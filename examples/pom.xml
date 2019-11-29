@@ -35,123 +35,41 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>camel-example-activemq-tomcat</module>
-        <module>camel-example-aggregate</module>
-        <module>camel-example-any23</module>
-        <module>camel-example-artemis</module>
-        <module>camel-example-artemis-amqp-blueprint</module>
-        <module>camel-example-artemis-large-messages</module>
-        <module>camel-example-as2</module>
-        <module>camel-example-billboard-aggr</module>
-        <module>camel-example-bigxml-split</module>
-        <module>camel-example-cafe</module>
-        <module>camel-example-cafe-endpointdsl</module>
-        <module>camel-example-cassandra-kubernetes</module>
-        <module>camel-example-cdi</module>
-        <module>camel-example-cdi-aws-s3</module>
-        <module>camel-example-cdi-cassandraql</module>
-        <module>camel-example-fhir</module>
-        <module>camel-example-fhir-auth-tx-spring-boot</module>
-        <module>camel-example-fhir-osgi</module>
-        <module>camel-example-fhir-spring-boot</module>
-        <module>camel-example-cdi-kubernetes</module>
-        <module>camel-example-cdi-metrics</module>
-        <module>camel-example-cdi-properties</module>
-        <module>camel-example-cdi-rest-servlet</module>
-        <module>camel-example-cdi-test</module>
-        <module>camel-example-cdi-xml</module>
-        <module>camel-example-cxf</module>
-        <module>camel-example-cxf-blueprint</module>
-        <module>camel-example-cxf-proxy</module>
-        <module>camel-example-cxf-tomcat</module>
-        <module>camel-example-cxf-ws-security-signature</module>
-        <module>camel-example-console</module>
-        <module>camel-example-debezium</module>
-        <module>camel-example-ehcache-blueprint</module>
-        <module>camel-example-ftp</module>
-        <module>camel-example-google-pubsub</module>
-        <module>camel-example-grpc-kubernetes</module>
-        <module>camel-example-hazelcast-kubernetes</module>
-        <module>camel-example-hystrix</module>
-        <module>camel-example-java8</module>
-        <module>camel-example-jdbc</module>
-        <module>camel-example-jira</module>
-        <module>camel-example-jmx</module>
-        <module>camel-example-jms-file</module>
-        <module>camel-example-jooq</module>
-        <module>camel-example-kafka</module>
-        <module>camel-example-kafka-avro</module>
-        <module>camel-example-kafka-offsetrepository</module>
-        <module>camel-example-kotlin</module>
-        <module>camel-example-loadbalancing</module>
-        <module>camel-example-loan-broker-cxf</module>
-        <module>camel-example-loan-broker-jms</module>
-        <module>camel-example-main</module>
-        <module>camel-example-main-artemis</module>
-        <module>camel-example-main-tiny</module>
-        <module>camel-example-main-xml</module>
-        <module>camel-example-management</module>
-        <module>camel-example-micrometer</module>
-        <module>camel-example-mybatis</module>
-        <module>camel-example-netty-custom-correlation</module>
-        <module>camel-example-netty-http</module>
-        <module>camel-example-olingo4-blueprint</module>
-        <module>camel-example-opentracing</module>
-        <module>camel-example-pojo-messaging</module>
-        <module>camel-example-rabbitmq</module>
-        <module>camel-example-reactive-executor-vertx</module>
-        <module>camel-example-reactive-streams</module>
-        <module>camel-example-resilience4j</module>
-        <module>camel-example-rest-producer</module>
-        <module>camel-example-rest-swagger</module>
-        <module>camel-example-route-throttling</module>
-        <module>camel-example-servlet-rest-blueprint</module>
-        <module>camel-example-servlet-tomcat</module>
-        <module>camel-example-spark-rest</module>
-        <module>camel-example-splunk</module>
-        <module>camel-example-spring</module>
         <module>camel-example-spring-boot</module>
         <module>camel-example-spring-boot-activemq</module>
         <module>camel-example-spring-boot-amqp</module>
         <module>camel-example-spring-boot-clustered-route-controller</module>
+        <module>camel-example-spring-boot-fhir</module>
+        <module>camel-example-spring-boot-fhir-auth-tx</module>
         <module>camel-example-spring-boot-geocoder</module>
         <module>camel-example-spring-boot-grpc</module>
+        <module>camel-example-spring-boot-grpc-kubernetes</module>
         <module>camel-example-spring-boot-health-checks</module>
+        <module>camel-example-spring-boot-hystrix</module>
         <module>camel-example-spring-boot-infinispan</module>
+        <module>camel-example-spring-boot-jira</module>
+        <module>camel-example-spring-boot-kafka-avro</module>
+        <module>camel-example-spring-boot-kafka-offsetrepository</module>
         <module>camel-example-spring-boot-master</module>
         <module>camel-example-spring-boot-metrics</module>
+        <module>camel-example-spring-boot-opentracing</module>
         <module>camel-example-spring-boot-pojo</module>
+        <module>camel-example-spring-boot-rabbitmq</module>
+        <module>camel-example-spring-boot-reactive-streams</module>
+        <module>camel-example-spring-boot-resilience4j</module>
         <module>camel-example-spring-boot-rest-jpa</module>
+        <module>camel-example-spring-boot-rest-producer</module>
         <module>camel-example-spring-boot-rest-swagger</module>
+        <module>camel-example-spring-boot-rest-swagger-simple</module>
         <module>camel-example-spring-boot-servicecall</module>
         <module>camel-example-spring-boot-supervising-route-controller</module>
+        <module>camel-example-spring-boot-twitter-salesforce</module>
+        <module>camel-example-spring-boot-validator</module>
+        <module>camel-example-spring-boot-webhook</module>
         <module>camel-example-spring-boot-xml</module>
+        <module>camel-example-spring-boot-zipkin</module>
         <module>camel-example-spring-cloud-servicecall</module>
         <module>camel-example-spring-cloud-serviceregistry</module>
-        <module>camel-example-spring-javaconfig</module>
-        <module>camel-example-spring-jms</module>
-        <module>camel-example-spring-pulsar</module>
-        <module>camel-example-spring-ws</module>
-        <module>camel-example-spring-xquery</module>
-        <module>camel-example-spring-security</module>
-        <module>camel-example-ssh</module>
-        <module>camel-example-ssh-security</module>
-        <module>camel-example-sql-blueprint</module>
-        <module>camel-example-swagger-cdi</module>
-        <module>camel-example-swagger-osgi</module>
-        <module>camel-example-telegram</module>
-        <module>camel-example-transformer-blueprint</module>
-        <module>camel-example-transformer-cdi</module>
-        <module>camel-example-transformer-demo</module>
-        <module>camel-example-twitter-salesforce</module>
-        <module>camel-example-twitter-websocket</module>
-        <module>camel-example-twitter-websocket-blueprint</module>
-        <module>camel-example-validator-spring-boot</module>
-        <module>camel-example-webhook</module>
-        <module>camel-example-widget-gadget-cdi</module>
-        <module>camel-example-widget-gadget-java</module>
-        <module>camel-example-widget-gadget-xml</module>
-        <module>camel-example-zipkin</module>
     </modules>
 
     <properties>

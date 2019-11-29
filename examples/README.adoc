@@ -19,7 +19,7 @@ Number of Examples: 118 (0 deprecated)
 
 | link:camel-example-micrometer/README.adoc[Micrometer] (camel-example-micrometer) | Advanced | An example showing how to work with Camel, Spring Java Config and Micrometer monitoring
 
-| link:camel-example-webhook/readme.adoc[Webhook] (camel-example-webhook) | Advanced | Example on how to use the Camel Webhook component
+| link:camel-example-spring-boot-webhook/readme.adoc[Webhook] (camel-example-webhook) | Advanced | Example on how to use the Camel Webhook component
 
 | link:camel-example-any23/README.adoc[Any23 example] (camel-example-any23) | Beginner | An example that uses the Any23 dataformat
 
@@ -48,7 +48,7 @@ Number of Examples: 118 (0 deprecated)
 | link:camel-example-pojo-messaging/README.adoc[POJO Routing] (camel-example-pojo-messaging) | Beginner | An example showing how to produce and consume messages from Camel endpoints using annotated POJOs
     
 
-| link:camel-example-rest-swagger/README.adoc[REST Swagger] (camel-example-rest-swagger) | Beginner | This example shows how to call a Rest service defined using Swagger specification
+| link:camel-example-spring-boot-rest-swagger-simple/README.adoc[REST Swagger] (camel-example-rest-swagger) | Beginner | This example shows how to call a Rest service defined using Swagger specification
 
 | link:camel-example-servlet-tomcat/README.adoc[Servlet Tomcat] (camel-example-servlet-tomcat) | Beginner | An example using Camel Servlet with Apache Tomcat
 
@@ -116,7 +116,7 @@ Number of Examples: 118 (0 deprecated)
 
 | link:camel-example-cafe-endpointdsl/README.adoc[Cafe Endpointdsl] (camel-example-cafe-endpointdsl) | EIP | A cafe example showing how to work with Camel and the Endpoint DSL
 
-| link:camel-example-hystrix/README.adoc[Hystrix] (camel-example-hystrix) | EIP | An example showing how to use Hystrix EIP as circuit breaker in Camel routes
+| link:camel-example-spring-boot-hystrix/README.adoc[Hystrix] (camel-example-hystrix) | EIP | An example showing how to use Hystrix EIP as circuit breaker in Camel routes
 
 | link:camel-example-loadbalancing/readme.md[Load Balancing] (camel-example-loadbalancing) | EIP | An example that demonstrate load balancing messaging with mina servers (TCP/IP)
 

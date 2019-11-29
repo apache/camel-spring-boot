@@ -77,10 +77,8 @@
         <module>bom</module>
         <module>buildingtools</module>
         <module>tooling</module>
-        <module>core</module>
-        <module>components</module>
-        <module>archetypes</module>
-        <module>platforms</module>
+        <module>components-starter</module>
+        <module>spring-boot-dm</module>
         <module>catalog</module>
         <module>tests</module>
         <module>examples</module>
@@ -364,17 +362,6 @@
     </build>
 
     <profiles>
-        <profile>
-            <id>assembly</id>
-            <activation>
-                <property>
-                    <name>!noassembly</name>
-                </property>
-            </activation>
-            <modules>
-                <module>apache-camel</module>
-            </modules>
-        </profile>
         <profile>
             <id>setup.eclipse</id>
             <!-- set up the eclipse workspace and generate the .classpath and .project
