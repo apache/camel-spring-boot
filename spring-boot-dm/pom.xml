@@ -22,9 +22,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>spring-boot</artifactId>
         <groupId>org.apache.camel.springboot</groupId>
-        <version>3.0.1-SNAPSHOT</version>
+        <artifactId>spring-boot</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>camel-spring-boot-dm</artifactId>
@@ -37,52 +37,8 @@
         <module>camel-starter-parent</module>
     </modules>
 
-    <properties>
-        <!-- Spring-Boot target version -->
-        <spring-boot-version>2.2.1.RELEASE</spring-boot-version>
-
-        <!-- The following dependencies should be aligned with the ones in standard camel parent -->
-        <!-- Needed by BOM generator-->
-        <avro-version>1.8.2</avro-version>
-        <jackson-version>1.9.12</jackson-version>
-        <testcontainers-version>1.12.3</testcontainers-version>
-
-        <!-- needed for testing -->
-        <curator-version>2.12.0</curator-version>
-
-        <!-- Needed by starters -->
-        <egit-github-core-version>2.1.5</egit-github-core-version>
-        <google-guava-version>19.0</google-guava-version>
-        <lucene3-version>3.6.0</lucene3-version>
-        <hadoop2-version>2.7.4</hadoop2-version>
-        <infinispan-spring-boot-version>2.1.7.Final</infinispan-spring-boot-version>
-        <cassandra-driver-guava-version>19.0</cassandra-driver-guava-version>
-        <groovy-version>2.5.8</groovy-version>
-        <grpc-guava-version>26.0-android</grpc-guava-version>
-
-        <!-- Plugin versions -->
-        <maven-checkstyle-plugin-version>3.1.0</maven-checkstyle-plugin-version>
-        <maven-checkstyle-version>8.26</maven-checkstyle-version>
-
-        <camel.osgi.manifest />
-    </properties>
-
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>versions</id>
-                        <phase />
-                    </execution>
-                    <execution>
-                        <id>bundle-manifest</id>
-                        <phase />
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

@@ -22,9 +22,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache.camel.example</groupId>
+        <groupId>org.apache.camel.springboot.example</groupId>
         <artifactId>camel-example-spring-boot-health-checks</artifactId>
-        <version>3.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>camel-example-spring-boot-health-checks-application</artifactId>

@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.apache.camel</groupId>
         <artifactId>catalog</artifactId>
-        <version>3.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>camel-catalog-maven</artifactId>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-catalog</artifactId>
-            <version>${project.version}</version>
+            <version>${camel-version}</version>
         </dependency>
 
         <!-- use groovy grape to download JARs as that is easy to use -->
@@ -79,13 +79,13 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-catalog-provider-springboot</artifactId>
-            <version>${project.version}</version>
+            <version>${camel-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-catalog-provider-karaf</artifactId>
-            <version>${project.version}</version>
+            <version>${camel-version}</version>
             <scope>test</scope>
         </dependency>
 

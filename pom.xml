@@ -26,9 +26,9 @@
         <version>21</version>
     </parent>
 
-    <groupId>org.apache.camel</groupId>
-    <artifactId>camel</artifactId>
-    <version>3.0.1-SNAPSHOT</version>
+    <groupId>org.apache.camel.springboot</groupId>
+    <artifactId>spring-boot</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Camel</name>
@@ -72,17 +72,18 @@
     </prerequisites>
 
     <modules>
-        <module>parent</module>
-        <module>etc</module>
-        <module>bom</module>
-        <module>buildingtools</module>
-        <module>tooling</module>
+<!--        <module>parent</module>-->
+<!--        <module>etc</module>-->
+<!--        <module>bom</module>-->
+<!--        <module>buildingtools</module>-->
+<!--        <module>tooling</module>-->
+        <module>camel-spring-boot</module>
         <module>components-starter</module>
         <module>spring-boot-dm</module>
-        <module>catalog</module>
+<!--        <module>catalog</module>-->
         <module>tests</module>
         <module>examples</module>
-        <module>docs</module>
+<!--        <module>docs</module>-->
     </modules>
 
     <scm>
@@ -125,7 +126,70 @@
         <mycila-license-version>3.0</mycila-license-version>
         <gmavenplus-plugin-version>1.6.2</gmavenplus-plugin-version>
         <groovy-version>2.5.8</groovy-version>
+
+        <!-- Spring-Boot target version -->
+        <spring-boot-version>2.2.1.RELEASE</spring-boot-version>
+
+        <!-- Camel target version -->
+        <camel-version>3.0.0</camel-version>
+
+        <!-- The following dependencies should be aligned with the ones in standard camel parent -->
+        <!-- Needed by BOM generator-->
+        <avro-version>1.8.2</avro-version>
+        <jackson-version>1.9.12</jackson-version>
+        <testcontainers-version>1.12.3</testcontainers-version>
+
+        <!-- needed for testing -->
+        <curator-version>2.12.0</curator-version>
+
+        <log4j2-version>2.12.1</log4j2-version>
+        <spring-cloud-consul-version>2.1.4.RELEASE</spring-cloud-consul-version>
+        <protobuf-maven-plugin-version>0.6.1</protobuf-maven-plugin-version>
+
+        <!-- Needed by starters -->
+        <egit-github-core-version>2.1.5</egit-github-core-version>
+        <google-guava-version>19.0</google-guava-version>
+        <lucene3-version>3.6.0</lucene3-version>
+        <hadoop2-version>2.7.4</hadoop2-version>
+        <infinispan-spring-boot-version>2.1.7.Final</infinispan-spring-boot-version>
+        <cassandra-driver-guava-version>19.0</cassandra-driver-guava-version>
+        <groovy-version>2.5.8</groovy-version>
+        <grpc-guava-version>26.0-android</grpc-guava-version>
+
+        <atomix-version>1.0.8</atomix-version>
+        <os-maven-plugin-version>1.6.0</os-maven-plugin-version>
+        <grpc-version>1.24.1</grpc-version>
+        <cdi-api-2.0-version>2.0</cdi-api-2.0-version>
+        <reactor-version>3.2.12.RELEASE</reactor-version>
+        <opentracing-version>0.33.0</opentracing-version>
+        <jolokia-version>1.6.2</jolokia-version>
+        <kafka-avro-serializer-version>5.2.2</kafka-avro-serializer-version>
+        <exec-maven-plugin-version>1.6.0</exec-maven-plugin-version>
+        <maven-resources-plugin-version>3.1.0</maven-resources-plugin-version>
+        <deltaspike-version>1.9.0</deltaspike-version>
+        <weld3-version>3.0.5.RELEASE</weld3-version>
+        <hibernate-validator-version>6.0.17.Final</hibernate-validator-version>
+        <hibernate-version>5.2.16.Final</hibernate-version>
+        <undertow-version>2.0.28.Final</undertow-version>
+        <jetty9-version>9.4.20.v20190813</jetty9-version>
+        <exec-maven-plugin-version>1.6.0</exec-maven-plugin-version>
+        <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
+        <protobuf-version>3.9.1</protobuf-version>
+        <javax-annotation-api-version>1.3.2</javax-annotation-api-version>
+
+        <arquillian-container-se-managed-version>1.0.2.Final</arquillian-container-se-managed-version>
+        <arquillian-version>1.5.0.Final</arquillian-version>
+        <shrinkwrap-resolver-version>3.1.3</shrinkwrap-resolver-version>
+        <shrinkwrap-version>1.2.6</shrinkwrap-version>
+        <aether-version>1.0.2.v20150114</aether-version>
+
+        <!-- Plugin versions -->
+        <maven-checkstyle-plugin-version>3.1.0</maven-checkstyle-plugin-version>
+        <maven-checkstyle-version>8.26</maven-checkstyle-version>
+
+        <camel.osgi.manifest />
     </properties>
+
 
     <!-- Comment out the snapshot repositories as we don't need them now -->
     <repositories>
@@ -154,10 +218,73 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-core-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-spring-boot</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-parent</artifactId>
+                <version>${camel-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${google-guava-version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
         <defaultGoal>install</defaultGoal>
 
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin-version}</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <maxmem>512M</maxmem>
+                    <fork>${compiler.fork}</fork>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                    <source>${jdk.version}</source>
+                    <quiet>true</quiet>
+                    <bottom>Apache Camel</bottom>
+                    <detectOfflineLinks>false</detectOfflineLinks>
+                    <javadocVersion>1.8.0</javadocVersion>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
@@ -180,7 +307,7 @@
                         <dependency>
                             <groupId>org.apache.camel</groupId>
                             <artifactId>camel-buildtools</artifactId>
-                            <version>${project.version}</version>
+                            <version>${camel-version}</version>
                         </dependency>
                     </dependencies>
                     <configuration>
@@ -355,6 +482,12 @@
                         <mavenOpts>-Xmx64m -XshowSettings</mavenOpts>
                         <showVersion>true</showVersion>
                     </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${exec-maven-plugin-version}</version>
                 </plugin>
 
             </plugins>
@@ -757,7 +890,7 @@
                             <dependency>
                                 <groupId>org.apache.camel</groupId>
                                 <artifactId>camel-buildtools</artifactId>
-                                <version>${project.version}</version>
+                                <version>${camel-version}</version>
                             </dependency>
                         </dependencies>
                     </plugin>
