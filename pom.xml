@@ -72,18 +72,11 @@
     </prerequisites>
 
     <modules>
-<!--        <module>parent</module>-->
-<!--        <module>etc</module>-->
-<!--        <module>bom</module>-->
-<!--        <module>buildingtools</module>-->
-<!--        <module>tooling</module>-->
+        <module>tooling</module>
         <module>camel-spring-boot</module>
         <module>components-starter</module>
-        <module>spring-boot-dm</module>
-<!--        <module>catalog</module>-->
         <module>tests</module>
         <module>examples</module>
-<!--        <module>docs</module>-->
     </modules>
 
     <scm>
@@ -176,6 +169,13 @@
         <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
         <protobuf-version>3.9.1</protobuf-version>
         <javax-annotation-api-version>1.3.2</javax-annotation-api-version>
+        <roaster-version>2.20.1.Final</roaster-version>
+        <jandex-version>2.1.1.Final</jandex-version>
+        <mvel-version>2.4.4.Final</mvel-version>
+        <gson-version>2.8.5</gson-version>
+        <asciidoctorj-version>2.1.0</asciidoctorj-version>
+        <junit-jupiter-version>5.5.2</junit-jupiter-version>
+        <freemarker-version>2.3.29</freemarker-version>
 
         <arquillian-container-se-managed-version>1.0.2.Final</arquillian-container-se-managed-version>
         <arquillian-version>1.5.0.Final</arquillian-version>

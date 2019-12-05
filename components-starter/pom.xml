@@ -27,7 +27,7 @@
   </parent>
   <artifactId>components-starter</artifactId>
   <packaging>pom</packaging>
-  <name>Camel :: Platforms :: Spring-Boot :: Components Starter</name>
+  <name>Camel :: Spring-Boot :: Components Starter</name>
   <description>Camel Components Starter</description>
   <!-- to support spring-boot auto configuration in the Camel components -->
   <dependencies>
@@ -77,9 +77,9 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-package-maven-plugin</artifactId>
-        <version>${camel-version}</version>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-spring-boot-generator-maven-plugin</artifactId>
+        <version>${project.version}</version>
         <configuration>
           <!-- set to true to make build fail fast if missing documentation in docs files -->
           <failFast>false</failFast>
@@ -87,6 +87,13 @@
           <failOnMissingDescription>false</failOnMissingDescription>
         </configuration>
         <executions>
+          <execution>
+            <id>prepare-spring-boot-starter</id>
+            <goals>
+              <goal>prepare-spring-boot-starter</goal>
+            </goals>
+            <phase>generate-resources</phase>
+          </execution>
           <execution>
             <id>readme</id>
             <goals>
