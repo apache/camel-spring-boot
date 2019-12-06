@@ -322,7 +322,9 @@ public class SpringBootStarterMojo extends AbstractMojo {
         try {
             Artifact artifact = project.getArtifactMap().get(getMainDepGroupId() + ":" + getMainDepArtifactId());
             ProjectBuildingResult result = projectBuilder.build(artifact, project.getProjectBuildingRequest());
-            dependencies = projectDependenciesResolver.resolve(result.getProject(), Collections.singleton(Artifact.SCOPE_COMPILE), session);
+            MavenProject prj = result.getProject();
+            prj.setRemoteArtifactRepositories(project.getRemoteArtifactRepositories());
+            dependencies = projectDependenciesResolver.resolve(prj, Collections.singleton(Artifact.SCOPE_COMPILE), session);
         } catch (Exception e) {
             throw new RuntimeException("Unable to build project dependency tree", e);
         }

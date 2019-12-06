@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,15 +42,17 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.zip.ZipEntry;
 
 import javax.annotation.Generated;
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.apache.camel.maven.packaging.JSonSchemaHelper;
-import org.apache.camel.maven.packaging.PackageHelper;
 import org.apache.camel.maven.packaging.model.ComponentModel;
 import org.apache.camel.maven.packaging.model.ComponentOptionModel;
 import org.apache.camel.maven.packaging.model.DataFormatModel;
@@ -68,6 +71,7 @@ import org.apache.camel.spi.Metadata;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriPath;
 import org.apache.commons.io.FileUtils;
+import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -190,28 +194,48 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
 
     DynamicClassLoader projectClassLoader;
 
+    JarFile componentJar;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        // Do not generate code for ignored module
-        if (Arrays.asList(IGNORE_MODULES).contains(project.getArtifactId())) {
-            getLog().info("Component auto-configuration will not be created: component contained in the ignore list");
+        if (project.getArtifactId().equals("components-starter")) {
             return;
         }
-
-        // Spring-boot configuration has been moved on starters
-        File starterDir = SpringBootHelper.starterDir(baseDir, getStarterArtifactId());
-        if (!starterDir.exists() || !(new File(starterDir, "pom.xml").exists())) {
-            // If the starter does not exist, no configuration can be created
-            getLog().info("Component auto-configuration will not be created: the starter does not exist");
+        // Do not generate code for ignored module
+        if (Arrays.asList(IGNORE_MODULES).contains(getMainDepArtifactId())) {
+            getLog().info("Component auto-configuration will not be created: component contained in the ignore list");
             return;
         }
 
         executeAll();
     }
 
+    private String getMainDepArtifactId() {
+        return project.getArtifactId().substring(0, project.getArtifactId().length() - "-starter".length());
+    }
+
+    private String getMainDepGroupId() {
+        return "camel-spring-boot-starter".equals(project.getArtifactId())
+                ? "org.apache.camel.springboot" : "org.apache.camel";
+    }
+
     private void executeAll() throws MojoExecutionException, MojoFailureException {
-        Map<File, Supplier<String>> files = PackageHelper.findJsonFiles(buildDir, p -> p.isDirectory() || p.getName().endsWith(".json")).stream()
-                .collect(Collectors.toMap(Function.identity(), s -> cache(() -> loadJson(s))));
+        Map<String, Supplier<String>> files;
+
+        Artifact mainDep = project.getArtifactMap().get(getMainDepGroupId() + ":" + getMainDepArtifactId());
+
+        try {
+            componentJar = new JarFile(mainDep.getFile());
+            files = componentJar.stream()
+                    .filter(je -> je.getName().endsWith(".json"))
+                    .collect(Collectors.toMap(je -> "jar:" + mainDep.getFile().toURI().toString() + "!" + je.getName(),
+                            je -> cache(() -> loadJson(componentJar, je))));
+        } catch (IOException e) {
+            throw new MojoExecutionException("Error scanning json files", e);
+        }
+
+//        files = PackageHelper.findJsonFiles(buildDir, p -> p.isDirectory() || p.getName().endsWith(".json")).stream()
+//                .collect(Collectors.toMap(f -> f.toURI().toString(), s -> cache(() -> loadJson(s))));
 
         // special for camel-core-engine where we generate some special auto-configuration source code
         if ("camel-core-engine".equals(project.getArtifactId())) {
@@ -225,6 +249,14 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
 
     private static String loadJson(File file) {
         try (InputStream is = new FileInputStream(file)) {
+            return loadText(is);
+        } catch (IOException e) {
+            throw new IOError(e);
+        }
+    }
+
+    private static String loadJson(JarFile jar, JarEntry je) {
+        try (InputStream is = jar.getInputStream(je)) {
             return loadText(is);
         } catch (IOException e) {
             throw new IOError(e);
@@ -245,7 +277,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
         };
     }
 
-    private void executeModels(Map<File, Supplier<String>> files) throws MojoExecutionException, MojoFailureException {
+    private void executeModels(Map<String, Supplier<String>> files) throws MojoExecutionException, MojoFailureException {
         String json;
 
         // Hystrix
@@ -577,10 +609,10 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
         writeComponentSpringFactorySource(packageName, name);
     }
 
-    private void executeComponent(Map<File, Supplier<String>> jsonFiles) throws MojoFailureException {
+    private void executeComponent(Map<String, Supplier<String>> jsonFiles) throws MojoFailureException {
         // find the component names
         Set<String> componentNames = new TreeSet<>();
-        findComponentNames(buildDir, componentNames);
+        findComponentNames(componentNames);
 
         // create auto configuration for the components
         if (!componentNames.isEmpty()) {
@@ -621,7 +653,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
         }
     }
 
-    private void executeDataFormat(Map<File, Supplier<String>> jsonFiles) throws MojoFailureException {
+    private void executeDataFormat(Map<String, Supplier<String>> jsonFiles) throws MojoFailureException {
         // find the data format names
         List<String> dataFormatNames = findDataFormatNames();
 
@@ -665,7 +697,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
         }
     }
 
-    private void executeLanguage(Map<File, Supplier<String>> jsonFiles) throws MojoFailureException {
+    private void executeLanguage(Map<String, Supplier<String>> jsonFiles) throws MojoFailureException {
         // find the language names
         List<String> languageNames = findLanguageNames();
 
@@ -1152,19 +1184,25 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
     // read java type from project, returns null if not found
     private JavaClass readJavaType(String type) {
         if (!type.startsWith("java.lang.") && (!type.contains("<") || !type.contains(">"))) {
-            final String fileName = type.replaceAll("[\\[\\]]", "").replaceAll("\\.", "\\/") + ".java";
-            Path sourcePath = project.getCompileSourceRoots().stream().map(Paths::get).map(p -> p.resolve(fileName)).filter(Files::isRegularFile).findFirst().orElse(null);
-            if (sourcePath == null) {
-                return null;
-            }
-            String sourceCode;
-            try (InputStream is = Files.newInputStream(sourcePath)) {
-                sourceCode = loadText(is);
-            } catch (IOException e) {
-                throw new RuntimeException("Unable to load source code", e);
-            }
+//            final String fileName = type.replaceAll("[\\[\\]]", "").replaceAll("\\.", "\\/") + ".java";
+//            Path sourcePath = project.getCompileSourceRoots().stream().map(Paths::get).map(p -> p.resolve(fileName)).filter(Files::isRegularFile).findFirst().orElse(null);
+//            if (sourcePath == null) {
+//                return null;
+//            }
+//            String sourceCode;
+//            try (InputStream is = Files.newInputStream(sourcePath)) {
+//                sourceCode = loadText(is);
+//            } catch (IOException e) {
+//                throw new RuntimeException("Unable to load source code", e);
+//            }
+            String sourceCode = "";
             try {
                 Class<?> clazz = getProjectClassLoader().loadClass(type);
+                URL url = clazz != null ? getProjectClassLoader().getResource(clazz.getName().replace('.', '/') + ".class") : null;
+                Artifact mainDep = project.getArtifactMap().get(getMainDepGroupId() + ":" + getMainDepArtifactId());
+                if (url == null || mainDep == null || !url.toString().contains(mainDep.getFile().toURI().toString())) {
+                    return null;
+                }
                 JavaClass nestedType = new JavaClass(getProjectClassLoader()).setPackage(clazz.getPackage().getName()).setName(clazz.getSimpleName()).setEnum(clazz.isEnum())
                     .setClass(!clazz.isInterface()).setAbstract((clazz.getModifiers() & Modifier.ABSTRACT) != 0).setStatic((clazz.getModifiers() & Modifier.STATIC) != 0)
                     .extendSuperType(clazz.getGenericSuperclass() != null ? new GenericType(clazz.getGenericSuperclass()).toString() : null);
@@ -1174,7 +1212,10 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
                     .filter(m -> m.getParameterCount() == 1).filter(m -> m.getName().matches("set[A-Z][a-zA-Z0-9]*")).collect(Collectors.toList());
                 List<java.lang.reflect.Method> allGetters = publicMethods.stream().filter(m -> m.getReturnType() != void.class).filter(m -> m.getParameterCount() == 0)
                     .filter(m -> m.getName().matches("(get|is)[A-Z][a-zA-Z0-9]*")).collect(Collectors.toList());
-                allSetters.stream().sorted(Comparator.comparing(m -> getSetterPosition(sourceCode, m))).map(m -> Strings.uncapitalize(m.getName().substring(3))).forEach(fn -> {
+                allSetters.stream()
+                        .sorted(Comparator.comparing(m -> getSetterPosition(sourceCode, m)))
+                        .map(m -> Strings.uncapitalize(m.getName().substring(3)))
+                        .forEach(fn -> {
                     Class<?> ft;
                     Type wft;
                     boolean isBoolean;
@@ -1912,25 +1953,25 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
         // do nothing, as imports are sorted automatically when displayed
     }
 
-    private static String loadModelJson(Map<File, Supplier<String>> jsonFiles, String modelName) {
+    private static String loadModelJson(Map<String, Supplier<String>> jsonFiles, String modelName) {
         return loadJsonOfType(jsonFiles, modelName, "model");
     }
 
-    private static String loadComponentJson(Map<File, Supplier<String>> jsonFiles, String componentName) {
+    private static String loadComponentJson(Map<String, Supplier<String>> jsonFiles, String componentName) {
         return loadJsonOfType(jsonFiles, componentName, "component");
     }
 
-    private static String loadDataFormatJson(Map<File, Supplier<String>> jsonFiles, String dataFormatName) {
+    private static String loadDataFormatJson(Map<String, Supplier<String>> jsonFiles, String dataFormatName) {
         return loadJsonOfType(jsonFiles, dataFormatName, "dataformat");
     }
 
-    private static String loadLanguageJson(Map<File, Supplier<String>> jsonFiles, String languageName) {
+    private static String loadLanguageJson(Map<String, Supplier<String>> jsonFiles, String languageName) {
         return loadJsonOfType(jsonFiles, languageName, "language");
     }
 
-    private static String loadJsonOfType(Map<File, Supplier<String>> jsonFiles, String modelName, String type) {
-        for (Map.Entry<File, Supplier<String>> entry : jsonFiles.entrySet()) {
-            if (entry.getKey().getName().equals(modelName + ".json")) {
+    private static String loadJsonOfType(Map<String, Supplier<String>> jsonFiles, String modelName, String type) {
+        for (Map.Entry<String, Supplier<String>> entry : jsonFiles.entrySet()) {
+            if (entry.getKey().endsWith("/" + modelName + ".json")) {
                 String json = entry.getValue().get();
                 if (json.contains("\"kind\": \"" + type + "\"")) {
                     return json;
@@ -2107,71 +2148,34 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
         return model;
     }
 
-    private void findComponentNames(File dir, Set<String> componentNames) {
-        File f = new File(dir, "classes/META-INF/services/org/apache/camel/component");
-
-        if (f.exists() && f.isDirectory()) {
-            File[] files = f.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    // skip directories as there may be a sub .resolver
-                    // directory
-                    if (file.isDirectory()) {
-                        continue;
-                    }
-                    String name = file.getName();
-                    if (name.charAt(0) != '.') {
-                        componentNames.add(name);
-                    }
-                }
-            }
-        }
+    private void findComponentNames(Set<String> componentNames) {
+        componentJar.stream()
+                .filter(je -> !je.isDirectory())
+                .map(ZipEntry::getName)
+                .filter(s -> s.startsWith("META-INF/services/org/apache/camel/component/"))
+                .map(s -> s.substring("META-INF/services/org/apache/camel/component/".length()))
+                .filter(s -> !s.startsWith(".") && !s.contains("/"))
+                .forEach(componentNames::add);
     }
 
     private List<String> findDataFormatNames() {
-        List<String> dataFormatNames = new ArrayList<>();
-        File f = new File(project.getBasedir(), "target/classes");
-        f = new File(f, "META-INF/services/org/apache/camel/dataformat");
-        if (f.exists() && f.isDirectory()) {
-            File[] files = f.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    // skip directories as there may be a sub .resolver
-                    // directory
-                    if (file.isDirectory()) {
-                        continue;
-                    }
-                    String name = file.getName();
-                    if (name.charAt(0) != '.') {
-                        dataFormatNames.add(name);
-                    }
-                }
-            }
-        }
-        return dataFormatNames;
+        return componentJar.stream()
+                .filter(je -> !je.isDirectory())
+                .map(ZipEntry::getName)
+                .filter(s -> s.startsWith("META-INF/services/org/apache/camel/dataformat/"))
+                .map(s -> s.substring("META-INF/services/org/apache/camel/dataformat/".length()))
+                .filter(s -> !s.startsWith(".") && !s.contains("/"))
+                .collect(Collectors.toList());
     }
 
     private List<String> findLanguageNames() {
-        List<String> languageNames = new ArrayList<>();
-        File f = new File(project.getBasedir(), "target/classes");
-        f = new File(f, "META-INF/services/org/apache/camel/language");
-        if (f.exists() && f.isDirectory()) {
-            File[] files = f.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    // skip directories as there may be a sub .resolver
-                    // directory
-                    if (file.isDirectory()) {
-                        continue;
-                    }
-                    String name = file.getName();
-                    if (name.charAt(0) != '.') {
-                        languageNames.add(name);
-                    }
-                }
-            }
-        }
-        return languageNames;
+        return componentJar.stream()
+                .filter(je -> !je.isDirectory())
+                .map(ZipEntry::getName)
+                .filter(s -> s.startsWith("META-INF/services/org/apache/camel/language/"))
+                .map(s -> s.substring("META-INF/services/org/apache/camel/language/".length()))
+                .filter(s -> !s.startsWith(".") && !s.contains("/"))
+                .collect(Collectors.toList());
     }
 
     private void writeSourceIfChanged(JavaClass source, String fileName, boolean innerClassesLast) throws MojoFailureException {
@@ -2180,7 +2184,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
 
     private void writeSourceIfChanged(String source, String fileName) throws MojoFailureException {
 
-        File target = new File(SpringBootHelper.starterSrcDir(baseDir, getStarterArtifactId()), fileName);
+        File target = new File(new File(baseDir, "src/main/java"), fileName);
 
         deleteFileOnMainArtifact(target);
 
@@ -2206,7 +2210,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
         sb.append(lineToAdd);
 
         String fileName = "META-INF/spring.factories";
-        File target = new File(SpringBootHelper.starterResourceDir(baseDir, getStarterArtifactId()), fileName);
+        File target = new File(new File(baseDir, "src/main/resources"), fileName);
 
         deleteFileOnMainArtifact(target);
 
@@ -2283,7 +2287,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
             return;
         }
 
-        String relativePath = SpringBootHelper.starterDir(baseDir, getStarterArtifactId()).toPath().relativize(starterFile.toPath()).toString();
+        String relativePath = baseDir.toPath().relativize(starterFile.toPath()).toString();
         File mainArtifactFile = new File(baseDir, relativePath);
         if (mainArtifactFile.exists()) {
             boolean deleted = mainArtifactFile.delete();

@@ -95,11 +95,11 @@
             <phase>generate-resources</phase>
           </execution>
           <execution>
-            <id>readme</id>
+            <id>prepare-spring-boot-auto-configuration</id>
             <goals>
-              <goal>update-spring-boot-auto-configuration-readme</goal>
+              <goal>prepare-spring-boot-auto-configuration</goal>
             </goals>
-            <phase>package</phase>
+            <phase>generate-resources</phase>
           </execution>
         </executions>
       </plugin>
