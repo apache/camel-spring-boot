@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-cloud-serviceregistry-consumer</artifactId>
-    <name>Camel :: Example :: Spring Cloud :: Service Registry :: Consumer</name>
+    <name>Camel Spring Boot :: Example :: Spring Cloud :: Service Registry :: Consumer</name>
     <description>An example showing how to work with Camel Service Registry and Spring Cloud (Consumer)</description>
 
     <properties>

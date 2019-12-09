@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot</artifactId>
-    <name>Camel :: Example :: Spring Boot</name>
+    <name>Camel Spring Boot :: Example</name>
     <description>An example showing how to work with Camel and Spring Boot</description>
 
     <properties>

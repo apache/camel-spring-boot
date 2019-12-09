@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-resilience4j-client2</artifactId>
-    <name>Camel :: Example :: Spring Boot :: Resilience4j :: Client 2</name>
+    <name>Camel Spring Boot :: Example :: Resilience4j :: Client 2</name>
     <description>An example showing how to use Resilience4j EIP as circuit breaker in Camel routes</description>
 
     <!-- import Camel BOM -->

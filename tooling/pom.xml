@@ -29,7 +29,7 @@
 
     <artifactId>tooling</artifactId>
     <packaging>pom</packaging>
-    <name>Camel :: Spring-Boot :: Tooling</name>
+    <name>Camel Spring Boot :: Tooling</name>
 
     <modules>
         <module>camel-spring-boot-generator-maven-plugin</module>

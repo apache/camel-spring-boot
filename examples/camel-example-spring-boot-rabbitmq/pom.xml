@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-rabbitmq</artifactId>
-    <name>Camel :: Example :: Spring Boot :: RabbitMQ</name>
+    <name>Camel Spring Boot :: Example :: RabbitMQ</name>
     <description>An example showing how to work with Camel and RabbitMQ</description>
 
     <properties>

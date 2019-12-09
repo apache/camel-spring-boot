@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-opentracing-loggingtracer</artifactId>
-    <name>Camel :: Example :: Spring Boot :: OpenTracing :: LoggingTracer</name>
+    <name>Camel Spring Boot :: Example :: OpenTracing :: LoggingTracer</name>
     <description>An example OpenTracing Tracer</description>
 
     <!-- import Camel BOM -->

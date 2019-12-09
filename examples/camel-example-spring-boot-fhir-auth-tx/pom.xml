@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-fhir-auth-tx</artifactId>
-    <name>Camel :: Example :: Spring Boot :: FHIR :: Transaction</name>
+    <name>Camel Spring Boot :: Example :: FHIR :: Transaction</name>
     <description>An example showing how to work with Camel, FHIR Authorization, FHIR Transaction and Spring Boot
     </description>
 

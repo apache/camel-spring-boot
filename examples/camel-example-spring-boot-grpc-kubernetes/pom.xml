@@ -29,7 +29,7 @@
 
     <artifactId>camel-example-spring-boot-grpc-kubernetes</artifactId>
     <packaging>pom</packaging>
-    <name>Camel :: Example :: Spring Boot :: gRPC :: Kubernetes</name>
+    <name>Camel Spring Boot :: Example :: gRPC :: Kubernetes</name>
     <description>An example showing the Camel gRPC component with Spring Boot running on Kubernetes</description>
 
     <properties>

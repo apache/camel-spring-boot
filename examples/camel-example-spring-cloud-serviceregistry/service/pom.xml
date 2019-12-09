@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-cloud-serviceregistry-service</artifactId>
-    <name>Camel :: Example :: Spring Cloud :: Service Registry :: Service</name>
+    <name>Camel Spring Boot :: Example :: Spring Cloud :: Service Registry :: Service</name>
     <description>An example showing how to work with Camel Service Registry and Spring Cloud (Service)</description>
 
     <properties>

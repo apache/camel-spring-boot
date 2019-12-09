@@ -27,7 +27,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-rest-swagger-simple</artifactId>
-    <name>Camel :: Example :: Rest :: Swagger Simple</name>
+    <name>Camel Spring Boot :: Example :: Rest :: Swagger Simple</name>
     <description>This example shows how to call a Rest service defined using Swagger specification</description>
 
     <properties>

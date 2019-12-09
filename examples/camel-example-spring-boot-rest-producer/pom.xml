@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-rest-producer</artifactId>
-    <name>Camel :: Example :: Spring Boot :: Rest :: Producer</name>
+    <name>Camel Spring Boot :: Example :: Rest :: Producer</name>
     <description>An example showing how to use Camel Rest to call a REST service</description>
 
     <properties>

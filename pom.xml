@@ -31,8 +31,8 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Camel</name>
-    <description>Camel Root POM</description>
+    <name>Camel Spring Boot</name>
+    <description>Camel Spring Boot Root POM</description>
     <url>https://camel.apache.org</url>
     <inceptionYear>2007</inceptionYear>
 
@@ -76,7 +76,7 @@
         <module>camel-spring-boot</module>
         <module>components-starter</module>
         <module>camel-catalog-provider-springboot</module>
-        <module>tests</module>
+        <module>camel-itest-spring-boot</module>
         <module>examples</module>
     </modules>
 

@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-clustered-route-controller-cluster-bootstrap</artifactId>
-    <name>Camel :: Example :: Spring Boot :: Clustered Route Controller :: Cluster Bootstrap</name>
+    <name>Camel Spring Boot :: Example :: Clustered Route Controller :: Cluster Bootstrap</name>
     <description>Bootstrap an Atomix Cluster (single node)</description>
 
     <dependencies>

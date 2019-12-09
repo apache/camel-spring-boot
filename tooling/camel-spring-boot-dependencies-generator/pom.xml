@@ -29,7 +29,7 @@
 
     <artifactId>camel-spring-boot-dependencies-generator</artifactId>
     <packaging>pom</packaging>
-    <name>Camel :: Spring-Boot :: Dependency Management :: Dependencies BOM Generator</name>
+    <name>Camel Spring Boot :: Dependency Management :: Dependencies BOM Generator</name>
 
     <dependencyManagement>
 

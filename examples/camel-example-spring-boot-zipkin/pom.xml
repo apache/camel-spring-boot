@@ -29,7 +29,7 @@
 
     <artifactId>camel-example-spring-boot-zipkin</artifactId>
     <packaging>pom</packaging>
-    <name>Camel :: Example :: Spring Boot :: Zipkin</name>
+    <name>Camel Spring Boot :: Example :: Zipkin</name>
     <description>An example showing how to trace incoming and outgoing messages from Camel with Zipkin</description>
 
     <properties>
