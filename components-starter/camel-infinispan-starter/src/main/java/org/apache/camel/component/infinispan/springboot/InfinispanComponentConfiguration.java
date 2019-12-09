@@ -125,35 +125,9 @@ public class InfinispanComponentConfiguration
     public static class InfinispanConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.infinispan.InfinispanConfiguration.class;
         /**
-         * A comma separated list of Flag to be applied by default on each cache
-         * invocation, not applicable to remote caches.
+         * Specifies the cache Container to connect
          */
-        private Flag[] flags;
-        /**
-         * The operation to perform.
-         */
-        @Deprecated
-        private String command = "PUT";
-        /**
-         * The operation to perform.
-         */
-        private InfinispanOperation operation = InfinispanOperation.PUT;
-        /**
-         * Specifies the host of the cache on Infinispan instance
-         */
-        private String hosts;
-        /**
-         * Specifies the query builder.
-         */
-        private InfinispanQueryBuilder queryBuilder;
-        /**
-         * An implementation specific URI for the CacheManager
-         */
-        private String configurationUri;
-        /**
-         * Implementation specific properties for the CacheManager
-         */
-        private Map configurationProperties;
+        private BasicCacheContainer cacheContainer;
         /**
          * The CacheContainer configuration. Uses if the cacheContainer is not
          * defined. Must be the following types:
@@ -164,31 +138,26 @@ public class InfinispanComponentConfiguration
          */
         private Object cacheContainerConfiguration;
         /**
-         * Store the operation result in a header instead of the message body.
-         * By default, resultHeader == null and the query result is stored in
-         * the message body, any existing content in the message body is
-         * discarded. If resultHeader is set, the value is used as the name of
-         * the header to store the query result and the original message body is
-         * preserved. This value can be overridden by an in message header
-         * named: CamelInfinispanOperationResultHeader
-         */
-        private Object resultHeader;
-        /**
-         * Set a specific remappingFunction to use in a compute operation
-         */
-        private BiFunction remappingFunction;
-        /**
-         * Specifies the cache Container to connect
-         */
-        private BasicCacheContainer cacheContainer;
-        /**
-         * If true, the consumer will receive notifications synchronously
-         */
-        private Boolean sync = true;
-        /**
          * If true, the listener will be installed for the entire cluster
          */
         private Boolean clusteredListener = false;
+        /**
+         * The operation to perform.
+         */
+        @Deprecated
+        private String command = "PUT";
+        /**
+         * Implementation specific properties for the CacheManager
+         */
+        private Map configurationProperties;
+        /**
+         * An implementation specific URI for the CacheManager
+         */
+        private String configurationUri;
+        /**
+         * Returns the custom listener in use, if provided
+         */
+        private InfinispanCustomListener customListener;
         /**
          * Specifies the set of event types to register by the consumer.
          * Multiple event can be separated by comma. The possible event types
@@ -201,16 +170,64 @@ public class InfinispanComponentConfiguration
          */
         private Set eventTypes;
         /**
-         * Returns the custom listener in use, if provided
+         * A comma separated list of Flag to be applied by default on each cache
+         * invocation, not applicable to remote caches.
          */
-        private InfinispanCustomListener customListener;
+        private Flag[] flags;
+        /**
+         * Specifies the host of the cache on Infinispan instance
+         */
+        private String hosts;
+        /**
+         * The operation to perform.
+         */
+        private InfinispanOperation operation = InfinispanOperation.PUT;
+        /**
+         * Specifies the query builder.
+         */
+        private InfinispanQueryBuilder queryBuilder;
+        /**
+         * Set a specific remappingFunction to use in a compute operation
+         */
+        private BiFunction remappingFunction;
+        /**
+         * Store the operation result in a header instead of the message body.
+         * By default, resultHeader == null and the query result is stored in
+         * the message body, any existing content in the message body is
+         * discarded. If resultHeader is set, the value is used as the name of
+         * the header to store the query result and the original message body is
+         * preserved. This value can be overridden by an in message header
+         * named: CamelInfinispanOperationResultHeader
+         */
+        private Object resultHeader;
+        /**
+         * If true, the consumer will receive notifications synchronously
+         */
+        private Boolean sync = true;
 
-        public Flag[] getFlags() {
-            return flags;
+        public BasicCacheContainer getCacheContainer() {
+            return cacheContainer;
         }
 
-        public void setFlags(Flag[] flags) {
-            this.flags = flags;
+        public void setCacheContainer(BasicCacheContainer cacheContainer) {
+            this.cacheContainer = cacheContainer;
+        }
+
+        public Object getCacheContainerConfiguration() {
+            return cacheContainerConfiguration;
+        }
+
+        public void setCacheContainerConfiguration(
+                Object cacheContainerConfiguration) {
+            this.cacheContainerConfiguration = cacheContainerConfiguration;
+        }
+
+        public Boolean getClusteredListener() {
+            return clusteredListener;
+        }
+
+        public void setClusteredListener(Boolean clusteredListener) {
+            this.clusteredListener = clusteredListener;
         }
 
         @Deprecated
@@ -224,28 +241,12 @@ public class InfinispanComponentConfiguration
             this.command = command;
         }
 
-        public InfinispanOperation getOperation() {
-            return operation;
+        public Map getConfigurationProperties() {
+            return configurationProperties;
         }
 
-        public void setOperation(InfinispanOperation operation) {
-            this.operation = operation;
-        }
-
-        public String getHosts() {
-            return hosts;
-        }
-
-        public void setHosts(String hosts) {
-            this.hosts = hosts;
-        }
-
-        public InfinispanQueryBuilder getQueryBuilder() {
-            return queryBuilder;
-        }
-
-        public void setQueryBuilder(InfinispanQueryBuilder queryBuilder) {
-            this.queryBuilder = queryBuilder;
+        public void setConfigurationProperties(Map configurationProperties) {
+            this.configurationProperties = configurationProperties;
         }
 
         public String getConfigurationUri() {
@@ -256,61 +257,12 @@ public class InfinispanComponentConfiguration
             this.configurationUri = configurationUri;
         }
 
-        public Map getConfigurationProperties() {
-            return configurationProperties;
+        public InfinispanCustomListener getCustomListener() {
+            return customListener;
         }
 
-        public void setConfigurationProperties(Map configurationProperties) {
-            this.configurationProperties = configurationProperties;
-        }
-
-        public Object getCacheContainerConfiguration() {
-            return cacheContainerConfiguration;
-        }
-
-        public void setCacheContainerConfiguration(
-                Object cacheContainerConfiguration) {
-            this.cacheContainerConfiguration = cacheContainerConfiguration;
-        }
-
-        public Object getResultHeader() {
-            return resultHeader;
-        }
-
-        public void setResultHeader(Object resultHeader) {
-            this.resultHeader = resultHeader;
-        }
-
-        public BiFunction getRemappingFunction() {
-            return remappingFunction;
-        }
-
-        public void setRemappingFunction(BiFunction remappingFunction) {
-            this.remappingFunction = remappingFunction;
-        }
-
-        public BasicCacheContainer getCacheContainer() {
-            return cacheContainer;
-        }
-
-        public void setCacheContainer(BasicCacheContainer cacheContainer) {
-            this.cacheContainer = cacheContainer;
-        }
-
-        public Boolean getSync() {
-            return sync;
-        }
-
-        public void setSync(Boolean sync) {
-            this.sync = sync;
-        }
-
-        public Boolean getClusteredListener() {
-            return clusteredListener;
-        }
-
-        public void setClusteredListener(Boolean clusteredListener) {
-            this.clusteredListener = clusteredListener;
+        public void setCustomListener(InfinispanCustomListener customListener) {
+            this.customListener = customListener;
         }
 
         public Set getEventTypes() {
@@ -321,12 +273,60 @@ public class InfinispanComponentConfiguration
             this.eventTypes = eventTypes;
         }
 
-        public InfinispanCustomListener getCustomListener() {
-            return customListener;
+        public Flag[] getFlags() {
+            return flags;
         }
 
-        public void setCustomListener(InfinispanCustomListener customListener) {
-            this.customListener = customListener;
+        public void setFlags(Flag[] flags) {
+            this.flags = flags;
+        }
+
+        public String getHosts() {
+            return hosts;
+        }
+
+        public void setHosts(String hosts) {
+            this.hosts = hosts;
+        }
+
+        public InfinispanOperation getOperation() {
+            return operation;
+        }
+
+        public void setOperation(InfinispanOperation operation) {
+            this.operation = operation;
+        }
+
+        public InfinispanQueryBuilder getQueryBuilder() {
+            return queryBuilder;
+        }
+
+        public void setQueryBuilder(InfinispanQueryBuilder queryBuilder) {
+            this.queryBuilder = queryBuilder;
+        }
+
+        public BiFunction getRemappingFunction() {
+            return remappingFunction;
+        }
+
+        public void setRemappingFunction(BiFunction remappingFunction) {
+            this.remappingFunction = remappingFunction;
+        }
+
+        public Object getResultHeader() {
+            return resultHeader;
+        }
+
+        public void setResultHeader(Object resultHeader) {
+            this.resultHeader = resultHeader;
+        }
+
+        public Boolean getSync() {
+            return sync;
+        }
+
+        public void setSync(Boolean sync) {
+            this.sync = sync;
         }
     }
 }

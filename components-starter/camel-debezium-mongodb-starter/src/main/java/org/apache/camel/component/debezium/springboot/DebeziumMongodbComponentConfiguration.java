@@ -104,70 +104,26 @@ public class DebeziumMongodbComponentConfiguration
     public static class MongoDbConnectorEmbeddedDebeziumConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.debezium.configuration.MongoDbConnectorEmbeddedDebeziumConfiguration.class;
         /**
+         * Description is not available here, please check Debezium website for
+         * corresponding key 'collection.blacklist' description.
+         */
+        private String collectionBlacklist;
+        /**
+         * The collections for which changes are to be captured
+         */
+        private String collectionWhitelist;
+        /**
          * The initial delay when trying to reconnect to a primary after a
          * connection cannot be made or when no primary is available. Defaults
          * to 1 second (1000 ms).
          */
         private Long connectBackoffInitialDelayMs = 1000L;
         /**
-         * Specifies whether the addresses in 'hosts' are seeds that should be
-         * used to discover all members of the cluster or replica set ('true'),
-         * or whether the address(es) in 'hosts' should be used as is ('false').
-         * The default is 'true'.
+         * The maximum delay when trying to reconnect to a primary after a
+         * connection cannot be made or when no primary is available. Defaults
+         * to 120 second (120,000 ms).
          */
-        private Boolean mongodbMembersAutoDiscover = true;
-        /**
-         * Whether delete operations should be represented by a delete event and
-         * a subsquenttombstone event (true) or only by a delete event (false).
-         * Emitting the tombstone event (the default behavior) allows Kafka to
-         * completely delete all events pertaining to the given key once the
-         * source record got deleted.
-         */
-        private Boolean tombstonesOnDelete = false;
-        /**
-         * Description is not available here, please check Debezium website for
-         * corresponding key 'collection.blacklist' description.
-         */
-        private String collectionBlacklist;
-        /**
-         * Unique name that identifies the MongoDB replica set or cluster and
-         * all recorded offsets, andthat is used as a prefix for all schemas and
-         * topics. Each distinct MongoDB installation should have a separate
-         * namespace and monitored by at most one Debezium connector.
-         */
-        private String mongodbName;
-        /**
-         * Description is not available here, please check Debezium website for
-         * corresponding key 'field.blacklist' description.
-         */
-        private String fieldBlacklist;
-        /**
-         * Database user for connecting to MongoDB, if necessary.
-         */
-        private String mongodbUser;
-        /**
-         * Should connector use SSL to connect to MongoDB instances
-         */
-        private Boolean mongodbSslEnabled = false;
-        /**
-         * The path to the file that will be used to record the database history
-         */
-        private String databaseHistoryFileFilename;
-        /**
-         * Password to be used when connecting to MongoDB, if necessary.
-         */
-        private String mongodbPassword;
-        /**
-         * Maximum size of the queue for change events read from the database
-         * log but not yet recorded or forwarded. Defaults to 8192, and should
-         * always be larger than the maximum batch size.
-         */
-        private Integer maxQueueSize = 8192;
-        /**
-         * Maximum number of threads used to perform an intial sync of the
-         * collections in a replica set. Defaults to 1.
-         */
-        private Integer initialSyncMaxThreads = 1;
+        private Long connectBackoffMaxDelayMs = 120000L;
         /**
          * Maximum number of failed connection attempts to a replica set primary
          * before an exception occurs and task is aborted. Defaults to 16, which
@@ -177,19 +133,103 @@ public class DebeziumMongodbComponentConfiguration
          */
         private Integer connectMaxAttempts = 16;
         /**
+         * The databases for which changes are to be excluded
+         */
+        private String databaseBlacklist;
+        /**
+         * The path to the file that will be used to record the database history
+         */
+        private String databaseHistoryFileFilename;
+        /**
+         * The databases for which changes are to be captured
+         */
+        private String databaseWhitelist;
+        /**
+         * Description is not available here, please check Debezium website for
+         * corresponding key 'field.blacklist' description.
+         */
+        private String fieldBlacklist;
+        /**
+         * Description is not available here, please check Debezium website for
+         * corresponding key 'field.renames' description.
+         */
+        private String fieldRenames;
+        /**
          * Length of an interval in milli-seconds in in which the connector
          * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
          * disable heartbeat messages. Disabled by default.
          */
         private Integer heartbeatIntervalMs = 0;
         /**
+         * The prefix that is used to name heartbeat topics.Defaults to
+         * __debezium-heartbeat.
+         */
+        private String heartbeatTopicsPrefix = "__debezium-heartbeat";
+        /**
+         * Maximum number of threads used to perform an intial sync of the
+         * collections in a replica set. Defaults to 1.
+         */
+        private Integer initialSyncMaxThreads = 1;
+        /**
+         * Maximum size of each batch of source records. Defaults to 2048.
+         */
+        private Integer maxBatchSize = 2048;
+        /**
+         * Maximum size of the queue for change events read from the database
+         * log but not yet recorded or forwarded. Defaults to 8192, and should
+         * always be larger than the maximum batch size.
+         */
+        private Integer maxQueueSize = 8192;
+        /**
+         * The hostname and port pairs (in the form 'host' or 'host:port') of
+         * the MongoDB server(s) in the replica set.
+         */
+        private String mongodbHosts;
+        /**
+         * Specifies whether the addresses in 'hosts' are seeds that should be
+         * used to discover all members of the cluster or replica set ('true'),
+         * or whether the address(es) in 'hosts' should be used as is ('false').
+         * The default is 'true'.
+         */
+        private Boolean mongodbMembersAutoDiscover = true;
+        /**
+         * Unique name that identifies the MongoDB replica set or cluster and
+         * all recorded offsets, andthat is used as a prefix for all schemas and
+         * topics. Each distinct MongoDB installation should have a separate
+         * namespace and monitored by at most one Debezium connector.
+         */
+        private String mongodbName;
+        /**
+         * Password to be used when connecting to MongoDB, if necessary.
+         */
+        private String mongodbPassword;
+        /**
+         * Should connector use SSL to connect to MongoDB instances
+         */
+        private Boolean mongodbSslEnabled = false;
+        /**
+         * Whether invalid host names are allowed when using SSL. If true the
+         * connection will not prevent man-in-the-middle attacks
+         */
+        private Boolean mongodbSslInvalidHostnameAllowed = false;
+        /**
+         * Database user for connecting to MongoDB, if necessary.
+         */
+        private String mongodbUser;
+        /**
+         * Frequency in milliseconds to wait for new change events to appear
+         * after receiving no events. Defaults to 500ms.
+         */
+        private Long pollIntervalMs = 500L;
+        /**
          * The number of milliseconds to delay before a snapshot will begin.
          */
         private Long snapshotDelayMs = 0L;
         /**
-         * The collections for which changes are to be captured
+         * The maximum number of records that should be loaded into memory while
+         * performing a snapshot
          */
-        private String collectionWhitelist;
+        private Integer snapshotFetchSize;
         /**
          * The criteria for running a snapshot upon startup of the connector.
          * Options include: 'initial' (the default) to specify the connector
@@ -203,86 +243,14 @@ public class DebeziumMongodbComponentConfiguration
          */
         private String sourceStructVersion = "v2";
         /**
-         * The databases for which changes are to be captured
+         * Whether delete operations should be represented by a delete event and
+         * a subsquenttombstone event (true) or only by a delete event (false).
+         * Emitting the tombstone event (the default behavior) allows Kafka to
+         * completely delete all events pertaining to the given key once the
+         * source record got deleted.
          */
-        private String databaseWhitelist;
-        /**
-         * Maximum size of each batch of source records. Defaults to 2048.
-         */
-        private Integer maxBatchSize = 2048;
-        /**
-         * The hostname and port pairs (in the form 'host' or 'host:port') of
-         * the MongoDB server(s) in the replica set.
-         */
-        private String mongodbHosts;
-        /**
-         * Whether invalid host names are allowed when using SSL. If true the
-         * connection will not prevent man-in-the-middle attacks
-         */
-        private Boolean mongodbSslInvalidHostnameAllowed = false;
-        /**
-         * The databases for which changes are to be excluded
-         */
-        private String databaseBlacklist;
-        /**
-         * The maximum number of records that should be loaded into memory while
-         * performing a snapshot
-         */
-        private Integer snapshotFetchSize;
-        /**
-         * The prefix that is used to name heartbeat topics.Defaults to
-         * __debezium-heartbeat.
-         */
-        private String heartbeatTopicsPrefix = "__debezium-heartbeat";
-        /**
-         * Frequency in milliseconds to wait for new change events to appear
-         * after receiving no events. Defaults to 500ms.
-         */
-        private Long pollIntervalMs = 500L;
-        /**
-         * Description is not available here, please check Debezium website for
-         * corresponding key 'field.renames' description.
-         */
-        private String fieldRenames;
-        /**
-         * The maximum delay when trying to reconnect to a primary after a
-         * connection cannot be made or when no primary is available. Defaults
-         * to 120 second (120,000 ms).
-         */
-        private Long connectBackoffMaxDelayMs = 120000L;
-        /**
-         * Unique name for the connector. Attempting to register again with the
-         * same name will fail.
-         */
-        private String name;
-        /**
-         * The name of the Java class that is responsible for persistence of
-         * connector offsets.
-         */
-        private String offsetStorage = "org.apache.kafka.connect.storage.FileOffsetBackingStore";
-        /**
-         * Path to file where offsets are to be stored. Required when
-         * offset.storage is set to the FileOffsetBackingStore
-         */
-        private String offsetStorageFileName;
-        /**
-         * Replication factor used when creating the offset storage topic.
-         * Required when offset.storage is set to the KafkaOffsetBackingStore
-         */
-        private Integer offsetStorageReplicationFactor;
+        private Boolean tombstonesOnDelete = false;
         private Class connectorClass;
-        /**
-         * Maximum number of milliseconds to wait for records to flush and
-         * partition offset data to be committed to offset storage before
-         * cancelling the process and restoring the offset data to be committed
-         * in a future attempt. The default is 5 seconds.
-         */
-        private Long offsetCommitTimeoutMs = 5000L;
-        /**
-         * The number of partitions used when creating the offset storage topic.
-         * Required when offset.storage is set to the 'KafkaOffsetBackingStore'.
-         */
-        private Integer offsetStoragePartitions;
         /**
          * The Converter class that should be used to serialize and deserialize
          * key data for offsets. The default is JSON converter.
@@ -294,6 +262,11 @@ public class DebeziumMongodbComponentConfiguration
          */
         private String internalValueConverter = "org.apache.kafka.connect.json.JsonConverter";
         /**
+         * Unique name for the connector. Attempting to register again with the
+         * same name will fail.
+         */
+        private String name;
+        /**
          * The name of the Java class of the commit policy. It defines when
          * offsets commit has to be triggered based on the number of events
          * processed and the time elapsed since the last commit. This class must
@@ -302,14 +275,57 @@ public class DebeziumMongodbComponentConfiguration
          */
         private String offsetCommitPolicy = "io.debezium.embedded.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy";
         /**
+         * Maximum number of milliseconds to wait for records to flush and
+         * partition offset data to be committed to offset storage before
+         * cancelling the process and restoring the offset data to be committed
+         * in a future attempt. The default is 5 seconds.
+         */
+        private Long offsetCommitTimeoutMs = 5000L;
+        /**
          * Interval at which to try committing offsets. The default is 1 minute.
          */
         private Long offsetFlushIntervalMs = 60000L;
+        /**
+         * The name of the Java class that is responsible for persistence of
+         * connector offsets.
+         */
+        private String offsetStorage = "org.apache.kafka.connect.storage.FileOffsetBackingStore";
+        /**
+         * Path to file where offsets are to be stored. Required when
+         * offset.storage is set to the FileOffsetBackingStore
+         */
+        private String offsetStorageFileName;
+        /**
+         * The number of partitions used when creating the offset storage topic.
+         * Required when offset.storage is set to the 'KafkaOffsetBackingStore'.
+         */
+        private Integer offsetStoragePartitions;
+        /**
+         * Replication factor used when creating the offset storage topic.
+         * Required when offset.storage is set to the KafkaOffsetBackingStore
+         */
+        private Integer offsetStorageReplicationFactor;
         /**
          * The name of the Kafka topic where offsets are to be stored. Required
          * when offset.storage is set to the KafkaOffsetBackingStore.
          */
         private String offsetStorageTopic;
+
+        public String getCollectionBlacklist() {
+            return collectionBlacklist;
+        }
+
+        public void setCollectionBlacklist(String collectionBlacklist) {
+            this.collectionBlacklist = collectionBlacklist;
+        }
+
+        public String getCollectionWhitelist() {
+            return collectionWhitelist;
+        }
+
+        public void setCollectionWhitelist(String collectionWhitelist) {
+            this.collectionWhitelist = collectionWhitelist;
+        }
 
         public Long getConnectBackoffInitialDelayMs() {
             return connectBackoffInitialDelayMs;
@@ -320,61 +336,28 @@ public class DebeziumMongodbComponentConfiguration
             this.connectBackoffInitialDelayMs = connectBackoffInitialDelayMs;
         }
 
-        public Boolean getMongodbMembersAutoDiscover() {
-            return mongodbMembersAutoDiscover;
+        public Long getConnectBackoffMaxDelayMs() {
+            return connectBackoffMaxDelayMs;
         }
 
-        public void setMongodbMembersAutoDiscover(
-                Boolean mongodbMembersAutoDiscover) {
-            this.mongodbMembersAutoDiscover = mongodbMembersAutoDiscover;
+        public void setConnectBackoffMaxDelayMs(Long connectBackoffMaxDelayMs) {
+            this.connectBackoffMaxDelayMs = connectBackoffMaxDelayMs;
         }
 
-        public Boolean getTombstonesOnDelete() {
-            return tombstonesOnDelete;
+        public Integer getConnectMaxAttempts() {
+            return connectMaxAttempts;
         }
 
-        public void setTombstonesOnDelete(Boolean tombstonesOnDelete) {
-            this.tombstonesOnDelete = tombstonesOnDelete;
+        public void setConnectMaxAttempts(Integer connectMaxAttempts) {
+            this.connectMaxAttempts = connectMaxAttempts;
         }
 
-        public String getCollectionBlacklist() {
-            return collectionBlacklist;
+        public String getDatabaseBlacklist() {
+            return databaseBlacklist;
         }
 
-        public void setCollectionBlacklist(String collectionBlacklist) {
-            this.collectionBlacklist = collectionBlacklist;
-        }
-
-        public String getMongodbName() {
-            return mongodbName;
-        }
-
-        public void setMongodbName(String mongodbName) {
-            this.mongodbName = mongodbName;
-        }
-
-        public String getFieldBlacklist() {
-            return fieldBlacklist;
-        }
-
-        public void setFieldBlacklist(String fieldBlacklist) {
-            this.fieldBlacklist = fieldBlacklist;
-        }
-
-        public String getMongodbUser() {
-            return mongodbUser;
-        }
-
-        public void setMongodbUser(String mongodbUser) {
-            this.mongodbUser = mongodbUser;
-        }
-
-        public Boolean getMongodbSslEnabled() {
-            return mongodbSslEnabled;
-        }
-
-        public void setMongodbSslEnabled(Boolean mongodbSslEnabled) {
-            this.mongodbSslEnabled = mongodbSslEnabled;
+        public void setDatabaseBlacklist(String databaseBlacklist) {
+            this.databaseBlacklist = databaseBlacklist;
         }
 
         public String getDatabaseHistoryFileFilename() {
@@ -386,36 +369,28 @@ public class DebeziumMongodbComponentConfiguration
             this.databaseHistoryFileFilename = databaseHistoryFileFilename;
         }
 
-        public String getMongodbPassword() {
-            return mongodbPassword;
+        public String getDatabaseWhitelist() {
+            return databaseWhitelist;
         }
 
-        public void setMongodbPassword(String mongodbPassword) {
-            this.mongodbPassword = mongodbPassword;
+        public void setDatabaseWhitelist(String databaseWhitelist) {
+            this.databaseWhitelist = databaseWhitelist;
         }
 
-        public Integer getMaxQueueSize() {
-            return maxQueueSize;
+        public String getFieldBlacklist() {
+            return fieldBlacklist;
         }
 
-        public void setMaxQueueSize(Integer maxQueueSize) {
-            this.maxQueueSize = maxQueueSize;
+        public void setFieldBlacklist(String fieldBlacklist) {
+            this.fieldBlacklist = fieldBlacklist;
         }
 
-        public Integer getInitialSyncMaxThreads() {
-            return initialSyncMaxThreads;
+        public String getFieldRenames() {
+            return fieldRenames;
         }
 
-        public void setInitialSyncMaxThreads(Integer initialSyncMaxThreads) {
-            this.initialSyncMaxThreads = initialSyncMaxThreads;
-        }
-
-        public Integer getConnectMaxAttempts() {
-            return connectMaxAttempts;
-        }
-
-        public void setConnectMaxAttempts(Integer connectMaxAttempts) {
-            this.connectMaxAttempts = connectMaxAttempts;
+        public void setFieldRenames(String fieldRenames) {
+            this.fieldRenames = fieldRenames;
         }
 
         public Integer getHeartbeatIntervalMs() {
@@ -426,6 +401,104 @@ public class DebeziumMongodbComponentConfiguration
             this.heartbeatIntervalMs = heartbeatIntervalMs;
         }
 
+        public String getHeartbeatTopicsPrefix() {
+            return heartbeatTopicsPrefix;
+        }
+
+        public void setHeartbeatTopicsPrefix(String heartbeatTopicsPrefix) {
+            this.heartbeatTopicsPrefix = heartbeatTopicsPrefix;
+        }
+
+        public Integer getInitialSyncMaxThreads() {
+            return initialSyncMaxThreads;
+        }
+
+        public void setInitialSyncMaxThreads(Integer initialSyncMaxThreads) {
+            this.initialSyncMaxThreads = initialSyncMaxThreads;
+        }
+
+        public Integer getMaxBatchSize() {
+            return maxBatchSize;
+        }
+
+        public void setMaxBatchSize(Integer maxBatchSize) {
+            this.maxBatchSize = maxBatchSize;
+        }
+
+        public Integer getMaxQueueSize() {
+            return maxQueueSize;
+        }
+
+        public void setMaxQueueSize(Integer maxQueueSize) {
+            this.maxQueueSize = maxQueueSize;
+        }
+
+        public String getMongodbHosts() {
+            return mongodbHosts;
+        }
+
+        public void setMongodbHosts(String mongodbHosts) {
+            this.mongodbHosts = mongodbHosts;
+        }
+
+        public Boolean getMongodbMembersAutoDiscover() {
+            return mongodbMembersAutoDiscover;
+        }
+
+        public void setMongodbMembersAutoDiscover(
+                Boolean mongodbMembersAutoDiscover) {
+            this.mongodbMembersAutoDiscover = mongodbMembersAutoDiscover;
+        }
+
+        public String getMongodbName() {
+            return mongodbName;
+        }
+
+        public void setMongodbName(String mongodbName) {
+            this.mongodbName = mongodbName;
+        }
+
+        public String getMongodbPassword() {
+            return mongodbPassword;
+        }
+
+        public void setMongodbPassword(String mongodbPassword) {
+            this.mongodbPassword = mongodbPassword;
+        }
+
+        public Boolean getMongodbSslEnabled() {
+            return mongodbSslEnabled;
+        }
+
+        public void setMongodbSslEnabled(Boolean mongodbSslEnabled) {
+            this.mongodbSslEnabled = mongodbSslEnabled;
+        }
+
+        public Boolean getMongodbSslInvalidHostnameAllowed() {
+            return mongodbSslInvalidHostnameAllowed;
+        }
+
+        public void setMongodbSslInvalidHostnameAllowed(
+                Boolean mongodbSslInvalidHostnameAllowed) {
+            this.mongodbSslInvalidHostnameAllowed = mongodbSslInvalidHostnameAllowed;
+        }
+
+        public String getMongodbUser() {
+            return mongodbUser;
+        }
+
+        public void setMongodbUser(String mongodbUser) {
+            this.mongodbUser = mongodbUser;
+        }
+
+        public Long getPollIntervalMs() {
+            return pollIntervalMs;
+        }
+
+        public void setPollIntervalMs(Long pollIntervalMs) {
+            this.pollIntervalMs = pollIntervalMs;
+        }
+
         public Long getSnapshotDelayMs() {
             return snapshotDelayMs;
         }
@@ -434,12 +507,12 @@ public class DebeziumMongodbComponentConfiguration
             this.snapshotDelayMs = snapshotDelayMs;
         }
 
-        public String getCollectionWhitelist() {
-            return collectionWhitelist;
+        public Integer getSnapshotFetchSize() {
+            return snapshotFetchSize;
         }
 
-        public void setCollectionWhitelist(String collectionWhitelist) {
-            this.collectionWhitelist = collectionWhitelist;
+        public void setSnapshotFetchSize(Integer snapshotFetchSize) {
+            this.snapshotFetchSize = snapshotFetchSize;
         }
 
         public String getSnapshotMode() {
@@ -458,118 +531,12 @@ public class DebeziumMongodbComponentConfiguration
             this.sourceStructVersion = sourceStructVersion;
         }
 
-        public String getDatabaseWhitelist() {
-            return databaseWhitelist;
+        public Boolean getTombstonesOnDelete() {
+            return tombstonesOnDelete;
         }
 
-        public void setDatabaseWhitelist(String databaseWhitelist) {
-            this.databaseWhitelist = databaseWhitelist;
-        }
-
-        public Integer getMaxBatchSize() {
-            return maxBatchSize;
-        }
-
-        public void setMaxBatchSize(Integer maxBatchSize) {
-            this.maxBatchSize = maxBatchSize;
-        }
-
-        public String getMongodbHosts() {
-            return mongodbHosts;
-        }
-
-        public void setMongodbHosts(String mongodbHosts) {
-            this.mongodbHosts = mongodbHosts;
-        }
-
-        public Boolean getMongodbSslInvalidHostnameAllowed() {
-            return mongodbSslInvalidHostnameAllowed;
-        }
-
-        public void setMongodbSslInvalidHostnameAllowed(
-                Boolean mongodbSslInvalidHostnameAllowed) {
-            this.mongodbSslInvalidHostnameAllowed = mongodbSslInvalidHostnameAllowed;
-        }
-
-        public String getDatabaseBlacklist() {
-            return databaseBlacklist;
-        }
-
-        public void setDatabaseBlacklist(String databaseBlacklist) {
-            this.databaseBlacklist = databaseBlacklist;
-        }
-
-        public Integer getSnapshotFetchSize() {
-            return snapshotFetchSize;
-        }
-
-        public void setSnapshotFetchSize(Integer snapshotFetchSize) {
-            this.snapshotFetchSize = snapshotFetchSize;
-        }
-
-        public String getHeartbeatTopicsPrefix() {
-            return heartbeatTopicsPrefix;
-        }
-
-        public void setHeartbeatTopicsPrefix(String heartbeatTopicsPrefix) {
-            this.heartbeatTopicsPrefix = heartbeatTopicsPrefix;
-        }
-
-        public Long getPollIntervalMs() {
-            return pollIntervalMs;
-        }
-
-        public void setPollIntervalMs(Long pollIntervalMs) {
-            this.pollIntervalMs = pollIntervalMs;
-        }
-
-        public String getFieldRenames() {
-            return fieldRenames;
-        }
-
-        public void setFieldRenames(String fieldRenames) {
-            this.fieldRenames = fieldRenames;
-        }
-
-        public Long getConnectBackoffMaxDelayMs() {
-            return connectBackoffMaxDelayMs;
-        }
-
-        public void setConnectBackoffMaxDelayMs(Long connectBackoffMaxDelayMs) {
-            this.connectBackoffMaxDelayMs = connectBackoffMaxDelayMs;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getOffsetStorage() {
-            return offsetStorage;
-        }
-
-        public void setOffsetStorage(String offsetStorage) {
-            this.offsetStorage = offsetStorage;
-        }
-
-        public String getOffsetStorageFileName() {
-            return offsetStorageFileName;
-        }
-
-        public void setOffsetStorageFileName(String offsetStorageFileName) {
-            this.offsetStorageFileName = offsetStorageFileName;
-        }
-
-        public Integer getOffsetStorageReplicationFactor() {
-            return offsetStorageReplicationFactor;
-        }
-
-        public void setOffsetStorageReplicationFactor(
-                Integer offsetStorageReplicationFactor) {
-            this.offsetStorageReplicationFactor = offsetStorageReplicationFactor;
+        public void setTombstonesOnDelete(Boolean tombstonesOnDelete) {
+            this.tombstonesOnDelete = tombstonesOnDelete;
         }
 
         public Class getConnectorClass() {
@@ -578,22 +545,6 @@ public class DebeziumMongodbComponentConfiguration
 
         public void setConnectorClass(Class connectorClass) {
             this.connectorClass = connectorClass;
-        }
-
-        public Long getOffsetCommitTimeoutMs() {
-            return offsetCommitTimeoutMs;
-        }
-
-        public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
-            this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
-        }
-
-        public Integer getOffsetStoragePartitions() {
-            return offsetStoragePartitions;
-        }
-
-        public void setOffsetStoragePartitions(Integer offsetStoragePartitions) {
-            this.offsetStoragePartitions = offsetStoragePartitions;
         }
 
         public String getInternalKeyConverter() {
@@ -612,6 +563,14 @@ public class DebeziumMongodbComponentConfiguration
             this.internalValueConverter = internalValueConverter;
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
         public String getOffsetCommitPolicy() {
             return offsetCommitPolicy;
         }
@@ -620,12 +579,53 @@ public class DebeziumMongodbComponentConfiguration
             this.offsetCommitPolicy = offsetCommitPolicy;
         }
 
+        public Long getOffsetCommitTimeoutMs() {
+            return offsetCommitTimeoutMs;
+        }
+
+        public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
+            this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
+        }
+
         public Long getOffsetFlushIntervalMs() {
             return offsetFlushIntervalMs;
         }
 
         public void setOffsetFlushIntervalMs(Long offsetFlushIntervalMs) {
             this.offsetFlushIntervalMs = offsetFlushIntervalMs;
+        }
+
+        public String getOffsetStorage() {
+            return offsetStorage;
+        }
+
+        public void setOffsetStorage(String offsetStorage) {
+            this.offsetStorage = offsetStorage;
+        }
+
+        public String getOffsetStorageFileName() {
+            return offsetStorageFileName;
+        }
+
+        public void setOffsetStorageFileName(String offsetStorageFileName) {
+            this.offsetStorageFileName = offsetStorageFileName;
+        }
+
+        public Integer getOffsetStoragePartitions() {
+            return offsetStoragePartitions;
+        }
+
+        public void setOffsetStoragePartitions(Integer offsetStoragePartitions) {
+            this.offsetStoragePartitions = offsetStoragePartitions;
+        }
+
+        public Integer getOffsetStorageReplicationFactor() {
+            return offsetStorageReplicationFactor;
+        }
+
+        public void setOffsetStorageReplicationFactor(
+                Integer offsetStorageReplicationFactor) {
+            this.offsetStorageReplicationFactor = offsetStorageReplicationFactor;
         }
 
         public String getOffsetStorageTopic() {

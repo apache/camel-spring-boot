@@ -111,13 +111,36 @@ public class AS2ComponentConfiguration
     public static class AS2ConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.as2.AS2Configuration.class;
         /**
-         * The chain of certificates used to encrypt EDI message.
+         * What kind of operation to perform
          */
-        private Certificate[] encryptingCertificateChain;
+        private AS2ApiName apiName;
         /**
-         * The template used to format MDN message
+         * The value of the AS2From header of AS2 message.
          */
-        private String mdnMessageTemplate;
+        private String as2From;
+        /**
+         * The structure of AS2 Message. One of: PLAIN - No encryption, no
+         * signature, SIGNED - No encryption, signature, ENCRYPTED - Encryption,
+         * no signature, ENCRYPTED_SIGNED - Encryption, signature
+         */
+        private AS2MessageStructure as2MessageStructure;
+        /**
+         * The value of the AS2To header of AS2 message.
+         */
+        private String as2To;
+        /**
+         * The version of the AS2 protocol.
+         */
+        private String as2Version = "1.1";
+        /**
+         * The Client Fully Qualified Domain Name (FQDN). Used in message ids
+         * sent by endpoint.
+         */
+        private String clientFqdn = "camel.apache.org";
+        /**
+         * The algorithm used to compress EDI message.
+         */
+        private AS2CompressionAlgorithm compressionAlgorithm;
         /**
          * The key used to encrypt the EDI message.
          */
@@ -129,62 +152,52 @@ public class AS2ComponentConfiguration
          */
         private String dispositionNotificationTo;
         /**
-         * What kind of operation to perform
+         * The transfer encoding of EDI message.
          */
-        private AS2ApiName apiName;
-        /**
-         * The request URI of EDI message.
-         */
-        private String requestUri = "/";
-        /**
-         * The port number of target host. -1 indicates the scheme default port.
-         */
-        private Integer targetPortNumber;
-        /**
-         * The value of the AS2From header of AS2 message.
-         */
-        private String as2From;
+        private String ediMessageTransferEncoding;
         /**
          * The content type of EDI message. One of application/edifact,
          * application/edi-x12, application/edi-consent
          */
         private ContentType ediMessageType;
         /**
-         * The port number of server.
-         */
-        private Integer serverPortNumber;
-        /**
          * The algorithm used to encrypt EDI message.
          */
         private AS2EncryptionAlgorithm encryptingAlgorithm;
         /**
-         * The Client Fully Qualified Domain Name (FQDN). Used in message ids
-         * sent by endpoint.
+         * The chain of certificates used to encrypt EDI message.
          */
-        private String clientFqdn = "camel.apache.org";
+        private Certificate[] encryptingCertificateChain;
         /**
-         * The key used to sign the EDI message.
+         * The value of the From header of AS2 message.
          */
-        private PrivateKey signingPrivateKey;
+        private String from;
         /**
-         * The value included in the User-Agent message header identifying the
-         * AS2 user agent.
+         * The template used to format MDN message
          */
-        private String userAgent = "Camel AS2 Client Endpoint";
+        private String mdnMessageTemplate;
         /**
          * What sub operation to use for the selected operation
          */
         private String methodName;
         /**
-         * The host name (IP or DNS name) of target host.
+         * The request URI of EDI message.
          */
-        private String targetHostname;
+        private String requestUri = "/";
         /**
-         * The structure of AS2 Message. One of: PLAIN - No encryption, no
-         * signature, SIGNED - No encryption, signature, ENCRYPTED - Encryption,
-         * no signature, ENCRYPTED_SIGNED - Encryption, signature
+         * The value included in the Server message header identifying the AS2
+         * Server.
          */
-        private AS2MessageStructure as2MessageStructure;
+        private String server = "Camel AS2 Server Endpoint";
+        /**
+         * The Server Fully Qualified Domain Name (FQDN). Used in message ids
+         * sent by endpoint.
+         */
+        private String serverFqdn = "camel.apache.org";
+        /**
+         * The port number of server.
+         */
+        private Integer serverPortNumber;
         /**
          * The list of algorithms, in order of preference, requested to generate
          * a message integrity check (MIC) returned in message dispostion
@@ -192,63 +205,91 @@ public class AS2ComponentConfiguration
          */
         private String[] signedReceiptMicAlgorithms;
         /**
-         * The version of the AS2 protocol.
-         */
-        private String as2Version = "1.1";
-        /**
          * The algorithm used to sign EDI message.
          */
         private AS2SignatureAlgorithm signingAlgorithm;
-        /**
-         * The algorithm used to compress EDI message.
-         */
-        private AS2CompressionAlgorithm compressionAlgorithm;
-        /**
-         * The transfer encoding of EDI message.
-         */
-        private String ediMessageTransferEncoding;
-        /**
-         * The value of Subject header of AS2 message.
-         */
-        private String subject;
-        /**
-         * The Server Fully Qualified Domain Name (FQDN). Used in message ids
-         * sent by endpoint.
-         */
-        private String serverFqdn = "camel.apache.org";
         /**
          * The chain of certificates used to sign EDI message.
          */
         private Certificate[] signingCertificateChain;
         /**
-         * The value of the AS2To header of AS2 message.
+         * The key used to sign the EDI message.
          */
-        private String as2To;
+        private PrivateKey signingPrivateKey;
         /**
-         * The value of the From header of AS2 message.
+         * The value of Subject header of AS2 message.
          */
-        private String from;
+        private String subject;
         /**
-         * The value included in the Server message header identifying the AS2
-         * Server.
+         * The host name (IP or DNS name) of target host.
          */
-        private String server = "Camel AS2 Server Endpoint";
+        private String targetHostname;
+        /**
+         * The port number of target host. -1 indicates the scheme default port.
+         */
+        private Integer targetPortNumber;
+        /**
+         * The value included in the User-Agent message header identifying the
+         * AS2 user agent.
+         */
+        private String userAgent = "Camel AS2 Client Endpoint";
 
-        public Certificate[] getEncryptingCertificateChain() {
-            return encryptingCertificateChain;
+        public AS2ApiName getApiName() {
+            return apiName;
         }
 
-        public void setEncryptingCertificateChain(
-                Certificate[] encryptingCertificateChain) {
-            this.encryptingCertificateChain = encryptingCertificateChain;
+        public void setApiName(AS2ApiName apiName) {
+            this.apiName = apiName;
         }
 
-        public String getMdnMessageTemplate() {
-            return mdnMessageTemplate;
+        public String getAs2From() {
+            return as2From;
         }
 
-        public void setMdnMessageTemplate(String mdnMessageTemplate) {
-            this.mdnMessageTemplate = mdnMessageTemplate;
+        public void setAs2From(String as2From) {
+            this.as2From = as2From;
+        }
+
+        public AS2MessageStructure getAs2MessageStructure() {
+            return as2MessageStructure;
+        }
+
+        public void setAs2MessageStructure(
+                AS2MessageStructure as2MessageStructure) {
+            this.as2MessageStructure = as2MessageStructure;
+        }
+
+        public String getAs2To() {
+            return as2To;
+        }
+
+        public void setAs2To(String as2To) {
+            this.as2To = as2To;
+        }
+
+        public String getAs2Version() {
+            return as2Version;
+        }
+
+        public void setAs2Version(String as2Version) {
+            this.as2Version = as2Version;
+        }
+
+        public String getClientFqdn() {
+            return clientFqdn;
+        }
+
+        public void setClientFqdn(String clientFqdn) {
+            this.clientFqdn = clientFqdn;
+        }
+
+        public AS2CompressionAlgorithm getCompressionAlgorithm() {
+            return compressionAlgorithm;
+        }
+
+        public void setCompressionAlgorithm(
+                AS2CompressionAlgorithm compressionAlgorithm) {
+            this.compressionAlgorithm = compressionAlgorithm;
         }
 
         public PrivateKey getDecryptingPrivateKey() {
@@ -268,36 +309,13 @@ public class AS2ComponentConfiguration
             this.dispositionNotificationTo = dispositionNotificationTo;
         }
 
-        public AS2ApiName getApiName() {
-            return apiName;
+        public String getEdiMessageTransferEncoding() {
+            return ediMessageTransferEncoding;
         }
 
-        public void setApiName(AS2ApiName apiName) {
-            this.apiName = apiName;
-        }
-
-        public String getRequestUri() {
-            return requestUri;
-        }
-
-        public void setRequestUri(String requestUri) {
-            this.requestUri = requestUri;
-        }
-
-        public Integer getTargetPortNumber() {
-            return targetPortNumber;
-        }
-
-        public void setTargetPortNumber(Integer targetPortNumber) {
-            this.targetPortNumber = targetPortNumber;
-        }
-
-        public String getAs2From() {
-            return as2From;
-        }
-
-        public void setAs2From(String as2From) {
-            this.as2From = as2From;
+        public void setEdiMessageTransferEncoding(
+                String ediMessageTransferEncoding) {
+            this.ediMessageTransferEncoding = ediMessageTransferEncoding;
         }
 
         public ContentType getEdiMessageType() {
@@ -306,14 +324,6 @@ public class AS2ComponentConfiguration
 
         public void setEdiMessageType(ContentType ediMessageType) {
             this.ediMessageType = ediMessageType;
-        }
-
-        public Integer getServerPortNumber() {
-            return serverPortNumber;
-        }
-
-        public void setServerPortNumber(Integer serverPortNumber) {
-            this.serverPortNumber = serverPortNumber;
         }
 
         public AS2EncryptionAlgorithm getEncryptingAlgorithm() {
@@ -325,28 +335,29 @@ public class AS2ComponentConfiguration
             this.encryptingAlgorithm = encryptingAlgorithm;
         }
 
-        public String getClientFqdn() {
-            return clientFqdn;
+        public Certificate[] getEncryptingCertificateChain() {
+            return encryptingCertificateChain;
         }
 
-        public void setClientFqdn(String clientFqdn) {
-            this.clientFqdn = clientFqdn;
+        public void setEncryptingCertificateChain(
+                Certificate[] encryptingCertificateChain) {
+            this.encryptingCertificateChain = encryptingCertificateChain;
         }
 
-        public PrivateKey getSigningPrivateKey() {
-            return signingPrivateKey;
+        public String getFrom() {
+            return from;
         }
 
-        public void setSigningPrivateKey(PrivateKey signingPrivateKey) {
-            this.signingPrivateKey = signingPrivateKey;
+        public void setFrom(String from) {
+            this.from = from;
         }
 
-        public String getUserAgent() {
-            return userAgent;
+        public String getMdnMessageTemplate() {
+            return mdnMessageTemplate;
         }
 
-        public void setUserAgent(String userAgent) {
-            this.userAgent = userAgent;
+        public void setMdnMessageTemplate(String mdnMessageTemplate) {
+            this.mdnMessageTemplate = mdnMessageTemplate;
         }
 
         public String getMethodName() {
@@ -357,21 +368,36 @@ public class AS2ComponentConfiguration
             this.methodName = methodName;
         }
 
-        public String getTargetHostname() {
-            return targetHostname;
+        public String getRequestUri() {
+            return requestUri;
         }
 
-        public void setTargetHostname(String targetHostname) {
-            this.targetHostname = targetHostname;
+        public void setRequestUri(String requestUri) {
+            this.requestUri = requestUri;
         }
 
-        public AS2MessageStructure getAs2MessageStructure() {
-            return as2MessageStructure;
+        public String getServer() {
+            return server;
         }
 
-        public void setAs2MessageStructure(
-                AS2MessageStructure as2MessageStructure) {
-            this.as2MessageStructure = as2MessageStructure;
+        public void setServer(String server) {
+            this.server = server;
+        }
+
+        public String getServerFqdn() {
+            return serverFqdn;
+        }
+
+        public void setServerFqdn(String serverFqdn) {
+            this.serverFqdn = serverFqdn;
+        }
+
+        public Integer getServerPortNumber() {
+            return serverPortNumber;
+        }
+
+        public void setServerPortNumber(Integer serverPortNumber) {
+            this.serverPortNumber = serverPortNumber;
         }
 
         public String[] getSignedReceiptMicAlgorithms() {
@@ -383,54 +409,12 @@ public class AS2ComponentConfiguration
             this.signedReceiptMicAlgorithms = signedReceiptMicAlgorithms;
         }
 
-        public String getAs2Version() {
-            return as2Version;
-        }
-
-        public void setAs2Version(String as2Version) {
-            this.as2Version = as2Version;
-        }
-
         public AS2SignatureAlgorithm getSigningAlgorithm() {
             return signingAlgorithm;
         }
 
         public void setSigningAlgorithm(AS2SignatureAlgorithm signingAlgorithm) {
             this.signingAlgorithm = signingAlgorithm;
-        }
-
-        public AS2CompressionAlgorithm getCompressionAlgorithm() {
-            return compressionAlgorithm;
-        }
-
-        public void setCompressionAlgorithm(
-                AS2CompressionAlgorithm compressionAlgorithm) {
-            this.compressionAlgorithm = compressionAlgorithm;
-        }
-
-        public String getEdiMessageTransferEncoding() {
-            return ediMessageTransferEncoding;
-        }
-
-        public void setEdiMessageTransferEncoding(
-                String ediMessageTransferEncoding) {
-            this.ediMessageTransferEncoding = ediMessageTransferEncoding;
-        }
-
-        public String getSubject() {
-            return subject;
-        }
-
-        public void setSubject(String subject) {
-            this.subject = subject;
-        }
-
-        public String getServerFqdn() {
-            return serverFqdn;
-        }
-
-        public void setServerFqdn(String serverFqdn) {
-            this.serverFqdn = serverFqdn;
         }
 
         public Certificate[] getSigningCertificateChain() {
@@ -442,28 +426,44 @@ public class AS2ComponentConfiguration
             this.signingCertificateChain = signingCertificateChain;
         }
 
-        public String getAs2To() {
-            return as2To;
+        public PrivateKey getSigningPrivateKey() {
+            return signingPrivateKey;
         }
 
-        public void setAs2To(String as2To) {
-            this.as2To = as2To;
+        public void setSigningPrivateKey(PrivateKey signingPrivateKey) {
+            this.signingPrivateKey = signingPrivateKey;
         }
 
-        public String getFrom() {
-            return from;
+        public String getSubject() {
+            return subject;
         }
 
-        public void setFrom(String from) {
-            this.from = from;
+        public void setSubject(String subject) {
+            this.subject = subject;
         }
 
-        public String getServer() {
-            return server;
+        public String getTargetHostname() {
+            return targetHostname;
         }
 
-        public void setServer(String server) {
-            this.server = server;
+        public void setTargetHostname(String targetHostname) {
+            this.targetHostname = targetHostname;
+        }
+
+        public Integer getTargetPortNumber() {
+            return targetPortNumber;
+        }
+
+        public void setTargetPortNumber(Integer targetPortNumber) {
+            this.targetPortNumber = targetPortNumber;
+        }
+
+        public String getUserAgent() {
+            return userAgent;
+        }
+
+        public void setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
         }
     }
 }

@@ -142,41 +142,13 @@ public class DdbStreamComponentConfiguration
     public static class DdbStreamConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.ddbstream.DdbStreamConfiguration.class;
         /**
-         * The region in which DDBStreams client needs to work
-         */
-        private String region;
-        /**
-         * To define a proxy port when instantiating the DDBStreams client
-         */
-        private Integer proxyPort;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
-        /**
-         * To define a proxy host when instantiating the DDBStreams client
-         */
-        private String proxyHost;
-        /**
          * Amazon AWS Access Key
          */
         private String accessKey;
         /**
-         * To define a proxy protocol when instantiating the DDBStreams client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
-        /**
          * Amazon DynamoDB client to use for all requests for this endpoint
          */
         private AmazonDynamoDBStreams amazonDynamoDbStreamsClient;
-        /**
-         * Maximum number of records that will be fetched in each poll
-         */
-        private Integer maxResultsPerRequest;
-        /**
-         * Name of the dynamodb table
-         */
-        private String tableName;
         /**
          * Defines where in the DynaboDB stream to start getting records. Note
          * that using TRIM_HORIZON can cause a significant delay before the
@@ -185,43 +157,39 @@ public class DdbStreamComponentConfiguration
          */
         private ShardIteratorType iteratorType = ShardIteratorType.LATEST;
         /**
+         * Maximum number of records that will be fetched in each poll
+         */
+        private Integer maxResultsPerRequest;
+        /**
+         * To define a proxy host when instantiating the DDBStreams client
+         */
+        private String proxyHost;
+        /**
+         * To define a proxy port when instantiating the DDBStreams client
+         */
+        private Integer proxyPort;
+        /**
+         * To define a proxy protocol when instantiating the DDBStreams client
+         */
+        private Protocol proxyProtocol = Protocol.HTTPS;
+        /**
+         * The region in which DDBStreams client needs to work
+         */
+        private String region;
+        /**
+         * Amazon AWS Secret Key
+         */
+        private String secretKey;
+        /**
          * Provider for the sequence number when using one of the two
          * ShardIteratorType.{AT,AFTER}_SEQUENCE_NUMBER iterator types. Can be a
          * registry reference or a literal sequence number.
          */
         private SequenceNumberProvider sequenceNumberProvider;
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
+        /**
+         * Name of the dynamodb table
+         */
+        private String tableName;
 
         public String getAccessKey() {
             return accessKey;
@@ -229,14 +197,6 @@ public class DdbStreamComponentConfiguration
 
         public void setAccessKey(String accessKey) {
             this.accessKey = accessKey;
-        }
-
-        public Protocol getProxyProtocol() {
-            return proxyProtocol;
-        }
-
-        public void setProxyProtocol(Protocol proxyProtocol) {
-            this.proxyProtocol = proxyProtocol;
         }
 
         public AmazonDynamoDBStreams getAmazonDynamoDbStreamsClient() {
@@ -248,6 +208,14 @@ public class DdbStreamComponentConfiguration
             this.amazonDynamoDbStreamsClient = amazonDynamoDbStreamsClient;
         }
 
+        public ShardIteratorType getIteratorType() {
+            return iteratorType;
+        }
+
+        public void setIteratorType(ShardIteratorType iteratorType) {
+            this.iteratorType = iteratorType;
+        }
+
         public Integer getMaxResultsPerRequest() {
             return maxResultsPerRequest;
         }
@@ -256,20 +224,44 @@ public class DdbStreamComponentConfiguration
             this.maxResultsPerRequest = maxResultsPerRequest;
         }
 
-        public String getTableName() {
-            return tableName;
+        public String getProxyHost() {
+            return proxyHost;
         }
 
-        public void setTableName(String tableName) {
-            this.tableName = tableName;
+        public void setProxyHost(String proxyHost) {
+            this.proxyHost = proxyHost;
         }
 
-        public ShardIteratorType getIteratorType() {
-            return iteratorType;
+        public Integer getProxyPort() {
+            return proxyPort;
         }
 
-        public void setIteratorType(ShardIteratorType iteratorType) {
-            this.iteratorType = iteratorType;
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
+        }
+
+        public Protocol getProxyProtocol() {
+            return proxyProtocol;
+        }
+
+        public void setProxyProtocol(Protocol proxyProtocol) {
+            this.proxyProtocol = proxyProtocol;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
         }
 
         public SequenceNumberProvider getSequenceNumberProvider() {
@@ -279,6 +271,14 @@ public class DdbStreamComponentConfiguration
         public void setSequenceNumberProvider(
                 SequenceNumberProvider sequenceNumberProvider) {
             this.sequenceNumberProvider = sequenceNumberProvider;
+        }
+
+        public String getTableName() {
+            return tableName;
+        }
+
+        public void setTableName(String tableName) {
+            this.tableName = tableName;
         }
     }
 }

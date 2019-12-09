@@ -1,0 +1,40 @@
+{
+ "component": {
+    "kind": "component",
+    "scheme": "ignite-set",
+    "syntax": "ignite-set:name",
+    "title": "Ignite Sets",
+    "description": "The Ignite Sets endpoint is one of camel-ignite endpoints which allows you to interact with Ignite Set data structures.",
+    "label": "nosql,cache",
+    "deprecated": false,
+    "deprecationNote": "",
+    "async": false,
+    "consumerOnly": false,
+    "producerOnly": true,
+    "lenientProperties": false,
+    "javaType": "org.apache.camel.component.ignite.set.IgniteSetComponent",
+    "firstVersion": "2.17.0",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-ignite-starter",
+    "version": "1.0.0-SNAPSHOT"
+  },
+  "componentProperties": {
+    "ignite": { "kind": "property", "displayName": "Ignite", "group": "producer", "required": false, "type": "object", "javaType": "org.apache.ignite.Ignite", "deprecated": false, "secret": false, "description": "Sets the Ignite instance." },
+    "configurationResource": { "kind": "property", "displayName": "Configuration Resource", "group": "producer", "required": false, "type": "object", "javaType": "java.lang.Object", "deprecated": false, "secret": false, "description": "Sets the resource from where to load the configuration. It can be a: URI, String (URI) or an InputStream." },
+    "igniteConfiguration": { "kind": "property", "displayName": "Ignite Configuration", "group": "producer", "required": false, "type": "object", "javaType": "org.apache.ignite.configuration.IgniteConfiguration", "deprecated": false, "secret": false, "description": "Allows the user to set a programmatic IgniteConfiguration." },
+    "basicPropertyBinding": { "kind": "property", "displayName": "Basic Property Binding", "group": "advanced", "label": "advanced", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": false, "description": "Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities" },
+    "lazyStartProducer": { "kind": "property", "displayName": "Lazy Start Producer", "group": "producer", "label": "producer", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": false, "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing." },
+    "bridgeErrorHandler": { "kind": "property", "displayName": "Bridge Error Handler", "group": "consumer", "label": "consumer", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": false, "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored." }
+  },
+  "properties": {
+    "name": { "kind": "path", "displayName": "Name", "group": "producer", "required": true, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "The set name." },
+    "configuration": { "kind": "parameter", "displayName": "Configuration", "group": "producer", "label": "producer", "required": false, "type": "object", "javaType": "org.apache.ignite.configuration.CollectionConfiguration", "deprecated": false, "secret": false, "description": "The collection configuration. Default: empty configuration. You can also conveniently set inner properties by using configuration.xyz=123 options." },
+    "lazyStartProducer": { "kind": "parameter", "displayName": "Lazy Start Producer", "group": "producer", "label": "producer", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": false, "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing." },
+    "operation": { "kind": "parameter", "displayName": "Operation", "group": "producer", "label": "producer", "required": false, "type": "object", "javaType": "org.apache.camel.component.ignite.set.IgniteSetOperation", "enum": [ "CONTAINS", "ADD", "SIZE", "REMOVE", "ITERATOR", "CLEAR", "RETAIN_ALL", "ARRAY" ], "deprecated": false, "secret": false, "description": "The operation to invoke on the Ignite Set. Superseded by the IgniteConstants.IGNITE_SETS_OPERATION header in the IN message. Possible values: CONTAINS, ADD, SIZE, REMOVE, ITERATOR, CLEAR, RETAIN_ALL, ARRAY.The set operation to perform." },
+    "propagateIncomingBodyIfNoReturnValue": { "kind": "parameter", "displayName": "Propagate Incoming Body If No Return Value", "group": "producer", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": true, "description": "Sets whether to propagate the incoming body if the return type of the underlying Ignite operation is void." },
+    "treatCollectionsAsCacheObjects": { "kind": "parameter", "displayName": "Treat Collections As Cache Objects", "group": "producer", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": false, "description": "Sets whether to treat Collections as cache objects or as Collections of items to insert/update/compute, etc." },
+    "basicPropertyBinding": { "kind": "parameter", "displayName": "Basic Property Binding", "group": "advanced", "label": "advanced", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": false, "description": "Whether the endpoint should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities" },
+    "synchronous": { "kind": "parameter", "displayName": "Synchronous", "group": "advanced", "label": "advanced", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": false, "description": "Sets whether synchronous processing should be strictly used, or Camel is allowed to use asynchronous processing (if supported)." }
+  }
+}
+

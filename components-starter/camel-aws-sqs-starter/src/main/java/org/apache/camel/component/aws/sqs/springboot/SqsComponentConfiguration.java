@@ -145,75 +145,22 @@ public class SqsComponentConfiguration
     public static class SqsConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.sqs.SqsConfiguration.class;
         /**
-         * The underlying protocol used to communicate with SQS
+         * Amazon AWS Access Key
          */
-        private String protocol = "https";
+        private String accessKey;
         /**
-         * Specify the queue region which could be used with
-         * queueOwnerAWSAccountId to build the service URL. When using this
-         * parameter, the configuration will expect the capitalized name of the
-         * region (for example AP_EAST_1) You'll need to use the name
-         * Regions.EU_WEST_1.name()
+         * The hostname of the Amazon AWS cloud.
          */
-        private String region;
+        private String amazonAWSHost = "amazonaws.com";
         /**
-         * The policy for this queue
+         * To use the AmazonSQS as client
          */
-        private String policy;
-        /**
-         * Only for FIFO queues. Strategy for setting the messageDeduplicationId
-         * on the message. Can be one of the following options: useExchangeId,
-         * useContentBasedDeduplication. For the useContentBasedDeduplication
-         * option, no messageDeduplicationId will be set on the message.
-         */
-        private MessageDeduplicationIdStrategy messageDeduplicationIdStrategy;
-        /**
-         * The length of time, in seconds, for which Amazon SQS can reuse a data
-         * key to encrypt or decrypt messages before calling AWS KMS again. An
-         * integer representing seconds, between 60 seconds (1 minute) and
-         * 86,400 seconds (24 hours). Default: 300 (5 minutes).
-         */
-        private Integer kmsDataKeyReusePeriodSeconds;
-        /**
-         * The default visibility timeout (in seconds)
-         */
-        private Integer defaultVisibilityTimeout;
-        /**
-         * If you do not specify WaitTimeSeconds in the request, the queue
-         * attribute ReceiveMessageWaitTimeSeconds is used to determine how long
-         * to wait.
-         */
-        private Integer receiveMessageWaitTimeSeconds;
-        /**
-         * To define a proxy port when instantiating the SQS client
-         */
-        private Integer proxyPort;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
-        /**
-         * The operation to do in case the user don't want to send only a
-         * message
-         */
-        private SqsOperations operation;
-        /**
-         * If enabled then a scheduled background task will keep extending the
-         * message visibility on SQS. This is needed if it takes a long time to
-         * process the message. If set to true defaultVisibilityTimeout must be
-         * set. See details at Amazon docs.
-         */
-        private Boolean extendMessageVisibility = false;
+        private AmazonSQS amazonSQSClient;
         /**
          * A list of attribute names to receive when consuming. Multiple names
          * can be separated by comma.
          */
         private String attributeNames;
-        /**
-         * Specify the queue owner aws account id when you need to connect the
-         * queue with different account owner.
-         */
-        private String queueOwnerAWSAccountId;
         /**
          * Setting the autocreation of the queue
          */
@@ -224,39 +171,65 @@ public class SqsComponentConfiguration
          */
         private Integer concurrentConsumers = 1;
         /**
+         * The default visibility timeout (in seconds)
+         */
+        private Integer defaultVisibilityTimeout;
+        /**
          * Define if you want to apply delaySeconds option to the queue or on
          * single messages
          */
         private Boolean delayQueue = false;
         /**
-         * The messageRetentionPeriod (in seconds) a message will be retained by
-         * SQS for this queue.
+         * Delay sending messages for a number of seconds.
          */
-        private Integer messageRetentionPeriod;
-        private String queueName;
+        private Integer delaySeconds;
+        /**
+         * Delete message from SQS after it has been read
+         */
+        private Boolean deleteAfterRead = true;
+        /**
+         * Whether or not to send the DeleteMessage to the SQS queue if an
+         * exchange fails to get through a filter. If 'false' and exchange does
+         * not make it through a Camel filter upstream in the route, then don't
+         * send DeleteMessage.
+         */
+        private Boolean deleteIfFiltered = true;
+        /**
+         * If enabled then a scheduled background task will keep extending the
+         * message visibility on SQS. This is needed if it takes a long time to
+         * process the message. If set to true defaultVisibilityTimeout must be
+         * set. See details at Amazon docs.
+         */
+        private Boolean extendMessageVisibility = false;
+        /**
+         * The length of time, in seconds, for which Amazon SQS can reuse a data
+         * key to encrypt or decrypt messages before calling AWS KMS again. An
+         * integer representing seconds, between 60 seconds (1 minute) and
+         * 86,400 seconds (24 hours). Default: 300 (5 minutes).
+         */
+        private Integer kmsDataKeyReusePeriodSeconds;
+        /**
+         * The ID of an AWS-managed customer master key (CMK) for Amazon SQS or
+         * a custom CMK.
+         */
+        private String kmsMasterKeyId;
         /**
          * The maximumMessageSize (in bytes) an SQS message can contain for this
          * queue.
          */
         private Integer maximumMessageSize;
         /**
-         * The hostname of the Amazon AWS cloud.
-         */
-        private String amazonAWSHost = "amazonaws.com";
-        /**
          * A list of message attribute names to receive when consuming. Multiple
          * names can be separated by comma.
          */
         private String messageAttributeNames;
         /**
-         * Delay sending messages for a number of seconds.
+         * Only for FIFO queues. Strategy for setting the messageDeduplicationId
+         * on the message. Can be one of the following options: useExchangeId,
+         * useContentBasedDeduplication. For the useContentBasedDeduplication
+         * option, no messageDeduplicationId will be set on the message.
          */
-        private Integer delaySeconds;
-        /**
-         * Specify the policy that send message to DeadLetter queue. See detail
-         * at Amazon docs.
-         */
-        private String redrivePolicy;
+        private MessageDeduplicationIdStrategy messageDeduplicationIdStrategy;
         /**
          * Only for FIFO queues. Strategy for setting the messageGroupId on the
          * message. Can be one of the following options: useConstant,
@@ -264,6 +237,76 @@ public class SqsComponentConfiguration
          * value of property CamelAwsMessageGroupId will be used.
          */
         private MessageGroupIdStrategy messageGroupIdStrategy;
+        /**
+         * The messageRetentionPeriod (in seconds) a message will be retained by
+         * SQS for this queue.
+         */
+        private Integer messageRetentionPeriod;
+        /**
+         * The operation to do in case the user don't want to send only a
+         * message
+         */
+        private SqsOperations operation;
+        /**
+         * The policy for this queue
+         */
+        private String policy;
+        /**
+         * The underlying protocol used to communicate with SQS
+         */
+        private String protocol = "https";
+        /**
+         * To define a proxy host when instantiating the SQS client
+         */
+        private String proxyHost;
+        /**
+         * To define a proxy port when instantiating the SQS client
+         */
+        private Integer proxyPort;
+        /**
+         * To define a proxy protocol when instantiating the SQS client
+         */
+        private Protocol proxyProtocol = Protocol.HTTPS;
+        private String queueName;
+        /**
+         * Specify the queue owner aws account id when you need to connect the
+         * queue with different account owner.
+         */
+        private String queueOwnerAWSAccountId;
+        /**
+         * To define the queueUrl explicitly. All other parameters, which would
+         * influence the queueUrl, are ignored. This parameter is intended to be
+         * used, to connect to a mock implementation of SQS, for testing
+         * purposes.
+         */
+        private String queueUrl;
+        /**
+         * If you do not specify WaitTimeSeconds in the request, the queue
+         * attribute ReceiveMessageWaitTimeSeconds is used to determine how long
+         * to wait.
+         */
+        private Integer receiveMessageWaitTimeSeconds;
+        /**
+         * Specify the policy that send message to DeadLetter queue. See detail
+         * at Amazon docs.
+         */
+        private String redrivePolicy;
+        /**
+         * Specify the queue region which could be used with
+         * queueOwnerAWSAccountId to build the service URL. When using this
+         * parameter, the configuration will expect the capitalized name of the
+         * region (for example AP_EAST_1) You'll need to use the name
+         * Regions.EU_WEST_1.name()
+         */
+        private String region;
+        /**
+         * Amazon AWS Secret Key
+         */
+        private String secretKey;
+        /**
+         * Define if Server Side Encryption is enabled or not on the queue
+         */
+        private Boolean serverSideEncryptionEnabled = false;
         /**
          * The duration (in seconds) that the received messages are hidden from
          * subsequent retrieve requests after being retrieved by a
@@ -274,143 +317,33 @@ public class SqsComponentConfiguration
          */
         private Integer visibilityTimeout;
         /**
-         * Whether or not to send the DeleteMessage to the SQS queue if an
-         * exchange fails to get through a filter. If 'false' and exchange does
-         * not make it through a Camel filter upstream in the route, then don't
-         * send DeleteMessage.
-         */
-        private Boolean deleteIfFiltered = true;
-        /**
          * Duration in seconds (0 to 20) that the ReceiveMessage action call
          * will wait until a message is in the queue to include in the response.
          */
         private Integer waitTimeSeconds;
-        /**
-         * To define a proxy host when instantiating the SQS client
-         */
-        private String proxyHost;
-        /**
-         * To use the AmazonSQS as client
-         */
-        private AmazonSQS amazonSQSClient;
-        /**
-         * To define the queueUrl explicitly. All other parameters, which would
-         * influence the queueUrl, are ignored. This parameter is intended to be
-         * used, to connect to a mock implementation of SQS, for testing
-         * purposes.
-         */
-        private String queueUrl;
-        /**
-         * The ID of an AWS-managed customer master key (CMK) for Amazon SQS or
-         * a custom CMK.
-         */
-        private String kmsMasterKeyId;
-        /**
-         * Define if Server Side Encryption is enabled or not on the queue
-         */
-        private Boolean serverSideEncryptionEnabled = false;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * To define a proxy protocol when instantiating the SQS client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
-        /**
-         * Delete message from SQS after it has been read
-         */
-        private Boolean deleteAfterRead = true;
 
-        public String getProtocol() {
-            return protocol;
+        public String getAccessKey() {
+            return accessKey;
         }
 
-        public void setProtocol(String protocol) {
-            this.protocol = protocol;
+        public void setAccessKey(String accessKey) {
+            this.accessKey = accessKey;
         }
 
-        public String getRegion() {
-            return region;
+        public String getAmazonAWSHost() {
+            return amazonAWSHost;
         }
 
-        public void setRegion(String region) {
-            this.region = region;
+        public void setAmazonAWSHost(String amazonAWSHost) {
+            this.amazonAWSHost = amazonAWSHost;
         }
 
-        public String getPolicy() {
-            return policy;
+        public AmazonSQS getAmazonSQSClient() {
+            return amazonSQSClient;
         }
 
-        public void setPolicy(String policy) {
-            this.policy = policy;
-        }
-
-        public MessageDeduplicationIdStrategy getMessageDeduplicationIdStrategy() {
-            return messageDeduplicationIdStrategy;
-        }
-
-        public void setMessageDeduplicationIdStrategy(
-                MessageDeduplicationIdStrategy messageDeduplicationIdStrategy) {
-            this.messageDeduplicationIdStrategy = messageDeduplicationIdStrategy;
-        }
-
-        public Integer getKmsDataKeyReusePeriodSeconds() {
-            return kmsDataKeyReusePeriodSeconds;
-        }
-
-        public void setKmsDataKeyReusePeriodSeconds(
-                Integer kmsDataKeyReusePeriodSeconds) {
-            this.kmsDataKeyReusePeriodSeconds = kmsDataKeyReusePeriodSeconds;
-        }
-
-        public Integer getDefaultVisibilityTimeout() {
-            return defaultVisibilityTimeout;
-        }
-
-        public void setDefaultVisibilityTimeout(Integer defaultVisibilityTimeout) {
-            this.defaultVisibilityTimeout = defaultVisibilityTimeout;
-        }
-
-        public Integer getReceiveMessageWaitTimeSeconds() {
-            return receiveMessageWaitTimeSeconds;
-        }
-
-        public void setReceiveMessageWaitTimeSeconds(
-                Integer receiveMessageWaitTimeSeconds) {
-            this.receiveMessageWaitTimeSeconds = receiveMessageWaitTimeSeconds;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public SqsOperations getOperation() {
-            return operation;
-        }
-
-        public void setOperation(SqsOperations operation) {
-            this.operation = operation;
-        }
-
-        public Boolean getExtendMessageVisibility() {
-            return extendMessageVisibility;
-        }
-
-        public void setExtendMessageVisibility(Boolean extendMessageVisibility) {
-            this.extendMessageVisibility = extendMessageVisibility;
+        public void setAmazonSQSClient(AmazonSQS amazonSQSClient) {
+            this.amazonSQSClient = amazonSQSClient;
         }
 
         public String getAttributeNames() {
@@ -419,14 +352,6 @@ public class SqsComponentConfiguration
 
         public void setAttributeNames(String attributeNames) {
             this.attributeNames = attributeNames;
-        }
-
-        public String getQueueOwnerAWSAccountId() {
-            return queueOwnerAWSAccountId;
-        }
-
-        public void setQueueOwnerAWSAccountId(String queueOwnerAWSAccountId) {
-            this.queueOwnerAWSAccountId = queueOwnerAWSAccountId;
         }
 
         public Boolean getAutoCreateQueue() {
@@ -445,52 +370,20 @@ public class SqsComponentConfiguration
             this.concurrentConsumers = concurrentConsumers;
         }
 
+        public Integer getDefaultVisibilityTimeout() {
+            return defaultVisibilityTimeout;
+        }
+
+        public void setDefaultVisibilityTimeout(Integer defaultVisibilityTimeout) {
+            this.defaultVisibilityTimeout = defaultVisibilityTimeout;
+        }
+
         public Boolean getDelayQueue() {
             return delayQueue;
         }
 
         public void setDelayQueue(Boolean delayQueue) {
             this.delayQueue = delayQueue;
-        }
-
-        public Integer getMessageRetentionPeriod() {
-            return messageRetentionPeriod;
-        }
-
-        public void setMessageRetentionPeriod(Integer messageRetentionPeriod) {
-            this.messageRetentionPeriod = messageRetentionPeriod;
-        }
-
-        public String getQueueName() {
-            return queueName;
-        }
-
-        public void setQueueName(String queueName) {
-            this.queueName = queueName;
-        }
-
-        public Integer getMaximumMessageSize() {
-            return maximumMessageSize;
-        }
-
-        public void setMaximumMessageSize(Integer maximumMessageSize) {
-            this.maximumMessageSize = maximumMessageSize;
-        }
-
-        public String getAmazonAWSHost() {
-            return amazonAWSHost;
-        }
-
-        public void setAmazonAWSHost(String amazonAWSHost) {
-            this.amazonAWSHost = amazonAWSHost;
-        }
-
-        public String getMessageAttributeNames() {
-            return messageAttributeNames;
-        }
-
-        public void setMessageAttributeNames(String messageAttributeNames) {
-            this.messageAttributeNames = messageAttributeNames;
         }
 
         public Integer getDelaySeconds() {
@@ -501,12 +394,70 @@ public class SqsComponentConfiguration
             this.delaySeconds = delaySeconds;
         }
 
-        public String getRedrivePolicy() {
-            return redrivePolicy;
+        public Boolean getDeleteAfterRead() {
+            return deleteAfterRead;
         }
 
-        public void setRedrivePolicy(String redrivePolicy) {
-            this.redrivePolicy = redrivePolicy;
+        public void setDeleteAfterRead(Boolean deleteAfterRead) {
+            this.deleteAfterRead = deleteAfterRead;
+        }
+
+        public Boolean getDeleteIfFiltered() {
+            return deleteIfFiltered;
+        }
+
+        public void setDeleteIfFiltered(Boolean deleteIfFiltered) {
+            this.deleteIfFiltered = deleteIfFiltered;
+        }
+
+        public Boolean getExtendMessageVisibility() {
+            return extendMessageVisibility;
+        }
+
+        public void setExtendMessageVisibility(Boolean extendMessageVisibility) {
+            this.extendMessageVisibility = extendMessageVisibility;
+        }
+
+        public Integer getKmsDataKeyReusePeriodSeconds() {
+            return kmsDataKeyReusePeriodSeconds;
+        }
+
+        public void setKmsDataKeyReusePeriodSeconds(
+                Integer kmsDataKeyReusePeriodSeconds) {
+            this.kmsDataKeyReusePeriodSeconds = kmsDataKeyReusePeriodSeconds;
+        }
+
+        public String getKmsMasterKeyId() {
+            return kmsMasterKeyId;
+        }
+
+        public void setKmsMasterKeyId(String kmsMasterKeyId) {
+            this.kmsMasterKeyId = kmsMasterKeyId;
+        }
+
+        public Integer getMaximumMessageSize() {
+            return maximumMessageSize;
+        }
+
+        public void setMaximumMessageSize(Integer maximumMessageSize) {
+            this.maximumMessageSize = maximumMessageSize;
+        }
+
+        public String getMessageAttributeNames() {
+            return messageAttributeNames;
+        }
+
+        public void setMessageAttributeNames(String messageAttributeNames) {
+            this.messageAttributeNames = messageAttributeNames;
+        }
+
+        public MessageDeduplicationIdStrategy getMessageDeduplicationIdStrategy() {
+            return messageDeduplicationIdStrategy;
+        }
+
+        public void setMessageDeduplicationIdStrategy(
+                MessageDeduplicationIdStrategy messageDeduplicationIdStrategy) {
+            this.messageDeduplicationIdStrategy = messageDeduplicationIdStrategy;
         }
 
         public MessageGroupIdStrategy getMessageGroupIdStrategy() {
@@ -518,28 +469,36 @@ public class SqsComponentConfiguration
             this.messageGroupIdStrategy = messageGroupIdStrategy;
         }
 
-        public Integer getVisibilityTimeout() {
-            return visibilityTimeout;
+        public Integer getMessageRetentionPeriod() {
+            return messageRetentionPeriod;
         }
 
-        public void setVisibilityTimeout(Integer visibilityTimeout) {
-            this.visibilityTimeout = visibilityTimeout;
+        public void setMessageRetentionPeriod(Integer messageRetentionPeriod) {
+            this.messageRetentionPeriod = messageRetentionPeriod;
         }
 
-        public Boolean getDeleteIfFiltered() {
-            return deleteIfFiltered;
+        public SqsOperations getOperation() {
+            return operation;
         }
 
-        public void setDeleteIfFiltered(Boolean deleteIfFiltered) {
-            this.deleteIfFiltered = deleteIfFiltered;
+        public void setOperation(SqsOperations operation) {
+            this.operation = operation;
         }
 
-        public Integer getWaitTimeSeconds() {
-            return waitTimeSeconds;
+        public String getPolicy() {
+            return policy;
         }
 
-        public void setWaitTimeSeconds(Integer waitTimeSeconds) {
-            this.waitTimeSeconds = waitTimeSeconds;
+        public void setPolicy(String policy) {
+            this.policy = policy;
+        }
+
+        public String getProtocol() {
+            return protocol;
+        }
+
+        public void setProtocol(String protocol) {
+            this.protocol = protocol;
         }
 
         public String getProxyHost() {
@@ -550,12 +509,36 @@ public class SqsComponentConfiguration
             this.proxyHost = proxyHost;
         }
 
-        public AmazonSQS getAmazonSQSClient() {
-            return amazonSQSClient;
+        public Integer getProxyPort() {
+            return proxyPort;
         }
 
-        public void setAmazonSQSClient(AmazonSQS amazonSQSClient) {
-            this.amazonSQSClient = amazonSQSClient;
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
+        }
+
+        public Protocol getProxyProtocol() {
+            return proxyProtocol;
+        }
+
+        public void setProxyProtocol(Protocol proxyProtocol) {
+            this.proxyProtocol = proxyProtocol;
+        }
+
+        public String getQueueName() {
+            return queueName;
+        }
+
+        public void setQueueName(String queueName) {
+            this.queueName = queueName;
+        }
+
+        public String getQueueOwnerAWSAccountId() {
+            return queueOwnerAWSAccountId;
+        }
+
+        public void setQueueOwnerAWSAccountId(String queueOwnerAWSAccountId) {
+            this.queueOwnerAWSAccountId = queueOwnerAWSAccountId;
         }
 
         public String getQueueUrl() {
@@ -566,12 +549,37 @@ public class SqsComponentConfiguration
             this.queueUrl = queueUrl;
         }
 
-        public String getKmsMasterKeyId() {
-            return kmsMasterKeyId;
+        public Integer getReceiveMessageWaitTimeSeconds() {
+            return receiveMessageWaitTimeSeconds;
         }
 
-        public void setKmsMasterKeyId(String kmsMasterKeyId) {
-            this.kmsMasterKeyId = kmsMasterKeyId;
+        public void setReceiveMessageWaitTimeSeconds(
+                Integer receiveMessageWaitTimeSeconds) {
+            this.receiveMessageWaitTimeSeconds = receiveMessageWaitTimeSeconds;
+        }
+
+        public String getRedrivePolicy() {
+            return redrivePolicy;
+        }
+
+        public void setRedrivePolicy(String redrivePolicy) {
+            this.redrivePolicy = redrivePolicy;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
         }
 
         public Boolean getServerSideEncryptionEnabled() {
@@ -583,28 +591,20 @@ public class SqsComponentConfiguration
             this.serverSideEncryptionEnabled = serverSideEncryptionEnabled;
         }
 
-        public String getAccessKey() {
-            return accessKey;
+        public Integer getVisibilityTimeout() {
+            return visibilityTimeout;
         }
 
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
+        public void setVisibilityTimeout(Integer visibilityTimeout) {
+            this.visibilityTimeout = visibilityTimeout;
         }
 
-        public Protocol getProxyProtocol() {
-            return proxyProtocol;
+        public Integer getWaitTimeSeconds() {
+            return waitTimeSeconds;
         }
 
-        public void setProxyProtocol(Protocol proxyProtocol) {
-            this.proxyProtocol = proxyProtocol;
-        }
-
-        public Boolean getDeleteAfterRead() {
-            return deleteAfterRead;
-        }
-
-        public void setDeleteAfterRead(Boolean deleteAfterRead) {
-            this.deleteAfterRead = deleteAfterRead;
+        public void setWaitTimeSeconds(Integer waitTimeSeconds) {
+            this.waitTimeSeconds = waitTimeSeconds;
         }
     }
 }

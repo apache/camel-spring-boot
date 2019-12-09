@@ -75,6 +75,7 @@
         <module>tooling</module>
         <module>camel-spring-boot</module>
         <module>components-starter</module>
+        <module>camel-catalog-provider-springboot</module>
         <module>tests</module>
         <module>examples</module>
     </modules>

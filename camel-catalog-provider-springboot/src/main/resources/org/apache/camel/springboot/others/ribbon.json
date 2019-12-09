@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "ribbon",
+    "kind": "other",
+    "title": "Ribbon",
+    "description": "Using Netflix Ribbon for client side load balancing",
+    "deprecated": "false",
+    "firstVersion": "2.18.0",
+    "label": "microservice",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-ribbon-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

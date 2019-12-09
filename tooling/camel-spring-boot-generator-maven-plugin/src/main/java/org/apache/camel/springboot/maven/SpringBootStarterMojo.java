@@ -64,6 +64,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
@@ -76,19 +77,14 @@ import org.apache.maven.project.ProjectBuildingResult;
  */
 @Mojo(name = "prepare-spring-boot-starter", threadSafe = true,
         requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME,
-        requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME)
-public class SpringBootStarterMojo extends AbstractMojo {
+        requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME,
+        defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
+public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
 
     private static final String GENERATED_SECTION_START = "START OF GENERATED CODE";
     private static final String GENERATED_SECTION_START_COMMENT = "<!--" + GENERATED_SECTION_START + "-->";
     private static final String GENERATED_SECTION_END = "END OF GENERATED CODE";
     private static final String GENERATED_SECTION_END_COMMENT = "<!--" + GENERATED_SECTION_END + "-->";
-
-    /**
-     * The maven project.
-     */
-    @Parameter(property = "project", required = true, readonly = true)
-    protected MavenProject project;
 
     /**
      * The maven session.
@@ -109,13 +105,8 @@ public class SpringBootStarterMojo extends AbstractMojo {
     private ProjectBuilder projectBuilder;
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
-
+    protected void executeAll() throws MojoExecutionException, MojoFailureException {
         try {
-            if (project.getArtifactId().equals("components-starter")) {
-                return;
-            }
-
             // create the starter directory
             File starterDir = baseDir;
 
@@ -307,15 +298,6 @@ public class SpringBootStarterMojo extends AbstractMojo {
         }
     }
 
-    private String getMainDepArtifactId() {
-        return project.getArtifactId().substring(0, project.getArtifactId().length() - "-starter".length());
-    }
-
-    private String getMainDepGroupId() {
-        return "camel-spring-boot-starter".equals(project.getArtifactId())
-                ? "org.apache.camel.springboot" : "org.apache.camel";
-    }
-
     private Set<String> filterIncludedArtifacts(Set<String> artifacts) {
 
         Set<Artifact> dependencies;
@@ -487,33 +469,6 @@ public class SpringBootStarterMojo extends AbstractMojo {
         content = content.replaceFirst("-->", "-->\n").replaceFirst("\\?><!--", "\\?>\n<!--");
 
         writeIfChanged(content, destination);
-    }
-
-    private void writeIfChanged(String content, File file) throws IOException {
-        boolean write = true;
-
-        if (file.exists()) {
-            try (FileReader fr = new FileReader(file)) {
-                String oldContent = IOUtils.toString(fr);
-                if (!content.equals(oldContent)) {
-                    getLog().debug("Writing new file " + file.getAbsolutePath());
-                    fr.close();
-                } else {
-                    getLog().debug("File " + file.getAbsolutePath() + " has been left unchanged");
-                    write = false;
-                }
-            }
-        } else {
-            // Create the structure
-            File parent = file.getParentFile();
-            parent.mkdirs();
-        }
-
-        if (write) {
-            try (FileWriter fw = new FileWriter(file)) {
-                IOUtils.write(content, fw);
-            }
-        }
     }
 
 }

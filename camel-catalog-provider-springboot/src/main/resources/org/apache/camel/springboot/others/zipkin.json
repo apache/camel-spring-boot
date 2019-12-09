@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "zipkin",
+    "kind": "other",
+    "title": "Zipkin",
+    "description": "Distributed message tracing using Zipkin",
+    "deprecated": "false",
+    "firstVersion": "2.18.0",
+    "label": "monitoring,microservice",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-zipkin-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

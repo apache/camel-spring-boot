@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "rxjava",
+    "kind": "other",
+    "title": "RxJava",
+    "description": "RxJava based back-end for Camel's reactive streams component",
+    "deprecated": "false",
+    "firstVersion": "2.22.0",
+    "label": "reactive,streams",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-rxjava-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

@@ -115,52 +115,36 @@ public class ZendeskComponentConfiguration
     public static class ZendeskConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.zendesk.ZendeskConfiguration.class;
         /**
-         * The password.
+         * What operation to use
          */
-        private String password;
-        /**
-         * The user name.
-         */
-        private String username;
-        /**
-         * The security token.
-         */
-        private String token;
+        private String methodName;
         /**
          * The OAuth token.
          */
         private String oauthToken;
         /**
+         * The password.
+         */
+        private String password;
+        /**
          * The server URL to connect.
          */
         private String serverUrl;
         /**
-         * What operation to use
+         * The security token.
          */
-        private String methodName;
+        private String token;
+        /**
+         * The user name.
+         */
+        private String username;
 
-        public String getPassword() {
-            return password;
+        public String getMethodName() {
+            return methodName;
         }
 
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getToken() {
-            return token;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
+        public void setMethodName(String methodName) {
+            this.methodName = methodName;
         }
 
         public String getOauthToken() {
@@ -171,6 +155,14 @@ public class ZendeskComponentConfiguration
             this.oauthToken = oauthToken;
         }
 
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
         public String getServerUrl() {
             return serverUrl;
         }
@@ -179,12 +171,20 @@ public class ZendeskComponentConfiguration
             this.serverUrl = serverUrl;
         }
 
-        public String getMethodName() {
-            return methodName;
+        public String getToken() {
+            return token;
         }
 
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
+        public void setToken(String token) {
+            this.token = token;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
         }
     }
 }

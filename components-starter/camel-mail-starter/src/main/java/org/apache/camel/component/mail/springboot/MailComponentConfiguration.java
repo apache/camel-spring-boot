@@ -147,62 +147,56 @@ public class MailComponentConfiguration
     public static class MailConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.mail.MailConfiguration.class;
         /**
-         * The mail server host name
-         */
-        private String host;
-        private String protocol;
-        /**
-         * The port number of the mail server
-         */
-        private Integer port;
-        /**
-         * The password for login
-         */
-        private String password;
-        /**
-         * The mail message content type. Use text/html for HTML mails.
-         */
-        private String contentType = "text/plain";
-        /**
-         * Specifies the mail session that camel should use for all mail
-         * interactions. Useful in scenarios where mail sessions are created and
-         * managed by some other resource, such as a JavaEE container. When
-         * using a custom mail session, then the hostname and port from the mail
-         * session will be used (if configured on the session).
-         */
-        private Session session;
-        /**
-         * The username for login
-         */
-        private String username;
-        /**
-         * The from email address
-         */
-        private String from = "camel@localhost";
-        /**
-         * Sets the To email address. Separate multiple email addresses with
-         * comma.
-         */
-        private String to;
-        /**
-         * Option to let Camel ignore unsupported charset in the local JVM when
-         * sending mails. If the charset is unsupported then charset=XXX (where
-         * XXX represents the unsupported charset) is removed from the
-         * content-type and it relies on the platform default instead.
-         */
-        private Boolean ignoreUnsupportedCharset = false;
-        /**
-         * To use a custom AttachmentsContentTransferEncodingResolver to resolve
-         * what content-type-encoding to use for attachments.
-         */
-        private AttachmentsContentTransferEncodingResolver attachmentsContentTransferEncodingResolver;
-        /**
          * Sets additional java mail properties, that will append/override any
          * default properties that is set based on all the other options. This
          * is useful if you need to add some special options but want to keep
          * the others as is.
          */
         private Properties additionalJavaMailProperties;
+        /**
+         * Specifies the key to an IN message header that contains an
+         * alternative email body. For example, if you send emails in text/html
+         * format and want to provide an alternative mail body for non-HTML
+         * email clients, set the alternative mail body with this key as a
+         * header.
+         */
+        private String alternativeBodyHeader = "CamelMailAlternativeBody";
+        /**
+         * To use a custom AttachmentsContentTransferEncodingResolver to resolve
+         * what content-type-encoding to use for attachments.
+         */
+        private AttachmentsContentTransferEncodingResolver attachmentsContentTransferEncodingResolver;
+        /**
+         * Sets the BCC email address. Separate multiple email addresses with
+         * comma.
+         */
+        private String bcc;
+        /**
+         * Sets the CC email address. Separate multiple email addresses with
+         * comma.
+         */
+        private String cc;
+        /**
+         * Whether the consumer should close the folder after polling. Setting
+         * this option to false and having disconnect=false as well, then the
+         * consumer keep the folder open between polls.
+         */
+        private Boolean closeFolder = true;
+        /**
+         * The connection timeout in milliseconds.
+         */
+        private Integer connectionTimeout = 30000;
+        /**
+         * The mail message content type. Use text/html for HTML mails.
+         */
+        private String contentType = "text/plain";
+        /**
+         * After processing a mail message, it can be copied to a mail folder
+         * with the given name. You can override this configuration value, with
+         * a header with the key copyTo, allowing you to copy messages to folder
+         * names configured at runtime.
+         */
+        private String copyTo;
         /**
          * Enable debug mode on the underlying mail framework. The SUN Mail
          * framework logs the debug messages to System.out by default.
@@ -216,48 +210,6 @@ public class MailComponentConfiguration
          * mail should be deleted or not.
          */
         private Boolean delete = false;
-        /**
-         * Whether the consumer should close the folder after polling. Setting
-         * this option to false and having disconnect=false as well, then the
-         * consumer keep the folder open between polls.
-         */
-        private Boolean closeFolder = true;
-        /**
-         * Whether to use disposition inline or attachment.
-         */
-        private Boolean useInlineAttachments = false;
-        /**
-         * Whether to limit by unseen mails only.
-         */
-        private Boolean unseen = true;
-        /**
-         * Will mark the javax.mail.Message as peeked before processing the mail
-         * message. This applies to IMAPMessage messages types only. By using
-         * peek the mail will not be eager marked as SEEN on the mail server,
-         * which allows us to rollback the mail message if there is an error
-         * processing in Camel.
-         */
-        private Boolean peek = true;
-        /**
-         * To use a custom org.apache.camel.component.mail.JavaMailSender for
-         * sending emails.
-         */
-        private JavaMailSender javaMailSender;
-        /**
-         * The folder to poll.
-         */
-        private String folderName = "INBOX";
-        /**
-         * Specifies whether Camel should map the received mail message to Camel
-         * body/headers/attachments. If set to true, the body of the mail
-         * message is mapped to the body of the Camel IN message, the mail
-         * headers are mapped to IN headers, and the attachments to Camel IN
-         * attachment message. If this option is set to false then the IN
-         * message contains a raw javax.mail.Message. You can retrieve this raw
-         * message by calling
-         * exchange.getIn().getBody(javax.mail.Message.class).
-         */
-        private Boolean mapMailMessage = true;
         /**
          * Whether the consumer should disconnect after polling. If enabled this
          * forces Camel to connect on each poll.
@@ -273,14 +225,13 @@ public class MailComponentConfiguration
          */
         private Integer fetchSize = -1;
         /**
-         * Specifies the key to an IN message header that contains an
-         * alternative email body. For example, if you send emails in text/html
-         * format and want to provide an alternative mail body for non-HTML
-         * email clients, set the alternative mail body with this key as a
-         * header.
+         * The folder to poll.
          */
-        private String alternativeBodyHeader = "CamelMailAlternativeBody";
-        private Properties javaMailProperties;
+        private String folderName = "INBOX";
+        /**
+         * The from email address
+         */
+        private String from = "camel@localhost";
         /**
          * If the mail consumer cannot retrieve a given mail message, then this
          * option allows to handle the caused exception by the consumer's error
@@ -291,14 +242,75 @@ public class MailComponentConfiguration
          */
         private Boolean handleFailedMessage = false;
         /**
+         * The mail server host name
+         */
+        private String host;
+        /**
+         * Option to let Camel ignore unsupported charset in the local JVM when
+         * sending mails. If the charset is unsupported then charset=XXX (where
+         * XXX represents the unsupported charset) is removed from the
+         * content-type and it relies on the platform default instead.
+         */
+        private Boolean ignoreUnsupportedCharset = false;
+        /**
+         * Option to let Camel ignore unsupported charset in the local JVM when
+         * sending mails. If the charset is unsupported then charset=XXX (where
+         * XXX represents the unsupported charset) is removed from the
+         * content-type and it relies on the platform default instead.
+         */
+        private Boolean ignoreUriScheme = false;
+        private Properties javaMailProperties;
+        /**
+         * To use a custom org.apache.camel.component.mail.JavaMailSender for
+         * sending emails.
+         */
+        private JavaMailSender javaMailSender;
+        /**
+         * Specifies whether Camel should map the received mail message to Camel
+         * body/headers/attachments. If set to true, the body of the mail
+         * message is mapped to the body of the Camel IN message, the mail
+         * headers are mapped to IN headers, and the attachments to Camel IN
+         * attachment message. If this option is set to false then the IN
+         * message contains a raw javax.mail.Message. You can retrieve this raw
+         * message by calling
+         * exchange.getIn().getBody(javax.mail.Message.class).
+         */
+        private Boolean mapMailMessage = true;
+        /**
          * This option enables transparent MIME decoding and unfolding for mail
          * headers.
          */
         private Boolean mimeDecodeHeaders = false;
         /**
-         * The connection timeout in milliseconds.
+         * The password for login
          */
-        private Integer connectionTimeout = 30000;
+        private String password;
+        /**
+         * Will mark the javax.mail.Message as peeked before processing the mail
+         * message. This applies to IMAPMessage messages types only. By using
+         * peek the mail will not be eager marked as SEEN on the mail server,
+         * which allows us to rollback the mail message if there is an error
+         * processing in Camel.
+         */
+        private Boolean peek = true;
+        /**
+         * The port number of the mail server
+         */
+        private Integer port;
+        private String protocol;
+        /**
+         * The Reply-To recipients (the receivers of the response mail).
+         * Separate multiple email addresses with a comma.
+         */
+        private String replyTo;
+        /**
+         * Specifies the mail session that camel should use for all mail
+         * interactions. Useful in scenarios where mail sessions are created and
+         * managed by some other resource, such as a JavaEE container. When
+         * using a custom mail session, then the hostname and port from the mail
+         * session will be used (if configured on the session).
+         */
+        private Session session;
         /**
          * If the mail consumer cannot retrieve a given mail message, then this
          * option allows to skip the message and move on to retrieve the next
@@ -308,122 +320,47 @@ public class MailComponentConfiguration
          */
         private Boolean skipFailedMessage = false;
         /**
-         * The Reply-To recipients (the receivers of the response mail).
-         * Separate multiple email addresses with a comma.
+         * To configure security using SSLContextParameters.
          */
-        private String replyTo;
-        /**
-         * Sets the CC email address. Separate multiple email addresses with
-         * comma.
-         */
-        private String cc;
-        /**
-         * Option to let Camel ignore unsupported charset in the local JVM when
-         * sending mails. If the charset is unsupported then charset=XXX (where
-         * XXX represents the unsupported charset) is removed from the
-         * content-type and it relies on the platform default instead.
-         */
-        private Boolean ignoreUriScheme = false;
-        /**
-         * After processing a mail message, it can be copied to a mail folder
-         * with the given name. You can override this configuration value, with
-         * a header with the key copyTo, allowing you to copy messages to folder
-         * names configured at runtime.
-         */
-        private String copyTo;
-        /**
-         * Sets the BCC email address. Separate multiple email addresses with
-         * comma.
-         */
-        private String bcc;
+        private SSLContextParameters sslContextParameters;
         /**
          * The Subject of the message being sent. Note: Setting the subject in
          * the header takes precedence over this option.
          */
         private String subject;
         /**
-         * To configure security using SSLContextParameters.
+         * Sets the To email address. Separate multiple email addresses with
+         * comma.
          */
-        private SSLContextParameters sslContextParameters;
+        private String to;
+        /**
+         * Whether to limit by unseen mails only.
+         */
+        private Boolean unseen = true;
+        /**
+         * Whether to use disposition inline or attachment.
+         */
+        private Boolean useInlineAttachments = false;
+        /**
+         * The username for login
+         */
+        private String username;
 
-        public String getHost() {
-            return host;
+        public Properties getAdditionalJavaMailProperties() {
+            return additionalJavaMailProperties;
         }
 
-        public void setHost(String host) {
-            this.host = host;
+        public void setAdditionalJavaMailProperties(
+                Properties additionalJavaMailProperties) {
+            this.additionalJavaMailProperties = additionalJavaMailProperties;
         }
 
-        public String getProtocol() {
-            return protocol;
+        public String getAlternativeBodyHeader() {
+            return alternativeBodyHeader;
         }
 
-        public void setProtocol(String protocol) {
-            this.protocol = protocol;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getContentType() {
-            return contentType;
-        }
-
-        public void setContentType(String contentType) {
-            this.contentType = contentType;
-        }
-
-        public Session getSession() {
-            return session;
-        }
-
-        public void setSession(Session session) {
-            this.session = session;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getFrom() {
-            return from;
-        }
-
-        public void setFrom(String from) {
-            this.from = from;
-        }
-
-        public String getTo() {
-            return to;
-        }
-
-        public void setTo(String to) {
-            this.to = to;
-        }
-
-        public Boolean getIgnoreUnsupportedCharset() {
-            return ignoreUnsupportedCharset;
-        }
-
-        public void setIgnoreUnsupportedCharset(Boolean ignoreUnsupportedCharset) {
-            this.ignoreUnsupportedCharset = ignoreUnsupportedCharset;
+        public void setAlternativeBodyHeader(String alternativeBodyHeader) {
+            this.alternativeBodyHeader = alternativeBodyHeader;
         }
 
         public AttachmentsContentTransferEncodingResolver getAttachmentsContentTransferEncodingResolver() {
@@ -435,13 +372,52 @@ public class MailComponentConfiguration
             this.attachmentsContentTransferEncodingResolver = attachmentsContentTransferEncodingResolver;
         }
 
-        public Properties getAdditionalJavaMailProperties() {
-            return additionalJavaMailProperties;
+        public String getBcc() {
+            return bcc;
         }
 
-        public void setAdditionalJavaMailProperties(
-                Properties additionalJavaMailProperties) {
-            this.additionalJavaMailProperties = additionalJavaMailProperties;
+        public void setBcc(String bcc) {
+            this.bcc = bcc;
+        }
+
+        public String getCc() {
+            return cc;
+        }
+
+        public void setCc(String cc) {
+            this.cc = cc;
+        }
+
+        public Boolean getCloseFolder() {
+            return closeFolder;
+        }
+
+        public void setCloseFolder(Boolean closeFolder) {
+            this.closeFolder = closeFolder;
+        }
+
+        public Integer getConnectionTimeout() {
+            return connectionTimeout;
+        }
+
+        public void setConnectionTimeout(Integer connectionTimeout) {
+            this.connectionTimeout = connectionTimeout;
+        }
+
+        public String getContentType() {
+            return contentType;
+        }
+
+        public void setContentType(String contentType) {
+            this.contentType = contentType;
+        }
+
+        public String getCopyTo() {
+            return copyTo;
+        }
+
+        public void setCopyTo(String copyTo) {
+            this.copyTo = copyTo;
         }
 
         public Boolean getDebugMode() {
@@ -460,62 +436,6 @@ public class MailComponentConfiguration
             this.delete = delete;
         }
 
-        public Boolean getCloseFolder() {
-            return closeFolder;
-        }
-
-        public void setCloseFolder(Boolean closeFolder) {
-            this.closeFolder = closeFolder;
-        }
-
-        public Boolean getUseInlineAttachments() {
-            return useInlineAttachments;
-        }
-
-        public void setUseInlineAttachments(Boolean useInlineAttachments) {
-            this.useInlineAttachments = useInlineAttachments;
-        }
-
-        public Boolean getUnseen() {
-            return unseen;
-        }
-
-        public void setUnseen(Boolean unseen) {
-            this.unseen = unseen;
-        }
-
-        public Boolean getPeek() {
-            return peek;
-        }
-
-        public void setPeek(Boolean peek) {
-            this.peek = peek;
-        }
-
-        public JavaMailSender getJavaMailSender() {
-            return javaMailSender;
-        }
-
-        public void setJavaMailSender(JavaMailSender javaMailSender) {
-            this.javaMailSender = javaMailSender;
-        }
-
-        public String getFolderName() {
-            return folderName;
-        }
-
-        public void setFolderName(String folderName) {
-            this.folderName = folderName;
-        }
-
-        public Boolean getMapMailMessage() {
-            return mapMailMessage;
-        }
-
-        public void setMapMailMessage(Boolean mapMailMessage) {
-            this.mapMailMessage = mapMailMessage;
-        }
-
         public Boolean getDisconnect() {
             return disconnect;
         }
@@ -532,20 +452,20 @@ public class MailComponentConfiguration
             this.fetchSize = fetchSize;
         }
 
-        public String getAlternativeBodyHeader() {
-            return alternativeBodyHeader;
+        public String getFolderName() {
+            return folderName;
         }
 
-        public void setAlternativeBodyHeader(String alternativeBodyHeader) {
-            this.alternativeBodyHeader = alternativeBodyHeader;
+        public void setFolderName(String folderName) {
+            this.folderName = folderName;
         }
 
-        public Properties getJavaMailProperties() {
-            return javaMailProperties;
+        public String getFrom() {
+            return from;
         }
 
-        public void setJavaMailProperties(Properties javaMailProperties) {
-            this.javaMailProperties = javaMailProperties;
+        public void setFrom(String from) {
+            this.from = from;
         }
 
         public Boolean getHandleFailedMessage() {
@@ -556,44 +476,20 @@ public class MailComponentConfiguration
             this.handleFailedMessage = handleFailedMessage;
         }
 
-        public Boolean getMimeDecodeHeaders() {
-            return mimeDecodeHeaders;
+        public String getHost() {
+            return host;
         }
 
-        public void setMimeDecodeHeaders(Boolean mimeDecodeHeaders) {
-            this.mimeDecodeHeaders = mimeDecodeHeaders;
+        public void setHost(String host) {
+            this.host = host;
         }
 
-        public Integer getConnectionTimeout() {
-            return connectionTimeout;
+        public Boolean getIgnoreUnsupportedCharset() {
+            return ignoreUnsupportedCharset;
         }
 
-        public void setConnectionTimeout(Integer connectionTimeout) {
-            this.connectionTimeout = connectionTimeout;
-        }
-
-        public Boolean getSkipFailedMessage() {
-            return skipFailedMessage;
-        }
-
-        public void setSkipFailedMessage(Boolean skipFailedMessage) {
-            this.skipFailedMessage = skipFailedMessage;
-        }
-
-        public String getReplyTo() {
-            return replyTo;
-        }
-
-        public void setReplyTo(String replyTo) {
-            this.replyTo = replyTo;
-        }
-
-        public String getCc() {
-            return cc;
-        }
-
-        public void setCc(String cc) {
-            this.cc = cc;
+        public void setIgnoreUnsupportedCharset(Boolean ignoreUnsupportedCharset) {
+            this.ignoreUnsupportedCharset = ignoreUnsupportedCharset;
         }
 
         public Boolean getIgnoreUriScheme() {
@@ -604,20 +500,101 @@ public class MailComponentConfiguration
             this.ignoreUriScheme = ignoreUriScheme;
         }
 
-        public String getCopyTo() {
-            return copyTo;
+        public Properties getJavaMailProperties() {
+            return javaMailProperties;
         }
 
-        public void setCopyTo(String copyTo) {
-            this.copyTo = copyTo;
+        public void setJavaMailProperties(Properties javaMailProperties) {
+            this.javaMailProperties = javaMailProperties;
         }
 
-        public String getBcc() {
-            return bcc;
+        public JavaMailSender getJavaMailSender() {
+            return javaMailSender;
         }
 
-        public void setBcc(String bcc) {
-            this.bcc = bcc;
+        public void setJavaMailSender(JavaMailSender javaMailSender) {
+            this.javaMailSender = javaMailSender;
+        }
+
+        public Boolean getMapMailMessage() {
+            return mapMailMessage;
+        }
+
+        public void setMapMailMessage(Boolean mapMailMessage) {
+            this.mapMailMessage = mapMailMessage;
+        }
+
+        public Boolean getMimeDecodeHeaders() {
+            return mimeDecodeHeaders;
+        }
+
+        public void setMimeDecodeHeaders(Boolean mimeDecodeHeaders) {
+            this.mimeDecodeHeaders = mimeDecodeHeaders;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public Boolean getPeek() {
+            return peek;
+        }
+
+        public void setPeek(Boolean peek) {
+            this.peek = peek;
+        }
+
+        public Integer getPort() {
+            return port;
+        }
+
+        public void setPort(Integer port) {
+            this.port = port;
+        }
+
+        public String getProtocol() {
+            return protocol;
+        }
+
+        public void setProtocol(String protocol) {
+            this.protocol = protocol;
+        }
+
+        public String getReplyTo() {
+            return replyTo;
+        }
+
+        public void setReplyTo(String replyTo) {
+            this.replyTo = replyTo;
+        }
+
+        public Session getSession() {
+            return session;
+        }
+
+        public void setSession(Session session) {
+            this.session = session;
+        }
+
+        public Boolean getSkipFailedMessage() {
+            return skipFailedMessage;
+        }
+
+        public void setSkipFailedMessage(Boolean skipFailedMessage) {
+            this.skipFailedMessage = skipFailedMessage;
+        }
+
+        public SSLContextParameters getSslContextParameters() {
+            return sslContextParameters;
+        }
+
+        public void setSslContextParameters(
+                SSLContextParameters sslContextParameters) {
+            this.sslContextParameters = sslContextParameters;
         }
 
         public String getSubject() {
@@ -628,13 +605,36 @@ public class MailComponentConfiguration
             this.subject = subject;
         }
 
-        public SSLContextParameters getSslContextParameters() {
-            return sslContextParameters;
+        public String getTo() {
+            return to;
         }
 
-        public void setSslContextParameters(
-                SSLContextParameters sslContextParameters) {
-            this.sslContextParameters = sslContextParameters;
+        public void setTo(String to) {
+            this.to = to;
+        }
+
+        public Boolean getUnseen() {
+            return unseen;
+        }
+
+        public void setUnseen(Boolean unseen) {
+            this.unseen = unseen;
+        }
+
+        public Boolean getUseInlineAttachments() {
+            return useInlineAttachments;
+        }
+
+        public void setUseInlineAttachments(Boolean useInlineAttachments) {
+            this.useInlineAttachments = useInlineAttachments;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
         }
     }
 }

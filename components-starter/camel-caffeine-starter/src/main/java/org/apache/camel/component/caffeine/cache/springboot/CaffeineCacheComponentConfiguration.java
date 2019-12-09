@@ -107,48 +107,27 @@ public class CaffeineCacheComponentConfiguration
     public static class CaffeineConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.caffeine.CaffeineConfiguration.class;
         /**
-         * To configure an already instantiated cache to be used
-         */
-        private Cache cache;
-        /**
-         * To configure the default action key. If a key is set in the message
-         * header, then the key from the header takes precedence.
-         */
-        private Object key;
-        /**
-         * To enable stats on the cache
-         */
-        private Boolean statsEnabled = false;
-        /**
-         * The cache key type, default java.lang.Object
-         */
-        private String keyType;
-        /**
          * To configure the default cache action. If an action is set in the
          * message header, then the operation from the header takes precedence.
          */
         private String action;
         /**
+         * To configure an already instantiated cache to be used
+         */
+        private Cache cache;
+        /**
          * To configure a CacheLoader in case of a LoadCache use
          */
         private CacheLoader cacheLoader;
-        /**
-         * Set the maximum size for the cache
-         */
-        private Integer maximumSize = 10000;
         /**
          * Configure if a cache need to be created if it does exist or can't be
          * pre-configured.
          */
         private Boolean createCacheIfNotExist = true;
         /**
-         * The cache value type, default java.lang.Object
+         * Set the eviction Type for this cache
          */
-        private String valueType;
-        /**
-         * Set a specific Stats Counter for the cache stats
-         */
-        private StatsCounter statsCounter;
+        private EvictionType evictionType = EvictionType.SIZE_BASED;
         /**
          * Set the expire After Access Time in case of time based Eviction (in
          * seconds)
@@ -164,45 +143,34 @@ public class CaffeineCacheComponentConfiguration
          */
         private Integer initialCapacity = 10000;
         /**
-         * Set the eviction Type for this cache
+         * To configure the default action key. If a key is set in the message
+         * header, then the key from the header takes precedence.
          */
-        private EvictionType evictionType = EvictionType.SIZE_BASED;
+        private Object key;
+        /**
+         * The cache key type, default java.lang.Object
+         */
+        private String keyType;
+        /**
+         * Set the maximum size for the cache
+         */
+        private Integer maximumSize = 10000;
         /**
          * Set a specific removal Listener for the cache
          */
         private RemovalListener removalListener;
-
-        public Cache getCache() {
-            return cache;
-        }
-
-        public void setCache(Cache cache) {
-            this.cache = cache;
-        }
-
-        public Object getKey() {
-            return key;
-        }
-
-        public void setKey(Object key) {
-            this.key = key;
-        }
-
-        public Boolean getStatsEnabled() {
-            return statsEnabled;
-        }
-
-        public void setStatsEnabled(Boolean statsEnabled) {
-            this.statsEnabled = statsEnabled;
-        }
-
-        public String getKeyType() {
-            return keyType;
-        }
-
-        public void setKeyType(String keyType) {
-            this.keyType = keyType;
-        }
+        /**
+         * Set a specific Stats Counter for the cache stats
+         */
+        private StatsCounter statsCounter;
+        /**
+         * To enable stats on the cache
+         */
+        private Boolean statsEnabled = false;
+        /**
+         * The cache value type, default java.lang.Object
+         */
+        private String valueType;
 
         public String getAction() {
             return action;
@@ -210,6 +178,14 @@ public class CaffeineCacheComponentConfiguration
 
         public void setAction(String action) {
             this.action = action;
+        }
+
+        public Cache getCache() {
+            return cache;
+        }
+
+        public void setCache(Cache cache) {
+            this.cache = cache;
         }
 
         public CacheLoader getCacheLoader() {
@@ -220,14 +196,6 @@ public class CaffeineCacheComponentConfiguration
             this.cacheLoader = cacheLoader;
         }
 
-        public Integer getMaximumSize() {
-            return maximumSize;
-        }
-
-        public void setMaximumSize(Integer maximumSize) {
-            this.maximumSize = maximumSize;
-        }
-
         public Boolean getCreateCacheIfNotExist() {
             return createCacheIfNotExist;
         }
@@ -236,20 +204,12 @@ public class CaffeineCacheComponentConfiguration
             this.createCacheIfNotExist = createCacheIfNotExist;
         }
 
-        public String getValueType() {
-            return valueType;
+        public EvictionType getEvictionType() {
+            return evictionType;
         }
 
-        public void setValueType(String valueType) {
-            this.valueType = valueType;
-        }
-
-        public StatsCounter getStatsCounter() {
-            return statsCounter;
-        }
-
-        public void setStatsCounter(StatsCounter statsCounter) {
-            this.statsCounter = statsCounter;
+        public void setEvictionType(EvictionType evictionType) {
+            this.evictionType = evictionType;
         }
 
         public Integer getExpireAfterAccessTime() {
@@ -276,12 +236,28 @@ public class CaffeineCacheComponentConfiguration
             this.initialCapacity = initialCapacity;
         }
 
-        public EvictionType getEvictionType() {
-            return evictionType;
+        public Object getKey() {
+            return key;
         }
 
-        public void setEvictionType(EvictionType evictionType) {
-            this.evictionType = evictionType;
+        public void setKey(Object key) {
+            this.key = key;
+        }
+
+        public String getKeyType() {
+            return keyType;
+        }
+
+        public void setKeyType(String keyType) {
+            this.keyType = keyType;
+        }
+
+        public Integer getMaximumSize() {
+            return maximumSize;
+        }
+
+        public void setMaximumSize(Integer maximumSize) {
+            this.maximumSize = maximumSize;
         }
 
         public RemovalListener getRemovalListener() {
@@ -290,6 +266,30 @@ public class CaffeineCacheComponentConfiguration
 
         public void setRemovalListener(RemovalListener removalListener) {
             this.removalListener = removalListener;
+        }
+
+        public StatsCounter getStatsCounter() {
+            return statsCounter;
+        }
+
+        public void setStatsCounter(StatsCounter statsCounter) {
+            this.statsCounter = statsCounter;
+        }
+
+        public Boolean getStatsEnabled() {
+            return statsEnabled;
+        }
+
+        public void setStatsEnabled(Boolean statsEnabled) {
+            this.statsEnabled = statsEnabled;
+        }
+
+        public String getValueType() {
+            return valueType;
+        }
+
+        public void setValueType(String valueType) {
+            this.valueType = valueType;
         }
     }
 }

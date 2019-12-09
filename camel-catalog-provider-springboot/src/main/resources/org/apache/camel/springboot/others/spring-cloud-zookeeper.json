@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "spring-cloud-zookeeper",
+    "kind": "other",
+    "title": "Spring Cloud Zookeeper",
+    "description": "Camel Cloud integration with Spring Cloud Zookeeper",
+    "deprecated": "false",
+    "firstVersion": "2.19.0",
+    "label": "spring,microservice",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-spring-cloud-zookeeper-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

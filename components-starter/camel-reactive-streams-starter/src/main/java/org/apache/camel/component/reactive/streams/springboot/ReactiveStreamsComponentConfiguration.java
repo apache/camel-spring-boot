@@ -132,16 +132,16 @@ public class ReactiveStreamsComponentConfiguration
 
     public static class ReactiveStreamsEngineConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration.class;
-        private String threadPoolName;
-        private Integer threadPoolMinSize;
         private Integer threadPoolMaxSize;
+        private Integer threadPoolMinSize;
+        private String threadPoolName;
 
-        public String getThreadPoolName() {
-            return threadPoolName;
+        public Integer getThreadPoolMaxSize() {
+            return threadPoolMaxSize;
         }
 
-        public void setThreadPoolName(String threadPoolName) {
-            this.threadPoolName = threadPoolName;
+        public void setThreadPoolMaxSize(Integer threadPoolMaxSize) {
+            this.threadPoolMaxSize = threadPoolMaxSize;
         }
 
         public Integer getThreadPoolMinSize() {
@@ -152,12 +152,12 @@ public class ReactiveStreamsComponentConfiguration
             this.threadPoolMinSize = threadPoolMinSize;
         }
 
-        public Integer getThreadPoolMaxSize() {
-            return threadPoolMaxSize;
+        public String getThreadPoolName() {
+            return threadPoolName;
         }
 
-        public void setThreadPoolMaxSize(Integer threadPoolMaxSize) {
-            this.threadPoolMaxSize = threadPoolMaxSize;
+        public void setThreadPoolName(String threadPoolName) {
+            this.threadPoolName = threadPoolName;
         }
     }
 }

@@ -141,20 +141,13 @@ public class KMSComponentConfiguration
     public static class KMSConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.kms.KMSConfiguration.class;
         /**
-         * The region in which KMS client needs to work. When using this
-         * parameter, the configuration will expect the capitalized name of the
-         * region (for example AP_EAST_1) You'll need to use the name
-         * Regions.EU_WEST_1.name()
+         * Amazon AWS Access Key
          */
-        private String region;
+        private String accessKey;
         /**
-         * To define a proxy port when instantiating the KMS client
+         * To use a existing configured AWS KMS as client
          */
-        private Integer proxyPort;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
+        private AWSKMS kmsClient;
         /**
          * The operation to perform
          */
@@ -164,40 +157,39 @@ public class KMSComponentConfiguration
          */
         private String proxyHost;
         /**
-         * To use a existing configured AWS KMS as client
+         * To define a proxy port when instantiating the KMS client
          */
-        private AWSKMS kmsClient;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
+        private Integer proxyPort;
         /**
          * To define a proxy protocol when instantiating the KMS client
          */
         private Protocol proxyProtocol = Protocol.HTTPS;
+        /**
+         * The region in which KMS client needs to work. When using this
+         * parameter, the configuration will expect the capitalized name of the
+         * region (for example AP_EAST_1) You'll need to use the name
+         * Regions.EU_WEST_1.name()
+         */
+        private String region;
+        /**
+         * Amazon AWS Secret Key
+         */
+        private String secretKey;
 
-        public String getRegion() {
-            return region;
+        public String getAccessKey() {
+            return accessKey;
         }
 
-        public void setRegion(String region) {
-            this.region = region;
+        public void setAccessKey(String accessKey) {
+            this.accessKey = accessKey;
         }
 
-        public Integer getProxyPort() {
-            return proxyPort;
+        public AWSKMS getKmsClient() {
+            return kmsClient;
         }
 
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
+        public void setKmsClient(AWSKMS kmsClient) {
+            this.kmsClient = kmsClient;
         }
 
         public KMSOperations getOperation() {
@@ -216,20 +208,12 @@ public class KMSComponentConfiguration
             this.proxyHost = proxyHost;
         }
 
-        public AWSKMS getKmsClient() {
-            return kmsClient;
+        public Integer getProxyPort() {
+            return proxyPort;
         }
 
-        public void setKmsClient(AWSKMS kmsClient) {
-            this.kmsClient = kmsClient;
-        }
-
-        public String getAccessKey() {
-            return accessKey;
-        }
-
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
         }
 
         public Protocol getProxyProtocol() {
@@ -238,6 +222,22 @@ public class KMSComponentConfiguration
 
         public void setProxyProtocol(Protocol proxyProtocol) {
             this.proxyProtocol = proxyProtocol;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
         }
     }
 }

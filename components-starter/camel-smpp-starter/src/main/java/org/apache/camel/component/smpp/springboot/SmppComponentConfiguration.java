@@ -105,38 +105,18 @@ public class SmppComponentConfiguration
     public static class SmppConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.smpp.SmppConfiguration.class;
         /**
-         * Hostname for the SMSC server to use.
+         * You can specify the address range for the SmppConsumer as defined in
+         * section 5.2.7 of the SMPP 3.4 specification. The SmppConsumer will
+         * receive messages only from SMSC's which target an address (MSISDN or
+         * IP address) within this range.
          */
-        private String host = "localhost";
-        /**
-         * Port number for the SMSC server to use.
-         */
-        private Integer port = 2775;
-        /**
-         * The password for connecting to SMSC server.
-         */
-        private String password;
-        /**
-         * The system id (username) for connecting to SMSC server.
-         */
-        private String systemId = "smppclient";
-        /**
-         * Defines the encoding scheme of the short message user data. Only for
-         * SubmitSm, ReplaceSm and SubmitMulti.
-         */
-        private String encoding = "ISO-8859-1";
+        private String addressRange;
         /**
          * Defines encoding of data according the SMPP 3.4 specification,
          * section 5.2.19. 0: SMSC Default Alphabet 4: 8 bit Alphabet 8: UCS2
          * Alphabet
          */
         private Byte alphabet;
-        /**
-         * Defines the interval in milliseconds between the confidence checks.
-         * The confidence check is used to test the communication path between
-         * an ESME and an SMSC.
-         */
-        private Integer enquireLinkTimer = 5000;
         /**
          * Defines the data coding according the SMPP 3.4 specification, section
          * 5.2.19. Example data encodings are: 0: SMSC Default Alphabet 3: Latin
@@ -151,52 +131,47 @@ public class SmppComponentConfiguration
          */
         private String destAddr = "1717";
         /**
-         * Defines the type of number (TON) to be used in the SME. The following
-         * TON values are defined: 0: Unknown 1: International 2: National 3:
-         * Network Specific 4: Subscriber Number 5: Alphanumeric 6: Abbreviated
+         * Defines the type of number (TON) to be used in the SME destination
+         * address parameters. Only for SubmitSm, SubmitMulti, CancelSm and
+         * DataSm. The following NPI values are defined: 0: Unknown 1: ISDN
+         * (E163/E164) 2: Data (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8:
+         * National 9: Private 10: ERMES 13: Internet (IP) 18: WAP Client Id (to
+         * be defined by WAP Forum)
          */
-        private Byte typeOfNumber;
+        private Byte destAddrNpi;
         /**
-         * Defines the numeric plan indicator (NPI) to be used in the SME. The
-         * following NPI values are defined: 0: Unknown 1: ISDN (E163/E164) 2:
-         * Data (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8: National 9:
-         * Private 10: ERMES 13: Internet (IP) 18: WAP Client Id (to be defined
-         * by WAP Forum)
+         * Defines the type of number (TON) to be used in the SME destination
+         * address parameters. Only for SubmitSm, SubmitMulti, CancelSm and
+         * DataSm. The following TON values are defined: 0: Unknown 1:
+         * International 2: National 3: Network Specific 4: Subscriber Number 5:
+         * Alphanumeric 6: Abbreviated
          */
-        private Byte numberingPlanIndicator;
+        private Byte destAddrTon;
         /**
-         * Whether using SSL with the smpps protocol
+         * Defines the encoding scheme of the short message user data. Only for
+         * SubmitSm, ReplaceSm and SubmitMulti.
          */
-        private Boolean usingSSL = false;
+        private String encoding = "ISO-8859-1";
         /**
-         * Defines the initial delay in milliseconds after the consumer/producer
-         * tries to reconnect to the SMSC, after the connection was lost.
+         * Defines the interval in milliseconds between the confidence checks.
+         * The confidence check is used to test the communication path between
+         * an ESME and an SMSC.
          */
-        private Long initialReconnectDelay = 5000L;
+        private Integer enquireLinkTimer = 5000;
         /**
-         * Defines the interval in milliseconds between the reconnect attempts,
-         * if the connection to the SMSC was lost and the previous was not
-         * succeed.
+         * Hostname for the SMSC server to use.
          */
-        private Long reconnectDelay = 5000L;
-        /**
-         * Defines the maximum number of attempts to reconnect to the SMSC, if
-         * SMSC returns a negative bind response
-         */
-        private Integer maxReconnect = 2147483647;
-        /**
-         * Sessions can be lazily created to avoid exceptions, if the SMSC is
-         * not available when the Camel producer is started. Camel will check
-         * the in message headers 'CamelSmppSystemId' and 'CamelSmppPassword' of
-         * the first exchange. If they are present, Camel will use these data to
-         * connect to the SMSC.
-         */
-        private Boolean lazySessionCreation = false;
+        private String host = "localhost";
         /**
          * If you need to tunnel SMPP through a HTTP proxy, set this attribute
          * to the hostname or ip address of your HTTP proxy.
          */
         private String httpProxyHost;
+        /**
+         * If your HTTP proxy requires basic authentication, set this attribute
+         * to the password required for your HTTP proxy.
+         */
+        private String httpProxyPassword;
         /**
          * If you need to tunnel SMPP through a HTTP proxy, set this attribute
          * to the port of your HTTP proxy.
@@ -208,22 +183,113 @@ public class SmppComponentConfiguration
          */
         private String httpProxyUsername;
         /**
-         * If your HTTP proxy requires basic authentication, set this attribute
-         * to the password required for your HTTP proxy.
+         * Defines the initial delay in milliseconds after the consumer/producer
+         * tries to reconnect to the SMSC, after the connection was lost.
          */
-        private String httpProxyPassword;
+        private Long initialReconnectDelay = 5000L;
+        /**
+         * Sessions can be lazily created to avoid exceptions, if the SMSC is
+         * not available when the Camel producer is started. Camel will check
+         * the in message headers 'CamelSmppSystemId' and 'CamelSmppPassword' of
+         * the first exchange. If they are present, Camel will use these data to
+         * connect to the SMSC.
+         */
+        private Boolean lazySessionCreation = false;
+        /**
+         * Defines the maximum number of attempts to reconnect to the SMSC, if
+         * SMSC returns a negative bind response
+         */
+        private Integer maxReconnect = 2147483647;
+        /**
+         * Defines the numeric plan indicator (NPI) to be used in the SME. The
+         * following NPI values are defined: 0: Unknown 1: ISDN (E163/E164) 2:
+         * Data (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8: National 9:
+         * Private 10: ERMES 13: Internet (IP) 18: WAP Client Id (to be defined
+         * by WAP Forum)
+         */
+        private Byte numberingPlanIndicator;
+        /**
+         * The password for connecting to SMSC server.
+         */
+        private String password;
+        /**
+         * Port number for the SMSC server to use.
+         */
+        private Integer port = 2775;
+        /**
+         * Allows the originating SME to assign a priority level to the short
+         * message. Only for SubmitSm and SubmitMulti. Four Priority Levels are
+         * supported: 0: Level 0 (lowest) priority 1: Level 1 priority 2: Level
+         * 2 priority 3: Level 3 (highest) priority
+         */
+        private Byte priorityFlag;
+        /**
+         * The protocol id
+         */
+        private Byte protocolId;
+        /**
+         * These headers will be passed to the proxy server while establishing
+         * the connection.
+         */
+        private Map proxyHeaders;
+        /**
+         * Defines the interval in milliseconds between the reconnect attempts,
+         * if the connection to the SMSC was lost and the previous was not
+         * succeed.
+         */
+        private Long reconnectDelay = 5000L;
+        /**
+         * Is used to request an SMSC delivery receipt and/or SME originated
+         * acknowledgements. The following values are defined: 0: No SMSC
+         * delivery receipt requested. 1: SMSC delivery receipt requested where
+         * final delivery outcome is success or failure. 2: SMSC delivery
+         * receipt requested where the final delivery outcome is delivery
+         * failure.
+         */
+        private Byte registeredDelivery;
+        /**
+         * Used to request the SMSC to replace a previously submitted message,
+         * that is still pending delivery. The SMSC will replace an existing
+         * message provided that the source address, destination address and
+         * service type match the same fields in the new message. The following
+         * replace if present flag values are defined: 0: Don't replace 1:
+         * Replace
+         */
+        private Byte replaceIfPresentFlag;
+        /**
+         * The service type parameter can be used to indicate the SMS
+         * Application service associated with the message. The following
+         * generic service_types are defined: CMT: Cellular Messaging CPT:
+         * Cellular Paging VMN: Voice Mail Notification VMA: Voice Mail Alerting
+         * WAP: Wireless Application Protocol USSD: Unstructured Supplementary
+         * Services Data
+         */
+        private String serviceType;
         /**
          * You can refer to a org.jsmpp.session.SessionStateListener in the
          * Registry to receive callbacks when the session state changed.
          */
         private SessionStateListener sessionStateListener;
         /**
-         * You can specify the address range for the SmppConsumer as defined in
-         * section 5.2.7 of the SMPP 3.4 specification. The SmppConsumer will
-         * receive messages only from SMSC's which target an address (MSISDN or
-         * IP address) within this range.
+         * Defines the address of SME (Short Message Entity) which originated
+         * this message.
          */
-        private String addressRange;
+        private String sourceAddr = "1616";
+        /**
+         * Defines the numeric plan indicator (NPI) to be used in the SME
+         * originator address parameters. The following NPI values are defined:
+         * 0: Unknown 1: ISDN (E163/E164) 2: Data (X.121) 3: Telex (F.69) 6:
+         * Land Mobile (E.212) 8: National 9: Private 10: ERMES 13: Internet
+         * (IP) 18: WAP Client Id (to be defined by WAP Forum)
+         */
+        private Byte sourceAddrNpi;
+        /**
+         * Defines the type of number (TON) to be used in the SME originator
+         * address parameters. The following TON values are defined: 0: Unknown
+         * 1: International 2: National 3: Network Specific 4: Subscriber Number
+         * 5: Alphanumeric 6: Abbreviated
+         */
+        private Byte sourceAddrTon;
         /**
          * You can specify a policy for handling long messages: ALLOW - the
          * default, long messages are split to 140 bytes per message TRUNCATE -
@@ -236,10 +302,14 @@ public class SmppComponentConfiguration
          */
         private SmppSplittingPolicy splittingPolicy = SmppSplittingPolicy.ALLOW;
         /**
-         * These headers will be passed to the proxy server while establishing
-         * the connection.
+         * The system id (username) for connecting to SMSC server.
          */
-        private Map proxyHeaders;
+        private String systemId = "smppclient";
+        /**
+         * This parameter is used to categorize the type of ESME (External Short
+         * Message Entity) that is binding to the SMSC (max. 13 characters).
+         */
+        private String systemType;
         /**
          * Defines the maximum period of inactivity allowed after a transaction,
          * after which an SMPP entity may assume that the session is no longer
@@ -248,124 +318,22 @@ public class SmppComponentConfiguration
          */
         private Integer transactionTimer = 10000;
         /**
-         * This parameter is used to categorize the type of ESME (External Short
-         * Message Entity) that is binding to the SMSC (max. 13 characters).
+         * Defines the type of number (TON) to be used in the SME. The following
+         * TON values are defined: 0: Unknown 1: International 2: National 3:
+         * Network Specific 4: Subscriber Number 5: Alphanumeric 6: Abbreviated
          */
-        private String systemType;
+        private Byte typeOfNumber;
         /**
-         * Is used to request an SMSC delivery receipt and/or SME originated
-         * acknowledgements. The following values are defined: 0: No SMSC
-         * delivery receipt requested. 1: SMSC delivery receipt requested where
-         * final delivery outcome is success or failure. 2: SMSC delivery
-         * receipt requested where the final delivery outcome is delivery
-         * failure.
+         * Whether using SSL with the smpps protocol
          */
-        private Byte registeredDelivery;
-        /**
-         * The service type parameter can be used to indicate the SMS
-         * Application service associated with the message. The following
-         * generic service_types are defined: CMT: Cellular Messaging CPT:
-         * Cellular Paging VMN: Voice Mail Notification VMA: Voice Mail Alerting
-         * WAP: Wireless Application Protocol USSD: Unstructured Supplementary
-         * Services Data
-         */
-        private String serviceType;
-        /**
-         * Defines the type of number (TON) to be used in the SME originator
-         * address parameters. The following TON values are defined: 0: Unknown
-         * 1: International 2: National 3: Network Specific 4: Subscriber Number
-         * 5: Alphanumeric 6: Abbreviated
-         */
-        private Byte sourceAddrTon;
-        /**
-         * Defines the type of number (TON) to be used in the SME destination
-         * address parameters. Only for SubmitSm, SubmitMulti, CancelSm and
-         * DataSm. The following TON values are defined: 0: Unknown 1:
-         * International 2: National 3: Network Specific 4: Subscriber Number 5:
-         * Alphanumeric 6: Abbreviated
-         */
-        private Byte destAddrTon;
-        /**
-         * Defines the numeric plan indicator (NPI) to be used in the SME
-         * originator address parameters. The following NPI values are defined:
-         * 0: Unknown 1: ISDN (E163/E164) 2: Data (X.121) 3: Telex (F.69) 6:
-         * Land Mobile (E.212) 8: National 9: Private 10: ERMES 13: Internet
-         * (IP) 18: WAP Client Id (to be defined by WAP Forum)
-         */
-        private Byte sourceAddrNpi;
-        /**
-         * Defines the type of number (TON) to be used in the SME destination
-         * address parameters. Only for SubmitSm, SubmitMulti, CancelSm and
-         * DataSm. The following NPI values are defined: 0: Unknown 1: ISDN
-         * (E163/E164) 2: Data (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8:
-         * National 9: Private 10: ERMES 13: Internet (IP) 18: WAP Client Id (to
-         * be defined by WAP Forum)
-         */
-        private Byte destAddrNpi;
-        /**
-         * The protocol id
-         */
-        private Byte protocolId;
-        /**
-         * Allows the originating SME to assign a priority level to the short
-         * message. Only for SubmitSm and SubmitMulti. Four Priority Levels are
-         * supported: 0: Level 0 (lowest) priority 1: Level 1 priority 2: Level
-         * 2 priority 3: Level 3 (highest) priority
-         */
-        private Byte priorityFlag;
-        /**
-         * Used to request the SMSC to replace a previously submitted message,
-         * that is still pending delivery. The SMSC will replace an existing
-         * message provided that the source address, destination address and
-         * service type match the same fields in the new message. The following
-         * replace if present flag values are defined: 0: Don't replace 1:
-         * Replace
-         */
-        private Byte replaceIfPresentFlag;
-        /**
-         * Defines the address of SME (Short Message Entity) which originated
-         * this message.
-         */
-        private String sourceAddr = "1616";
+        private Boolean usingSSL = false;
 
-        public String getHost() {
-            return host;
+        public String getAddressRange() {
+            return addressRange;
         }
 
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getSystemId() {
-            return systemId;
-        }
-
-        public void setSystemId(String systemId) {
-            this.systemId = systemId;
-        }
-
-        public String getEncoding() {
-            return encoding;
-        }
-
-        public void setEncoding(String encoding) {
-            this.encoding = encoding;
+        public void setAddressRange(String addressRange) {
+            this.addressRange = addressRange;
         }
 
         public Byte getAlphabet() {
@@ -374,14 +342,6 @@ public class SmppComponentConfiguration
 
         public void setAlphabet(Byte alphabet) {
             this.alphabet = alphabet;
-        }
-
-        public Integer getEnquireLinkTimer() {
-            return enquireLinkTimer;
-        }
-
-        public void setEnquireLinkTimer(Integer enquireLinkTimer) {
-            this.enquireLinkTimer = enquireLinkTimer;
         }
 
         public Byte getDataCoding() {
@@ -400,60 +360,44 @@ public class SmppComponentConfiguration
             this.destAddr = destAddr;
         }
 
-        public Byte getTypeOfNumber() {
-            return typeOfNumber;
+        public Byte getDestAddrNpi() {
+            return destAddrNpi;
         }
 
-        public void setTypeOfNumber(Byte typeOfNumber) {
-            this.typeOfNumber = typeOfNumber;
+        public void setDestAddrNpi(Byte destAddrNpi) {
+            this.destAddrNpi = destAddrNpi;
         }
 
-        public Byte getNumberingPlanIndicator() {
-            return numberingPlanIndicator;
+        public Byte getDestAddrTon() {
+            return destAddrTon;
         }
 
-        public void setNumberingPlanIndicator(Byte numberingPlanIndicator) {
-            this.numberingPlanIndicator = numberingPlanIndicator;
+        public void setDestAddrTon(Byte destAddrTon) {
+            this.destAddrTon = destAddrTon;
         }
 
-        public Boolean getUsingSSL() {
-            return usingSSL;
+        public String getEncoding() {
+            return encoding;
         }
 
-        public void setUsingSSL(Boolean usingSSL) {
-            this.usingSSL = usingSSL;
+        public void setEncoding(String encoding) {
+            this.encoding = encoding;
         }
 
-        public Long getInitialReconnectDelay() {
-            return initialReconnectDelay;
+        public Integer getEnquireLinkTimer() {
+            return enquireLinkTimer;
         }
 
-        public void setInitialReconnectDelay(Long initialReconnectDelay) {
-            this.initialReconnectDelay = initialReconnectDelay;
+        public void setEnquireLinkTimer(Integer enquireLinkTimer) {
+            this.enquireLinkTimer = enquireLinkTimer;
         }
 
-        public Long getReconnectDelay() {
-            return reconnectDelay;
+        public String getHost() {
+            return host;
         }
 
-        public void setReconnectDelay(Long reconnectDelay) {
-            this.reconnectDelay = reconnectDelay;
-        }
-
-        public Integer getMaxReconnect() {
-            return maxReconnect;
-        }
-
-        public void setMaxReconnect(Integer maxReconnect) {
-            this.maxReconnect = maxReconnect;
-        }
-
-        public Boolean getLazySessionCreation() {
-            return lazySessionCreation;
-        }
-
-        public void setLazySessionCreation(Boolean lazySessionCreation) {
-            this.lazySessionCreation = lazySessionCreation;
+        public void setHost(String host) {
+            this.host = host;
         }
 
         public String getHttpProxyHost() {
@@ -462,6 +406,14 @@ public class SmppComponentConfiguration
 
         public void setHttpProxyHost(String httpProxyHost) {
             this.httpProxyHost = httpProxyHost;
+        }
+
+        public String getHttpProxyPassword() {
+            return httpProxyPassword;
+        }
+
+        public void setHttpProxyPassword(String httpProxyPassword) {
+            this.httpProxyPassword = httpProxyPassword;
         }
 
         public Integer getHttpProxyPort() {
@@ -480,12 +432,108 @@ public class SmppComponentConfiguration
             this.httpProxyUsername = httpProxyUsername;
         }
 
-        public String getHttpProxyPassword() {
-            return httpProxyPassword;
+        public Long getInitialReconnectDelay() {
+            return initialReconnectDelay;
         }
 
-        public void setHttpProxyPassword(String httpProxyPassword) {
-            this.httpProxyPassword = httpProxyPassword;
+        public void setInitialReconnectDelay(Long initialReconnectDelay) {
+            this.initialReconnectDelay = initialReconnectDelay;
+        }
+
+        public Boolean getLazySessionCreation() {
+            return lazySessionCreation;
+        }
+
+        public void setLazySessionCreation(Boolean lazySessionCreation) {
+            this.lazySessionCreation = lazySessionCreation;
+        }
+
+        public Integer getMaxReconnect() {
+            return maxReconnect;
+        }
+
+        public void setMaxReconnect(Integer maxReconnect) {
+            this.maxReconnect = maxReconnect;
+        }
+
+        public Byte getNumberingPlanIndicator() {
+            return numberingPlanIndicator;
+        }
+
+        public void setNumberingPlanIndicator(Byte numberingPlanIndicator) {
+            this.numberingPlanIndicator = numberingPlanIndicator;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public Integer getPort() {
+            return port;
+        }
+
+        public void setPort(Integer port) {
+            this.port = port;
+        }
+
+        public Byte getPriorityFlag() {
+            return priorityFlag;
+        }
+
+        public void setPriorityFlag(Byte priorityFlag) {
+            this.priorityFlag = priorityFlag;
+        }
+
+        public Byte getProtocolId() {
+            return protocolId;
+        }
+
+        public void setProtocolId(Byte protocolId) {
+            this.protocolId = protocolId;
+        }
+
+        public Map getProxyHeaders() {
+            return proxyHeaders;
+        }
+
+        public void setProxyHeaders(Map proxyHeaders) {
+            this.proxyHeaders = proxyHeaders;
+        }
+
+        public Long getReconnectDelay() {
+            return reconnectDelay;
+        }
+
+        public void setReconnectDelay(Long reconnectDelay) {
+            this.reconnectDelay = reconnectDelay;
+        }
+
+        public Byte getRegisteredDelivery() {
+            return registeredDelivery;
+        }
+
+        public void setRegisteredDelivery(Byte registeredDelivery) {
+            this.registeredDelivery = registeredDelivery;
+        }
+
+        public Byte getReplaceIfPresentFlag() {
+            return replaceIfPresentFlag;
+        }
+
+        public void setReplaceIfPresentFlag(Byte replaceIfPresentFlag) {
+            this.replaceIfPresentFlag = replaceIfPresentFlag;
+        }
+
+        public String getServiceType() {
+            return serviceType;
+        }
+
+        public void setServiceType(String serviceType) {
+            this.serviceType = serviceType;
         }
 
         public SessionStateListener getSessionStateListener() {
@@ -497,76 +545,12 @@ public class SmppComponentConfiguration
             this.sessionStateListener = sessionStateListener;
         }
 
-        public String getAddressRange() {
-            return addressRange;
+        public String getSourceAddr() {
+            return sourceAddr;
         }
 
-        public void setAddressRange(String addressRange) {
-            this.addressRange = addressRange;
-        }
-
-        public SmppSplittingPolicy getSplittingPolicy() {
-            return splittingPolicy;
-        }
-
-        public void setSplittingPolicy(SmppSplittingPolicy splittingPolicy) {
-            this.splittingPolicy = splittingPolicy;
-        }
-
-        public Map getProxyHeaders() {
-            return proxyHeaders;
-        }
-
-        public void setProxyHeaders(Map proxyHeaders) {
-            this.proxyHeaders = proxyHeaders;
-        }
-
-        public Integer getTransactionTimer() {
-            return transactionTimer;
-        }
-
-        public void setTransactionTimer(Integer transactionTimer) {
-            this.transactionTimer = transactionTimer;
-        }
-
-        public String getSystemType() {
-            return systemType;
-        }
-
-        public void setSystemType(String systemType) {
-            this.systemType = systemType;
-        }
-
-        public Byte getRegisteredDelivery() {
-            return registeredDelivery;
-        }
-
-        public void setRegisteredDelivery(Byte registeredDelivery) {
-            this.registeredDelivery = registeredDelivery;
-        }
-
-        public String getServiceType() {
-            return serviceType;
-        }
-
-        public void setServiceType(String serviceType) {
-            this.serviceType = serviceType;
-        }
-
-        public Byte getSourceAddrTon() {
-            return sourceAddrTon;
-        }
-
-        public void setSourceAddrTon(Byte sourceAddrTon) {
-            this.sourceAddrTon = sourceAddrTon;
-        }
-
-        public Byte getDestAddrTon() {
-            return destAddrTon;
-        }
-
-        public void setDestAddrTon(Byte destAddrTon) {
-            this.destAddrTon = destAddrTon;
+        public void setSourceAddr(String sourceAddr) {
+            this.sourceAddr = sourceAddr;
         }
 
         public Byte getSourceAddrNpi() {
@@ -577,44 +561,60 @@ public class SmppComponentConfiguration
             this.sourceAddrNpi = sourceAddrNpi;
         }
 
-        public Byte getDestAddrNpi() {
-            return destAddrNpi;
+        public Byte getSourceAddrTon() {
+            return sourceAddrTon;
         }
 
-        public void setDestAddrNpi(Byte destAddrNpi) {
-            this.destAddrNpi = destAddrNpi;
+        public void setSourceAddrTon(Byte sourceAddrTon) {
+            this.sourceAddrTon = sourceAddrTon;
         }
 
-        public Byte getProtocolId() {
-            return protocolId;
+        public SmppSplittingPolicy getSplittingPolicy() {
+            return splittingPolicy;
         }
 
-        public void setProtocolId(Byte protocolId) {
-            this.protocolId = protocolId;
+        public void setSplittingPolicy(SmppSplittingPolicy splittingPolicy) {
+            this.splittingPolicy = splittingPolicy;
         }
 
-        public Byte getPriorityFlag() {
-            return priorityFlag;
+        public String getSystemId() {
+            return systemId;
         }
 
-        public void setPriorityFlag(Byte priorityFlag) {
-            this.priorityFlag = priorityFlag;
+        public void setSystemId(String systemId) {
+            this.systemId = systemId;
         }
 
-        public Byte getReplaceIfPresentFlag() {
-            return replaceIfPresentFlag;
+        public String getSystemType() {
+            return systemType;
         }
 
-        public void setReplaceIfPresentFlag(Byte replaceIfPresentFlag) {
-            this.replaceIfPresentFlag = replaceIfPresentFlag;
+        public void setSystemType(String systemType) {
+            this.systemType = systemType;
         }
 
-        public String getSourceAddr() {
-            return sourceAddr;
+        public Integer getTransactionTimer() {
+            return transactionTimer;
         }
 
-        public void setSourceAddr(String sourceAddr) {
-            this.sourceAddr = sourceAddr;
+        public void setTransactionTimer(Integer transactionTimer) {
+            this.transactionTimer = transactionTimer;
+        }
+
+        public Byte getTypeOfNumber() {
+            return typeOfNumber;
+        }
+
+        public void setTypeOfNumber(Byte typeOfNumber) {
+            this.typeOfNumber = typeOfNumber;
+        }
+
+        public Boolean getUsingSSL() {
+            return usingSSL;
+        }
+
+        public void setUsingSSL(Boolean usingSSL) {
+            this.usingSSL = usingSSL;
         }
     }
 }

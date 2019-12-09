@@ -140,19 +140,31 @@ public class YammerComponentConfiguration
     public static class YammerConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.yammer.YammerConfiguration.class;
         /**
+         * The access token
+         */
+        private String accessToken;
+        /**
+         * The consumer key
+         */
+        private String consumerKey;
+        /**
+         * The consumer secret
+         */
+        private String consumerSecret;
+        /**
+         * Delay between polling in millis
+         */
+        private Long delay = 5000L;
+        /**
+         * The function to use
+         */
+        private String function;
+        private YammerFunctionType functionType;
+        /**
          * Return only the specified number of messages. Works for threaded=true
          * and threaded=extended.
          */
         private Integer limit = -1;
-        /**
-         * The user id
-         */
-        private String userId;
-        /**
-         * Set to true if you want to use raw JSON rather than converting to
-         * POJOs.
-         */
-        private Boolean useJson = false;
         /**
          * Returns messages newer than the message ID specified as a numeric
          * string. This should be used when polling for new messages. If you're
@@ -163,13 +175,14 @@ public class YammerComponentConfiguration
          */
         private Long newerThan = -1L;
         /**
-         * The access token
+         * Returns messages older than the message ID specified as a numeric
+         * string. This is useful for paginating messages. For example, if
+         * you're currently viewing 20 messages and the oldest is number 2912,
+         * you could append olderThan=2912 to your request to get the 20
+         * messages prior to those you're seeing.
          */
-        private String accessToken;
-        /**
-         * The function to use
-         */
-        private String function;
+        private Long olderThan = -1L;
+        private ApiRequestor requestor;
         /**
          * threaded=true will only return the first message in each thread. This
          * parameter is intended for apps which display message threads
@@ -180,59 +193,14 @@ public class YammerComponentConfiguration
          */
         private String threaded;
         /**
-         * Returns messages older than the message ID specified as a numeric
-         * string. This is useful for paginating messages. For example, if
-         * you're currently viewing 20 messages and the oldest is number 2912,
-         * you could append olderThan=2912 to your request to get the 20
-         * messages prior to those you're seeing.
+         * Set to true if you want to use raw JSON rather than converting to
+         * POJOs.
          */
-        private Long olderThan = -1L;
+        private Boolean useJson = false;
         /**
-         * The consumer key
+         * The user id
          */
-        private String consumerKey;
-        /**
-         * The consumer secret
-         */
-        private String consumerSecret;
-        private ApiRequestor requestor;
-        private YammerFunctionType functionType;
-        /**
-         * Delay between polling in millis
-         */
-        private Long delay = 5000L;
-
-        public Integer getLimit() {
-            return limit;
-        }
-
-        public void setLimit(Integer limit) {
-            this.limit = limit;
-        }
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
-
-        public Boolean getUseJson() {
-            return useJson;
-        }
-
-        public void setUseJson(Boolean useJson) {
-            this.useJson = useJson;
-        }
-
-        public Long getNewerThan() {
-            return newerThan;
-        }
-
-        public void setNewerThan(Long newerThan) {
-            this.newerThan = newerThan;
-        }
+        private String userId;
 
         public String getAccessToken() {
             return accessToken;
@@ -240,30 +208,6 @@ public class YammerComponentConfiguration
 
         public void setAccessToken(String accessToken) {
             this.accessToken = accessToken;
-        }
-
-        public String getFunction() {
-            return function;
-        }
-
-        public void setFunction(String function) {
-            this.function = function;
-        }
-
-        public String getThreaded() {
-            return threaded;
-        }
-
-        public void setThreaded(String threaded) {
-            this.threaded = threaded;
-        }
-
-        public Long getOlderThan() {
-            return olderThan;
-        }
-
-        public void setOlderThan(Long olderThan) {
-            this.olderThan = olderThan;
         }
 
         public String getConsumerKey() {
@@ -282,12 +226,20 @@ public class YammerComponentConfiguration
             this.consumerSecret = consumerSecret;
         }
 
-        public ApiRequestor getRequestor() {
-            return requestor;
+        public Long getDelay() {
+            return delay;
         }
 
-        public void setRequestor(ApiRequestor requestor) {
-            this.requestor = requestor;
+        public void setDelay(Long delay) {
+            this.delay = delay;
+        }
+
+        public String getFunction() {
+            return function;
+        }
+
+        public void setFunction(String function) {
+            this.function = function;
         }
 
         public YammerFunctionType getFunctionType() {
@@ -298,12 +250,60 @@ public class YammerComponentConfiguration
             this.functionType = functionType;
         }
 
-        public Long getDelay() {
-            return delay;
+        public Integer getLimit() {
+            return limit;
         }
 
-        public void setDelay(Long delay) {
-            this.delay = delay;
+        public void setLimit(Integer limit) {
+            this.limit = limit;
+        }
+
+        public Long getNewerThan() {
+            return newerThan;
+        }
+
+        public void setNewerThan(Long newerThan) {
+            this.newerThan = newerThan;
+        }
+
+        public Long getOlderThan() {
+            return olderThan;
+        }
+
+        public void setOlderThan(Long olderThan) {
+            this.olderThan = olderThan;
+        }
+
+        public ApiRequestor getRequestor() {
+            return requestor;
+        }
+
+        public void setRequestor(ApiRequestor requestor) {
+            this.requestor = requestor;
+        }
+
+        public String getThreaded() {
+            return threaded;
+        }
+
+        public void setThreaded(String threaded) {
+            this.threaded = threaded;
+        }
+
+        public Boolean getUseJson() {
+            return useJson;
+        }
+
+        public void setUseJson(Boolean useJson) {
+            this.useJson = useJson;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
         }
     }
 }

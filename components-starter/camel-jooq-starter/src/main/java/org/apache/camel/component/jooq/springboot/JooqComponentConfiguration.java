@@ -105,37 +105,29 @@ public class JooqComponentConfiguration
     public static class JooqConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.jooq.JooqConfiguration.class;
         /**
-         * To execute plain SQL query
+         * Delete entity after it is consumed
          */
-        private String query;
+        private Boolean consumeDelete = true;
+        private Configuration databaseConfiguration;
         /**
          * JOOQ entity class
          */
         private Class entityType;
-        private Configuration databaseConfiguration;
-        /**
-         * Delete entity after it is consumed
-         */
-        private Boolean consumeDelete = true;
         /**
          * Type of operation to execute on query
          */
         private JooqOperation operation = JooqOperation.NONE;
+        /**
+         * To execute plain SQL query
+         */
+        private String query;
 
-        public String getQuery() {
-            return query;
+        public Boolean getConsumeDelete() {
+            return consumeDelete;
         }
 
-        public void setQuery(String query) {
-            this.query = query;
-        }
-
-        public Class getEntityType() {
-            return entityType;
-        }
-
-        public void setEntityType(Class entityType) {
-            this.entityType = entityType;
+        public void setConsumeDelete(Boolean consumeDelete) {
+            this.consumeDelete = consumeDelete;
         }
 
         public Configuration getDatabaseConfiguration() {
@@ -146,12 +138,12 @@ public class JooqComponentConfiguration
             this.databaseConfiguration = databaseConfiguration;
         }
 
-        public Boolean getConsumeDelete() {
-            return consumeDelete;
+        public Class getEntityType() {
+            return entityType;
         }
 
-        public void setConsumeDelete(Boolean consumeDelete) {
-            this.consumeDelete = consumeDelete;
+        public void setEntityType(Class entityType) {
+            this.entityType = entityType;
         }
 
         public JooqOperation getOperation() {
@@ -160,6 +152,14 @@ public class JooqComponentConfiguration
 
         public void setOperation(JooqOperation operation) {
             this.operation = operation;
+        }
+
+        public String getQuery() {
+            return query;
+        }
+
+        public void setQuery(String query) {
+            this.query = query;
         }
     }
 }

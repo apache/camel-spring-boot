@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "resilience4j",
+    "kind": "other",
+    "title": "Resilience4j",
+    "description": "Circuit Breaker EIP using Resilience4j",
+    "deprecated": "false",
+    "firstVersion": "3.0.0",
+    "label": "eip,microservice",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-resilience4j-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

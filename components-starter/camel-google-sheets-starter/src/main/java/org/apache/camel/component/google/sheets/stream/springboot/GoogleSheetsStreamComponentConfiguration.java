@@ -117,23 +117,10 @@ public class GoogleSheetsStreamComponentConfiguration
     public static class GoogleSheetsStreamConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.google.sheets.stream.GoogleSheetsStreamConfiguration.class;
         /**
-         * Specifies the level of permissions you want a sheets application to
-         * have to a user account. See
-         * https://developers.google.com/identity/protocols/googlescopes for
-         * more info.
-         */
-        private List scopes;
-        /**
          * OAuth 2 access token. This typically expires after an hour so
          * refreshToken is recommended for long term usage.
          */
         private String accessToken;
-        /**
-         * OAuth 2 refresh token. Using this, the Google Calendar component can
-         * obtain a new accessToken whenever the current one expires - a
-         * necessity if the application is long-lived.
-         */
-        private String refreshToken;
         /**
          * Sets the apiName.
          */
@@ -144,12 +131,6 @@ public class GoogleSheetsStreamComponentConfiguration
          */
         private String applicationName;
         /**
-         * Specify the maximum number of returned results. This will limit the
-         * number of rows in a returned value range data set or the number of
-         * returned value ranges in a batch request.
-         */
-        private Integer maxResults = 0;
-        /**
          * Client ID of the sheets application
          */
         private String clientId;
@@ -158,26 +139,36 @@ public class GoogleSheetsStreamComponentConfiguration
          */
         private String clientSecret;
         /**
-         * Specifies the range of rows and columns in a sheet to get data from.
+         * True if grid data should be returned.
          */
-        private String range;
-        /**
-         * Specifies the spreadsheet identifier that is used to identify the
-         * target to obtain.
-         */
-        private String spreadsheetId;
+        private Boolean includeGridData = false;
         /**
          * Specifies the major dimension that results should use..
          */
         private String majorDimension = "ROWS";
         /**
-         * Determines how values should be rendered in the output.
+         * Specify the maximum number of returned results. This will limit the
+         * number of rows in a returned value range data set or the number of
+         * returned value ranges in a batch request.
          */
-        private String valueRenderOption = "FORMATTED_VALUE";
+        private Integer maxResults = 0;
         /**
-         * True if grid data should be returned.
+         * Specifies the range of rows and columns in a sheet to get data from.
          */
-        private Boolean includeGridData = false;
+        private String range;
+        /**
+         * OAuth 2 refresh token. Using this, the Google Calendar component can
+         * obtain a new accessToken whenever the current one expires - a
+         * necessity if the application is long-lived.
+         */
+        private String refreshToken;
+        /**
+         * Specifies the level of permissions you want a sheets application to
+         * have to a user account. See
+         * https://developers.google.com/identity/protocols/googlescopes for
+         * more info.
+         */
+        private List scopes;
         /**
          * True if value range result should be split into rows or columns to
          * process each of them individually. When true each row or column is
@@ -185,14 +176,15 @@ public class GoogleSheetsStreamComponentConfiguration
          * value range object is used as exchange junk size.
          */
         private Boolean splitResults = false;
-
-        public List getScopes() {
-            return scopes;
-        }
-
-        public void setScopes(List scopes) {
-            this.scopes = scopes;
-        }
+        /**
+         * Specifies the spreadsheet identifier that is used to identify the
+         * target to obtain.
+         */
+        private String spreadsheetId;
+        /**
+         * Determines how values should be rendered in the output.
+         */
+        private String valueRenderOption = "FORMATTED_VALUE";
 
         public String getAccessToken() {
             return accessToken;
@@ -200,14 +192,6 @@ public class GoogleSheetsStreamComponentConfiguration
 
         public void setAccessToken(String accessToken) {
             this.accessToken = accessToken;
-        }
-
-        public String getRefreshToken() {
-            return refreshToken;
-        }
-
-        public void setRefreshToken(String refreshToken) {
-            this.refreshToken = refreshToken;
         }
 
         public String getApiName() {
@@ -226,14 +210,6 @@ public class GoogleSheetsStreamComponentConfiguration
             this.applicationName = applicationName;
         }
 
-        public Integer getMaxResults() {
-            return maxResults;
-        }
-
-        public void setMaxResults(Integer maxResults) {
-            this.maxResults = maxResults;
-        }
-
         public String getClientId() {
             return clientId;
         }
@@ -250,20 +226,12 @@ public class GoogleSheetsStreamComponentConfiguration
             this.clientSecret = clientSecret;
         }
 
-        public String getRange() {
-            return range;
+        public Boolean getIncludeGridData() {
+            return includeGridData;
         }
 
-        public void setRange(String range) {
-            this.range = range;
-        }
-
-        public String getSpreadsheetId() {
-            return spreadsheetId;
-        }
-
-        public void setSpreadsheetId(String spreadsheetId) {
-            this.spreadsheetId = spreadsheetId;
+        public void setIncludeGridData(Boolean includeGridData) {
+            this.includeGridData = includeGridData;
         }
 
         public String getMajorDimension() {
@@ -274,20 +242,36 @@ public class GoogleSheetsStreamComponentConfiguration
             this.majorDimension = majorDimension;
         }
 
-        public String getValueRenderOption() {
-            return valueRenderOption;
+        public Integer getMaxResults() {
+            return maxResults;
         }
 
-        public void setValueRenderOption(String valueRenderOption) {
-            this.valueRenderOption = valueRenderOption;
+        public void setMaxResults(Integer maxResults) {
+            this.maxResults = maxResults;
         }
 
-        public Boolean getIncludeGridData() {
-            return includeGridData;
+        public String getRange() {
+            return range;
         }
 
-        public void setIncludeGridData(Boolean includeGridData) {
-            this.includeGridData = includeGridData;
+        public void setRange(String range) {
+            this.range = range;
+        }
+
+        public String getRefreshToken() {
+            return refreshToken;
+        }
+
+        public void setRefreshToken(String refreshToken) {
+            this.refreshToken = refreshToken;
+        }
+
+        public List getScopes() {
+            return scopes;
+        }
+
+        public void setScopes(List scopes) {
+            this.scopes = scopes;
         }
 
         public Boolean getSplitResults() {
@@ -296,6 +280,22 @@ public class GoogleSheetsStreamComponentConfiguration
 
         public void setSplitResults(Boolean splitResults) {
             this.splitResults = splitResults;
+        }
+
+        public String getSpreadsheetId() {
+            return spreadsheetId;
+        }
+
+        public void setSpreadsheetId(String spreadsheetId) {
+            this.spreadsheetId = spreadsheetId;
+        }
+
+        public String getValueRenderOption() {
+            return valueRenderOption;
+        }
+
+        public void setValueRenderOption(String valueRenderOption) {
+            this.valueRenderOption = valueRenderOption;
         }
     }
 }

@@ -122,19 +122,9 @@ public class GoogleMailComponentConfiguration
          */
         private String accessToken;
         /**
-         * OAuth 2 refresh token. Using this, the Google Calendar component can
-         * obtain a new accessToken whenever the current one expires - a
-         * necessity if the application is long-lived.
-         */
-        private String refreshToken;
-        /**
          * What kind of operation to perform
          */
         private GoogleMailApiName apiName;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
         /**
          * Google mail application name. Example would be camel-google-mail/1.0
          */
@@ -147,6 +137,16 @@ public class GoogleMailComponentConfiguration
          * Client secret of the mail application
          */
         private String clientSecret;
+        /**
+         * What sub operation to use for the selected operation
+         */
+        private String methodName;
+        /**
+         * OAuth 2 refresh token. Using this, the Google Calendar component can
+         * obtain a new accessToken whenever the current one expires - a
+         * necessity if the application is long-lived.
+         */
+        private String refreshToken;
 
         public String getAccessToken() {
             return accessToken;
@@ -156,28 +156,12 @@ public class GoogleMailComponentConfiguration
             this.accessToken = accessToken;
         }
 
-        public String getRefreshToken() {
-            return refreshToken;
-        }
-
-        public void setRefreshToken(String refreshToken) {
-            this.refreshToken = refreshToken;
-        }
-
         public GoogleMailApiName getApiName() {
             return apiName;
         }
 
         public void setApiName(GoogleMailApiName apiName) {
             this.apiName = apiName;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
         }
 
         public String getApplicationName() {
@@ -202,6 +186,22 @@ public class GoogleMailComponentConfiguration
 
         public void setClientSecret(String clientSecret) {
             this.clientSecret = clientSecret;
+        }
+
+        public String getMethodName() {
+            return methodName;
+        }
+
+        public void setMethodName(String methodName) {
+            this.methodName = methodName;
+        }
+
+        public String getRefreshToken() {
+            return refreshToken;
+        }
+
+        public void setRefreshToken(String refreshToken) {
+            this.refreshToken = refreshToken;
         }
     }
 }

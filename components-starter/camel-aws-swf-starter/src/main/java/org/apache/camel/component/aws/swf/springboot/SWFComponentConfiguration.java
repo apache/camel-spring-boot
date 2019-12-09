@@ -146,6 +146,105 @@ public class SWFComponentConfiguration
     public static class SWFConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.swf.SWFConfiguration.class;
         /**
+         * Amazon AWS Access Key.
+         */
+        private String accessKey;
+        /**
+         * The list name to consume activities from.
+         */
+        private String activityList;
+        /**
+         * Activity scheduling options
+         */
+        private ActivitySchedulingOptions activitySchedulingOptions;
+        /**
+         * Maximum number of threads in work pool for activity.
+         */
+        private Integer activityThreadPoolSize = 100;
+        /**
+         * Activity execution options
+         */
+        private ActivityTypeExecutionOptions activityTypeExecutionOptions;
+        /**
+         * Activity registration options
+         */
+        private ActivityTypeRegistrationOptions activityTypeRegistrationOptions;
+        /**
+         * To use the given AmazonSimpleWorkflowClient as client
+         */
+        private AmazonSimpleWorkflow amazonSWClient;
+        /**
+         * The policy to use on child workflows when terminating a workflow.
+         */
+        private String childPolicy;
+        /**
+         * To configure the ClientConfiguration using the key/values from the
+         * Map.
+         */
+        private Map clientConfigurationParameters;
+        /**
+         * An instance of
+         * com.amazonaws.services.simpleworkflow.flow.DataConverter to use for
+         * serializing/deserializing the data.
+         */
+        private DataConverter dataConverter;
+        /**
+         * The workflow domain to use.
+         */
+        private String domainName;
+        /**
+         * The workflow or activity event name to use.
+         */
+        private String eventName;
+        /**
+         * Set the execution start to close timeout.
+         */
+        private String executionStartToCloseTimeout = "3600";
+        /**
+         * Workflow operation
+         */
+        private String operation = "START";
+        /**
+         * Amazon AWS Region. When using this parameter, the configuration will
+         * expect the capitalized name of the region (for example AP_EAST_1)
+         * You'll need to use the name Regions.EU_WEST_1.name()
+         */
+        private String region;
+        /**
+         * To configure the AmazonSimpleWorkflowClient using the key/values from
+         * the Map.
+         */
+        private Map sWClientParameters;
+        /**
+         * Amazon AWS Secret Key.
+         */
+        private String secretKey;
+        /**
+         * The name of the signal to send to the workflow.
+         */
+        private String signalName;
+        /**
+         * To configure the StartWorkflowOptions using the key/values from the
+         * Map.
+         */
+        private Map startWorkflowOptionsParameters;
+        /**
+         * The type of the result when a workflow state is queried.
+         */
+        private String stateResultType;
+        /**
+         * Set the task start to close timeout.
+         */
+        private String taskStartToCloseTimeout = "600";
+        /**
+         * Details for terminating a workflow.
+         */
+        private String terminationDetails;
+        /**
+         * The reason for terminating a workflow.
+         */
+        private String terminationReason;
+        /**
          * Activity or workflow
          */
         private String type;
@@ -154,112 +253,203 @@ public class SWFComponentConfiguration
          */
         private String version;
         /**
-         * Amazon AWS Region. When using this parameter, the configuration will
-         * expect the capitalized name of the region (for example AP_EAST_1)
-         * You'll need to use the name Regions.EU_WEST_1.name()
-         */
-        private String region;
-        /**
-         * Maximum number of threads in work pool for activity.
-         */
-        private Integer activityThreadPoolSize = 100;
-        /**
-         * The name of the signal to send to the workflow.
-         */
-        private String signalName;
-        /**
-         * To use the given AmazonSimpleWorkflowClient as client
-         */
-        private AmazonSimpleWorkflow amazonSWClient;
-        /**
-         * To configure the StartWorkflowOptions using the key/values from the
-         * Map.
-         */
-        private Map startWorkflowOptionsParameters;
-        /**
-         * The list name to consume activities from.
-         */
-        private String activityList;
-        /**
          * The list name to consume workflows from.
          */
         private String workflowList;
         /**
-         * An instance of
-         * com.amazonaws.services.simpleworkflow.flow.DataConverter to use for
-         * serializing/deserializing the data.
-         */
-        private DataConverter dataConverter;
-        /**
-         * To configure the ClientConfiguration using the key/values from the
-         * Map.
-         */
-        private Map clientConfigurationParameters;
-        /**
-         * The reason for terminating a workflow.
-         */
-        private String terminationReason;
-        /**
-         * Details for terminating a workflow.
-         */
-        private String terminationDetails;
-        /**
-         * To configure the AmazonSimpleWorkflowClient using the key/values from
-         * the Map.
-         */
-        private Map sWClientParameters;
-        /**
          * Workflow registration options
          */
         private WorkflowTypeRegistrationOptions workflowTypeRegistrationOptions;
-        /**
-         * Activity execution options
-         */
-        private ActivityTypeExecutionOptions activityTypeExecutionOptions;
-        /**
-         * Set the execution start to close timeout.
-         */
-        private String executionStartToCloseTimeout = "3600";
-        /**
-         * Set the task start to close timeout.
-         */
-        private String taskStartToCloseTimeout = "600";
-        /**
-         * Amazon AWS Secret Key.
-         */
-        private String secretKey;
-        /**
-         * Workflow operation
-         */
-        private String operation = "START";
-        /**
-         * The workflow or activity event name to use.
-         */
-        private String eventName;
-        /**
-         * Activity scheduling options
-         */
-        private ActivitySchedulingOptions activitySchedulingOptions;
-        /**
-         * The type of the result when a workflow state is queried.
-         */
-        private String stateResultType;
-        /**
-         * The policy to use on child workflows when terminating a workflow.
-         */
-        private String childPolicy;
-        /**
-         * Activity registration options
-         */
-        private ActivityTypeRegistrationOptions activityTypeRegistrationOptions;
-        /**
-         * Amazon AWS Access Key.
-         */
-        private String accessKey;
-        /**
-         * The workflow domain to use.
-         */
-        private String domainName;
+
+        public String getAccessKey() {
+            return accessKey;
+        }
+
+        public void setAccessKey(String accessKey) {
+            this.accessKey = accessKey;
+        }
+
+        public String getActivityList() {
+            return activityList;
+        }
+
+        public void setActivityList(String activityList) {
+            this.activityList = activityList;
+        }
+
+        public ActivitySchedulingOptions getActivitySchedulingOptions() {
+            return activitySchedulingOptions;
+        }
+
+        public void setActivitySchedulingOptions(
+                ActivitySchedulingOptions activitySchedulingOptions) {
+            this.activitySchedulingOptions = activitySchedulingOptions;
+        }
+
+        public Integer getActivityThreadPoolSize() {
+            return activityThreadPoolSize;
+        }
+
+        public void setActivityThreadPoolSize(Integer activityThreadPoolSize) {
+            this.activityThreadPoolSize = activityThreadPoolSize;
+        }
+
+        public ActivityTypeExecutionOptions getActivityTypeExecutionOptions() {
+            return activityTypeExecutionOptions;
+        }
+
+        public void setActivityTypeExecutionOptions(
+                ActivityTypeExecutionOptions activityTypeExecutionOptions) {
+            this.activityTypeExecutionOptions = activityTypeExecutionOptions;
+        }
+
+        public ActivityTypeRegistrationOptions getActivityTypeRegistrationOptions() {
+            return activityTypeRegistrationOptions;
+        }
+
+        public void setActivityTypeRegistrationOptions(
+                ActivityTypeRegistrationOptions activityTypeRegistrationOptions) {
+            this.activityTypeRegistrationOptions = activityTypeRegistrationOptions;
+        }
+
+        public AmazonSimpleWorkflow getAmazonSWClient() {
+            return amazonSWClient;
+        }
+
+        public void setAmazonSWClient(AmazonSimpleWorkflow amazonSWClient) {
+            this.amazonSWClient = amazonSWClient;
+        }
+
+        public String getChildPolicy() {
+            return childPolicy;
+        }
+
+        public void setChildPolicy(String childPolicy) {
+            this.childPolicy = childPolicy;
+        }
+
+        public Map getClientConfigurationParameters() {
+            return clientConfigurationParameters;
+        }
+
+        public void setClientConfigurationParameters(
+                Map clientConfigurationParameters) {
+            this.clientConfigurationParameters = clientConfigurationParameters;
+        }
+
+        public DataConverter getDataConverter() {
+            return dataConverter;
+        }
+
+        public void setDataConverter(DataConverter dataConverter) {
+            this.dataConverter = dataConverter;
+        }
+
+        public String getDomainName() {
+            return domainName;
+        }
+
+        public void setDomainName(String domainName) {
+            this.domainName = domainName;
+        }
+
+        public String getEventName() {
+            return eventName;
+        }
+
+        public void setEventName(String eventName) {
+            this.eventName = eventName;
+        }
+
+        public String getExecutionStartToCloseTimeout() {
+            return executionStartToCloseTimeout;
+        }
+
+        public void setExecutionStartToCloseTimeout(
+                String executionStartToCloseTimeout) {
+            this.executionStartToCloseTimeout = executionStartToCloseTimeout;
+        }
+
+        public String getOperation() {
+            return operation;
+        }
+
+        public void setOperation(String operation) {
+            this.operation = operation;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public Map getSWClientParameters() {
+            return sWClientParameters;
+        }
+
+        public void setSWClientParameters(Map sWClientParameters) {
+            this.sWClientParameters = sWClientParameters;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
+        }
+
+        public String getSignalName() {
+            return signalName;
+        }
+
+        public void setSignalName(String signalName) {
+            this.signalName = signalName;
+        }
+
+        public Map getStartWorkflowOptionsParameters() {
+            return startWorkflowOptionsParameters;
+        }
+
+        public void setStartWorkflowOptionsParameters(
+                Map startWorkflowOptionsParameters) {
+            this.startWorkflowOptionsParameters = startWorkflowOptionsParameters;
+        }
+
+        public String getStateResultType() {
+            return stateResultType;
+        }
+
+        public void setStateResultType(String stateResultType) {
+            this.stateResultType = stateResultType;
+        }
+
+        public String getTaskStartToCloseTimeout() {
+            return taskStartToCloseTimeout;
+        }
+
+        public void setTaskStartToCloseTimeout(String taskStartToCloseTimeout) {
+            this.taskStartToCloseTimeout = taskStartToCloseTimeout;
+        }
+
+        public String getTerminationDetails() {
+            return terminationDetails;
+        }
+
+        public void setTerminationDetails(String terminationDetails) {
+            this.terminationDetails = terminationDetails;
+        }
+
+        public String getTerminationReason() {
+            return terminationReason;
+        }
+
+        public void setTerminationReason(String terminationReason) {
+            this.terminationReason = terminationReason;
+        }
 
         public String getType() {
             return type;
@@ -277,102 +467,12 @@ public class SWFComponentConfiguration
             this.version = version;
         }
 
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public Integer getActivityThreadPoolSize() {
-            return activityThreadPoolSize;
-        }
-
-        public void setActivityThreadPoolSize(Integer activityThreadPoolSize) {
-            this.activityThreadPoolSize = activityThreadPoolSize;
-        }
-
-        public String getSignalName() {
-            return signalName;
-        }
-
-        public void setSignalName(String signalName) {
-            this.signalName = signalName;
-        }
-
-        public AmazonSimpleWorkflow getAmazonSWClient() {
-            return amazonSWClient;
-        }
-
-        public void setAmazonSWClient(AmazonSimpleWorkflow amazonSWClient) {
-            this.amazonSWClient = amazonSWClient;
-        }
-
-        public Map getStartWorkflowOptionsParameters() {
-            return startWorkflowOptionsParameters;
-        }
-
-        public void setStartWorkflowOptionsParameters(
-                Map startWorkflowOptionsParameters) {
-            this.startWorkflowOptionsParameters = startWorkflowOptionsParameters;
-        }
-
-        public String getActivityList() {
-            return activityList;
-        }
-
-        public void setActivityList(String activityList) {
-            this.activityList = activityList;
-        }
-
         public String getWorkflowList() {
             return workflowList;
         }
 
         public void setWorkflowList(String workflowList) {
             this.workflowList = workflowList;
-        }
-
-        public DataConverter getDataConverter() {
-            return dataConverter;
-        }
-
-        public void setDataConverter(DataConverter dataConverter) {
-            this.dataConverter = dataConverter;
-        }
-
-        public Map getClientConfigurationParameters() {
-            return clientConfigurationParameters;
-        }
-
-        public void setClientConfigurationParameters(
-                Map clientConfigurationParameters) {
-            this.clientConfigurationParameters = clientConfigurationParameters;
-        }
-
-        public String getTerminationReason() {
-            return terminationReason;
-        }
-
-        public void setTerminationReason(String terminationReason) {
-            this.terminationReason = terminationReason;
-        }
-
-        public String getTerminationDetails() {
-            return terminationDetails;
-        }
-
-        public void setTerminationDetails(String terminationDetails) {
-            this.terminationDetails = terminationDetails;
-        }
-
-        public Map getSWClientParameters() {
-            return sWClientParameters;
-        }
-
-        public void setSWClientParameters(Map sWClientParameters) {
-            this.sWClientParameters = sWClientParameters;
         }
 
         public WorkflowTypeRegistrationOptions getWorkflowTypeRegistrationOptions() {
@@ -382,106 +482,6 @@ public class SWFComponentConfiguration
         public void setWorkflowTypeRegistrationOptions(
                 WorkflowTypeRegistrationOptions workflowTypeRegistrationOptions) {
             this.workflowTypeRegistrationOptions = workflowTypeRegistrationOptions;
-        }
-
-        public ActivityTypeExecutionOptions getActivityTypeExecutionOptions() {
-            return activityTypeExecutionOptions;
-        }
-
-        public void setActivityTypeExecutionOptions(
-                ActivityTypeExecutionOptions activityTypeExecutionOptions) {
-            this.activityTypeExecutionOptions = activityTypeExecutionOptions;
-        }
-
-        public String getExecutionStartToCloseTimeout() {
-            return executionStartToCloseTimeout;
-        }
-
-        public void setExecutionStartToCloseTimeout(
-                String executionStartToCloseTimeout) {
-            this.executionStartToCloseTimeout = executionStartToCloseTimeout;
-        }
-
-        public String getTaskStartToCloseTimeout() {
-            return taskStartToCloseTimeout;
-        }
-
-        public void setTaskStartToCloseTimeout(String taskStartToCloseTimeout) {
-            this.taskStartToCloseTimeout = taskStartToCloseTimeout;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public String getOperation() {
-            return operation;
-        }
-
-        public void setOperation(String operation) {
-            this.operation = operation;
-        }
-
-        public String getEventName() {
-            return eventName;
-        }
-
-        public void setEventName(String eventName) {
-            this.eventName = eventName;
-        }
-
-        public ActivitySchedulingOptions getActivitySchedulingOptions() {
-            return activitySchedulingOptions;
-        }
-
-        public void setActivitySchedulingOptions(
-                ActivitySchedulingOptions activitySchedulingOptions) {
-            this.activitySchedulingOptions = activitySchedulingOptions;
-        }
-
-        public String getStateResultType() {
-            return stateResultType;
-        }
-
-        public void setStateResultType(String stateResultType) {
-            this.stateResultType = stateResultType;
-        }
-
-        public String getChildPolicy() {
-            return childPolicy;
-        }
-
-        public void setChildPolicy(String childPolicy) {
-            this.childPolicy = childPolicy;
-        }
-
-        public ActivityTypeRegistrationOptions getActivityTypeRegistrationOptions() {
-            return activityTypeRegistrationOptions;
-        }
-
-        public void setActivityTypeRegistrationOptions(
-                ActivityTypeRegistrationOptions activityTypeRegistrationOptions) {
-            this.activityTypeRegistrationOptions = activityTypeRegistrationOptions;
-        }
-
-        public String getAccessKey() {
-            return accessKey;
-        }
-
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
-        }
-
-        public String getDomainName() {
-            return domainName;
-        }
-
-        public void setDomainName(String domainName) {
-            this.domainName = domainName;
         }
     }
 }

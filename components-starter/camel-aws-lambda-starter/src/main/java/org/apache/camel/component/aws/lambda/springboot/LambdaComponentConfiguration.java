@@ -142,83 +142,51 @@ public class LambdaComponentConfiguration
     public static class LambdaConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.lambda.LambdaConfiguration.class;
         /**
-         * Amazon AWS Region. When using this parameter, the configuration will
-         * expect the capitalized name of the region (for example AP_EAST_1)
-         * You'll need to use the name Regions.EU_WEST_1.name()
+         * Amazon AWS Access Key
          */
-        private String region;
+        private String accessKey;
         /**
-         * To define a proxy port when instantiating the Lambda client
+         * To use a existing configured AwsLambdaClient as client
          */
-        private Integer proxyPort;
+        private AWSLambda awsLambdaClient;
         /**
-         * Amazon AWS Secret Key
+         * Name of the Lambda function.
          */
-        private String secretKey;
+        private String function;
         /**
          * The operation to perform. It can be listFunctions, getFunction,
          * createFunction, deleteFunction or invokeFunction
          */
         private LambdaOperations operation;
         /**
-         * Name of the Lambda function.
-         */
-        private String function;
-        /**
-         * To use a existing configured AwsLambdaClient as client
-         */
-        private AWSLambda awsLambdaClient;
-        /**
          * To define a proxy host when instantiating the Lambda client
          */
         private String proxyHost;
         /**
-         * Amazon AWS Access Key
+         * To define a proxy port when instantiating the Lambda client
          */
-        private String accessKey;
+        private Integer proxyPort;
         /**
          * To define a proxy protocol when instantiating the Lambda client
          */
         private Protocol proxyProtocol = Protocol.HTTPS;
+        /**
+         * Amazon AWS Region. When using this parameter, the configuration will
+         * expect the capitalized name of the region (for example AP_EAST_1)
+         * You'll need to use the name Regions.EU_WEST_1.name()
+         */
+        private String region;
+        /**
+         * Amazon AWS Secret Key
+         */
+        private String secretKey;
 
-        public String getRegion() {
-            return region;
+        public String getAccessKey() {
+            return accessKey;
         }
 
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public LambdaOperations getOperation() {
-            return operation;
-        }
-
-        public void setOperation(LambdaOperations operation) {
-            this.operation = operation;
-        }
-
-        public String getFunction() {
-            return function;
-        }
-
-        public void setFunction(String function) {
-            this.function = function;
+        public void setAccessKey(String accessKey) {
+            this.accessKey = accessKey;
         }
 
         public AWSLambda getAwsLambdaClient() {
@@ -229,6 +197,22 @@ public class LambdaComponentConfiguration
             this.awsLambdaClient = awsLambdaClient;
         }
 
+        public String getFunction() {
+            return function;
+        }
+
+        public void setFunction(String function) {
+            this.function = function;
+        }
+
+        public LambdaOperations getOperation() {
+            return operation;
+        }
+
+        public void setOperation(LambdaOperations operation) {
+            this.operation = operation;
+        }
+
         public String getProxyHost() {
             return proxyHost;
         }
@@ -237,12 +221,12 @@ public class LambdaComponentConfiguration
             this.proxyHost = proxyHost;
         }
 
-        public String getAccessKey() {
-            return accessKey;
+        public Integer getProxyPort() {
+            return proxyPort;
         }
 
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
         }
 
         public Protocol getProxyProtocol() {
@@ -251,6 +235,22 @@ public class LambdaComponentConfiguration
 
         public void setProxyProtocol(Protocol proxyProtocol) {
             this.proxyProtocol = proxyProtocol;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
         }
     }
 }

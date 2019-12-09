@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "swagger-java",
+    "kind": "other",
+    "title": "Swagger Java",
+    "description": "Rest-dsl support for using swagger api-doc",
+    "deprecated": "false",
+    "firstVersion": "2.16.0",
+    "label": "rest,api",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-swagger-java-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

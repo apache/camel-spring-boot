@@ -205,74 +205,12 @@ public class KafkaComponentConfiguration
     public static class KafkaConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.kafka.KafkaConfiguration.class;
         /**
-         * A string that uniquely identifies the group of consumer processes to
-         * which this consumer belongs. By setting the same group id multiple
-         * processes indicate that they are all part of the same consumer group.
-         * This option is required for consumers.
+         * Whether to allow doing manual commits via KafkaManualCommit. If this
+         * option is enabled then an instance of KafkaManualCommit is stored on
+         * the Exchange message header, which allows end users to access this
+         * API and perform manual offset commits via the Kafka consumer.
          */
-        private String groupId;
-        /**
-         * The record key (or null if no key is specified). If this option has
-         * been configured then it take precedence over header
-         * KafkaConstants#KEY
-         */
-        private String key;
-        /**
-         * Number of concurrent consumers on the consumer
-         */
-        private Integer consumerStreams = 10;
-        /**
-         * The offset repository to use in order to locally store the offset of
-         * each partition of the topic. Defining one will disable the
-         * autocommit.
-         */
-        private StateRepository offsetRepository;
-        /**
-         * The frequency in ms that the consumer offsets are committed to
-         * zookeeper.
-         */
-        private Integer autoCommitIntervalMs = 5000;
-        /**
-         * The partition to which the record will be sent (or null if no
-         * partition was specified). If this option has been configured then it
-         * take precedence over header KafkaConstants#PARTITION_KEY
-         */
-        private Integer partitionKey;
-        /**
-         * The number of acknowledgments the producer requires the leader to
-         * have received before considering a request complete. This controls
-         * the durability of records that are sent. The following settings are
-         * common: acks=0 If set to zero then the producer will not wait for any
-         * acknowledgment from the server at all. The record will be immediately
-         * added to the socket buffer and considered sent. No guarantee can be
-         * made that the server has received the record in this case, and the
-         * retries configuration will not take effect (as the client won't
-         * generally know of any failures). The offset given back for each
-         * record will always be set to -1. acks=1 This will mean the leader
-         * will write the record to its local log but will respond without
-         * awaiting full acknowledgement from all followers. In this case should
-         * the leader fail immediately after acknowledging the record but before
-         * the followers have replicated it then the record will be lost.
-         * acks=all This means the leader will wait for the full set of in-sync
-         * replicas to acknowledge the record. This guarantees that the record
-         * will not be lost as long as at least one in-sync replica remains
-         * alive. This is the strongest available guarantee.
-         */
-        private String requestRequiredAcks = "1";
-        /**
-         * The producer will attempt to batch records together into fewer
-         * requests whenever multiple records are being sent to the same
-         * partition. This helps performance on both the client and the server.
-         * This configuration controls the default batch size in bytes. No
-         * attempt will be made to batch records larger than this size.Requests
-         * sent to brokers will contain multiple batches, one for each partition
-         * with data available to be sent.A small batch size will make batching
-         * less common and may reduce throughput (a batch size of zero will
-         * disable batching entirely). A very large batch size may use memory a
-         * bit more wastefully as we will always allocate a buffer of the
-         * specified batch size in anticipation of additional records.
-         */
-        private Integer producerBatchSize = 16384;
+        private Boolean allowManualCommit = false;
         /**
          * If true, periodically commit to ZooKeeper the offset of messages
          * already fetched by the consumer. This committed offset will be used
@@ -281,24 +219,17 @@ public class KafkaComponentConfiguration
          */
         private Boolean autoCommitEnable = true;
         /**
-         * URL of the Kafka brokers to use. The format is
-         * host1:port1,host2:port2, and the list can be a subset of brokers or a
-         * VIP pointing to a subset of brokers. This option is known as
-         * bootstrap.servers in the Kafka documentation.
+         * The frequency in ms that the consumer offsets are committed to
+         * zookeeper.
          */
-        private String brokers;
+        private Integer autoCommitIntervalMs = 5000;
         /**
-         * Whether the topic is a pattern (regular expression). This can be used
-         * to subscribe to dynamic number of topics matching the pattern.
+         * Whether to perform an explicit auto commit when the consumer stops to
+         * ensure the broker has a commit from the last consumed message. This
+         * requires the option autoCommitEnable is turned on. The possible
+         * values are: sync, async, or none. And sync is the default value.
          */
-        private Boolean topicIsPattern = false;
-        /**
-         * Whether to allow doing manual commits via KafkaManualCommit. If this
-         * option is enabled then an instance of KafkaManualCommit is stored on
-         * the Exchange message header, which allows end users to access this
-         * API and perform manual offset commits via the Kafka consumer.
-         */
-        private Boolean allowManualCommit = false;
+        private String autoCommitOnStop = "sync";
         /**
          * What to do when there is no initial offset in ZooKeeper or if an
          * offset is out of range: earliest : automatically reset the offset to
@@ -307,43 +238,24 @@ public class KafkaComponentConfiguration
          */
         private String autoOffsetReset = "latest";
         /**
-         * Name of the topic to use. On the consumer you can use comma to
-         * separate multiple topics. A producer can only send a message to a
-         * single topic.
+         * This options controls what happens when a consumer is processing an
+         * exchange and it fails. If the option is false then the consumer
+         * continues to the next message and processes it. If the option is true
+         * then the consumer breaks out, and will seek back to offset of the
+         * message that caused a failure, and then re-attempt to process this
+         * message. However this can lead to endless processing of the same
+         * message if its bound to fail every time, eg a poison message.
+         * Therefore its recommended to deal with that for example by using
+         * Camel's error handler.
          */
-        private String topic;
+        private Boolean breakOnFirstError = false;
         /**
-         * The number of consumers that connect to kafka server
+         * URL of the Kafka brokers to use. The format is
+         * host1:port1,host2:port2, and the list can be a subset of brokers or a
+         * VIP pointing to a subset of brokers. This option is known as
+         * bootstrap.servers in the Kafka documentation.
          */
-        private Integer consumersCount = 1;
-        /**
-         * The maximum amount of data the server should return for a fetch
-         * request This is not an absolute maximum, if the first message in the
-         * first non-empty partition of the fetch is larger than this value, the
-         * message will still be returned to ensure that the consumer can make
-         * progress. The maximum message size accepted by the broker is defined
-         * via message.max.bytes (broker config) or max.message.bytes (topic
-         * config). Note that the consumer performs multiple fetches in
-         * parallel.
-         */
-        private Integer fetchMaxBytes = 52428800;
-        /**
-         * The partitioner class for partitioning messages amongst sub-topics.
-         * The default partitioner is based on the hash of the key.
-         */
-        private String partitioner = "org.apache.kafka.clients.producer.internals.DefaultPartitioner";
-        /**
-         * The minimum amount of data the server should return for a fetch
-         * request. If insufficient data is available the request will wait for
-         * that much data to accumulate before answering the request.
-         */
-        private Integer fetchMinBytes = 1;
-        /**
-         * The client id is a user-specified string sent in each request to help
-         * trace calls. It should logically identify the application making the
-         * request.
-         */
-        private String clientId;
+        private String brokers;
         /**
          * The total bytes of memory the producer can use to buffer records
          * waiting to be sent to the server. If records are sent faster than
@@ -357,15 +269,70 @@ public class KafkaComponentConfiguration
          */
         private Integer bufferMemorySize = 33554432;
         /**
-         * Setting a value greater than zero will cause the client to resend any
-         * record whose send fails with a potentially transient error. Note that
-         * this retry is no different than if the client resent the record upon
-         * receiving the error. Allowing retries will potentially change the
-         * ordering of records because if two records are sent to a single
-         * partition, and the first fails and is retried but the second
-         * succeeds, then the second record may appear first.
+         * Automatically check the CRC32 of the records consumed. This ensures
+         * no on-the-wire or on-disk corruption to the messages occurred. This
+         * check adds some overhead, so it may be disabled in cases seeking
+         * extreme performance.
          */
-        private Integer retries = 0;
+        private Boolean checkCrcs = true;
+        /**
+         * The client id is a user-specified string sent in each request to help
+         * trace calls. It should logically identify the application making the
+         * request.
+         */
+        private String clientId;
+        /**
+         * This parameter allows you to specify the compression codec for all
+         * data generated by this producer. Valid values are none, gzip and
+         * snappy.
+         */
+        private String compressionCodec = "none";
+        /**
+         * Close idle connections after the number of milliseconds specified by
+         * this config.
+         */
+        private Integer connectionMaxIdleMs = 540000;
+        /**
+         * The configuration controls the maximum amount of time the client will
+         * wait for the response of a request. If the response is not received
+         * before the timeout elapses the client will resend the request if
+         * necessary or fail the request if retries are exhausted.
+         */
+        private Integer consumerRequestTimeoutMs = 40000;
+        /**
+         * Number of concurrent consumers on the consumer
+         */
+        private Integer consumerStreams = 10;
+        /**
+         * The number of consumers that connect to kafka server
+         */
+        private Integer consumersCount = 1;
+        /**
+         * If set to 'true' the producer will ensure that exactly one copy of
+         * each message is written in the stream. If 'false', producer retries
+         * may write duplicates of the retried message in the stream. If set to
+         * true this option will require max.in.flight.requests.per.connection
+         * to be set to 1 and retries cannot be zero and additionally acks must
+         * be set to 'all'.
+         */
+        private Boolean enableIdempotence = false;
+        /**
+         * The maximum amount of data the server should return for a fetch
+         * request This is not an absolute maximum, if the first message in the
+         * first non-empty partition of the fetch is larger than this value, the
+         * message will still be returned to ensure that the consumer can make
+         * progress. The maximum message size accepted by the broker is defined
+         * via message.max.bytes (broker config) or max.message.bytes (topic
+         * config). Note that the consumer performs multiple fetches in
+         * parallel.
+         */
+        private Integer fetchMaxBytes = 52428800;
+        /**
+         * The minimum amount of data the server should return for a fetch
+         * request. If insufficient data is available the request will wait for
+         * that much data to accumulate before answering the request.
+         */
+        private Integer fetchMinBytes = 1;
         /**
          * The maximum amount of time the server will block before answering the
          * fetch request if there isn't sufficient data to immediately satisfy
@@ -373,16 +340,92 @@ public class KafkaComponentConfiguration
          */
         private Integer fetchWaitMaxMs = 500;
         /**
-         * Set if KafkaConsumer will read from beginning or end on startup:
-         * beginning : read from beginning end : read from end This is replacing
-         * the earlier property seekToBeginning
+         * A string that uniquely identifies the group of consumer processes to
+         * which this consumer belongs. By setting the same group id multiple
+         * processes indicate that they are all part of the same consumer group.
+         * This option is required for consumers.
          */
-        private String seekTo;
+        private String groupId;
         /**
-         * Close idle connections after the number of milliseconds specified by
-         * this config.
+         * To use a custom HeaderFilterStrategy to filter header to and from
+         * Camel message.
          */
-        private Integer connectionMaxIdleMs = 540000;
+        private HeaderFilterStrategy headerFilterStrategy;
+        /**
+         * The expected time between heartbeats to the consumer coordinator when
+         * using Kafka's group management facilities. Heartbeats are used to
+         * ensure that the consumer's session stays active and to facilitate
+         * rebalancing when new consumers join or leave the group. The value
+         * must be set lower than session.timeout.ms, but typically should be
+         * set no higher than 1/3 of that value. It can be adjusted even lower
+         * to control the expected time for normal rebalances.
+         */
+        private Integer heartbeatIntervalMs = 3000;
+        /**
+         * Sets interceptors for producer or consumers. Producer interceptors
+         * have to be classes implementing
+         * org.apache.kafka.clients.producer.ProducerInterceptor Consumer
+         * interceptors have to be classes implementing
+         * org.apache.kafka.clients.consumer.ConsumerInterceptor Note that if
+         * you use Producer interceptor on a consumer it will throw a class cast
+         * exception in runtime
+         */
+        private String interceptorClasses;
+        /**
+         * To use a custom KafkaHeaderDeserializer to deserialize kafka headers
+         * values
+         */
+        private KafkaHeaderDeserializer kafkaHeaderDeserializer;
+        /**
+         * To use a custom KafkaHeaderSerializer to serialize kafka headers
+         * values
+         */
+        private KafkaHeaderSerializer kafkaHeaderSerializer;
+        /**
+         * Login thread sleep time between refresh attempts.
+         */
+        private Integer kerberosBeforeReloginMinTime = 60000;
+        /**
+         * Kerberos kinit command path. Default is /usr/bin/kinit
+         */
+        private String kerberosInitCmd = "/usr/bin/kinit";
+        /**
+         * A list of rules for mapping from principal names to short names
+         * (typically operating system usernames). The rules are evaluated in
+         * order and the first rule that matches a principal name is used to map
+         * it to a short name. Any later rules in the list are ignored. By
+         * default, principal names of the form {username}/{hostname}{REALM} are
+         * mapped to {username}. For more details on the format please see the
+         * security authorization and acls documentation.. Multiple values can
+         * be separated by comma
+         */
+        private String kerberosPrincipalToLocalRules = "DEFAULT";
+        /**
+         * Percentage of random jitter added to the renewal time.
+         */
+        private Double kerberosRenewJitter = 0.05;
+        /**
+         * Login thread will sleep until the specified window factor of time
+         * from last refresh to ticket's expiry has been reached, at which time
+         * it will try to renew the ticket.
+         */
+        private Double kerberosRenewWindowFactor = 0.8;
+        /**
+         * The record key (or null if no key is specified). If this option has
+         * been configured then it take precedence over header
+         * KafkaConstants#KEY
+         */
+        private String key;
+        /**
+         * Deserializer class for key that implements the Deserializer
+         * interface.
+         */
+        private String keyDeserializer = "org.apache.kafka.common.serialization.StringDeserializer";
+        /**
+         * The serializer class for keys (defaults to the same as for messages
+         * if nothing is given).
+         */
+        private String keySerializerClass = "org.apache.kafka.common.serialization.StringSerializer";
         /**
          * The producer groups together any records that arrive in between
          * request transmissions into a single batched request. Normally this
@@ -405,104 +448,6 @@ public class KafkaComponentConfiguration
          */
         private Integer lingerMs = 0;
         /**
-         * The file format of the trust store file. Default value is JKS.
-         */
-        private String sslTruststoreType = "JKS";
-        /**
-         * The Kerberos principal name that Kafka runs as. This can be defined
-         * either in Kafka's JAAS config or in Kafka's config.
-         */
-        private String saslKerberosServiceName;
-        /**
-         * The maximum number of unsent messages that can be queued up the
-         * producer when using async mode before either the producer must be
-         * blocked or data must be dropped.
-         */
-        private Integer queueBufferingMaxMessages = 10000;
-        /**
-         * The serializer class for keys (defaults to the same as for messages
-         * if nothing is given).
-         */
-        private String keySerializerClass = "org.apache.kafka.common.serialization.StringSerializer";
-        /**
-         * This options controls what happens when a consumer is processing an
-         * exchange and it fails. If the option is false then the consumer
-         * continues to the next message and processes it. If the option is true
-         * then the consumer breaks out, and will seek back to offset of the
-         * message that caused a failure, and then re-attempt to process this
-         * message. However this can lead to endless processing of the same
-         * message if its bound to fail every time, eg a poison message.
-         * Therefore its recommended to deal with that for example by using
-         * Camel's error handler.
-         */
-        private Boolean breakOnFirstError = false;
-        /**
-         * URL of the Confluent Platform schema registry servers to use. The
-         * format is host1:port1,host2:port2. This is known as
-         * schema.registry.url in the Confluent Platform documentation. This
-         * option is only available in the Confluent Platform (not standard
-         * Apache Kafka)
-         */
-        private String schemaRegistryURL;
-        /**
-         * Whether to perform an explicit auto commit when the consumer stops to
-         * ensure the broker has a commit from the last consumed message. This
-         * requires the option autoCommitEnable is turned on. The possible
-         * values are: sync, async, or none. And sync is the default value.
-         */
-        private String autoCommitOnStop = "sync";
-        /**
-         * Socket write buffer size
-         */
-        private Integer sendBufferBytes = 131072;
-        /**
-         * This parameter allows you to specify the compression codec for all
-         * data generated by this producer. Valid values are none, gzip and
-         * snappy.
-         */
-        private String compressionCodec = "none";
-        /**
-         * Login thread sleep time between refresh attempts.
-         */
-        private Integer kerberosBeforeReloginMinTime = 60000;
-        /**
-         * The maximum size of a request. This is also effectively a cap on the
-         * maximum record size. Note that the server has its own cap on record
-         * size which may be different from this. This setting will limit the
-         * number of record batches the producer will send in a single request
-         * to avoid sending huge requests.
-         */
-        private Integer maxRequestSize = 1048576;
-        /**
-         * The size of the TCP receive buffer (SO_RCVBUF) to use when reading
-         * data.
-         */
-        private Integer receiveBufferBytes = 65536;
-        /**
-         * The amount of time the broker will wait trying to meet the
-         * request.required.acks requirement before sending back an error to the
-         * client.
-         */
-        private Integer requestTimeoutMs = 305000;
-        /**
-         * The serializer class for messages.
-         */
-        private String serializerClass = "org.apache.kafka.common.serialization.StringSerializer";
-        /**
-         * This enables the use of a specific Avro reader for use with the
-         * Confluent Platform schema registry and the
-         * io.confluent.kafka.serializers.KafkaAvroDeserializer. This option is
-         * only available in the Confluent Platform (not standard Apache Kafka)
-         */
-        private Boolean specificAvroReader = false;
-        /**
-         * Before each retry, the producer refreshes the metadata of relevant
-         * topics to see if a new leader has been elected. Since leader election
-         * takes a bit of time, this property specifies the amount of time that
-         * the producer waits before refreshing the metadata.
-         */
-        private Integer retryBackoffMs = 100;
-        /**
          * The configuration controls how long sending to kafka will block.
          * These methods can be blocked for multiple reasons. For e.g: buffer
          * full, metadata unavailable.This configuration imposes maximum limit
@@ -513,17 +458,12 @@ public class KafkaComponentConfiguration
          */
         private Integer maxBlockMs = 60000;
         /**
-         * Kerberos kinit command path. Default is /usr/bin/kinit
+         * The maximum number of unacknowledged requests the client will send on
+         * a single connection before blocking. Note that if this setting is set
+         * to be greater than 1 and there are failed sends, there is a risk of
+         * message re-ordering due to retries (i.e., if retries are enabled).
          */
-        private String kerberosInitCmd = "/usr/bin/kinit";
-        /**
-         * The location of the trust store file.
-         */
-        private String sslTruststoreLocation;
-        /**
-         * The password for the trust store file.
-         */
-        private String sslTruststorePassword;
+        private Integer maxInFlightRequest = 5;
         /**
          * The maximum amount of data per-partition the server will return. The
          * maximum total memory used for a request will be #partitions
@@ -535,222 +475,6 @@ public class KafkaComponentConfiguration
          */
         private Integer maxPartitionFetchBytes = 1048576;
         /**
-         * The timeout used to detect failures when using Kafka's group
-         * management facilities.
-         */
-        private Integer sessionTimeoutMs = 10000;
-        /**
-         * Deserializer class for value that implements the Deserializer
-         * interface.
-         */
-        private String valueDeserializer = "org.apache.kafka.common.serialization.StringDeserializer";
-        /**
-         * To use a custom worker pool for continue routing Exchange after kafka
-         * server has acknowledge the message that was sent to it from
-         * KafkaProducer using asynchronous non-blocking processing.
-         */
-        private ExecutorService workerPool;
-        /**
-         * A list of rules for mapping from principal names to short names
-         * (typically operating system usernames). The rules are evaluated in
-         * order and the first rule that matches a principal name is used to map
-         * it to a short name. Any later rules in the list are ignored. By
-         * default, principal names of the form {username}/{hostname}{REALM} are
-         * mapped to {username}. For more details on the format please see the
-         * security authorization and acls documentation.. Multiple values can
-         * be separated by comma
-         */
-        private String kerberosPrincipalToLocalRules = "DEFAULT";
-        /**
-         * Expose the kafka sasl.jaas.config parameter Example:
-         * org.apache.kafka.common.security.plain.PlainLoginModule required
-         * username=USERNAME password=PASSWORD;
-         */
-        private String saslJaasConfig;
-        /**
-         * Protocol used to communicate with brokers. SASL_PLAINTEXT, PLAINTEXT
-         * and SSL are supported
-         */
-        private String securityProtocol = "PLAINTEXT";
-        /**
-         * The name of the security provider used for SSL connections. Default
-         * value is the default security provider of the JVM.
-         */
-        private String sslProvider;
-        /**
-         * The number of samples maintained to compute metrics.
-         */
-        private Integer metricsSampleWindowMs = 30000;
-        /**
-         * The amount of time to wait before attempting to reconnect to a given
-         * host. This avoids repeatedly connecting to a host in a tight loop.
-         * This backoff applies to all requests sent by the consumer to the
-         * broker.
-         */
-        private Integer reconnectBackoffMs = 50;
-        /**
-         * The store password for the key store file.This is optional for client
-         * and only needed if ssl.keystore.location is configured.
-         */
-        private String sslKeystorePassword;
-        /**
-         * The algorithm used by key manager factory for SSL connections.
-         * Default value is the key manager factory algorithm configured for the
-         * Java Virtual Machine.
-         */
-        private String sslKeymanagerAlgorithm = "SunX509";
-        /**
-         * The list of protocols enabled for SSL connections. TLSv1.2, TLSv1.1
-         * and TLSv1 are enabled by default.
-         */
-        private String sslEnabledProtocols = "TLSv1.2,TLSv1.1,TLSv1";
-        /**
-         * Sets interceptors for producer or consumers. Producer interceptors
-         * have to be classes implementing
-         * org.apache.kafka.clients.producer.ProducerInterceptor Consumer
-         * interceptors have to be classes implementing
-         * org.apache.kafka.clients.consumer.ConsumerInterceptor Note that if
-         * you use Producer interceptor on a consumer it will throw a class cast
-         * exception in runtime
-         */
-        private String interceptorClasses;
-        /**
-         * Percentage of random jitter added to the renewal time.
-         */
-        private Double kerberosRenewJitter = 0.05;
-        /**
-         * If set to 'true' the producer will ensure that exactly one copy of
-         * each message is written in the stream. If 'false', producer retries
-         * may write duplicates of the retried message in the stream. If set to
-         * true this option will require max.in.flight.requests.per.connection
-         * to be set to 1 and retries cannot be zero and additionally acks must
-         * be set to 'all'.
-         */
-        private Boolean enableIdempotence = false;
-        /**
-         * The maximum amount of time in milliseconds to wait when reconnecting
-         * to a broker that has repeatedly failed to connect. If provided, the
-         * backoff per host will increase exponentially for each consecutive
-         * connection failure, up to this maximum. After calculating the backoff
-         * increase, 20% random jitter is added to avoid connection storms.
-         */
-        private Integer reconnectBackoffMaxMs = 1000;
-        /**
-         * The maximum number of unacknowledged requests the client will send on
-         * a single connection before blocking. Note that if this setting is set
-         * to be greater than 1 and there are failed sends, there is a risk of
-         * message re-ordering due to retries (i.e., if retries are enabled).
-         */
-        private Integer maxInFlightRequest = 5;
-        /**
-         * Number of core threads for the worker pool for continue routing
-         * Exchange after kafka server has acknowledge the message that was sent
-         * to it from KafkaProducer using asynchronous non-blocking processing.
-         */
-        private Integer workerPoolCoreSize = 10;
-        /**
-         * Login thread will sleep until the specified window factor of time
-         * from last refresh to ticket's expiry has been reached, at which time
-         * it will try to renew the ticket.
-         */
-        private Double kerberosRenewWindowFactor = 0.8;
-        /**
-         * The Simple Authentication and Security Layer (SASL) Mechanism used.
-         * For the valid values see a href=
-         * http://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtmlhttp://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml
-         */
-        private String saslMechanism = "GSSAPI";
-        /**
-         * To use a custom KafkaHeaderDeserializer to deserialize kafka headers
-         * values
-         */
-        private KafkaHeaderDeserializer kafkaHeaderDeserializer;
-        /**
-         * To use a custom KafkaHeaderSerializer to serialize kafka headers
-         * values
-         */
-        private KafkaHeaderSerializer kafkaHeaderSerializer;
-        /**
-         * The password of the private key in the key store file. This is
-         * optional for client.
-         */
-        private String sslKeyPassword;
-        /**
-         * The location of the key store file. This is optional for client and
-         * can be used for two-way authentication for client.
-         */
-        private String sslKeystoreLocation;
-        /**
-         * SSL configuration using a Camel SSLContextParameters object. If
-         * configured it's applied before the other SSL endpoint parameters.
-         */
-        private SSLContextParameters sslContextParameters;
-        /**
-         * A list of cipher suites. This is a named combination of
-         * authentication, encryption, MAC and key exchange algorithm used to
-         * negotiate the security settings for a network connection using TLS or
-         * SSL network protocol.By default all the available cipher suites are
-         * supported.
-         */
-        private String sslCipherSuites;
-        /**
-         * Maximum number of threads for the worker pool for continue routing
-         * Exchange after kafka server has acknowledge the message that was sent
-         * to it from KafkaProducer using asynchronous non-blocking processing.
-         */
-        private Integer workerPoolMaxSize = 20;
-        /**
-         * Whether the producer should store the RecordMetadata results from
-         * sending to Kafka. The results are stored in a List containing the
-         * RecordMetadata metadata's. The list is stored on a header with the
-         * key KafkaConstants#KAFKA_RECORDMETA
-         */
-        private Boolean recordMetadata = true;
-        /**
-         * The number of samples maintained to compute metrics.
-         */
-        private Integer noOfMetricsSample = 2;
-        /**
-         * The maximum number of records returned in a single call to poll()
-         */
-        private Integer maxPollRecords = 500;
-        /**
-         * The file format of the key store file. This is optional for client.
-         * Default value is JKS
-         */
-        private String sslKeystoreType = "JKS";
-        /**
-         * Deserializer class for key that implements the Deserializer
-         * interface.
-         */
-        private String keyDeserializer = "org.apache.kafka.common.serialization.StringDeserializer";
-        /**
-         * The configuration controls the maximum amount of time the client will
-         * wait for the response of a request. If the response is not received
-         * before the timeout elapses the client will resend the request if
-         * necessary or fail the request if retries are exhausted.
-         */
-        private Integer consumerRequestTimeoutMs = 40000;
-        /**
-         * Automatically check the CRC32 of the records consumed. This ensures
-         * no on-the-wire or on-disk corruption to the messages occurred. This
-         * check adds some overhead, so it may be disabled in cases seeking
-         * extreme performance.
-         */
-        private Boolean checkCrcs = true;
-        /**
-         * The SSL protocol used to generate the SSLContext. Default setting is
-         * TLS, which is fine for most cases. Allowed values in recent JVMs are
-         * TLS, TLSv1.1 and TLSv1.2. SSL, SSLv2 and SSLv3 may be supported in
-         * older JVMs, but their usage is discouraged due to known security
-         * vulnerabilities.
-         */
-        private String sslProtocol = "TLS";
-        /**
-         * The timeout used when polling the KafkaConsumer.
-         */
-        private Long pollTimeoutMs = 5000L;
-        /**
          * The maximum delay between invocations of poll() when using consumer
          * group management. This places an upper bound on the amount of time
          * that the consumer can be idle before fetching more records. If poll()
@@ -760,37 +484,17 @@ public class KafkaComponentConfiguration
          */
         private Long maxPollIntervalMs;
         /**
-         * To use a custom HeaderFilterStrategy to filter header to and from
-         * Camel message.
+         * The maximum number of records returned in a single call to poll()
          */
-        private HeaderFilterStrategy headerFilterStrategy;
+        private Integer maxPollRecords = 500;
         /**
-         * The endpoint identification algorithm to validate server hostname
-         * using server certificate.
+         * The maximum size of a request. This is also effectively a cap on the
+         * maximum record size. Note that the server has its own cap on record
+         * size which may be different from this. This setting will limit the
+         * number of record batches the producer will send in a single request
+         * to avoid sending huge requests.
          */
-        private String sslEndpointAlgorithm;
-        /**
-         * The class name of the partition assignment strategy that the client
-         * will use to distribute partition ownership amongst consumer instances
-         * when group management is used
-         */
-        private String partitionAssignor = "org.apache.kafka.clients.consumer.RangeAssignor";
-        /**
-         * The expected time between heartbeats to the consumer coordinator when
-         * using Kafka's group management facilities. Heartbeats are used to
-         * ensure that the consumer's session stays active and to facilitate
-         * rebalancing when new consumers join or leave the group. The value
-         * must be set lower than session.timeout.ms, but typically should be
-         * set no higher than 1/3 of that value. It can be adjusted even lower
-         * to control the expected time for normal rebalances.
-         */
-        private Integer heartbeatIntervalMs = 3000;
-        /**
-         * The algorithm used by trust manager factory for SSL connections.
-         * Default value is the trust manager factory algorithm configured for
-         * the Java Virtual Machine.
-         */
-        private String sslTrustmanagerAlgorithm = "PKIX";
+        private Integer maxRequestSize = 1048576;
         /**
          * The period of time in milliseconds after which we force a refresh of
          * metadata even if we haven't seen any partition leadership changes to
@@ -804,69 +508,309 @@ public class KafkaComponentConfiguration
          * to register JMX statistics.
          */
         private String metricReporters;
+        /**
+         * The number of samples maintained to compute metrics.
+         */
+        private Integer metricsSampleWindowMs = 30000;
+        /**
+         * The number of samples maintained to compute metrics.
+         */
+        private Integer noOfMetricsSample = 2;
+        /**
+         * The offset repository to use in order to locally store the offset of
+         * each partition of the topic. Defining one will disable the
+         * autocommit.
+         */
+        private StateRepository offsetRepository;
+        /**
+         * The class name of the partition assignment strategy that the client
+         * will use to distribute partition ownership amongst consumer instances
+         * when group management is used
+         */
+        private String partitionAssignor = "org.apache.kafka.clients.consumer.RangeAssignor";
+        /**
+         * The partition to which the record will be sent (or null if no
+         * partition was specified). If this option has been configured then it
+         * take precedence over header KafkaConstants#PARTITION_KEY
+         */
+        private Integer partitionKey;
+        /**
+         * The partitioner class for partitioning messages amongst sub-topics.
+         * The default partitioner is based on the hash of the key.
+         */
+        private String partitioner = "org.apache.kafka.clients.producer.internals.DefaultPartitioner";
+        /**
+         * The timeout used when polling the KafkaConsumer.
+         */
+        private Long pollTimeoutMs = 5000L;
+        /**
+         * The producer will attempt to batch records together into fewer
+         * requests whenever multiple records are being sent to the same
+         * partition. This helps performance on both the client and the server.
+         * This configuration controls the default batch size in bytes. No
+         * attempt will be made to batch records larger than this size.Requests
+         * sent to brokers will contain multiple batches, one for each partition
+         * with data available to be sent.A small batch size will make batching
+         * less common and may reduce throughput (a batch size of zero will
+         * disable batching entirely). A very large batch size may use memory a
+         * bit more wastefully as we will always allocate a buffer of the
+         * specified batch size in anticipation of additional records.
+         */
+        private Integer producerBatchSize = 16384;
+        /**
+         * The maximum number of unsent messages that can be queued up the
+         * producer when using async mode before either the producer must be
+         * blocked or data must be dropped.
+         */
+        private Integer queueBufferingMaxMessages = 10000;
+        /**
+         * The size of the TCP receive buffer (SO_RCVBUF) to use when reading
+         * data.
+         */
+        private Integer receiveBufferBytes = 65536;
+        /**
+         * The maximum amount of time in milliseconds to wait when reconnecting
+         * to a broker that has repeatedly failed to connect. If provided, the
+         * backoff per host will increase exponentially for each consecutive
+         * connection failure, up to this maximum. After calculating the backoff
+         * increase, 20% random jitter is added to avoid connection storms.
+         */
+        private Integer reconnectBackoffMaxMs = 1000;
+        /**
+         * The amount of time to wait before attempting to reconnect to a given
+         * host. This avoids repeatedly connecting to a host in a tight loop.
+         * This backoff applies to all requests sent by the consumer to the
+         * broker.
+         */
+        private Integer reconnectBackoffMs = 50;
+        /**
+         * Whether the producer should store the RecordMetadata results from
+         * sending to Kafka. The results are stored in a List containing the
+         * RecordMetadata metadata's. The list is stored on a header with the
+         * key KafkaConstants#KAFKA_RECORDMETA
+         */
+        private Boolean recordMetadata = true;
+        /**
+         * The number of acknowledgments the producer requires the leader to
+         * have received before considering a request complete. This controls
+         * the durability of records that are sent. The following settings are
+         * common: acks=0 If set to zero then the producer will not wait for any
+         * acknowledgment from the server at all. The record will be immediately
+         * added to the socket buffer and considered sent. No guarantee can be
+         * made that the server has received the record in this case, and the
+         * retries configuration will not take effect (as the client won't
+         * generally know of any failures). The offset given back for each
+         * record will always be set to -1. acks=1 This will mean the leader
+         * will write the record to its local log but will respond without
+         * awaiting full acknowledgement from all followers. In this case should
+         * the leader fail immediately after acknowledging the record but before
+         * the followers have replicated it then the record will be lost.
+         * acks=all This means the leader will wait for the full set of in-sync
+         * replicas to acknowledge the record. This guarantees that the record
+         * will not be lost as long as at least one in-sync replica remains
+         * alive. This is the strongest available guarantee.
+         */
+        private String requestRequiredAcks = "1";
+        /**
+         * The amount of time the broker will wait trying to meet the
+         * request.required.acks requirement before sending back an error to the
+         * client.
+         */
+        private Integer requestTimeoutMs = 305000;
+        /**
+         * Setting a value greater than zero will cause the client to resend any
+         * record whose send fails with a potentially transient error. Note that
+         * this retry is no different than if the client resent the record upon
+         * receiving the error. Allowing retries will potentially change the
+         * ordering of records because if two records are sent to a single
+         * partition, and the first fails and is retried but the second
+         * succeeds, then the second record may appear first.
+         */
+        private Integer retries = 0;
+        /**
+         * Before each retry, the producer refreshes the metadata of relevant
+         * topics to see if a new leader has been elected. Since leader election
+         * takes a bit of time, this property specifies the amount of time that
+         * the producer waits before refreshing the metadata.
+         */
+        private Integer retryBackoffMs = 100;
+        /**
+         * Expose the kafka sasl.jaas.config parameter Example:
+         * org.apache.kafka.common.security.plain.PlainLoginModule required
+         * username=USERNAME password=PASSWORD;
+         */
+        private String saslJaasConfig;
+        /**
+         * The Kerberos principal name that Kafka runs as. This can be defined
+         * either in Kafka's JAAS config or in Kafka's config.
+         */
+        private String saslKerberosServiceName;
+        /**
+         * The Simple Authentication and Security Layer (SASL) Mechanism used.
+         * For the valid values see a href=
+         * http://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtmlhttp://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml
+         */
+        private String saslMechanism = "GSSAPI";
+        /**
+         * URL of the Confluent Platform schema registry servers to use. The
+         * format is host1:port1,host2:port2. This is known as
+         * schema.registry.url in the Confluent Platform documentation. This
+         * option is only available in the Confluent Platform (not standard
+         * Apache Kafka)
+         */
+        private String schemaRegistryURL;
+        /**
+         * Protocol used to communicate with brokers. SASL_PLAINTEXT, PLAINTEXT
+         * and SSL are supported
+         */
+        private String securityProtocol = "PLAINTEXT";
+        /**
+         * Set if KafkaConsumer will read from beginning or end on startup:
+         * beginning : read from beginning end : read from end This is replacing
+         * the earlier property seekToBeginning
+         */
+        private String seekTo;
+        /**
+         * Socket write buffer size
+         */
+        private Integer sendBufferBytes = 131072;
+        /**
+         * The serializer class for messages.
+         */
+        private String serializerClass = "org.apache.kafka.common.serialization.StringSerializer";
+        /**
+         * The timeout used to detect failures when using Kafka's group
+         * management facilities.
+         */
+        private Integer sessionTimeoutMs = 10000;
+        /**
+         * This enables the use of a specific Avro reader for use with the
+         * Confluent Platform schema registry and the
+         * io.confluent.kafka.serializers.KafkaAvroDeserializer. This option is
+         * only available in the Confluent Platform (not standard Apache Kafka)
+         */
+        private Boolean specificAvroReader = false;
+        /**
+         * A list of cipher suites. This is a named combination of
+         * authentication, encryption, MAC and key exchange algorithm used to
+         * negotiate the security settings for a network connection using TLS or
+         * SSL network protocol.By default all the available cipher suites are
+         * supported.
+         */
+        private String sslCipherSuites;
+        /**
+         * SSL configuration using a Camel SSLContextParameters object. If
+         * configured it's applied before the other SSL endpoint parameters.
+         */
+        private SSLContextParameters sslContextParameters;
+        /**
+         * The list of protocols enabled for SSL connections. TLSv1.2, TLSv1.1
+         * and TLSv1 are enabled by default.
+         */
+        private String sslEnabledProtocols = "TLSv1.2,TLSv1.1,TLSv1";
+        /**
+         * The endpoint identification algorithm to validate server hostname
+         * using server certificate.
+         */
+        private String sslEndpointAlgorithm;
+        /**
+         * The password of the private key in the key store file. This is
+         * optional for client.
+         */
+        private String sslKeyPassword;
+        /**
+         * The algorithm used by key manager factory for SSL connections.
+         * Default value is the key manager factory algorithm configured for the
+         * Java Virtual Machine.
+         */
+        private String sslKeymanagerAlgorithm = "SunX509";
+        /**
+         * The location of the key store file. This is optional for client and
+         * can be used for two-way authentication for client.
+         */
+        private String sslKeystoreLocation;
+        /**
+         * The store password for the key store file.This is optional for client
+         * and only needed if ssl.keystore.location is configured.
+         */
+        private String sslKeystorePassword;
+        /**
+         * The file format of the key store file. This is optional for client.
+         * Default value is JKS
+         */
+        private String sslKeystoreType = "JKS";
+        /**
+         * The SSL protocol used to generate the SSLContext. Default setting is
+         * TLS, which is fine for most cases. Allowed values in recent JVMs are
+         * TLS, TLSv1.1 and TLSv1.2. SSL, SSLv2 and SSLv3 may be supported in
+         * older JVMs, but their usage is discouraged due to known security
+         * vulnerabilities.
+         */
+        private String sslProtocol = "TLS";
+        /**
+         * The name of the security provider used for SSL connections. Default
+         * value is the default security provider of the JVM.
+         */
+        private String sslProvider;
+        /**
+         * The algorithm used by trust manager factory for SSL connections.
+         * Default value is the trust manager factory algorithm configured for
+         * the Java Virtual Machine.
+         */
+        private String sslTrustmanagerAlgorithm = "PKIX";
+        /**
+         * The location of the trust store file.
+         */
+        private String sslTruststoreLocation;
+        /**
+         * The password for the trust store file.
+         */
+        private String sslTruststorePassword;
+        /**
+         * The file format of the trust store file. Default value is JKS.
+         */
+        private String sslTruststoreType = "JKS";
+        /**
+         * Name of the topic to use. On the consumer you can use comma to
+         * separate multiple topics. A producer can only send a message to a
+         * single topic.
+         */
+        private String topic;
+        /**
+         * Whether the topic is a pattern (regular expression). This can be used
+         * to subscribe to dynamic number of topics matching the pattern.
+         */
+        private Boolean topicIsPattern = false;
+        /**
+         * Deserializer class for value that implements the Deserializer
+         * interface.
+         */
+        private String valueDeserializer = "org.apache.kafka.common.serialization.StringDeserializer";
+        /**
+         * To use a custom worker pool for continue routing Exchange after kafka
+         * server has acknowledge the message that was sent to it from
+         * KafkaProducer using asynchronous non-blocking processing.
+         */
+        private ExecutorService workerPool;
+        /**
+         * Number of core threads for the worker pool for continue routing
+         * Exchange after kafka server has acknowledge the message that was sent
+         * to it from KafkaProducer using asynchronous non-blocking processing.
+         */
+        private Integer workerPoolCoreSize = 10;
+        /**
+         * Maximum number of threads for the worker pool for continue routing
+         * Exchange after kafka server has acknowledge the message that was sent
+         * to it from KafkaProducer using asynchronous non-blocking processing.
+         */
+        private Integer workerPoolMaxSize = 20;
 
-        public String getGroupId() {
-            return groupId;
+        public Boolean getAllowManualCommit() {
+            return allowManualCommit;
         }
 
-        public void setGroupId(String groupId) {
-            this.groupId = groupId;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public void setKey(String key) {
-            this.key = key;
-        }
-
-        public Integer getConsumerStreams() {
-            return consumerStreams;
-        }
-
-        public void setConsumerStreams(Integer consumerStreams) {
-            this.consumerStreams = consumerStreams;
-        }
-
-        public StateRepository getOffsetRepository() {
-            return offsetRepository;
-        }
-
-        public void setOffsetRepository(StateRepository offsetRepository) {
-            this.offsetRepository = offsetRepository;
-        }
-
-        public Integer getAutoCommitIntervalMs() {
-            return autoCommitIntervalMs;
-        }
-
-        public void setAutoCommitIntervalMs(Integer autoCommitIntervalMs) {
-            this.autoCommitIntervalMs = autoCommitIntervalMs;
-        }
-
-        public Integer getPartitionKey() {
-            return partitionKey;
-        }
-
-        public void setPartitionKey(Integer partitionKey) {
-            this.partitionKey = partitionKey;
-        }
-
-        public String getRequestRequiredAcks() {
-            return requestRequiredAcks;
-        }
-
-        public void setRequestRequiredAcks(String requestRequiredAcks) {
-            this.requestRequiredAcks = requestRequiredAcks;
-        }
-
-        public Integer getProducerBatchSize() {
-            return producerBatchSize;
-        }
-
-        public void setProducerBatchSize(Integer producerBatchSize) {
-            this.producerBatchSize = producerBatchSize;
+        public void setAllowManualCommit(Boolean allowManualCommit) {
+            this.allowManualCommit = allowManualCommit;
         }
 
         public Boolean getAutoCommitEnable() {
@@ -877,181 +821,12 @@ public class KafkaComponentConfiguration
             this.autoCommitEnable = autoCommitEnable;
         }
 
-        public String getBrokers() {
-            return brokers;
+        public Integer getAutoCommitIntervalMs() {
+            return autoCommitIntervalMs;
         }
 
-        public void setBrokers(String brokers) {
-            this.brokers = brokers;
-        }
-
-        public Boolean getTopicIsPattern() {
-            return topicIsPattern;
-        }
-
-        public void setTopicIsPattern(Boolean topicIsPattern) {
-            this.topicIsPattern = topicIsPattern;
-        }
-
-        public Boolean getAllowManualCommit() {
-            return allowManualCommit;
-        }
-
-        public void setAllowManualCommit(Boolean allowManualCommit) {
-            this.allowManualCommit = allowManualCommit;
-        }
-
-        public String getAutoOffsetReset() {
-            return autoOffsetReset;
-        }
-
-        public void setAutoOffsetReset(String autoOffsetReset) {
-            this.autoOffsetReset = autoOffsetReset;
-        }
-
-        public String getTopic() {
-            return topic;
-        }
-
-        public void setTopic(String topic) {
-            this.topic = topic;
-        }
-
-        public Integer getConsumersCount() {
-            return consumersCount;
-        }
-
-        public void setConsumersCount(Integer consumersCount) {
-            this.consumersCount = consumersCount;
-        }
-
-        public Integer getFetchMaxBytes() {
-            return fetchMaxBytes;
-        }
-
-        public void setFetchMaxBytes(Integer fetchMaxBytes) {
-            this.fetchMaxBytes = fetchMaxBytes;
-        }
-
-        public String getPartitioner() {
-            return partitioner;
-        }
-
-        public void setPartitioner(String partitioner) {
-            this.partitioner = partitioner;
-        }
-
-        public Integer getFetchMinBytes() {
-            return fetchMinBytes;
-        }
-
-        public void setFetchMinBytes(Integer fetchMinBytes) {
-            this.fetchMinBytes = fetchMinBytes;
-        }
-
-        public String getClientId() {
-            return clientId;
-        }
-
-        public void setClientId(String clientId) {
-            this.clientId = clientId;
-        }
-
-        public Integer getBufferMemorySize() {
-            return bufferMemorySize;
-        }
-
-        public void setBufferMemorySize(Integer bufferMemorySize) {
-            this.bufferMemorySize = bufferMemorySize;
-        }
-
-        public Integer getRetries() {
-            return retries;
-        }
-
-        public void setRetries(Integer retries) {
-            this.retries = retries;
-        }
-
-        public Integer getFetchWaitMaxMs() {
-            return fetchWaitMaxMs;
-        }
-
-        public void setFetchWaitMaxMs(Integer fetchWaitMaxMs) {
-            this.fetchWaitMaxMs = fetchWaitMaxMs;
-        }
-
-        public String getSeekTo() {
-            return seekTo;
-        }
-
-        public void setSeekTo(String seekTo) {
-            this.seekTo = seekTo;
-        }
-
-        public Integer getConnectionMaxIdleMs() {
-            return connectionMaxIdleMs;
-        }
-
-        public void setConnectionMaxIdleMs(Integer connectionMaxIdleMs) {
-            this.connectionMaxIdleMs = connectionMaxIdleMs;
-        }
-
-        public Integer getLingerMs() {
-            return lingerMs;
-        }
-
-        public void setLingerMs(Integer lingerMs) {
-            this.lingerMs = lingerMs;
-        }
-
-        public String getSslTruststoreType() {
-            return sslTruststoreType;
-        }
-
-        public void setSslTruststoreType(String sslTruststoreType) {
-            this.sslTruststoreType = sslTruststoreType;
-        }
-
-        public String getSaslKerberosServiceName() {
-            return saslKerberosServiceName;
-        }
-
-        public void setSaslKerberosServiceName(String saslKerberosServiceName) {
-            this.saslKerberosServiceName = saslKerberosServiceName;
-        }
-
-        public Integer getQueueBufferingMaxMessages() {
-            return queueBufferingMaxMessages;
-        }
-
-        public void setQueueBufferingMaxMessages(
-                Integer queueBufferingMaxMessages) {
-            this.queueBufferingMaxMessages = queueBufferingMaxMessages;
-        }
-
-        public String getKeySerializerClass() {
-            return keySerializerClass;
-        }
-
-        public void setKeySerializerClass(String keySerializerClass) {
-            this.keySerializerClass = keySerializerClass;
-        }
-
-        public Boolean getBreakOnFirstError() {
-            return breakOnFirstError;
-        }
-
-        public void setBreakOnFirstError(Boolean breakOnFirstError) {
-            this.breakOnFirstError = breakOnFirstError;
-        }
-
-        public String getSchemaRegistryURL() {
-            return schemaRegistryURL;
-        }
-
-        public void setSchemaRegistryURL(String schemaRegistryURL) {
-            this.schemaRegistryURL = schemaRegistryURL;
+        public void setAutoCommitIntervalMs(Integer autoCommitIntervalMs) {
+            this.autoCommitIntervalMs = autoCommitIntervalMs;
         }
 
         public String getAutoCommitOnStop() {
@@ -1062,12 +837,52 @@ public class KafkaComponentConfiguration
             this.autoCommitOnStop = autoCommitOnStop;
         }
 
-        public Integer getSendBufferBytes() {
-            return sendBufferBytes;
+        public String getAutoOffsetReset() {
+            return autoOffsetReset;
         }
 
-        public void setSendBufferBytes(Integer sendBufferBytes) {
-            this.sendBufferBytes = sendBufferBytes;
+        public void setAutoOffsetReset(String autoOffsetReset) {
+            this.autoOffsetReset = autoOffsetReset;
+        }
+
+        public Boolean getBreakOnFirstError() {
+            return breakOnFirstError;
+        }
+
+        public void setBreakOnFirstError(Boolean breakOnFirstError) {
+            this.breakOnFirstError = breakOnFirstError;
+        }
+
+        public String getBrokers() {
+            return brokers;
+        }
+
+        public void setBrokers(String brokers) {
+            this.brokers = brokers;
+        }
+
+        public Integer getBufferMemorySize() {
+            return bufferMemorySize;
+        }
+
+        public void setBufferMemorySize(Integer bufferMemorySize) {
+            this.bufferMemorySize = bufferMemorySize;
+        }
+
+        public Boolean getCheckCrcs() {
+            return checkCrcs;
+        }
+
+        public void setCheckCrcs(Boolean checkCrcs) {
+            this.checkCrcs = checkCrcs;
+        }
+
+        public String getClientId() {
+            return clientId;
+        }
+
+        public void setClientId(String clientId) {
+            this.clientId = clientId;
         }
 
         public String getCompressionCodec() {
@@ -1078,214 +893,36 @@ public class KafkaComponentConfiguration
             this.compressionCodec = compressionCodec;
         }
 
-        public Integer getKerberosBeforeReloginMinTime() {
-            return kerberosBeforeReloginMinTime;
+        public Integer getConnectionMaxIdleMs() {
+            return connectionMaxIdleMs;
         }
 
-        public void setKerberosBeforeReloginMinTime(
-                Integer kerberosBeforeReloginMinTime) {
-            this.kerberosBeforeReloginMinTime = kerberosBeforeReloginMinTime;
+        public void setConnectionMaxIdleMs(Integer connectionMaxIdleMs) {
+            this.connectionMaxIdleMs = connectionMaxIdleMs;
         }
 
-        public Integer getMaxRequestSize() {
-            return maxRequestSize;
+        public Integer getConsumerRequestTimeoutMs() {
+            return consumerRequestTimeoutMs;
         }
 
-        public void setMaxRequestSize(Integer maxRequestSize) {
-            this.maxRequestSize = maxRequestSize;
+        public void setConsumerRequestTimeoutMs(Integer consumerRequestTimeoutMs) {
+            this.consumerRequestTimeoutMs = consumerRequestTimeoutMs;
         }
 
-        public Integer getReceiveBufferBytes() {
-            return receiveBufferBytes;
+        public Integer getConsumerStreams() {
+            return consumerStreams;
         }
 
-        public void setReceiveBufferBytes(Integer receiveBufferBytes) {
-            this.receiveBufferBytes = receiveBufferBytes;
+        public void setConsumerStreams(Integer consumerStreams) {
+            this.consumerStreams = consumerStreams;
         }
 
-        public Integer getRequestTimeoutMs() {
-            return requestTimeoutMs;
+        public Integer getConsumersCount() {
+            return consumersCount;
         }
 
-        public void setRequestTimeoutMs(Integer requestTimeoutMs) {
-            this.requestTimeoutMs = requestTimeoutMs;
-        }
-
-        public String getSerializerClass() {
-            return serializerClass;
-        }
-
-        public void setSerializerClass(String serializerClass) {
-            this.serializerClass = serializerClass;
-        }
-
-        public Boolean getSpecificAvroReader() {
-            return specificAvroReader;
-        }
-
-        public void setSpecificAvroReader(Boolean specificAvroReader) {
-            this.specificAvroReader = specificAvroReader;
-        }
-
-        public Integer getRetryBackoffMs() {
-            return retryBackoffMs;
-        }
-
-        public void setRetryBackoffMs(Integer retryBackoffMs) {
-            this.retryBackoffMs = retryBackoffMs;
-        }
-
-        public Integer getMaxBlockMs() {
-            return maxBlockMs;
-        }
-
-        public void setMaxBlockMs(Integer maxBlockMs) {
-            this.maxBlockMs = maxBlockMs;
-        }
-
-        public String getKerberosInitCmd() {
-            return kerberosInitCmd;
-        }
-
-        public void setKerberosInitCmd(String kerberosInitCmd) {
-            this.kerberosInitCmd = kerberosInitCmd;
-        }
-
-        public String getSslTruststoreLocation() {
-            return sslTruststoreLocation;
-        }
-
-        public void setSslTruststoreLocation(String sslTruststoreLocation) {
-            this.sslTruststoreLocation = sslTruststoreLocation;
-        }
-
-        public String getSslTruststorePassword() {
-            return sslTruststorePassword;
-        }
-
-        public void setSslTruststorePassword(String sslTruststorePassword) {
-            this.sslTruststorePassword = sslTruststorePassword;
-        }
-
-        public Integer getMaxPartitionFetchBytes() {
-            return maxPartitionFetchBytes;
-        }
-
-        public void setMaxPartitionFetchBytes(Integer maxPartitionFetchBytes) {
-            this.maxPartitionFetchBytes = maxPartitionFetchBytes;
-        }
-
-        public Integer getSessionTimeoutMs() {
-            return sessionTimeoutMs;
-        }
-
-        public void setSessionTimeoutMs(Integer sessionTimeoutMs) {
-            this.sessionTimeoutMs = sessionTimeoutMs;
-        }
-
-        public String getValueDeserializer() {
-            return valueDeserializer;
-        }
-
-        public void setValueDeserializer(String valueDeserializer) {
-            this.valueDeserializer = valueDeserializer;
-        }
-
-        public ExecutorService getWorkerPool() {
-            return workerPool;
-        }
-
-        public void setWorkerPool(ExecutorService workerPool) {
-            this.workerPool = workerPool;
-        }
-
-        public String getKerberosPrincipalToLocalRules() {
-            return kerberosPrincipalToLocalRules;
-        }
-
-        public void setKerberosPrincipalToLocalRules(
-                String kerberosPrincipalToLocalRules) {
-            this.kerberosPrincipalToLocalRules = kerberosPrincipalToLocalRules;
-        }
-
-        public String getSaslJaasConfig() {
-            return saslJaasConfig;
-        }
-
-        public void setSaslJaasConfig(String saslJaasConfig) {
-            this.saslJaasConfig = saslJaasConfig;
-        }
-
-        public String getSecurityProtocol() {
-            return securityProtocol;
-        }
-
-        public void setSecurityProtocol(String securityProtocol) {
-            this.securityProtocol = securityProtocol;
-        }
-
-        public String getSslProvider() {
-            return sslProvider;
-        }
-
-        public void setSslProvider(String sslProvider) {
-            this.sslProvider = sslProvider;
-        }
-
-        public Integer getMetricsSampleWindowMs() {
-            return metricsSampleWindowMs;
-        }
-
-        public void setMetricsSampleWindowMs(Integer metricsSampleWindowMs) {
-            this.metricsSampleWindowMs = metricsSampleWindowMs;
-        }
-
-        public Integer getReconnectBackoffMs() {
-            return reconnectBackoffMs;
-        }
-
-        public void setReconnectBackoffMs(Integer reconnectBackoffMs) {
-            this.reconnectBackoffMs = reconnectBackoffMs;
-        }
-
-        public String getSslKeystorePassword() {
-            return sslKeystorePassword;
-        }
-
-        public void setSslKeystorePassword(String sslKeystorePassword) {
-            this.sslKeystorePassword = sslKeystorePassword;
-        }
-
-        public String getSslKeymanagerAlgorithm() {
-            return sslKeymanagerAlgorithm;
-        }
-
-        public void setSslKeymanagerAlgorithm(String sslKeymanagerAlgorithm) {
-            this.sslKeymanagerAlgorithm = sslKeymanagerAlgorithm;
-        }
-
-        public String getSslEnabledProtocols() {
-            return sslEnabledProtocols;
-        }
-
-        public void setSslEnabledProtocols(String sslEnabledProtocols) {
-            this.sslEnabledProtocols = sslEnabledProtocols;
-        }
-
-        public String getInterceptorClasses() {
-            return interceptorClasses;
-        }
-
-        public void setInterceptorClasses(String interceptorClasses) {
-            this.interceptorClasses = interceptorClasses;
-        }
-
-        public Double getKerberosRenewJitter() {
-            return kerberosRenewJitter;
-        }
-
-        public void setKerberosRenewJitter(Double kerberosRenewJitter) {
-            this.kerberosRenewJitter = kerberosRenewJitter;
+        public void setConsumersCount(Integer consumersCount) {
+            this.consumersCount = consumersCount;
         }
 
         public Boolean getEnableIdempotence() {
@@ -1296,45 +933,61 @@ public class KafkaComponentConfiguration
             this.enableIdempotence = enableIdempotence;
         }
 
-        public Integer getReconnectBackoffMaxMs() {
-            return reconnectBackoffMaxMs;
+        public Integer getFetchMaxBytes() {
+            return fetchMaxBytes;
         }
 
-        public void setReconnectBackoffMaxMs(Integer reconnectBackoffMaxMs) {
-            this.reconnectBackoffMaxMs = reconnectBackoffMaxMs;
+        public void setFetchMaxBytes(Integer fetchMaxBytes) {
+            this.fetchMaxBytes = fetchMaxBytes;
         }
 
-        public Integer getMaxInFlightRequest() {
-            return maxInFlightRequest;
+        public Integer getFetchMinBytes() {
+            return fetchMinBytes;
         }
 
-        public void setMaxInFlightRequest(Integer maxInFlightRequest) {
-            this.maxInFlightRequest = maxInFlightRequest;
+        public void setFetchMinBytes(Integer fetchMinBytes) {
+            this.fetchMinBytes = fetchMinBytes;
         }
 
-        public Integer getWorkerPoolCoreSize() {
-            return workerPoolCoreSize;
+        public Integer getFetchWaitMaxMs() {
+            return fetchWaitMaxMs;
         }
 
-        public void setWorkerPoolCoreSize(Integer workerPoolCoreSize) {
-            this.workerPoolCoreSize = workerPoolCoreSize;
+        public void setFetchWaitMaxMs(Integer fetchWaitMaxMs) {
+            this.fetchWaitMaxMs = fetchWaitMaxMs;
         }
 
-        public Double getKerberosRenewWindowFactor() {
-            return kerberosRenewWindowFactor;
+        public String getGroupId() {
+            return groupId;
         }
 
-        public void setKerberosRenewWindowFactor(
-                Double kerberosRenewWindowFactor) {
-            this.kerberosRenewWindowFactor = kerberosRenewWindowFactor;
+        public void setGroupId(String groupId) {
+            this.groupId = groupId;
         }
 
-        public String getSaslMechanism() {
-            return saslMechanism;
+        public HeaderFilterStrategy getHeaderFilterStrategy() {
+            return headerFilterStrategy;
         }
 
-        public void setSaslMechanism(String saslMechanism) {
-            this.saslMechanism = saslMechanism;
+        public void setHeaderFilterStrategy(
+                HeaderFilterStrategy headerFilterStrategy) {
+            this.headerFilterStrategy = headerFilterStrategy;
+        }
+
+        public Integer getHeartbeatIntervalMs() {
+            return heartbeatIntervalMs;
+        }
+
+        public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
+            this.heartbeatIntervalMs = heartbeatIntervalMs;
+        }
+
+        public String getInterceptorClasses() {
+            return interceptorClasses;
+        }
+
+        public void setInterceptorClasses(String interceptorClasses) {
+            this.interceptorClasses = interceptorClasses;
         }
 
         public KafkaHeaderDeserializer getKafkaHeaderDeserializer() {
@@ -1355,77 +1008,55 @@ public class KafkaComponentConfiguration
             this.kafkaHeaderSerializer = kafkaHeaderSerializer;
         }
 
-        public String getSslKeyPassword() {
-            return sslKeyPassword;
+        public Integer getKerberosBeforeReloginMinTime() {
+            return kerberosBeforeReloginMinTime;
         }
 
-        public void setSslKeyPassword(String sslKeyPassword) {
-            this.sslKeyPassword = sslKeyPassword;
+        public void setKerberosBeforeReloginMinTime(
+                Integer kerberosBeforeReloginMinTime) {
+            this.kerberosBeforeReloginMinTime = kerberosBeforeReloginMinTime;
         }
 
-        public String getSslKeystoreLocation() {
-            return sslKeystoreLocation;
+        public String getKerberosInitCmd() {
+            return kerberosInitCmd;
         }
 
-        public void setSslKeystoreLocation(String sslKeystoreLocation) {
-            this.sslKeystoreLocation = sslKeystoreLocation;
+        public void setKerberosInitCmd(String kerberosInitCmd) {
+            this.kerberosInitCmd = kerberosInitCmd;
         }
 
-        public SSLContextParameters getSslContextParameters() {
-            return sslContextParameters;
+        public String getKerberosPrincipalToLocalRules() {
+            return kerberosPrincipalToLocalRules;
         }
 
-        public void setSslContextParameters(
-                SSLContextParameters sslContextParameters) {
-            this.sslContextParameters = sslContextParameters;
+        public void setKerberosPrincipalToLocalRules(
+                String kerberosPrincipalToLocalRules) {
+            this.kerberosPrincipalToLocalRules = kerberosPrincipalToLocalRules;
         }
 
-        public String getSslCipherSuites() {
-            return sslCipherSuites;
+        public Double getKerberosRenewJitter() {
+            return kerberosRenewJitter;
         }
 
-        public void setSslCipherSuites(String sslCipherSuites) {
-            this.sslCipherSuites = sslCipherSuites;
+        public void setKerberosRenewJitter(Double kerberosRenewJitter) {
+            this.kerberosRenewJitter = kerberosRenewJitter;
         }
 
-        public Integer getWorkerPoolMaxSize() {
-            return workerPoolMaxSize;
+        public Double getKerberosRenewWindowFactor() {
+            return kerberosRenewWindowFactor;
         }
 
-        public void setWorkerPoolMaxSize(Integer workerPoolMaxSize) {
-            this.workerPoolMaxSize = workerPoolMaxSize;
+        public void setKerberosRenewWindowFactor(
+                Double kerberosRenewWindowFactor) {
+            this.kerberosRenewWindowFactor = kerberosRenewWindowFactor;
         }
 
-        public Boolean getRecordMetadata() {
-            return recordMetadata;
+        public String getKey() {
+            return key;
         }
 
-        public void setRecordMetadata(Boolean recordMetadata) {
-            this.recordMetadata = recordMetadata;
-        }
-
-        public Integer getNoOfMetricsSample() {
-            return noOfMetricsSample;
-        }
-
-        public void setNoOfMetricsSample(Integer noOfMetricsSample) {
-            this.noOfMetricsSample = noOfMetricsSample;
-        }
-
-        public Integer getMaxPollRecords() {
-            return maxPollRecords;
-        }
-
-        public void setMaxPollRecords(Integer maxPollRecords) {
-            this.maxPollRecords = maxPollRecords;
-        }
-
-        public String getSslKeystoreType() {
-            return sslKeystoreType;
-        }
-
-        public void setSslKeystoreType(String sslKeystoreType) {
-            this.sslKeystoreType = sslKeystoreType;
+        public void setKey(String key) {
+            this.key = key;
         }
 
         public String getKeyDeserializer() {
@@ -1436,36 +1067,44 @@ public class KafkaComponentConfiguration
             this.keyDeserializer = keyDeserializer;
         }
 
-        public Integer getConsumerRequestTimeoutMs() {
-            return consumerRequestTimeoutMs;
+        public String getKeySerializerClass() {
+            return keySerializerClass;
         }
 
-        public void setConsumerRequestTimeoutMs(Integer consumerRequestTimeoutMs) {
-            this.consumerRequestTimeoutMs = consumerRequestTimeoutMs;
+        public void setKeySerializerClass(String keySerializerClass) {
+            this.keySerializerClass = keySerializerClass;
         }
 
-        public Boolean getCheckCrcs() {
-            return checkCrcs;
+        public Integer getLingerMs() {
+            return lingerMs;
         }
 
-        public void setCheckCrcs(Boolean checkCrcs) {
-            this.checkCrcs = checkCrcs;
+        public void setLingerMs(Integer lingerMs) {
+            this.lingerMs = lingerMs;
         }
 
-        public String getSslProtocol() {
-            return sslProtocol;
+        public Integer getMaxBlockMs() {
+            return maxBlockMs;
         }
 
-        public void setSslProtocol(String sslProtocol) {
-            this.sslProtocol = sslProtocol;
+        public void setMaxBlockMs(Integer maxBlockMs) {
+            this.maxBlockMs = maxBlockMs;
         }
 
-        public Long getPollTimeoutMs() {
-            return pollTimeoutMs;
+        public Integer getMaxInFlightRequest() {
+            return maxInFlightRequest;
         }
 
-        public void setPollTimeoutMs(Long pollTimeoutMs) {
-            this.pollTimeoutMs = pollTimeoutMs;
+        public void setMaxInFlightRequest(Integer maxInFlightRequest) {
+            this.maxInFlightRequest = maxInFlightRequest;
+        }
+
+        public Integer getMaxPartitionFetchBytes() {
+            return maxPartitionFetchBytes;
+        }
+
+        public void setMaxPartitionFetchBytes(Integer maxPartitionFetchBytes) {
+            this.maxPartitionFetchBytes = maxPartitionFetchBytes;
         }
 
         public Long getMaxPollIntervalMs() {
@@ -1476,45 +1115,20 @@ public class KafkaComponentConfiguration
             this.maxPollIntervalMs = maxPollIntervalMs;
         }
 
-        public HeaderFilterStrategy getHeaderFilterStrategy() {
-            return headerFilterStrategy;
+        public Integer getMaxPollRecords() {
+            return maxPollRecords;
         }
 
-        public void setHeaderFilterStrategy(
-                HeaderFilterStrategy headerFilterStrategy) {
-            this.headerFilterStrategy = headerFilterStrategy;
+        public void setMaxPollRecords(Integer maxPollRecords) {
+            this.maxPollRecords = maxPollRecords;
         }
 
-        public String getSslEndpointAlgorithm() {
-            return sslEndpointAlgorithm;
+        public Integer getMaxRequestSize() {
+            return maxRequestSize;
         }
 
-        public void setSslEndpointAlgorithm(String sslEndpointAlgorithm) {
-            this.sslEndpointAlgorithm = sslEndpointAlgorithm;
-        }
-
-        public String getPartitionAssignor() {
-            return partitionAssignor;
-        }
-
-        public void setPartitionAssignor(String partitionAssignor) {
-            this.partitionAssignor = partitionAssignor;
-        }
-
-        public Integer getHeartbeatIntervalMs() {
-            return heartbeatIntervalMs;
-        }
-
-        public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
-            this.heartbeatIntervalMs = heartbeatIntervalMs;
-        }
-
-        public String getSslTrustmanagerAlgorithm() {
-            return sslTrustmanagerAlgorithm;
-        }
-
-        public void setSslTrustmanagerAlgorithm(String sslTrustmanagerAlgorithm) {
-            this.sslTrustmanagerAlgorithm = sslTrustmanagerAlgorithm;
+        public void setMaxRequestSize(Integer maxRequestSize) {
+            this.maxRequestSize = maxRequestSize;
         }
 
         public Integer getMetadataMaxAgeMs() {
@@ -1531,6 +1145,392 @@ public class KafkaComponentConfiguration
 
         public void setMetricReporters(String metricReporters) {
             this.metricReporters = metricReporters;
+        }
+
+        public Integer getMetricsSampleWindowMs() {
+            return metricsSampleWindowMs;
+        }
+
+        public void setMetricsSampleWindowMs(Integer metricsSampleWindowMs) {
+            this.metricsSampleWindowMs = metricsSampleWindowMs;
+        }
+
+        public Integer getNoOfMetricsSample() {
+            return noOfMetricsSample;
+        }
+
+        public void setNoOfMetricsSample(Integer noOfMetricsSample) {
+            this.noOfMetricsSample = noOfMetricsSample;
+        }
+
+        public StateRepository getOffsetRepository() {
+            return offsetRepository;
+        }
+
+        public void setOffsetRepository(StateRepository offsetRepository) {
+            this.offsetRepository = offsetRepository;
+        }
+
+        public String getPartitionAssignor() {
+            return partitionAssignor;
+        }
+
+        public void setPartitionAssignor(String partitionAssignor) {
+            this.partitionAssignor = partitionAssignor;
+        }
+
+        public Integer getPartitionKey() {
+            return partitionKey;
+        }
+
+        public void setPartitionKey(Integer partitionKey) {
+            this.partitionKey = partitionKey;
+        }
+
+        public String getPartitioner() {
+            return partitioner;
+        }
+
+        public void setPartitioner(String partitioner) {
+            this.partitioner = partitioner;
+        }
+
+        public Long getPollTimeoutMs() {
+            return pollTimeoutMs;
+        }
+
+        public void setPollTimeoutMs(Long pollTimeoutMs) {
+            this.pollTimeoutMs = pollTimeoutMs;
+        }
+
+        public Integer getProducerBatchSize() {
+            return producerBatchSize;
+        }
+
+        public void setProducerBatchSize(Integer producerBatchSize) {
+            this.producerBatchSize = producerBatchSize;
+        }
+
+        public Integer getQueueBufferingMaxMessages() {
+            return queueBufferingMaxMessages;
+        }
+
+        public void setQueueBufferingMaxMessages(
+                Integer queueBufferingMaxMessages) {
+            this.queueBufferingMaxMessages = queueBufferingMaxMessages;
+        }
+
+        public Integer getReceiveBufferBytes() {
+            return receiveBufferBytes;
+        }
+
+        public void setReceiveBufferBytes(Integer receiveBufferBytes) {
+            this.receiveBufferBytes = receiveBufferBytes;
+        }
+
+        public Integer getReconnectBackoffMaxMs() {
+            return reconnectBackoffMaxMs;
+        }
+
+        public void setReconnectBackoffMaxMs(Integer reconnectBackoffMaxMs) {
+            this.reconnectBackoffMaxMs = reconnectBackoffMaxMs;
+        }
+
+        public Integer getReconnectBackoffMs() {
+            return reconnectBackoffMs;
+        }
+
+        public void setReconnectBackoffMs(Integer reconnectBackoffMs) {
+            this.reconnectBackoffMs = reconnectBackoffMs;
+        }
+
+        public Boolean getRecordMetadata() {
+            return recordMetadata;
+        }
+
+        public void setRecordMetadata(Boolean recordMetadata) {
+            this.recordMetadata = recordMetadata;
+        }
+
+        public String getRequestRequiredAcks() {
+            return requestRequiredAcks;
+        }
+
+        public void setRequestRequiredAcks(String requestRequiredAcks) {
+            this.requestRequiredAcks = requestRequiredAcks;
+        }
+
+        public Integer getRequestTimeoutMs() {
+            return requestTimeoutMs;
+        }
+
+        public void setRequestTimeoutMs(Integer requestTimeoutMs) {
+            this.requestTimeoutMs = requestTimeoutMs;
+        }
+
+        public Integer getRetries() {
+            return retries;
+        }
+
+        public void setRetries(Integer retries) {
+            this.retries = retries;
+        }
+
+        public Integer getRetryBackoffMs() {
+            return retryBackoffMs;
+        }
+
+        public void setRetryBackoffMs(Integer retryBackoffMs) {
+            this.retryBackoffMs = retryBackoffMs;
+        }
+
+        public String getSaslJaasConfig() {
+            return saslJaasConfig;
+        }
+
+        public void setSaslJaasConfig(String saslJaasConfig) {
+            this.saslJaasConfig = saslJaasConfig;
+        }
+
+        public String getSaslKerberosServiceName() {
+            return saslKerberosServiceName;
+        }
+
+        public void setSaslKerberosServiceName(String saslKerberosServiceName) {
+            this.saslKerberosServiceName = saslKerberosServiceName;
+        }
+
+        public String getSaslMechanism() {
+            return saslMechanism;
+        }
+
+        public void setSaslMechanism(String saslMechanism) {
+            this.saslMechanism = saslMechanism;
+        }
+
+        public String getSchemaRegistryURL() {
+            return schemaRegistryURL;
+        }
+
+        public void setSchemaRegistryURL(String schemaRegistryURL) {
+            this.schemaRegistryURL = schemaRegistryURL;
+        }
+
+        public String getSecurityProtocol() {
+            return securityProtocol;
+        }
+
+        public void setSecurityProtocol(String securityProtocol) {
+            this.securityProtocol = securityProtocol;
+        }
+
+        public String getSeekTo() {
+            return seekTo;
+        }
+
+        public void setSeekTo(String seekTo) {
+            this.seekTo = seekTo;
+        }
+
+        public Integer getSendBufferBytes() {
+            return sendBufferBytes;
+        }
+
+        public void setSendBufferBytes(Integer sendBufferBytes) {
+            this.sendBufferBytes = sendBufferBytes;
+        }
+
+        public String getSerializerClass() {
+            return serializerClass;
+        }
+
+        public void setSerializerClass(String serializerClass) {
+            this.serializerClass = serializerClass;
+        }
+
+        public Integer getSessionTimeoutMs() {
+            return sessionTimeoutMs;
+        }
+
+        public void setSessionTimeoutMs(Integer sessionTimeoutMs) {
+            this.sessionTimeoutMs = sessionTimeoutMs;
+        }
+
+        public Boolean getSpecificAvroReader() {
+            return specificAvroReader;
+        }
+
+        public void setSpecificAvroReader(Boolean specificAvroReader) {
+            this.specificAvroReader = specificAvroReader;
+        }
+
+        public String getSslCipherSuites() {
+            return sslCipherSuites;
+        }
+
+        public void setSslCipherSuites(String sslCipherSuites) {
+            this.sslCipherSuites = sslCipherSuites;
+        }
+
+        public SSLContextParameters getSslContextParameters() {
+            return sslContextParameters;
+        }
+
+        public void setSslContextParameters(
+                SSLContextParameters sslContextParameters) {
+            this.sslContextParameters = sslContextParameters;
+        }
+
+        public String getSslEnabledProtocols() {
+            return sslEnabledProtocols;
+        }
+
+        public void setSslEnabledProtocols(String sslEnabledProtocols) {
+            this.sslEnabledProtocols = sslEnabledProtocols;
+        }
+
+        public String getSslEndpointAlgorithm() {
+            return sslEndpointAlgorithm;
+        }
+
+        public void setSslEndpointAlgorithm(String sslEndpointAlgorithm) {
+            this.sslEndpointAlgorithm = sslEndpointAlgorithm;
+        }
+
+        public String getSslKeyPassword() {
+            return sslKeyPassword;
+        }
+
+        public void setSslKeyPassword(String sslKeyPassword) {
+            this.sslKeyPassword = sslKeyPassword;
+        }
+
+        public String getSslKeymanagerAlgorithm() {
+            return sslKeymanagerAlgorithm;
+        }
+
+        public void setSslKeymanagerAlgorithm(String sslKeymanagerAlgorithm) {
+            this.sslKeymanagerAlgorithm = sslKeymanagerAlgorithm;
+        }
+
+        public String getSslKeystoreLocation() {
+            return sslKeystoreLocation;
+        }
+
+        public void setSslKeystoreLocation(String sslKeystoreLocation) {
+            this.sslKeystoreLocation = sslKeystoreLocation;
+        }
+
+        public String getSslKeystorePassword() {
+            return sslKeystorePassword;
+        }
+
+        public void setSslKeystorePassword(String sslKeystorePassword) {
+            this.sslKeystorePassword = sslKeystorePassword;
+        }
+
+        public String getSslKeystoreType() {
+            return sslKeystoreType;
+        }
+
+        public void setSslKeystoreType(String sslKeystoreType) {
+            this.sslKeystoreType = sslKeystoreType;
+        }
+
+        public String getSslProtocol() {
+            return sslProtocol;
+        }
+
+        public void setSslProtocol(String sslProtocol) {
+            this.sslProtocol = sslProtocol;
+        }
+
+        public String getSslProvider() {
+            return sslProvider;
+        }
+
+        public void setSslProvider(String sslProvider) {
+            this.sslProvider = sslProvider;
+        }
+
+        public String getSslTrustmanagerAlgorithm() {
+            return sslTrustmanagerAlgorithm;
+        }
+
+        public void setSslTrustmanagerAlgorithm(String sslTrustmanagerAlgorithm) {
+            this.sslTrustmanagerAlgorithm = sslTrustmanagerAlgorithm;
+        }
+
+        public String getSslTruststoreLocation() {
+            return sslTruststoreLocation;
+        }
+
+        public void setSslTruststoreLocation(String sslTruststoreLocation) {
+            this.sslTruststoreLocation = sslTruststoreLocation;
+        }
+
+        public String getSslTruststorePassword() {
+            return sslTruststorePassword;
+        }
+
+        public void setSslTruststorePassword(String sslTruststorePassword) {
+            this.sslTruststorePassword = sslTruststorePassword;
+        }
+
+        public String getSslTruststoreType() {
+            return sslTruststoreType;
+        }
+
+        public void setSslTruststoreType(String sslTruststoreType) {
+            this.sslTruststoreType = sslTruststoreType;
+        }
+
+        public String getTopic() {
+            return topic;
+        }
+
+        public void setTopic(String topic) {
+            this.topic = topic;
+        }
+
+        public Boolean getTopicIsPattern() {
+            return topicIsPattern;
+        }
+
+        public void setTopicIsPattern(Boolean topicIsPattern) {
+            this.topicIsPattern = topicIsPattern;
+        }
+
+        public String getValueDeserializer() {
+            return valueDeserializer;
+        }
+
+        public void setValueDeserializer(String valueDeserializer) {
+            this.valueDeserializer = valueDeserializer;
+        }
+
+        public ExecutorService getWorkerPool() {
+            return workerPool;
+        }
+
+        public void setWorkerPool(ExecutorService workerPool) {
+            this.workerPool = workerPool;
+        }
+
+        public Integer getWorkerPoolCoreSize() {
+            return workerPoolCoreSize;
+        }
+
+        public void setWorkerPoolCoreSize(Integer workerPoolCoreSize) {
+            this.workerPoolCoreSize = workerPoolCoreSize;
+        }
+
+        public Integer getWorkerPoolMaxSize() {
+            return workerPoolMaxSize;
+        }
+
+        public void setWorkerPoolMaxSize(Integer workerPoolMaxSize) {
+            this.workerPoolMaxSize = workerPoolMaxSize;
         }
     }
 }

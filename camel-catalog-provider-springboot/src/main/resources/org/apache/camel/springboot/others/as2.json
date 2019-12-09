@@ -1,0 +1,12 @@
+{
+ "other": {
+    "name": "as2",
+    "kind": "other",
+    "title": "As2",
+    "description": "Camel AS2 component",
+    "deprecated": "false",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-as2-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

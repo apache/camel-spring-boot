@@ -122,19 +122,9 @@ public class GoogleSheetsComponentConfiguration
          */
         private String accessToken;
         /**
-         * OAuth 2 refresh token. Using this, the Google Sheets component can
-         * obtain a new accessToken whenever the current one expires - a
-         * necessity if the application is long-lived.
-         */
-        private String refreshToken;
-        /**
          * What kind of operation to perform
          */
         private GoogleSheetsApiName apiName;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
         /**
          * Google Sheets application name. Example would be
          * camel-google-sheets/1.0
@@ -148,6 +138,16 @@ public class GoogleSheetsComponentConfiguration
          * Client secret of the sheets application
          */
         private String clientSecret;
+        /**
+         * What sub operation to use for the selected operation
+         */
+        private String methodName;
+        /**
+         * OAuth 2 refresh token. Using this, the Google Sheets component can
+         * obtain a new accessToken whenever the current one expires - a
+         * necessity if the application is long-lived.
+         */
+        private String refreshToken;
 
         public String getAccessToken() {
             return accessToken;
@@ -157,28 +157,12 @@ public class GoogleSheetsComponentConfiguration
             this.accessToken = accessToken;
         }
 
-        public String getRefreshToken() {
-            return refreshToken;
-        }
-
-        public void setRefreshToken(String refreshToken) {
-            this.refreshToken = refreshToken;
-        }
-
         public GoogleSheetsApiName getApiName() {
             return apiName;
         }
 
         public void setApiName(GoogleSheetsApiName apiName) {
             this.apiName = apiName;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
         }
 
         public String getApplicationName() {
@@ -203,6 +187,22 @@ public class GoogleSheetsComponentConfiguration
 
         public void setClientSecret(String clientSecret) {
             this.clientSecret = clientSecret;
+        }
+
+        public String getMethodName() {
+            return methodName;
+        }
+
+        public void setMethodName(String methodName) {
+            this.methodName = methodName;
+        }
+
+        public String getRefreshToken() {
+            return refreshToken;
+        }
+
+        public void setRefreshToken(String refreshToken) {
+            this.refreshToken = refreshToken;
         }
     }
 }

@@ -107,167 +107,151 @@ public class Web3jComponentConfiguration
     public static class Web3jConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.web3j.Web3jConfiguration.class;
         /**
-         * The priority of a whisper message.
-         */
-        private BigInteger priority;
-        /**
-         * The value sent within a transaction.
-         */
-        private BigInteger value;
-        /**
          * Contract address.
          */
         private String address;
         /**
-         * The nonce found (64 bits) used for submitting a proof-of-work
-         * solution.
-         */
-        private String nonce;
-        /**
-         * The compiled code of a contract OR the hash of the invoked method
-         * signature and encoded parameters.
-         */
-        private String data;
-        /**
-         * The transactions/uncle index position in the block.
-         */
-        private BigInteger index;
-        /**
-         * The transaction index position withing a block.
-         */
-        private BigInteger position;
-        /**
-         * The source code to compile.
-         */
-        private String sourceCode;
-        /**
-         * The signed transaction data for a new message call transaction or a
-         * contract creation for signed transactions.
-         */
-        private String signedTransactionData;
-        /**
-         * The address the transaction is directed to.
-         */
-        private String toAddress;
-        /**
-         * Message to sign by calculating an Ethereum specific signature.
-         */
-        private String sha3HashOfDataToSign;
-        /**
-         * The maximum gas allowed in this block.
-         */
-        private BigInteger gasLimit;
-        /**
-         * The block number, or the string latest for the last mined block or
-         * pending, earliest for not yet mined transactions.
-         */
-        private DefaultBlockParameter toBlock;
-        /**
-         * The filter id to use.
-         */
-        private BigInteger filterId;
-        /**
-         * Hash of the block where this transaction was in.
-         */
-        private String blockHash;
-        /**
-         * The information about a transaction requested by transaction hash.
-         */
-        private String transactionHash;
-        /**
-         * If true it returns the full transaction objects, if false only the
-         * hashes of the transactions.
-         */
-        private Boolean fullTransactionObjects = false;
-        /**
-         * Operation to use.
-         */
-        private String operation = "transaction";
-        /**
-         * The mix digest (256 bits) used for submitting a proof-of-work
-         * solution.
-         */
-        private String mixDigest;
-        /**
-         * A hexadecimal string representation (32 bytes) of the hash rate.
-         */
-        private String hashrate;
-        /**
-         * Topics are order-dependent. Each topic can also be a list of topics.
-         * Specify multiple topics separated by comma.
-         */
-        private List topics;
-        /**
          * Contract address or a list of addresses.
          */
         private List addresses;
-        /**
-         * Gas price used for each paid gas.
-         */
-        private BigInteger gasPrice;
-        /**
-         * The address the transaction is send from
-         */
-        private String fromAddress;
-        /**
-         * A transaction privateFor nodes with public keys in a Quorum network
-         */
-        private List privateFor;
-        /**
-         * The local database name.
-         */
-        private String databaseName;
-        /**
-         * The block number, or the string latest for the last mined block or
-         * pending, earliest for not yet mined transactions.
-         */
-        private DefaultBlockParameter fromBlock;
-        /**
-         * If true, this will support Quorum API.
-         */
-        private Boolean quorumAPI = false;
-        /**
-         * The time to live in seconds of a whisper message.
-         */
-        private BigInteger ttl;
         /**
          * The block number, or the string latest for the last mined block or
          * pending, earliest for not yet mined transactions.
          */
         private DefaultBlockParameter atBlock;
         /**
-         * The header's pow-hash (256 bits) used for submitting a proof-of-work
-         * solution.
+         * Hash of the block where this transaction was in.
          */
-        private String headerPowHash;
+        private String blockHash;
         /**
          * A random hexadecimal(32 bytes) ID identifying the client.
          */
         private String clientId;
         /**
+         * The compiled code of a contract OR the hash of the invoked method
+         * signature and encoded parameters.
+         */
+        private String data;
+        /**
+         * The local database name.
+         */
+        private String databaseName;
+        /**
+         * The filter id to use.
+         */
+        private BigInteger filterId;
+        /**
+         * The address the transaction is send from
+         */
+        private String fromAddress;
+        /**
+         * The block number, or the string latest for the last mined block or
+         * pending, earliest for not yet mined transactions.
+         */
+        private DefaultBlockParameter fromBlock;
+        /**
+         * If true it returns the full transaction objects, if false only the
+         * hashes of the transactions.
+         */
+        private Boolean fullTransactionObjects = false;
+        /**
+         * The maximum gas allowed in this block.
+         */
+        private BigInteger gasLimit;
+        /**
+         * Gas price used for each paid gas.
+         */
+        private BigInteger gasPrice;
+        /**
+         * A hexadecimal string representation (32 bytes) of the hash rate.
+         */
+        private String hashrate;
+        /**
+         * The header's pow-hash (256 bits) used for submitting a proof-of-work
+         * solution.
+         */
+        private String headerPowHash;
+        /**
+         * The transactions/uncle index position in the block.
+         */
+        private BigInteger index;
+        /**
          * The key name in the database.
          */
         private String keyName;
         /**
+         * The mix digest (256 bits) used for submitting a proof-of-work
+         * solution.
+         */
+        private String mixDigest;
+        /**
+         * The nonce found (64 bits) used for submitting a proof-of-work
+         * solution.
+         */
+        private String nonce;
+        /**
+         * Operation to use.
+         */
+        private String operation = "transaction";
+        /**
+         * The transaction index position withing a block.
+         */
+        private BigInteger position;
+        /**
+         * The priority of a whisper message.
+         */
+        private BigInteger priority;
+        /**
+         * A transaction privateFor nodes with public keys in a Quorum network
+         */
+        private List privateFor;
+        /**
+         * If true, this will support Quorum API.
+         */
+        private Boolean quorumAPI = false;
+        /**
+         * Message to sign by calculating an Ethereum specific signature.
+         */
+        private String sha3HashOfDataToSign;
+        /**
+         * The signed transaction data for a new message call transaction or a
+         * contract creation for signed transactions.
+         */
+        private String signedTransactionData;
+        /**
+         * The source code to compile.
+         */
+        private String sourceCode;
+        /**
+         * The address the transaction is directed to.
+         */
+        private String toAddress;
+        /**
+         * The block number, or the string latest for the last mined block or
+         * pending, earliest for not yet mined transactions.
+         */
+        private DefaultBlockParameter toBlock;
+        /**
+         * Topics are order-dependent. Each topic can also be a list of topics.
+         * Specify multiple topics separated by comma.
+         */
+        private List topics;
+        /**
+         * The information about a transaction requested by transaction hash.
+         */
+        private String transactionHash;
+        /**
+         * The time to live in seconds of a whisper message.
+         */
+        private BigInteger ttl;
+        /**
+         * The value sent within a transaction.
+         */
+        private BigInteger value;
+        /**
          * The preconfigured Web3j object.
          */
         private Web3j web3j;
-
-        public BigInteger getPriority() {
-            return priority;
-        }
-
-        public void setPriority(BigInteger priority) {
-            this.priority = priority;
-        }
-
-        public BigInteger getValue() {
-            return value;
-        }
-
-        public void setValue(BigInteger value) {
-            this.value = value;
-        }
 
         public String getAddress() {
             return address;
@@ -275,150 +259,6 @@ public class Web3jComponentConfiguration
 
         public void setAddress(String address) {
             this.address = address;
-        }
-
-        public String getNonce() {
-            return nonce;
-        }
-
-        public void setNonce(String nonce) {
-            this.nonce = nonce;
-        }
-
-        public String getData() {
-            return data;
-        }
-
-        public void setData(String data) {
-            this.data = data;
-        }
-
-        public BigInteger getIndex() {
-            return index;
-        }
-
-        public void setIndex(BigInteger index) {
-            this.index = index;
-        }
-
-        public BigInteger getPosition() {
-            return position;
-        }
-
-        public void setPosition(BigInteger position) {
-            this.position = position;
-        }
-
-        public String getSourceCode() {
-            return sourceCode;
-        }
-
-        public void setSourceCode(String sourceCode) {
-            this.sourceCode = sourceCode;
-        }
-
-        public String getSignedTransactionData() {
-            return signedTransactionData;
-        }
-
-        public void setSignedTransactionData(String signedTransactionData) {
-            this.signedTransactionData = signedTransactionData;
-        }
-
-        public String getToAddress() {
-            return toAddress;
-        }
-
-        public void setToAddress(String toAddress) {
-            this.toAddress = toAddress;
-        }
-
-        public String getSha3HashOfDataToSign() {
-            return sha3HashOfDataToSign;
-        }
-
-        public void setSha3HashOfDataToSign(String sha3HashOfDataToSign) {
-            this.sha3HashOfDataToSign = sha3HashOfDataToSign;
-        }
-
-        public BigInteger getGasLimit() {
-            return gasLimit;
-        }
-
-        public void setGasLimit(BigInteger gasLimit) {
-            this.gasLimit = gasLimit;
-        }
-
-        public DefaultBlockParameter getToBlock() {
-            return toBlock;
-        }
-
-        public void setToBlock(DefaultBlockParameter toBlock) {
-            this.toBlock = toBlock;
-        }
-
-        public BigInteger getFilterId() {
-            return filterId;
-        }
-
-        public void setFilterId(BigInteger filterId) {
-            this.filterId = filterId;
-        }
-
-        public String getBlockHash() {
-            return blockHash;
-        }
-
-        public void setBlockHash(String blockHash) {
-            this.blockHash = blockHash;
-        }
-
-        public String getTransactionHash() {
-            return transactionHash;
-        }
-
-        public void setTransactionHash(String transactionHash) {
-            this.transactionHash = transactionHash;
-        }
-
-        public Boolean getFullTransactionObjects() {
-            return fullTransactionObjects;
-        }
-
-        public void setFullTransactionObjects(Boolean fullTransactionObjects) {
-            this.fullTransactionObjects = fullTransactionObjects;
-        }
-
-        public String getOperation() {
-            return operation;
-        }
-
-        public void setOperation(String operation) {
-            this.operation = operation;
-        }
-
-        public String getMixDigest() {
-            return mixDigest;
-        }
-
-        public void setMixDigest(String mixDigest) {
-            this.mixDigest = mixDigest;
-        }
-
-        public String getHashrate() {
-            return hashrate;
-        }
-
-        public void setHashrate(String hashrate) {
-            this.hashrate = hashrate;
-        }
-
-        public List getTopics() {
-            return topics;
-        }
-
-        public void setTopics(List topics) {
-            this.topics = topics;
         }
 
         public List getAddresses() {
@@ -429,62 +269,6 @@ public class Web3jComponentConfiguration
             this.addresses = addresses;
         }
 
-        public BigInteger getGasPrice() {
-            return gasPrice;
-        }
-
-        public void setGasPrice(BigInteger gasPrice) {
-            this.gasPrice = gasPrice;
-        }
-
-        public String getFromAddress() {
-            return fromAddress;
-        }
-
-        public void setFromAddress(String fromAddress) {
-            this.fromAddress = fromAddress;
-        }
-
-        public List getPrivateFor() {
-            return privateFor;
-        }
-
-        public void setPrivateFor(List privateFor) {
-            this.privateFor = privateFor;
-        }
-
-        public String getDatabaseName() {
-            return databaseName;
-        }
-
-        public void setDatabaseName(String databaseName) {
-            this.databaseName = databaseName;
-        }
-
-        public DefaultBlockParameter getFromBlock() {
-            return fromBlock;
-        }
-
-        public void setFromBlock(DefaultBlockParameter fromBlock) {
-            this.fromBlock = fromBlock;
-        }
-
-        public Boolean getQuorumAPI() {
-            return quorumAPI;
-        }
-
-        public void setQuorumAPI(Boolean quorumAPI) {
-            this.quorumAPI = quorumAPI;
-        }
-
-        public BigInteger getTtl() {
-            return ttl;
-        }
-
-        public void setTtl(BigInteger ttl) {
-            this.ttl = ttl;
-        }
-
         public DefaultBlockParameter getAtBlock() {
             return atBlock;
         }
@@ -493,12 +277,12 @@ public class Web3jComponentConfiguration
             this.atBlock = atBlock;
         }
 
-        public String getHeaderPowHash() {
-            return headerPowHash;
+        public String getBlockHash() {
+            return blockHash;
         }
 
-        public void setHeaderPowHash(String headerPowHash) {
-            this.headerPowHash = headerPowHash;
+        public void setBlockHash(String blockHash) {
+            this.blockHash = blockHash;
         }
 
         public String getClientId() {
@@ -509,12 +293,228 @@ public class Web3jComponentConfiguration
             this.clientId = clientId;
         }
 
+        public String getData() {
+            return data;
+        }
+
+        public void setData(String data) {
+            this.data = data;
+        }
+
+        public String getDatabaseName() {
+            return databaseName;
+        }
+
+        public void setDatabaseName(String databaseName) {
+            this.databaseName = databaseName;
+        }
+
+        public BigInteger getFilterId() {
+            return filterId;
+        }
+
+        public void setFilterId(BigInteger filterId) {
+            this.filterId = filterId;
+        }
+
+        public String getFromAddress() {
+            return fromAddress;
+        }
+
+        public void setFromAddress(String fromAddress) {
+            this.fromAddress = fromAddress;
+        }
+
+        public DefaultBlockParameter getFromBlock() {
+            return fromBlock;
+        }
+
+        public void setFromBlock(DefaultBlockParameter fromBlock) {
+            this.fromBlock = fromBlock;
+        }
+
+        public Boolean getFullTransactionObjects() {
+            return fullTransactionObjects;
+        }
+
+        public void setFullTransactionObjects(Boolean fullTransactionObjects) {
+            this.fullTransactionObjects = fullTransactionObjects;
+        }
+
+        public BigInteger getGasLimit() {
+            return gasLimit;
+        }
+
+        public void setGasLimit(BigInteger gasLimit) {
+            this.gasLimit = gasLimit;
+        }
+
+        public BigInteger getGasPrice() {
+            return gasPrice;
+        }
+
+        public void setGasPrice(BigInteger gasPrice) {
+            this.gasPrice = gasPrice;
+        }
+
+        public String getHashrate() {
+            return hashrate;
+        }
+
+        public void setHashrate(String hashrate) {
+            this.hashrate = hashrate;
+        }
+
+        public String getHeaderPowHash() {
+            return headerPowHash;
+        }
+
+        public void setHeaderPowHash(String headerPowHash) {
+            this.headerPowHash = headerPowHash;
+        }
+
+        public BigInteger getIndex() {
+            return index;
+        }
+
+        public void setIndex(BigInteger index) {
+            this.index = index;
+        }
+
         public String getKeyName() {
             return keyName;
         }
 
         public void setKeyName(String keyName) {
             this.keyName = keyName;
+        }
+
+        public String getMixDigest() {
+            return mixDigest;
+        }
+
+        public void setMixDigest(String mixDigest) {
+            this.mixDigest = mixDigest;
+        }
+
+        public String getNonce() {
+            return nonce;
+        }
+
+        public void setNonce(String nonce) {
+            this.nonce = nonce;
+        }
+
+        public String getOperation() {
+            return operation;
+        }
+
+        public void setOperation(String operation) {
+            this.operation = operation;
+        }
+
+        public BigInteger getPosition() {
+            return position;
+        }
+
+        public void setPosition(BigInteger position) {
+            this.position = position;
+        }
+
+        public BigInteger getPriority() {
+            return priority;
+        }
+
+        public void setPriority(BigInteger priority) {
+            this.priority = priority;
+        }
+
+        public List getPrivateFor() {
+            return privateFor;
+        }
+
+        public void setPrivateFor(List privateFor) {
+            this.privateFor = privateFor;
+        }
+
+        public Boolean getQuorumAPI() {
+            return quorumAPI;
+        }
+
+        public void setQuorumAPI(Boolean quorumAPI) {
+            this.quorumAPI = quorumAPI;
+        }
+
+        public String getSha3HashOfDataToSign() {
+            return sha3HashOfDataToSign;
+        }
+
+        public void setSha3HashOfDataToSign(String sha3HashOfDataToSign) {
+            this.sha3HashOfDataToSign = sha3HashOfDataToSign;
+        }
+
+        public String getSignedTransactionData() {
+            return signedTransactionData;
+        }
+
+        public void setSignedTransactionData(String signedTransactionData) {
+            this.signedTransactionData = signedTransactionData;
+        }
+
+        public String getSourceCode() {
+            return sourceCode;
+        }
+
+        public void setSourceCode(String sourceCode) {
+            this.sourceCode = sourceCode;
+        }
+
+        public String getToAddress() {
+            return toAddress;
+        }
+
+        public void setToAddress(String toAddress) {
+            this.toAddress = toAddress;
+        }
+
+        public DefaultBlockParameter getToBlock() {
+            return toBlock;
+        }
+
+        public void setToBlock(DefaultBlockParameter toBlock) {
+            this.toBlock = toBlock;
+        }
+
+        public List getTopics() {
+            return topics;
+        }
+
+        public void setTopics(List topics) {
+            this.topics = topics;
+        }
+
+        public String getTransactionHash() {
+            return transactionHash;
+        }
+
+        public void setTransactionHash(String transactionHash) {
+            this.transactionHash = transactionHash;
+        }
+
+        public BigInteger getTtl() {
+            return ttl;
+        }
+
+        public void setTtl(BigInteger ttl) {
+            this.ttl = ttl;
+        }
+
+        public BigInteger getValue() {
+            return value;
+        }
+
+        public void setValue(BigInteger value) {
+            this.value = value;
         }
 
         public Web3j getWeb3j() {

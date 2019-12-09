@@ -141,45 +141,6 @@ public class CwComponentConfiguration
     public static class CwConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.cw.CwConfiguration.class;
         /**
-         * The metric name
-         */
-        private String name;
-        /**
-         * The metric value
-         */
-        private Double value;
-        /**
-         * The metric timestamp
-         */
-        private Date timestamp;
-        /**
-         * The region in which CW client needs to work. When using this
-         * parameter, the configuration will expect the capitalized name of the
-         * region (for example AP_EAST_1) You'll need to use the name
-         * Regions.EU_WEST_1.name()
-         */
-        private String region;
-        /**
-         * The metric namespace
-         */
-        private String namespace;
-        /**
-         * To define a proxy port when instantiating the CW client
-         */
-        private Integer proxyPort;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
-        /**
-         * To define a proxy host when instantiating the CW client
-         */
-        private String proxyHost;
-        /**
-         * The metric unit
-         */
-        private String unit;
-        /**
          * Amazon AWS Access Key
          */
         private String accessKey;
@@ -188,81 +149,48 @@ public class CwComponentConfiguration
          */
         private AmazonCloudWatch amazonCwClient;
         /**
+         * The metric name
+         */
+        private String name;
+        /**
+         * The metric namespace
+         */
+        private String namespace;
+        /**
+         * To define a proxy host when instantiating the CW client
+         */
+        private String proxyHost;
+        /**
+         * To define a proxy port when instantiating the CW client
+         */
+        private Integer proxyPort;
+        /**
          * To define a proxy protocol when instantiating the CW client
          */
         private Protocol proxyProtocol = Protocol.HTTPS;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Double getValue() {
-            return value;
-        }
-
-        public void setValue(Double value) {
-            this.value = value;
-        }
-
-        public Date getTimestamp() {
-            return timestamp;
-        }
-
-        public void setTimestamp(Date timestamp) {
-            this.timestamp = timestamp;
-        }
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public String getNamespace() {
-            return namespace;
-        }
-
-        public void setNamespace(String namespace) {
-            this.namespace = namespace;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
-
-        public String getUnit() {
-            return unit;
-        }
-
-        public void setUnit(String unit) {
-            this.unit = unit;
-        }
+        /**
+         * The region in which CW client needs to work. When using this
+         * parameter, the configuration will expect the capitalized name of the
+         * region (for example AP_EAST_1) You'll need to use the name
+         * Regions.EU_WEST_1.name()
+         */
+        private String region;
+        /**
+         * Amazon AWS Secret Key
+         */
+        private String secretKey;
+        /**
+         * The metric timestamp
+         */
+        private Date timestamp;
+        /**
+         * The metric unit
+         */
+        private String unit;
+        /**
+         * The metric value
+         */
+        private Double value;
 
         public String getAccessKey() {
             return accessKey;
@@ -280,12 +208,84 @@ public class CwComponentConfiguration
             this.amazonCwClient = amazonCwClient;
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getNamespace() {
+            return namespace;
+        }
+
+        public void setNamespace(String namespace) {
+            this.namespace = namespace;
+        }
+
+        public String getProxyHost() {
+            return proxyHost;
+        }
+
+        public void setProxyHost(String proxyHost) {
+            this.proxyHost = proxyHost;
+        }
+
+        public Integer getProxyPort() {
+            return proxyPort;
+        }
+
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
+        }
+
         public Protocol getProxyProtocol() {
             return proxyProtocol;
         }
 
         public void setProxyProtocol(Protocol proxyProtocol) {
             this.proxyProtocol = proxyProtocol;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
+        }
+
+        public Date getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(Date timestamp) {
+            this.timestamp = timestamp;
+        }
+
+        public String getUnit() {
+            return unit;
+        }
+
+        public void setUnit(String unit) {
+            this.unit = unit;
+        }
+
+        public Double getValue() {
+            return value;
+        }
+
+        public void setValue(Double value) {
+            this.value = value;
         }
     }
 }

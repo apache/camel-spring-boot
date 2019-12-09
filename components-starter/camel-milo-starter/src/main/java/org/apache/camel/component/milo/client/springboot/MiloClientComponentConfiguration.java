@@ -152,9 +152,10 @@ public class MiloClientComponentConfiguration
     public static class MiloClientConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.milo.client.MiloClientConfiguration.class;
         /**
-         * The maximum number of pending publish requests
+         * A set of allowed security policy URIs. Default is to accept all and
+         * use the highest.
          */
-        private Long maxPendingPublishRequests;
+        private Set allowedSecurityPolicies;
         /**
          * The application name
          */
@@ -163,18 +164,6 @@ public class MiloClientComponentConfiguration
          * The application URI
          */
         private String applicationUri = "http://camel.apache.org/EclipseMilo/Client";
-        /**
-         * The product URI
-         */
-        private String productUri = "http://camel.apache.org/EclipseMilo";
-        /**
-         * An alternative discovery URI
-         */
-        private String discoveryEndpointUri;
-        /**
-         * Session timeout in milliseconds
-         */
-        private Long sessionTimeout;
         /**
          * Channel lifetime in milliseconds
          */
@@ -185,27 +174,50 @@ public class MiloClientComponentConfiguration
          */
         private String clientId;
         /**
-         * The key password
+         * A suffix for endpoint URI when discovering
          */
-        private String keyPassword;
+        private String discoveryEndpointSuffix;
+        /**
+         * An alternative discovery URI
+         */
+        private String discoveryEndpointUri;
         /**
          * The name of the key in the keystore file
          */
         private String keyAlias;
         /**
-         * A set of allowed security policy URIs. Default is to accept all and
-         * use the highest.
+         * The key password
          */
-        private Set allowedSecurityPolicies;
+        private String keyPassword;
+        /**
+         * The keystore password
+         */
+        private String keyStorePassword;
         /**
          * The key store type
          */
         private String keyStoreType;
         /**
+         * The URL where the key should be loaded from
+         */
+        private String keyStoreUrl;
+        /**
+         * The maximum number of pending publish requests
+         */
+        private Long maxPendingPublishRequests;
+        /**
+         * The maximum number of bytes a response message may have
+         */
+        private Long maxResponseMessageSize;
+        /**
          * Override the server reported endpoint host with the host from the
          * endpoint URI.
          */
         private Boolean overrideHost = false;
+        /**
+         * The product URI
+         */
+        private String productUri = "http://camel.apache.org/EclipseMilo";
         /**
          * Request timeout in milliseconds
          */
@@ -215,28 +227,16 @@ public class MiloClientComponentConfiguration
          */
         private String sessionName;
         /**
-         * The maximum number of bytes a response message may have
+         * Session timeout in milliseconds
          */
-        private Long maxResponseMessageSize;
-        /**
-         * A suffix for endpoint URI when discovering
-         */
-        private String discoveryEndpointSuffix;
-        /**
-         * The URL where the key should be loaded from
-         */
-        private String keyStoreUrl;
-        /**
-         * The keystore password
-         */
-        private String keyStorePassword;
+        private Long sessionTimeout;
 
-        public Long getMaxPendingPublishRequests() {
-            return maxPendingPublishRequests;
+        public Set getAllowedSecurityPolicies() {
+            return allowedSecurityPolicies;
         }
 
-        public void setMaxPendingPublishRequests(Long maxPendingPublishRequests) {
-            this.maxPendingPublishRequests = maxPendingPublishRequests;
+        public void setAllowedSecurityPolicies(Set allowedSecurityPolicies) {
+            this.allowedSecurityPolicies = allowedSecurityPolicies;
         }
 
         public String getApplicationName() {
@@ -255,30 +255,6 @@ public class MiloClientComponentConfiguration
             this.applicationUri = applicationUri;
         }
 
-        public String getProductUri() {
-            return productUri;
-        }
-
-        public void setProductUri(String productUri) {
-            this.productUri = productUri;
-        }
-
-        public String getDiscoveryEndpointUri() {
-            return discoveryEndpointUri;
-        }
-
-        public void setDiscoveryEndpointUri(String discoveryEndpointUri) {
-            this.discoveryEndpointUri = discoveryEndpointUri;
-        }
-
-        public Long getSessionTimeout() {
-            return sessionTimeout;
-        }
-
-        public void setSessionTimeout(Long sessionTimeout) {
-            this.sessionTimeout = sessionTimeout;
-        }
-
         public Long getChannelLifetime() {
             return channelLifetime;
         }
@@ -295,12 +271,20 @@ public class MiloClientComponentConfiguration
             this.clientId = clientId;
         }
 
-        public String getKeyPassword() {
-            return keyPassword;
+        public String getDiscoveryEndpointSuffix() {
+            return discoveryEndpointSuffix;
         }
 
-        public void setKeyPassword(String keyPassword) {
-            this.keyPassword = keyPassword;
+        public void setDiscoveryEndpointSuffix(String discoveryEndpointSuffix) {
+            this.discoveryEndpointSuffix = discoveryEndpointSuffix;
+        }
+
+        public String getDiscoveryEndpointUri() {
+            return discoveryEndpointUri;
+        }
+
+        public void setDiscoveryEndpointUri(String discoveryEndpointUri) {
+            this.discoveryEndpointUri = discoveryEndpointUri;
         }
 
         public String getKeyAlias() {
@@ -311,12 +295,20 @@ public class MiloClientComponentConfiguration
             this.keyAlias = keyAlias;
         }
 
-        public Set getAllowedSecurityPolicies() {
-            return allowedSecurityPolicies;
+        public String getKeyPassword() {
+            return keyPassword;
         }
 
-        public void setAllowedSecurityPolicies(Set allowedSecurityPolicies) {
-            this.allowedSecurityPolicies = allowedSecurityPolicies;
+        public void setKeyPassword(String keyPassword) {
+            this.keyPassword = keyPassword;
+        }
+
+        public String getKeyStorePassword() {
+            return keyStorePassword;
+        }
+
+        public void setKeyStorePassword(String keyStorePassword) {
+            this.keyStorePassword = keyStorePassword;
         }
 
         public String getKeyStoreType() {
@@ -327,12 +319,44 @@ public class MiloClientComponentConfiguration
             this.keyStoreType = keyStoreType;
         }
 
+        public String getKeyStoreUrl() {
+            return keyStoreUrl;
+        }
+
+        public void setKeyStoreUrl(String keyStoreUrl) {
+            this.keyStoreUrl = keyStoreUrl;
+        }
+
+        public Long getMaxPendingPublishRequests() {
+            return maxPendingPublishRequests;
+        }
+
+        public void setMaxPendingPublishRequests(Long maxPendingPublishRequests) {
+            this.maxPendingPublishRequests = maxPendingPublishRequests;
+        }
+
+        public Long getMaxResponseMessageSize() {
+            return maxResponseMessageSize;
+        }
+
+        public void setMaxResponseMessageSize(Long maxResponseMessageSize) {
+            this.maxResponseMessageSize = maxResponseMessageSize;
+        }
+
         public Boolean getOverrideHost() {
             return overrideHost;
         }
 
         public void setOverrideHost(Boolean overrideHost) {
             this.overrideHost = overrideHost;
+        }
+
+        public String getProductUri() {
+            return productUri;
+        }
+
+        public void setProductUri(String productUri) {
+            this.productUri = productUri;
         }
 
         public Long getRequestTimeout() {
@@ -351,36 +375,12 @@ public class MiloClientComponentConfiguration
             this.sessionName = sessionName;
         }
 
-        public Long getMaxResponseMessageSize() {
-            return maxResponseMessageSize;
+        public Long getSessionTimeout() {
+            return sessionTimeout;
         }
 
-        public void setMaxResponseMessageSize(Long maxResponseMessageSize) {
-            this.maxResponseMessageSize = maxResponseMessageSize;
-        }
-
-        public String getDiscoveryEndpointSuffix() {
-            return discoveryEndpointSuffix;
-        }
-
-        public void setDiscoveryEndpointSuffix(String discoveryEndpointSuffix) {
-            this.discoveryEndpointSuffix = discoveryEndpointSuffix;
-        }
-
-        public String getKeyStoreUrl() {
-            return keyStoreUrl;
-        }
-
-        public void setKeyStoreUrl(String keyStoreUrl) {
-            this.keyStoreUrl = keyStoreUrl;
-        }
-
-        public String getKeyStorePassword() {
-            return keyStorePassword;
-        }
-
-        public void setKeyStorePassword(String keyStorePassword) {
-            this.keyStorePassword = keyStorePassword;
+        public void setSessionTimeout(Long sessionTimeout) {
+            this.sessionTimeout = sessionTimeout;
         }
     }
 }

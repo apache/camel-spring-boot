@@ -141,20 +141,13 @@ public class EC2ComponentConfiguration
     public static class EC2ConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.ec2.EC2Configuration.class;
         /**
-         * The region in which EC2 client needs to work. When using this
-         * parameter, the configuration will expect the capitalized name of the
-         * region (for example AP_EAST_1) You'll need to use the name
-         * Regions.EU_WEST_1.name()
+         * Amazon AWS Access Key
          */
-        private String region;
+        private String accessKey;
         /**
-         * To define a proxy port when instantiating the EC2 client
+         * To use a existing configured AmazonEC2Client as client
          */
-        private Integer proxyPort;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
+        private AmazonEC2 amazonEc2Client;
         /**
          * The operation to perform. It can be createAndRunInstances,
          * startInstances, stopInstances, terminateInstances, describeInstances,
@@ -163,52 +156,35 @@ public class EC2ComponentConfiguration
          */
         private EC2Operations operation;
         /**
-         * To use a existing configured AmazonEC2Client as client
-         */
-        private AmazonEC2 amazonEc2Client;
-        /**
          * To define a proxy host when instantiating the EC2 client
          */
         private String proxyHost;
         /**
-         * Amazon AWS Access Key
+         * To define a proxy port when instantiating the EC2 client
          */
-        private String accessKey;
+        private Integer proxyPort;
         /**
          * To define a proxy protocol when instantiating the EC2 client
          */
         private Protocol proxyProtocol = Protocol.HTTPS;
+        /**
+         * The region in which EC2 client needs to work. When using this
+         * parameter, the configuration will expect the capitalized name of the
+         * region (for example AP_EAST_1) You'll need to use the name
+         * Regions.EU_WEST_1.name()
+         */
+        private String region;
+        /**
+         * Amazon AWS Secret Key
+         */
+        private String secretKey;
 
-        public String getRegion() {
-            return region;
+        public String getAccessKey() {
+            return accessKey;
         }
 
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public EC2Operations getOperation() {
-            return operation;
-        }
-
-        public void setOperation(EC2Operations operation) {
-            this.operation = operation;
+        public void setAccessKey(String accessKey) {
+            this.accessKey = accessKey;
         }
 
         public AmazonEC2 getAmazonEc2Client() {
@@ -219,6 +195,14 @@ public class EC2ComponentConfiguration
             this.amazonEc2Client = amazonEc2Client;
         }
 
+        public EC2Operations getOperation() {
+            return operation;
+        }
+
+        public void setOperation(EC2Operations operation) {
+            this.operation = operation;
+        }
+
         public String getProxyHost() {
             return proxyHost;
         }
@@ -227,12 +211,12 @@ public class EC2ComponentConfiguration
             this.proxyHost = proxyHost;
         }
 
-        public String getAccessKey() {
-            return accessKey;
+        public Integer getProxyPort() {
+            return proxyPort;
         }
 
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
         }
 
         public Protocol getProxyProtocol() {
@@ -241,6 +225,22 @@ public class EC2ComponentConfiguration
 
         public void setProxyProtocol(Protocol proxyProtocol) {
             this.proxyProtocol = proxyProtocol;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
         }
     }
 }

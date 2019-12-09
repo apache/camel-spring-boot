@@ -1,0 +1,12 @@
+{
+ "other": {
+    "name": "http-common",
+    "kind": "other",
+    "title": "Http Common",
+    "description": "Camel HTTP common",
+    "deprecated": "false",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-http-common-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

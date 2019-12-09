@@ -254,41 +254,13 @@ public class ServiceNowComponentConfiguration
     public static class ServiceNowConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.servicenow.ServiceNowConfiguration.class;
         /**
-         * The ServiceNow release to target, default to Helsinki See
-         * https://docs.servicenow.com
+         * The ServiceNow REST API url
          */
-        private ServiceNowRelease release = ServiceNowRelease.HELSINKI;
+        private String apiUrl;
         /**
-         * Set this parameter to true to return only scorecards that have a
-         * target.
+         * The ServiceNow REST API version, default latest
          */
-        private Boolean target;
-        /**
-         * The default resource, can be overridden by header
-         * CamelServiceNowResource
-         */
-        private String resource;
-        /**
-         * ServiceNow user account name, MUST be provided
-         */
-        private String userName;
-        /**
-         * ServiceNow account password, MUST be provided
-         */
-        private String password;
-        /**
-         * The default table, can be overridden by header CamelServiceNowTable
-         */
-        private String table;
-        /**
-         * Set this parameter to true to return only scorecards for key
-         * indicators.
-         */
-        private Boolean key;
-        /**
-         * The time format used for Json serialization/deserialization
-         */
-        private String timeFormat = "HH:mm:ss";
+        private String apiVersion;
         /**
          * The date format used for Json serialization/deserialization
          */
@@ -298,21 +270,6 @@ public class ServiceNowComponentConfiguration
          */
         private String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
         /**
-         * To configure security using SSLContextParameters. See
-         * http://camel.apache.org/camel-configuration-utilities.html
-         */
-        private SSLContextParameters sslContextParameters;
-        /**
-         * The ServiceNow REST API version, default latest
-         */
-        private String apiVersion;
-        /**
-         * Specify the sort direction, ascending or descending. By default,
-         * queries sort records in descending order. Use sysparm_sortdir=asc to
-         * sort in ascending order.
-         */
-        private String sortDir;
-        /**
          * Set this parameter to true to return only scorecards where the
          * indicator Display field is selected. Set this parameter to all to
          * return scorecards with any Display field value. This parameter is
@@ -320,27 +277,72 @@ public class ServiceNowComponentConfiguration
          */
         private String display = "true";
         /**
-         * Defines both request and response models
+         * Return the display value (true), actual value (false), or both (all)
+         * for reference fields (default: false)
          */
-        private Map models;
+        private String displayValue = "false";
         /**
-         * Specify the value to use when sorting results. By default, queries
-         * sort records by value.
+         * True to exclude Table API links for reference fields (default: false)
          */
-        private String sortBy;
+        private Boolean excludeReferenceLink;
+        /**
+         * Set this parameter to true to return only scorecards that are
+         * favorites of the querying user.
+         */
+        private Boolean favorites;
+        /**
+         * To configure http-client
+         */
+        private HTTPClientPolicy httpClientPolicy;
+        /**
+         * Set this parameter to true to always return all available aggregates
+         * for an indicator, including when an aggregate has already been
+         * applied. If a value is not specified, this parameter defaults to
+         * false and returns no aggregates.
+         */
+        private Boolean includeAggregates;
+        /**
+         * Set this parameter to true to return all available aggregates for an
+         * indicator when no aggregate has been applied. If a value is not
+         * specified, this parameter defaults to false and returns no
+         * aggregates.
+         */
+        private Boolean includeAvailableAggregates;
+        /**
+         * Set this parameter to true to return all available breakdowns for an
+         * indicator. If a value is not specified, this parameter defaults to
+         * false and returns no breakdowns.
+         */
+        private Boolean includeAvailableBreakdowns;
+        /**
+         * Set this parameter to true to return all notes associated with the
+         * score. The note element contains the note text as well as the author
+         * and timestamp when the note was added.
+         */
+        private Boolean includeScoreNotes;
+        /**
+         * Set this parameter to true to return all scores for a scorecard. If a
+         * value is not specified, this parameter defaults to false and returns
+         * only the most recent score value.
+         */
+        private Boolean includeScores;
+        /**
+         * True to set raw value of input fields (default: false)
+         */
+        private Boolean inputDisplayValue;
+        /**
+         * Set this parameter to true to return only scorecards for key
+         * indicators.
+         */
+        private Boolean key;
         /**
          * Sets Jackson's ObjectMapper to use for request/reply
          */
         private ObjectMapper mapper;
         /**
-         * The ServiceNow REST API url
+         * Defines both request and response models
          */
-        private String apiUrl;
-        /**
-         * Enter the maximum number of scorecards each query can return. By
-         * default this value is 10, and the maximum is 100.
-         */
-        private Integer perPage = 10;
+        private Map models;
         /**
          * OAuth2 ClientID
          */
@@ -354,9 +356,74 @@ public class ServiceNowComponentConfiguration
          */
         private String oauthTokenUrl;
         /**
-         * True to exclude Table API links for reference fields (default: false)
+         * ServiceNow account password, MUST be provided
          */
-        private Boolean excludeReferenceLink;
+        private String password;
+        /**
+         * Enter the maximum number of scorecards each query can return. By
+         * default this value is 10, and the maximum is 100.
+         */
+        private Integer perPage = 10;
+        /**
+         * To configure proxy authentication
+         */
+        private ProxyAuthorizationPolicy proxyAuthorizationPolicy;
+        /**
+         * The proxy host name
+         */
+        private String proxyHost;
+        /**
+         * Password for proxy authentication
+         */
+        private String proxyPassword;
+        /**
+         * The proxy port number
+         */
+        private Integer proxyPort;
+        /**
+         * Username for proxy authentication
+         */
+        private String proxyUserName;
+        /**
+         * The ServiceNow release to target, default to Helsinki See
+         * https://docs.servicenow.com
+         */
+        private ServiceNowRelease release = ServiceNowRelease.HELSINKI;
+        /**
+         * Defines the request model
+         */
+        private Map requestModels;
+        /**
+         * The default resource, can be overridden by header
+         * CamelServiceNowResource
+         */
+        private String resource;
+        /**
+         * Defines the response model
+         */
+        private Map responseModels;
+        /**
+         * Set this parameter to true to retrieve the target record when using
+         * import set api. The import set result is then replaced by the target
+         * record
+         */
+        private Boolean retrieveTargetRecordOnImport = false;
+        /**
+         * Specify the value to use when sorting results. By default, queries
+         * sort records by value.
+         */
+        private String sortBy;
+        /**
+         * Specify the sort direction, ascending or descending. By default,
+         * queries sort records in descending order. Use sysparm_sortdir=asc to
+         * sort in ascending order.
+         */
+        private String sortDir;
+        /**
+         * To configure security using SSLContextParameters. See
+         * http://camel.apache.org/camel-configuration-utilities.html
+         */
+        private SSLContextParameters sslContextParameters;
         /**
          * True to suppress auto generation of system fields (default: false)
          */
@@ -368,156 +435,41 @@ public class ServiceNowComponentConfiguration
          */
         private Boolean suppressPaginationHeader;
         /**
-         * Set this parameter to true to return all scores for a scorecard. If a
-         * value is not specified, this parameter defaults to false and returns
-         * only the most recent score value.
+         * The default table, can be overridden by header CamelServiceNowTable
          */
-        private Boolean includeScores;
+        private String table;
         /**
-         * Set this parameter to true to always return all available aggregates
-         * for an indicator, including when an aggregate has already been
-         * applied. If a value is not specified, this parameter defaults to
-         * false and returns no aggregates.
+         * Set this parameter to true to return only scorecards that have a
+         * target.
          */
-        private Boolean includeAggregates;
+        private Boolean target;
         /**
-         * Set this parameter to true to return all available breakdowns for an
-         * indicator. If a value is not specified, this parameter defaults to
-         * false and returns no breakdowns.
+         * The time format used for Json serialization/deserialization
          */
-        private Boolean includeAvailableBreakdowns;
-        /**
-         * Set this parameter to true to return all available aggregates for an
-         * indicator when no aggregate has been applied. If a value is not
-         * specified, this parameter defaults to false and returns no
-         * aggregates.
-         */
-        private Boolean includeAvailableAggregates;
-        /**
-         * Set this parameter to true to return all notes associated with the
-         * score. The note element contains the note text as well as the author
-         * and timestamp when the note was added.
-         */
-        private Boolean includeScoreNotes;
-        /**
-         * Set this parameter to true to return only scorecards that are
-         * favorites of the querying user.
-         */
-        private Boolean favorites;
-        /**
-         * Set this parameter to true to retrieve the target record when using
-         * import set api. The import set result is then replaced by the target
-         * record
-         */
-        private Boolean retrieveTargetRecordOnImport = false;
-        /**
-         * Return the display value (true), actual value (false), or both (all)
-         * for reference fields (default: false)
-         */
-        private String displayValue = "false";
-        /**
-         * True to set raw value of input fields (default: false)
-         */
-        private Boolean inputDisplayValue;
+        private String timeFormat = "HH:mm:ss";
         /**
          * Gets only those categories whose parent is a catalog.
          */
         private Boolean topLevelOnly;
         /**
-         * To configure http-client
+         * ServiceNow user account name, MUST be provided
          */
-        private HTTPClientPolicy httpClientPolicy;
-        /**
-         * To configure proxy authentication
-         */
-        private ProxyAuthorizationPolicy proxyAuthorizationPolicy;
-        /**
-         * The proxy host name
-         */
-        private String proxyHost;
-        /**
-         * The proxy port number
-         */
-        private Integer proxyPort;
-        /**
-         * Username for proxy authentication
-         */
-        private String proxyUserName;
-        /**
-         * Password for proxy authentication
-         */
-        private String proxyPassword;
-        /**
-         * Defines the request model
-         */
-        private Map requestModels;
-        /**
-         * Defines the response model
-         */
-        private Map responseModels;
+        private String userName;
 
-        public ServiceNowRelease getRelease() {
-            return release;
+        public String getApiUrl() {
+            return apiUrl;
         }
 
-        public void setRelease(ServiceNowRelease release) {
-            this.release = release;
+        public void setApiUrl(String apiUrl) {
+            this.apiUrl = apiUrl;
         }
 
-        public Boolean getTarget() {
-            return target;
+        public String getApiVersion() {
+            return apiVersion;
         }
 
-        public void setTarget(Boolean target) {
-            this.target = target;
-        }
-
-        public String getResource() {
-            return resource;
-        }
-
-        public void setResource(String resource) {
-            this.resource = resource;
-        }
-
-        public String getUserName() {
-            return userName;
-        }
-
-        public void setUserName(String userName) {
-            this.userName = userName;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getTable() {
-            return table;
-        }
-
-        public void setTable(String table) {
-            this.table = table;
-        }
-
-        public Boolean getKey() {
-            return key;
-        }
-
-        public void setKey(Boolean key) {
-            this.key = key;
-        }
-
-        public String getTimeFormat() {
-            return timeFormat;
-        }
-
-        public void setTimeFormat(String timeFormat) {
-            this.timeFormat = timeFormat;
+        public void setApiVersion(String apiVersion) {
+            this.apiVersion = apiVersion;
         }
 
         public String getDateFormat() {
@@ -536,31 +488,6 @@ public class ServiceNowComponentConfiguration
             this.dateTimeFormat = dateTimeFormat;
         }
 
-        public SSLContextParameters getSslContextParameters() {
-            return sslContextParameters;
-        }
-
-        public void setSslContextParameters(
-                SSLContextParameters sslContextParameters) {
-            this.sslContextParameters = sslContextParameters;
-        }
-
-        public String getApiVersion() {
-            return apiVersion;
-        }
-
-        public void setApiVersion(String apiVersion) {
-            this.apiVersion = apiVersion;
-        }
-
-        public String getSortDir() {
-            return sortDir;
-        }
-
-        public void setSortDir(String sortDir) {
-            this.sortDir = sortDir;
-        }
-
         public String getDisplay() {
             return display;
         }
@@ -569,20 +496,94 @@ public class ServiceNowComponentConfiguration
             this.display = display;
         }
 
-        public Map getModels() {
-            return models;
+        public String getDisplayValue() {
+            return displayValue;
         }
 
-        public void setModels(Map models) {
-            this.models = models;
+        public void setDisplayValue(String displayValue) {
+            this.displayValue = displayValue;
         }
 
-        public String getSortBy() {
-            return sortBy;
+        public Boolean getExcludeReferenceLink() {
+            return excludeReferenceLink;
         }
 
-        public void setSortBy(String sortBy) {
-            this.sortBy = sortBy;
+        public void setExcludeReferenceLink(Boolean excludeReferenceLink) {
+            this.excludeReferenceLink = excludeReferenceLink;
+        }
+
+        public Boolean getFavorites() {
+            return favorites;
+        }
+
+        public void setFavorites(Boolean favorites) {
+            this.favorites = favorites;
+        }
+
+        public HTTPClientPolicy getHttpClientPolicy() {
+            return httpClientPolicy;
+        }
+
+        public void setHttpClientPolicy(HTTPClientPolicy httpClientPolicy) {
+            this.httpClientPolicy = httpClientPolicy;
+        }
+
+        public Boolean getIncludeAggregates() {
+            return includeAggregates;
+        }
+
+        public void setIncludeAggregates(Boolean includeAggregates) {
+            this.includeAggregates = includeAggregates;
+        }
+
+        public Boolean getIncludeAvailableAggregates() {
+            return includeAvailableAggregates;
+        }
+
+        public void setIncludeAvailableAggregates(
+                Boolean includeAvailableAggregates) {
+            this.includeAvailableAggregates = includeAvailableAggregates;
+        }
+
+        public Boolean getIncludeAvailableBreakdowns() {
+            return includeAvailableBreakdowns;
+        }
+
+        public void setIncludeAvailableBreakdowns(
+                Boolean includeAvailableBreakdowns) {
+            this.includeAvailableBreakdowns = includeAvailableBreakdowns;
+        }
+
+        public Boolean getIncludeScoreNotes() {
+            return includeScoreNotes;
+        }
+
+        public void setIncludeScoreNotes(Boolean includeScoreNotes) {
+            this.includeScoreNotes = includeScoreNotes;
+        }
+
+        public Boolean getIncludeScores() {
+            return includeScores;
+        }
+
+        public void setIncludeScores(Boolean includeScores) {
+            this.includeScores = includeScores;
+        }
+
+        public Boolean getInputDisplayValue() {
+            return inputDisplayValue;
+        }
+
+        public void setInputDisplayValue(Boolean inputDisplayValue) {
+            this.inputDisplayValue = inputDisplayValue;
+        }
+
+        public Boolean getKey() {
+            return key;
+        }
+
+        public void setKey(Boolean key) {
+            this.key = key;
         }
 
         public ObjectMapper getMapper() {
@@ -593,20 +594,12 @@ public class ServiceNowComponentConfiguration
             this.mapper = mapper;
         }
 
-        public String getApiUrl() {
-            return apiUrl;
+        public Map getModels() {
+            return models;
         }
 
-        public void setApiUrl(String apiUrl) {
-            this.apiUrl = apiUrl;
-        }
-
-        public Integer getPerPage() {
-            return perPage;
-        }
-
-        public void setPerPage(Integer perPage) {
-            this.perPage = perPage;
+        public void setModels(Map models) {
+            this.models = models;
         }
 
         public String getOauthClientId() {
@@ -633,119 +626,20 @@ public class ServiceNowComponentConfiguration
             this.oauthTokenUrl = oauthTokenUrl;
         }
 
-        public Boolean getExcludeReferenceLink() {
-            return excludeReferenceLink;
+        public String getPassword() {
+            return password;
         }
 
-        public void setExcludeReferenceLink(Boolean excludeReferenceLink) {
-            this.excludeReferenceLink = excludeReferenceLink;
+        public void setPassword(String password) {
+            this.password = password;
         }
 
-        public Boolean getSuppressAutoSysField() {
-            return suppressAutoSysField;
+        public Integer getPerPage() {
+            return perPage;
         }
 
-        public void setSuppressAutoSysField(Boolean suppressAutoSysField) {
-            this.suppressAutoSysField = suppressAutoSysField;
-        }
-
-        public Boolean getSuppressPaginationHeader() {
-            return suppressPaginationHeader;
-        }
-
-        public void setSuppressPaginationHeader(Boolean suppressPaginationHeader) {
-            this.suppressPaginationHeader = suppressPaginationHeader;
-        }
-
-        public Boolean getIncludeScores() {
-            return includeScores;
-        }
-
-        public void setIncludeScores(Boolean includeScores) {
-            this.includeScores = includeScores;
-        }
-
-        public Boolean getIncludeAggregates() {
-            return includeAggregates;
-        }
-
-        public void setIncludeAggregates(Boolean includeAggregates) {
-            this.includeAggregates = includeAggregates;
-        }
-
-        public Boolean getIncludeAvailableBreakdowns() {
-            return includeAvailableBreakdowns;
-        }
-
-        public void setIncludeAvailableBreakdowns(
-                Boolean includeAvailableBreakdowns) {
-            this.includeAvailableBreakdowns = includeAvailableBreakdowns;
-        }
-
-        public Boolean getIncludeAvailableAggregates() {
-            return includeAvailableAggregates;
-        }
-
-        public void setIncludeAvailableAggregates(
-                Boolean includeAvailableAggregates) {
-            this.includeAvailableAggregates = includeAvailableAggregates;
-        }
-
-        public Boolean getIncludeScoreNotes() {
-            return includeScoreNotes;
-        }
-
-        public void setIncludeScoreNotes(Boolean includeScoreNotes) {
-            this.includeScoreNotes = includeScoreNotes;
-        }
-
-        public Boolean getFavorites() {
-            return favorites;
-        }
-
-        public void setFavorites(Boolean favorites) {
-            this.favorites = favorites;
-        }
-
-        public Boolean getRetrieveTargetRecordOnImport() {
-            return retrieveTargetRecordOnImport;
-        }
-
-        public void setRetrieveTargetRecordOnImport(
-                Boolean retrieveTargetRecordOnImport) {
-            this.retrieveTargetRecordOnImport = retrieveTargetRecordOnImport;
-        }
-
-        public String getDisplayValue() {
-            return displayValue;
-        }
-
-        public void setDisplayValue(String displayValue) {
-            this.displayValue = displayValue;
-        }
-
-        public Boolean getInputDisplayValue() {
-            return inputDisplayValue;
-        }
-
-        public void setInputDisplayValue(Boolean inputDisplayValue) {
-            this.inputDisplayValue = inputDisplayValue;
-        }
-
-        public Boolean getTopLevelOnly() {
-            return topLevelOnly;
-        }
-
-        public void setTopLevelOnly(Boolean topLevelOnly) {
-            this.topLevelOnly = topLevelOnly;
-        }
-
-        public HTTPClientPolicy getHttpClientPolicy() {
-            return httpClientPolicy;
-        }
-
-        public void setHttpClientPolicy(HTTPClientPolicy httpClientPolicy) {
-            this.httpClientPolicy = httpClientPolicy;
+        public void setPerPage(Integer perPage) {
+            this.perPage = perPage;
         }
 
         public ProxyAuthorizationPolicy getProxyAuthorizationPolicy() {
@@ -765,6 +659,14 @@ public class ServiceNowComponentConfiguration
             this.proxyHost = proxyHost;
         }
 
+        public String getProxyPassword() {
+            return proxyPassword;
+        }
+
+        public void setProxyPassword(String proxyPassword) {
+            this.proxyPassword = proxyPassword;
+        }
+
         public Integer getProxyPort() {
             return proxyPort;
         }
@@ -781,12 +683,12 @@ public class ServiceNowComponentConfiguration
             this.proxyUserName = proxyUserName;
         }
 
-        public String getProxyPassword() {
-            return proxyPassword;
+        public ServiceNowRelease getRelease() {
+            return release;
         }
 
-        public void setProxyPassword(String proxyPassword) {
-            this.proxyPassword = proxyPassword;
+        public void setRelease(ServiceNowRelease release) {
+            this.release = release;
         }
 
         public Map getRequestModels() {
@@ -797,12 +699,110 @@ public class ServiceNowComponentConfiguration
             this.requestModels = requestModels;
         }
 
+        public String getResource() {
+            return resource;
+        }
+
+        public void setResource(String resource) {
+            this.resource = resource;
+        }
+
         public Map getResponseModels() {
             return responseModels;
         }
 
         public void setResponseModels(Map responseModels) {
             this.responseModels = responseModels;
+        }
+
+        public Boolean getRetrieveTargetRecordOnImport() {
+            return retrieveTargetRecordOnImport;
+        }
+
+        public void setRetrieveTargetRecordOnImport(
+                Boolean retrieveTargetRecordOnImport) {
+            this.retrieveTargetRecordOnImport = retrieveTargetRecordOnImport;
+        }
+
+        public String getSortBy() {
+            return sortBy;
+        }
+
+        public void setSortBy(String sortBy) {
+            this.sortBy = sortBy;
+        }
+
+        public String getSortDir() {
+            return sortDir;
+        }
+
+        public void setSortDir(String sortDir) {
+            this.sortDir = sortDir;
+        }
+
+        public SSLContextParameters getSslContextParameters() {
+            return sslContextParameters;
+        }
+
+        public void setSslContextParameters(
+                SSLContextParameters sslContextParameters) {
+            this.sslContextParameters = sslContextParameters;
+        }
+
+        public Boolean getSuppressAutoSysField() {
+            return suppressAutoSysField;
+        }
+
+        public void setSuppressAutoSysField(Boolean suppressAutoSysField) {
+            this.suppressAutoSysField = suppressAutoSysField;
+        }
+
+        public Boolean getSuppressPaginationHeader() {
+            return suppressPaginationHeader;
+        }
+
+        public void setSuppressPaginationHeader(Boolean suppressPaginationHeader) {
+            this.suppressPaginationHeader = suppressPaginationHeader;
+        }
+
+        public String getTable() {
+            return table;
+        }
+
+        public void setTable(String table) {
+            this.table = table;
+        }
+
+        public Boolean getTarget() {
+            return target;
+        }
+
+        public void setTarget(Boolean target) {
+            this.target = target;
+        }
+
+        public String getTimeFormat() {
+            return timeFormat;
+        }
+
+        public void setTimeFormat(String timeFormat) {
+            this.timeFormat = timeFormat;
+        }
+
+        public Boolean getTopLevelOnly() {
+            return topLevelOnly;
+        }
+
+        public void setTopLevelOnly(Boolean topLevelOnly) {
+            this.topLevelOnly = topLevelOnly;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
         }
     }
 }

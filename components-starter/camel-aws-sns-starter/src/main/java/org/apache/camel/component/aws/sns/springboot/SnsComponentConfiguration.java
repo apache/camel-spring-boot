@@ -142,6 +142,51 @@ public class SnsComponentConfiguration
     public static class SnsConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.sns.SnsConfiguration.class;
         /**
+         * Amazon AWS Access Key
+         */
+        private String accessKey;
+        /**
+         * To use the AmazonSNS as the client
+         */
+        private AmazonSNS amazonSNSClient;
+        /**
+         * An SQS Client to use as bridge between SNS and SQS
+         */
+        private AmazonSQS amazonSQSClient;
+        /**
+         * Setting the autocreation of the topic
+         */
+        private Boolean autoCreateTopic = true;
+        /**
+         * The ID of an AWS-managed customer master key (CMK) for Amazon SNS or
+         * a custom CMK.
+         */
+        private String kmsMasterKeyId;
+        /**
+         * The message structure to use such as json
+         */
+        private String messageStructure;
+        /**
+         * The policy for this queue
+         */
+        private String policy;
+        /**
+         * To define a proxy host when instantiating the SNS client
+         */
+        private String proxyHost;
+        /**
+         * To define a proxy port when instantiating the SNS client
+         */
+        private Integer proxyPort;
+        /**
+         * To define a proxy protocol when instantiating the SNS client
+         */
+        private Protocol proxyProtocol = Protocol.HTTPS;
+        /**
+         * The queueUrl to subscribe to
+         */
+        private String queueUrl;
+        /**
          * The region in which SNS client needs to work. When using this
          * parameter, the configuration will expect the capitalized name of the
          * region (for example AP_EAST_1) You'll need to use the name
@@ -149,141 +194,32 @@ public class SnsComponentConfiguration
          */
         private String region;
         /**
-         * The policy for this queue
-         */
-        private String policy;
-        /**
-         * To define a proxy port when instantiating the SNS client
-         */
-        private Integer proxyPort;
-        /**
          * Amazon AWS Secret Key
          */
         private String secretKey;
         /**
-         * To define a proxy host when instantiating the SNS client
+         * Define if Server Side Encryption is enabled or not on the topic
          */
-        private String proxyHost;
-        private String topicName;
-        /**
-         * An SQS Client to use as bridge between SNS and SQS
-         */
-        private AmazonSQS amazonSQSClient;
-        private String topicArn;
+        private Boolean serverSideEncryptionEnabled = false;
         /**
          * The subject which is used if the message header 'CamelAwsSnsSubject'
          * is not present.
          */
         private String subject;
         /**
-         * To use the AmazonSNS as the client
-         */
-        private AmazonSNS amazonSNSClient;
-        /**
-         * The queueUrl to subscribe to
-         */
-        private String queueUrl;
-        /**
          * Define if the subscription between SNS Topic and SQS must be done or
          * not
          */
         private Boolean subscribeSNStoSQS = false;
-        /**
-         * The ID of an AWS-managed customer master key (CMK) for Amazon SNS or
-         * a custom CMK.
-         */
-        private String kmsMasterKeyId;
-        /**
-         * Define if Server Side Encryption is enabled or not on the topic
-         */
-        private Boolean serverSideEncryptionEnabled = false;
-        /**
-         * Setting the autocreation of the topic
-         */
-        private Boolean autoCreateTopic = true;
-        /**
-         * The message structure to use such as json
-         */
-        private String messageStructure;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * To define a proxy protocol when instantiating the SNS client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
+        private String topicArn;
+        private String topicName;
 
-        public String getRegion() {
-            return region;
+        public String getAccessKey() {
+            return accessKey;
         }
 
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public String getPolicy() {
-            return policy;
-        }
-
-        public void setPolicy(String policy) {
-            this.policy = policy;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
-
-        public String getTopicName() {
-            return topicName;
-        }
-
-        public void setTopicName(String topicName) {
-            this.topicName = topicName;
-        }
-
-        public AmazonSQS getAmazonSQSClient() {
-            return amazonSQSClient;
-        }
-
-        public void setAmazonSQSClient(AmazonSQS amazonSQSClient) {
-            this.amazonSQSClient = amazonSQSClient;
-        }
-
-        public String getTopicArn() {
-            return topicArn;
-        }
-
-        public void setTopicArn(String topicArn) {
-            this.topicArn = topicArn;
-        }
-
-        public String getSubject() {
-            return subject;
-        }
-
-        public void setSubject(String subject) {
-            this.subject = subject;
+        public void setAccessKey(String accessKey) {
+            this.accessKey = accessKey;
         }
 
         public AmazonSNS getAmazonSNSClient() {
@@ -294,20 +230,20 @@ public class SnsComponentConfiguration
             this.amazonSNSClient = amazonSNSClient;
         }
 
-        public String getQueueUrl() {
-            return queueUrl;
+        public AmazonSQS getAmazonSQSClient() {
+            return amazonSQSClient;
         }
 
-        public void setQueueUrl(String queueUrl) {
-            this.queueUrl = queueUrl;
+        public void setAmazonSQSClient(AmazonSQS amazonSQSClient) {
+            this.amazonSQSClient = amazonSQSClient;
         }
 
-        public Boolean getSubscribeSNStoSQS() {
-            return subscribeSNStoSQS;
+        public Boolean getAutoCreateTopic() {
+            return autoCreateTopic;
         }
 
-        public void setSubscribeSNStoSQS(Boolean subscribeSNStoSQS) {
-            this.subscribeSNStoSQS = subscribeSNStoSQS;
+        public void setAutoCreateTopic(Boolean autoCreateTopic) {
+            this.autoCreateTopic = autoCreateTopic;
         }
 
         public String getKmsMasterKeyId() {
@@ -316,6 +252,70 @@ public class SnsComponentConfiguration
 
         public void setKmsMasterKeyId(String kmsMasterKeyId) {
             this.kmsMasterKeyId = kmsMasterKeyId;
+        }
+
+        public String getMessageStructure() {
+            return messageStructure;
+        }
+
+        public void setMessageStructure(String messageStructure) {
+            this.messageStructure = messageStructure;
+        }
+
+        public String getPolicy() {
+            return policy;
+        }
+
+        public void setPolicy(String policy) {
+            this.policy = policy;
+        }
+
+        public String getProxyHost() {
+            return proxyHost;
+        }
+
+        public void setProxyHost(String proxyHost) {
+            this.proxyHost = proxyHost;
+        }
+
+        public Integer getProxyPort() {
+            return proxyPort;
+        }
+
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
+        }
+
+        public Protocol getProxyProtocol() {
+            return proxyProtocol;
+        }
+
+        public void setProxyProtocol(Protocol proxyProtocol) {
+            this.proxyProtocol = proxyProtocol;
+        }
+
+        public String getQueueUrl() {
+            return queueUrl;
+        }
+
+        public void setQueueUrl(String queueUrl) {
+            this.queueUrl = queueUrl;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
         }
 
         public Boolean getServerSideEncryptionEnabled() {
@@ -327,36 +327,36 @@ public class SnsComponentConfiguration
             this.serverSideEncryptionEnabled = serverSideEncryptionEnabled;
         }
 
-        public Boolean getAutoCreateTopic() {
-            return autoCreateTopic;
+        public String getSubject() {
+            return subject;
         }
 
-        public void setAutoCreateTopic(Boolean autoCreateTopic) {
-            this.autoCreateTopic = autoCreateTopic;
+        public void setSubject(String subject) {
+            this.subject = subject;
         }
 
-        public String getMessageStructure() {
-            return messageStructure;
+        public Boolean getSubscribeSNStoSQS() {
+            return subscribeSNStoSQS;
         }
 
-        public void setMessageStructure(String messageStructure) {
-            this.messageStructure = messageStructure;
+        public void setSubscribeSNStoSQS(Boolean subscribeSNStoSQS) {
+            this.subscribeSNStoSQS = subscribeSNStoSQS;
         }
 
-        public String getAccessKey() {
-            return accessKey;
+        public String getTopicArn() {
+            return topicArn;
         }
 
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
+        public void setTopicArn(String topicArn) {
+            this.topicArn = topicArn;
         }
 
-        public Protocol getProxyProtocol() {
-            return proxyProtocol;
+        public String getTopicName() {
+            return topicName;
         }
 
-        public void setProxyProtocol(Protocol proxyProtocol) {
-            this.proxyProtocol = proxyProtocol;
+        public void setTopicName(String topicName) {
+            this.topicName = topicName;
         }
     }
 }

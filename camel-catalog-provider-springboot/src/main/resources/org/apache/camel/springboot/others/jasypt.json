@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "jasypt",
+    "kind": "other",
+    "title": "Jasypt",
+    "description": "Security using Jasypt",
+    "deprecated": "false",
+    "firstVersion": "2.5.0",
+    "label": "security",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-jasypt-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

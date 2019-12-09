@@ -108,6 +108,18 @@ public class WebhookComponentConfiguration
          * The delegate uri. Must belong to a component that supports webhooks.
          */
         private String endpointUri;
+        private RestConfiguration restConfiguration;
+        /**
+         * Automatically register the webhook at startup and unregister it on
+         * shutdown.
+         */
+        private Boolean webhookAutoRegister = true;
+        /**
+         * The first (base) path element where the webhook will be exposed. It's
+         * a good practice to set it to a random string, so that it cannot be
+         * guessed by unauthorized parties.
+         */
+        private String webhookBasePath;
         /**
          * The Camel Rest component to use for the REST transport, such as
          * netty-http.
@@ -118,22 +130,10 @@ public class WebhookComponentConfiguration
          */
         private String webhookExternalUrl;
         /**
-         * The first (base) path element where the webhook will be exposed. It's
-         * a good practice to set it to a random string, so that it cannot be
-         * guessed by unauthorized parties.
-         */
-        private String webhookBasePath;
-        /**
          * The path where the webhook endpoint will be exposed (relative to
          * basePath, if any)
          */
         private String webhookPath;
-        /**
-         * Automatically register the webhook at startup and unregister it on
-         * shutdown.
-         */
-        private Boolean webhookAutoRegister = true;
-        private RestConfiguration restConfiguration;
 
         public String getEndpointUri() {
             return endpointUri;
@@ -141,6 +141,30 @@ public class WebhookComponentConfiguration
 
         public void setEndpointUri(String endpointUri) {
             this.endpointUri = endpointUri;
+        }
+
+        public RestConfiguration getRestConfiguration() {
+            return restConfiguration;
+        }
+
+        public void setRestConfiguration(RestConfiguration restConfiguration) {
+            this.restConfiguration = restConfiguration;
+        }
+
+        public Boolean getWebhookAutoRegister() {
+            return webhookAutoRegister;
+        }
+
+        public void setWebhookAutoRegister(Boolean webhookAutoRegister) {
+            this.webhookAutoRegister = webhookAutoRegister;
+        }
+
+        public String getWebhookBasePath() {
+            return webhookBasePath;
+        }
+
+        public void setWebhookBasePath(String webhookBasePath) {
+            this.webhookBasePath = webhookBasePath;
         }
 
         public String getWebhookComponentName() {
@@ -159,36 +183,12 @@ public class WebhookComponentConfiguration
             this.webhookExternalUrl = webhookExternalUrl;
         }
 
-        public String getWebhookBasePath() {
-            return webhookBasePath;
-        }
-
-        public void setWebhookBasePath(String webhookBasePath) {
-            this.webhookBasePath = webhookBasePath;
-        }
-
         public String getWebhookPath() {
             return webhookPath;
         }
 
         public void setWebhookPath(String webhookPath) {
             this.webhookPath = webhookPath;
-        }
-
-        public Boolean getWebhookAutoRegister() {
-            return webhookAutoRegister;
-        }
-
-        public void setWebhookAutoRegister(Boolean webhookAutoRegister) {
-            this.webhookAutoRegister = webhookAutoRegister;
-        }
-
-        public RestConfiguration getRestConfiguration() {
-            return restConfiguration;
-        }
-
-        public void setRestConfiguration(RestConfiguration restConfiguration) {
-            this.restConfiguration = restConfiguration;
         }
     }
 }

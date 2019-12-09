@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "spring-cloud",
+    "kind": "other",
+    "title": "Spring Cloud",
+    "description": "Camel Cloud integration with Spring Cloud",
+    "deprecated": "false",
+    "firstVersion": "2.19.0",
+    "label": "spring,microservice",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-spring-cloud-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

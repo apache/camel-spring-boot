@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "hystrix",
+    "kind": "other",
+    "title": "Hystrix",
+    "description": "Circuit Breaker EIP using Netflix Hystrix",
+    "deprecated": "false",
+    "firstVersion": "2.18.0",
+    "label": "eip,microservice",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-hystrix-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

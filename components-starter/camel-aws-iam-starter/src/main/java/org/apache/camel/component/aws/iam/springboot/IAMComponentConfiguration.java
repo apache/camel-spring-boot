@@ -141,6 +141,30 @@ public class IAMComponentConfiguration
     public static class IAMConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.iam.IAMConfiguration.class;
         /**
+         * Amazon AWS Access Key
+         */
+        private String accessKey;
+        /**
+         * To use a existing configured AWS IAM as client
+         */
+        private AmazonIdentityManagement iamClient;
+        /**
+         * The operation to perform
+         */
+        private IAMOperations operation;
+        /**
+         * To define a proxy host when instantiating the IAM client
+         */
+        private String proxyHost;
+        /**
+         * To define a proxy port when instantiating the IAM client
+         */
+        private Integer proxyPort;
+        /**
+         * To define a proxy protocol when instantiating the IAM client
+         */
+        private Protocol proxyProtocol = Protocol.HTTPS;
+        /**
          * The region in which IAM client needs to work. When using this
          * parameter, the configuration will expect the capitalized name of the
          * region (for example AP_EAST_1) You'll need to use the name
@@ -148,64 +172,16 @@ public class IAMComponentConfiguration
          */
         private String region;
         /**
-         * To define a proxy port when instantiating the IAM client
-         */
-        private Integer proxyPort;
-        /**
          * Amazon AWS Secret Key
          */
         private String secretKey;
-        /**
-         * The operation to perform
-         */
-        private IAMOperations operation;
-        /**
-         * To use a existing configured AWS IAM as client
-         */
-        private AmazonIdentityManagement iamClient;
-        /**
-         * To define a proxy host when instantiating the IAM client
-         */
-        private String proxyHost;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * To define a proxy protocol when instantiating the IAM client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
 
-        public String getRegion() {
-            return region;
+        public String getAccessKey() {
+            return accessKey;
         }
 
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public IAMOperations getOperation() {
-            return operation;
-        }
-
-        public void setOperation(IAMOperations operation) {
-            this.operation = operation;
+        public void setAccessKey(String accessKey) {
+            this.accessKey = accessKey;
         }
 
         public AmazonIdentityManagement getIamClient() {
@@ -216,6 +192,14 @@ public class IAMComponentConfiguration
             this.iamClient = iamClient;
         }
 
+        public IAMOperations getOperation() {
+            return operation;
+        }
+
+        public void setOperation(IAMOperations operation) {
+            this.operation = operation;
+        }
+
         public String getProxyHost() {
             return proxyHost;
         }
@@ -224,12 +208,12 @@ public class IAMComponentConfiguration
             this.proxyHost = proxyHost;
         }
 
-        public String getAccessKey() {
-            return accessKey;
+        public Integer getProxyPort() {
+            return proxyPort;
         }
 
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
         }
 
         public Protocol getProxyProtocol() {
@@ -238,6 +222,22 @@ public class IAMComponentConfiguration
 
         public void setProxyProtocol(Protocol proxyProtocol) {
             this.proxyProtocol = proxyProtocol;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
         }
     }
 }

@@ -143,32 +143,32 @@ public class AtomixMessagingComponentConfiguration
     public static class AtomixMessagingConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.atomix.client.messaging.AtomixMessagingConfiguration.class;
         /**
-         * The Atomix Group member name
+         * The broadcast type.
          */
-        private String memberName;
+        private BroadcastType broadcastType = BroadcastType.ALL;
         /**
          * The messaging channel name
          */
         private String channelName;
         /**
-         * The broadcast type.
-         */
-        private BroadcastType broadcastType = BroadcastType.ALL;
-        /**
          * The default action.
          */
         private Action defaultAction = Action.DIRECT;
+        /**
+         * The Atomix Group member name
+         */
+        private String memberName;
         /**
          * The header that wil carry the result.
          */
         private String resultHeader;
 
-        public String getMemberName() {
-            return memberName;
+        public BroadcastType getBroadcastType() {
+            return broadcastType;
         }
 
-        public void setMemberName(String memberName) {
-            this.memberName = memberName;
+        public void setBroadcastType(BroadcastType broadcastType) {
+            this.broadcastType = broadcastType;
         }
 
         public String getChannelName() {
@@ -179,20 +179,20 @@ public class AtomixMessagingComponentConfiguration
             this.channelName = channelName;
         }
 
-        public BroadcastType getBroadcastType() {
-            return broadcastType;
-        }
-
-        public void setBroadcastType(BroadcastType broadcastType) {
-            this.broadcastType = broadcastType;
-        }
-
         public Action getDefaultAction() {
             return defaultAction;
         }
 
         public void setDefaultAction(Action defaultAction) {
             this.defaultAction = defaultAction;
+        }
+
+        public String getMemberName() {
+            return memberName;
+        }
+
+        public void setMemberName(String memberName) {
+            this.memberName = memberName;
         }
 
         public String getResultHeader() {

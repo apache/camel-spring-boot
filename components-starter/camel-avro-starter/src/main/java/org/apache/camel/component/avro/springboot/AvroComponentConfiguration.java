@@ -108,33 +108,25 @@ public class AvroComponentConfiguration
          */
         private String host;
         /**
-         * Avro protocol to use
+         * The name of the message to send.
          */
-        private Protocol protocol;
+        private String messageName;
         /**
          * Port number to use
          */
         private Integer port;
         /**
-         * Transport to use, can be either http or netty
+         * Avro protocol to use
          */
-        private AvroTransport transport;
-        /**
-         * Avro protocol location
-         */
-        private String protocolLocation;
+        private Protocol protocol;
         /**
          * Avro protocol to use defined by the FQN class name
          */
         private String protocolClassName;
         /**
-         * The name of the message to send.
+         * Avro protocol location
          */
-        private String messageName;
-        /**
-         * Authority to use (username and password)
-         */
-        private String uriAuthority;
+        private String protocolLocation;
         /**
          * If protocol object provided is reflection protocol. Should be used
          * only with protocol parameter because for protocolClassName protocol
@@ -146,6 +138,14 @@ public class AvroComponentConfiguration
          * protocol specifies more then 1 parameter for the message
          */
         private Boolean singleParameter = false;
+        /**
+         * Transport to use, can be either http or netty
+         */
+        private AvroTransport transport;
+        /**
+         * Authority to use (username and password)
+         */
+        private String uriAuthority;
 
         public String getHost() {
             return host;
@@ -153,46 +153,6 @@ public class AvroComponentConfiguration
 
         public void setHost(String host) {
             this.host = host;
-        }
-
-        public Protocol getProtocol() {
-            return protocol;
-        }
-
-        public void setProtocol(Protocol protocol) {
-            this.protocol = protocol;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public AvroTransport getTransport() {
-            return transport;
-        }
-
-        public void setTransport(AvroTransport transport) {
-            this.transport = transport;
-        }
-
-        public String getProtocolLocation() {
-            return protocolLocation;
-        }
-
-        public void setProtocolLocation(String protocolLocation) {
-            this.protocolLocation = protocolLocation;
-        }
-
-        public String getProtocolClassName() {
-            return protocolClassName;
-        }
-
-        public void setProtocolClassName(String protocolClassName) {
-            this.protocolClassName = protocolClassName;
         }
 
         public String getMessageName() {
@@ -203,12 +163,36 @@ public class AvroComponentConfiguration
             this.messageName = messageName;
         }
 
-        public String getUriAuthority() {
-            return uriAuthority;
+        public Integer getPort() {
+            return port;
         }
 
-        public void setUriAuthority(String uriAuthority) {
-            this.uriAuthority = uriAuthority;
+        public void setPort(Integer port) {
+            this.port = port;
+        }
+
+        public Protocol getProtocol() {
+            return protocol;
+        }
+
+        public void setProtocol(Protocol protocol) {
+            this.protocol = protocol;
+        }
+
+        public String getProtocolClassName() {
+            return protocolClassName;
+        }
+
+        public void setProtocolClassName(String protocolClassName) {
+            this.protocolClassName = protocolClassName;
+        }
+
+        public String getProtocolLocation() {
+            return protocolLocation;
+        }
+
+        public void setProtocolLocation(String protocolLocation) {
+            this.protocolLocation = protocolLocation;
         }
 
         public Boolean getReflectionProtocol() {
@@ -225,6 +209,22 @@ public class AvroComponentConfiguration
 
         public void setSingleParameter(Boolean singleParameter) {
             this.singleParameter = singleParameter;
+        }
+
+        public AvroTransport getTransport() {
+            return transport;
+        }
+
+        public void setTransport(AvroTransport transport) {
+            this.transport = transport;
+        }
+
+        public String getUriAuthority() {
+            return uriAuthority;
+        }
+
+        public void setUriAuthority(String uriAuthority) {
+            this.uriAuthority = uriAuthority;
         }
     }
 }

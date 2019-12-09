@@ -514,20 +514,6 @@ public class SalesforceComponentConfiguration
 
     public static class SalesforceLoginConfigNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.salesforce.SalesforceLoginConfig.class;
-        private AuthenticationType type;
-        /**
-         * Username used in OAuth flow to gain access to access token. It's easy
-         * to get started with password OAuth flow, but in general one should
-         * avoid it as it is deemed less secure than other flows.
-         */
-        private String userName;
-        /**
-         * Password used in OAuth flow to gain access to access token. It's easy
-         * to get started with password OAuth flow, but in general one should
-         * avoid it as it is deemed less secure than other flows. Make sure that
-         * you append security token to the end of the password if using one.
-         */
-        private String password;
         /**
          * OAuth Consumer Key of the connected app configured in the Salesforce
          * instance setup. Typically a connected app needs to be configured but
@@ -535,10 +521,15 @@ public class SalesforceComponentConfiguration
          */
         private String clientId;
         /**
-         * URL of the Salesforce instance used for authentication, by default
-         * set to https://login.salesforce.com
+         * OAuth Consumer Secret of the connected app configured in the
+         * Salesforce instance setup.
          */
-        private String loginUrl = "https://login.salesforce.com";
+        private String clientSecret;
+        /**
+         * URL of the Salesforce instance used after authentication, by default
+         * received from Salesforce on successful authentication
+         */
+        private String instanceUrl;
         /**
          * KeyStore parameters to use in OAuth JWT flow. The KeyStore should
          * contain only one entry with private key and certificate. Salesforce
@@ -548,17 +539,24 @@ public class SalesforceComponentConfiguration
          */
         private KeyStoreParameters keystore;
         /**
-         * OAuth Consumer Secret of the connected app configured in the
-         * Salesforce instance setup.
-         */
-        private String clientSecret;
-        /**
          * If set to true prevents the component from authenticating to
          * Salesforce with the start of the component. You would generally set
          * this to the (default) false and authenticate early and be immediately
          * aware of any authentication issues.
          */
         private Boolean lazyLogin = false;
+        /**
+         * URL of the Salesforce instance used for authentication, by default
+         * set to https://login.salesforce.com
+         */
+        private String loginUrl = "https://login.salesforce.com";
+        /**
+         * Password used in OAuth flow to gain access to access token. It's easy
+         * to get started with password OAuth flow, but in general one should
+         * avoid it as it is deemed less secure than other flows. Make sure that
+         * you append security token to the end of the password if using one.
+         */
+        private String password;
         /**
          * Refresh token already obtained in the refresh token OAuth flow. One
          * needs to setup a web application and configure a callback URL to
@@ -570,11 +568,77 @@ public class SalesforceComponentConfiguration
          * application at localhost.
          */
         private String refreshToken;
+        private AuthenticationType type;
         /**
-         * URL of the Salesforce instance used after authentication, by default
-         * received from Salesforce on successful authentication
+         * Username used in OAuth flow to gain access to access token. It's easy
+         * to get started with password OAuth flow, but in general one should
+         * avoid it as it is deemed less secure than other flows.
          */
-        private String instanceUrl;
+        private String userName;
+
+        public String getClientId() {
+            return clientId;
+        }
+
+        public void setClientId(String clientId) {
+            this.clientId = clientId;
+        }
+
+        public String getClientSecret() {
+            return clientSecret;
+        }
+
+        public void setClientSecret(String clientSecret) {
+            this.clientSecret = clientSecret;
+        }
+
+        public String getInstanceUrl() {
+            return instanceUrl;
+        }
+
+        public void setInstanceUrl(String instanceUrl) {
+            this.instanceUrl = instanceUrl;
+        }
+
+        public KeyStoreParameters getKeystore() {
+            return keystore;
+        }
+
+        public void setKeystore(KeyStoreParameters keystore) {
+            this.keystore = keystore;
+        }
+
+        public Boolean getLazyLogin() {
+            return lazyLogin;
+        }
+
+        public void setLazyLogin(Boolean lazyLogin) {
+            this.lazyLogin = lazyLogin;
+        }
+
+        public String getLoginUrl() {
+            return loginUrl;
+        }
+
+        public void setLoginUrl(String loginUrl) {
+            this.loginUrl = loginUrl;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getRefreshToken() {
+            return refreshToken;
+        }
+
+        public void setRefreshToken(String refreshToken) {
+            this.refreshToken = refreshToken;
+        }
 
         public AuthenticationType getType() {
             return type;
@@ -591,100 +655,102 @@ public class SalesforceComponentConfiguration
         public void setUserName(String userName) {
             this.userName = userName;
         }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getClientId() {
-            return clientId;
-        }
-
-        public void setClientId(String clientId) {
-            this.clientId = clientId;
-        }
-
-        public String getLoginUrl() {
-            return loginUrl;
-        }
-
-        public void setLoginUrl(String loginUrl) {
-            this.loginUrl = loginUrl;
-        }
-
-        public KeyStoreParameters getKeystore() {
-            return keystore;
-        }
-
-        public void setKeystore(KeyStoreParameters keystore) {
-            this.keystore = keystore;
-        }
-
-        public String getClientSecret() {
-            return clientSecret;
-        }
-
-        public void setClientSecret(String clientSecret) {
-            this.clientSecret = clientSecret;
-        }
-
-        public Boolean getLazyLogin() {
-            return lazyLogin;
-        }
-
-        public void setLazyLogin(Boolean lazyLogin) {
-            this.lazyLogin = lazyLogin;
-        }
-
-        public String getRefreshToken() {
-            return refreshToken;
-        }
-
-        public void setRefreshToken(String refreshToken) {
-            this.refreshToken = refreshToken;
-        }
-
-        public String getInstanceUrl() {
-            return instanceUrl;
-        }
-
-        public void setInstanceUrl(String instanceUrl) {
-            this.instanceUrl = instanceUrl;
-        }
     }
 
     public static class SalesforceEndpointConfigNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.salesforce.SalesforceEndpointConfig.class;
         /**
+         * APEX method name
+         */
+        private String apexMethod;
+        /**
+         * Query params for APEX method
+         */
+        private Map apexQueryParams;
+        /**
+         * APEX method URL
+         */
+        private String apexUrl;
+        /**
+         * Salesforce API version, defaults to
+         * SalesforceEndpointConfig.DEFAULT_VERSION
+         */
+        private String apiVersion;
+        private ApprovalRequest approval;
+        private Action approvalActionType;
+        private String approvalComments;
+        private String approvalContextActorId;
+        private String approvalContextId;
+        private List approvalNextApproverIds;
+        private String approvalProcessDefinitionNameOrId;
+        private Boolean approvalSkipEntryCriteria;
+        /**
+         * Backoff interval increment for Streaming connection restart attempts
+         * for failures beyond CometD auto-reconnect.
+         */
+        private Long backoffIncrement;
+        /**
+         * Bulk API Batch ID
+         */
+        private String batchId;
+        /**
          * Bulk API content type, one of XML, CSV, ZIP_XML, ZIP_CSV
          */
         private ContentType contentType;
+        /**
+         * Default replayId setting if no value is found in initialReplayIdMap
+         */
+        private Long defaultReplayId;
         /**
          * Payload format to use for Salesforce API calls, either JSON or XML,
          * defaults to JSON
          */
         private PayloadFormat format;
         /**
+         * Custom Jetty Http Client to use to connect to Salesforce.
+         */
+        private SalesforceHttpClient httpClient;
+        /**
+         * Include details in Salesforce1 Analytics report, defaults to false.
+         */
+        private Boolean includeDetails;
+        /**
+         * Replay IDs to start from per channel name.
+         */
+        private Map initialReplayIdMap;
+        /**
+         * Salesforce1 Analytics report execution instance ID
+         */
+        private String instanceId;
+        /**
+         * Bulk API Job ID
+         */
+        private String jobId;
+        /**
          * Limit on number of returned records. Applicable to some of the API,
          * check the Salesforce documentation.
          */
         private Integer limit;
         /**
-         * APEX method URL
+         * Maximum backoff interval for Streaming connection restart attempts
+         * for failures beyond CometD auto-reconnect.
          */
-        private String apexUrl;
+        private Long maxBackoff;
         /**
-         * Bulk API Batch ID
+         * Sets the behaviour of 404 not found status received from Salesforce
+         * API. Should the body be set to NULL NotFoundBehaviour#NULL or should
+         * a exception be signaled on the exchange NotFoundBehaviour#EXCEPTION -
+         * the default.
          */
-        private String batchId;
+        private NotFoundBehaviour notFoundBehaviour;
         /**
-         * Bulk API Job ID
+         * Notify for fields, options are ALL, REFERENCED, SELECT, WHERE
          */
-        private String jobId;
+        private NotifyForFieldsEnum notifyForFields;
+        /**
+         * Notify for create operation, defaults to false (API version = 29.0)
+         */
+        private Boolean notifyForOperationCreate;
         /**
          * Notify for delete operation, defaults to false (API version = 29.0)
          */
@@ -695,330 +761,78 @@ public class SalesforceComponentConfiguration
          */
         private Boolean notifyForOperationUndelete;
         /**
-         * Salesforce1 Analytics report Id
+         * Notify for update operation, defaults to false (API version = 29.0)
          */
-        private String reportId;
-        /**
-         * SObject external ID field name
-         */
-        private String sObjectIdName;
-        /**
-         * Salesforce API version, defaults to
-         * SalesforceEndpointConfig.DEFAULT_VERSION
-         */
-        private String apiVersion;
-        /**
-         * Backoff interval increment for Streaming connection restart attempts
-         * for failures beyond CometD auto-reconnect.
-         */
-        private Long backoffIncrement;
-        /**
-         * Maximum backoff interval for Streaming connection restart attempts
-         * for failures beyond CometD auto-reconnect.
-         */
-        private Long maxBackoff;
-        /**
-         * Custom Jackson ObjectMapper to use when serializing/deserializing
-         * Salesforce objects.
-         */
-        private ObjectMapper objectMapper;
-        /**
-         * SObject external ID field value
-         */
-        private String sObjectIdValue;
-        /**
-         * SObject blob field name
-         */
-        private String sObjectBlobFieldName;
-        /**
-         * SObject fields to retrieve
-         */
-        private String sObjectFields;
-        /**
-         * Bulk API Result ID
-         */
-        private String resultId;
-        /**
-         * Whether to update an existing Push Topic when using the Streaming
-         * API, defaults to false
-         */
-        private Boolean updateTopic = false;
-        /**
-         * SObject name if required or supported by API
-         */
-        private String sObjectName;
-        /**
-         * Notify for fields, options are ALL, REFERENCED, SELECT, WHERE
-         */
-        private NotifyForFieldsEnum notifyForFields;
+        private Boolean notifyForOperationUpdate;
         /**
          * Notify for operations, options are ALL, CREATE, EXTENDED, UPDATE (API
          * version 29.0)
          */
         private NotifyForOperationsEnum notifyForOperations;
         /**
-         * Salesforce SOSL search string
+         * Custom Jackson ObjectMapper to use when serializing/deserializing
+         * Salesforce objects.
          */
-        private String sObjectSearch;
-        /**
-         * APEX method name
-         */
-        private String apexMethod;
-        /**
-         * Query params for APEX method
-         */
-        private Map apexQueryParams;
-        /**
-         * Salesforce1 Analytics report execution instance ID
-         */
-        private String instanceId;
-        /**
-         * Custom Jetty Http Client to use to connect to Salesforce.
-         */
-        private SalesforceHttpClient httpClient;
-        /**
-         * SObject ID if required by API
-         */
-        private String sObjectId;
-        /**
-         * Include details in Salesforce1 Analytics report, defaults to false.
-         */
-        private Boolean includeDetails;
-        /**
-         * Salesforce1 Analytics report metadata for filtering
-         */
-        private ReportMetadata reportMetadata;
-        private ApprovalRequest approval;
-        /**
-         * Default replayId setting if no value is found in initialReplayIdMap
-         */
-        private Long defaultReplayId;
-        /**
-         * Replay IDs to start from per channel name.
-         */
-        private Map initialReplayIdMap;
+        private ObjectMapper objectMapper;
         /**
          * Use raw payload String for request and response (either JSON or XML
          * depending on format), instead of DTOs, false by default
          */
         private Boolean rawPayload = false;
         /**
+         * Salesforce1 Analytics report Id
+         */
+        private String reportId;
+        /**
+         * Salesforce1 Analytics report metadata for filtering
+         */
+        private ReportMetadata reportMetadata;
+        /**
+         * Bulk API Result ID
+         */
+        private String resultId;
+        /**
+         * SObject blob field name
+         */
+        private String sObjectBlobFieldName;
+        /**
          * Fully qualified SObject class name, usually generated using
          * camel-salesforce-maven-plugin
          */
         private String sObjectClass;
         /**
+         * SObject fields to retrieve
+         */
+        private String sObjectFields;
+        /**
+         * SObject ID if required by API
+         */
+        private String sObjectId;
+        /**
+         * SObject external ID field name
+         */
+        private String sObjectIdName;
+        /**
+         * SObject external ID field value
+         */
+        private String sObjectIdValue;
+        /**
+         * SObject name if required or supported by API
+         */
+        private String sObjectName;
+        /**
          * Salesforce SOQL query string
          */
         private String sObjectQuery;
         /**
-         * Notify for create operation, defaults to false (API version = 29.0)
+         * Salesforce SOSL search string
          */
-        private Boolean notifyForOperationCreate;
+        private String sObjectSearch;
         /**
-         * Notify for update operation, defaults to false (API version = 29.0)
+         * Whether to update an existing Push Topic when using the Streaming
+         * API, defaults to false
          */
-        private Boolean notifyForOperationUpdate;
-        private Action approvalActionType;
-        private String approvalComments;
-        private String approvalContextActorId;
-        private String approvalContextId;
-        private List approvalNextApproverIds;
-        private String approvalProcessDefinitionNameOrId;
-        private Boolean approvalSkipEntryCriteria;
-        /**
-         * Sets the behaviour of 404 not found status received from Salesforce
-         * API. Should the body be set to NULL NotFoundBehaviour#NULL or should
-         * a exception be signaled on the exchange NotFoundBehaviour#EXCEPTION -
-         * the default.
-         */
-        private NotFoundBehaviour notFoundBehaviour;
-
-        public ContentType getContentType() {
-            return contentType;
-        }
-
-        public void setContentType(ContentType contentType) {
-            this.contentType = contentType;
-        }
-
-        public PayloadFormat getFormat() {
-            return format;
-        }
-
-        public void setFormat(PayloadFormat format) {
-            this.format = format;
-        }
-
-        public Integer getLimit() {
-            return limit;
-        }
-
-        public void setLimit(Integer limit) {
-            this.limit = limit;
-        }
-
-        public String getApexUrl() {
-            return apexUrl;
-        }
-
-        public void setApexUrl(String apexUrl) {
-            this.apexUrl = apexUrl;
-        }
-
-        public String getBatchId() {
-            return batchId;
-        }
-
-        public void setBatchId(String batchId) {
-            this.batchId = batchId;
-        }
-
-        public String getJobId() {
-            return jobId;
-        }
-
-        public void setJobId(String jobId) {
-            this.jobId = jobId;
-        }
-
-        public Boolean getNotifyForOperationDelete() {
-            return notifyForOperationDelete;
-        }
-
-        public void setNotifyForOperationDelete(Boolean notifyForOperationDelete) {
-            this.notifyForOperationDelete = notifyForOperationDelete;
-        }
-
-        public Boolean getNotifyForOperationUndelete() {
-            return notifyForOperationUndelete;
-        }
-
-        public void setNotifyForOperationUndelete(
-                Boolean notifyForOperationUndelete) {
-            this.notifyForOperationUndelete = notifyForOperationUndelete;
-        }
-
-        public String getReportId() {
-            return reportId;
-        }
-
-        public void setReportId(String reportId) {
-            this.reportId = reportId;
-        }
-
-        public String getSObjectIdName() {
-            return sObjectIdName;
-        }
-
-        public void setSObjectIdName(String sObjectIdName) {
-            this.sObjectIdName = sObjectIdName;
-        }
-
-        public String getApiVersion() {
-            return apiVersion;
-        }
-
-        public void setApiVersion(String apiVersion) {
-            this.apiVersion = apiVersion;
-        }
-
-        public Long getBackoffIncrement() {
-            return backoffIncrement;
-        }
-
-        public void setBackoffIncrement(Long backoffIncrement) {
-            this.backoffIncrement = backoffIncrement;
-        }
-
-        public Long getMaxBackoff() {
-            return maxBackoff;
-        }
-
-        public void setMaxBackoff(Long maxBackoff) {
-            this.maxBackoff = maxBackoff;
-        }
-
-        public ObjectMapper getObjectMapper() {
-            return objectMapper;
-        }
-
-        public void setObjectMapper(ObjectMapper objectMapper) {
-            this.objectMapper = objectMapper;
-        }
-
-        public String getSObjectIdValue() {
-            return sObjectIdValue;
-        }
-
-        public void setSObjectIdValue(String sObjectIdValue) {
-            this.sObjectIdValue = sObjectIdValue;
-        }
-
-        public String getSObjectBlobFieldName() {
-            return sObjectBlobFieldName;
-        }
-
-        public void setSObjectBlobFieldName(String sObjectBlobFieldName) {
-            this.sObjectBlobFieldName = sObjectBlobFieldName;
-        }
-
-        public String getSObjectFields() {
-            return sObjectFields;
-        }
-
-        public void setSObjectFields(String sObjectFields) {
-            this.sObjectFields = sObjectFields;
-        }
-
-        public String getResultId() {
-            return resultId;
-        }
-
-        public void setResultId(String resultId) {
-            this.resultId = resultId;
-        }
-
-        public Boolean getUpdateTopic() {
-            return updateTopic;
-        }
-
-        public void setUpdateTopic(Boolean updateTopic) {
-            this.updateTopic = updateTopic;
-        }
-
-        public String getSObjectName() {
-            return sObjectName;
-        }
-
-        public void setSObjectName(String sObjectName) {
-            this.sObjectName = sObjectName;
-        }
-
-        public NotifyForFieldsEnum getNotifyForFields() {
-            return notifyForFields;
-        }
-
-        public void setNotifyForFields(NotifyForFieldsEnum notifyForFields) {
-            this.notifyForFields = notifyForFields;
-        }
-
-        public NotifyForOperationsEnum getNotifyForOperations() {
-            return notifyForOperations;
-        }
-
-        public void setNotifyForOperations(
-                NotifyForOperationsEnum notifyForOperations) {
-            this.notifyForOperations = notifyForOperations;
-        }
-
-        public String getSObjectSearch() {
-            return sObjectSearch;
-        }
-
-        public void setSObjectSearch(String sObjectSearch) {
-            this.sObjectSearch = sObjectSearch;
-        }
+        private Boolean updateTopic = false;
 
         public String getApexMethod() {
             return apexMethod;
@@ -1036,44 +850,20 @@ public class SalesforceComponentConfiguration
             this.apexQueryParams = apexQueryParams;
         }
 
-        public String getInstanceId() {
-            return instanceId;
+        public String getApexUrl() {
+            return apexUrl;
         }
 
-        public void setInstanceId(String instanceId) {
-            this.instanceId = instanceId;
+        public void setApexUrl(String apexUrl) {
+            this.apexUrl = apexUrl;
         }
 
-        public SalesforceHttpClient getHttpClient() {
-            return httpClient;
+        public String getApiVersion() {
+            return apiVersion;
         }
 
-        public void setHttpClient(SalesforceHttpClient httpClient) {
-            this.httpClient = httpClient;
-        }
-
-        public String getSObjectId() {
-            return sObjectId;
-        }
-
-        public void setSObjectId(String sObjectId) {
-            this.sObjectId = sObjectId;
-        }
-
-        public Boolean getIncludeDetails() {
-            return includeDetails;
-        }
-
-        public void setIncludeDetails(Boolean includeDetails) {
-            this.includeDetails = includeDetails;
-        }
-
-        public ReportMetadata getReportMetadata() {
-            return reportMetadata;
-        }
-
-        public void setReportMetadata(ReportMetadata reportMetadata) {
-            this.reportMetadata = reportMetadata;
+        public void setApiVersion(String apiVersion) {
+            this.apiVersion = apiVersion;
         }
 
         public ApprovalRequest getApproval() {
@@ -1082,62 +872,6 @@ public class SalesforceComponentConfiguration
 
         public void setApproval(ApprovalRequest approval) {
             this.approval = approval;
-        }
-
-        public Long getDefaultReplayId() {
-            return defaultReplayId;
-        }
-
-        public void setDefaultReplayId(Long defaultReplayId) {
-            this.defaultReplayId = defaultReplayId;
-        }
-
-        public Map getInitialReplayIdMap() {
-            return initialReplayIdMap;
-        }
-
-        public void setInitialReplayIdMap(Map initialReplayIdMap) {
-            this.initialReplayIdMap = initialReplayIdMap;
-        }
-
-        public Boolean getRawPayload() {
-            return rawPayload;
-        }
-
-        public void setRawPayload(Boolean rawPayload) {
-            this.rawPayload = rawPayload;
-        }
-
-        public String getSObjectClass() {
-            return sObjectClass;
-        }
-
-        public void setSObjectClass(String sObjectClass) {
-            this.sObjectClass = sObjectClass;
-        }
-
-        public String getSObjectQuery() {
-            return sObjectQuery;
-        }
-
-        public void setSObjectQuery(String sObjectQuery) {
-            this.sObjectQuery = sObjectQuery;
-        }
-
-        public Boolean getNotifyForOperationCreate() {
-            return notifyForOperationCreate;
-        }
-
-        public void setNotifyForOperationCreate(Boolean notifyForOperationCreate) {
-            this.notifyForOperationCreate = notifyForOperationCreate;
-        }
-
-        public Boolean getNotifyForOperationUpdate() {
-            return notifyForOperationUpdate;
-        }
-
-        public void setNotifyForOperationUpdate(Boolean notifyForOperationUpdate) {
-            this.notifyForOperationUpdate = notifyForOperationUpdate;
         }
 
         public Action getApprovalActionType() {
@@ -1198,12 +932,278 @@ public class SalesforceComponentConfiguration
             this.approvalSkipEntryCriteria = approvalSkipEntryCriteria;
         }
 
+        public Long getBackoffIncrement() {
+            return backoffIncrement;
+        }
+
+        public void setBackoffIncrement(Long backoffIncrement) {
+            this.backoffIncrement = backoffIncrement;
+        }
+
+        public String getBatchId() {
+            return batchId;
+        }
+
+        public void setBatchId(String batchId) {
+            this.batchId = batchId;
+        }
+
+        public ContentType getContentType() {
+            return contentType;
+        }
+
+        public void setContentType(ContentType contentType) {
+            this.contentType = contentType;
+        }
+
+        public Long getDefaultReplayId() {
+            return defaultReplayId;
+        }
+
+        public void setDefaultReplayId(Long defaultReplayId) {
+            this.defaultReplayId = defaultReplayId;
+        }
+
+        public PayloadFormat getFormat() {
+            return format;
+        }
+
+        public void setFormat(PayloadFormat format) {
+            this.format = format;
+        }
+
+        public SalesforceHttpClient getHttpClient() {
+            return httpClient;
+        }
+
+        public void setHttpClient(SalesforceHttpClient httpClient) {
+            this.httpClient = httpClient;
+        }
+
+        public Boolean getIncludeDetails() {
+            return includeDetails;
+        }
+
+        public void setIncludeDetails(Boolean includeDetails) {
+            this.includeDetails = includeDetails;
+        }
+
+        public Map getInitialReplayIdMap() {
+            return initialReplayIdMap;
+        }
+
+        public void setInitialReplayIdMap(Map initialReplayIdMap) {
+            this.initialReplayIdMap = initialReplayIdMap;
+        }
+
+        public String getInstanceId() {
+            return instanceId;
+        }
+
+        public void setInstanceId(String instanceId) {
+            this.instanceId = instanceId;
+        }
+
+        public String getJobId() {
+            return jobId;
+        }
+
+        public void setJobId(String jobId) {
+            this.jobId = jobId;
+        }
+
+        public Integer getLimit() {
+            return limit;
+        }
+
+        public void setLimit(Integer limit) {
+            this.limit = limit;
+        }
+
+        public Long getMaxBackoff() {
+            return maxBackoff;
+        }
+
+        public void setMaxBackoff(Long maxBackoff) {
+            this.maxBackoff = maxBackoff;
+        }
+
         public NotFoundBehaviour getNotFoundBehaviour() {
             return notFoundBehaviour;
         }
 
         public void setNotFoundBehaviour(NotFoundBehaviour notFoundBehaviour) {
             this.notFoundBehaviour = notFoundBehaviour;
+        }
+
+        public NotifyForFieldsEnum getNotifyForFields() {
+            return notifyForFields;
+        }
+
+        public void setNotifyForFields(NotifyForFieldsEnum notifyForFields) {
+            this.notifyForFields = notifyForFields;
+        }
+
+        public Boolean getNotifyForOperationCreate() {
+            return notifyForOperationCreate;
+        }
+
+        public void setNotifyForOperationCreate(Boolean notifyForOperationCreate) {
+            this.notifyForOperationCreate = notifyForOperationCreate;
+        }
+
+        public Boolean getNotifyForOperationDelete() {
+            return notifyForOperationDelete;
+        }
+
+        public void setNotifyForOperationDelete(Boolean notifyForOperationDelete) {
+            this.notifyForOperationDelete = notifyForOperationDelete;
+        }
+
+        public Boolean getNotifyForOperationUndelete() {
+            return notifyForOperationUndelete;
+        }
+
+        public void setNotifyForOperationUndelete(
+                Boolean notifyForOperationUndelete) {
+            this.notifyForOperationUndelete = notifyForOperationUndelete;
+        }
+
+        public Boolean getNotifyForOperationUpdate() {
+            return notifyForOperationUpdate;
+        }
+
+        public void setNotifyForOperationUpdate(Boolean notifyForOperationUpdate) {
+            this.notifyForOperationUpdate = notifyForOperationUpdate;
+        }
+
+        public NotifyForOperationsEnum getNotifyForOperations() {
+            return notifyForOperations;
+        }
+
+        public void setNotifyForOperations(
+                NotifyForOperationsEnum notifyForOperations) {
+            this.notifyForOperations = notifyForOperations;
+        }
+
+        public ObjectMapper getObjectMapper() {
+            return objectMapper;
+        }
+
+        public void setObjectMapper(ObjectMapper objectMapper) {
+            this.objectMapper = objectMapper;
+        }
+
+        public Boolean getRawPayload() {
+            return rawPayload;
+        }
+
+        public void setRawPayload(Boolean rawPayload) {
+            this.rawPayload = rawPayload;
+        }
+
+        public String getReportId() {
+            return reportId;
+        }
+
+        public void setReportId(String reportId) {
+            this.reportId = reportId;
+        }
+
+        public ReportMetadata getReportMetadata() {
+            return reportMetadata;
+        }
+
+        public void setReportMetadata(ReportMetadata reportMetadata) {
+            this.reportMetadata = reportMetadata;
+        }
+
+        public String getResultId() {
+            return resultId;
+        }
+
+        public void setResultId(String resultId) {
+            this.resultId = resultId;
+        }
+
+        public String getSObjectBlobFieldName() {
+            return sObjectBlobFieldName;
+        }
+
+        public void setSObjectBlobFieldName(String sObjectBlobFieldName) {
+            this.sObjectBlobFieldName = sObjectBlobFieldName;
+        }
+
+        public String getSObjectClass() {
+            return sObjectClass;
+        }
+
+        public void setSObjectClass(String sObjectClass) {
+            this.sObjectClass = sObjectClass;
+        }
+
+        public String getSObjectFields() {
+            return sObjectFields;
+        }
+
+        public void setSObjectFields(String sObjectFields) {
+            this.sObjectFields = sObjectFields;
+        }
+
+        public String getSObjectId() {
+            return sObjectId;
+        }
+
+        public void setSObjectId(String sObjectId) {
+            this.sObjectId = sObjectId;
+        }
+
+        public String getSObjectIdName() {
+            return sObjectIdName;
+        }
+
+        public void setSObjectIdName(String sObjectIdName) {
+            this.sObjectIdName = sObjectIdName;
+        }
+
+        public String getSObjectIdValue() {
+            return sObjectIdValue;
+        }
+
+        public void setSObjectIdValue(String sObjectIdValue) {
+            this.sObjectIdValue = sObjectIdValue;
+        }
+
+        public String getSObjectName() {
+            return sObjectName;
+        }
+
+        public void setSObjectName(String sObjectName) {
+            this.sObjectName = sObjectName;
+        }
+
+        public String getSObjectQuery() {
+            return sObjectQuery;
+        }
+
+        public void setSObjectQuery(String sObjectQuery) {
+            this.sObjectQuery = sObjectQuery;
+        }
+
+        public String getSObjectSearch() {
+            return sObjectSearch;
+        }
+
+        public void setSObjectSearch(String sObjectSearch) {
+            this.sObjectSearch = sObjectSearch;
+        }
+
+        public Boolean getUpdateTopic() {
+            return updateTopic;
+        }
+
+        public void setUpdateTopic(Boolean updateTopic) {
+            this.updateTopic = updateTopic;
         }
     }
 }

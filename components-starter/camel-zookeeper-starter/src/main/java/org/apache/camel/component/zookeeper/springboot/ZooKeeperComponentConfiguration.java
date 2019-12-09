@@ -102,20 +102,6 @@ public class ZooKeeperComponentConfiguration
 
     public static class ZooKeeperConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.zookeeper.ZooKeeperConfiguration.class;
-        private List servers;
-        /**
-         * The node in the ZooKeeper server (aka znode)
-         */
-        private String path;
-        /**
-         * The time interval to wait on connection before timing out.
-         */
-        private Integer timeout = 5000;
-        /**
-         * Upon the delete of a znode, should an empty message be send to the
-         * consumer
-         */
-        private Boolean sendEmptyMessageOnDelete = true;
         /**
          * The time interval to backoff for after an error before retrying.
          */
@@ -125,49 +111,31 @@ public class ZooKeeperComponentConfiguration
          */
         private Boolean create = false;
         /**
-         * Should changes to the znode be 'watched' and repeatedly processed.
+         * The create mode that should be used for the newly created node
          */
-        private Boolean repeat = false;
+        private String createMode = "EPHEMERAL";
         /**
          * Whether the children of the node should be listed
          */
         private Boolean listChildren = false;
         /**
-         * The create mode that should be used for the newly created node
+         * The node in the ZooKeeper server (aka znode)
          */
-        private String createMode = "EPHEMERAL";
-
-        public List getServers() {
-            return servers;
-        }
-
-        public void setServers(List servers) {
-            this.servers = servers;
-        }
-
-        public String getPath() {
-            return path;
-        }
-
-        public void setPath(String path) {
-            this.path = path;
-        }
-
-        public Integer getTimeout() {
-            return timeout;
-        }
-
-        public void setTimeout(Integer timeout) {
-            this.timeout = timeout;
-        }
-
-        public Boolean getSendEmptyMessageOnDelete() {
-            return sendEmptyMessageOnDelete;
-        }
-
-        public void setSendEmptyMessageOnDelete(Boolean sendEmptyMessageOnDelete) {
-            this.sendEmptyMessageOnDelete = sendEmptyMessageOnDelete;
-        }
+        private String path;
+        /**
+         * Should changes to the znode be 'watched' and repeatedly processed.
+         */
+        private Boolean repeat = false;
+        /**
+         * Upon the delete of a znode, should an empty message be send to the
+         * consumer
+         */
+        private Boolean sendEmptyMessageOnDelete = true;
+        private List servers;
+        /**
+         * The time interval to wait on connection before timing out.
+         */
+        private Integer timeout = 5000;
 
         public Long getBackoff() {
             return backoff;
@@ -185,12 +153,12 @@ public class ZooKeeperComponentConfiguration
             this.create = create;
         }
 
-        public Boolean getRepeat() {
-            return repeat;
+        public String getCreateMode() {
+            return createMode;
         }
 
-        public void setRepeat(Boolean repeat) {
-            this.repeat = repeat;
+        public void setCreateMode(String createMode) {
+            this.createMode = createMode;
         }
 
         public Boolean getListChildren() {
@@ -201,12 +169,44 @@ public class ZooKeeperComponentConfiguration
             this.listChildren = listChildren;
         }
 
-        public String getCreateMode() {
-            return createMode;
+        public String getPath() {
+            return path;
         }
 
-        public void setCreateMode(String createMode) {
-            this.createMode = createMode;
+        public void setPath(String path) {
+            this.path = path;
+        }
+
+        public Boolean getRepeat() {
+            return repeat;
+        }
+
+        public void setRepeat(Boolean repeat) {
+            this.repeat = repeat;
+        }
+
+        public Boolean getSendEmptyMessageOnDelete() {
+            return sendEmptyMessageOnDelete;
+        }
+
+        public void setSendEmptyMessageOnDelete(Boolean sendEmptyMessageOnDelete) {
+            this.sendEmptyMessageOnDelete = sendEmptyMessageOnDelete;
+        }
+
+        public List getServers() {
+            return servers;
+        }
+
+        public void setServers(List servers) {
+            this.servers = servers;
+        }
+
+        public Integer getTimeout() {
+            return timeout;
+        }
+
+        public void setTimeout(Integer timeout) {
+            this.timeout = timeout;
         }
     }
 }

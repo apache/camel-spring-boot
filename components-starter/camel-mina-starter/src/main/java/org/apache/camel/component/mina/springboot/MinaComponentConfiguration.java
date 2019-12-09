@@ -120,6 +120,59 @@ public class MinaComponentConfiguration
     public static class MinaConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.mina.MinaConfiguration.class;
         /**
+         * The mina component installs a default codec if both, codec is null
+         * and textline is false. Setting allowDefaultCodec to false prevents
+         * the mina component from installing a default codec as the first
+         * element in the filter chain. This is useful in scenarios where
+         * another filter must be the first in the filter chain, like the SSL
+         * filter.
+         */
+        private Boolean allowDefaultCodec = true;
+        /**
+         * Whether to auto start SSL handshake.
+         */
+        private Boolean autoStartTls = true;
+        /**
+         * Whether to create the InetAddress once and reuse. Setting this to
+         * false allows to pickup DNS changes in the network.
+         */
+        private Boolean cachedAddress = true;
+        /**
+         * If the clientMode is true, mina consumer will connect the address as
+         * a TCP client.
+         */
+        private Boolean clientMode = false;
+        /**
+         * To use a custom minda codec implementation.
+         */
+        private ProtocolCodecFactory codec;
+        /**
+         * To set the textline protocol decoder max line length. By default the
+         * default value of Mina itself is used which are 1024.
+         */
+        private Integer decoderMaxLineLength = 1024;
+        /**
+         * Whether or not to disconnect(close) from Mina session right after
+         * use. Can be used for both consumer and producer.
+         */
+        private Boolean disconnect = false;
+        /**
+         * If sync is enabled then this option dictates MinaConsumer if it
+         * should disconnect where there is no reply to send back.
+         */
+        private Boolean disconnectOnNoReply = true;
+        /**
+         * To set the textline protocol encoder max line length. By default the
+         * default value of Mina itself is used which are Integer.MAX_VALUE.
+         */
+        private Integer encoderMaxLineLength = -1;
+        /**
+         * You can configure the encoding (a charset name) to use for the TCP
+         * textline codec and the UDP protocol. If not provided, Camel will use
+         * the JVM default Charset
+         */
+        private String encoding;
+        /**
          * You can set a list of Mina IoFilters to use.
          */
         private List filters;
@@ -130,72 +183,45 @@ public class MinaComponentConfiguration
          */
         private String host;
         /**
-         * Protocol to use
-         */
-        private String protocol;
-        /**
-         * Port number
-         */
-        private Integer port;
-        /**
-         * Number of worker threads in the worker pool for TCP and UDP
-         */
-        private Integer maximumPoolSize = 16;
-        /**
-         * You can configure the encoding (a charset name) to use for the TCP
-         * textline codec and the UDP protocol. If not provided, Camel will use
-         * the JVM default Charset
-         */
-        private String encoding;
-        /**
-         * You can configure the timeout that specifies how long to wait for a
-         * response from a remote server. The timeout unit is in milliseconds,
-         * so 60000 is 60 seconds.
-         */
-        private Long timeout = 30000L;
-        /**
-         * Whether or not to disconnect(close) from Mina session right after
-         * use. Can be used for both consumer and producer.
-         */
-        private Boolean disconnect = false;
-        /**
-         * To use a custom minda codec implementation.
-         */
-        private ProtocolCodecFactory codec;
-        /**
-         * Setting to set endpoint as one-way or request-response.
-         */
-        private Boolean sync = true;
-        /**
          * Sessions can be lazily created to avoid exceptions, if the remote
          * server is not up and running when the Camel producer is started.
          */
         private Boolean lazySessionCreation = true;
         /**
-         * If the clientMode is true, mina consumer will connect the address as
-         * a TCP client.
+         * Number of worker threads in the worker pool for TCP and UDP
          */
-        private Boolean clientMode = false;
+        private Integer maximumPoolSize = 16;
         /**
-         * Only used for TCP and if textline=true. Sets the text line delimiter
-         * to use. If none provided, Camel will use DEFAULT. This delimiter is
-         * used to mark the end of text.
+         * You can enable the Apache MINA logging filter. Apache MINA uses slf4j
+         * logging at INFO level to log all input and output.
          */
-        private MinaTextLineDelimiter textlineDelimiter;
+        private Boolean minaLogger = false;
         /**
-         * Whether to auto start SSL handshake.
+         * If sync is enabled this option dictates MinaConsumer which logging
+         * level to use when logging a there is no reply to send back.
          */
-        private Boolean autoStartTls = true;
+        private LoggingLevel noReplyLogLevel = LoggingLevel.WARN;
         /**
-         * To set the textline protocol encoder max line length. By default the
-         * default value of Mina itself is used which are Integer.MAX_VALUE.
+         * Whether to use ordered thread pool, to ensure events are processed
+         * orderly on the same channel.
          */
-        private Integer encoderMaxLineLength = -1;
+        private Boolean orderedThreadPoolExecutor = true;
         /**
-         * Maximum amount of time it should take to send data to the MINA
-         * session. Default is 10000 milliseconds.
+         * Port number
          */
-        private Long writeTimeout = 10000L;
+        private Integer port;
+        /**
+         * Protocol to use
+         */
+        private String protocol;
+        /**
+         * To configure SSL security.
+         */
+        private SSLContextParameters sslContextParameters;
+        /**
+         * Setting to set endpoint as one-way or request-response.
+         */
+        private Boolean sync = true;
         /**
          * Only used for TCP. If no codec is specified, you can use this flag to
          * indicate a text line based codec; if not specified or the value is
@@ -203,20 +229,17 @@ public class MinaComponentConfiguration
          */
         private Boolean textline = false;
         /**
-         * If sync is enabled this option dictates MinaConsumer which logging
-         * level to use when logging a there is no reply to send back.
+         * Only used for TCP and if textline=true. Sets the text line delimiter
+         * to use. If none provided, Camel will use DEFAULT. This delimiter is
+         * used to mark the end of text.
          */
-        private LoggingLevel noReplyLogLevel = LoggingLevel.WARN;
+        private MinaTextLineDelimiter textlineDelimiter;
         /**
-         * If sync is enabled then this option dictates MinaConsumer if it
-         * should disconnect where there is no reply to send back.
+         * You can configure the timeout that specifies how long to wait for a
+         * response from a remote server. The timeout unit is in milliseconds,
+         * so 60000 is 60 seconds.
          */
-        private Boolean disconnectOnNoReply = true;
-        /**
-         * Whether to use ordered thread pool, to ensure events are processed
-         * orderly on the same channel.
-         */
-        private Boolean orderedThreadPoolExecutor = true;
+        private Long timeout = 30000L;
         /**
          * Only used for TCP. You can transfer the exchange over the wire
          * instead of just the body. The following fields are transferred: In
@@ -227,33 +250,90 @@ public class MinaComponentConfiguration
          */
         private Boolean transferExchange = false;
         /**
-         * Whether to create the InetAddress once and reuse. Setting this to
-         * false allows to pickup DNS changes in the network.
+         * Maximum amount of time it should take to send data to the MINA
+         * session. Default is 10000 milliseconds.
          */
-        private Boolean cachedAddress = true;
-        /**
-         * To configure SSL security.
-         */
-        private SSLContextParameters sslContextParameters;
-        /**
-         * The mina component installs a default codec if both, codec is null
-         * and textline is false. Setting allowDefaultCodec to false prevents
-         * the mina component from installing a default codec as the first
-         * element in the filter chain. This is useful in scenarios where
-         * another filter must be the first in the filter chain, like the SSL
-         * filter.
-         */
-        private Boolean allowDefaultCodec = true;
-        /**
-         * To set the textline protocol decoder max line length. By default the
-         * default value of Mina itself is used which are 1024.
-         */
-        private Integer decoderMaxLineLength = 1024;
-        /**
-         * You can enable the Apache MINA logging filter. Apache MINA uses slf4j
-         * logging at INFO level to log all input and output.
-         */
-        private Boolean minaLogger = false;
+        private Long writeTimeout = 10000L;
+
+        public Boolean getAllowDefaultCodec() {
+            return allowDefaultCodec;
+        }
+
+        public void setAllowDefaultCodec(Boolean allowDefaultCodec) {
+            this.allowDefaultCodec = allowDefaultCodec;
+        }
+
+        public Boolean getAutoStartTls() {
+            return autoStartTls;
+        }
+
+        public void setAutoStartTls(Boolean autoStartTls) {
+            this.autoStartTls = autoStartTls;
+        }
+
+        public Boolean getCachedAddress() {
+            return cachedAddress;
+        }
+
+        public void setCachedAddress(Boolean cachedAddress) {
+            this.cachedAddress = cachedAddress;
+        }
+
+        public Boolean getClientMode() {
+            return clientMode;
+        }
+
+        public void setClientMode(Boolean clientMode) {
+            this.clientMode = clientMode;
+        }
+
+        public ProtocolCodecFactory getCodec() {
+            return codec;
+        }
+
+        public void setCodec(ProtocolCodecFactory codec) {
+            this.codec = codec;
+        }
+
+        public Integer getDecoderMaxLineLength() {
+            return decoderMaxLineLength;
+        }
+
+        public void setDecoderMaxLineLength(Integer decoderMaxLineLength) {
+            this.decoderMaxLineLength = decoderMaxLineLength;
+        }
+
+        public Boolean getDisconnect() {
+            return disconnect;
+        }
+
+        public void setDisconnect(Boolean disconnect) {
+            this.disconnect = disconnect;
+        }
+
+        public Boolean getDisconnectOnNoReply() {
+            return disconnectOnNoReply;
+        }
+
+        public void setDisconnectOnNoReply(Boolean disconnectOnNoReply) {
+            this.disconnectOnNoReply = disconnectOnNoReply;
+        }
+
+        public Integer getEncoderMaxLineLength() {
+            return encoderMaxLineLength;
+        }
+
+        public void setEncoderMaxLineLength(Integer encoderMaxLineLength) {
+            this.encoderMaxLineLength = encoderMaxLineLength;
+        }
+
+        public String getEncoding() {
+            return encoding;
+        }
+
+        public void setEncoding(String encoding) {
+            this.encoding = encoding;
+        }
 
         public List getFilters() {
             return filters;
@@ -271,20 +351,12 @@ public class MinaComponentConfiguration
             this.host = host;
         }
 
-        public String getProtocol() {
-            return protocol;
+        public Boolean getLazySessionCreation() {
+            return lazySessionCreation;
         }
 
-        public void setProtocol(String protocol) {
-            this.protocol = protocol;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
+        public void setLazySessionCreation(Boolean lazySessionCreation) {
+            this.lazySessionCreation = lazySessionCreation;
         }
 
         public Integer getMaximumPoolSize() {
@@ -295,100 +367,12 @@ public class MinaComponentConfiguration
             this.maximumPoolSize = maximumPoolSize;
         }
 
-        public String getEncoding() {
-            return encoding;
+        public Boolean getMinaLogger() {
+            return minaLogger;
         }
 
-        public void setEncoding(String encoding) {
-            this.encoding = encoding;
-        }
-
-        public Long getTimeout() {
-            return timeout;
-        }
-
-        public void setTimeout(Long timeout) {
-            this.timeout = timeout;
-        }
-
-        public Boolean getDisconnect() {
-            return disconnect;
-        }
-
-        public void setDisconnect(Boolean disconnect) {
-            this.disconnect = disconnect;
-        }
-
-        public ProtocolCodecFactory getCodec() {
-            return codec;
-        }
-
-        public void setCodec(ProtocolCodecFactory codec) {
-            this.codec = codec;
-        }
-
-        public Boolean getSync() {
-            return sync;
-        }
-
-        public void setSync(Boolean sync) {
-            this.sync = sync;
-        }
-
-        public Boolean getLazySessionCreation() {
-            return lazySessionCreation;
-        }
-
-        public void setLazySessionCreation(Boolean lazySessionCreation) {
-            this.lazySessionCreation = lazySessionCreation;
-        }
-
-        public Boolean getClientMode() {
-            return clientMode;
-        }
-
-        public void setClientMode(Boolean clientMode) {
-            this.clientMode = clientMode;
-        }
-
-        public MinaTextLineDelimiter getTextlineDelimiter() {
-            return textlineDelimiter;
-        }
-
-        public void setTextlineDelimiter(MinaTextLineDelimiter textlineDelimiter) {
-            this.textlineDelimiter = textlineDelimiter;
-        }
-
-        public Boolean getAutoStartTls() {
-            return autoStartTls;
-        }
-
-        public void setAutoStartTls(Boolean autoStartTls) {
-            this.autoStartTls = autoStartTls;
-        }
-
-        public Integer getEncoderMaxLineLength() {
-            return encoderMaxLineLength;
-        }
-
-        public void setEncoderMaxLineLength(Integer encoderMaxLineLength) {
-            this.encoderMaxLineLength = encoderMaxLineLength;
-        }
-
-        public Long getWriteTimeout() {
-            return writeTimeout;
-        }
-
-        public void setWriteTimeout(Long writeTimeout) {
-            this.writeTimeout = writeTimeout;
-        }
-
-        public Boolean getTextline() {
-            return textline;
-        }
-
-        public void setTextline(Boolean textline) {
-            this.textline = textline;
+        public void setMinaLogger(Boolean minaLogger) {
+            this.minaLogger = minaLogger;
         }
 
         public LoggingLevel getNoReplyLogLevel() {
@@ -397,14 +381,6 @@ public class MinaComponentConfiguration
 
         public void setNoReplyLogLevel(LoggingLevel noReplyLogLevel) {
             this.noReplyLogLevel = noReplyLogLevel;
-        }
-
-        public Boolean getDisconnectOnNoReply() {
-            return disconnectOnNoReply;
-        }
-
-        public void setDisconnectOnNoReply(Boolean disconnectOnNoReply) {
-            this.disconnectOnNoReply = disconnectOnNoReply;
         }
 
         public Boolean getOrderedThreadPoolExecutor() {
@@ -416,20 +392,20 @@ public class MinaComponentConfiguration
             this.orderedThreadPoolExecutor = orderedThreadPoolExecutor;
         }
 
-        public Boolean getTransferExchange() {
-            return transferExchange;
+        public Integer getPort() {
+            return port;
         }
 
-        public void setTransferExchange(Boolean transferExchange) {
-            this.transferExchange = transferExchange;
+        public void setPort(Integer port) {
+            this.port = port;
         }
 
-        public Boolean getCachedAddress() {
-            return cachedAddress;
+        public String getProtocol() {
+            return protocol;
         }
 
-        public void setCachedAddress(Boolean cachedAddress) {
-            this.cachedAddress = cachedAddress;
+        public void setProtocol(String protocol) {
+            this.protocol = protocol;
         }
 
         public SSLContextParameters getSslContextParameters() {
@@ -441,28 +417,52 @@ public class MinaComponentConfiguration
             this.sslContextParameters = sslContextParameters;
         }
 
-        public Boolean getAllowDefaultCodec() {
-            return allowDefaultCodec;
+        public Boolean getSync() {
+            return sync;
         }
 
-        public void setAllowDefaultCodec(Boolean allowDefaultCodec) {
-            this.allowDefaultCodec = allowDefaultCodec;
+        public void setSync(Boolean sync) {
+            this.sync = sync;
         }
 
-        public Integer getDecoderMaxLineLength() {
-            return decoderMaxLineLength;
+        public Boolean getTextline() {
+            return textline;
         }
 
-        public void setDecoderMaxLineLength(Integer decoderMaxLineLength) {
-            this.decoderMaxLineLength = decoderMaxLineLength;
+        public void setTextline(Boolean textline) {
+            this.textline = textline;
         }
 
-        public Boolean getMinaLogger() {
-            return minaLogger;
+        public MinaTextLineDelimiter getTextlineDelimiter() {
+            return textlineDelimiter;
         }
 
-        public void setMinaLogger(Boolean minaLogger) {
-            this.minaLogger = minaLogger;
+        public void setTextlineDelimiter(MinaTextLineDelimiter textlineDelimiter) {
+            this.textlineDelimiter = textlineDelimiter;
+        }
+
+        public Long getTimeout() {
+            return timeout;
+        }
+
+        public void setTimeout(Long timeout) {
+            this.timeout = timeout;
+        }
+
+        public Boolean getTransferExchange() {
+            return transferExchange;
+        }
+
+        public void setTransferExchange(Boolean transferExchange) {
+            this.transferExchange = transferExchange;
+        }
+
+        public Long getWriteTimeout() {
+            return writeTimeout;
+        }
+
+        public void setWriteTimeout(Long writeTimeout) {
+            this.writeTimeout = writeTimeout;
         }
     }
 }

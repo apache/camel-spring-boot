@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "spring-security",
+    "kind": "other",
+    "title": "Spring Security",
+    "description": "Security using Spring Security",
+    "deprecated": "false",
+    "firstVersion": "2.3.0",
+    "label": "security,spring",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-spring-security-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

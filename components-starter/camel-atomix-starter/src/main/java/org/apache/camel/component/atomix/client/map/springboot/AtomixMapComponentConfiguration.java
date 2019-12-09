@@ -142,14 +142,14 @@ public class AtomixMapComponentConfiguration
     public static class AtomixMapConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.atomix.client.map.AtomixMapConfiguration.class;
         /**
+         * The default action.
+         */
+        private Action defaultAction = Action.PUT;
+        /**
          * The key to use if none is set in the header or to listen for events
          * for a specific key.
          */
         private Object key;
-        /**
-         * The default action.
-         */
-        private Action defaultAction = Action.PUT;
         /**
          * The resource ttl.
          */
@@ -159,20 +159,20 @@ public class AtomixMapComponentConfiguration
          */
         private String resultHeader;
 
-        public Object getKey() {
-            return key;
-        }
-
-        public void setKey(Object key) {
-            this.key = key;
-        }
-
         public Action getDefaultAction() {
             return defaultAction;
         }
 
         public void setDefaultAction(Action defaultAction) {
             this.defaultAction = defaultAction;
+        }
+
+        public Object getKey() {
+            return key;
+        }
+
+        public void setKey(Object key) {
+            this.key = key;
         }
 
         public Long getTtl() {

@@ -142,28 +142,9 @@ public class DdbComponentConfiguration
     public static class DdbConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.ddb.DdbConfiguration.class;
         /**
-         * The region in which DDB client needs to work
+         * Amazon AWS Access Key
          */
-        private String region;
-        /**
-         * To define a proxy port when instantiating the DDB client. When using
-         * this parameter, the configuration will expect the capitalized name of
-         * the region (for example AP_EAST_1) You'll need to use the name
-         * Regions.EU_WEST_1.name()
-         */
-        private Integer proxyPort;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
-        /**
-         * What operation to perform
-         */
-        private DdbOperations operation = DdbOperations.PutItem;
-        /**
-         * To define a proxy host when instantiating the DDB client
-         */
-        private String proxyHost;
+        private String accessKey;
         /**
          * To use the AmazonDynamoDB as the client
          */
@@ -174,16 +155,6 @@ public class DdbComponentConfiguration
          */
         private Boolean consistentRead = false;
         /**
-         * The provisioned throughput to reserve for reading resources from your
-         * table
-         */
-        private Long readCapacity;
-        /**
-         * The provisioned throughput to reserved for writing resources to your
-         * table
-         */
-        private Long writeCapacity;
-        /**
          * Attribute name when creating table
          */
         private String keyAttributeName;
@@ -192,56 +163,53 @@ public class DdbComponentConfiguration
          */
         private String keyAttributeType;
         /**
-         * Amazon AWS Access Key
+         * What operation to perform
          */
-        private String accessKey;
+        private DdbOperations operation = DdbOperations.PutItem;
+        /**
+         * To define a proxy host when instantiating the DDB client
+         */
+        private String proxyHost;
+        /**
+         * To define a proxy port when instantiating the DDB client. When using
+         * this parameter, the configuration will expect the capitalized name of
+         * the region (for example AP_EAST_1) You'll need to use the name
+         * Regions.EU_WEST_1.name()
+         */
+        private Integer proxyPort;
         /**
          * To define a proxy protocol when instantiating the DDB client
          */
         private Protocol proxyProtocol = Protocol.HTTPS;
         /**
+         * The provisioned throughput to reserve for reading resources from your
+         * table
+         */
+        private Long readCapacity;
+        /**
+         * The region in which DDB client needs to work
+         */
+        private String region;
+        /**
+         * Amazon AWS Secret Key
+         */
+        private String secretKey;
+        /**
          * The name of the table currently worked with.
          */
         private String tableName;
+        /**
+         * The provisioned throughput to reserved for writing resources to your
+         * table
+         */
+        private Long writeCapacity;
 
-        public String getRegion() {
-            return region;
+        public String getAccessKey() {
+            return accessKey;
         }
 
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public DdbOperations getOperation() {
-            return operation;
-        }
-
-        public void setOperation(DdbOperations operation) {
-            this.operation = operation;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
+        public void setAccessKey(String accessKey) {
+            this.accessKey = accessKey;
         }
 
         public AmazonDynamoDB getAmazonDDBClient() {
@@ -260,22 +228,6 @@ public class DdbComponentConfiguration
             this.consistentRead = consistentRead;
         }
 
-        public Long getReadCapacity() {
-            return readCapacity;
-        }
-
-        public void setReadCapacity(Long readCapacity) {
-            this.readCapacity = readCapacity;
-        }
-
-        public Long getWriteCapacity() {
-            return writeCapacity;
-        }
-
-        public void setWriteCapacity(Long writeCapacity) {
-            this.writeCapacity = writeCapacity;
-        }
-
         public String getKeyAttributeName() {
             return keyAttributeName;
         }
@@ -292,12 +244,28 @@ public class DdbComponentConfiguration
             this.keyAttributeType = keyAttributeType;
         }
 
-        public String getAccessKey() {
-            return accessKey;
+        public DdbOperations getOperation() {
+            return operation;
         }
 
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
+        public void setOperation(DdbOperations operation) {
+            this.operation = operation;
+        }
+
+        public String getProxyHost() {
+            return proxyHost;
+        }
+
+        public void setProxyHost(String proxyHost) {
+            this.proxyHost = proxyHost;
+        }
+
+        public Integer getProxyPort() {
+            return proxyPort;
+        }
+
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
         }
 
         public Protocol getProxyProtocol() {
@@ -308,12 +276,44 @@ public class DdbComponentConfiguration
             this.proxyProtocol = proxyProtocol;
         }
 
+        public Long getReadCapacity() {
+            return readCapacity;
+        }
+
+        public void setReadCapacity(Long readCapacity) {
+            this.readCapacity = readCapacity;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
+        }
+
         public String getTableName() {
             return tableName;
         }
 
         public void setTableName(String tableName) {
             this.tableName = tableName;
+        }
+
+        public Long getWriteCapacity() {
+            return writeCapacity;
+        }
+
+        public void setWriteCapacity(Long writeCapacity) {
+            this.writeCapacity = writeCapacity;
         }
     }
 }

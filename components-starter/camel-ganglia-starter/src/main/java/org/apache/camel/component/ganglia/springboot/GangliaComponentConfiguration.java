@@ -106,46 +106,56 @@ public class GangliaComponentConfiguration
     public static class GangliaConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.ganglia.GangliaConfiguration.class;
         /**
-         * The type of value
+         * Minumum time in seconds before Ganglia will purge the metric value if
+         * it expires. Set to 0 and the value will remain in Ganglia
+         * indefinitely until a gmond agent restart.
          */
-        private GMetricType type = GMetricType.STRING;
-        /**
-         * Prefix the metric name with this string and an underscore.
-         */
-        private String prefix;
-        /**
-         * Host name for Ganglia server
-         */
-        private String host = "239.2.11.71";
-        /**
-         * Port for Ganglia server
-         */
-        private Integer port = 8649;
-        /**
-         * Send the UDP metric packets using MULTICAST or UNICAST
-         */
-        private UDPAddressingMode mode = UDPAddressingMode.MULTICAST;
+        private Integer dmax = 0;
         /**
          * The group that the metric belongs to.
          */
         private String groupName = "java";
         /**
-         * Use the wire format of Ganglia 3.1.0 and later versions. Set this to
-         * false to use Ganglia 3.0.x or earlier.
+         * Host name for Ganglia server
          */
-        private Boolean wireFormat31x = true;
+        private String host = "239.2.11.71";
         /**
          * The name to use for the metric.
          */
         private String metricName = "metric";
         /**
+         * Send the UDP metric packets using MULTICAST or UNICAST
+         */
+        private UDPAddressingMode mode = UDPAddressingMode.MULTICAST;
+        /**
+         * Port for Ganglia server
+         */
+        private Integer port = 8649;
+        /**
+         * Prefix the metric name with this string and an underscore.
+         */
+        private String prefix;
+        /**
+         * The slope
+         */
+        private GMetricSlope slope = GMetricSlope.BOTH;
+        /**
          * Spoofing information IP:hostname
          */
         private String spoofHostname;
         /**
+         * Maximum time in seconds that the value can be considered current.
+         * After this, Ganglia considers the value to have expired.
+         */
+        private Integer tmax = 60;
+        /**
          * If using multicast, set the TTL of the packets
          */
         private Integer ttl = 5;
+        /**
+         * The type of value
+         */
+        private GMetricType type = GMetricType.STRING;
         /**
          * Any unit of measurement that qualifies the metric, e.g. widgets,
          * litres, bytes. Do not include a prefix such as k (kilo) or m (milli),
@@ -153,59 +163,17 @@ public class GangliaComponentConfiguration
          */
         private String units;
         /**
-         * Maximum time in seconds that the value can be considered current.
-         * After this, Ganglia considers the value to have expired.
+         * Use the wire format of Ganglia 3.1.0 and later versions. Set this to
+         * false to use Ganglia 3.0.x or earlier.
          */
-        private Integer tmax = 60;
-        /**
-         * The slope
-         */
-        private GMetricSlope slope = GMetricSlope.BOTH;
-        /**
-         * Minumum time in seconds before Ganglia will purge the metric value if
-         * it expires. Set to 0 and the value will remain in Ganglia
-         * indefinitely until a gmond agent restart.
-         */
-        private Integer dmax = 0;
+        private Boolean wireFormat31x = true;
 
-        public GMetricType getType() {
-            return type;
+        public Integer getDmax() {
+            return dmax;
         }
 
-        public void setType(GMetricType type) {
-            this.type = type;
-        }
-
-        public String getPrefix() {
-            return prefix;
-        }
-
-        public void setPrefix(String prefix) {
-            this.prefix = prefix;
-        }
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public UDPAddressingMode getMode() {
-            return mode;
-        }
-
-        public void setMode(UDPAddressingMode mode) {
-            this.mode = mode;
+        public void setDmax(Integer dmax) {
+            this.dmax = dmax;
         }
 
         public String getGroupName() {
@@ -216,12 +184,12 @@ public class GangliaComponentConfiguration
             this.groupName = groupName;
         }
 
-        public Boolean getWireFormat31x() {
-            return wireFormat31x;
+        public String getHost() {
+            return host;
         }
 
-        public void setWireFormat31x(Boolean wireFormat31x) {
-            this.wireFormat31x = wireFormat31x;
+        public void setHost(String host) {
+            this.host = host;
         }
 
         public String getMetricName() {
@@ -232,36 +200,28 @@ public class GangliaComponentConfiguration
             this.metricName = metricName;
         }
 
-        public String getSpoofHostname() {
-            return spoofHostname;
+        public UDPAddressingMode getMode() {
+            return mode;
         }
 
-        public void setSpoofHostname(String spoofHostname) {
-            this.spoofHostname = spoofHostname;
+        public void setMode(UDPAddressingMode mode) {
+            this.mode = mode;
         }
 
-        public Integer getTtl() {
-            return ttl;
+        public Integer getPort() {
+            return port;
         }
 
-        public void setTtl(Integer ttl) {
-            this.ttl = ttl;
+        public void setPort(Integer port) {
+            this.port = port;
         }
 
-        public String getUnits() {
-            return units;
+        public String getPrefix() {
+            return prefix;
         }
 
-        public void setUnits(String units) {
-            this.units = units;
-        }
-
-        public Integer getTmax() {
-            return tmax;
-        }
-
-        public void setTmax(Integer tmax) {
-            this.tmax = tmax;
+        public void setPrefix(String prefix) {
+            this.prefix = prefix;
         }
 
         public GMetricSlope getSlope() {
@@ -272,12 +232,52 @@ public class GangliaComponentConfiguration
             this.slope = slope;
         }
 
-        public Integer getDmax() {
-            return dmax;
+        public String getSpoofHostname() {
+            return spoofHostname;
         }
 
-        public void setDmax(Integer dmax) {
-            this.dmax = dmax;
+        public void setSpoofHostname(String spoofHostname) {
+            this.spoofHostname = spoofHostname;
+        }
+
+        public Integer getTmax() {
+            return tmax;
+        }
+
+        public void setTmax(Integer tmax) {
+            this.tmax = tmax;
+        }
+
+        public Integer getTtl() {
+            return ttl;
+        }
+
+        public void setTtl(Integer ttl) {
+            this.ttl = ttl;
+        }
+
+        public GMetricType getType() {
+            return type;
+        }
+
+        public void setType(GMetricType type) {
+            this.type = type;
+        }
+
+        public String getUnits() {
+            return units;
+        }
+
+        public void setUnits(String units) {
+            this.units = units;
+        }
+
+        public Boolean getWireFormat31x() {
+            return wireFormat31x;
+        }
+
+        public void setWireFormat31x(Boolean wireFormat31x) {
+            this.wireFormat31x = wireFormat31x;
         }
     }
 }

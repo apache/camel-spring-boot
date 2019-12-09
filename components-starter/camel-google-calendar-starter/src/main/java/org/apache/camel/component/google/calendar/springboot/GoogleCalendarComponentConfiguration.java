@@ -119,31 +119,14 @@ public class GoogleCalendarComponentConfiguration
     public static class GoogleCalendarConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.google.calendar.GoogleCalendarConfiguration.class;
         /**
-         * Specifies the level of permissions you want a calendar application to
-         * have to a user account. You can separate multiple scopes by comma.
-         * See https://developers.google.com/google-apps/calendar/auth for more
-         * info.
-         */
-        private String scopes = "https://www.googleapis.com/auth/calendar";
-        /**
          * OAuth 2 access token. This typically expires after an hour so
          * refreshToken is recommended for long term usage.
          */
         private String accessToken;
         /**
-         * OAuth 2 refresh token. Using this, the Google Calendar component can
-         * obtain a new accessToken whenever the current one expires - a
-         * necessity if the application is long-lived.
-         */
-        private String refreshToken;
-        /**
          * What kind of operation to perform
          */
         private GoogleCalendarApiName apiName;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
         /**
          * Google calendar application name. Example would be
          * camel-google-calendar/1.0
@@ -154,31 +137,40 @@ public class GoogleCalendarComponentConfiguration
          */
         private String clientId;
         /**
+         * Client secret of the calendar application
+         */
+        private String clientSecret;
+        /**
          * The emailAddress of the Google Service Account.
          */
         private String emailAddress;
         /**
-         * The email address of the user the application is trying to
-         * impersonate in the service account flow
+         * What sub operation to use for the selected operation
          */
-        private String user;
+        private String methodName;
         /**
          * The name of the p12 file which has the private key to use with the
          * Google Service Account.
          */
         private String p12FileName;
         /**
-         * Client secret of the calendar application
+         * OAuth 2 refresh token. Using this, the Google Calendar component can
+         * obtain a new accessToken whenever the current one expires - a
+         * necessity if the application is long-lived.
          */
-        private String clientSecret;
-
-        public String getScopes() {
-            return scopes;
-        }
-
-        public void setScopes(String scopes) {
-            this.scopes = scopes;
-        }
+        private String refreshToken;
+        /**
+         * Specifies the level of permissions you want a calendar application to
+         * have to a user account. You can separate multiple scopes by comma.
+         * See https://developers.google.com/google-apps/calendar/auth for more
+         * info.
+         */
+        private String scopes = "https://www.googleapis.com/auth/calendar";
+        /**
+         * The email address of the user the application is trying to
+         * impersonate in the service account flow
+         */
+        private String user;
 
         public String getAccessToken() {
             return accessToken;
@@ -188,28 +180,12 @@ public class GoogleCalendarComponentConfiguration
             this.accessToken = accessToken;
         }
 
-        public String getRefreshToken() {
-            return refreshToken;
-        }
-
-        public void setRefreshToken(String refreshToken) {
-            this.refreshToken = refreshToken;
-        }
-
         public GoogleCalendarApiName getApiName() {
             return apiName;
         }
 
         public void setApiName(GoogleCalendarApiName apiName) {
             this.apiName = apiName;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
         }
 
         public String getApplicationName() {
@@ -228,6 +204,14 @@ public class GoogleCalendarComponentConfiguration
             this.clientId = clientId;
         }
 
+        public String getClientSecret() {
+            return clientSecret;
+        }
+
+        public void setClientSecret(String clientSecret) {
+            this.clientSecret = clientSecret;
+        }
+
         public String getEmailAddress() {
             return emailAddress;
         }
@@ -236,12 +220,12 @@ public class GoogleCalendarComponentConfiguration
             this.emailAddress = emailAddress;
         }
 
-        public String getUser() {
-            return user;
+        public String getMethodName() {
+            return methodName;
         }
 
-        public void setUser(String user) {
-            this.user = user;
+        public void setMethodName(String methodName) {
+            this.methodName = methodName;
         }
 
         public String getP12FileName() {
@@ -252,12 +236,28 @@ public class GoogleCalendarComponentConfiguration
             this.p12FileName = p12FileName;
         }
 
-        public String getClientSecret() {
-            return clientSecret;
+        public String getRefreshToken() {
+            return refreshToken;
         }
 
-        public void setClientSecret(String clientSecret) {
-            this.clientSecret = clientSecret;
+        public void setRefreshToken(String refreshToken) {
+            this.refreshToken = refreshToken;
+        }
+
+        public String getScopes() {
+            return scopes;
+        }
+
+        public void setScopes(String scopes) {
+            this.scopes = scopes;
+        }
+
+        public String getUser() {
+            return user;
+        }
+
+        public void setUser(String user) {
+            this.user = user;
         }
     }
 }

@@ -105,43 +105,19 @@ public class BraintreeComponentConfiguration
     public static class BraintreeConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.braintree.BraintreeConfiguration.class;
         /**
-         * The private key provided by Braintree.
-         */
-        private String privateKey;
-        /**
-         * The environment Either SANDBOX or PRODUCTION
-         */
-        private String environment;
-        /**
-         * The proxy port
-         */
-        private Integer proxyPort;
-        /**
-         * The proxy host
-         */
-        private String proxyHost;
-        /**
-         * What kind of operation to perform
-         */
-        private BraintreeApiName apiName;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
-        /**
-         * The merchant id provided by Braintree.
-         */
-        private String merchantId;
-        /**
-         * The public key provided by Braintree.
-         */
-        private String publicKey;
-        /**
          * The access token granted by a merchant to another in order to process
          * transactions on their behalf. Used in place of environment, merchant
          * id, public key and private key fields.
          */
         private String accessToken;
+        /**
+         * What kind of operation to perform
+         */
+        private BraintreeApiName apiName;
+        /**
+         * The environment Either SANDBOX or PRODUCTION
+         */
+        private String environment;
         /**
          * Set logging level for http calls, see java.util.logging.Level
          */
@@ -151,37 +127,37 @@ public class BraintreeComponentConfiguration
          * Set read timeout for http calls.
          */
         private Integer httpReadTimeout;
+        /**
+         * The merchant id provided by Braintree.
+         */
+        private String merchantId;
+        /**
+         * What sub operation to use for the selected operation
+         */
+        private String methodName;
+        /**
+         * The private key provided by Braintree.
+         */
+        private String privateKey;
+        /**
+         * The proxy host
+         */
+        private String proxyHost;
+        /**
+         * The proxy port
+         */
+        private Integer proxyPort;
+        /**
+         * The public key provided by Braintree.
+         */
+        private String publicKey;
 
-        public String getPrivateKey() {
-            return privateKey;
+        public String getAccessToken() {
+            return accessToken;
         }
 
-        public void setPrivateKey(String privateKey) {
-            this.privateKey = privateKey;
-        }
-
-        public String getEnvironment() {
-            return environment;
-        }
-
-        public void setEnvironment(String environment) {
-            this.environment = environment;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
+        public void setAccessToken(String accessToken) {
+            this.accessToken = accessToken;
         }
 
         public BraintreeApiName getApiName() {
@@ -192,36 +168,12 @@ public class BraintreeComponentConfiguration
             this.apiName = apiName;
         }
 
-        public String getMethodName() {
-            return methodName;
+        public String getEnvironment() {
+            return environment;
         }
 
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
-        }
-
-        public String getMerchantId() {
-            return merchantId;
-        }
-
-        public void setMerchantId(String merchantId) {
-            this.merchantId = merchantId;
-        }
-
-        public String getPublicKey() {
-            return publicKey;
-        }
-
-        public void setPublicKey(String publicKey) {
-            this.publicKey = publicKey;
-        }
-
-        public String getAccessToken() {
-            return accessToken;
-        }
-
-        public void setAccessToken(String accessToken) {
-            this.accessToken = accessToken;
+        public void setEnvironment(String environment) {
+            this.environment = environment;
         }
 
         public Level getHttpLogLevel() {
@@ -246,6 +198,54 @@ public class BraintreeComponentConfiguration
 
         public void setHttpReadTimeout(Integer httpReadTimeout) {
             this.httpReadTimeout = httpReadTimeout;
+        }
+
+        public String getMerchantId() {
+            return merchantId;
+        }
+
+        public void setMerchantId(String merchantId) {
+            this.merchantId = merchantId;
+        }
+
+        public String getMethodName() {
+            return methodName;
+        }
+
+        public void setMethodName(String methodName) {
+            this.methodName = methodName;
+        }
+
+        public String getPrivateKey() {
+            return privateKey;
+        }
+
+        public void setPrivateKey(String privateKey) {
+            this.privateKey = privateKey;
+        }
+
+        public String getProxyHost() {
+            return proxyHost;
+        }
+
+        public void setProxyHost(String proxyHost) {
+            this.proxyHost = proxyHost;
+        }
+
+        public Integer getProxyPort() {
+            return proxyPort;
+        }
+
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
+        }
+
+        public String getPublicKey() {
+            return publicKey;
+        }
+
+        public void setPublicKey(String publicKey) {
+            this.publicKey = publicKey;
         }
     }
 }

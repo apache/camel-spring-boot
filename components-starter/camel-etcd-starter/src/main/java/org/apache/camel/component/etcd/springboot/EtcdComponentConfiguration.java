@@ -166,33 +166,21 @@ public class EtcdComponentConfiguration
     public static class EtcdConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.etcd.EtcdConfiguration.class;
         /**
-         * To apply an action recursively.
+         * The index to watch from
          */
-        private Boolean recursive = false;
-        /**
-         * The user name to use for basic authentication.
-         */
-        private String userName;
+        private Long fromIndex = 0L;
         /**
          * The password to use for basic authentication.
          */
         private String password;
         /**
-         * To set the maximum time an action could take to complete.
+         * To apply an action recursively.
          */
-        private Long timeout;
+        private Boolean recursive = false;
         /**
-         * To set the URIs the client connects.
+         * To send an empty message in case of timeout watching for a key.
          */
-        private String uris = "http://localhost:2379,http://localhost:4001";
-        /**
-         * To set the lifespan of a key in milliseconds.
-         */
-        private Integer timeToLive;
-        /**
-         * The index to watch from
-         */
-        private Long fromIndex = 0L;
+        private Boolean sendEmptyExchangeOnTimeout = false;
         /**
          * The path to look for for service discovery
          */
@@ -202,24 +190,28 @@ public class EtcdComponentConfiguration
          */
         private SSLContextParameters sslContextParameters;
         /**
-         * To send an empty message in case of timeout watching for a key.
+         * To set the lifespan of a key in milliseconds.
          */
-        private Boolean sendEmptyExchangeOnTimeout = false;
+        private Integer timeToLive;
+        /**
+         * To set the maximum time an action could take to complete.
+         */
+        private Long timeout;
+        /**
+         * To set the URIs the client connects.
+         */
+        private String uris = "http://localhost:2379,http://localhost:4001";
+        /**
+         * The user name to use for basic authentication.
+         */
+        private String userName;
 
-        public Boolean getRecursive() {
-            return recursive;
+        public Long getFromIndex() {
+            return fromIndex;
         }
 
-        public void setRecursive(Boolean recursive) {
-            this.recursive = recursive;
-        }
-
-        public String getUserName() {
-            return userName;
-        }
-
-        public void setUserName(String userName) {
-            this.userName = userName;
+        public void setFromIndex(Long fromIndex) {
+            this.fromIndex = fromIndex;
         }
 
         public String getPassword() {
@@ -230,36 +222,21 @@ public class EtcdComponentConfiguration
             this.password = password;
         }
 
-        public Long getTimeout() {
-            return timeout;
+        public Boolean getRecursive() {
+            return recursive;
         }
 
-        public void setTimeout(Long timeout) {
-            this.timeout = timeout;
+        public void setRecursive(Boolean recursive) {
+            this.recursive = recursive;
         }
 
-        public String getUris() {
-            return uris;
+        public Boolean getSendEmptyExchangeOnTimeout() {
+            return sendEmptyExchangeOnTimeout;
         }
 
-        public void setUris(String uris) {
-            this.uris = uris;
-        }
-
-        public Integer getTimeToLive() {
-            return timeToLive;
-        }
-
-        public void setTimeToLive(Integer timeToLive) {
-            this.timeToLive = timeToLive;
-        }
-
-        public Long getFromIndex() {
-            return fromIndex;
-        }
-
-        public void setFromIndex(Long fromIndex) {
-            this.fromIndex = fromIndex;
+        public void setSendEmptyExchangeOnTimeout(
+                Boolean sendEmptyExchangeOnTimeout) {
+            this.sendEmptyExchangeOnTimeout = sendEmptyExchangeOnTimeout;
         }
 
         public String getServicePath() {
@@ -279,13 +256,36 @@ public class EtcdComponentConfiguration
             this.sslContextParameters = sslContextParameters;
         }
 
-        public Boolean getSendEmptyExchangeOnTimeout() {
-            return sendEmptyExchangeOnTimeout;
+        public Integer getTimeToLive() {
+            return timeToLive;
         }
 
-        public void setSendEmptyExchangeOnTimeout(
-                Boolean sendEmptyExchangeOnTimeout) {
-            this.sendEmptyExchangeOnTimeout = sendEmptyExchangeOnTimeout;
+        public void setTimeToLive(Integer timeToLive) {
+            this.timeToLive = timeToLive;
+        }
+
+        public Long getTimeout() {
+            return timeout;
+        }
+
+        public void setTimeout(Long timeout) {
+            this.timeout = timeout;
+        }
+
+        public String getUris() {
+            return uris;
+        }
+
+        public void setUris(String uris) {
+            this.uris = uris;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
         }
     }
 }

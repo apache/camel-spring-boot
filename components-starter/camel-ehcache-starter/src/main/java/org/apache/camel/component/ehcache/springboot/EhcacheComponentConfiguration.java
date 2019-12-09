@@ -174,93 +174,69 @@ public class EhcacheComponentConfiguration
     public static class EhcacheConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.ehcache.EhcacheConfiguration.class;
         /**
+         * To configure the default cache action. If an action is set in the
+         * message header, then the operation from the header takes precedence.
+         */
+        private String action;
+        /**
+         * The cache manager
+         */
+        private CacheManager cacheManager;
+        /**
+         * The cache manager configuration
+         */
+        private Configuration cacheManagerConfiguration;
+        @Deprecated
+        private String configUri;
+        /**
          * The default cache configuration to be used to create caches.
          */
         private CacheConfiguration configuration;
         /**
+         * URI pointing to the Ehcache XML configuration file's location
+         */
+        private String configurationUri;
+        /**
          * A map of cache configuration to be used to create caches.
          */
         private Map configurations;
-        /**
-         * To configure the default action key. If a key is set in the message
-         * header, then the key from the header takes precedence.
-         */
-        private Object key;
         /**
          * Configure if a cache need to be created if it does exist or can't be
          * pre-configured.
          */
         private Boolean createCacheIfNotExist = true;
         /**
-         * The cache manager
-         */
-        private CacheManager cacheManager;
-        /**
-         * To configure the default cache action. If an action is set in the
-         * message header, then the operation from the header takes precedence.
-         */
-        private String action;
-        /**
-         * The cache key type, default java.lang.Object
-         */
-        private String keyType;
-        /**
-         * The cache manager configuration
-         */
-        private Configuration cacheManagerConfiguration;
-        /**
-         * URI pointing to the Ehcache XML configuration file's location
-         */
-        private String configurationUri;
-        @Deprecated
-        private String configUri;
-        /**
-         * The cache value type, default java.lang.Object
-         */
-        private String valueType;
-        /**
          * Set the delivery mode (synchronous, asynchronous)
          */
         private EventFiring eventFiring = EventFiring.ASYNCHRONOUS;
+        /**
+         * Set the delivery mode (ordered, unordered)
+         */
+        private EventOrdering eventOrdering = EventOrdering.ORDERED;
         /**
          * Set the type of events to listen for
          */
         private Set eventTypes;
         /**
-         * Set the delivery mode (ordered, unordered)
+         * To configure the default action key. If a key is set in the message
+         * header, then the key from the header takes precedence.
          */
-        private EventOrdering eventOrdering = EventOrdering.ORDERED;
+        private Object key;
+        /**
+         * The cache key type, default java.lang.Object
+         */
+        private String keyType;
+        /**
+         * The cache value type, default java.lang.Object
+         */
+        private String valueType;
 
-        public CacheConfiguration getConfiguration() {
-            return configuration;
+        public String getAction() {
+            return action;
         }
 
-        public void setConfiguration(CacheConfiguration configuration) {
-            this.configuration = configuration;
-        }
-
-        public Map getConfigurations() {
-            return configurations;
-        }
-
-        public void setConfigurations(Map configurations) {
-            this.configurations = configurations;
-        }
-
-        public Object getKey() {
-            return key;
-        }
-
-        public void setKey(Object key) {
-            this.key = key;
-        }
-
-        public Boolean getCreateCacheIfNotExist() {
-            return createCacheIfNotExist;
-        }
-
-        public void setCreateCacheIfNotExist(Boolean createCacheIfNotExist) {
-            this.createCacheIfNotExist = createCacheIfNotExist;
+        public void setAction(String action) {
+            this.action = action;
         }
 
         public CacheManager getCacheManager() {
@@ -271,22 +247,6 @@ public class EhcacheComponentConfiguration
             this.cacheManager = cacheManager;
         }
 
-        public String getAction() {
-            return action;
-        }
-
-        public void setAction(String action) {
-            this.action = action;
-        }
-
-        public String getKeyType() {
-            return keyType;
-        }
-
-        public void setKeyType(String keyType) {
-            this.keyType = keyType;
-        }
-
         public Configuration getCacheManagerConfiguration() {
             return cacheManagerConfiguration;
         }
@@ -294,14 +254,6 @@ public class EhcacheComponentConfiguration
         public void setCacheManagerConfiguration(
                 Configuration cacheManagerConfiguration) {
             this.cacheManagerConfiguration = cacheManagerConfiguration;
-        }
-
-        public String getConfigurationUri() {
-            return configurationUri;
-        }
-
-        public void setConfigurationUri(String configurationUri) {
-            this.configurationUri = configurationUri;
         }
 
         @Deprecated
@@ -315,12 +267,36 @@ public class EhcacheComponentConfiguration
             this.configUri = configUri;
         }
 
-        public String getValueType() {
-            return valueType;
+        public CacheConfiguration getConfiguration() {
+            return configuration;
         }
 
-        public void setValueType(String valueType) {
-            this.valueType = valueType;
+        public void setConfiguration(CacheConfiguration configuration) {
+            this.configuration = configuration;
+        }
+
+        public String getConfigurationUri() {
+            return configurationUri;
+        }
+
+        public void setConfigurationUri(String configurationUri) {
+            this.configurationUri = configurationUri;
+        }
+
+        public Map getConfigurations() {
+            return configurations;
+        }
+
+        public void setConfigurations(Map configurations) {
+            this.configurations = configurations;
+        }
+
+        public Boolean getCreateCacheIfNotExist() {
+            return createCacheIfNotExist;
+        }
+
+        public void setCreateCacheIfNotExist(Boolean createCacheIfNotExist) {
+            this.createCacheIfNotExist = createCacheIfNotExist;
         }
 
         public EventFiring getEventFiring() {
@@ -331,6 +307,14 @@ public class EhcacheComponentConfiguration
             this.eventFiring = eventFiring;
         }
 
+        public EventOrdering getEventOrdering() {
+            return eventOrdering;
+        }
+
+        public void setEventOrdering(EventOrdering eventOrdering) {
+            this.eventOrdering = eventOrdering;
+        }
+
         public Set getEventTypes() {
             return eventTypes;
         }
@@ -339,12 +323,28 @@ public class EhcacheComponentConfiguration
             this.eventTypes = eventTypes;
         }
 
-        public EventOrdering getEventOrdering() {
-            return eventOrdering;
+        public Object getKey() {
+            return key;
         }
 
-        public void setEventOrdering(EventOrdering eventOrdering) {
-            this.eventOrdering = eventOrdering;
+        public void setKey(Object key) {
+            this.key = key;
+        }
+
+        public String getKeyType() {
+            return keyType;
+        }
+
+        public void setKeyType(String keyType) {
+            this.keyType = keyType;
+        }
+
+        public String getValueType() {
+            return valueType;
+        }
+
+        public void setValueType(String valueType) {
+            this.valueType = valueType;
         }
     }
 }

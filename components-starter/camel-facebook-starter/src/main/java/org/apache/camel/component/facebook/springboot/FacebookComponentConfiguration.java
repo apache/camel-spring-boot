@@ -103,99 +103,33 @@ public class FacebookComponentConfiguration
     public static class FacebookConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.facebook.config.FacebookConfiguration.class;
         /**
-         * OAuth access token URL
+         * Facebook4J API client URL
          */
-        private String oAuthAccessTokenURL = "https://graph.facebook.com/oauth/access_token";
+        private String clientURL;
         /**
          * Facebook4J client API version
          */
         private String clientVersion;
         /**
-         * OAuth authorization URL
-         */
-        private String oAuthAuthorizationURL = "https://www.facebook.com/dialog/oauth";
-        /**
-         * The application Secret
-         */
-        private String oAuthAppSecret;
-        /**
-         * The application Id
-         */
-        private String oAuthAppId;
-        /**
-         * Facebook4J API client URL
-         */
-        private String clientURL;
-        /**
-         * The user access token
-         */
-        private String oAuthAccessToken;
-        /**
          * Enables deubg output. Effective only with the embedded logger
          */
         private Boolean debugEnabled = false;
         /**
-         * Use SSL
+         * Use Facebook GZIP encoding
          */
-        private Boolean useSSL = true;
-        /**
-         * Number of HTTP retries
-         */
-        private Integer httpRetryCount = 0;
-        /**
-         * HTTP proxy server user name
-         */
-        private String httpProxyUser;
-        /**
-         * API base URL
-         */
-        private String restBaseURL = "https://graph.facebook.com/";
-        /**
-         * HTTP proxy server port
-         */
-        private Integer httpProxyPort;
-        /**
-         * HTTP retry interval in seconds
-         */
-        private Integer httpRetryIntervalSeconds = 5;
-        /**
-         * Prettify JSON debug output if set to true
-         */
-        private Boolean prettyDebugEnabled = false;
-        /**
-         * Http read timeout in milliseconds
-         */
-        private Integer httpReadTimeout = 120000;
-        /**
-         * If set to true, raw JSON forms will be stored in DataObjectFactory
-         */
-        private Boolean jsonStoreEnabled = false;
-        /**
-         * Video API base URL
-         */
-        private String videoBaseURL = "https://graph-video.facebook.com/";
-        /**
-         * HTTP streaming read timeout in milliseconds
-         */
-        private Integer httpStreamingReadTimeout = 40000;
+        private Boolean gzipEnabled = true;
         /**
          * Http connection timeout in milliseconds
          */
         private Integer httpConnectionTimeout = 20000;
         /**
-         * Default OAuth permissions. Comma separated permission names. See
-         * https://developers.facebook.com/docs/reference/login/#permissions for
-         * the detail
+         * HTTP maximum connections per route
          */
-        private String oAuthPermissions;
+        private Integer httpDefaultMaxPerRoute = 2;
         /**
          * HTTP maximum total connections
          */
         private Integer httpMaxTotalConnections = 20;
-        /**
-         * If set to true, Facebook4J mbean will be registerd
-         */
-        private Boolean mbeanEnabled = false;
         /**
          * HTTP proxy server host name
          */
@@ -205,20 +139,86 @@ public class FacebookComponentConfiguration
          */
         private String httpProxyPassword;
         /**
-         * Use Facebook GZIP encoding
+         * HTTP proxy server port
          */
-        private Boolean gzipEnabled = true;
+        private Integer httpProxyPort;
         /**
-         * HTTP maximum connections per route
+         * HTTP proxy server user name
          */
-        private Integer httpDefaultMaxPerRoute = 2;
+        private String httpProxyUser;
+        /**
+         * Http read timeout in milliseconds
+         */
+        private Integer httpReadTimeout = 120000;
+        /**
+         * Number of HTTP retries
+         */
+        private Integer httpRetryCount = 0;
+        /**
+         * HTTP retry interval in seconds
+         */
+        private Integer httpRetryIntervalSeconds = 5;
+        /**
+         * HTTP streaming read timeout in milliseconds
+         */
+        private Integer httpStreamingReadTimeout = 40000;
+        /**
+         * If set to true, raw JSON forms will be stored in DataObjectFactory
+         */
+        private Boolean jsonStoreEnabled = false;
+        /**
+         * If set to true, Facebook4J mbean will be registerd
+         */
+        private Boolean mbeanEnabled = false;
+        /**
+         * The user access token
+         */
+        private String oAuthAccessToken;
+        /**
+         * OAuth access token URL
+         */
+        private String oAuthAccessTokenURL = "https://graph.facebook.com/oauth/access_token";
+        /**
+         * The application Id
+         */
+        private String oAuthAppId;
+        /**
+         * The application Secret
+         */
+        private String oAuthAppSecret;
+        /**
+         * OAuth authorization URL
+         */
+        private String oAuthAuthorizationURL = "https://www.facebook.com/dialog/oauth";
+        /**
+         * Default OAuth permissions. Comma separated permission names. See
+         * https://developers.facebook.com/docs/reference/login/#permissions for
+         * the detail
+         */
+        private String oAuthPermissions;
+        /**
+         * Prettify JSON debug output if set to true
+         */
+        private Boolean prettyDebugEnabled = false;
+        /**
+         * API base URL
+         */
+        private String restBaseURL = "https://graph.facebook.com/";
+        /**
+         * Use SSL
+         */
+        private Boolean useSSL = true;
+        /**
+         * Video API base URL
+         */
+        private String videoBaseURL = "https://graph-video.facebook.com/";
 
-        public String getOAuthAccessTokenURL() {
-            return oAuthAccessTokenURL;
+        public String getClientURL() {
+            return clientURL;
         }
 
-        public void setOAuthAccessTokenURL(String oAuthAccessTokenURL) {
-            this.oAuthAccessTokenURL = oAuthAccessTokenURL;
+        public void setClientURL(String clientURL) {
+            this.clientURL = clientURL;
         }
 
         public String getClientVersion() {
@@ -229,46 +229,6 @@ public class FacebookComponentConfiguration
             this.clientVersion = clientVersion;
         }
 
-        public String getOAuthAuthorizationURL() {
-            return oAuthAuthorizationURL;
-        }
-
-        public void setOAuthAuthorizationURL(String oAuthAuthorizationURL) {
-            this.oAuthAuthorizationURL = oAuthAuthorizationURL;
-        }
-
-        public String getOAuthAppSecret() {
-            return oAuthAppSecret;
-        }
-
-        public void setOAuthAppSecret(String oAuthAppSecret) {
-            this.oAuthAppSecret = oAuthAppSecret;
-        }
-
-        public String getOAuthAppId() {
-            return oAuthAppId;
-        }
-
-        public void setOAuthAppId(String oAuthAppId) {
-            this.oAuthAppId = oAuthAppId;
-        }
-
-        public String getClientURL() {
-            return clientURL;
-        }
-
-        public void setClientURL(String clientURL) {
-            this.clientURL = clientURL;
-        }
-
-        public String getOAuthAccessToken() {
-            return oAuthAccessToken;
-        }
-
-        public void setOAuthAccessToken(String oAuthAccessToken) {
-            this.oAuthAccessToken = oAuthAccessToken;
-        }
-
         public Boolean getDebugEnabled() {
             return debugEnabled;
         }
@@ -277,92 +237,12 @@ public class FacebookComponentConfiguration
             this.debugEnabled = debugEnabled;
         }
 
-        public Boolean getUseSSL() {
-            return useSSL;
+        public Boolean getGzipEnabled() {
+            return gzipEnabled;
         }
 
-        public void setUseSSL(Boolean useSSL) {
-            this.useSSL = useSSL;
-        }
-
-        public Integer getHttpRetryCount() {
-            return httpRetryCount;
-        }
-
-        public void setHttpRetryCount(Integer httpRetryCount) {
-            this.httpRetryCount = httpRetryCount;
-        }
-
-        public String getHttpProxyUser() {
-            return httpProxyUser;
-        }
-
-        public void setHttpProxyUser(String httpProxyUser) {
-            this.httpProxyUser = httpProxyUser;
-        }
-
-        public String getRestBaseURL() {
-            return restBaseURL;
-        }
-
-        public void setRestBaseURL(String restBaseURL) {
-            this.restBaseURL = restBaseURL;
-        }
-
-        public Integer getHttpProxyPort() {
-            return httpProxyPort;
-        }
-
-        public void setHttpProxyPort(Integer httpProxyPort) {
-            this.httpProxyPort = httpProxyPort;
-        }
-
-        public Integer getHttpRetryIntervalSeconds() {
-            return httpRetryIntervalSeconds;
-        }
-
-        public void setHttpRetryIntervalSeconds(Integer httpRetryIntervalSeconds) {
-            this.httpRetryIntervalSeconds = httpRetryIntervalSeconds;
-        }
-
-        public Boolean getPrettyDebugEnabled() {
-            return prettyDebugEnabled;
-        }
-
-        public void setPrettyDebugEnabled(Boolean prettyDebugEnabled) {
-            this.prettyDebugEnabled = prettyDebugEnabled;
-        }
-
-        public Integer getHttpReadTimeout() {
-            return httpReadTimeout;
-        }
-
-        public void setHttpReadTimeout(Integer httpReadTimeout) {
-            this.httpReadTimeout = httpReadTimeout;
-        }
-
-        public Boolean getJsonStoreEnabled() {
-            return jsonStoreEnabled;
-        }
-
-        public void setJsonStoreEnabled(Boolean jsonStoreEnabled) {
-            this.jsonStoreEnabled = jsonStoreEnabled;
-        }
-
-        public String getVideoBaseURL() {
-            return videoBaseURL;
-        }
-
-        public void setVideoBaseURL(String videoBaseURL) {
-            this.videoBaseURL = videoBaseURL;
-        }
-
-        public Integer getHttpStreamingReadTimeout() {
-            return httpStreamingReadTimeout;
-        }
-
-        public void setHttpStreamingReadTimeout(Integer httpStreamingReadTimeout) {
-            this.httpStreamingReadTimeout = httpStreamingReadTimeout;
+        public void setGzipEnabled(Boolean gzipEnabled) {
+            this.gzipEnabled = gzipEnabled;
         }
 
         public Integer getHttpConnectionTimeout() {
@@ -373,12 +253,12 @@ public class FacebookComponentConfiguration
             this.httpConnectionTimeout = httpConnectionTimeout;
         }
 
-        public String getOAuthPermissions() {
-            return oAuthPermissions;
+        public Integer getHttpDefaultMaxPerRoute() {
+            return httpDefaultMaxPerRoute;
         }
 
-        public void setOAuthPermissions(String oAuthPermissions) {
-            this.oAuthPermissions = oAuthPermissions;
+        public void setHttpDefaultMaxPerRoute(Integer httpDefaultMaxPerRoute) {
+            this.httpDefaultMaxPerRoute = httpDefaultMaxPerRoute;
         }
 
         public Integer getHttpMaxTotalConnections() {
@@ -387,14 +267,6 @@ public class FacebookComponentConfiguration
 
         public void setHttpMaxTotalConnections(Integer httpMaxTotalConnections) {
             this.httpMaxTotalConnections = httpMaxTotalConnections;
-        }
-
-        public Boolean getMbeanEnabled() {
-            return mbeanEnabled;
-        }
-
-        public void setMbeanEnabled(Boolean mbeanEnabled) {
-            this.mbeanEnabled = mbeanEnabled;
         }
 
         public String getHttpProxyHost() {
@@ -413,20 +285,148 @@ public class FacebookComponentConfiguration
             this.httpProxyPassword = httpProxyPassword;
         }
 
-        public Boolean getGzipEnabled() {
-            return gzipEnabled;
+        public Integer getHttpProxyPort() {
+            return httpProxyPort;
         }
 
-        public void setGzipEnabled(Boolean gzipEnabled) {
-            this.gzipEnabled = gzipEnabled;
+        public void setHttpProxyPort(Integer httpProxyPort) {
+            this.httpProxyPort = httpProxyPort;
         }
 
-        public Integer getHttpDefaultMaxPerRoute() {
-            return httpDefaultMaxPerRoute;
+        public String getHttpProxyUser() {
+            return httpProxyUser;
         }
 
-        public void setHttpDefaultMaxPerRoute(Integer httpDefaultMaxPerRoute) {
-            this.httpDefaultMaxPerRoute = httpDefaultMaxPerRoute;
+        public void setHttpProxyUser(String httpProxyUser) {
+            this.httpProxyUser = httpProxyUser;
+        }
+
+        public Integer getHttpReadTimeout() {
+            return httpReadTimeout;
+        }
+
+        public void setHttpReadTimeout(Integer httpReadTimeout) {
+            this.httpReadTimeout = httpReadTimeout;
+        }
+
+        public Integer getHttpRetryCount() {
+            return httpRetryCount;
+        }
+
+        public void setHttpRetryCount(Integer httpRetryCount) {
+            this.httpRetryCount = httpRetryCount;
+        }
+
+        public Integer getHttpRetryIntervalSeconds() {
+            return httpRetryIntervalSeconds;
+        }
+
+        public void setHttpRetryIntervalSeconds(Integer httpRetryIntervalSeconds) {
+            this.httpRetryIntervalSeconds = httpRetryIntervalSeconds;
+        }
+
+        public Integer getHttpStreamingReadTimeout() {
+            return httpStreamingReadTimeout;
+        }
+
+        public void setHttpStreamingReadTimeout(Integer httpStreamingReadTimeout) {
+            this.httpStreamingReadTimeout = httpStreamingReadTimeout;
+        }
+
+        public Boolean getJsonStoreEnabled() {
+            return jsonStoreEnabled;
+        }
+
+        public void setJsonStoreEnabled(Boolean jsonStoreEnabled) {
+            this.jsonStoreEnabled = jsonStoreEnabled;
+        }
+
+        public Boolean getMbeanEnabled() {
+            return mbeanEnabled;
+        }
+
+        public void setMbeanEnabled(Boolean mbeanEnabled) {
+            this.mbeanEnabled = mbeanEnabled;
+        }
+
+        public String getOAuthAccessToken() {
+            return oAuthAccessToken;
+        }
+
+        public void setOAuthAccessToken(String oAuthAccessToken) {
+            this.oAuthAccessToken = oAuthAccessToken;
+        }
+
+        public String getOAuthAccessTokenURL() {
+            return oAuthAccessTokenURL;
+        }
+
+        public void setOAuthAccessTokenURL(String oAuthAccessTokenURL) {
+            this.oAuthAccessTokenURL = oAuthAccessTokenURL;
+        }
+
+        public String getOAuthAppId() {
+            return oAuthAppId;
+        }
+
+        public void setOAuthAppId(String oAuthAppId) {
+            this.oAuthAppId = oAuthAppId;
+        }
+
+        public String getOAuthAppSecret() {
+            return oAuthAppSecret;
+        }
+
+        public void setOAuthAppSecret(String oAuthAppSecret) {
+            this.oAuthAppSecret = oAuthAppSecret;
+        }
+
+        public String getOAuthAuthorizationURL() {
+            return oAuthAuthorizationURL;
+        }
+
+        public void setOAuthAuthorizationURL(String oAuthAuthorizationURL) {
+            this.oAuthAuthorizationURL = oAuthAuthorizationURL;
+        }
+
+        public String getOAuthPermissions() {
+            return oAuthPermissions;
+        }
+
+        public void setOAuthPermissions(String oAuthPermissions) {
+            this.oAuthPermissions = oAuthPermissions;
+        }
+
+        public Boolean getPrettyDebugEnabled() {
+            return prettyDebugEnabled;
+        }
+
+        public void setPrettyDebugEnabled(Boolean prettyDebugEnabled) {
+            this.prettyDebugEnabled = prettyDebugEnabled;
+        }
+
+        public String getRestBaseURL() {
+            return restBaseURL;
+        }
+
+        public void setRestBaseURL(String restBaseURL) {
+            this.restBaseURL = restBaseURL;
+        }
+
+        public Boolean getUseSSL() {
+            return useSSL;
+        }
+
+        public void setUseSSL(Boolean useSSL) {
+            this.useSSL = useSSL;
+        }
+
+        public String getVideoBaseURL() {
+            return videoBaseURL;
+        }
+
+        public void setVideoBaseURL(String videoBaseURL) {
+            this.videoBaseURL = videoBaseURL;
         }
     }
 }

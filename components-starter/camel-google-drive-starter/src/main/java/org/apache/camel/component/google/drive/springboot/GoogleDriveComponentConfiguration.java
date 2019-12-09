@@ -119,30 +119,14 @@ public class GoogleDriveComponentConfiguration
     public static class GoogleDriveConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.google.drive.GoogleDriveConfiguration.class;
         /**
-         * Specifies the level of permissions you want a drive application to
-         * have to a user account. See
-         * https://developers.google.com/drive/web/scopes for more info.
-         */
-        private List scopes;
-        /**
          * OAuth 2 access token. This typically expires after an hour so
          * refreshToken is recommended for long term usage.
          */
         private String accessToken;
         /**
-         * OAuth 2 refresh token. Using this, the Google Calendar component can
-         * obtain a new accessToken whenever the current one expires - a
-         * necessity if the application is long-lived.
-         */
-        private String refreshToken;
-        /**
          * What kind of operation to perform
          */
         private GoogleDriveApiName apiName;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
         /**
          * Google drive application name. Example would be
          * camel-google-drive/1.0
@@ -156,14 +140,22 @@ public class GoogleDriveComponentConfiguration
          * Client secret of the drive application
          */
         private String clientSecret;
-
-        public List getScopes() {
-            return scopes;
-        }
-
-        public void setScopes(List scopes) {
-            this.scopes = scopes;
-        }
+        /**
+         * What sub operation to use for the selected operation
+         */
+        private String methodName;
+        /**
+         * OAuth 2 refresh token. Using this, the Google Calendar component can
+         * obtain a new accessToken whenever the current one expires - a
+         * necessity if the application is long-lived.
+         */
+        private String refreshToken;
+        /**
+         * Specifies the level of permissions you want a drive application to
+         * have to a user account. See
+         * https://developers.google.com/drive/web/scopes for more info.
+         */
+        private List scopes;
 
         public String getAccessToken() {
             return accessToken;
@@ -173,28 +165,12 @@ public class GoogleDriveComponentConfiguration
             this.accessToken = accessToken;
         }
 
-        public String getRefreshToken() {
-            return refreshToken;
-        }
-
-        public void setRefreshToken(String refreshToken) {
-            this.refreshToken = refreshToken;
-        }
-
         public GoogleDriveApiName getApiName() {
             return apiName;
         }
 
         public void setApiName(GoogleDriveApiName apiName) {
             this.apiName = apiName;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
         }
 
         public String getApplicationName() {
@@ -219,6 +195,30 @@ public class GoogleDriveComponentConfiguration
 
         public void setClientSecret(String clientSecret) {
             this.clientSecret = clientSecret;
+        }
+
+        public String getMethodName() {
+            return methodName;
+        }
+
+        public void setMethodName(String methodName) {
+            this.methodName = methodName;
+        }
+
+        public String getRefreshToken() {
+            return refreshToken;
+        }
+
+        public void setRefreshToken(String refreshToken) {
+            this.refreshToken = refreshToken;
+        }
+
+        public List getScopes() {
+            return scopes;
+        }
+
+        public void setScopes(List scopes) {
+            this.scopes = scopes;
         }
     }
 }

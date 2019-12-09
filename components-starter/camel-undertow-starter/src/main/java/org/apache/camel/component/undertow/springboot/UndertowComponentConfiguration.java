@@ -156,10 +156,10 @@ public class UndertowComponentConfiguration
     public static class UndertowHostOptionsNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.undertow.UndertowHostOptions.class;
         private Integer bufferSize;
-        private Integer workerThreads;
-        private Boolean http2Enabled;
         private Boolean directBuffers;
+        private Boolean http2Enabled;
         private Integer ioThreads;
+        private Integer workerThreads;
 
         public Integer getBufferSize() {
             return bufferSize;
@@ -167,22 +167,6 @@ public class UndertowComponentConfiguration
 
         public void setBufferSize(Integer bufferSize) {
             this.bufferSize = bufferSize;
-        }
-
-        public Integer getWorkerThreads() {
-            return workerThreads;
-        }
-
-        public void setWorkerThreads(Integer workerThreads) {
-            this.workerThreads = workerThreads;
-        }
-
-        public Boolean getHttp2Enabled() {
-            return http2Enabled;
-        }
-
-        public void setHttp2Enabled(Boolean http2Enabled) {
-            this.http2Enabled = http2Enabled;
         }
 
         public Boolean getDirectBuffers() {
@@ -193,12 +177,28 @@ public class UndertowComponentConfiguration
             this.directBuffers = directBuffers;
         }
 
+        public Boolean getHttp2Enabled() {
+            return http2Enabled;
+        }
+
+        public void setHttp2Enabled(Boolean http2Enabled) {
+            this.http2Enabled = http2Enabled;
+        }
+
         public Integer getIoThreads() {
             return ioThreads;
         }
 
         public void setIoThreads(Integer ioThreads) {
             this.ioThreads = ioThreads;
+        }
+
+        public Integer getWorkerThreads() {
+            return workerThreads;
+        }
+
+        public void setWorkerThreads(Integer workerThreads) {
+            this.workerThreads = workerThreads;
         }
     }
 }

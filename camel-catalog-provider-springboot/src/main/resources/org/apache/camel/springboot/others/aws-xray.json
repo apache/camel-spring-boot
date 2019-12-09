@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "aws-xray",
+    "kind": "other",
+    "title": "AWS XRay",
+    "description": "Distributed tracing using AWS XRay",
+    "deprecated": "false",
+    "firstVersion": "2.21.0",
+    "label": "monitoring,microservice",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-aws-xray-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

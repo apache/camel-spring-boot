@@ -17,17 +17,12 @@
 package org.apache.camel.springboot.maven;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -39,10 +34,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -72,14 +65,12 @@ import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriPath;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.artifact.Artifact;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
-import org.apache.maven.project.MavenProject;
 import org.jboss.forge.roaster.model.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -111,8 +102,13 @@ import static org.apache.camel.maven.packaging.PackageHelper.loadText;
  * Generate Spring Boot auto configuration files for Camel components and data
  * formats.
  */
-@Mojo(name = "prepare-spring-boot-auto-configuration", threadSafe = true, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
-public class SpringBootAutoConfigurationMojo extends AbstractMojo {
+@Mojo(name = "prepare-spring-boot-auto-configuration", threadSafe = true,
+        requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME,
+        requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME,
+        defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
+public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator {
+
+    protected static final String[] IGNORE_MODULES = {/* Non-standard -> */ "camel-grape"};
 
     /**
      * Useful to move configuration towards starters. Warning: the
@@ -166,25 +162,11 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
         PRIMITIVEMAP.put("float", "java.lang.Float");
     }
 
-    private static final String[] IGNORE_MODULES = {/* Non-standard -> */ "camel-grape"};
-
     /**
      * The output directory for generated component schema file
      */
     @Parameter(defaultValue = "${project.build.directory}/classes")
     protected File classesDir;
-
-    /**
-     * The maven project.
-     */
-    @Parameter(property = "project", required = true, readonly = true)
-    protected MavenProject project;
-
-    /**
-     * The project build directory
-     */
-    @Parameter(defaultValue = "${project.build.directory}")
-    protected File buildDir;
 
     /**
      * The base directory
@@ -196,88 +178,32 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
 
     JarFile componentJar;
 
+    protected void executeAll() throws MojoExecutionException, MojoFailureException, IOException {
+        if ("camel-core".equals(getMainDepArtifactId())) {
+            executeAll(getMainDepGroupId(), "camel-core");
+            executeAll(getMainDepGroupId(), "camel-base");
+            executeAll(getMainDepGroupId(), "camel-core-engine");
+        } else {
+            executeAll(getMainDepGroupId(), getMainDepArtifactId());
+        }
+    }
+
+    private void executeAll(String groupId, String artifactId) throws MojoExecutionException, MojoFailureException, IOException {
+        try (JarFile componentJar = getJarFile(groupId, artifactId)) {
+            Map<String, Supplier<String>> files = getJSonFiles(componentJar);
+            executeModels(componentJar, files);
+            executeComponents(componentJar, files);
+            executeDataFormats(componentJar, files);
+            executeLanguages(componentJar, files);
+        }
+    }
+
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
-        if (project.getArtifactId().equals("components-starter")) {
-            return;
-        }
-        // Do not generate code for ignored module
-        if (Arrays.asList(IGNORE_MODULES).contains(getMainDepArtifactId())) {
-            getLog().info("Component auto-configuration will not be created: component contained in the ignore list");
-            return;
-        }
-
-        executeAll();
+    protected boolean isIgnore(String artifactId) {
+        return Arrays.asList(IGNORE_MODULES).contains(artifactId);
     }
 
-    private String getMainDepArtifactId() {
-        return project.getArtifactId().substring(0, project.getArtifactId().length() - "-starter".length());
-    }
-
-    private String getMainDepGroupId() {
-        return "camel-spring-boot-starter".equals(project.getArtifactId())
-                ? "org.apache.camel.springboot" : "org.apache.camel";
-    }
-
-    private void executeAll() throws MojoExecutionException, MojoFailureException {
-        Map<String, Supplier<String>> files;
-
-        Artifact mainDep = project.getArtifactMap().get(getMainDepGroupId() + ":" + getMainDepArtifactId());
-
-        try {
-            componentJar = new JarFile(mainDep.getFile());
-            files = componentJar.stream()
-                    .filter(je -> je.getName().endsWith(".json"))
-                    .collect(Collectors.toMap(je -> "jar:" + mainDep.getFile().toURI().toString() + "!" + je.getName(),
-                            je -> cache(() -> loadJson(componentJar, je))));
-        } catch (IOException e) {
-            throw new MojoExecutionException("Error scanning json files", e);
-        }
-
-//        files = PackageHelper.findJsonFiles(buildDir, p -> p.isDirectory() || p.getName().endsWith(".json")).stream()
-//                .collect(Collectors.toMap(f -> f.toURI().toString(), s -> cache(() -> loadJson(s))));
-
-        // special for camel-core-engine where we generate some special auto-configuration source code
-        if ("camel-core-engine".equals(project.getArtifactId())) {
-            executeModels(files);
-        }
-
-        executeComponent(files);
-        executeDataFormat(files);
-        executeLanguage(files);
-    }
-
-    private static String loadJson(File file) {
-        try (InputStream is = new FileInputStream(file)) {
-            return loadText(is);
-        } catch (IOException e) {
-            throw new IOError(e);
-        }
-    }
-
-    private static String loadJson(JarFile jar, JarEntry je) {
-        try (InputStream is = jar.getInputStream(je)) {
-            return loadText(is);
-        } catch (IOException e) {
-            throw new IOError(e);
-        }
-    }
-
-    private static <T> Supplier<T> cache(Supplier<T> supplier) {
-        return new Supplier<T>() {
-            T value;
-
-            @Override
-            public T get() {
-                if (value == null) {
-                    value = supplier.get();
-                }
-                return value;
-            }
-        };
-    }
-
-    private void executeModels(Map<String, Supplier<String>> files) throws MojoExecutionException, MojoFailureException {
+    private void executeModels(JarFile componentJar, Map<String, Supplier<String>> files) throws MojoExecutionException, MojoFailureException {
         String json;
 
         // Hystrix
@@ -609,10 +535,9 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
         writeComponentSpringFactorySource(packageName, name);
     }
 
-    private void executeComponent(Map<String, Supplier<String>> jsonFiles) throws MojoFailureException {
+    private void executeComponents(JarFile componentJar, Map<String, Supplier<String>> jsonFiles) throws MojoFailureException {
         // find the component names
-        Set<String> componentNames = new TreeSet<>();
-        findComponentNames(componentNames);
+        List<String> componentNames = findComponentNames(componentJar);
 
         // create auto configuration for the components
         if (!componentNames.isEmpty()) {
@@ -653,9 +578,9 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
         }
     }
 
-    private void executeDataFormat(Map<String, Supplier<String>> jsonFiles) throws MojoFailureException {
+    private void executeDataFormats(JarFile componentJar, Map<String, Supplier<String>> jsonFiles) throws MojoFailureException {
         // find the data format names
-        List<String> dataFormatNames = findDataFormatNames();
+        List<String> dataFormatNames = findDataFormatNames(componentJar);
 
         // create auto configuration for the data formats
         if (!dataFormatNames.isEmpty()) {
@@ -697,9 +622,9 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
         }
     }
 
-    private void executeLanguage(Map<String, Supplier<String>> jsonFiles) throws MojoFailureException {
+    private void executeLanguages(JarFile componentJar, Map<String, Supplier<String>> jsonFiles) throws MojoFailureException {
         // find the language names
-        List<String> languageNames = findLanguageNames();
+        List<String> languageNames = findLanguageNames(componentJar);
 
         // create auto configuration for the languages
         if (!languageNames.isEmpty()) {
@@ -1213,7 +1138,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
                 List<java.lang.reflect.Method> allGetters = publicMethods.stream().filter(m -> m.getReturnType() != void.class).filter(m -> m.getParameterCount() == 0)
                     .filter(m -> m.getName().matches("(get|is)[A-Z][a-zA-Z0-9]*")).collect(Collectors.toList());
                 allSetters.stream()
-                        .sorted(Comparator.comparing(m -> getSetterPosition(sourceCode, m)))
+                        .sorted(Comparator.<java.lang.reflect.Method>comparingInt(m -> getSetterPosition(sourceCode, m))
+                                          .thenComparing(java.lang.reflect.Method::getName))
                         .map(m -> Strings.uncapitalize(m.getName().substring(3)))
                         .forEach(fn -> {
                     Class<?> ft;
@@ -1951,34 +1877,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractMojo {
     private static void sortImports(JavaClass importer) {
         // sort imports
         // do nothing, as imports are sorted automatically when displayed
-    }
-
-    private static String loadModelJson(Map<String, Supplier<String>> jsonFiles, String modelName) {
-        return loadJsonOfType(jsonFiles, modelName, "model");
-    }
-
-    private static String loadComponentJson(Map<String, Supplier<String>> jsonFiles, String componentName) {
-        return loadJsonOfType(jsonFiles, componentName, "component");
-    }
-
-    private static String loadDataFormatJson(Map<String, Supplier<String>> jsonFiles, String dataFormatName) {
-        return loadJsonOfType(jsonFiles, dataFormatName, "dataformat");
-    }
-
-    private static String loadLanguageJson(Map<String, Supplier<String>> jsonFiles, String languageName) {
-        return loadJsonOfType(jsonFiles, languageName, "language");
-    }
-
-    private static String loadJsonOfType(Map<String, Supplier<String>> jsonFiles, String modelName, String type) {
-        for (Map.Entry<String, Supplier<String>> entry : jsonFiles.entrySet()) {
-            if (entry.getKey().endsWith("/" + modelName + ".json")) {
-                String json = entry.getValue().get();
-                if (json.contains("\"kind\": \"" + type + "\"")) {
-                    return json;
-                }
-            }
-        }
-        return null;
     }
 
     private static ComponentModel generateComponentModel(String componentName, String json) {

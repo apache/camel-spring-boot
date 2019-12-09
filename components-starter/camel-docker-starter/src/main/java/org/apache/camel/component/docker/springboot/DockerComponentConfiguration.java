@@ -104,34 +104,55 @@ public class DockerComponentConfiguration
     public static class DockerConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.docker.DockerConfiguration.class;
         /**
-         * Docker host
+         * Location containing the SSL certificate chain
          */
-        private String host = "localhost";
+        private String certPath;
         /**
-         * Docker port
+         * The fully qualified class name of the DockerCmdExecFactory
+         * implementation to use
          */
-        private Integer port = 2375;
-        /**
-         * Password to authenticate with
-         */
-        private String password;
+        private String cmdExecFactory = "com.github.dockerjava.netty.NettyDockerCmdExecFactory";
         /**
          * Email address associated with the user
          */
         private String email;
         /**
-         * Socket connection mode
+         * Whether to follow redirect filter
          */
-        private Boolean socket = true;
-        private Map parameters;
+        private Boolean followRedirectFilter = false;
         /**
-         * User name to authenticate with
+         * Docker host
          */
-        private String username;
+        private String host = "localhost";
+        /**
+         * Whether to use logging filter
+         */
+        private Boolean loggingFilter = false;
+        /**
+         * Maximum route connections
+         */
+        private Integer maxPerRouteConnections = 100;
+        /**
+         * Maximum total connections
+         */
+        private Integer maxTotalConnections = 100;
         /**
          * Which operation to use
          */
         private DockerOperation operation;
+        private Map parameters;
+        /**
+         * Password to authenticate with
+         */
+        private String password;
+        /**
+         * Docker port
+         */
+        private Integer port = 2375;
+        /**
+         * Request timeout for response (in seconds)
+         */
+        private Integer requestTimeout;
         /**
          * Use HTTPS communication
          */
@@ -141,61 +162,32 @@ public class DockerComponentConfiguration
          */
         private String serverAddress = "https://index.docker.io/v1/";
         /**
-         * Request timeout for response (in seconds)
+         * Socket connection mode
          */
-        private Integer requestTimeout;
-        /**
-         * Location containing the SSL certificate chain
-         */
-        private String certPath;
-        /**
-         * Maximum total connections
-         */
-        private Integer maxTotalConnections = 100;
-        /**
-         * Maximum route connections
-         */
-        private Integer maxPerRouteConnections = 100;
-        /**
-         * Whether to use logging filter
-         */
-        private Boolean loggingFilter = false;
-        /**
-         * Whether to follow redirect filter
-         */
-        private Boolean followRedirectFilter = false;
+        private Boolean socket = true;
         /**
          * Check TLS
          */
         private Boolean tlsVerify = false;
         /**
-         * The fully qualified class name of the DockerCmdExecFactory
-         * implementation to use
+         * User name to authenticate with
          */
-        private String cmdExecFactory = "com.github.dockerjava.netty.NettyDockerCmdExecFactory";
+        private String username;
 
-        public String getHost() {
-            return host;
+        public String getCertPath() {
+            return certPath;
         }
 
-        public void setHost(String host) {
-            this.host = host;
+        public void setCertPath(String certPath) {
+            this.certPath = certPath;
         }
 
-        public Integer getPort() {
-            return port;
+        public String getCmdExecFactory() {
+            return cmdExecFactory;
         }
 
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
+        public void setCmdExecFactory(String cmdExecFactory) {
+            this.cmdExecFactory = cmdExecFactory;
         }
 
         public String getEmail() {
@@ -206,12 +198,52 @@ public class DockerComponentConfiguration
             this.email = email;
         }
 
-        public Boolean getSocket() {
-            return socket;
+        public Boolean getFollowRedirectFilter() {
+            return followRedirectFilter;
         }
 
-        public void setSocket(Boolean socket) {
-            this.socket = socket;
+        public void setFollowRedirectFilter(Boolean followRedirectFilter) {
+            this.followRedirectFilter = followRedirectFilter;
+        }
+
+        public String getHost() {
+            return host;
+        }
+
+        public void setHost(String host) {
+            this.host = host;
+        }
+
+        public Boolean getLoggingFilter() {
+            return loggingFilter;
+        }
+
+        public void setLoggingFilter(Boolean loggingFilter) {
+            this.loggingFilter = loggingFilter;
+        }
+
+        public Integer getMaxPerRouteConnections() {
+            return maxPerRouteConnections;
+        }
+
+        public void setMaxPerRouteConnections(Integer maxPerRouteConnections) {
+            this.maxPerRouteConnections = maxPerRouteConnections;
+        }
+
+        public Integer getMaxTotalConnections() {
+            return maxTotalConnections;
+        }
+
+        public void setMaxTotalConnections(Integer maxTotalConnections) {
+            this.maxTotalConnections = maxTotalConnections;
+        }
+
+        public DockerOperation getOperation() {
+            return operation;
+        }
+
+        public void setOperation(DockerOperation operation) {
+            this.operation = operation;
         }
 
         public Map getParameters() {
@@ -222,20 +254,28 @@ public class DockerComponentConfiguration
             this.parameters = parameters;
         }
 
-        public String getUsername() {
-            return username;
+        public String getPassword() {
+            return password;
         }
 
-        public void setUsername(String username) {
-            this.username = username;
+        public void setPassword(String password) {
+            this.password = password;
         }
 
-        public DockerOperation getOperation() {
-            return operation;
+        public Integer getPort() {
+            return port;
         }
 
-        public void setOperation(DockerOperation operation) {
-            this.operation = operation;
+        public void setPort(Integer port) {
+            this.port = port;
+        }
+
+        public Integer getRequestTimeout() {
+            return requestTimeout;
+        }
+
+        public void setRequestTimeout(Integer requestTimeout) {
+            this.requestTimeout = requestTimeout;
         }
 
         public Boolean getSecure() {
@@ -254,52 +294,12 @@ public class DockerComponentConfiguration
             this.serverAddress = serverAddress;
         }
 
-        public Integer getRequestTimeout() {
-            return requestTimeout;
+        public Boolean getSocket() {
+            return socket;
         }
 
-        public void setRequestTimeout(Integer requestTimeout) {
-            this.requestTimeout = requestTimeout;
-        }
-
-        public String getCertPath() {
-            return certPath;
-        }
-
-        public void setCertPath(String certPath) {
-            this.certPath = certPath;
-        }
-
-        public Integer getMaxTotalConnections() {
-            return maxTotalConnections;
-        }
-
-        public void setMaxTotalConnections(Integer maxTotalConnections) {
-            this.maxTotalConnections = maxTotalConnections;
-        }
-
-        public Integer getMaxPerRouteConnections() {
-            return maxPerRouteConnections;
-        }
-
-        public void setMaxPerRouteConnections(Integer maxPerRouteConnections) {
-            this.maxPerRouteConnections = maxPerRouteConnections;
-        }
-
-        public Boolean getLoggingFilter() {
-            return loggingFilter;
-        }
-
-        public void setLoggingFilter(Boolean loggingFilter) {
-            this.loggingFilter = loggingFilter;
-        }
-
-        public Boolean getFollowRedirectFilter() {
-            return followRedirectFilter;
-        }
-
-        public void setFollowRedirectFilter(Boolean followRedirectFilter) {
-            this.followRedirectFilter = followRedirectFilter;
+        public void setSocket(Boolean socket) {
+            this.socket = socket;
         }
 
         public Boolean getTlsVerify() {
@@ -310,12 +310,12 @@ public class DockerComponentConfiguration
             this.tlsVerify = tlsVerify;
         }
 
-        public String getCmdExecFactory() {
-            return cmdExecFactory;
+        public String getUsername() {
+            return username;
         }
 
-        public void setCmdExecFactory(String cmdExecFactory) {
-            this.cmdExecFactory = cmdExecFactory;
+        public void setUsername(String username) {
+            this.username = username;
         }
     }
 }

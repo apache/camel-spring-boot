@@ -199,39 +199,6 @@ public class NettyHttpComponentConfiguration
     public static class NettyHttpConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.netty.http.NettyHttpConfiguration.class;
         /**
-         * Allow using gzip/deflate for compression on the Netty HTTP server if
-         * the client supports it from the HTTP headers.
-         */
-        private Boolean compression = false;
-        /**
-         * Resource path
-         */
-        private String path;
-        /**
-         * The local hostname such as localhost, or 0.0.0.0 when being a
-         * consumer. The remote HTTP server hostname when using producer.
-         */
-        private String host;
-        /**
-         * The protocol to use which is either http, https or proxy - a consumer
-         * only option.
-         */
-        private String protocol;
-        /**
-         * The host port number
-         */
-        private Integer port;
-        /**
-         * Whether or not Camel should try to find a target consumer by matching
-         * the URI prefix if no exact match is found.
-         */
-        private Boolean matchOnUriPrefix = false;
-        /**
-         * Whether Netty HTTP server should log a WARN if decoding the HTTP
-         * request failed and a HTTP Status 400 (bad request) is returned.
-         */
-        private Boolean logWarnOnBadRequest = true;
-        /**
          * If the option is true, the producer will ignore the Exchange.HTTP_URI
          * header, and use the endpoint's URI for request. You may also set the
          * throwExceptionOnFailure to be false to let the producer send all the
@@ -241,6 +208,16 @@ public class NettyHttpComponentConfiguration
          * headers to the consumed exchange).
          */
         private Boolean bridgeEndpoint = false;
+        /**
+         * Value in bytes the max content length per chunked frame received on
+         * the Netty HTTP server.
+         */
+        private Integer chunkedMaxContentLength = 1048576;
+        /**
+         * Allow using gzip/deflate for compression on the Netty HTTP server if
+         * the client supports it from the HTTP headers.
+         */
+        private Boolean compression = false;
         /**
          * Determines whether or not the raw input stream from Netty
          * HttpRequest#getContent() or HttpResponset#getContent() is cached or
@@ -261,22 +238,41 @@ public class NettyHttpComponentConfiguration
          */
         private Boolean disableStreamCache = false;
         /**
-         * Whether to send back HTTP status code 503 when the consumer has been
-         * suspended. If the option is false then the Netty Acceptor is unbound
-         * when the consumer is suspended, so clients cannot connect anymore.
+         * The local hostname such as localhost, or 0.0.0.0 when being a
+         * consumer. The remote HTTP server hostname when using producer.
          */
-        private Boolean send503whenSuspended = true;
+        private String host;
         /**
-         * Value in bytes the max content length per chunked frame received on
-         * the Netty HTTP server.
+         * Whether Netty HTTP server should log a WARN if decoding the HTTP
+         * request failed and a HTTP Status 400 (bad request) is returned.
          */
-        private Integer chunkedMaxContentLength = 1048576;
+        private Boolean logWarnOnBadRequest = true;
+        /**
+         * If this option is enabled, then during binding from Netty to Camel
+         * Message then the headers will be mapped as well (eg added as header
+         * to the Camel Message as well). You can turn off this option to
+         * disable this. The headers can still be accessed from the
+         * org.apache.camel.component.netty.http.NettyHttpMessage message with
+         * the method getHttpRequest() that returns the Netty HTTP request
+         * io.netty.handler.codec.http.HttpRequest instance.
+         */
+        private Boolean mapHeaders = true;
+        /**
+         * Whether or not Camel should try to find a target consumer by matching
+         * the URI prefix if no exact match is found.
+         */
+        private Boolean matchOnUriPrefix = false;
         /**
          * The maximum length of all headers. If the sum of the length of each
          * header exceeds this value, a
          * io.netty.handler.codec.TooLongFrameException will be raised.
          */
         private Integer maxHeaderSize = 8192;
+        /**
+         * If enabled and an Exchange failed processing on the consumer side the
+         * response's body won't contain the exception's stack trace.
+         */
+        private Boolean muteException = false;
         /**
          * The status codes which are considered a success response. The values
          * are inclusive. Multiple ranges can be defined, separated by comma,
@@ -285,9 +281,24 @@ public class NettyHttpComponentConfiguration
          */
         private String okStatusCodeRange = "200-299";
         /**
-         * Sets whether to use a relative path in HTTP requests.
+         * Resource path
          */
-        private Boolean useRelativePath = true;
+        private String path;
+        /**
+         * The host port number
+         */
+        private Integer port;
+        /**
+         * The protocol to use which is either http, https or proxy - a consumer
+         * only option.
+         */
+        private String protocol;
+        /**
+         * Whether to send back HTTP status code 503 when the consumer has been
+         * suspended. If the option is false then the Netty Acceptor is unbound
+         * when the consumer is suspended, so clients cannot connect anymore.
+         */
+        private Boolean send503whenSuspended = true;
         /**
          * Option to disable throwing the HttpOperationFailedException in case
          * of failed responses from the remote server. This allows you to get
@@ -307,11 +318,6 @@ public class NettyHttpComponentConfiguration
          */
         private Boolean transferException = false;
         /**
-         * If enabled and an Exchange failed processing on the consumer side the
-         * response's body won't contain the exception's stack trace.
-         */
-        private Boolean muteException = false;
-        /**
          * If this option is enabled, then during binding from Netty to Camel
          * Message then the header values will be URL decoded (eg %20 will be a
          * space character. Notice this option is used by the default
@@ -322,71 +328,9 @@ public class NettyHttpComponentConfiguration
          */
         private Boolean urlDecodeHeaders = false;
         /**
-         * If this option is enabled, then during binding from Netty to Camel
-         * Message then the headers will be mapped as well (eg added as header
-         * to the Camel Message as well). You can turn off this option to
-         * disable this. The headers can still be accessed from the
-         * org.apache.camel.component.netty.http.NettyHttpMessage message with
-         * the method getHttpRequest() that returns the Netty HTTP request
-         * io.netty.handler.codec.http.HttpRequest instance.
+         * Sets whether to use a relative path in HTTP requests.
          */
-        private Boolean mapHeaders = true;
-
-        public Boolean getCompression() {
-            return compression;
-        }
-
-        public void setCompression(Boolean compression) {
-            this.compression = compression;
-        }
-
-        public String getPath() {
-            return path;
-        }
-
-        public void setPath(String path) {
-            this.path = path;
-        }
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public String getProtocol() {
-            return protocol;
-        }
-
-        public void setProtocol(String protocol) {
-            this.protocol = protocol;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public Boolean getMatchOnUriPrefix() {
-            return matchOnUriPrefix;
-        }
-
-        public void setMatchOnUriPrefix(Boolean matchOnUriPrefix) {
-            this.matchOnUriPrefix = matchOnUriPrefix;
-        }
-
-        public Boolean getLogWarnOnBadRequest() {
-            return logWarnOnBadRequest;
-        }
-
-        public void setLogWarnOnBadRequest(Boolean logWarnOnBadRequest) {
-            this.logWarnOnBadRequest = logWarnOnBadRequest;
-        }
+        private Boolean useRelativePath = true;
 
         public Boolean getBridgeEndpoint() {
             return bridgeEndpoint;
@@ -394,22 +338,6 @@ public class NettyHttpComponentConfiguration
 
         public void setBridgeEndpoint(Boolean bridgeEndpoint) {
             this.bridgeEndpoint = bridgeEndpoint;
-        }
-
-        public Boolean getDisableStreamCache() {
-            return disableStreamCache;
-        }
-
-        public void setDisableStreamCache(Boolean disableStreamCache) {
-            this.disableStreamCache = disableStreamCache;
-        }
-
-        public Boolean getSend503whenSuspended() {
-            return send503whenSuspended;
-        }
-
-        public void setSend503whenSuspended(Boolean send503whenSuspended) {
-            this.send503whenSuspended = send503whenSuspended;
         }
 
         public Integer getChunkedMaxContentLength() {
@@ -420,12 +348,68 @@ public class NettyHttpComponentConfiguration
             this.chunkedMaxContentLength = chunkedMaxContentLength;
         }
 
+        public Boolean getCompression() {
+            return compression;
+        }
+
+        public void setCompression(Boolean compression) {
+            this.compression = compression;
+        }
+
+        public Boolean getDisableStreamCache() {
+            return disableStreamCache;
+        }
+
+        public void setDisableStreamCache(Boolean disableStreamCache) {
+            this.disableStreamCache = disableStreamCache;
+        }
+
+        public String getHost() {
+            return host;
+        }
+
+        public void setHost(String host) {
+            this.host = host;
+        }
+
+        public Boolean getLogWarnOnBadRequest() {
+            return logWarnOnBadRequest;
+        }
+
+        public void setLogWarnOnBadRequest(Boolean logWarnOnBadRequest) {
+            this.logWarnOnBadRequest = logWarnOnBadRequest;
+        }
+
+        public Boolean getMapHeaders() {
+            return mapHeaders;
+        }
+
+        public void setMapHeaders(Boolean mapHeaders) {
+            this.mapHeaders = mapHeaders;
+        }
+
+        public Boolean getMatchOnUriPrefix() {
+            return matchOnUriPrefix;
+        }
+
+        public void setMatchOnUriPrefix(Boolean matchOnUriPrefix) {
+            this.matchOnUriPrefix = matchOnUriPrefix;
+        }
+
         public Integer getMaxHeaderSize() {
             return maxHeaderSize;
         }
 
         public void setMaxHeaderSize(Integer maxHeaderSize) {
             this.maxHeaderSize = maxHeaderSize;
+        }
+
+        public Boolean getMuteException() {
+            return muteException;
+        }
+
+        public void setMuteException(Boolean muteException) {
+            this.muteException = muteException;
         }
 
         public String getOkStatusCodeRange() {
@@ -436,12 +420,36 @@ public class NettyHttpComponentConfiguration
             this.okStatusCodeRange = okStatusCodeRange;
         }
 
-        public Boolean getUseRelativePath() {
-            return useRelativePath;
+        public String getPath() {
+            return path;
         }
 
-        public void setUseRelativePath(Boolean useRelativePath) {
-            this.useRelativePath = useRelativePath;
+        public void setPath(String path) {
+            this.path = path;
+        }
+
+        public Integer getPort() {
+            return port;
+        }
+
+        public void setPort(Integer port) {
+            this.port = port;
+        }
+
+        public String getProtocol() {
+            return protocol;
+        }
+
+        public void setProtocol(String protocol) {
+            this.protocol = protocol;
+        }
+
+        public Boolean getSend503whenSuspended() {
+            return send503whenSuspended;
+        }
+
+        public void setSend503whenSuspended(Boolean send503whenSuspended) {
+            this.send503whenSuspended = send503whenSuspended;
         }
 
         public Boolean getThrowExceptionOnFailure() {
@@ -460,14 +468,6 @@ public class NettyHttpComponentConfiguration
             this.transferException = transferException;
         }
 
-        public Boolean getMuteException() {
-            return muteException;
-        }
-
-        public void setMuteException(Boolean muteException) {
-            this.muteException = muteException;
-        }
-
         public Boolean getUrlDecodeHeaders() {
             return urlDecodeHeaders;
         }
@@ -476,32 +476,24 @@ public class NettyHttpComponentConfiguration
             this.urlDecodeHeaders = urlDecodeHeaders;
         }
 
-        public Boolean getMapHeaders() {
-            return mapHeaders;
+        public Boolean getUseRelativePath() {
+            return useRelativePath;
         }
 
-        public void setMapHeaders(Boolean mapHeaders) {
-            this.mapHeaders = mapHeaders;
+        public void setUseRelativePath(Boolean useRelativePath) {
+            this.useRelativePath = useRelativePath;
         }
     }
 
     public static class NettyHttpSecurityConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.netty.http.NettyHttpSecurityConfiguration.class;
-        private String realm;
         private Boolean authenticate;
+        private String constraint;
+        private LoggingLevel loginDeniedLoggingLevel;
+        private String realm;
         private String roleClassName;
         private SecurityAuthenticator securityAuthenticator;
         private SecurityConstraint securityConstraint;
-        private String constraint;
-        private LoggingLevel loginDeniedLoggingLevel;
-
-        public String getRealm() {
-            return realm;
-        }
-
-        public void setRealm(String realm) {
-            this.realm = realm;
-        }
 
         public Boolean getAuthenticate() {
             return authenticate;
@@ -509,6 +501,31 @@ public class NettyHttpComponentConfiguration
 
         public void setAuthenticate(Boolean authenticate) {
             this.authenticate = authenticate;
+        }
+
+        public String getConstraint() {
+            return constraint;
+        }
+
+        public void setConstraint(String constraint) {
+            this.constraint = constraint;
+        }
+
+        public LoggingLevel getLoginDeniedLoggingLevel() {
+            return loginDeniedLoggingLevel;
+        }
+
+        public void setLoginDeniedLoggingLevel(
+                LoggingLevel loginDeniedLoggingLevel) {
+            this.loginDeniedLoggingLevel = loginDeniedLoggingLevel;
+        }
+
+        public String getRealm() {
+            return realm;
+        }
+
+        public void setRealm(String realm) {
+            this.realm = realm;
         }
 
         public String getRoleClassName() {
@@ -534,23 +551,6 @@ public class NettyHttpComponentConfiguration
 
         public void setSecurityConstraint(SecurityConstraint securityConstraint) {
             this.securityConstraint = securityConstraint;
-        }
-
-        public String getConstraint() {
-            return constraint;
-        }
-
-        public void setConstraint(String constraint) {
-            this.constraint = constraint;
-        }
-
-        public LoggingLevel getLoginDeniedLoggingLevel() {
-            return loginDeniedLoggingLevel;
-        }
-
-        public void setLoginDeniedLoggingLevel(
-                LoggingLevel loginDeniedLoggingLevel) {
-            this.loginDeniedLoggingLevel = loginDeniedLoggingLevel;
         }
     }
 }

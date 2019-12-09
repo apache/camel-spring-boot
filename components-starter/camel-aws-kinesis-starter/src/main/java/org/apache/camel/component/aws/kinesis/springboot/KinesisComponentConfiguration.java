@@ -143,6 +143,34 @@ public class KinesisComponentConfiguration
     public static class KinesisConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.kinesis.KinesisConfiguration.class;
         /**
+         * Amazon AWS Access Key
+         */
+        private String accessKey;
+        /**
+         * Amazon Kinesis client to use for all requests for this endpoint
+         */
+        private AmazonKinesis amazonKinesisClient;
+        /**
+         * Defines where in the Kinesis stream to start getting records
+         */
+        private ShardIteratorType iteratorType = ShardIteratorType.TRIM_HORIZON;
+        /**
+         * Maximum number of records that will be fetched in each poll
+         */
+        private Integer maxResultsPerRequest = 1;
+        /**
+         * To define a proxy host when instantiating the Kinesis client
+         */
+        private String proxyHost;
+        /**
+         * To define a proxy port when instantiating the Kinesis client
+         */
+        private Integer proxyPort;
+        /**
+         * To define a proxy protocol when instantiating the Kinesis client
+         */
+        private Protocol proxyProtocol = Protocol.HTTPS;
+        /**
          * The region in which Kinesis client needs to work. When using this
          * parameter, the configuration will expect the capitalized name of the
          * region (for example AP_EAST_1)You'll need to use the name
@@ -150,45 +178,9 @@ public class KinesisComponentConfiguration
          */
         private String region;
         /**
-         * To define a proxy port when instantiating the Kinesis client
-         */
-        private Integer proxyPort;
-        /**
          * Amazon AWS Secret Key
          */
         private String secretKey;
-        /**
-         * To define a proxy host when instantiating the Kinesis client
-         */
-        private String proxyHost;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * To define a proxy protocol when instantiating the Kinesis client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
-        /**
-         * Maximum number of records that will be fetched in each poll
-         */
-        private Integer maxResultsPerRequest = 1;
-        /**
-         * Defines where in the Kinesis stream to start getting records
-         */
-        private ShardIteratorType iteratorType = ShardIteratorType.TRIM_HORIZON;
-        /**
-         * Defines which shardId in the Kinesis stream to get records from
-         */
-        private String shardId;
-        /**
-         * Amazon Kinesis client to use for all requests for this endpoint
-         */
-        private AmazonKinesis amazonKinesisClient;
-        /**
-         * Name of the stream
-         */
-        private String streamName;
         /**
          * The sequence number to start polling from. Required if iteratorType
          * is set to AFTER_SEQUENCE_NUMBER or AT_SEQUENCE_NUMBER
@@ -203,38 +195,14 @@ public class KinesisComponentConfiguration
          * raised
          */
         private KinesisShardClosedStrategyEnum shardClosed = KinesisShardClosedStrategyEnum.ignore;
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
+        /**
+         * Defines which shardId in the Kinesis stream to get records from
+         */
+        private String shardId;
+        /**
+         * Name of the stream
+         */
+        private String streamName;
 
         public String getAccessKey() {
             return accessKey;
@@ -242,38 +210,6 @@ public class KinesisComponentConfiguration
 
         public void setAccessKey(String accessKey) {
             this.accessKey = accessKey;
-        }
-
-        public Protocol getProxyProtocol() {
-            return proxyProtocol;
-        }
-
-        public void setProxyProtocol(Protocol proxyProtocol) {
-            this.proxyProtocol = proxyProtocol;
-        }
-
-        public Integer getMaxResultsPerRequest() {
-            return maxResultsPerRequest;
-        }
-
-        public void setMaxResultsPerRequest(Integer maxResultsPerRequest) {
-            this.maxResultsPerRequest = maxResultsPerRequest;
-        }
-
-        public ShardIteratorType getIteratorType() {
-            return iteratorType;
-        }
-
-        public void setIteratorType(ShardIteratorType iteratorType) {
-            this.iteratorType = iteratorType;
-        }
-
-        public String getShardId() {
-            return shardId;
-        }
-
-        public void setShardId(String shardId) {
-            this.shardId = shardId;
         }
 
         public AmazonKinesis getAmazonKinesisClient() {
@@ -284,12 +220,60 @@ public class KinesisComponentConfiguration
             this.amazonKinesisClient = amazonKinesisClient;
         }
 
-        public String getStreamName() {
-            return streamName;
+        public ShardIteratorType getIteratorType() {
+            return iteratorType;
         }
 
-        public void setStreamName(String streamName) {
-            this.streamName = streamName;
+        public void setIteratorType(ShardIteratorType iteratorType) {
+            this.iteratorType = iteratorType;
+        }
+
+        public Integer getMaxResultsPerRequest() {
+            return maxResultsPerRequest;
+        }
+
+        public void setMaxResultsPerRequest(Integer maxResultsPerRequest) {
+            this.maxResultsPerRequest = maxResultsPerRequest;
+        }
+
+        public String getProxyHost() {
+            return proxyHost;
+        }
+
+        public void setProxyHost(String proxyHost) {
+            this.proxyHost = proxyHost;
+        }
+
+        public Integer getProxyPort() {
+            return proxyPort;
+        }
+
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
+        }
+
+        public Protocol getProxyProtocol() {
+            return proxyProtocol;
+        }
+
+        public void setProxyProtocol(Protocol proxyProtocol) {
+            this.proxyProtocol = proxyProtocol;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
         }
 
         public String getSequenceNumber() {
@@ -306,6 +290,22 @@ public class KinesisComponentConfiguration
 
         public void setShardClosed(KinesisShardClosedStrategyEnum shardClosed) {
             this.shardClosed = shardClosed;
+        }
+
+        public String getShardId() {
+            return shardId;
+        }
+
+        public void setShardId(String shardId) {
+            this.shardId = shardId;
+        }
+
+        public String getStreamName() {
+            return streamName;
+        }
+
+        public void setStreamName(String streamName) {
+            this.streamName = streamName;
         }
     }
 }

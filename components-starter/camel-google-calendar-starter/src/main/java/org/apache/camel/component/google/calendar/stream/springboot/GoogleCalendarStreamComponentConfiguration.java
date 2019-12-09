@@ -118,52 +118,19 @@ public class GoogleCalendarStreamComponentConfiguration
     public static class GoogleCalendarStreamConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.google.calendar.stream.GoogleCalendarStreamConfiguration.class;
         /**
-         * Specifies an index for the endpoint
-         */
-        private String index;
-        /**
-         * Specifies the level of permissions you want a calendar application to
-         * have to a user account. See
-         * https://developers.google.com/calendar/auth for more info.
-         */
-        private List scopes;
-        /**
          * OAuth 2 access token. This typically expires after an hour so
          * refreshToken is recommended for long term usage.
          */
         private String accessToken;
-        /**
-         * OAuth 2 refresh token. Using this, the Google Calendar component can
-         * obtain a new accessToken whenever the current one expires - a
-         * necessity if the application is long-lived.
-         */
-        private String refreshToken;
-        /**
-         * The calendarId to be used
-         */
-        private String calendarId = "primary";
-        /**
-         * The query to execute on calendar
-         */
-        private String query;
         /**
          * Google Calendar application name. Example would be
          * camel-google-calendar/1.0
          */
         private String applicationName;
         /**
-         * Max results to be returned
+         * The calendarId to be used
          */
-        private Integer maxResults = 10;
-        /**
-         * Consume events in the selected calendar from now on
-         */
-        private Boolean consumeFromNow = true;
-        /**
-         * Take into account the lastUpdate of the last event polled as start
-         * date for the next poll
-         */
-        private Boolean considerLastUpdate = false;
+        private String calendarId = "primary";
         /**
          * Client ID of the calendar application
          */
@@ -172,22 +139,39 @@ public class GoogleCalendarStreamComponentConfiguration
          * Client secret of the calendar application
          */
         private String clientSecret;
-
-        public String getIndex() {
-            return index;
-        }
-
-        public void setIndex(String index) {
-            this.index = index;
-        }
-
-        public List getScopes() {
-            return scopes;
-        }
-
-        public void setScopes(List scopes) {
-            this.scopes = scopes;
-        }
+        /**
+         * Take into account the lastUpdate of the last event polled as start
+         * date for the next poll
+         */
+        private Boolean considerLastUpdate = false;
+        /**
+         * Consume events in the selected calendar from now on
+         */
+        private Boolean consumeFromNow = true;
+        /**
+         * Specifies an index for the endpoint
+         */
+        private String index;
+        /**
+         * Max results to be returned
+         */
+        private Integer maxResults = 10;
+        /**
+         * The query to execute on calendar
+         */
+        private String query;
+        /**
+         * OAuth 2 refresh token. Using this, the Google Calendar component can
+         * obtain a new accessToken whenever the current one expires - a
+         * necessity if the application is long-lived.
+         */
+        private String refreshToken;
+        /**
+         * Specifies the level of permissions you want a calendar application to
+         * have to a user account. See
+         * https://developers.google.com/calendar/auth for more info.
+         */
+        private List scopes;
 
         public String getAccessToken() {
             return accessToken;
@@ -195,30 +179,6 @@ public class GoogleCalendarStreamComponentConfiguration
 
         public void setAccessToken(String accessToken) {
             this.accessToken = accessToken;
-        }
-
-        public String getRefreshToken() {
-            return refreshToken;
-        }
-
-        public void setRefreshToken(String refreshToken) {
-            this.refreshToken = refreshToken;
-        }
-
-        public String getCalendarId() {
-            return calendarId;
-        }
-
-        public void setCalendarId(String calendarId) {
-            this.calendarId = calendarId;
-        }
-
-        public String getQuery() {
-            return query;
-        }
-
-        public void setQuery(String query) {
-            this.query = query;
         }
 
         public String getApplicationName() {
@@ -229,28 +189,12 @@ public class GoogleCalendarStreamComponentConfiguration
             this.applicationName = applicationName;
         }
 
-        public Integer getMaxResults() {
-            return maxResults;
+        public String getCalendarId() {
+            return calendarId;
         }
 
-        public void setMaxResults(Integer maxResults) {
-            this.maxResults = maxResults;
-        }
-
-        public Boolean getConsumeFromNow() {
-            return consumeFromNow;
-        }
-
-        public void setConsumeFromNow(Boolean consumeFromNow) {
-            this.consumeFromNow = consumeFromNow;
-        }
-
-        public Boolean getConsiderLastUpdate() {
-            return considerLastUpdate;
-        }
-
-        public void setConsiderLastUpdate(Boolean considerLastUpdate) {
-            this.considerLastUpdate = considerLastUpdate;
+        public void setCalendarId(String calendarId) {
+            this.calendarId = calendarId;
         }
 
         public String getClientId() {
@@ -267,6 +211,62 @@ public class GoogleCalendarStreamComponentConfiguration
 
         public void setClientSecret(String clientSecret) {
             this.clientSecret = clientSecret;
+        }
+
+        public Boolean getConsiderLastUpdate() {
+            return considerLastUpdate;
+        }
+
+        public void setConsiderLastUpdate(Boolean considerLastUpdate) {
+            this.considerLastUpdate = considerLastUpdate;
+        }
+
+        public Boolean getConsumeFromNow() {
+            return consumeFromNow;
+        }
+
+        public void setConsumeFromNow(Boolean consumeFromNow) {
+            this.consumeFromNow = consumeFromNow;
+        }
+
+        public String getIndex() {
+            return index;
+        }
+
+        public void setIndex(String index) {
+            this.index = index;
+        }
+
+        public Integer getMaxResults() {
+            return maxResults;
+        }
+
+        public void setMaxResults(Integer maxResults) {
+            this.maxResults = maxResults;
+        }
+
+        public String getQuery() {
+            return query;
+        }
+
+        public void setQuery(String query) {
+            this.query = query;
+        }
+
+        public String getRefreshToken() {
+            return refreshToken;
+        }
+
+        public void setRefreshToken(String refreshToken) {
+            this.refreshToken = refreshToken;
+        }
+
+        public List getScopes() {
+            return scopes;
+        }
+
+        public void setScopes(List scopes) {
+            this.scopes = scopes;
         }
     }
 }

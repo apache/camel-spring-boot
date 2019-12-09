@@ -108,101 +108,77 @@ public class BlobServiceComponentConfiguration
     public static class BlobServiceConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.azure.blob.BlobServiceConfiguration.class;
         /**
-         * Blob service operation hint to the producer
+         * The blob service client
          */
-        private BlobServiceOperations operation = BlobServiceOperations.listBlobs;
-        /**
-         * Set a blob type, 'blockblob' is default
-         */
-        private BlobType blobType = BlobType.blockblob;
-        /**
-         * Specify if the flat or hierarchical blob listing should be used
-         */
-        private Boolean useFlatListing = true;
-        /**
-         * Set a prefix which can be used for listing the blobs
-         */
-        private String blobPrefix;
+        private CloudBlob azureBlobClient;
         /**
          * Set the blob meta-data
          */
         private Map blobMetadata;
+        private String blobName;
         /**
          * Set the blob offset for the upload or download operations, default is
          * 0
          */
         private Long blobOffset = 0L;
         /**
-         * Set the minimum read size in bytes when reading the blob content
+         * Set a prefix which can be used for listing the blobs
          */
-        private Integer streamReadSize;
+        private String blobPrefix;
         /**
-         * Storage resources can be public for reading their content, if this
-         * property is enabled then the credentials do not have to be set
+         * Set a blob type, 'blockblob' is default
          */
-        private Boolean publicForRead = false;
-        private String containerName;
+        private BlobType blobType = BlobType.blockblob;
         /**
          * Close the stream after read or keep it open, default is true
          */
         private Boolean closeStreamAfterRead = true;
         /**
-         * The blob service client
+         * Close the stream after write or keep it open, default is true
          */
-        private CloudBlob azureBlobClient;
+        private Boolean closeStreamAfterWrite = true;
+        private String containerName;
+        /**
+         * Set the data length for the download or page blob upload operations
+         */
+        private Long dataLength;
         /**
          * Set the file directory where the downloaded blobs will be saved to
          */
         private String fileDir;
         /**
+         * Blob service operation hint to the producer
+         */
+        private BlobServiceOperations operation = BlobServiceOperations.listBlobs;
+        /**
+         * Storage resources can be public for reading their content, if this
+         * property is enabled then the credentials do not have to be set
+         */
+        private Boolean publicForRead = false;
+        /**
+         * Set the minimum read size in bytes when reading the blob content
+         */
+        private Integer streamReadSize;
+        /**
          * Set the size of the buffer for writing block and page blocks
          */
         private Integer streamWriteSize;
         /**
-         * Set the data length for the download or page blob upload operations
+         * Specify if the flat or hierarchical blob listing should be used
          */
-        private Long dataLength;
-        private String blobName;
-        /**
-         * Close the stream after write or keep it open, default is true
-         */
-        private Boolean closeStreamAfterWrite = true;
+        private Boolean useFlatListing = true;
+        private String accountName;
         /**
          * Set the storage credentials, required in most cases
          */
         private StorageCredentials credentials;
-        private String accountName;
 
-        public BlobServiceOperations getOperation() {
-            return operation;
+        public CloudBlob getAzureBlobClient() {
+            return azureBlobClient;
         }
 
-        public void setOperation(BlobServiceOperations operation) {
-            this.operation = operation;
-        }
-
-        public BlobType getBlobType() {
-            return blobType;
-        }
-
-        public void setBlobType(BlobType blobType) {
-            this.blobType = blobType;
-        }
-
-        public Boolean getUseFlatListing() {
-            return useFlatListing;
-        }
-
-        public void setUseFlatListing(Boolean useFlatListing) {
-            this.useFlatListing = useFlatListing;
-        }
-
-        public String getBlobPrefix() {
-            return blobPrefix;
-        }
-
-        public void setBlobPrefix(String blobPrefix) {
-            this.blobPrefix = blobPrefix;
+        public void setAzureBlobClient(CloudBlob azureBlobClient) {
+            this.azureBlobClient = azureBlobClient;
         }
 
         public Map getBlobMetadata() {
@@ -213,6 +189,14 @@ public class BlobServiceComponentConfiguration
             this.blobMetadata = blobMetadata;
         }
 
+        public String getBlobName() {
+            return blobName;
+        }
+
+        public void setBlobName(String blobName) {
+            this.blobName = blobName;
+        }
+
         public Long getBlobOffset() {
             return blobOffset;
         }
@@ -221,28 +205,20 @@ public class BlobServiceComponentConfiguration
             this.blobOffset = blobOffset;
         }
 
-        public Integer getStreamReadSize() {
-            return streamReadSize;
+        public String getBlobPrefix() {
+            return blobPrefix;
         }
 
-        public void setStreamReadSize(Integer streamReadSize) {
-            this.streamReadSize = streamReadSize;
+        public void setBlobPrefix(String blobPrefix) {
+            this.blobPrefix = blobPrefix;
         }
 
-        public Boolean getPublicForRead() {
-            return publicForRead;
+        public BlobType getBlobType() {
+            return blobType;
         }
 
-        public void setPublicForRead(Boolean publicForRead) {
-            this.publicForRead = publicForRead;
-        }
-
-        public String getContainerName() {
-            return containerName;
-        }
-
-        public void setContainerName(String containerName) {
-            this.containerName = containerName;
+        public void setBlobType(BlobType blobType) {
+            this.blobType = blobType;
         }
 
         public Boolean getCloseStreamAfterRead() {
@@ -253,28 +229,20 @@ public class BlobServiceComponentConfiguration
             this.closeStreamAfterRead = closeStreamAfterRead;
         }
 
-        public CloudBlob getAzureBlobClient() {
-            return azureBlobClient;
+        public Boolean getCloseStreamAfterWrite() {
+            return closeStreamAfterWrite;
         }
 
-        public void setAzureBlobClient(CloudBlob azureBlobClient) {
-            this.azureBlobClient = azureBlobClient;
+        public void setCloseStreamAfterWrite(Boolean closeStreamAfterWrite) {
+            this.closeStreamAfterWrite = closeStreamAfterWrite;
         }
 
-        public String getFileDir() {
-            return fileDir;
+        public String getContainerName() {
+            return containerName;
         }
 
-        public void setFileDir(String fileDir) {
-            this.fileDir = fileDir;
-        }
-
-        public Integer getStreamWriteSize() {
-            return streamWriteSize;
-        }
-
-        public void setStreamWriteSize(Integer streamWriteSize) {
-            this.streamWriteSize = streamWriteSize;
+        public void setContainerName(String containerName) {
+            this.containerName = containerName;
         }
 
         public Long getDataLength() {
@@ -285,28 +253,52 @@ public class BlobServiceComponentConfiguration
             this.dataLength = dataLength;
         }
 
-        public String getBlobName() {
-            return blobName;
+        public String getFileDir() {
+            return fileDir;
         }
 
-        public void setBlobName(String blobName) {
-            this.blobName = blobName;
+        public void setFileDir(String fileDir) {
+            this.fileDir = fileDir;
         }
 
-        public Boolean getCloseStreamAfterWrite() {
-            return closeStreamAfterWrite;
+        public BlobServiceOperations getOperation() {
+            return operation;
         }
 
-        public void setCloseStreamAfterWrite(Boolean closeStreamAfterWrite) {
-            this.closeStreamAfterWrite = closeStreamAfterWrite;
+        public void setOperation(BlobServiceOperations operation) {
+            this.operation = operation;
         }
 
-        public StorageCredentials getCredentials() {
-            return credentials;
+        public Boolean getPublicForRead() {
+            return publicForRead;
         }
 
-        public void setCredentials(StorageCredentials credentials) {
-            this.credentials = credentials;
+        public void setPublicForRead(Boolean publicForRead) {
+            this.publicForRead = publicForRead;
+        }
+
+        public Integer getStreamReadSize() {
+            return streamReadSize;
+        }
+
+        public void setStreamReadSize(Integer streamReadSize) {
+            this.streamReadSize = streamReadSize;
+        }
+
+        public Integer getStreamWriteSize() {
+            return streamWriteSize;
+        }
+
+        public void setStreamWriteSize(Integer streamWriteSize) {
+            this.streamWriteSize = streamWriteSize;
+        }
+
+        public Boolean getUseFlatListing() {
+            return useFlatListing;
+        }
+
+        public void setUseFlatListing(Boolean useFlatListing) {
+            this.useFlatListing = useFlatListing;
         }
 
         public String getAccountName() {
@@ -315,6 +307,14 @@ public class BlobServiceComponentConfiguration
 
         public void setAccountName(String accountName) {
             this.accountName = accountName;
+        }
+
+        public StorageCredentials getCredentials() {
+            return credentials;
+        }
+
+        public void setCredentials(StorageCredentials credentials) {
+            this.credentials = credentials;
         }
     }
 }

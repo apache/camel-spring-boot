@@ -132,112 +132,21 @@ public class PahoComponentConfiguration
     public static class PahoConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.paho.PahoConfiguration.class;
         /**
-         * Username to be used for authentication against the MQTT broker
+         * Sets whether the client will automatically attempt to reconnect to
+         * the server if the connection is lost. If set to false, the client
+         * will not attempt to automatically reconnect to the server in the
+         * event that the connection is lost. If set to true, in the event that
+         * the connection is lost, the client will attempt to reconnect to the
+         * server. It will initially wait 1 second before it attempts to
+         * reconnect, for every failed reconnect attempt, the delay will double
+         * until it is at 2 minutes at which point the delay will stay at 2
+         * minutes.
          */
-        private String userName;
-        /**
-         * Password to be used for authentication against the MQTT broker
-         */
-        private String password;
-        /**
-         * MQTT client identifier. The identifier must be unique.
-         */
-        private String clientId;
+        private Boolean automaticReconnect = true;
         /**
          * The URL of the MQTT broker.
          */
         private String brokerUrl = "tcp://localhost:1883";
-        /**
-         * Retain option
-         */
-        private Boolean retained = false;
-        /**
-         * Sets the max inflight. please increase this value in a high traffic
-         * environment. The default value is 10
-         */
-        private Integer maxInflight = 10;
-        /**
-         * Sets the keep alive interval. This value, measured in seconds,
-         * defines the maximum time interval between messages sent or received.
-         * It enables the client to detect if the server is no longer available,
-         * without having to wait for the TCP/IP timeout. The client will ensure
-         * that at least one message travels across the network within each keep
-         * alive period. In the absence of a data-related message during the
-         * time period, the client sends a very small ping message, which the
-         * server will acknowledge. A value of 0 disables keepalive processing
-         * in the client. The default value is 60 seconds
-         */
-        private Integer keepAliveInterval = 60;
-        /**
-         * Sets the Last Will and Testament (LWT) for the connection. In the
-         * event that this client unexpectedly loses its connection to the
-         * server, the server will publish a message to itself using the
-         * supplied details. The topic to publish to The byte payload for the
-         * message. The quality of service to publish the message at (0, 1 or
-         * 2). Whether or not the message should be retained.
-         */
-        private Integer willQos;
-        /**
-         * Client persistence to be used - memory or file.
-         */
-        private PahoPersistence persistence = PahoPersistence.MEMORY;
-        /**
-         * Base directory used by file persistence. Will by default use user
-         * directory.
-         */
-        private String filePersistenceDirectory;
-        /**
-         * Client quality of service level (0-2).
-         */
-        private Integer qos = 2;
-        /**
-         * Sets the Last Will and Testament (LWT) for the connection. In the
-         * event that this client unexpectedly loses its connection to the
-         * server, the server will publish a message to itself using the
-         * supplied details. The topic to publish to The byte payload for the
-         * message. The quality of service to publish the message at (0, 1 or
-         * 2). Whether or not the message should be retained.
-         */
-        private String willPayload;
-        /**
-         * Sets the Last Will and Testament (LWT) for the connection. In the
-         * event that this client unexpectedly loses its connection to the
-         * server, the server will publish a message to itself using the
-         * supplied details. The topic to publish to The byte payload for the
-         * message. The quality of service to publish the message at (0, 1 or
-         * 2). Whether or not the message should be retained.
-         */
-        private String willTopic;
-        /**
-         * Whether SSL HostnameVerifier is enabled or not. The default value is
-         * true.
-         */
-        private Boolean httpsHostnameVerificationEnabled = true;
-        /**
-         * Sets the Last Will and Testament (LWT) for the connection. In the
-         * event that this client unexpectedly loses its connection to the
-         * server, the server will publish a message to itself using the
-         * supplied details. The topic to publish to The byte payload for the
-         * message. The quality of service to publish the message at (0, 1 or
-         * 2). Whether or not the message should be retained.
-         */
-        private Boolean willRetained = false;
-        /**
-         * Sets the SocketFactory to use. This allows an application to apply
-         * its own policies around the creation of network sockets. If using an
-         * SSL connection, an SSLSocketFactory can be used to supply
-         * application-specific security settings.
-         */
-        private SocketFactory socketFactory;
-        /**
-         * Sets the connection timeout value. This value, measured in seconds,
-         * defines the maximum time interval the client will wait for the
-         * network connection to the MQTT server to be established. The default
-         * timeout is 30 seconds. A value of 0 disables timeout processing
-         * meaning the client will wait until the network connection is made
-         * successfully or fails.
-         */
-        private Integer connectionTimeout = 30;
         /**
          * Sets whether the client and server should remember state across
          * restarts and reconnects. If set to false both the client and server
@@ -252,6 +161,118 @@ public class PahoComponentConfiguration
          * subscription as non-durable
          */
         private Boolean cleanSession = true;
+        /**
+         * MQTT client identifier. The identifier must be unique.
+         */
+        private String clientId;
+        /**
+         * Sets the connection timeout value. This value, measured in seconds,
+         * defines the maximum time interval the client will wait for the
+         * network connection to the MQTT server to be established. The default
+         * timeout is 30 seconds. A value of 0 disables timeout processing
+         * meaning the client will wait until the network connection is made
+         * successfully or fails.
+         */
+        private Integer connectionTimeout = 30;
+        /**
+         * Sets the Custom WebSocket Headers for the WebSocket Connection.
+         */
+        private Properties customWebSocketHeaders;
+        /**
+         * Set the time in seconds that the executor service should wait when
+         * terminating before forcefully terminating. It is not recommended to
+         * change this value unless you are absolutely sure that you need to.
+         */
+        private Integer executorServiceTimeout = 1;
+        /**
+         * Base directory used by file persistence. Will by default use user
+         * directory.
+         */
+        private String filePersistenceDirectory;
+        /**
+         * Whether SSL HostnameVerifier is enabled or not. The default value is
+         * true.
+         */
+        private Boolean httpsHostnameVerificationEnabled = true;
+        /**
+         * Sets the keep alive interval. This value, measured in seconds,
+         * defines the maximum time interval between messages sent or received.
+         * It enables the client to detect if the server is no longer available,
+         * without having to wait for the TCP/IP timeout. The client will ensure
+         * that at least one message travels across the network within each keep
+         * alive period. In the absence of a data-related message during the
+         * time period, the client sends a very small ping message, which the
+         * server will acknowledge. A value of 0 disables keepalive processing
+         * in the client. The default value is 60 seconds
+         */
+        private Integer keepAliveInterval = 60;
+        /**
+         * Sets the max inflight. please increase this value in a high traffic
+         * environment. The default value is 10
+         */
+        private Integer maxInflight = 10;
+        /**
+         * Get the maximum time (in millis) to wait between reconnects
+         */
+        private Integer maxReconnectDelay = 128000;
+        /**
+         * Sets the MQTT version. The default action is to connect with version
+         * 3.1.1, and to fall back to 3.1 if that fails. Version 3.1.1 or 3.1
+         * can be selected specifically, with no fall back, by using the
+         * MQTT_VERSION_3_1_1 or MQTT_VERSION_3_1 options respectively.
+         */
+        private Integer mqttVersion;
+        /**
+         * Password to be used for authentication against the MQTT broker
+         */
+        private String password;
+        /**
+         * Client persistence to be used - memory or file.
+         */
+        private PahoPersistence persistence = PahoPersistence.MEMORY;
+        /**
+         * Client quality of service level (0-2).
+         */
+        private Integer qos = 2;
+        /**
+         * Retain option
+         */
+        private Boolean retained = false;
+        /**
+         * Set a list of one or more serverURIs the client may connect to.
+         * Multiple servers can be separated by comma. Each serverURI specifies
+         * the address of a server that the client may connect to. Two types of
+         * connection are supported tcp:// for a TCP connection and ssl:// for a
+         * TCP connection secured by SSL/TLS. For example: tcp://localhost:1883
+         * ssl://localhost:8883 If the port is not specified, it will default to
+         * 1883 for tcp:// URIs, and 8883 for ssl:// URIs. If serverURIs is set
+         * then it overrides the serverURI parameter passed in on the
+         * constructor of the MQTT client. When an attempt to connect is
+         * initiated the client will start with the first serverURI in the list
+         * and work through the list until a connection is established with a
+         * server. If a connection cannot be made to any of the servers then the
+         * connect attempt fails. Specifying a list of servers that a client may
+         * connect to has several uses: High Availability and reliable message
+         * delivery Some MQTT servers support a high availability feature where
+         * two or more equal MQTT servers share state. An MQTT client can
+         * connect to any of the equal servers and be assured that messages are
+         * reliably delivered and durable subscriptions are maintained no matter
+         * which server the client connects to. The cleansession flag must be
+         * set to false if durable subscriptions and/or reliable message
+         * delivery is required. Hunt List A set of servers may be specified
+         * that are not equal (as in the high availability option). As no state
+         * is shared across the servers reliable message delivery and durable
+         * subscriptions are not valid. The cleansession flag must be set to
+         * true if the hunt list mode is used
+         */
+        private String serverURIs;
+        /**
+         * Sets the SocketFactory to use. This allows an application to apply
+         * its own policies around the creation of network sockets. If using an
+         * SSL connection, an SSLSocketFactory can be used to supply
+         * application-specific security settings.
+         */
+        private SocketFactory socketFactory;
         /**
          * Sets the SSL properties for the connection. Note that these
          * properties are only valid if an implementation of the Java Secure
@@ -295,34 +316,6 @@ public class PahoComponentConfiguration
          */
         private Properties sslClientProps;
         /**
-         * Set a list of one or more serverURIs the client may connect to.
-         * Multiple servers can be separated by comma. Each serverURI specifies
-         * the address of a server that the client may connect to. Two types of
-         * connection are supported tcp:// for a TCP connection and ssl:// for a
-         * TCP connection secured by SSL/TLS. For example: tcp://localhost:1883
-         * ssl://localhost:8883 If the port is not specified, it will default to
-         * 1883 for tcp:// URIs, and 8883 for ssl:// URIs. If serverURIs is set
-         * then it overrides the serverURI parameter passed in on the
-         * constructor of the MQTT client. When an attempt to connect is
-         * initiated the client will start with the first serverURI in the list
-         * and work through the list until a connection is established with a
-         * server. If a connection cannot be made to any of the servers then the
-         * connect attempt fails. Specifying a list of servers that a client may
-         * connect to has several uses: High Availability and reliable message
-         * delivery Some MQTT servers support a high availability feature where
-         * two or more equal MQTT servers share state. An MQTT client can
-         * connect to any of the equal servers and be assured that messages are
-         * reliably delivered and durable subscriptions are maintained no matter
-         * which server the client connects to. The cleansession flag must be
-         * set to false if durable subscriptions and/or reliable message
-         * delivery is required. Hunt List A set of servers may be specified
-         * that are not equal (as in the high availability option). As no state
-         * is shared across the servers reliable message delivery and durable
-         * subscriptions are not valid. The cleansession flag must be set to
-         * true if the hunt list mode is used
-         */
-        private String serverURIs;
-        /**
          * Sets the HostnameVerifier for the SSL connection. Note that it will
          * be used after handshake on a connection and you should do actions by
          * yourself when hostname is verified error. There is no default
@@ -330,61 +323,52 @@ public class PahoComponentConfiguration
          */
         private HostnameVerifier sslHostnameVerifier;
         /**
-         * Sets the MQTT version. The default action is to connect with version
-         * 3.1.1, and to fall back to 3.1 if that fails. Version 3.1.1 or 3.1
-         * can be selected specifically, with no fall back, by using the
-         * MQTT_VERSION_3_1_1 or MQTT_VERSION_3_1 options respectively.
+         * Username to be used for authentication against the MQTT broker
          */
-        private Integer mqttVersion;
+        private String userName;
         /**
-         * Get the maximum time (in millis) to wait between reconnects
+         * Sets the Last Will and Testament (LWT) for the connection. In the
+         * event that this client unexpectedly loses its connection to the
+         * server, the server will publish a message to itself using the
+         * supplied details. The topic to publish to The byte payload for the
+         * message. The quality of service to publish the message at (0, 1 or
+         * 2). Whether or not the message should be retained.
          */
-        private Integer maxReconnectDelay = 128000;
+        private String willPayload;
         /**
-         * Set the time in seconds that the executor service should wait when
-         * terminating before forcefully terminating. It is not recommended to
-         * change this value unless you are absolutely sure that you need to.
+         * Sets the Last Will and Testament (LWT) for the connection. In the
+         * event that this client unexpectedly loses its connection to the
+         * server, the server will publish a message to itself using the
+         * supplied details. The topic to publish to The byte payload for the
+         * message. The quality of service to publish the message at (0, 1 or
+         * 2). Whether or not the message should be retained.
          */
-        private Integer executorServiceTimeout = 1;
+        private Integer willQos;
         /**
-         * Sets the Custom WebSocket Headers for the WebSocket Connection.
+         * Sets the Last Will and Testament (LWT) for the connection. In the
+         * event that this client unexpectedly loses its connection to the
+         * server, the server will publish a message to itself using the
+         * supplied details. The topic to publish to The byte payload for the
+         * message. The quality of service to publish the message at (0, 1 or
+         * 2). Whether or not the message should be retained.
          */
-        private Properties customWebSocketHeaders;
+        private Boolean willRetained = false;
         /**
-         * Sets whether the client will automatically attempt to reconnect to
-         * the server if the connection is lost. If set to false, the client
-         * will not attempt to automatically reconnect to the server in the
-         * event that the connection is lost. If set to true, in the event that
-         * the connection is lost, the client will attempt to reconnect to the
-         * server. It will initially wait 1 second before it attempts to
-         * reconnect, for every failed reconnect attempt, the delay will double
-         * until it is at 2 minutes at which point the delay will stay at 2
-         * minutes.
+         * Sets the Last Will and Testament (LWT) for the connection. In the
+         * event that this client unexpectedly loses its connection to the
+         * server, the server will publish a message to itself using the
+         * supplied details. The topic to publish to The byte payload for the
+         * message. The quality of service to publish the message at (0, 1 or
+         * 2). Whether or not the message should be retained.
          */
-        private Boolean automaticReconnect = true;
+        private String willTopic;
 
-        public String getUserName() {
-            return userName;
+        public Boolean getAutomaticReconnect() {
+            return automaticReconnect;
         }
 
-        public void setUserName(String userName) {
-            this.userName = userName;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getClientId() {
-            return clientId;
-        }
-
-        public void setClientId(String clientId) {
-            this.clientId = clientId;
+        public void setAutomaticReconnect(Boolean automaticReconnect) {
+            this.automaticReconnect = automaticReconnect;
         }
 
         public String getBrokerUrl() {
@@ -395,44 +379,44 @@ public class PahoComponentConfiguration
             this.brokerUrl = brokerUrl;
         }
 
-        public Boolean getRetained() {
-            return retained;
+        public Boolean getCleanSession() {
+            return cleanSession;
         }
 
-        public void setRetained(Boolean retained) {
-            this.retained = retained;
+        public void setCleanSession(Boolean cleanSession) {
+            this.cleanSession = cleanSession;
         }
 
-        public Integer getMaxInflight() {
-            return maxInflight;
+        public String getClientId() {
+            return clientId;
         }
 
-        public void setMaxInflight(Integer maxInflight) {
-            this.maxInflight = maxInflight;
+        public void setClientId(String clientId) {
+            this.clientId = clientId;
         }
 
-        public Integer getKeepAliveInterval() {
-            return keepAliveInterval;
+        public Integer getConnectionTimeout() {
+            return connectionTimeout;
         }
 
-        public void setKeepAliveInterval(Integer keepAliveInterval) {
-            this.keepAliveInterval = keepAliveInterval;
+        public void setConnectionTimeout(Integer connectionTimeout) {
+            this.connectionTimeout = connectionTimeout;
         }
 
-        public Integer getWillQos() {
-            return willQos;
+        public Properties getCustomWebSocketHeaders() {
+            return customWebSocketHeaders;
         }
 
-        public void setWillQos(Integer willQos) {
-            this.willQos = willQos;
+        public void setCustomWebSocketHeaders(Properties customWebSocketHeaders) {
+            this.customWebSocketHeaders = customWebSocketHeaders;
         }
 
-        public PahoPersistence getPersistence() {
-            return persistence;
+        public Integer getExecutorServiceTimeout() {
+            return executorServiceTimeout;
         }
 
-        public void setPersistence(PahoPersistence persistence) {
-            this.persistence = persistence;
+        public void setExecutorServiceTimeout(Integer executorServiceTimeout) {
+            this.executorServiceTimeout = executorServiceTimeout;
         }
 
         public String getFilePersistenceDirectory() {
@@ -441,30 +425,6 @@ public class PahoComponentConfiguration
 
         public void setFilePersistenceDirectory(String filePersistenceDirectory) {
             this.filePersistenceDirectory = filePersistenceDirectory;
-        }
-
-        public Integer getQos() {
-            return qos;
-        }
-
-        public void setQos(Integer qos) {
-            this.qos = qos;
-        }
-
-        public String getWillPayload() {
-            return willPayload;
-        }
-
-        public void setWillPayload(String willPayload) {
-            this.willPayload = willPayload;
-        }
-
-        public String getWillTopic() {
-            return willTopic;
-        }
-
-        public void setWillTopic(String willTopic) {
-            this.willTopic = willTopic;
         }
 
         public Boolean getHttpsHostnameVerificationEnabled() {
@@ -476,68 +436,20 @@ public class PahoComponentConfiguration
             this.httpsHostnameVerificationEnabled = httpsHostnameVerificationEnabled;
         }
 
-        public Boolean getWillRetained() {
-            return willRetained;
+        public Integer getKeepAliveInterval() {
+            return keepAliveInterval;
         }
 
-        public void setWillRetained(Boolean willRetained) {
-            this.willRetained = willRetained;
+        public void setKeepAliveInterval(Integer keepAliveInterval) {
+            this.keepAliveInterval = keepAliveInterval;
         }
 
-        public SocketFactory getSocketFactory() {
-            return socketFactory;
+        public Integer getMaxInflight() {
+            return maxInflight;
         }
 
-        public void setSocketFactory(SocketFactory socketFactory) {
-            this.socketFactory = socketFactory;
-        }
-
-        public Integer getConnectionTimeout() {
-            return connectionTimeout;
-        }
-
-        public void setConnectionTimeout(Integer connectionTimeout) {
-            this.connectionTimeout = connectionTimeout;
-        }
-
-        public Boolean getCleanSession() {
-            return cleanSession;
-        }
-
-        public void setCleanSession(Boolean cleanSession) {
-            this.cleanSession = cleanSession;
-        }
-
-        public Properties getSslClientProps() {
-            return sslClientProps;
-        }
-
-        public void setSslClientProps(Properties sslClientProps) {
-            this.sslClientProps = sslClientProps;
-        }
-
-        public String getServerURIs() {
-            return serverURIs;
-        }
-
-        public void setServerURIs(String serverURIs) {
-            this.serverURIs = serverURIs;
-        }
-
-        public HostnameVerifier getSslHostnameVerifier() {
-            return sslHostnameVerifier;
-        }
-
-        public void setSslHostnameVerifier(HostnameVerifier sslHostnameVerifier) {
-            this.sslHostnameVerifier = sslHostnameVerifier;
-        }
-
-        public Integer getMqttVersion() {
-            return mqttVersion;
-        }
-
-        public void setMqttVersion(Integer mqttVersion) {
-            this.mqttVersion = mqttVersion;
+        public void setMaxInflight(Integer maxInflight) {
+            this.maxInflight = maxInflight;
         }
 
         public Integer getMaxReconnectDelay() {
@@ -548,28 +460,116 @@ public class PahoComponentConfiguration
             this.maxReconnectDelay = maxReconnectDelay;
         }
 
-        public Integer getExecutorServiceTimeout() {
-            return executorServiceTimeout;
+        public Integer getMqttVersion() {
+            return mqttVersion;
         }
 
-        public void setExecutorServiceTimeout(Integer executorServiceTimeout) {
-            this.executorServiceTimeout = executorServiceTimeout;
+        public void setMqttVersion(Integer mqttVersion) {
+            this.mqttVersion = mqttVersion;
         }
 
-        public Properties getCustomWebSocketHeaders() {
-            return customWebSocketHeaders;
+        public String getPassword() {
+            return password;
         }
 
-        public void setCustomWebSocketHeaders(Properties customWebSocketHeaders) {
-            this.customWebSocketHeaders = customWebSocketHeaders;
+        public void setPassword(String password) {
+            this.password = password;
         }
 
-        public Boolean getAutomaticReconnect() {
-            return automaticReconnect;
+        public PahoPersistence getPersistence() {
+            return persistence;
         }
 
-        public void setAutomaticReconnect(Boolean automaticReconnect) {
-            this.automaticReconnect = automaticReconnect;
+        public void setPersistence(PahoPersistence persistence) {
+            this.persistence = persistence;
+        }
+
+        public Integer getQos() {
+            return qos;
+        }
+
+        public void setQos(Integer qos) {
+            this.qos = qos;
+        }
+
+        public Boolean getRetained() {
+            return retained;
+        }
+
+        public void setRetained(Boolean retained) {
+            this.retained = retained;
+        }
+
+        public String getServerURIs() {
+            return serverURIs;
+        }
+
+        public void setServerURIs(String serverURIs) {
+            this.serverURIs = serverURIs;
+        }
+
+        public SocketFactory getSocketFactory() {
+            return socketFactory;
+        }
+
+        public void setSocketFactory(SocketFactory socketFactory) {
+            this.socketFactory = socketFactory;
+        }
+
+        public Properties getSslClientProps() {
+            return sslClientProps;
+        }
+
+        public void setSslClientProps(Properties sslClientProps) {
+            this.sslClientProps = sslClientProps;
+        }
+
+        public HostnameVerifier getSslHostnameVerifier() {
+            return sslHostnameVerifier;
+        }
+
+        public void setSslHostnameVerifier(HostnameVerifier sslHostnameVerifier) {
+            this.sslHostnameVerifier = sslHostnameVerifier;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public String getWillPayload() {
+            return willPayload;
+        }
+
+        public void setWillPayload(String willPayload) {
+            this.willPayload = willPayload;
+        }
+
+        public Integer getWillQos() {
+            return willQos;
+        }
+
+        public void setWillQos(Integer willQos) {
+            this.willQos = willQos;
+        }
+
+        public Boolean getWillRetained() {
+            return willRetained;
+        }
+
+        public void setWillRetained(Boolean willRetained) {
+            this.willRetained = willRetained;
+        }
+
+        public String getWillTopic() {
+            return willTopic;
+        }
+
+        public void setWillTopic(String willTopic) {
+            this.willTopic = willTopic;
         }
     }
 }

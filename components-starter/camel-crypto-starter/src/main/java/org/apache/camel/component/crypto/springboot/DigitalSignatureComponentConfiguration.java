@@ -110,18 +110,10 @@ public class DigitalSignatureComponentConfiguration
     public static class DigitalSignatureConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.crypto.DigitalSignatureConfiguration.class;
         /**
-         * The logical name of this operation.
+         * Sets the JCE name of the Algorithm that should be used for the
+         * signer.
          */
-        private String name;
-        /**
-         * Set the PrivateKey that should be used to sign the exchange
-         */
-        private PrivateKey privateKey;
-        /**
-         * Sets the password used to access an aliased PrivateKey in the
-         * KeyStore.
-         */
-        private String password;
+        private String algorithm = "SHA256withRSA";
         /**
          * Sets the alias used to query the KeyStore for keys and {link
          * java.security.cert.Certificate Certificates} to be used in signing
@@ -135,53 +127,27 @@ public class DigitalSignatureComponentConfiguration
          */
         private Integer bufferSize = 2048;
         /**
-         * Set the Crypto operation from that supplied after the crypto scheme
-         * in the endpoint uri e.g. crypto:sign sets sign as the operation.
-         */
-        private CryptoOperation cryptoOperation;
-        /**
-         * Sets the JCE name of the Algorithm that should be used for the
-         * signer.
-         */
-        private String algorithm = "SHA256withRSA";
-        /**
-         * Sets the reference name for a PrivateKey that can be found in the
-         * registry.
-         */
-        private String privateKeyName;
-        /**
          * Set the Certificate that should be used to verify the signature in
          * the exchange based on its payload.
          */
         private Certificate certificate;
-        /**
-         * Sets the KeyStore that can contain keys and Certficates for use in
-         * signing and verifying exchanges. A KeyStore is typically used with an
-         * alias, either one supplied in the Route definition or dynamically via
-         * the message header CamelSignatureKeyStoreAlias. If no alias is
-         * supplied and there is only a single entry in the Keystore, then this
-         * single entry will be used.
-         */
-        private KeyStore keystore;
         /**
          * Sets the reference name for a PrivateKey that can be found in the
          * registry.
          */
         private String certificateName;
         /**
-         * references that should be resolved when the context changes
+         * Determines if the Signature specific headers be cleared after signing
+         * and verification. Defaults to true, and should only be made otherwise
+         * at your extreme peril as vital private information such as Keys and
+         * passwords may escape if unset.
          */
-        private String publicKeyName;
+        private Boolean clearHeaders = true;
         /**
-         * Sets the reference name for a Keystore that can be found in the
-         * registry.
+         * Set the Crypto operation from that supplied after the crypto scheme
+         * in the endpoint uri e.g. crypto:sign sets sign as the operation.
          */
-        private String keystoreName;
-        /**
-         * Set the PublicKey that should be used to verify the signature in the
-         * exchange.
-         */
-        private PublicKey publicKey;
+        private CryptoOperation cryptoOperation;
         /**
          * Sets the KeyStore that can contain keys and Certficates for use in
          * signing and verifying exchanges based on the given
@@ -193,54 +159,72 @@ public class DigitalSignatureComponentConfiguration
          */
         private KeyStoreParameters keyStoreParameters;
         /**
-         * Sets the reference name for a SecureRandom that can be found in the
+         * Sets the KeyStore that can contain keys and Certficates for use in
+         * signing and verifying exchanges. A KeyStore is typically used with an
+         * alias, either one supplied in the Route definition or dynamically via
+         * the message header CamelSignatureKeyStoreAlias. If no alias is
+         * supplied and there is only a single entry in the Keystore, then this
+         * single entry will be used.
+         */
+        private KeyStore keystore;
+        /**
+         * Sets the reference name for a Keystore that can be found in the
          * registry.
          */
-        private String secureRandomName;
+        private String keystoreName;
         /**
-         * Determines if the Signature specific headers be cleared after signing
-         * and verification. Defaults to true, and should only be made otherwise
-         * at your extreme peril as vital private information such as Keys and
-         * passwords may escape if unset.
+         * The logical name of this operation.
          */
-        private Boolean clearHeaders = true;
+        private String name;
         /**
-         * Set the SecureRandom used to initialize the Signature service
+         * Sets the password used to access an aliased PrivateKey in the
+         * KeyStore.
          */
-        private SecureRandom secureRandom;
+        private String password;
+        /**
+         * Set the PrivateKey that should be used to sign the exchange
+         */
+        private PrivateKey privateKey;
+        /**
+         * Sets the reference name for a PrivateKey that can be found in the
+         * registry.
+         */
+        private String privateKeyName;
         /**
          * Set the id of the security provider that provides the configured
          * Signature algorithm.
          */
         private String provider;
         /**
+         * Set the PublicKey that should be used to verify the signature in the
+         * exchange.
+         */
+        private PublicKey publicKey;
+        /**
+         * references that should be resolved when the context changes
+         */
+        private String publicKeyName;
+        /**
+         * Set the SecureRandom used to initialize the Signature service
+         */
+        private SecureRandom secureRandom;
+        /**
+         * Sets the reference name for a SecureRandom that can be found in the
+         * registry.
+         */
+        private String secureRandomName;
+        /**
          * Set the name of the message header that should be used to store the
          * base64 encoded signature. This defaults to 'CamelDigitalSignature'
          */
         private String signatureHeaderName;
 
-        public String getName() {
-            return name;
+        public String getAlgorithm() {
+            return algorithm;
         }
 
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public PrivateKey getPrivateKey() {
-            return privateKey;
-        }
-
-        public void setPrivateKey(PrivateKey privateKey) {
-            this.privateKey = privateKey;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
+        public void setAlgorithm(String algorithm) {
+            this.algorithm = algorithm;
         }
 
         public String getAlias() {
@@ -259,44 +243,12 @@ public class DigitalSignatureComponentConfiguration
             this.bufferSize = bufferSize;
         }
 
-        public CryptoOperation getCryptoOperation() {
-            return cryptoOperation;
-        }
-
-        public void setCryptoOperation(CryptoOperation cryptoOperation) {
-            this.cryptoOperation = cryptoOperation;
-        }
-
-        public String getAlgorithm() {
-            return algorithm;
-        }
-
-        public void setAlgorithm(String algorithm) {
-            this.algorithm = algorithm;
-        }
-
-        public String getPrivateKeyName() {
-            return privateKeyName;
-        }
-
-        public void setPrivateKeyName(String privateKeyName) {
-            this.privateKeyName = privateKeyName;
-        }
-
         public Certificate getCertificate() {
             return certificate;
         }
 
         public void setCertificate(Certificate certificate) {
             this.certificate = certificate;
-        }
-
-        public KeyStore getKeystore() {
-            return keystore;
-        }
-
-        public void setKeystore(KeyStore keystore) {
-            this.keystore = keystore;
         }
 
         public String getCertificateName() {
@@ -307,28 +259,20 @@ public class DigitalSignatureComponentConfiguration
             this.certificateName = certificateName;
         }
 
-        public String getPublicKeyName() {
-            return publicKeyName;
+        public Boolean getClearHeaders() {
+            return clearHeaders;
         }
 
-        public void setPublicKeyName(String publicKeyName) {
-            this.publicKeyName = publicKeyName;
+        public void setClearHeaders(Boolean clearHeaders) {
+            this.clearHeaders = clearHeaders;
         }
 
-        public String getKeystoreName() {
-            return keystoreName;
+        public CryptoOperation getCryptoOperation() {
+            return cryptoOperation;
         }
 
-        public void setKeystoreName(String keystoreName) {
-            this.keystoreName = keystoreName;
-        }
-
-        public PublicKey getPublicKey() {
-            return publicKey;
-        }
-
-        public void setPublicKey(PublicKey publicKey) {
-            this.publicKey = publicKey;
+        public void setCryptoOperation(CryptoOperation cryptoOperation) {
+            this.cryptoOperation = cryptoOperation;
         }
 
         public KeyStoreParameters getKeyStoreParameters() {
@@ -339,20 +283,76 @@ public class DigitalSignatureComponentConfiguration
             this.keyStoreParameters = keyStoreParameters;
         }
 
-        public String getSecureRandomName() {
-            return secureRandomName;
+        public KeyStore getKeystore() {
+            return keystore;
         }
 
-        public void setSecureRandomName(String secureRandomName) {
-            this.secureRandomName = secureRandomName;
+        public void setKeystore(KeyStore keystore) {
+            this.keystore = keystore;
         }
 
-        public Boolean getClearHeaders() {
-            return clearHeaders;
+        public String getKeystoreName() {
+            return keystoreName;
         }
 
-        public void setClearHeaders(Boolean clearHeaders) {
-            this.clearHeaders = clearHeaders;
+        public void setKeystoreName(String keystoreName) {
+            this.keystoreName = keystoreName;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public PrivateKey getPrivateKey() {
+            return privateKey;
+        }
+
+        public void setPrivateKey(PrivateKey privateKey) {
+            this.privateKey = privateKey;
+        }
+
+        public String getPrivateKeyName() {
+            return privateKeyName;
+        }
+
+        public void setPrivateKeyName(String privateKeyName) {
+            this.privateKeyName = privateKeyName;
+        }
+
+        public String getProvider() {
+            return provider;
+        }
+
+        public void setProvider(String provider) {
+            this.provider = provider;
+        }
+
+        public PublicKey getPublicKey() {
+            return publicKey;
+        }
+
+        public void setPublicKey(PublicKey publicKey) {
+            this.publicKey = publicKey;
+        }
+
+        public String getPublicKeyName() {
+            return publicKeyName;
+        }
+
+        public void setPublicKeyName(String publicKeyName) {
+            this.publicKeyName = publicKeyName;
         }
 
         public SecureRandom getSecureRandom() {
@@ -363,12 +363,12 @@ public class DigitalSignatureComponentConfiguration
             this.secureRandom = secureRandom;
         }
 
-        public String getProvider() {
-            return provider;
+        public String getSecureRandomName() {
+            return secureRandomName;
         }
 
-        public void setProvider(String provider) {
-            this.provider = provider;
+        public void setSecureRandomName(String secureRandomName) {
+            this.secureRandomName = secureRandomName;
         }
 
         public String getSignatureHeaderName() {

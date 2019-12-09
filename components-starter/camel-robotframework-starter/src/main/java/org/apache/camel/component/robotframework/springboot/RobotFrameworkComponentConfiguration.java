@@ -103,80 +103,26 @@ public class RobotFrameworkComponentConfiguration
     public static class RobotFrameworkCamelConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.robotframework.RobotFrameworkCamelConfiguration.class;
         /**
-         * Sets the name of the top-level tests suites.
+         * A text file to read more arguments from.
          */
-        private String name;
+        private File argumentFile;
         /**
-         * Selects the tests cases by tags. List
+         * Creates combined statistics based on tags. Use the format tags:title
+         * List
          */
-        private String includes;
-        /**
-         * Sets free metadata for the top level tests suites. comma seperated
-         * list of string resulting as List
-         */
-        private String metadata;
-        /**
-         * Sets the path to the generated log file.
-         */
-        private File log;
-        /**
-         * Configures where generated reports are to be placed.
-         */
-        private File outputDirectory;
-        /**
-         * Sets multiple listeners for monitoring tests execution. Use the
-         * format ListenerWithArgs:arg1:arg2 or simply ListenerWithoutArgs List
-         */
-        private String listeners;
-        /**
-         * Selects the tests cases by tags. List
-         */
-        private String excludes;
-        /**
-         * Sets the path to the generated output file.
-         */
-        private File output;
-        /**
-         * Sets a single listener for monitoring tests execution
-         */
-        private String listener;
-        /**
-         * Sets the threshold level for logging.
-         */
-        private String logLevel;
-        /**
-         * Sets the documentation of the top-level tests suites.
-         */
-        private String document;
-        /**
-         * Sets the path to the generated report file.
-         */
-        private File report;
+        private String combinedTagStats;
         /**
          * Tests that have the given tags are considered critical. List
          */
         private String criticalTags;
         /**
-         * Tests that have the given tags are not critical. List
+         * A debug file that is written during execution.
          */
-        private String nonCriticalTags;
+        private File debugFile;
         /**
-         * Selects the tests suites by name. List
+         * Sets the documentation of the top-level tests suites.
          */
-        private String suites;
-        /**
-         * Sets whether the teardowns are skipped if the test execution is
-         * prematurely stopped.
-         */
-        private Boolean skipTeardownOnExit = false;
-        /**
-         * Sets robot to stop execution immediately if a critical test fails.
-         */
-        private Boolean exitOnFailure = false;
-        /**
-         * Sets the tags(s) to all executed tests cases. List
-         */
-        private String tags;
+        private String document;
         /**
          * Sets dryrun mode on use. In the dry run mode tests are run without
          * executing keywords originating from test libraries. Useful for
@@ -184,110 +130,43 @@ public class RobotFrameworkComponentConfiguration
          */
         private Boolean dryrun = false;
         /**
-         * Sets the execution mode for this tests run. Note that this setting
-         * has been deprecated in Robot Framework 2.8. Use separate dryryn,
-         * skipTeardownOnExit, exitOnFailure, and randomize settings instead.
+         * Selects the tests cases by tags. List
          */
-        private String runMode;
+        private String excludes;
         /**
-         * Adds documentation to the specified tags. List
+         * Sets robot to stop execution immediately if a critical test fails.
          */
-        private String tagDocs;
+        private Boolean exitOnFailure = false;
         /**
-         * Selects the tests cases by name. List
+         * Selects the tests cases by tags. List
          */
-        private String tests;
+        private String includes;
         /**
-         * Excludes these tags from the Statistics by Tag and Test Details by
-         * Tag tables in outputs. List
+         * Sets a single listener for monitoring tests execution
          */
-        private String tagStatExcludes;
+        private String listener;
         /**
-         * Creates combined statistics based on tags. Use the format tags:title
-         * List
+         * Sets multiple listeners for monitoring tests execution. Use the
+         * format ListenerWithArgs:arg1:arg2 or simply ListenerWithoutArgs List
          */
-        private String combinedTagStats;
+        private String listeners;
         /**
-         * Defines how many levels to show in the Statistics by Suite table in
-         * outputs.
+         * Sets the path to the generated log file.
          */
-        private String suiteStatLevel;
+        private File log;
         /**
-         * Includes only these tags in the Statistics by Tag and Test Details by
-         * Tag tables in outputs. List
+         * Sets the threshold level for logging.
          */
-        private String tagStatIncludes;
-        /**
-         * Adds a timestamp to all output files.
-         */
-        private Boolean timestampOutputs = false;
-        /**
-         * Splits output and log files.
-         */
-        private String splitOutputs;
-        /**
-         * Sets the test execution order to be randomized. Valid values are all,
-         * suite, and test
-         */
-        private String randomize;
-        /**
-         * Sets variables using variables files. Use the format path:args List
-         */
-        private String variableFiles;
-        /**
-         * Sets a title for the generated summary report.
-         */
-        private String summaryTitle;
-        /**
-         * Sets background colors for the generated report and summary.
-         */
-        private String reportBackground;
-        /**
-         * Sets the path to the generated XUnit compatible result file, relative
-         * to outputDirectory. The file is in xml format. By default, the file
-         * name is derived from the testCasesDirectory parameter, replacing
-         * blanks in the directory name by underscores.
-         */
-        private File xunitFile;
-        /**
-         * A debug file that is written during execution.
-         */
-        private File debugFile;
-        /**
-         * Sets individual variables. Use the format name:value List
-         */
-        private String variables;
-        /**
-         * Adds external links to the Statistics by Tag table in outputs. Use
-         * the format pattern:link:title List
-         */
-        private String tagStatLinks;
-        /**
-         * Show a warning when an invalid file is skipped.
-         */
-        private Boolean warnOnSkippedFiles = false;
+        private String logLevel;
         /**
          * Sets a title for the generated tests log.
          */
         private String logTitle;
         /**
-         * Sets a title for the generated tests report.
+         * Sets free metadata for the top level tests suites. comma seperated
+         * list of string resulting as List
          */
-        private String reportTitle;
-        /**
-         * A text file to read more arguments from.
-         */
-        private File argumentFile;
-        /**
-         * Executes tests also if the top level test suite is empty. Useful e.g.
-         * with --include/--exclude when it is not an error that no test matches
-         * the condition.
-         */
-        private Boolean runEmptySuite = false;
-        /**
-         * Width of the monitor output. Default is 78.
-         */
-        private String monitorWidth = "78";
+        private String metadata;
         /**
          * Using ANSI colors in console. Normally colors work in unixes but not
          * in Windows. Default is 'on'. 'on' - use colors in unixes but not in
@@ -296,197 +175,142 @@ public class RobotFrameworkComponentConfiguration
          */
         private String monitorColors;
         /**
-         * Re-run failed tests, based on output.xml file.
+         * Width of the monitor output. Default is 78.
          */
-        private File runFailed;
+        private String monitorWidth = "78";
+        /**
+         * Sets the name of the top-level tests suites.
+         */
+        private String name;
         /**
          * If true, sets the return code to zero regardless of failures in test
          * cases. Error codes are returned normally.
          */
         private Boolean noStatusReturnCode = false;
+        /**
+         * Tests that have the given tags are not critical. List
+         */
+        private String nonCriticalTags;
+        /**
+         * Sets the path to the generated output file.
+         */
+        private File output;
+        /**
+         * Configures where generated reports are to be placed.
+         */
+        private File outputDirectory;
+        /**
+         * Sets the test execution order to be randomized. Valid values are all,
+         * suite, and test
+         */
+        private String randomize;
+        /**
+         * Sets the path to the generated report file.
+         */
+        private File report;
+        /**
+         * Sets background colors for the generated report and summary.
+         */
+        private String reportBackground;
+        /**
+         * Sets a title for the generated tests report.
+         */
+        private String reportTitle;
+        /**
+         * Executes tests also if the top level test suite is empty. Useful e.g.
+         * with --include/--exclude when it is not an error that no test matches
+         * the condition.
+         */
+        private Boolean runEmptySuite = false;
+        /**
+         * Re-run failed tests, based on output.xml file.
+         */
+        private File runFailed;
+        /**
+         * Sets the execution mode for this tests run. Note that this setting
+         * has been deprecated in Robot Framework 2.8. Use separate dryryn,
+         * skipTeardownOnExit, exitOnFailure, and randomize settings instead.
+         */
+        private String runMode;
+        /**
+         * Sets whether the teardowns are skipped if the test execution is
+         * prematurely stopped.
+         */
+        private Boolean skipTeardownOnExit = false;
+        /**
+         * Splits output and log files.
+         */
+        private String splitOutputs;
+        /**
+         * Defines how many levels to show in the Statistics by Suite table in
+         * outputs.
+         */
+        private String suiteStatLevel;
+        /**
+         * Selects the tests suites by name. List
+         */
+        private String suites;
+        /**
+         * Sets a title for the generated summary report.
+         */
+        private String summaryTitle;
+        /**
+         * Adds documentation to the specified tags. List
+         */
+        private String tagDocs;
+        /**
+         * Excludes these tags from the Statistics by Tag and Test Details by
+         * Tag tables in outputs. List
+         */
+        private String tagStatExcludes;
+        /**
+         * Includes only these tags in the Statistics by Tag and Test Details by
+         * Tag tables in outputs. List
+         */
+        private String tagStatIncludes;
+        /**
+         * Adds external links to the Statistics by Tag table in outputs. Use
+         * the format pattern:link:title List
+         */
+        private String tagStatLinks;
+        /**
+         * Sets the tags(s) to all executed tests cases. List
+         */
+        private String tags;
+        /**
+         * Selects the tests cases by name. List
+         */
+        private String tests;
+        /**
+         * Adds a timestamp to all output files.
+         */
+        private Boolean timestampOutputs = false;
+        /**
+         * Sets variables using variables files. Use the format path:args List
+         */
+        private String variableFiles;
+        /**
+         * Sets individual variables. Use the format name:value List
+         */
+        private String variables;
+        /**
+         * Show a warning when an invalid file is skipped.
+         */
+        private Boolean warnOnSkippedFiles = false;
+        /**
+         * Sets the path to the generated XUnit compatible result file, relative
+         * to outputDirectory. The file is in xml format. By default, the file
+         * name is derived from the testCasesDirectory parameter, replacing
+         * blanks in the directory name by underscores.
+         */
+        private File xunitFile;
 
-        public String getName() {
-            return name;
+        public File getArgumentFile() {
+            return argumentFile;
         }
 
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getIncludes() {
-            return includes;
-        }
-
-        public void setIncludes(String includes) {
-            this.includes = includes;
-        }
-
-        public String getMetadata() {
-            return metadata;
-        }
-
-        public void setMetadata(String metadata) {
-            this.metadata = metadata;
-        }
-
-        public File getLog() {
-            return log;
-        }
-
-        public void setLog(File log) {
-            this.log = log;
-        }
-
-        public File getOutputDirectory() {
-            return outputDirectory;
-        }
-
-        public void setOutputDirectory(File outputDirectory) {
-            this.outputDirectory = outputDirectory;
-        }
-
-        public String getListeners() {
-            return listeners;
-        }
-
-        public void setListeners(String listeners) {
-            this.listeners = listeners;
-        }
-
-        public String getExcludes() {
-            return excludes;
-        }
-
-        public void setExcludes(String excludes) {
-            this.excludes = excludes;
-        }
-
-        public File getOutput() {
-            return output;
-        }
-
-        public void setOutput(File output) {
-            this.output = output;
-        }
-
-        public String getListener() {
-            return listener;
-        }
-
-        public void setListener(String listener) {
-            this.listener = listener;
-        }
-
-        public String getLogLevel() {
-            return logLevel;
-        }
-
-        public void setLogLevel(String logLevel) {
-            this.logLevel = logLevel;
-        }
-
-        public String getDocument() {
-            return document;
-        }
-
-        public void setDocument(String document) {
-            this.document = document;
-        }
-
-        public File getReport() {
-            return report;
-        }
-
-        public void setReport(File report) {
-            this.report = report;
-        }
-
-        public String getCriticalTags() {
-            return criticalTags;
-        }
-
-        public void setCriticalTags(String criticalTags) {
-            this.criticalTags = criticalTags;
-        }
-
-        public String getNonCriticalTags() {
-            return nonCriticalTags;
-        }
-
-        public void setNonCriticalTags(String nonCriticalTags) {
-            this.nonCriticalTags = nonCriticalTags;
-        }
-
-        public String getSuites() {
-            return suites;
-        }
-
-        public void setSuites(String suites) {
-            this.suites = suites;
-        }
-
-        public Boolean getSkipTeardownOnExit() {
-            return skipTeardownOnExit;
-        }
-
-        public void setSkipTeardownOnExit(Boolean skipTeardownOnExit) {
-            this.skipTeardownOnExit = skipTeardownOnExit;
-        }
-
-        public Boolean getExitOnFailure() {
-            return exitOnFailure;
-        }
-
-        public void setExitOnFailure(Boolean exitOnFailure) {
-            this.exitOnFailure = exitOnFailure;
-        }
-
-        public String getTags() {
-            return tags;
-        }
-
-        public void setTags(String tags) {
-            this.tags = tags;
-        }
-
-        public Boolean getDryrun() {
-            return dryrun;
-        }
-
-        public void setDryrun(Boolean dryrun) {
-            this.dryrun = dryrun;
-        }
-
-        public String getRunMode() {
-            return runMode;
-        }
-
-        public void setRunMode(String runMode) {
-            this.runMode = runMode;
-        }
-
-        public String getTagDocs() {
-            return tagDocs;
-        }
-
-        public void setTagDocs(String tagDocs) {
-            this.tagDocs = tagDocs;
-        }
-
-        public String getTests() {
-            return tests;
-        }
-
-        public void setTests(String tests) {
-            this.tests = tests;
-        }
-
-        public String getTagStatExcludes() {
-            return tagStatExcludes;
-        }
-
-        public void setTagStatExcludes(String tagStatExcludes) {
-            this.tagStatExcludes = tagStatExcludes;
+        public void setArgumentFile(File argumentFile) {
+            this.argumentFile = argumentFile;
         }
 
         public String getCombinedTagStats() {
@@ -497,76 +321,12 @@ public class RobotFrameworkComponentConfiguration
             this.combinedTagStats = combinedTagStats;
         }
 
-        public String getSuiteStatLevel() {
-            return suiteStatLevel;
+        public String getCriticalTags() {
+            return criticalTags;
         }
 
-        public void setSuiteStatLevel(String suiteStatLevel) {
-            this.suiteStatLevel = suiteStatLevel;
-        }
-
-        public String getTagStatIncludes() {
-            return tagStatIncludes;
-        }
-
-        public void setTagStatIncludes(String tagStatIncludes) {
-            this.tagStatIncludes = tagStatIncludes;
-        }
-
-        public Boolean getTimestampOutputs() {
-            return timestampOutputs;
-        }
-
-        public void setTimestampOutputs(Boolean timestampOutputs) {
-            this.timestampOutputs = timestampOutputs;
-        }
-
-        public String getSplitOutputs() {
-            return splitOutputs;
-        }
-
-        public void setSplitOutputs(String splitOutputs) {
-            this.splitOutputs = splitOutputs;
-        }
-
-        public String getRandomize() {
-            return randomize;
-        }
-
-        public void setRandomize(String randomize) {
-            this.randomize = randomize;
-        }
-
-        public String getVariableFiles() {
-            return variableFiles;
-        }
-
-        public void setVariableFiles(String variableFiles) {
-            this.variableFiles = variableFiles;
-        }
-
-        public String getSummaryTitle() {
-            return summaryTitle;
-        }
-
-        public void setSummaryTitle(String summaryTitle) {
-            this.summaryTitle = summaryTitle;
-        }
-
-        public String getReportBackground() {
-            return reportBackground;
-        }
-
-        public void setReportBackground(String reportBackground) {
-            this.reportBackground = reportBackground;
-        }
-
-        public File getXunitFile() {
-            return xunitFile;
-        }
-
-        public void setXunitFile(File xunitFile) {
-            this.xunitFile = xunitFile;
+        public void setCriticalTags(String criticalTags) {
+            this.criticalTags = criticalTags;
         }
 
         public File getDebugFile() {
@@ -577,28 +337,76 @@ public class RobotFrameworkComponentConfiguration
             this.debugFile = debugFile;
         }
 
-        public String getVariables() {
-            return variables;
+        public String getDocument() {
+            return document;
         }
 
-        public void setVariables(String variables) {
-            this.variables = variables;
+        public void setDocument(String document) {
+            this.document = document;
         }
 
-        public String getTagStatLinks() {
-            return tagStatLinks;
+        public Boolean getDryrun() {
+            return dryrun;
         }
 
-        public void setTagStatLinks(String tagStatLinks) {
-            this.tagStatLinks = tagStatLinks;
+        public void setDryrun(Boolean dryrun) {
+            this.dryrun = dryrun;
         }
 
-        public Boolean getWarnOnSkippedFiles() {
-            return warnOnSkippedFiles;
+        public String getExcludes() {
+            return excludes;
         }
 
-        public void setWarnOnSkippedFiles(Boolean warnOnSkippedFiles) {
-            this.warnOnSkippedFiles = warnOnSkippedFiles;
+        public void setExcludes(String excludes) {
+            this.excludes = excludes;
+        }
+
+        public Boolean getExitOnFailure() {
+            return exitOnFailure;
+        }
+
+        public void setExitOnFailure(Boolean exitOnFailure) {
+            this.exitOnFailure = exitOnFailure;
+        }
+
+        public String getIncludes() {
+            return includes;
+        }
+
+        public void setIncludes(String includes) {
+            this.includes = includes;
+        }
+
+        public String getListener() {
+            return listener;
+        }
+
+        public void setListener(String listener) {
+            this.listener = listener;
+        }
+
+        public String getListeners() {
+            return listeners;
+        }
+
+        public void setListeners(String listeners) {
+            this.listeners = listeners;
+        }
+
+        public File getLog() {
+            return log;
+        }
+
+        public void setLog(File log) {
+            this.log = log;
+        }
+
+        public String getLogLevel() {
+            return logLevel;
+        }
+
+        public void setLogLevel(String logLevel) {
+            this.logLevel = logLevel;
         }
 
         public String getLogTitle() {
@@ -609,36 +417,12 @@ public class RobotFrameworkComponentConfiguration
             this.logTitle = logTitle;
         }
 
-        public String getReportTitle() {
-            return reportTitle;
+        public String getMetadata() {
+            return metadata;
         }
 
-        public void setReportTitle(String reportTitle) {
-            this.reportTitle = reportTitle;
-        }
-
-        public File getArgumentFile() {
-            return argumentFile;
-        }
-
-        public void setArgumentFile(File argumentFile) {
-            this.argumentFile = argumentFile;
-        }
-
-        public Boolean getRunEmptySuite() {
-            return runEmptySuite;
-        }
-
-        public void setRunEmptySuite(Boolean runEmptySuite) {
-            this.runEmptySuite = runEmptySuite;
-        }
-
-        public String getMonitorWidth() {
-            return monitorWidth;
-        }
-
-        public void setMonitorWidth(String monitorWidth) {
-            this.monitorWidth = monitorWidth;
+        public void setMetadata(String metadata) {
+            this.metadata = metadata;
         }
 
         public String getMonitorColors() {
@@ -649,12 +433,20 @@ public class RobotFrameworkComponentConfiguration
             this.monitorColors = monitorColors;
         }
 
-        public File getRunFailed() {
-            return runFailed;
+        public String getMonitorWidth() {
+            return monitorWidth;
         }
 
-        public void setRunFailed(File runFailed) {
-            this.runFailed = runFailed;
+        public void setMonitorWidth(String monitorWidth) {
+            this.monitorWidth = monitorWidth;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         public Boolean getNoStatusReturnCode() {
@@ -663,6 +455,214 @@ public class RobotFrameworkComponentConfiguration
 
         public void setNoStatusReturnCode(Boolean noStatusReturnCode) {
             this.noStatusReturnCode = noStatusReturnCode;
+        }
+
+        public String getNonCriticalTags() {
+            return nonCriticalTags;
+        }
+
+        public void setNonCriticalTags(String nonCriticalTags) {
+            this.nonCriticalTags = nonCriticalTags;
+        }
+
+        public File getOutput() {
+            return output;
+        }
+
+        public void setOutput(File output) {
+            this.output = output;
+        }
+
+        public File getOutputDirectory() {
+            return outputDirectory;
+        }
+
+        public void setOutputDirectory(File outputDirectory) {
+            this.outputDirectory = outputDirectory;
+        }
+
+        public String getRandomize() {
+            return randomize;
+        }
+
+        public void setRandomize(String randomize) {
+            this.randomize = randomize;
+        }
+
+        public File getReport() {
+            return report;
+        }
+
+        public void setReport(File report) {
+            this.report = report;
+        }
+
+        public String getReportBackground() {
+            return reportBackground;
+        }
+
+        public void setReportBackground(String reportBackground) {
+            this.reportBackground = reportBackground;
+        }
+
+        public String getReportTitle() {
+            return reportTitle;
+        }
+
+        public void setReportTitle(String reportTitle) {
+            this.reportTitle = reportTitle;
+        }
+
+        public Boolean getRunEmptySuite() {
+            return runEmptySuite;
+        }
+
+        public void setRunEmptySuite(Boolean runEmptySuite) {
+            this.runEmptySuite = runEmptySuite;
+        }
+
+        public File getRunFailed() {
+            return runFailed;
+        }
+
+        public void setRunFailed(File runFailed) {
+            this.runFailed = runFailed;
+        }
+
+        public String getRunMode() {
+            return runMode;
+        }
+
+        public void setRunMode(String runMode) {
+            this.runMode = runMode;
+        }
+
+        public Boolean getSkipTeardownOnExit() {
+            return skipTeardownOnExit;
+        }
+
+        public void setSkipTeardownOnExit(Boolean skipTeardownOnExit) {
+            this.skipTeardownOnExit = skipTeardownOnExit;
+        }
+
+        public String getSplitOutputs() {
+            return splitOutputs;
+        }
+
+        public void setSplitOutputs(String splitOutputs) {
+            this.splitOutputs = splitOutputs;
+        }
+
+        public String getSuiteStatLevel() {
+            return suiteStatLevel;
+        }
+
+        public void setSuiteStatLevel(String suiteStatLevel) {
+            this.suiteStatLevel = suiteStatLevel;
+        }
+
+        public String getSuites() {
+            return suites;
+        }
+
+        public void setSuites(String suites) {
+            this.suites = suites;
+        }
+
+        public String getSummaryTitle() {
+            return summaryTitle;
+        }
+
+        public void setSummaryTitle(String summaryTitle) {
+            this.summaryTitle = summaryTitle;
+        }
+
+        public String getTagDocs() {
+            return tagDocs;
+        }
+
+        public void setTagDocs(String tagDocs) {
+            this.tagDocs = tagDocs;
+        }
+
+        public String getTagStatExcludes() {
+            return tagStatExcludes;
+        }
+
+        public void setTagStatExcludes(String tagStatExcludes) {
+            this.tagStatExcludes = tagStatExcludes;
+        }
+
+        public String getTagStatIncludes() {
+            return tagStatIncludes;
+        }
+
+        public void setTagStatIncludes(String tagStatIncludes) {
+            this.tagStatIncludes = tagStatIncludes;
+        }
+
+        public String getTagStatLinks() {
+            return tagStatLinks;
+        }
+
+        public void setTagStatLinks(String tagStatLinks) {
+            this.tagStatLinks = tagStatLinks;
+        }
+
+        public String getTags() {
+            return tags;
+        }
+
+        public void setTags(String tags) {
+            this.tags = tags;
+        }
+
+        public String getTests() {
+            return tests;
+        }
+
+        public void setTests(String tests) {
+            this.tests = tests;
+        }
+
+        public Boolean getTimestampOutputs() {
+            return timestampOutputs;
+        }
+
+        public void setTimestampOutputs(Boolean timestampOutputs) {
+            this.timestampOutputs = timestampOutputs;
+        }
+
+        public String getVariableFiles() {
+            return variableFiles;
+        }
+
+        public void setVariableFiles(String variableFiles) {
+            this.variableFiles = variableFiles;
+        }
+
+        public String getVariables() {
+            return variables;
+        }
+
+        public void setVariables(String variables) {
+            this.variables = variables;
+        }
+
+        public Boolean getWarnOnSkippedFiles() {
+            return warnOnSkippedFiles;
+        }
+
+        public void setWarnOnSkippedFiles(Boolean warnOnSkippedFiles) {
+            this.warnOnSkippedFiles = warnOnSkippedFiles;
+        }
+
+        public File getXunitFile() {
+            return xunitFile;
+        }
+
+        public void setXunitFile(File xunitFile) {
+            this.xunitFile = xunitFile;
         }
     }
 }

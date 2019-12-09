@@ -106,38 +106,38 @@ public class QueueServiceComponentConfiguration
     public static class QueueServiceConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.azure.queue.QueueServiceConfiguration.class;
         /**
-         * Queue service operation hint to the producer
+         * The queue service client
          */
-        private QueueServiceOperations operation = QueueServiceOperations.listQueues;
+        private CloudQueue azureQueueClient;
         /**
          * Message Time To Live in seconds
          */
         private Integer messageTimeToLive;
-        private String queueName;
-        /**
-         * The queue service client
-         */
-        private CloudQueue azureQueueClient;
         /**
          * Message Visibility Delay in seconds
          */
         private Integer messageVisibilityDelay;
         /**
+         * Queue service operation hint to the producer
+         */
+        private QueueServiceOperations operation = QueueServiceOperations.listQueues;
+        private String queueName;
+        /**
          * Set a prefix which can be used for listing the queues
          */
         private String queuePrefix;
+        private String accountName;
         /**
          * Set the storage credentials, required in most cases
          */
         private StorageCredentials credentials;
-        private String accountName;
 
-        public QueueServiceOperations getOperation() {
-            return operation;
+        public CloudQueue getAzureQueueClient() {
+            return azureQueueClient;
         }
 
-        public void setOperation(QueueServiceOperations operation) {
-            this.operation = operation;
+        public void setAzureQueueClient(CloudQueue azureQueueClient) {
+            this.azureQueueClient = azureQueueClient;
         }
 
         public Integer getMessageTimeToLive() {
@@ -148,28 +148,28 @@ public class QueueServiceComponentConfiguration
             this.messageTimeToLive = messageTimeToLive;
         }
 
-        public String getQueueName() {
-            return queueName;
-        }
-
-        public void setQueueName(String queueName) {
-            this.queueName = queueName;
-        }
-
-        public CloudQueue getAzureQueueClient() {
-            return azureQueueClient;
-        }
-
-        public void setAzureQueueClient(CloudQueue azureQueueClient) {
-            this.azureQueueClient = azureQueueClient;
-        }
-
         public Integer getMessageVisibilityDelay() {
             return messageVisibilityDelay;
         }
 
         public void setMessageVisibilityDelay(Integer messageVisibilityDelay) {
             this.messageVisibilityDelay = messageVisibilityDelay;
+        }
+
+        public QueueServiceOperations getOperation() {
+            return operation;
+        }
+
+        public void setOperation(QueueServiceOperations operation) {
+            this.operation = operation;
+        }
+
+        public String getQueueName() {
+            return queueName;
+        }
+
+        public void setQueueName(String queueName) {
+            this.queueName = queueName;
         }
 
         public String getQueuePrefix() {
@@ -180,20 +180,20 @@ public class QueueServiceComponentConfiguration
             this.queuePrefix = queuePrefix;
         }
 
-        public StorageCredentials getCredentials() {
-            return credentials;
-        }
-
-        public void setCredentials(StorageCredentials credentials) {
-            this.credentials = credentials;
-        }
-
         public String getAccountName() {
             return accountName;
         }
 
         public void setAccountName(String accountName) {
             this.accountName = accountName;
+        }
+
+        public StorageCredentials getCredentials() {
+            return credentials;
+        }
+
+        public void setCredentials(StorageCredentials credentials) {
+            this.credentials = credentials;
         }
     }
 }

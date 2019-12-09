@@ -104,39 +104,15 @@ public class ServerComponentConfiguration
 
     public static class ServerOptionsNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.iec60870.server.ServerOptions.class;
+        private Integer backgroundScanPeriod;
+        private Boolean booleansWithTimestamp;
+        private Integer bufferingPeriod;
         /**
          * Data module options
          */
         private DataModuleOptions dataModuleOptions;
-        private Integer spontaneousDuplicates;
         private Boolean floatsWithTimestamp;
-        private Integer backgroundScanPeriod;
-        private Boolean booleansWithTimestamp;
-        private Integer bufferingPeriod;
-
-        public DataModuleOptions getDataModuleOptions() {
-            return dataModuleOptions;
-        }
-
-        public void setDataModuleOptions(DataModuleOptions dataModuleOptions) {
-            this.dataModuleOptions = dataModuleOptions;
-        }
-
-        public Integer getSpontaneousDuplicates() {
-            return spontaneousDuplicates;
-        }
-
-        public void setSpontaneousDuplicates(Integer spontaneousDuplicates) {
-            this.spontaneousDuplicates = spontaneousDuplicates;
-        }
-
-        public Boolean getFloatsWithTimestamp() {
-            return floatsWithTimestamp;
-        }
-
-        public void setFloatsWithTimestamp(Boolean floatsWithTimestamp) {
-            this.floatsWithTimestamp = floatsWithTimestamp;
-        }
+        private Integer spontaneousDuplicates;
 
         public Integer getBackgroundScanPeriod() {
             return backgroundScanPeriod;
@@ -160,6 +136,30 @@ public class ServerComponentConfiguration
 
         public void setBufferingPeriod(Integer bufferingPeriod) {
             this.bufferingPeriod = bufferingPeriod;
+        }
+
+        public DataModuleOptions getDataModuleOptions() {
+            return dataModuleOptions;
+        }
+
+        public void setDataModuleOptions(DataModuleOptions dataModuleOptions) {
+            this.dataModuleOptions = dataModuleOptions;
+        }
+
+        public Boolean getFloatsWithTimestamp() {
+            return floatsWithTimestamp;
+        }
+
+        public void setFloatsWithTimestamp(Boolean floatsWithTimestamp) {
+            this.floatsWithTimestamp = floatsWithTimestamp;
+        }
+
+        public Integer getSpontaneousDuplicates() {
+            return spontaneousDuplicates;
+        }
+
+        public void setSpontaneousDuplicates(Integer spontaneousDuplicates) {
+            this.spontaneousDuplicates = spontaneousDuplicates;
         }
     }
 }

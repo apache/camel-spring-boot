@@ -104,23 +104,243 @@ public class DebeziumMySqlComponentConfiguration
     public static class MySqlConnectorEmbeddedDebeziumConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.debezium.configuration.MySqlConnectorEmbeddedDebeziumConfiguration.class;
         /**
-         * Whether delete operations should be represented by a delete event and
-         * a subsquenttombstone event (true) or only by a delete event (false).
-         * Emitting the tombstone event (the default behavior) allows Kafka to
-         * completely delete all events pertaining to the given key once the
-         * source record got deleted.
+         * Specify how BIGINT UNSIGNED columns should be represented in change
+         * events, including:'precise' uses java.math.BigDecimal to represent
+         * values, which are encoded in the change events using a binary
+         * representation and Kafka Connect's
+         * 'org.apache.kafka.connect.data.Decimal' type; 'long' (the default)
+         * represents values using Java's 'long', which may not offer the
+         * precision but will be far easier to use in consumers.
          */
-        private Boolean tombstonesOnDelete = false;
+        private String bigintUnsignedHandlingMode = "long";
+        /**
+         * The size of a look-ahead buffer used by the binlog reader to decide
+         * whether the transaction in progress is going to be committed or
+         * rolled back. Use 0 to disable look-ahead buffering. Defaults to 0
+         * (i.e. buffering is disabled).
+         */
+        private Integer binlogBufferSize = 0;
+        /**
+         * Description is not available here, please check Debezium website for
+         * corresponding key 'column.blacklist' description.
+         */
+        private String columnBlacklist;
+        /**
+         * Whether a separate thread should be used to ensure the connection is
+         * kept alive.
+         */
+        private Boolean connectKeepAlive = true;
+        /**
+         * Interval in milliseconds to wait for connection checking if keep
+         * alive thread is used.
+         */
+        private Long connectKeepAliveIntervalMs = 60000L;
+        /**
+         * Maximum time in milliseconds to wait after trying to connect to the
+         * database before timing out.
+         */
+        private Integer connectTimeoutMs = 30000;
+        /**
+         * Description is not available here, please check Debezium website for
+         * corresponding key 'database.blacklist' description.
+         */
+        private String databaseBlacklist;
+        /**
+         * The name of the DatabaseHistory class that should be used to store
+         * and recover database schema changes. The configuration properties for
+         * the history are prefixed with the 'database.history.' string.
+         */
+        private String databaseHistory = "io.debezium.relational.history.FileDatabaseHistory";
         /**
          * The path to the file that will be used to record the database history
          */
         private String databaseHistoryFileFilename;
         /**
-         * Maximum size of the queue for change events read from the database
-         * log but not yet recorded or forwarded. Defaults to 8192, and should
-         * always be larger than the maximum batch size.
+         * A list of host/port pairs that the connector will use for
+         * establishing the initial connection to the Kafka cluster for
+         * retrieving database schema history previously stored by the
+         * connector. This should point to the same Kafka cluster used by the
+         * Kafka Connect process.
          */
-        private Integer maxQueueSize = 8192;
+        private String databaseHistoryKafkaBootstrapServers;
+        /**
+         * The number of attempts in a row that no data are returned from Kafka
+         * before recover completes. The maximum amount of time to wait after
+         * receiving no data is (recovery.attempts) x
+         * (recovery.poll.interval.ms).
+         */
+        private Integer databaseHistoryKafkaRecoveryAttempts = 100;
+        /**
+         * The number of milliseconds to wait while polling for persisted data
+         * during recovery.
+         */
+        private Integer databaseHistoryKafkaRecoveryPollIntervalMs = 100;
+        /**
+         * The name of the topic for the database schema history
+         */
+        private String databaseHistoryKafkaTopic;
+        /**
+         * Controls the action Debezium will take when it meets a DDL statement
+         * in binlog, that it cannot parse.By default the connector will stop
+         * operating but by changing the setting it can ignore the statements
+         * which it cannot parse. If skipping is enabled then Debezium can miss
+         * metadata changes.
+         */
+        private Boolean databaseHistorySkipUnparseableDdl = false;
+        /**
+         * Controls what DDL will Debezium store in database history.By default
+         * (false) Debezium will store all incoming DDL statements. If set to
+         * truethen only DDL that manipulates a monitored table will be stored.
+         */
+        private Boolean databaseHistoryStoreOnlyMonitoredTablesDdl = false;
+        /**
+         * Resolvable hostname or IP address of the MySQL database server.
+         */
+        private String databaseHostname;
+        /**
+         * A semicolon separated list of SQL statements to be executed when a
+         * JDBC connection (not binlog reading connection) to the database is
+         * established. Note that the connector may establish JDBC connections
+         * at its own discretion, so this should typically be used for
+         * configuration of session parameters only,but not for executing DML
+         * statements. Use doubled semicolon (';;') to use a semicolon as a
+         * character and not as a delimiter.
+         */
+        private String databaseInitialStatements;
+        /**
+         * JDBC Driver class name used to connect to the MySQL database server.
+         */
+        private String databaseJdbcDriver = "class com.mysql.cj.jdbc.Driver";
+        /**
+         * Password of the MySQL database user to be used when connecting to the
+         * database.
+         */
+        private String databasePassword;
+        /**
+         * Port of the MySQL database server.
+         */
+        private Integer databasePort = 3306;
+        /**
+         * A numeric ID of this database client, which must be unique across all
+         * currently-running database processes in the cluster. This connector
+         * joins the MySQL database cluster as another server (with this unique
+         * ID) so it can read the binlog. By default, a random number is
+         * generated between 5400 and 6400.
+         */
+        private Long databaseServerId;
+        /**
+         * Only relevant if parallel snapshotting is configured. During parallel
+         * snapshotting, multiple (4) connections open to the database client,
+         * and they each need their own unique connection ID. This offset is
+         * used to generate those IDs from the base configured cluster ID.
+         */
+        private Long databaseServerIdOffset = 10000L;
+        /**
+         * Unique name that identifies the database server and all recorded
+         * offsets, and that is used as a prefix for all schemas and topics.
+         * Each distinct installation should have a separate namespace and be
+         * monitored by at most one Debezium connector.
+         */
+        private String databaseServerName;
+        /**
+         * Location of the Java keystore file containing an application
+         * process's own certificate and private key.
+         */
+        private String databaseSslKeystore;
+        /**
+         * Password to access the private key from the keystore file specified
+         * by 'ssl.keystore' configuration property or the
+         * 'javax.net.ssl.keyStore' system or JVM property. This password is
+         * used to unlock the keystore file (store password), and to decrypt the
+         * private key stored in the keystore (key password).
+         */
+        private String databaseSslKeystorePassword;
+        /**
+         * Whether to use an encrypted connection to MySQL. Options
+         * include'disabled' (the default) to use an unencrypted connection;
+         * 'preferred' to establish a secure (encrypted) connection if the
+         * server supports secure connections, but fall back to an unencrypted
+         * connection otherwise; 'required' to use a secure (encrypted)
+         * connection, and fail if one cannot be established; 'verify_ca' like
+         * 'required' but additionally verify the server TLS certificate against
+         * the configured Certificate Authority (CA) certificates, or fail if no
+         * valid matching CA certificates are found; or'verify_identity' like
+         * 'verify_ca' but additionally verify that the server certificate
+         * matches the host to which the connection is attempted.
+         */
+        private String databaseSslMode = "disabled";
+        /**
+         * Location of the Java truststore file containing the collection of CA
+         * certificates trusted by this application process (trust store).
+         */
+        private String databaseSslTruststore;
+        /**
+         * Password to unlock the keystore file (store password) specified by
+         * 'ssl.trustore' configuration property or the
+         * 'javax.net.ssl.trustStore' system or JVM property.
+         */
+        private String databaseSslTruststorePassword;
+        /**
+         * Name of the MySQL database user to be used when connecting to the
+         * database.
+         */
+        private String databaseUser;
+        /**
+         * The databases for which changes are to be captured
+         */
+        private String databaseWhitelist;
+        /**
+         * Specify how DECIMAL and NUMERIC columns should be represented in
+         * change events, including:'precise' (the default) uses
+         * java.math.BigDecimal to represent values, which are encoded in the
+         * change events using a binary representation and Kafka Connect's
+         * 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to
+         * represent values; 'double' represents values using Java's 'double',
+         * which may not offer the precision but will be far easier to use in
+         * consumers.
+         */
+        private String decimalHandlingMode = "precise";
+        /**
+         * MySQL allows user to insert year value as either 2-digit or 4-digit.
+         * In case of two digit the value is automatically mapped into 1970 -
+         * 2069.false - delegates the implicit conversion to the databasetrue -
+         * (the default) Debezium makes the conversion
+         */
+        private Boolean enableTimeAdjuster = true;
+        /**
+         * Specify how failures during deserialization of binlog events (i.e.
+         * when encountering a corrupted event) should be handled,
+         * including:'fail' (the default) an exception indicating the
+         * problematic event and its binlog position is raised, causing the
+         * connector to be stopped; 'warn' the problematic event and its binlog
+         * position will be logged and the event will be skipped;'ignore' the
+         * problematic event will be skipped.
+         */
+        private String eventDeserializationFailureHandlingMode = "fail";
+        /**
+         * If set to 'latest', when connector sees new GTID, it will start
+         * consuming gtid channel from the server latest executed gtid position.
+         * If 'earliest' connector starts reading channel from first available
+         * (not purged) gtid position on the server.
+         */
+        private String gtidNewChannelPosition = "latest";
+        /**
+         * The source UUIDs used to exclude GTID ranges when determine the
+         * starting position in the MySQL server's binlog.
+         */
+        private String gtidSourceExcludes;
+        /**
+         * If set to true, we will only produce DML events into Kafka for
+         * transactions that were written on mysql servers with UUIDs matching
+         * the filters defined by the gtid.source.includes or
+         * gtid.source.excludes configuration options, if they are specified.
+         */
+        private Boolean gtidSourceFilterDmlEvents = true;
+        /**
+         * The source UUIDs used to include GTID ranges when determine the
+         * starting position in the MySQL server's binlog.
+         */
+        private String gtidSourceIncludes;
         /**
          * Length of an interval in milli-seconds in in which the connector
          * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
@@ -128,56 +348,75 @@ public class DebeziumMySqlComponentConfiguration
          */
         private Integer heartbeatIntervalMs = 0;
         /**
-         * The number of milliseconds to delay before a snapshot will begin.
-         */
-        private Long snapshotDelayMs = 0L;
-        /**
-         * The criteria for running a snapshot upon startup of the connector.
-         * Options include: 'when_needed' to specify that the connector run a
-         * snapshot upon startup whenever it deems it necessary; 'initial' (the
-         * default) to specify the connector can run a snapshot only when no
-         * offsets are available for the logical server name; 'initial_only'
-         * same as 'initial' except the connector should stop after completing
-         * the snapshot and before it would normally read the binlog; and'never'
-         * to specify the connector should never run a snapshot and that upon
-         * first startup the connector should read from the beginning of the
-         * binlog. The 'never' mode should be used with care, and only when the
-         * binlog is known to contain all history.
-         */
-        private String snapshotMode = "initial";
-        /**
-         * A version of the format of the publicly visible source part in the
-         * message
-         */
-        private String sourceStructVersion = "v2";
-        /**
-         * The databases for which changes are to be captured
-         */
-        private String databaseWhitelist;
-        /**
-         * Maximum size of each batch of source records. Defaults to 2048.
-         */
-        private Integer maxBatchSize = 2048;
-        /**
-         * Description is not available here, please check Debezium website for
-         * corresponding key 'database.blacklist' description.
-         */
-        private String databaseBlacklist;
-        /**
-         * The maximum number of records that should be loaded into memory while
-         * performing a snapshot
-         */
-        private Integer snapshotFetchSize;
-        /**
          * The prefix that is used to name heartbeat topics.Defaults to
          * __debezium-heartbeat.
          */
         private String heartbeatTopicsPrefix = "__debezium-heartbeat";
         /**
+         * Whether the connector should include the original SQL query that
+         * generated the change event. Note: This option requires MySQL be
+         * configured with the binlog_rows_query_log_events option set to ON.
+         * Query will not be present for events generated from snapshot.
+         * WARNING: Enabling this option may expose tables or fields explicitly
+         * blacklisted or masked by including the original SQL statement in the
+         * change event. For this reason the default value is 'false'.
+         */
+        private Boolean includeQuery = false;
+        /**
+         * Whether the connector should publish changes in the database schema
+         * to a Kafka topic with the same name as the database server ID. Each
+         * schema change will be recorded using a key that contains the database
+         * name and whose value includes the DDL statement(s).The default is
+         * 'true'. This is independent of how the connector internally records
+         * database history.
+         */
+        private Boolean includeSchemaChanges = true;
+        /**
+         * Specify how binlog events that belong to a table missing from
+         * internal schema representation (i.e. internal representation is not
+         * consistent with database) should be handled, including:'fail' (the
+         * default) an exception indicating the problematic event and its binlog
+         * position is raised, causing the connector to be stopped; 'warn' the
+         * problematic event and its binlog position will be logged and the
+         * event will be skipped;'ignore' the problematic event will be skipped.
+         */
+        private String inconsistentSchemaHandlingMode = "fail";
+        /**
+         * Maximum size of each batch of source records. Defaults to 2048.
+         */
+        private Integer maxBatchSize = 2048;
+        /**
+         * Maximum size of the queue for change events read from the database
+         * log but not yet recorded or forwarded. Defaults to 8192, and should
+         * always be larger than the maximum batch size.
+         */
+        private Integer maxQueueSize = 8192;
+        /**
+         * A semicolon-separated list of expressions that match fully-qualified
+         * tables and column(s) to be used as message key. Each expression must
+         * match the pattern ':',where the table names could be defined as
+         * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the
+         * specific connector,and the key columns are a comma-separated list of
+         * columns representing the custom key. For any table without an
+         * explicit key configuration the table's primary key column(s) will be
+         * used as message key.Example:
+         * dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id
+         */
+        private String messageKeyColumns;
+        /**
          * Frequency in milliseconds to wait for new change events to appear
          * after receiving no events. Defaults to 500ms.
          */
         private Long pollIntervalMs = 500L;
+        /**
+         * The number of milliseconds to delay before a snapshot will begin.
+         */
+        private Long snapshotDelayMs = 0L;
+        /**
+         * The maximum number of records that should be loaded into memory while
+         * performing a snapshot
+         */
+        private Integer snapshotFetchSize;
         /**
          * Controls how long the connector holds onto the global read lock while
          * it is performing a snapshot. The default is 'minimal', which means
@@ -198,195 +437,19 @@ public class DebeziumMySqlComponentConfiguration
          */
         private String snapshotLockingMode = "minimal";
         /**
-         * A semicolon-separated list of expressions that match fully-qualified
-         * tables and column(s) to be used as message key. Each expression must
-         * match the pattern ':',where the table names could be defined as
-         * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the
-         * specific connector,and the key columns are a comma-separated list of
-         * columns representing the custom key. For any table without an
-         * explicit key configuration the table's primary key column(s) will be
-         * used as message key.Example:
-         * dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id
+         * The criteria for running a snapshot upon startup of the connector.
+         * Options include: 'when_needed' to specify that the connector run a
+         * snapshot upon startup whenever it deems it necessary; 'initial' (the
+         * default) to specify the connector can run a snapshot only when no
+         * offsets are available for the logical server name; 'initial_only'
+         * same as 'initial' except the connector should stop after completing
+         * the snapshot and before it would normally read the binlog; and'never'
+         * to specify the connector should never run a snapshot and that upon
+         * first startup the connector should read from the beginning of the
+         * binlog. The 'never' mode should be used with care, and only when the
+         * binlog is known to contain all history.
          */
-        private String messageKeyColumns;
-        /**
-         * Description is not available here, please check Debezium website for
-         * corresponding key 'column.blacklist' description.
-         */
-        private String columnBlacklist;
-        /**
-         * Description is not available here, please check Debezium website for
-         * corresponding key 'table.blacklist' description.
-         */
-        private String tableBlacklist;
-        /**
-         * Whether the connector should publish changes in the database schema
-         * to a Kafka topic with the same name as the database server ID. Each
-         * schema change will be recorded using a key that contains the database
-         * name and whose value includes the DDL statement(s).The default is
-         * 'true'. This is independent of how the connector internally records
-         * database history.
-         */
-        private Boolean includeSchemaChanges = true;
-        /**
-         * The source UUIDs used to include GTID ranges when determine the
-         * starting position in the MySQL server's binlog.
-         */
-        private String gtidSourceIncludes;
-        /**
-         * JDBC Driver class name used to connect to the MySQL database server.
-         */
-        private String databaseJdbcDriver = "class com.mysql.cj.jdbc.Driver";
-        /**
-         * The number of milliseconds to wait while polling for persisted data
-         * during recovery.
-         */
-        private Integer databaseHistoryKafkaRecoveryPollIntervalMs = 100;
-        /**
-         * A semicolon separated list of SQL statements to be executed when a
-         * JDBC connection (not binlog reading connection) to the database is
-         * established. Note that the connector may establish JDBC connections
-         * at its own discretion, so this should typically be used for
-         * configuration of session parameters only,but not for executing DML
-         * statements. Use doubled semicolon (';;') to use a semicolon as a
-         * character and not as a delimiter.
-         */
-        private String databaseInitialStatements;
-        /**
-         * The size of a look-ahead buffer used by the binlog reader to decide
-         * whether the transaction in progress is going to be committed or
-         * rolled back. Use 0 to disable look-ahead buffering. Defaults to 0
-         * (i.e. buffering is disabled).
-         */
-        private Integer binlogBufferSize = 0;
-        /**
-         * Name of the MySQL database user to be used when connecting to the
-         * database.
-         */
-        private String databaseUser;
-        /**
-         * The source UUIDs used to exclude GTID ranges when determine the
-         * starting position in the MySQL server's binlog.
-         */
-        private String gtidSourceExcludes;
-        /**
-         * This property contains a comma-separated list of fully-qualified
-         * tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on
-         * thespecific connectors . Select statements for the individual tables
-         * are specified in further configuration properties, one for each
-         * table, identified by the id
-         * 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or
-         * 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME',
-         * respectively. The value of those properties is the select statement
-         * to use when retrieving data from the specific table during
-         * snapshotting. A possible use case for large append-only tables is
-         * setting a specific point where to start (resume) snapshotting, in
-         * case a previous snapshotting was interrupted.
-         */
-        private String snapshotSelectStatementOverrides;
-        /**
-         * A list of host/port pairs that the connector will use for
-         * establishing the initial connection to the Kafka cluster for
-         * retrieving database schema history previously stored by the
-         * connector. This should point to the same Kafka cluster used by the
-         * Kafka Connect process.
-         */
-        private String databaseHistoryKafkaBootstrapServers;
-        /**
-         * Location of the Java keystore file containing an application
-         * process's own certificate and private key.
-         */
-        private String databaseSslKeystore;
-        /**
-         * Password to unlock the keystore file (store password) specified by
-         * 'ssl.trustore' configuration property or the
-         * 'javax.net.ssl.trustStore' system or JVM property.
-         */
-        private String databaseSslTruststorePassword;
-        /**
-         * Specify how binlog events that belong to a table missing from
-         * internal schema representation (i.e. internal representation is not
-         * consistent with database) should be handled, including:'fail' (the
-         * default) an exception indicating the problematic event and its binlog
-         * position is raised, causing the connector to be stopped; 'warn' the
-         * problematic event and its binlog position will be logged and the
-         * event will be skipped;'ignore' the problematic event will be skipped.
-         */
-        private String inconsistentSchemaHandlingMode = "fail";
-        /**
-         * MySQL allows user to insert year value as either 2-digit or 4-digit.
-         * In case of two digit the value is automatically mapped into 1970 -
-         * 2069.false - delegates the implicit conversion to the databasetrue -
-         * (the default) Debezium makes the conversion
-         */
-        private Boolean enableTimeAdjuster = true;
-        /**
-         * If set to 'latest', when connector sees new GTID, it will start
-         * consuming gtid channel from the server latest executed gtid position.
-         * If 'earliest' connector starts reading channel from first available
-         * (not purged) gtid position on the server.
-         */
-        private String gtidNewChannelPosition = "latest";
-        /**
-         * Password of the MySQL database user to be used when connecting to the
-         * database.
-         */
-        private String databasePassword;
-        /**
-         * Controls what DDL will Debezium store in database history.By default
-         * (false) Debezium will store all incoming DDL statements. If set to
-         * truethen only DDL that manipulates a monitored table will be stored.
-         */
-        private Boolean databaseHistoryStoreOnlyMonitoredTablesDdl = false;
-        /**
-         * If set to true, we will only produce DML events into Kafka for
-         * transactions that were written on mysql servers with UUIDs matching
-         * the filters defined by the gtid.source.includes or
-         * gtid.source.excludes configuration options, if they are specified.
-         */
-        private Boolean gtidSourceFilterDmlEvents = true;
-        /**
-         * Whether a separate thread should be used to ensure the connection is
-         * kept alive.
-         */
-        private Boolean connectKeepAlive = true;
-        /**
-         * The name of the DatabaseHistory class that should be used to store
-         * and recover database schema changes. The configuration properties for
-         * the history are prefixed with the 'database.history.' string.
-         */
-        private String databaseHistory = "io.debezium.relational.history.FileDatabaseHistory";
-        /**
-         * Maximum time in milliseconds to wait after trying to connect to the
-         * database before timing out.
-         */
-        private Integer connectTimeoutMs = 30000;
-        /**
-         * The name of the topic for the database schema history
-         */
-        private String databaseHistoryKafkaTopic;
-        /**
-         * The number of attempts in a row that no data are returned from Kafka
-         * before recover completes. The maximum amount of time to wait after
-         * receiving no data is (recovery.attempts) x
-         * (recovery.poll.interval.ms).
-         */
-        private Integer databaseHistoryKafkaRecoveryAttempts = 100;
-        /**
-         * The tables for which changes are to be captured
-         */
-        private String tableWhitelist;
-        /**
-         * Specify how DECIMAL and NUMERIC columns should be represented in
-         * change events, including:'precise' (the default) uses
-         * java.math.BigDecimal to represent values, which are encoded in the
-         * change events using a binary representation and Kafka Connect's
-         * 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to
-         * represent values; 'double' represents values using Java's 'double',
-         * which may not offer the precision but will be far easier to use in
-         * consumers.
-         */
-        private String decimalHandlingMode = "precise";
+        private String snapshotMode = "initial";
         /**
          * BETA FEATURE: On connector restart, the connector will check if there
          * have been any new tables added to the configuration, and snapshot
@@ -403,45 +466,38 @@ public class DebeziumMySqlComponentConfiguration
          */
         private String snapshotNewTables = "off";
         /**
-         * Controls the action Debezium will take when it meets a DDL statement
-         * in binlog, that it cannot parse.By default the connector will stop
-         * operating but by changing the setting it can ignore the statements
-         * which it cannot parse. If skipping is enabled then Debezium can miss
-         * metadata changes.
+         * This property contains a comma-separated list of fully-qualified
+         * tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on
+         * thespecific connectors . Select statements for the individual tables
+         * are specified in further configuration properties, one for each
+         * table, identified by the id
+         * 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or
+         * 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME',
+         * respectively. The value of those properties is the select statement
+         * to use when retrieving data from the specific table during
+         * snapshotting. A possible use case for large append-only tables is
+         * setting a specific point where to start (resume) snapshotting, in
+         * case a previous snapshotting was interrupted.
          */
-        private Boolean databaseHistorySkipUnparseableDdl = false;
+        private String snapshotSelectStatementOverrides;
+        /**
+         * A version of the format of the publicly visible source part in the
+         * message
+         */
+        private String sourceStructVersion = "v2";
+        /**
+         * Description is not available here, please check Debezium website for
+         * corresponding key 'table.blacklist' description.
+         */
+        private String tableBlacklist;
         /**
          * Flag specifying whether built-in tables should be ignored.
          */
         private Boolean tableIgnoreBuiltin = true;
         /**
-         * Specify how BIGINT UNSIGNED columns should be represented in change
-         * events, including:'precise' uses java.math.BigDecimal to represent
-         * values, which are encoded in the change events using a binary
-         * representation and Kafka Connect's
-         * 'org.apache.kafka.connect.data.Decimal' type; 'long' (the default)
-         * represents values using Java's 'long', which may not offer the
-         * precision but will be far easier to use in consumers.
+         * The tables for which changes are to be captured
          */
-        private String bigintUnsignedHandlingMode = "long";
-        /**
-         * A numeric ID of this database client, which must be unique across all
-         * currently-running database processes in the cluster. This connector
-         * joins the MySQL database cluster as another server (with this unique
-         * ID) so it can read the binlog. By default, a random number is
-         * generated between 5400 and 6400.
-         */
-        private Long databaseServerId;
-        /**
-         * Specify how failures during deserialization of binlog events (i.e.
-         * when encountering a corrupted event) should be handled,
-         * including:'fail' (the default) an exception indicating the
-         * problematic event and its binlog position is raised, causing the
-         * connector to be stopped; 'warn' the problematic event and its binlog
-         * position will be logged and the event will be skipped;'ignore' the
-         * problematic event will be skipped.
-         */
-        private String eventDeserializationFailureHandlingMode = "fail";
+        private String tableWhitelist;
         /**
          * Time, date and timestamps can be represented with different kinds of
          * precisions, including:'adaptive_time_microseconds': the precision of
@@ -453,102 +509,14 @@ public class DebeziumMySqlComponentConfiguration
          */
         private String timePrecisionMode = "adaptive_time_microseconds";
         /**
-         * Unique name that identifies the database server and all recorded
-         * offsets, and that is used as a prefix for all schemas and topics.
-         * Each distinct installation should have a separate namespace and be
-         * monitored by at most one Debezium connector.
+         * Whether delete operations should be represented by a delete event and
+         * a subsquenttombstone event (true) or only by a delete event (false).
+         * Emitting the tombstone event (the default behavior) allows Kafka to
+         * completely delete all events pertaining to the given key once the
+         * source record got deleted.
          */
-        private String databaseServerName;
-        /**
-         * Port of the MySQL database server.
-         */
-        private Integer databasePort = 3306;
-        /**
-         * Location of the Java truststore file containing the collection of CA
-         * certificates trusted by this application process (trust store).
-         */
-        private String databaseSslTruststore;
-        /**
-         * Whether to use an encrypted connection to MySQL. Options
-         * include'disabled' (the default) to use an unencrypted connection;
-         * 'preferred' to establish a secure (encrypted) connection if the
-         * server supports secure connections, but fall back to an unencrypted
-         * connection otherwise; 'required' to use a secure (encrypted)
-         * connection, and fail if one cannot be established; 'verify_ca' like
-         * 'required' but additionally verify the server TLS certificate against
-         * the configured Certificate Authority (CA) certificates, or fail if no
-         * valid matching CA certificates are found; or'verify_identity' like
-         * 'verify_ca' but additionally verify that the server certificate
-         * matches the host to which the connection is attempted.
-         */
-        private String databaseSslMode = "disabled";
-        /**
-         * Password to access the private key from the keystore file specified
-         * by 'ssl.keystore' configuration property or the
-         * 'javax.net.ssl.keyStore' system or JVM property. This password is
-         * used to unlock the keystore file (store password), and to decrypt the
-         * private key stored in the keystore (key password).
-         */
-        private String databaseSslKeystorePassword;
-        /**
-         * Resolvable hostname or IP address of the MySQL database server.
-         */
-        private String databaseHostname;
-        /**
-         * Only relevant if parallel snapshotting is configured. During parallel
-         * snapshotting, multiple (4) connections open to the database client,
-         * and they each need their own unique connection ID. This offset is
-         * used to generate those IDs from the base configured cluster ID.
-         */
-        private Long databaseServerIdOffset = 10000L;
-        /**
-         * Interval in milliseconds to wait for connection checking if keep
-         * alive thread is used.
-         */
-        private Long connectKeepAliveIntervalMs = 60000L;
-        /**
-         * Whether the connector should include the original SQL query that
-         * generated the change event. Note: This option requires MySQL be
-         * configured with the binlog_rows_query_log_events option set to ON.
-         * Query will not be present for events generated from snapshot.
-         * WARNING: Enabling this option may expose tables or fields explicitly
-         * blacklisted or masked by including the original SQL statement in the
-         * change event. For this reason the default value is 'false'.
-         */
-        private Boolean includeQuery = false;
-        /**
-         * Unique name for the connector. Attempting to register again with the
-         * same name will fail.
-         */
-        private String name;
-        /**
-         * The name of the Java class that is responsible for persistence of
-         * connector offsets.
-         */
-        private String offsetStorage = "org.apache.kafka.connect.storage.FileOffsetBackingStore";
-        /**
-         * Path to file where offsets are to be stored. Required when
-         * offset.storage is set to the FileOffsetBackingStore
-         */
-        private String offsetStorageFileName;
-        /**
-         * Replication factor used when creating the offset storage topic.
-         * Required when offset.storage is set to the KafkaOffsetBackingStore
-         */
-        private Integer offsetStorageReplicationFactor;
+        private Boolean tombstonesOnDelete = false;
         private Class connectorClass;
-        /**
-         * Maximum number of milliseconds to wait for records to flush and
-         * partition offset data to be committed to offset storage before
-         * cancelling the process and restoring the offset data to be committed
-         * in a future attempt. The default is 5 seconds.
-         */
-        private Long offsetCommitTimeoutMs = 5000L;
-        /**
-         * The number of partitions used when creating the offset storage topic.
-         * Required when offset.storage is set to the 'KafkaOffsetBackingStore'.
-         */
-        private Integer offsetStoragePartitions;
         /**
          * The Converter class that should be used to serialize and deserialize
          * key data for offsets. The default is JSON converter.
@@ -560,6 +528,11 @@ public class DebeziumMySqlComponentConfiguration
          */
         private String internalValueConverter = "org.apache.kafka.connect.json.JsonConverter";
         /**
+         * Unique name for the connector. Attempting to register again with the
+         * same name will fail.
+         */
+        private String name;
+        /**
          * The name of the Java class of the commit policy. It defines when
          * offsets commit has to be triggered based on the number of events
          * processed and the time elapsed since the last commit. This class must
@@ -568,386 +541,41 @@ public class DebeziumMySqlComponentConfiguration
          */
         private String offsetCommitPolicy = "io.debezium.embedded.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy";
         /**
+         * Maximum number of milliseconds to wait for records to flush and
+         * partition offset data to be committed to offset storage before
+         * cancelling the process and restoring the offset data to be committed
+         * in a future attempt. The default is 5 seconds.
+         */
+        private Long offsetCommitTimeoutMs = 5000L;
+        /**
          * Interval at which to try committing offsets. The default is 1 minute.
          */
         private Long offsetFlushIntervalMs = 60000L;
+        /**
+         * The name of the Java class that is responsible for persistence of
+         * connector offsets.
+         */
+        private String offsetStorage = "org.apache.kafka.connect.storage.FileOffsetBackingStore";
+        /**
+         * Path to file where offsets are to be stored. Required when
+         * offset.storage is set to the FileOffsetBackingStore
+         */
+        private String offsetStorageFileName;
+        /**
+         * The number of partitions used when creating the offset storage topic.
+         * Required when offset.storage is set to the 'KafkaOffsetBackingStore'.
+         */
+        private Integer offsetStoragePartitions;
+        /**
+         * Replication factor used when creating the offset storage topic.
+         * Required when offset.storage is set to the KafkaOffsetBackingStore
+         */
+        private Integer offsetStorageReplicationFactor;
         /**
          * The name of the Kafka topic where offsets are to be stored. Required
          * when offset.storage is set to the KafkaOffsetBackingStore.
          */
         private String offsetStorageTopic;
-
-        public Boolean getTombstonesOnDelete() {
-            return tombstonesOnDelete;
-        }
-
-        public void setTombstonesOnDelete(Boolean tombstonesOnDelete) {
-            this.tombstonesOnDelete = tombstonesOnDelete;
-        }
-
-        public String getDatabaseHistoryFileFilename() {
-            return databaseHistoryFileFilename;
-        }
-
-        public void setDatabaseHistoryFileFilename(
-                String databaseHistoryFileFilename) {
-            this.databaseHistoryFileFilename = databaseHistoryFileFilename;
-        }
-
-        public Integer getMaxQueueSize() {
-            return maxQueueSize;
-        }
-
-        public void setMaxQueueSize(Integer maxQueueSize) {
-            this.maxQueueSize = maxQueueSize;
-        }
-
-        public Integer getHeartbeatIntervalMs() {
-            return heartbeatIntervalMs;
-        }
-
-        public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
-            this.heartbeatIntervalMs = heartbeatIntervalMs;
-        }
-
-        public Long getSnapshotDelayMs() {
-            return snapshotDelayMs;
-        }
-
-        public void setSnapshotDelayMs(Long snapshotDelayMs) {
-            this.snapshotDelayMs = snapshotDelayMs;
-        }
-
-        public String getSnapshotMode() {
-            return snapshotMode;
-        }
-
-        public void setSnapshotMode(String snapshotMode) {
-            this.snapshotMode = snapshotMode;
-        }
-
-        public String getSourceStructVersion() {
-            return sourceStructVersion;
-        }
-
-        public void setSourceStructVersion(String sourceStructVersion) {
-            this.sourceStructVersion = sourceStructVersion;
-        }
-
-        public String getDatabaseWhitelist() {
-            return databaseWhitelist;
-        }
-
-        public void setDatabaseWhitelist(String databaseWhitelist) {
-            this.databaseWhitelist = databaseWhitelist;
-        }
-
-        public Integer getMaxBatchSize() {
-            return maxBatchSize;
-        }
-
-        public void setMaxBatchSize(Integer maxBatchSize) {
-            this.maxBatchSize = maxBatchSize;
-        }
-
-        public String getDatabaseBlacklist() {
-            return databaseBlacklist;
-        }
-
-        public void setDatabaseBlacklist(String databaseBlacklist) {
-            this.databaseBlacklist = databaseBlacklist;
-        }
-
-        public Integer getSnapshotFetchSize() {
-            return snapshotFetchSize;
-        }
-
-        public void setSnapshotFetchSize(Integer snapshotFetchSize) {
-            this.snapshotFetchSize = snapshotFetchSize;
-        }
-
-        public String getHeartbeatTopicsPrefix() {
-            return heartbeatTopicsPrefix;
-        }
-
-        public void setHeartbeatTopicsPrefix(String heartbeatTopicsPrefix) {
-            this.heartbeatTopicsPrefix = heartbeatTopicsPrefix;
-        }
-
-        public Long getPollIntervalMs() {
-            return pollIntervalMs;
-        }
-
-        public void setPollIntervalMs(Long pollIntervalMs) {
-            this.pollIntervalMs = pollIntervalMs;
-        }
-
-        public String getSnapshotLockingMode() {
-            return snapshotLockingMode;
-        }
-
-        public void setSnapshotLockingMode(String snapshotLockingMode) {
-            this.snapshotLockingMode = snapshotLockingMode;
-        }
-
-        public String getMessageKeyColumns() {
-            return messageKeyColumns;
-        }
-
-        public void setMessageKeyColumns(String messageKeyColumns) {
-            this.messageKeyColumns = messageKeyColumns;
-        }
-
-        public String getColumnBlacklist() {
-            return columnBlacklist;
-        }
-
-        public void setColumnBlacklist(String columnBlacklist) {
-            this.columnBlacklist = columnBlacklist;
-        }
-
-        public String getTableBlacklist() {
-            return tableBlacklist;
-        }
-
-        public void setTableBlacklist(String tableBlacklist) {
-            this.tableBlacklist = tableBlacklist;
-        }
-
-        public Boolean getIncludeSchemaChanges() {
-            return includeSchemaChanges;
-        }
-
-        public void setIncludeSchemaChanges(Boolean includeSchemaChanges) {
-            this.includeSchemaChanges = includeSchemaChanges;
-        }
-
-        public String getGtidSourceIncludes() {
-            return gtidSourceIncludes;
-        }
-
-        public void setGtidSourceIncludes(String gtidSourceIncludes) {
-            this.gtidSourceIncludes = gtidSourceIncludes;
-        }
-
-        public String getDatabaseJdbcDriver() {
-            return databaseJdbcDriver;
-        }
-
-        public void setDatabaseJdbcDriver(String databaseJdbcDriver) {
-            this.databaseJdbcDriver = databaseJdbcDriver;
-        }
-
-        public Integer getDatabaseHistoryKafkaRecoveryPollIntervalMs() {
-            return databaseHistoryKafkaRecoveryPollIntervalMs;
-        }
-
-        public void setDatabaseHistoryKafkaRecoveryPollIntervalMs(
-                Integer databaseHistoryKafkaRecoveryPollIntervalMs) {
-            this.databaseHistoryKafkaRecoveryPollIntervalMs = databaseHistoryKafkaRecoveryPollIntervalMs;
-        }
-
-        public String getDatabaseInitialStatements() {
-            return databaseInitialStatements;
-        }
-
-        public void setDatabaseInitialStatements(
-                String databaseInitialStatements) {
-            this.databaseInitialStatements = databaseInitialStatements;
-        }
-
-        public Integer getBinlogBufferSize() {
-            return binlogBufferSize;
-        }
-
-        public void setBinlogBufferSize(Integer binlogBufferSize) {
-            this.binlogBufferSize = binlogBufferSize;
-        }
-
-        public String getDatabaseUser() {
-            return databaseUser;
-        }
-
-        public void setDatabaseUser(String databaseUser) {
-            this.databaseUser = databaseUser;
-        }
-
-        public String getGtidSourceExcludes() {
-            return gtidSourceExcludes;
-        }
-
-        public void setGtidSourceExcludes(String gtidSourceExcludes) {
-            this.gtidSourceExcludes = gtidSourceExcludes;
-        }
-
-        public String getSnapshotSelectStatementOverrides() {
-            return snapshotSelectStatementOverrides;
-        }
-
-        public void setSnapshotSelectStatementOverrides(
-                String snapshotSelectStatementOverrides) {
-            this.snapshotSelectStatementOverrides = snapshotSelectStatementOverrides;
-        }
-
-        public String getDatabaseHistoryKafkaBootstrapServers() {
-            return databaseHistoryKafkaBootstrapServers;
-        }
-
-        public void setDatabaseHistoryKafkaBootstrapServers(
-                String databaseHistoryKafkaBootstrapServers) {
-            this.databaseHistoryKafkaBootstrapServers = databaseHistoryKafkaBootstrapServers;
-        }
-
-        public String getDatabaseSslKeystore() {
-            return databaseSslKeystore;
-        }
-
-        public void setDatabaseSslKeystore(String databaseSslKeystore) {
-            this.databaseSslKeystore = databaseSslKeystore;
-        }
-
-        public String getDatabaseSslTruststorePassword() {
-            return databaseSslTruststorePassword;
-        }
-
-        public void setDatabaseSslTruststorePassword(
-                String databaseSslTruststorePassword) {
-            this.databaseSslTruststorePassword = databaseSslTruststorePassword;
-        }
-
-        public String getInconsistentSchemaHandlingMode() {
-            return inconsistentSchemaHandlingMode;
-        }
-
-        public void setInconsistentSchemaHandlingMode(
-                String inconsistentSchemaHandlingMode) {
-            this.inconsistentSchemaHandlingMode = inconsistentSchemaHandlingMode;
-        }
-
-        public Boolean getEnableTimeAdjuster() {
-            return enableTimeAdjuster;
-        }
-
-        public void setEnableTimeAdjuster(Boolean enableTimeAdjuster) {
-            this.enableTimeAdjuster = enableTimeAdjuster;
-        }
-
-        public String getGtidNewChannelPosition() {
-            return gtidNewChannelPosition;
-        }
-
-        public void setGtidNewChannelPosition(String gtidNewChannelPosition) {
-            this.gtidNewChannelPosition = gtidNewChannelPosition;
-        }
-
-        public String getDatabasePassword() {
-            return databasePassword;
-        }
-
-        public void setDatabasePassword(String databasePassword) {
-            this.databasePassword = databasePassword;
-        }
-
-        public Boolean getDatabaseHistoryStoreOnlyMonitoredTablesDdl() {
-            return databaseHistoryStoreOnlyMonitoredTablesDdl;
-        }
-
-        public void setDatabaseHistoryStoreOnlyMonitoredTablesDdl(
-                Boolean databaseHistoryStoreOnlyMonitoredTablesDdl) {
-            this.databaseHistoryStoreOnlyMonitoredTablesDdl = databaseHistoryStoreOnlyMonitoredTablesDdl;
-        }
-
-        public Boolean getGtidSourceFilterDmlEvents() {
-            return gtidSourceFilterDmlEvents;
-        }
-
-        public void setGtidSourceFilterDmlEvents(
-                Boolean gtidSourceFilterDmlEvents) {
-            this.gtidSourceFilterDmlEvents = gtidSourceFilterDmlEvents;
-        }
-
-        public Boolean getConnectKeepAlive() {
-            return connectKeepAlive;
-        }
-
-        public void setConnectKeepAlive(Boolean connectKeepAlive) {
-            this.connectKeepAlive = connectKeepAlive;
-        }
-
-        public String getDatabaseHistory() {
-            return databaseHistory;
-        }
-
-        public void setDatabaseHistory(String databaseHistory) {
-            this.databaseHistory = databaseHistory;
-        }
-
-        public Integer getConnectTimeoutMs() {
-            return connectTimeoutMs;
-        }
-
-        public void setConnectTimeoutMs(Integer connectTimeoutMs) {
-            this.connectTimeoutMs = connectTimeoutMs;
-        }
-
-        public String getDatabaseHistoryKafkaTopic() {
-            return databaseHistoryKafkaTopic;
-        }
-
-        public void setDatabaseHistoryKafkaTopic(
-                String databaseHistoryKafkaTopic) {
-            this.databaseHistoryKafkaTopic = databaseHistoryKafkaTopic;
-        }
-
-        public Integer getDatabaseHistoryKafkaRecoveryAttempts() {
-            return databaseHistoryKafkaRecoveryAttempts;
-        }
-
-        public void setDatabaseHistoryKafkaRecoveryAttempts(
-                Integer databaseHistoryKafkaRecoveryAttempts) {
-            this.databaseHistoryKafkaRecoveryAttempts = databaseHistoryKafkaRecoveryAttempts;
-        }
-
-        public String getTableWhitelist() {
-            return tableWhitelist;
-        }
-
-        public void setTableWhitelist(String tableWhitelist) {
-            this.tableWhitelist = tableWhitelist;
-        }
-
-        public String getDecimalHandlingMode() {
-            return decimalHandlingMode;
-        }
-
-        public void setDecimalHandlingMode(String decimalHandlingMode) {
-            this.decimalHandlingMode = decimalHandlingMode;
-        }
-
-        public String getSnapshotNewTables() {
-            return snapshotNewTables;
-        }
-
-        public void setSnapshotNewTables(String snapshotNewTables) {
-            this.snapshotNewTables = snapshotNewTables;
-        }
-
-        public Boolean getDatabaseHistorySkipUnparseableDdl() {
-            return databaseHistorySkipUnparseableDdl;
-        }
-
-        public void setDatabaseHistorySkipUnparseableDdl(
-                Boolean databaseHistorySkipUnparseableDdl) {
-            this.databaseHistorySkipUnparseableDdl = databaseHistorySkipUnparseableDdl;
-        }
-
-        public Boolean getTableIgnoreBuiltin() {
-            return tableIgnoreBuiltin;
-        }
-
-        public void setTableIgnoreBuiltin(Boolean tableIgnoreBuiltin) {
-            this.tableIgnoreBuiltin = tableIgnoreBuiltin;
-        }
 
         public String getBigintUnsignedHandlingMode() {
             return bigintUnsignedHandlingMode;
@@ -958,86 +586,28 @@ public class DebeziumMySqlComponentConfiguration
             this.bigintUnsignedHandlingMode = bigintUnsignedHandlingMode;
         }
 
-        public Long getDatabaseServerId() {
-            return databaseServerId;
+        public Integer getBinlogBufferSize() {
+            return binlogBufferSize;
         }
 
-        public void setDatabaseServerId(Long databaseServerId) {
-            this.databaseServerId = databaseServerId;
+        public void setBinlogBufferSize(Integer binlogBufferSize) {
+            this.binlogBufferSize = binlogBufferSize;
         }
 
-        public String getEventDeserializationFailureHandlingMode() {
-            return eventDeserializationFailureHandlingMode;
+        public String getColumnBlacklist() {
+            return columnBlacklist;
         }
 
-        public void setEventDeserializationFailureHandlingMode(
-                String eventDeserializationFailureHandlingMode) {
-            this.eventDeserializationFailureHandlingMode = eventDeserializationFailureHandlingMode;
+        public void setColumnBlacklist(String columnBlacklist) {
+            this.columnBlacklist = columnBlacklist;
         }
 
-        public String getTimePrecisionMode() {
-            return timePrecisionMode;
+        public Boolean getConnectKeepAlive() {
+            return connectKeepAlive;
         }
 
-        public void setTimePrecisionMode(String timePrecisionMode) {
-            this.timePrecisionMode = timePrecisionMode;
-        }
-
-        public String getDatabaseServerName() {
-            return databaseServerName;
-        }
-
-        public void setDatabaseServerName(String databaseServerName) {
-            this.databaseServerName = databaseServerName;
-        }
-
-        public Integer getDatabasePort() {
-            return databasePort;
-        }
-
-        public void setDatabasePort(Integer databasePort) {
-            this.databasePort = databasePort;
-        }
-
-        public String getDatabaseSslTruststore() {
-            return databaseSslTruststore;
-        }
-
-        public void setDatabaseSslTruststore(String databaseSslTruststore) {
-            this.databaseSslTruststore = databaseSslTruststore;
-        }
-
-        public String getDatabaseSslMode() {
-            return databaseSslMode;
-        }
-
-        public void setDatabaseSslMode(String databaseSslMode) {
-            this.databaseSslMode = databaseSslMode;
-        }
-
-        public String getDatabaseSslKeystorePassword() {
-            return databaseSslKeystorePassword;
-        }
-
-        public void setDatabaseSslKeystorePassword(
-                String databaseSslKeystorePassword) {
-            this.databaseSslKeystorePassword = databaseSslKeystorePassword;
-        }
-
-        public String getDatabaseHostname() {
-            return databaseHostname;
-        }
-
-        public void setDatabaseHostname(String databaseHostname) {
-            this.databaseHostname = databaseHostname;
-        }
-
-        public Long getDatabaseServerIdOffset() {
-            return databaseServerIdOffset;
-        }
-
-        public void setDatabaseServerIdOffset(Long databaseServerIdOffset) {
-            this.databaseServerIdOffset = databaseServerIdOffset;
+        public void setConnectKeepAlive(Boolean connectKeepAlive) {
+            this.connectKeepAlive = connectKeepAlive;
         }
 
         public Long getConnectKeepAliveIntervalMs() {
@@ -1049,6 +619,290 @@ public class DebeziumMySqlComponentConfiguration
             this.connectKeepAliveIntervalMs = connectKeepAliveIntervalMs;
         }
 
+        public Integer getConnectTimeoutMs() {
+            return connectTimeoutMs;
+        }
+
+        public void setConnectTimeoutMs(Integer connectTimeoutMs) {
+            this.connectTimeoutMs = connectTimeoutMs;
+        }
+
+        public String getDatabaseBlacklist() {
+            return databaseBlacklist;
+        }
+
+        public void setDatabaseBlacklist(String databaseBlacklist) {
+            this.databaseBlacklist = databaseBlacklist;
+        }
+
+        public String getDatabaseHistory() {
+            return databaseHistory;
+        }
+
+        public void setDatabaseHistory(String databaseHistory) {
+            this.databaseHistory = databaseHistory;
+        }
+
+        public String getDatabaseHistoryFileFilename() {
+            return databaseHistoryFileFilename;
+        }
+
+        public void setDatabaseHistoryFileFilename(
+                String databaseHistoryFileFilename) {
+            this.databaseHistoryFileFilename = databaseHistoryFileFilename;
+        }
+
+        public String getDatabaseHistoryKafkaBootstrapServers() {
+            return databaseHistoryKafkaBootstrapServers;
+        }
+
+        public void setDatabaseHistoryKafkaBootstrapServers(
+                String databaseHistoryKafkaBootstrapServers) {
+            this.databaseHistoryKafkaBootstrapServers = databaseHistoryKafkaBootstrapServers;
+        }
+
+        public Integer getDatabaseHistoryKafkaRecoveryAttempts() {
+            return databaseHistoryKafkaRecoveryAttempts;
+        }
+
+        public void setDatabaseHistoryKafkaRecoveryAttempts(
+                Integer databaseHistoryKafkaRecoveryAttempts) {
+            this.databaseHistoryKafkaRecoveryAttempts = databaseHistoryKafkaRecoveryAttempts;
+        }
+
+        public Integer getDatabaseHistoryKafkaRecoveryPollIntervalMs() {
+            return databaseHistoryKafkaRecoveryPollIntervalMs;
+        }
+
+        public void setDatabaseHistoryKafkaRecoveryPollIntervalMs(
+                Integer databaseHistoryKafkaRecoveryPollIntervalMs) {
+            this.databaseHistoryKafkaRecoveryPollIntervalMs = databaseHistoryKafkaRecoveryPollIntervalMs;
+        }
+
+        public String getDatabaseHistoryKafkaTopic() {
+            return databaseHistoryKafkaTopic;
+        }
+
+        public void setDatabaseHistoryKafkaTopic(
+                String databaseHistoryKafkaTopic) {
+            this.databaseHistoryKafkaTopic = databaseHistoryKafkaTopic;
+        }
+
+        public Boolean getDatabaseHistorySkipUnparseableDdl() {
+            return databaseHistorySkipUnparseableDdl;
+        }
+
+        public void setDatabaseHistorySkipUnparseableDdl(
+                Boolean databaseHistorySkipUnparseableDdl) {
+            this.databaseHistorySkipUnparseableDdl = databaseHistorySkipUnparseableDdl;
+        }
+
+        public Boolean getDatabaseHistoryStoreOnlyMonitoredTablesDdl() {
+            return databaseHistoryStoreOnlyMonitoredTablesDdl;
+        }
+
+        public void setDatabaseHistoryStoreOnlyMonitoredTablesDdl(
+                Boolean databaseHistoryStoreOnlyMonitoredTablesDdl) {
+            this.databaseHistoryStoreOnlyMonitoredTablesDdl = databaseHistoryStoreOnlyMonitoredTablesDdl;
+        }
+
+        public String getDatabaseHostname() {
+            return databaseHostname;
+        }
+
+        public void setDatabaseHostname(String databaseHostname) {
+            this.databaseHostname = databaseHostname;
+        }
+
+        public String getDatabaseInitialStatements() {
+            return databaseInitialStatements;
+        }
+
+        public void setDatabaseInitialStatements(
+                String databaseInitialStatements) {
+            this.databaseInitialStatements = databaseInitialStatements;
+        }
+
+        public String getDatabaseJdbcDriver() {
+            return databaseJdbcDriver;
+        }
+
+        public void setDatabaseJdbcDriver(String databaseJdbcDriver) {
+            this.databaseJdbcDriver = databaseJdbcDriver;
+        }
+
+        public String getDatabasePassword() {
+            return databasePassword;
+        }
+
+        public void setDatabasePassword(String databasePassword) {
+            this.databasePassword = databasePassword;
+        }
+
+        public Integer getDatabasePort() {
+            return databasePort;
+        }
+
+        public void setDatabasePort(Integer databasePort) {
+            this.databasePort = databasePort;
+        }
+
+        public Long getDatabaseServerId() {
+            return databaseServerId;
+        }
+
+        public void setDatabaseServerId(Long databaseServerId) {
+            this.databaseServerId = databaseServerId;
+        }
+
+        public Long getDatabaseServerIdOffset() {
+            return databaseServerIdOffset;
+        }
+
+        public void setDatabaseServerIdOffset(Long databaseServerIdOffset) {
+            this.databaseServerIdOffset = databaseServerIdOffset;
+        }
+
+        public String getDatabaseServerName() {
+            return databaseServerName;
+        }
+
+        public void setDatabaseServerName(String databaseServerName) {
+            this.databaseServerName = databaseServerName;
+        }
+
+        public String getDatabaseSslKeystore() {
+            return databaseSslKeystore;
+        }
+
+        public void setDatabaseSslKeystore(String databaseSslKeystore) {
+            this.databaseSslKeystore = databaseSslKeystore;
+        }
+
+        public String getDatabaseSslKeystorePassword() {
+            return databaseSslKeystorePassword;
+        }
+
+        public void setDatabaseSslKeystorePassword(
+                String databaseSslKeystorePassword) {
+            this.databaseSslKeystorePassword = databaseSslKeystorePassword;
+        }
+
+        public String getDatabaseSslMode() {
+            return databaseSslMode;
+        }
+
+        public void setDatabaseSslMode(String databaseSslMode) {
+            this.databaseSslMode = databaseSslMode;
+        }
+
+        public String getDatabaseSslTruststore() {
+            return databaseSslTruststore;
+        }
+
+        public void setDatabaseSslTruststore(String databaseSslTruststore) {
+            this.databaseSslTruststore = databaseSslTruststore;
+        }
+
+        public String getDatabaseSslTruststorePassword() {
+            return databaseSslTruststorePassword;
+        }
+
+        public void setDatabaseSslTruststorePassword(
+                String databaseSslTruststorePassword) {
+            this.databaseSslTruststorePassword = databaseSslTruststorePassword;
+        }
+
+        public String getDatabaseUser() {
+            return databaseUser;
+        }
+
+        public void setDatabaseUser(String databaseUser) {
+            this.databaseUser = databaseUser;
+        }
+
+        public String getDatabaseWhitelist() {
+            return databaseWhitelist;
+        }
+
+        public void setDatabaseWhitelist(String databaseWhitelist) {
+            this.databaseWhitelist = databaseWhitelist;
+        }
+
+        public String getDecimalHandlingMode() {
+            return decimalHandlingMode;
+        }
+
+        public void setDecimalHandlingMode(String decimalHandlingMode) {
+            this.decimalHandlingMode = decimalHandlingMode;
+        }
+
+        public Boolean getEnableTimeAdjuster() {
+            return enableTimeAdjuster;
+        }
+
+        public void setEnableTimeAdjuster(Boolean enableTimeAdjuster) {
+            this.enableTimeAdjuster = enableTimeAdjuster;
+        }
+
+        public String getEventDeserializationFailureHandlingMode() {
+            return eventDeserializationFailureHandlingMode;
+        }
+
+        public void setEventDeserializationFailureHandlingMode(
+                String eventDeserializationFailureHandlingMode) {
+            this.eventDeserializationFailureHandlingMode = eventDeserializationFailureHandlingMode;
+        }
+
+        public String getGtidNewChannelPosition() {
+            return gtidNewChannelPosition;
+        }
+
+        public void setGtidNewChannelPosition(String gtidNewChannelPosition) {
+            this.gtidNewChannelPosition = gtidNewChannelPosition;
+        }
+
+        public String getGtidSourceExcludes() {
+            return gtidSourceExcludes;
+        }
+
+        public void setGtidSourceExcludes(String gtidSourceExcludes) {
+            this.gtidSourceExcludes = gtidSourceExcludes;
+        }
+
+        public Boolean getGtidSourceFilterDmlEvents() {
+            return gtidSourceFilterDmlEvents;
+        }
+
+        public void setGtidSourceFilterDmlEvents(
+                Boolean gtidSourceFilterDmlEvents) {
+            this.gtidSourceFilterDmlEvents = gtidSourceFilterDmlEvents;
+        }
+
+        public String getGtidSourceIncludes() {
+            return gtidSourceIncludes;
+        }
+
+        public void setGtidSourceIncludes(String gtidSourceIncludes) {
+            this.gtidSourceIncludes = gtidSourceIncludes;
+        }
+
+        public Integer getHeartbeatIntervalMs() {
+            return heartbeatIntervalMs;
+        }
+
+        public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
+            this.heartbeatIntervalMs = heartbeatIntervalMs;
+        }
+
+        public String getHeartbeatTopicsPrefix() {
+            return heartbeatTopicsPrefix;
+        }
+
+        public void setHeartbeatTopicsPrefix(String heartbeatTopicsPrefix) {
+            this.heartbeatTopicsPrefix = heartbeatTopicsPrefix;
+        }
+
         public Boolean getIncludeQuery() {
             return includeQuery;
         }
@@ -1057,37 +911,150 @@ public class DebeziumMySqlComponentConfiguration
             this.includeQuery = includeQuery;
         }
 
-        public String getName() {
-            return name;
+        public Boolean getIncludeSchemaChanges() {
+            return includeSchemaChanges;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setIncludeSchemaChanges(Boolean includeSchemaChanges) {
+            this.includeSchemaChanges = includeSchemaChanges;
         }
 
-        public String getOffsetStorage() {
-            return offsetStorage;
+        public String getInconsistentSchemaHandlingMode() {
+            return inconsistentSchemaHandlingMode;
         }
 
-        public void setOffsetStorage(String offsetStorage) {
-            this.offsetStorage = offsetStorage;
+        public void setInconsistentSchemaHandlingMode(
+                String inconsistentSchemaHandlingMode) {
+            this.inconsistentSchemaHandlingMode = inconsistentSchemaHandlingMode;
         }
 
-        public String getOffsetStorageFileName() {
-            return offsetStorageFileName;
+        public Integer getMaxBatchSize() {
+            return maxBatchSize;
         }
 
-        public void setOffsetStorageFileName(String offsetStorageFileName) {
-            this.offsetStorageFileName = offsetStorageFileName;
+        public void setMaxBatchSize(Integer maxBatchSize) {
+            this.maxBatchSize = maxBatchSize;
         }
 
-        public Integer getOffsetStorageReplicationFactor() {
-            return offsetStorageReplicationFactor;
+        public Integer getMaxQueueSize() {
+            return maxQueueSize;
         }
 
-        public void setOffsetStorageReplicationFactor(
-                Integer offsetStorageReplicationFactor) {
-            this.offsetStorageReplicationFactor = offsetStorageReplicationFactor;
+        public void setMaxQueueSize(Integer maxQueueSize) {
+            this.maxQueueSize = maxQueueSize;
+        }
+
+        public String getMessageKeyColumns() {
+            return messageKeyColumns;
+        }
+
+        public void setMessageKeyColumns(String messageKeyColumns) {
+            this.messageKeyColumns = messageKeyColumns;
+        }
+
+        public Long getPollIntervalMs() {
+            return pollIntervalMs;
+        }
+
+        public void setPollIntervalMs(Long pollIntervalMs) {
+            this.pollIntervalMs = pollIntervalMs;
+        }
+
+        public Long getSnapshotDelayMs() {
+            return snapshotDelayMs;
+        }
+
+        public void setSnapshotDelayMs(Long snapshotDelayMs) {
+            this.snapshotDelayMs = snapshotDelayMs;
+        }
+
+        public Integer getSnapshotFetchSize() {
+            return snapshotFetchSize;
+        }
+
+        public void setSnapshotFetchSize(Integer snapshotFetchSize) {
+            this.snapshotFetchSize = snapshotFetchSize;
+        }
+
+        public String getSnapshotLockingMode() {
+            return snapshotLockingMode;
+        }
+
+        public void setSnapshotLockingMode(String snapshotLockingMode) {
+            this.snapshotLockingMode = snapshotLockingMode;
+        }
+
+        public String getSnapshotMode() {
+            return snapshotMode;
+        }
+
+        public void setSnapshotMode(String snapshotMode) {
+            this.snapshotMode = snapshotMode;
+        }
+
+        public String getSnapshotNewTables() {
+            return snapshotNewTables;
+        }
+
+        public void setSnapshotNewTables(String snapshotNewTables) {
+            this.snapshotNewTables = snapshotNewTables;
+        }
+
+        public String getSnapshotSelectStatementOverrides() {
+            return snapshotSelectStatementOverrides;
+        }
+
+        public void setSnapshotSelectStatementOverrides(
+                String snapshotSelectStatementOverrides) {
+            this.snapshotSelectStatementOverrides = snapshotSelectStatementOverrides;
+        }
+
+        public String getSourceStructVersion() {
+            return sourceStructVersion;
+        }
+
+        public void setSourceStructVersion(String sourceStructVersion) {
+            this.sourceStructVersion = sourceStructVersion;
+        }
+
+        public String getTableBlacklist() {
+            return tableBlacklist;
+        }
+
+        public void setTableBlacklist(String tableBlacklist) {
+            this.tableBlacklist = tableBlacklist;
+        }
+
+        public Boolean getTableIgnoreBuiltin() {
+            return tableIgnoreBuiltin;
+        }
+
+        public void setTableIgnoreBuiltin(Boolean tableIgnoreBuiltin) {
+            this.tableIgnoreBuiltin = tableIgnoreBuiltin;
+        }
+
+        public String getTableWhitelist() {
+            return tableWhitelist;
+        }
+
+        public void setTableWhitelist(String tableWhitelist) {
+            this.tableWhitelist = tableWhitelist;
+        }
+
+        public String getTimePrecisionMode() {
+            return timePrecisionMode;
+        }
+
+        public void setTimePrecisionMode(String timePrecisionMode) {
+            this.timePrecisionMode = timePrecisionMode;
+        }
+
+        public Boolean getTombstonesOnDelete() {
+            return tombstonesOnDelete;
+        }
+
+        public void setTombstonesOnDelete(Boolean tombstonesOnDelete) {
+            this.tombstonesOnDelete = tombstonesOnDelete;
         }
 
         public Class getConnectorClass() {
@@ -1096,22 +1063,6 @@ public class DebeziumMySqlComponentConfiguration
 
         public void setConnectorClass(Class connectorClass) {
             this.connectorClass = connectorClass;
-        }
-
-        public Long getOffsetCommitTimeoutMs() {
-            return offsetCommitTimeoutMs;
-        }
-
-        public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
-            this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
-        }
-
-        public Integer getOffsetStoragePartitions() {
-            return offsetStoragePartitions;
-        }
-
-        public void setOffsetStoragePartitions(Integer offsetStoragePartitions) {
-            this.offsetStoragePartitions = offsetStoragePartitions;
         }
 
         public String getInternalKeyConverter() {
@@ -1130,6 +1081,14 @@ public class DebeziumMySqlComponentConfiguration
             this.internalValueConverter = internalValueConverter;
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
         public String getOffsetCommitPolicy() {
             return offsetCommitPolicy;
         }
@@ -1138,12 +1097,53 @@ public class DebeziumMySqlComponentConfiguration
             this.offsetCommitPolicy = offsetCommitPolicy;
         }
 
+        public Long getOffsetCommitTimeoutMs() {
+            return offsetCommitTimeoutMs;
+        }
+
+        public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
+            this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
+        }
+
         public Long getOffsetFlushIntervalMs() {
             return offsetFlushIntervalMs;
         }
 
         public void setOffsetFlushIntervalMs(Long offsetFlushIntervalMs) {
             this.offsetFlushIntervalMs = offsetFlushIntervalMs;
+        }
+
+        public String getOffsetStorage() {
+            return offsetStorage;
+        }
+
+        public void setOffsetStorage(String offsetStorage) {
+            this.offsetStorage = offsetStorage;
+        }
+
+        public String getOffsetStorageFileName() {
+            return offsetStorageFileName;
+        }
+
+        public void setOffsetStorageFileName(String offsetStorageFileName) {
+            this.offsetStorageFileName = offsetStorageFileName;
+        }
+
+        public Integer getOffsetStoragePartitions() {
+            return offsetStoragePartitions;
+        }
+
+        public void setOffsetStoragePartitions(Integer offsetStoragePartitions) {
+            this.offsetStoragePartitions = offsetStoragePartitions;
+        }
+
+        public Integer getOffsetStorageReplicationFactor() {
+            return offsetStorageReplicationFactor;
+        }
+
+        public void setOffsetStorageReplicationFactor(
+                Integer offsetStorageReplicationFactor) {
+            this.offsetStorageReplicationFactor = offsetStorageReplicationFactor;
         }
 
         public String getOffsetStorageTopic() {

@@ -141,20 +141,13 @@ public class MQComponentConfiguration
     public static class MQConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.mq.MQConfiguration.class;
         /**
-         * The region in which MQ client needs to work. When using this
-         * parameter, the configuration will expect the capitalized name of the
-         * region (for example AP_EAST_1) You'll need to use the name
-         * Regions.EU_WEST_1.name()
+         * Amazon AWS Access Key
          */
-        private String region;
+        private String accessKey;
         /**
-         * To define a proxy port when instantiating the MQ client
+         * To use a existing configured AmazonMQClient as client
          */
-        private Integer proxyPort;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
+        private AmazonMQ amazonMqClient;
         /**
          * The operation to perform. It can be
          * listBrokers,createBroker,deleteBroker
@@ -165,40 +158,39 @@ public class MQComponentConfiguration
          */
         private String proxyHost;
         /**
-         * Amazon AWS Access Key
+         * To define a proxy port when instantiating the MQ client
          */
-        private String accessKey;
+        private Integer proxyPort;
         /**
          * To define a proxy protocol when instantiating the MQ client
          */
         private Protocol proxyProtocol = Protocol.HTTPS;
         /**
-         * To use a existing configured AmazonMQClient as client
+         * The region in which MQ client needs to work. When using this
+         * parameter, the configuration will expect the capitalized name of the
+         * region (for example AP_EAST_1) You'll need to use the name
+         * Regions.EU_WEST_1.name()
          */
-        private AmazonMQ amazonMqClient;
+        private String region;
+        /**
+         * Amazon AWS Secret Key
+         */
+        private String secretKey;
 
-        public String getRegion() {
-            return region;
+        public String getAccessKey() {
+            return accessKey;
         }
 
-        public void setRegion(String region) {
-            this.region = region;
+        public void setAccessKey(String accessKey) {
+            this.accessKey = accessKey;
         }
 
-        public Integer getProxyPort() {
-            return proxyPort;
+        public AmazonMQ getAmazonMqClient() {
+            return amazonMqClient;
         }
 
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
+        public void setAmazonMqClient(AmazonMQ amazonMqClient) {
+            this.amazonMqClient = amazonMqClient;
         }
 
         public MQOperations getOperation() {
@@ -217,12 +209,12 @@ public class MQComponentConfiguration
             this.proxyHost = proxyHost;
         }
 
-        public String getAccessKey() {
-            return accessKey;
+        public Integer getProxyPort() {
+            return proxyPort;
         }
 
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
         }
 
         public Protocol getProxyProtocol() {
@@ -233,12 +225,20 @@ public class MQComponentConfiguration
             this.proxyProtocol = proxyProtocol;
         }
 
-        public AmazonMQ getAmazonMqClient() {
-            return amazonMqClient;
+        public String getRegion() {
+            return region;
         }
 
-        public void setAmazonMqClient(AmazonMQ amazonMqClient) {
-            this.amazonMqClient = amazonMqClient;
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
         }
     }
 }

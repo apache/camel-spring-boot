@@ -141,6 +141,30 @@ public class MSKComponentConfiguration
     public static class MSKConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.msk.MSKConfiguration.class;
         /**
+         * Amazon AWS Access Key
+         */
+        private String accessKey;
+        /**
+         * To use a existing configured AWS MSK as client
+         */
+        private AWSKafka mskClient;
+        /**
+         * The operation to perform
+         */
+        private MSKOperations operation;
+        /**
+         * To define a proxy host when instantiating the MSK client
+         */
+        private String proxyHost;
+        /**
+         * To define a proxy port when instantiating the MSK client
+         */
+        private Integer proxyPort;
+        /**
+         * To define a proxy protocol when instantiating the MSK client
+         */
+        private Protocol proxyProtocol = Protocol.HTTPS;
+        /**
          * The region in which MSK client needs to work. When using this
          * parameter, the configuration will expect the capitalized name of the
          * region (for example AP_EAST_1) You'll need to use the name
@@ -148,64 +172,16 @@ public class MSKComponentConfiguration
          */
         private String region;
         /**
-         * To define a proxy port when instantiating the MSK client
-         */
-        private Integer proxyPort;
-        /**
          * Amazon AWS Secret Key
          */
         private String secretKey;
-        /**
-         * The operation to perform
-         */
-        private MSKOperations operation;
-        /**
-         * To use a existing configured AWS MSK as client
-         */
-        private AWSKafka mskClient;
-        /**
-         * To define a proxy host when instantiating the MSK client
-         */
-        private String proxyHost;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * To define a proxy protocol when instantiating the MSK client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
 
-        public String getRegion() {
-            return region;
+        public String getAccessKey() {
+            return accessKey;
         }
 
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public MSKOperations getOperation() {
-            return operation;
-        }
-
-        public void setOperation(MSKOperations operation) {
-            this.operation = operation;
+        public void setAccessKey(String accessKey) {
+            this.accessKey = accessKey;
         }
 
         public AWSKafka getMskClient() {
@@ -216,6 +192,14 @@ public class MSKComponentConfiguration
             this.mskClient = mskClient;
         }
 
+        public MSKOperations getOperation() {
+            return operation;
+        }
+
+        public void setOperation(MSKOperations operation) {
+            this.operation = operation;
+        }
+
         public String getProxyHost() {
             return proxyHost;
         }
@@ -224,12 +208,12 @@ public class MSKComponentConfiguration
             this.proxyHost = proxyHost;
         }
 
-        public String getAccessKey() {
-            return accessKey;
+        public Integer getProxyPort() {
+            return proxyPort;
         }
 
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
         }
 
         public Protocol getProxyProtocol() {
@@ -238,6 +222,22 @@ public class MSKComponentConfiguration
 
         public void setProxyProtocol(Protocol proxyProtocol) {
             this.proxyProtocol = proxyProtocol;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
         }
     }
 }

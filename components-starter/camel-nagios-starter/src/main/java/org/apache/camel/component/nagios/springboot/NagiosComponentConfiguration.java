@@ -106,66 +106,50 @@ public class NagiosComponentConfiguration
     public static class NagiosConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.nagios.NagiosConfiguration.class;
         /**
-         * This is the address of the Nagios host where checks should be send.
+         * Connection timeout in millis.
          */
-        private String host;
+        private Integer connectionTimeout = 5000;
         /**
-         * The port number of the host.
+         * To specify an encryption method.
          */
-        private Integer port;
-        /**
-         * Password to be authenticated when sending checks to Nagios.
-         */
-        private String password;
-        private NagiosSettings nagiosSettings;
+        private Encryption encryption;
         /**
          * To specify an encryption method.
          */
         @Deprecated
         private NagiosEncryptionMethod encryptionMethod;
         /**
-         * To specify an encryption method.
+         * This is the address of the Nagios host where checks should be send.
          */
-        private Encryption encryption;
+        private String host;
+        private NagiosSettings nagiosSettings;
         /**
-         * Connection timeout in millis.
+         * Password to be authenticated when sending checks to Nagios.
          */
-        private Integer connectionTimeout = 5000;
+        private String password;
+        /**
+         * The port number of the host.
+         */
+        private Integer port;
         /**
          * Sending timeout in millis.
          */
         private Integer timeout = 5000;
 
-        public String getHost() {
-            return host;
+        public Integer getConnectionTimeout() {
+            return connectionTimeout;
         }
 
-        public void setHost(String host) {
-            this.host = host;
+        public void setConnectionTimeout(Integer connectionTimeout) {
+            this.connectionTimeout = connectionTimeout;
         }
 
-        public Integer getPort() {
-            return port;
+        public Encryption getEncryption() {
+            return encryption;
         }
 
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public NagiosSettings getNagiosSettings() {
-            return nagiosSettings;
-        }
-
-        public void setNagiosSettings(NagiosSettings nagiosSettings) {
-            this.nagiosSettings = nagiosSettings;
+        public void setEncryption(Encryption encryption) {
+            this.encryption = encryption;
         }
 
         @Deprecated
@@ -179,20 +163,36 @@ public class NagiosComponentConfiguration
             this.encryptionMethod = encryptionMethod;
         }
 
-        public Encryption getEncryption() {
-            return encryption;
+        public String getHost() {
+            return host;
         }
 
-        public void setEncryption(Encryption encryption) {
-            this.encryption = encryption;
+        public void setHost(String host) {
+            this.host = host;
         }
 
-        public Integer getConnectionTimeout() {
-            return connectionTimeout;
+        public NagiosSettings getNagiosSettings() {
+            return nagiosSettings;
         }
 
-        public void setConnectionTimeout(Integer connectionTimeout) {
-            this.connectionTimeout = connectionTimeout;
+        public void setNagiosSettings(NagiosSettings nagiosSettings) {
+            this.nagiosSettings = nagiosSettings;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public Integer getPort() {
+            return port;
+        }
+
+        public void setPort(Integer port) {
+            this.port = port;
         }
 
         public Integer getTimeout() {

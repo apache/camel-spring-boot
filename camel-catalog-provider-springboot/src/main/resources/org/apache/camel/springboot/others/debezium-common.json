@@ -1,0 +1,12 @@
+{
+ "other": {
+    "name": "debezium-common",
+    "kind": "other",
+    "title": "Debezium Common",
+    "description": "Camel Debezium Common support",
+    "deprecated": "false",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-debezium-common-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

@@ -106,10 +106,6 @@ public class LuceneComponentConfiguration
     public static class LuceneConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.lucene.LuceneConfiguration.class;
         /**
-         * The URL to the lucene server
-         */
-        private String host;
-        /**
          * An Analyzer builds TokenStreams, which analyze text. It thus
          * represents a policy for extracting index terms from text. The value
          * for analyzer can be any class that extends the abstract class
@@ -117,35 +113,31 @@ public class LuceneComponentConfiguration
          * analyzers out of the box
          */
         private Analyzer analyzer;
+        private String authority;
+        /**
+         * The URL to the lucene server
+         */
+        private String host;
         /**
          * A file system directory in which index files are created upon
          * analysis of the document by the specified analyzer
          */
         private File indexDir;
+        private Version luceneVersion;
+        /**
+         * An integer value that limits the result set of the search operation
+         */
+        private Integer maxHits;
         /**
          * Operation to do such as insert or query.
          */
         private LuceneOperation operation;
-        private String authority;
         /**
          * An optional directory containing files to be used to be analyzed and
          * added to the index at producer startup.
          */
         private File srcDir;
-        private Version luceneVersion;
         private URI uri;
-        /**
-         * An integer value that limits the result set of the search operation
-         */
-        private Integer maxHits;
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
 
         public Analyzer getAnalyzer() {
             return analyzer;
@@ -153,22 +145,6 @@ public class LuceneComponentConfiguration
 
         public void setAnalyzer(Analyzer analyzer) {
             this.analyzer = analyzer;
-        }
-
-        public File getIndexDir() {
-            return indexDir;
-        }
-
-        public void setIndexDir(File indexDir) {
-            this.indexDir = indexDir;
-        }
-
-        public LuceneOperation getOperation() {
-            return operation;
-        }
-
-        public void setOperation(LuceneOperation operation) {
-            this.operation = operation;
         }
 
         public String getAuthority() {
@@ -179,12 +155,20 @@ public class LuceneComponentConfiguration
             this.authority = authority;
         }
 
-        public File getSrcDir() {
-            return srcDir;
+        public String getHost() {
+            return host;
         }
 
-        public void setSrcDir(File srcDir) {
-            this.srcDir = srcDir;
+        public void setHost(String host) {
+            this.host = host;
+        }
+
+        public File getIndexDir() {
+            return indexDir;
+        }
+
+        public void setIndexDir(File indexDir) {
+            this.indexDir = indexDir;
         }
 
         public Version getLuceneVersion() {
@@ -195,20 +179,36 @@ public class LuceneComponentConfiguration
             this.luceneVersion = luceneVersion;
         }
 
-        public URI getUri() {
-            return uri;
-        }
-
-        public void setUri(URI uri) {
-            this.uri = uri;
-        }
-
         public Integer getMaxHits() {
             return maxHits;
         }
 
         public void setMaxHits(Integer maxHits) {
             this.maxHits = maxHits;
+        }
+
+        public LuceneOperation getOperation() {
+            return operation;
+        }
+
+        public void setOperation(LuceneOperation operation) {
+            this.operation = operation;
+        }
+
+        public File getSrcDir() {
+            return srcDir;
+        }
+
+        public void setSrcDir(File srcDir) {
+            this.srcDir = srcDir;
+        }
+
+        public URI getUri() {
+            return uri;
+        }
+
+        public void setUri(URI uri) {
+            this.uri = uri;
         }
     }
 }

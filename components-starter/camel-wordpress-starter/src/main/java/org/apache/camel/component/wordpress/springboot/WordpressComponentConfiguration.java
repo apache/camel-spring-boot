@@ -104,9 +104,17 @@ public class WordpressComponentConfiguration
     public static class WordpressComponentConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.wordpress.WordpressComponentConfiguration.class;
         /**
-         * The Wordpress API URL from your site, e.g. http://myblog.com/wp-json/
+         * The Wordpress REST API version
          */
-        private String url;
+        private String apiVersion = "2";
+        /**
+         * The criteria to use with complex searches.
+         */
+        private Map criteria;
+        /**
+         * Whether to bypass trash and force deletion.
+         */
+        private Boolean force = false;
         /**
          * The entity ID. Should be passed when the operation performed requires
          * a specific entity, e.g. deleting a post
@@ -117,32 +125,40 @@ public class WordpressComponentConfiguration
          */
         private String password;
         /**
-         * The Wordpress REST API version
-         */
-        private String apiVersion = "2";
-        /**
          * Search criteria
          */
         private SearchCriteria searchCriteria;
         /**
-         * The criteria to use with complex searches.
+         * The Wordpress API URL from your site, e.g. http://myblog.com/wp-json/
          */
-        private Map criteria;
+        private String url;
         /**
          * Authorized user to perform writing operations
          */
         private String user;
-        /**
-         * Whether to bypass trash and force deletion.
-         */
-        private Boolean force = false;
 
-        public String getUrl() {
-            return url;
+        public String getApiVersion() {
+            return apiVersion;
         }
 
-        public void setUrl(String url) {
-            this.url = url;
+        public void setApiVersion(String apiVersion) {
+            this.apiVersion = apiVersion;
+        }
+
+        public Map getCriteria() {
+            return criteria;
+        }
+
+        public void setCriteria(Map criteria) {
+            this.criteria = criteria;
+        }
+
+        public Boolean getForce() {
+            return force;
+        }
+
+        public void setForce(Boolean force) {
+            this.force = force;
         }
 
         public Integer getId() {
@@ -161,14 +177,6 @@ public class WordpressComponentConfiguration
             this.password = password;
         }
 
-        public String getApiVersion() {
-            return apiVersion;
-        }
-
-        public void setApiVersion(String apiVersion) {
-            this.apiVersion = apiVersion;
-        }
-
         public SearchCriteria getSearchCriteria() {
             return searchCriteria;
         }
@@ -177,12 +185,12 @@ public class WordpressComponentConfiguration
             this.searchCriteria = searchCriteria;
         }
 
-        public Map getCriteria() {
-            return criteria;
+        public String getUrl() {
+            return url;
         }
 
-        public void setCriteria(Map criteria) {
-            this.criteria = criteria;
+        public void setUrl(String url) {
+            this.url = url;
         }
 
         public String getUser() {
@@ -191,14 +199,6 @@ public class WordpressComponentConfiguration
 
         public void setUser(String user) {
             this.user = user;
-        }
-
-        public Boolean getForce() {
-            return force;
-        }
-
-        public void setForce(Boolean force) {
-            this.force = force;
         }
     }
 }

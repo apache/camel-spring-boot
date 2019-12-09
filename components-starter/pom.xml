@@ -88,16 +88,11 @@
         </configuration>
         <executions>
           <execution>
-            <id>prepare-spring-boot-starter</id>
+            <id>generate</id>
             <goals>
               <goal>prepare-spring-boot-starter</goal>
-            </goals>
-            <phase>generate-resources</phase>
-          </execution>
-          <execution>
-            <id>prepare-spring-boot-auto-configuration</id>
-            <goals>
               <goal>prepare-spring-boot-auto-configuration</goal>
+              <goal>prepare-catalog-springboot</goal>
             </goals>
             <phase>generate-resources</phase>
           </execution>

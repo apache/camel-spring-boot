@@ -1,0 +1,12 @@
+{
+ "other": {
+    "name": "jetty-common",
+    "kind": "other",
+    "title": "Jetty Common",
+    "description": "Camel Jetty 9.x support",
+    "deprecated": "false",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-jetty-common-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

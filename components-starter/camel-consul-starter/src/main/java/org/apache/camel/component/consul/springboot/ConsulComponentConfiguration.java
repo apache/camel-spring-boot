@@ -197,56 +197,48 @@ public class ConsulComponentConfiguration
 
     public static class ConsulConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.consul.ConsulConfiguration.class;
-        private String key;
         private String action;
         private Consul consulClient;
+        private String key;
         private Boolean valueAsString;
-        /**
-         * The Consul agent URL
-         */
-        private String url;
-        private Long connectTimeoutMillis;
-        private Boolean recursive;
-        /**
-         * Sets the username to be used for basic authentication
-         */
-        private String userName;
-        /**
-         * Sets the password to be used for basic authentication
-         */
-        private String password;
-        private Set tags;
-        private String nearNode;
-        private Boolean pingInstance;
-        private Long readTimeoutMillis;
-        private ConsistencyMode consistencyMode;
-        private Integer blockSeconds;
-        private List nodeMeta;
-        private Long writeTimeoutMillis;
         /**
          * Sets the ACL token to be used with Consul
          */
         private String aclToken;
+        private Integer blockSeconds;
+        private Long connectTimeoutMillis;
+        private ConsistencyMode consistencyMode;
         /**
          * The data center
          */
         private String datacenter;
-        private BigInteger firstIndex;
         @Deprecated
         private String dc;
+        private BigInteger firstIndex;
+        private String nearNode;
+        private List nodeMeta;
+        /**
+         * Sets the password to be used for basic authentication
+         */
+        private String password;
+        private Boolean pingInstance;
+        private Long readTimeoutMillis;
+        private Boolean recursive;
         /**
          * SSL configuration using an
          * org.apache.camel.support.jsse.SSLContextParameters instance.
          */
         private SSLContextParameters sslContextParameters;
-
-        public String getKey() {
-            return key;
-        }
-
-        public void setKey(String key) {
-            this.key = key;
-        }
+        private Set tags;
+        /**
+         * The Consul agent URL
+         */
+        private String url;
+        /**
+         * Sets the username to be used for basic authentication
+         */
+        private String userName;
+        private Long writeTimeoutMillis;
 
         public String getAction() {
             return action;
@@ -264,6 +256,14 @@ public class ConsulComponentConfiguration
             this.consulClient = consulClient;
         }
 
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
         public Boolean getValueAsString() {
             return valueAsString;
         }
@@ -272,12 +272,20 @@ public class ConsulComponentConfiguration
             this.valueAsString = valueAsString;
         }
 
-        public String getUrl() {
-            return url;
+        public String getAclToken() {
+            return aclToken;
         }
 
-        public void setUrl(String url) {
-            this.url = url;
+        public void setAclToken(String aclToken) {
+            this.aclToken = aclToken;
+        }
+
+        public Integer getBlockSeconds() {
+            return blockSeconds;
+        }
+
+        public void setBlockSeconds(Integer blockSeconds) {
+            this.blockSeconds = blockSeconds;
         }
 
         public Long getConnectTimeoutMillis() {
@@ -288,36 +296,39 @@ public class ConsulComponentConfiguration
             this.connectTimeoutMillis = connectTimeoutMillis;
         }
 
-        public Boolean getRecursive() {
-            return recursive;
+        public ConsistencyMode getConsistencyMode() {
+            return consistencyMode;
         }
 
-        public void setRecursive(Boolean recursive) {
-            this.recursive = recursive;
+        public void setConsistencyMode(ConsistencyMode consistencyMode) {
+            this.consistencyMode = consistencyMode;
         }
 
-        public String getUserName() {
-            return userName;
+        public String getDatacenter() {
+            return datacenter;
         }
 
-        public void setUserName(String userName) {
-            this.userName = userName;
+        public void setDatacenter(String datacenter) {
+            this.datacenter = datacenter;
         }
 
-        public String getPassword() {
-            return password;
+        @Deprecated
+        @DeprecatedConfigurationProperty
+        public String getDc() {
+            return dc;
         }
 
-        public void setPassword(String password) {
-            this.password = password;
+        @Deprecated
+        public void setDc(String dc) {
+            this.dc = dc;
         }
 
-        public Set getTags() {
-            return tags;
+        public BigInteger getFirstIndex() {
+            return firstIndex;
         }
 
-        public void setTags(Set tags) {
-            this.tags = tags;
+        public void setFirstIndex(BigInteger firstIndex) {
+            this.firstIndex = firstIndex;
         }
 
         public String getNearNode() {
@@ -326,6 +337,22 @@ public class ConsulComponentConfiguration
 
         public void setNearNode(String nearNode) {
             this.nearNode = nearNode;
+        }
+
+        public List getNodeMeta() {
+            return nodeMeta;
+        }
+
+        public void setNodeMeta(List nodeMeta) {
+            this.nodeMeta = nodeMeta;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
         }
 
         public Boolean getPingInstance() {
@@ -344,71 +371,12 @@ public class ConsulComponentConfiguration
             this.readTimeoutMillis = readTimeoutMillis;
         }
 
-        public ConsistencyMode getConsistencyMode() {
-            return consistencyMode;
+        public Boolean getRecursive() {
+            return recursive;
         }
 
-        public void setConsistencyMode(ConsistencyMode consistencyMode) {
-            this.consistencyMode = consistencyMode;
-        }
-
-        public Integer getBlockSeconds() {
-            return blockSeconds;
-        }
-
-        public void setBlockSeconds(Integer blockSeconds) {
-            this.blockSeconds = blockSeconds;
-        }
-
-        public List getNodeMeta() {
-            return nodeMeta;
-        }
-
-        public void setNodeMeta(List nodeMeta) {
-            this.nodeMeta = nodeMeta;
-        }
-
-        public Long getWriteTimeoutMillis() {
-            return writeTimeoutMillis;
-        }
-
-        public void setWriteTimeoutMillis(Long writeTimeoutMillis) {
-            this.writeTimeoutMillis = writeTimeoutMillis;
-        }
-
-        public String getAclToken() {
-            return aclToken;
-        }
-
-        public void setAclToken(String aclToken) {
-            this.aclToken = aclToken;
-        }
-
-        public String getDatacenter() {
-            return datacenter;
-        }
-
-        public void setDatacenter(String datacenter) {
-            this.datacenter = datacenter;
-        }
-
-        public BigInteger getFirstIndex() {
-            return firstIndex;
-        }
-
-        public void setFirstIndex(BigInteger firstIndex) {
-            this.firstIndex = firstIndex;
-        }
-
-        @Deprecated
-        @DeprecatedConfigurationProperty
-        public String getDc() {
-            return dc;
-        }
-
-        @Deprecated
-        public void setDc(String dc) {
-            this.dc = dc;
+        public void setRecursive(Boolean recursive) {
+            this.recursive = recursive;
         }
 
         public SSLContextParameters getSslContextParameters() {
@@ -418,6 +386,38 @@ public class ConsulComponentConfiguration
         public void setSslContextParameters(
                 SSLContextParameters sslContextParameters) {
             this.sslContextParameters = sslContextParameters;
+        }
+
+        public Set getTags() {
+            return tags;
+        }
+
+        public void setTags(Set tags) {
+            this.tags = tags;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public Long getWriteTimeoutMillis() {
+            return writeTimeoutMillis;
+        }
+
+        public void setWriteTimeoutMillis(Long writeTimeoutMillis) {
+            this.writeTimeoutMillis = writeTimeoutMillis;
         }
     }
 }

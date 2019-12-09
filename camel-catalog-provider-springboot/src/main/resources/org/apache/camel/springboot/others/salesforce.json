@@ -1,0 +1,12 @@
+{
+ "other": {
+    "name": "salesforce",
+    "kind": "other",
+    "title": "Salesforce",
+    "description": "Camel Salesforce support",
+    "deprecated": "false",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-salesforce-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

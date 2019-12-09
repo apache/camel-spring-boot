@@ -142,44 +142,10 @@ public class MllpComponentConfiguration
     public static class MllpConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.mllp.MllpConfiguration.class;
         /**
-         * Enable/disable the TCP_NODELAY socket option.
+         * Timeout (in milliseconds) while waiting for a TCP connection TCP
+         * Server Only
          */
-        private Boolean tcpNoDelay = true;
-        /**
-         * Sets the SO_SNDBUF option to the specified value (in bytes)
-         */
-        private Integer sendBufferSize = 8192;
-        /**
-         * Sets the SO_RCVBUF option to the specified value (in bytes)
-         */
-        private Integer receiveBufferSize = 8192;
-        /**
-         * Enable/disable the SO_KEEPALIVE socket option.
-         */
-        private Boolean keepAlive = true;
-        /**
-         * Enable/disable the SO_REUSEADDR socket option.
-         */
-        private Boolean reuseAddress = false;
-        /**
-         * Timeout (in milliseconds) for establishing for a TCP connection TCP
-         * Client only
-         */
-        private Integer connectTimeout = 30000;
-        /**
-         * The SO_TIMEOUT value (in milliseconds) used after the start of an
-         * MLLP frame has been received
-         */
-        private Integer readTimeout = 5000;
-        /**
-         * Allows for bridging the consumer to the Camel routing Error Handler,
-         * which mean any exceptions occurred while the consumer is trying to
-         * receive incoming messages, or the likes, will now be processed as a
-         * message and handled by the routing Error Handler. If disabled, the
-         * consumer will use the org.apache.camel.spi.ExceptionHandler to deal
-         * with exceptions by logging them at WARN or ERROR level and ignored.
-         */
-        private Boolean bridgeErrorHandler = true;
+        private Integer acceptTimeout = 60000;
         /**
          * Enable/Disable the automatic generation of a MLLP Acknowledgement
          * MLLP Consumers only
@@ -192,35 +158,64 @@ public class MllpComponentConfiguration
          */
         private Integer backlog = 5;
         /**
-         * Sets the exchange pattern when the consumer creates an exchange.
+         * TCP Server Only - The number of milliseconds to wait between bind
+         * attempts
          */
-        private ExchangePattern exchangePattern = ExchangePattern.InOut;
+        private Integer bindRetryInterval = 5000;
         /**
          * TCP Server Only - The number of milliseconds to retry binding to a
          * server port
          */
         private Integer bindTimeout = 30000;
         /**
-         * TCP Server Only - The number of milliseconds to wait between bind
-         * attempts
+         * Allows for bridging the consumer to the Camel routing Error Handler,
+         * which mean any exceptions occurred while the consumer is trying to
+         * receive incoming messages, or the likes, will now be processed as a
+         * message and handled by the routing Error Handler. If disabled, the
+         * consumer will use the org.apache.camel.spi.ExceptionHandler to deal
+         * with exceptions by logging them at WARN or ERROR level and ignored.
          */
-        private Integer bindRetryInterval = 5000;
+        private Boolean bridgeErrorHandler = true;
+        /**
+         * Enable/Disable the buffering of HL7 payloads before writing to the
+         * socket.
+         */
+        @Deprecated
+        private Boolean bufferWrites = false;
+        /**
+         * Set the CamelCharsetName property on the exchange
+         */
+        private String charsetName;
+        /**
+         * Timeout (in milliseconds) for establishing for a TCP connection TCP
+         * Client only
+         */
+        private Integer connectTimeout = 30000;
+        /**
+         * Sets the exchange pattern when the consumer creates an exchange.
+         */
+        private ExchangePattern exchangePattern = ExchangePattern.InOut;
+        /**
+         * Enable/Disable the automatic generation of message headers from the
+         * HL7 Message MLLP Consumers only
+         */
+        private Boolean hl7Headers = true;
+        /**
+         * The approximate idle time allowed before the Client TCP Connection
+         * will be reset. A null value or a value less than or equal to zero
+         * will disable the idle timeout.
+         */
+        private Integer idleTimeout;
+        /**
+         * Enable/disable the SO_KEEPALIVE socket option.
+         */
+        private Boolean keepAlive = true;
         /**
          * TCP Server Only - Allow the endpoint to start before the TCP
          * ServerSocket is bound. In some environments, it may be desirable to
          * allow the endpoint to start before the TCP ServerSocket is bound.
          */
         private Boolean lenientBind = false;
-        /**
-         * Timeout (in milliseconds) while waiting for a TCP connection TCP
-         * Server Only
-         */
-        private Integer acceptTimeout = 60000;
-        /**
-         * The SO_TIMEOUT value (in milliseconds) used when waiting for the
-         * start of an MLLP frame
-         */
-        private Integer receiveTimeout = 15000;
         /**
          * The maximum number of concurrent MLLP Consumer connections that will
          * be allowed. If a new connection is received and the maximum is number
@@ -235,25 +230,19 @@ public class MllpComponentConfiguration
         @Deprecated
         private Integer maxReceiveTimeouts;
         /**
-         * Sets whether synchronous processing should be strictly used (this
-         * component only supports synchronous operations).
+         * The SO_TIMEOUT value (in milliseconds) used after the start of an
+         * MLLP frame has been received
          */
-        private Boolean synchronous = true;
+        private Integer readTimeout = 5000;
         /**
-         * Set the CamelCharsetName property on the exchange
+         * Sets the SO_RCVBUF option to the specified value (in bytes)
          */
-        private String charsetName;
+        private Integer receiveBufferSize = 8192;
         /**
-         * The approximate idle time allowed before the Client TCP Connection
-         * will be reset. A null value or a value less than or equal to zero
-         * will disable the idle timeout.
+         * The SO_TIMEOUT value (in milliseconds) used when waiting for the
+         * start of an MLLP frame
          */
-        private Integer idleTimeout;
-        /**
-         * Enable/Disable the automatic generation of message headers from the
-         * HL7 Message MLLP Consumers only
-         */
-        private Boolean hl7Headers = true;
+        private Integer receiveTimeout = 15000;
         /**
          * Enable/Disable strict compliance to the MLLP standard. The MLLP
          * standard specifies START_OF_BLOCKhl7 payloadEND_OF_BLOCKEND_OF_DATA,
@@ -262,6 +251,14 @@ public class MllpComponentConfiguration
          * required or optional.
          */
         private Boolean requireEndOfData = true;
+        /**
+         * Enable/disable the SO_REUSEADDR socket option.
+         */
+        private Boolean reuseAddress = false;
+        /**
+         * Sets the SO_SNDBUF option to the specified value (in bytes)
+         */
+        private Integer sendBufferSize = 8192;
         /**
          * Enable/Disable converting the payload to a String. If enabled, HL7
          * Payloads received from external systems will be validated converted
@@ -273,6 +270,15 @@ public class MllpComponentConfiguration
          */
         private Boolean stringPayload = true;
         /**
+         * Sets whether synchronous processing should be strictly used (this
+         * component only supports synchronous operations).
+         */
+        private Boolean synchronous = true;
+        /**
+         * Enable/disable the TCP_NODELAY socket option.
+         */
+        private Boolean tcpNoDelay = true;
+        /**
          * Enable/Disable the validation of HL7 Payloads If enabled, HL7
          * Payloads received from external systems will be validated (see
          * Hl7Util.generateInvalidPayloadExceptionMessage for details on the
@@ -281,75 +287,13 @@ public class MllpComponentConfiguration
          * MllpInvalidAcknowledgementException will be thrown.
          */
         private Boolean validatePayload = false;
-        /**
-         * Enable/Disable the buffering of HL7 payloads before writing to the
-         * socket.
-         */
-        @Deprecated
-        private Boolean bufferWrites = false;
 
-        public Boolean getTcpNoDelay() {
-            return tcpNoDelay;
+        public Integer getAcceptTimeout() {
+            return acceptTimeout;
         }
 
-        public void setTcpNoDelay(Boolean tcpNoDelay) {
-            this.tcpNoDelay = tcpNoDelay;
-        }
-
-        public Integer getSendBufferSize() {
-            return sendBufferSize;
-        }
-
-        public void setSendBufferSize(Integer sendBufferSize) {
-            this.sendBufferSize = sendBufferSize;
-        }
-
-        public Integer getReceiveBufferSize() {
-            return receiveBufferSize;
-        }
-
-        public void setReceiveBufferSize(Integer receiveBufferSize) {
-            this.receiveBufferSize = receiveBufferSize;
-        }
-
-        public Boolean getKeepAlive() {
-            return keepAlive;
-        }
-
-        public void setKeepAlive(Boolean keepAlive) {
-            this.keepAlive = keepAlive;
-        }
-
-        public Boolean getReuseAddress() {
-            return reuseAddress;
-        }
-
-        public void setReuseAddress(Boolean reuseAddress) {
-            this.reuseAddress = reuseAddress;
-        }
-
-        public Integer getConnectTimeout() {
-            return connectTimeout;
-        }
-
-        public void setConnectTimeout(Integer connectTimeout) {
-            this.connectTimeout = connectTimeout;
-        }
-
-        public Integer getReadTimeout() {
-            return readTimeout;
-        }
-
-        public void setReadTimeout(Integer readTimeout) {
-            this.readTimeout = readTimeout;
-        }
-
-        public Boolean getBridgeErrorHandler() {
-            return bridgeErrorHandler;
-        }
-
-        public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-            this.bridgeErrorHandler = bridgeErrorHandler;
+        public void setAcceptTimeout(Integer acceptTimeout) {
+            this.acceptTimeout = acceptTimeout;
         }
 
         public Boolean getAutoAck() {
@@ -368,12 +312,12 @@ public class MllpComponentConfiguration
             this.backlog = backlog;
         }
 
-        public ExchangePattern getExchangePattern() {
-            return exchangePattern;
+        public Integer getBindRetryInterval() {
+            return bindRetryInterval;
         }
 
-        public void setExchangePattern(ExchangePattern exchangePattern) {
-            this.exchangePattern = exchangePattern;
+        public void setBindRetryInterval(Integer bindRetryInterval) {
+            this.bindRetryInterval = bindRetryInterval;
         }
 
         public Integer getBindTimeout() {
@@ -384,12 +328,71 @@ public class MllpComponentConfiguration
             this.bindTimeout = bindTimeout;
         }
 
-        public Integer getBindRetryInterval() {
-            return bindRetryInterval;
+        public Boolean getBridgeErrorHandler() {
+            return bridgeErrorHandler;
         }
 
-        public void setBindRetryInterval(Integer bindRetryInterval) {
-            this.bindRetryInterval = bindRetryInterval;
+        public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+            this.bridgeErrorHandler = bridgeErrorHandler;
+        }
+
+        @Deprecated
+        @DeprecatedConfigurationProperty
+        public Boolean getBufferWrites() {
+            return bufferWrites;
+        }
+
+        @Deprecated
+        public void setBufferWrites(Boolean bufferWrites) {
+            this.bufferWrites = bufferWrites;
+        }
+
+        public String getCharsetName() {
+            return charsetName;
+        }
+
+        public void setCharsetName(String charsetName) {
+            this.charsetName = charsetName;
+        }
+
+        public Integer getConnectTimeout() {
+            return connectTimeout;
+        }
+
+        public void setConnectTimeout(Integer connectTimeout) {
+            this.connectTimeout = connectTimeout;
+        }
+
+        public ExchangePattern getExchangePattern() {
+            return exchangePattern;
+        }
+
+        public void setExchangePattern(ExchangePattern exchangePattern) {
+            this.exchangePattern = exchangePattern;
+        }
+
+        public Boolean getHl7Headers() {
+            return hl7Headers;
+        }
+
+        public void setHl7Headers(Boolean hl7Headers) {
+            this.hl7Headers = hl7Headers;
+        }
+
+        public Integer getIdleTimeout() {
+            return idleTimeout;
+        }
+
+        public void setIdleTimeout(Integer idleTimeout) {
+            this.idleTimeout = idleTimeout;
+        }
+
+        public Boolean getKeepAlive() {
+            return keepAlive;
+        }
+
+        public void setKeepAlive(Boolean keepAlive) {
+            this.keepAlive = keepAlive;
         }
 
         public Boolean getLenientBind() {
@@ -398,22 +401,6 @@ public class MllpComponentConfiguration
 
         public void setLenientBind(Boolean lenientBind) {
             this.lenientBind = lenientBind;
-        }
-
-        public Integer getAcceptTimeout() {
-            return acceptTimeout;
-        }
-
-        public void setAcceptTimeout(Integer acceptTimeout) {
-            this.acceptTimeout = acceptTimeout;
-        }
-
-        public Integer getReceiveTimeout() {
-            return receiveTimeout;
-        }
-
-        public void setReceiveTimeout(Integer receiveTimeout) {
-            this.receiveTimeout = receiveTimeout;
         }
 
         public Integer getMaxConcurrentConsumers() {
@@ -435,36 +422,28 @@ public class MllpComponentConfiguration
             this.maxReceiveTimeouts = maxReceiveTimeouts;
         }
 
-        public Boolean getSynchronous() {
-            return synchronous;
+        public Integer getReadTimeout() {
+            return readTimeout;
         }
 
-        public void setSynchronous(Boolean synchronous) {
-            this.synchronous = synchronous;
+        public void setReadTimeout(Integer readTimeout) {
+            this.readTimeout = readTimeout;
         }
 
-        public String getCharsetName() {
-            return charsetName;
+        public Integer getReceiveBufferSize() {
+            return receiveBufferSize;
         }
 
-        public void setCharsetName(String charsetName) {
-            this.charsetName = charsetName;
+        public void setReceiveBufferSize(Integer receiveBufferSize) {
+            this.receiveBufferSize = receiveBufferSize;
         }
 
-        public Integer getIdleTimeout() {
-            return idleTimeout;
+        public Integer getReceiveTimeout() {
+            return receiveTimeout;
         }
 
-        public void setIdleTimeout(Integer idleTimeout) {
-            this.idleTimeout = idleTimeout;
-        }
-
-        public Boolean getHl7Headers() {
-            return hl7Headers;
-        }
-
-        public void setHl7Headers(Boolean hl7Headers) {
-            this.hl7Headers = hl7Headers;
+        public void setReceiveTimeout(Integer receiveTimeout) {
+            this.receiveTimeout = receiveTimeout;
         }
 
         public Boolean getRequireEndOfData() {
@@ -475,6 +454,22 @@ public class MllpComponentConfiguration
             this.requireEndOfData = requireEndOfData;
         }
 
+        public Boolean getReuseAddress() {
+            return reuseAddress;
+        }
+
+        public void setReuseAddress(Boolean reuseAddress) {
+            this.reuseAddress = reuseAddress;
+        }
+
+        public Integer getSendBufferSize() {
+            return sendBufferSize;
+        }
+
+        public void setSendBufferSize(Integer sendBufferSize) {
+            this.sendBufferSize = sendBufferSize;
+        }
+
         public Boolean getStringPayload() {
             return stringPayload;
         }
@@ -483,23 +478,28 @@ public class MllpComponentConfiguration
             this.stringPayload = stringPayload;
         }
 
+        public Boolean getSynchronous() {
+            return synchronous;
+        }
+
+        public void setSynchronous(Boolean synchronous) {
+            this.synchronous = synchronous;
+        }
+
+        public Boolean getTcpNoDelay() {
+            return tcpNoDelay;
+        }
+
+        public void setTcpNoDelay(Boolean tcpNoDelay) {
+            this.tcpNoDelay = tcpNoDelay;
+        }
+
         public Boolean getValidatePayload() {
             return validatePayload;
         }
 
         public void setValidatePayload(Boolean validatePayload) {
             this.validatePayload = validatePayload;
-        }
-
-        @Deprecated
-        @DeprecatedConfigurationProperty
-        public Boolean getBufferWrites() {
-            return bufferWrites;
-        }
-
-        @Deprecated
-        public void setBufferWrites(Boolean bufferWrites) {
-            this.bufferWrites = bufferWrites;
         }
     }
 }

@@ -104,45 +104,123 @@ public class DebeziumPostgresComponentConfiguration
     public static class PostgresConnectorEmbeddedDebeziumConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.debezium.configuration.PostgresConnectorEmbeddedDebeziumConfiguration.class;
         /**
-         * When 'snapshot.mode' is set as custom, this setting must be set to
-         * specify a fully qualified class name to load (via the default class
-         * loader).This class must implement the 'Snapshotter' interface and is
-         * called on each app boot to determine whether to do a snapshot and how
-         * to build queries.
+         * Description is not available here, please check Debezium website for
+         * corresponding key 'column.blacklist' description.
          */
-        private String snapshotCustomClass;
+        private String columnBlacklist;
         /**
-         * The name of the Postgres logical decoding slot created for streaming
-         * changes from a plugin.Defaults to 'debezium
+         * The name of the database the connector should be monitoring
          */
-        private String slotName = "debezium";
+        private String databaseDbname;
         /**
-         * Specify how HSTORE columns should be represented in change events,
-         * including:'json' represents values as json string'map' (default)
-         * represents values using java.util.Map
+         * The path to the file that will be used to record the database history
          */
-        private String hstoreHandlingMode = "json";
+        private String databaseHistoryFileFilename;
         /**
-         * The number of milli-seconds to wait between retry attempts when the
-         * connector fails to connect to a replication slot.
+         * Resolvable hostname or IP address of the Postgres database server.
          */
-        private Long slotRetryDelayMs = 10000L;
+        private String databaseHostname;
+        /**
+         * A semicolon separated list of SQL statements to be executed when a
+         * JDBC connection to the database is established. Note that the
+         * connector may establish JDBC connections at its own discretion, so
+         * this should typically be used for configurationof session parameters
+         * only, but not for executing DML statements. Use doubled semicolon
+         * (';;') to use a semicolon as a character and not as a delimiter.
+         */
+        private String databaseInitialStatements;
+        /**
+         * Password of the Postgres database user to be used when connecting to
+         * the database.
+         */
+        private String databasePassword;
+        /**
+         * Port of the Postgres database server.
+         */
+        private Integer databasePort = 5432;
+        /**
+         * Unique name that identifies the database server and all recorded
+         * offsets, and that is used as a prefix for all schemas and topics.
+         * Each distinct installation should have a separate namespace and be
+         * monitored by at most one Debezium connector.
+         */
+        private String databaseServerName;
+        /**
+         * File containing the SSL Certificate for the client. See the Postgres
+         * SSL docs for further information
+         */
+        private String databaseSslcert;
+        /**
+         * A name of class to that creates SSL Sockets. Use
+         * org.postgresql.ssl.NonValidatingFactory to disable SSL validation in
+         * development environments
+         */
+        private String databaseSslfactory;
+        /**
+         * File containing the SSL private key for the client. See the Postgres
+         * SSL docs for further information
+         */
+        private String databaseSslkey;
+        /**
+         * Whether to use an encrypted connection to Postgres. Options
+         * include'disable' (the default) to use an unencrypted connection;
+         * 'require' to use a secure (encrypted) connection, and fail if one
+         * cannot be established; 'verify-ca' like 'required' but additionally
+         * verify the server TLS certificate against the configured Certificate
+         * Authority (CA) certificates, or fail if no valid matching CA
+         * certificates are found; or'verify-full' like 'verify-ca' but
+         * additionally verify that the server certificate matches the host to
+         * which the connection is attempted.
+         */
+        private String databaseSslmode = "disable";
+        /**
+         * Password to access the client private key from the file specified by
+         * 'database.sslkey'. See the Postgres SSL docs for further information
+         */
+        private String databaseSslpassword;
+        /**
+         * File containing the root certificate(s) against which the server is
+         * validated. See the Postgres JDBC SSL docs for further information
+         */
+        private String databaseSslrootcert;
         /**
          * Enable or disable TCP keep-alive probe to avoid dropping TCP
          * connection
          */
         private Boolean databaseTcpkeepalive = true;
         /**
-         * Specify how often (in ms) the xmin will be fetched from the
-         * replication slot. This xmin value is exposed by the slot which gives
-         * a lower bound of where a new replication slot could start from. The
-         * lower the value, the more likely this value is to be the current
-         * 'true' value, but the bigger the performance cost. The bigger the
-         * value, the less likely this value is to be the current 'true' value,
-         * but the lower the performance penalty. The default is set to 0 ms,
-         * which disables tracking xmin.
+         * Name of the Postgres database user to be used when connecting to the
+         * database.
          */
-        private Long xminFetchIntervalMs = 0L;
+        private String databaseUser;
+        /**
+         * Specify how DECIMAL and NUMERIC columns should be represented in
+         * change events, including:'precise' (the default) uses
+         * java.math.BigDecimal to represent values, which are encoded in the
+         * change events using a binary representation and Kafka Connect's
+         * 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to
+         * represent values; 'double' represents values using Java's 'double',
+         * which may not offer the precision but will be far easier to use in
+         * consumers.
+         */
+        private String decimalHandlingMode = "precise";
+        /**
+         * Length of an interval in milli-seconds in in which the connector
+         * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
+         * disable heartbeat messages. Disabled by default.
+         */
+        private Integer heartbeatIntervalMs = 0;
+        /**
+         * The prefix that is used to name heartbeat topics.Defaults to
+         * __debezium-heartbeat.
+         */
+        private String heartbeatTopicsPrefix = "__debezium-heartbeat";
+        /**
+         * Specify how HSTORE columns should be represented in change events,
+         * including:'json' represents values as json string'map' (default)
+         * represents values using java.util.Map
+         */
+        private String hstoreHandlingMode = "json";
         /**
          * Specify whether the fields of data type not supported by Debezium
          * should be processed:'false' (the default) omits the fields; 'true'
@@ -151,23 +229,9 @@ public class DebeziumPostgresComponentConfiguration
          */
         private Boolean includeUnknownDatatypes = false;
         /**
-         * Any optional parameters used by logical decoding plugin. Semi-colon
-         * separated. E.g.
-         * 'add-tables=public.table,public.table2;include-lsn=true'
+         * Maximum size of each batch of source records. Defaults to 2048.
          */
-        private String slotStreamParams;
-        /**
-         * Whether delete operations should be represented by a delete event and
-         * a subsquenttombstone event (true) or only by a delete event (false).
-         * Emitting the tombstone event (the default behavior) allows Kafka to
-         * completely delete all events pertaining to the given key once the
-         * source record got deleted.
-         */
-        private Boolean tombstonesOnDelete = false;
-        /**
-         * The path to the file that will be used to record the database history
-         */
-        private String databaseHistoryFileFilename;
+        private Integer maxBatchSize = 2048;
         /**
          * Maximum size of the queue for change events read from the database
          * log but not yet recorded or forwarded. Defaults to 8192, and should
@@ -175,15 +239,106 @@ public class DebeziumPostgresComponentConfiguration
          */
         private Integer maxQueueSize = 8192;
         /**
-         * Length of an interval in milli-seconds in in which the connector
-         * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
-         * disable heartbeat messages. Disabled by default.
+         * A semicolon-separated list of expressions that match fully-qualified
+         * tables and column(s) to be used as message key. Each expression must
+         * match the pattern ':',where the table names could be defined as
+         * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the
+         * specific connector,and the key columns are a comma-separated list of
+         * columns representing the custom key. For any table without an
+         * explicit key configuration the table's primary key column(s) will be
+         * used as message key.Example:
+         * dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id
          */
-        private Integer heartbeatIntervalMs = 0;
+        private String messageKeyColumns;
+        /**
+         * The name of the Postgres logical decoding plugin installed on the
+         * server. Supported values are 'decoderbufs' and 'wal2json'. Defaults
+         * to 'decoderbufs'.
+         */
+        private String pluginName = "decoderbufs";
+        /**
+         * Frequency in milliseconds to wait for new change events to appear
+         * after receiving no events. Defaults to 500ms.
+         */
+        private Long pollIntervalMs = 500L;
+        /**
+         * The name of the Postgres 10 publication used for streaming changes
+         * from a plugin.Defaults to 'dbz_publication'
+         */
+        private String publicationName = "dbz_publication";
+        /**
+         * The schemas for which events must not be captured
+         */
+        private String schemaBlacklist;
+        /**
+         * Specify the conditions that trigger a refresh of the in-memory schema
+         * for a table. 'columns_diff' (the default) is the safest mode,
+         * ensuring the in-memory schema stays in-sync with the database table's
+         * schema at all times. 'columns_diff_exclude_unchanged_toast' instructs
+         * the connector to refresh the in-memory schema cache if there is a
+         * discrepancy between it and the schema derived from the incoming
+         * message, unless unchanged TOASTable data fully accounts for the
+         * discrepancy. This setting can improve connector performance
+         * significantly if there are frequently-updated tables that have
+         * TOASTed data that are rarely part of these updates. However, it is
+         * possible for the in-memory schema to become outdated if TOASTable
+         * columns are dropped from the table.
+         */
+        private String schemaRefreshMode = "columns_diff";
+        /**
+         * The schemas for which events should be captured
+         */
+        private String schemaWhitelist;
+        /**
+         * Whether or not to drop the logical replication slot when the
+         * connector finishes orderlyBy default the replication is kept so that
+         * on restart progress can resume from the last recorded location
+         */
+        private Boolean slotDropOnStop = false;
+        /**
+         * How many times to retry connecting to a replication slot when an
+         * attempt fails.
+         */
+        private Integer slotMaxRetries = 6;
+        /**
+         * The name of the Postgres logical decoding slot created for streaming
+         * changes from a plugin.Defaults to 'debezium
+         */
+        private String slotName = "debezium";
+        /**
+         * The number of milli-seconds to wait between retry attempts when the
+         * connector fails to connect to a replication slot.
+         */
+        private Long slotRetryDelayMs = 10000L;
+        /**
+         * Any optional parameters used by logical decoding plugin. Semi-colon
+         * separated. E.g.
+         * 'add-tables=public.table,public.table2;include-lsn=true'
+         */
+        private String slotStreamParams;
+        /**
+         * When 'snapshot.mode' is set as custom, this setting must be set to
+         * specify a fully qualified class name to load (via the default class
+         * loader).This class must implement the 'Snapshotter' interface and is
+         * called on each app boot to determine whether to do a snapshot and how
+         * to build queries.
+         */
+        private String snapshotCustomClass;
         /**
          * The number of milliseconds to delay before a snapshot will begin.
          */
         private Long snapshotDelayMs = 0L;
+        /**
+         * The maximum number of records that should be loaded into memory while
+         * performing a snapshot
+         */
+        private Integer snapshotFetchSize;
+        /**
+         * The maximum number of millis to wait for table locks at the beginning
+         * of a snapshot. If locks cannot be acquired in this time frame, the
+         * snapshot will be aborted. Defaults to 10 seconds
+         */
+        private Long snapshotLockTimeoutMs = 10000L;
         /**
          * The criteria for running a snapshot upon startup of the connector.
          * Options include: 'always' to specify that the connector run a
@@ -201,66 +356,6 @@ public class DebeziumPostgresComponentConfiguration
          */
         private String snapshotMode = "initial";
         /**
-         * A version of the format of the publicly visible source part in the
-         * message
-         */
-        private String sourceStructVersion = "v2";
-        /**
-         * Maximum size of each batch of source records. Defaults to 2048.
-         */
-        private Integer maxBatchSize = 2048;
-        /**
-         * The maximum number of records that should be loaded into memory while
-         * performing a snapshot
-         */
-        private Integer snapshotFetchSize;
-        /**
-         * The prefix that is used to name heartbeat topics.Defaults to
-         * __debezium-heartbeat.
-         */
-        private String heartbeatTopicsPrefix = "__debezium-heartbeat";
-        /**
-         * Frequency in milliseconds to wait for new change events to appear
-         * after receiving no events. Defaults to 500ms.
-         */
-        private Long pollIntervalMs = 500L;
-        /**
-         * A semicolon-separated list of expressions that match fully-qualified
-         * tables and column(s) to be used as message key. Each expression must
-         * match the pattern ':',where the table names could be defined as
-         * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the
-         * specific connector,and the key columns are a comma-separated list of
-         * columns representing the custom key. For any table without an
-         * explicit key configuration the table's primary key column(s) will be
-         * used as message key.Example:
-         * dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id
-         */
-        private String messageKeyColumns;
-        /**
-         * Description is not available here, please check Debezium website for
-         * corresponding key 'column.blacklist' description.
-         */
-        private String columnBlacklist;
-        /**
-         * Description is not available here, please check Debezium website for
-         * corresponding key 'table.blacklist' description.
-         */
-        private String tableBlacklist;
-        /**
-         * A semicolon separated list of SQL statements to be executed when a
-         * JDBC connection to the database is established. Note that the
-         * connector may establish JDBC connections at its own discretion, so
-         * this should typically be used for configurationof session parameters
-         * only, but not for executing DML statements. Use doubled semicolon
-         * (';;') to use a semicolon as a character and not as a delimiter.
-         */
-        private String databaseInitialStatements;
-        /**
-         * Name of the Postgres database user to be used when connecting to the
-         * database.
-         */
-        private String databaseUser;
-        /**
          * This property contains a comma-separated list of fully-qualified
          * tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on
          * thespecific connectors . Select statements for the individual tables
@@ -276,25 +371,24 @@ public class DebeziumPostgresComponentConfiguration
          */
         private String snapshotSelectStatementOverrides;
         /**
-         * Password of the Postgres database user to be used when connecting to
-         * the database.
+         * A version of the format of the publicly visible source part in the
+         * message
          */
-        private String databasePassword;
+        private String sourceStructVersion = "v2";
+        /**
+         * Frequency in milliseconds for sending replication connection status
+         * updates to the server. Defaults to 10 seconds (10000 ms).
+         */
+        private Integer statusUpdateIntervalMs = 10000;
+        /**
+         * Description is not available here, please check Debezium website for
+         * corresponding key 'table.blacklist' description.
+         */
+        private String tableBlacklist;
         /**
          * The tables for which changes are to be captured
          */
         private String tableWhitelist;
-        /**
-         * Specify how DECIMAL and NUMERIC columns should be represented in
-         * change events, including:'precise' (the default) uses
-         * java.math.BigDecimal to represent values, which are encoded in the
-         * change events using a binary representation and Kafka Connect's
-         * 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to
-         * represent values; 'double' represents values using Java's 'double',
-         * which may not offer the precision but will be far easier to use in
-         * consumers.
-         */
-        private String decimalHandlingMode = "precise";
         /**
          * Time, date, and timestamps can be represented with different kinds of
          * precisions, including:'adaptive' (the default) bases the precision of
@@ -307,110 +401,6 @@ public class DebeziumPostgresComponentConfiguration
          */
         private String timePrecisionMode = "adaptive";
         /**
-         * Unique name that identifies the database server and all recorded
-         * offsets, and that is used as a prefix for all schemas and topics.
-         * Each distinct installation should have a separate namespace and be
-         * monitored by at most one Debezium connector.
-         */
-        private String databaseServerName;
-        /**
-         * Port of the Postgres database server.
-         */
-        private Integer databasePort = 5432;
-        /**
-         * Resolvable hostname or IP address of the Postgres database server.
-         */
-        private String databaseHostname;
-        /**
-         * The name of the Postgres 10 publication used for streaming changes
-         * from a plugin.Defaults to 'dbz_publication'
-         */
-        private String publicationName = "dbz_publication";
-        /**
-         * The schemas for which events must not be captured
-         */
-        private String schemaBlacklist;
-        /**
-         * How many times to retry connecting to a replication slot when an
-         * attempt fails.
-         */
-        private Integer slotMaxRetries = 6;
-        /**
-         * Specify the conditions that trigger a refresh of the in-memory schema
-         * for a table. 'columns_diff' (the default) is the safest mode,
-         * ensuring the in-memory schema stays in-sync with the database table's
-         * schema at all times. 'columns_diff_exclude_unchanged_toast' instructs
-         * the connector to refresh the in-memory schema cache if there is a
-         * discrepancy between it and the schema derived from the incoming
-         * message, unless unchanged TOASTable data fully accounts for the
-         * discrepancy. This setting can improve connector performance
-         * significantly if there are frequently-updated tables that have
-         * TOASTed data that are rarely part of these updates. However, it is
-         * possible for the in-memory schema to become outdated if TOASTable
-         * columns are dropped from the table.
-         */
-        private String schemaRefreshMode = "columns_diff";
-        /**
-         * Whether or not to drop the logical replication slot when the
-         * connector finishes orderlyBy default the replication is kept so that
-         * on restart progress can resume from the last recorded location
-         */
-        private Boolean slotDropOnStop = false;
-        /**
-         * Whether to use an encrypted connection to Postgres. Options
-         * include'disable' (the default) to use an unencrypted connection;
-         * 'require' to use a secure (encrypted) connection, and fail if one
-         * cannot be established; 'verify-ca' like 'required' but additionally
-         * verify the server TLS certificate against the configured Certificate
-         * Authority (CA) certificates, or fail if no valid matching CA
-         * certificates are found; or'verify-full' like 'verify-ca' but
-         * additionally verify that the server certificate matches the host to
-         * which the connection is attempted.
-         */
-        private String databaseSslmode = "disable";
-        /**
-         * File containing the SSL Certificate for the client. See the Postgres
-         * SSL docs for further information
-         */
-        private String databaseSslcert;
-        /**
-         * A name of class to that creates SSL Sockets. Use
-         * org.postgresql.ssl.NonValidatingFactory to disable SSL validation in
-         * development environments
-         */
-        private String databaseSslfactory;
-        /**
-         * Frequency in milliseconds for sending replication connection status
-         * updates to the server. Defaults to 10 seconds (10000 ms).
-         */
-        private Integer statusUpdateIntervalMs = 10000;
-        /**
-         * The maximum number of millis to wait for table locks at the beginning
-         * of a snapshot. If locks cannot be acquired in this time frame, the
-         * snapshot will be aborted. Defaults to 10 seconds
-         */
-        private Long snapshotLockTimeoutMs = 10000L;
-        /**
-         * The name of the database the connector should be monitoring
-         */
-        private String databaseDbname;
-        /**
-         * File containing the SSL private key for the client. See the Postgres
-         * SSL docs for further information
-         */
-        private String databaseSslkey;
-        /**
-         * The name of the Postgres logical decoding plugin installed on the
-         * server. Supported values are 'decoderbufs' and 'wal2json'. Defaults
-         * to 'decoderbufs'.
-         */
-        private String pluginName = "decoderbufs";
-        /**
-         * Password to access the client private key from the file specified by
-         * 'database.sslkey'. See the Postgres SSL docs for further information
-         */
-        private String databaseSslpassword;
-        /**
          * Specify the constant that will be provided by Debezium to indicate
          * that the original value is a toasted value not provided by the
          * database.If starts with 'hex:' prefix it is expected that the rest of
@@ -418,47 +408,25 @@ public class DebeziumPostgresComponentConfiguration
          */
         private String toastedValuePlaceholder = "__debezium_unavailable_value";
         /**
-         * The schemas for which events should be captured
+         * Whether delete operations should be represented by a delete event and
+         * a subsquenttombstone event (true) or only by a delete event (false).
+         * Emitting the tombstone event (the default behavior) allows Kafka to
+         * completely delete all events pertaining to the given key once the
+         * source record got deleted.
          */
-        private String schemaWhitelist;
+        private Boolean tombstonesOnDelete = false;
         /**
-         * File containing the root certificate(s) against which the server is
-         * validated. See the Postgres JDBC SSL docs for further information
+         * Specify how often (in ms) the xmin will be fetched from the
+         * replication slot. This xmin value is exposed by the slot which gives
+         * a lower bound of where a new replication slot could start from. The
+         * lower the value, the more likely this value is to be the current
+         * 'true' value, but the bigger the performance cost. The bigger the
+         * value, the less likely this value is to be the current 'true' value,
+         * but the lower the performance penalty. The default is set to 0 ms,
+         * which disables tracking xmin.
          */
-        private String databaseSslrootcert;
-        /**
-         * Unique name for the connector. Attempting to register again with the
-         * same name will fail.
-         */
-        private String name;
-        /**
-         * The name of the Java class that is responsible for persistence of
-         * connector offsets.
-         */
-        private String offsetStorage = "org.apache.kafka.connect.storage.FileOffsetBackingStore";
-        /**
-         * Path to file where offsets are to be stored. Required when
-         * offset.storage is set to the FileOffsetBackingStore
-         */
-        private String offsetStorageFileName;
-        /**
-         * Replication factor used when creating the offset storage topic.
-         * Required when offset.storage is set to the KafkaOffsetBackingStore
-         */
-        private Integer offsetStorageReplicationFactor;
+        private Long xminFetchIntervalMs = 0L;
         private Class connectorClass;
-        /**
-         * Maximum number of milliseconds to wait for records to flush and
-         * partition offset data to be committed to offset storage before
-         * cancelling the process and restoring the offset data to be committed
-         * in a future attempt. The default is 5 seconds.
-         */
-        private Long offsetCommitTimeoutMs = 5000L;
-        /**
-         * The number of partitions used when creating the offset storage topic.
-         * Required when offset.storage is set to the 'KafkaOffsetBackingStore'.
-         */
-        private Integer offsetStoragePartitions;
         /**
          * The Converter class that should be used to serialize and deserialize
          * key data for offsets. The default is JSON converter.
@@ -470,6 +438,11 @@ public class DebeziumPostgresComponentConfiguration
          */
         private String internalValueConverter = "org.apache.kafka.connect.json.JsonConverter";
         /**
+         * Unique name for the connector. Attempting to register again with the
+         * same name will fail.
+         */
+        private String name;
+        /**
          * The name of the Java class of the commit policy. It defines when
          * offsets commit has to be triggered based on the number of events
          * processed and the time elapsed since the last commit. This class must
@@ -478,85 +451,56 @@ public class DebeziumPostgresComponentConfiguration
          */
         private String offsetCommitPolicy = "io.debezium.embedded.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy";
         /**
+         * Maximum number of milliseconds to wait for records to flush and
+         * partition offset data to be committed to offset storage before
+         * cancelling the process and restoring the offset data to be committed
+         * in a future attempt. The default is 5 seconds.
+         */
+        private Long offsetCommitTimeoutMs = 5000L;
+        /**
          * Interval at which to try committing offsets. The default is 1 minute.
          */
         private Long offsetFlushIntervalMs = 60000L;
+        /**
+         * The name of the Java class that is responsible for persistence of
+         * connector offsets.
+         */
+        private String offsetStorage = "org.apache.kafka.connect.storage.FileOffsetBackingStore";
+        /**
+         * Path to file where offsets are to be stored. Required when
+         * offset.storage is set to the FileOffsetBackingStore
+         */
+        private String offsetStorageFileName;
+        /**
+         * The number of partitions used when creating the offset storage topic.
+         * Required when offset.storage is set to the 'KafkaOffsetBackingStore'.
+         */
+        private Integer offsetStoragePartitions;
+        /**
+         * Replication factor used when creating the offset storage topic.
+         * Required when offset.storage is set to the KafkaOffsetBackingStore
+         */
+        private Integer offsetStorageReplicationFactor;
         /**
          * The name of the Kafka topic where offsets are to be stored. Required
          * when offset.storage is set to the KafkaOffsetBackingStore.
          */
         private String offsetStorageTopic;
 
-        public String getSnapshotCustomClass() {
-            return snapshotCustomClass;
+        public String getColumnBlacklist() {
+            return columnBlacklist;
         }
 
-        public void setSnapshotCustomClass(String snapshotCustomClass) {
-            this.snapshotCustomClass = snapshotCustomClass;
+        public void setColumnBlacklist(String columnBlacklist) {
+            this.columnBlacklist = columnBlacklist;
         }
 
-        public String getSlotName() {
-            return slotName;
+        public String getDatabaseDbname() {
+            return databaseDbname;
         }
 
-        public void setSlotName(String slotName) {
-            this.slotName = slotName;
-        }
-
-        public String getHstoreHandlingMode() {
-            return hstoreHandlingMode;
-        }
-
-        public void setHstoreHandlingMode(String hstoreHandlingMode) {
-            this.hstoreHandlingMode = hstoreHandlingMode;
-        }
-
-        public Long getSlotRetryDelayMs() {
-            return slotRetryDelayMs;
-        }
-
-        public void setSlotRetryDelayMs(Long slotRetryDelayMs) {
-            this.slotRetryDelayMs = slotRetryDelayMs;
-        }
-
-        public Boolean getDatabaseTcpkeepalive() {
-            return databaseTcpkeepalive;
-        }
-
-        public void setDatabaseTcpkeepalive(Boolean databaseTcpkeepalive) {
-            this.databaseTcpkeepalive = databaseTcpkeepalive;
-        }
-
-        public Long getXminFetchIntervalMs() {
-            return xminFetchIntervalMs;
-        }
-
-        public void setXminFetchIntervalMs(Long xminFetchIntervalMs) {
-            this.xminFetchIntervalMs = xminFetchIntervalMs;
-        }
-
-        public Boolean getIncludeUnknownDatatypes() {
-            return includeUnknownDatatypes;
-        }
-
-        public void setIncludeUnknownDatatypes(Boolean includeUnknownDatatypes) {
-            this.includeUnknownDatatypes = includeUnknownDatatypes;
-        }
-
-        public String getSlotStreamParams() {
-            return slotStreamParams;
-        }
-
-        public void setSlotStreamParams(String slotStreamParams) {
-            this.slotStreamParams = slotStreamParams;
-        }
-
-        public Boolean getTombstonesOnDelete() {
-            return tombstonesOnDelete;
-        }
-
-        public void setTombstonesOnDelete(Boolean tombstonesOnDelete) {
-            this.tombstonesOnDelete = tombstonesOnDelete;
+        public void setDatabaseDbname(String databaseDbname) {
+            this.databaseDbname = databaseDbname;
         }
 
         public String getDatabaseHistoryFileFilename() {
@@ -568,100 +512,12 @@ public class DebeziumPostgresComponentConfiguration
             this.databaseHistoryFileFilename = databaseHistoryFileFilename;
         }
 
-        public Integer getMaxQueueSize() {
-            return maxQueueSize;
+        public String getDatabaseHostname() {
+            return databaseHostname;
         }
 
-        public void setMaxQueueSize(Integer maxQueueSize) {
-            this.maxQueueSize = maxQueueSize;
-        }
-
-        public Integer getHeartbeatIntervalMs() {
-            return heartbeatIntervalMs;
-        }
-
-        public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
-            this.heartbeatIntervalMs = heartbeatIntervalMs;
-        }
-
-        public Long getSnapshotDelayMs() {
-            return snapshotDelayMs;
-        }
-
-        public void setSnapshotDelayMs(Long snapshotDelayMs) {
-            this.snapshotDelayMs = snapshotDelayMs;
-        }
-
-        public String getSnapshotMode() {
-            return snapshotMode;
-        }
-
-        public void setSnapshotMode(String snapshotMode) {
-            this.snapshotMode = snapshotMode;
-        }
-
-        public String getSourceStructVersion() {
-            return sourceStructVersion;
-        }
-
-        public void setSourceStructVersion(String sourceStructVersion) {
-            this.sourceStructVersion = sourceStructVersion;
-        }
-
-        public Integer getMaxBatchSize() {
-            return maxBatchSize;
-        }
-
-        public void setMaxBatchSize(Integer maxBatchSize) {
-            this.maxBatchSize = maxBatchSize;
-        }
-
-        public Integer getSnapshotFetchSize() {
-            return snapshotFetchSize;
-        }
-
-        public void setSnapshotFetchSize(Integer snapshotFetchSize) {
-            this.snapshotFetchSize = snapshotFetchSize;
-        }
-
-        public String getHeartbeatTopicsPrefix() {
-            return heartbeatTopicsPrefix;
-        }
-
-        public void setHeartbeatTopicsPrefix(String heartbeatTopicsPrefix) {
-            this.heartbeatTopicsPrefix = heartbeatTopicsPrefix;
-        }
-
-        public Long getPollIntervalMs() {
-            return pollIntervalMs;
-        }
-
-        public void setPollIntervalMs(Long pollIntervalMs) {
-            this.pollIntervalMs = pollIntervalMs;
-        }
-
-        public String getMessageKeyColumns() {
-            return messageKeyColumns;
-        }
-
-        public void setMessageKeyColumns(String messageKeyColumns) {
-            this.messageKeyColumns = messageKeyColumns;
-        }
-
-        public String getColumnBlacklist() {
-            return columnBlacklist;
-        }
-
-        public void setColumnBlacklist(String columnBlacklist) {
-            this.columnBlacklist = columnBlacklist;
-        }
-
-        public String getTableBlacklist() {
-            return tableBlacklist;
-        }
-
-        public void setTableBlacklist(String tableBlacklist) {
-            this.tableBlacklist = tableBlacklist;
+        public void setDatabaseHostname(String databaseHostname) {
+            this.databaseHostname = databaseHostname;
         }
 
         public String getDatabaseInitialStatements() {
@@ -673,61 +529,12 @@ public class DebeziumPostgresComponentConfiguration
             this.databaseInitialStatements = databaseInitialStatements;
         }
 
-        public String getDatabaseUser() {
-            return databaseUser;
-        }
-
-        public void setDatabaseUser(String databaseUser) {
-            this.databaseUser = databaseUser;
-        }
-
-        public String getSnapshotSelectStatementOverrides() {
-            return snapshotSelectStatementOverrides;
-        }
-
-        public void setSnapshotSelectStatementOverrides(
-                String snapshotSelectStatementOverrides) {
-            this.snapshotSelectStatementOverrides = snapshotSelectStatementOverrides;
-        }
-
         public String getDatabasePassword() {
             return databasePassword;
         }
 
         public void setDatabasePassword(String databasePassword) {
             this.databasePassword = databasePassword;
-        }
-
-        public String getTableWhitelist() {
-            return tableWhitelist;
-        }
-
-        public void setTableWhitelist(String tableWhitelist) {
-            this.tableWhitelist = tableWhitelist;
-        }
-
-        public String getDecimalHandlingMode() {
-            return decimalHandlingMode;
-        }
-
-        public void setDecimalHandlingMode(String decimalHandlingMode) {
-            this.decimalHandlingMode = decimalHandlingMode;
-        }
-
-        public String getTimePrecisionMode() {
-            return timePrecisionMode;
-        }
-
-        public void setTimePrecisionMode(String timePrecisionMode) {
-            this.timePrecisionMode = timePrecisionMode;
-        }
-
-        public String getDatabaseServerName() {
-            return databaseServerName;
-        }
-
-        public void setDatabaseServerName(String databaseServerName) {
-            this.databaseServerName = databaseServerName;
         }
 
         public Integer getDatabasePort() {
@@ -738,60 +545,12 @@ public class DebeziumPostgresComponentConfiguration
             this.databasePort = databasePort;
         }
 
-        public String getDatabaseHostname() {
-            return databaseHostname;
+        public String getDatabaseServerName() {
+            return databaseServerName;
         }
 
-        public void setDatabaseHostname(String databaseHostname) {
-            this.databaseHostname = databaseHostname;
-        }
-
-        public String getPublicationName() {
-            return publicationName;
-        }
-
-        public void setPublicationName(String publicationName) {
-            this.publicationName = publicationName;
-        }
-
-        public String getSchemaBlacklist() {
-            return schemaBlacklist;
-        }
-
-        public void setSchemaBlacklist(String schemaBlacklist) {
-            this.schemaBlacklist = schemaBlacklist;
-        }
-
-        public Integer getSlotMaxRetries() {
-            return slotMaxRetries;
-        }
-
-        public void setSlotMaxRetries(Integer slotMaxRetries) {
-            this.slotMaxRetries = slotMaxRetries;
-        }
-
-        public String getSchemaRefreshMode() {
-            return schemaRefreshMode;
-        }
-
-        public void setSchemaRefreshMode(String schemaRefreshMode) {
-            this.schemaRefreshMode = schemaRefreshMode;
-        }
-
-        public Boolean getSlotDropOnStop() {
-            return slotDropOnStop;
-        }
-
-        public void setSlotDropOnStop(Boolean slotDropOnStop) {
-            this.slotDropOnStop = slotDropOnStop;
-        }
-
-        public String getDatabaseSslmode() {
-            return databaseSslmode;
-        }
-
-        public void setDatabaseSslmode(String databaseSslmode) {
-            this.databaseSslmode = databaseSslmode;
+        public void setDatabaseServerName(String databaseServerName) {
+            this.databaseServerName = databaseServerName;
         }
 
         public String getDatabaseSslcert() {
@@ -810,30 +569,6 @@ public class DebeziumPostgresComponentConfiguration
             this.databaseSslfactory = databaseSslfactory;
         }
 
-        public Integer getStatusUpdateIntervalMs() {
-            return statusUpdateIntervalMs;
-        }
-
-        public void setStatusUpdateIntervalMs(Integer statusUpdateIntervalMs) {
-            this.statusUpdateIntervalMs = statusUpdateIntervalMs;
-        }
-
-        public Long getSnapshotLockTimeoutMs() {
-            return snapshotLockTimeoutMs;
-        }
-
-        public void setSnapshotLockTimeoutMs(Long snapshotLockTimeoutMs) {
-            this.snapshotLockTimeoutMs = snapshotLockTimeoutMs;
-        }
-
-        public String getDatabaseDbname() {
-            return databaseDbname;
-        }
-
-        public void setDatabaseDbname(String databaseDbname) {
-            this.databaseDbname = databaseDbname;
-        }
-
         public String getDatabaseSslkey() {
             return databaseSslkey;
         }
@@ -842,12 +577,12 @@ public class DebeziumPostgresComponentConfiguration
             this.databaseSslkey = databaseSslkey;
         }
 
-        public String getPluginName() {
-            return pluginName;
+        public String getDatabaseSslmode() {
+            return databaseSslmode;
         }
 
-        public void setPluginName(String pluginName) {
-            this.pluginName = pluginName;
+        public void setDatabaseSslmode(String databaseSslmode) {
+            this.databaseSslmode = databaseSslmode;
         }
 
         public String getDatabaseSslpassword() {
@@ -858,12 +593,132 @@ public class DebeziumPostgresComponentConfiguration
             this.databaseSslpassword = databaseSslpassword;
         }
 
-        public String getToastedValuePlaceholder() {
-            return toastedValuePlaceholder;
+        public String getDatabaseSslrootcert() {
+            return databaseSslrootcert;
         }
 
-        public void setToastedValuePlaceholder(String toastedValuePlaceholder) {
-            this.toastedValuePlaceholder = toastedValuePlaceholder;
+        public void setDatabaseSslrootcert(String databaseSslrootcert) {
+            this.databaseSslrootcert = databaseSslrootcert;
+        }
+
+        public Boolean getDatabaseTcpkeepalive() {
+            return databaseTcpkeepalive;
+        }
+
+        public void setDatabaseTcpkeepalive(Boolean databaseTcpkeepalive) {
+            this.databaseTcpkeepalive = databaseTcpkeepalive;
+        }
+
+        public String getDatabaseUser() {
+            return databaseUser;
+        }
+
+        public void setDatabaseUser(String databaseUser) {
+            this.databaseUser = databaseUser;
+        }
+
+        public String getDecimalHandlingMode() {
+            return decimalHandlingMode;
+        }
+
+        public void setDecimalHandlingMode(String decimalHandlingMode) {
+            this.decimalHandlingMode = decimalHandlingMode;
+        }
+
+        public Integer getHeartbeatIntervalMs() {
+            return heartbeatIntervalMs;
+        }
+
+        public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
+            this.heartbeatIntervalMs = heartbeatIntervalMs;
+        }
+
+        public String getHeartbeatTopicsPrefix() {
+            return heartbeatTopicsPrefix;
+        }
+
+        public void setHeartbeatTopicsPrefix(String heartbeatTopicsPrefix) {
+            this.heartbeatTopicsPrefix = heartbeatTopicsPrefix;
+        }
+
+        public String getHstoreHandlingMode() {
+            return hstoreHandlingMode;
+        }
+
+        public void setHstoreHandlingMode(String hstoreHandlingMode) {
+            this.hstoreHandlingMode = hstoreHandlingMode;
+        }
+
+        public Boolean getIncludeUnknownDatatypes() {
+            return includeUnknownDatatypes;
+        }
+
+        public void setIncludeUnknownDatatypes(Boolean includeUnknownDatatypes) {
+            this.includeUnknownDatatypes = includeUnknownDatatypes;
+        }
+
+        public Integer getMaxBatchSize() {
+            return maxBatchSize;
+        }
+
+        public void setMaxBatchSize(Integer maxBatchSize) {
+            this.maxBatchSize = maxBatchSize;
+        }
+
+        public Integer getMaxQueueSize() {
+            return maxQueueSize;
+        }
+
+        public void setMaxQueueSize(Integer maxQueueSize) {
+            this.maxQueueSize = maxQueueSize;
+        }
+
+        public String getMessageKeyColumns() {
+            return messageKeyColumns;
+        }
+
+        public void setMessageKeyColumns(String messageKeyColumns) {
+            this.messageKeyColumns = messageKeyColumns;
+        }
+
+        public String getPluginName() {
+            return pluginName;
+        }
+
+        public void setPluginName(String pluginName) {
+            this.pluginName = pluginName;
+        }
+
+        public Long getPollIntervalMs() {
+            return pollIntervalMs;
+        }
+
+        public void setPollIntervalMs(Long pollIntervalMs) {
+            this.pollIntervalMs = pollIntervalMs;
+        }
+
+        public String getPublicationName() {
+            return publicationName;
+        }
+
+        public void setPublicationName(String publicationName) {
+            this.publicationName = publicationName;
+        }
+
+        public String getSchemaBlacklist() {
+            return schemaBlacklist;
+        }
+
+        public void setSchemaBlacklist(String schemaBlacklist) {
+            this.schemaBlacklist = schemaBlacklist;
+        }
+
+        public String getSchemaRefreshMode() {
+            return schemaRefreshMode;
+        }
+
+        public void setSchemaRefreshMode(String schemaRefreshMode) {
+            this.schemaRefreshMode = schemaRefreshMode;
         }
 
         public String getSchemaWhitelist() {
@@ -874,45 +729,157 @@ public class DebeziumPostgresComponentConfiguration
             this.schemaWhitelist = schemaWhitelist;
         }
 
-        public String getDatabaseSslrootcert() {
-            return databaseSslrootcert;
+        public Boolean getSlotDropOnStop() {
+            return slotDropOnStop;
         }
 
-        public void setDatabaseSslrootcert(String databaseSslrootcert) {
-            this.databaseSslrootcert = databaseSslrootcert;
+        public void setSlotDropOnStop(Boolean slotDropOnStop) {
+            this.slotDropOnStop = slotDropOnStop;
         }
 
-        public String getName() {
-            return name;
+        public Integer getSlotMaxRetries() {
+            return slotMaxRetries;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setSlotMaxRetries(Integer slotMaxRetries) {
+            this.slotMaxRetries = slotMaxRetries;
         }
 
-        public String getOffsetStorage() {
-            return offsetStorage;
+        public String getSlotName() {
+            return slotName;
         }
 
-        public void setOffsetStorage(String offsetStorage) {
-            this.offsetStorage = offsetStorage;
+        public void setSlotName(String slotName) {
+            this.slotName = slotName;
         }
 
-        public String getOffsetStorageFileName() {
-            return offsetStorageFileName;
+        public Long getSlotRetryDelayMs() {
+            return slotRetryDelayMs;
         }
 
-        public void setOffsetStorageFileName(String offsetStorageFileName) {
-            this.offsetStorageFileName = offsetStorageFileName;
+        public void setSlotRetryDelayMs(Long slotRetryDelayMs) {
+            this.slotRetryDelayMs = slotRetryDelayMs;
         }
 
-        public Integer getOffsetStorageReplicationFactor() {
-            return offsetStorageReplicationFactor;
+        public String getSlotStreamParams() {
+            return slotStreamParams;
         }
 
-        public void setOffsetStorageReplicationFactor(
-                Integer offsetStorageReplicationFactor) {
-            this.offsetStorageReplicationFactor = offsetStorageReplicationFactor;
+        public void setSlotStreamParams(String slotStreamParams) {
+            this.slotStreamParams = slotStreamParams;
+        }
+
+        public String getSnapshotCustomClass() {
+            return snapshotCustomClass;
+        }
+
+        public void setSnapshotCustomClass(String snapshotCustomClass) {
+            this.snapshotCustomClass = snapshotCustomClass;
+        }
+
+        public Long getSnapshotDelayMs() {
+            return snapshotDelayMs;
+        }
+
+        public void setSnapshotDelayMs(Long snapshotDelayMs) {
+            this.snapshotDelayMs = snapshotDelayMs;
+        }
+
+        public Integer getSnapshotFetchSize() {
+            return snapshotFetchSize;
+        }
+
+        public void setSnapshotFetchSize(Integer snapshotFetchSize) {
+            this.snapshotFetchSize = snapshotFetchSize;
+        }
+
+        public Long getSnapshotLockTimeoutMs() {
+            return snapshotLockTimeoutMs;
+        }
+
+        public void setSnapshotLockTimeoutMs(Long snapshotLockTimeoutMs) {
+            this.snapshotLockTimeoutMs = snapshotLockTimeoutMs;
+        }
+
+        public String getSnapshotMode() {
+            return snapshotMode;
+        }
+
+        public void setSnapshotMode(String snapshotMode) {
+            this.snapshotMode = snapshotMode;
+        }
+
+        public String getSnapshotSelectStatementOverrides() {
+            return snapshotSelectStatementOverrides;
+        }
+
+        public void setSnapshotSelectStatementOverrides(
+                String snapshotSelectStatementOverrides) {
+            this.snapshotSelectStatementOverrides = snapshotSelectStatementOverrides;
+        }
+
+        public String getSourceStructVersion() {
+            return sourceStructVersion;
+        }
+
+        public void setSourceStructVersion(String sourceStructVersion) {
+            this.sourceStructVersion = sourceStructVersion;
+        }
+
+        public Integer getStatusUpdateIntervalMs() {
+            return statusUpdateIntervalMs;
+        }
+
+        public void setStatusUpdateIntervalMs(Integer statusUpdateIntervalMs) {
+            this.statusUpdateIntervalMs = statusUpdateIntervalMs;
+        }
+
+        public String getTableBlacklist() {
+            return tableBlacklist;
+        }
+
+        public void setTableBlacklist(String tableBlacklist) {
+            this.tableBlacklist = tableBlacklist;
+        }
+
+        public String getTableWhitelist() {
+            return tableWhitelist;
+        }
+
+        public void setTableWhitelist(String tableWhitelist) {
+            this.tableWhitelist = tableWhitelist;
+        }
+
+        public String getTimePrecisionMode() {
+            return timePrecisionMode;
+        }
+
+        public void setTimePrecisionMode(String timePrecisionMode) {
+            this.timePrecisionMode = timePrecisionMode;
+        }
+
+        public String getToastedValuePlaceholder() {
+            return toastedValuePlaceholder;
+        }
+
+        public void setToastedValuePlaceholder(String toastedValuePlaceholder) {
+            this.toastedValuePlaceholder = toastedValuePlaceholder;
+        }
+
+        public Boolean getTombstonesOnDelete() {
+            return tombstonesOnDelete;
+        }
+
+        public void setTombstonesOnDelete(Boolean tombstonesOnDelete) {
+            this.tombstonesOnDelete = tombstonesOnDelete;
+        }
+
+        public Long getXminFetchIntervalMs() {
+            return xminFetchIntervalMs;
+        }
+
+        public void setXminFetchIntervalMs(Long xminFetchIntervalMs) {
+            this.xminFetchIntervalMs = xminFetchIntervalMs;
         }
 
         public Class getConnectorClass() {
@@ -921,22 +888,6 @@ public class DebeziumPostgresComponentConfiguration
 
         public void setConnectorClass(Class connectorClass) {
             this.connectorClass = connectorClass;
-        }
-
-        public Long getOffsetCommitTimeoutMs() {
-            return offsetCommitTimeoutMs;
-        }
-
-        public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
-            this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
-        }
-
-        public Integer getOffsetStoragePartitions() {
-            return offsetStoragePartitions;
-        }
-
-        public void setOffsetStoragePartitions(Integer offsetStoragePartitions) {
-            this.offsetStoragePartitions = offsetStoragePartitions;
         }
 
         public String getInternalKeyConverter() {
@@ -955,6 +906,14 @@ public class DebeziumPostgresComponentConfiguration
             this.internalValueConverter = internalValueConverter;
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
         public String getOffsetCommitPolicy() {
             return offsetCommitPolicy;
         }
@@ -963,12 +922,53 @@ public class DebeziumPostgresComponentConfiguration
             this.offsetCommitPolicy = offsetCommitPolicy;
         }
 
+        public Long getOffsetCommitTimeoutMs() {
+            return offsetCommitTimeoutMs;
+        }
+
+        public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
+            this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
+        }
+
         public Long getOffsetFlushIntervalMs() {
             return offsetFlushIntervalMs;
         }
 
         public void setOffsetFlushIntervalMs(Long offsetFlushIntervalMs) {
             this.offsetFlushIntervalMs = offsetFlushIntervalMs;
+        }
+
+        public String getOffsetStorage() {
+            return offsetStorage;
+        }
+
+        public void setOffsetStorage(String offsetStorage) {
+            this.offsetStorage = offsetStorage;
+        }
+
+        public String getOffsetStorageFileName() {
+            return offsetStorageFileName;
+        }
+
+        public void setOffsetStorageFileName(String offsetStorageFileName) {
+            this.offsetStorageFileName = offsetStorageFileName;
+        }
+
+        public Integer getOffsetStoragePartitions() {
+            return offsetStoragePartitions;
+        }
+
+        public void setOffsetStoragePartitions(Integer offsetStoragePartitions) {
+            this.offsetStoragePartitions = offsetStoragePartitions;
+        }
+
+        public Integer getOffsetStorageReplicationFactor() {
+            return offsetStorageReplicationFactor;
+        }
+
+        public void setOffsetStorageReplicationFactor(
+                Integer offsetStorageReplicationFactor) {
+            this.offsetStorageReplicationFactor = offsetStorageReplicationFactor;
         }
 
         public String getOffsetStorageTopic() {

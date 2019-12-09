@@ -104,82 +104,18 @@ public class CordaComponentConfiguration
 
     public static class CordaConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.corda.CordaConfiguration.class;
-        private String host;
-        private Integer port;
-        private String password;
-        private String username;
-        private String operation;
-        private Sort sort;
-        private Boolean processSnapshot;
-        private Class flowLociClass;
         private Object[] arguments;
         private Class contractStateClass;
-        private QueryCriteria queryCriteria;
+        private Class flowLociClass;
+        private String host;
+        private String operation;
         private PageSpecification pageSpecification;
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getOperation() {
-            return operation;
-        }
-
-        public void setOperation(String operation) {
-            this.operation = operation;
-        }
-
-        public Sort getSort() {
-            return sort;
-        }
-
-        public void setSort(Sort sort) {
-            this.sort = sort;
-        }
-
-        public Boolean getProcessSnapshot() {
-            return processSnapshot;
-        }
-
-        public void setProcessSnapshot(Boolean processSnapshot) {
-            this.processSnapshot = processSnapshot;
-        }
-
-        public Class getFlowLociClass() {
-            return flowLociClass;
-        }
-
-        public void setFlowLociClass(Class flowLociClass) {
-            this.flowLociClass = flowLociClass;
-        }
+        private String password;
+        private Integer port;
+        private Boolean processSnapshot;
+        private QueryCriteria queryCriteria;
+        private Sort sort;
+        private String username;
 
         public Object[] getArguments() {
             return arguments;
@@ -197,12 +133,28 @@ public class CordaComponentConfiguration
             this.contractStateClass = contractStateClass;
         }
 
-        public QueryCriteria getQueryCriteria() {
-            return queryCriteria;
+        public Class getFlowLociClass() {
+            return flowLociClass;
         }
 
-        public void setQueryCriteria(QueryCriteria queryCriteria) {
-            this.queryCriteria = queryCriteria;
+        public void setFlowLociClass(Class flowLociClass) {
+            this.flowLociClass = flowLociClass;
+        }
+
+        public String getHost() {
+            return host;
+        }
+
+        public void setHost(String host) {
+            this.host = host;
+        }
+
+        public String getOperation() {
+            return operation;
+        }
+
+        public void setOperation(String operation) {
+            this.operation = operation;
         }
 
         public PageSpecification getPageSpecification() {
@@ -211,6 +163,54 @@ public class CordaComponentConfiguration
 
         public void setPageSpecification(PageSpecification pageSpecification) {
             this.pageSpecification = pageSpecification;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public Integer getPort() {
+            return port;
+        }
+
+        public void setPort(Integer port) {
+            this.port = port;
+        }
+
+        public Boolean getProcessSnapshot() {
+            return processSnapshot;
+        }
+
+        public void setProcessSnapshot(Boolean processSnapshot) {
+            this.processSnapshot = processSnapshot;
+        }
+
+        public QueryCriteria getQueryCriteria() {
+            return queryCriteria;
+        }
+
+        public void setQueryCriteria(QueryCriteria queryCriteria) {
+            this.queryCriteria = queryCriteria;
+        }
+
+        public Sort getSort() {
+            return sort;
+        }
+
+        public void setSort(Sort sort) {
+            this.sort = sort;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
         }
     }
 }

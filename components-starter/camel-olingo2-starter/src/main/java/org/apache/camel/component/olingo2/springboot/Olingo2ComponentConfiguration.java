@@ -121,37 +121,31 @@ public class Olingo2ComponentConfiguration
     public static class Olingo2ConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.olingo2.Olingo2Configuration.class;
         /**
-         * Custom HTTP headers to inject into every request, this could include
-         * OAuth tokens, etc.
+         * What kind of operation to perform
          */
-        private Map httpHeaders;
-        /**
-         * HTTP proxy server configuration
-         */
-        private HttpHost proxy;
-        /**
-         * Content-Type header value can be used to specify JSON or XML message
-         * format, defaults to application/json;charset=utf-8
-         */
-        private String contentType = "application/json;charset=utf-8";
+        private Olingo2ApiName apiName;
         /**
          * HTTP connection creation timeout in milliseconds, defaults to 30,000
          * (30 seconds)
          */
         private Integer connectTimeout = 30000;
         /**
-         * What kind of operation to perform
+         * Content-Type header value can be used to specify JSON or XML message
+         * format, defaults to application/json;charset=utf-8
          */
-        private Olingo2ApiName apiName;
-        /**
-         * HTTP request timeout in milliseconds, defaults to 30,000 (30 seconds)
-         */
-        private Integer socketTimeout = 30000;
+        private String contentType = "application/json;charset=utf-8";
         /**
          * Set this to true to filter out results that have already been
          * communicated by this component.
          */
         private Boolean filterAlreadySeen = false;
+        /**
+         * Custom HTTP async client builder for more complex HTTP client
+         * configuration, overrides connectionTimeout, socketTimeout, proxy and
+         * sslContext. Note that a socketTimeout MUST be specified in the
+         * builder, otherwise OData requests could block indefinitely
+         */
+        private HttpAsyncClientBuilder httpAsyncClientBuilder;
         /**
          * Custom HTTP client builder for more complex HTTP client
          * configuration, overrides connectionTimeout, socketTimeout, proxy and
@@ -159,6 +153,28 @@ public class Olingo2ComponentConfiguration
          * builder, otherwise OData requests could block indefinitely
          */
         private HttpClientBuilder httpClientBuilder;
+        /**
+         * Custom HTTP headers to inject into every request, this could include
+         * OAuth tokens, etc.
+         */
+        private Map httpHeaders;
+        /**
+         * What sub operation to use for the selected operation
+         */
+        private String methodName;
+        /**
+         * HTTP proxy server configuration
+         */
+        private HttpHost proxy;
+        /**
+         * Target OData service base URI, e.g.
+         * http://services.odata.org/OData/OData.svc
+         */
+        private String serviceUri;
+        /**
+         * HTTP request timeout in milliseconds, defaults to 30,000 (30 seconds)
+         */
+        private Integer socketTimeout = 30000;
         /**
          * For endpoints that return an array or collection, a consumer endpoint
          * will map every element to distinct messages, unless splitResult is
@@ -169,45 +185,13 @@ public class Olingo2ComponentConfiguration
          * To configure security using SSLContextParameters
          */
         private SSLContextParameters sslContextParameters;
-        /**
-         * Target OData service base URI, e.g.
-         * http://services.odata.org/OData/OData.svc
-         */
-        private String serviceUri;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
-        /**
-         * Custom HTTP async client builder for more complex HTTP client
-         * configuration, overrides connectionTimeout, socketTimeout, proxy and
-         * sslContext. Note that a socketTimeout MUST be specified in the
-         * builder, otherwise OData requests could block indefinitely
-         */
-        private HttpAsyncClientBuilder httpAsyncClientBuilder;
 
-        public Map getHttpHeaders() {
-            return httpHeaders;
+        public Olingo2ApiName getApiName() {
+            return apiName;
         }
 
-        public void setHttpHeaders(Map httpHeaders) {
-            this.httpHeaders = httpHeaders;
-        }
-
-        public HttpHost getProxy() {
-            return proxy;
-        }
-
-        public void setProxy(HttpHost proxy) {
-            this.proxy = proxy;
-        }
-
-        public String getContentType() {
-            return contentType;
-        }
-
-        public void setContentType(String contentType) {
-            this.contentType = contentType;
+        public void setApiName(Olingo2ApiName apiName) {
+            this.apiName = apiName;
         }
 
         public Integer getConnectTimeout() {
@@ -218,20 +202,12 @@ public class Olingo2ComponentConfiguration
             this.connectTimeout = connectTimeout;
         }
 
-        public Olingo2ApiName getApiName() {
-            return apiName;
+        public String getContentType() {
+            return contentType;
         }
 
-        public void setApiName(Olingo2ApiName apiName) {
-            this.apiName = apiName;
-        }
-
-        public Integer getSocketTimeout() {
-            return socketTimeout;
-        }
-
-        public void setSocketTimeout(Integer socketTimeout) {
-            this.socketTimeout = socketTimeout;
+        public void setContentType(String contentType) {
+            this.contentType = contentType;
         }
 
         public Boolean getFilterAlreadySeen() {
@@ -242,12 +218,61 @@ public class Olingo2ComponentConfiguration
             this.filterAlreadySeen = filterAlreadySeen;
         }
 
+        public HttpAsyncClientBuilder getHttpAsyncClientBuilder() {
+            return httpAsyncClientBuilder;
+        }
+
+        public void setHttpAsyncClientBuilder(
+                HttpAsyncClientBuilder httpAsyncClientBuilder) {
+            this.httpAsyncClientBuilder = httpAsyncClientBuilder;
+        }
+
         public HttpClientBuilder getHttpClientBuilder() {
             return httpClientBuilder;
         }
 
         public void setHttpClientBuilder(HttpClientBuilder httpClientBuilder) {
             this.httpClientBuilder = httpClientBuilder;
+        }
+
+        public Map getHttpHeaders() {
+            return httpHeaders;
+        }
+
+        public void setHttpHeaders(Map httpHeaders) {
+            this.httpHeaders = httpHeaders;
+        }
+
+        public String getMethodName() {
+            return methodName;
+        }
+
+        public void setMethodName(String methodName) {
+            this.methodName = methodName;
+        }
+
+        public HttpHost getProxy() {
+            return proxy;
+        }
+
+        public void setProxy(HttpHost proxy) {
+            this.proxy = proxy;
+        }
+
+        public String getServiceUri() {
+            return serviceUri;
+        }
+
+        public void setServiceUri(String serviceUri) {
+            this.serviceUri = serviceUri;
+        }
+
+        public Integer getSocketTimeout() {
+            return socketTimeout;
+        }
+
+        public void setSocketTimeout(Integer socketTimeout) {
+            this.socketTimeout = socketTimeout;
         }
 
         public Boolean getSplitResult() {
@@ -265,31 +290,6 @@ public class Olingo2ComponentConfiguration
         public void setSslContextParameters(
                 SSLContextParameters sslContextParameters) {
             this.sslContextParameters = sslContextParameters;
-        }
-
-        public String getServiceUri() {
-            return serviceUri;
-        }
-
-        public void setServiceUri(String serviceUri) {
-            this.serviceUri = serviceUri;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
-        }
-
-        public HttpAsyncClientBuilder getHttpAsyncClientBuilder() {
-            return httpAsyncClientBuilder;
-        }
-
-        public void setHttpAsyncClientBuilder(
-                HttpAsyncClientBuilder httpAsyncClientBuilder) {
-            this.httpAsyncClientBuilder = httpAsyncClientBuilder;
         }
     }
 }

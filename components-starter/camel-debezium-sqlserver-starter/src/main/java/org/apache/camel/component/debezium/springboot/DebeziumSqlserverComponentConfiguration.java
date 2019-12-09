@@ -104,15 +104,85 @@ public class DebeziumSqlserverComponentConfiguration
     public static class SqlServerConnectorEmbeddedDebeziumConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.debezium.configuration.SqlServerConnectorEmbeddedDebeziumConfiguration.class;
         /**
+         * Description is not available here, please check Debezium website for
+         * corresponding key 'column.blacklist' description.
+         */
+        private String columnBlacklist;
+        /**
+         * The name of the database the connector should be monitoring. When
+         * working with a multi-tenant set-up, must be set to the CDB name.
+         */
+        private String databaseDbname;
+        /**
+         * The name of the DatabaseHistory class that should be used to store
+         * and recover database schema changes. The configuration properties for
+         * the history are prefixed with the 'database.history.' string.
+         */
+        private String databaseHistory = "io.debezium.relational.history.FileDatabaseHistory";
+        /**
          * The path to the file that will be used to record the database history
          */
         private String databaseHistoryFileFilename;
         /**
-         * Maximum size of the queue for change events read from the database
-         * log but not yet recorded or forwarded. Defaults to 8192, and should
-         * always be larger than the maximum batch size.
+         * A list of host/port pairs that the connector will use for
+         * establishing the initial connection to the Kafka cluster for
+         * retrieving database schema history previously stored by the
+         * connector. This should point to the same Kafka cluster used by the
+         * Kafka Connect process.
          */
-        private Integer maxQueueSize = 8192;
+        private String databaseHistoryKafkaBootstrapServers;
+        /**
+         * The number of attempts in a row that no data are returned from Kafka
+         * before recover completes. The maximum amount of time to wait after
+         * receiving no data is (recovery.attempts) x
+         * (recovery.poll.interval.ms).
+         */
+        private Integer databaseHistoryKafkaRecoveryAttempts = 100;
+        /**
+         * The number of milliseconds to wait while polling for persisted data
+         * during recovery.
+         */
+        private Integer databaseHistoryKafkaRecoveryPollIntervalMs = 100;
+        /**
+         * The name of the topic for the database schema history
+         */
+        private String databaseHistoryKafkaTopic;
+        /**
+         * Resolvable hostname or IP address of the SQL Server database server.
+         */
+        private String databaseHostname;
+        /**
+         * Password of the SQL Server database user to be used when connecting
+         * to the database.
+         */
+        private String databasePassword;
+        /**
+         * Port of the SQL Server database server.
+         */
+        private Integer databasePort = 1433;
+        /**
+         * Unique name that identifies the database server and all recorded
+         * offsets, and that is used as a prefix for all schemas and topics.
+         * Each distinct installation should have a separate namespace and be
+         * monitored by at most one Debezium connector.
+         */
+        private String databaseServerName;
+        /**
+         * Name of the SQL Server database user to be used when connecting to
+         * the database.
+         */
+        private String databaseUser;
+        /**
+         * Specify how DECIMAL and NUMERIC columns should be represented in
+         * change events, including:'precise' (the default) uses
+         * java.math.BigDecimal to represent values, which are encoded in the
+         * change events using a binary representation and Kafka Connect's
+         * 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to
+         * represent values; 'double' represents values using Java's 'double',
+         * which may not offer the precision but will be far easier to use in
+         * consumers.
+         */
+        private String decimalHandlingMode = "precise";
         /**
          * Length of an interval in milli-seconds in in which the connector
          * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
@@ -120,42 +190,20 @@ public class DebeziumSqlserverComponentConfiguration
          */
         private Integer heartbeatIntervalMs = 0;
         /**
-         * The number of milliseconds to delay before a snapshot will begin.
-         */
-        private Long snapshotDelayMs = 0L;
-        /**
-         * The criteria for running a snapshot upon startup of the connector.
-         * Options include: 'initial' (the default) to specify the connector
-         * should run a snapshot only when no offsets are available for the
-         * logical server name; 'initial_schema_only' to specify the connector
-         * should run a snapshot of the schema when no offsets are available for
-         * the logical server name.
-         */
-        private String snapshotMode = "initial";
-        /**
-         * A version of the format of the publicly visible source part in the
-         * message
-         */
-        private String sourceStructVersion = "v2";
-        /**
-         * Maximum size of each batch of source records. Defaults to 2048.
-         */
-        private Integer maxBatchSize = 2048;
-        /**
-         * The maximum number of records that should be loaded into memory while
-         * performing a snapshot
-         */
-        private Integer snapshotFetchSize;
-        /**
          * The prefix that is used to name heartbeat topics.Defaults to
          * __debezium-heartbeat.
          */
         private String heartbeatTopicsPrefix = "__debezium-heartbeat";
         /**
-         * Frequency in milliseconds to wait for new change events to appear
-         * after receiving no events. Defaults to 500ms.
+         * Maximum size of each batch of source records. Defaults to 2048.
          */
-        private Long pollIntervalMs = 500L;
+        private Integer maxBatchSize = 2048;
+        /**
+         * Maximum size of the queue for change events read from the database
+         * log but not yet recorded or forwarded. Defaults to 8192, and should
+         * always be larger than the maximum batch size.
+         */
+        private Integer maxQueueSize = 8192;
         /**
          * A semicolon-separated list of expressions that match fully-qualified
          * tables and column(s) to be used as message key. Each expression must
@@ -169,25 +217,34 @@ public class DebeziumSqlserverComponentConfiguration
          */
         private String messageKeyColumns;
         /**
-         * Description is not available here, please check Debezium website for
-         * corresponding key 'column.blacklist' description.
+         * Frequency in milliseconds to wait for new change events to appear
+         * after receiving no events. Defaults to 500ms.
          */
-        private String columnBlacklist;
+        private Long pollIntervalMs = 500L;
         /**
-         * Description is not available here, please check Debezium website for
-         * corresponding key 'table.blacklist' description.
+         * The number of milliseconds to delay before a snapshot will begin.
          */
-        private String tableBlacklist;
+        private Long snapshotDelayMs = 0L;
         /**
-         * The number of milliseconds to wait while polling for persisted data
-         * during recovery.
+         * The maximum number of records that should be loaded into memory while
+         * performing a snapshot
          */
-        private Integer databaseHistoryKafkaRecoveryPollIntervalMs = 100;
+        private Integer snapshotFetchSize;
         /**
-         * Name of the SQL Server database user to be used when connecting to
-         * the database.
+         * The maximum number of millis to wait for table locks at the beginning
+         * of a snapshot. If locks cannot be acquired in this time frame, the
+         * snapshot will be aborted. Defaults to 10 seconds
          */
-        private String databaseUser;
+        private Long snapshotLockTimeoutMs = 10000L;
+        /**
+         * The criteria for running a snapshot upon startup of the connector.
+         * Options include: 'initial' (the default) to specify the connector
+         * should run a snapshot only when no offsets are available for the
+         * logical server name; 'initial_schema_only' to specify the connector
+         * should run a snapshot of the schema when no offsets are available for
+         * the logical server name.
+         */
+        private String snapshotMode = "initial";
         /**
          * This property contains a comma-separated list of fully-qualified
          * tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on
@@ -204,54 +261,23 @@ public class DebeziumSqlserverComponentConfiguration
          */
         private String snapshotSelectStatementOverrides;
         /**
-         * A list of host/port pairs that the connector will use for
-         * establishing the initial connection to the Kafka cluster for
-         * retrieving database schema history previously stored by the
-         * connector. This should point to the same Kafka cluster used by the
-         * Kafka Connect process.
+         * A version of the format of the publicly visible source part in the
+         * message
          */
-        private String databaseHistoryKafkaBootstrapServers;
+        private String sourceStructVersion = "v2";
         /**
-         * Password of the SQL Server database user to be used when connecting
-         * to the database.
+         * Description is not available here, please check Debezium website for
+         * corresponding key 'table.blacklist' description.
          */
-        private String databasePassword;
-        /**
-         * The name of the DatabaseHistory class that should be used to store
-         * and recover database schema changes. The configuration properties for
-         * the history are prefixed with the 'database.history.' string.
-         */
-        private String databaseHistory = "io.debezium.relational.history.FileDatabaseHistory";
-        /**
-         * The name of the topic for the database schema history
-         */
-        private String databaseHistoryKafkaTopic;
-        /**
-         * The number of attempts in a row that no data are returned from Kafka
-         * before recover completes. The maximum amount of time to wait after
-         * receiving no data is (recovery.attempts) x
-         * (recovery.poll.interval.ms).
-         */
-        private Integer databaseHistoryKafkaRecoveryAttempts = 100;
-        /**
-         * The tables for which changes are to be captured
-         */
-        private String tableWhitelist;
-        /**
-         * Specify how DECIMAL and NUMERIC columns should be represented in
-         * change events, including:'precise' (the default) uses
-         * java.math.BigDecimal to represent values, which are encoded in the
-         * change events using a binary representation and Kafka Connect's
-         * 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to
-         * represent values; 'double' represents values using Java's 'double',
-         * which may not offer the precision but will be far easier to use in
-         * consumers.
-         */
-        private String decimalHandlingMode = "precise";
+        private String tableBlacklist;
         /**
          * Flag specifying whether built-in tables should be ignored.
          */
         private Boolean tableIgnoreBuiltin = true;
+        /**
+         * The tables for which changes are to be captured
+         */
+        private String tableWhitelist;
         /**
          * Time, date, and timestamps can be represented with different kinds of
          * precisions, including:'adaptive' (the default) bases the precision of
@@ -263,65 +289,7 @@ public class DebeziumSqlserverComponentConfiguration
          * precision regardless of the database columns' precision .
          */
         private String timePrecisionMode = "adaptive";
-        /**
-         * Unique name that identifies the database server and all recorded
-         * offsets, and that is used as a prefix for all schemas and topics.
-         * Each distinct installation should have a separate namespace and be
-         * monitored by at most one Debezium connector.
-         */
-        private String databaseServerName;
-        /**
-         * Port of the SQL Server database server.
-         */
-        private Integer databasePort = 1433;
-        /**
-         * Resolvable hostname or IP address of the SQL Server database server.
-         */
-        private String databaseHostname;
-        /**
-         * The maximum number of millis to wait for table locks at the beginning
-         * of a snapshot. If locks cannot be acquired in this time frame, the
-         * snapshot will be aborted. Defaults to 10 seconds
-         */
-        private Long snapshotLockTimeoutMs = 10000L;
-        /**
-         * The name of the database the connector should be monitoring. When
-         * working with a multi-tenant set-up, must be set to the CDB name.
-         */
-        private String databaseDbname;
-        /**
-         * Unique name for the connector. Attempting to register again with the
-         * same name will fail.
-         */
-        private String name;
-        /**
-         * The name of the Java class that is responsible for persistence of
-         * connector offsets.
-         */
-        private String offsetStorage = "org.apache.kafka.connect.storage.FileOffsetBackingStore";
-        /**
-         * Path to file where offsets are to be stored. Required when
-         * offset.storage is set to the FileOffsetBackingStore
-         */
-        private String offsetStorageFileName;
-        /**
-         * Replication factor used when creating the offset storage topic.
-         * Required when offset.storage is set to the KafkaOffsetBackingStore
-         */
-        private Integer offsetStorageReplicationFactor;
         private Class connectorClass;
-        /**
-         * Maximum number of milliseconds to wait for records to flush and
-         * partition offset data to be committed to offset storage before
-         * cancelling the process and restoring the offset data to be committed
-         * in a future attempt. The default is 5 seconds.
-         */
-        private Long offsetCommitTimeoutMs = 5000L;
-        /**
-         * The number of partitions used when creating the offset storage topic.
-         * Required when offset.storage is set to the 'KafkaOffsetBackingStore'.
-         */
-        private Integer offsetStoragePartitions;
         /**
          * The Converter class that should be used to serialize and deserialize
          * key data for offsets. The default is JSON converter.
@@ -333,6 +301,11 @@ public class DebeziumSqlserverComponentConfiguration
          */
         private String internalValueConverter = "org.apache.kafka.connect.json.JsonConverter";
         /**
+         * Unique name for the connector. Attempting to register again with the
+         * same name will fail.
+         */
+        private String name;
+        /**
          * The name of the Java class of the commit policy. It defines when
          * offsets commit has to be triggered based on the number of events
          * processed and the time elapsed since the last commit. This class must
@@ -341,103 +314,41 @@ public class DebeziumSqlserverComponentConfiguration
          */
         private String offsetCommitPolicy = "io.debezium.embedded.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy";
         /**
+         * Maximum number of milliseconds to wait for records to flush and
+         * partition offset data to be committed to offset storage before
+         * cancelling the process and restoring the offset data to be committed
+         * in a future attempt. The default is 5 seconds.
+         */
+        private Long offsetCommitTimeoutMs = 5000L;
+        /**
          * Interval at which to try committing offsets. The default is 1 minute.
          */
         private Long offsetFlushIntervalMs = 60000L;
+        /**
+         * The name of the Java class that is responsible for persistence of
+         * connector offsets.
+         */
+        private String offsetStorage = "org.apache.kafka.connect.storage.FileOffsetBackingStore";
+        /**
+         * Path to file where offsets are to be stored. Required when
+         * offset.storage is set to the FileOffsetBackingStore
+         */
+        private String offsetStorageFileName;
+        /**
+         * The number of partitions used when creating the offset storage topic.
+         * Required when offset.storage is set to the 'KafkaOffsetBackingStore'.
+         */
+        private Integer offsetStoragePartitions;
+        /**
+         * Replication factor used when creating the offset storage topic.
+         * Required when offset.storage is set to the KafkaOffsetBackingStore
+         */
+        private Integer offsetStorageReplicationFactor;
         /**
          * The name of the Kafka topic where offsets are to be stored. Required
          * when offset.storage is set to the KafkaOffsetBackingStore.
          */
         private String offsetStorageTopic;
-
-        public String getDatabaseHistoryFileFilename() {
-            return databaseHistoryFileFilename;
-        }
-
-        public void setDatabaseHistoryFileFilename(
-                String databaseHistoryFileFilename) {
-            this.databaseHistoryFileFilename = databaseHistoryFileFilename;
-        }
-
-        public Integer getMaxQueueSize() {
-            return maxQueueSize;
-        }
-
-        public void setMaxQueueSize(Integer maxQueueSize) {
-            this.maxQueueSize = maxQueueSize;
-        }
-
-        public Integer getHeartbeatIntervalMs() {
-            return heartbeatIntervalMs;
-        }
-
-        public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
-            this.heartbeatIntervalMs = heartbeatIntervalMs;
-        }
-
-        public Long getSnapshotDelayMs() {
-            return snapshotDelayMs;
-        }
-
-        public void setSnapshotDelayMs(Long snapshotDelayMs) {
-            this.snapshotDelayMs = snapshotDelayMs;
-        }
-
-        public String getSnapshotMode() {
-            return snapshotMode;
-        }
-
-        public void setSnapshotMode(String snapshotMode) {
-            this.snapshotMode = snapshotMode;
-        }
-
-        public String getSourceStructVersion() {
-            return sourceStructVersion;
-        }
-
-        public void setSourceStructVersion(String sourceStructVersion) {
-            this.sourceStructVersion = sourceStructVersion;
-        }
-
-        public Integer getMaxBatchSize() {
-            return maxBatchSize;
-        }
-
-        public void setMaxBatchSize(Integer maxBatchSize) {
-            this.maxBatchSize = maxBatchSize;
-        }
-
-        public Integer getSnapshotFetchSize() {
-            return snapshotFetchSize;
-        }
-
-        public void setSnapshotFetchSize(Integer snapshotFetchSize) {
-            this.snapshotFetchSize = snapshotFetchSize;
-        }
-
-        public String getHeartbeatTopicsPrefix() {
-            return heartbeatTopicsPrefix;
-        }
-
-        public void setHeartbeatTopicsPrefix(String heartbeatTopicsPrefix) {
-            this.heartbeatTopicsPrefix = heartbeatTopicsPrefix;
-        }
-
-        public Long getPollIntervalMs() {
-            return pollIntervalMs;
-        }
-
-        public void setPollIntervalMs(Long pollIntervalMs) {
-            this.pollIntervalMs = pollIntervalMs;
-        }
-
-        public String getMessageKeyColumns() {
-            return messageKeyColumns;
-        }
-
-        public void setMessageKeyColumns(String messageKeyColumns) {
-            this.messageKeyColumns = messageKeyColumns;
-        }
 
         public String getColumnBlacklist() {
             return columnBlacklist;
@@ -447,38 +358,29 @@ public class DebeziumSqlserverComponentConfiguration
             this.columnBlacklist = columnBlacklist;
         }
 
-        public String getTableBlacklist() {
-            return tableBlacklist;
+        public String getDatabaseDbname() {
+            return databaseDbname;
         }
 
-        public void setTableBlacklist(String tableBlacklist) {
-            this.tableBlacklist = tableBlacklist;
+        public void setDatabaseDbname(String databaseDbname) {
+            this.databaseDbname = databaseDbname;
         }
 
-        public Integer getDatabaseHistoryKafkaRecoveryPollIntervalMs() {
-            return databaseHistoryKafkaRecoveryPollIntervalMs;
+        public String getDatabaseHistory() {
+            return databaseHistory;
         }
 
-        public void setDatabaseHistoryKafkaRecoveryPollIntervalMs(
-                Integer databaseHistoryKafkaRecoveryPollIntervalMs) {
-            this.databaseHistoryKafkaRecoveryPollIntervalMs = databaseHistoryKafkaRecoveryPollIntervalMs;
+        public void setDatabaseHistory(String databaseHistory) {
+            this.databaseHistory = databaseHistory;
         }
 
-        public String getDatabaseUser() {
-            return databaseUser;
+        public String getDatabaseHistoryFileFilename() {
+            return databaseHistoryFileFilename;
         }
 
-        public void setDatabaseUser(String databaseUser) {
-            this.databaseUser = databaseUser;
-        }
-
-        public String getSnapshotSelectStatementOverrides() {
-            return snapshotSelectStatementOverrides;
-        }
-
-        public void setSnapshotSelectStatementOverrides(
-                String snapshotSelectStatementOverrides) {
-            this.snapshotSelectStatementOverrides = snapshotSelectStatementOverrides;
+        public void setDatabaseHistoryFileFilename(
+                String databaseHistoryFileFilename) {
+            this.databaseHistoryFileFilename = databaseHistoryFileFilename;
         }
 
         public String getDatabaseHistoryKafkaBootstrapServers() {
@@ -490,20 +392,22 @@ public class DebeziumSqlserverComponentConfiguration
             this.databaseHistoryKafkaBootstrapServers = databaseHistoryKafkaBootstrapServers;
         }
 
-        public String getDatabasePassword() {
-            return databasePassword;
+        public Integer getDatabaseHistoryKafkaRecoveryAttempts() {
+            return databaseHistoryKafkaRecoveryAttempts;
         }
 
-        public void setDatabasePassword(String databasePassword) {
-            this.databasePassword = databasePassword;
+        public void setDatabaseHistoryKafkaRecoveryAttempts(
+                Integer databaseHistoryKafkaRecoveryAttempts) {
+            this.databaseHistoryKafkaRecoveryAttempts = databaseHistoryKafkaRecoveryAttempts;
         }
 
-        public String getDatabaseHistory() {
-            return databaseHistory;
+        public Integer getDatabaseHistoryKafkaRecoveryPollIntervalMs() {
+            return databaseHistoryKafkaRecoveryPollIntervalMs;
         }
 
-        public void setDatabaseHistory(String databaseHistory) {
-            this.databaseHistory = databaseHistory;
+        public void setDatabaseHistoryKafkaRecoveryPollIntervalMs(
+                Integer databaseHistoryKafkaRecoveryPollIntervalMs) {
+            this.databaseHistoryKafkaRecoveryPollIntervalMs = databaseHistoryKafkaRecoveryPollIntervalMs;
         }
 
         public String getDatabaseHistoryKafkaTopic() {
@@ -515,53 +419,20 @@ public class DebeziumSqlserverComponentConfiguration
             this.databaseHistoryKafkaTopic = databaseHistoryKafkaTopic;
         }
 
-        public Integer getDatabaseHistoryKafkaRecoveryAttempts() {
-            return databaseHistoryKafkaRecoveryAttempts;
+        public String getDatabaseHostname() {
+            return databaseHostname;
         }
 
-        public void setDatabaseHistoryKafkaRecoveryAttempts(
-                Integer databaseHistoryKafkaRecoveryAttempts) {
-            this.databaseHistoryKafkaRecoveryAttempts = databaseHistoryKafkaRecoveryAttempts;
+        public void setDatabaseHostname(String databaseHostname) {
+            this.databaseHostname = databaseHostname;
         }
 
-        public String getTableWhitelist() {
-            return tableWhitelist;
+        public String getDatabasePassword() {
+            return databasePassword;
         }
 
-        public void setTableWhitelist(String tableWhitelist) {
-            this.tableWhitelist = tableWhitelist;
-        }
-
-        public String getDecimalHandlingMode() {
-            return decimalHandlingMode;
-        }
-
-        public void setDecimalHandlingMode(String decimalHandlingMode) {
-            this.decimalHandlingMode = decimalHandlingMode;
-        }
-
-        public Boolean getTableIgnoreBuiltin() {
-            return tableIgnoreBuiltin;
-        }
-
-        public void setTableIgnoreBuiltin(Boolean tableIgnoreBuiltin) {
-            this.tableIgnoreBuiltin = tableIgnoreBuiltin;
-        }
-
-        public String getTimePrecisionMode() {
-            return timePrecisionMode;
-        }
-
-        public void setTimePrecisionMode(String timePrecisionMode) {
-            this.timePrecisionMode = timePrecisionMode;
-        }
-
-        public String getDatabaseServerName() {
-            return databaseServerName;
-        }
-
-        public void setDatabaseServerName(String databaseServerName) {
-            this.databaseServerName = databaseServerName;
+        public void setDatabasePassword(String databasePassword) {
+            this.databasePassword = databasePassword;
         }
 
         public Integer getDatabasePort() {
@@ -572,12 +443,92 @@ public class DebeziumSqlserverComponentConfiguration
             this.databasePort = databasePort;
         }
 
-        public String getDatabaseHostname() {
-            return databaseHostname;
+        public String getDatabaseServerName() {
+            return databaseServerName;
         }
 
-        public void setDatabaseHostname(String databaseHostname) {
-            this.databaseHostname = databaseHostname;
+        public void setDatabaseServerName(String databaseServerName) {
+            this.databaseServerName = databaseServerName;
+        }
+
+        public String getDatabaseUser() {
+            return databaseUser;
+        }
+
+        public void setDatabaseUser(String databaseUser) {
+            this.databaseUser = databaseUser;
+        }
+
+        public String getDecimalHandlingMode() {
+            return decimalHandlingMode;
+        }
+
+        public void setDecimalHandlingMode(String decimalHandlingMode) {
+            this.decimalHandlingMode = decimalHandlingMode;
+        }
+
+        public Integer getHeartbeatIntervalMs() {
+            return heartbeatIntervalMs;
+        }
+
+        public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
+            this.heartbeatIntervalMs = heartbeatIntervalMs;
+        }
+
+        public String getHeartbeatTopicsPrefix() {
+            return heartbeatTopicsPrefix;
+        }
+
+        public void setHeartbeatTopicsPrefix(String heartbeatTopicsPrefix) {
+            this.heartbeatTopicsPrefix = heartbeatTopicsPrefix;
+        }
+
+        public Integer getMaxBatchSize() {
+            return maxBatchSize;
+        }
+
+        public void setMaxBatchSize(Integer maxBatchSize) {
+            this.maxBatchSize = maxBatchSize;
+        }
+
+        public Integer getMaxQueueSize() {
+            return maxQueueSize;
+        }
+
+        public void setMaxQueueSize(Integer maxQueueSize) {
+            this.maxQueueSize = maxQueueSize;
+        }
+
+        public String getMessageKeyColumns() {
+            return messageKeyColumns;
+        }
+
+        public void setMessageKeyColumns(String messageKeyColumns) {
+            this.messageKeyColumns = messageKeyColumns;
+        }
+
+        public Long getPollIntervalMs() {
+            return pollIntervalMs;
+        }
+
+        public void setPollIntervalMs(Long pollIntervalMs) {
+            this.pollIntervalMs = pollIntervalMs;
+        }
+
+        public Long getSnapshotDelayMs() {
+            return snapshotDelayMs;
+        }
+
+        public void setSnapshotDelayMs(Long snapshotDelayMs) {
+            this.snapshotDelayMs = snapshotDelayMs;
+        }
+
+        public Integer getSnapshotFetchSize() {
+            return snapshotFetchSize;
+        }
+
+        public void setSnapshotFetchSize(Integer snapshotFetchSize) {
+            this.snapshotFetchSize = snapshotFetchSize;
         }
 
         public Long getSnapshotLockTimeoutMs() {
@@ -588,45 +539,61 @@ public class DebeziumSqlserverComponentConfiguration
             this.snapshotLockTimeoutMs = snapshotLockTimeoutMs;
         }
 
-        public String getDatabaseDbname() {
-            return databaseDbname;
+        public String getSnapshotMode() {
+            return snapshotMode;
         }
 
-        public void setDatabaseDbname(String databaseDbname) {
-            this.databaseDbname = databaseDbname;
+        public void setSnapshotMode(String snapshotMode) {
+            this.snapshotMode = snapshotMode;
         }
 
-        public String getName() {
-            return name;
+        public String getSnapshotSelectStatementOverrides() {
+            return snapshotSelectStatementOverrides;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setSnapshotSelectStatementOverrides(
+                String snapshotSelectStatementOverrides) {
+            this.snapshotSelectStatementOverrides = snapshotSelectStatementOverrides;
         }
 
-        public String getOffsetStorage() {
-            return offsetStorage;
+        public String getSourceStructVersion() {
+            return sourceStructVersion;
         }
 
-        public void setOffsetStorage(String offsetStorage) {
-            this.offsetStorage = offsetStorage;
+        public void setSourceStructVersion(String sourceStructVersion) {
+            this.sourceStructVersion = sourceStructVersion;
         }
 
-        public String getOffsetStorageFileName() {
-            return offsetStorageFileName;
+        public String getTableBlacklist() {
+            return tableBlacklist;
         }
 
-        public void setOffsetStorageFileName(String offsetStorageFileName) {
-            this.offsetStorageFileName = offsetStorageFileName;
+        public void setTableBlacklist(String tableBlacklist) {
+            this.tableBlacklist = tableBlacklist;
         }
 
-        public Integer getOffsetStorageReplicationFactor() {
-            return offsetStorageReplicationFactor;
+        public Boolean getTableIgnoreBuiltin() {
+            return tableIgnoreBuiltin;
         }
 
-        public void setOffsetStorageReplicationFactor(
-                Integer offsetStorageReplicationFactor) {
-            this.offsetStorageReplicationFactor = offsetStorageReplicationFactor;
+        public void setTableIgnoreBuiltin(Boolean tableIgnoreBuiltin) {
+            this.tableIgnoreBuiltin = tableIgnoreBuiltin;
+        }
+
+        public String getTableWhitelist() {
+            return tableWhitelist;
+        }
+
+        public void setTableWhitelist(String tableWhitelist) {
+            this.tableWhitelist = tableWhitelist;
+        }
+
+        public String getTimePrecisionMode() {
+            return timePrecisionMode;
+        }
+
+        public void setTimePrecisionMode(String timePrecisionMode) {
+            this.timePrecisionMode = timePrecisionMode;
         }
 
         public Class getConnectorClass() {
@@ -635,22 +602,6 @@ public class DebeziumSqlserverComponentConfiguration
 
         public void setConnectorClass(Class connectorClass) {
             this.connectorClass = connectorClass;
-        }
-
-        public Long getOffsetCommitTimeoutMs() {
-            return offsetCommitTimeoutMs;
-        }
-
-        public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
-            this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
-        }
-
-        public Integer getOffsetStoragePartitions() {
-            return offsetStoragePartitions;
-        }
-
-        public void setOffsetStoragePartitions(Integer offsetStoragePartitions) {
-            this.offsetStoragePartitions = offsetStoragePartitions;
         }
 
         public String getInternalKeyConverter() {
@@ -669,6 +620,14 @@ public class DebeziumSqlserverComponentConfiguration
             this.internalValueConverter = internalValueConverter;
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
         public String getOffsetCommitPolicy() {
             return offsetCommitPolicy;
         }
@@ -677,12 +636,53 @@ public class DebeziumSqlserverComponentConfiguration
             this.offsetCommitPolicy = offsetCommitPolicy;
         }
 
+        public Long getOffsetCommitTimeoutMs() {
+            return offsetCommitTimeoutMs;
+        }
+
+        public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
+            this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
+        }
+
         public Long getOffsetFlushIntervalMs() {
             return offsetFlushIntervalMs;
         }
 
         public void setOffsetFlushIntervalMs(Long offsetFlushIntervalMs) {
             this.offsetFlushIntervalMs = offsetFlushIntervalMs;
+        }
+
+        public String getOffsetStorage() {
+            return offsetStorage;
+        }
+
+        public void setOffsetStorage(String offsetStorage) {
+            this.offsetStorage = offsetStorage;
+        }
+
+        public String getOffsetStorageFileName() {
+            return offsetStorageFileName;
+        }
+
+        public void setOffsetStorageFileName(String offsetStorageFileName) {
+            this.offsetStorageFileName = offsetStorageFileName;
+        }
+
+        public Integer getOffsetStoragePartitions() {
+            return offsetStoragePartitions;
+        }
+
+        public void setOffsetStoragePartitions(Integer offsetStoragePartitions) {
+            this.offsetStoragePartitions = offsetStoragePartitions;
+        }
+
+        public Integer getOffsetStorageReplicationFactor() {
+            return offsetStorageReplicationFactor;
+        }
+
+        public void setOffsetStorageReplicationFactor(
+                Integer offsetStorageReplicationFactor) {
+            this.offsetStorageReplicationFactor = offsetStorageReplicationFactor;
         }
 
         public String getOffsetStorageTopic() {

@@ -115,56 +115,48 @@ public class GoogleMailStreamComponentConfiguration
     public static class GoogleMailStreamConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.google.mail.stream.GoogleMailStreamConfiguration.class;
         /**
-         * Specifies an index for the endpoint
-         */
-        private String index;
-        /**
          * OAuth 2 access token. This typically expires after an hour so
          * refreshToken is recommended for long term usage.
          */
         private String accessToken;
+        /**
+         * Google mail application name. Example would be camel-google-mail/1.0
+         */
+        private String applicationName;
+        /**
+         * Client ID of the mail application
+         */
+        private String clientId;
+        /**
+         * Client secret of the mail application
+         */
+        private String clientSecret;
+        /**
+         * Specifies an index for the endpoint
+         */
+        private String index;
+        /**
+         * Comma separated list of labels to take into account
+         */
+        private String labels;
+        /**
+         * Mark the message as read once it has been consumed
+         */
+        private Boolean markAsRead = false;
+        /**
+         * Max results to be returned
+         */
+        private Long maxResults = 10L;
+        /**
+         * The query to execute on gmail box
+         */
+        private String query = "is:unread";
         /**
          * OAuth 2 refresh token. Using this, the Google Calendar component can
          * obtain a new accessToken whenever the current one expires - a
          * necessity if the application is long-lived.
          */
         private String refreshToken;
-        /**
-         * The query to execute on gmail box
-         */
-        private String query = "is:unread";
-        /**
-         * Google mail application name. Example would be camel-google-mail/1.0
-         */
-        private String applicationName;
-        /**
-         * Max results to be returned
-         */
-        private Long maxResults = 10L;
-        /**
-         * Client ID of the mail application
-         */
-        private String clientId;
-        /**
-         * Comma separated list of labels to take into account
-         */
-        private String labels;
-        /**
-         * Client secret of the mail application
-         */
-        private String clientSecret;
-        /**
-         * Mark the message as read once it has been consumed
-         */
-        private Boolean markAsRead = false;
-
-        public String getIndex() {
-            return index;
-        }
-
-        public void setIndex(String index) {
-            this.index = index;
-        }
 
         public String getAccessToken() {
             return accessToken;
@@ -172,22 +164,6 @@ public class GoogleMailStreamComponentConfiguration
 
         public void setAccessToken(String accessToken) {
             this.accessToken = accessToken;
-        }
-
-        public String getRefreshToken() {
-            return refreshToken;
-        }
-
-        public void setRefreshToken(String refreshToken) {
-            this.refreshToken = refreshToken;
-        }
-
-        public String getQuery() {
-            return query;
-        }
-
-        public void setQuery(String query) {
-            this.query = query;
         }
 
         public String getApplicationName() {
@@ -198,28 +174,12 @@ public class GoogleMailStreamComponentConfiguration
             this.applicationName = applicationName;
         }
 
-        public Long getMaxResults() {
-            return maxResults;
-        }
-
-        public void setMaxResults(Long maxResults) {
-            this.maxResults = maxResults;
-        }
-
         public String getClientId() {
             return clientId;
         }
 
         public void setClientId(String clientId) {
             this.clientId = clientId;
-        }
-
-        public String getLabels() {
-            return labels;
-        }
-
-        public void setLabels(String labels) {
-            this.labels = labels;
         }
 
         public String getClientSecret() {
@@ -230,12 +190,52 @@ public class GoogleMailStreamComponentConfiguration
             this.clientSecret = clientSecret;
         }
 
+        public String getIndex() {
+            return index;
+        }
+
+        public void setIndex(String index) {
+            this.index = index;
+        }
+
+        public String getLabels() {
+            return labels;
+        }
+
+        public void setLabels(String labels) {
+            this.labels = labels;
+        }
+
         public Boolean getMarkAsRead() {
             return markAsRead;
         }
 
         public void setMarkAsRead(Boolean markAsRead) {
             this.markAsRead = markAsRead;
+        }
+
+        public Long getMaxResults() {
+            return maxResults;
+        }
+
+        public void setMaxResults(Long maxResults) {
+            this.maxResults = maxResults;
+        }
+
+        public String getQuery() {
+            return query;
+        }
+
+        public void setQuery(String query) {
+            this.query = query;
+        }
+
+        public String getRefreshToken() {
+            return refreshToken;
+        }
+
+        public void setRefreshToken(String refreshToken) {
+            this.refreshToken = refreshToken;
         }
     }
 }

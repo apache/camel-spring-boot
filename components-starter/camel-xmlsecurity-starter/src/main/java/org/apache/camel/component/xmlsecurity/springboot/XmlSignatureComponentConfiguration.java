@@ -128,41 +128,42 @@ public class XmlSignatureComponentConfiguration
     public static class XmlSignerConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.xmlsecurity.processor.XmlSignerConfiguration.class;
         /**
-         * For adding additional References and Objects to the XML signature
-         * which contain additional properties, you can provide a bean which
-         * implements the XmlSignatureProperties interface.
+         * In order to protect the KeyInfo element from tampering you can add a
+         * reference to the signed info element so that it is protected via the
+         * signature value. The default value is true. Only relevant when a
+         * KeyInfo is returned by KeyAccessor. and KeyInfo#getId() is not null.
          */
-        private XmlSignatureProperties properties;
+        private Boolean addKeyInfoReference = true;
         /**
-         * Sets the XPath to find the parent node in the enveloped case. Either
-         * you specify the parent node via this method or the local name and
-         * namespace of the parent with the methods setParentLocalName(String)
-         * and setParentNamespace(String). Default value is null. The value must
-         * be null for enveloping and detached XML signature. If the parameters
-         * parentXpath and parentLocalName are specified in the same
-         * configuration then an exception is thrown.
+         * Canonicalization method used to canonicalize the SignedInfo element
+         * before the digest is calculated. You can use the helper methods
+         * XmlSignatureHelper.getCanonicalizationMethod(String algorithm) or
+         * getCanonicalizationMethod(String algorithm, List
+         * inclusiveNamespacePrefixes) to create a canonicalization method.
          */
-        private XPathFilterParameterSpec parentXpath;
+        private AlgorithmMethod canonicalizationMethod;
+        private String canonicalizationMethodName;
         /**
-         * Define the elements which are signed in the detached case via XPATH
-         * expressions to ID attributes (attributes of type ID). For each
-         * element found via the XPATH expression a detached signature is
-         * created whose reference URI contains the corresponding attribute
-         * value (preceded by '#'). The signature becomes the last sibling of
-         * the signed element. Elements with deeper hierarchy level are signed
-         * first. You can also set the XPATH list dynamically via the header
-         * XmlSignatureConstants#HEADER_XPATHS_TO_ID_ATTRIBUTES. The parameter
-         * setParentLocalName(String) or
-         * setParentXpath(XPathFilterParameterSpec) for enveloped signature and
-         * this parameter for detached signature must not be set in the same
-         * configuration.
+         * Sets the content object Id attribute value. By default a UUID is
+         * generated. If you set the null value, then a new UUID will be
+         * generated. Only used in the enveloping case.
          */
-        private List xpathsToIdAttributes;
+        private String contentObjectId;
         /**
-         * Signature algorithm. Default value is
-         * http://www.w3.org/2000/09/xmldsig#rsa-sha1.
+         * Type of the content reference. The default value is null. This value
+         * can be overwritten by the header
+         * XmlSignatureConstants#HEADER_CONTENT_REFERENCE_TYPE.
          */
-        private String signatureAlgorithm = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
+        private String contentReferenceType;
+        /**
+         * Reference URI for the content to be signed. Only used in the
+         * enveloped case. If the reference URI contains an ID attribute value,
+         * then the resource schema URI ( setSchemaResourceUri(String)) must
+         * also be set because the schema validator will then find out which
+         * attributes are ID attributes. Will be ignored in the enveloping or
+         * detached case.
+         */
+        private String contentReferenceUri;
         /**
          * Digest algorithm URI. Optional parameter. This digest algorithm is
          * used for calculating the digest of the input message. If this digest
@@ -172,32 +173,6 @@ public class XmlSignatureComponentConfiguration
          */
         private String digestAlgorithm;
         /**
-         * In order to protect the KeyInfo element from tampering you can add a
-         * reference to the signed info element so that it is protected via the
-         * signature value. The default value is true. Only relevant when a
-         * KeyInfo is returned by KeyAccessor. and KeyInfo#getId() is not null.
-         */
-        private Boolean addKeyInfoReference = true;
-        private String keyAccessorName;
-        /**
-         * Type of the content reference. The default value is null. This value
-         * can be overwritten by the header
-         * XmlSignatureConstants#HEADER_CONTENT_REFERENCE_TYPE.
-         */
-        private String contentReferenceType;
-        /**
-         * Indicator whether the message body contains plain text. The default
-         * value is false, indicating that the message body contains XML. The
-         * value can be overwritten by the header
-         * XmlSignatureConstants#HEADER_MESSAGE_IS_PLAIN_TEXT.
-         */
-        private Boolean plainText = false;
-        /**
-         * Encoding of the plain text. Only relevant if the message body is
-         * plain text (see parameter plainText. Default value is UTF-8.
-         */
-        private String plainTextEncoding = "UTF-8";
-        /**
          * For the signing process, a private key is necessary. You specify a
          * key accessor bean which provides this private key. The key accessor
          * bean must implement the KeyAccessor interface. The package
@@ -206,32 +181,7 @@ public class XmlSignatureComponentConfiguration
          * from a Java keystore.
          */
         private KeyAccessor keyAccessor;
-        /**
-         * Canonicalization method used to canonicalize the SignedInfo element
-         * before the digest is calculated. You can use the helper methods
-         * XmlSignatureHelper.getCanonicalizationMethod(String algorithm) or
-         * getCanonicalizationMethod(String algorithm, List
-         * inclusiveNamespacePrefixes) to create a canonicalization method.
-         */
-        private AlgorithmMethod canonicalizationMethod;
-        /**
-         * Transforms which are executed on the message body before the digest
-         * is calculated. By default, C14n is added and in the case of enveloped
-         * signature (see option parentLocalName) also
-         * http://www.w3.org/2000/09/xmldsig#enveloped-signature is added at
-         * position 0 of the list. Use methods in XmlSignatureHelper to create
-         * the transform methods.
-         */
-        private List transformMethods;
-        /**
-         * Namespace prefix for the XML signature namespace
-         * http://www.w3.org/2000/09/xmldsig#. Default value is ds. If null or
-         * an empty value is set then no prefix is used for the XML signature
-         * namespace. See best practice
-         * http://www.w3.org/TR/xmldsig-bestpractices/#signing-xml-
-         * without-namespaces
-         */
-        private String prefixForXmlSignatureNamespace = "ds";
+        private String keyAccessorName;
         /**
          * Local name of the parent element to which the XML signature element
          * will be added. Only relevant for enveloped XML signature.
@@ -251,15 +201,49 @@ public class XmlSignatureComponentConfiguration
          * will be added.
          */
         private String parentNamespace;
-        private String canonicalizationMethodName;
-        private String transformMethodsName;
+        /**
+         * Sets the XPath to find the parent node in the enveloped case. Either
+         * you specify the parent node via this method or the local name and
+         * namespace of the parent with the methods setParentLocalName(String)
+         * and setParentNamespace(String). Default value is null. The value must
+         * be null for enveloping and detached XML signature. If the parameters
+         * parentXpath and parentLocalName are specified in the same
+         * configuration then an exception is thrown.
+         */
+        private XPathFilterParameterSpec parentXpath;
+        /**
+         * Indicator whether the message body contains plain text. The default
+         * value is false, indicating that the message body contains XML. The
+         * value can be overwritten by the header
+         * XmlSignatureConstants#HEADER_MESSAGE_IS_PLAIN_TEXT.
+         */
+        private Boolean plainText = false;
+        /**
+         * Encoding of the plain text. Only relevant if the message body is
+         * plain text (see parameter plainText. Default value is UTF-8.
+         */
+        private String plainTextEncoding = "UTF-8";
+        /**
+         * Namespace prefix for the XML signature namespace
+         * http://www.w3.org/2000/09/xmldsig#. Default value is ds. If null or
+         * an empty value is set then no prefix is used for the XML signature
+         * namespace. See best practice
+         * http://www.w3.org/TR/xmldsig-bestpractices/#signing-xml-
+         * without-namespaces
+         */
+        private String prefixForXmlSignatureNamespace = "ds";
+        /**
+         * For adding additional References and Objects to the XML signature
+         * which contain additional properties, you can provide a bean which
+         * implements the XmlSignatureProperties interface.
+         */
+        private XmlSignatureProperties properties;
         private String propertiesName;
         /**
-         * Sets the content object Id attribute value. By default a UUID is
-         * generated. If you set the null value, then a new UUID will be
-         * generated. Only used in the enveloping case.
+         * Signature algorithm. Default value is
+         * http://www.w3.org/2000/09/xmldsig#rsa-sha1.
          */
-        private String contentObjectId;
+        private String signatureAlgorithm = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
         /**
          * Sets the signature Id. If this parameter is not set (null value) then
          * a unique ID is generated for the signature ID (default). If this
@@ -268,27 +252,40 @@ public class XmlSignatureComponentConfiguration
          */
         private String signatureId;
         /**
-         * Reference URI for the content to be signed. Only used in the
-         * enveloped case. If the reference URI contains an ID attribute value,
-         * then the resource schema URI ( setSchemaResourceUri(String)) must
-         * also be set because the schema validator will then find out which
-         * attributes are ID attributes. Will be ignored in the enveloping or
-         * detached case.
+         * Transforms which are executed on the message body before the digest
+         * is calculated. By default, C14n is added and in the case of enveloped
+         * signature (see option parentLocalName) also
+         * http://www.w3.org/2000/09/xmldsig#enveloped-signature is added at
+         * position 0 of the list. Use methods in XmlSignatureHelper to create
+         * the transform methods.
          */
-        private String contentReferenceUri;
+        private List transformMethods;
+        private String transformMethodsName;
+        /**
+         * Define the elements which are signed in the detached case via XPATH
+         * expressions to ID attributes (attributes of type ID). For each
+         * element found via the XPATH expression a detached signature is
+         * created whose reference URI contains the corresponding attribute
+         * value (preceded by '#'). The signature becomes the last sibling of
+         * the signed element. Elements with deeper hierarchy level are signed
+         * first. You can also set the XPATH list dynamically via the header
+         * XmlSignatureConstants#HEADER_XPATHS_TO_ID_ATTRIBUTES. The parameter
+         * setParentLocalName(String) or
+         * setParentXpath(XPathFilterParameterSpec) for enveloped signature and
+         * this parameter for detached signature must not be set in the same
+         * configuration.
+         */
+        private List xpathsToIdAttributes;
         /**
          * You can set a base URI which is used in the URI dereferencing.
          * Relative URIs are then concatenated with the base URI.
          */
         private String baseUri;
         /**
-         * If you want to restrict the remote access via reference URIs, you can
-         * set an own dereferencer. Optional parameter. If not set the provider
-         * default dereferencer is used which can resolve URI fragments, HTTP,
-         * file and XPpointer URIs. Attention: The implementation is provider
-         * dependent!
+         * Determines if the XML signature specific headers be cleared after
+         * signing and verification. Defaults to true.
          */
-        private URIDereferencer uriDereferencer;
+        private Boolean clearHeaders = true;
         /**
          * Sets the crypto context properties. See {link
          * XMLCryptoContext#setProperty(String, Object)}. Possible properties
@@ -312,10 +309,10 @@ public class XmlSignatureComponentConfiguration
          */
         private Boolean omitXmlDeclaration = false;
         /**
-         * Determines if the XML signature specific headers be cleared after
-         * signing and verification. Defaults to true.
+         * The character encoding of the resulting signed XML document. If null
+         * then the encoding of the original XML document is used.
          */
-        private Boolean clearHeaders = true;
+        private String outputXmlEncoding;
         /**
          * Classpath to the XML Schema. Must be specified in the detached XML
          * Signature case for determining the ID attributes, might be set in the
@@ -326,50 +323,13 @@ public class XmlSignatureComponentConfiguration
          */
         private String schemaResourceUri;
         /**
-         * The character encoding of the resulting signed XML document. If null
-         * then the encoding of the original XML document is used.
+         * If you want to restrict the remote access via reference URIs, you can
+         * set an own dereferencer. Optional parameter. If not set the provider
+         * default dereferencer is used which can resolve URI fragments, HTTP,
+         * file and XPpointer URIs. Attention: The implementation is provider
+         * dependent!
          */
-        private String outputXmlEncoding;
-
-        public XmlSignatureProperties getProperties() {
-            return properties;
-        }
-
-        public void setProperties(XmlSignatureProperties properties) {
-            this.properties = properties;
-        }
-
-        public XPathFilterParameterSpec getParentXpath() {
-            return parentXpath;
-        }
-
-        public void setParentXpath(XPathFilterParameterSpec parentXpath) {
-            this.parentXpath = parentXpath;
-        }
-
-        public List getXpathsToIdAttributes() {
-            return xpathsToIdAttributes;
-        }
-
-        public void setXpathsToIdAttributes(List xpathsToIdAttributes) {
-            this.xpathsToIdAttributes = xpathsToIdAttributes;
-        }
-
-        public String getSignatureAlgorithm() {
-            return signatureAlgorithm;
-        }
-
-        public void setSignatureAlgorithm(String signatureAlgorithm) {
-            this.signatureAlgorithm = signatureAlgorithm;
-        }
-
-        public String getDigestAlgorithm() {
-            return digestAlgorithm;
-        }
-
-        public void setDigestAlgorithm(String digestAlgorithm) {
-            this.digestAlgorithm = digestAlgorithm;
-        }
+        private URIDereferencer uriDereferencer;
 
         public Boolean getAddKeyInfoReference() {
             return addKeyInfoReference;
@@ -377,46 +337,6 @@ public class XmlSignatureComponentConfiguration
 
         public void setAddKeyInfoReference(Boolean addKeyInfoReference) {
             this.addKeyInfoReference = addKeyInfoReference;
-        }
-
-        public String getKeyAccessorName() {
-            return keyAccessorName;
-        }
-
-        public void setKeyAccessorName(String keyAccessorName) {
-            this.keyAccessorName = keyAccessorName;
-        }
-
-        public String getContentReferenceType() {
-            return contentReferenceType;
-        }
-
-        public void setContentReferenceType(String contentReferenceType) {
-            this.contentReferenceType = contentReferenceType;
-        }
-
-        public Boolean getPlainText() {
-            return plainText;
-        }
-
-        public void setPlainText(Boolean plainText) {
-            this.plainText = plainText;
-        }
-
-        public String getPlainTextEncoding() {
-            return plainTextEncoding;
-        }
-
-        public void setPlainTextEncoding(String plainTextEncoding) {
-            this.plainTextEncoding = plainTextEncoding;
-        }
-
-        public KeyAccessor getKeyAccessor() {
-            return keyAccessor;
-        }
-
-        public void setKeyAccessor(KeyAccessor keyAccessor) {
-            this.keyAccessor = keyAccessor;
         }
 
         public AlgorithmMethod getCanonicalizationMethod() {
@@ -428,21 +348,61 @@ public class XmlSignatureComponentConfiguration
             this.canonicalizationMethod = canonicalizationMethod;
         }
 
-        public List getTransformMethods() {
-            return transformMethods;
+        public String getCanonicalizationMethodName() {
+            return canonicalizationMethodName;
         }
 
-        public void setTransformMethods(List transformMethods) {
-            this.transformMethods = transformMethods;
+        public void setCanonicalizationMethodName(
+                String canonicalizationMethodName) {
+            this.canonicalizationMethodName = canonicalizationMethodName;
         }
 
-        public String getPrefixForXmlSignatureNamespace() {
-            return prefixForXmlSignatureNamespace;
+        public String getContentObjectId() {
+            return contentObjectId;
         }
 
-        public void setPrefixForXmlSignatureNamespace(
-                String prefixForXmlSignatureNamespace) {
-            this.prefixForXmlSignatureNamespace = prefixForXmlSignatureNamespace;
+        public void setContentObjectId(String contentObjectId) {
+            this.contentObjectId = contentObjectId;
+        }
+
+        public String getContentReferenceType() {
+            return contentReferenceType;
+        }
+
+        public void setContentReferenceType(String contentReferenceType) {
+            this.contentReferenceType = contentReferenceType;
+        }
+
+        public String getContentReferenceUri() {
+            return contentReferenceUri;
+        }
+
+        public void setContentReferenceUri(String contentReferenceUri) {
+            this.contentReferenceUri = contentReferenceUri;
+        }
+
+        public String getDigestAlgorithm() {
+            return digestAlgorithm;
+        }
+
+        public void setDigestAlgorithm(String digestAlgorithm) {
+            this.digestAlgorithm = digestAlgorithm;
+        }
+
+        public KeyAccessor getKeyAccessor() {
+            return keyAccessor;
+        }
+
+        public void setKeyAccessor(KeyAccessor keyAccessor) {
+            this.keyAccessor = keyAccessor;
+        }
+
+        public String getKeyAccessorName() {
+            return keyAccessorName;
+        }
+
+        public void setKeyAccessorName(String keyAccessorName) {
+            this.keyAccessorName = keyAccessorName;
         }
 
         public String getParentLocalName() {
@@ -461,21 +421,45 @@ public class XmlSignatureComponentConfiguration
             this.parentNamespace = parentNamespace;
         }
 
-        public String getCanonicalizationMethodName() {
-            return canonicalizationMethodName;
+        public XPathFilterParameterSpec getParentXpath() {
+            return parentXpath;
         }
 
-        public void setCanonicalizationMethodName(
-                String canonicalizationMethodName) {
-            this.canonicalizationMethodName = canonicalizationMethodName;
+        public void setParentXpath(XPathFilterParameterSpec parentXpath) {
+            this.parentXpath = parentXpath;
         }
 
-        public String getTransformMethodsName() {
-            return transformMethodsName;
+        public Boolean getPlainText() {
+            return plainText;
         }
 
-        public void setTransformMethodsName(String transformMethodsName) {
-            this.transformMethodsName = transformMethodsName;
+        public void setPlainText(Boolean plainText) {
+            this.plainText = plainText;
+        }
+
+        public String getPlainTextEncoding() {
+            return plainTextEncoding;
+        }
+
+        public void setPlainTextEncoding(String plainTextEncoding) {
+            this.plainTextEncoding = plainTextEncoding;
+        }
+
+        public String getPrefixForXmlSignatureNamespace() {
+            return prefixForXmlSignatureNamespace;
+        }
+
+        public void setPrefixForXmlSignatureNamespace(
+                String prefixForXmlSignatureNamespace) {
+            this.prefixForXmlSignatureNamespace = prefixForXmlSignatureNamespace;
+        }
+
+        public XmlSignatureProperties getProperties() {
+            return properties;
+        }
+
+        public void setProperties(XmlSignatureProperties properties) {
+            this.properties = properties;
         }
 
         public String getPropertiesName() {
@@ -486,12 +470,12 @@ public class XmlSignatureComponentConfiguration
             this.propertiesName = propertiesName;
         }
 
-        public String getContentObjectId() {
-            return contentObjectId;
+        public String getSignatureAlgorithm() {
+            return signatureAlgorithm;
         }
 
-        public void setContentObjectId(String contentObjectId) {
-            this.contentObjectId = contentObjectId;
+        public void setSignatureAlgorithm(String signatureAlgorithm) {
+            this.signatureAlgorithm = signatureAlgorithm;
         }
 
         public String getSignatureId() {
@@ -502,12 +486,28 @@ public class XmlSignatureComponentConfiguration
             this.signatureId = signatureId;
         }
 
-        public String getContentReferenceUri() {
-            return contentReferenceUri;
+        public List getTransformMethods() {
+            return transformMethods;
         }
 
-        public void setContentReferenceUri(String contentReferenceUri) {
-            this.contentReferenceUri = contentReferenceUri;
+        public void setTransformMethods(List transformMethods) {
+            this.transformMethods = transformMethods;
+        }
+
+        public String getTransformMethodsName() {
+            return transformMethodsName;
+        }
+
+        public void setTransformMethodsName(String transformMethodsName) {
+            this.transformMethodsName = transformMethodsName;
+        }
+
+        public List getXpathsToIdAttributes() {
+            return xpathsToIdAttributes;
+        }
+
+        public void setXpathsToIdAttributes(List xpathsToIdAttributes) {
+            this.xpathsToIdAttributes = xpathsToIdAttributes;
         }
 
         public String getBaseUri() {
@@ -518,12 +518,12 @@ public class XmlSignatureComponentConfiguration
             this.baseUri = baseUri;
         }
 
-        public URIDereferencer getUriDereferencer() {
-            return uriDereferencer;
+        public Boolean getClearHeaders() {
+            return clearHeaders;
         }
 
-        public void setUriDereferencer(URIDereferencer uriDereferencer) {
-            this.uriDereferencer = uriDereferencer;
+        public void setClearHeaders(Boolean clearHeaders) {
+            this.clearHeaders = clearHeaders;
         }
 
         public Map getCryptoContextProperties() {
@@ -550,12 +550,12 @@ public class XmlSignatureComponentConfiguration
             this.omitXmlDeclaration = omitXmlDeclaration;
         }
 
-        public Boolean getClearHeaders() {
-            return clearHeaders;
+        public String getOutputXmlEncoding() {
+            return outputXmlEncoding;
         }
 
-        public void setClearHeaders(Boolean clearHeaders) {
-            this.clearHeaders = clearHeaders;
+        public void setOutputXmlEncoding(String outputXmlEncoding) {
+            this.outputXmlEncoding = outputXmlEncoding;
         }
 
         public String getSchemaResourceUri() {
@@ -566,59 +566,21 @@ public class XmlSignatureComponentConfiguration
             this.schemaResourceUri = schemaResourceUri;
         }
 
-        public String getOutputXmlEncoding() {
-            return outputXmlEncoding;
+        public URIDereferencer getUriDereferencer() {
+            return uriDereferencer;
         }
 
-        public void setOutputXmlEncoding(String outputXmlEncoding) {
-            this.outputXmlEncoding = outputXmlEncoding;
+        public void setUriDereferencer(URIDereferencer uriDereferencer) {
+            this.uriDereferencer = uriDereferencer;
         }
     }
 
     public static class XmlVerifierConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.xmlsecurity.processor.XmlVerifierConfiguration.class;
         /**
-         * This interface allows the application to check the XML signature
-         * before the validation is executed. This step is recommended in
-         * http://www.w3.org/TR/xmldsig-bestpractices/#check-what-is-signed
+         * Provides the key for validating the XML signature.
          */
-        private XmlSignatureChecker xmlSignatureChecker;
-        /**
-         * Bean which maps the XML signature to the output-message after the
-         * validation. How this mapping should be done can be configured by the
-         * options outputNodeSearchType, outputNodeSearch, and
-         * removeSignatureElements. The default implementation offers three
-         * possibilities which are related to the three output node search types
-         * Default, ElementName, and XPath. The default implementation
-         * determines a node which is then serialized and set to the body of the
-         * output message If the search type is ElementName then the output node
-         * (which must be in this case an element) is determined by the local
-         * name and namespace defined in the search value (see option
-         * outputNodeSearch). If the search type is XPath then the output node
-         * is determined by the XPath specified in the search value (in this
-         * case the output node can be of type Element, TextNode or Document).
-         * If the output node search type is Default then the following rules
-         * apply: In the enveloped XML signature case (there is a reference with
-         * URI= and transform
-         * http://www.w3.org/2000/09/xmldsig#enveloped-signature), the incoming
-         * XML document without the Signature element is set to the output
-         * message body. In the non-enveloped XML signature case, the message
-         * body is determined from a referenced Object; this is explained in
-         * more detail in chapter Output Node Determination in Enveloping XML
-         * Signature Case.
-         */
-        private XmlSignature2Message xmlSignature2Message;
-        /**
-         * Handles the different validation failed situations. The default
-         * implementation throws specific exceptions for the different
-         * situations (All exceptions have the package name
-         * org.apache.camel.component.xmlsecurity.api and are a sub-class of
-         * XmlSignatureInvalidException. If the signature value validation
-         * fails, a XmlSignatureInvalidValueException is thrown. If a reference
-         * validation fails, a XmlSignatureInvalidContentHashException is
-         * thrown. For more detailed information, see the JavaDoc.
-         */
-        private ValidationFailedHandler validationFailedHandler;
+        private KeySelector keySelector;
         /**
          * Sets the output node search value for determining the node from the
          * XML signature document which shall be set to the output message body.
@@ -648,24 +610,59 @@ public class XmlSignatureComponentConfiguration
          * Enables secure validation. If true then secure validation is enabled.
          */
         private Boolean secureValidation = true;
+        /**
+         * Handles the different validation failed situations. The default
+         * implementation throws specific exceptions for the different
+         * situations (All exceptions have the package name
+         * org.apache.camel.component.xmlsecurity.api and are a sub-class of
+         * XmlSignatureInvalidException. If the signature value validation
+         * fails, a XmlSignatureInvalidValueException is thrown. If a reference
+         * validation fails, a XmlSignatureInvalidContentHashException is
+         * thrown. For more detailed information, see the JavaDoc.
+         */
+        private ValidationFailedHandler validationFailedHandler;
         private String validationFailedHandlerName;
         /**
-         * Provides the key for validating the XML signature.
+         * Bean which maps the XML signature to the output-message after the
+         * validation. How this mapping should be done can be configured by the
+         * options outputNodeSearchType, outputNodeSearch, and
+         * removeSignatureElements. The default implementation offers three
+         * possibilities which are related to the three output node search types
+         * Default, ElementName, and XPath. The default implementation
+         * determines a node which is then serialized and set to the body of the
+         * output message If the search type is ElementName then the output node
+         * (which must be in this case an element) is determined by the local
+         * name and namespace defined in the search value (see option
+         * outputNodeSearch). If the search type is XPath then the output node
+         * is determined by the XPath specified in the search value (in this
+         * case the output node can be of type Element, TextNode or Document).
+         * If the output node search type is Default then the following rules
+         * apply: In the enveloped XML signature case (there is a reference with
+         * URI= and transform
+         * http://www.w3.org/2000/09/xmldsig#enveloped-signature), the incoming
+         * XML document without the Signature element is set to the output
+         * message body. In the non-enveloped XML signature case, the message
+         * body is determined from a referenced Object; this is explained in
+         * more detail in chapter Output Node Determination in Enveloping XML
+         * Signature Case.
          */
-        private KeySelector keySelector;
+        private XmlSignature2Message xmlSignature2Message;
+        /**
+         * This interface allows the application to check the XML signature
+         * before the validation is executed. This step is recommended in
+         * http://www.w3.org/TR/xmldsig-bestpractices/#check-what-is-signed
+         */
+        private XmlSignatureChecker xmlSignatureChecker;
         /**
          * You can set a base URI which is used in the URI dereferencing.
          * Relative URIs are then concatenated with the base URI.
          */
         private String baseUri;
         /**
-         * If you want to restrict the remote access via reference URIs, you can
-         * set an own dereferencer. Optional parameter. If not set the provider
-         * default dereferencer is used which can resolve URI fragments, HTTP,
-         * file and XPpointer URIs. Attention: The implementation is provider
-         * dependent!
+         * Determines if the XML signature specific headers be cleared after
+         * signing and verification. Defaults to true.
          */
-        private URIDereferencer uriDereferencer;
+        private Boolean clearHeaders = true;
         /**
          * Sets the crypto context properties. See {link
          * XMLCryptoContext#setProperty(String, Object)}. Possible properties
@@ -689,10 +686,10 @@ public class XmlSignatureComponentConfiguration
          */
         private Boolean omitXmlDeclaration = false;
         /**
-         * Determines if the XML signature specific headers be cleared after
-         * signing and verification. Defaults to true.
+         * The character encoding of the resulting signed XML document. If null
+         * then the encoding of the original XML document is used.
          */
-        private Boolean clearHeaders = true;
+        private String outputXmlEncoding;
         /**
          * Classpath to the XML Schema. Must be specified in the detached XML
          * Signature case for determining the ID attributes, might be set in the
@@ -703,36 +700,20 @@ public class XmlSignatureComponentConfiguration
          */
         private String schemaResourceUri;
         /**
-         * The character encoding of the resulting signed XML document. If null
-         * then the encoding of the original XML document is used.
+         * If you want to restrict the remote access via reference URIs, you can
+         * set an own dereferencer. Optional parameter. If not set the provider
+         * default dereferencer is used which can resolve URI fragments, HTTP,
+         * file and XPpointer URIs. Attention: The implementation is provider
+         * dependent!
          */
-        private String outputXmlEncoding;
+        private URIDereferencer uriDereferencer;
 
-        public XmlSignatureChecker getXmlSignatureChecker() {
-            return xmlSignatureChecker;
+        public KeySelector getKeySelector() {
+            return keySelector;
         }
 
-        public void setXmlSignatureChecker(
-                XmlSignatureChecker xmlSignatureChecker) {
-            this.xmlSignatureChecker = xmlSignatureChecker;
-        }
-
-        public XmlSignature2Message getXmlSignature2Message() {
-            return xmlSignature2Message;
-        }
-
-        public void setXmlSignature2Message(
-                XmlSignature2Message xmlSignature2Message) {
-            this.xmlSignature2Message = xmlSignature2Message;
-        }
-
-        public ValidationFailedHandler getValidationFailedHandler() {
-            return validationFailedHandler;
-        }
-
-        public void setValidationFailedHandler(
-                ValidationFailedHandler validationFailedHandler) {
-            this.validationFailedHandler = validationFailedHandler;
+        public void setKeySelector(KeySelector keySelector) {
+            this.keySelector = keySelector;
         }
 
         public Object getOutputNodeSearch() {
@@ -767,6 +748,15 @@ public class XmlSignatureComponentConfiguration
             this.secureValidation = secureValidation;
         }
 
+        public ValidationFailedHandler getValidationFailedHandler() {
+            return validationFailedHandler;
+        }
+
+        public void setValidationFailedHandler(
+                ValidationFailedHandler validationFailedHandler) {
+            this.validationFailedHandler = validationFailedHandler;
+        }
+
         public String getValidationFailedHandlerName() {
             return validationFailedHandlerName;
         }
@@ -776,12 +766,22 @@ public class XmlSignatureComponentConfiguration
             this.validationFailedHandlerName = validationFailedHandlerName;
         }
 
-        public KeySelector getKeySelector() {
-            return keySelector;
+        public XmlSignature2Message getXmlSignature2Message() {
+            return xmlSignature2Message;
         }
 
-        public void setKeySelector(KeySelector keySelector) {
-            this.keySelector = keySelector;
+        public void setXmlSignature2Message(
+                XmlSignature2Message xmlSignature2Message) {
+            this.xmlSignature2Message = xmlSignature2Message;
+        }
+
+        public XmlSignatureChecker getXmlSignatureChecker() {
+            return xmlSignatureChecker;
+        }
+
+        public void setXmlSignatureChecker(
+                XmlSignatureChecker xmlSignatureChecker) {
+            this.xmlSignatureChecker = xmlSignatureChecker;
         }
 
         public String getBaseUri() {
@@ -792,12 +792,12 @@ public class XmlSignatureComponentConfiguration
             this.baseUri = baseUri;
         }
 
-        public URIDereferencer getUriDereferencer() {
-            return uriDereferencer;
+        public Boolean getClearHeaders() {
+            return clearHeaders;
         }
 
-        public void setUriDereferencer(URIDereferencer uriDereferencer) {
-            this.uriDereferencer = uriDereferencer;
+        public void setClearHeaders(Boolean clearHeaders) {
+            this.clearHeaders = clearHeaders;
         }
 
         public Map getCryptoContextProperties() {
@@ -824,12 +824,12 @@ public class XmlSignatureComponentConfiguration
             this.omitXmlDeclaration = omitXmlDeclaration;
         }
 
-        public Boolean getClearHeaders() {
-            return clearHeaders;
+        public String getOutputXmlEncoding() {
+            return outputXmlEncoding;
         }
 
-        public void setClearHeaders(Boolean clearHeaders) {
-            this.clearHeaders = clearHeaders;
+        public void setOutputXmlEncoding(String outputXmlEncoding) {
+            this.outputXmlEncoding = outputXmlEncoding;
         }
 
         public String getSchemaResourceUri() {
@@ -840,12 +840,12 @@ public class XmlSignatureComponentConfiguration
             this.schemaResourceUri = schemaResourceUri;
         }
 
-        public String getOutputXmlEncoding() {
-            return outputXmlEncoding;
+        public URIDereferencer getUriDereferencer() {
+            return uriDereferencer;
         }
 
-        public void setOutputXmlEncoding(String outputXmlEncoding) {
-            this.outputXmlEncoding = outputXmlEncoding;
+        public void setUriDereferencer(URIDereferencer uriDereferencer) {
+            this.uriDereferencer = uriDereferencer;
         }
     }
 }
