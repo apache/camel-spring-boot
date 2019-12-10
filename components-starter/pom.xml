@@ -21,9 +21,9 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
-    <artifactId>spring-boot</artifactId>
+    <artifactId>camel-starter-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <relativePath>..</relativePath>
+    <relativePath>../tooling/camel-starter-parent</relativePath>
   </parent>
   <artifactId>components-starter</artifactId>
   <packaging>pom</packaging>
@@ -100,7 +100,6 @@
       </plugin>
     </plugins>
   </build>
-  <!-- WARNING: do not edit the modules section, it is update automatically by the camel-package plugin -->
   <modules>
     <module>camel-activemq-starter</module>
     <module>camel-ahc-starter</module>

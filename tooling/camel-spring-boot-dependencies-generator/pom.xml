@@ -86,13 +86,13 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>bom-generator-maven-plugin</artifactId>
-                <version>${camel-version}</version>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-spring-boot-generator-maven-plugin</artifactId>
+                <version>${project.version}</version>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>generate</goal>
+                            <goal>generate-bom</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -112,7 +112,6 @@
                             <include>*:*</include>
                         </includes>
                         <excludes>
-
                             <!-- These artifacts should not be included in the final (generated) BOM -->
 
                             <!-- Different versions from the ones provided by spring-boot -->
