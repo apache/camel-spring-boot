@@ -199,7 +199,7 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
 
     protected void writeIfChanged(String content, File file) throws IOException {
         boolean write = true;
-
+        file = file.getCanonicalFile();
         if (file.exists()) {
             try (FileReader fr = new FileReader(file)) {
                 String oldContent = IOUtils.toString(fr);

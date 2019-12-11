@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "spring-boot",
+    "kind": "other",
+    "title": "Spring Boot",
+    "description": "Using Camel with Spring Boot",
+    "deprecated": "false",
+    "firstVersion": "2.15.0",
+    "label": "spring,microservice",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-spring-boot-starter",
+    "version": "1.0.0-SNAPSHOT"
+  }
+}

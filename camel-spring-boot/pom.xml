@@ -165,6 +165,14 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>prepare-components</goal>
+                            <goal>generate-components-list</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                    <execution>
                         <id>readme</id>
                         <goals>
                             <goal>update-spring-boot-auto-configuration-readme</goal>
