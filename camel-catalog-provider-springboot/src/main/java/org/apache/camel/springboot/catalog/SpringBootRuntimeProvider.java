@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.catalog.springboot;
+package org.apache.camel.springboot.catalog;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,14 +31,14 @@ import org.apache.camel.catalog.RuntimeProvider;
  */
 public class SpringBootRuntimeProvider implements RuntimeProvider {
 
-    private static final String COMPONENT_DIR = "org/apache/camel/catalog/springboot/components";
-    private static final String DATAFORMAT_DIR = "org/apache/camel/catalog/springboot/dataformats";
-    private static final String LANGUAGE_DIR = "org/apache/camel/catalog/springboot/languages";
-    private static final String OTHER_DIR = "org/apache/camel/catalog/springboot/others";
-    private static final String COMPONENTS_CATALOG = "org/apache/camel/catalog/springboot/components.properties";
-    private static final String DATA_FORMATS_CATALOG = "org/apache/camel/catalog/springboot/dataformats.properties";
-    private static final String LANGUAGE_CATALOG = "org/apache/camel/catalog/springboot/languages.properties";
-    private static final String OTHER_CATALOG = "org/apache/camel/catalog/springboot/others.properties";
+    private static final String COMPONENT_DIR = "org/apache/camel/springboot/catalog/components";
+    private static final String DATAFORMAT_DIR = "org/apache/camel/springboot/catalog/dataformats";
+    private static final String LANGUAGE_DIR = "org/apache/camel/springboot/catalog/languages";
+    private static final String OTHER_DIR = "org/apache/camel/springboot/catalog/others";
+    private static final String COMPONENTS_CATALOG = "org/apache/camel/springboot/catalog/components.properties";
+    private static final String DATA_FORMATS_CATALOG = "org/apache/camel/springboot/catalog/dataformats.properties";
+    private static final String LANGUAGE_CATALOG = "org/apache/camel/springboot/catalog/languages.properties";
+    private static final String OTHER_CATALOG = "org/apache/camel/springboot/catalog/others.properties";
 
     private CamelCatalog camelCatalog;
 
