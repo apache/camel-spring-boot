@@ -211,11 +211,11 @@ public class ITestConfigBuilder {
         }
 
         if (config.getModulesPath() == null) {
-            config.setModulesPath(propertyOr("modulesPath", "../../components/"));
+            config.setModulesPath(propertyOr("modulesPath", "../components-starter/"));
         }
 
         if (config.getModuleBasePath() == null) {
-            config.setModuleBasePath(config.getModulesPath() + config.getModuleName());
+            config.setModuleBasePath(config.getModulesPath() + config.getModuleName() + "-starter");
         }
 
         if (config.getUnitTestBasePackage() == null) {

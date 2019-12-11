@@ -102,11 +102,11 @@ public final class DependencyResolver {
     }
 
     public static String resolveSpringBootParentProperty(String property) {
-        return resolveProperty(camelRoot("platforms/spring-boot/spring-boot-dm/pom.xml"), property, 0);
+        return resolveProperty(camelRoot("tooling/pom.xml"), property, 0);
     }
 
     public static String resolveCamelParentProperty(String property) {
-        return resolveProperty(camelRoot("parent/pom.xml"), property, 0);
+        return resolveProperty(camelRoot("pom.xml"), property, 0);
     }
 
     public static String resolveCamelProperty(String property) {
