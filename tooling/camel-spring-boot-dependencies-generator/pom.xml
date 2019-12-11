@@ -38,6 +38,11 @@
             <!-- Additional libraries related to Avro (version from Camel) -->
             <dependency>
                 <groupId>org.apache.avro</groupId>
+                <artifactId>avro</artifactId>
+                <version>${avro-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.avro</groupId>
                 <artifactId>avro-mapred</artifactId>
                 <version>${avro-version}</version>
             </dependency>
@@ -45,6 +50,16 @@
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro-mapred</artifactId>
                 <classifier>hadoop2</classifier>
+                <version>${avro-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-protobuf</artifactId>
+                <version>${avro-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-ipc</artifactId>
                 <version>${avro-version}</version>
             </dependency>
 

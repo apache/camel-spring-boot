@@ -129,7 +129,7 @@
 
         <!-- The following dependencies should be aligned with the ones in standard camel parent -->
         <!-- Needed by BOM generator-->
-        <avro-version>1.8.2</avro-version>
+        <avro-version>1.8.1</avro-version>
         <jackson-version>1.9.12</jackson-version>
         <testcontainers-version>1.12.3</testcontainers-version>
 
@@ -177,6 +177,7 @@
         <asciidoctorj-version>2.1.0</asciidoctorj-version>
         <junit-jupiter-version>5.5.2</junit-jupiter-version>
         <freemarker-version>2.3.29</freemarker-version>
+        <openjpa-version>3.1.0</openjpa-version>
 
         <arquillian-container-se-managed-version>1.0.2.Final</arquillian-container-se-managed-version>
         <arquillian-version>1.5.0.Final</arquillian-version>

@@ -35,7 +35,7 @@ public class CamelOlingo4Test extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelOlingo4Test.class))
-                .basePath("../../components/camel-olingo4/camel-olingo4-component")
+//                .basePath("../../components/camel-olingo4/camel-olingo4-component")
 //                .dependency(DependencyResolver.withVersion("javax.ws.rs:javax.ws.rs-api"))
                 .build();
     }
