@@ -39,7 +39,6 @@ public class FooTest {
     ModelCamelContext camelContext;
 
     @Test
-    @Disabled("TODO: fix this test")
     public void shouldSendToFoo() throws Exception {
         // Given
         MockEndpoint mock = camelContext.getEndpoint("mock:foo", MockEndpoint.class);
