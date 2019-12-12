@@ -27,7 +27,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <name>Camel :: Spring Cloud Netflix</name>
+    <name>Camel Spring Boot :: Spring Cloud Netflix</name>
     <artifactId>camel-spring-cloud-netflix</artifactId>
     <description>Camel Cloud integration with Spring Cloud Netflix</description>
 
