@@ -182,7 +182,7 @@
         <junit-jupiter-version>5.5.2</junit-jupiter-version>
         <freemarker-version>2.3.29</freemarker-version>
         <openjpa-version>3.1.0</openjpa-version>
-        <spring-cloud-commons-version>2.1.4.RELEASE</spring-cloud-commons-version>
+        <spring-cloud-commons-version>2.2.0.RELEASE</spring-cloud-commons-version>
         <spring-cloud-consul-version>2.1.4.RELEASE</spring-cloud-consul-version>
         <spring-cloud-netflix-version>2.1.4.RELEASE</spring-cloud-netflix-version>
         <spring-cloud-zookeeper-version>2.1.4.RELEASE</spring-cloud-zookeeper-version>
