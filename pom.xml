@@ -183,7 +183,7 @@
         <freemarker-version>2.3.29</freemarker-version>
         <openjpa-version>3.1.0</openjpa-version>
         <spring-cloud-commons-version>2.2.0.RELEASE</spring-cloud-commons-version>
-        <spring-cloud-netflix-version>2.1.4.RELEASE</spring-cloud-netflix-version>
+        <spring-cloud-netflix-version>2.2.0.RELEASE</spring-cloud-netflix-version>
         <spring-cloud-zookeeper-version>2.1.4.RELEASE</spring-cloud-zookeeper-version>
         <rxjava-version>1.3.8</rxjava-version>
 
