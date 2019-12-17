@@ -525,6 +525,13 @@
 
     <profiles>
         <profile>
+            <id>dev</id>
+            <properties>
+                <camel-version>3.1.0-SNAPSHOT</camel-version>
+            </properties>
+        </profile>
+
+        <profile>
             <id>setup.eclipse</id>
             <!-- set up the eclipse workspace and generate the .classpath and .project
               files for modules -->
