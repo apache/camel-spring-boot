@@ -532,6 +532,21 @@
         </profile>
 
         <profile>
+            <id>fastinstall</id>
+            <activation>
+                <property>
+                    <name>fastinstall</name>
+                </property>
+            </activation>
+            <properties>
+                <maven.test.skip.exec>true</maven.test.skip.exec>
+                <assembly.skipAssembly>true</assembly.skipAssembly>
+                <fastinstall>true</fastinstall>
+                <noassembly>true</noassembly>
+            </properties>
+        </profile>
+
+        <profile>
             <id>setup.eclipse</id>
             <!-- set up the eclipse workspace and generate the .classpath and .project
               files for modules -->
