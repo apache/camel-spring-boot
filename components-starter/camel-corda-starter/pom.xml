@@ -48,10 +48,6 @@
           <groupId>ch.qos.logback</groupId>
           <artifactId>logback-core</artifactId>
         </exclusion>
-        <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-        </exclusion>
       </exclusions>
       <!--END OF GENERATED CODE-->
     </dependency>
