@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws-cw-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AWS CW</name>
+  <name>Camel SB Starters :: AWS CW</name>
   <description>Spring-Boot Starter for A Camel Amazon CW Web Service Component</description>
   <dependencies>
     <dependency>

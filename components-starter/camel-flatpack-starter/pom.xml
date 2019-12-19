@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-flatpack-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: FlatPack</name>
+  <name>Camel SB Starters :: FlatPack</name>
   <description>Spring-Boot Starter for Camel FlatPack support</description>
   <dependencies>
     <dependency>

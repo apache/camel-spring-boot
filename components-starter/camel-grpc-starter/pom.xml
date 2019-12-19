@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-grpc-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: gRPC</name>
+  <name>Camel SB Starters :: gRPC</name>
   <description>Spring-Boot Starter for Camel component for gRPC (Remote Procedure Call) support</description>
   <dependencies>
     <dependency>

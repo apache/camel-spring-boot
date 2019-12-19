@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-ftp-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: FTP</name>
+  <name>Camel SB Starters :: FTP</name>
   <description>Spring-Boot Starter for Camel FTP support</description>
   <dependencies>
     <dependency>

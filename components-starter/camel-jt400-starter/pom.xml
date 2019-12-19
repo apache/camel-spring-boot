@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jt400-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Java Toolbox for AS/400</name>
+  <name>Camel SB Starters :: Java Toolbox for AS/400</name>
   <description>Spring-Boot Starter for Camel AS/400 support</description>
   <dependencies>
     <dependency>

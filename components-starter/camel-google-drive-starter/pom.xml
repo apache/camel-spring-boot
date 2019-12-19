@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-google-drive-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: GoogleDrive</name>
+  <name>Camel SB Starters :: GoogleDrive</name>
   <description>Spring-Boot Starter for Camel Component for GoogleDrive</description>
   <dependencies>
     <dependency>

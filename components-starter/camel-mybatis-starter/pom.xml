@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-mybatis-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: MyBatis</name>
+  <name>Camel SB Starters :: MyBatis</name>
   <description>Spring-Boot Starter for Camel MyBatis support</description>
   <dependencies>
     <dependency>

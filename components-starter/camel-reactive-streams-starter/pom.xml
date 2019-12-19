@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-reactive-streams-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Reactive Streams</name>
+  <name>Camel SB Starters :: Reactive Streams</name>
   <description>Spring-Boot Starter for Camel Reactive Streams Component</description>
   <dependencies>
     <dependency>

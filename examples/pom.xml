@@ -30,7 +30,7 @@
 
     <groupId>org.apache.camel.springboot.example</groupId>
     <artifactId>examples</artifactId>
-    <name>Camel Spring Boot :: Example</name>
+    <name>Camel SB :: Examples</name>
     <description>Camel Examples</description>
     <packaging>pom</packaging>
 

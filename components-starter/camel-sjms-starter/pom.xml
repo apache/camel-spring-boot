@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-sjms-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Simple JMS</name>
+  <name>Camel SB Starters :: Simple JMS</name>
   <description>Spring-Boot Starter for A pure Java JMS Camel Component</description>
   <dependencies>
     <dependency>

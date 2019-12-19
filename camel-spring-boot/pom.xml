@@ -28,7 +28,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <name>Camel Spring Boot :: Spring Boot Component</name>
+    <name>Camel SB :: Spring Boot Component</name>
     <artifactId>camel-spring-boot</artifactId>
     <description>Using Camel with Spring Boot</description>
 

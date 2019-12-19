@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-ognl-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: OGNL</name>
+  <name>Camel SB Starters :: OGNL</name>
   <description>Spring-Boot Starter for Camel OGNL support</description>
   <dependencies>
     <dependency>

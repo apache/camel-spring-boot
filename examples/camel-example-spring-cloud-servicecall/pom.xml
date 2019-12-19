@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-cloud-servicecall</artifactId>
-    <name>Camel Spring Boot :: Example :: Spring Cloud :: ServiceCall</name>
+    <name>Camel SB Examples :: Spring Cloud :: ServiceCall</name>
     <description>An example showing how to work with Camel ServiceCall EIP and Spring Cloud</description>
     <packaging>pom</packaging>
 

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-infinispan-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Infinispan</name>
+  <name>Camel SB Starters :: Infinispan</name>
   <description>Spring-Boot Starter for Camel Infinispan support</description>
   <dependencies>
     <dependency>

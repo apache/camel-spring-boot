@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jooq-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: JOOQ</name>
+  <name>Camel SB Starters :: JOOQ</name>
   <description>Spring-Boot Starter for Camel JOOQ support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jbpm-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: JBPM</name>
+  <name>Camel SB Starters :: JBPM</name>
   <description>Spring-Boot Starter for Camel JBPM support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-reactor-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Reactor</name>
+  <name>Camel SB Starters :: Reactor</name>
   <description>Spring-Boot Starter for Camel Reactor Component</description>
   <dependencies>
     <dependency>

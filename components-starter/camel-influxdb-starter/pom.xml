@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-influxdb-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: InfluxDB</name>
+  <name>Camel SB Starters :: InfluxDB</name>
   <description>Spring-Boot Starter for Camel InfluxDB component</description>
   <dependencies>
     <dependency>

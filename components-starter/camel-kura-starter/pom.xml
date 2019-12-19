@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-kura-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Kura</name>
+  <name>Camel SB Starters :: Kura</name>
   <description>Spring-Boot Starter for Camel Kura support</description>
   <dependencies>
     <dependency>

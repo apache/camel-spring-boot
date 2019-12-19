@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-google-sheets-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: GoogleSheets</name>
+  <name>Camel SB Starters :: GoogleSheets</name>
   <description>Spring-Boot Starter for Camel Component for GoogleSheets</description>
   <dependencies>
     <dependency>

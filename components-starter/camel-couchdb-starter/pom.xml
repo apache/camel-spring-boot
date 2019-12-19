@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-couchdb-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: CouchDB</name>
+  <name>Camel SB Starters :: CouchDB</name>
   <description>Spring-Boot Starter for Camel CouchDB component</description>
   <dependencies>
     <dependency>

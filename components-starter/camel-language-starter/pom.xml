@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-language-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Language</name>
+  <name>Camel SB Starters :: Language</name>
   <description>Spring-Boot Starter for Camel Language component</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-http-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: HTTP</name>
+  <name>Camel SB Starters :: HTTP</name>
   <description>Spring-Boot Starter for Camel HTTP support</description>
   <dependencies>
     <dependency>

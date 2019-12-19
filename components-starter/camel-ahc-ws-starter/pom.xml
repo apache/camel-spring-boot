@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-ahc-ws-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AHC-WS</name>
+  <name>Camel SB Starters :: AHC-WS</name>
   <description>Spring-Boot Starter for Camel Websocket Client support</description>
   <dependencies>
     <dependency>

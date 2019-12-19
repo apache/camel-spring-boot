@@ -29,7 +29,7 @@
 
     <artifactId>camel-example-spring-boot-resilience4j</artifactId>
     <packaging>pom</packaging>
-    <name>Camel Spring Boot :: Example :: Resilience4j</name>
+    <name>Camel SB Examples :: Resilience4j</name>
     <description>An example showing how to use Resilience4j EIP as circuit breaker in Camel routes</description>
 
     <properties>

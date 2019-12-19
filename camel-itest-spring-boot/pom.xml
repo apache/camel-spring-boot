@@ -29,7 +29,7 @@
     </parent>
 
     <artifactId>camel-itest-spring-boot</artifactId>
-    <name>Camel Spring-Boot :: Integration Tests</name>
+    <name>Camel SB :: Integration Tests</name>
     <description>Spring-Boot Camel test</description>
 
     <properties>

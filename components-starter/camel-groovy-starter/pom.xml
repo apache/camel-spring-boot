@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-groovy-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Groovy</name>
+  <name>Camel SB Starters :: Groovy</name>
   <description>Spring-Boot Starter for Camel Groovy support</description>
   <dependencies>
     <dependency>

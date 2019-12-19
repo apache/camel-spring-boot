@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-kafka-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Kafka</name>
+  <name>Camel SB Starters :: Kafka</name>
   <description>Spring-Boot Starter for Camel Kafka support</description>
   <dependencies>
     <dependency>

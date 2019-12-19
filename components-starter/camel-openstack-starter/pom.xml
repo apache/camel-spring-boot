@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-openstack-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: OpenStack</name>
+  <name>Camel SB Starters :: OpenStack</name>
   <description>Spring-Boot Starter for Camel Components</description>
   <dependencies>
     <dependency>

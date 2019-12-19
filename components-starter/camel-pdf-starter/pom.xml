@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-pdf-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: PDF</name>
+  <name>Camel SB Starters :: PDF</name>
   <description>Spring-Boot Starter for Camel PDF support</description>
   <dependencies>
     <dependency>

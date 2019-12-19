@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-zipkin-client</artifactId>
-    <name>Camel Spring Boot :: Example :: Zipkin :: Client</name>
+    <name>Camel SB Examples :: Zipkin :: Client</name>
     <description>An example showing how to trace incoming and outgoing messages from Camel with Zipkin</description>
 
     <!-- import Camel BOM -->

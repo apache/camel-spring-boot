@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jdbc-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: JDBC</name>
+  <name>Camel SB Starters :: JDBC</name>
   <description>Spring-Boot Starter for Camel JDBC support</description>
   <dependencies>
     <dependency>

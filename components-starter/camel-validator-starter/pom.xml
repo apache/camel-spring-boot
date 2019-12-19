@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-validator-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Validator</name>
+  <name>Camel SB Starters :: Validator</name>
   <description>Spring-Boot Starter for Camel Validator component</description>
   <dependencies>
     <dependency>

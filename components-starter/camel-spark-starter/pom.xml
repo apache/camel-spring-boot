@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-spark-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Apache Spark</name>
+  <name>Camel SB Starters :: Apache Spark</name>
   <description>Spring-Boot Starter for Camel Apache Spark Support</description>
   <dependencies>
     <dependency>

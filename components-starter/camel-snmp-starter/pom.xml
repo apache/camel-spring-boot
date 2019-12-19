@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-snmp-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: SNMP</name>
+  <name>Camel SB Starters :: SNMP</name>
   <description>Spring-Boot Starter for Camel SNMP support</description>
   <dependencies>
     <dependency>

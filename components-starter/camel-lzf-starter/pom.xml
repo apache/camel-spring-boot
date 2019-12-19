@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-lzf-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: LZF</name>
+  <name>Camel SB Starters :: LZF</name>
   <description>Spring-Boot Starter for Camel LZF support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-azure-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Azure</name>
+  <name>Camel SB Starters :: Azure</name>
   <description>Spring-Boot Starter for Camel Microsoft Azure Components</description>
   <dependencies>
     <dependency>

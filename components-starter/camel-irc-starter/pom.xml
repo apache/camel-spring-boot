@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-irc-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: IRC</name>
+  <name>Camel SB Starters :: IRC</name>
   <description>Spring-Boot Starter for Camel IRC support</description>
   <dependencies>
     <dependency>

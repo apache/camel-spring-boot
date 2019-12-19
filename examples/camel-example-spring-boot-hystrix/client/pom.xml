@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-hystrix-client</artifactId>
-    <name>Camel Spring Boot :: Example :: Hystrix :: Client</name>
+    <name>Camel SB Examples :: Hystrix :: Client</name>
     <description>An example showing how to use Hystrix EIP as circuit breaker in Camel routes</description>
 
     <properties>

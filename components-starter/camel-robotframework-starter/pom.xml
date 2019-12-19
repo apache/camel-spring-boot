@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-robotframework-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: RobotFramework</name>
+  <name>Camel SB Starters :: RobotFramework</name>
   <description>Spring-Boot Starter for Camel RobotFramework Support</description>
   <dependencies>
     <dependency>

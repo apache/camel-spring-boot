@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-mvel-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: MVEL</name>
+  <name>Camel SB Starters :: MVEL</name>
   <description>Spring-Boot Starter for Camel MVEL support</description>
   <dependencies>
     <dependency>

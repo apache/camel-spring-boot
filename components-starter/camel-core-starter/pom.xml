@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-core-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Core</name>
+  <name>Camel SB Starters :: Core</name>
   <description>Spring-Boot Starter for The Core Camel Java DSL based router</description>
   <dependencies>
     <dependency>

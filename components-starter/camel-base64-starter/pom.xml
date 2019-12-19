@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-base64-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Base64</name>
+  <name>Camel SB Starters :: Base64</name>
   <description>Spring-Boot Starter for Camel Base64 data format support</description>
   <dependencies>
     <dependency>

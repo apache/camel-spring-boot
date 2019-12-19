@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-xpath-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: XPath</name>
+  <name>Camel SB Starters :: XPath</name>
   <description>Spring-Boot Starter for Camel XPath language</description>
   <dependencies>
     <dependency>

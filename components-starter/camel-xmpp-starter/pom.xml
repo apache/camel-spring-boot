@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-xmpp-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: XMPP</name>
+  <name>Camel SB Starters :: XMPP</name>
   <description>Spring-Boot Starter for Camel XMPP support</description>
   <dependencies>
     <dependency>

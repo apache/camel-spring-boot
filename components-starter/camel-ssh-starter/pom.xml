@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-ssh-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: SSH</name>
+  <name>Camel SB Starters :: SSH</name>
   <description>Spring-Boot Starter for Camel SSH support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jolt-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Jolt</name>
+  <name>Camel SB Starters :: Jolt</name>
   <description>Spring-Boot Starter for Camel Jolt Support</description>
   <dependencies>
     <dependency>

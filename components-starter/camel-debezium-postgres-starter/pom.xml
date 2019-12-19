@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-debezium-postgres-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Debezium :: PostgreSQL</name>
+  <name>Camel SB Starters :: Debezium :: PostgreSQL</name>
   <description>Spring-Boot Starter for Camel Debezium PostgreSQL support</description>
   <dependencies>
     <dependency>

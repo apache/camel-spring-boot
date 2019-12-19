@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-spring-cloud-netflix-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Spring Cloud Netflix</name>
+  <name>Camel SB Starters :: Spring Cloud Netflix</name>
   <description>Spring-Boot Starter for Camel Cloud integration with Spring Cloud Netflix</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-beanio-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: BeanIO</name>
+  <name>Camel SB Starters :: BeanIO</name>
   <description>Spring-Boot Starter for Camel BeanIO data format support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-seda-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Seda</name>
+  <name>Camel SB Starters :: Seda</name>
   <description>Spring-Boot Starter for Camel Seda component</description>
   <dependencies>
     <dependency>

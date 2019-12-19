@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-vertx-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Vertx</name>
+  <name>Camel SB Starters :: Vertx</name>
   <description>Spring-Boot Starter for Camel Vertx support</description>
   <dependencies>
     <dependency>

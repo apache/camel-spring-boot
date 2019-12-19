@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws-iam-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AWS IAM</name>
+  <name>Camel SB Starters :: AWS IAM</name>
   <description>Spring-Boot Starter for A Camel Amazon IAM Web Service Component</description>
   <dependencies>
     <dependency>

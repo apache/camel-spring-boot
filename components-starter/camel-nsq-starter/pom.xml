@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-nsq-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: NSQ</name>
+  <name>Camel SB Starters :: NSQ</name>
   <description>Spring-Boot Starter for Camel Components</description>
   <dependencies>
     <dependency>

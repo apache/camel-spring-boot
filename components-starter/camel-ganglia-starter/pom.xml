@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-ganglia-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Ganglia</name>
+  <name>Camel SB Starters :: Ganglia</name>
   <description>Spring-Boot Starter for Camel Ganglia support</description>
   <dependencies>
     <dependency>

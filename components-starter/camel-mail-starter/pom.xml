@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-mail-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Mail</name>
+  <name>Camel SB Starters :: Mail</name>
   <description>Spring-Boot Starter for Camel Mail support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-ldap-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: LDAP</name>
+  <name>Camel SB Starters :: LDAP</name>
   <description>Spring-Boot Starter for Camel LDAP support</description>
   <dependencies>
     <dependency>

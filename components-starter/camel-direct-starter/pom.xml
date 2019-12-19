@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-direct-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Direct</name>
+  <name>Camel SB Starters :: Direct</name>
   <description>Spring-Boot Starter for Camel Direct component</description>
   <dependencies>
     <dependency>

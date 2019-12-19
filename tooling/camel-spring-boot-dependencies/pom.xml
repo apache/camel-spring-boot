@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-spring-boot-dependencies</artifactId>
   <packaging>pom</packaging>
-  <name>Camel Spring Boot :: Dependency Management :: Dependencies BOM</name>
+  <name>Camel SB Tooling :: Dependencies BOM</name>
   <description>Camel Spring-Boot Dependencies BOM</description>
   <dependencyManagement>
     <dependencies>
@@ -1754,6 +1754,11 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-zookeeper-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>target</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

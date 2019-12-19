@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-activemq-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: ActiveMQ</name>
+  <name>Camel SB Starters :: ActiveMQ</name>
   <description>Spring-Boot Starter for ActiveMQ component for Camel</description>
   <dependencies>
     <dependency>

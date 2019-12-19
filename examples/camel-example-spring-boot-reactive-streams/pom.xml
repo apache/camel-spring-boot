@@ -29,7 +29,7 @@
 
     <artifactId>camel-example-spring-boot-reactive-streams</artifactId>
     <packaging>jar</packaging>
-    <name>Camel Spring Boot :: Example :: Reactive Streams</name>
+    <name>Camel SB Examples :: Reactive Streams</name>
     <description>An example that shows how Camel can exchange data using reactive streams with Spring Boot reactor
     </description>
 

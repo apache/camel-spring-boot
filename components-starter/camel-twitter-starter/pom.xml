@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-twitter-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Twitter</name>
+  <name>Camel SB Starters :: Twitter</name>
   <description>Spring-Boot Starter for Camel Twitter support</description>
   <dependencies>
     <dependency>

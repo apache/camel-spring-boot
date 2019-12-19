@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-velocity-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Velocity</name>
+  <name>Camel SB Starters :: Velocity</name>
   <description>Spring-Boot Starter for Camel Velocity support</description>
   <dependencies>
     <dependency>

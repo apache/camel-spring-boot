@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-quartz-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Quartz</name>
+  <name>Camel SB Starters :: Quartz</name>
   <description>Spring-Boot Starter for Camel Quartz support</description>
   <dependencies>
     <dependency>

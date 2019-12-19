@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-file-watch-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: File Watch</name>
+  <name>Camel SB Starters :: File Watch</name>
   <description>Spring-Boot Starter for Camel File Watch component</description>
   <dependencies>
     <dependency>

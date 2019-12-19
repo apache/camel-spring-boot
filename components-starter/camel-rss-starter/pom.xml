@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-rss-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: RSS</name>
+  <name>Camel SB Starters :: RSS</name>
   <description>Spring-Boot Starter for Camel RSS support</description>
   <dependencies>
     <dependency>

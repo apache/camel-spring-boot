@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jmx-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: JMX</name>
+  <name>Camel SB Starters :: JMX</name>
   <description>Spring-Boot Starter for Camel JMX support</description>
   <dependencies>
     <dependency>

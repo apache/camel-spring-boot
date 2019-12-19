@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-tika-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Tika</name>
+  <name>Camel SB Starters :: Tika</name>
   <description>Spring-Boot Starter for This component integrates with Apache Tika to extract content and metadata from
         thousands of file types.
     </description>

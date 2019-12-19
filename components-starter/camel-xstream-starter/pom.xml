@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-xstream-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: XStream</name>
+  <name>Camel SB Starters :: XStream</name>
   <description>Spring-Boot Starter for Camel XStream support</description>
   <dependencies>
     <dependency>

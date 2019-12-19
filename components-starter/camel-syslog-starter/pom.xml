@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-syslog-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Syslog</name>
+  <name>Camel SB Starters :: Syslog</name>
   <description>Spring-Boot Starter for Camel Syslog support</description>
   <dependencies>
     <dependency>

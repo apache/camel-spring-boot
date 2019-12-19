@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-consul-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Consul</name>
+  <name>Camel SB Starters :: Consul</name>
   <description>Spring-Boot Starter for Camel Consul support</description>
   <dependencies>
     <dependency>

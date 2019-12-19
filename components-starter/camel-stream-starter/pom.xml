@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-stream-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Stream</name>
+  <name>Camel SB Starters :: Stream</name>
   <description>Spring-Boot Starter for Camel Stream (System.in, System.out, System.err) support</description>
   <dependencies>
     <dependency>

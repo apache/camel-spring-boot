@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-bindy-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Bindy</name>
+  <name>Camel SB Starters :: Bindy</name>
   <description>Spring-Boot Starter for Camel Bindy data format support</description>
   <dependencies>
     <dependency>

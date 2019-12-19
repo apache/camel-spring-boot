@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jing-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Jing</name>
+  <name>Camel SB Starters :: Jing</name>
   <description>Spring-Boot Starter for Camel Jing support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-soroush-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Soroush</name>
+  <name>Camel SB Starters :: Soroush</name>
   <description>Spring-Boot Starter for Camel Soroush Support</description>
   <dependencies>
     <dependency>

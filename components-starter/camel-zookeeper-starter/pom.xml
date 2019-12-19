@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-zookeeper-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Zookeeper</name>
+  <name>Camel SB Starters :: Zookeeper</name>
   <description>Spring-Boot Starter for Camel Zookeeper Support</description>
   <dependencies>
     <dependency>

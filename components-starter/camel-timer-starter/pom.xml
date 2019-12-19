@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-timer-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Timer</name>
+  <name>Camel SB Starters :: Timer</name>
   <description>Spring-Boot Starter for Camel Timer component</description>
   <dependencies>
     <dependency>

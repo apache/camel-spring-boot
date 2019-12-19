@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-iec60870-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: IEC 60870</name>
+  <name>Camel SB Starters :: IEC 60870</name>
   <description>Spring-Boot Starter for Camel IEC 60870-5-104 support</description>
   <dependencies>
     <dependency>

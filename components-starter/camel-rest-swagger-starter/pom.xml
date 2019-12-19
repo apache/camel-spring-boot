@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-rest-swagger-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: REST Swagger</name>
+  <name>Camel SB Starters :: REST Swagger</name>
   <description>Spring-Boot Starter for Camel REST support using Swagger</description>
   <dependencies>
     <dependency>

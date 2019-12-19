@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-pojo</artifactId>
-    <name>Camel Spring Boot :: Example :: POJO Routing</name>
+    <name>Camel SB Examples :: POJO Routing</name>
     <description>An example showing how to work with Camel POJO routing with Spring Boot</description>
 
     <properties>

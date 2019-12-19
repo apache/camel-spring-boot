@@ -26,7 +26,7 @@
     </parent>
     <artifactId>camel-%NAME%-starter</artifactId>
     <packaging>jar</packaging>
-<!--    <name>Spring-Boot Starter :: Camel :: Dozer</name>-->
+<!--    <name>Camel Spring Boot :: Starters :: Dozer</name>-->
 <!--    <description>Spring-Boot Starter for Camel Support for the Dozer type conversion framework</description>-->
     <dependencies>
         <dependency>

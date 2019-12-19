@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-log-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Log</name>
+  <name>Camel SB Starters :: Log</name>
   <description>Spring-Boot Starter for Camel Log component</description>
   <dependencies>
     <dependency>

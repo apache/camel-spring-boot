@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws-ddb-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AWS DDB</name>
+  <name>Camel SB Starters :: AWS DDB</name>
   <description>Spring-Boot Starter for A Camel Amazon DynamoDB Web Service Component</description>
   <dependencies>
     <dependency>

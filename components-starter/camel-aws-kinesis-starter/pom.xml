@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws-kinesis-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AWS Kinesis</name>
+  <name>Camel SB Starters :: AWS Kinesis</name>
   <description>Spring-Boot Starter for A Camel Amazon Kinesis Web Service Component</description>
   <dependencies>
     <dependency>

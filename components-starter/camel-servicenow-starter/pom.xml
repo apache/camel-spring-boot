@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-servicenow-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: ServiceNow</name>
+  <name>Camel SB Starters :: ServiceNow</name>
   <description>Spring-Boot Starter for Camel ServiceNow support</description>
   <dependencies>
     <dependency>

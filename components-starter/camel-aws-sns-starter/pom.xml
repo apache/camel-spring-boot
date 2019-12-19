@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws-sns-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AWS SNS</name>
+  <name>Camel SB Starters :: AWS SNS</name>
   <description>Spring-Boot Starter for A Camel Amazon SNS Web Service Component</description>
   <dependencies>
     <dependency>

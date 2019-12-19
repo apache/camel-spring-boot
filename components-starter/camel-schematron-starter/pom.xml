@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-schematron-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Schematron</name>
+  <name>Camel SB Starters :: Schematron</name>
   <description>Spring-Boot Starter for Camel Schematron support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jira-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: JIRA Rest</name>
+  <name>Camel SB Starters :: JIRA Rest</name>
   <description>Spring-Boot Starter for Camel Components</description>
   <dependencies>
     <dependency>

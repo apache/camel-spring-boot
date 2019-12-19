@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-splunk-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Splunk</name>
+  <name>Camel SB Starters :: Splunk</name>
   <description>Spring-Boot Starter for Camel :: Splunk component</description>
   <dependencies>
     <dependency>

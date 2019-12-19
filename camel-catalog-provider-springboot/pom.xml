@@ -28,7 +28,7 @@
 
     <artifactId>camel-catalog-provider-springboot</artifactId>
     <packaging>jar</packaging>
-    <name>Camel Spring Boot :: Catalog Provider </name>
+    <name>Camel SB :: Catalog Provider </name>
     <description>Camel Catalog Spring Boot</description>
 
     <properties>

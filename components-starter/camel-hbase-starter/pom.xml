@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-hbase-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Hbase</name>
+  <name>Camel SB Starters :: Hbase</name>
   <description>Spring-Boot Starter for Camel HBase component</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-crypto-cms-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Crypto</name>
+  <name>Camel SB Starters :: Crypto</name>
   <description>Spring-Boot Starter for Camel Cryptographic Support</description>
   <dependencies>
     <dependency>

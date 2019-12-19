@@ -27,7 +27,7 @@
     </parent>
 
   <artifactId>camel-example-spring-boot-kafka-avro</artifactId>
-  <name>Camel Spring Boot :: Example :: Kafka :: Avro</name>
+  <name>Camel SB Examples :: Kafka :: Avro</name>
   <description>An example for Kafka avro</description>
 
     <properties>

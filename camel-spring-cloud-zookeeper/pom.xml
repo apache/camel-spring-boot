@@ -27,7 +27,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <name>Camel Spring Boot :: Spring Cloud Zookeeper</name>
+    <name>Camel SB :: Spring Cloud Zookeeper</name>
     <artifactId>camel-spring-cloud-zookeeper</artifactId>
     <description>Camel Cloud integration with Spring Cloud Zookeeper</description>
 

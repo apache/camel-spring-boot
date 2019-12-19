@@ -27,7 +27,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <name>Camel Spring Boot :: Spring Cloud</name>
+    <name>Camel SB :: Spring Cloud</name>
     <artifactId>camel-spring-cloud</artifactId>
     <description>Camel Cloud integration with Spring Cloud</description>
 

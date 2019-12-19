@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-atmos-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Atmos</name>
+  <name>Camel SB Starters :: Atmos</name>
   <description>Spring-Boot Starter for Camel Atmos support</description>
   <dependencies>
     <dependency>

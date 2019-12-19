@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jcache-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: JCache</name>
+  <name>Camel SB Starters :: JCache</name>
   <description>Spring-Boot Starter for Camel JCache support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-spring-redis-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Redis</name>
+  <name>Camel SB Starters :: Redis</name>
   <description>Spring-Boot Starter for Camel Spring Redis Component</description>
   <dependencies>
     <dependency>

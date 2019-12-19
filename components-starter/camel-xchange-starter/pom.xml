@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-xchange-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: XChange</name>
+  <name>Camel SB Starters :: XChange</name>
   <description>Spring-Boot Starter for Camel XChange support</description>
   <dependencies>
     <dependency>

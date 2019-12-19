@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jaxb-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: JAXB</name>
+  <name>Camel SB Starters :: JAXB</name>
   <description>Spring-Boot Starter for Camel JAXB support</description>
   <dependencies>
     <dependency>

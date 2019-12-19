@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-platform-http-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Platform HTTP</name>
+  <name>Camel SB Starters :: Platform HTTP</name>
   <description>Spring-Boot Starter for An HTTP service leveraging the given platform's (SB, Quarkus, WildFly, ...) default HTTP server</description>
   <dependencies>
     <dependency>

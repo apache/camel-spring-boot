@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-mllp-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: MLLP</name>
+  <name>Camel SB Starters :: MLLP</name>
   <description>Spring-Boot Starter for Camel MLLP Component</description>
   <dependencies>
     <dependency>

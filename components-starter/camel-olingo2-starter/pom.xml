@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-olingo2-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Olingo2 :: Component</name>
+  <name>Camel SB Starters :: Olingo2 :: Component</name>
   <description>Spring-Boot Starter for Camel Olingo2 component</description>
   <dependencies>
     <dependency>

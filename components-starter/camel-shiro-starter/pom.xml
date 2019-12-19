@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-shiro-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Shiro</name>
+  <name>Camel SB Starters :: Shiro</name>
   <description>Spring-Boot Starter for Camel Shiro Security support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-sap-netweaver-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: SAP NetWeaver</name>
+  <name>Camel SB Starters :: SAP NetWeaver</name>
   <description>Spring-Boot Starter for Camel SAP NetWeaver support</description>
   <dependencies>
     <dependency>

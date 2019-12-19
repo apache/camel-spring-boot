@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-grok-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Grok</name>
+  <name>Camel SB Starters :: Grok</name>
   <description>Spring-Boot Starter for Camel Grok support</description>
   <dependencies>
     <dependency>

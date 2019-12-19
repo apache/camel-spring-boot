@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-twilio-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Twilio</name>
+  <name>Camel SB Starters :: Twilio</name>
   <description>Spring-Boot Starter for Camel Component for Twilio</description>
   <dependencies>
     <dependency>

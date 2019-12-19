@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-health-checks</artifactId>
-    <name>Camel Spring Boot :: Example :: Health Checks</name>
+    <name>Camel SB Examples :: Health Checks</name>
     <description>An example showing how to work with Camel's Health Checks and Spring Boot</description>
     <packaging>pom</packaging>
 

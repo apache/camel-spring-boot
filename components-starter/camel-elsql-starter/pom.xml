@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-elsql-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: ElSql</name>
+  <name>Camel SB Starters :: ElSql</name>
   <description>Spring-Boot Starter for Camel ElSql support</description>
   <dependencies>
     <dependency>

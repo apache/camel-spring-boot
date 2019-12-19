@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws-xray-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AWS :: XRay</name>
+  <name>Camel SB Starters :: AWS :: XRay</name>
   <description>Spring-Boot Starter for Distributed tracing using AWS XRay</description>
   <dependencies>
     <dependency>

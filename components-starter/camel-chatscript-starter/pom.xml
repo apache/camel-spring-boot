@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-chatscript-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: ChatScript</name>
+  <name>Camel SB Starters :: ChatScript</name>
   <description>Spring-Boot Starter for Camel support for ChatScript</description>
   <dependencies>
     <dependency>

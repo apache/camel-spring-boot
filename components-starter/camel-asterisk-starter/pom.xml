@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-asterisk-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Asterisk</name>
+  <name>Camel SB Starters :: Asterisk</name>
   <description>Spring-Boot Starter for Camel Asterisk to interact with an Asterisk PBX Server</description>
   <dependencies>
     <dependency>

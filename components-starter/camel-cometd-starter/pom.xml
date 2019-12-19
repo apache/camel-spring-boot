@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-cometd-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Cometd</name>
+  <name>Camel SB Starters :: Cometd</name>
   <description>Spring-Boot Starter for Camel Cometd support based on Jetty</description>
   <dependencies>
     <dependency>

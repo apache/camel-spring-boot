@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws-ecs-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AWS ECS</name>
+  <name>Camel SB Starters :: AWS ECS</name>
   <description>Spring-Boot Starter for A Camel Amazon ECS Web Service Component</description>
   <dependencies>
     <dependency>

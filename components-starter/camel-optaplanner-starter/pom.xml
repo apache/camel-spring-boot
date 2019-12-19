@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-optaplanner-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: OptaPlanner</name>
+  <name>Camel SB Starters :: OptaPlanner</name>
   <description>Spring-Boot Starter for Camel OptaPlanner support</description>
   <dependencies>
     <dependency>

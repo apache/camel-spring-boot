@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-zipkin-service1</artifactId>
-    <name>Camel Spring Boot :: Example :: Zipkin :: Service 1</name>
+    <name>Camel SB Examples :: Zipkin :: Service 1</name>
     <description>An example showing how to trace incoming and outgoing messages from Camel with Zipkin</description>
 
     <properties>

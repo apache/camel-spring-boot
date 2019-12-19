@@ -29,7 +29,7 @@
 
     <artifactId>camel-example-spring-boot-twitter-salesforce</artifactId>
     <packaging>jar</packaging>
-    <name>Camel Spring Boot :: Example :: Twitter Salesforce</name>
+    <name>Camel SB Examples :: Twitter Salesforce</name>
     <description>Twitter mentions is created as contacts in Salesforce</description>
 
     <properties>

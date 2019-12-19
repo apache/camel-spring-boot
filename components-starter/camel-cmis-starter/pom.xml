@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-cmis-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: CMIS</name>
+  <name>Camel SB Starters :: CMIS</name>
   <description>Spring-Boot Starter for Camel CMIS which is based on Apache Chemistry support</description>
   <dependencies>
     <dependency>

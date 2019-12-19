@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-dataformat-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Dataformat</name>
+  <name>Camel SB Starters :: Dataformat</name>
   <description>Spring-Boot Starter for Camel DataFormat component</description>
   <dependencies>
     <dependency>

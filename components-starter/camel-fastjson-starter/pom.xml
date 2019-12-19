@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-fastjson-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Fastjson</name>
+  <name>Camel SB Starters :: Fastjson</name>
   <description>Spring-Boot Starter for Camel Fastjson support</description>
   <dependencies>
     <dependency>

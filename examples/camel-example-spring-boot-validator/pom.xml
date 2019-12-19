@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-validator</artifactId>
-    <name>Camel Spring Boot :: Example :: Validator</name>
+    <name>Camel SB Examples :: Validator</name>
     <description>An example showing how to work with declarative validation and Spring Boot</description>
 
     <properties>

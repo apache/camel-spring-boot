@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-mongodb-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: MongoDB</name>
+  <name>Camel SB Starters :: MongoDB</name>
   <description>Spring-Boot Starter for Camel MongoDB (Java Driver 3) component</description>
   <dependencies>
     <dependency>

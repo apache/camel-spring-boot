@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-metrics-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Metrics</name>
+  <name>Camel SB Starters :: Metrics</name>
   <description>Spring-Boot Starter for Camel Metrics based monitoring component</description>
   <dependencies>
     <dependency>

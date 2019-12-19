@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jsonpath-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: JSon Path</name>
+  <name>Camel SB Starters :: JSon Path</name>
   <description>Spring-Boot Starter for Camel JSON Path Language</description>
   <dependencies>
     <dependency>

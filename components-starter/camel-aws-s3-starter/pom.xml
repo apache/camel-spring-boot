@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws-s3-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AWS S3</name>
+  <name>Camel SB Starters :: AWS S3</name>
   <description>Spring-Boot Starter for A Camel Amazon S3 Web Service Component</description>
   <dependencies>
     <dependency>

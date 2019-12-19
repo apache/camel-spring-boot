@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-cm-sms-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: CM SMS</name>
+  <name>Camel SB Starters :: CM SMS</name>
   <description>Spring-Boot Starter for Camel CM SMS Gateway Component</description>
   <dependencies>
     <dependency>

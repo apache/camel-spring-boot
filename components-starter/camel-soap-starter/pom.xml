@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-soap-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: SOAP</name>
+  <name>Camel SB Starters :: SOAP</name>
   <description>Spring-Boot Starter for Camel SOAP support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws-msk-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AWS MSK</name>
+  <name>Camel SB Starters :: AWS MSK</name>
   <description>Spring-Boot Starter for A Camel Amazon MSK Web Service Component</description>
   <dependencies>
     <dependency>

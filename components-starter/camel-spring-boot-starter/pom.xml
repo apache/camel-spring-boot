@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-spring-boot-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Spring Boot</name>
+  <name>Camel SB Starters :: Spring Boot</name>
   <description>Spring-Boot Starter for Camel :: Spring Boot</description>
   <dependencies>
     <dependency>

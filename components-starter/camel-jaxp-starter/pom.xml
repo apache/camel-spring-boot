@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jaxp-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: JAXP</name>
+  <name>Camel SB Starters :: JAXP</name>
   <description>Spring-Boot Starter for Camel JAXP Support</description>
   <dependencies>
     <dependency>

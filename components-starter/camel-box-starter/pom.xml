@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-box-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Box.com</name>
+  <name>Camel SB Starters :: Box.com</name>
   <description>Spring-Boot Starter for Camel Component for Box.com</description>
   <dependencies>
     <dependency>

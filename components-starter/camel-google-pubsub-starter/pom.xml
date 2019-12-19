@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-google-pubsub-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: GooglePubsub</name>
+  <name>Camel SB Starters :: GooglePubsub</name>
   <description>Spring-Boot Starter for Camel Component for Google Cloud Platform Pubsub</description>
   <dependencies>
     <dependency>

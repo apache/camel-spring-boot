@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-fop-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: FOP</name>
+  <name>Camel SB Starters :: FOP</name>
   <description>Spring-Boot Starter for Camel FOP support</description>
   <dependencies>
     <dependency>

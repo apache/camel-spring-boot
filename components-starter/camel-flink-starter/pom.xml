@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-flink-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Apache Flink</name>
+  <name>Camel SB Starters :: Apache Flink</name>
   <description>Spring-Boot Starter for Camel Apache Flink support</description>
   <dependencies>
     <dependency>

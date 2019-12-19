@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-univocity-parsers-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: UniVocity Parsers</name>
+  <name>Camel SB Starters :: UniVocity Parsers</name>
   <description>Spring-Boot Starter for Camel UniVocity parsers data format support</description>
   <dependencies>
     <dependency>

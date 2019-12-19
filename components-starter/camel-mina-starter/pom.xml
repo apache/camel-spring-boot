@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-mina-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: MINA</name>
+  <name>Camel SB Starters :: MINA</name>
   <description>Spring-Boot Starter for Camel MINA support</description>
   <dependencies>
     <dependency>

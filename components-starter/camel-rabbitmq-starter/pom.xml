@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-rabbitmq-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: RabbitMQ</name>
+  <name>Camel SB Starters :: RabbitMQ</name>
   <description>Spring-Boot Starter for Camel RabbitMQ Component</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jsch-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Jsch</name>
+  <name>Camel SB Starters :: Jsch</name>
   <description>Spring-Boot Starter for Camel SCP Support</description>
   <dependencies>
     <dependency>

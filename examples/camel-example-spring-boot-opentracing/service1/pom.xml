@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-opentracing-service1</artifactId>
-    <name>Camel Spring Boot :: Example :: OpenTracing :: Service 1</name>
+    <name>Camel SB Examples :: OpenTracing :: Service 1</name>
     <description>An example showing how to trace incoming and outgoing messages from Camel with OpenTracing
     </description>
 

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-cxf-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: CXF</name>
+  <name>Camel SB Starters :: CXF</name>
   <description>Spring-Boot Starter for Camel CXF support</description>
   <dependencies>
     <dependency>

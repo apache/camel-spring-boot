@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-activemq</artifactId>
-    <name>Camel Spring Boot :: Example :: ActiveMQ</name>
+    <name>Camel SB Examples :: ActiveMQ</name>
     <description>An example showing how to work with Camel, ActiveMQ and Spring Boot</description>
 
     <properties>

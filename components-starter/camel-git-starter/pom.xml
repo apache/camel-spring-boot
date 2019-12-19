@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-git-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Git</name>
+  <name>Camel SB Starters :: Git</name>
   <description>Spring-Boot Starter for Camel Components</description>
   <dependencies>
     <dependency>

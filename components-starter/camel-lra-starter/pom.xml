@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-lra-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Long-Running-Action</name>
+  <name>Camel SB Starters :: Long-Running-Action</name>
   <description>Spring-Boot Starter for Camel saga binding for Long-Running-Action framework</description>
   <dependencies>
     <dependency>

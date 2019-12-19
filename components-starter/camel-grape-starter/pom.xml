@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-grape-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Grape</name>
+  <name>Camel SB Starters :: Grape</name>
   <description>Spring-Boot Starter for Camel Component for Grape</description>
   <dependencies>
     <dependency>

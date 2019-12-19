@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-hipchat-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Hipchat</name>
+  <name>Camel SB Starters :: Hipchat</name>
   <description>Spring-Boot Starter for Camel Hipchat Component</description>
   <dependencies>
     <dependency>

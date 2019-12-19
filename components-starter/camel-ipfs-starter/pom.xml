@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-ipfs-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: IPFS</name>
+  <name>Camel SB Starters :: IPFS</name>
   <description>Spring-Boot Starter for Camel IPFS support</description>
   <dependencies>
     <dependency>

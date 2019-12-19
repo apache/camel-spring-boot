@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-swagger-java-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Swagger Java</name>
+  <name>Camel SB Starters :: Swagger Java</name>
   <description>Spring-Boot Starter for Camel Swagger Java support</description>
   <dependencies>
     <dependency>

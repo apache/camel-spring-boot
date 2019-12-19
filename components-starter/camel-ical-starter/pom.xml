@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-ical-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: iCal</name>
+  <name>Camel SB Starters :: iCal</name>
   <description>Spring-Boot Starter for Camel iCal component</description>
   <dependencies>
     <dependency>

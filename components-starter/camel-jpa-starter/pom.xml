@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jpa-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: JPA</name>
+  <name>Camel SB Starters :: JPA</name>
   <description>Spring-Boot Starter for Camel JPA support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws-sdb-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AWS SDB</name>
+  <name>Camel SB Starters :: AWS SDB</name>
   <description>Spring-Boot Starter for A Camel Amazon SDB Web Service Component</description>
   <dependencies>
     <dependency>

@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-clustered-route-controller-cluster-node</artifactId>
-    <name>Camel Spring Boot :: Example :: Clustered Route Controller :: Cluster Node</name>
+    <name>Camel SB Examples :: CRC :: Node</name>
     <description>Bootstrap an Camel Cluster Node</description>
 
     <dependencyManagement>

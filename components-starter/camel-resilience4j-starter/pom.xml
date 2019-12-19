@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-resilience4j-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Resilience4j</name>
+  <name>Camel SB Starters :: Resilience4j</name>
   <description>Spring-Boot Starter for Circuit Breaker EIP using Resilience4j</description>
   <dependencies>
     <dependency>

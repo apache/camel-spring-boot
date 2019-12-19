@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-cbor-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: CBOR</name>
+  <name>Camel SB Starters :: CBOR</name>
   <description>Spring-Boot Starter for Camel Cbor Support</description>
   <dependencies>
     <dependency>

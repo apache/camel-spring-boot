@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-health-checks-application</artifactId>
-    <name>Camel Spring Boot :: Example :: Health Checks :: Application</name>
+    <name>Camel SB Examples :: Health Checks :: Application</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

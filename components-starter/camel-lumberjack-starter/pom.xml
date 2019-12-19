@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-lumberjack-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Lumberjack</name>
+  <name>Camel SB Starters :: Lumberjack</name>
   <description>Spring-Boot Starter for Camel Lumberjack log streaming component</description>
   <dependencies>
     <dependency>

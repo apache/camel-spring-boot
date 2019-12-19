@@ -26,7 +26,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-hello-grpc-server-kubernetes</artifactId>
-    <name>Camel Spring Boot :: Example :: gRPC :: Kubernetes :: Server</name>
+    <name>Camel SB Examples :: gRPC :: Kubernetes :: Server</name>
     <description>An example showing a simple gRPC server running on Kubernetes</description>
 
     <properties>

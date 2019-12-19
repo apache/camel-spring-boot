@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-nitrite-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Nitrite</name>
+  <name>Camel SB Starters :: Nitrite</name>
   <description>Spring-Boot Starter for Camel Nitrite component</description>
   <dependencies>
     <dependency>

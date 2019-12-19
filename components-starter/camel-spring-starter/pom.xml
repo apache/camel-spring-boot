@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-spring-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Spring</name>
+  <name>Camel SB Starters :: Spring</name>
   <description>Spring-Boot Starter for Camel Spring support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-snakeyaml-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: SnakeYAML</name>
+  <name>Camel SB Starters :: SnakeYAML</name>
   <description>Spring-Boot Starter for Camel SnakeYAML support</description>
   <dependencies>
     <dependency>

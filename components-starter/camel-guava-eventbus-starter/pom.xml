@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-guava-eventbus-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Guava-EventBus</name>
+  <name>Camel SB Starters :: Guava-EventBus</name>
   <description>Spring-Boot Starter for Camel Guava EventBus support</description>
   <dependencies>
     <dependency>

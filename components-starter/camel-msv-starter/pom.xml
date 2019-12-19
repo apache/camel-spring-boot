@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-msv-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: MSV</name>
+  <name>Camel SB Starters :: MSV</name>
   <description>Spring-Boot Starter for Camel MSV support</description>
   <dependencies>
     <dependency>

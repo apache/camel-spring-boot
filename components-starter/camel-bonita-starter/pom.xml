@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-bonita-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Bonita</name>
+  <name>Camel SB Starters :: Bonita</name>
   <description>Spring-Boot Starter for Camel Bonita support</description>
   <dependencies>
     <dependency>

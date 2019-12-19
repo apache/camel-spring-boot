@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-apns-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: APNS</name>
+  <name>Camel SB Starters :: APNS</name>
   <description>Spring-Boot Starter for A Camel Apple Push Notification Server Component</description>
   <dependencies>
     <dependency>

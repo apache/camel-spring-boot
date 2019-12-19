@@ -26,7 +26,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>camel-example-spring-boot-webhook</artifactId>
-    <name>Camel Spring Boot :: Example :: Webhook</name>
+    <name>Camel SB Examples :: Webhook</name>
     <description>Example on how to use the Camel Webhook component</description>
     <packaging>jar</packaging>
 

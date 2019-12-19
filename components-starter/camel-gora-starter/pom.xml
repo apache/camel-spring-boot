@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-gora-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Gora</name>
+  <name>Camel SB Starters :: Gora</name>
   <description>Spring-Boot Starter for Gora Component for Apache Camel.</description>
   <dependencies>
     <dependency>

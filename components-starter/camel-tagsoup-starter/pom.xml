@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-tagsoup-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: TagSoup</name>
+  <name>Camel SB Starters :: TagSoup</name>
   <description>Spring-Boot Starter for Camel TagSoup support</description>
   <dependencies>
     <dependency>

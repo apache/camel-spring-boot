@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-facebook-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Facebook</name>
+  <name>Camel SB Starters :: Facebook</name>
   <description>Spring-Boot Starter for Camel Facebook Support</description>
   <dependencies>
     <dependency>

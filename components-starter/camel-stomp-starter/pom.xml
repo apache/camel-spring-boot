@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-stomp-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Stomp</name>
+  <name>Camel SB Starters :: Stomp</name>
   <description>Spring-Boot Starter for Camel Stomp client</description>
   <dependencies>
     <dependency>

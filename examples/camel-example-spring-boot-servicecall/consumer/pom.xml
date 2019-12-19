@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-servicecall-consumer</artifactId>
-    <name>Camel Spring Boot :: Example :: ServiceCall :: Consumer</name>
+    <name>Camel SB Examples :: ServiceCall :: Consumer</name>
     <description>An example showing how to work with Camel ServiceCall EIP and Spring Boot (Consumer)</description>
 
     <properties>

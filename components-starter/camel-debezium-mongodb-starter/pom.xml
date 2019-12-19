@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-debezium-mongodb-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Debezium :: MongoDB</name>
+  <name>Camel SB Starters :: Debezium :: MongoDB</name>
   <description>Spring-Boot Starter for Camel Debezium MongoDB support</description>
   <dependencies>
     <dependency>

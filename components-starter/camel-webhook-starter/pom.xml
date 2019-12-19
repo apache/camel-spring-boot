@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-webhook-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Webhook</name>
+  <name>Camel SB Starters :: Webhook</name>
   <description>Spring-Boot Starter for Camel Webhook component</description>
   <dependencies>
     <dependency>

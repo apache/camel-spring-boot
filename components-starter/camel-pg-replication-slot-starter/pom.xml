@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-pg-replication-slot-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: PgReplicationSlot</name>
+  <name>Camel SB Starters :: PgReplicationSlot</name>
   <description>Spring-Boot Starter for Component for receiving from PostgreSQL Replication Slots</description>
   <dependencies>
     <dependency>

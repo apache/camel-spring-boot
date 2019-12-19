@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-debezium-common-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Debezium :: Common</name>
+  <name>Camel SB Starters :: Debezium :: Common</name>
   <description>Spring-Boot Starter for Camel Debezium Common support</description>
   <dependencies>
     <dependency>

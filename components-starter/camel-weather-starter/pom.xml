@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-weather-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Weather</name>
+  <name>Camel SB Starters :: Weather</name>
   <description>Spring-Boot Starter for Camel Weather support</description>
   <dependencies>
     <dependency>

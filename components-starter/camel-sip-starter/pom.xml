@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-sip-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: SIP</name>
+  <name>Camel SB Starters :: SIP</name>
   <description>Spring-Boot Starter for Camel SIP protocol based communication component</description>
   <dependencies>
     <dependency>

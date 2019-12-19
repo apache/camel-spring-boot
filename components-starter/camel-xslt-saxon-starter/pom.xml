@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-xslt-saxon-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: XSLT Saxon</name>
+  <name>Camel SB Starters :: XSLT Saxon</name>
   <description>Spring-Boot Starter for Camel XSLT Saxon component</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-zip-deflater-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Zip Deflater</name>
+  <name>Camel SB Starters :: Zip Deflater</name>
   <description>Spring-Boot Starter for Camel Zip/GZip deflater dataformat</description>
   <dependencies>
     <dependency>

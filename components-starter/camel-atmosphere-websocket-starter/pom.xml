@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-atmosphere-websocket-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Atmosphere WebSocket Servlet</name>
+  <name>Camel SB Starters :: Atmosphere WebSocket Servlet</name>
   <description>Spring-Boot Starter for Camel Atmosphere WebSocket Servlet</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-vm-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: VM</name>
+  <name>Camel SB Starters :: VM</name>
   <description>Spring-Boot Starter for Camel VM component</description>
   <dependencies>
     <dependency>

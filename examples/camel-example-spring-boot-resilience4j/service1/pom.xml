@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-resilience4j-service1</artifactId>
-    <name>Camel Spring Boot :: Example :: Resilience4j :: Service 1</name>
+    <name>Camel SB Examples :: Resilience4j :: Service 1</name>
     <description>An example showing how to use Resilience4j EIP as circuit breaker in Camel routes</description>
 
     <properties>

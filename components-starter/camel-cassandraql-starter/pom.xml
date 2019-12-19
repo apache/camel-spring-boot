@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-cassandraql-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Cassandra CQL</name>
+  <name>Camel SB Starters :: Cassandra CQL</name>
   <description>Spring-Boot Starter for Cassandra CQL3 support</description>
   <dependencies>
     <dependency>

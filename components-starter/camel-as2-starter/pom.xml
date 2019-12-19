@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-as2-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AS2 :: Component</name>
+  <name>Camel SB Starters :: AS2 :: Component</name>
   <description>Spring-Boot Starter for Camel AS2 component</description>
   <dependencies>
     <dependency>

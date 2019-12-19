@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-gson-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Gson</name>
+  <name>Camel SB Starters :: Gson</name>
   <description>Spring-Boot Starter for Camel Gson support</description>
   <dependencies>
     <dependency>

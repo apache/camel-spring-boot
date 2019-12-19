@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-reactive-executor-vertx-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Reactive Executor :: Vert X</name>
+  <name>Camel SB Starters :: Reactive Executor :: Vert X</name>
   <description>Spring-Boot Starter for Reactive Executor for camel-core using Vert X</description>
   <dependencies>
     <dependency>

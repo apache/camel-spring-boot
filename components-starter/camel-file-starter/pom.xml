@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-file-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: File</name>
+  <name>Camel SB Starters :: File</name>
   <description>Spring-Boot Starter for Camel File component</description>
   <dependencies>
     <dependency>

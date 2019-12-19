@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-supervising-route-controller</artifactId>
-    <name>Camel Spring Boot :: Example :: Supervising Route Controller</name>
+    <name>Camel SB Examples :: Supervising Route Controller</name>
     <description>An example showing how to work with Camel's Supervising Route Controller and Spring Boot</description>
 
     <properties>

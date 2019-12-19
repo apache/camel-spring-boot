@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-ref-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Ref</name>
+  <name>Camel SB Starters :: Ref</name>
   <description>Spring-Boot Starter for Camel Ref component</description>
   <dependencies>
     <dependency>

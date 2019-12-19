@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-docker-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Docker</name>
+  <name>Camel SB Starters :: Docker</name>
   <description>Spring-Boot Starter for Camel Docker Support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-milo-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Milo</name>
+  <name>Camel SB Starters :: Milo</name>
   <description>Spring-Boot Starter for Camel OPC UA support</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-opentracing-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: OpenTracing</name>
+  <name>Camel SB Starters :: OpenTracing</name>
   <description>Spring-Boot Starter for Distributed message tracing using OpenTracing</description>
   <dependencies>
     <dependency>

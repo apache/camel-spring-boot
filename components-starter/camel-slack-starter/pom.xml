@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-slack-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Slack</name>
+  <name>Camel SB Starters :: Slack</name>
   <description>Spring-Boot Starter for Camel Slack Support</description>
   <dependencies>
     <dependency>

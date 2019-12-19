@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jasypt-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Jasypt</name>
+  <name>Camel SB Starters :: Jasypt</name>
   <description>Spring-Boot Starter for Camel Jasypt support</description>
   <dependencies>
     <dependency>

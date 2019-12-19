@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-lucene-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Lucene</name>
+  <name>Camel SB Starters :: Lucene</name>
   <description>Spring-Boot Starter for Camel Lucene based search component</description>
   <dependencies>
     <dependency>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-rxjava-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: RxJava</name>
+  <name>Camel SB Starters :: RxJava</name>
   <description>Spring-Boot Starter for RxJava2 based back-end for Camel's reactive streams component</description>
   <dependencies>
     <dependency>

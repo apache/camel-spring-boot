@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-printer-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Printer</name>
+  <name>Camel SB Starters :: Printer</name>
   <description>Spring-Boot Starter for Camel Printer support</description>
   <dependencies>
     <dependency>

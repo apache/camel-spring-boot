@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-pulsar-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Pulsar</name>
+  <name>Camel SB Starters :: Pulsar</name>
   <description>Spring-Boot Starter for Camel Apache Pulsar Component</description>
   <dependencies>
     <dependency>

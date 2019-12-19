@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws-sqs-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: AWS SQS</name>
+  <name>Camel SB Starters :: AWS SQS</name>
   <description>Spring-Boot Starter for A Camel Amazon SQS Web Service Component</description>
   <dependencies>
     <dependency>

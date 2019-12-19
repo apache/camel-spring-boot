@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-zipfile-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Zip File</name>
+  <name>Camel SB Starters :: Zip File</name>
   <description>Spring-Boot Starter for Camel Zip file support</description>
   <dependencies>
     <dependency>

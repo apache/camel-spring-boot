@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-spring-cloud-zookeeper-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Spring Cloud Zookeeper</name>
+  <name>Camel SB Starters :: Spring Cloud Zookeeper</name>
   <description>Spring-Boot Starter for Camel Cloud integration with Spring Cloud Zookeeper</description>
   <dependencies>
     <dependency>

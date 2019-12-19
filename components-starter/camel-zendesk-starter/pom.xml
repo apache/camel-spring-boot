@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-zendesk-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Zendesk</name>
+  <name>Camel SB Starters :: Zendesk</name>
   <description>Spring-Boot Starter for Camel Zendesk Component</description>
   <dependencies>
     <dependency>

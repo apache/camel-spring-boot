@@ -27,7 +27,7 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-jira</artifactId>
-    <name>Camel Spring Boot :: Example :: Jira</name>
+    <name>Camel SB Examples :: Jira</name>
     <description>An example that uses Jira Camel API</description>
     <packaging>jar</packaging>
 

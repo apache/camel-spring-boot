@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-cxf-transport-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: CXF :: Transport</name>
+  <name>Camel SB Starters :: CXF :: Transport</name>
   <description>Spring-Boot Starter for Camel Transport for CXF</description>
   <dependencies>
     <dependency>

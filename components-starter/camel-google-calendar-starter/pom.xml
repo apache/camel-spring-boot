@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-google-calendar-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: GoogleCalendar</name>
+  <name>Camel SB Starters :: GoogleCalendar</name>
   <description>Spring-Boot Starter for Camel Component for GoogleCalendar</description>
   <dependencies>
     <dependency>

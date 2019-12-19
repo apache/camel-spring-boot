@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-dataset-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: DataSet</name>
+  <name>Camel SB Starters :: DataSet</name>
   <description>Spring-Boot Starter for Camel DataSet component</description>
   <dependencies>
     <dependency>

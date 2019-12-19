@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-chunk-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: Chunk</name>
+  <name>Camel SB Starters :: Chunk</name>
   <description>Spring-Boot Starter for Camel Chunk support</description>
   <dependencies>
     <dependency>

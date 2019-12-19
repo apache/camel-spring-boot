@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-smpp-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Spring-Boot Starter :: Camel :: SMPP</name>
+  <name>Camel SB Starters :: SMPP</name>
   <description>Spring-Boot Starter for Camel SMPP support</description>
   <dependencies>
     <dependency>
