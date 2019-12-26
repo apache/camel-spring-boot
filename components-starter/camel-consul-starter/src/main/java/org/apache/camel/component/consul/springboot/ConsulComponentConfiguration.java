@@ -197,38 +197,82 @@ public class ConsulComponentConfiguration
 
     public static class ConsulConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.consul.ConsulConfiguration.class;
+        /**
+         * The default action. Can be overridden by CamelConsulAction
+         */
         private String action;
+        /**
+         * Reference to a com.orbitz.consul.Consul in the registry.
+         */
         private Consul consulClient;
+        /**
+         * The default key. Can be overridden by CamelConsulKey
+         */
         private String key;
-        private Boolean valueAsString;
+        /**
+         * Default to transform values retrieved from Consul i.e. on KV endpoint
+         * to string.
+         */
+        private Boolean valueAsString = false;
         /**
          * Sets the ACL token to be used with Consul
          */
         private String aclToken;
-        private Integer blockSeconds;
+        /**
+         * The second to wait for a watch event, default 10 seconds
+         */
+        private Integer blockSeconds = 10;
+        /**
+         * Connect timeout for OkHttpClient
+         */
         private Long connectTimeoutMillis;
-        private ConsistencyMode consistencyMode;
+        /**
+         * The consistencyMode used for queries, default ConsistencyMode.DEFAULT
+         */
+        private ConsistencyMode consistencyMode = ConsistencyMode.DEFAULT;
         /**
          * The data center
          */
         private String datacenter;
         @Deprecated
         private String dc;
+        /**
+         * The first index for watch for, default 0
+         */
         private BigInteger firstIndex;
+        /**
+         * The near node to use for queries.
+         */
         private String nearNode;
+        /**
+         * The note meta-data to use for queries.
+         */
         private List nodeMeta;
         /**
          * Sets the password to be used for basic authentication
          */
         private String password;
-        private Boolean pingInstance;
+        /**
+         * Configure if the AgentClient should attempt a ping before returning
+         * the Consul instance
+         */
+        private Boolean pingInstance = true;
+        /**
+         * Read timeout for OkHttpClient
+         */
         private Long readTimeoutMillis;
-        private Boolean recursive;
+        /**
+         * Recursively watch, default false
+         */
+        private Boolean recursive = false;
         /**
          * SSL configuration using an
          * org.apache.camel.support.jsse.SSLContextParameters instance.
          */
         private SSLContextParameters sslContextParameters;
+        /**
+         * Set tags. You can separate multiple tags by comma.
+         */
         private Set tags;
         /**
          * The Consul agent URL
@@ -238,6 +282,9 @@ public class ConsulComponentConfiguration
          * Sets the username to be used for basic authentication
          */
         private String userName;
+        /**
+         * Write timeout for OkHttpClient
+         */
         private Long writeTimeoutMillis;
 
         public String getAction() {

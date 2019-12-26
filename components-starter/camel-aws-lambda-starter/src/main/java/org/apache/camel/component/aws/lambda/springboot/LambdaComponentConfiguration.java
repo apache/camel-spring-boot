@@ -150,10 +150,6 @@ public class LambdaComponentConfiguration
          */
         private AWSLambda awsLambdaClient;
         /**
-         * Name of the Lambda function.
-         */
-        private String function;
-        /**
          * The operation to perform. It can be listFunctions, getFunction,
          * createFunction, deleteFunction or invokeFunction
          */
@@ -195,14 +191,6 @@ public class LambdaComponentConfiguration
 
         public void setAwsLambdaClient(AWSLambda awsLambdaClient) {
             this.awsLambdaClient = awsLambdaClient;
-        }
-
-        public String getFunction() {
-            return function;
-        }
-
-        public void setFunction(String function) {
-            this.function = function;
         }
 
         public LambdaOperations getOperation() {
