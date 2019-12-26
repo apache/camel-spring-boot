@@ -62,8 +62,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-spring-boot</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- Testing dependencies -->

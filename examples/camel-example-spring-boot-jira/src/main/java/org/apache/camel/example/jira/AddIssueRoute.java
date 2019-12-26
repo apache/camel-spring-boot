@@ -37,7 +37,7 @@ public class AddIssueRoute extends RouteBuilder {
     public void configure() {
 
         LOG.info(" >>>>>>>>>>>>>>>>>>>>> jira example - add new issue");
-        // change the fields accordinly to your target jira server
+        // change the fields accordingly to your target jira server
         from("timer://foo?fixedRate=true&period=50000")
                 .setHeader(ISSUE_PROJECT_KEY, () -> "COM")
                 .setHeader(ISSUE_TYPE_NAME, () -> "Bug")
@@ -50,7 +50,7 @@ public class AddIssueRoute extends RouteBuilder {
                 //     comps.add("plugins");
                 //     return comps;
                 // })
-                .setBody(() -> "A small description for a test issue. ")
+                .setBody(constant("A small description for a test issue. "))
                 .log("  JIRA new issue: ${body}")
                 .to("jira://addIssue");
     }
