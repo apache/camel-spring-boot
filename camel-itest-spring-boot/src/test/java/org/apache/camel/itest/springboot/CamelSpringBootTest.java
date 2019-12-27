@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
 @RunWith(Arquillian.class)
 public class CamelSpringBootTest extends AbstractSpringBootTestSupport {
 
@@ -41,8 +40,6 @@ public class CamelSpringBootTest extends AbstractSpringBootTestSupport {
     @Test
     public void componentTests() throws Exception {
         // no component test
-        this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

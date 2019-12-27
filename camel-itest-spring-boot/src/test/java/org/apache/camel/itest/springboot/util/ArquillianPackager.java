@@ -24,7 +24,6 @@ import java.security.PrivilegedAction;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -111,10 +110,7 @@ public final class ArquillianPackager {
         Domain domain = ShrinkWrap.createDomain(conf);
 
         JavaArchive ark = domain.getArchiveFactory().create(JavaArchive.class, "test.jar");
-
-
         ark = ark.addAsManifestResource("BOOT-MANIFEST.MF", "MANIFEST.MF");
-
         ark = ark.addAsDirectories(LIB_FOLDER);
         if (!CLASSES_FOLDER.equals("")) {
             ark = ark.addAsDirectories(CLASSES_FOLDER);
@@ -297,7 +293,6 @@ public final class ArquillianPackager {
     }
 
     private static void lookForVersionMismatch(ITestConfig config, List<MavenResolvedArtifact> dependencyArtifacts) {
-
         Set<String> ignore = new HashSet<>();
         ignore.addAll(config.getIgnoreLibraryMismatch());
 
@@ -357,6 +352,11 @@ public final class ArquillianPackager {
         ignore.add("org.jgroups:jgroups-raft");
         ignore.add("net.sourceforge.htmlunit:htmlunit");
 
+        // these are from camel-spring-boot and not camel repo so ignore them
+        ignore.add("org.apache.camel:camel-spring-cloud-consul");
+        ignore.add("org.apache.camel:camel-spring-cloud-netflix");
+        ignore.add("org.apache.camel:camel-spring-cloud");
+        ignore.add("org.apache.camel:camel-spring-boot");
 
         Map<String, Map<String, String>> status = new TreeMap<>();
         Set<String> mismatches = new TreeSet<>();
@@ -429,63 +429,11 @@ public final class ArquillianPackager {
         return v1.equals(v2);
     }
 
-    private static List<MavenResolvedArtifact> merge(ITestConfig config, List<MavenResolvedArtifact> runtimeDependencies, List<MavenResolvedArtifact> testDependencies) {
-
-
-        Set<String> runtimeArtifacts = new HashSet<>();
-        for (MavenResolvedArtifact a : runtimeDependencies) {
-            runtimeArtifacts.add(getIdentifier(a));
-        }
-
-        Map<String, String> testVersions = new HashMap<>();
-        for (MavenResolvedArtifact a : testDependencies) {
-            testVersions.put(getIdentifier(a), a.getCoordinate().getVersion());
-        }
-
-        List<MavenResolvedArtifact> result = new LinkedList<>();
-        List<String> problems = new LinkedList<>();
-
-        for (MavenResolvedArtifact a : runtimeDependencies) {
-            String version = a.getCoordinate().getVersion();
-            String testVersion = testVersions.get(getIdentifier(a));
-
-            if (testVersion != null && !sameVersion(testVersion, version)) {
-                problems.add("Versions for artifact " + getIdentifier(a) + " are different between runtime (" + version + ") and test (" + testVersion + ") scopes");
-            }
-
-            result.add(a);
-        }
-
-        for (MavenResolvedArtifact a : testDependencies) {
-            if (!runtimeArtifacts.contains(getIdentifier(a))) {
-                result.add(a);
-            }
-        }
-
-        if (!problems.isEmpty()) {
-            StringBuilder message = new StringBuilder();
-            message.append("Some problems found while merging test dependencies:\n");
-            for (String problem : problems) {
-                message.append(" - " + problem + "\n");
-            }
-
-            if (FAIL_ON_TEST_LIBRARY_MISMATCH) {
-                throw new InvocationException(new RuntimeException(message.toString()));
-            } else {
-                debug(message.toString());
-            }
-        }
-
-        return result;
-    }
-
     private static String getIdentifier(MavenResolvedArtifact a) {
         return a.getCoordinate().getGroupId() + ":" + a.getCoordinate().getArtifactId() + ":" + a.getCoordinate().getType() + ":" + a.getCoordinate().getClassifier();
     }
 
-
     private static File createUserPom(ITestConfig config, List<String> cleanTestProvidedDependencies) throws Exception {
-
         String pom;
         String template = "/application-pom-sb" + config.getSpringBootMajorVersion() + ".xml";
         try (InputStream pomTemplate = ArquillianPackager.class.getResourceAsStream(template)) {
@@ -514,7 +462,16 @@ public final class ArquillianPackager {
 
         pom = pom.replace("#{module}", config.getModuleName());
 
-        File pomFile = new File(config.getModuleBasePath() + "/target/itest-spring-boot-pom.xml");
+        // some modules are not in component-starter
+        String path = config.getModuleBasePath();
+        if (path.contains("camel-spring-cloud-netflix")) {
+            path = "../camel-spring-cloud-netflix";
+        } else if (path.contains("camel-spring-cloud-consul")) {
+            path = "../camel-spring-cloud-consul";
+        } else if (path.contains("camel-spring-cloud")) {
+            path = "../camel-spring-cloud";
+        }
+        File pomFile = new File(path + "/target/itest-spring-boot-pom.xml");
         pomFile.getParentFile().mkdirs();
         try (FileWriter fw = new FileWriter(pomFile)) {
             IOUtils.write(pom, fw);

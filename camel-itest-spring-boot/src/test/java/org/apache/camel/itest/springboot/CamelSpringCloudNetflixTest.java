@@ -42,7 +42,6 @@ public class CamelSpringCloudNetflixTest extends AbstractSpringBootTestSupport {
     @Test
     public void componentTests() throws Exception {
         // no component test
-        this.runModuleUnitTestsIfEnabled(config);
     }
 
 
