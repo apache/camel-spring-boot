@@ -39,6 +39,7 @@
         <module>camel-example-spring-boot-activemq</module>
         <module>camel-example-spring-boot-amqp</module>
         <module>camel-example-spring-boot-clustered-route-controller</module>
+        <module>camel-example-spring-boot-elytron</module>
         <module>camel-example-spring-boot-fhir</module>
         <module>camel-example-spring-boot-fhir-auth-tx</module>
         <module>camel-example-spring-boot-geocoder</module>
