@@ -18,7 +18,7 @@ This project provides Spring Boot support for Apache Camel.
 
 To create a starter for the `zoot` component, run the following command:
 ```
-./starter-add zoot
+./starter-create zoot
 ```
 
 Similarly, to delete the starter for the `zoot` component, run the following command:
