@@ -44,6 +44,12 @@ public class BraintreeComponentConfiguration
      */
     private BraintreeConfigurationNestedConfiguration configuration;
     /**
+     * Sets whether to enable the BraintreeLogHandler. It may be desirable to
+     * set this to 'false' where an existing JUL - SLF4J logger bridge is on the
+     * classpath.
+     */
+    private Boolean logHandlerEnabled = true;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -76,6 +82,14 @@ public class BraintreeComponentConfiguration
     public void setConfiguration(
             BraintreeConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public Boolean getLogHandlerEnabled() {
+        return logHandlerEnabled;
+    }
+
+    public void setLogHandlerEnabled(Boolean logHandlerEnabled) {
+        this.logHandlerEnabled = logHandlerEnabled;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -127,6 +141,13 @@ public class BraintreeComponentConfiguration
          * Set read timeout for http calls.
          */
         private Integer httpReadTimeout;
+        /**
+         * Sets whether to enable the BraintreeLogHandler. It may be desirable
+         * to set this to 'false' where an existing JUL - SLF4J logger bridge is
+         * on the classpath. This option can also be configured globally on the
+         * BraintreeComponent.
+         */
+        private Boolean logHandlerEnabled = true;
         /**
          * The merchant id provided by Braintree.
          */
@@ -198,6 +219,14 @@ public class BraintreeComponentConfiguration
 
         public void setHttpReadTimeout(Integer httpReadTimeout) {
             this.httpReadTimeout = httpReadTimeout;
+        }
+
+        public Boolean getLogHandlerEnabled() {
+            return logHandlerEnabled;
+        }
+
+        public void setLogHandlerEnabled(Boolean logHandlerEnabled) {
+            this.logHandlerEnabled = logHandlerEnabled;
         }
 
         public String getMerchantId() {

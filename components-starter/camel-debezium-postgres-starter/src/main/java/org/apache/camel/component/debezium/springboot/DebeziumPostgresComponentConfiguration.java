@@ -48,17 +48,6 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -83,14 +72,6 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -228,6 +209,13 @@ public class DebeziumPostgresComponentConfiguration
          * representation.
          */
         private Boolean includeUnknownDatatypes = false;
+        /**
+         * Specify how INTERVAL columns should be represented in change events,
+         * including:'string' represents values as an exact ISO formatted
+         * string'numeric' (default) represents values using the inexact
+         * conversion into microseconds
+         */
+        private String intervalHandlingMode = "numeric";
         /**
          * Maximum size of each batch of source records. Defaults to 2048.
          */
@@ -655,6 +643,14 @@ public class DebeziumPostgresComponentConfiguration
 
         public void setIncludeUnknownDatatypes(Boolean includeUnknownDatatypes) {
             this.includeUnknownDatatypes = includeUnknownDatatypes;
+        }
+
+        public String getIntervalHandlingMode() {
+            return intervalHandlingMode;
+        }
+
+        public void setIntervalHandlingMode(String intervalHandlingMode) {
+            this.intervalHandlingMode = intervalHandlingMode;
         }
 
         public Integer getMaxBatchSize() {

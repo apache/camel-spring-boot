@@ -22,7 +22,6 @@ import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.web3j.protocol.Web3j;
-import org.web3j.protocol.core.DefaultBlockParameter;
 
 /**
  * The web3j component uses the Web3j client API and allows you to add/read
@@ -118,7 +117,7 @@ public class Web3jComponentConfiguration
          * The block number, or the string latest for the last mined block or
          * pending, earliest for not yet mined transactions.
          */
-        private DefaultBlockParameter atBlock;
+        private String atBlock = "latest";
         /**
          * Hash of the block where this transaction was in.
          */
@@ -148,7 +147,7 @@ public class Web3jComponentConfiguration
          * The block number, or the string latest for the last mined block or
          * pending, earliest for not yet mined transactions.
          */
-        private DefaultBlockParameter fromBlock;
+        private String fromBlock = "latest";
         /**
          * If true it returns the full transaction objects, if false only the
          * hashes of the transactions.
@@ -230,7 +229,7 @@ public class Web3jComponentConfiguration
          * The block number, or the string latest for the last mined block or
          * pending, earliest for not yet mined transactions.
          */
-        private DefaultBlockParameter toBlock;
+        private String toBlock = "latest";
         /**
          * Topics are order-dependent. Each topic can also be a list of topics.
          * Specify multiple topics separated by comma.
@@ -269,11 +268,11 @@ public class Web3jComponentConfiguration
             this.addresses = addresses;
         }
 
-        public DefaultBlockParameter getAtBlock() {
+        public String getAtBlock() {
             return atBlock;
         }
 
-        public void setAtBlock(DefaultBlockParameter atBlock) {
+        public void setAtBlock(String atBlock) {
             this.atBlock = atBlock;
         }
 
@@ -325,11 +324,11 @@ public class Web3jComponentConfiguration
             this.fromAddress = fromAddress;
         }
 
-        public DefaultBlockParameter getFromBlock() {
+        public String getFromBlock() {
             return fromBlock;
         }
 
-        public void setFromBlock(DefaultBlockParameter fromBlock) {
+        public void setFromBlock(String fromBlock) {
             this.fromBlock = fromBlock;
         }
 
@@ -477,11 +476,11 @@ public class Web3jComponentConfiguration
             this.toAddress = toAddress;
         }
 
-        public DefaultBlockParameter getToBlock() {
+        public String getToBlock() {
             return toBlock;
         }
 
-        public void setToBlock(DefaultBlockParameter toBlock) {
+        public void setToBlock(String toBlock) {
             this.toBlock = toBlock;
         }
 

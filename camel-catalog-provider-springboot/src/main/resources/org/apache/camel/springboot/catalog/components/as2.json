@@ -5,7 +5,7 @@
     "syntax": "as2:apiName/methodName",
     "title": "AS2",
     "description": "Component used for transferring data secure and reliable over the internet using the AS2 protocol.",
-    "label": "AS2",
+    "label": "file",
     "deprecated": false,
     "deprecationNote": "",
     "async": false,

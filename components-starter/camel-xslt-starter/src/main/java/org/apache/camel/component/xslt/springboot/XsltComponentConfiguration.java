@@ -83,15 +83,6 @@ public class XsltComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
-    /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
 
     public String getUriResolverFactory() {
         return uriResolverFactory;
@@ -148,13 +139,5 @@ public class XsltComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 }

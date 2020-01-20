@@ -19,10 +19,8 @@ package org.apache.camel.component.nagios.springboot;
 import javax.annotation.Generated;
 import com.googlecode.jsendnsca.NagiosSettings;
 import com.googlecode.jsendnsca.encryption.Encryption;
-import org.apache.camel.component.nagios.NagiosEncryptionMethod;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * To send passive checks to Nagios using JSendNSCA.
@@ -60,15 +58,6 @@ public class NagiosComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
-    /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
 
     public NagiosConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -95,14 +84,6 @@ public class NagiosComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
-    }
-
     public static class NagiosConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.nagios.NagiosConfiguration.class;
         /**
@@ -113,11 +94,6 @@ public class NagiosComponentConfiguration
          * To specify an encryption method.
          */
         private Encryption encryption;
-        /**
-         * To specify an encryption method.
-         */
-        @Deprecated
-        private NagiosEncryptionMethod encryptionMethod;
         /**
          * This is the address of the Nagios host where checks should be send.
          */
@@ -150,17 +126,6 @@ public class NagiosComponentConfiguration
 
         public void setEncryption(Encryption encryption) {
             this.encryption = encryption;
-        }
-
-        @Deprecated
-        @DeprecatedConfigurationProperty
-        public NagiosEncryptionMethod getEncryptionMethod() {
-            return encryptionMethod;
-        }
-
-        @Deprecated
-        public void setEncryptionMethod(NagiosEncryptionMethod encryptionMethod) {
-            this.encryptionMethod = encryptionMethod;
         }
 
         public String getHost() {

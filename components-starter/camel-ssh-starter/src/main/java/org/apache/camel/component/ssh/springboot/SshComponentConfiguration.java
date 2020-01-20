@@ -20,7 +20,6 @@ import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.sshd.common.keyprovider.KeyPairProvider;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * The ssh component enables access to SSH servers such that you can send an SSH
@@ -275,8 +274,6 @@ public class SshComponentConfiguration
 
     public static class SshConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.ssh.SshConfiguration.class;
-        @Deprecated
-        private String certFilename;
         /**
          * Sets the resource path of the certificate to use for Authentication.
          * Will use ResourceHelperKeyPairProvider to resolve file based
@@ -354,17 +351,6 @@ public class SshComponentConfiguration
          * Sets the username to use in logging into the remote SSH server.
          */
         private String username;
-
-        @Deprecated
-        @DeprecatedConfigurationProperty
-        public String getCertFilename() {
-            return certFilename;
-        }
-
-        @Deprecated
-        public void setCertFilename(String certFilename) {
-            this.certFilename = certFilename;
-        }
 
         public String getCertResource() {
             return certResource;

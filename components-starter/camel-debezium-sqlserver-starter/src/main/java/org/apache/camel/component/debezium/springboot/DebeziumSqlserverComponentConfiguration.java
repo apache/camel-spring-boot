@@ -48,17 +48,6 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -83,14 +72,6 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -168,6 +149,12 @@ public class DebeziumSqlserverComponentConfiguration
          */
         private String databaseServerName;
         /**
+         * The timezone of the server used to correctly shift the commit
+         * transaction timestamp on the client sideOptions include: Any valid
+         * Java ZoneId
+         */
+        private String databaseServerTimezone;
+        /**
          * Name of the SQL Server database user to be used when connecting to
          * the database.
          */
@@ -240,9 +227,9 @@ public class DebeziumSqlserverComponentConfiguration
          * The criteria for running a snapshot upon startup of the connector.
          * Options include: 'initial' (the default) to specify the connector
          * should run a snapshot only when no offsets are available for the
-         * logical server name; 'initial_schema_only' to specify the connector
-         * should run a snapshot of the schema when no offsets are available for
-         * the logical server name.
+         * logical server name; 'schema_only' to specify the connector should
+         * run a snapshot of the schema when no offsets are available for the
+         * logical server name.
          */
         private String snapshotMode = "initial";
         /**
@@ -289,6 +276,14 @@ public class DebeziumSqlserverComponentConfiguration
          * precision regardless of the database columns' precision .
          */
         private String timePrecisionMode = "adaptive";
+        /**
+         * Whether delete operations should be represented by a delete event and
+         * a subsquenttombstone event (true) or only by a delete event (false).
+         * Emitting the tombstone event (the default behavior) allows Kafka to
+         * completely delete all events pertaining to the given key once the
+         * source record got deleted.
+         */
+        private Boolean tombstonesOnDelete = false;
         private Class connectorClass;
         /**
          * The Converter class that should be used to serialize and deserialize
@@ -451,6 +446,14 @@ public class DebeziumSqlserverComponentConfiguration
             this.databaseServerName = databaseServerName;
         }
 
+        public String getDatabaseServerTimezone() {
+            return databaseServerTimezone;
+        }
+
+        public void setDatabaseServerTimezone(String databaseServerTimezone) {
+            this.databaseServerTimezone = databaseServerTimezone;
+        }
+
         public String getDatabaseUser() {
             return databaseUser;
         }
@@ -594,6 +597,14 @@ public class DebeziumSqlserverComponentConfiguration
 
         public void setTimePrecisionMode(String timePrecisionMode) {
             this.timePrecisionMode = timePrecisionMode;
+        }
+
+        public Boolean getTombstonesOnDelete() {
+            return tombstonesOnDelete;
+        }
+
+        public void setTombstonesOnDelete(Boolean tombstonesOnDelete) {
+            this.tombstonesOnDelete = tombstonesOnDelete;
         }
 
         public Class getConnectorClass() {

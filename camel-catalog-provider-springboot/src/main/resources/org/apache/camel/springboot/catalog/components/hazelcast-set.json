@@ -4,7 +4,7 @@
     "scheme": "hazelcast-set",
     "syntax": "hazelcast-set:cacheName",
     "title": "Hazelcast Set",
-    "description": "The camel Endpoint to access Hazelcast distributed set.",
+    "description": "The hazelcast-set component is used to access Hazelcast distributed set.",
     "label": "cache,datagrid",
     "deprecated": false,
     "deprecationNote": "",

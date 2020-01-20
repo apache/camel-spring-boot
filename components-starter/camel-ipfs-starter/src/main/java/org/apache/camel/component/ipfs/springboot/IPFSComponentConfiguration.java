@@ -38,6 +38,14 @@ public class IPFSComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The ipfs host
+     */
+    private String ipfsHost = "127.0.0.1";
+    /**
+     * The ipfs port
+     */
+    private Integer ipfsPort = 5001;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -53,15 +61,22 @@ public class IPFSComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
-    /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
+
+    public String getIpfsHost() {
+        return ipfsHost;
+    }
+
+    public void setIpfsHost(String ipfsHost) {
+        this.ipfsHost = ipfsHost;
+    }
+
+    public Integer getIpfsPort() {
+        return ipfsPort;
+    }
+
+    public void setIpfsPort(Integer ipfsPort) {
+        this.ipfsPort = ipfsPort;
+    }
 
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
@@ -77,13 +92,5 @@ public class IPFSComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 }

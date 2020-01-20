@@ -17,8 +17,11 @@
 package org.apache.camel.component.bean.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.BeanScope;
+import org.apache.camel.component.bean.BeanComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * The bean component is for invoking Java beans from Camel.
@@ -37,11 +40,26 @@ public class BeanComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * If enabled, Camel will cache the result of the first Registry look-up.
-     * Cache can be enabled if the bean in the Registry is defined as a
-     * singleton scope.
+     * Use singleton option instead.
      */
-    private Boolean cache;
+    @Deprecated
+    private Boolean cache = true;
+    /**
+     * Scope of bean. When using singleton scope (default) the bean is created
+     * or looked up only once and reused for the lifetime of the endpoint. The
+     * bean should be thread-safe in case concurrent threads is calling the bean
+     * at the same time. When using request scope the bean is created or looked
+     * up once per request (exchange). This can be used if you want to store
+     * state on a bean while processing a request and you want to call the same
+     * bean instance multiple times while processing the request. The bean does
+     * not have to be thread-safe as the instance is only called from the same
+     * request. When using delegate scope, then the bean will be looked up or
+     * created per call. However in case of lookup then this is delegated to the
+     * bean registry such as Spring or CDI (if in use), which depends on their
+     * configuration can act as either singleton or prototype scope. so when
+     * using prototype then this depends on the delegated registry.
+     */
+    private BeanScope scope = BeanScope.Singleton;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -58,22 +76,24 @@ public class BeanComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
-    /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getCache() {
         return cache;
     }
 
+    @Deprecated
     public void setCache(Boolean cache) {
         this.cache = cache;
+    }
+
+    public BeanScope getScope() {
+        return scope;
+    }
+
+    public void setScope(BeanScope scope) {
+        this.scope = scope;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -90,13 +110,5 @@ public class BeanComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 }

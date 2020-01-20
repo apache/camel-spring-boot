@@ -72,15 +72,6 @@ public class LambdaComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
-    /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
 
     public LambdaConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -131,14 +122,6 @@ public class LambdaComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
-    }
-
     public static class LambdaConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.lambda.LambdaConfiguration.class;
         /**
@@ -150,14 +133,10 @@ public class LambdaComponentConfiguration
          */
         private AWSLambda awsLambdaClient;
         /**
-         * Name of the Lambda function.
-         */
-        private String function;
-        /**
          * The operation to perform. It can be listFunctions, getFunction,
          * createFunction, deleteFunction or invokeFunction
          */
-        private LambdaOperations operation;
+        private LambdaOperations operation = LambdaOperations.invokeFunction;
         /**
          * To define a proxy host when instantiating the Lambda client
          */
@@ -195,14 +174,6 @@ public class LambdaComponentConfiguration
 
         public void setAwsLambdaClient(AWSLambda awsLambdaClient) {
             this.awsLambdaClient = awsLambdaClient;
-        }
-
-        public String getFunction() {
-            return function;
-        }
-
-        public void setFunction(String function) {
-            this.function = function;
         }
 
         public LambdaOperations getOperation() {

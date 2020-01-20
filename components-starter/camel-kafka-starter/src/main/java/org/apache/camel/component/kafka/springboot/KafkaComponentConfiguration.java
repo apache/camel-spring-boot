@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.kafka.springboot;
 
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import javax.annotation.Generated;
 import org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer;
@@ -204,6 +205,15 @@ public class KafkaComponentConfiguration
 
     public static class KafkaConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.kafka.KafkaConfiguration.class;
+        /**
+         * Sets additional properties for either kafka consumer or kafka
+         * producer in case they can't be set directly on the camel
+         * configurations (e.g: new Kafka properties that are not reflected yet
+         * in Camel configurations), the properties have to be prefixed with
+         * additionalProperties.. E.g:
+         * additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http://localhost:8811/avro
+         */
+        private Map additionalProperties;
         /**
          * Whether to allow doing manual commits via KafkaManualCommit. If this
          * option is enabled then an instance of KafkaManualCommit is stored on
@@ -804,6 +814,14 @@ public class KafkaComponentConfiguration
          * to it from KafkaProducer using asynchronous non-blocking processing.
          */
         private Integer workerPoolMaxSize = 20;
+
+        public Map getAdditionalProperties() {
+            return additionalProperties;
+        }
+
+        public void setAdditionalProperties(Map additionalProperties) {
+            this.additionalProperties = additionalProperties;
+        }
 
         public Boolean getAllowManualCommit() {
             return allowManualCommit;

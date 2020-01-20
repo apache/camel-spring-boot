@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
+import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -56,10 +57,14 @@ public class QuartzComponentConfiguration
      */
     private Boolean enableJmx = true;
     /**
-     * Properties to configure the Quartz scheduler. The option is a
-     * java.util.Properties type.
+     * References to an existing Properties or Map to lookup in the registry to
+     * use for configuring quartz.
      */
-    private String properties;
+    private String propertiesRef;
+    /**
+     * Properties to configure the Quartz scheduler.
+     */
+    private Map properties;
     /**
      * File name of the properties to load from the classpath
      */
@@ -93,17 +98,6 @@ public class QuartzComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -147,11 +141,19 @@ public class QuartzComponentConfiguration
         this.enableJmx = enableJmx;
     }
 
-    public String getProperties() {
+    public String getPropertiesRef() {
+        return propertiesRef;
+    }
+
+    public void setPropertiesRef(String propertiesRef) {
+        this.propertiesRef = propertiesRef;
+    }
+
+    public Map getProperties() {
         return properties;
     }
 
-    public void setProperties(String properties) {
+    public void setProperties(Map properties) {
         this.properties = properties;
     }
 
@@ -201,14 +203,6 @@ public class QuartzComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBridgeErrorHandler() {
