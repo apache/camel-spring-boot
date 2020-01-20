@@ -15,10 +15,3 @@ Starters are created to meet the following requirements:
 
 Each starter has its own integration test (in path `tests/camel-itest-spring-boot`) that verifies its compatibility with the current release of spring-boot.
 
-The following components do not have a starter:
-
-* **camel-blueprint** (intended for OSGi only)
-* **camel-cdi** (intended for CDI only)
-* **camel-eventadmin** (intended for OSGi only)
-* **camel-paxlogging** (intended for OSGi only)
-* **camel-spark-rest** (does not work with Spring Boot)
