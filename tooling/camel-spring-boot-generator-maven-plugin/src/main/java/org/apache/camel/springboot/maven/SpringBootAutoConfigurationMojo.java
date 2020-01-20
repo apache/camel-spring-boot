@@ -45,7 +45,7 @@ import java.util.zip.ZipEntry;
 import javax.annotation.Generated;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.apache.camel.maven.packaging.JSonSchemaHelper;
+import org.apache.camel.maven.packaging.AbstractGeneratorMojo;
 import org.apache.camel.maven.packaging.model.ComponentModel;
 import org.apache.camel.maven.packaging.model.ComponentOptionModel;
 import org.apache.camel.maven.packaging.model.DataFormatModel;
@@ -55,14 +55,16 @@ import org.apache.camel.maven.packaging.model.LanguageModel;
 import org.apache.camel.maven.packaging.model.LanguageOptionModel;
 import org.apache.camel.maven.packaging.model.OtherModel;
 import org.apache.camel.maven.packaging.model.OtherOptionModel;
-import org.apache.camel.maven.packaging.srcgen.Annotation;
-import org.apache.camel.maven.packaging.srcgen.GenericType;
-import org.apache.camel.maven.packaging.srcgen.JavaClass;
-import org.apache.camel.maven.packaging.srcgen.Method;
-import org.apache.camel.maven.packaging.srcgen.Property;
 import org.apache.camel.spi.Metadata;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriPath;
+import org.apache.camel.tooling.util.JSonSchemaHelper;
+import org.apache.camel.tooling.util.PackageHelper;
+import org.apache.camel.tooling.util.srcgen.Annotation;
+import org.apache.camel.tooling.util.srcgen.GenericType;
+import org.apache.camel.tooling.util.srcgen.JavaClass;
+import org.apache.camel.tooling.util.srcgen.Method;
+import org.apache.camel.tooling.util.srcgen.Property;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -88,15 +90,6 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
-
-import static org.apache.camel.maven.packaging.AbstractGeneratorMojo.updateResource;
-import static org.apache.camel.maven.packaging.JSonSchemaHelper.getPropertyDefaultValue;
-import static org.apache.camel.maven.packaging.JSonSchemaHelper.getPropertyDescriptionValue;
-import static org.apache.camel.maven.packaging.JSonSchemaHelper.getPropertyJavaType;
-import static org.apache.camel.maven.packaging.JSonSchemaHelper.getPropertyType;
-import static org.apache.camel.maven.packaging.JSonSchemaHelper.getSafeValue;
-import static org.apache.camel.maven.packaging.JSonSchemaHelper.parseJsonSchema;
-import static org.apache.camel.maven.packaging.PackageHelper.loadText;
 
 /**
  * Generate Spring Boot auto configuration files for Camel components and data
@@ -918,11 +911,11 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                             }
 
                             if (optionName != null) {
-                                javaType = getPropertyJavaType(rows, optionName);
-                                type = getPropertyType(rows, optionName);
-                                defaultValue = getPropertyDefaultValue(rows, optionName);
+                                javaType = JSonSchemaHelper.getPropertyJavaType(rows, optionName);
+                                type = JSonSchemaHelper.getPropertyType(rows, optionName);
+                                defaultValue = JSonSchemaHelper.getPropertyDefaultValue(rows, optionName);
                                 // favour description from the model
-                                description = getPropertyDescriptionValue(rows, optionName);
+                                description = JSonSchemaHelper.getPropertyDescriptionValue(rows, optionName);
                                 if (description != null) {
                                     prop.getField().getJavaDoc().setFullText(description);
                                 }
@@ -1883,56 +1876,56 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         List<Map<String, String>> rows = JSonSchemaHelper.parseJsonSchema("component", json, false);
 
         ComponentModel component = new ComponentModel();
-        component.setScheme(getSafeValue("scheme", rows));
-        component.setSyntax(getSafeValue("syntax", rows));
-        component.setAlternativeSyntax(getSafeValue("alternativeSyntax", rows));
-        component.setTitle(getSafeValue("title", rows));
-        component.setDescription(getSafeValue("description", rows));
+        component.setScheme(JSonSchemaHelper.getSafeValue("scheme", rows));
+        component.setSyntax(JSonSchemaHelper.getSafeValue("syntax", rows));
+        component.setAlternativeSyntax(JSonSchemaHelper.getSafeValue("alternativeSyntax", rows));
+        component.setTitle(JSonSchemaHelper.getSafeValue("title", rows));
+        component.setDescription(JSonSchemaHelper.getSafeValue("description", rows));
         component.setFirstVersion(JSonSchemaHelper.getSafeValue("firstVersion", rows));
-        component.setLabel(getSafeValue("label", rows));
-        component.setDeprecated(getSafeValue("deprecated", rows));
-        component.setDeprecationNote(getSafeValue("deprecationNote", rows));
-        component.setConsumerOnly(getSafeValue("consumerOnly", rows));
-        component.setProducerOnly(getSafeValue("producerOnly", rows));
-        component.setJavaType(getSafeValue("javaType", rows));
-        component.setGroupId(getSafeValue("groupId", rows));
-        component.setArtifactId(getSafeValue("artifactId", rows));
-        component.setVersion(getSafeValue("version", rows));
+        component.setLabel(JSonSchemaHelper.getSafeValue("label", rows));
+        component.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", rows));
+        component.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", rows));
+        component.setConsumerOnly(JSonSchemaHelper.getSafeValue("consumerOnly", rows));
+        component.setProducerOnly(JSonSchemaHelper.getSafeValue("producerOnly", rows));
+        component.setJavaType(JSonSchemaHelper.getSafeValue("javaType", rows));
+        component.setGroupId(JSonSchemaHelper.getSafeValue("groupId", rows));
+        component.setArtifactId(JSonSchemaHelper.getSafeValue("artifactId", rows));
+        component.setVersion(JSonSchemaHelper.getSafeValue("version", rows));
 
         rows = JSonSchemaHelper.parseJsonSchema("componentProperties", json, true);
         for (Map<String, String> row : rows) {
             ComponentOptionModel option = new ComponentOptionModel();
-            option.setName(getSafeValue("name", row));
-            option.setDisplayName(getSafeValue("displayName", row));
-            option.setKind(getSafeValue("kind", row));
-            option.setType(getSafeValue("type", row));
-            option.setJavaType(getSafeValue("javaType", row));
-            option.setDeprecated(getSafeValue("deprecated", row));
-            option.setDeprecationNote(getSafeValue("deprecationNote", row));
-            option.setDescription(getSafeValue("description", row));
-            option.setDefaultValue(getSafeValue("defaultValue", row));
-            option.setEnums(getSafeValue("enum", row));
+            option.setName(JSonSchemaHelper.getSafeValue("name", row));
+            option.setDisplayName(JSonSchemaHelper.getSafeValue("displayName", row));
+            option.setKind(JSonSchemaHelper.getSafeValue("kind", row));
+            option.setType(JSonSchemaHelper.getSafeValue("type", row));
+            option.setJavaType(JSonSchemaHelper.getSafeValue("javaType", row));
+            option.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", row));
+            option.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", row));
+            option.setDescription(JSonSchemaHelper.getSafeValue("description", row));
+            option.setDefaultValue(JSonSchemaHelper.getSafeValue("defaultValue", row));
+            option.setEnums(JSonSchemaHelper.getSafeValue("enum", row));
             component.addComponentOption(option);
         }
 
         rows = JSonSchemaHelper.parseJsonSchema("properties", json, true);
         for (Map<String, String> row : rows) {
             EndpointOptionModel option = new EndpointOptionModel();
-            option.setName(getSafeValue("name", row));
-            option.setDisplayName(getSafeValue("displayName", row));
-            option.setKind(getSafeValue("kind", row));
-            option.setGroup(getSafeValue("group", row));
-            option.setRequired(getSafeValue("required", row));
-            option.setType(getSafeValue("type", row));
-            option.setJavaType(getSafeValue("javaType", row));
-            option.setEnums(getSafeValue("enum", row));
-            option.setPrefix(getSafeValue("prefix", row));
-            option.setMultiValue(getSafeValue("multiValue", row));
-            option.setDeprecated(getSafeValue("deprecated", row));
-            option.setDeprecationNote(getSafeValue("deprecationNote", row));
-            option.setDefaultValue(getSafeValue("defaultValue", row));
-            option.setDescription(getSafeValue("description", row));
-            option.setEnumValues(getSafeValue("enum", row));
+            option.setName(JSonSchemaHelper.getSafeValue("name", row));
+            option.setDisplayName(JSonSchemaHelper.getSafeValue("displayName", row));
+            option.setKind(JSonSchemaHelper.getSafeValue("kind", row));
+            option.setGroup(JSonSchemaHelper.getSafeValue("group", row));
+            option.setRequired(JSonSchemaHelper.getSafeValue("required", row));
+            option.setType(JSonSchemaHelper.getSafeValue("type", row));
+            option.setJavaType(JSonSchemaHelper.getSafeValue("javaType", row));
+            option.setEnums(JSonSchemaHelper.getSafeValue("enum", row));
+            option.setPrefix(JSonSchemaHelper.getSafeValue("prefix", row));
+            option.setMultiValue(JSonSchemaHelper.getSafeValue("multiValue", row));
+            option.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", row));
+            option.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", row));
+            option.setDefaultValue(JSonSchemaHelper.getSafeValue("defaultValue", row));
+            option.setDescription(JSonSchemaHelper.getSafeValue("description", row));
+            option.setEnumValues(JSonSchemaHelper.getSafeValue("enum", row));
             component.addEndpointOption(option);
         }
 
@@ -1943,32 +1936,32 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         List<Map<String, String>> rows = JSonSchemaHelper.parseJsonSchema("dataformat", json, false);
 
         DataFormatModel dataFormat = new DataFormatModel();
-        dataFormat.setTitle(getSafeValue("title", rows));
-        dataFormat.setName(getSafeValue("name", rows));
-        dataFormat.setModelName(getSafeValue("modelName", rows));
-        dataFormat.setDescription(getSafeValue("description", rows));
+        dataFormat.setTitle(JSonSchemaHelper.getSafeValue("title", rows));
+        dataFormat.setName(JSonSchemaHelper.getSafeValue("name", rows));
+        dataFormat.setModelName(JSonSchemaHelper.getSafeValue("modelName", rows));
+        dataFormat.setDescription(JSonSchemaHelper.getSafeValue("description", rows));
         dataFormat.setFirstVersion(JSonSchemaHelper.getSafeValue("firstVersion", rows));
-        dataFormat.setLabel(getSafeValue("label", rows));
-        dataFormat.setDeprecated(getSafeValue("deprecated", rows));
-        dataFormat.setDeprecationNote(getSafeValue("deprecationNote", rows));
-        dataFormat.setJavaType(getSafeValue("javaType", rows));
-        dataFormat.setGroupId(getSafeValue("groupId", rows));
-        dataFormat.setArtifactId(getSafeValue("artifactId", rows));
-        dataFormat.setVersion(getSafeValue("version", rows));
+        dataFormat.setLabel(JSonSchemaHelper.getSafeValue("label", rows));
+        dataFormat.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", rows));
+        dataFormat.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", rows));
+        dataFormat.setJavaType(JSonSchemaHelper.getSafeValue("javaType", rows));
+        dataFormat.setGroupId(JSonSchemaHelper.getSafeValue("groupId", rows));
+        dataFormat.setArtifactId(JSonSchemaHelper.getSafeValue("artifactId", rows));
+        dataFormat.setVersion(JSonSchemaHelper.getSafeValue("version", rows));
 
         rows = JSonSchemaHelper.parseJsonSchema("properties", json, true);
         for (Map<String, String> row : rows) {
             DataFormatOptionModel option = new DataFormatOptionModel();
-            option.setName(getSafeValue("name", row));
-            option.setDisplayName(getSafeValue("displayName", row));
-            option.setKind(getSafeValue("kind", row));
-            option.setType(getSafeValue("type", row));
-            option.setJavaType(getSafeValue("javaType", row));
-            option.setDeprecated(getSafeValue("deprecated", row));
-            option.setDeprecationNote(getSafeValue("deprecationNote", row));
-            option.setDescription(getSafeValue("description", row));
-            option.setDefaultValue(getSafeValue("defaultValue", row));
-            option.setEnumValues(getSafeValue("enum", row));
+            option.setName(JSonSchemaHelper.getSafeValue("name", row));
+            option.setDisplayName(JSonSchemaHelper.getSafeValue("displayName", row));
+            option.setKind(JSonSchemaHelper.getSafeValue("kind", row));
+            option.setType(JSonSchemaHelper.getSafeValue("type", row));
+            option.setJavaType(JSonSchemaHelper.getSafeValue("javaType", row));
+            option.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", row));
+            option.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", row));
+            option.setDescription(JSonSchemaHelper.getSafeValue("description", row));
+            option.setDefaultValue(JSonSchemaHelper.getSafeValue("defaultValue", row));
+            option.setEnumValues(JSonSchemaHelper.getSafeValue("enum", row));
             dataFormat.addDataFormatOption(option);
         }
 
@@ -1979,32 +1972,32 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         List<Map<String, String>> rows = JSonSchemaHelper.parseJsonSchema("language", json, false);
 
         LanguageModel language = new LanguageModel();
-        language.setTitle(getSafeValue("title", rows));
-        language.setName(getSafeValue("name", rows));
-        language.setModelName(getSafeValue("modelName", rows));
-        language.setDescription(getSafeValue("description", rows));
+        language.setTitle(JSonSchemaHelper.getSafeValue("title", rows));
+        language.setName(JSonSchemaHelper.getSafeValue("name", rows));
+        language.setModelName(JSonSchemaHelper.getSafeValue("modelName", rows));
+        language.setDescription(JSonSchemaHelper.getSafeValue("description", rows));
         language.setFirstVersion(JSonSchemaHelper.getSafeValue("firstVersion", rows));
-        language.setLabel(getSafeValue("label", rows));
-        language.setDeprecated(getSafeValue("deprecated", rows));
-        language.setDeprecationNote(getSafeValue("deprecationNote", rows));
-        language.setJavaType(getSafeValue("javaType", rows));
-        language.setGroupId(getSafeValue("groupId", rows));
-        language.setArtifactId(getSafeValue("artifactId", rows));
-        language.setVersion(getSafeValue("version", rows));
+        language.setLabel(JSonSchemaHelper.getSafeValue("label", rows));
+        language.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", rows));
+        language.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", rows));
+        language.setJavaType(JSonSchemaHelper.getSafeValue("javaType", rows));
+        language.setGroupId(JSonSchemaHelper.getSafeValue("groupId", rows));
+        language.setArtifactId(JSonSchemaHelper.getSafeValue("artifactId", rows));
+        language.setVersion(JSonSchemaHelper.getSafeValue("version", rows));
 
         rows = JSonSchemaHelper.parseJsonSchema("properties", json, true);
         for (Map<String, String> row : rows) {
             LanguageOptionModel option = new LanguageOptionModel();
-            option.setName(getSafeValue("name", row));
-            option.setDisplayName(getSafeValue("displayName", row));
-            option.setKind(getSafeValue("kind", row));
-            option.setType(getSafeValue("type", row));
-            option.setJavaType(getSafeValue("javaType", row));
-            option.setDeprecated(getSafeValue("deprecated", row));
-            option.setDeprecationNote(getSafeValue("deprecationNote", row));
-            option.setDescription(getSafeValue("description", row));
-            option.setDefaultValue(getSafeValue("defaultValue", row));
-            option.setEnumValues(getSafeValue("enum", row));
+            option.setName(JSonSchemaHelper.getSafeValue("name", row));
+            option.setDisplayName(JSonSchemaHelper.getSafeValue("displayName", row));
+            option.setKind(JSonSchemaHelper.getSafeValue("kind", row));
+            option.setType(JSonSchemaHelper.getSafeValue("type", row));
+            option.setJavaType(JSonSchemaHelper.getSafeValue("javaType", row));
+            option.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", row));
+            option.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", row));
+            option.setDescription(JSonSchemaHelper.getSafeValue("description", row));
+            option.setDefaultValue(JSonSchemaHelper.getSafeValue("defaultValue", row));
+            option.setEnumValues(JSonSchemaHelper.getSafeValue("enum", row));
             language.addLanguageOption(option);
         }
 
@@ -2012,33 +2005,33 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     }
 
     private OtherModel generateOtherModel(String json) {
-        List<Map<String, String>> rows = parseJsonSchema("model", json, false);
+        List<Map<String, String>> rows = JSonSchemaHelper.parseJsonSchema("model", json, false);
 
         OtherModel model = new OtherModel();
-        model.setName(getSafeValue("name", rows));
-        model.setTitle(getSafeValue("title", rows));
-        model.setDescription(getSafeValue("description", rows));
-        model.setJavaType(getSafeValue("javaType", rows));
-        model.setLabel(getSafeValue("label", rows));
-        model.setDeprecated(getSafeValue("deprecated", rows));
-        model.setDeprecationNote(getSafeValue("deprecationNote", rows));
+        model.setName(JSonSchemaHelper.getSafeValue("name", rows));
+        model.setTitle(JSonSchemaHelper.getSafeValue("title", rows));
+        model.setDescription(JSonSchemaHelper.getSafeValue("description", rows));
+        model.setJavaType(JSonSchemaHelper.getSafeValue("javaType", rows));
+        model.setLabel(JSonSchemaHelper.getSafeValue("label", rows));
+        model.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", rows));
+        model.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", rows));
 
-        rows = parseJsonSchema("properties", json, true);
+        rows = JSonSchemaHelper.parseJsonSchema("properties", json, true);
         for (Map<String, String> row : rows) {
             OtherOptionModel option = new OtherOptionModel();
-            option.setName(getSafeValue("name", row));
-            option.setDisplayName(getSafeValue("displayName", row));
-            option.setKind(getSafeValue("kind", row));
-            option.setGroup(getSafeValue("group", row));
-            option.setRequired(getSafeValue("required", row));
-            option.setType(getSafeValue("type", row));
-            option.setJavaType(getSafeValue("javaType", row));
-            option.setEnums(getSafeValue("enum", row));
-            option.setDeprecated(getSafeValue("deprecated", row));
-            option.setDeprecationNote(getSafeValue("deprecationNote", row));
-            option.setDefaultValue(getSafeValue("defaultValue", row));
-            option.setDescription(getSafeValue("description", row));
-            option.setEnums(getSafeValue("enums", row));
+            option.setName(JSonSchemaHelper.getSafeValue("name", row));
+            option.setDisplayName(JSonSchemaHelper.getSafeValue("displayName", row));
+            option.setKind(JSonSchemaHelper.getSafeValue("kind", row));
+            option.setGroup(JSonSchemaHelper.getSafeValue("group", row));
+            option.setRequired(JSonSchemaHelper.getSafeValue("required", row));
+            option.setType(JSonSchemaHelper.getSafeValue("type", row));
+            option.setJavaType(JSonSchemaHelper.getSafeValue("javaType", row));
+            option.setEnums(JSonSchemaHelper.getSafeValue("enum", row));
+            option.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", row));
+            option.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", row));
+            option.setDefaultValue(JSonSchemaHelper.getSafeValue("defaultValue", row));
+            option.setDescription(JSonSchemaHelper.getSafeValue("description", row));
+            option.setEnums(JSonSchemaHelper.getSafeValue("enums", row));
 
             model.addOptionModel(option);
         }
@@ -2089,12 +2082,12 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         try {
             String header;
             try (InputStream is = getClass().getClassLoader().getResourceAsStream("license-header-java.txt")) {
-                header = loadText(is);
+                header = PackageHelper.loadText(is);
             }
             String code = header + source;
             getLog().debug("Source code generated:\n" + code);
 
-            updateResource(null, target.toPath(), code);
+            AbstractGeneratorMojo.updateResource(null, target.toPath(), code);
         } catch (Exception e) {
             throw new MojoFailureException("IOError with file " + target, e);
         }
@@ -2158,7 +2151,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             // create new file
             try {
                 InputStream is = getClass().getClassLoader().getResourceAsStream("license-header.txt");
-                String header = loadText(is);
+                String header = PackageHelper.loadText(is);
                 String code = sb.toString();
                 // add empty new line after header
                 code = header + "\n" + code;

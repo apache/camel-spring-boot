@@ -17,34 +17,27 @@
 package org.apache.camel.springboot.maven;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Supplier;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 
+import org.apache.camel.tooling.util.PackageHelper;
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
-import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
-
-import static org.apache.camel.maven.packaging.PackageHelper.loadText;
 
 public abstract class AbstractSpringBootGenerator extends AbstractMojo {
 
@@ -144,7 +137,7 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
 
     protected static String loadJson(JarFile jar, JarEntry je) {
         try (InputStream is = jar.getInputStream(je)) {
-            return loadText(is);
+            return PackageHelper.loadText(is);
         } catch (IOException e) {
             throw new IOError(e);
         }

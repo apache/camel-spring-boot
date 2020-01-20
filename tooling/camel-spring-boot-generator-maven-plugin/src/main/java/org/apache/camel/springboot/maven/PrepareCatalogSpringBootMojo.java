@@ -37,8 +37,6 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 
-import static org.apache.camel.maven.packaging.PackageHelper.loadText;
-
 /**
  * Prepares the Spring Boot provider camel catalog to include component it supports
  */
