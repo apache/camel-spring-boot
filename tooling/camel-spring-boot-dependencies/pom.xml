@@ -423,6 +423,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-aws2-translate-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-azure-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1762,11 +1767,6 @@
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>target</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
         <groupId>org.apache.camel.tests</groupId>
         <artifactId>org.apache.camel.tests.mock-javamail_1.7</artifactId>
         <version>3.1.0-SNAPSHOT</version>
@@ -2700,6 +2700,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-jsch</artifactId>
+        <version>3.1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-jslt</artifactId>
         <version>3.1.0-SNAPSHOT</version>
       </dependency>
       <dependency>
