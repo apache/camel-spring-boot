@@ -16,7 +16,7 @@
     "firstVersion": "1.2.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-velocity-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "velocityEngine": { "kind": "property", "displayName": "Velocity Engine", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "org.apache.velocity.app.VelocityEngine", "deprecated": false, "secret": false, "description": "To use the VelocityEngine otherwise a new engine is created" },

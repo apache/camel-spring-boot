@@ -16,7 +16,7 @@
     "firstVersion": "2.18.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-telegram-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "authorizationToken": { "kind": "property", "displayName": "Authorization Token", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "description": "The default Telegram authorization token to be used when the information is not provided in the endpoints." },

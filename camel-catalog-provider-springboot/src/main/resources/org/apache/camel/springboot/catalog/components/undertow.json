@@ -17,7 +17,7 @@
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-undertow-starter",
     "verifiers": "parameters,connectivity",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "undertowHttpBinding": { "kind": "property", "displayName": "Undertow Http Binding", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "org.apache.camel.component.undertow.UndertowHttpBinding", "deprecated": false, "secret": false, "description": "To use a custom HttpBinding to control the mapping between Camel message and HttpClient." },

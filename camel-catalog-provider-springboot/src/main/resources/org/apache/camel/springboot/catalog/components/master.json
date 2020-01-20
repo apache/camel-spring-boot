@@ -16,7 +16,7 @@
     "firstVersion": "2.20.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-master-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "service": { "kind": "property", "displayName": "Service", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "org.apache.camel.cluster.CamelClusterService", "deprecated": false, "secret": false, "description": "Inject the service to use." },

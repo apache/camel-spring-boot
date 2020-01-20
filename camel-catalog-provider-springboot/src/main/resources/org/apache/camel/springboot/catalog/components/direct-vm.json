@@ -16,7 +16,7 @@
     "firstVersion": "2.10.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-directvm-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "block": { "kind": "property", "displayName": "Block", "group": "producer", "label": "producer", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": true, "description": "If sending a message to a direct endpoint which has no active consumer, then we can tell the producer to block and wait for the consumer to become active." },

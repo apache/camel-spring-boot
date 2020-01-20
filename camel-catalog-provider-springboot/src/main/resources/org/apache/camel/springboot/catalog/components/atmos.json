@@ -16,7 +16,7 @@
     "firstVersion": "2.15.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-atmos-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "fullTokenId": { "kind": "property", "displayName": "Full Token Id", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "description": "The token id to pass to the Atmos client" },

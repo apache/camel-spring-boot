@@ -16,7 +16,7 @@
     "firstVersion": "2.24.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-pulsar-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "autoConfiguration": { "kind": "property", "displayName": "Auto Configuration", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "org.apache.camel.component.pulsar.utils.AutoConfiguration", "deprecated": false, "secret": false, "description": "The pulsar auto configuration" },

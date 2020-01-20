@@ -16,7 +16,7 @@
     "firstVersion": "2.11.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-aws-cw-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "configuration": { "kind": "property", "displayName": "Configuration", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "org.apache.camel.component.aws.cw.CwConfiguration", "deprecated": false, "secret": false, "description": "The AWS CW default configuration" },

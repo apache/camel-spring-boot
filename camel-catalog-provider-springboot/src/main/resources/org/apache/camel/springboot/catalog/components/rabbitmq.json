@@ -16,7 +16,7 @@
     "firstVersion": "2.12.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-rabbitmq-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "hostname": { "kind": "property", "displayName": "Hostname", "group": "common", "label": "common", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "The hostname of the running RabbitMQ instance or cluster." },

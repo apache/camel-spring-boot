@@ -16,7 +16,7 @@
     "firstVersion": "3.0.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-debezium-sqlserver-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "configuration": { "kind": "property", "displayName": "Configuration", "group": "consumer", "required": false, "type": "object", "javaType": "org.apache.camel.component.debezium.configuration.SqlServerConnectorEmbeddedDebeziumConfiguration", "deprecated": false, "secret": false, "description": "Allow pre-configured Configurations to be set." },

@@ -17,7 +17,7 @@
     "firstVersion": "2.14.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-netty-http-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "nettyHttpBinding": { "kind": "property", "displayName": "Netty Http Binding", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "org.apache.camel.component.netty.http.NettyHttpBinding", "deprecated": false, "secret": false, "description": "To use a custom org.apache.camel.component.netty.http.NettyHttpBinding for binding to/from Netty and Camel Message API." },

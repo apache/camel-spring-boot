@@ -16,7 +16,7 @@
     "firstVersion": "2.19.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-reactive-streams-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "internalEngineConfiguration": { "kind": "property", "displayName": "Internal Engine Configuration", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration", "deprecated": false, "secret": false, "description": "Configures the internal engine for Reactive Streams." },

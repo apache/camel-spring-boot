@@ -16,7 +16,7 @@
     "firstVersion": "2.16.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-jolt-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "transform": { "kind": "property", "displayName": "Transform", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "com.bazaarvoice.jolt.Transform", "deprecated": false, "secret": false, "description": "Explicitly sets the Transform to use. If not set a Transform specified by the transformDsl will be created" },

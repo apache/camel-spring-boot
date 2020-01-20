@@ -18,7 +18,7 @@
     "firstVersion": "2.14.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-ahc-ws-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "client": {"kind":"property","displayName":"Client","group":"advanced","label":"advanced","required":false,"type":"object","javaType":"org.asynchttpclient.AsyncHttpClient","deprecated":false,"secret":false,"description":"To use a custom AsyncHttpClient"},

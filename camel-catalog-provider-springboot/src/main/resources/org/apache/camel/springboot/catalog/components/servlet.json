@@ -17,7 +17,7 @@
     "firstVersion": "2.0.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-servlet-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "servletName": { "kind": "property", "displayName": "Servlet Name", "group": "consumer", "label": "consumer", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "defaultValue": "CamelServlet", "description": "Default name of servlet to use. The default name is CamelServlet." },

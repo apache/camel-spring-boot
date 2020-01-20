@@ -16,7 +16,7 @@
     "firstVersion": "2.19.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-zookeeper-master-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "containerIdFactory": { "kind": "property", "displayName": "Container Id Factory", "group": "consumer", "required": false, "type": "object", "javaType": "org.apache.camel.component.zookeepermaster.ContainerIdFactory", "deprecated": false, "secret": false, "description": "To use a custom ContainerIdFactory for creating container ids." },

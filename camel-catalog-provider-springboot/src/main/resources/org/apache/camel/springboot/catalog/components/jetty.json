@@ -17,7 +17,7 @@
     "firstVersion": "1.2.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-jetty-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "sslKeyPassword": { "kind": "property", "displayName": "Ssl Key Password", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "description": "The key password, which is used to access the certificate's key entry in the keystore (this is the same password that is supplied to the keystore command's -keypass option)." },

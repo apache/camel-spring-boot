@@ -17,7 +17,7 @@
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-rest-starter",
     "verifiers": "parameters,connectivity",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "consumerComponentName": { "kind": "property", "displayName": "Consumer Component Name", "group": "consumer", "label": "consumer", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "The Camel Rest component to use for (consumer) the REST transport, such as jetty, servlet, undertow. If no component has been explicit configured, then Camel will lookup if there is a Camel component that integrates with the Rest DSL, or if a org.apache.camel.spi.RestConsumerFactory is registered in the registry. If either one is found, then that is being used." },

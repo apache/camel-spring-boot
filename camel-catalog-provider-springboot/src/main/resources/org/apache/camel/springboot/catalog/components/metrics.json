@@ -16,7 +16,7 @@
     "firstVersion": "2.14.0",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-metrics-starter",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "metricRegistry": { "kind": "property", "displayName": "Metric Registry", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "com.codahale.metrics.MetricRegistry", "deprecated": false, "secret": false, "description": "To use a custom configured MetricRegistry." },

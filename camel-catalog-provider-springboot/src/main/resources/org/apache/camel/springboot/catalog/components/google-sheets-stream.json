@@ -17,7 +17,7 @@
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-google-sheets-starter",
     "verifiers": "parameters,connectivity",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "3.1.0-SNAPSHOT"
   },
   "componentProperties": {
     "configuration": { "kind": "property", "displayName": "Configuration", "group": "consumer", "required": false, "type": "object", "javaType": "org.apache.camel.component.google.sheets.stream.GoogleSheetsStreamConfiguration", "deprecated": false, "secret": false, "description": "To use the shared configuration" },
