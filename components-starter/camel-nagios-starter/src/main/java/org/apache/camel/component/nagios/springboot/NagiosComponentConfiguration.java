@@ -19,8 +19,10 @@ package org.apache.camel.component.nagios.springboot;
 import javax.annotation.Generated;
 import com.googlecode.jsendnsca.NagiosSettings;
 import com.googlecode.jsendnsca.encryption.Encryption;
+import org.apache.camel.component.nagios.NagiosEncryptionMethod;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * To send passive checks to Nagios using JSendNSCA.
@@ -112,6 +114,11 @@ public class NagiosComponentConfiguration
          */
         private Encryption encryption;
         /**
+         * To specify an encryption method.
+         */
+        @Deprecated
+        private NagiosEncryptionMethod encryptionMethod;
+        /**
          * This is the address of the Nagios host where checks should be send.
          */
         private String host;
@@ -143,6 +150,17 @@ public class NagiosComponentConfiguration
 
         public void setEncryption(Encryption encryption) {
             this.encryption = encryption;
+        }
+
+        @Deprecated
+        @DeprecatedConfigurationProperty
+        public NagiosEncryptionMethod getEncryptionMethod() {
+            return encryptionMethod;
+        }
+
+        @Deprecated
+        public void setEncryptionMethod(NagiosEncryptionMethod encryptionMethod) {
+            this.encryptionMethod = encryptionMethod;
         }
 
         public String getHost() {

@@ -37,7 +37,7 @@ public class JiraComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a shared base jira configuration.
+     * The JiraConfiguration parameters
      */
     private JiraConfigurationNestedConfiguration configuration;
     /**

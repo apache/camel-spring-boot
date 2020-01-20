@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jcache.springboot;
 
-import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -48,14 +47,10 @@ public class JCacheComponentConfiguration
      */
     private String cacheConfiguration;
     /**
-     * Properties to configure jcache
+     * The Properties for the javax.cache.spi.CachingProvider to create the
+     * CacheManager. The option is a java.util.Properties type.
      */
-    private Map cacheConfigurationProperties;
-    /**
-     * References to an existing Properties or Map to lookup in the registry to
-     * use for configuring jcache.
-     */
-    private String cacheConfigurationPropertiesRef;
+    private String cacheConfigurationProperties;
     /**
      * An implementation specific URI for the CacheManager
      */
@@ -102,21 +97,13 @@ public class JCacheComponentConfiguration
         this.cacheConfiguration = cacheConfiguration;
     }
 
-    public Map getCacheConfigurationProperties() {
+    public String getCacheConfigurationProperties() {
         return cacheConfigurationProperties;
     }
 
-    public void setCacheConfigurationProperties(Map cacheConfigurationProperties) {
+    public void setCacheConfigurationProperties(
+            String cacheConfigurationProperties) {
         this.cacheConfigurationProperties = cacheConfigurationProperties;
-    }
-
-    public String getCacheConfigurationPropertiesRef() {
-        return cacheConfigurationPropertiesRef;
-    }
-
-    public void setCacheConfigurationPropertiesRef(
-            String cacheConfigurationPropertiesRef) {
-        this.cacheConfigurationPropertiesRef = cacheConfigurationPropertiesRef;
     }
 
     public String getConfigurationUri() {

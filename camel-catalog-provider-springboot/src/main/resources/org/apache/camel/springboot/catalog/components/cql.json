@@ -4,7 +4,7 @@
     "scheme": "cql",
     "syntax": "cql:beanRef:hosts:port/keyspace",
     "title": "Cassandra CQL",
-    "description": "The cql component aims at integrating Cassandra 2.0 using the CQL3 API (not the Thrift API). It's based on Cassandra Java Driver provided by DataStax.",
+    "description": "The cql component aims at integrating Cassandra 2.0 using the CQL3 API (not the Thrift API).",
     "label": "database,nosql",
     "deprecated": false,
     "deprecationNote": "",

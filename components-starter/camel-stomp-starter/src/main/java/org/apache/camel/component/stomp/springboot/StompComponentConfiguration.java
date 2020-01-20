@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.stomp.springboot;
 
-import java.util.Properties;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
@@ -184,10 +183,6 @@ public class StompComponentConfiguration
          */
         private String brokerURL = "tcp://localhost:61613";
         /**
-         * To set custom headers
-         */
-        private Properties customHeaders;
-        /**
          * The virtual host name
          */
         private String host;
@@ -203,10 +198,6 @@ public class StompComponentConfiguration
          * To configure security using SSLContextParameters
          */
         private SSLContextParameters sslContextParameters;
-        /**
-         * The stomp version (1.1, or 1.2)
-         */
-        private String version;
 
         public String getBrokerURL() {
             return brokerURL;
@@ -214,14 +205,6 @@ public class StompComponentConfiguration
 
         public void setBrokerURL(String brokerURL) {
             this.brokerURL = brokerURL;
-        }
-
-        public Properties getCustomHeaders() {
-            return customHeaders;
-        }
-
-        public void setCustomHeaders(Properties customHeaders) {
-            this.customHeaders = customHeaders;
         }
 
         public String getHost() {
@@ -255,14 +238,6 @@ public class StompComponentConfiguration
         public void setSslContextParameters(
                 SSLContextParameters sslContextParameters) {
             this.sslContextParameters = sslContextParameters;
-        }
-
-        public String getVersion() {
-            return version;
-        }
-
-        public void setVersion(String version) {
-            this.version = version;
         }
     }
 }

@@ -207,7 +207,7 @@ public class SalesforceComponentConfiguration
     private String httpProxyRealm;
     /**
      * If set to true Digest authentication will be used when authenticating to
-     * the HTTP proxy, otherwise Basic authorization method will be used
+     * the HTTP proxy,otherwise Basic authorization method will be used
      */
     private Boolean httpProxyUseDigestAuth = false;
     /**

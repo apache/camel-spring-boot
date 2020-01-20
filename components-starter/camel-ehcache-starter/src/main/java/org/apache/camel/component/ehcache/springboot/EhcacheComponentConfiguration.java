@@ -17,6 +17,7 @@
 package org.apache.camel.component.ehcache.springboot;
 
 import java.util.Map;
+import java.util.Set;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.ehcache.CacheManager;
@@ -214,10 +215,8 @@ public class EhcacheComponentConfiguration
         private EventOrdering eventOrdering = EventOrdering.ORDERED;
         /**
          * Set the type of events to listen for
-         * (EVICTED,EXPIRED,REMOVED,CREATED,UPDATED). You can specify multiple
-         * entries separated by comma.
          */
-        private String eventTypes;
+        private Set eventTypes;
         /**
          * To configure the default action key. If a key is set in the message
          * header, then the key from the header takes precedence.
@@ -316,11 +315,11 @@ public class EhcacheComponentConfiguration
             this.eventOrdering = eventOrdering;
         }
 
-        public String getEventTypes() {
+        public Set getEventTypes() {
             return eventTypes;
         }
 
-        public void setEventTypes(String eventTypes) {
+        public void setEventTypes(Set eventTypes) {
             this.eventTypes = eventTypes;
         }
 

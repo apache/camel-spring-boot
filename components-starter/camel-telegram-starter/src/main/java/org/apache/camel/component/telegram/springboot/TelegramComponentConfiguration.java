@@ -42,22 +42,6 @@ public class TelegramComponentConfiguration
      */
     private String authorizationToken;
     /**
-     * To use a custom AsyncHttpClient. The option is a
-     * org.asynchttpclient.AsyncHttpClient type.
-     */
-    private String client;
-    /**
-     * To configure the AsyncHttpClient to use a custom
-     * com.ning.http.client.AsyncHttpClientConfig instance. The option is a
-     * org.asynchttpclient.AsyncHttpClientConfig type.
-     */
-    private String clientConfig;
-    /**
-     * Set an alternative base URI, e.g. when you want to test the component
-     * against a mock Telegram API.
-     */
-    private String baseUri = "https://api.telegram.org";
-    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -89,30 +73,6 @@ public class TelegramComponentConfiguration
 
     public void setAuthorizationToken(String authorizationToken) {
         this.authorizationToken = authorizationToken;
-    }
-
-    public String getClient() {
-        return client;
-    }
-
-    public void setClient(String client) {
-        this.client = client;
-    }
-
-    public String getClientConfig() {
-        return clientConfig;
-    }
-
-    public void setClientConfig(String clientConfig) {
-        this.clientConfig = clientConfig;
-    }
-
-    public String getBaseUri() {
-        return baseUri;
-    }
-
-    public void setBaseUri(String baseUri) {
-        this.baseUri = baseUri;
     }
 
     public Boolean getBasicPropertyBinding() {
