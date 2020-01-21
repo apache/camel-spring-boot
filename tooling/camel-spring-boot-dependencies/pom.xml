@@ -1353,6 +1353,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-rest-openapi-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-rest-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
