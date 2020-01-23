@@ -35,6 +35,12 @@ public class CamelInfinispanTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelInfinispanTest.class))
+                .dependency("org.infinispan:infinispan-client-hotrod:10.1.1.Final")
+                .dependency("org.infinispan:infinispan-commons:10.1.1.Final")
+                .dependency("org.infinispan:infinispan-component-annotations:10.1.1.Final")
+                .dependency("org.infinispan:infinispan-core:10.1.1.Final")
+                .dependency("org.infinispan:infinispan-query-dsl:10.1.1.Final")
+                .dependency("org.infinispan:infinispan-remote-query-client:10.1.1.Final")
                 .disableJmx("org.infinispan:*")
                 .build();
     }
