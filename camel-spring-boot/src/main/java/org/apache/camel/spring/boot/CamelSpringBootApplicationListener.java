@@ -173,11 +173,11 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                         @Override
                         public void notify(CamelEvent eventObject) throws Exception {
                             for (CamelContextConfiguration camelContextConfiguration : camelContextConfigurations) {
-                                log.debug("CamelContextConfiguration found. Invoking afterApplicationStart: {}", camelContextConfiguration);
+                                LOG.debug("CamelContextConfiguration found. Invoking afterApplicationStart: {}", camelContextConfiguration);
                                 try {
                                     camelContextConfiguration.afterApplicationStart(camelContext);
                                 } catch (Exception e) {
-                                    log.warn("Error during calling afterApplicationStart due " + e.getMessage() + ". This exception is ignored", e);
+                                    LOG.warn("Error during calling afterApplicationStart due " + e.getMessage() + ". This exception is ignored", e);
                                 }
                             }
                         }

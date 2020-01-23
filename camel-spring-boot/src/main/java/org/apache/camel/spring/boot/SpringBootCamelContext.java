@@ -17,13 +17,18 @@
 package org.apache.camel.spring.boot;
 
 import org.apache.camel.spring.SpringCamelContext;
+import org.apache.camel.support.service.ServiceSupport;
 import org.apache.camel.util.StopWatch;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 /**
  * The {@link org.apache.camel.CamelContext} created by Spring Boot.
  */
 public class SpringBootCamelContext extends SpringCamelContext {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SpringBootCamelContext.class);
 
     private final StopWatch stopWatch = new StopWatch();
     private final boolean warnOnEarlyShutdown;
@@ -49,7 +54,7 @@ public class SpringBootCamelContext extends SpringCamelContext {
             boolean junit = cp != null && cp.contains("junit-");
             boolean starterWeb = cp != null && cp.contains("spring-boot-starter-web");
             if (!junit && !starterWeb) {
-                log.warn("CamelContext has only been running for less than a second. If you intend to run Camel for a longer time "
+                LOG.warn("CamelContext has only been running for less than a second. If you intend to run Camel for a longer time "
                         + "then you can set the property camel.springboot.main-run-controller=true in application.properties"
                         + " or add spring-boot-starter-web JAR to the classpath.");
             }
