@@ -109,6 +109,8 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     /**
      * Sets whether to log information about the inflight Exchanges which are still running
      * during a shutdown which didn't complete without the given timeout.
+     *
+     * This requires to enable the option inflightRepositoryExchangeEnabled.
      */
     private boolean shutdownLogInflightExchangesOnTimeout = true;
 
@@ -336,6 +338,13 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * Default is false.
      */
     private boolean allowUseOriginalMessage;
+
+    /**
+     * Sets whether the inflight repository should track each inflight exchange.
+     *
+     * This is by default disabled as there is a very slight performance overhead when enabled.
+     */
+    private boolean inflightRepositoryExchangeEnabled;
 
     /**
      * Sets whether endpoint runtime statistics is enabled (gathers runtime usage of each incoming and outgoing endpoints).
