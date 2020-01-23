@@ -340,11 +340,11 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean allowUseOriginalMessage;
 
     /**
-     * Sets whether the inflight repository should track each inflight exchange.
+     * Sets whether the inflight repository should allow browsing each inflight exchange.
      *
      * This is by default disabled as there is a very slight performance overhead when enabled.
      */
-    private boolean inflightRepositoryExchangeEnabled;
+    private boolean inflightRepositoryBrowseEnabled;
 
     /**
      * Sets whether endpoint runtime statistics is enabled (gathers runtime usage of each incoming and outgoing endpoints).
