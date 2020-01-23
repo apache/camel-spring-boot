@@ -109,6 +109,11 @@ public class ClientComponentConfiguration
          */
         private Byte causeSourceAddress;
         /**
+         * Timeout in millis to wait for client to establish a connected
+         * connection.
+         */
+        private Integer connectionTimeout = 10000;
+        /**
          * Data module options
          */
         private DataModuleOptions dataModuleOptions;
@@ -123,6 +128,14 @@ public class ClientComponentConfiguration
 
         public void setCauseSourceAddress(Byte causeSourceAddress) {
             this.causeSourceAddress = causeSourceAddress;
+        }
+
+        public Integer getConnectionTimeout() {
+            return connectionTimeout;
+        }
+
+        public void setConnectionTimeout(Integer connectionTimeout) {
+            this.connectionTimeout = connectionTimeout;
         }
 
         public DataModuleOptions getDataModuleOptions() {
