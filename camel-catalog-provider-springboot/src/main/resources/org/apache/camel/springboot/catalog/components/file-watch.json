@@ -3,7 +3,7 @@
     "kind": "component",
     "scheme": "file-watch",
     "syntax": "file-watch:path",
-    "title": "file-watch",
+    "title": "File Watch",
     "description": "The file-watch is used to monitor file events in directory using java.nio.file.WatchService",
     "label": "file",
     "deprecated": false,
