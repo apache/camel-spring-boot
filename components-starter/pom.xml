@@ -134,6 +134,7 @@
     <module>camel-aws-swf-starter</module>
     <module>camel-aws-translate-starter</module>
     <module>camel-aws-xray-starter</module>
+    <module>camel-aws2-ecs-starter</module>
     <module>camel-aws2-translate-starter</module>
     <module>camel-azure-starter</module>
     <module>camel-barcode-starter</module>
