@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.debezium.springboot;
 
+import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -414,6 +415,15 @@ public class DebeziumPostgresComponentConfiguration
          * which disables tracking xmin.
          */
         private Long xminFetchIntervalMs = 0L;
+        /**
+         * Sets additional properties for debezium components in case they can't
+         * be set directly on the camel configurations (e.g: setting Kafka
+         * Connect properties needed by Debezium engine, for example setting
+         * KafkaOffsetBackingStore), the properties have to be prefixed with
+         * additionalProperties.. E.g:
+         * additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http://localhost:8811/avro
+         */
+        private Map additionalProperties;
         private Class connectorClass;
         /**
          * The Converter class that should be used to serialize and deserialize
@@ -876,6 +886,14 @@ public class DebeziumPostgresComponentConfiguration
 
         public void setXminFetchIntervalMs(Long xminFetchIntervalMs) {
             this.xminFetchIntervalMs = xminFetchIntervalMs;
+        }
+
+        public Map getAdditionalProperties() {
+            return additionalProperties;
+        }
+
+        public void setAdditionalProperties(Map additionalProperties) {
+            this.additionalProperties = additionalProperties;
         }
 
         public Class getConnectorClass() {
