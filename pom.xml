@@ -144,7 +144,7 @@
         <hadoop2-version>2.7.4</hadoop2-version>
         <hibernate-validator-version>6.0.17.Final</hibernate-validator-version>
         <hibernate-version>5.2.16.Final</hibernate-version>
-        <infinispan-spring-boot-version>2.1.7.Final</infinispan-spring-boot-version>
+        <infinispan-spring-boot-version>2.2.0.Final</infinispan-spring-boot-version>
         <jackson-version>1.9.12</jackson-version>
         <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
         <jandex-version>2.1.1.Final</jandex-version>
