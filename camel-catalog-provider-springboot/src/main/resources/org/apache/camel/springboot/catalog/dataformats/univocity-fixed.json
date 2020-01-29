@@ -1,11 +1,12 @@
 {
- "dataformat": {
-    "name": "univocity-fixed",
+  "dataformat": {
     "kind": "dataformat",
+    "name": "univocity-fixed",
     "modelName": "univocity-fixed",
     "title": "uniVocity Fixed Length",
     "description": "The uniVocity Fixed Length data format is used for working with fixed length flat payloads.",
     "deprecated": false,
+    "deprecationNote": "dataformat,transformation,csv",
     "firstVersion": "2.15.0",
     "label": "dataformat,transformation,csv",
     "javaType": "org.apache.camel.dataformat.univocity.UniVocityFixedWidthDataFormat",
@@ -27,12 +28,11 @@
     "numberOfRecordsToRead": { "kind": "attribute", "displayName": "Number Of Records To Read", "required": false, "type": "integer", "javaType": "java.lang.Integer", "deprecated": false, "secret": false, "description": "The maximum number of record to read." },
     "emptyValue": { "kind": "attribute", "displayName": "Empty Value", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "The String representation of an empty value" },
     "lineSeparator": { "kind": "attribute", "displayName": "Line Separator", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "The line separator of the files The default value is to use the JVM platform line separator" },
-    "normalizedLineSeparator": { "kind": "attribute", "displayName": "Normalized Line Separator", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "defaultValue": "\n", "description": "The normalized line separator of the files The default value is a new line character." },
+    "normalizedLineSeparator": { "kind": "attribute", "displayName": "Normalized Line Separator", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "defaultValue": "\\n", "description": "The normalized line separator of the files The default value is a new line character." },
     "comment": { "kind": "attribute", "displayName": "Comment", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "defaultValue": "#", "description": "The comment symbol. The default value is #" },
     "lazyLoad": { "kind": "attribute", "displayName": "Lazy Load", "required": false, "type": "boolean", "javaType": "java.lang.Boolean", "deprecated": false, "secret": false, "defaultValue": false, "description": "Whether the unmarshalling should produce an iterator that reads the lines on the fly or if all the lines must be read at one. The default value is false" },
     "asMap": { "kind": "attribute", "displayName": "As Map", "required": false, "type": "boolean", "javaType": "java.lang.Boolean", "deprecated": false, "secret": false, "defaultValue": false, "description": "Whether the unmarshalling should produce maps for the lines values instead of lists. It requires to have header (either defined or collected). The default value is false" },
-    "contentTypeHeader": { "kind": "attribute", "displayName": "Content Type Header", "required": false, "type": "boolean", "javaType": "java.lang.Boolean", "deprecated": false, "secret": false, "defaultValue": false, "description": "Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSon etc." },
+    "contentTypeHeader": { "kind": "attribute", "displayName": "Content Type Header", "required": false, "type": "boolean", "javaType": "java.lang.Boolean", "deprecated": false, "secret": false, "defaultValue": false, "description": "Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application\/xml for data formats marshalling to XML, or application\/json for data formats marshalling to JSon etc." },
     "id": { "kind": "attribute", "displayName": "Id", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "Sets the value of the id property." }
   }
 }
-

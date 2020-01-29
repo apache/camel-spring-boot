@@ -1,11 +1,12 @@
 {
- "language": {
-    "name": "xquery",
+  "language": {
     "kind": "language",
+    "name": "xquery",
     "modelName": "xquery",
     "title": "XQuery",
     "description": "To use XQuery (XML) in Camel expressions or predicates.",
     "deprecated": false,
+    "deprecationNote": "language,xml",
     "firstVersion": "1.0.0",
     "label": "language,xml",
     "javaType": "org.apache.camel.language.xquery.XQueryLanguage",
@@ -22,4 +23,3 @@
     "id": { "kind": "attribute", "displayName": "Id", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "Sets the id of this node" }
   }
 }
-

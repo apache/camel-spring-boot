@@ -1,10 +1,10 @@
 {
- "other": {
-    "name": "shiro",
+  "other": {
     "kind": "other",
+    "name": "shiro",
     "title": "Shiro",
     "description": "Security using Shiro",
-    "deprecated": "false",
+    "deprecated": false,
     "firstVersion": "2.5.0",
     "label": "security",
     "groupId": "org.apache.camel.springboot",

@@ -19,6 +19,7 @@ package org.apache.camel.model.rest.springboot;
 import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.model.rest.RestBindingMode;
+import org.apache.camel.model.rest.RestConfigurationDefinition;
 import org.apache.camel.model.rest.RestHostNameResolver;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -136,7 +137,7 @@ public class RestConfigurationDefinitionProperties {
     /**
      * Sets the binding mode to use. The default value is off
      */
-    private RestBindingMode bindingMode;
+    private RestBindingMode bindingMode = RestBindingMode.off;
     /**
      * Whether to skip binding on output if there is a custom HTTP error code
      * header. This allows to build custom error messages that do not bind to

@@ -73,7 +73,7 @@ public class CryptoDataFormatConfiguration
      * Flag indicating that a Message Authentication Code should be calculated
      * and appended to the encrypted data.
      */
-    private Boolean shouldAppendHMAC = false;
+    private Boolean shouldAppendHMAC = true;
     /**
      * Flag indicating that the configured IV should be inlined into the
      * encrypted data stream. Is by default false.

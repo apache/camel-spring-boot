@@ -1,11 +1,12 @@
 {
- "language": {
-    "name": "groovy",
+  "language": {
     "kind": "language",
+    "name": "groovy",
     "modelName": "groovy",
     "title": "Groovy",
     "description": "To use Groovy scripts in Camel expressions or predicates.",
     "deprecated": false,
+    "deprecationNote": "language,script",
     "firstVersion": "1.3.0",
     "label": "language,script",
     "javaType": "org.apache.camel.language.groovy.GroovyLanguage",
@@ -20,4 +21,3 @@
     "id": { "kind": "attribute", "displayName": "Id", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "Sets the id of this node" }
   }
 }
-

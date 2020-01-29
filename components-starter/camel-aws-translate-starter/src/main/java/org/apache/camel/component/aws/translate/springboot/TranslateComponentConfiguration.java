@@ -134,7 +134,7 @@ public class TranslateComponentConfiguration
         /**
          * The operation to perform
          */
-        private TranslateOperations operation;
+        private TranslateOperations operation = TranslateOperations.translateText;
         /**
          * To define a proxy host when instantiating the Translate client
          */

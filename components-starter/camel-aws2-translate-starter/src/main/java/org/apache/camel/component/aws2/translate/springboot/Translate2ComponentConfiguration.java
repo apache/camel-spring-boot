@@ -134,7 +134,7 @@ public class Translate2ComponentConfiguration
         /**
          * The operation to perform
          */
-        private Translate2Operations operation;
+        private Translate2Operations operation = Translate2Operations.translateText;
         /**
          * To define a proxy host when instantiating the Translate client
          */

@@ -1,11 +1,12 @@
 {
- "language": {
-    "name": "file",
+  "language": {
     "kind": "language",
+    "name": "file",
     "modelName": "simple",
     "title": "File",
-    "description": "For expressions and predicates using the file/simple language.",
+    "description": "For expressions and predicates using the file\/simple language.",
     "deprecated": false,
+    "deprecationNote": "language,core,java",
     "firstVersion": "1.1.0",
     "label": "language,core,java",
     "javaType": "org.apache.camel.language.simple.FileLanguage",
@@ -21,4 +22,3 @@
     "id": { "kind": "attribute", "displayName": "Id", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "Sets the id of this node" }
   }
 }
-

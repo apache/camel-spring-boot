@@ -1,11 +1,12 @@
 {
- "language": {
-    "name": "bean",
+  "language": {
     "kind": "language",
+    "name": "bean",
     "modelName": "method",
     "title": "Bean method",
     "description": "To use a Java bean (aka method call) in Camel expressions or predicates.",
     "deprecated": false,
+    "deprecationNote": "language,core,java",
     "firstVersion": "1.3.0",
     "label": "language,core,java",
     "javaType": "org.apache.camel.language.bean.BeanLanguage",
@@ -22,4 +23,3 @@
     "id": { "kind": "attribute", "displayName": "Id", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "Sets the id of this node" }
   }
 }
-

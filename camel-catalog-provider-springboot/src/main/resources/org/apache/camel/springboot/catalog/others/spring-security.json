@@ -1,10 +1,10 @@
 {
- "other": {
-    "name": "spring-security",
+  "other": {
     "kind": "other",
+    "name": "spring-security",
     "title": "Spring Security",
     "description": "Security using Spring Security",
-    "deprecated": "false",
+    "deprecated": false,
     "firstVersion": "2.3.0",
     "label": "security,spring",
     "groupId": "org.apache.camel.springboot",

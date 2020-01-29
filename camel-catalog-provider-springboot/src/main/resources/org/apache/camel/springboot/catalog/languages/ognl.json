@@ -1,11 +1,12 @@
 {
- "language": {
-    "name": "ognl",
+  "language": {
     "kind": "language",
+    "name": "ognl",
     "modelName": "ognl",
     "title": "OGNL",
     "description": "To use OGNL scripts in Camel expressions or predicates.",
     "deprecated": false,
+    "deprecationNote": "language,java",
     "firstVersion": "1.1.0",
     "label": "language,java",
     "javaType": "org.apache.camel.language.ognl.OgnlLanguage",
@@ -20,4 +21,3 @@
     "id": { "kind": "attribute", "displayName": "Id", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "Sets the id of this node" }
   }
 }
-

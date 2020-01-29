@@ -1,10 +1,10 @@
 {
- "other": {
-    "name": "zipkin",
+  "other": {
     "kind": "other",
+    "name": "zipkin",
     "title": "Zipkin",
     "description": "Distributed message tracing using Zipkin",
-    "deprecated": "false",
+    "deprecated": false,
     "firstVersion": "2.18.0",
     "label": "monitoring,microservice",
     "groupId": "org.apache.camel.springboot",

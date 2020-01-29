@@ -1,11 +1,12 @@
 {
- "language": {
-    "name": "xtokenize",
+  "language": {
     "kind": "language",
+    "name": "xtokenize",
     "modelName": "xtokenize",
     "title": "XML Tokenize",
     "description": "To use Camel message body or header with a XML tokenizer in Camel expressions or predicates.",
     "deprecated": false,
+    "deprecationNote": "language,core,xml",
     "firstVersion": "2.14.0",
     "label": "language,core,xml",
     "javaType": "org.apache.camel.language.xtokenizer.XMLTokenizeLanguage",
@@ -22,4 +23,3 @@
     "id": { "kind": "attribute", "displayName": "Id", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "Sets the id of this node" }
   }
 }
-

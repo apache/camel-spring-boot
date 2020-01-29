@@ -1,10 +1,10 @@
 {
- "other": {
-    "name": "reactive-executor-vertx",
+  "other": {
     "kind": "other",
+    "name": "reactive-executor-vertx",
     "title": "Reactive Executor Vert.x",
     "description": "Reactive Executor for camel-core using Vert.x",
-    "deprecated": "false",
+    "deprecated": false,
     "firstVersion": "3.0.0",
     "label": "reactive",
     "groupId": "org.apache.camel.springboot",

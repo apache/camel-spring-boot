@@ -1,11 +1,12 @@
 {
- "language": {
-    "name": "ref",
+  "language": {
     "kind": "language",
+    "name": "ref",
     "modelName": "ref",
     "title": "Ref",
     "description": "Reference to an existing Camel expression or predicate, which is looked up from the Camel registry.",
     "deprecated": false,
+    "deprecationNote": "language,core",
     "firstVersion": "2.8.0",
     "label": "language,core",
     "javaType": "org.apache.camel.language.ref.RefLanguage",
@@ -20,4 +21,3 @@
     "id": { "kind": "attribute", "displayName": "Id", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "Sets the id of this node" }
   }
 }
-

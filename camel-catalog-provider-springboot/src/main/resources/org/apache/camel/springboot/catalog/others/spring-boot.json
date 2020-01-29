@@ -1,10 +1,10 @@
 {
- "other": {
-    "name": "spring-boot",
+  "other": {
     "kind": "other",
+    "name": "spring-boot",
     "title": "Spring Boot",
     "description": "Using Camel with Spring Boot",
-    "deprecated": "false",
+    "deprecated": false,
     "firstVersion": "2.15.0",
     "label": "spring,microservice",
     "groupId": "org.apache.camel.springboot",

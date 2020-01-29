@@ -1,10 +1,10 @@
 {
- "other": {
-    "name": "leveldb",
+  "other": {
     "kind": "other",
+    "name": "leveldb",
     "title": "LevelDB",
     "description": "Using LevelDB as persistent EIP store",
-    "deprecated": "false",
+    "deprecated": false,
     "firstVersion": "2.10.0",
     "label": "database",
     "groupId": "org.apache.camel.springboot",

@@ -1,10 +1,10 @@
 {
- "other": {
-    "name": "opentracing",
+  "other": {
     "kind": "other",
+    "name": "opentracing",
     "title": "OpenTracing",
     "description": "Distributed tracing using OpenTracing",
-    "deprecated": "false",
+    "deprecated": false,
     "firstVersion": "2.19.0",
     "label": "monitoring,microservice",
     "groupId": "org.apache.camel.springboot",

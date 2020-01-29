@@ -1,11 +1,12 @@
 {
- "language": {
-    "name": "simple",
+  "language": {
     "kind": "language",
+    "name": "simple",
     "modelName": "simple",
     "title": "Simple",
     "description": "To use Camels built-in Simple language in Camel expressions or predicates.",
     "deprecated": false,
+    "deprecationNote": "language,core,java",
     "firstVersion": "1.1.0",
     "label": "language,core,java",
     "javaType": "org.apache.camel.language.simple.SimpleLanguage",
@@ -21,4 +22,3 @@
     "id": { "kind": "attribute", "displayName": "Id", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "Sets the id of this node" }
   }
 }
-
