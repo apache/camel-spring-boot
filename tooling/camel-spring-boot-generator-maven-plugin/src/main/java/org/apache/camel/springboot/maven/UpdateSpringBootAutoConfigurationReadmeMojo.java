@@ -29,8 +29,8 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.apache.camel.maven.packaging.MvelHelper;
-import org.apache.camel.maven.packaging.model.SpringBootAutoConfigureOptionModel;
-import org.apache.camel.maven.packaging.model.SpringBootModel;
+import org.apache.camel.springboot.maven.model.SpringBootAutoConfigureOptionModel;
+import org.apache.camel.springboot.maven.model.SpringBootModel;
 import org.apache.camel.tooling.util.Strings;
 import org.apache.camel.util.json.DeserializationException;
 import org.apache.camel.util.json.JsonArray;

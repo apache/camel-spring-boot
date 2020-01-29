@@ -25,6 +25,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -46,19 +47,19 @@ import javax.annotation.Generated;
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.apache.camel.maven.packaging.AbstractGeneratorMojo;
-import org.apache.camel.maven.packaging.model.ComponentModel;
-import org.apache.camel.maven.packaging.model.ComponentOptionModel;
-import org.apache.camel.maven.packaging.model.DataFormatModel;
-import org.apache.camel.maven.packaging.model.DataFormatOptionModel;
-import org.apache.camel.maven.packaging.model.EndpointOptionModel;
-import org.apache.camel.maven.packaging.model.LanguageModel;
-import org.apache.camel.maven.packaging.model.LanguageOptionModel;
-import org.apache.camel.maven.packaging.model.OtherModel;
-import org.apache.camel.maven.packaging.model.OtherOptionModel;
 import org.apache.camel.spi.Metadata;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriPath;
-import org.apache.camel.tooling.util.JSonSchemaHelper;
+import org.apache.camel.tooling.model.ComponentModel;
+import org.apache.camel.tooling.model.ComponentModel.ComponentOptionModel;
+import org.apache.camel.tooling.model.ComponentModel.EndpointOptionModel;
+import org.apache.camel.tooling.model.DataFormatModel;
+import org.apache.camel.tooling.model.DataFormatModel.DataFormatOptionModel;
+import org.apache.camel.tooling.model.EipModel;
+import org.apache.camel.tooling.model.EipModel.EipOptionModel;
+import org.apache.camel.tooling.model.JsonMapper;
+import org.apache.camel.tooling.model.LanguageModel;
+import org.apache.camel.tooling.model.LanguageModel.LanguageOptionModel;
 import org.apache.camel.tooling.util.PackageHelper;
 import org.apache.camel.tooling.util.srcgen.Annotation;
 import org.apache.camel.tooling.util.srcgen.GenericType;
@@ -202,92 +203,92 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         // Hystrix
         json = loadModelJson(files, "hystrixConfiguration");
         if (json != null) {
-            OtherModel model = generateOtherModel(json);
+            EipModel model = JsonMapper.generateEipModel(json);
 
             int pos = model.getJavaType().lastIndexOf(".");
             String pkg = model.getJavaType().substring(0, pos) + ".springboot";
 
             // Generate properties, auto-configuration for camel-core-starter
-            createOtherModelConfigurationSource(pkg, model, "camel.hystrix", true);
+            createEipModelConfigurationSource(pkg, model, "camel.hystrix", true);
         }
 
         // Resilience4j
         json = loadModelJson(files, "resilience4jConfiguration");
         if (json != null) {
-            OtherModel model = generateOtherModel(json);
+            EipModel model = JsonMapper.generateEipModel(json);
 
             int pos = model.getJavaType().lastIndexOf(".");
             String pkg = model.getJavaType().substring(0, pos) + ".springboot";
 
             // Generate properties, auto-configuration for camel-core-starter
-            createOtherModelConfigurationSource(pkg, model, "camel.resilience4j", true);
+            createEipModelConfigurationSource(pkg, model, "camel.resilience4j", true);
         }
 
         // Consul
         json = loadModelJson(files, "consulServiceDiscovery");
         if (json != null) {
-            OtherModel model = generateOtherModel(json);
+            EipModel model = JsonMapper.generateEipModel(json);
 
             int pos = model.getJavaType().lastIndexOf(".");
             String pkg = model.getJavaType().substring(0, pos) + ".springboot";
 
             // Generate properties, auto-configuration for camel-core-starter
-            createOtherModelConfigurationSource(pkg, model, "camel.cloud.consul.service-discovery", true);
+            createEipModelConfigurationSource(pkg, model, "camel.cloud.consul.service-discovery", true);
         }
 
         // DNS
         json = loadModelJson(files, "dnsServiceDiscovery");
         if (json != null) {
-            OtherModel model = generateOtherModel(json);
+            EipModel model = JsonMapper.generateEipModel(json);
 
             int pos = model.getJavaType().lastIndexOf(".");
             String pkg = model.getJavaType().substring(0, pos) + ".springboot";
 
             // Generate properties, auto-configuration for camel-core-starter
-            createOtherModelConfigurationSource(pkg, model, "camel.cloud.dns.service-discovery", true);
+            createEipModelConfigurationSource(pkg, model, "camel.cloud.dns.service-discovery", true);
         }
 
         // Etcd
         json = loadModelJson(files, "etcdServiceDiscovery");
         if (json != null) {
-            OtherModel model = generateOtherModel(json);
+            EipModel model = JsonMapper.generateEipModel(json);
 
             int pos = model.getJavaType().lastIndexOf(".");
             String pkg = model.getJavaType().substring(0, pos) + ".springboot";
 
             // Generate properties, auto-configuration for camel-core-starter
-            createOtherModelConfigurationSource(pkg, model, "camel.cloud.etcd.service-discovery", true);
+            createEipModelConfigurationSource(pkg, model, "camel.cloud.etcd.service-discovery", true);
         }
 
         // Kubernetes
         json = loadModelJson(files, "kubernetesServiceDiscovery");
         if (json != null) {
-            OtherModel model = generateOtherModel(json);
+            EipModel model = JsonMapper.generateEipModel(json);
 
             int pos = model.getJavaType().lastIndexOf(".");
             String pkg = model.getJavaType().substring(0, pos) + ".springboot";
 
             // Generate properties, auto-configuration happens in
             // camel-kubernetes-starter
-            createOtherModelConfigurationSource(pkg, model, "camel.cloud.kubernetes.service-discovery", true);
+            createEipModelConfigurationSource(pkg, model, "camel.cloud.kubernetes.service-discovery", true);
         }
 
         // Ribbon
         json = loadModelJson(files, "ribbonLoadBalancer");
         if (json != null) {
-            OtherModel model = generateOtherModel(json);
+            EipModel model = JsonMapper.generateEipModel(json);
 
             int pos = model.getJavaType().lastIndexOf(".");
             String pkg = model.getJavaType().substring(0, pos) + ".springboot";
 
             // Generate properties, auto-configuration for camel-core-starter
-            createOtherModelConfigurationSource(pkg, model, "camel.cloud.ribbon.load-balancer", true);
+            createEipModelConfigurationSource(pkg, model, "camel.cloud.ribbon.load-balancer", true);
         }
 
         // Rest
         json = loadModelJson(files, "restConfiguration");
         if (json != null) {
-            OtherModel model = generateOtherModel(json);
+            EipModel model = JsonMapper.generateEipModel(json);
 
             int pos = model.getJavaType().lastIndexOf(".");
             String pkg = model.getJavaType().substring(0, pos) + ".springboot";
@@ -298,7 +299,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         }
     }
 
-    private void createOtherModelConfigurationSource(String packageName, OtherModel model, String propertiesPrefix, boolean generatedNestedConfig) throws MojoFailureException {
+    private void createEipModelConfigurationSource(String packageName, EipModel model, String propertiesPrefix, boolean generatedNestedConfig) throws MojoFailureException {
         final int pos = model.getJavaType().lastIndexOf(".");
         final String commonName = model.getJavaType().substring(pos + 1) + (generatedNestedConfig ? "Common" : "Properties");
         final String configName = model.getJavaType().substring(pos + 1) + (generatedNestedConfig ? "Properties" : null);
@@ -315,7 +316,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         commonClass.getJavaDoc().setFullText(doc);
         commonClass.addAnnotation(Generated.class).setStringValue("value", SpringBootAutoConfigurationMojo.class.getName());
 
-        for (OtherOptionModel option : model.getOptions()) {
+        for (EipOptionModel option : model.getOptions()) {
             String type = option.getJavaType();
             String name = option.getName();
 
@@ -333,16 +334,17 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             if (!Strings.isBlank(option.getDescription())) {
                 prop.getField().getJavaDoc().setFullText(option.getDescription());
             }
-            if (!Strings.isBlank(option.getDefaultValue())) {
+            if (!isBlank(option.getDefaultValue())) {
                 if ("java.lang.String".equals(type)) {
-                    prop.getField().setStringInitializer(option.getDefaultValue());
+                    prop.getField().setStringInitializer(option.getDefaultValue().toString());
                 } else if ("long".equals(type) || "java.lang.Long".equals(type)) {
                     // the value should be a Long number
                     String value = option.getDefaultValue() + "L";
                     prop.getField().setLiteralInitializer(value);
-                } else if ("integer".equals(option.getType()) || "boolean".equals(option.getType())) {
-                    prop.getField().setLiteralInitializer(option.getDefaultValue());
-                } else if (!Strings.isBlank(option.getEnums())) {
+                } else if ("integer".equals(option.getType()) || "java.lang.Integer".equals(option.getJavaType())
+                        || "boolean".equals(option.getType()) || "java.lang.Boolean".equals(option.getJavaType())) {
+                    prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
+                } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
                     prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
                     commonClass.addImport(model.getJavaType());
@@ -395,7 +397,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         }
     }
 
-    private void createRestConfigurationSource(String packageName, OtherModel model, String propertiesPrefix) throws MojoFailureException {
+    private void createRestConfigurationSource(String packageName, EipModel model, String propertiesPrefix) throws MojoFailureException {
         final int pos = model.getJavaType().lastIndexOf(".");
         final String className = model.getJavaType().substring(pos + 1) + "Properties";
 
@@ -414,7 +416,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         }
         javaClass.getJavaDoc().setFullText(doc);
 
-        for (OtherOptionModel option : model.getOptions()) {
+        for (EipOptionModel option : model.getOptions()) {
             String type = option.getJavaType();
             String name = option.getName();
 
@@ -439,16 +441,17 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             if (!Strings.isBlank(option.getDescription())) {
                 prop.getField().getJavaDoc().setFullText(option.getDescription());
             }
-            if (!Strings.isBlank(option.getDefaultValue())) {
+            if (!isBlank(option.getDefaultValue())) {
                 if ("java.lang.String".equals(type)) {
-                    prop.getField().setStringInitializer(option.getDefaultValue());
+                    prop.getField().setStringInitializer(option.getDefaultValue().toString());
                 } else if ("long".equals(type) || "java.lang.Long".equals(type)) {
                     // the value should be a Long number
                     String value = option.getDefaultValue() + "L";
                     prop.getField().setLiteralInitializer(value);
-                } else if ("integer".equals(option.getType()) || "boolean".equals(option.getType())) {
-                    prop.getField().setLiteralInitializer(option.getDefaultValue());
-                } else if (!Strings.isBlank(option.getEnums())) {
+                } else if ("integer".equals(option.getType()) || "java.lang.Integer".equals(option.getJavaType())
+                        || "boolean".equals(option.getType()) || "java.lang.Boolean".equals(option.getJavaType())) {
+                    prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
+                } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
                     prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
                     javaClass.addImport(model.getJavaType());
@@ -460,7 +463,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         writeSourceIfChanged(javaClass, fileName, true);
     }
 
-    private void createRestModuleAutoConfigurationSource(String packageName, OtherModel model) throws MojoFailureException {
+    private void createRestModuleAutoConfigurationSource(String packageName, EipModel model) throws MojoFailureException {
         final JavaClass javaClass = new JavaClass(getProjectClassLoader());
         final int pos = model.getJavaType().lastIndexOf(".");
         final String name = model.getJavaType().substring(pos + 1) + "AutoConfiguration";
@@ -540,7 +543,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             for (String componentName : componentNames) {
                 String json = loadComponentJson(jsonFiles, componentName);
                 if (json != null) {
-                    ComponentModel model = generateComponentModel(componentName, json);
+                    ComponentModel model = JsonMapper.generateComponentModel(json);
                     allModels.add(model);
                 }
             }
@@ -583,7 +586,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             for (String dataFormatName : dataFormatNames) {
                 String json = loadDataFormatJson(jsonFiles, dataFormatName);
                 if (json != null) {
-                    DataFormatModel model = generateDataFormatModel(dataFormatName, json);
+                    DataFormatModel model = JsonMapper.generateDataFormatModel(json);
                     allModels.add(model);
                 }
             }
@@ -627,7 +630,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             for (String languageName : languageNames) {
                 String json = loadLanguageJson(jsonFiles, languageName);
                 if (json != null) {
-                    LanguageModel model = generateLanguageModel(languageName, json);
+                    LanguageModel model = JsonMapper.generateLanguageModel(json);
                     allModels.add(model);
                 }
             }
@@ -718,7 +721,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             // and therefore there is no problem, eg
             // camel.component.jdbc.data-source = myDataSource
             // where the type would have been javax.sql.DataSource
-            boolean complex = isComplexType(option) && !isNestedProperty && Strings.isBlank(option.getEnums());
+            boolean complex = isComplexType(option) && !isNestedProperty && isBlank(option.getEnums());
             if (complex) {
                 // force to use a string type
                 type = "java.lang.String";
@@ -731,14 +734,14 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
 
             Property prop = javaClass.addProperty(type, option.getName());
             if (ADD_NESTED_CONFIGURATION_PROPERTY) {
-                if (!type.endsWith(INNER_TYPE_SUFFIX) && type.indexOf('[') == -1 && INCLUDE_INNER_PATTERN.matcher(type).matches() && Strings.isBlank(option.getEnums())
+                if (!type.endsWith(INNER_TYPE_SUFFIX) && type.indexOf('[') == -1 && INCLUDE_INNER_PATTERN.matcher(type).matches() && isBlank(option.getEnums())
                     && (javaClassSource == null || (javaClassSource.isClass() && !javaClassSource.isAbstract()))) {
                     // add nested configuration annotation for complex
                     // properties
                     prop.getField().addAnnotation(NestedConfigurationProperty.class);
                 }
             }
-            if ("true".equals(option.getDeprecated())) {
+            if (option.isDeprecated()) {
                 prop.getField().addAnnotation(Deprecated.class);
                 prop.getAccessor().addAnnotation(Deprecated.class);
                 prop.getMutator().addAnnotation(Deprecated.class);
@@ -756,16 +759,17 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 }
                 prop.getField().getJavaDoc().setFullText(desc);
             }
-            if (!Strings.isBlank(option.getDefaultValue())) {
+            if (!isBlank(option.getDefaultValue())) {
                 if ("java.lang.String".equals(option.getJavaType())) {
-                    prop.getField().setStringInitializer(option.getDefaultValue());
+                    prop.getField().setStringInitializer(option.getDefaultValue().toString());
                 } else if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
                     // the value should be a Long number
                     String value = option.getDefaultValue() + "L";
                     prop.getField().setLiteralInitializer(value);
-                } else if ("integer".equals(option.getType()) || "boolean".equals(option.getType())) {
-                    prop.getField().setLiteralInitializer(option.getDefaultValue());
-                } else if (!Strings.isBlank(option.getEnums())) {
+                } else if ("integer".equals(option.getType()) || "java.lang.Integer".equals(option.getJavaType())
+                        || "boolean".equals(option.getType()) || "java.lang.Boolean".equals(option.getJavaType())) {
+                    prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
+                } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
                     prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
                     javaClass.addImport(model.getJavaType());
@@ -777,6 +781,16 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
 
         String fileName = packageName.replaceAll("\\.", "\\/") + "/" + name + ".java";
         writeSourceIfChanged(javaClass, fileName, true);
+    }
+
+    private boolean isBlank(Object value) {
+        if (value instanceof String) {
+            return "".equals(value);
+        } else if (value instanceof Collection) {
+            return ((Collection) value).isEmpty();
+        } else {
+            return value == null;
+        }
     }
 
     private void createComponentConfigurationSourceInnerClass(JavaClass javaClass, Set<JavaClass> nestedTypes, ComponentModel model) throws MojoFailureException {
@@ -895,9 +909,10 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     fileName = fileName.replace('.', '/');
                     File jsonFile = new File(classesDir, fileName + "/" + model.getScheme() + ".json");
                     if (jsonFile.isFile() && jsonFile.exists()) {
+                        /*
                         try {
                             String json = FileUtils.readFileToString(jsonFile, StandardCharsets.UTF_8);
-                            List<Map<String, String>> rows = JSonSchemaHelper.parseJsonSchema("properties", json, true);
+                            ComponentModel model = JsonMapper.generateComponentModel(json);
 
                             // grab name from annotation
                             String optionName;
@@ -911,6 +926,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                             }
 
                             if (optionName != null) {
+                                model.get
                                 javaType = JSonSchemaHelper.getPropertyJavaType(rows, optionName);
                                 type = JSonSchemaHelper.getPropertyType(rows, optionName);
                                 defaultValue = JSonSchemaHelper.getPropertyDefaultValue(rows, optionName);
@@ -923,6 +939,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                         } catch (IOException e) {
                             // ignore
                         }
+                        */
+                        throw new UnsupportedOperationException();
                     }
 
                     if (!Strings.isBlank(defaultValue)) {
@@ -1000,7 +1018,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         return properties;
     }
 
-    private String asLiteralDefault(GenericType type, String defaultValue) {
+    private String asLiteralDefault(GenericType type, Object dv) {
+        String defaultValue = dv != null ? dv.toString() : null;
         if (defaultValue != null && !defaultValue.isEmpty()) {
             if (type.getRawClass() == String.class) {
                 return Annotation.quote(defaultValue);
@@ -1299,11 +1318,12 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.addAnnotation(Generated.class).setStringValue("value", SpringBootAutoConfigurationMojo.class.getName());
         javaClass.addAnnotation("org.springframework.boot.context.properties.ConfigurationProperties").setStringValue("prefix", prefix);
 
-        for (DataFormatOptionModel option : model.getDataFormatOptions()) {
+        for (DataFormatOptionModel option : model.getOptions()) {
             // skip option with name id in data format as we do not need that
             if ("id".equals(option.getName())) {
                 continue;
             }
+            Object defaultValue = option.getDefaultValue();
             String type = option.getJavaType();
             type = getSimpleJavaType(type);
 
@@ -1311,6 +1331,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             if ("org.apache.camel.model.dataformat.BindyType".equals(option.getJavaType())) {
                 // force to use a string type
                 type = "java.lang.String";
+                defaultValue = null;
             } else if (option.getJavaType().contains("org.apache.camel.model.dataformat")) {
                 // skip options that are from the model as they are not possible to configure anyway
                 continue;
@@ -1325,14 +1346,14 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             // and therefore there is no problem, eg
             // camel.component.jdbc.data-source = myDataSource
             // where the type would have been javax.sql.DataSource
-            boolean complex = isComplexType(option) && Strings.isBlank(option.getEnumValues());
+            boolean complex = isComplexType(option) && isBlank(option.getEnums());
             if (complex) {
                 // force to use a string type
                 type = "java.lang.String";
             }
 
             Property prop = javaClass.addProperty(type, option.getName());
-            if ("true".equals(option.getDeprecated())) {
+            if (option.isDeprecated()) {
                 prop.getField().addAnnotation(Deprecated.class);
                 prop.getAccessor().addAnnotation(Deprecated.class);
                 prop.getMutator().addAnnotation(Deprecated.class);
@@ -1350,18 +1371,19 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 }
                 prop.getField().getJavaDoc().setFullText(desc);
             }
-            if (!Strings.isBlank(option.getDefaultValue())) {
+            if (!isBlank(defaultValue)) {
                 if ("java.lang.String".equals(option.getJavaType())) {
-                    prop.getField().setStringInitializer(option.getDefaultValue());
+                    prop.getField().setStringInitializer(defaultValue.toString());
                 } else if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
                     // the value should be a Long number
-                    String value = option.getDefaultValue() + "L";
+                    String value = defaultValue + "L";
                     prop.getField().setLiteralInitializer(value);
-                } else if ("integer".equals(option.getType()) || "boolean".equals(option.getType())) {
-                    prop.getField().setLiteralInitializer(option.getDefaultValue());
-                } else if (!Strings.isBlank(option.getEnumValues())) {
+                } else if ("integer".equals(option.getType()) || "java.lang.Integer".equals(option.getJavaType())
+                        || "boolean".equals(option.getType()) || "java.lang.Boolean".equals(option.getJavaType())) {
+                    prop.getField().setLiteralInitializer(defaultValue.toString());
+                } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
-                    prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
+                    prop.getField().setLiteralInitializer(enumShortName + "." + defaultValue);
                     javaClass.addImport(model.getJavaType());
                 }
             }
@@ -1400,7 +1422,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.addAnnotation(Generated.class).setStringValue("value", SpringBootAutoConfigurationMojo.class.getName());
         javaClass.addAnnotation("org.springframework.boot.context.properties.ConfigurationProperties").setStringValue("prefix", prefix);
 
-        for (LanguageOptionModel option : model.getLanguageOptions()) {
+        for (LanguageOptionModel option : model.getOptions()) {
             // skip option with name id, or expression in language as we do not
             // need that and skip resultType as they are not global options
             if ("id".equals(option.getName()) || "expression".equals(option.getName()) || "resultType".equals(option.getName())) {
@@ -1448,14 +1470,14 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             // and therefore there is no problem, eg
             // camel.component.jdbc.data-source = myDataSource
             // where the type would have been javax.sql.DataSource
-            boolean complex = isComplexType(option) && Strings.isBlank(option.getEnumValues());
+            boolean complex = isComplexType(option) && isBlank(option.getEnums());
             if (complex) {
                 // force to use a string type
                 type = "java.lang.String";
             }
 
             Property prop = javaClass.addProperty(type, option.getName());
-            if ("true".equals(option.getDeprecated())) {
+            if (option.isDeprecated()) {
                 prop.getField().addAnnotation(Deprecated.class);
                 prop.getAccessor().addAnnotation(Deprecated.class);
                 prop.getMutator().addAnnotation(Deprecated.class);
@@ -1473,16 +1495,17 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 }
                 prop.getField().getJavaDoc().setFullText(desc);
             }
-            if (!Strings.isBlank(option.getDefaultValue())) {
+            if (!isBlank(option.getDefaultValue())) {
                 if ("java.lang.String".equals(option.getJavaType())) {
-                    prop.getField().setStringInitializer(option.getDefaultValue());
+                    prop.getField().setStringInitializer(option.getDefaultValue().toString());
                 } else if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
                     // the value should be a Long number
                     String value = option.getDefaultValue() + "L";
                     prop.getField().setLiteralInitializer(value);
-                } else if ("integer".equals(option.getType()) || "boolean".equals(option.getType())) {
-                    prop.getField().setLiteralInitializer(option.getDefaultValue());
-                } else if (!Strings.isBlank(option.getEnumValues())) {
+                } else if ("integer".equals(option.getType()) || "java.lang.Integer".equals(option.getJavaType())
+                        || "boolean".equals(option.getType()) || "java.lang.Boolean".equals(option.getJavaType())) {
+                    prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
+                } else if (isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
                     prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
                     javaClass.addImport(model.getJavaType());
@@ -1872,172 +1895,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         // do nothing, as imports are sorted automatically when displayed
     }
 
-    private static ComponentModel generateComponentModel(String componentName, String json) {
-        List<Map<String, String>> rows = JSonSchemaHelper.parseJsonSchema("component", json, false);
-
-        ComponentModel component = new ComponentModel();
-        component.setScheme(JSonSchemaHelper.getSafeValue("scheme", rows));
-        component.setSyntax(JSonSchemaHelper.getSafeValue("syntax", rows));
-        component.setAlternativeSyntax(JSonSchemaHelper.getSafeValue("alternativeSyntax", rows));
-        component.setTitle(JSonSchemaHelper.getSafeValue("title", rows));
-        component.setDescription(JSonSchemaHelper.getSafeValue("description", rows));
-        component.setFirstVersion(JSonSchemaHelper.getSafeValue("firstVersion", rows));
-        component.setLabel(JSonSchemaHelper.getSafeValue("label", rows));
-        component.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", rows));
-        component.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", rows));
-        component.setConsumerOnly(JSonSchemaHelper.getSafeValue("consumerOnly", rows));
-        component.setProducerOnly(JSonSchemaHelper.getSafeValue("producerOnly", rows));
-        component.setJavaType(JSonSchemaHelper.getSafeValue("javaType", rows));
-        component.setGroupId(JSonSchemaHelper.getSafeValue("groupId", rows));
-        component.setArtifactId(JSonSchemaHelper.getSafeValue("artifactId", rows));
-        component.setVersion(JSonSchemaHelper.getSafeValue("version", rows));
-
-        rows = JSonSchemaHelper.parseJsonSchema("componentProperties", json, true);
-        for (Map<String, String> row : rows) {
-            ComponentOptionModel option = new ComponentOptionModel();
-            option.setName(JSonSchemaHelper.getSafeValue("name", row));
-            option.setDisplayName(JSonSchemaHelper.getSafeValue("displayName", row));
-            option.setKind(JSonSchemaHelper.getSafeValue("kind", row));
-            option.setType(JSonSchemaHelper.getSafeValue("type", row));
-            option.setJavaType(JSonSchemaHelper.getSafeValue("javaType", row));
-            option.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", row));
-            option.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", row));
-            option.setDescription(JSonSchemaHelper.getSafeValue("description", row));
-            option.setDefaultValue(JSonSchemaHelper.getSafeValue("defaultValue", row));
-            option.setEnums(JSonSchemaHelper.getSafeValue("enum", row));
-            component.addComponentOption(option);
-        }
-
-        rows = JSonSchemaHelper.parseJsonSchema("properties", json, true);
-        for (Map<String, String> row : rows) {
-            EndpointOptionModel option = new EndpointOptionModel();
-            option.setName(JSonSchemaHelper.getSafeValue("name", row));
-            option.setDisplayName(JSonSchemaHelper.getSafeValue("displayName", row));
-            option.setKind(JSonSchemaHelper.getSafeValue("kind", row));
-            option.setGroup(JSonSchemaHelper.getSafeValue("group", row));
-            option.setRequired(JSonSchemaHelper.getSafeValue("required", row));
-            option.setType(JSonSchemaHelper.getSafeValue("type", row));
-            option.setJavaType(JSonSchemaHelper.getSafeValue("javaType", row));
-            option.setEnums(JSonSchemaHelper.getSafeValue("enum", row));
-            option.setPrefix(JSonSchemaHelper.getSafeValue("prefix", row));
-            option.setMultiValue(JSonSchemaHelper.getSafeValue("multiValue", row));
-            option.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", row));
-            option.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", row));
-            option.setDefaultValue(JSonSchemaHelper.getSafeValue("defaultValue", row));
-            option.setDescription(JSonSchemaHelper.getSafeValue("description", row));
-            option.setEnumValues(JSonSchemaHelper.getSafeValue("enum", row));
-            component.addEndpointOption(option);
-        }
-
-        return component;
-    }
-
-    private static DataFormatModel generateDataFormatModel(String dataFormatName, String json) {
-        List<Map<String, String>> rows = JSonSchemaHelper.parseJsonSchema("dataformat", json, false);
-
-        DataFormatModel dataFormat = new DataFormatModel();
-        dataFormat.setTitle(JSonSchemaHelper.getSafeValue("title", rows));
-        dataFormat.setName(JSonSchemaHelper.getSafeValue("name", rows));
-        dataFormat.setModelName(JSonSchemaHelper.getSafeValue("modelName", rows));
-        dataFormat.setDescription(JSonSchemaHelper.getSafeValue("description", rows));
-        dataFormat.setFirstVersion(JSonSchemaHelper.getSafeValue("firstVersion", rows));
-        dataFormat.setLabel(JSonSchemaHelper.getSafeValue("label", rows));
-        dataFormat.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", rows));
-        dataFormat.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", rows));
-        dataFormat.setJavaType(JSonSchemaHelper.getSafeValue("javaType", rows));
-        dataFormat.setGroupId(JSonSchemaHelper.getSafeValue("groupId", rows));
-        dataFormat.setArtifactId(JSonSchemaHelper.getSafeValue("artifactId", rows));
-        dataFormat.setVersion(JSonSchemaHelper.getSafeValue("version", rows));
-
-        rows = JSonSchemaHelper.parseJsonSchema("properties", json, true);
-        for (Map<String, String> row : rows) {
-            DataFormatOptionModel option = new DataFormatOptionModel();
-            option.setName(JSonSchemaHelper.getSafeValue("name", row));
-            option.setDisplayName(JSonSchemaHelper.getSafeValue("displayName", row));
-            option.setKind(JSonSchemaHelper.getSafeValue("kind", row));
-            option.setType(JSonSchemaHelper.getSafeValue("type", row));
-            option.setJavaType(JSonSchemaHelper.getSafeValue("javaType", row));
-            option.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", row));
-            option.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", row));
-            option.setDescription(JSonSchemaHelper.getSafeValue("description", row));
-            option.setDefaultValue(JSonSchemaHelper.getSafeValue("defaultValue", row));
-            option.setEnumValues(JSonSchemaHelper.getSafeValue("enum", row));
-            dataFormat.addDataFormatOption(option);
-        }
-
-        return dataFormat;
-    }
-
-    private static LanguageModel generateLanguageModel(String languageName, String json) {
-        List<Map<String, String>> rows = JSonSchemaHelper.parseJsonSchema("language", json, false);
-
-        LanguageModel language = new LanguageModel();
-        language.setTitle(JSonSchemaHelper.getSafeValue("title", rows));
-        language.setName(JSonSchemaHelper.getSafeValue("name", rows));
-        language.setModelName(JSonSchemaHelper.getSafeValue("modelName", rows));
-        language.setDescription(JSonSchemaHelper.getSafeValue("description", rows));
-        language.setFirstVersion(JSonSchemaHelper.getSafeValue("firstVersion", rows));
-        language.setLabel(JSonSchemaHelper.getSafeValue("label", rows));
-        language.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", rows));
-        language.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", rows));
-        language.setJavaType(JSonSchemaHelper.getSafeValue("javaType", rows));
-        language.setGroupId(JSonSchemaHelper.getSafeValue("groupId", rows));
-        language.setArtifactId(JSonSchemaHelper.getSafeValue("artifactId", rows));
-        language.setVersion(JSonSchemaHelper.getSafeValue("version", rows));
-
-        rows = JSonSchemaHelper.parseJsonSchema("properties", json, true);
-        for (Map<String, String> row : rows) {
-            LanguageOptionModel option = new LanguageOptionModel();
-            option.setName(JSonSchemaHelper.getSafeValue("name", row));
-            option.setDisplayName(JSonSchemaHelper.getSafeValue("displayName", row));
-            option.setKind(JSonSchemaHelper.getSafeValue("kind", row));
-            option.setType(JSonSchemaHelper.getSafeValue("type", row));
-            option.setJavaType(JSonSchemaHelper.getSafeValue("javaType", row));
-            option.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", row));
-            option.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", row));
-            option.setDescription(JSonSchemaHelper.getSafeValue("description", row));
-            option.setDefaultValue(JSonSchemaHelper.getSafeValue("defaultValue", row));
-            option.setEnumValues(JSonSchemaHelper.getSafeValue("enum", row));
-            language.addLanguageOption(option);
-        }
-
-        return language;
-    }
-
-    private OtherModel generateOtherModel(String json) {
-        List<Map<String, String>> rows = JSonSchemaHelper.parseJsonSchema("model", json, false);
-
-        OtherModel model = new OtherModel();
-        model.setName(JSonSchemaHelper.getSafeValue("name", rows));
-        model.setTitle(JSonSchemaHelper.getSafeValue("title", rows));
-        model.setDescription(JSonSchemaHelper.getSafeValue("description", rows));
-        model.setJavaType(JSonSchemaHelper.getSafeValue("javaType", rows));
-        model.setLabel(JSonSchemaHelper.getSafeValue("label", rows));
-        model.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", rows));
-        model.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", rows));
-
-        rows = JSonSchemaHelper.parseJsonSchema("properties", json, true);
-        for (Map<String, String> row : rows) {
-            OtherOptionModel option = new OtherOptionModel();
-            option.setName(JSonSchemaHelper.getSafeValue("name", row));
-            option.setDisplayName(JSonSchemaHelper.getSafeValue("displayName", row));
-            option.setKind(JSonSchemaHelper.getSafeValue("kind", row));
-            option.setGroup(JSonSchemaHelper.getSafeValue("group", row));
-            option.setRequired(JSonSchemaHelper.getSafeValue("required", row));
-            option.setType(JSonSchemaHelper.getSafeValue("type", row));
-            option.setJavaType(JSonSchemaHelper.getSafeValue("javaType", row));
-            option.setEnums(JSonSchemaHelper.getSafeValue("enum", row));
-            option.setDeprecated(JSonSchemaHelper.getSafeValue("deprecated", row));
-            option.setDeprecationNote(JSonSchemaHelper.getSafeValue("deprecationNote", row));
-            option.setDefaultValue(JSonSchemaHelper.getSafeValue("defaultValue", row));
-            option.setDescription(JSonSchemaHelper.getSafeValue("description", row));
-            option.setEnums(JSonSchemaHelper.getSafeValue("enums", row));
-
-            model.addOptionModel(option);
-        }
-
-        return model;
-    }
 
     private void findComponentNames(Set<String> componentNames) {
         componentJar.stream()
