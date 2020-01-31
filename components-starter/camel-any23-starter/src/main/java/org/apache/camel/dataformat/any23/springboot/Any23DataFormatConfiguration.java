@@ -18,6 +18,8 @@ package org.apache.camel.dataformat.any23.springboot;
 
 import java.util.List;
 import javax.annotation.Generated;
+import org.apache.camel.dataformat.any23.Any23DataFormat;
+import org.apache.camel.dataformat.any23.Any23OutputFormat;
 import org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -38,6 +40,11 @@ public class Any23DataFormatConfiguration
      */
     private Boolean enabled;
     /**
+     * What RDF syntax to unmarshal as, can be: NTRIPLES, TURTLE, NQUADS,
+     * RDFXML, JSONLD, RDFJSON, RDF4JMODEL. It is by default: RDF4JMODEL.
+     */
+    private Any23OutputFormat outputFormat = Any23OutputFormat.RDF4JMODEL;
+    /**
      * List of Any23 extractors to be used in the unmarshal operation. A list of
      * the available extractors can be found here here. If not provided, all the
      * available extractors are used.
@@ -55,6 +62,14 @@ public class Any23DataFormatConfiguration
      * application/json for data formats marshalling to JSon etc.
      */
     private Boolean contentTypeHeader = false;
+
+    public Any23OutputFormat getOutputFormat() {
+        return outputFormat;
+    }
+
+    public void setOutputFormat(Any23OutputFormat outputFormat) {
+        this.outputFormat = outputFormat;
+    }
 
     public List<String> getExtractors() {
         return extractors;

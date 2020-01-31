@@ -2,6 +2,7 @@
   "component": {
     "kind": "component",
     "scheme": "dataformat",
+    "extendsScheme": "",
     "syntax": "dataformat:name:operation",
     "title": "Data Format",
     "description": "The dataformat component is used for working with Data Formats as if it was a regular Component supporting Endpoints and URIs.",

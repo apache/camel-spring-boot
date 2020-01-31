@@ -2,6 +2,7 @@
   "component": {
     "kind": "component",
     "scheme": "jing",
+    "extendsScheme": "",
     "syntax": "jing:resourceUri",
     "title": "Jing",
     "description": "Validates the payload of a message using RelaxNG Syntax using Jing library.",

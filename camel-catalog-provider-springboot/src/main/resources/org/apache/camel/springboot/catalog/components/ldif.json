@@ -2,6 +2,7 @@
   "component": {
     "kind": "component",
     "scheme": "ldif",
+    "extendsScheme": "",
     "syntax": "ldif:ldapConnectionName",
     "title": "LDIF",
     "description": "The ldif component allows you to do updates on an LDAP server from a LDIF body content.",

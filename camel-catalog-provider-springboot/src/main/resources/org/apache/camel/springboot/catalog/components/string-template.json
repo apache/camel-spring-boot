@@ -2,6 +2,7 @@
   "component": {
     "kind": "component",
     "scheme": "string-template",
+    "extendsScheme": "",
     "syntax": "string-template:resourceUri",
     "title": "String Template",
     "description": "Transforms the message using a String template.",

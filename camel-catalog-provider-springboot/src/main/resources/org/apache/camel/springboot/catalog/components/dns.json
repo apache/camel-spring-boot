@@ -2,6 +2,7 @@
   "component": {
     "kind": "component",
     "scheme": "dns",
+    "extendsScheme": "",
     "syntax": "dns:dnsType",
     "title": "DNS",
     "description": "To lookup domain information and run DNS queries using DNSJava.",

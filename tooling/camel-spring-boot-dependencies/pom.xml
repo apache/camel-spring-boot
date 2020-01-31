@@ -1723,6 +1723,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-weka-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-wordpress-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3566,6 +3571,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-websocket-jsr356</artifactId>
+        <version>3.1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-weka</artifactId>
         <version>3.1.0-SNAPSHOT</version>
       </dependency>
       <dependency>

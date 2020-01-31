@@ -2,6 +2,7 @@
   "component": {
     "kind": "component",
     "scheme": "stax",
+    "extendsScheme": "",
     "syntax": "stax:contentHandlerClass",
     "title": "StAX",
     "description": "The stax component allows messages to be process through a SAX ContentHandler.",

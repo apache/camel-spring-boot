@@ -2,6 +2,7 @@
   "component": {
     "kind": "component",
     "scheme": "saga",
+    "extendsScheme": "",
     "syntax": "saga:action",
     "title": "Saga",
     "description": "The saga component provides access to advanced options for managing the flow in the Saga EIP.",
