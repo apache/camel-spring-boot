@@ -89,7 +89,7 @@ When using Spring Boot make sure to use the following Maven dependency to have s
 ----
 
 
-The component supports 144 options, which are listed below.
+The component supports 145 options, which are listed below.
 
 
 
@@ -158,6 +158,7 @@ The component supports 144 options, which are listed below.
 | *camel.springboot.backlog-tracing* | Sets whether backlog tracing is enabled or not. Default is false. | false | Boolean
 | *camel.springboot.bean-introspection-extended-statistics* | Sets whether bean introspection uses extended statistics. The default is false. | false | Boolean
 | *camel.springboot.bean-introspection-logging-level* | Sets the logging level used by bean introspection, logging activity of its usage. The default is TRACE. |  | LoggingLevel
+| *camel.springboot.case-insensitive-headers* | Whether to use case sensitive or insensitive headers. Important: When using case sensitive (this is set to false). Then the map is case sensitive which means headers such as content-type and Content-Type are two different keys which can be a problem for some protocols such as HTTP based, which rely on case insensitive headers. However case sensitive implementations can yield faster performance. Therefore use case sensitive implementation with care. Default is true. | true | Boolean
 | *camel.springboot.consumer-template-cache-size* | Consumer template endpoints cache size. | 1000 | Integer
 | *camel.springboot.duration-max-idle-seconds* | To specify for how long time in seconds Camel can be idle before automatic terminating the JVM. You can use this to run Spring Boot for a short while. | 0 | Integer
 | *camel.springboot.duration-max-messages* | To specify how many messages to process by Camel before automatic terminating the JVM. You can use this to run Spring Boot for a short while. | 0 | Integer

@@ -340,6 +340,18 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean allowUseOriginalMessage;
 
     /**
+     * Whether to use case sensitive or insensitive headers.
+     *
+     * Important: When using case sensitive (this is set to false).
+     * Then the map is case sensitive which means headers such as content-type and Content-Type are
+     * two different keys which can be a problem for some protocols such as HTTP based, which rely on case insensitive headers.
+     * However case sensitive implementations can yield faster performance. Therefore use case sensitive implementation with care.
+     *
+     * Default is true.
+     */
+    private boolean caseInsensitiveHeaders = true;
+
+    /**
      * Sets whether the inflight repository should allow browsing each inflight exchange.
      *
      * This is by default disabled as there is a very slight performance overhead when enabled.
