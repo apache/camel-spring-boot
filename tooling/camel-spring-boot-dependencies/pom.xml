@@ -1733,6 +1733,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-workday-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xchange-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2009,6 +2014,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws2-eks</artifactId>
+        <version>3.1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-aws2-mq</artifactId>
         <version>3.1.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -3581,6 +3591,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-wordpress</artifactId>
+        <version>3.1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-workday</artifactId>
         <version>3.1.0-SNAPSHOT</version>
       </dependency>
       <dependency>
