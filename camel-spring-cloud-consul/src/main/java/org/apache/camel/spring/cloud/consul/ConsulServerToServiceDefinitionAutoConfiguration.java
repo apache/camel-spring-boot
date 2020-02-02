@@ -27,7 +27,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(CamelSpringCloudServiceLoadBalancerAutoConfiguration.class)
 @ConditionalOnConsulEnabled
 @Conditional(ConsulServerToServiceDefinitionAutoConfiguration.Condition.class)

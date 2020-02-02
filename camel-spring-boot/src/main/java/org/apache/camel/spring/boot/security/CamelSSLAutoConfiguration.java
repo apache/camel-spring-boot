@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(CamelAutoConfiguration.class)
 @EnableConfigurationProperties(CamelSSLConfigurationProperties.class)
 @Conditional(CamelSSLAutoConfiguration.Condition.class)

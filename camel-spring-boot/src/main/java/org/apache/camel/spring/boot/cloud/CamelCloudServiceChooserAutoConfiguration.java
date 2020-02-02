@@ -22,7 +22,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnBean(CamelCloudAutoConfiguration.class)
 @EnableConfigurationProperties(CamelCloudConfigurationProperties.class)
 @Conditional(CamelCloudServiceChooserAutoConfiguration.ServiceChooserCondition.class)

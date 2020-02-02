@@ -25,7 +25,7 @@ import org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnBean(CamelAutoConfiguration.class)
 @AutoConfigureAfter({ CamelAutoConfiguration.class, CamelCloudAutoConfiguration.class,  RibbonAutoConfiguration.class })
 @Conditional(CamelCloudNetflixAutoConfiguration.Condition.class)

@@ -51,7 +51,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MutablePropertySources;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(CamelConfigurationProperties.class)
 @Import(TypeConversionConfiguration.class)
 public class CamelAutoConfiguration {

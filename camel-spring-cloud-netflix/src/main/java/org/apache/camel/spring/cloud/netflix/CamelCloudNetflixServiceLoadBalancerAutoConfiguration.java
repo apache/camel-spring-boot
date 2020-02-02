@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.ConversionService;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(RibbonAutoConfiguration.class)
 @AutoConfigureBefore(CamelSpringCloudServiceRegistryAutoConfiguration.class)
 @Conditional(CamelCloudNetflixServiceLoadBalancerAutoConfiguration.Condition.class)

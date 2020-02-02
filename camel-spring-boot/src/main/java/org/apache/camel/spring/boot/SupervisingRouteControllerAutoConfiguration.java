@@ -38,7 +38,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(CamelAutoConfiguration.class)
 @ConditionalOnProperty(prefix = "camel.supervising.controller", name = "enabled")
 @EnableConfigurationProperties(SupervisingRouteControllerConfiguration.class)

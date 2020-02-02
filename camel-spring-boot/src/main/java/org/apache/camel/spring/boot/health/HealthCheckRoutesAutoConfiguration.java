@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(CamelAutoConfiguration.class)
 @Conditional(HealthCheckRoutesAutoConfiguration.Condition.class)
 @EnableConfigurationProperties(HealthCheckRoutesConfiguration.class)

@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(ServiceRegistryAutoConfiguration.class)
 @AutoConfigureBefore(CamelAutoConfiguration.class)
 @ConditionalOnBean(org.springframework.cloud.client.serviceregistry.ServiceRegistry.class)

@@ -22,7 +22,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnBean(CamelAutoConfiguration.class)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @ConditionalOnProperty(value = "camel.cloud.enabled", matchIfMissing = true)

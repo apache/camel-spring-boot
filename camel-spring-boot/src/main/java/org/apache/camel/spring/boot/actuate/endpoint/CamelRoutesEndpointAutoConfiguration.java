@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Auto configuration for the {@link CamelRoutesEndpoint}.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({ CamelRoutesEndpointProperties.class })
 @ConditionalOnClass({CamelRoutesEndpoint.class})
 @ConditionalOnBean(CamelAutoConfiguration.class)

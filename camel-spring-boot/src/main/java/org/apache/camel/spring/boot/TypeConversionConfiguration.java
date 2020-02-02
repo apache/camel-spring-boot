@@ -29,7 +29,7 @@ import org.springframework.core.convert.support.DefaultConversionService;
 
 import static java.util.Arrays.asList;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(value = "camel.springboot.type-conversion", matchIfMissing = true)
 public class TypeConversionConfiguration {
 
