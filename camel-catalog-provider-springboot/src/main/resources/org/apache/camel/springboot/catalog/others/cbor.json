@@ -1,0 +1,12 @@
+{
+  "other": {
+    "kind": "other",
+    "name": "cbor",
+    "title": "Cbor",
+    "description": "Camel Cbor Support",
+    "deprecated": false,
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-cbor-starter",
+    "version": "3.1.0-SNAPSHOT"
+  }
+}

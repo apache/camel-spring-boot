@@ -137,6 +137,7 @@
     <module>camel-aws2-ecs-starter</module>
     <module>camel-aws2-eks-starter</module>
     <module>camel-aws2-mq-starter</module>
+    <module>camel-aws2-msk-starter</module>
     <module>camel-aws2-translate-starter</module>
     <module>camel-azure-starter</module>
     <module>camel-barcode-starter</module>
