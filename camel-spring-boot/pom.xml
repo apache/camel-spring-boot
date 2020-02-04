@@ -77,11 +77,6 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-main</artifactId>
         </dependency>
-        <!-- JMX is enabled by default -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-management</artifactId>
-        </dependency>
 
         <!-- Optional Spring web support -->
         <dependency>
