@@ -17,7 +17,6 @@
 package org.apache.camel.spring.boot;
 
 import org.apache.camel.spring.SpringCamelContext;
-import org.apache.camel.support.service.ServiceSupport;
 import org.apache.camel.util.StopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
