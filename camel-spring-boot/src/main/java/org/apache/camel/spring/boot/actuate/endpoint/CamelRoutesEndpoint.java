@@ -29,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.camel.CamelContext;
+import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.Route;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.StatefulService;
@@ -36,8 +37,8 @@ import org.apache.camel.api.management.ManagedCamelContext;
 import org.apache.camel.api.management.mbean.ManagedRouteMBean;
 import org.apache.camel.api.management.mbean.RouteError;
 import org.apache.camel.model.Model;
-import org.apache.camel.model.ModelHelper;
 import org.apache.camel.model.RouteDefinition;
+import org.apache.camel.spi.ModelToXMLDumper;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.annotation.Selector;
@@ -117,7 +118,9 @@ public class CamelRoutesEndpoint {
         RouteDefinition route = camelContext.getExtension(Model.class).getRouteDefinition(id);
         if (route != null) {
             try {
-                return ModelHelper.dumpModelAsXml(camelContext, route);
+                ExtendedCamelContext extendedCamelContext = camelContext.adapt(ExtendedCamelContext.class);
+                ModelToXMLDumper dumper = extendedCamelContext.getModelToXMLDumper();
+                return dumper.dumpModelAsXml(camelContext, route);
             } catch (Exception e) {
                 throw RuntimeCamelException.wrapRuntimeCamelException(e);
             }

@@ -22,12 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.main.DefaultRoutesCollector;
-import org.apache.camel.model.ModelHelper;
 import org.apache.camel.model.RoutesDefinition;
 import org.apache.camel.model.rest.RestsDefinition;
+import org.apache.camel.spi.XMLRoutesDefinitionLoader;
 import org.apache.camel.util.AntPathMatcher;
 import org.apache.camel.util.ObjectHelper;
 import org.springframework.context.ApplicationContext;
@@ -121,7 +122,9 @@ public class SpringBootRoutesCollector extends DefaultRoutesCollector {
                 Resource[] xmlRoutes = applicationContext.getResources(part);
                 for (Resource xmlRoute : xmlRoutes) {
                     log.debug("Found XML route: {}", xmlRoute);
-                    RoutesDefinition routes = ModelHelper.loadRoutesDefinition(camelContext, xmlRoute.getInputStream());
+                    ExtendedCamelContext extendedCamelContext = camelContext.adapt(ExtendedCamelContext.class);
+                    XMLRoutesDefinitionLoader xmlLoader = extendedCamelContext.getXMLRoutesDefinitionLoader();
+                    RoutesDefinition routes = (RoutesDefinition) xmlLoader.loadRoutesDefinition(camelContext, xmlRoute.getInputStream());
                     answer.add(routes);
                 }
             } catch (FileNotFoundException e) {
@@ -144,7 +147,9 @@ public class SpringBootRoutesCollector extends DefaultRoutesCollector {
             try {
                 final Resource[] xmlRests = applicationContext.getResources(part);
                 for (final Resource xmlRest : xmlRests) {
-                    RestsDefinition rests = ModelHelper.loadRestsDefinition(camelContext, xmlRest.getInputStream());
+                    ExtendedCamelContext extendedCamelContext = camelContext.adapt(ExtendedCamelContext.class);
+                    XMLRoutesDefinitionLoader xmlLoader = extendedCamelContext.getXMLRoutesDefinitionLoader();
+                    RestsDefinition rests = (RestsDefinition) xmlLoader.loadRestsDefinition(camelContext, xmlRest.getInputStream());
                     answer.add(rests);
                 }
             } catch (FileNotFoundException e) {
