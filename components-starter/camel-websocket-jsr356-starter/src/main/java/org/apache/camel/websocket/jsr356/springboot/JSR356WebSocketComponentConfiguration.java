@@ -37,6 +37,13 @@ public class JSR356WebSocketComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * To enable customization of how a WebSocket ServerEndpoint is configured
+     * and deployed. By default DefaultServerEndpointDeploymentStrategy is used.
+     * The option is a
+     * org.apache.camel.websocket.jsr356.ServerEndpointDeploymentStrategy type.
+     */
+    private String serverEndpointDeploymentStrategy;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -61,6 +68,15 @@ public class JSR356WebSocketComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+
+    public String getServerEndpointDeploymentStrategy() {
+        return serverEndpointDeploymentStrategy;
+    }
+
+    public void setServerEndpointDeploymentStrategy(
+            String serverEndpointDeploymentStrategy) {
+        this.serverEndpointDeploymentStrategy = serverEndpointDeploymentStrategy;
+    }
 
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;

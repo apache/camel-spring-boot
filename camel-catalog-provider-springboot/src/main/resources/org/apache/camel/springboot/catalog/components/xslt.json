@@ -46,4 +46,3 @@
     "uriResolver": { "kind": "parameter", "displayName": "Uri Resolver", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "javax.xml.transform.URIResolver", "deprecated": false, "secret": false, "description": "To use a custom javax.xml.transform.URIResolver" }
   }
 }
-

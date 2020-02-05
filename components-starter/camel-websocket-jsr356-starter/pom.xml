@@ -40,9 +40,9 @@
       <version>${camel-version}</version>
     </dependency>
     <dependency>
-       <groupId>org.apache.tomcat</groupId>
-       <artifactId>tomcat-websocket-api</artifactId>
-       <version>${tomcat-version}</version>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-websocket-api</artifactId>
+      <version>${tomcat-version}</version>
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
