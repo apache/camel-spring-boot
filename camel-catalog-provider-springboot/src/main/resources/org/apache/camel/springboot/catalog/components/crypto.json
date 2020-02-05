@@ -49,4 +49,3 @@
     "password": { "kind": "parameter", "displayName": "Password", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "configurationClass": "org.apache.camel.component.crypto.DigitalSignatureConfiguration", "configurationField": "configuration", "description": "Sets the password used to access an aliased PrivateKey in the KeyStore." }
   }
 }
-

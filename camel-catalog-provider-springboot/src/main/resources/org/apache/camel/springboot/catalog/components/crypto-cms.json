@@ -46,4 +46,3 @@
     "verifySignaturesOfAllSigners": { "kind": "parameter", "displayName": "Verify Signatures Of All Signers", "group": "verify", "label": "verify", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": "true", "configurationClass": "org.apache.camel.component.crypto.cms.sig.DefaultSignedDataVerifierConfiguration", "configurationField": "verifyConfig", "description": "If true then the signatures of all signers contained in the Signed Data object are verified. If false then only one signature whose signer info matches with one of the specified certificates is verified. Default value is true." }
   }
 }
-

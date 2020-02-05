@@ -38,17 +38,17 @@ public class IgniteEventsComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Sets the Ignite instance. The option is a org.apache.ignite.Ignite type.
+     * Ignite instance. The option is a org.apache.ignite.Ignite type.
      */
     private String ignite;
     /**
-     * Sets the resource from where to load the configuration. It can be a: URI,
-     * String (URI) or an InputStream. The option is a java.lang.Object type.
+     * Resource from where to load configuration. The option is a
+     * java.lang.Object type.
      */
     private String configurationResource;
     /**
-     * Allows the user to set a programmatic IgniteConfiguration. The option is
-     * a org.apache.ignite.configuration.IgniteConfiguration type.
+     * Ignite configuration. The option is a
+     * org.apache.ignite.configuration.IgniteConfiguration type.
      */
     private String igniteConfiguration;
     /**

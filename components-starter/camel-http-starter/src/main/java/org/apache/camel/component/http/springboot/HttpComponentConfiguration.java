@@ -98,22 +98,22 @@ public class HttpComponentConfiguration
      * The timeout in milliseconds used when requesting a connection from the
      * connection manager. A timeout value of zero is interpreted as an infinite
      * timeout. A timeout value of zero is interpreted as an infinite timeout. A
-     * negative value is interpreted as undefined (system default). Default: -1
+     * negative value is interpreted as undefined (system default).
      */
     private Integer connectionRequestTimeout = -1;
     /**
      * Determines the timeout in milliseconds until a connection is established.
      * A timeout value of zero is interpreted as an infinite timeout. A timeout
      * value of zero is interpreted as an infinite timeout. A negative value is
-     * interpreted as undefined (system default). Default: -1
+     * interpreted as undefined (system default).
      */
     private Integer connectTimeout = -1;
     /**
-     * Defines the socket timeout (SO_TIMEOUT) in milliseconds, which is the
-     * timeout for waiting for data or, put differently, a maximum period
-     * inactivity between two consecutive data packets). A timeout value of zero
-     * is interpreted as an infinite timeout. A negative value is interpreted as
-     * undefined (system default). Default: -1
+     * Defines the socket timeout in milliseconds, which is the timeout for
+     * waiting for data or, put differently, a maximum period inactivity between
+     * two consecutive data packets). A timeout value of zero is interpreted as
+     * an infinite timeout. A negative value is interpreted as undefined (system
+     * default).
      */
     private Integer socketTimeout = -1;
     /**

@@ -44,4 +44,3 @@
     "verificationCode": { "kind": "parameter", "displayName": "Verification Code", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "configurationClass": "org.apache.camel.component.jira.JiraConfiguration", "configurationField": "configuration", "description": "(OAuth only) The verification code from Jira generated in the first step of the authorization proccess." }
   }
 }
-

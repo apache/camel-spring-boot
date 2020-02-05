@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.debezium.springboot;
 
-import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -415,75 +414,6 @@ public class DebeziumPostgresComponentConfiguration
          * which disables tracking xmin.
          */
         private Long xminFetchIntervalMs = 0L;
-        /**
-         * Sets additional properties for debezium components in case they can't
-         * be set directly on the camel configurations (e.g: setting Kafka
-         * Connect properties needed by Debezium engine, for example setting
-         * KafkaOffsetBackingStore), the properties have to be prefixed with
-         * additionalProperties.. E.g:
-         * additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http://localhost:8811/avro
-         */
-        private Map additionalProperties;
-        private Class connectorClass;
-        /**
-         * The Converter class that should be used to serialize and deserialize
-         * key data for offsets. The default is JSON converter.
-         */
-        private String internalKeyConverter = "org.apache.kafka.connect.json.JsonConverter";
-        /**
-         * The Converter class that should be used to serialize and deserialize
-         * value data for offsets. The default is JSON converter.
-         */
-        private String internalValueConverter = "org.apache.kafka.connect.json.JsonConverter";
-        /**
-         * Unique name for the connector. Attempting to register again with the
-         * same name will fail.
-         */
-        private String name;
-        /**
-         * The name of the Java class of the commit policy. It defines when
-         * offsets commit has to be triggered based on the number of events
-         * processed and the time elapsed since the last commit. This class must
-         * implement the interface 'OffsetCommitPolicy'. The default is a
-         * periodic commit policy based upon time intervals.
-         */
-        private String offsetCommitPolicy = "io.debezium.embedded.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy";
-        /**
-         * Maximum number of milliseconds to wait for records to flush and
-         * partition offset data to be committed to offset storage before
-         * cancelling the process and restoring the offset data to be committed
-         * in a future attempt. The default is 5 seconds.
-         */
-        private Long offsetCommitTimeoutMs = 5000L;
-        /**
-         * Interval at which to try committing offsets. The default is 1 minute.
-         */
-        private Long offsetFlushIntervalMs = 60000L;
-        /**
-         * The name of the Java class that is responsible for persistence of
-         * connector offsets.
-         */
-        private String offsetStorage = "org.apache.kafka.connect.storage.FileOffsetBackingStore";
-        /**
-         * Path to file where offsets are to be stored. Required when
-         * offset.storage is set to the FileOffsetBackingStore
-         */
-        private String offsetStorageFileName;
-        /**
-         * The number of partitions used when creating the offset storage topic.
-         * Required when offset.storage is set to the 'KafkaOffsetBackingStore'.
-         */
-        private Integer offsetStoragePartitions;
-        /**
-         * Replication factor used when creating the offset storage topic.
-         * Required when offset.storage is set to the KafkaOffsetBackingStore
-         */
-        private Integer offsetStorageReplicationFactor;
-        /**
-         * The name of the Kafka topic where offsets are to be stored. Required
-         * when offset.storage is set to the KafkaOffsetBackingStore.
-         */
-        private String offsetStorageTopic;
 
         public String getColumnBlacklist() {
             return columnBlacklist;
@@ -886,111 +816,6 @@ public class DebeziumPostgresComponentConfiguration
 
         public void setXminFetchIntervalMs(Long xminFetchIntervalMs) {
             this.xminFetchIntervalMs = xminFetchIntervalMs;
-        }
-
-        public Map getAdditionalProperties() {
-            return additionalProperties;
-        }
-
-        public void setAdditionalProperties(Map additionalProperties) {
-            this.additionalProperties = additionalProperties;
-        }
-
-        public Class getConnectorClass() {
-            return connectorClass;
-        }
-
-        public void setConnectorClass(Class connectorClass) {
-            this.connectorClass = connectorClass;
-        }
-
-        public String getInternalKeyConverter() {
-            return internalKeyConverter;
-        }
-
-        public void setInternalKeyConverter(String internalKeyConverter) {
-            this.internalKeyConverter = internalKeyConverter;
-        }
-
-        public String getInternalValueConverter() {
-            return internalValueConverter;
-        }
-
-        public void setInternalValueConverter(String internalValueConverter) {
-            this.internalValueConverter = internalValueConverter;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getOffsetCommitPolicy() {
-            return offsetCommitPolicy;
-        }
-
-        public void setOffsetCommitPolicy(String offsetCommitPolicy) {
-            this.offsetCommitPolicy = offsetCommitPolicy;
-        }
-
-        public Long getOffsetCommitTimeoutMs() {
-            return offsetCommitTimeoutMs;
-        }
-
-        public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
-            this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
-        }
-
-        public Long getOffsetFlushIntervalMs() {
-            return offsetFlushIntervalMs;
-        }
-
-        public void setOffsetFlushIntervalMs(Long offsetFlushIntervalMs) {
-            this.offsetFlushIntervalMs = offsetFlushIntervalMs;
-        }
-
-        public String getOffsetStorage() {
-            return offsetStorage;
-        }
-
-        public void setOffsetStorage(String offsetStorage) {
-            this.offsetStorage = offsetStorage;
-        }
-
-        public String getOffsetStorageFileName() {
-            return offsetStorageFileName;
-        }
-
-        public void setOffsetStorageFileName(String offsetStorageFileName) {
-            this.offsetStorageFileName = offsetStorageFileName;
-        }
-
-        public Integer getOffsetStoragePartitions() {
-            return offsetStoragePartitions;
-        }
-
-        public void setOffsetStoragePartitions(Integer offsetStoragePartitions) {
-            this.offsetStoragePartitions = offsetStoragePartitions;
-        }
-
-        public Integer getOffsetStorageReplicationFactor() {
-            return offsetStorageReplicationFactor;
-        }
-
-        public void setOffsetStorageReplicationFactor(
-                Integer offsetStorageReplicationFactor) {
-            this.offsetStorageReplicationFactor = offsetStorageReplicationFactor;
-        }
-
-        public String getOffsetStorageTopic() {
-            return offsetStorageTopic;
-        }
-
-        public void setOffsetStorageTopic(String offsetStorageTopic) {
-            this.offsetStorageTopic = offsetStorageTopic;
         }
     }
 }

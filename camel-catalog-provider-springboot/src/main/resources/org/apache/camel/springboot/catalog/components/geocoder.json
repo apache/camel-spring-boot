@@ -42,4 +42,3 @@
     "clientKey": { "kind": "parameter", "displayName": "Client Key", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "description": "To use google premium with this client key" }
   }
 }
-

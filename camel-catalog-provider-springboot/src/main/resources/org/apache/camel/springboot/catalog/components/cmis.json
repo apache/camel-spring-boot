@@ -43,4 +43,3 @@
     "username": { "kind": "parameter", "displayName": "Username", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "configurationClass": "org.apache.camel.component.cmis.CMISSessionFacade", "configurationField": "sessionFacade", "description": "Username for the cmis repository" }
   }
 }
-

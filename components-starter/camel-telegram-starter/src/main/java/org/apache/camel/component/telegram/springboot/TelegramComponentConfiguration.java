@@ -53,8 +53,8 @@ public class TelegramComponentConfiguration
      */
     private String clientConfig;
     /**
-     * Set an alternative base URI, e.g. when you want to test the component
-     * against a mock Telegram API.
+     * Can be used to set an alternative base URI, e.g. when you want to test
+     * the component against a mock Telegram API
      */
     private String baseUri = "https://api.telegram.org";
     /**

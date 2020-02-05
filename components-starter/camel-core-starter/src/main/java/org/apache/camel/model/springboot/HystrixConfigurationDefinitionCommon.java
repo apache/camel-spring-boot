@@ -93,7 +93,7 @@ public class HystrixConfigurationDefinitionCommon {
     private String executionIsolationStrategy = "THREAD";
     /**
      * Whether the execution thread should attempt an interrupt (using
-     * Future#cancel) when a thread times out. Applicable only when
+     * Future#cancel ) when a thread times out. Applicable only when
      * executionIsolationStrategy() == THREAD.
      */
     private String executionIsolationThreadInterruptOnTimeout = "true";
@@ -172,15 +172,15 @@ public class HystrixConfigurationDefinitionCommon {
     private String corePoolSize = "10";
     /**
      * Maximum thread-pool size that gets passed to
-     * ThreadPoolExecutor#setMaximumPoolSize(int). This is the maximum amount of
-     * concurrency that can be supported without starting to reject
+     * ThreadPoolExecutor#setMaximumPoolSize(int) . This is the maximum amount
+     * of concurrency that can be supported without starting to reject
      * HystrixCommands. Please note that this setting only takes effect if you
      * also set allowMaximumSizeToDivergeFromCoreSize
      */
     private String maximumSize = "10";
     /**
-     * Keep-alive time in minutes that gets passed to {link
-     * ThreadPoolExecutor#setKeepAliveTime(long, TimeUnit)}
+     * Keep-alive time in minutes that gets passed to
+     * ThreadPoolExecutor#setKeepAliveTime(long,TimeUnit)
      */
     private String keepAliveTime = "1";
     /**

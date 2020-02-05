@@ -38,4 +38,3 @@
     "oAuthToken": { "kind": "parameter", "displayName": "OAuth Token", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "configurationClass": "org.apache.camel.component.digitalocean.DigitalOceanConfiguration", "configurationField": "configuration", "description": "DigitalOcean OAuth Token" }
   }
 }
-

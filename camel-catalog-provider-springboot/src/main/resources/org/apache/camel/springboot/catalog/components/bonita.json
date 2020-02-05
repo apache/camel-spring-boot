@@ -34,4 +34,3 @@
     "username": { "kind": "parameter", "displayName": "Username", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "configurationClass": "org.apache.camel.component.bonita.BonitaConfiguration", "configurationField": "configuration", "description": "Username to authenticate to Bonita engine." }
   }
 }
-

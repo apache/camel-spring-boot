@@ -56,4 +56,3 @@
     "lookupProviders": { "kind": "parameter", "displayName": "Lookup Providers", "group": "advanced", "label": "advanced", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": false, "configurationClass": "org.apache.camel.component.jcache.JCacheConfiguration", "configurationField": "configuration", "description": "Configure if a camel-cache should try to find implementations of jcache api in runtimes like OSGi." }
   }
 }
-

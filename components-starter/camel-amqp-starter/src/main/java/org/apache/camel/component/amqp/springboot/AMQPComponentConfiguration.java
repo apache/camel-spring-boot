@@ -95,11 +95,11 @@ public class AMQPComponentConfiguration
     private Integer acknowledgementMode;
     /**
      * If eagerLoadingOfProperties is enabled and the JMS message payload (JMS
-     * body or JMS properties) (cannot be read/mapped), then set this text as
-     * the message body instead so the message can be processed (the cause of
-     * the poison are already stored as exception on the Exchange). This can be
-     * turned off by setting eagerPoisonBody=false. See also the option
-     * eagerLoadingOfProperties.
+     * body or JMS properties) is poison (cannot be read/mapped), then set this
+     * text as the message body instead so the message can be processed (the
+     * cause of the poison are already stored as exception on the Exchange).
+     * This can be turned off by setting eagerPoisonBody=false. See also the
+     * option eagerLoadingOfProperties.
      */
     private String eagerPoisonBody = "Poison JMS message due to ${exception.message}";
     /**
@@ -282,13 +282,12 @@ public class AMQPComponentConfiguration
     private String messageConverter;
     /**
      * Specifies whether Camel should auto map the received JMS message to a
-     * suited payload type, such as javax.jms.TextMessage to a String etc. See
-     * section about how mapping works below for more details.
+     * suited payload type, such as javax.jms.TextMessage to a String etc.
      */
     private Boolean mapJmsMessage = true;
     /**
      * When sending, specifies whether message IDs should be added. This is just
-     * an hint to the JMS Broker. If the JMS provider accepts this hint, these
+     * an hint to the JMS broker. If the JMS provider accepts this hint, these
      * messages must have the message ID set to null; if the provider ignores
      * the hint, the message ID must be set to its normal unique value.
      */
@@ -424,7 +423,11 @@ public class AMQPComponentConfiguration
      * exchange exception. This requires that the objects are serializable.
      * Camel will exclude any non-serializable objects and log it at WARN level.
      * You must enable this option on both the producer and consumer side, so
-     * Camel knows the payloads is an Exchange and not a regular payload.
+     * Camel knows the payloads is an Exchange and not a regular payload. Use
+     * this with caution as the data is using Java Object serialization and
+     * requires the received to be able to deserialize the data at Class level,
+     * which forces a strong coupling between the producers and consumer having
+     * to use compatible Camel versions!
      */
     private Boolean transferExchange = false;
     /**

@@ -50,4 +50,3 @@
     "authorizationToken": { "kind": "parameter", "displayName": "Authorization Token", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "description": "The authorization token for using the bot. if uri path does not contain authorization token, this token will be used." }
   }
 }
-

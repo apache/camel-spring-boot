@@ -56,4 +56,3 @@
     "trustCertCollectionResource": { "kind": "parameter", "displayName": "Trust Cert Collection Resource", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "configurationClass": "org.apache.camel.component.grpc.GrpcConfiguration", "configurationField": "configuration", "description": "The trusted certificates collection file resource in PEM format for verifying the remote endpoint's certificate" }
   }
 }
-

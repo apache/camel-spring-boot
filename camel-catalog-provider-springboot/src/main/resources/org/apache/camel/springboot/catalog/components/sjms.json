@@ -78,4 +78,3 @@
     "sharedJMSSession": { "kind": "parameter", "displayName": "Shared JMSSession", "group": "transaction (advanced)", "label": "transaction,advanced", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": "true", "description": "Specifies whether to share JMS session with other SJMS endpoints. Turn this off if your route is accessing to multiple JMS providers. If you need transaction against multiple JMS providers, use jms component to leverage XA transaction." }
   }
 }
-

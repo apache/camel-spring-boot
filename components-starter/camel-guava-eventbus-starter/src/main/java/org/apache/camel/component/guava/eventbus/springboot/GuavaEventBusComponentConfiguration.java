@@ -49,7 +49,7 @@ public class GuavaEventBusComponentConfiguration
      * multi-event listeners and for handling DeadEvent properly. This option
      * cannot be used together with eventClass option.
      */
-    private Class<?> listenerInterface;
+    private Class<Object> listenerInterface;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -84,11 +84,11 @@ public class GuavaEventBusComponentConfiguration
         this.eventBus = eventBus;
     }
 
-    public Class<?> getListenerInterface() {
+    public Class<Object> getListenerInterface() {
         return listenerInterface;
     }
 
-    public void setListenerInterface(Class<?> listenerInterface) {
+    public void setListenerInterface(Class<Object> listenerInterface) {
         this.listenerInterface = listenerInterface;
     }
 

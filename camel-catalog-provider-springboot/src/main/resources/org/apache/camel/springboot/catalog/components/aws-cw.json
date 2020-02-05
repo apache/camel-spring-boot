@@ -44,4 +44,3 @@
     "secretKey": { "kind": "parameter", "displayName": "Secret Key", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "configurationClass": "org.apache.camel.component.aws.cw.CwConfiguration", "configurationField": "configuration", "description": "Amazon AWS Secret Key" }
   }
 }
-

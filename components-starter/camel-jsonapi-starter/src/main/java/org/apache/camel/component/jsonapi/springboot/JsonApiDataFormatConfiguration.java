@@ -39,11 +39,11 @@ public class JsonApiDataFormatConfiguration
     /**
      * The classes to take into account for the marshalling
      */
-    private Class<?>[] dataFormatTypes;
+    private Class<Object>[] dataFormatTypes;
     /**
      * The classes to take into account while unmarshalling
      */
-    private Class<?> mainFormatType;
+    private Class<Object> mainFormatType;
     /**
      * Whether the data format should set the Content-Type header with the type
      * from the data format if the data format is capable of doing so. For
@@ -52,19 +52,19 @@ public class JsonApiDataFormatConfiguration
      */
     private Boolean contentTypeHeader = false;
 
-    public Class<?>[] getDataFormatTypes() {
+    public Class<Object>[] getDataFormatTypes() {
         return dataFormatTypes;
     }
 
-    public void setDataFormatTypes(Class<?>[] dataFormatTypes) {
+    public void setDataFormatTypes(Class<Object>[] dataFormatTypes) {
         this.dataFormatTypes = dataFormatTypes;
     }
 
-    public Class<?> getMainFormatType() {
+    public Class<Object> getMainFormatType() {
         return mainFormatType;
     }
 
-    public void setMainFormatType(Class<?> mainFormatType) {
+    public void setMainFormatType(Class<Object> mainFormatType) {
         this.mainFormatType = mainFormatType;
     }
 

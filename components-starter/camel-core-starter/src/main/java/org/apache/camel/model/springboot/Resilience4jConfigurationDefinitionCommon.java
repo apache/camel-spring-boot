@@ -61,7 +61,7 @@ public class Resilience4jConfigurationDefinitionCommon {
      * recorded and aggregated. The slidingWindowSize must be greater than 0.
      * The minimumNumberOfCalls must be greater than 0. If the slidingWindowType
      * is COUNT_BASED, the minimumNumberOfCalls cannot be greater than
-     * slidingWindowSize. If the slidingWindowType is TIME_BASED, you can pick
+     * slidingWindowSize . If the slidingWindowType is TIME_BASED, you can pick
      * whatever you want. Default slidingWindowSize is 100.
      */
     private Integer slidingWindowSize = 100;

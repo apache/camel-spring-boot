@@ -63,4 +63,3 @@
     "userName": { "kind": "parameter", "displayName": "User Name", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "deprecationNote": "", "secret": true, "configurationClass": "org.apache.camel.component.paho.PahoConfiguration", "configurationField": "configuration", "description": "Username to be used for authentication against the MQTT broker" }
   }
 }
-

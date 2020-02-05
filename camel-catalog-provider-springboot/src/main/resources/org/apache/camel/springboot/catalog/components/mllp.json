@@ -61,4 +61,3 @@
     "charsetName": { "kind": "parameter", "displayName": "Charset Name", "group": "codec", "label": "codec", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "configurationClass": "org.apache.camel.component.mllp.MllpConfiguration", "configurationField": "configuration", "description": "Set the CamelCharsetName property on the exchange" }
   }
 }
-

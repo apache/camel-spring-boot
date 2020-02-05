@@ -50,4 +50,3 @@
     "connectionId": { "kind": "parameter", "displayName": "Connection Id", "group": "id", "label": "id", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "An identifier grouping connection instances" }
   }
 }
-

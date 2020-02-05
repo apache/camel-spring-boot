@@ -36,4 +36,3 @@
     "password": { "kind": "parameter", "displayName": "Password", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "configurationClass": "org.apache.camel.component.nagios.NagiosConfiguration", "configurationField": "configuration", "description": "Password to be authenticated when sending checks to Nagios." }
   }
 }
-

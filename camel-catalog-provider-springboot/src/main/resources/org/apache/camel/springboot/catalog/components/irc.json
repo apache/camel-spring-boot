@@ -59,4 +59,3 @@
     "username": { "kind": "parameter", "displayName": "Username", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "configurationClass": "org.apache.camel.component.irc.IrcConfiguration", "configurationField": "configuration", "description": "The IRC server user name." }
   }
 }
-

@@ -60,4 +60,3 @@
     "sslContextParameters": { "kind": "parameter", "displayName": "Ssl Context Parameters", "group": "security", "label": "security", "required": false, "type": "object", "javaType": "org.apache.camel.support.jsse.SSLContextParameters", "deprecated": false, "secret": false, "configurationClass": "org.apache.camel.component.mina.MinaConfiguration", "configurationField": "configuration", "description": "To configure SSL security." }
   }
 }
-

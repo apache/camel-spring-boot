@@ -46,4 +46,3 @@
     "sslValidation": { "kind": "parameter", "displayName": "Ssl Validation", "group": "security", "label": "security", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": false, "configurationClass": "org.apache.camel.component.atmos.AtmosConfiguration", "configurationField": "configuration", "description": "Atmos SSL validation" }
   }
 }
-

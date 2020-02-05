@@ -41,4 +41,3 @@
     "validatorFactory": { "kind": "parameter", "displayName": "Validator Factory", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "javax.validation.ValidatorFactory", "deprecated": false, "secret": false, "description": "To use a custom ValidatorFactory" }
   }
 }
-

@@ -62,4 +62,3 @@
     "userName": { "kind": "parameter", "displayName": "User Name", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "configurationClass": "org.apache.camel.component.consul.ConsulConfiguration", "configurationField": "configuration", "description": "Sets the username to be used for basic authentication" }
   }
 }
-

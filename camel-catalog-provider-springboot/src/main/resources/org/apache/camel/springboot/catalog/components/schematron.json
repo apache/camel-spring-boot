@@ -32,4 +32,3 @@
     "uriResolver": { "kind": "parameter", "displayName": "Uri Resolver", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "javax.xml.transform.URIResolver", "deprecated": false, "secret": false, "description": "Set the URIResolver to be used for resolving schematron includes in the rules file." }
   }
 }
-

@@ -47,4 +47,3 @@
     "user": { "kind": "parameter", "displayName": "User", "group": "compute", "label": "producer,compute", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "configurationClass": "org.apache.camel.component.jclouds.JcloudsConfiguration", "configurationField": "configuration", "description": "The user on the target node that will run the script." }
   }
 }
-

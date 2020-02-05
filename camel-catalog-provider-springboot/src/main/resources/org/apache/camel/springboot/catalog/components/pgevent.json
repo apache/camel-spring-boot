@@ -39,4 +39,3 @@
     "user": { "kind": "parameter", "displayName": "User", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "defaultValue": "postgres", "description": "Username for login" }
   }
 }
-

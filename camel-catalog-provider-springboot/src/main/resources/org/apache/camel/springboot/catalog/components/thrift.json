@@ -44,4 +44,3 @@
     "sslParameters": { "kind": "parameter", "displayName": "Ssl Parameters", "group": "security", "label": "security", "required": false, "type": "object", "javaType": "org.apache.camel.support.jsse.SSLContextParameters", "deprecated": false, "secret": false, "configurationClass": "org.apache.camel.component.thrift.ThriftConfiguration", "configurationField": "configuration", "description": "Configuration parameters for SSL\/TLS security negotiation" }
   }
 }
-

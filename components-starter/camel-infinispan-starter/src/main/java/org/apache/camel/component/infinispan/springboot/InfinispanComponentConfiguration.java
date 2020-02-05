@@ -47,11 +47,11 @@ public class InfinispanComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The default configuration shared among endpoints.
+     * Default configuration
      */
     private InfinispanConfigurationNestedConfiguration configuration;
     /**
-     * The default cache container. The option is a
+     * Default Cache container. The option is a
      * org.infinispan.commons.api.BasicCacheContainer type.
      */
     private String cacheContainer;

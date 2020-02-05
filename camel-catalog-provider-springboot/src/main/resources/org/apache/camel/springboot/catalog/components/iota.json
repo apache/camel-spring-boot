@@ -35,4 +35,3 @@
     "securityLevel": { "kind": "parameter", "displayName": "Security Level", "group": "security", "label": "security", "required": false, "type": "integer", "javaType": "java.lang.Integer", "deprecated": false, "secret": false, "defaultValue": "1", "description": "Address security level" }
   }
 }
-

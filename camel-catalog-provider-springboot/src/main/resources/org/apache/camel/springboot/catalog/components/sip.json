@@ -74,4 +74,3 @@
     "useRouterForAllUris": { "kind": "parameter", "displayName": "Use Router For All Uris", "group": "proxy", "label": "proxy", "required": false, "type": "boolean", "javaType": "boolean", "deprecated": false, "secret": false, "defaultValue": false, "configurationClass": "org.apache.camel.component.sip.SipConfiguration", "configurationField": "configuration", "description": "This setting is used when requests are sent to the Presence Agent via a proxy." }
   }
 }
-

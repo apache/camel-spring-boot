@@ -43,4 +43,3 @@
     "subscribeKey": { "kind": "parameter", "displayName": "Subscribe Key", "group": "security", "label": "security", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": true, "configurationClass": "org.apache.camel.component.pubnub.PubNubConfiguration", "configurationField": "configuration", "description": "The subscribe key obtained from your PubNub account. Required when subscribing to channels or listening for presence events" }
   }
 }
-

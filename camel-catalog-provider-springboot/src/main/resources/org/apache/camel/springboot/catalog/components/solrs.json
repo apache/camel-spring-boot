@@ -44,4 +44,3 @@
     "zkHost": { "kind": "parameter", "displayName": "Zk Host", "group": "solrCloud", "label": "solrCloud", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "secret": false, "description": "Set the ZooKeeper host information which the solrCloud could use, such as zkhost=localhost:8123." }
   }
 }
-

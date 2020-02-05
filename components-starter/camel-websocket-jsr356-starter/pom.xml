@@ -39,6 +39,11 @@
       <artifactId>camel-websocket-jsr356</artifactId>
       <version>${camel-version}</version>
     </dependency>
+    <dependency>
+       <groupId>org.apache.tomcat</groupId>
+       <artifactId>tomcat-websocket-api</artifactId>
+       <version>${tomcat-version}</version>
+    </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>

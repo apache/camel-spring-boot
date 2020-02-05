@@ -61,4 +61,3 @@
     "sessionTimeout": { "kind": "parameter", "displayName": "Session Timeout", "group": "client", "label": "client", "required": false, "type": "integer", "javaType": "java.lang.Long", "deprecated": false, "secret": false, "configurationClass": "org.apache.camel.component.milo.client.MiloClientConfiguration", "configurationField": "configuration", "description": "Session timeout in milliseconds" }
   }
 }
-

@@ -38,8 +38,10 @@ public class Jt400ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Returns the default connection pool used by this component. The option is
-     * a com.ibm.as400.access.AS400ConnectionPool type.
+     * Default connection pool used by the component. Note that this pool is
+     * lazily initialized. This is because in a scenario where the user always
+     * provides a pool, it would be wasteful for Camel to initialize and keep an
+     * idle pool. The option is a com.ibm.as400.access.AS400ConnectionPool type.
      */
     private String connectionPool;
     /**

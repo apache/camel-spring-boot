@@ -54,4 +54,3 @@
     "timeoutCheckerExecutorService": { "kind": "parameter", "displayName": "Timeout Checker Executor Service", "group": "advanced", "label": "advanced", "required": false, "type": "object", "javaType": "java.util.concurrent.ScheduledExecutorService", "deprecated": false, "secret": false, "description": "If using the completionInterval option a background thread is created to trigger the completion interval. Set this option to provide a custom thread pool to be used rather than creating a new thread for every consumer." }
   }
 }
-
