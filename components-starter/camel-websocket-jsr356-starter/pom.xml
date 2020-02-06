@@ -35,14 +35,14 @@
       <version>${spring-boot-version}</version>
     </dependency>
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>${spring-boot-version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-websocket-jsr356</artifactId>
       <version>${camel-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tomcat</groupId>
-      <artifactId>tomcat-websocket-api</artifactId>
-      <version>${tomcat-version}</version>
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
