@@ -49,6 +49,11 @@ public class MiloServerComponentConfiguration
      */
     private String applicationName;
     /**
+     * The path to be appended to the end of the endpoint url. (doesn't need to
+     * start with '/')
+     */
+    private String path;
+    /**
      * The application URI
      */
     private String applicationUri;
@@ -60,18 +65,6 @@ public class MiloServerComponentConfiguration
      * The TCP port the server binds to
      */
     private Integer bindPort;
-    /**
-     * Set whether strict endpoint URLs are enforced
-     */
-    private Boolean strictEndpointUrlsEnabled = false;
-    /**
-     * Server name
-     */
-    private String serverName;
-    /**
-     * Server hostname
-     */
-    private String hostname;
     /**
      * Security policies
      */
@@ -109,12 +102,12 @@ public class MiloServerComponentConfiguration
     private String serverCertificate;
     /**
      * Server certificate manager. The option is a
-     * org.eclipse.milo.opcua.stack.core.application.CertificateManager type.
+     * org.eclipse.milo.opcua.stack.core.security.CertificateManager type.
      */
     private String certificateManager;
     /**
      * Validator for client certificates. The option is a
-     * java.util.function.Supplier<org.eclipse.milo.opcua.stack.core.application.CertificateValidator> type.
+     * java.util.function.Supplier<org.eclipse.milo.opcua.stack.core.security.CertificateValidator> type.
      */
     private String certificateValidator;
     /**
@@ -163,6 +156,14 @@ public class MiloServerComponentConfiguration
         this.applicationName = applicationName;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public String getApplicationUri() {
         return applicationUri;
     }
@@ -185,30 +186,6 @@ public class MiloServerComponentConfiguration
 
     public void setBindPort(Integer bindPort) {
         this.bindPort = bindPort;
-    }
-
-    public Boolean getStrictEndpointUrlsEnabled() {
-        return strictEndpointUrlsEnabled;
-    }
-
-    public void setStrictEndpointUrlsEnabled(Boolean strictEndpointUrlsEnabled) {
-        this.strictEndpointUrlsEnabled = strictEndpointUrlsEnabled;
-    }
-
-    public String getServerName() {
-        return serverName;
-    }
-
-    public void setServerName(String serverName) {
-        this.serverName = serverName;
-    }
-
-    public String getHostname() {
-        return hostname;
-    }
-
-    public void setHostname(String hostname) {
-        this.hostname = hostname;
     }
 
     public Set<SecurityPolicy> getSecurityPolicies() {
