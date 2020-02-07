@@ -135,6 +135,7 @@
     <module>camel-aws-translate-starter</module>
     <module>camel-aws-xray-starter</module>
     <module>camel-aws2-cw-starter</module>
+    <module>camel-aws2-ec2-starter</module>
     <module>camel-aws2-ecs-starter</module>
     <module>camel-aws2-eks-starter</module>
     <module>camel-aws2-iam-starter</module>

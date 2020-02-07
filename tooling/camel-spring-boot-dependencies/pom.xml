@@ -428,6 +428,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-aws2-ec2-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-ecs-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
