@@ -16,9 +16,7 @@
  */
 package org.apache.camel.springboot.maven.model;
 
-import org.apache.camel.tooling.util.Strings;
-
-import static org.apache.camel.tooling.util.Strings.wrapCamelCaseWords;
+import org.apache.camel.tooling.model.Strings;
 
 public class SpringBootAutoConfigureOptionModel {
 
@@ -70,7 +68,7 @@ public class SpringBootAutoConfigureOptionModel {
 
         // if its some kind of custom java object then lets wrap it as its long
         if (!javaType.startsWith("java.")) {
-            text = wrapCamelCaseWords(text, watermark, " ");
+            text = Strings.wrapCamelCaseWords(text, watermark, " ");
         }
 
         return text;
