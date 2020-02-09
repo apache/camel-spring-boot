@@ -41,7 +41,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnBean(CamelAutoConfiguration.class)
 @Conditional(DnsCloudAutoConfiguration.Condition.class)
 @AutoConfigureAfter(CamelAutoConfiguration.class)

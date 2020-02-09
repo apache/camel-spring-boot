@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Servlet mapping auto-configuration.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(name = "camel.component.servlet.mapping.enabled", matchIfMissing = true)
 @ConditionalOnBean(type = "org.apache.camel.spring.boot.CamelAutoConfiguration")
 @AutoConfigureAfter(name = "org.apache.camel.spring.boot.CamelAutoConfiguration")

@@ -48,7 +48,7 @@ import org.springframework.core.annotation.Order;
  *    camel.component.ehcache.customizer.cache-manager.enabled = true/false
  */
 @Order(Ordered.LOWEST_PRECEDENCE)
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @Conditional(CacheManagerCustomizer.NestedConditions.class)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @AutoConfigureBefore(EhcacheComponentAutoConfiguration.class)

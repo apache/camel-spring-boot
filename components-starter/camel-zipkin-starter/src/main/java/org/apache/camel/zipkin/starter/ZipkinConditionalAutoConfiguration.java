@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Import;
  * A configuration controller to enable Zipkin via the configuration property.
  * Useful to bootstrap Zipkin when not using the {@link CamelZipkin} annotation.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(value = "camel.zipkin.enabled")
 @Import(ZipkinAutoConfiguration.class)
 public class ZipkinConditionalAutoConfiguration {

@@ -40,7 +40,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnBean({ CamelAutoConfiguration.class, CamelContext.class })
 @Conditional(KubernetesServiceDiscoveryAutoConfiguration.Condition.class)
 @AutoConfigureAfter(CamelAutoConfiguration.class)

@@ -40,7 +40,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnBean(CamelCloudAutoConfiguration.class)
 @EnableConfigurationProperties(CamelCloudConfigurationProperties.class)
 @Conditional(CamelCloudServiceDiscoveryAutoConfiguration.Condition.class)

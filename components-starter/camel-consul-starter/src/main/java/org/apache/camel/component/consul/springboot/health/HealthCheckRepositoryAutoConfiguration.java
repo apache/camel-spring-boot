@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(CamelAutoConfiguration.class)
 @ConditionalOnProperty(prefix = "camel.component.consul.health.check.repository", value = "enabled")
 @EnableConfigurationProperties(HealthCheckRepositoryConfiguration.class)

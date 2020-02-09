@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Import;
  * A configuration controller to enable OpenTracing via the configuration property.
  * Useful to bootstrap OpenTracing when not using the {@link CamelOpenTracing} annotation.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(value = "camel.opentracing.enabled")
 @Import(OpenTracingAutoConfiguration.class)
 public class OpenTracingConditionalAutoConfiguration {

@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore({ ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
 @ConditionalOnProperty(prefix = "camel.component.jgroups.raft.cluster.service", name = "enabled")
 @EnableConfigurationProperties(JGroupsRaftClusterServiceConfiguration.class)

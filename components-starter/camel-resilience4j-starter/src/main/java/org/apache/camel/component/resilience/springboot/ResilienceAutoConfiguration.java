@@ -42,7 +42,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Resilience auto configuration.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(name = "camel.resilience4j.enabled", matchIfMissing = true)
 @ConditionalOnBean(value = CamelAutoConfiguration.class)
 @AutoConfigureAfter(value = CamelAutoConfiguration.class)

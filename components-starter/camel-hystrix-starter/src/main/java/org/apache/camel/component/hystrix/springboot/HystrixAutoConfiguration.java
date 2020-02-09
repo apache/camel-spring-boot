@@ -43,7 +43,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Hystrix auto configuration.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(name = "camel.hystrix.enabled", matchIfMissing = true)
 @ConditionalOnBean(value = CamelAutoConfiguration.class)
 @AutoConfigureAfter(value = CamelAutoConfiguration.class)
