@@ -33,7 +33,7 @@ public class PetController {
 
     @GetMapping(value = "/pets/{id}")
     public Map<String, String> petById(@PathVariable("id") Integer id) {
-        if (id != null && id > 0 && id <= PETS.length + 1) {
+        if (id != null && id > 0 && id <= PETS.length) {
             int index = id - 1;
             String pet = PETS[index];
             return Collections.singletonMap("name", pet);
