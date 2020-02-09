@@ -37,9 +37,6 @@ public class CustomKafkaAvroDeserializer extends AbstractKafkaAvroDeserializer  
         LOG.info("ENTER CustomKafkaAvroDeserializer  : configure method ");
         LOG.info("ENTER CustomKafkaAvroDeserializer  : SCHEMA_REGISTRY_URL " + SCHEMA_REGISTRY_URL);
 
-        if (SCHEMA_REGISTRY_URL == null) {
-            throw new org.apache.kafka.common.config.ConfigException("No schema registry provided");
-        }
         try {
 
             final List<String> schemas = Collections.singletonList(SCHEMA_REGISTRY_URL);
