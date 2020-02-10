@@ -96,6 +96,13 @@
             </goals>
             <phase>generate-resources</phase>
           </execution>
+          <execution>
+            <id>readme</id>
+            <goals>
+              <goal>update-spring-boot-auto-configuration-readme</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
         </executions>
       </plugin>
     </plugins>

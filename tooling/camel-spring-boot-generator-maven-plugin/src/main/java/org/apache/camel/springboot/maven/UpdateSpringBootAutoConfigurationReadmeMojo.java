@@ -17,16 +17,12 @@
 package org.apache.camel.springboot.maven;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
 
 import org.apache.camel.maven.packaging.MvelHelper;
 import org.apache.camel.springboot.maven.model.SpringBootAutoConfigureOptionModel;
@@ -45,6 +41,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.mvel2.templates.TemplateRuntime;
 import org.sonatype.plexus.build.incremental.BuildContext;
+
 
 import static org.apache.camel.tooling.util.PackageHelper.loadText;
 import static org.apache.camel.tooling.util.PackageHelper.writeText;
@@ -68,13 +65,6 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
      */
     @Parameter(defaultValue = "${project.build.directory}")
     protected File buildDir;
-
-    /**
-     * The documentation directory
-     *
-     */
-    @Parameter(defaultValue = "${basedir}/../../../../components/")
-    protected File componentsDir;
 
     /**
      * Whether to fail the build fast if any Warnings was detected.
@@ -118,142 +108,38 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
                     return;
                 }
 
-                File compDir = getComponentsDir(name);
+                // skip camel-  and -starter in the end
+                String componentName = name.substring(6, name.length() - 8);
+                getLog().debug("Camel component: " + componentName);
+                File docFolder = new File("components-starter/" + name + "/src/main/docs/");
+                File docFile = new File(docFolder, componentName + "-starter.adoc");
 
-                File[] docFiles;
-                File docFolder;
-                String componentName;
-                if ("camel-spring-boot".equals(name)) {
-                    // special for camel-spring-boot where we also want to auto-generate the options in the adoc file
-                    componentName = "spring-boot";
-                    docFolder = new File(compDir, "/src/main/docs/");
-                    docFiles = docFolder.listFiles(new ComponentDocFilter(componentName));
-                } else if ("camel-univocity-parsers-starter".equals(name)) {
-                    // special for univocity-parsers
-                    componentName = "univocity";
-                    docFolder = new File(compDir, "camel-univocity-parsers/src/main/docs/");
-                    docFiles = docFolder.listFiles(new ComponentDocFilter(componentName));
-                } else {
-                    // skip camel-  and -starter in the end
-                    componentName = name.substring(6, name.length() - 8);
-                    getLog().debug("Camel component: " + componentName);
-                    docFolder = new File(compDir, "camel-" + componentName + "/src/main/docs/");
-                    docFiles = docFolder.listFiles(new ComponentDocFilter(componentName));
+                List<SpringBootAutoConfigureOptionModel> models = parseSpringBootAutoConfigureModels(jsonFile, null);
 
-                    // maybe its one of those component that has subfolders with -api and -component
-                    if (docFiles == null || docFiles.length == 0) {
-                        docFolder = new File(compDir, "camel-" + componentName + "/camel-" + componentName + "-component/src/main/docs/");
-                        docFiles = docFolder.listFiles(new ComponentDocFilter(componentName));
+                // check for missing description on options
+                boolean noDescription = false;
+                for (SpringBootAutoConfigureOptionModel o : models) {
+                    if (Strings.isEmpty(o.getDescription())) {
+                        noDescription = true;
+                        getLog().warn("Option " + o.getName() + " has no description");
                     }
                 }
+                if (noDescription && isFailOnNoDescription()) {
+                    throw new MojoExecutionException("Failed build due failOnMissingDescription=true");
+                }
 
-                if (docFiles != null && docFiles.length > 0) {
-                    List<File> files = Arrays.asList(docFiles);
-
-                    // find out if the JAR has a Camel component, dataformat, or language
-                    boolean hasComponentDataFormatOrLanguage = files.stream().anyMatch(
-                            f -> f.getName().endsWith("-component.adoc") || f.getName().endsWith("-dataformat.adoc") || f.getName().endsWith("-language.adoc"));
-
-                    // if so then skip the root adoc file as its just a introduction to the others
-                    if (hasComponentDataFormatOrLanguage) {
-                        files = Arrays.stream(docFiles).filter(f -> !f.getName().equals(componentName + ".adoc")).collect(Collectors.toList());
-                    }
-
-                    if (files.size() == 1) {
-                        List<SpringBootAutoConfigureOptionModel> models = parseSpringBootAutoConfigureModels(jsonFile, null);
-
-                        // special for other kind of JARs that is not a regular Camel component,dataformat,language
-                        boolean onlyOther = files.size() == 1 && !hasComponentDataFormatOrLanguage;
-                        if (models.isEmpty() && onlyOther) {
-                            // there are no spring-boot auto configuration for this other kind of JAR so lets just ignore this
-                            return;
-                        }
-                        File docFile = files.get(0);
-
-                        // check for missing description on options
-                        boolean noDescription = false;
-                        for (SpringBootAutoConfigureOptionModel o : models) {
-                            if (Strings.isEmpty(o.getDescription())) {
-                                noDescription = true;
-                                getLog().warn("Option " + o.getName() + " has no description");
-                            }
-                        }
-                        if (noDescription && isFailOnNoDescription()) {
-                            throw new MojoExecutionException("Failed build due failOnMissingDescription=true");
-                        }
-
-                        String changed = templateAutoConfigurationOptions(models, componentName);
-                        boolean updated = updateAutoConfigureOptions(docFile, changed);
-                        if (updated) {
-                            getLog().info("Updated doc file: " + docFile);
-                        } else {
-                            getLog().debug("No changes to doc file: " + docFile);
-                        }
-                    } else if (files.size() > 1) {
-                        // when we have 2 or more files we need to filter the model options accordingly
-                        for (File docFile : files) {
-                            String docName = docFile.getName();
-                            int pos = docName.lastIndexOf("-");
-                            // spring-boot use lower cased keys
-                            String prefix = pos > 0 ? docName.substring(0, pos).toLowerCase(Locale.US) : null;
-
-                            List<SpringBootAutoConfigureOptionModel> models = parseSpringBootAutoConfigureModels(jsonFile, prefix);
-
-                            // check for missing description on options
-                            boolean noDescription = false;
-                            for (SpringBootAutoConfigureOptionModel o : models) {
-                                if (Strings.isEmpty(o.getDescription())) {
-                                    noDescription = true;
-                                    getLog().warn("Option " + o.getName() + " has no description");
-                                }
-                            }
-                            if (noDescription && isFailOnNoDescription()) {
-                                throw new MojoExecutionException("Failed build due failOnMissingDescription=true");
-                            }
-
-                            String changed = templateAutoConfigurationOptions(models, componentName);
-                            boolean updated = updateAutoConfigureOptions(docFile, changed);
-                            if (updated) {
-                                getLog().info("Updated doc file: " + docFile);
-                            } else {
-                                getLog().debug("No changes to doc file: " + docFile);
-                            }
-                        }
-                    }
+                String changed = templateAutoConfigurationOptions(models, componentName);
+                boolean updated = updateAutoConfigureOptions(docFile, changed);
+                if (updated) {
+                    getLog().info("Updated doc file: " + docFile);
                 } else {
-                    getLog().warn("No component docs found in folder: " + docFolder);
-                    if (isFailFast()) {
-                        throw new MojoExecutionException("Failed build due failFast=true");
-                    }
+                    getLog().debug("No changes to doc file: " + docFile);
                 }
             }
         }
     }
 
-    private File getComponentsDir(String name) {
-        if ("camel-spring-boot".equals(name)) {
-            // special for camel-spring-boot
-            return project.getBasedir();
-        } else {
-            return componentsDir;
-        }
-    }
-
-    private static final class ComponentDocFilter implements FileFilter {
-
-        private final String componentName;
-
-        public ComponentDocFilter(String componentName) {
-            this.componentName = asComponentName(componentName);
-        }
-
-        @Override
-        public boolean accept(File pathname) {
-            String name = pathname.getName();
-            return name.startsWith(componentName) && name.endsWith(".adoc");
-        }
-    }
-
+    // TODO: later
     private static String asComponentName(String componentName) {
         if ("fastjson".equals(componentName)) {
             return "json-fastjson";
@@ -286,10 +172,6 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
     }
 
     private static boolean isValidStarter(String name) {
-        // skip these
-        if ("camel-core-starter".equals(name)) {
-            return false;
-        }
         return true;
     }
 
@@ -339,11 +221,12 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
     }
 
     private boolean updateAutoConfigureOptions(File file, String changed) throws MojoExecutionException {
-        if (!file.exists()) {
-            return false;
-        }
-
         try {
+            if (!file.exists()) {
+                writeText(file, changed);
+                return true;
+            }
+
             String text = loadText(new FileInputStream(file));
 
             String existing = Strings.between(text, "// spring-boot-auto-configure options: START", "// spring-boot-auto-configure options: END");
@@ -381,6 +264,7 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
         model.setArtifactId("camel-" + componentName + "-starter");
         model.setVersion(project.getVersion());
         model.setOptions(options);
+        model.setTitle(componentName);
 
         try {
             String template = loadText(UpdateSpringBootAutoConfigurationReadmeMojo.class.getClassLoader().getResourceAsStream("spring-boot-auto-configure-options.mvel"));

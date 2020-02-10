@@ -1,6 +1,6 @@
-== Spring Boot Auto-Configuration
+== @{title} - Spring Boot Auto-Configuration
 
-When using Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+When using @{title} with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
 
 [source,xml]
 ----

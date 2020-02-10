@@ -23,8 +23,17 @@ public class SpringBootModel {
     private String groupId;
     private String artifactId;
     private String version;
+    private String title;
 
     private List<SpringBootAutoConfigureOptionModel> options;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getGroupId() {
         return groupId;
