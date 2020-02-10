@@ -1115,51 +1115,51 @@ Number of miscellaneous extensions: 23 in 23 JAR artifacts (0 deprecated)
 |===
 | Extension | Since | Description
 
-| link:https://camel.apache.org/components/latest/aws-xray.html[camel-aws-xray-starter]  | 2.21 | Distributed tracing using AWS XRay
+| link:https://camel.apache.org/components/latest/aws-xray.html[AWS XRay] (camel-aws-xray-starter) | 2.21 | Distributed tracing using AWS XRay
 
-| link:https://camel.apache.org/components/latest/cxf-transport.html[camel-cxf-transport-starter]  | 2.8 | Camel Transport for Apache CXF
+| link:https://camel.apache.org/components/latest/cxf-transport.html[CXF Transport] (camel-cxf-transport-starter) | 2.8 | Camel Transport for Apache CXF
 
-| link:https://camel.apache.org/components/latest/hystrix.html[camel-hystrix-starter]  | 2.18 | Circuit Breaker EIP using Netflix Hystrix
+| link:https://camel.apache.org/components/latest/hystrix.html[Hystrix] (camel-hystrix-starter) | 2.18 | Circuit Breaker EIP using Netflix Hystrix
 
-| link:https://camel.apache.org/components/latest/jasypt.html[camel-jasypt-starter]  | 2.5 | Security using Jasypt
+| link:https://camel.apache.org/components/latest/jasypt.html[Jasypt] (camel-jasypt-starter) | 2.5 | Security using Jasypt
 
-| link:https://camel.apache.org/components/latest/kura.html[camel-kura-starter]  | 2.15 | Using Camel with Eclipse Kura (OSGi)
+| link:https://camel.apache.org/components/latest/kura.html[Kura] (camel-kura-starter) | 2.15 | Using Camel with Eclipse Kura (OSGi)
 
-| link:https://camel.apache.org/components/latest/leveldb.html[camel-leveldb-starter]  | 2.10 | Using LevelDB as persistent EIP store
+| link:https://camel.apache.org/components/latest/leveldb.html[LevelDB] (camel-leveldb-starter) | 2.10 | Using LevelDB as persistent EIP store
 
-| link:https://camel.apache.org/components/latest/lra.html[camel-lra-starter]  | 2.21 | Camel saga binding for Long-Running-Action framework
+| link:https://camel.apache.org/components/latest/lra.html[LRA] (camel-lra-starter) | 2.21 | Camel saga binding for Long-Running-Action framework
 
-| link:https://camel.apache.org/components/latest/openapi-java.html[camel-openapi-java-starter]  | 3.1 | Rest-dsl support for using openapi doc
+| link:https://camel.apache.org/components/latest/openapi-java.html[Openapi Java] (camel-openapi-java-starter) | 3.1 | Rest-dsl support for using openapi doc
 
-| link:https://camel.apache.org/components/latest/opentracing.html[camel-opentracing-starter]  | 2.19 | Distributed tracing using OpenTracing
+| link:https://camel.apache.org/components/latest/opentracing.html[OpenTracing] (camel-opentracing-starter) | 2.19 | Distributed tracing using OpenTracing
 
-| link:https://camel.apache.org/components/latest/reactive-executor-vertx.html[camel-reactive-executor-vertx-starter]  | 3.0 | Reactive Executor for camel-core using Vert.x
+| link:https://camel.apache.org/components/latest/reactive-executor-vertx.html[Reactive Executor Vert.x] (camel-reactive-executor-vertx-starter) | 3.0 | Reactive Executor for camel-core using Vert.x
 
-| link:https://camel.apache.org/components/latest/reactor.html[camel-reactor-starter]  | 2.20 | Reactor based back-end for Camel's reactive streams component
+| link:https://camel.apache.org/components/latest/reactor.html[Reactor] (camel-reactor-starter) | 2.20 | Reactor based back-end for Camel's reactive streams component
 
-| link:https://camel.apache.org/components/latest/resilience4j.html[camel-resilience4j-starter]  | 3.0 | Circuit Breaker EIP using Resilience4j
+| link:https://camel.apache.org/components/latest/resilience4j.html[Resilience4j] (camel-resilience4j-starter) | 3.0 | Circuit Breaker EIP using Resilience4j
 
-| link:https://camel.apache.org/components/latest/ribbon.html[camel-ribbon-starter]  | 2.18 | Using Netflix Ribbon for client side load balancing
+| link:https://camel.apache.org/components/latest/ribbon.html[Ribbon] (camel-ribbon-starter) | 2.18 | Using Netflix Ribbon for client side load balancing
 
-| link:https://camel.apache.org/components/latest/rxjava.html[camel-rxjava-starter]  | 2.22 | RxJava based back-end for Camel's reactive streams component
+| link:https://camel.apache.org/components/latest/rxjava.html[RxJava] (camel-rxjava-starter) | 2.22 | RxJava based back-end for Camel's reactive streams component
 
-| link:https://camel.apache.org/components/latest/shiro.html[camel-shiro-starter]  | 2.5 | Security using Shiro
+| link:https://camel.apache.org/components/latest/shiro.html[Shiro] (camel-shiro-starter) | 2.5 | Security using Shiro
 
-| link:https://camel.apache.org/components/latest/spring-cloud.html[camel-spring-cloud-starter]  | 2.19 | Camel Cloud integration with Spring Cloud
+| link:https://camel.apache.org/components/latest/spring-cloud.html[Spring Cloud] (camel-spring-cloud-starter) | 2.19 | Camel Cloud integration with Spring Cloud
 
-| link:https://camel.apache.org/components/latest/spring-cloud-consul.html[camel-spring-cloud-consul-starter]  | 2.19 | Camel Cloud integration with Spring Cloud Consul
+| link:https://camel.apache.org/components/latest/spring-cloud-consul.html[Spring Cloud Consul] (camel-spring-cloud-consul-starter) | 2.19 | Camel Cloud integration with Spring Cloud Consul
 
-| link:https://camel.apache.org/components/latest/spring-cloud-netflix.html[camel-spring-cloud-netflix-starter]  | 2.19 | Camel Cloud integration with Spring Cloud Netflix
+| link:https://camel.apache.org/components/latest/spring-cloud-netflix.html[Spring Cloud Netflix] (camel-spring-cloud-netflix-starter) | 2.19 | Camel Cloud integration with Spring Cloud Netflix
 
-| link:https://camel.apache.org/components/latest/spring-cloud-zookeeper.html[camel-spring-cloud-zookeeper-starter]  | 2.19 | Camel Cloud integration with Spring Cloud Zookeeper
+| link:https://camel.apache.org/components/latest/spring-cloud-zookeeper.html[Spring Cloud Zookeeper] (camel-spring-cloud-zookeeper-starter) | 2.19 | Camel Cloud integration with Spring Cloud Zookeeper
 
-| link:https://camel.apache.org/components/latest/spring-javaconfig.html[camel-spring-javaconfig-starter]  | 2.0 | Using Camel with Spring Java Configuration
+| link:https://camel.apache.org/components/latest/spring-javaconfig.html[Spring Java Configuration] (camel-spring-javaconfig-starter) | 2.0 | Using Camel with Spring Java Configuration
 
-| link:https://camel.apache.org/components/latest/spring-security.html[camel-spring-security-starter]  | 2.3 | Security using Spring Security
+| link:https://camel.apache.org/components/latest/spring-security.html[Spring Security] (camel-spring-security-starter) | 2.3 | Security using Spring Security
 
-| link:https://camel.apache.org/components/latest/swagger-java.html[camel-swagger-java-starter]  | 2.16 | Rest-dsl support for using swagger api-doc
+| link:https://camel.apache.org/components/latest/swagger-java.html[Swagger Java] (camel-swagger-java-starter) | 2.16 | Rest-dsl support for using swagger api-doc
 
-| link:https://camel.apache.org/components/latest/zipkin.html[camel-zipkin-starter]  | 2.18 | Distributed message tracing using Zipkin
+| link:https://camel.apache.org/components/latest/zipkin.html[Zipkin] (camel-zipkin-starter) | 2.18 | Distributed message tracing using Zipkin
 |===
 // others: END
 
