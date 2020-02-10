@@ -96,19 +96,19 @@ public class UpdateDocComponentsListMojo extends AbstractMojo {
     /**
      * The directory for components starter
      */
-    @Parameter(defaultValue = "${project.directory}/../../components-starter")
+    @Parameter(defaultValue = "${project.directory}/../../../components-starter")
     protected File readmeComponentsStarterDir;
 
     /**
      * The website doc base directory
      */
-    @Parameter(defaultValue = "${project.directory}/../../docs/modules/ROOT/pages")
+    @Parameter(defaultValue = "${project.directory}/../../../docs/modules/ROOT/pages")
     protected File websiteDocBaseDir;
 
     /**
      * The website doc for extensions
      */
-    @Parameter(defaultValue = "${project.directory}/../../docs/modules/ROOT/pages/list-of-camel-spring-boot-components.adoc")
+    @Parameter(defaultValue = "${project.directory}/../../../docs/modules/ROOT/pages/list-of-camel-spring-boot-components.adoc")
     protected File websiteDocFile;
 
     /**

@@ -79,7 +79,7 @@
         <module>camel-spring-cloud-netflix</module>
         <module>camel-spring-cloud-zookeeper</module>
         <module>components-starter</module>
-        <module>camel-catalog-provider-springboot</module>
+        <module>catalog</module>
         <module>camel-itest-spring-boot</module>
         <module>examples</module>
     </modules>
