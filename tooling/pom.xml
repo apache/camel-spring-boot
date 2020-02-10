@@ -37,6 +37,7 @@
         <module>camel-spring-boot-dependencies</module>
         <module>camel-starter-parent</module>
         <module>camel-spring-boot-starter-generator</module>
+        <module>camel-spring-boot-docs-maven-plugin</module>
     </modules>
 
     <build>

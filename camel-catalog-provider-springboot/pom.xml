@@ -34,10 +34,6 @@
     <properties>
         <firstVersion>2.18.1</firstVersion>
         <label>tooling</label>
-
-        <camel.osgi.export.pkg>
-            org.apache.camel.catalog.springboot
-        </camel.osgi.export.pkg>
     </properties>
 
     <dependencies>
@@ -72,5 +68,28 @@
         </dependency>
 
     </dependencies>
+
+   <build>
+        <plugins>
+
+            <!-- update docs -->
+            <plugin>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-spring-boot-docs-maven-plugin</artifactId>
+                <version>${project.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>update-doc-components-list</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
 
 </project>

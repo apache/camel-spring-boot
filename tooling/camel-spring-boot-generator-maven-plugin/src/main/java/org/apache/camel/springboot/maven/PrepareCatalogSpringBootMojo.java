@@ -158,6 +158,8 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
         // The json files for 'other' components are in the root of the jars
         List<String> otherNames = findNames(componentJar, "").stream()
                 .map(s -> s.substring(0, s.length() - ".json".length()))
+                // skip some that are otherwise mistaken as others
+                .filter(s -> !s.endsWith("-common") && !s.equals("as2") && !s.equals("cbor") && !s.equals("salesforce") && !s.equals("servicenow"))
                 .collect(Collectors.toList());
         if (!otherNames.isEmpty()) {
             getLog().info("Others found: " + String.join(", ", otherNames));
