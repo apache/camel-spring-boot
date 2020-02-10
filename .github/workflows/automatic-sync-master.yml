@@ -31,6 +31,7 @@ jobs:
         with:
           repository: apache/camel
           ref: master
+          path: 'camel'
       - name: Set Up Java
         uses: actions/setup-java@v1
         with:
