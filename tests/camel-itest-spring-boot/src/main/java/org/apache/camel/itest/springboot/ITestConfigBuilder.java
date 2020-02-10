@@ -211,7 +211,7 @@ public class ITestConfigBuilder {
         }
 
         if (config.getModulesPath() == null) {
-            config.setModulesPath(propertyOr("modulesPath", "../components-starter/"));
+            config.setModulesPath(propertyOr("modulesPath", "../../components-starter/"));
         }
 
         if (config.getModuleBasePath() == null) {

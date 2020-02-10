@@ -80,7 +80,7 @@
         <module>camel-spring-cloud-zookeeper</module>
         <module>components-starter</module>
         <module>catalog</module>
-        <module>camel-itest-spring-boot</module>
+        <module>tests</module>
         <module>examples</module>
     </modules>
 
