@@ -31,13 +31,12 @@ jobs:
         with:
           repository: apache/camel
           ref: master
-          path: 'camel'
-      - name: Set Up Java
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-      - name: Build Project
-        run: camel/mvnw clean install -DskipTests
+            - name: Set Up Java
+              uses: actions/setup-java@v1
+              with:
+                java-version: 1.8
+            - name: Build Project
+              run: mvnw clean install -DskipTests
   sync:
     runs-on: ubuntu-latest
     steps:
