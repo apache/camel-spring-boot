@@ -1,0 +1,32 @@
+== directvm - Spring Boot Auto-Configuration
+
+When using directvm with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-directvm-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 8 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.component.direct-vm.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.direct-vm.block* | If sending a message to a direct endpoint which has no active consumer, then we can tell the producer to block and wait for the consumer to become active. | true | Boolean
+| *camel.component.direct-vm.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
+| *camel.component.direct-vm.enabled* | Whether to enable auto configuration of the direct-vm component. This is enabled by default. |  | Boolean
+| *camel.component.direct-vm.header-filter-strategy* | Sets a HeaderFilterStrategy that will only be applied on producer endpoints (on both directions: request and response). Default value: none. The option is a org.apache.camel.spi.HeaderFilterStrategy type. |  | String
+| *camel.component.direct-vm.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.direct-vm.propagate-properties* | Whether to propagate or not properties from the producer side to the consumer side, and vice versa. Default value: true. | true | Boolean
+| *camel.component.direct-vm.timeout* | The timeout value to use if block is enabled. | 30000 | Long
+|===
+

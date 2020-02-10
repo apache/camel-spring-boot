@@ -1,0 +1,29 @@
+== master - Spring Boot Auto-Configuration
+
+When using master with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-master-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 5 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.component.master.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.master.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
+| *camel.component.master.enabled* | Whether to enable auto configuration of the master component. This is enabled by default. |  | Boolean
+| *camel.component.master.service* | Inject the service to use. The option is a org.apache.camel.cluster.CamelClusterService type. |  | String
+| *camel.component.master.service-selector* | Inject the service selector used to lookup the CamelClusterService to use. The option is a org.apache.camel.cluster.CamelClusterService.Selector type. |  | String
+|===
+

@@ -1,0 +1,27 @@
+== jaxp - Spring Boot Auto-Configuration
+
+When using jaxp with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-jaxp-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 3 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.language.xtokenize.enabled* | Whether to enable auto configuration of the xtokenize language. This is enabled by default. |  | Boolean
+| *camel.language.xtokenize.mode* | The extraction mode. The available extraction modes are: i - injecting the contextual namespace bindings into the extracted token (default) w - wrapping the extracted token in its ancestor context u - unwrapping the extracted token to its child content t - extracting the text content of the specified element |  | String
+| *camel.language.xtokenize.trim* | Whether to trim the value to remove leading and trailing whitespaces and line breaks | true | Boolean
+|===
+

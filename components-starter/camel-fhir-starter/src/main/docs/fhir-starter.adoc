@@ -1,0 +1,81 @@
+== fhir - Spring Boot Auto-Configuration
+
+When using fhir with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-fhir-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 57 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.component.fhir.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.fhir.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
+| *camel.component.fhir.configuration.access-token* | OAuth access token |  | String
+| *camel.component.fhir.configuration.api-name* | What kind of operation to perform |  | FhirApiName
+| *camel.component.fhir.configuration.client* | To use the custom client |  | IGenericClient
+| *camel.component.fhir.configuration.client-factory* | To use the custom client factory |  | IRestfulClientFactory
+| *camel.component.fhir.configuration.compress* | Compresses outgoing (POST/PUT) contents to the GZIP format | false | Boolean
+| *camel.component.fhir.configuration.connection-timeout* | How long to try and establish the initial TCP connection (in ms) | 10000 | Integer
+| *camel.component.fhir.configuration.defer-model-scanning* | When this option is set, model classes will not be scanned for children until the child list for the given type is actually accessed. | false | Boolean
+| *camel.component.fhir.configuration.encoding* | Encoding to use for all request |  | String
+| *camel.component.fhir.configuration.fhir-context* | FhirContext is an expensive object to create. To avoid creating multiple instances, it can be set directly. |  | FhirContext
+| *camel.component.fhir.configuration.fhir-version* | The FHIR Version to use | R4 | String
+| *camel.component.fhir.configuration.force-conformance-check* | Force conformance check | false | Boolean
+| *camel.component.fhir.configuration.log* | Will log every requests and responses | false | Boolean
+| *camel.component.fhir.configuration.method-name* | What sub operation to use for the selected operation |  | String
+| *camel.component.fhir.configuration.password* | Username to use for basic authentication |  | String
+| *camel.component.fhir.configuration.pretty-print* | Pretty print all request | false | Boolean
+| *camel.component.fhir.configuration.proxy-host* | The proxy host |  | String
+| *camel.component.fhir.configuration.proxy-password* | The proxy password |  | String
+| *camel.component.fhir.configuration.proxy-port* | The proxy port |  | Integer
+| *camel.component.fhir.configuration.proxy-user* | The proxy username |  | String
+| *camel.component.fhir.configuration.server-url* | The FHIR server base URL |  | String
+| *camel.component.fhir.configuration.session-cookie* | HTTP session cookie to add to every request |  | String
+| *camel.component.fhir.configuration.socket-timeout* | How long to block for individual read/write operations (in ms) | 10000 | Integer
+| *camel.component.fhir.configuration.summary* | Request that the server modify the response using the <code>_summary</code> param |  | String
+| *camel.component.fhir.configuration.username* | Username to use for basic authentication |  | String
+| *camel.component.fhir.configuration.validation-mode* | When should Camel validate the FHIR Server's conformance statement | ONCE | String
+| *camel.component.fhir.enabled* | Whether to enable auto configuration of the fhir component. This is enabled by default. |  | Boolean
+| *camel.component.fhir.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.dataformat.fhirjson.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSon etc. | false | Boolean
+| *camel.dataformat.fhirjson.dont-encode-elements* | If provided, specifies the elements which should NOT be encoded. Valid values for this field would include: Patient - Don't encode patient and all its children Patient.name - Don't encode the patient's name Patient.name.family - Don't encode the patient's family name .text - Don't encode the text element on any resource (only the very first position may contain a wildcard) DSTU2 note: Note that values including meta, such as Patient.meta will work for DSTU2 parsers, but values with subelements on meta such as Patient.meta.lastUpdated will only work in DSTU3 mode. |  | Set
+| *camel.dataformat.fhirjson.dont-strip-versions-from-references-at-paths* | If supplied value(s), any resource references at the specified paths will have their resource versions encoded instead of being automatically stripped during the encoding process. This setting has no effect on the parsing process. This method provides a finer-grained level of control than setStripVersionsFromReferences(Boolean) and any paths specified by this method will be encoded even if setStripVersionsFromReferences(Boolean) has been set to true (which is the default) |  | List
+| *camel.dataformat.fhirjson.enabled* | Whether to enable auto configuration of the fhirJson data format. This is enabled by default. |  | Boolean
+| *camel.dataformat.fhirjson.encode-elements* | If provided, specifies the elements which should be encoded, to the exclusion of all others. Valid values for this field would include: Patient - Encode patient and all its children Patient.name - Encode only the patient's name Patient.name.family - Encode only the patient's family name .text - Encode the text element on any resource (only the very first position may contain a wildcard) .(mandatory) - This is a special case which causes any mandatory fields (min 0) to be encoded |  | Set
+| *camel.dataformat.fhirjson.encode-elements-applies-to-child-resources-only* | If set to true (default is false), the values supplied to setEncodeElements(Set) will not be applied to the root resource (typically a Bundle), but will be applied to any sub-resources contained within it (i.e. search result resources in that bundle) | false | Boolean
+| *camel.dataformat.fhirjson.fhir-version* | The version of FHIR to use. Possible values are: DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4 | DSTU3 | String
+| *camel.dataformat.fhirjson.omit-resource-id* | If set to true (default is false) the ID of any resources being encoded will not be included in the output. Note that this does not apply to contained resources, only to root resources. In other words, if this is set to true, contained resources will still have local IDs but the outer/containing ID will not have an ID. | false | Boolean
+| *camel.dataformat.fhirjson.override-resource-id-with-bundle-entry-full-url* | If set to true (which is the default), the Bundle.entry.fullUrl will override the Bundle.entry.resource's resource id if the fullUrl is defined. This behavior happens when parsing the source data into a Bundle object. Set this to false if this is not the desired behavior (e.g. the client code wishes to perform additional validation checks between the fullUrl and the resource id). | false | Boolean
+| *camel.dataformat.fhirjson.pretty-print* | Sets the pretty print flag, meaning that the parser will encode resources with human-readable spacing and newlines between elements instead of condensing output as much as possible. | false | Boolean
+| *camel.dataformat.fhirjson.server-base-url* | Sets the server's base URL used by this parser. If a value is set, resource references will be turned into relative references if they are provided as absolute URLs but have a base matching the given base. |  | String
+| *camel.dataformat.fhirjson.strip-versions-from-references* | If set to true (which is the default), resource references containing a version will have the version removed when the resource is encoded. This is generally good behaviour because in most situations, references from one resource to another should be to the resource by ID, not by ID and version. In some cases though, it may be desirable to preserve the version in resource links. In that case, this value should be set to false. This method provides the ability to globally disable reference encoding. If finer-grained control is needed, use setDontStripVersionsFromReferencesAtPaths(List) | false | Boolean
+| *camel.dataformat.fhirjson.summary-mode* | If set to true (default is false) only elements marked by the FHIR specification as being summary elements will be included. | false | Boolean
+| *camel.dataformat.fhirjson.suppress-narratives* | If set to true (default is false), narratives will not be included in the encoded values. | false | Boolean
+| *camel.dataformat.fhirxml.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSon etc. | false | Boolean
+| *camel.dataformat.fhirxml.dont-encode-elements* | If provided, specifies the elements which should NOT be encoded. Valid values for this field would include: Patient - Don't encode patient and all its children Patient.name - Don't encode the patient's name Patient.name.family - Don't encode the patient's family name .text - Don't encode the text element on any resource (only the very first position may contain a wildcard) DSTU2 note: Note that values including meta, such as Patient.meta will work for DSTU2 parsers, but values with subelements on meta such as Patient.meta.lastUpdated will only work in DSTU3 mode. |  | Set
+| *camel.dataformat.fhirxml.dont-strip-versions-from-references-at-paths* | If supplied value(s), any resource references at the specified paths will have their resource versions encoded instead of being automatically stripped during the encoding process. This setting has no effect on the parsing process. This method provides a finer-grained level of control than setStripVersionsFromReferences(Boolean) and any paths specified by this method will be encoded even if setStripVersionsFromReferences(Boolean) has been set to true (which is the default) |  | List
+| *camel.dataformat.fhirxml.enabled* | Whether to enable auto configuration of the fhirXml data format. This is enabled by default. |  | Boolean
+| *camel.dataformat.fhirxml.encode-elements* | If provided, specifies the elements which should be encoded, to the exclusion of all others. Valid values for this field would include: Patient - Encode patient and all its children Patient.name - Encode only the patient's name Patient.name.family - Encode only the patient's family name .text - Encode the text element on any resource (only the very first position may contain a wildcard) .(mandatory) - This is a special case which causes any mandatory fields (min 0) to be encoded |  | Set
+| *camel.dataformat.fhirxml.encode-elements-applies-to-child-resources-only* | If set to true (default is false), the values supplied to setEncodeElements(Set) will not be applied to the root resource (typically a Bundle), but will be applied to any sub-resources contained within it (i.e. search result resources in that bundle) | false | Boolean
+| *camel.dataformat.fhirxml.fhir-version* | The version of FHIR to use. Possible values are: DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4 | DSTU3 | String
+| *camel.dataformat.fhirxml.omit-resource-id* | If set to true (default is false) the ID of any resources being encoded will not be included in the output. Note that this does not apply to contained resources, only to root resources. In other words, if this is set to true, contained resources will still have local IDs but the outer/containing ID will not have an ID. | false | Boolean
+| *camel.dataformat.fhirxml.override-resource-id-with-bundle-entry-full-url* | If set to true (which is the default), the Bundle.entry.fullUrl will override the Bundle.entry.resource's resource id if the fullUrl is defined. This behavior happens when parsing the source data into a Bundle object. Set this to false if this is not the desired behavior (e.g. the client code wishes to perform additional validation checks between the fullUrl and the resource id). | false | Boolean
+| *camel.dataformat.fhirxml.pretty-print* | Sets the pretty print flag, meaning that the parser will encode resources with human-readable spacing and newlines between elements instead of condensing output as much as possible. | false | Boolean
+| *camel.dataformat.fhirxml.server-base-url* | Sets the server's base URL used by this parser. If a value is set, resource references will be turned into relative references if they are provided as absolute URLs but have a base matching the given base. |  | String
+| *camel.dataformat.fhirxml.strip-versions-from-references* | If set to true (which is the default), resource references containing a version will have the version removed when the resource is encoded. This is generally good behaviour because in most situations, references from one resource to another should be to the resource by ID, not by ID and version. In some cases though, it may be desirable to preserve the version in resource links. In that case, this value should be set to false. This method provides the ability to globally disable reference encoding. If finer-grained control is needed, use setDontStripVersionsFromReferencesAtPaths(List) | false | Boolean
+| *camel.dataformat.fhirxml.summary-mode* | If set to true (default is false) only elements marked by the FHIR specification as being summary elements will be included. | false | Boolean
+| *camel.dataformat.fhirxml.suppress-narratives* | If set to true (default is false), narratives will not be included in the encoded values. | false | Boolean
+|===
+
