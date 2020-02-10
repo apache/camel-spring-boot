@@ -23,13 +23,14 @@
 
     <parent>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>spring-boot</artifactId>
+        <artifactId>core-modules</artifactId>
         <version>3.1.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
 
-    <name>Camel SB :: Spring Cloud Netflix</name>
-    <artifactId>camel-spring-cloud-netflix</artifactId>
-    <description>Camel Cloud integration with Spring Cloud Netflix</description>
+    <name>Camel SB :: Spring Cloud Zookeeper</name>
+    <artifactId>camel-spring-cloud-zookeeper</artifactId>
+    <description>Camel Cloud integration with Spring Cloud Zookeeper</description>
 
     <properties>
         <firstVersion>2.19.0</firstVersion>
@@ -51,13 +52,13 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-netflix-ribbon</artifactId>
-            <version>${spring-cloud-netflix-version}</version>
+            <artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
+            <version>${spring-cloud-zookeeper-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-netflix-core</artifactId>
-            <version>${spring-cloud-netflix-version}</version>
+            <artifactId>spring-cloud-zookeeper-core</artifactId>
+            <version>${spring-cloud-zookeeper-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -67,23 +68,14 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-ribbon</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-spring-boot</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-spring-cloud</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.reactivex</groupId>
-            <artifactId>rxjava</artifactId>
-            <version>${rxjava-version}</version>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-spring-boot</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- Testing dependencies -->
@@ -125,12 +117,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-            <version>${spring-cloud-netflix-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${spring-boot-version}</version>
@@ -150,4 +136,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

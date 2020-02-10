@@ -73,11 +73,7 @@
 
     <modules>
         <module>tooling</module>
-        <module>camel-spring-boot</module>
-        <module>camel-spring-cloud</module>
-        <module>camel-spring-cloud-consul</module>
-        <module>camel-spring-cloud-netflix</module>
-        <module>camel-spring-cloud-zookeeper</module>
+        <module>core</module>
         <module>components-starter</module>
         <module>catalog</module>
         <module>tests</module>
