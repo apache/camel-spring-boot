@@ -31,10 +31,31 @@ jobs:
         with:
           repository: apache/camel
           ref: master
-          path: 'camel'
+          path: camel
       - name: Set Up Java
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
       - name: Build Project
         run: ./mvnw clean install -DskipTests
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      # Note: checkout@v2 seems to break the pull-request action hence v1 is used
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          path: camel-spring-boot
+      - name: Set Up Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Build Project
+        run: ./mvnw clean install -DskipTests
+      - name: GitHub Pull Request Action
+        uses: repo-sync/pull-request@v2.0.1
+        with:
+          source_branch: master
+          destination_branch: master
+          pr_title: Automatic sync branch master to camel-master
+          github_token: ${{ secrets.GITHUB_TOKEN }}
