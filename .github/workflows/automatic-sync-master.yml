@@ -20,7 +20,7 @@ name: Sync Camel Spring Boot Master Branch
 on:
   schedule:
     # Run every day at midnight
-    - cron:  '0 0 * * *'
+    - cron:  '* 5 * * *'
 
 jobs:
   sync:
@@ -28,6 +28,17 @@ jobs:
     steps:
       # Note: checkout@v2 seems to break the pull-request action hence v1 is used
       - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          repository: apache/camel
+          ref: master
+      - name: Set Up Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Build Project
+        run: ./mvnw clean install -DskipTests
+      - name: Checkout SB
         uses: actions/checkout@v1
       - name: GitHub Pull Request Action
         uses: repo-sync/pull-request@v2.0.1
