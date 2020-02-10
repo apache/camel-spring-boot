@@ -39,15 +39,6 @@ public class NagiosComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a shared NagiosConfiguration
-     */
-    private NagiosConfigurationNestedConfiguration configuration;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -58,14 +49,22 @@ public class NagiosComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a shared NagiosConfiguration
+     */
+    private NagiosConfigurationNestedConfiguration configuration;
 
-    public NagiosConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setConfiguration(
-            NagiosConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -76,12 +75,13 @@ public class NagiosComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public NagiosConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setConfiguration(
+            NagiosConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public static class NagiosConfigurationNestedConfiguration {

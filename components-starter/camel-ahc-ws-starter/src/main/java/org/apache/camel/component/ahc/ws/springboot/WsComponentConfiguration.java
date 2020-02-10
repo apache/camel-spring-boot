@@ -37,53 +37,14 @@ public class WsComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a custom AsyncHttpClient. The option is a
-     * org.asynchttpclient.AsyncHttpClient type.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String client;
-    /**
-     * To use a custom AhcBinding which allows to control how to bind between
-     * AHC and Camel. The option is a org.apache.camel.component.ahc.AhcBinding
-     * type.
-     */
-    private String binding;
-    /**
-     * To configure the AsyncHttpClient to use a custom
-     * com.ning.http.client.AsyncHttpClientConfig instance. The option is a
-     * org.asynchttpclient.AsyncHttpClientConfig type.
-     */
-    private String clientConfig;
-    /**
-     * Reference to a org.apache.camel.support.jsse.SSLContextParameters in the
-     * Registry. Note that configuring this option will override any SSL/TLS
-     * configuration options provided through the clientConfig option at the
-     * endpoint or component level. The option is a
-     * org.apache.camel.support.jsse.SSLContextParameters type.
-     */
-    private String sslContextParameters;
-    /**
-     * Whether to allow java serialization when a request uses
-     * context-type=application/x-java-serialized-object This is by default
-     * turned off. If you enable this then be aware that Java will deserialize
-     * the incoming data from the request to Java and that can be a potential
-     * security risk.
-     */
-    private Boolean allowJavaSerializedObject = false;
-    /**
-     * Enable usage of global SSL context parameters.
-     */
-    private Boolean useGlobalSslContextParameters = false;
-    /**
-     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
-     * header to and from Camel message. The option is a
-     * org.apache.camel.spi.HeaderFilterStrategy type.
-     */
-    private String headerFilterStrategy;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -96,78 +57,60 @@ public class WsComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether to allow java serialization when a request uses
+     * context-type=application/x-java-serialized-object This is by default
+     * turned off. If you enable this then be aware that Java will deserialize
+     * the incoming data from the request to Java and that can be a potential
+     * security risk.
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean allowJavaSerializedObject = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a custom AhcBinding which allows to control how to bind between
+     * AHC and Camel. The option is a org.apache.camel.component.ahc.AhcBinding
+     * type.
+     */
+    private String binding;
+    /**
+     * To use a custom AsyncHttpClient. The option is a
+     * org.asynchttpclient.AsyncHttpClient type.
+     */
+    private String client;
+    /**
+     * To configure the AsyncHttpClient to use a custom
+     * com.ning.http.client.AsyncHttpClientConfig instance. The option is a
+     * org.asynchttpclient.AsyncHttpClientConfig type.
+     */
+    private String clientConfig;
+    /**
+     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
+     * header to and from Camel message. The option is a
+     * org.apache.camel.spi.HeaderFilterStrategy type.
+     */
+    private String headerFilterStrategy;
+    /**
+     * Reference to a org.apache.camel.support.jsse.SSLContextParameters in the
+     * Registry. Note that configuring this option will override any SSL/TLS
+     * configuration options provided through the clientConfig option at the
+     * endpoint or component level. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private String sslContextParameters;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
 
-    public String getClient() {
-        return client;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setClient(String client) {
-        this.client = client;
-    }
-
-    public String getBinding() {
-        return binding;
-    }
-
-    public void setBinding(String binding) {
-        this.binding = binding;
-    }
-
-    public String getClientConfig() {
-        return clientConfig;
-    }
-
-    public void setClientConfig(String clientConfig) {
-        this.clientConfig = clientConfig;
-    }
-
-    public String getSslContextParameters() {
-        return sslContextParameters;
-    }
-
-    public void setSslContextParameters(String sslContextParameters) {
-        this.sslContextParameters = sslContextParameters;
-    }
-
-    public Boolean getAllowJavaSerializedObject() {
-        return allowJavaSerializedObject;
-    }
-
-    public void setAllowJavaSerializedObject(Boolean allowJavaSerializedObject) {
-        this.allowJavaSerializedObject = allowJavaSerializedObject;
-    }
-
-    public Boolean getUseGlobalSslContextParameters() {
-        return useGlobalSslContextParameters;
-    }
-
-    public void setUseGlobalSslContextParameters(
-            Boolean useGlobalSslContextParameters) {
-        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public String getHeaderFilterStrategy() {
-        return headerFilterStrategy;
-    }
-
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
-        this.headerFilterStrategy = headerFilterStrategy;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -178,11 +121,68 @@ public class WsComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getAllowJavaSerializedObject() {
+        return allowJavaSerializedObject;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setAllowJavaSerializedObject(Boolean allowJavaSerializedObject) {
+        this.allowJavaSerializedObject = allowJavaSerializedObject;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getBinding() {
+        return binding;
+    }
+
+    public void setBinding(String binding) {
+        this.binding = binding;
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public void setClient(String client) {
+        this.client = client;
+    }
+
+    public String getClientConfig() {
+        return clientConfig;
+    }
+
+    public void setClientConfig(String clientConfig) {
+        this.clientConfig = clientConfig;
+    }
+
+    public String getHeaderFilterStrategy() {
+        return headerFilterStrategy;
+    }
+
+    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+        this.headerFilterStrategy = headerFilterStrategy;
+    }
+
+    public String getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(String sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
+    }
+
+    public Boolean getUseGlobalSslContextParameters() {
+        return useGlobalSslContextParameters;
+    }
+
+    public void setUseGlobalSslContextParameters(
+            Boolean useGlobalSslContextParameters) {
+        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 }

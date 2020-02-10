@@ -38,17 +38,14 @@ public class Jt400ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Default connection pool used by the component. Note that this pool is
-     * lazily initialized. This is because in a scenario where the user always
-     * provides a pool, it would be wasteful for Camel to initialize and keep an
-     * idle pool. The option is a com.ibm.as400.access.AS400ConnectionPool type.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String connectionPool;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -61,29 +58,24 @@ public class Jt400ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * Default connection pool used by the component. Note that this pool is
+     * lazily initialized. This is because in a scenario where the user always
+     * provides a pool, it would be wasteful for Camel to initialize and keep an
+     * idle pool. The option is a com.ibm.as400.access.AS400ConnectionPool type.
+     */
+    private String connectionPool;
 
-    public String getConnectionPool() {
-        return connectionPool;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setConnectionPool(String connectionPool) {
-        this.connectionPool = connectionPool;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -94,11 +86,19 @@ public class Jt400ComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getConnectionPool() {
+        return connectionPool;
+    }
+
+    public void setConnectionPool(String connectionPool) {
+        this.connectionPool = connectionPool;
     }
 }

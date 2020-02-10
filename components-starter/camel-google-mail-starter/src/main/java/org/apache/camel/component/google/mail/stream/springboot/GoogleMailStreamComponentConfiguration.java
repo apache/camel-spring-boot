@@ -37,20 +37,6 @@ public class GoogleMailStreamComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The configuration
-     */
-    private GoogleMailStreamConfigurationNestedConfiguration configuration;
-    /**
-     * The client Factory. The option is a
-     * org.apache.camel.component.google.mail.GoogleMailClientFactory type.
-     */
-    private String clientFactory;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -59,22 +45,27 @@ public class GoogleMailStreamComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * The client Factory. The option is a
+     * org.apache.camel.component.google.mail.GoogleMailClientFactory type.
+     */
+    private String clientFactory;
+    /**
+     * The configuration
+     */
+    private GoogleMailStreamConfigurationNestedConfiguration configuration;
 
-    public GoogleMailStreamConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setConfiguration(
-            GoogleMailStreamConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
-    }
-
-    public String getClientFactory() {
-        return clientFactory;
-    }
-
-    public void setClientFactory(String clientFactory) {
-        this.clientFactory = clientFactory;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -85,12 +76,21 @@ public class GoogleMailStreamComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public String getClientFactory() {
+        return clientFactory;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setClientFactory(String clientFactory) {
+        this.clientFactory = clientFactory;
+    }
+
+    public GoogleMailStreamConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            GoogleMailStreamConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public static class GoogleMailStreamConfigurationNestedConfiguration {

@@ -37,17 +37,6 @@ public class ScpComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * JSCH is verbose logging out of the box. Therefore we turn the logging
-     * down to DEBUG logging by default. But setting this option to true turns
-     * on the verbose logging again.
-     */
-    private Boolean verboseLogging = false;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -58,6 +47,25 @@ public class ScpComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * JSCH is verbose logging out of the box. Therefore we turn the logging
+     * down to DEBUG logging by default. But setting this option to true turns
+     * on the verbose logging again.
+     */
+    private Boolean verboseLogging = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
 
     public Boolean getVerboseLogging() {
         return verboseLogging;
@@ -73,13 +81,5 @@ public class ScpComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
     }
 }

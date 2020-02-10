@@ -38,20 +38,19 @@ public class FileWatchComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
      * The number of concurrent consumers. Increase this value, if your route is
      * slow to prevent buffering in queue.
      */
     private Integer concurrentConsumers = 1;
-    /**
-     * Maximum size of queue between WatchService and consumer. Unbounded by
-     * default.
-     */
-    private Integer queueSize = 2147483647;
-    /**
-     * The number of threads polling WatchService. Increase this value, if you
-     * see OVERFLOW messages in log.
-     */
-    private Integer pollThreads = 1;
     /**
      * Reference to io.methvin.watcher.hashing.FileHasher. This prevents
      * emitting duplicate events on some platforms. For working with large files
@@ -61,6 +60,16 @@ public class FileWatchComponentConfiguration
      * io.methvin.watcher.hashing.FileHasher type.
      */
     private String fileHasher;
+    /**
+     * The number of threads polling WatchService. Increase this value, if you
+     * see OVERFLOW messages in log.
+     */
+    private Integer pollThreads = 1;
+    /**
+     * Maximum size of queue between WatchService and consumer. Unbounded by
+     * default.
+     */
+    private Integer queueSize = 2147483647;
     /**
      * Enables or disables file hashing to detect duplicate events. If you
      * disable this, you can get some events multiple times on some platforms
@@ -73,15 +82,14 @@ public class FileWatchComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
 
     public Integer getConcurrentConsumers() {
         return concurrentConsumers;
@@ -91,12 +99,12 @@ public class FileWatchComponentConfiguration
         this.concurrentConsumers = concurrentConsumers;
     }
 
-    public Integer getQueueSize() {
-        return queueSize;
+    public String getFileHasher() {
+        return fileHasher;
     }
 
-    public void setQueueSize(Integer queueSize) {
-        this.queueSize = queueSize;
+    public void setFileHasher(String fileHasher) {
+        this.fileHasher = fileHasher;
     }
 
     public Integer getPollThreads() {
@@ -107,12 +115,12 @@ public class FileWatchComponentConfiguration
         this.pollThreads = pollThreads;
     }
 
-    public String getFileHasher() {
-        return fileHasher;
+    public Integer getQueueSize() {
+        return queueSize;
     }
 
-    public void setFileHasher(String fileHasher) {
-        this.fileHasher = fileHasher;
+    public void setQueueSize(Integer queueSize) {
+        this.queueSize = queueSize;
     }
 
     public Boolean getUseFileHashing() {
@@ -129,13 +137,5 @@ public class FileWatchComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 }

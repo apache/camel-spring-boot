@@ -38,10 +38,14 @@ public class SjmsBatchComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * A ConnectionFactory is required to enable the SjmsBatchComponent. The
-     * option is a javax.jms.ConnectionFactory type.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String connectionFactory;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether to startup the consumer message listener asynchronously, when
      * starting a route. For example if a JmsConsumer cannot get a connection to
@@ -56,6 +60,16 @@ public class SjmsBatchComponentConfiguration
      */
     private Boolean asyncStartListener = false;
     /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * A ConnectionFactory is required to enable the SjmsBatchComponent. The
+     * option is a javax.jms.ConnectionFactory type.
+     */
+    private String connectionFactory;
+    /**
      * Specifies the interval between recovery attempts, i.e. when a connection
      * is being refreshed, in milliseconds. The default is 5000 ms, that is, 5
      * seconds.
@@ -67,27 +81,13 @@ public class SjmsBatchComponentConfiguration
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
     private String headerFilterStrategy;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
 
-    public String getConnectionFactory() {
-        return connectionFactory;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setConnectionFactory(String connectionFactory) {
-        this.connectionFactory = connectionFactory;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getAsyncStartListener() {
@@ -96,6 +96,22 @@ public class SjmsBatchComponentConfiguration
 
     public void setAsyncStartListener(Boolean asyncStartListener) {
         this.asyncStartListener = asyncStartListener;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getConnectionFactory() {
+        return connectionFactory;
+    }
+
+    public void setConnectionFactory(String connectionFactory) {
+        this.connectionFactory = connectionFactory;
     }
 
     public Integer getRecoveryInterval() {
@@ -112,21 +128,5 @@ public class SjmsBatchComponentConfiguration
 
     public void setHeaderFilterStrategy(String headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 }

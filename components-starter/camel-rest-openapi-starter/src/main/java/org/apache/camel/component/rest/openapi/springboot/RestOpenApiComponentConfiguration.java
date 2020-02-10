@@ -69,6 +69,17 @@ public class RestOpenApiComponentConfiguration
      */
     private String host;
     /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
      * What payload type this component is producing. For example
      * application/json according to the RFC7231. This equates to the value of
      * Content-Type HTTP header. If set overrides any value present in the
@@ -87,6 +98,11 @@ public class RestOpenApiComponentConfiguration
      */
     private URI specificationUri;
     /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
      * Customize TLS parameters used by the component. If not set defaults to
      * the TLS parameters set in the Camel context. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
@@ -96,22 +112,6 @@ public class RestOpenApiComponentConfiguration
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
 
     public String getBasePath() {
         return basePath;
@@ -145,6 +145,14 @@ public class RestOpenApiComponentConfiguration
         this.host = host;
     }
 
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
     public String getProduces() {
         return produces;
     }
@@ -159,6 +167,14 @@ public class RestOpenApiComponentConfiguration
 
     public void setSpecificationUri(URI specificationUri) {
         this.specificationUri = specificationUri;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public String getSslContextParameters() {
@@ -176,21 +192,5 @@ public class RestOpenApiComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
     }
 }

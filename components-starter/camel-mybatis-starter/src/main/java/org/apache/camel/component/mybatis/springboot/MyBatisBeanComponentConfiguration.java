@@ -38,20 +38,10 @@ public class MyBatisBeanComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the SqlSessionFactory. The option is a
-     * org.apache.ibatis.session.SqlSessionFactory type.
-     */
-    private String sqlSessionFactory;
-    /**
      * Location of MyBatis xml configuration file. The default value is:
      * SqlMapConfig.xml loaded from the classpath
      */
     private String configurationUri = "SqlMapConfig.xml";
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -63,14 +53,16 @@ public class MyBatisBeanComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
-
-    public String getSqlSessionFactory() {
-        return sqlSessionFactory;
-    }
-
-    public void setSqlSessionFactory(String sqlSessionFactory) {
-        this.sqlSessionFactory = sqlSessionFactory;
-    }
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use the SqlSessionFactory. The option is a
+     * org.apache.ibatis.session.SqlSessionFactory type.
+     */
+    private String sqlSessionFactory;
 
     public String getConfigurationUri() {
         return configurationUri;
@@ -78,6 +70,14 @@ public class MyBatisBeanComponentConfiguration
 
     public void setConfigurationUri(String configurationUri) {
         this.configurationUri = configurationUri;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -88,11 +88,11 @@ public class MyBatisBeanComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public String getSqlSessionFactory() {
+        return sqlSessionFactory;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setSqlSessionFactory(String sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 }

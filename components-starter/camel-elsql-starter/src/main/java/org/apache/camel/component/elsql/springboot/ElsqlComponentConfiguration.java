@@ -48,12 +48,6 @@ public class ElsqlComponentConfiguration
      */
     private String dataSource;
     /**
-     * To use a specific configured ElSqlConfig. It may be better to use the
-     * databaseVendor option instead. The option is a
-     * com.opengamma.elsql.ElSqlConfig type.
-     */
-    private String elSqlConfig;
-    /**
      * The resource file which contains the elsql SQL statements to use. You can
      * specify multiple resources separated by comma. The resources are loaded
      * on the classpath by default, you can prefix with file: to load from file
@@ -62,10 +56,14 @@ public class ElsqlComponentConfiguration
      */
     private String resourceUri;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -78,14 +76,16 @@ public class ElsqlComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a specific configured ElSqlConfig. It may be better to use the
+     * databaseVendor option instead. The option is a
+     * com.opengamma.elsql.ElSqlConfig type.
+     */
+    private String elSqlConfig;
 
     public ElSqlDatabaseVendor getDatabaseVendor() {
         return databaseVendor;
@@ -103,14 +103,6 @@ public class ElsqlComponentConfiguration
         this.dataSource = dataSource;
     }
 
-    public String getElSqlConfig() {
-        return elSqlConfig;
-    }
-
-    public void setElSqlConfig(String elSqlConfig) {
-        this.elSqlConfig = elSqlConfig;
-    }
-
     public String getResourceUri() {
         return resourceUri;
     }
@@ -119,12 +111,12 @@ public class ElsqlComponentConfiguration
         this.resourceUri = resourceUri;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -135,11 +127,19 @@ public class ElsqlComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getElSqlConfig() {
+        return elSqlConfig;
+    }
+
+    public void setElSqlConfig(String elSqlConfig) {
+        this.elSqlConfig = elSqlConfig;
     }
 }

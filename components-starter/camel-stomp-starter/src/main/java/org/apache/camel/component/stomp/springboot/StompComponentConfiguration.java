@@ -40,40 +40,22 @@ public class StompComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the shared stomp configuration
-     */
-    private StompConfigurationNestedConfiguration configuration;
-    /**
      * The URI of the Stomp broker to connect to
      */
     private String brokerURL;
-    /**
-     * The username
-     */
-    private String login;
-    /**
-     * The password
-     */
-    private String passcode;
     /**
      * The virtual host
      */
     private String host;
     /**
-     * Enable usage of global SSL context parameters.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private Boolean useGlobalSslContextParameters = false;
-    /**
-     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
-     * header to and from Camel message. The option is a
-     * org.apache.camel.spi.HeaderFilterStrategy type.
-     */
-    private String headerFilterStrategy;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -86,14 +68,72 @@ public class StompComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use the shared stomp configuration
+     */
+    private StompConfigurationNestedConfiguration configuration;
+    /**
+     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
+     * header to and from Camel message. The option is a
+     * org.apache.camel.spi.HeaderFilterStrategy type.
+     */
+    private String headerFilterStrategy;
+    /**
+     * The username
+     */
+    private String login;
+    /**
+     * The password
+     */
+    private String passcode;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
+
+    public String getBrokerURL() {
+        return brokerURL;
+    }
+
+    public void setBrokerURL(String brokerURL) {
+        this.brokerURL = brokerURL;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
 
     public StompConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -104,12 +144,12 @@ public class StompComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getBrokerURL() {
-        return brokerURL;
+    public String getHeaderFilterStrategy() {
+        return headerFilterStrategy;
     }
 
-    public void setBrokerURL(String brokerURL) {
-        this.brokerURL = brokerURL;
+    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+        this.headerFilterStrategy = headerFilterStrategy;
     }
 
     public String getLogin() {
@@ -128,14 +168,6 @@ public class StompComponentConfiguration
         this.passcode = passcode;
     }
 
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
     public Boolean getUseGlobalSslContextParameters() {
         return useGlobalSslContextParameters;
     }
@@ -143,38 +175,6 @@ public class StompComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public String getHeaderFilterStrategy() {
-        return headerFilterStrategy;
-    }
-
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
-        this.headerFilterStrategy = headerFilterStrategy;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public static class StompConfigurationNestedConfiguration {

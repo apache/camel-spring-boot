@@ -38,40 +38,6 @@ public class MasterComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a custom ContainerIdFactory for creating container ids. The option
-     * is a org.apache.camel.component.zookeepermaster.ContainerIdFactory type.
-     */
-    private String containerIdFactory;
-    /**
-     * The root path to use in zookeeper where information is stored which nodes
-     * are master/slave etc. Will by default use:
-     * /camel/zookeepermaster/clusters/master
-     */
-    private String zkRoot = "/camel/zookeepermaster/clusters/master";
-    /**
-     * To use a custom configured CuratorFramework as connection to zookeeper
-     * ensemble. The option is a org.apache.curator.framework.CuratorFramework
-     * type.
-     */
-    private String curator;
-    /**
-     * Timeout in millis to use when connecting to the zookeeper ensemble
-     */
-    private Integer maximumConnectionTimeout = 10000;
-    /**
-     * The url for the zookeeper ensemble
-     */
-    private String zooKeeperUrl = "localhost:2181";
-    /**
-     * The password to use when connecting to the zookeeper ensemble
-     */
-    private String zooKeeperPassword;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -80,6 +46,48 @@ public class MasterComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * To use a custom ContainerIdFactory for creating container ids. The option
+     * is a org.apache.camel.component.zookeepermaster.ContainerIdFactory type.
+     */
+    private String containerIdFactory;
+    /**
+     * Timeout in millis to use when connecting to the zookeeper ensemble
+     */
+    private Integer maximumConnectionTimeout = 10000;
+    /**
+     * The root path to use in zookeeper where information is stored which nodes
+     * are master/slave etc. Will by default use:
+     * /camel/zookeepermaster/clusters/master
+     */
+    private String zkRoot = "/camel/zookeepermaster/clusters/master";
+    /**
+     * The url for the zookeeper ensemble
+     */
+    private String zooKeeperUrl = "localhost:2181";
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a custom configured CuratorFramework as connection to zookeeper
+     * ensemble. The option is a org.apache.curator.framework.CuratorFramework
+     * type.
+     */
+    private String curator;
+    /**
+     * The password to use when connecting to the zookeeper ensemble
+     */
+    private String zooKeeperPassword;
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
 
     public String getContainerIdFactory() {
         return containerIdFactory;
@@ -87,22 +95,6 @@ public class MasterComponentConfiguration
 
     public void setContainerIdFactory(String containerIdFactory) {
         this.containerIdFactory = containerIdFactory;
-    }
-
-    public String getZkRoot() {
-        return zkRoot;
-    }
-
-    public void setZkRoot(String zkRoot) {
-        this.zkRoot = zkRoot;
-    }
-
-    public String getCurator() {
-        return curator;
-    }
-
-    public void setCurator(String curator) {
-        this.curator = curator;
     }
 
     public Integer getMaximumConnectionTimeout() {
@@ -113,20 +105,20 @@ public class MasterComponentConfiguration
         this.maximumConnectionTimeout = maximumConnectionTimeout;
     }
 
+    public String getZkRoot() {
+        return zkRoot;
+    }
+
+    public void setZkRoot(String zkRoot) {
+        this.zkRoot = zkRoot;
+    }
+
     public String getZooKeeperUrl() {
         return zooKeeperUrl;
     }
 
     public void setZooKeeperUrl(String zooKeeperUrl) {
         this.zooKeeperUrl = zooKeeperUrl;
-    }
-
-    public String getZooKeeperPassword() {
-        return zooKeeperPassword;
-    }
-
-    public void setZooKeeperPassword(String zooKeeperPassword) {
-        this.zooKeeperPassword = zooKeeperPassword;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -137,11 +129,19 @@ public class MasterComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public String getCurator() {
+        return curator;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setCurator(String curator) {
+        this.curator = curator;
+    }
+
+    public String getZooKeeperPassword() {
+        return zooKeeperPassword;
+    }
+
+    public void setZooKeeperPassword(String zooKeeperPassword) {
+        this.zooKeeperPassword = zooKeeperPassword;
     }
 }

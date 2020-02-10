@@ -37,16 +37,6 @@ public class FreemarkerComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use an existing freemarker.template.Configuration instance as the
-     * configuration. The option is a freemarker.template.Configuration type.
-     */
-    private String configuration;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -57,13 +47,23 @@ public class FreemarkerComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use an existing freemarker.template.Configuration instance as the
+     * configuration. The option is a freemarker.template.Configuration type.
+     */
+    private String configuration;
 
-    public String getConfiguration() {
-        return configuration;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setConfiguration(String configuration) {
-        this.configuration = configuration;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -74,11 +74,11 @@ public class FreemarkerComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public String getConfiguration() {
+        return configuration;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
     }
 }

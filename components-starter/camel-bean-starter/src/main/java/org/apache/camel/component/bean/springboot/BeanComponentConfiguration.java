@@ -45,6 +45,17 @@ public class BeanComponentConfiguration
     @Deprecated
     private Boolean cache = true;
     /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
      * Scope of bean. When using singleton scope (default) the bean is created
      * or looked up only once and reused for the lifetime of the endpoint. The
      * bean should be thread-safe in case concurrent threads is calling the bean
@@ -65,17 +76,6 @@ public class BeanComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
 
     @Deprecated
     @DeprecatedConfigurationProperty
@@ -86,6 +86,14 @@ public class BeanComponentConfiguration
     @Deprecated
     public void setCache(Boolean cache) {
         this.cache = cache;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public BeanScope getScope() {
@@ -102,13 +110,5 @@ public class BeanComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
     }
 }

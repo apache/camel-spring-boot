@@ -38,37 +38,19 @@ public class QuartzComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Whether or not the scheduler should be auto started. This options is
-     * default true
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private Boolean autoStartScheduler = true;
-    /**
-     * Seconds to wait before starting the quartz scheduler.
-     */
-    private Integer startDelayedSeconds;
-    /**
-     * Whether to prefix the quartz job with the endpoint id. This option is
-     * default false.
-     */
-    private Boolean prefixJobNameWithEndpointId = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether to enable Quartz JMX which allows to manage the Quartz scheduler
      * from JMX. This options is default true
      */
     private Boolean enableJmx = true;
-    /**
-     * References to an existing Properties or Map to lookup in the registry to
-     * use for configuring quartz.
-     */
-    private String propertiesRef;
-    /**
-     * Properties to configure the Quartz scheduler.
-     */
-    private Map properties;
-    /**
-     * File name of the properties to load from the classpath
-     */
-    private String propertiesFile;
     /**
      * Whether to prefix the Quartz Scheduler instance name with the
      * CamelContext name. This is enabled by default, to let each CamelContext
@@ -78,59 +60,60 @@ public class QuartzComponentConfiguration
      */
     private Boolean prefixInstanceName = true;
     /**
-     * Whether to interrupt jobs on shutdown which forces the scheduler to
-     * shutdown quicker and attempt to interrupt any running jobs. If this is
-     * enabled then any running jobs can fail due to being interrupted.
+     * Whether to prefix the quartz job with the endpoint id. This option is
+     * default false.
      */
-    private Boolean interruptJobsOnShutdown = false;
+    private Boolean prefixJobNameWithEndpointId = false;
     /**
-     * To use the custom SchedulerFactory which is used to create the Scheduler.
-     * The option is a org.quartz.SchedulerFactory type.
+     * Properties to configure the Quartz scheduler.
      */
-    private String schedulerFactory;
+    private Map properties;
     /**
-     * To use the custom configured Quartz scheduler, instead of creating a new
-     * Scheduler. The option is a org.quartz.Scheduler type.
+     * File name of the properties to load from the classpath
      */
-    private String scheduler;
+    private String propertiesFile;
+    /**
+     * References to an existing Properties or Map to lookup in the registry to
+     * use for configuring quartz.
+     */
+    private String propertiesRef;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * To use the custom configured Quartz scheduler, instead of creating a new
+     * Scheduler. The option is a org.quartz.Scheduler type.
      */
-    private Boolean bridgeErrorHandler = false;
+    private String scheduler;
+    /**
+     * To use the custom SchedulerFactory which is used to create the Scheduler.
+     * The option is a org.quartz.SchedulerFactory type.
+     */
+    private String schedulerFactory;
+    /**
+     * Whether or not the scheduler should be auto started. This options is
+     * default true
+     */
+    private Boolean autoStartScheduler = true;
+    /**
+     * Whether to interrupt jobs on shutdown which forces the scheduler to
+     * shutdown quicker and attempt to interrupt any running jobs. If this is
+     * enabled then any running jobs can fail due to being interrupted.
+     */
+    private Boolean interruptJobsOnShutdown = false;
+    /**
+     * Seconds to wait before starting the quartz scheduler.
+     */
+    private Integer startDelayedSeconds;
 
-    public Boolean getAutoStartScheduler() {
-        return autoStartScheduler;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setAutoStartScheduler(Boolean autoStartScheduler) {
-        this.autoStartScheduler = autoStartScheduler;
-    }
-
-    public Integer getStartDelayedSeconds() {
-        return startDelayedSeconds;
-    }
-
-    public void setStartDelayedSeconds(Integer startDelayedSeconds) {
-        this.startDelayedSeconds = startDelayedSeconds;
-    }
-
-    public Boolean getPrefixJobNameWithEndpointId() {
-        return prefixJobNameWithEndpointId;
-    }
-
-    public void setPrefixJobNameWithEndpointId(
-            Boolean prefixJobNameWithEndpointId) {
-        this.prefixJobNameWithEndpointId = prefixJobNameWithEndpointId;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getEnableJmx() {
@@ -141,12 +124,21 @@ public class QuartzComponentConfiguration
         this.enableJmx = enableJmx;
     }
 
-    public String getPropertiesRef() {
-        return propertiesRef;
+    public Boolean getPrefixInstanceName() {
+        return prefixInstanceName;
     }
 
-    public void setPropertiesRef(String propertiesRef) {
-        this.propertiesRef = propertiesRef;
+    public void setPrefixInstanceName(Boolean prefixInstanceName) {
+        this.prefixInstanceName = prefixInstanceName;
+    }
+
+    public Boolean getPrefixJobNameWithEndpointId() {
+        return prefixJobNameWithEndpointId;
+    }
+
+    public void setPrefixJobNameWithEndpointId(
+            Boolean prefixJobNameWithEndpointId) {
+        this.prefixJobNameWithEndpointId = prefixJobNameWithEndpointId;
     }
 
     public Map getProperties() {
@@ -165,36 +157,12 @@ public class QuartzComponentConfiguration
         this.propertiesFile = propertiesFile;
     }
 
-    public Boolean getPrefixInstanceName() {
-        return prefixInstanceName;
+    public String getPropertiesRef() {
+        return propertiesRef;
     }
 
-    public void setPrefixInstanceName(Boolean prefixInstanceName) {
-        this.prefixInstanceName = prefixInstanceName;
-    }
-
-    public Boolean getInterruptJobsOnShutdown() {
-        return interruptJobsOnShutdown;
-    }
-
-    public void setInterruptJobsOnShutdown(Boolean interruptJobsOnShutdown) {
-        this.interruptJobsOnShutdown = interruptJobsOnShutdown;
-    }
-
-    public String getSchedulerFactory() {
-        return schedulerFactory;
-    }
-
-    public void setSchedulerFactory(String schedulerFactory) {
-        this.schedulerFactory = schedulerFactory;
-    }
-
-    public String getScheduler() {
-        return scheduler;
-    }
-
-    public void setScheduler(String scheduler) {
-        this.scheduler = scheduler;
+    public void setPropertiesRef(String propertiesRef) {
+        this.propertiesRef = propertiesRef;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -205,11 +173,43 @@ public class QuartzComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public String getScheduler() {
+        return scheduler;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setScheduler(String scheduler) {
+        this.scheduler = scheduler;
+    }
+
+    public String getSchedulerFactory() {
+        return schedulerFactory;
+    }
+
+    public void setSchedulerFactory(String schedulerFactory) {
+        this.schedulerFactory = schedulerFactory;
+    }
+
+    public Boolean getAutoStartScheduler() {
+        return autoStartScheduler;
+    }
+
+    public void setAutoStartScheduler(Boolean autoStartScheduler) {
+        this.autoStartScheduler = autoStartScheduler;
+    }
+
+    public Boolean getInterruptJobsOnShutdown() {
+        return interruptJobsOnShutdown;
+    }
+
+    public void setInterruptJobsOnShutdown(Boolean interruptJobsOnShutdown) {
+        this.interruptJobsOnShutdown = interruptJobsOnShutdown;
+    }
+
+    public Integer getStartDelayedSeconds() {
+        return startDelayedSeconds;
+    }
+
+    public void setStartDelayedSeconds(Integer startDelayedSeconds) {
+        this.startDelayedSeconds = startDelayedSeconds;
     }
 }

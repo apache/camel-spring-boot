@@ -37,18 +37,6 @@ public class ValidatorComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a custom LSResourceResolver which depends on a dynamic endpoint
-     * resource URI. The option is a
-     * org.apache.camel.component.validator.ValidatorResourceResolverFactory
-     * type.
-     */
-    private String resourceResolverFactory;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -59,13 +47,25 @@ public class ValidatorComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a custom LSResourceResolver which depends on a dynamic endpoint
+     * resource URI. The option is a
+     * org.apache.camel.component.validator.ValidatorResourceResolverFactory
+     * type.
+     */
+    private String resourceResolverFactory;
 
-    public String getResourceResolverFactory() {
-        return resourceResolverFactory;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setResourceResolverFactory(String resourceResolverFactory) {
-        this.resourceResolverFactory = resourceResolverFactory;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -76,11 +76,11 @@ public class ValidatorComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public String getResourceResolverFactory() {
+        return resourceResolverFactory;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setResourceResolverFactory(String resourceResolverFactory) {
+        this.resourceResolverFactory = resourceResolverFactory;
     }
 }

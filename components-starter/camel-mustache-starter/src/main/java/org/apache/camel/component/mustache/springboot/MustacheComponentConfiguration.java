@@ -37,16 +37,6 @@ public class MustacheComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a custom MustacheFactory. The option is a
-     * com.github.mustachejava.MustacheFactory type.
-     */
-    private String mustacheFactory;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -57,13 +47,23 @@ public class MustacheComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a custom MustacheFactory. The option is a
+     * com.github.mustachejava.MustacheFactory type.
+     */
+    private String mustacheFactory;
 
-    public String getMustacheFactory() {
-        return mustacheFactory;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setMustacheFactory(String mustacheFactory) {
-        this.mustacheFactory = mustacheFactory;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -74,11 +74,11 @@ public class MustacheComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public String getMustacheFactory() {
+        return mustacheFactory;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setMustacheFactory(String mustacheFactory) {
+        this.mustacheFactory = mustacheFactory;
     }
 }

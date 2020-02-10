@@ -45,15 +45,6 @@ public class DigitalSignatureComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the shared DigitalSignatureConfiguration as configuration
-     */
-    private DigitalSignatureConfigurationNestedConfiguration configuration;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -64,14 +55,22 @@ public class DigitalSignatureComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use the shared DigitalSignatureConfiguration as configuration
+     */
+    private DigitalSignatureConfigurationNestedConfiguration configuration;
 
-    public DigitalSignatureConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setConfiguration(
-            DigitalSignatureConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -82,12 +81,13 @@ public class DigitalSignatureComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public DigitalSignatureConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setConfiguration(
+            DigitalSignatureConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public static class DigitalSignatureConfigurationNestedConfiguration {

@@ -41,26 +41,9 @@ public class DdbStreamComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The AWS DDB stream default configuration
-     */
-    private DdbStreamConfigurationNestedConfiguration configuration;
-    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
-    /**
-     * Amazon AWS Region
-     */
-    private String region;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -70,15 +53,23 @@ public class DdbStreamComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
-
-    public DdbStreamConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            DdbStreamConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
-    }
+    /**
+     * Amazon AWS Region
+     */
+    private String region;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * The AWS DDB stream default configuration
+     */
+    private DdbStreamConfigurationNestedConfiguration configuration;
 
     public String getAccessKey() {
         return accessKey;
@@ -88,12 +79,12 @@ public class DdbStreamComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public String getSecretKey() {
-        return secretKey;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public String getRegion() {
@@ -104,6 +95,14 @@ public class DdbStreamComponentConfiguration
         this.region = region;
     }
 
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
@@ -112,12 +111,13 @@ public class DdbStreamComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public DdbStreamConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setConfiguration(
+            DdbStreamConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public static class DdbStreamConfigurationNestedConfiguration {

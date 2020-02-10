@@ -38,34 +38,6 @@ public class XJComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Allows you to use a custom net.sf.saxon.lib.ExtensionFunctionDefinition.
-     * You would need to add camel-saxon to the classpath. The function is
-     * looked up in the registry, where you can comma to separate multiple
-     * values to lookup.
-     */
-    private String saxonExtensionFunctions;
-    /**
-     * To use a custom Saxon configuration. The option is a
-     * net.sf.saxon.Configuration type.
-     */
-    private String saxonConfiguration;
-    /**
-     * To set custom Saxon configuration properties
-     */
-    private Map<String, Object> saxonConfigurationProperties;
-    /**
-     * To use a custom UriResolver which depends on a dynamic endpoint resource
-     * URI. Should not be used together with the option 'uriResolver'. The
-     * option is a org.apache.camel.component.xslt.XsltUriResolverFactory type.
-     */
-    private String uriResolverFactory;
-    /**
-     * To use a custom UriResolver. Should not be used together with the option
-     * 'uriResolverFactory'. The option is a javax.xml.transform.URIResolver
-     * type.
-     */
-    private String uriResolver;
-    /**
      * Cache for the resource content (the stylesheet file) when it is loaded.
      * If set to false Camel will reload the stylesheet file on each message
      * processing. This is good for development. A cached stylesheet can be
@@ -73,22 +45,6 @@ public class XJComponentConfiguration
      * operation.
      */
     private Boolean contentCache = true;
-    /**
-     * A configuration strategy to apply on freshly created instances of
-     * TransformerFactory. The option is a
-     * org.apache.camel.component.xslt.TransformerFactoryConfigurationStrategy
-     * type.
-     */
-    private String transformerFactoryConfigurationStrategy;
-    /**
-     * To use a custom XSLT transformer factory, specified as a FQN class name
-     */
-    private String transformerFactoryClass;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -100,13 +56,73 @@ public class XJComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a custom Saxon configuration. The option is a
+     * net.sf.saxon.Configuration type.
+     */
+    private String saxonConfiguration;
+    /**
+     * To set custom Saxon configuration properties
+     */
+    private Map<String, Object> saxonConfigurationProperties;
+    /**
+     * Allows you to use a custom net.sf.saxon.lib.ExtensionFunctionDefinition.
+     * You would need to add camel-saxon to the classpath. The function is
+     * looked up in the registry, where you can comma to separate multiple
+     * values to lookup.
+     */
+    private String saxonExtensionFunctions;
+    /**
+     * To use a custom XSLT transformer factory, specified as a FQN class name
+     */
+    private String transformerFactoryClass;
+    /**
+     * A configuration strategy to apply on freshly created instances of
+     * TransformerFactory. The option is a
+     * org.apache.camel.component.xslt.TransformerFactoryConfigurationStrategy
+     * type.
+     */
+    private String transformerFactoryConfigurationStrategy;
+    /**
+     * To use a custom UriResolver. Should not be used together with the option
+     * 'uriResolverFactory'. The option is a javax.xml.transform.URIResolver
+     * type.
+     */
+    private String uriResolver;
+    /**
+     * To use a custom UriResolver which depends on a dynamic endpoint resource
+     * URI. Should not be used together with the option 'uriResolver'. The
+     * option is a org.apache.camel.component.xslt.XsltUriResolverFactory type.
+     */
+    private String uriResolverFactory;
 
-    public String getSaxonExtensionFunctions() {
-        return saxonExtensionFunctions;
+    public Boolean getContentCache() {
+        return contentCache;
     }
 
-    public void setSaxonExtensionFunctions(String saxonExtensionFunctions) {
-        this.saxonExtensionFunctions = saxonExtensionFunctions;
+    public void setContentCache(Boolean contentCache) {
+        this.contentCache = contentCache;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public String getSaxonConfiguration() {
@@ -126,28 +142,20 @@ public class XJComponentConfiguration
         this.saxonConfigurationProperties = saxonConfigurationProperties;
     }
 
-    public String getUriResolverFactory() {
-        return uriResolverFactory;
+    public String getSaxonExtensionFunctions() {
+        return saxonExtensionFunctions;
     }
 
-    public void setUriResolverFactory(String uriResolverFactory) {
-        this.uriResolverFactory = uriResolverFactory;
+    public void setSaxonExtensionFunctions(String saxonExtensionFunctions) {
+        this.saxonExtensionFunctions = saxonExtensionFunctions;
     }
 
-    public String getUriResolver() {
-        return uriResolver;
+    public String getTransformerFactoryClass() {
+        return transformerFactoryClass;
     }
 
-    public void setUriResolver(String uriResolver) {
-        this.uriResolver = uriResolver;
-    }
-
-    public Boolean getContentCache() {
-        return contentCache;
-    }
-
-    public void setContentCache(Boolean contentCache) {
-        this.contentCache = contentCache;
+    public void setTransformerFactoryClass(String transformerFactoryClass) {
+        this.transformerFactoryClass = transformerFactoryClass;
     }
 
     public String getTransformerFactoryConfigurationStrategy() {
@@ -159,27 +167,19 @@ public class XJComponentConfiguration
         this.transformerFactoryConfigurationStrategy = transformerFactoryConfigurationStrategy;
     }
 
-    public String getTransformerFactoryClass() {
-        return transformerFactoryClass;
+    public String getUriResolver() {
+        return uriResolver;
     }
 
-    public void setTransformerFactoryClass(String transformerFactoryClass) {
-        this.transformerFactoryClass = transformerFactoryClass;
+    public void setUriResolver(String uriResolver) {
+        this.uriResolver = uriResolver;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public String getUriResolverFactory() {
+        return uriResolverFactory;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setUriResolverFactory(String uriResolverFactory) {
+        this.uriResolverFactory = uriResolverFactory;
     }
 }

@@ -39,26 +39,19 @@ public class ReactiveStreamsComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Configures the internal engine for Reactive Streams.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private ReactiveStreamsEngineConfigurationNestedConfiguration internalEngineConfiguration;
+    private Boolean bridgeErrorHandler = false;
     /**
      * The backpressure strategy to use when pushing events to a slow
      * subscriber.
      */
     private ReactiveStreamsBackpressureStrategy backpressureStrategy = ReactiveStreamsBackpressureStrategy.BUFFER;
-    /**
-     * Set the type of the underlying reactive streams implementation to use.
-     * The implementation is looked up from the registry or using a
-     * ServiceLoader, the default implementation is
-     * DefaultCamelReactiveStreamsService
-     */
-    private String serviceType;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -71,22 +64,28 @@ public class ReactiveStreamsComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * Configures the internal engine for Reactive Streams.
+     */
+    private ReactiveStreamsEngineConfigurationNestedConfiguration internalEngineConfiguration;
+    /**
+     * Set the type of the underlying reactive streams implementation to use.
+     * The implementation is looked up from the registry or using a
+     * ServiceLoader, the default implementation is
+     * DefaultCamelReactiveStreamsService
+     */
+    private String serviceType;
 
-    public ReactiveStreamsEngineConfigurationNestedConfiguration getInternalEngineConfiguration() {
-        return internalEngineConfiguration;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setInternalEngineConfiguration(
-            ReactiveStreamsEngineConfigurationNestedConfiguration internalEngineConfiguration) {
-        this.internalEngineConfiguration = internalEngineConfiguration;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public ReactiveStreamsBackpressureStrategy getBackpressureStrategy() {
@@ -98,12 +97,12 @@ public class ReactiveStreamsComponentConfiguration
         this.backpressureStrategy = backpressureStrategy;
     }
 
-    public String getServiceType() {
-        return serviceType;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -114,20 +113,21 @@ public class ReactiveStreamsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public ReactiveStreamsEngineConfigurationNestedConfiguration getInternalEngineConfiguration() {
+        return internalEngineConfiguration;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setInternalEngineConfiguration(
+            ReactiveStreamsEngineConfigurationNestedConfiguration internalEngineConfiguration) {
+        this.internalEngineConfiguration = internalEngineConfiguration;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public String getServiceType() {
+        return serviceType;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
     }
 
     public static class ReactiveStreamsEngineConfigurationNestedConfiguration {

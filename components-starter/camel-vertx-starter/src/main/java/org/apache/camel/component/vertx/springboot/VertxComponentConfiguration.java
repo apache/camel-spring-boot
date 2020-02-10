@@ -38,11 +38,6 @@ public class VertxComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a custom VertxFactory implementation. The option is a
-     * io.vertx.core.spi.VertxFactory type.
-     */
-    private String vertxFactory;
-    /**
      * Hostname for creating an embedded clustered EventBus
      */
     private String host;
@@ -51,25 +46,29 @@ public class VertxComponentConfiguration
      */
     private Integer port;
     /**
-     * Options to use for creating vertx. The option is a
-     * io.vertx.core.VertxOptions type.
+     * Timeout in seconds to wait for clustered Vertx EventBus to be ready. The
+     * default value is 60.
      */
-    private String vertxOptions;
+    private Integer timeout = 60;
     /**
      * To use the given vertx EventBus instead of creating a new embedded
      * EventBus. The option is a io.vertx.core.Vertx type.
      */
     private String vertx;
     /**
-     * Timeout in seconds to wait for clustered Vertx EventBus to be ready. The
-     * default value is 60.
+     * Options to use for creating vertx. The option is a
+     * io.vertx.core.VertxOptions type.
      */
-    private Integer timeout = 60;
+    private String vertxOptions;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -82,22 +81,15 @@ public class VertxComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
-
-    public String getVertxFactory() {
-        return vertxFactory;
-    }
-
-    public void setVertxFactory(String vertxFactory) {
-        this.vertxFactory = vertxFactory;
-    }
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a custom VertxFactory implementation. The option is a
+     * io.vertx.core.spi.VertxFactory type.
+     */
+    private String vertxFactory;
 
     public String getHost() {
         return host;
@@ -115,12 +107,12 @@ public class VertxComponentConfiguration
         this.port = port;
     }
 
-    public String getVertxOptions() {
-        return vertxOptions;
+    public Integer getTimeout() {
+        return timeout;
     }
 
-    public void setVertxOptions(String vertxOptions) {
-        this.vertxOptions = vertxOptions;
+    public void setTimeout(Integer timeout) {
+        this.timeout = timeout;
     }
 
     public String getVertx() {
@@ -131,20 +123,20 @@ public class VertxComponentConfiguration
         this.vertx = vertx;
     }
 
-    public Integer getTimeout() {
-        return timeout;
+    public String getVertxOptions() {
+        return vertxOptions;
     }
 
-    public void setTimeout(Integer timeout) {
-        this.timeout = timeout;
+    public void setVertxOptions(String vertxOptions) {
+        this.vertxOptions = vertxOptions;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -155,11 +147,19 @@ public class VertxComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getVertxFactory() {
+        return vertxFactory;
+    }
+
+    public void setVertxFactory(String vertxFactory) {
+        this.vertxFactory = vertxFactory;
     }
 }

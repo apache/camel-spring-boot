@@ -43,12 +43,6 @@ public class JpaComponentConfiguration
      */
     private String entityManagerFactory;
     /**
-     * To use the PlatformTransactionManager for managing transactions. The
-     * option is a org.springframework.transaction.PlatformTransactionManager
-     * type.
-     */
-    private String transactionManager;
-    /**
      * The camel-jpa component will join transaction by default. You can use
      * this option to turn this off, for example if you use LOCAL_RESOURCE and
      * join transaction doesn't work with your JPA provider. This option can
@@ -63,10 +57,20 @@ public class JpaComponentConfiguration
      */
     private Boolean sharedEntityManager = false;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * To use the PlatformTransactionManager for managing transactions. The
+     * option is a org.springframework.transaction.PlatformTransactionManager
+     * type.
      */
-    private Boolean basicPropertyBinding = false;
+    private String transactionManager;
+    /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -79,14 +83,10 @@ public class JpaComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
 
     public String getEntityManagerFactory() {
         return entityManagerFactory;
@@ -94,14 +94,6 @@ public class JpaComponentConfiguration
 
     public void setEntityManagerFactory(String entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
-    }
-
-    public String getTransactionManager() {
-        return transactionManager;
-    }
-
-    public void setTransactionManager(String transactionManager) {
-        this.transactionManager = transactionManager;
     }
 
     public Boolean getJoinTransaction() {
@@ -120,12 +112,20 @@ public class JpaComponentConfiguration
         this.sharedEntityManager = sharedEntityManager;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public String getTransactionManager() {
+        return transactionManager;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setTransactionManager(String transactionManager) {
+        this.transactionManager = transactionManager;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -136,11 +136,11 @@ public class JpaComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 }

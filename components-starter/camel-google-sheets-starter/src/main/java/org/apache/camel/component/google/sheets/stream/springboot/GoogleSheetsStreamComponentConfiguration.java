@@ -38,21 +38,6 @@ public class GoogleSheetsStreamComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the shared configuration
-     */
-    private GoogleSheetsStreamConfigurationNestedConfiguration configuration;
-    /**
-     * To use the GoogleSheetsClientFactory as factory for creating the client.
-     * Will by default use BatchGoogleSheetsClientFactory. The option is a
-     * org.apache.camel.component.google.sheets.GoogleSheetsClientFactory type.
-     */
-    private String clientFactory;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -61,6 +46,29 @@ public class GoogleSheetsStreamComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * To use the shared configuration
+     */
+    private GoogleSheetsStreamConfigurationNestedConfiguration configuration;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use the GoogleSheetsClientFactory as factory for creating the client.
+     * Will by default use BatchGoogleSheetsClientFactory. The option is a
+     * org.apache.camel.component.google.sheets.GoogleSheetsClientFactory type.
+     */
+    private String clientFactory;
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
 
     public GoogleSheetsStreamConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -71,14 +79,6 @@ public class GoogleSheetsStreamComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getClientFactory() {
-        return clientFactory;
-    }
-
-    public void setClientFactory(String clientFactory) {
-        this.clientFactory = clientFactory;
-    }
-
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
@@ -87,12 +87,12 @@ public class GoogleSheetsStreamComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public String getClientFactory() {
+        return clientFactory;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setClientFactory(String clientFactory) {
+        this.clientFactory = clientFactory;
     }
 
     public static class GoogleSheetsStreamConfigurationNestedConfiguration {

@@ -44,25 +44,41 @@ public class ServiceNowComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The ServiceNow instance name
+     * The ServiceNow REST API url
      */
-    private String instanceName;
+    private String apiUrl;
+    /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
     /**
      * The ServiceNow default configuration
      */
     private ServiceNowConfigurationNestedConfiguration configuration;
     /**
-     * The ServiceNow REST API url
+     * The ServiceNow instance name
      */
-    private String apiUrl;
+    private String instanceName;
     /**
-     * ServiceNow user account name
+     * The proxy host name
      */
-    private String userName;
+    private String proxyHost;
     /**
-     * ServiceNow account password
+     * The proxy port number
      */
-    private String password;
+    private Integer proxyPort;
     /**
      * OAuth2 ClientID
      */
@@ -76,48 +92,48 @@ public class ServiceNowComponentConfiguration
      */
     private String oauthTokenUrl;
     /**
-     * The proxy host name
+     * ServiceNow account password
      */
-    private String proxyHost;
-    /**
-     * The proxy port number
-     */
-    private Integer proxyPort;
-    /**
-     * Username for proxy authentication
-     */
-    private String proxyUserName;
+    private String password;
     /**
      * Password for proxy authentication
      */
     private String proxyPassword;
     /**
+     * Username for proxy authentication
+     */
+    private String proxyUserName;
+    /**
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * ServiceNow user account name
      */
-    private Boolean basicPropertyBinding = false;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
+    private String userName;
 
-    public String getInstanceName() {
-        return instanceName;
+    public String getApiUrl() {
+        return apiUrl;
     }
 
-    public void setInstanceName(String instanceName) {
-        this.instanceName = instanceName;
+    public void setApiUrl(String apiUrl) {
+        this.apiUrl = apiUrl;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public ServiceNowConfigurationNestedConfiguration getConfiguration() {
@@ -129,28 +145,28 @@ public class ServiceNowComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getApiUrl() {
-        return apiUrl;
+    public String getInstanceName() {
+        return instanceName;
     }
 
-    public void setApiUrl(String apiUrl) {
-        this.apiUrl = apiUrl;
+    public void setInstanceName(String instanceName) {
+        this.instanceName = instanceName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getProxyHost() {
+        return proxyHost;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getProxyPort() {
+        return proxyPort;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
     }
 
     public String getOauthClientId() {
@@ -177,28 +193,12 @@ public class ServiceNowComponentConfiguration
         this.oauthTokenUrl = oauthTokenUrl;
     }
 
-    public String getProxyHost() {
-        return proxyHost;
+    public String getPassword() {
+        return password;
     }
 
-    public void setProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-    }
-
-    public Integer getProxyPort() {
-        return proxyPort;
-    }
-
-    public void setProxyPort(Integer proxyPort) {
-        this.proxyPort = proxyPort;
-    }
-
-    public String getProxyUserName() {
-        return proxyUserName;
-    }
-
-    public void setProxyUserName(String proxyUserName) {
-        this.proxyUserName = proxyUserName;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getProxyPassword() {
@@ -207,6 +207,14 @@ public class ServiceNowComponentConfiguration
 
     public void setProxyPassword(String proxyPassword) {
         this.proxyPassword = proxyPassword;
+    }
+
+    public String getProxyUserName() {
+        return proxyUserName;
+    }
+
+    public void setProxyUserName(String proxyUserName) {
+        this.proxyUserName = proxyUserName;
     }
 
     public Boolean getUseGlobalSslContextParameters() {
@@ -218,20 +226,12 @@ public class ServiceNowComponentConfiguration
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public static class ServiceNowConfigurationNestedConfiguration {

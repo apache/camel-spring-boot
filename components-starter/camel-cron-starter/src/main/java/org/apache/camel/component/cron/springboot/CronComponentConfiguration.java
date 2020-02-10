@@ -37,16 +37,6 @@ public class CronComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The id of the CamelCronService to use when multiple implementations are
-     * provided
-     */
-    private String cronService;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -55,13 +45,23 @@ public class CronComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * The id of the CamelCronService to use when multiple implementations are
+     * provided
+     */
+    private String cronService;
 
-    public String getCronService() {
-        return cronService;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setCronService(String cronService) {
-        this.cronService = cronService;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -72,11 +72,11 @@ public class CronComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public String getCronService() {
+        return cronService;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setCronService(String cronService) {
+        this.cronService = cronService;
     }
 }

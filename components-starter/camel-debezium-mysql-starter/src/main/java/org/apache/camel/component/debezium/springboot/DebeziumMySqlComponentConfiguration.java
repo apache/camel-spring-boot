@@ -39,15 +39,6 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Allow pre-configured Configurations to be set.
-     */
-    private MySqlConnectorEmbeddedDebeziumConfigurationNestedConfiguration configuration;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -56,6 +47,23 @@ public class DebeziumMySqlComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Allow pre-configured Configurations to be set.
+     */
+    private MySqlConnectorEmbeddedDebeziumConfigurationNestedConfiguration configuration;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
 
     public MySqlConnectorEmbeddedDebeziumConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -72,14 +80,6 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public static class MySqlConnectorEmbeddedDebeziumConfigurationNestedConfiguration {

@@ -46,13 +46,17 @@ public class ConsulComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The Consul agent URL
+     * Sets the ACL token to be used with Consul
      */
-    private String url;
+    private String aclToken;
     /**
      * The data center
      */
     private String datacenter;
+    /**
+     * Sets the password to be used for basic authentication
+     */
+    private String password;
     /**
      * SSL configuration using an
      * org.apache.camel.support.jsse.SSLContextParameters instance. The option
@@ -60,30 +64,22 @@ public class ConsulComponentConfiguration
      */
     private String sslContextParameters;
     /**
-     * Enable usage of global SSL context parameters.
+     * The Consul agent URL
      */
-    private Boolean useGlobalSslContextParameters = false;
-    /**
-     * Sets the ACL token to be used with Consul
-     */
-    private String aclToken;
+    private String url;
     /**
      * Sets the username to be used for basic authentication
      */
     private String userName;
     /**
-     * Sets the password to be used for basic authentication
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String password;
-    /**
-     * Sets the common configuration shared among endpoints
-     */
-    private ConsulConfigurationNestedConfiguration configuration;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -96,21 +92,25 @@ public class ConsulComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * Sets the common configuration shared among endpoints
+     */
+    private ConsulConfigurationNestedConfiguration configuration;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
 
-    public String getUrl() {
-        return url;
+    public String getAclToken() {
+        return aclToken;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setAclToken(String aclToken) {
+        this.aclToken = aclToken;
     }
 
     public String getDatacenter() {
@@ -121,6 +121,14 @@ public class ConsulComponentConfiguration
         this.datacenter = datacenter;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getSslContextParameters() {
         return sslContextParameters;
     }
@@ -129,21 +137,12 @@ public class ConsulComponentConfiguration
         this.sslContextParameters = sslContextParameters;
     }
 
-    public Boolean getUseGlobalSslContextParameters() {
-        return useGlobalSslContextParameters;
+    public String getUrl() {
+        return url;
     }
 
-    public void setUseGlobalSslContextParameters(
-            Boolean useGlobalSslContextParameters) {
-        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public String getAclToken() {
-        return aclToken;
-    }
-
-    public void setAclToken(String aclToken) {
-        this.aclToken = aclToken;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getUserName() {
@@ -154,12 +153,28 @@ public class ConsulComponentConfiguration
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public ConsulConfigurationNestedConfiguration getConfiguration() {
@@ -171,28 +186,13 @@ public class ConsulComponentConfiguration
         this.configuration = configuration;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getUseGlobalSslContextParameters() {
+        return useGlobalSslContextParameters;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setUseGlobalSslContextParameters(
+            Boolean useGlobalSslContextParameters) {
+        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 
     public static class ConsulConfigurationNestedConfiguration {

@@ -37,11 +37,38 @@ public class HttpComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the custom HttpClientConfigurer to perform configuration of the
-     * HttpClient that will be used. The option is a
-     * org.apache.camel.component.http.HttpClientConfigurer type.
+     * To use a custom org.apache.http.client.CookieStore. By default the
+     * org.apache.http.impl.client.BasicCookieStore is used which is an
+     * in-memory only cookie store. Notice if bridgeEndpoint=true then the
+     * cookie store is forced to be a noop cookie store as cookie shouldn't be
+     * stored as we are just bridging (eg acting as a proxy). The option is a
+     * org.apache.http.client.CookieStore type.
      */
-    private String httpClientConfigurer;
+    private String cookieStore;
+    /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
+     * Whether to allow java serialization when a request uses
+     * context-type=application/x-java-serialized-object. This is by default
+     * turned off. If you enable this then be aware that Java will deserialize
+     * the incoming data from the request to Java and that can be a potential
+     * security risk.
+     */
+    private Boolean allowJavaSerializedObject = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
     /**
      * To use a custom and shared HttpClientConnectionManager to manage
      * connections. If this has been configured then this is always used for all
@@ -50,10 +77,46 @@ public class HttpComponentConfiguration
      */
     private String clientConnectionManager;
     /**
+     * The maximum number of connections per route.
+     */
+    private Integer connectionsPerRoute = 20;
+    /**
+     * The time for connection to live, the time unit is millisecond, the
+     * default value is always keep alive.
+     */
+    private Long connectionTimeToLive;
+    /**
+     * To use a custom HttpBinding to control the mapping between Camel message
+     * and HttpClient. The option is a org.apache.camel.http.common.HttpBinding
+     * type.
+     */
+    private String httpBinding;
+    /**
+     * To use the custom HttpClientConfigurer to perform configuration of the
+     * HttpClient that will be used. The option is a
+     * org.apache.camel.component.http.HttpClientConfigurer type.
+     */
+    private String httpClientConfigurer;
+    /**
+     * To use the shared HttpConfiguration as base configuration. The option is
+     * a org.apache.camel.http.common.HttpConfiguration type.
+     */
+    private String httpConfiguration;
+    /**
      * To use a custom org.apache.http.protocol.HttpContext when executing
      * requests. The option is a org.apache.http.protocol.HttpContext type.
      */
     private String httpContext;
+    /**
+     * The maximum number of connections.
+     */
+    private Integer maxTotalConnections = 200;
+    /**
+     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
+     * header to and from Camel message. The option is a
+     * org.apache.camel.spi.HeaderFilterStrategy type.
+     */
+    private String headerFilterStrategy;
     /**
      * To configure security using SSLContextParameters. Important: Only one
      * instance of org.apache.camel.support.jsse.SSLContextParameters is
@@ -72,28 +135,6 @@ public class HttpComponentConfiguration
      * type.
      */
     private String x509HostnameVerifier;
-    /**
-     * The maximum number of connections.
-     */
-    private Integer maxTotalConnections = 200;
-    /**
-     * The maximum number of connections per route.
-     */
-    private Integer connectionsPerRoute = 20;
-    /**
-     * The time for connection to live, the time unit is millisecond, the
-     * default value is always keep alive.
-     */
-    private Long connectionTimeToLive;
-    /**
-     * To use a custom org.apache.http.client.CookieStore. By default the
-     * org.apache.http.impl.client.BasicCookieStore is used which is an
-     * in-memory only cookie store. Notice if bridgeEndpoint=true then the
-     * cookie store is forced to be a noop cookie store as cookie shouldn't be
-     * stored as we are just bridging (eg acting as a proxy). The option is a
-     * org.apache.http.client.CookieStore type.
-     */
-    private String cookieStore;
     /**
      * The timeout in milliseconds used when requesting a connection from the
      * connection manager. A timeout value of zero is interpreted as an infinite
@@ -116,54 +157,37 @@ public class HttpComponentConfiguration
      * default).
      */
     private Integer socketTimeout = -1;
-    /**
-     * To use a custom HttpBinding to control the mapping between Camel message
-     * and HttpClient. The option is a org.apache.camel.http.common.HttpBinding
-     * type.
-     */
-    private String httpBinding;
-    /**
-     * To use the shared HttpConfiguration as base configuration. The option is
-     * a org.apache.camel.http.common.HttpConfiguration type.
-     */
-    private String httpConfiguration;
-    /**
-     * Whether to allow java serialization when a request uses
-     * context-type=application/x-java-serialized-object. This is by default
-     * turned off. If you enable this then be aware that Java will deserialize
-     * the incoming data from the request to Java and that can be a potential
-     * security risk.
-     */
-    private Boolean allowJavaSerializedObject = false;
-    /**
-     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
-     * header to and from Camel message. The option is a
-     * org.apache.camel.spi.HeaderFilterStrategy type.
-     */
-    private String headerFilterStrategy;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
 
-    public String getHttpClientConfigurer() {
-        return httpClientConfigurer;
+    public String getCookieStore() {
+        return cookieStore;
     }
 
-    public void setHttpClientConfigurer(String httpClientConfigurer) {
-        this.httpClientConfigurer = httpClientConfigurer;
+    public void setCookieStore(String cookieStore) {
+        this.cookieStore = cookieStore;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getAllowJavaSerializedObject() {
+        return allowJavaSerializedObject;
+    }
+
+    public void setAllowJavaSerializedObject(Boolean allowJavaSerializedObject) {
+        this.allowJavaSerializedObject = allowJavaSerializedObject;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public String getClientConnectionManager() {
@@ -174,12 +198,68 @@ public class HttpComponentConfiguration
         this.clientConnectionManager = clientConnectionManager;
     }
 
+    public Integer getConnectionsPerRoute() {
+        return connectionsPerRoute;
+    }
+
+    public void setConnectionsPerRoute(Integer connectionsPerRoute) {
+        this.connectionsPerRoute = connectionsPerRoute;
+    }
+
+    public Long getConnectionTimeToLive() {
+        return connectionTimeToLive;
+    }
+
+    public void setConnectionTimeToLive(Long connectionTimeToLive) {
+        this.connectionTimeToLive = connectionTimeToLive;
+    }
+
+    public String getHttpBinding() {
+        return httpBinding;
+    }
+
+    public void setHttpBinding(String httpBinding) {
+        this.httpBinding = httpBinding;
+    }
+
+    public String getHttpClientConfigurer() {
+        return httpClientConfigurer;
+    }
+
+    public void setHttpClientConfigurer(String httpClientConfigurer) {
+        this.httpClientConfigurer = httpClientConfigurer;
+    }
+
+    public String getHttpConfiguration() {
+        return httpConfiguration;
+    }
+
+    public void setHttpConfiguration(String httpConfiguration) {
+        this.httpConfiguration = httpConfiguration;
+    }
+
     public String getHttpContext() {
         return httpContext;
     }
 
     public void setHttpContext(String httpContext) {
         this.httpContext = httpContext;
+    }
+
+    public Integer getMaxTotalConnections() {
+        return maxTotalConnections;
+    }
+
+    public void setMaxTotalConnections(Integer maxTotalConnections) {
+        this.maxTotalConnections = maxTotalConnections;
+    }
+
+    public String getHeaderFilterStrategy() {
+        return headerFilterStrategy;
+    }
+
+    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+        this.headerFilterStrategy = headerFilterStrategy;
     }
 
     public String getSslContextParameters() {
@@ -207,38 +287,6 @@ public class HttpComponentConfiguration
         this.x509HostnameVerifier = x509HostnameVerifier;
     }
 
-    public Integer getMaxTotalConnections() {
-        return maxTotalConnections;
-    }
-
-    public void setMaxTotalConnections(Integer maxTotalConnections) {
-        this.maxTotalConnections = maxTotalConnections;
-    }
-
-    public Integer getConnectionsPerRoute() {
-        return connectionsPerRoute;
-    }
-
-    public void setConnectionsPerRoute(Integer connectionsPerRoute) {
-        this.connectionsPerRoute = connectionsPerRoute;
-    }
-
-    public Long getConnectionTimeToLive() {
-        return connectionTimeToLive;
-    }
-
-    public void setConnectionTimeToLive(Long connectionTimeToLive) {
-        this.connectionTimeToLive = connectionTimeToLive;
-    }
-
-    public String getCookieStore() {
-        return cookieStore;
-    }
-
-    public void setCookieStore(String cookieStore) {
-        this.cookieStore = cookieStore;
-    }
-
     public Integer getConnectionRequestTimeout() {
         return connectionRequestTimeout;
     }
@@ -261,53 +309,5 @@ public class HttpComponentConfiguration
 
     public void setSocketTimeout(Integer socketTimeout) {
         this.socketTimeout = socketTimeout;
-    }
-
-    public String getHttpBinding() {
-        return httpBinding;
-    }
-
-    public void setHttpBinding(String httpBinding) {
-        this.httpBinding = httpBinding;
-    }
-
-    public String getHttpConfiguration() {
-        return httpConfiguration;
-    }
-
-    public void setHttpConfiguration(String httpConfiguration) {
-        this.httpConfiguration = httpConfiguration;
-    }
-
-    public Boolean getAllowJavaSerializedObject() {
-        return allowJavaSerializedObject;
-    }
-
-    public void setAllowJavaSerializedObject(Boolean allowJavaSerializedObject) {
-        this.allowJavaSerializedObject = allowJavaSerializedObject;
-    }
-
-    public String getHeaderFilterStrategy() {
-        return headerFilterStrategy;
-    }
-
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
-        this.headerFilterStrategy = headerFilterStrategy;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
     }
 }

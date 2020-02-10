@@ -38,24 +38,19 @@ public class IgniteIdGenComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Ignite instance. The option is a org.apache.ignite.Ignite type.
-     */
-    private String ignite;
-    /**
      * Resource from where to load configuration. The option is a
      * java.lang.Object type.
      */
     private String configurationResource;
     /**
+     * Ignite instance. The option is a org.apache.ignite.Ignite type.
+     */
+    private String ignite;
+    /**
      * Ignite configuration. The option is a
      * org.apache.ignite.configuration.IgniteConfiguration type.
      */
     private String igniteConfiguration;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -67,14 +62,11 @@ public class IgniteIdGenComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
-
-    public String getIgnite() {
-        return ignite;
-    }
-
-    public void setIgnite(String ignite) {
-        this.ignite = ignite;
-    }
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
 
     public String getConfigurationResource() {
         return configurationResource;
@@ -82,6 +74,14 @@ public class IgniteIdGenComponentConfiguration
 
     public void setConfigurationResource(String configurationResource) {
         this.configurationResource = configurationResource;
+    }
+
+    public String getIgnite() {
+        return ignite;
+    }
+
+    public void setIgnite(String ignite) {
+        this.ignite = ignite;
     }
 
     public String getIgniteConfiguration() {
@@ -92,19 +92,19 @@ public class IgniteIdGenComponentConfiguration
         this.igniteConfiguration = igniteConfiguration;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 }

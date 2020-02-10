@@ -52,6 +52,20 @@ public class NettyComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
+     * To use the given EventExecutorGroup. The option is a
+     * io.netty.util.concurrent.EventExecutorGroup type.
+     */
+    private String executorService;
+    /**
      * Sets a maximum thread pool size for the netty consumer ordered thread
      * pool. The default size is 2 x cpu_core plus 1. Setting this value to eg
      * 10 will then use 10 threads unless 2 x cpu_core plus 1 is a higher value,
@@ -62,29 +76,6 @@ public class NettyComponentConfiguration
      * block, then nettys worker threads (event loop) wont be affected.
      */
     private Integer maximumPoolSize;
-    /**
-     * To use the NettyConfiguration as configuration when creating endpoints.
-     */
-    private NettyConfigurationNestedConfiguration configuration;
-    /**
-     * To use the given EventExecutorGroup. The option is a
-     * io.netty.util.concurrent.EventExecutorGroup type.
-     */
-    private String executorService;
-    /**
-     * Enable usage of global SSL context parameters.
-     */
-    private Boolean useGlobalSslContextParameters = false;
-    /**
-     * To configure security using SSLContextParameters. The option is a
-     * org.apache.camel.support.jsse.SSLContextParameters type.
-     */
-    private String sslContextParameters;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -97,14 +88,39 @@ public class NettyComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use the NettyConfiguration as configuration when creating endpoints.
+     */
+    private NettyConfigurationNestedConfiguration configuration;
+    /**
+     * To configure security using SSLContextParameters. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private String sslContextParameters;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public String getExecutorService() {
+        return executorService;
+    }
+
+    public void setExecutorService(String executorService) {
+        this.executorService = executorService;
+    }
 
     public Integer getMaximumPoolSize() {
         return maximumPoolSize;
@@ -112,6 +128,22 @@ public class NettyComponentConfiguration
 
     public void setMaximumPoolSize(Integer maximumPoolSize) {
         this.maximumPoolSize = maximumPoolSize;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public NettyConfigurationNestedConfiguration getConfiguration() {
@@ -123,12 +155,12 @@ public class NettyComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getExecutorService() {
-        return executorService;
+    public String getSslContextParameters() {
+        return sslContextParameters;
     }
 
-    public void setExecutorService(String executorService) {
-        this.executorService = executorService;
+    public void setSslContextParameters(String sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
     }
 
     public Boolean getUseGlobalSslContextParameters() {
@@ -138,38 +170,6 @@ public class NettyComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public String getSslContextParameters() {
-        return sslContextParameters;
-    }
-
-    public void setSslContextParameters(String sslContextParameters) {
-        this.sslContextParameters = sslContextParameters;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public static class NettyConfigurationNestedConfiguration {

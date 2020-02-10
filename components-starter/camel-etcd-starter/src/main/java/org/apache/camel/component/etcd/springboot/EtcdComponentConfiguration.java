@@ -39,35 +39,31 @@ public class EtcdComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To set the URIs the client connects.
+     * The password to use for basic authentication.
      */
-    private String uris;
+    private String password;
     /**
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
     private String sslContextParameters;
     /**
+     * To set the URIs the client connects.
+     */
+    private String uris;
+    /**
      * The user name to use for basic authentication.
      */
     private String userName;
     /**
-     * The password to use for basic authentication.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String password;
-    /**
-     * Sets the common configuration shared among endpoints
-     */
-    private EtcdConfigurationNestedConfiguration configuration;
-    /**
-     * Enable usage of global SSL context parameters.
-     */
-    private Boolean useGlobalSslContextParameters = false;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -80,21 +76,25 @@ public class EtcdComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * Sets the common configuration shared among endpoints
+     */
+    private EtcdConfigurationNestedConfiguration configuration;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
 
-    public String getUris() {
-        return uris;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUris(String uris) {
-        this.uris = uris;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getSslContextParameters() {
@@ -105,6 +105,14 @@ public class EtcdComponentConfiguration
         this.sslContextParameters = sslContextParameters;
     }
 
+    public String getUris() {
+        return uris;
+    }
+
+    public void setUris(String uris) {
+        this.uris = uris;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -113,12 +121,28 @@ public class EtcdComponentConfiguration
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public EtcdConfigurationNestedConfiguration getConfiguration() {
@@ -137,30 +161,6 @@ public class EtcdComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public static class EtcdConfigurationNestedConfiguration {

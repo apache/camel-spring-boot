@@ -40,26 +40,9 @@ public class SesComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The AWS SES default configuration
-     */
-    private SesConfigurationNestedConfiguration configuration;
-    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
-    /**
-     * The region in which SES client needs to work
-     */
-    private String region;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -71,15 +54,23 @@ public class SesComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
-
-    public SesConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            SesConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
-    }
+    /**
+     * The region in which SES client needs to work
+     */
+    private String region;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * The AWS SES default configuration
+     */
+    private SesConfigurationNestedConfiguration configuration;
 
     public String getAccessKey() {
         return accessKey;
@@ -89,12 +80,12 @@ public class SesComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public String getSecretKey() {
-        return secretKey;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public String getRegion() {
@@ -105,6 +96,14 @@ public class SesComponentConfiguration
         this.region = region;
     }
 
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
@@ -113,12 +112,13 @@ public class SesComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public SesConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setConfiguration(
+            SesConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public static class SesConfigurationNestedConfiguration {

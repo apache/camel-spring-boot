@@ -40,15 +40,6 @@ public class JsltComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * JSLT can be extended by plugging in functions written in Java.
-     */
-    private Collection<Function> functions;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -59,13 +50,22 @@ public class JsltComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * JSLT can be extended by plugging in functions written in Java.
+     */
+    private Collection<Function> functions;
 
-    public Collection<Function> getFunctions() {
-        return functions;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setFunctions(Collection<Function> functions) {
-        this.functions = functions;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -76,11 +76,11 @@ public class JsltComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public Collection<Function> getFunctions() {
+        return functions;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setFunctions(Collection<Function> functions) {
+        this.functions = functions;
     }
 }

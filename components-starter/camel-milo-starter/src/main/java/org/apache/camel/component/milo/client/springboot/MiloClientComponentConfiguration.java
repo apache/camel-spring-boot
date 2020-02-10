@@ -39,10 +39,6 @@ public class MiloClientComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * All default options for client
-     */
-    private MiloClientConfigurationNestedConfiguration defaultConfiguration;
-    /**
      * Default application name
      */
     private String applicationName;
@@ -50,6 +46,10 @@ public class MiloClientComponentConfiguration
      * Default application URI
      */
     private String applicationUri;
+    /**
+     * All default options for client
+     */
+    private MiloClientConfigurationNestedConfiguration defaultConfiguration;
     /**
      * Default product URI
      */
@@ -59,10 +59,14 @@ public class MiloClientComponentConfiguration
      */
     private Long reconnectTimeout;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -75,23 +79,10 @@ public class MiloClientComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
-
-    public MiloClientConfigurationNestedConfiguration getDefaultConfiguration() {
-        return defaultConfiguration;
-    }
-
-    public void setDefaultConfiguration(
-            MiloClientConfigurationNestedConfiguration defaultConfiguration) {
-        this.defaultConfiguration = defaultConfiguration;
-    }
+    private Boolean basicPropertyBinding = false;
 
     public String getApplicationName() {
         return applicationName;
@@ -107,6 +98,15 @@ public class MiloClientComponentConfiguration
 
     public void setApplicationUri(String applicationUri) {
         this.applicationUri = applicationUri;
+    }
+
+    public MiloClientConfigurationNestedConfiguration getDefaultConfiguration() {
+        return defaultConfiguration;
+    }
+
+    public void setDefaultConfiguration(
+            MiloClientConfigurationNestedConfiguration defaultConfiguration) {
+        this.defaultConfiguration = defaultConfiguration;
     }
 
     public String getProductUri() {
@@ -125,12 +125,12 @@ public class MiloClientComponentConfiguration
         this.reconnectTimeout = reconnectTimeout;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -141,12 +141,12 @@ public class MiloClientComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public static class MiloClientConfigurationNestedConfiguration {

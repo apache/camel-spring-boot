@@ -40,15 +40,6 @@ public class WebsocketComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Set a resource path for static resources (such as .html files etc). The
-     * resources can be loaded from classpath, if you prefix with classpath:,
-     * otherwise the resources is loaded from file system or from JAR files. For
-     * example to load from root classpath use classpath:., or
-     * classpath:WEB-INF/static If not configured (eg null) then no static
-     * resource is in use.
-     */
-    private String staticResources;
-    /**
      * The hostname. The default value is 0.0.0.0
      */
     private String host = "0.0.0.0";
@@ -57,60 +48,29 @@ public class WebsocketComponentConfiguration
      */
     private Integer port = 9292;
     /**
-     * The password for the keystore when using SSL.
-     */
-    private String sslKeyPassword;
-    /**
-     * The password when using SSL.
-     */
-    private String sslPassword;
-    /**
-     * The path to the keystore.
-     */
-    private String sslKeystore;
-    /**
-     * If this option is true, Jetty JMX support will be enabled for this
-     * endpoint. See Jetty JMX support for more details.
-     */
-    private Boolean enableJmx = false;
-    /**
-     * To set a value for minimum number of threads in server thread pool.
-     * MaxThreads/minThreads or threadPool fields are required due to switch to
-     * Jetty9. The default values for minThreads is 1.
-     */
-    private Integer minThreads;
-    /**
-     * To set a value for maximum number of threads in server thread pool.
-     * MaxThreads/minThreads or threadPool fields are required due to switch to
-     * Jetty9. The default values for maxThreads is 1 2 noCores.
-     */
-    private Integer maxThreads;
-    /**
-     * To use a custom thread pool for the server. MaxThreads/minThreads or
-     * threadPool fields are required due to switch to Jetty9. The option is a
-     * org.eclipse.jetty.util.thread.ThreadPool type.
-     */
-    private String threadPool;
-    /**
-     * To configure security using SSLContextParameters. The option is a
-     * org.apache.camel.support.jsse.SSLContextParameters type.
-     */
-    private String sslContextParameters;
-    /**
-     * Enable usage of global SSL context parameters.
-     */
-    private Boolean useGlobalSslContextParameters = false;
-    /**
      * To configure a map which contains custom WebSocketFactory for sub
      * protocols. The key in the map is the sub protocol. The default key is
      * reserved for the default implementation.
      */
     private Map<String, WebSocketFactory> socketFactory;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
+    /**
+     * Set a resource path for static resources (such as .html files etc). The
+     * resources can be loaded from classpath, if you prefix with classpath:,
+     * otherwise the resources is loaded from file system or from JAR files. For
+     * example to load from root classpath use classpath:., or
+     * classpath:WEB-INF/static If not configured (eg null) then no static
+     * resource is in use.
+     */
+    private String staticResources;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -123,22 +83,54 @@ public class WebsocketComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
-
-    public String getStaticResources() {
-        return staticResources;
-    }
-
-    public void setStaticResources(String staticResources) {
-        this.staticResources = staticResources;
-    }
+    private Boolean basicPropertyBinding = false;
+    /**
+     * If this option is true, Jetty JMX support will be enabled for this
+     * endpoint. See Jetty JMX support for more details.
+     */
+    private Boolean enableJmx = false;
+    /**
+     * To set a value for maximum number of threads in server thread pool.
+     * MaxThreads/minThreads or threadPool fields are required due to switch to
+     * Jetty9. The default values for maxThreads is 1 2 noCores.
+     */
+    private Integer maxThreads;
+    /**
+     * To set a value for minimum number of threads in server thread pool.
+     * MaxThreads/minThreads or threadPool fields are required due to switch to
+     * Jetty9. The default values for minThreads is 1.
+     */
+    private Integer minThreads;
+    /**
+     * To use a custom thread pool for the server. MaxThreads/minThreads or
+     * threadPool fields are required due to switch to Jetty9. The option is a
+     * org.eclipse.jetty.util.thread.ThreadPool type.
+     */
+    private String threadPool;
+    /**
+     * To configure security using SSLContextParameters. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private String sslContextParameters;
+    /**
+     * The password for the keystore when using SSL.
+     */
+    private String sslKeyPassword;
+    /**
+     * The path to the keystore.
+     */
+    private String sslKeystore;
+    /**
+     * The password when using SSL.
+     */
+    private String sslPassword;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
 
     public String getHost() {
         return host;
@@ -156,28 +148,44 @@ public class WebsocketComponentConfiguration
         this.port = port;
     }
 
-    public String getSslKeyPassword() {
-        return sslKeyPassword;
+    public Map<String, WebSocketFactory> getSocketFactory() {
+        return socketFactory;
     }
 
-    public void setSslKeyPassword(String sslKeyPassword) {
-        this.sslKeyPassword = sslKeyPassword;
+    public void setSocketFactory(Map<String, WebSocketFactory> socketFactory) {
+        this.socketFactory = socketFactory;
     }
 
-    public String getSslPassword() {
-        return sslPassword;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setSslPassword(String sslPassword) {
-        this.sslPassword = sslPassword;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public String getSslKeystore() {
-        return sslKeystore;
+    public String getStaticResources() {
+        return staticResources;
     }
 
-    public void setSslKeystore(String sslKeystore) {
-        this.sslKeystore = sslKeystore;
+    public void setStaticResources(String staticResources) {
+        this.staticResources = staticResources;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public Boolean getEnableJmx() {
@@ -188,20 +196,20 @@ public class WebsocketComponentConfiguration
         this.enableJmx = enableJmx;
     }
 
-    public Integer getMinThreads() {
-        return minThreads;
-    }
-
-    public void setMinThreads(Integer minThreads) {
-        this.minThreads = minThreads;
-    }
-
     public Integer getMaxThreads() {
         return maxThreads;
     }
 
     public void setMaxThreads(Integer maxThreads) {
         this.maxThreads = maxThreads;
+    }
+
+    public Integer getMinThreads() {
+        return minThreads;
+    }
+
+    public void setMinThreads(Integer minThreads) {
+        this.minThreads = minThreads;
     }
 
     public String getThreadPool() {
@@ -220,6 +228,30 @@ public class WebsocketComponentConfiguration
         this.sslContextParameters = sslContextParameters;
     }
 
+    public String getSslKeyPassword() {
+        return sslKeyPassword;
+    }
+
+    public void setSslKeyPassword(String sslKeyPassword) {
+        this.sslKeyPassword = sslKeyPassword;
+    }
+
+    public String getSslKeystore() {
+        return sslKeystore;
+    }
+
+    public void setSslKeystore(String sslKeystore) {
+        this.sslKeystore = sslKeystore;
+    }
+
+    public String getSslPassword() {
+        return sslPassword;
+    }
+
+    public void setSslPassword(String sslPassword) {
+        this.sslPassword = sslPassword;
+    }
+
     public Boolean getUseGlobalSslContextParameters() {
         return useGlobalSslContextParameters;
     }
@@ -227,37 +259,5 @@ public class WebsocketComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public Map<String, WebSocketFactory> getSocketFactory() {
-        return socketFactory;
-    }
-
-    public void setSocketFactory(Map<String, WebSocketFactory> socketFactory) {
-        this.socketFactory = socketFactory;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 }

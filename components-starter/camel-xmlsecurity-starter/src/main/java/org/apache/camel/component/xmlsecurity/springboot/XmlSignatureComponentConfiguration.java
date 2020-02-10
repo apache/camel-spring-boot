@@ -48,21 +48,6 @@ public class XmlSignatureComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a shared XmlSignerConfiguration configuration to use as base for
-     * configuring endpoints.
-     */
-    private XmlSignerConfigurationNestedConfiguration signerConfiguration;
-    /**
-     * To use a shared XmlVerifierConfiguration configuration to use as base for
-     * configuring endpoints.
-     */
-    private XmlVerifierConfigurationNestedConfiguration verifierConfiguration;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -73,6 +58,37 @@ public class XmlSignatureComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a shared XmlSignerConfiguration configuration to use as base for
+     * configuring endpoints.
+     */
+    private XmlSignerConfigurationNestedConfiguration signerConfiguration;
+    /**
+     * To use a shared XmlVerifierConfiguration configuration to use as base for
+     * configuring endpoints.
+     */
+    private XmlVerifierConfigurationNestedConfiguration verifierConfiguration;
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
 
     public XmlSignerConfigurationNestedConfiguration getSignerConfiguration() {
         return signerConfiguration;
@@ -92,22 +108,6 @@ public class XmlSignatureComponentConfiguration
         this.verifierConfiguration = verifierConfiguration;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
     public static class XmlSignerConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.xmlsecurity.processor.XmlSignerConfiguration.class;
         /**
@@ -125,7 +125,6 @@ public class XmlSignatureComponentConfiguration
          * inclusiveNamespacePrefixes) to create a canonicalization method.
          */
         private AlgorithmMethod canonicalizationMethod;
-        private String canonicalizationMethodName;
         /**
          * Sets the content object Id attribute value. By default a UUID is
          * generated. If you set the null value, then a new UUID will be
@@ -164,7 +163,6 @@ public class XmlSignatureComponentConfiguration
          * from a Java keystore.
          */
         private KeyAccessor keyAccessor;
-        private String keyAccessorName;
         /**
          * Local name of the parent element to which the XML signature element
          * will be added. Only relevant for enveloped XML signature.
@@ -221,7 +219,6 @@ public class XmlSignatureComponentConfiguration
          * implements the XmlSignatureProperties interface.
          */
         private XmlSignatureProperties properties;
-        private String propertiesName;
         /**
          * Signature algorithm. Default value is
          * http://www.w3.org/2000/09/xmldsig#rsa-sha1.
@@ -243,7 +240,6 @@ public class XmlSignatureComponentConfiguration
          * the transform methods.
          */
         private List transformMethods;
-        private String transformMethodsName;
         /**
          * Define the elements which are signed in the detached case via XPATH
          * expressions to ID attributes (attributes of type ID). For each
@@ -331,15 +327,6 @@ public class XmlSignatureComponentConfiguration
             this.canonicalizationMethod = canonicalizationMethod;
         }
 
-        public String getCanonicalizationMethodName() {
-            return canonicalizationMethodName;
-        }
-
-        public void setCanonicalizationMethodName(
-                String canonicalizationMethodName) {
-            this.canonicalizationMethodName = canonicalizationMethodName;
-        }
-
         public String getContentObjectId() {
             return contentObjectId;
         }
@@ -378,14 +365,6 @@ public class XmlSignatureComponentConfiguration
 
         public void setKeyAccessor(KeyAccessor keyAccessor) {
             this.keyAccessor = keyAccessor;
-        }
-
-        public String getKeyAccessorName() {
-            return keyAccessorName;
-        }
-
-        public void setKeyAccessorName(String keyAccessorName) {
-            this.keyAccessorName = keyAccessorName;
         }
 
         public String getParentLocalName() {
@@ -445,14 +424,6 @@ public class XmlSignatureComponentConfiguration
             this.properties = properties;
         }
 
-        public String getPropertiesName() {
-            return propertiesName;
-        }
-
-        public void setPropertiesName(String propertiesName) {
-            this.propertiesName = propertiesName;
-        }
-
         public String getSignatureAlgorithm() {
             return signatureAlgorithm;
         }
@@ -475,14 +446,6 @@ public class XmlSignatureComponentConfiguration
 
         public void setTransformMethods(List transformMethods) {
             this.transformMethods = transformMethods;
-        }
-
-        public String getTransformMethodsName() {
-            return transformMethodsName;
-        }
-
-        public void setTransformMethodsName(String transformMethodsName) {
-            this.transformMethodsName = transformMethodsName;
         }
 
         public List getXpathsToIdAttributes() {
@@ -604,7 +567,6 @@ public class XmlSignatureComponentConfiguration
          * thrown. For more detailed information, see the JavaDoc.
          */
         private ValidationFailedHandler validationFailedHandler;
-        private String validationFailedHandlerName;
         /**
          * Bean which maps the XML signature to the output-message after the
          * validation. How this mapping should be done can be configured by the
@@ -738,15 +700,6 @@ public class XmlSignatureComponentConfiguration
         public void setValidationFailedHandler(
                 ValidationFailedHandler validationFailedHandler) {
             this.validationFailedHandler = validationFailedHandler;
-        }
-
-        public String getValidationFailedHandlerName() {
-            return validationFailedHandlerName;
-        }
-
-        public void setValidationFailedHandlerName(
-                String validationFailedHandlerName) {
-            this.validationFailedHandlerName = validationFailedHandlerName;
         }
 
         public XmlSignature2Message getXmlSignature2Message() {

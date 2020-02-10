@@ -45,9 +45,14 @@ public class EhcacheComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Sets the global component configuration
+     * The default cache configuration to be used to create caches. The option
+     * is a org.ehcache.config.CacheConfiguration type.
      */
-    private EhcacheConfigurationNestedConfiguration configuration;
+    private String cacheConfiguration;
+    /**
+     * URI pointing to the Ehcache XML configuration file's location
+     */
+    private String cacheConfigurationUri;
     /**
      * The cache manager. The option is a org.ehcache.CacheManager type.
      */
@@ -58,23 +63,18 @@ public class EhcacheComponentConfiguration
      */
     private String cacheManagerConfiguration;
     /**
-     * The default cache configuration to be used to create caches. The option
-     * is a org.ehcache.config.CacheConfiguration type.
-     */
-    private String cacheConfiguration;
-    /**
      * A map of caches configurations to be used to create caches.
      */
     private Map<String, CacheConfiguration> cachesConfigurations;
     /**
-     * URI pointing to the Ehcache XML configuration file's location
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String cacheConfigurationUri;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -87,22 +87,29 @@ public class EhcacheComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * Sets the global component configuration
+     */
+    private EhcacheConfigurationNestedConfiguration configuration;
 
-    public EhcacheConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getCacheConfiguration() {
+        return cacheConfiguration;
     }
 
-    public void setConfiguration(
-            EhcacheConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setCacheConfiguration(String cacheConfiguration) {
+        this.cacheConfiguration = cacheConfiguration;
+    }
+
+    public String getCacheConfigurationUri() {
+        return cacheConfigurationUri;
+    }
+
+    public void setCacheConfigurationUri(String cacheConfigurationUri) {
+        this.cacheConfigurationUri = cacheConfigurationUri;
     }
 
     public String getCacheManager() {
@@ -121,14 +128,6 @@ public class EhcacheComponentConfiguration
         this.cacheManagerConfiguration = cacheManagerConfiguration;
     }
 
-    public String getCacheConfiguration() {
-        return cacheConfiguration;
-    }
-
-    public void setCacheConfiguration(String cacheConfiguration) {
-        this.cacheConfiguration = cacheConfiguration;
-    }
-
     public Map<String, CacheConfiguration> getCachesConfigurations() {
         return cachesConfigurations;
     }
@@ -138,20 +137,12 @@ public class EhcacheComponentConfiguration
         this.cachesConfigurations = cachesConfigurations;
     }
 
-    public String getCacheConfigurationUri() {
-        return cacheConfigurationUri;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setCacheConfigurationUri(String cacheConfigurationUri) {
-        this.cacheConfigurationUri = cacheConfigurationUri;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -162,12 +153,21 @@ public class EhcacheComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public EhcacheConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            EhcacheConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public static class EhcacheConfigurationNestedConfiguration {

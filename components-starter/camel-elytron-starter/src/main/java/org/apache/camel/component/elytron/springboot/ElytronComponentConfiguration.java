@@ -38,22 +38,57 @@ public class ElytronComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Definition of Builder, which will be used for creation of security
-     * domain. The option is a
-     * org.wildfly.security.auth.server.SecurityDomain.Builder type.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String securityDomainBuilder;
+    private Boolean bridgeErrorHandler = false;
     /**
-     * Name of the mechanism, which will be used for selection of authentication
-     * mechanism.
+     * If enabled and an Exchange failed processing on the consumer side the
+     * response's body won't contain the exception's stack trace.
      */
-    private String mechanismName = "BEARER_TOKEN";
+    private Boolean muteException = false;
+    /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
     /**
      * Elytron security provider, has to support mechanism from parameter
      * mechanismName. The option is a
      * org.wildfly.security.WildFlyElytronBaseProvider type.
      */
     private String elytronProvider;
+    /**
+     * To configure common options, such as thread pools. The option is a
+     * org.apache.camel.component.undertow.UndertowHostOptions type.
+     */
+    private String hostOptions;
+    /**
+     * Name of the mechanism, which will be used for selection of authentication
+     * mechanism.
+     */
+    private String mechanismName = "BEARER_TOKEN";
+    /**
+     * Definition of Builder, which will be used for creation of security
+     * domain. The option is a
+     * org.wildfly.security.auth.server.SecurityDomain.Builder type.
+     */
+    private String securityDomainBuilder;
     /**
      * To use a custom HttpBinding to control the mapping between Camel message
      * and HttpClient. The option is a
@@ -69,48 +104,53 @@ public class ElytronComponentConfiguration
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
-    /**
-     * To configure common options, such as thread pools. The option is a
-     * org.apache.camel.component.undertow.UndertowHostOptions type.
-     */
-    private String hostOptions;
-    /**
-     * If enabled and an Exchange failed processing on the consumer side the
-     * response's body won't contain the exception's stack trace.
-     */
-    private Boolean muteException = false;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
-    /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
 
-    public String getSecurityDomainBuilder() {
-        return securityDomainBuilder;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setSecurityDomainBuilder(String securityDomainBuilder) {
-        this.securityDomainBuilder = securityDomainBuilder;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getMuteException() {
+        return muteException;
+    }
+
+    public void setMuteException(Boolean muteException) {
+        this.muteException = muteException;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getElytronProvider() {
+        return elytronProvider;
+    }
+
+    public void setElytronProvider(String elytronProvider) {
+        this.elytronProvider = elytronProvider;
+    }
+
+    public String getHostOptions() {
+        return hostOptions;
+    }
+
+    public void setHostOptions(String hostOptions) {
+        this.hostOptions = hostOptions;
     }
 
     public String getMechanismName() {
@@ -121,12 +161,12 @@ public class ElytronComponentConfiguration
         this.mechanismName = mechanismName;
     }
 
-    public String getElytronProvider() {
-        return elytronProvider;
+    public String getSecurityDomainBuilder() {
+        return securityDomainBuilder;
     }
 
-    public void setElytronProvider(String elytronProvider) {
-        this.elytronProvider = elytronProvider;
+    public void setSecurityDomainBuilder(String securityDomainBuilder) {
+        this.securityDomainBuilder = securityDomainBuilder;
     }
 
     public String getUndertowHttpBinding() {
@@ -152,45 +192,5 @@ public class ElytronComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public String getHostOptions() {
-        return hostOptions;
-    }
-
-    public void setHostOptions(String hostOptions) {
-        this.hostOptions = hostOptions;
-    }
-
-    public Boolean getMuteException() {
-        return muteException;
-    }
-
-    public void setMuteException(Boolean muteException) {
-        this.muteException = muteException;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 }

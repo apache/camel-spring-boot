@@ -53,78 +53,26 @@ public class SalesforceComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Explicit authentication method to be used, one of USERNAME_PASSWORD,
-     * REFRESH_TOKEN or JWT. Salesforce component can auto-determine the
-     * authentication method to use from the properties set, set this property
-     * to eliminate any ambiguity.
+     * Connection timeout used by the HttpClient when connecting to the
+     * Salesforce server.
      */
-    private AuthenticationType authenticationType;
+    private Long httpClientConnectionTimeout = 60000L;
     /**
-     * All authentication configuration in one nested bean, all properties set
-     * there can be set directly on the component as well
+     * Timeout used by the HttpClient when waiting for response from the
+     * Salesforce server.
      */
-    private SalesforceLoginConfigNestedConfiguration loginConfig;
+    private Long httpClientIdleTimeout = 10000L;
     /**
-     * URL of the Salesforce instance used after authentication, by default
-     * received from Salesforce on successful authentication
+     * Max content length of an HTTP response.
      */
-    private String instanceUrl;
+    private Integer httpMaxContentLength;
     /**
-     * URL of the Salesforce instance used for authentication, by default set to
-     * https://login.salesforce.com
+     * In what packages are the generated DTO classes. Typically the classes
+     * would be generated using camel-salesforce-maven-plugin. Set it if using
+     * the generated DTOs to gain the benefit of using short SObject names in
+     * parameters/header values.
      */
-    private String loginUrl = "https://login.salesforce.com";
-    /**
-     * OAuth Consumer Key of the connected app configured in the Salesforce
-     * instance setup. Typically a connected app needs to be configured but one
-     * can be provided by installing a package.
-     */
-    private String clientId;
-    /**
-     * OAuth Consumer Secret of the connected app configured in the Salesforce
-     * instance setup.
-     */
-    private String clientSecret;
-    /**
-     * KeyStore parameters to use in OAuth JWT flow. The KeyStore should contain
-     * only one entry with private key and certificate. Salesforce does not
-     * verify the certificate chain, so this can easily be a selfsigned
-     * certificate. Make sure that you upload the certificate to the
-     * corresponding connected app. The option is a
-     * org.apache.camel.support.jsse.KeyStoreParameters type.
-     */
-    private String keystore;
-    /**
-     * Refresh token already obtained in the refresh token OAuth flow. One needs
-     * to setup a web application and configure a callback URL to receive the
-     * refresh token, or configure using the builtin callback at
-     * https://login.salesforce.com/services/oauth2/success or
-     * https://test.salesforce.com/services/oauth2/success and then retrive the
-     * refresh_token from the URL at the end of the flow. Note that in
-     * development organizations Salesforce allows hosting the callback web
-     * application at localhost.
-     */
-    private String refreshToken;
-    /**
-     * Username used in OAuth flow to gain access to access token. It's easy to
-     * get started with password OAuth flow, but in general one should avoid it
-     * as it is deemed less secure than other flows.
-     */
-    private String userName;
-    /**
-     * Password used in OAuth flow to gain access to access token. It's easy to
-     * get started with password OAuth flow, but in general one should avoid it
-     * as it is deemed less secure than other flows. Make sure that you append
-     * security token to the end of the password if using one.
-     */
-    private String password;
-    /**
-     * If set to true prevents the component from authenticating to Salesforce
-     * with the start of the component. You would generally set this to the
-     * (default) false and authenticate early and be immediately aware of any
-     * authentication issues.
-     */
-    private Boolean lazyLogin = false;
+    private String[] packages;
     /**
      * Global endpoint configuration - use to set values that are common to all
      * endpoints
@@ -143,89 +91,14 @@ public class SalesforceComponentConfiguration
      */
     private Map<String, Object> longPollingTransportProperties;
     /**
-     * SSL parameters to use, see SSLContextParameters class for all available
-     * options. The option is a
-     * org.apache.camel.support.jsse.SSLContextParameters type.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String sslContextParameters;
-    /**
-     * Enable usage of global SSL context parameters
-     */
-    private Boolean useGlobalSslContextParameters = false;
-    /**
-     * Timeout used by the HttpClient when waiting for response from the
-     * Salesforce server.
-     */
-    private Long httpClientIdleTimeout = 10000L;
-    /**
-     * Connection timeout used by the HttpClient when connecting to the
-     * Salesforce server.
-     */
-    private Long httpClientConnectionTimeout = 60000L;
-    /**
-     * Max content length of an HTTP response.
-     */
-    private Integer httpMaxContentLength;
-    /**
-     * Hostname of the HTTP proxy server to use.
-     */
-    private String httpProxyHost;
-    /**
-     * Port number of the HTTP proxy server to use.
-     */
-    private Integer httpProxyPort;
-    /**
-     * Username to use to authenticate against the HTTP proxy server.
-     */
-    private String httpProxyUsername;
-    /**
-     * Password to use to authenticate against the HTTP proxy server.
-     */
-    private String httpProxyPassword;
-    /**
-     * If set to true the configures the HTTP proxy to use as a SOCKS4 proxy.
-     */
-    private Boolean isHttpProxySocks4 = false;
-    /**
-     * If set to false disables the use of TLS when accessing the HTTP proxy.
-     */
-    private Boolean isHttpProxySecure = true;
-    /**
-     * A list of addresses for which HTTP proxy server should be used.
-     */
-    private Set<String> httpProxyIncludedAddresses;
-    /**
-     * A list of addresses for which HTTP proxy server should not be used.
-     */
-    private Set<String> httpProxyExcludedAddresses;
-    /**
-     * Used in authentication against the HTTP proxy server, needs to match the
-     * URI of the proxy server in order for the httpProxyUsername and
-     * httpProxyPassword to be used for authentication.
-     */
-    private String httpProxyAuthUri;
-    /**
-     * Realm of the proxy server, used in preemptive Basic/Digest authentication
-     * methods against the HTTP proxy server.
-     */
-    private String httpProxyRealm;
-    /**
-     * If set to true Digest authentication will be used when authenticating to
-     * the HTTP proxy, otherwise Basic authorization method will be used
-     */
-    private Boolean httpProxyUseDigestAuth = false;
-    /**
-     * In what packages are the generated DTO classes. Typically the classes
-     * would be generated using camel-salesforce-maven-plugin. Set it if using
-     * the generated DTOs to gain the benefit of using short SObject names in
-     * parameters/header values.
-     */
-    private String[] packages;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -238,102 +111,172 @@ public class SalesforceComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * A list of addresses for which HTTP proxy server should not be used.
+     */
+    private Set<String> httpProxyExcludedAddresses;
+    /**
+     * Hostname of the HTTP proxy server to use.
+     */
+    private String httpProxyHost;
+    /**
+     * A list of addresses for which HTTP proxy server should be used.
+     */
+    private Set<String> httpProxyIncludedAddresses;
+    /**
+     * Port number of the HTTP proxy server to use.
+     */
+    private Integer httpProxyPort;
+    /**
+     * If set to true the configures the HTTP proxy to use as a SOCKS4 proxy.
+     */
+    private Boolean isHttpProxySocks4 = false;
+    /**
+     * Explicit authentication method to be used, one of USERNAME_PASSWORD,
+     * REFRESH_TOKEN or JWT. Salesforce component can auto-determine the
+     * authentication method to use from the properties set, set this property
+     * to eliminate any ambiguity.
+     */
+    private AuthenticationType authenticationType;
+    /**
+     * OAuth Consumer Key of the connected app configured in the Salesforce
+     * instance setup. Typically a connected app needs to be configured but one
+     * can be provided by installing a package.
+     */
+    private String clientId;
+    /**
+     * OAuth Consumer Secret of the connected app configured in the Salesforce
+     * instance setup.
+     */
+    private String clientSecret;
+    /**
+     * Used in authentication against the HTTP proxy server, needs to match the
+     * URI of the proxy server in order for the httpProxyUsername and
+     * httpProxyPassword to be used for authentication.
+     */
+    private String httpProxyAuthUri;
+    /**
+     * Password to use to authenticate against the HTTP proxy server.
+     */
+    private String httpProxyPassword;
+    /**
+     * Realm of the proxy server, used in preemptive Basic/Digest authentication
+     * methods against the HTTP proxy server.
+     */
+    private String httpProxyRealm;
+    /**
+     * If set to true Digest authentication will be used when authenticating to
+     * the HTTP proxy, otherwise Basic authorization method will be used
+     */
+    private Boolean httpProxyUseDigestAuth = false;
+    /**
+     * Username to use to authenticate against the HTTP proxy server.
+     */
+    private String httpProxyUsername;
+    /**
+     * URL of the Salesforce instance used after authentication, by default
+     * received from Salesforce on successful authentication
+     */
+    private String instanceUrl;
+    /**
+     * If set to false disables the use of TLS when accessing the HTTP proxy.
+     */
+    private Boolean isHttpProxySecure = true;
+    /**
+     * KeyStore parameters to use in OAuth JWT flow. The KeyStore should contain
+     * only one entry with private key and certificate. Salesforce does not
+     * verify the certificate chain, so this can easily be a selfsigned
+     * certificate. Make sure that you upload the certificate to the
+     * corresponding connected app. The option is a
+     * org.apache.camel.support.jsse.KeyStoreParameters type.
+     */
+    private String keystore;
+    /**
+     * If set to true prevents the component from authenticating to Salesforce
+     * with the start of the component. You would generally set this to the
+     * (default) false and authenticate early and be immediately aware of any
+     * authentication issues.
+     */
+    private Boolean lazyLogin = false;
+    /**
+     * All authentication configuration in one nested bean, all properties set
+     * there can be set directly on the component as well
+     */
+    private SalesforceLoginConfigNestedConfiguration loginConfig;
+    /**
+     * URL of the Salesforce instance used for authentication, by default set to
+     * https://login.salesforce.com
+     */
+    private String loginUrl = "https://login.salesforce.com";
+    /**
+     * Password used in OAuth flow to gain access to access token. It's easy to
+     * get started with password OAuth flow, but in general one should avoid it
+     * as it is deemed less secure than other flows. Make sure that you append
+     * security token to the end of the password if using one.
+     */
+    private String password;
+    /**
+     * Refresh token already obtained in the refresh token OAuth flow. One needs
+     * to setup a web application and configure a callback URL to receive the
+     * refresh token, or configure using the builtin callback at
+     * https://login.salesforce.com/services/oauth2/success or
+     * https://test.salesforce.com/services/oauth2/success and then retrive the
+     * refresh_token from the URL at the end of the flow. Note that in
+     * development organizations Salesforce allows hosting the callback web
+     * application at localhost.
+     */
+    private String refreshToken;
+    /**
+     * SSL parameters to use, see SSLContextParameters class for all available
+     * options. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private String sslContextParameters;
+    /**
+     * Enable usage of global SSL context parameters
+     */
+    private Boolean useGlobalSslContextParameters = false;
+    /**
+     * Username used in OAuth flow to gain access to access token. It's easy to
+     * get started with password OAuth flow, but in general one should avoid it
+     * as it is deemed less secure than other flows.
+     */
+    private String userName;
 
-    public AuthenticationType getAuthenticationType() {
-        return authenticationType;
+    public Long getHttpClientConnectionTimeout() {
+        return httpClientConnectionTimeout;
     }
 
-    public void setAuthenticationType(AuthenticationType authenticationType) {
-        this.authenticationType = authenticationType;
+    public void setHttpClientConnectionTimeout(Long httpClientConnectionTimeout) {
+        this.httpClientConnectionTimeout = httpClientConnectionTimeout;
     }
 
-    public SalesforceLoginConfigNestedConfiguration getLoginConfig() {
-        return loginConfig;
+    public Long getHttpClientIdleTimeout() {
+        return httpClientIdleTimeout;
     }
 
-    public void setLoginConfig(
-            SalesforceLoginConfigNestedConfiguration loginConfig) {
-        this.loginConfig = loginConfig;
+    public void setHttpClientIdleTimeout(Long httpClientIdleTimeout) {
+        this.httpClientIdleTimeout = httpClientIdleTimeout;
     }
 
-    public String getInstanceUrl() {
-        return instanceUrl;
+    public Integer getHttpMaxContentLength() {
+        return httpMaxContentLength;
     }
 
-    public void setInstanceUrl(String instanceUrl) {
-        this.instanceUrl = instanceUrl;
+    public void setHttpMaxContentLength(Integer httpMaxContentLength) {
+        this.httpMaxContentLength = httpMaxContentLength;
     }
 
-    public String getLoginUrl() {
-        return loginUrl;
+    public String[] getPackages() {
+        return packages;
     }
 
-    public void setLoginUrl(String loginUrl) {
-        this.loginUrl = loginUrl;
-    }
-
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    public String getClientSecret() {
-        return clientSecret;
-    }
-
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
-    }
-
-    public String getKeystore() {
-        return keystore;
-    }
-
-    public void setKeystore(String keystore) {
-        this.keystore = keystore;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getLazyLogin() {
-        return lazyLogin;
-    }
-
-    public void setLazyLogin(Boolean lazyLogin) {
-        this.lazyLogin = lazyLogin;
+    public void setPackages(String[] packages) {
+        this.packages = packages;
     }
 
     public SalesforceEndpointConfigNestedConfiguration getConfig() {
@@ -361,102 +304,28 @@ public class SalesforceComponentConfiguration
         this.longPollingTransportProperties = longPollingTransportProperties;
     }
 
-    public String getSslContextParameters() {
-        return sslContextParameters;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
-        this.sslContextParameters = sslContextParameters;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public Boolean getUseGlobalSslContextParameters() {
-        return useGlobalSslContextParameters;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setUseGlobalSslContextParameters(
-            Boolean useGlobalSslContextParameters) {
-        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Long getHttpClientIdleTimeout() {
-        return httpClientIdleTimeout;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setHttpClientIdleTimeout(Long httpClientIdleTimeout) {
-        this.httpClientIdleTimeout = httpClientIdleTimeout;
-    }
-
-    public Long getHttpClientConnectionTimeout() {
-        return httpClientConnectionTimeout;
-    }
-
-    public void setHttpClientConnectionTimeout(Long httpClientConnectionTimeout) {
-        this.httpClientConnectionTimeout = httpClientConnectionTimeout;
-    }
-
-    public Integer getHttpMaxContentLength() {
-        return httpMaxContentLength;
-    }
-
-    public void setHttpMaxContentLength(Integer httpMaxContentLength) {
-        this.httpMaxContentLength = httpMaxContentLength;
-    }
-
-    public String getHttpProxyHost() {
-        return httpProxyHost;
-    }
-
-    public void setHttpProxyHost(String httpProxyHost) {
-        this.httpProxyHost = httpProxyHost;
-    }
-
-    public Integer getHttpProxyPort() {
-        return httpProxyPort;
-    }
-
-    public void setHttpProxyPort(Integer httpProxyPort) {
-        this.httpProxyPort = httpProxyPort;
-    }
-
-    public String getHttpProxyUsername() {
-        return httpProxyUsername;
-    }
-
-    public void setHttpProxyUsername(String httpProxyUsername) {
-        this.httpProxyUsername = httpProxyUsername;
-    }
-
-    public String getHttpProxyPassword() {
-        return httpProxyPassword;
-    }
-
-    public void setHttpProxyPassword(String httpProxyPassword) {
-        this.httpProxyPassword = httpProxyPassword;
-    }
-
-    public Boolean getIsHttpProxySocks4() {
-        return isHttpProxySocks4;
-    }
-
-    public void setIsHttpProxySocks4(Boolean isHttpProxySocks4) {
-        this.isHttpProxySocks4 = isHttpProxySocks4;
-    }
-
-    public Boolean getIsHttpProxySecure() {
-        return isHttpProxySecure;
-    }
-
-    public void setIsHttpProxySecure(Boolean isHttpProxySecure) {
-        this.isHttpProxySecure = isHttpProxySecure;
-    }
-
-    public Set<String> getHttpProxyIncludedAddresses() {
-        return httpProxyIncludedAddresses;
-    }
-
-    public void setHttpProxyIncludedAddresses(
-            Set<String> httpProxyIncludedAddresses) {
-        this.httpProxyIncludedAddresses = httpProxyIncludedAddresses;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public Set<String> getHttpProxyExcludedAddresses() {
@@ -468,12 +337,77 @@ public class SalesforceComponentConfiguration
         this.httpProxyExcludedAddresses = httpProxyExcludedAddresses;
     }
 
+    public String getHttpProxyHost() {
+        return httpProxyHost;
+    }
+
+    public void setHttpProxyHost(String httpProxyHost) {
+        this.httpProxyHost = httpProxyHost;
+    }
+
+    public Set<String> getHttpProxyIncludedAddresses() {
+        return httpProxyIncludedAddresses;
+    }
+
+    public void setHttpProxyIncludedAddresses(
+            Set<String> httpProxyIncludedAddresses) {
+        this.httpProxyIncludedAddresses = httpProxyIncludedAddresses;
+    }
+
+    public Integer getHttpProxyPort() {
+        return httpProxyPort;
+    }
+
+    public void setHttpProxyPort(Integer httpProxyPort) {
+        this.httpProxyPort = httpProxyPort;
+    }
+
+    public Boolean getIsHttpProxySocks4() {
+        return isHttpProxySocks4;
+    }
+
+    public void setIsHttpProxySocks4(Boolean isHttpProxySocks4) {
+        this.isHttpProxySocks4 = isHttpProxySocks4;
+    }
+
+    public AuthenticationType getAuthenticationType() {
+        return authenticationType;
+    }
+
+    public void setAuthenticationType(AuthenticationType authenticationType) {
+        this.authenticationType = authenticationType;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
     public String getHttpProxyAuthUri() {
         return httpProxyAuthUri;
     }
 
     public void setHttpProxyAuthUri(String httpProxyAuthUri) {
         this.httpProxyAuthUri = httpProxyAuthUri;
+    }
+
+    public String getHttpProxyPassword() {
+        return httpProxyPassword;
+    }
+
+    public void setHttpProxyPassword(String httpProxyPassword) {
+        this.httpProxyPassword = httpProxyPassword;
     }
 
     public String getHttpProxyRealm() {
@@ -492,181 +426,102 @@ public class SalesforceComponentConfiguration
         this.httpProxyUseDigestAuth = httpProxyUseDigestAuth;
     }
 
-    public String[] getPackages() {
-        return packages;
+    public String getHttpProxyUsername() {
+        return httpProxyUsername;
     }
 
-    public void setPackages(String[] packages) {
-        this.packages = packages;
+    public void setHttpProxyUsername(String httpProxyUsername) {
+        this.httpProxyUsername = httpProxyUsername;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public String getInstanceUrl() {
+        return instanceUrl;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setInstanceUrl(String instanceUrl) {
+        this.instanceUrl = instanceUrl;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public Boolean getIsHttpProxySecure() {
+        return isHttpProxySecure;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setIsHttpProxySecure(Boolean isHttpProxySecure) {
+        this.isHttpProxySecure = isHttpProxySecure;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public String getKeystore() {
+        return keystore;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setKeystore(String keystore) {
+        this.keystore = keystore;
     }
 
-    public static class SalesforceLoginConfigNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.salesforce.SalesforceLoginConfig.class;
-        /**
-         * OAuth Consumer Key of the connected app configured in the Salesforce
-         * instance setup. Typically a connected app needs to be configured but
-         * one can be provided by installing a package.
-         */
-        private String clientId;
-        /**
-         * OAuth Consumer Secret of the connected app configured in the
-         * Salesforce instance setup.
-         */
-        private String clientSecret;
-        /**
-         * URL of the Salesforce instance used after authentication, by default
-         * received from Salesforce on successful authentication
-         */
-        private String instanceUrl;
-        /**
-         * KeyStore parameters to use in OAuth JWT flow. The KeyStore should
-         * contain only one entry with private key and certificate. Salesforce
-         * does not verify the certificate chain, so this can easily be a
-         * selfsigned certificate. Make sure that you upload the certificate to
-         * the corresponding connected app.
-         */
-        private KeyStoreParameters keystore;
-        /**
-         * If set to true prevents the component from authenticating to
-         * Salesforce with the start of the component. You would generally set
-         * this to the (default) false and authenticate early and be immediately
-         * aware of any authentication issues.
-         */
-        private Boolean lazyLogin = false;
-        /**
-         * URL of the Salesforce instance used for authentication, by default
-         * set to https://login.salesforce.com
-         */
-        private String loginUrl = "https://login.salesforce.com";
-        /**
-         * Password used in OAuth flow to gain access to access token. It's easy
-         * to get started with password OAuth flow, but in general one should
-         * avoid it as it is deemed less secure than other flows. Make sure that
-         * you append security token to the end of the password if using one.
-         */
-        private String password;
-        /**
-         * Refresh token already obtained in the refresh token OAuth flow. One
-         * needs to setup a web application and configure a callback URL to
-         * receive the refresh token, or configure using the builtin callback at
-         * https://login.salesforce.com/services/oauth2/success or
-         * https://test.salesforce.com/services/oauth2/success and then retrive
-         * the refresh_token from the URL at the end of the flow. Note that in
-         * development organizations Salesforce allows hosting the callback web
-         * application at localhost.
-         */
-        private String refreshToken;
-        private AuthenticationType type;
-        /**
-         * Username used in OAuth flow to gain access to access token. It's easy
-         * to get started with password OAuth flow, but in general one should
-         * avoid it as it is deemed less secure than other flows.
-         */
-        private String userName;
+    public Boolean getLazyLogin() {
+        return lazyLogin;
+    }
 
-        public String getClientId() {
-            return clientId;
-        }
+    public void setLazyLogin(Boolean lazyLogin) {
+        this.lazyLogin = lazyLogin;
+    }
 
-        public void setClientId(String clientId) {
-            this.clientId = clientId;
-        }
+    public SalesforceLoginConfigNestedConfiguration getLoginConfig() {
+        return loginConfig;
+    }
 
-        public String getClientSecret() {
-            return clientSecret;
-        }
+    public void setLoginConfig(
+            SalesforceLoginConfigNestedConfiguration loginConfig) {
+        this.loginConfig = loginConfig;
+    }
 
-        public void setClientSecret(String clientSecret) {
-            this.clientSecret = clientSecret;
-        }
+    public String getLoginUrl() {
+        return loginUrl;
+    }
 
-        public String getInstanceUrl() {
-            return instanceUrl;
-        }
+    public void setLoginUrl(String loginUrl) {
+        this.loginUrl = loginUrl;
+    }
 
-        public void setInstanceUrl(String instanceUrl) {
-            this.instanceUrl = instanceUrl;
-        }
+    public String getPassword() {
+        return password;
+    }
 
-        public KeyStoreParameters getKeystore() {
-            return keystore;
-        }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-        public void setKeystore(KeyStoreParameters keystore) {
-            this.keystore = keystore;
-        }
+    public String getRefreshToken() {
+        return refreshToken;
+    }
 
-        public Boolean getLazyLogin() {
-            return lazyLogin;
-        }
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 
-        public void setLazyLogin(Boolean lazyLogin) {
-            this.lazyLogin = lazyLogin;
-        }
+    public String getSslContextParameters() {
+        return sslContextParameters;
+    }
 
-        public String getLoginUrl() {
-            return loginUrl;
-        }
+    public void setSslContextParameters(String sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
+    }
 
-        public void setLoginUrl(String loginUrl) {
-            this.loginUrl = loginUrl;
-        }
+    public Boolean getUseGlobalSslContextParameters() {
+        return useGlobalSslContextParameters;
+    }
 
-        public String getPassword() {
-            return password;
-        }
+    public void setUseGlobalSslContextParameters(
+            Boolean useGlobalSslContextParameters) {
+        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
+    }
 
-        public void setPassword(String password) {
-            this.password = password;
-        }
+    public String getUserName() {
+        return userName;
+    }
 
-        public String getRefreshToken() {
-            return refreshToken;
-        }
-
-        public void setRefreshToken(String refreshToken) {
-            this.refreshToken = refreshToken;
-        }
-
-        public AuthenticationType getType() {
-            return type;
-        }
-
-        public void setType(AuthenticationType type) {
-            this.type = type;
-        }
-
-        public String getUserName() {
-            return userName;
-        }
-
-        public void setUserName(String userName) {
-            this.userName = userName;
-        }
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public static class SalesforceEndpointConfigNestedConfiguration {
@@ -1216,6 +1071,151 @@ public class SalesforceComponentConfiguration
 
         public void setUpdateTopic(Boolean updateTopic) {
             this.updateTopic = updateTopic;
+        }
+    }
+
+    public static class SalesforceLoginConfigNestedConfiguration {
+        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.salesforce.SalesforceLoginConfig.class;
+        /**
+         * OAuth Consumer Key of the connected app configured in the Salesforce
+         * instance setup. Typically a connected app needs to be configured but
+         * one can be provided by installing a package.
+         */
+        private String clientId;
+        /**
+         * OAuth Consumer Secret of the connected app configured in the
+         * Salesforce instance setup.
+         */
+        private String clientSecret;
+        /**
+         * URL of the Salesforce instance used after authentication, by default
+         * received from Salesforce on successful authentication
+         */
+        private String instanceUrl;
+        /**
+         * KeyStore parameters to use in OAuth JWT flow. The KeyStore should
+         * contain only one entry with private key and certificate. Salesforce
+         * does not verify the certificate chain, so this can easily be a
+         * selfsigned certificate. Make sure that you upload the certificate to
+         * the corresponding connected app.
+         */
+        private KeyStoreParameters keystore;
+        /**
+         * If set to true prevents the component from authenticating to
+         * Salesforce with the start of the component. You would generally set
+         * this to the (default) false and authenticate early and be immediately
+         * aware of any authentication issues.
+         */
+        private Boolean lazyLogin = false;
+        /**
+         * URL of the Salesforce instance used for authentication, by default
+         * set to https://login.salesforce.com
+         */
+        private String loginUrl = "https://login.salesforce.com";
+        /**
+         * Password used in OAuth flow to gain access to access token. It's easy
+         * to get started with password OAuth flow, but in general one should
+         * avoid it as it is deemed less secure than other flows. Make sure that
+         * you append security token to the end of the password if using one.
+         */
+        private String password;
+        /**
+         * Refresh token already obtained in the refresh token OAuth flow. One
+         * needs to setup a web application and configure a callback URL to
+         * receive the refresh token, or configure using the builtin callback at
+         * https://login.salesforce.com/services/oauth2/success or
+         * https://test.salesforce.com/services/oauth2/success and then retrive
+         * the refresh_token from the URL at the end of the flow. Note that in
+         * development organizations Salesforce allows hosting the callback web
+         * application at localhost.
+         */
+        private String refreshToken;
+        private AuthenticationType type;
+        /**
+         * Username used in OAuth flow to gain access to access token. It's easy
+         * to get started with password OAuth flow, but in general one should
+         * avoid it as it is deemed less secure than other flows.
+         */
+        private String userName;
+
+        public String getClientId() {
+            return clientId;
+        }
+
+        public void setClientId(String clientId) {
+            this.clientId = clientId;
+        }
+
+        public String getClientSecret() {
+            return clientSecret;
+        }
+
+        public void setClientSecret(String clientSecret) {
+            this.clientSecret = clientSecret;
+        }
+
+        public String getInstanceUrl() {
+            return instanceUrl;
+        }
+
+        public void setInstanceUrl(String instanceUrl) {
+            this.instanceUrl = instanceUrl;
+        }
+
+        public KeyStoreParameters getKeystore() {
+            return keystore;
+        }
+
+        public void setKeystore(KeyStoreParameters keystore) {
+            this.keystore = keystore;
+        }
+
+        public Boolean getLazyLogin() {
+            return lazyLogin;
+        }
+
+        public void setLazyLogin(Boolean lazyLogin) {
+            this.lazyLogin = lazyLogin;
+        }
+
+        public String getLoginUrl() {
+            return loginUrl;
+        }
+
+        public void setLoginUrl(String loginUrl) {
+            this.loginUrl = loginUrl;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getRefreshToken() {
+            return refreshToken;
+        }
+
+        public void setRefreshToken(String refreshToken) {
+            this.refreshToken = refreshToken;
+        }
+
+        public AuthenticationType getType() {
+            return type;
+        }
+
+        public void setType(AuthenticationType type) {
+            this.type = type;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
         }
     }
 }

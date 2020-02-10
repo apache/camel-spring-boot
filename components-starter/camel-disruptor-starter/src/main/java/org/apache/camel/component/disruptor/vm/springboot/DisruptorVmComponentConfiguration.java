@@ -42,6 +42,24 @@ public class DisruptorVmComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * To configure the ring buffer size
+     */
+    private Integer bufferSize = 1024;
+    /**
+     * To configure the ring buffer size
+     */
+    @Deprecated
+    private Integer queueSize;
+    /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
      * To configure the default number of concurrent consumers
      */
     private Integer defaultConcurrentConsumers = 1;
@@ -49,11 +67,6 @@ public class DisruptorVmComponentConfiguration
      * To configure the default value for multiple consumers
      */
     private Boolean defaultMultipleConsumers = false;
-    /**
-     * To configure the default value for DisruptorProducerType The default
-     * value is Multi.
-     */
-    private DisruptorProducerType defaultProducerType = DisruptorProducerType.Multi;
     /**
      * To configure the default value for DisruptorWaitStrategy The default
      * value is Blocking.
@@ -65,19 +78,10 @@ public class DisruptorVmComponentConfiguration
      */
     private Boolean defaultBlockWhenFull = true;
     /**
-     * To configure the ring buffer size
+     * To configure the default value for DisruptorProducerType The default
+     * value is Multi.
      */
-    @Deprecated
-    private Integer queueSize;
-    /**
-     * To configure the ring buffer size
-     */
-    private Integer bufferSize = 1024;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private DisruptorProducerType defaultProducerType = DisruptorProducerType.Multi;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -90,14 +94,37 @@ public class DisruptorVmComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+
+    public Integer getBufferSize() {
+        return bufferSize;
+    }
+
+    public void setBufferSize(Integer bufferSize) {
+        this.bufferSize = bufferSize;
+    }
+
+    @Deprecated
+    @DeprecatedConfigurationProperty
+    public Integer getQueueSize() {
+        return queueSize;
+    }
+
+    @Deprecated
+    public void setQueueSize(Integer queueSize) {
+        this.queueSize = queueSize;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
 
     public Integer getDefaultConcurrentConsumers() {
         return defaultConcurrentConsumers;
@@ -113,14 +140,6 @@ public class DisruptorVmComponentConfiguration
 
     public void setDefaultMultipleConsumers(Boolean defaultMultipleConsumers) {
         this.defaultMultipleConsumers = defaultMultipleConsumers;
-    }
-
-    public DisruptorProducerType getDefaultProducerType() {
-        return defaultProducerType;
-    }
-
-    public void setDefaultProducerType(DisruptorProducerType defaultProducerType) {
-        this.defaultProducerType = defaultProducerType;
     }
 
     public DisruptorWaitStrategy getDefaultWaitStrategy() {
@@ -139,31 +158,12 @@ public class DisruptorVmComponentConfiguration
         this.defaultBlockWhenFull = defaultBlockWhenFull;
     }
 
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Integer getQueueSize() {
-        return queueSize;
+    public DisruptorProducerType getDefaultProducerType() {
+        return defaultProducerType;
     }
 
-    @Deprecated
-    public void setQueueSize(Integer queueSize) {
-        this.queueSize = queueSize;
-    }
-
-    public Integer getBufferSize() {
-        return bufferSize;
-    }
-
-    public void setBufferSize(Integer bufferSize) {
-        this.bufferSize = bufferSize;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setDefaultProducerType(DisruptorProducerType defaultProducerType) {
+        this.defaultProducerType = defaultProducerType;
     }
 
     public Boolean getLazyStartProducer() {
@@ -174,11 +174,11 @@ public class DisruptorVmComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 }

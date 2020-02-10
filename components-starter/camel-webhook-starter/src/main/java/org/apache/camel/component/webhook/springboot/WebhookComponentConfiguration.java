@@ -40,15 +40,6 @@ public class WebhookComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Set the default configuration for the webhook meta-component.
-     */
-    private WebhookConfigurationNestedConfiguration configuration;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -57,14 +48,22 @@ public class WebhookComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * Set the default configuration for the webhook meta-component.
+     */
+    private WebhookConfigurationNestedConfiguration configuration;
 
-    public WebhookConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setConfiguration(
-            WebhookConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -75,12 +74,13 @@ public class WebhookComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public WebhookConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setConfiguration(
+            WebhookConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public static class WebhookConfigurationNestedConfiguration {

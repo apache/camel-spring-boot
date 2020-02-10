@@ -40,27 +40,18 @@ public class MllpComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Set the component to log PHI data.
-     */
-    private Boolean logPhi = true;
-    /**
-     * Set the maximum number of bytes of PHI that will be logged in a log
-     * entry.
-     */
-    private Integer logPhiMaxBytes = 5120;
-    /**
-     * Set the default character set to use for byte to/from String conversions.
-     */
-    private String defaultCharset = "ISO-8859-1";
-    /**
      * Sets the default configuration to use when creating MLLP endpoints.
      */
     private MllpConfigurationNestedConfiguration configuration;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -73,14 +64,65 @@ public class MllpComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * Set the default character set to use for byte to/from String conversions.
+     * The option is a java.nio.charset.Charset type.
+     */
+    private String defaultCharset;
+    /**
+     * Set the component to log PHI data.
+     */
+    private Boolean logPhi = true;
+    /**
+     * Set the maximum number of bytes of PHI that will be logged in a log
+     * entry.
+     */
+    private Integer logPhiMaxBytes = 5120;
+
+    public MllpConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            MllpConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getDefaultCharset() {
+        return defaultCharset;
+    }
+
+    public void setDefaultCharset(String defaultCharset) {
+        this.defaultCharset = defaultCharset;
+    }
 
     public Boolean getLogPhi() {
         return logPhi;
@@ -96,47 +138,6 @@ public class MllpComponentConfiguration
 
     public void setLogPhiMaxBytes(Integer logPhiMaxBytes) {
         this.logPhiMaxBytes = logPhiMaxBytes;
-    }
-
-    public String getDefaultCharset() {
-        return defaultCharset;
-    }
-
-    public void setDefaultCharset(String defaultCharset) {
-        this.defaultCharset = defaultCharset;
-    }
-
-    public MllpConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            MllpConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public static class MllpConfigurationNestedConfiguration {

@@ -37,18 +37,6 @@ public class XsltComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a custom UriResolver which depends on a dynamic endpoint resource
-     * URI. Should not be used together with the option 'uriResolver'. The
-     * option is a org.apache.camel.component.xslt.XsltUriResolverFactory type.
-     */
-    private String uriResolverFactory;
-    /**
-     * To use a custom UriResolver. Should not be used together with the option
-     * 'uriResolverFactory'. The option is a javax.xml.transform.URIResolver
-     * type.
-     */
-    private String uriResolver;
-    /**
      * Cache for the resource content (the stylesheet file) when it is loaded.
      * If set to false Camel will reload the stylesheet file on each message
      * processing. This is good for development. A cached stylesheet can be
@@ -56,22 +44,6 @@ public class XsltComponentConfiguration
      * operation.
      */
     private Boolean contentCache = true;
-    /**
-     * A configuration strategy to apply on freshly created instances of
-     * TransformerFactory. The option is a
-     * org.apache.camel.component.xslt.TransformerFactoryConfigurationStrategy
-     * type.
-     */
-    private String transformerFactoryConfigurationStrategy;
-    /**
-     * To use a custom XSLT transformer factory, specified as a FQN class name
-     */
-    private String transformerFactoryClass;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -83,22 +55,34 @@ public class XsltComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
-
-    public String getUriResolverFactory() {
-        return uriResolverFactory;
-    }
-
-    public void setUriResolverFactory(String uriResolverFactory) {
-        this.uriResolverFactory = uriResolverFactory;
-    }
-
-    public String getUriResolver() {
-        return uriResolver;
-    }
-
-    public void setUriResolver(String uriResolver) {
-        this.uriResolver = uriResolver;
-    }
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a custom XSLT transformer factory, specified as a FQN class name
+     */
+    private String transformerFactoryClass;
+    /**
+     * A configuration strategy to apply on freshly created instances of
+     * TransformerFactory. The option is a
+     * org.apache.camel.component.xslt.TransformerFactoryConfigurationStrategy
+     * type.
+     */
+    private String transformerFactoryConfigurationStrategy;
+    /**
+     * To use a custom UriResolver. Should not be used together with the option
+     * 'uriResolverFactory'. The option is a javax.xml.transform.URIResolver
+     * type.
+     */
+    private String uriResolver;
+    /**
+     * To use a custom UriResolver which depends on a dynamic endpoint resource
+     * URI. Should not be used together with the option 'uriResolver'. The
+     * option is a org.apache.camel.component.xslt.XsltUriResolverFactory type.
+     */
+    private String uriResolverFactory;
 
     public Boolean getContentCache() {
         return contentCache;
@@ -106,6 +90,30 @@ public class XsltComponentConfiguration
 
     public void setContentCache(Boolean contentCache) {
         this.contentCache = contentCache;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getTransformerFactoryClass() {
+        return transformerFactoryClass;
+    }
+
+    public void setTransformerFactoryClass(String transformerFactoryClass) {
+        this.transformerFactoryClass = transformerFactoryClass;
     }
 
     public String getTransformerFactoryConfigurationStrategy() {
@@ -117,27 +125,19 @@ public class XsltComponentConfiguration
         this.transformerFactoryConfigurationStrategy = transformerFactoryConfigurationStrategy;
     }
 
-    public String getTransformerFactoryClass() {
-        return transformerFactoryClass;
+    public String getUriResolver() {
+        return uriResolver;
     }
 
-    public void setTransformerFactoryClass(String transformerFactoryClass) {
-        this.transformerFactoryClass = transformerFactoryClass;
+    public void setUriResolver(String uriResolver) {
+        this.uriResolver = uriResolver;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public String getUriResolverFactory() {
+        return uriResolverFactory;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setUriResolverFactory(String uriResolverFactory) {
+        this.uriResolverFactory = uriResolverFactory;
     }
 }

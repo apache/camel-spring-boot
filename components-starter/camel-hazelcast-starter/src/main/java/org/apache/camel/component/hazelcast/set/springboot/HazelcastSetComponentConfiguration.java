@@ -37,22 +37,14 @@ public class HazelcastSetComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The hazelcast instance reference which can be used for hazelcast
-     * endpoint. If you don't specify the instance reference, camel use the
-     * default hazelcast instance from the camel-hazelcast instance. The option
-     * is a com.hazelcast.core.HazelcastInstance type.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String hazelcastInstance;
-    /**
-     * The hazelcast mode reference which kind of instance should be used. If
-     * you don't specify the mode, then the node mode will be the default.
-     */
-    private String hazelcastMode = "node";
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -65,14 +57,46 @@ public class HazelcastSetComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * The hazelcast instance reference which can be used for hazelcast
+     * endpoint. If you don't specify the instance reference, camel use the
+     * default hazelcast instance from the camel-hazelcast instance. The option
+     * is a com.hazelcast.core.HazelcastInstance type.
+     */
+    private String hazelcastInstance;
+    /**
+     * The hazelcast mode reference which kind of instance should be used. If
+     * you don't specify the mode, then the node mode will be the default.
+     */
+    private String hazelcastMode = "node";
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
 
     public String getHazelcastInstance() {
         return hazelcastInstance;
@@ -88,29 +112,5 @@ public class HazelcastSetComponentConfiguration
 
     public void setHazelcastMode(String hazelcastMode) {
         this.hazelcastMode = hazelcastMode;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 }

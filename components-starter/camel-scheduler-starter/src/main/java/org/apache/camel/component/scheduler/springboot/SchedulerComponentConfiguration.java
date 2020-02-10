@@ -38,16 +38,6 @@ public class SchedulerComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Number of threads used by the scheduling thread pool. Is by default using
-     * a single thread
-     */
-    private Integer concurrentTasks = 1;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -56,13 +46,23 @@ public class SchedulerComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * Number of threads used by the scheduling thread pool. Is by default using
+     * a single thread
+     */
+    private Integer concurrentTasks = 1;
 
-    public Integer getConcurrentTasks() {
-        return concurrentTasks;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setConcurrentTasks(Integer concurrentTasks) {
-        this.concurrentTasks = concurrentTasks;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -73,11 +73,11 @@ public class SchedulerComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Integer getConcurrentTasks() {
+        return concurrentTasks;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setConcurrentTasks(Integer concurrentTasks) {
+        this.concurrentTasks = concurrentTasks;
     }
 }

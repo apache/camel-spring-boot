@@ -42,16 +42,14 @@ public class GoogleMailComponentConfiguration
      */
     private GoogleMailConfigurationNestedConfiguration configuration;
     /**
-     * To use the GoogleCalendarClientFactory as factory for creating the
-     * client. Will by default use BatchGoogleMailClientFactory. The option is a
-     * org.apache.camel.component.google.mail.GoogleMailClientFactory type.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String clientFactory;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -64,14 +62,16 @@ public class GoogleMailComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use the GoogleCalendarClientFactory as factory for creating the
+     * client. Will by default use BatchGoogleMailClientFactory. The option is a
+     * org.apache.camel.component.google.mail.GoogleMailClientFactory type.
+     */
+    private String clientFactory;
 
     public GoogleMailConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -82,20 +82,12 @@ public class GoogleMailComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getClientFactory() {
-        return clientFactory;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setClientFactory(String clientFactory) {
-        this.clientFactory = clientFactory;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -106,12 +98,20 @@ public class GoogleMailComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getClientFactory() {
+        return clientFactory;
+    }
+
+    public void setClientFactory(String clientFactory) {
+        this.clientFactory = clientFactory;
     }
 
     public static class GoogleMailConfigurationNestedConfiguration {

@@ -42,27 +42,27 @@ public class S3ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The AWS S3 default configuration
-     */
-    private S3ConfigurationNestedConfiguration configuration;
-    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * The region where the bucket is located. This option is used in the
      * com.amazonaws.services.s3.model.CreateBucketRequest.
      */
     private String region;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Amazon AWS Secret Key
      */
-    private Boolean basicPropertyBinding = false;
+    private String secretKey;
+    /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -75,23 +75,14 @@ public class S3ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
-
-    public S3ConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            S3ConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
-    }
+    private Boolean basicPropertyBinding = false;
+    /**
+     * The AWS S3 default configuration
+     */
+    private S3ConfigurationNestedConfiguration configuration;
 
     public String getAccessKey() {
         return accessKey;
@@ -99,14 +90,6 @@ public class S3ComponentConfiguration
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 
     public String getRegion() {
@@ -117,12 +100,20 @@ public class S3ComponentConfiguration
         this.region = region;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public String getSecretKey() {
+        return secretKey;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -133,12 +124,21 @@ public class S3ComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public S3ConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            S3ConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public static class S3ConfigurationNestedConfiguration {

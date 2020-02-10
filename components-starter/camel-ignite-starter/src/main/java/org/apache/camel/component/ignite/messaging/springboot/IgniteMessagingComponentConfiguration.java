@@ -38,24 +38,28 @@ public class IgniteMessagingComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Ignite instance. The option is a org.apache.ignite.Ignite type.
-     */
-    private String ignite;
-    /**
      * Resource from where to load configuration. The option is a
      * java.lang.Object type.
      */
     private String configurationResource;
+    /**
+     * Ignite instance. The option is a org.apache.ignite.Ignite type.
+     */
+    private String ignite;
     /**
      * Ignite configuration. The option is a
      * org.apache.ignite.configuration.IgniteConfiguration type.
      */
     private String igniteConfiguration;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -68,22 +72,10 @@ public class IgniteMessagingComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
-
-    public String getIgnite() {
-        return ignite;
-    }
-
-    public void setIgnite(String ignite) {
-        this.ignite = ignite;
-    }
+    private Boolean basicPropertyBinding = false;
 
     public String getConfigurationResource() {
         return configurationResource;
@@ -91,6 +83,14 @@ public class IgniteMessagingComponentConfiguration
 
     public void setConfigurationResource(String configurationResource) {
         this.configurationResource = configurationResource;
+    }
+
+    public String getIgnite() {
+        return ignite;
+    }
+
+    public void setIgnite(String ignite) {
+        this.ignite = ignite;
     }
 
     public String getIgniteConfiguration() {
@@ -101,12 +101,12 @@ public class IgniteMessagingComponentConfiguration
         this.igniteConfiguration = igniteConfiguration;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -117,11 +117,11 @@ public class IgniteMessagingComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 }

@@ -40,41 +40,19 @@ public class CometdComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The password for the keystore when using SSL.
-     */
-    private String sslKeyPassword;
-    /**
-     * The password when using SSL.
-     */
-    private String sslPassword;
-    /**
-     * The path to the keystore.
-     */
-    private String sslKeystore;
-    /**
-     * To use a custom configured SecurityPolicy to control authorization. The
-     * option is a org.cometd.bayeux.server.SecurityPolicy type.
-     */
-    private String securityPolicy;
-    /**
      * To use a list of custom BayeuxServer.Extension that allows modifying
      * incoming and outgoing requests.
      */
     private List<Extension> extensions;
     /**
-     * To configure security using SSLContextParameters. The option is a
-     * org.apache.camel.support.jsse.SSLContextParameters type.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String sslContextParameters;
-    /**
-     * Enable usage of global SSL context parameters.
-     */
-    private Boolean useGlobalSslContextParameters = false;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -87,46 +65,36 @@ public class CometdComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
-
-    public String getSslKeyPassword() {
-        return sslKeyPassword;
-    }
-
-    public void setSslKeyPassword(String sslKeyPassword) {
-        this.sslKeyPassword = sslKeyPassword;
-    }
-
-    public String getSslPassword() {
-        return sslPassword;
-    }
-
-    public void setSslPassword(String sslPassword) {
-        this.sslPassword = sslPassword;
-    }
-
-    public String getSslKeystore() {
-        return sslKeystore;
-    }
-
-    public void setSslKeystore(String sslKeystore) {
-        this.sslKeystore = sslKeystore;
-    }
-
-    public String getSecurityPolicy() {
-        return securityPolicy;
-    }
-
-    public void setSecurityPolicy(String securityPolicy) {
-        this.securityPolicy = securityPolicy;
-    }
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a custom configured SecurityPolicy to control authorization. The
+     * option is a org.cometd.bayeux.server.SecurityPolicy type.
+     */
+    private String securityPolicy;
+    /**
+     * To configure security using SSLContextParameters. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private String sslContextParameters;
+    /**
+     * The password for the keystore when using SSL.
+     */
+    private String sslKeyPassword;
+    /**
+     * The path to the keystore.
+     */
+    private String sslKeystore;
+    /**
+     * The password when using SSL.
+     */
+    private String sslPassword;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
 
     public List<Extension> getExtensions() {
         return extensions;
@@ -136,29 +104,12 @@ public class CometdComponentConfiguration
         this.extensions = extensions;
     }
 
-    public String getSslContextParameters() {
-        return sslContextParameters;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
-        this.sslContextParameters = sslContextParameters;
-    }
-
-    public Boolean getUseGlobalSslContextParameters() {
-        return useGlobalSslContextParameters;
-    }
-
-    public void setUseGlobalSslContextParameters(
-            Boolean useGlobalSslContextParameters) {
-        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -169,11 +120,60 @@ public class CometdComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getSecurityPolicy() {
+        return securityPolicy;
+    }
+
+    public void setSecurityPolicy(String securityPolicy) {
+        this.securityPolicy = securityPolicy;
+    }
+
+    public String getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(String sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
+    }
+
+    public String getSslKeyPassword() {
+        return sslKeyPassword;
+    }
+
+    public void setSslKeyPassword(String sslKeyPassword) {
+        this.sslKeyPassword = sslKeyPassword;
+    }
+
+    public String getSslKeystore() {
+        return sslKeystore;
+    }
+
+    public void setSslKeystore(String sslKeystore) {
+        this.sslKeystore = sslKeystore;
+    }
+
+    public String getSslPassword() {
+        return sslPassword;
+    }
+
+    public void setSslPassword(String sslPassword) {
+        this.sslPassword = sslPassword;
+    }
+
+    public Boolean getUseGlobalSslContextParameters() {
+        return useGlobalSslContextParameters;
+    }
+
+    public void setUseGlobalSslContextParameters(
+            Boolean useGlobalSslContextParameters) {
+        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 }

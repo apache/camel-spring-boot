@@ -37,19 +37,10 @@ public class GoogleBigQuerySQLComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Google Cloud Project Id
-     */
-    private String projectId;
-    /**
      * ConnectionFactory to obtain connection to Bigquery Service. If non
      * provided the default one will be used
      */
     private GoogleBigQueryConnectionFactoryNestedConfiguration connectionFactory;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -61,14 +52,15 @@ public class GoogleBigQuerySQLComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
-
-    public String getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
-    }
+    /**
+     * Google Cloud Project Id
+     */
+    private String projectId;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
 
     public GoogleBigQueryConnectionFactoryNestedConfiguration getConnectionFactory() {
         return connectionFactory;
@@ -79,20 +71,28 @@ public class GoogleBigQuerySQLComponentConfiguration
         this.connectionFactory = connectionFactory;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public static class GoogleBigQueryConnectionFactoryNestedConfiguration {

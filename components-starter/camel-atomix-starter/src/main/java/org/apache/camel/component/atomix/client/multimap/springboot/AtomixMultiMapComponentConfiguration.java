@@ -41,27 +41,18 @@ public class AtomixMultiMapComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The shared component configuration
-     */
-    private AtomixMultiMapConfigurationNestedConfiguration configuration;
-    /**
      * The shared AtomixClient instance. The option is a io.atomix.AtomixClient
      * type.
      */
     private String atomix;
     /**
-     * The nodes the AtomixClient should connect to
+     * The shared component configuration
      */
-    private List<Address> nodes;
+    private AtomixMultiMapConfigurationNestedConfiguration configuration;
     /**
      * The path to the AtomixClient configuration
      */
     private String configurationUri;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -73,6 +64,23 @@ public class AtomixMultiMapComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * The nodes the AtomixClient should connect to
+     */
+    private List<Address> nodes;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+
+    public String getAtomix() {
+        return atomix;
+    }
+
+    public void setAtomix(String atomix) {
+        this.atomix = atomix;
+    }
 
     public AtomixMultiMapConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -83,12 +91,20 @@ public class AtomixMultiMapComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getAtomix() {
-        return atomix;
+    public String getConfigurationUri() {
+        return configurationUri;
     }
 
-    public void setAtomix(String atomix) {
-        this.atomix = atomix;
+    public void setConfigurationUri(String configurationUri) {
+        this.configurationUri = configurationUri;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public List<Address> getNodes() {
@@ -99,28 +115,12 @@ public class AtomixMultiMapComponentConfiguration
         this.nodes = nodes;
     }
 
-    public String getConfigurationUri() {
-        return configurationUri;
-    }
-
-    public void setConfigurationUri(String configurationUri) {
-        this.configurationUri = configurationUri;
-    }
-
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
     }
 
     public static class AtomixMultiMapConfigurationNestedConfiguration {

@@ -39,31 +39,14 @@ public class TwilioComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the shared configuration
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private TwilioConfigurationNestedConfiguration configuration;
-    /**
-     * To use the shared REST client. The option is a
-     * com.twilio.http.TwilioRestClient type.
-     */
-    private String restClient;
-    /**
-     * The account to use.
-     */
-    private String username;
-    /**
-     * Auth token for the account.
-     */
-    private String password;
-    /**
-     * The account SID to use.
-     */
-    private String accountSid;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -76,14 +59,55 @@ public class TwilioComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use the shared configuration
+     */
+    private TwilioConfigurationNestedConfiguration configuration;
+    /**
+     * To use the shared REST client. The option is a
+     * com.twilio.http.TwilioRestClient type.
+     */
+    private String restClient;
+    /**
+     * The account SID to use.
+     */
+    private String accountSid;
+    /**
+     * Auth token for the account.
+     */
+    private String password;
+    /**
+     * The account to use.
+     */
+    private String username;
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
 
     public TwilioConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -102,12 +126,12 @@ public class TwilioComponentConfiguration
         this.restClient = restClient;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAccountSid() {
+        return accountSid;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAccountSid(String accountSid) {
+        this.accountSid = accountSid;
     }
 
     public String getPassword() {
@@ -118,36 +142,12 @@ public class TwilioComponentConfiguration
         this.password = password;
     }
 
-    public String getAccountSid() {
-        return accountSid;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAccountSid(String accountSid) {
-        this.accountSid = accountSid;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public static class TwilioConfigurationNestedConfiguration {

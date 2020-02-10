@@ -38,17 +38,6 @@ public class JoltComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Explicitly sets the Transform to use. If not set a Transform specified by
-     * the transformDsl will be created. The option is a
-     * com.bazaarvoice.jolt.Transform type.
-     */
-    private String transform;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -59,13 +48,24 @@ public class JoltComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * Explicitly sets the Transform to use. If not set a Transform specified by
+     * the transformDsl will be created. The option is a
+     * com.bazaarvoice.jolt.Transform type.
+     */
+    private String transform;
 
-    public String getTransform() {
-        return transform;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setTransform(String transform) {
-        this.transform = transform;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -76,11 +76,11 @@ public class JoltComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public String getTransform() {
+        return transform;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setTransform(String transform) {
+        this.transform = transform;
     }
 }

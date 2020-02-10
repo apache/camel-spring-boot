@@ -38,28 +38,32 @@ public class JGroupsRaftComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Specifies configuration properties of the RaftHandle JChannel used by the
+     * endpoint (ignored if raftHandle ref is provided).
+     */
+    private String channelProperties = "raft.xml";
+    /**
      * RaftHandle to use. The option is a org.jgroups.raft.RaftHandle type.
      */
     private String raftHandle;
+    /**
+     * Unique raftId to use.
+     */
+    private String raftId;
     /**
      * StateMachine to use. The option is a
      * org.jgroups.protocols.raft.StateMachine type.
      */
     private String stateMachine;
     /**
-     * Unique raftId to use.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String raftId;
-    /**
-     * Specifies configuration properties of the RaftHandle JChannel used by the
-     * endpoint (ignored if raftHandle ref is provided).
-     */
-    private String channelProperties = "raft.xml";
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -72,14 +76,18 @@ public class JGroupsRaftComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+
+    public String getChannelProperties() {
+        return channelProperties;
+    }
+
+    public void setChannelProperties(String channelProperties) {
+        this.channelProperties = channelProperties;
+    }
 
     public String getRaftHandle() {
         return raftHandle;
@@ -87,14 +95,6 @@ public class JGroupsRaftComponentConfiguration
 
     public void setRaftHandle(String raftHandle) {
         this.raftHandle = raftHandle;
-    }
-
-    public String getStateMachine() {
-        return stateMachine;
-    }
-
-    public void setStateMachine(String stateMachine) {
-        this.stateMachine = stateMachine;
     }
 
     public String getRaftId() {
@@ -105,20 +105,20 @@ public class JGroupsRaftComponentConfiguration
         this.raftId = raftId;
     }
 
-    public String getChannelProperties() {
-        return channelProperties;
+    public String getStateMachine() {
+        return stateMachine;
     }
 
-    public void setChannelProperties(String channelProperties) {
-        this.channelProperties = channelProperties;
+    public void setStateMachine(String stateMachine) {
+        this.stateMachine = stateMachine;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -129,11 +129,11 @@ public class JGroupsRaftComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 }

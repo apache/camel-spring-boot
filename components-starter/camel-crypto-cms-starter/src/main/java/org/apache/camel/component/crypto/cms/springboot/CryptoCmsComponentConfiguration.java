@@ -39,24 +39,6 @@ public class CryptoCmsComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To configure the shared SignedDataVerifierConfiguration, which determines
-     * the uri parameters for the verify operation. The option is a
-     * org.apache.camel.component.crypto.cms.sig.SignedDataVerifierConfiguration
-     * type.
-     */
-    private String signedDataVerifierConfiguration;
-    /**
-     * To configure the shared EnvelopedDataDecryptorConfiguration, which
-     * determines the uri parameters for the decrypt operation. The option is a
-     * org.apache.camel.component.crypto.cms.crypt.EnvelopedDataDecryptorConfiguration type.
-     */
-    private String envelopedDataDecryptorConfiguration;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -67,14 +49,39 @@ public class CryptoCmsComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To configure the shared EnvelopedDataDecryptorConfiguration, which
+     * determines the uri parameters for the decrypt operation. The option is a
+     * org.apache.camel.component.crypto.cms.crypt.EnvelopedDataDecryptorConfiguration type.
+     */
+    private String envelopedDataDecryptorConfiguration;
+    /**
+     * To configure the shared SignedDataVerifierConfiguration, which determines
+     * the uri parameters for the verify operation. The option is a
+     * org.apache.camel.component.crypto.cms.sig.SignedDataVerifierConfiguration
+     * type.
+     */
+    private String signedDataVerifierConfiguration;
 
-    public String getSignedDataVerifierConfiguration() {
-        return signedDataVerifierConfiguration;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setSignedDataVerifierConfiguration(
-            String signedDataVerifierConfiguration) {
-        this.signedDataVerifierConfiguration = signedDataVerifierConfiguration;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public String getEnvelopedDataDecryptorConfiguration() {
@@ -86,19 +93,12 @@ public class CryptoCmsComponentConfiguration
         this.envelopedDataDecryptorConfiguration = envelopedDataDecryptorConfiguration;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public String getSignedDataVerifierConfiguration() {
+        return signedDataVerifierConfiguration;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setSignedDataVerifierConfiguration(
+            String signedDataVerifierConfiguration) {
+        this.signedDataVerifierConfiguration = signedDataVerifierConfiguration;
     }
 }

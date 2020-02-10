@@ -38,11 +38,52 @@ public class Sjms2ComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The maximum number of connections available to endpoints started under
+     * this component
+     */
+    private Integer connectionCount = 1;
+    /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * The client ID to use when creating javax.jms.Connection when using the
+     * default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.
+     */
+    private String connectionClientId;
+    /**
      * A ConnectionFactory is required to enable the SjmsComponent. It can be
      * set directly or set set as part of a ConnectionResource. The option is a
      * javax.jms.ConnectionFactory type.
      */
     private String connectionFactory;
+    /**
+     * The max wait time in millis to block and wait on free connection when the
+     * pool is exhausted when using the default
+     * org.apache.camel.component.sjms.jms.ConnectionFactoryResource.
+     */
+    private Long connectionMaxWait = 5000L;
     /**
      * A ConnectionResource is an interface that allows for customization and
      * container control of the ConnectionFactory. See Plugable Connection
@@ -51,10 +92,17 @@ public class Sjms2ComponentConfiguration
      */
     private String connectionResource;
     /**
-     * The maximum number of connections available to endpoints started under
-     * this component
+     * When using the default
+     * org.apache.camel.component.sjms.jms.ConnectionFactoryResource then should
+     * each javax.jms.Connection be tested (calling start) before returned from
+     * the pool.
      */
-    private Integer connectionCount = 1;
+    private Boolean connectionTestOnBorrow = true;
+    /**
+     * To use a custom DestinationCreationStrategy. The option is a
+     * org.apache.camel.component.sjms.jms.DestinationCreationStrategy type.
+     */
+    private String destinationCreationStrategy;
     /**
      * Pluggable strategy for encoding and decoding JMS keys so they can be
      * compliant with the JMS specification. Camel provides one implementation
@@ -68,22 +116,6 @@ public class Sjms2ComponentConfiguration
      */
     private String jmsKeyFormatStrategy;
     /**
-     * To configure which kind of commit strategy to use. Camel provides two
-     * implementations out of the box, default and batch. The option is a
-     * org.apache.camel.component.sjms.TransactionCommitStrategy type.
-     */
-    private String transactionCommitStrategy;
-    /**
-     * To use a custom DestinationCreationStrategy. The option is a
-     * org.apache.camel.component.sjms.jms.DestinationCreationStrategy type.
-     */
-    private String destinationCreationStrategy;
-    /**
-     * To use a custom TimedTaskManager. The option is a
-     * org.apache.camel.component.sjms.taskmanager.TimedTaskManager type.
-     */
-    private String timedTaskManager;
-    /**
      * To use the given MessageCreatedStrategy which are invoked when Camel
      * creates new instances of javax.jms.Message objects when Camel is sending
      * a JMS message. The option is a
@@ -91,33 +123,10 @@ public class Sjms2ComponentConfiguration
      */
     private String messageCreatedStrategy;
     /**
-     * When using the default
-     * org.apache.camel.component.sjms.jms.ConnectionFactoryResource then should
-     * each javax.jms.Connection be tested (calling start) before returned from
-     * the pool.
+     * To use a custom TimedTaskManager. The option is a
+     * org.apache.camel.component.sjms.taskmanager.TimedTaskManager type.
      */
-    private Boolean connectionTestOnBorrow = true;
-    /**
-     * The username to use when creating javax.jms.Connection when using the
-     * default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.
-     */
-    private String connectionUsername;
-    /**
-     * The password to use when creating javax.jms.Connection when using the
-     * default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.
-     */
-    private String connectionPassword;
-    /**
-     * The client ID to use when creating javax.jms.Connection when using the
-     * default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.
-     */
-    private String connectionClientId;
-    /**
-     * The max wait time in millis to block and wait on free connection when the
-     * pool is exhausted when using the default
-     * org.apache.camel.component.sjms.jms.ConnectionFactoryResource.
-     */
-    private Long connectionMaxWait = 5000L;
+    private String timedTaskManager;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
@@ -125,30 +134,61 @@ public class Sjms2ComponentConfiguration
      */
     private String headerFilterStrategy;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * The password to use when creating javax.jms.Connection when using the
+     * default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.
      */
-    private Boolean basicPropertyBinding = false;
+    private String connectionPassword;
     /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
+     * The username to use when creating javax.jms.Connection when using the
+     * default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.
      */
-    private Boolean lazyStartProducer = false;
+    private String connectionUsername;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * To configure which kind of commit strategy to use. Camel provides two
+     * implementations out of the box, default and batch. The option is a
+     * org.apache.camel.component.sjms.TransactionCommitStrategy type.
      */
-    private Boolean bridgeErrorHandler = false;
+    private String transactionCommitStrategy;
+
+    public Integer getConnectionCount() {
+        return connectionCount;
+    }
+
+    public void setConnectionCount(Integer connectionCount) {
+        this.connectionCount = connectionCount;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getConnectionClientId() {
+        return connectionClientId;
+    }
+
+    public void setConnectionClientId(String connectionClientId) {
+        this.connectionClientId = connectionClientId;
+    }
 
     public String getConnectionFactory() {
         return connectionFactory;
@@ -156,6 +196,14 @@ public class Sjms2ComponentConfiguration
 
     public void setConnectionFactory(String connectionFactory) {
         this.connectionFactory = connectionFactory;
+    }
+
+    public Long getConnectionMaxWait() {
+        return connectionMaxWait;
+    }
+
+    public void setConnectionMaxWait(Long connectionMaxWait) {
+        this.connectionMaxWait = connectionMaxWait;
     }
 
     public String getConnectionResource() {
@@ -166,28 +214,12 @@ public class Sjms2ComponentConfiguration
         this.connectionResource = connectionResource;
     }
 
-    public Integer getConnectionCount() {
-        return connectionCount;
+    public Boolean getConnectionTestOnBorrow() {
+        return connectionTestOnBorrow;
     }
 
-    public void setConnectionCount(Integer connectionCount) {
-        this.connectionCount = connectionCount;
-    }
-
-    public String getJmsKeyFormatStrategy() {
-        return jmsKeyFormatStrategy;
-    }
-
-    public void setJmsKeyFormatStrategy(String jmsKeyFormatStrategy) {
-        this.jmsKeyFormatStrategy = jmsKeyFormatStrategy;
-    }
-
-    public String getTransactionCommitStrategy() {
-        return transactionCommitStrategy;
-    }
-
-    public void setTransactionCommitStrategy(String transactionCommitStrategy) {
-        this.transactionCommitStrategy = transactionCommitStrategy;
+    public void setConnectionTestOnBorrow(Boolean connectionTestOnBorrow) {
+        this.connectionTestOnBorrow = connectionTestOnBorrow;
     }
 
     public String getDestinationCreationStrategy() {
@@ -199,12 +231,12 @@ public class Sjms2ComponentConfiguration
         this.destinationCreationStrategy = destinationCreationStrategy;
     }
 
-    public String getTimedTaskManager() {
-        return timedTaskManager;
+    public String getJmsKeyFormatStrategy() {
+        return jmsKeyFormatStrategy;
     }
 
-    public void setTimedTaskManager(String timedTaskManager) {
-        this.timedTaskManager = timedTaskManager;
+    public void setJmsKeyFormatStrategy(String jmsKeyFormatStrategy) {
+        this.jmsKeyFormatStrategy = jmsKeyFormatStrategy;
     }
 
     public String getMessageCreatedStrategy() {
@@ -215,44 +247,12 @@ public class Sjms2ComponentConfiguration
         this.messageCreatedStrategy = messageCreatedStrategy;
     }
 
-    public Boolean getConnectionTestOnBorrow() {
-        return connectionTestOnBorrow;
+    public String getTimedTaskManager() {
+        return timedTaskManager;
     }
 
-    public void setConnectionTestOnBorrow(Boolean connectionTestOnBorrow) {
-        this.connectionTestOnBorrow = connectionTestOnBorrow;
-    }
-
-    public String getConnectionUsername() {
-        return connectionUsername;
-    }
-
-    public void setConnectionUsername(String connectionUsername) {
-        this.connectionUsername = connectionUsername;
-    }
-
-    public String getConnectionPassword() {
-        return connectionPassword;
-    }
-
-    public void setConnectionPassword(String connectionPassword) {
-        this.connectionPassword = connectionPassword;
-    }
-
-    public String getConnectionClientId() {
-        return connectionClientId;
-    }
-
-    public void setConnectionClientId(String connectionClientId) {
-        this.connectionClientId = connectionClientId;
-    }
-
-    public Long getConnectionMaxWait() {
-        return connectionMaxWait;
-    }
-
-    public void setConnectionMaxWait(Long connectionMaxWait) {
-        this.connectionMaxWait = connectionMaxWait;
+    public void setTimedTaskManager(String timedTaskManager) {
+        this.timedTaskManager = timedTaskManager;
     }
 
     public String getHeaderFilterStrategy() {
@@ -263,27 +263,27 @@ public class Sjms2ComponentConfiguration
         this.headerFilterStrategy = headerFilterStrategy;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public String getConnectionPassword() {
+        return connectionPassword;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setConnectionPassword(String connectionPassword) {
+        this.connectionPassword = connectionPassword;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public String getConnectionUsername() {
+        return connectionUsername;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setConnectionUsername(String connectionUsername) {
+        this.connectionUsername = connectionUsername;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public String getTransactionCommitStrategy() {
+        return transactionCommitStrategy;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setTransactionCommitStrategy(String transactionCommitStrategy) {
+        this.transactionCommitStrategy = transactionCommitStrategy;
     }
 }

@@ -47,19 +47,23 @@ public class InfinispanComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Default configuration
-     */
-    private InfinispanConfigurationNestedConfiguration configuration;
-    /**
      * Default Cache container. The option is a
      * org.infinispan.commons.api.BasicCacheContainer type.
      */
     private String cacheContainer;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Default configuration
      */
-    private Boolean basicPropertyBinding = false;
+    private InfinispanConfigurationNestedConfiguration configuration;
+    /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -72,14 +76,18 @@ public class InfinispanComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
+    private Boolean basicPropertyBinding = false;
+
+    public String getCacheContainer() {
+        return cacheContainer;
+    }
+
+    public void setCacheContainer(String cacheContainer) {
+        this.cacheContainer = cacheContainer;
+    }
 
     public InfinispanConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -90,20 +98,12 @@ public class InfinispanComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getCacheContainer() {
-        return cacheContainer;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setCacheContainer(String cacheContainer) {
-        this.cacheContainer = cacheContainer;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -114,12 +114,12 @@ public class InfinispanComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public static class InfinispanConfigurationNestedConfiguration {

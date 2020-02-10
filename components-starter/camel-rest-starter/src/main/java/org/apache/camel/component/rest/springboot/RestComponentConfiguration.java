@@ -39,6 +39,15 @@ public class RestComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
      * The Camel Rest component to use for (consumer) the REST transport, such
      * as jetty, servlet, undertow. If no component has been explicit
      * configured, then Camel will lookup if there is a Camel component that
@@ -48,13 +57,10 @@ public class RestComponentConfiguration
      */
     private String consumerComponentName;
     /**
-     * The Camel Rest component to use for (producer) the REST transport, such
-     * as http, undertow. If no component has been explicit configured, then
-     * Camel will lookup if there is a Camel component that integrates with the
-     * Rest DSL, or if a org.apache.camel.spi.RestProducerFactory is registered
-     * in the registry. If either one is found, then that is being used.
+     * The swagger api doc resource to use. The resource is loaded from
+     * classpath by default and must be in JSon format.
      */
-    private String producerComponentName;
+    private String apiDoc;
     /**
      * The Camel Rest component to use for (producer) the REST transport, such
      * as http, undertow. If no component has been explicit configured, then
@@ -65,19 +71,9 @@ public class RestComponentConfiguration
     @Deprecated
     private String componentName;
     /**
-     * The swagger api doc resource to use. The resource is loaded from
-     * classpath by default and must be in JSon format.
-     */
-    private String apiDoc;
-    /**
      * Host and port of HTTP service to use (override host in swagger schema)
      */
     private String host;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -90,14 +86,26 @@ public class RestComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * The Camel Rest component to use for (producer) the REST transport, such
+     * as http, undertow. If no component has been explicit configured, then
+     * Camel will lookup if there is a Camel component that integrates with the
+     * Rest DSL, or if a org.apache.camel.spi.RestProducerFactory is registered
+     * in the registry. If either one is found, then that is being used.
      */
-    private Boolean bridgeErrorHandler = false;
+    private String producerComponentName;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
 
     public String getConsumerComponentName() {
         return consumerComponentName;
@@ -107,12 +115,12 @@ public class RestComponentConfiguration
         this.consumerComponentName = consumerComponentName;
     }
 
-    public String getProducerComponentName() {
-        return producerComponentName;
+    public String getApiDoc() {
+        return apiDoc;
     }
 
-    public void setProducerComponentName(String producerComponentName) {
-        this.producerComponentName = producerComponentName;
+    public void setApiDoc(String apiDoc) {
+        this.apiDoc = apiDoc;
     }
 
     @Deprecated
@@ -126,28 +134,12 @@ public class RestComponentConfiguration
         this.componentName = componentName;
     }
 
-    public String getApiDoc() {
-        return apiDoc;
-    }
-
-    public void setApiDoc(String apiDoc) {
-        this.apiDoc = apiDoc;
-    }
-
     public String getHost() {
         return host;
     }
 
     public void setHost(String host) {
         this.host = host;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public Boolean getLazyStartProducer() {
@@ -158,11 +150,19 @@ public class RestComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public String getProducerComponentName() {
+        return producerComponentName;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setProducerComponentName(String producerComponentName) {
+        this.producerComponentName = producerComponentName;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 }

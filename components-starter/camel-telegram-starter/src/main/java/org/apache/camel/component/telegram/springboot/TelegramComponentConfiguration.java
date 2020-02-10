@@ -37,31 +37,14 @@ public class TelegramComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The default Telegram authorization token to be used when the information
-     * is not provided in the endpoints.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String authorizationToken;
-    /**
-     * To use a custom AsyncHttpClient. The option is a
-     * org.asynchttpclient.AsyncHttpClient type.
-     */
-    private String client;
-    /**
-     * To configure the AsyncHttpClient to use a custom
-     * com.ning.http.client.AsyncHttpClientConfig instance. The option is a
-     * org.asynchttpclient.AsyncHttpClientConfig type.
-     */
-    private String clientConfig;
-    /**
-     * Can be used to set an alternative base URI, e.g. when you want to test
-     * the component against a mock Telegram API
-     */
-    private String baseUri = "https://api.telegram.org";
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -74,37 +57,46 @@ public class TelegramComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Can be used to set an alternative base URI, e.g. when you want to test
+     * the component against a mock Telegram API
      */
-    private Boolean bridgeErrorHandler = false;
+    private String baseUri = "https://api.telegram.org";
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a custom AsyncHttpClient. The option is a
+     * org.asynchttpclient.AsyncHttpClient type.
+     */
+    private String client;
+    /**
+     * To configure the AsyncHttpClient to use a custom
+     * com.ning.http.client.AsyncHttpClientConfig instance. The option is a
+     * org.asynchttpclient.AsyncHttpClientConfig type.
+     */
+    private String clientConfig;
+    /**
+     * The default Telegram authorization token to be used when the information
+     * is not provided in the endpoints.
+     */
+    private String authorizationToken;
 
-    public String getAuthorizationToken() {
-        return authorizationToken;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setAuthorizationToken(String authorizationToken) {
-        this.authorizationToken = authorizationToken;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public String getClient() {
-        return client;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setClient(String client) {
-        this.client = client;
-    }
-
-    public String getClientConfig() {
-        return clientConfig;
-    }
-
-    public void setClientConfig(String clientConfig) {
-        this.clientConfig = clientConfig;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public String getBaseUri() {
@@ -123,19 +115,27 @@ public class TelegramComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public String getClient() {
+        return client;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setClient(String client) {
+        this.client = client;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public String getClientConfig() {
+        return clientConfig;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setClientConfig(String clientConfig) {
+        this.clientConfig = clientConfig;
+    }
+
+    public String getAuthorizationToken() {
+        return authorizationToken;
+    }
+
+    public void setAuthorizationToken(String authorizationToken) {
+        this.authorizationToken = authorizationToken;
     }
 }

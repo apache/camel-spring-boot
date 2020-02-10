@@ -42,15 +42,6 @@ public class LuceneComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a shared lucene configuration
-     */
-    private LuceneConfigurationNestedConfiguration config;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -61,13 +52,22 @@ public class LuceneComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a shared lucene configuration
+     */
+    private LuceneConfigurationNestedConfiguration config;
 
-    public LuceneConfigurationNestedConfiguration getConfig() {
-        return config;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setConfig(LuceneConfigurationNestedConfiguration config) {
-        this.config = config;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -78,12 +78,12 @@ public class LuceneComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public LuceneConfigurationNestedConfiguration getConfig() {
+        return config;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setConfig(LuceneConfigurationNestedConfiguration config) {
+        this.config = config;
     }
 
     public static class LuceneConfigurationNestedConfiguration {

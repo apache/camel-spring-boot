@@ -38,6 +38,47 @@ public class TwitterDirectMessageComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * The http proxy host which can be used for the camel-twitter.
+     */
+    private String httpProxyHost;
+    /**
+     * The http proxy password which can be used for the camel-twitter.
+     */
+    private String httpProxyPassword;
+    /**
+     * The http proxy port which can be used for the camel-twitter.
+     */
+    private Integer httpProxyPort;
+    /**
+     * The http proxy user which can be used for the camel-twitter.
+     */
+    private String httpProxyUser;
+    /**
      * The access token
      */
     private String accessToken;
@@ -53,47 +94,62 @@ public class TwitterDirectMessageComponentConfiguration
      * The consumer secret
      */
     private String consumerSecret;
-    /**
-     * The http proxy host which can be used for the camel-twitter.
-     */
-    private String httpProxyHost;
-    /**
-     * The http proxy user which can be used for the camel-twitter.
-     */
-    private String httpProxyUser;
-    /**
-     * The http proxy password which can be used for the camel-twitter.
-     */
-    private String httpProxyPassword;
-    /**
-     * The http proxy port which can be used for the camel-twitter.
-     */
-    private Integer httpProxyPort;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
-    /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getHttpProxyHost() {
+        return httpProxyHost;
+    }
+
+    public void setHttpProxyHost(String httpProxyHost) {
+        this.httpProxyHost = httpProxyHost;
+    }
+
+    public String getHttpProxyPassword() {
+        return httpProxyPassword;
+    }
+
+    public void setHttpProxyPassword(String httpProxyPassword) {
+        this.httpProxyPassword = httpProxyPassword;
+    }
+
+    public Integer getHttpProxyPort() {
+        return httpProxyPort;
+    }
+
+    public void setHttpProxyPort(Integer httpProxyPort) {
+        this.httpProxyPort = httpProxyPort;
+    }
+
+    public String getHttpProxyUser() {
+        return httpProxyUser;
+    }
+
+    public void setHttpProxyUser(String httpProxyUser) {
+        this.httpProxyUser = httpProxyUser;
+    }
 
     public String getAccessToken() {
         return accessToken;
@@ -125,61 +181,5 @@ public class TwitterDirectMessageComponentConfiguration
 
     public void setConsumerSecret(String consumerSecret) {
         this.consumerSecret = consumerSecret;
-    }
-
-    public String getHttpProxyHost() {
-        return httpProxyHost;
-    }
-
-    public void setHttpProxyHost(String httpProxyHost) {
-        this.httpProxyHost = httpProxyHost;
-    }
-
-    public String getHttpProxyUser() {
-        return httpProxyUser;
-    }
-
-    public void setHttpProxyUser(String httpProxyUser) {
-        this.httpProxyUser = httpProxyUser;
-    }
-
-    public String getHttpProxyPassword() {
-        return httpProxyPassword;
-    }
-
-    public void setHttpProxyPassword(String httpProxyPassword) {
-        this.httpProxyPassword = httpProxyPassword;
-    }
-
-    public Integer getHttpProxyPort() {
-        return httpProxyPort;
-    }
-
-    public void setHttpProxyPort(Integer httpProxyPort) {
-        this.httpProxyPort = httpProxyPort;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 }

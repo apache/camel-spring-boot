@@ -38,16 +38,6 @@ public class MetricsComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a custom configured MetricRegistry. The option is a
-     * com.codahale.metrics.MetricRegistry type.
-     */
-    private String metricRegistry;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -58,13 +48,23 @@ public class MetricsComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a custom configured MetricRegistry. The option is a
+     * com.codahale.metrics.MetricRegistry type.
+     */
+    private String metricRegistry;
 
-    public String getMetricRegistry() {
-        return metricRegistry;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setMetricRegistry(String metricRegistry) {
-        this.metricRegistry = metricRegistry;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -75,11 +75,11 @@ public class MetricsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public String getMetricRegistry() {
+        return metricRegistry;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setMetricRegistry(String metricRegistry) {
+        this.metricRegistry = metricRegistry;
     }
 }

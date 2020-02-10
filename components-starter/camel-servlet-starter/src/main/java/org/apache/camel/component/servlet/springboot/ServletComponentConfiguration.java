@@ -38,14 +38,18 @@ public class ServletComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
      * Default name of servlet to use. The default name is CamelServlet.
      */
     private String servletName = "CamelServlet";
-    /**
-     * To use a custom org.apache.camel.component.servlet.HttpRegistry. The
-     * option is a org.apache.camel.component.servlet.HttpRegistry type.
-     */
-    private String httpRegistry;
     /**
      * Whether to automatic bind multipart/form-data as attachments on the Camel
      * Exchange. The options attachmentMultipartBinding=true and
@@ -61,6 +65,24 @@ public class ServletComponentConfiguration
      */
     private String fileNameExtWhitelist;
     /**
+     * To use a custom org.apache.camel.component.servlet.HttpRegistry. The
+     * option is a org.apache.camel.component.servlet.HttpRegistry type.
+     */
+    private String httpRegistry;
+    /**
+     * Whether to allow java serialization when a request uses
+     * context-type=application/x-java-serialized-object. This is by default
+     * turned off. If you enable this then be aware that Java will deserialize
+     * the incoming data from the request to Java and that can be a potential
+     * security risk.
+     */
+    private Boolean allowJavaSerializedObject = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
      * To use a custom HttpBinding to control the mapping between Camel message
      * and HttpClient. The option is a org.apache.camel.http.common.HttpBinding
      * type.
@@ -72,33 +94,19 @@ public class ServletComponentConfiguration
      */
     private String httpConfiguration;
     /**
-     * Whether to allow java serialization when a request uses
-     * context-type=application/x-java-serialized-object. This is by default
-     * turned off. If you enable this then be aware that Java will deserialize
-     * the incoming data from the request to Java and that can be a potential
-     * security risk.
-     */
-    private Boolean allowJavaSerializedObject = false;
-    /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
     private String headerFilterStrategy;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
 
     public String getServletName() {
         return servletName;
@@ -106,14 +114,6 @@ public class ServletComponentConfiguration
 
     public void setServletName(String servletName) {
         this.servletName = servletName;
-    }
-
-    public String getHttpRegistry() {
-        return httpRegistry;
-    }
-
-    public void setHttpRegistry(String httpRegistry) {
-        this.httpRegistry = httpRegistry;
     }
 
     public Boolean getAttachmentMultipartBinding() {
@@ -132,6 +132,30 @@ public class ServletComponentConfiguration
         this.fileNameExtWhitelist = fileNameExtWhitelist;
     }
 
+    public String getHttpRegistry() {
+        return httpRegistry;
+    }
+
+    public void setHttpRegistry(String httpRegistry) {
+        this.httpRegistry = httpRegistry;
+    }
+
+    public Boolean getAllowJavaSerializedObject() {
+        return allowJavaSerializedObject;
+    }
+
+    public void setAllowJavaSerializedObject(Boolean allowJavaSerializedObject) {
+        this.allowJavaSerializedObject = allowJavaSerializedObject;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
     public String getHttpBinding() {
         return httpBinding;
     }
@@ -148,35 +172,11 @@ public class ServletComponentConfiguration
         this.httpConfiguration = httpConfiguration;
     }
 
-    public Boolean getAllowJavaSerializedObject() {
-        return allowJavaSerializedObject;
-    }
-
-    public void setAllowJavaSerializedObject(Boolean allowJavaSerializedObject) {
-        this.allowJavaSerializedObject = allowJavaSerializedObject;
-    }
-
     public String getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
     public void setHeaderFilterStrategy(String headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 }

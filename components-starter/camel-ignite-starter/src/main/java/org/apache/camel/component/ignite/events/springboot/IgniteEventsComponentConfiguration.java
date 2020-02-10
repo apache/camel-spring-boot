@@ -38,14 +38,23 @@ public class IgniteEventsComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Ignite instance. The option is a org.apache.ignite.Ignite type.
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private String ignite;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Resource from where to load configuration. The option is a
      * java.lang.Object type.
      */
     private String configurationResource;
+    /**
+     * Ignite instance. The option is a org.apache.ignite.Ignite type.
+     */
+    private String ignite;
     /**
      * Ignite configuration. The option is a
      * org.apache.ignite.configuration.IgniteConfiguration type.
@@ -56,22 +65,13 @@ public class IgniteEventsComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
 
-    public String getIgnite() {
-        return ignite;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setIgnite(String ignite) {
-        this.ignite = ignite;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public String getConfigurationResource() {
@@ -80,6 +80,14 @@ public class IgniteEventsComponentConfiguration
 
     public void setConfigurationResource(String configurationResource) {
         this.configurationResource = configurationResource;
+    }
+
+    public String getIgnite() {
+        return ignite;
+    }
+
+    public void setIgnite(String ignite) {
+        this.ignite = ignite;
     }
 
     public String getIgniteConfiguration() {
@@ -96,13 +104,5 @@ public class IgniteEventsComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 }

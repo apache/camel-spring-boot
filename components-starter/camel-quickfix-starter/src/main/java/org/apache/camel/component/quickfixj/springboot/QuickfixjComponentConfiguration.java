@@ -40,20 +40,6 @@ public class QuickfixjComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the given MessageFactory. The option is a quickfix.MessageFactory
-     * type.
-     */
-    private String messageFactory;
-    /**
-     * To use the given LogFactory. The option is a quickfix.LogFactory type.
-     */
-    private String logFactory;
-    /**
-     * To use the given MessageStoreFactory. The option is a
-     * quickfix.MessageStoreFactory type.
-     */
-    private String messageStoreFactory;
-    /**
      * To use the given map of pre configured QuickFix configurations mapped to
      * the key
      */
@@ -64,10 +50,14 @@ public class QuickfixjComponentConfiguration
      */
     private Boolean lazyCreateEngines = false;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
      */
-    private Boolean basicPropertyBinding = false;
+    private Boolean bridgeErrorHandler = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -80,38 +70,24 @@ public class QuickfixjComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
      */
-    private Boolean bridgeErrorHandler = false;
-
-    public String getMessageFactory() {
-        return messageFactory;
-    }
-
-    public void setMessageFactory(String messageFactory) {
-        this.messageFactory = messageFactory;
-    }
-
-    public String getLogFactory() {
-        return logFactory;
-    }
-
-    public void setLogFactory(String logFactory) {
-        this.logFactory = logFactory;
-    }
-
-    public String getMessageStoreFactory() {
-        return messageStoreFactory;
-    }
-
-    public void setMessageStoreFactory(String messageStoreFactory) {
-        this.messageStoreFactory = messageStoreFactory;
-    }
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use the given LogFactory. The option is a quickfix.LogFactory type.
+     */
+    private String logFactory;
+    /**
+     * To use the given MessageFactory. The option is a quickfix.MessageFactory
+     * type.
+     */
+    private String messageFactory;
+    /**
+     * To use the given MessageStoreFactory. The option is a
+     * quickfix.MessageStoreFactory type.
+     */
+    private String messageStoreFactory;
 
     public Map<String, QuickfixjConfiguration> getConfigurations() {
         return configurations;
@@ -130,12 +106,12 @@ public class QuickfixjComponentConfiguration
         this.lazyCreateEngines = lazyCreateEngines;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
@@ -146,11 +122,35 @@ public class QuickfixjComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getLogFactory() {
+        return logFactory;
+    }
+
+    public void setLogFactory(String logFactory) {
+        this.logFactory = logFactory;
+    }
+
+    public String getMessageFactory() {
+        return messageFactory;
+    }
+
+    public void setMessageFactory(String messageFactory) {
+        this.messageFactory = messageFactory;
+    }
+
+    public String getMessageStoreFactory() {
+        return messageStoreFactory;
+    }
+
+    public void setMessageStoreFactory(String messageStoreFactory) {
+        this.messageStoreFactory = messageStoreFactory;
     }
 }

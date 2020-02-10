@@ -38,62 +38,6 @@ public class ElasticsearchComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use an existing configured Elasticsearch client, instead of creating a
-     * client per endpoint. This allow to customize the client with specific
-     * settings. The option is a org.elasticsearch.client.RestClient type.
-     */
-    private String client;
-    /**
-     * Comma separated list with ip:port formatted remote transport addresses to
-     * use. The ip and port options must be left blank for hostAddresses to be
-     * considered instead.
-     */
-    private String hostAddresses;
-    /**
-     * The timeout in ms to wait before the socket will timeout.
-     */
-    private Integer socketTimeout = 30000;
-    /**
-     * The time in ms to wait before connection will timeout.
-     */
-    private Integer connectionTimeout = 30000;
-    /**
-     * Basic authenticate user
-     */
-    private String user;
-    /**
-     * Password for authenticate
-     */
-    private String password;
-    /**
-     * Enable SSL
-     */
-    private Boolean enableSSL = false;
-    /**
-     * The time in ms before retry
-     */
-    private Integer maxRetryTimeout = 30000;
-    /**
-     * Enable automatically discover nodes from a running Elasticsearch cluster
-     */
-    private Boolean enableSniffer = false;
-    /**
-     * The interval between consecutive ordinary sniff executions in
-     * milliseconds. Will be honoured when sniffOnFailure is disabled or when
-     * there are no failures between consecutive sniff executions
-     */
-    private Integer snifferInterval = 300000;
-    /**
-     * The delay of a sniff execution scheduled after a failure (in
-     * milliseconds)
-     */
-    private Integer sniffAfterFailureDelay = 60000;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -104,93 +48,69 @@ public class ElasticsearchComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use an existing configured Elasticsearch client, instead of creating a
+     * client per endpoint. This allow to customize the client with specific
+     * settings. The option is a org.elasticsearch.client.RestClient type.
+     */
+    private String client;
+    /**
+     * The time in ms to wait before connection will timeout.
+     */
+    private Integer connectionTimeout = 30000;
+    /**
+     * Enable automatically discover nodes from a running Elasticsearch cluster
+     */
+    private Boolean enableSniffer = false;
+    /**
+     * Comma separated list with ip:port formatted remote transport addresses to
+     * use. The ip and port options must be left blank for hostAddresses to be
+     * considered instead.
+     */
+    private String hostAddresses;
+    /**
+     * The time in ms before retry
+     */
+    private Integer maxRetryTimeout = 30000;
+    /**
+     * The delay of a sniff execution scheduled after a failure (in
+     * milliseconds)
+     */
+    private Integer sniffAfterFailureDelay = 60000;
+    /**
+     * The interval between consecutive ordinary sniff executions in
+     * milliseconds. Will be honoured when sniffOnFailure is disabled or when
+     * there are no failures between consecutive sniff executions
+     */
+    private Integer snifferInterval = 300000;
+    /**
+     * The timeout in ms to wait before the socket will timeout.
+     */
+    private Integer socketTimeout = 30000;
+    /**
+     * Enable SSL
+     */
+    private Boolean enableSSL = false;
+    /**
+     * Password for authenticate
+     */
+    private String password;
+    /**
+     * Basic authenticate user
+     */
+    private String user;
 
-    public String getClient() {
-        return client;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setClient(String client) {
-        this.client = client;
-    }
-
-    public String getHostAddresses() {
-        return hostAddresses;
-    }
-
-    public void setHostAddresses(String hostAddresses) {
-        this.hostAddresses = hostAddresses;
-    }
-
-    public Integer getSocketTimeout() {
-        return socketTimeout;
-    }
-
-    public void setSocketTimeout(Integer socketTimeout) {
-        this.socketTimeout = socketTimeout;
-    }
-
-    public Integer getConnectionTimeout() {
-        return connectionTimeout;
-    }
-
-    public void setConnectionTimeout(Integer connectionTimeout) {
-        this.connectionTimeout = connectionTimeout;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getEnableSSL() {
-        return enableSSL;
-    }
-
-    public void setEnableSSL(Boolean enableSSL) {
-        this.enableSSL = enableSSL;
-    }
-
-    public Integer getMaxRetryTimeout() {
-        return maxRetryTimeout;
-    }
-
-    public void setMaxRetryTimeout(Integer maxRetryTimeout) {
-        this.maxRetryTimeout = maxRetryTimeout;
-    }
-
-    public Boolean getEnableSniffer() {
-        return enableSniffer;
-    }
-
-    public void setEnableSniffer(Boolean enableSniffer) {
-        this.enableSniffer = enableSniffer;
-    }
-
-    public Integer getSnifferInterval() {
-        return snifferInterval;
-    }
-
-    public void setSnifferInterval(Integer snifferInterval) {
-        this.snifferInterval = snifferInterval;
-    }
-
-    public Integer getSniffAfterFailureDelay() {
-        return sniffAfterFailureDelay;
-    }
-
-    public void setSniffAfterFailureDelay(Integer sniffAfterFailureDelay) {
-        this.sniffAfterFailureDelay = sniffAfterFailureDelay;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -201,11 +121,91 @@ public class ElasticsearchComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public String getClient() {
+        return client;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setClient(String client) {
+        this.client = client;
+    }
+
+    public Integer getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Integer connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public Boolean getEnableSniffer() {
+        return enableSniffer;
+    }
+
+    public void setEnableSniffer(Boolean enableSniffer) {
+        this.enableSniffer = enableSniffer;
+    }
+
+    public String getHostAddresses() {
+        return hostAddresses;
+    }
+
+    public void setHostAddresses(String hostAddresses) {
+        this.hostAddresses = hostAddresses;
+    }
+
+    public Integer getMaxRetryTimeout() {
+        return maxRetryTimeout;
+    }
+
+    public void setMaxRetryTimeout(Integer maxRetryTimeout) {
+        this.maxRetryTimeout = maxRetryTimeout;
+    }
+
+    public Integer getSniffAfterFailureDelay() {
+        return sniffAfterFailureDelay;
+    }
+
+    public void setSniffAfterFailureDelay(Integer sniffAfterFailureDelay) {
+        this.sniffAfterFailureDelay = sniffAfterFailureDelay;
+    }
+
+    public Integer getSnifferInterval() {
+        return snifferInterval;
+    }
+
+    public void setSnifferInterval(Integer snifferInterval) {
+        this.snifferInterval = snifferInterval;
+    }
+
+    public Integer getSocketTimeout() {
+        return socketTimeout;
+    }
+
+    public void setSocketTimeout(Integer socketTimeout) {
+        this.socketTimeout = socketTimeout;
+    }
+
+    public Boolean getEnableSSL() {
+        return enableSSL;
+    }
+
+    public void setEnableSSL(Boolean enableSSL) {
+        this.enableSSL = enableSSL;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

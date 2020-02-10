@@ -42,10 +42,26 @@ public class BeanValidatorComponentConfiguration
      */
     private Boolean ignoreXmlConfiguration = false;
     /**
-     * To use a a custom ValidationProviderResolver. The option is a
-     * javax.validation.ValidationProviderResolver type.
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
      */
-    private String validationProviderResolver;
+    private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use a custom ConstraintValidatorFactory. The option is a
+     * javax.validation.ConstraintValidatorFactory type.
+     */
+    private String constraintValidatorFactory;
     /**
      * To use a custom MessageInterpolator. The option is a
      * javax.validation.MessageInterpolator type.
@@ -57,26 +73,10 @@ public class BeanValidatorComponentConfiguration
      */
     private String traversableResolver;
     /**
-     * To use a custom ConstraintValidatorFactory. The option is a
-     * javax.validation.ConstraintValidatorFactory type.
+     * To use a a custom ValidationProviderResolver. The option is a
+     * javax.validation.ValidationProviderResolver type.
      */
-    private String constraintValidatorFactory;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
+    private String validationProviderResolver;
 
     public Boolean getIgnoreXmlConfiguration() {
         return ignoreXmlConfiguration;
@@ -86,12 +86,28 @@ public class BeanValidatorComponentConfiguration
         this.ignoreXmlConfiguration = ignoreXmlConfiguration;
     }
 
-    public String getValidationProviderResolver() {
-        return validationProviderResolver;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setValidationProviderResolver(String validationProviderResolver) {
-        this.validationProviderResolver = validationProviderResolver;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getConstraintValidatorFactory() {
+        return constraintValidatorFactory;
+    }
+
+    public void setConstraintValidatorFactory(String constraintValidatorFactory) {
+        this.constraintValidatorFactory = constraintValidatorFactory;
     }
 
     public String getMessageInterpolator() {
@@ -110,27 +126,11 @@ public class BeanValidatorComponentConfiguration
         this.traversableResolver = traversableResolver;
     }
 
-    public String getConstraintValidatorFactory() {
-        return constraintValidatorFactory;
+    public String getValidationProviderResolver() {
+        return validationProviderResolver;
     }
 
-    public void setConstraintValidatorFactory(String constraintValidatorFactory) {
-        this.constraintValidatorFactory = constraintValidatorFactory;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setValidationProviderResolver(String validationProviderResolver) {
+        this.validationProviderResolver = validationProviderResolver;
     }
 }

@@ -37,16 +37,6 @@ public class VelocityComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the VelocityEngine otherwise a new engine is created. The option
-     * is a org.apache.velocity.app.VelocityEngine type.
-     */
-    private String velocityEngine;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -57,13 +47,23 @@ public class VelocityComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To use the VelocityEngine otherwise a new engine is created. The option
+     * is a org.apache.velocity.app.VelocityEngine type.
+     */
+    private String velocityEngine;
 
-    public String getVelocityEngine() {
-        return velocityEngine;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setVelocityEngine(String velocityEngine) {
-        this.velocityEngine = velocityEngine;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -74,11 +74,11 @@ public class VelocityComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public String getVelocityEngine() {
+        return velocityEngine;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setVelocityEngine(String velocityEngine) {
+        this.velocityEngine = velocityEngine;
     }
 }

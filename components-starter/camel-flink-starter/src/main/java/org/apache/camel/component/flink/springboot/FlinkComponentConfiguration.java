@@ -42,25 +42,20 @@ public class FlinkComponentConfiguration
      */
     private String dataSet;
     /**
-     * DataStream to compute against. The option is a
-     * org.apache.flink.streaming.api.datastream.DataStream type.
-     */
-    private String dataStream;
-    /**
      * Function performing action against a DataSet. The option is a
      * org.apache.camel.component.flink.DataSetCallback type.
      */
     private String dataSetCallback;
     /**
+     * DataStream to compute against. The option is a
+     * org.apache.flink.streaming.api.datastream.DataStream type.
+     */
+    private String dataStream;
+    /**
      * Function performing action against a DataStream. The option is a
      * org.apache.camel.component.flink.DataStreamCallback type.
      */
     private String dataStreamCallback;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -72,6 +67,11 @@ public class FlinkComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
 
     public String getDataSet() {
         return dataSet;
@@ -79,14 +79,6 @@ public class FlinkComponentConfiguration
 
     public void setDataSet(String dataSet) {
         this.dataSet = dataSet;
-    }
-
-    public String getDataStream() {
-        return dataStream;
-    }
-
-    public void setDataStream(String dataStream) {
-        this.dataStream = dataStream;
     }
 
     public String getDataSetCallback() {
@@ -97,6 +89,14 @@ public class FlinkComponentConfiguration
         this.dataSetCallback = dataSetCallback;
     }
 
+    public String getDataStream() {
+        return dataStream;
+    }
+
+    public void setDataStream(String dataStream) {
+        this.dataStream = dataStream;
+    }
+
     public String getDataStreamCallback() {
         return dataStreamCallback;
     }
@@ -105,19 +105,19 @@ public class FlinkComponentConfiguration
         this.dataStreamCallback = dataStreamCallback;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 }

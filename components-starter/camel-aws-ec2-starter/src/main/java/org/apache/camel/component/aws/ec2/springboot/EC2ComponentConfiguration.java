@@ -40,26 +40,9 @@ public class EC2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The AWS EC2 default configuration
-     */
-    private EC2ConfigurationNestedConfiguration configuration;
-    /**
-     * The region in which EC2 client needs to work
-     */
-    private String region;
-    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -71,14 +54,38 @@ public class EC2ComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * The region in which EC2 client needs to work
+     */
+    private String region;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * The AWS EC2 default configuration
+     */
+    private EC2ConfigurationNestedConfiguration configuration;
 
-    public EC2ConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setConfiguration(
-            EC2ConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public String getRegion() {
@@ -87,14 +94,6 @@ public class EC2ComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
-    }
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
     }
 
     public String getSecretKey() {
@@ -113,12 +112,13 @@ public class EC2ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public EC2ConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setConfiguration(
+            EC2ConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public static class EC2ConfigurationNestedConfiguration {

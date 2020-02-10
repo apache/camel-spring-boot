@@ -39,26 +39,9 @@ public class SshComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the shared SSH configuration
-     */
-    private SshConfigurationNestedConfiguration configuration;
-    /**
      * Sets the hostname of the remote SSH server.
      */
     private String host;
-    /**
-     * Sets the port number for the remote SSH server.
-     */
-    private Integer port;
-    /**
-     * Sets the username to use in logging into the remote SSH server.
-     */
-    private String username;
-    /**
-     * Sets the password to use in connecting to remote SSH server. Requires
-     * keyPairProvider to be set to null.
-     */
-    private String password;
     /**
      * Sets the command string to send to the remote SSH server during every
      * poll cycle. Only works with camel-ssh component being used as a consumer,
@@ -66,6 +49,70 @@ public class SshComponentConfiguration
      * and that must be URL encoded %0A
      */
     private String pollCommand;
+    /**
+     * Sets the port number for the remote SSH server.
+     */
+    private Integer port;
+    /**
+     * Sets the timeout in milliseconds to wait in establishing the remote SSH
+     * server connection. Defaults to 30000 milliseconds.
+     */
+    private Long timeout;
+    /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions occurred while the consumer is trying to pickup
+     * incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler. By default the consumer will use
+     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
+     * will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * Sets the channel type to pass to the Channel as part of command
+     * execution. Defaults to exec.
+     */
+    private String channelType;
+    /**
+     * To use the shared SSH configuration
+     */
+    private SshConfigurationNestedConfiguration configuration;
+    /**
+     * Sets the shellPrompt to be dropped when response is read after command
+     * execution
+     */
+    private String shellPrompt;
+    /**
+     * Sets the sleep period in milliseconds to wait reading response from shell
+     * prompt. Defaults to 100 milliseconds.
+     */
+    private Long sleepForShellPrompt;
+    /**
+     * Sets the resource path of the certificate to use for Authentication. Will
+     * use ResourceHelperKeyPairProvider to resolve file based certificate, and
+     * depends on keyType setting.
+     */
+    private String certResource;
+    /**
+     * Sets the password to use in loading certResource, if certResource is an
+     * encrypted key.
+     */
+    private String certResourcePassword;
     /**
      * Sets the KeyPairProvider reference to use when connecting using
      * Certificates to the remote SSH Server. The option is a
@@ -79,70 +126,14 @@ public class SshComponentConfiguration
      */
     private String keyType;
     /**
-     * Sets the timeout in milliseconds to wait in establishing the remote SSH
-     * server connection. Defaults to 30000 milliseconds.
+     * Sets the password to use in connecting to remote SSH server. Requires
+     * keyPairProvider to be set to null.
      */
-    private Long timeout;
+    private String password;
     /**
-     * Sets the resource path of the certificate to use for Authentication. Will
-     * use ResourceHelperKeyPairProvider to resolve file based certificate, and
-     * depends on keyType setting.
+     * Sets the username to use in logging into the remote SSH server.
      */
-    private String certResource;
-    /**
-     * Sets the password to use in loading certResource, if certResource is an
-     * encrypted key.
-     */
-    private String certResourcePassword;
-    /**
-     * Sets the channel type to pass to the Channel as part of command
-     * execution. Defaults to exec.
-     */
-    private String channelType;
-    /**
-     * Sets the shellPrompt to be dropped when response is read after command
-     * execution
-     */
-    private String shellPrompt;
-    /**
-     * Sets the sleep period in milliseconds to wait reading response from shell
-     * prompt. Defaults to 100 milliseconds.
-     */
-    private Long sleepForShellPrompt;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
-    /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
-
-    public SshConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            SshConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
-    }
+    private String username;
 
     public String getHost() {
         return host;
@@ -150,30 +141,6 @@ public class SshComponentConfiguration
 
     public void setHost(String host) {
         this.host = host;
-    }
-
-    public Integer getPort() {
-        return port;
-    }
-
-    public void setPort(Integer port) {
-        this.port = port;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPollCommand() {
@@ -184,20 +151,12 @@ public class SshComponentConfiguration
         this.pollCommand = pollCommand;
     }
 
-    public String getKeyPairProvider() {
-        return keyPairProvider;
+    public Integer getPort() {
+        return port;
     }
 
-    public void setKeyPairProvider(String keyPairProvider) {
-        this.keyPairProvider = keyPairProvider;
-    }
-
-    public String getKeyType() {
-        return keyType;
-    }
-
-    public void setKeyType(String keyType) {
-        this.keyType = keyType;
+    public void setPort(Integer port) {
+        this.port = port;
     }
 
     public Long getTimeout() {
@@ -208,20 +167,28 @@ public class SshComponentConfiguration
         this.timeout = timeout;
     }
 
-    public String getCertResource() {
-        return certResource;
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
     }
 
-    public void setCertResource(String certResource) {
-        this.certResource = certResource;
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public String getCertResourcePassword() {
-        return certResourcePassword;
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
     }
 
-    public void setCertResourcePassword(String certResourcePassword) {
-        this.certResourcePassword = certResourcePassword;
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public String getChannelType() {
@@ -230,6 +197,15 @@ public class SshComponentConfiguration
 
     public void setChannelType(String channelType) {
         this.channelType = channelType;
+    }
+
+    public SshConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            SshConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getShellPrompt() {
@@ -248,28 +224,52 @@ public class SshComponentConfiguration
         this.sleepForShellPrompt = sleepForShellPrompt;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public String getCertResource() {
+        return certResource;
     }
 
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setCertResource(String certResource) {
+        this.certResource = certResource;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public String getCertResourcePassword() {
+        return certResourcePassword;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setCertResourcePassword(String certResourcePassword) {
+        this.certResourcePassword = certResourcePassword;
     }
 
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
+    public String getKeyPairProvider() {
+        return keyPairProvider;
     }
 
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
+    public void setKeyPairProvider(String keyPairProvider) {
+        this.keyPairProvider = keyPairProvider;
+    }
+
+    public String getKeyType() {
+        return keyType;
+    }
+
+    public void setKeyType(String keyType) {
+        this.keyType = keyType;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public static class SshConfigurationNestedConfiguration {
