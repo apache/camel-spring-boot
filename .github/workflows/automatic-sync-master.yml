@@ -37,7 +37,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Build Project
-        run: /home/runner/work/camel-spring-boot/camel/mvnw clean install -DskipTests
+        run: mvn -f /home/runner/work/camel-spring-boot/camel/pom.xml clean install -DskipTests
       - name: Checkout
         uses: actions/checkout@v1
         with:
