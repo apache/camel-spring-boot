@@ -37,7 +37,8 @@ jobs:
         with:
           java-version: 1.8
       - name: Build Project
-        run: mvn -f /home/runner/work/camel-spring-boot/camel/pom.xml clean install -DskipTests
+        run: ./mvnw -V --no-transfer-progress clean install -DskipTests
+        working-directory: /home/runner/work/camel-spring-boot/camel
       - name: Checkout
         uses: actions/checkout@v1
         with:
@@ -47,7 +48,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Build Project
-        run: ./mvnw clean install -DskipTests
+        run: ./mvnw -V --no-transfer-progress clean install -DskipTests
       - name: GitHub Pull Request Action
         uses: repo-sync/pull-request@v2.0.1
         with:
