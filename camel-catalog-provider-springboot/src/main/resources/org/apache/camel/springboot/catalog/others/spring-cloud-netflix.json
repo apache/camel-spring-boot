@@ -1,0 +1,14 @@
+{
+ "other": {
+    "name": "spring-cloud-netflix",
+    "kind": "other",
+    "title": "Spring Cloud Netflix",
+    "description": "Camel Cloud integration with Spring Cloud Netflix",
+    "deprecated": "false",
+    "firstVersion": "2.19.0",
+    "label": "spring,microservice",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-spring-cloud-netflix-starter",
+    "version": "3.1.0-SNAPSHOT"
+  }
+}
