@@ -47,6 +47,7 @@
               </goals>
               <configuration>
                 <target>
+                  <copy file="${project.basedir}/../components-starter/README.adoc" tofile="${project.basedir}/modules/ROOT/pages/index.adoc" />
                   <copy todir="${project.basedir}/modules/ROOT/pages" flatten="true">
                     <fileset dir="${project.basedir}/../components-starter/">
                       <include name="*/src/main/docs/*.adoc"/>

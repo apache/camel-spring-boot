@@ -1,0 +1,1262 @@
+= Component Starters
+
+Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot Starters
+
+== Camel Components
+
+// components: START
+Number of Camel components: 319 in 254 JAR artifacts (1 deprecated)
+
+[width="100%",cols="4,1,5",options="header"]
+|===
+| Component | Since | Description
+
+| link:https://camel.apache.org/components/latest/activemq-component.html[ActiveMQ] (camel-activemq-starter) +
+`activemq:destinationType:destinationName` | 1.0 | The activemq component allows messages to be sent to (or consumed from) Apache ActiveMQ. This component extends the Camel JMS component.
+
+| link:https://camel.apache.org/components/latest/ahc-component.html[AHC] (camel-ahc-starter) +
+`ahc:httpUri` | 2.8 | To call external HTTP services using Async Http Client.
+
+| link:https://camel.apache.org/components/latest/ahc-ws-component.html[AHC Websocket] (camel-ahc-ws-starter) +
+`ahc-ws:httpUri` | 2.14 | To exchange data with external Websocket servers using Async Http Client.
+
+| link:https://camel.apache.org/components/latest/amqp-component.html[AMQP] (camel-amqp-starter) +
+`amqp:destinationType:destinationName` | 1.2 | Messaging with AMQP protocol using Apache QPid Client.
+
+| link:https://camel.apache.org/components/latest/apns-component.html[APNS] (camel-apns-starter) +
+`apns:name` | 2.8 | For sending notifications to Apple iOS devices.
+
+| link:https://camel.apache.org/components/latest/as2-component.html[AS2] (camel-as2-starter) +
+`as2:apiName/methodName` | 2.22 | Component used for transferring data secure and reliable over the internet using the AS2 protocol.
+
+| link:https://camel.apache.org/components/latest/asterisk-component.html[Asterisk] (camel-asterisk-starter) +
+`asterisk:name` | 2.18 | The asterisk component is used to interact with Asterisk PBX Server.
+
+| link:https://camel.apache.org/components/latest/atmos-component.html[Atmos] (camel-atmos-starter) +
+`atmos:name/operation` | 2.15 | The atmos component is used for integrating with EMC's Atomos Storage.
+
+| link:https://camel.apache.org/components/latest/atmosphere-websocket-component.html[Atmosphere Websocket] (camel-atmosphere-websocket-starter) +
+`atmosphere-websocket:servicePath` | 2.14 | To exchange data with external Websocket clients using Atmosphere.
+
+| link:https://camel.apache.org/components/latest/atom-component.html[Atom] (camel-atom-starter) +
+`atom:feedUri` | 1.2 | The atom component is used for consuming Atom RSS feeds.
+
+| link:https://camel.apache.org/components/latest/atomix-map-component.html[Atomix Map] (camel-atomix-starter) +
+`atomix-map:resourceName` | 2.20 | The atomix-map component is used to access Atomix's distributed map.
+
+| link:https://camel.apache.org/components/latest/atomix-messaging-component.html[Atomix Messaging] (camel-atomix-starter) +
+`atomix-messaging:resourceName` | 2.20 | The atomix-messaging component is used to access Atomix's group messaging.
+
+| link:https://camel.apache.org/components/latest/atomix-multimap-component.html[Atomix MultiMap] (camel-atomix-starter) +
+`atomix-multimap:resourceName` | 2.20 | The atomix-multimap component is used to access Atomix's distributed multi map.
+
+| link:https://camel.apache.org/components/latest/atomix-queue-component.html[Atomix Queue] (camel-atomix-starter) +
+`atomix-queue:resourceName` | 2.20 | The atomix-queue component is used to access Atomix's distributed queue.
+
+| link:https://camel.apache.org/components/latest/atomix-set-component.html[Atomix Set] (camel-atomix-starter) +
+`atomix-set:resourceName` | 2.20 | The atomix-set component is used to access Atomix's distributed set.
+
+| link:https://camel.apache.org/components/latest/atomix-value-component.html[Atomix Value] (camel-atomix-starter) +
+`atomix-value:resourceName` | 2.20 | The atomix-value component is used to access Atomix's distributed value.
+
+| link:https://camel.apache.org/components/latest/avro-component.html[Avro] (camel-avro-starter) +
+`avro:transport:host:port/messageName` | 2.10 | Working with Apache Avro for data serialization.
+
+| link:https://camel.apache.org/components/latest/aws2-cw-component.html[AWS 2 CloudWatch] (camel-aws2-cw-starter) +
+`aws2-cw:namespace` | 3.1 | The aws2-cw component is used for sending metrics to an Amazon CloudWatch.
+
+| link:https://camel.apache.org/components/latest/aws2-ddb-component.html[AWS 2 DynamoDB] (camel-aws2-ddb-starter) +
+`aws2-ddb:tableName` | 3.1 | The aws2-ddb component is used for storing and retrieving data from Amazon's DynamoDB service.
+
+| link:https://camel.apache.org/components/latest/aws2-ddbstream-component.html[AWS 2 DynamoDB Streams] (camel-aws2-ddb-starter) +
+`aws2-ddbstream:tableName` | 3.1 | The aws2-ddbstream component is used for working with Amazon DynamoDB Streams.
+
+| link:https://camel.apache.org/components/latest/aws2-ec2-component.html[AWS 2 EC2] (camel-aws2-ec2-starter) +
+`aws2-ec2:label` | 3.1 | The aws2-ec2 is used for managing Amazon EC2 instances.
+
+| link:https://camel.apache.org/components/latest/aws2-ecs-component.html[AWS 2 ECS] (camel-aws2-ecs-starter) +
+`aws2-ecs:label` | 3.1 | The aws2-ecs is used for managing Amazon ECS
+
+| link:https://camel.apache.org/components/latest/aws2-eks-component.html[AWS 2 EKS] (camel-aws2-eks-starter) +
+`aws2-eks:label` | 3.1 | The aws2-eks is used for managing Amazon EKS
+
+| link:https://camel.apache.org/components/latest/aws2-iam-component.html[AWS 2 IAM] (camel-aws2-iam-starter) +
+`aws2-iam:label` | 3.1 | The aws-iam is used for managing Amazon IAM
+
+| link:https://camel.apache.org/components/latest/aws2-kms-component.html[AWS 2 KMS] (camel-aws2-kms-starter) +
+`aws2-kms:label` | 3.1 | The aws2-kms is used for managing Amazon KMS
+
+| link:https://camel.apache.org/components/latest/aws2-mq-component.html[AWS 2 MQ] (camel-aws2-mq-starter) +
+`aws2-mq:label` | 3.1 | The aws2-mq is used for managing Amazon MQ instances.
+
+| link:https://camel.apache.org/components/latest/aws2-msk-component.html[AWS 2 MSK] (camel-aws2-msk-starter) +
+`aws2-msk:label` | 3.1 | The aws2-msk is used for managing Amazon MSK
+
+| link:https://camel.apache.org/components/latest/aws2-translate-component.html[AWS 2 Translate] (camel-aws2-translate-starter) +
+`aws2-translate:label` | 3.1 | The aws2-translate component is used for managing Amazon Translate
+
+| link:https://camel.apache.org/components/latest/aws-cw-component.html[AWS CloudWatch] (camel-aws-cw-starter) +
+`aws-cw:namespace` | 2.11 | The aws-cw component is used for sending metrics to an Amazon CloudWatch.
+
+| link:https://camel.apache.org/components/latest/aws-ddb-component.html[AWS DynamoDB] (camel-aws-ddb-starter) +
+`aws-ddb:tableName` | 2.10 | The aws-ddb component is used for storing and retrieving data from Amazon's DynamoDB service.
+
+| link:https://camel.apache.org/components/latest/aws-ddbstream-component.html[AWS DynamoDB Streams] (camel-aws-ddb-starter) +
+`aws-ddbstream:tableName` | 2.17 | The aws-ddbstream component is used for working with Amazon DynamoDB Streams.
+
+| link:https://camel.apache.org/components/latest/aws-ec2-component.html[AWS EC2] (camel-aws-ec2-starter) +
+`aws-ec2:label` | 2.16 | The aws-ec2 is used for managing Amazon EC2 instances.
+
+| link:https://camel.apache.org/components/latest/aws-ecs-component.html[AWS ECS] (camel-aws-ecs-starter) +
+`aws-ecs:label` | 3.0 | The aws-ecs is used for managing Amazon ECS
+
+| link:https://camel.apache.org/components/latest/aws-eks-component.html[AWS EKS] (camel-aws-eks-starter) +
+`aws-eks:label` | 3.0 | The aws-eks is used for managing Amazon EKS
+
+| link:https://camel.apache.org/components/latest/aws-iam-component.html[AWS IAM] (camel-aws-iam-starter) +
+`aws-iam:label` | 2.23 | The aws-iam is used for managing Amazon IAM
+
+| link:https://camel.apache.org/components/latest/aws-kinesis-component.html[AWS Kinesis] (camel-aws-kinesis-starter) +
+`aws-kinesis:streamName` | 2.17 | The aws-kinesis component is for consuming and producing records from Amazon Kinesis Streams.
+
+| link:https://camel.apache.org/components/latest/aws-kinesis-firehose-component.html[AWS Kinesis Firehose] (camel-aws-kinesis-starter) +
+`aws-kinesis-firehose:streamName` | 2.19 | The aws-kinesis-firehose component is used for producing Amazon's Kinesis Firehose streams.
+
+| link:https://camel.apache.org/components/latest/aws-kms-component.html[AWS KMS] (camel-aws-kms-starter) +
+`aws-kms:label` | 2.21 | The aws-kms is used for managing Amazon KMS
+
+| link:https://camel.apache.org/components/latest/aws-lambda-component.html[AWS Lambda] (camel-aws-lambda-starter) +
+`aws-lambda:function` | 2.20 | The aws-lambda is used for managing and invoking functions from Amazon Lambda.
+
+| link:https://camel.apache.org/components/latest/aws-mq-component.html[AWS MQ] (camel-aws-mq-starter) +
+`aws-mq:label` | 2.21 | The aws-mq is used for managing Amazon MQ instances.
+
+| link:https://camel.apache.org/components/latest/aws-msk-component.html[AWS MSK] (camel-aws-msk-starter) +
+`aws-msk:label` | 3.0 | The aws-msk is used for managing Amazon MSK
+
+| link:https://camel.apache.org/components/latest/aws-s3-component.html[AWS S3 Storage Service] (camel-aws-s3-starter) +
+`aws-s3://bucketNameOrArn` | 2.8 | The aws-s3 component is used for storing and retrieving object from Amazon S3 Storage Service.
+
+| link:https://camel.apache.org/components/latest/aws-ses-component.html[AWS Simple Email Service] (camel-aws-ses-starter) +
+`aws-ses:from` | 2.9 | The aws-ses component is used for sending emails with Amazon's SES service.
+
+| link:https://camel.apache.org/components/latest/aws-sns-component.html[AWS Simple Notification System] (camel-aws-sns-starter) +
+`aws-sns:topicNameOrArn` | 2.8 | The aws-sns component is used for sending messages to an Amazon Simple Notification Topic.
+
+| link:https://camel.apache.org/components/latest/aws-sqs-component.html[AWS Simple Queue Service] (camel-aws-sqs-starter) +
+`aws-sqs:queueNameOrArn` | 2.6 | The aws-sqs component is used for sending and receiving messages to Amazon's SQS service.
+
+| link:https://camel.apache.org/components/latest/aws-swf-component.html[AWS Simple Workflow] (camel-aws-swf-starter) +
+`aws-swf:type` | 2.13 | The aws-swf component is used for managing workflows from Amazon Simple Workflow.
+
+| link:https://camel.apache.org/components/latest/aws-sdb-component.html[AWS SimpleDB] (camel-aws-sdb-starter) +
+`aws-sdb:domainName` | 2.9 | The aws-sdb component is for storing and retrieving data from/to Amazon's SDB service.
+
+| link:https://camel.apache.org/components/latest/aws-translate-component.html[AWS Translate] (camel-aws-translate-starter) +
+`aws-translate:label` | 3.0 | The aws-translate component is used for managing Amazon Translate
+
+| link:https://camel.apache.org/components/latest/azure-blob-component.html[Azure Storage Blob Service] (camel-azure-starter) +
+`azure-blob:containerOrBlobUri` | 2.19 | The azure-blob component is used for storing and retrieving blobs from Azure Storage Blob Service.
+
+| link:https://camel.apache.org/components/latest/azure-queue-component.html[Azure Storage Queue Service] (camel-azure-starter) +
+`azure-queue:containerAndQueueUri` | 2.19 | The azure-queue component is used for storing and retrieving messages from Azure Storage Queue Service.
+
+| link:https://camel.apache.org/components/latest/bean-component.html[Bean] (camel-bean-starter) +
+`bean:beanName` | 1.0 | The bean component is for invoking Java beans from Camel.
+
+| link:https://camel.apache.org/components/latest/bean-validator-component.html[Bean Validator] (camel-bean-validator-starter) +
+`bean-validator:label` | 2.3 | The Validator component performs bean validation of the message body using the Java Bean Validation API.
+
+| link:https://camel.apache.org/components/latest/beanstalk-component.html[Beanstalk] (camel-beanstalk-starter) +
+`beanstalk:connectionSettings` | 2.15 | The beanstalk component is used for job retrieval and post-processing of Beanstalk jobs.
+
+| link:https://camel.apache.org/components/latest/bonita-component.html[Bonita] (camel-bonita-starter) +
+`bonita:operation` | 2.19 | Used for communicating with a remote Bonita BPM process engine.
+
+| link:https://camel.apache.org/components/latest/box-component.html[Box] (camel-box-starter) +
+`box:apiName/methodName` | 2.14 | For uploading downloading and managing files folders groups collaborations etc on box DOT com.
+
+| link:https://camel.apache.org/components/latest/braintree-component.html[Braintree] (camel-braintree-starter) +
+`braintree:apiName/methodName` | 2.17 | The braintree component is used for integrating with the Braintree Payment System.
+
+| link:https://camel.apache.org/components/latest/browse-component.html[Browse] (camel-browse-starter) +
+`browse:name` | 1.3 | The browse component is used for viewing the messages received on endpoints that supports BrowsableEndpoint.
+
+| link:https://camel.apache.org/components/latest/caffeine-cache-component.html[Caffeine Cache] (camel-caffeine-starter) +
+`caffeine-cache:cacheName` | 2.20 | The caffeine-cache component is used for integration with Caffeine Cache.
+
+| link:https://camel.apache.org/components/latest/caffeine-loadcache-component.html[Caffeine LoadCache] (camel-caffeine-starter) +
+`caffeine-loadcache:cacheName` | 2.20 | The caffeine-loadcache component is used for integration with Caffeine Load Cache.
+
+| link:https://camel.apache.org/components/latest/cql-component.html[Cassandra CQL] (camel-cassandraql-starter) +
+`cql:beanRef:hosts:port/keyspace` | 2.15 | The cql component aims at integrating Cassandra 2.0 using the CQL3 API (not the Thrift API). It's based on Cassandra Java Driver provided by DataStax.
+
+| link:https://camel.apache.org/components/latest/chatscript-component.html[ChatScript] (camel-chatscript-starter) +
+`chatscript:host:port/botName` | 3.0 | Represents a ChatScript endpoint.
+
+| link:https://camel.apache.org/components/latest/chunk-component.html[Chunk] (camel-chunk-starter) +
+`chunk:resourceUri` | 2.15 | Transforms the message using a Chunk template.
+
+| link:https://camel.apache.org/components/latest/class-component.html[Class] (camel-bean-starter) +
+`class:beanName` | 2.4 | The Class component is for invoking Java classes (Java beans) from Camel.
+
+| link:https://camel.apache.org/components/latest/cm-sms-component.html[CM SMS Gateway] (camel-cm-sms-starter) +
+`cm-sms:host` | 2.18 | The cm-sms component allows to integrate with CM SMS Gateway.
+
+| link:https://camel.apache.org/components/latest/cmis-component.html[CMIS] (camel-cmis-starter) +
+`cmis:cmsUrl` | 2.11 | The cmis component uses the Apache Chemistry client API and allows you to add/read nodes to/from a CMIS compliant content repositories.
+
+| link:https://camel.apache.org/components/latest/coap-component.html[CoAP] (camel-coap-starter) +
+`coap:uri` | 2.16 | The coap component is used for sending and receiving messages from COAP capable devices.
+
+| link:https://camel.apache.org/components/latest/cometd-component.html[CometD] (camel-cometd-starter) +
+`cometd:host:port/channelName` | 2.0 | The cometd component is a transport for working with the Jetty implementation of the cometd/bayeux protocol.
+
+| link:https://camel.apache.org/components/latest/consul-component.html[Consul] (camel-consul-starter) +
+`consul:apiEndpoint` | 2.18 | The camel consul component allows you to work with Consul, a distributed, highly available, datacenter-aware, service discovery and configuration system.
+
+| link:https://camel.apache.org/components/latest/controlbus-component.html[Control Bus] (camel-controlbus-starter) +
+`controlbus:command:language` | 2.11 | The controlbus component provides easy management of Camel applications based on the Control Bus EIP pattern.
+
+| link:https://camel.apache.org/components/latest/corda-component.html[Corda] (camel-corda-starter) +
+`corda:node` | 2.23 | The corda component uses corda-rpc to interact with corda nodes.
+
+| link:https://camel.apache.org/components/latest/couchbase-component.html[Couchbase] (camel-couchbase-starter) +
+`couchbase:protocol:hostname:port` | 2.19 | Represents a Couchbase endpoint that can query Views with a Poll strategy and/or produce various type of operations.
+
+| link:https://camel.apache.org/components/latest/couchdb-component.html[CouchDB] (camel-couchdb-starter) +
+`couchdb:protocol:hostname:port/database` | 2.11 | The couchdb component is used for integrate with CouchDB databases.
+
+| link:https://camel.apache.org/components/latest/cron-component.html[Cron] (camel-cron-starter) +
+`cron:name` | 3.1 | Camel Cron Component
+
+| link:https://camel.apache.org/components/latest/crypto-component.html[Crypto (JCE)] (camel-crypto-starter) +
+`crypto:cryptoOperation:name` | 2.3 | The crypto component is used for signing and verifying exchanges using the Signature Service of the Java Cryptographic Extension (JCE).
+
+| link:https://camel.apache.org/components/latest/crypto-cms-component.html[Crypto CMS] (camel-crypto-cms-starter) +
+`crypto-cms:cryptoOperation:name` | 2.20 | *deprecated* The crypto cms component is used for encrypting data in CMS Enveloped Data format, decrypting CMS Enveloped Data, signing data in CMS Signed Data format, and verifying CMS Signed Data.
+
+| link:https://camel.apache.org/components/latest/cxf-component.html[CXF] (camel-cxf-starter) +
+`cxf:beanId:address` | 1.0 | The cxf component is used for SOAP WebServices using Apache CXF.
+
+| link:https://camel.apache.org/components/latest/cxfrs-component.html[CXF-RS] (camel-cxf-starter) +
+`cxfrs:beanId:address` | 2.0 | The cxfrs component is used for JAX-RS REST services using Apache CXF.
+
+| link:https://camel.apache.org/components/latest/dataformat-component.html[Data Format] (camel-dataformat-starter) +
+`dataformat:name:operation` | 2.12 | The dataformat component is used for working with Data Formats as if it was a regular Component supporting Endpoints and URIs.
+
+| link:https://camel.apache.org/components/latest/dataset-component.html[Dataset] (camel-dataset-starter) +
+`dataset:name` | 1.3 | The dataset component provides a mechanism to easily perform load & soak testing of your system.
+
+| link:https://camel.apache.org/components/latest/dataset-test-component.html[DataSet Test] (camel-dataset-starter) +
+`dataset-test:name` | 1.3 | The dataset-test component extends the mock component by on startup to pull messages from another endpoint to set the expected message bodies.
+
+| link:https://camel.apache.org/components/latest/debezium-mongodb-component.html[Debezium MongoDB Connector] (camel-debezium-mongodb-starter) +
+`debezium-mongodb:name` | 3.0 | Represents a Debezium MongoDB endpoint which is used to capture changes in MongoDB database so that that applications can see those changes and respond to them.
+
+| link:https://camel.apache.org/components/latest/debezium-mysql-component.html[Debezium MySQL Connector] (camel-debezium-mysql-starter) +
+`debezium-mysql:name` | 3.0 | Represents a Debezium MySQL endpoint which is used to capture changes in MySQL database so that that applications can see those changes and respond to them.
+
+| link:https://camel.apache.org/components/latest/debezium-postgres-component.html[Debezium PostgresSQL Connector] (camel-debezium-postgres-starter) +
+`debezium-postgres:name` | 3.0 | Represents a Debezium PostgresSQL endpoint which is used to capture changes in PostgresSQL database so that that applications can see those changes and respond to them.
+
+| link:https://camel.apache.org/components/latest/debezium-sqlserver-component.html[Debezium SQL Server Connector] (camel-debezium-sqlserver-starter) +
+`debezium-sqlserver:name` | 3.0 | Represents a Debezium SQL Server endpoint which is used to capture changes in SQL Server database so that that applications can see those changes and respond to them.
+
+| link:https://camel.apache.org/components/latest/digitalocean-component.html[DigitalOcean] (camel-digitalocean-starter) +
+`digitalocean:operation` | 2.19 | The DigitalOcean component allows you to manage Droplets and resources within the DigitalOcean cloud.
+
+| link:https://camel.apache.org/components/latest/direct-component.html[Direct] (camel-direct-starter) +
+`direct:name` | 1.0 | The direct component provides direct, synchronous call to another endpoint from the same CamelContext.
+
+| link:https://camel.apache.org/components/latest/direct-vm-component.html[Direct VM] (camel-directvm-starter) +
+`direct-vm:name` | 2.10 | The direct-vm component provides direct, synchronous call to another endpoint from any CamelContext in the same JVM.
+
+| link:https://camel.apache.org/components/latest/disruptor-component.html[Disruptor] (camel-disruptor-starter) +
+`disruptor:name` | 2.12 | The disruptor component provides asynchronous SEDA behavior using LMAX Disruptor.
+
+| link:https://camel.apache.org/components/latest/dns-component.html[DNS] (camel-dns-starter) +
+`dns:dnsType` | 2.7 | To lookup domain information and run DNS queries using DNSJava.
+
+| link:https://camel.apache.org/components/latest/docker-component.html[Docker] (camel-docker-starter) +
+`docker:operation` | 2.15 | The docker component is used for managing Docker containers.
+
+| link:https://camel.apache.org/components/latest/dozer-component.html[Dozer] (camel-dozer-starter) +
+`dozer:name` | 2.15 | The dozer component provides the ability to map between Java beans using the Dozer mapping library.
+
+| link:https://camel.apache.org/components/latest/drill-component.html[Drill] (camel-drill-starter) +
+`drill:host` | 2.19 | The drill component gives you the ability to quering into apache drill cluster.
+
+| link:https://camel.apache.org/components/latest/dropbox-component.html[Dropbox] (camel-dropbox-starter) +
+`dropbox:operation` | 2.14 | For uploading, downloading and managing files, folders, groups, collaborations, etc on dropbox DOT com.
+
+| link:https://camel.apache.org/components/latest/ehcache-component.html[Ehcache] (camel-ehcache-starter) +
+`ehcache:cacheName` | 2.18 | The ehcache component enables you to perform caching operations using Ehcache as cache implementation.
+
+| link:https://camel.apache.org/components/latest/elasticsearch-rest-component.html[Elastichsearch Rest] (camel-elasticsearch-rest-starter) +
+`elasticsearch-rest:clusterName` | 2.21 | The elasticsearch component is used for interfacing with ElasticSearch server using REST API.
+
+| link:https://camel.apache.org/components/latest/elsql-component.html[ElSQL] (camel-elsql-starter) +
+`elsql:elsqlName:resourceUri` | 2.16 | The elsql component is an extension to the existing SQL Component that uses ElSql to define the SQL queries.
+
+| link:https://camel.apache.org/components/latest/elytron-component.html[Elytron] (camel-elytron-starter) +
+`elytron:httpURI` | 3.1 | The elytron component is allows you to work with the Elytron Security Framework
+
+| link:https://camel.apache.org/components/latest/etcd-keys-component.html[Etcd Keys] (camel-etcd-starter) +
+`etcd-keys:path` | 2.18 | Camel Etcd support
+
+| link:https://camel.apache.org/components/latest/etcd-stats-component.html[Etcd Stats] (camel-etcd-starter) +
+`etcd-stats:path` | 2.18 | The camel etcd component allows you to work with Etcd, a distributed reliable key-value store.
+
+| link:https://camel.apache.org/components/latest/etcd-watch-component.html[Etcd Watch] (camel-etcd-starter) +
+`etcd-watch:path` | 2.18 | The camel etcd component allows you to work with Etcd, a distributed reliable key-value store.
+
+| link:https://camel.apache.org/components/latest/exec-component.html[Exec] (camel-exec-starter) +
+`exec:executable` | 2.3 | The exec component can be used to execute OS system commands.
+
+| link:https://camel.apache.org/components/latest/facebook-component.html[Facebook] (camel-facebook-starter) +
+`facebook:methodName` | 2.14 | The Facebook component provides access to all of the Facebook APIs accessible using Facebook4J.
+
+| link:https://camel.apache.org/components/latest/fhir-component.html[FHIR] (camel-fhir-starter) +
+`fhir:apiName/methodName` | 2.23 | The fhir component is used for working with the FHIR protocol (health care).
+
+| link:https://camel.apache.org/components/latest/file-component.html[File] (camel-file-starter) +
+`file:directoryName` | 1.0 | The file component is used for reading or writing files.
+
+| link:https://camel.apache.org/components/latest/file-watch-component.html[File Watch] (camel-file-watch-starter) +
+`file-watch:path` | 3.0 | The file-watch is used to monitor file events in directory using java.nio.file.WatchService
+
+| link:https://camel.apache.org/components/latest/flatpack-component.html[Flatpack] (camel-flatpack-starter) +
+`flatpack:type:resourceUri` | 1.4 | The flatpack component supports fixed width and delimited file parsing via the FlatPack library.
+
+| link:https://camel.apache.org/components/latest/flink-component.html[Flink] (camel-flink-starter) +
+`flink:endpointType` | 2.18 | The flink component can be used to send DataSet jobs to Apache Flink cluster.
+
+| link:https://camel.apache.org/components/latest/fop-component.html[FOP] (camel-fop-starter) +
+`fop:outputType` | 2.10 | The fop component allows you to render a message into different output formats using Apache FOP.
+
+| link:https://camel.apache.org/components/latest/freemarker-component.html[Freemarker] (camel-freemarker-starter) +
+`freemarker:resourceUri` | 2.10 | Transforms the message using a FreeMarker template.
+
+| link:https://camel.apache.org/components/latest/ftp-component.html[FTP] (camel-ftp-starter) +
+`ftp:host:port/directoryName` | 1.1 | The \ftp component is used for uploading or downloading files from FTP servers.
+
+| link:https://camel.apache.org/components/latest/ftps-component.html[FTPS] (camel-ftp-starter) +
+`ftps:host:port/directoryName` | 2.2 | The \ftps (FTP secure SSL/TLS) component is used for uploading or downloading files from FTP servers.
+
+| link:https://camel.apache.org/components/latest/ganglia-component.html[Ganglia] (camel-ganglia-starter) +
+`ganglia:host:port` | 2.15 | The ganglia component is used for sending metrics to the Ganglia monitoring system.
+
+| link:https://camel.apache.org/components/latest/geocoder-component.html[Geocoder] (camel-geocoder-starter) +
+`geocoder:address:latlng` | 2.12 | The geocoder component is used for looking up geocodes (latitude and longitude) for a given address, or reverse lookup.
+
+| link:https://camel.apache.org/components/latest/git-component.html[Git] (camel-git-starter) +
+`git:localPath` | 2.16 | The git component is used for working with git repositories.
+
+| link:https://camel.apache.org/components/latest/github-component.html[GitHub] (camel-github-starter) +
+`github:type/branchName` | 2.15 | The github component is used for integrating Camel with github.
+
+| link:https://camel.apache.org/components/latest/google-bigquery-component.html[Google BigQuery] (camel-google-bigquery-starter) +
+`google-bigquery:projectId:datasetId:tableId` | 2.20 | Google BigQuery data warehouse for analytics.
+
+| link:https://camel.apache.org/components/latest/google-bigquery-sql-component.html[Google BigQuery Standard SQL] (camel-google-bigquery-starter) +
+`google-bigquery-sql:projectId:query` | 2.23 | Google BigQuery data warehouse for analytics (using SQL queries).
+
+| link:https://camel.apache.org/components/latest/google-calendar-component.html[Google Calendar] (camel-google-calendar-starter) +
+`google-calendar:apiName/methodName` | 2.15 | The google-calendar component provides access to Google Calendar.
+
+| link:https://camel.apache.org/components/latest/google-calendar-stream-component.html[Google Calendar Stream] (camel-google-calendar-starter) +
+`google-calendar-stream:index` | 2.23 | The google-calendar-stream component provides access to Google Calendar in a streaming mode.
+
+| link:https://camel.apache.org/components/latest/google-drive-component.html[Google Drive] (camel-google-drive-starter) +
+`google-drive:apiName/methodName` | 2.14 | The google-drive component provides access to Google Drive file storage service.
+
+| link:https://camel.apache.org/components/latest/google-mail-component.html[Google Mail] (camel-google-mail-starter) +
+`google-mail:apiName/methodName` | 2.15 | The google-mail component provides access to Google Mail.
+
+| link:https://camel.apache.org/components/latest/google-mail-stream-component.html[Google Mail Stream] (camel-google-mail-starter) +
+`google-mail-stream:index` | 2.22 | The google-mail component provides access to Google Mail.
+
+| link:https://camel.apache.org/components/latest/google-pubsub-component.html[Google Pubsub] (camel-google-pubsub-starter) +
+`google-pubsub:projectId:destinationName` | 2.19 | Messaging client for Google Cloud Platform PubSub Service
+
+| link:https://camel.apache.org/components/latest/google-sheets-component.html[Google Sheets] (camel-google-sheets-starter) +
+`google-sheets:apiName/methodName` | 2.23 | The google-sheets component provides access to Google Sheets.
+
+| link:https://camel.apache.org/components/latest/google-sheets-stream-component.html[Google Sheets Stream] (camel-google-sheets-starter) +
+`google-sheets-stream:apiName` | 2.23 | The google-sheets-stream component provides access to Google Sheets.
+
+| link:https://camel.apache.org/components/latest/gora-component.html[Gora] (camel-gora-starter) +
+`gora:name` | 2.14 | The gora component allows you to work with NoSQL databases using the Apache Gora framework.
+
+| link:https://camel.apache.org/components/latest/graphql-component.html[GraphQL] (camel-graphql-starter) +
+`graphql:httpUri` | 3.0 | A Camel GraphQL Component
+
+| link:https://camel.apache.org/components/latest/grpc-component.html[gRPC] (camel-grpc-starter) +
+`grpc:host:port/service` | 2.19 | The gRPC component allows to call and expose remote procedures via HTTP/2 with protobuf dataformat
+
+| link:https://camel.apache.org/components/latest/guava-eventbus-component.html[Guava EventBus] (camel-guava-eventbus-starter) +
+`guava-eventbus:eventBusRef` | 2.10 | The guava-eventbus component provides integration bridge between Camel and Google Guava EventBus.
+
+| link:https://camel.apache.org/components/latest/hazelcast-atomicvalue-component.html[Hazelcast Atomic Number] (camel-hazelcast-starter) +
+`hazelcast-atomicvalue:cacheName` | 2.7 | The hazelcast-atomicvalue component is used to access Hazelcast atomic number, which is an object that simply provides a grid wide number (long).
+
+| link:https://camel.apache.org/components/latest/hazelcast-instance-component.html[Hazelcast Instance] (camel-hazelcast-starter) +
+`hazelcast-instance:cacheName` | 2.7 | The hazelcast-instance component is used to consume join/leave events of the cache instance in the cluster.
+
+| link:https://camel.apache.org/components/latest/hazelcast-list-component.html[Hazelcast List] (camel-hazelcast-starter) +
+`hazelcast-list:cacheName` | 2.7 | The hazelcast-list component is used to access Hazelcast distributed list.
+
+| link:https://camel.apache.org/components/latest/hazelcast-map-component.html[Hazelcast Map] (camel-hazelcast-starter) +
+`hazelcast-map:cacheName` | 2.7 | The hazelcast-map component is used to access Hazelcast distributed map.
+
+| link:https://camel.apache.org/components/latest/hazelcast-multimap-component.html[Hazelcast Multimap] (camel-hazelcast-starter) +
+`hazelcast-multimap:cacheName` | 2.7 | The hazelcast-multimap component is used to to access Hazelcast distributed multimap.
+
+| link:https://camel.apache.org/components/latest/hazelcast-queue-component.html[Hazelcast Queue] (camel-hazelcast-starter) +
+`hazelcast-queue:cacheName` | 2.7 | The hazelcast-queue component is used to access Hazelcast distributed queue.
+
+| link:https://camel.apache.org/components/latest/hazelcast-replicatedmap-component.html[Hazelcast Replicated Map] (camel-hazelcast-starter) +
+`hazelcast-replicatedmap:cacheName` | 2.16 | The hazelcast-replicatedmap component is used to access Hazelcast replicated map.
+
+| link:https://camel.apache.org/components/latest/hazelcast-ringbuffer-component.html[Hazelcast Ringbuffer] (camel-hazelcast-starter) +
+`hazelcast-ringbuffer:cacheName` | 2.16 | The hazelcast-ringbuffer component is used to access Hazelcast distributed ringbuffer.
+
+| link:https://camel.apache.org/components/latest/hazelcast-seda-component.html[Hazelcast SEDA] (camel-hazelcast-starter) +
+`hazelcast-seda:cacheName` | 2.7 | The hazelcast-seda component is used to access Hazelcast BlockingQueue.
+
+| link:https://camel.apache.org/components/latest/hazelcast-set-component.html[Hazelcast Set] (camel-hazelcast-starter) +
+`hazelcast-set:cacheName` | 2.7 | The hazelcast-set component is used to access Hazelcast distributed set.
+
+| link:https://camel.apache.org/components/latest/hazelcast-topic-component.html[Hazelcast Topic] (camel-hazelcast-starter) +
+`hazelcast-topic:cacheName` | 2.15 | The hazelcast-topic component is used to access Hazelcast distributed topic.
+
+| link:https://camel.apache.org/components/latest/hbase-component.html[HBase] (camel-hbase-starter) +
+`hbase:tableName` | 2.10 | For reading/writing from/to an HBase store (Hadoop database).
+
+| link:https://camel.apache.org/components/latest/hdfs-component.html[HDFS] (camel-hdfs-starter) +
+`hdfs:hostName:port/path` | 2.14 | For reading/writing from/to an HDFS filesystem using Hadoop 2.x.
+
+| link:https://camel.apache.org/components/latest/hipchat-component.html[Hipchat] (camel-hipchat-starter) +
+`hipchat:protocol:host:port` | 2.15 | The hipchat component supports producing and consuming messages from/to Hipchat service.
+
+| link:https://camel.apache.org/components/latest/http-component.html[HTTP] (camel-http-starter) +
+`http:httpUri` | 2.3 | For calling out to external HTTP servers using Apache HTTP Client 4.x.
+
+| link:https://camel.apache.org/components/latest/iec60870-client-component.html[IEC 60870 Client] (camel-iec60870-starter) +
+`iec60870-client:uriPath` | 2.20 | IEC 60870 component used for telecontrol (supervisory control and data acquisition) such as controlling electric power transmission grids and other geographically widespread control systems.
+
+| link:https://camel.apache.org/components/latest/iec60870-server-component.html[IEC 60870 Server] (camel-iec60870-starter) +
+`iec60870-server:uriPath` | 2.20 | IEC 60870 component used for telecontrol (supervisory control and data acquisition) such as controlling electric power transmission grids and other geographically widespread control systems.
+
+| link:https://camel.apache.org/components/latest/ignite-cache-component.html[Ignite Cache] (camel-ignite-starter) +
+`ignite-cache:cacheName` | 2.17 | The Ignite Cache endpoint is one of camel-ignite endpoints which allows you to interact with an Ignite Cache.
+
+| link:https://camel.apache.org/components/latest/ignite-compute-component.html[Ignite Compute] (camel-ignite-starter) +
+`ignite-compute:endpointId` | 2.17 | The Ignite Compute endpoint is one of camel-ignite endpoints which allows you to run compute operations on the cluster by passing in an IgniteCallable, an IgniteRunnable, an IgniteClosure, or collections of them, along with their parameters if necessary.
+
+| link:https://camel.apache.org/components/latest/ignite-events-component.html[Ignite Events] (camel-ignite-starter) +
+`ignite-events:endpointId` | 2.17 | The Ignite Events endpoint is one of camel-ignite endpoints which allows you to receive events from the Ignite cluster by creating a local event listener.
+
+| link:https://camel.apache.org/components/latest/ignite-idgen-component.html[Ignite ID Generator] (camel-ignite-starter) +
+`ignite-idgen:name` | 2.17 | The Ignite ID Generator endpoint is one of camel-ignite endpoints which allows you to interact with Ignite Atomic Sequences and ID Generators.
+
+| link:https://camel.apache.org/components/latest/ignite-messaging-component.html[Ignite Messaging] (camel-ignite-starter) +
+`ignite-messaging:topic` | 2.17 | The Ignite Messaging endpoint is one of camel-ignite endpoints which allows you to send and consume messages from an Ignite topic.
+
+| link:https://camel.apache.org/components/latest/ignite-queue-component.html[Ignite Queues] (camel-ignite-starter) +
+`ignite-queue:name` | 2.17 | The Ignite Queue endpoint is one of camel-ignite endpoints which allows you to interact with Ignite Queue data structures.
+
+| link:https://camel.apache.org/components/latest/ignite-set-component.html[Ignite Sets] (camel-ignite-starter) +
+`ignite-set:name` | 2.17 | The Ignite Sets endpoint is one of camel-ignite endpoints which allows you to interact with Ignite Set data structures.
+
+| link:https://camel.apache.org/components/latest/infinispan-component.html[Infinispan] (camel-infinispan-starter) +
+`infinispan:cacheName` | 2.13 | For reading/writing from/to Infinispan distributed key/value store and data grid.
+
+| link:https://camel.apache.org/components/latest/influxdb-component.html[InfluxDB] (camel-influxdb-starter) +
+`influxdb:connectionBean` | 2.18 | The influxdb component allows you to interact with InfluxDB, a time series database.
+
+| link:https://camel.apache.org/components/latest/iota-component.html[IOTA] (camel-iota-starter) +
+`iota:name` | 2.23 | Component for integrate IOTA DLT
+
+| link:https://camel.apache.org/components/latest/ipfs-component.html[IPFS] (camel-ipfs-starter) +
+`ipfs:ipfsCmd` | 2.23 | The camel-ipfs component provides access to the Interplanetary File System (IPFS).
+
+| link:https://camel.apache.org/components/latest/irc-component.html[IRC] (camel-irc-starter) +
+`irc:hostname:port` | 1.1 | The irc component implements an IRC (Internet Relay Chat) transport.
+
+| link:https://camel.apache.org/components/latest/ironmq-component.html[IronMQ] (camel-ironmq-starter) +
+`ironmq:queueName` | 2.17 | The ironmq provides integration with IronMQ an elastic and durable hosted message queue as a service.
+
+| link:https://camel.apache.org/components/latest/websocket-jsr356-component.html[Javax Websocket] (camel-websocket-jsr356-starter) +
+`websocket-jsr356:uri` | 2.23 | Camel WebSocket using JSR356 (javax)
+
+| link:https://camel.apache.org/components/latest/jbpm-component.html[JBPM] (camel-jbpm-starter) +
+`jbpm:connectionURL` | 2.6 | The jbpm component provides integration with jBPM (Business Process Management).
+
+| link:https://camel.apache.org/components/latest/jcache-component.html[JCache] (camel-jcache-starter) +
+`jcache:cacheName` | 2.17 | The jcache component enables you to perform caching operations using JSR107/JCache as cache implementation.
+
+| link:https://camel.apache.org/components/latest/jclouds-component.html[JClouds] (camel-jclouds-starter) +
+`jclouds:command:providerId` | 2.9 | For interacting with cloud compute & blobstore service via jclouds.
+
+| link:https://camel.apache.org/components/latest/jcr-component.html[JCR] (camel-jcr-starter) +
+`jcr:host/base` | 1.3 | The jcr component allows you to add/read nodes to/from a JCR compliant content repository.
+
+| link:https://camel.apache.org/components/latest/jdbc-component.html[JDBC] (camel-jdbc-starter) +
+`jdbc:dataSourceName` | 1.2 | The jdbc component enables you to access databases through JDBC, where SQL queries are sent in the message body.
+
+| link:https://camel.apache.org/components/latest/jetty-component.html[Jetty] (camel-jetty-starter) +
+`jetty:httpUri` | 1.2 | To use Jetty as a HTTP server as consumer for Camel routes.
+
+| link:https://camel.apache.org/components/latest/websocket-component.html[Jetty Websocket] (camel-websocket-starter) +
+`websocket:host:port/resourceUri` | 2.10 | The websocket component provides websocket endpoints with Jetty for communicating with clients using websocket.
+
+| link:https://camel.apache.org/components/latest/jgroups-component.html[JGroups] (camel-jgroups-starter) +
+`jgroups:clusterName` | 2.13 | The jgroups component provides exchange of messages between Camel and JGroups clusters.
+
+| link:https://camel.apache.org/components/latest/jgroups-raft-component.html[JGroups raft] (camel-jgroups-raft-starter) +
+`jgroups-raft:clusterName` | 2.24 | The jgroups component provides exchange of messages between Camel and JGroups clusters.
+
+| link:https://camel.apache.org/components/latest/jing-component.html[Jing] (camel-jing-starter) +
+`jing:resourceUri` | 1.1 | Validates the payload of a message using RelaxNG Syntax using Jing library.
+
+| link:https://camel.apache.org/components/latest/jira-component.html[Jira] (camel-jira-starter) +
+`jira:type` | 3.0 | The jira component interacts with the JIRA issue tracker.
+
+| link:https://camel.apache.org/components/latest/jms-component.html[JMS] (camel-jms-starter) +
+`jms:destinationType:destinationName` | 1.0 | The jms component allows messages to be sent to (or consumed from) a JMS Queue or Topic.
+
+| link:https://camel.apache.org/components/latest/jmx-component.html[JMX] (camel-jmx-starter) +
+`jmx:serverURL` | 2.6 | The jmx component allows to receive JMX notifications.
+
+| link:https://camel.apache.org/components/latest/jolt-component.html[JOLT] (camel-jolt-starter) +
+`jolt:resourceUri` | 2.16 | The jolt component allows you to process a JSON messages using an JOLT specification (such as JSON-JSON transformation).
+
+| link:https://camel.apache.org/components/latest/jooq-component.html[JOOQ] (camel-jooq-starter) +
+`jooq:entityType` | 3.0 | The jooq component enables you to store and retrieve entities from databases using JOOQ
+
+| link:https://camel.apache.org/components/latest/jpa-component.html[JPA] (camel-jpa-starter) +
+`jpa:entityType` | 1.0 | The jpa component enables you to store and retrieve Java objects from databases using JPA.
+
+| link:https://camel.apache.org/components/latest/jslt-component.html[JSLT] (camel-jslt-starter) +
+`jslt:resourceUri` | 3.1 | The jslt component allows you to process a JSON messages using an JSLT transformations.
+
+| link:https://camel.apache.org/components/latest/json-validator-component.html[JSON Schema Validator] (camel-json-validator-starter) +
+`json-validator:resourceUri` | 2.20 | Validates the payload of a message using NetworkNT JSON Schema library.
+
+| link:https://camel.apache.org/components/latest/jt400-component.html[JT400] (camel-jt400-starter) +
+`jt400:userID:password/systemName/objectPath.type` | 1.5 | The jt400 component allows you to exchanges messages with an AS/400 system using data queues or program call.
+
+| link:https://camel.apache.org/components/latest/kafka-component.html[Kafka] (camel-kafka-starter) +
+`kafka:topic` | 2.13 | The kafka component allows messages to be sent to (or consumed from) Apache Kafka brokers.
+
+| link:https://camel.apache.org/components/latest/kubernetes-config-maps-component.html[Kubernetes ConfigMap] (camel-kubernetes-starter) +
+`kubernetes-config-maps:masterUrl` | 2.17 | The Kubernetes Configmaps component provides a producer to execute kubernetes configmap operations.
+
+| link:https://camel.apache.org/components/latest/kubernetes-deployments-component.html[Kubernetes Deployments] (camel-kubernetes-starter) +
+`kubernetes-deployments:masterUrl` | 2.20 | The Kubernetes Nodes component provides a producer to execute kubernetes node operations and a consumer to consume node events.
+
+| link:https://camel.apache.org/components/latest/kubernetes-hpa-component.html[Kubernetes HPA] (camel-kubernetes-starter) +
+`kubernetes-hpa:masterUrl` | 2.23 | The Kubernetes HPA component provides a producer to execute kubernetes hpa operations and a consumer to consume HPA events.
+
+| link:https://camel.apache.org/components/latest/kubernetes-job-component.html[Kubernetes Job] (camel-kubernetes-starter) +
+`kubernetes-job:masterUrl` | 2.23 | The Kubernetes Jobs component provides a producer to execute kubernetes job operations
+
+| link:https://camel.apache.org/components/latest/kubernetes-namespaces-component.html[Kubernetes Namespaces] (camel-kubernetes-starter) +
+`kubernetes-namespaces:masterUrl` | 2.17 | The Kubernetes Namespaces component provides a producer to execute kubernetes namespace operations and a consumer to consume namespace events.
+
+| link:https://camel.apache.org/components/latest/kubernetes-nodes-component.html[Kubernetes Nodes] (camel-kubernetes-starter) +
+`kubernetes-nodes:masterUrl` | 2.17 | The Kubernetes Nodes component provides a producer to execute kubernetes node operations and a consumer to consume node events.
+
+| link:https://camel.apache.org/components/latest/kubernetes-persistent-volumes-component.html[Kubernetes Persistent Volume] (camel-kubernetes-starter) +
+`kubernetes-persistent-volumes:masterUrl` | 2.17 | The Kubernetes Persistent Volumes component provides a producer to execute kubernetes persistent volume operations.
+
+| link:https://camel.apache.org/components/latest/kubernetes-persistent-volumes-claims-component.html[Kubernetes Persistent Volume Claim] (camel-kubernetes-starter) +
+`kubernetes-persistent-volumes-claims:masterUrl` | 2.17 | The Kubernetes Persistent Volumes Claims component provides a producer to execute kubernetes persistent volume claim operations.
+
+| link:https://camel.apache.org/components/latest/kubernetes-pods-component.html[Kubernetes Pods] (camel-kubernetes-starter) +
+`kubernetes-pods:masterUrl` | 2.17 | The Kubernetes Pods component provides a producer to execute kubernetes pod operations and a consumer to consume pod events.
+
+| link:https://camel.apache.org/components/latest/kubernetes-replication-controllers-component.html[Kubernetes Replication Controller] (camel-kubernetes-starter) +
+`kubernetes-replication-controllers:masterUrl` | 2.17 | The Kubernetes Replication Controllers component provides a producer to execute kubernetes replication controller operations and a consumer to consume replication controller events.
+
+| link:https://camel.apache.org/components/latest/kubernetes-resources-quota-component.html[Kubernetes Resources Quota] (camel-kubernetes-starter) +
+`kubernetes-resources-quota:masterUrl` | 2.17 | The Kubernetes Resources Quota component provides a producer to execute kubernetes resources quota operations.
+
+| link:https://camel.apache.org/components/latest/kubernetes-secrets-component.html[Kubernetes Secrets] (camel-kubernetes-starter) +
+`kubernetes-secrets:masterUrl` | 2.17 | The Kubernetes Secrets component provides a producer to execute kubernetes secret operations.
+
+| link:https://camel.apache.org/components/latest/kubernetes-service-accounts-component.html[Kubernetes Service Account] (camel-kubernetes-starter) +
+`kubernetes-service-accounts:masterUrl` | 2.17 | The Kubernetes Service Accounts component provides a producer to execute service account operations.
+
+| link:https://camel.apache.org/components/latest/kubernetes-services-component.html[Kubernetes Services] (camel-kubernetes-starter) +
+`kubernetes-services:masterUrl` | 2.17 | The Kubernetes Services component provides a producer to execute service operations and a consumer to consume service events.
+
+| link:https://camel.apache.org/components/latest/kudu-component.html[Kudu] (camel-kudu-starter) +
+`kudu:host:port/tableName` | 3.0 | Represents a Kudu endpoint. A kudu endpoint allows you to interact with Apache Kudu, a free and open source column-oriented data store of the Apache Hadoop ecosystem.
+
+| link:https://camel.apache.org/components/latest/language-component.html[Language] (camel-language-starter) +
+`language:languageName:resourceUri` | 2.5 | The language component allows you to send a message to an endpoint which executes a script by any of the supported Languages in Camel.
+
+| link:https://camel.apache.org/components/latest/ldap-component.html[LDAP] (camel-ldap-starter) +
+`ldap:dirContextName` | 1.5 | The ldap component allows you to perform searches in LDAP servers using filters as the message payload.
+
+| link:https://camel.apache.org/components/latest/ldif-component.html[LDIF] (camel-ldif-starter) +
+`ldif:ldapConnectionName` | 2.20 | The ldif component allows you to do updates on an LDAP server from a LDIF body content.
+
+| link:https://camel.apache.org/components/latest/log-component.html[Log] (camel-log-starter) +
+`log:loggerName` | 1.1 | The log component logs message exchanges to the underlying logging mechanism.
+
+| link:https://camel.apache.org/components/latest/lucene-component.html[Lucene] (camel-lucene-starter) +
+`lucene:host:operation` | 2.2 | To insert or query from Apache Lucene databases.
+
+| link:https://camel.apache.org/components/latest/lumberjack-component.html[Lumberjack] (camel-lumberjack-starter) +
+`lumberjack:host:port` | 2.18 | The lumberjack retrieves logs sent over the network using the Lumberjack protocol.
+
+| link:https://camel.apache.org/components/latest/mail-component.html[Mail] (camel-mail-starter) +
+`imap:host:port` | 1.0 | To send or receive emails using imap/pop3 or smtp protocols.
+
+| link:https://camel.apache.org/components/latest/master-component.html[Master] (camel-master-starter) +
+`master:namespace:delegateUri` | 2.20 | Represents an endpoint which only becomes active when the CamelClusterView has the leadership.
+
+| link:https://camel.apache.org/components/latest/metrics-component.html[Metrics] (camel-metrics-starter) +
+`metrics:metricsType:metricsName` | 2.14 | To collect various metrics directly from Camel routes using the DropWizard metrics library.
+
+| link:https://camel.apache.org/components/latest/micrometer-component.html[Micrometer] (camel-micrometer-starter) +
+`micrometer:metricsType:metricsName` | 2.22 | To collect various metrics directly from Camel routes using the Micrometer library.
+
+| link:https://camel.apache.org/components/latest/mina-component.html[Mina] (camel-mina-starter) +
+`mina:protocol:host:port` | 2.10 | Socket level networking using TCP or UDP with the Apache Mina 2.x library.
+
+| link:https://camel.apache.org/components/latest/mllp-component.html[MLLP] (camel-mllp-starter) +
+`mllp:hostname:port` | 2.17 | Provides functionality required by Healthcare providers to communicate with other systems using the MLLP protocol.
+
+| link:https://camel.apache.org/components/latest/mock-component.html[Mock] (camel-mock-starter) +
+`mock:name` | 1.0 | The mock component is used for testing routes and mediation rules using mocks.
+
+| link:https://camel.apache.org/components/latest/mongodb-component.html[MongoDB] (camel-mongodb-starter) +
+`mongodb:connectionBean` | 2.19 | Component for working with documents stored in MongoDB database.
+
+| link:https://camel.apache.org/components/latest/mongodb-gridfs-component.html[MongoDB GridFS] (camel-mongodb-gridfs-starter) +
+`mongodb-gridfs:connectionBean` | 2.18 | Component for working with MongoDB GridFS.
+
+| link:https://camel.apache.org/components/latest/msv-component.html[MSV] (camel-msv-starter) +
+`msv:resourceUri` | 1.1 | Validates the payload of a message using the MSV Library.
+
+| link:https://camel.apache.org/components/latest/mustache-component.html[Mustache] (camel-mustache-starter) +
+`mustache:resourceUri` | 2.12 | Transforms the message using a Mustache template.
+
+| link:https://camel.apache.org/components/latest/mvel-component.html[MVEL] (camel-mvel-starter) +
+`mvel:resourceUri` | 2.12 | Transforms the message using a MVEL template.
+
+| link:https://camel.apache.org/components/latest/mybatis-component.html[MyBatis] (camel-mybatis-starter) +
+`mybatis:statement` | 2.7 | Performs a query, poll, insert, update or delete in a relational database using MyBatis.
+
+| link:https://camel.apache.org/components/latest/mybatis-bean-component.html[MyBatis Bean] (camel-mybatis-starter) +
+`mybatis-bean:beanName:methodName` | 2.22 | Performs a query, insert, update or delete in a relational database using MyBatis.
+
+| link:https://camel.apache.org/components/latest/nagios-component.html[Nagios] (camel-nagios-starter) +
+`nagios:host:port` | 2.3 | To send passive checks to Nagios using JSendNSCA.
+
+| link:https://camel.apache.org/components/latest/nats-component.html[Nats] (camel-nats-starter) +
+`nats:topic` | 2.17 | The nats component allows you produce and consume messages from NATS.
+
+| link:https://camel.apache.org/components/latest/netty-component.html[Netty] (camel-netty-starter) +
+`netty:protocol:host:port` | 2.14 | Socket level networking using TCP or UDP with the Netty 4.x library.
+
+| link:https://camel.apache.org/components/latest/netty-http-component.html[Netty HTTP] (camel-netty-http-starter) +
+`netty-http:protocol:host:port/path` | 2.14 | Netty HTTP server and client using the Netty 4.x library.
+
+| link:https://camel.apache.org/components/latest/nitrite-component.html[Nitrite] (camel-nitrite-starter) +
+`nitrite:database` | 3.0 | Used for integrating Camel with Nitrite databases.
+
+| link:https://camel.apache.org/components/latest/nsq-component.html[NSQ] (camel-nsq-starter) +
+`nsq:topic` | 2.23 | Represents a nsq endpoint.
+
+| link:https://camel.apache.org/components/latest/olingo2-component.html[Olingo2] (camel-olingo2-starter) +
+`olingo2:apiName/methodName` | 2.14 | Communicates with OData 2.0 services using Apache Olingo.
+
+| link:https://camel.apache.org/components/latest/olingo4-component.html[Olingo4] (camel-olingo4-starter) +
+`olingo4:apiName/methodName` | 2.19 | Communicates with OData 4.0 services using Apache Olingo OData API.
+
+| link:https://camel.apache.org/components/latest/milo-client-component.html[OPC UA Client] (camel-milo-starter) +
+`milo-client:endpointUri` | 2.19 | Connect to OPC UA servers using the binary protocol for acquiring telemetry data
+
+| link:https://camel.apache.org/components/latest/milo-server-component.html[OPC UA Server] (camel-milo-starter) +
+`milo-server:itemId` | 2.19 | Make telemetry data available as an OPC UA server
+
+| link:https://camel.apache.org/components/latest/openshift-build-configs-component.html[Openshift Build Config] (camel-kubernetes-starter) +
+`openshift-build-configs:masterUrl` | 2.17 | The Kubernetes Build Config component provides a producer to execute kubernetes build config operations.
+
+| link:https://camel.apache.org/components/latest/openshift-builds-component.html[Openshift Builds] (camel-kubernetes-starter) +
+`openshift-builds:masterUrl` | 2.17 | The Openshift Builds component provides a producer to execute openshift build operations.
+
+| link:https://camel.apache.org/components/latest/openstack-cinder-component.html[OpenStack Cinder] (camel-openstack-starter) +
+`openstack-cinder:host` | 2.19 | The openstack-cinder component allows messages to be sent to an OpenStack block storage services.
+
+| link:https://camel.apache.org/components/latest/openstack-glance-component.html[OpenStack Glance] (camel-openstack-starter) +
+`openstack-glance:host` | 2.19 | The openstack-glance component allows messages to be sent to an OpenStack image services.
+
+| link:https://camel.apache.org/components/latest/openstack-keystone-component.html[OpenStack Keystone] (camel-openstack-starter) +
+`openstack-keystone:host` | 2.19 | The openstack-keystone component allows messages to be sent to an OpenStack identity services.
+
+| link:https://camel.apache.org/components/latest/openstack-neutron-component.html[OpenStack Neutron] (camel-openstack-starter) +
+`openstack-neutron:host` | 2.19 | The openstack-neutron component allows messages to be sent to an OpenStack network services.
+
+| link:https://camel.apache.org/components/latest/openstack-nova-component.html[OpenStack Nova] (camel-openstack-starter) +
+`openstack-nova:host` | 2.19 | The openstack-nova component allows messages to be sent to an OpenStack compute services.
+
+| link:https://camel.apache.org/components/latest/openstack-swift-component.html[OpenStack Swift] (camel-openstack-starter) +
+`openstack-swift:host` | 2.19 | The openstack-swift component allows messages to be sent to an OpenStack object storage services.
+
+| link:https://camel.apache.org/components/latest/optaplanner-component.html[OptaPlanner] (camel-optaplanner-starter) +
+`optaplanner:configFile` | 2.13 | Solves the planning problem contained in a message with OptaPlanner.
+
+| link:https://camel.apache.org/components/latest/paho-component.html[Paho] (camel-paho-starter) +
+`paho:topic` | 2.16 | Component for communicating with MQTT message brokers using Eclipse Paho MQTT Client.
+
+| link:https://camel.apache.org/components/latest/pdf-component.html[PDF] (camel-pdf-starter) +
+`pdf:operation` | 2.16 | The pdf components provides the ability to create, modify or extract content from PDF documents.
+
+| link:https://camel.apache.org/components/latest/platform-http-component.html[Platform HTTP] (camel-platform-http-starter) +
+`platform-http:path` | 3.0 | HTTP service leveraging existing runtime platform HTTP server
+
+| link:https://camel.apache.org/components/latest/pgevent-component.html[PostgresSQL Event] (camel-pgevent-starter) +
+`pgevent:host:port/database/channel` | 2.15 | The pgevent component allows for producing/consuming PostgreSQL events related to the listen/notify commands.
+
+| link:https://camel.apache.org/components/latest/pg-replication-slot-component.html[PostgresSQL Replication Slot] (camel-pg-replication-slot-starter) +
+`pg-replication-slot:host:port/database/slot:outputPlugin` | 3.0 | Consumer endpoint to receive from PostgreSQL Replication Slot.
+
+| link:https://camel.apache.org/components/latest/lpr-component.html[Printer] (camel-printer-starter) +
+`lpr:hostname:port/printername` | 2.1 | The printer component is used for sending messages to printers as print jobs.
+
+| link:https://camel.apache.org/components/latest/pubnub-component.html[PubNub] (camel-pubnub-starter) +
+`pubnub:channel` | 2.19 | To send and receive messages to PubNub data stream network for connected devices.
+
+| link:https://camel.apache.org/components/latest/pulsar-component.html[Pulsar] (camel-pulsar-starter) +
+`pulsar:persistence://tenant/namespace/topic` | 2.24 | Camel Apache Pulsar Component
+
+| link:https://camel.apache.org/components/latest/quartz-component.html[Quartz] (camel-quartz-starter) +
+`quartz:groupName/triggerName` | 2.12 | Provides a scheduled delivery of messages using the Quartz 2.x scheduler.
+
+| link:https://camel.apache.org/components/latest/quickfix-component.html[QuickFix] (camel-quickfix-starter) +
+`quickfix:configurationName` | 2.1 | The quickfix component allows to send Financial Interchange (FIX) messages to the QuickFix engine.
+
+| link:https://camel.apache.org/components/latest/rabbitmq-component.html[RabbitMQ] (camel-rabbitmq-starter) +
+`rabbitmq:exchangeName` | 2.12 | The rabbitmq component allows you produce and consume messages from RabbitMQ instances.
+
+| link:https://camel.apache.org/components/latest/reactive-streams-component.html[Reactive Streams] (camel-reactive-streams-starter) +
+`reactive-streams:stream` | 2.19 | Reactive Camel using reactive streams
+
+| link:https://camel.apache.org/components/latest/ref-component.html[Ref] (camel-ref-starter) +
+`ref:name` | 1.2 | The ref component is used for lookup of existing endpoints bound in the Registry.
+
+| link:https://camel.apache.org/components/latest/rest-component.html[REST] (camel-rest-starter) +
+`rest:method:path:uriTemplate` | 2.14 | The rest component is used for either hosting REST services (consumer) or calling external REST services (producer).
+
+| link:https://camel.apache.org/components/latest/rest-api-component.html[REST API] (camel-rest-starter) +
+`rest-api:path/contextIdPattern` | 2.16 | The rest-api component is used for providing Swagger API of the REST services which has been defined using the rest-dsl in Camel.
+
+| link:https://camel.apache.org/components/latest/rest-openapi-component.html[REST OpenApi] (camel-rest-openapi-starter) +
+`rest-openapi:specificationUri#operationId` | 3.1 | An awesome REST endpoint backed by OpenApi specifications.
+
+| link:https://camel.apache.org/components/latest/rest-swagger-component.html[REST Swagger] (camel-rest-swagger-starter) +
+`rest-swagger:specificationUri#operationId` | 2.19 | An awesome REST endpoint backed by Swagger specifications.
+
+| link:https://camel.apache.org/components/latest/robotframework-component.html[Robot Framework] (camel-robotframework-starter) +
+`robotframework:resourceUri` | 3.0 | Represents a RobotFramework endpoint.
+
+| link:https://camel.apache.org/components/latest/rss-component.html[RSS] (camel-rss-starter) +
+`rss:feedUri` | 2.0 | The rss component is used for consuming RSS feeds.
+
+| link:https://camel.apache.org/components/latest/saga-component.html[Saga] (camel-saga-starter) +
+`saga:action` | 2.21 | The saga component provides access to advanced options for managing the flow in the Saga EIP.
+
+| link:https://camel.apache.org/components/latest/salesforce-component.html[Salesforce] (camel-salesforce-starter) +
+`salesforce:operationName:topicName` | 2.12 | The salesforce component is used for integrating Camel with the massive Salesforce API.
+
+| link:https://camel.apache.org/components/latest/sap-netweaver-component.html[SAP NetWeaver] (camel-sap-netweaver-starter) +
+`sap-netweaver:url` | 2.12 | The sap-netweaver component integrates with the SAP NetWeaver Gateway using HTTP transports.
+
+| link:https://camel.apache.org/components/latest/scheduler-component.html[Scheduler] (camel-scheduler-starter) +
+`scheduler:name` | 2.15 | The scheduler component is used for generating message exchanges when a scheduler fires.
+
+| link:https://camel.apache.org/components/latest/schematron-component.html[Schematron] (camel-schematron-starter) +
+`schematron:path` | 2.15 | Validates the payload of a message using the Schematron Library.
+
+| link:https://camel.apache.org/components/latest/scp-component.html[SCP] (camel-jsch-starter) +
+`scp:host:port/directoryName` | 2.10 | To copy files using the secure copy protocol (SCP).
+
+| link:https://camel.apache.org/components/latest/seda-component.html[SEDA] (camel-seda-starter) +
+`seda:name` | 1.1 | The seda component provides asynchronous call to another endpoint from any CamelContext in the same JVM.
+
+| link:https://camel.apache.org/components/latest/service-component.html[Service] (camel-service-starter) +
+`service:delegateUri` | 2.22 | Represents an endpoint which is registered to a Service Registry such as Consul, Etcd.
+
+| link:https://camel.apache.org/components/latest/servicenow-component.html[ServiceNow] (camel-servicenow-starter) +
+`servicenow:instanceName` | 2.18 | The servicenow component is used to integrate Camel with ServiceNow cloud services.
+
+| link:https://camel.apache.org/components/latest/servlet-component.html[Servlet] (camel-servlet-starter) +
+`servlet:contextPath` | 2.0 | To use a HTTP Servlet as entry for Camel routes when running in a servlet container.
+
+| link:https://camel.apache.org/components/latest/sftp-component.html[SFTP] (camel-ftp-starter) +
+`sftp:host:port/directoryName` | 1.1 | The \sftp (FTP over SSH) component is used for uploading or downloading files from SFTP servers.
+
+| link:https://camel.apache.org/components/latest/sjms-component.html[Simple JMS] (camel-sjms-starter) +
+`sjms:destinationType:destinationName` | 2.11 | The sjms component (simple jms) allows messages to be sent to (or consumed from) a JMS Queue or Topic (uses JMS 1.x API).
+
+| link:https://camel.apache.org/components/latest/sjms-batch-component.html[Simple JMS Batch] (camel-sjms-starter) +
+`sjms-batch:destinationName` | 2.16 | The sjms-batch component is a specialized for highly performant, transactional batch consumption from a JMS queue.
+
+| link:https://camel.apache.org/components/latest/sjms2-component.html[Simple JMS2] (camel-sjms2-starter) +
+`sjms2:destinationType:destinationName` | 2.19 | The sjms2 component (simple jms) allows messages to be sent to (or consumed from) a JMS Queue or Topic (uses JMS 2.x API).
+
+| link:https://camel.apache.org/components/latest/sip-component.html[SIP] (camel-sip-starter) +
+`sip:uri` | 2.5 | To send and receive messages using the SIP protocol (used in telco and mobile).
+
+| link:https://camel.apache.org/components/latest/slack-component.html[Slack] (camel-slack-starter) +
+`slack:channel` | 2.16 | The slack component allows you to send messages to Slack.
+
+| link:https://camel.apache.org/components/latest/smpp-component.html[SMPP] (camel-smpp-starter) +
+`smpp:host:port` | 2.2 | To send and receive SMS using a SMSC (Short Message Service Center).
+
+| link:https://camel.apache.org/components/latest/snmp-component.html[SNMP] (camel-snmp-starter) +
+`snmp:host:port` | 2.1 | The snmp component gives you the ability to poll SNMP capable devices or receiving traps.
+
+| link:https://camel.apache.org/components/latest/solr-component.html[Solr] (camel-solr-starter) +
+`solr:url` | 2.9 | The solr component allows you to interface with an Apache Lucene Solr server.
+
+| link:https://camel.apache.org/components/latest/soroush-component.html[Soroush] (camel-soroush-starter) +
+`soroush:action` | 3.0 | To integrate with the Soroush chat bot.
+
+| link:https://camel.apache.org/components/latest/spark-component.html[Spark] (camel-spark-starter) +
+`spark:endpointType` | 2.17 | The spark component can be used to send RDD or DataFrame jobs to Apache Spark cluster.
+
+| link:https://camel.apache.org/components/latest/splunk-component.html[Splunk] (camel-splunk-starter) +
+`splunk:name` | 2.13 | The splunk component allows to publish or search for events in Splunk.
+
+| link:https://camel.apache.org/components/latest/spring-batch-component.html[Spring Batch] (camel-spring-batch-starter) +
+`spring-batch:jobName` | 2.10 | The spring-batch component allows to send messages to Spring Batch for further processing.
+
+| link:https://camel.apache.org/components/latest/spring-event-component.html[Spring Event] (camel-spring-starter) +
+`spring-event:name` | 1.4 | The spring-event component allows to listen for Spring Application Events.
+
+| link:https://camel.apache.org/components/latest/spring-integration-component.html[Spring Integration] (camel-spring-integration-starter) +
+`spring-integration:defaultChannel` | 1.4 | Bridges Camel with Spring Integration.
+
+| link:https://camel.apache.org/components/latest/spring-ldap-component.html[Spring LDAP] (camel-spring-ldap-starter) +
+`spring-ldap:templateName` | 2.11 | The spring-ldap component allows you to perform searches in LDAP servers using filters as the message payload.
+
+| link:https://camel.apache.org/components/latest/spring-redis-component.html[Spring Redis] (camel-spring-redis-starter) +
+`spring-redis:host:port` | 2.11 | The spring-redis component allows sending and receiving messages from Redis.
+
+| link:https://camel.apache.org/components/latest/spring-ws-component.html[Spring WebService] (camel-spring-ws-starter) +
+`spring-ws:type:lookupKey:webServiceEndpointUri` | 2.6 | The spring-ws component is used for SOAP WebServices using Spring WebServices.
+
+| link:https://camel.apache.org/components/latest/sql-component.html[SQL] (camel-sql-starter) +
+`sql:query` | 1.4 | The sql component allows you to work with databases using JDBC SQL queries.
+
+| link:https://camel.apache.org/components/latest/sql-stored-component.html[SQL Stored Procedure] (camel-sql-starter) +
+`sql-stored:template` | 2.17 | The sql component allows you to work with databases using JDBC Stored Procedure queries.
+
+| link:https://camel.apache.org/components/latest/ssh-component.html[SSH] (camel-ssh-starter) +
+`ssh:host:port` | 2.10 | The ssh component enables access to SSH servers such that you can send an SSH command, and process the response.
+
+| link:https://camel.apache.org/components/latest/stax-component.html[StAX] (camel-stax-starter) +
+`stax:contentHandlerClass` | 2.9 | The stax component allows messages to be process through a SAX ContentHandler.
+
+| link:https://camel.apache.org/components/latest/stomp-component.html[Stomp] (camel-stomp-starter) +
+`stomp:destination` | 2.12 | The stomp component is used for communicating with Stomp compliant message brokers.
+
+| link:https://camel.apache.org/components/latest/stream-component.html[Stream] (camel-stream-starter) +
+`stream:kind` | 1.3 | The stream: component provides access to the system-in, system-out and system-err streams as well as allowing streaming of file.
+
+| link:https://camel.apache.org/components/latest/string-template-component.html[String Template] (camel-stringtemplate-starter) +
+`string-template:resourceUri` | 1.2 | Transforms the message using a String template.
+
+| link:https://camel.apache.org/components/latest/stub-component.html[Stub] (camel-stub-starter) +
+`stub:name` | 2.10 | The stub component provides a simple way to stub out any physical endpoints while in development or testing.
+
+| link:https://camel.apache.org/components/latest/telegram-component.html[Telegram] (camel-telegram-starter) +
+`telegram:type` | 2.18 | The telegram component provides access to the Telegram Bot API.
+
+| link:https://camel.apache.org/components/latest/thrift-component.html[Thrift] (camel-thrift-starter) +
+`thrift:host:port/service` | 2.20 | The Thrift component allows to call and expose remote procedures (RPC) with Apache Thrift data format and serialization mechanism
+
+| link:https://camel.apache.org/components/latest/tika-component.html[Tika] (camel-tika-starter) +
+`tika:operation` | 2.19 | This component integrates with Apache Tika to extract content and metadata from thousands of file types.
+
+| link:https://camel.apache.org/components/latest/timer-component.html[Timer] (camel-timer-starter) +
+`timer:timerName` | 1.0 | The timer component is used for generating message exchanges when a timer fires.
+
+| link:https://camel.apache.org/components/latest/twilio-component.html[Twilio] (camel-twilio-starter) +
+`twilio:apiName/methodName` | 2.20 | The Twilio component allows you to interact with the Twilio REST APIs using Twilio Java SDK.
+
+| link:https://camel.apache.org/components/latest/twitter-directmessage-component.html[Twitter Direct Message] (camel-twitter-starter) +
+`twitter-directmessage:user` | 2.10 | The Twitter Direct Message Component consumes/produces user's direct messages.
+
+| link:https://camel.apache.org/components/latest/twitter-search-component.html[Twitter Search] (camel-twitter-starter) +
+`twitter-search:keywords` | 2.10 | The Twitter Search component consumes search results.
+
+| link:https://camel.apache.org/components/latest/twitter-timeline-component.html[Twitter Timeline] (camel-twitter-starter) +
+`twitter-timeline:timelineType` | 2.10 | The Twitter Timeline component consumes twitter timeline or update the status of specific user.
+
+| link:https://camel.apache.org/components/latest/undertow-component.html[Undertow] (camel-undertow-starter) +
+`undertow:httpURI` | 2.16 | The undertow component provides HTTP and WebSocket based endpoints for consuming and producing HTTP/WebSocket requests.
+
+| link:https://camel.apache.org/components/latest/validator-component.html[Validator] (camel-validator-starter) +
+`validator:resourceUri` | 1.1 | Validates the payload of a message using XML Schema and JAXP Validation.
+
+| link:https://camel.apache.org/components/latest/velocity-component.html[Velocity] (camel-velocity-starter) +
+`velocity:resourceUri` | 1.2 | Transforms the message using a Velocity template.
+
+| link:https://camel.apache.org/components/latest/vertx-component.html[Vert.x] (camel-vertx-starter) +
+`vertx:address` | 2.12 | The vertx component is used for sending and receive messages from a vertx event bus.
+
+| link:https://camel.apache.org/components/latest/vm-component.html[VM] (camel-vm-starter) +
+`vm:name` | 1.1 | The vm component provides asynchronous call to another endpoint from the same CamelContext.
+
+| link:https://camel.apache.org/components/latest/weather-component.html[Weather] (camel-weather-starter) +
+`weather:name` | 2.12 | Polls the weather information from Open Weather Map.
+
+| link:https://camel.apache.org/components/latest/web3j-component.html[Web3j Ethereum Blockchain] (camel-web3j-starter) +
+`web3j:nodeAddress` | 2.22 | The web3j component uses the Web3j client API and allows you to add/read nodes to/from a web3j compliant content repositories.
+
+| link:https://camel.apache.org/components/latest/webhook-component.html[Webhook] (camel-webhook-starter) +
+`webhook:endpointUri` | 3.0 | The webhook component allows other Camel components that can receive push notifications to expose webhook endpoints and automatically register them with their own webhook provider.
+
+| link:https://camel.apache.org/components/latest/weka-component.html[Weka] (camel-weka-starter) +
+`weka:command` | 3.1 | The camel-weka component provides Data Mining functionality through Weka.
+
+| link:https://camel.apache.org/components/latest/wordpress-component.html[Wordpress] (camel-wordpress-starter) +
+`wordpress:operation` | 2.21 | Integrates Camel with Wordpress.
+
+| link:https://camel.apache.org/components/latest/workday-component.html[Workday] (camel-workday-starter) +
+`workday:entity:path` | 3.1 | Represents a Workday endpoint.
+
+| link:https://camel.apache.org/components/latest/xchange-component.html[XChange] (camel-xchange-starter) +
+`xchange:name` | 2.21 | The camel-xchange component provide access to many bitcoin and altcoin exchanges for trading and accessing market data.
+
+| link:https://camel.apache.org/components/latest/xj-component.html[XJ] (camel-xj-starter) +
+`xj:resourceUri` | 3.0 | Transforms json/xml message back and forth using a XSLT.
+
+| link:https://camel.apache.org/components/latest/xmlsecurity-component.html[XML Security] (camel-xmlsecurity-starter) +
+`xmlsecurity:command:name` | 2.12 | Used to sign and verify exchanges using the XML signature specification.
+
+| link:https://camel.apache.org/components/latest/xmpp-component.html[XMPP] (camel-xmpp-starter) +
+`xmpp:host:port/participant` | 1.0 | To send and receive messages from a XMPP (chat) server.
+
+| link:https://camel.apache.org/components/latest/xquery-component.html[XQuery] (camel-saxon-starter) +
+`xquery:resourceUri` | 1.0 | Transforms the message using a XQuery template using Saxon.
+
+| link:https://camel.apache.org/components/latest/xslt-component.html[XSLT] (camel-xslt-starter) +
+`xslt:resourceUri` | 1.3 | Transforms the message using a XSLT template.
+
+| link:https://camel.apache.org/components/latest/xslt-saxon-component.html[XSLT Saxon] (camel-xslt-saxon-starter) +
+`xslt-saxon:resourceUri` | 3.0 | Transforms the message using a XSLT template using Saxon.
+
+| link:https://camel.apache.org/components/latest/yammer-component.html[Yammer] (camel-yammer-starter) +
+`yammer:function` | 2.12 | The yammer component allows you to interact with the Yammer enterprise social network.
+
+| link:https://camel.apache.org/components/latest/zendesk-component.html[Zendesk] (camel-zendesk-starter) +
+`zendesk:methodName` | 2.19 | Allows producing messages to manage Zendesk ticket, user, organization, etc.
+
+| link:https://camel.apache.org/components/latest/zookeeper-component.html[ZooKeeper] (camel-zookeeper-starter) +
+`zookeeper:serverUrls/path` | 2.9 | The zookeeper component allows interaction with a ZooKeeper cluster.
+
+| link:https://camel.apache.org/components/latest/zookeeper-master-component.html[ZooKeeper Master] (camel-zookeeper-master-starter) +
+`zookeeper-master:groupName:consumerEndpointUri` | 2.19 | Represents an endpoint which only becomes active when it obtains the master lock
+
+|===
+// components: END
+
+== Camel Data Formats
+
+// dataformats: START
+Number of Camel data formats: 45 in 37 JAR artifacts (0 deprecated)
+
+[width="100%",cols="4,1,5",options="header"]
+|===
+| Data Format | Since | Description
+
+| link:https://camel.apache.org/components/latest/any23-dataformat.html[Any23] +
+(camel-any23-starter) | 3.0 | Any23 data format is used for parsing data to RDF.
+
+| link:https://camel.apache.org/components/latest/asn1-dataformat.html[ASN.1 File] +
+(camel-asn1-starter) | 2.20 | The ASN.1 data format is used for file transfer with telecommunications protocols.
+
+| link:https://camel.apache.org/components/latest/avro-dataformat.html[Avro] +
+(camel-avro-starter) | 2.14 | The Avro data format is used for serialization and deserialization of messages using Apache Avro binary dataformat.
+
+| link:https://camel.apache.org/components/latest/barcode-dataformat.html[Barcode] +
+(camel-barcode-starter) | 2.14 | The Barcode data format is used for creating barccode images (such as QR-Code)
+
+| link:https://camel.apache.org/components/latest/base64-dataformat.html[Base64] +
+(camel-base64-starter) | 2.11 | The Base64 data format is used for base64 encoding and decoding.
+
+| link:https://camel.apache.org/components/latest/beanio-dataformat.html[BeanIO] +
+(camel-beanio-starter) | 2.10 | The BeanIO data format is used for working with flat payloads (such as CSV, delimited, or fixed length formats).
+
+| link:https://camel.apache.org/components/latest/bindy-dataformat.html[Bindy CSV] +
+(camel-bindy-starter) | 2.0 | The Bindy data format is used for working with flat payloads (such as CSV, delimited, fixed length formats, or FIX messages).
+
+| link:https://camel.apache.org/components/latest/bindy-dataformat.html[Bindy Fixed Length] +
+(camel-bindy-starter) | 2.0 | The Bindy data format is used for working with flat payloads (such as CSV, delimited, fixed length formats, or FIX messages).
+
+| link:https://camel.apache.org/components/latest/bindy-dataformat.html[Bindy Key Value Pair] +
+(camel-bindy-starter) | 2.0 | The Bindy data format is used for working with flat payloads (such as CSV, delimited, fixed length formats, or FIX messages).
+
+| link:https://camel.apache.org/components/latest/cbor-dataformat.html[CBOR] +
+(camel-cbor-starter) | 3.0 | CBOR data format is used for unmarshal a CBOR payload to POJO or to marshal POJO back to CBOR payload.
+
+| link:https://camel.apache.org/components/latest/crypto-dataformat.html[Crypto (Java Cryptographic Extension)] +
+(camel-crypto-starter) | 2.3 | Crypto data format is used for encrypting and decrypting of messages using Java Cryptographic Extension.
+
+| link:https://camel.apache.org/components/latest/csv-dataformat.html[CSV] +
+(camel-csv-starter) | 1.3 | The CSV data format is used for handling CSV payloads.
+
+| link:https://camel.apache.org/components/latest/fhirJson-dataformat.html[FHIR JSon] +
+(camel-fhir-starter) | 2.21 | The FHIR JSon data format is used to marshall/unmarshall to/from FHIR objects to/from JSON.
+
+| link:https://camel.apache.org/components/latest/fhirXml-dataformat.html[FHIR XML] +
+(camel-fhir-starter) | 2.21 | The FHIR XML data format is used to marshall/unmarshall from/to FHIR objects to/from XML.
+
+| link:https://camel.apache.org/components/latest/flatpack-dataformat.html[Flatpack] +
+(camel-flatpack-starter) | 2.1 | The Flatpack data format is used for working with flat payloads (such as CSV, delimited, or fixed length formats).
+
+| link:https://camel.apache.org/components/latest/grok-dataformat.html[Grok] +
+(camel-grok-starter) | 3.0 | The Grok data format is used for unmarshalling unstructured data to objects using Logstash based Grok patterns.
+
+| link:https://camel.apache.org/components/latest/gzipdeflater-dataformat.html[GZip Deflater] +
+(camel-zip-deflater-starter) | 2.0 | The GZip data format is a message compression and de-compression format (which works with the popular gzip/gunzip tools).
+
+| link:https://camel.apache.org/components/latest/hl7-dataformat.html[HL7] +
+(camel-hl7-starter) | 2.0 | The HL7 data format can be used to marshal or unmarshal HL7 (Health Care) model objects.
+
+| link:https://camel.apache.org/components/latest/ical-dataformat.html[iCal] +
+(camel-ical-starter) | 2.12 | The iCal dataformat is used for working with iCalendar messages.
+
+| link:https://camel.apache.org/components/latest/jacksonxml-dataformat.html[JacksonXML] +
+(camel-jacksonxml-starter) | 2.16 | JacksonXML data format is used for unmarshal a XML payload to POJO or to marshal POJO back to XML payload.
+
+| link:https://camel.apache.org/components/latest/jaxb-dataformat.html[JAXB] +
+(camel-jaxb-starter) | 1.0 | JAXB data format uses the JAXB2 XML marshalling standard to unmarshal an XML payload into Java objects or to marshal Java objects into an XML payload.
+
+| link:https://camel.apache.org/components/latest/json-fastjson-dataformat.html[JSon Fastjson] +
+(camel-fastjson-starter) | 2.20 | JSon data format is used for unmarshal a JSon payload to POJO or to marshal POJO back to JSon payload.
+
+| link:https://camel.apache.org/components/latest/json-gson-dataformat.html[JSon GSon] +
+(camel-gson-starter) | 2.10 | JSon data format is used for unmarshal a JSon payload to POJO or to marshal POJO back to JSon payload.
+
+| link:https://camel.apache.org/components/latest/json-jackson-dataformat.html[JSon Jackson] +
+(camel-jackson-starter) | 2.0 | JSon data format is used for unmarshal a JSon payload to POJO or to marshal POJO back to JSon payload.
+
+| link:https://camel.apache.org/components/latest/json-johnzon-dataformat.html[JSon Johnzon] +
+(camel-johnzon-starter) | 2.18 | JSon data format is used for unmarshal a JSon payload to POJO or to marshal POJO back to JSon payload.
+
+| link:https://camel.apache.org/components/latest/json-xstream-dataformat.html[JSon XStream] +
+(camel-xstream-starter) | 2.0 | JSon data format is used for unmarshal a JSon payload to POJO or to marshal POJO back to JSon payload.
+
+| link:https://camel.apache.org/components/latest/jsonApi-dataformat.html[JSonApi] +
+(camel-jsonapi-starter) | 3.0 | JSonApi data format is used for marshal and unmarshal Json API object.
+
+| link:https://camel.apache.org/components/latest/lzf-dataformat.html[LZF Deflate Compression] +
+(camel-lzf-starter) | 2.17 | The LZF data format is a message compression and de-compression format (uses the LZF deflate algorithm).
+
+| link:https://camel.apache.org/components/latest/mime-multipart-dataformat.html[MIME Multipart] +
+(camel-mail-starter) | 2.17 | The MIME Multipart data format is used for marshalling Camel messages with attachments into MIME-Multipart message, and vise-versa.
+
+| link:https://camel.apache.org/components/latest/pgp-dataformat.html[PGP] +
+(camel-crypto-starter) | 2.9 | PGP data format is used for encrypting and decrypting of messages using Java Cryptographic Extension and PGP.
+
+| link:https://camel.apache.org/components/latest/protobuf-dataformat.html[Protobuf] +
+(camel-protobuf-starter) | 2.2 | The Protobuf data format is used for serializing between Java objects and the Google Protobuf protocol.
+
+| link:https://camel.apache.org/components/latest/rss-dataformat.html[RSS] +
+(camel-rss-starter) | 2.1 | RSS data format is used for working with RSS sync feed Java Objects and transforming to XML and vice-versa.
+
+| link:https://camel.apache.org/components/latest/soapjaxb-dataformat.html[SOAP] +
+(camel-soap-starter) | 2.3 | SOAP is a data format which uses JAXB2 and JAX-WS annotations to marshal and unmarshal SOAP payloads.
+
+| link:https://camel.apache.org/components/latest/syslog-dataformat.html[Syslog] +
+(camel-syslog-starter) | 2.6 | The Syslog dataformat is used for working with RFC3164 and RFC5424 messages (logging and monitoring).
+
+| link:https://camel.apache.org/components/latest/tarfile-dataformat.html[Tar File] +
+(camel-tarfile-starter) | 2.16 | The Tar File data format is a message compression and de-compression format of tar files.
+
+| link:https://camel.apache.org/components/latest/thrift-dataformat.html[Thrift] +
+(camel-thrift-starter) | 2.20 | The Thrift data format is used for serialization and deserialization of messages using Apache Thrift binary dataformat.
+
+| link:https://camel.apache.org/components/latest/tidyMarkup-dataformat.html[TidyMarkup] +
+(camel-tagsoup-starter) | 2.0 | TidyMarkup data format is used for parsing HTML and return it as pretty well-formed HTML.
+
+| link:https://camel.apache.org/components/latest/univocity-csv-dataformat.html[uniVocity CSV] +
+(camel-univocity-parsers-starter) | 2.15 | The uniVocity CSV data format is used for working with CSV (Comma Separated Values) flat payloads.
+
+| link:https://camel.apache.org/components/latest/univocity-fixed-dataformat.html[uniVocity Fixed Length] +
+(camel-univocity-parsers-starter) | 2.15 | The uniVocity Fixed Length data format is used for working with fixed length flat payloads.
+
+| link:https://camel.apache.org/components/latest/univocity-tsv-dataformat.html[uniVocity TSV] +
+(camel-univocity-parsers-starter) | 2.15 | The uniVocity TSV data format is used for working with TSV (Tabular Separated Values) flat payloads.
+
+| link:https://camel.apache.org/components/latest/secureXML-dataformat.html[XML Security] +
+(camel-xmlsecurity-starter) | 2.0 | The XML Security data format facilitates encryption and decryption of XML payloads.
+
+| link:https://camel.apache.org/components/latest/xstream-dataformat.html[XStream] +
+(camel-xstream-starter) | 1.3 | XStream data format is used for unmarshal a XML payload to POJO or to marshal POJO back to XML payload.
+
+| link:https://camel.apache.org/components/latest/yaml-snakeyaml-dataformat.html[YAML SnakeYAML] +
+(camel-snakeyaml-starter) | 2.17 | YAML is a data format to marshal and unmarshal Java objects to and from YAML.
+
+| link:https://camel.apache.org/components/latest/zipdeflater-dataformat.html[Zip Deflate Compression] +
+(camel-zip-deflater-starter) | 2.12 | Zip Deflate Compression data format is a message compression and de-compression format (not zip files).
+
+| link:https://camel.apache.org/components/latest/zipfile-dataformat.html[Zip File] +
+(camel-zipfile-starter) | 2.11 | The Zip File data format is a message compression and de-compression format of zip files.
+|===
+// dataformats: END
+
+== Camel Languages
+
+// languages: START
+Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
+
+[width="100%",cols="4,1,5",options="header"]
+|===
+| Language | Since | Description
+
+| link:https://camel.apache.org/components/latest/bean-language.html[Bean method] +
+(camel-bean-starter) | 1.3 | To use a Java bean (aka method call) in Camel expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/constant-language.html[Constant] +
+(camel-base) | 1.5 | To use a constant value in Camel expressions or predicates. Important: this is a fixed constant value that is only set once during starting up the route, do not use this if you want dynamic values during routing.
+
+| link:https://camel.apache.org/components/latest/exchangeProperty-language.html[ExchangeProperty] +
+(camel-base) | 2.0 | To use a Camel Exchange property in expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/file-language.html[File] +
+(camel-base) | 1.1 | For expressions and predicates using the file/simple language.
+
+| link:https://camel.apache.org/components/latest/groovy-language.html[Groovy] +
+(camel-groovy-starter) | 1.3 | To use Groovy scripts in Camel expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/header-language.html[Header] +
+(camel-base) | 1.5 | To use a Camel Message header in expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/hl7terser-language.html[HL7 Terser] +
+(camel-hl7-starter) | 2.11 | To use HL7 terser scripts in Camel expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/jsonpath-language.html[JsonPath] +
+(camel-jsonpath-starter) | 2.13 | To use JsonPath in Camel expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/mvel-language.html[MVEL] +
+(camel-mvel-starter) | 2.0 | To use MVEL scripts in Camel expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/ognl-language.html[OGNL] +
+(camel-ognl-starter) | 1.1 | To use OGNL scripts in Camel expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/ref-language.html[Ref] +
+(camel-base) | 2.8 | Reference to an existing Camel expression or predicate, which is looked up from the Camel registry.
+
+| link:https://camel.apache.org/components/latest/simple-language.html[Simple] +
+(camel-base) | 1.1 | To use Camels built-in Simple language in Camel expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/spel-language.html[SpEL] +
+(camel-spring-starter) | 2.7 | To use Spring Expression Language (SpEL) in Camel expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/tokenize-language.html[Tokenize] +
+(camel-base) | 2.0 | To use Camel message body or header with a tokenizer in Camel expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/xtokenize-language.html[XML Tokenize] +
+(camel-jaxp-starter) | 2.14 | To use Camel message body or header with a XML tokenizer in Camel expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/xpath-language.html[XPath] +
+(camel-xpath-starter) | 1.1 | To use XPath (XML) in Camel expressions or predicates.
+
+| link:https://camel.apache.org/components/latest/xquery-language.html[XQuery] +
+(camel-saxon-starter) | 1.0 | To use XQuery (XML) in Camel expressions or predicates.
+|===
+// languages: END
+
+
+== Miscellaneous Extensions
+
+// others: START
+Number of miscellaneous extensions: 23 in 23 JAR artifacts (0 deprecated)
+
+[width="100%",cols="4,1,5",options="header"]
+|===
+| Extension | Since | Description
+
+| link:https://camel.apache.org/components/latest/aws-xray.html[AWS XRay] +
+(camel-aws-xray-starter) | 2.21 | Distributed tracing using AWS XRay
+
+| link:https://camel.apache.org/components/latest/cxf-transport.html[CXF Transport] +
+(camel-cxf-transport-starter) | 2.8 | Camel Transport for Apache CXF
+
+| link:https://camel.apache.org/components/latest/hystrix.html[Hystrix] +
+(camel-hystrix-starter) | 2.18 | Circuit Breaker EIP using Netflix Hystrix
+
+| link:https://camel.apache.org/components/latest/jasypt.html[Jasypt] +
+(camel-jasypt-starter) | 2.5 | Security using Jasypt
+
+| link:https://camel.apache.org/components/latest/kura.html[Kura] +
+(camel-kura-starter) | 2.15 | Using Camel with Eclipse Kura (OSGi)
+
+| link:https://camel.apache.org/components/latest/leveldb.html[LevelDB] +
+(camel-leveldb-starter) | 2.10 | Using LevelDB as persistent EIP store
+
+| link:https://camel.apache.org/components/latest/lra.html[LRA] +
+(camel-lra-starter) | 2.21 | Camel saga binding for Long-Running-Action framework
+
+| link:https://camel.apache.org/components/latest/openapi-java.html[Openapi Java] +
+(camel-openapi-java-starter) | 3.1 | Rest-dsl support for using openapi doc
+
+| link:https://camel.apache.org/components/latest/opentracing.html[OpenTracing] +
+(camel-opentracing-starter) | 2.19 | Distributed tracing using OpenTracing
+
+| link:https://camel.apache.org/components/latest/reactive-executor-vertx.html[Reactive Executor Vert.x] +
+(camel-reactive-executor-vertx-starter) | 3.0 | Reactive Executor for camel-core using Vert.x
+
+| link:https://camel.apache.org/components/latest/reactor.html[Reactor] +
+(camel-reactor-starter) | 2.20 | Reactor based back-end for Camel's reactive streams component
+
+| link:https://camel.apache.org/components/latest/resilience4j.html[Resilience4j] +
+(camel-resilience4j-starter) | 3.0 | Circuit Breaker EIP using Resilience4j
+
+| link:https://camel.apache.org/components/latest/ribbon.html[Ribbon] +
+(camel-ribbon-starter) | 2.18 | Using Netflix Ribbon for client side load balancing
+
+| link:https://camel.apache.org/components/latest/rxjava.html[RxJava] +
+(camel-rxjava-starter) | 2.22 | RxJava based back-end for Camel's reactive streams component
+
+| link:https://camel.apache.org/components/latest/shiro.html[Shiro] +
+(camel-shiro-starter) | 2.5 | Security using Shiro
+
+| link:https://camel.apache.org/components/latest/spring-cloud.html[Spring Cloud] +
+(camel-spring-cloud-starter) | 2.19 | Camel Cloud integration with Spring Cloud
+
+| link:https://camel.apache.org/components/latest/spring-cloud-consul.html[Spring Cloud Consul] +
+(camel-spring-cloud-consul-starter) | 2.19 | Camel Cloud integration with Spring Cloud Consul
+
+| link:https://camel.apache.org/components/latest/spring-cloud-netflix.html[Spring Cloud Netflix] +
+(camel-spring-cloud-netflix-starter) | 2.19 | Camel Cloud integration with Spring Cloud Netflix
+
+| link:https://camel.apache.org/components/latest/spring-cloud-zookeeper.html[Spring Cloud Zookeeper] +
+(camel-spring-cloud-zookeeper-starter) | 2.19 | Camel Cloud integration with Spring Cloud Zookeeper
+
+| link:https://camel.apache.org/components/latest/spring-javaconfig.html[Spring Java Configuration] +
+(camel-spring-javaconfig-starter) | 2.0 | Using Camel with Spring Java Configuration
+
+| link:https://camel.apache.org/components/latest/spring-security.html[Spring Security] +
+(camel-spring-security-starter) | 2.3 | Security using Spring Security
+
+| link:https://camel.apache.org/components/latest/swagger-java.html[Swagger Java] +
+(camel-swagger-java-starter) | 2.16 | Rest-dsl support for using swagger api-doc
+
+| link:https://camel.apache.org/components/latest/zipkin.html[Zipkin] +
+(camel-zipkin-starter) | 2.18 | Distributed message tracing using Zipkin
+|===
+// others: END
+
