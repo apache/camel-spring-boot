@@ -17,10 +17,13 @@
 package org.apache.camel.component.hystrix.processor;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.impl.engine.DefaultRouteContext;
 import org.apache.camel.model.CircuitBreakerDefinition;
 import org.apache.camel.model.HystrixConfigurationDefinition;
 import org.apache.camel.model.Model;
+import org.apache.camel.model.ModelCamelContext;
 import org.apache.camel.model.RouteDefinition;
+import org.apache.camel.spi.RouteContext;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,8 +59,9 @@ public class HystrixHierarchicalConfigurationTest {
 
         Assert.assertNotNull(hystrixDefinition);
 
-        HystrixReifier reifier = new HystrixReifier(hystrixDefinition);
-        HystrixConfigurationDefinition config = reifier.buildHystrixConfiguration(camelContext);
+        RouteContext rc = new DefaultRouteContext(camelContext, routeDefinition, "hystrix-route");
+        HystrixReifier reifier = new HystrixReifier(rc, hystrixDefinition);
+        HystrixConfigurationDefinition config = reifier.buildHystrixConfiguration();
 
         Assert.assertEquals("local-conf-group-key", config.getGroupKey());
         Assert.assertEquals("global-thread-key", config.getThreadPoolKey());
