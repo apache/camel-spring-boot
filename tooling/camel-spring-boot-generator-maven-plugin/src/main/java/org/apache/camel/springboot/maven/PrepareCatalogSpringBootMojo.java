@@ -51,7 +51,7 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
     /**
      * The catalog directory
      */
-    @Parameter(defaultValue = "${basedir}/../../camel-catalog-provider-springboot")
+    @Parameter(defaultValue = "${basedir}/../../catalog/camel-catalog-provider-springboot")
     protected File catalogDir;
 
     protected void executeAll() throws MojoExecutionException, MojoFailureException, IOException {
