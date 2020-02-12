@@ -20,7 +20,7 @@ name: Sync Camel Spring Boot Master Branch
 on:
   schedule:
     # Run every day at midnight
-    - cron:  '5 * * * *'
+    - cron:  '0 0 * * *'
 jobs:
   build:
     name: Build
