@@ -1,4 +1,5 @@
 :page-partial:
+:doctitle: Camel Spring Boot Starter for soroush
 
 == Spring Boot Auto-Configuration
 

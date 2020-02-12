@@ -1,4 +1,5 @@
 :page-partial:
+:doctitle: Camel Spring Boot Starter for kudu
 
 == Spring Boot Auto-Configuration
 
