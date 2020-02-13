@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
-import org.apache.camel.component.xmlsecurity.XmlSignatureComponent;
+import org.apache.camel.component.xmlsecurity.XmlVerifierComponent;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spi.HasId;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -51,35 +51,34 @@ import org.springframework.context.annotation.Lazy;
 @Generated("org.apache.camel.springboot.maven.SpringBootAutoConfigurationMojo")
 @Configuration(proxyBeanMethods = false)
 @Conditional({ConditionalOnCamelContextAndAutoConfigurationBeans.class,
-        XmlSignatureComponentAutoConfiguration.GroupConditions.class})
+        XmlVerifierComponentAutoConfiguration.GroupConditions.class})
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,
-        XmlSignatureComponentConfiguration.class})
-public class XmlSignatureComponentAutoConfiguration {
+        XmlVerifierComponentConfiguration.class})
+public class XmlVerifierComponentAutoConfiguration {
 
     private static final Logger LOGGER = LoggerFactory
-            .getLogger(XmlSignatureComponentAutoConfiguration.class);
+            .getLogger(XmlVerifierComponentAutoConfiguration.class);
     @Autowired
     private ApplicationContext applicationContext;
     @Autowired
     private CamelContext camelContext;
     @Autowired
-    private XmlSignatureComponentConfiguration configuration;
+    private XmlVerifierComponentConfiguration configuration;
     @Autowired(required = false)
-    private List<ComponentCustomizer<XmlSignatureComponent>> customizers;
+    private List<ComponentCustomizer<XmlVerifierComponent>> customizers;
 
     static class GroupConditions extends GroupCondition {
         public GroupConditions() {
-            super("camel.component", "camel.component.xmlsecurity-sign");
+            super("camel.component", "camel.component.xmlsecurity-verify");
         }
     }
 
     @Lazy
-    @Bean(name = "xmlsecurity-sign-component")
-    @ConditionalOnMissingBean(XmlSignatureComponent.class)
-    public XmlSignatureComponent configureXmlSignatureComponent()
-            throws Exception {
-        XmlSignatureComponent component = new XmlSignatureComponent();
+    @Bean(name = "xmlsecurity-verify-component")
+    @ConditionalOnMissingBean(XmlVerifierComponent.class)
+    public XmlVerifierComponent configureXmlVerifierComponent() throws Exception {
+        XmlVerifierComponent component = new XmlVerifierComponent();
         component.setCamelContext(camelContext);
         Map<String, Object> parameters = new HashMap<>();
         IntrospectionSupport.getProperties(configuration, parameters, null,
@@ -106,17 +105,17 @@ public class XmlSignatureComponentAutoConfiguration {
         CamelPropertiesHelper.setCamelProperties(camelContext, component,
                 parameters, false);
         if (ObjectHelper.isNotEmpty(customizers)) {
-            for (ComponentCustomizer<XmlSignatureComponent> customizer : customizers) {
+            for (ComponentCustomizer<XmlVerifierComponent> customizer : customizers) {
                 boolean useCustomizer = (customizer instanceof HasId)
                         ? HierarchicalPropertiesEvaluator.evaluate(
                                 applicationContext.getEnvironment(),
                                 "camel.component.customizer",
-                                "camel.component.xmlsecurity-sign.customizer",
+                                "camel.component.xmlsecurity-verify.customizer",
                                 ((HasId) customizer).getId())
                         : HierarchicalPropertiesEvaluator.evaluate(
                                 applicationContext.getEnvironment(),
                                 "camel.component.customizer",
-                                "camel.component.xmlsecurity-sign.customizer");
+                                "camel.component.xmlsecurity-verify.customizer");
                 if (useCustomizer) {
                     LOGGER.debug("Configure component {}, with customizer {}",
                             component, customizer);

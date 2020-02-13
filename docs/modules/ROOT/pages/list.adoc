@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 319 in 254 JAR artifacts (1 deprecated)
+Number of Camel components: 320 in 254 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -941,8 +941,11 @@ Number of Camel components: 319 in 254 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/xj-component.html[XJ] (camel-xj-starter) +
 `xj:resourceUri` | 3.0 | Transforms json/xml message back and forth using a XSLT.
 
-| link:https://camel.apache.org/components/latest/xmlsecurity-component.html[XML Security] (camel-xmlsecurity-starter) +
-`xmlsecurity:command:name` | 2.12 | Used to sign and verify exchanges using the XML signature specification.
+| link:https://camel.apache.org/components/latest/xmlsecurity-sign-component.html[XML Security Sign] (camel-xmlsecurity-starter) +
+`xmlsecurity-sign:name` | 2.12 | Used to sign exchanges using the XML signature specification.
+
+| link:https://camel.apache.org/components/latest/xmlsecurity-verify-component.html[XML Security Verify] (camel-xmlsecurity-starter) +
+`xmlsecurity-verify:name` | 2.12 | Used to verify exchanges using the XML signature specification.
 
 | link:https://camel.apache.org/components/latest/xmpp-component.html[XMPP] (camel-xmpp-starter) +
 `xmpp:host:port/participant` | 1.0 | To send and receive messages from a XMPP (chat) server.
