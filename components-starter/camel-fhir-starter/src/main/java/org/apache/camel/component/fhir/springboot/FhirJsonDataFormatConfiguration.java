@@ -129,10 +129,10 @@ public class FhirJsonDataFormatConfiguration
      * have their resource versions encoded instead of being automatically
      * stripped during the encoding process. This setting has no effect on the
      * parsing process. This method provides a finer-grained level of control
-     * than setStripVersionsFromReferences(Boolean) and any paths specified by
+     * than setStripVersionsFromReferences(String) and any paths specified by
      * this method will be encoded even if
-     * setStripVersionsFromReferences(Boolean) has been set to true (which is
-     * the default)
+     * setStripVersionsFromReferences(String) has been set to true (which is the
+     * default)
      */
     private List<String> dontStripVersionsFromReferencesAtPaths;
     /**
