@@ -23,10 +23,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * A Spring Boot application that runs the Camel Resilience client application that calls service 1 and service 2 (as fallback)
  */
 @SpringBootApplication
-public final class ClientApplication {
-
-    private ClientApplication() {
-    }
+public class ClientApplication {
 
     /**
      * A main method to start this application.
