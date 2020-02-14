@@ -1,5 +1,4 @@
 // spring-boot-auto-configure options: START
-// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for ahc
 
@@ -36,6 +35,4 @@ The component supports 10 options, which are listed below.
 | *camel.component.ahc.ssl-context-parameters* | Reference to a org.apache.camel.support.jsse.SSLContextParameters in the Registry. Note that configuring this option will override any SSL/TLS configuration options provided through the clientConfig option at the endpoint or component level. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
 | *camel.component.ahc.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 |===
-
-// spring-boot-auto-configure options: END
 // spring-boot-auto-configure options: END
