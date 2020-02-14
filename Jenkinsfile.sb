@@ -21,7 +21,7 @@ def LOCAL_REPOSITORY = env.LOCAL_REPOSITORY ?: '/home/jenkins/jenkins-slave/mave
 def AGENT_LABEL = env.AGENT_LABEL ?: 'ubuntu'
 def JDK_NAME = env.JDK_NAME ?: 'JDK 1.8 (latest)'
 
-def MAVEN_PARAMS = '-U -B -e -fae -V -Dmaven.repo.local=/home/jenkins/.m2/repository -Dmaven.compiler.fork=true -Dsurefire.rerunFailingTestsCount=2'
+def MAVEN_PARAMS = '-U -B -e -fae -V -Dmaven.repo.local=/home/jenkins/.m2/repository -Dmaven.compiler.fork=true'
 
 def spring_boot_itests_result
 
@@ -54,16 +54,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh "./mvnw $MAVEN_PARAMS clean install"
-            }
-        }
-
-        stage('spring-boot-itests') {
-            steps {
-                dir("tests/camel-itest-spring-boot/") {
-                    script {
-                        spring_boot_itests_result = sh script: "../mvnw $MAVEN_PARAMS -Dmaven.test.failure.ignore=true clean install", returnStatus: true
-                    }
+                script {
+                    spring_boot_itests_result = sh script: "./mvnw $MAVEN_PARAMS -Dmaven.test.failure.ignore=true clean install", returnStatus: true
                 }
             }
             post {
@@ -72,7 +64,6 @@ pipeline {
                 }
             }
         }
-
     }
 
     post {
