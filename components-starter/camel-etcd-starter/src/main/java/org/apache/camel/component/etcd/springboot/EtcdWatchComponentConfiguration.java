@@ -48,10 +48,6 @@ public class EtcdWatchComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
-     * Sets the common configuration shared among endpoints
-     */
-    private EtcdConfigurationNestedConfiguration configuration;
-    /**
      * The password to use for basic authentication.
      */
     private String password;
@@ -74,6 +70,10 @@ public class EtcdWatchComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * Sets the common configuration shared among endpoints
+     */
+    private EtcdConfigurationNestedConfiguration configuration;
+    /**
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
@@ -84,15 +84,6 @@ public class EtcdWatchComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
-    }
-
-    public EtcdConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            EtcdConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public String getPassword() {
@@ -135,6 +126,15 @@ public class EtcdWatchComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
+    public EtcdConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            EtcdConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
+    }
+
     public Boolean getUseGlobalSslContextParameters() {
         return useGlobalSslContextParameters;
     }
@@ -170,9 +170,6 @@ public class EtcdWatchComponentConfiguration
          * To configure security using SSLContextParameters.
          */
         private SSLContextParameters sslContextParameters;
-        /**
-         * To set the lifespan of a key in milliseconds.
-         */
         private Integer timeToLive;
         /**
          * To set the maximum time an action could take to complete.

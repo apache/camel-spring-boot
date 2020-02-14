@@ -35,7 +35,7 @@ The component supports 22 options, which are listed below.
 | *camel.component.docker.configuration.max-per-route-connections* | Maximum route connections | 100 | Integer
 | *camel.component.docker.configuration.max-total-connections* | Maximum total connections | 100 | Integer
 | *camel.component.docker.configuration.operation* | Which operation to use |  | DockerOperation
-| *camel.component.docker.configuration.parameters* | Additional configuration parameters as key/value pairs |  | Map
+| *camel.component.docker.configuration.parameters* |  |  | Map
 | *camel.component.docker.configuration.password* | Password to authenticate with |  | String
 | *camel.component.docker.configuration.port* | Docker port | 2375 | Integer
 | *camel.component.docker.configuration.request-timeout* | Request timeout for response (in seconds) |  | Integer

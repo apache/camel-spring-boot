@@ -38,10 +38,6 @@ public class EtcdKeysComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Sets the common configuration shared among endpoints
-     */
-    private EtcdConfigurationNestedConfiguration configuration;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -75,18 +71,13 @@ public class EtcdKeysComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * Sets the common configuration shared among endpoints
+     */
+    private EtcdConfigurationNestedConfiguration configuration;
+    /**
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
-
-    public EtcdConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            EtcdConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
-    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -136,6 +127,15 @@ public class EtcdKeysComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
+    public EtcdConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            EtcdConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
+    }
+
     public Boolean getUseGlobalSslContextParameters() {
         return useGlobalSslContextParameters;
     }
@@ -147,9 +147,6 @@ public class EtcdKeysComponentConfiguration
 
     public static class EtcdConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.etcd.EtcdConfiguration.class;
-        /**
-         * The index to watch from
-         */
         private Long fromIndex;
         /**
          * The password to use for basic authentication.
@@ -159,9 +156,6 @@ public class EtcdKeysComponentConfiguration
          * To apply an action recursively.
          */
         private Boolean recursive = false;
-        /**
-         * To send an empty message in case of timeout watching for a key.
-         */
         private Boolean sendEmptyExchangeOnTimeout;
         /**
          * The path to look for for service discovery
