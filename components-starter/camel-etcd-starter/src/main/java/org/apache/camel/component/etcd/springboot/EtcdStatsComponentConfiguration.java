@@ -39,6 +39,10 @@ public class EtcdStatsComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Sets the common configuration shared among endpoints
+     */
+    private EtcdConfigurationNestedConfiguration configuration;
+    /**
      * The password to use for basic authentication.
      */
     private String password;
@@ -81,13 +85,18 @@ public class EtcdStatsComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Sets the common configuration shared among endpoints
-     */
-    private EtcdConfigurationNestedConfiguration configuration;
-    /**
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
+
+    public EtcdConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            EtcdConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
+    }
 
     public String getPassword() {
         return password;
@@ -143,15 +152,6 @@ public class EtcdStatsComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public EtcdConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            EtcdConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public Boolean getUseGlobalSslContextParameters() {

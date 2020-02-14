@@ -105,5 +105,4 @@ The component supports 80 options, which are listed below.
 | *camel.component.netty.configuration.server-pipeline-factory* | *Deprecated*  |  | ServerInitializerFactory
 | *camel.component.netty.configuration.trust-store-file* | *Deprecated* Server side certificate keystore to be used for encryption |  | File
 |===
-
 // spring-boot-auto-configure options: END

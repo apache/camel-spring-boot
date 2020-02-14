@@ -39,6 +39,10 @@ public class DockerComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * To use the shared docker configuration
+     */
+    private DockerConfigurationNestedConfiguration configuration;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -63,10 +67,15 @@ public class DockerComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * To use the shared docker configuration
-     */
-    private DockerConfigurationNestedConfiguration configuration;
+
+    public DockerConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            DockerConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -90,15 +99,6 @@ public class DockerComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public DockerConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            DockerConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public static class DockerConfigurationNestedConfiguration {
@@ -140,6 +140,9 @@ public class DockerComponentConfiguration
          * Which operation to use
          */
         private DockerOperation operation;
+        /**
+         * Additional configuration parameters as key/value pairs
+         */
         private Map parameters;
         /**
          * Password to authenticate with

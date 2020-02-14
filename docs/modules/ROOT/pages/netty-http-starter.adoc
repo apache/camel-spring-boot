@@ -61,5 +61,4 @@ The component supports 36 options, which are listed below.
 | *camel.component.netty-http.ssl-context-parameters* | To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
 | *camel.component.netty-http.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 |===
-
 // spring-boot-auto-configure options: END
