@@ -70,7 +70,7 @@ public class BraintreeComponentConfiguration
     private Boolean basicPropertyBinding = false;
     /**
      * Sets whether to enable the BraintreeLogHandler. It may be desirable to
-     * set this to 'false' where an existing JUL - SLF4J logger bridge is on the
+     * set this to false where an existing JUL - SLF4J logger bridge is on the
      * classpath.
      */
     private Boolean logHandlerEnabled = true;
@@ -136,7 +136,10 @@ public class BraintreeComponentConfiguration
          * Set logging level for http calls, see java.util.logging.Level
          */
         private Level httpLogLevel;
-        private String httpLogName;
+        /**
+         * Set log category to use to log http calls.
+         */
+        private String httpLogName = "Braintree";
         /**
          * Set read timeout for http calls.
          */
