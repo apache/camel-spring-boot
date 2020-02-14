@@ -108,6 +108,9 @@ public class JooqComponentConfiguration
          * Delete entity after it is consumed
          */
         private Boolean consumeDelete = true;
+        /**
+         * To use a specific database configuration
+         */
         private Configuration databaseConfiguration;
         /**
          * JOOQ entity class
