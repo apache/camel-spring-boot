@@ -88,7 +88,7 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         try {
-            executeStarter(project.getBasedir());
+            executeStarter(buildDir.getParentFile());
         } catch (Exception e) {
             throw new MojoFailureException("Error processing spring-configuration-metadata.json", e);
         }
@@ -111,7 +111,7 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
                 // skip camel-  and -starter in the end
                 String componentName = name.substring(6, name.length() - 8);
                 getLog().debug("Camel component: " + componentName);
-                File docFolder = new File("components-starter/" + name + "/src/main/docs/");
+                File docFolder = new File(starter,"src/main/docs/");
                 File docFile = new File(docFolder, componentName + "-starter.adoc");
 
                 List<SpringBootAutoConfigureOptionModel> models = parseSpringBootAutoConfigureModels(jsonFile, null);
@@ -244,14 +244,9 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
                     return true;
                 }
             } else {
-                getLog().warn("Cannot find markers in file " + file);
-                getLog().warn("Add the following markers");
-                getLog().warn("\t// spring-boot-auto-configure options: START");
-                getLog().warn("\t// spring-boot-auto-configure options: END");
-                if (isFailFast()) {
-                    throw new MojoExecutionException("Failed build due failFast=true");
-                }
-                return false;
+                // override existing file with new content
+                writeText(file, changed);
+                return true;
             }
         } catch (Exception e) {
             throw new MojoExecutionException("Error reading file " + file + " Reason: " + e, e);
