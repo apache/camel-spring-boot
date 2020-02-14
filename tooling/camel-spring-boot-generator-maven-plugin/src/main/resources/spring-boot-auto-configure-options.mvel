@@ -1,4 +1,3 @@
-// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for @{title}
 
@@ -29,4 +28,3 @@ The component supports @{options.size()} options, which are listed below.
 @foreach{row : options}| *@{row.name}* | @{util.escape(row.description)} | @{row.getShortDefaultValue(20)} | @{row.getShortJavaType()}
 @end{}|===
 @end{}
-// spring-boot-auto-configure options: END

@@ -223,6 +223,8 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
     private boolean updateAutoConfigureOptions(File file, String changed) throws MojoExecutionException {
         try {
             if (!file.exists()) {
+                // include markers for new files
+                changed = "// spring-boot-auto-configure options: START\n" + changed + "\n// spring-boot-auto-configure options: END\n";
                 writeText(file, changed);
                 return true;
             }
@@ -244,9 +246,14 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
                     return true;
                 }
             } else {
-                // override existing file with new content
-                writeText(file, changed);
-                return true;
+                getLog().warn("Cannot find markers in file " + file);
+                getLog().warn("Add the following markers");
+                getLog().warn("\t// spring-boot-auto-configure options: START");
+                getLog().warn("\t// spring-boot-auto-configure options: END");
+                if (isFailFast()) {
+                    throw new MojoExecutionException("Failed build due failFast=true");
+                }
+                return false;
             }
         } catch (Exception e) {
             throw new MojoExecutionException("Error reading file " + file + " Reason: " + e, e);
