@@ -151,6 +151,7 @@
     <module>camel-aws2-mq-starter</module>
     <module>camel-aws2-msk-starter</module>
     <module>camel-aws2-ses-starter</module>
+    <module>camel-aws2-sns-starter</module>
     <module>camel-aws2-translate-starter</module>
     <module>camel-azure-starter</module>
     <module>camel-barcode-starter</module>

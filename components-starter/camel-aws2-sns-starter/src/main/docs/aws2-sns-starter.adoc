@@ -1,0 +1,53 @@
+// spring-boot-auto-configure options: START
+:page-partial:
+:doctitle: Camel Spring Boot Starter for aws2-sns
+
+== Spring Boot Auto-Configuration
+
+When using aws2-sns with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-aws2-sns-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 23 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.component.aws2-sns.access-key* | Amazon AWS Access Key |  | String
+| *camel.component.aws2-sns.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.aws2-sns.configuration.access-key* | Amazon AWS Access Key |  | String
+| *camel.component.aws2-sns.configuration.amazon-s-n-s-client* | To use the AmazonSNS as the client |  | SnsClient
+| *camel.component.aws2-sns.configuration.auto-create-topic* | Setting the autocreation of the topic | true | Boolean
+| *camel.component.aws2-sns.configuration.kms-master-key-id* | The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. |  | String
+| *camel.component.aws2-sns.configuration.message-structure* | The message structure to use such as json |  | String
+| *camel.component.aws2-sns.configuration.policy* | The policy for this queue |  | String
+| *camel.component.aws2-sns.configuration.proxy-host* | To define a proxy host when instantiating the SNS client |  | String
+| *camel.component.aws2-sns.configuration.proxy-port* | To define a proxy port when instantiating the SNS client |  | Integer
+| *camel.component.aws2-sns.configuration.proxy-protocol* | To define a proxy protocol when instantiating the SNS client |  | Protocol
+| *camel.component.aws2-sns.configuration.queue-url* | The queueUrl to subscribe to |  | String
+| *camel.component.aws2-sns.configuration.region* | The region in which SNS client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
+| *camel.component.aws2-sns.configuration.secret-key* | Amazon AWS Secret Key |  | String
+| *camel.component.aws2-sns.configuration.server-side-encryption-enabled* | Define if Server Side Encryption is enabled or not on the topic | false | Boolean
+| *camel.component.aws2-sns.configuration.subject* | The subject which is used if the message header 'CamelAwsSnsSubject' is not present. |  | String
+| *camel.component.aws2-sns.configuration.subscribe-s-n-sto-s-q-s* | Define if the subscription between SNS Topic and SQS must be done or not | false | Boolean
+| *camel.component.aws2-sns.configuration.topic-arn* |  |  | String
+| *camel.component.aws2-sns.configuration.topic-name* |  |  | String
+| *camel.component.aws2-sns.enabled* | Whether to enable auto configuration of the aws2-sns component. This is enabled by default. |  | Boolean
+| *camel.component.aws2-sns.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.aws2-sns.region* | The region in which SNS client needs to work |  | String
+| *camel.component.aws2-sns.secret-key* | Amazon AWS Secret Key |  | String
+|===
+
+
+// spring-boot-auto-configure options: END
