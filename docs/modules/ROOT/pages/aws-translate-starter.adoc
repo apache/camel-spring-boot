@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for aws-translate
 
@@ -42,3 +43,4 @@ The component supports 17 options, which are listed below.
 | *camel.component.aws-translate.secret-key* | Amazon AWS Secret Key |  | String
 |===
 
+// spring-boot-auto-configure options: END

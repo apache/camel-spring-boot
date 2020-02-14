@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for elsql
 
@@ -33,3 +34,4 @@ The component supports 8 options, which are listed below.
 | *camel.component.elsql.resource-uri* | The resource file which contains the elsql SQL statements to use. You can specify multiple resources separated by comma. The resources are loaded on the classpath by default, you can prefix with file: to load from file system. Notice you can set this option on the component and then you do not have to configure this on the endpoint. |  | String
 |===
 
+// spring-boot-auto-configure options: END

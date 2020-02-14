@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for rest
 
@@ -37,3 +38,4 @@ The component supports 12 options, which are listed below.
 | *camel.component.rest.component-name* | *Deprecated* The Camel Rest component to use for (producer) the REST transport, such as http, undertow. If no component has been explicit configured, then Camel will lookup if there is a Camel component that integrates with the Rest DSL, or if a org.apache.camel.spi.RestProducerFactory is registered in the registry. If either one is found, then that is being used. |  | String
 |===
 
+// spring-boot-auto-configure options: END

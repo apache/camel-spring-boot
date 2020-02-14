@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for bean-validator
 
@@ -33,3 +34,4 @@ The component supports 8 options, which are listed below.
 | *camel.component.bean-validator.validation-provider-resolver* | To use a a custom ValidationProviderResolver. The option is a javax.validation.ValidationProviderResolver type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

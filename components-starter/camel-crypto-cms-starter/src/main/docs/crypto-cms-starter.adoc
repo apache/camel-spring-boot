@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for crypto-cms
 
@@ -30,3 +31,4 @@ The component supports 5 options, which are listed below.
 | *camel.component.crypto-cms.signed-data-verifier-configuration* | To configure the shared SignedDataVerifierConfiguration, which determines the uri parameters for the verify operation. The option is a org.apache.camel.component.crypto.cms.sig.SignedDataVerifierConfiguration type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

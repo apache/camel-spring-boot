@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for mustache
 
@@ -29,3 +30,4 @@ The component supports 4 options, which are listed below.
 | *camel.component.mustache.mustache-factory* | To use a custom MustacheFactory. The option is a com.github.mustachejava.MustacheFactory type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

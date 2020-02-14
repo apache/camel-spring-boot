@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for quickfix
 
@@ -34,3 +35,4 @@ The component supports 9 options, which are listed below.
 | *camel.component.quickfix.message-store-factory* | To use the given MessageStoreFactory. The option is a quickfix.MessageStoreFactory type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

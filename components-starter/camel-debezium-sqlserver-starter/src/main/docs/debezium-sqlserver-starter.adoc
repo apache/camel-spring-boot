@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for debezium-sqlserver
 
@@ -60,3 +61,4 @@ The component supports 35 options, which are listed below.
 | *camel.component.debezium-sqlserver.enabled* | Whether to enable auto configuration of the debezium-sqlserver component. This is enabled by default. |  | Boolean
 |===
 
+// spring-boot-auto-configure options: END

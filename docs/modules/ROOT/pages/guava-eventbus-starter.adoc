@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for guava-eventbus
 
@@ -31,3 +32,4 @@ The component supports 6 options, which are listed below.
 | *camel.component.guava-eventbus.listener-interface* | The interface with method(s) marked with the Subscribe annotation. Dynamic proxy will be created over the interface so it could be registered as the EventBus listener. Particularly useful when creating multi-event listeners and for handling DeadEvent properly. This option cannot be used together with eventClass option. |  | Class
 |===
 
+// spring-boot-auto-configure options: END

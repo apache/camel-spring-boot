@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for csv
 
@@ -55,3 +56,4 @@ The component supports 30 options, which are listed below.
 | *camel.dataformat.csv.use-ordered-maps* | Whether the unmarshalling should produce ordered maps (LinkedHashMap) for the lines values instead of lists. It requires to have header (either defined or collected). | false | Boolean
 |===
 
+// spring-boot-auto-configure options: END

@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for msv
 
@@ -30,3 +31,4 @@ The component supports 5 options, which are listed below.
 | *camel.component.msv.schema-factory* | To use the javax.xml.validation.SchemaFactory. The option is a javax.xml.validation.SchemaFactory type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

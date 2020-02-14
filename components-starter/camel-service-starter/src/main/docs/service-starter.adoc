@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for service
 
@@ -30,3 +31,4 @@ The component supports 5 options, which are listed below.
 | *camel.component.service.service-selector* | Inject the service selector used to lookup the ServiceRegistry to use. The option is a org.apache.camel.cloud.ServiceRegistry.Selector type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

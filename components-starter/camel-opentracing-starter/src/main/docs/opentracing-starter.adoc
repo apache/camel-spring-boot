@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for opentracing
 
@@ -27,3 +28,4 @@ The component supports 2 options, which are listed below.
 | *camel.opentracing.exclude-patterns* | Sets exclude pattern(s) that will disable tracing for Camel messages that matches the pattern. |  | Set
 |===
 
+// spring-boot-auto-configure options: END

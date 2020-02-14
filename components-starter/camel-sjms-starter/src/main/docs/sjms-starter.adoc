@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for sjms
 
@@ -50,3 +51,4 @@ The component supports 25 options, which are listed below.
 | *camel.component.sjms.transaction-commit-strategy* | To configure which kind of commit strategy to use. Camel provides two implementations out of the box, default and batch. The option is a org.apache.camel.component.sjms.TransactionCommitStrategy type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

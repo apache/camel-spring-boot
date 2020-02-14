@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for pulsar
 
@@ -33,3 +34,4 @@ The component supports 8 options, which are listed below.
 | *camel.component.pulsar.pulsar-message-receipt-factory* | Provide a factory to create an alternate implementation of PulsarMessageReceipt. The option is a org.apache.camel.component.pulsar.PulsarMessageReceiptFactory type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

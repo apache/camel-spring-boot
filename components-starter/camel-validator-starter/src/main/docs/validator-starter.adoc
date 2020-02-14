@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for validator
 
@@ -29,3 +30,4 @@ The component supports 4 options, which are listed below.
 | *camel.component.validator.resource-resolver-factory* | To use a custom LSResourceResolver which depends on a dynamic endpoint resource URI. The option is a org.apache.camel.component.validator.ValidatorResourceResolverFactory type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

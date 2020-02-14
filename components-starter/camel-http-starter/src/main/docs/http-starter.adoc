@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for http
 
@@ -45,3 +46,4 @@ The component supports 20 options, which are listed below.
 | *camel.component.http.x509-hostname-verifier* | To use a custom X509HostnameVerifier such as DefaultHostnameVerifier or NoopHostnameVerifier. The option is a javax.net.ssl.HostnameVerifier type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

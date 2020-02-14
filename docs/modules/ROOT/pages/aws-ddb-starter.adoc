@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for aws-ddb
 
@@ -62,3 +63,4 @@ The component supports 37 options, which are listed below.
 | *camel.component.aws-ddbstream.secret-key* | Amazon AWS Secret Key |  | String
 |===
 
+// spring-boot-auto-configure options: END

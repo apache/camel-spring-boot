@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for aws-s3
 
@@ -66,3 +67,4 @@ The component supports 41 options, which are listed below.
 | *camel.component.aws-s3.secret-key* | Amazon AWS Secret Key |  | String
 |===
 
+// spring-boot-auto-configure options: END

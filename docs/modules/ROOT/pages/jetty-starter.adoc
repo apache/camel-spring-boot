@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for jetty
 
@@ -58,3 +59,4 @@ The component supports 33 options, which are listed below.
 | *camel.component.jetty.use-x-forwarded-for-header* | To use the X-Forwarded-For header in HttpServletRequest.getRemoteAddr. | false | Boolean
 |===
 
+// spring-boot-auto-configure options: END

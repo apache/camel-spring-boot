@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for mybatis
 
@@ -36,3 +37,4 @@ The component supports 11 options, which are listed below.
 | *camel.component.mybatis.sql-session-factory* | To use the SqlSessionFactory. The option is a org.apache.ibatis.session.SqlSessionFactory type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

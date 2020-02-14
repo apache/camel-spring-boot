@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for cbor
 
@@ -37,3 +38,4 @@ The component supports 12 options, which are listed below.
 | *camel.dataformat.cbor.use-list* | To unarmshal to a List of Map or a List of Pojo. | false | Boolean
 |===
 
+// spring-boot-auto-configure options: END

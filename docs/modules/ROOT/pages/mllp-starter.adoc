@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for mllp
 
@@ -58,3 +59,4 @@ The component supports 33 options, which are listed below.
 | *camel.component.mllp.configuration.max-receive-timeouts* | *Deprecated* The maximum number of timeouts (specified by receiveTimeout) allowed before the TCP Connection will be reset. |  | Integer
 |===
 
+// spring-boot-auto-configure options: END

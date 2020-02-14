@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for hbase
 
@@ -31,3 +32,4 @@ The component supports 6 options, which are listed below.
 | *camel.component.hbase.pool-max-size* | Maximum number of references to keep for each table in the HTable pool. The default value is 10. | 10 | Integer
 |===
 
+// spring-boot-auto-configure options: END

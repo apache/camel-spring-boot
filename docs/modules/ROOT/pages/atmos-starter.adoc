@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for atmos
 
@@ -33,3 +34,4 @@ The component supports 8 options, which are listed below.
 | *camel.component.atmos.uri* | The URI of the server for the Atmos client to connect to |  | String
 |===
 
+// spring-boot-auto-configure options: END

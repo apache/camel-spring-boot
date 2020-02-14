@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for slack
 
@@ -30,3 +31,4 @@ The component supports 5 options, which are listed below.
 | *camel.component.slack.webhook-url* | The incoming webhook URL |  | String
 |===
 
+// spring-boot-auto-configure options: END

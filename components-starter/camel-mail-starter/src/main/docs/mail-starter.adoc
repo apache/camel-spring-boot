@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for mail
 
@@ -75,3 +76,4 @@ The component supports 50 options, which are listed below.
 | *camel.dataformat.mime-multipart.multipart-without-attachment* | Defines whether a message without attachment is also marshaled into a MIME Multipart (with only one body part). Default is false. | false | Boolean
 |===
 
+// spring-boot-auto-configure options: END

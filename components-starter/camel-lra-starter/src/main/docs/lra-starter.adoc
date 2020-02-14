@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for lra
 
@@ -30,3 +31,4 @@ The component supports 5 options, which are listed below.
 | *camel.service.lra.local-participant-url* | The local URL where the coordinator should send callbacks to (e.g. \http://my-host-name:8080) |  | String
 |===
 
+// spring-boot-auto-configure options: END

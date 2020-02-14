@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for ssh
 
@@ -57,3 +58,4 @@ The component supports 32 options, which are listed below.
 | *camel.component.ssh.username* | Sets the username to use in logging into the remote SSH server. |  | String
 |===
 
+// spring-boot-auto-configure options: END

@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for saxon
 
@@ -35,3 +36,4 @@ The component supports 10 options, which are listed below.
 | *camel.language.xquery.type* | Sets the class name of the result type (type from output) The default result type is NodeSet |  | String
 |===
 
+// spring-boot-auto-configure options: END

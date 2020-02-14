@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for vm
 
@@ -35,3 +36,4 @@ The component supports 10 options, which are listed below.
 | *camel.component.vm.queue-size* | Sets the default maximum capacity of the SEDA queue (i.e., the number of messages it can hold). | 1000 | Integer
 |===
 
+// spring-boot-auto-configure options: END

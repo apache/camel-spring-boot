@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for servlet
 
@@ -39,3 +40,4 @@ The component supports 14 options, which are listed below.
 | *camel.component.servlet.servlet-name* | Default name of servlet to use. The default name is CamelServlet. | CamelServlet | String
 |===
 
+// spring-boot-auto-configure options: END

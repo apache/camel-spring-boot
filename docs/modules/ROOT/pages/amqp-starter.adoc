@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for amqp
 
@@ -111,3 +112,4 @@ The component supports 86 options, which are listed below.
 | *camel.component.amqp.wait-for-provision-correlation-to-be-updated-thread-sleeping-time* | Interval in millis to sleep each time while waiting for provisional correlation id to be updated. | 100 | Long
 |===
 
+// spring-boot-auto-configure options: END

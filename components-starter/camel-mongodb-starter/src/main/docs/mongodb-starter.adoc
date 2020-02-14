@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for mongodb
 
@@ -30,3 +31,4 @@ The component supports 5 options, which are listed below.
 | *camel.component.mongodb.mongo-connection* | A connection client provided externally. The option is a com.mongodb.client.MongoClient type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

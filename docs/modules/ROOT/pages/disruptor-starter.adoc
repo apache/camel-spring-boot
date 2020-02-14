@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for disruptor
 
@@ -47,3 +48,4 @@ The component supports 22 options, which are listed below.
 | *camel.component.disruptor.queue-size* | *Deprecated* To configure the ring buffer size |  | Integer
 |===
 
+// spring-boot-auto-configure options: END

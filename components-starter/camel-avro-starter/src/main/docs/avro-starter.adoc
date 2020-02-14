@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for avro
 
@@ -42,3 +43,4 @@ The component supports 17 options, which are listed below.
 | *camel.dataformat.avro.instance-class-name* | Class name to use for marshal and unmarshalling |  | String
 |===
 
+// spring-boot-auto-configure options: END

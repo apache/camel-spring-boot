@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for nsq
 
@@ -31,3 +32,4 @@ The component supports 6 options, which are listed below.
 | *camel.component.nsq.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 |===
 
+// spring-boot-auto-configure options: END

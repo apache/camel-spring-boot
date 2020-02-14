@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for core
 
@@ -170,3 +171,4 @@ The component supports 145 options, which are listed below.
 | *camel.rest.xml-data-format* | Name of specific XML data format to use. By default jaxb will be used. Important: This option is only for setting a custom name of the data format, not to refer to an existing data format instance. |  | String
 |===
 
+// spring-boot-auto-configure options: END

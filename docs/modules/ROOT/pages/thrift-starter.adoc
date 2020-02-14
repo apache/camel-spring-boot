@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for thrift
 
@@ -34,3 +35,4 @@ The component supports 9 options, which are listed below.
 | *camel.dataformat.thrift.instance-class* | Name of class to use when unarmshalling |  | String
 |===
 
+// spring-boot-auto-configure options: END

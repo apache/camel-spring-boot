@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for aws-sns
 
@@ -49,3 +50,4 @@ The component supports 24 options, which are listed below.
 | *camel.component.aws-sns.secret-key* | Amazon AWS Secret Key |  | String
 |===
 
+// spring-boot-auto-configure options: END

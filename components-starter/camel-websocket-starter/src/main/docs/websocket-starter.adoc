@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for websocket
 
@@ -42,3 +43,4 @@ The component supports 17 options, which are listed below.
 | *camel.component.websocket.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 |===
 
+// spring-boot-auto-configure options: END

@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for jgroups-raft
 
@@ -38,3 +39,4 @@ The component supports 13 options, which are listed below.
 | *camel.component.jgroups.raft.cluster.service.raft-id* | JGroups-raft ID |  | String
 |===
 
+// spring-boot-auto-configure options: END

@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for rest-openapi
 
@@ -36,3 +37,4 @@ The component supports 11 options, which are listed below.
 | *camel.component.rest-openapi.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 |===
 
+// spring-boot-auto-configure options: END

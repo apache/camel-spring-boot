@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for any23
 
@@ -30,3 +31,4 @@ The component supports 5 options, which are listed below.
 | *camel.dataformat.any23.output-format* | What RDF syntax to unmarshal as, can be: NTRIPLES, TURTLE, NQUADS, RDFXML, JSONLD, RDFJSON, RDF4JMODEL. It is by default: RDF4JMODEL. |  | Any23OutputFormat
 |===
 
+// spring-boot-auto-configure options: END

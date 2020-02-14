@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for univocity-parsers
 
@@ -78,3 +79,4 @@ The component supports 53 options, which are listed below.
 | *camel.dataformat.univocity-tsv.skip-empty-lines* | Whether or not the empty lines must be ignored. The default value is true | true | Boolean
 |===
 
+// spring-boot-auto-configure options: END

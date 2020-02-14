@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for tagsoup
 
@@ -29,3 +30,4 @@ The component supports 4 options, which are listed below.
 | *camel.dataformat.tidymarkup.omit-xml-declaration* | When returning a String, do we omit the XML declaration in the top. | false | Boolean
 |===
 
+// spring-boot-auto-configure options: END

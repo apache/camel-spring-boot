@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for sql
 
@@ -35,3 +36,4 @@ The component supports 10 options, which are listed below.
 | *camel.component.sql.use-placeholder* | Sets whether to use placeholder and replace all placeholder characters with sign in the SQL queries. This option is default true | true | Boolean
 |===
 
+// spring-boot-auto-configure options: END

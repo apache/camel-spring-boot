@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for base64
 
@@ -30,3 +31,4 @@ The component supports 5 options, which are listed below.
 | *camel.dataformat.base64.url-safe* | Instead of emitting '' and '/' we emit '-' and '_' respectively. urlSafe is only applied to encode operations. Decoding seamlessly handles both modes. Is by default false. | false | Boolean
 |===
 
+// spring-boot-auto-configure options: END

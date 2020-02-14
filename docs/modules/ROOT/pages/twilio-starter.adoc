@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for twilio
 
@@ -35,3 +36,4 @@ The component supports 10 options, which are listed below.
 | *camel.component.twilio.username* | The account to use. |  | String
 |===
 
+// spring-boot-auto-configure options: END

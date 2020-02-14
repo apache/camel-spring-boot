@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for rabbitmq
 
@@ -78,3 +79,4 @@ The component supports 53 options, which are listed below.
 | *camel.component.rabbitmq.vhost* | The vhost for the channel | / | String
 |===
 
+// spring-boot-auto-configure options: END

@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for vertx
 
@@ -35,3 +36,4 @@ The component supports 10 options, which are listed below.
 | *camel.component.vertx.vertx-options* | Options to use for creating vertx. The option is a io.vertx.core.VertxOptions type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

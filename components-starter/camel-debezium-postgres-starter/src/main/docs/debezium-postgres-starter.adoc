@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for debezium-postgres
 
@@ -78,3 +79,4 @@ The component supports 53 options, which are listed below.
 | *camel.component.debezium-postgres.enabled* | Whether to enable auto configuration of the debezium-postgres component. This is enabled by default. |  | Boolean
 |===
 
+// spring-boot-auto-configure options: END

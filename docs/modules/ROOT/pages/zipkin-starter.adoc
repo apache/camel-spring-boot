@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for zipkin
 
@@ -35,3 +36,4 @@ The component supports 10 options, which are listed below.
 | *camel.zipkin.service-name* | To use a global service name that matches all Camel events |  | String
 |===
 
+// spring-boot-auto-configure options: END

@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for micrometer
 
@@ -29,3 +30,4 @@ The component supports 4 options, which are listed below.
 | *camel.component.micrometer.metrics-registry* | To use a custom configured MetricRegistry. The option is a io.micrometer.core.instrument.MeterRegistry type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

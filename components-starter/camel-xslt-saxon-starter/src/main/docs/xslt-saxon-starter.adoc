@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for xslt-saxon
 
@@ -36,3 +37,4 @@ The component supports 11 options, which are listed below.
 | *camel.component.xslt-saxon.uri-resolver-factory* | To use a custom UriResolver which depends on a dynamic endpoint resource URI. Should not be used together with the option 'uriResolver'. The option is a org.apache.camel.component.xslt.XsltUriResolverFactory type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

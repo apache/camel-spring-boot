@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for metrics
 
@@ -29,3 +30,4 @@ The component supports 4 options, which are listed below.
 | *camel.component.metrics.metric-registry* | To use a custom configured MetricRegistry. The option is a com.codahale.metrics.MetricRegistry type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

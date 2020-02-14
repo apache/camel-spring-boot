@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for reactive-streams
 
@@ -34,3 +35,4 @@ The component supports 9 options, which are listed below.
 | *camel.component.reactive-streams.service-type* | Set the type of the underlying reactive streams implementation to use. The implementation is looked up from the registry or using a ServiceLoader, the default implementation is DefaultCamelReactiveStreamsService |  | String
 |===
 
+// spring-boot-auto-configure options: END

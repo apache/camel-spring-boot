@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for soap
 
@@ -33,3 +34,4 @@ The component supports 8 options, which are listed below.
 | *camel.dataformat.soapjaxb.version* | SOAP version should either be 1.1 or 1.2. Is by default 1.1 | 1.1 | String
 |===
 
+// spring-boot-auto-configure options: END

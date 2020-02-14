@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for flatpack
 
@@ -39,3 +40,4 @@ The component supports 14 options, which are listed below.
 | *camel.dataformat.flatpack.text-qualifier* | If the text is qualified with a character. Uses quote character by default. |  | String
 |===
 
+// spring-boot-auto-configure options: END

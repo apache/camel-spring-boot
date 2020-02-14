@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for velocity
 
@@ -29,3 +30,4 @@ The component supports 4 options, which are listed below.
 | *camel.component.velocity.velocity-engine* | To use the VelocityEngine otherwise a new engine is created. The option is a org.apache.velocity.app.VelocityEngine type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

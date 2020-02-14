@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for beanio
 
@@ -35,3 +36,4 @@ The component supports 10 options, which are listed below.
 | *camel.dataformat.beanio.unmarshal-single-object* | This options controls whether to unmarshal as a list of objects or as a single object only. The former is the default mode, and the latter is only intended in special use-cases where beanio maps the Camel message to a single POJO bean. | false | Boolean
 |===
 
+// spring-boot-auto-configure options: END

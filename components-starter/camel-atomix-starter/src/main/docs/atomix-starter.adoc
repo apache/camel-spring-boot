@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for atomix
 
@@ -98,3 +99,4 @@ The component supports 73 options, which are listed below.
 | *camel.component.atomix.cluster.service.storage-path* | The storage directory - node only. |  | String
 |===
 
+// spring-boot-auto-configure options: END

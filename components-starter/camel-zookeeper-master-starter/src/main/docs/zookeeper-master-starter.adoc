@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for zookeeper-master
 
@@ -34,3 +35,4 @@ The component supports 9 options, which are listed below.
 | *camel.component.zookeeper-master.zoo-keeper-url* | The url for the zookeeper ensemble | localhost:2181 | String
 |===
 
+// spring-boot-auto-configure options: END

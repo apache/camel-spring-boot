@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for jaxb
 
@@ -44,3 +45,4 @@ The component supports 19 options, which are listed below.
 | *camel.dataformat.jaxb.xml-stream-writer-wrapper* | To use a custom xml stream writer. |  | String
 |===
 
+// spring-boot-auto-configure options: END

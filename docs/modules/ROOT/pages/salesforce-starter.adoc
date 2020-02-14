@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for salesforce
 
@@ -114,3 +115,4 @@ The component supports 89 options, which are listed below.
 | *camel.component.salesforce.user-name* | Username used in OAuth flow to gain access to access token. It's easy to get started with password OAuth flow, but in general one should avoid it as it is deemed less secure than other flows. |  | String
 |===
 
+// spring-boot-auto-configure options: END

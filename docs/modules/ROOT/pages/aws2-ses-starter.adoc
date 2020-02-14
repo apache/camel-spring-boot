@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for aws2-ses
 
@@ -43,3 +44,4 @@ The component supports 18 options, which are listed below.
 | *camel.component.aws2-ses.secret-key* | Amazon AWS Secret Key |  | String
 |===
 
+// spring-boot-auto-configure options: END

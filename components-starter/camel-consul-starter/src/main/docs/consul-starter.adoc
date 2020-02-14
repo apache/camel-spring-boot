@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for consul
 
@@ -117,3 +118,4 @@ The component supports 92 options, which are listed below.
 | *camel.component.consul.service-registry.dc* | *Deprecated*  |  | String
 |===
 
+// spring-boot-auto-configure options: END

@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for etcd
 
@@ -80,3 +81,4 @@ The component supports 55 options, which are listed below.
 | *camel.component.etcd-watch.user-name* | The user name to use for basic authentication. |  | String
 |===
 
+// spring-boot-auto-configure options: END

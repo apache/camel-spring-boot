@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for zendesk
 
@@ -36,3 +37,4 @@ The component supports 11 options, which are listed below.
 | *camel.component.zendesk.zendesk* | To use a shared Zendesk instance. The option is a org.zendesk.client.v2.Zendesk type. |  | String
 |===
 
+// spring-boot-auto-configure options: END

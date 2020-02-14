@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for milo
 
@@ -73,3 +74,4 @@ The component supports 48 options, which are listed below.
 | *camel.component.milo-server.username-security-policy-uri* | Set the UserTokenPolicy used when |  | SecurityPolicy
 |===
 
+// spring-boot-auto-configure options: END

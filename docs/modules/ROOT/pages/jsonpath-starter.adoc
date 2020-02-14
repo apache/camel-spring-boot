@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for jsonpath
 
@@ -32,3 +33,4 @@ The component supports 7 options, which are listed below.
 | *camel.language.jsonpath.write-as-string* | Whether to write the output of each row/element as a JSON String value instead of a Map/POJO value. | false | Boolean
 |===
 
+// spring-boot-auto-configure options: END

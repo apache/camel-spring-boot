@@ -1,3 +1,4 @@
+// spring-boot-auto-configure options: START
 :page-partial:
 :doctitle: Camel Spring Boot Starter for protobuf
 
@@ -29,3 +30,4 @@ The component supports 4 options, which are listed below.
 | *camel.dataformat.protobuf.instance-class* | Name of class to use when unarmshalling |  | String
 |===
 
+// spring-boot-auto-configure options: END
