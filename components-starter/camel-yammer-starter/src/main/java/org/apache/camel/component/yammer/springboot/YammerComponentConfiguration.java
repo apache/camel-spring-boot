@@ -69,6 +69,11 @@ public class YammerComponentConfiguration
      */
     private YammerConfigurationNestedConfiguration config;
     /**
+     * To use a specific requester to communicate with Yammer. The option is a
+     * org.apache.camel.component.yammer.ApiRequestor type.
+     */
+    private String requestor;
+    /**
      * The access token
      */
     private String accessToken;
@@ -111,6 +116,14 @@ public class YammerComponentConfiguration
 
     public void setConfig(YammerConfigurationNestedConfiguration config) {
         this.config = config;
+    }
+
+    public String getRequestor() {
+        return requestor;
+    }
+
+    public void setRequestor(String requestor) {
+        this.requestor = requestor;
     }
 
     public String getAccessToken() {
@@ -158,8 +171,7 @@ public class YammerComponentConfiguration
         /**
          * The function to use
          */
-        private String function;
-        private YammerFunctionType functionType;
+        private YammerFunctionType function;
         /**
          * Return only the specified number of messages. Works for threaded=true
          * and threaded=extended.
@@ -182,6 +194,9 @@ public class YammerComponentConfiguration
          * messages prior to those you're seeing.
          */
         private Long olderThan = -1L;
+        /**
+         * To use a specific requester to communicate with Yammer.
+         */
         private ApiRequestor requestor;
         /**
          * threaded=true will only return the first message in each thread. This
@@ -234,20 +249,12 @@ public class YammerComponentConfiguration
             this.delay = delay;
         }
 
-        public String getFunction() {
+        public YammerFunctionType getFunction() {
             return function;
         }
 
-        public void setFunction(String function) {
+        public void setFunction(YammerFunctionType function) {
             this.function = function;
-        }
-
-        public YammerFunctionType getFunctionType() {
-            return functionType;
-        }
-
-        public void setFunctionType(YammerFunctionType functionType) {
-            this.functionType = functionType;
         }
 
         public Integer getLimit() {
