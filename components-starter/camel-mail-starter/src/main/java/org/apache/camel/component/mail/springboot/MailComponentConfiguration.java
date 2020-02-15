@@ -259,6 +259,10 @@ public class MailComponentConfiguration
          * content-type and it relies on the platform default instead.
          */
         private Boolean ignoreUriScheme = false;
+        /**
+         * Sets the java mail options. Will clear any default properties and
+         * only use the properties provided for this method.
+         */
         private Properties javaMailProperties;
         /**
          * To use a custom org.apache.camel.component.mail.JavaMailSender for
@@ -297,7 +301,6 @@ public class MailComponentConfiguration
          * The port number of the mail server
          */
         private Integer port;
-        private String protocol;
         /**
          * The Reply-To recipients (the receivers of the response mail).
          * Separate multiple email addresses with a comma.
@@ -554,14 +557,6 @@ public class MailComponentConfiguration
 
         public void setPort(Integer port) {
             this.port = port;
-        }
-
-        public String getProtocol() {
-            return protocol;
-        }
-
-        public void setProtocol(String protocol) {
-            this.protocol = protocol;
         }
 
         public String getReplyTo() {

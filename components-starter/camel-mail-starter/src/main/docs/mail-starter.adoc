@@ -17,7 +17,7 @@ When using mail with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 50 options, which are listed below.
+The component supports 49 options, which are listed below.
 
 
 
@@ -45,14 +45,13 @@ The component supports 50 options, which are listed below.
 | *camel.component.mail.configuration.host* | The mail server host name |  | String
 | *camel.component.mail.configuration.ignore-unsupported-charset* | Option to let Camel ignore unsupported charset in the local JVM when sending mails. If the charset is unsupported then charset=XXX (where XXX represents the unsupported charset) is removed from the content-type and it relies on the platform default instead. | false | Boolean
 | *camel.component.mail.configuration.ignore-uri-scheme* | Option to let Camel ignore unsupported charset in the local JVM when sending mails. If the charset is unsupported then charset=XXX (where XXX represents the unsupported charset) is removed from the content-type and it relies on the platform default instead. | false | Boolean
-| *camel.component.mail.configuration.java-mail-properties* |  |  | Properties
+| *camel.component.mail.configuration.java-mail-properties* | Sets the java mail options. Will clear any default properties and only use the properties provided for this method. |  | Properties
 | *camel.component.mail.configuration.java-mail-sender* | To use a custom org.apache.camel.component.mail.JavaMailSender for sending emails. |  | JavaMailSender
 | *camel.component.mail.configuration.map-mail-message* | Specifies whether Camel should map the received mail message to Camel body/headers/attachments. If set to true, the body of the mail message is mapped to the body of the Camel IN message, the mail headers are mapped to IN headers, and the attachments to Camel IN attachment message. If this option is set to false then the IN message contains a raw javax.mail.Message. You can retrieve this raw message by calling exchange.getIn().getBody(javax.mail.Message.class). | true | Boolean
 | *camel.component.mail.configuration.mime-decode-headers* | This option enables transparent MIME decoding and unfolding for mail headers. | false | Boolean
 | *camel.component.mail.configuration.password* | The password for login |  | String
 | *camel.component.mail.configuration.peek* | Will mark the javax.mail.Message as peeked before processing the mail message. This applies to IMAPMessage messages types only. By using peek the mail will not be eager marked as SEEN on the mail server, which allows us to rollback the mail message if there is an error processing in Camel. | true | Boolean
 | *camel.component.mail.configuration.port* | The port number of the mail server |  | Integer
-| *camel.component.mail.configuration.protocol* |  |  | String
 | *camel.component.mail.configuration.reply-to* | The Reply-To recipients (the receivers of the response mail). Separate multiple email addresses with a comma. |  | String
 | *camel.component.mail.configuration.session* | Specifies the mail session that camel should use for all mail interactions. Useful in scenarios where mail sessions are created and managed by some other resource, such as a JavaEE container. When using a custom mail session, then the hostname and port from the mail session will be used (if configured on the session). |  | Session
 | *camel.component.mail.configuration.skip-failed-message* | If the mail consumer cannot retrieve a given mail message, then this option allows to skip the message and move on to retrieve the next mail message. The default behavior would be the consumer throws an exception and no mails from the batch would be able to be routed by Camel. | false | Boolean
@@ -75,5 +74,4 @@ The component supports 50 options, which are listed below.
 | *camel.dataformat.mime-multipart.multipart-sub-type* | Specify the subtype of the MIME Multipart. Default is mixed. | mixed | String
 | *camel.dataformat.mime-multipart.multipart-without-attachment* | Defines whether a message without attachment is also marshaled into a MIME Multipart (with only one body part). Default is false. | false | Boolean
 |===
-
 // spring-boot-auto-configure options: END

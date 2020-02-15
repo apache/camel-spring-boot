@@ -132,8 +132,20 @@ public class ReactiveStreamsComponentConfiguration
 
     public static class ReactiveStreamsEngineConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration.class;
+        /**
+         * The maximum number of threads used by the reactive streams internal
+         * engine.
+         */
         private Integer threadPoolMaxSize;
+        /**
+         * The minimum number of threads used by the reactive streams internal
+         * engine.
+         */
         private Integer threadPoolMinSize;
+        /**
+         * The name of the thread pool used by the reactive streams internal
+         * engine.
+         */
         private String threadPoolName;
 
         public Integer getThreadPoolMaxSize() {
