@@ -155,10 +155,25 @@ public class UndertowComponentConfiguration
 
     public static class UndertowHostOptionsNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.undertow.UndertowHostOptions.class;
+        /**
+         * The buffer size of the Undertow host.
+         */
         private Integer bufferSize;
+        /**
+         * Set if the Undertow host should use direct buffers.
+         */
         private Boolean directBuffers;
+        /**
+         * Set if the Undertow host should use http2 protocol.
+         */
         private Boolean http2Enabled;
+        /**
+         * The number of io threads to use in a Undertow host.
+         */
         private Integer ioThreads;
+        /**
+         * The number of worker threads to use in a Undertow host.
+         */
         private Integer workerThreads;
 
         public Integer getBufferSize() {
