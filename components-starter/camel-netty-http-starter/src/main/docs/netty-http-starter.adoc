@@ -17,7 +17,7 @@ When using netty-http with Spring Boot make sure to use the following Maven depe
 ----
 
 
-The component supports 36 options, which are listed below.
+The component supports 35 options, which are listed below.
 
 
 
@@ -51,13 +51,12 @@ The component supports 36 options, which are listed below.
 | *camel.component.netty-http.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.netty-http.maximum-pool-size* | Sets a maximum thread pool size for the netty consumer ordered thread pool. The default size is 2 x cpu_core plus 1. Setting this value to eg 10 will then use 10 threads unless 2 x cpu_core plus 1 is a higher value, which then will override and be used. For example if there are 8 cores, then the consumer thread pool will be 17. This thread pool is used to route messages received from Netty by Camel. We use a separate thread pool to ensure ordering of messages and also in case some messages will block, then nettys worker threads (event loop) wont be affected. |  | Integer
 | *camel.component.netty-http.netty-http-binding* | To use a custom org.apache.camel.component.netty.http.NettyHttpBinding for binding to/from Netty and Camel Message API. The option is a org.apache.camel.component.netty.http.NettyHttpBinding type. |  | String
-| *camel.component.netty-http.security-configuration.authenticate* |  |  | Boolean
-| *camel.component.netty-http.security-configuration.constraint* |  |  | String
-| *camel.component.netty-http.security-configuration.login-denied-logging-level* |  |  | LoggingLevel
-| *camel.component.netty-http.security-configuration.realm* |  |  | String
-| *camel.component.netty-http.security-configuration.role-class-name* |  |  | String
-| *camel.component.netty-http.security-configuration.security-authenticator* |  |  | SecurityAuthenticator
-| *camel.component.netty-http.security-configuration.security-constraint* |  |  | SecurityConstraint
+| *camel.component.netty-http.security-configuration.authenticate* | Whether to enable authentication |  | Boolean
+| *camel.component.netty-http.security-configuration.constraint* | Security constraint. Currently only Basic is supported. |  | String
+| *camel.component.netty-http.security-configuration.login-denied-logging-level* | Sets a logging level to use for logging denied login attempts (incl stacktraces) |  | LoggingLevel
+| *camel.component.netty-http.security-configuration.realm* | Name of security realm |  | String
+| *camel.component.netty-http.security-configuration.security-authenticator* | Sets the SecurityAuthenticator to use for authenticating the HttpPrincipal. |  | SecurityAuthenticator
+| *camel.component.netty-http.security-configuration.security-constraint* | Sets a SecurityConstraint to use for checking if a web resource is restricted or not. By default this is null, which means all resources is restricted. |  | SecurityConstraint
 | *camel.component.netty-http.ssl-context-parameters* | To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
 | *camel.component.netty-http.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 |===

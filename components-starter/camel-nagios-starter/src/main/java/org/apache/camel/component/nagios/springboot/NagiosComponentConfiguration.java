@@ -17,7 +17,6 @@
 package org.apache.camel.component.nagios.springboot;
 
 import javax.annotation.Generated;
-import com.googlecode.jsendnsca.NagiosSettings;
 import com.googlecode.jsendnsca.encryption.Encryption;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -98,7 +97,6 @@ public class NagiosComponentConfiguration
          * This is the address of the Nagios host where checks should be send.
          */
         private String host;
-        private NagiosSettings nagiosSettings;
         /**
          * Password to be authenticated when sending checks to Nagios.
          */
@@ -134,14 +132,6 @@ public class NagiosComponentConfiguration
 
         public void setHost(String host) {
             this.host = host;
-        }
-
-        public NagiosSettings getNagiosSettings() {
-            return nagiosSettings;
-        }
-
-        public void setNagiosSettings(NagiosSettings nagiosSettings) {
-            this.nagiosSettings = nagiosSettings;
         }
 
         public String getPassword() {

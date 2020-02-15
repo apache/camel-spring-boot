@@ -20,7 +20,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Generated;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.handler.ssl.SslHandler;
@@ -220,7 +219,6 @@ public class NettyComponentConfiguration
          * producerPoolEnabled option for more details.
          */
         private NettyCamelStateCorrelationManager correlationManager;
-        private ChannelHandler decoder;
         /**
          * The max line length to use for the textline codec.
          */
@@ -247,7 +245,6 @@ public class NettyComponentConfiguration
          * should disconnect where there is no reply to send back.
          */
         private Boolean disconnectOnNoReply = true;
-        private ChannelHandler encoder;
         /**
          * A list of encoders to be used. You can use a String which have values
          * separated by comma, and have the values be looked up in the Registry.
@@ -631,14 +628,6 @@ public class NettyComponentConfiguration
             this.correlationManager = correlationManager;
         }
 
-        public ChannelHandler getDecoder() {
-            return decoder;
-        }
-
-        public void setDecoder(ChannelHandler decoder) {
-            this.decoder = decoder;
-        }
-
         public Integer getDecoderMaxLineLength() {
             return decoderMaxLineLength;
         }
@@ -677,14 +666,6 @@ public class NettyComponentConfiguration
 
         public void setDisconnectOnNoReply(Boolean disconnectOnNoReply) {
             this.disconnectOnNoReply = disconnectOnNoReply;
-        }
-
-        public ChannelHandler getEncoder() {
-            return encoder;
-        }
-
-        public void setEncoder(ChannelHandler encoder) {
-            this.encoder = encoder;
         }
 
         public List getEncoders() {

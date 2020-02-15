@@ -17,12 +17,10 @@
 package org.apache.camel.component.lucene.springboot;
 
 import java.io.File;
-import java.net.URI;
 import javax.annotation.Generated;
 import org.apache.camel.component.lucene.LuceneOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.util.Version;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -96,7 +94,6 @@ public class LuceneComponentConfiguration
          * analyzers out of the box
          */
         private Analyzer analyzer;
-        private String authority;
         /**
          * The URL to the lucene server
          */
@@ -106,7 +103,6 @@ public class LuceneComponentConfiguration
          * analysis of the document by the specified analyzer
          */
         private File indexDir;
-        private Version luceneVersion;
         /**
          * An integer value that limits the result set of the search operation
          */
@@ -120,7 +116,6 @@ public class LuceneComponentConfiguration
          * added to the index at producer startup.
          */
         private File srcDir;
-        private URI uri;
 
         public Analyzer getAnalyzer() {
             return analyzer;
@@ -128,14 +123,6 @@ public class LuceneComponentConfiguration
 
         public void setAnalyzer(Analyzer analyzer) {
             this.analyzer = analyzer;
-        }
-
-        public String getAuthority() {
-            return authority;
-        }
-
-        public void setAuthority(String authority) {
-            this.authority = authority;
         }
 
         public String getHost() {
@@ -152,14 +139,6 @@ public class LuceneComponentConfiguration
 
         public void setIndexDir(File indexDir) {
             this.indexDir = indexDir;
-        }
-
-        public Version getLuceneVersion() {
-            return luceneVersion;
-        }
-
-        public void setLuceneVersion(Version luceneVersion) {
-            this.luceneVersion = luceneVersion;
         }
 
         public Integer getMaxHits() {
@@ -184,14 +163,6 @@ public class LuceneComponentConfiguration
 
         public void setSrcDir(File srcDir) {
             this.srcDir = srcDir;
-        }
-
-        public URI getUri() {
-            return uri;
-        }
-
-        public void setUri(URI uri) {
-            this.uri = uri;
         }
     }
 }

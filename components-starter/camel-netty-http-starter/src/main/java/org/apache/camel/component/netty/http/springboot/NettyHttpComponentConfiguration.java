@@ -493,12 +493,33 @@ public class NettyHttpComponentConfiguration
 
     public static class NettyHttpSecurityConfigurationNestedConfiguration {
         public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.netty.http.NettyHttpSecurityConfiguration.class;
+        /**
+         * Whether to enable authentication
+         */
         private Boolean authenticate;
+        /**
+         * Security constraint. Currently only Basic is supported.
+         */
         private String constraint;
+        /**
+         * Sets a logging level to use for logging denied login attempts (incl
+         * stacktraces)
+         */
         private LoggingLevel loginDeniedLoggingLevel;
+        /**
+         * Name of security realm
+         */
         private String realm;
-        private String roleClassName;
+        /**
+         *  Sets the SecurityAuthenticator to use for authenticating the
+         * HttpPrincipal.
+         */
         private SecurityAuthenticator securityAuthenticator;
+        /**
+         * Sets a SecurityConstraint to use for checking if a web resource is
+         * restricted or not. By default this is null, which means all resources
+         * is restricted.
+         */
         private SecurityConstraint securityConstraint;
 
         public Boolean getAuthenticate() {
@@ -532,14 +553,6 @@ public class NettyHttpComponentConfiguration
 
         public void setRealm(String realm) {
             this.realm = realm;
-        }
-
-        public String getRoleClassName() {
-            return roleClassName;
-        }
-
-        public void setRoleClassName(String roleClassName) {
-            this.roleClassName = roleClassName;
         }
 
         public SecurityAuthenticator getSecurityAuthenticator() {
