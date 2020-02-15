@@ -17,7 +17,6 @@
 package org.apache.camel.component.webhook.springboot;
 
 import javax.annotation.Generated;
-import org.apache.camel.spi.RestConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -89,7 +88,6 @@ public class WebhookComponentConfiguration
          * The delegate uri. Must belong to a component that supports webhooks.
          */
         private String endpointUri;
-        private RestConfiguration restConfiguration;
         /**
          * Automatically register the webhook at startup and unregister it on
          * shutdown.
@@ -122,14 +120,6 @@ public class WebhookComponentConfiguration
 
         public void setEndpointUri(String endpointUri) {
             this.endpointUri = endpointUri;
-        }
-
-        public RestConfiguration getRestConfiguration() {
-            return restConfiguration;
-        }
-
-        public void setRestConfiguration(RestConfiguration restConfiguration) {
-            this.restConfiguration = restConfiguration;
         }
 
         public Boolean getWebhookAutoRegister() {
