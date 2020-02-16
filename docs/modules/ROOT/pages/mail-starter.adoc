@@ -17,7 +17,7 @@ When using mail with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 50 options, which are listed below.
+The component supports 49 options, which are listed below.
 
 
 
@@ -52,7 +52,6 @@ The component supports 50 options, which are listed below.
 | *camel.component.mail.configuration.password* | The password for login |  | String
 | *camel.component.mail.configuration.peek* | Will mark the javax.mail.Message as peeked before processing the mail message. This applies to IMAPMessage messages types only. By using peek the mail will not be eager marked as SEEN on the mail server, which allows us to rollback the mail message if there is an error processing in Camel. | true | Boolean
 | *camel.component.mail.configuration.port* | The port number of the mail server |  | Integer
-| *camel.component.mail.configuration.protocol* |  |  | String
 | *camel.component.mail.configuration.reply-to* | The Reply-To recipients (the receivers of the response mail). Separate multiple email addresses with a comma. |  | String
 | *camel.component.mail.configuration.session* | Specifies the mail session that camel should use for all mail interactions. Useful in scenarios where mail sessions are created and managed by some other resource, such as a JavaEE container. When using a custom mail session, then the hostname and port from the mail session will be used (if configured on the session). |  | Session
 | *camel.component.mail.configuration.skip-failed-message* | If the mail consumer cannot retrieve a given mail message, then this option allows to skip the message and move on to retrieve the next mail message. The default behavior would be the consumer throws an exception and no mails from the batch would be able to be routed by Camel. | false | Boolean
