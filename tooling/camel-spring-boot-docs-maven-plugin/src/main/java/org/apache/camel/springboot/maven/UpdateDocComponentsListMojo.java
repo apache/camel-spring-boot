@@ -56,7 +56,6 @@ import static org.apache.camel.tooling.util.PackageHelper.writeText;
  * Updates the documentation in:
  *
  * - component-starter/readme.adoc
- * - docs/modules/ROOT/pages/list-of-camel-springboot-components.adoc
  *
  * to be up to date with all the component starters that Apache Camel Spring Boot ships.
  */
@@ -104,12 +103,6 @@ public class UpdateDocComponentsListMojo extends AbstractMojo {
      */
     @Parameter(defaultValue = "${project.directory}/../../../docs/modules/ROOT/pages")
     protected File websiteDocBaseDir;
-
-    /**
-     * The website doc for extensions
-     */
-    @Parameter(defaultValue = "${project.directory}/../../../docs/modules/ROOT/pages/list-of-camel-spring-boot-components.adoc")
-    protected File websiteDocFile;
 
     /**
      * Maven ProjectHelper.
@@ -199,19 +192,6 @@ public class UpdateDocComponentsListMojo extends AbstractMojo {
                 getLog().warn("No readme.adoc file: " + file);
             }
 
-            // update doc in the website dir
-            file = websiteDocFile;
-            exists = file.exists();
-            changed = templateComponents(components, count, deprecated);
-            updated = updateComponents(file, changed);
-            if (updated) {
-                getLog().info("Updated website doc file: " + file);
-            } else if (exists) {
-                getLog().debug("No changes to website doc file: " + file);
-            } else {
-                getLog().warn("No website doc file: " + file);
-            }
-
         } catch (IOException e) {
             throw new MojoFailureException("Error due " + e.getMessage(), e);
         }
@@ -273,19 +253,6 @@ public class UpdateDocComponentsListMojo extends AbstractMojo {
                 getLog().warn("No readme.adoc file: " + file);
             }
 
-            // update doc in the website dir
-            file = websiteDocFile;
-            exists = file.exists();
-            changed = templateDataFormats(dataFormats, count, deprecated);
-            updated = updateDataFormats(file, changed);
-            if (updated) {
-                getLog().info("Updated website doc file: " + file);
-            } else if (exists) {
-                getLog().debug("No changes to website doc file: " + file);
-            } else {
-                getLog().warn("No website doc file: " + file);
-            }
-
         } catch (IOException e) {
             throw new MojoFailureException("Error due " + e.getMessage(), e);
         }
@@ -341,19 +308,6 @@ public class UpdateDocComponentsListMojo extends AbstractMojo {
                 getLog().warn("No readme.adoc file: " + file);
             }
 
-            // update doc in the website dir
-            file = websiteDocFile;
-            exists = file.exists();
-            changed = templateLanguages(languages, count, deprecated);
-            updated = updateLanguages(file, changed);
-            if (updated) {
-                getLog().info("Updated website doc file: " + file);
-            } else if (exists) {
-                getLog().debug("No changes to website doc file: " + file);
-            } else {
-                getLog().warn("No website doc file: " + file);
-            }
-
         } catch (IOException e) {
             throw new MojoFailureException("Error due " + e.getMessage(), e);
         }
@@ -401,19 +355,6 @@ public class UpdateDocComponentsListMojo extends AbstractMojo {
                 getLog().debug("No changes to readme.adoc file: " + file);
             } else {
                 getLog().warn("No readme.adoc file: " + file);
-            }
-
-            // update doc in the website dir
-            file = websiteDocFile;
-            exists = file.exists();
-            changed = templateOthers(others, count, deprecated);
-            updated = updateOthers(file, changed);
-            if (updated) {
-                getLog().info("Updated website doc file: " + file);
-            } else if (exists) {
-                getLog().debug("No changes to website doc file: " + file);
-            } else {
-                getLog().warn("No website doc file: " + file);
             }
 
         } catch (IOException e) {
