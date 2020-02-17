@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           repository: apache/camel
           ref: master
@@ -40,14 +40,10 @@ jobs:
         run: ./mvnw -V --no-transfer-progress clean install -DskipTests
         working-directory: /home/runner/work/camel-spring-boot/camel
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           path: camel-spring-boot
           fetch-depth: 0
-      - name: Set Up Java
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
       - name: Build Project
         run: ./mvnw -V --no-transfer-progress clean install -DskipTests
       - name: Create Pull Request
