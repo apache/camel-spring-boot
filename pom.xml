@@ -316,7 +316,8 @@
                     <configuration>
                         <excludeSubProjects>false</excludeSubProjects>
                         <excludes>
-                            <exclude>**/generated.txt</exclude>
+                            <exclude>**/*.mvel</exclude>
+                            <exclude>**/catalog/*.properties</exclude>
                             <exclude>**/*.json</exclude>
                             <exclude>**/README</exclude>
                             <exclude>**/README.txt</exclude>
