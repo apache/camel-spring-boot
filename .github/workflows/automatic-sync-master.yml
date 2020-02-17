@@ -38,6 +38,7 @@ jobs:
           java-version: 1.8
       - name: Build Project
         run: ./mvnw -V --no-transfer-progress clean install -DskipTests
+        working-directory: ${{ github.workspace }}/camel
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -46,6 +47,7 @@ jobs:
           fetch-depth: 0
       - name: Build Project
         run: ./mvnw -V --no-transfer-progress clean install -DskipTests
+        working-directory: ${{ github.workspace }}/camel-spring-boot
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2.4.1
         with:
