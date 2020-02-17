@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 322 in 256 JAR artifacts (1 deprecated)
+Number of Camel components: 323 in 257 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -97,6 +97,9 @@ Number of Camel components: 322 in 256 JAR artifacts (1 deprecated)
 
 | link:https://camel.apache.org/components/latest/aws2-sns-component.html[AWS 2 Simple Notification System] (camel-aws2-sns-starter) +
 `aws2-sns:topicNameOrArn` | 3.1 | The aws2-sns component is used for sending messages to an Amazon Simple Notification Topic.
+
+| link:https://camel.apache.org/components/latest/aws2-sqs-component.html[AWS 2 Simple Queue Service] (camel-aws2-sqs-starter) +
+`aws2-sqs:queueNameOrArn` | 3.1 | The aws2-sqs component is used for sending and receiving messages to Amazon's SQS service.
 
 | link:https://camel.apache.org/components/latest/aws2-translate-component.html[AWS 2 Translate] (camel-aws2-translate-starter) +
 `aws2-translate:label` | 3.1 | The aws2-translate component is used for managing Amazon Translate
