@@ -43,7 +43,7 @@ jobs:
         uses: actions/checkout@v1
         with:
           path: camel-spring-boot
-          ref: master
+          fetch-depth: 0
       - name: Set Up Java
         uses: actions/setup-java@v1
         with:
