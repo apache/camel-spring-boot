@@ -38,7 +38,6 @@ jobs:
           java-version: 1.8
       - name: Build Project
         run: ./mvnw -V --no-transfer-progress clean install -DskipTests
-        working-directory: $GITHUB_WORKSPACE/camel
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -47,12 +46,11 @@ jobs:
           fetch-depth: 0
       - name: Build Project
         run: ./mvnw -V --no-transfer-progress clean install -DskipTests
-        working-directory: $GITHUB_WORKSPACE/camel-spring-boot
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2.4.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch:
+          branch: periodic-sync
           title: '[Github Actions] Periodic Sync Camel Spring Boot Master Branch'
           body: |
             Periodic Sync of Camel Spring Boot Master Branch with main Camel Master.
