@@ -20,7 +20,7 @@ name: Sync Camel Spring Boot Master Branch
 on:
   schedule:
     # Run every 10 minutes
-    - cron:  '10 * * * *'
+    - cron:  '0 0 * * *'
 jobs:
   build:
     name: Sync Camel Spring Boot Master Branch
@@ -42,12 +42,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          path: camel-spring-boot
           ref: master
           fetch-depth: 0
       - name: Build Project
         run: ./mvnw -V --no-transfer-progress clean install -DskipTests
-        working-directory: ${{ github.workspace }}/camel-spring-boot
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2.4.1
         with:
