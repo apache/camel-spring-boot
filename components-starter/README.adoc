@@ -81,7 +81,7 @@ Number of Camel components: 323 in 257 JAR artifacts (1 deprecated)
 `aws2-eks:label` | 3.1 | The aws2-eks is used for managing Amazon EKS
 
 | link:https://camel.apache.org/components/latest/aws2-iam-component.html[AWS 2 IAM] (camel-aws2-iam-starter) +
-`aws2-iam:label` | 3.1 | The aws-iam is used for managing Amazon IAM
+`aws2-iam:label` | 3.1 | The aws2-iam is used for managing Amazon IAM
 
 | link:https://camel.apache.org/components/latest/aws2-kms-component.html[AWS 2 KMS] (camel-aws2-kms-starter) +
 `aws2-kms:label` | 3.1 | The aws2-kms is used for managing Amazon KMS
