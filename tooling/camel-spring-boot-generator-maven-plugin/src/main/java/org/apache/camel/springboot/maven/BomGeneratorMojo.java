@@ -305,6 +305,12 @@ public class BomGeneratorMojo extends AbstractMojo {
         }
 
         for (Dependency dep : dependencies) {
+
+            if ("target".equals(dep.getArtifactId())) {
+                // skip invalid artifact that somehow gets included
+                continue;
+            }
+
             Element dependencyEl = pom.createElement("dependency");
 
             Element groupIdEl = pom.createElement("groupId");
