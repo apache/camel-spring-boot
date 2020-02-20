@@ -52,6 +52,14 @@ public class SjmsComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Backoff in millis on consumer pool reconnection attempts
+     */
+    private Long reconnectBackOff = 5000L;
+    /**
+     * Try to apply reconnection logic on consumer pool
+     */
+    private Boolean reconnectOnError = true;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -164,6 +172,22 @@ public class SjmsComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Long getReconnectBackOff() {
+        return reconnectBackOff;
+    }
+
+    public void setReconnectBackOff(Long reconnectBackOff) {
+        this.reconnectBackOff = reconnectBackOff;
+    }
+
+    public Boolean getReconnectOnError() {
+        return reconnectOnError;
+    }
+
+    public void setReconnectOnError(Boolean reconnectOnError) {
+        this.reconnectOnError = reconnectOnError;
     }
 
     public Boolean getLazyStartProducer() {

@@ -286,6 +286,13 @@ public class MailComponentConfiguration
          */
         private Boolean mimeDecodeHeaders = false;
         /**
+         * After processing a mail message, it can be moved to a mail folder
+         * with the given name. You can override this configuration value, with
+         * a header with the key moveTo, allowing you to move messages to folder
+         * names configured at runtime.
+         */
+        private String moveTo;
+        /**
          * The password for login
          */
         private String password;
@@ -533,6 +540,14 @@ public class MailComponentConfiguration
 
         public void setMimeDecodeHeaders(Boolean mimeDecodeHeaders) {
             this.mimeDecodeHeaders = mimeDecodeHeaders;
+        }
+
+        public String getMoveTo() {
+            return moveTo;
+        }
+
+        public void setMoveTo(String moveTo) {
+            this.moveTo = moveTo;
         }
 
         public String getPassword() {

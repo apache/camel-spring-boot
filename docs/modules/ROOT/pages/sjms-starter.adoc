@@ -17,7 +17,7 @@ When using sjms with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 25 options, which are listed below.
+The component supports 27 options, which are listed below.
 
 
 
@@ -47,8 +47,9 @@ The component supports 25 options, which are listed below.
 | *camel.component.sjms.jms-key-format-strategy* | Pluggable strategy for encoding and decoding JMS keys so they can be compliant with the JMS specification. Camel provides one implementation out of the box: default. The default strategy will safely marshal dots and hyphens (. and -). Can be used for JMS brokers which do not care whether JMS header keys contain illegal characters. You can provide your own implementation of the org.apache.camel.component.jms.JmsKeyFormatStrategy and refer to it using the # notation. The option is a org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy type. |  | String
 | *camel.component.sjms.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.sjms.message-created-strategy* | To use the given MessageCreatedStrategy which are invoked when Camel creates new instances of javax.jms.Message objects when Camel is sending a JMS message. The option is a org.apache.camel.component.sjms.jms.MessageCreatedStrategy type. |  | String
+| *camel.component.sjms.reconnect-back-off* | Backoff in millis on consumer pool reconnection attempts | 5000 | Long
+| *camel.component.sjms.reconnect-on-error* | Try to apply reconnection logic on consumer pool | true | Boolean
 | *camel.component.sjms.timed-task-manager* | To use a custom TimedTaskManager. The option is a org.apache.camel.component.sjms.taskmanager.TimedTaskManager type. |  | String
 | *camel.component.sjms.transaction-commit-strategy* | To configure which kind of commit strategy to use. Camel provides two implementations out of the box, default and batch. The option is a org.apache.camel.component.sjms.TransactionCommitStrategy type. |  | String
 |===
-
 // spring-boot-auto-configure options: END
