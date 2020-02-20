@@ -112,7 +112,7 @@
         <spring-boot-version>2.2.4.RELEASE</spring-boot-version>
 
         <!-- Camel target version -->
-        <camel-version>3.1.0-SNAPSHOT</camel-version>
+        <camel-version>3.1.0</camel-version>
 
         <!-- versions -->
         <aether-version>1.0.2.v20150114</aether-version>
