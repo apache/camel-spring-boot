@@ -102,18 +102,22 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
+            <version>${camel-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-kafka</artifactId>
+            <version>${camel-version}</version>
         </dependency>
          <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-support</artifactId>
+            <version>${camel-version}</version>
         </dependency>
          <dependency>
            <groupId>org.apache.camel</groupId>
            <artifactId>camel-avro</artifactId>
+           <version>${camel-version}</version>
          </dependency> 
         <dependency>
            <groupId>io.confluent</groupId>

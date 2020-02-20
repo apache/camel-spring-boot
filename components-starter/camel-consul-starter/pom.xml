@@ -36,21 +36,25 @@
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-consul</artifactId>
+      <version>${camel-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>spi-annotations</artifactId>
+      <version>${camel-version}</version>
       <scope>provided</scope>
     </dependency>
     <!-- testing -->
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-jetty</artifactId>
+      <version>${camel-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-testcontainers</artifactId>
+      <version>${camel-version}</version>
       <scope>test</scope>
     </dependency>
     <!--START OF GENERATED CODE-->
