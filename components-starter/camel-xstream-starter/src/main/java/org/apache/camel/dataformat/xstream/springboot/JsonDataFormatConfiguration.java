@@ -51,7 +51,7 @@ public class JsonDataFormatConfiguration
      */
     private Boolean prettyPrint = false;
     /**
-     * Class name of the java type to use when unarmshalling
+     * Class name of the java type to use when unmarshalling
      */
     private String unmarshalTypeName;
     /**
@@ -78,7 +78,7 @@ public class JsonDataFormatConfiguration
      */
     private String collectionTypeName;
     /**
-     * To unarmshal to a List of Map or a List of Pojo.
+     * To unmarshal to a List of Map or a List of Pojo.
      */
     private Boolean useList = false;
     /**

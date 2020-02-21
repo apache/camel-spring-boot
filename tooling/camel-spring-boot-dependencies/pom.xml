@@ -2094,6 +2094,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-aws2-lambda</artifactId>
+        <version>3.1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws2-mq</artifactId>
         <version>3.1.0-SNAPSHOT</version>
       </dependency>
