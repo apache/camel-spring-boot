@@ -33,9 +33,8 @@ The component supports 12 options, which are listed below.
 | *camel.dataformat.cbor.enabled* | Whether to enable auto configuration of the cbor data format. This is enabled by default. |  | Boolean
 | *camel.dataformat.cbor.object-mapper* | Lookup and use the existing CBOR ObjectMapper with the given id when using Jackson. |  | String
 | *camel.dataformat.cbor.pretty-print* | To enable pretty printing output nicely formatted. Is by default false. | false | Boolean
-| *camel.dataformat.cbor.unmarshal-type-name* | Class name of the java type to use when unarmshalling |  | String
+| *camel.dataformat.cbor.unmarshal-type-name* | Class name of the java type to use when unmarshalling |  | String
 | *camel.dataformat.cbor.use-default-object-mapper* | Whether to lookup and use default Jackson CBOR ObjectMapper from the registry. | true | Boolean
-| *camel.dataformat.cbor.use-list* | To unarmshal to a List of Map or a List of Pojo. | false | Boolean
+| *camel.dataformat.cbor.use-list* | To unmarshal to a List of Map or a List of Pojo. | false | Boolean
 |===
-
 // spring-boot-auto-configure options: END

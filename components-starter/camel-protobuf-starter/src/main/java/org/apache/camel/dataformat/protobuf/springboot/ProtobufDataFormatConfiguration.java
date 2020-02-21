@@ -38,7 +38,7 @@ public class ProtobufDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Name of class to use when unarmshalling
+     * Name of class to use when unmarshalling
      */
     private String instanceClass;
     /**
