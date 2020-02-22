@@ -83,8 +83,8 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
     protected String getMainDepGroupId() {
         if ("camel-spring-boot-starter".equals(project.getArtifactId())) {
             return "org.apache.camel.springboot";
-        } else if (project.getArtifactId().startsWith("camel-spring-cloud-")) {
-            // any of the -cloud-xxx are from camel-spring-boot
+        } else if (project.getArtifactId().startsWith("camel-spring-cloud")) {
+            // any of the camel-spring-cloud are from camel-spring-boot
             return "org.apache.camel.springboot";
         } else {
             // others are from camel
