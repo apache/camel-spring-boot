@@ -35,9 +35,9 @@
       <version>${spring-boot-version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.camel</groupId>
+      <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-spring-cloud-zookeeper</artifactId>
-      <version>${camel-version}</version>
+      <version>${project.version}</version>
       <!--START OF GENERATED CODE-->
       <exclusions>
         <exclusion>
