@@ -12,7 +12,7 @@
     "javaType": "org.apache.camel.language.xtokenizer.XMLTokenizeLanguage",
     "modelJavaType": "org.apache.camel.model.language.XMLTokenizerExpression",
     "groupId": "org.apache.camel.springboot",
-    "artifactId": "camel-jaxp-starter",
+    "artifactId": "camel-xml-jaxp-starter",
     "version": "3.1.0-SNAPSHOT"
   },
   "properties": {

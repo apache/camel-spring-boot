@@ -24,9 +24,9 @@
     <artifactId>components-starter</artifactId>
     <version>3.1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>camel-jaxp-starter</artifactId>
+  <artifactId>camel-xml-jaxp-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: JAXP</name>
+  <name>Camel SB Starters :: XML JAXP</name>
   <description>Spring-Boot Starter for Camel JAXP Support</description>
   <dependencies>
     <dependency>
