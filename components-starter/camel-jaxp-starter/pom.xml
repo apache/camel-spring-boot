@@ -36,7 +36,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-jaxp</artifactId>
+      <artifactId>camel-xml-jaxp</artifactId>
       <version>${camel-version}</version>
     </dependency>
     <!--START OF GENERATED CODE-->
