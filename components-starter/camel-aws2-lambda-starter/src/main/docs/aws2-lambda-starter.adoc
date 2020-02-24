@@ -1,0 +1,44 @@
+// spring-boot-auto-configure options: START
+:page-partial:
+:doctitle: Camel Spring Boot Starter for aws2-lambda
+
+== Spring Boot Auto-Configuration
+
+When using aws2-lambda with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-aws2-lambda-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 14 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.component.aws2-lambda.access-key* | Amazon AWS Access Key |  | String
+| *camel.component.aws2-lambda.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.aws2-lambda.configuration.access-key* | Amazon AWS Access Key |  | String
+| *camel.component.aws2-lambda.configuration.aws-lambda-client* | To use a existing configured AwsLambdaClient as client |  | LambdaClient
+| *camel.component.aws2-lambda.configuration.operation* | The operation to perform. It can be listFunctions, getFunction, createFunction, deleteFunction or invokeFunction |  | Lambda2Operations
+| *camel.component.aws2-lambda.configuration.proxy-host* | To define a proxy host when instantiating the Lambda client |  | String
+| *camel.component.aws2-lambda.configuration.proxy-port* | To define a proxy port when instantiating the Lambda client |  | Integer
+| *camel.component.aws2-lambda.configuration.proxy-protocol* | To define a proxy protocol when instantiating the Lambda client |  | Protocol
+| *camel.component.aws2-lambda.configuration.region* | The region in which ECS client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
+| *camel.component.aws2-lambda.configuration.secret-key* | Amazon AWS Secret Key |  | String
+| *camel.component.aws2-lambda.enabled* | Whether to enable auto configuration of the aws2-lambda component. This is enabled by default. |  | Boolean
+| *camel.component.aws2-lambda.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.aws2-lambda.region* | Amazon AWS Region |  | String
+| *camel.component.aws2-lambda.secret-key* | Amazon AWS Secret Key |  | String
+|===
+
+
+// spring-boot-auto-configure options: END

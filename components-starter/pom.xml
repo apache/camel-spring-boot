@@ -148,6 +148,7 @@
     <module>camel-aws2-eks-starter</module>
     <module>camel-aws2-iam-starter</module>
     <module>camel-aws2-kms-starter</module>
+    <module>camel-aws2-lambda-starter</module>
     <module>camel-aws2-mq-starter</module>
     <module>camel-aws2-msk-starter</module>
     <module>camel-aws2-ses-starter</module>
