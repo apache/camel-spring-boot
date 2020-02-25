@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 323 in 257 JAR artifacts (1 deprecated)
+Number of Camel components: 324 in 258 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -136,6 +136,9 @@ Number of Camel components: 323 in 257 JAR artifacts (1 deprecated)
 
 | link:https://camel.apache.org/components/latest/aws-lambda-component.html[AWS Lambda] (camel-aws-lambda-starter) +
 `aws-lambda:function` | 2.20 | The aws-lambda is used for managing and invoking functions from Amazon Lambda.
+
+| link:https://camel.apache.org/components/latest/aws2-lambda-component.html[AWS Lambda] (camel-aws2-lambda-starter) +
+`aws2-lambda:function` | 3.2 | The aws2-lambda is used for managing and invoking functions from Amazon Lambda.
 
 | link:https://camel.apache.org/components/latest/aws-mq-component.html[AWS MQ] (camel-aws-mq-starter) +
 `aws-mq:label` | 2.21 | The aws-mq is used for managing Amazon MQ instances.
