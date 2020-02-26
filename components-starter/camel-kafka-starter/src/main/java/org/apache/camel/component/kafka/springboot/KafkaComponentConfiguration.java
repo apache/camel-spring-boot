@@ -45,13 +45,6 @@ public class KafkaComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * URL of the Kafka brokers to use. The format is host1:port1,host2:port2,
-     * and the list can be a subset of brokers or a VIP pointing to a subset of
-     * brokers. This option is known as bootstrap.servers in the Kafka
-     * documentation.
-     */
-    private String brokers;
-    /**
      * Allows to pre-configure the Kafka component with common options that the
      * endpoints will reuse.
      */
@@ -120,14 +113,6 @@ public class KafkaComponentConfiguration
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
-
-    public String getBrokers() {
-        return brokers;
-    }
-
-    public void setBrokers(String brokers) {
-        this.brokers = brokers;
-    }
 
     public KafkaConfigurationNestedConfiguration getConfiguration() {
         return configuration;
