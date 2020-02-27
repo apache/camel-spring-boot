@@ -757,6 +757,14 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     }
                     desc = desc + " The option is a " + option.getJavaType() + " type.";
                 }
+
+                // hack for yammer issue with generating javadoc
+                if ("yammer".equals(model.getScheme()) && "olderThan".equals(option.getName())) {
+                    desc = "Returns messages older than the message ID specified as a numeric string.";
+                } else if ("yammer".equals(model.getScheme()) && "newerThan".equals(option.getName())) {
+                    desc = "Returns messages newer than the message ID specified as a numeric string.";
+                }
+
                 prop.getField().getJavaDoc().setFullText(desc);
             }
             if (!isBlank(option.getDefaultValue())) {
@@ -889,6 +897,14 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 if (Strings.isBlank(description) && sourceProp.hasAnnotation(Metadata.class)) {
                     description = sourceProp.getAnnotation(Metadata.class).getStringValue("description");
                 }
+
+                // hack for yammer issue with generating javadoc
+                if ("yammer".equals(model.getScheme()) && "olderThan".equals(sourceProp.getName())) {
+                    description = "Returns messages older than the message ID specified as a numeric string.";
+                } else if ("yammer".equals(model.getScheme()) && "newerThan".equals(sourceProp.getName())) {
+                    description = "Returns messages newer than the message ID specified as a numeric string.";
+                }
+
                 if (!Strings.isBlank(description)) {
                     prop.getField().getJavaDoc().setFullText(description);
                 }

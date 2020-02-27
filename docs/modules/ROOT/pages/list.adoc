@@ -1181,7 +1181,7 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 (camel-base) | 2.0 | To use Camel message body or header with a tokenizer in Camel expressions or predicates.
 
 | link:https://camel.apache.org/components/latest/xtokenize-language.html[XML Tokenize] +
-(camel-jaxp-starter) | 2.14 | To use Camel message body or header with a XML tokenizer in Camel expressions or predicates.
+(camel-xml-jaxp-starter) | 2.14 | To use Camel message body or header with a XML tokenizer in Camel expressions or predicates.
 
 | link:https://camel.apache.org/components/latest/xpath-language.html[XPath] +
 (camel-xpath-starter) | 1.1 | To use XPath (XML) in Camel expressions or predicates.

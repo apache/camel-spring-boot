@@ -22,11 +22,11 @@
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>components-starter</artifactId>
-    <version>3.1.0-SNAPSHOT</version>
+    <version>3.1.1-SNAPSHOT</version>
   </parent>
-  <artifactId>camel-jaxp-starter</artifactId>
+  <artifactId>camel-xml-jaxp-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: JAXP</name>
+  <name>Camel SB Starters :: XML JAXP</name>
   <description>Spring-Boot Starter for Camel JAXP Support</description>
   <dependencies>
     <dependency>
@@ -36,7 +36,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-jaxp</artifactId>
+      <artifactId>camel-xml-jaxp</artifactId>
       <version>${camel-version}</version>
     </dependency>
     <!--START OF GENERATED CODE-->

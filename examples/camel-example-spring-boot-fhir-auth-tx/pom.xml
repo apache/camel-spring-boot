@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.camel.springboot.example</groupId>
         <artifactId>examples</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>3.1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>camel-example-spring-boot-fhir-auth-tx</artifactId>
@@ -92,10 +92,12 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-fhir</artifactId>
+            <version>${camel-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-csv</artifactId>
+            <version>${camel-version}</version>
         </dependency>
 
         <dependency>
@@ -112,6 +114,7 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-test-spring</artifactId>
+            <version>${camel-version}</version>
             <scope>test</scope>
         </dependency>
 
