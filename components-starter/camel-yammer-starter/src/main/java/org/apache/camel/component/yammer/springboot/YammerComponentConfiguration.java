@@ -40,6 +40,10 @@ public class YammerComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Set to true if you want to use raw JSON rather than converting to POJOs.
+     */
+    private Boolean useJson = false;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -48,6 +52,43 @@ public class YammerComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Delay between polling in millis
+     */
+    private Long delay = 5000L;
+    /**
+     * Return only the specified number of messages. Works for threaded=true and
+     * threaded=extended.
+     */
+    private Integer limit = -1;
+    /**
+     * Returns messages newer than the message ID specified as a numeric string.
+     * This should be used when polling for new messages. If you're looking at
+     * messages, and the most recent message returned is 3516, you can make a
+     * request with the parameter newerThan=3516 to ensure that you do not get
+     * duplicate copies of messages already on your page.
+     */
+    private Long newerThan = -1L;
+    /**
+     * Returns messages older than the message ID specified as a numeric string.
+     * This is useful for paginating messages. For example, if you're currently
+     * viewing 20 messages and the oldest is number 2912, you could append
+     * olderThan=2912 to your request to get the 20 messages prior to those
+     * you're seeing.
+     */
+    private Long olderThan = -1L;
+    /**
+     * threaded=true will only return the first message in each thread. This
+     * parameter is intended for apps which display message threads collapsed.
+     * threaded=extended will return the thread starter messages in order of
+     * most recently active as well as the two most recent messages, as they are
+     * viewed in the default view on the Yammer web interface.
+     */
+    private String threaded;
+    /**
+     * The user id
+     */
+    private String userId;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -65,9 +106,9 @@ public class YammerComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * To use a shared yammer configuration
+     * Component configuration
      */
-    private YammerConfigurationNestedConfiguration config;
+    private YammerConfigurationNestedConfiguration configuration;
     /**
      * To use a specific requester to communicate with Yammer. The option is a
      * org.apache.camel.component.yammer.ApiRequestor type.
@@ -86,12 +127,68 @@ public class YammerComponentConfiguration
      */
     private String consumerSecret;
 
+    public Boolean getUseJson() {
+        return useJson;
+    }
+
+    public void setUseJson(Boolean useJson) {
+        this.useJson = useJson;
+    }
+
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Long getDelay() {
+        return delay;
+    }
+
+    public void setDelay(Long delay) {
+        this.delay = delay;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Long getNewerThan() {
+        return newerThan;
+    }
+
+    public void setNewerThan(Long newerThan) {
+        this.newerThan = newerThan;
+    }
+
+    public Long getOlderThan() {
+        return olderThan;
+    }
+
+    public void setOlderThan(Long olderThan) {
+        this.olderThan = olderThan;
+    }
+
+    public String getThreaded() {
+        return threaded;
+    }
+
+    public void setThreaded(String threaded) {
+        this.threaded = threaded;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public Boolean getLazyStartProducer() {
@@ -110,12 +207,13 @@ public class YammerComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public YammerConfigurationNestedConfiguration getConfig() {
-        return config;
+    public YammerConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
     }
 
-    public void setConfig(YammerConfigurationNestedConfiguration config) {
-        this.config = config;
+    public void setConfiguration(
+            YammerConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getRequestor() {

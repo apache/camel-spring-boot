@@ -53,7 +53,7 @@ public class CacheManagerCustomizerWithoutCacheManagerTest {
     @Test
     public void testComponentConfiguration() throws Exception {
         Assert.assertNotNull(component);
-        Assert.assertNull(component.getCacheContainer());
+        Assert.assertNull(component.getConfiguration().getCacheContainer());
         Assert.assertEquals(0, context.getBeansOfType(EmbeddedCacheManagerCustomizer.class).size());
         Assert.assertEquals(0, context.getBeansOfType(RemoteCacheManagerCustomizer.class).size());
     }

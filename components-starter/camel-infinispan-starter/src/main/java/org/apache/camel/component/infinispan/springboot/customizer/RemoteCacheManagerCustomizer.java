@@ -17,6 +17,7 @@
 package org.apache.camel.component.infinispan.springboot.customizer;
 
 import org.apache.camel.component.infinispan.InfinispanComponent;
+import org.apache.camel.component.infinispan.InfinispanConfiguration;
 import org.apache.camel.component.infinispan.springboot.InfinispanComponentAutoConfiguration;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spi.HasId;
@@ -48,8 +49,8 @@ public class RemoteCacheManagerCustomizer implements HasId, ComponentCustomizer<
     public void customize(InfinispanComponent component) {
         // Set the cache manager only if the customizer is configured to always
         // set it or if no cache manager is already configured on component
-        if (configuration.isOverride() || component.getCacheContainer() == null) {
-            component.setCacheContainer(cacheManager);
+        if (configuration.isOverride() || component.getConfiguration().getCacheContainer() == null) {
+            component.getConfiguration().setCacheContainer(cacheManager);
         }
     }
 

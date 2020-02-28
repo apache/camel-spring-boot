@@ -18,6 +18,7 @@ package org.apache.camel.component.aws2.ses.springboot;
 
 import java.util.List;
 import javax.annotation.Generated;
+import org.apache.camel.component.aws2.ses.Ses2Component;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
@@ -44,6 +45,11 @@ public class Ses2ComponentConfiguration
      */
     private String accessKey;
     /**
+     * To use the AmazonSimpleEmailService as the client. The option is a
+     * software.amazon.awssdk.services.ses.SesClient type.
+     */
+    private String amazonSESClient;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -55,13 +61,45 @@ public class Ses2ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * To define a proxy host when instantiating the SES client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the SES client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the SES client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * The region in which SES client needs to work
      */
     private String region;
     /**
+     * List of reply-to email address(es) for the message, override it using
+     * 'CamelAwsSesReplyToAddresses' header.
+     */
+    private List<String> replyToAddresses;
+    /**
+     * The email address to which bounce notifications are to be forwarded,
+     * override it using 'CamelAwsSesReturnPath' header.
+     */
+    private String returnPath;
+    /**
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * The subject which is used if the message header 'CamelAwsSesSubject' is
+     * not present.
+     */
+    private String subject;
+    /**
+     * List of destination email address. Can be overriden with 'CamelAwsSesTo'
+     * header.
+     */
+    private List<String> to;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -80,12 +118,44 @@ public class Ses2ComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getAmazonSESClient() {
+        return amazonSESClient;
+    }
+
+    public void setAmazonSESClient(String amazonSESClient) {
+        this.amazonSESClient = amazonSESClient;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public String getRegion() {
@@ -96,12 +166,44 @@ public class Ses2ComponentConfiguration
         this.region = region;
     }
 
+    public List<String> getReplyToAddresses() {
+        return replyToAddresses;
+    }
+
+    public void setReplyToAddresses(List<String> replyToAddresses) {
+        this.replyToAddresses = replyToAddresses;
+    }
+
+    public String getReturnPath() {
+        return returnPath;
+    }
+
+    public void setReturnPath(String returnPath) {
+        this.returnPath = returnPath;
+    }
+
     public String getSecretKey() {
         return secretKey;
     }
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public List<String> getTo() {
+        return to;
+    }
+
+    public void setTo(List<String> to) {
+        this.to = to;
     }
 
     public Boolean getBasicPropertyBinding() {

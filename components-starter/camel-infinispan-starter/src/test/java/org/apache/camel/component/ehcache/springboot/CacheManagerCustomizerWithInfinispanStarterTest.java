@@ -50,7 +50,7 @@ public class CacheManagerCustomizerWithInfinispanStarterTest {
     public void testComponentConfiguration() throws Exception {
         Assert.assertNotNull(cacheManager);
         Assert.assertNotNull(component);
-        Assert.assertEquals(cacheManager, component.getCacheContainer());
+        Assert.assertEquals(cacheManager, component.getConfiguration().getCacheContainer());
     }
 
     @Configuration

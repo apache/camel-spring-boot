@@ -61,8 +61,8 @@ public class CacheManagerCustomizerSelectionForceEmbeddedTest {
         Assert.assertNotNull(remoteCacheManager);
         Assert.assertNotNull(embeddedCacheManager);
         Assert.assertNotNull(component);
-        Assert.assertNotNull(component.getCacheContainer());
-        Assert.assertEquals(embeddedCacheManager, component.getCacheContainer());
+        Assert.assertNotNull(component.getConfiguration().getCacheContainer());
+        Assert.assertEquals(embeddedCacheManager, component.getConfiguration().getCacheContainer());
     }
 
     @Configuration

@@ -41,7 +41,7 @@ class CacheManagerCustomizerNotEnabledTestBase {
         Assert.assertNotNull(embeddedCacheManager);
         Assert.assertNotNull(remoteCacheManager);
         Assert.assertNotNull(component);
-        Assert.assertNull(component.getCacheContainer());
+        Assert.assertNull(component.getConfiguration().getCacheContainer());
     }
 
     @Configuration

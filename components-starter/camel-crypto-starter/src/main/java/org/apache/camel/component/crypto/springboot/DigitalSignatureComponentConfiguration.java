@@ -45,6 +45,36 @@ public class DigitalSignatureComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Sets the JCE name of the Algorithm that should be used for the signer.
+     */
+    private String algorithm = "SHA256withRSA";
+    /**
+     * Sets the alias used to query the KeyStore for keys and {link
+     * java.security.cert.Certificate Certificates} to be used in signing and
+     * verifying exchanges. This value can be provided at runtime via the
+     * message header
+     * org.apache.camel.component.crypto.DigitalSignatureConstants#KEYSTORE_ALIAS
+     */
+    private String alias;
+    /**
+     * Sets the reference name for a PrivateKey that can be found in the
+     * registry.
+     */
+    private String certificateName;
+    /**
+     * Sets the KeyStore that can contain keys and Certficates for use in
+     * signing and verifying exchanges. A KeyStore is typically used with an
+     * alias, either one supplied in the Route definition or dynamically via the
+     * message header CamelSignatureKeyStoreAlias. If no alias is supplied and
+     * there is only a single entry in the Keystore, then this single entry will
+     * be used. The option is a java.security.KeyStore type.
+     */
+    private String keystore;
+    /**
+     * Sets the reference name for a Keystore that can be found in the registry.
+     */
+    private String keystoreName;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -56,14 +86,124 @@ public class DigitalSignatureComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Set the PrivateKey that should be used to sign the exchange. The option
+     * is a java.security.PrivateKey type.
+     */
+    private String privateKey;
+    /**
+     * Sets the reference name for a PrivateKey that can be found in the
+     * registry.
+     */
+    private String privateKeyName;
+    /**
+     * Set the id of the security provider that provides the configured
+     * Signature algorithm.
+     */
+    private String provider;
+    /**
+     * references that should be resolved when the context changes
+     */
+    private String publicKeyName;
+    /**
+     * Sets the reference name for a SecureRandom that can be found in the
+     * registry.
+     */
+    private String secureRandomName;
+    /**
+     * Set the name of the message header that should be used to store the
+     * base64 encoded signature. This defaults to 'CamelDigitalSignature'
+     */
+    private String signatureHeaderName;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * Set the size of the buffer used to read in the Exchange payload data.
+     */
+    private Integer bufferSize = 2048;
+    /**
+     * Set the Certificate that should be used to verify the signature in the
+     * exchange based on its payload. The option is a
+     * java.security.cert.Certificate type.
+     */
+    private String certificate;
+    /**
+     * Determines if the Signature specific headers be cleared after signing and
+     * verification. Defaults to true, and should only be made otherwise at your
+     * extreme peril as vital private information such as Keys and passwords may
+     * escape if unset.
+     */
+    private Boolean clearHeaders = true;
+    /**
      * To use the shared DigitalSignatureConfiguration as configuration
      */
     private DigitalSignatureConfigurationNestedConfiguration configuration;
+    /**
+     * Sets the KeyStore that can contain keys and Certficates for use in
+     * signing and verifying exchanges based on the given KeyStoreParameters. A
+     * KeyStore is typically used with an alias, either one supplied in the
+     * Route definition or dynamically via the message header
+     * CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a
+     * single entry in the Keystore, then this single entry will be used. The
+     * option is a org.apache.camel.support.jsse.KeyStoreParameters type.
+     */
+    private String keyStoreParameters;
+    /**
+     * Set the PublicKey that should be used to verify the signature in the
+     * exchange. The option is a java.security.PublicKey type.
+     */
+    private String publicKey;
+    /**
+     * Set the SecureRandom used to initialize the Signature service. The option
+     * is a java.security.SecureRandom type.
+     */
+    private String secureRandom;
+    /**
+     * Sets the password used to access an aliased PrivateKey in the KeyStore.
+     */
+    private String password;
+
+    public String getAlgorithm() {
+        return algorithm;
+    }
+
+    public void setAlgorithm(String algorithm) {
+        this.algorithm = algorithm;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getCertificateName() {
+        return certificateName;
+    }
+
+    public void setCertificateName(String certificateName) {
+        this.certificateName = certificateName;
+    }
+
+    public String getKeystore() {
+        return keystore;
+    }
+
+    public void setKeystore(String keystore) {
+        this.keystore = keystore;
+    }
+
+    public String getKeystoreName() {
+        return keystoreName;
+    }
+
+    public void setKeystoreName(String keystoreName) {
+        this.keystoreName = keystoreName;
+    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -71,6 +211,54 @@ public class DigitalSignatureComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public String getPrivateKey() {
+        return privateKey;
+    }
+
+    public void setPrivateKey(String privateKey) {
+        this.privateKey = privateKey;
+    }
+
+    public String getPrivateKeyName() {
+        return privateKeyName;
+    }
+
+    public void setPrivateKeyName(String privateKeyName) {
+        this.privateKeyName = privateKeyName;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+    public String getPublicKeyName() {
+        return publicKeyName;
+    }
+
+    public void setPublicKeyName(String publicKeyName) {
+        this.publicKeyName = publicKeyName;
+    }
+
+    public String getSecureRandomName() {
+        return secureRandomName;
+    }
+
+    public void setSecureRandomName(String secureRandomName) {
+        this.secureRandomName = secureRandomName;
+    }
+
+    public String getSignatureHeaderName() {
+        return signatureHeaderName;
+    }
+
+    public void setSignatureHeaderName(String signatureHeaderName) {
+        this.signatureHeaderName = signatureHeaderName;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -81,6 +269,30 @@ public class DigitalSignatureComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
+    public Integer getBufferSize() {
+        return bufferSize;
+    }
+
+    public void setBufferSize(Integer bufferSize) {
+        this.bufferSize = bufferSize;
+    }
+
+    public String getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(String certificate) {
+        this.certificate = certificate;
+    }
+
+    public Boolean getClearHeaders() {
+        return clearHeaders;
+    }
+
+    public void setClearHeaders(Boolean clearHeaders) {
+        this.clearHeaders = clearHeaders;
+    }
+
     public DigitalSignatureConfigurationNestedConfiguration getConfiguration() {
         return configuration;
     }
@@ -88,6 +300,38 @@ public class DigitalSignatureComponentConfiguration
     public void setConfiguration(
             DigitalSignatureConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getKeyStoreParameters() {
+        return keyStoreParameters;
+    }
+
+    public void setKeyStoreParameters(String keyStoreParameters) {
+        this.keyStoreParameters = keyStoreParameters;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
+
+    public String getSecureRandom() {
+        return secureRandom;
+    }
+
+    public void setSecureRandom(String secureRandom) {
+        this.secureRandom = secureRandom;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public static class DigitalSignatureConfigurationNestedConfiguration {

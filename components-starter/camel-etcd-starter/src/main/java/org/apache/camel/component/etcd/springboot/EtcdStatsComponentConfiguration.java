@@ -39,26 +39,25 @@ public class EtcdStatsComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Sets the common configuration shared among endpoints
+     * Component configuration.
      */
     private EtcdConfigurationNestedConfiguration configuration;
     /**
-     * The password to use for basic authentication.
+     * To apply an action recursively.
      */
-    private String password;
+    private Boolean recursive = false;
     /**
-     * To configure security using SSLContextParameters. The option is a
-     * org.apache.camel.support.jsse.SSLContextParameters type.
+     * The path to look for for service discovery
      */
-    private String sslContextParameters;
+    private String servicePath = "/services/";
+    /**
+     * To set the maximum time an action could take to complete.
+     */
+    private Long timeout;
     /**
      * To set the URIs the client connects.
      */
-    private String uris;
-    /**
-     * The user name to use for basic authentication.
-     */
-    private String userName;
+    private String uris = "http://localhost:2379,http://localhost:4001";
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -68,6 +67,14 @@ public class EtcdStatsComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * To send an empty message in case of timeout watching for a key.
+     */
+    private Boolean sendEmptyExchangeOnTimeout = false;
+    /**
+     * The index to watch from
+     */
+    private Long fromIndex = 0L;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -80,14 +87,31 @@ public class EtcdStatsComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * To set the lifespan of a key in milliseconds.
+     */
+    private Integer timeToLive;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * The password to use for basic authentication.
+     */
+    private String password;
+    /**
+     * To configure security using SSLContextParameters. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private String sslContextParameters;
+    /**
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
+    /**
+     * The user name to use for basic authentication.
+     */
+    private String userName;
 
     public EtcdConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -96,6 +120,86 @@ public class EtcdStatsComponentConfiguration
     public void setConfiguration(
             EtcdConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public Boolean getRecursive() {
+        return recursive;
+    }
+
+    public void setRecursive(Boolean recursive) {
+        this.recursive = recursive;
+    }
+
+    public String getServicePath() {
+        return servicePath;
+    }
+
+    public void setServicePath(String servicePath) {
+        this.servicePath = servicePath;
+    }
+
+    public Long getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(Long timeout) {
+        this.timeout = timeout;
+    }
+
+    public String getUris() {
+        return uris;
+    }
+
+    public void setUris(String uris) {
+        this.uris = uris;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getSendEmptyExchangeOnTimeout() {
+        return sendEmptyExchangeOnTimeout;
+    }
+
+    public void setSendEmptyExchangeOnTimeout(Boolean sendEmptyExchangeOnTimeout) {
+        this.sendEmptyExchangeOnTimeout = sendEmptyExchangeOnTimeout;
+    }
+
+    public Long getFromIndex() {
+        return fromIndex;
+    }
+
+    public void setFromIndex(Long fromIndex) {
+        this.fromIndex = fromIndex;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Integer getTimeToLive() {
+        return timeToLive;
+    }
+
+    public void setTimeToLive(Integer timeToLive) {
+        this.timeToLive = timeToLive;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public String getPassword() {
@@ -114,12 +218,13 @@ public class EtcdStatsComponentConfiguration
         this.sslContextParameters = sslContextParameters;
     }
 
-    public String getUris() {
-        return uris;
+    public Boolean getUseGlobalSslContextParameters() {
+        return useGlobalSslContextParameters;
     }
 
-    public void setUris(String uris) {
-        this.uris = uris;
+    public void setUseGlobalSslContextParameters(
+            Boolean useGlobalSslContextParameters) {
+        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 
     public String getUserName() {
@@ -128,39 +233,6 @@ public class EtcdStatsComponentConfiguration
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Boolean getUseGlobalSslContextParameters() {
-        return useGlobalSslContextParameters;
-    }
-
-    public void setUseGlobalSslContextParameters(
-            Boolean useGlobalSslContextParameters) {
-        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 
     public static class EtcdConfigurationNestedConfiguration {

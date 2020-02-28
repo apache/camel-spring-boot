@@ -42,11 +42,19 @@ public class StompComponentConfiguration
     /**
      * The URI of the Stomp broker to connect to
      */
-    private String brokerURL;
+    private String brokerURL = "tcp://localhost:61613";
     /**
-     * The virtual host
+     * To set custom headers. The option is a java.util.Properties type.
+     */
+    private String customHeaders;
+    /**
+     * The virtual host name
      */
     private String host;
+    /**
+     * The stomp version (1.1, or 1.2)
+     */
+    private String version;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -73,7 +81,7 @@ public class StompComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * To use the shared stomp configuration
+     * Component configuration.
      */
     private StompConfigurationNestedConfiguration configuration;
     /**
@@ -91,6 +99,11 @@ public class StompComponentConfiguration
      */
     private String passcode;
     /**
+     * To configure security using SSLContextParameters. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private String sslContextParameters;
+    /**
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
@@ -103,12 +116,28 @@ public class StompComponentConfiguration
         this.brokerURL = brokerURL;
     }
 
+    public String getCustomHeaders() {
+        return customHeaders;
+    }
+
+    public void setCustomHeaders(String customHeaders) {
+        this.customHeaders = customHeaders;
+    }
+
     public String getHost() {
         return host;
     }
 
     public void setHost(String host) {
         this.host = host;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -166,6 +195,14 @@ public class StompComponentConfiguration
 
     public void setPasscode(String passcode) {
         this.passcode = passcode;
+    }
+
+    public String getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(String sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
     }
 
     public Boolean getUseGlobalSslContextParameters() {

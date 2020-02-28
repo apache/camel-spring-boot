@@ -44,6 +44,14 @@ public class BraintreeComponentConfiguration
      */
     private BraintreeConfigurationNestedConfiguration configuration;
     /**
+     * The environment Either SANDBOX or PRODUCTION
+     */
+    private String environment;
+    /**
+     * The merchant id provided by Braintree.
+     */
+    private String merchantId;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -69,11 +77,46 @@ public class BraintreeComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * Set read timeout for http calls.
+     */
+    private Integer httpReadTimeout;
+    /**
+     * Set logging level for http calls, see java.util.logging.Level
+     */
+    private String httpLogLevel;
+    /**
+     * Set log category to use to log http calls.
+     */
+    private String httpLogName = "Braintree";
+    /**
      * Sets whether to enable the BraintreeLogHandler. It may be desirable to
-     * set this to false where an existing JUL - SLF4J logger bridge is on the
-     * classpath.
+     * set this to 'false' where an existing JUL - SLF4J logger bridge is on the
+     * classpath. This option can also be configured globally on the
+     * BraintreeComponent.
      */
     private Boolean logHandlerEnabled = true;
+    /**
+     * The proxy host
+     */
+    private String proxyHost;
+    /**
+     * The proxy port
+     */
+    private Integer proxyPort;
+    /**
+     * The access token granted by a merchant to another in order to process
+     * transactions on their behalf. Used in place of environment, merchant id,
+     * public key and private key fields.
+     */
+    private String accessToken;
+    /**
+     * The private key provided by Braintree.
+     */
+    private String privateKey;
+    /**
+     * The public key provided by Braintree.
+     */
+    private String publicKey;
 
     public BraintreeConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -82,6 +125,22 @@ public class BraintreeComponentConfiguration
     public void setConfiguration(
             BraintreeConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(String environment) {
+        this.environment = environment;
+    }
+
+    public String getMerchantId() {
+        return merchantId;
+    }
+
+    public void setMerchantId(String merchantId) {
+        this.merchantId = merchantId;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -108,12 +167,76 @@ public class BraintreeComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
+    public Integer getHttpReadTimeout() {
+        return httpReadTimeout;
+    }
+
+    public void setHttpReadTimeout(Integer httpReadTimeout) {
+        this.httpReadTimeout = httpReadTimeout;
+    }
+
+    public String getHttpLogLevel() {
+        return httpLogLevel;
+    }
+
+    public void setHttpLogLevel(String httpLogLevel) {
+        this.httpLogLevel = httpLogLevel;
+    }
+
+    public String getHttpLogName() {
+        return httpLogName;
+    }
+
+    public void setHttpLogName(String httpLogName) {
+        this.httpLogName = httpLogName;
+    }
+
     public Boolean getLogHandlerEnabled() {
         return logHandlerEnabled;
     }
 
     public void setLogHandlerEnabled(Boolean logHandlerEnabled) {
         this.logHandlerEnabled = logHandlerEnabled;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getPrivateKey() {
+        return privateKey;
+    }
+
+    public void setPrivateKey(String privateKey) {
+        this.privateKey = privateKey;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
     }
 
     public static class BraintreeConfigurationNestedConfiguration {

@@ -60,7 +60,7 @@ public class RemoteCacheManagerCustomizerTest {
         Assert.assertNotNull(embeddedCacheManager);
         Assert.assertNotNull(remoteCacheManager);
         Assert.assertNotNull(component);
-        Assert.assertEquals(remoteCacheManager, component.getCacheContainer());
+        Assert.assertEquals(remoteCacheManager, component.getConfiguration().getCacheContainer());
         Assert.assertEquals(1, context.getBeansOfType(EmbeddedCacheManagerCustomizer.class).size());
         Assert.assertEquals(1, context.getBeansOfType(RemoteCacheManagerCustomizer.class).size());
     }

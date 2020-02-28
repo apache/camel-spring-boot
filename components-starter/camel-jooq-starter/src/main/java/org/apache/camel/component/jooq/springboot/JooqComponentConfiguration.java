@@ -17,6 +17,7 @@
 package org.apache.camel.component.jooq.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.jooq.JooqComponent;
 import org.apache.camel.component.jooq.JooqOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.jooq.Configuration;
@@ -44,6 +45,11 @@ public class JooqComponentConfiguration
      */
     private JooqConfigurationNestedConfiguration configuration;
     /**
+     * To use a specific database configuration. The option is a
+     * org.jooq.Configuration type.
+     */
+    private String databaseConfiguration;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -52,6 +58,10 @@ public class JooqComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Delete entity after it is consumed
+     */
+    private Boolean consumeDelete = true;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -63,6 +73,14 @@ public class JooqComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Type of operation to execute on query
+     */
+    private JooqOperation operation = JooqOperation.NONE;
+    /**
+     * To execute plain SQL query
+     */
+    private String query;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -78,6 +96,14 @@ public class JooqComponentConfiguration
         this.configuration = configuration;
     }
 
+    public String getDatabaseConfiguration() {
+        return databaseConfiguration;
+    }
+
+    public void setDatabaseConfiguration(String databaseConfiguration) {
+        this.databaseConfiguration = databaseConfiguration;
+    }
+
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
@@ -86,12 +112,36 @@ public class JooqComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
+    public Boolean getConsumeDelete() {
+        return consumeDelete;
+    }
+
+    public void setConsumeDelete(Boolean consumeDelete) {
+        this.consumeDelete = consumeDelete;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public JooqOperation getOperation() {
+        return operation;
+    }
+
+    public void setOperation(JooqOperation operation) {
+        this.operation = operation;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
     }
 
     public Boolean getBasicPropertyBinding() {

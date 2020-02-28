@@ -17,9 +17,13 @@
 package org.apache.camel.component.atomix.client.multimap.springboot;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import javax.annotation.Generated;
 import io.atomix.catalyst.transport.Address;
+import io.atomix.resource.ReadConsistency;
 import org.apache.camel.component.atomix.client.multimap.AtomixMultiMap.Action;
+import org.apache.camel.component.atomix.client.multimap.AtomixMultiMapComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -41,8 +45,7 @@ public class AtomixMultiMapComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The shared AtomixClient instance. The option is a io.atomix.AtomixClient
-     * type.
+     * The Atomix instance to use. The option is a io.atomix.Atomix type.
      */
     private String atomix;
     /**
@@ -53,6 +56,15 @@ public class AtomixMultiMapComponentConfiguration
      * The path to the AtomixClient configuration
      */
     private String configurationUri;
+    /**
+     * The default action.
+     */
+    private Action defaultAction = Action.PUT;
+    /**
+     * The key to use if none is set in the header or to listen for events for a
+     * specific key. The option is a java.lang.Object type.
+     */
+    private String key;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -69,10 +81,50 @@ public class AtomixMultiMapComponentConfiguration
      */
     private List<Address> nodes;
     /**
+     * The header that wil carry the result.
+     */
+    private String resultHeader;
+    /**
+     * The class name (fqn) of the Atomix transport
+     */
+    private String transportClassName = "io.atomix.catalyst.transport.netty.NettyTransport";
+    /**
+     * The resource ttl.
+     */
+    private Long ttl;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+    /**
+     * The cluster wide default resource configuration. The option is a
+     * java.util.Properties type.
+     */
+    private String defaultResourceConfig;
+    /**
+     * The local default resource options. The option is a java.util.Properties
+     * type.
+     */
+    private String defaultResourceOptions;
+    /**
+     * Sets if the local member should join groups as PersistentMember or not.
+     * If set to ephemeral the local member will receive an auto generated ID
+     * thus the local one is ignored.
+     */
+    private Boolean ephemeral = false;
+    /**
+     * The read consistency level.
+     */
+    private ReadConsistency readConsistency;
+    /**
+     * Cluster wide resources configuration.
+     */
+    private Map<String, Properties> resourceConfigs;
+    /**
+     * Local resources configurations
+     */
+    private Map<String, Properties> resourceOptions;
 
     public String getAtomix() {
         return atomix;
@@ -99,6 +151,22 @@ public class AtomixMultiMapComponentConfiguration
         this.configurationUri = configurationUri;
     }
 
+    public Action getDefaultAction() {
+        return defaultAction;
+    }
+
+    public void setDefaultAction(Action defaultAction) {
+        this.defaultAction = defaultAction;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
@@ -115,12 +183,84 @@ public class AtomixMultiMapComponentConfiguration
         this.nodes = nodes;
     }
 
+    public String getResultHeader() {
+        return resultHeader;
+    }
+
+    public void setResultHeader(String resultHeader) {
+        this.resultHeader = resultHeader;
+    }
+
+    public String getTransportClassName() {
+        return transportClassName;
+    }
+
+    public void setTransportClassName(String transportClassName) {
+        this.transportClassName = transportClassName;
+    }
+
+    public Long getTtl() {
+        return ttl;
+    }
+
+    public void setTtl(Long ttl) {
+        this.ttl = ttl;
+    }
+
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getDefaultResourceConfig() {
+        return defaultResourceConfig;
+    }
+
+    public void setDefaultResourceConfig(String defaultResourceConfig) {
+        this.defaultResourceConfig = defaultResourceConfig;
+    }
+
+    public String getDefaultResourceOptions() {
+        return defaultResourceOptions;
+    }
+
+    public void setDefaultResourceOptions(String defaultResourceOptions) {
+        this.defaultResourceOptions = defaultResourceOptions;
+    }
+
+    public Boolean getEphemeral() {
+        return ephemeral;
+    }
+
+    public void setEphemeral(Boolean ephemeral) {
+        this.ephemeral = ephemeral;
+    }
+
+    public ReadConsistency getReadConsistency() {
+        return readConsistency;
+    }
+
+    public void setReadConsistency(ReadConsistency readConsistency) {
+        this.readConsistency = readConsistency;
+    }
+
+    public Map<String, Properties> getResourceConfigs() {
+        return resourceConfigs;
+    }
+
+    public void setResourceConfigs(Map<String, Properties> resourceConfigs) {
+        this.resourceConfigs = resourceConfigs;
+    }
+
+    public Map<String, Properties> getResourceOptions() {
+        return resourceOptions;
+    }
+
+    public void setResourceOptions(Map<String, Properties> resourceOptions) {
+        this.resourceOptions = resourceOptions;
     }
 
     public static class AtomixMultiMapConfigurationNestedConfiguration {

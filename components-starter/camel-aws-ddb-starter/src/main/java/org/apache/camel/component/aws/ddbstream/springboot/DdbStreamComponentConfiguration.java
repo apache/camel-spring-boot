@@ -20,6 +20,7 @@ import javax.annotation.Generated;
 import com.amazonaws.Protocol;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBStreams;
 import com.amazonaws.services.dynamodbv2.model.ShardIteratorType;
+import org.apache.camel.component.aws.ddbstream.DdbStreamComponent;
 import org.apache.camel.component.aws.ddbstream.SequenceNumberProvider;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -45,6 +46,11 @@ public class DdbStreamComponentConfiguration
      */
     private String accessKey;
     /**
+     * Amazon DynamoDB client to use for all requests for this endpoint. The
+     * option is a com.amazonaws.services.dynamodbv2.AmazonDynamoDBStreams type.
+     */
+    private String amazonDynamoDbStreamsClient;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -54,6 +60,29 @@ public class DdbStreamComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Defines where in the DynaboDB stream to start getting records. Note that
+     * using TRIM_HORIZON can cause a significant delay before the stream has
+     * caught up to real-time. if {AT,AFTER}_SEQUENCE_NUMBER are used, then a
+     * sequenceNumberProvider MUST be supplied.
+     */
+    private ShardIteratorType iteratorType = ShardIteratorType.LATEST;
+    /**
+     * Maximum number of records that will be fetched in each poll
+     */
+    private Integer maxResultsPerRequest;
+    /**
+     * To define a proxy host when instantiating the DDBStreams client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the DDBStreams client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the DDBStreams client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * Amazon AWS Region
      */
     private String region;
@@ -61,6 +90,13 @@ public class DdbStreamComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * Provider for the sequence number when using one of the two
+     * ShardIteratorType.{AT,AFTER}_SEQUENCE_NUMBER iterator types. Can be a
+     * registry reference or a literal sequence number. The option is a
+     * org.apache.camel.component.aws.ddbstream.SequenceNumberProvider type.
+     */
+    private String sequenceNumberProvider;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -79,12 +115,61 @@ public class DdbStreamComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getAmazonDynamoDbStreamsClient() {
+        return amazonDynamoDbStreamsClient;
+    }
+
+    public void setAmazonDynamoDbStreamsClient(
+            String amazonDynamoDbStreamsClient) {
+        this.amazonDynamoDbStreamsClient = amazonDynamoDbStreamsClient;
+    }
+
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public ShardIteratorType getIteratorType() {
+        return iteratorType;
+    }
+
+    public void setIteratorType(ShardIteratorType iteratorType) {
+        this.iteratorType = iteratorType;
+    }
+
+    public Integer getMaxResultsPerRequest() {
+        return maxResultsPerRequest;
+    }
+
+    public void setMaxResultsPerRequest(Integer maxResultsPerRequest) {
+        this.maxResultsPerRequest = maxResultsPerRequest;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public String getRegion() {
@@ -101,6 +186,14 @@ public class DdbStreamComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public String getSequenceNumberProvider() {
+        return sequenceNumberProvider;
+    }
+
+    public void setSequenceNumberProvider(String sequenceNumberProvider) {
+        this.sequenceNumberProvider = sequenceNumberProvider;
     }
 
     public Boolean getBasicPropertyBinding() {

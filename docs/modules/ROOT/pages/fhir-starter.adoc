@@ -17,15 +17,19 @@ When using fhir with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 57 options, which are listed below.
+The component supports 80 options, which are listed below.
 
 
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| *camel.component.fhir.access-token* | OAuth access token |  | String
 | *camel.component.fhir.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.fhir.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
+| *camel.component.fhir.client* | To use the custom client. The option is a ca.uhn.fhir.rest.client.api.IGenericClient type. |  | String
+| *camel.component.fhir.client-factory* | To use the custom client factory. The option is a ca.uhn.fhir.rest.client.api.IRestfulClientFactory type. |  | String
+| *camel.component.fhir.compress* | Compresses outgoing (POST/PUT) contents to the GZIP format | false | Boolean
 | *camel.component.fhir.configuration.access-token* | OAuth access token |  | String
 | *camel.component.fhir.configuration.api-name* | What kind of operation to perform |  | FhirApiName
 | *camel.component.fhir.configuration.client* | To use the custom client |  | IGenericClient
@@ -51,8 +55,27 @@ The component supports 57 options, which are listed below.
 | *camel.component.fhir.configuration.summary* | Request that the server modify the response using the <code>_summary</code> param |  | String
 | *camel.component.fhir.configuration.username* | Username to use for basic authentication |  | String
 | *camel.component.fhir.configuration.validation-mode* | When should Camel validate the FHIR Server's conformance statement | ONCE | String
+| *camel.component.fhir.connection-timeout* | How long to try and establish the initial TCP connection (in ms) | 10000 | Integer
+| *camel.component.fhir.defer-model-scanning* | When this option is set, model classes will not be scanned for children until the child list for the given type is actually accessed. | false | Boolean
 | *camel.component.fhir.enabled* | Whether to enable auto configuration of the fhir component. This is enabled by default. |  | Boolean
+| *camel.component.fhir.encoding* | Encoding to use for all request |  | String
+| *camel.component.fhir.fhir-context* | FhirContext is an expensive object to create. To avoid creating multiple instances, it can be set directly. The option is a ca.uhn.fhir.context.FhirContext type. |  | String
+| *camel.component.fhir.fhir-version* | The FHIR Version to use | R4 | String
+| *camel.component.fhir.force-conformance-check* | Force conformance check | false | Boolean
 | *camel.component.fhir.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.fhir.log* | Will log every requests and responses | false | Boolean
+| *camel.component.fhir.password* | Username to use for basic authentication |  | String
+| *camel.component.fhir.pretty-print* | Pretty print all request | false | Boolean
+| *camel.component.fhir.proxy-host* | The proxy host |  | String
+| *camel.component.fhir.proxy-password* | The proxy password |  | String
+| *camel.component.fhir.proxy-port* | The proxy port |  | Integer
+| *camel.component.fhir.proxy-user* | The proxy username |  | String
+| *camel.component.fhir.server-url* | The FHIR server base URL |  | String
+| *camel.component.fhir.session-cookie* | HTTP session cookie to add to every request |  | String
+| *camel.component.fhir.socket-timeout* | How long to block for individual read/write operations (in ms) | 10000 | Integer
+| *camel.component.fhir.summary* | Request that the server modify the response using the _summary param |  | String
+| *camel.component.fhir.username* | Username to use for basic authentication |  | String
+| *camel.component.fhir.validation-mode* | When should Camel validate the FHIR Server's conformance statement | ONCE | String
 | *camel.dataformat.fhirjson.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSon etc. | false | Boolean
 | *camel.dataformat.fhirjson.dont-encode-elements* | If provided, specifies the elements which should NOT be encoded. Valid values for this field would include: Patient - Don't encode patient and all its children Patient.name - Don't encode the patient's name Patient.name.family - Don't encode the patient's family name .text - Don't encode the text element on any resource (only the very first position may contain a wildcard) DSTU2 note: Note that values including meta, such as Patient.meta will work for DSTU2 parsers, but values with subelements on meta such as Patient.meta.lastUpdated will only work in DSTU3 mode. |  | Set
 | *camel.dataformat.fhirjson.dont-strip-versions-from-references-at-paths* | If supplied value(s), any resource references at the specified paths will have their resource versions encoded instead of being automatically stripped during the encoding process. This setting has no effect on the parsing process. This method provides a finer-grained level of control than setStripVersionsFromReferences(String) and any paths specified by this method will be encoded even if setStripVersionsFromReferences(String) has been set to true (which is the default) |  | List
@@ -82,5 +105,4 @@ The component supports 57 options, which are listed below.
 | *camel.dataformat.fhirxml.summary-mode* | If set to true (default is false) only elements marked by the FHIR specification as being summary elements will be included. | false | Boolean
 | *camel.dataformat.fhirxml.suppress-narratives* | If set to true (default is false), narratives will not be included in the encoded values. | false | Boolean
 |===
-
 // spring-boot-auto-configure options: END

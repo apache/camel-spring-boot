@@ -38,6 +38,14 @@ public class GoogleMailComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Google mail application name. Example would be camel-google-mail/1.0
+     */
+    private String applicationName;
+    /**
+     * Client ID of the mail application
+     */
+    private String clientId;
+    /**
      * To use the shared configuration
      */
     private GoogleMailConfigurationNestedConfiguration configuration;
@@ -72,6 +80,37 @@ public class GoogleMailComponentConfiguration
      * org.apache.camel.component.google.mail.GoogleMailClientFactory type.
      */
     private String clientFactory;
+    /**
+     * OAuth 2 access token. This typically expires after an hour so
+     * refreshToken is recommended for long term usage.
+     */
+    private String accessToken;
+    /**
+     * Client secret of the mail application
+     */
+    private String clientSecret;
+    /**
+     * OAuth 2 refresh token. Using this, the Google Calendar component can
+     * obtain a new accessToken whenever the current one expires - a necessity
+     * if the application is long-lived.
+     */
+    private String refreshToken;
+
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
 
     public GoogleMailConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -112,6 +151,30 @@ public class GoogleMailComponentConfiguration
 
     public void setClientFactory(String clientFactory) {
         this.clientFactory = clientFactory;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     public static class GoogleMailConfigurationNestedConfiguration {

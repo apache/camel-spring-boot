@@ -16,9 +16,7 @@
  */
 package org.apache.camel.component.websocket.springboot;
 
-import java.util.Map;
 import javax.annotation.Generated;
-import org.apache.camel.component.websocket.WebSocketFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -47,12 +45,6 @@ public class WebsocketComponentConfiguration
      * The port number. The default value is 9292
      */
     private Integer port = 9292;
-    /**
-     * To configure a map which contains custom WebSocketFactory for sub
-     * protocols. The key in the map is the sub protocol. The default key is
-     * reserved for the default implementation.
-     */
-    private Map<String, WebSocketFactory> socketFactory;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -146,14 +138,6 @@ public class WebsocketComponentConfiguration
 
     public void setPort(Integer port) {
         this.port = port;
-    }
-
-    public Map<String, WebSocketFactory> getSocketFactory() {
-        return socketFactory;
-    }
-
-    public void setSocketFactory(Map<String, WebSocketFactory> socketFactory) {
-        this.socketFactory = socketFactory;
     }
 
     public Boolean getBridgeErrorHandler() {

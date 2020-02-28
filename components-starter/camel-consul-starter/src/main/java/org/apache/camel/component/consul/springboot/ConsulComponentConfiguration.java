@@ -22,6 +22,7 @@ import java.util.Set;
 import javax.annotation.Generated;
 import com.orbitz.consul.Consul;
 import com.orbitz.consul.option.ConsistencyMode;
+import org.apache.camel.component.consul.ConsulComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -46,31 +47,39 @@ public class ConsulComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Sets the ACL token to be used with Consul
+     * Connect timeout for OkHttpClient
      */
-    private String aclToken;
+    private Long connectTimeoutMillis;
     /**
-     * The data center
+     * Reference to a com.orbitz.consul.Consul in the registry. The option is a
+     * com.orbitz.consul.Consul type.
      */
-    private String datacenter;
+    private String consulClient;
     /**
-     * Sets the password to be used for basic authentication
+     * The default key. Can be overridden by CamelConsulKey
      */
-    private String password;
+    private String key;
     /**
-     * SSL configuration using an
-     * org.apache.camel.support.jsse.SSLContextParameters instance. The option
-     * is a org.apache.camel.support.jsse.SSLContextParameters type.
+     * Configure if the AgentClient should attempt a ping before returning the
+     * Consul instance
      */
-    private String sslContextParameters;
+    private Boolean pingInstance = true;
+    /**
+     * Read timeout for OkHttpClient
+     */
+    private Long readTimeoutMillis;
+    /**
+     * Set tags. You can separate multiple tags by comma.
+     */
+    private String tags;
     /**
      * The Consul agent URL
      */
     private String url;
     /**
-     * Sets the username to be used for basic authentication
+     * Write timeout for OkHttpClient
      */
-    private String userName;
+    private Long writeTimeoutMillis;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -80,6 +89,10 @@ public class ConsulComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * The default action. Can be overridden by CamelConsulAction
+     */
+    private String action;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -92,49 +105,117 @@ public class ConsulComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Default to transform values retrieved from Consul i.e. on KV endpoint to
+     * string.
+     */
+    private Boolean valueAsString = false;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Sets the common configuration shared among endpoints
+     * Consul configuration
      */
     private ConsulConfigurationNestedConfiguration configuration;
+    /**
+     * The consistencyMode used for queries, default ConsistencyMode.DEFAULT
+     */
+    private ConsistencyMode consistencyMode = ConsistencyMode.DEFAULT;
+    /**
+     * The data center
+     */
+    private String datacenter;
+    /**
+     * The near node to use for queries.
+     */
+    private String nearNode;
+    /**
+     * The note meta-data to use for queries.
+     */
+    private List<String> nodeMeta;
+    /**
+     * The second to wait for a watch event, default 10 seconds
+     */
+    private Integer blockSeconds = 10;
+    /**
+     * The first index for watch for, default 0. The option is a
+     * java.math.BigInteger type.
+     */
+    private String firstIndex;
+    /**
+     * Recursively watch, default false
+     */
+    private Boolean recursive = false;
+    /**
+     * Sets the ACL token to be used with Consul
+     */
+    private String aclToken;
+    /**
+     * Sets the password to be used for basic authentication
+     */
+    private String password;
+    /**
+     * SSL configuration using an
+     * org.apache.camel.support.jsse.SSLContextParameters instance. The option
+     * is a org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private String sslContextParameters;
     /**
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
+    /**
+     * Sets the username to be used for basic authentication
+     */
+    private String userName;
 
-    public String getAclToken() {
-        return aclToken;
+    public Long getConnectTimeoutMillis() {
+        return connectTimeoutMillis;
     }
 
-    public void setAclToken(String aclToken) {
-        this.aclToken = aclToken;
+    public void setConnectTimeoutMillis(Long connectTimeoutMillis) {
+        this.connectTimeoutMillis = connectTimeoutMillis;
     }
 
-    public String getDatacenter() {
-        return datacenter;
+    public String getConsulClient() {
+        return consulClient;
     }
 
-    public void setDatacenter(String datacenter) {
-        this.datacenter = datacenter;
+    public void setConsulClient(String consulClient) {
+        this.consulClient = consulClient;
     }
 
-    public String getPassword() {
-        return password;
+    public String getKey() {
+        return key;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public String getSslContextParameters() {
-        return sslContextParameters;
+    public Boolean getPingInstance() {
+        return pingInstance;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
-        this.sslContextParameters = sslContextParameters;
+    public void setPingInstance(Boolean pingInstance) {
+        this.pingInstance = pingInstance;
+    }
+
+    public Long getReadTimeoutMillis() {
+        return readTimeoutMillis;
+    }
+
+    public void setReadTimeoutMillis(Long readTimeoutMillis) {
+        this.readTimeoutMillis = readTimeoutMillis;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     public String getUrl() {
@@ -145,12 +226,12 @@ public class ConsulComponentConfiguration
         this.url = url;
     }
 
-    public String getUserName() {
-        return userName;
+    public Long getWriteTimeoutMillis() {
+        return writeTimeoutMillis;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setWriteTimeoutMillis(Long writeTimeoutMillis) {
+        this.writeTimeoutMillis = writeTimeoutMillis;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -161,12 +242,28 @@ public class ConsulComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getValueAsString() {
+        return valueAsString;
+    }
+
+    public void setValueAsString(Boolean valueAsString) {
+        this.valueAsString = valueAsString;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -186,6 +283,86 @@ public class ConsulComponentConfiguration
         this.configuration = configuration;
     }
 
+    public ConsistencyMode getConsistencyMode() {
+        return consistencyMode;
+    }
+
+    public void setConsistencyMode(ConsistencyMode consistencyMode) {
+        this.consistencyMode = consistencyMode;
+    }
+
+    public String getDatacenter() {
+        return datacenter;
+    }
+
+    public void setDatacenter(String datacenter) {
+        this.datacenter = datacenter;
+    }
+
+    public String getNearNode() {
+        return nearNode;
+    }
+
+    public void setNearNode(String nearNode) {
+        this.nearNode = nearNode;
+    }
+
+    public List<String> getNodeMeta() {
+        return nodeMeta;
+    }
+
+    public void setNodeMeta(List<String> nodeMeta) {
+        this.nodeMeta = nodeMeta;
+    }
+
+    public Integer getBlockSeconds() {
+        return blockSeconds;
+    }
+
+    public void setBlockSeconds(Integer blockSeconds) {
+        this.blockSeconds = blockSeconds;
+    }
+
+    public String getFirstIndex() {
+        return firstIndex;
+    }
+
+    public void setFirstIndex(String firstIndex) {
+        this.firstIndex = firstIndex;
+    }
+
+    public Boolean getRecursive() {
+        return recursive;
+    }
+
+    public void setRecursive(Boolean recursive) {
+        this.recursive = recursive;
+    }
+
+    public String getAclToken() {
+        return aclToken;
+    }
+
+    public void setAclToken(String aclToken) {
+        this.aclToken = aclToken;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(String sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
+    }
+
     public Boolean getUseGlobalSslContextParameters() {
         return useGlobalSslContextParameters;
     }
@@ -193,6 +370,14 @@ public class ConsulComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public static class ConsulConfigurationNestedConfiguration {

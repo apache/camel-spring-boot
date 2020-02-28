@@ -41,9 +41,59 @@ public class Web3jComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Contract address or a list of addresses.
+     */
+    private List<String> addresses;
+    /**
      * Default configuration
      */
     private Web3jConfigurationNestedConfiguration configuration;
+    /**
+     * The address the transaction is send from
+     */
+    private String fromAddress;
+    /**
+     * The block number, or the string latest for the last mined block or
+     * pending, earliest for not yet mined transactions.
+     */
+    private String fromBlock = "latest";
+    /**
+     * If true it returns the full transaction objects, if false only the hashes
+     * of the transactions.
+     */
+    private Boolean fullTransactionObjects = false;
+    /**
+     * The maximum gas allowed in this block. The option is a
+     * java.math.BigInteger type.
+     */
+    private String gasLimit;
+    /**
+     * A transaction privateFor nodes with public keys in a Quorum network
+     */
+    private List<String> privateFor;
+    /**
+     * If true, this will support Quorum API.
+     */
+    private Boolean quorumAPI = false;
+    /**
+     * The address the transaction is directed to.
+     */
+    private String toAddress;
+    /**
+     * The block number, or the string latest for the last mined block or
+     * pending, earliest for not yet mined transactions.
+     */
+    private String toBlock = "latest";
+    /**
+     * Topics are order-dependent. Each topic can also be a list of topics.
+     * Specify multiple topics separated by comma.
+     */
+    private String topics;
+    /**
+     * The preconfigured Web3j object. The option is a org.web3j.protocol.Web3j
+     * type.
+     */
+    private String web3j;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -53,6 +103,59 @@ public class Web3jComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Contract address.
+     */
+    private String address;
+    /**
+     * The block number, or the string latest for the last mined block or
+     * pending, earliest for not yet mined transactions.
+     */
+    private String atBlock = "latest";
+    /**
+     * Hash of the block where this transaction was in.
+     */
+    private String blockHash;
+    /**
+     * A random hexadecimal(32 bytes) ID identifying the client.
+     */
+    private String clientId;
+    /**
+     * The compiled code of a contract OR the hash of the invoked method
+     * signature and encoded parameters.
+     */
+    private String data;
+    /**
+     * The local database name.
+     */
+    private String databaseName;
+    /**
+     * The filter id to use. The option is a java.math.BigInteger type.
+     */
+    private String filterId;
+    /**
+     * Gas price used for each paid gas. The option is a java.math.BigInteger
+     * type.
+     */
+    private String gasPrice;
+    /**
+     * A hexadecimal string representation (32 bytes) of the hash rate.
+     */
+    private String hashrate;
+    /**
+     * The header's pow-hash (256 bits) used for submitting a proof-of-work
+     * solution.
+     */
+    private String headerPowHash;
+    /**
+     * The transactions/uncle index position in the block. The option is a
+     * java.math.BigInteger type.
+     */
+    private String index;
+    /**
+     * The key name in the database.
+     */
+    private String keyName;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -65,10 +168,67 @@ public class Web3jComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The mix digest (256 bits) used for submitting a proof-of-work solution.
+     */
+    private String mixDigest;
+    /**
+     * The nonce found (64 bits) used for submitting a proof-of-work solution.
+     */
+    private String nonce;
+    /**
+     * Operation to use.
+     */
+    private String operation = "transaction";
+    /**
+     * The transaction index position withing a block. The option is a
+     * java.math.BigInteger type.
+     */
+    private String position;
+    /**
+     * The priority of a whisper message. The option is a java.math.BigInteger
+     * type.
+     */
+    private String priority;
+    /**
+     * Message to sign by calculating an Ethereum specific signature.
+     */
+    private String sha3HashOfDataToSign;
+    /**
+     * The signed transaction data for a new message call transaction or a
+     * contract creation for signed transactions.
+     */
+    private String signedTransactionData;
+    /**
+     * The source code to compile.
+     */
+    private String sourceCode;
+    /**
+     * The information about a transaction requested by transaction hash.
+     */
+    private String transactionHash;
+    /**
+     * The time to live in seconds of a whisper message. The option is a
+     * java.math.BigInteger type.
+     */
+    private String ttl;
+    /**
+     * The value sent within a transaction. The option is a java.math.BigInteger
+     * type.
+     */
+    private String value;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+
+    public List<String> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<String> addresses) {
+        this.addresses = addresses;
+    }
 
     public Web3jConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -79,6 +239,86 @@ public class Web3jComponentConfiguration
         this.configuration = configuration;
     }
 
+    public String getFromAddress() {
+        return fromAddress;
+    }
+
+    public void setFromAddress(String fromAddress) {
+        this.fromAddress = fromAddress;
+    }
+
+    public String getFromBlock() {
+        return fromBlock;
+    }
+
+    public void setFromBlock(String fromBlock) {
+        this.fromBlock = fromBlock;
+    }
+
+    public Boolean getFullTransactionObjects() {
+        return fullTransactionObjects;
+    }
+
+    public void setFullTransactionObjects(Boolean fullTransactionObjects) {
+        this.fullTransactionObjects = fullTransactionObjects;
+    }
+
+    public String getGasLimit() {
+        return gasLimit;
+    }
+
+    public void setGasLimit(String gasLimit) {
+        this.gasLimit = gasLimit;
+    }
+
+    public List<String> getPrivateFor() {
+        return privateFor;
+    }
+
+    public void setPrivateFor(List<String> privateFor) {
+        this.privateFor = privateFor;
+    }
+
+    public Boolean getQuorumAPI() {
+        return quorumAPI;
+    }
+
+    public void setQuorumAPI(Boolean quorumAPI) {
+        this.quorumAPI = quorumAPI;
+    }
+
+    public String getToAddress() {
+        return toAddress;
+    }
+
+    public void setToAddress(String toAddress) {
+        this.toAddress = toAddress;
+    }
+
+    public String getToBlock() {
+        return toBlock;
+    }
+
+    public void setToBlock(String toBlock) {
+        this.toBlock = toBlock;
+    }
+
+    public String getTopics() {
+        return topics;
+    }
+
+    public void setTopics(String topics) {
+        this.topics = topics;
+    }
+
+    public String getWeb3j() {
+        return web3j;
+    }
+
+    public void setWeb3j(String web3j) {
+        this.web3j = web3j;
+    }
+
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
@@ -87,12 +327,196 @@ public class Web3jComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAtBlock() {
+        return atBlock;
+    }
+
+    public void setAtBlock(String atBlock) {
+        this.atBlock = atBlock;
+    }
+
+    public String getBlockHash() {
+        return blockHash;
+    }
+
+    public void setBlockHash(String blockHash) {
+        this.blockHash = blockHash;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getDatabaseName() {
+        return databaseName;
+    }
+
+    public void setDatabaseName(String databaseName) {
+        this.databaseName = databaseName;
+    }
+
+    public String getFilterId() {
+        return filterId;
+    }
+
+    public void setFilterId(String filterId) {
+        this.filterId = filterId;
+    }
+
+    public String getGasPrice() {
+        return gasPrice;
+    }
+
+    public void setGasPrice(String gasPrice) {
+        this.gasPrice = gasPrice;
+    }
+
+    public String getHashrate() {
+        return hashrate;
+    }
+
+    public void setHashrate(String hashrate) {
+        this.hashrate = hashrate;
+    }
+
+    public String getHeaderPowHash() {
+        return headerPowHash;
+    }
+
+    public void setHeaderPowHash(String headerPowHash) {
+        this.headerPowHash = headerPowHash;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
+    public String getKeyName() {
+        return keyName;
+    }
+
+    public void setKeyName(String keyName) {
+        this.keyName = keyName;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public String getMixDigest() {
+        return mixDigest;
+    }
+
+    public void setMixDigest(String mixDigest) {
+        this.mixDigest = mixDigest;
+    }
+
+    public String getNonce() {
+        return nonce;
+    }
+
+    public void setNonce(String nonce) {
+        this.nonce = nonce;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public String getSha3HashOfDataToSign() {
+        return sha3HashOfDataToSign;
+    }
+
+    public void setSha3HashOfDataToSign(String sha3HashOfDataToSign) {
+        this.sha3HashOfDataToSign = sha3HashOfDataToSign;
+    }
+
+    public String getSignedTransactionData() {
+        return signedTransactionData;
+    }
+
+    public void setSignedTransactionData(String signedTransactionData) {
+        this.signedTransactionData = signedTransactionData;
+    }
+
+    public String getSourceCode() {
+        return sourceCode;
+    }
+
+    public void setSourceCode(String sourceCode) {
+        this.sourceCode = sourceCode;
+    }
+
+    public String getTransactionHash() {
+        return transactionHash;
+    }
+
+    public void setTransactionHash(String transactionHash) {
+        this.transactionHash = transactionHash;
+    }
+
+    public String getTtl() {
+        return ttl;
+    }
+
+    public void setTtl(String ttl) {
+        this.ttl = ttl;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public Boolean getBasicPropertyBinding() {

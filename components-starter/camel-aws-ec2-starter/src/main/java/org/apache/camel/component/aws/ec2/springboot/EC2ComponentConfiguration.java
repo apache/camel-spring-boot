@@ -19,6 +19,7 @@ package org.apache.camel.component.aws.ec2.springboot;
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
 import com.amazonaws.services.ec2.AmazonEC2;
+import org.apache.camel.component.aws.ec2.EC2Component;
 import org.apache.camel.component.aws.ec2.EC2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -44,6 +45,11 @@ public class EC2ComponentConfiguration
      */
     private String accessKey;
     /**
+     * To use a existing configured AmazonEC2Client as client. The option is a
+     * com.amazonaws.services.ec2.AmazonEC2 type.
+     */
+    private String amazonEc2Client;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -54,6 +60,25 @@ public class EC2ComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * The operation to perform. It can be createAndRunInstances,
+     * startInstances, stopInstances, terminateInstances, describeInstances,
+     * describeInstancesStatus, rebootInstances, monitorInstances,
+     * unmonitorInstances, createTags or deleteTags
+     */
+    private EC2Operations operation;
+    /**
+     * To define a proxy host when instantiating the EC2 client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the EC2 client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the EC2 client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
     /**
      * The region in which EC2 client needs to work
      */
@@ -80,12 +105,52 @@ public class EC2ComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getAmazonEc2Client() {
+        return amazonEc2Client;
+    }
+
+    public void setAmazonEc2Client(String amazonEc2Client) {
+        this.amazonEc2Client = amazonEc2Client;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public EC2Operations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(EC2Operations operation) {
+        this.operation = operation;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public String getRegion() {

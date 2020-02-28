@@ -63,8 +63,8 @@ public class EmbeddedCacheManagerCustomizerOverrideTest {
     public void testComponentConfiguration() throws Exception {
         Assert.assertNotNull(cacheManager);
         Assert.assertNotNull(component);
-        Assert.assertNotNull(component.getCacheContainer());
-        Assert.assertEquals(cacheManager, component.getCacheContainer());
+        Assert.assertNotNull(component.getConfiguration().getCacheContainer());
+        Assert.assertEquals(cacheManager, component.getConfiguration().getCacheContainer());
     }
 
     @Configuration
@@ -78,7 +78,7 @@ public class EmbeddedCacheManagerCustomizerOverrideTest {
             return new ComponentCustomizer<InfinispanComponent>() {
                 @Override
                 public void customize(InfinispanComponent component) {
-                    component.setCacheContainer(CACHE_MANAGER);
+                    component.getConfiguration().setCacheContainer(CACHE_MANAGER);
                 }
             };
         }

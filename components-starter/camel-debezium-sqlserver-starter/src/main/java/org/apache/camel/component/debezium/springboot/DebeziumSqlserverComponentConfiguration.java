@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.debezium.springboot;
 
+import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -39,6 +40,15 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Additional properties for debezium components in case they can't be set
+     * directly on the camel configurations (e.g: setting Kafka Connect
+     * properties needed by Debezium engine, for example setting
+     * KafkaOffsetBackingStore), the properties have to be prefixed with
+     * additionalProperties.. E.g:
+     * additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http://localhost:8811/avro
+     */
+    private Map<String, Object> additionalProperties;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -52,10 +62,267 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private SqlServerConnectorEmbeddedDebeziumConfigurationNestedConfiguration configuration;
     /**
+     * The Converter class that should be used to serialize and deserialize key
+     * data for offsets. The default is JSON converter.
+     */
+    private String internalKeyConverter = "org.apache.kafka.connect.json.JsonConverter";
+    /**
+     * The Converter class that should be used to serialize and deserialize
+     * value data for offsets. The default is JSON converter.
+     */
+    private String internalValueConverter = "org.apache.kafka.connect.json.JsonConverter";
+    /**
+     * The name of the Java class of the commit policy. It defines when offsets
+     * commit has to be triggered based on the number of events processed and
+     * the time elapsed since the last commit. This class must implement the
+     * interface 'OffsetCommitPolicy'. The default is a periodic commit policy
+     * based upon time intervals.
+     */
+    private String offsetCommitPolicy = "io.debezium.embedded.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy";
+    /**
+     * Maximum number of milliseconds to wait for records to flush and partition
+     * offset data to be committed to offset storage before cancelling the
+     * process and restoring the offset data to be committed in a future
+     * attempt. The default is 5 seconds.
+     */
+    private Long offsetCommitTimeoutMs = 5000L;
+    /**
+     * Interval at which to try committing offsets. The default is 1 minute.
+     */
+    private Long offsetFlushIntervalMs = 60000L;
+    /**
+     * The name of the Java class that is responsible for persistence of
+     * connector offsets.
+     */
+    private String offsetStorage = "org.apache.kafka.connect.storage.FileOffsetBackingStore";
+    /**
+     * Path to file where offsets are to be stored. Required when offset.storage
+     * is set to the FileOffsetBackingStore.
+     */
+    private String offsetStorageFileName;
+    /**
+     * The number of partitions used when creating the offset storage topic.
+     * Required when offset.storage is set to the 'KafkaOffsetBackingStore'.
+     */
+    private Integer offsetStoragePartitions;
+    /**
+     * Replication factor used when creating the offset storage topic. Required
+     * when offset.storage is set to the KafkaOffsetBackingStore
+     */
+    private Integer offsetStorageReplicationFactor;
+    /**
+     * The name of the Kafka topic where offsets are to be stored. Required when
+     * offset.storage is set to the KafkaOffsetBackingStore.
+     */
+    private String offsetStorageTopic;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+    /**
+     * Description is not available here, please check Debezium website for
+     * corresponding key 'column.blacklist' description.
+     */
+    private String columnBlacklist;
+    /**
+     * The name of the database the connector should be monitoring. When working
+     * with a multi-tenant set-up, must be set to the CDB name.
+     */
+    private String databaseDbname;
+    /**
+     * The name of the DatabaseHistory class that should be used to store and
+     * recover database schema changes. The configuration properties for the
+     * history are prefixed with the 'database.history.' string.
+     */
+    private String databaseHistory = "io.debezium.relational.history.FileDatabaseHistory";
+    /**
+     * The path to the file that will be used to record the database history
+     */
+    private String databaseHistoryFileFilename;
+    /**
+     * A list of host/port pairs that the connector will use for establishing
+     * the initial connection to the Kafka cluster for retrieving database
+     * schema history previously stored by the connector. This should point to
+     * the same Kafka cluster used by the Kafka Connect process.
+     */
+    private String databaseHistoryKafkaBootstrapServers;
+    /**
+     * The number of attempts in a row that no data are returned from Kafka
+     * before recover completes. The maximum amount of time to wait after
+     * receiving no data is (recovery.attempts) x (recovery.poll.interval.ms).
+     */
+    private Integer databaseHistoryKafkaRecoveryAttempts = 100;
+    /**
+     * The number of milliseconds to wait while polling for persisted data
+     * during recovery.
+     */
+    private Integer databaseHistoryKafkaRecoveryPollIntervalMs = 100;
+    /**
+     * The name of the topic for the database schema history
+     */
+    private String databaseHistoryKafkaTopic;
+    /**
+     * Resolvable hostname or IP address of the SQL Server database server.
+     */
+    private String databaseHostname;
+    /**
+     * Password of the SQL Server database user to be used when connecting to
+     * the database.
+     */
+    private String databasePassword;
+    /**
+     * Port of the SQL Server database server.
+     */
+    private Integer databasePort = 1433;
+    /**
+     * Unique name that identifies the database server and all recorded offsets,
+     * and that is used as a prefix for all schemas and topics. Each distinct
+     * installation should have a separate namespace and be monitored by at most
+     * one Debezium connector.
+     */
+    private String databaseServerName;
+    /**
+     * The timezone of the server used to correctly shift the commit transaction
+     * timestamp on the client sideOptions include: Any valid Java ZoneId
+     */
+    private String databaseServerTimezone;
+    /**
+     * Name of the SQL Server database user to be used when connecting to the
+     * database.
+     */
+    private String databaseUser;
+    /**
+     * Specify how DECIMAL and NUMERIC columns should be represented in change
+     * events, including:'precise' (the default) uses java.math.BigDecimal to
+     * represent values, which are encoded in the change events using a binary
+     * representation and Kafka Connect's
+     * 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to
+     * represent values; 'double' represents values using Java's 'double', which
+     * may not offer the precision but will be far easier to use in consumers.
+     */
+    private String decimalHandlingMode = "precise";
+    /**
+     * Length of an interval in milli-seconds in in which the connector
+     * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
+     * disable heartbeat messages. Disabled by default.
+     */
+    private Integer heartbeatIntervalMs = 0;
+    /**
+     * The prefix that is used to name heartbeat topics.Defaults to
+     * __debezium-heartbeat.
+     */
+    private String heartbeatTopicsPrefix = "__debezium-heartbeat";
+    /**
+     * Maximum size of each batch of source records. Defaults to 2048.
+     */
+    private Integer maxBatchSize = 2048;
+    /**
+     * Maximum size of the queue for change events read from the database log
+     * but not yet recorded or forwarded. Defaults to 8192, and should always be
+     * larger than the maximum batch size.
+     */
+    private Integer maxQueueSize = 8192;
+    /**
+     * A semicolon-separated list of expressions that match fully-qualified
+     * tables and column(s) to be used as message key. Each expression must
+     * match the pattern ':',where the table names could be defined as
+     * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the
+     * specific connector,and the key columns are a comma-separated list of
+     * columns representing the custom key. For any table without an explicit
+     * key configuration the table's primary key column(s) will be used as
+     * message key.Example:
+     * dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id
+     */
+    private String messageKeyColumns;
+    /**
+     * Frequency in milliseconds to wait for new change events to appear after
+     * receiving no events. Defaults to 500ms.
+     */
+    private Long pollIntervalMs = 500L;
+    /**
+     * The number of milliseconds to delay before a snapshot will begin.
+     */
+    private Long snapshotDelayMs = 0L;
+    /**
+     * The maximum number of records that should be loaded into memory while
+     * performing a snapshot
+     */
+    private Integer snapshotFetchSize;
+    /**
+     * The maximum number of millis to wait for table locks at the beginning of
+     * a snapshot. If locks cannot be acquired in this time frame, the snapshot
+     * will be aborted. Defaults to 10 seconds
+     */
+    private Long snapshotLockTimeoutMs = 10000L;
+    /**
+     * The criteria for running a snapshot upon startup of the connector.
+     * Options include: 'initial' (the default) to specify the connector should
+     * run a snapshot only when no offsets are available for the logical server
+     * name; 'schema_only' to specify the connector should run a snapshot of the
+     * schema when no offsets are available for the logical server name.
+     */
+    private String snapshotMode = "initial";
+    /**
+     * This property contains a comma-separated list of fully-qualified tables
+     * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on
+     * thespecific connectors . Select statements for the individual tables are
+     * specified in further configuration properties, one for each table,
+     * identified by the id
+     * 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or
+     * 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME',
+     * respectively. The value of those properties is the select statement to
+     * use when retrieving data from the specific table during snapshotting. A
+     * possible use case for large append-only tables is setting a specific
+     * point where to start (resume) snapshotting, in case a previous
+     * snapshotting was interrupted.
+     */
+    private String snapshotSelectStatementOverrides;
+    /**
+     * A version of the format of the publicly visible source part in the
+     * message
+     */
+    private String sourceStructVersion = "v2";
+    /**
+     * Description is not available here, please check Debezium website for
+     * corresponding key 'table.blacklist' description.
+     */
+    private String tableBlacklist;
+    /**
+     * Flag specifying whether built-in tables should be ignored.
+     */
+    private Boolean tableIgnoreBuiltin = true;
+    /**
+     * The tables for which changes are to be captured
+     */
+    private String tableWhitelist;
+    /**
+     * Time, date, and timestamps can be represented with different kinds of
+     * precisions, including:'adaptive' (the default) bases the precision of
+     * time, date, and timestamp values on the database column's precision;
+     * 'adaptive_time_microseconds' like 'adaptive' mode, but TIME fields always
+     * use microseconds precision;'connect' always represents time, date, and
+     * timestamp values using Kafka Connect's built-in representations for Time,
+     * Date, and Timestamp, which uses millisecond precision regardless of the
+     * database columns' precision .
+     */
+    private String timePrecisionMode = "adaptive";
+    /**
+     * Whether delete operations should be represented by a delete event and a
+     * subsquenttombstone event (true) or only by a delete event (false).
+     * Emitting the tombstone event (the default behavior) allows Kafka to
+     * completely delete all events pertaining to the given key once the source
+     * record got deleted.
+     */
+    private Boolean tombstonesOnDelete = false;
+
+    public Map<String, Object> getAdditionalProperties() {
+        return additionalProperties;
+    }
+
+    public void setAdditionalProperties(Map<String, Object> additionalProperties) {
+        this.additionalProperties = additionalProperties;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -74,12 +341,354 @@ public class DebeziumSqlserverComponentConfiguration
         this.configuration = configuration;
     }
 
+    public String getInternalKeyConverter() {
+        return internalKeyConverter;
+    }
+
+    public void setInternalKeyConverter(String internalKeyConverter) {
+        this.internalKeyConverter = internalKeyConverter;
+    }
+
+    public String getInternalValueConverter() {
+        return internalValueConverter;
+    }
+
+    public void setInternalValueConverter(String internalValueConverter) {
+        this.internalValueConverter = internalValueConverter;
+    }
+
+    public String getOffsetCommitPolicy() {
+        return offsetCommitPolicy;
+    }
+
+    public void setOffsetCommitPolicy(String offsetCommitPolicy) {
+        this.offsetCommitPolicy = offsetCommitPolicy;
+    }
+
+    public Long getOffsetCommitTimeoutMs() {
+        return offsetCommitTimeoutMs;
+    }
+
+    public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
+        this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
+    }
+
+    public Long getOffsetFlushIntervalMs() {
+        return offsetFlushIntervalMs;
+    }
+
+    public void setOffsetFlushIntervalMs(Long offsetFlushIntervalMs) {
+        this.offsetFlushIntervalMs = offsetFlushIntervalMs;
+    }
+
+    public String getOffsetStorage() {
+        return offsetStorage;
+    }
+
+    public void setOffsetStorage(String offsetStorage) {
+        this.offsetStorage = offsetStorage;
+    }
+
+    public String getOffsetStorageFileName() {
+        return offsetStorageFileName;
+    }
+
+    public void setOffsetStorageFileName(String offsetStorageFileName) {
+        this.offsetStorageFileName = offsetStorageFileName;
+    }
+
+    public Integer getOffsetStoragePartitions() {
+        return offsetStoragePartitions;
+    }
+
+    public void setOffsetStoragePartitions(Integer offsetStoragePartitions) {
+        this.offsetStoragePartitions = offsetStoragePartitions;
+    }
+
+    public Integer getOffsetStorageReplicationFactor() {
+        return offsetStorageReplicationFactor;
+    }
+
+    public void setOffsetStorageReplicationFactor(
+            Integer offsetStorageReplicationFactor) {
+        this.offsetStorageReplicationFactor = offsetStorageReplicationFactor;
+    }
+
+    public String getOffsetStorageTopic() {
+        return offsetStorageTopic;
+    }
+
+    public void setOffsetStorageTopic(String offsetStorageTopic) {
+        this.offsetStorageTopic = offsetStorageTopic;
+    }
+
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getColumnBlacklist() {
+        return columnBlacklist;
+    }
+
+    public void setColumnBlacklist(String columnBlacklist) {
+        this.columnBlacklist = columnBlacklist;
+    }
+
+    public String getDatabaseDbname() {
+        return databaseDbname;
+    }
+
+    public void setDatabaseDbname(String databaseDbname) {
+        this.databaseDbname = databaseDbname;
+    }
+
+    public String getDatabaseHistory() {
+        return databaseHistory;
+    }
+
+    public void setDatabaseHistory(String databaseHistory) {
+        this.databaseHistory = databaseHistory;
+    }
+
+    public String getDatabaseHistoryFileFilename() {
+        return databaseHistoryFileFilename;
+    }
+
+    public void setDatabaseHistoryFileFilename(
+            String databaseHistoryFileFilename) {
+        this.databaseHistoryFileFilename = databaseHistoryFileFilename;
+    }
+
+    public String getDatabaseHistoryKafkaBootstrapServers() {
+        return databaseHistoryKafkaBootstrapServers;
+    }
+
+    public void setDatabaseHistoryKafkaBootstrapServers(
+            String databaseHistoryKafkaBootstrapServers) {
+        this.databaseHistoryKafkaBootstrapServers = databaseHistoryKafkaBootstrapServers;
+    }
+
+    public Integer getDatabaseHistoryKafkaRecoveryAttempts() {
+        return databaseHistoryKafkaRecoveryAttempts;
+    }
+
+    public void setDatabaseHistoryKafkaRecoveryAttempts(
+            Integer databaseHistoryKafkaRecoveryAttempts) {
+        this.databaseHistoryKafkaRecoveryAttempts = databaseHistoryKafkaRecoveryAttempts;
+    }
+
+    public Integer getDatabaseHistoryKafkaRecoveryPollIntervalMs() {
+        return databaseHistoryKafkaRecoveryPollIntervalMs;
+    }
+
+    public void setDatabaseHistoryKafkaRecoveryPollIntervalMs(
+            Integer databaseHistoryKafkaRecoveryPollIntervalMs) {
+        this.databaseHistoryKafkaRecoveryPollIntervalMs = databaseHistoryKafkaRecoveryPollIntervalMs;
+    }
+
+    public String getDatabaseHistoryKafkaTopic() {
+        return databaseHistoryKafkaTopic;
+    }
+
+    public void setDatabaseHistoryKafkaTopic(String databaseHistoryKafkaTopic) {
+        this.databaseHistoryKafkaTopic = databaseHistoryKafkaTopic;
+    }
+
+    public String getDatabaseHostname() {
+        return databaseHostname;
+    }
+
+    public void setDatabaseHostname(String databaseHostname) {
+        this.databaseHostname = databaseHostname;
+    }
+
+    public String getDatabasePassword() {
+        return databasePassword;
+    }
+
+    public void setDatabasePassword(String databasePassword) {
+        this.databasePassword = databasePassword;
+    }
+
+    public Integer getDatabasePort() {
+        return databasePort;
+    }
+
+    public void setDatabasePort(Integer databasePort) {
+        this.databasePort = databasePort;
+    }
+
+    public String getDatabaseServerName() {
+        return databaseServerName;
+    }
+
+    public void setDatabaseServerName(String databaseServerName) {
+        this.databaseServerName = databaseServerName;
+    }
+
+    public String getDatabaseServerTimezone() {
+        return databaseServerTimezone;
+    }
+
+    public void setDatabaseServerTimezone(String databaseServerTimezone) {
+        this.databaseServerTimezone = databaseServerTimezone;
+    }
+
+    public String getDatabaseUser() {
+        return databaseUser;
+    }
+
+    public void setDatabaseUser(String databaseUser) {
+        this.databaseUser = databaseUser;
+    }
+
+    public String getDecimalHandlingMode() {
+        return decimalHandlingMode;
+    }
+
+    public void setDecimalHandlingMode(String decimalHandlingMode) {
+        this.decimalHandlingMode = decimalHandlingMode;
+    }
+
+    public Integer getHeartbeatIntervalMs() {
+        return heartbeatIntervalMs;
+    }
+
+    public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
+        this.heartbeatIntervalMs = heartbeatIntervalMs;
+    }
+
+    public String getHeartbeatTopicsPrefix() {
+        return heartbeatTopicsPrefix;
+    }
+
+    public void setHeartbeatTopicsPrefix(String heartbeatTopicsPrefix) {
+        this.heartbeatTopicsPrefix = heartbeatTopicsPrefix;
+    }
+
+    public Integer getMaxBatchSize() {
+        return maxBatchSize;
+    }
+
+    public void setMaxBatchSize(Integer maxBatchSize) {
+        this.maxBatchSize = maxBatchSize;
+    }
+
+    public Integer getMaxQueueSize() {
+        return maxQueueSize;
+    }
+
+    public void setMaxQueueSize(Integer maxQueueSize) {
+        this.maxQueueSize = maxQueueSize;
+    }
+
+    public String getMessageKeyColumns() {
+        return messageKeyColumns;
+    }
+
+    public void setMessageKeyColumns(String messageKeyColumns) {
+        this.messageKeyColumns = messageKeyColumns;
+    }
+
+    public Long getPollIntervalMs() {
+        return pollIntervalMs;
+    }
+
+    public void setPollIntervalMs(Long pollIntervalMs) {
+        this.pollIntervalMs = pollIntervalMs;
+    }
+
+    public Long getSnapshotDelayMs() {
+        return snapshotDelayMs;
+    }
+
+    public void setSnapshotDelayMs(Long snapshotDelayMs) {
+        this.snapshotDelayMs = snapshotDelayMs;
+    }
+
+    public Integer getSnapshotFetchSize() {
+        return snapshotFetchSize;
+    }
+
+    public void setSnapshotFetchSize(Integer snapshotFetchSize) {
+        this.snapshotFetchSize = snapshotFetchSize;
+    }
+
+    public Long getSnapshotLockTimeoutMs() {
+        return snapshotLockTimeoutMs;
+    }
+
+    public void setSnapshotLockTimeoutMs(Long snapshotLockTimeoutMs) {
+        this.snapshotLockTimeoutMs = snapshotLockTimeoutMs;
+    }
+
+    public String getSnapshotMode() {
+        return snapshotMode;
+    }
+
+    public void setSnapshotMode(String snapshotMode) {
+        this.snapshotMode = snapshotMode;
+    }
+
+    public String getSnapshotSelectStatementOverrides() {
+        return snapshotSelectStatementOverrides;
+    }
+
+    public void setSnapshotSelectStatementOverrides(
+            String snapshotSelectStatementOverrides) {
+        this.snapshotSelectStatementOverrides = snapshotSelectStatementOverrides;
+    }
+
+    public String getSourceStructVersion() {
+        return sourceStructVersion;
+    }
+
+    public void setSourceStructVersion(String sourceStructVersion) {
+        this.sourceStructVersion = sourceStructVersion;
+    }
+
+    public String getTableBlacklist() {
+        return tableBlacklist;
+    }
+
+    public void setTableBlacklist(String tableBlacklist) {
+        this.tableBlacklist = tableBlacklist;
+    }
+
+    public Boolean getTableIgnoreBuiltin() {
+        return tableIgnoreBuiltin;
+    }
+
+    public void setTableIgnoreBuiltin(Boolean tableIgnoreBuiltin) {
+        this.tableIgnoreBuiltin = tableIgnoreBuiltin;
+    }
+
+    public String getTableWhitelist() {
+        return tableWhitelist;
+    }
+
+    public void setTableWhitelist(String tableWhitelist) {
+        this.tableWhitelist = tableWhitelist;
+    }
+
+    public String getTimePrecisionMode() {
+        return timePrecisionMode;
+    }
+
+    public void setTimePrecisionMode(String timePrecisionMode) {
+        this.timePrecisionMode = timePrecisionMode;
+    }
+
+    public Boolean getTombstonesOnDelete() {
+        return tombstonesOnDelete;
+    }
+
+    public void setTombstonesOnDelete(Boolean tombstonesOnDelete) {
+        this.tombstonesOnDelete = tombstonesOnDelete;
     }
 
     public static class SqlServerConnectorEmbeddedDebeziumConfigurationNestedConfiguration {

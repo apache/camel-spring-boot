@@ -20,6 +20,7 @@ import javax.annotation.Generated;
 import com.amazonaws.Protocol;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.EncryptionMaterials;
+import org.apache.camel.component.aws.s3.S3Component;
 import org.apache.camel.component.aws.s3.S3Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -46,6 +47,36 @@ public class S3ComponentConfiguration
      */
     private String accessKey;
     /**
+     * Reference to a com.amazonaws.services.s3.AmazonS3 in the registry. The
+     * option is a com.amazonaws.services.s3.AmazonS3 type.
+     */
+    private String amazonS3Client;
+    /**
+     * Setting the autocreation of the bucket
+     */
+    private Boolean autoCreateBucket = true;
+    /**
+     * Whether or not the S3 client should use path style access
+     */
+    private Boolean pathStyleAccess = false;
+    /**
+     * The policy for this queue to set in the
+     * com.amazonaws.services.s3.AmazonS3#setBucketPolicy() method.
+     */
+    private String policy;
+    /**
+     * To define a proxy host when instantiating the SQS client
+     */
+    private String proxyHost;
+    /**
+     * Specify a proxy port to be used inside the client definition.
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the S3 client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * The region where the bucket is located. This option is used in the
      * com.amazonaws.services.s3.model.CreateBucketRequest.
      */
@@ -55,6 +86,21 @@ public class S3ComponentConfiguration
      */
     private String secretKey;
     /**
+     * Set whether the S3 client should expect to load credentials on an EC2
+     * instance or to expect static credentials to be passed in.
+     */
+    private Boolean useIAMCredentials = false;
+    /**
+     * The encryption materials to use in case of Symmetric/Asymmetric client
+     * usage. The option is a
+     * com.amazonaws.services.s3.model.EncryptionMaterials type.
+     */
+    private String encryptionMaterials;
+    /**
+     * Define if encryption must be used or not
+     */
+    private Boolean useEncryption = false;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -63,6 +109,60 @@ public class S3ComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Delete objects from S3 after they have been retrieved. The delete is only
+     * performed if the Exchange is committed. If a rollback occurs, the object
+     * is not deleted. If this option is false, then the same objects will be
+     * retrieve over and over again on the polls. Therefore you need to use the
+     * Idempotent Consumer EIP in the route to filter out duplicates. You can
+     * filter using the S3Constants#BUCKET_NAME and S3Constants#KEY headers, or
+     * only the S3Constants#KEY header.
+     */
+    private Boolean deleteAfterRead = true;
+    /**
+     * The delimiter which is used in the
+     * com.amazonaws.services.s3.model.ListObjectsRequest to only consume
+     * objects we are interested in.
+     */
+    private String delimiter;
+    /**
+     * To get the object from the bucket with the given file name
+     */
+    private String fileName;
+    /**
+     * If it is true, the exchange body will be set to a stream to the contents
+     * of the file. If false, the headers will be set with the S3 object
+     * metadata, but the body will be null. This option is strongly related to
+     * autocloseBody option. In case of setting includeBody to true and
+     * autocloseBody to false, it will be up to the caller to close the S3Object
+     * stream. Setting autocloseBody to true, will close the S3Object stream
+     * automatically.
+     */
+    private Boolean includeBody = true;
+    /**
+     * The prefix which is used in the
+     * com.amazonaws.services.s3.model.ListObjectsRequest to only consume
+     * objects we are interested in.
+     */
+    private String prefix;
+    /**
+     * If this option is true and includeBody is true, then the S3Object.close()
+     * method will be called on exchange completion. This option is strongly
+     * related to includeBody option. In case of setting includeBody to true and
+     * autocloseBody to false, it will be up to the caller to close the S3Object
+     * stream. Setting autocloseBody to true, will close the S3Object stream
+     * automatically.
+     */
+    private Boolean autocloseBody = true;
+    /**
+     * Delete file object after the S3 file has been uploaded
+     */
+    private Boolean deleteAfterWrite = false;
+    /**
+     * Setting the key name for an element in the bucket through endpoint
+     * parameter
+     */
+    private String keyName;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -75,6 +175,38 @@ public class S3ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * If it is true, camel will upload the file with multi part format, the
+     * part size is decided by the option of partSize
+     */
+    private Boolean multiPartUpload = false;
+    /**
+     * The operation to do in case the user don't want to do only an upload
+     */
+    private S3Operations operation;
+    /**
+     * Setup the partSize which is used in multi part upload, the default size
+     * is 25M.
+     */
+    private Long partSize = 26214400L;
+    /**
+     * Sets the server-side encryption algorithm when encrypting the object
+     * using AWS-managed keys. For example use AES256.
+     */
+    private String serverSideEncryption;
+    /**
+     * The storage class to set in the
+     * com.amazonaws.services.s3.model.PutObjectRequest request.
+     */
+    private String storageClass;
+    /**
+     * Define the id of KMS key to use in case KMS is enabled
+     */
+    private String awsKMSKeyId;
+    /**
+     * Define if KMS must be used or not
+     */
+    private Boolean useAwsKMS = false;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -83,6 +215,26 @@ public class S3ComponentConfiguration
      * The AWS S3 default configuration
      */
     private S3ConfigurationNestedConfiguration configuration;
+    /**
+     * Define if Accelerate Mode enabled is true or false
+     */
+    private Boolean accelerateModeEnabled = false;
+    /**
+     * Define if disabled Chunked Encoding is true or false
+     */
+    private Boolean chunkedEncodingDisabled = false;
+    /**
+     * Define if Dualstack enabled is true or false
+     */
+    private Boolean dualstackEnabled = false;
+    /**
+     * Define if Force Global Bucket Access enabled is true or false
+     */
+    private Boolean forceGlobalBucketAccessEnabled = false;
+    /**
+     * Define if Payload Signing enabled is true or false
+     */
+    private Boolean payloadSigningEnabled = false;
 
     public String getAccessKey() {
         return accessKey;
@@ -90,6 +242,62 @@ public class S3ComponentConfiguration
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public String getAmazonS3Client() {
+        return amazonS3Client;
+    }
+
+    public void setAmazonS3Client(String amazonS3Client) {
+        this.amazonS3Client = amazonS3Client;
+    }
+
+    public Boolean getAutoCreateBucket() {
+        return autoCreateBucket;
+    }
+
+    public void setAutoCreateBucket(Boolean autoCreateBucket) {
+        this.autoCreateBucket = autoCreateBucket;
+    }
+
+    public Boolean getPathStyleAccess() {
+        return pathStyleAccess;
+    }
+
+    public void setPathStyleAccess(Boolean pathStyleAccess) {
+        this.pathStyleAccess = pathStyleAccess;
+    }
+
+    public String getPolicy() {
+        return policy;
+    }
+
+    public void setPolicy(String policy) {
+        this.policy = policy;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public String getRegion() {
@@ -108,6 +316,30 @@ public class S3ComponentConfiguration
         this.secretKey = secretKey;
     }
 
+    public Boolean getUseIAMCredentials() {
+        return useIAMCredentials;
+    }
+
+    public void setUseIAMCredentials(Boolean useIAMCredentials) {
+        this.useIAMCredentials = useIAMCredentials;
+    }
+
+    public String getEncryptionMaterials() {
+        return encryptionMaterials;
+    }
+
+    public void setEncryptionMaterials(String encryptionMaterials) {
+        this.encryptionMaterials = encryptionMaterials;
+    }
+
+    public Boolean getUseEncryption() {
+        return useEncryption;
+    }
+
+    public void setUseEncryption(Boolean useEncryption) {
+        this.useEncryption = useEncryption;
+    }
+
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
@@ -116,12 +348,132 @@ public class S3ComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
+    public Boolean getDeleteAfterRead() {
+        return deleteAfterRead;
+    }
+
+    public void setDeleteAfterRead(Boolean deleteAfterRead) {
+        this.deleteAfterRead = deleteAfterRead;
+    }
+
+    public String getDelimiter() {
+        return delimiter;
+    }
+
+    public void setDelimiter(String delimiter) {
+        this.delimiter = delimiter;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public Boolean getIncludeBody() {
+        return includeBody;
+    }
+
+    public void setIncludeBody(Boolean includeBody) {
+        this.includeBody = includeBody;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public Boolean getAutocloseBody() {
+        return autocloseBody;
+    }
+
+    public void setAutocloseBody(Boolean autocloseBody) {
+        this.autocloseBody = autocloseBody;
+    }
+
+    public Boolean getDeleteAfterWrite() {
+        return deleteAfterWrite;
+    }
+
+    public void setDeleteAfterWrite(Boolean deleteAfterWrite) {
+        this.deleteAfterWrite = deleteAfterWrite;
+    }
+
+    public String getKeyName() {
+        return keyName;
+    }
+
+    public void setKeyName(String keyName) {
+        this.keyName = keyName;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getMultiPartUpload() {
+        return multiPartUpload;
+    }
+
+    public void setMultiPartUpload(Boolean multiPartUpload) {
+        this.multiPartUpload = multiPartUpload;
+    }
+
+    public S3Operations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(S3Operations operation) {
+        this.operation = operation;
+    }
+
+    public Long getPartSize() {
+        return partSize;
+    }
+
+    public void setPartSize(Long partSize) {
+        this.partSize = partSize;
+    }
+
+    public String getServerSideEncryption() {
+        return serverSideEncryption;
+    }
+
+    public void setServerSideEncryption(String serverSideEncryption) {
+        this.serverSideEncryption = serverSideEncryption;
+    }
+
+    public String getStorageClass() {
+        return storageClass;
+    }
+
+    public void setStorageClass(String storageClass) {
+        this.storageClass = storageClass;
+    }
+
+    public String getAwsKMSKeyId() {
+        return awsKMSKeyId;
+    }
+
+    public void setAwsKMSKeyId(String awsKMSKeyId) {
+        this.awsKMSKeyId = awsKMSKeyId;
+    }
+
+    public Boolean getUseAwsKMS() {
+        return useAwsKMS;
+    }
+
+    public void setUseAwsKMS(Boolean useAwsKMS) {
+        this.useAwsKMS = useAwsKMS;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -139,6 +491,47 @@ public class S3ComponentConfiguration
     public void setConfiguration(
             S3ConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public Boolean getAccelerateModeEnabled() {
+        return accelerateModeEnabled;
+    }
+
+    public void setAccelerateModeEnabled(Boolean accelerateModeEnabled) {
+        this.accelerateModeEnabled = accelerateModeEnabled;
+    }
+
+    public Boolean getChunkedEncodingDisabled() {
+        return chunkedEncodingDisabled;
+    }
+
+    public void setChunkedEncodingDisabled(Boolean chunkedEncodingDisabled) {
+        this.chunkedEncodingDisabled = chunkedEncodingDisabled;
+    }
+
+    public Boolean getDualstackEnabled() {
+        return dualstackEnabled;
+    }
+
+    public void setDualstackEnabled(Boolean dualstackEnabled) {
+        this.dualstackEnabled = dualstackEnabled;
+    }
+
+    public Boolean getForceGlobalBucketAccessEnabled() {
+        return forceGlobalBucketAccessEnabled;
+    }
+
+    public void setForceGlobalBucketAccessEnabled(
+            Boolean forceGlobalBucketAccessEnabled) {
+        this.forceGlobalBucketAccessEnabled = forceGlobalBucketAccessEnabled;
+    }
+
+    public Boolean getPayloadSigningEnabled() {
+        return payloadSigningEnabled;
+    }
+
+    public void setPayloadSigningEnabled(Boolean payloadSigningEnabled) {
+        this.payloadSigningEnabled = payloadSigningEnabled;
     }
 
     public static class S3ConfigurationNestedConfiguration {

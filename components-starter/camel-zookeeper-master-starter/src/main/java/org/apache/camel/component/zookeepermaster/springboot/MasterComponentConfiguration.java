@@ -47,11 +47,6 @@ public class MasterComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
-     * To use a custom ContainerIdFactory for creating container ids. The option
-     * is a org.apache.camel.component.zookeepermaster.ContainerIdFactory type.
-     */
-    private String containerIdFactory;
-    /**
      * Timeout in millis to use when connecting to the zookeeper ensemble
      */
     private Integer maximumConnectionTimeout = 10000;
@@ -71,6 +66,11 @@ public class MasterComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * To use a custom ContainerIdFactory for creating container ids. The option
+     * is a org.apache.camel.component.zookeepermaster.ContainerIdFactory type.
+     */
+    private String containerIdFactory;
+    /**
      * To use a custom configured CuratorFramework as connection to zookeeper
      * ensemble. The option is a org.apache.curator.framework.CuratorFramework
      * type.
@@ -87,14 +87,6 @@ public class MasterComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
-    }
-
-    public String getContainerIdFactory() {
-        return containerIdFactory;
-    }
-
-    public void setContainerIdFactory(String containerIdFactory) {
-        this.containerIdFactory = containerIdFactory;
     }
 
     public Integer getMaximumConnectionTimeout() {
@@ -127,6 +119,14 @@ public class MasterComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getContainerIdFactory() {
+        return containerIdFactory;
+    }
+
+    public void setContainerIdFactory(String containerIdFactory) {
+        this.containerIdFactory = containerIdFactory;
     }
 
     public String getCurator() {

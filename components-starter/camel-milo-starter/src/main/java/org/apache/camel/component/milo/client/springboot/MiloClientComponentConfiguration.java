@@ -39,25 +39,21 @@ public class MiloClientComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Default application name
+     * A virtual client id to force the creation of a new connection instance
      */
-    private String applicationName;
+    private String clientId;
     /**
-     * Default application URI
+     * All default options for client configurations
      */
-    private String applicationUri;
+    private MiloClientConfigurationNestedConfiguration configuration;
     /**
-     * All default options for client
+     * A suffix for endpoint URI when discovering
      */
-    private MiloClientConfigurationNestedConfiguration defaultConfiguration;
+    private String discoveryEndpointSuffix;
     /**
-     * Default product URI
+     * An alternative discovery URI
      */
-    private String productUri;
-    /**
-     * Default reconnect timeout
-     */
-    private Long reconnectTimeout;
+    private String discoveryEndpointUri;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -83,46 +79,104 @@ public class MiloClientComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+    /**
+     * A set of allowed security policy URIs. Default is to accept all and use
+     * the highest.
+     */
+    private String allowedSecurityPolicies;
+    /**
+     * The application name
+     */
+    private String applicationName = "Apache Camel adapter for Eclipse Milo";
+    /**
+     * The application URI
+     */
+    private String applicationUri = "http://camel.apache.org/EclipseMilo/Client";
+    /**
+     * Channel lifetime in milliseconds
+     */
+    private Long channelLifetime;
+    /**
+     * The name of the key in the keystore file
+     */
+    private String keyAlias;
+    /**
+     * The key password
+     */
+    private String keyPassword;
+    /**
+     * The keystore password
+     */
+    private String keyStorePassword;
+    /**
+     * The key store type
+     */
+    private String keyStoreType;
+    /**
+     * The URL where the key should be loaded from
+     */
+    private String keyStoreUrl;
+    /**
+     * The maximum number of pending publish requests
+     */
+    private Long maxPendingPublishRequests;
+    /**
+     * The maximum number of bytes a response message may have
+     */
+    private Long maxResponseMessageSize;
+    /**
+     * Override the server reported endpoint host with the host from the
+     * endpoint URI.
+     */
+    private Boolean overrideHost = false;
+    /**
+     * The product URI
+     */
+    private String productUri = "http://camel.apache.org/EclipseMilo";
+    /**
+     * Request timeout in milliseconds
+     */
+    private Long requestTimeout;
+    /**
+     * Session name
+     */
+    private String sessionName;
+    /**
+     * Session timeout in milliseconds
+     */
+    private Long sessionTimeout;
 
-    public String getApplicationName() {
-        return applicationName;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setApplicationName(String applicationName) {
-        this.applicationName = applicationName;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public String getApplicationUri() {
-        return applicationUri;
+    public MiloClientConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
     }
 
-    public void setApplicationUri(String applicationUri) {
-        this.applicationUri = applicationUri;
+    public void setConfiguration(
+            MiloClientConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
-    public MiloClientConfigurationNestedConfiguration getDefaultConfiguration() {
-        return defaultConfiguration;
+    public String getDiscoveryEndpointSuffix() {
+        return discoveryEndpointSuffix;
     }
 
-    public void setDefaultConfiguration(
-            MiloClientConfigurationNestedConfiguration defaultConfiguration) {
-        this.defaultConfiguration = defaultConfiguration;
+    public void setDiscoveryEndpointSuffix(String discoveryEndpointSuffix) {
+        this.discoveryEndpointSuffix = discoveryEndpointSuffix;
     }
 
-    public String getProductUri() {
-        return productUri;
+    public String getDiscoveryEndpointUri() {
+        return discoveryEndpointUri;
     }
 
-    public void setProductUri(String productUri) {
-        this.productUri = productUri;
-    }
-
-    public Long getReconnectTimeout() {
-        return reconnectTimeout;
-    }
-
-    public void setReconnectTimeout(Long reconnectTimeout) {
-        this.reconnectTimeout = reconnectTimeout;
+    public void setDiscoveryEndpointUri(String discoveryEndpointUri) {
+        this.discoveryEndpointUri = discoveryEndpointUri;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -147,6 +201,134 @@ public class MiloClientComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getAllowedSecurityPolicies() {
+        return allowedSecurityPolicies;
+    }
+
+    public void setAllowedSecurityPolicies(String allowedSecurityPolicies) {
+        this.allowedSecurityPolicies = allowedSecurityPolicies;
+    }
+
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
+    public String getApplicationUri() {
+        return applicationUri;
+    }
+
+    public void setApplicationUri(String applicationUri) {
+        this.applicationUri = applicationUri;
+    }
+
+    public Long getChannelLifetime() {
+        return channelLifetime;
+    }
+
+    public void setChannelLifetime(Long channelLifetime) {
+        this.channelLifetime = channelLifetime;
+    }
+
+    public String getKeyAlias() {
+        return keyAlias;
+    }
+
+    public void setKeyAlias(String keyAlias) {
+        this.keyAlias = keyAlias;
+    }
+
+    public String getKeyPassword() {
+        return keyPassword;
+    }
+
+    public void setKeyPassword(String keyPassword) {
+        this.keyPassword = keyPassword;
+    }
+
+    public String getKeyStorePassword() {
+        return keyStorePassword;
+    }
+
+    public void setKeyStorePassword(String keyStorePassword) {
+        this.keyStorePassword = keyStorePassword;
+    }
+
+    public String getKeyStoreType() {
+        return keyStoreType;
+    }
+
+    public void setKeyStoreType(String keyStoreType) {
+        this.keyStoreType = keyStoreType;
+    }
+
+    public String getKeyStoreUrl() {
+        return keyStoreUrl;
+    }
+
+    public void setKeyStoreUrl(String keyStoreUrl) {
+        this.keyStoreUrl = keyStoreUrl;
+    }
+
+    public Long getMaxPendingPublishRequests() {
+        return maxPendingPublishRequests;
+    }
+
+    public void setMaxPendingPublishRequests(Long maxPendingPublishRequests) {
+        this.maxPendingPublishRequests = maxPendingPublishRequests;
+    }
+
+    public Long getMaxResponseMessageSize() {
+        return maxResponseMessageSize;
+    }
+
+    public void setMaxResponseMessageSize(Long maxResponseMessageSize) {
+        this.maxResponseMessageSize = maxResponseMessageSize;
+    }
+
+    public Boolean getOverrideHost() {
+        return overrideHost;
+    }
+
+    public void setOverrideHost(Boolean overrideHost) {
+        this.overrideHost = overrideHost;
+    }
+
+    public String getProductUri() {
+        return productUri;
+    }
+
+    public void setProductUri(String productUri) {
+        this.productUri = productUri;
+    }
+
+    public Long getRequestTimeout() {
+        return requestTimeout;
+    }
+
+    public void setRequestTimeout(Long requestTimeout) {
+        this.requestTimeout = requestTimeout;
+    }
+
+    public String getSessionName() {
+        return sessionName;
+    }
+
+    public void setSessionName(String sessionName) {
+        this.sessionName = sessionName;
+    }
+
+    public Long getSessionTimeout() {
+        return sessionTimeout;
+    }
+
+    public void setSessionTimeout(Long sessionTimeout) {
+        this.sessionTimeout = sessionTimeout;
     }
 
     public static class MiloClientConfigurationNestedConfiguration {

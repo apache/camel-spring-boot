@@ -17,7 +17,7 @@ When using webhook with Spring Boot make sure to use the following Maven depende
 ----
 
 
-The component supports 9 options, which are listed below.
+The component supports 14 options, which are listed below.
 
 
 
@@ -33,5 +33,10 @@ The component supports 9 options, which are listed below.
 | *camel.component.webhook.configuration.webhook-external-url* | The URL of the current service as seen by the webhook provider |  | String
 | *camel.component.webhook.configuration.webhook-path* | The path where the webhook endpoint will be exposed (relative to basePath, if any) |  | String
 | *camel.component.webhook.enabled* | Whether to enable auto configuration of the webhook component. This is enabled by default. |  | Boolean
+| *camel.component.webhook.webhook-auto-register* | Automatically register the webhook at startup and unregister it on shutdown. | true | Boolean
+| *camel.component.webhook.webhook-base-path* | The first (base) path element where the webhook will be exposed. It's a good practice to set it to a random string, so that it cannot be guessed by unauthorized parties. |  | String
+| *camel.component.webhook.webhook-component-name* | The Camel Rest component to use for the REST transport, such as netty-http. |  | String
+| *camel.component.webhook.webhook-external-url* | The URL of the current service as seen by the webhook provider |  | String
+| *camel.component.webhook.webhook-path* | The path where the webhook endpoint will be exposed (relative to basePath, if any) |  | String
 |===
 // spring-boot-auto-configure options: END

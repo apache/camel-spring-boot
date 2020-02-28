@@ -39,6 +39,33 @@ public class AvroComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Avro protocol to use. The option is a org.apache.avro.Protocol type.
+     */
+    private String protocol;
+    /**
+     * Avro protocol to use defined by the FQN class name
+     */
+    private String protocolClassName;
+    /**
+     * Avro protocol location
+     */
+    private String protocolLocation;
+    /**
+     * If protocol object provided is reflection protocol. Should be used only
+     * with protocol parameter because for protocolClassName protocol type will
+     * be auto detected
+     */
+    private Boolean reflectionProtocol = false;
+    /**
+     * If true, consumer parameter won't be wrapped into array. Will fail if
+     * protocol specifies more then 1 parameter for the message
+     */
+    private Boolean singleParameter = false;
+    /**
+     * Authority to use (username and password)
+     */
+    private String uriAuthority;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -67,6 +94,54 @@ public class AvroComponentConfiguration
      * To use a shared AvroConfiguration to configure options once
      */
     private AvroConfigurationNestedConfiguration configuration;
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    public String getProtocolClassName() {
+        return protocolClassName;
+    }
+
+    public void setProtocolClassName(String protocolClassName) {
+        this.protocolClassName = protocolClassName;
+    }
+
+    public String getProtocolLocation() {
+        return protocolLocation;
+    }
+
+    public void setProtocolLocation(String protocolLocation) {
+        this.protocolLocation = protocolLocation;
+    }
+
+    public Boolean getReflectionProtocol() {
+        return reflectionProtocol;
+    }
+
+    public void setReflectionProtocol(Boolean reflectionProtocol) {
+        this.reflectionProtocol = reflectionProtocol;
+    }
+
+    public Boolean getSingleParameter() {
+        return singleParameter;
+    }
+
+    public void setSingleParameter(Boolean singleParameter) {
+        this.singleParameter = singleParameter;
+    }
+
+    public String getUriAuthority() {
+        return uriAuthority;
+    }
+
+    public void setUriAuthority(String uriAuthority) {
+        this.uriAuthority = uriAuthority;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;

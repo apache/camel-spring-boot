@@ -17,6 +17,7 @@
 package org.apache.camel.component.aws2.msk.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.aws2.msk.MSK2Component;
 import org.apache.camel.component.aws2.msk.MSK2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -55,6 +56,27 @@ public class MSK2ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * To use a existing configured AWS MSK as client. The option is a
+     * software.amazon.awssdk.services.kafka.KafkaClient type.
+     */
+    private String mskClient;
+    /**
+     * The operation to perform
+     */
+    private MSK2Operations operation;
+    /**
+     * To define a proxy host when instantiating the MSK client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the MSK client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the MSK client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * The region in which MSK client needs to work
      */
     private String region;
@@ -86,6 +108,46 @@ public class MSK2ComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public String getMskClient() {
+        return mskClient;
+    }
+
+    public void setMskClient(String mskClient) {
+        this.mskClient = mskClient;
+    }
+
+    public MSK2Operations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(MSK2Operations operation) {
+        this.operation = operation;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public String getRegion() {

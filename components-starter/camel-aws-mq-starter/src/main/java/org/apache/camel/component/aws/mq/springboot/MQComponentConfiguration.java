@@ -19,6 +19,7 @@ package org.apache.camel.component.aws.mq.springboot;
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
 import com.amazonaws.services.mq.AmazonMQ;
+import org.apache.camel.component.aws.mq.MQComponent;
 import org.apache.camel.component.aws.mq.MQOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -44,6 +45,11 @@ public class MQComponentConfiguration
      */
     private String accessKey;
     /**
+     * To use a existing configured AmazonMQClient as client. The option is a
+     * com.amazonaws.services.mq.AmazonMQ type.
+     */
+    private String amazonMqClient;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -54,6 +60,22 @@ public class MQComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * The operation to perform. It can be listBrokers,createBroker,deleteBroker
+     */
+    private MQOperations operation;
+    /**
+     * To define a proxy host when instantiating the MQ client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the MQ client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the MQ client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
     /**
      * The region in which MQ client needs to work
      */
@@ -80,12 +102,52 @@ public class MQComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getAmazonMqClient() {
+        return amazonMqClient;
+    }
+
+    public void setAmazonMqClient(String amazonMqClient) {
+        this.amazonMqClient = amazonMqClient;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public MQOperations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(MQOperations operation) {
+        this.operation = operation;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public String getRegion() {

@@ -17,7 +17,7 @@ When using consul with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 92 options, which are listed below.
+The component supports 107 options, which are listed below.
 
 
 
@@ -25,7 +25,9 @@ The component supports 92 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.consul.acl-token* | Sets the ACL token to be used with Consul |  | String
+| *camel.component.consul.action* | The default action. Can be overridden by CamelConsulAction |  | String
 | *camel.component.consul.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.consul.block-seconds* | The second to wait for a watch event, default 10 seconds | 10 | Integer
 | *camel.component.consul.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.consul.cluster.service.acl-token* |  |  | String
 | *camel.component.consul.cluster.service.attributes* | Custom service attributes. |  | Map
@@ -73,15 +75,25 @@ The component supports 92 options, which are listed below.
 | *camel.component.consul.configuration.user-name* | Sets the username to be used for basic authentication |  | String
 | *camel.component.consul.configuration.value-as-string* | Default to transform values retrieved from Consul i.e. on KV endpoint to string. | false | Boolean
 | *camel.component.consul.configuration.write-timeout-millis* | Write timeout for OkHttpClient |  | Long
+| *camel.component.consul.connect-timeout-millis* | Connect timeout for OkHttpClient |  | Long
+| *camel.component.consul.consistency-mode* | The consistencyMode used for queries, default ConsistencyMode.DEFAULT |  | ConsistencyMode
+| *camel.component.consul.consul-client* | Reference to a com.orbitz.consul.Consul in the registry. The option is a com.orbitz.consul.Consul type. |  | String
 | *camel.component.consul.datacenter* | The data center |  | String
 | *camel.component.consul.enabled* | Whether to enable auto configuration of the consul component. This is enabled by default. |  | Boolean
+| *camel.component.consul.first-index* | The first index for watch for, default 0. The option is a java.math.BigInteger type. |  | String
 | *camel.component.consul.health.check.repository.checks* | Define the checks to include. |  | List
 | *camel.component.consul.health.check.repository.configurations* | Health check configurations. |  | Map
 | *camel.component.consul.health.check.repository.enabled* |  |  | Boolean
 | *camel.component.consul.health.check.repository.failure-threshold* |  |  | Integer
 | *camel.component.consul.health.check.repository.interval* |  |  | String
+| *camel.component.consul.key* | The default key. Can be overridden by CamelConsulKey |  | String
 | *camel.component.consul.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.consul.near-node* | The near node to use for queries. |  | String
+| *camel.component.consul.node-meta* | The note meta-data to use for queries. |  | List
 | *camel.component.consul.password* | Sets the password to be used for basic authentication |  | String
+| *camel.component.consul.ping-instance* | Configure if the AgentClient should attempt a ping before returning the Consul instance | true | Boolean
+| *camel.component.consul.read-timeout-millis* | Read timeout for OkHttpClient |  | Long
+| *camel.component.consul.recursive* | Recursively watch, default false | false | Boolean
 | *camel.component.consul.service-registry.acl-token* |  |  | String
 | *camel.component.consul.service-registry.attributes* | Custom service attributes. |  | Map
 | *camel.component.consul.service-registry.block-seconds* |  |  | Integer
@@ -110,12 +122,14 @@ The component supports 92 options, which are listed below.
 | *camel.component.consul.service-registry.user-name* |  |  | String
 | *camel.component.consul.service-registry.write-timeout-millis* |  |  | Long
 | *camel.component.consul.ssl-context-parameters* | SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
+| *camel.component.consul.tags* | Set tags. You can separate multiple tags by comma. |  | String
 | *camel.component.consul.url* | The Consul agent URL |  | String
 | *camel.component.consul.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 | *camel.component.consul.user-name* | Sets the username to be used for basic authentication |  | String
+| *camel.component.consul.value-as-string* | Default to transform values retrieved from Consul i.e. on KV endpoint to string. | false | Boolean
+| *camel.component.consul.write-timeout-millis* | Write timeout for OkHttpClient |  | Long
 | *camel.component.consul.cluster.service.dc* | *Deprecated*  |  | String
 | *camel.component.consul.configuration.dc* | *Deprecated*  |  | String
 | *camel.component.consul.service-registry.dc* | *Deprecated*  |  | String
 |===
-
 // spring-boot-auto-configure options: END

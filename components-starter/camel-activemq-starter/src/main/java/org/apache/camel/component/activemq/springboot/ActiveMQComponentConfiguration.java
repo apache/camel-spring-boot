@@ -19,7 +19,10 @@ package org.apache.camel.component.activemq.springboot;
 import javax.annotation.Generated;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.component.activemq.ActiveMQComponent;
+import org.apache.camel.component.jms.ConsumerType;
 import org.apache.camel.component.jms.DefaultTaskExecutorType;
+import org.apache.camel.component.jms.JmsKeyFormatStrategy;
+import org.apache.camel.component.jms.JmsMessageType;
 import org.apache.camel.component.jms.ReplyToType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -64,10 +67,28 @@ public class ActiveMQComponentConfiguration
      */
     private String connectionFactory;
     /**
+     * Specifies whether Camel ignores the JMSReplyTo header in messages. If
+     * true, Camel does not send a reply back to the destination specified in
+     * the JMSReplyTo header. You can use this option if you want Camel to
+     * consume from a route and you do not want Camel to automatically send back
+     * a reply message because another component in your code handles the reply
+     * message. You can also use this option if you want to use Camel as a proxy
+     * between different message brokers and you want to route message from one
+     * system to another.
+     */
+    private Boolean disableReplyTo = false;
+    /**
      * The durable subscriber name for specifying durable topic subscriptions.
      * The clientId option must be configured as well.
      */
     private String durableSubscriptionName;
+    /**
+     * Allows you to force the use of a specific javax.jms.Message
+     * implementation for sending JMS messages. Possible values are: Bytes, Map,
+     * Object, Stream, Text. By default, Camel would determine which JMS message
+     * type to use from the In body type. This option allows you to specify it.
+     */
+    private JmsMessageType jmsMessageType;
     /**
      * Specifies whether to test the connection on startup. This ensures that
      * when Camel starts that all the JMS consumers have a valid connection to
@@ -101,12 +122,6 @@ public class ActiveMQComponentConfiguration
      * false and a pooled connection is used by default.
      */
     private Boolean useSingleConnection = false;
-    /**
-     * The JMS acknowledgement mode defined as an Integer. Allows you to set
-     * vendor-specific extensions to the acknowledgment mode. For the regular
-     * modes, it is preferable to use the acknowledgementModeName instead.
-     */
-    private Integer acknowledgementMode;
     /**
      * The JMS acknowledgement name, which is one of: SESSION_TRANSACTED,
      * CLIENT_ACKNOWLEDGE, AUTO_ACKNOWLEDGE, DUPS_OK_ACKNOWLEDGE
@@ -167,6 +182,19 @@ public class ActiveMQComponentConfiguration
      */
     private Integer maxConcurrentConsumers;
     /**
+     * Provides an explicit ReplyTo destination, which overrides any incoming
+     * value of Message.getJMSReplyTo().
+     */
+    private String replyTo;
+    /**
+     * Specifies whether to use persistent delivery by default for replies.
+     */
+    private Boolean replyToDeliveryPersistent = true;
+    /**
+     * Sets the JMS selector to use
+     */
+    private String selector;
+    /**
      * Set whether to make the subscription durable. The durable subscription
      * name to be used can be specified through the subscriptionName property.
      * Default is false. Set this to true to register a durable subscription,
@@ -221,6 +249,17 @@ public class ActiveMQComponentConfiguration
      */
     private Boolean allowReplyManagerQuickStop = false;
     /**
+     * The consumer type to use, which can be one of: Simple, Default, or
+     * Custom. The consumer type determines which Spring JMS listener to use.
+     * Default will use
+     * org.springframework.jms.listener.DefaultMessageListenerContainer, Simple
+     * will use org.springframework.jms.listener.SimpleMessageListenerContainer.
+     * When Custom is specified, the MessageListenerContainerFactory defined by
+     * the messageListenerContainerFactory option will determine what
+     * org.springframework.jms.listener.AbstractMessageListenerContainer to use.
+     */
+    private ConsumerType consumerType = ConsumerType.Default;
+    /**
      * Specifies what default TaskExecutor type to use in the
      * DefaultMessageListenerContainer, for both consumer endpoints and the
      * ReplyTo consumer of producer endpoints. Possible values: SimpleAsync
@@ -234,10 +273,11 @@ public class ActiveMQComponentConfiguration
      */
     private DefaultTaskExecutorType defaultTaskExecutorType;
     /**
-     * Enables eager loading of JMS properties as soon as a message is loaded
-     * which generally is inefficient as the JMS properties may not be required
-     * but sometimes can catch early any issues with the underlying JMS provider
-     * and the use of JMS properties. See also the option eagerLoadingOfBody.
+     * Enables eager loading of JMS properties and payload as soon as a message
+     * is loaded which generally is inefficient as the JMS properties may not be
+     * required but sometimes can catch early any issues with the underlying JMS
+     * provider and the use of JMS properties. See also the option
+     * eagerPoisonBody.
      */
     private Boolean eagerLoadingOfProperties = false;
     /**
@@ -255,10 +295,21 @@ public class ActiveMQComponentConfiguration
      */
     private Boolean exposeListenerSession = false;
     /**
+     * Whether a JMS consumer is allowed to send a reply message to the same
+     * destination that the consumer is using to consume from. This prevents an
+     * endless loop by consuming and sending back the same message to itself.
+     */
+    private Boolean replyToSameDestinationAllowed = false;
+    /**
      * Allows you to specify a custom task executor for consuming messages. The
      * option is a org.springframework.core.task.TaskExecutor type.
      */
     private String taskExecutor;
+    /**
+     * Sets delivery delay to use for send calls for JMS. This option requires
+     * JMS 2.0 compliant broker.
+     */
+    private Long deliveryDelay = -1L;
     /**
      * Specifies the delivery mode to be used. Possibles values are those
      * defined by javax.jms.DeliveryMode. NON_PERSISTENT = 1 and PERSISTENT = 2.
@@ -278,8 +329,8 @@ public class ActiveMQComponentConfiguration
      */
     private Boolean explicitQosEnabled = false;
     /**
-     * Sets whether date headers should be formatted according to the ISO 8601
-     * standard.
+     * Sets whether JMS date properties should be formatted according to the ISO
+     * 8601 standard.
      */
     private Boolean formatDateHeadersToIso8601 = false;
     /**
@@ -311,11 +362,6 @@ public class ActiveMQComponentConfiguration
      */
     private Integer priority = 4;
     /**
-     * Specifies the maximum number of concurrent consumers for continue routing
-     * when timeout occurred when using request/reply over JMS.
-     */
-    private Integer replyOnTimeoutToMaxConcurrentConsumers = 1;
-    /**
      * Specifies the default number of concurrent consumers when doing
      * request/reply over JMS. See also the maxMessagesPerTask option to control
      * dynamic scaling up/down of threads.
@@ -327,6 +373,18 @@ public class ActiveMQComponentConfiguration
      * dynamic scaling up/down of threads.
      */
     private Integer replyToMaxConcurrentConsumers;
+    /**
+     * Specifies the maximum number of concurrent consumers for continue routing
+     * when timeout occurred when using request/reply over JMS.
+     */
+    private Integer replyToOnTimeoutMaxConcurrentConsumers = 1;
+    /**
+     * Provides an explicit ReplyTo destination in the JMS message, which
+     * overrides the setting of replyTo. It is useful if you want to forward the
+     * message to a remote Queue and receive the reply message from the ReplyTo
+     * destination.
+     */
+    private String replyToOverride;
     /**
      * Allows for explicitly specifying which kind of strategy to use for
      * replyTo queues when doing request/reply over JMS. Possible values are:
@@ -371,18 +429,27 @@ public class ActiveMQComponentConfiguration
      * is passed to the producer for sending. Copying the message is needed in
      * some situations, such as when a replyToDestinationSelectorName is set
      * (incidentally, Camel will set the alwaysCopyMessage option to true, if a
-     * replyToDestinationSelectorName is set).
+     * replyToDestinationSelectorName is set)
      */
     private Boolean alwaysCopyMessage = false;
     /**
-     * Use this JMS property to correlate messages in InOut exchange pattern
-     * (request-reply) instead of JMSCorrelationID property. This allows you to
-     * exchange messages with systems that do not correlate messages using
-     * JMSCorrelationID JMS property. If used JMSCorrelationID will not be used
-     * or set by Camel. The value of here named property will be generated if
-     * not supplied in the header of the message under the same name.
+     * When using InOut exchange pattern use this JMS property instead of
+     * JMSCorrelationID JMS property to correlate messages. If set messages will
+     * be correlated solely on the value of this property JMSCorrelationID
+     * property will be ignored and not set by Camel.
      */
     private String correlationProperty;
+    /**
+     * Use this option to force disabling time to live. For example when you do
+     * request/reply over JMS, then Camel will by default use the requestTimeout
+     * value as time to live on the message being sent. The problem is that the
+     * sender and receiver systems have to have their clocks synchronized, so
+     * they are in sync. This is not always so easy to archive. So you can use
+     * disableTimeToLive=true to not set a time to live value on the sent
+     * message. Then the message will not expire on the receiver system. See
+     * below in section About time to live for more details.
+     */
+    private Boolean disableTimeToLive = false;
     /**
      * When using mapJmsMessage=false Camel will create a new JMS message to
      * send to a new JMS destination if you touch the headers (get or set)
@@ -409,6 +476,12 @@ public class ActiveMQComponentConfiguration
      */
     private String replyToCacheLevelName;
     /**
+     * Sets the JMS Selector using the fixed name to be used so you can filter
+     * out your own replies from the others when using a shared queue (that is,
+     * if you are not using a temporary reply queue).
+     */
+    private String replyToDestinationSelectorName;
+    /**
      * Sets whether StreamMessage type is enabled or not. Message payloads of
      * streaming kind such as files, InputStream, etc will either by sent as
      * BytesMessage or StreamMessage. This option controls which kind will be
@@ -432,6 +505,13 @@ public class ActiveMQComponentConfiguration
      * default.
      */
     private Boolean allowAutoWiredDestinationResolver = false;
+    /**
+     * Controls whether or not to include serialized headers. Applies only when
+     * transferExchange is true. This requires that the objects are
+     * serializable. Camel will exclude any non-serializable objects and log it
+     * at WARN level.
+     */
+    private Boolean allowSerializedHeaders = false;
     /**
      * Whether to startup the JmsConsumer message listener asynchronously, when
      * starting a route. For example if a JmsConsumer cannot get a connection to
@@ -508,18 +588,9 @@ public class ActiveMQComponentConfiguration
      * key as is. Can be used for JMS brokers which do not care whether JMS
      * header keys contain illegal characters. You can provide your own
      * implementation of the org.apache.camel.component.jms.JmsKeyFormatStrategy
-     * and refer to it using the # notation. The option is a
-     * org.apache.camel.component.jms.JmsKeyFormatStrategy type.
+     * and refer to it using the # notation.
      */
-    private String jmsKeyFormatStrategy;
-    /**
-     * Allows you to use your own implementation of the
-     * org.springframework.jms.core.JmsOperations interface. Camel uses
-     * JmsTemplate as default. Can be used for testing purpose, but not used
-     * much as stated in the spring API docs. The option is a
-     * org.springframework.jms.core.JmsOperations type.
-     */
-    private String jmsOperations;
+    private JmsKeyFormatStrategy jmsKeyFormatStrategy;
     /**
      * Specifies whether Camel should auto map the received JMS message to a
      * suited payload type, such as javax.jms.TextMessage to a String etc.
@@ -553,6 +624,14 @@ public class ActiveMQComponentConfiguration
      * the hint, the message ID must be set to its normal unique value.
      */
     private Boolean messageIdEnabled = true;
+    /**
+     * Registry ID of the MessageListenerContainerFactory used to determine what
+     * org.springframework.jms.listener.AbstractMessageListenerContainer to use
+     * to consume messages. Setting this will automatically set consumerType to
+     * Custom. The option is a
+     * org.apache.camel.component.jms.MessageListenerContainerFactory type.
+     */
+    private String messageListenerContainerFactory;
     /**
      * Specifies whether timestamps should be enabled by default on sending
      * messages. This is just an hint to the JMS broker. If the JMS provider
@@ -717,12 +796,28 @@ public class ActiveMQComponentConfiguration
         this.connectionFactory = connectionFactory;
     }
 
+    public Boolean getDisableReplyTo() {
+        return disableReplyTo;
+    }
+
+    public void setDisableReplyTo(Boolean disableReplyTo) {
+        this.disableReplyTo = disableReplyTo;
+    }
+
     public String getDurableSubscriptionName() {
         return durableSubscriptionName;
     }
 
     public void setDurableSubscriptionName(String durableSubscriptionName) {
         this.durableSubscriptionName = durableSubscriptionName;
+    }
+
+    public JmsMessageType getJmsMessageType() {
+        return jmsMessageType;
+    }
+
+    public void setJmsMessageType(JmsMessageType jmsMessageType) {
+        this.jmsMessageType = jmsMessageType;
     }
 
     public Boolean getTestConnectionOnStartup() {
@@ -755,14 +850,6 @@ public class ActiveMQComponentConfiguration
 
     public void setUseSingleConnection(Boolean useSingleConnection) {
         this.useSingleConnection = useSingleConnection;
-    }
-
-    public Integer getAcknowledgementMode() {
-        return acknowledgementMode;
-    }
-
-    public void setAcknowledgementMode(Integer acknowledgementMode) {
-        this.acknowledgementMode = acknowledgementMode;
     }
 
     public String getAcknowledgementModeName() {
@@ -829,6 +916,30 @@ public class ActiveMQComponentConfiguration
         this.maxConcurrentConsumers = maxConcurrentConsumers;
     }
 
+    public String getReplyTo() {
+        return replyTo;
+    }
+
+    public void setReplyTo(String replyTo) {
+        this.replyTo = replyTo;
+    }
+
+    public Boolean getReplyToDeliveryPersistent() {
+        return replyToDeliveryPersistent;
+    }
+
+    public void setReplyToDeliveryPersistent(Boolean replyToDeliveryPersistent) {
+        this.replyToDeliveryPersistent = replyToDeliveryPersistent;
+    }
+
+    public String getSelector() {
+        return selector;
+    }
+
+    public void setSelector(String selector) {
+        this.selector = selector;
+    }
+
     public Boolean getSubscriptionDurable() {
         return subscriptionDurable;
     }
@@ -870,6 +981,14 @@ public class ActiveMQComponentConfiguration
         this.allowReplyManagerQuickStop = allowReplyManagerQuickStop;
     }
 
+    public ConsumerType getConsumerType() {
+        return consumerType;
+    }
+
+    public void setConsumerType(ConsumerType consumerType) {
+        this.consumerType = consumerType;
+    }
+
     public DefaultTaskExecutorType getDefaultTaskExecutorType() {
         return defaultTaskExecutorType;
     }
@@ -903,12 +1022,29 @@ public class ActiveMQComponentConfiguration
         this.exposeListenerSession = exposeListenerSession;
     }
 
+    public Boolean getReplyToSameDestinationAllowed() {
+        return replyToSameDestinationAllowed;
+    }
+
+    public void setReplyToSameDestinationAllowed(
+            Boolean replyToSameDestinationAllowed) {
+        this.replyToSameDestinationAllowed = replyToSameDestinationAllowed;
+    }
+
     public String getTaskExecutor() {
         return taskExecutor;
     }
 
     public void setTaskExecutor(String taskExecutor) {
         this.taskExecutor = taskExecutor;
+    }
+
+    public Long getDeliveryDelay() {
+        return deliveryDelay;
+    }
+
+    public void setDeliveryDelay(Long deliveryDelay) {
+        this.deliveryDelay = deliveryDelay;
     }
 
     public Integer getDeliveryMode() {
@@ -967,15 +1103,6 @@ public class ActiveMQComponentConfiguration
         this.priority = priority;
     }
 
-    public Integer getReplyOnTimeoutToMaxConcurrentConsumers() {
-        return replyOnTimeoutToMaxConcurrentConsumers;
-    }
-
-    public void setReplyOnTimeoutToMaxConcurrentConsumers(
-            Integer replyOnTimeoutToMaxConcurrentConsumers) {
-        this.replyOnTimeoutToMaxConcurrentConsumers = replyOnTimeoutToMaxConcurrentConsumers;
-    }
-
     public Integer getReplyToConcurrentConsumers() {
         return replyToConcurrentConsumers;
     }
@@ -991,6 +1118,23 @@ public class ActiveMQComponentConfiguration
     public void setReplyToMaxConcurrentConsumers(
             Integer replyToMaxConcurrentConsumers) {
         this.replyToMaxConcurrentConsumers = replyToMaxConcurrentConsumers;
+    }
+
+    public Integer getReplyToOnTimeoutMaxConcurrentConsumers() {
+        return replyToOnTimeoutMaxConcurrentConsumers;
+    }
+
+    public void setReplyToOnTimeoutMaxConcurrentConsumers(
+            Integer replyToOnTimeoutMaxConcurrentConsumers) {
+        this.replyToOnTimeoutMaxConcurrentConsumers = replyToOnTimeoutMaxConcurrentConsumers;
+    }
+
+    public String getReplyToOverride() {
+        return replyToOverride;
+    }
+
+    public void setReplyToOverride(String replyToOverride) {
+        this.replyToOverride = replyToOverride;
     }
 
     public ReplyToType getReplyToType() {
@@ -1049,6 +1193,14 @@ public class ActiveMQComponentConfiguration
         this.correlationProperty = correlationProperty;
     }
 
+    public Boolean getDisableTimeToLive() {
+        return disableTimeToLive;
+    }
+
+    public void setDisableTimeToLive(Boolean disableTimeToLive) {
+        this.disableTimeToLive = disableTimeToLive;
+    }
+
     public Boolean getForceSendOriginalMessage() {
         return forceSendOriginalMessage;
     }
@@ -1071,6 +1223,15 @@ public class ActiveMQComponentConfiguration
 
     public void setReplyToCacheLevelName(String replyToCacheLevelName) {
         this.replyToCacheLevelName = replyToCacheLevelName;
+    }
+
+    public String getReplyToDestinationSelectorName() {
+        return replyToDestinationSelectorName;
+    }
+
+    public void setReplyToDestinationSelectorName(
+            String replyToDestinationSelectorName) {
+        this.replyToDestinationSelectorName = replyToDestinationSelectorName;
     }
 
     public Boolean getStreamMessageTypeEnabled() {
@@ -1097,6 +1258,14 @@ public class ActiveMQComponentConfiguration
     public void setAllowAutoWiredDestinationResolver(
             Boolean allowAutoWiredDestinationResolver) {
         this.allowAutoWiredDestinationResolver = allowAutoWiredDestinationResolver;
+    }
+
+    public Boolean getAllowSerializedHeaders() {
+        return allowSerializedHeaders;
+    }
+
+    public void setAllowSerializedHeaders(Boolean allowSerializedHeaders) {
+        this.allowSerializedHeaders = allowSerializedHeaders;
     }
 
     public Boolean getAsyncStartListener() {
@@ -1171,20 +1340,13 @@ public class ActiveMQComponentConfiguration
         this.includeAllJMSXProperties = includeAllJMSXProperties;
     }
 
-    public String getJmsKeyFormatStrategy() {
+    public JmsKeyFormatStrategy getJmsKeyFormatStrategy() {
         return jmsKeyFormatStrategy;
     }
 
-    public void setJmsKeyFormatStrategy(String jmsKeyFormatStrategy) {
+    public void setJmsKeyFormatStrategy(
+            JmsKeyFormatStrategy jmsKeyFormatStrategy) {
         this.jmsKeyFormatStrategy = jmsKeyFormatStrategy;
-    }
-
-    public String getJmsOperations() {
-        return jmsOperations;
-    }
-
-    public void setJmsOperations(String jmsOperations) {
-        this.jmsOperations = jmsOperations;
     }
 
     public Boolean getMapJmsMessage() {
@@ -1225,6 +1387,15 @@ public class ActiveMQComponentConfiguration
 
     public void setMessageIdEnabled(Boolean messageIdEnabled) {
         this.messageIdEnabled = messageIdEnabled;
+    }
+
+    public String getMessageListenerContainerFactory() {
+        return messageListenerContainerFactory;
+    }
+
+    public void setMessageListenerContainerFactory(
+            String messageListenerContainerFactory) {
+        this.messageListenerContainerFactory = messageListenerContainerFactory;
     }
 
     public Boolean getMessageTimestampEnabled() {

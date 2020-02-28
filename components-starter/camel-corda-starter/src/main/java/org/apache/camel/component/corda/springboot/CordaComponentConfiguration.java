@@ -17,6 +17,8 @@
 package org.apache.camel.component.corda.springboot;
 
 import javax.annotation.Generated;
+import net.corda.core.contracts.ContractState;
+import net.corda.core.flows.FlowLogic;
 import net.corda.core.node.services.vault.PageSpecification;
 import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.node.services.vault.Sort;
@@ -53,6 +55,57 @@ public class CordaComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * PageSpecification allows specification of a page number (starting from 1)
+     * and page size (defaulting to 200 with a maximum page size of
+     * (Integer.MAX_INT) Note: we default the page number to 200 to enable
+     * queries without requiring a page specification but enabling detection of
+     * large results sets that fall out of the 200 requirement. Max page size
+     * should be used with extreme caution as results may exceed your JVM memory
+     * footprint. The option is a
+     * net.corda.core.node.services.vault.PageSpecification type.
+     */
+    private String pageSpecification;
+    /**
+     * Whether to process snapshots or not
+     */
+    private Boolean processSnapshot = true;
+    /**
+     * Sort allows specification of a set of entity attribute names and their
+     * associated directionality and null handling, to be applied upon
+     * processing a query specification.
+     */
+    private Sort sort;
+    /**
+     * A contract state (or just state) contains opaque data used by a contract
+     * program. It can be thought of as a disk file that the program can use to
+     * persist data across transactions. States are immutable: once created they
+     * are never updated, instead, any changes must generate a new successor
+     * state. States can be updated (consumed) only once: the notary is
+     * responsible for ensuring there is no double spending by only signing a
+     * transaction if the input states are all free.
+     */
+    private Class<ContractState> contractStateClass;
+    /**
+     * Start the given flow with the given arguments, returning an Observable
+     * with a single observation of the result of running the flow. The
+     * flowLogicClass must be annotated with
+     * net.corda.core.flows.StartableByRPC.
+     */
+    private Object[] flowLogicArguments;
+    /**
+     * Start the given flow with the given arguments, returning an Observable
+     * with a single observation of the result of running the flow. The
+     * flowLogicClass must be annotated with
+     * net.corda.core.flows.StartableByRPC.
+     */
+    private Class<FlowLogic<Object>> flowLogicClass;
+    /**
+     * QueryCriteria assumes underlying schema tables are correctly indexed for
+     * performance. The option is a
+     * net.corda.core.node.services.vault.QueryCriteria type.
+     */
+    private String queryCriteria;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -64,10 +117,22 @@ public class CordaComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Operation to use
+     */
+    private String operation;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+    /**
+     * Password for login
+     */
+    private String password;
+    /**
+     * Username for login
+     */
+    private String username;
 
     public CordaConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -86,6 +151,62 @@ public class CordaComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
+    public String getPageSpecification() {
+        return pageSpecification;
+    }
+
+    public void setPageSpecification(String pageSpecification) {
+        this.pageSpecification = pageSpecification;
+    }
+
+    public Boolean getProcessSnapshot() {
+        return processSnapshot;
+    }
+
+    public void setProcessSnapshot(Boolean processSnapshot) {
+        this.processSnapshot = processSnapshot;
+    }
+
+    public Sort getSort() {
+        return sort;
+    }
+
+    public void setSort(Sort sort) {
+        this.sort = sort;
+    }
+
+    public Class<ContractState> getContractStateClass() {
+        return contractStateClass;
+    }
+
+    public void setContractStateClass(Class<ContractState> contractStateClass) {
+        this.contractStateClass = contractStateClass;
+    }
+
+    public Object[] getFlowLogicArguments() {
+        return flowLogicArguments;
+    }
+
+    public void setFlowLogicArguments(Object[] flowLogicArguments) {
+        this.flowLogicArguments = flowLogicArguments;
+    }
+
+    public Class<FlowLogic<Object>> getFlowLogicClass() {
+        return flowLogicClass;
+    }
+
+    public void setFlowLogicClass(Class<FlowLogic<Object>> flowLogicClass) {
+        this.flowLogicClass = flowLogicClass;
+    }
+
+    public String getQueryCriteria() {
+        return queryCriteria;
+    }
+
+    public void setQueryCriteria(String queryCriteria) {
+        this.queryCriteria = queryCriteria;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
@@ -94,12 +215,36 @@ public class CordaComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
+
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public static class CordaConfigurationNestedConfiguration {

@@ -17,14 +17,20 @@ When using crypto with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 50 options, which are listed below.
+The component supports 68 options, which are listed below.
 
 
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| *camel.component.crypto.algorithm* | Sets the JCE name of the Algorithm that should be used for the signer. | SHA256withRSA | String
+| *camel.component.crypto.alias* | Sets the alias used to query the KeyStore for keys and {link java.security.cert.Certificate Certificates} to be used in signing and verifying exchanges. This value can be provided at runtime via the message header org.apache.camel.component.crypto.DigitalSignatureConstants#KEYSTORE_ALIAS |  | String
 | *camel.component.crypto.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.crypto.buffer-size* | Set the size of the buffer used to read in the Exchange payload data. | 2048 | Integer
+| *camel.component.crypto.certificate* | Set the Certificate that should be used to verify the signature in the exchange based on its payload. The option is a java.security.cert.Certificate type. |  | String
+| *camel.component.crypto.certificate-name* | Sets the reference name for a PrivateKey that can be found in the registry. |  | String
+| *camel.component.crypto.clear-headers* | Determines if the Signature specific headers be cleared after signing and verification. Defaults to true, and should only be made otherwise at your extreme peril as vital private information such as Keys and passwords may escape if unset. | true | Boolean
 | *camel.component.crypto.configuration.algorithm* | Sets the JCE name of the Algorithm that should be used for the signer. | SHA256withRSA | String
 | *camel.component.crypto.configuration.alias* | Sets the alias used to query the KeyStore for keys and {link java.security.cert.Certificate Certificates} to be used in signing and verifying exchanges. This value can be provided at runtime via the message header org.apache.camel.component.crypto.DigitalSignatureConstants#KEYSTORE_ALIAS |  | String
 | *camel.component.crypto.configuration.buffer-size* | Set the size of the buffer used to read in the Exchange payload data. | 2048 | Integer
@@ -46,7 +52,19 @@ The component supports 50 options, which are listed below.
 | *camel.component.crypto.configuration.secure-random-name* | Sets the reference name for a SecureRandom that can be found in the registry. |  | String
 | *camel.component.crypto.configuration.signature-header-name* | Set the name of the message header that should be used to store the base64 encoded signature. This defaults to 'CamelDigitalSignature' |  | String
 | *camel.component.crypto.enabled* | Whether to enable auto configuration of the crypto component. This is enabled by default. |  | Boolean
+| *camel.component.crypto.key-store-parameters* | Sets the KeyStore that can contain keys and Certficates for use in signing and verifying exchanges based on the given KeyStoreParameters. A KeyStore is typically used with an alias, either one supplied in the Route definition or dynamically via the message header CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a single entry in the Keystore, then this single entry will be used. The option is a org.apache.camel.support.jsse.KeyStoreParameters type. |  | String
+| *camel.component.crypto.keystore* | Sets the KeyStore that can contain keys and Certficates for use in signing and verifying exchanges. A KeyStore is typically used with an alias, either one supplied in the Route definition or dynamically via the message header CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a single entry in the Keystore, then this single entry will be used. The option is a java.security.KeyStore type. |  | String
+| *camel.component.crypto.keystore-name* | Sets the reference name for a Keystore that can be found in the registry. |  | String
 | *camel.component.crypto.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.crypto.password* | Sets the password used to access an aliased PrivateKey in the KeyStore. |  | String
+| *camel.component.crypto.private-key* | Set the PrivateKey that should be used to sign the exchange. The option is a java.security.PrivateKey type. |  | String
+| *camel.component.crypto.private-key-name* | Sets the reference name for a PrivateKey that can be found in the registry. |  | String
+| *camel.component.crypto.provider* | Set the id of the security provider that provides the configured Signature algorithm. |  | String
+| *camel.component.crypto.public-key* | Set the PublicKey that should be used to verify the signature in the exchange. The option is a java.security.PublicKey type. |  | String
+| *camel.component.crypto.public-key-name* | references that should be resolved when the context changes |  | String
+| *camel.component.crypto.secure-random* | Set the SecureRandom used to initialize the Signature service. The option is a java.security.SecureRandom type. |  | String
+| *camel.component.crypto.secure-random-name* | Sets the reference name for a SecureRandom that can be found in the registry. |  | String
+| *camel.component.crypto.signature-header-name* | Set the name of the message header that should be used to store the base64 encoded signature. This defaults to 'CamelDigitalSignature' |  | String
 | *camel.dataformat.crypto.algorithm* | The JCE algorithm name indicating the cryptographic algorithm that will be used. |  | String
 | *camel.dataformat.crypto.algorithm-parameter-ref* | A JCE AlgorithmParameterSpec used to initialize the Cipher. Will lookup the type using the given name as a java.security.spec.AlgorithmParameterSpec type. |  | String
 | *camel.dataformat.crypto.buffersize* | The size of the buffer used in the signature process. |  | Integer
@@ -75,5 +93,4 @@ The component supports 50 options, which are listed below.
 | *camel.dataformat.pgp.signature-password* | Password used when opening the private key used for signing (during encryption). |  | String
 | *camel.dataformat.pgp.signature-verification-option* | Controls the behavior for verifying the signature during unmarshaling. There are 4 values possible: optional: The PGP message may or may not contain signatures; if it does contain signatures, then a signature verification is executed. required: The PGP message must contain at least one signature; if this is not the case an exception (PGPException) is thrown. A signature verification is executed. ignore: Contained signatures in the PGP message are ignored; no signature verification is executed. no_signature_allowed: The PGP message must not contain a signature; otherwise an exception (PGPException) is thrown. |  | String
 |===
-
 // spring-boot-auto-configure options: END

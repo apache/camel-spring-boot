@@ -19,6 +19,7 @@ package org.apache.camel.component.azure.queue.springboot;
 import javax.annotation.Generated;
 import com.microsoft.azure.storage.StorageCredentials;
 import com.microsoft.azure.storage.queue.CloudQueue;
+import org.apache.camel.component.azure.queue.QueueServiceComponent;
 import org.apache.camel.component.azure.queue.QueueServiceOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -41,6 +42,16 @@ public class QueueServiceComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The queue service client. The option is a
+     * com.microsoft.azure.storage.queue.CloudQueue type.
+     */
+    private String azureQueueClient;
+    /**
+     * Set the storage credentials, required in most cases. The option is a
+     * com.microsoft.azure.storage.StorageCredentials type.
+     */
+    private String credentials;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -61,6 +72,22 @@ public class QueueServiceComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Message Time To Live in seconds
+     */
+    private Integer messageTimeToLive;
+    /**
+     * Message Visibility Delay in seconds
+     */
+    private Integer messageVisibilityDelay;
+    /**
+     * Queue service operation hint to the producer
+     */
+    private QueueServiceOperations operation = QueueServiceOperations.listQueues;
+    /**
+     * Set a prefix which can be used for listing the queues
+     */
+    private String queuePrefix;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -69,6 +96,22 @@ public class QueueServiceComponentConfiguration
      * The Queue Service configuration
      */
     private QueueServiceConfigurationNestedConfiguration configuration;
+
+    public String getAzureQueueClient() {
+        return azureQueueClient;
+    }
+
+    public void setAzureQueueClient(String azureQueueClient) {
+        this.azureQueueClient = azureQueueClient;
+    }
+
+    public String getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(String credentials) {
+        this.credentials = credentials;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -84,6 +127,38 @@ public class QueueServiceComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Integer getMessageTimeToLive() {
+        return messageTimeToLive;
+    }
+
+    public void setMessageTimeToLive(Integer messageTimeToLive) {
+        this.messageTimeToLive = messageTimeToLive;
+    }
+
+    public Integer getMessageVisibilityDelay() {
+        return messageVisibilityDelay;
+    }
+
+    public void setMessageVisibilityDelay(Integer messageVisibilityDelay) {
+        this.messageVisibilityDelay = messageVisibilityDelay;
+    }
+
+    public QueueServiceOperations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(QueueServiceOperations operation) {
+        this.operation = operation;
+    }
+
+    public String getQueuePrefix() {
+        return queuePrefix;
+    }
+
+    public void setQueuePrefix(String queuePrefix) {
+        this.queuePrefix = queuePrefix;
     }
 
     public Boolean getBasicPropertyBinding() {

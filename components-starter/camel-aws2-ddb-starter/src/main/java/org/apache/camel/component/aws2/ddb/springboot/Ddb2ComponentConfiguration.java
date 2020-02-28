@@ -17,6 +17,7 @@
 package org.apache.camel.component.aws2.ddb.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.aws2.ddb.Ddb2Component;
 import org.apache.camel.component.aws2.ddb.Ddb2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -45,6 +46,24 @@ public class Ddb2ComponentConfiguration
      */
     private String accessKey;
     /**
+     * To use the AmazonDynamoDB as the client. The option is a
+     * software.amazon.awssdk.services.dynamodb.DynamoDbClient type.
+     */
+    private String amazonDDBClient;
+    /**
+     * Determines whether or not strong consistency should be enforced when data
+     * is read.
+     */
+    private Boolean consistentRead = false;
+    /**
+     * Attribute name when creating table
+     */
+    private String keyAttributeName;
+    /**
+     * Attribute type when creating table
+     */
+    private String keyAttributeType;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -56,6 +75,29 @@ public class Ddb2ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * What operation to perform
+     */
+    private Ddb2Operations operation = Ddb2Operations.PutItem;
+    /**
+     * To define a proxy host when instantiating the DDB client
+     */
+    private String proxyHost;
+    /**
+     * The region in which DynamoDB client needs to work. When using this
+     * parameter, the configuration will expect the lowercase name of the region
+     * (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the DDB client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
+     * The provisioned throughput to reserve for reading resources from your
+     * table
+     */
+    private Long readCapacity;
+    /**
      * The region in which DDB client needs to work
      */
     private String region;
@@ -63,6 +105,11 @@ public class Ddb2ComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * The provisioned throughput to reserved for writing resources to your
+     * table
+     */
+    private Long writeCapacity;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -81,12 +128,84 @@ public class Ddb2ComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getAmazonDDBClient() {
+        return amazonDDBClient;
+    }
+
+    public void setAmazonDDBClient(String amazonDDBClient) {
+        this.amazonDDBClient = amazonDDBClient;
+    }
+
+    public Boolean getConsistentRead() {
+        return consistentRead;
+    }
+
+    public void setConsistentRead(Boolean consistentRead) {
+        this.consistentRead = consistentRead;
+    }
+
+    public String getKeyAttributeName() {
+        return keyAttributeName;
+    }
+
+    public void setKeyAttributeName(String keyAttributeName) {
+        this.keyAttributeName = keyAttributeName;
+    }
+
+    public String getKeyAttributeType() {
+        return keyAttributeType;
+    }
+
+    public void setKeyAttributeType(String keyAttributeType) {
+        this.keyAttributeType = keyAttributeType;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Ddb2Operations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Ddb2Operations operation) {
+        this.operation = operation;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
+    }
+
+    public Long getReadCapacity() {
+        return readCapacity;
+    }
+
+    public void setReadCapacity(Long readCapacity) {
+        this.readCapacity = readCapacity;
     }
 
     public String getRegion() {
@@ -103,6 +222,14 @@ public class Ddb2ComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public Long getWriteCapacity() {
+        return writeCapacity;
+    }
+
+    public void setWriteCapacity(Long writeCapacity) {
+        this.writeCapacity = writeCapacity;
     }
 
     public Boolean getBasicPropertyBinding() {

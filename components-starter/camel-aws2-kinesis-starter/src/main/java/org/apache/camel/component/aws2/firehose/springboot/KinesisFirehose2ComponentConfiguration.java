@@ -17,6 +17,7 @@
 package org.apache.camel.component.aws2.firehose.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.aws2.firehose.KinesisFirehose2Component;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
@@ -44,6 +45,12 @@ public class KinesisFirehose2ComponentConfiguration
      */
     private String accessKey;
     /**
+     * Amazon Kinesis Firehose client to use for all requests for this endpoint.
+     * The option is a software.amazon.awssdk.services.firehose.FirehoseClient
+     * type.
+     */
+    private String amazonKinesisFirehoseClient;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -54,6 +61,18 @@ public class KinesisFirehose2ComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * To define a proxy host when instantiating the Kinesis Firehose client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the Kinesis Firehose client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the Kinesis Firehose client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
     /**
      * Amazon AWS Region
      */
@@ -80,12 +99,45 @@ public class KinesisFirehose2ComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getAmazonKinesisFirehoseClient() {
+        return amazonKinesisFirehoseClient;
+    }
+
+    public void setAmazonKinesisFirehoseClient(
+            String amazonKinesisFirehoseClient) {
+        this.amazonKinesisFirehoseClient = amazonKinesisFirehoseClient;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public String getRegion() {

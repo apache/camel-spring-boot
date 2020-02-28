@@ -22,7 +22,6 @@ import org.apache.camel.component.disruptor.DisruptorProducerType;
 import org.apache.camel.component.disruptor.DisruptorWaitStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * The disruptor component provides asynchronous SEDA behavior using LMAX
@@ -45,11 +44,6 @@ public class DisruptorComponentConfiguration
      * To configure the ring buffer size
      */
     private Integer bufferSize = 1024;
-    /**
-     * To configure the ring buffer size
-     */
-    @Deprecated
-    private Integer queueSize;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -105,17 +99,6 @@ public class DisruptorComponentConfiguration
 
     public void setBufferSize(Integer bufferSize) {
         this.bufferSize = bufferSize;
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Integer getQueueSize() {
-        return queueSize;
-    }
-
-    @Deprecated
-    public void setQueueSize(Integer queueSize) {
-        this.queueSize = queueSize;
     }
 
     public Boolean getBridgeErrorHandler() {

@@ -17,6 +17,7 @@
 package org.apache.camel.component.aws2.lambda.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.aws2.lambda.Lambda2Component;
 import org.apache.camel.component.aws2.lambda.Lambda2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -56,6 +57,11 @@ public class Lambda2ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The operation to perform. It can be listFunctions, getFunction,
+     * createFunction, deleteFunction or invokeFunction
+     */
+    private Lambda2Operations operation = Lambda2Operations.invokeFunction;
+    /**
      * Amazon AWS Region
      */
     private String region;
@@ -63,6 +69,11 @@ public class Lambda2ComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * To use a existing configured AwsLambdaClient as client. The option is a
+     * software.amazon.awssdk.services.lambda.LambdaClient type.
+     */
+    private String awsLambdaClient;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -72,6 +83,18 @@ public class Lambda2ComponentConfiguration
      * The AWS Lambda default configuration
      */
     private Lambda2ConfigurationNestedConfiguration configuration;
+    /**
+     * To define a proxy host when instantiating the Lambda client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the Lambda client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the Lambda client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
 
     public String getAccessKey() {
         return accessKey;
@@ -87,6 +110,14 @@ public class Lambda2ComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Lambda2Operations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Lambda2Operations operation) {
+        this.operation = operation;
     }
 
     public String getRegion() {
@@ -105,6 +136,14 @@ public class Lambda2ComponentConfiguration
         this.secretKey = secretKey;
     }
 
+    public String getAwsLambdaClient() {
+        return awsLambdaClient;
+    }
+
+    public void setAwsLambdaClient(String awsLambdaClient) {
+        this.awsLambdaClient = awsLambdaClient;
+    }
+
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
@@ -120,6 +159,30 @@ public class Lambda2ComponentConfiguration
     public void setConfiguration(
             Lambda2ConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public static class Lambda2ConfigurationNestedConfiguration {

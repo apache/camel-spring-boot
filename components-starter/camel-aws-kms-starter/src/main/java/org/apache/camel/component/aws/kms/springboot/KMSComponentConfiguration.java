@@ -19,6 +19,7 @@ package org.apache.camel.component.aws.kms.springboot;
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
 import com.amazonaws.services.kms.AWSKMS;
+import org.apache.camel.component.aws.kms.KMSComponent;
 import org.apache.camel.component.aws.kms.KMSOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -44,6 +45,11 @@ public class KMSComponentConfiguration
      */
     private String accessKey;
     /**
+     * To use a existing configured AWS KMS as client. The option is a
+     * com.amazonaws.services.kms.AWSKMS type.
+     */
+    private String kmsClient;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -54,6 +60,22 @@ public class KMSComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * The operation to perform
+     */
+    private KMSOperations operation;
+    /**
+     * To define a proxy host when instantiating the KMS client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the KMS client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the KMS client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
     /**
      * The region in which KMS client needs to work
      */
@@ -80,12 +102,52 @@ public class KMSComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getKmsClient() {
+        return kmsClient;
+    }
+
+    public void setKmsClient(String kmsClient) {
+        this.kmsClient = kmsClient;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public KMSOperations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(KMSOperations operation) {
+        this.operation = operation;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public String getRegion() {

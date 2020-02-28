@@ -19,6 +19,7 @@ package org.apache.camel.component.aws.eks.springboot;
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
 import com.amazonaws.services.eks.AmazonEKS;
+import org.apache.camel.component.aws.eks.EKSComponent;
 import org.apache.camel.component.aws.eks.EKSOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -44,6 +45,11 @@ public class EKSComponentConfiguration
      */
     private String accessKey;
     /**
+     * To use a existing configured AWS EKS as client. The option is a
+     * com.amazonaws.services.eks.AmazonEKS type.
+     */
+    private String eksClient;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -54,6 +60,22 @@ public class EKSComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * The operation to perform
+     */
+    private EKSOperations operation;
+    /**
+     * To define a proxy host when instantiating the EKS client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the EKS client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the EKS client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
     /**
      * The region in which EKS client needs to work
      */
@@ -80,12 +102,52 @@ public class EKSComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getEksClient() {
+        return eksClient;
+    }
+
+    public void setEksClient(String eksClient) {
+        this.eksClient = eksClient;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public EKSOperations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(EKSOperations operation) {
+        this.operation = operation;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public String getRegion() {

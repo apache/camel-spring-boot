@@ -37,11 +37,9 @@ public class GooglePubsubComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Sets the connection factory to use: provides the ability to explicitly
-     * manage connection credentials: - the path to the key file - the Service
-     * Account Key / Email pair
+     * Endpoint to use with local Pub/Sub emulator.
      */
-    private GooglePubsubConnectionFactoryNestedConfiguration connectionFactory;
+    private String endpoint;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -63,18 +61,30 @@ public class GooglePubsubComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Maximum number of producers to cache. This could be increased if you have
+     * producers for lots of different topics.
+     */
+    private Integer publisherCacheSize;
+    /**
+     * How many milliseconds should each producer stay alive in the cache.
+     */
+    private Integer publisherCacheTimeout;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+    /**
+     * How many milliseconds should a producer be allowed to terminate.
+     */
+    private Integer publisherTerminationTimeout;
 
-    public GooglePubsubConnectionFactoryNestedConfiguration getConnectionFactory() {
-        return connectionFactory;
+    public String getEndpoint() {
+        return endpoint;
     }
 
-    public void setConnectionFactory(
-            GooglePubsubConnectionFactoryNestedConfiguration connectionFactory) {
-        this.connectionFactory = connectionFactory;
+    public void setEndpoint(String endpoint) {
+        this.endpoint = endpoint;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -93,6 +103,22 @@ public class GooglePubsubComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Integer getPublisherCacheSize() {
+        return publisherCacheSize;
+    }
+
+    public void setPublisherCacheSize(Integer publisherCacheSize) {
+        this.publisherCacheSize = publisherCacheSize;
+    }
+
+    public Integer getPublisherCacheTimeout() {
+        return publisherCacheTimeout;
+    }
+
+    public void setPublisherCacheTimeout(Integer publisherCacheTimeout) {
+        this.publisherCacheTimeout = publisherCacheTimeout;
+    }
+
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
@@ -101,43 +127,12 @@ public class GooglePubsubComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public static class GooglePubsubConnectionFactoryNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.google.pubsub.GooglePubsubConnectionFactory.class;
-        private String credentialsFileLocation;
-        private String serviceAccount;
-        private String serviceAccountKey;
-        private String serviceURL;
+    public Integer getPublisherTerminationTimeout() {
+        return publisherTerminationTimeout;
+    }
 
-        public String getCredentialsFileLocation() {
-            return credentialsFileLocation;
-        }
-
-        public void setCredentialsFileLocation(String credentialsFileLocation) {
-            this.credentialsFileLocation = credentialsFileLocation;
-        }
-
-        public String getServiceAccount() {
-            return serviceAccount;
-        }
-
-        public void setServiceAccount(String serviceAccount) {
-            this.serviceAccount = serviceAccount;
-        }
-
-        public String getServiceAccountKey() {
-            return serviceAccountKey;
-        }
-
-        public void setServiceAccountKey(String serviceAccountKey) {
-            this.serviceAccountKey = serviceAccountKey;
-        }
-
-        public String getServiceURL() {
-            return serviceURL;
-        }
-
-        public void setServiceURL(String serviceURL) {
-            this.serviceURL = serviceURL;
-        }
+    public void setPublisherTerminationTimeout(
+            Integer publisherTerminationTimeout) {
+        this.publisherTerminationTimeout = publisherTerminationTimeout;
     }
 }

@@ -47,6 +47,40 @@ public class Olingo2ComponentConfiguration
      */
     private Olingo2ConfigurationNestedConfiguration configuration;
     /**
+     * HTTP connection creation timeout in milliseconds, defaults to 30,000 (30
+     * seconds)
+     */
+    private Integer connectTimeout = 30000;
+    /**
+     * Content-Type header value can be used to specify JSON or XML message
+     * format, defaults to application/json;charset=utf-8
+     */
+    private String contentType = "application/json;charset=utf-8";
+    /**
+     * Set this to true to filter out results that have already been
+     * communicated by this component.
+     */
+    private Boolean filterAlreadySeen = false;
+    /**
+     * Custom HTTP headers to inject into every request, this could include
+     * OAuth tokens, etc.
+     */
+    private Map<String, String> httpHeaders;
+    /**
+     * HTTP proxy server configuration. The option is a org.apache.http.HttpHost
+     * type.
+     */
+    private String proxy;
+    /**
+     * Target OData service base URI, e.g.
+     * http://services.odata.org/OData/OData.svc
+     */
+    private String serviceUri;
+    /**
+     * HTTP request timeout in milliseconds, defaults to 30,000 (30 seconds)
+     */
+    private Integer socketTimeout = 30000;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -55,6 +89,12 @@ public class Olingo2ComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * For endpoints that return an array or collection, a consumer endpoint
+     * will map every element to distinct messages, unless splitResult is set to
+     * false.
+     */
+    private Boolean splitResult = true;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -72,6 +112,27 @@ public class Olingo2ComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * Custom HTTP async client builder for more complex HTTP client
+     * configuration, overrides connectionTimeout, socketTimeout, proxy and
+     * sslContext. Note that a socketTimeout MUST be specified in the builder,
+     * otherwise OData requests could block indefinitely. The option is a
+     * org.apache.http.impl.nio.client.HttpAsyncClientBuilder type.
+     */
+    private String httpAsyncClientBuilder;
+    /**
+     * Custom HTTP client builder for more complex HTTP client configuration,
+     * overrides connectionTimeout, socketTimeout, proxy and sslContext. Note
+     * that a socketTimeout MUST be specified in the builder, otherwise OData
+     * requests could block indefinitely. The option is a
+     * org.apache.http.impl.client.HttpClientBuilder type.
+     */
+    private String httpClientBuilder;
+    /**
+     * To configure security using SSLContextParameters. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private String sslContextParameters;
+    /**
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
@@ -85,12 +146,76 @@ public class Olingo2ComponentConfiguration
         this.configuration = configuration;
     }
 
+    public Integer getConnectTimeout() {
+        return connectTimeout;
+    }
+
+    public void setConnectTimeout(Integer connectTimeout) {
+        this.connectTimeout = connectTimeout;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public Boolean getFilterAlreadySeen() {
+        return filterAlreadySeen;
+    }
+
+    public void setFilterAlreadySeen(Boolean filterAlreadySeen) {
+        this.filterAlreadySeen = filterAlreadySeen;
+    }
+
+    public Map<String, String> getHttpHeaders() {
+        return httpHeaders;
+    }
+
+    public void setHttpHeaders(Map<String, String> httpHeaders) {
+        this.httpHeaders = httpHeaders;
+    }
+
+    public String getProxy() {
+        return proxy;
+    }
+
+    public void setProxy(String proxy) {
+        this.proxy = proxy;
+    }
+
+    public String getServiceUri() {
+        return serviceUri;
+    }
+
+    public void setServiceUri(String serviceUri) {
+        this.serviceUri = serviceUri;
+    }
+
+    public Integer getSocketTimeout() {
+        return socketTimeout;
+    }
+
+    public void setSocketTimeout(Integer socketTimeout) {
+        this.socketTimeout = socketTimeout;
+    }
+
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getSplitResult() {
+        return splitResult;
+    }
+
+    public void setSplitResult(Boolean splitResult) {
+        this.splitResult = splitResult;
     }
 
     public Boolean getLazyStartProducer() {
@@ -107,6 +232,30 @@ public class Olingo2ComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getHttpAsyncClientBuilder() {
+        return httpAsyncClientBuilder;
+    }
+
+    public void setHttpAsyncClientBuilder(String httpAsyncClientBuilder) {
+        this.httpAsyncClientBuilder = httpAsyncClientBuilder;
+    }
+
+    public String getHttpClientBuilder() {
+        return httpClientBuilder;
+    }
+
+    public void setHttpClientBuilder(String httpClientBuilder) {
+        this.httpClientBuilder = httpClientBuilder;
+    }
+
+    public String getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(String sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
     }
 
     public Boolean getUseGlobalSslContextParameters() {

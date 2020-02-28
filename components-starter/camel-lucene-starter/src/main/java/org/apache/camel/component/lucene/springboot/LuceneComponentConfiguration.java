@@ -40,6 +40,20 @@ public class LuceneComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * An Analyzer builds TokenStreams, which analyze text. It thus represents a
+     * policy for extracting index terms from text. The value for analyzer can
+     * be any class that extends the abstract class
+     * org.apache.lucene.analysis.Analyzer. Lucene also offers a rich set of
+     * analyzers out of the box. The option is a
+     * org.apache.lucene.analysis.Analyzer type.
+     */
+    private String analyzer;
+    /**
+     * A file system directory in which index files are created upon analysis of
+     * the document by the specified analyzer
+     */
+    private File indexDir;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -51,6 +65,15 @@ public class LuceneComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * An integer value that limits the result set of the search operation
+     */
+    private Integer maxHits;
+    /**
+     * An optional directory containing files to be used to be analyzed and
+     * added to the index at producer startup.
+     */
+    private File srcDir;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -60,12 +83,44 @@ public class LuceneComponentConfiguration
      */
     private LuceneConfigurationNestedConfiguration config;
 
+    public String getAnalyzer() {
+        return analyzer;
+    }
+
+    public void setAnalyzer(String analyzer) {
+        this.analyzer = analyzer;
+    }
+
+    public File getIndexDir() {
+        return indexDir;
+    }
+
+    public void setIndexDir(File indexDir) {
+        this.indexDir = indexDir;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Integer getMaxHits() {
+        return maxHits;
+    }
+
+    public void setMaxHits(Integer maxHits) {
+        this.maxHits = maxHits;
+    }
+
+    public File getSrcDir() {
+        return srcDir;
+    }
+
+    public void setSrcDir(File srcDir) {
+        this.srcDir = srcDir;
     }
 
     public Boolean getBasicPropertyBinding() {

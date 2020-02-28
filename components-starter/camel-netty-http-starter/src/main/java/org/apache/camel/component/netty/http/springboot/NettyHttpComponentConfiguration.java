@@ -16,8 +16,13 @@
  */
 package org.apache.camel.component.netty.http.springboot;
 
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 import javax.annotation.Generated;
+import io.netty.channel.ChannelHandler;
 import org.apache.camel.LoggingLevel;
+import org.apache.camel.component.netty.http.NettyHttpComponent;
 import org.apache.camel.component.netty.http.SecurityAuthenticator;
 import org.apache.camel.component.netty.http.SecurityConstraint;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -40,9 +45,38 @@ public class NettyHttpComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the NettyConfiguration as configuration when creating endpoints.
+     * Whether or not to disconnect(close) from Netty Channel right after use.
+     * Can be used for both consumer and producer.
      */
-    private NettyHttpConfigurationNestedConfiguration configuration;
+    private Boolean disconnect = false;
+    /**
+     * Setting to ensure socket is not closed due to inactivity
+     */
+    private Boolean keepAlive = true;
+    /**
+     * Setting to facilitate socket multiplexing
+     */
+    private Boolean reuseAddress = true;
+    /**
+     * This option allows producers and consumers (in client mode) to reuse the
+     * same Netty Channel for the lifecycle of processing the Exchange. This is
+     * useful if you need to call a server multiple times in a Camel route and
+     * want to use the same network connection. When using this, the channel is
+     * not returned to the connection pool until the Exchange is done; or
+     * disconnected if the disconnect option is set to true. The reused Channel
+     * is stored on the Exchange as an exchange property with the key
+     * NettyConstants#NETTY_CHANNEL which allows you to obtain the channel
+     * during routing and use it as well.
+     */
+    private Boolean reuseChannel = false;
+    /**
+     * Setting to set endpoint as one-way or request-response
+     */
+    private Boolean sync = true;
+    /**
+     * Setting to improve TCP protocol performance
+     */
+    private Boolean tcpNoDelay = true;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -52,6 +86,31 @@ public class NettyHttpComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Allows to configure a backlog for netty consumer (server). Note the
+     * backlog is just a best effort depending on the OS. Setting this option to
+     * a value such as 200, 500 or 1000, tells the TCP stack how long the accept
+     * queue can be If this option is not configured, then the backlog depends
+     * on OS setting.
+     */
+    private Integer backlog;
+    /**
+     * When netty works on nio mode, it uses default bossCount parameter from
+     * Netty, which is 1. User can use this option to override the default
+     * bossCount from Netty
+     */
+    private Integer bossCount = 1;
+    /**
+     * Set the BossGroup which could be used for handling the new connection of
+     * the server side across the NettyEndpoint. The option is a
+     * io.netty.channel.EventLoopGroup type.
+     */
+    private String bossGroup;
+    /**
+     * If sync is enabled then this option dictates NettyConsumer if it should
+     * disconnect where there is no reply to send back.
+     */
+    private Boolean disconnectOnNoReply = true;
     /**
      * To use the given EventExecutorGroup. The option is a
      * io.netty.util.concurrent.EventExecutorGroup type.
@@ -69,6 +128,44 @@ public class NettyHttpComponentConfiguration
      */
     private Integer maximumPoolSize;
     /**
+     * To use a custom NettyServerBootstrapFactory. The option is a
+     * org.apache.camel.component.netty.NettyServerBootstrapFactory type.
+     */
+    private String nettyServerBootstrapFactory;
+    /**
+     * If sync is enabled this option dictates NettyConsumer which logging level
+     * to use when logging a there is no reply to send back.
+     */
+    private LoggingLevel noReplyLogLevel = LoggingLevel.WARN;
+    /**
+     * If the server (NettyConsumer) catches an
+     * java.nio.channels.ClosedChannelException then its logged using this
+     * logging level. This is used to avoid logging the closed channel
+     * exceptions, as clients can disconnect abruptly and then cause a flood of
+     * closed exceptions in the Netty server.
+     */
+    private LoggingLevel serverClosedChannelExceptionCaughtLogLevel = LoggingLevel.DEBUG;
+    /**
+     * If the server (NettyConsumer) catches an exception then its logged using
+     * this logging level.
+     */
+    private LoggingLevel serverExceptionCaughtLogLevel = LoggingLevel.WARN;
+    /**
+     * To use a custom ServerInitializerFactory. The option is a
+     * org.apache.camel.component.netty.ServerInitializerFactory type.
+     */
+    private String serverInitializerFactory;
+    /**
+     * Whether to use ordered thread pool, to ensure events are processed
+     * orderly on the same channel.
+     */
+    private Boolean usingExecutorService = true;
+    /**
+     * Time to wait for a socket connection to be available. Value is in
+     * milliseconds.
+     */
+    private Integer connectTimeout = 10000;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -80,15 +177,107 @@ public class NettyHttpComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Allows to use a timeout for the Netty producer when calling a remote
+     * server. By default no timeout is in use. The value is in milli seconds,
+     * so eg 30000 is 30 seconds. The requestTimeout is using Netty's
+     * ReadTimeoutHandler to trigger the timeout.
+     */
+    private Long requestTimeout;
+    /**
+     * To use a custom ClientInitializerFactory. The option is a
+     * org.apache.camel.component.netty.ClientInitializerFactory type.
+     */
+    private String clientInitializerFactory;
+    /**
+     * To use a custom correlation manager to manage how request and reply
+     * messages are mapped when using request/reply with the netty producer.
+     * This should only be used if you have a way to map requests together with
+     * replies such as if there is correlation ids in both the request and reply
+     * messages. This can be used if you want to multiplex concurrent messages
+     * on the same channel (aka connection) in netty. When doing this you must
+     * have a way to correlate the request and reply messages so you can store
+     * the right reply on the inflight Camel Exchange before its continued
+     * routed. We recommend extending the TimeoutCorrelationManagerSupport when
+     * you build custom correlation managers. This provides support for timeout
+     * and other complexities you otherwise would need to implement as well. See
+     * also the producerPoolEnabled option for more details. The option is a
+     * org.apache.camel.component.netty.NettyCamelStateCorrelationManager type.
+     */
+    private String correlationManager;
+    /**
+     * Channels can be lazily created to avoid exceptions, if the remote server
+     * is not up and running when the Camel producer is started.
+     */
+    private Boolean lazyChannelCreation = true;
+    /**
+     * Whether producer pool is enabled or not. Important: If you turn this off
+     * then a single shared connection is used for the producer, also if you are
+     * doing request/reply. That means there is a potential issue with
+     * interleaved responses if replies comes back out-of-order. Therefore you
+     * need to have a correlation id in both the request and reply messages so
+     * you can properly correlate the replies to the Camel callback that is
+     * responsible for continue processing the message in Camel. To do this you
+     * need to implement NettyCamelStateCorrelationManager as correlation
+     * manager and configure it via the correlationManager option. See also the
+     * correlationManager option for more details.
+     */
+    private Boolean producerPoolEnabled = true;
+    /**
+     * Sets the cap on the number of objects that can be allocated by the pool
+     * (checked out to clients, or idle awaiting checkout) at a given time. Use
+     * a negative value for no limit.
+     */
+    private Integer producerPoolMaxActive = -1;
+    /**
+     * Sets the cap on the number of idle instances in the pool.
+     */
+    private Integer producerPoolMaxIdle = 100;
+    /**
+     * Sets the minimum amount of time (value in millis) an object may sit idle
+     * in the pool before it is eligible for eviction by the idle object
+     * evictor.
+     */
+    private Long producerPoolMinEvictableIdle = 300000L;
+    /**
+     * Sets the minimum number of instances allowed in the producer pool before
+     * the evictor thread (if active) spawns new objects.
+     */
+    private Integer producerPoolMinIdle;
+    /**
+     * Only used for TCP when transferExchange is true. When set to true,
+     * serializable objects in headers and properties will be added to the
+     * exchange. Otherwise Camel will exclude any non-serializable objects and
+     * log it at WARN level.
+     */
+    private Boolean allowSerializedHeaders = false;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * To use a explicit ChannelGroup. The option is a
+     * io.netty.channel.group.ChannelGroup type.
+     */
+    private String channelGroup;
+    /**
+     * To use the NettyConfiguration as configuration when creating endpoints.
+     * The option is a org.apache.camel.component.netty.NettyConfiguration type.
+     */
+    private String configuration;
+    /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * headers. The option is a org.apache.camel.spi.HeaderFilterStrategy type.
      */
     private String headerFilterStrategy;
+    /**
+     * Whether to use native transport instead of NIO. Native transport takes
+     * advantage of the host operating system and is only supported on some
+     * platforms. You need to add the netty JAR for the host operating system
+     * you are using. See more details at:
+     * http://netty.io/wiki/native-transports.html
+     */
+    private Boolean nativeTransport = false;
     /**
      * To use a custom org.apache.camel.component.netty.http.NettyHttpBinding
      * for binding to/from Netty and Camel Message API. The option is a
@@ -96,28 +285,181 @@ public class NettyHttpComponentConfiguration
      */
     private String nettyHttpBinding;
     /**
+     * Allows to configure additional netty options using option. as prefix. For
+     * example option.child.keepAlive=false to set the netty option
+     * child.keepAlive=false. See the Netty documentation for possible options
+     * that can be used.
+     */
+    private Map<String, Object> options;
+    /**
+     * The TCP/UDP buffer sizes to be used during inbound communication. Size is
+     * bytes.
+     */
+    private Integer receiveBufferSize = 65536;
+    /**
+     * Configures the buffer size predictor. See details at Jetty documentation
+     * and this mail thread.
+     */
+    private Integer receiveBufferSizePredictor;
+    /**
+     * The TCP/UDP buffer sizes to be used during outbound communication. Size
+     * is bytes.
+     */
+    private Integer sendBufferSize = 65536;
+    /**
+     * Only used for TCP. You can transfer the exchange over the wire instead of
+     * just the body. The following fields are transferred: In body, Out body,
+     * fault body, In headers, Out headers, fault headers, exchange properties,
+     * exchange exception. This requires that the objects are serializable.
+     * Camel will exclude any non-serializable objects and log it at WARN level.
+     */
+    private Boolean transferExchange = false;
+    /**
+     * When netty works on nio mode, it uses default workerCount parameter from
+     * Netty (which is cpu_core_threads x 2). User can use this option to
+     * override the default workerCount from Netty.
+     */
+    private Integer workerCount;
+    /**
+     * To use a explicit EventLoopGroup as the boss thread pool. For example to
+     * share a thread pool with multiple consumers or producers. By default each
+     * consumer or producer has their own worker pool with 2 x cpu count core
+     * threads. The option is a io.netty.channel.EventLoopGroup type.
+     */
+    private String workerGroup;
+    /**
+     * A list of decoders to be used. You can use a String which have values
+     * separated by comma, and have the values be looked up in the Registry.
+     * Just remember to prefix the value with # so Camel knows it should lookup.
+     */
+    private List<ChannelHandler> decoders;
+    /**
+     * A list of encoders to be used. You can use a String which have values
+     * separated by comma, and have the values be looked up in the Registry.
+     * Just remember to prefix the value with # so Camel knows it should lookup.
+     */
+    private List<ChannelHandler> encoders;
+    /**
+     * Which protocols to enable when using SSL
+     */
+    private String enabledProtocols = "TLSv1,TLSv1.1,TLSv1.2";
+    /**
+     * Client side certificate keystore to be used for encryption
+     */
+    private File keyStoreFile;
+    /**
+     * Keystore format to be used for payload encryption. Defaults to JKS if not
+     * set
+     */
+    private String keyStoreFormat;
+    /**
+     * Client side certificate keystore to be used for encryption. Is loaded by
+     * default from classpath, but you can prefix with classpath:, file:, or
+     * http: to load the resource from different systems.
+     */
+    private String keyStoreResource;
+    /**
+     * Configures whether the server needs client authentication when using SSL.
+     */
+    private Boolean needClientAuth = false;
+    /**
+     * Password setting to use in order to encrypt/decrypt payloads sent using
+     * SSH
+     */
+    private String passphrase;
+    /**
      * Refers to a
      * org.apache.camel.component.netty.http.NettyHttpSecurityConfiguration for
      * configuring secure web resources.
      */
     private NettyHttpSecurityConfigurationNestedConfiguration securityConfiguration;
     /**
+     * Security provider to be used for payload encryption. Defaults to SunX509
+     * if not set.
+     */
+    private String securityProvider;
+    /**
+     * Setting to specify whether SSL encryption is applied to this endpoint
+     */
+    private Boolean ssl = false;
+    /**
+     * When enabled and in SSL mode, then the Netty consumer will enrich the
+     * Camel Message with headers having information about the client
+     * certificate such as subject name, issuer name, serial number, and the
+     * valid date range.
+     */
+    private Boolean sslClientCertHeaders = false;
+    /**
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
     private String sslContextParameters;
     /**
+     * Reference to a class that could be used to return an SSL Handler. The
+     * option is a io.netty.handler.ssl.SslHandler type.
+     */
+    private String sslHandler;
+    /**
+     * Server side certificate keystore to be used for encryption
+     */
+    private File trustStoreFile;
+    /**
+     * Server side certificate keystore to be used for encryption. Is loaded by
+     * default from classpath, but you can prefix with classpath:, file:, or
+     * http: to load the resource from different systems.
+     */
+    private String trustStoreResource;
+    /**
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
 
-    public NettyHttpConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public Boolean getDisconnect() {
+        return disconnect;
     }
 
-    public void setConfiguration(
-            NettyHttpConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setDisconnect(Boolean disconnect) {
+        this.disconnect = disconnect;
+    }
+
+    public Boolean getKeepAlive() {
+        return keepAlive;
+    }
+
+    public void setKeepAlive(Boolean keepAlive) {
+        this.keepAlive = keepAlive;
+    }
+
+    public Boolean getReuseAddress() {
+        return reuseAddress;
+    }
+
+    public void setReuseAddress(Boolean reuseAddress) {
+        this.reuseAddress = reuseAddress;
+    }
+
+    public Boolean getReuseChannel() {
+        return reuseChannel;
+    }
+
+    public void setReuseChannel(Boolean reuseChannel) {
+        this.reuseChannel = reuseChannel;
+    }
+
+    public Boolean getSync() {
+        return sync;
+    }
+
+    public void setSync(Boolean sync) {
+        this.sync = sync;
+    }
+
+    public Boolean getTcpNoDelay() {
+        return tcpNoDelay;
+    }
+
+    public void setTcpNoDelay(Boolean tcpNoDelay) {
+        this.tcpNoDelay = tcpNoDelay;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -126,6 +468,38 @@ public class NettyHttpComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Integer getBacklog() {
+        return backlog;
+    }
+
+    public void setBacklog(Integer backlog) {
+        this.backlog = backlog;
+    }
+
+    public Integer getBossCount() {
+        return bossCount;
+    }
+
+    public void setBossCount(Integer bossCount) {
+        this.bossCount = bossCount;
+    }
+
+    public String getBossGroup() {
+        return bossGroup;
+    }
+
+    public void setBossGroup(String bossGroup) {
+        this.bossGroup = bossGroup;
+    }
+
+    public Boolean getDisconnectOnNoReply() {
+        return disconnectOnNoReply;
+    }
+
+    public void setDisconnectOnNoReply(Boolean disconnectOnNoReply) {
+        this.disconnectOnNoReply = disconnectOnNoReply;
     }
 
     public String getExecutorService() {
@@ -144,12 +518,152 @@ public class NettyHttpComponentConfiguration
         this.maximumPoolSize = maximumPoolSize;
     }
 
+    public String getNettyServerBootstrapFactory() {
+        return nettyServerBootstrapFactory;
+    }
+
+    public void setNettyServerBootstrapFactory(
+            String nettyServerBootstrapFactory) {
+        this.nettyServerBootstrapFactory = nettyServerBootstrapFactory;
+    }
+
+    public LoggingLevel getNoReplyLogLevel() {
+        return noReplyLogLevel;
+    }
+
+    public void setNoReplyLogLevel(LoggingLevel noReplyLogLevel) {
+        this.noReplyLogLevel = noReplyLogLevel;
+    }
+
+    public LoggingLevel getServerClosedChannelExceptionCaughtLogLevel() {
+        return serverClosedChannelExceptionCaughtLogLevel;
+    }
+
+    public void setServerClosedChannelExceptionCaughtLogLevel(
+            LoggingLevel serverClosedChannelExceptionCaughtLogLevel) {
+        this.serverClosedChannelExceptionCaughtLogLevel = serverClosedChannelExceptionCaughtLogLevel;
+    }
+
+    public LoggingLevel getServerExceptionCaughtLogLevel() {
+        return serverExceptionCaughtLogLevel;
+    }
+
+    public void setServerExceptionCaughtLogLevel(
+            LoggingLevel serverExceptionCaughtLogLevel) {
+        this.serverExceptionCaughtLogLevel = serverExceptionCaughtLogLevel;
+    }
+
+    public String getServerInitializerFactory() {
+        return serverInitializerFactory;
+    }
+
+    public void setServerInitializerFactory(String serverInitializerFactory) {
+        this.serverInitializerFactory = serverInitializerFactory;
+    }
+
+    public Boolean getUsingExecutorService() {
+        return usingExecutorService;
+    }
+
+    public void setUsingExecutorService(Boolean usingExecutorService) {
+        this.usingExecutorService = usingExecutorService;
+    }
+
+    public Integer getConnectTimeout() {
+        return connectTimeout;
+    }
+
+    public void setConnectTimeout(Integer connectTimeout) {
+        this.connectTimeout = connectTimeout;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Long getRequestTimeout() {
+        return requestTimeout;
+    }
+
+    public void setRequestTimeout(Long requestTimeout) {
+        this.requestTimeout = requestTimeout;
+    }
+
+    public String getClientInitializerFactory() {
+        return clientInitializerFactory;
+    }
+
+    public void setClientInitializerFactory(String clientInitializerFactory) {
+        this.clientInitializerFactory = clientInitializerFactory;
+    }
+
+    public String getCorrelationManager() {
+        return correlationManager;
+    }
+
+    public void setCorrelationManager(String correlationManager) {
+        this.correlationManager = correlationManager;
+    }
+
+    public Boolean getLazyChannelCreation() {
+        return lazyChannelCreation;
+    }
+
+    public void setLazyChannelCreation(Boolean lazyChannelCreation) {
+        this.lazyChannelCreation = lazyChannelCreation;
+    }
+
+    public Boolean getProducerPoolEnabled() {
+        return producerPoolEnabled;
+    }
+
+    public void setProducerPoolEnabled(Boolean producerPoolEnabled) {
+        this.producerPoolEnabled = producerPoolEnabled;
+    }
+
+    public Integer getProducerPoolMaxActive() {
+        return producerPoolMaxActive;
+    }
+
+    public void setProducerPoolMaxActive(Integer producerPoolMaxActive) {
+        this.producerPoolMaxActive = producerPoolMaxActive;
+    }
+
+    public Integer getProducerPoolMaxIdle() {
+        return producerPoolMaxIdle;
+    }
+
+    public void setProducerPoolMaxIdle(Integer producerPoolMaxIdle) {
+        this.producerPoolMaxIdle = producerPoolMaxIdle;
+    }
+
+    public Long getProducerPoolMinEvictableIdle() {
+        return producerPoolMinEvictableIdle;
+    }
+
+    public void setProducerPoolMinEvictableIdle(
+            Long producerPoolMinEvictableIdle) {
+        this.producerPoolMinEvictableIdle = producerPoolMinEvictableIdle;
+    }
+
+    public Integer getProducerPoolMinIdle() {
+        return producerPoolMinIdle;
+    }
+
+    public void setProducerPoolMinIdle(Integer producerPoolMinIdle) {
+        this.producerPoolMinIdle = producerPoolMinIdle;
+    }
+
+    public Boolean getAllowSerializedHeaders() {
+        return allowSerializedHeaders;
+    }
+
+    public void setAllowSerializedHeaders(Boolean allowSerializedHeaders) {
+        this.allowSerializedHeaders = allowSerializedHeaders;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -160,6 +674,22 @@ public class NettyHttpComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
+    public String getChannelGroup() {
+        return channelGroup;
+    }
+
+    public void setChannelGroup(String channelGroup) {
+        this.channelGroup = channelGroup;
+    }
+
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
+    }
+
     public String getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
@@ -168,12 +698,140 @@ public class NettyHttpComponentConfiguration
         this.headerFilterStrategy = headerFilterStrategy;
     }
 
+    public Boolean getNativeTransport() {
+        return nativeTransport;
+    }
+
+    public void setNativeTransport(Boolean nativeTransport) {
+        this.nativeTransport = nativeTransport;
+    }
+
     public String getNettyHttpBinding() {
         return nettyHttpBinding;
     }
 
     public void setNettyHttpBinding(String nettyHttpBinding) {
         this.nettyHttpBinding = nettyHttpBinding;
+    }
+
+    public Map<String, Object> getOptions() {
+        return options;
+    }
+
+    public void setOptions(Map<String, Object> options) {
+        this.options = options;
+    }
+
+    public Integer getReceiveBufferSize() {
+        return receiveBufferSize;
+    }
+
+    public void setReceiveBufferSize(Integer receiveBufferSize) {
+        this.receiveBufferSize = receiveBufferSize;
+    }
+
+    public Integer getReceiveBufferSizePredictor() {
+        return receiveBufferSizePredictor;
+    }
+
+    public void setReceiveBufferSizePredictor(Integer receiveBufferSizePredictor) {
+        this.receiveBufferSizePredictor = receiveBufferSizePredictor;
+    }
+
+    public Integer getSendBufferSize() {
+        return sendBufferSize;
+    }
+
+    public void setSendBufferSize(Integer sendBufferSize) {
+        this.sendBufferSize = sendBufferSize;
+    }
+
+    public Boolean getTransferExchange() {
+        return transferExchange;
+    }
+
+    public void setTransferExchange(Boolean transferExchange) {
+        this.transferExchange = transferExchange;
+    }
+
+    public Integer getWorkerCount() {
+        return workerCount;
+    }
+
+    public void setWorkerCount(Integer workerCount) {
+        this.workerCount = workerCount;
+    }
+
+    public String getWorkerGroup() {
+        return workerGroup;
+    }
+
+    public void setWorkerGroup(String workerGroup) {
+        this.workerGroup = workerGroup;
+    }
+
+    public List<ChannelHandler> getDecoders() {
+        return decoders;
+    }
+
+    public void setDecoders(List<ChannelHandler> decoders) {
+        this.decoders = decoders;
+    }
+
+    public List<ChannelHandler> getEncoders() {
+        return encoders;
+    }
+
+    public void setEncoders(List<ChannelHandler> encoders) {
+        this.encoders = encoders;
+    }
+
+    public String getEnabledProtocols() {
+        return enabledProtocols;
+    }
+
+    public void setEnabledProtocols(String enabledProtocols) {
+        this.enabledProtocols = enabledProtocols;
+    }
+
+    public File getKeyStoreFile() {
+        return keyStoreFile;
+    }
+
+    public void setKeyStoreFile(File keyStoreFile) {
+        this.keyStoreFile = keyStoreFile;
+    }
+
+    public String getKeyStoreFormat() {
+        return keyStoreFormat;
+    }
+
+    public void setKeyStoreFormat(String keyStoreFormat) {
+        this.keyStoreFormat = keyStoreFormat;
+    }
+
+    public String getKeyStoreResource() {
+        return keyStoreResource;
+    }
+
+    public void setKeyStoreResource(String keyStoreResource) {
+        this.keyStoreResource = keyStoreResource;
+    }
+
+    public Boolean getNeedClientAuth() {
+        return needClientAuth;
+    }
+
+    public void setNeedClientAuth(Boolean needClientAuth) {
+        this.needClientAuth = needClientAuth;
+    }
+
+    public String getPassphrase() {
+        return passphrase;
+    }
+
+    public void setPassphrase(String passphrase) {
+        this.passphrase = passphrase;
     }
 
     public NettyHttpSecurityConfigurationNestedConfiguration getSecurityConfiguration() {
@@ -185,12 +843,60 @@ public class NettyHttpComponentConfiguration
         this.securityConfiguration = securityConfiguration;
     }
 
+    public String getSecurityProvider() {
+        return securityProvider;
+    }
+
+    public void setSecurityProvider(String securityProvider) {
+        this.securityProvider = securityProvider;
+    }
+
+    public Boolean getSsl() {
+        return ssl;
+    }
+
+    public void setSsl(Boolean ssl) {
+        this.ssl = ssl;
+    }
+
+    public Boolean getSslClientCertHeaders() {
+        return sslClientCertHeaders;
+    }
+
+    public void setSslClientCertHeaders(Boolean sslClientCertHeaders) {
+        this.sslClientCertHeaders = sslClientCertHeaders;
+    }
+
     public String getSslContextParameters() {
         return sslContextParameters;
     }
 
     public void setSslContextParameters(String sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
+    }
+
+    public String getSslHandler() {
+        return sslHandler;
+    }
+
+    public void setSslHandler(String sslHandler) {
+        this.sslHandler = sslHandler;
+    }
+
+    public File getTrustStoreFile() {
+        return trustStoreFile;
+    }
+
+    public void setTrustStoreFile(File trustStoreFile) {
+        this.trustStoreFile = trustStoreFile;
+    }
+
+    public String getTrustStoreResource() {
+        return trustStoreResource;
+    }
+
+    public void setTrustStoreResource(String trustStoreResource) {
+        this.trustStoreResource = trustStoreResource;
     }
 
     public Boolean getUseGlobalSslContextParameters() {
@@ -200,295 +906,6 @@ public class NettyHttpComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public static class NettyHttpConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.netty.http.NettyHttpConfiguration.class;
-        /**
-         * If the option is true, the producer will ignore the Exchange.HTTP_URI
-         * header, and use the endpoint's URI for request. You may also set the
-         * throwExceptionOnFailure to be false to let the producer send all the
-         * fault response back. The consumer working in the bridge mode will
-         * skip the gzip compression and WWW URL form encoding (by adding the
-         * Exchange.SKIP_GZIP_ENCODING and Exchange.SKIP_WWW_FORM_URLENCODED
-         * headers to the consumed exchange).
-         */
-        private Boolean bridgeEndpoint = false;
-        /**
-         * Value in bytes the max content length per chunked frame received on
-         * the Netty HTTP server.
-         */
-        private Integer chunkedMaxContentLength = 1048576;
-        /**
-         * Allow using gzip/deflate for compression on the Netty HTTP server if
-         * the client supports it from the HTTP headers.
-         */
-        private Boolean compression = false;
-        /**
-         * Determines whether or not the raw input stream from Netty
-         * HttpRequest#getContent() or HttpResponset#getContent() is cached or
-         * not (Camel will read the stream into a in light-weight memory based
-         * Stream caching) cache. By default Camel will cache the Netty input
-         * stream to support reading it multiple times to ensure it Camel can
-         * retrieve all data from the stream. However you can set this option to
-         * true when you for example need to access the raw stream, such as
-         * streaming it directly to a file or other persistent store. Mind that
-         * if you enable this option, then you cannot read the Netty stream
-         * multiple times out of the box, and you would need manually to reset
-         * the reader index on the Netty raw stream. Also Netty will auto-close
-         * the Netty stream when the Netty HTTP server/HTTP client is done
-         * processing, which means that if the asynchronous routing engine is in
-         * use then any asynchronous thread that may continue routing the
-         * org.apache.camel.Exchange may not be able to read the Netty stream,
-         * because Netty has closed it.
-         */
-        private Boolean disableStreamCache = false;
-        /**
-         * The local hostname such as localhost, or 0.0.0.0 when being a
-         * consumer. The remote HTTP server hostname when using producer.
-         */
-        private String host;
-        /**
-         * Whether Netty HTTP server should log a WARN if decoding the HTTP
-         * request failed and a HTTP Status 400 (bad request) is returned.
-         */
-        private Boolean logWarnOnBadRequest = true;
-        /**
-         * If this option is enabled, then during binding from Netty to Camel
-         * Message then the headers will be mapped as well (eg added as header
-         * to the Camel Message as well). You can turn off this option to
-         * disable this. The headers can still be accessed from the
-         * org.apache.camel.component.netty.http.NettyHttpMessage message with
-         * the method getHttpRequest() that returns the Netty HTTP request
-         * io.netty.handler.codec.http.HttpRequest instance.
-         */
-        private Boolean mapHeaders = true;
-        /**
-         * Whether or not Camel should try to find a target consumer by matching
-         * the URI prefix if no exact match is found.
-         */
-        private Boolean matchOnUriPrefix = false;
-        /**
-         * The maximum length of all headers. If the sum of the length of each
-         * header exceeds this value, a
-         * io.netty.handler.codec.TooLongFrameException will be raised.
-         */
-        private Integer maxHeaderSize = 8192;
-        /**
-         * If enabled and an Exchange failed processing on the consumer side the
-         * response's body won't contain the exception's stack trace.
-         */
-        private Boolean muteException = false;
-        /**
-         * The status codes which are considered a success response. The values
-         * are inclusive. Multiple ranges can be defined, separated by comma,
-         * e.g. 200-204,209,301-304. Each range must be a single number or
-         * from-to with the dash included. The default range is 200-299
-         */
-        private String okStatusCodeRange = "200-299";
-        /**
-         * Resource path
-         */
-        private String path;
-        /**
-         * The host port number
-         */
-        private Integer port;
-        /**
-         * The protocol to use which is either http, https or proxy - a consumer
-         * only option.
-         */
-        private String protocol;
-        /**
-         * Whether to send back HTTP status code 503 when the consumer has been
-         * suspended. If the option is false then the Netty Acceptor is unbound
-         * when the consumer is suspended, so clients cannot connect anymore.
-         */
-        private Boolean send503whenSuspended = true;
-        /**
-         * Option to disable throwing the HttpOperationFailedException in case
-         * of failed responses from the remote server. This allows you to get
-         * all responses regardless of the HTTP status code.
-         */
-        private Boolean throwExceptionOnFailure = true;
-        /**
-         * If enabled and an Exchange failed processing on the consumer side,
-         * and if the caused Exception was send back serialized in the response
-         * as a application/x-java-serialized-object content type. On the
-         * producer side the exception will be deserialized and thrown as is,
-         * instead of the HttpOperationFailedException. The caused exception is
-         * required to be serialized. This is by default turned off. If you
-         * enable this then be aware that Java will deserialize the incoming
-         * data from the request to Java and that can be a potential security
-         * risk.
-         */
-        private Boolean transferException = false;
-        /**
-         * If this option is enabled, then during binding from Netty to Camel
-         * Message then the header values will be URL decoded (eg %20 will be a
-         * space character. Notice this option is used by the default
-         * org.apache.camel.component.netty.http.NettyHttpBinding and therefore
-         * if you implement a custom
-         * org.apache.camel.component.netty.http.NettyHttpBinding then you would
-         * need to decode the headers accordingly to this option.
-         */
-        private Boolean urlDecodeHeaders = false;
-        /**
-         * Sets whether to use a relative path in HTTP requests.
-         */
-        private Boolean useRelativePath = true;
-
-        public Boolean getBridgeEndpoint() {
-            return bridgeEndpoint;
-        }
-
-        public void setBridgeEndpoint(Boolean bridgeEndpoint) {
-            this.bridgeEndpoint = bridgeEndpoint;
-        }
-
-        public Integer getChunkedMaxContentLength() {
-            return chunkedMaxContentLength;
-        }
-
-        public void setChunkedMaxContentLength(Integer chunkedMaxContentLength) {
-            this.chunkedMaxContentLength = chunkedMaxContentLength;
-        }
-
-        public Boolean getCompression() {
-            return compression;
-        }
-
-        public void setCompression(Boolean compression) {
-            this.compression = compression;
-        }
-
-        public Boolean getDisableStreamCache() {
-            return disableStreamCache;
-        }
-
-        public void setDisableStreamCache(Boolean disableStreamCache) {
-            this.disableStreamCache = disableStreamCache;
-        }
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public Boolean getLogWarnOnBadRequest() {
-            return logWarnOnBadRequest;
-        }
-
-        public void setLogWarnOnBadRequest(Boolean logWarnOnBadRequest) {
-            this.logWarnOnBadRequest = logWarnOnBadRequest;
-        }
-
-        public Boolean getMapHeaders() {
-            return mapHeaders;
-        }
-
-        public void setMapHeaders(Boolean mapHeaders) {
-            this.mapHeaders = mapHeaders;
-        }
-
-        public Boolean getMatchOnUriPrefix() {
-            return matchOnUriPrefix;
-        }
-
-        public void setMatchOnUriPrefix(Boolean matchOnUriPrefix) {
-            this.matchOnUriPrefix = matchOnUriPrefix;
-        }
-
-        public Integer getMaxHeaderSize() {
-            return maxHeaderSize;
-        }
-
-        public void setMaxHeaderSize(Integer maxHeaderSize) {
-            this.maxHeaderSize = maxHeaderSize;
-        }
-
-        public Boolean getMuteException() {
-            return muteException;
-        }
-
-        public void setMuteException(Boolean muteException) {
-            this.muteException = muteException;
-        }
-
-        public String getOkStatusCodeRange() {
-            return okStatusCodeRange;
-        }
-
-        public void setOkStatusCodeRange(String okStatusCodeRange) {
-            this.okStatusCodeRange = okStatusCodeRange;
-        }
-
-        public String getPath() {
-            return path;
-        }
-
-        public void setPath(String path) {
-            this.path = path;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public String getProtocol() {
-            return protocol;
-        }
-
-        public void setProtocol(String protocol) {
-            this.protocol = protocol;
-        }
-
-        public Boolean getSend503whenSuspended() {
-            return send503whenSuspended;
-        }
-
-        public void setSend503whenSuspended(Boolean send503whenSuspended) {
-            this.send503whenSuspended = send503whenSuspended;
-        }
-
-        public Boolean getThrowExceptionOnFailure() {
-            return throwExceptionOnFailure;
-        }
-
-        public void setThrowExceptionOnFailure(Boolean throwExceptionOnFailure) {
-            this.throwExceptionOnFailure = throwExceptionOnFailure;
-        }
-
-        public Boolean getTransferException() {
-            return transferException;
-        }
-
-        public void setTransferException(Boolean transferException) {
-            this.transferException = transferException;
-        }
-
-        public Boolean getUrlDecodeHeaders() {
-            return urlDecodeHeaders;
-        }
-
-        public void setUrlDecodeHeaders(Boolean urlDecodeHeaders) {
-            this.urlDecodeHeaders = urlDecodeHeaders;
-        }
-
-        public Boolean getUseRelativePath() {
-            return useRelativePath;
-        }
-
-        public void setUseRelativePath(Boolean useRelativePath) {
-            this.useRelativePath = useRelativePath;
-        }
     }
 
     public static class NettyHttpSecurityConfigurationNestedConfiguration {

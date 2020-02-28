@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 324 in 258 JAR artifacts (1 deprecated)
+Number of Camel components: 326 in 259 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -82,6 +82,12 @@ Number of Camel components: 324 in 258 JAR artifacts (1 deprecated)
 
 | link:https://camel.apache.org/components/latest/aws2-iam-component.html[AWS 2 IAM] (camel-aws2-iam-starter) +
 `aws2-iam:label` | 3.1 | The aws2-iam is used for managing Amazon IAM
+
+| link:https://camel.apache.org/components/latest/aws2-kinesis-component.html[AWS 2 Kinesis] (camel-aws2-kinesis-starter) +
+`aws2-kinesis:streamName` | 3.2 | The aws2-kinesis component is for consuming and producing records from Amazon Kinesis Streams.
+
+| link:https://camel.apache.org/components/latest/aws2-kinesis-firehose-component.html[AWS 2 Kinesis Firehose] (camel-aws2-kinesis-starter) +
+`aws2-kinesis-firehose:streamName` | 3.2 | The aws2-kinesis-firehose component is used for producing Amazon's Kinesis Firehose streams.
 
 | link:https://camel.apache.org/components/latest/aws2-kms-component.html[AWS 2 KMS] (camel-aws2-kms-starter) +
 `aws2-kms:label` | 3.1 | The aws2-kms is used for managing Amazon KMS

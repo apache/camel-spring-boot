@@ -48,6 +48,31 @@ public class WebhookComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Automatically register the webhook at startup and unregister it on
+     * shutdown.
+     */
+    private Boolean webhookAutoRegister = true;
+    /**
+     * The first (base) path element where the webhook will be exposed. It's a
+     * good practice to set it to a random string, so that it cannot be guessed
+     * by unauthorized parties.
+     */
+    private String webhookBasePath;
+    /**
+     * The Camel Rest component to use for the REST transport, such as
+     * netty-http.
+     */
+    private String webhookComponentName;
+    /**
+     * The URL of the current service as seen by the webhook provider
+     */
+    private String webhookExternalUrl;
+    /**
+     * The path where the webhook endpoint will be exposed (relative to
+     * basePath, if any)
+     */
+    private String webhookPath;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -63,6 +88,46 @@ public class WebhookComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getWebhookAutoRegister() {
+        return webhookAutoRegister;
+    }
+
+    public void setWebhookAutoRegister(Boolean webhookAutoRegister) {
+        this.webhookAutoRegister = webhookAutoRegister;
+    }
+
+    public String getWebhookBasePath() {
+        return webhookBasePath;
+    }
+
+    public void setWebhookBasePath(String webhookBasePath) {
+        this.webhookBasePath = webhookBasePath;
+    }
+
+    public String getWebhookComponentName() {
+        return webhookComponentName;
+    }
+
+    public void setWebhookComponentName(String webhookComponentName) {
+        this.webhookComponentName = webhookComponentName;
+    }
+
+    public String getWebhookExternalUrl() {
+        return webhookExternalUrl;
+    }
+
+    public void setWebhookExternalUrl(String webhookExternalUrl) {
+        this.webhookExternalUrl = webhookExternalUrl;
+    }
+
+    public String getWebhookPath() {
+        return webhookPath;
+    }
+
+    public void setWebhookPath(String webhookPath) {
+        this.webhookPath = webhookPath;
     }
 
     public Boolean getBasicPropertyBinding() {

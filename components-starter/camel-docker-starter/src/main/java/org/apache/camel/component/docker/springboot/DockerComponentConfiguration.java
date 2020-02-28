@@ -43,6 +43,22 @@ public class DockerComponentConfiguration
      */
     private DockerConfigurationNestedConfiguration configuration;
     /**
+     * Email address associated with the user
+     */
+    private String email;
+    /**
+     * Docker host
+     */
+    private String host = "localhost";
+    /**
+     * Docker port
+     */
+    private Integer port = 2375;
+    /**
+     * Request timeout for response (in seconds)
+     */
+    private Integer requestTimeout;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -67,6 +83,59 @@ public class DockerComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+    /**
+     * The fully qualified class name of the DockerCmdExecFactory implementation
+     * to use
+     */
+    private String cmdExecFactory = "com.github.dockerjava.netty.NettyDockerCmdExecFactory";
+    /**
+     * Whether to follow redirect filter
+     */
+    private Boolean followRedirectFilter = false;
+    /**
+     * Whether to use logging filter
+     */
+    private Boolean loggingFilter = false;
+    /**
+     * Maximum route connections
+     */
+    private Integer maxPerRouteConnections = 100;
+    /**
+     * Maximum total connections
+     */
+    private Integer maxTotalConnections = 100;
+    /**
+     * Additional configuration parameters as key/value pairs
+     */
+    private Map<String, Object> parameters;
+    /**
+     * Server address for docker registry.
+     */
+    private String serverAddress = "https://index.docker.io/v1/";
+    /**
+     * Socket connection mode
+     */
+    private Boolean socket = true;
+    /**
+     * Location containing the SSL certificate chain
+     */
+    private String certPath;
+    /**
+     * Password to authenticate with
+     */
+    private String password;
+    /**
+     * Use HTTPS communication
+     */
+    private Boolean secure = false;
+    /**
+     * Check TLS
+     */
+    private Boolean tlsVerify = false;
+    /**
+     * User name to authenticate with
+     */
+    private String username;
 
     public DockerConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -75,6 +144,38 @@ public class DockerComponentConfiguration
     public void setConfiguration(
             DockerConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
+    }
+
+    public Integer getRequestTimeout() {
+        return requestTimeout;
+    }
+
+    public void setRequestTimeout(Integer requestTimeout) {
+        this.requestTimeout = requestTimeout;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -99,6 +200,110 @@ public class DockerComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getCmdExecFactory() {
+        return cmdExecFactory;
+    }
+
+    public void setCmdExecFactory(String cmdExecFactory) {
+        this.cmdExecFactory = cmdExecFactory;
+    }
+
+    public Boolean getFollowRedirectFilter() {
+        return followRedirectFilter;
+    }
+
+    public void setFollowRedirectFilter(Boolean followRedirectFilter) {
+        this.followRedirectFilter = followRedirectFilter;
+    }
+
+    public Boolean getLoggingFilter() {
+        return loggingFilter;
+    }
+
+    public void setLoggingFilter(Boolean loggingFilter) {
+        this.loggingFilter = loggingFilter;
+    }
+
+    public Integer getMaxPerRouteConnections() {
+        return maxPerRouteConnections;
+    }
+
+    public void setMaxPerRouteConnections(Integer maxPerRouteConnections) {
+        this.maxPerRouteConnections = maxPerRouteConnections;
+    }
+
+    public Integer getMaxTotalConnections() {
+        return maxTotalConnections;
+    }
+
+    public void setMaxTotalConnections(Integer maxTotalConnections) {
+        this.maxTotalConnections = maxTotalConnections;
+    }
+
+    public Map<String, Object> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Map<String, Object> parameters) {
+        this.parameters = parameters;
+    }
+
+    public String getServerAddress() {
+        return serverAddress;
+    }
+
+    public void setServerAddress(String serverAddress) {
+        this.serverAddress = serverAddress;
+    }
+
+    public Boolean getSocket() {
+        return socket;
+    }
+
+    public void setSocket(Boolean socket) {
+        this.socket = socket;
+    }
+
+    public String getCertPath() {
+        return certPath;
+    }
+
+    public void setCertPath(String certPath) {
+        this.certPath = certPath;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getSecure() {
+        return secure;
+    }
+
+    public void setSecure(Boolean secure) {
+        this.secure = secure;
+    }
+
+    public Boolean getTlsVerify() {
+        return tlsVerify;
+    }
+
+    public void setTlsVerify(Boolean tlsVerify) {
+        this.tlsVerify = tlsVerify;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public static class DockerConfigurationNestedConfiguration {

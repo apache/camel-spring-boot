@@ -16,9 +16,7 @@
  */
 package org.apache.camel.component.quickfixj.springboot;
 
-import java.util.Map;
 import javax.annotation.Generated;
-import org.apache.camel.component.quickfixj.QuickfixjConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -39,11 +37,6 @@ public class QuickfixjComponentConfiguration
      * enabled by default.
      */
     private Boolean enabled;
-    /**
-     * To use the given map of pre configured QuickFix configurations mapped to
-     * the key
-     */
-    private Map<String, QuickfixjConfiguration> configurations;
     /**
      * If set to true, the engines will be created and started when needed (when
      * first message is send)
@@ -88,15 +81,6 @@ public class QuickfixjComponentConfiguration
      * quickfix.MessageStoreFactory type.
      */
     private String messageStoreFactory;
-
-    public Map<String, QuickfixjConfiguration> getConfigurations() {
-        return configurations;
-    }
-
-    public void setConfigurations(
-            Map<String, QuickfixjConfiguration> configurations) {
-        this.configurations = configurations;
-    }
 
     public Boolean getLazyCreateEngines() {
         return lazyCreateEngines;

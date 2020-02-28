@@ -17,6 +17,7 @@
 package org.apache.camel.component.aws2.sns.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.aws2.sns.Sns2Component;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
@@ -44,6 +45,20 @@ public class Sns2ComponentConfiguration
      */
     private String accessKey;
     /**
+     * To use the AmazonSNS as the client. The option is a
+     * software.amazon.awssdk.services.sns.SnsClient type.
+     */
+    private String amazonSNSClient;
+    /**
+     * Setting the autocreation of the topic
+     */
+    private Boolean autoCreateTopic = true;
+    /**
+     * The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a
+     * custom CMK.
+     */
+    private String kmsMasterKeyId;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -55,6 +70,30 @@ public class Sns2ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The message structure to use such as json
+     */
+    private String messageStructure;
+    /**
+     * The policy for this queue
+     */
+    private String policy;
+    /**
+     * To define a proxy host when instantiating the SNS client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the SNS client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the SNS client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
+     * The queueUrl to subscribe to
+     */
+    private String queueUrl;
+    /**
      * The region in which SNS client needs to work
      */
     private String region;
@@ -62,6 +101,19 @@ public class Sns2ComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * Define if Server Side Encryption is enabled or not on the topic
+     */
+    private Boolean serverSideEncryptionEnabled = false;
+    /**
+     * The subject which is used if the message header 'CamelAwsSnsSubject' is
+     * not present.
+     */
+    private String subject;
+    /**
+     * Define if the subscription between SNS Topic and SQS must be done or not
+     */
+    private Boolean subscribeSNStoSQS = false;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -80,12 +132,84 @@ public class Sns2ComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getAmazonSNSClient() {
+        return amazonSNSClient;
+    }
+
+    public void setAmazonSNSClient(String amazonSNSClient) {
+        this.amazonSNSClient = amazonSNSClient;
+    }
+
+    public Boolean getAutoCreateTopic() {
+        return autoCreateTopic;
+    }
+
+    public void setAutoCreateTopic(Boolean autoCreateTopic) {
+        this.autoCreateTopic = autoCreateTopic;
+    }
+
+    public String getKmsMasterKeyId() {
+        return kmsMasterKeyId;
+    }
+
+    public void setKmsMasterKeyId(String kmsMasterKeyId) {
+        this.kmsMasterKeyId = kmsMasterKeyId;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public String getMessageStructure() {
+        return messageStructure;
+    }
+
+    public void setMessageStructure(String messageStructure) {
+        this.messageStructure = messageStructure;
+    }
+
+    public String getPolicy() {
+        return policy;
+    }
+
+    public void setPolicy(String policy) {
+        this.policy = policy;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
+    }
+
+    public String getQueueUrl() {
+        return queueUrl;
+    }
+
+    public void setQueueUrl(String queueUrl) {
+        this.queueUrl = queueUrl;
     }
 
     public String getRegion() {
@@ -102,6 +226,31 @@ public class Sns2ComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public Boolean getServerSideEncryptionEnabled() {
+        return serverSideEncryptionEnabled;
+    }
+
+    public void setServerSideEncryptionEnabled(
+            Boolean serverSideEncryptionEnabled) {
+        this.serverSideEncryptionEnabled = serverSideEncryptionEnabled;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public Boolean getSubscribeSNStoSQS() {
+        return subscribeSNStoSQS;
+    }
+
+    public void setSubscribeSNStoSQS(Boolean subscribeSNStoSQS) {
+        this.subscribeSNStoSQS = subscribeSNStoSQS;
     }
 
     public Boolean getBasicPropertyBinding() {

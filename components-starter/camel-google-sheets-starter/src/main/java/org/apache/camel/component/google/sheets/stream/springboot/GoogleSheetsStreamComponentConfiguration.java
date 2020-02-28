@@ -38,6 +38,15 @@ public class GoogleSheetsStreamComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * OAuth 2 access token. This typically expires after an hour so
+     * refreshToken is recommended for long term usage.
+     */
+    private String accessToken;
+    /**
+     * Google sheets application name. Example would be camel-google-sheets/1.0
+     */
+    private String applicationName;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -47,9 +56,64 @@ public class GoogleSheetsStreamComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Client ID of the sheets application
+     */
+    private String clientId;
+    /**
+     * Client secret of the sheets application
+     */
+    private String clientSecret;
+    /**
      * To use the shared configuration
      */
     private GoogleSheetsStreamConfigurationNestedConfiguration configuration;
+    /**
+     * True if grid data should be returned.
+     */
+    private Boolean includeGridData = false;
+    /**
+     * Specifies the major dimension that results should use..
+     */
+    private String majorDimension = "ROWS";
+    /**
+     * Specify the maximum number of returned results. This will limit the
+     * number of rows in a returned value range data set or the number of
+     * returned value ranges in a batch request.
+     */
+    private Integer maxResults = 0;
+    /**
+     * Specifies the range of rows and columns in a sheet to get data from.
+     */
+    private String range;
+    /**
+     * OAuth 2 refresh token. Using this, the Google Calendar component can
+     * obtain a new accessToken whenever the current one expires - a necessity
+     * if the application is long-lived.
+     */
+    private String refreshToken;
+    /**
+     * Specifies the level of permissions you want a sheets application to have
+     * to a user account. See
+     * https://developers.google.com/identity/protocols/googlescopes for more
+     * info.
+     */
+    private List<String> scopes;
+    /**
+     * True if value range result should be split into rows or columns to
+     * process each of them individually. When true each row or column is
+     * represented with a separate exchange in batch processing. Otherwise value
+     * range object is used as exchange junk size.
+     */
+    private Boolean splitResults = false;
+    /**
+     * Specifies the spreadsheet identifier that is used to identify the target
+     * to obtain.
+     */
+    private String spreadsheetId;
+    /**
+     * Determines how values should be rendered in the output.
+     */
+    private String valueRenderOption = "FORMATTED_VALUE";
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -62,12 +126,44 @@ public class GoogleSheetsStreamComponentConfiguration
      */
     private String clientFactory;
 
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
     }
 
     public GoogleSheetsStreamConfigurationNestedConfiguration getConfiguration() {
@@ -77,6 +173,78 @@ public class GoogleSheetsStreamComponentConfiguration
     public void setConfiguration(
             GoogleSheetsStreamConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public Boolean getIncludeGridData() {
+        return includeGridData;
+    }
+
+    public void setIncludeGridData(Boolean includeGridData) {
+        this.includeGridData = includeGridData;
+    }
+
+    public String getMajorDimension() {
+        return majorDimension;
+    }
+
+    public void setMajorDimension(String majorDimension) {
+        this.majorDimension = majorDimension;
+    }
+
+    public Integer getMaxResults() {
+        return maxResults;
+    }
+
+    public void setMaxResults(Integer maxResults) {
+        this.maxResults = maxResults;
+    }
+
+    public String getRange() {
+        return range;
+    }
+
+    public void setRange(String range) {
+        this.range = range;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    public List<String> getScopes() {
+        return scopes;
+    }
+
+    public void setScopes(List<String> scopes) {
+        this.scopes = scopes;
+    }
+
+    public Boolean getSplitResults() {
+        return splitResults;
+    }
+
+    public void setSplitResults(Boolean splitResults) {
+        this.splitResults = splitResults;
+    }
+
+    public String getSpreadsheetId() {
+        return spreadsheetId;
+    }
+
+    public void setSpreadsheetId(String spreadsheetId) {
+        this.spreadsheetId = spreadsheetId;
+    }
+
+    public String getValueRenderOption() {
+        return valueRenderOption;
+    }
+
+    public void setValueRenderOption(String valueRenderOption) {
+        this.valueRenderOption = valueRenderOption;
     }
 
     public Boolean getBasicPropertyBinding() {

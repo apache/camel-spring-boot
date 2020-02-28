@@ -38,9 +38,38 @@ public class GoogleCalendarComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Google calendar application name. Example would be
+     * camel-google-calendar/1.0
+     */
+    private String applicationName;
+    /**
+     * Client ID of the calendar application
+     */
+    private String clientId;
+    /**
      * To use the shared configuration
      */
     private GoogleCalendarConfigurationNestedConfiguration configuration;
+    /**
+     * The emailAddress of the Google Service Account.
+     */
+    private String emailAddress;
+    /**
+     * The name of the p12 file which has the private key to use with the Google
+     * Service Account.
+     */
+    private String p12FileName;
+    /**
+     * Specifies the level of permissions you want a calendar application to
+     * have to a user account. You can separate multiple scopes by comma. See
+     * https://developers.google.com/google-apps/calendar/auth for more info.
+     */
+    private String scopes = "https://www.googleapis.com/auth/calendar";
+    /**
+     * The email address of the user the application is trying to impersonate in
+     * the service account flow
+     */
+    private String user;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -74,6 +103,37 @@ public class GoogleCalendarComponentConfiguration
      * type.
      */
     private String clientFactory;
+    /**
+     * OAuth 2 access token. This typically expires after an hour so
+     * refreshToken is recommended for long term usage.
+     */
+    private String accessToken;
+    /**
+     * Client secret of the calendar application
+     */
+    private String clientSecret;
+    /**
+     * OAuth 2 refresh token. Using this, the Google Calendar component can
+     * obtain a new accessToken whenever the current one expires - a necessity
+     * if the application is long-lived.
+     */
+    private String refreshToken;
+
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
 
     public GoogleCalendarConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -82,6 +142,38 @@ public class GoogleCalendarComponentConfiguration
     public void setConfiguration(
             GoogleCalendarConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getP12FileName() {
+        return p12FileName;
+    }
+
+    public void setP12FileName(String p12FileName) {
+        this.p12FileName = p12FileName;
+    }
+
+    public String getScopes() {
+        return scopes;
+    }
+
+    public void setScopes(String scopes) {
+        this.scopes = scopes;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -114,6 +206,30 @@ public class GoogleCalendarComponentConfiguration
 
     public void setClientFactory(String clientFactory) {
         this.clientFactory = clientFactory;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     public static class GoogleCalendarConfigurationNestedConfiguration {

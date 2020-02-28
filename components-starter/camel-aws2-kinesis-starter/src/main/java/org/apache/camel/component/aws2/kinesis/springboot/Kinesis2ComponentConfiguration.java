@@ -17,6 +17,7 @@
 package org.apache.camel.component.aws2.kinesis.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.aws2.kinesis.Kinesis2Component;
 import org.apache.camel.component.aws2.kinesis.Kinesis2ShardClosedStrategyEnum;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -46,6 +47,23 @@ public class Kinesis2ComponentConfiguration
      */
     private String accessKey;
     /**
+     * Amazon Kinesis client to use for all requests for this endpoint. The
+     * option is a software.amazon.awssdk.services.kinesis.KinesisClient type.
+     */
+    private String amazonKinesisClient;
+    /**
+     * To define a proxy host when instantiating the Kinesis client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the Kinesis client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the Kinesis client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * Amazon AWS Region
      */
     private String region;
@@ -62,6 +80,31 @@ public class Kinesis2ComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Defines where in the Kinesis stream to start getting records
+     */
+    private ShardIteratorType iteratorType = ShardIteratorType.TRIM_HORIZON;
+    /**
+     * Maximum number of records that will be fetched in each poll
+     */
+    private Integer maxResultsPerRequest = 1;
+    /**
+     * The sequence number to start polling from. Required if iteratorType is
+     * set to AFTER_SEQUENCE_NUMBER or AT_SEQUENCE_NUMBER
+     */
+    private String sequenceNumber;
+    /**
+     * Define what will be the behavior in case of shard closed. Possible value
+     * are ignore, silent and fail. In case of ignore a message will be logged
+     * and the consumer will restart from the beginning,in case of silent there
+     * will be no logging and the consumer will start from the beginning,in case
+     * of fail a ReachedClosedStateException will be raised
+     */
+    private Kinesis2ShardClosedStrategyEnum shardClosed = Kinesis2ShardClosedStrategyEnum.ignore;
+    /**
+     * Defines which shardId in the Kinesis stream to get records from
+     */
+    private String shardId;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -91,6 +134,38 @@ public class Kinesis2ComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getAmazonKinesisClient() {
+        return amazonKinesisClient;
+    }
+
+    public void setAmazonKinesisClient(String amazonKinesisClient) {
+        this.amazonKinesisClient = amazonKinesisClient;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
+    }
+
     public String getRegion() {
         return region;
     }
@@ -113,6 +188,46 @@ public class Kinesis2ComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public ShardIteratorType getIteratorType() {
+        return iteratorType;
+    }
+
+    public void setIteratorType(ShardIteratorType iteratorType) {
+        this.iteratorType = iteratorType;
+    }
+
+    public Integer getMaxResultsPerRequest() {
+        return maxResultsPerRequest;
+    }
+
+    public void setMaxResultsPerRequest(Integer maxResultsPerRequest) {
+        this.maxResultsPerRequest = maxResultsPerRequest;
+    }
+
+    public String getSequenceNumber() {
+        return sequenceNumber;
+    }
+
+    public void setSequenceNumber(String sequenceNumber) {
+        this.sequenceNumber = sequenceNumber;
+    }
+
+    public Kinesis2ShardClosedStrategyEnum getShardClosed() {
+        return shardClosed;
+    }
+
+    public void setShardClosed(Kinesis2ShardClosedStrategyEnum shardClosed) {
+        this.shardClosed = shardClosed;
+    }
+
+    public String getShardId() {
+        return shardId;
+    }
+
+    public void setShardId(String shardId) {
+        this.shardId = shardId;
     }
 
     public Boolean getLazyStartProducer() {

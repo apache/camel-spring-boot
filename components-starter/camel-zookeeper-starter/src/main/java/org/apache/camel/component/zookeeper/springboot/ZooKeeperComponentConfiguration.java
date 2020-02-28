@@ -38,6 +38,18 @@ public class ZooKeeperComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Whether the children of the node should be listed
+     */
+    private Boolean listChildren = false;
+    /**
+     * The time interval to wait on connection before timing out.
+     */
+    private Integer timeout = 5000;
+    /**
+     * The time interval to backoff for after an error before retrying.
+     */
+    private Long backoff = 5000L;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -46,6 +58,23 @@ public class ZooKeeperComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Should changes to the znode be 'watched' and repeatedly processed.
+     */
+    private Boolean repeat = false;
+    /**
+     * Upon the delete of a znode, should an empty message be send to the
+     * consumer
+     */
+    private Boolean sendEmptyMessageOnDelete = true;
+    /**
+     * Should the endpoint create the node if it does not currently exist.
+     */
+    private Boolean create = false;
+    /**
+     * The create mode that should be used for the newly created node
+     */
+    private String createMode = "EPHEMERAL";
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -67,12 +96,68 @@ public class ZooKeeperComponentConfiguration
      */
     private ZooKeeperConfigurationNestedConfiguration configuration;
 
+    public Boolean getListChildren() {
+        return listChildren;
+    }
+
+    public void setListChildren(Boolean listChildren) {
+        this.listChildren = listChildren;
+    }
+
+    public Integer getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(Integer timeout) {
+        this.timeout = timeout;
+    }
+
+    public Long getBackoff() {
+        return backoff;
+    }
+
+    public void setBackoff(Long backoff) {
+        this.backoff = backoff;
+    }
+
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(Boolean repeat) {
+        this.repeat = repeat;
+    }
+
+    public Boolean getSendEmptyMessageOnDelete() {
+        return sendEmptyMessageOnDelete;
+    }
+
+    public void setSendEmptyMessageOnDelete(Boolean sendEmptyMessageOnDelete) {
+        this.sendEmptyMessageOnDelete = sendEmptyMessageOnDelete;
+    }
+
+    public Boolean getCreate() {
+        return create;
+    }
+
+    public void setCreate(Boolean create) {
+        this.create = create;
+    }
+
+    public String getCreateMode() {
+        return createMode;
+    }
+
+    public void setCreateMode(String createMode) {
+        this.createMode = createMode;
     }
 
     public Boolean getLazyStartProducer() {

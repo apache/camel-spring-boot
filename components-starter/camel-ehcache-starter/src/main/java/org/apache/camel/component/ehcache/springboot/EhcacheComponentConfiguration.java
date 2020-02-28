@@ -18,14 +18,12 @@ package org.apache.camel.component.ehcache.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import org.apache.camel.component.ehcache.EhcacheComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
-import org.ehcache.CacheManager;
 import org.ehcache.config.CacheConfiguration;
-import org.ehcache.config.Configuration;
 import org.ehcache.event.EventFiring;
 import org.ehcache.event.EventOrdering;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * The ehcache component enables you to perform caching operations using Ehcache
@@ -45,15 +43,6 @@ public class EhcacheComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The default cache configuration to be used to create caches. The option
-     * is a org.ehcache.config.CacheConfiguration type.
-     */
-    private String cacheConfiguration;
-    /**
-     * URI pointing to the Ehcache XML configuration file's location
-     */
-    private String cacheConfigurationUri;
-    /**
      * The cache manager. The option is a org.ehcache.CacheManager type.
      */
     private String cacheManager;
@@ -63,9 +52,14 @@ public class EhcacheComponentConfiguration
      */
     private String cacheManagerConfiguration;
     /**
-     * A map of caches configurations to be used to create caches.
+     * URI pointing to the Ehcache XML configuration file's location
      */
-    private Map<String, CacheConfiguration> cachesConfigurations;
+    private String configurationUri;
+    /**
+     * Configure if a cache need to be created if it does exist or can't be
+     * pre-configured.
+     */
+    private Boolean createCacheIfNotExist = true;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -75,6 +69,31 @@ public class EhcacheComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Set the delivery mode (synchronous, asynchronous)
+     */
+    private EventFiring eventFiring = EventFiring.ASYNCHRONOUS;
+    /**
+     * Set the delivery mode (ordered, unordered)
+     */
+    private EventOrdering eventOrdering = EventOrdering.ORDERED;
+    /**
+     * Set the type of events to listen for
+     * (EVICTED,EXPIRED,REMOVED,CREATED,UPDATED). You can specify multiple
+     * entries separated by comma.
+     */
+    private String eventTypes;
+    /**
+     * To configure the default cache action. If an action is set in the message
+     * header, then the operation from the header takes precedence.
+     */
+    private String action;
+    /**
+     * To configure the default action key. If a key is set in the message
+     * header, then the key from the header takes precedence. The option is a
+     * java.lang.Object type.
+     */
+    private String key;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -92,25 +111,22 @@ public class EhcacheComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Sets the global component configuration
+     * The default cache configuration to be used to create caches. The option
+     * is a org.ehcache.config.CacheConfiguration type.
      */
-    private EhcacheConfigurationNestedConfiguration configuration;
-
-    public String getCacheConfiguration() {
-        return cacheConfiguration;
-    }
-
-    public void setCacheConfiguration(String cacheConfiguration) {
-        this.cacheConfiguration = cacheConfiguration;
-    }
-
-    public String getCacheConfigurationUri() {
-        return cacheConfigurationUri;
-    }
-
-    public void setCacheConfigurationUri(String cacheConfigurationUri) {
-        this.cacheConfigurationUri = cacheConfigurationUri;
-    }
+    private String configuration;
+    /**
+     * A map of cache configuration to be used to create caches.
+     */
+    private Map<String, CacheConfiguration> configurations;
+    /**
+     * The cache key type, default java.lang.Object
+     */
+    private String keyType;
+    /**
+     * The cache value type, default java.lang.Object
+     */
+    private String valueType;
 
     public String getCacheManager() {
         return cacheManager;
@@ -128,13 +144,20 @@ public class EhcacheComponentConfiguration
         this.cacheManagerConfiguration = cacheManagerConfiguration;
     }
 
-    public Map<String, CacheConfiguration> getCachesConfigurations() {
-        return cachesConfigurations;
+    public String getConfigurationUri() {
+        return configurationUri;
     }
 
-    public void setCachesConfigurations(
-            Map<String, CacheConfiguration> cachesConfigurations) {
-        this.cachesConfigurations = cachesConfigurations;
+    public void setConfigurationUri(String configurationUri) {
+        this.configurationUri = configurationUri;
+    }
+
+    public Boolean getCreateCacheIfNotExist() {
+        return createCacheIfNotExist;
+    }
+
+    public void setCreateCacheIfNotExist(Boolean createCacheIfNotExist) {
+        this.createCacheIfNotExist = createCacheIfNotExist;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -143,6 +166,46 @@ public class EhcacheComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public EventFiring getEventFiring() {
+        return eventFiring;
+    }
+
+    public void setEventFiring(EventFiring eventFiring) {
+        this.eventFiring = eventFiring;
+    }
+
+    public EventOrdering getEventOrdering() {
+        return eventOrdering;
+    }
+
+    public void setEventOrdering(EventOrdering eventOrdering) {
+        this.eventOrdering = eventOrdering;
+    }
+
+    public String getEventTypes() {
+        return eventTypes;
+    }
+
+    public void setEventTypes(String eventTypes) {
+        this.eventTypes = eventTypes;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public Boolean getLazyStartProducer() {
@@ -161,191 +224,35 @@ public class EhcacheComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public EhcacheConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            EhcacheConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
-    public static class EhcacheConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.ehcache.EhcacheConfiguration.class;
-        /**
-         * To configure the default cache action. If an action is set in the
-         * message header, then the operation from the header takes precedence.
-         */
-        private String action;
-        /**
-         * The cache manager
-         */
-        private CacheManager cacheManager;
-        /**
-         * The cache manager configuration
-         */
-        private Configuration cacheManagerConfiguration;
-        @Deprecated
-        private String configUri;
-        /**
-         * The default cache configuration to be used to create caches.
-         */
-        private CacheConfiguration configuration;
-        /**
-         * URI pointing to the Ehcache XML configuration file's location
-         */
-        private String configurationUri;
-        /**
-         * A map of cache configuration to be used to create caches.
-         */
-        private Map configurations;
-        /**
-         * Configure if a cache need to be created if it does exist or can't be
-         * pre-configured.
-         */
-        private Boolean createCacheIfNotExist = true;
-        /**
-         * Set the delivery mode (synchronous, asynchronous)
-         */
-        private EventFiring eventFiring = EventFiring.ASYNCHRONOUS;
-        /**
-         * Set the delivery mode (ordered, unordered)
-         */
-        private EventOrdering eventOrdering = EventOrdering.ORDERED;
-        /**
-         * Set the type of events to listen for
-         * (EVICTED,EXPIRED,REMOVED,CREATED,UPDATED). You can specify multiple
-         * entries separated by comma.
-         */
-        private String eventTypes;
-        /**
-         * To configure the default action key. If a key is set in the message
-         * header, then the key from the header takes precedence.
-         */
-        private Object key;
-        /**
-         * The cache key type, default java.lang.Object
-         */
-        private String keyType;
-        /**
-         * The cache value type, default java.lang.Object
-         */
-        private String valueType;
+    public Map<String, CacheConfiguration> getConfigurations() {
+        return configurations;
+    }
 
-        public String getAction() {
-            return action;
-        }
+    public void setConfigurations(Map<String, CacheConfiguration> configurations) {
+        this.configurations = configurations;
+    }
 
-        public void setAction(String action) {
-            this.action = action;
-        }
+    public String getKeyType() {
+        return keyType;
+    }
 
-        public CacheManager getCacheManager() {
-            return cacheManager;
-        }
+    public void setKeyType(String keyType) {
+        this.keyType = keyType;
+    }
 
-        public void setCacheManager(CacheManager cacheManager) {
-            this.cacheManager = cacheManager;
-        }
+    public String getValueType() {
+        return valueType;
+    }
 
-        public Configuration getCacheManagerConfiguration() {
-            return cacheManagerConfiguration;
-        }
-
-        public void setCacheManagerConfiguration(
-                Configuration cacheManagerConfiguration) {
-            this.cacheManagerConfiguration = cacheManagerConfiguration;
-        }
-
-        @Deprecated
-        @DeprecatedConfigurationProperty
-        public String getConfigUri() {
-            return configUri;
-        }
-
-        @Deprecated
-        public void setConfigUri(String configUri) {
-            this.configUri = configUri;
-        }
-
-        public CacheConfiguration getConfiguration() {
-            return configuration;
-        }
-
-        public void setConfiguration(CacheConfiguration configuration) {
-            this.configuration = configuration;
-        }
-
-        public String getConfigurationUri() {
-            return configurationUri;
-        }
-
-        public void setConfigurationUri(String configurationUri) {
-            this.configurationUri = configurationUri;
-        }
-
-        public Map getConfigurations() {
-            return configurations;
-        }
-
-        public void setConfigurations(Map configurations) {
-            this.configurations = configurations;
-        }
-
-        public Boolean getCreateCacheIfNotExist() {
-            return createCacheIfNotExist;
-        }
-
-        public void setCreateCacheIfNotExist(Boolean createCacheIfNotExist) {
-            this.createCacheIfNotExist = createCacheIfNotExist;
-        }
-
-        public EventFiring getEventFiring() {
-            return eventFiring;
-        }
-
-        public void setEventFiring(EventFiring eventFiring) {
-            this.eventFiring = eventFiring;
-        }
-
-        public EventOrdering getEventOrdering() {
-            return eventOrdering;
-        }
-
-        public void setEventOrdering(EventOrdering eventOrdering) {
-            this.eventOrdering = eventOrdering;
-        }
-
-        public String getEventTypes() {
-            return eventTypes;
-        }
-
-        public void setEventTypes(String eventTypes) {
-            this.eventTypes = eventTypes;
-        }
-
-        public Object getKey() {
-            return key;
-        }
-
-        public void setKey(Object key) {
-            this.key = key;
-        }
-
-        public String getKeyType() {
-            return keyType;
-        }
-
-        public void setKeyType(String keyType) {
-            this.keyType = keyType;
-        }
-
-        public String getValueType() {
-            return valueType;
-        }
-
-        public void setValueType(String valueType) {
-            this.valueType = valueType;
-        }
+    public void setValueType(String valueType) {
+        this.valueType = valueType;
     }
 }

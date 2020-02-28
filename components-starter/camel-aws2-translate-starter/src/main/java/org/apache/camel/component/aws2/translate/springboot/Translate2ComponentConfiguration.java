@@ -17,6 +17,7 @@
 package org.apache.camel.component.aws2.translate.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.aws2.translate.Translate2Component;
 import org.apache.camel.component.aws2.translate.Translate2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -44,6 +45,10 @@ public class Translate2ComponentConfiguration
      */
     private String accessKey;
     /**
+     * Being able to autodetect the source language
+     */
+    private Boolean autodetectSourceLanguage = false;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -55,6 +60,22 @@ public class Translate2ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The operation to perform
+     */
+    private Translate2Operations operation = Translate2Operations.translateText;
+    /**
+     * To define a proxy host when instantiating the Translate client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the Translate client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the Translate client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * The region in which Translate client needs to work
      */
     private String region;
@@ -62,6 +83,19 @@ public class Translate2ComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * Source language to use
+     */
+    private String sourceLanguage;
+    /**
+     * Target language to use
+     */
+    private String targetLanguage;
+    /**
+     * To use a existing configured AWS Translate as client. The option is a
+     * software.amazon.awssdk.services.translate.TranslateClient type.
+     */
+    private String translateClient;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -80,12 +114,52 @@ public class Translate2ComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public Boolean getAutodetectSourceLanguage() {
+        return autodetectSourceLanguage;
+    }
+
+    public void setAutodetectSourceLanguage(Boolean autodetectSourceLanguage) {
+        this.autodetectSourceLanguage = autodetectSourceLanguage;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Translate2Operations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Translate2Operations operation) {
+        this.operation = operation;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public String getRegion() {
@@ -102,6 +176,30 @@ public class Translate2ComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public String getSourceLanguage() {
+        return sourceLanguage;
+    }
+
+    public void setSourceLanguage(String sourceLanguage) {
+        this.sourceLanguage = sourceLanguage;
+    }
+
+    public String getTargetLanguage() {
+        return targetLanguage;
+    }
+
+    public void setTargetLanguage(String targetLanguage) {
+        this.targetLanguage = targetLanguage;
+    }
+
+    public String getTranslateClient() {
+        return translateClient;
+    }
+
+    public void setTranslateClient(String translateClient) {
+        this.translateClient = translateClient;
     }
 
     public Boolean getBasicPropertyBinding() {

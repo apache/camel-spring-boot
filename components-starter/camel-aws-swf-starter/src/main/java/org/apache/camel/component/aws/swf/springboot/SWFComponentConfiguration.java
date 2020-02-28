@@ -49,6 +49,25 @@ public class SWFComponentConfiguration
      */
     private String accessKey;
     /**
+     * To use the given AmazonSimpleWorkflowClient as client. The option is a
+     * com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflow type.
+     */
+    private String amazonSWClient;
+    /**
+     * An instance of com.amazonaws.services.simpleworkflow.flow.DataConverter
+     * to use for serializing/deserializing the data. The option is a
+     * com.amazonaws.services.simpleworkflow.flow.DataConverter type.
+     */
+    private String dataConverter;
+    /**
+     * The workflow domain to use.
+     */
+    private String domainName;
+    /**
+     * The workflow or activity event name to use.
+     */
+    private String eventName;
+    /**
      * Amazon AWS Region.
      */
     private String region;
@@ -56,6 +75,10 @@ public class SWFComponentConfiguration
      * Amazon AWS Secret Key.
      */
     private String secretKey;
+    /**
+     * The workflow or activity event version to use.
+     */
+    private String version;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -82,9 +105,87 @@ public class SWFComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * To configure the ClientConfiguration using the key/values from the Map.
+     */
+    private Map<String, Object> clientConfigurationParameters;
+    /**
      * The AWS SWF default configuration
      */
     private SWFConfigurationNestedConfiguration configuration;
+    /**
+     * To configure the StartWorkflowOptions using the key/values from the Map.
+     */
+    private Map<String, Object> startWorkflowOptionsParameters;
+    /**
+     * To configure the AmazonSimpleWorkflowClient using the key/values from the
+     * Map.
+     */
+    private Map<String, Object> sWClientParameters;
+    /**
+     * The list name to consume activities from.
+     */
+    private String activityList;
+    /**
+     * Activity scheduling options. The option is a
+     * com.amazonaws.services.simpleworkflow.flow.ActivitySchedulingOptions
+     * type.
+     */
+    private String activitySchedulingOptions;
+    /**
+     * Maximum number of threads in work pool for activity.
+     */
+    private Integer activityThreadPoolSize = 100;
+    /**
+     * Activity execution options. The option is a
+     * com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeExecutionOptions type.
+     */
+    private String activityTypeExecutionOptions;
+    /**
+     * Activity registration options. The option is a
+     * com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeRegistrationOptions type.
+     */
+    private String activityTypeRegistrationOptions;
+    /**
+     * The policy to use on child workflows when terminating a workflow.
+     */
+    private String childPolicy;
+    /**
+     * Set the execution start to close timeout.
+     */
+    private String executionStartToCloseTimeout = "3600";
+    /**
+     * Workflow operation
+     */
+    private String operation = "START";
+    /**
+     * The name of the signal to send to the workflow.
+     */
+    private String signalName;
+    /**
+     * The type of the result when a workflow state is queried.
+     */
+    private String stateResultType;
+    /**
+     * Set the task start to close timeout.
+     */
+    private String taskStartToCloseTimeout = "600";
+    /**
+     * Details for terminating a workflow.
+     */
+    private String terminationDetails;
+    /**
+     * The reason for terminating a workflow.
+     */
+    private String terminationReason;
+    /**
+     * The list name to consume workflows from.
+     */
+    private String workflowList;
+    /**
+     * Workflow registration options. The option is a
+     * com.amazonaws.services.simpleworkflow.flow.WorkflowTypeRegistrationOptions type.
+     */
+    private String workflowTypeRegistrationOptions;
 
     public String getAccessKey() {
         return accessKey;
@@ -92,6 +193,38 @@ public class SWFComponentConfiguration
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public String getAmazonSWClient() {
+        return amazonSWClient;
+    }
+
+    public void setAmazonSWClient(String amazonSWClient) {
+        this.amazonSWClient = amazonSWClient;
+    }
+
+    public String getDataConverter() {
+        return dataConverter;
+    }
+
+    public void setDataConverter(String dataConverter) {
+        this.dataConverter = dataConverter;
+    }
+
+    public String getDomainName() {
+        return domainName;
+    }
+
+    public void setDomainName(String domainName) {
+        this.domainName = domainName;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getRegion() {
@@ -108,6 +241,14 @@ public class SWFComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -134,6 +275,15 @@ public class SWFComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
+    public Map<String, Object> getClientConfigurationParameters() {
+        return clientConfigurationParameters;
+    }
+
+    public void setClientConfigurationParameters(
+            Map<String, Object> clientConfigurationParameters) {
+        this.clientConfigurationParameters = clientConfigurationParameters;
+    }
+
     public SWFConfigurationNestedConfiguration getConfiguration() {
         return configuration;
     }
@@ -141,6 +291,147 @@ public class SWFComponentConfiguration
     public void setConfiguration(
             SWFConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public Map<String, Object> getStartWorkflowOptionsParameters() {
+        return startWorkflowOptionsParameters;
+    }
+
+    public void setStartWorkflowOptionsParameters(
+            Map<String, Object> startWorkflowOptionsParameters) {
+        this.startWorkflowOptionsParameters = startWorkflowOptionsParameters;
+    }
+
+    public Map<String, Object> getSWClientParameters() {
+        return sWClientParameters;
+    }
+
+    public void setSWClientParameters(Map<String, Object> sWClientParameters) {
+        this.sWClientParameters = sWClientParameters;
+    }
+
+    public String getActivityList() {
+        return activityList;
+    }
+
+    public void setActivityList(String activityList) {
+        this.activityList = activityList;
+    }
+
+    public String getActivitySchedulingOptions() {
+        return activitySchedulingOptions;
+    }
+
+    public void setActivitySchedulingOptions(String activitySchedulingOptions) {
+        this.activitySchedulingOptions = activitySchedulingOptions;
+    }
+
+    public Integer getActivityThreadPoolSize() {
+        return activityThreadPoolSize;
+    }
+
+    public void setActivityThreadPoolSize(Integer activityThreadPoolSize) {
+        this.activityThreadPoolSize = activityThreadPoolSize;
+    }
+
+    public String getActivityTypeExecutionOptions() {
+        return activityTypeExecutionOptions;
+    }
+
+    public void setActivityTypeExecutionOptions(
+            String activityTypeExecutionOptions) {
+        this.activityTypeExecutionOptions = activityTypeExecutionOptions;
+    }
+
+    public String getActivityTypeRegistrationOptions() {
+        return activityTypeRegistrationOptions;
+    }
+
+    public void setActivityTypeRegistrationOptions(
+            String activityTypeRegistrationOptions) {
+        this.activityTypeRegistrationOptions = activityTypeRegistrationOptions;
+    }
+
+    public String getChildPolicy() {
+        return childPolicy;
+    }
+
+    public void setChildPolicy(String childPolicy) {
+        this.childPolicy = childPolicy;
+    }
+
+    public String getExecutionStartToCloseTimeout() {
+        return executionStartToCloseTimeout;
+    }
+
+    public void setExecutionStartToCloseTimeout(
+            String executionStartToCloseTimeout) {
+        this.executionStartToCloseTimeout = executionStartToCloseTimeout;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
+
+    public String getSignalName() {
+        return signalName;
+    }
+
+    public void setSignalName(String signalName) {
+        this.signalName = signalName;
+    }
+
+    public String getStateResultType() {
+        return stateResultType;
+    }
+
+    public void setStateResultType(String stateResultType) {
+        this.stateResultType = stateResultType;
+    }
+
+    public String getTaskStartToCloseTimeout() {
+        return taskStartToCloseTimeout;
+    }
+
+    public void setTaskStartToCloseTimeout(String taskStartToCloseTimeout) {
+        this.taskStartToCloseTimeout = taskStartToCloseTimeout;
+    }
+
+    public String getTerminationDetails() {
+        return terminationDetails;
+    }
+
+    public void setTerminationDetails(String terminationDetails) {
+        this.terminationDetails = terminationDetails;
+    }
+
+    public String getTerminationReason() {
+        return terminationReason;
+    }
+
+    public void setTerminationReason(String terminationReason) {
+        this.terminationReason = terminationReason;
+    }
+
+    public String getWorkflowList() {
+        return workflowList;
+    }
+
+    public void setWorkflowList(String workflowList) {
+        this.workflowList = workflowList;
+    }
+
+    public String getWorkflowTypeRegistrationOptions() {
+        return workflowTypeRegistrationOptions;
+    }
+
+    public void setWorkflowTypeRegistrationOptions(
+            String workflowTypeRegistrationOptions) {
+        this.workflowTypeRegistrationOptions = workflowTypeRegistrationOptions;
     }
 
     public static class SWFConfigurationNestedConfiguration {

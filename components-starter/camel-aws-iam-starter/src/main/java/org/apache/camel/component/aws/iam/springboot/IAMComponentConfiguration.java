@@ -19,6 +19,7 @@ package org.apache.camel.component.aws.iam.springboot;
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
 import com.amazonaws.services.identitymanagement.AmazonIdentityManagement;
+import org.apache.camel.component.aws.iam.IAMComponent;
 import org.apache.camel.component.aws.iam.IAMOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -44,6 +45,11 @@ public class IAMComponentConfiguration
      */
     private String accessKey;
     /**
+     * To use a existing configured AWS IAM as client. The option is a
+     * com.amazonaws.services.identitymanagement.AmazonIdentityManagement type.
+     */
+    private String iamClient;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -54,6 +60,22 @@ public class IAMComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * The operation to perform
+     */
+    private IAMOperations operation;
+    /**
+     * To define a proxy host when instantiating the IAM client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the IAM client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the IAM client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
     /**
      * The region in which IAM client needs to work
      */
@@ -80,12 +102,52 @@ public class IAMComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getIamClient() {
+        return iamClient;
+    }
+
+    public void setIamClient(String iamClient) {
+        this.iamClient = iamClient;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public IAMOperations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(IAMOperations operation) {
+        this.operation = operation;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public String getRegion() {

@@ -40,9 +40,23 @@ public class GoogleDriveComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Google drive application name. Example would be camel-google-drive/1.0
+     */
+    private String applicationName;
+    /**
+     * Client ID of the drive application
+     */
+    private String clientId;
+    /**
      * To use the shared configuration
      */
     private GoogleDriveConfigurationNestedConfiguration configuration;
+    /**
+     * Specifies the level of permissions you want a drive application to have
+     * to a user account. See https://developers.google.com/drive/web/scopes for
+     * more info.
+     */
+    private List<String> scopes;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -74,6 +88,37 @@ public class GoogleDriveComponentConfiguration
      * a org.apache.camel.component.google.drive.GoogleDriveClientFactory type.
      */
     private String clientFactory;
+    /**
+     * OAuth 2 access token. This typically expires after an hour so
+     * refreshToken is recommended for long term usage.
+     */
+    private String accessToken;
+    /**
+     * Client secret of the drive application
+     */
+    private String clientSecret;
+    /**
+     * OAuth 2 refresh token. Using this, the Google Calendar component can
+     * obtain a new accessToken whenever the current one expires - a necessity
+     * if the application is long-lived.
+     */
+    private String refreshToken;
+
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
 
     public GoogleDriveConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -82,6 +127,14 @@ public class GoogleDriveComponentConfiguration
     public void setConfiguration(
             GoogleDriveConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public List<String> getScopes() {
+        return scopes;
+    }
+
+    public void setScopes(List<String> scopes) {
+        this.scopes = scopes;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -114,6 +167,30 @@ public class GoogleDriveComponentConfiguration
 
     public void setClientFactory(String clientFactory) {
         this.clientFactory = clientFactory;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     public static class GoogleDriveConfigurationNestedConfiguration {

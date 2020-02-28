@@ -20,6 +20,7 @@ import java.util.Map;
 import javax.annotation.Generated;
 import com.box.sdk.EncryptionAlgorithm;
 import com.box.sdk.IAccessTokenCache;
+import org.apache.camel.component.box.BoxComponent;
 import org.apache.camel.component.box.internal.BoxApiName;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
@@ -43,9 +44,21 @@ public class BoxComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Box application client ID
+     */
+    private String clientId;
+    /**
      * To use the shared configuration
      */
     private BoxConfigurationNestedConfiguration configuration;
+    /**
+     * The enterprise ID to use for an App Enterprise.
+     */
+    private String enterpriseId;
+    /**
+     * The user ID to use for an App User.
+     */
+    private String userId;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -71,6 +84,68 @@ public class BoxComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+    /**
+     * Custom HTTP params for settings like proxy host
+     */
+    private Map<String, Object> httpParams;
+    /**
+     * Custom Access Token Cache for storing and retrieving access tokens. The
+     * option is a com.box.sdk.IAccessTokenCache type.
+     */
+    private String accessTokenCache;
+    /**
+     * Box application client secret
+     */
+    private String clientSecret;
+    /**
+     * The type of encryption algorithm for JWT. Supported Algorithms:
+     * RSA_SHA_256 RSA_SHA_384 RSA_SHA_512
+     */
+    private EncryptionAlgorithm encryptionAlgorithm = EncryptionAlgorithm.RSA_SHA_256;
+    /**
+     * The maximum number of access tokens in cache.
+     */
+    private Integer maxCacheEntries = 100;
+    /**
+     * The type of authentication for connection. Types of Authentication:
+     * STANDARD_AUTHENTICATION - OAuth 2.0 (3-legged) SERVER_AUTHENTICATION -
+     * OAuth 2.0 with JSON Web Tokens
+     */
+    private String authenticationType = "APP_USER_AUTHENTICATION";
+    /**
+     * The private key for generating the JWT signature.
+     */
+    private String privateKeyFile;
+    /**
+     * The password for the private key.
+     */
+    private String privateKeyPassword;
+    /**
+     * The ID for public key for validating the JWT signature.
+     */
+    private String publicKeyId;
+    /**
+     * To configure security using SSLContextParameters. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private String sslContextParameters;
+    /**
+     * Box user name, MUST be provided
+     */
+    private String userName;
+    /**
+     * Box user password, MUST be provided if authSecureStorage is not set, or
+     * returns null on first call
+     */
+    private String userPassword;
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
 
     public BoxConfigurationNestedConfiguration getConfiguration() {
         return configuration;
@@ -79,6 +154,22 @@ public class BoxComponentConfiguration
     public void setConfiguration(
             BoxConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getEnterpriseId() {
+        return enterpriseId;
+    }
+
+    public void setEnterpriseId(String enterpriseId) {
+        this.enterpriseId = enterpriseId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -103,6 +194,102 @@ public class BoxComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public Map<String, Object> getHttpParams() {
+        return httpParams;
+    }
+
+    public void setHttpParams(Map<String, Object> httpParams) {
+        this.httpParams = httpParams;
+    }
+
+    public String getAccessTokenCache() {
+        return accessTokenCache;
+    }
+
+    public void setAccessTokenCache(String accessTokenCache) {
+        this.accessTokenCache = accessTokenCache;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
+    public EncryptionAlgorithm getEncryptionAlgorithm() {
+        return encryptionAlgorithm;
+    }
+
+    public void setEncryptionAlgorithm(EncryptionAlgorithm encryptionAlgorithm) {
+        this.encryptionAlgorithm = encryptionAlgorithm;
+    }
+
+    public Integer getMaxCacheEntries() {
+        return maxCacheEntries;
+    }
+
+    public void setMaxCacheEntries(Integer maxCacheEntries) {
+        this.maxCacheEntries = maxCacheEntries;
+    }
+
+    public String getAuthenticationType() {
+        return authenticationType;
+    }
+
+    public void setAuthenticationType(String authenticationType) {
+        this.authenticationType = authenticationType;
+    }
+
+    public String getPrivateKeyFile() {
+        return privateKeyFile;
+    }
+
+    public void setPrivateKeyFile(String privateKeyFile) {
+        this.privateKeyFile = privateKeyFile;
+    }
+
+    public String getPrivateKeyPassword() {
+        return privateKeyPassword;
+    }
+
+    public void setPrivateKeyPassword(String privateKeyPassword) {
+        this.privateKeyPassword = privateKeyPassword;
+    }
+
+    public String getPublicKeyId() {
+        return publicKeyId;
+    }
+
+    public void setPublicKeyId(String publicKeyId) {
+        this.publicKeyId = publicKeyId;
+    }
+
+    public String getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(String sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     public static class BoxConfigurationNestedConfiguration {

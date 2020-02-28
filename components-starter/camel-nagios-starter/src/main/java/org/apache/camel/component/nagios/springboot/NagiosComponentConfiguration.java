@@ -38,6 +38,10 @@ public class NagiosComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Connection timeout in millis.
+     */
+    private Integer connectionTimeout = 5000;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -49,6 +53,10 @@ public class NagiosComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Sending timeout in millis.
+     */
+    private Integer timeout = 5000;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -57,6 +65,22 @@ public class NagiosComponentConfiguration
      * To use a shared NagiosConfiguration
      */
     private NagiosConfigurationNestedConfiguration configuration;
+    /**
+     * To specify an encryption method.
+     */
+    private Encryption encryption;
+    /**
+     * Password to be authenticated when sending checks to Nagios.
+     */
+    private String password;
+
+    public Integer getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Integer connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -64,6 +88,14 @@ public class NagiosComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Integer getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(Integer timeout) {
+        this.timeout = timeout;
     }
 
     public Boolean getBasicPropertyBinding() {
@@ -81,6 +113,22 @@ public class NagiosComponentConfiguration
     public void setConfiguration(
             NagiosConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public Encryption getEncryption() {
+        return encryption;
+    }
+
+    public void setEncryption(Encryption encryption) {
+        this.encryption = encryption;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public static class NagiosConfigurationNestedConfiguration {

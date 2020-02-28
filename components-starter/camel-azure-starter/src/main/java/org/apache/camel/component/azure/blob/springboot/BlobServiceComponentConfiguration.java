@@ -20,6 +20,7 @@ import java.util.Map;
 import javax.annotation.Generated;
 import com.microsoft.azure.storage.StorageCredentials;
 import com.microsoft.azure.storage.blob.CloudBlob;
+import org.apache.camel.component.azure.blob.BlobServiceComponent;
 import org.apache.camel.component.azure.blob.BlobServiceOperations;
 import org.apache.camel.component.azure.blob.BlobType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -43,6 +44,45 @@ public class BlobServiceComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The blob service client. The option is a
+     * com.microsoft.azure.storage.blob.CloudBlob type.
+     */
+    private String azureBlobClient;
+    /**
+     * Set the blob offset for the upload or download operations, default is 0
+     */
+    private Long blobOffset = 0L;
+    /**
+     * Set a blob type, 'blockblob' is default
+     */
+    private BlobType blobType = BlobType.blockblob;
+    /**
+     * Close the stream after read or keep it open, default is true
+     */
+    private Boolean closeStreamAfterRead = true;
+    /**
+     * Set the storage credentials, required in most cases. The option is a
+     * com.microsoft.azure.storage.StorageCredentials type.
+     */
+    private String credentials;
+    /**
+     * Set the data length for the download or page blob upload operations
+     */
+    private Long dataLength;
+    /**
+     * Set the file directory where the downloaded blobs will be saved to
+     */
+    private String fileDir;
+    /**
+     * Storage resources can be public for reading their content, if this
+     * property is enabled then the credentials do not have to be set
+     */
+    private Boolean publicForRead = false;
+    /**
+     * Set the minimum read size in bytes when reading the blob content
+     */
+    private Integer streamReadSize;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -51,6 +91,18 @@ public class BlobServiceComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Set the blob meta-data
+     */
+    private Map<String, String> blobMetadata;
+    /**
+     * Set a prefix which can be used for listing the blobs
+     */
+    private String blobPrefix;
+    /**
+     * Close the stream after write or keep it open, default is true
+     */
+    private Boolean closeStreamAfterWrite = true;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -63,6 +115,18 @@ public class BlobServiceComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Blob service operation hint to the producer
+     */
+    private BlobServiceOperations operation = BlobServiceOperations.listBlobs;
+    /**
+     * Set the size of the buffer for writing block and page blocks
+     */
+    private Integer streamWriteSize;
+    /**
+     * Specify if the flat or hierarchical blob listing should be used
+     */
+    private Boolean useFlatListing = true;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -72,6 +136,78 @@ public class BlobServiceComponentConfiguration
      */
     private BlobServiceConfigurationNestedConfiguration configuration;
 
+    public String getAzureBlobClient() {
+        return azureBlobClient;
+    }
+
+    public void setAzureBlobClient(String azureBlobClient) {
+        this.azureBlobClient = azureBlobClient;
+    }
+
+    public Long getBlobOffset() {
+        return blobOffset;
+    }
+
+    public void setBlobOffset(Long blobOffset) {
+        this.blobOffset = blobOffset;
+    }
+
+    public BlobType getBlobType() {
+        return blobType;
+    }
+
+    public void setBlobType(BlobType blobType) {
+        this.blobType = blobType;
+    }
+
+    public Boolean getCloseStreamAfterRead() {
+        return closeStreamAfterRead;
+    }
+
+    public void setCloseStreamAfterRead(Boolean closeStreamAfterRead) {
+        this.closeStreamAfterRead = closeStreamAfterRead;
+    }
+
+    public String getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(String credentials) {
+        this.credentials = credentials;
+    }
+
+    public Long getDataLength() {
+        return dataLength;
+    }
+
+    public void setDataLength(Long dataLength) {
+        this.dataLength = dataLength;
+    }
+
+    public String getFileDir() {
+        return fileDir;
+    }
+
+    public void setFileDir(String fileDir) {
+        this.fileDir = fileDir;
+    }
+
+    public Boolean getPublicForRead() {
+        return publicForRead;
+    }
+
+    public void setPublicForRead(Boolean publicForRead) {
+        this.publicForRead = publicForRead;
+    }
+
+    public Integer getStreamReadSize() {
+        return streamReadSize;
+    }
+
+    public void setStreamReadSize(Integer streamReadSize) {
+        this.streamReadSize = streamReadSize;
+    }
+
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
@@ -80,12 +216,60 @@ public class BlobServiceComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
+    public Map<String, String> getBlobMetadata() {
+        return blobMetadata;
+    }
+
+    public void setBlobMetadata(Map<String, String> blobMetadata) {
+        this.blobMetadata = blobMetadata;
+    }
+
+    public String getBlobPrefix() {
+        return blobPrefix;
+    }
+
+    public void setBlobPrefix(String blobPrefix) {
+        this.blobPrefix = blobPrefix;
+    }
+
+    public Boolean getCloseStreamAfterWrite() {
+        return closeStreamAfterWrite;
+    }
+
+    public void setCloseStreamAfterWrite(Boolean closeStreamAfterWrite) {
+        this.closeStreamAfterWrite = closeStreamAfterWrite;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public BlobServiceOperations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(BlobServiceOperations operation) {
+        this.operation = operation;
+    }
+
+    public Integer getStreamWriteSize() {
+        return streamWriteSize;
+    }
+
+    public void setStreamWriteSize(Integer streamWriteSize) {
+        this.streamWriteSize = streamWriteSize;
+    }
+
+    public Boolean getUseFlatListing() {
+        return useFlatListing;
+    }
+
+    public void setUseFlatListing(Boolean useFlatListing) {
+        this.useFlatListing = useFlatListing;
     }
 
     public Boolean getBasicPropertyBinding() {

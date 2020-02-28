@@ -37,10 +37,6 @@ public class ZendeskComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the shared configuration
-     */
-    private ZendeskConfigurationNestedConfiguration configuration;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -66,19 +62,14 @@ public class ZendeskComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * Component configuration
+     */
+    private ZendeskConfigurationNestedConfiguration configuration;
+    /**
      * To use a shared Zendesk instance. The option is a
      * org.zendesk.client.v2.Zendesk type.
      */
     private String zendesk;
-
-    public ZendeskConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            ZendeskConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
-    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -102,6 +93,15 @@ public class ZendeskComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public ZendeskConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            ZendeskConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getZendesk() {

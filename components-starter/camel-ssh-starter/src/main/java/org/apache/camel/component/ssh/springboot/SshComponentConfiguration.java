@@ -39,25 +39,19 @@ public class SshComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Sets the hostname of the remote SSH server.
+     * Specifies whether a connection to an unknown host should fail or not.
+     * This value is only checked when the property knownHosts is set.
      */
-    private String host;
+    private Boolean failOnUnknownHost = false;
     /**
-     * Sets the command string to send to the remote SSH server during every
-     * poll cycle. Only works with camel-ssh component being used as a consumer,
-     * i.e. from(ssh://...). You may need to end your command with a newline,
-     * and that must be URL encoded %0A
+     * Sets the resource path for a known_hosts file
      */
-    private String pollCommand;
-    /**
-     * Sets the port number for the remote SSH server.
-     */
-    private Integer port;
+    private String knownHostsResource;
     /**
      * Sets the timeout in milliseconds to wait in establishing the remote SSH
      * server connection. Defaults to 30000 milliseconds.
      */
-    private Long timeout;
+    private Long timeout = 30000L;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -67,6 +61,13 @@ public class SshComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Sets the command string to send to the remote SSH server during every
+     * poll cycle. Only works with camel-ssh component being used as a consumer,
+     * i.e. from(ssh://...) You may need to end your command with a newline, and
+     * that must be URL encoded %0A
+     */
+    private String pollCommand;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -87,9 +88,9 @@ public class SshComponentConfiguration
      * Sets the channel type to pass to the Channel as part of command
      * execution. Defaults to exec.
      */
-    private String channelType;
+    private String channelType = "exec";
     /**
-     * To use the shared SSH configuration
+     * Component configuration
      */
     private SshConfigurationNestedConfiguration configuration;
     /**
@@ -101,7 +102,7 @@ public class SshComponentConfiguration
      * Sets the sleep period in milliseconds to wait reading response from shell
      * prompt. Defaults to 100 milliseconds.
      */
-    private Long sleepForShellPrompt;
+    private Long sleepForShellPrompt = 100L;
     /**
      * Sets the resource path of the certificate to use for Authentication. Will
      * use ResourceHelperKeyPairProvider to resolve file based certificate, and
@@ -122,7 +123,9 @@ public class SshComponentConfiguration
     /**
      * Sets the key type to pass to the KeyPairProvider as part of
      * authentication. KeyPairProvider.loadKey(...) will be passed this value.
-     * Defaults to ssh-rsa.
+     * From Camel 3.0.0 / 2.25.0, by default Camel will select the first
+     * available KeyPair that is loaded. Prior to this, a KeyType of 'ssh-rsa'
+     * was enforced by default.
      */
     private String keyType;
     /**
@@ -135,28 +138,20 @@ public class SshComponentConfiguration
      */
     private String username;
 
-    public String getHost() {
-        return host;
+    public Boolean getFailOnUnknownHost() {
+        return failOnUnknownHost;
     }
 
-    public void setHost(String host) {
-        this.host = host;
+    public void setFailOnUnknownHost(Boolean failOnUnknownHost) {
+        this.failOnUnknownHost = failOnUnknownHost;
     }
 
-    public String getPollCommand() {
-        return pollCommand;
+    public String getKnownHostsResource() {
+        return knownHostsResource;
     }
 
-    public void setPollCommand(String pollCommand) {
-        this.pollCommand = pollCommand;
-    }
-
-    public Integer getPort() {
-        return port;
-    }
-
-    public void setPort(Integer port) {
-        this.port = port;
+    public void setKnownHostsResource(String knownHostsResource) {
+        this.knownHostsResource = knownHostsResource;
     }
 
     public Long getTimeout() {
@@ -173,6 +168,14 @@ public class SshComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public String getPollCommand() {
+        return pollCommand;
+    }
+
+    public void setPollCommand(String pollCommand) {
+        this.pollCommand = pollCommand;
     }
 
     public Boolean getLazyStartProducer() {

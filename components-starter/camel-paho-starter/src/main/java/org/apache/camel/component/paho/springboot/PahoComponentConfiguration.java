@@ -20,6 +20,7 @@ import java.util.Properties;
 import javax.annotation.Generated;
 import javax.net.SocketFactory;
 import javax.net.ssl.HostnameVerifier;
+import org.apache.camel.component.paho.PahoComponent;
 import org.apache.camel.component.paho.PahoPersistence;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -42,13 +43,157 @@ public class PahoComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Sets whether the client will automatically attempt to reconnect to the
+     * server if the connection is lost. If set to false, the client will not
+     * attempt to automatically reconnect to the server in the event that the
+     * connection is lost. If set to true, in the event that the connection is
+     * lost, the client will attempt to reconnect to the server. It will
+     * initially wait 1 second before it attempts to reconnect, for every failed
+     * reconnect attempt, the delay will double until it is at 2 minutes at
+     * which point the delay will stay at 2 minutes.
+     */
+    private Boolean automaticReconnect = true;
+    /**
      * The URL of the MQTT broker.
      */
-    private String brokerUrl;
+    private String brokerUrl = "tcp://localhost:1883";
+    /**
+     * Sets whether the client and server should remember state across restarts
+     * and reconnects. If set to false both the client and server will maintain
+     * state across restarts of the client, the server and the connection. As
+     * state is maintained: Message delivery will be reliable meeting the
+     * specified QOS even if the client, server or connection are restarted. The
+     * server will treat a subscription as durable. If set to true the client
+     * and server will not maintain state across restarts of the client, the
+     * server or the connection. This means Message delivery to the specified
+     * QOS cannot be maintained if the client, server or connection are
+     * restarted The server will treat a subscription as non-durable
+     */
+    private Boolean cleanSession = true;
+    /**
+     * MQTT client identifier. The identifier must be unique.
+     */
+    private String clientId;
     /**
      * To use the shared Paho configuration
      */
     private PahoConfigurationNestedConfiguration configuration;
+    /**
+     * Sets the connection timeout value. This value, measured in seconds,
+     * defines the maximum time interval the client will wait for the network
+     * connection to the MQTT server to be established. The default timeout is
+     * 30 seconds. A value of 0 disables timeout processing meaning the client
+     * will wait until the network connection is made successfully or fails.
+     */
+    private Integer connectionTimeout = 30;
+    /**
+     * Base directory used by file persistence. Will by default use user
+     * directory.
+     */
+    private String filePersistenceDirectory;
+    /**
+     * Sets the keep alive interval. This value, measured in seconds, defines
+     * the maximum time interval between messages sent or received. It enables
+     * the client to detect if the server is no longer available, without having
+     * to wait for the TCP/IP timeout. The client will ensure that at least one
+     * message travels across the network within each keep alive period. In the
+     * absence of a data-related message during the time period, the client
+     * sends a very small ping message, which the server will acknowledge. A
+     * value of 0 disables keepalive processing in the client. The default value
+     * is 60 seconds
+     */
+    private Integer keepAliveInterval = 60;
+    /**
+     * Sets the max inflight. please increase this value in a high traffic
+     * environment. The default value is 10
+     */
+    private Integer maxInflight = 10;
+    /**
+     * Get the maximum time (in millis) to wait between reconnects
+     */
+    private Integer maxReconnectDelay = 128000;
+    /**
+     * Sets the MQTT version. The default action is to connect with version
+     * 3.1.1, and to fall back to 3.1 if that fails. Version 3.1.1 or 3.1 can be
+     * selected specifically, with no fall back, by using the MQTT_VERSION_3_1_1
+     * or MQTT_VERSION_3_1 options respectively.
+     */
+    private Integer mqttVersion;
+    /**
+     * Client persistence to be used - memory or file.
+     */
+    private PahoPersistence persistence = PahoPersistence.MEMORY;
+    /**
+     * Client quality of service level (0-2).
+     */
+    private Integer qos = 2;
+    /**
+     * Retain option
+     */
+    private Boolean retained = false;
+    /**
+     * Set a list of one or more serverURIs the client may connect to. Multiple
+     * servers can be separated by comma. Each serverURI specifies the address
+     * of a server that the client may connect to. Two types of connection are
+     * supported tcp:// for a TCP connection and ssl:// for a TCP connection
+     * secured by SSL/TLS. For example: tcp://localhost:1883
+     * ssl://localhost:8883 If the port is not specified, it will default to
+     * 1883 for tcp:// URIs, and 8883 for ssl:// URIs. If serverURIs is set then
+     * it overrides the serverURI parameter passed in on the constructor of the
+     * MQTT client. When an attempt to connect is initiated the client will
+     * start with the first serverURI in the list and work through the list
+     * until a connection is established with a server. If a connection cannot
+     * be made to any of the servers then the connect attempt fails. Specifying
+     * a list of servers that a client may connect to has several uses: High
+     * Availability and reliable message delivery Some MQTT servers support a
+     * high availability feature where two or more equal MQTT servers share
+     * state. An MQTT client can connect to any of the equal servers and be
+     * assured that messages are reliably delivered and durable subscriptions
+     * are maintained no matter which server the client connects to. The
+     * cleansession flag must be set to false if durable subscriptions and/or
+     * reliable message delivery is required. Hunt List A set of servers may be
+     * specified that are not equal (as in the high availability option). As no
+     * state is shared across the servers reliable message delivery and durable
+     * subscriptions are not valid. The cleansession flag must be set to true if
+     * the hunt list mode is used
+     */
+    private String serverURIs;
+    /**
+     * Sets the Last Will and Testament (LWT) for the connection. In the event
+     * that this client unexpectedly loses its connection to the server, the
+     * server will publish a message to itself using the supplied details. The
+     * topic to publish to The byte payload for the message. The quality of
+     * service to publish the message at (0, 1 or 2). Whether or not the message
+     * should be retained.
+     */
+    private String willPayload;
+    /**
+     * Sets the Last Will and Testament (LWT) for the connection. In the event
+     * that this client unexpectedly loses its connection to the server, the
+     * server will publish a message to itself using the supplied details. The
+     * topic to publish to The byte payload for the message. The quality of
+     * service to publish the message at (0, 1 or 2). Whether or not the message
+     * should be retained.
+     */
+    private Integer willQos;
+    /**
+     * Sets the Last Will and Testament (LWT) for the connection. In the event
+     * that this client unexpectedly loses its connection to the server, the
+     * server will publish a message to itself using the supplied details. The
+     * topic to publish to The byte payload for the message. The quality of
+     * service to publish the message at (0, 1 or 2). Whether or not the message
+     * should be retained.
+     */
+    private Boolean willRetained = false;
+    /**
+     * Sets the Last Will and Testament (LWT) for the connection. In the event
+     * that this client unexpectedly loses its connection to the server, the
+     * server will publish a message to itself using the supplied details. The
+     * topic to publish to The byte payload for the message. The quality of
+     * service to publish the message at (0, 1 or 2). Whether or not the message
+     * should be retained.
+     */
+    private String willTopic;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -79,6 +224,94 @@ public class PahoComponentConfiguration
      * org.eclipse.paho.client.mqttv3.MqttClient type.
      */
     private String client;
+    /**
+     * Sets the Custom WebSocket Headers for the WebSocket Connection. The
+     * option is a java.util.Properties type.
+     */
+    private String customWebSocketHeaders;
+    /**
+     * Set the time in seconds that the executor service should wait when
+     * terminating before forcefully terminating. It is not recommended to
+     * change this value unless you are absolutely sure that you need to.
+     */
+    private Integer executorServiceTimeout = 1;
+    /**
+     * Whether SSL HostnameVerifier is enabled or not. The default value is
+     * true.
+     */
+    private Boolean httpsHostnameVerificationEnabled = true;
+    /**
+     * Password to be used for authentication against the MQTT broker
+     */
+    private String password;
+    /**
+     * Sets the SocketFactory to use. This allows an application to apply its
+     * own policies around the creation of network sockets. If using an SSL
+     * connection, an SSLSocketFactory can be used to supply
+     * application-specific security settings. The option is a
+     * javax.net.SocketFactory type.
+     */
+    private String socketFactory;
+    /**
+     * Sets the SSL properties for the connection. Note that these properties
+     * are only valid if an implementation of the Java Secure Socket Extensions
+     * (JSSE) is available. These properties are not used if a custom
+     * SocketFactory has been set. The following properties can be used:
+     * com.ibm.ssl.protocol One of: SSL, SSLv3, TLS, TLSv1, SSL_TLS.
+     * com.ibm.ssl.contextProvider Underlying JSSE provider. For example
+     * IBMJSSE2 or SunJSSE com.ibm.ssl.keyStore The name of the file that
+     * contains the KeyStore object that you want the KeyManager to use. For
+     * example /mydir/etc/key.p12 com.ibm.ssl.keyStorePassword The password for
+     * the KeyStore object that you want the KeyManager to use. The password can
+     * either be in plain-text, or may be obfuscated using the static method:
+     * com.ibm.micro.security.Password.obfuscate(char password). This obfuscates
+     * the password using a simple and insecure XOR and Base64 encoding
+     * mechanism. Note that this is only a simple scrambler to obfuscate
+     * clear-text passwords. com.ibm.ssl.keyStoreType Type of key store, for
+     * example PKCS12, JKS, or JCEKS. com.ibm.ssl.keyStoreProvider Key store
+     * provider, for example IBMJCE or IBMJCEFIPS. com.ibm.ssl.trustStore The
+     * name of the file that contains the KeyStore object that you want the
+     * TrustManager to use. com.ibm.ssl.trustStorePassword The password for the
+     * TrustStore object that you want the TrustManager to use. The password can
+     * either be in plain-text, or may be obfuscated using the static method:
+     * com.ibm.micro.security.Password.obfuscate(char password). This obfuscates
+     * the password using a simple and insecure XOR and Base64 encoding
+     * mechanism. Note that this is only a simple scrambler to obfuscate
+     * clear-text passwords. com.ibm.ssl.trustStoreType The type of KeyStore
+     * object that you want the default TrustManager to use. Same possible
+     * values as keyStoreType. com.ibm.ssl.trustStoreProvider Trust store
+     * provider, for example IBMJCE or IBMJCEFIPS.
+     * com.ibm.ssl.enabledCipherSuites A list of which ciphers are enabled.
+     * Values are dependent on the provider, for example:
+     * SSL_RSA_WITH_AES_128_CBC_SHA;SSL_RSA_WITH_3DES_EDE_CBC_SHA.
+     * com.ibm.ssl.keyManager Sets the algorithm that will be used to
+     * instantiate a KeyManagerFactory object instead of using the default
+     * algorithm available in the platform. Example values: IbmX509 or
+     * IBMJ9X509. com.ibm.ssl.trustManager Sets the algorithm that will be used
+     * to instantiate a TrustManagerFactory object instead of using the default
+     * algorithm available in the platform. Example values: PKIX or IBMJ9X509.
+     * The option is a java.util.Properties type.
+     */
+    private String sslClientProps;
+    /**
+     * Sets the HostnameVerifier for the SSL connection. Note that it will be
+     * used after handshake on a connection and you should do actions by
+     * yourself when hostname is verified error. There is no default
+     * HostnameVerifier. The option is a javax.net.ssl.HostnameVerifier type.
+     */
+    private String sslHostnameVerifier;
+    /**
+     * Username to be used for authentication against the MQTT broker
+     */
+    private String userName;
+
+    public Boolean getAutomaticReconnect() {
+        return automaticReconnect;
+    }
+
+    public void setAutomaticReconnect(Boolean automaticReconnect) {
+        this.automaticReconnect = automaticReconnect;
+    }
 
     public String getBrokerUrl() {
         return brokerUrl;
@@ -88,6 +321,22 @@ public class PahoComponentConfiguration
         this.brokerUrl = brokerUrl;
     }
 
+    public Boolean getCleanSession() {
+        return cleanSession;
+    }
+
+    public void setCleanSession(Boolean cleanSession) {
+        this.cleanSession = cleanSession;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
     public PahoConfigurationNestedConfiguration getConfiguration() {
         return configuration;
     }
@@ -95,6 +344,118 @@ public class PahoComponentConfiguration
     public void setConfiguration(
             PahoConfigurationNestedConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public Integer getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Integer connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public String getFilePersistenceDirectory() {
+        return filePersistenceDirectory;
+    }
+
+    public void setFilePersistenceDirectory(String filePersistenceDirectory) {
+        this.filePersistenceDirectory = filePersistenceDirectory;
+    }
+
+    public Integer getKeepAliveInterval() {
+        return keepAliveInterval;
+    }
+
+    public void setKeepAliveInterval(Integer keepAliveInterval) {
+        this.keepAliveInterval = keepAliveInterval;
+    }
+
+    public Integer getMaxInflight() {
+        return maxInflight;
+    }
+
+    public void setMaxInflight(Integer maxInflight) {
+        this.maxInflight = maxInflight;
+    }
+
+    public Integer getMaxReconnectDelay() {
+        return maxReconnectDelay;
+    }
+
+    public void setMaxReconnectDelay(Integer maxReconnectDelay) {
+        this.maxReconnectDelay = maxReconnectDelay;
+    }
+
+    public Integer getMqttVersion() {
+        return mqttVersion;
+    }
+
+    public void setMqttVersion(Integer mqttVersion) {
+        this.mqttVersion = mqttVersion;
+    }
+
+    public PahoPersistence getPersistence() {
+        return persistence;
+    }
+
+    public void setPersistence(PahoPersistence persistence) {
+        this.persistence = persistence;
+    }
+
+    public Integer getQos() {
+        return qos;
+    }
+
+    public void setQos(Integer qos) {
+        this.qos = qos;
+    }
+
+    public Boolean getRetained() {
+        return retained;
+    }
+
+    public void setRetained(Boolean retained) {
+        this.retained = retained;
+    }
+
+    public String getServerURIs() {
+        return serverURIs;
+    }
+
+    public void setServerURIs(String serverURIs) {
+        this.serverURIs = serverURIs;
+    }
+
+    public String getWillPayload() {
+        return willPayload;
+    }
+
+    public void setWillPayload(String willPayload) {
+        this.willPayload = willPayload;
+    }
+
+    public Integer getWillQos() {
+        return willQos;
+    }
+
+    public void setWillQos(Integer willQos) {
+        this.willQos = willQos;
+    }
+
+    public Boolean getWillRetained() {
+        return willRetained;
+    }
+
+    public void setWillRetained(Boolean willRetained) {
+        this.willRetained = willRetained;
+    }
+
+    public String getWillTopic() {
+        return willTopic;
+    }
+
+    public void setWillTopic(String willTopic) {
+        this.willTopic = willTopic;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -127,6 +488,71 @@ public class PahoComponentConfiguration
 
     public void setClient(String client) {
         this.client = client;
+    }
+
+    public String getCustomWebSocketHeaders() {
+        return customWebSocketHeaders;
+    }
+
+    public void setCustomWebSocketHeaders(String customWebSocketHeaders) {
+        this.customWebSocketHeaders = customWebSocketHeaders;
+    }
+
+    public Integer getExecutorServiceTimeout() {
+        return executorServiceTimeout;
+    }
+
+    public void setExecutorServiceTimeout(Integer executorServiceTimeout) {
+        this.executorServiceTimeout = executorServiceTimeout;
+    }
+
+    public Boolean getHttpsHostnameVerificationEnabled() {
+        return httpsHostnameVerificationEnabled;
+    }
+
+    public void setHttpsHostnameVerificationEnabled(
+            Boolean httpsHostnameVerificationEnabled) {
+        this.httpsHostnameVerificationEnabled = httpsHostnameVerificationEnabled;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSocketFactory() {
+        return socketFactory;
+    }
+
+    public void setSocketFactory(String socketFactory) {
+        this.socketFactory = socketFactory;
+    }
+
+    public String getSslClientProps() {
+        return sslClientProps;
+    }
+
+    public void setSslClientProps(String sslClientProps) {
+        this.sslClientProps = sslClientProps;
+    }
+
+    public String getSslHostnameVerifier() {
+        return sslHostnameVerifier;
+    }
+
+    public void setSslHostnameVerifier(String sslHostnameVerifier) {
+        this.sslHostnameVerifier = sslHostnameVerifier;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public static class PahoConfigurationNestedConfiguration {

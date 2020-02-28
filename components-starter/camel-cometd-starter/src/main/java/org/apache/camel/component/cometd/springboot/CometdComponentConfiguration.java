@@ -40,11 +40,6 @@ public class CometdComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a list of custom BayeuxServer.Extension that allows modifying
-     * incoming and outgoing requests.
-     */
-    private List<Extension> extensions;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -69,6 +64,11 @@ public class CometdComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+    /**
+     * To use a list of custom BayeuxServer.Extension that allows modifying
+     * incoming and outgoing requests.
+     */
+    private List<Extension> extensions;
     /**
      * To use a custom configured SecurityPolicy to control authorization. The
      * option is a org.cometd.bayeux.server.SecurityPolicy type.
@@ -96,14 +96,6 @@ public class CometdComponentConfiguration
      */
     private Boolean useGlobalSslContextParameters = false;
 
-    public List<Extension> getExtensions() {
-        return extensions;
-    }
-
-    public void setExtensions(List<Extension> extensions) {
-        this.extensions = extensions;
-    }
-
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
@@ -126,6 +118,14 @@ public class CometdComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public List<Extension> getExtensions() {
+        return extensions;
+    }
+
+    public void setExtensions(List<Extension> extensions) {
+        this.extensions = extensions;
     }
 
     public String getSecurityPolicy() {

@@ -64,8 +64,8 @@ public class RemoteCacheManagerCustomizerNoOverrideTest {
     public void testComponentConfiguration() throws Exception {
         Assert.assertNotNull(cacheManager);
         Assert.assertNotNull(component);
-        Assert.assertNotNull(component.getCacheContainer());
-        Assert.assertEquals(CACHE_MANAGER, component.getCacheContainer());
+        Assert.assertNotNull(component.getConfiguration().getCacheContainer());
+        Assert.assertEquals(CACHE_MANAGER, component.getConfiguration().getCacheContainer());
     }
 
     @Configuration
@@ -79,7 +79,7 @@ public class RemoteCacheManagerCustomizerNoOverrideTest {
             return new ComponentCustomizer<InfinispanComponent>() {
                 @Override
                 public void customize(InfinispanComponent component) {
-                    component.setCacheContainer(CACHE_MANAGER);
+                    component.getConfiguration().setCacheContainer(CACHE_MANAGER);
                 }
             };
         }

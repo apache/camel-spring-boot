@@ -17,9 +17,13 @@
 package org.apache.camel.component.atomix.client.queue.springboot;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import javax.annotation.Generated;
 import io.atomix.catalyst.transport.Address;
+import io.atomix.resource.ReadConsistency;
 import org.apache.camel.component.atomix.client.queue.AtomixQueue.Action;
+import org.apache.camel.component.atomix.client.queue.AtomixQueueComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -40,8 +44,7 @@ public class AtomixQueueComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The shared AtomixClient instance. The option is a io.atomix.AtomixClient
-     * type.
+     * The Atomix instance to use. The option is a io.atomix.Atomix type.
      */
     private String atomix;
     /**
@@ -53,9 +56,21 @@ public class AtomixQueueComponentConfiguration
      */
     private String configurationUri;
     /**
+     * The default action.
+     */
+    private Action defaultAction = Action.ADD;
+    /**
      * The nodes the AtomixClient should connect to
      */
     private List<Address> nodes;
+    /**
+     * The header that wil carry the result.
+     */
+    private String resultHeader;
+    /**
+     * The class name (fqn) of the Atomix transport
+     */
+    private String transportClassName = "io.atomix.catalyst.transport.netty.NettyTransport";
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -81,6 +96,34 @@ public class AtomixQueueComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+    /**
+     * The cluster wide default resource configuration. The option is a
+     * java.util.Properties type.
+     */
+    private String defaultResourceConfig;
+    /**
+     * The local default resource options. The option is a java.util.Properties
+     * type.
+     */
+    private String defaultResourceOptions;
+    /**
+     * Sets if the local member should join groups as PersistentMember or not.
+     * If set to ephemeral the local member will receive an auto generated ID
+     * thus the local one is ignored.
+     */
+    private Boolean ephemeral = false;
+    /**
+     * The read consistency level.
+     */
+    private ReadConsistency readConsistency;
+    /**
+     * Cluster wide resources configuration.
+     */
+    private Map<String, Properties> resourceConfigs;
+    /**
+     * Local resources configurations
+     */
+    private Map<String, Properties> resourceOptions;
 
     public String getAtomix() {
         return atomix;
@@ -107,12 +150,36 @@ public class AtomixQueueComponentConfiguration
         this.configurationUri = configurationUri;
     }
 
+    public Action getDefaultAction() {
+        return defaultAction;
+    }
+
+    public void setDefaultAction(Action defaultAction) {
+        this.defaultAction = defaultAction;
+    }
+
     public List<Address> getNodes() {
         return nodes;
     }
 
     public void setNodes(List<Address> nodes) {
         this.nodes = nodes;
+    }
+
+    public String getResultHeader() {
+        return resultHeader;
+    }
+
+    public void setResultHeader(String resultHeader) {
+        this.resultHeader = resultHeader;
+    }
+
+    public String getTransportClassName() {
+        return transportClassName;
+    }
+
+    public void setTransportClassName(String transportClassName) {
+        this.transportClassName = transportClassName;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -137,6 +204,54 @@ public class AtomixQueueComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getDefaultResourceConfig() {
+        return defaultResourceConfig;
+    }
+
+    public void setDefaultResourceConfig(String defaultResourceConfig) {
+        this.defaultResourceConfig = defaultResourceConfig;
+    }
+
+    public String getDefaultResourceOptions() {
+        return defaultResourceOptions;
+    }
+
+    public void setDefaultResourceOptions(String defaultResourceOptions) {
+        this.defaultResourceOptions = defaultResourceOptions;
+    }
+
+    public Boolean getEphemeral() {
+        return ephemeral;
+    }
+
+    public void setEphemeral(Boolean ephemeral) {
+        this.ephemeral = ephemeral;
+    }
+
+    public ReadConsistency getReadConsistency() {
+        return readConsistency;
+    }
+
+    public void setReadConsistency(ReadConsistency readConsistency) {
+        this.readConsistency = readConsistency;
+    }
+
+    public Map<String, Properties> getResourceConfigs() {
+        return resourceConfigs;
+    }
+
+    public void setResourceConfigs(Map<String, Properties> resourceConfigs) {
+        this.resourceConfigs = resourceConfigs;
+    }
+
+    public Map<String, Properties> getResourceOptions() {
+        return resourceOptions;
+    }
+
+    public void setResourceOptions(Map<String, Properties> resourceOptions) {
+        this.resourceOptions = resourceOptions;
     }
 
     public static class AtomixQueueConfigurationNestedConfiguration {

@@ -20,6 +20,7 @@ import java.util.Date;
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
 import com.amazonaws.services.cloudwatch.AmazonCloudWatch;
+import org.apache.camel.component.aws.cw.CwComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -44,6 +45,11 @@ public class CwComponentConfiguration
      */
     private String accessKey;
     /**
+     * To use the AmazonCloudWatch as the client. The option is a
+     * com.amazonaws.services.cloudwatch.AmazonCloudWatch type.
+     */
+    private String amazonCwClient;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -55,6 +61,22 @@ public class CwComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The metric name
+     */
+    private String name;
+    /**
+     * To define a proxy host when instantiating the CW client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the CW client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the CW client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * The region in which CW client needs to work
      */
     private String region;
@@ -62,6 +84,18 @@ public class CwComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * The metric timestamp
+     */
+    private Date timestamp;
+    /**
+     * The metric unit
+     */
+    private String unit;
+    /**
+     * The metric value
+     */
+    private Double value;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -80,12 +114,52 @@ public class CwComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getAmazonCwClient() {
+        return amazonCwClient;
+    }
+
+    public void setAmazonCwClient(String amazonCwClient) {
+        this.amazonCwClient = amazonCwClient;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public String getRegion() {
@@ -102,6 +176,30 @@ public class CwComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
     }
 
     public Boolean getBasicPropertyBinding() {
