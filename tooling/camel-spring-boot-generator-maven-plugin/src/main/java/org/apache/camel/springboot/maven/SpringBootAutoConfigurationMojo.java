@@ -16,6 +16,7 @@
  */
 package org.apache.camel.springboot.maven;
 
+import javax.annotation.Generated;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,13 +24,9 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -38,21 +35,13 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.jar.JarFile;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 
-import javax.annotation.Generated;
-import javax.xml.bind.annotation.XmlTransient;
-
 import org.apache.camel.maven.packaging.AbstractGeneratorMojo;
-import org.apache.camel.spi.Metadata;
-import org.apache.camel.spi.UriParam;
-import org.apache.camel.spi.UriPath;
 import org.apache.camel.tooling.model.ComponentModel;
 import org.apache.camel.tooling.model.ComponentModel.ComponentOptionModel;
-import org.apache.camel.tooling.model.ComponentModel.EndpointOptionModel;
 import org.apache.camel.tooling.model.DataFormatModel;
 import org.apache.camel.tooling.model.DataFormatModel.DataFormatOptionModel;
 import org.apache.camel.tooling.model.EipModel;
@@ -84,7 +73,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -108,18 +96,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
      * Make sure it is not the case before enabling this property.
      */
     private static final boolean DELETE_FILES_ON_MAIN_ARTIFACTS = false;
-
-    /**
-     * Suffix used for generating inner classes for nested component properties,
-     * e.g. endpoint configuration.
-     */
-    private static final String INNER_TYPE_SUFFIX = "NestedConfiguration";
-
-    /**
-     * Classes to include when adding {@link NestedConfigurationProperty}
-     * annotations.
-     */
-    private static final Pattern INCLUDE_INNER_PATTERN = Pattern.compile("org\\.apache\\.camel\\..*");
 
     private static final Map<String, String> PRIMITIVEMAP;
     private static final Map<Type, Type> PRIMITIVE_CLASSES;
@@ -678,7 +654,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.addAnnotation(Generated.class.getName()).setStringValue("value", SpringBootAutoConfigurationMojo.class.getName());
         javaClass.addAnnotation("org.springframework.boot.context.properties.ConfigurationProperties").setStringValue("prefix", prefix);
 
-        Set<JavaClass> nestedTypes = new LinkedHashSet<>();
         for (ComponentOptionModel option : model.getComponentOptions()) {
 
             if (skipComponentOption(model, option)) {
@@ -690,12 +665,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
 
             // generate inner class for non-primitive options
             type = getSimpleJavaType(type);
-            JavaClass javaClassSource = readJavaType(type);
-            boolean isNestedProperty = isValidNestedProperty(model, option)
-                    && (isNestedProperty(nestedTypes, javaClassSource) || "org.apache.camel.converter.jaxp.XmlConverter".equals(type));
-            if (isNestedProperty) {
-                type = packageName + "." + name + "$" + option.getShortJavaType() + INNER_TYPE_SUFFIX;
-            }
 
             // spring-boot auto configuration does not support complex types
             // (unless they are enum, nested)
@@ -706,15 +675,10 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             // and therefore there is no problem, eg
             // camel.component.jdbc.data-source = myDataSource
             // where the type would have been javax.sql.DataSource
-            boolean complex = isComplexType(option) && !isNestedProperty && isBlank(option.getEnums());
+            boolean complex = isComplexType(option) && isBlank(option.getEnums());
             if (complex) {
                 // force to use a string type
                 type = "java.lang.String";
-            }
-
-            // need to generate and load this class so the compiler can compile
-            if (type.equals(packageName + "." + name + "$" + option.getShortJavaType() + INNER_TYPE_SUFFIX)) {
-                generateDummyClass(type);
             }
 
             Property prop = javaClass.addProperty(type, option.getName());
@@ -722,8 +686,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 prop.getField().addAnnotation(Deprecated.class);
                 prop.getAccessor().addAnnotation(Deprecated.class);
                 prop.getMutator().addAnnotation(Deprecated.class);
-                // DeprecatedConfigurationProperty must be on getter when
-                // deprecated
+                // DeprecatedConfigurationProperty must be on getter when deprecated
                 prop.getAccessor().addAnnotation(DeprecatedConfigurationProperty.class);
             }
             if (!Strings.isBlank(option.getDescription())) {
@@ -754,8 +717,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             }
         }
 
-        createComponentConfigurationSourceInnerClass(javaClass, nestedTypes, model);
-
         String fileName = packageName.replaceAll("\\.", "\\/") + "/" + name + ".java";
         writeSourceIfChanged(javaClass, fileName, true);
     }
@@ -767,179 +728,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             return ((Collection) value).isEmpty();
         } else {
             return value == null;
-        }
-    }
-
-    private void createComponentConfigurationSourceInnerClass(JavaClass javaClass, Set<JavaClass> nestedTypes, ComponentModel model) throws MojoFailureException {
-        // add inner classes for nested AutoConfiguration options
-        for (JavaClass nestedType : nestedTypes) {
-
-            final JavaClass innerClass = javaClass.addNestedType().setPublic().setStatic(true).setName(nestedType.getName() + INNER_TYPE_SUFFIX);
-            // add source class name as a static field
-            innerClass.addField().setPublic().setStatic(true).setFinal(true).setType(Class.class).setName("CAMEL_NESTED_CLASS")
-                .setLiteralInitializer(nestedType.getCanonicalName() + ".class");
-
-            // parse option type
-            for (Property sourceProp : getProperties(nestedType)) {
-
-                GenericType propType = sourceProp.getType();
-
-                // skip these types
-                boolean ignore = sourceProp.hasAnnotation(XmlTransient.class);
-                if (ignore || propType.getRawClass().getName().equals("org.apache.camel.CamelContext")) {
-                    continue;
-                }
-
-                String wt = PRIMITIVEMAP.get(propType.toString());
-                GenericType ptype = wt != null ? loadType(wt) : propType;
-                final Property prop = innerClass.addProperty(ptype, sourceProp.getName());
-                if (sourceProp.getField() != null) {
-                    prop.getField().getJavaDoc().setText(sourceProp.getField().getJavaDoc().getText());
-                    prop.getField().setLiteralInitializer(sourceProp.getField().getLiteralInitializer());
-                }
-
-                ComponentOptionModel com = model.getComponentOptions().stream().filter(o -> o.getName().equals(sourceProp.getName())).findFirst().orElse(null);
-                EndpointOptionModel eom = Stream.concat(model.getEndpointOptions().stream(), model.getEndpointPathOptions().stream())
-                    .filter(o -> o.getName().equals(sourceProp.getName())).findFirst().orElse(null);
-                String deprecationNote = null;
-                if (eom != null) {
-                    prop.getField().getJavaDoc().setText(eom.getDescription());
-                    prop.getField().setLiteralInitializer(asLiteralDefault(sourceProp.getType(), eom.getDefaultValue()));
-                    deprecationNote = eom.getDeprecationNote();
-                } else if (com != null) {
-                    prop.getField().getJavaDoc().setText(com.getDescription());
-                    prop.getField().setLiteralInitializer(asLiteralDefault(sourceProp.getType(), com.getDefaultValue()));
-                    deprecationNote = com.getDeprecationNote();
-                }
-
-                boolean anEnum;
-                Class<?> optionClass;
-                if (!propType.getRawClass().isArray()) {
-                    optionClass = propType.getRawClass();
-                    anEnum = optionClass.isEnum();
-                } else {
-                    optionClass = null;
-                    anEnum = false;
-                }
-
-                if (sourceProp.hasAnnotation(Deprecated.class)) {
-                    if (deprecationNote != null && !deprecationNote.isEmpty()) {
-                        String jd = prop.getField().getJavaDoc().getText();
-                        if (jd != null) {
-                            jd += "\n\n";
-                        } else {
-                            jd = "";
-                        }
-                        jd = "@deprecated " + deprecationNote;
-                        prop.getField().getJavaDoc().setText(jd);
-                    }
-                    prop.getField().addAnnotation(Deprecated.class);
-                    prop.getAccessor().addAnnotation(Deprecated.class);
-                    prop.getMutator().addAnnotation(Deprecated.class);
-                    // DeprecatedConfigurationProperty must be on getter when
-                    // deprecated
-                    prop.getAccessor().addAnnotation(DeprecatedConfigurationProperty.class);
-                }
-
-                // find description for the nested type on its field/setter
-                // javadoc or via Camel annotations
-                String description = null;
-                final Method mutator = sourceProp.getMutator();
-                if (mutator.hasJavaDoc()) {
-                    description = mutator.getJavaDoc().getFullText();
-                } else if (sourceProp.hasField()) {
-                    description = sourceProp.getField().getJavaDoc().getFullText();
-                }
-                if (Strings.isBlank(description) && sourceProp.hasAnnotation(UriPath.class)) {
-                    description = sourceProp.getAnnotation(UriPath.class).getStringValue("description");
-                }
-                if (Strings.isBlank(description) && sourceProp.hasAnnotation(UriParam.class)) {
-                    description = sourceProp.getAnnotation(UriParam.class).getStringValue("description");
-                }
-                if (Strings.isBlank(description) && sourceProp.hasAnnotation(Metadata.class)) {
-                    description = sourceProp.getAnnotation(Metadata.class).getStringValue("description");
-                }
-                if (!Strings.isBlank(description)) {
-                    prop.getField().getJavaDoc().setFullText(description);
-                }
-
-                // try to see if the source is actually reusing a shared Camel
-                // configuration that that has @UriParam options
-                // if so we can fetch the default value from the json file as it
-                // holds the correct value vs the annotation
-                // as the annotation can refer to a constant field which we wont
-                // have accessible at this point
-                if (sourceProp.hasAnnotation(UriParam.class) || sourceProp.hasAnnotation(UriPath.class)) {
-                    String defaultValue = null;
-                    String javaType = null;
-                    String type = null;
-
-                    String fileName = model.getJavaType();
-                    fileName = fileName.substring(0, fileName.lastIndexOf("."));
-                    fileName = fileName.replace('.', '/');
-                    File jsonFile = new File(classesDir, fileName + "/" + model.getScheme() + ".json");
-                    if (jsonFile.isFile() && jsonFile.exists()) {
-                        /*
-                        try {
-                            String json = FileUtils.readFileToString(jsonFile, StandardCharsets.UTF_8);
-                            ComponentModel model = JsonMapper.generateComponentModel(json);
-
-                            // grab name from annotation
-                            String optionName;
-                            if (sourceProp.hasAnnotation(UriParam.class)) {
-                                optionName = sourceProp.getAnnotation(UriParam.class).getStringValue("name");
-                            } else {
-                                optionName = sourceProp.getAnnotation(UriPath.class).getStringValue("name");
-                            }
-                            if (optionName == null) {
-                                optionName = sourceProp.hasField() ? sourceProp.getField().getName() : null;
-                            }
-
-                            if (optionName != null) {
-                                model.get
-                                javaType = JSonSchemaHelper.getPropertyJavaType(rows, optionName);
-                                type = JSonSchemaHelper.getPropertyType(rows, optionName);
-                                defaultValue = JSonSchemaHelper.getPropertyDefaultValue(rows, optionName);
-                                // favour description from the model
-                                description = JSonSchemaHelper.getPropertyDescriptionValue(rows, optionName);
-                                if (description != null) {
-                                    prop.getField().getJavaDoc().setFullText(description);
-                                }
-                            }
-                        } catch (IOException e) {
-                            // ignore
-                        }
-                        */
-                        throw new UnsupportedOperationException();
-                    }
-
-                    if (!Strings.isBlank(defaultValue)) {
-
-                        // roaster can create the wrong type for some options so
-                        // use the correct type we found in the json schema
-                        String wrapperType = getSimpleJavaType(javaType);
-                        if (wrapperType.startsWith("java.lang.")) {
-                            // skip java.lang. as prefix for wrapper type
-                            wrapperType = wrapperType.substring(10);
-                            prop.setType(loadType(wrapperType));
-                        }
-
-                        if ("long".equals(javaType) || "java.lang.Long".equals(javaType)) {
-                            // the value should be a Long number
-                            String value = defaultValue + "L";
-                            prop.getField().setLiteralInitializer(value);
-                        } else if ("integer".equals(type) || "boolean".equals(type)) {
-                            prop.getField().setLiteralInitializer(defaultValue);
-                        } else if ("string".equals(type)) {
-                            prop.getField().setStringInitializer(defaultValue);
-                        } else if (anEnum) {
-                            String enumShortName = optionClass.getSimpleName();
-                            prop.getField().setLiteralInitializer(enumShortName + "." + defaultValue);
-                            javaClass.addImport(model.getJavaType());
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -968,50 +756,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         }
         // all the object types are complex
         return "object".equals(option.getType());
-    }
-
-    // get properties for nested type and super types, only properties with
-    // setters are supported!!!
-    private List<Property> getProperties(JavaClass nestedType) {
-        final List<Property> properties = new ArrayList<>();
-        final Set<String> names = new HashSet<>();
-        do {
-            for (Property propertySource : nestedType.getProperties()) {
-                // NOTE: fields with no setters are skipped
-                if (propertySource.isMutable() && !names.contains(propertySource.getName())) {
-                    properties.add(propertySource);
-                    names.add(propertySource.getName());
-                }
-            }
-            nestedType = readJavaType(nestedType.getSuperType());
-        } while (nestedType != null);
-        return properties;
-    }
-
-    private String asLiteralDefault(GenericType type, Object dv) {
-        String defaultValue = dv != null ? dv.toString() : null;
-        if (defaultValue != null && !defaultValue.isEmpty()) {
-            if (type.getRawClass() == String.class) {
-                return Annotation.quote(defaultValue);
-            } else if (type.getRawClass().isEnum()) {
-                return type.getRawClass().getSimpleName() + "." + defaultValue;
-            } else if (type.getRawClass() == boolean.class || type.getRawClass() == Boolean.class) {
-                return defaultValue;
-            } else if (type.getRawClass() == int.class || type.getRawClass() == Integer.class) {
-                return defaultValue;
-            } else if (type.getRawClass() == long.class || type.getRawClass() == Long.class) {
-                return defaultValue + "L";
-            } else if (type.getRawClass() == float.class || type.getRawClass() == Float.class) {
-                return defaultValue + "f";
-            } else if (type.getRawClass() == double.class || type.getRawClass() == Double.class) {
-                return defaultValue;
-            } else if (type.getRawClass() == Class.class) {
-                return defaultValue + ".class";
-            } else {
-                return null;
-            }
-        }
-        return null;
     }
 
     private GenericType loadType(String type) throws MojoFailureException {
@@ -1062,30 +806,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             type = wrapper;
         }
         return type;
-    }
-
-    // it's a nested property if the source exists and it's not an abstract
-    // class in this project, e.g. endpoint configuration
-    private boolean isNestedProperty(Set<JavaClass> nestedTypes, JavaClass type) {
-        if (type != null) {
-            // nested type MUST have some properties of it's own, besides those
-            // from super class
-            if (type.isClass() && !type.isEnum() && !type.isAbstract() && !type.getProperties().isEmpty()) {
-                nestedTypes.add(type);
-            } else {
-                type = null;
-            }
-        }
-        return type != null;
-    }
-
-    private boolean isValidNestedProperty(ComponentModel model, ComponentOptionModel option) {
-        if ("camel-jms".equals(model.getArtifactId()) && "configuration".equals(option.getName())) {
-            // skip camel-jms JmsConfiguration as all these options has already
-            // been set on component level direction, as otherwise we have duplicates
-            return false;
-        }
-        return true;
     }
 
     // read java type from project, returns null if not found
@@ -1500,7 +1220,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.addImport(List.class);
         javaClass.addImport(Map.class);
         javaClass.addImport(ApplicationContext.class);
-        javaClass.addImport(ConditionalOnBean.class);
         javaClass.addImport("org.slf4j.Logger");
         javaClass.addImport("org.slf4j.LoggerFactory");
         javaClass.addImport("org.apache.camel.CamelContext");
@@ -1727,23 +1446,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         sb.append("component.setCamelContext(camelContext);\n");
         sb.append("Map<String, Object> parameters = new HashMap<>();\n");
         sb.append("IntrospectionSupport.getProperties(configuration, parameters, null,\n" + "        false);\n");
-        sb.append("for (Map.Entry<String, Object> entry : parameters.entrySet()) {\n");
-        sb.append("    Object value = entry.getValue();\n");
-        sb.append("    Class<?> paramClass = value.getClass();\n");
-        sb.append("    if (paramClass.getName().endsWith(\"NestedConfiguration\")) {\n");
-        sb.append("        Class nestedClass = null;\n");
-        sb.append("        try {\n");
-        sb.append("            nestedClass = (Class) paramClass.getDeclaredField(\n" + "                    \"CAMEL_NESTED_CLASS\").get(null);\n");
-        sb.append("            HashMap<String, Object> nestedParameters = new HashMap<>();\n");
-        sb.append("            IntrospectionSupport.getProperties(value, nestedParameters,\n" + "                    null, false);\n");
-        sb.append("            Object nestedProperty = nestedClass.newInstance();\n");
-        sb.append("            CamelPropertiesHelper.setCamelProperties(camelContext,\n" + "                    nestedProperty, nestedParameters, false);\n");
-        sb.append("            entry.setValue(nestedProperty);\n");
-        sb.append("        } catch (NoSuchFieldException e) {\n");
-//        sb.append("            // ignore, class must not be a nested configuration class after all\n");
-        sb.append("        }\n");
-        sb.append("    }\n");
-        sb.append("}\n");
         sb.append("CamelPropertiesHelper.setCamelProperties(camelContext, component,\n");
         sb.append("        parameters, false);\n");
         sb.append("if (ObjectHelper.isNotEmpty(customizers)) {\n");
