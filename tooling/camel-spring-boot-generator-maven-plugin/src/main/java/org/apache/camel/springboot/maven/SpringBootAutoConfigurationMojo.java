@@ -102,8 +102,6 @@ import org.springframework.context.annotation.Scope;
         defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator {
 
-    protected static final String[] IGNORE_MODULES = {/* Non-standard -> */ "camel-grape"};
-
     /**
      * Useful to move configuration towards starters. Warning: the
      * spring.factories files sometimes are used also on the main artifacts.
@@ -122,14 +120,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
      * annotations.
      */
     private static final Pattern INCLUDE_INNER_PATTERN = Pattern.compile("org\\.apache\\.camel\\..*");
-
-    /**
-     * Whether to enable adding @NestedConfigurationProperty annotations to
-     * options. This is disabled as the generated options likely is not
-     * configurable as plain POJOs and there is also no documentation for each
-     * of the generated options.
-     */
-    private static final boolean ADD_NESTED_CONFIGURATION_PROPERTY = false;
 
     private static final Map<String, String> PRIMITIVEMAP;
     private static final Map<Type, Type> PRIMITIVE_CLASSES;
@@ -190,11 +180,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             executeDataFormats(componentJar, files);
             executeLanguages(componentJar, files);
         }
-    }
-
-    @Override
-    protected boolean isIgnore(String artifactId) {
-        return Arrays.asList(IGNORE_MODULES).contains(artifactId);
     }
 
     private void executeModels(JarFile componentJar, Map<String, Supplier<String>> files) throws MojoExecutionException, MojoFailureException {
@@ -733,14 +718,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             }
 
             Property prop = javaClass.addProperty(type, option.getName());
-            if (ADD_NESTED_CONFIGURATION_PROPERTY) {
-                if (!type.endsWith(INNER_TYPE_SUFFIX) && type.indexOf('[') == -1 && INCLUDE_INNER_PATTERN.matcher(type).matches() && isBlank(option.getEnums())
-                    && (javaClassSource == null || (javaClassSource.isClass() && !javaClassSource.isAbstract()))) {
-                    // add nested configuration annotation for complex
-                    // properties
-                    prop.getField().addAnnotation(NestedConfigurationProperty.class);
-                }
-            }
             if (option.isDeprecated()) {
                 prop.getField().addAnnotation(Deprecated.class);
                 prop.getAccessor().addAnnotation(Deprecated.class);
@@ -845,13 +822,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     anEnum = false;
                 }
 
-                // add nested configuration annotation for complex properties
-                if (ADD_NESTED_CONFIGURATION_PROPERTY) {
-                    if (INCLUDE_INNER_PATTERN.matcher(propType.toString()).matches() && !propType.getRawClass().isArray() && !anEnum && optionClass != null
-                        && !optionClass.isInterface() && !optionClass.isAnnotation() && !Modifier.isAbstract(optionClass.getModifiers())) {
-                        prop.getField().addAnnotation(NestedConfigurationProperty.class);
-                    }
-                }
                 if (sourceProp.hasAnnotation(Deprecated.class)) {
                     if (deprecationNote != null && !deprecationNote.isEmpty()) {
                         String jd = prop.getField().getJavaDoc().getText();
@@ -1121,17 +1091,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     // read java type from project, returns null if not found
     private JavaClass readJavaType(String type) {
         if (!type.startsWith("java.lang.") && (!type.contains("<") || !type.contains(">"))) {
-//            final String fileName = type.replaceAll("[\\[\\]]", "").replaceAll("\\.", "\\/") + ".java";
-//            Path sourcePath = project.getCompileSourceRoots().stream().map(Paths::get).map(p -> p.resolve(fileName)).filter(Files::isRegularFile).findFirst().orElse(null);
-//            if (sourcePath == null) {
-//                return null;
-//            }
-//            String sourceCode;
-//            try (InputStream is = Files.newInputStream(sourcePath)) {
-//                sourceCode = loadText(is);
-//            } catch (IOException e) {
-//                throw new RuntimeException("Unable to load source code", e);
-//            }
             String sourceCode = "";
             try {
                 Class<?> clazz = getProjectClassLoader().loadClass(type);
