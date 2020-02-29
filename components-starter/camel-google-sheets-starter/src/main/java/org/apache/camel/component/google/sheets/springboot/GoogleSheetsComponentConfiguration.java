@@ -17,7 +17,6 @@
 package org.apache.camel.component.google.sheets.springboot;
 
 import javax.annotation.Generated;
-import org.apache.camel.component.google.sheets.internal.GoogleSheetsApiName;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -46,9 +45,10 @@ public class GoogleSheetsComponentConfiguration
      */
     private String clientId;
     /**
-     * To use the shared configuration
+     * To use the shared configuration. The option is a
+     * org.apache.camel.component.google.sheets.GoogleSheetsConfiguration type.
      */
-    private GoogleSheetsConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -112,12 +112,11 @@ public class GoogleSheetsComponentConfiguration
         this.clientId = clientId;
     }
 
-    public GoogleSheetsConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            GoogleSheetsConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -175,97 +174,5 @@ public class GoogleSheetsComponentConfiguration
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
-    }
-
-    public static class GoogleSheetsConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.google.sheets.GoogleSheetsConfiguration.class;
-        /**
-         * OAuth 2 access token. This typically expires after an hour so
-         * refreshToken is recommended for long term usage.
-         */
-        private String accessToken;
-        /**
-         * What kind of operation to perform
-         */
-        private GoogleSheetsApiName apiName;
-        /**
-         * Google Sheets application name. Example would be
-         * camel-google-sheets/1.0
-         */
-        private String applicationName;
-        /**
-         * Client ID of the sheets application
-         */
-        private String clientId;
-        /**
-         * Client secret of the sheets application
-         */
-        private String clientSecret;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
-        /**
-         * OAuth 2 refresh token. Using this, the Google Sheets component can
-         * obtain a new accessToken whenever the current one expires - a
-         * necessity if the application is long-lived.
-         */
-        private String refreshToken;
-
-        public String getAccessToken() {
-            return accessToken;
-        }
-
-        public void setAccessToken(String accessToken) {
-            this.accessToken = accessToken;
-        }
-
-        public GoogleSheetsApiName getApiName() {
-            return apiName;
-        }
-
-        public void setApiName(GoogleSheetsApiName apiName) {
-            this.apiName = apiName;
-        }
-
-        public String getApplicationName() {
-            return applicationName;
-        }
-
-        public void setApplicationName(String applicationName) {
-            this.applicationName = applicationName;
-        }
-
-        public String getClientId() {
-            return clientId;
-        }
-
-        public void setClientId(String clientId) {
-            this.clientId = clientId;
-        }
-
-        public String getClientSecret() {
-            return clientSecret;
-        }
-
-        public void setClientSecret(String clientSecret) {
-            this.clientSecret = clientSecret;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
-        }
-
-        public String getRefreshToken() {
-            return refreshToken;
-        }
-
-        public void setRefreshToken(String refreshToken) {
-            this.refreshToken = refreshToken;
-        }
     }
 }

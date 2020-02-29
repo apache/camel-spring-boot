@@ -18,7 +18,6 @@ package org.apache.camel.component.aws.kms.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
-import com.amazonaws.services.kms.AWSKMS;
 import org.apache.camel.component.aws.kms.KMSComponent;
 import org.apache.camel.component.aws.kms.KMSOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -45,9 +44,10 @@ public class KMSComponentConfiguration
      */
     private String accessKey;
     /**
-     * The Component configuration
+     * The Component configuration. The option is a
+     * org.apache.camel.component.aws.kms.KMSConfiguration type.
      */
-    private KMSConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * To use a existing configured AWS KMS as client. The option is a
      * com.amazonaws.services.kms.AWSKMS type.
@@ -104,12 +104,11 @@ public class KMSComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public KMSConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            KMSConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -183,108 +182,5 @@ public class KMSComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public static class KMSConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.kms.KMSConfiguration.class;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * To use a existing configured AWS KMS as client
-         */
-        private AWSKMS kmsClient;
-        /**
-         * The operation to perform
-         */
-        private KMSOperations operation;
-        /**
-         * To define a proxy host when instantiating the KMS client
-         */
-        private String proxyHost;
-        /**
-         * To define a proxy port when instantiating the KMS client
-         */
-        private Integer proxyPort;
-        /**
-         * To define a proxy protocol when instantiating the KMS client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
-        /**
-         * The region in which KMS client needs to work. When using this
-         * parameter, the configuration will expect the capitalized name of the
-         * region (for example AP_EAST_1) You'll need to use the name
-         * Regions.EU_WEST_1.name()
-         */
-        private String region;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
-
-        public String getAccessKey() {
-            return accessKey;
-        }
-
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
-        }
-
-        public AWSKMS getKmsClient() {
-            return kmsClient;
-        }
-
-        public void setKmsClient(AWSKMS kmsClient) {
-            this.kmsClient = kmsClient;
-        }
-
-        public KMSOperations getOperation() {
-            return operation;
-        }
-
-        public void setOperation(KMSOperations operation) {
-            this.operation = operation;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public Protocol getProxyProtocol() {
-            return proxyProtocol;
-        }
-
-        public void setProxyProtocol(Protocol proxyProtocol) {
-            this.proxyProtocol = proxyProtocol;
-        }
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
     }
 }

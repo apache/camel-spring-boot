@@ -16,9 +16,7 @@
  */
 package org.apache.camel.component.braintree.springboot;
 
-import java.util.logging.Level;
 import javax.annotation.Generated;
-import org.apache.camel.component.braintree.internal.BraintreeApiName;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -65,9 +63,10 @@ public class BraintreeComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Component configuration
+     * Component configuration. The option is a
+     * org.apache.camel.component.braintree.BraintreeConfiguration type.
      */
-    private BraintreeConfigurationNestedConfiguration configuration;
+    private String configuration;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -93,177 +92,11 @@ public class BraintreeComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public BraintreeConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            BraintreeConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
-    }
-
-    public static class BraintreeConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.braintree.BraintreeConfiguration.class;
-        /**
-         * The access token granted by a merchant to another in order to process
-         * transactions on their behalf. Used in place of environment, merchant
-         * id, public key and private key fields.
-         */
-        private String accessToken;
-        /**
-         * What kind of operation to perform
-         */
-        private BraintreeApiName apiName;
-        /**
-         * The environment Either SANDBOX or PRODUCTION
-         */
-        private String environment;
-        /**
-         * Set logging level for http calls, see java.util.logging.Level
-         */
-        private Level httpLogLevel;
-        /**
-         * Set log category to use to log http calls.
-         */
-        private String httpLogName = "Braintree";
-        /**
-         * Set read timeout for http calls.
-         */
-        private Integer httpReadTimeout;
-        /**
-         * Sets whether to enable the BraintreeLogHandler. It may be desirable
-         * to set this to 'false' where an existing JUL - SLF4J logger bridge is
-         * on the classpath. This option can also be configured globally on the
-         * BraintreeComponent.
-         */
-        private Boolean logHandlerEnabled = true;
-        /**
-         * The merchant id provided by Braintree.
-         */
-        private String merchantId;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
-        /**
-         * The private key provided by Braintree.
-         */
-        private String privateKey;
-        /**
-         * The proxy host
-         */
-        private String proxyHost;
-        /**
-         * The proxy port
-         */
-        private Integer proxyPort;
-        /**
-         * The public key provided by Braintree.
-         */
-        private String publicKey;
-
-        public String getAccessToken() {
-            return accessToken;
-        }
-
-        public void setAccessToken(String accessToken) {
-            this.accessToken = accessToken;
-        }
-
-        public BraintreeApiName getApiName() {
-            return apiName;
-        }
-
-        public void setApiName(BraintreeApiName apiName) {
-            this.apiName = apiName;
-        }
-
-        public String getEnvironment() {
-            return environment;
-        }
-
-        public void setEnvironment(String environment) {
-            this.environment = environment;
-        }
-
-        public Level getHttpLogLevel() {
-            return httpLogLevel;
-        }
-
-        public void setHttpLogLevel(Level httpLogLevel) {
-            this.httpLogLevel = httpLogLevel;
-        }
-
-        public String getHttpLogName() {
-            return httpLogName;
-        }
-
-        public void setHttpLogName(String httpLogName) {
-            this.httpLogName = httpLogName;
-        }
-
-        public Integer getHttpReadTimeout() {
-            return httpReadTimeout;
-        }
-
-        public void setHttpReadTimeout(Integer httpReadTimeout) {
-            this.httpReadTimeout = httpReadTimeout;
-        }
-
-        public Boolean getLogHandlerEnabled() {
-            return logHandlerEnabled;
-        }
-
-        public void setLogHandlerEnabled(Boolean logHandlerEnabled) {
-            this.logHandlerEnabled = logHandlerEnabled;
-        }
-
-        public String getMerchantId() {
-            return merchantId;
-        }
-
-        public void setMerchantId(String merchantId) {
-            this.merchantId = merchantId;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
-        }
-
-        public String getPrivateKey() {
-            return privateKey;
-        }
-
-        public void setPrivateKey(String privateKey) {
-            this.privateKey = privateKey;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getPublicKey() {
-            return publicKey;
-        }
-
-        public void setPublicKey(String publicKey) {
-            this.publicKey = publicKey;
-        }
     }
 }

@@ -18,7 +18,6 @@ package org.apache.camel.component.ssh.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
-import org.apache.sshd.common.keyprovider.KeyPairProvider;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -90,9 +89,10 @@ public class SshComponentConfiguration
      */
     private String channelType = "exec";
     /**
-     * Component configuration
+     * Component configuration. The option is a
+     * org.apache.camel.component.ssh.SshConfiguration type.
      */
-    private SshConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * Sets the shellPrompt to be dropped when response is read after command
      * execution
@@ -202,12 +202,11 @@ public class SshComponentConfiguration
         this.channelType = channelType;
     }
 
-    public SshConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            SshConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -273,206 +272,5 @@ public class SshComponentConfiguration
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public static class SshConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.ssh.SshConfiguration.class;
-        /**
-         * Sets the resource path of the certificate to use for Authentication.
-         * Will use ResourceHelperKeyPairProvider to resolve file based
-         * certificate, and depends on keyType setting.
-         */
-        private String certResource;
-        /**
-         * Sets the password to use in loading certResource, if certResource is
-         * an encrypted key.
-         */
-        private String certResourcePassword;
-        /**
-         * Sets the channel type to pass to the Channel as part of command
-         * execution. Defaults to exec.
-         */
-        private String channelType = "exec";
-        /**
-         * Specifies whether a connection to an unknown host should fail or not.
-         * This value is only checked when the property knownHosts is set.
-         */
-        private Boolean failOnUnknownHost = false;
-        /**
-         * Sets the hostname of the remote SSH server.
-         */
-        private String host;
-        /**
-         * Sets the KeyPairProvider reference to use when connecting using
-         * Certificates to the remote SSH Server.
-         */
-        private KeyPairProvider keyPairProvider;
-        /**
-         * Sets the key type to pass to the KeyPairProvider as part of
-         * authentication. KeyPairProvider.loadKey(...) will be passed this
-         * value. From Camel 3.0.0 / 2.25.0, by default Camel will select the
-         * first available KeyPair that is loaded. Prior to this, a KeyType of
-         * 'ssh-rsa' was enforced by default.
-         */
-        private String keyType;
-        /**
-         * Sets the resource path for a known_hosts file
-         */
-        private String knownHostsResource;
-        /**
-         * Sets the password to use in connecting to remote SSH server. Requires
-         * keyPairProvider to be set to null.
-         */
-        private String password;
-        /**
-         * Sets the command string to send to the remote SSH server during every
-         * poll cycle. Only works with camel-ssh component being used as a
-         * consumer, i.e. from(ssh://...) You may need to end your command with
-         * a newline, and that must be URL encoded %0A
-         */
-        private String pollCommand;
-        /**
-         * Sets the port number for the remote SSH server.
-         */
-        private Integer port = 22;
-        /**
-         * Sets the shellPrompt to be dropped when response is read after
-         * command execution
-         */
-        private String shellPrompt;
-        /**
-         * Sets the sleep period in milliseconds to wait reading response from
-         * shell prompt. Defaults to 100 milliseconds.
-         */
-        private Long sleepForShellPrompt = 100L;
-        /**
-         * Sets the timeout in milliseconds to wait in establishing the remote
-         * SSH server connection. Defaults to 30000 milliseconds.
-         */
-        private Long timeout = 30000L;
-        /**
-         * Sets the username to use in logging into the remote SSH server.
-         */
-        private String username;
-
-        public String getCertResource() {
-            return certResource;
-        }
-
-        public void setCertResource(String certResource) {
-            this.certResource = certResource;
-        }
-
-        public String getCertResourcePassword() {
-            return certResourcePassword;
-        }
-
-        public void setCertResourcePassword(String certResourcePassword) {
-            this.certResourcePassword = certResourcePassword;
-        }
-
-        public String getChannelType() {
-            return channelType;
-        }
-
-        public void setChannelType(String channelType) {
-            this.channelType = channelType;
-        }
-
-        public Boolean getFailOnUnknownHost() {
-            return failOnUnknownHost;
-        }
-
-        public void setFailOnUnknownHost(Boolean failOnUnknownHost) {
-            this.failOnUnknownHost = failOnUnknownHost;
-        }
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public KeyPairProvider getKeyPairProvider() {
-            return keyPairProvider;
-        }
-
-        public void setKeyPairProvider(KeyPairProvider keyPairProvider) {
-            this.keyPairProvider = keyPairProvider;
-        }
-
-        public String getKeyType() {
-            return keyType;
-        }
-
-        public void setKeyType(String keyType) {
-            this.keyType = keyType;
-        }
-
-        public String getKnownHostsResource() {
-            return knownHostsResource;
-        }
-
-        public void setKnownHostsResource(String knownHostsResource) {
-            this.knownHostsResource = knownHostsResource;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getPollCommand() {
-            return pollCommand;
-        }
-
-        public void setPollCommand(String pollCommand) {
-            this.pollCommand = pollCommand;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public String getShellPrompt() {
-            return shellPrompt;
-        }
-
-        public void setShellPrompt(String shellPrompt) {
-            this.shellPrompt = shellPrompt;
-        }
-
-        public Long getSleepForShellPrompt() {
-            return sleepForShellPrompt;
-        }
-
-        public void setSleepForShellPrompt(Long sleepForShellPrompt) {
-            this.sleepForShellPrompt = sleepForShellPrompt;
-        }
-
-        public Long getTimeout() {
-            return timeout;
-        }
-
-        public void setTimeout(Long timeout) {
-            this.timeout = timeout;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
     }
 }

@@ -18,10 +18,8 @@ package org.apache.camel.component.aws.ddbstream.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBStreams;
 import com.amazonaws.services.dynamodbv2.model.ShardIteratorType;
 import org.apache.camel.component.aws.ddbstream.DdbStreamComponent;
-import org.apache.camel.component.aws.ddbstream.SequenceNumberProvider;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -56,9 +54,10 @@ public class DdbStreamComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
-     * The component configuration
+     * The component configuration. The option is a
+     * org.apache.camel.component.aws.ddbstream.DdbStreamConfiguration type.
      */
-    private DdbStreamConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * Defines where in the DynaboDB stream to start getting records. Note that
      * using TRIM_HORIZON can cause a significant delay before the stream has
@@ -124,12 +123,11 @@ public class DdbStreamComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public DdbStreamConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            DdbStreamConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -211,148 +209,5 @@ public class DdbStreamComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
-    }
-
-    public static class DdbStreamConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws.ddbstream.DdbStreamConfiguration.class;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * Amazon DynamoDB client to use for all requests for this endpoint
-         */
-        private AmazonDynamoDBStreams amazonDynamoDbStreamsClient;
-        /**
-         * Defines where in the DynaboDB stream to start getting records. Note
-         * that using TRIM_HORIZON can cause a significant delay before the
-         * stream has caught up to real-time. if {AT,AFTER}_SEQUENCE_NUMBER are
-         * used, then a sequenceNumberProvider MUST be supplied.
-         */
-        private ShardIteratorType iteratorType = ShardIteratorType.LATEST;
-        /**
-         * Maximum number of records that will be fetched in each poll
-         */
-        private Integer maxResultsPerRequest;
-        /**
-         * To define a proxy host when instantiating the DDBStreams client
-         */
-        private String proxyHost;
-        /**
-         * To define a proxy port when instantiating the DDBStreams client
-         */
-        private Integer proxyPort;
-        /**
-         * To define a proxy protocol when instantiating the DDBStreams client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
-        /**
-         * The region in which DDBStreams client needs to work
-         */
-        private String region;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
-        /**
-         * Provider for the sequence number when using one of the two
-         * ShardIteratorType.{AT,AFTER}_SEQUENCE_NUMBER iterator types. Can be a
-         * registry reference or a literal sequence number.
-         */
-        private SequenceNumberProvider sequenceNumberProvider;
-        /**
-         * Name of the dynamodb table
-         */
-        private String tableName;
-
-        public String getAccessKey() {
-            return accessKey;
-        }
-
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
-        }
-
-        public AmazonDynamoDBStreams getAmazonDynamoDbStreamsClient() {
-            return amazonDynamoDbStreamsClient;
-        }
-
-        public void setAmazonDynamoDbStreamsClient(
-                AmazonDynamoDBStreams amazonDynamoDbStreamsClient) {
-            this.amazonDynamoDbStreamsClient = amazonDynamoDbStreamsClient;
-        }
-
-        public ShardIteratorType getIteratorType() {
-            return iteratorType;
-        }
-
-        public void setIteratorType(ShardIteratorType iteratorType) {
-            this.iteratorType = iteratorType;
-        }
-
-        public Integer getMaxResultsPerRequest() {
-            return maxResultsPerRequest;
-        }
-
-        public void setMaxResultsPerRequest(Integer maxResultsPerRequest) {
-            this.maxResultsPerRequest = maxResultsPerRequest;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public Protocol getProxyProtocol() {
-            return proxyProtocol;
-        }
-
-        public void setProxyProtocol(Protocol proxyProtocol) {
-            this.proxyProtocol = proxyProtocol;
-        }
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public SequenceNumberProvider getSequenceNumberProvider() {
-            return sequenceNumberProvider;
-        }
-
-        public void setSequenceNumberProvider(
-                SequenceNumberProvider sequenceNumberProvider) {
-            this.sequenceNumberProvider = sequenceNumberProvider;
-        }
-
-        public String getTableName() {
-            return tableName;
-        }
-
-        public void setTableName(String tableName) {
-            this.tableName = tableName;
-        }
     }
 }

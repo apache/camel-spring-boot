@@ -17,7 +17,7 @@ When using box with Spring Boot make sure to use the following Maven dependency 
 ----
 
 
-The component supports 36 options, which are listed below.
+The component supports 20 options, which are listed below.
 
 
 
@@ -30,23 +30,7 @@ The component supports 36 options, which are listed below.
 | *camel.component.box.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.box.client-id* | Box application client ID |  | String
 | *camel.component.box.client-secret* | Box application client secret |  | String
-| *camel.component.box.configuration.access-token-cache* | Custom Access Token Cache for storing and retrieving access tokens. |  | IAccessTokenCache
-| *camel.component.box.configuration.api-name* | What kind of operation to perform |  | BoxApiName
-| *camel.component.box.configuration.authentication-type* | The type of authentication for connection. Types of Authentication: STANDARD_AUTHENTICATION - OAuth 2.0 (3-legged) SERVER_AUTHENTICATION - OAuth 2.0 with JSON Web Tokens | APP_USER_AUTHENTICATION | String
-| *camel.component.box.configuration.client-id* | Box application client ID |  | String
-| *camel.component.box.configuration.client-secret* | Box application client secret |  | String
-| *camel.component.box.configuration.encryption-algorithm* | The type of encryption algorithm for JWT. Supported Algorithms: RSA_SHA_256 RSA_SHA_384 RSA_SHA_512 |  | EncryptionAlgorithm
-| *camel.component.box.configuration.enterprise-id* | The enterprise ID to use for an App Enterprise. |  | String
-| *camel.component.box.configuration.http-params* | Custom HTTP params for settings like proxy host |  | Map
-| *camel.component.box.configuration.max-cache-entries* | The maximum number of access tokens in cache. | 100 | Integer
-| *camel.component.box.configuration.method-name* | What sub operation to use for the selected operation |  | String
-| *camel.component.box.configuration.private-key-file* | The private key for generating the JWT signature. |  | String
-| *camel.component.box.configuration.private-key-password* | The password for the private key. |  | String
-| *camel.component.box.configuration.public-key-id* | The ID for public key for validating the JWT signature. |  | String
-| *camel.component.box.configuration.ssl-context-parameters* | To configure security using SSLContextParameters. |  | SSLContextParameters
-| *camel.component.box.configuration.user-id* | The user ID to use for an App User. |  | String
-| *camel.component.box.configuration.user-name* | Box user name, MUST be provided |  | String
-| *camel.component.box.configuration.user-password* | Box user password, MUST be provided if authSecureStorage is not set, or returns null on first call |  | String
+| *camel.component.box.configuration* | To use the shared configuration. The option is a org.apache.camel.component.box.BoxConfiguration type. |  | String
 | *camel.component.box.enabled* | Whether to enable auto configuration of the box component. This is enabled by default. |  | Boolean
 | *camel.component.box.encryption-algorithm* | The type of encryption algorithm for JWT. Supported Algorithms: RSA_SHA_256 RSA_SHA_384 RSA_SHA_512 |  | EncryptionAlgorithm
 | *camel.component.box.enterprise-id* | The enterprise ID to use for an App Enterprise. |  | String

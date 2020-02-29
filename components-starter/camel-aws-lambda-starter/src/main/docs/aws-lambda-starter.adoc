@@ -17,7 +17,7 @@ When using aws-lambda with Spring Boot make sure to use the following Maven depe
 ----
 
 
-The component supports 19 options, which are listed below.
+The component supports 12 options, which are listed below.
 
 
 
@@ -27,14 +27,7 @@ The component supports 19 options, which are listed below.
 | *camel.component.aws-lambda.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws-lambda.aws-lambda-client* | To use a existing configured AwsLambdaClient as client. The option is a com.amazonaws.services.lambda.AWSLambda type. |  | String
 | *camel.component.aws-lambda.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
-| *camel.component.aws-lambda.configuration.access-key* | Amazon AWS Access Key |  | String
-| *camel.component.aws-lambda.configuration.aws-lambda-client* | To use a existing configured AwsLambdaClient as client |  | AWSLambda
-| *camel.component.aws-lambda.configuration.operation* | The operation to perform. It can be listFunctions, getFunction, createFunction, deleteFunction or invokeFunction |  | LambdaOperations
-| *camel.component.aws-lambda.configuration.proxy-host* | To define a proxy host when instantiating the Lambda client |  | String
-| *camel.component.aws-lambda.configuration.proxy-port* | To define a proxy port when instantiating the Lambda client |  | Integer
-| *camel.component.aws-lambda.configuration.proxy-protocol* | To define a proxy protocol when instantiating the Lambda client |  | Protocol
-| *camel.component.aws-lambda.configuration.region* | Amazon AWS Region. When using this parameter, the configuration will expect the capitalized name of the region (for example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name() |  | String
-| *camel.component.aws-lambda.configuration.secret-key* | Amazon AWS Secret Key |  | String
+| *camel.component.aws-lambda.configuration* | The AWS Lambda default configuration. The option is a org.apache.camel.component.aws.lambda.LambdaConfiguration type. |  | String
 | *camel.component.aws-lambda.enabled* | Whether to enable auto configuration of the aws-lambda component. This is enabled by default. |  | Boolean
 | *camel.component.aws-lambda.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.aws-lambda.operation* | The operation to perform. It can be listFunctions, getFunction, createFunction, deleteFunction or invokeFunction |  | LambdaOperations

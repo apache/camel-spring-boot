@@ -17,10 +17,6 @@
 package org.apache.camel.component.caffeine.cache.springboot;
 
 import javax.annotation.Generated;
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.CacheLoader;
-import com.github.benmanes.caffeine.cache.RemovalListener;
-import com.github.benmanes.caffeine.cache.stats.StatsCounter;
 import org.apache.camel.component.caffeine.EvictionType;
 import org.apache.camel.component.caffeine.cache.CaffeineCacheComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -121,9 +117,10 @@ public class CaffeineCacheComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Sets the global component configuration
+     * Sets the global component configuration. The option is a
+     * org.apache.camel.component.caffeine.CaffeineConfiguration type.
      */
-    private CaffeineConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * The cache key type, default java.lang.Object
      */
@@ -253,12 +250,11 @@ public class CaffeineCacheComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public CaffeineConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            CaffeineConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -276,194 +272,5 @@ public class CaffeineCacheComponentConfiguration
 
     public void setValueType(String valueType) {
         this.valueType = valueType;
-    }
-
-    public static class CaffeineConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.caffeine.CaffeineConfiguration.class;
-        /**
-         * To configure the default cache action. If an action is set in the
-         * message header, then the operation from the header takes precedence.
-         */
-        private String action;
-        /**
-         * To configure an already instantiated cache to be used
-         */
-        private Cache cache;
-        /**
-         * To configure a CacheLoader in case of a LoadCache use
-         */
-        private CacheLoader cacheLoader;
-        /**
-         * Configure if a cache need to be created if it does exist or can't be
-         * pre-configured.
-         */
-        private Boolean createCacheIfNotExist = true;
-        /**
-         * Set the eviction Type for this cache
-         */
-        private EvictionType evictionType = EvictionType.SIZE_BASED;
-        /**
-         * Set the expire After Access Time in case of time based Eviction (in
-         * seconds)
-         */
-        private Integer expireAfterAccessTime = 300;
-        /**
-         * Set the expire After Access Write in case of time based Eviction (in
-         * seconds)
-         */
-        private Integer expireAfterWriteTime = 300;
-        /**
-         * Set the initial Capacity for the cache
-         */
-        private Integer initialCapacity = 10000;
-        /**
-         * To configure the default action key. If a key is set in the message
-         * header, then the key from the header takes precedence.
-         */
-        private Object key;
-        /**
-         * The cache key type, default java.lang.Object
-         */
-        private String keyType;
-        /**
-         * Set the maximum size for the cache
-         */
-        private Integer maximumSize = 10000;
-        /**
-         * Set a specific removal Listener for the cache
-         */
-        private RemovalListener removalListener;
-        /**
-         * Set a specific Stats Counter for the cache stats
-         */
-        private StatsCounter statsCounter;
-        /**
-         * To enable stats on the cache
-         */
-        private Boolean statsEnabled = false;
-        /**
-         * The cache value type, default java.lang.Object
-         */
-        private String valueType;
-
-        public String getAction() {
-            return action;
-        }
-
-        public void setAction(String action) {
-            this.action = action;
-        }
-
-        public Cache getCache() {
-            return cache;
-        }
-
-        public void setCache(Cache cache) {
-            this.cache = cache;
-        }
-
-        public CacheLoader getCacheLoader() {
-            return cacheLoader;
-        }
-
-        public void setCacheLoader(CacheLoader cacheLoader) {
-            this.cacheLoader = cacheLoader;
-        }
-
-        public Boolean getCreateCacheIfNotExist() {
-            return createCacheIfNotExist;
-        }
-
-        public void setCreateCacheIfNotExist(Boolean createCacheIfNotExist) {
-            this.createCacheIfNotExist = createCacheIfNotExist;
-        }
-
-        public EvictionType getEvictionType() {
-            return evictionType;
-        }
-
-        public void setEvictionType(EvictionType evictionType) {
-            this.evictionType = evictionType;
-        }
-
-        public Integer getExpireAfterAccessTime() {
-            return expireAfterAccessTime;
-        }
-
-        public void setExpireAfterAccessTime(Integer expireAfterAccessTime) {
-            this.expireAfterAccessTime = expireAfterAccessTime;
-        }
-
-        public Integer getExpireAfterWriteTime() {
-            return expireAfterWriteTime;
-        }
-
-        public void setExpireAfterWriteTime(Integer expireAfterWriteTime) {
-            this.expireAfterWriteTime = expireAfterWriteTime;
-        }
-
-        public Integer getInitialCapacity() {
-            return initialCapacity;
-        }
-
-        public void setInitialCapacity(Integer initialCapacity) {
-            this.initialCapacity = initialCapacity;
-        }
-
-        public Object getKey() {
-            return key;
-        }
-
-        public void setKey(Object key) {
-            this.key = key;
-        }
-
-        public String getKeyType() {
-            return keyType;
-        }
-
-        public void setKeyType(String keyType) {
-            this.keyType = keyType;
-        }
-
-        public Integer getMaximumSize() {
-            return maximumSize;
-        }
-
-        public void setMaximumSize(Integer maximumSize) {
-            this.maximumSize = maximumSize;
-        }
-
-        public RemovalListener getRemovalListener() {
-            return removalListener;
-        }
-
-        public void setRemovalListener(RemovalListener removalListener) {
-            this.removalListener = removalListener;
-        }
-
-        public StatsCounter getStatsCounter() {
-            return statsCounter;
-        }
-
-        public void setStatsCounter(StatsCounter statsCounter) {
-            this.statsCounter = statsCounter;
-        }
-
-        public Boolean getStatsEnabled() {
-            return statsEnabled;
-        }
-
-        public void setStatsEnabled(Boolean statsEnabled) {
-            this.statsEnabled = statsEnabled;
-        }
-
-        public String getValueType() {
-            return valueType;
-        }
-
-        public void setValueType(String valueType) {
-            this.valueType = valueType;
-        }
     }
 }

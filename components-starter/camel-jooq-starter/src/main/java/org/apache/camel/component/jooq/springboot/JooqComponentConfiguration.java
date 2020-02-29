@@ -20,7 +20,6 @@ import javax.annotation.Generated;
 import org.apache.camel.component.jooq.JooqComponent;
 import org.apache.camel.component.jooq.JooqOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
-import org.jooq.Configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -41,9 +40,11 @@ public class JooqComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Component configuration (database connection, database entity type, etc.)
+     * Component configuration (database connection, database entity type,
+     * etc.). The option is a org.apache.camel.component.jooq.JooqConfiguration
+     * type.
      */
-    private JooqConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * To use a specific database configuration. The option is a
      * org.jooq.Configuration type.
@@ -87,12 +88,11 @@ public class JooqComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
 
-    public JooqConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            JooqConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -150,69 +150,5 @@ public class JooqComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public static class JooqConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.jooq.JooqConfiguration.class;
-        /**
-         * Delete entity after it is consumed
-         */
-        private Boolean consumeDelete = true;
-        /**
-         * To use a specific database configuration
-         */
-        private Configuration databaseConfiguration;
-        /**
-         * JOOQ entity class
-         */
-        private Class entityType;
-        /**
-         * Type of operation to execute on query
-         */
-        private JooqOperation operation = JooqOperation.NONE;
-        /**
-         * To execute plain SQL query
-         */
-        private String query;
-
-        public Boolean getConsumeDelete() {
-            return consumeDelete;
-        }
-
-        public void setConsumeDelete(Boolean consumeDelete) {
-            this.consumeDelete = consumeDelete;
-        }
-
-        public Configuration getDatabaseConfiguration() {
-            return databaseConfiguration;
-        }
-
-        public void setDatabaseConfiguration(Configuration databaseConfiguration) {
-            this.databaseConfiguration = databaseConfiguration;
-        }
-
-        public Class getEntityType() {
-            return entityType;
-        }
-
-        public void setEntityType(Class entityType) {
-            this.entityType = entityType;
-        }
-
-        public JooqOperation getOperation() {
-            return operation;
-        }
-
-        public void setOperation(JooqOperation operation) {
-            this.operation = operation;
-        }
-
-        public String getQuery() {
-            return query;
-        }
-
-        public void setQuery(String query) {
-            this.query = query;
-        }
     }
 }

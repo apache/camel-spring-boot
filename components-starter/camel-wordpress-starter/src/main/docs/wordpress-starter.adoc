@@ -17,7 +17,7 @@ When using wordpress with Spring Boot make sure to use the following Maven depen
 ----
 
 
-The component supports 25 options, which are listed below.
+The component supports 13 options, which are listed below.
 
 
 
@@ -27,26 +27,14 @@ The component supports 25 options, which are listed below.
 | *camel.component.wordpress.api-version* | The Wordpress REST API version | 2 | String
 | *camel.component.wordpress.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.wordpress.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.wordpress.configuration.api-version* | The Wordpress REST API version | 2 | String
-| *camel.component.wordpress.configuration.criteria* | The criteria to use with complex searches. |  | Map
-| *camel.component.wordpress.configuration.force* | Whether to bypass trash and force deletion. | false | Boolean
-| *camel.component.wordpress.configuration.id* | The entity ID. Should be passed when the operation performed requires a specific entity, e.g. deleting a post |  | Integer
-| *camel.component.wordpress.configuration.password* | Password from authorized user |  | String
-| *camel.component.wordpress.configuration.search-criteria* | Search criteria |  | SearchCriteria
-| *camel.component.wordpress.configuration.url* | The Wordpress API URL from your site, e.g. \http://myblog.com/wp-json/ |  | String
-| *camel.component.wordpress.configuration.user* | Authorized user to perform writing operations |  | String
+| *camel.component.wordpress.configuration* | Wordpress component configuration. The option is a org.apache.camel.component.wordpress.WordpressComponentConfiguration type. |  | String
 | *camel.component.wordpress.criteria* | The criteria to use with complex searches. |  | Map
 | *camel.component.wordpress.enabled* | Whether to enable auto configuration of the wordpress component. This is enabled by default. |  | Boolean
 | *camel.component.wordpress.force* | Whether to bypass trash and force deletion. | false | Boolean
 | *camel.component.wordpress.id* | The entity ID. Should be passed when the operation performed requires a specific entity, e.g. deleting a post |  | Integer
 | *camel.component.wordpress.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.wordpress.password* | Password from authorized user |  | String
-| *camel.component.wordpress.search-criteria.exclude* |  |  | List
-| *camel.component.wordpress.search-criteria.include* |  |  | List
-| *camel.component.wordpress.search-criteria.order* |  |  | Order
-| *camel.component.wordpress.search-criteria.page* |  |  | Integer
-| *camel.component.wordpress.search-criteria.per-page* |  |  | Integer
-| *camel.component.wordpress.search-criteria.search* |  |  | String
+| *camel.component.wordpress.search-criteria* | Search criteria. The option is a org.apache.camel.component.wordpress.api.model.SearchCriteria type. |  | String
 | *camel.component.wordpress.url* | The Wordpress API URL from your site, e.g. \http://myblog.com/wp-json/ |  | String
 | *camel.component.wordpress.user* | Authorized user to perform writing operations |  | String
 |===

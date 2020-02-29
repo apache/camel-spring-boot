@@ -17,7 +17,7 @@ When using milo with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 63 options, which are listed below.
+The component supports 45 options, which are listed below.
 
 
 
@@ -31,25 +31,7 @@ The component supports 63 options, which are listed below.
 | *camel.component.milo-client.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.milo-client.channel-lifetime* | Channel lifetime in milliseconds |  | Long
 | *camel.component.milo-client.client-id* | A virtual client id to force the creation of a new connection instance |  | String
-| *camel.component.milo-client.configuration.allowed-security-policies* | A set of allowed security policy URIs. Default is to accept all and use the highest. |  | Set
-| *camel.component.milo-client.configuration.application-name* | The application name | Apache Camel adapter for Eclipse Milo | String
-| *camel.component.milo-client.configuration.application-uri* | The application URI | http://camel.apache.org/EclipseMilo/Client | String
-| *camel.component.milo-client.configuration.channel-lifetime* | Channel lifetime in milliseconds |  | Long
-| *camel.component.milo-client.configuration.client-id* | A virtual client id to force the creation of a new connection instance |  | String
-| *camel.component.milo-client.configuration.discovery-endpoint-suffix* | A suffix for endpoint URI when discovering |  | String
-| *camel.component.milo-client.configuration.discovery-endpoint-uri* | An alternative discovery URI |  | String
-| *camel.component.milo-client.configuration.key-alias* | The name of the key in the keystore file |  | String
-| *camel.component.milo-client.configuration.key-password* | The key password |  | String
-| *camel.component.milo-client.configuration.key-store-password* | The keystore password |  | String
-| *camel.component.milo-client.configuration.key-store-type* | The key store type |  | String
-| *camel.component.milo-client.configuration.key-store-url* | The URL where the key should be loaded from |  | String
-| *camel.component.milo-client.configuration.max-pending-publish-requests* | The maximum number of pending publish requests |  | Long
-| *camel.component.milo-client.configuration.max-response-message-size* | The maximum number of bytes a response message may have |  | Long
-| *camel.component.milo-client.configuration.override-host* | Override the server reported endpoint host with the host from the endpoint URI. | false | Boolean
-| *camel.component.milo-client.configuration.product-uri* | The product URI | http://camel.apache.org/EclipseMilo | String
-| *camel.component.milo-client.configuration.request-timeout* | Request timeout in milliseconds |  | Long
-| *camel.component.milo-client.configuration.session-name* | Session name |  | String
-| *camel.component.milo-client.configuration.session-timeout* | Session timeout in milliseconds |  | Long
+| *camel.component.milo-client.configuration* | All default options for client configurations. The option is a org.apache.camel.component.milo.client.MiloClientConfiguration type. |  | String
 | *camel.component.milo-client.discovery-endpoint-suffix* | A suffix for endpoint URI when discovering |  | String
 | *camel.component.milo-client.discovery-endpoint-uri* | An alternative discovery URI |  | String
 | *camel.component.milo-client.enabled* | Whether to enable auto configuration of the milo-client component. This is enabled by default. |  | Boolean

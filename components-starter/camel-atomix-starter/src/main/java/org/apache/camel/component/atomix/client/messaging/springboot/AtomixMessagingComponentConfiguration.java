@@ -57,9 +57,10 @@ public class AtomixMessagingComponentConfiguration
      */
     private String channelName;
     /**
-     * The shared component configuration
+     * The shared component configuration. The option is a
+     * org.apache.camel.component.atomix.client.messaging.AtomixMessagingConfiguration type.
      */
-    private AtomixMessagingConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * The path to the AtomixClient configuration
      */
@@ -162,12 +163,11 @@ public class AtomixMessagingComponentConfiguration
         this.channelName = channelName;
     }
 
-    public AtomixMessagingConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            AtomixMessagingConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -289,69 +289,5 @@ public class AtomixMessagingComponentConfiguration
 
     public void setResourceOptions(Map<String, Properties> resourceOptions) {
         this.resourceOptions = resourceOptions;
-    }
-
-    public static class AtomixMessagingConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.atomix.client.messaging.AtomixMessagingConfiguration.class;
-        /**
-         * The broadcast type.
-         */
-        private BroadcastType broadcastType = BroadcastType.ALL;
-        /**
-         * The messaging channel name
-         */
-        private String channelName;
-        /**
-         * The default action.
-         */
-        private Action defaultAction = Action.DIRECT;
-        /**
-         * The Atomix Group member name
-         */
-        private String memberName;
-        /**
-         * The header that wil carry the result.
-         */
-        private String resultHeader;
-
-        public BroadcastType getBroadcastType() {
-            return broadcastType;
-        }
-
-        public void setBroadcastType(BroadcastType broadcastType) {
-            this.broadcastType = broadcastType;
-        }
-
-        public String getChannelName() {
-            return channelName;
-        }
-
-        public void setChannelName(String channelName) {
-            this.channelName = channelName;
-        }
-
-        public Action getDefaultAction() {
-            return defaultAction;
-        }
-
-        public void setDefaultAction(Action defaultAction) {
-            this.defaultAction = defaultAction;
-        }
-
-        public String getMemberName() {
-            return memberName;
-        }
-
-        public void setMemberName(String memberName) {
-            this.memberName = memberName;
-        }
-
-        public String getResultHeader() {
-            return resultHeader;
-        }
-
-        public void setResultHeader(String resultHeader) {
-            this.resultHeader = resultHeader;
-        }
     }
 }

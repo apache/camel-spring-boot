@@ -17,7 +17,6 @@
 package org.apache.camel.component.google.mail.springboot;
 
 import javax.annotation.Generated;
-import org.apache.camel.component.google.mail.internal.GoogleMailApiName;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -46,9 +45,10 @@ public class GoogleMailComponentConfiguration
      */
     private String clientId;
     /**
-     * To use the shared configuration
+     * To use the shared configuration. The option is a
+     * org.apache.camel.component.google.mail.GoogleMailConfiguration type.
      */
-    private GoogleMailConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -112,12 +112,11 @@ public class GoogleMailComponentConfiguration
         this.clientId = clientId;
     }
 
-    public GoogleMailConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            GoogleMailConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -175,96 +174,5 @@ public class GoogleMailComponentConfiguration
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
-    }
-
-    public static class GoogleMailConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.google.mail.GoogleMailConfiguration.class;
-        /**
-         * OAuth 2 access token. This typically expires after an hour so
-         * refreshToken is recommended for long term usage.
-         */
-        private String accessToken;
-        /**
-         * What kind of operation to perform
-         */
-        private GoogleMailApiName apiName;
-        /**
-         * Google mail application name. Example would be camel-google-mail/1.0
-         */
-        private String applicationName;
-        /**
-         * Client ID of the mail application
-         */
-        private String clientId;
-        /**
-         * Client secret of the mail application
-         */
-        private String clientSecret;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
-        /**
-         * OAuth 2 refresh token. Using this, the Google Calendar component can
-         * obtain a new accessToken whenever the current one expires - a
-         * necessity if the application is long-lived.
-         */
-        private String refreshToken;
-
-        public String getAccessToken() {
-            return accessToken;
-        }
-
-        public void setAccessToken(String accessToken) {
-            this.accessToken = accessToken;
-        }
-
-        public GoogleMailApiName getApiName() {
-            return apiName;
-        }
-
-        public void setApiName(GoogleMailApiName apiName) {
-            this.apiName = apiName;
-        }
-
-        public String getApplicationName() {
-            return applicationName;
-        }
-
-        public void setApplicationName(String applicationName) {
-            this.applicationName = applicationName;
-        }
-
-        public String getClientId() {
-            return clientId;
-        }
-
-        public void setClientId(String clientId) {
-            this.clientId = clientId;
-        }
-
-        public String getClientSecret() {
-            return clientSecret;
-        }
-
-        public void setClientSecret(String clientSecret) {
-            this.clientSecret = clientSecret;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
-        }
-
-        public String getRefreshToken() {
-            return refreshToken;
-        }
-
-        public void setRefreshToken(String refreshToken) {
-            this.refreshToken = refreshToken;
-        }
     }
 }

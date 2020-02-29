@@ -17,7 +17,7 @@ When using pulsar with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 57 options, which are listed below.
+The component supports 33 options, which are listed below.
 
 
 
@@ -35,31 +35,7 @@ The component supports 57 options, which are listed below.
 | *camel.component.pulsar.block-if-queue-full* | Whether to block the producing thread if pending messages queue is full or to throw a ProducerQueueIsFullError | false | Boolean
 | *camel.component.pulsar.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.pulsar.compression-type* | Compression type to use |  | CompressionType
-| *camel.component.pulsar.configuration.ack-group-time-millis* | Group the consumer acknowledgments for the specified time in milliseconds - defaults to 100 | 100 | Long
-| *camel.component.pulsar.configuration.ack-timeout-millis* | Timeout for unacknowledged messages in milliseconds - defaults to 10000 | 10000 | Long
-| *camel.component.pulsar.configuration.allow-manual-acknowledgement* | Whether to allow manual message acknowledgements. If this option is enabled, then messages are not immediately acknowledged after being consumed. Instead, an instance of PulsarMessageReceipt is stored as a header on the org.apache.camel.Exchange. Messages can then be acknowledged using PulsarMessageReceipt at any time before the ackTimeout occurs. | false | Boolean
-| *camel.component.pulsar.configuration.batching-enabled* | Control whether automatic batching of messages is enabled for the producer. | true | Boolean
-| *camel.component.pulsar.configuration.batching-max-messages* | The maximum size to batch messages. | 1000 | Integer
-| *camel.component.pulsar.configuration.batching-max-publish-delay-micros* | The maximum time period within which the messages sent will be batched if batchingEnabled is true. | 1000 | Long
-| *camel.component.pulsar.configuration.block-if-queue-full* | Whether to block the producing thread if pending messages queue is full or to throw a ProducerQueueIsFullError | false | Boolean
-| *camel.component.pulsar.configuration.compression-type* | Compression type to use |  | CompressionType
-| *camel.component.pulsar.configuration.consumer-name* | Name of the consumer when subscription is EXCLUSIVE | sole-consumer | String
-| *camel.component.pulsar.configuration.consumer-name-prefix* | Prefix to add to consumer names when a SHARED or FAILOVER subscription is used | cons | String
-| *camel.component.pulsar.configuration.consumer-queue-size* | Size of the consumer queue - defaults to 10 | 10 | Integer
-| *camel.component.pulsar.configuration.dead-letter-topic* | Name of the topic where the messages which fail maxRedeliverCount times will be sent. Note: if not set, default topic name will be topicName-subscriptionName-DLQ |  | String
-| *camel.component.pulsar.configuration.initial-sequence-id* | The first message published will have a sequence Id of initialSequenceId  1. | -1 | Long
-| *camel.component.pulsar.configuration.max-pending-messages* | Size of the pending massages queue. When the queue is full, by default, any further sends will fail unless blockIfQueueFull=true | 1000 | Integer
-| *camel.component.pulsar.configuration.max-pending-messages-across-partitions* | The maximum number of pending messages for partitioned topics. The maxPendingMessages value will be reduced if (number of partitions * maxPendingMessages) exceeds this value. Partitioned topics have a pending message queue for each partition. | 50000 | Integer
-| *camel.component.pulsar.configuration.max-redeliver-count* | Maximum number of times that a message will be redelivered before being sent to the dead letter queue. If this value is not set, no Dead Letter Policy will be created |  | Integer
-| *camel.component.pulsar.configuration.message-router* | Custom Message Router to use |  | MessageRouter
-| *camel.component.pulsar.configuration.message-routing-mode* | Message Routing Mode to use |  | MessageRoutingMode
-| *camel.component.pulsar.configuration.negative-ack-redelivery-delay-micros* | Set the negative acknowledgement delay | 60000000 | Long
-| *camel.component.pulsar.configuration.number-of-consumers* | Number of consumers - defaults to 1 | 1 | Integer
-| *camel.component.pulsar.configuration.producer-name* | Name of the producer. If unset, lets Pulsar select a unique identifier. |  | String
-| *camel.component.pulsar.configuration.send-timeout-ms* | Send timeout in milliseconds | 30000 | Integer
-| *camel.component.pulsar.configuration.subscription-initial-position* | Control the initial position in the topic of a newly created subscription. Default is latest message. |  | SubscriptionInitialPosition
-| *camel.component.pulsar.configuration.subscription-name* | Name of the subscription to use | subs | String
-| *camel.component.pulsar.configuration.subscription-type* | Type of the subscription EXCLUSIVESHAREDFAILOVER, defaults to EXCLUSIVE |  | SubscriptionType
+| *camel.component.pulsar.configuration* | Allows to pre-configure the Pulsar component with common options that the endpoints will reuse. The option is a org.apache.camel.component.pulsar.PulsarConfiguration type. |  | String
 | *camel.component.pulsar.consumer-name* | Name of the consumer when subscription is EXCLUSIVE | sole-consumer | String
 | *camel.component.pulsar.consumer-name-prefix* | Prefix to add to consumer names when a SHARED or FAILOVER subscription is used | cons | String
 | *camel.component.pulsar.consumer-queue-size* | Size of the consumer queue - defaults to 10 | 10 | Integer

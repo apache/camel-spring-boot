@@ -17,7 +17,7 @@ When using yammer with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 27 options, which are listed below.
+The component supports 16 options, which are listed below.
 
 
 
@@ -27,18 +27,7 @@ The component supports 27 options, which are listed below.
 | *camel.component.yammer.access-token* | The access token |  | String
 | *camel.component.yammer.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.yammer.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.yammer.configuration.access-token* | The access token |  | String
-| *camel.component.yammer.configuration.consumer-key* | The consumer key |  | String
-| *camel.component.yammer.configuration.consumer-secret* | The consumer secret |  | String
-| *camel.component.yammer.configuration.delay* | Delay between polling in millis | 5000 | Long
-| *camel.component.yammer.configuration.function* | The function to use |  | YammerFunctionType
-| *camel.component.yammer.configuration.limit* | Return only the specified number of messages. Works for threaded=true and threaded=extended. | -1 | Integer
-| *camel.component.yammer.configuration.newer-than* | Returns messages newer than the message ID specified as a numeric string. This should be used when polling for new messages. If you're looking at messages, and the most recent message returned is 3516, you can make a request with the parameter newerThan=3516 to ensure that you do not get duplicate copies of messages already on your page. | -1 | Long
-| *camel.component.yammer.configuration.older-than* | Returns messages older than the message ID specified as a numeric string. This is useful for paginating messages. For example, if you're currently viewing 20 messages and the oldest is number 2912, you could append olderThan=2912 to your request to get the 20 messages prior to those you're seeing. | -1 | Long
-| *camel.component.yammer.configuration.requestor* | To use a specific requester to communicate with Yammer. |  | ApiRequestor
-| *camel.component.yammer.configuration.threaded* | threaded=true will only return the first message in each thread. This parameter is intended for apps which display message threads collapsed. threaded=extended will return the thread starter messages in order of most recently active as well as the two most recent messages, as they are viewed in the default view on the Yammer web interface. |  | String
-| *camel.component.yammer.configuration.use-json* | Set to true if you want to use raw JSON rather than converting to POJOs. | false | Boolean
-| *camel.component.yammer.configuration.user-id* | The user id |  | String
+| *camel.component.yammer.configuration* | Component configuration. The option is a org.apache.camel.component.yammer.YammerConfiguration type. |  | String
 | *camel.component.yammer.consumer-key* | The consumer key |  | String
 | *camel.component.yammer.consumer-secret* | The consumer secret |  | String
 | *camel.component.yammer.delay* | Delay between polling in millis | 5000 | Long

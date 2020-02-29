@@ -78,9 +78,10 @@ public class WebhookComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Set the default configuration for the webhook meta-component.
+     * Set the default configuration for the webhook meta-component. The option
+     * is a org.apache.camel.component.webhook.WebhookConfiguration type.
      */
-    private WebhookConfigurationNestedConfiguration configuration;
+    private String configuration;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -138,93 +139,11 @@ public class WebhookComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public WebhookConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            WebhookConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
-    }
-
-    public static class WebhookConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.webhook.WebhookConfiguration.class;
-        /**
-         * The delegate uri. Must belong to a component that supports webhooks.
-         */
-        private String endpointUri;
-        /**
-         * Automatically register the webhook at startup and unregister it on
-         * shutdown.
-         */
-        private Boolean webhookAutoRegister = true;
-        /**
-         * The first (base) path element where the webhook will be exposed. It's
-         * a good practice to set it to a random string, so that it cannot be
-         * guessed by unauthorized parties.
-         */
-        private String webhookBasePath;
-        /**
-         * The Camel Rest component to use for the REST transport, such as
-         * netty-http.
-         */
-        private String webhookComponentName;
-        /**
-         * The URL of the current service as seen by the webhook provider
-         */
-        private String webhookExternalUrl;
-        /**
-         * The path where the webhook endpoint will be exposed (relative to
-         * basePath, if any)
-         */
-        private String webhookPath;
-
-        public String getEndpointUri() {
-            return endpointUri;
-        }
-
-        public void setEndpointUri(String endpointUri) {
-            this.endpointUri = endpointUri;
-        }
-
-        public Boolean getWebhookAutoRegister() {
-            return webhookAutoRegister;
-        }
-
-        public void setWebhookAutoRegister(Boolean webhookAutoRegister) {
-            this.webhookAutoRegister = webhookAutoRegister;
-        }
-
-        public String getWebhookBasePath() {
-            return webhookBasePath;
-        }
-
-        public void setWebhookBasePath(String webhookBasePath) {
-            this.webhookBasePath = webhookBasePath;
-        }
-
-        public String getWebhookComponentName() {
-            return webhookComponentName;
-        }
-
-        public void setWebhookComponentName(String webhookComponentName) {
-            this.webhookComponentName = webhookComponentName;
-        }
-
-        public String getWebhookExternalUrl() {
-            return webhookExternalUrl;
-        }
-
-        public void setWebhookExternalUrl(String webhookExternalUrl) {
-            this.webhookExternalUrl = webhookExternalUrl;
-        }
-
-        public String getWebhookPath() {
-            return webhookPath;
-        }
-
-        public void setWebhookPath(String webhookPath) {
-            this.webhookPath = webhookPath;
-        }
     }
 }

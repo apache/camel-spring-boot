@@ -22,7 +22,6 @@ import org.apache.camel.component.aws2.ddb.Ddb2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
 /**
  * The aws2-ddb component is used for storing and retrieving data from Amazon's
@@ -47,9 +46,10 @@ public class Ddb2ComponentConfiguration
      */
     private String amazonDDBClient;
     /**
-     * The component configuration
+     * The component configuration. The option is a
+     * org.apache.camel.component.aws2.ddb.Ddb2Configuration type.
      */
-    private Ddb2ConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * Determines whether or not strong consistency should be enforced when data
      * is read.
@@ -128,12 +128,11 @@ public class Ddb2ComponentConfiguration
         this.amazonDDBClient = amazonDDBClient;
     }
 
-    public Ddb2ConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            Ddb2ConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -247,183 +246,5 @@ public class Ddb2ComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
-    }
-
-    public static class Ddb2ConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws2.ddb.Ddb2Configuration.class;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * To use the AmazonDynamoDB as the client
-         */
-        private DynamoDbClient amazonDDBClient;
-        /**
-         * Determines whether or not strong consistency should be enforced when
-         * data is read.
-         */
-        private Boolean consistentRead = false;
-        /**
-         * Attribute name when creating table
-         */
-        private String keyAttributeName;
-        /**
-         * Attribute type when creating table
-         */
-        private String keyAttributeType;
-        /**
-         * What operation to perform
-         */
-        private Ddb2Operations operation = Ddb2Operations.PutItem;
-        /**
-         * To define a proxy host when instantiating the DDB client
-         */
-        private String proxyHost;
-        /**
-         * The region in which DynamoDB client needs to work. When using this
-         * parameter, the configuration will expect the lowercase name of the
-         * region (for example ap-east-1) You'll need to use the name
-         * Region.EU_WEST_1.id()
-         */
-        private Integer proxyPort;
-        /**
-         * To define a proxy protocol when instantiating the DDB client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
-        /**
-         * The provisioned throughput to reserve for reading resources from your
-         * table
-         */
-        private Long readCapacity;
-        /**
-         * The region in which DDB client needs to work
-         */
-        private String region;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
-        /**
-         * The name of the table currently worked with.
-         */
-        private String tableName;
-        /**
-         * The provisioned throughput to reserved for writing resources to your
-         * table
-         */
-        private Long writeCapacity;
-
-        public String getAccessKey() {
-            return accessKey;
-        }
-
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
-        }
-
-        public DynamoDbClient getAmazonDDBClient() {
-            return amazonDDBClient;
-        }
-
-        public void setAmazonDDBClient(DynamoDbClient amazonDDBClient) {
-            this.amazonDDBClient = amazonDDBClient;
-        }
-
-        public Boolean getConsistentRead() {
-            return consistentRead;
-        }
-
-        public void setConsistentRead(Boolean consistentRead) {
-            this.consistentRead = consistentRead;
-        }
-
-        public String getKeyAttributeName() {
-            return keyAttributeName;
-        }
-
-        public void setKeyAttributeName(String keyAttributeName) {
-            this.keyAttributeName = keyAttributeName;
-        }
-
-        public String getKeyAttributeType() {
-            return keyAttributeType;
-        }
-
-        public void setKeyAttributeType(String keyAttributeType) {
-            this.keyAttributeType = keyAttributeType;
-        }
-
-        public Ddb2Operations getOperation() {
-            return operation;
-        }
-
-        public void setOperation(Ddb2Operations operation) {
-            this.operation = operation;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public Protocol getProxyProtocol() {
-            return proxyProtocol;
-        }
-
-        public void setProxyProtocol(Protocol proxyProtocol) {
-            this.proxyProtocol = proxyProtocol;
-        }
-
-        public Long getReadCapacity() {
-            return readCapacity;
-        }
-
-        public void setReadCapacity(Long readCapacity) {
-            this.readCapacity = readCapacity;
-        }
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public String getTableName() {
-            return tableName;
-        }
-
-        public void setTableName(String tableName) {
-            this.tableName = tableName;
-        }
-
-        public Long getWriteCapacity() {
-            return writeCapacity;
-        }
-
-        public void setWriteCapacity(Long writeCapacity) {
-            this.writeCapacity = writeCapacity;
-        }
     }
 }

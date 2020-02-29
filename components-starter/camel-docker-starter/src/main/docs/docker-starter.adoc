@@ -17,7 +17,7 @@ When using docker with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 39 options, which are listed below.
+The component supports 22 options, which are listed below.
 
 
 
@@ -28,24 +28,7 @@ The component supports 39 options, which are listed below.
 | *camel.component.docker.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.docker.cert-path* | Location containing the SSL certificate chain |  | String
 | *camel.component.docker.cmd-exec-factory* | The fully qualified class name of the DockerCmdExecFactory implementation to use | com.github.dockerjava.netty.NettyDockerCmdExecFactory | String
-| *camel.component.docker.configuration.cert-path* | Location containing the SSL certificate chain |  | String
-| *camel.component.docker.configuration.cmd-exec-factory* | The fully qualified class name of the DockerCmdExecFactory implementation to use | com.github.dockerjava.netty.NettyDockerCmdExecFactory | String
-| *camel.component.docker.configuration.email* | Email address associated with the user |  | String
-| *camel.component.docker.configuration.follow-redirect-filter* | Whether to follow redirect filter | false | Boolean
-| *camel.component.docker.configuration.host* | Docker host | localhost | String
-| *camel.component.docker.configuration.logging-filter* | Whether to use logging filter | false | Boolean
-| *camel.component.docker.configuration.max-per-route-connections* | Maximum route connections | 100 | Integer
-| *camel.component.docker.configuration.max-total-connections* | Maximum total connections | 100 | Integer
-| *camel.component.docker.configuration.operation* | Which operation to use |  | DockerOperation
-| *camel.component.docker.configuration.parameters* | Additional configuration parameters as key/value pairs |  | Map
-| *camel.component.docker.configuration.password* | Password to authenticate with |  | String
-| *camel.component.docker.configuration.port* | Docker port | 2375 | Integer
-| *camel.component.docker.configuration.request-timeout* | Request timeout for response (in seconds) |  | Integer
-| *camel.component.docker.configuration.secure* | Use HTTPS communication | false | Boolean
-| *camel.component.docker.configuration.server-address* | Server address for docker registry. | https://index.docker.io/v1/ | String
-| *camel.component.docker.configuration.socket* | Socket connection mode | true | Boolean
-| *camel.component.docker.configuration.tls-verify* | Check TLS | false | Boolean
-| *camel.component.docker.configuration.username* | User name to authenticate with |  | String
+| *camel.component.docker.configuration* | To use the shared docker configuration. The option is a org.apache.camel.component.docker.DockerConfiguration type. |  | String
 | *camel.component.docker.email* | Email address associated with the user |  | String
 | *camel.component.docker.enabled* | Whether to enable auto configuration of the docker component. This is enabled by default. |  | Boolean
 | *camel.component.docker.follow-redirect-filter* | Whether to follow redirect filter | false | Boolean

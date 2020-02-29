@@ -22,7 +22,6 @@ import org.apache.camel.component.aws2.ec2.AWS2EC2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
-import software.amazon.awssdk.services.ec2.Ec2Client;
 
 /**
  * The aws2-ec2 is used for managing Amazon EC2 instances.
@@ -50,9 +49,10 @@ public class AWS2EC2ComponentConfiguration
      */
     private String amazonEc2Client;
     /**
-     * The component configuration
+     * The component configuration. The option is a
+     * org.apache.camel.component.aws2.ec2.AWS2EC2Configuration type.
      */
-    private AWS2EC2ConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -115,12 +115,11 @@ public class AWS2EC2ComponentConfiguration
         this.amazonEc2Client = amazonEc2Client;
     }
 
-    public AWS2EC2ConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            AWS2EC2ConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -186,111 +185,5 @@ public class AWS2EC2ComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public static class AWS2EC2ConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws2.ec2.AWS2EC2Configuration.class;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * To use a existing configured AmazonEC2Client as client
-         */
-        private Ec2Client amazonEc2Client;
-        /**
-         * The operation to perform. It can be createAndRunInstances,
-         * startInstances, stopInstances, terminateInstances, describeInstances,
-         * describeInstancesStatus, rebootInstances, monitorInstances,
-         * unmonitorInstances, createTags or deleteTags
-         */
-        private AWS2EC2Operations operation;
-        /**
-         * To define a proxy host when instantiating the EC2 client
-         */
-        private String proxyHost;
-        /**
-         * To define a proxy port when instantiating the EC2 client
-         */
-        private Integer proxyPort;
-        /**
-         * To define a proxy protocol when instantiating the EC2 client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
-        /**
-         * The region in which EC2 client needs to work. When using this
-         * parameter, the configuration will expect the capitalized name of the
-         * region (for example AP_EAST_1) You'll need to use the name
-         * Regions.EU_WEST_1.name()
-         */
-        private String region;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
-
-        public String getAccessKey() {
-            return accessKey;
-        }
-
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
-        }
-
-        public Ec2Client getAmazonEc2Client() {
-            return amazonEc2Client;
-        }
-
-        public void setAmazonEc2Client(Ec2Client amazonEc2Client) {
-            this.amazonEc2Client = amazonEc2Client;
-        }
-
-        public AWS2EC2Operations getOperation() {
-            return operation;
-        }
-
-        public void setOperation(AWS2EC2Operations operation) {
-            this.operation = operation;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public Protocol getProxyProtocol() {
-            return proxyProtocol;
-        }
-
-        public void setProxyProtocol(Protocol proxyProtocol) {
-            this.proxyProtocol = proxyProtocol;
-        }
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
     }
 }

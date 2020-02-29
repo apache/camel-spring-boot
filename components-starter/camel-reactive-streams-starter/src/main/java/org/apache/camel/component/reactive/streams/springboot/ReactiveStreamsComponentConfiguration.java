@@ -69,9 +69,10 @@ public class ReactiveStreamsComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Configures the internal engine for Reactive Streams.
+     * Configures the internal engine for Reactive Streams. The option is a
+     * org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration type.
      */
-    private ReactiveStreamsEngineConfigurationNestedConfiguration internalEngineConfiguration;
+    private String internalEngineConfiguration;
     /**
      * Set the type of the underlying reactive streams implementation to use.
      * The implementation is looked up from the registry or using a
@@ -113,12 +114,12 @@ public class ReactiveStreamsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public ReactiveStreamsEngineConfigurationNestedConfiguration getInternalEngineConfiguration() {
+    public String getInternalEngineConfiguration() {
         return internalEngineConfiguration;
     }
 
     public void setInternalEngineConfiguration(
-            ReactiveStreamsEngineConfigurationNestedConfiguration internalEngineConfiguration) {
+            String internalEngineConfiguration) {
         this.internalEngineConfiguration = internalEngineConfiguration;
     }
 
@@ -128,48 +129,5 @@ public class ReactiveStreamsComponentConfiguration
 
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
-    }
-
-    public static class ReactiveStreamsEngineConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration.class;
-        /**
-         * The maximum number of threads used by the reactive streams internal
-         * engine.
-         */
-        private Integer threadPoolMaxSize;
-        /**
-         * The minimum number of threads used by the reactive streams internal
-         * engine.
-         */
-        private Integer threadPoolMinSize;
-        /**
-         * The name of the thread pool used by the reactive streams internal
-         * engine.
-         */
-        private String threadPoolName;
-
-        public Integer getThreadPoolMaxSize() {
-            return threadPoolMaxSize;
-        }
-
-        public void setThreadPoolMaxSize(Integer threadPoolMaxSize) {
-            this.threadPoolMaxSize = threadPoolMaxSize;
-        }
-
-        public Integer getThreadPoolMinSize() {
-            return threadPoolMinSize;
-        }
-
-        public void setThreadPoolMinSize(Integer threadPoolMinSize) {
-            this.threadPoolMinSize = threadPoolMinSize;
-        }
-
-        public String getThreadPoolName() {
-            return threadPoolName;
-        }
-
-        public void setThreadPoolName(String threadPoolName) {
-            this.threadPoolName = threadPoolName;
-        }
     }
 }

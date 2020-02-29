@@ -17,7 +17,7 @@ When using aws2-ddb with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 54 options, which are listed below.
+The component supports 31 options, which are listed below.
 
 
 
@@ -27,20 +27,7 @@ The component supports 54 options, which are listed below.
 | *camel.component.aws2-ddb.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws2-ddb.amazon-d-d-b-client* | To use the AmazonDynamoDB as the client. The option is a software.amazon.awssdk.services.dynamodb.DynamoDbClient type. |  | String
 | *camel.component.aws2-ddb.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
-| *camel.component.aws2-ddb.configuration.access-key* | Amazon AWS Access Key |  | String
-| *camel.component.aws2-ddb.configuration.amazon-d-d-b-client* | To use the AmazonDynamoDB as the client |  | DynamoDbClient
-| *camel.component.aws2-ddb.configuration.consistent-read* | Determines whether or not strong consistency should be enforced when data is read. | false | Boolean
-| *camel.component.aws2-ddb.configuration.key-attribute-name* | Attribute name when creating table |  | String
-| *camel.component.aws2-ddb.configuration.key-attribute-type* | Attribute type when creating table |  | String
-| *camel.component.aws2-ddb.configuration.operation* | What operation to perform |  | Ddb2Operations
-| *camel.component.aws2-ddb.configuration.proxy-host* | To define a proxy host when instantiating the DDB client |  | String
-| *camel.component.aws2-ddb.configuration.proxy-port* | The region in which DynamoDB client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | Integer
-| *camel.component.aws2-ddb.configuration.proxy-protocol* | To define a proxy protocol when instantiating the DDB client |  | Protocol
-| *camel.component.aws2-ddb.configuration.read-capacity* | The provisioned throughput to reserve for reading resources from your table |  | Long
-| *camel.component.aws2-ddb.configuration.region* | The region in which DDB client needs to work |  | String
-| *camel.component.aws2-ddb.configuration.secret-key* | Amazon AWS Secret Key |  | String
-| *camel.component.aws2-ddb.configuration.table-name* | The name of the table currently worked with. |  | String
-| *camel.component.aws2-ddb.configuration.write-capacity* | The provisioned throughput to reserved for writing resources to your table |  | Long
+| *camel.component.aws2-ddb.configuration* | The component configuration. The option is a org.apache.camel.component.aws2.ddb.Ddb2Configuration type. |  | String
 | *camel.component.aws2-ddb.consistent-read* | Determines whether or not strong consistency should be enforced when data is read. | false | Boolean
 | *camel.component.aws2-ddb.enabled* | Whether to enable auto configuration of the aws2-ddb component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-ddb.key-attribute-name* | Attribute name when creating table |  | String
@@ -58,17 +45,7 @@ The component supports 54 options, which are listed below.
 | *camel.component.aws2-ddbstream.amazon-dynamo-db-streams-client* | Amazon DynamoDB client to use for all requests for this endpoint. The option is a software.amazon.awssdk.services.dynamodb.streams.DynamoDbStreamsClient type. |  | String
 | *camel.component.aws2-ddbstream.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws2-ddbstream.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.aws2-ddbstream.configuration.access-key* | Amazon AWS Access Key |  | String
-| *camel.component.aws2-ddbstream.configuration.amazon-dynamo-db-streams-client* | Amazon DynamoDB client to use for all requests for this endpoint |  | DynamoDbStreamsClient
-| *camel.component.aws2-ddbstream.configuration.iterator-type* | Defines where in the DynaboDB stream to start getting records. Note that using TRIM_HORIZON can cause a significant delay before the stream has caught up to real-time. if {AT,AFTER}_SEQUENCE_NUMBER are used, then a sequenceNumberProvider MUST be supplied. |  | ShardIteratorType
-| *camel.component.aws2-ddbstream.configuration.max-results-per-request* | Maximum number of records that will be fetched in each poll |  | Integer
-| *camel.component.aws2-ddbstream.configuration.proxy-host* | To define a proxy host when instantiating the DDBStreams client |  | String
-| *camel.component.aws2-ddbstream.configuration.proxy-port* | To define a proxy port when instantiating the DDBStreams client |  | Integer
-| *camel.component.aws2-ddbstream.configuration.proxy-protocol* | To define a proxy protocol when instantiating the DDBStreams client |  | Protocol
-| *camel.component.aws2-ddbstream.configuration.region* | The region in which DDBStreams client needs to work |  | String
-| *camel.component.aws2-ddbstream.configuration.secret-key* | Amazon AWS Secret Key |  | String
-| *camel.component.aws2-ddbstream.configuration.sequence-number-provider* | Provider for the sequence number when using one of the two ShardIteratorType.{AT,AFTER}_SEQUENCE_NUMBER iterator types. Can be a registry reference or a literal sequence number. |  | SequenceNumberProvider
-| *camel.component.aws2-ddbstream.configuration.table-name* | Name of the dynamodb table |  | String
+| *camel.component.aws2-ddbstream.configuration* | The component configuration. The option is a org.apache.camel.component.aws2.ddbstream.Ddb2StreamConfiguration type. |  | String
 | *camel.component.aws2-ddbstream.enabled* | Whether to enable auto configuration of the aws2-ddbstream component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-ddbstream.iterator-type* | Defines where in the DynaboDB stream to start getting records. Note that using TRIM_HORIZON can cause a significant delay before the stream has caught up to real-time. if {AT,AFTER}_SEQUENCE_NUMBER are used, then a sequenceNumberProvider MUST be supplied. |  | ShardIteratorType
 | *camel.component.aws2-ddbstream.max-results-per-request* | Maximum number of records that will be fetched in each poll |  | Integer

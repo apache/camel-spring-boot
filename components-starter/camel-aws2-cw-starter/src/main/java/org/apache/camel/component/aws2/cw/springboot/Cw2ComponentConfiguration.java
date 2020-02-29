@@ -16,13 +16,11 @@
  */
 package org.apache.camel.component.aws2.cw.springboot;
 
-import java.time.Instant;
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.cw.Cw2Component;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
-import software.amazon.awssdk.services.cloudwatch.CloudWatchClient;
 
 /**
  * The aws2-cw component is used for sending metrics to an Amazon CloudWatch.
@@ -46,9 +44,10 @@ public class Cw2ComponentConfiguration
      */
     private String amazonCwClient;
     /**
-     * The component configuration
+     * The component configuration. The option is a
+     * org.apache.camel.component.aws2.cw.Cw2Configuration type.
      */
-    private Cw2ConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -116,12 +115,11 @@ public class Cw2ComponentConfiguration
         this.amazonCwClient = amazonCwClient;
     }
 
-    public Cw2ConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            Cw2ConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -219,156 +217,5 @@ public class Cw2ComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
-    }
-
-    public static class Cw2ConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws2.cw.Cw2Configuration.class;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * To use the AmazonCloudWatch as the client
-         */
-        private CloudWatchClient amazonCwClient;
-        /**
-         * The metric name
-         */
-        private String name;
-        /**
-         * The metric namespace
-         */
-        private String namespace;
-        /**
-         * To define a proxy host when instantiating the CW client
-         */
-        private String proxyHost;
-        /**
-         * To define a proxy port when instantiating the CW client
-         */
-        private Integer proxyPort;
-        /**
-         * To define a proxy protocol when instantiating the CW client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
-        /**
-         * The region in which EKS client needs to work. When using this
-         * parameter, the configuration will expect the lowercase name of the
-         * region (for example ap-east-1) You'll need to use the name
-         * Region.EU_WEST_1.id()
-         */
-        private String region;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
-        /**
-         * The metric timestamp
-         */
-        private Instant timestamp;
-        /**
-         * The metric unit
-         */
-        private String unit;
-        /**
-         * The metric value
-         */
-        private Double value;
-
-        public String getAccessKey() {
-            return accessKey;
-        }
-
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
-        }
-
-        public CloudWatchClient getAmazonCwClient() {
-            return amazonCwClient;
-        }
-
-        public void setAmazonCwClient(CloudWatchClient amazonCwClient) {
-            this.amazonCwClient = amazonCwClient;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getNamespace() {
-            return namespace;
-        }
-
-        public void setNamespace(String namespace) {
-            this.namespace = namespace;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public Protocol getProxyProtocol() {
-            return proxyProtocol;
-        }
-
-        public void setProxyProtocol(Protocol proxyProtocol) {
-            this.proxyProtocol = proxyProtocol;
-        }
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public Instant getTimestamp() {
-            return timestamp;
-        }
-
-        public void setTimestamp(Instant timestamp) {
-            this.timestamp = timestamp;
-        }
-
-        public String getUnit() {
-            return unit;
-        }
-
-        public void setUnit(String unit) {
-            this.unit = unit;
-        }
-
-        public Double getValue() {
-            return value;
-        }
-
-        public void setValue(Double value) {
-            this.value = value;
-        }
     }
 }

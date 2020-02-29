@@ -17,7 +17,7 @@ When using aws-swf with Spring Boot make sure to use the following Maven depende
 ----
 
 
-The component supports 57 options, which are listed below.
+The component supports 31 options, which are listed below.
 
 
 
@@ -35,33 +35,7 @@ The component supports 57 options, which are listed below.
 | *camel.component.aws-swf.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.aws-swf.child-policy* | The policy to use on child workflows when terminating a workflow. |  | String
 | *camel.component.aws-swf.client-configuration-parameters* | To configure the ClientConfiguration using the key/values from the Map. |  | Map
-| *camel.component.aws-swf.configuration.access-key* | Amazon AWS Access Key. |  | String
-| *camel.component.aws-swf.configuration.activity-list* | The list name to consume activities from. |  | String
-| *camel.component.aws-swf.configuration.activity-scheduling-options* | Activity scheduling options |  | ActivitySchedulingOptions
-| *camel.component.aws-swf.configuration.activity-thread-pool-size* | Maximum number of threads in work pool for activity. | 100 | Integer
-| *camel.component.aws-swf.configuration.activity-type-execution-options* | Activity execution options |  | ActivityTypeExecutionOptions
-| *camel.component.aws-swf.configuration.activity-type-registration-options* | Activity registration options |  | ActivityTypeRegistrationOptions
-| *camel.component.aws-swf.configuration.amazon-s-w-client* | To use the given AmazonSimpleWorkflowClient as client |  | AmazonSimpleWorkflow
-| *camel.component.aws-swf.configuration.child-policy* | The policy to use on child workflows when terminating a workflow. |  | String
-| *camel.component.aws-swf.configuration.client-configuration-parameters* | To configure the ClientConfiguration using the key/values from the Map. |  | Map
-| *camel.component.aws-swf.configuration.data-converter* | An instance of com.amazonaws.services.simpleworkflow.flow.DataConverter to use for serializing/deserializing the data. |  | DataConverter
-| *camel.component.aws-swf.configuration.domain-name* | The workflow domain to use. |  | String
-| *camel.component.aws-swf.configuration.event-name* | The workflow or activity event name to use. |  | String
-| *camel.component.aws-swf.configuration.execution-start-to-close-timeout* | Set the execution start to close timeout. | 3600 | String
-| *camel.component.aws-swf.configuration.operation* | Workflow operation | START | String
-| *camel.component.aws-swf.configuration.region* | Amazon AWS Region. When using this parameter, the configuration will expect the capitalized name of the region (for example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name() |  | String
-| *camel.component.aws-swf.configuration.s-w-client-parameters* | To configure the AmazonSimpleWorkflowClient using the key/values from the Map. |  | Map
-| *camel.component.aws-swf.configuration.secret-key* | Amazon AWS Secret Key. |  | String
-| *camel.component.aws-swf.configuration.signal-name* | The name of the signal to send to the workflow. |  | String
-| *camel.component.aws-swf.configuration.start-workflow-options-parameters* | To configure the StartWorkflowOptions using the key/values from the Map. |  | Map
-| *camel.component.aws-swf.configuration.state-result-type* | The type of the result when a workflow state is queried. |  | String
-| *camel.component.aws-swf.configuration.task-start-to-close-timeout* | Set the task start to close timeout. | 600 | String
-| *camel.component.aws-swf.configuration.termination-details* | Details for terminating a workflow. |  | String
-| *camel.component.aws-swf.configuration.termination-reason* | The reason for terminating a workflow. |  | String
-| *camel.component.aws-swf.configuration.type* | Activity or workflow |  | String
-| *camel.component.aws-swf.configuration.version* | The workflow or activity event version to use. |  | String
-| *camel.component.aws-swf.configuration.workflow-list* | The list name to consume workflows from. |  | String
-| *camel.component.aws-swf.configuration.workflow-type-registration-options* | Workflow registration options |  | WorkflowTypeRegistrationOptions
+| *camel.component.aws-swf.configuration* | The component configuration. The option is a org.apache.camel.component.aws.swf.SWFConfiguration type. |  | String
 | *camel.component.aws-swf.data-converter* | An instance of com.amazonaws.services.simpleworkflow.flow.DataConverter to use for serializing/deserializing the data. The option is a com.amazonaws.services.simpleworkflow.flow.DataConverter type. |  | String
 | *camel.component.aws-swf.domain-name* | The workflow domain to use. |  | String
 | *camel.component.aws-swf.enabled* | Whether to enable auto configuration of the aws-swf component. This is enabled by default. |  | Boolean

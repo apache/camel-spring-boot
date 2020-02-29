@@ -16,11 +16,8 @@
  */
 package org.apache.camel.component.wordpress.springboot;
 
-import java.util.List;
 import java.util.Map;
 import javax.annotation.Generated;
-import org.apache.camel.component.wordpress.api.model.Order;
-import org.apache.camel.component.wordpress.api.model.SearchCriteria;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -62,9 +59,10 @@ public class WordpressComponentConfiguration
      */
     private String password;
     /**
-     * Search criteria
+     * Search criteria. The option is a
+     * org.apache.camel.component.wordpress.api.model.SearchCriteria type.
      */
-    private SearchCriteriaNestedConfiguration searchCriteria;
+    private String searchCriteria;
     /**
      * The Wordpress API URL from your site, e.g. http://myblog.com/wp-json/
      */
@@ -99,9 +97,11 @@ public class WordpressComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Wordpress component configuration
+     * Wordpress component configuration. The option is a
+     * org.apache.camel.component.wordpress.WordpressComponentConfiguration
+     * type.
      */
-    private WordpressComponentConfigurationNestedConfiguration configuration;
+    private String configuration;
 
     public String getApiVersion() {
         return apiVersion;
@@ -143,12 +143,11 @@ public class WordpressComponentConfiguration
         this.password = password;
     }
 
-    public SearchCriteriaNestedConfiguration getSearchCriteria() {
+    public String getSearchCriteria() {
         return searchCriteria;
     }
 
-    public void setSearchCriteria(
-            SearchCriteriaNestedConfiguration searchCriteria) {
+    public void setSearchCriteria(String searchCriteria) {
         this.searchCriteria = searchCriteria;
     }
 
@@ -192,171 +191,11 @@ public class WordpressComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public WordpressComponentConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            WordpressComponentConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
-    }
-
-    public static class SearchCriteriaNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.wordpress.api.model.SearchCriteria.class;
-        private List exclude;
-        private List include;
-        private Order order;
-        private Integer page;
-        private Integer perPage;
-        private String search;
-
-        public List getExclude() {
-            return exclude;
-        }
-
-        public void setExclude(List exclude) {
-            this.exclude = exclude;
-        }
-
-        public List getInclude() {
-            return include;
-        }
-
-        public void setInclude(List include) {
-            this.include = include;
-        }
-
-        public Order getOrder() {
-            return order;
-        }
-
-        public void setOrder(Order order) {
-            this.order = order;
-        }
-
-        public Integer getPage() {
-            return page;
-        }
-
-        public void setPage(Integer page) {
-            this.page = page;
-        }
-
-        public Integer getPerPage() {
-            return perPage;
-        }
-
-        public void setPerPage(Integer perPage) {
-            this.perPage = perPage;
-        }
-
-        public String getSearch() {
-            return search;
-        }
-
-        public void setSearch(String search) {
-            this.search = search;
-        }
-    }
-
-    public static class WordpressComponentConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.wordpress.WordpressComponentConfiguration.class;
-        /**
-         * The Wordpress REST API version
-         */
-        private String apiVersion = "2";
-        /**
-         * The criteria to use with complex searches.
-         */
-        private Map criteria;
-        /**
-         * Whether to bypass trash and force deletion.
-         */
-        private Boolean force = false;
-        /**
-         * The entity ID. Should be passed when the operation performed requires
-         * a specific entity, e.g. deleting a post
-         */
-        private Integer id;
-        /**
-         * Password from authorized user
-         */
-        private String password;
-        /**
-         * Search criteria
-         */
-        private SearchCriteria searchCriteria;
-        /**
-         * The Wordpress API URL from your site, e.g. http://myblog.com/wp-json/
-         */
-        private String url;
-        /**
-         * Authorized user to perform writing operations
-         */
-        private String user;
-
-        public String getApiVersion() {
-            return apiVersion;
-        }
-
-        public void setApiVersion(String apiVersion) {
-            this.apiVersion = apiVersion;
-        }
-
-        public Map getCriteria() {
-            return criteria;
-        }
-
-        public void setCriteria(Map criteria) {
-            this.criteria = criteria;
-        }
-
-        public Boolean getForce() {
-            return force;
-        }
-
-        public void setForce(Boolean force) {
-            this.force = force;
-        }
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public SearchCriteria getSearchCriteria() {
-            return searchCriteria;
-        }
-
-        public void setSearchCriteria(SearchCriteria searchCriteria) {
-            this.searchCriteria = searchCriteria;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        public String getUser() {
-            return user;
-        }
-
-        public void setUser(String user) {
-            this.user = user;
-        }
     }
 }

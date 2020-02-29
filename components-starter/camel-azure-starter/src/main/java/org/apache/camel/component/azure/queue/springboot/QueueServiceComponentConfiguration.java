@@ -17,8 +17,6 @@
 package org.apache.camel.component.azure.queue.springboot;
 
 import javax.annotation.Generated;
-import com.microsoft.azure.storage.StorageCredentials;
-import com.microsoft.azure.storage.queue.CloudQueue;
 import org.apache.camel.component.azure.queue.QueueServiceComponent;
 import org.apache.camel.component.azure.queue.QueueServiceOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -93,9 +91,10 @@ public class QueueServiceComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The Queue Service configuration
+     * The Queue Service configuration. The option is a
+     * org.apache.camel.component.azure.queue.QueueServiceConfiguration type.
      */
-    private QueueServiceConfigurationNestedConfiguration configuration;
+    private String configuration;
 
     public String getAzureQueueClient() {
         return azureQueueClient;
@@ -169,106 +168,11 @@ public class QueueServiceComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public QueueServiceConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            QueueServiceConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
-    }
-
-    public static class QueueServiceConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.azure.queue.QueueServiceConfiguration.class;
-        /**
-         * The queue service client
-         */
-        private CloudQueue azureQueueClient;
-        /**
-         * Message Time To Live in seconds
-         */
-        private Integer messageTimeToLive;
-        /**
-         * Message Visibility Delay in seconds
-         */
-        private Integer messageVisibilityDelay;
-        /**
-         * Queue service operation hint to the producer
-         */
-        private QueueServiceOperations operation = QueueServiceOperations.listQueues;
-        private String queueName;
-        /**
-         * Set a prefix which can be used for listing the queues
-         */
-        private String queuePrefix;
-        private String accountName;
-        /**
-         * Set the storage credentials, required in most cases
-         */
-        private StorageCredentials credentials;
-
-        public CloudQueue getAzureQueueClient() {
-            return azureQueueClient;
-        }
-
-        public void setAzureQueueClient(CloudQueue azureQueueClient) {
-            this.azureQueueClient = azureQueueClient;
-        }
-
-        public Integer getMessageTimeToLive() {
-            return messageTimeToLive;
-        }
-
-        public void setMessageTimeToLive(Integer messageTimeToLive) {
-            this.messageTimeToLive = messageTimeToLive;
-        }
-
-        public Integer getMessageVisibilityDelay() {
-            return messageVisibilityDelay;
-        }
-
-        public void setMessageVisibilityDelay(Integer messageVisibilityDelay) {
-            this.messageVisibilityDelay = messageVisibilityDelay;
-        }
-
-        public QueueServiceOperations getOperation() {
-            return operation;
-        }
-
-        public void setOperation(QueueServiceOperations operation) {
-            this.operation = operation;
-        }
-
-        public String getQueueName() {
-            return queueName;
-        }
-
-        public void setQueueName(String queueName) {
-            this.queueName = queueName;
-        }
-
-        public String getQueuePrefix() {
-            return queuePrefix;
-        }
-
-        public void setQueuePrefix(String queuePrefix) {
-            this.queuePrefix = queuePrefix;
-        }
-
-        public String getAccountName() {
-            return accountName;
-        }
-
-        public void setAccountName(String accountName) {
-            this.accountName = accountName;
-        }
-
-        public StorageCredentials getCredentials() {
-            return credentials;
-        }
-
-        public void setCredentials(StorageCredentials credentials) {
-            this.credentials = credentials;
-        }
     }
 }

@@ -17,7 +17,7 @@ When using crypto with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 68 options, which are listed below.
+The component supports 49 options, which are listed below.
 
 
 
@@ -31,26 +31,7 @@ The component supports 68 options, which are listed below.
 | *camel.component.crypto.certificate* | Set the Certificate that should be used to verify the signature in the exchange based on its payload. The option is a java.security.cert.Certificate type. |  | String
 | *camel.component.crypto.certificate-name* | Sets the reference name for a PrivateKey that can be found in the registry. |  | String
 | *camel.component.crypto.clear-headers* | Determines if the Signature specific headers be cleared after signing and verification. Defaults to true, and should only be made otherwise at your extreme peril as vital private information such as Keys and passwords may escape if unset. | true | Boolean
-| *camel.component.crypto.configuration.algorithm* | Sets the JCE name of the Algorithm that should be used for the signer. | SHA256withRSA | String
-| *camel.component.crypto.configuration.alias* | Sets the alias used to query the KeyStore for keys and {link java.security.cert.Certificate Certificates} to be used in signing and verifying exchanges. This value can be provided at runtime via the message header org.apache.camel.component.crypto.DigitalSignatureConstants#KEYSTORE_ALIAS |  | String
-| *camel.component.crypto.configuration.buffer-size* | Set the size of the buffer used to read in the Exchange payload data. | 2048 | Integer
-| *camel.component.crypto.configuration.certificate* | Set the Certificate that should be used to verify the signature in the exchange based on its payload. |  | Certificate
-| *camel.component.crypto.configuration.certificate-name* | Sets the reference name for a PrivateKey that can be found in the registry. |  | String
-| *camel.component.crypto.configuration.clear-headers* | Determines if the Signature specific headers be cleared after signing and verification. Defaults to true, and should only be made otherwise at your extreme peril as vital private information such as Keys and passwords may escape if unset. | true | Boolean
-| *camel.component.crypto.configuration.crypto-operation* | Set the Crypto operation from that supplied after the crypto scheme in the endpoint uri e.g. crypto:sign sets sign as the operation. |  | CryptoOperation
-| *camel.component.crypto.configuration.key-store-parameters* | Sets the KeyStore that can contain keys and Certficates for use in signing and verifying exchanges based on the given KeyStoreParameters. A KeyStore is typically used with an alias, either one supplied in the Route definition or dynamically via the message header CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a single entry in the Keystore, then this single entry will be used. |  | KeyStoreParameters
-| *camel.component.crypto.configuration.keystore* | Sets the KeyStore that can contain keys and Certficates for use in signing and verifying exchanges. A KeyStore is typically used with an alias, either one supplied in the Route definition or dynamically via the message header CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a single entry in the Keystore, then this single entry will be used. |  | KeyStore
-| *camel.component.crypto.configuration.keystore-name* | Sets the reference name for a Keystore that can be found in the registry. |  | String
-| *camel.component.crypto.configuration.name* | The logical name of this operation. |  | String
-| *camel.component.crypto.configuration.password* | Sets the password used to access an aliased PrivateKey in the KeyStore. |  | String
-| *camel.component.crypto.configuration.private-key* | Set the PrivateKey that should be used to sign the exchange |  | PrivateKey
-| *camel.component.crypto.configuration.private-key-name* | Sets the reference name for a PrivateKey that can be found in the registry. |  | String
-| *camel.component.crypto.configuration.provider* | Set the id of the security provider that provides the configured Signature algorithm. |  | String
-| *camel.component.crypto.configuration.public-key* | Set the PublicKey that should be used to verify the signature in the exchange. |  | PublicKey
-| *camel.component.crypto.configuration.public-key-name* | references that should be resolved when the context changes |  | String
-| *camel.component.crypto.configuration.secure-random* | Set the SecureRandom used to initialize the Signature service |  | SecureRandom
-| *camel.component.crypto.configuration.secure-random-name* | Sets the reference name for a SecureRandom that can be found in the registry. |  | String
-| *camel.component.crypto.configuration.signature-header-name* | Set the name of the message header that should be used to store the base64 encoded signature. This defaults to 'CamelDigitalSignature' |  | String
+| *camel.component.crypto.configuration* | To use the shared DigitalSignatureConfiguration as configuration. The option is a org.apache.camel.component.crypto.DigitalSignatureConfiguration type. |  | String
 | *camel.component.crypto.enabled* | Whether to enable auto configuration of the crypto component. This is enabled by default. |  | Boolean
 | *camel.component.crypto.key-store-parameters* | Sets the KeyStore that can contain keys and Certficates for use in signing and verifying exchanges based on the given KeyStoreParameters. A KeyStore is typically used with an alias, either one supplied in the Route definition or dynamically via the message header CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a single entry in the Keystore, then this single entry will be used. The option is a org.apache.camel.support.jsse.KeyStoreParameters type. |  | String
 | *camel.component.crypto.keystore* | Sets the KeyStore that can contain keys and Certficates for use in signing and verifying exchanges. A KeyStore is typically used with an alias, either one supplied in the Route definition or dynamically via the message header CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a single entry in the Keystore, then this single entry will be used. The option is a java.security.KeyStore type. |  | String

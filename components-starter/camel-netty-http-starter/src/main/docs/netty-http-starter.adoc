@@ -17,7 +17,7 @@ When using netty-http with Spring Boot make sure to use the following Maven depe
 ----
 
 
-The component supports 67 options, which are listed below.
+The component supports 62 options, which are listed below.
 
 
 
@@ -67,12 +67,7 @@ The component supports 67 options, which are listed below.
 | *camel.component.netty-http.request-timeout* | Allows to use a timeout for the Netty producer when calling a remote server. By default no timeout is in use. The value is in milli seconds, so eg 30000 is 30 seconds. The requestTimeout is using Netty's ReadTimeoutHandler to trigger the timeout. |  | Long
 | *camel.component.netty-http.reuse-address* | Setting to facilitate socket multiplexing | true | Boolean
 | *camel.component.netty-http.reuse-channel* | This option allows producers and consumers (in client mode) to reuse the same Netty Channel for the lifecycle of processing the Exchange. This is useful if you need to call a server multiple times in a Camel route and want to use the same network connection. When using this, the channel is not returned to the connection pool until the Exchange is done; or disconnected if the disconnect option is set to true. The reused Channel is stored on the Exchange as an exchange property with the key NettyConstants#NETTY_CHANNEL which allows you to obtain the channel during routing and use it as well. | false | Boolean
-| *camel.component.netty-http.security-configuration.authenticate* | Whether to enable authentication |  | Boolean
-| *camel.component.netty-http.security-configuration.constraint* | Security constraint. Currently only Basic is supported. |  | String
-| *camel.component.netty-http.security-configuration.login-denied-logging-level* | Sets a logging level to use for logging denied login attempts (incl stacktraces) |  | LoggingLevel
-| *camel.component.netty-http.security-configuration.realm* | Name of security realm |  | String
-| *camel.component.netty-http.security-configuration.security-authenticator* | Sets the SecurityAuthenticator to use for authenticating the HttpPrincipal. |  | SecurityAuthenticator
-| *camel.component.netty-http.security-configuration.security-constraint* | Sets a SecurityConstraint to use for checking if a web resource is restricted or not. By default this is null, which means all resources is restricted. |  | SecurityConstraint
+| *camel.component.netty-http.security-configuration* | Refers to a org.apache.camel.component.netty.http.NettyHttpSecurityConfiguration for configuring secure web resources. The option is a org.apache.camel.component.netty.http.NettyHttpSecurityConfiguration type. |  | String
 | *camel.component.netty-http.security-provider* | Security provider to be used for payload encryption. Defaults to SunX509 if not set. |  | String
 | *camel.component.netty-http.send-buffer-size* | The TCP/UDP buffer sizes to be used during outbound communication. Size is bytes. | 65536 | Integer
 | *camel.component.netty-http.server-closed-channel-exception-caught-log-level* | If the server (NettyConsumer) catches an java.nio.channels.ClosedChannelException then its logged using this logging level. This is used to avoid logging the closed channel exceptions, as clients can disconnect abruptly and then cause a flood of closed exceptions in the Netty server. |  | LoggingLevel

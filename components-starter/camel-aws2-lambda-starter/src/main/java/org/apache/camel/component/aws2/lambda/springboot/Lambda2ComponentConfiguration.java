@@ -22,7 +22,6 @@ import org.apache.camel.component.aws2.lambda.Lambda2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
-import software.amazon.awssdk.services.lambda.LambdaClient;
 
 /**
  * The aws2-lambda is used for managing and invoking functions from Amazon
@@ -42,9 +41,10 @@ public class Lambda2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Component configuration
+     * Component configuration. The option is a
+     * org.apache.camel.component.aws2.lambda.Lambda2Configuration type.
      */
-    private Lambda2ConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -98,12 +98,11 @@ public class Lambda2ComponentConfiguration
      */
     private String secretKey;
 
-    public Lambda2ConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            Lambda2ConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -185,109 +184,5 @@ public class Lambda2ComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
-    }
-
-    public static class Lambda2ConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws2.lambda.Lambda2Configuration.class;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * To use a existing configured AwsLambdaClient as client
-         */
-        private LambdaClient awsLambdaClient;
-        /**
-         * The operation to perform. It can be listFunctions, getFunction,
-         * createFunction, deleteFunction or invokeFunction
-         */
-        private Lambda2Operations operation = Lambda2Operations.invokeFunction;
-        /**
-         * To define a proxy host when instantiating the Lambda client
-         */
-        private String proxyHost;
-        /**
-         * To define a proxy port when instantiating the Lambda client
-         */
-        private Integer proxyPort;
-        /**
-         * To define a proxy protocol when instantiating the Lambda client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
-        /**
-         * The region in which ECS client needs to work. When using this
-         * parameter, the configuration will expect the lowercase name of the
-         * region (for example ap-east-1) You'll need to use the name
-         * Region.EU_WEST_1.id()
-         */
-        private String region;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
-
-        public String getAccessKey() {
-            return accessKey;
-        }
-
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
-        }
-
-        public LambdaClient getAwsLambdaClient() {
-            return awsLambdaClient;
-        }
-
-        public void setAwsLambdaClient(LambdaClient awsLambdaClient) {
-            this.awsLambdaClient = awsLambdaClient;
-        }
-
-        public Lambda2Operations getOperation() {
-            return operation;
-        }
-
-        public void setOperation(Lambda2Operations operation) {
-            this.operation = operation;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public Protocol getProxyProtocol() {
-            return proxyProtocol;
-        }
-
-        public void setProxyProtocol(Protocol proxyProtocol) {
-            this.proxyProtocol = proxyProtocol;
-        }
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
     }
 }

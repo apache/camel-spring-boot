@@ -68,9 +68,10 @@ public class UndertowComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * To configure common options, such as thread pools
+     * To configure common options, such as thread pools. The option is a
+     * org.apache.camel.component.undertow.UndertowHostOptions type.
      */
-    private UndertowHostOptionsNestedConfiguration hostOptions;
+    private String hostOptions;
     /**
      * To use a custom HttpBinding to control the mapping between Camel message
      * and HttpClient. The option is a
@@ -119,12 +120,11 @@ public class UndertowComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public UndertowHostOptionsNestedConfiguration getHostOptions() {
+    public String getHostOptions() {
         return hostOptions;
     }
 
-    public void setHostOptions(
-            UndertowHostOptionsNestedConfiguration hostOptions) {
+    public void setHostOptions(String hostOptions) {
         this.hostOptions = hostOptions;
     }
 
@@ -151,69 +151,5 @@ public class UndertowComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public static class UndertowHostOptionsNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.undertow.UndertowHostOptions.class;
-        /**
-         * The buffer size of the Undertow host.
-         */
-        private Integer bufferSize;
-        /**
-         * Set if the Undertow host should use direct buffers.
-         */
-        private Boolean directBuffers;
-        /**
-         * Set if the Undertow host should use http2 protocol.
-         */
-        private Boolean http2Enabled;
-        /**
-         * The number of io threads to use in a Undertow host.
-         */
-        private Integer ioThreads;
-        /**
-         * The number of worker threads to use in a Undertow host.
-         */
-        private Integer workerThreads;
-
-        public Integer getBufferSize() {
-            return bufferSize;
-        }
-
-        public void setBufferSize(Integer bufferSize) {
-            this.bufferSize = bufferSize;
-        }
-
-        public Boolean getDirectBuffers() {
-            return directBuffers;
-        }
-
-        public void setDirectBuffers(Boolean directBuffers) {
-            this.directBuffers = directBuffers;
-        }
-
-        public Boolean getHttp2Enabled() {
-            return http2Enabled;
-        }
-
-        public void setHttp2Enabled(Boolean http2Enabled) {
-            this.http2Enabled = http2Enabled;
-        }
-
-        public Integer getIoThreads() {
-            return ioThreads;
-        }
-
-        public void setIoThreads(Integer ioThreads) {
-            this.ioThreads = ioThreads;
-        }
-
-        public Integer getWorkerThreads() {
-            return workerThreads;
-        }
-
-        public void setWorkerThreads(Integer workerThreads) {
-            this.workerThreads = workerThreads;
-        }
     }
 }

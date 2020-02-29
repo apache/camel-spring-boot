@@ -17,7 +17,7 @@ When using caffeine with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 66 options, which are listed below.
+The component supports 38 options, which are listed below.
 
 
 
@@ -28,21 +28,7 @@ The component supports 66 options, which are listed below.
 | *camel.component.caffeine-cache.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.caffeine-cache.cache* | To configure an already instantiated cache to be used. The option is a com.github.benmanes.caffeine.cache.Cache type. |  | String
 | *camel.component.caffeine-cache.cache-loader* | To configure a CacheLoader in case of a LoadCache use. The option is a com.github.benmanes.caffeine.cache.CacheLoader type. |  | String
-| *camel.component.caffeine-cache.configuration.action* | To configure the default cache action. If an action is set in the message header, then the operation from the header takes precedence. |  | String
-| *camel.component.caffeine-cache.configuration.cache* | To configure an already instantiated cache to be used |  | Cache
-| *camel.component.caffeine-cache.configuration.cache-loader* | To configure a CacheLoader in case of a LoadCache use |  | CacheLoader
-| *camel.component.caffeine-cache.configuration.create-cache-if-not-exist* | Configure if a cache need to be created if it does exist or can't be pre-configured. | true | Boolean
-| *camel.component.caffeine-cache.configuration.eviction-type* | Set the eviction Type for this cache |  | EvictionType
-| *camel.component.caffeine-cache.configuration.expire-after-access-time* | Set the expire After Access Time in case of time based Eviction (in seconds) | 300 | Integer
-| *camel.component.caffeine-cache.configuration.expire-after-write-time* | Set the expire After Access Write in case of time based Eviction (in seconds) | 300 | Integer
-| *camel.component.caffeine-cache.configuration.initial-capacity* | Set the initial Capacity for the cache | 10000 | Integer
-| *camel.component.caffeine-cache.configuration.key* | To configure the default action key. If a key is set in the message header, then the key from the header takes precedence. |  | Object
-| *camel.component.caffeine-cache.configuration.key-type* | The cache key type, default java.lang.Object |  | String
-| *camel.component.caffeine-cache.configuration.maximum-size* | Set the maximum size for the cache | 10000 | Integer
-| *camel.component.caffeine-cache.configuration.removal-listener* | Set a specific removal Listener for the cache |  | RemovalListener
-| *camel.component.caffeine-cache.configuration.stats-counter* | Set a specific Stats Counter for the cache stats |  | StatsCounter
-| *camel.component.caffeine-cache.configuration.stats-enabled* | To enable stats on the cache | false | Boolean
-| *camel.component.caffeine-cache.configuration.value-type* | The cache value type, default java.lang.Object |  | String
+| *camel.component.caffeine-cache.configuration* | Sets the global component configuration. The option is a org.apache.camel.component.caffeine.CaffeineConfiguration type. |  | String
 | *camel.component.caffeine-cache.create-cache-if-not-exist* | Configure if a cache need to be created if it does exist or can't be pre-configured. | true | Boolean
 | *camel.component.caffeine-cache.enabled* | Whether to enable auto configuration of the caffeine-cache component. This is enabled by default. |  | Boolean
 | *camel.component.caffeine-cache.eviction-type* | Set the eviction Type for this cache |  | EvictionType
@@ -61,21 +47,7 @@ The component supports 66 options, which are listed below.
 | *camel.component.caffeine-loadcache.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.caffeine-loadcache.cache* | To configure an already instantiated cache to be used. The option is a com.github.benmanes.caffeine.cache.Cache type. |  | String
 | *camel.component.caffeine-loadcache.cache-loader* | To configure a CacheLoader in case of a LoadCache use. The option is a com.github.benmanes.caffeine.cache.CacheLoader type. |  | String
-| *camel.component.caffeine-loadcache.configuration.action* | To configure the default cache action. If an action is set in the message header, then the operation from the header takes precedence. |  | String
-| *camel.component.caffeine-loadcache.configuration.cache* | To configure an already instantiated cache to be used |  | Cache
-| *camel.component.caffeine-loadcache.configuration.cache-loader* | To configure a CacheLoader in case of a LoadCache use |  | CacheLoader
-| *camel.component.caffeine-loadcache.configuration.create-cache-if-not-exist* | Configure if a cache need to be created if it does exist or can't be pre-configured. | true | Boolean
-| *camel.component.caffeine-loadcache.configuration.eviction-type* | Set the eviction Type for this cache |  | EvictionType
-| *camel.component.caffeine-loadcache.configuration.expire-after-access-time* | Set the expire After Access Time in case of time based Eviction (in seconds) | 300 | Integer
-| *camel.component.caffeine-loadcache.configuration.expire-after-write-time* | Set the expire After Access Write in case of time based Eviction (in seconds) | 300 | Integer
-| *camel.component.caffeine-loadcache.configuration.initial-capacity* | Set the initial Capacity for the cache | 10000 | Integer
-| *camel.component.caffeine-loadcache.configuration.key* | To configure the default action key. If a key is set in the message header, then the key from the header takes precedence. |  | Object
-| *camel.component.caffeine-loadcache.configuration.key-type* | The cache key type, default java.lang.Object |  | String
-| *camel.component.caffeine-loadcache.configuration.maximum-size* | Set the maximum size for the cache | 10000 | Integer
-| *camel.component.caffeine-loadcache.configuration.removal-listener* | Set a specific removal Listener for the cache |  | RemovalListener
-| *camel.component.caffeine-loadcache.configuration.stats-counter* | Set a specific Stats Counter for the cache stats |  | StatsCounter
-| *camel.component.caffeine-loadcache.configuration.stats-enabled* | To enable stats on the cache | false | Boolean
-| *camel.component.caffeine-loadcache.configuration.value-type* | The cache value type, default java.lang.Object |  | String
+| *camel.component.caffeine-loadcache.configuration* | Sets the global component configuration. The option is a org.apache.camel.component.caffeine.CaffeineConfiguration type. |  | String
 | *camel.component.caffeine-loadcache.create-cache-if-not-exist* | Configure if a cache need to be created if it does exist or can't be pre-configured. | true | Boolean
 | *camel.component.caffeine-loadcache.enabled* | Whether to enable auto configuration of the caffeine-loadcache component. This is enabled by default. |  | Boolean
 | *camel.component.caffeine-loadcache.eviction-type* | Set the eviction Type for this cache |  | EvictionType

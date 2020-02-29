@@ -48,9 +48,11 @@ public class AtomixValueComponentConfiguration
      */
     private String atomix;
     /**
-     * The shared component configuration
+     * The shared component configuration. The option is a
+     * org.apache.camel.component.atomix.client.value.AtomixValueConfiguration
+     * type.
      */
-    private AtomixValueConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * The path to the AtomixClient configuration
      */
@@ -137,12 +139,11 @@ public class AtomixValueComponentConfiguration
         this.atomix = atomix;
     }
 
-    public AtomixValueConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            AtomixValueConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -264,45 +265,5 @@ public class AtomixValueComponentConfiguration
 
     public void setResourceOptions(Map<String, Properties> resourceOptions) {
         this.resourceOptions = resourceOptions;
-    }
-
-    public static class AtomixValueConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.atomix.client.value.AtomixValueConfiguration.class;
-        /**
-         * The default action.
-         */
-        private Action defaultAction = Action.SET;
-        /**
-         * The resource ttl.
-         */
-        private Long ttl;
-        /**
-         * The header that wil carry the result.
-         */
-        private String resultHeader;
-
-        public Action getDefaultAction() {
-            return defaultAction;
-        }
-
-        public void setDefaultAction(Action defaultAction) {
-            this.defaultAction = defaultAction;
-        }
-
-        public Long getTtl() {
-            return ttl;
-        }
-
-        public void setTtl(Long ttl) {
-            this.ttl = ttl;
-        }
-
-        public String getResultHeader() {
-            return resultHeader;
-        }
-
-        public void setResultHeader(String resultHeader) {
-            this.resultHeader = resultHeader;
-        }
     }
 }

@@ -19,8 +19,6 @@ package org.apache.camel.component.corda.springboot;
 import javax.annotation.Generated;
 import net.corda.core.contracts.ContractState;
 import net.corda.core.flows.FlowLogic;
-import net.corda.core.node.services.vault.PageSpecification;
-import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.node.services.vault.Sort;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -42,9 +40,10 @@ public class CordaComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a shared configuration.
+     * To use a shared configuration. The option is a
+     * org.apache.camel.component.corda.CordaConfiguration type.
      */
-    private CordaConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -134,12 +133,11 @@ public class CordaComponentConfiguration
      */
     private String username;
 
-    public CordaConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            CordaConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -245,163 +243,5 @@ public class CordaComponentConfiguration
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public static class CordaConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.corda.CordaConfiguration.class;
-        /**
-         * A contract state (or just state) contains opaque data used by a
-         * contract program. It can be thought of as a disk file that the
-         * program can use to persist data across transactions. States are
-         * immutable: once created they are never updated, instead, any changes
-         * must generate a new successor state. States can be updated (consumed)
-         * only once: the notary is responsible for ensuring there is no "double
-         * spending" by only signing a transaction if the input states are all
-         * free.
-         */
-        private Class contractStateClass;
-        /**
-         * Start the given flow with the given arguments, returning an
-         * Observable with a single observation of the result of running the
-         * flow. The flowLogicClass must be annotated with
-         * net.corda.core.flows.StartableByRPC.
-         */
-        private Object[] flowLogicArguments;
-        /**
-         * Start the given flow with the given arguments, returning an
-         * Observable with a single observation of the result of running the
-         * flow. The flowLogicClass must be annotated with
-         * net.corda.core.flows.StartableByRPC.
-         */
-        private Class flowLogicClass;
-        /**
-         * The url for the corda node
-         */
-        private String node;
-        /**
-         * Operation to use
-         */
-        private String operation;
-        /**
-         * PageSpecification allows specification of a page number (starting
-         * from 1) and page size (defaulting to 200 with a maximum page size of
-         * (Integer.MAX_INT) Note: we default the page number to 200 to enable
-         * queries without requiring a page specification but enabling detection
-         * of large results sets that fall out of the 200 requirement. Max page
-         * size should be used with extreme caution as results may exceed your
-         * JVM memory footprint.
-         */
-        private PageSpecification pageSpecification;
-        /**
-         * Password for login
-         */
-        private String password;
-        /**
-         * Whether to process snapshots or not
-         */
-        private Boolean processSnapshot = true;
-        /**
-         * QueryCriteria assumes underlying schema tables are correctly indexed
-         * for performance.
-         */
-        private QueryCriteria queryCriteria;
-        /**
-         * Sort allows specification of a set of entity attribute names and
-         * their associated directionality and null handling, to be applied upon
-         * processing a query specification.
-         */
-        private Sort sort;
-        /**
-         * Username for login
-         */
-        private String username;
-
-        public Class getContractStateClass() {
-            return contractStateClass;
-        }
-
-        public void setContractStateClass(Class contractStateClass) {
-            this.contractStateClass = contractStateClass;
-        }
-
-        public Object[] getFlowLogicArguments() {
-            return flowLogicArguments;
-        }
-
-        public void setFlowLogicArguments(Object[] flowLogicArguments) {
-            this.flowLogicArguments = flowLogicArguments;
-        }
-
-        public Class getFlowLogicClass() {
-            return flowLogicClass;
-        }
-
-        public void setFlowLogicClass(Class flowLogicClass) {
-            this.flowLogicClass = flowLogicClass;
-        }
-
-        public String getNode() {
-            return node;
-        }
-
-        public void setNode(String node) {
-            this.node = node;
-        }
-
-        public String getOperation() {
-            return operation;
-        }
-
-        public void setOperation(String operation) {
-            this.operation = operation;
-        }
-
-        public PageSpecification getPageSpecification() {
-            return pageSpecification;
-        }
-
-        public void setPageSpecification(PageSpecification pageSpecification) {
-            this.pageSpecification = pageSpecification;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public Boolean getProcessSnapshot() {
-            return processSnapshot;
-        }
-
-        public void setProcessSnapshot(Boolean processSnapshot) {
-            this.processSnapshot = processSnapshot;
-        }
-
-        public QueryCriteria getQueryCriteria() {
-            return queryCriteria;
-        }
-
-        public void setQueryCriteria(QueryCriteria queryCriteria) {
-            this.queryCriteria = queryCriteria;
-        }
-
-        public Sort getSort() {
-            return sort;
-        }
-
-        public void setSort(Sort sort) {
-            this.sort = sort;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
     }
 }

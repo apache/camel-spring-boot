@@ -17,7 +17,6 @@
 package org.apache.camel.component.twilio.springboot;
 
 import javax.annotation.Generated;
-import org.apache.camel.component.twilio.internal.TwilioApiName;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -64,9 +63,10 @@ public class TwilioComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * To use the shared configuration
+     * To use the shared configuration. The option is a
+     * org.apache.camel.component.twilio.TwilioConfiguration type.
      */
-    private TwilioConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * To use the shared REST client. The option is a
      * com.twilio.http.TwilioRestClient type.
@@ -109,12 +109,11 @@ public class TwilioComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public TwilioConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            TwilioConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -148,33 +147,5 @@ public class TwilioComponentConfiguration
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public static class TwilioConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.twilio.TwilioConfiguration.class;
-        /**
-         * What kind of operation to perform
-         */
-        private TwilioApiName apiName;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
-
-        public TwilioApiName getApiName() {
-            return apiName;
-        }
-
-        public void setApiName(TwilioApiName apiName) {
-            this.apiName = apiName;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
-        }
     }
 }

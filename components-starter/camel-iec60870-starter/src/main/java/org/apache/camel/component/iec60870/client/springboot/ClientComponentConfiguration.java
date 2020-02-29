@@ -18,7 +18,6 @@ package org.apache.camel.component.iec60870.client.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
-import org.eclipse.neoscada.protocol.iec60870.client.data.DataModuleOptions;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -40,9 +39,10 @@ public class ClientComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Default connection options
+     * Default connection options. The option is a
+     * org.apache.camel.component.iec60870.client.ClientOptions type.
      */
-    private ClientOptionsNestedConfiguration defaultConnectionOptions;
+    private String defaultConnectionOptions;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -69,12 +69,11 @@ public class ClientComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
 
-    public ClientOptionsNestedConfiguration getDefaultConnectionOptions() {
+    public String getDefaultConnectionOptions() {
         return defaultConnectionOptions;
     }
 
-    public void setDefaultConnectionOptions(
-            ClientOptionsNestedConfiguration defaultConnectionOptions) {
+    public void setDefaultConnectionOptions(String defaultConnectionOptions) {
         this.defaultConnectionOptions = defaultConnectionOptions;
     }
 
@@ -100,58 +99,5 @@ public class ClientComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public static class ClientOptionsNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.iec60870.client.ClientOptions.class;
-        /**
-         * Whether to include the source address
-         */
-        private Byte causeSourceAddress;
-        /**
-         * Timeout in millis to wait for client to establish a connected
-         * connection.
-         */
-        private Integer connectionTimeout = 10000;
-        /**
-         * Data module options
-         */
-        private DataModuleOptions dataModuleOptions;
-        /**
-         * Whether background scan transmissions should be ignored.
-         */
-        private Boolean ignoreBackgroundScan = true;
-
-        public Byte getCauseSourceAddress() {
-            return causeSourceAddress;
-        }
-
-        public void setCauseSourceAddress(Byte causeSourceAddress) {
-            this.causeSourceAddress = causeSourceAddress;
-        }
-
-        public Integer getConnectionTimeout() {
-            return connectionTimeout;
-        }
-
-        public void setConnectionTimeout(Integer connectionTimeout) {
-            this.connectionTimeout = connectionTimeout;
-        }
-
-        public DataModuleOptions getDataModuleOptions() {
-            return dataModuleOptions;
-        }
-
-        public void setDataModuleOptions(DataModuleOptions dataModuleOptions) {
-            this.dataModuleOptions = dataModuleOptions;
-        }
-
-        public Boolean getIgnoreBackgroundScan() {
-            return ignoreBackgroundScan;
-        }
-
-        public void setIgnoreBackgroundScan(Boolean ignoreBackgroundScan) {
-            this.ignoreBackgroundScan = ignoreBackgroundScan;
-        }
     }
 }

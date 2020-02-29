@@ -17,7 +17,7 @@ When using aws2-translate with Spring Boot make sure to use the following Maven 
 ----
 
 
-The component supports 25 options, which are listed below.
+The component supports 15 options, which are listed below.
 
 
 
@@ -27,17 +27,7 @@ The component supports 25 options, which are listed below.
 | *camel.component.aws2-translate.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws2-translate.autodetect-source-language* | Being able to autodetect the source language | false | Boolean
 | *camel.component.aws2-translate.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
-| *camel.component.aws2-translate.configuration.access-key* | Amazon AWS Access Key |  | String
-| *camel.component.aws2-translate.configuration.autodetect-source-language* | Being able to autodetect the source language | false | Boolean
-| *camel.component.aws2-translate.configuration.operation* | The operation to perform |  | Translate2Operations
-| *camel.component.aws2-translate.configuration.proxy-host* | To define a proxy host when instantiating the Translate client |  | String
-| *camel.component.aws2-translate.configuration.proxy-port* | To define a proxy port when instantiating the Translate client |  | Integer
-| *camel.component.aws2-translate.configuration.proxy-protocol* | To define a proxy protocol when instantiating the Translate client |  | Protocol
-| *camel.component.aws2-translate.configuration.region* | The region in which Translate client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
-| *camel.component.aws2-translate.configuration.secret-key* | Amazon AWS Secret Key |  | String
-| *camel.component.aws2-translate.configuration.source-language* | Source language to use |  | String
-| *camel.component.aws2-translate.configuration.target-language* | Target language to use |  | String
-| *camel.component.aws2-translate.configuration.translate-client* | To use a existing configured AWS Translate as client |  | TranslateClient
+| *camel.component.aws2-translate.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.translate.Translate2Configuration type. |  | String
 | *camel.component.aws2-translate.enabled* | Whether to enable auto configuration of the aws2-translate component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-translate.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.aws2-translate.operation* | The operation to perform |  | Translate2Operations

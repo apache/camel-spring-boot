@@ -38,9 +38,10 @@ public class GoogleBigQuerySQLComponentConfiguration
     private Boolean enabled;
     /**
      * ConnectionFactory to obtain connection to Bigquery Service. If non
-     * provided the default one will be used
+     * provided the default one will be used. The option is a
+     * org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory type.
      */
-    private GoogleBigQueryConnectionFactoryNestedConfiguration connectionFactory;
+    private String connectionFactory;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -62,12 +63,11 @@ public class GoogleBigQuerySQLComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
 
-    public GoogleBigQueryConnectionFactoryNestedConfiguration getConnectionFactory() {
+    public String getConnectionFactory() {
         return connectionFactory;
     }
 
-    public void setConnectionFactory(
-            GoogleBigQueryConnectionFactoryNestedConfiguration connectionFactory) {
+    public void setConnectionFactory(String connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
@@ -93,45 +93,5 @@ public class GoogleBigQuerySQLComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public static class GoogleBigQueryConnectionFactoryNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory.class;
-        private String credentialsFileLocation;
-        private String serviceAccount;
-        private String serviceAccountKey;
-        private String serviceURL;
-
-        public String getCredentialsFileLocation() {
-            return credentialsFileLocation;
-        }
-
-        public void setCredentialsFileLocation(String credentialsFileLocation) {
-            this.credentialsFileLocation = credentialsFileLocation;
-        }
-
-        public String getServiceAccount() {
-            return serviceAccount;
-        }
-
-        public void setServiceAccount(String serviceAccount) {
-            this.serviceAccount = serviceAccount;
-        }
-
-        public String getServiceAccountKey() {
-            return serviceAccountKey;
-        }
-
-        public void setServiceAccountKey(String serviceAccountKey) {
-            this.serviceAccountKey = serviceAccountKey;
-        }
-
-        public String getServiceURL() {
-            return serviceURL;
-        }
-
-        public void setServiceURL(String serviceURL) {
-            this.serviceURL = serviceURL;
-        }
     }
 }

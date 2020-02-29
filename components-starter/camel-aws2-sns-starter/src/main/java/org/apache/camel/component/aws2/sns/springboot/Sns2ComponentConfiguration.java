@@ -21,7 +21,6 @@ import org.apache.camel.component.aws2.sns.Sns2Component;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
-import software.amazon.awssdk.services.sns.SnsClient;
 
 /**
  * The aws2-sns component is used for sending messages to an Amazon Simple
@@ -50,9 +49,10 @@ public class Sns2ComponentConfiguration
      */
     private Boolean autoCreateTopic = true;
     /**
-     * Component configuration
+     * Component configuration. The option is a
+     * org.apache.camel.component.aws2.sns.Sns2Configuration type.
      */
-    private Sns2ConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a
      * custom CMK.
@@ -142,12 +142,11 @@ public class Sns2ComponentConfiguration
         this.autoCreateTopic = autoCreateTopic;
     }
 
-    public Sns2ConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            Sns2ConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -270,214 +269,5 @@ public class Sns2ComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
-    }
-
-    public static class Sns2ConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws2.sns.Sns2Configuration.class;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * To use the AmazonSNS as the client
-         */
-        private SnsClient amazonSNSClient;
-        /**
-         * Setting the autocreation of the topic
-         */
-        private Boolean autoCreateTopic = true;
-        /**
-         * The ID of an AWS-managed customer master key (CMK) for Amazon SNS or
-         * a custom CMK.
-         */
-        private String kmsMasterKeyId;
-        /**
-         * The message structure to use such as json
-         */
-        private String messageStructure;
-        /**
-         * The policy for this queue
-         */
-        private String policy;
-        /**
-         * To define a proxy host when instantiating the SNS client
-         */
-        private String proxyHost;
-        /**
-         * To define a proxy port when instantiating the SNS client
-         */
-        private Integer proxyPort;
-        /**
-         * To define a proxy protocol when instantiating the SNS client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
-        /**
-         * The queueUrl to subscribe to
-         */
-        private String queueUrl;
-        /**
-         * The region in which SNS client needs to work. When using this
-         * parameter, the configuration will expect the lowercase name of the
-         * region (for example ap-east-1) You'll need to use the name
-         * Region.EU_WEST_1.id()
-         */
-        private String region;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
-        /**
-         * Define if Server Side Encryption is enabled or not on the topic
-         */
-        private Boolean serverSideEncryptionEnabled = false;
-        /**
-         * The subject which is used if the message header 'CamelAwsSnsSubject'
-         * is not present.
-         */
-        private String subject;
-        /**
-         * Define if the subscription between SNS Topic and SQS must be done or
-         * not
-         */
-        private Boolean subscribeSNStoSQS = false;
-        private String topicArn;
-        private String topicName;
-
-        public String getAccessKey() {
-            return accessKey;
-        }
-
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
-        }
-
-        public SnsClient getAmazonSNSClient() {
-            return amazonSNSClient;
-        }
-
-        public void setAmazonSNSClient(SnsClient amazonSNSClient) {
-            this.amazonSNSClient = amazonSNSClient;
-        }
-
-        public Boolean getAutoCreateTopic() {
-            return autoCreateTopic;
-        }
-
-        public void setAutoCreateTopic(Boolean autoCreateTopic) {
-            this.autoCreateTopic = autoCreateTopic;
-        }
-
-        public String getKmsMasterKeyId() {
-            return kmsMasterKeyId;
-        }
-
-        public void setKmsMasterKeyId(String kmsMasterKeyId) {
-            this.kmsMasterKeyId = kmsMasterKeyId;
-        }
-
-        public String getMessageStructure() {
-            return messageStructure;
-        }
-
-        public void setMessageStructure(String messageStructure) {
-            this.messageStructure = messageStructure;
-        }
-
-        public String getPolicy() {
-            return policy;
-        }
-
-        public void setPolicy(String policy) {
-            this.policy = policy;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public Protocol getProxyProtocol() {
-            return proxyProtocol;
-        }
-
-        public void setProxyProtocol(Protocol proxyProtocol) {
-            this.proxyProtocol = proxyProtocol;
-        }
-
-        public String getQueueUrl() {
-            return queueUrl;
-        }
-
-        public void setQueueUrl(String queueUrl) {
-            this.queueUrl = queueUrl;
-        }
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public Boolean getServerSideEncryptionEnabled() {
-            return serverSideEncryptionEnabled;
-        }
-
-        public void setServerSideEncryptionEnabled(
-                Boolean serverSideEncryptionEnabled) {
-            this.serverSideEncryptionEnabled = serverSideEncryptionEnabled;
-        }
-
-        public String getSubject() {
-            return subject;
-        }
-
-        public void setSubject(String subject) {
-            this.subject = subject;
-        }
-
-        public Boolean getSubscribeSNStoSQS() {
-            return subscribeSNStoSQS;
-        }
-
-        public void setSubscribeSNStoSQS(Boolean subscribeSNStoSQS) {
-            this.subscribeSNStoSQS = subscribeSNStoSQS;
-        }
-
-        public String getTopicArn() {
-            return topicArn;
-        }
-
-        public void setTopicArn(String topicArn) {
-            this.topicArn = topicArn;
-        }
-
-        public String getTopicName() {
-            return topicName;
-        }
-
-        public void setTopicName(String topicName) {
-            this.topicName = topicName;
-        }
     }
 }

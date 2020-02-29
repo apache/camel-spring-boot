@@ -18,7 +18,6 @@ package org.apache.camel.component.iec60870.server.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
-import org.eclipse.neoscada.protocol.iec60870.server.data.DataModuleOptions;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -40,9 +39,10 @@ public class ServerComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Default connection options
+     * Default connection options. The option is a
+     * org.apache.camel.component.iec60870.server.ServerOptions type.
      */
-    private ServerOptionsNestedConfiguration defaultConnectionOptions;
+    private String defaultConnectionOptions;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -69,12 +69,11 @@ public class ServerComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
 
-    public ServerOptionsNestedConfiguration getDefaultConnectionOptions() {
+    public String getDefaultConnectionOptions() {
         return defaultConnectionOptions;
     }
 
-    public void setDefaultConnectionOptions(
-            ServerOptionsNestedConfiguration defaultConnectionOptions) {
+    public void setDefaultConnectionOptions(String defaultConnectionOptions) {
         this.defaultConnectionOptions = defaultConnectionOptions;
     }
 
@@ -100,66 +99,5 @@ public class ServerComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public static class ServerOptionsNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.iec60870.server.ServerOptions.class;
-        private Integer backgroundScanPeriod;
-        private Boolean booleansWithTimestamp;
-        private Integer bufferingPeriod;
-        /**
-         * Data module options
-         */
-        private DataModuleOptions dataModuleOptions;
-        private Boolean floatsWithTimestamp;
-        private Integer spontaneousDuplicates;
-
-        public Integer getBackgroundScanPeriod() {
-            return backgroundScanPeriod;
-        }
-
-        public void setBackgroundScanPeriod(Integer backgroundScanPeriod) {
-            this.backgroundScanPeriod = backgroundScanPeriod;
-        }
-
-        public Boolean getBooleansWithTimestamp() {
-            return booleansWithTimestamp;
-        }
-
-        public void setBooleansWithTimestamp(Boolean booleansWithTimestamp) {
-            this.booleansWithTimestamp = booleansWithTimestamp;
-        }
-
-        public Integer getBufferingPeriod() {
-            return bufferingPeriod;
-        }
-
-        public void setBufferingPeriod(Integer bufferingPeriod) {
-            this.bufferingPeriod = bufferingPeriod;
-        }
-
-        public DataModuleOptions getDataModuleOptions() {
-            return dataModuleOptions;
-        }
-
-        public void setDataModuleOptions(DataModuleOptions dataModuleOptions) {
-            this.dataModuleOptions = dataModuleOptions;
-        }
-
-        public Boolean getFloatsWithTimestamp() {
-            return floatsWithTimestamp;
-        }
-
-        public void setFloatsWithTimestamp(Boolean floatsWithTimestamp) {
-            this.floatsWithTimestamp = floatsWithTimestamp;
-        }
-
-        public Integer getSpontaneousDuplicates() {
-            return spontaneousDuplicates;
-        }
-
-        public void setSpontaneousDuplicates(Integer spontaneousDuplicates) {
-            this.spontaneousDuplicates = spontaneousDuplicates;
-        }
     }
 }

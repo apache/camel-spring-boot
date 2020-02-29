@@ -62,9 +62,10 @@ public class NagiosComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * To use a shared NagiosConfiguration
+     * To use a shared NagiosConfiguration. The option is a
+     * org.apache.camel.component.nagios.NagiosConfiguration type.
      */
-    private NagiosConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * To specify an encryption method.
      */
@@ -106,12 +107,11 @@ public class NagiosComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public NagiosConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            NagiosConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -129,81 +129,5 @@ public class NagiosComponentConfiguration
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public static class NagiosConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.nagios.NagiosConfiguration.class;
-        /**
-         * Connection timeout in millis.
-         */
-        private Integer connectionTimeout = 5000;
-        /**
-         * To specify an encryption method.
-         */
-        private Encryption encryption;
-        /**
-         * This is the address of the Nagios host where checks should be send.
-         */
-        private String host;
-        /**
-         * Password to be authenticated when sending checks to Nagios.
-         */
-        private String password;
-        /**
-         * The port number of the host.
-         */
-        private Integer port;
-        /**
-         * Sending timeout in millis.
-         */
-        private Integer timeout = 5000;
-
-        public Integer getConnectionTimeout() {
-            return connectionTimeout;
-        }
-
-        public void setConnectionTimeout(Integer connectionTimeout) {
-            this.connectionTimeout = connectionTimeout;
-        }
-
-        public Encryption getEncryption() {
-            return encryption;
-        }
-
-        public void setEncryption(Encryption encryption) {
-            this.encryption = encryption;
-        }
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public Integer getTimeout() {
-            return timeout;
-        }
-
-        public void setTimeout(Integer timeout) {
-            this.timeout = timeout;
-        }
     }
 }

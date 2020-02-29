@@ -18,9 +18,7 @@ package org.apache.camel.component.lucene.springboot;
 
 import java.io.File;
 import javax.annotation.Generated;
-import org.apache.camel.component.lucene.LuceneOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
-import org.apache.lucene.analysis.Analyzer;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -79,9 +77,10 @@ public class LuceneComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * To use a shared lucene configuration
+     * To use a shared lucene configuration. The option is a
+     * org.apache.camel.component.lucene.LuceneConfiguration type.
      */
-    private LuceneConfigurationNestedConfiguration config;
+    private String config;
 
     public String getAnalyzer() {
         return analyzer;
@@ -131,93 +130,11 @@ public class LuceneComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public LuceneConfigurationNestedConfiguration getConfig() {
+    public String getConfig() {
         return config;
     }
 
-    public void setConfig(LuceneConfigurationNestedConfiguration config) {
+    public void setConfig(String config) {
         this.config = config;
-    }
-
-    public static class LuceneConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.lucene.LuceneConfiguration.class;
-        /**
-         * An Analyzer builds TokenStreams, which analyze text. It thus
-         * represents a policy for extracting index terms from text. The value
-         * for analyzer can be any class that extends the abstract class
-         * org.apache.lucene.analysis.Analyzer. Lucene also offers a rich set of
-         * analyzers out of the box
-         */
-        private Analyzer analyzer;
-        /**
-         * The URL to the lucene server
-         */
-        private String host;
-        /**
-         * A file system directory in which index files are created upon
-         * analysis of the document by the specified analyzer
-         */
-        private File indexDir;
-        /**
-         * An integer value that limits the result set of the search operation
-         */
-        private Integer maxHits;
-        /**
-         * Operation to do such as insert or query.
-         */
-        private LuceneOperation operation;
-        /**
-         * An optional directory containing files to be used to be analyzed and
-         * added to the index at producer startup.
-         */
-        private File srcDir;
-
-        public Analyzer getAnalyzer() {
-            return analyzer;
-        }
-
-        public void setAnalyzer(Analyzer analyzer) {
-            this.analyzer = analyzer;
-        }
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public File getIndexDir() {
-            return indexDir;
-        }
-
-        public void setIndexDir(File indexDir) {
-            this.indexDir = indexDir;
-        }
-
-        public Integer getMaxHits() {
-            return maxHits;
-        }
-
-        public void setMaxHits(Integer maxHits) {
-            this.maxHits = maxHits;
-        }
-
-        public LuceneOperation getOperation() {
-            return operation;
-        }
-
-        public void setOperation(LuceneOperation operation) {
-            this.operation = operation;
-        }
-
-        public File getSrcDir() {
-            return srcDir;
-        }
-
-        public void setSrcDir(File srcDir) {
-            this.srcDir = srcDir;
-        }
     }
 }

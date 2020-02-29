@@ -36,7 +36,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
@@ -83,25 +82,6 @@ public class RedisComponentAutoConfiguration {
         Map<String, Object> parameters = new HashMap<>();
         IntrospectionSupport.getProperties(configuration, parameters, null,
                 false);
-        for (Map.Entry<String, Object> entry : parameters.entrySet()) {
-            Object value = entry.getValue();
-            Class<?> paramClass = value.getClass();
-            if (paramClass.getName().endsWith("NestedConfiguration")) {
-                Class nestedClass = null;
-                try {
-                    nestedClass = (Class) paramClass.getDeclaredField(
-                            "CAMEL_NESTED_CLASS").get(null);
-                    HashMap<String, Object> nestedParameters = new HashMap<>();
-                    IntrospectionSupport.getProperties(value, nestedParameters,
-                            null, false);
-                    Object nestedProperty = nestedClass.newInstance();
-                    CamelPropertiesHelper.setCamelProperties(camelContext,
-                            nestedProperty, nestedParameters, false);
-                    entry.setValue(nestedProperty);
-                } catch (NoSuchFieldException e) {
-                }
-            }
-        }
         CamelPropertiesHelper.setCamelProperties(camelContext, component,
                 parameters, false);
         if (ObjectHelper.isNotEmpty(customizers)) {

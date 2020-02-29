@@ -62,9 +62,10 @@ public class ZendeskComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Component configuration
+     * Component configuration. The option is a
+     * org.apache.camel.component.zendesk.ZendeskConfiguration type.
      */
-    private ZendeskConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * To use a shared Zendesk instance. The option is a
      * org.zendesk.client.v2.Zendesk type.
@@ -95,12 +96,11 @@ public class ZendeskComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public ZendeskConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            ZendeskConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -110,81 +110,5 @@ public class ZendeskComponentConfiguration
 
     public void setZendesk(String zendesk) {
         this.zendesk = zendesk;
-    }
-
-    public static class ZendeskConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.zendesk.ZendeskConfiguration.class;
-        /**
-         * What operation to use
-         */
-        private String methodName;
-        /**
-         * The OAuth token.
-         */
-        private String oauthToken;
-        /**
-         * The password.
-         */
-        private String password;
-        /**
-         * The server URL to connect.
-         */
-        private String serverUrl;
-        /**
-         * The security token.
-         */
-        private String token;
-        /**
-         * The user name.
-         */
-        private String username;
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
-        }
-
-        public String getOauthToken() {
-            return oauthToken;
-        }
-
-        public void setOauthToken(String oauthToken) {
-            this.oauthToken = oauthToken;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getServerUrl() {
-            return serverUrl;
-        }
-
-        public void setServerUrl(String serverUrl) {
-            this.serverUrl = serverUrl;
-        }
-
-        public String getToken() {
-            return token;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
     }
 }

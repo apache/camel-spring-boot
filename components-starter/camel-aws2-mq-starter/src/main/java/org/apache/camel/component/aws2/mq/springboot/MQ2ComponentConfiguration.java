@@ -22,7 +22,6 @@ import org.apache.camel.component.aws2.mq.MQ2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
-import software.amazon.awssdk.services.mq.MqClient;
 
 /**
  * The aws2-mq is used for managing Amazon MQ instances.
@@ -46,9 +45,10 @@ public class MQ2ComponentConfiguration
      */
     private String amazonMqClient;
     /**
-     * Component configuration
+     * Component configuration. The option is a
+     * org.apache.camel.component.aws2.mq.MQ2Configuration type.
      */
-    private MQ2ConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -104,12 +104,11 @@ public class MQ2ComponentConfiguration
         this.amazonMqClient = amazonMqClient;
     }
 
-    public MQ2ConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            MQ2ConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -183,109 +182,5 @@ public class MQ2ComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
-    }
-
-    public static class MQ2ConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.aws2.mq.MQ2Configuration.class;
-        /**
-         * Amazon AWS Access Key
-         */
-        private String accessKey;
-        /**
-         * To use a existing configured AmazonMQClient as client
-         */
-        private MqClient amazonMqClient;
-        /**
-         * The operation to perform. It can be
-         * listBrokers,createBroker,deleteBroker
-         */
-        private MQ2Operations operation;
-        /**
-         * To define a proxy host when instantiating the MQ client
-         */
-        private String proxyHost;
-        /**
-         * To define a proxy port when instantiating the MQ client
-         */
-        private Integer proxyPort;
-        /**
-         * To define a proxy protocol when instantiating the MQ client
-         */
-        private Protocol proxyProtocol = Protocol.HTTPS;
-        /**
-         * The region in which MQ client needs to work. When using this
-         * parameter, the configuration will expect the lowercase name of the
-         * region (for example ap-east-1) You'll need to use the name
-         * Region.EU_WEST_1.id()
-         */
-        private String region;
-        /**
-         * Amazon AWS Secret Key
-         */
-        private String secretKey;
-
-        public String getAccessKey() {
-            return accessKey;
-        }
-
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
-        }
-
-        public MqClient getAmazonMqClient() {
-            return amazonMqClient;
-        }
-
-        public void setAmazonMqClient(MqClient amazonMqClient) {
-            this.amazonMqClient = amazonMqClient;
-        }
-
-        public MQ2Operations getOperation() {
-            return operation;
-        }
-
-        public void setOperation(MQ2Operations operation) {
-            this.operation = operation;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public Protocol getProxyProtocol() {
-            return proxyProtocol;
-        }
-
-        public void setProxyProtocol(Protocol proxyProtocol) {
-            this.proxyProtocol = proxyProtocol;
-        }
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
     }
 }

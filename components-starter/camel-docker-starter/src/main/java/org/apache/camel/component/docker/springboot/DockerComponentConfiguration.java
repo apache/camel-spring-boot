@@ -18,7 +18,6 @@ package org.apache.camel.component.docker.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
-import org.apache.camel.component.docker.DockerOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -39,9 +38,10 @@ public class DockerComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the shared docker configuration
+     * To use the shared docker configuration. The option is a
+     * org.apache.camel.component.docker.DockerConfiguration type.
      */
-    private DockerConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * Email address associated with the user
      */
@@ -137,12 +137,11 @@ public class DockerComponentConfiguration
      */
     private String username;
 
-    public DockerConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            DockerConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -304,226 +303,5 @@ public class DockerComponentConfiguration
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public static class DockerConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.docker.DockerConfiguration.class;
-        /**
-         * Location containing the SSL certificate chain
-         */
-        private String certPath;
-        /**
-         * The fully qualified class name of the DockerCmdExecFactory
-         * implementation to use
-         */
-        private String cmdExecFactory = "com.github.dockerjava.netty.NettyDockerCmdExecFactory";
-        /**
-         * Email address associated with the user
-         */
-        private String email;
-        /**
-         * Whether to follow redirect filter
-         */
-        private Boolean followRedirectFilter = false;
-        /**
-         * Docker host
-         */
-        private String host = "localhost";
-        /**
-         * Whether to use logging filter
-         */
-        private Boolean loggingFilter = false;
-        /**
-         * Maximum route connections
-         */
-        private Integer maxPerRouteConnections = 100;
-        /**
-         * Maximum total connections
-         */
-        private Integer maxTotalConnections = 100;
-        /**
-         * Which operation to use
-         */
-        private DockerOperation operation;
-        /**
-         * Additional configuration parameters as key/value pairs
-         */
-        private Map parameters;
-        /**
-         * Password to authenticate with
-         */
-        private String password;
-        /**
-         * Docker port
-         */
-        private Integer port = 2375;
-        /**
-         * Request timeout for response (in seconds)
-         */
-        private Integer requestTimeout;
-        /**
-         * Use HTTPS communication
-         */
-        private Boolean secure = false;
-        /**
-         * Server address for docker registry.
-         */
-        private String serverAddress = "https://index.docker.io/v1/";
-        /**
-         * Socket connection mode
-         */
-        private Boolean socket = true;
-        /**
-         * Check TLS
-         */
-        private Boolean tlsVerify = false;
-        /**
-         * User name to authenticate with
-         */
-        private String username;
-
-        public String getCertPath() {
-            return certPath;
-        }
-
-        public void setCertPath(String certPath) {
-            this.certPath = certPath;
-        }
-
-        public String getCmdExecFactory() {
-            return cmdExecFactory;
-        }
-
-        public void setCmdExecFactory(String cmdExecFactory) {
-            this.cmdExecFactory = cmdExecFactory;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public Boolean getFollowRedirectFilter() {
-            return followRedirectFilter;
-        }
-
-        public void setFollowRedirectFilter(Boolean followRedirectFilter) {
-            this.followRedirectFilter = followRedirectFilter;
-        }
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public Boolean getLoggingFilter() {
-            return loggingFilter;
-        }
-
-        public void setLoggingFilter(Boolean loggingFilter) {
-            this.loggingFilter = loggingFilter;
-        }
-
-        public Integer getMaxPerRouteConnections() {
-            return maxPerRouteConnections;
-        }
-
-        public void setMaxPerRouteConnections(Integer maxPerRouteConnections) {
-            this.maxPerRouteConnections = maxPerRouteConnections;
-        }
-
-        public Integer getMaxTotalConnections() {
-            return maxTotalConnections;
-        }
-
-        public void setMaxTotalConnections(Integer maxTotalConnections) {
-            this.maxTotalConnections = maxTotalConnections;
-        }
-
-        public DockerOperation getOperation() {
-            return operation;
-        }
-
-        public void setOperation(DockerOperation operation) {
-            this.operation = operation;
-        }
-
-        public Map getParameters() {
-            return parameters;
-        }
-
-        public void setParameters(Map parameters) {
-            this.parameters = parameters;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public Integer getRequestTimeout() {
-            return requestTimeout;
-        }
-
-        public void setRequestTimeout(Integer requestTimeout) {
-            this.requestTimeout = requestTimeout;
-        }
-
-        public Boolean getSecure() {
-            return secure;
-        }
-
-        public void setSecure(Boolean secure) {
-            this.secure = secure;
-        }
-
-        public String getServerAddress() {
-            return serverAddress;
-        }
-
-        public void setServerAddress(String serverAddress) {
-            this.serverAddress = serverAddress;
-        }
-
-        public Boolean getSocket() {
-            return socket;
-        }
-
-        public void setSocket(Boolean socket) {
-            this.socket = socket;
-        }
-
-        public Boolean getTlsVerify() {
-            return tlsVerify;
-        }
-
-        public void setTlsVerify(Boolean tlsVerify) {
-            this.tlsVerify = tlsVerify;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
     }
 }

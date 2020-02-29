@@ -17,7 +17,7 @@ When using lucene with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 13 options, which are listed below.
+The component supports 8 options, which are listed below.
 
 
 
@@ -26,12 +26,7 @@ The component supports 13 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.lucene.analyzer* | An Analyzer builds TokenStreams, which analyze text. It thus represents a policy for extracting index terms from text. The value for analyzer can be any class that extends the abstract class org.apache.lucene.analysis.Analyzer. Lucene also offers a rich set of analyzers out of the box. The option is a org.apache.lucene.analysis.Analyzer type. |  | String
 | *camel.component.lucene.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
-| *camel.component.lucene.config.analyzer* | An Analyzer builds TokenStreams, which analyze text. It thus represents a policy for extracting index terms from text. The value for analyzer can be any class that extends the abstract class org.apache.lucene.analysis.Analyzer. Lucene also offers a rich set of analyzers out of the box |  | Analyzer
-| *camel.component.lucene.config.host* | The URL to the lucene server |  | String
-| *camel.component.lucene.config.index-dir* | A file system directory in which index files are created upon analysis of the document by the specified analyzer |  | File
-| *camel.component.lucene.config.max-hits* | An integer value that limits the result set of the search operation |  | Integer
-| *camel.component.lucene.config.operation* | Operation to do such as insert or query. |  | LuceneOperation
-| *camel.component.lucene.config.src-dir* | An optional directory containing files to be used to be analyzed and added to the index at producer startup. |  | File
+| *camel.component.lucene.config* | To use a shared lucene configuration. The option is a org.apache.camel.component.lucene.LuceneConfiguration type. |  | String
 | *camel.component.lucene.enabled* | Whether to enable auto configuration of the lucene component. This is enabled by default. |  | Boolean
 | *camel.component.lucene.index-dir* | A file system directory in which index files are created upon analysis of the document by the specified analyzer |  | File
 | *camel.component.lucene.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean

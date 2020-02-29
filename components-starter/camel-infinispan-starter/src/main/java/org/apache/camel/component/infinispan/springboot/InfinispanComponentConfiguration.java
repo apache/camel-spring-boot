@@ -17,16 +17,10 @@
 package org.apache.camel.component.infinispan.springboot;
 
 import java.util.Map;
-import java.util.Set;
-import java.util.function.BiFunction;
 import javax.annotation.Generated;
 import org.apache.camel.component.infinispan.InfinispanComponent;
-import org.apache.camel.component.infinispan.InfinispanCustomListener;
 import org.apache.camel.component.infinispan.InfinispanOperation;
-import org.apache.camel.component.infinispan.InfinispanQueryBuilder;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
-import org.infinispan.commons.api.BasicCacheContainer;
-import org.infinispan.context.Flag;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -48,9 +42,10 @@ public class InfinispanComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Component configuration
+     * Component configuration. The option is a
+     * org.apache.camel.component.infinispan.InfinispanConfiguration type.
      */
-    private InfinispanConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * Specifies the host of the cache on Infinispan instance
      */
@@ -161,12 +156,11 @@ public class InfinispanComponentConfiguration
      */
     private String resultHeader;
 
-    public InfinispanConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            InfinispanConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -317,213 +311,5 @@ public class InfinispanComponentConfiguration
 
     public void setResultHeader(String resultHeader) {
         this.resultHeader = resultHeader;
-    }
-
-    public static class InfinispanConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.infinispan.InfinispanConfiguration.class;
-        /**
-         * Specifies the cache Container to connect
-         */
-        private BasicCacheContainer cacheContainer;
-        /**
-         * The CacheContainer configuration. Uses if the cacheContainer is not
-         * defined. Must be the following types:
-         * org.infinispan.client.hotrod.configuration.Configuration - for remote
-         * cache interaction configuration;
-         * org.infinispan.configuration.cache.Configuration - for embedded cache
-         * interaction configuration;
-         */
-        private Object cacheContainerConfiguration;
-        /**
-         * If true, the listener will be installed for the entire cluster
-         */
-        private Boolean clusteredListener = false;
-        /**
-         * The operation to perform.
-         */
-        @Deprecated
-        private String command = "PUT";
-        /**
-         * Implementation specific properties for the CacheManager
-         */
-        private Map configurationProperties;
-        /**
-         * An implementation specific URI for the CacheManager
-         */
-        private String configurationUri;
-        /**
-         * Returns the custom listener in use, if provided
-         */
-        private InfinispanCustomListener customListener;
-        /**
-         * Specifies the set of event types to register by the consumer.
-         * Multiple event can be separated by comma. The possible event types
-         * are: CACHE_ENTRY_ACTIVATED, CACHE_ENTRY_PASSIVATED,
-         * CACHE_ENTRY_VISITED, CACHE_ENTRY_LOADED, CACHE_ENTRY_EVICTED,
-         * CACHE_ENTRY_CREATED, CACHE_ENTRY_REMOVED, CACHE_ENTRY_MODIFIED,
-         * TRANSACTION_COMPLETED, TRANSACTION_REGISTERED,
-         * CACHE_ENTRY_INVALIDATED, DATA_REHASHED, TOPOLOGY_CHANGED,
-         * PARTITION_STATUS_CHANGED
-         */
-        private Set eventTypes;
-        /**
-         * A comma separated list of Flag to be applied by default on each cache
-         * invocation, not applicable to remote caches.
-         */
-        private Flag[] flags;
-        /**
-         * Specifies the host of the cache on Infinispan instance
-         */
-        private String hosts;
-        /**
-         * The operation to perform.
-         */
-        private InfinispanOperation operation = InfinispanOperation.PUT;
-        /**
-         * Specifies the query builder.
-         */
-        private InfinispanQueryBuilder queryBuilder;
-        /**
-         * Set a specific remappingFunction to use in a compute operation
-         */
-        private BiFunction remappingFunction;
-        /**
-         * Store the operation result in a header instead of the message body.
-         * By default, resultHeader == null and the query result is stored in
-         * the message body, any existing content in the message body is
-         * discarded. If resultHeader is set, the value is used as the name of
-         * the header to store the query result and the original message body is
-         * preserved. This value can be overridden by an in message header
-         * named: CamelInfinispanOperationResultHeader
-         */
-        private Object resultHeader;
-        /**
-         * If true, the consumer will receive notifications synchronously
-         */
-        private Boolean sync = true;
-
-        public BasicCacheContainer getCacheContainer() {
-            return cacheContainer;
-        }
-
-        public void setCacheContainer(BasicCacheContainer cacheContainer) {
-            this.cacheContainer = cacheContainer;
-        }
-
-        public Object getCacheContainerConfiguration() {
-            return cacheContainerConfiguration;
-        }
-
-        public void setCacheContainerConfiguration(
-                Object cacheContainerConfiguration) {
-            this.cacheContainerConfiguration = cacheContainerConfiguration;
-        }
-
-        public Boolean getClusteredListener() {
-            return clusteredListener;
-        }
-
-        public void setClusteredListener(Boolean clusteredListener) {
-            this.clusteredListener = clusteredListener;
-        }
-
-        @Deprecated
-        @DeprecatedConfigurationProperty
-        public String getCommand() {
-            return command;
-        }
-
-        @Deprecated
-        public void setCommand(String command) {
-            this.command = command;
-        }
-
-        public Map getConfigurationProperties() {
-            return configurationProperties;
-        }
-
-        public void setConfigurationProperties(Map configurationProperties) {
-            this.configurationProperties = configurationProperties;
-        }
-
-        public String getConfigurationUri() {
-            return configurationUri;
-        }
-
-        public void setConfigurationUri(String configurationUri) {
-            this.configurationUri = configurationUri;
-        }
-
-        public InfinispanCustomListener getCustomListener() {
-            return customListener;
-        }
-
-        public void setCustomListener(InfinispanCustomListener customListener) {
-            this.customListener = customListener;
-        }
-
-        public Set getEventTypes() {
-            return eventTypes;
-        }
-
-        public void setEventTypes(Set eventTypes) {
-            this.eventTypes = eventTypes;
-        }
-
-        public Flag[] getFlags() {
-            return flags;
-        }
-
-        public void setFlags(Flag[] flags) {
-            this.flags = flags;
-        }
-
-        public String getHosts() {
-            return hosts;
-        }
-
-        public void setHosts(String hosts) {
-            this.hosts = hosts;
-        }
-
-        public InfinispanOperation getOperation() {
-            return operation;
-        }
-
-        public void setOperation(InfinispanOperation operation) {
-            this.operation = operation;
-        }
-
-        public InfinispanQueryBuilder getQueryBuilder() {
-            return queryBuilder;
-        }
-
-        public void setQueryBuilder(InfinispanQueryBuilder queryBuilder) {
-            this.queryBuilder = queryBuilder;
-        }
-
-        public BiFunction getRemappingFunction() {
-            return remappingFunction;
-        }
-
-        public void setRemappingFunction(BiFunction remappingFunction) {
-            this.remappingFunction = remappingFunction;
-        }
-
-        public Object getResultHeader() {
-            return resultHeader;
-        }
-
-        public void setResultHeader(Object resultHeader) {
-            this.resultHeader = resultHeader;
-        }
-
-        public Boolean getSync() {
-            return sync;
-        }
-
-        public void setSync(Boolean sync) {
-            this.sync = sync;
-        }
     }
 }

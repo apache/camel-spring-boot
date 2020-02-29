@@ -23,8 +23,6 @@ import javax.annotation.Generated;
 import io.netty.channel.ChannelHandler;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.component.netty.http.NettyHttpComponent;
-import org.apache.camel.component.netty.http.SecurityAuthenticator;
-import org.apache.camel.component.netty.http.SecurityConstraint;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -370,9 +368,11 @@ public class NettyHttpComponentConfiguration
     /**
      * Refers to a
      * org.apache.camel.component.netty.http.NettyHttpSecurityConfiguration for
-     * configuring secure web resources.
+     * configuring secure web resources. The option is a
+     * org.apache.camel.component.netty.http.NettyHttpSecurityConfiguration
+     * type.
      */
-    private NettyHttpSecurityConfigurationNestedConfiguration securityConfiguration;
+    private String securityConfiguration;
     /**
      * Security provider to be used for payload encryption. Defaults to SunX509
      * if not set.
@@ -834,12 +834,11 @@ public class NettyHttpComponentConfiguration
         this.passphrase = passphrase;
     }
 
-    public NettyHttpSecurityConfigurationNestedConfiguration getSecurityConfiguration() {
+    public String getSecurityConfiguration() {
         return securityConfiguration;
     }
 
-    public void setSecurityConfiguration(
-            NettyHttpSecurityConfigurationNestedConfiguration securityConfiguration) {
+    public void setSecurityConfiguration(String securityConfiguration) {
         this.securityConfiguration = securityConfiguration;
     }
 
@@ -906,87 +905,5 @@ public class NettyHttpComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public static class NettyHttpSecurityConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.netty.http.NettyHttpSecurityConfiguration.class;
-        /**
-         * Whether to enable authentication
-         */
-        private Boolean authenticate;
-        /**
-         * Security constraint. Currently only Basic is supported.
-         */
-        private String constraint;
-        /**
-         * Sets a logging level to use for logging denied login attempts (incl
-         * stacktraces)
-         */
-        private LoggingLevel loginDeniedLoggingLevel;
-        /**
-         * Name of security realm
-         */
-        private String realm;
-        /**
-         *  Sets the SecurityAuthenticator to use for authenticating the
-         * HttpPrincipal.
-         */
-        private SecurityAuthenticator securityAuthenticator;
-        /**
-         * Sets a SecurityConstraint to use for checking if a web resource is
-         * restricted or not. By default this is null, which means all resources
-         * is restricted.
-         */
-        private SecurityConstraint securityConstraint;
-
-        public Boolean getAuthenticate() {
-            return authenticate;
-        }
-
-        public void setAuthenticate(Boolean authenticate) {
-            this.authenticate = authenticate;
-        }
-
-        public String getConstraint() {
-            return constraint;
-        }
-
-        public void setConstraint(String constraint) {
-            this.constraint = constraint;
-        }
-
-        public LoggingLevel getLoginDeniedLoggingLevel() {
-            return loginDeniedLoggingLevel;
-        }
-
-        public void setLoginDeniedLoggingLevel(
-                LoggingLevel loginDeniedLoggingLevel) {
-            this.loginDeniedLoggingLevel = loginDeniedLoggingLevel;
-        }
-
-        public String getRealm() {
-            return realm;
-        }
-
-        public void setRealm(String realm) {
-            this.realm = realm;
-        }
-
-        public SecurityAuthenticator getSecurityAuthenticator() {
-            return securityAuthenticator;
-        }
-
-        public void setSecurityAuthenticator(
-                SecurityAuthenticator securityAuthenticator) {
-            this.securityAuthenticator = securityAuthenticator;
-        }
-
-        public SecurityConstraint getSecurityConstraint() {
-            return securityConstraint;
-        }
-
-        public void setSecurityConstraint(SecurityConstraint securityConstraint) {
-            this.securityConstraint = securityConstraint;
-        }
     }
 }

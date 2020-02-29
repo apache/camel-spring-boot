@@ -18,7 +18,6 @@ package org.apache.camel.component.etcd.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
-import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -48,9 +47,10 @@ public class EtcdWatchComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
-     * Component configuration.
+     * Component configuration. The option is a
+     * org.apache.camel.component.etcd.EtcdConfiguration type.
      */
-    private EtcdConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * To apply an action recursively.
      */
@@ -106,12 +106,11 @@ public class EtcdWatchComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public EtcdConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            EtcdConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -202,131 +201,5 @@ public class EtcdWatchComponentConfiguration
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public static class EtcdConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.etcd.EtcdConfiguration.class;
-        /**
-         * The index to watch from
-         */
-        private Long fromIndex = 0L;
-        /**
-         * The password to use for basic authentication.
-         */
-        private String password;
-        /**
-         * To apply an action recursively.
-         */
-        private Boolean recursive = false;
-        /**
-         * To send an empty message in case of timeout watching for a key.
-         */
-        private Boolean sendEmptyExchangeOnTimeout = false;
-        /**
-         * The path to look for for service discovery
-         */
-        private String servicePath = "/services/";
-        /**
-         * To configure security using SSLContextParameters.
-         */
-        private SSLContextParameters sslContextParameters;
-        /**
-         * To set the lifespan of a key in milliseconds.
-         */
-        private Integer timeToLive;
-        /**
-         * To set the maximum time an action could take to complete.
-         */
-        private Long timeout;
-        /**
-         * To set the URIs the client connects.
-         */
-        private String uris = "http://localhost:2379,http://localhost:4001";
-        /**
-         * The user name to use for basic authentication.
-         */
-        private String userName;
-
-        public Long getFromIndex() {
-            return fromIndex;
-        }
-
-        public void setFromIndex(Long fromIndex) {
-            this.fromIndex = fromIndex;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public Boolean getRecursive() {
-            return recursive;
-        }
-
-        public void setRecursive(Boolean recursive) {
-            this.recursive = recursive;
-        }
-
-        public Boolean getSendEmptyExchangeOnTimeout() {
-            return sendEmptyExchangeOnTimeout;
-        }
-
-        public void setSendEmptyExchangeOnTimeout(
-                Boolean sendEmptyExchangeOnTimeout) {
-            this.sendEmptyExchangeOnTimeout = sendEmptyExchangeOnTimeout;
-        }
-
-        public String getServicePath() {
-            return servicePath;
-        }
-
-        public void setServicePath(String servicePath) {
-            this.servicePath = servicePath;
-        }
-
-        public SSLContextParameters getSslContextParameters() {
-            return sslContextParameters;
-        }
-
-        public void setSslContextParameters(
-                SSLContextParameters sslContextParameters) {
-            this.sslContextParameters = sslContextParameters;
-        }
-
-        public Integer getTimeToLive() {
-            return timeToLive;
-        }
-
-        public void setTimeToLive(Integer timeToLive) {
-            this.timeToLive = timeToLive;
-        }
-
-        public Long getTimeout() {
-            return timeout;
-        }
-
-        public void setTimeout(Long timeout) {
-            this.timeout = timeout;
-        }
-
-        public String getUris() {
-            return uris;
-        }
-
-        public void setUris(String uris) {
-            this.uris = uris;
-        }
-
-        public String getUserName() {
-            return userName;
-        }
-
-        public void setUserName(String userName) {
-            this.userName = userName;
-        }
     }
 }

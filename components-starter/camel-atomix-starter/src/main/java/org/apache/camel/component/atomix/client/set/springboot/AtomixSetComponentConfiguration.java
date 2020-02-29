@@ -48,9 +48,10 @@ public class AtomixSetComponentConfiguration
      */
     private String atomix;
     /**
-     * The shared component configuration
+     * The shared component configuration. The option is a
+     * org.apache.camel.component.atomix.client.set.AtomixSetConfiguration type.
      */
-    private AtomixSetConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * The path to the AtomixClient configuration
      */
@@ -137,12 +138,11 @@ public class AtomixSetComponentConfiguration
         this.atomix = atomix;
     }
 
-    public AtomixSetConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            AtomixSetConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -264,45 +264,5 @@ public class AtomixSetComponentConfiguration
 
     public void setResourceOptions(Map<String, Properties> resourceOptions) {
         this.resourceOptions = resourceOptions;
-    }
-
-    public static class AtomixSetConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.atomix.client.set.AtomixSetConfiguration.class;
-        /**
-         * The default action.
-         */
-        private Action defaultAction = Action.ADD;
-        /**
-         * The resource ttl.
-         */
-        private Long ttl;
-        /**
-         * The header that wil carry the result.
-         */
-        private String resultHeader;
-
-        public Action getDefaultAction() {
-            return defaultAction;
-        }
-
-        public void setDefaultAction(Action defaultAction) {
-            this.defaultAction = defaultAction;
-        }
-
-        public Long getTtl() {
-            return ttl;
-        }
-
-        public void setTtl(Long ttl) {
-            this.ttl = ttl;
-        }
-
-        public String getResultHeader() {
-            return resultHeader;
-        }
-
-        public void setResultHeader(String resultHeader) {
-            this.resultHeader = resultHeader;
-        }
     }
 }

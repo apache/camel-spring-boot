@@ -17,8 +17,6 @@
 package org.apache.camel.component.yammer.springboot;
 
 import javax.annotation.Generated;
-import org.apache.camel.component.yammer.ApiRequestor;
-import org.apache.camel.component.yammer.YammerFunctionType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -106,9 +104,10 @@ public class YammerComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Component configuration
+     * Component configuration. The option is a
+     * org.apache.camel.component.yammer.YammerConfiguration type.
      */
-    private YammerConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * To use a specific requester to communicate with Yammer. The option is a
      * org.apache.camel.component.yammer.ApiRequestor type.
@@ -207,12 +206,11 @@ public class YammerComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public YammerConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            YammerConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -246,169 +244,5 @@ public class YammerComponentConfiguration
 
     public void setConsumerSecret(String consumerSecret) {
         this.consumerSecret = consumerSecret;
-    }
-
-    public static class YammerConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.yammer.YammerConfiguration.class;
-        /**
-         * The access token
-         */
-        private String accessToken;
-        /**
-         * The consumer key
-         */
-        private String consumerKey;
-        /**
-         * The consumer secret
-         */
-        private String consumerSecret;
-        /**
-         * Delay between polling in millis
-         */
-        private Long delay = 5000L;
-        /**
-         * The function to use
-         */
-        private YammerFunctionType function;
-        /**
-         * Return only the specified number of messages. Works for threaded=true
-         * and threaded=extended.
-         */
-        private Integer limit = -1;
-        /**
-         * Returns messages newer than the message ID specified as a numeric
-         * string. This should be used when polling for new messages. If you're
-         * looking at messages, and the most recent message returned is 3516,
-         * you can make a request with the parameter newerThan=3516 to ensure
-         * that you do not get duplicate copies of messages already on your
-         * page.
-         */
-        private Long newerThan = -1L;
-        /**
-         * Returns messages older than the message ID specified as a numeric
-         * string. This is useful for paginating messages. For example, if
-         * you're currently viewing 20 messages and the oldest is number 2912,
-         * you could append olderThan=2912 to your request to get the 20
-         * messages prior to those you're seeing.
-         */
-        private Long olderThan = -1L;
-        /**
-         * To use a specific requester to communicate with Yammer.
-         */
-        private ApiRequestor requestor;
-        /**
-         * threaded=true will only return the first message in each thread. This
-         * parameter is intended for apps which display message threads
-         * collapsed. threaded=extended will return the thread starter messages
-         * in order of most recently active as well as the two most recent
-         * messages, as they are viewed in the default view on the Yammer web
-         * interface.
-         */
-        private String threaded;
-        /**
-         * Set to true if you want to use raw JSON rather than converting to
-         * POJOs.
-         */
-        private Boolean useJson = false;
-        /**
-         * The user id
-         */
-        private String userId;
-
-        public String getAccessToken() {
-            return accessToken;
-        }
-
-        public void setAccessToken(String accessToken) {
-            this.accessToken = accessToken;
-        }
-
-        public String getConsumerKey() {
-            return consumerKey;
-        }
-
-        public void setConsumerKey(String consumerKey) {
-            this.consumerKey = consumerKey;
-        }
-
-        public String getConsumerSecret() {
-            return consumerSecret;
-        }
-
-        public void setConsumerSecret(String consumerSecret) {
-            this.consumerSecret = consumerSecret;
-        }
-
-        public Long getDelay() {
-            return delay;
-        }
-
-        public void setDelay(Long delay) {
-            this.delay = delay;
-        }
-
-        public YammerFunctionType getFunction() {
-            return function;
-        }
-
-        public void setFunction(YammerFunctionType function) {
-            this.function = function;
-        }
-
-        public Integer getLimit() {
-            return limit;
-        }
-
-        public void setLimit(Integer limit) {
-            this.limit = limit;
-        }
-
-        public Long getNewerThan() {
-            return newerThan;
-        }
-
-        public void setNewerThan(Long newerThan) {
-            this.newerThan = newerThan;
-        }
-
-        public Long getOlderThan() {
-            return olderThan;
-        }
-
-        public void setOlderThan(Long olderThan) {
-            this.olderThan = olderThan;
-        }
-
-        public ApiRequestor getRequestor() {
-            return requestor;
-        }
-
-        public void setRequestor(ApiRequestor requestor) {
-            this.requestor = requestor;
-        }
-
-        public String getThreaded() {
-            return threaded;
-        }
-
-        public void setThreaded(String threaded) {
-            this.threaded = threaded;
-        }
-
-        public Boolean getUseJson() {
-            return useJson;
-        }
-
-        public void setUseJson(Boolean useJson) {
-            this.useJson = useJson;
-        }
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
     }
 }

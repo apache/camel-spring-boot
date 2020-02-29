@@ -17,7 +17,7 @@ When using consul with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 107 options, which are listed below.
+The component supports 86 options, which are listed below.
 
 
 
@@ -54,27 +54,7 @@ The component supports 107 options, which are listed below.
 | *camel.component.consul.cluster.service.url* |  |  | String
 | *camel.component.consul.cluster.service.user-name* |  |  | String
 | *camel.component.consul.cluster.service.write-timeout-millis* |  |  | Long
-| *camel.component.consul.configuration.acl-token* | Sets the ACL token to be used with Consul |  | String
-| *camel.component.consul.configuration.action* | The default action. Can be overridden by CamelConsulAction |  | String
-| *camel.component.consul.configuration.block-seconds* | The second to wait for a watch event, default 10 seconds | 10 | Integer
-| *camel.component.consul.configuration.connect-timeout-millis* | Connect timeout for OkHttpClient |  | Long
-| *camel.component.consul.configuration.consistency-mode* | The consistencyMode used for queries, default ConsistencyMode.DEFAULT |  | ConsistencyMode
-| *camel.component.consul.configuration.consul-client* | Reference to a com.orbitz.consul.Consul in the registry. |  | Consul
-| *camel.component.consul.configuration.datacenter* | The data center |  | String
-| *camel.component.consul.configuration.first-index* | The first index for watch for, default 0 |  | BigInteger
-| *camel.component.consul.configuration.key* | The default key. Can be overridden by CamelConsulKey |  | String
-| *camel.component.consul.configuration.near-node* | The near node to use for queries. |  | String
-| *camel.component.consul.configuration.node-meta* | The note meta-data to use for queries. |  | List
-| *camel.component.consul.configuration.password* | Sets the password to be used for basic authentication |  | String
-| *camel.component.consul.configuration.ping-instance* | Configure if the AgentClient should attempt a ping before returning the Consul instance | true | Boolean
-| *camel.component.consul.configuration.read-timeout-millis* | Read timeout for OkHttpClient |  | Long
-| *camel.component.consul.configuration.recursive* | Recursively watch, default false | false | Boolean
-| *camel.component.consul.configuration.ssl-context-parameters* | SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance. |  | SSLContextParameters
-| *camel.component.consul.configuration.tags* | Set tags. You can separate multiple tags by comma. |  | Set
-| *camel.component.consul.configuration.url* | The Consul agent URL |  | String
-| *camel.component.consul.configuration.user-name* | Sets the username to be used for basic authentication |  | String
-| *camel.component.consul.configuration.value-as-string* | Default to transform values retrieved from Consul i.e. on KV endpoint to string. | false | Boolean
-| *camel.component.consul.configuration.write-timeout-millis* | Write timeout for OkHttpClient |  | Long
+| *camel.component.consul.configuration* | Consul configuration. The option is a org.apache.camel.component.consul.ConsulConfiguration type. |  | String
 | *camel.component.consul.connect-timeout-millis* | Connect timeout for OkHttpClient |  | Long
 | *camel.component.consul.consistency-mode* | The consistencyMode used for queries, default ConsistencyMode.DEFAULT |  | ConsistencyMode
 | *camel.component.consul.consul-client* | Reference to a com.orbitz.consul.Consul in the registry. The option is a com.orbitz.consul.Consul type. |  | String
@@ -129,7 +109,6 @@ The component supports 107 options, which are listed below.
 | *camel.component.consul.value-as-string* | Default to transform values retrieved from Consul i.e. on KV endpoint to string. | false | Boolean
 | *camel.component.consul.write-timeout-millis* | Write timeout for OkHttpClient |  | Long
 | *camel.component.consul.cluster.service.dc* | *Deprecated*  |  | String
-| *camel.component.consul.configuration.dc* | *Deprecated*  |  | String
 | *camel.component.consul.service-registry.dc* | *Deprecated*  |  | String
 |===
 // spring-boot-auto-configure options: END

@@ -48,9 +48,11 @@ public class AtomixQueueComponentConfiguration
      */
     private String atomix;
     /**
-     * The shared component configuration
+     * The shared component configuration. The option is a
+     * org.apache.camel.component.atomix.client.queue.AtomixQueueConfiguration
+     * type.
      */
-    private AtomixQueueConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * The path to the AtomixClient configuration
      */
@@ -133,12 +135,11 @@ public class AtomixQueueComponentConfiguration
         this.atomix = atomix;
     }
 
-    public AtomixQueueConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            AtomixQueueConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -252,33 +253,5 @@ public class AtomixQueueComponentConfiguration
 
     public void setResourceOptions(Map<String, Properties> resourceOptions) {
         this.resourceOptions = resourceOptions;
-    }
-
-    public static class AtomixQueueConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.atomix.client.queue.AtomixQueueConfiguration.class;
-        /**
-         * The default action.
-         */
-        private Action defaultAction = Action.ADD;
-        /**
-         * The header that wil carry the result.
-         */
-        private String resultHeader;
-
-        public Action getDefaultAction() {
-            return defaultAction;
-        }
-
-        public void setDefaultAction(Action defaultAction) {
-            this.defaultAction = defaultAction;
-        }
-
-        public String getResultHeader() {
-            return resultHeader;
-        }
-
-        public void setResultHeader(String resultHeader) {
-            this.resultHeader = resultHeader;
-        }
     }
 }

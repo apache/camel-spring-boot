@@ -19,11 +19,8 @@ package org.apache.camel.component.box.springboot;
 import java.util.Map;
 import javax.annotation.Generated;
 import com.box.sdk.EncryptionAlgorithm;
-import com.box.sdk.IAccessTokenCache;
 import org.apache.camel.component.box.BoxComponent;
-import org.apache.camel.component.box.internal.BoxApiName;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
-import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -48,9 +45,10 @@ public class BoxComponentConfiguration
      */
     private String clientId;
     /**
-     * To use the shared configuration
+     * To use the shared configuration. The option is a
+     * org.apache.camel.component.box.BoxConfiguration type.
      */
-    private BoxConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * The enterprise ID to use for an App Enterprise.
      */
@@ -147,12 +145,11 @@ public class BoxComponentConfiguration
         this.clientId = clientId;
     }
 
-    public BoxConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            BoxConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -290,219 +287,5 @@ public class BoxComponentConfiguration
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
-    }
-
-    public static class BoxConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.box.BoxConfiguration.class;
-        /**
-         * Custom Access Token Cache for storing and retrieving access tokens.
-         */
-        private IAccessTokenCache accessTokenCache;
-        /**
-         * What kind of operation to perform
-         */
-        private BoxApiName apiName;
-        /**
-         * The type of authentication for connection. Types of Authentication:
-         * STANDARD_AUTHENTICATION - OAuth 2.0 (3-legged) SERVER_AUTHENTICATION
-         * - OAuth 2.0 with JSON Web Tokens
-         */
-        private String authenticationType = "APP_USER_AUTHENTICATION";
-        /**
-         * Box application client ID
-         */
-        private String clientId;
-        /**
-         * Box application client secret
-         */
-        private String clientSecret;
-        /**
-         * The type of encryption algorithm for JWT. Supported Algorithms:
-         * RSA_SHA_256 RSA_SHA_384 RSA_SHA_512
-         */
-        private EncryptionAlgorithm encryptionAlgorithm = EncryptionAlgorithm.RSA_SHA_256;
-        /**
-         * The enterprise ID to use for an App Enterprise.
-         */
-        private String enterpriseId;
-        /**
-         * Custom HTTP params for settings like proxy host
-         */
-        private Map httpParams;
-        /**
-         * The maximum number of access tokens in cache.
-         */
-        private Integer maxCacheEntries = 100;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
-        /**
-         * The private key for generating the JWT signature.
-         */
-        private String privateKeyFile;
-        /**
-         * The password for the private key.
-         */
-        private String privateKeyPassword;
-        /**
-         * The ID for public key for validating the JWT signature.
-         */
-        private String publicKeyId;
-        /**
-         * To configure security using SSLContextParameters.
-         */
-        private SSLContextParameters sslContextParameters;
-        /**
-         * The user ID to use for an App User.
-         */
-        private String userId;
-        /**
-         * Box user name, MUST be provided
-         */
-        private String userName;
-        /**
-         * Box user password, MUST be provided if authSecureStorage is not set,
-         * or returns null on first call
-         */
-        private String userPassword;
-
-        public IAccessTokenCache getAccessTokenCache() {
-            return accessTokenCache;
-        }
-
-        public void setAccessTokenCache(IAccessTokenCache accessTokenCache) {
-            this.accessTokenCache = accessTokenCache;
-        }
-
-        public BoxApiName getApiName() {
-            return apiName;
-        }
-
-        public void setApiName(BoxApiName apiName) {
-            this.apiName = apiName;
-        }
-
-        public String getAuthenticationType() {
-            return authenticationType;
-        }
-
-        public void setAuthenticationType(String authenticationType) {
-            this.authenticationType = authenticationType;
-        }
-
-        public String getClientId() {
-            return clientId;
-        }
-
-        public void setClientId(String clientId) {
-            this.clientId = clientId;
-        }
-
-        public String getClientSecret() {
-            return clientSecret;
-        }
-
-        public void setClientSecret(String clientSecret) {
-            this.clientSecret = clientSecret;
-        }
-
-        public EncryptionAlgorithm getEncryptionAlgorithm() {
-            return encryptionAlgorithm;
-        }
-
-        public void setEncryptionAlgorithm(
-                EncryptionAlgorithm encryptionAlgorithm) {
-            this.encryptionAlgorithm = encryptionAlgorithm;
-        }
-
-        public String getEnterpriseId() {
-            return enterpriseId;
-        }
-
-        public void setEnterpriseId(String enterpriseId) {
-            this.enterpriseId = enterpriseId;
-        }
-
-        public Map getHttpParams() {
-            return httpParams;
-        }
-
-        public void setHttpParams(Map httpParams) {
-            this.httpParams = httpParams;
-        }
-
-        public Integer getMaxCacheEntries() {
-            return maxCacheEntries;
-        }
-
-        public void setMaxCacheEntries(Integer maxCacheEntries) {
-            this.maxCacheEntries = maxCacheEntries;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
-        }
-
-        public String getPrivateKeyFile() {
-            return privateKeyFile;
-        }
-
-        public void setPrivateKeyFile(String privateKeyFile) {
-            this.privateKeyFile = privateKeyFile;
-        }
-
-        public String getPrivateKeyPassword() {
-            return privateKeyPassword;
-        }
-
-        public void setPrivateKeyPassword(String privateKeyPassword) {
-            this.privateKeyPassword = privateKeyPassword;
-        }
-
-        public String getPublicKeyId() {
-            return publicKeyId;
-        }
-
-        public void setPublicKeyId(String publicKeyId) {
-            this.publicKeyId = publicKeyId;
-        }
-
-        public SSLContextParameters getSslContextParameters() {
-            return sslContextParameters;
-        }
-
-        public void setSslContextParameters(
-                SSLContextParameters sslContextParameters) {
-            this.sslContextParameters = sslContextParameters;
-        }
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
-
-        public String getUserName() {
-            return userName;
-        }
-
-        public void setUserName(String userName) {
-            this.userName = userName;
-        }
-
-        public String getUserPassword() {
-            return userPassword;
-        }
-
-        public void setUserPassword(String userPassword) {
-            this.userPassword = userPassword;
-        }
     }
 }

@@ -49,9 +49,10 @@ public class AtomixMultiMapComponentConfiguration
      */
     private String atomix;
     /**
-     * The shared component configuration
+     * The shared component configuration. The option is a
+     * org.apache.camel.component.atomix.client.multimap.AtomixMultiMapConfiguration type.
      */
-    private AtomixMultiMapConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * The path to the AtomixClient configuration
      */
@@ -134,12 +135,11 @@ public class AtomixMultiMapComponentConfiguration
         this.atomix = atomix;
     }
 
-    public AtomixMultiMapConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            AtomixMultiMapConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -261,58 +261,5 @@ public class AtomixMultiMapComponentConfiguration
 
     public void setResourceOptions(Map<String, Properties> resourceOptions) {
         this.resourceOptions = resourceOptions;
-    }
-
-    public static class AtomixMultiMapConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.atomix.client.multimap.AtomixMultiMapConfiguration.class;
-        /**
-         * The default action.
-         */
-        private Action defaultAction = Action.PUT;
-        /**
-         * The key to use if none is set in the header or to listen for events
-         * for a specific key.
-         */
-        private Object key;
-        /**
-         * The resource ttl.
-         */
-        private Long ttl;
-        /**
-         * The header that wil carry the result.
-         */
-        private String resultHeader;
-
-        public Action getDefaultAction() {
-            return defaultAction;
-        }
-
-        public void setDefaultAction(Action defaultAction) {
-            this.defaultAction = defaultAction;
-        }
-
-        public Object getKey() {
-            return key;
-        }
-
-        public void setKey(Object key) {
-            this.key = key;
-        }
-
-        public Long getTtl() {
-            return ttl;
-        }
-
-        public void setTtl(Long ttl) {
-            this.ttl = ttl;
-        }
-
-        public String getResultHeader() {
-            return resultHeader;
-        }
-
-        public void setResultHeader(String resultHeader) {
-            this.resultHeader = resultHeader;
-        }
     }
 }

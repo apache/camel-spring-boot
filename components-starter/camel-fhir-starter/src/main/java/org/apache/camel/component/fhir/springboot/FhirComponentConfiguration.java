@@ -17,10 +17,6 @@
 package org.apache.camel.component.fhir.springboot;
 
 import javax.annotation.Generated;
-import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.rest.client.api.IGenericClient;
-import ca.uhn.fhir.rest.client.api.IRestfulClientFactory;
-import org.apache.camel.component.fhir.internal.FhirApiName;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -100,9 +96,10 @@ public class FhirComponentConfiguration
      */
     private Boolean compress = false;
     /**
-     * To use the shared configuration
+     * To use the shared configuration. The option is a
+     * org.apache.camel.component.fhir.FhirConfiguration type.
      */
-    private FhirConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * How long to try and establish the initial TCP connection (in ms)
      */
@@ -255,12 +252,11 @@ public class FhirComponentConfiguration
         this.compress = compress;
     }
 
-    public FhirConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            FhirConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -382,313 +378,5 @@ public class FhirComponentConfiguration
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public static class FhirConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.fhir.FhirConfiguration.class;
-        /**
-         * OAuth access token
-         */
-        private String accessToken;
-        /**
-         * What kind of operation to perform
-         */
-        private FhirApiName apiName;
-        /**
-         * To use the custom client
-         */
-        private IGenericClient client;
-        /**
-         * To use the custom client factory
-         */
-        private IRestfulClientFactory clientFactory;
-        /**
-         * Compresses outgoing (POST/PUT) contents to the GZIP format
-         */
-        private Boolean compress = false;
-        /**
-         * How long to try and establish the initial TCP connection (in ms)
-         */
-        private Integer connectionTimeout = 10000;
-        /**
-         * When this option is set, model classes will not be scanned for
-         * children until the child list for the given type is actually
-         * accessed.
-         */
-        private Boolean deferModelScanning = false;
-        /**
-         * Encoding to use for all request
-         */
-        private String encoding;
-        /**
-         * FhirContext is an expensive object to create. To avoid creating
-         * multiple instances, it can be set directly.
-         */
-        private FhirContext fhirContext;
-        /**
-         * The FHIR Version to use
-         */
-        private String fhirVersion = "R4";
-        /**
-         * Force conformance check
-         */
-        private Boolean forceConformanceCheck = false;
-        /**
-         * Will log every requests and responses
-         */
-        private Boolean log = false;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
-        /**
-         * Username to use for basic authentication
-         */
-        private String password;
-        /**
-         * Pretty print all request
-         */
-        private Boolean prettyPrint = false;
-        /**
-         * The proxy host
-         */
-        private String proxyHost;
-        /**
-         * The proxy password
-         */
-        private String proxyPassword;
-        /**
-         * The proxy port
-         */
-        private Integer proxyPort;
-        /**
-         * The proxy username
-         */
-        private String proxyUser;
-        /**
-         * The FHIR server base URL
-         */
-        private String serverUrl;
-        /**
-         * HTTP session cookie to add to every request
-         */
-        private String sessionCookie;
-        /**
-         * How long to block for individual read/write operations (in ms)
-         */
-        private Integer socketTimeout = 10000;
-        /**
-         * Request that the server modify the response using the
-         * <code>_summary</code> param
-         */
-        private String summary;
-        /**
-         * Username to use for basic authentication
-         */
-        private String username;
-        /**
-         * When should Camel validate the FHIR Server's conformance statement
-         */
-        private String validationMode = "ONCE";
-
-        public String getAccessToken() {
-            return accessToken;
-        }
-
-        public void setAccessToken(String accessToken) {
-            this.accessToken = accessToken;
-        }
-
-        public FhirApiName getApiName() {
-            return apiName;
-        }
-
-        public void setApiName(FhirApiName apiName) {
-            this.apiName = apiName;
-        }
-
-        public IGenericClient getClient() {
-            return client;
-        }
-
-        public void setClient(IGenericClient client) {
-            this.client = client;
-        }
-
-        public IRestfulClientFactory getClientFactory() {
-            return clientFactory;
-        }
-
-        public void setClientFactory(IRestfulClientFactory clientFactory) {
-            this.clientFactory = clientFactory;
-        }
-
-        public Boolean getCompress() {
-            return compress;
-        }
-
-        public void setCompress(Boolean compress) {
-            this.compress = compress;
-        }
-
-        public Integer getConnectionTimeout() {
-            return connectionTimeout;
-        }
-
-        public void setConnectionTimeout(Integer connectionTimeout) {
-            this.connectionTimeout = connectionTimeout;
-        }
-
-        public Boolean getDeferModelScanning() {
-            return deferModelScanning;
-        }
-
-        public void setDeferModelScanning(Boolean deferModelScanning) {
-            this.deferModelScanning = deferModelScanning;
-        }
-
-        public String getEncoding() {
-            return encoding;
-        }
-
-        public void setEncoding(String encoding) {
-            this.encoding = encoding;
-        }
-
-        public FhirContext getFhirContext() {
-            return fhirContext;
-        }
-
-        public void setFhirContext(FhirContext fhirContext) {
-            this.fhirContext = fhirContext;
-        }
-
-        public String getFhirVersion() {
-            return fhirVersion;
-        }
-
-        public void setFhirVersion(String fhirVersion) {
-            this.fhirVersion = fhirVersion;
-        }
-
-        public Boolean getForceConformanceCheck() {
-            return forceConformanceCheck;
-        }
-
-        public void setForceConformanceCheck(Boolean forceConformanceCheck) {
-            this.forceConformanceCheck = forceConformanceCheck;
-        }
-
-        public Boolean getLog() {
-            return log;
-        }
-
-        public void setLog(Boolean log) {
-            this.log = log;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public Boolean getPrettyPrint() {
-            return prettyPrint;
-        }
-
-        public void setPrettyPrint(Boolean prettyPrint) {
-            this.prettyPrint = prettyPrint;
-        }
-
-        public String getProxyHost() {
-            return proxyHost;
-        }
-
-        public void setProxyHost(String proxyHost) {
-            this.proxyHost = proxyHost;
-        }
-
-        public String getProxyPassword() {
-            return proxyPassword;
-        }
-
-        public void setProxyPassword(String proxyPassword) {
-            this.proxyPassword = proxyPassword;
-        }
-
-        public Integer getProxyPort() {
-            return proxyPort;
-        }
-
-        public void setProxyPort(Integer proxyPort) {
-            this.proxyPort = proxyPort;
-        }
-
-        public String getProxyUser() {
-            return proxyUser;
-        }
-
-        public void setProxyUser(String proxyUser) {
-            this.proxyUser = proxyUser;
-        }
-
-        public String getServerUrl() {
-            return serverUrl;
-        }
-
-        public void setServerUrl(String serverUrl) {
-            this.serverUrl = serverUrl;
-        }
-
-        public String getSessionCookie() {
-            return sessionCookie;
-        }
-
-        public void setSessionCookie(String sessionCookie) {
-            this.sessionCookie = sessionCookie;
-        }
-
-        public Integer getSocketTimeout() {
-            return socketTimeout;
-        }
-
-        public void setSocketTimeout(Integer socketTimeout) {
-            this.socketTimeout = socketTimeout;
-        }
-
-        public String getSummary() {
-            return summary;
-        }
-
-        public void setSummary(String summary) {
-            this.summary = summary;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getValidationMode() {
-            return validationMode;
-        }
-
-        public void setValidationMode(String validationMode) {
-            this.validationMode = validationMode;
-        }
     }
 }

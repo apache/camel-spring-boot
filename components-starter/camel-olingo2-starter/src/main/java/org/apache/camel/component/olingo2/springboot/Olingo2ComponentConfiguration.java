@@ -18,12 +18,7 @@ package org.apache.camel.component.olingo2.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
-import org.apache.camel.component.olingo2.internal.Olingo2ApiName;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
-import org.apache.camel.support.jsse.SSLContextParameters;
-import org.apache.http.HttpHost;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -43,9 +38,10 @@ public class Olingo2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the shared configuration
+     * To use the shared configuration. The option is a
+     * org.apache.camel.component.olingo2.Olingo2Configuration type.
      */
-    private Olingo2ConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * HTTP connection creation timeout in milliseconds, defaults to 30,000 (30
      * seconds)
@@ -137,12 +133,11 @@ public class Olingo2ComponentConfiguration
      */
     private Boolean useGlobalSslContextParameters = false;
 
-    public Olingo2ConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            Olingo2ConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -265,180 +260,5 @@ public class Olingo2ComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public static class Olingo2ConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.olingo2.Olingo2Configuration.class;
-        /**
-         * What kind of operation to perform
-         */
-        private Olingo2ApiName apiName;
-        /**
-         * HTTP connection creation timeout in milliseconds, defaults to 30,000
-         * (30 seconds)
-         */
-        private Integer connectTimeout = 30000;
-        /**
-         * Content-Type header value can be used to specify JSON or XML message
-         * format, defaults to application/json;charset=utf-8
-         */
-        private String contentType = "application/json;charset=utf-8";
-        /**
-         * Set this to true to filter out results that have already been
-         * communicated by this component.
-         */
-        private Boolean filterAlreadySeen = false;
-        /**
-         * Custom HTTP async client builder for more complex HTTP client
-         * configuration, overrides connectionTimeout, socketTimeout, proxy and
-         * sslContext. Note that a socketTimeout MUST be specified in the
-         * builder, otherwise OData requests could block indefinitely
-         */
-        private HttpAsyncClientBuilder httpAsyncClientBuilder;
-        /**
-         * Custom HTTP client builder for more complex HTTP client
-         * configuration, overrides connectionTimeout, socketTimeout, proxy and
-         * sslContext. Note that a socketTimeout MUST be specified in the
-         * builder, otherwise OData requests could block indefinitely
-         */
-        private HttpClientBuilder httpClientBuilder;
-        /**
-         * Custom HTTP headers to inject into every request, this could include
-         * OAuth tokens, etc.
-         */
-        private Map httpHeaders;
-        /**
-         * What sub operation to use for the selected operation
-         */
-        private String methodName;
-        /**
-         * HTTP proxy server configuration
-         */
-        private HttpHost proxy;
-        /**
-         * Target OData service base URI, e.g.
-         * http://services.odata.org/OData/OData.svc
-         */
-        private String serviceUri;
-        /**
-         * HTTP request timeout in milliseconds, defaults to 30,000 (30 seconds)
-         */
-        private Integer socketTimeout = 30000;
-        /**
-         * For endpoints that return an array or collection, a consumer endpoint
-         * will map every element to distinct messages, unless splitResult is
-         * set to false.
-         */
-        private Boolean splitResult = true;
-        /**
-         * To configure security using SSLContextParameters
-         */
-        private SSLContextParameters sslContextParameters;
-
-        public Olingo2ApiName getApiName() {
-            return apiName;
-        }
-
-        public void setApiName(Olingo2ApiName apiName) {
-            this.apiName = apiName;
-        }
-
-        public Integer getConnectTimeout() {
-            return connectTimeout;
-        }
-
-        public void setConnectTimeout(Integer connectTimeout) {
-            this.connectTimeout = connectTimeout;
-        }
-
-        public String getContentType() {
-            return contentType;
-        }
-
-        public void setContentType(String contentType) {
-            this.contentType = contentType;
-        }
-
-        public Boolean getFilterAlreadySeen() {
-            return filterAlreadySeen;
-        }
-
-        public void setFilterAlreadySeen(Boolean filterAlreadySeen) {
-            this.filterAlreadySeen = filterAlreadySeen;
-        }
-
-        public HttpAsyncClientBuilder getHttpAsyncClientBuilder() {
-            return httpAsyncClientBuilder;
-        }
-
-        public void setHttpAsyncClientBuilder(
-                HttpAsyncClientBuilder httpAsyncClientBuilder) {
-            this.httpAsyncClientBuilder = httpAsyncClientBuilder;
-        }
-
-        public HttpClientBuilder getHttpClientBuilder() {
-            return httpClientBuilder;
-        }
-
-        public void setHttpClientBuilder(HttpClientBuilder httpClientBuilder) {
-            this.httpClientBuilder = httpClientBuilder;
-        }
-
-        public Map getHttpHeaders() {
-            return httpHeaders;
-        }
-
-        public void setHttpHeaders(Map httpHeaders) {
-            this.httpHeaders = httpHeaders;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public void setMethodName(String methodName) {
-            this.methodName = methodName;
-        }
-
-        public HttpHost getProxy() {
-            return proxy;
-        }
-
-        public void setProxy(HttpHost proxy) {
-            this.proxy = proxy;
-        }
-
-        public String getServiceUri() {
-            return serviceUri;
-        }
-
-        public void setServiceUri(String serviceUri) {
-            this.serviceUri = serviceUri;
-        }
-
-        public Integer getSocketTimeout() {
-            return socketTimeout;
-        }
-
-        public void setSocketTimeout(Integer socketTimeout) {
-            this.socketTimeout = socketTimeout;
-        }
-
-        public Boolean getSplitResult() {
-            return splitResult;
-        }
-
-        public void setSplitResult(Boolean splitResult) {
-            this.splitResult = splitResult;
-        }
-
-        public SSLContextParameters getSslContextParameters() {
-            return sslContextParameters;
-        }
-
-        public void setSslContextParameters(
-                SSLContextParameters sslContextParameters) {
-            this.sslContextParameters = sslContextParameters;
-        }
     }
 }

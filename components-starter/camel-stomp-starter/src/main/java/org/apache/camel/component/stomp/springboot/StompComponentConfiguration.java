@@ -16,10 +16,8 @@
  */
 package org.apache.camel.component.stomp.springboot;
 
-import java.util.Properties;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
-import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -81,9 +79,10 @@ public class StompComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Component configuration.
+     * Component configuration. The option is a
+     * org.apache.camel.component.stomp.StompConfiguration type.
      */
-    private StompConfigurationNestedConfiguration configuration;
+    private String configuration;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
@@ -164,12 +163,11 @@ public class StompComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public StompConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            StompConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
     }
 
@@ -212,94 +210,5 @@ public class StompComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public static class StompConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.stomp.StompConfiguration.class;
-        /**
-         * The URI of the Stomp broker to connect to
-         */
-        private String brokerURL = "tcp://localhost:61613";
-        /**
-         * To set custom headers
-         */
-        private Properties customHeaders;
-        /**
-         * The virtual host name
-         */
-        private String host;
-        /**
-         * The username
-         */
-        private String login;
-        /**
-         * The password
-         */
-        private String passcode;
-        /**
-         * To configure security using SSLContextParameters
-         */
-        private SSLContextParameters sslContextParameters;
-        /**
-         * The stomp version (1.1, or 1.2)
-         */
-        private String version;
-
-        public String getBrokerURL() {
-            return brokerURL;
-        }
-
-        public void setBrokerURL(String brokerURL) {
-            this.brokerURL = brokerURL;
-        }
-
-        public Properties getCustomHeaders() {
-            return customHeaders;
-        }
-
-        public void setCustomHeaders(Properties customHeaders) {
-            this.customHeaders = customHeaders;
-        }
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public String getLogin() {
-            return login;
-        }
-
-        public void setLogin(String login) {
-            this.login = login;
-        }
-
-        public String getPasscode() {
-            return passcode;
-        }
-
-        public void setPasscode(String passcode) {
-            this.passcode = passcode;
-        }
-
-        public SSLContextParameters getSslContextParameters() {
-            return sslContextParameters;
-        }
-
-        public void setSslContextParameters(
-                SSLContextParameters sslContextParameters) {
-            this.sslContextParameters = sslContextParameters;
-        }
-
-        public String getVersion() {
-            return version;
-        }
-
-        public void setVersion(String version) {
-            this.version = version;
-        }
     }
 }

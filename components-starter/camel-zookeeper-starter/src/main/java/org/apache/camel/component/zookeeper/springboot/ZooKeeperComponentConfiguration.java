@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.zookeeper.springboot;
 
-import java.util.List;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -92,9 +91,10 @@ public class ZooKeeperComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * To use a shared ZooKeeperConfiguration
+     * To use a shared ZooKeeperConfiguration. The option is a
+     * org.apache.camel.component.zookeeper.ZooKeeperConfiguration type.
      */
-    private ZooKeeperConfigurationNestedConfiguration configuration;
+    private String configuration;
 
     public Boolean getListChildren() {
         return listChildren;
@@ -176,122 +176,11 @@ public class ZooKeeperComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public ZooKeeperConfigurationNestedConfiguration getConfiguration() {
+    public String getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(
-            ZooKeeperConfigurationNestedConfiguration configuration) {
+    public void setConfiguration(String configuration) {
         this.configuration = configuration;
-    }
-
-    public static class ZooKeeperConfigurationNestedConfiguration {
-        public static final Class CAMEL_NESTED_CLASS = org.apache.camel.component.zookeeper.ZooKeeperConfiguration.class;
-        /**
-         * The time interval to backoff for after an error before retrying.
-         */
-        private Long backoff = 5000L;
-        /**
-         * Should the endpoint create the node if it does not currently exist.
-         */
-        private Boolean create = false;
-        /**
-         * The create mode that should be used for the newly created node
-         */
-        private String createMode = "EPHEMERAL";
-        /**
-         * Whether the children of the node should be listed
-         */
-        private Boolean listChildren = false;
-        /**
-         * The node in the ZooKeeper server (aka znode)
-         */
-        private String path;
-        /**
-         * Should changes to the znode be 'watched' and repeatedly processed.
-         */
-        private Boolean repeat = false;
-        /**
-         * Upon the delete of a znode, should an empty message be send to the
-         * consumer
-         */
-        private Boolean sendEmptyMessageOnDelete = true;
-        private List servers;
-        /**
-         * The time interval to wait on connection before timing out.
-         */
-        private Integer timeout = 5000;
-
-        public Long getBackoff() {
-            return backoff;
-        }
-
-        public void setBackoff(Long backoff) {
-            this.backoff = backoff;
-        }
-
-        public Boolean getCreate() {
-            return create;
-        }
-
-        public void setCreate(Boolean create) {
-            this.create = create;
-        }
-
-        public String getCreateMode() {
-            return createMode;
-        }
-
-        public void setCreateMode(String createMode) {
-            this.createMode = createMode;
-        }
-
-        public Boolean getListChildren() {
-            return listChildren;
-        }
-
-        public void setListChildren(Boolean listChildren) {
-            this.listChildren = listChildren;
-        }
-
-        public String getPath() {
-            return path;
-        }
-
-        public void setPath(String path) {
-            this.path = path;
-        }
-
-        public Boolean getRepeat() {
-            return repeat;
-        }
-
-        public void setRepeat(Boolean repeat) {
-            this.repeat = repeat;
-        }
-
-        public Boolean getSendEmptyMessageOnDelete() {
-            return sendEmptyMessageOnDelete;
-        }
-
-        public void setSendEmptyMessageOnDelete(Boolean sendEmptyMessageOnDelete) {
-            this.sendEmptyMessageOnDelete = sendEmptyMessageOnDelete;
-        }
-
-        public List getServers() {
-            return servers;
-        }
-
-        public void setServers(List servers) {
-            this.servers = servers;
-        }
-
-        public Integer getTimeout() {
-            return timeout;
-        }
-
-        public void setTimeout(Integer timeout) {
-            this.timeout = timeout;
-        }
     }
 }
