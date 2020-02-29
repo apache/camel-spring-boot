@@ -43,14 +43,14 @@ public class KinesisComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * Amazon Kinesis client to use for all requests for this endpoint. The
      * option is a com.amazonaws.services.kinesis.AmazonKinesis type.
      */
     private String amazonKinesisClient;
+    /**
+     * The component configuration
+     */
+    private KinesisConfigurationNestedConfiguration configuration;
     /**
      * To define a proxy host when instantiating the Kinesis client
      */
@@ -64,13 +64,12 @@ public class KinesisComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * Amazon AWS Region
+     * The region in which Kinesis client needs to work. When using this
+     * parameter, the configuration will expect the capitalized name of the
+     * region (for example AP_EAST_1)You'll need to use the name
+     * Regions.EU_WEST_1.name()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -122,17 +121,13 @@ public class KinesisComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS S3 default configuration
+     * Amazon AWS Access Key
      */
-    private KinesisConfigurationNestedConfiguration configuration;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
     public String getAmazonKinesisClient() {
         return amazonKinesisClient;
@@ -140,6 +135,15 @@ public class KinesisComponentConfiguration
 
     public void setAmazonKinesisClient(String amazonKinesisClient) {
         this.amazonKinesisClient = amazonKinesisClient;
+    }
+
+    public KinesisConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            KinesisConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getProxyHost() {
@@ -172,14 +176,6 @@ public class KinesisComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -246,13 +242,20 @@ public class KinesisComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public KinesisConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setConfiguration(
-            KinesisConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class KinesisConfigurationNestedConfiguration {

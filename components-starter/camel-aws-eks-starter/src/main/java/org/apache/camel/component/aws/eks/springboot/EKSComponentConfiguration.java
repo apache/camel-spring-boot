@@ -45,6 +45,10 @@ public class EKSComponentConfiguration
      */
     private String accessKey;
     /**
+     * The component configuration
+     */
+    private EKSConfigurationNestedConfiguration configuration;
+    /**
      * To use a existing configured AWS EKS as client. The option is a
      * com.amazonaws.services.eks.AmazonEKS type.
      */
@@ -77,7 +81,9 @@ public class EKSComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which EKS client needs to work
+     * The region in which EKS client needs to work. When using this parameter,
+     * the configuration will expect the capitalized name of the region (for
+     * example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name()
      */
     private String region;
     /**
@@ -89,10 +95,6 @@ public class EKSComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * The AWS EKS default configuration
-     */
-    private EKSConfigurationNestedConfiguration configuration;
 
     public String getAccessKey() {
         return accessKey;
@@ -100,6 +102,15 @@ public class EKSComponentConfiguration
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public EKSConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            EKSConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getEksClient() {
@@ -172,15 +183,6 @@ public class EKSComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public EKSConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            EKSConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public static class EKSConfigurationNestedConfiguration {

@@ -50,6 +50,10 @@ public class MQComponentConfiguration
      */
     private String amazonMqClient;
     /**
+     * The Component configuration
+     */
+    private MQConfigurationNestedConfiguration configuration;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -77,7 +81,9 @@ public class MQComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which MQ client needs to work
+     * The region in which MQ client needs to work. When using this parameter,
+     * the configuration will expect the capitalized name of the region (for
+     * example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name()
      */
     private String region;
     /**
@@ -89,10 +95,6 @@ public class MQComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * The AWS MQ default configuration
-     */
-    private MQConfigurationNestedConfiguration configuration;
 
     public String getAccessKey() {
         return accessKey;
@@ -108,6 +110,15 @@ public class MQComponentConfiguration
 
     public void setAmazonMqClient(String amazonMqClient) {
         this.amazonMqClient = amazonMqClient;
+    }
+
+    public MQConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            MQConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getLazyStartProducer() {
@@ -172,15 +183,6 @@ public class MQComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public MQConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            MQConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public static class MQConfigurationNestedConfiguration {

@@ -45,14 +45,14 @@ public class SWFComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key.
-     */
-    private String accessKey;
-    /**
      * To use the given AmazonSimpleWorkflowClient as client. The option is a
      * com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflow type.
      */
     private String amazonSWClient;
+    /**
+     * The component configuration
+     */
+    private SWFConfigurationNestedConfiguration configuration;
     /**
      * An instance of com.amazonaws.services.simpleworkflow.flow.DataConverter
      * to use for serializing/deserializing the data. The option is a
@@ -68,13 +68,11 @@ public class SWFComponentConfiguration
      */
     private String eventName;
     /**
-     * Amazon AWS Region.
+     * Amazon AWS Region. When using this parameter, the configuration will
+     * expect the capitalized name of the region (for example AP_EAST_1) You'll
+     * need to use the name Regions.EU_WEST_1.name()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key.
-     */
-    private String secretKey;
     /**
      * The workflow or activity event version to use.
      */
@@ -108,10 +106,6 @@ public class SWFComponentConfiguration
      * To configure the ClientConfiguration using the key/values from the Map.
      */
     private Map<String, Object> clientConfigurationParameters;
-    /**
-     * The AWS SWF default configuration
-     */
-    private SWFConfigurationNestedConfiguration configuration;
     /**
      * To configure the StartWorkflowOptions using the key/values from the Map.
      */
@@ -186,14 +180,14 @@ public class SWFComponentConfiguration
      * com.amazonaws.services.simpleworkflow.flow.WorkflowTypeRegistrationOptions type.
      */
     private String workflowTypeRegistrationOptions;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    /**
+     * Amazon AWS Access Key.
+     */
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key.
+     */
+    private String secretKey;
 
     public String getAmazonSWClient() {
         return amazonSWClient;
@@ -201,6 +195,15 @@ public class SWFComponentConfiguration
 
     public void setAmazonSWClient(String amazonSWClient) {
         this.amazonSWClient = amazonSWClient;
+    }
+
+    public SWFConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            SWFConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getDataConverter() {
@@ -233,14 +236,6 @@ public class SWFComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 
     public String getVersion() {
@@ -282,15 +277,6 @@ public class SWFComponentConfiguration
     public void setClientConfigurationParameters(
             Map<String, Object> clientConfigurationParameters) {
         this.clientConfigurationParameters = clientConfigurationParameters;
-    }
-
-    public SWFConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            SWFConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public Map<String, Object> getStartWorkflowOptionsParameters() {
@@ -432,6 +418,22 @@ public class SWFComponentConfiguration
     public void setWorkflowTypeRegistrationOptions(
             String workflowTypeRegistrationOptions) {
         this.workflowTypeRegistrationOptions = workflowTypeRegistrationOptions;
+    }
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class SWFConfigurationNestedConfiguration {

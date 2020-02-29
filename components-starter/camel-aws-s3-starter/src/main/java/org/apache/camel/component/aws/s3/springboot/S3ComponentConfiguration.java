@@ -43,10 +43,6 @@ public class S3ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * Reference to a com.amazonaws.services.s3.AmazonS3 in the registry. The
      * option is a com.amazonaws.services.s3.AmazonS3 type.
      */
@@ -55,6 +51,10 @@ public class S3ComponentConfiguration
      * Setting the autocreation of the bucket
      */
     private Boolean autoCreateBucket = true;
+    /**
+     * The component configuration
+     */
+    private S3ConfigurationNestedConfiguration configuration;
     /**
      * Whether or not the S3 client should use path style access
      */
@@ -77,14 +77,11 @@ public class S3ComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region where the bucket is located. This option is used in the
-     * com.amazonaws.services.s3.model.CreateBucketRequest.
+     * The region in which S3 client needs to work. When using this parameter,
+     * the configuration will expect the capitalized name of the region (for
+     * example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * Set whether the S3 client should expect to load credentials on an EC2
      * instance or to expect static credentials to be passed in.
@@ -212,10 +209,6 @@ public class S3ComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS S3 default configuration
-     */
-    private S3ConfigurationNestedConfiguration configuration;
-    /**
      * Define if Accelerate Mode enabled is true or false
      */
     private Boolean accelerateModeEnabled = false;
@@ -235,14 +228,14 @@ public class S3ComponentConfiguration
      * Define if Payload Signing enabled is true or false
      */
     private Boolean payloadSigningEnabled = false;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    /**
+     * Amazon AWS Access Key
+     */
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
     public String getAmazonS3Client() {
         return amazonS3Client;
@@ -258,6 +251,15 @@ public class S3ComponentConfiguration
 
     public void setAutoCreateBucket(Boolean autoCreateBucket) {
         this.autoCreateBucket = autoCreateBucket;
+    }
+
+    public S3ConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            S3ConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getPathStyleAccess() {
@@ -306,14 +308,6 @@ public class S3ComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 
     public Boolean getUseIAMCredentials() {
@@ -484,15 +478,6 @@ public class S3ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public S3ConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            S3ConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
-    }
-
     public Boolean getAccelerateModeEnabled() {
         return accelerateModeEnabled;
     }
@@ -532,6 +517,22 @@ public class S3ComponentConfiguration
 
     public void setPayloadSigningEnabled(Boolean payloadSigningEnabled) {
         this.payloadSigningEnabled = payloadSigningEnabled;
+    }
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class S3ConfigurationNestedConfiguration {

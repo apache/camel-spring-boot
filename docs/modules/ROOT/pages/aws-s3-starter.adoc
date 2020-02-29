@@ -88,7 +88,7 @@ The component supports 71 options, which are listed below.
 | *camel.component.aws-s3.proxy-host* | To define a proxy host when instantiating the SQS client |  | String
 | *camel.component.aws-s3.proxy-port* | Specify a proxy port to be used inside the client definition. |  | Integer
 | *camel.component.aws-s3.proxy-protocol* | To define a proxy protocol when instantiating the S3 client |  | Protocol
-| *camel.component.aws-s3.region* | The region where the bucket is located. This option is used in the com.amazonaws.services.s3.model.CreateBucketRequest. |  | String
+| *camel.component.aws-s3.region* | The region in which S3 client needs to work. When using this parameter, the configuration will expect the capitalized name of the region (for example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name() |  | String
 | *camel.component.aws-s3.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws-s3.server-side-encryption* | Sets the server-side encryption algorithm when encrypting the object using AWS-managed keys. For example use AES256. |  | String
 | *camel.component.aws-s3.storage-class* | The storage class to set in the com.amazonaws.services.s3.model.PutObjectRequest request. |  | String

@@ -41,14 +41,14 @@ public class CwComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * To use the AmazonCloudWatch as the client. The option is a
      * com.amazonaws.services.cloudwatch.AmazonCloudWatch type.
      */
     private String amazonCwClient;
+    /**
+     * The component configuration
+     */
+    private CwConfigurationNestedConfiguration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -77,13 +77,11 @@ public class CwComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which CW client needs to work
+     * The region in which CW client needs to work. When using this parameter,
+     * the configuration will expect the capitalized name of the region (for
+     * example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * The metric timestamp
      */
@@ -102,17 +100,13 @@ public class CwComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS CW default configuration
+     * Amazon AWS Access Key
      */
-    private CwConfigurationNestedConfiguration configuration;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
     public String getAmazonCwClient() {
         return amazonCwClient;
@@ -120,6 +114,15 @@ public class CwComponentConfiguration
 
     public void setAmazonCwClient(String amazonCwClient) {
         this.amazonCwClient = amazonCwClient;
+    }
+
+    public CwConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            CwConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getLazyStartProducer() {
@@ -170,14 +173,6 @@ public class CwComponentConfiguration
         this.region = region;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
     public Date getTimestamp() {
         return timestamp;
     }
@@ -210,13 +205,20 @@ public class CwComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public CwConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setConfiguration(
-            CwConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class CwConfigurationNestedConfiguration {

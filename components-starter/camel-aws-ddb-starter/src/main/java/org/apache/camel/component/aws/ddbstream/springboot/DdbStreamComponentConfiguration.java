@@ -42,10 +42,6 @@ public class DdbStreamComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * Amazon DynamoDB client to use for all requests for this endpoint. The
      * option is a com.amazonaws.services.dynamodbv2.AmazonDynamoDBStreams type.
      */
@@ -59,6 +55,10 @@ public class DdbStreamComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * The component configuration
+     */
+    private DdbStreamConfigurationNestedConfiguration configuration;
     /**
      * Defines where in the DynaboDB stream to start getting records. Note that
      * using TRIM_HORIZON can cause a significant delay before the stream has
@@ -83,13 +83,9 @@ public class DdbStreamComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * Amazon AWS Region
+     * The region in which DDBStreams client needs to work
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * Provider for the sequence number when using one of the two
      * ShardIteratorType.{AT,AFTER}_SEQUENCE_NUMBER iterator types. Can be a
@@ -103,17 +99,13 @@ public class DdbStreamComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS DDB stream default configuration
+     * Amazon AWS Access Key
      */
-    private DdbStreamConfigurationNestedConfiguration configuration;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
     public String getAmazonDynamoDbStreamsClient() {
         return amazonDynamoDbStreamsClient;
@@ -130,6 +122,15 @@ public class DdbStreamComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public DdbStreamConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            DdbStreamConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public ShardIteratorType getIteratorType() {
@@ -180,14 +181,6 @@ public class DdbStreamComponentConfiguration
         this.region = region;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
     public String getSequenceNumberProvider() {
         return sequenceNumberProvider;
     }
@@ -204,13 +197,20 @@ public class DdbStreamComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public DdbStreamConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setConfiguration(
-            DdbStreamConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class DdbStreamConfigurationNestedConfiguration {

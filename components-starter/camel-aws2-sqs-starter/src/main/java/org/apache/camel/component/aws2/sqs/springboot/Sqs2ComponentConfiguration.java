@@ -44,10 +44,6 @@ public class Sqs2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * The hostname of the Amazon AWS cloud.
      */
     private String amazonAWSHost = "amazonaws.com";
@@ -60,6 +56,10 @@ public class Sqs2ComponentConfiguration
      * Setting the autocreation of the queue
      */
     private Boolean autoCreateQueue = true;
+    /**
+     * The AWS SQS default configuration
+     */
+    private Sqs2ConfigurationNestedConfiguration configuration;
     /**
      * The underlying protocol used to communicate with SQS
      */
@@ -74,14 +74,11 @@ public class Sqs2ComponentConfiguration
      */
     private String queueOwnerAWSAccountId;
     /**
-     * Specify the queue region which could be used with queueOwnerAWSAccountId
-     * to build the service URL.
+     * The region in which ECS client needs to work. When using this parameter,
+     * the configuration will expect the lowercase name of the region (for
+     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * A list of attribute names to receive when consuming. Multiple names can
      * be separated by comma.
@@ -197,10 +194,6 @@ public class Sqs2ComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS SQS default configuration
-     */
-    private Sqs2ConfigurationNestedConfiguration configuration;
-    /**
      * Define if you want to apply delaySeconds option to the queue or on single
      * messages
      */
@@ -243,14 +236,14 @@ public class Sqs2ComponentConfiguration
      * Amazon docs.
      */
     private String redrivePolicy;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    /**
+     * Amazon AWS Access Key
+     */
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
     public String getAmazonAWSHost() {
         return amazonAWSHost;
@@ -274,6 +267,15 @@ public class Sqs2ComponentConfiguration
 
     public void setAutoCreateQueue(Boolean autoCreateQueue) {
         this.autoCreateQueue = autoCreateQueue;
+    }
+
+    public Sqs2ConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            Sqs2ConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getProtocol() {
@@ -306,14 +308,6 @@ public class Sqs2ComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 
     public String getAttributeNames() {
@@ -471,15 +465,6 @@ public class Sqs2ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Sqs2ConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            Sqs2ConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
-    }
-
     public Boolean getDelayQueue() {
         return delayQueue;
     }
@@ -551,6 +536,22 @@ public class Sqs2ComponentConfiguration
 
     public void setRedrivePolicy(String redrivePolicy) {
         this.redrivePolicy = redrivePolicy;
+    }
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class Sqs2ConfigurationNestedConfiguration {

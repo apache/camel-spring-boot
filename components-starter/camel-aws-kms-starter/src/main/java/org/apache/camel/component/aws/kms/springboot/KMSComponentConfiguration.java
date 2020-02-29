@@ -45,6 +45,10 @@ public class KMSComponentConfiguration
      */
     private String accessKey;
     /**
+     * The Component configuration
+     */
+    private KMSConfigurationNestedConfiguration configuration;
+    /**
      * To use a existing configured AWS KMS as client. The option is a
      * com.amazonaws.services.kms.AWSKMS type.
      */
@@ -77,7 +81,9 @@ public class KMSComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which KMS client needs to work
+     * The region in which KMS client needs to work. When using this parameter,
+     * the configuration will expect the capitalized name of the region (for
+     * example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name()
      */
     private String region;
     /**
@@ -89,10 +95,6 @@ public class KMSComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * The AWS KMS default configuration
-     */
-    private KMSConfigurationNestedConfiguration configuration;
 
     public String getAccessKey() {
         return accessKey;
@@ -100,6 +102,15 @@ public class KMSComponentConfiguration
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public KMSConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            KMSConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getKmsClient() {
@@ -172,15 +183,6 @@ public class KMSComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public KMSConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            KMSConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public static class KMSConfigurationNestedConfiguration {

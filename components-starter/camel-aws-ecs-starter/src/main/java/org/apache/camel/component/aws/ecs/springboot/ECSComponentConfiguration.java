@@ -45,6 +45,10 @@ public class ECSComponentConfiguration
      */
     private String accessKey;
     /**
+     * The component configuration
+     */
+    private ECSConfigurationNestedConfiguration configuration;
+    /**
      * To use a existing configured AWS ECS as client. The option is a
      * com.amazonaws.services.ecs.AmazonECS type.
      */
@@ -77,7 +81,9 @@ public class ECSComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which ECS client needs to work
+     * The region in which ECS client needs to work. When using this parameter,
+     * the configuration will expect the capitalized name of the region (for
+     * example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name()
      */
     private String region;
     /**
@@ -89,10 +95,6 @@ public class ECSComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * The AWS ECS default configuration
-     */
-    private ECSConfigurationNestedConfiguration configuration;
 
     public String getAccessKey() {
         return accessKey;
@@ -100,6 +102,15 @@ public class ECSComponentConfiguration
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public ECSConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            ECSConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getEcsClient() {
@@ -172,15 +183,6 @@ public class ECSComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public ECSConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            ECSConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public static class ECSConfigurationNestedConfiguration {

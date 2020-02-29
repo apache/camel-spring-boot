@@ -41,15 +41,15 @@ public class KinesisFirehoseComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * Amazon Kinesis Firehose client to use for all requests for this endpoint.
      * The option is a
      * com.amazonaws.services.kinesisfirehose.AmazonKinesisFirehose type.
      */
     private String amazonKinesisFirehoseClient;
+    /**
+     * The component configuration
+     */
+    private KinesisFirehoseConfigurationNestedConfiguration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -74,30 +74,25 @@ public class KinesisFirehoseComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * Amazon AWS Region
+     * The region in which Kinesis client needs to work. When using this
+     * parameter, the configuration will expect the capitalized name of the
+     * region (for example AP_EAST_1)You'll need to use the name
+     * Regions.EU_WEST_1.name()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS Kinesis Firehose default configuration
+     * Amazon AWS Access Key
      */
-    private KinesisFirehoseConfigurationNestedConfiguration configuration;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
     public String getAmazonKinesisFirehoseClient() {
         return amazonKinesisFirehoseClient;
@@ -106,6 +101,15 @@ public class KinesisFirehoseComponentConfiguration
     public void setAmazonKinesisFirehoseClient(
             String amazonKinesisFirehoseClient) {
         this.amazonKinesisFirehoseClient = amazonKinesisFirehoseClient;
+    }
+
+    public KinesisFirehoseConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            KinesisFirehoseConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getLazyStartProducer() {
@@ -148,14 +152,6 @@ public class KinesisFirehoseComponentConfiguration
         this.region = region;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
@@ -164,13 +160,20 @@ public class KinesisFirehoseComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public KinesisFirehoseConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setConfiguration(
-            KinesisFirehoseConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class KinesisFirehoseConfigurationNestedConfiguration {

@@ -44,10 +44,6 @@ public class SqsComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * The hostname of the Amazon AWS cloud.
      */
     private String amazonAWSHost = "amazonaws.com";
@@ -60,6 +56,10 @@ public class SqsComponentConfiguration
      * Setting the autocreation of the queue
      */
     private Boolean autoCreateQueue = true;
+    /**
+     * The component configuration
+     */
+    private SqsConfigurationNestedConfiguration configuration;
     /**
      * The underlying protocol used to communicate with SQS
      */
@@ -75,13 +75,11 @@ public class SqsComponentConfiguration
     private String queueOwnerAWSAccountId;
     /**
      * Specify the queue region which could be used with queueOwnerAWSAccountId
-     * to build the service URL.
+     * to build the service URL. When using this parameter, the configuration
+     * will expect the capitalized name of the region (for example AP_EAST_1)
+     * You'll need to use the name Regions.EU_WEST_1.name()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * A list of attribute names to receive when consuming. Multiple names can
      * be separated by comma.
@@ -197,10 +195,6 @@ public class SqsComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS SQS default configuration
-     */
-    private SqsConfigurationNestedConfiguration configuration;
-    /**
      * Define if you want to apply delaySeconds option to the queue or on single
      * messages
      */
@@ -243,14 +237,14 @@ public class SqsComponentConfiguration
      * Amazon docs.
      */
     private String redrivePolicy;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    /**
+     * Amazon AWS Access Key
+     */
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
     public String getAmazonAWSHost() {
         return amazonAWSHost;
@@ -274,6 +268,15 @@ public class SqsComponentConfiguration
 
     public void setAutoCreateQueue(Boolean autoCreateQueue) {
         this.autoCreateQueue = autoCreateQueue;
+    }
+
+    public SqsConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            SqsConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getProtocol() {
@@ -306,14 +309,6 @@ public class SqsComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 
     public String getAttributeNames() {
@@ -471,15 +466,6 @@ public class SqsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public SqsConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            SqsConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
-    }
-
     public Boolean getDelayQueue() {
         return delayQueue;
     }
@@ -551,6 +537,22 @@ public class SqsComponentConfiguration
 
     public void setRedrivePolicy(String redrivePolicy) {
         this.redrivePolicy = redrivePolicy;
+    }
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class SqsConfigurationNestedConfiguration {

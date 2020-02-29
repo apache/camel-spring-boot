@@ -41,9 +41,9 @@ public class ECS2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
+     * Component configuration
      */
-    private String accessKey;
+    private ECS2ConfigurationNestedConfiguration configuration;
     /**
      * To use a existing configured AWS ECS as client. The option is a
      * software.amazon.awssdk.services.ecs.EcsClient type.
@@ -77,29 +77,32 @@ public class ECS2ComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which ECS client needs to work
+     * The region in which ECS client needs to work. When using this parameter,
+     * the configuration will expect the lowercase name of the region (for
+     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS ECS default configuration
+     * Amazon AWS Access Key
      */
-    private ECS2ConfigurationNestedConfiguration configuration;
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
-    public String getAccessKey() {
-        return accessKey;
+    public ECS2ConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
     }
 
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
+    public void setConfiguration(
+            ECS2ConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getEcsClient() {
@@ -158,14 +161,6 @@ public class ECS2ComponentConfiguration
         this.region = region;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
@@ -174,13 +169,20 @@ public class ECS2ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public ECS2ConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setConfiguration(
-            ECS2ConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class ECS2ConfigurationNestedConfiguration {

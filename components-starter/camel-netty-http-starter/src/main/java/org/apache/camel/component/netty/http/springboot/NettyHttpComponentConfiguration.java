@@ -45,6 +45,11 @@ public class NettyHttpComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * To use the NettyConfiguration as configuration when creating endpoints.
+     * The option is a org.apache.camel.component.netty.NettyConfiguration type.
+     */
+    private String configuration;
+    /**
      * Whether or not to disconnect(close) from Netty Channel right after use.
      * Can be used for both consumer and producer.
      */
@@ -261,11 +266,6 @@ public class NettyHttpComponentConfiguration
      */
     private String channelGroup;
     /**
-     * To use the NettyConfiguration as configuration when creating endpoints.
-     * The option is a org.apache.camel.component.netty.NettyConfiguration type.
-     */
-    private String configuration;
-    /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * headers. The option is a org.apache.camel.spi.HeaderFilterStrategy type.
      */
@@ -413,6 +413,14 @@ public class NettyHttpComponentConfiguration
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
+
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
+    }
 
     public Boolean getDisconnect() {
         return disconnect;
@@ -680,14 +688,6 @@ public class NettyHttpComponentConfiguration
 
     public void setChannelGroup(String channelGroup) {
         this.channelGroup = channelGroup;
-    }
-
-    public String getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(String configuration) {
-        this.configuration = configuration;
     }
 
     public String getHeaderFilterStrategy() {

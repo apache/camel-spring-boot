@@ -45,6 +45,10 @@ public class MSKComponentConfiguration
      */
     private String accessKey;
     /**
+     * The component configuration
+     */
+    private MSKConfigurationNestedConfiguration configuration;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -77,7 +81,9 @@ public class MSKComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which MSK client needs to work
+     * The region in which MSK client needs to work. When using this parameter,
+     * the configuration will expect the capitalized name of the region (for
+     * example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name()
      */
     private String region;
     /**
@@ -89,10 +95,6 @@ public class MSKComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * The AWS MSK default configuration
-     */
-    private MSKConfigurationNestedConfiguration configuration;
 
     public String getAccessKey() {
         return accessKey;
@@ -100,6 +102,15 @@ public class MSKComponentConfiguration
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public MSKConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            MSKConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getLazyStartProducer() {
@@ -172,15 +183,6 @@ public class MSKComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public MSKConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            MSKConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public static class MSKConfigurationNestedConfiguration {

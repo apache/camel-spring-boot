@@ -41,7 +41,7 @@ The component supports 19 options, which are listed below.
 | *camel.component.aws-kms.proxy-host* | To define a proxy host when instantiating the KMS client |  | String
 | *camel.component.aws-kms.proxy-port* | To define a proxy port when instantiating the KMS client |  | Integer
 | *camel.component.aws-kms.proxy-protocol* | To define a proxy protocol when instantiating the KMS client |  | Protocol
-| *camel.component.aws-kms.region* | The region in which KMS client needs to work |  | String
+| *camel.component.aws-kms.region* | The region in which KMS client needs to work. When using this parameter, the configuration will expect the capitalized name of the region (for example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name() |  | String
 | *camel.component.aws-kms.secret-key* | Amazon AWS Secret Key |  | String
 |===
 // spring-boot-auto-configure options: END

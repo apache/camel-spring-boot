@@ -50,6 +50,10 @@ public class EC2ComponentConfiguration
      */
     private String amazonEc2Client;
     /**
+     * The component configuration
+     */
+    private EC2ConfigurationNestedConfiguration configuration;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -80,7 +84,9 @@ public class EC2ComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which EC2 client needs to work
+     * The region in which ECS client needs to work. When using this parameter,
+     * the configuration will expect the lowercase name of the region (for
+     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
     /**
@@ -92,10 +98,6 @@ public class EC2ComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * The AWS EC2 default configuration
-     */
-    private EC2ConfigurationNestedConfiguration configuration;
 
     public String getAccessKey() {
         return accessKey;
@@ -111,6 +113,15 @@ public class EC2ComponentConfiguration
 
     public void setAmazonEc2Client(String amazonEc2Client) {
         this.amazonEc2Client = amazonEc2Client;
+    }
+
+    public EC2ConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            EC2ConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getLazyStartProducer() {
@@ -175,15 +186,6 @@ public class EC2ComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public EC2ConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            EC2ConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public static class EC2ConfigurationNestedConfiguration {

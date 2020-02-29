@@ -42,10 +42,6 @@ public class SnsComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * To use the AmazonSNS as the client. The option is a
      * com.amazonaws.services.sns.AmazonSNS type.
      */
@@ -59,6 +55,10 @@ public class SnsComponentConfiguration
      * Setting the autocreation of the topic
      */
     private Boolean autoCreateTopic = true;
+    /**
+     * The component configuration
+     */
+    private SnsConfigurationNestedConfiguration configuration;
     /**
      * The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a
      * custom CMK.
@@ -100,13 +100,11 @@ public class SnsComponentConfiguration
      */
     private String queueUrl;
     /**
-     * The region in which SNS client needs to work
+     * The region in which SNS client needs to work. When using this parameter,
+     * the configuration will expect the capitalized name of the region (for
+     * example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * Define if Server Side Encryption is enabled or not on the topic
      */
@@ -126,17 +124,13 @@ public class SnsComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS SNS default configuration
+     * Amazon AWS Access Key
      */
-    private SnsConfigurationNestedConfiguration configuration;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
     public String getAmazonSNSClient() {
         return amazonSNSClient;
@@ -160,6 +154,15 @@ public class SnsComponentConfiguration
 
     public void setAutoCreateTopic(Boolean autoCreateTopic) {
         this.autoCreateTopic = autoCreateTopic;
+    }
+
+    public SnsConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            SnsConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getKmsMasterKeyId() {
@@ -234,14 +237,6 @@ public class SnsComponentConfiguration
         this.region = region;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
     public Boolean getServerSideEncryptionEnabled() {
         return serverSideEncryptionEnabled;
     }
@@ -275,13 +270,20 @@ public class SnsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public SnsConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setConfiguration(
-            SnsConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class SnsConfigurationNestedConfiguration {

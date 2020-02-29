@@ -41,13 +41,13 @@ public class Translate2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * Being able to autodetect the source language
      */
     private Boolean autodetectSourceLanguage = false;
+    /**
+     * Component configuration
+     */
+    private Translate2ConfigurationNestedConfiguration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -76,13 +76,11 @@ public class Translate2ComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which Translate client needs to work
+     * The region in which Translate client needs to work. When using this
+     * parameter, the configuration will expect the lowercase name of the region
+     * (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * Source language to use
      */
@@ -102,17 +100,13 @@ public class Translate2ComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS Translate default configuration
+     * Amazon AWS Access Key
      */
-    private Translate2ConfigurationNestedConfiguration configuration;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
     public Boolean getAutodetectSourceLanguage() {
         return autodetectSourceLanguage;
@@ -120,6 +114,15 @@ public class Translate2ComponentConfiguration
 
     public void setAutodetectSourceLanguage(Boolean autodetectSourceLanguage) {
         this.autodetectSourceLanguage = autodetectSourceLanguage;
+    }
+
+    public Translate2ConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            Translate2ConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getLazyStartProducer() {
@@ -170,14 +173,6 @@ public class Translate2ComponentConfiguration
         this.region = region;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
     public String getSourceLanguage() {
         return sourceLanguage;
     }
@@ -210,13 +205,20 @@ public class Translate2ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Translate2ConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setConfiguration(
-            Translate2ConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class Translate2ConfigurationNestedConfiguration {

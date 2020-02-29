@@ -41,9 +41,9 @@ public class EKS2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
+     * Component configuration
      */
-    private String accessKey;
+    private EKS2ConfigurationNestedConfiguration configuration;
     /**
      * To use a existing configured AWS EKS as client. The option is a
      * software.amazon.awssdk.services.eks.EksClient type.
@@ -77,29 +77,32 @@ public class EKS2ComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which EKS client needs to work
+     * The region in which EKS client needs to work. When using this parameter,
+     * the configuration will expect the lowercase name of the region (for
+     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS EKS default configuration
+     * Amazon AWS Access Key
      */
-    private EKS2ConfigurationNestedConfiguration configuration;
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
-    public String getAccessKey() {
-        return accessKey;
+    public EKS2ConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
     }
 
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
+    public void setConfiguration(
+            EKS2ConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getEksClient() {
@@ -158,14 +161,6 @@ public class EKS2ComponentConfiguration
         this.region = region;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
@@ -174,13 +169,20 @@ public class EKS2ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public EKS2ConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setConfiguration(
-            EKS2ConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class EKS2ConfigurationNestedConfiguration {

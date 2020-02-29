@@ -41,14 +41,14 @@ public class Ses2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * To use the AmazonSimpleEmailService as the client. The option is a
      * software.amazon.awssdk.services.ses.SesClient type.
      */
     private String amazonSESClient;
+    /**
+     * component configuration
+     */
+    private Ses2ConfigurationNestedConfiguration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -73,7 +73,9 @@ public class Ses2ComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which SES client needs to work
+     * The region in which SES client needs to work. When using this parameter,
+     * the configuration will expect the lowercase name of the region (for
+     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
     /**
@@ -86,10 +88,6 @@ public class Ses2ComponentConfiguration
      * override it using 'CamelAwsSesReturnPath' header.
      */
     private String returnPath;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * The subject which is used if the message header 'CamelAwsSesSubject' is
      * not present.
@@ -106,17 +104,13 @@ public class Ses2ComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS SES default configuration
+     * Amazon AWS Access Key
      */
-    private Ses2ConfigurationNestedConfiguration configuration;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
     public String getAmazonSESClient() {
         return amazonSESClient;
@@ -124,6 +118,15 @@ public class Ses2ComponentConfiguration
 
     public void setAmazonSESClient(String amazonSESClient) {
         this.amazonSESClient = amazonSESClient;
+    }
+
+    public Ses2ConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            Ses2ConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getLazyStartProducer() {
@@ -182,14 +185,6 @@ public class Ses2ComponentConfiguration
         this.returnPath = returnPath;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
     public String getSubject() {
         return subject;
     }
@@ -214,13 +209,20 @@ public class Ses2ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Ses2ConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setConfiguration(
-            Ses2ConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class Ses2ConfigurationNestedConfiguration {

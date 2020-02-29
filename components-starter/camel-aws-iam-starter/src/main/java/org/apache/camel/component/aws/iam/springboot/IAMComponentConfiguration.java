@@ -45,6 +45,10 @@ public class IAMComponentConfiguration
      */
     private String accessKey;
     /**
+     * The component configuration
+     */
+    private IAMConfigurationNestedConfiguration configuration;
+    /**
      * To use a existing configured AWS IAM as client. The option is a
      * com.amazonaws.services.identitymanagement.AmazonIdentityManagement type.
      */
@@ -77,7 +81,9 @@ public class IAMComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which IAM client needs to work
+     * The region in which IAM client needs to work. When using this parameter,
+     * the configuration will expect the capitalized name of the region (for
+     * example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name()
      */
     private String region;
     /**
@@ -89,10 +95,6 @@ public class IAMComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * The AWS IAM default configuration
-     */
-    private IAMConfigurationNestedConfiguration configuration;
 
     public String getAccessKey() {
         return accessKey;
@@ -100,6 +102,15 @@ public class IAMComponentConfiguration
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public IAMConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            IAMConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public String getIamClient() {
@@ -172,15 +183,6 @@ public class IAMComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public IAMConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            IAMConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public static class IAMConfigurationNestedConfiguration {

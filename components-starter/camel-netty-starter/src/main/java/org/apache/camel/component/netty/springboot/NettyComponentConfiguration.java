@@ -53,6 +53,10 @@ public class NettyComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * To use the NettyConfiguration as configuration when creating endpoints.
+     */
+    private NettyConfigurationNestedConfiguration configuration;
+    /**
      * Whether or not to disconnect(close) from Netty Channel right after use.
      * Can be used for both consumer and producer.
      */
@@ -304,10 +308,6 @@ public class NettyComponentConfiguration
      */
     private String channelGroup;
     /**
-     * To use the NettyConfiguration as configuration when creating endpoints.
-     */
-    private NettyConfigurationNestedConfiguration configuration;
-    /**
      * Whether to use native transport instead of NIO. Native transport takes
      * advantage of the host operating system and is only supported on some
      * platforms. You need to add the netty JAR for the host operating system
@@ -476,6 +476,15 @@ public class NettyComponentConfiguration
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
+
+    public NettyConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            NettyConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
+    }
 
     public Boolean getDisconnect() {
         return disconnect;
@@ -799,15 +808,6 @@ public class NettyComponentConfiguration
 
     public void setChannelGroup(String channelGroup) {
         this.channelGroup = channelGroup;
-    }
-
-    public NettyConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            NettyConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public Boolean getNativeTransport() {

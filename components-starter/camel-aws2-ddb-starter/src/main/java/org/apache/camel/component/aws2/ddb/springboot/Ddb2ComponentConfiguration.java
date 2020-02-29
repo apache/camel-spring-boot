@@ -42,14 +42,14 @@ public class Ddb2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * To use the AmazonDynamoDB as the client. The option is a
      * software.amazon.awssdk.services.dynamodb.DynamoDbClient type.
      */
     private String amazonDDBClient;
+    /**
+     * The component configuration
+     */
+    private Ddb2ConfigurationNestedConfiguration configuration;
     /**
      * Determines whether or not strong consistency should be enforced when data
      * is read.
@@ -102,10 +102,6 @@ public class Ddb2ComponentConfiguration
      */
     private String region;
     /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
-    /**
      * The provisioned throughput to reserved for writing resources to your
      * table
      */
@@ -116,17 +112,13 @@ public class Ddb2ComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS DDB default configuration
+     * Amazon AWS Access Key
      */
-    private Ddb2ConfigurationNestedConfiguration configuration;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
     public String getAmazonDDBClient() {
         return amazonDDBClient;
@@ -134,6 +126,15 @@ public class Ddb2ComponentConfiguration
 
     public void setAmazonDDBClient(String amazonDDBClient) {
         this.amazonDDBClient = amazonDDBClient;
+    }
+
+    public Ddb2ConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            Ddb2ConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getConsistentRead() {
@@ -216,14 +217,6 @@ public class Ddb2ComponentConfiguration
         this.region = region;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
     public Long getWriteCapacity() {
         return writeCapacity;
     }
@@ -240,13 +233,20 @@ public class Ddb2ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Ddb2ConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setConfiguration(
-            Ddb2ConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class Ddb2ConfigurationNestedConfiguration {

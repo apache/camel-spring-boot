@@ -41,14 +41,14 @@ public class Cw2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * To use the AmazonCloudWatch as the client. The option is a
      * software.amazon.awssdk.services.cloudwatch.CloudWatchClient type.
      */
     private String amazonCwClient;
+    /**
+     * The component configuration
+     */
+    private Cw2ConfigurationNestedConfiguration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -77,13 +77,11 @@ public class Cw2ComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which CW client needs to work
+     * The region in which EKS client needs to work. When using this parameter,
+     * the configuration will expect the lowercase name of the region (for
+     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * The metric timestamp. The option is a java.time.Instant type.
      */
@@ -102,17 +100,13 @@ public class Cw2ComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * The AWS CW default configuration
+     * Amazon AWS Access Key
      */
-    private Cw2ConfigurationNestedConfiguration configuration;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
     public String getAmazonCwClient() {
         return amazonCwClient;
@@ -120,6 +114,15 @@ public class Cw2ComponentConfiguration
 
     public void setAmazonCwClient(String amazonCwClient) {
         this.amazonCwClient = amazonCwClient;
+    }
+
+    public Cw2ConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            Cw2ConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getLazyStartProducer() {
@@ -170,14 +173,6 @@ public class Cw2ComponentConfiguration
         this.region = region;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
     public String getTimestamp() {
         return timestamp;
     }
@@ -210,13 +205,20 @@ public class Cw2ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public Cw2ConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setConfiguration(
-            Cw2ConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class Cw2ConfigurationNestedConfiguration {

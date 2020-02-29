@@ -41,7 +41,7 @@ The component supports 19 options, which are listed below.
 | *camel.component.aws-msk.proxy-host* | To define a proxy host when instantiating the MSK client |  | String
 | *camel.component.aws-msk.proxy-port* | To define a proxy port when instantiating the MSK client |  | Integer
 | *camel.component.aws-msk.proxy-protocol* | To define a proxy protocol when instantiating the MSK client |  | Protocol
-| *camel.component.aws-msk.region* | The region in which MSK client needs to work |  | String
+| *camel.component.aws-msk.region* | The region in which MSK client needs to work. When using this parameter, the configuration will expect the capitalized name of the region (for example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name() |  | String
 | *camel.component.aws-msk.secret-key* | Amazon AWS Secret Key |  | String
 |===
 // spring-boot-auto-configure options: END

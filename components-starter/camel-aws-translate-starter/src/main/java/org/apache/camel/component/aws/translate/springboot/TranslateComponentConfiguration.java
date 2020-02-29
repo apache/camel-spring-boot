@@ -49,6 +49,10 @@ public class TranslateComponentConfiguration
      */
     private Boolean autodetectSourceLanguage = false;
     /**
+     * The component configuration
+     */
+    private TranslateConfigurationNestedConfiguration configuration;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -76,7 +80,10 @@ public class TranslateComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which Translate client needs to work
+     * The region in which Translate client needs to work. When using this
+     * parameter, the configuration will expect the capitalized name of the
+     * region (for example AP_EAST_1) You'll need to use the name
+     * Regions.EU_WEST_1.name()
      */
     private String region;
     /**
@@ -101,10 +108,6 @@ public class TranslateComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * The AWS Translate default configuration
-     */
-    private TranslateConfigurationNestedConfiguration configuration;
 
     public String getAccessKey() {
         return accessKey;
@@ -120,6 +123,15 @@ public class TranslateComponentConfiguration
 
     public void setAutodetectSourceLanguage(Boolean autodetectSourceLanguage) {
         this.autodetectSourceLanguage = autodetectSourceLanguage;
+    }
+
+    public TranslateConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(
+            TranslateConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getLazyStartProducer() {
@@ -208,15 +220,6 @@ public class TranslateComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public TranslateConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            TranslateConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public static class TranslateConfigurationNestedConfiguration {

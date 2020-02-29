@@ -42,9 +42,9 @@ public class Lambda2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
+     * Component configuration
      */
-    private String accessKey;
+    private Lambda2ConfigurationNestedConfiguration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -62,13 +62,11 @@ public class Lambda2ComponentConfiguration
      */
     private Lambda2Operations operation = Lambda2Operations.invokeFunction;
     /**
-     * Amazon AWS Region
+     * The region in which ECS client needs to work. When using this parameter,
+     * the configuration will expect the lowercase name of the region (for
+     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
     /**
      * To use a existing configured AwsLambdaClient as client. The option is a
      * software.amazon.awssdk.services.lambda.LambdaClient type.
@@ -79,10 +77,6 @@ public class Lambda2ComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * The AWS Lambda default configuration
-     */
-    private Lambda2ConfigurationNestedConfiguration configuration;
     /**
      * To define a proxy host when instantiating the Lambda client
      */
@@ -95,13 +89,22 @@ public class Lambda2ComponentConfiguration
      * To define a proxy protocol when instantiating the Lambda client
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
+     * Amazon AWS Access Key
+     */
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
 
-    public String getAccessKey() {
-        return accessKey;
+    public Lambda2ConfigurationNestedConfiguration getConfiguration() {
+        return configuration;
     }
 
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
+    public void setConfiguration(
+            Lambda2ConfigurationNestedConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getLazyStartProducer() {
@@ -128,14 +131,6 @@ public class Lambda2ComponentConfiguration
         this.region = region;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
     public String getAwsLambdaClient() {
         return awsLambdaClient;
     }
@@ -150,15 +145,6 @@ public class Lambda2ComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Lambda2ConfigurationNestedConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(
-            Lambda2ConfigurationNestedConfiguration configuration) {
-        this.configuration = configuration;
     }
 
     public String getProxyHost() {
@@ -183,6 +169,22 @@ public class Lambda2ComponentConfiguration
 
     public void setProxyProtocol(Protocol proxyProtocol) {
         this.proxyProtocol = proxyProtocol;
+    }
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public static class Lambda2ConfigurationNestedConfiguration {

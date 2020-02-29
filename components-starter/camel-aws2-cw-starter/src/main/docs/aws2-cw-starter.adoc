@@ -45,7 +45,7 @@ The component supports 26 options, which are listed below.
 | *camel.component.aws2-cw.proxy-host* | To define a proxy host when instantiating the CW client |  | String
 | *camel.component.aws2-cw.proxy-port* | To define a proxy port when instantiating the CW client |  | Integer
 | *camel.component.aws2-cw.proxy-protocol* | To define a proxy protocol when instantiating the CW client |  | Protocol
-| *camel.component.aws2-cw.region* | The region in which CW client needs to work |  | String
+| *camel.component.aws2-cw.region* | The region in which EKS client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
 | *camel.component.aws2-cw.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws2-cw.timestamp* | The metric timestamp. The option is a java.time.Instant type. |  | String
 | *camel.component.aws2-cw.unit* | The metric unit |  | String
