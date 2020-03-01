@@ -47,7 +47,7 @@ public class ActiveMQComponentConfiguration
     /**
      * Sets the broker URL to use to connect to ActiveMQ
      */
-    private String brokerURL;
+    private String brokerUrl;
     /**
      * Sets the JMS client ID to use. Note that this value, if specified, must
      * be unique and can only be used by a single JMS connection instance. It is
@@ -463,7 +463,7 @@ public class ActiveMQComponentConfiguration
      * actual JMSMessageID that was used by the JMS client when the message was
      * sent to the JMS destination.
      */
-    private Boolean includeSentJMSMessageID = false;
+    private Boolean includeSentJmsMessageId = false;
     /**
      * Sets the cache level by name for the reply consumer when doing
      * request/reply over JMS. This option only applies when using fixed reply
@@ -579,7 +579,7 @@ public class ActiveMQComponentConfiguration
      * and JMSXUserID etc. Note: If you are using a custom headerFilterStrategy
      * then this option does not apply.
      */
-    private Boolean includeAllJMSXProperties = false;
+    private Boolean includeAllJmsxProperties = false;
     /**
      * Pluggable strategy for encoding and decoding JMS keys so they can be
      * compliant with the JMS specification. Camel provides two implementations
@@ -702,7 +702,7 @@ public class ActiveMQComponentConfiguration
      * Specifies whether JMSMessageID should always be used as JMSCorrelationID
      * for InOut messages.
      */
-    private Boolean useMessageIDAsCorrelationID = false;
+    private Boolean useMessageIdAsCorrelationId = false;
     /**
      * Number of times to wait for provisional correlation id to be updated to
      * the actual correlation id when doing request/reply over JMS and when the
@@ -764,12 +764,12 @@ public class ActiveMQComponentConfiguration
      */
     private Integer transactionTimeout = -1;
 
-    public String getBrokerURL() {
-        return brokerURL;
+    public String getBrokerUrl() {
+        return brokerUrl;
     }
 
-    public void setBrokerURL(String brokerURL) {
-        this.brokerURL = brokerURL;
+    public void setBrokerUrl(String brokerUrl) {
+        this.brokerUrl = brokerUrl;
     }
 
     public String getClientId() {
@@ -1209,12 +1209,12 @@ public class ActiveMQComponentConfiguration
         this.forceSendOriginalMessage = forceSendOriginalMessage;
     }
 
-    public Boolean getIncludeSentJMSMessageID() {
-        return includeSentJMSMessageID;
+    public Boolean getIncludeSentJmsMessageId() {
+        return includeSentJmsMessageId;
     }
 
-    public void setIncludeSentJMSMessageID(Boolean includeSentJMSMessageID) {
-        this.includeSentJMSMessageID = includeSentJMSMessageID;
+    public void setIncludeSentJmsMessageId(Boolean includeSentJmsMessageId) {
+        this.includeSentJmsMessageId = includeSentJmsMessageId;
     }
 
     public String getReplyToCacheLevelName() {
@@ -1332,12 +1332,12 @@ public class ActiveMQComponentConfiguration
         this.idleTaskExecutionLimit = idleTaskExecutionLimit;
     }
 
-    public Boolean getIncludeAllJMSXProperties() {
-        return includeAllJMSXProperties;
+    public Boolean getIncludeAllJmsxProperties() {
+        return includeAllJmsxProperties;
     }
 
-    public void setIncludeAllJMSXProperties(Boolean includeAllJMSXProperties) {
-        this.includeAllJMSXProperties = includeAllJMSXProperties;
+    public void setIncludeAllJmsxProperties(Boolean includeAllJmsxProperties) {
+        this.includeAllJmsxProperties = includeAllJmsxProperties;
     }
 
     public JmsKeyFormatStrategy getJmsKeyFormatStrategy() {
@@ -1463,13 +1463,13 @@ public class ActiveMQComponentConfiguration
         this.transferExchange = transferExchange;
     }
 
-    public Boolean getUseMessageIDAsCorrelationID() {
-        return useMessageIDAsCorrelationID;
+    public Boolean getUseMessageIdAsCorrelationId() {
+        return useMessageIdAsCorrelationId;
     }
 
-    public void setUseMessageIDAsCorrelationID(
-            Boolean useMessageIDAsCorrelationID) {
-        this.useMessageIDAsCorrelationID = useMessageIDAsCorrelationID;
+    public void setUseMessageIdAsCorrelationId(
+            Boolean useMessageIdAsCorrelationId) {
+        this.useMessageIdAsCorrelationId = useMessageIdAsCorrelationId;
     }
 
     public Integer getWaitForProvisionCorrelationToBeUpdatedCounter() {

@@ -40,7 +40,7 @@ public class StompComponentConfiguration
     /**
      * The URI of the Stomp broker to connect to
      */
-    private String brokerURL = "tcp://localhost:61613";
+    private String brokerUrl = "tcp://localhost:61613";
     /**
      * To set custom headers. The option is a java.util.Properties type.
      */
@@ -107,12 +107,12 @@ public class StompComponentConfiguration
      */
     private Boolean useGlobalSslContextParameters = false;
 
-    public String getBrokerURL() {
-        return brokerURL;
+    public String getBrokerUrl() {
+        return brokerUrl;
     }
 
-    public void setBrokerURL(String brokerURL) {
-        this.brokerURL = brokerURL;
+    public void setBrokerUrl(String brokerUrl) {
+        this.brokerUrl = brokerUrl;
     }
 
     public String getCustomHeaders() {

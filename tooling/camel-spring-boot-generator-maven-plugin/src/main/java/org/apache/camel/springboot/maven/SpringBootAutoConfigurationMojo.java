@@ -528,10 +528,26 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     overrideComponentName = model.getArtifactId().replace("camel-", "");
                 }
 
+                beforeGenerateComponentSource(model);
+
                 createComponentConfigurationSource(pkg, model, overrideComponentName);
                 createComponentAutoConfigurationSource(pkg, model, aliases, overrideComponentName);
                 createComponentSpringFactorySource(pkg, model);
             }
+        }
+    }
+
+    private void beforeGenerateComponentSource(ComponentModel model) {
+        if ("activemq".equals(model.getScheme()) || "amqp".equals(model.getScheme()) || "stomp".equals(model.getScheme())) {
+            // we want brokerURL to be brokerUrl so its generated with a nice name for spring boot (and some other options too)
+            model.getComponentOptions().stream()
+                    .filter(o -> "brokerURL".equals(o.getName())).findFirst().ifPresent(o -> o.setName("brokerUrl"));
+            model.getComponentOptions().stream()
+                    .filter(o -> "useMessageIDAsCorrelationID".equals(o.getName())).findFirst().ifPresent(o -> o.setName("useMessageIdAsCorrelationId"));
+            model.getComponentOptions().stream()
+                    .filter(o -> "includeAllJMSXProperties".equals(o.getName())).findFirst().ifPresent(o -> o.setName("includeAllJmsxProperties"));
+            model.getComponentOptions().stream()
+                    .filter(o -> "includeSentJMSMessageID".equals(o.getName())).findFirst().ifPresent(o -> o.setName("includeSentJmsMessageId"));
         }
     }
 
