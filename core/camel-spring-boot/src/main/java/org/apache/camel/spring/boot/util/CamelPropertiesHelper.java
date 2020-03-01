@@ -20,8 +20,11 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.Component;
 import org.apache.camel.PropertyBindingException;
+import org.apache.camel.spi.PropertyConfigurer;
 import org.apache.camel.support.PropertyBindingSupport;
+import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.util.ObjectHelper;
 
 /**
@@ -62,11 +65,19 @@ public final class CamelPropertiesHelper {
      * @throws IllegalArgumentException is thrown if an option cannot be configured on the bean because there is no suitable setter method and failOnNoSet is true.
      * @throws Exception for any other kind of error
      */
+    @Deprecated
     public static boolean setCamelProperties(CamelContext context, Object target, Map<String, Object> properties, boolean failIfNotSet) throws Exception {
         ObjectHelper.notNull(context, "context");
         ObjectHelper.notNull(target, "target");
         ObjectHelper.notNull(properties, "properties");
         boolean rc = false;
+
+        PropertyConfigurer configurer = null;
+        if (target instanceof Component) {
+            // the component needs to be initialized to have the configurer ready
+            ServiceHelper.initService(target);
+            configurer = ((Component) target).getComponentPropertyConfigurer();
+        }
 
         Iterator<Map.Entry<String, Object>> it = properties.entrySet().iterator();
         while (it.hasNext()) {
@@ -76,7 +87,10 @@ public final class CamelPropertiesHelper {
             String stringValue = value != null ? value.toString() : null;
             boolean hit = false;
             try {
-                hit = PropertyBindingSupport.build().withIgnoreCase(true).bind(context, target, name, value);
+                hit = PropertyBindingSupport.build()
+                        .withConfigurer(configurer)
+                        .withIgnoreCase(true)
+                        .bind(context, target, name, value);
             } catch (PropertyBindingException e) {
                 // no we could not and this would be thrown if we attempted to set a value on a property which we cannot do type conversion as
                 // then maybe the value refers to a spring bean in the registry so try this
