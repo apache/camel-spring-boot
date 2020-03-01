@@ -9,7 +9,7 @@ When using mock with Spring Boot make sure to use the following Maven dependency
 [source,xml]
 ----
 <dependency>
-  <groupId>org.apache.camel.springboot</groupId>
+  <groupId>org.apache.camel</groupId>
   <artifactId>camel-mock-starter</artifactId>
   <version>x.x.x</version>
   <!-- use the same version as your Camel core version -->
