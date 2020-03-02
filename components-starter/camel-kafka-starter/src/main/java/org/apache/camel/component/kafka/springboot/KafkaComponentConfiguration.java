@@ -651,6 +651,10 @@ public class KafkaComponentConfiguration
      */
     private String sslTrustmanagerAlgorithm = "PKIX";
     /**
+     * The location of the trust store file.
+     */
+    private String sslTruststoreLocation;
+    /**
      * The file format of the trust store file. Default value is JKS.
      */
     private String sslTruststoreType = "JKS";
@@ -661,10 +665,6 @@ public class KafkaComponentConfiguration
      * Confluent Platform (not standard Apache Kafka)
      */
     private String schemaRegistryURL;
-    /**
-     * The location of the trust store file.
-     */
-    private String sslTruststoreLocation;
     /**
      * The password for the trust store file.
      */
@@ -1404,6 +1404,14 @@ public class KafkaComponentConfiguration
         this.sslTrustmanagerAlgorithm = sslTrustmanagerAlgorithm;
     }
 
+    public String getSslTruststoreLocation() {
+        return sslTruststoreLocation;
+    }
+
+    public void setSslTruststoreLocation(String sslTruststoreLocation) {
+        this.sslTruststoreLocation = sslTruststoreLocation;
+    }
+
     public String getSslTruststoreType() {
         return sslTruststoreType;
     }
@@ -1418,14 +1426,6 @@ public class KafkaComponentConfiguration
 
     public void setSchemaRegistryURL(String schemaRegistryURL) {
         this.schemaRegistryURL = schemaRegistryURL;
-    }
-
-    public String getSslTruststoreLocation() {
-        return sslTruststoreLocation;
-    }
-
-    public void setSslTruststoreLocation(String sslTruststoreLocation) {
-        this.sslTruststoreLocation = sslTruststoreLocation;
     }
 
     public String getSslTruststorePassword() {
