@@ -358,6 +358,9 @@ public final class ArquillianPackager {
         ignore.add("org.apache.camel:camel-spring-cloud");
         ignore.add("org.apache.camel:camel-spring-boot");
 
+        // google grpc is a mix of all sort of different versions
+        ignore.add("com.google.api.grpc");
+
         Map<String, Map<String, String>> status = new TreeMap<>();
         Set<String> mismatches = new TreeSet<>();
         for (MavenResolvedArtifact a : dependencyArtifacts) {
