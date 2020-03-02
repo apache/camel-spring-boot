@@ -16,20 +16,17 @@
  */
 package org.apache.camel.component.reactive.streams.springboot;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.reactive.streams.ReactiveStreamsHelper;
 import org.apache.camel.component.reactive.streams.api.CamelReactiveStreamsService;
 import org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration;
-import org.apache.camel.support.IntrospectionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 
@@ -46,13 +43,19 @@ public class ReactiveStreamsServiceAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnClass(CamelContext.class)
-    public CamelReactiveStreamsService camelReactiveStreamsService() throws Exception {
+    public CamelReactiveStreamsService camelReactiveStreamsService(ApplicationContext ac) throws Exception {
         ReactiveStreamsEngineConfiguration engineConfiguration = new ReactiveStreamsEngineConfiguration();
 
-        if (configuration.getInternalEngineConfiguration() != null) {
-            Map<String, Object> parameters = new HashMap<>();
-            IntrospectionSupport.getProperties(configuration.getInternalEngineConfiguration(), parameters, null, false);
-            IntrospectionSupport.setProperties(context, context.getTypeConverter(), engineConfiguration, parameters);
+        if (configuration.getReactiveStreamsEngineConfiguration() != null) {
+            engineConfiguration = ac.getBean(configuration.getReactiveStreamsEngineConfiguration(), ReactiveStreamsEngineConfiguration.class);
+        } else {
+            engineConfiguration.setThreadPoolName(configuration.getThreadPoolName());
+            if (configuration.getThreadPoolMinSize() != null) {
+                engineConfiguration.setThreadPoolMinSize(configuration.getThreadPoolMinSize());
+            }
+            if (configuration.getThreadPoolMaxSize() != null) {
+                engineConfiguration.setThreadPoolMinSize(configuration.getThreadPoolMaxSize());
+            }
         }
 
         return ReactiveStreamsHelper.resolveReactiveStreamsService(context, configuration.getServiceType(), engineConfiguration);

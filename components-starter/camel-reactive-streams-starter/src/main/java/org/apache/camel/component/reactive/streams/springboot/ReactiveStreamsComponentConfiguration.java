@@ -39,6 +39,20 @@ public class ReactiveStreamsComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The maximum number of threads used by the reactive streams internal
+     * engine.
+     */
+    private Integer threadPoolMaxSize = 10;
+    /**
+     * The minimum number of threads used by the reactive streams internal
+     * engine.
+     */
+    private Integer threadPoolMinSize;
+    /**
+     * The name of the thread pool used by the reactive streams internal engine.
+     */
+    private String threadPoolName = "CamelReactiveStreamsWorker";
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -69,10 +83,10 @@ public class ReactiveStreamsComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Configures the internal engine for Reactive Streams. The option is a
+     * To use an existing reactive stream engine configuration. The option is a
      * org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration type.
      */
-    private String internalEngineConfiguration;
+    private String reactiveStreamsEngineConfiguration;
     /**
      * Set the type of the underlying reactive streams implementation to use.
      * The implementation is looked up from the registry or using a
@@ -80,6 +94,30 @@ public class ReactiveStreamsComponentConfiguration
      * DefaultCamelReactiveStreamsService
      */
     private String serviceType;
+
+    public Integer getThreadPoolMaxSize() {
+        return threadPoolMaxSize;
+    }
+
+    public void setThreadPoolMaxSize(Integer threadPoolMaxSize) {
+        this.threadPoolMaxSize = threadPoolMaxSize;
+    }
+
+    public Integer getThreadPoolMinSize() {
+        return threadPoolMinSize;
+    }
+
+    public void setThreadPoolMinSize(Integer threadPoolMinSize) {
+        this.threadPoolMinSize = threadPoolMinSize;
+    }
+
+    public String getThreadPoolName() {
+        return threadPoolName;
+    }
+
+    public void setThreadPoolName(String threadPoolName) {
+        this.threadPoolName = threadPoolName;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -114,13 +152,13 @@ public class ReactiveStreamsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getInternalEngineConfiguration() {
-        return internalEngineConfiguration;
+    public String getReactiveStreamsEngineConfiguration() {
+        return reactiveStreamsEngineConfiguration;
     }
 
-    public void setInternalEngineConfiguration(
-            String internalEngineConfiguration) {
-        this.internalEngineConfiguration = internalEngineConfiguration;
+    public void setReactiveStreamsEngineConfiguration(
+            String reactiveStreamsEngineConfiguration) {
+        this.reactiveStreamsEngineConfiguration = reactiveStreamsEngineConfiguration;
     }
 
     public String getServiceType() {

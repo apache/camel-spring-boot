@@ -51,7 +51,7 @@ import static org.junit.Assert.assertTrue;
         ReactiveStreamsAutoConfigurationTest.TestConfiguration.class
     },
     properties = {
-        "camel.component.reactive-streams.internal-engine-configuration.thread-pool-name=rs-test"
+        "camel.component.reactive-streams.thread-pool-name=rs-test"
     }
 )
 public class ReactiveStreamsAutoConfigurationTest {
@@ -61,17 +61,17 @@ public class ReactiveStreamsAutoConfigurationTest {
     private CamelReactiveStreamsService reactiveStreamsService;
 
     @Test
-    public void testConfiguration() throws InterruptedException {
+    public void testConfiguration() throws Exception {
         CamelReactiveStreamsService service = CamelReactiveStreams.get(context);
         assertTrue(service instanceof DefaultCamelReactiveStreamsService);
         assertEquals(service, reactiveStreamsService);
 
         ReactiveStreamsComponent component = context.getComponent(ReactiveStreamsConstants.SCHEME, ReactiveStreamsComponent.class);
-        assertEquals("rs-test", component.getInternalEngineConfiguration().getThreadPoolName());
+        assertEquals("rs-test", component.getThreadPoolName());
     }
 
     @Test
-    public void testService() throws InterruptedException {
+    public void testService() throws Exception {
         CamelReactiveStreamsService service = CamelReactiveStreams.get(context);
         CountDownLatch latch = new CountDownLatch(1);
         String[] res = new String[1];
