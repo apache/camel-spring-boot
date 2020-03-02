@@ -74,6 +74,17 @@ public class XmlVerifierComponentConfiguration
      */
     private Boolean omitXmlDeclaration = false;
     /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
      * Sets the output node search value for determining the node from the XML
      * signature document which shall be set to the output message body. The
      * class of the value depends on the type of the output node search. The
@@ -111,17 +122,6 @@ public class XmlVerifierComponentConfiguration
      * by the header XmlSignatureConstants#HEADER_SCHEMA_RESOURCE_URI.
      */
     private String schemaResourceUri;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
     /**
      * Enables secure validation. If true then secure validation is enabled.
      */
@@ -240,6 +240,14 @@ public class XmlVerifierComponentConfiguration
         this.omitXmlDeclaration = omitXmlDeclaration;
     }
 
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
     public String getOutputNodeSearch() {
         return outputNodeSearch;
     }
@@ -278,14 +286,6 @@ public class XmlVerifierComponentConfiguration
 
     public void setSchemaResourceUri(String schemaResourceUri) {
         this.schemaResourceUri = schemaResourceUri;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getSecureValidation() {
