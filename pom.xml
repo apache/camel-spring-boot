@@ -120,7 +120,7 @@
         <arquillian-version>1.5.0.Final</arquillian-version>
         <asciidoctorj-version>2.1.0</asciidoctorj-version>
         <atomix-version>1.0.8</atomix-version>
-        <avro-version>1.9.1</avro-version>
+        <avro-version>1.8.1</avro-version>
         <cassandra-driver-guava-version>19.0</cassandra-driver-guava-version>
         <cdi-api-2.0-version>2.0</cdi-api-2.0-version>
         <curator-version>2.12.0</curator-version>
