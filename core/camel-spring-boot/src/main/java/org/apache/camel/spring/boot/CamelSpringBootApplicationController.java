@@ -52,6 +52,11 @@ public class CamelSpringBootApplicationController {
             }
 
             @Override
+            protected void postProcessCamelContext(CamelContext camelContext) throws Exception {
+                // spring boot has configured camel context and no post processing is needed
+            }
+
+            @Override
             protected void doStop() throws Exception {
                 LOG.debug("Controller is shutting down CamelContext");
                 try {
