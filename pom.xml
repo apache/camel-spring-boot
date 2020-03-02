@@ -158,7 +158,7 @@
         <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
         <mvel-version>2.4.5.Final</mvel-version>
         <mycila-license-version>3.0</mycila-license-version>
-        <openjpa-version>3.1.0</openjpa-version>
+        <openjpa-version>3.1.1</openjpa-version>
         <opentracing-version>0.33.0</opentracing-version>
         <os-maven-plugin-version>1.6.0</os-maven-plugin-version>
         <protobuf-maven-plugin-version>0.6.1</protobuf-maven-plugin-version>
