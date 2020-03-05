@@ -338,18 +338,18 @@ public class KafkaComponentConfiguration
      * under load when records arrive faster than they can be sent out. However
      * in some circumstances the client may want to reduce the number of
      * requests even under moderate load. This setting accomplishes this by
-     * adding a small amount of artificial delaythat is, rather than immediately
-     * sending out a record the producer will wait for up to the given delay to
-     * allow other records to be sent so that the sends can be batched together.
-     * This can be thought of as analogous to Nagle's algorithm in TCP. This
-     * setting gives the upper bound on the delay for batching: once we get
-     * batch.size worth of records for a partition it will be sent immediately
-     * regardless of this setting, however if we have fewer than this many bytes
-     * accumulated for this partition we will 'linger' for the specified time
-     * waiting for more records to show up. This setting defaults to 0 (i.e. no
-     * delay). Setting linger.ms=5, for example, would have the effect of
-     * reducing the number of requests sent but would add up to 5ms of latency
-     * to records sent in the absense of load.
+     * adding a small amount of artificial delay that is, rather than
+     * immediately sending out a record the producer will wait for up to the
+     * given delay to allow other records to be sent so that the sends can be
+     * batched together. This can be thought of as analogous to Nagle's
+     * algorithm in TCP. This setting gives the upper bound on the delay for
+     * batching: once we get batch.size worth of records for a partition it will
+     * be sent immediately regardless of this setting, however if we have fewer
+     * than this many bytes accumulated for this partition we will 'linger' for
+     * the specified time waiting for more records to show up. This setting
+     * defaults to 0 (i.e. no delay). Setting linger.ms=5, for example, would
+     * have the effect of reducing the number of requests sent but would add up
+     * to 5ms of latency to records sent in the absense of load.
      */
     private Integer lingerMs = 0;
     /**
@@ -523,6 +523,13 @@ public class KafkaComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * URL of the Confluent Platform schema registry servers to use. The format
+     * is host1:port1,host2:port2. This is known as schema.registry.url in the
+     * Confluent Platform documentation. This option is only available in the
+     * Confluent Platform (not standard Apache Kafka)
+     */
+    private String schemaRegistryURL;
+    /**
      * Sets interceptors for producer or consumers. Producer interceptors have
      * to be classes implementing
      * org.apache.kafka.clients.producer.ProducerInterceptor Consumer
@@ -574,8 +581,8 @@ public class KafkaComponentConfiguration
     private String saslKerberosServiceName;
     /**
      * The Simple Authentication and Security Layer (SASL) Mechanism used. For
-     * the valid values see a href=
-     * http://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtmlhttp://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml
+     * the valid values see
+     * http://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml
      */
     private String saslMechanism = "GSSAPI";
     /**
@@ -651,17 +658,6 @@ public class KafkaComponentConfiguration
      */
     private String sslTrustmanagerAlgorithm = "PKIX";
     /**
-     * The file format of the trust store file. Default value is JKS.
-     */
-    private String sslTruststoreType = "JKS";
-    /**
-     * URL of the Confluent Platform schema registry servers to use. The format
-     * is host1:port1,host2:port2. This is known as schema.registry.url in the
-     * Confluent Platform documentation. This option is only available in the
-     * Confluent Platform (not standard Apache Kafka)
-     */
-    private String schemaRegistryURL;
-    /**
      * The location of the trust store file.
      */
     private String sslTruststoreLocation;
@@ -669,6 +665,10 @@ public class KafkaComponentConfiguration
      * The password for the trust store file.
      */
     private String sslTruststorePassword;
+    /**
+     * The file format of the trust store file. Default value is JKS.
+     */
+    private String sslTruststoreType = "JKS";
     /**
      * Enable usage of global SSL context parameters.
      */
@@ -1226,6 +1226,14 @@ public class KafkaComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
+    public String getSchemaRegistryURL() {
+        return schemaRegistryURL;
+    }
+
+    public void setSchemaRegistryURL(String schemaRegistryURL) {
+        this.schemaRegistryURL = schemaRegistryURL;
+    }
+
     public String getInterceptorClasses() {
         return interceptorClasses;
     }
@@ -1404,22 +1412,6 @@ public class KafkaComponentConfiguration
         this.sslTrustmanagerAlgorithm = sslTrustmanagerAlgorithm;
     }
 
-    public String getSslTruststoreType() {
-        return sslTruststoreType;
-    }
-
-    public void setSslTruststoreType(String sslTruststoreType) {
-        this.sslTruststoreType = sslTruststoreType;
-    }
-
-    public String getSchemaRegistryURL() {
-        return schemaRegistryURL;
-    }
-
-    public void setSchemaRegistryURL(String schemaRegistryURL) {
-        this.schemaRegistryURL = schemaRegistryURL;
-    }
-
     public String getSslTruststoreLocation() {
         return sslTruststoreLocation;
     }
@@ -1434,6 +1426,14 @@ public class KafkaComponentConfiguration
 
     public void setSslTruststorePassword(String sslTruststorePassword) {
         this.sslTruststorePassword = sslTruststorePassword;
+    }
+
+    public String getSslTruststoreType() {
+        return sslTruststoreType;
+    }
+
+    public void setSslTruststoreType(String sslTruststoreType) {
+        this.sslTruststoreType = sslTruststoreType;
     }
 
     public Boolean getUseGlobalSslContextParameters() {

@@ -68,12 +68,6 @@ public class XmlVerifierComponentConfiguration
      */
     private String keySelector;
     /**
-     * Indicator whether the XML declaration in the outgoing message body should
-     * be omitted. Default value is false. Can be overwritten by the header
-     * XmlSignatureConstants#HEADER_OMIT_XML_DECLARATION.
-     */
-    private Boolean omitXmlDeclaration = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -84,6 +78,12 @@ public class XmlVerifierComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Indicator whether the XML declaration in the outgoing message body should
+     * be omitted. Default value is false. Can be overwritten by the header
+     * XmlSignatureConstants#HEADER_OMIT_XML_DECLARATION.
+     */
+    private Boolean omitXmlDeclaration = false;
     /**
      * Sets the output node search value for determining the node from the XML
      * signature document which shall be set to the output message body. The
@@ -232,20 +232,20 @@ public class XmlVerifierComponentConfiguration
         this.keySelector = keySelector;
     }
 
-    public Boolean getOmitXmlDeclaration() {
-        return omitXmlDeclaration;
-    }
-
-    public void setOmitXmlDeclaration(Boolean omitXmlDeclaration) {
-        this.omitXmlDeclaration = omitXmlDeclaration;
-    }
-
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getOmitXmlDeclaration() {
+        return omitXmlDeclaration;
+    }
+
+    public void setOmitXmlDeclaration(Boolean omitXmlDeclaration) {
+        this.omitXmlDeclaration = omitXmlDeclaration;
     }
 
     public String getOutputNodeSearch() {
