@@ -93,24 +93,6 @@ public class SWFComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
-     * To configure the ClientConfiguration using the key/values from the Map.
-     */
-    private Map<String, Object> clientConfigurationParameters;
-    /**
-     * To configure the StartWorkflowOptions using the key/values from the Map.
-     */
-    private Map<String, Object> startWorkflowOptionsParameters;
-    /**
-     * To configure the AmazonSimpleWorkflowClient using the key/values from the
-     * Map.
-     */
-    private Map<String, Object> sWClientParameters;
-    /**
      * The list name to consume activities from.
      */
     private String activityList;
@@ -134,6 +116,32 @@ public class SWFComponentConfiguration
      * com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeRegistrationOptions type.
      */
     private String activityTypeRegistrationOptions;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
+    /**
+     * To configure the ClientConfiguration using the key/values from the Map.
+     */
+    private Map<String, Object> clientConfigurationParameters;
+    /**
+     * To configure the StartWorkflowOptions using the key/values from the Map.
+     */
+    private Map<String, Object> startWorkflowOptionsParameters;
+    /**
+     * To configure the AmazonSimpleWorkflowClient using the key/values from the
+     * Map.
+     */
+    private Map<String, Object> sWClientParameters;
+    /**
+     * Amazon AWS Access Key.
+     */
+    private String accessKey;
+    /**
+     * Amazon AWS Secret Key.
+     */
+    private String secretKey;
     /**
      * The policy to use on child workflows when terminating a workflow.
      */
@@ -175,14 +183,6 @@ public class SWFComponentConfiguration
      * com.amazonaws.services.simpleworkflow.flow.WorkflowTypeRegistrationOptions type.
      */
     private String workflowTypeRegistrationOptions;
-    /**
-     * Amazon AWS Access Key.
-     */
-    private String accessKey;
-    /**
-     * Amazon AWS Secret Key.
-     */
-    private String secretKey;
 
     public String getAmazonSWClient() {
         return amazonSWClient;
@@ -256,40 +256,6 @@ public class SWFComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public Map<String, Object> getClientConfigurationParameters() {
-        return clientConfigurationParameters;
-    }
-
-    public void setClientConfigurationParameters(
-            Map<String, Object> clientConfigurationParameters) {
-        this.clientConfigurationParameters = clientConfigurationParameters;
-    }
-
-    public Map<String, Object> getStartWorkflowOptionsParameters() {
-        return startWorkflowOptionsParameters;
-    }
-
-    public void setStartWorkflowOptionsParameters(
-            Map<String, Object> startWorkflowOptionsParameters) {
-        this.startWorkflowOptionsParameters = startWorkflowOptionsParameters;
-    }
-
-    public Map<String, Object> getSWClientParameters() {
-        return sWClientParameters;
-    }
-
-    public void setSWClientParameters(Map<String, Object> sWClientParameters) {
-        this.sWClientParameters = sWClientParameters;
-    }
-
     public String getActivityList() {
         return activityList;
     }
@@ -330,6 +296,56 @@ public class SWFComponentConfiguration
     public void setActivityTypeRegistrationOptions(
             String activityTypeRegistrationOptions) {
         this.activityTypeRegistrationOptions = activityTypeRegistrationOptions;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public Map<String, Object> getClientConfigurationParameters() {
+        return clientConfigurationParameters;
+    }
+
+    public void setClientConfigurationParameters(
+            Map<String, Object> clientConfigurationParameters) {
+        this.clientConfigurationParameters = clientConfigurationParameters;
+    }
+
+    public Map<String, Object> getStartWorkflowOptionsParameters() {
+        return startWorkflowOptionsParameters;
+    }
+
+    public void setStartWorkflowOptionsParameters(
+            Map<String, Object> startWorkflowOptionsParameters) {
+        this.startWorkflowOptionsParameters = startWorkflowOptionsParameters;
+    }
+
+    public Map<String, Object> getSWClientParameters() {
+        return sWClientParameters;
+    }
+
+    public void setSWClientParameters(Map<String, Object> sWClientParameters) {
+        this.sWClientParameters = sWClientParameters;
+    }
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public String getChildPolicy() {
@@ -412,21 +428,5 @@ public class SWFComponentConfiguration
     public void setWorkflowTypeRegistrationOptions(
             String workflowTypeRegistrationOptions) {
         this.workflowTypeRegistrationOptions = workflowTypeRegistrationOptions;
-    }
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 }

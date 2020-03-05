@@ -203,11 +203,6 @@ public class S3ComponentConfiguration
      */
     private Boolean useAwsKMS = false;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    private Boolean basicPropertyBinding = false;
-    /**
      * Define if Accelerate Mode enabled is true or false
      */
     private Boolean accelerateModeEnabled = false;
@@ -227,6 +222,11 @@ public class S3ComponentConfiguration
      * Define if Payload Signing enabled is true or false
      */
     private Boolean payloadSigningEnabled = false;
+    /**
+     * Whether the component should use basic property binding (Camel 2.x) or
+     * the newer property binding with additional capabilities
+     */
+    private Boolean basicPropertyBinding = false;
     /**
      * Amazon AWS Access Key
      */
@@ -468,14 +468,6 @@ public class S3ComponentConfiguration
         this.useAwsKMS = useAwsKMS;
     }
 
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
-    }
-
     public Boolean getAccelerateModeEnabled() {
         return accelerateModeEnabled;
     }
@@ -515,6 +507,14 @@ public class S3ComponentConfiguration
 
     public void setPayloadSigningEnabled(Boolean payloadSigningEnabled) {
         this.payloadSigningEnabled = payloadSigningEnabled;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public String getAccessKey() {

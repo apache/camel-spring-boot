@@ -692,6 +692,12 @@ public class AMQPComponentConfiguration
      */
     private Long waitForProvisionCorrelationToBeUpdatedThreadSleepingTime = 100L;
     /**
+     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
+     * header to and from Camel message. The option is a
+     * org.apache.camel.spi.HeaderFilterStrategy type.
+     */
+    private String headerFilterStrategy;
+    /**
      * Allows to configure the default errorHandler logging level for logging
      * uncaught exceptions.
      */
@@ -701,12 +707,6 @@ public class AMQPComponentConfiguration
      * default errorHandler.
      */
     private Boolean errorHandlerLogStackTrace = true;
-    /**
-     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
-     * header to and from Camel message. The option is a
-     * org.apache.camel.spi.HeaderFilterStrategy type.
-     */
-    private String headerFilterStrategy;
     /**
      * Password to use with the ConnectionFactory. You can also configure
      * username/password directly on the ConnectionFactory.
@@ -1443,6 +1443,14 @@ public class AMQPComponentConfiguration
         this.waitForProvisionCorrelationToBeUpdatedThreadSleepingTime = waitForProvisionCorrelationToBeUpdatedThreadSleepingTime;
     }
 
+    public String getHeaderFilterStrategy() {
+        return headerFilterStrategy;
+    }
+
+    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+        this.headerFilterStrategy = headerFilterStrategy;
+    }
+
     public LoggingLevel getErrorHandlerLoggingLevel() {
         return errorHandlerLoggingLevel;
     }
@@ -1458,14 +1466,6 @@ public class AMQPComponentConfiguration
 
     public void setErrorHandlerLogStackTrace(Boolean errorHandlerLogStackTrace) {
         this.errorHandlerLogStackTrace = errorHandlerLogStackTrace;
-    }
-
-    public String getHeaderFilterStrategy() {
-        return headerFilterStrategy;
-    }
-
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
-        this.headerFilterStrategy = headerFilterStrategy;
     }
 
     public String getPassword() {

@@ -87,6 +87,12 @@ public class BoxComponentConfiguration
      */
     private Map<String, Object> httpParams;
     /**
+     * The type of authentication for connection. Types of Authentication:
+     * STANDARD_AUTHENTICATION - OAuth 2.0 (3-legged) SERVER_AUTHENTICATION -
+     * OAuth 2.0 with JSON Web Tokens
+     */
+    private String authenticationType = "APP_USER_AUTHENTICATION";
+    /**
      * Custom Access Token Cache for storing and retrieving access tokens. The
      * option is a com.box.sdk.IAccessTokenCache type.
      */
@@ -104,12 +110,6 @@ public class BoxComponentConfiguration
      * The maximum number of access tokens in cache.
      */
     private Integer maxCacheEntries = 100;
-    /**
-     * The type of authentication for connection. Types of Authentication:
-     * STANDARD_AUTHENTICATION - OAuth 2.0 (3-legged) SERVER_AUTHENTICATION -
-     * OAuth 2.0 with JSON Web Tokens
-     */
-    private String authenticationType = "APP_USER_AUTHENTICATION";
     /**
      * The private key for generating the JWT signature.
      */
@@ -201,6 +201,14 @@ public class BoxComponentConfiguration
         this.httpParams = httpParams;
     }
 
+    public String getAuthenticationType() {
+        return authenticationType;
+    }
+
+    public void setAuthenticationType(String authenticationType) {
+        this.authenticationType = authenticationType;
+    }
+
     public String getAccessTokenCache() {
         return accessTokenCache;
     }
@@ -231,14 +239,6 @@ public class BoxComponentConfiguration
 
     public void setMaxCacheEntries(Integer maxCacheEntries) {
         this.maxCacheEntries = maxCacheEntries;
-    }
-
-    public String getAuthenticationType() {
-        return authenticationType;
-    }
-
-    public void setAuthenticationType(String authenticationType) {
-        this.authenticationType = authenticationType;
     }
 
     public String getPrivateKeyFile() {

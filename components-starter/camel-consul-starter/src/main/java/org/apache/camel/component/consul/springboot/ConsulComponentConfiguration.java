@@ -131,19 +131,6 @@ public class ConsulComponentConfiguration
      */
     private List<String> nodeMeta;
     /**
-     * The second to wait for a watch event, default 10 seconds
-     */
-    private Integer blockSeconds = 10;
-    /**
-     * The first index for watch for, default 0. The option is a
-     * java.math.BigInteger type.
-     */
-    private String firstIndex;
-    /**
-     * Recursively watch, default false
-     */
-    private Boolean recursive = false;
-    /**
      * Sets the ACL token to be used with Consul
      */
     private String aclToken;
@@ -165,6 +152,19 @@ public class ConsulComponentConfiguration
      * Sets the username to be used for basic authentication
      */
     private String userName;
+    /**
+     * The second to wait for a watch event, default 10 seconds
+     */
+    private Integer blockSeconds = 10;
+    /**
+     * The first index for watch for, default 0. The option is a
+     * java.math.BigInteger type.
+     */
+    private String firstIndex;
+    /**
+     * Recursively watch, default false
+     */
+    private Boolean recursive = false;
 
     public Long getConnectTimeoutMillis() {
         return connectTimeoutMillis;
@@ -310,30 +310,6 @@ public class ConsulComponentConfiguration
         this.nodeMeta = nodeMeta;
     }
 
-    public Integer getBlockSeconds() {
-        return blockSeconds;
-    }
-
-    public void setBlockSeconds(Integer blockSeconds) {
-        this.blockSeconds = blockSeconds;
-    }
-
-    public String getFirstIndex() {
-        return firstIndex;
-    }
-
-    public void setFirstIndex(String firstIndex) {
-        this.firstIndex = firstIndex;
-    }
-
-    public Boolean getRecursive() {
-        return recursive;
-    }
-
-    public void setRecursive(Boolean recursive) {
-        this.recursive = recursive;
-    }
-
     public String getAclToken() {
         return aclToken;
     }
@@ -373,5 +349,29 @@ public class ConsulComponentConfiguration
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Integer getBlockSeconds() {
+        return blockSeconds;
+    }
+
+    public void setBlockSeconds(Integer blockSeconds) {
+        this.blockSeconds = blockSeconds;
+    }
+
+    public String getFirstIndex() {
+        return firstIndex;
+    }
+
+    public void setFirstIndex(String firstIndex) {
+        this.firstIndex = firstIndex;
+    }
+
+    public Boolean getRecursive() {
+        return recursive;
+    }
+
+    public void setRecursive(Boolean recursive) {
+        this.recursive = recursive;
     }
 }
