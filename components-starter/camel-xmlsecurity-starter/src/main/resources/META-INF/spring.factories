@@ -14,11 +14,10 @@
 ## See the License for the specific language governing permissions and
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatAutoConfiguration,\
-org.apache.camel.component.xmlsecurity.springboot.XmlSignatureComponentAutoConfiguration,\
-org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentAutoConfiguration,\
-org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentAutoConfiguration
 
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentAutoConfiguration,\
+org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentAutoConfiguration,\
+org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatAutoConfiguration
 
 

@@ -55,32 +55,33 @@ public class YammerComponentConfiguration
      */
     private Long delay = 5000L;
     /**
-     * Return only the specified number of messages. Works for threaded=true and
-     * threaded=extended.
+     * Return only the specified number of messages. Works for threaded set to
+     * true and threaded set to extended.
      */
     private Integer limit = -1;
     /**
      * Returns messages newer than the message ID specified as a numeric string.
      * This should be used when polling for new messages. If you're looking at
      * messages, and the most recent message returned is 3516, you can make a
-     * request with the parameter newerThan=3516 to ensure that you do not get
-     * duplicate copies of messages already on your page.
+     * request with the parameter newerThan equals to 3516 to ensure that you do
+     * not get duplicate copies of messages already on your page.
      */
     private Long newerThan = -1L;
     /**
      * Returns messages older than the message ID specified as a numeric string.
      * This is useful for paginating messages. For example, if you're currently
      * viewing 20 messages and the oldest is number 2912, you could append
-     * olderThan=2912 to your request to get the 20 messages prior to those
-     * you're seeing.
+     * olderThan equals to 2912 to your request to get the 20 messages prior to
+     * those you're seeing.
      */
     private Long olderThan = -1L;
     /**
-     * threaded=true will only return the first message in each thread. This
-     * parameter is intended for apps which display message threads collapsed.
-     * threaded=extended will return the thread starter messages in order of
-     * most recently active as well as the two most recent messages, as they are
-     * viewed in the default view on the Yammer web interface.
+     * threaded equals to true will only return the first message in each
+     * thread. This parameter is intended for apps which display message threads
+     * collapsed. threaded equals to extended will return the thread starter
+     * messages in order of most recently active as well as the two most recent
+     * messages, as they are viewed in the default view on the Yammer web
+     * interface.
      */
     private String threaded;
     /**
