@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
 
     Licensed to the Apache Software Foundation (ASF) under one or more
@@ -71,6 +71,7 @@
         <module>camel-example-spring-boot-webhook</module>
         <module>camel-example-spring-boot-xml</module>
         <module>camel-example-spring-boot-zipkin</module>
+        <module>camel-example-spring-boot-strimzi</module>
         <module>camel-example-spring-cloud-servicecall</module>
         <module>camel-example-spring-cloud-serviceregistry</module>
     </modules>
@@ -82,6 +83,7 @@
         <skip.starting.camel.context>false</skip.starting.camel.context>
         <javax.servlet.api.version>4.0.1</javax.servlet.api.version>
         <camel.osgi.export.pkg />
+        <fabric8-maven-plugin-version>4.4.0</fabric8-maven-plugin-version>
     </properties>
 
     <dependencyManagement>
