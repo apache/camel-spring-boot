@@ -2124,6 +2124,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-aws2-s3</artifactId>
+        <version>3.2.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws2-ses</artifactId>
         <version>3.2.0-SNAPSHOT</version>
       </dependency>
@@ -4067,7 +4072,7 @@
       <dependency>
         <groupId>org.apache.zookeeper</groupId>
         <artifactId>zookeeper</artifactId>
-        <version>3.4.14</version>
+        <version>3.5.7</version>
       </dependency>
       <dependency>
         <groupId>org.cassandraunit</groupId>
