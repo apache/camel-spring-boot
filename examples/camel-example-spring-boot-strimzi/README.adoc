@@ -163,7 +163,7 @@ testlog   1            1
 
 [NOTE]
 ====
-Since the "TestLog" topic is auto-created, it used the Kafka cluster default configuration for partition count and replication factor. Because this is an example, we will not change this.
+Since the "TestLog" topic is auto-created, it used Kafka cluster's default configuration for partition count and replication factor. Because this is an example, we will not change this.
 ====
 
 Now lets check the logs of the Camel application and see if it consumes the messages properly:
@@ -198,7 +198,7 @@ You should see logs like this:
 
 You can see the Camel Consumer Route consumes the message  and prints it in the log in Kubernetes/OpenShift environment.
 
-==== Run Camel Application Locally
+==== Run Camel Application Locally (Optional)
 
 [WARNING]
 ====
@@ -247,7 +247,7 @@ After application running you should see logs like this:
 15:16:11.255 [Camel (camel) thread #1 - KafkaConsumer[testlog]] INFO  Consumer Route - Hi, this is Camel-Strimzi example from local environment
 ----
 
-Congratulations! You have just consumed and produced messages with Apache Camel Spring Boot through Strimzi's Apache Kafka cluster.
+Congratulations! You have just consumed and produced messages via Apache Camel routes, through Strimzi's Apache Kafka cluster.
 
 === Help & Contributions
 
