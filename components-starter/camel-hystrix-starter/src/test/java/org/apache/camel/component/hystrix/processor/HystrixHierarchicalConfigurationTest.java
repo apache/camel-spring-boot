@@ -59,7 +59,7 @@ public class HystrixHierarchicalConfigurationTest {
 
         Assert.assertNotNull(hystrixDefinition);
 
-        Route rc = new DefaultRoute(camelContext, null, null, null);
+        Route rc = new DefaultRoute(camelContext, null, null, null, null);
         HystrixReifier reifier = new HystrixReifier(rc, hystrixDefinition);
         HystrixConfigurationDefinition config = reifier.buildHystrixConfiguration();
 

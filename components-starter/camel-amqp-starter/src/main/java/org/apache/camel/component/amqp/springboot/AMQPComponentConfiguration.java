@@ -469,14 +469,14 @@ public class AMQPComponentConfiguration
      * ConnectionFactory is found then it will be used. This is enabled by
      * default.
      */
-    private Boolean allowAutoWiredConnectionFactory = false;
+    private Boolean allowAutoWiredConnectionFactory = true;
     /**
      * Whether to auto-discover DestinationResolver from the registry, if no
      * destination resolver has been configured. If only one instance of
      * DestinationResolver is found then it will be used. This is enabled by
      * default.
      */
-    private Boolean allowAutoWiredDestinationResolver = false;
+    private Boolean allowAutoWiredDestinationResolver = true;
     /**
      * Controls whether or not to include serialized headers. Applies only when
      * transferExchange is true. This requires that the objects are
