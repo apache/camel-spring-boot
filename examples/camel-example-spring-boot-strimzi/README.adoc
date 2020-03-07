@@ -10,7 +10,7 @@ We will have
 
 Login your Kubernetes/OpenShift cluster as cluster admin. For installing Strimzi operator you have to be a cluster admin.
 
-After logging into your cluster create a namespace called "camel-example-strimzi":
+After logging into your cluster create a namespace called `camel-example-strimzi`:
 
 [source, shell]
 ----
@@ -104,7 +104,7 @@ Since the cluster is ready lets deploy our Camel application to Kubernetes/OpenS
 
 === Run Camel Application on Kubernetes/OpenShift
 
-Before deploying the example application on Kubernetes/OpenShift we have to run "prepare-truststore.sh" since our Strimzi cluster uses SSL/TLS for external access. 
+Before deploying the example application on Kubernetes/OpenShift we have to run `prepare-truststore.sh` since our Strimzi cluster uses SSL/TLS for external access. 
 
 [IMPORTANT]
 ====
@@ -139,7 +139,7 @@ For OpenShift:
 oc get pods -w
 ----
 
-When the application pod state is ready first check that there is a topic created with the name "TestLog" which is auto-created in the Kafka cluster. To get the topics created we can use custom resources of Strimzi:
+When the application pod state is ready first check that there is a topic created with the name `TestLog` which is auto-created in the Kafka cluster. To get the topics created we can use custom resources of Strimzi:
 
 [source,shell]
 ----
@@ -163,7 +163,7 @@ testlog   1            1
 
 [NOTE]
 ====
-Since the "TestLog" topic is auto-created, it used Kafka cluster's default configuration for partition count and replication factor. Because this is an example, we will not change this.
+Since the `TestLog` topic is auto-created, it used Kafka cluster's default configuration for partition count and replication factor. Because this is an example, we will not change this.
 ====
 
 Now lets check the logs of the Camel application and see if it consumes the messages properly:
@@ -206,14 +206,14 @@ This part of the example is only shown on OpenShift because there are different 
 ====
 
 
-Only thing you have to do is to change the "kafka.bootstrap.url" to Route URL of the service that is provided by Strimzi cluster. You can do it either manually or with using "sed" command in a linux environment:
+Only thing you have to do is to change the `kafka.bootstrap.url` to Route URL of the service that is provided by Strimzi cluster. You can do it either manually or with using `sed` command in a linux environment:
 
 [source,shell]
 ----
 sed -i 's/KAFKA_BOOTSTRAP_ROUTE_URL/'$(oc get route my-cluster-kafka-bootstrap --output=jsonpath={.spec.host})':443/g' src/main/resources/application-local.properties 
 ----
 
-Once you changed the "kafka.bootstrap.url" you can run the application via maven -with using "local" profile:
+Once you changed the `kafka.bootstrap.url` you can run the application via maven -with using `local` profile:
 
 [TIP]
 ====
