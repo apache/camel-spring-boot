@@ -134,6 +134,14 @@ public class BlobServiceComponentConfiguration
      * org.apache.camel.component.azure.blob.BlobServiceConfiguration type.
      */
     private String configuration;
+    /**
+     * Set the storage account key used during authentication phase
+     */
+    private String credentialsAccountKey;
+    /**
+     * Set the storage account name used during authentication phase
+     */
+    private String credentialsAccountName;
 
     public String getAzureBlobClient() {
         return azureBlobClient;
@@ -285,5 +293,21 @@ public class BlobServiceComponentConfiguration
 
     public void setConfiguration(String configuration) {
         this.configuration = configuration;
+    }
+
+    public String getCredentialsAccountKey() {
+        return credentialsAccountKey;
+    }
+
+    public void setCredentialsAccountKey(String credentialsAccountKey) {
+        this.credentialsAccountKey = credentialsAccountKey;
+    }
+
+    public String getCredentialsAccountName() {
+        return credentialsAccountName;
+    }
+
+    public void setCredentialsAccountName(String credentialsAccountName) {
+        this.credentialsAccountName = credentialsAccountName;
     }
 }
