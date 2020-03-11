@@ -4,7 +4,9 @@
 
 This example shows how to integrate Camel with Strimzi: Kafka on Kubernetes/OpenShift.
 
-We will have 
+We will have two routes basically. One for producing messages to Kafka cluster which we will setup via Strimzi and other one is for consuming messages which will consume messages from the Kafka cluster. Here is a very high-level diagram of the routes we will run shortly:
+
+image::route-diagram.png[]
 
 === Preparing Strimzi Cluster
 
