@@ -117,7 +117,8 @@ public class PulsarComponentConfiguration
      */
     private String subscriptionName = "subs";
     /**
-     * Type of the subscription EXCLUSIVESHAREDFAILOVER, defaults to EXCLUSIVE
+     * Type of the subscription EXCLUSIVESHAREDFAILOVERKEY_SHARED, defaults to
+     * EXCLUSIVE
      */
     private SubscriptionType subscriptionType = SubscriptionType.EXCLUSIVE;
     /**
@@ -126,6 +127,11 @@ public class PulsarComponentConfiguration
      * org.apache.camel.component.pulsar.PulsarMessageReceiptFactory type.
      */
     private String pulsarMessageReceiptFactory;
+    /**
+     * Control batching method used by the producer. The option is a
+     * org.apache.pulsar.client.api.BatcherBuilder type.
+     */
+    private String batcherBuilder;
     /**
      * Control whether automatic batching of messages is enabled for the
      * producer.
@@ -339,6 +345,14 @@ public class PulsarComponentConfiguration
     public void setPulsarMessageReceiptFactory(
             String pulsarMessageReceiptFactory) {
         this.pulsarMessageReceiptFactory = pulsarMessageReceiptFactory;
+    }
+
+    public String getBatcherBuilder() {
+        return batcherBuilder;
+    }
+
+    public void setBatcherBuilder(String batcherBuilder) {
+        this.batcherBuilder = batcherBuilder;
     }
 
     public Boolean getBatchingEnabled() {
