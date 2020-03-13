@@ -18,7 +18,9 @@ package org.apache.camel.example.strimzi;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.kafka.KafkaConstants;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StrimziRouteBuilder extends RouteBuilder {
 
     @Override
@@ -27,13 +29,11 @@ public class StrimziRouteBuilder extends RouteBuilder {
         from("timer://foo?period=1000")
         .routeId("Producer Route")
         .setBody(simple("Hi, this is Camel-Strimzi example from {{environment}} environment"))
-        .to("kafka:{{producer.topic}}?brokers={{kafka.bootstrap.url}}&sslEndpointAlgorithm={{kafka.sslEndpointAlgorithm}}&securityProtocol={{kafka.securityProtocol}}&sslTruststoreLocation={{kafka.truststore.location}}&sslTruststorePassword={{kafka.truststore.password}}");
-        ;
+        .to("{{camel.component.kafka}}");
 
-        from("kafka:{{producer.topic}}?brokers={{kafka.bootstrap.url}}&sslEndpointAlgorithm={{kafka.sslEndpointAlgorithm}}&securityProtocol={{kafka.securityProtocol}}&sslTruststoreLocation={{kafka.truststore.location}}&sslTruststorePassword={{kafka.truststore.password}}")
+        from("{{camel.component.kafka}}")
         .routeId("Consumer Route")
-        .log("${body}")
-        ;
+        .log("${body}");
     }
 }
 

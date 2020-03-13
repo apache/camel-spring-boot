@@ -215,6 +215,13 @@ Only thing you have to do is to change the `kafka.bootstrap.url` to Route URL of
 sed -i 's/KAFKA_BOOTSTRAP_ROUTE_URL/'$(oc get route my-cluster-kafka-bootstrap --output=jsonpath={.spec.host})':443/g' src/main/resources/application-local.properties 
 ----
 
+For Mac:
+
+[source,shell]
+----
+sed -i '' 's/KAFKA_BOOTSTRAP_ROUTE_URL/'$(oc get route my-cluster-kafka-bootstrap --output=jsonpath={.spec.host})':443/g' src/main/resources/application-local.properties 
+----
+
 Once you changed the `kafka.bootstrap.url` you can run the application via maven -with using `local` profile:
 
 [TIP]
@@ -229,7 +236,9 @@ oc scale dc/camel-example-spring-boot-strimzi --replicas=0
 
 [source,shell]
 ----
-mvn spring-boot:run -Dspring-boot.run.profiles=local
+SPRING_PROFILES_ACTIVE=local
+
+mvn spring-boot:run
 ----
 
 
