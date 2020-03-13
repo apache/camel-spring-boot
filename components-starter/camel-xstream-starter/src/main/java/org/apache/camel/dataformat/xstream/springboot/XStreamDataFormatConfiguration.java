@@ -17,8 +17,8 @@
 package org.apache.camel.dataformat.xstream.springboot;
 
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
+import org.apache.camel.model.PropertyDefinition;
 import org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -79,22 +79,22 @@ public class XStreamDataFormatConfiguration
      * List of class names for using custom XStream converters. The classes must
      * be of type com.thoughtworks.xstream.converters.Converter
      */
-    private List<String> converters;
+    private List<PropertyDefinition> converters;
     /**
      * Alias a Class to a shorter name to be used in XML elements.
      */
-    private Map<String, String> aliases;
+    private List<PropertyDefinition> aliases;
     /**
      * Prevents a field from being serialized. To omit a field you must always
      * provide the declaring type and not necessarily the type that is
-     * converted.
+     * converted. Multiple values can be separated by comma.
      */
-    private Map<String, String[]> omitFields;
+    private List<PropertyDefinition> omitFields;
     /**
      * Adds a default implicit collection which is used for any unmapped XML
-     * tag.
+     * tag. Multiple values can be separated by comma.
      */
-    private Map<String, String[]> implicitCollections;
+    private List<PropertyDefinition> implicitCollections;
     /**
      * Whether the data format should set the Content-Type header with the type
      * from the data format if the data format is capable of doing so. For
@@ -143,35 +143,36 @@ public class XStreamDataFormatConfiguration
         this.mode = mode;
     }
 
-    public List<String> getConverters() {
+    public List<PropertyDefinition> getConverters() {
         return converters;
     }
 
-    public void setConverters(List<String> converters) {
+    public void setConverters(List<PropertyDefinition> converters) {
         this.converters = converters;
     }
 
-    public Map<String, String> getAliases() {
+    public List<PropertyDefinition> getAliases() {
         return aliases;
     }
 
-    public void setAliases(Map<String, String> aliases) {
+    public void setAliases(List<PropertyDefinition> aliases) {
         this.aliases = aliases;
     }
 
-    public Map<String, String[]> getOmitFields() {
+    public List<PropertyDefinition> getOmitFields() {
         return omitFields;
     }
 
-    public void setOmitFields(Map<String, String[]> omitFields) {
+    public void setOmitFields(List<PropertyDefinition> omitFields) {
         this.omitFields = omitFields;
     }
 
-    public Map<String, String[]> getImplicitCollections() {
+    public List<PropertyDefinition> getImplicitCollections() {
         return implicitCollections;
     }
 
-    public void setImplicitCollections(Map<String, String[]> implicitCollections) {
+    public void setImplicitCollections(
+            List<PropertyDefinition> implicitCollections) {
         this.implicitCollections = implicitCollections;
     }
 

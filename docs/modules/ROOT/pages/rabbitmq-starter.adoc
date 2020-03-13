@@ -17,7 +17,7 @@ When using rabbitmq with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 53 options, which are listed below.
+The component supports 54 options, which are listed below.
 
 
 
@@ -37,6 +37,7 @@ The component supports 53 options, which are listed below.
 | *camel.component.rabbitmq.channel-pool-max-wait* | Set the maximum number of milliseconds to wait for a channel from the pool | 1000 | Long
 | *camel.component.rabbitmq.client-properties* | Connection client properties (client info used in negotiating with the server) |  | Map
 | *camel.component.rabbitmq.connection-factory* | To use a custom RabbitMQ connection factory. When this option is set, all connection options (connectionTimeout, requestedChannelMax...) set on URI are not used. The option is a com.rabbitmq.client.ConnectionFactory type. |  | String
+| *camel.component.rabbitmq.connection-factory-exception-handler* | Custom rabbitmq ExceptionHandler for ConnectionFactory. The option is a com.rabbitmq.client.ExceptionHandler type. |  | String
 | *camel.component.rabbitmq.connection-timeout* | Connection timeout | 60000 | Integer
 | *camel.component.rabbitmq.dead-letter-exchange* | The name of the dead letter exchange |  | String
 | *camel.component.rabbitmq.dead-letter-exchange-type* | The type of the dead letter exchange | direct | String
@@ -78,5 +79,4 @@ The component supports 53 options, which are listed below.
 | *camel.component.rabbitmq.username* | Username in case of authenticated access | guest | String
 | *camel.component.rabbitmq.vhost* | The vhost for the channel | / | String
 |===
-
 // spring-boot-auto-configure options: END

@@ -253,6 +253,11 @@ public class RabbitMQComponentConfiguration
      */
     private Map<String, Object> clientProperties;
     /**
+     * Custom rabbitmq ExceptionHandler for ConnectionFactory. The option is a
+     * com.rabbitmq.client.ExceptionHandler type.
+     */
+    private String connectionFactoryExceptionHandler;
+    /**
      * Connection timeout
      */
     private Integer connectionTimeout = 60000;
@@ -622,6 +627,15 @@ public class RabbitMQComponentConfiguration
 
     public void setClientProperties(Map<String, Object> clientProperties) {
         this.clientProperties = clientProperties;
+    }
+
+    public String getConnectionFactoryExceptionHandler() {
+        return connectionFactoryExceptionHandler;
+    }
+
+    public void setConnectionFactoryExceptionHandler(
+            String connectionFactoryExceptionHandler) {
+        this.connectionFactoryExceptionHandler = connectionFactoryExceptionHandler;
     }
 
     public Integer getConnectionTimeout() {

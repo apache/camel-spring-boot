@@ -20,6 +20,7 @@ import java.util.List;
 import javax.annotation.Generated;
 import org.apache.camel.dataformat.any23.Any23DataFormat;
 import org.apache.camel.dataformat.any23.Any23OutputFormat;
+import org.apache.camel.model.PropertyDefinition;
 import org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -45,6 +46,12 @@ public class Any23DataFormatConfiguration
      */
     private Any23OutputFormat outputFormat = Any23OutputFormat.RDF4JMODEL;
     /**
+     * Configurations for Apache Any23 as key-value pairs in order to customize
+     * the extraction process. The list of supported parameters can be found
+     * here. If not provided, a default configuration is used.
+     */
+    private List<PropertyDefinition> configuration;
+    /**
      * List of Any23 extractors to be used in the unmarshal operation. A list of
      * the available extractors can be found here here. If not provided, all the
      * available extractors are used.
@@ -69,6 +76,14 @@ public class Any23DataFormatConfiguration
 
     public void setOutputFormat(Any23OutputFormat outputFormat) {
         this.outputFormat = outputFormat;
+    }
+
+    public List<PropertyDefinition> getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(List<PropertyDefinition> configuration) {
+        this.configuration = configuration;
     }
 
     public List<String> getExtractors() {
