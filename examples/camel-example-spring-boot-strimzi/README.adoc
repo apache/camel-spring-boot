@@ -208,7 +208,7 @@ This part of the example is only shown on OpenShift because there are different 
 ====
 
 
-Only thing you have to do is to change the `kafka.bootstrap.url` to Route URL of the service that is provided by Strimzi cluster. You can do it either manually or with using `sed` command in a linux environment:
+Only thing you have to do is to change the `camel.component.kafka.brokers` to Route URL of the service that is provided by Strimzi cluster. You can do it either manually or with using `sed` command in a linux environment:
 
 [source,shell]
 ----
