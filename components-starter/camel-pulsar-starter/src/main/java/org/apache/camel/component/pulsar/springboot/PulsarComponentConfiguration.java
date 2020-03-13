@@ -58,11 +58,11 @@ public class PulsarComponentConfiguration
     private Long ackTimeoutMillis = 10000L;
     /**
      * Whether to allow manual message acknowledgements. If this option is
-     * enabled, then messages are not immediately acknowledged after being
-     * consumed. Instead, an instance of PulsarMessageReceipt is stored as a
-     * header on the org.apache.camel.Exchange. Messages can then be
-     * acknowledged using PulsarMessageReceipt at any time before the ackTimeout
-     * occurs.
+     * enabled, then messages are not acknowledged automatically after
+     * successful route completion. Instead, an instance of PulsarMessageReceipt
+     * is stored as a header on the org.apache.camel.Exchange. Messages can then
+     * be acknowledged using PulsarMessageReceipt at any time before the
+     * ackTimeout occurs.
      */
     private Boolean allowManualAcknowledgement = false;
     /**
