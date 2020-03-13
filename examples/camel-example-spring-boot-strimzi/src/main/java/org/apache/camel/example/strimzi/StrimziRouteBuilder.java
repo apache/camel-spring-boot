@@ -27,13 +27,13 @@ public class StrimziRouteBuilder extends RouteBuilder {
     public void configure() throws Exception {
 
         from("timer://foo?period=1000")
-        .routeId("Producer Route")
-        .setBody(simple("Hi, this is Camel-Strimzi example from {{environment}} environment"))
-        .to("{{camel.component.kafka}}");
+            .routeId("Producer Route")
+            .setBody(simple("Hi, this is Camel-Strimzi example from {{environment}} environment"))
+            .to("kafka:{{kafka.producer.topic}}");
 
-        from("{{camel.component.kafka}}")
-        .routeId("Consumer Route")
-        .log("${body}");
+        from("kafka:{{kafka.consumer.topic}}")
+            .routeId("Consumer Route")
+            .log("${body}");
     }
 }
 
