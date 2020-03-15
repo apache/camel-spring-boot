@@ -65,7 +65,6 @@ public final class CamelPropertiesHelper {
      * @throws IllegalArgumentException is thrown if an option cannot be configured on the bean because there is no suitable setter method and failOnNoSet is true.
      * @throws Exception for any other kind of error
      */
-    @Deprecated
     public static boolean setCamelProperties(CamelContext context, Object target, Map<String, Object> properties, boolean failIfNotSet) throws Exception {
         ObjectHelper.notNull(context, "context");
         ObjectHelper.notNull(target, "target");
