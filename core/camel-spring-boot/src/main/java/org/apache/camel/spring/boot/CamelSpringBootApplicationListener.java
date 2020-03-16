@@ -220,16 +220,24 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
 
     private void terminateMainControllerAfter(final CamelContext camelContext, int seconds, final AtomicBoolean completed, final CountDownLatch latch) {
         ScheduledExecutorService executorService = camelContext.getExecutorServiceManager().newSingleThreadScheduledExecutor(this, "CamelSpringBootTerminateTask");
+
+        final AtomicBoolean running = new AtomicBoolean();
         Runnable task = () -> {
-            LOG.info("CamelSpringBoot triggering shutdown of the JVM.");
-            try {
-                camelContext.stop();
-            } catch (Throwable e) {
-                LOG.warn("Error during stopping CamelContext", e);
-            } finally {
-                completed.set(true);
-                latch.countDown();
-            }
+            // need to spin up as separate thread so we can terminate this thread pool without problems
+            Runnable stop = () -> {
+                running.set(true);
+                LOG.info("CamelSpringBoot triggering shutdown of the JVM.");
+                try {
+                    camelContext.stop();
+                } catch (Throwable e) {
+                    LOG.warn("Error during stopping CamelContext", e);
+                } finally {
+                    completed.set(true);
+                    latch.countDown();
+                }
+                running.set(false);
+            };
+            new Thread(stop, "CamelSpringBootTerminateTaskWorker").start();
         };
 
         final ScheduledFuture future = executorService.schedule(task, seconds, TimeUnit.SECONDS);
@@ -237,17 +245,27 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
             @Override
             public void onContextStop(CamelContext context) {
                 // we are stopping then cancel the task so we can shutdown quicker
-                future.cancel(true);
+                if (!running.get()) {
+                    future.cancel(true);
+                }
             }
         });
     }
 
     private void terminateApplicationContext(final ConfigurableApplicationContext applicationContext, final CamelContext camelContext, int seconds) {
         ScheduledExecutorService executorService = camelContext.getExecutorServiceManager().newSingleThreadScheduledExecutor(this, "CamelSpringBootTerminateTask");
+
+        final AtomicBoolean running = new AtomicBoolean();
         Runnable task = () -> {
-            LOG.info("CamelSpringBoot triggering shutdown of the JVM.");
-            // we need to run a daemon thread to stop ourselves so this thread pool can be stopped nice also
-            new Thread(applicationContext::close).start();
+            // need to spin up as separate thread so we can terminate this thread pool without problems
+            Runnable stop = () -> {
+                running.set(true);
+                LOG.info("CamelSpringBoot triggering shutdown of the JVM.");
+                // we need to run a daemon thread to stop ourselves so this thread pool can be stopped nice also
+                new Thread(applicationContext::close).start();
+                running.set(false);
+            };
+            new Thread(stop, "CamelSpringBootTerminateTaskWorker").start();
         };
 
         final ScheduledFuture future = executorService.schedule(task, seconds, TimeUnit.SECONDS);
@@ -255,22 +273,29 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
             @Override
             public void onContextStop(CamelContext context) {
                 // we are stopping then cancel the task so we can shutdown quicker
-                future.cancel(true);
+                if (!running.get()) {
+                    future.cancel(true);
+                }
             }
         });
     }
 
     private void terminateApplicationContext(final ConfigurableApplicationContext applicationContext, final CamelContext camelContext, final CountDownLatch latch) {
         ExecutorService executorService = camelContext.getExecutorServiceManager().newSingleThreadExecutor(this, "CamelSpringBootTerminateTask");
+
+        final AtomicBoolean running = new AtomicBoolean();
         Runnable task = () -> {
             try {
                 latch.await();
+                // only mark as running after the latch
+                running.set(true);
                 LOG.info("CamelSpringBoot triggering shutdown of the JVM.");
                 // we need to run a daemon thread to stop ourselves so this thread pool can be stopped nice also
                 new Thread(applicationContext::close).start();
             } catch (Throwable e) {
                 // ignore
             }
+            running.set(false);
         };
 
         final Future future = executorService.submit(task);
@@ -278,7 +303,12 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
             @Override
             public void onContextStop(CamelContext context) {
                 // we are stopping then cancel the task so we can shutdown quicker
-                future.cancel(true);
+                if (!running.get()) {
+                    future.cancel(true);
+                } else {
+                    // trigger shutdown
+                    latch.countDown();
+                }
             }
         });
     }
