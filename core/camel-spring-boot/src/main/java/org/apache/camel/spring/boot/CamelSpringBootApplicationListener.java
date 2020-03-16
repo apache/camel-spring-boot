@@ -247,6 +247,8 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                 // we are stopping then cancel the task so we can shutdown quicker
                 if (!running.get()) {
                     future.cancel(true);
+                    // trigger shutdown
+                    latch.countDown();
                 }
             }
         });
