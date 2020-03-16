@@ -52,7 +52,7 @@ public class MixedJavaDslAndXmlTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("timer:project?period=1s").id("java").setBody().constant("Hello World from Java Route")
+                    from("timer:project?period=1000").id("java").setBody().constant("Hello World from Java Route")
                         .log(">>> ${body}");
                 }
             };

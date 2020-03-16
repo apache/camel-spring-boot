@@ -60,7 +60,7 @@ public class CamelSpringBootTemplateShutdownTest {
 
         camelContext.stop();
 
-        assertTrue(((ServiceSupport) camelContext).isStopped());
+        assertTrue(camelContext.isStopped());
         assertTrue(((ServiceSupport) consumerTemplate).isStopped());
         assertTrue(((ServiceSupport) producerTemplate).isStopped());
         assertTrue(((ServiceSupport) fluentProducerTemplate).isStopped());
@@ -75,7 +75,7 @@ public class CamelSpringBootTemplateShutdownTest {
         applicationContext.close();
 
         assertFalse(applicationContext.isActive());
-        assertTrue(((ServiceSupport) camelContext).isStopped());
+        assertTrue(camelContext.isStopped());
         assertTrue(((ServiceSupport) consumerTemplate).isStopped());
         assertTrue(((ServiceSupport) producerTemplate).isStopped());
         assertTrue(((ServiceSupport) fluentProducerTemplate).isStopped());

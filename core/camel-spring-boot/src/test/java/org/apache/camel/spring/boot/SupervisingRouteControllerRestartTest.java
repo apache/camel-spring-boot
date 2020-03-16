@@ -118,18 +118,18 @@ public class SupervisingRouteControllerRestartTest {
                 public void configure() throws Exception {
                     getContext().addComponent("dummy", new DummyComponent());
 
-                    from("timer:foo?period=5s")
+                    from("timer:foo?period=5000")
                         .id("foo")
                         .startupOrder(2)
                         .to("mock:foo");
-                    from("timer:bar?period=5s")
+                    from("timer:bar?period=5000")
                         .id("bar")
                         .startupOrder(1)
                         .to("mock:bar");
-                    from("scheduler:unmanaged?initialDelay=5s")
+                    from("scheduler:unmanaged?initialDelay=5000")
                         .id("scheduler-unmanaged")
                         .to("mock:scheduler-unmanaged");
-                    from("timer:no-autostartup?period=5s")
+                    from("timer:no-autostartup?period=5000")
                         .id("timer-no-autostartup")
                         .autoStartup(false)
                         .to("mock:timer-no-autostartup");
