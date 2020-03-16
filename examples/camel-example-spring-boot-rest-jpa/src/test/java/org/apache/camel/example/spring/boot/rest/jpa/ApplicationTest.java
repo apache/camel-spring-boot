@@ -47,7 +47,7 @@ public class ApplicationTest {
 
     @Test
     public void newOrderTest() {
-        // Wait for maximum 5s until the first order gets inserted and processed
+        // Wait for maximum 5 seconds until the first order gets inserted and processed
         NotifyBuilder notify = new NotifyBuilder(camelContext)
             .fromRoute("generate-order")
             .whenDone(1)

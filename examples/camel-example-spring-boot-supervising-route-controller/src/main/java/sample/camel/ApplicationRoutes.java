@@ -26,12 +26,12 @@ import org.springframework.stereotype.Component;
 public class ApplicationRoutes extends RouteBuilder {
     @Override
     public void configure() throws Exception {
-        from("timer:foo?period=5s")
+        from("timer:foo?period=5000")
             .id("foo")
             .startupOrder(2)
             .log("From timer (foo) ...");
 
-        from("timer:bar?period=5s")
+        from("timer:bar?period=5000")
             .id("bar")
             .startupOrder(1)
             .log("From timer (bar) ...");

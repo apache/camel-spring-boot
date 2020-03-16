@@ -27,17 +27,17 @@ public class ApplicationConfiguration {
     public RouteBuilder routesBuilder() {
         return new RouteBuilder() {
             public void configure() throws Exception {
-                from("timer:foo?period=1s")
+                from("timer:foo?period=1000")
                     .routeId("foo")
                     .process(e -> {
                         throw new RuntimeCamelException("This is a forced exception to have health check monitor this failure (route=foo)"); 
                     });
-                from("timer:bar?period=1s")
+                from("timer:bar?period=1000")
                     .routeId("bar")
                     .process(e -> {
                         throw new RuntimeCamelException("This is a forced exception to have health check monitor this failure (route=bar)");
                     });
-                from("timer:slow?period=1s")
+                from("timer:slow?period=1000")
                     .routeId("slow")
                     .process(e -> {
                         Thread.sleep(1200);

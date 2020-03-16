@@ -31,13 +31,13 @@ public class ClusterNodeConfiguration {
                 // This route is configured to be local (see application.properties)
                 // so it will be started regardless of the leadership status if
                 // this node.
-                from("timer:heartbeat?period=10s")
+                from("timer:heartbeat?period=10000")
                     .routeId("heartbeat")
                     .log("HeartBeat route (timer) {{node.id}} ...");
 
                 // This route is configured to be clustered so it will be started
                 // by the controller only when this node is leader
-                from("timer:clustered?period=5s")
+                from("timer:clustered?period=5000")
                     .routeId("clustered")
                     .log("Clustered route (timer) {{node.id}} ...");
             }

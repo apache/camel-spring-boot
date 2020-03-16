@@ -25,5 +25,5 @@ camel:
         contextPath: /camel-rest-jpa/*
 
 example:
-  generateOrderPeriod: 1s
-  processOrderPeriod: 3s
+  generateOrderPeriod: 1000
+  processOrderPeriod: 3000

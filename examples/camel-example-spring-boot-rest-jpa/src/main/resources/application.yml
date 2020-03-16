@@ -53,5 +53,5 @@ spring:
 
 # The application configuration properties
 example:
-  generateOrderPeriod: 10s
-  processOrderPeriod: 30s
+  generateOrderPeriod: 10000
+  processOrderPeriod: 30000

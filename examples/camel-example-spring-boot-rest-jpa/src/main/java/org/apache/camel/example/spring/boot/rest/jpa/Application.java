@@ -66,7 +66,7 @@ public class Application extends SpringBootServletInitializer {
         @Override
         public void configure() {
             // A first route generates some orders and queue them in DB
-            from("timer:new-order?delay=1s&period={{example.generateOrderPeriod:2s}}")
+            from("timer:new-order?delay=1000&period={{example.generateOrderPeriod:2000}}")
                 .routeId("generate-order")
                 .bean("orderService", "generateOrder")
                 .to("jpa:org.apache.camel.example.spring.boot.rest.jpa.Order")
@@ -75,7 +75,7 @@ public class Application extends SpringBootServletInitializer {
             // A second route polls the DB for new orders and processes them
             from("jpa:org.apache.camel.example.spring.boot.rest.jpa.Order"
                 + "?namedQuery=new-orders"
-                + "&delay={{example.processOrderPeriod:5s}}"
+                + "&delay={{example.processOrderPeriod:5000}}"
                 + "&consumeDelete=false")
                 .routeId("process-order")
                 .log("Processed order #id ${body.id} with ${body.amount} copies of the «${body.book.description}» book");
