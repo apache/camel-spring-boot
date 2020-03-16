@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.camel.converter.TimePatternConverter;
+import org.apache.camel.catalog.impl.TimePatternConverter;
 import org.apache.camel.health.HealthCheckRegistry;
 import org.apache.camel.health.HealthCheckService;
 import org.apache.camel.impl.health.DefaultHealthCheckService;

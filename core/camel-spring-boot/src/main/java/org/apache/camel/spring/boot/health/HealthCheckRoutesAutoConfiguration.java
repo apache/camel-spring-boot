@@ -16,7 +16,7 @@
  */
 package org.apache.camel.spring.boot.health;
 
-import org.apache.camel.converter.TimePatternConverter;
+import org.apache.camel.catalog.impl.TimePatternConverter;
 import org.apache.camel.health.HealthCheckRepository;
 import org.apache.camel.impl.health.RoutePerformanceCounterEvaluators;
 import org.apache.camel.impl.health.RoutesHealthCheckRepository;

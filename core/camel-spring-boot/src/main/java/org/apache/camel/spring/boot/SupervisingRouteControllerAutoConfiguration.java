@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.apache.camel.converter.TimePatternConverter;
+import org.apache.camel.catalog.impl.TimePatternConverter;
 import org.apache.camel.impl.engine.SupervisingRouteController;
 import org.apache.camel.impl.engine.SupervisingRouteControllerFilters;
 import org.apache.camel.spi.RouteController;
