@@ -43,6 +43,10 @@ public class CamelMainRunController {
         return controller.getLatch();
     }
 
+    public Runnable getMainCompleteTask() {
+        return controller.getMainCompletedTask();
+    }
+
     public AtomicBoolean getCompleted() {
         return controller.getCompleted();
     }

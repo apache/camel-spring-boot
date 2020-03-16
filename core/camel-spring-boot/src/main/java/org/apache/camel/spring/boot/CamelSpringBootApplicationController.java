@@ -77,6 +77,10 @@ public class CamelSpringBootApplicationController {
         return this.latch;
     }
 
+    public Runnable getMainCompletedTask() {
+        return main.getCompleteTask();
+    }
+
     public AtomicBoolean getCompleted() {
         return completed;
     }

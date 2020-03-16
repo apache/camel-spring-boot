@@ -120,7 +120,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                     if (configurationProperties.getDurationMaxSeconds() > 0) {
                         LOG.info("CamelSpringBoot will terminate after {} seconds", configurationProperties.getDurationMaxSeconds());
                         terminateMainControllerAfter(camelContext, configurationProperties.getDurationMaxSeconds(),
-                                controller.getCompleted(), controller.getLatch());
+                                controller.getCompleted(), controller.getLatch(), controller.getMainCompleteTask());
                     }
 
                     camelContext.addStartupListener(new StartupListener() {
@@ -218,7 +218,8 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
 
     // Helpers
 
-    private void terminateMainControllerAfter(final CamelContext camelContext, int seconds, final AtomicBoolean completed, final CountDownLatch latch) {
+    private void terminateMainControllerAfter(final CamelContext camelContext, int seconds, final AtomicBoolean completed,
+                                              final CountDownLatch latch, final Runnable mainCompletedTask) {
         ScheduledExecutorService executorService = camelContext.getExecutorServiceManager().newSingleThreadScheduledExecutor(this, "CamelSpringBootTerminateTask");
 
         final AtomicBoolean running = new AtomicBoolean();
@@ -234,6 +235,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                 } finally {
                     completed.set(true);
                     latch.countDown();
+                    mainCompletedTask.run();
                 }
                 running.set(false);
             };
@@ -249,6 +251,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                     future.cancel(true);
                     // trigger shutdown
                     latch.countDown();
+                    mainCompletedTask.run();
                 }
             }
         });
@@ -282,7 +285,8 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
         });
     }
 
-    private void terminateApplicationContext(final ConfigurableApplicationContext applicationContext, final CamelContext camelContext, final CountDownLatch latch) {
+    private void terminateApplicationContext(final ConfigurableApplicationContext applicationContext, final CamelContext camelContext,
+                                             final CountDownLatch latch) {
         ExecutorService executorService = camelContext.getExecutorServiceManager().newSingleThreadExecutor(this, "CamelSpringBootTerminateTask");
 
         final AtomicBoolean running = new AtomicBoolean();
