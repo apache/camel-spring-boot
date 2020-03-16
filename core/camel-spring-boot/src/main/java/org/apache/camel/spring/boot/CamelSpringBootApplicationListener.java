@@ -20,19 +20,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.StartupListener;
 import org.apache.camel.main.MainDurationEventNotifier;
+import org.apache.camel.main.MainLifecycleStrategy;
 import org.apache.camel.main.RoutesCollector;
 import org.apache.camel.main.RoutesConfigurer;
 import org.apache.camel.spi.CamelEvent;
 import org.apache.camel.spi.CamelEvent.Type;
 import org.apache.camel.spi.EventNotifier;
 import org.apache.camel.support.EventNotifierSupport;
+import org.apache.camel.support.LifecycleStrategySupport;
 import org.apache.camel.support.service.ServiceHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -227,7 +231,15 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                 latch.countDown();
             }
         };
-        executorService.schedule(task, seconds, TimeUnit.SECONDS);
+
+        final ScheduledFuture future = executorService.schedule(task, seconds, TimeUnit.SECONDS);
+        camelContext.addLifecycleStrategy(new LifecycleStrategySupport() {
+            @Override
+            public void onContextStop(CamelContext context) {
+                // we are stopping then cancel the task so we can shutdown quicker
+                future.cancel(true);
+            }
+        });
     }
 
     private void terminateApplicationContext(final ConfigurableApplicationContext applicationContext, final CamelContext camelContext, int seconds) {
@@ -237,7 +249,15 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
             // we need to run a daemon thread to stop ourselves so this thread pool can be stopped nice also
             new Thread(applicationContext::close).start();
         };
-        executorService.schedule(task, seconds, TimeUnit.SECONDS);
+
+        final ScheduledFuture future = executorService.schedule(task, seconds, TimeUnit.SECONDS);
+        camelContext.addLifecycleStrategy(new LifecycleStrategySupport() {
+            @Override
+            public void onContextStop(CamelContext context) {
+                // we are stopping then cancel the task so we can shutdown quicker
+                future.cancel(true);
+            }
+        });
     }
 
     private void terminateApplicationContext(final ConfigurableApplicationContext applicationContext, final CamelContext camelContext, final CountDownLatch latch) {
@@ -252,7 +272,15 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                 // ignore
             }
         };
-        executorService.submit(task);
+
+        final Future future = executorService.submit(task);
+        camelContext.addLifecycleStrategy(new LifecycleStrategySupport() {
+            @Override
+            public void onContextStop(CamelContext context) {
+                // we are stopping then cancel the task so we can shutdown quicker
+                future.cancel(true);
+            }
+        });
     }
 
 }
