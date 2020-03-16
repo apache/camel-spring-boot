@@ -123,7 +123,7 @@
         <avro-version>1.8.1</avro-version>
         <cassandra-driver-guava-version>19.0</cassandra-driver-guava-version>
         <cdi-api-2.0-version>2.0</cdi-api-2.0-version>
-        <curator-version>2.12.0</curator-version>
+        <curator-version>4.3.0</curator-version>
         <deltaspike-version>1.9.0</deltaspike-version>
         <egit-github-core-version>2.1.5</egit-github-core-version>
         <exec-maven-plugin-version>1.6.0</exec-maven-plugin-version>
