@@ -485,6 +485,10 @@ public class AMQPComponentConfiguration
      */
     private Boolean allowSerializedHeaders = false;
     /**
+     * Whether optimizing for Apache Artemis streaming mode.
+     */
+    private Boolean artemisStreamingEnabled = true;
+    /**
      * Whether to startup the JmsConsumer message listener asynchronously, when
      * starting a route. For example if a JmsConsumer cannot get a connection to
      * a remote JMS broker, then it may block while retrying and/or failover.
@@ -1211,6 +1215,14 @@ public class AMQPComponentConfiguration
 
     public void setAllowSerializedHeaders(Boolean allowSerializedHeaders) {
         this.allowSerializedHeaders = allowSerializedHeaders;
+    }
+
+    public Boolean getArtemisStreamingEnabled() {
+        return artemisStreamingEnabled;
+    }
+
+    public void setArtemisStreamingEnabled(Boolean artemisStreamingEnabled) {
+        this.artemisStreamingEnabled = artemisStreamingEnabled;
     }
 
     public Boolean getAsyncStartListener() {
