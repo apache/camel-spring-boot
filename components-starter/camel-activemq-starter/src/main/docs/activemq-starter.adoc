@@ -17,7 +17,7 @@ When using activemq with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 100 options, which are listed below.
+The component supports 101 options, which are listed below.
 
 
 
@@ -33,6 +33,7 @@ The component supports 100 options, which are listed below.
 | *camel.component.activemq.allow-reply-manager-quick-stop* | Whether the DefaultMessageListenerContainer used in the reply managers for request-reply messaging allow the DefaultMessageListenerContainer.runningAllowed flag to quick stop in case JmsConfiguration#isAcceptMessagesWhileStopping is enabled, and org.apache.camel.CamelContext is currently being stopped. This quick stop ability is enabled by default in the regular JMS consumers but to enable for reply managers you must enable this flag. | false | Boolean
 | *camel.component.activemq.allow-serialized-headers* | Controls whether or not to include serialized headers. Applies only when transferExchange is true. This requires that the objects are serializable. Camel will exclude any non-serializable objects and log it at WARN level. | false | Boolean
 | *camel.component.activemq.always-copy-message* | If true, Camel will always make a JMS message copy of the message when it is passed to the producer for sending. Copying the message is needed in some situations, such as when a replyToDestinationSelectorName is set (incidentally, Camel will set the alwaysCopyMessage option to true, if a replyToDestinationSelectorName is set) | false | Boolean
+| *camel.component.activemq.artemis-streaming-enabled* | Whether optimizing for Apache Artemis streaming mode. | true | Boolean
 | *camel.component.activemq.async-consumer* | Whether the JmsConsumer processes the Exchange asynchronously. If enabled then the JmsConsumer may pickup the next message from the JMS queue, while the previous message is being processed asynchronously (by the Asynchronous Routing Engine). This means that messages may be processed not 100% strictly in order. If disabled (as default) then the Exchange is fully processed before the JmsConsumer will pickup the next message from the JMS queue. Note if transacted has been enabled, then asyncConsumer=true does not run asynchronously, as transaction must be executed synchronously (Camel 3.0 may support async transactions). | false | Boolean
 | *camel.component.activemq.async-start-listener* | Whether to startup the JmsConsumer message listener asynchronously, when starting a route. For example if a JmsConsumer cannot get a connection to a remote JMS broker, then it may block while retrying and/or failover. This will cause Camel to block while starting routes. By setting this option to true, you will let routes startup, while the JmsConsumer connects to the JMS broker using a dedicated thread in asynchronous mode. If this option is used, then beware that if the connection could not be established, then an exception is logged at WARN level, and the consumer will not be able to receive messages; You can then restart the route to retry. | false | Boolean
 | *camel.component.activemq.async-stop-listener* | Whether to stop the JmsConsumer message listener asynchronously, when stopping a route. | false | Boolean
