@@ -175,7 +175,7 @@
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
         <testcontainers-version>1.13.0</testcontainers-version>
         <tomcat-version>9.0.31</tomcat-version>
-        <undertow-version>2.0.29.Final</undertow-version>
+        <undertow-version>2.0.30.Final</undertow-version>
         <weld3-version>3.0.5.RELEASE</weld3-version>
     </properties>
 
