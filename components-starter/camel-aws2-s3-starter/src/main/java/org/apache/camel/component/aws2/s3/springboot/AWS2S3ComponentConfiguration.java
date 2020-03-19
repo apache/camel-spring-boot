@@ -55,10 +55,6 @@ public class AWS2S3ComponentConfiguration
      */
     private String configuration;
     /**
-     * Whether or not the S3 client should use path style access
-     */
-    private Boolean pathStyleAccess = false;
-    /**
      * The policy for this queue to set in the
      * com.amazonaws.services.s3.AmazonS3#setBucketPolicy() method.
      */
@@ -86,16 +82,6 @@ public class AWS2S3ComponentConfiguration
      * instance or to expect static credentials to be passed in.
      */
     private Boolean useIAMCredentials = false;
-    /**
-     * The encryption materials to use in case of Symmetric/Asymmetric client
-     * usage. The option is a
-     * software.amazon.awssdk.services.s3.model.Encryption type.
-     */
-    private String encryptionMaterials;
-    /**
-     * Define if encryption must be used or not
-     */
-    private Boolean useEncryption = false;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -185,11 +171,6 @@ public class AWS2S3ComponentConfiguration
      */
     private Long partSize = 26214400L;
     /**
-     * Sets the server-side encryption algorithm when encrypting the object
-     * using AWS-managed keys. For example use AES256.
-     */
-    private String serverSideEncryption;
-    /**
      * The storage class to set in the
      * com.amazonaws.services.s3.model.PutObjectRequest request.
      */
@@ -202,26 +183,6 @@ public class AWS2S3ComponentConfiguration
      * Define if KMS must be used or not
      */
     private Boolean useAwsKMS = false;
-    /**
-     * Define if Accelerate Mode enabled is true or false
-     */
-    private Boolean accelerateModeEnabled = false;
-    /**
-     * Define if disabled Chunked Encoding is true or false
-     */
-    private Boolean chunkedEncodingDisabled = false;
-    /**
-     * Define if Dualstack enabled is true or false
-     */
-    private Boolean dualstackEnabled = false;
-    /**
-     * Define if Force Global Bucket Access enabled is true or false
-     */
-    private Boolean forceGlobalBucketAccessEnabled = false;
-    /**
-     * Define if Payload Signing enabled is true or false
-     */
-    private Boolean payloadSigningEnabled = false;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -258,14 +219,6 @@ public class AWS2S3ComponentConfiguration
 
     public void setConfiguration(String configuration) {
         this.configuration = configuration;
-    }
-
-    public Boolean getPathStyleAccess() {
-        return pathStyleAccess;
-    }
-
-    public void setPathStyleAccess(Boolean pathStyleAccess) {
-        this.pathStyleAccess = pathStyleAccess;
     }
 
     public String getPolicy() {
@@ -314,22 +267,6 @@ public class AWS2S3ComponentConfiguration
 
     public void setUseIAMCredentials(Boolean useIAMCredentials) {
         this.useIAMCredentials = useIAMCredentials;
-    }
-
-    public String getEncryptionMaterials() {
-        return encryptionMaterials;
-    }
-
-    public void setEncryptionMaterials(String encryptionMaterials) {
-        this.encryptionMaterials = encryptionMaterials;
-    }
-
-    public Boolean getUseEncryption() {
-        return useEncryption;
-    }
-
-    public void setUseEncryption(Boolean useEncryption) {
-        this.useEncryption = useEncryption;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -436,14 +373,6 @@ public class AWS2S3ComponentConfiguration
         this.partSize = partSize;
     }
 
-    public String getServerSideEncryption() {
-        return serverSideEncryption;
-    }
-
-    public void setServerSideEncryption(String serverSideEncryption) {
-        this.serverSideEncryption = serverSideEncryption;
-    }
-
     public String getStorageClass() {
         return storageClass;
     }
@@ -466,47 +395,6 @@ public class AWS2S3ComponentConfiguration
 
     public void setUseAwsKMS(Boolean useAwsKMS) {
         this.useAwsKMS = useAwsKMS;
-    }
-
-    public Boolean getAccelerateModeEnabled() {
-        return accelerateModeEnabled;
-    }
-
-    public void setAccelerateModeEnabled(Boolean accelerateModeEnabled) {
-        this.accelerateModeEnabled = accelerateModeEnabled;
-    }
-
-    public Boolean getChunkedEncodingDisabled() {
-        return chunkedEncodingDisabled;
-    }
-
-    public void setChunkedEncodingDisabled(Boolean chunkedEncodingDisabled) {
-        this.chunkedEncodingDisabled = chunkedEncodingDisabled;
-    }
-
-    public Boolean getDualstackEnabled() {
-        return dualstackEnabled;
-    }
-
-    public void setDualstackEnabled(Boolean dualstackEnabled) {
-        this.dualstackEnabled = dualstackEnabled;
-    }
-
-    public Boolean getForceGlobalBucketAccessEnabled() {
-        return forceGlobalBucketAccessEnabled;
-    }
-
-    public void setForceGlobalBucketAccessEnabled(
-            Boolean forceGlobalBucketAccessEnabled) {
-        this.forceGlobalBucketAccessEnabled = forceGlobalBucketAccessEnabled;
-    }
-
-    public Boolean getPayloadSigningEnabled() {
-        return payloadSigningEnabled;
-    }
-
-    public void setPayloadSigningEnabled(Boolean payloadSigningEnabled) {
-        this.payloadSigningEnabled = payloadSigningEnabled;
     }
 
     public Boolean getBasicPropertyBinding() {
