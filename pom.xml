@@ -148,7 +148,7 @@
         <jolokia-version>1.6.2</jolokia-version>
         <junit-jupiter-version>5.6.0</junit-jupiter-version>
         <kafka-avro-serializer-version>5.2.2</kafka-avro-serializer-version>
-        <log4j2-version>2.13.0</log4j2-version>
+        <log4j2-version>2.13.1</log4j2-version>
         <lucene3-version>3.6.0</lucene3-version>
         <maven-checkstyle-plugin-version>3.1.0</maven-checkstyle-plugin-version>
         <maven-checkstyle-version>8.26</maven-checkstyle-version>
