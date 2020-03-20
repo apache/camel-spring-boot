@@ -50,6 +50,11 @@ public class PlatformHttpComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+    /**
+     * An HTTP Server engine implementation to serve the requests. The option is
+     * a org.apache.camel.component.platform.http.spi.PlatformHttpEngine type.
+     */
+    private String engine;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -65,5 +70,13 @@ public class PlatformHttpComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getEngine() {
+        return engine;
+    }
+
+    public void setEngine(String engine) {
+        this.engine = engine;
     }
 }
