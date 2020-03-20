@@ -55,6 +55,11 @@ public class S3ComponentConfiguration
      */
     private String configuration;
     /**
+     * Amazon AWS Endpoint Configuration. The option is a
+     * com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration type.
+     */
+    private String endpointConfiguration;
+    /**
      * Whether or not the S3 client should use path style access
      */
     private Boolean pathStyleAccess = false;
@@ -258,6 +263,14 @@ public class S3ComponentConfiguration
 
     public void setConfiguration(String configuration) {
         this.configuration = configuration;
+    }
+
+    public String getEndpointConfiguration() {
+        return endpointConfiguration;
+    }
+
+    public void setEndpointConfiguration(String endpointConfiguration) {
+        this.endpointConfiguration = endpointConfiguration;
     }
 
     public Boolean getPathStyleAccess() {

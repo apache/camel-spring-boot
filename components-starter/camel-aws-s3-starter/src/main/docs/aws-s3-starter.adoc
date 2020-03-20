@@ -17,7 +17,7 @@ When using aws-s3 with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 38 options, which are listed below.
+The component supports 39 options, which are listed below.
 
 
 
@@ -40,6 +40,7 @@ The component supports 38 options, which are listed below.
 | *camel.component.aws-s3.dualstack-enabled* | Define if Dualstack enabled is true or false | false | Boolean
 | *camel.component.aws-s3.enabled* | Whether to enable auto configuration of the aws-s3 component. This is enabled by default. |  | Boolean
 | *camel.component.aws-s3.encryption-materials* | The encryption materials to use in case of Symmetric/Asymmetric client usage. The option is a com.amazonaws.services.s3.model.EncryptionMaterials type. |  | String
+| *camel.component.aws-s3.endpoint-configuration* | Amazon AWS Endpoint Configuration. The option is a com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration type. |  | String
 | *camel.component.aws-s3.file-name* | To get the object from the bucket with the given file name |  | String
 | *camel.component.aws-s3.force-global-bucket-access-enabled* | Define if Force Global Bucket Access enabled is true or false | false | Boolean
 | *camel.component.aws-s3.include-body* | If it is true, the exchange body will be set to a stream to the contents of the file. If false, the headers will be set with the S3 object metadata, but the body will be null. This option is strongly related to autocloseBody option. In case of setting includeBody to true and autocloseBody to false, it will be up to the caller to close the S3Object stream. Setting autocloseBody to true, will close the S3Object stream automatically. | true | Boolean

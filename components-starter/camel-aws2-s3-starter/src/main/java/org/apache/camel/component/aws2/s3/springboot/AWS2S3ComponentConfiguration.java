@@ -55,6 +55,11 @@ public class AWS2S3ComponentConfiguration
      */
     private String configuration;
     /**
+     * Set the need for overidding the endpoint. This option needs to be used in
+     * combination with uriEndpointOverride option
+     */
+    private Boolean overrideEndpoint = false;
+    /**
      * The policy for this queue to set in the
      * com.amazonaws.services.s3.AmazonS3#setBucketPolicy() method.
      */
@@ -77,6 +82,11 @@ public class AWS2S3ComponentConfiguration
      * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
+    /**
+     * Set the overriding uri endpoint. This option needs to be used in
+     * combination with overrideEndpoint option
+     */
+    private String uriEndpointOverride;
     /**
      * Set whether the S3 client should expect to load credentials on an EC2
      * instance or to expect static credentials to be passed in.
@@ -221,6 +231,14 @@ public class AWS2S3ComponentConfiguration
         this.configuration = configuration;
     }
 
+    public Boolean getOverrideEndpoint() {
+        return overrideEndpoint;
+    }
+
+    public void setOverrideEndpoint(Boolean overrideEndpoint) {
+        this.overrideEndpoint = overrideEndpoint;
+    }
+
     public String getPolicy() {
         return policy;
     }
@@ -259,6 +277,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
     }
 
     public Boolean getUseIAMCredentials() {

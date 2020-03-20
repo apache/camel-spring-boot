@@ -17,7 +17,7 @@ When using aws2-s3 with Spring Boot make sure to use the following Maven depende
 ----
 
 
-The component supports 29 options, which are listed below.
+The component supports 31 options, which are listed below.
 
 
 
@@ -42,6 +42,7 @@ The component supports 29 options, which are listed below.
 | *camel.component.aws2-s3.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.aws2-s3.multi-part-upload* | If it is true, camel will upload the file with multi part format, the part size is decided by the option of partSize | false | Boolean
 | *camel.component.aws2-s3.operation* | The operation to do in case the user don't want to do only an upload |  | AWS2S3Operations
+| *camel.component.aws2-s3.override-endpoint* | Set the need for overidding the endpoint. This option needs to be used in combination with uriEndpointOverride option | false | Boolean
 | *camel.component.aws2-s3.part-size* | Setup the partSize which is used in multi part upload, the default size is 25M. | 26214400 | Long
 | *camel.component.aws2-s3.policy* | The policy for this queue to set in the com.amazonaws.services.s3.AmazonS3#setBucketPolicy() method. |  | String
 | *camel.component.aws2-s3.prefix* | The prefix which is used in the com.amazonaws.services.s3.model.ListObjectsRequest to only consume objects we are interested in. |  | String
@@ -51,6 +52,7 @@ The component supports 29 options, which are listed below.
 | *camel.component.aws2-s3.region* | The region in which S3 client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
 | *camel.component.aws2-s3.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws2-s3.storage-class* | The storage class to set in the com.amazonaws.services.s3.model.PutObjectRequest request. |  | String
+| *camel.component.aws2-s3.uri-endpoint-override* | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
 | *camel.component.aws2-s3.use-aws-k-m-s* | Define if KMS must be used or not | false | Boolean
 | *camel.component.aws2-s3.use-i-a-m-credentials* | Set whether the S3 client should expect to load credentials on an EC2 instance or to expect static credentials to be passed in. | false | Boolean
 |===
