@@ -96,6 +96,18 @@ public class ElytronComponentConfiguration
      */
     private String undertowHttpBinding;
     /**
+     * Configuration used by UndertowSecurityProvider. Comma separated list of
+     * allowed roles.
+     */
+    private String allowedRoles;
+    /**
+     * Configuration used by UndertowSecurityProvider. Security configuration
+     * object for use from UndertowSecurityProvider. Configuration is
+     * UndertowSecurityProvider specific. Each provider decides, whether it
+     * accepts configuration. The option is a java.lang.Object type.
+     */
+    private String securityConfiguration;
+    /**
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
@@ -175,6 +187,22 @@ public class ElytronComponentConfiguration
 
     public void setUndertowHttpBinding(String undertowHttpBinding) {
         this.undertowHttpBinding = undertowHttpBinding;
+    }
+
+    public String getAllowedRoles() {
+        return allowedRoles;
+    }
+
+    public void setAllowedRoles(String allowedRoles) {
+        this.allowedRoles = allowedRoles;
+    }
+
+    public String getSecurityConfiguration() {
+        return securityConfiguration;
+    }
+
+    public void setSecurityConfiguration(String securityConfiguration) {
+        this.securityConfiguration = securityConfiguration;
     }
 
     public String getSslContextParameters() {

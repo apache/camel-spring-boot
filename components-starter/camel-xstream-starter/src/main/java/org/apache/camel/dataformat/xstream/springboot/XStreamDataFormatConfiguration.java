@@ -58,17 +58,6 @@ public class XStreamDataFormatConfiguration
      */
     private String encoding;
     /**
-     * To use a custom XStream driver. The instance must be of type
-     * com.thoughtworks.xstream.io.HierarchicalStreamDriver
-     */
-    private String driver;
-    /**
-     * To refer to a custom XStream driver to lookup in the registry. The
-     * instance must be of type
-     * com.thoughtworks.xstream.io.HierarchicalStreamDriver
-     */
-    private String driverRef;
-    /**
      * Mode for dealing with duplicate references The possible values are:
      * NO_REFERENCES ID_REFERENCES XPATH_RELATIVE_REFERENCES
      * XPATH_ABSOLUTE_REFERENCES SINGLE_NODE_XPATH_RELATIVE_REFERENCES
@@ -117,22 +106,6 @@ public class XStreamDataFormatConfiguration
 
     public void setEncoding(String encoding) {
         this.encoding = encoding;
-    }
-
-    public String getDriver() {
-        return driver;
-    }
-
-    public void setDriver(String driver) {
-        this.driver = driver;
-    }
-
-    public String getDriverRef() {
-        return driverRef;
-    }
-
-    public void setDriverRef(String driverRef) {
-        this.driverRef = driverRef;
     }
 
     public String getMode() {

@@ -51,10 +51,6 @@ public class JacksonDataFormatConfiguration
      */
     private Boolean prettyPrint = false;
     /**
-     * Class name of the java type to use when unmarshalling
-     */
-    private String unmarshalTypeName;
-    /**
      * When marshalling a POJO to JSON you might want to exclude certain fields
      * from the JSON output. With Jackson you can use JSON views to accomplish
      * this. This option is to refer to the class which has JsonView annotations
@@ -71,12 +67,6 @@ public class JacksonDataFormatConfiguration
      * specify a FQN classname to use to unmarshal to.
      */
     private Boolean allowJmsType = false;
-    /**
-     * Refers to a custom collection type to lookup in the registry to use. This
-     * option should rarely be used, but allows to use different collection
-     * types than java.util.Collection based as default.
-     */
-    private String collectionTypeName;
     /**
      * To unmarshal to a List of Map or a List of Pojo.
      */
@@ -117,20 +107,6 @@ public class JacksonDataFormatConfiguration
      * separated by comma
      */
     private String disableFeatures;
-    /**
-     * Adds permissions that controls which Java packages and classes XStream is
-     * allowed to use during unmarshal from xml/json to Java beans. A permission
-     * must be configured either here or globally using a JVM system property.
-     * The permission can be specified in a syntax where a plus sign is allow,
-     * and minus sign is deny. Wildcards is supported by using . as prefix. For
-     * example to allow com.foo and all subpackages then specfy com.foo..
-     * Multiple permissions can be configured separated by comma, such as
-     * com.foo.,-com.foo.bar.MySecretBean. The following default permission is
-     * always included: -,java.lang.,java.util. unless its overridden by
-     * specifying a JVM system property with they key
-     * org.apache.camel.xstream.permissions.
-     */
-    private String permissions;
     /**
      * If enabled then Jackson is allowed to attempt to use the
      * CamelJacksonUnmarshalType header during the unmarshalling. This should
@@ -180,14 +156,6 @@ public class JacksonDataFormatConfiguration
         this.prettyPrint = prettyPrint;
     }
 
-    public String getUnmarshalTypeName() {
-        return unmarshalTypeName;
-    }
-
-    public void setUnmarshalTypeName(String unmarshalTypeName) {
-        this.unmarshalTypeName = unmarshalTypeName;
-    }
-
     public Class<Object> getJsonView() {
         return jsonView;
     }
@@ -210,14 +178,6 @@ public class JacksonDataFormatConfiguration
 
     public void setAllowJmsType(Boolean allowJmsType) {
         this.allowJmsType = allowJmsType;
-    }
-
-    public String getCollectionTypeName() {
-        return collectionTypeName;
-    }
-
-    public void setCollectionTypeName(String collectionTypeName) {
-        this.collectionTypeName = collectionTypeName;
     }
 
     public Boolean getUseList() {
@@ -266,14 +226,6 @@ public class JacksonDataFormatConfiguration
 
     public void setDisableFeatures(String disableFeatures) {
         this.disableFeatures = disableFeatures;
-    }
-
-    public String getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(String permissions) {
-        this.permissions = permissions;
     }
 
     public Boolean getAllowUnmarshallType() {
