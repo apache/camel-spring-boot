@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.milo.server.springboot;
 
-import java.io.File;
-import java.util.Collection;
 import java.util.Set;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -53,14 +51,15 @@ public class MiloServerComponentConfiguration
      */
     private String bindAddresses;
     /**
-     * The TCP port the server binds to
-     */
-    private Integer bindPort;
-    /**
      * Server build info. The option is a
      * org.eclipse.milo.opcua.stack.core.types.structured.BuildInfo type.
      */
     private String buildInfo;
+    /**
+     * Server certificate. The option is a java.security.cert.X509Certificate
+     * type.
+     */
+    private String certificate;
     /**
      * Server certificate manager. The option is a
      * org.eclipse.milo.opcua.stack.core.security.CertificateManager type.
@@ -68,13 +67,13 @@ public class MiloServerComponentConfiguration
     private String certificateManager;
     /**
      * Validator for client certificates. The option is a
-     * java.util.function.Supplier<org.eclipse.milo.opcua.stack.core.security.CertificateValidator> type.
+     * org.eclipse.milo.opcua.stack.core.security.CertificateValidator type.
      */
     private String certificateValidator;
     /**
      * Validator for client certificates using default file based approach
      */
-    private File defaultCertificateValidator;
+    private String defaultCertificateValidator;
     /**
      * Enable anonymous authentication, disabled by default
      */
@@ -89,6 +88,10 @@ public class MiloServerComponentConfiguration
      */
     private String path;
     /**
+     * The TCP port the server binds to
+     */
+    private Integer port;
+    /**
      * The product URI
      */
     private String productUri;
@@ -97,14 +100,10 @@ public class MiloServerComponentConfiguration
      */
     private Set<SecurityPolicy> securityPolicies;
     /**
-     * Security policies by URI or name
+     * Security policies by URI or name. Multiple policies can be separated by
+     * comma.
      */
-    private Collection<String> securityPoliciesById;
-    /**
-     * Server certificate. The option is a
-     * org.apache.camel.component.milo.KeyStoreLoader.Result type.
-     */
-    private String serverCertificate;
+    private String securityPoliciesById;
     /**
      * Set user password combinations in the form of user1:pwd1,user2:pwd2
      * Usernames and passwords will be URL decoded
@@ -164,20 +163,20 @@ public class MiloServerComponentConfiguration
         this.bindAddresses = bindAddresses;
     }
 
-    public Integer getBindPort() {
-        return bindPort;
-    }
-
-    public void setBindPort(Integer bindPort) {
-        this.bindPort = bindPort;
-    }
-
     public String getBuildInfo() {
         return buildInfo;
     }
 
     public void setBuildInfo(String buildInfo) {
         this.buildInfo = buildInfo;
+    }
+
+    public String getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(String certificate) {
+        this.certificate = certificate;
     }
 
     public String getCertificateManager() {
@@ -196,11 +195,12 @@ public class MiloServerComponentConfiguration
         this.certificateValidator = certificateValidator;
     }
 
-    public File getDefaultCertificateValidator() {
+    public String getDefaultCertificateValidator() {
         return defaultCertificateValidator;
     }
 
-    public void setDefaultCertificateValidator(File defaultCertificateValidator) {
+    public void setDefaultCertificateValidator(
+            String defaultCertificateValidator) {
         this.defaultCertificateValidator = defaultCertificateValidator;
     }
 
@@ -229,6 +229,14 @@ public class MiloServerComponentConfiguration
         this.path = path;
     }
 
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
+    }
+
     public String getProductUri() {
         return productUri;
     }
@@ -245,20 +253,12 @@ public class MiloServerComponentConfiguration
         this.securityPolicies = securityPolicies;
     }
 
-    public Collection<String> getSecurityPoliciesById() {
+    public String getSecurityPoliciesById() {
         return securityPoliciesById;
     }
 
-    public void setSecurityPoliciesById(Collection<String> securityPoliciesById) {
+    public void setSecurityPoliciesById(String securityPoliciesById) {
         this.securityPoliciesById = securityPoliciesById;
-    }
-
-    public String getServerCertificate() {
-        return serverCertificate;
-    }
-
-    public void setServerCertificate(String serverCertificate) {
-        this.serverCertificate = serverCertificate;
     }
 
     public String getUserAuthenticationCredentials() {

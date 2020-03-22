@@ -52,14 +52,14 @@ The component supports 73 options, which are listed below.
 | *camel.component.salesforce.http-proxy-password* | Password to use to authenticate against the HTTP proxy server. |  | String
 | *camel.component.salesforce.http-proxy-port* | Port number of the HTTP proxy server to use. |  | Integer
 | *camel.component.salesforce.http-proxy-realm* | Realm of the proxy server, used in preemptive Basic/Digest authentication methods against the HTTP proxy server. |  | String
+| *camel.component.salesforce.http-proxy-secure* | If set to false disables the use of TLS when accessing the HTTP proxy. | true | Boolean
+| *camel.component.salesforce.http-proxy-socks4* | If set to true the configures the HTTP proxy to use as a SOCKS4 proxy. | false | Boolean
 | *camel.component.salesforce.http-proxy-use-digest-auth* | If set to true Digest authentication will be used when authenticating to the HTTP proxy, otherwise Basic authorization method will be used | false | Boolean
 | *camel.component.salesforce.http-proxy-username* | Username to use to authenticate against the HTTP proxy server. |  | String
 | *camel.component.salesforce.include-details* | Include details in Salesforce1 Analytics report, defaults to false. |  | Boolean
 | *camel.component.salesforce.initial-replay-id-map* | Replay IDs to start from per channel name. |  | Map
 | *camel.component.salesforce.instance-id* | Salesforce1 Analytics report execution instance ID |  | String
 | *camel.component.salesforce.instance-url* | URL of the Salesforce instance used after authentication, by default received from Salesforce on successful authentication |  | String
-| *camel.component.salesforce.is-http-proxy-secure* | If set to false disables the use of TLS when accessing the HTTP proxy. | true | Boolean
-| *camel.component.salesforce.is-http-proxy-socks4* | If set to true the configures the HTTP proxy to use as a SOCKS4 proxy. | false | Boolean
 | *camel.component.salesforce.job-id* | Bulk API Job ID |  | String
 | *camel.component.salesforce.keystore* | KeyStore parameters to use in OAuth JWT flow. The KeyStore should contain only one entry with private key and certificate. Salesforce does not verify the certificate chain, so this can easily be a selfsigned certificate. Make sure that you upload the certificate to the corresponding connected app. The option is a org.apache.camel.support.jsse.KeyStoreParameters type. |  | String
 | *camel.component.salesforce.lazy-login* | If set to true prevents the component from authenticating to Salesforce with the start of the component. You would generally set this to the (default) false and authenticate early and be immediately aware of any authentication issues. | false | Boolean

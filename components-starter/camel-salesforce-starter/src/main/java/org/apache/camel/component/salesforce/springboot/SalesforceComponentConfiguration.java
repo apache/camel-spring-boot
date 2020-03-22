@@ -296,7 +296,7 @@ public class SalesforceComponentConfiguration
     /**
      * If set to true the configures the HTTP proxy to use as a SOCKS4 proxy.
      */
-    private Boolean isHttpProxySocks4 = false;
+    private Boolean httpProxySocks4 = false;
     /**
      * Explicit authentication method to be used, one of USERNAME_PASSWORD,
      * REFRESH_TOKEN or JWT. Salesforce component can auto-determine the
@@ -331,6 +331,10 @@ public class SalesforceComponentConfiguration
      */
     private String httpProxyRealm;
     /**
+     * If set to false disables the use of TLS when accessing the HTTP proxy.
+     */
+    private Boolean httpProxySecure = true;
+    /**
      * If set to true Digest authentication will be used when authenticating to
      * the HTTP proxy, otherwise Basic authorization method will be used
      */
@@ -344,10 +348,6 @@ public class SalesforceComponentConfiguration
      * received from Salesforce on successful authentication
      */
     private String instanceUrl;
-    /**
-     * If set to false disables the use of TLS when accessing the HTTP proxy.
-     */
-    private Boolean isHttpProxySecure = true;
     /**
      * KeyStore parameters to use in OAuth JWT flow. The KeyStore should contain
      * only one entry with private key and certificate. Salesforce does not
@@ -830,12 +830,12 @@ public class SalesforceComponentConfiguration
         this.httpProxyPort = httpProxyPort;
     }
 
-    public Boolean getIsHttpProxySocks4() {
-        return isHttpProxySocks4;
+    public Boolean getHttpProxySocks4() {
+        return httpProxySocks4;
     }
 
-    public void setIsHttpProxySocks4(Boolean isHttpProxySocks4) {
-        this.isHttpProxySocks4 = isHttpProxySocks4;
+    public void setHttpProxySocks4(Boolean httpProxySocks4) {
+        this.httpProxySocks4 = httpProxySocks4;
     }
 
     public AuthenticationType getAuthenticationType() {
@@ -886,6 +886,14 @@ public class SalesforceComponentConfiguration
         this.httpProxyRealm = httpProxyRealm;
     }
 
+    public Boolean getHttpProxySecure() {
+        return httpProxySecure;
+    }
+
+    public void setHttpProxySecure(Boolean httpProxySecure) {
+        this.httpProxySecure = httpProxySecure;
+    }
+
     public Boolean getHttpProxyUseDigestAuth() {
         return httpProxyUseDigestAuth;
     }
@@ -908,14 +916,6 @@ public class SalesforceComponentConfiguration
 
     public void setInstanceUrl(String instanceUrl) {
         this.instanceUrl = instanceUrl;
-    }
-
-    public Boolean getIsHttpProxySecure() {
-        return isHttpProxySecure;
-    }
-
-    public void setIsHttpProxySecure(Boolean isHttpProxySecure) {
-        this.isHttpProxySecure = isHttpProxySecure;
     }
 
     public String getKeystore() {
