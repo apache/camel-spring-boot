@@ -17,7 +17,7 @@ When using debezium-postgres with Spring Boot make sure to use the following Mav
 ----
 
 
-The component supports 65 options, which are listed below.
+The component supports 68 options, which are listed below.
 
 
 
@@ -46,9 +46,11 @@ The component supports 65 options, which are listed below.
 | *camel.component.debezium-postgres.database-user* | Name of the Postgres database user to be used when connecting to the database. |  | String
 | *camel.component.debezium-postgres.decimal-handling-mode* | Specify how DECIMAL and NUMERIC columns should be represented in change events, including:'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers. | precise | String
 | *camel.component.debezium-postgres.enabled* | Whether to enable auto configuration of the debezium-postgres component. This is enabled by default. |  | Boolean
+| *camel.component.debezium-postgres.event-processing-failure-handling-mode* | Specify how failures during processing of events (i.e. when encountering a corrupted event) should be handled, including:'fail' (the default) an exception indicating the problematic event and its position is raised, causing the connector to be stopped; 'warn' the problematic event and its position will be logged and the event will be skipped;'ignore' the problematic event will be skipped. | fail | String
+| *camel.component.debezium-postgres.heartbeat-action-query* | The query executed with every heartbeat. Defaults to an empty string. |  | String
 | *camel.component.debezium-postgres.heartbeat-interval-ms* | Length of an interval in milli-seconds in in which the connector periodically sends heartbeat messages to a heartbeat topic. Use 0 to disable heartbeat messages. Disabled by default. | 0 | Integer
 | *camel.component.debezium-postgres.heartbeat-topics-prefix* | The prefix that is used to name heartbeat topics.Defaults to __debezium-heartbeat. | __debezium-heartbeat | String
-| *camel.component.debezium-postgres.hstore-handling-mode* | Specify how HSTORE columns should be represented in change events, including:'json' represents values as json string'map' (default) represents values using java.util.Map | json | String
+| *camel.component.debezium-postgres.hstore-handling-mode* | Specify how HSTORE columns should be represented in change events, including:'json' represents values as string-ified JSON (default)'map' represents values as a key/value map | json | String
 | *camel.component.debezium-postgres.include-unknown-datatypes* | Specify whether the fields of data type not supported by Debezium should be processed:'false' (the default) omits the fields; 'true' converts the field into an implementation dependent binary representation. | false | Boolean
 | *camel.component.debezium-postgres.internal-key-converter* | The Converter class that should be used to serialize and deserialize key data for offsets. The default is JSON converter. | org.apache.kafka.connect.json.JsonConverter | String
 | *camel.component.debezium-postgres.internal-value-converter* | The Converter class that should be used to serialize and deserialize value data for offsets. The default is JSON converter. | org.apache.kafka.connect.json.JsonConverter | String
@@ -66,6 +68,7 @@ The component supports 65 options, which are listed below.
 | *camel.component.debezium-postgres.offset-storage-topic* | The name of the Kafka topic where offsets are to be stored. Required when offset.storage is set to the KafkaOffsetBackingStore. |  | String
 | *camel.component.debezium-postgres.plugin-name* | The name of the Postgres logical decoding plugin installed on the server. Supported values are 'decoderbufs' and 'wal2json'. Defaults to 'decoderbufs'. | decoderbufs | String
 | *camel.component.debezium-postgres.poll-interval-ms* | Frequency in milliseconds to wait for new change events to appear after receiving no events. Defaults to 500ms. | 500 | Long
+| *camel.component.debezium-postgres.provide-transaction-metadata* | Enables transaction metadata extraction together with event counting | false | Boolean
 | *camel.component.debezium-postgres.publication-name* | The name of the Postgres 10 publication used for streaming changes from a plugin.Defaults to 'dbz_publication' | dbz_publication | String
 | *camel.component.debezium-postgres.schema-blacklist* | The schemas for which events must not be captured |  | String
 | *camel.component.debezium-postgres.schema-refresh-mode* | Specify the conditions that trigger a refresh of the in-memory schema for a table. 'columns_diff' (the default) is the safest mode, ensuring the in-memory schema stays in-sync with the database table's schema at all times. 'columns_diff_exclude_unchanged_toast' instructs the connector to refresh the in-memory schema cache if there is a discrepancy between it and the schema derived from the incoming message, unless unchanged TOASTable data fully accounts for the discrepancy. This setting can improve connector performance significantly if there are frequently-updated tables that have TOASTed data that are rarely part of these updates. However, it is possible for the in-memory schema to become outdated if TOASTable columns are dropped from the table. | columns_diff | String

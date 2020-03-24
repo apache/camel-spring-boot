@@ -3496,6 +3496,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-spring-main</artifactId>
+        <version>3.2.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-spring-redis</artifactId>
         <version>3.2.0-SNAPSHOT</version>
       </dependency>

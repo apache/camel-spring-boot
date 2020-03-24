@@ -204,6 +204,15 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String decimalHandlingMode = "precise";
     /**
+     * Specify how failures during processing of events (i.e. when encountering
+     * a corrupted event) should be handled, including:'fail' (the default) an
+     * exception indicating the problematic event and its position is raised,
+     * causing the connector to be stopped; 'warn' the problematic event and its
+     * position will be logged and the event will be skipped;'ignore' the
+     * problematic event will be skipped.
+     */
+    private String eventProcessingFailureHandlingMode = "fail";
+    /**
      * Length of an interval in milli-seconds in in which the connector
      * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
      * disable heartbeat messages. Disabled by default.
@@ -241,6 +250,10 @@ public class DebeziumSqlserverComponentConfiguration
      * receiving no events. Defaults to 500ms.
      */
     private Long pollIntervalMs = 500L;
+    /**
+     * Enables transaction metadata extraction together with event counting
+     */
+    private Boolean provideTransactionMetadata = false;
     /**
      * The number of milliseconds to delay before a snapshot will begin.
      */
@@ -554,6 +567,15 @@ public class DebeziumSqlserverComponentConfiguration
         this.decimalHandlingMode = decimalHandlingMode;
     }
 
+    public String getEventProcessingFailureHandlingMode() {
+        return eventProcessingFailureHandlingMode;
+    }
+
+    public void setEventProcessingFailureHandlingMode(
+            String eventProcessingFailureHandlingMode) {
+        this.eventProcessingFailureHandlingMode = eventProcessingFailureHandlingMode;
+    }
+
     public Integer getHeartbeatIntervalMs() {
         return heartbeatIntervalMs;
     }
@@ -600,6 +622,14 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setPollIntervalMs(Long pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
+    }
+
+    public Boolean getProvideTransactionMetadata() {
+        return provideTransactionMetadata;
+    }
+
+    public void setProvideTransactionMetadata(Boolean provideTransactionMetadata) {
+        this.provideTransactionMetadata = provideTransactionMetadata;
     }
 
     public Long getSnapshotDelayMs() {

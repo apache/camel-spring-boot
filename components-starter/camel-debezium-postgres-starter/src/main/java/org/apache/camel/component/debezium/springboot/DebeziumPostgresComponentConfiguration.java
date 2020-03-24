@@ -220,6 +220,19 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String decimalHandlingMode = "precise";
     /**
+     * Specify how failures during processing of events (i.e. when encountering
+     * a corrupted event) should be handled, including:'fail' (the default) an
+     * exception indicating the problematic event and its position is raised,
+     * causing the connector to be stopped; 'warn' the problematic event and its
+     * position will be logged and the event will be skipped;'ignore' the
+     * problematic event will be skipped.
+     */
+    private String eventProcessingFailureHandlingMode = "fail";
+    /**
+     * The query executed with every heartbeat. Defaults to an empty string.
+     */
+    private String heartbeatActionQuery;
+    /**
      * Length of an interval in milli-seconds in in which the connector
      * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
      * disable heartbeat messages. Disabled by default.
@@ -232,8 +245,8 @@ public class DebeziumPostgresComponentConfiguration
     private String heartbeatTopicsPrefix = "__debezium-heartbeat";
     /**
      * Specify how HSTORE columns should be represented in change events,
-     * including:'json' represents values as json string'map' (default)
-     * represents values using java.util.Map
+     * including:'json' represents values as string-ified JSON (default)'map'
+     * represents values as a key/value map
      */
     private String hstoreHandlingMode = "json";
     /**
@@ -282,6 +295,10 @@ public class DebeziumPostgresComponentConfiguration
      * receiving no events. Defaults to 500ms.
      */
     private Long pollIntervalMs = 500L;
+    /**
+     * Enables transaction metadata extraction together with event counting
+     */
+    private Boolean provideTransactionMetadata = false;
     /**
      * The name of the Postgres 10 publication used for streaming changes from a
      * plugin.Defaults to 'dbz_publication'
@@ -695,6 +712,23 @@ public class DebeziumPostgresComponentConfiguration
         this.decimalHandlingMode = decimalHandlingMode;
     }
 
+    public String getEventProcessingFailureHandlingMode() {
+        return eventProcessingFailureHandlingMode;
+    }
+
+    public void setEventProcessingFailureHandlingMode(
+            String eventProcessingFailureHandlingMode) {
+        this.eventProcessingFailureHandlingMode = eventProcessingFailureHandlingMode;
+    }
+
+    public String getHeartbeatActionQuery() {
+        return heartbeatActionQuery;
+    }
+
+    public void setHeartbeatActionQuery(String heartbeatActionQuery) {
+        this.heartbeatActionQuery = heartbeatActionQuery;
+    }
+
     public Integer getHeartbeatIntervalMs() {
         return heartbeatIntervalMs;
     }
@@ -773,6 +807,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setPollIntervalMs(Long pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
+    }
+
+    public Boolean getProvideTransactionMetadata() {
+        return provideTransactionMetadata;
+    }
+
+    public void setProvideTransactionMetadata(Boolean provideTransactionMetadata) {
+        this.provideTransactionMetadata = provideTransactionMetadata;
     }
 
     public String getPublicationName() {

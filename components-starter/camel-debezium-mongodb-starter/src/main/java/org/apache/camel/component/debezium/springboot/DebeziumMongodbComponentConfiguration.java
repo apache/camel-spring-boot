@@ -184,7 +184,7 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String heartbeatTopicsPrefix = "__debezium-heartbeat";
     /**
-     * Maximum number of threads used to perform an intial sync of the
+     * Maximum number of threads used to perform an initial sync of the
      * collections in a replica set. Defaults to 1.
      */
     private Integer initialSyncMaxThreads = 1;
@@ -239,6 +239,12 @@ public class DebeziumMongodbComponentConfiguration
      * receiving no events. Defaults to 500ms.
      */
     private Long pollIntervalMs = 500L;
+    /**
+     * The comma-separated list of operations to skip during streaming, defined
+     * as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no
+     * operations will be skipped.
+     */
+    private String skippedOperations;
     /**
      * The number of milliseconds to delay before a snapshot will begin.
      */
@@ -567,6 +573,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setPollIntervalMs(Long pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
+    }
+
+    public String getSkippedOperations() {
+        return skippedOperations;
+    }
+
+    public void setSkippedOperations(String skippedOperations) {
+        this.skippedOperations = skippedOperations;
     }
 
     public Long getSnapshotDelayMs() {

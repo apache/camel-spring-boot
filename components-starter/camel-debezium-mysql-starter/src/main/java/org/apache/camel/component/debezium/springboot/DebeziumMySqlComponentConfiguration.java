@@ -331,12 +331,21 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String eventDeserializationFailureHandlingMode = "fail";
     /**
+     * Specify how failures during processing of events (i.e. when encountering
+     * a corrupted event) should be handled, including:'fail' (the default) an
+     * exception indicating the problematic event and its position is raised,
+     * causing the connector to be stopped; 'warn' the problematic event and its
+     * position will be logged and the event will be skipped;'ignore' the
+     * problematic event will be skipped.
+     */
+    private String eventProcessingFailureHandlingMode = "fail";
+    /**
      * If set to 'latest', when connector sees new GTID, it will start consuming
      * gtid channel from the server latest executed gtid position. If 'earliest'
-     * connector starts reading channel from first available (not purged) gtid
-     * position on the server.
+     * (the default) connector starts reading channel from first available (not
+     * purged) gtid position on the server.
      */
-    private String gtidNewChannelPosition = "latest";
+    private String gtidNewChannelPosition = "earliest";
     /**
      * The source UUIDs used to exclude GTID ranges when determine the starting
      * position in the MySQL server's binlog.
@@ -390,7 +399,7 @@ public class DebeziumMySqlComponentConfiguration
      * exception indicating the problematic event and its binlog position is
      * raised, causing the connector to be stopped; 'warn' the problematic event
      * and its binlog position will be logged and the event will be
-     * skipped;'ignore' the problematic event will be skipped.
+     * skipped;'skip' the problematic event will be skipped.
      */
     private String inconsistentSchemaHandlingMode = "fail";
     /**
@@ -911,6 +920,15 @@ public class DebeziumMySqlComponentConfiguration
     public void setEventDeserializationFailureHandlingMode(
             String eventDeserializationFailureHandlingMode) {
         this.eventDeserializationFailureHandlingMode = eventDeserializationFailureHandlingMode;
+    }
+
+    public String getEventProcessingFailureHandlingMode() {
+        return eventProcessingFailureHandlingMode;
+    }
+
+    public void setEventProcessingFailureHandlingMode(
+            String eventProcessingFailureHandlingMode) {
+        this.eventProcessingFailureHandlingMode = eventProcessingFailureHandlingMode;
     }
 
     public String getGtidNewChannelPosition() {
