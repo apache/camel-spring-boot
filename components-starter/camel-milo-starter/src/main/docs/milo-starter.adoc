@@ -17,7 +17,7 @@ When using milo with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 45 options, which are listed below.
+The component supports 46 options, which are listed below.
 
 
 
@@ -46,6 +46,7 @@ The component supports 45 options, which are listed below.
 | *camel.component.milo-client.override-host* | Override the server reported endpoint host with the host from the endpoint URI. | false | Boolean
 | *camel.component.milo-client.product-uri* | The product URI | http://camel.apache.org/EclipseMilo | String
 | *camel.component.milo-client.request-timeout* | Request timeout in milliseconds |  | Long
+| *camel.component.milo-client.requested-publishing-interval* | The requested publishing interval in milliseconds |  | Double
 | *camel.component.milo-client.session-name* | Session name |  | String
 | *camel.component.milo-client.session-timeout* | Session timeout in milliseconds |  | Long
 | *camel.component.milo-server.application-name* | The application name |  | String

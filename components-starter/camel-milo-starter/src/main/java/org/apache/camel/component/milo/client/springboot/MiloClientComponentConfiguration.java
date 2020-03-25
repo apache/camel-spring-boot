@@ -134,6 +134,10 @@ public class MiloClientComponentConfiguration
      */
     private String productUri = "http://camel.apache.org/EclipseMilo";
     /**
+     * The requested publishing interval in milliseconds
+     */
+    private Double requestedPublishingInterval;
+    /**
      * Request timeout in milliseconds
      */
     private Long requestTimeout;
@@ -304,6 +308,15 @@ public class MiloClientComponentConfiguration
 
     public void setProductUri(String productUri) {
         this.productUri = productUri;
+    }
+
+    public Double getRequestedPublishingInterval() {
+        return requestedPublishingInterval;
+    }
+
+    public void setRequestedPublishingInterval(
+            Double requestedPublishingInterval) {
+        this.requestedPublishingInterval = requestedPublishingInterval;
     }
 
     public Long getRequestTimeout() {

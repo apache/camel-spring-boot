@@ -91,6 +91,13 @@ public class UndertowComponentConfiguration
      */
     private String securityConfiguration;
     /**
+     * Security provider allows plug in the provider, which will be used to
+     * secure requests. SPI approach could be used too (component then finds
+     * security provider using SPI). The option is a
+     * org.apache.camel.component.undertow.spi.UndertowSecurityProvider type.
+     */
+    private String securityProvider;
+    /**
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
@@ -162,6 +169,14 @@ public class UndertowComponentConfiguration
 
     public void setSecurityConfiguration(String securityConfiguration) {
         this.securityConfiguration = securityConfiguration;
+    }
+
+    public String getSecurityProvider() {
+        return securityProvider;
+    }
+
+    public void setSecurityProvider(String securityProvider) {
+        this.securityProvider = securityProvider;
     }
 
     public String getSslContextParameters() {
