@@ -88,7 +88,7 @@ public class CamelAutoConfiguration {
                                                 CamelContext camelContext,
                                                 CamelConfigurationProperties config) throws Exception {
 
-        camelContext.init();
+        camelContext.build();
 
         // initialize properties component eager
         PropertiesComponent pc = applicationContext.getBeanProvider(PropertiesComponent.class).getIfAvailable();
