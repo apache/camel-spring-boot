@@ -320,9 +320,6 @@ Number of Camel components: 327 in 260 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/elsql-component.html[ElSQL] (camel-elsql-starter) +
 `elsql:elsqlName:resourceUri` | 2.16 | The elsql component is an extension to the existing SQL Component that uses ElSql to define the SQL queries.
 
-| link:https://camel.apache.org/components/latest/elytron-component.html[Elytron] (camel-elytron-starter) +
-`elytron:httpURI` | 3.1 | The elytron component is allows you to work with the Elytron Security Framework
-
 | link:https://camel.apache.org/components/latest/etcd-keys-component.html[Etcd Keys] (camel-etcd-starter) +
 `etcd-keys:path` | 2.18 | Camel Etcd support
 
