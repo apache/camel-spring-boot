@@ -758,6 +758,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-elytron-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-etcd-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2511,6 +2516,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-elsql</artifactId>
+        <version>3.2.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-elytron</artifactId>
         <version>3.2.0-SNAPSHOT</version>
       </dependency>
       <dependency>
