@@ -37,15 +37,6 @@ public class WeatherComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The geolocation service now needs an accessKey to be used
-     */
-    private String geolocationAccessKey;
-    /**
-     * The geolocation service now needs to specify the IP associated to the
-     * accessKey you're using
-     */
-    private String geolocationRequestHostIP;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -70,22 +61,11 @@ public class WeatherComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-
-    public String getGeolocationAccessKey() {
-        return geolocationAccessKey;
-    }
-
-    public void setGeolocationAccessKey(String geolocationAccessKey) {
-        this.geolocationAccessKey = geolocationAccessKey;
-    }
-
-    public String getGeolocationRequestHostIP() {
-        return geolocationRequestHostIP;
-    }
-
-    public void setGeolocationRequestHostIP(String geolocationRequestHostIP) {
-        this.geolocationRequestHostIP = geolocationRequestHostIP;
-    }
+    /**
+     * To use an existing configured http client (for example with http proxy).
+     * The option is a org.apache.http.impl.client.CloseableHttpClient type.
+     */
+    private String httpClient;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -109,5 +89,13 @@ public class WeatherComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getHttpClient() {
+        return httpClient;
+    }
+
+    public void setHttpClient(String httpClient) {
+        this.httpClient = httpClient;
     }
 }
