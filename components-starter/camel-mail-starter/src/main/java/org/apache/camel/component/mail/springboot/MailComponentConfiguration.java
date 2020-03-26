@@ -197,6 +197,13 @@ public class MailComponentConfiguration
      */
     private String attachmentsContentTransferEncodingResolver;
     /**
+     * The authenticator for login. If set then the password and username are
+     * ignored. Can be used for tokens which can expire and therefore must be
+     * read dynamically. The option is a
+     * org.apache.camel.component.mail.MailAuthenticator type.
+     */
+    private String authenticator;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -264,7 +271,7 @@ public class MailComponentConfiguration
      */
     private String headerFilterStrategy;
     /**
-     * The password for login
+     * The password for login. See also setAuthenticator(MailAuthenticator).
      */
     private String password;
     /**
@@ -277,7 +284,7 @@ public class MailComponentConfiguration
      */
     private Boolean useGlobalSslContextParameters = false;
     /**
-     * The username for login
+     * The username for login. See also setAuthenticator(MailAuthenticator).
      */
     private String username;
 
@@ -481,6 +488,14 @@ public class MailComponentConfiguration
     public void setAttachmentsContentTransferEncodingResolver(
             String attachmentsContentTransferEncodingResolver) {
         this.attachmentsContentTransferEncodingResolver = attachmentsContentTransferEncodingResolver;
+    }
+
+    public String getAuthenticator() {
+        return authenticator;
+    }
+
+    public void setAuthenticator(String authenticator) {
+        this.authenticator = authenticator;
     }
 
     public Boolean getBasicPropertyBinding() {
