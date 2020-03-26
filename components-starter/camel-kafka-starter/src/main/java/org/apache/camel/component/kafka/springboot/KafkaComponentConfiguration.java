@@ -470,7 +470,7 @@ public class KafkaComponentConfiguration
      * request.required.acks requirement before sending back an error to the
      * client.
      */
-    private Integer requestTimeoutMs = 305000;
+    private Integer requestTimeoutMs = 30000;
     /**
      * Setting a value greater than zero will cause the client to resend any
      * record whose send fails with a potentially transient error. Note that
