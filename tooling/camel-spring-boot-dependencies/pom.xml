@@ -2189,11 +2189,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-blueprint</artifactId>
-        <version>3.2.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-bonita</artifactId>
         <version>3.2.0-SNAPSHOT</version>
       </dependency>
@@ -2360,11 +2355,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-core-osgi</artifactId>
-        <version>3.2.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-core-xml</artifactId>
         <version>3.2.0-SNAPSHOT</version>
       </dependency>
@@ -2526,11 +2516,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-etcd</artifactId>
-        <version>3.2.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-eventadmin</artifactId>
         <version>3.2.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -2935,11 +2920,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-kura</artifactId>
-        <version>3.2.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-language</artifactId>
         <version>3.2.0-SNAPSHOT</version>
       </dependency>
@@ -3177,11 +3157,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-optaplanner</artifactId>
-        <version>3.2.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-osgi-activator</artifactId>
         <version>3.2.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -3567,11 +3542,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-test</artifactId>
-        <version>3.2.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-test-blueprint</artifactId>
         <version>3.2.0-SNAPSHOT</version>
       </dependency>
       <dependency>
