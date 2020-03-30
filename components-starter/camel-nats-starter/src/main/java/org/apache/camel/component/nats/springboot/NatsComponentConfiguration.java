@@ -42,6 +42,10 @@ public class NatsComponentConfiguration
      */
     private String servers;
     /**
+     * Whether or not running in verbose mode
+     */
+    private Boolean verbose = false;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -77,6 +81,14 @@ public class NatsComponentConfiguration
 
     public void setServers(String servers) {
         this.servers = servers;
+    }
+
+    public Boolean getVerbose() {
+        return verbose;
+    }
+
+    public void setVerbose(Boolean verbose) {
+        this.verbose = verbose;
     }
 
     public Boolean getBridgeErrorHandler() {

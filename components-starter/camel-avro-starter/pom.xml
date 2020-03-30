@@ -26,8 +26,8 @@
   </parent>
   <artifactId>camel-avro-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: Avro</name>
-  <description>Spring-Boot Starter for Camel Avro data format</description>
+  <!--    <name>Camel Spring Boot :: Starters :: Dozer</name>-->
+  <!--    <description>Spring-Boot Starter for Camel Support for the Dozer type conversion framework</description>-->
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>

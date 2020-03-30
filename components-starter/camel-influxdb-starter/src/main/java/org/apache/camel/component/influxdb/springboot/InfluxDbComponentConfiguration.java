@@ -38,6 +38,11 @@ public class InfluxDbComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The shared Influx DB to use for all endpoints. The option is a
+     * org.influxdb.InfluxDB type.
+     */
+    private String influxDB;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -53,6 +58,14 @@ public class InfluxDbComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+
+    public String getInfluxDB() {
+        return influxDB;
+    }
+
+    public void setInfluxDB(String influxDB) {
+        this.influxDB = influxDB;
+    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
