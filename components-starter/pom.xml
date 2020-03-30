@@ -122,6 +122,7 @@
     <module>camel-atmosphere-websocket-starter</module>
     <module>camel-atom-starter</module>
     <module>camel-atomix-starter</module>
+    <module>camel-avro-rpc-starter</module>
     <module>camel-avro-starter</module>
     <module>camel-aws-cw-starter</module>
     <module>camel-aws-ddb-starter</module>
