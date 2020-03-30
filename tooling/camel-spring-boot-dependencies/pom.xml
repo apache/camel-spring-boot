@@ -758,6 +758,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-elytron-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-etcd-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1969,6 +1974,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-avro-rpc</artifactId>
+        <version>3.2.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws-cw</artifactId>
         <version>3.2.0-SNAPSHOT</version>
       </dependency>
@@ -2300,11 +2310,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-cometd</artifactId>
-        <version>3.2.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-commands-core</artifactId>
         <version>3.2.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -3552,11 +3557,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-test-junit5</artifactId>
-        <version>3.2.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-test-karaf</artifactId>
         <version>3.2.0-SNAPSHOT</version>
       </dependency>
       <dependency>
