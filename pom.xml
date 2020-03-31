@@ -398,6 +398,11 @@
                             </exclude>
                             <!-- Maven Wrapper -->
                             <exclude>.mvn/**/*</exclude>
+                            <!-- examples -->
+                            <exclude>examples/**/*.properties</exclude>
+                            <exclude>examples/**/*.yml</exclude>
+                            <exclude>examples/**/*.yaml</exclude>
+
                         </excludes>
                     </configuration>
                 </plugin>
