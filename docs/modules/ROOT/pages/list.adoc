@@ -59,7 +59,7 @@ Number of Camel components: 326 in 259 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/atomix-value-component.html[Atomix Value] (camel-atomix-starter) +
 `atomix-value:resourceName` | 2.20 | The atomix-value component is used to access Atomix's distributed value.
 
-| link:https://camel.apache.org/components/latest/avro-component.html[Avro] (camel-avro-starter) +
+| link:https://camel.apache.org/components/latest/avro-component.html[Avro] (camel-avro-rpc-starter) +
 `avro:transport:host:port/messageName` | 2.10 | Working with Apache Avro for data serialization.
 
 | link:https://camel.apache.org/components/latest/aws2-cw-component.html[AWS 2 CloudWatch] (camel-aws2-cw-starter) +
