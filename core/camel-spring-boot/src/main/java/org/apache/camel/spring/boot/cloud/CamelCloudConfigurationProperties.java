@@ -221,21 +221,10 @@ public class CamelCloudConfigurationProperties {
          * Configure service discoveries.
          */
         private Map<String, List<String>> services = new HashMap<>();
-        /**
-         * Configure cache timeout (in millis).
-         */
-        private String cacheTimeout;
+
 
         public Map<String, List<String>> getServices() {
             return services;
-        }
-
-        public String getCacheTimeout() {
-            return cacheTimeout;
-        }
-
-        public void setCacheTimeout(String cacheTimeout) {
-            this.cacheTimeout = cacheTimeout;
         }
     }
 
