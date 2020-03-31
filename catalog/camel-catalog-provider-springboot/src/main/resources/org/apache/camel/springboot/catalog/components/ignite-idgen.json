@@ -1,6 +1,7 @@
 {
   "component": {
     "kind": "component",
+    "name": "ignite-idgen",
     "scheme": "ignite-idgen",
     "extendsScheme": "",
     "syntax": "ignite-idgen:name",

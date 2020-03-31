@@ -1,6 +1,7 @@
 {
   "component": {
     "kind": "component",
+    "name": "ignite-set",
     "scheme": "ignite-set",
     "extendsScheme": "",
     "syntax": "ignite-set:name",

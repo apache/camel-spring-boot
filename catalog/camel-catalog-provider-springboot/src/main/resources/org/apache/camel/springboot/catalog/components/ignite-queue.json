@@ -1,6 +1,7 @@
 {
   "component": {
     "kind": "component",
+    "name": "ignite-queue",
     "scheme": "ignite-queue",
     "extendsScheme": "",
     "syntax": "ignite-queue:name",

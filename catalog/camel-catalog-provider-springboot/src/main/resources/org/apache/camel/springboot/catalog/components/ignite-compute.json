@@ -1,6 +1,7 @@
 {
   "component": {
     "kind": "component",
+    "name": "ignite-compute",
     "scheme": "ignite-compute",
     "extendsScheme": "",
     "syntax": "ignite-compute:endpointId",

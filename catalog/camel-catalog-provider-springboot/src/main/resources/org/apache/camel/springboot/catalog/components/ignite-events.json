@@ -1,6 +1,7 @@
 {
   "component": {
     "kind": "component",
+    "name": "ignite-events",
     "scheme": "ignite-events",
     "extendsScheme": "",
     "syntax": "ignite-events:endpointId",

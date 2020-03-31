@@ -1,6 +1,7 @@
 {
   "component": {
     "kind": "component",
+    "name": "ignite-cache",
     "scheme": "ignite-cache",
     "extendsScheme": "",
     "syntax": "ignite-cache:cacheName",
