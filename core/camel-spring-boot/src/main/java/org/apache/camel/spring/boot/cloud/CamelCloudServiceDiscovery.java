@@ -21,23 +21,15 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.cloud.ServiceDefinition;
 import org.apache.camel.cloud.ServiceDiscovery;
-import org.apache.camel.impl.cloud.CachingServiceDiscovery;
 import org.apache.camel.impl.cloud.CombinedServiceDiscovery;
 
 public class CamelCloudServiceDiscovery implements ServiceDiscovery {
     private ServiceDiscovery delegate;
 
-    public CamelCloudServiceDiscovery(Long timeout, List<ServiceDiscovery> serviceDiscoveryList) {
+    public CamelCloudServiceDiscovery(List<ServiceDiscovery> serviceDiscoveryList) {
         // Created a chained service discovery that collects services from multiple
         // ServiceDiscovery
         this.delegate = new CombinedServiceDiscovery(serviceDiscoveryList);
-
-        // If a timeout is provided, wrap the serviceDiscovery with a caching
-        // strategy so the discovery implementations are not queried for each
-        // discovery request
-        if (timeout != null && timeout > 0) {
-            this.delegate = CachingServiceDiscovery.wrap(this.delegate, timeout, TimeUnit.MILLISECONDS);
-        }
     }
 
     @Override

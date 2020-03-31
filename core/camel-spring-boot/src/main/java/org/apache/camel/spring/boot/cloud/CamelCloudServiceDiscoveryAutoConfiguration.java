@@ -68,14 +68,7 @@ public class CamelCloudServiceDiscoveryAutoConfiguration implements BeanFactoryA
     @Lazy
     @Bean(name = "service-discovery")
     public CamelCloudServiceDiscovery serviceDiscovery(List<ServiceDiscovery> serviceDiscoveryList) throws NoTypeConversionAvailableException {
-        String cacheTimeout = configurationProperties.getServiceDiscovery().getCacheTimeout();
-        Long timeout = null;
-
-        if (cacheTimeout != null) {
-            timeout = camelContext.getTypeConverter().mandatoryConvertTo(Long.class, timeout);
-        }
-
-        return new CamelCloudServiceDiscovery(timeout, serviceDiscoveryList);
+        return new CamelCloudServiceDiscovery(serviceDiscoveryList);
     }
 
     @PostConstruct
