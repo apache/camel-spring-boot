@@ -1204,7 +1204,7 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 23 in 23 JAR artifacts (0 deprecated)
+Number of miscellaneous extensions: 22 in 22 JAR artifacts (0 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
