@@ -55,7 +55,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    spring_boot_itests_result = sh script: "./mvnw $MAVEN_PARAMS -Dmaven.test.failure.ignore=true clean install", returnStatus: true
+                    spring_boot_itests_result = sh script: "./mvnw $MAVEN_PARAMS -Dmaven.test.failure.ignore=true clean install deploy", returnStatus: true
                 }
             }
             post {
