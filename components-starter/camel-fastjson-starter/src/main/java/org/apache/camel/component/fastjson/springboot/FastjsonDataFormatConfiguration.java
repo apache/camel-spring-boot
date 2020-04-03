@@ -38,12 +38,24 @@ public class FastjsonDataFormatConfiguration
      */
     private Boolean enabled;
     /**
+     * Class name of the java type to use when unmarshalling
+     */
+    private String unmarshalTypeName;
+    /**
      * Whether the data format should set the Content-Type header with the type
      * from the data format if the data format is capable of doing so. For
      * example application/xml for data formats marshalling to XML, or
      * application/json for data formats marshalling to JSon etc.
      */
     private Boolean contentTypeHeader = false;
+
+    public String getUnmarshalTypeName() {
+        return unmarshalTypeName;
+    }
+
+    public void setUnmarshalTypeName(String unmarshalTypeName) {
+        this.unmarshalTypeName = unmarshalTypeName;
+    }
 
     public Boolean getContentTypeHeader() {
         return contentTypeHeader;
