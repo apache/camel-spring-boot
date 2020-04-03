@@ -46,6 +46,10 @@ public class JohnzonDataFormatConfiguration
      * To enable pretty printing output nicely formatted. Is by default false.
      */
     private Boolean prettyPrint = false;
+    /**
+     * Class name of the java type to use when unmarshalling
+     */
+    private String unmarshalTypeName;
 
     public String getObjectMapper() {
         return objectMapper;
@@ -61,5 +65,13 @@ public class JohnzonDataFormatConfiguration
 
     public void setPrettyPrint(Boolean prettyPrint) {
         this.prettyPrint = prettyPrint;
+    }
+
+    public String getUnmarshalTypeName() {
+        return unmarshalTypeName;
+    }
+
+    public void setUnmarshalTypeName(String unmarshalTypeName) {
+        this.unmarshalTypeName = unmarshalTypeName;
     }
 }
