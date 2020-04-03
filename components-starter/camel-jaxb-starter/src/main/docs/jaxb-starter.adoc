@@ -17,7 +17,7 @@ When using jaxb with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 19 options, which are listed below.
+The component supports 20 options, which are listed below.
 
 
 
@@ -26,6 +26,7 @@ The component supports 19 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.dataformat.jaxb.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSon etc. | false | Boolean
 | *camel.dataformat.jaxb.context-path* | Package name where your JAXB classes are located. |  | String
+| *camel.dataformat.jaxb.context-path-is-class-name* | This can be set to true to mark that the contextPath is referring to a classname and not a package name. | false | Boolean
 | *camel.dataformat.jaxb.enabled* | Whether to enable auto configuration of the jaxb data format. This is enabled by default. |  | Boolean
 | *camel.dataformat.jaxb.encoding* | To overrule and use a specific encoding |  | String
 | *camel.dataformat.jaxb.filter-non-xml-chars* | To ignore non xml characheters and replace them with an empty space. | false | Boolean
@@ -44,5 +45,4 @@ The component supports 19 options, which are listed below.
 | *camel.dataformat.jaxb.schema-severity-level* | Sets the schema severity level to use when validating against a schema. This level determines the minimum severity error that triggers JAXB to stop continue parsing. The default value of 0 (warning) means that any error (warning, error or fatal error) will trigger JAXB to stop. There are the following three levels: 0=warning, 1=error, 2=fatal error. | 0 | Integer
 | *camel.dataformat.jaxb.xml-stream-writer-wrapper* | To use a custom xml stream writer. |  | String
 |===
-
 // spring-boot-auto-configure options: END

@@ -42,6 +42,11 @@ public class JaxbDataFormatConfiguration
      */
     private String contextPath;
     /**
+     * This can be set to true to mark that the contextPath is referring to a
+     * classname and not a package name.
+     */
+    private Boolean contextPathIsClassName = false;
+    /**
      * To validate against an existing schema. Your can use the prefix
      * classpath:, file: or http: to specify how the resource should by
      * resolved. You can separate multiple schema files by using the ','
@@ -143,6 +148,14 @@ public class JaxbDataFormatConfiguration
 
     public void setContextPath(String contextPath) {
         this.contextPath = contextPath;
+    }
+
+    public Boolean getContextPathIsClassName() {
+        return contextPathIsClassName;
+    }
+
+    public void setContextPathIsClassName(Boolean contextPathIsClassName) {
+        this.contextPathIsClassName = contextPathIsClassName;
     }
 
     public String getSchema() {
