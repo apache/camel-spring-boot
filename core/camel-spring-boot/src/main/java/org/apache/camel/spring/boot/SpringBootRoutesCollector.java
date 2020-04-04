@@ -46,7 +46,7 @@ public class SpringBootRoutesCollector extends DefaultRoutesCollector {
     }
 
     @Override
-    public List<RoutesBuilder> collectRoutesFromRegistry(CamelContext camelContext, String excludePattern, String includePattern) {
+    public List<RoutesBuilder> collectRoutesFromRegistry(final CamelContext camelContext, final String excludePattern, final String includePattern) {
         final List<RoutesBuilder> routes = new ArrayList<>();
 
         final AntPathMatcher matcher = new AntPathMatcher();
@@ -73,14 +73,14 @@ public class SpringBootRoutesCollector extends DefaultRoutesCollector {
                     }
                 }
                 // special support for testing with @ExcludeRoutes annotation with camel-test-spring
-                excludePattern = System.getProperty("CamelTestSpringExcludeRoutes");
+                String sysExcludePattern = System.getProperty("CamelTestSpringExcludeRoutes");
                 // exclude take precedence over include
-                if (match && ObjectHelper.isNotEmpty(excludePattern)) {
+                if (match && ObjectHelper.isNotEmpty(sysExcludePattern)) {
                     // this property is a comma separated list of FQN class names, so we need to make
                     // name as path so we can use ant patch matcher
-                    excludePattern = excludePattern.replace('.', '/');
+                    sysExcludePattern = sysExcludePattern.replace('.', '/');
                     // there may be multiple separated by comma
-                    String[] parts = excludePattern.split(",");
+                    String[] parts = sysExcludePattern.split(",");
                     for (String part : parts) {
                         // must negate when excluding, and hence !
                         match = !matcher.match(part, name);
