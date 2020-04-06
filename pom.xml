@@ -112,7 +112,7 @@
         <spring-boot-version>2.2.6.RELEASE</spring-boot-version>
 
         <!-- Camel target version -->
-        <camel-version>3.2.0-SNAPSHOT</camel-version>
+        <camel-version>3.3.0-SNAPSHOT</camel-version>
 
         <!-- versions -->
         <aether-version>1.0.2.v20150114</aether-version>
@@ -527,7 +527,7 @@
         <profile>
             <id>dev</id>
             <properties>
-                <camel-version>3.2.0-SNAPSHOT</camel-version>
+                <camel-version>3.3.0-SNAPSHOT</camel-version>
             </properties>
         </profile>
 
