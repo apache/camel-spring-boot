@@ -35,6 +35,8 @@ public class CamelGooglePubsubTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelGooglePubsubTest.class))
+                .dependency("com.google.http-client:google-http-client-jackson2:1.34.0")
+                .dependency("com.google.http-client:google-http-client:1.34.0")
                 .build();
     }
 
