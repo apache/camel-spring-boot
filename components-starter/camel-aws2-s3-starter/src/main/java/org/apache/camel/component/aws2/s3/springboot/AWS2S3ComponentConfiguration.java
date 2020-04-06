@@ -132,6 +132,11 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean includeBody = true;
     /**
+     * If it is true, the folders/directories will be consumed. If it is false,
+     * they will be ignored, and Exchanges will not be created for those
+     */
+    private Boolean includeFolders = true;
+    /**
      * The prefix which is used in the
      * com.amazonaws.services.s3.model.ListObjectsRequest to only consume
      * objects we are interested in.
@@ -333,6 +338,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setIncludeBody(Boolean includeBody) {
         this.includeBody = includeBody;
+    }
+
+    public Boolean getIncludeFolders() {
+        return includeFolders;
+    }
+
+    public void setIncludeFolders(Boolean includeFolders) {
+        this.includeFolders = includeFolders;
     }
 
     public String getPrefix() {

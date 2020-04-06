@@ -17,7 +17,7 @@ When using aws2-s3 with Spring Boot make sure to use the following Maven depende
 ----
 
 
-The component supports 31 options, which are listed below.
+The component supports 32 options, which are listed below.
 
 
 
@@ -38,6 +38,7 @@ The component supports 31 options, which are listed below.
 | *camel.component.aws2-s3.enabled* | Whether to enable auto configuration of the aws2-s3 component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-s3.file-name* | To get the object from the bucket with the given file name |  | String
 | *camel.component.aws2-s3.include-body* | If it is true, the exchange body will be set to a stream to the contents of the file. If false, the headers will be set with the S3 object metadata, but the body will be null. This option is strongly related to autocloseBody option. In case of setting includeBody to true and autocloseBody to false, it will be up to the caller to close the S3Object stream. Setting autocloseBody to true, will close the S3Object stream automatically. | true | Boolean
+| *camel.component.aws2-s3.include-folders* | If it is true, the folders/directories will be consumed. If it is false, they will be ignored, and Exchanges will not be created for those | true | Boolean
 | *camel.component.aws2-s3.key-name* | Setting the key name for an element in the bucket through endpoint parameter |  | String
 | *camel.component.aws2-s3.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.aws2-s3.multi-part-upload* | If it is true, camel will upload the file with multi part format, the part size is decided by the option of partSize | false | Boolean
