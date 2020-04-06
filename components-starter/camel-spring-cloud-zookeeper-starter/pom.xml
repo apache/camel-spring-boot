@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>components-starter</artifactId>
-    <version>3.2.0-SNAPSHOT</version>
+    <version>3.2.1-SNAPSHOT</version>
   </parent>
   <artifactId>camel-spring-cloud-zookeeper-starter</artifactId>
   <packaging>jar</packaging>
@@ -38,26 +38,6 @@
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-spring-cloud-zookeeper</artifactId>
       <version>${project.version}</version>
-      <!--START OF GENERATED CODE-->
-      <exclusions>
-        <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>log4j</groupId>
-          <artifactId>log4j</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.logging.log4j</groupId>
-          <artifactId>log4j-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.logging.log4j</groupId>
-          <artifactId>log4j-slf4j-impl</artifactId>
-        </exclusion>
-      </exclusions>
-      <!--END OF GENERATED CODE-->
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
