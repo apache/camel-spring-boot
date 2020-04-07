@@ -203,6 +203,7 @@
     <module>camel-direct-starter</module>
     <module>camel-directvm-starter</module>
     <module>camel-disruptor-starter</module>
+    <module>camel-djl-starter</module>
     <module>camel-dns-starter</module>
     <module>camel-docker-starter</module>
     <module>camel-dozer-starter</module>

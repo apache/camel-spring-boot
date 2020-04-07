@@ -718,6 +718,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-djl-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-dns-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2451,6 +2456,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-disruptor</artifactId>
+        <version>3.3.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-djl</artifactId>
         <version>3.3.0-SNAPSHOT</version>
       </dependency>
       <dependency>
