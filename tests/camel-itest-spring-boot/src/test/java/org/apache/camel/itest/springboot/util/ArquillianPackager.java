@@ -351,6 +351,9 @@ public final class ArquillianPackager {
         ignore.add("org.jboss.marshalling");
         ignore.add("org.jgroups:jgroups-raft");
         ignore.add("net.sourceforge.htmlunit:htmlunit");
+        ignore.add("ai.djl.mxnet:mxnet-engine");
+        ignore.add("ai.djl.mxnet:mxnet-model-zoo");
+        ignore.add("ai.djl.mxnet:mxnet-native-auto");
 
         // these are from camel-spring-boot and not camel repo so ignore them
         ignore.add("org.apache.camel:camel-spring-cloud-consul");
