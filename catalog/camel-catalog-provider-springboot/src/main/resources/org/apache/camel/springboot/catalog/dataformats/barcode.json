@@ -11,6 +11,7 @@
     "label": "dataformat,transformation",
     "javaType": "org.apache.camel.dataformat.barcode.BarcodeDataFormat",
     "modelJavaType": "org.apache.camel.model.dataformat.BarcodeDataFormat",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-barcode-starter",
     "version": "3.3.0-SNAPSHOT"

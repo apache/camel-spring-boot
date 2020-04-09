@@ -15,6 +15,7 @@
     "lenientProperties": false,
     "javaType": "org.apache.camel.component.ganglia.GangliaComponent",
     "firstVersion": "2.15.0",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-ganglia-starter",
     "version": "3.3.0-SNAPSHOT"

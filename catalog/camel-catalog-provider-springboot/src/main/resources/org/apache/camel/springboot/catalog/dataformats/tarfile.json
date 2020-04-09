@@ -11,6 +11,7 @@
     "label": "dataformat,transformation,file",
     "javaType": "org.apache.camel.dataformat.tarfile.TarFileDataFormat",
     "modelJavaType": "org.apache.camel.model.dataformat.TarFileDataFormat",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-tarfile-starter",
     "version": "3.3.0-SNAPSHOT"

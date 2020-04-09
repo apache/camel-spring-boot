@@ -15,6 +15,7 @@
     "lenientProperties": false,
     "javaType": "org.apache.camel.component.aws.ecs.ECSComponent",
     "firstVersion": "3.0.0",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-aws-ecs-starter",
     "version": "3.3.0-SNAPSHOT"

@@ -15,6 +15,7 @@
     "lenientProperties": false,
     "javaType": "org.apache.camel.component.drill.DrillComponent",
     "firstVersion": "2.19.0",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-drill-starter",
     "version": "3.3.0-SNAPSHOT"

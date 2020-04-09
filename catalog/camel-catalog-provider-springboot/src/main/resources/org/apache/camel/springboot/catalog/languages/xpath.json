@@ -11,6 +11,7 @@
     "label": "language,core,xml",
     "javaType": "org.apache.camel.language.xpath.XPathLanguage",
     "modelJavaType": "org.apache.camel.model.language.XPathExpression",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-xpath-starter",
     "version": "3.3.0-SNAPSHOT"

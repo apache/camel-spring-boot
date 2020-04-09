@@ -7,6 +7,7 @@
     "deprecated": false,
     "firstVersion": "2.0.0",
     "label": "spring",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-spring-javaconfig-starter",
     "version": "3.3.0-SNAPSHOT"

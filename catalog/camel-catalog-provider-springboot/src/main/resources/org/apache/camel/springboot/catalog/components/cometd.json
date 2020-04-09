@@ -16,6 +16,7 @@
     "lenientProperties": false,
     "javaType": "org.apache.camel.component.cometd.CometdComponent",
     "firstVersion": "2.0.0",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-cometd-starter",
     "version": "3.3.0-SNAPSHOT"

@@ -16,6 +16,7 @@
     "lenientProperties": true,
     "javaType": "org.apache.camel.component.netty.http.NettyHttpComponent",
     "firstVersion": "2.14.0",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-netty-http-starter",
     "version": "3.3.0-SNAPSHOT"

@@ -15,6 +15,7 @@
     "lenientProperties": true,
     "javaType": "org.apache.camel.component.box.BoxComponent",
     "firstVersion": "2.14.0",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-box-starter",
     "version": "3.3.0-SNAPSHOT"

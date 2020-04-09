@@ -15,6 +15,7 @@
     "lenientProperties": true,
     "javaType": "org.apache.camel.component.ahc.AhcComponent",
     "firstVersion": "2.8.0",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-ahc-starter",
     "version": "3.3.0-SNAPSHOT"

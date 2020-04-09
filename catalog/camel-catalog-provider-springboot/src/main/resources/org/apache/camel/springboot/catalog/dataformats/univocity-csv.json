@@ -11,6 +11,7 @@
     "label": "dataformat,transformation,csv",
     "javaType": "org.apache.camel.dataformat.univocity.UniVocityCsvDataFormat",
     "modelJavaType": "org.apache.camel.model.dataformat.UniVocityCsvDataFormat",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-univocity-parsers-starter",
     "version": "3.3.0-SNAPSHOT"

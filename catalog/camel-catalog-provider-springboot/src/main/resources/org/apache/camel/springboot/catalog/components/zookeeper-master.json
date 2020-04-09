@@ -15,6 +15,7 @@
     "lenientProperties": true,
     "javaType": "org.apache.camel.component.zookeepermaster.MasterComponent",
     "firstVersion": "2.19.0",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-zookeeper-master-starter",
     "version": "3.3.0-SNAPSHOT"

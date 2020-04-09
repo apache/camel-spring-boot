@@ -15,6 +15,7 @@
     "lenientProperties": false,
     "javaType": "org.apache.camel.component.micrometer.MicrometerComponent",
     "firstVersion": "2.22.0",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-micrometer-starter",
     "version": "3.3.0-SNAPSHOT"

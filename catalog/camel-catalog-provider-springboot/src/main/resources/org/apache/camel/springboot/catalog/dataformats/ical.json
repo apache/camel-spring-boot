@@ -11,6 +11,7 @@
     "label": "dataformat,transformation",
     "javaType": "org.apache.camel.component.ical.ICalDataFormat",
     "modelJavaType": "org.apache.camel.model.dataformat.IcalDataFormat",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-ical-starter",
     "version": "3.3.0-SNAPSHOT"

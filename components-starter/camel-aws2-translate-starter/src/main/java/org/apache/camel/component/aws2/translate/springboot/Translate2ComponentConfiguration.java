@@ -64,6 +64,10 @@ public class Translate2ComponentConfiguration
      */
     private Translate2Operations operation = Translate2Operations.translateText;
     /**
+     * If we want to use a POJO request as body or not
+     */
+    private Boolean pojoRequest = false;
+    /**
      * To define a proxy host when instantiating the Translate client
      */
     private String proxyHost;
@@ -138,6 +142,14 @@ public class Translate2ComponentConfiguration
 
     public void setOperation(Translate2Operations operation) {
         this.operation = operation;
+    }
+
+    public Boolean getPojoRequest() {
+        return pojoRequest;
+    }
+
+    public void setPojoRequest(Boolean pojoRequest) {
+        this.pojoRequest = pojoRequest;
     }
 
     public String getProxyHost() {

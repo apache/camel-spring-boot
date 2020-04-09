@@ -15,6 +15,7 @@
     "lenientProperties": false,
     "javaType": "org.apache.camel.component.debezium.DebeziumPostgresComponent",
     "firstVersion": "3.0.0",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-debezium-postgres-starter",
     "version": "3.3.0-SNAPSHOT"

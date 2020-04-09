@@ -11,6 +11,7 @@
     "label": "dataformat,transformation",
     "javaType": "org.apache.camel.dataformat.avro.AvroDataFormat",
     "modelJavaType": "org.apache.camel.model.dataformat.AvroDataFormat",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-avro-starter",
     "version": "3.3.0-SNAPSHOT"

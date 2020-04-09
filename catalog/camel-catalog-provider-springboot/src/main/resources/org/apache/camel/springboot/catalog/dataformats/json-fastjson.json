@@ -11,6 +11,7 @@
     "label": "dataformat,transformation,json",
     "javaType": "org.apache.camel.component.fastjson.FastjsonDataFormat",
     "modelJavaType": "org.apache.camel.model.dataformat.JsonDataFormat",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-fastjson-starter",
     "version": "3.3.0-SNAPSHOT"

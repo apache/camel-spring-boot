@@ -17,6 +17,7 @@
     "lenientProperties": false,
     "javaType": "org.apache.camel.component.file.remote.FtpsComponent",
     "firstVersion": "2.2.0",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-ftp-starter",
     "version": "3.3.0-SNAPSHOT"
