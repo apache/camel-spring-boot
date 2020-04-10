@@ -72,6 +72,10 @@ public class AWS2EC2ComponentConfiguration
      */
     private AWS2EC2Operations operation;
     /**
+     * If we want to use a POJO request as body or not
+     */
+    private Boolean pojoRequest = false;
+    /**
      * To define a proxy host when instantiating the EC2 client
      */
     private String proxyHost;
@@ -85,8 +89,8 @@ public class AWS2EC2ComponentConfiguration
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
      * The region in which EC2 client needs to work. When using this parameter,
-     * the configuration will expect the capitalized name of the region (for
-     * example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name()
+     * the configuration will expect the lowercase name of the region (for
+     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
     /**
@@ -137,6 +141,14 @@ public class AWS2EC2ComponentConfiguration
 
     public void setOperation(AWS2EC2Operations operation) {
         this.operation = operation;
+    }
+
+    public Boolean getPojoRequest() {
+        return pojoRequest;
+    }
+
+    public void setPojoRequest(Boolean pojoRequest) {
+        this.pojoRequest = pojoRequest;
     }
 
     public String getProxyHost() {
