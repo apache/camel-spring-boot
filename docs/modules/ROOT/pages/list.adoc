@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 327 in 260 JAR artifacts (1 deprecated)
+Number of Camel components: 328 in 261 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -179,6 +179,9 @@ Number of Camel components: 327 in 260 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/azure-blob-component.html[Azure Storage Blob Service] (camel-azure-starter) +
 `azure-blob:containerOrBlobUri` | 2.19 | The azure-blob component is used for storing and retrieving blobs from Azure Storage Blob Service.
 
+| link:https://camel.apache.org/components/latest/azure-storage-blob-component.html[Azure Storage Blob Service] (camel-azure-storage-blob-starter) +
+`azure-storage-blob:containerName` | 3.3 | The azure-storage-blob component is used for storing and retrieving blobs from Azure Storage Blob Service using SDK v12.
+
 | link:https://camel.apache.org/components/latest/azure-queue-component.html[Azure Storage Queue Service] (camel-azure-starter) +
 `azure-queue:containerAndQueueUri` | 2.19 | The azure-queue component is used for storing and retrieving messages from Azure Storage Queue Service.
 
@@ -284,6 +287,9 @@ Number of Camel components: 327 in 260 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/debezium-sqlserver-component.html[Debezium SQL Server Connector] (camel-debezium-sqlserver-starter) +
 `debezium-sqlserver:name` | 3.0 | Represents a Debezium SQL Server endpoint which is used to capture changes in SQL Server database so that that applications can see those changes and respond to them.
 
+| link:https://camel.apache.org/components/latest/djl-component.html[Deep Java Library] (camel-djl-starter) +
+`djl:application` | 3.3 | The Deep Java Library component is used to infer deep learning models.
+
 | link:https://camel.apache.org/components/latest/digitalocean-component.html[DigitalOcean] (camel-digitalocean-starter) +
 `digitalocean:operation` | 2.19 | The DigitalOcean component allows you to manage Droplets and resources within the DigitalOcean cloud.
 
@@ -295,9 +301,6 @@ Number of Camel components: 327 in 260 JAR artifacts (1 deprecated)
 
 | link:https://camel.apache.org/components/latest/disruptor-component.html[Disruptor] (camel-disruptor-starter) +
 `disruptor:name` | 2.12 | The disruptor component provides asynchronous SEDA behavior using LMAX Disruptor.
-
-| link:https://camel.apache.org/components/latest/djl-component.html[DJL] (camel-djl-starter) +
-`djl:application` | 3.2 | Represents a DJL endpoint.
 
 | link:https://camel.apache.org/components/latest/dns-component.html[DNS] (camel-dns-starter) +
 `dns:dnsType` | 2.7 | To lookup domain information and run DNS queries using DNSJava.
