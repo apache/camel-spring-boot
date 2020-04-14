@@ -173,7 +173,7 @@
         <spring-cloud-netflix-version>2.2.2.RELEASE</spring-cloud-netflix-version>
         <spring-cloud-zookeeper-version>2.2.1.RELEASE</spring-cloud-zookeeper-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
-        <testcontainers-version>1.13.0</testcontainers-version>
+        <testcontainers-version>1.14.0</testcontainers-version>
         <tomcat-version>9.0.31</tomcat-version>
         <undertow-version>2.0.30.Final</undertow-version>
         <weld3-version>3.0.5.Final</weld3-version>
