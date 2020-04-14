@@ -301,6 +301,7 @@ public final class ArquillianPackager {
         ignore.add("com.fasterxml.jackson.module:jackson-module-scala_2.11"); // latest version not available
         ignore.add("com.github.jnr");
         ignore.add("com.sun.xml.bind:jaxb-xjc");
+        ignore.add("com.azure:azure");
         ignore.add("commons-beanutils:commons-beanutils");
         ignore.add("io.dropwizard.metrics:metrics-json"); // PR to spring-boot
         ignore.add("io.dropwizard.metrics:metrics-jvm"); // PR to spring-boot
