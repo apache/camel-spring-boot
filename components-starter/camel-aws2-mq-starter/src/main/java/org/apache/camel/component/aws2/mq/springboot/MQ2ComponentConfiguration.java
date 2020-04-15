@@ -65,6 +65,10 @@ public class MQ2ComponentConfiguration
      */
     private MQ2Operations operation;
     /**
+     * If we want to use a POJO request as body or not
+     */
+    private Boolean pojoRequest = false;
+    /**
      * To define a proxy host when instantiating the MQ client
      */
     private String proxyHost;
@@ -126,6 +130,14 @@ public class MQ2ComponentConfiguration
 
     public void setOperation(MQ2Operations operation) {
         this.operation = operation;
+    }
+
+    public Boolean getPojoRequest() {
+        return pojoRequest;
+    }
+
+    public void setPojoRequest(Boolean pojoRequest) {
+        this.pojoRequest = pojoRequest;
     }
 
     public String getProxyHost() {
