@@ -17,7 +17,7 @@ When using aws2-s3 with Spring Boot make sure to use the following Maven depende
 ----
 
 
-The component supports 32 options, which are listed below.
+The component supports 33 options, which are listed below.
 
 
 
@@ -45,6 +45,7 @@ The component supports 32 options, which are listed below.
 | *camel.component.aws2-s3.operation* | The operation to do in case the user don't want to do only an upload |  | AWS2S3Operations
 | *camel.component.aws2-s3.override-endpoint* | Set the need for overidding the endpoint. This option needs to be used in combination with uriEndpointOverride option | false | Boolean
 | *camel.component.aws2-s3.part-size* | Setup the partSize which is used in multi part upload, the default size is 25M. | 26214400 | Long
+| *camel.component.aws2-s3.pojo-request* | If we want to use a POJO request as body or not | false | Boolean
 | *camel.component.aws2-s3.policy* | The policy for this queue to set in the com.amazonaws.services.s3.AmazonS3#setBucketPolicy() method. |  | String
 | *camel.component.aws2-s3.prefix* | The prefix which is used in the com.amazonaws.services.s3.model.ListObjectsRequest to only consume objects we are interested in. |  | String
 | *camel.component.aws2-s3.proxy-host* | To define a proxy host when instantiating the SQS client |  | String

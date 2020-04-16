@@ -65,6 +65,10 @@ public class MSK2ComponentConfiguration
      */
     private MSK2Operations operation;
     /**
+     * If we want to use a POJO request as body or not
+     */
+    private Boolean pojoRequest = false;
+    /**
      * To define a proxy host when instantiating the MSK client
      */
     private String proxyHost;
@@ -126,6 +130,14 @@ public class MSK2ComponentConfiguration
 
     public void setOperation(MSK2Operations operation) {
         this.operation = operation;
+    }
+
+    public Boolean getPojoRequest() {
+        return pojoRequest;
+    }
+
+    public void setPojoRequest(Boolean pojoRequest) {
+        this.pojoRequest = pojoRequest;
     }
 
     public String getProxyHost() {

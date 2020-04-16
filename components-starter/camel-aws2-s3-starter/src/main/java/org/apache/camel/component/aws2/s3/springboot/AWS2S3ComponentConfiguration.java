@@ -60,6 +60,10 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean overrideEndpoint = false;
     /**
+     * If we want to use a POJO request as body or not
+     */
+    private Boolean pojoRequest = false;
+    /**
      * The policy for this queue to set in the
      * com.amazonaws.services.s3.AmazonS3#setBucketPolicy() method.
      */
@@ -242,6 +246,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setOverrideEndpoint(Boolean overrideEndpoint) {
         this.overrideEndpoint = overrideEndpoint;
+    }
+
+    public Boolean getPojoRequest() {
+        return pojoRequest;
+    }
+
+    public void setPojoRequest(Boolean pojoRequest) {
+        this.pojoRequest = pojoRequest;
     }
 
     public String getPolicy() {
