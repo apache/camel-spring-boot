@@ -122,6 +122,11 @@ public class AWS2S3ComponentConfiguration
      */
     private String delimiter;
     /**
+     * Define the destination bucket where an object must be moved when
+     * moveAfterRead is set to true.
+     */
+    private String destinationBucket;
+    /**
      * To get the object from the bucket with the given file name
      */
     private String fileName;
@@ -140,6 +145,13 @@ public class AWS2S3ComponentConfiguration
      * they will be ignored, and Exchanges will not be created for those
      */
     private Boolean includeFolders = true;
+    /**
+     * Move objects from S3 bucket to a different bucket after they have been
+     * retrieved. To accomplish the operation the destinationBucket option must
+     * be set. The copy bucket operation is only performed if the Exchange is
+     * committed. If a rollback occurs, the object is not moved.
+     */
+    private Boolean moveAfterRead = false;
     /**
      * The prefix which is used in the
      * com.amazonaws.services.s3.model.ListObjectsRequest to only consume
@@ -336,6 +348,14 @@ public class AWS2S3ComponentConfiguration
         this.delimiter = delimiter;
     }
 
+    public String getDestinationBucket() {
+        return destinationBucket;
+    }
+
+    public void setDestinationBucket(String destinationBucket) {
+        this.destinationBucket = destinationBucket;
+    }
+
     public String getFileName() {
         return fileName;
     }
@@ -358,6 +378,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setIncludeFolders(Boolean includeFolders) {
         this.includeFolders = includeFolders;
+    }
+
+    public Boolean getMoveAfterRead() {
+        return moveAfterRead;
+    }
+
+    public void setMoveAfterRead(Boolean moveAfterRead) {
+        this.moveAfterRead = moveAfterRead;
     }
 
     public String getPrefix() {
