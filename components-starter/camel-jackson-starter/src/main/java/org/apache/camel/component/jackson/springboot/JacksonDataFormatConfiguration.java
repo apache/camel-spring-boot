@@ -82,11 +82,6 @@ public class JacksonDataFormatConfiguration
      */
     private Boolean useList = false;
     /**
-     * Whether to enable the JAXB annotations module when using jackson. When
-     * enabled then JAXB annotations can be used by Jackson.
-     */
-    private Boolean enableJaxbAnnotationModule = false;
-    /**
      * To use custom Jackson modules com.fasterxml.jackson.databind.Module
      * specified as a String with FQN class names. Multiple classes can be
      * separated by comma.
@@ -212,14 +207,6 @@ public class JacksonDataFormatConfiguration
 
     public void setUseList(Boolean useList) {
         this.useList = useList;
-    }
-
-    public Boolean getEnableJaxbAnnotationModule() {
-        return enableJaxbAnnotationModule;
-    }
-
-    public void setEnableJaxbAnnotationModule(Boolean enableJaxbAnnotationModule) {
-        this.enableJaxbAnnotationModule = enableJaxbAnnotationModule;
     }
 
     public String getModuleClassNames() {
