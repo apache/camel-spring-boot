@@ -1433,6 +1433,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-resteasy-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ribbon-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3288,6 +3293,11 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-rest-swagger</artifactId>
         <version>3.4.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-resteasy</artifactId>
+        <version>3.3.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>

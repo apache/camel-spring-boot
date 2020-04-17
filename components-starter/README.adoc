@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 329 in 262 JAR artifacts (1 deprecated)
+Number of Camel components: 330 in 263 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -790,6 +790,9 @@ Number of Camel components: 329 in 262 JAR artifacts (1 deprecated)
 
 | link:https://camel.apache.org/components/latest/rest-swagger-component.html[REST Swagger] (camel-rest-swagger-starter) +
 `rest-swagger:specificationUri#operationId` | 2.19 | Configure REST producers based on a Swagger (OpenAPI) specification document delegating to a component implementing the RestProducerFactory interface.
+
+| link:https://camel.apache.org/components/latest/resteasy-component.html[Resteasy] (camel-resteasy-starter) +
+`resteasy:contextPath` | 3.3 | Defines the Resteasy Endpoint.
 
 | link:https://camel.apache.org/components/latest/robotframework-component.html[Robot Framework] (camel-robotframework-starter) +
 `robotframework:resourceUri` | 3.0 | Pass camel exchanges to acceptence test written in Robot DSL.
