@@ -17,7 +17,7 @@ When using aws2-s3 with Spring Boot make sure to use the following Maven depende
 ----
 
 
-The component supports 35 options, which are listed below.
+The component supports 39 options, which are listed below.
 
 
 
@@ -32,6 +32,9 @@ The component supports 35 options, which are listed below.
 | *camel.component.aws2-s3.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws2-s3.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.aws2-s3.configuration* | The component configuration. The option is a org.apache.camel.component.aws2.s3.AWS2S3Configuration type. |  | String
+| *camel.component.aws2-s3.customer-algorithm* | Define the customer algorithm to use in case CustomerKey is enabled |  | String
+| *camel.component.aws2-s3.customer-key-id* | Define the id of Customer key to use in case CustomerKey is enabled |  | String
+| *camel.component.aws2-s3.customer-key-m-d5* | Define the MD5 of Customer key to use in case CustomerKey is enabled |  | String
 | *camel.component.aws2-s3.delete-after-read* | Delete objects from S3 after they have been retrieved. The delete is only performed if the Exchange is committed. If a rollback occurs, the object is not deleted. If this option is false, then the same objects will be retrieve over and over again on the polls. Therefore you need to use the Idempotent Consumer EIP in the route to filter out duplicates. You can filter using the AWS2S3Constants#BUCKET_NAME and AWS2S3Constants#KEY headers, or only the AWS2S3Constants#KEY header. | true | Boolean
 | *camel.component.aws2-s3.delete-after-write* | Delete file object after the S3 file has been uploaded | false | Boolean
 | *camel.component.aws2-s3.delimiter* | The delimiter which is used in the com.amazonaws.services.s3.model.ListObjectsRequest to only consume objects we are interested in. |  | String
@@ -58,6 +61,7 @@ The component supports 35 options, which are listed below.
 | *camel.component.aws2-s3.storage-class* | The storage class to set in the com.amazonaws.services.s3.model.PutObjectRequest request. |  | String
 | *camel.component.aws2-s3.uri-endpoint-override* | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
 | *camel.component.aws2-s3.use-aws-k-m-s* | Define if KMS must be used or not | false | Boolean
+| *camel.component.aws2-s3.use-customer-key* | Define if Customer Key must be used or not | false | Boolean
 | *camel.component.aws2-s3.use-i-a-m-credentials* | Set whether the S3 client should expect to load credentials on an EC2 instance or to expect static credentials to be passed in. | false | Boolean
 |===
 // spring-boot-auto-configure options: END

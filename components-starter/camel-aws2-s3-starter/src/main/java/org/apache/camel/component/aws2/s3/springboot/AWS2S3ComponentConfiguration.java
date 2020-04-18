@@ -211,9 +211,25 @@ public class AWS2S3ComponentConfiguration
      */
     private String awsKMSKeyId;
     /**
+     * Define the customer algorithm to use in case CustomerKey is enabled
+     */
+    private String customerAlgorithm;
+    /**
+     * Define the id of Customer key to use in case CustomerKey is enabled
+     */
+    private String customerKeyId;
+    /**
+     * Define the MD5 of Customer key to use in case CustomerKey is enabled
+     */
+    private String customerKeyMD5;
+    /**
      * Define if KMS must be used or not
      */
     private Boolean useAwsKMS = false;
+    /**
+     * Define if Customer Key must be used or not
+     */
+    private Boolean useCustomerKey = false;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -468,12 +484,44 @@ public class AWS2S3ComponentConfiguration
         this.awsKMSKeyId = awsKMSKeyId;
     }
 
+    public String getCustomerAlgorithm() {
+        return customerAlgorithm;
+    }
+
+    public void setCustomerAlgorithm(String customerAlgorithm) {
+        this.customerAlgorithm = customerAlgorithm;
+    }
+
+    public String getCustomerKeyId() {
+        return customerKeyId;
+    }
+
+    public void setCustomerKeyId(String customerKeyId) {
+        this.customerKeyId = customerKeyId;
+    }
+
+    public String getCustomerKeyMD5() {
+        return customerKeyMD5;
+    }
+
+    public void setCustomerKeyMD5(String customerKeyMD5) {
+        this.customerKeyMD5 = customerKeyMD5;
+    }
+
     public Boolean getUseAwsKMS() {
         return useAwsKMS;
     }
 
     public void setUseAwsKMS(Boolean useAwsKMS) {
         this.useAwsKMS = useAwsKMS;
+    }
+
+    public Boolean getUseCustomerKey() {
+        return useCustomerKey;
+    }
+
+    public void setUseCustomerKey(Boolean useCustomerKey) {
+        this.useCustomerKey = useCustomerKey;
     }
 
     public Boolean getBasicPropertyBinding() {

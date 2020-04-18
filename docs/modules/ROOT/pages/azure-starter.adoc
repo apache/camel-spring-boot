@@ -17,7 +17,7 @@ When using azure with Spring Boot make sure to use the following Maven dependenc
 ----
 
 
-The component supports 35 options, which are listed below.
+The component supports 37 options, which are listed below.
 
 
 
@@ -46,6 +46,7 @@ The component supports 35 options, which are listed below.
 | *camel.component.azure-blob.stream-read-size* | Set the minimum read size in bytes when reading the blob content |  | Integer
 | *camel.component.azure-blob.stream-write-size* | Set the size of the buffer for writing block and page blocks |  | Integer
 | *camel.component.azure-blob.use-flat-listing* | Specify if the flat or hierarchical blob listing should be used | true | Boolean
+| *camel.component.azure-blob.validate-client-u-r-i* | Whether to validate the Azure client URI | true | Boolean
 | *camel.component.azure-queue.azure-queue-client* | The queue service client. The option is a com.microsoft.azure.storage.queue.CloudQueue type. |  | String
 | *camel.component.azure-queue.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.azure-queue.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
@@ -59,5 +60,6 @@ The component supports 35 options, which are listed below.
 | *camel.component.azure-queue.message-visibility-delay* | Message Visibility Delay in seconds |  | Integer
 | *camel.component.azure-queue.operation* | Queue service operation hint to the producer |  | QueueServiceOperations
 | *camel.component.azure-queue.queue-prefix* | Set a prefix which can be used for listing the queues |  | String
+| *camel.component.azure-queue.validate-client-u-r-i* | Whether to validate the Azure client URI | true | Boolean
 |===
 // spring-boot-auto-configure options: END
