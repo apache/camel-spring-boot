@@ -50,6 +50,10 @@ public class QueueServiceComponentConfiguration
      */
     private String credentials;
     /**
+     * Whether to validate the Azure client URI
+     */
+    private Boolean validateClientURI = true;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -118,6 +122,14 @@ public class QueueServiceComponentConfiguration
 
     public void setCredentials(String credentials) {
         this.credentials = credentials;
+    }
+
+    public Boolean getValidateClientURI() {
+        return validateClientURI;
+    }
+
+    public void setValidateClientURI(Boolean validateClientURI) {
+        this.validateClientURI = validateClientURI;
     }
 
     public Boolean getBridgeErrorHandler() {

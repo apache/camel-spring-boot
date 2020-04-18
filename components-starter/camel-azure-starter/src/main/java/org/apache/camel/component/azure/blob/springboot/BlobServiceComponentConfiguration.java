@@ -81,6 +81,10 @@ public class BlobServiceComponentConfiguration
      */
     private Integer streamReadSize;
     /**
+     * Whether to validate the Azure client URI
+     */
+    private Boolean validateClientURI = true;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -213,6 +217,14 @@ public class BlobServiceComponentConfiguration
 
     public void setStreamReadSize(Integer streamReadSize) {
         this.streamReadSize = streamReadSize;
+    }
+
+    public Boolean getValidateClientURI() {
+        return validateClientURI;
+    }
+
+    public void setValidateClientURI(Boolean validateClientURI) {
+        this.validateClientURI = validateClientURI;
     }
 
     public Boolean getBridgeErrorHandler() {
