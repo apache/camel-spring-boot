@@ -62,6 +62,10 @@ public class Lambda2ComponentConfiguration
      */
     private Lambda2Operations operation = Lambda2Operations.invokeFunction;
     /**
+     * If we want to use a POJO request as body or not
+     */
+    private Boolean pojoRequest = false;
+    /**
      * The region in which ECS client needs to work. When using this parameter,
      * the configuration will expect the lowercase name of the region (for
      * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
@@ -120,6 +124,14 @@ public class Lambda2ComponentConfiguration
 
     public void setOperation(Lambda2Operations operation) {
         this.operation = operation;
+    }
+
+    public Boolean getPojoRequest() {
+        return pojoRequest;
+    }
+
+    public void setPojoRequest(Boolean pojoRequest) {
+        this.pojoRequest = pojoRequest;
     }
 
     public String getRegion() {
