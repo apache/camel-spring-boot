@@ -1153,55 +1153,55 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 |===
 | Language | Since | Description
 
-| link:https://camel.apache.org/components/latest/bean-language.html[Bean method] +
+| link:https://camel.apache.org/components/latest/languages/bean-language.html[Bean method] +
 (camel-bean-starter) | 1.3 | To use a Java bean (aka method call) in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/constant-language.html[Constant] +
+| link:https://camel.apache.org/components/latest/languages/constant-language.html[Constant] +
 (camel-base) | 1.5 | To use a constant value in Camel expressions or predicates. Important: this is a fixed constant value that is only set once during starting up the route, do not use this if you want dynamic values during routing.
 
-| link:https://camel.apache.org/components/latest/exchangeProperty-language.html[ExchangeProperty] +
+| link:https://camel.apache.org/components/latest/languages/exchangeProperty-language.html[ExchangeProperty] +
 (camel-base) | 2.0 | To use a Camel Exchange property in expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/file-language.html[File] +
+| link:https://camel.apache.org/components/latest/languages/file-language.html[File] +
 (camel-base) | 1.1 | For expressions and predicates using the file/simple language.
 
-| link:https://camel.apache.org/components/latest/groovy-language.html[Groovy] +
+| link:https://camel.apache.org/components/latest/languages/groovy-language.html[Groovy] +
 (camel-groovy-starter) | 1.3 | To use Groovy scripts in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/header-language.html[Header] +
+| link:https://camel.apache.org/components/latest/languages/header-language.html[Header] +
 (camel-base) | 1.5 | To use a Camel Message header in expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/hl7terser-language.html[HL7 Terser] +
+| link:https://camel.apache.org/components/latest/languages/hl7terser-language.html[HL7 Terser] +
 (camel-hl7-starter) | 2.11 | To use HL7 terser scripts in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/jsonpath-language.html[JsonPath] +
+| link:https://camel.apache.org/components/latest/languages/jsonpath-language.html[JsonPath] +
 (camel-jsonpath-starter) | 2.13 | To use JsonPath in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/mvel-language.html[MVEL] +
+| link:https://camel.apache.org/components/latest/languages/mvel-language.html[MVEL] +
 (camel-mvel-starter) | 2.0 | To use MVEL scripts in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/ognl-language.html[OGNL] +
+| link:https://camel.apache.org/components/latest/languages/ognl-language.html[OGNL] +
 (camel-ognl-starter) | 1.1 | To use OGNL scripts in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/ref-language.html[Ref] +
+| link:https://camel.apache.org/components/latest/languages/ref-language.html[Ref] +
 (camel-base) | 2.8 | Reference to an existing Camel expression or predicate, which is looked up from the Camel registry.
 
-| link:https://camel.apache.org/components/latest/simple-language.html[Simple] +
+| link:https://camel.apache.org/components/latest/languages/simple-language.html[Simple] +
 (camel-base) | 1.1 | To use Camels built-in Simple language in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/spel-language.html[SpEL] +
+| link:https://camel.apache.org/components/latest/languages/spel-language.html[SpEL] +
 (camel-spring-starter) | 2.7 | To use Spring Expression Language (SpEL) in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/tokenize-language.html[Tokenize] +
+| link:https://camel.apache.org/components/latest/languages/tokenize-language.html[Tokenize] +
 (camel-base) | 2.0 | To use Camel message body or header with a tokenizer in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/xtokenize-language.html[XML Tokenize] +
+| link:https://camel.apache.org/components/latest/languages/xtokenize-language.html[XML Tokenize] +
 (camel-xml-jaxp-starter) | 2.14 | To use Camel message body or header with a XML tokenizer in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/xpath-language.html[XPath] +
+| link:https://camel.apache.org/components/latest/languages/xpath-language.html[XPath] +
 (camel-xpath-starter) | 1.1 | To use XPath (XML) in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/xquery-language.html[XQuery] +
+| link:https://camel.apache.org/components/latest/languages/xquery-language.html[XQuery] +
 (camel-saxon-starter) | 1.0 | To use XQuery (XML) in Camel expressions or predicates.
 |===
 // languages: END
