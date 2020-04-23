@@ -49,14 +49,14 @@ public class ExtMvelHelper {
             return String.format("link:https://camel.apache.org/%s/latest/%s", "components",
                     invokeGetter(model, "getScheme") + "-component.html");
         } else if (model instanceof DataFormatModel) {
-            return String.format("link:https://camel.apache.org/%s/latest/%s", "components", "dataformats", 
-                    invokeGetter(model, "getName") + "-dataformat.html");
+            return String.format("link:https://camel.apache.org/%s/latest/%s", "components",  
+            		"dataformats/" + invokeGetter(model, "getName") + "-dataformat.html");
         } else if (model instanceof LanguageModel) {
-            return String.format("link:https://camel.apache.org/%s/latest/%s", "components", "languages", 
-                    invokeGetter(model, "getName") + "-language.html");
+            return String.format("link:https://camel.apache.org/%s/latest/%s", "components", 
+            		"languages/" +invokeGetter(model, "getName") + "-language.html");
         } else if (model instanceof OtherModel) {
-            return String.format("link:https://camel.apache.org/%s/latest/%s", "components", "others", 
-                    invokeGetter(model, "getName") + ".html");
+            return String.format("link:https://camel.apache.org/%s/latest/%s", "components", 
+            		"others/" + invokeGetter(model, "getName") + ".html");
         } else {
             return null;
         }
