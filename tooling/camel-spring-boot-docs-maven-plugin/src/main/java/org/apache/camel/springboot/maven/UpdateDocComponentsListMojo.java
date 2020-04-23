@@ -241,7 +241,7 @@ public class UpdateDocComponentsListMojo extends AbstractMojo {
             }
 
             // update the big readme file in the extensions dir
-            File file = new File(readmeComponentsStarterDir, "readme.adoc");
+            File file = new File(readmeComponentsStarterDir, "README.adoc");
             boolean exists = file.exists();
             String changed = templateDataFormats(dataFormats, count, deprecated);
             boolean updated = updateDataFormats(file, changed);
@@ -296,7 +296,7 @@ public class UpdateDocComponentsListMojo extends AbstractMojo {
                     .count();
 
             // update the big readme file in the extensions dir
-            File file = new File(readmeComponentsStarterDir, "readme.adoc");
+            File file = new File(readmeComponentsStarterDir, "README.adoc");
             boolean exists = file.exists();
             String changed = templateLanguages(languages, count, deprecated);
             boolean updated = updateLanguages(file, changed);
@@ -345,7 +345,7 @@ public class UpdateDocComponentsListMojo extends AbstractMojo {
                     .count();
 
             // update the big readme file in the extensions dir
-            File file = new File(readmeComponentsStarterDir, "readme.adoc");
+            File file = new File(readmeComponentsStarterDir, "README.adoc");
             boolean exists = file.exists();
             String changed = templateOthers(others, count, deprecated);
             boolean updated = updateOthers(file, changed);

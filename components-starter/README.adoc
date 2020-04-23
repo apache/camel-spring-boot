@@ -12,328 +12,328 @@ Number of Camel components: 328 in 261 JAR artifacts (1 deprecated)
 | Component | Since | Description
 
 | link:https://camel.apache.org/components/latest/activemq-component.html[ActiveMQ] (camel-activemq-starter) +
-`activemq:destinationType:destinationName` | 1.0 | The activemq component allows messages to be sent to (or consumed from) Apache ActiveMQ. This component extends the Camel JMS component.
+`activemq:destinationType:destinationName` | 1.0 | Send messages to (or consume from) Apache ActiveMQ. This component extends the Camel JMS component.
 
 | link:https://camel.apache.org/components/latest/ahc-component.html[AHC] (camel-ahc-starter) +
-`ahc:httpUri` | 2.8 | To call external HTTP services using Async Http Client.
+`ahc:httpUri` | 2.8 | Call external HTTP services using Async Http Client.
 
 | link:https://camel.apache.org/components/latest/ahc-ws-component.html[AHC Websocket] (camel-ahc-ws-starter) +
-`ahc-ws:httpUri` | 2.14 | To exchange data with external Websocket servers using Async Http Client.
+`ahc-ws:httpUri` | 2.14 | Exchange data with external Websocket servers using Async Http Client.
 
 | link:https://camel.apache.org/components/latest/amqp-component.html[AMQP] (camel-amqp-starter) +
 `amqp:destinationType:destinationName` | 1.2 | Messaging with AMQP protocol using Apache QPid Client.
 
 | link:https://camel.apache.org/components/latest/apns-component.html[APNS] (camel-apns-starter) +
-`apns:name` | 2.8 | For sending notifications to Apple iOS devices.
+`apns:name` | 2.8 | Send notifications to Apple iOS devices.
 
 | link:https://camel.apache.org/components/latest/as2-component.html[AS2] (camel-as2-starter) +
-`as2:apiName/methodName` | 2.22 | Component used for transferring data secure and reliable over the internet using the AS2 protocol.
+`as2:apiName/methodName` | 2.22 | Transfer data securely and reliably using the AS2 protocol (RFC4130).
 
 | link:https://camel.apache.org/components/latest/asterisk-component.html[Asterisk] (camel-asterisk-starter) +
-`asterisk:name` | 2.18 | The asterisk component is used to interact with Asterisk PBX Server.
+`asterisk:name` | 2.18 | Interact with Asterisk PBX Server.
 
 | link:https://camel.apache.org/components/latest/atmos-component.html[Atmos] (camel-atmos-starter) +
-`atmos:name/operation` | 2.15 | The atmos component is used for integrating with EMC's Atomos Storage.
+`atmos:name/operation` | 2.15 | Integract with EMC's ViPR object data services using the Atmos Client.
 
 | link:https://camel.apache.org/components/latest/atmosphere-websocket-component.html[Atmosphere Websocket] (camel-atmosphere-websocket-starter) +
-`atmosphere-websocket:servicePath` | 2.14 | To exchange data with external Websocket clients using Atmosphere.
+`atmosphere-websocket:servicePath` | 2.14 | Expose WebSocket endpoints using the Atmosphere framework.
 
 | link:https://camel.apache.org/components/latest/atom-component.html[Atom] (camel-atom-starter) +
-`atom:feedUri` | 1.2 | The atom component is used for consuming Atom RSS feeds.
+`atom:feedUri` | 1.2 | Poll Atom RSS feeds.
 
 | link:https://camel.apache.org/components/latest/atomix-map-component.html[Atomix Map] (camel-atomix-starter) +
-`atomix-map:resourceName` | 2.20 | The atomix-map component is used to access Atomix's distributed map.
+`atomix-map:resourceName` | 2.20 | Access Atomix's distributed map.
 
 | link:https://camel.apache.org/components/latest/atomix-messaging-component.html[Atomix Messaging] (camel-atomix-starter) +
-`atomix-messaging:resourceName` | 2.20 | The atomix-messaging component is used to access Atomix's group messaging.
+`atomix-messaging:resourceName` | 2.20 | Access Atomix's group messaging.
 
 | link:https://camel.apache.org/components/latest/atomix-multimap-component.html[Atomix MultiMap] (camel-atomix-starter) +
-`atomix-multimap:resourceName` | 2.20 | The atomix-multimap component is used to access Atomix's distributed multi map.
+`atomix-multimap:resourceName` | 2.20 | Access Atomix's distributed multi map.
 
 | link:https://camel.apache.org/components/latest/atomix-queue-component.html[Atomix Queue] (camel-atomix-starter) +
-`atomix-queue:resourceName` | 2.20 | The atomix-queue component is used to access Atomix's distributed queue.
+`atomix-queue:resourceName` | 2.20 | Access Atomix's distributed queue.
 
 | link:https://camel.apache.org/components/latest/atomix-set-component.html[Atomix Set] (camel-atomix-starter) +
-`atomix-set:resourceName` | 2.20 | The atomix-set component is used to access Atomix's distributed set.
+`atomix-set:resourceName` | 2.20 | Access Atomix's distributed set.
 
 | link:https://camel.apache.org/components/latest/atomix-value-component.html[Atomix Value] (camel-atomix-starter) +
-`atomix-value:resourceName` | 2.20 | The atomix-value component is used to access Atomix's distributed value.
+`atomix-value:resourceName` | 2.20 | Access Atomix's distributed value.
 
 | link:https://camel.apache.org/components/latest/avro-component.html[Avro] (camel-avro-rpc-starter) +
-`avro:transport:host:port/messageName` | 2.10 | Working with Apache Avro for data serialization.
+`avro:transport:host:port/messageName` | 2.10 | Produce or consume Apache Avro RPC services.
 
 | link:https://camel.apache.org/components/latest/aws2-cw-component.html[AWS 2 CloudWatch] (camel-aws2-cw-starter) +
-`aws2-cw:namespace` | 3.1 | The aws2-cw component is used for sending metrics to an Amazon CloudWatch.
+`aws2-cw:namespace` | 3.1 | Sending metrics to AWS CloudWatch using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-ddb-component.html[AWS 2 DynamoDB] (camel-aws2-ddb-starter) +
-`aws2-ddb:tableName` | 3.1 | The aws2-ddb component is used for storing and retrieving data from Amazon's DynamoDB service.
+`aws2-ddb:tableName` | 3.1 | Store and retrieve data from AWS DynamoDB service using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-ddbstream-component.html[AWS 2 DynamoDB Streams] (camel-aws2-ddb-starter) +
-`aws2-ddbstream:tableName` | 3.1 | The aws2-ddbstream component is used for working with Amazon DynamoDB Streams.
+`aws2-ddbstream:tableName` | 3.1 | Receive messages from AWS DynamoDB Stream service using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-ec2-component.html[AWS 2 EC2] (camel-aws2-ec2-starter) +
-`aws2-ec2:label` | 3.1 | The aws2-ec2 is used for managing Amazon EC2 instances.
+`aws2-ec2:label` | 3.1 | Manage AWS EC2 instances using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-ecs-component.html[AWS 2 ECS] (camel-aws2-ecs-starter) +
-`aws2-ecs:label` | 3.1 | The aws2-ecs is used for managing Amazon ECS
+`aws2-ecs:label` | 3.1 | Manage AWS ECS cluster instances using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-eks-component.html[AWS 2 EKS] (camel-aws2-eks-starter) +
-`aws2-eks:label` | 3.1 | The aws2-eks is used for managing Amazon EKS
+`aws2-eks:label` | 3.1 | Manage AWS EKS cluster instances using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-iam-component.html[AWS 2 IAM] (camel-aws2-iam-starter) +
-`aws2-iam:label` | 3.1 | The aws2-iam is used for managing Amazon IAM
+`aws2-iam:label` | 3.1 | Manage AWS IAM instances using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-kinesis-component.html[AWS 2 Kinesis] (camel-aws2-kinesis-starter) +
-`aws2-kinesis:streamName` | 3.2 | The aws2-kinesis component is for consuming and producing records from Amazon Kinesis Streams.
+`aws2-kinesis:streamName` | 3.2 | Consume and produce records from AWS Kinesis Streams using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-kinesis-firehose-component.html[AWS 2 Kinesis Firehose] (camel-aws2-kinesis-starter) +
-`aws2-kinesis-firehose:streamName` | 3.2 | The aws2-kinesis-firehose component is used for producing Amazon's Kinesis Firehose streams.
+`aws2-kinesis-firehose:streamName` | 3.2 | Consume data from AWS Kinesis Firehose streams using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-kms-component.html[AWS 2 KMS] (camel-aws2-kms-starter) +
-`aws2-kms:label` | 3.1 | The aws2-kms is used for managing Amazon KMS
+`aws2-kms:label` | 3.1 | Manage keys stored in AWS KMS instances using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-mq-component.html[AWS 2 MQ] (camel-aws2-mq-starter) +
-`aws2-mq:label` | 3.1 | The aws2-mq is used for managing Amazon MQ instances.
+`aws2-mq:label` | 3.1 | Manage AWS MQ instances using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-msk-component.html[AWS 2 MSK] (camel-aws2-msk-starter) +
-`aws2-msk:label` | 3.1 | The aws2-msk is used for managing Amazon MSK
+`aws2-msk:label` | 3.1 | Manage AWS MSK instances using AWS SDK version 2.x.
+
+| link:https://camel.apache.org/components/latest/aws2-s3-component.html[AWS 2 S3 Storage Service] (camel-aws2-s3-starter) +
+`aws2-s3://bucketNameOrArn` | 3.2 | Store and retrie objects from AWS S3 Storage Service using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-ses-component.html[AWS 2 Simple Email Service] (camel-aws2-ses-starter) +
-`aws2-ses:from` | 3.1 | The aws2-ses component is used for sending emails with Amazon's SES service.
+`aws2-ses:from` | 3.1 | Send e-mails through AWS SES service using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-sns-component.html[AWS 2 Simple Notification System] (camel-aws2-sns-starter) +
-`aws2-sns:topicNameOrArn` | 3.1 | The aws2-sns component is used for sending messages to an Amazon Simple Notification Topic.
+`aws2-sns:topicNameOrArn` | 3.1 | Send messages to an AWS Simple Notification Topic using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-sqs-component.html[AWS 2 Simple Queue Service] (camel-aws2-sqs-starter) +
-`aws2-sqs:queueNameOrArn` | 3.1 | The aws2-sqs component is used for sending and receiving messages to Amazon's SQS service.
+`aws2-sqs:queueNameOrArn` | 3.1 | Sending and receive messages to/from AWS SQS service using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-translate-component.html[AWS 2 Translate] (camel-aws2-translate-starter) +
-`aws2-translate:label` | 3.1 | The aws2-translate component is used for managing Amazon Translate
+`aws2-translate:label` | 3.1 | Translate texts using AWS Translate and AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws-cw-component.html[AWS CloudWatch] (camel-aws-cw-starter) +
-`aws-cw:namespace` | 2.11 | The aws-cw component is used for sending metrics to an Amazon CloudWatch.
+`aws-cw:namespace` | 2.11 | Send metrics to AWS CloudWatch.
 
 | link:https://camel.apache.org/components/latest/aws-ddb-component.html[AWS DynamoDB] (camel-aws-ddb-starter) +
-`aws-ddb:tableName` | 2.10 | The aws-ddb component is used for storing and retrieving data from Amazon's DynamoDB service.
+`aws-ddb:tableName` | 2.10 | Store and retrieve data from AWS DynamoDB service.
 
 | link:https://camel.apache.org/components/latest/aws-ddbstream-component.html[AWS DynamoDB Streams] (camel-aws-ddb-starter) +
-`aws-ddbstream:tableName` | 2.17 | The aws-ddbstream component is used for working with Amazon DynamoDB Streams.
+`aws-ddbstream:tableName` | 2.17 | Receive messages from AWS DynamoDB Stream service.
 
 | link:https://camel.apache.org/components/latest/aws-ec2-component.html[AWS EC2] (camel-aws-ec2-starter) +
-`aws-ec2:label` | 2.16 | The aws-ec2 is used for managing Amazon EC2 instances.
+`aws-ec2:label` | 2.16 | Manage AWS EC2 instances.
 
 | link:https://camel.apache.org/components/latest/aws-ecs-component.html[AWS ECS] (camel-aws-ecs-starter) +
-`aws-ecs:label` | 3.0 | The aws-ecs is used for managing Amazon ECS
+`aws-ecs:label` | 3.0 | Manage AWS ECS cluster instances.
 
 | link:https://camel.apache.org/components/latest/aws-eks-component.html[AWS EKS] (camel-aws-eks-starter) +
-`aws-eks:label` | 3.0 | The aws-eks is used for managing Amazon EKS
+`aws-eks:label` | 3.0 | Manage AWS EKS cluster instances.
 
 | link:https://camel.apache.org/components/latest/aws-iam-component.html[AWS IAM] (camel-aws-iam-starter) +
-`aws-iam:label` | 2.23 | The aws-iam is used for managing Amazon IAM
+`aws-iam:label` | 2.23 | Manage AWS IAM instances.
 
 | link:https://camel.apache.org/components/latest/aws-kinesis-component.html[AWS Kinesis] (camel-aws-kinesis-starter) +
-`aws-kinesis:streamName` | 2.17 | The aws-kinesis component is for consuming and producing records from Amazon Kinesis Streams.
+`aws-kinesis:streamName` | 2.17 | Consume and produce records from AWS Kinesis Streams.
 
 | link:https://camel.apache.org/components/latest/aws-kinesis-firehose-component.html[AWS Kinesis Firehose] (camel-aws-kinesis-starter) +
-`aws-kinesis-firehose:streamName` | 2.19 | The aws-kinesis-firehose component is used for producing Amazon's Kinesis Firehose streams.
+`aws-kinesis-firehose:streamName` | 2.19 | Consume data from AWS Kinesis Firehose streams.
 
 | link:https://camel.apache.org/components/latest/aws-kms-component.html[AWS KMS] (camel-aws-kms-starter) +
-`aws-kms:label` | 2.21 | The aws-kms is used for managing Amazon KMS
+`aws-kms:label` | 2.21 | Manage keys stored in AWS KMS instances.
 
 | link:https://camel.apache.org/components/latest/aws-lambda-component.html[AWS Lambda] (camel-aws-lambda-starter) +
-`aws-lambda:function` | 2.20 | The aws-lambda is used for managing and invoking functions from Amazon Lambda.
+`aws-lambda:function` | 2.20 | Manage and invoke AWS Lambda functions.
 
 | link:https://camel.apache.org/components/latest/aws2-lambda-component.html[AWS Lambda] (camel-aws2-lambda-starter) +
-`aws2-lambda:function` | 3.2 | The aws2-lambda is used for managing and invoking functions from Amazon Lambda.
+`aws2-lambda:function` | 3.2 | Manage and invoke AWS Lambda functions using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws-mq-component.html[AWS MQ] (camel-aws-mq-starter) +
-`aws-mq:label` | 2.21 | The aws-mq is used for managing Amazon MQ instances.
+`aws-mq:label` | 2.21 | Manage AWS MQ instances.
 
 | link:https://camel.apache.org/components/latest/aws-msk-component.html[AWS MSK] (camel-aws-msk-starter) +
-`aws-msk:label` | 3.0 | The aws-msk is used for managing Amazon MSK
+`aws-msk:label` | 3.0 | Manage AWS MSK instances.
 
 | link:https://camel.apache.org/components/latest/aws-s3-component.html[AWS S3 Storage Service] (camel-aws-s3-starter) +
-`aws-s3://bucketNameOrArn` | 2.8 | The aws-s3 component is used for storing and retrieving object from Amazon S3 Storage Service.
+`aws-s3://bucketNameOrArn` | 2.8 | Store and retrie objects from AWS S3 Storage Service.
 
 | link:https://camel.apache.org/components/latest/aws-ses-component.html[AWS Simple Email Service] (camel-aws-ses-starter) +
-`aws-ses:from` | 2.9 | The aws-ses component is used for sending emails with Amazon's SES service.
+`aws-ses:from` | 2.9 | Send e-mails through AWS SES service.
 
 | link:https://camel.apache.org/components/latest/aws-sns-component.html[AWS Simple Notification System] (camel-aws-sns-starter) +
-`aws-sns:topicNameOrArn` | 2.8 | The aws-sns component is used for sending messages to an Amazon Simple Notification Topic.
+`aws-sns:topicNameOrArn` | 2.8 | Send messages to an AWS Simple Notification Topic.
 
 | link:https://camel.apache.org/components/latest/aws-sqs-component.html[AWS Simple Queue Service] (camel-aws-sqs-starter) +
-`aws-sqs:queueNameOrArn` | 2.6 | The aws-sqs component is used for sending and receiving messages to Amazon's SQS service.
+`aws-sqs:queueNameOrArn` | 2.6 | Sending and receive messages to/from AWS SQS service.
 
 | link:https://camel.apache.org/components/latest/aws-swf-component.html[AWS Simple Workflow] (camel-aws-swf-starter) +
-`aws-swf:type` | 2.13 | The aws-swf component is used for managing workflows from Amazon Simple Workflow.
+`aws-swf:type` | 2.13 | Manage workflows in the AWS Simple Workflow service.
 
 | link:https://camel.apache.org/components/latest/aws-sdb-component.html[AWS SimpleDB] (camel-aws-sdb-starter) +
-`aws-sdb:domainName` | 2.9 | The aws-sdb component is for storing and retrieving data from/to Amazon's SDB service.
+`aws-sdb:domainName` | 2.9 | Store and Retrieve data from/to AWS SDB service.
 
 | link:https://camel.apache.org/components/latest/aws-translate-component.html[AWS Translate] (camel-aws-translate-starter) +
-`aws-translate:label` | 3.0 | The aws-translate component is used for managing Amazon Translate
-
-| link:https://camel.apache.org/components/latest/aws2-s3-component.html[AWS2 S3 Storage Service] (camel-aws2-s3-starter) +
-`aws2-s3://bucketNameOrArn` | 3.2 | The aws2-s3 component is used for storing and retrieving object from Amazon S3 Storage Service.
-
-| link:https://camel.apache.org/components/latest/azure-blob-component.html[Azure Storage Blob Service] (camel-azure-starter) +
-`azure-blob:containerOrBlobUri` | 2.19 | The azure-blob component is used for storing and retrieving blobs from Azure Storage Blob Service.
+`aws-translate:label` | 3.0 | Translate texts using AWS Translate.
 
 | link:https://camel.apache.org/components/latest/azure-storage-blob-component.html[Azure Storage Blob Service] (camel-azure-storage-blob-starter) +
-`azure-storage-blob:containerName` | 3.3 | The azure-storage-blob component is used for storing and retrieving blobs from Azure Storage Blob Service using SDK v12.
+`azure-storage-blob:containerName` | 3.3 | Store and retrieve blobs from Azure Storage Blob Service using SDK v12.
+
+| link:https://camel.apache.org/components/latest/azure-blob-component.html[Azure Storage Blob Service (Legacy)] (camel-azure-starter) +
+`azure-blob:containerOrBlobUri` | 2.19 | Store and retrieve blobs from Azure Storage Blob Service.
 
 | link:https://camel.apache.org/components/latest/azure-queue-component.html[Azure Storage Queue Service] (camel-azure-starter) +
-`azure-queue:containerAndQueueUri` | 2.19 | The azure-queue component is used for storing and retrieving messages from Azure Storage Queue Service.
+`azure-queue:containerAndQueueUri` | 2.19 | Store and retrieve messages from Azure Storage Queue Service.
 
 | link:https://camel.apache.org/components/latest/bean-component.html[Bean] (camel-bean-starter) +
-`bean:beanName` | 1.0 | The bean component is for invoking Java beans from Camel.
+`bean:beanName` | 1.0 | Invoke methods of Java beans stored in Camel registry.
 
 | link:https://camel.apache.org/components/latest/bean-validator-component.html[Bean Validator] (camel-bean-validator-starter) +
-`bean-validator:label` | 2.3 | The Validator component performs bean validation of the message body using the Java Bean Validation API.
+`bean-validator:label` | 2.3 | Validate the message body using the Java Bean Validation API.
 
 | link:https://camel.apache.org/components/latest/beanstalk-component.html[Beanstalk] (camel-beanstalk-starter) +
-`beanstalk:connectionSettings` | 2.15 | The beanstalk component is used for job retrieval and post-processing of Beanstalk jobs.
+`beanstalk:connectionSettings` | 2.15 | Retrieve and post-process Beanstalk jobs.
 
 | link:https://camel.apache.org/components/latest/bonita-component.html[Bonita] (camel-bonita-starter) +
-`bonita:operation` | 2.19 | Used for communicating with a remote Bonita BPM process engine.
+`bonita:operation` | 2.19 | Communicate with a remote Bonita BPM process engine.
 
 | link:https://camel.apache.org/components/latest/box-component.html[Box] (camel-box-starter) +
-`box:apiName/methodName` | 2.14 | For uploading downloading and managing files folders groups collaborations etc on box DOT com.
+`box:apiName/methodName` | 2.14 | Upload, download and manage files, folders, groups, collaborations, etc. on box.com.
 
 | link:https://camel.apache.org/components/latest/braintree-component.html[Braintree] (camel-braintree-starter) +
-`braintree:apiName/methodName` | 2.17 | The braintree component is used for integrating with the Braintree Payment System.
+`braintree:apiName/methodName` | 2.17 | Process payments using Braintree Payments.
 
 | link:https://camel.apache.org/components/latest/browse-component.html[Browse] (camel-browse-starter) +
-`browse:name` | 1.3 | The browse component is used for viewing the messages received on endpoints that supports BrowsableEndpoint.
+`browse:name` | 1.3 | Inspect the messages received on endpoints supporting BrowsableEndpoint.
 
 | link:https://camel.apache.org/components/latest/caffeine-cache-component.html[Caffeine Cache] (camel-caffeine-starter) +
-`caffeine-cache:cacheName` | 2.20 | The caffeine-cache component is used for integration with Caffeine Cache.
+`caffeine-cache:cacheName` | 2.20 | Perform caching operations using Caffeine Cache.
 
 | link:https://camel.apache.org/components/latest/caffeine-loadcache-component.html[Caffeine LoadCache] (camel-caffeine-starter) +
-`caffeine-loadcache:cacheName` | 2.20 | The caffeine-loadcache component is used for integration with Caffeine Load Cache.
+`caffeine-loadcache:cacheName` | 2.20 | Perform caching operations using Caffeine Cache with an attached CacheLoader.
 
 | link:https://camel.apache.org/components/latest/cql-component.html[Cassandra CQL] (camel-cassandraql-starter) +
-`cql:beanRef:hosts:port/keyspace` | 2.15 | The cql component aims at integrating Cassandra 2.0 using the CQL3 API (not the Thrift API). It's based on Cassandra Java Driver provided by DataStax.
+`cql:beanRef:hosts:port/keyspace` | 2.15 | Integrate with Cassandra 2.0 using the CQL3 API (not the Thrift API).
 
 | link:https://camel.apache.org/components/latest/chatscript-component.html[ChatScript] (camel-chatscript-starter) +
-`chatscript:host:port/botName` | 3.0 | Represents a ChatScript endpoint.
+`chatscript:host:port/botName` | 3.0 | Chat with a ChatScript Server.
 
 | link:https://camel.apache.org/components/latest/chunk-component.html[Chunk] (camel-chunk-starter) +
-`chunk:resourceUri` | 2.15 | Transforms the message using a Chunk template.
+`chunk:resourceUri` | 2.15 | Transform messages using Chunk templating engine.
 
 | link:https://camel.apache.org/components/latest/class-component.html[Class] (camel-bean-starter) +
-`class:beanName` | 2.4 | The Class component is for invoking Java classes (Java beans) from Camel.
+`class:beanName` | 2.4 | Invoke methods of Java beans specified by class name.
 
 | link:https://camel.apache.org/components/latest/cm-sms-component.html[CM SMS Gateway] (camel-cm-sms-starter) +
-`cm-sms:host` | 2.18 | The cm-sms component allows to integrate with CM SMS Gateway.
+`cm-sms:host` | 2.18 | Send SMS messages via CM SMS Gateway.
 
 | link:https://camel.apache.org/components/latest/cmis-component.html[CMIS] (camel-cmis-starter) +
-`cmis:cmsUrl` | 2.11 | The cmis component uses the Apache Chemistry client API and allows you to add/read nodes to/from a CMIS compliant content repositories.
+`cmis:cmsUrl` | 2.11 | Read and write data from to/from a CMIS compliant content repositories.
 
 | link:https://camel.apache.org/components/latest/coap-component.html[CoAP] (camel-coap-starter) +
-`coap:uri` | 2.16 | The coap component is used for sending and receiving messages from COAP capable devices.
+`coap:uri` | 2.16 | Send and receive messages to/from COAP capable devices.
 
 | link:https://camel.apache.org/components/latest/cometd-component.html[CometD] (camel-cometd-starter) +
-`cometd:host:port/channelName` | 2.0 | The cometd component is a transport for working with the Jetty implementation of the cometd/bayeux protocol.
+`cometd:host:port/channelName` | 2.0 | Offers publish/subscribe, peer-to-peer (via a server), and RPC style messaging using the CometD/Bayeux protocol.
 
 | link:https://camel.apache.org/components/latest/consul-component.html[Consul] (camel-consul-starter) +
-`consul:apiEndpoint` | 2.18 | The camel consul component allows you to work with Consul, a distributed, highly available, datacenter-aware, service discovery and configuration system.
+`consul:apiEndpoint` | 2.18 | Integrate with Consul service discovery and configuration store.
 
 | link:https://camel.apache.org/components/latest/controlbus-component.html[Control Bus] (camel-controlbus-starter) +
-`controlbus:command:language` | 2.11 | The controlbus component provides easy management of Camel applications based on the Control Bus EIP pattern.
+`controlbus:command:language` | 2.11 | Manage and monitor Camel routes.
 
 | link:https://camel.apache.org/components/latest/corda-component.html[Corda] (camel-corda-starter) +
-`corda:node` | 2.23 | The corda component uses corda-rpc to interact with corda nodes.
+`corda:node` | 2.23 | Perform operations against Corda blockchain platform using corda-rpc library.
 
 | link:https://camel.apache.org/components/latest/couchbase-component.html[Couchbase] (camel-couchbase-starter) +
-`couchbase:protocol:hostname:port` | 2.19 | Represents a Couchbase endpoint that can query Views with a Poll strategy and/or produce various type of operations.
+`couchbase:protocol:hostname:port` | 2.19 | Query Couchbase Views with a poll strategy and/or perform various operations against Couchbase databases.
 
 | link:https://camel.apache.org/components/latest/couchdb-component.html[CouchDB] (camel-couchdb-starter) +
-`couchdb:protocol:hostname:port/database` | 2.11 | The couchdb component is used for integrate with CouchDB databases.
+`couchdb:protocol:hostname:port/database` | 2.11 | Consume changesets for inserts, updates and deletes in a CouchDB database, as well as get, save, update and delete documents from a CouchDB database.
 
 | link:https://camel.apache.org/components/latest/cron-component.html[Cron] (camel-cron-starter) +
-`cron:name` | 3.1 | Camel Cron Component
+`cron:name` | 3.1 | A generic interface for triggering events at times specified through the Unix cron syntax.
 
 | link:https://camel.apache.org/components/latest/crypto-component.html[Crypto (JCE)] (camel-crypto-starter) +
-`crypto:cryptoOperation:name` | 2.3 | The crypto component is used for signing and verifying exchanges using the Signature Service of the Java Cryptographic Extension (JCE).
+`crypto:cryptoOperation:name` | 2.3 | Sign and verify exchanges using the Signature Service of the Java Cryptographic Extension (JCE).
 
 | link:https://camel.apache.org/components/latest/crypto-cms-component.html[Crypto CMS] (camel-crypto-cms-starter) +
-`crypto-cms:cryptoOperation:name` | 2.20 | *deprecated* The crypto cms component is used for encrypting data in CMS Enveloped Data format, decrypting CMS Enveloped Data, signing data in CMS Signed Data format, and verifying CMS Signed Data.
+`crypto-cms:cryptoOperation:name` | 2.20 | *deprecated* Encrypt, decrypt, sign and verify data in CMS Enveloped Data format.
 
 | link:https://camel.apache.org/components/latest/cxf-component.html[CXF] (camel-cxf-starter) +
-`cxf:beanId:address` | 1.0 | The cxf component is used for SOAP WebServices using Apache CXF.
+`cxf:beanId:address` | 1.0 | Expose SOAP WebServices using Apache CXF or connect to external WebServices using CXF WS client.
 
 | link:https://camel.apache.org/components/latest/cxfrs-component.html[CXF-RS] (camel-cxf-starter) +
-`cxfrs:beanId:address` | 2.0 | The cxfrs component is used for JAX-RS REST services using Apache CXF.
+`cxfrs:beanId:address` | 2.0 | Expose JAX-RS REST services using Apache CXF or connect to external REST services using CXF REST client.
 
 | link:https://camel.apache.org/components/latest/dataformat-component.html[Data Format] (camel-dataformat-starter) +
-`dataformat:name:operation` | 2.12 | The dataformat component is used for working with Data Formats as if it was a regular Component supporting Endpoints and URIs.
+`dataformat:name:operation` | 2.12 | Use a Camel Data Format as a regular Camel Component.
 
 | link:https://camel.apache.org/components/latest/dataset-component.html[Dataset] (camel-dataset-starter) +
-`dataset:name` | 1.3 | The dataset component provides a mechanism to easily perform load & soak testing of your system.
+`dataset:name` | 1.3 | Provide data for load & soak testing of your Camel application.
 
 | link:https://camel.apache.org/components/latest/dataset-test-component.html[DataSet Test] (camel-dataset-starter) +
-`dataset-test:name` | 1.3 | The dataset-test component extends the mock component by on startup to pull messages from another endpoint to set the expected message bodies.
+`dataset-test:name` | 1.3 | Extends the mock component by pulling messages from another endpoint on startup to set the expected message bodies.
 
 | link:https://camel.apache.org/components/latest/debezium-mongodb-component.html[Debezium MongoDB Connector] (camel-debezium-mongodb-starter) +
-`debezium-mongodb:name` | 3.0 | Represents a Debezium MongoDB endpoint which is used to capture changes in MongoDB database so that that applications can see those changes and respond to them.
+`debezium-mongodb:name` | 3.0 | Capture changes from a MongoDB database.
 
 | link:https://camel.apache.org/components/latest/debezium-mysql-component.html[Debezium MySQL Connector] (camel-debezium-mysql-starter) +
-`debezium-mysql:name` | 3.0 | Represents a Debezium MySQL endpoint which is used to capture changes in MySQL database so that that applications can see those changes and respond to them.
+`debezium-mysql:name` | 3.0 | Capture changes from a MySQL database.
 
 | link:https://camel.apache.org/components/latest/debezium-postgres-component.html[Debezium PostgresSQL Connector] (camel-debezium-postgres-starter) +
-`debezium-postgres:name` | 3.0 | Represents a Debezium PostgresSQL endpoint which is used to capture changes in PostgresSQL database so that that applications can see those changes and respond to them.
+`debezium-postgres:name` | 3.0 | Capture changes from a PostgresSQL database.
 
 | link:https://camel.apache.org/components/latest/debezium-sqlserver-component.html[Debezium SQL Server Connector] (camel-debezium-sqlserver-starter) +
-`debezium-sqlserver:name` | 3.0 | Represents a Debezium SQL Server endpoint which is used to capture changes in SQL Server database so that that applications can see those changes and respond to them.
+`debezium-sqlserver:name` | 3.0 | Capture changes from an SQL Server database.
 
 | link:https://camel.apache.org/components/latest/djl-component.html[Deep Java Library] (camel-djl-starter) +
-`djl:application` | 3.3 | The Deep Java Library component is used to infer deep learning models.
+`djl:application` | 3.3 | Infer Deep Learning models from message exchanges data using Deep Java Library (DJL).
 
 | link:https://camel.apache.org/components/latest/digitalocean-component.html[DigitalOcean] (camel-digitalocean-starter) +
-`digitalocean:operation` | 2.19 | The DigitalOcean component allows you to manage Droplets and resources within the DigitalOcean cloud.
+`digitalocean:operation` | 2.19 | Manage Droplets and resources within the DigitalOcean cloud.
 
 | link:https://camel.apache.org/components/latest/direct-component.html[Direct] (camel-direct-starter) +
-`direct:name` | 1.0 | The direct component provides direct, synchronous call to another endpoint from the same CamelContext.
+`direct:name` | 1.0 | Provides a direct, synchronous call to another endpoint from the same CamelContext.
 
 | link:https://camel.apache.org/components/latest/direct-vm-component.html[Direct VM] (camel-directvm-starter) +
-`direct-vm:name` | 2.10 | The direct-vm component provides direct, synchronous call to another endpoint from any CamelContext in the same JVM.
+`direct-vm:name` | 2.10 | Provides direct, synchronous call to another endpoint from any CamelContext in the same JVM.
 
 | link:https://camel.apache.org/components/latest/disruptor-component.html[Disruptor] (camel-disruptor-starter) +
-`disruptor:name` | 2.12 | The disruptor component provides asynchronous SEDA behavior using LMAX Disruptor.
+`disruptor:name` | 2.12 | Provides asynchronous SEDA behavior using LMAX Disruptor.
 
 | link:https://camel.apache.org/components/latest/dns-component.html[DNS] (camel-dns-starter) +
-`dns:dnsType` | 2.7 | To lookup domain information and run DNS queries using DNSJava.
+`dns:dnsType` | 2.7 | Perform DNS queries using DNSJava.
 
 | link:https://camel.apache.org/components/latest/docker-component.html[Docker] (camel-docker-starter) +
-`docker:operation` | 2.15 | The docker component is used for managing Docker containers.
+`docker:operation` | 2.15 | Manage Docker containers.
 
 | link:https://camel.apache.org/components/latest/dozer-component.html[Dozer] (camel-dozer-starter) +
-`dozer:name` | 2.15 | The dozer component provides the ability to map between Java beans using the Dozer mapping library.
+`dozer:name` | 2.15 | Map between Java beans using the Dozer mapping library.
 
 | link:https://camel.apache.org/components/latest/drill-component.html[Drill] (camel-drill-starter) +
-`drill:host` | 2.19 | The drill component gives you the ability to quering into apache drill cluster.
+`drill:host` | 2.19 | Perform queries against an Apache Drill cluster.
 
 | link:https://camel.apache.org/components/latest/dropbox-component.html[Dropbox] (camel-dropbox-starter) +
-`dropbox:operation` | 2.14 | For uploading, downloading and managing files, folders, groups, collaborations, etc on dropbox DOT com.
+`dropbox:operation` | 2.14 | Upload, download and manage files, folders, groups, collaborations, etc on Dropbox.
 
 | link:https://camel.apache.org/components/latest/ehcache-component.html[Ehcache] (camel-ehcache-starter) +
-`ehcache:cacheName` | 2.18 | The ehcache component enables you to perform caching operations using Ehcache as cache implementation.
+`ehcache:cacheName` | 2.18 | Perform caching operations using Ehcache.
 
 | link:https://camel.apache.org/components/latest/elasticsearch-rest-component.html[Elastichsearch Rest] (camel-elasticsearch-rest-starter) +
-`elasticsearch-rest:clusterName` | 2.21 | The elasticsearch component is used for interfacing with ElasticSearch server using REST API.
+`elasticsearch-rest:clusterName` | 2.21 | Send requests to with an ElasticSearch via REST API.
 
 | link:https://camel.apache.org/components/latest/elsql-component.html[ElSQL] (camel-elsql-starter) +
-`elsql:elsqlName:resourceUri` | 2.16 | The elsql component is an extension to the existing SQL Component that uses ElSql to define the SQL queries.
+`elsql:elsqlName:resourceUri` | 2.16 | Use ElSql to define SQL queries. Extends the SQL Component.
 
 | link:https://camel.apache.org/components/latest/etcd-keys-component.html[Etcd Keys] (camel-etcd-starter) +
-`etcd-keys:path` | 2.18 | Camel Etcd support
+`etcd-keys:path` | 2.18 | Get, set or delete keys in etcd key-value store.
 
 | link:https://camel.apache.org/components/latest/etcd-stats-component.html[Etcd Stats] (camel-etcd-starter) +
-`etcd-stats:path` | 2.18 | The camel etcd component allows you to work with Etcd, a distributed reliable key-value store.
+`etcd-stats:path` | 2.18 | Access etcd cluster statistcs.
 
 | link:https://camel.apache.org/components/latest/etcd-watch-component.html[Etcd Watch] (camel-etcd-starter) +
-`etcd-watch:path` | 2.18 | The camel etcd component allows you to work with Etcd, a distributed reliable key-value store.
+`etcd-watch:path` | 2.18 | Watch specific etcd keys or directories for changes.
 
 | link:https://camel.apache.org/components/latest/exec-component.html[Exec] (camel-exec-starter) +
 `exec:executable` | 2.3 | The exec component can be used to execute OS system commands.
