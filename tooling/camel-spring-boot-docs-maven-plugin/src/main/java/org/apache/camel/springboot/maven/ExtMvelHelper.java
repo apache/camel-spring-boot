@@ -55,7 +55,7 @@ public class ExtMvelHelper {
             return String.format("link:https://camel.apache.org/%s/latest/%s", "components", "languages", 
                     invokeGetter(model, "getName") + "-language.html");
         } else if (model instanceof OtherModel) {
-            return String.format("link:https://camel.apache.org/%s/latest/%s", "components",
+            return String.format("link:https://camel.apache.org/%s/latest/%s", "components", "others", 
                     invokeGetter(model, "getName") + ".html");
         } else {
             return null;
