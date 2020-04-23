@@ -49,7 +49,7 @@ public class ExtMvelHelper {
             return String.format("link:https://camel.apache.org/%s/latest/%s", "components",
                     invokeGetter(model, "getScheme") + "-component.html");
         } else if (model instanceof DataFormatModel) {
-            return String.format("link:https://camel.apache.org/%s/latest/%s", "components",
+            return String.format("link:https://camel.apache.org/%s/latest/%s", "dataformats",
                     invokeGetter(model, "getName") + "-dataformat.html");
         } else if (model instanceof LanguageModel) {
             return String.format("link:https://camel.apache.org/%s/latest/%s", "components",
