@@ -180,7 +180,7 @@ public class UpdateDocComponentsListMojo extends AbstractMojo {
                     .count();
 
             // update the big readme file in the extensions dir
-            File file = new File(readmeComponentsStarterDir, "readme.adoc");
+            File file = new File(readmeComponentsStarterDir, "README.adoc");
             boolean exists = file.exists();
             String changed = templateComponents(components, count, deprecated);
             boolean updated = updateComponents(file, changed);
