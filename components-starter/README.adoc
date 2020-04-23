@@ -1007,139 +1007,139 @@ Number of Camel data formats: 45 in 37 JAR artifacts (0 deprecated)
 |===
 | Data Format | Since | Description
 
-| link:https://camel.apache.org/components/latest/dataformats[Any23] +
+| link:https://camel.apache.org/components/latest/dataformats/any23-dataformat.html[Any23] +
 (camel-any23-starter) | 3.0 | Extract RDF data from HTML documents.
 
-| link:https://camel.apache.org/components/latest/dataformats[ASN.1 File] +
+| link:https://camel.apache.org/components/latest/dataformats/asn1-dataformat.html[ASN.1 File] +
 (camel-asn1-starter) | 2.20 | Encode and decode data structures using Abstract Syntax Notation One (ASN.1).
 
-| link:https://camel.apache.org/components/latest/dataformats[Avro] +
+| link:https://camel.apache.org/components/latest/dataformats/avro-dataformat.html[Avro] +
 (camel-avro-starter) | 2.14 | Serialize and deserialize messages using Apache Avro binary dataformat.
 
-| link:https://camel.apache.org/components/latest/dataformats[Barcode] +
+| link:https://camel.apache.org/components/latest/dataformats/barcode-dataformat.html[Barcode] +
 (camel-barcode-starter) | 2.14 | Transform strings to various 1D/2D barcode bitmap formats and back.
 
-| link:https://camel.apache.org/components/latest/dataformats[Base64] +
+| link:https://camel.apache.org/components/latest/dataformats/base64-dataformat.html[Base64] +
 (camel-base64-starter) | 2.11 | Encode and decode data using Base64.
 
-| link:https://camel.apache.org/components/latest/dataformats[BeanIO] +
+| link:https://camel.apache.org/components/latest/dataformats/beanio-dataformat.html[BeanIO] +
 (camel-beanio-starter) | 2.10 | Marshal and unmarshal Java beans to and from flat files (such as CSV, delimited, or fixed length formats).
 
-| link:https://camel.apache.org/components/latest/dataformats[Bindy CSV] +
+| link:https://camel.apache.org/components/latest/dataformats/bindy-dataformat.html[Bindy CSV] +
 (camel-bindy-starter) | 2.0 | Marshal and unmarshal Java beans from and to flat payloads (such as CSV, delimited, fixed length formats, or FIX messages).
 
-| link:https://camel.apache.org/components/latest/dataformats[Bindy Fixed Length] +
+| link:https://camel.apache.org/components/latest/dataformats/bindy-dataformat.html[Bindy Fixed Length] +
 (camel-bindy-starter) | 2.0 | Marshal and unmarshal Java beans from and to flat payloads (such as CSV, delimited, fixed length formats, or FIX messages).
 
-| link:https://camel.apache.org/components/latest/dataformats[Bindy Key Value Pair] +
+| link:https://camel.apache.org/components/latest/dataformats/bindy-dataformat.html[Bindy Key Value Pair] +
 (camel-bindy-starter) | 2.0 | Marshal and unmarshal Java beans from and to flat payloads (such as CSV, delimited, fixed length formats, or FIX messages).
 
-| link:https://camel.apache.org/components/latest/dataformats[CBOR] +
+| link:https://camel.apache.org/components/latest/dataformats/cbor-dataformat.html[CBOR] +
 (camel-cbor-starter) | 3.0 | Unmarshal a CBOR payload to POJO and back.
 
-| link:https://camel.apache.org/components/latest/dataformats[Crypto (Java Cryptographic Extension)] +
+| link:https://camel.apache.org/components/latest/dataformats/crypto-dataformat.html[Crypto (Java Cryptographic Extension)] +
 (camel-crypto-starter) | 2.3 | Encrypt and decrypt messages using Java Cryptography Extension (JCE).
 
-| link:https://camel.apache.org/components/latest/dataformats[CSV] +
+| link:https://camel.apache.org/components/latest/dataformats/csv-dataformat.html[CSV] +
 (camel-csv-starter) | 1.3 | Handle CSV (Comma Separated Values) payloads.
 
-| link:https://camel.apache.org/components/latest/dataformats[FHIR JSon] +
+| link:https://camel.apache.org/components/latest/dataformats/fhirJson-dataformat.html[FHIR JSon] +
 (camel-fhir-starter) | 2.21 | Marshall/unmarshall FHIR objects to/from JSON.
 
-| link:https://camel.apache.org/components/latest/dataformats[FHIR XML] +
+| link:https://camel.apache.org/components/latest/dataformats/fhirXml-dataformat.html[FHIR XML] +
 (camel-fhir-starter) | 2.21 | Marshall/unmarshall FHIR objects to/from XML.
 
-| link:https://camel.apache.org/components/latest/dataformats[Flatpack] +
+| link:https://camel.apache.org/components/latest/dataformats/flatpack-dataformat.html[Flatpack] +
 (camel-flatpack-starter) | 2.1 | Marshal and unmarshal Java lists and maps to/from flat files (such as CSV, delimited, or fixed length formats).
 
-| link:https://camel.apache.org/components/latest/dataformats[Grok] +
+| link:https://camel.apache.org/components/latest/dataformats/grok-dataformat.html[Grok] +
 (camel-grok-starter) | 3.0 | Unmarshal unstructured data to objects using Logstash based Grok patterns.
 
-| link:https://camel.apache.org/components/latest/dataformats[GZip Deflater] +
+| link:https://camel.apache.org/components/latest/dataformats/gzipdeflater-dataformat.html[GZip Deflater] +
 (camel-zip-deflater-starter) | 2.0 | Compress and de-compress messages using java.util.zip.GZIPStream.
 
-| link:https://camel.apache.org/components/latest/dataformats[HL7] +
+| link:https://camel.apache.org/components/latest/dataformats/hl7-dataformat.html[HL7] +
 (camel-hl7-starter) | 2.0 | Marshal and unmarshal HL7 (Health Care) model objects using the HL7 MLLP codec.
 
-| link:https://camel.apache.org/components/latest/dataformats[iCal] +
+| link:https://camel.apache.org/components/latest/dataformats/ical-dataformat.html[iCal] +
 (camel-ical-starter) | 2.12 | Marshal and unmarshal iCal (.ics) documents to/from model objects provided by the iCal4j library.
 
-| link:https://camel.apache.org/components/latest/dataformats[JacksonXML] +
+| link:https://camel.apache.org/components/latest/dataformats/jacksonxml-dataformat.html[JacksonXML] +
 (camel-jacksonxml-starter) | 2.16 | Unmarshal a XML payloads to POJOs and back using XMLMapper extension of Jackson.
 
-| link:https://camel.apache.org/components/latest/dataformats[JAXB] +
+| link:https://camel.apache.org/components/latest/dataformats/jaxb-dataformat.html[JAXB] +
 (camel-jaxb-starter) | 1.0 | Unmarshal XML payloads to POJOs and back using JAXB2 XML marshalling standard.
 
-| link:https://camel.apache.org/components/latest/dataformats[JSon Fastjson] +
+| link:https://camel.apache.org/components/latest/dataformats/json-fastjson-dataformat.html[JSon Fastjson] +
 (camel-fastjson-starter) | 2.20 | Marshal POJOs to JSON and back.
 
-| link:https://camel.apache.org/components/latest/dataformats[JSon GSon] +
+| link:https://camel.apache.org/components/latest/dataformats/json-gson-dataformat.html[JSon GSon] +
 (camel-gson-starter) | 2.10 | Marshal POJOs to JSON and back.
 
-| link:https://camel.apache.org/components/latest/dataformats[JSon Jackson] +
+| link:https://camel.apache.org/components/latest/dataformats/json-jackson-dataformat.html[JSon Jackson] +
 (camel-jackson-starter) | 2.0 | Marshal POJOs to JSON and back.
 
-| link:https://camel.apache.org/components/latest/dataformats[JSon Johnzon] +
+| link:https://camel.apache.org/components/latest/dataformats/json-johnzon-dataformat.html[JSon Johnzon] +
 (camel-johnzon-starter) | 2.18 | Marshal POJOs to JSON and back.
 
-| link:https://camel.apache.org/components/latest/dataformats[JSon XStream] +
+| link:https://camel.apache.org/components/latest/dataformats/json-xstream-dataformat.html[JSon XStream] +
 (camel-xstream-starter) | 2.0 | Marshal POJOs to JSON and back.
 
-| link:https://camel.apache.org/components/latest/dataformats[JSonApi] +
+| link:https://camel.apache.org/components/latest/dataformats/jsonApi-dataformat.html[JSonApi] +
 (camel-jsonapi-starter) | 3.0 | Marshal and unmarshal JSON:API resources.
 
-| link:https://camel.apache.org/components/latest/dataformats[LZF Deflate Compression] +
+| link:https://camel.apache.org/components/latest/dataformats/lzf-dataformat.html[LZF Deflate Compression] +
 (camel-lzf-starter) | 2.17 | Compression and de-compress streams using LZF deflate algorithm.
 
-| link:https://camel.apache.org/components/latest/dataformats[MIME Multipart] +
+| link:https://camel.apache.org/components/latest/dataformats/mime-multipart-dataformat.html[MIME Multipart] +
 (camel-mail-starter) | 2.17 | Marshal Camel messages with attachments into MIME-Multipart messages and back.
 
-| link:https://camel.apache.org/components/latest/dataformats[PGP] +
+| link:https://camel.apache.org/components/latest/dataformats/pgp-dataformat.html[PGP] +
 (camel-crypto-starter) | 2.9 | Encrypt and decrypt messages using Java Cryptographic Extension (JCE) and PGP.
 
-| link:https://camel.apache.org/components/latest/dataformats[Protobuf] +
+| link:https://camel.apache.org/components/latest/dataformats/protobuf-dataformat.html[Protobuf] +
 (camel-protobuf-starter) | 2.2 | Serialize and deserialize Java objects using Google's Protocol buffers.
 
-| link:https://camel.apache.org/components/latest/dataformats[RSS] +
+| link:https://camel.apache.org/components/latest/dataformats/rss-dataformat.html[RSS] +
 (camel-rss-starter) | 2.1 | Transform from ROME SyndFeed Java Objects to XML and vice-versa.
 
-| link:https://camel.apache.org/components/latest/dataformats[SOAP] +
+| link:https://camel.apache.org/components/latest/dataformats/soapjaxb-dataformat.html[SOAP] +
 (camel-soap-starter) | 2.3 | Marshal Java objects to SOAP messages and back.
 
-| link:https://camel.apache.org/components/latest/dataformats[Syslog] +
+| link:https://camel.apache.org/components/latest/dataformats/syslog-dataformat.html[Syslog] +
 (camel-syslog-starter) | 2.6 | Marshall SyslogMessages to RFC3164 and RFC5424 messages and back.
 
-| link:https://camel.apache.org/components/latest/dataformats[Tar File] +
+| link:https://camel.apache.org/components/latest/dataformats/tarfile-dataformat.html[Tar File] +
 (camel-tarfile-starter) | 2.16 | Archive/extract files into/from tarballs.
 
-| link:https://camel.apache.org/components/latest/dataformats[Thrift] +
+| link:https://camel.apache.org/components/latest/dataformats/thrift-dataformat.html[Thrift] +
 (camel-thrift-starter) | 2.20 | Serialize and deserialize of messages using Apache Thrift binary dataformat.
 
-| link:https://camel.apache.org/components/latest/dataformats[TidyMarkup] +
+| link:https://camel.apache.org/components/latest/dataformats/tidyMarkup-dataformat.html[TidyMarkup] +
 (camel-tagsoup-starter) | 2.0 | Parse (potentially invalid) HTML into valid HTML or DOM.
 
-| link:https://camel.apache.org/components/latest/dataformats[uniVocity CSV] +
+| link:https://camel.apache.org/components/latest/dataformats/univocity-csv-dataformat.html[uniVocity CSV] +
 (camel-univocity-parsers-starter) | 2.15 | Marshal and unmarshal Java objects from and to CSV (Comma Separated Values) using univocity-parsers.
 
-| link:https://camel.apache.org/components/latest/dataformats[uniVocity Fixed Length] +
+| link:https://camel.apache.org/components/latest/dataformats/univocity-fixed-dataformat.html[uniVocity Fixed Length] +
 (camel-univocity-parsers-starter) | 2.15 | Marshal and unmarshal Java objects from and to fixed length records using univocity-parsers.
 
-| link:https://camel.apache.org/components/latest/dataformats[uniVocity TSV] +
+| link:https://camel.apache.org/components/latest/dataformats/univocity-tsv-dataformat.html[uniVocity TSV] +
 (camel-univocity-parsers-starter) | 2.15 | Marshal and unmarshal Java objects from and to TSV (Tab-Separated Values) records using univocity-parsers.
 
-| link:https://camel.apache.org/components/latest/dataformats[XML Security] +
+| link:https://camel.apache.org/components/latest/dataformats/secureXML-dataformat.html[XML Security] +
 (camel-xmlsecurity-starter) | 2.0 | Encrypt and decrypt XML payloads using Apache Santuario.
 
-| link:https://camel.apache.org/components/latest/dataformats[XStream] +
+| link:https://camel.apache.org/components/latest/dataformats/xstream-dataformat.html[XStream] +
 (camel-xstream-starter) | 1.3 | Marshal and unmarshal POJOs to/from XML.
 
-| link:https://camel.apache.org/components/latest/dataformats[YAML SnakeYAML] +
+| link:https://camel.apache.org/components/latest/dataformats/yaml-snakeyaml-dataformat.html[YAML SnakeYAML] +
 (camel-snakeyaml-starter) | 2.17 | Marshal and unmarshal Java objects to and from YAML.
 
-| link:https://camel.apache.org/components/latest/dataformats[Zip Deflate Compression] +
+| link:https://camel.apache.org/components/latest/dataformats/zipdeflater-dataformat.html[Zip Deflate Compression] +
 (camel-zip-deflater-starter) | 2.12 | Compress and decompress streams using java.util.zip.Deflater and java.util.zip.Inflater.
 
-| link:https://camel.apache.org/components/latest/dataformats[Zip File] +
+| link:https://camel.apache.org/components/latest/dataformats/zipfile-dataformat.html[Zip File] +
 (camel-zipfile-starter) | 2.11 | Compression and decompress streams using java.util.zip.ZipStream.
 |===
 // dataformats: END
@@ -1153,55 +1153,55 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 |===
 | Language | Since | Description
 
-| link:https://camel.apache.org/components/latest/languages[Bean method] +
+| link:https://camel.apache.org/components/latest/languages/bean-language.html[Bean method] +
 (camel-bean-starter) | 1.3 | To use a Java bean (aka method call) in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[Constant] +
+| link:https://camel.apache.org/components/latest/languages/constant-language.html[Constant] +
 (camel-base) | 1.5 | To use a constant value in Camel expressions or predicates. Important: this is a fixed constant value that is only set once during starting up the route, do not use this if you want dynamic values during routing.
 
-| link:https://camel.apache.org/components/latest/languages[ExchangeProperty] +
+| link:https://camel.apache.org/components/latest/languages/exchangeProperty-language.html[ExchangeProperty] +
 (camel-base) | 2.0 | To use a Camel Exchange property in expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[File] +
+| link:https://camel.apache.org/components/latest/languages/file-language.html[File] +
 (camel-base) | 1.1 | For expressions and predicates using the file/simple language.
 
-| link:https://camel.apache.org/components/latest/languages[Groovy] +
+| link:https://camel.apache.org/components/latest/languages/groovy-language.html[Groovy] +
 (camel-groovy-starter) | 1.3 | To use Groovy scripts in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[Header] +
+| link:https://camel.apache.org/components/latest/languages/header-language.html[Header] +
 (camel-base) | 1.5 | To use a Camel Message header in expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[HL7 Terser] +
+| link:https://camel.apache.org/components/latest/languages/hl7terser-language.html[HL7 Terser] +
 (camel-hl7-starter) | 2.11 | To use HL7 terser scripts in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[JsonPath] +
+| link:https://camel.apache.org/components/latest/languages/jsonpath-language.html[JsonPath] +
 (camel-jsonpath-starter) | 2.13 | To use JsonPath in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[MVEL] +
+| link:https://camel.apache.org/components/latest/languages/mvel-language.html[MVEL] +
 (camel-mvel-starter) | 2.0 | To use MVEL scripts in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[OGNL] +
+| link:https://camel.apache.org/components/latest/languages/ognl-language.html[OGNL] +
 (camel-ognl-starter) | 1.1 | To use OGNL scripts in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[Ref] +
+| link:https://camel.apache.org/components/latest/languages/ref-language.html[Ref] +
 (camel-base) | 2.8 | Reference to an existing Camel expression or predicate, which is looked up from the Camel registry.
 
-| link:https://camel.apache.org/components/latest/languages[Simple] +
+| link:https://camel.apache.org/components/latest/languages/simple-language.html[Simple] +
 (camel-base) | 1.1 | To use Camels built-in Simple language in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[SpEL] +
+| link:https://camel.apache.org/components/latest/languages/spel-language.html[SpEL] +
 (camel-spring-starter) | 2.7 | To use Spring Expression Language (SpEL) in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[Tokenize] +
+| link:https://camel.apache.org/components/latest/languages/tokenize-language.html[Tokenize] +
 (camel-base) | 2.0 | To use Camel message body or header with a tokenizer in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[XML Tokenize] +
+| link:https://camel.apache.org/components/latest/languages/xtokenize-language.html[XML Tokenize] +
 (camel-xml-jaxp-starter) | 2.14 | To use Camel message body or header with a XML tokenizer in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[XPath] +
+| link:https://camel.apache.org/components/latest/languages/xpath-language.html[XPath] +
 (camel-xpath-starter) | 1.1 | To use XPath (XML) in Camel expressions or predicates.
 
-| link:https://camel.apache.org/components/latest/languages[XQuery] +
+| link:https://camel.apache.org/components/latest/languages/xquery-language.html[XQuery] +
 (camel-saxon-starter) | 1.0 | To use XQuery (XML) in Camel expressions or predicates.
 |===
 // languages: END
@@ -1216,70 +1216,70 @@ Number of miscellaneous extensions: 22 in 22 JAR artifacts (0 deprecated)
 |===
 | Extension | Since | Description
 
-| link:https://camel.apache.org/components/latest/others[AWS XRay] +
+| link:https://camel.apache.org/components/latest/others/aws-xray.html[AWS XRay] +
 (camel-aws-xray-starter) | 2.21 | Distributed tracing using AWS XRay
 
-| link:https://camel.apache.org/components/latest/others[CXF Transport] +
+| link:https://camel.apache.org/components/latest/others/cxf-transport.html[CXF Transport] +
 (camel-cxf-transport-starter) | 2.8 | Camel Transport for Apache CXF
 
-| link:https://camel.apache.org/components/latest/others[Hystrix] +
+| link:https://camel.apache.org/components/latest/others/hystrix.html[Hystrix] +
 (camel-hystrix-starter) | 2.18 | Circuit Breaker EIP using Netflix Hystrix
 
-| link:https://camel.apache.org/components/latest/others[Jasypt] +
+| link:https://camel.apache.org/components/latest/others/jasypt.html[Jasypt] +
 (camel-jasypt-starter) | 2.5 | Security using Jasypt
 
-| link:https://camel.apache.org/components/latest/others[LevelDB] +
+| link:https://camel.apache.org/components/latest/others/leveldb.html[LevelDB] +
 (camel-leveldb-starter) | 2.10 | Using LevelDB as persistent EIP store
 
-| link:https://camel.apache.org/components/latest/others[LRA] +
+| link:https://camel.apache.org/components/latest/others/lra.html[LRA] +
 (camel-lra-starter) | 2.21 | Camel saga binding for Long-Running-Action framework
 
-| link:https://camel.apache.org/components/latest/others[Openapi Java] +
+| link:https://camel.apache.org/components/latest/others/openapi-java.html[Openapi Java] +
 (camel-openapi-java-starter) | 3.1 | Rest-dsl support for using openapi doc
 
-| link:https://camel.apache.org/components/latest/others[OpenTracing] +
+| link:https://camel.apache.org/components/latest/others/opentracing.html[OpenTracing] +
 (camel-opentracing-starter) | 2.19 | Distributed tracing using OpenTracing
 
-| link:https://camel.apache.org/components/latest/others[Reactive Executor Vert.x] +
+| link:https://camel.apache.org/components/latest/others/reactive-executor-vertx.html[Reactive Executor Vert.x] +
 (camel-reactive-executor-vertx-starter) | 3.0 | Reactive Executor for camel-core using Vert.x
 
-| link:https://camel.apache.org/components/latest/others[Reactor] +
+| link:https://camel.apache.org/components/latest/others/reactor.html[Reactor] +
 (camel-reactor-starter) | 2.20 | Reactor based back-end for Camel's reactive streams component
 
-| link:https://camel.apache.org/components/latest/others[Resilience4j] +
+| link:https://camel.apache.org/components/latest/others/resilience4j.html[Resilience4j] +
 (camel-resilience4j-starter) | 3.0 | Circuit Breaker EIP using Resilience4j
 
-| link:https://camel.apache.org/components/latest/others[Ribbon] +
+| link:https://camel.apache.org/components/latest/others/ribbon.html[Ribbon] +
 (camel-ribbon-starter) | 2.18 | Using Netflix Ribbon for client side load balancing
 
-| link:https://camel.apache.org/components/latest/others[RxJava] +
+| link:https://camel.apache.org/components/latest/others/rxjava.html[RxJava] +
 (camel-rxjava-starter) | 2.22 | RxJava based back-end for Camel's reactive streams component
 
-| link:https://camel.apache.org/components/latest/others[Shiro] +
+| link:https://camel.apache.org/components/latest/others/shiro.html[Shiro] +
 (camel-shiro-starter) | 2.5 | Security using Shiro
 
-| link:https://camel.apache.org/components/latest/others[Spring Cloud] +
+| link:https://camel.apache.org/components/latest/others/spring-cloud.html[Spring Cloud] +
 (camel-spring-cloud-starter) | 2.19 | Camel Cloud integration with Spring Cloud
 
-| link:https://camel.apache.org/components/latest/others[Spring Cloud Consul] +
+| link:https://camel.apache.org/components/latest/others/spring-cloud-consul.html[Spring Cloud Consul] +
 (camel-spring-cloud-consul-starter) | 2.19 | Camel Cloud integration with Spring Cloud Consul
 
-| link:https://camel.apache.org/components/latest/others[Spring Cloud Netflix] +
+| link:https://camel.apache.org/components/latest/others/spring-cloud-netflix.html[Spring Cloud Netflix] +
 (camel-spring-cloud-netflix-starter) | 2.19 | Camel Cloud integration with Spring Cloud Netflix
 
-| link:https://camel.apache.org/components/latest/others[Spring Cloud Zookeeper] +
+| link:https://camel.apache.org/components/latest/others/spring-cloud-zookeeper.html[Spring Cloud Zookeeper] +
 (camel-spring-cloud-zookeeper-starter) | 2.19 | Camel Cloud integration with Spring Cloud Zookeeper
 
-| link:https://camel.apache.org/components/latest/others[Spring Java Configuration] +
+| link:https://camel.apache.org/components/latest/others/spring-javaconfig.html[Spring Java Configuration] +
 (camel-spring-javaconfig-starter) | 2.0 | Using Camel with Spring Java Configuration
 
-| link:https://camel.apache.org/components/latest/others[Spring Security] +
+| link:https://camel.apache.org/components/latest/others/spring-security.html[Spring Security] +
 (camel-spring-security-starter) | 2.3 | Security using Spring Security
 
-| link:https://camel.apache.org/components/latest/others[Swagger Java] +
+| link:https://camel.apache.org/components/latest/others/swagger-java.html[Swagger Java] +
 (camel-swagger-java-starter) | 2.16 | Rest-dsl support for using swagger api-doc
 
-| link:https://camel.apache.org/components/latest/others[Zipkin] +
+| link:https://camel.apache.org/components/latest/others/zipkin.html[Zipkin] +
 (camel-zipkin-starter) | 2.18 | Distributed message tracing using Zipkin
 |===
 // others: END
