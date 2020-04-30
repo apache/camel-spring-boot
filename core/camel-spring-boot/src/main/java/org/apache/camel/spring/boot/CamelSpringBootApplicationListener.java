@@ -29,7 +29,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.camel.CamelContext;
 import org.apache.camel.StartupListener;
 import org.apache.camel.main.MainDurationEventNotifier;
-import org.apache.camel.main.MainLifecycleStrategy;
 import org.apache.camel.main.RoutesCollector;
 import org.apache.camel.main.RoutesConfigurer;
 import org.apache.camel.spi.CamelEvent;
@@ -89,7 +88,15 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                 && camelContext.getStatus().isStopped()) {
             LOG.debug("Post-processing CamelContext bean: {}", camelContext.getName());
 
+            // we can use the default routes configurer
             RoutesConfigurer configurer = new RoutesConfigurer(springBootRoutesCollector);
+            // if camel context is NOT from spring boot then its from camel-spring XML DSL
+            // and if so then it has its own special handling of collected rests
+            // that are added later as routes so turn this off
+            boolean addRestsToRoutes = camelContext instanceof SpringBootCamelContext;
+            if (!addRestsToRoutes) {
+                configurer.setAddRestsToRoutes(false);
+            }
             configurer.configureRoutes(camelContext, configurationProperties);
 
             for (CamelContextConfiguration camelContextConfiguration : camelContextConfigurations) {
