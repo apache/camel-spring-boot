@@ -323,7 +323,7 @@ Number of Camel components: 329 in 262 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/ehcache-component.html[Ehcache] (camel-ehcache-starter) +
 `ehcache:cacheName` | 2.18 | Perform caching operations using Ehcache.
 
-| link:https://camel.apache.org/components/latest/elasticsearch-rest-component.html[Elastichsearch Rest] (camel-elasticsearch-rest-starter) +
+| link:https://camel.apache.org/components/latest/elasticsearch-rest-component.html[Elasticsearch Rest] (camel-elasticsearch-rest-starter) +
 `elasticsearch-rest:clusterName` | 2.21 | Send requests to with an ElasticSearch via REST API.
 
 | link:https://camel.apache.org/components/latest/elsql-component.html[ElSQL] (camel-elsql-starter) +

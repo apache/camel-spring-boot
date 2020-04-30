@@ -21,6 +21,7 @@ import java.util.Set;
 import javax.annotation.Generated;
 import org.apache.camel.component.salesforce.AuthenticationType;
 import org.apache.camel.component.salesforce.NotFoundBehaviour;
+import org.apache.camel.component.salesforce.SalesforceComponent;
 import org.apache.camel.component.salesforce.api.dto.bulk.ContentType;
 import org.apache.camel.component.salesforce.internal.PayloadFormat;
 import org.apache.camel.component.salesforce.internal.dto.NotifyForFieldsEnum;
@@ -57,15 +58,14 @@ public class SalesforceComponentConfiguration
      */
     private String apexUrl;
     /**
-     * Salesforce API version, defaults to
-     * SalesforceEndpointConfig.DEFAULT_VERSION
+     * Salesforce API version.
      */
-    private String apiVersion;
+    private String apiVersion = "34.0";
     /**
      * Backoff interval increment for Streaming connection restart attempts for
      * failures beyond CometD auto-reconnect.
      */
-    private Long backoffIncrement;
+    private Long backoffIncrement = 1000L;
     /**
      * Bulk API Batch ID
      */
@@ -127,14 +127,14 @@ public class SalesforceComponentConfiguration
      * Maximum backoff interval for Streaming connection restart attempts for
      * failures beyond CometD auto-reconnect.
      */
-    private Long maxBackoff;
+    private Long maxBackoff = 30000L;
     /**
      * Sets the behaviour of 404 not found status received from Salesforce API.
      * Should the body be set to NULL NotFoundBehaviour#NULL or should a
      * exception be signaled on the exchange NotFoundBehaviour#EXCEPTION - the
      * default.
      */
-    private NotFoundBehaviour notFoundBehaviour;
+    private NotFoundBehaviour notFoundBehaviour = NotFoundBehaviour.EXCEPTION;
     /**
      * Notify for fields, options are ALL, REFERENCED, SELECT, WHERE
      */

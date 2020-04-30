@@ -72,7 +72,7 @@ public class Sqs2ComponentConfiguration
      */
     private String queueOwnerAWSAccountId;
     /**
-     * The region in which ECS client needs to work. When using this parameter,
+     * The region in which SQS client needs to work. When using this parameter,
      * the configuration will expect the lowercase name of the region (for
      * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
