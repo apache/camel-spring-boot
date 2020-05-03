@@ -8,7 +8,7 @@
     "firstVersion": "3.3.0",
     "label": "cloud,file",
     "javaType": "org.apache.camel.component.azure.storage.blob.BlobComponent",
-    "supportLevel": "Stable",
+    "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-azure-storage-blob-starter",
     "version": "3.3.0-SNAPSHOT",
