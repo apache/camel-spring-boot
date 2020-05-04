@@ -17,14 +17,10 @@
 package org.apache.camel.example.undertow.spring.boot;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.spring.security.SpringSecurityConfiguration;
 import org.apache.camel.component.spring.security.SpringSecurityProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.DelegatingFilterProxyRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 //CHECKSTYLE:OFF
 @SpringBootApplication
@@ -34,27 +30,17 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Autowired
-    private DelegatingFilterProxyRegistrationBean filterProxyRegistrationBean;
+    @Bean
+    public RouteBuilder route() {
+        return new RouteBuilder() {
+            public void configure()  {
 
-    @Component
-    public class Routes extends RouteBuilder {
-        @Override
-        public void configure() {
+                from("undertow:http://localhost:8082/hi?allowedRoles=role02")
+                        .transform(simple("Hello ${in.header." + SpringSecurityProvider.PRINCIPAL_NAME_HEADER + "}!"))
+                        .log("content: ${body}");
 
-                from("undertow:http://localhost:8082/hi?securityConfiguration=#springSecurityConfiguration&allowedRoles=role02")
-                        .transform(simple("Hello ${in.header."
-                                + SpringSecurityProvider.PRINCIPAL_NAME_HEADER
-                                + "}!"))
-                        .log("${body}");
-
-        }
+            }
+        };
     }
-
-    @Bean(name = "springSecurityConfiguration")
-    public SpringSecurityConfiguration securityConfiguration() {
-        return () -> filterProxyRegistrationBean.getFilter();
-    }
-
 }
 //CHECKSTYLE:ON
