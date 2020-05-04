@@ -17,7 +17,7 @@ When using activemq with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 101 options, which are listed below.
+The component supports 100 options, which are listed below.
 
 
 
@@ -39,7 +39,6 @@ The component supports 101 options, which are listed below.
 | *camel.component.activemq.async-stop-listener* | Whether to stop the JmsConsumer message listener asynchronously, when stopping a route. | false | Boolean
 | *camel.component.activemq.auto-startup* | Specifies whether the consumer container should auto-startup. | true | Boolean
 | *camel.component.activemq.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
-| *camel.component.activemq.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.activemq.broker-url* | Sets the broker URL to use to connect to ActiveMQ |  | String
 | *camel.component.activemq.cache-level* | Sets the cache level by ID for the underlying JMS resources. See cacheLevelName option for more details. |  | Integer
 | *camel.component.activemq.cache-level-name* | Sets the cache level by name for the underlying JMS resources. Possible values are: CACHE_AUTO, CACHE_CONNECTION, CACHE_CONSUMER, CACHE_NONE, and CACHE_SESSION. The default setting is CACHE_AUTO. See the Spring documentation and Transactions Cache Levels for more information. | CACHE_AUTO | String

@@ -17,7 +17,7 @@ When using amqp with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 98 options, which are listed below.
+The component supports 97 options, which are listed below.
 
 
 
@@ -39,7 +39,6 @@ The component supports 98 options, which are listed below.
 | *camel.component.amqp.async-stop-listener* | Whether to stop the JmsConsumer message listener asynchronously, when stopping a route. | false | Boolean
 | *camel.component.amqp.auto-startup* | Specifies whether the consumer container should auto-startup. | true | Boolean
 | *camel.component.amqp.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
-| *camel.component.amqp.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.amqp.cache-level* | Sets the cache level by ID for the underlying JMS resources. See cacheLevelName option for more details. |  | Integer
 | *camel.component.amqp.cache-level-name* | Sets the cache level by name for the underlying JMS resources. Possible values are: CACHE_AUTO, CACHE_CONNECTION, CACHE_CONSUMER, CACHE_NONE, and CACHE_SESSION. The default setting is CACHE_AUTO. See the Spring documentation and Transactions Cache Levels for more information. | CACHE_AUTO | String
 | *camel.component.amqp.client-id* | Sets the JMS client ID to use. Note that this value, if specified, must be unique and can only be used by a single JMS connection instance. It is typically only required for durable topic subscriptions. If using Apache ActiveMQ you may prefer to use Virtual Topics instead. |  | String

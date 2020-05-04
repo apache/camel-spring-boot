@@ -109,15 +109,6 @@ public class JmsComponentConfiguration
      */
     private Boolean autoStartup = true;
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler,
-     * which mean any exceptions occurred while the consumer is trying to pickup
-     * incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler. By default the consumer will use
-     * the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that
-     * will be logged at WARN or ERROR level and ignored.
-     */
-    private Boolean bridgeErrorHandler = false;
-    /**
      * Sets the cache level by ID for the underlying JMS resources. See
      * cacheLevelName option for more details.
      */
@@ -808,14 +799,6 @@ public class JmsComponentConfiguration
 
     public void setAutoStartup(Boolean autoStartup) {
         this.autoStartup = autoStartup;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Integer getCacheLevel() {
