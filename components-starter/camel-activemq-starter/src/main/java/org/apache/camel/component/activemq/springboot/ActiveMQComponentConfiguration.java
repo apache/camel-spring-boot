@@ -45,7 +45,9 @@ public class ActiveMQComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Sets the broker URL to use to connect to ActiveMQ
+     * Sets the broker URL to use to connect to ActiveMQ. If none configured
+     * then localhost:61616 is used by default (however can be overridden by
+     * configuration from environment variables)
      */
     private String brokerUrl;
     /**
@@ -55,11 +57,6 @@ public class ActiveMQComponentConfiguration
      * ActiveMQ you may prefer to use Virtual Topics instead.
      */
     private String clientId;
-    /**
-     * Configuration of ActiveMQ. The option is a
-     * org.apache.camel.component.jms.JmsConfiguration type.
-     */
-    private String configuration;
     /**
      * The connection factory to be use. A connection factory must be configured
      * either on the component or endpoint. The option is a
@@ -98,13 +95,6 @@ public class ActiveMQComponentConfiguration
      */
     private Boolean testConnectionOnStartup = false;
     /**
-     * Define if all Java packages are trusted or not (for Java object JMS
-     * message types). Notice its not recommended practice to send Java
-     * serialized objects over network. Setting this to true can expose security
-     * risks, so use this with care.
-     */
-    private Boolean trustAllPackages = false;
-    /**
      * Enables or disables whether a PooledConnectionFactory will be used so
      * that when messages are sent to ActiveMQ from outside of a message
      * consuming thread, pooling will be used rather than the default with the
@@ -112,7 +102,7 @@ public class ActiveMQComponentConfiguration
      * for each message then close them all down again. The default value is
      * true.
      */
-    private Boolean usePooledConnection = false;
+    private Boolean usePooledConnection = true;
     /**
      * Enables or disables whether a Spring SingleConnectionFactory will be used
      * so that when messages are sent to ActiveMQ from outside of a message
@@ -531,6 +521,11 @@ public class ActiveMQComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * To use a shared JMS configuration. The option is a
+     * org.apache.camel.component.jms.JmsConfiguration type.
+     */
+    private String configuration;
+    /**
      * A pluggable
      * org.springframework.jms.support.destination.DestinationResolver that
      * allows you to use your own resolver (for example, to lookup the real
@@ -694,6 +689,13 @@ public class ActiveMQComponentConfiguration
      */
     private Boolean transferExchange = false;
     /**
+     * Define if all Java packages are trusted or not (for Java object JMS
+     * message types). Notice its not recommended practice to send Java
+     * serialized objects over network. Setting this to true can expose security
+     * risks, so use this with care.
+     */
+    private Boolean trustAllPackages = false;
+    /**
      * Specifies whether JMSMessageID should always be used as JMSCorrelationID
      * for InOut messages.
      */
@@ -775,14 +777,6 @@ public class ActiveMQComponentConfiguration
         this.clientId = clientId;
     }
 
-    public String getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(String configuration) {
-        this.configuration = configuration;
-    }
-
     public String getConnectionFactory() {
         return connectionFactory;
     }
@@ -821,14 +815,6 @@ public class ActiveMQComponentConfiguration
 
     public void setTestConnectionOnStartup(Boolean testConnectionOnStartup) {
         this.testConnectionOnStartup = testConnectionOnStartup;
-    }
-
-    public Boolean getTrustAllPackages() {
-        return trustAllPackages;
-    }
-
-    public void setTrustAllPackages(Boolean trustAllPackages) {
-        this.trustAllPackages = trustAllPackages;
     }
 
     public Boolean getUsePooledConnection() {
@@ -1287,6 +1273,14 @@ public class ActiveMQComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
+    }
+
     public String getDestinationResolver() {
         return destinationResolver;
     }
@@ -1456,6 +1450,14 @@ public class ActiveMQComponentConfiguration
 
     public void setTransferExchange(Boolean transferExchange) {
         this.transferExchange = transferExchange;
+    }
+
+    public Boolean getTrustAllPackages() {
+        return trustAllPackages;
+    }
+
+    public void setTrustAllPackages(Boolean trustAllPackages) {
+        this.trustAllPackages = trustAllPackages;
     }
 
     public Boolean getUseMessageIdAsCorrelationId() {
