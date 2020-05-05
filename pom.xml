@@ -119,6 +119,7 @@
         <arquillian-container-se-managed-version>1.0.2.Final</arquillian-container-se-managed-version>
         <arquillian-version>1.6.0.Final</arquillian-version>
         <asciidoctorj-version>2.1.0</asciidoctorj-version>
+        <avro-version>1.8.1</avro-version>
         <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
         <groovy-version>3.0.3</groovy-version>
         <hadoop2-version>2.7.4</hadoop2-version>
@@ -131,6 +132,7 @@
         <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
         <mycila-license-version>3.0</mycila-license-version>
         <reactor-version>3.2.15.RELEASE</reactor-version>
+        <roaster-version>2.20.1.Final</roaster-version>
         <spring-cloud-commons-version>2.2.2.RELEASE</spring-cloud-commons-version>
         <spring-cloud-consul-version>2.2.2.RELEASE</spring-cloud-consul-version>
         <spring-cloud-netflix-version>2.2.2.RELEASE</spring-cloud-netflix-version>
