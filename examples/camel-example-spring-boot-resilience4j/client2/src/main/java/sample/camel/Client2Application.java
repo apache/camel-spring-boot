@@ -28,7 +28,7 @@ public final class Client2Application {
 
     public static void main(String[] args) throws Exception {
         Main main = new Main();
-        main.addRoutesBuilder(new Client2Route());
+        main.configure().addRoutesBuilder(new Client2Route());
         main.bind("counterBean", new CounterBean());
         main.run();
     }

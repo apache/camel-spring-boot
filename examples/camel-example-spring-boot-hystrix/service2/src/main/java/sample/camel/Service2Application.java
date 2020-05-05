@@ -26,7 +26,7 @@ public class Service2Application {
 
     public static void main(String[] args) throws Exception {
         Main main = new Main();
-        main.addRouteBuilder(new Service2Route());
+        main.configure().addRoutesBuilder(new Service2Route());
         main.run();
     }
 
