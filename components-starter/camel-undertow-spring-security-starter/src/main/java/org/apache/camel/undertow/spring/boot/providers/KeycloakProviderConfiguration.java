@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.undertow.spring.boot.providers;
+package org.apache.camel.undertow.spring.boot.providers;
 
 import org.apache.camel.component.spring.security.keycloak.KeycloakJwtAuthenticationConverter;
 import org.springframework.core.convert.converter.Converter;
@@ -99,6 +99,7 @@ public class KeycloakProviderConfiguration extends AbstractProviderConfiguration
         this.realmId = realmId;
     }
 
+    @Override
     public String getUserNameAttribute() {
         return userNameAttribute;
     }

@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.undertow.spring.boot;
+package org.apache.camel.undertow.spring.boot;
 
 import org.apache.camel.component.spring.security.SpringSecurityConfiguration;
 import org.apache.camel.component.spring.security.keycloak.KeycloakUsernameSubClaimAdapter;
 import org.apache.camel.component.undertow.UndertowComponent;
-import org.apache.camel.example.undertow.spring.boot.providers.AbstractProviderConfiguration;
+import org.apache.camel.undertow.spring.boot.providers.AbstractProviderConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -88,8 +88,7 @@ public class UndertowSpringSecurityAutoConfiguration {
     public JwtDecoder jwtDecoderByIssuerUri() {
         final String jwkSetUri = getClientRegistration().getProviderDetails().getJwkSetUri();
         final NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
-        // Use preferred_username from claims as authentication name, instead of UUID subject
-        jwtDecoder.setClaimSetConverter(new KeycloakUsernameSubClaimAdapter("preferred_username"));
+        jwtDecoder.setClaimSetConverter(new KeycloakUsernameSubClaimAdapter(getProvider().getUserNameAttribute()));;
         return jwtDecoder;
     }
 

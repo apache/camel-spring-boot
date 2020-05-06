@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.undertow.spring.boot;
+package org.apache.camel.undertow.spring.boot;
 
 import org.apache.camel.component.undertow.UndertowComponent;
-import org.apache.camel.example.undertow.spring.boot.providers.KeycloakProviderConfiguration;
+import org.apache.camel.undertow.spring.boot.providers.KeycloakProviderConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

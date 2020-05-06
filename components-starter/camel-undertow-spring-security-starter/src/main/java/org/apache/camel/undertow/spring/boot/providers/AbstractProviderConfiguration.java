@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.undertow.spring.boot.providers;
+package org.apache.camel.undertow.spring.boot.providers;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -35,6 +35,8 @@ public abstract class AbstractProviderConfiguration {
     abstract TYPE getType();
 
     public abstract ClientRegistration getClientRegistration() throws URISyntaxException;
+
+    public abstract String getUserNameAttribute();
 
     public Converter<Jwt, ? extends AbstractAuthenticationToken> getJwtAuthenticationConverter() {
         throw new IllegalArgumentException("Not implemented");
