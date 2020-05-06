@@ -1213,7 +1213,7 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 22 in 22 JAR artifacts (0 deprecated)
+Number of miscellaneous extensions: 23 in 23 JAR artifacts (0 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -1281,6 +1281,9 @@ Number of miscellaneous extensions: 22 in 22 JAR artifacts (0 deprecated)
 
 | link:https://camel.apache.org/components/latest/others/swagger-java.html[Swagger Java] +
 (camel-swagger-java-starter) | 2.16 | Rest-dsl support for using swagger api-doc
+
+| link:https://camel.apache.org/components/latest/others/undertow-spring-security.html[Undertow Spring Security] +
+(camel-undertow-spring-security-starter) | 3.3 | Spring Security Provider for camel-undertow
 
 | link:https://camel.apache.org/components/latest/others/zipkin.html[Zipkin] +
 (camel-zipkin-starter) | 2.18 | Distributed message tracing using Zipkin

@@ -38,6 +38,13 @@ public class RobotFrameworkComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Whether to allow to use resource template from header or not (default
+     * false). Enabling this allows to specify dynamic templates via message
+     * header. However this can be seen as a potential security vulnerability if
+     * the header is coming from a malicious user, so use this with care.
+     */
+    private Boolean allowTemplateFromHeader = false;
+    /**
      * A text file to read more arguments from.
      */
     private File argumentFile;
@@ -267,6 +274,14 @@ public class RobotFrameworkComponentConfiguration
      * org.apache.camel.component.robotframework.RobotFrameworkCamelConfiguration type.
      */
     private String configuration;
+
+    public Boolean getAllowTemplateFromHeader() {
+        return allowTemplateFromHeader;
+    }
+
+    public void setAllowTemplateFromHeader(Boolean allowTemplateFromHeader) {
+        this.allowTemplateFromHeader = allowTemplateFromHeader;
+    }
 
     public File getArgumentFile() {
         return argumentFile;
