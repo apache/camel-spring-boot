@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.example.undertow.spring.boot;
+package org.apache.camel.undertow.spring.boot;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.spring.security.SpringSecurityProvider;
