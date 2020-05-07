@@ -39,7 +39,11 @@ public class CamelSpringBootApplicationController {
     public CamelSpringBootApplicationController(final ApplicationContext applicationContext, final CamelContext context) {
         this.main = new Main() {
 
-            { this.camelContext = context; }
+            {
+                this.camelContext = context;
+                // disable shutdown hook as spring-boot has its own hook we use
+                this.disableHangupSupport();
+            }
 
             @Override
             protected ProducerTemplate findOrCreateCamelTemplate() {
