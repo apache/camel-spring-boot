@@ -78,6 +78,11 @@ public class KafkaComponentConfiguration
      */
     private Integer reconnectBackoffMaxMs = 1000;
     /**
+     * Timeout in milli seconds to wait gracefully for the consumer or producer
+     * to shutdown and terminate its worker threads.
+     */
+    private Integer shutdownTimeout = 30000;
+    /**
      * Whether to allow doing manual commits via KafkaManualCommit. If this
      * option is enabled then an instance of KafkaManualCommit is stored on the
      * Exchange message header, which allows end users to access this API and
@@ -719,6 +724,14 @@ public class KafkaComponentConfiguration
 
     public void setReconnectBackoffMaxMs(Integer reconnectBackoffMaxMs) {
         this.reconnectBackoffMaxMs = reconnectBackoffMaxMs;
+    }
+
+    public Integer getShutdownTimeout() {
+        return shutdownTimeout;
+    }
+
+    public void setShutdownTimeout(Integer shutdownTimeout) {
+        this.shutdownTimeout = shutdownTimeout;
     }
 
     public Boolean getAllowManualCommit() {
