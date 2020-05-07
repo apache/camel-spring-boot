@@ -415,13 +415,6 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private String jmxManagementNamePattern = "#name#";
 
     /**
-     * Whether JMX connector is created, allowing clients to connect remotely
-     *
-     * The default value is false.
-     */
-    private boolean jmxCreateConnector;
-
-    /**
      * To turn on MDC logging
      */
     private boolean useMdcLogging;
