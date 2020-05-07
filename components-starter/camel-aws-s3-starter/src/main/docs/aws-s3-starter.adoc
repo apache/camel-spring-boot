@@ -53,7 +53,7 @@ The component supports 39 options, which are listed below.
 | *camel.component.aws-s3.payload-signing-enabled* | Define if Payload Signing enabled is true or false | false | Boolean
 | *camel.component.aws-s3.policy* | The policy for this queue to set in the com.amazonaws.services.s3.AmazonS3#setBucketPolicy() method. |  | String
 | *camel.component.aws-s3.prefix* | The prefix which is used in the com.amazonaws.services.s3.model.ListObjectsRequest to only consume objects we are interested in. |  | String
-| *camel.component.aws-s3.proxy-host* | To define a proxy host when instantiating the SQS client |  | String
+| *camel.component.aws-s3.proxy-host* | To define a proxy host when instantiating the S3 client |  | String
 | *camel.component.aws-s3.proxy-port* | Specify a proxy port to be used inside the client definition. |  | Integer
 | *camel.component.aws-s3.proxy-protocol* | To define a proxy protocol when instantiating the S3 client |  | Protocol
 | *camel.component.aws-s3.region* | The region in which S3 client needs to work. When using this parameter, the configuration will expect the capitalized name of the region (for example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name() |  | String

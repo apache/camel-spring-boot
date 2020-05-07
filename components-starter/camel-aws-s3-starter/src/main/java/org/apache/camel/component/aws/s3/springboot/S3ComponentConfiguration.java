@@ -68,7 +68,7 @@ public class S3ComponentConfiguration
      */
     private String policy;
     /**
-     * To define a proxy host when instantiating the SQS client
+     * To define a proxy host when instantiating the S3 client
      */
     private String proxyHost;
     /**
