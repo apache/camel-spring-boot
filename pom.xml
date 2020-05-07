@@ -279,6 +279,8 @@
                         <excludeSubProjects>false</excludeSubProjects>
                         <excludes>
                             <exclude>**/*.mvel</exclude>
+                            <exclude>**/*.yml</exclude>
+                            <exclude>**/*.yaml</exclude>
                             <exclude>**/catalog/*.properties</exclude>
                             <exclude>**/*.json</exclude>
                             <exclude>**/README</exclude>
