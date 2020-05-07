@@ -35,6 +35,8 @@ public class CamelMongodbGridfsTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelMongodbGridfsTest.class))
+                .dependency("org.mongodb:mongodb-driver-sync:4.0.1")
+                .dependency("org.mongodb:mongodb-driver-core:4.0.1")
                 .includeTestDependencies(false)
                 .unitTestsEnabled(false)
                 .build();
