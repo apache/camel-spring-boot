@@ -17,7 +17,7 @@ When using kafka with Spring Boot make sure to use the following Maven dependenc
 ----
 
 
-The component supports 97 options, which are listed below.
+The component supports 98 options, which are listed below.
 
 
 
@@ -99,6 +99,7 @@ The component supports 97 options, which are listed below.
 | *camel.component.kafka.send-buffer-bytes* | Socket write buffer size | 131072 | Integer
 | *camel.component.kafka.serializer-class* | The serializer class for messages. | org.apache.kafka.common.serialization.StringSerializer | String
 | *camel.component.kafka.session-timeout-ms* | The timeout used to detect failures when using Kafka's group management facilities. | 10000 | Integer
+| *camel.component.kafka.shutdown-timeout* | Timeout in milli seconds to wait gracefully for the consumer or producer to shutdown and terminate its worker threads. | 30000 | Integer
 | *camel.component.kafka.specific-avro-reader* | This enables the use of a specific Avro reader for use with the Confluent Platform schema registry and the io.confluent.kafka.serializers.KafkaAvroDeserializer. This option is only available in the Confluent Platform (not standard Apache Kafka) | false | Boolean
 | *camel.component.kafka.ssl-cipher-suites* | A list of cipher suites. This is a named combination of authentication, encryption, MAC and key exchange algorithm used to negotiate the security settings for a network connection using TLS or SSL network protocol.By default all the available cipher suites are supported. |  | String
 | *camel.component.kafka.ssl-context-parameters* | SSL configuration using a Camel SSLContextParameters object. If configured it's applied before the other SSL endpoint parameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
