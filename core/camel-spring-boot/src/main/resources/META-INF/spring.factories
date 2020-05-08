@@ -33,7 +33,6 @@
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.spring.boot.CamelAutoConfiguration,\
-org.apache.camel.spring.boot.SupervisingRouteControllerAutoConfiguration,\
 org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpointAutoConfiguration,\
 org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpointAutoConfiguration,\
 org.apache.camel.spring.boot.actuate.health.CamelHealthAutoConfiguration,\

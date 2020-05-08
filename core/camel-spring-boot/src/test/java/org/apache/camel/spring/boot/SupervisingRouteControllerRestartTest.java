@@ -21,9 +21,8 @@ import java.util.concurrent.TimeUnit;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ServiceStatus;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.impl.engine.SupervisingRouteController;
+import org.apache.camel.spi.SupervisingRouteController;
 import org.apache.camel.spring.boot.dummy.DummyComponent;
-import org.apache.camel.util.backoff.BackOffTimer;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,19 +40,15 @@ import static org.awaitility.Awaitility.await;
 @SpringBootTest(
     classes = {
         CamelAutoConfiguration.class,
-        SupervisingRouteControllerAutoConfiguration.class,
         SupervisingRouteControllerRestartTest.TestConfiguration.class
     },
     properties = {
         "camel.springboot.xml-routes = false",
         "camel.springboot.main-run-controller = true",
-        "camel.supervising.controller.enabled = true",
-        "camel.supervising.controller.initial-delay = 2s",
-        "camel.supervising.controller.default-back-off.delay = 1s",
-        "camel.supervising.controller.default-back-off.max-attempts = 10",
-        "camel.supervising.controller.routes.bar.back-off.delay = 10s",
-        "camel.supervising.controller.routes.bar.back-off.max-attempts = 3",
-        "camel.supervising.controller.routes.scheduler-unmanaged.supervise = false"
+        "camel.springboot.routeControllerEnabled = true",
+        "camel.springboot.routeControllerInitialDelay = 500",
+        "camel.springboot.routeControllerBackoffDelay = 1000",
+        "camel.springboot.routeControllerBackoffMaxAttempts = 5",
     }
 )
 public class SupervisingRouteControllerRestartTest {
@@ -70,13 +65,10 @@ public class SupervisingRouteControllerRestartTest {
 
         // Wait for the controller to start the routes
         await().atMost(3, TimeUnit.SECONDS).untilAsserted(() -> {
-            // now its suspended by the policy
             Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("foo"));
             Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("bar"));
             Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("dummy"));
         });
-
-        Assert.assertEquals(ServiceStatus.Stopped, context.getRouteController().getRouteStatus("scheduler-unmanaged"));
 
         // restart the dummy route which should fail on first attempt
         controller.stopRoute("dummy");
@@ -89,19 +81,12 @@ public class SupervisingRouteControllerRestartTest {
             Assert.assertEquals("Forced error on restart", e.getCause().getMessage());
         }
 
-        Assert.assertTrue(controller.getBackOffContext("dummy").isPresent());
-        Assert.assertEquals(BackOffTimer.Task.Status.Active, controller.getBackOffContext("dummy").get().getStatus());
-        Assert.assertTrue(controller.getBackOffContext("dummy").get().getCurrentAttempts() > 0);
-
         // Wait for wile to give time to the controller to start the route
         await().atMost(2, TimeUnit.SECONDS).untilAsserted(() -> {
             // now its suspended by the policy
             Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("dummy"));
             Assert.assertNotNull(context.getRoute("dummy").getRouteController());
-            Assert.assertFalse(controller.getBackOffContext("dummy").isPresent());
         });
-
-        Assert.assertEquals(ServiceStatus.Stopped, context.getRouteController().getRouteStatus("scheduler-unmanaged"));
     }
 
     // *************************************
@@ -126,14 +111,6 @@ public class SupervisingRouteControllerRestartTest {
                         .id("bar")
                         .startupOrder(1)
                         .to("mock:bar");
-                    from("scheduler:unmanaged?initialDelay=5000")
-                        .id("scheduler-unmanaged")
-                        .to("mock:scheduler-unmanaged");
-                    from("timer:no-autostartup?period=5000")
-                        .id("timer-no-autostartup")
-                        .autoStartup(false)
-                        .to("mock:timer-no-autostartup");
-
                     from("dummy:foo?failOnRestart=true")
                         .id("dummy")
                         .to("mock:dummy");

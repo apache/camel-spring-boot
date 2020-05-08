@@ -21,9 +21,8 @@ import java.util.concurrent.TimeUnit;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ServiceStatus;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.impl.engine.SupervisingRouteController;
+import org.apache.camel.spi.SupervisingRouteController;
 import org.apache.camel.test.AvailablePortFinder;
-import org.apache.camel.util.backoff.BackOff;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,20 +40,16 @@ import static org.awaitility.Awaitility.await;
 @SpringBootTest(
     classes = {
         CamelAutoConfiguration.class,
-        SupervisingRouteControllerAutoConfiguration.class,
         SupervisingRouteControllerTest.TestConfiguration.class
     },
     properties = {
         "camel.springboot.xml-routes = false",
         "camel.springboot.xml-rests = false",
         "camel.springboot.main-run-controller = true",
-        "camel.supervising.controller.enabled = true",
-        "camel.supervising.controller.initial-delay = 2s",
-        "camel.supervising.controller.default-back-off.delay = 1s",
-        "camel.supervising.controller.default-back-off.max-attempts = 10",
-        "camel.supervising.controller.routes.bar.back-off.delay = 10s",
-        "camel.supervising.controller.routes.bar.back-off.max-attempts = 3",
-        "camel.supervising.controller.routes.scheduler-unmanaged.supervise = false"
+        "camel.springboot.routeControllerEnabled = true",
+        "camel.springboot.routeControllerInitialDelay = 500",
+        "camel.springboot.routeControllerBackoffDelay = 1000",
+        "camel.springboot.routeControllerBackoffMaxAttempts = 5",
     }
 )
 public class SupervisingRouteControllerTest {
@@ -69,36 +64,14 @@ public class SupervisingRouteControllerTest {
         SupervisingRouteController controller = context.getRouteController().unwrap(SupervisingRouteController.class);
 
         // Wait for the controller to start the routes
-        await().atMost(3, TimeUnit.SECONDS).untilAsserted(() -> {
+        await().atMost(5, TimeUnit.SECONDS).untilAsserted(() -> {
             Assert.assertEquals(3, controller.getControlledRoutes().size());
-            Assert.assertEquals(2, controller.getInitialDelay().getSeconds());
-        });
+            Assert.assertEquals(500, controller.getInitialDelay());
 
-        // Route foo
-        BackOff foo = controller.getBackOff("foo");
-        Assert.assertEquals(1, foo.getDelay().getSeconds());
-        Assert.assertEquals(Long.MAX_VALUE, foo.getMaxDelay().toMillis());
-        Assert.assertEquals(10L, foo.getMaxAttempts().longValue());
-
-        // Route bar
-        BackOff bar = controller.getBackOff("bar");
-        Assert.assertEquals(10, bar.getDelay().getSeconds());
-        Assert.assertEquals(Long.MAX_VALUE, bar.getMaxDelay().toMillis());
-        Assert.assertEquals(3L, bar.getMaxAttempts().longValue());
-
-        Assert.assertEquals(ServiceStatus.Stopped, context.getRouteController().getRouteStatus("foo"));
-        Assert.assertEquals(ServiceStatus.Stopped, context.getRouteController().getRouteStatus("bar"));
-        Assert.assertEquals(ServiceStatus.Stopped, context.getRouteController().getRouteStatus("timer-no-autostartup"));
-        Assert.assertEquals(ServiceStatus.Stopped, context.getRouteController().getRouteStatus("jetty"));
-
-        // Wait for the controller to start the routes
-        await().atMost(10, TimeUnit.SECONDS).untilAsserted(() -> {
+            Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("foo"));
+            Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("bar"));
             Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("jetty"));
         });
-        Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("jetty"));
-
-        // this one is never started as it was not managed (then its not started)
-        Assert.assertEquals(ServiceStatus.Stopped, context.getRouteController().getRouteStatus("scheduler-unmanaged"));
     }
 
     // *************************************
@@ -122,14 +95,6 @@ public class SupervisingRouteControllerTest {
                         .id("bar")
                         .startupOrder(1)
                         .to("mock:bar");
-                    from("scheduler:unmanaged?initialDelay=5000")
-                        .id("scheduler-unmanaged")
-                        .to("mock:scheduler-unmanaged");
-                    from("timer:no-autostartup?period=5000")
-                        .id("timer-no-autostartup")
-                        .autoStartup(false)
-                        .to("mock:timer-no-autostartup");
-
                     fromF("jetty:http://localhost:%d", PORT)
                         .id("jetty")
                         .to("mock:jetty");
