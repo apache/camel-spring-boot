@@ -611,7 +611,7 @@ public class KafkaComponentConfiguration
      * The list of protocols enabled for SSL connections. TLSv1.2, TLSv1.1 and
      * TLSv1 are enabled by default.
      */
-    private String sslEnabledProtocols = "TLSv1.2,TLSv1.1,TLSv1";
+    private String sslEnabledProtocols = "TLSv1.2";
     /**
      * The endpoint identification algorithm to validate server hostname using
      * server certificate.
@@ -649,7 +649,7 @@ public class KafkaComponentConfiguration
      * TLSv1.1 and TLSv1.2. SSL, SSLv2 and SSLv3 may be supported in older JVMs,
      * but their usage is discouraged due to known security vulnerabilities.
      */
-    private String sslProtocol = "TLS";
+    private String sslProtocol = "TLSv1.2";
     /**
      * The name of the security provider used for SSL connections. Default value
      * is the default security provider of the JVM.
