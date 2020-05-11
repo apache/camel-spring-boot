@@ -42,7 +42,6 @@
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-undertow-starter</artifactId>
-      <version>${camel-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
