@@ -19,7 +19,6 @@ package org.apache.camel.spring.boot;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.ServiceStatus;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spi.SupervisingRouteController;
@@ -62,7 +61,7 @@ public class SupervisingRouteControllerTest {
         Assert.assertNotNull(context.getRouteController());
         Assert.assertTrue(context.getRouteController() instanceof SupervisingRouteController);
 
-        SupervisingRouteController controller = context.adapt(ExtendedCamelContext.class).getSupervisingRouteController();
+        SupervisingRouteController controller = context.getRouteController().adapt(SupervisingRouteController.class);
 
         // Wait for the controller to start the routes
         await().atMost(5, TimeUnit.SECONDS).untilAsserted(() -> {

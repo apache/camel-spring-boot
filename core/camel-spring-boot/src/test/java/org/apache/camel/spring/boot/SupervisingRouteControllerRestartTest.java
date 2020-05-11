@@ -19,7 +19,6 @@ package org.apache.camel.spring.boot;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.ServiceStatus;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spi.SupervisingRouteController;
@@ -62,10 +61,10 @@ public class SupervisingRouteControllerRestartTest {
         Assert.assertNotNull(context.getRouteController());
         Assert.assertTrue(context.getRouteController() instanceof SupervisingRouteController);
 
-        SupervisingRouteController controller = context.adapt(ExtendedCamelContext.class).getSupervisingRouteController();
+        SupervisingRouteController controller = context.getRouteController().adapt(SupervisingRouteController.class);
 
         // Wait for the controller to start the routes
-        await().atMost(3, TimeUnit.SECONDS).untilAsserted(() -> {
+        await().atMost(5, TimeUnit.SECONDS).untilAsserted(() -> {
             Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("foo"));
             Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("bar"));
             Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("dummy"));
@@ -83,7 +82,7 @@ public class SupervisingRouteControllerRestartTest {
         }
 
         // Wait for wile to give time to the controller to start the route
-        await().atMost(2, TimeUnit.SECONDS).untilAsserted(() -> {
+        await().atMost(5, TimeUnit.SECONDS).untilAsserted(() -> {
             // now its suspended by the policy
             Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("dummy"));
             Assert.assertNotNull(context.getRoute("dummy").getRouteController());
