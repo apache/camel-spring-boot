@@ -530,7 +530,7 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * using a background thread. The controller allows to be configured with various
      * settings to attempt to restart failing routes.
      */
-    boolean routeControllerEnabled;
+    boolean routeControllerSuperviseEnabled;
 
     /**
      * The number of threads used by the route controller scheduled thread pool that are used for restarting

@@ -19,6 +19,7 @@ package org.apache.camel.spring.boot;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.ServiceStatus;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spi.SupervisingRouteController;
@@ -45,7 +46,7 @@ import static org.awaitility.Awaitility.await;
     properties = {
         "camel.springboot.xml-routes = false",
         "camel.springboot.main-run-controller = true",
-        "camel.springboot.routeControllerEnabled = true",
+        "camel.springboot.routeControllerSuperviseEnabled = true",
         "camel.springboot.routeControllerInitialDelay = 500",
         "camel.springboot.routeControllerBackoffDelay = 1000",
         "camel.springboot.routeControllerBackoffMaxAttempts = 5",
@@ -61,7 +62,7 @@ public class SupervisingRouteControllerRestartTest {
         Assert.assertNotNull(context.getRouteController());
         Assert.assertTrue(context.getRouteController() instanceof SupervisingRouteController);
 
-        SupervisingRouteController controller = context.getRouteController().unwrap(SupervisingRouteController.class);
+        SupervisingRouteController controller = context.adapt(ExtendedCamelContext.class).getSupervisingRouteController();
 
         // Wait for the controller to start the routes
         await().atMost(3, TimeUnit.SECONDS).untilAsserted(() -> {
