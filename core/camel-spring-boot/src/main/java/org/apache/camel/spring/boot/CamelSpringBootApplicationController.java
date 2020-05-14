@@ -16,77 +16,32 @@
  */
 package org.apache.camel.spring.boot;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import javax.annotation.PreDestroy;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.main.Main;
+import org.apache.camel.main.MainShutdownStrategy;
+import org.apache.camel.main.SimpleMainShutdownStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 public class CamelSpringBootApplicationController {
-
     private static final Logger LOG = LoggerFactory.getLogger(CamelSpringBootApplicationController.class);
 
     private final Main main;
-    private final CountDownLatch latch = new CountDownLatch(1);
-    private final AtomicBoolean completed = new AtomicBoolean();
 
     public CamelSpringBootApplicationController(final ApplicationContext applicationContext, final CamelContext context) {
-        this.main = new Main() {
-
-            {
-                this.camelContext = context;
-                // disable shutdown hook as spring-boot has its own hook we use
-                this.disableHangupSupport();
-            }
-
-            @Override
-            protected ProducerTemplate findOrCreateCamelTemplate() {
-                return applicationContext.getBean(ProducerTemplate.class);
-            }
-
-            @Override
-            protected CamelContext createCamelContext() {
-                return context;
-            }
-
-            @Override
-            protected void postProcessCamelContext(CamelContext camelContext) throws Exception {
-                // spring boot has configured camel context and no post processing is needed
-            }
-
-            @Override
-            protected void doStop() throws Exception {
-                LOG.debug("Controller is shutting down CamelContext");
-                try {
-                    super.doStop();
-                } finally {
-                    completed.set(true);
-                    // should use the latch on this instance
-                    CamelSpringBootApplicationController.this.latch.countDown();
-                }
-            }
-        };
-        // turn off route collector on main as camel-spring-boot has already discovered the routes
-        // and here we just use the main as implementation detail (to keep the jvm running)
-        this.main.configure().setRoutesCollectorEnabled(false);
+        this.main = new CamelSpringMain(applicationContext, context);
     }
 
-    public CountDownLatch getLatch() {
-        return this.latch;
+    public MainShutdownStrategy getMainShutdownStrategy() {
+        return this.main.getShutdownStrategy();
     }
 
     public Runnable getMainCompletedTask() {
         return main.getCompleteTask();
-    }
-
-    public AtomicBoolean getCompleted() {
-        return completed;
     }
 
     /**
@@ -98,7 +53,7 @@ public class CamelSpringBootApplicationController {
             main.run();
             // keep the daemon thread running
             LOG.debug("Waiting for CamelContext to complete shutdown");
-            latch.await();
+            this.main.getShutdownStrategy().await();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -116,6 +71,38 @@ public class CamelSpringBootApplicationController {
     @PreDestroy
     private void destroy() {
         main.completed();
+    }
+
+    private static class CamelSpringMain extends Main {
+        final ApplicationContext applicationContext;
+
+        public CamelSpringMain(ApplicationContext applicationContext, CamelContext camelContext) {
+            this.applicationContext = applicationContext;
+            this.camelContext = camelContext;
+
+            // use a simple shutdown strategy that does not install any shutdown hook as spring-boot
+            // as spring-boot has its own hook we use
+            this.shutdownStrategy = new SimpleMainShutdownStrategy();
+
+            // turn off route collector on main as camel-spring-boot has already discovered the routes
+            // and here we just use the main as implementation detail (to keep the jvm running)
+            this.mainConfigurationProperties.setRoutesCollectorEnabled(false);
+        }
+
+        @Override
+        protected ProducerTemplate findOrCreateCamelTemplate() {
+            return applicationContext.getBean(ProducerTemplate.class);
+        }
+
+        @Override
+        protected CamelContext createCamelContext() {
+            return camelContext;
+        }
+
+        @Override
+        protected void postProcessCamelContext(CamelContext camelContext) throws Exception {
+            // spring boot has configured camel context and no post processing is needed
+        }
     }
 
 }

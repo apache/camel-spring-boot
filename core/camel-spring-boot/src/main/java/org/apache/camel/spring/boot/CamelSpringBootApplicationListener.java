@@ -18,7 +18,6 @@ package org.apache.camel.spring.boot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
@@ -29,8 +28,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.camel.CamelContext;
 import org.apache.camel.StartupListener;
 import org.apache.camel.main.MainDurationEventNotifier;
+import org.apache.camel.main.MainShutdownStrategy;
 import org.apache.camel.main.RoutesCollector;
 import org.apache.camel.main.RoutesConfigurer;
+import org.apache.camel.main.SimpleMainShutdownStrategy;
 import org.apache.camel.spi.CamelEvent;
 import org.apache.camel.spi.CamelEvent.Type;
 import org.apache.camel.spi.EventNotifier;
@@ -85,7 +86,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
 
         // only add and start Camel if its stopped (initial state)
         if (event.getApplicationContext() == this.applicationContext
-                && camelContext.getStatus().isStopped()) {
+            && camelContext.getStatus().isStopped()) {
             LOG.debug("Post-processing CamelContext bean: {}", camelContext.getName());
 
             // we can use the default routes configurer
@@ -117,8 +118,8 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                         }
                         // register lifecycle so we can trigger to shutdown the JVM when maximum number of messages has been processed
                         EventNotifier notifier = new MainDurationEventNotifier(camelContext,
-                                configurationProperties.getDurationMaxMessages(), configurationProperties.getDurationMaxIdleSeconds(),
-                                controller.getCompleted(), controller.getLatch(), true);
+                            configurationProperties.getDurationMaxMessages(), configurationProperties.getDurationMaxIdleSeconds(),
+                            controller.getMainShutdownStrategy(), true);
                         // register our event notifier
                         ServiceHelper.startService(notifier);
                         camelContext.getManagementStrategy().addEventNotifier(notifier);
@@ -127,7 +128,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                     if (configurationProperties.getDurationMaxSeconds() > 0) {
                         LOG.info("CamelSpringBoot will terminate after {} seconds", configurationProperties.getDurationMaxSeconds());
                         terminateMainControllerAfter(camelContext, configurationProperties.getDurationMaxSeconds(),
-                                controller.getCompleted(), controller.getLatch(), controller.getMainCompleteTask());
+                            controller.getMainShutdownStrategy(), controller.getMainCompleteTask());
                     }
 
                     camelContext.addStartupListener(new StartupListener() {
@@ -161,18 +162,19 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                                 LOG.info("CamelSpringBoot will terminate after being idle for more {} seconds", configurationProperties.getDurationMaxIdleSeconds());
                             }
                             // needed by MainDurationEventNotifier to signal when we have processed the max messages
-                            final AtomicBoolean completed = new AtomicBoolean();
-                            final CountDownLatch latch = new CountDownLatch(1);
+                            final MainShutdownStrategy strategy = new SimpleMainShutdownStrategy();
 
                             // register lifecycle so we can trigger to shutdown the JVM when maximum number of messages has been processed
                             EventNotifier notifier = new MainDurationEventNotifier(camelContext,
-                                    configurationProperties.getDurationMaxMessages(), configurationProperties.getDurationMaxIdleSeconds(),
-                                    completed, latch, false);
+                                configurationProperties.getDurationMaxMessages(),
+                                configurationProperties.getDurationMaxIdleSeconds(),
+                                strategy, false);
+
                             // register our event notifier
                             ServiceHelper.startService(notifier);
                             camelContext.getManagementStrategy().addEventNotifier(notifier);
 
-                            terminateApplicationContext(cac, camelContext, latch);
+                            terminateApplicationContext(cac, camelContext, strategy);
                         }
                     }
                 }
@@ -214,7 +216,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
         // SpringCamelContext should be the last one,
         // CamelContextFactoryBean should be second to last and then
         // RoutesCollector. This is important for startup as we want
-        // all resources to be ready and all routes added to the 
+        // all resources to be ready and all routes added to the
         // context before we start CamelContext.
         // So the order should be:
         // 1. RoutesCollector (LOWEST_PRECEDENCE - 2)
@@ -225,8 +227,8 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
 
     // Helpers
 
-    private void terminateMainControllerAfter(final CamelContext camelContext, int seconds, final AtomicBoolean completed,
-                                              final CountDownLatch latch, final Runnable mainCompletedTask) {
+    private void terminateMainControllerAfter(final CamelContext camelContext, int seconds,
+                                              final MainShutdownStrategy shutdownStrategy, final Runnable mainCompletedTask) {
         ScheduledExecutorService executorService = camelContext.getExecutorServiceManager().newSingleThreadScheduledExecutor(this, "CamelSpringBootTerminateTask");
 
         final AtomicBoolean running = new AtomicBoolean();
@@ -240,8 +242,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                 } catch (Throwable e) {
                     LOG.warn("Error during stopping CamelContext", e);
                 } finally {
-                    completed.set(true);
-                    latch.countDown();
+                    shutdownStrategy.shutdown();
                     mainCompletedTask.run();
                 }
                 running.set(false);
@@ -249,7 +250,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
             new Thread(stop, "CamelSpringBootTerminateTaskWorker").start();
         };
 
-        final ScheduledFuture future = executorService.schedule(task, seconds, TimeUnit.SECONDS);
+        final ScheduledFuture<?> future = executorService.schedule(task, seconds, TimeUnit.SECONDS);
         camelContext.addLifecycleStrategy(new LifecycleStrategySupport() {
             @Override
             public void onContextStop(CamelContext context) {
@@ -257,7 +258,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                 if (!running.get()) {
                     future.cancel(true);
                     // trigger shutdown
-                    latch.countDown();
+                    shutdownStrategy.shutdown();
                     mainCompletedTask.run();
                 }
             }
@@ -280,7 +281,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
             new Thread(stop, "CamelSpringBootTerminateTaskWorker").start();
         };
 
-        final ScheduledFuture future = executorService.schedule(task, seconds, TimeUnit.SECONDS);
+        final ScheduledFuture<?> future = executorService.schedule(task, seconds, TimeUnit.SECONDS);
         camelContext.addLifecycleStrategy(new LifecycleStrategySupport() {
             @Override
             public void onContextStop(CamelContext context) {
@@ -293,13 +294,13 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
     }
 
     private void terminateApplicationContext(final ConfigurableApplicationContext applicationContext, final CamelContext camelContext,
-                                             final CountDownLatch latch) {
+                                             final MainShutdownStrategy shutdownStrategy) {
         ExecutorService executorService = camelContext.getExecutorServiceManager().newSingleThreadExecutor(this, "CamelSpringBootTerminateTask");
 
         final AtomicBoolean running = new AtomicBoolean();
         Runnable task = () -> {
             try {
-                latch.await();
+                shutdownStrategy.await();
                 // only mark as running after the latch
                 running.set(true);
                 LOG.info("CamelSpringBoot triggering shutdown of the JVM.");
@@ -311,7 +312,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
             running.set(false);
         };
 
-        final Future future = executorService.submit(task);
+        final Future<?> future = executorService.submit(task);
         camelContext.addLifecycleStrategy(new LifecycleStrategySupport() {
             @Override
             public void onContextStop(CamelContext context) {
@@ -320,7 +321,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                     future.cancel(true);
                 } else {
                     // trigger shutdown
-                    latch.countDown();
+                    shutdownStrategy.shutdown();
                 }
             }
         });
