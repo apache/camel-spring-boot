@@ -74,6 +74,7 @@
         <module>camel-example-spring-boot-strimzi</module>
         <module>camel-example-spring-cloud-servicecall</module>
         <module>camel-example-spring-cloud-serviceregistry</module>
+        <module>camel-example-spring-boot-widget-gadget</module>
     </modules>
 
     <properties>
