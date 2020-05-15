@@ -9,6 +9,6 @@
     "label": "spring,microservice",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-spring-cloud-zookeeper-starter",
-    "version": "3.3.0-SNAPSHOT"
+    "version": "3.4.0-SNAPSHOT"
   }
 }
