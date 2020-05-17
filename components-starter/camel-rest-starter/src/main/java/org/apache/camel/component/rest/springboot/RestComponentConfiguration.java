@@ -57,7 +57,7 @@ public class RestComponentConfiguration
     private String consumerComponentName;
     /**
      * The swagger api doc resource to use. The resource is loaded from
-     * classpath by default and must be in JSon format.
+     * classpath by default and must be in JSON format.
      */
     private String apiDoc;
     /**

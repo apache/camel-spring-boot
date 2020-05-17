@@ -14,12 +14,6 @@ Number of Camel components: 329 in 262 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/activemq-component.html[ActiveMQ] (camel-activemq-starter) +
 `activemq:destinationType:destinationName` | 1.0 | Send messages to (or consume from) Apache ActiveMQ. This component extends the Camel JMS component.
 
-| link:https://camel.apache.org/components/latest/ahc-component.html[AHC] (camel-ahc-starter) +
-`ahc:httpUri` | 2.8 | Call external HTTP services using Async Http Client.
-
-| link:https://camel.apache.org/components/latest/ahc-ws-component.html[AHC Websocket] (camel-ahc-ws-starter) +
-`ahc-ws:httpUri` | 2.14 | Exchange data with external Websocket servers using Async Http Client.
-
 | link:https://camel.apache.org/components/latest/amqp-component.html[AMQP] (camel-amqp-starter) +
 `amqp:destinationType:destinationName` | 1.2 | Messaging with AMQP protocol using Apache QPid Client.
 
@@ -31,6 +25,12 @@ Number of Camel components: 329 in 262 JAR artifacts (1 deprecated)
 
 | link:https://camel.apache.org/components/latest/asterisk-component.html[Asterisk] (camel-asterisk-starter) +
 `asterisk:name` | 2.18 | Interact with Asterisk PBX Server.
+
+| link:https://camel.apache.org/components/latest/ahc-component.html[Async HTTP Client (AHC)] (camel-ahc-starter) +
+`ahc:httpUri` | 2.8 | Call external HTTP services using Async Http Client.
+
+| link:https://camel.apache.org/components/latest/ahc-ws-component.html[Async HTTP Client (AHC) Websocket] (camel-ahc-ws-starter) +
+`ahc-ws:httpUri` | 2.14 | Exchange data with external Websocket servers using Async Http Client.
 
 | link:https://camel.apache.org/components/latest/atmos-component.html[Atmos] (camel-atmos-starter) +
 `atmos:name/operation` | 2.15 | Integract with EMC's ViPR object data services using the Atmos Client.
@@ -59,7 +59,7 @@ Number of Camel components: 329 in 262 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/atomix-value-component.html[Atomix Value] (camel-atomix-starter) +
 `atomix-value:resourceName` | 2.20 | Access Atomix's distributed value.
 
-| link:https://camel.apache.org/components/latest/avro-component.html[Avro] (camel-avro-rpc-starter) +
+| link:https://camel.apache.org/components/latest/avro-component.html[Avro RPC] (camel-avro-rpc-starter) +
 `avro:transport:host:port/messageName` | 2.10 | Produce or consume Apache Avro RPC services.
 
 | link:https://camel.apache.org/components/latest/aws2-cw-component.html[AWS 2 CloudWatch] (camel-aws2-cw-starter) +
@@ -71,17 +71,20 @@ Number of Camel components: 329 in 262 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/aws2-ddbstream-component.html[AWS 2 DynamoDB Streams] (camel-aws2-ddb-starter) +
 `aws2-ddbstream:tableName` | 3.1 | Receive messages from AWS DynamoDB Stream service using AWS SDK version 2.x.
 
-| link:https://camel.apache.org/components/latest/aws2-ec2-component.html[AWS 2 EC2] (camel-aws2-ec2-starter) +
+| link:https://camel.apache.org/components/latest/aws2-ec2-component.html[AWS 2 Elastic Compute Cloud (EC2)] (camel-aws2-ec2-starter) +
 `aws2-ec2:label` | 3.1 | Manage AWS EC2 instances using AWS SDK version 2.x.
 
-| link:https://camel.apache.org/components/latest/aws2-ecs-component.html[AWS 2 ECS] (camel-aws2-ecs-starter) +
+| link:https://camel.apache.org/components/latest/aws2-ecs-component.html[AWS 2 Elastic Container Service (ECS)] (camel-aws2-ecs-starter) +
 `aws2-ecs:label` | 3.1 | Manage AWS ECS cluster instances using AWS SDK version 2.x.
 
-| link:https://camel.apache.org/components/latest/aws2-eks-component.html[AWS 2 EKS] (camel-aws2-eks-starter) +
+| link:https://camel.apache.org/components/latest/aws2-eks-component.html[AWS 2 Elastic Kubernetes Service (EKS)] (camel-aws2-eks-starter) +
 `aws2-eks:label` | 3.1 | Manage AWS EKS cluster instances using AWS SDK version 2.x.
 
-| link:https://camel.apache.org/components/latest/aws2-iam-component.html[AWS 2 IAM] (camel-aws2-iam-starter) +
+| link:https://camel.apache.org/components/latest/aws2-iam-component.html[AWS 2 Identity and Access Management (IAM)] (camel-aws2-iam-starter) +
 `aws2-iam:label` | 3.1 | Manage AWS IAM instances using AWS SDK version 2.x.
+
+| link:https://camel.apache.org/components/latest/aws2-kms-component.html[AWS 2 Key Management Service (KMS)] (camel-aws2-kms-starter) +
+`aws2-kms:label` | 3.1 | Manage keys stored in AWS KMS instances using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-kinesis-component.html[AWS 2 Kinesis] (camel-aws2-kinesis-starter) +
 `aws2-kinesis:streamName` | 3.2 | Consume and produce records from AWS Kinesis Streams using AWS SDK version 2.x.
@@ -89,25 +92,25 @@ Number of Camel components: 329 in 262 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/aws2-kinesis-firehose-component.html[AWS 2 Kinesis Firehose] (camel-aws2-kinesis-starter) +
 `aws2-kinesis-firehose:streamName` | 3.2 | Consume data from AWS Kinesis Firehose streams using AWS SDK version 2.x.
 
-| link:https://camel.apache.org/components/latest/aws2-kms-component.html[AWS 2 KMS] (camel-aws2-kms-starter) +
-`aws2-kms:label` | 3.1 | Manage keys stored in AWS KMS instances using AWS SDK version 2.x.
+| link:https://camel.apache.org/components/latest/aws2-lambda-component.html[AWS 2 Lambda] (camel-aws2-lambda-starter) +
+`aws2-lambda:function` | 3.2 | Manage and invoke AWS Lambda functions using AWS SDK version 2.x.
+
+| link:https://camel.apache.org/components/latest/aws2-msk-component.html[AWS 2 Managed Streaming for Apache Kafka (MSK)] (camel-aws2-msk-starter) +
+`aws2-msk:label` | 3.1 | Manage AWS MSK instances using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-mq-component.html[AWS 2 MQ] (camel-aws2-mq-starter) +
 `aws2-mq:label` | 3.1 | Manage AWS MQ instances using AWS SDK version 2.x.
 
-| link:https://camel.apache.org/components/latest/aws2-msk-component.html[AWS 2 MSK] (camel-aws2-msk-starter) +
-`aws2-msk:label` | 3.1 | Manage AWS MSK instances using AWS SDK version 2.x.
-
 | link:https://camel.apache.org/components/latest/aws2-s3-component.html[AWS 2 S3 Storage Service] (camel-aws2-s3-starter) +
 `aws2-s3://bucketNameOrArn` | 3.2 | Store and retrie objects from AWS S3 Storage Service using AWS SDK version 2.x.
 
-| link:https://camel.apache.org/components/latest/aws2-ses-component.html[AWS 2 Simple Email Service] (camel-aws2-ses-starter) +
+| link:https://camel.apache.org/components/latest/aws2-ses-component.html[AWS 2 Simple Email Service (SES)] (camel-aws2-ses-starter) +
 `aws2-ses:from` | 3.1 | Send e-mails through AWS SES service using AWS SDK version 2.x.
 
-| link:https://camel.apache.org/components/latest/aws2-sns-component.html[AWS 2 Simple Notification System] (camel-aws2-sns-starter) +
+| link:https://camel.apache.org/components/latest/aws2-sns-component.html[AWS 2 Simple Notification System (SNS)] (camel-aws2-sns-starter) +
 `aws2-sns:topicNameOrArn` | 3.1 | Send messages to an AWS Simple Notification Topic using AWS SDK version 2.x.
 
-| link:https://camel.apache.org/components/latest/aws2-sqs-component.html[AWS 2 Simple Queue Service] (camel-aws2-sqs-starter) +
+| link:https://camel.apache.org/components/latest/aws2-sqs-component.html[AWS 2 Simple Queue Service (SQS)] (camel-aws2-sqs-starter) +
 `aws2-sqs:queueNameOrArn` | 3.1 | Sending and receive messages to/from AWS SQS service using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-translate-component.html[AWS 2 Translate] (camel-aws2-translate-starter) +
@@ -122,17 +125,20 @@ Number of Camel components: 329 in 262 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/aws-ddbstream-component.html[AWS DynamoDB Streams] (camel-aws-ddb-starter) +
 `aws-ddbstream:tableName` | 2.17 | Receive messages from AWS DynamoDB Stream service.
 
-| link:https://camel.apache.org/components/latest/aws-ec2-component.html[AWS EC2] (camel-aws-ec2-starter) +
+| link:https://camel.apache.org/components/latest/aws-ec2-component.html[AWS Elastic Compute Cloud (EC2)] (camel-aws-ec2-starter) +
 `aws-ec2:label` | 2.16 | Manage AWS EC2 instances.
 
-| link:https://camel.apache.org/components/latest/aws-ecs-component.html[AWS ECS] (camel-aws-ecs-starter) +
+| link:https://camel.apache.org/components/latest/aws-ecs-component.html[AWS Elastic Container Service (ECS)] (camel-aws-ecs-starter) +
 `aws-ecs:label` | 3.0 | Manage AWS ECS cluster instances.
 
-| link:https://camel.apache.org/components/latest/aws-eks-component.html[AWS EKS] (camel-aws-eks-starter) +
+| link:https://camel.apache.org/components/latest/aws-eks-component.html[AWS Elastic Kubernetes Service (EKS)] (camel-aws-eks-starter) +
 `aws-eks:label` | 3.0 | Manage AWS EKS cluster instances.
 
-| link:https://camel.apache.org/components/latest/aws-iam-component.html[AWS IAM] (camel-aws-iam-starter) +
+| link:https://camel.apache.org/components/latest/aws-iam-component.html[AWS Identity and Access Management (IAM)] (camel-aws-iam-starter) +
 `aws-iam:label` | 2.23 | Manage AWS IAM instances.
+
+| link:https://camel.apache.org/components/latest/aws-kms-component.html[AWS Key Management Service (KMS)] (camel-aws-kms-starter) +
+`aws-kms:label` | 2.21 | Manage keys stored in AWS KMS instances.
 
 | link:https://camel.apache.org/components/latest/aws-kinesis-component.html[AWS Kinesis] (camel-aws-kinesis-starter) +
 `aws-kinesis:streamName` | 2.17 | Consume and produce records from AWS Kinesis Streams.
@@ -140,34 +146,28 @@ Number of Camel components: 329 in 262 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/aws-kinesis-firehose-component.html[AWS Kinesis Firehose] (camel-aws-kinesis-starter) +
 `aws-kinesis-firehose:streamName` | 2.19 | Consume data from AWS Kinesis Firehose streams.
 
-| link:https://camel.apache.org/components/latest/aws-kms-component.html[AWS KMS] (camel-aws-kms-starter) +
-`aws-kms:label` | 2.21 | Manage keys stored in AWS KMS instances.
-
 | link:https://camel.apache.org/components/latest/aws-lambda-component.html[AWS Lambda] (camel-aws-lambda-starter) +
 `aws-lambda:function` | 2.20 | Manage and invoke AWS Lambda functions.
 
-| link:https://camel.apache.org/components/latest/aws2-lambda-component.html[AWS Lambda] (camel-aws2-lambda-starter) +
-`aws2-lambda:function` | 3.2 | Manage and invoke AWS Lambda functions using AWS SDK version 2.x.
+| link:https://camel.apache.org/components/latest/aws-msk-component.html[AWS Managed Streaming for Apache Kafka (MSK)] (camel-aws-msk-starter) +
+`aws-msk:label` | 3.0 | Manage AWS MSK instances.
 
 | link:https://camel.apache.org/components/latest/aws-mq-component.html[AWS MQ] (camel-aws-mq-starter) +
 `aws-mq:label` | 2.21 | Manage AWS MQ instances.
 
-| link:https://camel.apache.org/components/latest/aws-msk-component.html[AWS MSK] (camel-aws-msk-starter) +
-`aws-msk:label` | 3.0 | Manage AWS MSK instances.
-
 | link:https://camel.apache.org/components/latest/aws-s3-component.html[AWS S3 Storage Service] (camel-aws-s3-starter) +
 `aws-s3://bucketNameOrArn` | 2.8 | Store and retrie objects from AWS S3 Storage Service.
 
-| link:https://camel.apache.org/components/latest/aws-ses-component.html[AWS Simple Email Service] (camel-aws-ses-starter) +
+| link:https://camel.apache.org/components/latest/aws-ses-component.html[AWS Simple Email Service (SES)] (camel-aws-ses-starter) +
 `aws-ses:from` | 2.9 | Send e-mails through AWS SES service.
 
-| link:https://camel.apache.org/components/latest/aws-sns-component.html[AWS Simple Notification System] (camel-aws-sns-starter) +
+| link:https://camel.apache.org/components/latest/aws-sns-component.html[AWS Simple Notification System (SNS)] (camel-aws-sns-starter) +
 `aws-sns:topicNameOrArn` | 2.8 | Send messages to an AWS Simple Notification Topic.
 
-| link:https://camel.apache.org/components/latest/aws-sqs-component.html[AWS Simple Queue Service] (camel-aws-sqs-starter) +
+| link:https://camel.apache.org/components/latest/aws-sqs-component.html[AWS Simple Queue Service (SQS)] (camel-aws-sqs-starter) +
 `aws-sqs:queueNameOrArn` | 2.6 | Sending and receive messages to/from AWS SQS service.
 
-| link:https://camel.apache.org/components/latest/aws-swf-component.html[AWS Simple Workflow] (camel-aws-swf-starter) +
+| link:https://camel.apache.org/components/latest/aws-swf-component.html[AWS Simple Workflow (SWF)] (camel-aws-swf-starter) +
 `aws-swf:type` | 2.13 | Manage workflows in the AWS Simple Workflow service.
 
 | link:https://camel.apache.org/components/latest/aws-sdb-component.html[AWS SimpleDB] (camel-aws-sdb-starter) +
@@ -1073,19 +1073,19 @@ Number of Camel data formats: 45 in 37 JAR artifacts (0 deprecated)
 | link:https://camel.apache.org/components/latest/dataformats/jaxb-dataformat.html[JAXB] +
 (camel-jaxb-starter) | 1.0 | Unmarshal XML payloads to POJOs and back using JAXB2 XML marshalling standard.
 
-| link:https://camel.apache.org/components/latest/dataformats/json-fastjson-dataformat.html[JSon Fastjson] +
+| link:https://camel.apache.org/components/latest/dataformats/json-fastjson-dataformat.html[JSON Fastjson] +
 (camel-fastjson-starter) | 2.20 | Marshal POJOs to JSON and back.
 
-| link:https://camel.apache.org/components/latest/dataformats/json-gson-dataformat.html[JSon GSon] +
+| link:https://camel.apache.org/components/latest/dataformats/json-gson-dataformat.html[JSON Gson] +
 (camel-gson-starter) | 2.10 | Marshal POJOs to JSON and back.
 
-| link:https://camel.apache.org/components/latest/dataformats/json-jackson-dataformat.html[JSon Jackson] +
+| link:https://camel.apache.org/components/latest/dataformats/json-jackson-dataformat.html[JSON Jackson] +
 (camel-jackson-starter) | 2.0 | Marshal POJOs to JSON and back.
 
-| link:https://camel.apache.org/components/latest/dataformats/json-johnzon-dataformat.html[JSon Johnzon] +
+| link:https://camel.apache.org/components/latest/dataformats/json-johnzon-dataformat.html[JSON Johnzon] +
 (camel-johnzon-starter) | 2.18 | Marshal POJOs to JSON and back.
 
-| link:https://camel.apache.org/components/latest/dataformats/json-xstream-dataformat.html[JSon XStream] +
+| link:https://camel.apache.org/components/latest/dataformats/json-xstream-dataformat.html[JSON XStream] +
 (camel-xstream-starter) | 2.0 | Marshal POJOs to JSON and back.
 
 | link:https://camel.apache.org/components/latest/dataformats/jsonApi-dataformat.html[JSonApi] +

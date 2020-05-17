@@ -7,7 +7,7 @@
     "deprecated": false,
     "firstVersion": "3.3.0",
     "label": "security",
-    "supportLevel": "Stable",
+    "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-undertow-spring-security-starter",
     "version": "3.4.0-SNAPSHOT"
