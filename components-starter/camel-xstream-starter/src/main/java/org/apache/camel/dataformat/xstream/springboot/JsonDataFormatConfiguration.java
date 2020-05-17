@@ -44,14 +44,14 @@ public class JsonDataFormatConfiguration
      * Whether XStream will drop the root node in the generated JSon. You may
      * want to enable this when using POJOs; as then the written object will
      * include the class name as root node, which is often not intended to be
-     * written in the JSon output.
+     * written in the JSON output.
      */
     private Boolean dropRootNode = false;
     /**
      * Whether the data format should set the Content-Type header with the type
      * from the data format if the data format is capable of doing so. For
      * example application/xml for data formats marshalling to XML, or
-     * application/json for data formats marshalling to JSon etc.
+     * application/json for data formats marshalling to JSON etc.
      */
     private Boolean contentTypeHeader = false;
 
