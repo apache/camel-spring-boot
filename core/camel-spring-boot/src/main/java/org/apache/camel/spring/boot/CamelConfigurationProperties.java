@@ -521,6 +521,13 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private String xmlRests = "classpath:camel-rest/*.xml";
 
     /**
+     * Sets the logging level used for logging route startup activity.
+     * By default INFO level is used. You can use this to change the level for example to OFF if
+     * this kind of logging is not wanted.
+     */
+    private LoggingLevel routeControllerRouteStartupLoggingLevel;
+
+    /**
      * To enable using supervising route controller which allows Camel to startup
      * and then the controller takes care of starting the routes in a safe manner.
      *
