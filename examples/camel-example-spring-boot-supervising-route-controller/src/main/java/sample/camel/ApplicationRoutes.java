@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ApplicationRoutes extends RouteBuilder {
+
     @Override
     public void configure() throws Exception {
         from("timer:foo?period=5000")

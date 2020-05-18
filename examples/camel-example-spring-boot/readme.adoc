@@ -29,19 +29,13 @@ To show a summary of spring boot health check
 curl -XGET -s http://localhost:8080/actuator/health
 ----
 
-=== To get info about the routes
-
-To show a summary of all the routes
+And you can see some info details as well
 
 ----
-curl -XGET -s http://localhost:8080/actuator/camelroutes
+curl -XGET -s http://localhost:8080/actuator/info
 ----
 
-To show detailed information for a specific route
-
-----
-curl -XGET -s http://localhost:8080/actuator/camelroutes/{id}/detail
-----
+See the `application.properties` to control what information to present in actuator.
 
 === Help and contributions
 

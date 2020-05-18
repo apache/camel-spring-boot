@@ -8,42 +8,21 @@ You can run this example using
 
     mvn spring-boot:run
 
-Beside JMX you can use Spring Boot Endpoints to interact with the routes:
+=== To get health check
 
-* To get info about the routes
+To show a summary of spring boot health check
 
-[source]
 ----
-curl -XGET -s http://localhost:8080/actuator/camelroutes
-----
-
-* To get details about a route
-
-[source]
-----
-curl -XGET -s http://localhost:8080/actuator/camelroutes/{id}/detail
+curl -XGET -s http://localhost:8080/actuator/health
 ----
 
-* To get info about a route
+And you can see some info details as well
 
-[source]
 ----
-curl -XGET -s http://localhost:8080/actuator/camelroutes/{id}/info
-----
-
-* To stop a route
-
-[source]
-----
-curl -XPOST -H "Content-Type: application/json" -s http://localhost:8080/actuator/camelroutes/{id}/stop
+curl -XGET -s http://localhost:8080/actuator/info
 ----
 
-* To start a route
-
-[source]
-----
-curl -XPOST -H "Content-Type: application/json" -s http://localhost:8080/actuator/camelroutes/{id}/start
-----
+See the `application.properties` to control what information to present in actuator.
 
 === Help and contributions
 
