@@ -39,7 +39,7 @@ The component supports 23 options, which are listed below.
 | *camel.component.resteasy.http-client-configurer* | To use the custom HttpClientConfigurer to perform configuration of the HttpClient that will be used. The option is a org.apache.camel.component.http.HttpClientConfigurer type. |  | String
 | *camel.component.resteasy.http-configuration* | To use the shared HttpConfiguration as base configuration. The option is a org.apache.camel.http.common.HttpConfiguration type. |  | String
 | *camel.component.resteasy.http-context* | To use a custom org.apache.http.protocol.HttpContext when executing requests. The option is a org.apache.http.protocol.HttpContext type. |  | String
-| *camel.component.resteasy.http-registry* | Sets httpRegistry which can be externalized to be used by camel. The option is a org.apache.camel.component.resteasy.HttpRegistry type. |  | String
+| *camel.component.resteasy.http-registry* | Sets httpRegistry which can be externalized to be used by camel. The option is a org.apache.camel.http.common.HttpRegistry type. |  | String
 | *camel.component.resteasy.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.resteasy.max-total-connections* | The maximum number of connections. | 200 | Integer
 | *camel.component.resteasy.proxy-consumers-classes* | Sets the proxy class for consumer enpoints |  | String
@@ -48,6 +48,4 @@ The component supports 23 options, which are listed below.
 | *camel.component.resteasy.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 | *camel.component.resteasy.x509-hostname-verifier* | To use a custom X509HostnameVerifier such as DefaultHostnameVerifier or NoopHostnameVerifier. The option is a javax.net.ssl.HostnameVerifier type. |  | String
 |===
-
-
 // spring-boot-auto-configure options: END

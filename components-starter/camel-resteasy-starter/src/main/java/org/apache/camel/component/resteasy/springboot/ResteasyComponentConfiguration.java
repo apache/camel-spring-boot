@@ -37,6 +37,15 @@ public class ResteasyComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Sets httpRegistry which can be externalized to be used by camel. The
+     * option is a org.apache.camel.http.common.HttpRegistry type.
+     */
+    private String httpRegistry;
+    /**
+     * Sets the proxy class for consumer enpoints
+     */
+    private String proxyConsumersClasses;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -46,14 +55,25 @@ public class ResteasyComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
-     * Sets httpRegistry which can be externalized to be used by camel. The
-     * option is a org.apache.camel.component.resteasy.HttpRegistry type.
+     * To use a custom org.apache.http.client.CookieStore. By default the
+     * org.apache.http.impl.client.BasicCookieStore is used which is an
+     * in-memory only cookie store. Notice if bridgeEndpoint=true then the
+     * cookie store is forced to be a noop cookie store as cookie shouldn't be
+     * stored as we are just bridging (eg acting as a proxy). The option is a
+     * org.apache.http.client.CookieStore type.
      */
-    private String httpRegistry;
+    private String cookieStore;
     /**
-     * Sets the proxy class for consumer enpoints
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
      */
-    private String proxyConsumersClasses;
+    private Boolean lazyStartProducer = false;
     /**
      * Whether to allow java serialization when a request uses
      * context-type=application/x-java-serialized-object. This is by default
@@ -155,34 +175,6 @@ public class ResteasyComponentConfiguration
      * default).
      */
     private Integer socketTimeout = -1;
-    /**
-     * To use a custom org.apache.http.client.CookieStore. By default the
-     * org.apache.http.impl.client.BasicCookieStore is used which is an
-     * in-memory only cookie store. Notice if bridgeEndpoint=true then the
-     * cookie store is forced to be a noop cookie store as cookie shouldn't be
-     * stored as we are just bridging (eg acting as a proxy). The option is a
-     * org.apache.http.client.CookieStore type.
-     */
-    private String cookieStore;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
-    }
 
     public String getHttpRegistry() {
         return httpRegistry;
@@ -198,6 +190,30 @@ public class ResteasyComponentConfiguration
 
     public void setProxyConsumersClasses(String proxyConsumersClasses) {
         this.proxyConsumersClasses = proxyConsumersClasses;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public String getCookieStore() {
+        return cookieStore;
+    }
+
+    public void setCookieStore(String cookieStore) {
+        this.cookieStore = cookieStore;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getAllowJavaSerializedObject() {
@@ -335,21 +351,5 @@ public class ResteasyComponentConfiguration
 
     public void setSocketTimeout(Integer socketTimeout) {
         this.socketTimeout = socketTimeout;
-    }
-
-    public String getCookieStore() {
-        return cookieStore;
-    }
-
-    public void setCookieStore(String cookieStore) {
-        this.cookieStore = cookieStore;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
     }
 }

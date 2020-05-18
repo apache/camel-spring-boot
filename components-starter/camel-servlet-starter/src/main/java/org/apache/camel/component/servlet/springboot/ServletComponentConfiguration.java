@@ -65,7 +65,7 @@ public class ServletComponentConfiguration
     private String fileNameExtWhitelist;
     /**
      * To use a custom org.apache.camel.component.servlet.HttpRegistry. The
-     * option is a org.apache.camel.component.servlet.HttpRegistry type.
+     * option is a org.apache.camel.http.common.HttpRegistry type.
      */
     private String httpRegistry;
     /**

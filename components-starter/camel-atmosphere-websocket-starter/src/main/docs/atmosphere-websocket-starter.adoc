@@ -33,9 +33,8 @@ The component supports 12 options, which are listed below.
 | *camel.component.atmosphere-websocket.header-filter-strategy* | To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type. |  | String
 | *camel.component.atmosphere-websocket.http-binding* | To use a custom HttpBinding to control the mapping between Camel message and HttpClient. The option is a org.apache.camel.http.common.HttpBinding type. |  | String
 | *camel.component.atmosphere-websocket.http-configuration* | To use the shared HttpConfiguration as base configuration. The option is a org.apache.camel.http.common.HttpConfiguration type. |  | String
-| *camel.component.atmosphere-websocket.http-registry* | To use a custom org.apache.camel.component.servlet.HttpRegistry. The option is a org.apache.camel.component.servlet.HttpRegistry type. |  | String
+| *camel.component.atmosphere-websocket.http-registry* | To use a custom org.apache.camel.component.servlet.HttpRegistry. The option is a org.apache.camel.http.common.HttpRegistry type. |  | String
 | *camel.component.atmosphere-websocket.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.atmosphere-websocket.servlet-name* | Default name of servlet to use. The default name is CamelServlet. | CamelServlet | String
 |===
-
 // spring-boot-auto-configure options: END
