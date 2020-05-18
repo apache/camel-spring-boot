@@ -17,7 +17,8 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -41,5 +42,30 @@
         <module>camel-spring-cloud-netflix</module>
         <module>camel-spring-cloud-zookeeper</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-spring-boot-generator-maven-plugin</artifactId>
+                <version>${project.version}</version>
+                <configuration>
+                    <!-- set to true to make build fail fast if missing documentation in docs files -->
+                    <failFast>false</failFast>
+                    <!-- set to true to make build fail if an option has no description -->
+                    <failOnMissingDescription>false</failOnMissingDescription>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>readme</id>
+                        <goals>
+                            <goal>update-spring-boot-auto-configuration-readme</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

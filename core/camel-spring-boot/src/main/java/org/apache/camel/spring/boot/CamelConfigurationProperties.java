@@ -608,6 +608,14 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      */
     String routeControllerExcludeRoutes;
 
+    /**
+     * Experimental: Configure the context to be lightweight.
+     * This will trigger some optimizations and memory reduction options.
+     * Lightweight context have some limitations.
+     * At this moment, dynamic endpoint destinations are not supported.
+     */
+    private boolean lightweight;
+
     // Getters & setters
     // -----------------
 

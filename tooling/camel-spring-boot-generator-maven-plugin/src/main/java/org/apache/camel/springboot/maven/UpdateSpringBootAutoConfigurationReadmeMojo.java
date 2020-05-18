@@ -108,11 +108,20 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
                     return;
                 }
 
-                // skip camel-  and -starter in the end
-                String componentName = name.substring(6, name.length() - 8);
+                if (name.startsWith("camel-")) {
+                    // skip camel-  and -starter in the end
+                    name = name.substring(6);
+                }
+                boolean isStarter = false;
+                if (name.endsWith("-starter")) {
+                    // skip camel-  and -starter in the end
+                    name = name.substring(0, name.length() - 8);
+                    isStarter = true;
+                }
+                String componentName = name;
                 getLog().debug("Camel component: " + componentName);
                 File docFolder = new File(starter,"src/main/docs/");
-                File docFile = new File(docFolder, componentName + "-starter.adoc");
+                File docFile = new File(docFolder, isStarter ? componentName + "-starter.adoc" : componentName + ".adoc");
 
                 List<SpringBootAutoConfigureOptionModel> models = parseSpringBootAutoConfigureModels(jsonFile, null);
 
