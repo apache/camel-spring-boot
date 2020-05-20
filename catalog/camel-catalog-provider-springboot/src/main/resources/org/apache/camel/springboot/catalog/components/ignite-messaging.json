@@ -6,7 +6,7 @@
     "description": "Send and receive messages from an Ignite topic.",
     "deprecated": false,
     "firstVersion": "2.17.0",
-    "label": "nosql,cache,messaging",
+    "label": "messaging",
     "javaType": "org.apache.camel.component.ignite.messaging.IgniteMessagingComponent",
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",

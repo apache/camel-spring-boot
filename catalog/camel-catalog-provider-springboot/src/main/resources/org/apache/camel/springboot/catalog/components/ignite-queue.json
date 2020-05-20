@@ -6,7 +6,7 @@
     "description": "Interact with Ignite Queue data structures.",
     "deprecated": false,
     "firstVersion": "2.17.0",
-    "label": "nosql,cache",
+    "label": "messaging,queue",
     "javaType": "org.apache.camel.component.ignite.queue.IgniteQueueComponent",
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
