@@ -126,20 +126,16 @@
         <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
         <jetty9-version>9.4.20.v20190813</jetty9-version>
-        <kafka-avro-serializer-version>5.2.2</kafka-avro-serializer-version>
         <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
         <maven-javadoc-plugin-version>3.0.1</maven-javadoc-plugin-version>
         <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
         <mycila-license-version>3.0</mycila-license-version>
-        <reactor-version>3.2.15.RELEASE</reactor-version>
         <roaster-version>2.20.1.Final</roaster-version>
         <spring-cloud-commons-version>2.2.2.RELEASE</spring-cloud-commons-version>
         <spring-cloud-consul-version>2.2.2.RELEASE</spring-cloud-consul-version>
         <spring-cloud-netflix-version>2.2.2.RELEASE</spring-cloud-netflix-version>
         <spring-cloud-zookeeper-version>2.2.1.RELEASE</spring-cloud-zookeeper-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
-        <testcontainers-version>1.14.0</testcontainers-version>
-        <tomcat-version>9.0.31</tomcat-version>
         <undertow-version>2.0.30.Final</undertow-version>
     </properties>
 
