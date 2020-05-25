@@ -20,10 +20,11 @@ import org.apache.camel.itest.springboot.util.ArquillianPackager;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
+@Ignore("MongoDB driver 3.x is not supported in SB 2.3.0")
 @RunWith(Arquillian.class)
 public class CamelDebeziumMongodbTest extends AbstractSpringBootTestSupport {
 
