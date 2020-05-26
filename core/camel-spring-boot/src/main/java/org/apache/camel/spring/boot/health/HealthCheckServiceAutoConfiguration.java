@@ -51,7 +51,7 @@ public class HealthCheckServiceAutoConfiguration {
 
         Optional.ofNullable(configuration.getCheckInterval())
             .map(TimePatternConverter::toMilliSeconds)
-            .ifPresent(interval -> service.setCheckInterval(interval, TimeUnit.MILLISECONDS));
+            .ifPresent(interval -> service.setCheckInterval(interval));
 
         configuration.getChecks().entrySet().stream()
             .filter(entry -> Objects.nonNull(entry.getValue().getOptions()))
