@@ -65,6 +65,11 @@ public class JsltComponentConfiguration
      * JSLT can be extended by plugging in functions written in Java.
      */
     private Collection<Function> functions;
+    /**
+     * JSLT can be extended by plugging in a custom jslt object filter. The
+     * option is a com.schibsted.spt.data.jslt.filters.JsonFilter type.
+     */
+    private String objectFilter;
 
     public Boolean getAllowTemplateFromHeader() {
         return allowTemplateFromHeader;
@@ -96,5 +101,13 @@ public class JsltComponentConfiguration
 
     public void setFunctions(Collection<Function> functions) {
         this.functions = functions;
+    }
+
+    public String getObjectFilter() {
+        return objectFilter;
+    }
+
+    public void setObjectFilter(String objectFilter) {
+        this.objectFilter = objectFilter;
     }
 }
