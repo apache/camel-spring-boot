@@ -1216,7 +1216,7 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 24 in 24 JAR artifacts (1 deprecated)
+Number of miscellaneous extensions: 23 in 23 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -1233,9 +1233,6 @@ Number of miscellaneous extensions: 24 in 24 JAR artifacts (1 deprecated)
 
 | link:https://camel.apache.org/components/latest/others/jasypt.html[Jasypt] +
 (camel-jasypt-starter) | 2.5 | Security using Jasypt
-
-| link:https://camel.apache.org/components/latest/others/kura.html[Kura] +
-(camel-kura-starter) | 2.15 | Using Camel with Eclipse Kura (OSGi)
 
 | link:https://camel.apache.org/components/latest/others/leveldb.html[LevelDB] +
 (camel-leveldb-starter) | 2.10 | Using LevelDB as persistent EIP store

@@ -234,10 +234,9 @@ public class DebeziumPostgresComponentConfiguration
     /**
      * Length of an interval in milli-seconds in in which the connector
      * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
-     * disable heartbeat messages. Disabled by default. The option is a int
-     * type.
+     * disable heartbeat messages. Disabled by default.
      */
-    private String heartbeatIntervalMs = "0s";
+    private Integer heartbeatIntervalMs = 0;
     /**
      * The prefix that is used to name heartbeat topics.Defaults to
      * __debezium-heartbeat.
@@ -292,9 +291,9 @@ public class DebeziumPostgresComponentConfiguration
     private String pluginName = "decoderbufs";
     /**
      * Frequency in milliseconds to wait for new change events to appear after
-     * receiving no events. Defaults to 500ms. The option is a long type.
+     * receiving no events. Defaults to 500ms.
      */
-    private String pollIntervalMs = "0.5s";
+    private Long pollIntervalMs = 500L;
     /**
      * Enables transaction metadata extraction together with event counting
      */
@@ -344,10 +343,9 @@ public class DebeziumPostgresComponentConfiguration
     private String slotName = "debezium";
     /**
      * The number of milli-seconds to wait between retry attempts when the
-     * connector fails to connect to a replication slot. The option is a long
-     * type.
+     * connector fails to connect to a replication slot.
      */
-    private String slotRetryDelayMs = "10s";
+    private Long slotRetryDelayMs = 10000L;
     /**
      * Any optional parameters used by logical decoding plugin. Semi-colon
      * separated. E.g. 'add-tables=public.table,public.table2;include-lsn=true'
@@ -362,10 +360,9 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String snapshotCustomClass;
     /**
-     * The number of milliseconds to delay before a snapshot will begin. The
-     * option is a long type.
+     * The number of milliseconds to delay before a snapshot will begin.
      */
-    private String snapshotDelayMs = "0s";
+    private Long snapshotDelayMs = 0L;
     /**
      * The maximum number of records that should be loaded into memory while
      * performing a snapshot
@@ -374,9 +371,9 @@ public class DebeziumPostgresComponentConfiguration
     /**
      * The maximum number of millis to wait for table locks at the beginning of
      * a snapshot. If locks cannot be acquired in this time frame, the snapshot
-     * will be aborted. Defaults to 10 seconds. The option is a long type.
+     * will be aborted. Defaults to 10 seconds
      */
-    private String snapshotLockTimeoutMs = "10s";
+    private Long snapshotLockTimeoutMs = 10000L;
     /**
      * The criteria for running a snapshot upon startup of the connector.
      * Options include: 'always' to specify that the connector run a snapshot
@@ -415,10 +412,9 @@ public class DebeziumPostgresComponentConfiguration
     private String sourceStructVersion = "v2";
     /**
      * Frequency in milliseconds for sending replication connection status
-     * updates to the server. Defaults to 10 seconds (10000 ms). The option is a
-     * int type.
+     * updates to the server. Defaults to 10 seconds (10000 ms).
      */
-    private String statusUpdateIntervalMs = "10s";
+    private Integer statusUpdateIntervalMs = 10000;
     /**
      * Description is not available here, please check Debezium website for
      * corresponding key 'table.blacklist' description.
@@ -461,10 +457,9 @@ public class DebeziumPostgresComponentConfiguration
      * more likely this value is to be the current 'true' value, but the bigger
      * the performance cost. The bigger the value, the less likely this value is
      * to be the current 'true' value, but the lower the performance penalty.
-     * The default is set to 0 ms, which disables tracking xmin. The option is a
-     * long type.
+     * The default is set to 0 ms, which disables tracking xmin.
      */
-    private String xminFetchIntervalMs = "0s";
+    private Long xminFetchIntervalMs = 0L;
 
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
@@ -733,11 +728,11 @@ public class DebeziumPostgresComponentConfiguration
         this.heartbeatActionQuery = heartbeatActionQuery;
     }
 
-    public String getHeartbeatIntervalMs() {
+    public Integer getHeartbeatIntervalMs() {
         return heartbeatIntervalMs;
     }
 
-    public void setHeartbeatIntervalMs(String heartbeatIntervalMs) {
+    public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
         this.heartbeatIntervalMs = heartbeatIntervalMs;
     }
 
@@ -805,11 +800,11 @@ public class DebeziumPostgresComponentConfiguration
         this.pluginName = pluginName;
     }
 
-    public String getPollIntervalMs() {
+    public Long getPollIntervalMs() {
         return pollIntervalMs;
     }
 
-    public void setPollIntervalMs(String pollIntervalMs) {
+    public void setPollIntervalMs(Long pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
     }
 
@@ -877,11 +872,11 @@ public class DebeziumPostgresComponentConfiguration
         this.slotName = slotName;
     }
 
-    public String getSlotRetryDelayMs() {
+    public Long getSlotRetryDelayMs() {
         return slotRetryDelayMs;
     }
 
-    public void setSlotRetryDelayMs(String slotRetryDelayMs) {
+    public void setSlotRetryDelayMs(Long slotRetryDelayMs) {
         this.slotRetryDelayMs = slotRetryDelayMs;
     }
 
@@ -901,11 +896,11 @@ public class DebeziumPostgresComponentConfiguration
         this.snapshotCustomClass = snapshotCustomClass;
     }
 
-    public String getSnapshotDelayMs() {
+    public Long getSnapshotDelayMs() {
         return snapshotDelayMs;
     }
 
-    public void setSnapshotDelayMs(String snapshotDelayMs) {
+    public void setSnapshotDelayMs(Long snapshotDelayMs) {
         this.snapshotDelayMs = snapshotDelayMs;
     }
 
@@ -917,11 +912,11 @@ public class DebeziumPostgresComponentConfiguration
         this.snapshotFetchSize = snapshotFetchSize;
     }
 
-    public String getSnapshotLockTimeoutMs() {
+    public Long getSnapshotLockTimeoutMs() {
         return snapshotLockTimeoutMs;
     }
 
-    public void setSnapshotLockTimeoutMs(String snapshotLockTimeoutMs) {
+    public void setSnapshotLockTimeoutMs(Long snapshotLockTimeoutMs) {
         this.snapshotLockTimeoutMs = snapshotLockTimeoutMs;
     }
 
@@ -950,11 +945,11 @@ public class DebeziumPostgresComponentConfiguration
         this.sourceStructVersion = sourceStructVersion;
     }
 
-    public String getStatusUpdateIntervalMs() {
+    public Integer getStatusUpdateIntervalMs() {
         return statusUpdateIntervalMs;
     }
 
-    public void setStatusUpdateIntervalMs(String statusUpdateIntervalMs) {
+    public void setStatusUpdateIntervalMs(Integer statusUpdateIntervalMs) {
         this.statusUpdateIntervalMs = statusUpdateIntervalMs;
     }
 
@@ -998,11 +993,11 @@ public class DebeziumPostgresComponentConfiguration
         this.tombstonesOnDelete = tombstonesOnDelete;
     }
 
-    public String getXminFetchIntervalMs() {
+    public Long getXminFetchIntervalMs() {
         return xminFetchIntervalMs;
     }
 
-    public void setXminFetchIntervalMs(String xminFetchIntervalMs) {
+    public void setXminFetchIntervalMs(Long xminFetchIntervalMs) {
         this.xminFetchIntervalMs = xminFetchIntervalMs;
     }
 }

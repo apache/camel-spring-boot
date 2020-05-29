@@ -132,15 +132,15 @@ public class DebeziumMongodbComponentConfiguration
     /**
      * The initial delay when trying to reconnect to a primary after a
      * connection cannot be made or when no primary is available. Defaults to 1
-     * second (1000 ms). The option is a long type.
+     * second (1000 ms).
      */
-    private String connectBackoffInitialDelayMs = "1s";
+    private Long connectBackoffInitialDelayMs = 1000L;
     /**
      * The maximum delay when trying to reconnect to a primary after a
      * connection cannot be made or when no primary is available. Defaults to
-     * 120 second (120,000 ms). The option is a long type.
+     * 120 second (120,000 ms).
      */
-    private String connectBackoffMaxDelayMs = "120s";
+    private Long connectBackoffMaxDelayMs = 120000L;
     /**
      * Maximum number of failed connection attempts to a replica set primary
      * before an exception occurs and task is aborted. Defaults to 16, which
@@ -174,10 +174,9 @@ public class DebeziumMongodbComponentConfiguration
     /**
      * Length of an interval in milli-seconds in in which the connector
      * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
-     * disable heartbeat messages. Disabled by default. The option is a int
-     * type.
+     * disable heartbeat messages. Disabled by default.
      */
-    private String heartbeatIntervalMs = "0s";
+    private Integer heartbeatIntervalMs = 0;
     /**
      * The prefix that is used to name heartbeat topics.Defaults to
      * __debezium-heartbeat.
@@ -236,9 +235,9 @@ public class DebeziumMongodbComponentConfiguration
     private String mongodbUser;
     /**
      * Frequency in milliseconds to wait for new change events to appear after
-     * receiving no events. Defaults to 500ms. The option is a long type.
+     * receiving no events. Defaults to 500ms.
      */
-    private String pollIntervalMs = "0.5s";
+    private Long pollIntervalMs = 500L;
     /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no
@@ -246,10 +245,9 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String skippedOperations;
     /**
-     * The number of milliseconds to delay before a snapshot will begin. The
-     * option is a long type.
+     * The number of milliseconds to delay before a snapshot will begin.
      */
-    private String snapshotDelayMs = "0s";
+    private Long snapshotDelayMs = 0L;
     /**
      * The maximum number of records that should be loaded into memory while
      * performing a snapshot
@@ -405,20 +403,20 @@ public class DebeziumMongodbComponentConfiguration
         this.collectionWhitelist = collectionWhitelist;
     }
 
-    public String getConnectBackoffInitialDelayMs() {
+    public Long getConnectBackoffInitialDelayMs() {
         return connectBackoffInitialDelayMs;
     }
 
     public void setConnectBackoffInitialDelayMs(
-            String connectBackoffInitialDelayMs) {
+            Long connectBackoffInitialDelayMs) {
         this.connectBackoffInitialDelayMs = connectBackoffInitialDelayMs;
     }
 
-    public String getConnectBackoffMaxDelayMs() {
+    public Long getConnectBackoffMaxDelayMs() {
         return connectBackoffMaxDelayMs;
     }
 
-    public void setConnectBackoffMaxDelayMs(String connectBackoffMaxDelayMs) {
+    public void setConnectBackoffMaxDelayMs(Long connectBackoffMaxDelayMs) {
         this.connectBackoffMaxDelayMs = connectBackoffMaxDelayMs;
     }
 
@@ -471,11 +469,11 @@ public class DebeziumMongodbComponentConfiguration
         this.fieldRenames = fieldRenames;
     }
 
-    public String getHeartbeatIntervalMs() {
+    public Integer getHeartbeatIntervalMs() {
         return heartbeatIntervalMs;
     }
 
-    public void setHeartbeatIntervalMs(String heartbeatIntervalMs) {
+    public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
         this.heartbeatIntervalMs = heartbeatIntervalMs;
     }
 
@@ -568,11 +566,11 @@ public class DebeziumMongodbComponentConfiguration
         this.mongodbUser = mongodbUser;
     }
 
-    public String getPollIntervalMs() {
+    public Long getPollIntervalMs() {
         return pollIntervalMs;
     }
 
-    public void setPollIntervalMs(String pollIntervalMs) {
+    public void setPollIntervalMs(Long pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
     }
 
@@ -584,11 +582,11 @@ public class DebeziumMongodbComponentConfiguration
         this.skippedOperations = skippedOperations;
     }
 
-    public String getSnapshotDelayMs() {
+    public Long getSnapshotDelayMs() {
         return snapshotDelayMs;
     }
 
-    public void setSnapshotDelayMs(String snapshotDelayMs) {
+    public void setSnapshotDelayMs(Long snapshotDelayMs) {
         this.snapshotDelayMs = snapshotDelayMs;
     }
 

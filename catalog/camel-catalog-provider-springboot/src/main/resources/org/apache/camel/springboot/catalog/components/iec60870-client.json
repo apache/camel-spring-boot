@@ -3,7 +3,7 @@
     "kind": "component",
     "name": "iec60870-client",
     "title": "IEC 60870 Client",
-    "description": "IEC 60870 supervisory control and data acquisition (SCADA) client using NeoSCADA�\u0084� implementation.",
+    "description": "IEC 60870 supervisory control and data acquisition (SCADA) client using NeoSCADA implementation.",
     "deprecated": false,
     "firstVersion": "2.20.0",
     "label": "iot",

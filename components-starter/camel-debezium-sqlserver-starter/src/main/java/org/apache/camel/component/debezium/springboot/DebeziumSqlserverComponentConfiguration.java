@@ -155,9 +155,9 @@ public class DebeziumSqlserverComponentConfiguration
     private Integer databaseHistoryKafkaRecoveryAttempts = 100;
     /**
      * The number of milliseconds to wait while polling for persisted data
-     * during recovery. The option is a int type.
+     * during recovery.
      */
-    private String databaseHistoryKafkaRecoveryPollIntervalMs = "0.1s";
+    private Integer databaseHistoryKafkaRecoveryPollIntervalMs = 100;
     /**
      * The name of the topic for the database schema history
      */
@@ -214,10 +214,9 @@ public class DebeziumSqlserverComponentConfiguration
     /**
      * Length of an interval in milli-seconds in in which the connector
      * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
-     * disable heartbeat messages. Disabled by default. The option is a int
-     * type.
+     * disable heartbeat messages. Disabled by default.
      */
-    private String heartbeatIntervalMs = "0s";
+    private Integer heartbeatIntervalMs = 0;
     /**
      * The prefix that is used to name heartbeat topics.Defaults to
      * __debezium-heartbeat.
@@ -247,18 +246,17 @@ public class DebeziumSqlserverComponentConfiguration
     private String messageKeyColumns;
     /**
      * Frequency in milliseconds to wait for new change events to appear after
-     * receiving no events. Defaults to 500ms. The option is a long type.
+     * receiving no events. Defaults to 500ms.
      */
-    private String pollIntervalMs = "0.5s";
+    private Long pollIntervalMs = 500L;
     /**
      * Enables transaction metadata extraction together with event counting
      */
     private Boolean provideTransactionMetadata = false;
     /**
-     * The number of milliseconds to delay before a snapshot will begin. The
-     * option is a long type.
+     * The number of milliseconds to delay before a snapshot will begin.
      */
-    private String snapshotDelayMs = "0s";
+    private Long snapshotDelayMs = 0L;
     /**
      * The maximum number of records that should be loaded into memory while
      * performing a snapshot
@@ -267,9 +265,9 @@ public class DebeziumSqlserverComponentConfiguration
     /**
      * The maximum number of millis to wait for table locks at the beginning of
      * a snapshot. If locks cannot be acquired in this time frame, the snapshot
-     * will be aborted. Defaults to 10 seconds. The option is a long type.
+     * will be aborted. Defaults to 10 seconds
      */
-    private String snapshotLockTimeoutMs = "10s";
+    private Long snapshotLockTimeoutMs = 10000L;
     /**
      * The criteria for running a snapshot upon startup of the connector.
      * Options include: 'initial' (the default) to specify the connector should
@@ -495,12 +493,12 @@ public class DebeziumSqlserverComponentConfiguration
         this.databaseHistoryKafkaRecoveryAttempts = databaseHistoryKafkaRecoveryAttempts;
     }
 
-    public String getDatabaseHistoryKafkaRecoveryPollIntervalMs() {
+    public Integer getDatabaseHistoryKafkaRecoveryPollIntervalMs() {
         return databaseHistoryKafkaRecoveryPollIntervalMs;
     }
 
     public void setDatabaseHistoryKafkaRecoveryPollIntervalMs(
-            String databaseHistoryKafkaRecoveryPollIntervalMs) {
+            Integer databaseHistoryKafkaRecoveryPollIntervalMs) {
         this.databaseHistoryKafkaRecoveryPollIntervalMs = databaseHistoryKafkaRecoveryPollIntervalMs;
     }
 
@@ -577,11 +575,11 @@ public class DebeziumSqlserverComponentConfiguration
         this.eventProcessingFailureHandlingMode = eventProcessingFailureHandlingMode;
     }
 
-    public String getHeartbeatIntervalMs() {
+    public Integer getHeartbeatIntervalMs() {
         return heartbeatIntervalMs;
     }
 
-    public void setHeartbeatIntervalMs(String heartbeatIntervalMs) {
+    public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
         this.heartbeatIntervalMs = heartbeatIntervalMs;
     }
 
@@ -617,11 +615,11 @@ public class DebeziumSqlserverComponentConfiguration
         this.messageKeyColumns = messageKeyColumns;
     }
 
-    public String getPollIntervalMs() {
+    public Long getPollIntervalMs() {
         return pollIntervalMs;
     }
 
-    public void setPollIntervalMs(String pollIntervalMs) {
+    public void setPollIntervalMs(Long pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
     }
 
@@ -633,11 +631,11 @@ public class DebeziumSqlserverComponentConfiguration
         this.provideTransactionMetadata = provideTransactionMetadata;
     }
 
-    public String getSnapshotDelayMs() {
+    public Long getSnapshotDelayMs() {
         return snapshotDelayMs;
     }
 
-    public void setSnapshotDelayMs(String snapshotDelayMs) {
+    public void setSnapshotDelayMs(Long snapshotDelayMs) {
         this.snapshotDelayMs = snapshotDelayMs;
     }
 
@@ -649,11 +647,11 @@ public class DebeziumSqlserverComponentConfiguration
         this.snapshotFetchSize = snapshotFetchSize;
     }
 
-    public String getSnapshotLockTimeoutMs() {
+    public Long getSnapshotLockTimeoutMs() {
         return snapshotLockTimeoutMs;
     }
 
-    public void setSnapshotLockTimeoutMs(String snapshotLockTimeoutMs) {
+    public void setSnapshotLockTimeoutMs(Long snapshotLockTimeoutMs) {
         this.snapshotLockTimeoutMs = snapshotLockTimeoutMs;
     }
 

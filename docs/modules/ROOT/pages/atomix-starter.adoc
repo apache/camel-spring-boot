@@ -42,7 +42,7 @@ The component supports 121 options, which are listed below.
 | *camel.component.atomix-map.resource-options* | Local resources configurations |  | Map
 | *camel.component.atomix-map.result-header* | The header that wil carry the result. |  | String
 | *camel.component.atomix-map.transport-class-name* | The class name (fqn) of the Atomix transport | io.atomix.catalyst.transport.netty.NettyTransport | String
-| *camel.component.atomix-map.ttl* | The resource ttl. |  | Long
+| *camel.component.atomix-map.ttl* | The resource ttl. The option is a long type. |  | String
 | *camel.component.atomix-messaging.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | String
 | *camel.component.atomix-messaging.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.atomix-messaging.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
@@ -80,7 +80,7 @@ The component supports 121 options, which are listed below.
 | *camel.component.atomix-multimap.resource-options* | Local resources configurations |  | Map
 | *camel.component.atomix-multimap.result-header* | The header that wil carry the result. |  | String
 | *camel.component.atomix-multimap.transport-class-name* | The class name (fqn) of the Atomix transport | io.atomix.catalyst.transport.netty.NettyTransport | String
-| *camel.component.atomix-multimap.ttl* | The resource ttl. |  | Long
+| *camel.component.atomix-multimap.ttl* | The resource ttl. The option is a long type. |  | String
 | *camel.component.atomix-queue.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | String
 | *camel.component.atomix-queue.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.atomix-queue.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
@@ -115,7 +115,7 @@ The component supports 121 options, which are listed below.
 | *camel.component.atomix-set.resource-options* | Local resources configurations |  | Map
 | *camel.component.atomix-set.result-header* | The header that wil carry the result. |  | String
 | *camel.component.atomix-set.transport-class-name* | The class name (fqn) of the Atomix transport | io.atomix.catalyst.transport.netty.NettyTransport | String
-| *camel.component.atomix-set.ttl* | The resource ttl. |  | Long
+| *camel.component.atomix-set.ttl* | The resource ttl. The option is a long type. |  | String
 | *camel.component.atomix-value.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | String
 | *camel.component.atomix-value.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.atomix-value.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
@@ -133,7 +133,7 @@ The component supports 121 options, which are listed below.
 | *camel.component.atomix-value.resource-options* | Local resources configurations |  | Map
 | *camel.component.atomix-value.result-header* | The header that wil carry the result. |  | String
 | *camel.component.atomix-value.transport-class-name* | The class name (fqn) of the Atomix transport | io.atomix.catalyst.transport.netty.NettyTransport | String
-| *camel.component.atomix-value.ttl* | The resource ttl. |  | Long
+| *camel.component.atomix-value.ttl* | The resource ttl. The option is a long type. |  | String
 | *camel.component.atomix.cluster.service.address* | The address of the node - node only. |  | String
 | *camel.component.atomix.cluster.service.attributes* | Custom service attributes. |  | Map
 | *camel.component.atomix.cluster.service.configuration-uri* | The Atomix configuration uri. |  | String

@@ -29,7 +29,7 @@ The component supports 73 options, which are listed below.
 | *camel.component.salesforce.apex-url* | APEX method URL |  | String
 | *camel.component.salesforce.api-version* | Salesforce API version. | 34.0 | String
 | *camel.component.salesforce.authentication-type* | Explicit authentication method to be used, one of USERNAME_PASSWORD, REFRESH_TOKEN or JWT. Salesforce component can auto-determine the authentication method to use from the properties set, set this property to eliminate any ambiguity. |  | AuthenticationType
-| *camel.component.salesforce.backoff-increment* | Backoff interval increment for Streaming connection restart attempts for failures beyond CometD auto-reconnect. | 1000 | Long
+| *camel.component.salesforce.backoff-increment* | Backoff interval increment for Streaming connection restart attempts for failures beyond CometD auto-reconnect. The option is a long type. | 1000 | String
 | *camel.component.salesforce.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.salesforce.batch-id* | Bulk API Batch ID |  | String
 | *camel.component.salesforce.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
@@ -68,7 +68,7 @@ The component supports 73 options, which are listed below.
 | *camel.component.salesforce.login-config* | All authentication configuration in one nested bean, all properties set there can be set directly on the component as well. The option is a org.apache.camel.component.salesforce.SalesforceLoginConfig type. |  | String
 | *camel.component.salesforce.login-url* | URL of the Salesforce instance used for authentication, by default set to \https://login.salesforce.com | https://login.salesforce.com | String
 | *camel.component.salesforce.long-polling-transport-properties* | Used to set any properties that can be configured on the LongPollingTransport used by the BayeuxClient (CometD) used by the streaming api |  | Map
-| *camel.component.salesforce.max-backoff* | Maximum backoff interval for Streaming connection restart attempts for failures beyond CometD auto-reconnect. | 30000 | Long
+| *camel.component.salesforce.max-backoff* | Maximum backoff interval for Streaming connection restart attempts for failures beyond CometD auto-reconnect. The option is a long type. | 30000 | String
 | *camel.component.salesforce.not-found-behaviour* | Sets the behaviour of 404 not found status received from Salesforce API. Should the body be set to NULL NotFoundBehaviour#NULL or should a exception be signaled on the exchange NotFoundBehaviour#EXCEPTION - the default. |  | NotFoundBehaviour
 | *camel.component.salesforce.notify-for-fields* | Notify for fields, options are ALL, REFERENCED, SELECT, WHERE |  | NotifyForFieldsEnum
 | *camel.component.salesforce.notify-for-operation-create* | Notify for create operation, defaults to false (API version = 29.0) |  | Boolean
