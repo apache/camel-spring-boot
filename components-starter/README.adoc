@@ -471,10 +471,10 @@ Number of Camel components: 330 in 263 JAR artifacts (1 deprecated)
 `http:httpUri` | 2.3 | Send requests to external HTTP servers using Apache HTTP Client 4.x.
 
 | link:https://camel.apache.org/components/latest/iec60870-client-component.html[IEC 60870 Client] (camel-iec60870-starter) +
-`iec60870-client:uriPath` | 2.20 | IEC 60870 supervisory control and data acquisition (SCADA) client using NeoSCADA implementation.
+`iec60870-client:uriPath` | 2.20 | IEC 60870 supervisory control and data acquisition (SCADA) client using NeoSCADA�� implementation.
 
 | link:https://camel.apache.org/components/latest/iec60870-server-component.html[IEC 60870 Server] (camel-iec60870-starter) +
-`iec60870-server:uriPath` | 2.20 | IEC 60870 supervisory control and data acquisition (SCADA) server using NeoSCADA implementation.
+`iec60870-server:uriPath` | 2.20 | IEC 60870 supervisory control and data acquisition (SCADA) server using NeoSCADA�� implementation.
 
 | link:https://camel.apache.org/components/latest/ignite-cache-component.html[Ignite Cache] (camel-ignite-starter) +
 `ignite-cache:cacheName` | 2.17 | Perform cache operations on an Ignite cache or consume changes from a continuous query.
@@ -1216,7 +1216,7 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 23 in 23 JAR artifacts (1 deprecated)
+Number of miscellaneous extensions: 24 in 24 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -1233,6 +1233,9 @@ Number of miscellaneous extensions: 23 in 23 JAR artifacts (1 deprecated)
 
 | link:https://camel.apache.org/components/latest/others/jasypt.html[Jasypt] +
 (camel-jasypt-starter) | 2.5 | Security using Jasypt
+
+| link:https://camel.apache.org/components/latest/others/kura.html[Kura] +
+(camel-kura-starter) | 2.15 | Using Camel with Eclipse Kura (OSGi)
 
 | link:https://camel.apache.org/components/latest/others/leveldb.html[LevelDB] +
 (camel-leveldb-starter) | 2.10 | Using LevelDB as persistent EIP store

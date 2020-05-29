@@ -73,9 +73,9 @@ public class AtomixSetComponentConfiguration
      */
     private String transportClassName = "io.atomix.catalyst.transport.netty.NettyTransport";
     /**
-     * The resource ttl.
+     * The resource ttl. The option is a long type.
      */
-    private Long ttl;
+    private String ttl;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -186,11 +186,11 @@ public class AtomixSetComponentConfiguration
         this.transportClassName = transportClassName;
     }
 
-    public Long getTtl() {
+    public String getTtl() {
         return ttl;
     }
 
-    public void setTtl(Long ttl) {
+    public void setTtl(String ttl) {
         this.ttl = ttl;
     }
 

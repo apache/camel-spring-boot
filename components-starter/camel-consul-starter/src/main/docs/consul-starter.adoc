@@ -118,6 +118,6 @@ The component supports 95 options, which are listed below.
 | *camel.component.consul.service-registry.dc* | *Deprecated*  |  | String
 | *camel.component.consul.service-registry.read-timeout-millis* | *Deprecated*  |  | Long
 | *camel.component.consul.service-registry.write-timeout-millis* | *Deprecated*  |  | Long
-| *camel.component.consul.write-timeout-millis* | *Deprecated* Write timeout for OkHttpClient. Deprecation note: Use writeTimeout instead |  | Long
+| *camel.component.consul.write-timeout-millis* | *Deprecated* Write timeout for OkHttpClient. Deprecation note: Use writeTimeout instead. The option is a java.lang.Long type. |  | String
 |===
 // spring-boot-auto-configure options: END

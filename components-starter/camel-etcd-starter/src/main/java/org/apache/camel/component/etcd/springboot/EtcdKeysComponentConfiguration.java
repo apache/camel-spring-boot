@@ -61,9 +61,10 @@ public class EtcdKeysComponentConfiguration
      */
     private String servicePath = "/services/";
     /**
-     * To set the maximum time an action could take to complete.
+     * To set the maximum time an action could take to complete. The option is a
+     * java.lang.Long type.
      */
-    private Long timeout;
+    private String timeout;
     /**
      * To set the URIs the client connects.
      */
@@ -127,11 +128,11 @@ public class EtcdKeysComponentConfiguration
         this.servicePath = servicePath;
     }
 
-    public Long getTimeout() {
+    public String getTimeout() {
         return timeout;
     }
 
-    public void setTimeout(Long timeout) {
+    public void setTimeout(String timeout) {
         this.timeout = timeout;
     }
 

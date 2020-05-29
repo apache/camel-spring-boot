@@ -88,10 +88,10 @@ public class ConsulComponentConfiguration
     private String writeTimeout;
     /**
      * Write timeout for OkHttpClient. Deprecation note: Use writeTimeout
-     * instead
+     * instead. The option is a java.lang.Long type.
      */
     @Deprecated
-    private Long writeTimeoutMillis;
+    private String writeTimeoutMillis;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -271,12 +271,12 @@ public class ConsulComponentConfiguration
 
     @Deprecated
     @DeprecatedConfigurationProperty
-    public Long getWriteTimeoutMillis() {
+    public String getWriteTimeoutMillis() {
         return writeTimeoutMillis;
     }
 
     @Deprecated
-    public void setWriteTimeoutMillis(Long writeTimeoutMillis) {
+    public void setWriteTimeoutMillis(String writeTimeoutMillis) {
         this.writeTimeoutMillis = writeTimeoutMillis;
     }
 

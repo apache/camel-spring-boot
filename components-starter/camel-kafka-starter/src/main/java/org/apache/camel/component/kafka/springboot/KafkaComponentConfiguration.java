@@ -220,9 +220,9 @@ public class KafkaComponentConfiguration
      * consumer can be idle before fetching more records. If poll() is not
      * called before expiration of this timeout, then the consumer is considered
      * failed and the group will rebalance in order to reassign the partitions
-     * to another member.
+     * to another member. The option is a java.lang.Long type.
      */
-    private Long maxPollIntervalMs;
+    private String maxPollIntervalMs;
     /**
      * The maximum number of records returned in a single call to poll()
      */
@@ -241,9 +241,10 @@ public class KafkaComponentConfiguration
      */
     private String partitionAssignor = "org.apache.kafka.clients.consumer.RangeAssignor";
     /**
-     * The timeout used when polling the KafkaConsumer.
+     * The timeout used when polling the KafkaConsumer. The option is a
+     * java.lang.Long type.
      */
-    private Long pollTimeoutMs = 5000L;
+    private String pollTimeoutMs = "5000";
     /**
      * Set if KafkaConsumer will read from beginning or end on startup:
      * beginning : read from beginning end : read from end This is replacing the
@@ -888,11 +889,11 @@ public class KafkaComponentConfiguration
         this.maxPartitionFetchBytes = maxPartitionFetchBytes;
     }
 
-    public Long getMaxPollIntervalMs() {
+    public String getMaxPollIntervalMs() {
         return maxPollIntervalMs;
     }
 
-    public void setMaxPollIntervalMs(Long maxPollIntervalMs) {
+    public void setMaxPollIntervalMs(String maxPollIntervalMs) {
         this.maxPollIntervalMs = maxPollIntervalMs;
     }
 
@@ -920,11 +921,11 @@ public class KafkaComponentConfiguration
         this.partitionAssignor = partitionAssignor;
     }
 
-    public Long getPollTimeoutMs() {
+    public String getPollTimeoutMs() {
         return pollTimeoutMs;
     }
 
-    public void setPollTimeoutMs(Long pollTimeoutMs) {
+    public void setPollTimeoutMs(String pollTimeoutMs) {
         this.pollTimeoutMs = pollTimeoutMs;
     }
 

@@ -358,9 +358,9 @@ public class JmsComponentConfiguration
      * (in milliseconds). The default is 20 seconds. You can include the header
      * CamelJmsRequestTimeout to override this endpoint configured timeout
      * value, and thus have per message individual timeout values. See also the
-     * requestTimeoutCheckerInterval option.
+     * requestTimeoutCheckerInterval option. The option is a long type.
      */
-    private Long requestTimeout = 20000L;
+    private String requestTimeout = "20000";
     /**
      * When sending messages, specifies the time-to-live of the message (in
      * milliseconds).
@@ -616,23 +616,24 @@ public class JmsComponentConfiguration
      */
     private String queueBrowseStrategy;
     /**
-     * The timeout for receiving messages (in milliseconds).
+     * The timeout for receiving messages (in milliseconds). The option is a
+     * long type.
      */
-    private Long receiveTimeout = 1000L;
+    private String receiveTimeout = "1000";
     /**
      * Specifies the interval between recovery attempts, i.e. when a connection
      * is being refreshed, in milliseconds. The default is 5000 ms, that is, 5
-     * seconds.
+     * seconds. The option is a long type.
      */
-    private Long recoveryInterval = 5000L;
+    private String recoveryInterval = "5000";
     /**
      * Configures how often Camel should check for timed out Exchanges when
      * doing request/reply over JMS. By default Camel checks once per second.
      * But if you must react faster when a timeout occurs, then you can lower
      * this interval, to check more frequently. The timeout is determined by the
-     * option requestTimeout.
+     * option requestTimeout. The option is a long type.
      */
-    private Long requestTimeoutCheckerInterval = 1000L;
+    private String requestTimeoutCheckerInterval = "1000";
     /**
      * If enabled and you are using Request Reply messaging (InOut) and an
      * Exchange failed on the consumer side, then the caused Exception will be
@@ -676,9 +677,9 @@ public class JmsComponentConfiguration
     private Integer waitForProvisionCorrelationToBeUpdatedCounter = 50;
     /**
      * Interval in millis to sleep each time while waiting for provisional
-     * correlation id to be updated.
+     * correlation id to be updated. The option is a long type.
      */
-    private Long waitForProvisionCorrelationToBeUpdatedThreadSleepingTime = 100L;
+    private String waitForProvisionCorrelationToBeUpdatedThreadSleepingTime = "100";
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
@@ -1062,11 +1063,11 @@ public class JmsComponentConfiguration
         this.replyToType = replyToType;
     }
 
-    public Long getRequestTimeout() {
+    public String getRequestTimeout() {
         return requestTimeout;
     }
 
-    public void setRequestTimeout(Long requestTimeout) {
+    public void setRequestTimeout(String requestTimeout) {
         this.requestTimeout = requestTimeout;
     }
 
@@ -1355,28 +1356,28 @@ public class JmsComponentConfiguration
         this.queueBrowseStrategy = queueBrowseStrategy;
     }
 
-    public Long getReceiveTimeout() {
+    public String getReceiveTimeout() {
         return receiveTimeout;
     }
 
-    public void setReceiveTimeout(Long receiveTimeout) {
+    public void setReceiveTimeout(String receiveTimeout) {
         this.receiveTimeout = receiveTimeout;
     }
 
-    public Long getRecoveryInterval() {
+    public String getRecoveryInterval() {
         return recoveryInterval;
     }
 
-    public void setRecoveryInterval(Long recoveryInterval) {
+    public void setRecoveryInterval(String recoveryInterval) {
         this.recoveryInterval = recoveryInterval;
     }
 
-    public Long getRequestTimeoutCheckerInterval() {
+    public String getRequestTimeoutCheckerInterval() {
         return requestTimeoutCheckerInterval;
     }
 
     public void setRequestTimeoutCheckerInterval(
-            Long requestTimeoutCheckerInterval) {
+            String requestTimeoutCheckerInterval) {
         this.requestTimeoutCheckerInterval = requestTimeoutCheckerInterval;
     }
 
@@ -1414,12 +1415,12 @@ public class JmsComponentConfiguration
         this.waitForProvisionCorrelationToBeUpdatedCounter = waitForProvisionCorrelationToBeUpdatedCounter;
     }
 
-    public Long getWaitForProvisionCorrelationToBeUpdatedThreadSleepingTime() {
+    public String getWaitForProvisionCorrelationToBeUpdatedThreadSleepingTime() {
         return waitForProvisionCorrelationToBeUpdatedThreadSleepingTime;
     }
 
     public void setWaitForProvisionCorrelationToBeUpdatedThreadSleepingTime(
-            Long waitForProvisionCorrelationToBeUpdatedThreadSleepingTime) {
+            String waitForProvisionCorrelationToBeUpdatedThreadSleepingTime) {
         this.waitForProvisionCorrelationToBeUpdatedThreadSleepingTime = waitForProvisionCorrelationToBeUpdatedThreadSleepingTime;
     }
 

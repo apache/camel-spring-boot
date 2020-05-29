@@ -50,9 +50,9 @@ public class YammerComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
-     * Delay between polling in millis
+     * Delay between polling in millis. The option is a long type.
      */
-    private Long delay = 5000L;
+    private String delay = "5000";
     /**
      * Return only the specified number of messages. Works for threaded set to
      * true and threaded set to extended.
@@ -142,11 +142,11 @@ public class YammerComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public Long getDelay() {
+    public String getDelay() {
         return delay;
     }
 
-    public void setDelay(Long delay) {
+    public void setDelay(String delay) {
         this.delay = delay;
     }
 

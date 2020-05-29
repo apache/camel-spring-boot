@@ -17,7 +17,7 @@ When using consul with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 86 options, which are listed below.
+The component supports 95 options, which are listed below.
 
 
 
@@ -32,7 +32,7 @@ The component supports 86 options, which are listed below.
 | *camel.component.consul.cluster.service.acl-token* |  |  | String
 | *camel.component.consul.cluster.service.attributes* | Custom service attributes. |  | Map
 | *camel.component.consul.cluster.service.block-seconds* |  |  | Integer
-| *camel.component.consul.cluster.service.connect-timeout-millis* |  |  | Long
+| *camel.component.consul.cluster.service.connect-timeout* |  |  | Duration
 | *camel.component.consul.cluster.service.consistency-mode* |  |  | ConsistencyMode
 | *camel.component.consul.cluster.service.datacenter* |  |  | String
 | *camel.component.consul.cluster.service.enabled* | Sets if the consul cluster service should be enabled or not, default is false. | false | Boolean
@@ -43,7 +43,7 @@ The component supports 86 options, which are listed below.
 | *camel.component.consul.cluster.service.order* | Service lookup order/priority. |  | Integer
 | *camel.component.consul.cluster.service.password* |  |  | String
 | *camel.component.consul.cluster.service.ping-instance* |  |  | Boolean
-| *camel.component.consul.cluster.service.read-timeout-millis* |  |  | Long
+| *camel.component.consul.cluster.service.read-timeout* |  |  | Duration
 | *camel.component.consul.cluster.service.recursive* |  |  | Boolean
 | *camel.component.consul.cluster.service.root-path* |  |  | String
 | *camel.component.consul.cluster.service.session-lock-delay* |  |  | Integer
@@ -53,9 +53,9 @@ The component supports 86 options, which are listed below.
 | *camel.component.consul.cluster.service.tags* |  |  | Set
 | *camel.component.consul.cluster.service.url* |  |  | String
 | *camel.component.consul.cluster.service.user-name* |  |  | String
-| *camel.component.consul.cluster.service.write-timeout-millis* |  |  | Long
+| *camel.component.consul.cluster.service.write-timeout* |  |  | Duration
 | *camel.component.consul.configuration* | Consul configuration. The option is a org.apache.camel.component.consul.ConsulConfiguration type. |  | String
-| *camel.component.consul.connect-timeout-millis* | Connect timeout for OkHttpClient |  | Long
+| *camel.component.consul.connect-timeout* | Connect timeout for OkHttpClient. The option is a java.time.Duration type. |  | String
 | *camel.component.consul.consistency-mode* | The consistencyMode used for queries, default ConsistencyMode.DEFAULT |  | ConsistencyMode
 | *camel.component.consul.consul-client* | Reference to a com.orbitz.consul.Consul in the registry. The option is a com.orbitz.consul.Consul type. |  | String
 | *camel.component.consul.datacenter* | The data center |  | String
@@ -72,14 +72,14 @@ The component supports 86 options, which are listed below.
 | *camel.component.consul.node-meta* | The note meta-data to use for queries. |  | List
 | *camel.component.consul.password* | Sets the password to be used for basic authentication |  | String
 | *camel.component.consul.ping-instance* | Configure if the AgentClient should attempt a ping before returning the Consul instance | true | Boolean
-| *camel.component.consul.read-timeout-millis* | Read timeout for OkHttpClient |  | Long
+| *camel.component.consul.read-timeout* | Read timeout for OkHttpClient. The option is a java.time.Duration type. |  | String
 | *camel.component.consul.recursive* | Recursively watch, default false | false | Boolean
 | *camel.component.consul.service-registry.acl-token* |  |  | String
 | *camel.component.consul.service-registry.attributes* | Custom service attributes. |  | Map
 | *camel.component.consul.service-registry.block-seconds* |  |  | Integer
 | *camel.component.consul.service-registry.check-interval* |  |  | Integer
 | *camel.component.consul.service-registry.check-ttl* |  |  | Integer
-| *camel.component.consul.service-registry.connect-timeout-millis* |  |  | Long
+| *camel.component.consul.service-registry.connect-timeout* |  |  | Duration
 | *camel.component.consul.service-registry.consistency-mode* |  |  | ConsistencyMode
 | *camel.component.consul.service-registry.datacenter* |  |  | String
 | *camel.component.consul.service-registry.deregister-after* |  |  | Integer
@@ -93,22 +93,31 @@ The component supports 86 options, which are listed below.
 | *camel.component.consul.service-registry.override-service-host* |  |  | Boolean
 | *camel.component.consul.service-registry.password* |  |  | String
 | *camel.component.consul.service-registry.ping-instance* |  |  | Boolean
-| *camel.component.consul.service-registry.read-timeout-millis* |  |  | Long
+| *camel.component.consul.service-registry.read-timeout* |  |  | Duration
 | *camel.component.consul.service-registry.recursive* |  |  | Boolean
 | *camel.component.consul.service-registry.service-host* |  |  | String
 | *camel.component.consul.service-registry.ssl-context-parameters* |  |  | SSLContextParameters
 | *camel.component.consul.service-registry.tags* |  |  | Set
 | *camel.component.consul.service-registry.url* |  |  | String
 | *camel.component.consul.service-registry.user-name* |  |  | String
-| *camel.component.consul.service-registry.write-timeout-millis* |  |  | Long
+| *camel.component.consul.service-registry.write-timeout* |  |  | Duration
 | *camel.component.consul.ssl-context-parameters* | SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
 | *camel.component.consul.tags* | Set tags. You can separate multiple tags by comma. |  | String
 | *camel.component.consul.url* | The Consul agent URL |  | String
 | *camel.component.consul.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 | *camel.component.consul.user-name* | Sets the username to be used for basic authentication |  | String
 | *camel.component.consul.value-as-string* | Default to transform values retrieved from Consul i.e. on KV endpoint to string. | false | Boolean
-| *camel.component.consul.write-timeout-millis* | Write timeout for OkHttpClient |  | Long
+| *camel.component.consul.write-timeout* | Write timeout for OkHttpClient. The option is a java.time.Duration type. |  | String
+| *camel.component.consul.cluster.service.connect-timeout-millis* | *Deprecated*  |  | Long
 | *camel.component.consul.cluster.service.dc* | *Deprecated*  |  | String
+| *camel.component.consul.cluster.service.read-timeout-millis* | *Deprecated*  |  | Long
+| *camel.component.consul.cluster.service.write-timeout-millis* | *Deprecated*  |  | Long
+| *camel.component.consul.connect-timeout-millis* | *Deprecated* Connect timeout for OkHttpClient. Deprecation note: Use connectTimeout instead |  | Long
+| *camel.component.consul.read-timeout-millis* | *Deprecated* Read timeout for OkHttpClient. Deprecation note: Use readTimeout instead |  | Long
+| *camel.component.consul.service-registry.connect-timeout-millis* | *Deprecated*  |  | Long
 | *camel.component.consul.service-registry.dc* | *Deprecated*  |  | String
+| *camel.component.consul.service-registry.read-timeout-millis* | *Deprecated*  |  | Long
+| *camel.component.consul.service-registry.write-timeout-millis* | *Deprecated*  |  | Long
+| *camel.component.consul.write-timeout-millis* | *Deprecated* Write timeout for OkHttpClient. Deprecation note: Use writeTimeout instead |  | Long
 |===
 // spring-boot-auto-configure options: END

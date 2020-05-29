@@ -89,9 +89,9 @@ public class AtomixMultiMapComponentConfiguration
      */
     private String transportClassName = "io.atomix.catalyst.transport.netty.NettyTransport";
     /**
-     * The resource ttl.
+     * The resource ttl. The option is a long type.
      */
-    private Long ttl;
+    private String ttl;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -198,11 +198,11 @@ public class AtomixMultiMapComponentConfiguration
         this.transportClassName = transportClassName;
     }
 
-    public Long getTtl() {
+    public String getTtl() {
         return ttl;
     }
 
-    public void setTtl(Long ttl) {
+    public void setTtl(String ttl) {
         this.ttl = ttl;
     }
 

@@ -63,9 +63,9 @@ public class SalesforceComponentConfiguration
     private String apiVersion = "34.0";
     /**
      * Backoff interval increment for Streaming connection restart attempts for
-     * failures beyond CometD auto-reconnect.
+     * failures beyond CometD auto-reconnect. The option is a long type.
      */
-    private Long backoffIncrement = 1000L;
+    private String backoffIncrement = "1000";
     /**
      * Bulk API Batch ID
      */
@@ -125,9 +125,9 @@ public class SalesforceComponentConfiguration
     private Integer limit;
     /**
      * Maximum backoff interval for Streaming connection restart attempts for
-     * failures beyond CometD auto-reconnect.
+     * failures beyond CometD auto-reconnect. The option is a long type.
      */
-    private Long maxBackoff = 30000L;
+    private String maxBackoff = "30000";
     /**
      * Sets the behaviour of 404 not found status received from Salesforce API.
      * Should the body be set to NULL NotFoundBehaviour#NULL or should a
@@ -441,11 +441,11 @@ public class SalesforceComponentConfiguration
         this.apiVersion = apiVersion;
     }
 
-    public Long getBackoffIncrement() {
+    public String getBackoffIncrement() {
         return backoffIncrement;
     }
 
-    public void setBackoffIncrement(Long backoffIncrement) {
+    public void setBackoffIncrement(String backoffIncrement) {
         this.backoffIncrement = backoffIncrement;
     }
 
@@ -553,11 +553,11 @@ public class SalesforceComponentConfiguration
         this.limit = limit;
     }
 
-    public Long getMaxBackoff() {
+    public String getMaxBackoff() {
         return maxBackoff;
     }
 
-    public void setMaxBackoff(Long maxBackoff) {
+    public void setMaxBackoff(String maxBackoff) {
         this.maxBackoff = maxBackoff;
     }
 

@@ -82,13 +82,14 @@ public class DebeziumPostgresComponentConfiguration
      * Maximum number of milliseconds to wait for records to flush and partition
      * offset data to be committed to offset storage before cancelling the
      * process and restoring the offset data to be committed in a future
-     * attempt. The default is 5 seconds.
+     * attempt. The default is 5 seconds. The option is a long type.
      */
-    private Long offsetCommitTimeoutMs = 5000L;
+    private String offsetCommitTimeoutMs = "5s";
     /**
-     * Interval at which to try committing offsets. The default is 1 minute.
+     * Interval at which to try committing offsets. The default is 1 minute. The
+     * option is a long type.
      */
-    private Long offsetFlushIntervalMs = 60000L;
+    private String offsetFlushIntervalMs = "60s";
     /**
      * The name of the Java class that is responsible for persistence of
      * connector offsets.
@@ -508,19 +509,19 @@ public class DebeziumPostgresComponentConfiguration
         this.offsetCommitPolicy = offsetCommitPolicy;
     }
 
-    public Long getOffsetCommitTimeoutMs() {
+    public String getOffsetCommitTimeoutMs() {
         return offsetCommitTimeoutMs;
     }
 
-    public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
+    public void setOffsetCommitTimeoutMs(String offsetCommitTimeoutMs) {
         this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
     }
 
-    public Long getOffsetFlushIntervalMs() {
+    public String getOffsetFlushIntervalMs() {
         return offsetFlushIntervalMs;
     }
 
-    public void setOffsetFlushIntervalMs(Long offsetFlushIntervalMs) {
+    public void setOffsetFlushIntervalMs(String offsetFlushIntervalMs) {
         this.offsetFlushIntervalMs = offsetFlushIntervalMs;
     }
 
