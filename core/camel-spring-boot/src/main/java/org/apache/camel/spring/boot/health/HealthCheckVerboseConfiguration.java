@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.health;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+// TODO: Move to actuate/health
 @ConfigurationProperties("management.info.camel")
 public class HealthCheckVerboseConfiguration {
     /**

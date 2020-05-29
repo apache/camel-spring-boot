@@ -25,16 +25,6 @@ public abstract class AbstractHealthCheckConfiguration {
     private Boolean enabled;
 
     /**
-     * Set the check interval.
-     */
-    private String interval;
-
-    /**
-     * Set the number of failure before reporting the service as un-healthy.
-     */
-    private Integer failureThreshold;
-
-    /**
      * Set if the check associated to this configuration is enabled or not.
      */
     public Boolean isEnabled() {
@@ -48,36 +38,12 @@ public abstract class AbstractHealthCheckConfiguration {
         this.enabled = enabled;
     }
 
-    public String getInterval() {
-        return interval;
-    }
-
-    /**
-     * Set the check interval.
-     */
-    public void setInterval(String interval) {
-        this.interval = interval;
-    }
-
-    public Integer getFailureThreshold() {
-        return failureThreshold;
-    }
-
-    /**
-     * Set the number of failure before reporting the service as un-healthy.
-     */
-    public void setFailureThreshold(Integer failureThreshold) {
-        this.failureThreshold = failureThreshold;
-    }
-
     /**
      * Convert this configuration to a {@link HealthCheckConfiguration} using default values.
      */
     public HealthCheckConfiguration asHealthCheckConfiguration() {
         return HealthCheckConfiguration.builder()
             .enabled(this.isEnabled())
-            .interval(this.getInterval())
-            .failureThreshold(this.getFailureThreshold())
             .build();
     }
 }
