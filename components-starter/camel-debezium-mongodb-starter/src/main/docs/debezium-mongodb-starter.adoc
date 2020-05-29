@@ -30,8 +30,8 @@ The component supports 44 options, which are listed below.
 | *camel.component.debezium-mongodb.collection-blacklist* | Description is not available here, please check Debezium website for corresponding key 'collection.blacklist' description. |  | String
 | *camel.component.debezium-mongodb.collection-whitelist* | The collections for which changes are to be captured |  | String
 | *camel.component.debezium-mongodb.configuration* | Allow pre-configured Configurations to be set. The option is a org.apache.camel.component.debezium.configuration.MongoDbConnectorEmbeddedDebeziumConfiguration type. |  | String
-| *camel.component.debezium-mongodb.connect-backoff-initial-delay-ms* | The initial delay when trying to reconnect to a primary after a connection cannot be made or when no primary is available. Defaults to 1 second (1000 ms). | 1000 | Long
-| *camel.component.debezium-mongodb.connect-backoff-max-delay-ms* | The maximum delay when trying to reconnect to a primary after a connection cannot be made or when no primary is available. Defaults to 120 second (120,000 ms). | 120000 | Long
+| *camel.component.debezium-mongodb.connect-backoff-initial-delay-ms* | The initial delay when trying to reconnect to a primary after a connection cannot be made or when no primary is available. Defaults to 1 second (1000 ms). The option is a long type. | 1s | String
+| *camel.component.debezium-mongodb.connect-backoff-max-delay-ms* | The maximum delay when trying to reconnect to a primary after a connection cannot be made or when no primary is available. Defaults to 120 second (120,000 ms). The option is a long type. | 120s | String
 | *camel.component.debezium-mongodb.connect-max-attempts* | Maximum number of failed connection attempts to a replica set primary before an exception occurs and task is aborted. Defaults to 16, which with the defaults for 'connect.backoff.initial.delay.ms' and 'connect.backoff.max.delay.ms' results in just over 20 minutes of attempts before failing. | 16 | Integer
 | *camel.component.debezium-mongodb.database-blacklist* | The databases for which changes are to be excluded |  | String
 | *camel.component.debezium-mongodb.database-history-file-filename* | The path to the file that will be used to record the database history |  | String
@@ -39,7 +39,7 @@ The component supports 44 options, which are listed below.
 | *camel.component.debezium-mongodb.enabled* | Whether to enable auto configuration of the debezium-mongodb component. This is enabled by default. |  | Boolean
 | *camel.component.debezium-mongodb.field-blacklist* | Description is not available here, please check Debezium website for corresponding key 'field.blacklist' description. |  | String
 | *camel.component.debezium-mongodb.field-renames* | Description is not available here, please check Debezium website for corresponding key 'field.renames' description. |  | String
-| *camel.component.debezium-mongodb.heartbeat-interval-ms* | Length of an interval in milli-seconds in in which the connector periodically sends heartbeat messages to a heartbeat topic. Use 0 to disable heartbeat messages. Disabled by default. | 0 | Integer
+| *camel.component.debezium-mongodb.heartbeat-interval-ms* | Length of an interval in milli-seconds in in which the connector periodically sends heartbeat messages to a heartbeat topic. Use 0 to disable heartbeat messages. Disabled by default. The option is a int type. | 0s | String
 | *camel.component.debezium-mongodb.heartbeat-topics-prefix* | The prefix that is used to name heartbeat topics.Defaults to __debezium-heartbeat. | __debezium-heartbeat | String
 | *camel.component.debezium-mongodb.initial-sync-max-threads* | Maximum number of threads used to perform an initial sync of the collections in a replica set. Defaults to 1. | 1 | Integer
 | *camel.component.debezium-mongodb.internal-key-converter* | The Converter class that should be used to serialize and deserialize key data for offsets. The default is JSON converter. | org.apache.kafka.connect.json.JsonConverter | String
@@ -61,9 +61,9 @@ The component supports 44 options, which are listed below.
 | *camel.component.debezium-mongodb.offset-storage-partitions* | The number of partitions used when creating the offset storage topic. Required when offset.storage is set to the 'KafkaOffsetBackingStore'. |  | Integer
 | *camel.component.debezium-mongodb.offset-storage-replication-factor* | Replication factor used when creating the offset storage topic. Required when offset.storage is set to the KafkaOffsetBackingStore |  | Integer
 | *camel.component.debezium-mongodb.offset-storage-topic* | The name of the Kafka topic where offsets are to be stored. Required when offset.storage is set to the KafkaOffsetBackingStore. |  | String
-| *camel.component.debezium-mongodb.poll-interval-ms* | Frequency in milliseconds to wait for new change events to appear after receiving no events. Defaults to 500ms. | 500 | Long
+| *camel.component.debezium-mongodb.poll-interval-ms* | Frequency in milliseconds to wait for new change events to appear after receiving no events. Defaults to 500ms. The option is a long type. | 0.5s | String
 | *camel.component.debezium-mongodb.skipped-operations* | The comma-separated list of operations to skip during streaming, defined as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no operations will be skipped. |  | String
-| *camel.component.debezium-mongodb.snapshot-delay-ms* | The number of milliseconds to delay before a snapshot will begin. | 0 | Long
+| *camel.component.debezium-mongodb.snapshot-delay-ms* | The number of milliseconds to delay before a snapshot will begin. The option is a long type. | 0s | String
 | *camel.component.debezium-mongodb.snapshot-fetch-size* | The maximum number of records that should be loaded into memory while performing a snapshot |  | Integer
 | *camel.component.debezium-mongodb.snapshot-mode* | The criteria for running a snapshot upon startup of the connector. Options include: 'initial' (the default) to specify the connector should always perform an initial sync when required; 'never' to specify the connector should never perform an initial sync | initial | String
 | *camel.component.debezium-mongodb.source-struct-version* | A version of the format of the publicly visible source part in the message | v2 | String
