@@ -717,7 +717,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 prop.getField().getJavaDoc().setFullText(desc);
             }
             if (!isBlank(option.getDefaultValue())) {
-                if ("java.lang.String".equals(option.getJavaType())) {
+                if ("java.lang.String".equals(option.getJavaType()) || "duration".equals(option.getType())) {
                     prop.getField().setStringInitializer(option.getDefaultValue().toString());
                 } else if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
                     // the value should be a Long number
@@ -754,7 +754,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             return false;
         }
         // all the object types are complex
-        return "object".equals(option.getType());
+        return "object".equals(option.getType()) || "duration".equals(option.getType());
     }
 
     private boolean isComplexType(DataFormatOptionModel option) {
