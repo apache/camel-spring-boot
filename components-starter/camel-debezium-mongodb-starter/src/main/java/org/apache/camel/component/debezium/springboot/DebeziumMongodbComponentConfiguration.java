@@ -84,11 +84,11 @@ public class DebeziumMongodbComponentConfiguration
      * process and restoring the offset data to be committed in a future
      * attempt. The default is 5 seconds.
      */
-    private Long offsetCommitTimeoutMs = 5000L;
+    private Long offsetCommitTimeoutMs = 5sL;
     /**
      * Interval at which to try committing offsets. The default is 1 minute.
      */
-    private Long offsetFlushIntervalMs = 60000L;
+    private Long offsetFlushIntervalMs = 60sL;
     /**
      * The name of the Java class that is responsible for persistence of
      * connector offsets.

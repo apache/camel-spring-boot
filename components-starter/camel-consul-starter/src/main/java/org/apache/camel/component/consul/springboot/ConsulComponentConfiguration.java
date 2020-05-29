@@ -22,6 +22,7 @@ import com.orbitz.consul.option.ConsistencyMode;
 import org.apache.camel.component.consul.ConsulComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Integrate with Consul service discovery and configuration store.
@@ -40,8 +41,15 @@ public class ConsulComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Connect timeout for OkHttpClient
+     * Connect timeout for OkHttpClient. The option is a java.time.Duration
+     * type.
      */
+    private String connectTimeout;
+    /**
+     * Connect timeout for OkHttpClient. Deprecation note: Use connectTimeout
+     * instead
+     */
+    @Deprecated
     private Long connectTimeoutMillis;
     /**
      * Reference to a com.orbitz.consul.Consul in the registry. The option is a
@@ -58,8 +66,13 @@ public class ConsulComponentConfiguration
      */
     private Boolean pingInstance = true;
     /**
-     * Read timeout for OkHttpClient
+     * Read timeout for OkHttpClient. The option is a java.time.Duration type.
      */
+    private String readTimeout;
+    /**
+     * Read timeout for OkHttpClient. Deprecation note: Use readTimeout instead
+     */
+    @Deprecated
     private Long readTimeoutMillis;
     /**
      * Set tags. You can separate multiple tags by comma.
@@ -70,8 +83,14 @@ public class ConsulComponentConfiguration
      */
     private String url;
     /**
-     * Write timeout for OkHttpClient
+     * Write timeout for OkHttpClient. The option is a java.time.Duration type.
      */
+    private String writeTimeout;
+    /**
+     * Write timeout for OkHttpClient. Deprecation note: Use writeTimeout
+     * instead
+     */
+    @Deprecated
     private Long writeTimeoutMillis;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
@@ -164,10 +183,21 @@ public class ConsulComponentConfiguration
      */
     private Boolean recursive = false;
 
+    public String getConnectTimeout() {
+        return connectTimeout;
+    }
+
+    public void setConnectTimeout(String connectTimeout) {
+        this.connectTimeout = connectTimeout;
+    }
+
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Long getConnectTimeoutMillis() {
         return connectTimeoutMillis;
     }
 
+    @Deprecated
     public void setConnectTimeoutMillis(Long connectTimeoutMillis) {
         this.connectTimeoutMillis = connectTimeoutMillis;
     }
@@ -196,10 +226,21 @@ public class ConsulComponentConfiguration
         this.pingInstance = pingInstance;
     }
 
+    public String getReadTimeout() {
+        return readTimeout;
+    }
+
+    public void setReadTimeout(String readTimeout) {
+        this.readTimeout = readTimeout;
+    }
+
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Long getReadTimeoutMillis() {
         return readTimeoutMillis;
     }
 
+    @Deprecated
     public void setReadTimeoutMillis(Long readTimeoutMillis) {
         this.readTimeoutMillis = readTimeoutMillis;
     }
@@ -220,10 +261,21 @@ public class ConsulComponentConfiguration
         this.url = url;
     }
 
+    public String getWriteTimeout() {
+        return writeTimeout;
+    }
+
+    public void setWriteTimeout(String writeTimeout) {
+        this.writeTimeout = writeTimeout;
+    }
+
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Long getWriteTimeoutMillis() {
         return writeTimeoutMillis;
     }
 
+    @Deprecated
     public void setWriteTimeoutMillis(Long writeTimeoutMillis) {
         this.writeTimeoutMillis = writeTimeoutMillis;
     }
