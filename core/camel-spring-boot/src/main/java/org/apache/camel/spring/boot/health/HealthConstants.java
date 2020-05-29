@@ -19,7 +19,6 @@ package org.apache.camel.spring.boot.health;
 public interface HealthConstants {
     String HEALTH_PREFIX = "camel.health";
     String HEALTH_INDICATOR_PREFIX = "camel.health.indicator";
-    String HEALTH_CHECK_SERVICE_PREFIX = "camel.health.check.service";
     String HEALTH_CHECK_INDICATOR_PREFIX = "camel.health.check.indicator";
     String HEALTH_CHECK_ROUTES_PREFIX = "camel.health.check.routes";
 }
