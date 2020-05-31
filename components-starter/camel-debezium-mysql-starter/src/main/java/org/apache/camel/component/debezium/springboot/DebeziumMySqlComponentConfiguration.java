@@ -149,14 +149,14 @@ public class DebeziumMySqlComponentConfiguration
     private Boolean connectKeepAlive = true;
     /**
      * Interval in milliseconds to wait for connection checking if keep alive
-     * thread is used.
+     * thread is used. The option is a long type.
      */
-    private Long connectKeepAliveIntervalMs = 60000L;
+    private String connectKeepAliveIntervalMs = "60s";
     /**
      * Maximum time in milliseconds to wait after trying to connect to the
-     * database before timing out.
+     * database before timing out. The option is a int type.
      */
-    private Integer connectTimeoutMs = 30000;
+    private String connectTimeoutMs = "30s";
     /**
      * Description is not available here, please check Debezium website for
      * corresponding key 'database.blacklist' description.
@@ -187,9 +187,9 @@ public class DebeziumMySqlComponentConfiguration
     private Integer databaseHistoryKafkaRecoveryAttempts = 100;
     /**
      * The number of milliseconds to wait while polling for persisted data
-     * during recovery.
+     * during recovery. The option is a int type.
      */
-    private Integer databaseHistoryKafkaRecoveryPollIntervalMs = 100;
+    private String databaseHistoryKafkaRecoveryPollIntervalMs = "0.1s";
     /**
      * The name of the topic for the database schema history
      */
@@ -365,9 +365,10 @@ public class DebeziumMySqlComponentConfiguration
     /**
      * Length of an interval in milli-seconds in in which the connector
      * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
-     * disable heartbeat messages. Disabled by default.
+     * disable heartbeat messages. Disabled by default. The option is a int
+     * type.
      */
-    private Integer heartbeatIntervalMs = 0;
+    private String heartbeatIntervalMs = "0s";
     /**
      * The prefix that is used to name heartbeat topics.Defaults to
      * __debezium-heartbeat.
@@ -425,13 +426,14 @@ public class DebeziumMySqlComponentConfiguration
     private String messageKeyColumns;
     /**
      * Frequency in milliseconds to wait for new change events to appear after
-     * receiving no events. Defaults to 500ms.
+     * receiving no events. Defaults to 500ms. The option is a long type.
      */
-    private Long pollIntervalMs = 500L;
+    private String pollIntervalMs = "0.5s";
     /**
-     * The number of milliseconds to delay before a snapshot will begin.
+     * The number of milliseconds to delay before a snapshot will begin. The
+     * option is a long type.
      */
-    private Long snapshotDelayMs = 0L;
+    private String snapshotDelayMs = "0s";
     /**
      * The maximum number of records that should be loaded into memory while
      * performing a snapshot
@@ -680,19 +682,19 @@ public class DebeziumMySqlComponentConfiguration
         this.connectKeepAlive = connectKeepAlive;
     }
 
-    public Long getConnectKeepAliveIntervalMs() {
+    public String getConnectKeepAliveIntervalMs() {
         return connectKeepAliveIntervalMs;
     }
 
-    public void setConnectKeepAliveIntervalMs(Long connectKeepAliveIntervalMs) {
+    public void setConnectKeepAliveIntervalMs(String connectKeepAliveIntervalMs) {
         this.connectKeepAliveIntervalMs = connectKeepAliveIntervalMs;
     }
 
-    public Integer getConnectTimeoutMs() {
+    public String getConnectTimeoutMs() {
         return connectTimeoutMs;
     }
 
-    public void setConnectTimeoutMs(Integer connectTimeoutMs) {
+    public void setConnectTimeoutMs(String connectTimeoutMs) {
         this.connectTimeoutMs = connectTimeoutMs;
     }
 
@@ -739,12 +741,12 @@ public class DebeziumMySqlComponentConfiguration
         this.databaseHistoryKafkaRecoveryAttempts = databaseHistoryKafkaRecoveryAttempts;
     }
 
-    public Integer getDatabaseHistoryKafkaRecoveryPollIntervalMs() {
+    public String getDatabaseHistoryKafkaRecoveryPollIntervalMs() {
         return databaseHistoryKafkaRecoveryPollIntervalMs;
     }
 
     public void setDatabaseHistoryKafkaRecoveryPollIntervalMs(
-            Integer databaseHistoryKafkaRecoveryPollIntervalMs) {
+            String databaseHistoryKafkaRecoveryPollIntervalMs) {
         this.databaseHistoryKafkaRecoveryPollIntervalMs = databaseHistoryKafkaRecoveryPollIntervalMs;
     }
 
@@ -962,11 +964,11 @@ public class DebeziumMySqlComponentConfiguration
         this.gtidSourceIncludes = gtidSourceIncludes;
     }
 
-    public Integer getHeartbeatIntervalMs() {
+    public String getHeartbeatIntervalMs() {
         return heartbeatIntervalMs;
     }
 
-    public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
+    public void setHeartbeatIntervalMs(String heartbeatIntervalMs) {
         this.heartbeatIntervalMs = heartbeatIntervalMs;
     }
 
@@ -1027,19 +1029,19 @@ public class DebeziumMySqlComponentConfiguration
         this.messageKeyColumns = messageKeyColumns;
     }
 
-    public Long getPollIntervalMs() {
+    public String getPollIntervalMs() {
         return pollIntervalMs;
     }
 
-    public void setPollIntervalMs(Long pollIntervalMs) {
+    public void setPollIntervalMs(String pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
     }
 
-    public Long getSnapshotDelayMs() {
+    public String getSnapshotDelayMs() {
         return snapshotDelayMs;
     }
 
-    public void setSnapshotDelayMs(Long snapshotDelayMs) {
+    public void setSnapshotDelayMs(String snapshotDelayMs) {
         this.snapshotDelayMs = snapshotDelayMs;
     }
 
