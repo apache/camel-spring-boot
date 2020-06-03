@@ -157,7 +157,7 @@ public class DebeziumSqlserverComponentConfiguration
      * The number of milliseconds to wait while polling for persisted data
      * during recovery. The option is a int type.
      */
-    private String databaseHistoryKafkaRecoveryPollIntervalMs = "0.1s";
+    private String databaseHistoryKafkaRecoveryPollIntervalMs = "0,1s";
     /**
      * The name of the topic for the database schema history
      */
@@ -249,7 +249,7 @@ public class DebeziumSqlserverComponentConfiguration
      * Frequency in milliseconds to wait for new change events to appear after
      * receiving no events. Defaults to 500ms. The option is a long type.
      */
-    private String pollIntervalMs = "0.5s";
+    private String pollIntervalMs = "0,5s";
     /**
      * Enables transaction metadata extraction together with event counting
      */

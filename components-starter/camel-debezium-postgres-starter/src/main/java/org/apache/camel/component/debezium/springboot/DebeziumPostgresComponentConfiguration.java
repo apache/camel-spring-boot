@@ -294,7 +294,7 @@ public class DebeziumPostgresComponentConfiguration
      * Frequency in milliseconds to wait for new change events to appear after
      * receiving no events. Defaults to 500ms. The option is a long type.
      */
-    private String pollIntervalMs = "0.5s";
+    private String pollIntervalMs = "0,5s";
     /**
      * Enables transaction metadata extraction together with event counting
      */

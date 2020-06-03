@@ -238,7 +238,7 @@ public class DebeziumMongodbComponentConfiguration
      * Frequency in milliseconds to wait for new change events to appear after
      * receiving no events. Defaults to 500ms. The option is a long type.
      */
-    private String pollIntervalMs = "0.5s";
+    private String pollIntervalMs = "0,5s";
     /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no

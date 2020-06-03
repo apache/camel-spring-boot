@@ -61,7 +61,7 @@ The component supports 44 options, which are listed below.
 | *camel.component.debezium-mongodb.offset-storage-partitions* | The number of partitions used when creating the offset storage topic. Required when offset.storage is set to the 'KafkaOffsetBackingStore'. |  | Integer
 | *camel.component.debezium-mongodb.offset-storage-replication-factor* | Replication factor used when creating the offset storage topic. Required when offset.storage is set to the KafkaOffsetBackingStore |  | Integer
 | *camel.component.debezium-mongodb.offset-storage-topic* | The name of the Kafka topic where offsets are to be stored. Required when offset.storage is set to the KafkaOffsetBackingStore. |  | String
-| *camel.component.debezium-mongodb.poll-interval-ms* | Frequency in milliseconds to wait for new change events to appear after receiving no events. Defaults to 500ms. The option is a long type. | 0.5s | String
+| *camel.component.debezium-mongodb.poll-interval-ms* | Frequency in milliseconds to wait for new change events to appear after receiving no events. Defaults to 500ms. The option is a long type. | 0,5s | String
 | *camel.component.debezium-mongodb.skipped-operations* | The comma-separated list of operations to skip during streaming, defined as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no operations will be skipped. |  | String
 | *camel.component.debezium-mongodb.snapshot-delay-ms* | The number of milliseconds to delay before a snapshot will begin. The option is a long type. | 0s | String
 | *camel.component.debezium-mongodb.snapshot-fetch-size* | The maximum number of records that should be loaded into memory while performing a snapshot |  | Integer

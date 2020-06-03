@@ -34,7 +34,7 @@ The component supports 49 options, which are listed below.
 | *camel.component.debezium-sqlserver.database-history-file-filename* | The path to the file that will be used to record the database history |  | String
 | *camel.component.debezium-sqlserver.database-history-kafka-bootstrap-servers* | A list of host/port pairs that the connector will use for establishing the initial connection to the Kafka cluster for retrieving database schema history previously stored by the connector. This should point to the same Kafka cluster used by the Kafka Connect process. |  | String
 | *camel.component.debezium-sqlserver.database-history-kafka-recovery-attempts* | The number of attempts in a row that no data are returned from Kafka before recover completes. The maximum amount of time to wait after receiving no data is (recovery.attempts) x (recovery.poll.interval.ms). | 100 | Integer
-| *camel.component.debezium-sqlserver.database-history-kafka-recovery-poll-interval-ms* | The number of milliseconds to wait while polling for persisted data during recovery. The option is a int type. | 0.1s | String
+| *camel.component.debezium-sqlserver.database-history-kafka-recovery-poll-interval-ms* | The number of milliseconds to wait while polling for persisted data during recovery. The option is a int type. | 0,1s | String
 | *camel.component.debezium-sqlserver.database-history-kafka-topic* | The name of the topic for the database schema history |  | String
 | *camel.component.debezium-sqlserver.database-hostname* | Resolvable hostname or IP address of the SQL Server database server. |  | String
 | *camel.component.debezium-sqlserver.database-password* | Password of the SQL Server database user to be used when connecting to the database. |  | String
@@ -60,7 +60,7 @@ The component supports 49 options, which are listed below.
 | *camel.component.debezium-sqlserver.offset-storage-partitions* | The number of partitions used when creating the offset storage topic. Required when offset.storage is set to the 'KafkaOffsetBackingStore'. |  | Integer
 | *camel.component.debezium-sqlserver.offset-storage-replication-factor* | Replication factor used when creating the offset storage topic. Required when offset.storage is set to the KafkaOffsetBackingStore |  | Integer
 | *camel.component.debezium-sqlserver.offset-storage-topic* | The name of the Kafka topic where offsets are to be stored. Required when offset.storage is set to the KafkaOffsetBackingStore. |  | String
-| *camel.component.debezium-sqlserver.poll-interval-ms* | Frequency in milliseconds to wait for new change events to appear after receiving no events. Defaults to 500ms. The option is a long type. | 0.5s | String
+| *camel.component.debezium-sqlserver.poll-interval-ms* | Frequency in milliseconds to wait for new change events to appear after receiving no events. Defaults to 500ms. The option is a long type. | 0,5s | String
 | *camel.component.debezium-sqlserver.provide-transaction-metadata* | Enables transaction metadata extraction together with event counting | false | Boolean
 | *camel.component.debezium-sqlserver.snapshot-delay-ms* | The number of milliseconds to delay before a snapshot will begin. The option is a long type. | 0s | String
 | *camel.component.debezium-sqlserver.snapshot-fetch-size* | The maximum number of records that should be loaded into memory while performing a snapshot |  | Integer

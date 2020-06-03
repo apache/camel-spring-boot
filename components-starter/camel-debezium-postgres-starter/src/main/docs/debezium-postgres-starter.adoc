@@ -67,7 +67,7 @@ The component supports 68 options, which are listed below.
 | *camel.component.debezium-postgres.offset-storage-replication-factor* | Replication factor used when creating the offset storage topic. Required when offset.storage is set to the KafkaOffsetBackingStore |  | Integer
 | *camel.component.debezium-postgres.offset-storage-topic* | The name of the Kafka topic where offsets are to be stored. Required when offset.storage is set to the KafkaOffsetBackingStore. |  | String
 | *camel.component.debezium-postgres.plugin-name* | The name of the Postgres logical decoding plugin installed on the server. Supported values are 'decoderbufs' and 'wal2json'. Defaults to 'decoderbufs'. | decoderbufs | String
-| *camel.component.debezium-postgres.poll-interval-ms* | Frequency in milliseconds to wait for new change events to appear after receiving no events. Defaults to 500ms. The option is a long type. | 0.5s | String
+| *camel.component.debezium-postgres.poll-interval-ms* | Frequency in milliseconds to wait for new change events to appear after receiving no events. Defaults to 500ms. The option is a long type. | 0,5s | String
 | *camel.component.debezium-postgres.provide-transaction-metadata* | Enables transaction metadata extraction together with event counting | false | Boolean
 | *camel.component.debezium-postgres.publication-name* | The name of the Postgres 10 publication used for streaming changes from a plugin.Defaults to 'dbz_publication' | dbz_publication | String
 | *camel.component.debezium-postgres.schema-blacklist* | The schemas for which events must not be captured |  | String
