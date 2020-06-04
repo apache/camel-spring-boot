@@ -140,7 +140,7 @@ public class DebeziumMongodbComponentConfiguration
      * connection cannot be made or when no primary is available. Defaults to
      * 120 second (120,000 ms). The option is a long type.
      */
-    private String connectBackoffMaxDelayMs = "120s";
+    private String connectBackoffMaxDelayMs = "2m";
     /**
      * Maximum number of failed connection attempts to a replica set primary
      * before an exception occurs and task is aborted. Defaults to 16, which
@@ -177,7 +177,7 @@ public class DebeziumMongodbComponentConfiguration
      * disable heartbeat messages. Disabled by default. The option is a int
      * type.
      */
-    private String heartbeatIntervalMs = "0s";
+    private String heartbeatIntervalMs = "0ms";
     /**
      * The prefix that is used to name heartbeat topics.Defaults to
      * __debezium-heartbeat.
@@ -238,7 +238,7 @@ public class DebeziumMongodbComponentConfiguration
      * Frequency in milliseconds to wait for new change events to appear after
      * receiving no events. Defaults to 500ms. The option is a long type.
      */
-    private String pollIntervalMs = "0,5s";
+    private String pollIntervalMs = "500ms";
     /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no
@@ -249,7 +249,7 @@ public class DebeziumMongodbComponentConfiguration
      * The number of milliseconds to delay before a snapshot will begin. The
      * option is a long type.
      */
-    private String snapshotDelayMs = "0s";
+    private String snapshotDelayMs = "0ms";
     /**
      * The maximum number of records that should be loaded into memory while
      * performing a snapshot

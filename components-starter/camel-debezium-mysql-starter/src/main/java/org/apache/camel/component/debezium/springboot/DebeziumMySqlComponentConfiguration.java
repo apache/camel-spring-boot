@@ -151,7 +151,7 @@ public class DebeziumMySqlComponentConfiguration
      * Interval in milliseconds to wait for connection checking if keep alive
      * thread is used. The option is a long type.
      */
-    private String connectKeepAliveIntervalMs = "60s";
+    private String connectKeepAliveIntervalMs = "1m";
     /**
      * Maximum time in milliseconds to wait after trying to connect to the
      * database before timing out. The option is a int type.
@@ -189,7 +189,7 @@ public class DebeziumMySqlComponentConfiguration
      * The number of milliseconds to wait while polling for persisted data
      * during recovery. The option is a int type.
      */
-    private String databaseHistoryKafkaRecoveryPollIntervalMs = "0,1s";
+    private String databaseHistoryKafkaRecoveryPollIntervalMs = "100ms";
     /**
      * The name of the topic for the database schema history
      */
@@ -368,7 +368,7 @@ public class DebeziumMySqlComponentConfiguration
      * disable heartbeat messages. Disabled by default. The option is a int
      * type.
      */
-    private String heartbeatIntervalMs = "0s";
+    private String heartbeatIntervalMs = "0ms";
     /**
      * The prefix that is used to name heartbeat topics.Defaults to
      * __debezium-heartbeat.
@@ -428,12 +428,12 @@ public class DebeziumMySqlComponentConfiguration
      * Frequency in milliseconds to wait for new change events to appear after
      * receiving no events. Defaults to 500ms. The option is a long type.
      */
-    private String pollIntervalMs = "0,5s";
+    private String pollIntervalMs = "500ms";
     /**
      * The number of milliseconds to delay before a snapshot will begin. The
      * option is a long type.
      */
-    private String snapshotDelayMs = "0s";
+    private String snapshotDelayMs = "0ms";
     /**
      * The maximum number of records that should be loaded into memory while
      * performing a snapshot
