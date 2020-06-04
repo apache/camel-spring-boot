@@ -237,7 +237,7 @@ public class DebeziumPostgresComponentConfiguration
      * disable heartbeat messages. Disabled by default. The option is a int
      * type.
      */
-    private String heartbeatIntervalMs = "0s";
+    private String heartbeatIntervalMs = "0ms";
     /**
      * The prefix that is used to name heartbeat topics.Defaults to
      * __debezium-heartbeat.
@@ -294,7 +294,7 @@ public class DebeziumPostgresComponentConfiguration
      * Frequency in milliseconds to wait for new change events to appear after
      * receiving no events. Defaults to 500ms. The option is a long type.
      */
-    private String pollIntervalMs = "0,5s";
+    private String pollIntervalMs = "500ms";
     /**
      * Enables transaction metadata extraction together with event counting
      */
@@ -365,7 +365,7 @@ public class DebeziumPostgresComponentConfiguration
      * The number of milliseconds to delay before a snapshot will begin. The
      * option is a long type.
      */
-    private String snapshotDelayMs = "0s";
+    private String snapshotDelayMs = "0ms";
     /**
      * The maximum number of records that should be loaded into memory while
      * performing a snapshot
@@ -464,7 +464,7 @@ public class DebeziumPostgresComponentConfiguration
      * The default is set to 0 ms, which disables tracking xmin. The option is a
      * long type.
      */
-    private String xminFetchIntervalMs = "0s";
+    private String xminFetchIntervalMs = "0ms";
 
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
