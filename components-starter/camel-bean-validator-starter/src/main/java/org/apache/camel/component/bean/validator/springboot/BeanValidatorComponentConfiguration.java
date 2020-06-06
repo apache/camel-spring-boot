@@ -76,6 +76,11 @@ public class BeanValidatorComponentConfiguration
      * javax.validation.ValidationProviderResolver type.
      */
     private String validationProviderResolver;
+    /**
+     * To use a custom ValidatorFactory. The option is a
+     * javax.validation.ValidatorFactory type.
+     */
+    private String validatorFactory;
 
     public Boolean getIgnoreXmlConfiguration() {
         return ignoreXmlConfiguration;
@@ -131,5 +136,13 @@ public class BeanValidatorComponentConfiguration
 
     public void setValidationProviderResolver(String validationProviderResolver) {
         this.validationProviderResolver = validationProviderResolver;
+    }
+
+    public String getValidatorFactory() {
+        return validatorFactory;
+    }
+
+    public void setValidatorFactory(String validatorFactory) {
+        this.validatorFactory = validatorFactory;
     }
 }
