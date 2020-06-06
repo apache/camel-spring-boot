@@ -17,7 +17,7 @@ When using bean-validator with Spring Boot make sure to use the following Maven 
 ----
 
 
-The component supports 8 options, which are listed below.
+The component supports 9 options, which are listed below.
 
 
 
@@ -32,6 +32,6 @@ The component supports 8 options, which are listed below.
 | *camel.component.bean-validator.message-interpolator* | To use a custom MessageInterpolator. The option is a javax.validation.MessageInterpolator type. |  | String
 | *camel.component.bean-validator.traversable-resolver* | To use a custom TraversableResolver. The option is a javax.validation.TraversableResolver type. |  | String
 | *camel.component.bean-validator.validation-provider-resolver* | To use a a custom ValidationProviderResolver. The option is a javax.validation.ValidationProviderResolver type. |  | String
+| *camel.component.bean-validator.validator-factory* | To use a custom ValidatorFactory. The option is a javax.validation.ValidatorFactory type. |  | String
 |===
-
 // spring-boot-auto-configure options: END

@@ -4149,7 +4149,7 @@
       <dependency>
         <groupId>org.dizitart</groupId>
         <artifactId>nitrite</artifactId>
-        <version>3.4.1</version>
+        <version>3.4.2</version>
       </dependency>
       <dependency>
         <groupId>org.eclipse.rdf4j</groupId>
