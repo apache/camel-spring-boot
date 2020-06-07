@@ -16,8 +16,13 @@
  */
 package org.apache.camel.spring.boot.actuate.health;
 
+import java.util.Collection;
+import java.util.Map;
+
 import org.apache.camel.CamelContext;
-import org.apache.camel.spring.boot.health.HealthCheckVerboseConfiguration;
+import org.apache.camel.health.HealthCheck;
+import org.apache.camel.health.HealthCheckHelper;
+import org.apache.camel.impl.health.AbstractHealthCheck;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
@@ -25,37 +30,38 @@ import org.springframework.boot.actuate.health.HealthIndicator;
 /**
  * Camel {@link HealthIndicator}.
  */
-public class CamelHealthIndicator extends AbstractHealthIndicator {
+public class CamelHealthCheckIndicator extends AbstractHealthIndicator {
 
     private final CamelContext camelContext;
-    private final HealthCheckVerboseConfiguration properties;
 
-    public CamelHealthIndicator(CamelContext camelContext, HealthCheckVerboseConfiguration properties) {
+    public CamelHealthCheckIndicator(CamelContext camelContext) {
         this.camelContext = camelContext;
-        this.properties = properties;
     }
 
     @Override
     protected void doHealthCheck(Health.Builder builder) throws Exception {
-        if (camelContext == null) {
-            builder.unknown();
-        } else {
-            if (properties.isVerbose()) {
-                builder.withDetail("name", camelContext.getName());
-                builder.withDetail("version", camelContext.getVersion());
-            }
-            if (camelContext.getUptime() != null) {
-                builder.withDetail("uptime", camelContext.getUptime());
-                builder.withDetail("uptimeMillis", camelContext.getUptimeMillis());
-            }
-            builder.withDetail("status", camelContext.getStatus().name());
-            if (camelContext.getStatus().isStarted()) {
-                builder.up();
-            } else if (camelContext.getStatus().isStopped()) {
-                builder.down();
-            } else {
-                builder.unknown();
+        builder.withDetail("name", "camel-health-check");
+        builder.up();
+
+        if (camelContext != null) {
+            Collection<HealthCheck.Result> results = HealthCheckHelper.invoke(camelContext);
+
+            for (HealthCheck.Result result : results) {
+                Map<String, Object> details = result.getDetails();
+                boolean enabled = true;
+
+                if (details.containsKey(AbstractHealthCheck.CHECK_ENABLED)) {
+                    enabled = (boolean) details.get(AbstractHealthCheck.CHECK_ENABLED);
+                }
+
+                if (enabled) {
+                    builder.withDetail(result.getCheck().getId(), result.getState().name());
+                    if (result.getState() == HealthCheck.State.DOWN) {
+                        builder.down();
+                    }
+                }
             }
         }
     }
+
 }

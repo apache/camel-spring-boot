@@ -32,13 +32,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @EnableAutoConfiguration
 @SpringBootApplication
 @SpringBootTest(
-    classes = {CamelAutoConfiguration.class, CamelHealthAutoConfiguration.class, MyCamelRoute.class},
-    properties = {"management.info.camel.verbose = true"}
-    )
+    classes = {CamelAutoConfiguration.class, CamelHealthCheckAutoConfiguration.class, MyCamelRoute.class})
 public class CamelHealthTest extends Assert {
 
     @Autowired
-    CamelHealthIndicator indicator;
+    CamelHealthCheckIndicator indicator;
 
     @Autowired
     CamelContext camelContext;
@@ -50,12 +48,6 @@ public class CamelHealthTest extends Assert {
 
         String code = health.getStatus().getCode();
         assertEquals("UP", code);
-        
-        String version = (String) health.getDetails().get("version");
-        assertEquals(camelContext.getVersion(), version);
-        
-        String name = (String) health.getDetails().get("name");
-        assertEquals(camelContext.getName(), name);
     }
 
 }

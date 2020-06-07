@@ -18,7 +18,6 @@ package org.apache.camel.spring.boot.actuate.health;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.spring.boot.health.HealthCheckVerboseConfiguration;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -31,23 +30,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass({HealthIndicator.class})
 @ConditionalOnBean(CamelAutoConfiguration.class)
+@EnableConfigurationProperties(CamelHealthCheckConfigurationProperties.class)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
-@EnableConfigurationProperties(HealthCheckVerboseConfiguration.class)
-public class CamelHealthAutoConfiguration {
-
-    private HealthCheckVerboseConfiguration properties;
-
-    public CamelHealthAutoConfiguration(HealthCheckVerboseConfiguration configuration) {
-        this.properties = configuration;
-    }
+public class CamelHealthCheckAutoConfiguration {
 
     @ConditionalOnClass({CamelContext.class})
-    @ConditionalOnMissingBean(CamelHealthIndicator.class)
-    protected class CamelHealthIndicatorInitializer {
+    @ConditionalOnMissingBean(CamelHealthCheckIndicator.class)
+    protected class CamelHealthCheckIndicatorInitializer {
 
         @Bean
-        public HealthIndicator camelHealthIndicator(CamelContext camelContext) {
-            return new CamelHealthIndicator(camelContext, properties);
+        public HealthIndicator camelHealthCheckIndicator(CamelContext camelContext, CamelHealthCheckConfigurationProperties configuration) {
+            // TODO: use configuration to configure health-check
+            return new CamelHealthCheckIndicator(camelContext);
         }
 
     }
