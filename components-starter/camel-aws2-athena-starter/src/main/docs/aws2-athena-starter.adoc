@@ -1,0 +1,60 @@
+// spring-boot-auto-configure options: START
+:page-partial:
+:doctitle: Camel Spring Boot Starter for aws2-athena
+
+== Spring Boot Auto-Configuration
+
+When using aws2-athena with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-aws2-athena-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 30 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.component.aws2-athena.access-key* | Amazon AWS Access Key. |  | String
+| *camel.component.aws2-athena.amazon-athena-client* | The AmazonAthena instance to use as the client. The option is a software.amazon.awssdk.services.athena.AthenaClient type. |  | String
+| *camel.component.aws2-athena.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.aws2-athena.client-request-token* | A unique string to ensure issues queries are idempotent. It is unlikely you will need to set this. |  | String
+| *camel.component.aws2-athena.configuration* | The component configuration. The option is a org.apache.camel.component.aws2.athena.Athena2Configuration type. |  | String
+| *camel.component.aws2-athena.database* | The Athena database to use. |  | String
+| *camel.component.aws2-athena.delay* | Milliseconds before the next poll for query execution status. See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more. | 2000 | Long
+| *camel.component.aws2-athena.enabled* | Whether to enable auto configuration of the aws2-athena component. This is enabled by default. |  | Boolean
+| *camel.component.aws2-athena.encryption-option* | The encryption type to use when storing query results in S3. One of SSE_S3, SSE_KMS, or CSE_KMS. |  | EncryptionOption
+| *camel.component.aws2-athena.include-trace* | Include useful trace information at the beginning of queries as an SQL comment (prefixed with --). | false | Boolean
+| *camel.component.aws2-athena.initial-delay* | Milliseconds before the first poll for query execution status. See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more. | 1000 | Long
+| *camel.component.aws2-athena.kms-key* | For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. |  | String
+| *camel.component.aws2-athena.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.aws2-athena.max-attempts* | Maximum number of times to attempt a query. Set to 1 to disable retries. See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more. | 1 | Integer
+| *camel.component.aws2-athena.max-results* | Max number of results to return for the given operation (if supported by the Athena API endpoint). If not set, will use the Athena API default for the given operation. |  | Integer
+| *camel.component.aws2-athena.next-token* | Pagination token to use in the case where the response from the previous request was truncated. |  | String
+| *camel.component.aws2-athena.operation* | The Athena API function to call. |  | Athena2Operations
+| *camel.component.aws2-athena.output-location* | The location in Amazon S3 where query results are stored, such as s3://path/to/query/bucket/. Ensure this value ends with a forward slash ('/'). |  | String
+| *camel.component.aws2-athena.output-type* | How query results should be returned. One of StreamList (default - return a GetQueryResultsIterable that can page through all results), SelectList (returns at most 1,000 rows at a time, plus a NextToken value as a header than can be used for manual pagination of results), S3Pointer (return an S3 path pointing to the results). |  | Athena2OutputType
+| *camel.component.aws2-athena.proxy-host* | To define a proxy host when instantiating the Athena client. |  | String
+| *camel.component.aws2-athena.proxy-port* | To define a proxy port when instantiating the Athena client. |  | Integer
+| *camel.component.aws2-athena.proxy-protocol* | To define a proxy protocol when instantiating the Athena client. |  | Protocol
+| *camel.component.aws2-athena.query-execution-id* | The unique ID identifying the query execution. |  | String
+| *camel.component.aws2-athena.query-string* | The SQL query to run. Except for simple queries, prefer setting this as the body of the Exchange or as a header using Athena2Constants.QUERY_STRING to avoid having to deal with URL encoding issues. |  | String
+| *camel.component.aws2-athena.region* | The region in which Athena client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1). You'll need to use the name Region.EU_WEST_1.id(). |  | String
+| *camel.component.aws2-athena.reset-wait-timeout-on-retry* | Reset the waitTimeout countdown in the event of a query retry. If set to true, potential max time spent waiting for queries is equal to waitTimeout x maxAttempts. See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more. | true | Boolean
+| *camel.component.aws2-athena.retry* | Optional comma separated list of error types to retry the query for. Use 'retryable' to retry all retryable failure conditions (e.g. generic errors and resources exhausted), 'generic' to retry 'GENERIC_INTERNAL_ERROR' failures, 'exhausted' to retry queries that have exhausted resource limits, 'always' to always retry regardless of failure condition, or 'never' or null to never retry (default). See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more. | never | String
+| *camel.component.aws2-athena.secret-key* | Amazon AWS Secret Key. |  | String
+| *camel.component.aws2-athena.wait-timeout* | Optional max wait time in millis to wait for a successful query completion. See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more. | 0 | Long
+| *camel.component.aws2-athena.work-group* | The workgroup to use for running the query. |  | String
+|===
+
+
+// spring-boot-auto-configure options: END

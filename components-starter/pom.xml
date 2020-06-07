@@ -143,6 +143,7 @@
     <module>camel-aws-swf-starter</module>
     <module>camel-aws-translate-starter</module>
     <module>camel-aws-xray-starter</module>
+    <module>camel-aws2-athena-starter</module>
     <module>camel-aws2-cw-starter</module>
     <module>camel-aws2-ddb-starter</module>
     <module>camel-aws2-ec2-starter</module>
