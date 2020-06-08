@@ -413,6 +413,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-aws2-athena-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-cw-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2080,6 +2085,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws-xray</artifactId>
+        <version>3.4.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-aws2-athena</artifactId>
         <version>3.4.0-SNAPSHOT</version>
       </dependency>
       <dependency>

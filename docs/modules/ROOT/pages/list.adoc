@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 330 in 263 JAR artifacts (1 deprecated)
+Number of Camel components: 331 in 264 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -61,6 +61,9 @@ Number of Camel components: 330 in 263 JAR artifacts (1 deprecated)
 
 | link:https://camel.apache.org/components/latest/avro-component.html[Avro RPC] (camel-avro-rpc-starter) +
 `avro:transport:host:port/messageName` | 2.10 | Produce or consume Apache Avro RPC services.
+
+| link:https://camel.apache.org/components/latest/aws2-athena-component.html[AWS 2 Athena] (camel-aws2-athena-starter) +
+`aws2-athena:label` | 3.4 | Access AWS Athena service using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-cw-component.html[AWS 2 CloudWatch] (camel-aws2-cw-starter) +
 `aws2-cw:namespace` | 3.1 | Sending metrics to AWS CloudWatch using AWS SDK version 2.x.
