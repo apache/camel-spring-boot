@@ -132,6 +132,8 @@ public class CamelAutoConfiguration {
         // configure the common/default options
         DefaultConfigurationConfigurer.configure(camelContext, config);
         // lookup and configure SPI beans
+        DefaultConfigurationConfigurer.afterConfigure(camelContext);
+        // and call after all properties are set
         DefaultConfigurationConfigurer.afterPropertiesSet(camelContext);
 
         return camelContext;

@@ -16,75 +16,158 @@
  */
 package org.apache.camel.spring.boot.actuate.health;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.camel.health.HealthCheckConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.health")
 public class CamelHealthCheckConfigurationProperties {
 
     /**
-     * Global option to enable/disable Camel health check.
+     * Whether health check is enabled globally
      */
-    private boolean enabled = true;
+    private Boolean enabled;
 
     /**
-     * Option to enable/disable context health-check.
+     * Whether context health check is enabled
+     *
+     * Is default enabled
      */
-    private boolean contextEnabled = true;
+    private Boolean contextEnabled;
 
     /**
-     * Option to enable/disable routes health-check.
+     * Whether routes health check is enabled
+     *
+     * Is default enabled
      */
-    private boolean routesEnabled = true;
+    private Boolean routesEnabled;
 
     /**
-     * Option to enable/disable registry health-check.
+     * Whether registry health check is enabled
+     *
+     * Is default enabled
      */
-    private boolean registryEnabled = true;
+    private Boolean registryEnabled;
 
     /**
-     * Extended configuration for routes, registry or custom health checks
+     * Additional health check properties for fine grained configuration of health checks.
      */
-    private Map<String, String> parameters;
+    private Map<String, HealthCheckConfigurationProperties> config = new HashMap<>();
 
-    public boolean isEnabled() {
+    public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 
-    public boolean isContextEnabled() {
+    public Boolean getContextEnabled() {
         return contextEnabled;
     }
 
-    public void setContextEnabled(boolean contextEnabled) {
+    public void setContextEnabled(Boolean contextEnabled) {
         this.contextEnabled = contextEnabled;
     }
 
-    public boolean isRoutesEnabled() {
+    public Boolean getRoutesEnabled() {
         return routesEnabled;
     }
 
-    public void setRoutesEnabled(boolean routesEnabled) {
+    public void setRoutesEnabled(Boolean routesEnabled) {
         this.routesEnabled = routesEnabled;
     }
 
-    public boolean isRegistryEnabled() {
+    public Boolean getRegistryEnabled() {
         return registryEnabled;
     }
 
-    public void setRegistryEnabled(boolean registryEnabled) {
+    public void setRegistryEnabled(Boolean registryEnabled) {
         this.registryEnabled = registryEnabled;
     }
 
-    public Map<String, String> getParameters() {
-        return parameters;
+    public Map<String, HealthCheckConfigurationProperties> getConfig() {
+        return config;
     }
 
-    public void setParameters(Map<String, String> parameters) {
-        this.parameters = parameters;
+    public void setConfig(Map<String, HealthCheckConfigurationProperties> config) {
+        this.config = config;
+    }
+
+    @ConfigurationProperties(prefix = "camel.health.config")
+    public static class HealthCheckConfigurationProperties {
+
+        /**
+         * The id of the health check such as routes or registry (can use * as wildcard)
+         */
+        private String parent;
+
+        /**
+         * Set if the check associated to this configuration is enabled or not.
+         *
+         * Is default enabled.
+         */
+        private Boolean enabled;
+
+        /**
+         * Set the check interval in milli seconds.
+         */
+        private Long interval;
+
+        /**
+         * Set the number of failure before reporting the service as un-healthy.
+         */
+        private Integer failureThreshold;
+
+        public String getParent() {
+            return parent;
+        }
+
+        public void setParent(String parent) {
+            this.parent = parent;
+        }
+
+        public Boolean getEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(Boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public Long getInterval() {
+            return interval;
+        }
+
+        public void setInterval(Long interval) {
+            this.interval = interval;
+        }
+
+        public Integer getFailureThreshold() {
+            return failureThreshold;
+        }
+
+        public void setFailureThreshold(Integer failureThreshold) {
+            this.failureThreshold = failureThreshold;
+        }
+
+        public HealthCheckConfiguration toHealthCheckConfiguration() {
+            HealthCheckConfiguration answer = new HealthCheckConfiguration();
+            answer.setParent(parent);
+            if (enabled != null) {
+                answer.setEnabled(enabled);
+            }
+            if (interval != null) {
+                answer.setInterval(interval);
+            }
+            if (failureThreshold != null) {
+                answer.setFailureThreshold(failureThreshold);
+            }
+            return answer;
+        }
     }
 }
+
+
