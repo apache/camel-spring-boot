@@ -63,6 +63,8 @@ public class CamelHealthCheckAutoConfiguration {
                 LOG.warn("Cannot find HealthCheckRegistry from classpath. Add camel-health to classpath.");
                 return null;
             }
+            // lets signal we are integrated with spring boot
+            hcr.setId("camel-spring-boot");
 
             // configure camel health check
             // context is enabled by default
