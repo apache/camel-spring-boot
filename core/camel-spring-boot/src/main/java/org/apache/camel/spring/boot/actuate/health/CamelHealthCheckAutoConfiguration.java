@@ -48,7 +48,7 @@ public class CamelHealthCheckAutoConfiguration {
     @ConditionalOnMissingBean(CamelHealthCheckIndicator.class)
     protected class CamelHealthCheckIndicatorInitializer {
 
-        @Bean
+        @Bean(name = "camelHealth")
         public HealthIndicator camelHealthCheckIndicator(CamelContext camelContext, CamelHealthCheckConfigurationProperties config) {
             if (config != null && config.getEnabled() != null && !config.getEnabled()) {
                 // health check is disabled
@@ -122,7 +122,6 @@ public class CamelHealthCheckAutoConfiguration {
 
             return new CamelHealthCheckIndicator(camelContext);
         }
-
     }
 
 }
