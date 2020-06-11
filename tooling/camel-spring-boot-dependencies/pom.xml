@@ -2364,12 +2364,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-core</artifactId>
-        <version>3.4.0-SNAPSHOT</version>
-        <type>test-jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-core-catalog</artifactId>
         <version>3.4.0-SNAPSHOT</version>
       </dependency>
@@ -3022,12 +3016,6 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-management</artifactId>
         <version>3.4.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-management</artifactId>
-        <version>3.4.0-SNAPSHOT</version>
-        <type>test-jar</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -4196,12 +4184,6 @@
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-benchmark</artifactId>
         <version>7.38.0.Final</version>
-        <type>test-jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.optaplanner</groupId>
-        <artifactId>optaplanner-benchmark</artifactId>
-        <version>7.38.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
@@ -4214,12 +4196,6 @@
         <artifactId>optaplanner-core</artifactId>
         <version>7.38.0.Final</version>
         <classifier>sources</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.optaplanner</groupId>
-        <artifactId>optaplanner-core</artifactId>
-        <version>7.38.0.Final</version>
-        <type>test-jar</type>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
@@ -4252,12 +4228,6 @@
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
-        <artifactId>optaplanner-examples</artifactId>
-        <version>7.38.0.Final</version>
-        <type>test-jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-common</artifactId>
         <version>7.38.0.Final</version>
       </dependency>
@@ -4266,12 +4236,6 @@
         <artifactId>optaplanner-persistence-common</artifactId>
         <version>7.38.0.Final</version>
         <classifier>sources</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.optaplanner</groupId>
-        <artifactId>optaplanner-persistence-common</artifactId>
-        <version>7.38.0.Final</version>
-        <type>test-jar</type>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
@@ -4294,12 +4258,6 @@
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-jackson</artifactId>
         <version>7.38.0.Final</version>
-        <type>test-jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.optaplanner</groupId>
-        <artifactId>optaplanner-persistence-jackson</artifactId>
-        <version>7.38.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
@@ -4317,12 +4275,6 @@
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-jaxb</artifactId>
         <version>7.38.0.Final</version>
-        <type>test-jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.optaplanner</groupId>
-        <artifactId>optaplanner-persistence-jaxb</artifactId>
-        <version>7.38.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
@@ -4335,12 +4287,6 @@
         <artifactId>optaplanner-persistence-jpa</artifactId>
         <version>7.38.0.Final</version>
         <classifier>sources</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.optaplanner</groupId>
-        <artifactId>optaplanner-persistence-jpa</artifactId>
-        <version>7.38.0.Final</version>
-        <type>test-jar</type>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
@@ -4358,12 +4304,6 @@
         <artifactId>optaplanner-persistence-jsonb</artifactId>
         <version>7.38.0.Final</version>
         <classifier>sources</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.optaplanner</groupId>
-        <artifactId>optaplanner-persistence-jsonb</artifactId>
-        <version>7.38.0.Final</version>
-        <type>test-jar</type>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
@@ -4381,12 +4321,6 @@
         <artifactId>optaplanner-persistence-xstream</artifactId>
         <version>7.38.0.Final</version>
         <classifier>sources</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.optaplanner</groupId>
-        <artifactId>optaplanner-persistence-xstream</artifactId>
-        <version>7.38.0.Final</version>
-        <type>test-jar</type>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
@@ -4407,12 +4341,6 @@
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
-        <artifactId>optaplanner-spring-boot-autoconfigure</artifactId>
-        <version>7.38.0.Final</version>
-        <type>test-jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-spring-boot-starter</artifactId>
         <version>7.38.0.Final</version>
       </dependency>
@@ -4424,12 +4352,6 @@
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
-        <artifactId>optaplanner-spring-boot-starter</artifactId>
-        <version>7.38.0.Final</version>
-        <type>test-jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-test</artifactId>
         <version>7.38.0.Final</version>
       </dependency>
@@ -4438,12 +4360,6 @@
         <artifactId>optaplanner-test</artifactId>
         <version>7.38.0.Final</version>
         <classifier>sources</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.optaplanner</groupId>
-        <artifactId>optaplanner-test</artifactId>
-        <version>7.38.0.Final</version>
-        <type>test-jar</type>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
