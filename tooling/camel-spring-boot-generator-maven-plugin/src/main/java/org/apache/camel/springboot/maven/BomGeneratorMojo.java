@@ -177,8 +177,15 @@ public class BomGeneratorMojo extends AbstractMojo {
                             && dep.getArtifactId().endsWith("-starter"));
             getLog().debug(dep + (accept ? " included in the BOM" : " excluded from BOM"));
 
+            // skip test-jars
+            boolean testJar = dep.getType() != null && dep.getType().equals("test-jar");
+
             if (accept) {
-                outDependencies.add(dep);
+                if (testJar) {
+                    getLog().debug(dep + " test-jar excluded from BOM");
+                } else {
+                    outDependencies.add(dep);
+                }
             } else {
                 // lets log a WARN if some Camel JARs was excluded
                 if (dep.getGroupId().startsWith("org.apache.camel")) {
