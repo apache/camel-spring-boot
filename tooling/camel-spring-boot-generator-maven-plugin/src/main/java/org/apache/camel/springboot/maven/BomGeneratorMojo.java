@@ -179,10 +179,13 @@ public class BomGeneratorMojo extends AbstractMojo {
 
             // skip test-jars
             boolean testJar = dep.getType() != null && dep.getType().equals("test-jar");
+            boolean sourcesJar = dep.getClassifier() != null && dep.getClassifier().equals("sources");
 
             if (accept) {
                 if (testJar) {
                     getLog().debug(dep + " test-jar excluded from BOM");
+                } else if (sourcesJar) {
+                    getLog().debug(dep + " source-jar excluded from BOM");
                 } else {
                     outDependencies.add(dep);
                 }
