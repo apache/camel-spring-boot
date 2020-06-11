@@ -33,13 +33,11 @@ import org.springframework.context.annotation.Configuration;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 public class CamelThreadPoolAutoConfiguration {
 
-    @Autowired
-    private CamelContext camelContext;
-
     @Bean
-    public ThreadPoolProfile threadPool(CamelThreadPoolConfigurationProperties tp) {
+    public ThreadPoolProfile threadPool(CamelContext camelContext, CamelThreadPoolConfigurationProperties tp) {
         // okay we have all properties set so we should be able to create thread pool profiles and register them on camel
-        final ThreadPoolProfile dp = new ThreadPoolProfileBuilder("default")
+        ThreadPoolProfile defaultProfile = camelContext.getExecutorServiceManager().getDefaultThreadPoolProfile();
+        final ThreadPoolProfile dp = new ThreadPoolProfileBuilder("default", defaultProfile)
                 .poolSize(tp.getPoolSize())
                 .maxPoolSize(tp.getMaxPoolSize())
                 .keepAliveTime(tp.getKeepAliveTime(), tp.getTimeUnit())
@@ -47,18 +45,18 @@ public class CamelThreadPoolAutoConfiguration {
                 .allowCoreThreadTimeOut(tp.getAllowCoreThreadTimeOut())
                 .rejectedPolicy(tp.getRejectedPolicy()).build();
 
-        for (CamelThreadPoolConfigurationProperties.ThreadPoolProfileConfigurationProperties config : tp.getConfig().values()) {
-            ThreadPoolProfileBuilder builder = new ThreadPoolProfileBuilder(config.getId(), dp);
-            final ThreadPoolProfile tpp = builder.poolSize(config.getPoolSize())
-                    .maxPoolSize(config.getMaxPoolSize())
-                    .keepAliveTime(config.getKeepAliveTime(), config.getTimeUnit())
-                    .maxQueueSize(config.getMaxQueueSize())
-                    .allowCoreThreadTimeOut(config.getAllowCoreThreadTimeOut())
-                    .rejectedPolicy(config.getRejectedPolicy()).build();
+        tp.getConfig().forEach((k, v) -> {
+            ThreadPoolProfileBuilder builder = new ThreadPoolProfileBuilder(k, dp);
+            final ThreadPoolProfile tpp = builder.poolSize(v.getPoolSize())
+                    .maxPoolSize(v.getMaxPoolSize())
+                    .keepAliveTime(v.getKeepAliveTime(), v.getTimeUnit())
+                    .maxQueueSize(v.getMaxQueueSize())
+                    .allowCoreThreadTimeOut(v.getAllowCoreThreadTimeOut())
+                    .rejectedPolicy(v.getRejectedPolicy()).build();
             if (!tpp.isEmpty()) {
                 camelContext.getExecutorServiceManager().registerThreadPoolProfile(tpp);
             }
-        }
+        });
 
         if (!dp.isEmpty()) {
             dp.setDefaultProfile(true);
