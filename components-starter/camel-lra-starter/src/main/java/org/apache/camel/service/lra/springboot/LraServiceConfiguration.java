@@ -24,7 +24,7 @@ import static org.apache.camel.service.lra.LRAConstants.DEFAULT_LOCAL_PARTICIPAN
 /**
  * Spring-boot Auto-configuration for LRA service.
  */
-@ConfigurationProperties(prefix = "camel.service.lra")
+@ConfigurationProperties(prefix = "camel.lra")
 public class LraServiceConfiguration {
 
     /**

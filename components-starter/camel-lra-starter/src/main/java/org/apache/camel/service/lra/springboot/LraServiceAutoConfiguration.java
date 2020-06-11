@@ -27,8 +27,6 @@ import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
 import org.apache.camel.spring.boot.util.GroupCondition;
 import org.apache.camel.support.IntrospectionSupport;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -45,31 +43,25 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties({LraServiceConfiguration.class})
 public class LraServiceAutoConfiguration {
 
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(LraServiceAutoConfiguration.class);
-
     @Autowired
     private CamelContext camelContext;
 
-    @Autowired
-    private LraServiceConfiguration configuration;
-
-
     static class GroupConditions extends GroupCondition {
         public GroupConditions() {
-            super("camel.service", "camel.service.lra");
+            super("camel", "camel.lra");
         }
     }
 
     @Bean(name = "lra-service")
     @ConditionalOnMissingBean(CamelSagaService.class)
     @ConditionalOnProperty(value = "camel.service.lra.enabled", havingValue = "true")
-    public LRASagaService configureLraSagaService() throws Exception {
+    public LRASagaService configureLraSagaService(LraServiceConfiguration configuration) throws Exception {
         LRASagaService service = new LRASagaService();
 
-        Map<String, Object> parameters = new HashMap<>();
-        IntrospectionSupport.getProperties(configuration, parameters, null, false);
-        CamelPropertiesHelper.setCamelProperties(camelContext, service, parameters, false);
+        service.setCoordinatorUrl(configuration.getCoordinatorUrl());
+        service.setCoordinatorContextPath(configuration.getCoordinatorContextPath());
+        service.setLocalParticipantUrl(configuration.getLocalParticipantUrl());
+        service.setLocalParticipantContextPath(configuration.getLocalParticipantContextPath());
 
         camelContext.addService(service);
         return service;
