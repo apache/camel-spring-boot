@@ -92,7 +92,7 @@ When using spring-boot with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 149 options, which are listed below.
+The component supports 148 options, which are listed below.
 
 
 
@@ -247,7 +247,6 @@ The component supports 149 options, which are listed below.
 | *camel.threadpool.pool-size* | Sets the default core pool size (threads to keep minimum in pool) |  | Integer
 | *camel.threadpool.rejected-policy* | Sets the default handler for tasks which cannot be executed by the thread pool. |  | ThreadPoolRejectedPolicy
 | *camel.threadpool.time-unit* | Sets the default time unit used for keep alive time |  | TimeUnit
-| *management.info.camel.enabled* | Whether to enable Camel info. | true | Boolean
 |===
 // spring-boot-auto-configure options: END
 
