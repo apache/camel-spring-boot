@@ -34,7 +34,7 @@ Apache Camel ships
 a https://github.com/spring-projects/spring-boot/tree/master/spring-boot-project/spring-boot-starters[Spring
 Boot Starter] module that allows you to develop Spring Boot applications
 using starters. There is a
-https://github.com/apache/camel/tree/master/examples/camel-example-spring-boot[sample
+https://github.com/apache/camel-spring-boot-examples/tree/master/camel-example-spring-boot[sample
 application] in the source code also.
 
 To use the starter, add the following to your spring boot pom.xml file:
