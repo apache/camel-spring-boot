@@ -37,12 +37,6 @@ public class CMISComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use a custom CMISSessionFacadeFactory to create the CMISSessionFacade
-     * instances. The option is a
-     * org.apache.camel.component.cmis.CMISSessionFacadeFactory type.
-     */
-    private String sessionFacadeFactory;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -67,14 +61,12 @@ public class CMISComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-
-    public String getSessionFacadeFactory() {
-        return sessionFacadeFactory;
-    }
-
-    public void setSessionFacadeFactory(String sessionFacadeFactory) {
-        this.sessionFacadeFactory = sessionFacadeFactory;
-    }
+    /**
+     * To use a custom CMISSessionFacadeFactory to create the CMISSessionFacade
+     * instances. The option is a
+     * org.apache.camel.component.cmis.CMISSessionFacadeFactory type.
+     */
+    private String sessionFacadeFactory;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -98,5 +90,13 @@ public class CMISComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getSessionFacadeFactory() {
+        return sessionFacadeFactory;
+    }
+
+    public void setSessionFacadeFactory(String sessionFacadeFactory) {
+        this.sessionFacadeFactory = sessionFacadeFactory;
     }
 }

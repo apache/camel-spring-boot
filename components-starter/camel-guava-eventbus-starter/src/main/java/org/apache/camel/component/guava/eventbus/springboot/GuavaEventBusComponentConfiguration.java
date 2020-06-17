@@ -42,14 +42,6 @@ public class GuavaEventBusComponentConfiguration
      */
     private String eventBus;
     /**
-     * The interface with method(s) marked with the Subscribe annotation.
-     * Dynamic proxy will be created over the interface so it could be
-     * registered as the EventBus listener. Particularly useful when creating
-     * multi-event listeners and for handling DeadEvent properly. This option
-     * cannot be used together with eventClass option.
-     */
-    private Class<Object> listenerInterface;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -58,6 +50,14 @@ public class GuavaEventBusComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * The interface with method(s) marked with the Subscribe annotation.
+     * Dynamic proxy will be created over the interface so it could be
+     * registered as the EventBus listener. Particularly useful when creating
+     * multi-event listeners and for handling DeadEvent properly. This option
+     * cannot be used together with eventClass option.
+     */
+    private Class<Object> listenerInterface;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -83,20 +83,20 @@ public class GuavaEventBusComponentConfiguration
         this.eventBus = eventBus;
     }
 
-    public Class<Object> getListenerInterface() {
-        return listenerInterface;
-    }
-
-    public void setListenerInterface(Class<Object> listenerInterface) {
-        this.listenerInterface = listenerInterface;
-    }
-
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Class<Object> getListenerInterface() {
+        return listenerInterface;
+    }
+
+    public void setListenerInterface(Class<Object> listenerInterface) {
+        this.listenerInterface = listenerInterface;
     }
 
     public Boolean getLazyStartProducer() {

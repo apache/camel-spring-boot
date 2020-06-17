@@ -37,10 +37,6 @@ public class SlackComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The incoming webhook URL
-     */
-    private String webhookUrl;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -65,14 +61,10 @@ public class SlackComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-
-    public String getWebhookUrl() {
-        return webhookUrl;
-    }
-
-    public void setWebhookUrl(String webhookUrl) {
-        this.webhookUrl = webhookUrl;
-    }
+    /**
+     * The incoming webhook URL
+     */
+    private String webhookUrl;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -96,5 +88,13 @@ public class SlackComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getWebhookUrl() {
+        return webhookUrl;
+    }
+
+    public void setWebhookUrl(String webhookUrl) {
+        this.webhookUrl = webhookUrl;
     }
 }

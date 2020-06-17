@@ -37,18 +37,6 @@ public class HdfsComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the given configuration for security with JAAS. The option is a
-     * javax.security.auth.login.Configuration type.
-     */
-    private String jAASConfiguration;
-    /**
-     * To use kerberos authentication, set the value of the
-     * 'java.security.krb5.conf' environment variable to an existing file. If
-     * the environment variable is already set, warn if different than the
-     * specified parameter
-     */
-    private String kerberosConfigFile;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -73,22 +61,18 @@ public class HdfsComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-
-    public String getJAASConfiguration() {
-        return jAASConfiguration;
-    }
-
-    public void setJAASConfiguration(String jAASConfiguration) {
-        this.jAASConfiguration = jAASConfiguration;
-    }
-
-    public String getKerberosConfigFile() {
-        return kerberosConfigFile;
-    }
-
-    public void setKerberosConfigFile(String kerberosConfigFile) {
-        this.kerberosConfigFile = kerberosConfigFile;
-    }
+    /**
+     * To use the given configuration for security with JAAS. The option is a
+     * javax.security.auth.login.Configuration type.
+     */
+    private String jAASConfiguration;
+    /**
+     * To use kerberos authentication, set the value of the
+     * 'java.security.krb5.conf' environment variable to an existing file. If
+     * the environment variable is already set, warn if different than the
+     * specified parameter
+     */
+    private String kerberosConfigFile;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -112,5 +96,21 @@ public class HdfsComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getJAASConfiguration() {
+        return jAASConfiguration;
+    }
+
+    public void setJAASConfiguration(String jAASConfiguration) {
+        this.jAASConfiguration = jAASConfiguration;
+    }
+
+    public String getKerberosConfigFile() {
+        return kerberosConfigFile;
+    }
+
+    public void setKerberosConfigFile(String kerberosConfigFile) {
+        this.kerberosConfigFile = kerberosConfigFile;
     }
 }

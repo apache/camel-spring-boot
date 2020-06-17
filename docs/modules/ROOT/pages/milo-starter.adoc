@@ -62,7 +62,7 @@ The component supports 46 options, which are listed below.
 | *camel.component.milo-server.enable-anonymous-authentication* | Enable anonymous authentication, disabled by default | false | Boolean
 | *camel.component.milo-server.enabled* | Whether to enable auto configuration of the milo-server component. This is enabled by default. |  | Boolean
 | *camel.component.milo-server.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| *camel.component.milo-server.namespace-uri* | The URI of the namespace, defaults to urn:org:apache:camel |  | String
+| *camel.component.milo-server.namespace-uri* | The URI of the namespace, defaults to urn:org:apache:camel | urn:org:apache:camel | String
 | *camel.component.milo-server.path* | The path to be appended to the end of the endpoint url. (doesn't need to start with '/') |  | String
 | *camel.component.milo-server.port* | The TCP port the server binds to |  | Integer
 | *camel.component.milo-server.product-uri* | The product URI |  | String

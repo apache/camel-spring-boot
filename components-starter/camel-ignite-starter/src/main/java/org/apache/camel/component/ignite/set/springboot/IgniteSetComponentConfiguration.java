@@ -37,17 +37,18 @@ public class IgniteSetComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Resource from where to load configuration. The option is a
-     * java.lang.Object type.
+     * The resource from where to load the configuration. It can be a: URL,
+     * String or InputStream type. The option is a java.lang.Object type.
      */
     private String configurationResource;
     /**
-     * Ignite instance. The option is a org.apache.ignite.Ignite type.
+     * To use an existing Ignite instance. The option is a
+     * org.apache.ignite.Ignite type.
      */
     private String ignite;
     /**
-     * Ignite configuration. The option is a
-     * org.apache.ignite.configuration.IgniteConfiguration type.
+     * Allows the user to set a programmatic ignite configuration. The option is
+     * a org.apache.ignite.configuration.IgniteConfiguration type.
      */
     private String igniteConfiguration;
     /**
