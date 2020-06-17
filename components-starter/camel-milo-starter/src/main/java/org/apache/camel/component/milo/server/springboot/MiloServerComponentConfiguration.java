@@ -56,32 +56,9 @@ public class MiloServerComponentConfiguration
      */
     private String buildInfo;
     /**
-     * Server certificate. The option is a java.security.cert.X509Certificate
-     * type.
-     */
-    private String certificate;
-    /**
-     * Server certificate manager. The option is a
-     * org.eclipse.milo.opcua.stack.core.security.CertificateManager type.
-     */
-    private String certificateManager;
-    /**
-     * Validator for client certificates. The option is a
-     * org.eclipse.milo.opcua.stack.core.security.CertificateValidator type.
-     */
-    private String certificateValidator;
-    /**
-     * Validator for client certificates using default file based approach
-     */
-    private String defaultCertificateValidator;
-    /**
-     * Enable anonymous authentication, disabled by default
-     */
-    private Boolean enableAnonymousAuthentication = false;
-    /**
      * The URI of the namespace, defaults to urn:org:apache:camel
      */
-    private String namespaceUri;
+    private String namespaceUri = "urn:org:apache:camel";
     /**
      * The path to be appended to the end of the endpoint url. (doesn't need to
      * start with '/')
@@ -95,24 +72,6 @@ public class MiloServerComponentConfiguration
      * The product URI
      */
     private String productUri;
-    /**
-     * Security policies
-     */
-    private Set<SecurityPolicy> securityPolicies;
-    /**
-     * Security policies by URI or name. Multiple policies can be separated by
-     * comma.
-     */
-    private String securityPoliciesById;
-    /**
-     * Set user password combinations in the form of user1:pwd1,user2:pwd2
-     * Usernames and passwords will be URL decoded
-     */
-    private String userAuthenticationCredentials;
-    /**
-     * Set the UserTokenPolicy used when
-     */
-    private SecurityPolicy usernameSecurityPolicyUri;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -138,6 +97,47 @@ public class MiloServerComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+    /**
+     * Server certificate. The option is a java.security.cert.X509Certificate
+     * type.
+     */
+    private String certificate;
+    /**
+     * Server certificate manager. The option is a
+     * org.eclipse.milo.opcua.stack.core.security.CertificateManager type.
+     */
+    private String certificateManager;
+    /**
+     * Validator for client certificates. The option is a
+     * org.eclipse.milo.opcua.stack.core.security.CertificateValidator type.
+     */
+    private String certificateValidator;
+    /**
+     * Validator for client certificates using default file based approach
+     */
+    private String defaultCertificateValidator;
+    /**
+     * Enable anonymous authentication, disabled by default
+     */
+    private Boolean enableAnonymousAuthentication = false;
+    /**
+     * Security policies
+     */
+    private Set<SecurityPolicy> securityPolicies;
+    /**
+     * Security policies by URI or name. Multiple policies can be separated by
+     * comma.
+     */
+    private String securityPoliciesById;
+    /**
+     * Set user password combinations in the form of user1:pwd1,user2:pwd2
+     * Usernames and passwords will be URL decoded
+     */
+    private String userAuthenticationCredentials;
+    /**
+     * Set the UserTokenPolicy used when
+     */
+    private SecurityPolicy usernameSecurityPolicyUri;
 
     public String getApplicationName() {
         return applicationName;
@@ -169,6 +169,62 @@ public class MiloServerComponentConfiguration
 
     public void setBuildInfo(String buildInfo) {
         this.buildInfo = buildInfo;
+    }
+
+    public String getNamespaceUri() {
+        return namespaceUri;
+    }
+
+    public void setNamespaceUri(String namespaceUri) {
+        this.namespaceUri = namespaceUri;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
+    }
+
+    public String getProductUri() {
+        return productUri;
+    }
+
+    public void setProductUri(String productUri) {
+        this.productUri = productUri;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getBasicPropertyBinding() {
+        return basicPropertyBinding;
+    }
+
+    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
+        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public String getCertificate() {
@@ -213,38 +269,6 @@ public class MiloServerComponentConfiguration
         this.enableAnonymousAuthentication = enableAnonymousAuthentication;
     }
 
-    public String getNamespaceUri() {
-        return namespaceUri;
-    }
-
-    public void setNamespaceUri(String namespaceUri) {
-        this.namespaceUri = namespaceUri;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public Integer getPort() {
-        return port;
-    }
-
-    public void setPort(Integer port) {
-        this.port = port;
-    }
-
-    public String getProductUri() {
-        return productUri;
-    }
-
-    public void setProductUri(String productUri) {
-        this.productUri = productUri;
-    }
-
     public Set<SecurityPolicy> getSecurityPolicies() {
         return securityPolicies;
     }
@@ -277,29 +301,5 @@ public class MiloServerComponentConfiguration
     public void setUsernameSecurityPolicyUri(
             SecurityPolicy usernameSecurityPolicyUri) {
         this.usernameSecurityPolicyUri = usernameSecurityPolicyUri;
-    }
-
-    public Boolean getBridgeErrorHandler() {
-        return bridgeErrorHandler;
-    }
-
-    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
-        this.bridgeErrorHandler = bridgeErrorHandler;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
     }
 }

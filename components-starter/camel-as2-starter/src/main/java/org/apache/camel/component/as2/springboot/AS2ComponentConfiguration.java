@@ -37,11 +37,6 @@ public class AS2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the shared configuration. The option is a
-     * org.apache.camel.component.as2.AS2Configuration type.
-     */
-    private String configuration;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -66,14 +61,11 @@ public class AS2ComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-
-    public String getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(String configuration) {
-        this.configuration = configuration;
-    }
+    /**
+     * Component configuration. The option is a
+     * org.apache.camel.component.as2.AS2Configuration type.
+     */
+    private String configuration;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -97,5 +89,13 @@ public class AS2ComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
     }
 }

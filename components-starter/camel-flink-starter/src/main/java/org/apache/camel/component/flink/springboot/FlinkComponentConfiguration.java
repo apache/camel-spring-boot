@@ -37,11 +37,6 @@ public class FlinkComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * DataSet to compute against. The option is a
-     * org.apache.flink.api.java.DataSet type.
-     */
-    private String dataSet;
-    /**
      * Function performing action against a DataSet. The option is a
      * org.apache.camel.component.flink.DataSetCallback type.
      */
@@ -72,14 +67,6 @@ public class FlinkComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-
-    public String getDataSet() {
-        return dataSet;
-    }
-
-    public void setDataSet(String dataSet) {
-        this.dataSet = dataSet;
-    }
 
     public String getDataSetCallback() {
         return dataSetCallback;

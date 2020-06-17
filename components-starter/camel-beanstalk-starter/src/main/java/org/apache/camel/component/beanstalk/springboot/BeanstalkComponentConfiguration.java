@@ -37,14 +37,6 @@ public class BeanstalkComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Custom ConnectionSettingsFactory. Specify which ConnectionSettingsFactory
-     * to use to make connections to Beanstalkd. Especially useful for unit
-     * testing without beanstalkd daemon (you can mock ConnectionSettings). The
-     * option is a
-     * org.apache.camel.component.beanstalk.ConnectionSettingsFactory type.
-     */
-    private String connectionSettingsFactory;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -69,14 +61,14 @@ public class BeanstalkComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-
-    public String getConnectionSettingsFactory() {
-        return connectionSettingsFactory;
-    }
-
-    public void setConnectionSettingsFactory(String connectionSettingsFactory) {
-        this.connectionSettingsFactory = connectionSettingsFactory;
-    }
+    /**
+     * Custom ConnectionSettingsFactory. Specify which ConnectionSettingsFactory
+     * to use to make connections to Beanstalkd. Especially useful for unit
+     * testing without beanstalkd daemon (you can mock ConnectionSettings). The
+     * option is a
+     * org.apache.camel.component.beanstalk.ConnectionSettingsFactory type.
+     */
+    private String connectionSettingsFactory;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -100,5 +92,13 @@ public class BeanstalkComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getConnectionSettingsFactory() {
+        return connectionSettingsFactory;
+    }
+
+    public void setConnectionSettingsFactory(String connectionSettingsFactory) {
+        this.connectionSettingsFactory = connectionSettingsFactory;
     }
 }
