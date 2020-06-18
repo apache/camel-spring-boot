@@ -29,7 +29,7 @@ The component supports 11 options, which are listed below.
 | *camel.component.file.cluster.service.acquire-lock-delay* | The time to wait before starting to try to acquire lock. |  | String
 | *camel.component.file.cluster.service.acquire-lock-interval* | The time to wait between attempts to try to acquire lock. |  | String
 | *camel.component.file.cluster.service.attributes* | Custom service attributes. |  | Map
-| *camel.component.file.cluster.service.enabled* | Sets if the zookeeper cluster service should be enabled or not, default is false. | false | Boolean
+| *camel.component.file.cluster.service.enabled* | Sets if the file cluster service should be enabled or not, default is false. | false | Boolean
 | *camel.component.file.cluster.service.id* | Cluster Service ID |  | String
 | *camel.component.file.cluster.service.order* | Service lookup order/priority. |  | Integer
 | *camel.component.file.cluster.service.root* | The root path. |  | String

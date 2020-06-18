@@ -44,7 +44,7 @@ public class FileLockClusterServiceAutoConfiguration {
 
     @Bean(name = "file-lock-cluster-service")
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-    public CamelClusterService consulClusterService() throws Exception {
+    public CamelClusterService fileClusterService() throws Exception {
         FileLockClusterService service = new FileLockClusterService();
 
         Optional.ofNullable(configuration.getId())
