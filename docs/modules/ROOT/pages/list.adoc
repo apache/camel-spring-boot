@@ -576,7 +576,7 @@ Number of Camel components: 331 in 264 JAR artifacts (1 deprecated)
 `json-validator:resourceUri` | 2.20 | Validate JSON payloads using NetworkNT JSON Schema.
 
 | link:https://camel.apache.org/components/latest/jt400-component.html[JT400] (camel-jt400-starter) +
-`jt400:userID:password/systemName/objectPath.type` | 1.5 | Exchanges messages with an AS/400 system using data queues, message queues, or program call.
+`jt400:userID:password/systemName/objectPath.type` | 1.5 | Exchanges messages with an IBM i system using data queues, message queues, or program call. IBM i is the replacement for AS/400 and iSeries servers.
 
 | link:https://camel.apache.org/components/latest/kafka-component.html[Kafka] (camel-kafka-starter) +
 `kafka:topic` | 2.13 | Sent and receive messages to/from an Apache Kafka broker.
