@@ -149,7 +149,6 @@ public class CamelAutoConfigurationTest extends Assert {
     @Test
     public void shouldChangeContextNameViaConfigurationCallback() {
         assertEquals("customName", camelContext.getName());
-        assertEquals(camelContext.getName(), camelContext.getManagementName());
     }
 
     @Test
