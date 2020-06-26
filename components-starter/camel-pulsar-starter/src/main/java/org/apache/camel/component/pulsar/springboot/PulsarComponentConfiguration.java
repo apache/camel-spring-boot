@@ -23,6 +23,7 @@ import org.apache.camel.component.pulsar.utils.consumers.SubscriptionType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.pulsar.client.api.CompressionType;
 import org.apache.pulsar.client.api.MessageRoutingMode;
+import org.apache.pulsar.client.api.RegexSubscriptionMode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -117,10 +118,21 @@ public class PulsarComponentConfiguration
      */
     private String subscriptionName = "subs";
     /**
+     * Determines to which topics this consumer should be subscribed to -
+     * Persistent, Non-Persistent, or both. Only used with pattern
+     * subscriptions.
+     */
+    private RegexSubscriptionMode subscriptionTopicsMode = RegexSubscriptionMode.PersistentOnly;
+    /**
      * Type of the subscription EXCLUSIVESHAREDFAILOVERKEY_SHARED, defaults to
      * EXCLUSIVE
      */
     private SubscriptionType subscriptionType = SubscriptionType.EXCLUSIVE;
+    /**
+     * Whether the topic is a pattern (regular expression) that allows the
+     * consumer to subscribe to all matching topics in the namespace
+     */
+    private Boolean topicsPattern = false;
     /**
      * Provide a factory to create an alternate implementation of
      * PulsarMessageReceipt. The option is a
@@ -330,12 +342,29 @@ public class PulsarComponentConfiguration
         this.subscriptionName = subscriptionName;
     }
 
+    public RegexSubscriptionMode getSubscriptionTopicsMode() {
+        return subscriptionTopicsMode;
+    }
+
+    public void setSubscriptionTopicsMode(
+            RegexSubscriptionMode subscriptionTopicsMode) {
+        this.subscriptionTopicsMode = subscriptionTopicsMode;
+    }
+
     public SubscriptionType getSubscriptionType() {
         return subscriptionType;
     }
 
     public void setSubscriptionType(SubscriptionType subscriptionType) {
         this.subscriptionType = subscriptionType;
+    }
+
+    public Boolean getTopicsPattern() {
+        return topicsPattern;
+    }
+
+    public void setTopicsPattern(Boolean topicsPattern) {
+        this.topicsPattern = topicsPattern;
     }
 
     public String getPulsarMessageReceiptFactory() {
