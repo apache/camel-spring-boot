@@ -90,10 +90,10 @@ Number of Camel components: 331 in 264 JAR artifacts (1 deprecated)
 `aws2-kms:label` | 3.1 | Manage keys stored in AWS KMS instances using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-kinesis-component.html[AWS 2 Kinesis] (camel-aws2-kinesis-starter) +
-`aws2-kinesis:streamName` | 3.2 | Consume and produce records from AWS Kinesis Streams using AWS SDK version 2.x.
+`aws2-kinesis:streamName` | 3.2 | Consume and produce records from and to AWS Kinesis Streams using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-kinesis-firehose-component.html[AWS 2 Kinesis Firehose] (camel-aws2-kinesis-starter) +
-`aws2-kinesis-firehose:streamName` | 3.2 | Consume data from AWS Kinesis Firehose streams using AWS SDK version 2.x.
+`aws2-kinesis-firehose:streamName` | 3.2 | Produce data to AWS Kinesis Firehose streams using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-lambda-component.html[AWS 2 Lambda] (camel-aws2-lambda-starter) +
 `aws2-lambda:function` | 3.2 | Manage and invoke AWS Lambda functions using AWS SDK version 2.x.
@@ -1219,7 +1219,7 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 23 in 23 JAR artifacts (1 deprecated)
+Number of miscellaneous extensions: 22 in 22 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
