@@ -1249,9 +1249,6 @@ Number of miscellaneous extensions: 23 in 23 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/others/opentracing.html[OpenTracing] +
 (camel-opentracing-starter) | 2.19 | Distributed tracing using OpenTracing
 
-| link:https://camel.apache.org/components/latest/others/reactive-executor-vertx.html[Reactive Executor Vert.x] +
-(camel-reactive-executor-vertx-starter) | 3.0 | Reactive Executor for camel-core using Vert.x
-
 | link:https://camel.apache.org/components/latest/others/reactor.html[Reactor] +
 (camel-reactor-starter) | 2.20 | Reactor based back-end for Camel's reactive streams component
 
