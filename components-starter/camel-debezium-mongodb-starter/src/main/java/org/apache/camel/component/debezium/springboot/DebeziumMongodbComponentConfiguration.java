@@ -150,6 +150,12 @@ public class DebeziumMongodbComponentConfiguration
      */
     private Integer connectMaxAttempts = 16;
     /**
+     * Optional list of custom converters that would be used instead of default
+     * ones. The converters are defined using '.type' config option and
+     * configured using options '.'
+     */
+    private String converters;
+    /**
      * The databases for which changes are to be excluded
      */
     private String databaseBlacklist;
@@ -161,6 +167,15 @@ public class DebeziumMongodbComponentConfiguration
      * The databases for which changes are to be captured
      */
     private String databaseWhitelist;
+    /**
+     * Specify how failures during processing of events (i.e. when encountering
+     * a corrupted event) should be handled, including:'fail' (the default) an
+     * exception indicating the problematic event and its position is raised,
+     * causing the connector to be stopped; 'warn' the problematic event and its
+     * position will be logged and the event will be skipped;'ignore' the
+     * problematic event will be skipped.
+     */
+    private String eventProcessingFailureHandlingMode = "fail";
     /**
      * Description is not available here, please check Debezium website for
      * corresponding key 'field.blacklist' description.
@@ -199,6 +214,10 @@ public class DebeziumMongodbComponentConfiguration
      */
     private Integer maxQueueSize = 8192;
     /**
+     * Database containing user credentials.
+     */
+    private String mongodbAuthsource = "admin";
+    /**
      * The hostname and port pairs (in the form 'host' or 'host:port') of the
      * MongoDB server(s) in the replica set.
      */
@@ -222,6 +241,11 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String mongodbPassword;
     /**
+     * Frequency in seconds to look for new, removed, or changed replica sets.
+     * Defaults to 30 seconds.
+     */
+    private Integer mongodbPollIntervalSec = 30;
+    /**
      * Should connector use SSL to connect to MongoDB instances
      */
     private Boolean mongodbSslEnabled = false;
@@ -239,6 +263,14 @@ public class DebeziumMongodbComponentConfiguration
      * receiving no events. Defaults to 500ms. The option is a long type.
      */
     private String pollIntervalMs = "500ms";
+    /**
+     * Enables transaction metadata extraction together with event counting
+     */
+    private Boolean provideTransactionMetadata = false;
+    /**
+     * Whether field names will be sanitized to Avro naming conventions
+     */
+    private Boolean sanitizeFieldNames = false;
     /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no
@@ -430,6 +462,14 @@ public class DebeziumMongodbComponentConfiguration
         this.connectMaxAttempts = connectMaxAttempts;
     }
 
+    public String getConverters() {
+        return converters;
+    }
+
+    public void setConverters(String converters) {
+        this.converters = converters;
+    }
+
     public String getDatabaseBlacklist() {
         return databaseBlacklist;
     }
@@ -453,6 +493,15 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setDatabaseWhitelist(String databaseWhitelist) {
         this.databaseWhitelist = databaseWhitelist;
+    }
+
+    public String getEventProcessingFailureHandlingMode() {
+        return eventProcessingFailureHandlingMode;
+    }
+
+    public void setEventProcessingFailureHandlingMode(
+            String eventProcessingFailureHandlingMode) {
+        this.eventProcessingFailureHandlingMode = eventProcessingFailureHandlingMode;
     }
 
     public String getFieldBlacklist() {
@@ -511,6 +560,14 @@ public class DebeziumMongodbComponentConfiguration
         this.maxQueueSize = maxQueueSize;
     }
 
+    public String getMongodbAuthsource() {
+        return mongodbAuthsource;
+    }
+
+    public void setMongodbAuthsource(String mongodbAuthsource) {
+        this.mongodbAuthsource = mongodbAuthsource;
+    }
+
     public String getMongodbHosts() {
         return mongodbHosts;
     }
@@ -541,6 +598,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setMongodbPassword(String mongodbPassword) {
         this.mongodbPassword = mongodbPassword;
+    }
+
+    public Integer getMongodbPollIntervalSec() {
+        return mongodbPollIntervalSec;
+    }
+
+    public void setMongodbPollIntervalSec(Integer mongodbPollIntervalSec) {
+        this.mongodbPollIntervalSec = mongodbPollIntervalSec;
     }
 
     public Boolean getMongodbSslEnabled() {
@@ -574,6 +639,22 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setPollIntervalMs(String pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
+    }
+
+    public Boolean getProvideTransactionMetadata() {
+        return provideTransactionMetadata;
+    }
+
+    public void setProvideTransactionMetadata(Boolean provideTransactionMetadata) {
+        this.provideTransactionMetadata = provideTransactionMetadata;
+    }
+
+    public Boolean getSanitizeFieldNames() {
+        return sanitizeFieldNames;
+    }
+
+    public void setSanitizeFieldNames(Boolean sanitizeFieldNames) {
+        this.sanitizeFieldNames = sanitizeFieldNames;
     }
 
     public String getSkippedOperations() {

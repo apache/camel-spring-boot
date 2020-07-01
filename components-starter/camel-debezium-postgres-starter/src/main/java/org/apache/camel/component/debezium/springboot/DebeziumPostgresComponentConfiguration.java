@@ -121,10 +121,26 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Description is not available here, please check Debezium website for
-     * corresponding key 'column.blacklist' description.
+     * Specify how binary (blob, binary, etc.) columns should be represented in
+     * change events, including:'bytes' represents binary data as byte array
+     * (default)'base64' represents binary data as base64-encoded string'hex'
+     * represents binary data as hex-encoded (base16) string
+     */
+    private String binaryHandlingMode = "bytes";
+    /**
+     * Regular expressions matching columns to exclude from change events
      */
     private String columnBlacklist;
+    /**
+     * Regular expressions matching columns to include in change events
+     */
+    private String columnWhitelist;
+    /**
+     * Optional list of custom converters that would be used instead of default
+     * ones. The converters are defined using '.type' config option and
+     * configured using options '.'
+     */
+    private String converters;
     /**
      * The name of the database the connector should be monitoring
      */
@@ -300,10 +316,30 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Boolean provideTransactionMetadata = false;
     /**
+     * Applies only when streaming changes using pgoutput.Determine how creation
+     * of a publication should work, the default is all_tables.DISABLED - The
+     * connector will not attempt to create a publication at all. The
+     * expectation is that the user has created the publication up-front. If the
+     * publication isn't found to exist upon startup, the connector will throw
+     * an exception and stop.ALL_TABLES - If no publication exists, the
+     * connector will create a new publication for all tables. Note this
+     * requires that the configured user has access. If the publication already
+     * exists, it will be used. i.e CREATE PUBLICATION FOR ALL TABLES;FILTERED -
+     * If no publication exists, the connector will create a new publication for
+     * all those tables matchingthe current filter configuration (see
+     * table/database whitelist/blacklist properties). If the publication
+     * already exists, it will be used. i.e CREATE PUBLICATION FOR TABLE
+     */
+    private String publicationAutocreateMode = "all_tables";
+    /**
      * The name of the Postgres 10 publication used for streaming changes from a
      * plugin.Defaults to 'dbz_publication'
      */
     private String publicationName = "dbz_publication";
+    /**
+     * Whether field names will be sanitized to Avro naming conventions
+     */
+    private Boolean sanitizeFieldNames = false;
     /**
      * The schemas for which events must not be captured
      */
@@ -326,6 +362,12 @@ public class DebeziumPostgresComponentConfiguration
      * The schemas for which events should be captured
      */
     private String schemaWhitelist;
+    /**
+     * The comma-separated list of operations to skip during streaming, defined
+     * as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no
+     * operations will be skipped.
+     */
+    private String skippedOperations;
     /**
      * Whether or not to drop the logical replication slot when the connector
      * finishes orderlyBy default the replication is kept so that on restart
@@ -424,6 +466,10 @@ public class DebeziumPostgresComponentConfiguration
      * corresponding key 'table.blacklist' description.
      */
     private String tableBlacklist;
+    /**
+     * Flag specifying whether built-in tables should be ignored.
+     */
+    private Boolean tableIgnoreBuiltin = true;
     /**
      * The tables for which changes are to be captured
      */
@@ -579,12 +625,36 @@ public class DebeziumPostgresComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
+    public String getBinaryHandlingMode() {
+        return binaryHandlingMode;
+    }
+
+    public void setBinaryHandlingMode(String binaryHandlingMode) {
+        this.binaryHandlingMode = binaryHandlingMode;
+    }
+
     public String getColumnBlacklist() {
         return columnBlacklist;
     }
 
     public void setColumnBlacklist(String columnBlacklist) {
         this.columnBlacklist = columnBlacklist;
+    }
+
+    public String getColumnWhitelist() {
+        return columnWhitelist;
+    }
+
+    public void setColumnWhitelist(String columnWhitelist) {
+        this.columnWhitelist = columnWhitelist;
+    }
+
+    public String getConverters() {
+        return converters;
+    }
+
+    public void setConverters(String converters) {
+        this.converters = converters;
     }
 
     public String getDatabaseDbname() {
@@ -821,12 +891,28 @@ public class DebeziumPostgresComponentConfiguration
         this.provideTransactionMetadata = provideTransactionMetadata;
     }
 
+    public String getPublicationAutocreateMode() {
+        return publicationAutocreateMode;
+    }
+
+    public void setPublicationAutocreateMode(String publicationAutocreateMode) {
+        this.publicationAutocreateMode = publicationAutocreateMode;
+    }
+
     public String getPublicationName() {
         return publicationName;
     }
 
     public void setPublicationName(String publicationName) {
         this.publicationName = publicationName;
+    }
+
+    public Boolean getSanitizeFieldNames() {
+        return sanitizeFieldNames;
+    }
+
+    public void setSanitizeFieldNames(Boolean sanitizeFieldNames) {
+        this.sanitizeFieldNames = sanitizeFieldNames;
     }
 
     public String getSchemaBlacklist() {
@@ -851,6 +937,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setSchemaWhitelist(String schemaWhitelist) {
         this.schemaWhitelist = schemaWhitelist;
+    }
+
+    public String getSkippedOperations() {
+        return skippedOperations;
+    }
+
+    public void setSkippedOperations(String skippedOperations) {
+        this.skippedOperations = skippedOperations;
     }
 
     public Boolean getSlotDropOnStop() {
@@ -964,6 +1058,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setTableBlacklist(String tableBlacklist) {
         this.tableBlacklist = tableBlacklist;
+    }
+
+    public Boolean getTableIgnoreBuiltin() {
+        return tableIgnoreBuiltin;
+    }
+
+    public void setTableIgnoreBuiltin(Boolean tableIgnoreBuiltin) {
+        this.tableIgnoreBuiltin = tableIgnoreBuiltin;
     }
 
     public String getTableWhitelist() {

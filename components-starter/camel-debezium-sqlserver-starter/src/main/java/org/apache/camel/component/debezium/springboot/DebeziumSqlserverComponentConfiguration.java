@@ -121,10 +121,19 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * Description is not available here, please check Debezium website for
-     * corresponding key 'column.blacklist' description.
+     * Regular expressions matching columns to exclude from change events
      */
     private String columnBlacklist;
+    /**
+     * Regular expressions matching columns to include in change events
+     */
+    private String columnWhitelist;
+    /**
+     * Optional list of custom converters that would be used instead of default
+     * ones. The converters are defined using '.type' config option and
+     * configured using options '.'
+     */
+    private String converters;
     /**
      * The name of the database the connector should be monitoring. When working
      * with a multi-tenant set-up, must be set to the CDB name.
@@ -224,6 +233,15 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String heartbeatTopicsPrefix = "__debezium-heartbeat";
     /**
+     * Whether the connector should publish changes in the database schema to a
+     * Kafka topic with the same name as the database server ID. Each schema
+     * change will be recorded using a key that contains the database name and
+     * whose value include logical description of the new schema and optionally
+     * the DDL statement(s).The default is 'true'. This is independent of how
+     * the connector internally records database history.
+     */
+    private Boolean includeSchemaChanges = true;
+    /**
      * Maximum size of each batch of source records. Defaults to 2048.
      */
     private Integer maxBatchSize = 2048;
@@ -255,6 +273,16 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Boolean provideTransactionMetadata = false;
     /**
+     * Whether field names will be sanitized to Avro naming conventions
+     */
+    private Boolean sanitizeFieldNames = false;
+    /**
+     * The comma-separated list of operations to skip during streaming, defined
+     * as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no
+     * operations will be skipped.
+     */
+    private String skippedOperations;
+    /**
      * The number of milliseconds to delay before a snapshot will begin. The
      * option is a long type.
      */
@@ -264,6 +292,24 @@ public class DebeziumSqlserverComponentConfiguration
      * performing a snapshot
      */
     private Integer snapshotFetchSize;
+    /**
+     * Controls which transaction isolation level is used and how long the
+     * connector locks the monitored tables. The default is 'repeatable_read',
+     * which means that repeatable read isolation level is used. In addition,
+     * exclusive locks are taken only during schema snapshot. Using a value of
+     * 'exclusive' ensures that the connector holds the exclusive lock (and thus
+     * prevents any reads and updates) for all monitored tables during the
+     * entire snapshot duration. When 'snapshot' is specified, connector runs
+     * the initial snapshot in SNAPSHOT isolation level, which guarantees
+     * snapshot consistency. In addition, neither table nor row-level locks are
+     * held. When 'read_committed' is specified, connector runs the initial
+     * snapshot in READ COMMITTED isolation level. No long-running locks are
+     * taken, so that initial snapshot does not prevent other transactions from
+     * updating table rows. Snapshot consistency is not guaranteed.In
+     * 'read_uncommitted' mode neither table nor row-level locks are acquired,
+     * but connector does not guarantee snapshot consistency.
+     */
+    private String snapshotIsolationMode = "repeatable_read";
     /**
      * The maximum number of millis to wait for table locks at the beginning of
      * a snapshot. If locks cannot be acquired in this time frame, the snapshot
@@ -298,6 +344,14 @@ public class DebeziumSqlserverComponentConfiguration
      * message
      */
     private String sourceStructVersion = "v2";
+    /**
+     * Configures the criteria of the attached timestamp within the source
+     * record (ts_ms).Options include:'commit', (default) the source timestamp
+     * is set to the instant where the record was committed in the
+     * database'processing', the source timestamp is set to the instant where
+     * the record was processed by Debezium.
+     */
+    private String sourceTimestampMode = "commit";
     /**
      * Description is not available here, please check Debezium website for
      * corresponding key 'table.blacklist' description.
@@ -452,6 +506,22 @@ public class DebeziumSqlserverComponentConfiguration
         this.columnBlacklist = columnBlacklist;
     }
 
+    public String getColumnWhitelist() {
+        return columnWhitelist;
+    }
+
+    public void setColumnWhitelist(String columnWhitelist) {
+        this.columnWhitelist = columnWhitelist;
+    }
+
+    public String getConverters() {
+        return converters;
+    }
+
+    public void setConverters(String converters) {
+        this.converters = converters;
+    }
+
     public String getDatabaseDbname() {
         return databaseDbname;
     }
@@ -593,6 +663,14 @@ public class DebeziumSqlserverComponentConfiguration
         this.heartbeatTopicsPrefix = heartbeatTopicsPrefix;
     }
 
+    public Boolean getIncludeSchemaChanges() {
+        return includeSchemaChanges;
+    }
+
+    public void setIncludeSchemaChanges(Boolean includeSchemaChanges) {
+        this.includeSchemaChanges = includeSchemaChanges;
+    }
+
     public Integer getMaxBatchSize() {
         return maxBatchSize;
     }
@@ -633,6 +711,22 @@ public class DebeziumSqlserverComponentConfiguration
         this.provideTransactionMetadata = provideTransactionMetadata;
     }
 
+    public Boolean getSanitizeFieldNames() {
+        return sanitizeFieldNames;
+    }
+
+    public void setSanitizeFieldNames(Boolean sanitizeFieldNames) {
+        this.sanitizeFieldNames = sanitizeFieldNames;
+    }
+
+    public String getSkippedOperations() {
+        return skippedOperations;
+    }
+
+    public void setSkippedOperations(String skippedOperations) {
+        this.skippedOperations = skippedOperations;
+    }
+
     public String getSnapshotDelayMs() {
         return snapshotDelayMs;
     }
@@ -647,6 +741,14 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setSnapshotFetchSize(Integer snapshotFetchSize) {
         this.snapshotFetchSize = snapshotFetchSize;
+    }
+
+    public String getSnapshotIsolationMode() {
+        return snapshotIsolationMode;
+    }
+
+    public void setSnapshotIsolationMode(String snapshotIsolationMode) {
+        this.snapshotIsolationMode = snapshotIsolationMode;
     }
 
     public String getSnapshotLockTimeoutMs() {
@@ -680,6 +782,14 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setSourceStructVersion(String sourceStructVersion) {
         this.sourceStructVersion = sourceStructVersion;
+    }
+
+    public String getSourceTimestampMode() {
+        return sourceTimestampMode;
+    }
+
+    public void setSourceTimestampMode(String sourceTimestampMode) {
+        this.sourceTimestampMode = sourceTimestampMode;
     }
 
     public String getTableBlacklist() {

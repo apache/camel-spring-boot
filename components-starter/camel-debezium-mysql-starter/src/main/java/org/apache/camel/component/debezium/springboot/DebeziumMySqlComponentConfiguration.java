@@ -131,6 +131,13 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String bigintUnsignedHandlingMode = "long";
     /**
+     * Specify how binary (blob, binary, etc.) columns should be represented in
+     * change events, including:'bytes' represents binary data as byte array
+     * (default)'base64' represents binary data as base64-encoded string'hex'
+     * represents binary data as hex-encoded (base16) string
+     */
+    private String binaryHandlingMode = "bytes";
+    /**
      * The size of a look-ahead buffer used by the binlog reader to decide
      * whether the transaction in progress is going to be committed or rolled
      * back. Use 0 to disable look-ahead buffering. Defaults to 0 (i.e.
@@ -138,8 +145,7 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Integer binlogBufferSize = 0;
     /**
-     * Description is not available here, please check Debezium website for
-     * corresponding key 'column.blacklist' description.
+     * Regular expressions matching columns to exclude from change events
      */
     private String columnBlacklist;
     /**
@@ -388,8 +394,9 @@ public class DebeziumMySqlComponentConfiguration
      * Whether the connector should publish changes in the database schema to a
      * Kafka topic with the same name as the database server ID. Each schema
      * change will be recorded using a key that contains the database name and
-     * whose value includes the DDL statement(s).The default is 'true'. This is
-     * independent of how the connector internally records database history.
+     * whose value include logical description of the new schema and optionally
+     * the DDL statement(s).The default is 'true'. This is independent of how
+     * the connector internally records database history.
      */
     private Boolean includeSchemaChanges = true;
     /**
@@ -430,6 +437,12 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String pollIntervalMs = "500ms";
     /**
+     * The comma-separated list of operations to skip during streaming, defined
+     * as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no
+     * operations will be skipped.
+     */
+    private String skippedOperations;
+    /**
      * The number of milliseconds to delay before a snapshot will begin. The
      * option is a long type.
      */
@@ -460,15 +473,16 @@ public class DebeziumMySqlComponentConfiguration
     /**
      * The criteria for running a snapshot upon startup of the connector.
      * Options include: 'when_needed' to specify that the connector run a
-     * snapshot upon startup whenever it deems it necessary; 'initial' (the
-     * default) to specify the connector can run a snapshot only when no offsets
-     * are available for the logical server name; 'initial_only' same as
-     * 'initial' except the connector should stop after completing the snapshot
-     * and before it would normally read the binlog; and'never' to specify the
-     * connector should never run a snapshot and that upon first startup the
-     * connector should read from the beginning of the binlog. The 'never' mode
-     * should be used with care, and only when the binlog is known to contain
-     * all history.
+     * snapshot upon startup whenever it deems it necessary; 'schema_only' to
+     * only take a snapshot of the schema (table structures) but no actual data;
+     * 'initial' (the default) to specify the connector can run a snapshot only
+     * when no offsets are available for the logical server name; 'initial_only'
+     * same as 'initial' except the connector should stop after completing the
+     * snapshot and before it would normally read the binlog; and'never' to
+     * specify the connector should never run a snapshot and that upon first
+     * startup the connector should read from the beginning of the binlog. The
+     * 'never' mode should be used with care, and only when the binlog is known
+     * to contain all history.
      */
     private String snapshotMode = "initial";
     /**
@@ -656,6 +670,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setBigintUnsignedHandlingMode(String bigintUnsignedHandlingMode) {
         this.bigintUnsignedHandlingMode = bigintUnsignedHandlingMode;
+    }
+
+    public String getBinaryHandlingMode() {
+        return binaryHandlingMode;
+    }
+
+    public void setBinaryHandlingMode(String binaryHandlingMode) {
+        this.binaryHandlingMode = binaryHandlingMode;
     }
 
     public Integer getBinlogBufferSize() {
@@ -1035,6 +1057,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setPollIntervalMs(String pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
+    }
+
+    public String getSkippedOperations() {
+        return skippedOperations;
+    }
+
+    public void setSkippedOperations(String skippedOperations) {
+        this.skippedOperations = skippedOperations;
     }
 
     public String getSnapshotDelayMs() {
