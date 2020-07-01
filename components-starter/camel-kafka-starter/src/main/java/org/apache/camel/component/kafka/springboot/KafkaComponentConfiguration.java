@@ -619,7 +619,7 @@ public class KafkaComponentConfiguration
      * The endpoint identification algorithm to validate server hostname using
      * server certificate.
      */
-    private String sslEndpointAlgorithm;
+    private String sslEndpointAlgorithm = "https";
     /**
      * The algorithm used by key manager factory for SSL connections. Default
      * value is the key manager factory algorithm configured for the Java
