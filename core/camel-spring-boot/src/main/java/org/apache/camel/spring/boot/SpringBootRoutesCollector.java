@@ -26,6 +26,7 @@ import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.main.DefaultRoutesCollector;
+import org.apache.camel.model.RouteTemplatesDefinition;
 import org.apache.camel.model.RoutesDefinition;
 import org.apache.camel.model.rest.RestsDefinition;
 import org.apache.camel.spi.XMLRoutesDefinitionLoader;
@@ -125,10 +126,40 @@ public class SpringBootRoutesCollector extends DefaultRoutesCollector {
                     ExtendedCamelContext extendedCamelContext = camelContext.adapt(ExtendedCamelContext.class);
                     XMLRoutesDefinitionLoader xmlLoader = extendedCamelContext.getXMLRoutesDefinitionLoader();
                     RoutesDefinition routes = (RoutesDefinition) xmlLoader.loadRoutesDefinition(camelContext, xmlRoute.getInputStream());
-                    answer.add(routes);
+                    if (routes != null) {
+                        answer.add(routes);
+                    }
                 }
             } catch (FileNotFoundException e) {
                 log.debug("No XML routes found in {}. Skipping XML routes detection.", part);
+            } catch (Exception e) {
+                throw RuntimeCamelException.wrapRuntimeException(e);
+            }
+        }
+
+        return answer;
+    }
+
+    @Override
+    public List<RouteTemplatesDefinition> collectXmlRouteTemplatesFromDirectory(CamelContext camelContext, String directory) throws Exception {
+        List<RouteTemplatesDefinition> answer = new ArrayList<>();
+
+        String[] parts = directory.split(",");
+        for (String part : parts) {
+            log.info("Loading additional Camel XML route templates from: {}", part);
+            try {
+                Resource[] xmlRouteTemplates = applicationContext.getResources(part);
+                for (Resource xmlRoute : xmlRouteTemplates) {
+                    log.debug("Found XML route template: {}", xmlRoute);
+                    ExtendedCamelContext extendedCamelContext = camelContext.adapt(ExtendedCamelContext.class);
+                    XMLRoutesDefinitionLoader xmlLoader = extendedCamelContext.getXMLRoutesDefinitionLoader();
+                    RouteTemplatesDefinition templates = (RouteTemplatesDefinition) xmlLoader.loadRouteTemplatesDefinition(camelContext, xmlRoute.getInputStream());
+                    if (templates != null) {
+                        answer.add(templates);
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                log.debug("No XML route templates found in {}. Skipping XML route templates detection.", part);
             } catch (Exception e) {
                 throw RuntimeCamelException.wrapRuntimeException(e);
             }
@@ -150,7 +181,9 @@ public class SpringBootRoutesCollector extends DefaultRoutesCollector {
                     ExtendedCamelContext extendedCamelContext = camelContext.adapt(ExtendedCamelContext.class);
                     XMLRoutesDefinitionLoader xmlLoader = extendedCamelContext.getXMLRoutesDefinitionLoader();
                     RestsDefinition rests = (RestsDefinition) xmlLoader.loadRestsDefinition(camelContext, xmlRest.getInputStream());
-                    answer.add(rests);
+                    if (rests != null) {
+                        answer.add(rests);
+                    }
                 }
             } catch (FileNotFoundException e) {
                 log.debug("No XML rests found in {}. Skipping XML rests detection.", part);
