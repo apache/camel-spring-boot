@@ -948,7 +948,7 @@ Number of Camel components: 332 in 265 JAR artifacts (1 deprecated)
 `vertx:address` | 2.12 | Send and receive messages to/from Vert.x Event Bus.
 
 | link:https://camel.apache.org/components/latest/vertx-websocket-component.html[Vert.x WebSocket] (camel-vertx-websocket-starter) +
-`vertx-websocket:host:port/resourceUri` | 3.5 | Camel WebSocket support with Vert.x
+`vertx-websocket:host:port/path` | 3.5 | Camel WebSocket support with Vert.x
 
 | link:https://camel.apache.org/components/latest/vm-component.html[VM] (camel-vm-starter) +
 `vm:name` | 1.1 | Call another endpoint in the same CamelContext asynchronously.
