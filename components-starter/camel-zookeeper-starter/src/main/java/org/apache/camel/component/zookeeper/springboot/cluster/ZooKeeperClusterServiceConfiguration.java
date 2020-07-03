@@ -16,9 +16,14 @@
  */
 package org.apache.camel.component.zookeeper.springboot.cluster;
 
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.component.zookeeper.ZooKeeperCuratorConfiguration;
+import org.apache.curator.RetryPolicy;
+import org.apache.curator.framework.AuthInfo;
+import org.apache.curator.framework.CuratorFramework;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.component.zookeeper.cluster.service")
@@ -26,7 +31,7 @@ public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfig
     /**
      * Sets if the zookeeper cluster service should be enabled or not, default is false.
      */
-    private boolean enabled;
+    private boolean enabled = false;
 
     /**
      * Cluster Service ID
@@ -74,4 +79,107 @@ public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfig
     public void setOrder(Integer order) {
         this.order = order;
     }
+
+
+    //
+    // Fields copied from ZooKeeperCuratorConfiguration to add
+    // javadoc which is used by spring-boot-configuration-processor
+    // to generate descritpions for inherited properties
+    // ------------------------------------------
+
+    /**
+     * The Zookeeper server hosts (multiple servers can be separated by comma).
+     */
+    private List<String> nodes;
+
+    /**
+     * The base path to store in ZooKeeper.
+     */
+    private String basePath;
+
+    /**
+     * ZooKeeper namespace. If a namespace is set here, all paths will get pre-pended with the namespace.
+     */
+    private String namespace;
+
+    /**
+     * Initial amount of time to wait between retries.
+     */
+    private long reconnectBaseSleepTime;
+
+    /**
+     * ReconnectBaseSleepTime TimeUnit.
+     * Default is TimeUnit.MILLISECONDS.
+     */
+    private TimeUnit reconnectBaseSleepTimeUnit = TimeUnit.MILLISECONDS;
+
+    /**
+     * Max number of times to retry.
+     * Default is 3.
+     */
+    private int reconnectMaxRetries = 3;
+
+    /**
+     * Max time to sleep on each retry.
+     * Default is Integer.MAX_VALUE.
+     */
+    private long reconnectMaxSleepTime = Integer.MAX_VALUE;
+    
+    /**
+     * ReconnectMaxSleepTimeUnit TimeUnit.
+     * Default is TimeUnit.MILLISECONDS.
+     */
+    private TimeUnit reconnectMaxSleepTimeUnit = TimeUnit.MILLISECONDS;
+    
+    /**
+     * Session timeout.
+     * Default is 60000.
+     */
+    private long sessionTimeout = 60 * 1000;
+
+    /**
+     * Session timeout TimeUnit.
+     * Default is TimeUnit.MILLISECONDS.
+     */
+    private TimeUnit sessionTimeoutUnit =  TimeUnit.MILLISECONDS;
+
+    /**
+     * Connection timeout.
+     * Default is 15000.
+     */
+    private long connectionTimeout = 15 * 1000;
+
+    /**
+     * Connection timeout TimeUnit.
+     * Default is TimeUnit.MILLISECONDS.
+     */
+    private TimeUnit connectionTimeoutUnit = TimeUnit.MILLISECONDS;
+    
+    /**
+     * Time to wait during close to join background threads.
+     * Default is 1000.
+     */
+    private long maxCloseWait = 1000;
+    
+    /**
+     * MaxCloseWait TimeUnit.
+     * Default is TimeUnit.MILLISECONDS.
+     */
+    private TimeUnit maxCloseWaitUnit = TimeUnit.MILLISECONDS;
+    
+    /**
+     * Zookeeper CuratorFramework-style client.
+     */
+    private CuratorFramework curatorFramework;
+
+    /**
+     * List of AuthInfo objects with scheme and auth.
+     */
+    private List<AuthInfo> authInfoList;
+
+    /** 
+     * Retry policy to use.
+     */
+    private RetryPolicy retryPolicy;
+
 }
