@@ -26,6 +26,7 @@ class SpringPropertiesParser extends DefaultPropertiesParser {
     // Members
 
     @Autowired
+    @Qualifier("environment")
     private PropertyResolver propertyResolver;
 
     // Overridden
