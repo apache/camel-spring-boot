@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 331 in 264 JAR artifacts (1 deprecated)
+Number of Camel components: 332 in 265 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -946,6 +946,9 @@ Number of Camel components: 331 in 264 JAR artifacts (1 deprecated)
 
 | link:https://camel.apache.org/components/latest/vertx-component.html[Vert.x] (camel-vertx-starter) +
 `vertx:address` | 2.12 | Send and receive messages to/from Vert.x Event Bus.
+
+| link:https://camel.apache.org/components/latest/vertx-websocket-component.html[Vert.x WebSocket] (camel-vertx-websocket-starter) +
+`vertx-websocket:host:port/resourceUri` | 3.5 | Camel WebSocket support with Vert.x
 
 | link:https://camel.apache.org/components/latest/vm-component.html[VM] (camel-vm-starter) +
 `vm:name` | 1.1 | Call another endpoint in the same CamelContext asynchronously.

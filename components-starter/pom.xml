@@ -405,12 +405,13 @@
     <module>camel-timer-starter</module>
     <module>camel-twilio-starter</module>
     <module>camel-twitter-starter</module>
-    <module>camel-undertow-starter</module>
     <module>camel-undertow-spring-security-starter</module>
+    <module>camel-undertow-starter</module>
     <module>camel-univocity-parsers-starter</module>
     <module>camel-validator-starter</module>
     <module>camel-velocity-starter</module>
     <module>camel-vertx-starter</module>
+    <module>camel-vertx-websocket-starter</module>
     <module>camel-vm-starter</module>
     <module>camel-weather-starter</module>
     <module>camel-web3j-starter</module>
