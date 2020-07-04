@@ -1,0 +1,355 @@
+{
+    "properties": [
+        {
+            "name": "camel.component.consul.cluster.service.acl-token",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The ACL token to be used with Consul"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.block-seconds",
+            "type": "java.lang.Integer",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The ACL token to be used with Consul"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.connect-timeout",
+            "type": "java.time.Duration",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "Connect timeout for OkHttpClient"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.consistency-mode",
+            "type": "com.orbitz.consul.option.ConsistencyMode",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The consistencyMode used for queries.",
+            "defaultValue": "ConsistencyMode.DEFAULT"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.datacenter",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The data center"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.first-index",
+            "type": "java.math.BigInteger",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The first index for watch for",
+            "defaultValue": "0"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.near-node",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The near node to use for queries."
+        },
+        {
+            "name": "camel.component.consul.cluster.service.node-meta",
+            "type": "java.util.List<java.lang.String>",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The note meta-data to use for queries."
+        },
+        {
+            "name": "camel.component.consul.cluster.service.password",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The password to be used for basic authentication"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.ping-instance",
+            "type": "java.lang.Boolean",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "Configure if the AgentClient should attempt a ping before returning the Consul instance",
+            "defaultValue": "true"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.read-timeout",
+            "type": "java.time.Duration",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "Read timeout for OkHttpClient"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.recursive",
+            "type": "java.lang.Boolean",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "Recursively watch",
+            "defaultValue": "false"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.ssl-context-parameters",
+            "type": "org.apache.camel.support.jsse.SSLContextParameters",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance."
+        },
+        {
+            "name": "camel.component.consul.cluster.service.tags",
+            "type": "java.util.Set<java.lang.String>",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "Set tags. You can separate multiple tags by comma."
+        },
+        {
+            "name": "camel.component.consul.cluster.service.url",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The Consul agent URL"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.user-name",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The username to be used for basic authentication"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.write-timeout",
+            "type": "java.time.Duration",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "Write timeout for OkHttpClient"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.connect-timeout-millis",
+            "type": "java.lang.Long",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "deprecated": true,
+            "deprecation": {},
+            "description": "Use connectTimeout instead."
+        },
+        {
+            "name": "camel.component.consul.cluster.service.dc",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "deprecated": true,
+            "deprecation": {},
+            "description": "Use datacenter instead."
+        },
+        {
+            "name": "camel.component.consul.cluster.service.read-timeout-millis",
+            "type": "java.lang.Long",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "deprecated": true,
+            "deprecation": {},
+            "description": "Use readTimeout instead."
+        },
+        {
+            "name": "camel.component.consul.cluster.service.write-timeout-millis",
+            "type": "java.lang.Long",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "deprecated": true,
+            "deprecation": {},
+            "description": "Use writeTimeout instead."
+        },
+        {
+            "name": "camel.component.consul.cluster.service.root-path",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "Consul root path",
+            "defaultValue": "/camel"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.session-lock-delay",
+            "type": "java.lang.Integer",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The value for lockDelay",
+            "defaultValue": "5"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.session-refresh-interval",
+            "type": "java.lang.Integer",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The value of wait attribute",
+            "defaultValue": "5"
+        },
+        {
+            "name": "camel.component.consul.cluster.service.session-ttl",
+            "type": "java.lang.Integer",
+            "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+            "description": "The value of TTL",
+            "defaultValue": "60"
+        },
+
+
+
+
+
+
+        {
+            "name": "camel.component.consul.service-registry.acl-token",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "The ACL token to be used with Consul"
+        },
+        {
+            "name": "camel.component.consul.service-registry.block-seconds",
+            "type": "java.lang.Integer",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "The ACL token to be used with Consul"
+        },
+        {
+            "name": "camel.component.consul.service-registry.connect-timeout",
+            "type": "java.time.Duration",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "Connect timeout for OkHttpClient"
+        },
+        {
+            "name": "camel.component.consul.service-registry.consistency-mode",
+            "type": "com.orbitz.consul.option.ConsistencyMode",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "The consistencyMode used for queries.",
+            "defaultValue": "ConsistencyMode.DEFAULT"
+        },
+        {
+            "name": "camel.component.consul.service-registry.datacenter",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "The data center"
+        },
+        {
+            "name": "camel.component.consul.service-registry.first-index",
+            "type": "java.math.BigInteger",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "The first index for watch for",
+            "defaultValue": "0"
+        },
+        {
+            "name": "camel.component.consul.service-registry.near-node",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "The near node to use for queries."
+        },
+        {
+            "name": "camel.component.consul.service-registry.node-meta",
+            "type": "java.util.List<java.lang.String>",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "The note meta-data to use for queries."
+        },
+        {
+            "name": "camel.component.consul.service-registry.password",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "The password to be used for basic authentication"
+        },
+        {
+            "name": "camel.component.consul.service-registry.ping-instance",
+            "type": "java.lang.Boolean",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "Configure if the AgentClient should attempt a ping before returning the Consul instance",
+            "defaultValue": "true"
+        },
+        {
+            "name": "camel.component.consul.service-registry.read-timeout",
+            "type": "java.time.Duration",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "Read timeout for OkHttpClient"
+        },
+        {
+            "name": "camel.component.consul.service-registry.recursive",
+            "type": "java.lang.Boolean",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "Recursively watch",
+            "defaultValue": "false"
+        },
+        {
+            "name": "camel.component.consul.service-registry.ssl-context-parameters",
+            "type": "org.apache.camel.support.jsse.SSLContextParameters",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance."
+        },
+        {
+            "name": "camel.component.consul.service-registry.tags",
+            "type": "java.util.Set<java.lang.String>",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "Set tags. You can separate multiple tags by comma."
+        },
+        {
+            "name": "camel.component.consul.service-registry.url",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "The Consul agent URL"
+        },
+        {
+            "name": "camel.component.consul.service-registry.user-name",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "The username to be used for basic authentication"
+        },
+        {
+            "name": "camel.component.consul.service-registry.write-timeout",
+            "type": "java.time.Duration",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "Write timeout for OkHttpClient"
+        },
+        {
+            "name": "camel.component.consul.service-registry.connect-timeout-millis",
+            "type": "java.lang.Long",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "deprecated": true,
+            "deprecation": {},
+            "description": "Use connectTimeout instead."
+        },
+        {
+            "name": "camel.component.consul.service-registry.dc",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "deprecated": true,
+            "deprecation": {},
+            "description": "Use datacenter instead."
+        },
+        {
+            "name": "camel.component.consul.service-registry.read-timeout-millis",
+            "type": "java.lang.Long",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "deprecated": true,
+            "deprecation": {},
+            "description": "Use readTimeout instead."
+        },
+        {
+            "name": "camel.component.consul.service-registry.write-timeout-millis",
+            "type": "java.lang.Long",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "deprecated": true,
+            "deprecation": {},
+            "description": "Use writeTimeout instead."
+        },
+        {
+            "name": "camel.component.consul.service-registry.check-interval",
+            "type": "java.lang.Integer",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "How often (in seconds) a service has to be marked as healthy if its check is TTL or how often the check should run",
+            "defaultValue": "5"
+        },
+        {
+            "name": "camel.component.consul.service-registry.check-ttl",
+            "type": "java.lang.Integer",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "The time (in seconds) to live for TTL checks",
+            "defaultValue": "60"
+        },
+        {
+            "name": "camel.component.consul.service-registry.deregister-after",
+            "type": "java.lang.Integer",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "How long (in seconds) to wait to deregister a service in case of unclean shutdown.",
+            "defaultValue": "3600"
+        },
+        {
+            "name": "camel.component.consul.service-registry.deregister-services-on-stop",
+            "type": "java.lang.Boolean",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "Should we remove all the registered services know by this registry on stop?",
+            "defaultValue": "true"
+        },
+        {
+            "name": "camel.component.consul.service-registry.override-service-host",
+            "type": "java.lang.Boolean",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "Should we override the service host if given ?",
+            "defaultValue": "true"
+        },
+        {
+            "name": "camel.component.consul.service-registry.service-host",
+            "type": "java.lang.String",
+            "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+            "description": "Service host."
+        }
+    ]
+}
