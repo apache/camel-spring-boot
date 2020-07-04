@@ -28,25 +28,6 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     // ---------------------------
 
     /**
-     * Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while
-     * the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and
-     * handled by the routing Error Handler.
-     * <p/>
-     * By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions,
-     * that will be logged at WARN/ERROR level and ignored.
-     *
-     * The default value is false.
-     */
-    public boolean endpointBridgeErrorHandler;
-
-    /**
-     * Whether the endpoint should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities.
-     *
-     * The default value is false.
-     */
-    public boolean endpointBasicPropertyBinding;
-
-    /**
      * Whether to use the main run controller to ensure the Spring-Boot application
      * keeps running until being stopped or the JVM terminated.
      * You typically only need this if you run Spring-Boot standalone.
@@ -364,6 +345,25 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * The default value is false.
      */
     private boolean endpointRuntimeStatisticsEnabled;
+
+    /**
+     * Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while
+     * the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and
+     * handled by the routing Error Handler.
+     * <p/>
+     * By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions,
+     * that will be logged at WARN/ERROR level and ignored.
+     *
+     * The default value is false.
+     */
+    public boolean endpointBridgeErrorHandler;
+
+    /**
+     * Whether the endpoint should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities.
+     *
+     * The default value is false.
+     */
+    public boolean endpointBasicPropertyBinding;
 
     /**
      * Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup
