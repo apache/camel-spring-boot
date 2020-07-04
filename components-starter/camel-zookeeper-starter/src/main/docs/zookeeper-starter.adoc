@@ -30,23 +30,23 @@ The component supports 57 options, which are listed below.
 | *camel.component.zookeeper.cluster.service.attributes* | Custom service attributes. |  | Map
 | *camel.component.zookeeper.cluster.service.auth-info-list* | List of AuthInfo objects with scheme and auth. |  | List
 | *camel.component.zookeeper.cluster.service.base-path* | The base path to store in ZooKeeper. |  | String
-| *camel.component.zookeeper.cluster.service.connection-timeout* | Connection timeout. Default is 15000. |  | Long
+| *camel.component.zookeeper.cluster.service.connection-timeout* | Connection timeout. | 15000 | Long
 | *camel.component.zookeeper.cluster.service.connection-timeout-unit* | Connection timeout TimeUnit. Default is TimeUnit.MILLISECONDS. |  | TimeUnit
 | *camel.component.zookeeper.cluster.service.curator-framework* | Zookeeper CuratorFramework-style client. |  | CuratorFramework
-| *camel.component.zookeeper.cluster.service.enabled* | Sets if the zookeeper cluster service should be enabled or not, default is false. |  | Boolean
+| *camel.component.zookeeper.cluster.service.enabled* | Sets if the zookeeper cluster service should be enabled or not, default is false. | false | Boolean
 | *camel.component.zookeeper.cluster.service.id* | Cluster Service ID |  | String
-| *camel.component.zookeeper.cluster.service.max-close-wait* | Time to wait during close to join background threads. Default is 1000. |  | Long
+| *camel.component.zookeeper.cluster.service.max-close-wait* | Time to wait during close to join background threads. | 1000 | Long
 | *camel.component.zookeeper.cluster.service.max-close-wait-unit* | MaxCloseWait TimeUnit. Default is TimeUnit.MILLISECONDS. |  | TimeUnit
 | *camel.component.zookeeper.cluster.service.namespace* | ZooKeeper namespace. If a namespace is set here, all paths will get pre-pended with the namespace. |  | String
 | *camel.component.zookeeper.cluster.service.nodes* | The Zookeeper server hosts (multiple servers can be separated by comma). |  | List
 | *camel.component.zookeeper.cluster.service.order* | Service lookup order/priority. |  | Integer
-| *camel.component.zookeeper.cluster.service.reconnect-base-sleep-time* | Initial amount of time to wait between retries. |  | Long
+| *camel.component.zookeeper.cluster.service.reconnect-base-sleep-time* | Initial amount of time to wait between retries. | 0 | Long
 | *camel.component.zookeeper.cluster.service.reconnect-base-sleep-time-unit* | ReconnectBaseSleepTime TimeUnit. Default is TimeUnit.MILLISECONDS. |  | TimeUnit
-| *camel.component.zookeeper.cluster.service.reconnect-max-retries* | Max number of times to retry. Default is 3. |  | Integer
+| *camel.component.zookeeper.cluster.service.reconnect-max-retries* | Max number of times to retry. | 3 | Integer
 | *camel.component.zookeeper.cluster.service.reconnect-max-sleep-time* | Max time to sleep on each retry. Default is Integer.MAX_VALUE. |  | Long
 | *camel.component.zookeeper.cluster.service.reconnect-max-sleep-time-unit* | ReconnectMaxSleepTimeUnit TimeUnit. Default is TimeUnit.MILLISECONDS. |  | TimeUnit
 | *camel.component.zookeeper.cluster.service.retry-policy* | Retry policy to use. |  | RetryPolicy
-| *camel.component.zookeeper.cluster.service.session-timeout* | Session timeout. Default is 60000. |  | Long
+| *camel.component.zookeeper.cluster.service.session-timeout* | Session timeout. | 60000 | Long
 | *camel.component.zookeeper.cluster.service.session-timeout-unit* | Session timeout TimeUnit. Default is TimeUnit.MILLISECONDS. |  | TimeUnit
 | *camel.component.zookeeper.configuration* | To use a shared ZooKeeperConfiguration. The option is a org.apache.camel.component.zookeeper.ZooKeeperConfiguration type. |  | String
 | *camel.component.zookeeper.create* | Should the endpoint create the node if it does not currently exist. | false | Boolean
@@ -59,26 +59,26 @@ The component supports 57 options, which are listed below.
 | *camel.component.zookeeper.service-registry.attributes* | Custom service attributes. |  | Map
 | *camel.component.zookeeper.service-registry.auth-info-list* | List of AuthInfo objects with scheme and auth. |  | List
 | *camel.component.zookeeper.service-registry.base-path* | The base path to store in ZooKeeper. |  | String
-| *camel.component.zookeeper.service-registry.connection-timeout* | Connection timeout. Default is 15000. |  | Long
+| *camel.component.zookeeper.service-registry.connection-timeout* | Connection timeout. | 15000 | Long
 | *camel.component.zookeeper.service-registry.connection-timeout-unit* | Connection timeout TimeUnit. Default is TimeUnit.MILLISECONDS. |  | TimeUnit
 | *camel.component.zookeeper.service-registry.curator-framework* | Zookeeper CuratorFramework-style client. |  | CuratorFramework
-| *camel.component.zookeeper.service-registry.deregister-services-on-stop* | Should we remove all the registered services know by this registry on stop ?  Default is true. |  | Boolean
-| *camel.component.zookeeper.service-registry.enabled* | Sets if the zookeeper service registry should be enabled or not, default is false. |  | Boolean
+| *camel.component.zookeeper.service-registry.deregister-services-on-stop* | Should we remove all the registered services know by this registry on stop ?  Default is true. | true | Boolean
+| *camel.component.zookeeper.service-registry.enabled* | Sets if the zookeeper service registry should be enabled or not, default is false. | false | Boolean
 | *camel.component.zookeeper.service-registry.id* | Service Registry ID |  | String
-| *camel.component.zookeeper.service-registry.max-close-wait* | Time to wait during close to join background threads. Default is 1000. |  | Long
+| *camel.component.zookeeper.service-registry.max-close-wait* | Time to wait during close to join background threads. | 1000 | Long
 | *camel.component.zookeeper.service-registry.max-close-wait-unit* | MaxCloseWait TimeUnit. Default is TimeUnit.MILLISECONDS. |  | TimeUnit
 | *camel.component.zookeeper.service-registry.namespace* | ZooKeeper namespace. If a namespace is set here, all paths will get pre-pended with the namespace. |  | String
 | *camel.component.zookeeper.service-registry.nodes* | The Zookeeper server hosts (multiple servers can be separated by comma). |  | List
 | *camel.component.zookeeper.service-registry.order* | Service lookup order/priority. |  | Integer
-| *camel.component.zookeeper.service-registry.override-service-host* | Should we override the service host if given ?  Default is true. |  | Boolean
-| *camel.component.zookeeper.service-registry.reconnect-base-sleep-time* | Initial amount of time to wait between retries. |  | Long
+| *camel.component.zookeeper.service-registry.override-service-host* | Should we override the service host if given ?  Default is true. | true | Boolean
+| *camel.component.zookeeper.service-registry.reconnect-base-sleep-time* | Initial amount of time to wait between retries. | 0 | Long
 | *camel.component.zookeeper.service-registry.reconnect-base-sleep-time-unit* | ReconnectBaseSleepTime TimeUnit. Default is TimeUnit.MILLISECONDS. |  | TimeUnit
-| *camel.component.zookeeper.service-registry.reconnect-max-retries* | Max number of times to retry. Default is 3. |  | Integer
+| *camel.component.zookeeper.service-registry.reconnect-max-retries* | Max number of times to retry. | 3 | Integer
 | *camel.component.zookeeper.service-registry.reconnect-max-sleep-time* | Max time to sleep on each retry. Default is Integer.MAX_VALUE. |  | Long
 | *camel.component.zookeeper.service-registry.reconnect-max-sleep-time-unit* | ReconnectMaxSleepTimeUnit TimeUnit. Default is TimeUnit.MILLISECONDS. |  | TimeUnit
 | *camel.component.zookeeper.service-registry.retry-policy* | Retry policy to use. |  | RetryPolicy
 | *camel.component.zookeeper.service-registry.service-host* | Service host. |  | String
-| *camel.component.zookeeper.service-registry.session-timeout* | Session timeout. Default is 60000. |  | Long
+| *camel.component.zookeeper.service-registry.session-timeout* | Session timeout. | 60000 | Long
 | *camel.component.zookeeper.service-registry.session-timeout-unit* | Session timeout TimeUnit. Default is TimeUnit.MILLISECONDS. |  | TimeUnit
 | *camel.component.zookeeper.timeout* | The time interval to wait on connection before timing out. | 5000 | Integer
 |===

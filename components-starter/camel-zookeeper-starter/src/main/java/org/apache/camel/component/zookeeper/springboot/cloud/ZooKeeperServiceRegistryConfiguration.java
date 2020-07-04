@@ -129,7 +129,6 @@ public class ZooKeeperServiceRegistryConfiguration extends org.apache.camel.comp
 
     /**
      * Max number of times to retry.
-     * Default is 3.
      */
     private int reconnectMaxRetries = 3;
 
@@ -147,9 +146,8 @@ public class ZooKeeperServiceRegistryConfiguration extends org.apache.camel.comp
     
     /**
      * Session timeout.
-     * Default is 60000.
      */
-    private long sessionTimeout = 60 * 1000;
+    private long sessionTimeout = 60000;
 
     /**
      * Session timeout TimeUnit.
@@ -159,9 +157,8 @@ public class ZooKeeperServiceRegistryConfiguration extends org.apache.camel.comp
 
     /**
      * Connection timeout.
-     * Default is 15000.
      */
-    private long connectionTimeout = 15 * 1000;
+    private long connectionTimeout = 15000;
 
     /**
      * Connection timeout TimeUnit.
@@ -171,7 +168,6 @@ public class ZooKeeperServiceRegistryConfiguration extends org.apache.camel.comp
     
     /**
      * Time to wait during close to join background threads.
-     * Default is 1000.
      */
     private long maxCloseWait = 1000;
     
