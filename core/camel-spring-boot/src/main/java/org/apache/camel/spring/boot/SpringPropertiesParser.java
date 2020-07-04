@@ -18,15 +18,14 @@ package org.apache.camel.spring.boot;
 
 import org.apache.camel.component.properties.DefaultPropertiesParser;
 import org.apache.camel.component.properties.PropertiesLookup;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 import org.springframework.core.env.PropertyResolver;
 
-class SpringPropertiesParser extends DefaultPropertiesParser {
+class SpringPropertiesParser extends DefaultPropertiesParser implements EnvironmentAware {
 
     // Members
 
-    @Autowired
-    @Qualifier("environment")
     private PropertyResolver propertyResolver;
 
     // Overridden
@@ -34,6 +33,11 @@ class SpringPropertiesParser extends DefaultPropertiesParser {
     @Override
     public String parseProperty(String key, String value, PropertiesLookup properties) {
         return propertyResolver.getProperty(key);
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.propertyResolver = environment;
     }
 
 }
