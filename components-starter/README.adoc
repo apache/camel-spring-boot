@@ -105,7 +105,7 @@ Number of Camel components: 332 in 265 JAR artifacts (1 deprecated)
 `aws2-mq:label` | 3.1 | Manage AWS MQ instances using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-s3-component.html[AWS 2 S3 Storage Service] (camel-aws2-s3-starter) +
-`aws2-s3://bucketNameOrArn` | 3.2 | Store and retrie objects from AWS S3 Storage Service using AWS SDK version 2.x.
+`aws2-s3://bucketNameOrArn` | 3.2 | Store and retrieve objects from AWS S3 Storage Service using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-ses-component.html[AWS 2 Simple Email Service (SES)] (camel-aws2-ses-starter) +
 `aws2-ses:from` | 3.1 | Send e-mails through AWS SES service using AWS SDK version 2.x.
@@ -159,7 +159,7 @@ Number of Camel components: 332 in 265 JAR artifacts (1 deprecated)
 `aws-mq:label` | 2.21 | Manage AWS MQ instances.
 
 | link:https://camel.apache.org/components/latest/aws-s3-component.html[AWS S3 Storage Service] (camel-aws-s3-starter) +
-`aws-s3://bucketNameOrArn` | 2.8 | Store and retrie objects from AWS S3 Storage Service.
+`aws-s3://bucketNameOrArn` | 2.8 | Store and retrieve objects from AWS S3 Storage Service.
 
 | link:https://camel.apache.org/components/latest/aws-ses-component.html[AWS Simple Email Service (SES)] (camel-aws-ses-starter) +
 `aws-ses:from` | 2.9 | Send e-mails through AWS SES service.
