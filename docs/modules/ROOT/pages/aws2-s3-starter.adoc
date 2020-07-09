@@ -17,7 +17,7 @@ When using aws2-s3 with Spring Boot make sure to use the following Maven depende
 ----
 
 
-The component supports 39 options, which are listed below.
+The component supports 40 options, which are listed below.
 
 
 
@@ -59,6 +59,7 @@ The component supports 39 options, which are listed below.
 | *camel.component.aws2-s3.region* | The region in which S3 client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
 | *camel.component.aws2-s3.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws2-s3.storage-class* | The storage class to set in the com.amazonaws.services.s3.model.PutObjectRequest request. |  | String
+| *camel.component.aws2-s3.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | *camel.component.aws2-s3.uri-endpoint-override* | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
 | *camel.component.aws2-s3.use-aws-k-m-s* | Define if KMS must be used or not | false | Boolean
 | *camel.component.aws2-s3.use-customer-key* | Define if Customer Key must be used or not | false | Boolean

@@ -95,6 +95,10 @@ public class Ddb2StreamComponentConfiguration
      */
     private String sequenceNumberProvider;
     /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -187,6 +191,14 @@ public class Ddb2StreamComponentConfiguration
 
     public void setSequenceNumberProvider(String sequenceNumberProvider) {
         this.sequenceNumberProvider = sequenceNumberProvider;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
     }
 
     public Boolean getBasicPropertyBinding() {

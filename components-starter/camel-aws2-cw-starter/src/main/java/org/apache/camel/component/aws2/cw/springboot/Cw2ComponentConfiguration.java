@@ -86,6 +86,10 @@ public class Cw2ComponentConfiguration
      */
     private String timestamp;
     /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
      * The metric unit
      */
     private String unit;
@@ -177,6 +181,14 @@ public class Cw2ComponentConfiguration
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
     }
 
     public String getUnit() {

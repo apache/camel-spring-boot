@@ -17,7 +17,7 @@ When using aws2-ddb with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 31 options, which are listed below.
+The component supports 33 options, which are listed below.
 
 
 
@@ -40,6 +40,7 @@ The component supports 31 options, which are listed below.
 | *camel.component.aws2-ddb.read-capacity* | The provisioned throughput to reserve for reading resources from your table |  | Long
 | *camel.component.aws2-ddb.region* | The region in which DDB client needs to work |  | String
 | *camel.component.aws2-ddb.secret-key* | Amazon AWS Secret Key |  | String
+| *camel.component.aws2-ddb.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | *camel.component.aws2-ddb.write-capacity* | The provisioned throughput to reserved for writing resources to your table |  | Long
 | *camel.component.aws2-ddbstream.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws2-ddbstream.amazon-dynamo-db-streams-client* | Amazon DynamoDB client to use for all requests for this endpoint. The option is a software.amazon.awssdk.services.dynamodb.streams.DynamoDbStreamsClient type. |  | String
@@ -55,5 +56,6 @@ The component supports 31 options, which are listed below.
 | *camel.component.aws2-ddbstream.region* | The region in which DDBStreams client needs to work |  | String
 | *camel.component.aws2-ddbstream.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws2-ddbstream.sequence-number-provider* | Provider for the sequence number when using one of the two ShardIteratorType.{AT,AFTER}_SEQUENCE_NUMBER iterator types. Can be a registry reference or a literal sequence number. The option is a org.apache.camel.component.aws2.ddbstream.SequenceNumberProvider type. |  | String
+| *camel.component.aws2-ddbstream.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 |===
 // spring-boot-auto-configure options: END
