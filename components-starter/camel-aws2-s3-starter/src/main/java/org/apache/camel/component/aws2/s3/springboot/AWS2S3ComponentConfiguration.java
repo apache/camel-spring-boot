@@ -87,6 +87,10 @@ public class AWS2S3ComponentConfiguration
      */
     private String region;
     /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
      */
@@ -322,6 +326,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
     }
 
     public String getUriEndpointOverride() {

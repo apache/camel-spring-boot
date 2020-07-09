@@ -101,6 +101,10 @@ public class Ddb2ComponentConfiguration
      */
     private String region;
     /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
      * The provisioned throughput to reserved for writing resources to your
      * table
      */
@@ -213,6 +217,14 @@ public class Ddb2ComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
     }
 
     public Long getWriteCapacity() {
