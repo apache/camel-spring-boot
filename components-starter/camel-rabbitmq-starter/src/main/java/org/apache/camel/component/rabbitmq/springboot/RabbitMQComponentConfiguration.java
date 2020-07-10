@@ -223,8 +223,9 @@ public class RabbitMQComponentConfiguration
     /**
      * Specify arguments for configuring the different RabbitMQ concepts, a
      * different prefix is required for each: Exchange: arg.exchange. Queue:
-     * arg.queue. Binding: arg.binding. For example to declare a queue with
-     * message ttl argument:
+     * arg.queue. Binding: arg.binding. DLQ: arg.dlq.queue. DLQ Binding:
+     * arg.dlq.binding. For example to declare a queue with message ttl
+     * argument:
      * http://localhost:5672/exchange/queueargs=arg.queue.x-message-ttl=60000
      */
     private Map<String, Object> args;

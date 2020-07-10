@@ -99,6 +99,10 @@ public class Translate2ComponentConfiguration
      */
     private String translateClient;
     /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -206,6 +210,14 @@ public class Translate2ComponentConfiguration
 
     public void setTranslateClient(String translateClient) {
         this.translateClient = translateClient;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
     }
 
     public Boolean getBasicPropertyBinding() {
