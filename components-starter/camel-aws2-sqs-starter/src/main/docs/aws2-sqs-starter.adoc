@@ -17,7 +17,7 @@ When using aws2-sqs with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 39 options, which are listed below.
+The component supports 40 options, which are listed below.
 
 
 
@@ -61,6 +61,7 @@ The component supports 39 options, which are listed below.
 | *camel.component.aws2-sqs.region* | The region in which SQS client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
 | *camel.component.aws2-sqs.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws2-sqs.server-side-encryption-enabled* | Define if Server Side Encryption is enabled or not on the queue | false | Boolean
+| *camel.component.aws2-sqs.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | *camel.component.aws2-sqs.visibility-timeout* | The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request to set in the com.amazonaws.services.sqs.model.SetQueueAttributesRequest. This only make sense if its different from defaultVisibilityTimeout. It changes the queue visibility timeout attribute permanently. |  | Integer
 | *camel.component.aws2-sqs.wait-time-seconds* | Duration in seconds (0 to 20) that the ReceiveMessage action call will wait until a message is in the queue to include in the response. |  | Integer
 |===

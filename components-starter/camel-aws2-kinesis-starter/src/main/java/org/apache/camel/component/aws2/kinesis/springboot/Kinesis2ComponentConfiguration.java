@@ -71,6 +71,10 @@ public class Kinesis2ComponentConfiguration
      */
     private String region;
     /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -175,6 +179,14 @@ public class Kinesis2ComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
     }
 
     public Boolean getBridgeErrorHandler() {

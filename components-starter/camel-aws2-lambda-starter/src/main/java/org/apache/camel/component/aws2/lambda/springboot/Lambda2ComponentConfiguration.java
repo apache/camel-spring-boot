@@ -71,6 +71,10 @@ public class Lambda2ComponentConfiguration
      */
     private String region;
     /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
      * To use a existing configured AwsLambdaClient as client. The option is a
      * software.amazon.awssdk.services.lambda.LambdaClient type.
      */
@@ -139,6 +143,14 @@ public class Lambda2ComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
     }
 
     public String getAwsLambdaClient() {

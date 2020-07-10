@@ -78,6 +78,10 @@ public class Sqs2ComponentConfiguration
      */
     private String region;
     /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
      * A list of attribute names to receive when consuming. Multiple names can
      * be separated by comma.
      */
@@ -305,6 +309,14 @@ public class Sqs2ComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
     }
 
     public String getAttributeNames() {

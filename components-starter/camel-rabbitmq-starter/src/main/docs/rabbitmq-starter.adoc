@@ -26,7 +26,7 @@ The component supports 54 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.rabbitmq.addresses* | If this option is set, camel-rabbitmq will try to create connection based on the setting of option addresses. The addresses value is a string which looks like server1:12345, server2:12345 |  | String
 | *camel.component.rabbitmq.allow-null-headers* | Allow pass null values to header | false | Boolean
-| *camel.component.rabbitmq.args* | Specify arguments for configuring the different RabbitMQ concepts, a different prefix is required for each: Exchange: arg.exchange. Queue: arg.queue. Binding: arg.binding. For example to declare a queue with message ttl argument: \http://localhost:5672/exchange/queueargs=arg.queue.x-message-ttl=60000 |  | Map
+| *camel.component.rabbitmq.args* | Specify arguments for configuring the different RabbitMQ concepts, a different prefix is required for each: Exchange: arg.exchange. Queue: arg.queue. Binding: arg.binding. DLQ: arg.dlq.queue. DLQ Binding: arg.dlq.binding. For example to declare a queue with message ttl argument: \http://localhost:5672/exchange/queueargs=arg.queue.x-message-ttl=60000 |  | Map
 | *camel.component.rabbitmq.auto-ack* | If messages should be auto acknowledged | true | Boolean
 | *camel.component.rabbitmq.auto-delete* | If it is true, the exchange will be deleted when it is no longer in use | true | Boolean
 | *camel.component.rabbitmq.auto-detect-connection-factory* | Whether to auto-detect looking up RabbitMQ connection factory from the registry. When enabled and a single instance of the connection factory is found then it will be used. An explicit connection factory can be configured on the component or endpoint level which takes precedence. | true | Boolean

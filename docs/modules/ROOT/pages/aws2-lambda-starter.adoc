@@ -17,7 +17,7 @@ When using aws2-lambda with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 13 options, which are listed below.
+The component supports 14 options, which are listed below.
 
 
 
@@ -37,5 +37,6 @@ The component supports 13 options, which are listed below.
 | *camel.component.aws2-lambda.proxy-protocol* | To define a proxy protocol when instantiating the Lambda client |  | Protocol
 | *camel.component.aws2-lambda.region* | The region in which ECS client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
 | *camel.component.aws2-lambda.secret-key* | Amazon AWS Secret Key |  | String
+| *camel.component.aws2-lambda.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 |===
 // spring-boot-auto-configure options: END
