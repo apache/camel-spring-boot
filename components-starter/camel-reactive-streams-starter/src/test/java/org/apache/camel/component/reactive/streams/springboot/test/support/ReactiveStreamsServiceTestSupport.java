@@ -18,6 +18,7 @@ package org.apache.camel.component.reactive.streams.springboot.test.support;
 
 import java.util.function.Function;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.component.reactive.streams.ReactiveStreamsCamelSubscriber;
 import org.apache.camel.component.reactive.streams.ReactiveStreamsConsumer;
@@ -163,4 +164,9 @@ public class ReactiveStreamsServiceTestSupport implements CamelReactiveStreamsSe
     public String getId() {
         return id;
     }
+
+	@Override
+	public CamelContext getCamelContext() {
+		return null;
+	}
 }
