@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 332 in 265 JAR artifacts (1 deprecated)
+Number of Camel components: 333 in 266 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -574,6 +574,9 @@ Number of Camel components: 332 in 265 JAR artifacts (1 deprecated)
 
 | link:https://camel.apache.org/components/latest/json-validator-component.html[JSON Schema Validator] (camel-json-validator-starter) +
 `json-validator:resourceUri` | 2.20 | Validate JSON payloads using NetworkNT JSON Schema.
+
+| link:https://camel.apache.org/components/latest/jsonata-component.html[JSONATA] (camel-jsonata-starter) +
+`jsonata:resourceUri` | 3.5 | JSON to JSON transformation using JSONATA.
 
 | link:https://camel.apache.org/components/latest/jt400-component.html[JT400] (camel-jt400-starter) +
 `jt400:userID:password/systemName/objectPath.type` | 1.5 | Exchanges messages with an IBM i system using data queues, message queues, or program call. IBM i is the replacement for AS/400 and iSeries servers.
