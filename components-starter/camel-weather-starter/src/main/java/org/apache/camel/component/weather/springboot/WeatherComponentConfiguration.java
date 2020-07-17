@@ -61,11 +61,6 @@ public class WeatherComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
-    /**
-     * To use an existing configured http client (for example with http proxy).
-     * The option is a org.apache.http.impl.client.CloseableHttpClient type.
-     */
-    private String httpClient;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -89,13 +84,5 @@ public class WeatherComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public String getHttpClient() {
-        return httpClient;
-    }
-
-    public void setHttpClient(String httpClient) {
-        this.httpClient = httpClient;
     }
 }
