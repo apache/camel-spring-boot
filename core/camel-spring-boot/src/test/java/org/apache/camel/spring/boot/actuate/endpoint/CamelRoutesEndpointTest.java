@@ -65,11 +65,6 @@ public class CamelRoutesEndpointTest extends Assert {
         assertTrue(routes.stream().anyMatch(r -> r.getProperties().containsKey("key2") &&  "val2".equals(r.getProperties().get("key2"))));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testRouteDumpReadOnly() throws Exception {
-        endpoint.getRouteDump("foo-route");
-    }
-
     @Test
     public void testReadOperation() throws Exception {
         Object answer = endpoint.doReadAction("foo-route", ReadAction.INFO);

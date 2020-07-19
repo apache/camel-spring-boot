@@ -33,10 +33,7 @@ import org.apache.camel.StatefulService;
 import org.apache.camel.api.management.ManagedCamelContext;
 import org.apache.camel.api.management.mbean.ManagedRouteMBean;
 import org.apache.camel.impl.DefaultCamelContext;
-import org.apache.camel.model.ModelHelper;
-import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.spi.RouteError;
-import org.apache.camel.util.ObjectHelper;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.annotation.Selector;
@@ -116,23 +113,6 @@ public class CamelRoutesEndpoint {
         default:
             throw new IllegalArgumentException("Unsupported write action " + action);
         }
-    }
-
-    @WriteOperation
-    public String getRouteDump(@Selector String id) {
-        if (this.properties.isReadOnly()) {
-            throw new IllegalArgumentException("Read only: route dump is not permitted in read-only mode");
-        }
-
-        RouteDefinition route = dcontext.getRouteDefinition(id);
-        if (route != null) {
-            try {
-                return ModelHelper.dumpModelAsXml(extendedContext, route);
-            } catch (Exception e) {
-                throw ObjectHelper.wrapRuntimeCamelException(e);
-            }
-        }
-        return null;
     }
 
     private RouteEndpointInfo getRouteInfo(String id) {
