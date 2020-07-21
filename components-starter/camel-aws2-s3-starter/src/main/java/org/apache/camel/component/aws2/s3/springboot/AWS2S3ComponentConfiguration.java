@@ -101,6 +101,18 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean useIAMCredentials = false;
     /**
+     * Define the customer algorithm to use in case CustomerKey is enabled
+     */
+    private String customerAlgorithm;
+    /**
+     * Define the id of Customer key to use in case CustomerKey is enabled
+     */
+    private String customerKeyId;
+    /**
+     * Define the MD5 of Customer key to use in case CustomerKey is enabled
+     */
+    private String customerKeyMD5;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -214,18 +226,6 @@ public class AWS2S3ComponentConfiguration
      * Define the id of KMS key to use in case KMS is enabled
      */
     private String awsKMSKeyId;
-    /**
-     * Define the customer algorithm to use in case CustomerKey is enabled
-     */
-    private String customerAlgorithm;
-    /**
-     * Define the id of Customer key to use in case CustomerKey is enabled
-     */
-    private String customerKeyId;
-    /**
-     * Define the MD5 of Customer key to use in case CustomerKey is enabled
-     */
-    private String customerKeyMD5;
     /**
      * Define if KMS must be used or not
      */
@@ -350,6 +350,30 @@ public class AWS2S3ComponentConfiguration
 
     public void setUseIAMCredentials(Boolean useIAMCredentials) {
         this.useIAMCredentials = useIAMCredentials;
+    }
+
+    public String getCustomerAlgorithm() {
+        return customerAlgorithm;
+    }
+
+    public void setCustomerAlgorithm(String customerAlgorithm) {
+        this.customerAlgorithm = customerAlgorithm;
+    }
+
+    public String getCustomerKeyId() {
+        return customerKeyId;
+    }
+
+    public void setCustomerKeyId(String customerKeyId) {
+        this.customerKeyId = customerKeyId;
+    }
+
+    public String getCustomerKeyMD5() {
+        return customerKeyMD5;
+    }
+
+    public void setCustomerKeyMD5(String customerKeyMD5) {
+        this.customerKeyMD5 = customerKeyMD5;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -494,30 +518,6 @@ public class AWS2S3ComponentConfiguration
 
     public void setAwsKMSKeyId(String awsKMSKeyId) {
         this.awsKMSKeyId = awsKMSKeyId;
-    }
-
-    public String getCustomerAlgorithm() {
-        return customerAlgorithm;
-    }
-
-    public void setCustomerAlgorithm(String customerAlgorithm) {
-        this.customerAlgorithm = customerAlgorithm;
-    }
-
-    public String getCustomerKeyId() {
-        return customerKeyId;
-    }
-
-    public void setCustomerKeyId(String customerKeyId) {
-        this.customerKeyId = customerKeyId;
-    }
-
-    public String getCustomerKeyMD5() {
-        return customerKeyMD5;
-    }
-
-    public void setCustomerKeyMD5(String customerKeyMD5) {
-        this.customerKeyMD5 = customerKeyMD5;
     }
 
     public Boolean getUseAwsKMS() {
