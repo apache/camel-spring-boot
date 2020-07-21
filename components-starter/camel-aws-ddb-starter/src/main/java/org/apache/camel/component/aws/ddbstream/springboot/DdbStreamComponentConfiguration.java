@@ -40,6 +40,12 @@ public class DdbStreamComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Setting the autoDiscoverClient mechanism, if true, the component will
+     * look for a client instance in the registry automatically otherwise it
+     * will skip that checking
+     */
+    private Boolean autoDiscoverClient = true;
+    /**
      * Amazon DynamoDB client to use for all requests for this endpoint. The
      * option is a com.amazonaws.services.dynamodbv2.AmazonDynamoDBStreams type.
      */
@@ -105,6 +111,14 @@ public class DdbStreamComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
+
+    public Boolean getAutoDiscoverClient() {
+        return autoDiscoverClient;
+    }
+
+    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
+        this.autoDiscoverClient = autoDiscoverClient;
+    }
 
     public String getAmazonDynamoDbStreamsClient() {
         return amazonDynamoDbStreamsClient;

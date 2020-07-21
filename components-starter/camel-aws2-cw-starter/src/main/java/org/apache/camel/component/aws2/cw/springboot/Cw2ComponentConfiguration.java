@@ -44,6 +44,12 @@ public class Cw2ComponentConfiguration
      */
     private String amazonCwClient;
     /**
+     * Setting the autoDiscoverClient mechanism, if true, the component will
+     * look for a client instance in the registry automatically otherwise it
+     * will skip that checking.
+     */
+    private Boolean autoDiscoverClient = true;
+    /**
      * The component configuration. The option is a
      * org.apache.camel.component.aws2.cw.Cw2Configuration type.
      */
@@ -117,6 +123,14 @@ public class Cw2ComponentConfiguration
 
     public void setAmazonCwClient(String amazonCwClient) {
         this.amazonCwClient = amazonCwClient;
+    }
+
+    public Boolean getAutoDiscoverClient() {
+        return autoDiscoverClient;
+    }
+
+    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
+        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public String getConfiguration() {

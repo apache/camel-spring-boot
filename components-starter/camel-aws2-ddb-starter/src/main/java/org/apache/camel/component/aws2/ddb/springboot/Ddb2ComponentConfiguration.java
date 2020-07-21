@@ -45,6 +45,12 @@ public class Ddb2ComponentConfiguration
      */
     private String amazonDDBClient;
     /**
+     * Setting the autoDiscoverClient mechanism, if true, the component will
+     * look for a client instance in the registry automatically otherwise it
+     * will skip that checking.
+     */
+    private Boolean autoDiscoverClient = true;
+    /**
      * The component configuration. The option is a
      * org.apache.camel.component.aws2.ddb.Ddb2Configuration type.
      */
@@ -129,6 +135,14 @@ public class Ddb2ComponentConfiguration
 
     public void setAmazonDDBClient(String amazonDDBClient) {
         this.amazonDDBClient = amazonDDBClient;
+    }
+
+    public Boolean getAutoDiscoverClient() {
+        return autoDiscoverClient;
+    }
+
+    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
+        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public String getConfiguration() {

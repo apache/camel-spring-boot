@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 333 in 266 JAR artifacts (1 deprecated)
+Number of Camel components: 333 in 266 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -182,14 +182,14 @@ Number of Camel components: 333 in 266 JAR artifacts (1 deprecated)
 | link:https://camel.apache.org/components/latest/azure-storage-blob-component.html[Azure Storage Blob Service] (camel-azure-storage-blob-starter) +
 `azure-storage-blob:containerName` | 3.3 | Store and retrieve blobs from Azure Storage Blob Service using SDK v12.
 
-| link:https://camel.apache.org/components/latest/azure-blob-component.html[Azure Storage Blob Service (Legacy)] (camel-azure-starter) +
-`azure-blob:containerOrBlobUri` | 2.19 | Store and retrieve blobs from Azure Storage Blob Service.
+| link:https://camel.apache.org/components/latest/azure-blob-component.html[Azure Storage Blob Service (Deprecated)] (camel-azure-starter) +
+`azure-blob:containerOrBlobUri` | 2.19 | *deprecated* Store and retrieve blobs from Azure Storage Blob Service.
 
 | link:https://camel.apache.org/components/latest/azure-storage-queue-component.html[Azure Storage Queue Service] (camel-azure-storage-queue-starter) +
 `azure-storage-queue:queueName` | 3.3 | The azure-storage-queue component is used for storing and retrieving the messages to/from Azure Storage Queue using Azure SDK v12.
 
-| link:https://camel.apache.org/components/latest/azure-queue-component.html[Azure Storage Queue Service (Legacy)] (camel-azure-starter) +
-`azure-queue:containerAndQueueUri` | 2.19 | Store and retrieve messages from Azure Storage Queue Service.
+| link:https://camel.apache.org/components/latest/azure-queue-component.html[Azure Storage Queue Service (Deprecated)] (camel-azure-starter) +
+`azure-queue:containerAndQueueUri` | 2.19 | *deprecated* Store and retrieve messages from Azure Storage Queue Service.
 
 | link:https://camel.apache.org/components/latest/bean-component.html[Bean] (camel-bean-starter) +
 `bean:beanName` | 1.0 | Invoke methods of Java beans stored in Camel registry.

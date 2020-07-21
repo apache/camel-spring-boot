@@ -49,6 +49,12 @@ public class S3ComponentConfiguration
      */
     private Boolean autoCreateBucket = true;
     /**
+     * Setting the autoDiscoverClient mechanism, if true, the component will
+     * look for a client instance in the registry automatically otherwise it
+     * will skip that checking.
+     */
+    private Boolean autoDiscoverClient = true;
+    /**
      * The component configuration. The option is a
      * org.apache.camel.component.aws.s3.S3Configuration type.
      */
@@ -254,6 +260,14 @@ public class S3ComponentConfiguration
 
     public void setAutoCreateBucket(Boolean autoCreateBucket) {
         this.autoCreateBucket = autoCreateBucket;
+    }
+
+    public Boolean getAutoDiscoverClient() {
+        return autoDiscoverClient;
+    }
+
+    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
+        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public String getConfiguration() {
