@@ -17,7 +17,7 @@ When using aws-ecs with Spring Boot make sure to use the following Maven depende
 ----
 
 
-The component supports 12 options, which are listed below.
+The component supports 13 options, which are listed below.
 
 
 
@@ -25,6 +25,7 @@ The component supports 12 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.aws-ecs.access-key* | Amazon AWS Access Key |  | String
+| *camel.component.aws-ecs.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
 | *camel.component.aws-ecs.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws-ecs.configuration* | The component configuration. The option is a org.apache.camel.component.aws.ecs.ECSConfiguration type. |  | String
 | *camel.component.aws-ecs.ecs-client* | To use a existing configured AWS ECS as client. The option is a com.amazonaws.services.ecs.AmazonECS type. |  | String

@@ -40,6 +40,12 @@ public class AWS2EC2ComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Setting the autoDiscoverClient mechanism, if true, the component will
+     * look for a client instance in the registry automatically otherwise it
+     * will skip that checking.
+     */
+    private Boolean autoDiscoverClient = true;
+    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
@@ -106,6 +112,14 @@ public class AWS2EC2ComponentConfiguration
      * the newer property binding with additional capabilities
      */
     private Boolean basicPropertyBinding = false;
+
+    public Boolean getAutoDiscoverClient() {
+        return autoDiscoverClient;
+    }
+
+    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
+        this.autoDiscoverClient = autoDiscoverClient;
+    }
 
     public String getAccessKey() {
         return accessKey;
