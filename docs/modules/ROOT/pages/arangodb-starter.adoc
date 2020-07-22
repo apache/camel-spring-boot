@@ -1,0 +1,40 @@
+// spring-boot-auto-configure options: START
+:page-partial:
+:doctitle: Camel Spring Boot Starter for arangodb
+
+== Spring Boot Auto-Configuration
+
+When using arangodb with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-arangodb-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 10 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.component.arangodb.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.arangodb.collection* | collection in the database |  | String
+| *camel.component.arangodb.configuration* | Component configuration. The option is a org.apache.camel.component.arangodb.ArangoDbConfiguration type. |  | String
+| *camel.component.arangodb.enabled* | Whether to enable auto configuration of the arangodb component. This is enabled by default. |  | Boolean
+| *camel.component.arangodb.host* | host if host and/or port different from default |  | String
+| *camel.component.arangodb.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.arangodb.operation* | operation to perform |  | ArangoDbOperation
+| *camel.component.arangodb.password* | password if user and/or password different from default |  | String
+| *camel.component.arangodb.port* | port if host and/or port different from default |  | Integer
+| *camel.component.arangodb.user* | user if user and/or password different from default |  | String
+|===
+
+
+// spring-boot-auto-configure options: END
