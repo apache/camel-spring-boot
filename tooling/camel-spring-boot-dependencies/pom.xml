@@ -3724,6 +3724,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-vertx-http</artifactId>
+        <version>3.5.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-vertx-websocket</artifactId>
         <version>3.5.0-SNAPSHOT</version>
       </dependency>
