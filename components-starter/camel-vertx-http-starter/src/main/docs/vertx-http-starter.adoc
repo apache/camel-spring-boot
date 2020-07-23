@@ -1,0 +1,39 @@
+// spring-boot-auto-configure options: START
+:page-partial:
+:doctitle: Camel Spring Boot Starter for vertx-http
+
+== Spring Boot Auto-Configuration
+
+When using vertx-http with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-vertx-http-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 9 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.component.vertx-http.allow-java-serialized-object* | Whether to allow java serialization when a request has the Content-Type application/x-java-serialized-object This is disabled by default. If you enable this, be aware that Java will deserialize the incoming data from the request. This can be a potential security risk. | false | Boolean
+| *camel.component.vertx-http.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.vertx-http.enabled* | Whether to enable auto configuration of the vertx-http component. This is enabled by default. |  | Boolean
+| *camel.component.vertx-http.header-filter-strategy* | To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type. |  | String
+| *camel.component.vertx-http.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.vertx-http.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters | false | Boolean
+| *camel.component.vertx-http.vertx* | To use an existing vertx instead of creating a new instance. The option is a io.vertx.core.Vertx type. |  | String
+| *camel.component.vertx-http.vertx-http-binding* | A custom VertxHttpBinding which can control how to bind between Vert.x and Camel. The option is a org.apache.camel.component.vertx.http.VertxHttpBinding type. |  | String
+| *camel.component.vertx-http.vertx-options* | To provide a custom set of vertx options for configuring vertx. The option is a io.vertx.core.VertxOptions type. |  | String
+|===
+
+
+// spring-boot-auto-configure options: END
