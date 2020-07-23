@@ -17,7 +17,7 @@ When using aws-kinesis with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 28 options, which are listed below.
+The component supports 30 options, which are listed below.
 
 
 
@@ -26,6 +26,7 @@ The component supports 28 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.aws-kinesis-firehose.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws-kinesis-firehose.amazon-kinesis-firehose-client* | Amazon Kinesis Firehose client to use for all requests for this endpoint. The option is a com.amazonaws.services.kinesisfirehose.AmazonKinesisFirehose type. |  | String
+| *camel.component.aws-kinesis-firehose.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking | true | Boolean
 | *camel.component.aws-kinesis-firehose.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws-kinesis-firehose.configuration* | The component configuration. The option is a org.apache.camel.component.aws.firehose.KinesisFirehoseConfiguration type. |  | String
 | *camel.component.aws-kinesis-firehose.enabled* | Whether to enable auto configuration of the aws-kinesis-firehose component. This is enabled by default. |  | Boolean
@@ -37,6 +38,7 @@ The component supports 28 options, which are listed below.
 | *camel.component.aws-kinesis-firehose.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws-kinesis.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws-kinesis.amazon-kinesis-client* | Amazon Kinesis client to use for all requests for this endpoint. The option is a com.amazonaws.services.kinesis.AmazonKinesis type. |  | String
+| *camel.component.aws-kinesis.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking | true | Boolean
 | *camel.component.aws-kinesis.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws-kinesis.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.aws-kinesis.configuration* | The component configuration. The option is a org.apache.camel.component.aws.kinesis.KinesisConfiguration type. |  | String

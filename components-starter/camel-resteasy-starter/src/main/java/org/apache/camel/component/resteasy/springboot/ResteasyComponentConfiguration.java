@@ -75,10 +75,11 @@ public class ResteasyComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * To use a custom ResteasyHttpBinding. The option is a
-     * org.apache.camel.component.resteasy.ResteasyHttpBinding type.
+     * To use a custom HttpBinding to control the mapping between Camel message
+     * and HttpClient. The option is a org.apache.camel.http.common.HttpBinding
+     * type.
      */
-    private String resteasyHttpBinding;
+    private String httpBinding;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
@@ -144,12 +145,12 @@ public class ResteasyComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getResteasyHttpBinding() {
-        return resteasyHttpBinding;
+    public String getHttpBinding() {
+        return httpBinding;
     }
 
-    public void setResteasyHttpBinding(String resteasyHttpBinding) {
-        this.resteasyHttpBinding = resteasyHttpBinding;
+    public void setHttpBinding(String httpBinding) {
+        this.httpBinding = httpBinding;
     }
 
     public String getHeaderFilterStrategy() {

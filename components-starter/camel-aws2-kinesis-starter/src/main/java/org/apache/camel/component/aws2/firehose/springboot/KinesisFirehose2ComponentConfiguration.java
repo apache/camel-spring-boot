@@ -46,6 +46,12 @@ public class KinesisFirehose2ComponentConfiguration
      */
     private String amazonKinesisFirehoseClient;
     /**
+     * Setting the autoDiscoverClient mechanism, if true, the component will
+     * look for a client instance in the registry automatically otherwise it
+     * will skip that checking
+     */
+    private Boolean autoDiscoverClient = true;
+    /**
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.firehose.KinesisFirehose2Configuration
      * type.
@@ -110,6 +116,14 @@ public class KinesisFirehose2ComponentConfiguration
     public void setAmazonKinesisFirehoseClient(
             String amazonKinesisFirehoseClient) {
         this.amazonKinesisFirehoseClient = amazonKinesisFirehoseClient;
+    }
+
+    public Boolean getAutoDiscoverClient() {
+        return autoDiscoverClient;
+    }
+
+    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
+        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public String getConfiguration() {
