@@ -150,6 +150,8 @@
                             <exclude>org.mockito:*</exclude>
                             <exclude>org.awaitility:awaitility</exclude>
                             <exclude>org.hamcrest:hamcrest</exclude>
+                            <exclude>com.datastax.oss:java-driver-core</exclude>
+                            <exclude>com.datastax.oss:java-driver-query-builder</exclude>
 
                             <exclude>org.slf4j:jul-to-slf4j</exclude>
                             <exclude>org.slf4j:log4j-over-slf4j</exclude>
