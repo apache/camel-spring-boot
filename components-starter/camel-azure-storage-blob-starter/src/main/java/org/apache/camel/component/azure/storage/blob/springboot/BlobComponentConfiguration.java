@@ -17,6 +17,7 @@
 package org.apache.camel.component.azure.storage.blob.springboot;
 
 import javax.annotation.Generated;
+import com.azure.storage.blob.models.BlockListType;
 import org.apache.camel.component.azure.storage.blob.BlobComponent;
 import org.apache.camel.component.azure.storage.blob.BlobOperationsDefinition;
 import org.apache.camel.component.azure.storage.blob.BlobType;
@@ -79,10 +80,21 @@ public class BlobComponentConfiguration
      */
     private String fileDir;
     /**
+     * Specifies the maximum number of blobs to return, including all BlobPrefix
+     * elements. If the request does not specify maxResultsPerPage or specifies
+     * a value greater than 5,000, the server will return up to 5,000 items.
+     */
+    private Integer maxResultsPerPage;
+    /**
      * Specifies the maximum number of additional HTTP Get requests that will be
      * made while reading the data from a response body.
      */
     private Integer maxRetryRequests = 0;
+    /**
+     * Filters the results to return only blobs whose names begin with the
+     * specified prefix. May be null to return all blobs.
+     */
+    private String prefix;
     /**
      * Client to a storage account. This client does not hold any state about a
      * particular storage account but is instead a convenient way of sending off
@@ -96,6 +108,11 @@ public class BlobComponentConfiguration
      */
     private String serviceClient;
     /**
+     * An optional timeout value beyond which a RuntimeException will be raised.
+     * The option is a java.time.Duration type.
+     */
+    private String timeout;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -105,9 +122,36 @@ public class BlobComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * A user-controlled value that you can use to track requests. The value of
+     * the sequence number must be between 0 and 263 - 1.The default value is 0.
+     */
+    private Long blobSequenceNumber = 0L;
+    /**
+     * Specifies which type of blocks to return.
+     */
+    private BlockListType blockListType = BlockListType.COMMITTED;
+    /**
      * Close the stream after write or keep it open, default is true
      */
     private Boolean closeStreamAfterWrite = true;
+    /**
+     * When is set to true, the staged blocks will not be committed directly.
+     */
+    private Boolean commitBlockListLater = true;
+    /**
+     * When is set to true, the append blocks will be created when committing
+     * append blocks.
+     */
+    private Boolean createAppendBlob = true;
+    /**
+     * When is set to true, the page blob will be created when uploading page
+     * blob.
+     */
+    private Boolean createPageBlob = true;
+    /**
+     * Override the default expiration (millis) of URL download link.
+     */
+    private Long downloadLinkExpiration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -123,6 +167,11 @@ public class BlobComponentConfiguration
      * The blob operation that can be used with this component on the producer
      */
     private BlobOperationsDefinition operation = BlobOperationsDefinition.listBlobContainers;
+    /**
+     * Specifies the maximum size for the page blob, up to 8 TB. The page blob
+     * size must be aligned to a 512-byte boundary.
+     */
+    private Long pageBlobSize = 512L;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -198,12 +247,28 @@ public class BlobComponentConfiguration
         this.fileDir = fileDir;
     }
 
+    public Integer getMaxResultsPerPage() {
+        return maxResultsPerPage;
+    }
+
+    public void setMaxResultsPerPage(Integer maxResultsPerPage) {
+        this.maxResultsPerPage = maxResultsPerPage;
+    }
+
     public Integer getMaxRetryRequests() {
         return maxRetryRequests;
     }
 
     public void setMaxRetryRequests(Integer maxRetryRequests) {
         this.maxRetryRequests = maxRetryRequests;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 
     public String getServiceClient() {
@@ -214,6 +279,14 @@ public class BlobComponentConfiguration
         this.serviceClient = serviceClient;
     }
 
+    public String getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(String timeout) {
+        this.timeout = timeout;
+    }
+
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
@@ -222,12 +295,60 @@ public class BlobComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
+    public Long getBlobSequenceNumber() {
+        return blobSequenceNumber;
+    }
+
+    public void setBlobSequenceNumber(Long blobSequenceNumber) {
+        this.blobSequenceNumber = blobSequenceNumber;
+    }
+
+    public BlockListType getBlockListType() {
+        return blockListType;
+    }
+
+    public void setBlockListType(BlockListType blockListType) {
+        this.blockListType = blockListType;
+    }
+
     public Boolean getCloseStreamAfterWrite() {
         return closeStreamAfterWrite;
     }
 
     public void setCloseStreamAfterWrite(Boolean closeStreamAfterWrite) {
         this.closeStreamAfterWrite = closeStreamAfterWrite;
+    }
+
+    public Boolean getCommitBlockListLater() {
+        return commitBlockListLater;
+    }
+
+    public void setCommitBlockListLater(Boolean commitBlockListLater) {
+        this.commitBlockListLater = commitBlockListLater;
+    }
+
+    public Boolean getCreateAppendBlob() {
+        return createAppendBlob;
+    }
+
+    public void setCreateAppendBlob(Boolean createAppendBlob) {
+        this.createAppendBlob = createAppendBlob;
+    }
+
+    public Boolean getCreatePageBlob() {
+        return createPageBlob;
+    }
+
+    public void setCreatePageBlob(Boolean createPageBlob) {
+        this.createPageBlob = createPageBlob;
+    }
+
+    public Long getDownloadLinkExpiration() {
+        return downloadLinkExpiration;
+    }
+
+    public void setDownloadLinkExpiration(Long downloadLinkExpiration) {
+        this.downloadLinkExpiration = downloadLinkExpiration;
     }
 
     public Boolean getLazyStartProducer() {
@@ -244,6 +365,14 @@ public class BlobComponentConfiguration
 
     public void setOperation(BlobOperationsDefinition operation) {
         this.operation = operation;
+    }
+
+    public Long getPageBlobSize() {
+        return pageBlobSize;
+    }
+
+    public void setPageBlobSize(Long pageBlobSize) {
+        this.pageBlobSize = pageBlobSize;
     }
 
     public Boolean getBasicPropertyBinding() {

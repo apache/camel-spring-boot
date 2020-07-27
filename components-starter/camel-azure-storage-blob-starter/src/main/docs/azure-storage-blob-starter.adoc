@@ -17,7 +17,7 @@ When using azure-storage-blob with Spring Boot make sure to use the following Ma
 ----
 
 
-The component supports 17 options, which are listed below.
+The component supports 27 options, which are listed below.
 
 
 
@@ -28,20 +28,28 @@ The component supports 17 options, which are listed below.
 | *camel.component.azure-storage-blob.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.azure-storage-blob.blob-name* | The blob name, required for consumer. However on producer, is only required for the operations on the blob level |  | String
 | *camel.component.azure-storage-blob.blob-offset* | Set the blob offset for the upload or download operations, default is 0 | 0 | Long
+| *camel.component.azure-storage-blob.blob-sequence-number* | A user-controlled value that you can use to track requests. The value of the sequence number must be between 0 and 263 - 1.The default value is 0. | 0 | Long
 | *camel.component.azure-storage-blob.blob-type* | The blob type in order to initiate the appropriate settings for each blob type |  | BlobType
+| *camel.component.azure-storage-blob.block-list-type* | Specifies which type of blocks to return. |  | BlockListType
 | *camel.component.azure-storage-blob.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.azure-storage-blob.close-stream-after-read* | Close the stream after read or keep it open, default is true | true | Boolean
 | *camel.component.azure-storage-blob.close-stream-after-write* | Close the stream after write or keep it open, default is true | true | Boolean
+| *camel.component.azure-storage-blob.commit-block-list-later* | When is set to true, the staged blocks will not be committed directly. | true | Boolean
 | *camel.component.azure-storage-blob.configuration* | The component configurations. The option is a org.apache.camel.component.azure.storage.blob.BlobConfiguration type. |  | String
+| *camel.component.azure-storage-blob.create-append-blob* | When is set to true, the append blocks will be created when committing append blocks. | true | Boolean
+| *camel.component.azure-storage-blob.create-page-blob* | When is set to true, the page blob will be created when uploading page blob. | true | Boolean
 | *camel.component.azure-storage-blob.credentials* | StorageSharedKeyCredential can be injected to create the azure client, this holds the important authentication information. The option is a com.azure.storage.common.StorageSharedKeyCredential type. |  | String
 | *camel.component.azure-storage-blob.data-count* | How many bytes to include in the range. Must be greater than or equal to 0 if specified. |  | Long
+| *camel.component.azure-storage-blob.download-link-expiration* | Override the default expiration (millis) of URL download link. |  | Long
 | *camel.component.azure-storage-blob.enabled* | Whether to enable auto configuration of the azure-storage-blob component. This is enabled by default. |  | Boolean
 | *camel.component.azure-storage-blob.file-dir* | The file directory where the downloaded blobs will be saved to, this can be used in both, producer and consumer |  | String
 | *camel.component.azure-storage-blob.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.azure-storage-blob.max-results-per-page* | Specifies the maximum number of blobs to return, including all BlobPrefix elements. If the request does not specify maxResultsPerPage or specifies a value greater than 5,000, the server will return up to 5,000 items. |  | Integer
 | *camel.component.azure-storage-blob.max-retry-requests* | Specifies the maximum number of additional HTTP Get requests that will be made while reading the data from a response body. | 0 | Integer
 | *camel.component.azure-storage-blob.operation* | The blob operation that can be used with this component on the producer |  | BlobOperationsDefinition
+| *camel.component.azure-storage-blob.page-blob-size* | Specifies the maximum size for the page blob, up to 8 TB. The page blob size must be aligned to a 512-byte boundary. | 512 | Long
+| *camel.component.azure-storage-blob.prefix* | Filters the results to return only blobs whose names begin with the specified prefix. May be null to return all blobs. |  | String
 | *camel.component.azure-storage-blob.service-client* | Client to a storage account. This client does not hold any state about a particular storage account but is instead a convenient way of sending off appropriate requests to the resource on the service. It may also be used to construct URLs to blobs and containers. This client contains operations on a service account. Operations on a container are available on BlobContainerClient through getBlobContainerClient(String), and operations on a blob are available on BlobClient through getBlobContainerClient(String).getBlobClient(String). The option is a com.azure.storage.blob.BlobServiceClient type. |  | String
+| *camel.component.azure-storage-blob.timeout* | An optional timeout value beyond which a RuntimeException will be raised. The option is a java.time.Duration type. |  | String
 |===
-
-
 // spring-boot-auto-configure options: END

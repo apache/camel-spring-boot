@@ -17,7 +17,7 @@ When using aws-mq with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 12 options, which are listed below.
+The component supports 13 options, which are listed below.
 
 
 
@@ -26,6 +26,7 @@ The component supports 12 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.aws-mq.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws-mq.amazon-mq-client* | To use a existing configured AmazonMQClient as client. The option is a com.amazonaws.services.mq.AmazonMQ type. |  | String
+| *camel.component.aws-mq.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
 | *camel.component.aws-mq.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws-mq.configuration* | The Component configuration. The option is a org.apache.camel.component.aws.mq.MQConfiguration type. |  | String
 | *camel.component.aws-mq.enabled* | Whether to enable auto configuration of the aws-mq component. This is enabled by default. |  | Boolean
