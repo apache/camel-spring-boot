@@ -302,6 +302,8 @@ public final class ArquillianPackager {
         ignore.add("com.github.jnr");
         ignore.add("com.sun.xml.bind:jaxb-xjc");
         ignore.add("com.azure:azure");
+        ignore.add("com.datastax.oss:java");
+        ignore.add("com.jcabi:jcabi");
         ignore.add("commons-beanutils:commons-beanutils");
         ignore.add("io.dropwizard.metrics:metrics-json"); // PR to spring-boot
         ignore.add("io.dropwizard.metrics:metrics-jvm"); // PR to spring-boot
