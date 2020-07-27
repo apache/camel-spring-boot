@@ -132,6 +132,12 @@ public class CamelThreadPoolConfigurationProperties {
         this.config = config;
     }
 
+    public boolean isEmpty() {
+        return poolSize == null && maxPoolSize == null && keepAliveTime == null && timeUnit == null
+                && maxQueueSize == null && allowCoreThreadTimeOut == null && rejectedPolicy == null
+                && config.isEmpty();
+    }
+
     @ConfigurationProperties(prefix = "camel.health.config")
     public static class ThreadPoolProfileConfigurationProperties {
 
@@ -241,20 +247,6 @@ public class CamelThreadPoolConfigurationProperties {
             this.rejectedPolicy = rejectedPolicy;
         }
 
-        /*public HealthCheckConfiguration toHealthCheckConfiguration() {
-            HealthCheckConfiguration answer = new HealthCheckConfiguration();
-            answer.setParent(parent);
-            if (enabled != null) {
-                answer.setEnabled(enabled);
-            }
-            if (interval != null) {
-                answer.setInterval(interval);
-            }
-            if (failureThreshold != null) {
-                answer.setFailureThreshold(failureThreshold);
-            }
-            return answer;
-        }*/
     }
 }
 

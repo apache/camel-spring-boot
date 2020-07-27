@@ -20,7 +20,6 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.builder.ThreadPoolProfileBuilder;
 import org.apache.camel.spi.ThreadPoolProfile;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -35,6 +34,10 @@ public class CamelThreadPoolAutoConfiguration {
 
     @Bean
     public ThreadPoolProfile threadPool(CamelContext camelContext, CamelThreadPoolConfigurationProperties tp) {
+        if (tp.isEmpty()) {
+            return null;
+        }
+
         // okay we have all properties set so we should be able to create thread pool profiles and register them on camel
         ThreadPoolProfile defaultProfile = camelContext.getExecutorServiceManager().getDefaultThreadPoolProfile();
         final ThreadPoolProfile dp = new ThreadPoolProfileBuilder("default", defaultProfile)
