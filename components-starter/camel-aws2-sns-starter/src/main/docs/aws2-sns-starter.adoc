@@ -17,7 +17,7 @@ When using aws2-sns with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 20 options, which are listed below.
+The component supports 21 options, which are listed below.
 
 
 
@@ -27,6 +27,7 @@ The component supports 20 options, which are listed below.
 | *camel.component.aws2-sns.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws2-sns.amazon-s-n-s-client* | To use the AmazonSNS as the client. The option is a software.amazon.awssdk.services.sns.SnsClient type. |  | String
 | *camel.component.aws2-sns.auto-create-topic* | Setting the autocreation of the topic | true | Boolean
+| *camel.component.aws2-sns.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
 | *camel.component.aws2-sns.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws2-sns.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.sns.Sns2Configuration type. |  | String
 | *camel.component.aws2-sns.enabled* | Whether to enable auto configuration of the aws2-sns component. This is enabled by default. |  | Boolean
