@@ -41,9 +41,14 @@
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>${cassandra-driver-guava-version}</version>
+      <groupId>com.datastax.oss</groupId>
+      <artifactId>java-driver-core</artifactId>
+      <version>${cassandra-driver-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.datastax.oss</groupId>
+      <artifactId>java-driver-query-builder</artifactId>
+      <version>${cassandra-driver-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>

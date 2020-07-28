@@ -53,6 +53,12 @@ public class SqsComponentConfiguration
      */
     private Boolean autoCreateQueue = true;
     /**
+     * Setting the autoDiscoverClient mechanism, if true, the component will
+     * look for a client instance in the registry automatically otherwise it
+     * will skip that checking.
+     */
+    private Boolean autoDiscoverClient = true;
+    /**
      * The component configuration. The option is a
      * org.apache.camel.component.aws.sqs.SqsConfiguration type.
      */
@@ -265,6 +271,14 @@ public class SqsComponentConfiguration
 
     public void setAutoCreateQueue(Boolean autoCreateQueue) {
         this.autoCreateQueue = autoCreateQueue;
+    }
+
+    public Boolean getAutoDiscoverClient() {
+        return autoDiscoverClient;
+    }
+
+    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
+        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public String getConfiguration() {
