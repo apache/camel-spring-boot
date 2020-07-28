@@ -64,6 +64,11 @@ public class QueueComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * When is set to true, the queue will be automatically created when sending
+     * messages to the queue.
+     */
+    private Boolean createQueue = true;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -89,6 +94,15 @@ public class QueueComponentConfiguration
      * only 1 message will be retrieved, the allowed range is 1 to 32 messages.
      */
     private Integer maxMessages = 1;
+    /**
+     * The ID of the message to be deleted or updated.
+     */
+    private String messageId;
+    /**
+     * Unique identifier that must match for the message to be deleted or
+     * updated.
+     */
+    private String popReceipt;
     /**
      * An optional timeout applied to the operation. If a response is not
      * returned before the timeout concludes a RuntimeException will be thrown.
@@ -152,6 +166,14 @@ public class QueueComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
+    public Boolean getCreateQueue() {
+        return createQueue;
+    }
+
+    public void setCreateQueue(Boolean createQueue) {
+        this.createQueue = createQueue;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
@@ -182,6 +204,22 @@ public class QueueComponentConfiguration
 
     public void setMaxMessages(Integer maxMessages) {
         this.maxMessages = maxMessages;
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
+    public String getPopReceipt() {
+        return popReceipt;
+    }
+
+    public void setPopReceipt(String popReceipt) {
+        this.popReceipt = popReceipt;
     }
 
     public String getTimeout() {
