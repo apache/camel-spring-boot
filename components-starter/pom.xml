@@ -328,6 +328,7 @@
     <module>camel-olingo4-starter</module>
     <module>camel-openapi-java-starter</module>
     <module>camel-openstack-starter</module>
+    <module>camel-opentelemetry-starter</module>
     <module>camel-opentracing-starter</module>
     <module>camel-optaplanner-starter</module>
     <module>camel-paho-starter</module>
