@@ -46,7 +46,9 @@ public class AWS2S3ComponentConfiguration
      */
     private String amazonS3Client;
     /**
-     * Setting the autocreation of the bucket
+     * Setting the autocreation of the S3 bucket bucketName. This will apply
+     * also in case of moveAfterRead option enabled and it will create the
+     * destinationBucket if it doesn't exist already.
      */
     private Boolean autoCreateBucket = true;
     /**
