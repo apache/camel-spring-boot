@@ -15,5 +15,13 @@
 # limitations under the License.
 #
 
+github:
+  description: "Apache Camel Spring Boot support"
+  homepage: https://camel.apache.org
+  labels:
+    - camel
+    - integration
+    - java
+    - spring-boot
 notifications:
   pullrequests: commits@camel.apache.org
