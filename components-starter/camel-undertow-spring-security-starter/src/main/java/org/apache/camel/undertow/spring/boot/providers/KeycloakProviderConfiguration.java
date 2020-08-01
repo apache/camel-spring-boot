@@ -29,7 +29,7 @@ import java.net.URISyntaxException;
 /**
  * Configuration of provider for the Keycloak server.
  *
- * Requires 4 attributes: server url, realmId, clientId and userNameAttribute (with default value "preffered_username")
+ * Requires 4 attributes: server url, realmId, clientId and userNameAttribute (with default value "preferred_username")
  */
 public class KeycloakProviderConfiguration extends AbstractProviderConfiguration {
 
@@ -48,7 +48,7 @@ public class KeycloakProviderConfiguration extends AbstractProviderConfiguration
     /**
      * Name of the attribute, which will be used as username.
      */
-    private String userNameAttribute = "preffered_username";
+    private String userNameAttribute = "preferred_username";
 
     @Override
     public TYPE getType() {
