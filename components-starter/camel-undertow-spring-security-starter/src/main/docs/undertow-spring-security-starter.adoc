@@ -28,6 +28,6 @@ The component supports 5 options, which are listed below.
 | *camel.component.undertow.spring.security.keycloak.client-id* | Client id from the Keycloak server used for authentication. |  | String
 | *camel.component.undertow.spring.security.keycloak.realm-id* | Realm id from the keycloak server used for authentication. |  | String
 | *camel.component.undertow.spring.security.keycloak.url* | Url to keycloak server which will be used in spring security configuration. (Example "\http://localhost:8080") |  | String
-| *camel.component.undertow.spring.security.keycloak.user-name-attribute* | Name of the attribute, which will be used as username. | preffered_username | String
+| *camel.component.undertow.spring.security.keycloak.user-name-attribute* | Name of the attribute, which will be used as username. | preferred_username | String
 |===
 // spring-boot-auto-configure options: END
