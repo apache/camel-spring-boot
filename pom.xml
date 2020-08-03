@@ -131,7 +131,7 @@
         <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
         <mycila-license-version>3.0</mycila-license-version>
         <roaster-version>2.21.2.Final</roaster-version>
-        <spring-cloud-commons-version>2.2.3.RELEASE</spring-cloud-commons-version>
+        <spring-cloud-commons-version>2.2.4.RELEASE</spring-cloud-commons-version>
         <spring-cloud-consul-version>2.2.3.RELEASE</spring-cloud-consul-version>
         <spring-cloud-netflix-version>2.2.4.RELEASE</spring-cloud-netflix-version>
         <spring-cloud-zookeeper-version>2.2.2.RELEASE</spring-cloud-zookeeper-version>
