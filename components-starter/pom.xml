@@ -160,6 +160,7 @@
     <module>camel-aws2-ses-starter</module>
     <module>camel-aws2-sns-starter</module>
     <module>camel-aws2-sqs-starter</module>
+    <module>camel-aws2-sts-starter</module>
     <module>camel-aws2-translate-starter</module>
     <module>camel-azure-starter</module>
     <module>camel-azure-storage-blob-starter</module>
@@ -413,8 +414,8 @@
     <module>camel-univocity-parsers-starter</module>
     <module>camel-validator-starter</module>
     <module>camel-velocity-starter</module>
-    <module>camel-vertx-starter</module>
     <module>camel-vertx-http-starter</module>
+    <module>camel-vertx-starter</module>
     <module>camel-vertx-websocket-starter</module>
     <module>camel-vm-starter</module>
     <module>camel-weather-starter</module>

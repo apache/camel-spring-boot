@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 335 in 268 JAR artifacts (3 deprecated)
+Number of Camel components: 336 in 269 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -109,6 +109,9 @@ Number of Camel components: 335 in 268 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/aws2-s3-component.html[AWS 2 S3 Storage Service] (camel-aws2-s3-starter) +
 `aws2-s3://bucketNameOrArn` | 3.2 | Store and retrieve objects from AWS S3 Storage Service using AWS SDK version 2.x.
+
+| link:https://camel.apache.org/components/latest/aws2-sts-component.html[AWS 2 Security Token Service (STS)] (camel-aws2-sts-starter) +
+`aws2-sts:label` | 3.5 | Manage AWS STS cluster instances using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-ses-component.html[AWS 2 Simple Email Service (SES)] (camel-aws2-ses-starter) +
 `aws2-ses:from` | 3.1 | Send e-mails through AWS SES service using AWS SDK version 2.x.
