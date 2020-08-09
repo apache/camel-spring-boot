@@ -170,9 +170,9 @@ public class SalesforceComponentConfiguration
      * In what packages are the generated DTO classes. Typically the classes
      * would be generated using camel-salesforce-maven-plugin. Set it if using
      * the generated DTOs to gain the benefit of using short SObject names in
-     * parameters/header values.
+     * parameters/header values. Multiple packages can be separated by comma.
      */
-    private String[] packages;
+    private String packages;
     /**
      * Use raw payload String for request and response (either JSON or XML
      * depending on format), instead of DTOs, false by default
@@ -626,11 +626,11 @@ public class SalesforceComponentConfiguration
         this.objectMapper = objectMapper;
     }
 
-    public String[] getPackages() {
+    public String getPackages() {
         return packages;
     }
 
-    public void setPackages(String[] packages) {
+    public void setPackages(String packages) {
         this.packages = packages;
     }
 
