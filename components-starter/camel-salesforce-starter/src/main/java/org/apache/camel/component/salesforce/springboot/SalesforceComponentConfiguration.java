@@ -28,6 +28,7 @@ import org.apache.camel.component.salesforce.internal.dto.NotifyForFieldsEnum;
 import org.apache.camel.component.salesforce.internal.dto.NotifyForOperationsEnum;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Communicate with Salesforce using Java DTOs.
@@ -172,6 +173,7 @@ public class SalesforceComponentConfiguration
      * the generated DTOs to gain the benefit of using short SObject names in
      * parameters/header values. Multiple packages can be separated by comma.
      */
+    @Deprecated
     private String packages;
     /**
      * Use raw payload String for request and response (either JSON or XML
@@ -626,10 +628,13 @@ public class SalesforceComponentConfiguration
         this.objectMapper = objectMapper;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public String getPackages() {
         return packages;
     }
 
+    @Deprecated
     public void setPackages(String packages) {
         this.packages = packages;
     }
