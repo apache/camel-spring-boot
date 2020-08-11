@@ -118,6 +118,34 @@ public class HttpComponentConfiguration
      */
     private String headerFilterStrategy;
     /**
+     * Proxy authentication domain to use
+     */
+    private String proxyAuthDomain;
+    /**
+     * Proxy authentication host
+     */
+    private String proxyAuthHost;
+    /**
+     * Proxy authentication method to use
+     */
+    private String proxyAuthMethod;
+    /**
+     * Proxy authentication domain (workstation name) to use with NTML
+     */
+    private String proxyAuthNtHost;
+    /**
+     * Proxy authentication password
+     */
+    private String proxyAuthPassword;
+    /**
+     * Proxy authentication port
+     */
+    private Integer proxyAuthPort;
+    /**
+     * Proxy authentication username
+     */
+    private String proxyAuthUsername;
+    /**
      * To configure security using SSLContextParameters. Important: Only one
      * instance of org.apache.camel.support.jsse.SSLContextParameters is
      * supported per HttpComponent. If you need to use 2 or more different
@@ -260,6 +288,62 @@ public class HttpComponentConfiguration
 
     public void setHeaderFilterStrategy(String headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
+    }
+
+    public String getProxyAuthDomain() {
+        return proxyAuthDomain;
+    }
+
+    public void setProxyAuthDomain(String proxyAuthDomain) {
+        this.proxyAuthDomain = proxyAuthDomain;
+    }
+
+    public String getProxyAuthHost() {
+        return proxyAuthHost;
+    }
+
+    public void setProxyAuthHost(String proxyAuthHost) {
+        this.proxyAuthHost = proxyAuthHost;
+    }
+
+    public String getProxyAuthMethod() {
+        return proxyAuthMethod;
+    }
+
+    public void setProxyAuthMethod(String proxyAuthMethod) {
+        this.proxyAuthMethod = proxyAuthMethod;
+    }
+
+    public String getProxyAuthNtHost() {
+        return proxyAuthNtHost;
+    }
+
+    public void setProxyAuthNtHost(String proxyAuthNtHost) {
+        this.proxyAuthNtHost = proxyAuthNtHost;
+    }
+
+    public String getProxyAuthPassword() {
+        return proxyAuthPassword;
+    }
+
+    public void setProxyAuthPassword(String proxyAuthPassword) {
+        this.proxyAuthPassword = proxyAuthPassword;
+    }
+
+    public Integer getProxyAuthPort() {
+        return proxyAuthPort;
+    }
+
+    public void setProxyAuthPort(Integer proxyAuthPort) {
+        this.proxyAuthPort = proxyAuthPort;
+    }
+
+    public String getProxyAuthUsername() {
+        return proxyAuthUsername;
+    }
+
+    public void setProxyAuthUsername(String proxyAuthUsername) {
+        this.proxyAuthUsername = proxyAuthUsername;
     }
 
     public String getSslContextParameters() {

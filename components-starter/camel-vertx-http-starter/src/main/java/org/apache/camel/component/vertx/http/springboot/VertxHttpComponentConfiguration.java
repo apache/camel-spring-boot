@@ -17,6 +17,7 @@
 package org.apache.camel.component.vertx.http.springboot;
 
 import javax.annotation.Generated;
+import io.vertx.core.net.ProxyType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -82,6 +83,43 @@ public class VertxHttpComponentConfiguration
      */
     private String headerFilterStrategy;
     /**
+     * The proxy server host address
+     */
+    private String proxyHost;
+    /**
+     * The proxy server password if authentication is required
+     */
+    private String proxyPassword;
+    /**
+     * The proxy server port
+     */
+    private Integer proxyPort;
+    /**
+     * The proxy server type
+     */
+    private ProxyType proxyType;
+    /**
+     * The proxy server username if authentication is required
+     */
+    private String proxyUsername;
+    /**
+     * The password to use for basic authentication
+     */
+    private String basicAuthPassword;
+    /**
+     * The user name to use for basic authentication
+     */
+    private String basicAuthUsername;
+    /**
+     * The bearer token to use for bearer token authentication
+     */
+    private String bearerToken;
+    /**
+     * To configure security using SSLContextParameters. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private String sslContextParameters;
+    /**
      * Enable usage of global SSL context parameters
      */
     private Boolean useGlobalSslContextParameters = false;
@@ -140,6 +178,78 @@ public class VertxHttpComponentConfiguration
 
     public void setHeaderFilterStrategy(String headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public String getProxyPassword() {
+        return proxyPassword;
+    }
+
+    public void setProxyPassword(String proxyPassword) {
+        this.proxyPassword = proxyPassword;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public ProxyType getProxyType() {
+        return proxyType;
+    }
+
+    public void setProxyType(ProxyType proxyType) {
+        this.proxyType = proxyType;
+    }
+
+    public String getProxyUsername() {
+        return proxyUsername;
+    }
+
+    public void setProxyUsername(String proxyUsername) {
+        this.proxyUsername = proxyUsername;
+    }
+
+    public String getBasicAuthPassword() {
+        return basicAuthPassword;
+    }
+
+    public void setBasicAuthPassword(String basicAuthPassword) {
+        this.basicAuthPassword = basicAuthPassword;
+    }
+
+    public String getBasicAuthUsername() {
+        return basicAuthUsername;
+    }
+
+    public void setBasicAuthUsername(String basicAuthUsername) {
+        this.basicAuthUsername = basicAuthUsername;
+    }
+
+    public String getBearerToken() {
+        return bearerToken;
+    }
+
+    public void setBearerToken(String bearerToken) {
+        this.bearerToken = bearerToken;
+    }
+
+    public String getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(String sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
     }
 
     public Boolean getUseGlobalSslContextParameters() {

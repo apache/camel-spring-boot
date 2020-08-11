@@ -17,7 +17,7 @@ When using vertx-http with Spring Boot make sure to use the following Maven depe
 ----
 
 
-The component supports 9 options, which are listed below.
+The component supports 18 options, which are listed below.
 
 
 
@@ -25,15 +25,22 @@ The component supports 9 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.vertx-http.allow-java-serialized-object* | Whether to allow java serialization when a request has the Content-Type application/x-java-serialized-object This is disabled by default. If you enable this, be aware that Java will deserialize the incoming data from the request. This can be a potential security risk. | false | Boolean
+| *camel.component.vertx-http.basic-auth-password* | The password to use for basic authentication |  | String
+| *camel.component.vertx-http.basic-auth-username* | The user name to use for basic authentication |  | String
 | *camel.component.vertx-http.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.vertx-http.bearer-token* | The bearer token to use for bearer token authentication |  | String
 | *camel.component.vertx-http.enabled* | Whether to enable auto configuration of the vertx-http component. This is enabled by default. |  | Boolean
 | *camel.component.vertx-http.header-filter-strategy* | To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type. |  | String
 | *camel.component.vertx-http.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.vertx-http.proxy-host* | The proxy server host address |  | String
+| *camel.component.vertx-http.proxy-password* | The proxy server password if authentication is required |  | String
+| *camel.component.vertx-http.proxy-port* | The proxy server port |  | Integer
+| *camel.component.vertx-http.proxy-type* | The proxy server type |  | ProxyType
+| *camel.component.vertx-http.proxy-username* | The proxy server username if authentication is required |  | String
+| *camel.component.vertx-http.ssl-context-parameters* | To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
 | *camel.component.vertx-http.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters | false | Boolean
 | *camel.component.vertx-http.vertx* | To use an existing vertx instead of creating a new instance. The option is a io.vertx.core.Vertx type. |  | String
 | *camel.component.vertx-http.vertx-http-binding* | A custom VertxHttpBinding which can control how to bind between Vert.x and Camel. The option is a org.apache.camel.component.vertx.http.VertxHttpBinding type. |  | String
 | *camel.component.vertx-http.vertx-options* | To provide a custom set of vertx options for configuring vertx. The option is a io.vertx.core.VertxOptions type. |  | String
 |===
-
-
 // spring-boot-auto-configure options: END

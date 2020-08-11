@@ -17,7 +17,7 @@ When using http with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 20 options, which are listed below.
+The component supports 27 options, which are listed below.
 
 
 
@@ -40,10 +40,16 @@ The component supports 20 options, which are listed below.
 | *camel.component.http.http-context* | To use a custom org.apache.http.protocol.HttpContext when executing requests. The option is a org.apache.http.protocol.HttpContext type. |  | String
 | *camel.component.http.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.http.max-total-connections* | The maximum number of connections. | 200 | Integer
+| *camel.component.http.proxy-auth-domain* | Proxy authentication domain to use |  | String
+| *camel.component.http.proxy-auth-host* | Proxy authentication host |  | String
+| *camel.component.http.proxy-auth-method* | Proxy authentication method to use |  | String
+| *camel.component.http.proxy-auth-nt-host* | Proxy authentication domain (workstation name) to use with NTML |  | String
+| *camel.component.http.proxy-auth-password* | Proxy authentication password |  | String
+| *camel.component.http.proxy-auth-port* | Proxy authentication port |  | Integer
+| *camel.component.http.proxy-auth-username* | Proxy authentication username |  | String
 | *camel.component.http.socket-timeout* | Defines the socket timeout in milliseconds, which is the timeout for waiting for data or, put differently, a maximum period inactivity between two consecutive data packets). A timeout value of zero is interpreted as an infinite timeout. A negative value is interpreted as undefined (system default). | -1 | Integer
 | *camel.component.http.ssl-context-parameters* | To configure security using SSLContextParameters. Important: Only one instance of org.apache.camel.support.jsse.SSLContextParameters is supported per HttpComponent. If you need to use 2 or more different instances, you need to define a new HttpComponent per instance you need. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
 | *camel.component.http.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 | *camel.component.http.x509-hostname-verifier* | To use a custom X509HostnameVerifier such as DefaultHostnameVerifier or NoopHostnameVerifier. The option is a javax.net.ssl.HostnameVerifier type. |  | String
 |===
-
 // spring-boot-auto-configure options: END
