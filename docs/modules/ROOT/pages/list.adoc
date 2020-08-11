@@ -1234,7 +1234,7 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 23 in 23 JAR artifacts (1 deprecated)
+Number of miscellaneous extensions: 23 in 23 JAR artifacts (2 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -1295,7 +1295,7 @@ Number of miscellaneous extensions: 23 in 23 JAR artifacts (1 deprecated)
 (camel-spring-cloud-zookeeper-starter) | 2.19 | Camel Cloud integration with Spring Cloud Zookeeper
 
 | link:https://camel.apache.org/components/latest/others/spring-javaconfig.html[Spring Java Configuration] +
-(camel-spring-javaconfig-starter) | 2.0 | Using Camel with Spring Java Configuration
+(camel-spring-javaconfig-starter) | 2.0 | *deprecated* Using Camel with Spring Java Configuration
 
 | link:https://camel.apache.org/components/latest/others/spring-security.html[Spring Security] +
 (camel-spring-security-starter) | 2.3 | Security using Spring Security

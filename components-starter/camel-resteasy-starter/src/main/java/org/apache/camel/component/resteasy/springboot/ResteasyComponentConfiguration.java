@@ -75,63 +75,11 @@ public class ResteasyComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
-     * To use a custom HttpBinding to control the mapping between Camel message
-     * and HttpClient. The option is a org.apache.camel.http.common.HttpBinding
-     * type.
-     */
-    private String httpBinding;
-    /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
     private String headerFilterStrategy;
-    /**
-     * Proxy authentication domain to use
-     */
-    private String proxyAuthDomain;
-    /**
-     * Proxy authentication host
-     */
-    private String proxyAuthHost;
-    /**
-     * Proxy authentication method to use
-     */
-    private String proxyAuthMethod;
-    /**
-     * Proxy authentication domain (workstation name) to use with NTML
-     */
-    private String proxyAuthNtHost;
-    /**
-     * Proxy authentication password
-     */
-    private String proxyAuthPassword;
-    /**
-     * Proxy authentication port
-     */
-    private Integer proxyAuthPort;
-    /**
-     * Proxy authentication username
-     */
-    private String proxyAuthUsername;
-    /**
-     * To configure security using SSLContextParameters. Important: Only one
-     * instance of org.apache.camel.support.jsse.SSLContextParameters is
-     * supported per HttpComponent. If you need to use 2 or more different
-     * instances, you need to define a new HttpComponent per instance you need.
-     * The option is a org.apache.camel.support.jsse.SSLContextParameters type.
-     */
-    private String sslContextParameters;
-    /**
-     * Enable usage of global SSL context parameters.
-     */
-    private Boolean useGlobalSslContextParameters = false;
-    /**
-     * To use a custom X509HostnameVerifier such as DefaultHostnameVerifier or
-     * NoopHostnameVerifier. The option is a javax.net.ssl.HostnameVerifier
-     * type.
-     */
-    private String x509HostnameVerifier;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -173,100 +121,11 @@ public class ResteasyComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getHttpBinding() {
-        return httpBinding;
-    }
-
-    public void setHttpBinding(String httpBinding) {
-        this.httpBinding = httpBinding;
-    }
-
     public String getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
     public void setHeaderFilterStrategy(String headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
-    }
-
-    public String getProxyAuthDomain() {
-        return proxyAuthDomain;
-    }
-
-    public void setProxyAuthDomain(String proxyAuthDomain) {
-        this.proxyAuthDomain = proxyAuthDomain;
-    }
-
-    public String getProxyAuthHost() {
-        return proxyAuthHost;
-    }
-
-    public void setProxyAuthHost(String proxyAuthHost) {
-        this.proxyAuthHost = proxyAuthHost;
-    }
-
-    public String getProxyAuthMethod() {
-        return proxyAuthMethod;
-    }
-
-    public void setProxyAuthMethod(String proxyAuthMethod) {
-        this.proxyAuthMethod = proxyAuthMethod;
-    }
-
-    public String getProxyAuthNtHost() {
-        return proxyAuthNtHost;
-    }
-
-    public void setProxyAuthNtHost(String proxyAuthNtHost) {
-        this.proxyAuthNtHost = proxyAuthNtHost;
-    }
-
-    public String getProxyAuthPassword() {
-        return proxyAuthPassword;
-    }
-
-    public void setProxyAuthPassword(String proxyAuthPassword) {
-        this.proxyAuthPassword = proxyAuthPassword;
-    }
-
-    public Integer getProxyAuthPort() {
-        return proxyAuthPort;
-    }
-
-    public void setProxyAuthPort(Integer proxyAuthPort) {
-        this.proxyAuthPort = proxyAuthPort;
-    }
-
-    public String getProxyAuthUsername() {
-        return proxyAuthUsername;
-    }
-
-    public void setProxyAuthUsername(String proxyAuthUsername) {
-        this.proxyAuthUsername = proxyAuthUsername;
-    }
-
-    public String getSslContextParameters() {
-        return sslContextParameters;
-    }
-
-    public void setSslContextParameters(String sslContextParameters) {
-        this.sslContextParameters = sslContextParameters;
-    }
-
-    public Boolean getUseGlobalSslContextParameters() {
-        return useGlobalSslContextParameters;
-    }
-
-    public void setUseGlobalSslContextParameters(
-            Boolean useGlobalSslContextParameters) {
-        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
-    }
-
-    public String getX509HostnameVerifier() {
-        return x509HostnameVerifier;
-    }
-
-    public void setX509HostnameVerifier(String x509HostnameVerifier) {
-        this.x509HostnameVerifier = x509HostnameVerifier;
     }
 }
