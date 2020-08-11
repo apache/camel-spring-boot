@@ -28,7 +28,7 @@
 
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>spring-boot</artifactId>
-    <version>3.4.3-SNAPSHOT</version>
+    <version>3.4.3</version>
     <packaging>pom</packaging>
 
     <name>Camel SB</name>
@@ -84,7 +84,7 @@
         <connection>scm:git:http://gitbox.apache.org/repos/asf/camel-spring-boot.git</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/camel-spring-boot.git</developerConnection>
         <url>https://gitbox.apache.org/repos/asf?p=camel-spring-boot.git;a=summary</url>
-        <tag>HEAD</tag>
+        <tag>camel-spring-boot-3.4.3</tag>
     </scm>
     <issueManagement>
         <system>jira</system>
