@@ -34,6 +34,16 @@ public class CamelOpentelemetryTest extends AbstractSpringBootTestSupport {
 
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
+                .dependency("io.grpc:grpc-api:1.30.2")
+                .dependency("io.grpc:grpc-context:1.30.2")
+                .dependency("io.grpc:grpc-core:1.30.2")
+                .dependency("io.grpc:grpc-netty-shaded:1.30.2")
+                .dependency("io.grpc:grpc-protobuf-lite:1.30.2")
+                .dependency("io.grpc:grpc-protobuf:1.30.2")
+                .dependency("io.grpc:grpc-stub:1.30.2")
+                .dependency("com.google.protobuf:protobuf-java-util:3.12.0")
+                .dependency("com.google.protobuf:protobuf-java:3.12.0")
+                .dependency("com.google.protobuf:protobuf-javalite:3.12.0")
                 .module(inferModuleName(CamelOpentelemetryTest.class))
                 .build();
     }
