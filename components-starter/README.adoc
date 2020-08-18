@@ -228,7 +228,7 @@ Number of Camel components: 337 in 270 JAR artifacts (3 deprecated)
 `caffeine-loadcache:cacheName` | 2.20 | Perform caching operations using Caffeine Cache with an attached CacheLoader.
 
 | link:https://camel.apache.org/components/latest/cql-component.html[Cassandra CQL] (camel-cassandraql-starter) +
-`cql:beanRef:hosts:port/keyspace` | 2.15 | Integrate with Cassandra 2.0 using the CQL3 API (not the Thrift API).
+`cql:beanRef:hosts:port/keyspace` | 2.15 | Integrate with Cassandra 2.0 using the CQL3 API (not the Thrift API). Based on Cassandra Java Driver provided by DataStax.
 
 | link:https://camel.apache.org/components/latest/chatscript-component.html[ChatScript] (camel-chatscript-starter) +
 `chatscript:host:port/botName` | 3.0 | Chat with a ChatScript Server.
