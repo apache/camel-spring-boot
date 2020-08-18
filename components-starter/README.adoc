@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 336 in 269 JAR artifacts (3 deprecated)
+Number of Camel components: 337 in 270 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -184,6 +184,9 @@ Number of Camel components: 336 in 269 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/aws-translate-component.html[AWS Translate] (camel-aws-translate-starter) +
 `aws-translate:label` | 3.0 | Translate texts using AWS Translate.
+
+| link:https://camel.apache.org/components/latest/azure-eventhubs-component.html[Azure Event Hubs] (camel-azure-eventhubs-starter) +
+`azure-eventhubs:namespace/eventHubName` | 3.5 | The azure-eventhubs component that integrates Azure Event Hubs using AMQP protocol. Azure EventHubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers.
 
 | link:https://camel.apache.org/components/latest/azure-storage-blob-component.html[Azure Storage Blob Service] (camel-azure-storage-blob-starter) +
 `azure-storage-blob:containerName` | 3.3 | Store and retrieve blobs from Azure Storage Blob Service using SDK v12.
