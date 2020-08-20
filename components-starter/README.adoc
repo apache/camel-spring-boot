@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 337 in 270 JAR artifacts (3 deprecated)
+Number of Camel components: 338 in 271 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,1,5",options="header"]
 |===
@@ -715,6 +715,9 @@ Number of Camel components: 337 in 270 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/nsq-component.html[NSQ] (camel-nsq-starter) +
 `nsq:topic` | 2.23 | Send and receive messages from NSQ realtime distributed messaging platform.
+
+| link:https://camel.apache.org/components/latest/oaipmh-component.html[OAI-PMH] (camel-oaipmh-starter) +
+`oaipmh:baseUrl` | 3.5 | Harvest metadata using OAI-PMH protocol
 
 | link:https://camel.apache.org/components/latest/olingo2-component.html[Olingo2] (camel-olingo2-starter) +
 `olingo2:apiName/methodName` | 2.14 | Communicate with OData 2.0 services using Apache Olingo.
