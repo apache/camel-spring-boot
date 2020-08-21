@@ -1,0 +1,78 @@
+// spring-boot-auto-configure options: START
+:page-partial:
+:doctitle: Camel Spring Boot Starter for minio
+
+== Spring Boot Auto-Configuration
+
+When using minio with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-minio-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 48 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.component.minio.access-key* | Amazon AWS Secret Access Key or Minio Access Key. If not set camel will connect to service for anonymous access. |  | String
+| *camel.component.minio.auto-close-body* | If this option is true and includeBody is true, then the MinioObject.close() method will be called on exchange completion. This option is strongly related to includeBody option. In case of setting includeBody to true and autocloseBody to false, it will be up to the caller to close the MinioObject stream. Setting autocloseBody to true, will close the MinioObject stream automatically. | true | Boolean
+| *camel.component.minio.auto-create-bucket* | Setting the autocreation of the bucket if bucket name not exist. | true | Boolean
+| *camel.component.minio.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.minio.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
+| *camel.component.minio.bypass-governance-mode* | Set this flag if you want to bypassGovernanceMode when deleting a particular object. | false | Boolean
+| *camel.component.minio.configuration* | The component configuration. The option is a org.apache.camel.component.minio.MinioConfiguration type. |  | String
+| *camel.component.minio.custom-http-client* | Set custom HTTP client for authenticated access. The option is a okhttp3.OkHttpClient type. |  | String
+| *camel.component.minio.delete-after-read* | Delete objects from Minio after they have been retrieved. The delete is only performed if the Exchange is committed. If a rollback occurs, the object is not deleted. If this option is false, then the same objects will be retrieve over and over again on the polls. Therefore you need to use the Idempotent Consumer EIP in the route to filter out duplicates. You can filter using the MinioConstants#BUCKET_NAME and MinioConstants#OBJECT_NAME headers, or only the MinioConstants#OBJECT_NAME header. | true | Boolean
+| *camel.component.minio.delete-after-write* | Delete file object after the Minio file has been uploaded. | false | Boolean
+| *camel.component.minio.delimiter* | The delimiter which is used in the ListObjectsRequest to only consume objects we are interested in. |  | String
+| *camel.component.minio.destination-bucket-name* | Source bucket name. |  | String
+| *camel.component.minio.destination-object-name* | Source object name. |  | String
+| *camel.component.minio.enabled* | Whether to enable auto configuration of the minio component. This is enabled by default. |  | Boolean
+| *camel.component.minio.endpoint* | Endpoint can be an URL, domain name, IPv4 address or IPv6 address. |  | String
+| *camel.component.minio.include-body* | If it is true, the exchange body will be set to a stream to the contents of the file. If false, the headers will be set with the Minio object metadata, but the body will be null. This option is strongly related to autocloseBody option. In case of setting includeBody to true and autocloseBody to false, it will be up to the caller to close the MinioObject stream. Setting autocloseBody to true, will close the MinioObject stream automatically. | true | Boolean
+| *camel.component.minio.include-folders* | The flag which is used in the ListObjectsRequest to set include folders. | false | Boolean
+| *camel.component.minio.include-user-metadata* | The flag which is used in the ListObjectsRequest to get objects with user meta data. | false | Boolean
+| *camel.component.minio.include-versions* | The flag which is used in the ListObjectsRequest to get objects with versioning. | false | Boolean
+| *camel.component.minio.key-name* | Setting the key name for an element in the bucket through endpoint parameter. |  | String
+| *camel.component.minio.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.minio.length* | Number of bytes of object data from offset. |  | Long
+| *camel.component.minio.match-e-tag* | Set match ETag parameter for get object(s). |  | String
+| *camel.component.minio.max-connections* | Set the maxConnections parameter in the minio client configuration | 60 | Integer
+| *camel.component.minio.max-messages-per-poll* | Gets the maximum number of messages as a limit to poll at each polling. Gets the maximum number of messages as a limit to poll at each polling. The default value is 10. Use 0 or a negative number to set it as unlimited. | 10 | Integer
+| *camel.component.minio.minio-client* | Reference to a Minio Client object in the registry. The option is a io.minio.MinioClient type. |  | String
+| *camel.component.minio.modified-since* | Set modified since parameter for get object(s). The option is a java.time.ZonedDateTime type. |  | String
+| *camel.component.minio.move-after-read* | Move objects from bucket to a different bucket after they have been retrieved. To accomplish the operation the destinationBucket option must be set. The copy bucket operation is only performed if the Exchange is committed. If a rollback occurs, the object is not moved. | false | Boolean
+| *camel.component.minio.not-match-e-tag* | Set not match ETag parameter for get object(s). |  | String
+| *camel.component.minio.object-lock* | Set when creating new bucket. | false | Boolean
+| *camel.component.minio.object-name* | To get the object from the bucket with the given object name. |  | String
+| *camel.component.minio.offset* | Start byte position of object data. |  | Long
+| *camel.component.minio.operation* | The operation to do in case the user don't want to do only an upload. |  | MinioOperations
+| *camel.component.minio.pojo-request* | If we want to use a POJO request as body or not. | false | Boolean
+| *camel.component.minio.policy* | The policy for this queue to set in the method. |  | String
+| *camel.component.minio.prefix* | Object name starts with prefix. |  | String
+| *camel.component.minio.proxy-port* | TCP/IP port number. 80 and 443 are used as defaults for HTTP and HTTPS. |  | Integer
+| *camel.component.minio.recursive* | List recursively than directory structure emulation. | false | Boolean
+| *camel.component.minio.region* | The region in which Minio client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1). You'll need to use the name Region.EU_WEST_1.id() |  | String
+| *camel.component.minio.secret-key* | Amazon AWS Access Key Id or Minio Secret Key. If not set camel will connect to service for anonymous access. |  | String
+| *camel.component.minio.secure* | Flag to indicate to use secure connection to minio service or not. | false | Boolean
+| *camel.component.minio.server-side-encryption* | Server-side encryption. The option is a io.minio.ServerSideEncryption type. |  | String
+| *camel.component.minio.server-side-encryption-customer-key* | Server-side encryption for source object while copy/move objects. The option is a io.minio.ServerSideEncryptionCustomerKey type. |  | String
+| *camel.component.minio.start-after* | list objects in bucket after this object name. |  | String
+| *camel.component.minio.storage-class* | The storage class to set in the request. |  | String
+| *camel.component.minio.un-modified-since* | Set un modified since parameter for get object(s). The option is a java.time.ZonedDateTime type. |  | String
+| *camel.component.minio.use-version1* | when true, version 1 of REST API is used. | false | Boolean
+| *camel.component.minio.version-id* | Set specific version_ID of a object when deleting the object. |  | String
+|===
+
+
+// spring-boot-auto-configure options: END
