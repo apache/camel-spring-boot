@@ -21,7 +21,7 @@ Number of Camel components: 338 in 271 JAR artifacts (3 deprecated)
 `apns:name` | 2.8 | Send notifications to Apple iOS devices.
 
 | link:https://camel.apache.org/components/latest/arangodb-component.html[ArangoDb] (camel-arangodb-starter) +
-`arangodb:database` | 3.5.0-SNAPSHOT | Perform operations on ArangoDb documents, collections and graphs.
+`arangodb:database` | 3.5 | Perform operations on ArangoDb when used as a Document Database, or as a Graph Database
 
 | link:https://camel.apache.org/components/latest/as2-component.html[AS2] (camel-as2-starter) +
 `as2:apiName/methodName` | 2.22 | Transfer data securely and reliably using the AS2 protocol (RFC4130).
