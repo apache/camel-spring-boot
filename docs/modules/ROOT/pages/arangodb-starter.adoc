@@ -17,7 +17,7 @@ When using arangodb with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 10 options, which are listed below.
+The component supports 13 options, which are listed below.
 
 
 
@@ -25,16 +25,17 @@ The component supports 10 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.arangodb.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
-| *camel.component.arangodb.collection* | collection in the database |  | String
 | *camel.component.arangodb.configuration* | Component configuration. The option is a org.apache.camel.component.arangodb.ArangoDbConfiguration type. |  | String
+| *camel.component.arangodb.document-collection* | Collection name, when using ArangoDb as a Document Database. Set the documentCollection name when using the CRUD operation on the document database collections (SAVE_DOCUMENT , FIND_DOCUMENT_BY_KEY, UPDATE_DOCUMENT, DELETE_DOCUMENT). |  | String
+| *camel.component.arangodb.edge-collection* | Collection name of vertices, when using ArangoDb as a Graph Database. Set the edgeCollection name to perform CRUD operation on edges using these operations : SAVE_VERTEX, FIND_VERTEX_BY_KEY, UPDATE_VERTEX, DELETE_VERTEX. The graph attribute is mandatory. |  | String
 | *camel.component.arangodb.enabled* | Whether to enable auto configuration of the arangodb component. This is enabled by default. |  | Boolean
-| *camel.component.arangodb.host* | host if host and/or port different from default |  | String
+| *camel.component.arangodb.graph* | Graph name, when using ArangoDb as a Graph Database. Combine this attribute with one of the two attributes vertexCollection and edgeCollection. |  | String
+| *camel.component.arangodb.host* | ArangoDB host. If host and port are default, this field is Optional. |  | String
 | *camel.component.arangodb.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| *camel.component.arangodb.operation* | operation to perform |  | ArangoDbOperation
-| *camel.component.arangodb.password* | password if user and/or password different from default |  | String
-| *camel.component.arangodb.port* | port if host and/or port different from default |  | Integer
-| *camel.component.arangodb.user* | user if user and/or password different from default |  | String
+| *camel.component.arangodb.operation* | Operations to perform on ArangoDb. For the operation AQL_QUERY, no need to specify a collection or graph. |  | ArangoDbOperation
+| *camel.component.arangodb.password* | ArangoDB password. If user and password are default, this field is Optional. |  | String
+| *camel.component.arangodb.port* | ArangoDB exposed port. If host and port are default, this field is Optional. |  | Integer
+| *camel.component.arangodb.user* | ArangoDB user. If user and password are default, this field is Optional. |  | String
+| *camel.component.arangodb.vertex-collection* | Collection name of vertices, when using ArangoDb as a Graph Database. Set the vertexCollection name to perform CRUD operation on vertices using these operations : SAVE_EDGE, FIND_EDGE_BY_KEY, UPDATE_EDGE, DELETE_EDGE. The graph attribute is mandatory. |  | String
 |===
-
-
 // spring-boot-auto-configure options: END
