@@ -107,7 +107,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>generate-bom</goal>
+                            <goal>generate-dependencies-bom</goal>
                         </goals>
                     </execution>
                 </executions>

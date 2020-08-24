@@ -77,8 +77,8 @@ import org.apache.maven.project.MavenProject;
 /**
  * Generate BOM by flattening the current project's dependency management section and applying exclusions.
  */
-@Mojo(name = "generate-bom", defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true)
-public class BomGeneratorMojo extends AbstractMojo {
+@Mojo(name = "generate-dependencies-bom", defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true)
+public class BomDependenciesGeneratorMojo extends AbstractMojo {
 
     /**
      * The maven project.
