@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>tooling</artifactId>
-    <version>3.5.0-SNAPSHOT</version>
+    <version>3.4.4-SNAPSHOT</version>
   </parent>
   <artifactId>camel-spring-boot-bom</artifactId>
   <packaging>pom</packaging>
@@ -58,11 +58,6 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-apns-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-arangodb-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -287,17 +282,7 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-aws2-sts-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-translate-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-azure-eventhubs-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -937,11 +922,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-jsonata-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jsonpath-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1042,11 +1022,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-minio-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mllp-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1117,11 +1092,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-oaipmh-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ognl-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1143,11 +1113,6 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-openstack-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-opentelemetry-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -1218,6 +1183,11 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-rabbitmq-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-reactive-executor-vertx-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -1572,17 +1542,7 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-vertx-http-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-vertx-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-vertx-websocket-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

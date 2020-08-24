@@ -53,6 +53,23 @@ public class Olingo2ComponentConfiguration
      */
     private String contentType = "application/json;charset=utf-8";
     /**
+     * Custom entity provider read properties applied to all read operations.
+     * The option is a
+     * org.apache.olingo.odata2.api.ep.EntityProviderReadProperties type.
+     */
+    private String entityProviderReadProperties;
+    /**
+     * Custom entity provider write properties applied to create, update, patch,
+     * batch and merge operations. For instance users can skip the Json object
+     * wrapper or enable content only mode when sending request data. A service
+     * URI set in the properties will always be overwritten by the serviceUri
+     * configuration parameter. Please consider to using the serviceUri
+     * configuration parameter instead of setting the respective write property
+     * here. The option is a
+     * org.apache.olingo.odata2.api.ep.EntityProviderWriteProperties type.
+     */
+    private String entityProviderWriteProperties;
+    /**
      * Set this to true to filter out results that have already been
      * communicated by this component.
      */
@@ -155,6 +172,24 @@ public class Olingo2ComponentConfiguration
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public String getEntityProviderReadProperties() {
+        return entityProviderReadProperties;
+    }
+
+    public void setEntityProviderReadProperties(
+            String entityProviderReadProperties) {
+        this.entityProviderReadProperties = entityProviderReadProperties;
+    }
+
+    public String getEntityProviderWriteProperties() {
+        return entityProviderWriteProperties;
+    }
+
+    public void setEntityProviderWriteProperties(
+            String entityProviderWriteProperties) {
+        this.entityProviderWriteProperties = entityProviderWriteProperties;
     }
 
     public Boolean getFilterAlreadySeen() {
