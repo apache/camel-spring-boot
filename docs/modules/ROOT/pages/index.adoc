@@ -12,7 +12,7 @@ Get started by adding the Camel Spring Boot BOM to your Maven `pom.xml` file.
         <!-- Camel BOM -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-spring-boot-dependencies</artifactId>
+            <artifactId>camel-spring-boot-bom</artifactId>
             <version>${project.version}</version>
             <type>pom</type>
             <scope>import</scope>
@@ -22,6 +22,8 @@ Get started by adding the Camel Spring Boot BOM to your Maven `pom.xml` file.
 
 </dependencyManagement>
 ----
+
+The `camel-spring-boot-bom` is a basic BOM that only holds the list of Camel Spring Boot starter JARs.
 
 Next, add the xref:spring-boot.adoc[Camel Spring Boot starter] to startup the xref:manual::camelcontext.adoc[Camel Context].
 
@@ -49,6 +51,14 @@ And any xref:list.adoc[component starters] your Spring Boot application requires
         </dependency>
     </dependencies>
 ----
+
+== Camel Spring Boot BOM vs Camel Spring Boot Dependencies BOM
+
+There is a curated `camel-spring-boot-dependencies` which is a generated BOM that has adjusted the JARs that both Spring Boot
+and Apache Camel may use to use single shared version that will not conflict. This BOM is what is used to test camel-spring-boot itself.
+However Spring Boot users may want to use _pure_ Camel dependencies and hence why you can use `camel-spring-boot-bom` that only has the
+Camel starter JARs as managed dependencies. This may lead to a classpath conflict if a 3rd party JAR from Spring Boot is not compatible
+with a Camel component.
 
 == Making sure Camel context is running in standalone Spring Boot
 
