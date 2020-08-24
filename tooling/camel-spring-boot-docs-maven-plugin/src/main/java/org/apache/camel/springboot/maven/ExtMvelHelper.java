@@ -19,11 +19,13 @@ package org.apache.camel.springboot.maven;
 import java.nio.file.Path;
 
 import org.apache.camel.maven.packaging.MvelHelper;
-import org.apache.camel.tooling.model.OtherModel;
-import org.apache.camel.tooling.util.Strings;
+import org.apache.camel.tooling.model.ArtifactModel;
 import org.apache.camel.tooling.model.ComponentModel;
 import org.apache.camel.tooling.model.DataFormatModel;
 import org.apache.camel.tooling.model.LanguageModel;
+import org.apache.camel.tooling.model.OtherModel;
+import org.apache.camel.tooling.model.SupportLevel;
+import org.apache.camel.tooling.util.Strings;
 
 public class ExtMvelHelper {
 
@@ -40,6 +42,18 @@ public class ExtMvelHelper {
     public String getFirstVersionShort(Object model) {
         String version = (String) invokeGetter(model, "getFirstVersion");
         return org.apache.camel.tooling.model.Strings.cutLastZeroDigit(version);
+    }
+
+    public String getSupportLevel(Object model) {
+        if (model instanceof ArtifactModel) {
+            ArtifactModel am = (ArtifactModel) model;
+            if (am.getSupportLevel() != null) {
+                return am.getSupportLevel().name();
+            } else {
+                return SupportLevel.Preview.name();
+            }
+        }
+        return null;
     }
 
     public String getDocLink(Object model) {

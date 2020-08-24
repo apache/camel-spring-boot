@@ -2,13 +2,11 @@
 
 Number of Camel components: @{components.size} in @{numberOfArtifacts} JAR artifacts (@{numberOfDeprecated} deprecated)
 
-[width="100%",cols="4,1,5",options="header"]
+[width="100%",cols="4,3,3,3,6",options="header"]
 |===
-| Component | Since | Description
+| Component | Artifact | Support Level | Since | Description
 @foreach{row : components}
-| @{util.getDocLink(row)}[@{row.title}] (@{row.artifactId}) +
-`@{row.syntax}` | @{util.getFirstVersionShort(row)} | @if{row.deprecated == "true"}*deprecated* @end{}@{util.escape(row.description)}
-@end{}
-|===
+| @{util.getDocLink(row)}[@{row.title}] | @{row.artifactId} | @{util.getSupportLevel(row)} | @{util.getFirstVersionShort(row)} | @if{row.deprecated == "true"}*deprecated* @end{}@{util.escape(row.description)}
+@end{}|===
 
 @end{}
