@@ -35,6 +35,8 @@
         <module>camel-spring-boot-generator-maven-plugin</module>
         <module>camel-spring-boot-dependencies-generator</module>
         <module>camel-spring-boot-dependencies</module>
+        <module>camel-spring-boot-bom-generator</module>
+        <module>camel-spring-boot-bom</module>
         <module>camel-starter-parent</module>
         <module>camel-spring-boot-starter-generator</module>
         <module>camel-spring-boot-docs-maven-plugin</module>
