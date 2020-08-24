@@ -199,6 +199,11 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
 
         Files.list(startersDir.toPath())
                 .filter(Files::isDirectory)
+                // must have a pom.xml to be active
+                .filter(d -> {
+                    File pom = new File(d.toFile(), "pom.xml");
+                    return pom.isFile() && pom.exists();
+                })
                 .map(dir -> {
                     Dependency dep = new Dependency();
                     dep.setGroupId("org.apache.camel.springboot");
