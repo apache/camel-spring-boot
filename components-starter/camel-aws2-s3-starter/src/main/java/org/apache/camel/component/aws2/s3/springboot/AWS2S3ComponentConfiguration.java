@@ -151,6 +151,16 @@ public class AWS2S3ComponentConfiguration
      */
     private String destinationBucket;
     /**
+     * Define the destination bucket prefix to use when an object must be moved
+     * and moveAfterRead is set to true.
+     */
+    private String destinationBucketPrefix;
+    /**
+     * Define the destination bucket suffix to use when an object must be moved
+     * and moveAfterRead is set to true.
+     */
+    private String destinationBucketSuffix;
+    /**
      * To get the object from the bucket with the given file name
      */
     private String fileName;
@@ -422,6 +432,22 @@ public class AWS2S3ComponentConfiguration
 
     public void setDestinationBucket(String destinationBucket) {
         this.destinationBucket = destinationBucket;
+    }
+
+    public String getDestinationBucketPrefix() {
+        return destinationBucketPrefix;
+    }
+
+    public void setDestinationBucketPrefix(String destinationBucketPrefix) {
+        this.destinationBucketPrefix = destinationBucketPrefix;
+    }
+
+    public String getDestinationBucketSuffix() {
+        return destinationBucketSuffix;
+    }
+
+    public void setDestinationBucketSuffix(String destinationBucketSuffix) {
+        this.destinationBucketSuffix = destinationBucketSuffix;
     }
 
     public String getFileName() {

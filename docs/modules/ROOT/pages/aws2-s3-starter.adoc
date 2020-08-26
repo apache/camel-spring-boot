@@ -17,7 +17,7 @@ When using aws2-s3 with Spring Boot make sure to use the following Maven depende
 ----
 
 
-The component supports 41 options, which are listed below.
+The component supports 43 options, which are listed below.
 
 
 
@@ -40,6 +40,8 @@ The component supports 41 options, which are listed below.
 | *camel.component.aws2-s3.delete-after-write* | Delete file object after the S3 file has been uploaded | false | Boolean
 | *camel.component.aws2-s3.delimiter* | The delimiter which is used in the com.amazonaws.services.s3.model.ListObjectsRequest to only consume objects we are interested in. |  | String
 | *camel.component.aws2-s3.destination-bucket* | Define the destination bucket where an object must be moved when moveAfterRead is set to true. |  | String
+| *camel.component.aws2-s3.destination-bucket-prefix* | Define the destination bucket prefix to use when an object must be moved and moveAfterRead is set to true. |  | String
+| *camel.component.aws2-s3.destination-bucket-suffix* | Define the destination bucket suffix to use when an object must be moved and moveAfterRead is set to true. |  | String
 | *camel.component.aws2-s3.enabled* | Whether to enable auto configuration of the aws2-s3 component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-s3.file-name* | To get the object from the bucket with the given file name |  | String
 | *camel.component.aws2-s3.include-body* | If it is true, the exchange body will be set to a stream to the contents of the file. If false, the headers will be set with the S3 object metadata, but the body will be null. This option is strongly related to autocloseBody option. In case of setting includeBody to true and autocloseBody to false, it will be up to the caller to close the S3Object stream. Setting autocloseBody to true, will close the S3Object stream automatically. | true | Boolean
