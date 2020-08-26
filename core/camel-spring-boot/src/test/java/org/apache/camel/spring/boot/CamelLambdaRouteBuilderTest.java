@@ -33,10 +33,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 @EnableAutoConfiguration
 @SpringBootTest(
     classes = {
-        CamelRouteBuilderConfigurerTest.class,
-            RouteBuilderConfigurerConfiguration.class }
+        CamelLambdaRouteBuilderTest.class,
+            LambdaRouteBuilderConfiguration.class }
 )
-public class CamelRouteBuilderConfigurerTest extends Assert {
+public class CamelLambdaRouteBuilderTest extends Assert {
 
     // Collaborators fixtures
 

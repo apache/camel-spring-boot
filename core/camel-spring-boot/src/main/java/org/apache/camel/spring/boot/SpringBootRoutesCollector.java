@@ -26,8 +26,8 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.RuntimeCamelException;
+import org.apache.camel.builder.LambdaRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.builder.RouteBuilderConfigurer;
 import org.apache.camel.main.DefaultRoutesCollector;
 import org.apache.camel.model.RouteTemplatesDefinition;
 import org.apache.camel.model.RoutesDefinition;
@@ -53,12 +53,12 @@ public class SpringBootRoutesCollector extends DefaultRoutesCollector {
     public List<RoutesBuilder> collectRoutesFromRegistry(final CamelContext camelContext, final String excludePattern, final String includePattern) {
         final List<RoutesBuilder> routes = new ArrayList<>();
 
-        Set<RouteBuilderConfigurer> configurers = camelContext.getRegistry().findByType(RouteBuilderConfigurer.class);
-        for (RouteBuilderConfigurer configurer : configurers) {
+        Set<LambdaRouteBuilder> lrbs = camelContext.getRegistry().findByType(LambdaRouteBuilder.class);
+        for (LambdaRouteBuilder lrb : lrbs) {
             RouteBuilder rb = new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    configurer.accept(this);
+                    lrb.accept(this);
                 }
             };
             routes.add(rb);

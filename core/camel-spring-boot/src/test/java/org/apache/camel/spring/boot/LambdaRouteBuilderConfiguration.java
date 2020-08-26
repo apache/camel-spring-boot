@@ -16,15 +16,15 @@
  */
 package org.apache.camel.spring.boot;
 
-import org.apache.camel.builder.RouteBuilderConfigurer;
+import org.apache.camel.builder.LambdaRouteBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RouteBuilderConfigurerConfiguration {
+public class LambdaRouteBuilderConfiguration {
 
     @Bean
-    public RouteBuilderConfigurer myRoute() {
+    public LambdaRouteBuilder myRoute() {
         return rb -> rb.from("direct:start").routeId("foo").to("mock:result");
     }
 
