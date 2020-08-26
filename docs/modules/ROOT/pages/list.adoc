@@ -841,7 +841,7 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 23 in 23 JAR artifacts (2 deprecated)
+Number of miscellaneous extensions: 24 in 24 JAR artifacts (2 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -850,6 +850,8 @@ Number of miscellaneous extensions: 23 in 23 JAR artifacts (2 deprecated)
 | link:https://camel.apache.org/components/latest/others/aws-xray.html[AWS XRay] | camel-aws-xray-starter | Stable | 2.21 | Distributed tracing using AWS XRay
 
 | link:https://camel.apache.org/components/latest/others/cxf-transport.html[CXF Transport] | camel-cxf-transport-starter | Stable | 2.8 | Camel Transport for Apache CXF
+
+| link:https://camel.apache.org/components/latest/others/etcd3.html[Etcd3] | camel-etcd3-starter | Preview | 3.5 | Aggregation repository using EtcD as datastore
 
 | link:https://camel.apache.org/components/latest/others/hystrix.html[Hystrix] | camel-hystrix-starter | Stable | 2.18 | *deprecated* Circuit Breaker EIP using Netflix Hystrix
 
