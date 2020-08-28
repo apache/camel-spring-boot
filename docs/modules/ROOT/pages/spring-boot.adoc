@@ -1,8 +1,6 @@
 [[SpringBoot-SpringBoot]]
 = Spring Boot
 
-*Since Camel 2.15*
-
 Spring Boot component provides auto-configuration for Apache Camel. Our
 opinionated auto-configuration of the Camel context auto-detects Camel
 routes available in the Spring context and registers the key Camel
@@ -16,37 +14,14 @@ in order to use this component:
 ----
 <dependency>
     <groupId>org.apache.camel.springboot</groupId>
-    <artifactId>camel-spring-boot</artifactId>
-    <version>${camel.version}</version> <!-- use the same version as your Camel core version -->
-</dependency>
-----
-
-`camel-spring-boot` jar comes with the `spring.factories` file, so as
-soon as you add that dependency into your classpath, Spring Boot will
-automatically auto-configure Camel for you.
-
-[[SpringBoot-CamelSpringBootStarter]]
-== Camel Spring Boot Starter
-
-*Since Camel 2.17*
-
-Apache Camel ships
-a https://github.com/spring-projects/spring-boot/tree/master/spring-boot-project/spring-boot-starters[Spring
-Boot Starter] module that allows you to develop Spring Boot applications
-using starters. There is a
-https://github.com/apache/camel-spring-boot-examples/tree/master/camel-example-spring-boot[sample
-application] in the source code also.
-
-To use the starter, add the following to your spring boot pom.xml file:
-
-[source,xml]
-----
-<dependency>
-    <groupId>org.apache.camel</groupId>
     <artifactId>camel-spring-boot-starter</artifactId>
     <version>${camel.version}</version> <!-- use the same version as your Camel core version -->
 </dependency>
 ----
+
+`camel-spring-boot-starter` jar comes with the `spring.factories` file, so as
+soon as you add that dependency into your classpath, Spring Boot will
+automatically auto-configure Camel for you.
 
 Then you can just add classes with your Camel routes such as:
 
