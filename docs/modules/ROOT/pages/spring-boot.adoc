@@ -1,6 +1,8 @@
 [[SpringBoot-SpringBoot]]
 = Spring Boot
 
+*Since Camel 2.15*
+
 Spring Boot component provides auto-configuration for Apache Camel. Our
 opinionated auto-configuration of the Camel context auto-detects Camel
 routes available in the Spring context and registers the key Camel
@@ -14,14 +16,37 @@ in order to use this component:
 ----
 <dependency>
     <groupId>org.apache.camel.springboot</groupId>
-    <artifactId>camel-spring-boot-starter</artifactId>
+    <artifactId>camel-spring-boot</artifactId>
     <version>${camel.version}</version> <!-- use the same version as your Camel core version -->
 </dependency>
 ----
 
-`camel-spring-boot-starter` jar comes with the `spring.factories` file, so as
+`camel-spring-boot` jar comes with the `spring.factories` file, so as
 soon as you add that dependency into your classpath, Spring Boot will
 automatically auto-configure Camel for you.
+
+[[SpringBoot-CamelSpringBootStarter]]
+== Camel Spring Boot Starter
+
+*Since Camel 2.17*
+
+Apache Camel ships
+a https://github.com/spring-projects/spring-boot/tree/master/spring-boot-project/spring-boot-starters[Spring
+Boot Starter] module that allows you to develop Spring Boot applications
+using starters. There is a
+https://github.com/apache/camel-spring-boot-examples/tree/master/camel-example-spring-boot[sample
+application] in the source code also.
+
+To use the starter, add the following to your spring boot pom.xml file:
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.apache.camel</groupId>
+    <artifactId>camel-spring-boot-starter</artifactId>
+    <version>${camel.version}</version> <!-- use the same version as your Camel core version -->
+</dependency>
+----
 
 Then you can just add classes with your Camel routes such as:
 
@@ -172,7 +197,7 @@ The component supports 157 options, which are listed below.
 | *camel.springboot.route-controller-route-startup-logging-level* | Sets the logging level used for logging route startup activity. By default INFO level is used. You can use this to change the level for example to OFF if this kind of logging is not wanted. |  | LoggingLevel
 | *camel.springboot.route-controller-supervise-enabled* | To enable using supervising route controller which allows Camel to startup and then the controller takes care of starting the routes in a safe manner. This can be used when you want to startup Camel despite a route may otherwise fail fast during startup and cause Camel to fail to startup as well. By delegating the route startup to the supervising route controller then its manages the startup using a background thread. The controller allows to be configured with various settings to attempt to restart failing routes. | false | Boolean
 | *camel.springboot.route-controller-thread-pool-size* | The number of threads used by the route controller scheduled thread pool that are used for restarting routes. The pool uses 1 thread by default, but you can increase this to allow the controller to concurrently attempt to restart multiple routes in case more than one route has problems starting. | 1 | Integer
-| *camel.springboot.route-controller-unhealthy-on-exhausted* |  |  | Boolean
+| *camel.springboot.route-controller-unhealthy-on-exhausted* | Whether to mark the route as unhealthy (down) when all restarting attempts (backoff) have failed and the route is not successfully started and the route manager is giving up. Setting this to true allows health checks to know about this and can report the Camel application as DOWN. The default is false. | false | Boolean
 | *camel.springboot.route-filter-exclude-pattern* | Used for filtering routes routes matching the given pattern, which follows the following rules: - Match by route id - Match by route input endpoint uri The matching is using exact match, by wildcard and regular expression. For example to only include routes which starts with foo in their route id's, use: include=foo&#42; And to exclude routes which starts from JMS endpoints, use: exclude=jms:&#42; Multiple patterns can be separated by comma, for example to exclude both foo and bar routes, use: exclude=foo&#42;,bar&#42; Exclude takes precedence over include. |  | String
 | *camel.springboot.route-filter-include-pattern* | Used for filtering routes routes matching the given pattern, which follows the following rules: - Match by route id - Match by route input endpoint uri The matching is using exact match, by wildcard and regular expression. For example to only include routes which starts with foo in their route id's, use: include=foo&#42; And to exclude routes which starts from JMS endpoints, use: exclude=jms:&#42; Multiple patterns can be separated by comma, for example to exclude both foo and bar routes, use: exclude=foo&#42;,bar&#42; Exclude takes precedence over include. |  | String
 | *camel.springboot.routes-collector-enabled* | Whether the routes collector is enabled or not. When enabled Camel will auto-discover routes (RouteBuilder instances from the registry and also load additional XML routes from the file system. The routes collector is default enabled. | true | Boolean
