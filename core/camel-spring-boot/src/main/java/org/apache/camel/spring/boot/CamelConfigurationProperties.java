@@ -624,6 +624,16 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     String routeControllerExcludeRoutes;
 
     /**
+     * Whether to mark the route as unhealthy (down) when all restarting attempts (backoff) have failed and the route is
+     * not successfully started and the route manager is giving up.
+     *
+     * Setting this to true allows health checks to know about this and can report the Camel application as DOWN.
+     *
+     * The default is false.
+     */
+    private boolean routeControllerUnhealthyOnExhausted;
+
+    /**
      * Experimental: Configure the context to be lightweight.
      * This will trigger some optimizations and memory reduction options.
      * Lightweight context have some limitations.
