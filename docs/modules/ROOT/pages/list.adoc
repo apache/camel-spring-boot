@@ -27,7 +27,7 @@ Number of Camel components: 339 in 272 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/ahc-ws-component.html[Async HTTP Client (AHC) Websocket] | camel-ahc-ws-starter | Stable | 2.14 | Exchange data with external Websocket servers using Async Http Client.
 
-| link:https://camel.apache.org/components/latest/atmos-component.html[Atmos] | camel-atmos-starter | Stable | 2.15 | Integract with EMC's ViPR object data services using the Atmos Client.
+| link:https://camel.apache.org/components/latest/atmos-component.html[Atmos] | camel-atmos-starter | Stable | 2.15 | Integrate with EMC's ViPR object data services using the Atmos Client.
 
 | link:https://camel.apache.org/components/latest/atmosphere-websocket-component.html[Atmosphere Websocket] | camel-atmosphere-websocket-starter | Stable | 2.14 | Expose WebSocket endpoints using the Atmosphere framework.
 
