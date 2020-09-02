@@ -16,6 +16,8 @@
     "extendsScheme": "",
     "syntax": "atom:feedUri",
     "async": false,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": true,
     "producerOnly": false,
     "lenientProperties": true

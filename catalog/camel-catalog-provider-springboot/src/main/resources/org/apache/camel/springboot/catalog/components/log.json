@@ -16,6 +16,8 @@
     "extendsScheme": "",
     "syntax": "log:loggerName",
     "async": false,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": true,
     "lenientProperties": false

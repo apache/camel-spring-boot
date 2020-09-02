@@ -37,6 +37,10 @@ public class ZendeskComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The server URL to connect.
+     */
+    private String serverUrl;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -71,6 +75,30 @@ public class ZendeskComponentConfiguration
      * org.zendesk.client.v2.Zendesk type.
      */
     private String zendesk;
+    /**
+     * The OAuth token.
+     */
+    private String oauthToken;
+    /**
+     * The password.
+     */
+    private String password;
+    /**
+     * The security token.
+     */
+    private String token;
+    /**
+     * The user name.
+     */
+    private String username;
+
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -110,5 +138,37 @@ public class ZendeskComponentConfiguration
 
     public void setZendesk(String zendesk) {
         this.zendesk = zendesk;
+    }
+
+    public String getOauthToken() {
+        return oauthToken;
+    }
+
+    public void setOauthToken(String oauthToken) {
+        this.oauthToken = oauthToken;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
