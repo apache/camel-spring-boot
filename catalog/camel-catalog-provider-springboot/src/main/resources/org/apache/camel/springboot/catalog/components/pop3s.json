@@ -18,6 +18,8 @@
     "syntax": "pop3s:host:port",
     "alternativeSyntax": "pop3s:username:password@host:port",
     "async": false,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false

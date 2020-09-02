@@ -17,6 +17,8 @@
     "alternativeSchemes": "http,https",
     "syntax": "https:httpUri",
     "async": false,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": true,
     "lenientProperties": true,

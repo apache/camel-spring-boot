@@ -17,6 +17,8 @@
     "alternativeSchemes": "cometd,cometds",
     "syntax": "cometds:host:port\/channelName",
     "async": false,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false

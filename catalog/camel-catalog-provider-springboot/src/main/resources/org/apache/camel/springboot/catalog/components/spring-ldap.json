@@ -16,6 +16,8 @@
     "extendsScheme": "",
     "syntax": "spring-ldap:templateName",
     "async": false,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": true,
     "lenientProperties": false
