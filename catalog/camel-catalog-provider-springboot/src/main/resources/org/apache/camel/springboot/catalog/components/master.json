@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "master:namespace:delegateUri",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": true,
     "producerOnly": false,
     "lenientProperties": true

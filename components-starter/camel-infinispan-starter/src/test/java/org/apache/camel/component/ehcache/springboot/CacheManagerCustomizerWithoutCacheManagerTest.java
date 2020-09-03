@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.ehcache.springboot;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.component.infinispan.InfinispanComponent;
 import org.apache.camel.component.infinispan.springboot.customizer.EmbeddedCacheManagerCustomizer;
 import org.apache.camel.component.infinispan.springboot.customizer.RemoteCacheManagerCustomizer;
@@ -48,14 +49,18 @@ public class CacheManagerCustomizerWithoutCacheManagerTest {
     @Autowired
     InfinispanComponent component;
     @Autowired
-    ApplicationContext context;
+    ApplicationContext applicationContext;
+    @Autowired
+    CamelContext context;
 
     @Test
-    public void testComponentConfiguration() throws Exception {
+    public void testComponentConfiguration() {
+        InfinispanComponent component = context.getComponent("infinispan", InfinispanComponent.class);
+
         Assert.assertNotNull(component);
         Assert.assertNull(component.getConfiguration().getCacheContainer());
-        Assert.assertEquals(0, context.getBeansOfType(EmbeddedCacheManagerCustomizer.class).size());
-        Assert.assertEquals(0, context.getBeansOfType(RemoteCacheManagerCustomizer.class).size());
+        Assert.assertEquals(0, applicationContext.getBeansOfType(EmbeddedCacheManagerCustomizer.class).size());
+        Assert.assertEquals(0, applicationContext.getBeansOfType(RemoteCacheManagerCustomizer.class).size());
     }
 
     @Configuration

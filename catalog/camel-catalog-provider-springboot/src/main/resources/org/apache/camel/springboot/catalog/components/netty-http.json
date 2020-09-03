@@ -17,8 +17,6 @@
     "extendsScheme": "netty",
     "syntax": "netty-http:protocol:host:port\/path",
     "async": true,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": true

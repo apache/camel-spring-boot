@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "platform-http:path",
     "async": true,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": true,
     "producerOnly": false,
     "lenientProperties": false

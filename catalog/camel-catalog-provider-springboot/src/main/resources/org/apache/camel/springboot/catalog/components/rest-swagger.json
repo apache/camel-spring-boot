@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "rest-swagger:specificationUri#operationId",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": true,
     "lenientProperties": false

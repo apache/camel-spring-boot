@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "twitter-search:keywords",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false,

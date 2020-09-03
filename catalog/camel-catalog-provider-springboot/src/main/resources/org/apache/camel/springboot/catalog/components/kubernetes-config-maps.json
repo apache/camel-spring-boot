@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "kubernetes-config-maps:masterUrl",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": true,
     "lenientProperties": false

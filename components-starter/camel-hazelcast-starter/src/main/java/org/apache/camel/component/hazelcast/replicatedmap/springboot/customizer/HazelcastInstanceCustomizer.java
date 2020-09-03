@@ -17,22 +17,16 @@
 package org.apache.camel.component.hazelcast.replicatedmap.springboot.customizer;
 
 import org.apache.camel.component.hazelcast.replicatedmap.HazelcastReplicatedmapComponent;
-import org.apache.camel.component.hazelcast.replicatedmap.springboot.HazelcastReplicatedmapComponentAutoConfiguration;
 import org.apache.camel.component.hazelcast.springboot.customizer.AbstractHazelcastInstanceCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 
-@Order(Ordered.LOWEST_PRECEDENCE)
 @Configuration
 @Conditional(HazelcastInstanceCustomizer.NestedConditions.class)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
-@AutoConfigureBefore(HazelcastReplicatedmapComponentAutoConfiguration.class)
 @EnableConfigurationProperties(HazelcastInstanceCustomizerConfiguration.class)
 public class HazelcastInstanceCustomizer extends AbstractHazelcastInstanceCustomizer<HazelcastReplicatedmapComponent, HazelcastInstanceCustomizerConfiguration> {
     @Override

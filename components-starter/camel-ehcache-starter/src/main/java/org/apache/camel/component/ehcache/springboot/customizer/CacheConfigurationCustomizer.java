@@ -18,22 +18,19 @@ package org.apache.camel.component.ehcache.springboot.customizer;
 
 import java.util.Map;
 
+import org.apache.camel.Component;
+import org.apache.camel.Ordered;
 import org.apache.camel.component.ehcache.EhcacheComponent;
-import org.apache.camel.component.ehcache.springboot.EhcacheComponentAutoConfiguration;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spi.HasId;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
+import org.apache.camel.spring.boot.util.ConditionalOnHierarchicalProperties;
 import org.ehcache.config.CacheConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.boot.autoconfigure.condition.AllNestedConditions;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 
 /**
  * A simple implementation of {@link ComponentCustomizer} that auto discovers a
@@ -49,20 +46,24 @@ import org.springframework.core.annotation.Order;
  * 3. individually:
  *    camel.component.ehcache.customizer.cache-configuration.enabled = true/false
  */
-@Order(Ordered.LOWEST_PRECEDENCE)
 @Configuration
-@Conditional(CacheConfigurationCustomizer.NestedConditions.class)
+@ConditionalOnBean(CamelAutoConfiguration.class)
+@ConditionalOnHierarchicalProperties({
+    "camel.component.customizer",
+    "camel.component.ehcache.customizer",
+    "camel.component.ehcache.customizer.cache-configuration"})
 @AutoConfigureAfter(CamelAutoConfiguration.class)
-@AutoConfigureBefore(EhcacheComponentAutoConfiguration.class)
 @EnableConfigurationProperties(CacheConfigurationCustomizerConfiguration.class)
-public class CacheConfigurationCustomizer implements HasId, ComponentCustomizer<EhcacheComponent> {
+public class CacheConfigurationCustomizer implements HasId, ComponentCustomizer {
     @Autowired(required = false)
     private Map<String, CacheConfiguration> configurations;
     @Autowired
     private CacheConfigurationCustomizerConfiguration configuration;
 
     @Override
-    public void customize(EhcacheComponent component) {
+    public void configure(String name, Component target) {
+        EhcacheComponent component = (EhcacheComponent)target;
+
         if (configurations != null && configuration.getMode() == CacheConfigurationCustomizerConfiguration.Mode.APPEND) {
             component.addCachesConfigurations(configurations);
         }
@@ -72,29 +73,17 @@ public class CacheConfigurationCustomizer implements HasId, ComponentCustomizer<
     }
 
     @Override
-    public String getId() {
-        return "camel.component.ehcache.customizer.cache-configuration";
+    public boolean isEnabled(String name, Component target) {
+        return target instanceof EhcacheComponent;
     }
 
-    // *************************************************************************
-    // By default ConditionalOnBean works using an OR operation so if you list
-    // a number of classes, the condition succeeds if a single instance of any
-    // class is found.
-    //
-    // A workaround is to use AllNestedConditions and creates some dummy classes
-    // annotated with @ConditionalOnBean
-    //
-    // This should be fixed in spring-boot 2.0 where ConditionalOnBean uses and
-    // AND operation instead of the OR as it does today.
-    // *************************************************************************
+    @Override
+    public int getOrder() {
+        return Ordered.LOWEST;
+    }
 
-    static class NestedConditions extends AllNestedConditions {
-        public NestedConditions() {
-            super(ConfigurationPhase.REGISTER_BEAN);
-        }
-
-        @ConditionalOnBean(CamelAutoConfiguration.class)
-        static class OnCamelAutoConfiguration {
-        }
+    @Override
+    public String getId() {
+        return "camel.component.ehcache.customizer.cache-configuration";
     }
 }

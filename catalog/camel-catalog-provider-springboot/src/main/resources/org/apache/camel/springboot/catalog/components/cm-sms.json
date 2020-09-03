@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "cm-sms:host",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": true,
     "lenientProperties": false

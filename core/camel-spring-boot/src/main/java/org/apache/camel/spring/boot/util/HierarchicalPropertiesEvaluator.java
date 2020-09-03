@@ -16,8 +16,11 @@
  */
 package org.apache.camel.spring.boot.util;
 
+import java.util.Collection;
+
 import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.boot.context.properties.bind.Binder;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 
 public final class HierarchicalPropertiesEvaluator {
@@ -28,11 +31,44 @@ public final class HierarchicalPropertiesEvaluator {
     /**
      * Determine the value of the "enabled" flag for a hierarchy of properties.
      *
+     * @param applicationContext the spring {@link ApplicationContext}
+     * @param prefixes an ordered list of prefixed (less restrictive to more restrictive)
+     * @return the value of the key `enabled` for most restrictive prefix
+     */
+    public static boolean evaluate(ApplicationContext applicationContext, String... prefixes) {
+        return evaluate(applicationContext.getEnvironment(), prefixes);
+    }
+
+    /**
+     * Determine the value of the "enabled" flag for a hierarchy of properties.
+     *
      * @param environment the environment
      * @param prefixes an ordered list of prefixed (less restrictive to more restrictive)
      * @return the value of the key `enabled` for most restrictive prefix
      */
     public static boolean evaluate(Environment environment, String... prefixes) {
+        boolean answer = true;
+
+        // Loop over all the prefixes to find out the value of the key `enabled`
+        // for the most restrictive prefix.
+        for (String prefix : prefixes) {
+            // evaluate the value of the current prefix using the parent one
+            // as default value so if the enabled property is not set, the parent
+            // one is used.
+            answer = isEnabled(environment, prefix, answer);
+        }
+
+        return answer;
+    }
+
+    /**
+     * Determine the value of the "enabled" flag for a hierarchy of properties.
+     *
+     * @param environment the environment
+     * @param prefixes an ordered list of prefixed (less restrictive to more restrictive)
+     * @return the value of the key `enabled` for most restrictive prefix
+     */
+    public static boolean evaluate(Environment environment, Collection<String> prefixes) {
         boolean answer = true;
 
         // Loop over all the prefixes to find out the value of the key `enabled`

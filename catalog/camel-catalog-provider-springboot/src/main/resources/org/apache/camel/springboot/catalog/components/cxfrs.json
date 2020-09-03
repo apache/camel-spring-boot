@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "cxfrs:beanId:address",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": true

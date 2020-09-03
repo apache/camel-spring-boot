@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "aws-ddbstream:tableName",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": true,
     "producerOnly": false,
     "lenientProperties": false

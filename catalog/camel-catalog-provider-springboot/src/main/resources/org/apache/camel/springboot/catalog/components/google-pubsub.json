@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "google-pubsub:projectId:destinationName",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false

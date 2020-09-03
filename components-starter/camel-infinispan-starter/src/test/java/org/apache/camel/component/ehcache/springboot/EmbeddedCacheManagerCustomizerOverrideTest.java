@@ -16,6 +16,8 @@
  */
 package org.apache.camel.component.ehcache.springboot;
 
+import org.apache.camel.CamelContext;
+import org.apache.camel.Ordered;
 import org.apache.camel.component.infinispan.InfinispanComponent;
 import org.apache.camel.component.infinispan.springboot.InfinispanComponentAutoConfiguration;
 import org.apache.camel.spi.ComponentCustomizer;
@@ -31,8 +33,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -57,30 +57,27 @@ public class EmbeddedCacheManagerCustomizerOverrideTest {
     @Autowired
     EmbeddedCacheManager cacheManager;
     @Autowired
-    InfinispanComponent component;
+    CamelContext context;
 
     @Test
-    public void testComponentConfiguration() throws Exception {
+    public void testComponentConfiguration() {
+        InfinispanComponent component = context.getComponent("infinispan", InfinispanComponent.class);
+
         Assert.assertNotNull(cacheManager);
         Assert.assertNotNull(component);
         Assert.assertNotNull(component.getConfiguration().getCacheContainer());
-        Assert.assertEquals(cacheManager, component.getConfiguration().getCacheContainer());
+        Assert.assertSame(cacheManager, component.getConfiguration().getCacheContainer());
     }
 
     @Configuration
     @AutoConfigureAfter(CamelAutoConfiguration.class)
     @AutoConfigureBefore(InfinispanComponentAutoConfiguration.class)
     public static class TestConfiguration {
-
-        @Order(Ordered.HIGHEST_PRECEDENCE)
         @Bean
-        public ComponentCustomizer<InfinispanComponent> customizer() {
-            return new ComponentCustomizer<InfinispanComponent>() {
-                @Override
-                public void customize(InfinispanComponent component) {
-                    component.getConfiguration().setCacheContainer(CACHE_MANAGER);
-                }
-            };
+        public ComponentCustomizer customizer() {
+            return ComponentCustomizer.builder(InfinispanComponent.class)
+                .withOrder(Ordered.HIGHEST)
+                .build(component -> component.getConfiguration().setCacheContainer(CACHE_MANAGER));
         }
 
         @Bean(destroyMethod = "stop")

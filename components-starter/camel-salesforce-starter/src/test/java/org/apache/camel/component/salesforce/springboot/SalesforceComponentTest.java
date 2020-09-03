@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.salesforce.springboot;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.component.salesforce.SalesforceComponent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -40,10 +41,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SalesforceComponentTest {
 
     @Autowired
-    private SalesforceComponent sf;
+    private CamelContext context;
 
     @Test
     public void testSalesforceComponent() {
+        SalesforceComponent sf = context.getComponent("salesforce", SalesforceComponent.class);
+
         Assert.assertNotNull(sf);
         Assert.assertNotNull(sf.getHttpClientProperties());
         Assert.assertEquals("12345", sf.getHttpClientProperties().get("requestBufferSize"));

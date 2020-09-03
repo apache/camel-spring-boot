@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "mock:name",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": true,
     "lenientProperties": true

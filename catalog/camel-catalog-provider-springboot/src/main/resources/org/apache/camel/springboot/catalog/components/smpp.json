@@ -17,8 +17,6 @@
     "alternativeSchemes": "smpp,smpps",
     "syntax": "smpp:host:port",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": true

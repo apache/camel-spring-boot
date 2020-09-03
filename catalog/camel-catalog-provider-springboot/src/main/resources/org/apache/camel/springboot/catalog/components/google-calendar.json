@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "google-calendar:apiName\/methodName",
     "async": false,
-    "api": true,
-    "apiPropertyQualifier": "apiName",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false

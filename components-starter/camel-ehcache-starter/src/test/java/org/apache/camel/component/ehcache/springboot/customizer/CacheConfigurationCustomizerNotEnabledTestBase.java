@@ -18,6 +18,7 @@ package org.apache.camel.component.ehcache.springboot.customizer;
 
 import java.util.Map;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.component.ehcache.EhcacheComponent;
 import org.ehcache.config.CacheConfiguration;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
@@ -34,10 +35,12 @@ class CacheConfigurationCustomizerNotEnabledTestBase {
     @Autowired
     Map<String, CacheConfiguration<?, ?>> configurations;
     @Autowired
-    EhcacheComponent component;
+    CamelContext context;
 
     @Test
-    public void testComponentConfiguration() throws Exception {
+    public void testComponentConfiguration() {
+        EhcacheComponent component = context.getComponent("ehcache", EhcacheComponent.class);
+
         Assert.assertNotNull(configurations);
         Assert.assertEquals(2, configurations.size());
         Assert.assertNotNull(component);
