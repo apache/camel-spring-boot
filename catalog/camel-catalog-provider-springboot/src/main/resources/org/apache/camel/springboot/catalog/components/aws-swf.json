@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "aws-swf:type",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false

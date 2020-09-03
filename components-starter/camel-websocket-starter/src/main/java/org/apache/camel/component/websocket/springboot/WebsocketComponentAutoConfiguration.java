@@ -16,27 +16,19 @@
  */
 package org.apache.camel.component.websocket.springboot;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Component;
 import org.apache.camel.component.websocket.WebsocketComponent;
 import org.apache.camel.spi.ComponentCustomizer;
-import org.apache.camel.spi.HasId;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
 import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
-import org.apache.camel.spring.boot.util.GroupCondition;
+import org.apache.camel.spring.boot.util.ConditionalOnHierarchicalProperties;
 import org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator;
-import org.apache.camel.support.IntrospectionSupport;
-import org.apache.camel.util.ObjectHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -49,60 +41,35 @@ import org.springframework.context.annotation.Lazy;
  */
 @Generated("org.apache.camel.springboot.maven.SpringBootAutoConfigurationMojo")
 @Configuration(proxyBeanMethods = false)
-@Conditional({ConditionalOnCamelContextAndAutoConfigurationBeans.class,
-        WebsocketComponentAutoConfiguration.GroupConditions.class})
 @AutoConfigureAfter(CamelAutoConfiguration.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,
-        WebsocketComponentConfiguration.class})
+@Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,WebsocketComponentConfiguration.class})
+@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.websocket"})
 public class WebsocketComponentAutoConfiguration {
 
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(WebsocketComponentAutoConfiguration.class);
     @Autowired
     private ApplicationContext applicationContext;
     @Autowired
     private CamelContext camelContext;
     @Autowired
     private WebsocketComponentConfiguration configuration;
-    @Autowired(required = false)
-    private List<ComponentCustomizer<WebsocketComponent>> customizers;
-
-    static class GroupConditions extends GroupCondition {
-        public GroupConditions() {
-            super("camel.component", "camel.component.websocket");
-        }
-    }
 
     @Lazy
-    @Bean(name = "websocket-component")
-    @ConditionalOnMissingBean(WebsocketComponent.class)
-    public WebsocketComponent configureWebsocketComponent() throws Exception {
-        WebsocketComponent component = new WebsocketComponent();
-        component.setCamelContext(camelContext);
-        Map<String, Object> parameters = new HashMap<>();
-        IntrospectionSupport.getProperties(configuration, parameters, null,
-                false);
-        CamelPropertiesHelper.setCamelProperties(camelContext, component,
-                parameters, false);
-        if (ObjectHelper.isNotEmpty(customizers)) {
-            for (ComponentCustomizer<WebsocketComponent> customizer : customizers) {
-                boolean useCustomizer = (customizer instanceof HasId)
-                        ? HierarchicalPropertiesEvaluator.evaluate(
-                                applicationContext.getEnvironment(),
-                                "camel.component.customizer",
-                                "camel.component.websocket.customizer",
-                                ((HasId) customizer).getId())
-                        : HierarchicalPropertiesEvaluator.evaluate(
-                                applicationContext.getEnvironment(),
-                                "camel.component.customizer",
-                                "camel.component.websocket.customizer");
-                if (useCustomizer) {
-                    LOGGER.debug("Configure component {}, with customizer {}",
-                            component, customizer);
-                    customizer.customize(component);
-                }
+    @Bean
+    public ComponentCustomizer configureWebsocketComponent() {
+        return new ComponentCustomizer() {
+            @Override
+            public void configure(String name, Component target) {
+                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
             }
-        }
-        return component;
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.websocket.customizer")
+                    && target instanceof WebsocketComponent;
+            }
+        };
     }
 }

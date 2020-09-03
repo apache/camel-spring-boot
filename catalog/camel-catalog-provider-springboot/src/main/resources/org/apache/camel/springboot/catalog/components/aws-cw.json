@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "aws-cw:namespace",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": true,
     "lenientProperties": false

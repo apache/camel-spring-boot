@@ -23,6 +23,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
 import org.apache.camel.PropertyBindingException;
 import org.apache.camel.spi.PropertyConfigurer;
+import org.apache.camel.support.IntrospectionSupport;
 import org.apache.camel.support.PropertyBindingSupport;
 import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.util.ObjectHelper;
@@ -33,6 +34,19 @@ import org.apache.camel.util.ObjectHelper;
 public final class CamelPropertiesHelper {
 
     private CamelPropertiesHelper() {
+    }
+
+    @SuppressWarnings({"unchecked", "deprecation"})
+    public static void copyProperties(CamelContext camelContext, Object source, Object target) {
+        ObjectHelper.notNull(camelContext, "camel context");
+        ObjectHelper.notNull(source, "source");
+        ObjectHelper.notNull(target, "target");
+
+        CamelPropertiesHelper.setCamelProperties(
+            camelContext,
+            target,
+            source instanceof Map ? (Map)source : IntrospectionSupport.getNonNullProperties(source),
+            false);
     }
 
     /**
@@ -63,9 +77,8 @@ public final class CamelPropertiesHelper {
      * @param failIfNotSet   whether to fail if an option either does not exists on the target bean or if the option cannot be due no suitable setter methods with the given type
      * @return <tt>true</tt> if at least one option was configured
      * @throws IllegalArgumentException is thrown if an option cannot be configured on the bean because there is no suitable setter method and failOnNoSet is true.
-     * @throws Exception for any other kind of error
      */
-    public static boolean setCamelProperties(CamelContext context, Object target, Map<String, Object> properties, boolean failIfNotSet) throws Exception {
+    public static boolean setCamelProperties(CamelContext context, Object target, Map<String, Object> properties, boolean failIfNotSet) {
         ObjectHelper.notNull(context, "context");
         ObjectHelper.notNull(target, "target");
         ObjectHelper.notNull(properties, "properties");

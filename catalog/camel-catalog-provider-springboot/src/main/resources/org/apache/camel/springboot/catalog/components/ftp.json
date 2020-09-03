@@ -18,8 +18,6 @@
     "syntax": "ftp:host:port\/directoryName",
     "alternativeSyntax": "ftp:username:password@host:port\/directoryName",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false

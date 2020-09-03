@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "google-sheets-stream:apiName",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": true,
     "producerOnly": false,
     "lenientProperties": false,

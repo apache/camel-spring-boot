@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "stream:kind",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false

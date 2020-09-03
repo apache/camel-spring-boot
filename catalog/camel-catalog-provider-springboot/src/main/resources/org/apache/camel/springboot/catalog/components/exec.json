@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "exec:executable",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": true,
     "lenientProperties": false

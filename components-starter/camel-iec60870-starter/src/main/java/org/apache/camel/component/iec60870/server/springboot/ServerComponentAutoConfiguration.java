@@ -16,27 +16,19 @@
  */
 package org.apache.camel.component.iec60870.server.springboot;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Component;
 import org.apache.camel.component.iec60870.server.ServerComponent;
 import org.apache.camel.spi.ComponentCustomizer;
-import org.apache.camel.spi.HasId;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
 import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
-import org.apache.camel.spring.boot.util.GroupCondition;
+import org.apache.camel.spring.boot.util.ConditionalOnHierarchicalProperties;
 import org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator;
-import org.apache.camel.support.IntrospectionSupport;
-import org.apache.camel.util.ObjectHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -49,60 +41,35 @@ import org.springframework.context.annotation.Lazy;
  */
 @Generated("org.apache.camel.springboot.maven.SpringBootAutoConfigurationMojo")
 @Configuration(proxyBeanMethods = false)
-@Conditional({ConditionalOnCamelContextAndAutoConfigurationBeans.class,
-        ServerComponentAutoConfiguration.GroupConditions.class})
 @AutoConfigureAfter(CamelAutoConfiguration.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,
-        ServerComponentConfiguration.class})
+@Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,ServerComponentConfiguration.class})
+@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.iec60870-server"})
 public class ServerComponentAutoConfiguration {
 
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(ServerComponentAutoConfiguration.class);
     @Autowired
     private ApplicationContext applicationContext;
     @Autowired
     private CamelContext camelContext;
     @Autowired
     private ServerComponentConfiguration configuration;
-    @Autowired(required = false)
-    private List<ComponentCustomizer<ServerComponent>> customizers;
-
-    static class GroupConditions extends GroupCondition {
-        public GroupConditions() {
-            super("camel.component", "camel.component.iec60870-server");
-        }
-    }
 
     @Lazy
-    @Bean(name = "iec60870-server-component")
-    @ConditionalOnMissingBean(ServerComponent.class)
-    public ServerComponent configureServerComponent() throws Exception {
-        ServerComponent component = new ServerComponent();
-        component.setCamelContext(camelContext);
-        Map<String, Object> parameters = new HashMap<>();
-        IntrospectionSupport.getProperties(configuration, parameters, null,
-                false);
-        CamelPropertiesHelper.setCamelProperties(camelContext, component,
-                parameters, false);
-        if (ObjectHelper.isNotEmpty(customizers)) {
-            for (ComponentCustomizer<ServerComponent> customizer : customizers) {
-                boolean useCustomizer = (customizer instanceof HasId)
-                        ? HierarchicalPropertiesEvaluator.evaluate(
-                                applicationContext.getEnvironment(),
-                                "camel.component.customizer",
-                                "camel.component.iec60870-server.customizer",
-                                ((HasId) customizer).getId())
-                        : HierarchicalPropertiesEvaluator.evaluate(
-                                applicationContext.getEnvironment(),
-                                "camel.component.customizer",
-                                "camel.component.iec60870-server.customizer");
-                if (useCustomizer) {
-                    LOGGER.debug("Configure component {}, with customizer {}",
-                            component, customizer);
-                    customizer.customize(component);
-                }
+    @Bean
+    public ComponentCustomizer configureServerComponent() {
+        return new ComponentCustomizer() {
+            @Override
+            public void configure(String name, Component target) {
+                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
             }
-        }
-        return component;
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.iec60870-server.customizer")
+                    && target instanceof ServerComponent;
+            }
+        };
     }
 }

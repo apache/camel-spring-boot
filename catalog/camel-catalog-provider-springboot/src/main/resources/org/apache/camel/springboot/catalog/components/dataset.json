@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "dataset:name",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": true

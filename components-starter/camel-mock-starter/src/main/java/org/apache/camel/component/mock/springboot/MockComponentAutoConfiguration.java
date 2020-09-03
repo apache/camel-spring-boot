@@ -16,27 +16,19 @@
  */
 package org.apache.camel.component.mock.springboot;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Component;
 import org.apache.camel.component.mock.MockComponent;
 import org.apache.camel.spi.ComponentCustomizer;
-import org.apache.camel.spi.HasId;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
 import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
-import org.apache.camel.spring.boot.util.GroupCondition;
+import org.apache.camel.spring.boot.util.ConditionalOnHierarchicalProperties;
 import org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator;
-import org.apache.camel.support.IntrospectionSupport;
-import org.apache.camel.util.ObjectHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -49,60 +41,35 @@ import org.springframework.context.annotation.Lazy;
  */
 @Generated("org.apache.camel.springboot.maven.SpringBootAutoConfigurationMojo")
 @Configuration(proxyBeanMethods = false)
-@Conditional({ConditionalOnCamelContextAndAutoConfigurationBeans.class,
-        MockComponentAutoConfiguration.GroupConditions.class})
 @AutoConfigureAfter(CamelAutoConfiguration.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,
-        MockComponentConfiguration.class})
+@Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,MockComponentConfiguration.class})
+@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.mock"})
 public class MockComponentAutoConfiguration {
 
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(MockComponentAutoConfiguration.class);
     @Autowired
     private ApplicationContext applicationContext;
     @Autowired
     private CamelContext camelContext;
     @Autowired
     private MockComponentConfiguration configuration;
-    @Autowired(required = false)
-    private List<ComponentCustomizer<MockComponent>> customizers;
-
-    static class GroupConditions extends GroupCondition {
-        public GroupConditions() {
-            super("camel.component", "camel.component.mock");
-        }
-    }
 
     @Lazy
-    @Bean(name = "mock-component")
-    @ConditionalOnMissingBean(MockComponent.class)
-    public MockComponent configureMockComponent() throws Exception {
-        MockComponent component = new MockComponent();
-        component.setCamelContext(camelContext);
-        Map<String, Object> parameters = new HashMap<>();
-        IntrospectionSupport.getProperties(configuration, parameters, null,
-                false);
-        CamelPropertiesHelper.setCamelProperties(camelContext, component,
-                parameters, false);
-        if (ObjectHelper.isNotEmpty(customizers)) {
-            for (ComponentCustomizer<MockComponent> customizer : customizers) {
-                boolean useCustomizer = (customizer instanceof HasId)
-                        ? HierarchicalPropertiesEvaluator.evaluate(
-                                applicationContext.getEnvironment(),
-                                "camel.component.customizer",
-                                "camel.component.mock.customizer",
-                                ((HasId) customizer).getId())
-                        : HierarchicalPropertiesEvaluator.evaluate(
-                                applicationContext.getEnvironment(),
-                                "camel.component.customizer",
-                                "camel.component.mock.customizer");
-                if (useCustomizer) {
-                    LOGGER.debug("Configure component {}, with customizer {}",
-                            component, customizer);
-                    customizer.customize(component);
-                }
+    @Bean
+    public ComponentCustomizer configureMockComponent() {
+        return new ComponentCustomizer() {
+            @Override
+            public void configure(String name, Component target) {
+                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
             }
-        }
-        return component;
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.mock.customizer")
+                    && target instanceof MockComponent;
+            }
+        };
     }
 }

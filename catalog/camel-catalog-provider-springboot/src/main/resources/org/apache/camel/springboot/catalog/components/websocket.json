@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "websocket:host:port\/resourceUri",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false

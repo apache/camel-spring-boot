@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "websocket-jsr356:uri",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false

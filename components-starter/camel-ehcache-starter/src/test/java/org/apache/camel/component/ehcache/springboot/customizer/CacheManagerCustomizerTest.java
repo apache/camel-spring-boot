@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.ehcache.springboot.customizer;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.component.ehcache.EhcacheComponent;
 import org.ehcache.CacheManager;
 import org.ehcache.config.builders.CacheManagerBuilder;
@@ -44,13 +45,15 @@ public class CacheManagerCustomizerTest {
     @Autowired
     CacheManager cacheManager;
     @Autowired
-    EhcacheComponent component;
+    CamelContext context;
 
     @Test
-    public void testComponentConfiguration() throws Exception {
+    public void testComponentConfiguration() {
+        EhcacheComponent component = context.getComponent("ehcache", EhcacheComponent.class);
+
         Assert.assertNotNull(cacheManager);
         Assert.assertNotNull(component);
-        Assert.assertEquals(cacheManager, component.getCacheManager());
+        Assert.assertSame(cacheManager, component.getCacheManager());
     }
 
     @Configuration

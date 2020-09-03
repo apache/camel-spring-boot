@@ -20,6 +20,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.camel.CamelContext;
+import org.apache.camel.Ordered;
 import org.apache.camel.component.ehcache.EhcacheComponent;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.ehcache.config.CacheConfiguration;
@@ -35,8 +37,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -60,10 +60,12 @@ public class CacheConfigurationCustomizerEnabledReplaceTest {
     @Autowired
     Map<String, CacheConfiguration<?, ?>> configurations;
     @Autowired
-    EhcacheComponent component;
+    CamelContext context;
 
     @Test
-    public void testComponentConfiguration() throws Exception {
+    public void testComponentConfiguration() {
+        EhcacheComponent component = context.getComponent("ehcache", EhcacheComponent.class);
+
         Assert.assertNotNull(configurations);
         Assert.assertEquals(2, configurations.size());
         Assert.assertNotNull(component);
@@ -76,12 +78,11 @@ public class CacheConfigurationCustomizerEnabledReplaceTest {
 
     @Configuration
     static class TestConfiguration {
-        @Order(Ordered.HIGHEST_PRECEDENCE)
         @Bean
-        public ComponentCustomizer<EhcacheComponent> customizer() {
-            return new ComponentCustomizer<EhcacheComponent>() {
-                @Override
-                public void customize(EhcacheComponent component) {
+        public ComponentCustomizer customizer() {
+            return ComponentCustomizer.builder(EhcacheComponent.class)
+                .withOrder(Ordered.HIGHEST)
+                .build(component -> {
                     component.addCachesConfigurations(Collections.singletonMap(
                         CACHE_CONFIG_ID,
                         CacheConfigurationBuilder.newCacheConfigurationBuilder(
@@ -92,8 +93,7 @@ public class CacheConfigurationCustomizerEnabledReplaceTest {
                                 .offheap(2, MemoryUnit.MB))
                             .build()
                     ));
-                }
-            };
+                });
         }
 
         @Bean

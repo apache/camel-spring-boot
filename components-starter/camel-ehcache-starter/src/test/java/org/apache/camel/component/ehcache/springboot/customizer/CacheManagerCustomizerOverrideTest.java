@@ -16,6 +16,8 @@
  */
 package org.apache.camel.component.ehcache.springboot.customizer;
 
+import org.apache.camel.CamelContext;
+import org.apache.camel.Ordered;
 import org.apache.camel.component.ehcache.EhcacheComponent;
 import org.apache.camel.component.ehcache.springboot.EhcacheComponentAutoConfiguration;
 import org.apache.camel.spi.ComponentCustomizer;
@@ -32,8 +34,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -51,33 +51,31 @@ import org.springframework.test.context.junit4.SpringRunner;
     })
 public class CacheManagerCustomizerOverrideTest {
     private static final CacheManager CACHE_MANAGER = CacheManagerBuilder.newCacheManagerBuilder().build();
+
     @Autowired
     CacheManager cacheManager;
     @Autowired
-    EhcacheComponent component;
+    CamelContext context;
 
     @Test
     public void testComponentConfiguration() throws Exception {
+        EhcacheComponent component = context.getComponent("ehcache", EhcacheComponent.class);
+
         Assert.assertNotNull(cacheManager);
         Assert.assertNotNull(component);
         Assert.assertNotNull(component.getCacheManager());
-        Assert.assertEquals(cacheManager, component.getCacheManager());
+        Assert.assertSame(cacheManager, component.getCacheManager());
     }
 
     @Configuration
     @AutoConfigureAfter(CamelAutoConfiguration.class)
     @AutoConfigureBefore(EhcacheComponentAutoConfiguration.class)
     public static class TestConfiguration {
-
-        @Order(Ordered.HIGHEST_PRECEDENCE)
         @Bean
-        public ComponentCustomizer<EhcacheComponent> customizer() {
-            return new ComponentCustomizer<EhcacheComponent>() {
-                @Override
-                public void customize(EhcacheComponent component) {
-                    component.setCacheManager(CACHE_MANAGER);
-                }
-            };
+        public ComponentCustomizer customizer() {
+            return ComponentCustomizer.builder(EhcacheComponent.class)
+                .withOrder(Ordered.HIGHEST)
+                .build(component -> component.setCacheManager(CACHE_MANAGER));
         }
 
         @Bean(initMethod = "init", destroyMethod = "close")

@@ -16,13 +16,13 @@
  */
 package org.apache.camel.component.ehcache.springboot;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.component.infinispan.InfinispanComponent;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,12 +32,12 @@ class CacheManagerCustomizerNotEnabledTestBase {
     @Autowired
     RemoteCacheManager remoteCacheManager;
     @Autowired
-    InfinispanComponent component;
-    @Autowired
-    ApplicationContext context;
+    CamelContext context;
 
     @Test
-    public void testComponentConfiguration() throws Exception {
+    public void testComponentConfiguration() {
+        InfinispanComponent component = context.getComponent("infinispan", InfinispanComponent.class);
+
         Assert.assertNotNull(embeddedCacheManager);
         Assert.assertNotNull(remoteCacheManager);
         Assert.assertNotNull(component);

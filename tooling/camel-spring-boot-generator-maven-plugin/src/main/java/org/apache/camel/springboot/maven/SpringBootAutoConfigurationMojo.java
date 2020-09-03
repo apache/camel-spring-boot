@@ -16,7 +16,6 @@
  */
 package org.apache.camel.springboot.maven;
 
-import javax.annotation.Generated;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +37,7 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
+import javax.annotation.Generated;
 
 import org.apache.camel.maven.packaging.AbstractGeneratorMojo;
 import org.apache.camel.tooling.model.ComponentModel;
@@ -66,7 +66,6 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -79,7 +78,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
 
 /**
  * Generate Spring Boot auto configuration files for Camel components and data
@@ -144,6 +142,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             executeAll(getMainDepGroupId(), "camel-core");
             executeAll(getMainDepGroupId(), "camel-base");
             executeAll(getMainDepGroupId(), "camel-core-engine");
+            executeAll(getMainDepGroupId(), "camel-core-languages");
         } else {
             executeAll(getMainDepGroupId(), getMainDepArtifactId());
         }
@@ -532,7 +531,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 beforeGenerateComponentSource(model);
 
                 createComponentConfigurationSource(pkg, model, overrideComponentName);
-                createComponentAutoConfigurationSource(pkg, model, aliases, overrideComponentName);
+                createComponentAutoConfigurationSource(pkg, model, overrideComponentName);
                 createComponentSpringFactorySource(pkg, model);
             }
         }
@@ -590,7 +589,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 }
 
                 createDataFormatConfigurationSource(pkg, model, overrideDataFormatName);
-                createDataFormatAutoConfigurationSource(pkg, model, aliases, overrideDataFormatName);
+                createDataFormatAutoConfigurationSource(pkg, model, overrideDataFormatName);
                 createDataFormatSpringFactorySource(pkg, model);
             }
         }
@@ -634,7 +633,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 }
 
                 createLanguageConfigurationSource(pkg, model, overrideLanguageName);
-                createLanguageAutoConfigurationSource(pkg, model, aliases, overrideLanguageName);
+                createLanguageAutoConfigurationSource(pkg, model, overrideLanguageName);
                 createLanguageSpringFactorySource(pkg, model);
             }
         }
@@ -1213,15 +1212,17 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         writeSourceIfChanged(javaClass, fileName, true);
     }
 
-    private void createComponentAutoConfigurationSource(String packageName, ComponentModel model, List<String> componentAliases, String overrideComponentName)
+    private Class<?> generateDummyClass(String clazzName) {
+        return getProjectClassLoader().generateDummyClass(clazzName);
+    }
+
+    private void createComponentAutoConfigurationSource(String packageName, ComponentModel model, String overrideName)
         throws MojoFailureException {
 
         final String name = model.getJavaType().substring(model.getJavaType().lastIndexOf(".") + 1).replace("Component", "ComponentAutoConfiguration");
         final String configurationName = name.replace("ComponentAutoConfiguration", "ComponentConfiguration");
-        final String componentName = (overrideComponentName != null ? overrideComponentName : model.getScheme()).toLowerCase(Locale.US);
-
-        Class configClass = generateDummyClass(packageName + "." + configurationName);
-
+        final String componentName = (overrideName != null ? overrideName : model.getScheme()).toLowerCase(Locale.US);
+        final Class<?> configClass = generateDummyClass(packageName + "." + configurationName);
         final JavaClass javaClass = new JavaClass(getProjectClassLoader());
 
         javaClass.setPackage(packageName);
@@ -1229,52 +1230,43 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.getJavaDoc().setFullText("Generated by camel-package-maven-plugin - do not edit this file!");
         javaClass.addAnnotation(Generated.class).setStringValue("value", SpringBootAutoConfigurationMojo.class.getName());
         javaClass.addAnnotation(Configuration.class).setLiteralValue("proxyBeanMethods", "false");
-        javaClass.addAnnotation(Conditional.class).setLiteralValue("{ConditionalOnCamelContextAndAutoConfigurationBeans.class,\n        " + name + ".GroupConditions.class}");
         javaClass.addAnnotation(AutoConfigureAfter.class).setLiteralValue("CamelAutoConfiguration.class");
-        javaClass.addAnnotation(EnableConfigurationProperties.class).setLiteralValue("{ComponentConfigurationProperties.class,\n        " + configurationName + ".class}");
+        javaClass.addAnnotation(Conditional.class).setLiteralValue("ConditionalOnCamelContextAndAutoConfigurationBeans.class");
+        javaClass.addAnnotation(EnableConfigurationProperties.class)
+            .setLiteralValue("{ComponentConfigurationProperties.class," + configurationName + ".class}");
 
-        javaClass.addImport(HashMap.class);
-        javaClass.addImport(List.class);
-        javaClass.addImport(Map.class);
+        javaClass.addAnnotation("org.apache.camel.spring.boot.util.ConditionalOnHierarchicalProperties")
+            .setStringArrayValue(
+                "value",
+                new String[] { "camel.component", "camel.component." + componentName });
+
         javaClass.addImport(ApplicationContext.class);
-        javaClass.addImport("org.slf4j.Logger");
-        javaClass.addImport("org.slf4j.LoggerFactory");
         javaClass.addImport("org.apache.camel.CamelContext");
+        javaClass.addImport("org.apache.camel.Component");
         javaClass.addImport("org.apache.camel.spi.ComponentCustomizer");
         javaClass.addImport("org.apache.camel.spring.boot.CamelAutoConfiguration");
         javaClass.addImport("org.apache.camel.spring.boot.ComponentConfigurationProperties");
         javaClass.addImport("org.apache.camel.spring.boot.util.CamelPropertiesHelper");
         javaClass.addImport("org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans");
-        javaClass.addImport("org.apache.camel.spring.boot.util.GroupCondition");
         javaClass.addImport("org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator");
-        javaClass.addImport("org.apache.camel.support.IntrospectionSupport");
-        javaClass.addImport("org.apache.camel.util.ObjectHelper");
-        javaClass.addImport("org.apache.camel.spi.HasId");
         javaClass.addImport(model.getJavaType());
 
-        javaClass.addField().setPrivate().setStatic(true).setFinal(true).setName("LOGGER").setType(loadClass("org.slf4j.Logger"))
-            .setLiteralInitializer("LoggerFactory\n            .getLogger(" + name + ".class)");
         javaClass.addField().setPrivate().setName("applicationContext").setType(ApplicationContext.class).addAnnotation(Autowired.class);
         javaClass.addField().setPrivate().setName("camelContext").setType(loadClass("org.apache.camel.CamelContext")).addAnnotation(Autowired.class);
         javaClass.addField().setPrivate().setName("configuration").setType(configClass).addAnnotation(Autowired.class);
-        javaClass.addField().setPrivate().setName("customizers").setType(loadType("java.util.List<org.apache.camel.spi.ComponentCustomizer<" + model.getJavaType() + ">>"))
-            .addAnnotation(Autowired.class).setLiteralValue("required", "false");
-
-        javaClass.addNestedType().setName("GroupConditions").setStatic(true).setPackagePrivate().extendSuperType("GroupCondition").addMethod().setName("GroupConditions")
-            .setConstructor(true).setPublic().setBody("super(\"camel.component\", \"camel.component." + componentName + "\");");
 
         // add method for auto configure
         String body = createComponentBody(model.getShortJavaType(), componentName);
         String methodName = "configure" + model.getShortJavaType();
 
-        Method method = javaClass.addMethod().setName(methodName).setPublic().setBody(body).setReturnType(loadType(model.getJavaType())).addThrows(Exception.class);
-
-        // Determine all the aliases
-        String[] springBeanAliases = componentAliases.stream().map(alias -> alias + "-component").toArray(size -> new String[size]);
+        Method method = javaClass.addMethod()
+            .setName(methodName)
+            .setPublic()
+            .setBody(body)
+            .setReturnType(loadType("org.apache.camel.spi.ComponentCustomizer"));
 
         method.addAnnotation(Lazy.class);
-        method.addAnnotation(Bean.class).setStringArrayValue("name", springBeanAliases);
-        method.addAnnotation(ConditionalOnMissingBean.class).setLiteralValue(model.getShortJavaType() + ".class");
+        method.addAnnotation(Bean.class);
 
         sortImports(javaClass);
 
@@ -1282,19 +1274,13 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         writeSourceIfChanged(javaClass, fileName, false);
     }
 
-    private Class generateDummyClass(String clazzName) {
-        return getProjectClassLoader().generateDummyClass(clazzName);
-    }
-
-    private void createDataFormatAutoConfigurationSource(String packageName, DataFormatModel model, List<String> dataFormatAliases, String overrideDataFormatName)
+    private void createDataFormatAutoConfigurationSource(String packageName, DataFormatModel model, String overrideName)
         throws MojoFailureException {
 
         final String name = model.getJavaType().substring(model.getJavaType().lastIndexOf(".") + 1).replace("DataFormat", "DataFormatAutoConfiguration");
         final String configurationName = name.replace("DataFormatAutoConfiguration", "DataFormatConfiguration");
-        final String dataformatName = (overrideDataFormatName != null ? overrideDataFormatName : model.getName()).toLowerCase(Locale.US);
-
-        Class configClass = generateDummyClass(packageName + "." + configurationName);
-
+        final String dataformatName = (overrideName != null ? overrideName : model.getName()).toLowerCase(Locale.US);
+        final Class<?> configClass = generateDummyClass(packageName + "." + configurationName);
         final JavaClass javaClass = new JavaClass(getProjectClassLoader());
 
         javaClass.setPackage(packageName);
@@ -1302,59 +1288,42 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.getJavaDoc().setFullText("Generated by camel-package-maven-plugin - do not edit this file!");
         javaClass.addAnnotation(Generated.class).setStringValue("value", SpringBootAutoConfigurationMojo.class.getName());
         javaClass.addAnnotation(Configuration.class).setLiteralValue("proxyBeanMethods", "false");
-        javaClass.addAnnotation(Conditional.class).setLiteralValue("{ConditionalOnCamelContextAndAutoConfigurationBeans.class,\n        " + name + ".GroupConditions.class}");
-        javaClass.addAnnotation(AutoConfigureAfter.class).setStringValue("name", "org.apache.camel.spring.boot.CamelAutoConfiguration");
-        javaClass.addAnnotation(EnableConfigurationProperties.class).setLiteralValue("{DataFormatConfigurationProperties.class,\n        " + configurationName + ".class}");
+        javaClass.addAnnotation(AutoConfigureAfter.class).setLiteralValue("CamelAutoConfiguration.class");
+        javaClass.addAnnotation(Conditional.class).setLiteralValue("ConditionalOnCamelContextAndAutoConfigurationBeans.class");
+        javaClass.addAnnotation(EnableConfigurationProperties.class)
+            .setLiteralValue("{DataFormatConfigurationProperties.class," + configurationName + ".class}");
 
-        javaClass.addImport(HashMap.class);
-        javaClass.addImport(List.class);
-        javaClass.addImport(Map.class);
+        javaClass.addAnnotation("org.apache.camel.spring.boot.util.ConditionalOnHierarchicalProperties")
+            .setStringArrayValue(
+                "value",
+                new String[] { "camel.dataformat", "camel.dataformat." + dataformatName });
+
         javaClass.addImport(ApplicationContext.class);
-        javaClass.addImport(ConditionalOnBean.class);
-        javaClass.addImport("org.slf4j.Logger");
-        javaClass.addImport("org.slf4j.LoggerFactory");
         javaClass.addImport("org.apache.camel.CamelContext");
-        javaClass.addImport("org.apache.camel.CamelContextAware");
         javaClass.addImport("org.apache.camel.spring.boot.CamelAutoConfiguration");
         javaClass.addImport("org.apache.camel.spring.boot.DataFormatConfigurationProperties");
         javaClass.addImport("org.apache.camel.spring.boot.util.CamelPropertiesHelper");
         javaClass.addImport("org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans");
-        javaClass.addImport("org.apache.camel.spring.boot.util.GroupCondition");
         javaClass.addImport("org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator");
-        javaClass.addImport("org.apache.camel.support.IntrospectionSupport");
-        javaClass.addImport("org.apache.camel.util.ObjectHelper");
-        javaClass.addImport("org.apache.camel.RuntimeCamelException");
         javaClass.addImport("org.apache.camel.spi.DataFormat");
         javaClass.addImport("org.apache.camel.spi.DataFormatCustomizer");
-        javaClass.addImport("org.apache.camel.spi.DataFormatFactory");
-        javaClass.addImport("org.apache.camel.spi.HasId");
         javaClass.addImport(model.getJavaType());
 
-        javaClass.addField().setPrivate().setStatic(true).setFinal(true).setName("LOGGER").setType(loadType("org.slf4j.Logger"))
-            .setLiteralInitializer("LoggerFactory\n            .getLogger(" + name + ".class)");
         javaClass.addField().setPrivate().setName("applicationContext").setType(ApplicationContext.class).addAnnotation(Autowired.class);
         javaClass.addField().setPrivate().setName("camelContext").setType(loadType("org.apache.camel.CamelContext")).addAnnotation(Autowired.class);
         javaClass.addField().setPrivate().setName("configuration").setType(configClass).addAnnotation(Autowired.class);
-        javaClass.addField().setPrivate().setName("customizers").setType(loadType("java.util.List<org.apache.camel.spi.DataFormatCustomizer<" + model.getJavaType() + ">>"))
-            .addAnnotation(Autowired.class).setLiteralValue("required", "false");
-
-        JavaClass groupConditions = javaClass.addNestedType().setName("GroupConditions").setStatic(true).setPackagePrivate().extendSuperType("GroupCondition");
-        groupConditions.addMethod().setName("GroupConditions").setConstructor(true).setPublic()
-            .setBody("super(\"camel.dataformat\", \"camel.dataformat." + dataformatName + "\");");
 
         String body = createDataFormatBody(model.getShortJavaType(), dataformatName);
         String methodName = "configure" + model.getShortJavaType() + "Factory";
 
-        Method method = javaClass.addMethod().setName(methodName).setPublic().setBody(body).setReturnType(loadType("org.apache.camel.spi.DataFormatFactory"))
-            .addThrows(Exception.class);
+        Method method = javaClass.addMethod()
+            .setName(methodName)
+            .setPublic()
+            .setBody(body)
+            .setReturnType(loadType("org.apache.camel.spi.DataFormatCustomizer"));
 
-        // Determine all the aliases
-        // adding the '-dataformat' suffix to prevent collision with component
-        // names
-        String[] springBeanAliases = dataFormatAliases.stream().map(alias -> alias + "-dataformat-factory").toArray(String[]::new);
-
-        method.addAnnotation(Bean.class).setStringArrayValue("name", springBeanAliases);
-        method.addAnnotation(ConditionalOnMissingBean.class).setLiteralValue("value", model.getShortJavaType() + ".class");
+        method.addAnnotation(Lazy.class);
+        method.addAnnotation(Bean.class);
 
         sortImports(javaClass);
 
@@ -1362,15 +1331,13 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         writeSourceIfChanged(javaClass, fileName, false);
     }
 
-    private void createLanguageAutoConfigurationSource(String packageName, LanguageModel model, List<String> languageAliases, String overrideLanguageName)
+    private void createLanguageAutoConfigurationSource(String packageName, LanguageModel model, String overrideName)
         throws MojoFailureException {
 
         final String name = model.getJavaType().substring(model.getJavaType().lastIndexOf(".") + 1).replace("Language", "LanguageAutoConfiguration");
         final String configurationName = name.replace("LanguageAutoConfiguration", "LanguageConfiguration");
-        final String languageName = (overrideLanguageName != null ? overrideLanguageName : model.getName()).toLowerCase(Locale.US);
-
-        Class configClass = generateDummyClass(packageName + "." + configurationName);
-
+        final String languageName = (overrideName != null ? overrideName : model.getName()).toLowerCase(Locale.US);
+        final Class<?> configClass = generateDummyClass(packageName + "." + configurationName);
         final JavaClass javaClass = new JavaClass(getProjectClassLoader());
 
         javaClass.setPackage(packageName);
@@ -1378,56 +1345,42 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.getJavaDoc().setFullText("Generated by camel-package-maven-plugin - do not edit this file!");
         javaClass.addAnnotation(Generated.class).setStringValue("value", SpringBootAutoConfigurationMojo.class.getName());
         javaClass.addAnnotation(Configuration.class).setLiteralValue("proxyBeanMethods", "false");
-        javaClass.addAnnotation(Conditional.class).setLiteralValue("{ConditionalOnCamelContextAndAutoConfigurationBeans.class,\n        " + name + ".GroupConditions.class}");
         javaClass.addAnnotation(AutoConfigureAfter.class).setLiteralValue("CamelAutoConfiguration.class");
-        javaClass.addAnnotation(EnableConfigurationProperties.class).setLiteralValue("{LanguageConfigurationProperties.class,\n        " + configurationName + ".class}");
+        javaClass.addAnnotation(Conditional.class).setLiteralValue("ConditionalOnCamelContextAndAutoConfigurationBeans.class");
+        javaClass.addAnnotation(EnableConfigurationProperties.class)
+            .setLiteralValue("{LanguageConfigurationProperties.class," + configurationName + ".class}");
 
-        javaClass.addImport(HashMap.class);
-        javaClass.addImport(List.class);
-        javaClass.addImport(Map.class);
+        javaClass.addAnnotation("org.apache.camel.spring.boot.util.ConditionalOnHierarchicalProperties")
+            .setStringArrayValue(
+                "value",
+                new String[] { "camel.language", "camel.language." + languageName });
+
         javaClass.addImport(ApplicationContext.class);
-        javaClass.addImport(ConditionalOnBean.class);
-        javaClass.addImport(ConfigurableBeanFactory.class);
-        javaClass.addImport("org.slf4j.Logger");
-        javaClass.addImport("org.slf4j.LoggerFactory");
         javaClass.addImport("org.apache.camel.CamelContext");
-        javaClass.addImport("org.apache.camel.CamelContextAware");
         javaClass.addImport("org.apache.camel.spring.boot.CamelAutoConfiguration");
         javaClass.addImport("org.apache.camel.spring.boot.LanguageConfigurationProperties");
         javaClass.addImport("org.apache.camel.spring.boot.util.CamelPropertiesHelper");
         javaClass.addImport("org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans");
-        javaClass.addImport("org.apache.camel.spring.boot.util.GroupCondition");
         javaClass.addImport("org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator");
-        javaClass.addImport("org.apache.camel.support.IntrospectionSupport");
-        javaClass.addImport("org.apache.camel.util.ObjectHelper");
-        javaClass.addImport("org.apache.camel.spi.HasId");
+        javaClass.addImport("org.apache.camel.spi.Language");
         javaClass.addImport("org.apache.camel.spi.LanguageCustomizer");
         javaClass.addImport(model.getJavaType());
 
-        javaClass.addField().setPrivate().setStatic(true).setFinal(true).setName("LOGGER").setType(loadType("org.slf4j.Logger"))
-            .setLiteralInitializer("LoggerFactory\n            .getLogger(" + name + ".class)");
         javaClass.addField().setPrivate().setName("applicationContext").setType(ApplicationContext.class).addAnnotation(Autowired.class);
         javaClass.addField().setPrivate().setName("camelContext").setType(loadType("org.apache.camel.CamelContext")).addAnnotation(Autowired.class);
         javaClass.addField().setPrivate().setName("configuration").setType(configClass).addAnnotation(Autowired.class);
-        javaClass.addField().setPrivate().setName("customizers").setType(loadType("java.util.List<org.apache.camel.spi.LanguageCustomizer<" + model.getJavaType() + ">>"))
-            .addAnnotation(Autowired.class).setLiteralValue("required", "false");
-
-        javaClass.addNestedType().setName("GroupConditions").setStatic(true).setPackagePrivate().extendSuperType("GroupCondition").addMethod().setName("GroupConditions")
-            .setConstructor(true).setPublic().setBody("super(\"camel.component\", \"camel.component." + languageName + "\");");
 
         String body = createLanguageBody(model.getShortJavaType(), languageName);
         String methodName = "configure" + model.getShortJavaType();
 
-        Method method = javaClass.addMethod().setName(methodName).setPublic().setBody(body).setReturnType(loadType(model.getJavaType())).addThrows(Exception.class);
+        Method method = javaClass.addMethod()
+            .setName(methodName)
+            .setPublic()
+            .setBody(body)
+            .setReturnType("org.apache.camel.spi.LanguageCustomizer");
 
-        // Determine all the aliases
-        // adding the '-language' suffix to prevent collision with component
-        // names
-        String[] springBeanAliases = languageAliases.stream().map(alias -> alias + "-language").toArray(String[]::new);
-
-        method.addAnnotation(Bean.class).setStringArrayValue("name", springBeanAliases);
-        method.addAnnotation(Scope.class).setLiteralValue("ConfigurableBeanFactory.SCOPE_PROTOTYPE");
-        method.addAnnotation(ConditionalOnMissingBean.class).setLiteralValue("value", model.getShortJavaType() + ".class");
+        method.addAnnotation(Lazy.class);
+        method.addAnnotation(Bean.class);
 
         String fileName = packageName.replaceAll("\\.", "\\/") + "/" + name + ".java";
         writeSourceIfChanged(javaClass, fileName, false);
@@ -1458,114 +1411,60 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     }
 
     private static String createComponentBody(String shortJavaType, String name) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(shortJavaType).append(" component = new ").append(shortJavaType).append("();").append("\n");
-        sb.append("component.setCamelContext(camelContext);\n");
-        sb.append("Map<String, Object> parameters = new HashMap<>();\n");
-        sb.append("IntrospectionSupport.getProperties(configuration, parameters, null,\n" + "        false);\n");
-        sb.append("CamelPropertiesHelper.setCamelProperties(camelContext, component,\n");
-        sb.append("        parameters, false);\n");
-        sb.append("if (ObjectHelper.isNotEmpty(customizers)) {\n");
-        sb.append("    for (ComponentCustomizer<").append(shortJavaType).append("> customizer : customizers) {\n");
-        sb.append("        boolean useCustomizer = (customizer instanceof HasId)\n");
-        sb.append("                ? HierarchicalPropertiesEvaluator.evaluate(\n");
-        sb.append("                        applicationContext.getEnvironment(),\n");
-        sb.append("                        \"camel.component.customizer\",\n");
-        sb.append("                        \"camel.component.").append(name).append(".customizer\",\n");
-        sb.append("                        ((HasId) customizer).getId())\n");
-        sb.append("                : HierarchicalPropertiesEvaluator.evaluate(\n");
-        sb.append("                        applicationContext.getEnvironment(),\n");
-        sb.append("                        \"camel.component.customizer\",\n");
-        sb.append("                        \"camel.component.").append(name).append(".customizer\");\n");
-        sb.append("        if (useCustomizer) {\n");
-        sb.append("            LOGGER.debug(\"Configure component {}, with customizer {}\",\n");
-        sb.append("                    component, customizer);\n");
-        sb.append("            customizer.customize(component);\n");
-        sb.append("        }\n");
-        sb.append("    }\n");
-        sb.append("}\n");
-        sb.append("return component;");
-
-        return sb.toString();
+        return new StringBuilder()
+            .append("return new ComponentCustomizer() {\n")
+            .append("    @Override\n")
+            .append("    public void configure(String name, Component target) {\n")
+            .append("        CamelPropertiesHelper.copyProperties(camelContext, configuration, target);\n")
+            .append("    }\n")
+            .append("    @Override\n")
+            .append("    public boolean isEnabled(String name, Component target) {\n")
+            .append("        return HierarchicalPropertiesEvaluator.evaluate(\n")
+            .append("                applicationContext,\n")
+            .append("                \"camel.component.customizer\",\n")
+            .append("                \"camel.component.").append(name).append(".customizer\")\n")
+            .append("            && target instanceof ").append(shortJavaType).append(";\n")
+            .append("    }\n")
+            .append("};\n")
+            .toString();
     }
 
     private static String createDataFormatBody(String shortJavaType, String name) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("return new DataFormatFactory() {\n");
-        sb.append("    @Override\n");
-        sb.append("    public DataFormat newInstance() {\n");
-        sb.append("        ").append(shortJavaType).append(" dataformat = new ").append(shortJavaType).append("();").append("\n");
-        sb.append("        if (CamelContextAware.class\n" + "                .isAssignableFrom(").append(shortJavaType).append(".class)) {\n");
-        sb.append("            CamelContextAware contextAware = CamelContextAware.class\n" + "                    .cast(dataformat);\n");
-        sb.append("            if (contextAware != null) {\n");
-        sb.append("                contextAware.setCamelContext(camelContext);\n");
-        sb.append("            }\n");
-        sb.append("        }\n");
-        sb.append("        try {\n");
-        sb.append("            Map<String, Object> parameters = new HashMap<>();\n");
-        sb.append("            IntrospectionSupport.getProperties(configuration,\n" + "                    parameters, null, false);\n");
-        sb.append("            CamelPropertiesHelper.setCamelProperties(camelContext,\n" + "                    dataformat, parameters, false);\n");
-        sb.append("        } catch (Exception e) {\n");
-        sb.append("            throw new RuntimeCamelException(e);\n");
-        sb.append("        }\n");
-        sb.append("        if (ObjectHelper.isNotEmpty(customizers)) {\n");
-        sb.append("            for (DataFormatCustomizer<").append(shortJavaType).append("> customizer : customizers) {\n");
-        sb.append("                boolean useCustomizer = (customizer instanceof HasId)\n");
-        sb.append("                        ? HierarchicalPropertiesEvaluator.evaluate(\n");
-        sb.append("                                applicationContext.getEnvironment(),\n");
-        sb.append("                                \"camel.dataformat.customizer\",\n");
-        sb.append("                                \"camel.dataformat.").append(name).append(".customizer\",\n");
-        sb.append("                                ((HasId) customizer).getId())\n");
-        sb.append("                        : HierarchicalPropertiesEvaluator.evaluate(\n" + "                                applicationContext.getEnvironment(),\n");
-        sb.append("                                \"camel.dataformat.customizer\",\n");
-        sb.append("                                \"camel.dataformat.").append(name).append(".customizer\");\n");
-        sb.append("                if (useCustomizer) {\n");
-        sb.append("                    LOGGER.debug(\n" + "                            \"Configure dataformat {}, with customizer {}\",\n"
-                  + "                            dataformat, customizer);\n");
-        sb.append("                    customizer.customize(dataformat);\n");
-        sb.append("                }\n");
-        sb.append("            }\n");
-        sb.append("        }\n");
-        sb.append("        return dataformat;\n");
-        sb.append("    }\n");
-        sb.append("};\n");
-
-        return sb.toString();
+        return new StringBuilder()
+            .append("return new DataFormatCustomizer() {\n")
+            .append("    @Override\n")
+            .append("    public void configure(String name, DataFormat target) {\n")
+            .append("        CamelPropertiesHelper.copyProperties(camelContext, configuration, target);\n")
+            .append("    }\n")
+            .append("    @Override\n")
+            .append("    public boolean isEnabled(String name, DataFormat target) {\n")
+            .append("        return HierarchicalPropertiesEvaluator.evaluate(\n")
+            .append("                applicationContext,\n")
+            .append("                \"camel.dataformat.customizer\",\n")
+            .append("                \"camel.dataformat.").append(name).append(".customizer\")\n")
+            .append("            && target instanceof ").append(shortJavaType).append(";\n")
+            .append("    }\n")
+            .append("};\n")
+            .toString();
     }
 
     private static String createLanguageBody(String shortJavaType, String name) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(shortJavaType).append(" language = new ").append(shortJavaType).append("();").append("\n");
-        sb.append("if (CamelContextAware.class.isAssignableFrom(").append(shortJavaType).append(".class)) {\n");
-        sb.append("    CamelContextAware contextAware = CamelContextAware.class\n" + "            .cast(language);\n");
-        sb.append("    if (contextAware != null) {\n");
-        sb.append("        contextAware.setCamelContext(camelContext);\n");
-        sb.append("    }\n");
-        sb.append("}\n");
-        sb.append("Map<String, Object> parameters = new HashMap<>();\n");
-        sb.append("IntrospectionSupport.getProperties(configuration, parameters, null,\n" + "        false);\n");
-        sb.append("CamelPropertiesHelper.setCamelProperties(camelContext, language,\n" + "        parameters, false);\n");
-        sb.append("if (ObjectHelper.isNotEmpty(customizers)) {\n");
-        sb.append("    for (LanguageCustomizer<").append(shortJavaType).append("> customizer : customizers) {\n");
-        sb.append("        boolean useCustomizer = (customizer instanceof HasId)\n");
-        sb.append("                ? HierarchicalPropertiesEvaluator.evaluate(\n");
-        sb.append("                        applicationContext.getEnvironment(),\n");
-        sb.append("                        \"camel.language.customizer\",\n");
-        sb.append("                        \"camel.language.").append(name).append(".customizer\",\n");
-        sb.append("                        ((HasId) customizer).getId())\n");
-        sb.append("                : HierarchicalPropertiesEvaluator.evaluate(\n");
-        sb.append("                        applicationContext.getEnvironment(),\n");
-        sb.append("                        \"camel.language.customizer\",\n");
-        sb.append("                        \"camel.language.").append(name).append(".customizer\");\n");
-        sb.append("        if (useCustomizer) {\n");
-        sb.append("            LOGGER.debug(\"Configure language {}, with customizer {}\",\n" + "                    language, customizer);\n");
-        sb.append("            customizer.customize(language);\n");
-        sb.append("        }\n");
-        sb.append("    }\n");
-        sb.append("}\n");
-        sb.append("return language;");
-
-        return sb.toString();
+        return new StringBuilder()
+            .append("return new LanguageCustomizer() {\n")
+            .append("    @Override\n")
+            .append("    public void configure(String name, Language target) {\n")
+            .append("        CamelPropertiesHelper.copyProperties(camelContext, configuration, target);\n")
+            .append("    }\n")
+            .append("    @Override\n")
+            .append("    public boolean isEnabled(String name, Language target) {\n")
+            .append("        return HierarchicalPropertiesEvaluator.evaluate(\n")
+            .append("                applicationContext,\n")
+            .append("                \"camel.language.customizer\",\n")
+            .append("                \"camel.language.").append(name).append(".customizer\")\n")
+            .append("            && target instanceof ").append(shortJavaType).append(";\n")
+            .append("    }\n")
+            .append("};\n")
+            .toString();
     }
 
     private static void sortImports(JavaClass importer) {

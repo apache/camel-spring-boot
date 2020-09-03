@@ -17,29 +17,52 @@
 package org.apache.camel.component.hazelcast.springboot.customizer;
 
 import com.hazelcast.core.HazelcastInstance;
+import org.apache.camel.Component;
+import org.apache.camel.Ordered;
 import org.apache.camel.component.hazelcast.HazelcastDefaultComponent;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spi.HasId;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
+import org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.AllNestedConditions;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.context.ApplicationContext;
 
 public abstract class AbstractHazelcastInstanceCustomizer<T extends HazelcastDefaultComponent, C extends AbstractHazelcastInstanceCustomizerConfiguration>
-        implements HasId, ComponentCustomizer<T> {
+        implements HasId, ComponentCustomizer {
 
+    @Autowired
+    private ApplicationContext applicationContext;
     @Autowired
     private HazelcastInstance hazelcastInstance;
     @Autowired
     private C configuration;
 
     @Override
-    public void customize(T component) {
+    public void configure(String name, Component target) {
+        HazelcastDefaultComponent component = (HazelcastDefaultComponent)target;
+
         // Set the cache manager only if the customizer is configured to always
         // set it or if no cache manager is already configured on component
         if (configuration.isOverride() || component.getHazelcastInstance() == null) {
             component.setHazelcastInstance(hazelcastInstance);
         }
+    }
+
+    @Override
+    public boolean isEnabled(String name, Component target) {
+        return HierarchicalPropertiesEvaluator.evaluate(
+                applicationContext,
+                "camel.component.customizer",
+                "camel.component.hazelcast.customizer",
+                getId())
+            && target instanceof HazelcastDefaultComponent;
+    }
+
+    @Override
+    public int getOrder() {
+        return Ordered.LOWEST;
     }
 
     // *************************************************************************

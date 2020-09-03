@@ -16,8 +16,6 @@
     "extendsScheme": "",
     "syntax": "graphql:httpUri",
     "async": false,
-    "api": false,
-    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": true,
     "lenientProperties": false
