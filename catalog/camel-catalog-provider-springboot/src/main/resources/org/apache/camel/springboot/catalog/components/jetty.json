@@ -17,6 +17,8 @@
     "extendsScheme": "http",
     "syntax": "jetty:httpUri",
     "async": true,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": true,
     "producerOnly": false,
     "lenientProperties": true

@@ -16,6 +16,8 @@
     "extendsScheme": "",
     "syntax": "aws-lambda:function",
     "async": false,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": true,
     "lenientProperties": false

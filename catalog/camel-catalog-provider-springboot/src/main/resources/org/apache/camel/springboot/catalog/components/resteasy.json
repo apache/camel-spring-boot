@@ -17,6 +17,8 @@
     "extendsScheme": "http",
     "syntax": "resteasy:httpUri",
     "async": false,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false,

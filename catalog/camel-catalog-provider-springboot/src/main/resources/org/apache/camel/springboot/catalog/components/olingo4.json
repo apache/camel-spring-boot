@@ -16,6 +16,8 @@
     "extendsScheme": "",
     "syntax": "olingo4:apiName\/methodName",
     "async": false,
+    "api": true,
+    "apiPropertyQualifier": "apiName",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false
