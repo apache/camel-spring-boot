@@ -647,9 +647,9 @@ Number of Camel components: 339 in 272 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/vertx-component.html[Vert.x] | camel-vertx-starter | Stable | 2.12 | Send and receive messages to/from Vert.x Event Bus.
 
-| link:https://camel.apache.org/components/latest/vertx-http-component.html[Vert.x HTTP Client] | camel-vertx-http-starter | Preview | 3.5 | Camel HTTP client support with Vert.x
+| link:https://camel.apache.org/components/latest/vertx-http-component.html[Vert.x HTTP Client] | camel-vertx-http-starter | Preview | 3.5 | Send requests to external HTTP servers using Vert.x
 
-| link:https://camel.apache.org/components/latest/vertx-websocket-component.html[Vert.x WebSocket] | camel-vertx-websocket-starter | Preview | 3.5 | Camel WebSocket support with Vert.x
+| link:https://camel.apache.org/components/latest/vertx-websocket-component.html[Vert.x WebSocket] | camel-vertx-websocket-starter | Preview | 3.5 | Expose WebSocket endpoints and connect to remote WebSocket servers using Vert.x
 
 | link:https://camel.apache.org/components/latest/vm-component.html[VM] | camel-vm-starter | Stable | 1.1 | Call another endpoint in the same CamelContext asynchronously.
 
