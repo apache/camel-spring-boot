@@ -689,7 +689,7 @@ You can also use xref:manual::spring-testing.adoc[Camel Spring test annotations]
 [source,java]
 ----
 @CamelSpringBootTest
-@SpringBootApplication
+@SpringBootTest
 @MockEndpoints("direct:end")
 public class MyApplicationTest {
 
