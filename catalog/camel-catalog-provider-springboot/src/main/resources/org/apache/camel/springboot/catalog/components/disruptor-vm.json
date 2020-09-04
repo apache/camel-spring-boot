@@ -17,6 +17,8 @@
     "alternativeSchemes": "disruptor,disruptor-vm",
     "syntax": "disruptor-vm:name",
     "async": true,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false

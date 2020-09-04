@@ -16,6 +16,8 @@
     "extendsScheme": "",
     "syntax": "pubnub:channel",
     "async": false,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false

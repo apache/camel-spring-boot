@@ -16,6 +16,8 @@
     "extendsScheme": "",
     "syntax": "aws2-iam:label",
     "async": false,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": true,
     "lenientProperties": false

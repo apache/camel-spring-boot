@@ -16,6 +16,8 @@
     "extendsScheme": "",
     "syntax": "thrift:host:port\/service",
     "async": false,
+    "api": false,
+    "apiPropertyQualifier": "",
     "consumerOnly": false,
     "producerOnly": false,
     "lenientProperties": false
