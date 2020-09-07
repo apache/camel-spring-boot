@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-sap-netweaver-starter",
-    "version": "3.5.0-SNAPSHOT",
+    "version": "3.6.0-SNAPSHOT",
     "scheme": "sap-netweaver",
     "extendsScheme": "",
     "syntax": "sap-netweaver:url",

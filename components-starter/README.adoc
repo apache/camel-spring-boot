@@ -47,7 +47,7 @@ Number of Camel components: 339 in 272 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/avro-component.html[Avro RPC] | camel-avro-rpc-starter | Stable | 2.10 | Produce or consume Apache Avro RPC services.
 
-| link:https://camel.apache.org/components/latest/aws2-athena-component.html[AWS 2 Athena] | camel-aws2-athena-starter | Preview | 3.4 | Access AWS Athena service using AWS SDK version 2.x.
+| link:https://camel.apache.org/components/latest/aws2-athena-component.html[AWS 2 Athena] | camel-aws2-athena-starter | Stable | 3.4 | Access AWS Athena service using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-cw-component.html[AWS 2 CloudWatch] | camel-aws2-cw-starter | Stable | 3.1 | Sending metrics to AWS CloudWatch using AWS SDK version 2.x.
 
