@@ -63,6 +63,11 @@ public class VertxWebsocketComponentConfiguration
      */
     private Boolean basicPropertyBinding = false;
     /**
+     * To provide a custom vertx router to use on the WebSocket server. The
+     * option is a io.vertx.ext.web.Router type.
+     */
+    private String router;
+    /**
      * To use an existing vertx instead of creating a new instance. The option
      * is a io.vertx.core.Vertx type.
      */
@@ -99,6 +104,14 @@ public class VertxWebsocketComponentConfiguration
 
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public String getRouter() {
+        return router;
+    }
+
+    public void setRouter(String router) {
+        this.router = router;
     }
 
     public String getVertx() {
