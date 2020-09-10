@@ -24,7 +24,6 @@ The component supports 15 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.corda.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.corda.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.corda.configuration* | To use a shared configuration. The option is a org.apache.camel.component.corda.CordaConfiguration type. |  | String
 | *camel.component.corda.contract-state-class* | A contract state (or just state) contains opaque data used by a contract program. It can be thought of as a disk file that the program can use to persist data across transactions. States are immutable: once created they are never updated, instead, any changes must generate a new successor state. States can be updated (consumed) only once: the notary is responsible for ensuring there is no double spending by only signing a transaction if the input states are all free. |  | Class
@@ -39,5 +38,6 @@ The component supports 15 options, which are listed below.
 | *camel.component.corda.query-criteria* | QueryCriteria assumes underlying schema tables are correctly indexed for performance. The option is a net.corda.core.node.services.vault.QueryCriteria type. |  | String
 | *camel.component.corda.sort* | Sort allows specification of a set of entity attribute names and their associated directionality and null handling, to be applied upon processing a query specification. |  | Sort
 | *camel.component.corda.username* | Username for login |  | String
+| *camel.component.corda.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

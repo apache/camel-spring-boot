@@ -21,6 +21,7 @@ import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.cometd.bayeux.server.BayeuxServer.Extension;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Offers publish/subscribe, peer-to-peer (via a server), and RPC style
@@ -63,6 +64,7 @@ public class CometdComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * To use a list of custom BayeuxServer.Extension that allows modifying
@@ -112,10 +114,13 @@ public class CometdComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

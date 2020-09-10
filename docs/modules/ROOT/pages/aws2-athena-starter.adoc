@@ -27,7 +27,6 @@ The component supports 31 options, which are listed below.
 | *camel.component.aws2-athena.access-key* | Amazon AWS Access Key. |  | String
 | *camel.component.aws2-athena.amazon-athena-client* | The AmazonAthena instance to use as the client. The option is a software.amazon.awssdk.services.athena.AthenaClient type. |  | String
 | *camel.component.aws2-athena.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking | true | Boolean
-| *camel.component.aws2-athena.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws2-athena.client-request-token* | A unique string to ensure issues queries are idempotent. It is unlikely you will need to set this. |  | String
 | *camel.component.aws2-athena.configuration* | The component configuration. The option is a org.apache.camel.component.aws2.athena.Athena2Configuration type. |  | String
 | *camel.component.aws2-athena.database* | The Athena database to use. |  | String
@@ -55,5 +54,6 @@ The component supports 31 options, which are listed below.
 | *camel.component.aws2-athena.secret-key* | Amazon AWS Secret Key. |  | String
 | *camel.component.aws2-athena.wait-timeout* | Optional max wait time in millis to wait for a successful query completion. See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more. | 0 | Long
 | *camel.component.aws2-athena.work-group* | The workgroup to use for running the query. |  | String
+| *camel.component.aws2-athena.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

@@ -26,7 +26,6 @@ The component supports 20 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.box.access-token-cache* | Custom Access Token Cache for storing and retrieving access tokens. The option is a com.box.sdk.IAccessTokenCache type. |  | String
 | *camel.component.box.authentication-type* | The type of authentication for connection. Types of Authentication: STANDARD_AUTHENTICATION - OAuth 2.0 (3-legged) SERVER_AUTHENTICATION - OAuth 2.0 with JSON Web Tokens | APP_USER_AUTHENTICATION | String
-| *camel.component.box.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.box.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.box.client-id* | Box application client ID |  | String
 | *camel.component.box.client-secret* | Box application client secret |  | String
@@ -44,5 +43,6 @@ The component supports 20 options, which are listed below.
 | *camel.component.box.user-id* | The user ID to use for an App User. |  | String
 | *camel.component.box.user-name* | Box user name, MUST be provided |  | String
 | *camel.component.box.user-password* | Box user password, MUST be provided if authSecureStorage is not set, or returns null on first call |  | String
+| *camel.component.box.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

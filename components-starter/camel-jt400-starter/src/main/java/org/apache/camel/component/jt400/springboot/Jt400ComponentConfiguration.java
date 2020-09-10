@@ -19,6 +19,7 @@ package org.apache.camel.component.jt400.springboot;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Exchanges messages with an IBM i system using data queues, message queues, or
@@ -61,6 +62,7 @@ public class Jt400ComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * Default connection pool used by the component. Note that this pool is
@@ -86,10 +88,13 @@ public class Jt400ComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

@@ -31,7 +31,6 @@ The component supports 54 options, which are listed below.
 | *camel.component.rabbitmq.auto-delete* | If it is true, the exchange will be deleted when it is no longer in use | true | Boolean
 | *camel.component.rabbitmq.auto-detect-connection-factory* | Whether to auto-detect looking up RabbitMQ connection factory from the registry. When enabled and a single instance of the connection factory is found then it will be used. An explicit connection factory can be configured on the component or endpoint level which takes precedence. | true | Boolean
 | *camel.component.rabbitmq.automatic-recovery-enabled* | Enables connection automatic recovery (uses connection implementation that performs automatic recovery when connection shutdown is not initiated by the application) |  | Boolean
-| *camel.component.rabbitmq.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.rabbitmq.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.rabbitmq.channel-pool-max-size* | Get maximum number of opened channel in pool | 10 | Integer
 | *camel.component.rabbitmq.channel-pool-max-wait* | Set the maximum number of milliseconds to wait for a channel from the pool | 1000 | Long
@@ -78,5 +77,6 @@ The component supports 54 options, which are listed below.
 | *camel.component.rabbitmq.trust-manager* | Configure SSL trust manager, SSL should be enabled for this option to be effective. The option is a javax.net.ssl.TrustManager type. |  | String
 | *camel.component.rabbitmq.username* | Username in case of authenticated access | guest | String
 | *camel.component.rabbitmq.vhost* | The vhost for the channel | / | String
+| *camel.component.rabbitmq.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

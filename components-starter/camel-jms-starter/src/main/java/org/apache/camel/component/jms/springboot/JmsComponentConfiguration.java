@@ -26,6 +26,7 @@ import org.apache.camel.component.jms.JmsMessageType;
 import org.apache.camel.component.jms.ReplyToType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Sent and receive messages to/from a JMS Queue or Topic.
@@ -79,6 +80,11 @@ public class JmsComponentConfiguration
      * type to use from the In body type. This option allows you to specify it.
      */
     private JmsMessageType jmsMessageType;
+    /**
+     * Provides an explicit ReplyTo destination (overrides any incoming value of
+     * Message.getJMSReplyTo() in consumer).
+     */
+    private String replyTo;
     /**
      * Specifies whether to test the connection on startup. This ensures that
      * when Camel starts that all the JMS consumers have a valid connection to
@@ -137,11 +143,6 @@ public class JmsComponentConfiguration
      * listener.
      */
     private Integer maxConcurrentConsumers;
-    /**
-     * Provides an explicit ReplyTo destination, which overrides any incoming
-     * value of Message.getJMSReplyTo().
-     */
-    private String replyTo;
     /**
      * Specifies whether to use persistent delivery by default for replies.
      */
@@ -494,6 +495,7 @@ public class JmsComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * To use a shared JMS configuration. The option is a
@@ -789,6 +791,14 @@ public class JmsComponentConfiguration
         this.jmsMessageType = jmsMessageType;
     }
 
+    public String getReplyTo() {
+        return replyTo;
+    }
+
+    public void setReplyTo(String replyTo) {
+        this.replyTo = replyTo;
+    }
+
     public Boolean getTestConnectionOnStartup() {
         return testConnectionOnStartup;
     }
@@ -851,14 +861,6 @@ public class JmsComponentConfiguration
 
     public void setMaxConcurrentConsumers(Integer maxConcurrentConsumers) {
         this.maxConcurrentConsumers = maxConcurrentConsumers;
-    }
-
-    public String getReplyTo() {
-        return replyTo;
-    }
-
-    public void setReplyTo(String replyTo) {
-        this.replyTo = replyTo;
     }
 
     public Boolean getReplyToDeliveryPersistent() {
@@ -1229,10 +1231,13 @@ public class JmsComponentConfiguration
         this.asyncStopListener = asyncStopListener;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

@@ -21,6 +21,7 @@ import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.eclipse.jetty.server.Connector;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Expose HTTP endpoints using Jetty 9.
@@ -123,6 +124,7 @@ public class JettyHttpComponentConfiguration9
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * This option is used to set the ErrorHandler that Jetty server uses. The
@@ -322,10 +324,13 @@ public class JettyHttpComponentConfiguration9
         this.allowJavaSerializedObject = allowJavaSerializedObject;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

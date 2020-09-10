@@ -20,6 +20,7 @@ import javax.annotation.Generated;
 import org.apache.camel.component.minio.MinioOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Store and retrieve objects from Minio Storage Service using Minio SDK.
@@ -268,6 +269,7 @@ public class MinioComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * Amazon AWS Secret Access Key or Minio Access Key. If not set camel will
@@ -633,10 +635,13 @@ public class MinioComponentConfiguration
         this.storageClass = storageClass;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

@@ -23,6 +23,7 @@ import org.apache.camel.component.aws.kinesis.KinesisComponent;
 import org.apache.camel.component.aws.kinesis.KinesisShardClosedStrategyEnum;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Consume and produce records from AWS Kinesis Streams.
@@ -124,6 +125,7 @@ public class KinesisComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * Amazon AWS Access Key
@@ -246,10 +248,13 @@ public class KinesisComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

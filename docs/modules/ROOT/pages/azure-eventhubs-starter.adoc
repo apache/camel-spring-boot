@@ -27,7 +27,6 @@ The component supports 22 options, which are listed below.
 | *camel.component.azure-eventhubs.amqp-retry-options* | Sets the retry policy for EventHubAsyncClient. If not specified, the default retry options are used. The option is a com.azure.core.amqp.AmqpRetryOptions type. |  | String
 | *camel.component.azure-eventhubs.amqp-transport-type* | Sets the transport type by which all the communication with Azure Event Hubs occurs. Default value is AmqpTransportType#AMQP. |  | AmqpTransportType
 | *camel.component.azure-eventhubs.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
-| *camel.component.azure-eventhubs.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.azure-eventhubs.blob-access-key* | In case you chose the default BlobCheckpointStore, this sets access key for the associated azure account name to be used for authentication with azure blob services |  | String
 | *camel.component.azure-eventhubs.blob-account-name* | In case you chose the default BlobCheckpointStore, this sets Azure account name to be used for authentication with azure blob services. |  | String
 | *camel.component.azure-eventhubs.blob-container-name* | In case you chose the default BlobCheckpointStore, this sets the blob container that shall be used by the BlobCheckpointStore to store the checkpoint offsets |  | String
@@ -46,7 +45,6 @@ The component supports 22 options, which are listed below.
 | *camel.component.azure-eventhubs.producer-async-client* | Sets the EventHubProducerAsyncClient.An asynchronous producer responsible for transmitting EventData to a specific Event Hub, grouped together in batches. Depending on the {link CreateBatchOptions options} specified when creating an \{linkEventDataBatch\}, the events may be automatically routed to an available partition or specific to a partition. Use by this component to produce the data in camel producer. The option is a com.azure.messaging.eventhubs.EventHubProducerAsyncClient type. |  | String
 | *camel.component.azure-eventhubs.shared-access-key* | The generated value for the SharedAccessName |  | String
 | *camel.component.azure-eventhubs.shared-access-name* | The name you chose for your EventHubs SAS keys |  | String
+| *camel.component.azure-eventhubs.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
-
-
 // spring-boot-auto-configure options: END

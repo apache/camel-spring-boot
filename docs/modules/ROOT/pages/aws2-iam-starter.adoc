@@ -26,7 +26,6 @@ The component supports 15 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.aws2-iam.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws2-iam.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
-| *camel.component.aws2-iam.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws2-iam.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.iam.IAM2Configuration type. |  | String
 | *camel.component.aws2-iam.enabled* | Whether to enable auto configuration of the aws2-iam component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-iam.iam-client* | To use a existing configured AWS IAM as client. The option is a software.amazon.awssdk.services.iam.IamClient type. |  | String
@@ -39,5 +38,6 @@ The component supports 15 options, which are listed below.
 | *camel.component.aws2-iam.region* | The region in which IAM client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() | aws-global | String
 | *camel.component.aws2-iam.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws2-iam.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
+| *camel.component.aws2-iam.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

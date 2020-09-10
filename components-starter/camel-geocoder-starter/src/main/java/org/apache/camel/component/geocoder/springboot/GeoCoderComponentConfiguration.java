@@ -19,6 +19,7 @@ package org.apache.camel.component.geocoder.springboot;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Find geocodes (latitude and longitude) for a given address or the other way
@@ -52,6 +53,7 @@ public class GeoCoderComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
 
     public Boolean getLazyStartProducer() {
@@ -62,10 +64,13 @@ public class GeoCoderComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

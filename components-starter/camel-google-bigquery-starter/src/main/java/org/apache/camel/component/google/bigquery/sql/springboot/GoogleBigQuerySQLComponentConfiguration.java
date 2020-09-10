@@ -19,6 +19,7 @@ package org.apache.camel.component.google.bigquery.sql.springboot;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Access Google Cloud BigQuery service using SQL queries.
@@ -61,6 +62,7 @@ public class GoogleBigQuerySQLComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
 
     public String getConnectionFactory() {
@@ -87,10 +89,13 @@ public class GoogleBigQuerySQLComponentConfiguration
         this.projectId = projectId;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

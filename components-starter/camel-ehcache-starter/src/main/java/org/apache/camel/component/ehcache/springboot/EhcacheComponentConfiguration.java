@@ -24,6 +24,7 @@ import org.ehcache.config.CacheConfiguration;
 import org.ehcache.event.EventFiring;
 import org.ehcache.event.EventOrdering;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Perform caching operations using Ehcache.
@@ -108,6 +109,7 @@ public class EhcacheComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * The default cache configuration to be used to create caches. The option
@@ -215,10 +217,13 @@ public class EhcacheComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

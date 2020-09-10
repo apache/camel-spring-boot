@@ -22,6 +22,7 @@ import org.apache.camel.component.aws.ddb.DdbComponent;
 import org.apache.camel.component.aws.ddb.DdbOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Store and retrieve data from AWS DynamoDB service.
@@ -116,6 +117,7 @@ public class DdbComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * Amazon AWS Access Key
@@ -238,10 +240,13 @@ public class DdbComponentConfiguration
         this.writeCapacity = writeCapacity;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

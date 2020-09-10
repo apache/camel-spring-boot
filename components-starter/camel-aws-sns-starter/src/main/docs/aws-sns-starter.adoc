@@ -29,7 +29,6 @@ The component supports 21 options, which are listed below.
 | *camel.component.aws-sns.amazon-s-q-s-client* | An SQS Client to use as bridge between SNS and SQS. The option is a com.amazonaws.services.sqs.AmazonSQS type. |  | String
 | *camel.component.aws-sns.auto-create-topic* | Setting the autocreation of the topic | true | Boolean
 | *camel.component.aws-sns.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
-| *camel.component.aws-sns.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws-sns.configuration* | The component configuration. The option is a org.apache.camel.component.aws.sns.SnsConfiguration type. |  | String
 | *camel.component.aws-sns.enabled* | Whether to enable auto configuration of the aws-sns component. This is enabled by default. |  | Boolean
 | *camel.component.aws-sns.kms-master-key-id* | The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. |  | String
@@ -45,5 +44,6 @@ The component supports 21 options, which are listed below.
 | *camel.component.aws-sns.server-side-encryption-enabled* | Define if Server Side Encryption is enabled or not on the topic | false | Boolean
 | *camel.component.aws-sns.subject* | The subject which is used if the message header 'CamelAwsSnsSubject' is not present. |  | String
 | *camel.component.aws-sns.subscribe-s-n-sto-s-q-s* | Define if the subscription between SNS Topic and SQS must be done or not | false | Boolean
+| *camel.component.aws-sns.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

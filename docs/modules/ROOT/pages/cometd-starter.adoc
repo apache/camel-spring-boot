@@ -24,7 +24,6 @@ The component supports 11 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.cometd.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.cometd.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.cometd.enabled* | Whether to enable auto configuration of the cometd component. This is enabled by default. |  | Boolean
 | *camel.component.cometd.extensions* | To use a list of custom BayeuxServer.Extension that allows modifying incoming and outgoing requests. |  | List
@@ -35,6 +34,6 @@ The component supports 11 options, which are listed below.
 | *camel.component.cometd.ssl-keystore* | The path to the keystore. |  | String
 | *camel.component.cometd.ssl-password* | The password when using SSL. |  | String
 | *camel.component.cometd.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
+| *camel.component.cometd.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
-
 // spring-boot-auto-configure options: END

@@ -30,7 +30,6 @@ The component supports 73 options, which are listed below.
 | *camel.component.salesforce.api-version* | Salesforce API version. | 34.0 | String
 | *camel.component.salesforce.authentication-type* | Explicit authentication method to be used, one of USERNAME_PASSWORD, REFRESH_TOKEN or JWT. Salesforce component can auto-determine the authentication method to use from the properties set, set this property to eliminate any ambiguity. |  | AuthenticationType
 | *camel.component.salesforce.backoff-increment* | Backoff interval increment for Streaming connection restart attempts for failures beyond CometD auto-reconnect. The option is a long type. | 1000 | String
-| *camel.component.salesforce.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.salesforce.batch-id* | Bulk API Batch ID |  | String
 | *camel.component.salesforce.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.salesforce.client-id* | OAuth Consumer Key of the connected app configured in the Salesforce instance setup. Typically a connected app needs to be configured but one can be provided by installing a package. |  | String
@@ -97,5 +96,6 @@ The component supports 73 options, which are listed below.
 | *camel.component.salesforce.update-topic* | Whether to update an existing Push Topic when using the Streaming API, defaults to false | false | Boolean
 | *camel.component.salesforce.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters | false | Boolean
 | *camel.component.salesforce.user-name* | Username used in OAuth flow to gain access to access token. It's easy to get started with password OAuth flow, but in general one should avoid it as it is deemed less secure than other flows. |  | String
+| *camel.component.salesforce.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

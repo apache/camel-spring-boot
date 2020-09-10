@@ -19,6 +19,7 @@ package org.apache.camel.component.lumberjack.springboot;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Receive logs messages using the Lumberjack protocol.
@@ -49,6 +50,7 @@ public class LumberjackComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * Sets the default SSL configuration to use for all the endpoints. You can
@@ -69,10 +71,13 @@ public class LumberjackComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

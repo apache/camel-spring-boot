@@ -24,7 +24,6 @@ The component supports 24 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.infinispan.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.infinispan.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.infinispan.cache-container* | Specifies the cache Container to connect. The option is a org.infinispan.commons.api.BasicCacheContainer type. |  | String
 | *camel.component.infinispan.cache-container-configuration* | The CacheContainer configuration. Uses if the cacheContainer is not defined. Must be the following types: org.infinispan.client.hotrod.configuration.Configuration - for remote cache interaction configuration; org.infinispan.configuration.cache.Configuration - for embedded cache interaction configuration;. The option is a java.lang.Object type. |  | String
@@ -47,6 +46,7 @@ The component supports 24 options, which are listed below.
 | *camel.component.infinispan.remapping-function* | Set a specific remappingFunction to use in a compute operation. The option is a java.util.function.BiFunction type. |  | String
 | *camel.component.infinispan.result-header* | Store the operation result in a header instead of the message body. By default, resultHeader == null and the query result is stored in the message body, any existing content in the message body is discarded. If resultHeader is set, the value is used as the name of the header to store the query result and the original message body is preserved. This value can be overridden by an in message header named: CamelInfinispanOperationResultHeader. The option is a java.lang.Object type. |  | String
 | *camel.component.infinispan.sync* | If true, the consumer will receive notifications synchronously | true | Boolean
+| *camel.component.infinispan.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.infinispan.command* | *Deprecated* The operation to perform. | PUT | String
 |===
 // spring-boot-auto-configure options: END

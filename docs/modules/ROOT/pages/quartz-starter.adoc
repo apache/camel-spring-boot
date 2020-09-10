@@ -25,7 +25,6 @@ The component supports 14 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.quartz.auto-start-scheduler* | Whether or not the scheduler should be auto started. This options is default true | true | Boolean
-| *camel.component.quartz.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.quartz.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.quartz.enable-jmx* | Whether to enable Quartz JMX which allows to manage the Quartz scheduler from JMX. This options is default true | true | Boolean
 | *camel.component.quartz.enabled* | Whether to enable auto configuration of the quartz component. This is enabled by default. |  | Boolean
@@ -38,6 +37,6 @@ The component supports 14 options, which are listed below.
 | *camel.component.quartz.scheduler* | To use the custom configured Quartz scheduler, instead of creating a new Scheduler. The option is a org.quartz.Scheduler type. |  | String
 | *camel.component.quartz.scheduler-factory* | To use the custom SchedulerFactory which is used to create the Scheduler. The option is a org.quartz.SchedulerFactory type. |  | String
 | *camel.component.quartz.start-delayed-seconds* | Seconds to wait before starting the quartz scheduler. |  | Integer
+| *camel.component.quartz.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
-
 // spring-boot-auto-configure options: END

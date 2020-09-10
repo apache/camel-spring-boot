@@ -27,7 +27,6 @@ The component supports 17 options, which are listed below.
 | *camel.component.aws2-ses.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws2-ses.amazon-s-e-s-client* | To use the AmazonSimpleEmailService as the client. The option is a software.amazon.awssdk.services.ses.SesClient type. |  | String
 | *camel.component.aws2-ses.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
-| *camel.component.aws2-ses.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws2-ses.configuration* | component configuration. The option is a org.apache.camel.component.aws2.ses.Ses2Configuration type. |  | String
 | *camel.component.aws2-ses.enabled* | Whether to enable auto configuration of the aws2-ses component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-ses.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
@@ -41,5 +40,6 @@ The component supports 17 options, which are listed below.
 | *camel.component.aws2-ses.subject* | The subject which is used if the message header 'CamelAwsSesSubject' is not present. |  | String
 | *camel.component.aws2-ses.to* | List of destination email address. Can be overriden with 'CamelAwsSesTo' header. |  | List
 | *camel.component.aws2-ses.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
+| *camel.component.aws2-ses.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

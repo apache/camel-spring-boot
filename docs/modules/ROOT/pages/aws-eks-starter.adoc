@@ -26,7 +26,6 @@ The component supports 13 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.aws-eks.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws-eks.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
-| *camel.component.aws-eks.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws-eks.configuration* | The component configuration. The option is a org.apache.camel.component.aws.eks.EKSConfiguration type. |  | String
 | *camel.component.aws-eks.eks-client* | To use a existing configured AWS EKS as client. The option is a com.amazonaws.services.eks.AmazonEKS type. |  | String
 | *camel.component.aws-eks.enabled* | Whether to enable auto configuration of the aws-eks component. This is enabled by default. |  | Boolean
@@ -37,5 +36,6 @@ The component supports 13 options, which are listed below.
 | *camel.component.aws-eks.proxy-protocol* | To define a proxy protocol when instantiating the EKS client |  | Protocol
 | *camel.component.aws-eks.region* | The region in which EKS client needs to work. When using this parameter, the configuration will expect the capitalized name of the region (for example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name() |  | String
 | *camel.component.aws-eks.secret-key* | Amazon AWS Secret Key |  | String
+| *camel.component.aws-eks.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

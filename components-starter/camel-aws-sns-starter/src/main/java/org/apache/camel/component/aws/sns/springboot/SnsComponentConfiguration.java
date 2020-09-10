@@ -21,6 +21,7 @@ import com.amazonaws.Protocol;
 import org.apache.camel.component.aws.sns.SnsComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send messages to an AWS Simple Notification Topic.
@@ -126,6 +127,7 @@ public class SnsComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * Amazon AWS Access Key
@@ -273,10 +275,13 @@ public class SnsComponentConfiguration
         this.subscribeSNStoSQS = subscribeSNStoSQS;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

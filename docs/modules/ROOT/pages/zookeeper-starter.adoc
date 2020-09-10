@@ -25,7 +25,6 @@ The component supports 57 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.zookeeper.backoff* | The time interval to backoff for after an error before retrying. | 5000 | Long
-| *camel.component.zookeeper.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.zookeeper.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.zookeeper.cluster.service.attributes* | Custom service attributes. |  | Map
 | *camel.component.zookeeper.cluster.service.auth-info-list* | List of AuthInfo objects with scheme and auth. |  | List
@@ -81,5 +80,6 @@ The component supports 57 options, which are listed below.
 | *camel.component.zookeeper.service-registry.session-timeout* | Session timeout. | 60000 | Long
 | *camel.component.zookeeper.service-registry.session-timeout-unit* | Session timeout TimeUnit. Default is TimeUnit.MILLISECONDS. |  | TimeUnit
 | *camel.component.zookeeper.timeout* | The time interval to wait on connection before timing out. | 5000 | Integer
+| *camel.component.zookeeper.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

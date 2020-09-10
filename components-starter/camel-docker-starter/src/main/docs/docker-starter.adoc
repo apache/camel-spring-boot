@@ -24,7 +24,6 @@ The component supports 22 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.docker.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.docker.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.docker.cert-path* | Location containing the SSL certificate chain |  | String
 | *camel.component.docker.cmd-exec-factory* | The fully qualified class name of the DockerCmdExecFactory implementation to use | com.github.dockerjava.netty.NettyDockerCmdExecFactory | String
@@ -46,5 +45,6 @@ The component supports 22 options, which are listed below.
 | *camel.component.docker.socket* | Socket connection mode | true | Boolean
 | *camel.component.docker.tls-verify* | Check TLS | false | Boolean
 | *camel.component.docker.username* | User name to authenticate with |  | String
+| *camel.component.docker.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

@@ -27,6 +27,7 @@ import org.apache.camel.component.atomix.client.messaging.AtomixMessaging.Broadc
 import org.apache.camel.component.atomix.client.messaging.AtomixMessagingComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Access Atomix's group messaging.
@@ -109,6 +110,7 @@ public class AtomixMessagingComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * The cluster wide default resource configuration. The option is a
@@ -235,10 +237,13 @@ public class AtomixMessagingComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

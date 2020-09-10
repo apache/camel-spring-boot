@@ -30,7 +30,6 @@ The component supports 41 options, which are listed below.
 | *camel.component.aws2-sqs.attribute-names* | A list of attribute names to receive when consuming. Multiple names can be separated by comma. |  | String
 | *camel.component.aws2-sqs.auto-create-queue* | Setting the autocreation of the queue | true | Boolean
 | *camel.component.aws2-sqs.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
-| *camel.component.aws2-sqs.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws2-sqs.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.aws2-sqs.concurrent-consumers* | Allows you to use multiple threads to poll the sqs queue to increase throughput | 1 | Integer
 | *camel.component.aws2-sqs.configuration* | The AWS SQS default configuration. The option is a org.apache.camel.component.aws2.sqs.Sqs2Configuration type. |  | String
@@ -65,5 +64,6 @@ The component supports 41 options, which are listed below.
 | *camel.component.aws2-sqs.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | *camel.component.aws2-sqs.visibility-timeout* | The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request to set in the com.amazonaws.services.sqs.model.SetQueueAttributesRequest. This only make sense if its different from defaultVisibilityTimeout. It changes the queue visibility timeout attribute permanently. |  | Integer
 | *camel.component.aws2-sqs.wait-time-seconds* | Duration in seconds (0 to 20) that the ReceiveMessage action call will wait until a message is in the queue to include in the response. |  | Integer
+| *camel.component.aws2-sqs.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END
