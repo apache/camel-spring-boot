@@ -20,6 +20,7 @@ import javax.annotation.Generated;
 import com.googlecode.jsendnsca.encryption.Encryption;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send passive checks to Nagios using JSendNSCA.
@@ -60,6 +61,7 @@ public class NagiosComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * To use a shared NagiosConfiguration. The option is a
@@ -99,10 +101,13 @@ public class NagiosComponentConfiguration
         this.timeout = timeout;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

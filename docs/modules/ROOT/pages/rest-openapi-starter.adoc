@@ -25,7 +25,6 @@ The component supports 11 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.rest-openapi.base-path* | API basePath, for example /v2. Default is unset, if set overrides the value present in OpenApi specification. |  | String
-| *camel.component.rest-openapi.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.rest-openapi.component-name* | Name of the Camel component that will perform the requests. The component must be present in Camel registry and it must implement RestProducerFactory service provider interface. If not set CLASSPATH is searched for single component that implements RestProducerFactory SPI. Can be overridden in endpoint configuration. |  | String
 | *camel.component.rest-openapi.consumes* | What payload type this component capable of consuming. Could be one type, like application/json or multiple types as application/json, application/xml; q=0.5 according to the RFC7231. This equates to the value of Accept HTTP header. If set overrides any value found in the OpenApi specification. Can be overridden in endpoint configuration |  | String
 | *camel.component.rest-openapi.enabled* | Whether to enable auto configuration of the rest-openapi component. This is enabled by default. |  | Boolean
@@ -35,6 +34,6 @@ The component supports 11 options, which are listed below.
 | *camel.component.rest-openapi.specification-uri* | Path to the OpenApi specification file. The scheme, host base path are taken from this specification, but these can be overridden with properties on the component or endpoint level. If not given the component tries to load openapi.json resource. Note that the host defined on the component and endpoint of this Component should contain the scheme, hostname and optionally the port in the URI syntax (i.e. \https://api.example.com:8080). Can be overridden in endpoint configuration. |  | URI
 | *camel.component.rest-openapi.ssl-context-parameters* | Customize TLS parameters used by the component. If not set defaults to the TLS parameters set in the Camel context. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
 | *camel.component.rest-openapi.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
+| *camel.component.rest-openapi.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
-
 // spring-boot-auto-configure options: END

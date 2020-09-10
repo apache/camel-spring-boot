@@ -22,6 +22,7 @@ import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.jclouds.blobstore.BlobStore;
 import org.jclouds.compute.ComputeService;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Interact with jclouds compute & blobstore service.
@@ -72,6 +73,7 @@ public class JcloudsComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
 
     public List<BlobStore> getBlobStores() {
@@ -106,10 +108,13 @@ public class JcloudsComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

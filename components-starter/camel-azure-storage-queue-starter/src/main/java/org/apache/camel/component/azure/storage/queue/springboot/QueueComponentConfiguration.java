@@ -20,6 +20,7 @@ import javax.annotation.Generated;
 import org.apache.camel.component.azure.storage.queue.QueueOperationDefinition;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * The azure-storage-queue component is used for storing and retrieving the
@@ -93,6 +94,7 @@ public class QueueComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * Maximum number of messages to get, if there are less messages exist in
@@ -204,10 +206,13 @@ public class QueueComponentConfiguration
         this.operation = operation;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

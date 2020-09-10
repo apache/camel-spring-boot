@@ -23,6 +23,7 @@ import com.azure.messaging.eventhubs.models.EventPosition;
 import org.apache.camel.component.azure.eventhubs.EventHubsComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * The azure-eventhubs component that integrates Azure Event Hubs using AMQP
@@ -174,6 +175,7 @@ public class EventHubsComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * Instead of supplying namespace, sharedAccessKey, sharedAccessName ...
@@ -330,10 +332,13 @@ public class EventHubsComponentConfiguration
         this.producerAsyncClient = producerAsyncClient;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

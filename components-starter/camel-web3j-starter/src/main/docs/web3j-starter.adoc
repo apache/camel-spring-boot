@@ -27,7 +27,6 @@ The component supports 39 options, which are listed below.
 | *camel.component.web3j.address* | Contract address. |  | String
 | *camel.component.web3j.addresses* | Contract address or a list of addresses. |  | List
 | *camel.component.web3j.at-block* | The block number, or the string latest for the last mined block or pending, earliest for not yet mined transactions. | latest | String
-| *camel.component.web3j.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.web3j.block-hash* | Hash of the block where this transaction was in. |  | String
 | *camel.component.web3j.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.web3j.client-id* | A random hexadecimal(32 bytes) ID identifying the client. |  | String
@@ -63,5 +62,6 @@ The component supports 39 options, which are listed below.
 | *camel.component.web3j.ttl* | The time to live in seconds of a whisper message. The option is a java.math.BigInteger type. |  | String
 | *camel.component.web3j.value* | The value sent within a transaction. The option is a java.math.BigInteger type. |  | String
 | *camel.component.web3j.web3j* | The preconfigured Web3j object. The option is a org.web3j.protocol.Web3j type. |  | String
+| *camel.component.web3j.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

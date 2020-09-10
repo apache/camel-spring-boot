@@ -21,6 +21,7 @@ import org.apache.camel.component.azure.queue.QueueServiceComponent;
 import org.apache.camel.component.azure.queue.QueueServiceOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Store and retrieve messages from Azure Storage Queue Service.
@@ -92,6 +93,7 @@ public class QueueServiceComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * The Queue Service configuration. The option is a
@@ -179,10 +181,13 @@ public class QueueServiceComponentConfiguration
         this.queuePrefix = queuePrefix;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

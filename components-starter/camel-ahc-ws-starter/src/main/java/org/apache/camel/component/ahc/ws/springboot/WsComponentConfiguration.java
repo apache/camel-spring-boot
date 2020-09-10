@@ -19,6 +19,7 @@ package org.apache.camel.component.ahc.ws.springboot;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Exchange data with external Websocket servers using Async Http Client.
@@ -68,6 +69,7 @@ public class WsComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * To use a custom AhcBinding which allows to control how to bind between
@@ -129,10 +131,13 @@ public class WsComponentConfiguration
         this.allowJavaSerializedObject = allowJavaSerializedObject;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

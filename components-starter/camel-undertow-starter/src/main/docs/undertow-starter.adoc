@@ -25,7 +25,6 @@ The component supports 12 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.undertow.allowed-roles* | Configuration used by UndertowSecurityProvider. Comma separated list of allowed roles. |  | String
-| *camel.component.undertow.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.undertow.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.undertow.enabled* | Whether to enable auto configuration of the undertow component. This is enabled by default. |  | Boolean
 | *camel.component.undertow.host-options* | To configure common options, such as thread pools. The option is a org.apache.camel.component.undertow.UndertowHostOptions type. |  | String
@@ -36,5 +35,6 @@ The component supports 12 options, which are listed below.
 | *camel.component.undertow.ssl-context-parameters* | To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
 | *camel.component.undertow.undertow-http-binding* | To use a custom HttpBinding to control the mapping between Camel message and HttpClient. The option is a org.apache.camel.component.undertow.UndertowHttpBinding type. |  | String
 | *camel.component.undertow.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
+| *camel.component.undertow.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

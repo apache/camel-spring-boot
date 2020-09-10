@@ -24,7 +24,6 @@ The component supports 8 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.quickfix.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.quickfix.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.quickfix.enabled* | Whether to enable auto configuration of the quickfix component. This is enabled by default. |  | Boolean
 | *camel.component.quickfix.lazy-create-engines* | If set to true, the engines will be created and started when needed (when first message is send) | false | Boolean
@@ -32,5 +31,6 @@ The component supports 8 options, which are listed below.
 | *camel.component.quickfix.log-factory* | To use the given LogFactory. The option is a quickfix.LogFactory type. |  | String
 | *camel.component.quickfix.message-factory* | To use the given MessageFactory. The option is a quickfix.MessageFactory type. |  | String
 | *camel.component.quickfix.message-store-factory* | To use the given MessageStoreFactory. The option is a quickfix.MessageStoreFactory type. |  | String
+| *camel.component.quickfix.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

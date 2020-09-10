@@ -24,7 +24,6 @@ The component supports 8 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.nagios.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.nagios.configuration* | To use a shared NagiosConfiguration. The option is a org.apache.camel.component.nagios.NagiosConfiguration type. |  | String
 | *camel.component.nagios.connection-timeout* | Connection timeout in millis. | 5000 | Integer
 | *camel.component.nagios.enabled* | Whether to enable auto configuration of the nagios component. This is enabled by default. |  | Boolean
@@ -32,5 +31,6 @@ The component supports 8 options, which are listed below.
 | *camel.component.nagios.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.nagios.password* | Password to be authenticated when sending checks to Nagios. |  | String
 | *camel.component.nagios.timeout* | Sending timeout in millis. | 5000 | Integer
+| *camel.component.nagios.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

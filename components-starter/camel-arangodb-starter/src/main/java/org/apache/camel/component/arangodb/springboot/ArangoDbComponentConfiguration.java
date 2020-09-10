@@ -20,6 +20,7 @@ import javax.annotation.Generated;
 import org.apache.camel.component.arangodb.ArangoDbOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Perform operations on ArangoDb when used as a Document Database, or as a
@@ -99,6 +100,7 @@ public class ArangoDbComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * ArangoDB password. If user and password are default, this field is
@@ -182,10 +184,13 @@ public class ArangoDbComponentConfiguration
         this.vertexCollection = vertexCollection;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

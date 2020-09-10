@@ -25,7 +25,6 @@ The component supports 13 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.wordpress.api-version* | The Wordpress REST API version | 2 | String
-| *camel.component.wordpress.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.wordpress.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.wordpress.configuration* | Wordpress component configuration. The option is a org.apache.camel.component.wordpress.WordpressComponentConfiguration type. |  | String
 | *camel.component.wordpress.criteria* | The criteria to use with complex searches. |  | Map
@@ -37,5 +36,6 @@ The component supports 13 options, which are listed below.
 | *camel.component.wordpress.search-criteria* | Search criteria. The option is a org.apache.camel.component.wordpress.api.model.SearchCriteria type. |  | String
 | *camel.component.wordpress.url* | The Wordpress API URL from your site, e.g. \http://myblog.com/wp-json/ |  | String
 | *camel.component.wordpress.user* | Authorized user to perform writing operations |  | String
+| *camel.component.wordpress.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

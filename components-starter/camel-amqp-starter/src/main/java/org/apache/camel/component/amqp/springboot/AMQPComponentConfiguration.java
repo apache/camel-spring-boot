@@ -26,6 +26,7 @@ import org.apache.camel.component.jms.JmsMessageType;
 import org.apache.camel.component.jms.ReplyToType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Messaging with AMQP protocol using Apache QPid Client.
@@ -87,6 +88,11 @@ public class AMQPComponentConfiguration
      */
     private JmsMessageType jmsMessageType;
     /**
+     * Provides an explicit ReplyTo destination (overrides any incoming value of
+     * Message.getJMSReplyTo() in consumer).
+     */
+    private String replyTo;
+    /**
      * Specifies whether to test the connection on startup. This ensures that
      * when Camel starts that all the JMS consumers have a valid connection to
      * the JMS broker. If a connection cannot be granted then Camel throws an
@@ -144,11 +150,6 @@ public class AMQPComponentConfiguration
      * listener.
      */
     private Integer maxConcurrentConsumers;
-    /**
-     * Provides an explicit ReplyTo destination, which overrides any incoming
-     * value of Message.getJMSReplyTo().
-     */
-    private String replyTo;
     /**
      * Specifies whether to use persistent delivery by default for replies.
      */
@@ -501,6 +502,7 @@ public class AMQPComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * To use a shared JMS configuration. The option is a
@@ -804,6 +806,14 @@ public class AMQPComponentConfiguration
         this.jmsMessageType = jmsMessageType;
     }
 
+    public String getReplyTo() {
+        return replyTo;
+    }
+
+    public void setReplyTo(String replyTo) {
+        this.replyTo = replyTo;
+    }
+
     public Boolean getTestConnectionOnStartup() {
         return testConnectionOnStartup;
     }
@@ -866,14 +876,6 @@ public class AMQPComponentConfiguration
 
     public void setMaxConcurrentConsumers(Integer maxConcurrentConsumers) {
         this.maxConcurrentConsumers = maxConcurrentConsumers;
-    }
-
-    public String getReplyTo() {
-        return replyTo;
-    }
-
-    public void setReplyTo(String replyTo) {
-        this.replyTo = replyTo;
     }
 
     public Boolean getReplyToDeliveryPersistent() {
@@ -1244,10 +1246,13 @@ public class AMQPComponentConfiguration
         this.asyncStopListener = asyncStopListener;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

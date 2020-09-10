@@ -31,7 +31,6 @@ The component supports 40 options, which are listed below.
 | *camel.component.aws-s3.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
 | *camel.component.aws-s3.autoclose-body* | If this option is true and includeBody is true, then the S3Object.close() method will be called on exchange completion. This option is strongly related to includeBody option. In case of setting includeBody to true and autocloseBody to false, it will be up to the caller to close the S3Object stream. Setting autocloseBody to true, will close the S3Object stream automatically. | true | Boolean
 | *camel.component.aws-s3.aws-k-m-s-key-id* | Define the id of KMS key to use in case KMS is enabled |  | String
-| *camel.component.aws-s3.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.aws-s3.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.aws-s3.chunked-encoding-disabled* | Define if disabled Chunked Encoding is true or false | false | Boolean
 | *camel.component.aws-s3.configuration* | The component configuration. The option is a org.apache.camel.component.aws.s3.S3Configuration type. |  | String
@@ -64,5 +63,6 @@ The component supports 40 options, which are listed below.
 | *camel.component.aws-s3.use-aws-k-m-s* | Define if KMS must be used or not | false | Boolean
 | *camel.component.aws-s3.use-encryption* | Define if encryption must be used or not | false | Boolean
 | *camel.component.aws-s3.use-i-a-m-credentials* | Set whether the S3 client should expect to load credentials on an EC2 instance or to expect static credentials to be passed in. | false | Boolean
+| *camel.component.aws-s3.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

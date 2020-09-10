@@ -27,7 +27,6 @@ The component supports 48 options, which are listed below.
 | *camel.component.minio.access-key* | Amazon AWS Secret Access Key or Minio Access Key. If not set camel will connect to service for anonymous access. |  | String
 | *camel.component.minio.auto-close-body* | If this option is true and includeBody is true, then the MinioObject.close() method will be called on exchange completion. This option is strongly related to includeBody option. In case of setting includeBody to true and autocloseBody to false, it will be up to the caller to close the MinioObject stream. Setting autocloseBody to true, will close the MinioObject stream automatically. | true | Boolean
 | *camel.component.minio.auto-create-bucket* | Setting the autocreation of the bucket if bucket name not exist. | true | Boolean
-| *camel.component.minio.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.minio.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.minio.bypass-governance-mode* | Set this flag if you want to bypassGovernanceMode when deleting a particular object. | false | Boolean
 | *camel.component.minio.configuration* | The component configuration. The option is a org.apache.camel.component.minio.MinioConfiguration type. |  | String
@@ -72,7 +71,6 @@ The component supports 48 options, which are listed below.
 | *camel.component.minio.un-modified-since* | Set un modified since parameter for get object(s). The option is a java.time.ZonedDateTime type. |  | String
 | *camel.component.minio.use-version1* | when true, version 1 of REST API is used. | false | Boolean
 | *camel.component.minio.version-id* | Set specific version_ID of a object when deleting the object. |  | String
+| *camel.component.minio.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
-
-
 // spring-boot-auto-configure options: END

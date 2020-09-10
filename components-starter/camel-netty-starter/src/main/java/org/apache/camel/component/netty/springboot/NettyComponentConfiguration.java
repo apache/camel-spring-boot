@@ -26,6 +26,7 @@ import org.apache.camel.component.netty.NettyComponent;
 import org.apache.camel.component.netty.TextLineDelimiter;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Socket level networking using TCP or UDP with the Netty 4.x.
@@ -293,6 +294,7 @@ public class NettyComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * To use a explicit ChannelGroup. The option is a
@@ -785,10 +787,13 @@ public class NettyComponentConfiguration
         this.allowSerializedHeaders = allowSerializedHeaders;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

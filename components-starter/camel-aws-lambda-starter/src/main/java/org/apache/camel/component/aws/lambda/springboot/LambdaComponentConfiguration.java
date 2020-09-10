@@ -22,6 +22,7 @@ import org.apache.camel.component.aws.lambda.LambdaComponent;
 import org.apache.camel.component.aws.lambda.LambdaOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Manage and invoke AWS Lambda functions.
@@ -81,6 +82,7 @@ public class LambdaComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * To define a proxy host when instantiating the Lambda client
@@ -151,10 +153,13 @@ public class LambdaComponentConfiguration
         this.awsLambdaClient = awsLambdaClient;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

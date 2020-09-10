@@ -23,6 +23,7 @@ import org.apache.camel.component.azure.blob.BlobServiceOperations;
 import org.apache.camel.component.azure.blob.BlobType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Store and retrieve blobs from Azure Storage Blob Service.
@@ -131,6 +132,7 @@ public class BlobServiceComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * The Blob Service configuration. The option is a
@@ -290,10 +292,13 @@ public class BlobServiceComponentConfiguration
         this.useFlatListing = useFlatListing;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

@@ -23,6 +23,7 @@ import info.ganglia.gmetric4j.gmetric.GMetricType;
 import org.apache.camel.component.ganglia.GangliaComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send metrics to Ganglia monitoring system.
@@ -109,6 +110,7 @@ public class GangliaComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * To use the shared configuration. The option is a
@@ -220,10 +222,13 @@ public class GangliaComponentConfiguration
         this.wireFormat31x = wireFormat31x;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

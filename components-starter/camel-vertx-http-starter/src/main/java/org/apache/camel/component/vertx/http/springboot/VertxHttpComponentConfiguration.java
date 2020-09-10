@@ -20,6 +20,7 @@ import javax.annotation.Generated;
 import io.vertx.core.net.ProxyType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send requests to external HTTP servers using Vert.x
@@ -59,6 +60,7 @@ public class VertxHttpComponentConfiguration
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
+    @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
      * To use an existing vertx instead of creating a new instance. The option
@@ -140,10 +142,13 @@ public class VertxHttpComponentConfiguration
         this.allowJavaSerializedObject = allowJavaSerializedObject;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
         return basicPropertyBinding;
     }
 
+    @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
     }

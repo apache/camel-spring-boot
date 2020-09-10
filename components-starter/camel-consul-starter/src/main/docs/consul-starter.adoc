@@ -26,7 +26,6 @@ The component supports 90 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.consul.acl-token* | Sets the ACL token to be used with Consul |  | String
 | *camel.component.consul.action* | The default action. Can be overridden by CamelConsulAction |  | String
-| *camel.component.consul.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.consul.block-seconds* | The second to wait for a watch event, default 10 seconds | 10 | Integer
 | *camel.component.consul.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.consul.cluster.service.acl-token* | Sets the ACL token to be used with Consul |  | String
@@ -109,6 +108,7 @@ The component supports 90 options, which are listed below.
 | *camel.component.consul.user-name* | Sets the username to be used for basic authentication |  | String
 | *camel.component.consul.value-as-string* | Default to transform values retrieved from Consul i.e. on KV endpoint to string. | false | Boolean
 | *camel.component.consul.write-timeout* | Write timeout for OkHttpClient. The option is a java.time.Duration type. |  | String
+| *camel.component.consul.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.consul.cluster.service.dc* | *Deprecated* Use datacenter instead |  | String
 | *camel.component.consul.connect-timeout-millis* | *Deprecated* Connect timeout for OkHttpClient. Deprecation note: Use connectTimeout instead |  | Long
 | *camel.component.consul.read-timeout-millis* | *Deprecated* Read timeout for OkHttpClient. Deprecation note: Use readTimeout instead |  | Long

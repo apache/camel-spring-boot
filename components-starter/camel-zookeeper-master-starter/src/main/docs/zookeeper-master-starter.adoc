@@ -24,7 +24,6 @@ The component supports 9 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.zookeeper-master.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.zookeeper-master.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.zookeeper-master.container-id-factory* | To use a custom ContainerIdFactory for creating container ids. The option is a org.apache.camel.component.zookeepermaster.ContainerIdFactory type. |  | String
 | *camel.component.zookeeper-master.curator* | To use a custom configured CuratorFramework as connection to zookeeper ensemble. The option is a org.apache.curator.framework.CuratorFramework type. |  | String
@@ -33,6 +32,6 @@ The component supports 9 options, which are listed below.
 | *camel.component.zookeeper-master.zk-root* | The root path to use in zookeeper where information is stored which nodes are master/slave etc. Will by default use: /camel/zookeepermaster/clusters/master | /camel/zookeepermaster/clusters/master | String
 | *camel.component.zookeeper-master.zoo-keeper-password* | The password to use when connecting to the zookeeper ensemble |  | String
 | *camel.component.zookeeper-master.zoo-keeper-url* | The url for the zookeeper ensemble | localhost:2181 | String
+| *camel.component.zookeeper-master.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
-
 // spring-boot-auto-configure options: END

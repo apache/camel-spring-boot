@@ -27,7 +27,6 @@ The component supports 46 options, which are listed below.
 | *camel.component.milo-client.allowed-security-policies* | A set of allowed security policy URIs. Default is to accept all and use the highest. |  | String
 | *camel.component.milo-client.application-name* | The application name | Apache Camel adapter for Eclipse Milo | String
 | *camel.component.milo-client.application-uri* | The application URI | http://camel.apache.org/EclipseMilo/Client | String
-| *camel.component.milo-client.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.milo-client.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.milo-client.channel-lifetime* | Channel lifetime in milliseconds |  | Long
 | *camel.component.milo-client.client-id* | A virtual client id to force the creation of a new connection instance |  | String
@@ -51,7 +50,6 @@ The component supports 46 options, which are listed below.
 | *camel.component.milo-client.session-timeout* | Session timeout in milliseconds |  | Long
 | *camel.component.milo-server.application-name* | The application name |  | String
 | *camel.component.milo-server.application-uri* | The application URI |  | String
-| *camel.component.milo-server.basic-property-binding* | Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.milo-server.bind-addresses* | Set the addresses of the local addresses the server should bind to |  | String
 | *camel.component.milo-server.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.milo-server.build-info* | Server build info. The option is a org.eclipse.milo.opcua.stack.core.types.structured.BuildInfo type. |  | String
@@ -70,5 +68,7 @@ The component supports 46 options, which are listed below.
 | *camel.component.milo-server.security-policies-by-id* | Security policies by URI or name. Multiple policies can be separated by comma. |  | String
 | *camel.component.milo-server.user-authentication-credentials* | Set user password combinations in the form of user1:pwd1,user2:pwd2 Usernames and passwords will be URL decoded |  | String
 | *camel.component.milo-server.username-security-policy-uri* | Set the UserTokenPolicy used when |  | SecurityPolicy
+| *camel.component.milo-client.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
+| *camel.component.milo-server.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END
