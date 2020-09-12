@@ -45,11 +45,6 @@ public class CaffeineLoadCacheComponentConfiguration
      */
     private String action;
     /**
-     * To configure an already instantiated cache to be used. The option is a
-     * com.github.benmanes.caffeine.cache.Cache type.
-     */
-    private String cache;
-    /**
      * To configure a CacheLoader in case of a LoadCache use. The option is a
      * com.github.benmanes.caffeine.cache.CacheLoader type.
      */
@@ -138,14 +133,6 @@ public class CaffeineLoadCacheComponentConfiguration
 
     public void setAction(String action) {
         this.action = action;
-    }
-
-    public String getCache() {
-        return cache;
-    }
-
-    public void setCache(String cache) {
-        this.cache = cache;
     }
 
     public String getCacheLoader() {
