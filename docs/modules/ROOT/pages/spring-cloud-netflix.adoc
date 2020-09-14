@@ -2,7 +2,7 @@
 
 *Since Camel 2.19*
 
-The Spring Cloud Netflix component bridges Camel Cloud and Spring Cloud Netflix so you can leverage Spring Cloud Netflix service discovery and load balance features in Camel and/or you can use Camel Service Discovery implementations as ServerList source for Spring Cloud Netflix's Ribbon load balabncer.
+The Spring Cloud Netflix component bridges Camel Cloud and Spring Cloud Netflix so you can leverage Spring Cloud Netflix service discovery and load balance features in Camel and/or you can use Camel Service Discovery implementations as ServerList source for Spring Cloud Netflix's Ribbon load balancer.
 
 Maven users will need to add the following dependency to their `pom.xml` in order to use this component:
 
