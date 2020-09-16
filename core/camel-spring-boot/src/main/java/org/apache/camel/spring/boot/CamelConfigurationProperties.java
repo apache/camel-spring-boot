@@ -132,7 +132,7 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private String fileConfigurations;
 
     /**
-     * Used for filtering routes routes matching the given pattern, which follows the following rules:
+     * Used for filtering routes matching the given pattern, which follows the following rules:
      *
      * - Match by route id
      * - Match by route input endpoint uri
