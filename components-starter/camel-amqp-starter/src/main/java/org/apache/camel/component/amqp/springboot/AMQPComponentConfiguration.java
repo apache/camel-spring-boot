@@ -275,8 +275,8 @@ public class AMQPComponentConfiguration
      */
     private Long deliveryDelay = -1L;
     /**
-     * Specifies the delivery mode to be used. Possibles values are those
-     * defined by javax.jms.DeliveryMode. NON_PERSISTENT = 1 and PERSISTENT = 2.
+     * Specifies the delivery mode to be used. Possible values are those defined
+     * by javax.jms.DeliveryMode. NON_PERSISTENT = 1 and PERSISTENT = 2.
      */
     private Integer deliveryMode;
     /**
