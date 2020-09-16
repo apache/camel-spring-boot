@@ -548,7 +548,7 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      *
      * This can be used when you want to startup Camel despite a route may otherwise
      * fail fast during startup and cause Camel to fail to startup as well. By delegating
-     * the route startup to the supervising route controller then its manages the startup
+     * the route startup to the supervising route controller then it manages the startup
      * using a background thread. The controller allows to be configured with various
      * settings to attempt to restart failing routes.
      */
