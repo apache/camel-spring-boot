@@ -501,7 +501,7 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * You can turn this off by setting the value to false.
      *
      * Files can be loaded from either classpath or file by prefixing with classpath: or file:
-     * Wildcards is supported using a ANT pattern style paths, such as classpath:&#42;&#42;/&#42;camel&#42;.xml
+     * Wildcards is supported using an ANT pattern style paths, such as classpath:&#42;&#42;/&#42;camel&#42;.xml
      *
      * Multiple directories can be specified and separated by comma, such as:
      * file:/myapp/mycamel/&#42;.xml,file:/myapp/myothercamel/&#42;.xml
@@ -513,7 +513,7 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * You can turn this off by setting the value to false.
      *
      * Files can be loaded from either classpath or file by prefixing with classpath: or file:
-     * Wildcards is supported using a ANT pattern style paths, such as classpath:&#42;&#42;/&#42;template-&#42;.xml
+     * Wildcards is supported using an ANT pattern style paths, such as classpath:&#42;&#42;/&#42;template-&#42;.xml
      *
      * Notice when using wildcards, then there is additional overhead as the classpath is scanned, where
      * as if you specific the exact name for each XML file is faster as no classpath scanning is needed.
@@ -528,7 +528,7 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * You can turn this off by setting the value to false.
      *
      * Files can be loaded from either classpath or file by prefixing with classpath: or file:
-     * Wildcards is supported using a ANT pattern style paths, such as classpath:&#42;&#42;/&#42;camel&#42;.xml
+     * Wildcards is supported using an ANT pattern style paths, such as classpath:&#42;&#42;/&#42;camel&#42;.xml
      *
      * Multiple directories can be specified and separated by comma, such as:
      * file:/myapp/mycamel/&#42;.xml,file:/myapp/myothercamel/&#42;.xml
