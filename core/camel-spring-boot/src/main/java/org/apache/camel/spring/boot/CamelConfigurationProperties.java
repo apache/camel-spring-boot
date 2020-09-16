@@ -420,7 +420,7 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean useMdcLogging;
 
     /**
-     * Sets the pattern used for determine which custom MDC keys to propagate during message routing when
+     * Sets the pattern used for determining which custom MDC keys to propagate during message routing when
      * the routing engine continues routing asynchronously for the given message. Setting this pattern to * will
      * propagate all custom keys. Or setting the pattern to foo*,bar* will propagate any keys starting with
      * either foo or bar.
