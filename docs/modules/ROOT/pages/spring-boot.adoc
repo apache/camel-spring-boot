@@ -132,14 +132,14 @@ The component supports 157 options, which are listed below.
 | *camel.component.properties.ignore-missing-location* | Whether to silently ignore if a location cannot be located, such as a properties file not found. | false | Boolean
 | *camel.component.properties.initial-properties* | Sets initial properties which will be used before any locations are resolved. The option is a java.util.Properties type. |  | String
 | *camel.component.properties.location* | A list of locations to load properties. You can use comma to separate multiple locations. This option will override any default locations and only use the locations from this option. |  | String
-| *camel.component.properties.override-properties* | Sets a special list of override properties that take precedence and will use first, if a property exist. The option is a java.util.Properties type. |  | String
+| *camel.component.properties.override-properties* | Sets a special list of override properties that take precedence and will use first, if a property exists. The option is a java.util.Properties type. |  | String
 | *camel.component.properties.properties-parser* | To use a custom PropertiesParser. The option is a org.apache.camel.component.properties.PropertiesParser type. |  | String
 | *camel.component.properties.system-properties-mode* | Sets the JVM system property mode (0 = never, 1 = fallback, 2 = override). The default mode (override) is to use system properties if present, and override any existing properties. OS environment variable mode is checked before JVM system property mode | 2 | Integer
 | *camel.dataformat.enabled* | Global option to enable/disable dataformat auto-configuration, default is true. | true | Boolean
 | *camel.health.config* | Additional health check properties for fine grained configuration of health checks. |  | Map
 | *camel.health.config.allow-core-thread-time-out* | Sets whether to allow core threads to timeout |  | Boolean
 | *camel.health.config.enabled* | Set if the check associated to this configuration is enabled or not. Is default enabled. |  | Boolean
-| *camel.health.config.failure-threshold* | Set the number of failure before reporting the service as un-healthy. |  | Integer
+| *camel.health.config.failure-threshold* | Set the number of failures before reporting the service as un-healthy. |  | Integer
 | *camel.health.config.id* | Sets the id of this thread pool |  | String
 | *camel.health.config.interval* | Set the check interval in milli seconds. |  | Long
 | *camel.health.config.keep-alive-time* | Sets the keep alive time for inactive threads |  | Long
