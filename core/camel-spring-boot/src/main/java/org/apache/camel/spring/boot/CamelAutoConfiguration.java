@@ -224,6 +224,7 @@ public class CamelAutoConfiguration {
     // SpringCamelContext integration
 
     @Bean
+    @ConditionalOnMissingBean(PropertiesParser.class)
     PropertiesParser propertiesParser() {
         return new SpringPropertiesParser();
     }

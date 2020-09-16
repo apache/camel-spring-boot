@@ -50,4 +50,20 @@
     </dependency>
     <!--END OF GENERATED CODE-->
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <systemProperties>
+            <JASYPT_ENCRYPTION_PASSWORD>mainpassword</JASYPT_ENCRYPTION_PASSWORD>
+          </systemProperties>
+          <environmentVariables>
+            <JASYPT_ENCRYPTION_PASSWORD>mainpassword</JASYPT_ENCRYPTION_PASSWORD>
+          </environmentVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
