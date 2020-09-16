@@ -378,7 +378,7 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     /**
      * Whether to enable using data type on Camel messages.
      *
-     * Data type are automatic turned on if one ore more routes has been explicit configured with input and output types.
+     * Data type are automatic turned on if one or more routes has been explicit configured with input and output types.
      * Otherwise data type is default off.
      */
     private boolean useDataType;
