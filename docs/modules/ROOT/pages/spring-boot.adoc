@@ -148,7 +148,7 @@ The component supports 157 options, which are listed below.
 | *camel.health.config.parent* | The id of the health check such as routes or registry (can use * as wildcard) |  | String
 | *camel.health.config.pool-size* | Sets the core pool size (threads to keep minimum in pool) |  | Integer
 | *camel.health.config.rejected-policy* | Sets the handler for tasks which cannot be executed by the thread pool. |  | ThreadPoolRejectedPolicy
-| *camel.health.config.time-unit* | Sets the time unit used for keeping alive time |  | TimeUnit
+| *camel.health.config.time-unit* | Sets the time unit used for keep alive time |  | TimeUnit
 | *camel.health.context-enabled* | Whether context health check is enabled Is default enabled |  | Boolean
 | *camel.health.enabled* | Whether health check is enabled globally |  | Boolean
 | *camel.health.registry-enabled* | Whether registry health check is enabled Is default enabled |  | Boolean
@@ -247,7 +247,7 @@ The component supports 157 options, which are listed below.
 | *camel.threadpool.max-queue-size* | Sets the default maximum number of tasks in the work queue. Use -1 or an unbounded queue |  | Integer
 | *camel.threadpool.pool-size* | Sets the default core pool size (threads to keep minimum in pool) |  | Integer
 | *camel.threadpool.rejected-policy* | Sets the default handler for tasks which cannot be executed by the thread pool. |  | ThreadPoolRejectedPolicy
-| *camel.threadpool.time-unit* | Sets the default time unit used for keeping alive time |  | TimeUnit
+| *camel.threadpool.time-unit* | Sets the default time unit used for keep alive time |  | TimeUnit
 | *management.endpoint.camelroutecontroller.cache.time-to-live* | Maximum time that a response can be cached. | 0ms | Duration
 | *management.endpoint.camelroutecontroller.enabled* | To turn on or off information about Camel Route Controller via actuator endpoint. | true | Boolean
 | *management.endpoint.camelroutes.cache.time-to-live* | Maximum time that a response can be cached. | 0ms | Duration
