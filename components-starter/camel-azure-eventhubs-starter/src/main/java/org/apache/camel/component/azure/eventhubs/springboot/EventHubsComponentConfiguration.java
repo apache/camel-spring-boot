@@ -142,10 +142,10 @@ public class EventHubsComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Sets the identifier of the Event Hub partition that the {link EventData
-     * events} will be sent to. If the identifier is not specified, the Event
-     * Hubs service will be responsible for routing events that are sent to an
-     * available partition.
+     * Sets the identifier of the Event Hub partition that the events will be
+     * sent to. If the identifier is not specified, the Event Hubs service will
+     * be responsible for routing events that are sent to an available
+     * partition.
      */
     private String partitionId;
     /**
@@ -164,10 +164,10 @@ public class EventHubsComponentConfiguration
     /**
      * Sets the EventHubProducerAsyncClient.An asynchronous producer responsible
      * for transmitting EventData to a specific Event Hub, grouped together in
-     * batches. Depending on the {link CreateBatchOptions options} specified
-     * when creating an {linkEventDataBatch}, the events may be automatically
-     * routed to an available partition or specific to a partition. Use by this
-     * component to produce the data in camel producer. The option is a
+     * batches. Depending on the options specified when creating an
+     * {linkEventDataBatch}, the events may be automatically routed to an
+     * available partition or specific to a partition. Use by this component to
+     * produce the data in camel producer. The option is a
      * com.azure.messaging.eventhubs.EventHubProducerAsyncClient type.
      */
     private String producerAsyncClient;
