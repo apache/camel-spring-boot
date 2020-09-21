@@ -150,6 +150,7 @@
     <module>camel-aws2-ec2-starter</module>
     <module>camel-aws2-ecs-starter</module>
     <module>camel-aws2-eks-starter</module>
+    <module>camel-aws2-eventbridge-starter</module>
     <module>camel-aws2-iam-starter</module>
     <module>camel-aws2-kinesis-starter</module>
     <module>camel-aws2-kms-starter</module>

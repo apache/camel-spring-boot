@@ -39,11 +39,6 @@ public class GoogleCalendarStreamComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * OAuth 2 access token. This typically expires after an hour so
-     * refreshToken is recommended for long term usage.
-     */
-    private String accessToken;
-    /**
      * Google Calendar application name. Example would be
      * camel-google-calendar/1.0
      */
@@ -66,9 +61,10 @@ public class GoogleCalendarStreamComponentConfiguration
      */
     private String clientId;
     /**
-     * Client secret of the calendar application
+     * The configuration. The option is a
+     * org.apache.camel.component.google.calendar.stream.GoogleCalendarStreamConfiguration type.
      */
-    private String clientSecret;
+    private String configuration;
     /**
      * Take into account the lastUpdate of the last event polled as start date
      * for the next poll
@@ -86,12 +82,6 @@ public class GoogleCalendarStreamComponentConfiguration
      * The query to execute on calendar
      */
     private String query;
-    /**
-     * OAuth 2 refresh token. Using this, the Google Calendar component can
-     * obtain a new accessToken whenever the current one expires - a necessity
-     * if the application is long-lived.
-     */
-    private String refreshToken;
     /**
      * Specifies the level of permissions you want a calendar application to
      * have to a user account. See https://developers.google.com/calendar/auth
@@ -111,18 +101,20 @@ public class GoogleCalendarStreamComponentConfiguration
      */
     private String clientFactory;
     /**
-     * The configuration. The option is a
-     * org.apache.camel.component.google.calendar.stream.GoogleCalendarStreamConfiguration type.
+     * OAuth 2 access token. This typically expires after an hour so
+     * refreshToken is recommended for long term usage.
      */
-    private String configuration;
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
+    private String accessToken;
+    /**
+     * Client secret of the calendar application
+     */
+    private String clientSecret;
+    /**
+     * OAuth 2 refresh token. Using this, the Google Calendar component can
+     * obtain a new accessToken whenever the current one expires - a necessity
+     * if the application is long-lived.
+     */
+    private String refreshToken;
 
     public String getApplicationName() {
         return applicationName;
@@ -156,12 +148,12 @@ public class GoogleCalendarStreamComponentConfiguration
         this.clientId = clientId;
     }
 
-    public String getClientSecret() {
-        return clientSecret;
+    public String getConfiguration() {
+        return configuration;
     }
 
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
     }
 
     public Boolean getConsiderLastUpdate() {
@@ -196,14 +188,6 @@ public class GoogleCalendarStreamComponentConfiguration
         this.query = query;
     }
 
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
     public List<String> getScopes() {
         return scopes;
     }
@@ -231,11 +215,27 @@ public class GoogleCalendarStreamComponentConfiguration
         this.clientFactory = clientFactory;
     }
 
-    public String getConfiguration() {
-        return configuration;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public void setConfiguration(String configuration) {
-        this.configuration = configuration;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

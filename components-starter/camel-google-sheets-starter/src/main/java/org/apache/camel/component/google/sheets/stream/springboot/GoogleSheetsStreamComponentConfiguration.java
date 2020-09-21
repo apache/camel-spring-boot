@@ -39,11 +39,6 @@ public class GoogleSheetsStreamComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * OAuth 2 access token. This typically expires after an hour so
-     * refreshToken is recommended for long term usage.
-     */
-    private String accessToken;
-    /**
      * Google sheets application name. Example would be camel-google-sheets/1.0
      */
     private String applicationName;
@@ -60,10 +55,6 @@ public class GoogleSheetsStreamComponentConfiguration
      * Client ID of the sheets application
      */
     private String clientId;
-    /**
-     * Client secret of the sheets application
-     */
-    private String clientSecret;
     /**
      * To use the shared configuration. The option is a
      * org.apache.camel.component.google.sheets.stream.GoogleSheetsStreamConfiguration type.
@@ -82,17 +73,11 @@ public class GoogleSheetsStreamComponentConfiguration
      * number of rows in a returned value range data set or the number of
      * returned value ranges in a batch request.
      */
-    private Integer maxResults = 0;
+    private Integer maxResults;
     /**
      * Specifies the range of rows and columns in a sheet to get data from.
      */
     private String range;
-    /**
-     * OAuth 2 refresh token. Using this, the Google Calendar component can
-     * obtain a new accessToken whenever the current one expires - a necessity
-     * if the application is long-lived.
-     */
-    private String refreshToken;
     /**
      * Specifies the level of permissions you want a sheets application to have
      * to a user account. See
@@ -128,14 +113,21 @@ public class GoogleSheetsStreamComponentConfiguration
      * org.apache.camel.component.google.sheets.GoogleSheetsClientFactory type.
      */
     private String clientFactory;
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
+    /**
+     * OAuth 2 access token. This typically expires after an hour so
+     * refreshToken is recommended for long term usage.
+     */
+    private String accessToken;
+    /**
+     * Client secret of the sheets application
+     */
+    private String clientSecret;
+    /**
+     * OAuth 2 refresh token. Using this, the Google Calendar component can
+     * obtain a new accessToken whenever the current one expires - a necessity
+     * if the application is long-lived.
+     */
+    private String refreshToken;
 
     public String getApplicationName() {
         return applicationName;
@@ -159,14 +151,6 @@ public class GoogleSheetsStreamComponentConfiguration
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
-    }
-
-    public String getClientSecret() {
-        return clientSecret;
-    }
-
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
     }
 
     public String getConfiguration() {
@@ -207,14 +191,6 @@ public class GoogleSheetsStreamComponentConfiguration
 
     public void setRange(String range) {
         this.range = range;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
     }
 
     public List<String> getScopes() {
@@ -266,5 +242,29 @@ public class GoogleSheetsStreamComponentConfiguration
 
     public void setClientFactory(String clientFactory) {
         this.clientFactory = clientFactory;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

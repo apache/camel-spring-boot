@@ -38,11 +38,6 @@ public class GoogleMailStreamComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * OAuth 2 access token. This typically expires after an hour so
-     * refreshToken is recommended for long term usage.
-     */
-    private String accessToken;
-    /**
      * Google mail application name. Example would be camel-google-mail/1.0
      */
     private String applicationName;
@@ -60,10 +55,6 @@ public class GoogleMailStreamComponentConfiguration
      */
     private String clientId;
     /**
-     * Client secret of the mail application
-     */
-    private String clientSecret;
-    /**
      * Comma separated list of labels to take into account
      */
     private String labels;
@@ -80,12 +71,6 @@ public class GoogleMailStreamComponentConfiguration
      */
     private String query = "is:unread";
     /**
-     * OAuth 2 refresh token. Using this, the Google Calendar component can
-     * obtain a new accessToken whenever the current one expires - a necessity
-     * if the application is long-lived.
-     */
-    private String refreshToken;
-    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -101,14 +86,21 @@ public class GoogleMailStreamComponentConfiguration
      * org.apache.camel.component.google.mail.stream.GoogleMailStreamConfiguration type.
      */
     private String configuration;
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
+    /**
+     * OAuth 2 access token. This typically expires after an hour so
+     * refreshToken is recommended for long term usage.
+     */
+    private String accessToken;
+    /**
+     * Client secret of the mail application
+     */
+    private String clientSecret;
+    /**
+     * OAuth 2 refresh token. Using this, the Google Calendar component can
+     * obtain a new accessToken whenever the current one expires - a necessity
+     * if the application is long-lived.
+     */
+    private String refreshToken;
 
     public String getApplicationName() {
         return applicationName;
@@ -132,14 +124,6 @@ public class GoogleMailStreamComponentConfiguration
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
-    }
-
-    public String getClientSecret() {
-        return clientSecret;
-    }
-
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
     }
 
     public String getLabels() {
@@ -174,14 +158,6 @@ public class GoogleMailStreamComponentConfiguration
         this.query = query;
     }
 
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
     @Deprecated
     @DeprecatedConfigurationProperty
     public Boolean getBasicPropertyBinding() {
@@ -207,5 +183,29 @@ public class GoogleMailStreamComponentConfiguration
 
     public void setConfiguration(String configuration) {
         this.configuration = configuration;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

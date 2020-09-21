@@ -38,6 +38,11 @@ public class TwilioComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * To use the shared configuration. The option is a
+     * org.apache.camel.component.twilio.TwilioConfiguration type.
+     */
+    private String configuration;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -64,11 +69,6 @@ public class TwilioComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
-     * To use the shared configuration. The option is a
-     * org.apache.camel.component.twilio.TwilioConfiguration type.
-     */
-    private String configuration;
-    /**
      * To use the shared REST client. The option is a
      * com.twilio.http.TwilioRestClient type.
      */
@@ -85,6 +85,14 @@ public class TwilioComponentConfiguration
      * The account to use.
      */
     private String username;
+
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -111,14 +119,6 @@ public class TwilioComponentConfiguration
     @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public String getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(String configuration) {
-        this.configuration = configuration;
     }
 
     public String getRestClient() {

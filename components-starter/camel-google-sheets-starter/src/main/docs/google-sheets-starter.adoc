@@ -17,7 +17,7 @@ When using google-sheets with Spring Boot make sure to use the following Maven d
 ----
 
 
-The component supports 29 options, which are listed below.
+The component supports 30 options, which are listed below.
 
 
 
@@ -34,7 +34,7 @@ The component supports 29 options, which are listed below.
 | *camel.component.google-sheets-stream.enabled* | Whether to enable auto configuration of the google-sheets-stream component. This is enabled by default. |  | Boolean
 | *camel.component.google-sheets-stream.include-grid-data* | True if grid data should be returned. | false | Boolean
 | *camel.component.google-sheets-stream.major-dimension* | Specifies the major dimension that results should use.. | ROWS | String
-| *camel.component.google-sheets-stream.max-results* | Specify the maximum number of returned results. This will limit the number of rows in a returned value range data set or the number of returned value ranges in a batch request. | 0 | Integer
+| *camel.component.google-sheets-stream.max-results* | Specify the maximum number of returned results. This will limit the number of rows in a returned value range data set or the number of returned value ranges in a batch request. |  | Integer
 | *camel.component.google-sheets-stream.range* | Specifies the range of rows and columns in a sheet to get data from. |  | String
 | *camel.component.google-sheets-stream.refresh-token* | OAuth 2 refresh token. Using this, the Google Calendar component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived. |  | String
 | *camel.component.google-sheets-stream.scopes* | Specifies the level of permissions you want a sheets application to have to a user account. See \https://developers.google.com/identity/protocols/googlescopes for more info. |  | List
@@ -51,6 +51,7 @@ The component supports 29 options, which are listed below.
 | *camel.component.google-sheets.enabled* | Whether to enable auto configuration of the google-sheets component. This is enabled by default. |  | Boolean
 | *camel.component.google-sheets.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.google-sheets.refresh-token* | OAuth 2 refresh token. Using this, the Google Sheets component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived. |  | String
+| *camel.component.google-sheets.split-result* | When consumer return an array or collection this will generate one exchange per element, and their routes will be executed once for each exchange.Set this value to false to use a single exchange for the entire list or array. | true | Boolean
 | *camel.component.google-sheets-stream.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.google-sheets.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===

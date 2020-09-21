@@ -60,6 +60,13 @@ public class GoogleSheetsComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * When consumer return an array or collection this will generate one
+     * exchange per element, and their routes will be executed once for each
+     * exchange.Set this value to false to use a single exchange for the entire
+     * list or array.
+     */
+    private Boolean splitResult = true;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -128,6 +135,14 @@ public class GoogleSheetsComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getSplitResult() {
+        return splitResult;
+    }
+
+    public void setSplitResult(Boolean splitResult) {
+        this.splitResult = splitResult;
     }
 
     public Boolean getLazyStartProducer() {
