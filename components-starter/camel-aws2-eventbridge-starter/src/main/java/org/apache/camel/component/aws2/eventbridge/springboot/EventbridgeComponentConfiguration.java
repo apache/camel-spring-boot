@@ -17,8 +17,8 @@
 package org.apache.camel.component.aws2.eventbridge.springboot;
 
 import javax.annotation.Generated;
-import org.apache.camel.component.aws2.eventbridge.EvenbridgeOperations;
 import org.apache.camel.component.aws2.eventbridge.EventbridgeComponent;
+import org.apache.camel.component.aws2.eventbridge.EventbridgeOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -58,6 +58,11 @@ public class EventbridgeComponentConfiguration
      */
     private String eventbridgeClient;
     /**
+     * The eventbus name, the default value is default and this means it will be
+     * the AWS event bus of your account.
+     */
+    private String eventbusName = "default";
+    /**
      * EventPattern File
      */
     private String eventPatternFile;
@@ -75,27 +80,27 @@ public class EventbridgeComponentConfiguration
     /**
      * The operation to perform
      */
-    private EvenbridgeOperations operation = EvenbridgeOperations.putRule;
+    private EventbridgeOperations operation = EventbridgeOperations.putRule;
     /**
      * If we want to use a POJO request as body or not
      */
     private Boolean pojoRequest = false;
     /**
-     * To define a proxy host when instantiating the STS client
+     * To define a proxy host when instantiating the Eventbridge client
      */
     private String proxyHost;
     /**
-     * To define a proxy port when instantiating the STS client
+     * To define a proxy port when instantiating the Eventbridge client
      */
     private Integer proxyPort;
     /**
-     * To define a proxy protocol when instantiating the STS client
+     * To define a proxy protocol when instantiating the Eventbridge client
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which STS client needs to work. When using this parameter,
-     * the configuration will expect the lowercase name of the region (for
-     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
+     * The region in which Eventbridge client needs to work. When using this
+     * parameter, the configuration will expect the lowercase name of the region
+     * (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
     /**
@@ -141,6 +146,14 @@ public class EventbridgeComponentConfiguration
         this.eventbridgeClient = eventbridgeClient;
     }
 
+    public String getEventbusName() {
+        return eventbusName;
+    }
+
+    public void setEventbusName(String eventbusName) {
+        this.eventbusName = eventbusName;
+    }
+
     public String getEventPatternFile() {
         return eventPatternFile;
     }
@@ -157,11 +170,11 @@ public class EventbridgeComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public EvenbridgeOperations getOperation() {
+    public EventbridgeOperations getOperation() {
         return operation;
     }
 
-    public void setOperation(EvenbridgeOperations operation) {
+    public void setOperation(EventbridgeOperations operation) {
         this.operation = operation;
     }
 
