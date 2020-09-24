@@ -58,11 +58,6 @@ public class EventbridgeComponentConfiguration
      */
     private String eventbridgeClient;
     /**
-     * The eventbus name, the default value is default and this means it will be
-     * the AWS event bus of your account.
-     */
-    private String eventbusName = "default";
-    /**
      * EventPattern File
      */
     private String eventPatternFile;
@@ -144,14 +139,6 @@ public class EventbridgeComponentConfiguration
 
     public void setEventbridgeClient(String eventbridgeClient) {
         this.eventbridgeClient = eventbridgeClient;
-    }
-
-    public String getEventbusName() {
-        return eventbusName;
-    }
-
-    public void setEventbusName(String eventbusName) {
-        this.eventbusName = eventbusName;
     }
 
     public String getEventPatternFile() {
