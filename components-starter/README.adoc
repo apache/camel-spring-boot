@@ -714,11 +714,11 @@ Number of Camel data formats: 45 in 37 JAR artifacts (0 deprecated)
 
 | link:https://camel.apache.org/components/latest/dataformats/beanio-dataformat.html[BeanIO] | camel-beanio-starter | Stable | 2.10 | Marshal and unmarshal Java beans to and from flat files (such as CSV, delimited, or fixed length formats).
 
-| link:https://camel.apache.org/components/latest/dataformats/bindy-dataformat.html[Bindy CSV] | camel-bindy-starter | Stable | 2.0 | Marshal and unmarshal Java beans from and to flat payloads (such as CSV, delimited, fixed length formats, or FIX messages).
+| link:https://camel.apache.org/components/latest/dataformats/bindy-dataformat.html[Bindy CSV] | camel-bindy-starter | Stable | 2.0 | Marshal and unmarshal between POJOs and Comma separated values (CSV) format using Camel Bindy
 
-| link:https://camel.apache.org/components/latest/dataformats/bindy-dataformat.html[Bindy Fixed Length] | camel-bindy-starter | Stable | 2.0 | Marshal and unmarshal Java beans from and to flat payloads (such as CSV, delimited, fixed length formats, or FIX messages).
+| link:https://camel.apache.org/components/latest/dataformats/bindy-dataformat.html[Bindy Fixed Length] | camel-bindy-starter | Stable | 2.0 | Marshal and unmarshal between POJOs and fixed field length format using Camel Bindy
 
-| link:https://camel.apache.org/components/latest/dataformats/bindy-dataformat.html[Bindy Key Value Pair] | camel-bindy-starter | Stable | 2.0 | Marshal and unmarshal Java beans from and to flat payloads (such as CSV, delimited, fixed length formats, or FIX messages).
+| link:https://camel.apache.org/components/latest/dataformats/bindy-dataformat.html[Bindy Key Value Pair] | camel-bindy-starter | Stable | 2.0 | Marshal and unmarshal between POJOs and key-value pair (KVP) format using Camel Bindy
 
 | link:https://camel.apache.org/components/latest/dataformats/cbor-dataformat.html[CBOR] | camel-cbor-starter | Stable | 3.0 | Unmarshal a CBOR payload to POJO and back.
 
@@ -744,15 +744,15 @@ Number of Camel data formats: 45 in 37 JAR artifacts (0 deprecated)
 
 | link:https://camel.apache.org/components/latest/dataformats/jaxb-dataformat.html[JAXB] | camel-jaxb-starter | Stable | 1.0 | Unmarshal XML payloads to POJOs and back using JAXB2 XML marshalling standard.
 
-| link:https://camel.apache.org/components/latest/dataformats/json-fastjson-dataformat.html[JSON Fastjson] | camel-fastjson-starter | Stable | 2.20 | Marshal POJOs to JSON and back.
+| link:https://camel.apache.org/components/latest/dataformats/json-fastjson-dataformat.html[JSON Fastjson] | camel-fastjson-starter | Stable | 2.20 | Marshal POJOs to JSON and back using Fastjson
 
-| link:https://camel.apache.org/components/latest/dataformats/json-gson-dataformat.html[JSON Gson] | camel-gson-starter | Stable | 2.10 | Marshal POJOs to JSON and back.
+| link:https://camel.apache.org/components/latest/dataformats/json-gson-dataformat.html[JSON Gson] | camel-gson-starter | Stable | 2.10 | Marshal POJOs to JSON and back using Gson
 
-| link:https://camel.apache.org/components/latest/dataformats/json-jackson-dataformat.html[JSON Jackson] | camel-jackson-starter | Stable | 2.0 | Marshal POJOs to JSON and back.
+| link:https://camel.apache.org/components/latest/dataformats/json-jackson-dataformat.html[JSON Jackson] | camel-jackson-starter | Stable | 2.0 | Marshal POJOs to JSON and back using Jackson
 
-| link:https://camel.apache.org/components/latest/dataformats/json-johnzon-dataformat.html[JSON Johnzon] | camel-johnzon-starter | Stable | 2.18 | Marshal POJOs to JSON and back.
+| link:https://camel.apache.org/components/latest/dataformats/json-johnzon-dataformat.html[JSON Johnzon] | camel-johnzon-starter | Stable | 2.18 | Marshal POJOs to JSON and back using Johnzon
 
-| link:https://camel.apache.org/components/latest/dataformats/json-xstream-dataformat.html[JSON XStream] | camel-xstream-starter | Stable | 2.0 | Marshal POJOs to JSON and back.
+| link:https://camel.apache.org/components/latest/dataformats/json-xstream-dataformat.html[JSON XStream] | camel-xstream-starter | Stable | 2.0 | Marshal POJOs to JSON and back using XStream
 
 | link:https://camel.apache.org/components/latest/dataformats/jsonApi-dataformat.html[JSonApi] | camel-jsonapi-starter | Stable | 3.0 | Marshal and unmarshal JSON:API resources using JSONAPI-Converter library.
 
@@ -786,7 +786,7 @@ Number of Camel data formats: 45 in 37 JAR artifacts (0 deprecated)
 
 | link:https://camel.apache.org/components/latest/dataformats/xstream-dataformat.html[XStream] | camel-xstream-starter | Stable | 1.3 | Marshal and unmarshal POJOs to/from XML using XStream library.
 
-| link:https://camel.apache.org/components/latest/dataformats/yaml-snakeyaml-dataformat.html[YAML SnakeYAML] | camel-snakeyaml-starter | Stable | 2.17 | Marshal and unmarshal Java objects to and from YAML.
+| link:https://camel.apache.org/components/latest/dataformats/yaml-snakeyaml-dataformat.html[YAML SnakeYAML] | camel-snakeyaml-starter | Stable | 2.17 | Marshal and unmarshal Java objects to and from YAML using SnakeYAML
 
 | link:https://camel.apache.org/components/latest/dataformats/zipdeflater-dataformat.html[Zip Deflate Compression] | camel-zip-deflater-starter | Stable | 2.12 | Compress and decompress streams using java.util.zip.Deflater and java.util.zip.Inflater.
 
