@@ -92,6 +92,16 @@ public class InfinispanComponentConfiguration
      */
     private Boolean sync = true;
     /**
+     * Set a specific default value for some producer operations. The option is
+     * a java.lang.Object type.
+     */
+    private String defaultValue;
+    /**
+     * Set a specific key for producer operations. The option is a
+     * java.lang.Object type.
+     */
+    private String key;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -103,9 +113,19 @@ public class InfinispanComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Set a specific old value for some producer operations. The option is a
+     * java.lang.Object type.
+     */
+    private String oldValue;
+    /**
      * The operation to perform.
      */
     private InfinispanOperation operation = InfinispanOperation.PUT;
+    /**
+     * Set a specific value for producer operations. The option is a
+     * java.lang.Object type.
+     */
+    private String value;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -231,6 +251,22 @@ public class InfinispanComponentConfiguration
         this.sync = sync;
     }
 
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(String defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
@@ -239,12 +275,28 @@ public class InfinispanComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public String getOldValue() {
+        return oldValue;
+    }
+
+    public void setOldValue(String oldValue) {
+        this.oldValue = oldValue;
+    }
+
     public InfinispanOperation getOperation() {
         return operation;
     }
 
     public void setOperation(InfinispanOperation operation) {
         this.operation = operation;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Deprecated
