@@ -47,7 +47,7 @@ public class ReactiveStreamsServiceAutoConfiguration {
         ReactiveStreamsEngineConfiguration engineConfiguration = new ReactiveStreamsEngineConfiguration();
 
         if (configuration.getReactiveStreamsEngineConfiguration() != null) {
-            engineConfiguration = ac.getBean(configuration.getReactiveStreamsEngineConfiguration(), ReactiveStreamsEngineConfiguration.class);
+            engineConfiguration = configuration.getReactiveStreamsEngineConfiguration();
         } else {
             engineConfiguration.setThreadPoolName(configuration.getThreadPoolName());
             if (configuration.getThreadPoolMinSize() != null) {
