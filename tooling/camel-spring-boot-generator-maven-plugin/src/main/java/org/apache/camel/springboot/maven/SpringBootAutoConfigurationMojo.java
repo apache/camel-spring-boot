@@ -23,6 +23,7 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -37,6 +38,7 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
+
 import javax.annotation.Generated;
 
 import org.apache.camel.maven.packaging.AbstractGeneratorMojo;
@@ -682,21 +684,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             // generate inner class for non-primitive options
             type = getSimpleJavaType(type);
 
-            // spring-boot auto configuration does not support complex types
-            // (unless they are enum, nested)
-            // and if so then we should use a String type so spring-boot and its
-            // tooling support that
-            // as Camel will be able to convert the string value into a lookup
-            // of the bean in the registry anyway
-            // and therefore there is no problem, eg
-            // camel.component.jdbc.data-source = myDataSource
-            // where the type would have been javax.sql.DataSource
-            boolean complex = isComplexType(option) && isBlank(option.getEnums());
-            if (complex) {
-                // force to use a string type
-                type = "java.lang.String";
-            }
-
             Property prop = javaClass.addProperty(type, option.getName());
             if (option.isDeprecated()) {
                 prop.getField().addAnnotation(Deprecated.class);
@@ -707,6 +694,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             }
             if (!Strings.isNullOrEmpty(option.getDescription())) {
                 String desc = option.getDescription();
+                boolean complex = isComplexType(option) && isBlank(option.getEnums());
                 if (complex) {
                     if (!desc.endsWith(".")) {
                         desc = desc + ".";
@@ -716,8 +704,15 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 prop.getField().getJavaDoc().setFullText(desc);
             }
             if (!isBlank(option.getDefaultValue())) {
-                if ("java.lang.String".equals(option.getJavaType()) || "duration".equals(option.getType())) {
+                if ("java.lang.String".equals(option.getJavaType())) {
                     prop.getField().setStringInitializer(option.getDefaultValue().toString());
+                } else if ("duration".equals(option.getType())) {
+                	String value= convertDurationToMillisec(option.getDefaultValue().toString());
+                	// duration is either long or int java type
+                	if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
+                		value = value + "L";
+                	}
+                    prop.getField().setLiteralInitializer(value);
                 } else if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
                     // the value should be a Long number
                     String value = option.getDefaultValue() + "L";
@@ -735,6 +730,21 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
 
         String fileName = packageName.replaceAll("\\.", "\\/") + "/" + name + ".java";
         writeSourceIfChanged(javaClass, fileName, true);
+    }
+    
+    private String convertDurationToMillisec(String pattern) {
+    	String value = null;
+    	pattern = pattern.toLowerCase();
+    	if (pattern.indexOf("ms") != -1) {
+			pattern = pattern.replaceAll("ms", "");
+		}
+    	try {
+    		Duration d = Duration.parse("PT"+pattern);
+    		value = String.valueOf(d.toMillis());
+		} catch (java.time.format.DateTimeParseException e) {
+			value = pattern;
+		}
+        return value;
     }
 
     private boolean isBlank(Object value) {
