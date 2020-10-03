@@ -707,11 +707,11 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 if ("java.lang.String".equals(option.getJavaType())) {
                     prop.getField().setStringInitializer(option.getDefaultValue().toString());
                 } else if ("duration".equals(option.getType())) {
-                	String value= convertDurationToMillisec(option.getDefaultValue().toString());
-                	// duration is either long or int java type
-                	if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
-                		value = value + "L";
-                	}
+                    String value = convertDurationToMillisec(option.getDefaultValue().toString());
+                    // duration is either long or int java type
+                    if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
+                        value = value + "L";
+                    }
                     prop.getField().setLiteralInitializer(value);
                 } else if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
                     // the value should be a Long number
@@ -733,17 +733,17 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     }
     
     private String convertDurationToMillisec(String pattern) {
-    	String value = null;
-    	pattern = pattern.toLowerCase();
-    	if (pattern.indexOf("ms") != -1) {
-			pattern = pattern.replaceAll("ms", "");
-		}
-    	try {
-    		Duration d = Duration.parse("PT"+pattern);
-    		value = String.valueOf(d.toMillis());
-		} catch (java.time.format.DateTimeParseException e) {
-			value = pattern;
-		}
+        String value = null;
+        pattern = pattern.toLowerCase();
+        if (pattern.indexOf("ms") != -1) {
+            pattern = pattern.replaceAll("ms", "");
+        }
+        try {
+            Duration d = Duration.parse("PT" + pattern);
+            value = String.valueOf(d.toMillis());
+        } catch (java.time.format.DateTimeParseException e) {
+            value = pattern;
+        }
         return value;
     }
 
