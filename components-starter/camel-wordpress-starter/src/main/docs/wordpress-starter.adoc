@@ -26,7 +26,7 @@ The component supports 13 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.wordpress.api-version* | The Wordpress REST API version | 2 | String
 | *camel.component.wordpress.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.wordpress.configuration* | Wordpress component configuration. The option is a org.apache.camel.component.wordpress.WordpressComponentConfiguration type. |  | String
+| *camel.component.wordpress.configuration* | Wordpress configuration. The option is a org.apache.camel.component.wordpress.WordpressConfiguration type. |  | String
 | *camel.component.wordpress.criteria* | The criteria to use with complex searches. |  | Map
 | *camel.component.wordpress.enabled* | Whether to enable auto configuration of the wordpress component. This is enabled by default. |  | Boolean
 | *camel.component.wordpress.force* | Whether to bypass trash and force deletion. | false | Boolean

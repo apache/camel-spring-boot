@@ -58,6 +58,11 @@ public class JsonPathLanguageConfiguration
      */
     private String headerName;
     /**
+     * To configure additional options on json path. Multiple values can be
+     * separated by comma.
+     */
+    private String option;
+    /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
      */
@@ -101,6 +106,14 @@ public class JsonPathLanguageConfiguration
 
     public void setHeaderName(String headerName) {
         this.headerName = headerName;
+    }
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
     }
 
     public Boolean getTrim() {

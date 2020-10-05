@@ -43,6 +43,11 @@ public class WordpressComponentConfiguration
      */
     private String apiVersion = "2";
     /**
+     * Wordpress configuration. The option is a
+     * org.apache.camel.component.wordpress.WordpressConfiguration type.
+     */
+    private String configuration;
+    /**
      * The criteria to use with complex searches.
      */
     private Map<String, Object> criteria;
@@ -98,12 +103,6 @@ public class WordpressComponentConfiguration
      */
     @Deprecated
     private Boolean basicPropertyBinding = false;
-    /**
-     * Wordpress component configuration. The option is a
-     * org.apache.camel.component.wordpress.WordpressComponentConfiguration
-     * type.
-     */
-    private String configuration;
 
     public String getApiVersion() {
         return apiVersion;
@@ -111,6 +110,14 @@ public class WordpressComponentConfiguration
 
     public void setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
+    }
+
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
     }
 
     public Map<String, Object> getCriteria() {
@@ -194,13 +201,5 @@ public class WordpressComponentConfiguration
     @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
-    }
-
-    public String getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(String configuration) {
-        this.configuration = configuration;
     }
 }

@@ -17,7 +17,7 @@ When using infinispan with Spring Boot make sure to use the following Maven depe
 ----
 
 
-The component supports 28 options, which are listed below.
+The component supports 34 options, which are listed below.
 
 
 
@@ -45,10 +45,16 @@ The component supports 28 options, which are listed below.
 | *camel.component.infinispan.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.infinispan.old-value* | Set a specific old value for some producer operations. The option is a java.lang.Object type. |  | String
 | *camel.component.infinispan.operation* | The operation to perform. |  | InfinispanOperation
+| *camel.component.infinispan.password* | Define the password to access the infinispan instance |  | String
 | *camel.component.infinispan.query-builder* | Specifies the query builder. The option is a org.apache.camel.component.infinispan.InfinispanQueryBuilder type. |  | String
 | *camel.component.infinispan.remapping-function* | Set a specific remappingFunction to use in a compute operation. The option is a java.util.function.BiFunction type. |  | String
 | *camel.component.infinispan.result-header* | Store the operation result in a header instead of the message body. By default, resultHeader == null and the query result is stored in the message body, any existing content in the message body is discarded. If resultHeader is set, the value is used as the name of the header to store the query result and the original message body is preserved. This value can be overridden by an in message header named: CamelInfinispanOperationResultHeader. The option is a java.lang.Object type. |  | String
+| *camel.component.infinispan.sasl-mechanism* | Define the SASL Mechanism to access the infinispan instance |  | String
+| *camel.component.infinispan.secure* | Define if we are connecting to a secured Infinispan instance | false | Boolean
+| *camel.component.infinispan.security-realm* | Define the security realm to access the infinispan instance |  | String
+| *camel.component.infinispan.security-server-name* | Define the security server name to access the infinispan instance |  | String
 | *camel.component.infinispan.sync* | If true, the consumer will receive notifications synchronously | true | Boolean
+| *camel.component.infinispan.username* | Define the username to access the infinispan instance |  | String
 | *camel.component.infinispan.value* | Set a specific value for producer operations. The option is a java.lang.Object type. |  | String
 | *camel.component.infinispan.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.infinispan.command* | *Deprecated* The operation to perform. | PUT | String
