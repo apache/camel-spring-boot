@@ -60,8 +60,8 @@ public class JasyptEncryptedPropertiesConfiguration {
      * The class name of the security provider to be used for obtaining the encryption
      * algorithm.
      */
-    @Value("${camel.component.jasypt.provider-class-name}")
-    private String providerClassName = "com.sun.crypto.provider.SunJCE";
+    @Value("${camel.component.jasypt.provider-name}")
+    private String providerName;
 
 
     public boolean isEnabled() {
@@ -104,12 +104,12 @@ public class JasyptEncryptedPropertiesConfiguration {
         this.saltGeneratorClassName = saltGeneratorClassName;
     }
 
-    public String getProviderClassName() {
-        return providerClassName;
+    public String getProviderName() {
+        return providerName;
     }
 
-    public void setProviderClassName(String providerClassName) {
-        this.providerClassName = providerClassName;
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
     }
 }
 

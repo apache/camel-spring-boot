@@ -21,14 +21,8 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig;
-import org.jasypt.exceptions.EncryptionInitializationException;
-import org.jasypt.iv.IvGenerator;
-import org.jasypt.iv.NoIvGenerator;
-import org.jasypt.iv.RandomIvGenerator;
 import org.jasypt.salt.RandomSaltGenerator;
 import org.jasypt.salt.SaltGenerator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -51,9 +45,9 @@ import org.springframework.core.env.PropertyResolver;
 import java.lang.annotation.Annotation;
 
 import static org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration.PREFIX;
-import static org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesUtils.isIVNeeded;
-import static org.apache.camel.util.ObjectHelper.isNotEmpty;
-import static org.apache.camel.util.StringHelper.after;
+import static org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesUtils.getIVGenerator;
+import static org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesUtils.loadClass;
+import static org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesUtils.parsePassword;
 import static org.springframework.boot.context.properties.source.ConfigurationPropertySources.from;
 import static org.springframework.core.ResolvableType.forClass;
 import static org.springframework.core.annotation.AnnotationUtils.findAnnotation;
@@ -64,11 +58,6 @@ import static org.springframework.core.annotation.AnnotationUtils.findAnnotation
 @AutoConfigureBefore(CamelAutoConfiguration.class)
 public class JasyptEncryptedPropertiesAutoconfiguration {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JasyptEncryptedPropertiesAutoconfiguration.class);
-
-    private static final String SYSTEM_ENVIRONMENT_PREFIX = "sysenv:";
-
-    private static final String SYSTEM_PROPERTIES_PREFIX = "sys:";
 
     @Bean
     public JasyptEncryptedPropertiesConfiguration JasyptEncryptedPropertiesAutoconfiguration(final ConfigurableEnvironment environment) {
@@ -94,7 +83,7 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
         environmentStringPBEConfig.setAlgorithm(configuration.getAlgorithm());
         environmentStringPBEConfig.setIvGenerator(getIVGenerator(configuration));
         environmentStringPBEConfig.setSaltGenerator(getSaltGenerator(configuration));
-        environmentStringPBEConfig.setProviderClassName(configuration.getProviderClassName());
+        environmentStringPBEConfig.setProviderName(configuration.getProviderName());
         parsePassword(environmentStringPBEConfig, configuration);
         return environmentStringPBEConfig;
     }
@@ -128,37 +117,5 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
             return saltGenerator;
         }
         return new RandomSaltGenerator();
-    }
-
-    private IvGenerator getIVGenerator(JasyptEncryptedPropertiesConfiguration configuration) {
-        String ivGeneratorClassName = configuration.getIvGeneratorClassName();
-        IvGenerator ivGenerator = loadClass(ivGeneratorClassName);
-        if (ivGenerator != null) {
-            return ivGenerator;
-        }
-        String algorithm = configuration.getAlgorithm();
-        return isIVNeeded(algorithm) ? new RandomIvGenerator() : new NoIvGenerator();
-    }
-
-    private <T> T loadClass(String className) {
-        try {
-            final Class clazz = Thread.currentThread().getContextClassLoader().loadClass(className);
-            return (T) clazz.newInstance();
-        } catch (Exception e) {
-            throw new EncryptionInitializationException(e);
-        }
-    }
-
-    private void parsePassword(EnvironmentStringPBEConfig environmentStringPBEConfig, JasyptEncryptedPropertiesConfiguration configuration) {
-        String passwordReference = configuration.getPassword();
-        if (isNotEmpty(passwordReference) && passwordReference.startsWith(SYSTEM_ENVIRONMENT_PREFIX)) {
-            environmentStringPBEConfig.setPasswordEnvName(after(passwordReference, SYSTEM_ENVIRONMENT_PREFIX));
-            return;
-        }
-        if (isNotEmpty(passwordReference) && passwordReference.startsWith(SYSTEM_PROPERTIES_PREFIX)) {
-            environmentStringPBEConfig.setPasswordSysPropertyName(after(passwordReference, SYSTEM_PROPERTIES_PREFIX));
-            return;
-        }
-        environmentStringPBEConfig.setPassword(passwordReference);
     }
 }

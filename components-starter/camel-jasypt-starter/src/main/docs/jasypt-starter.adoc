@@ -29,6 +29,6 @@ The component supports 6 options, which are listed below.
 | *camel.component.jasypt.iv-generator-class-name* | The initialization vector (IV) generator applied in decryption operations. | org.jasypt.iv.NoIvGenerator if the algorithm does not require an initialization vector, org.jasypt.iv.RandomIvGenerator otherwise | String
 | *camel.component.jasypt.salt-generator-class-name* | The salt generator applied in decryption operations. | org.jasypt.salt.RandomSaltGenerator | String
 | *camel.component.jasypt.password* | The master password used by Jasypt for decrypting the values. This option supports prefixes which influence the master password lookup behaviour: sysenv: means to lookup the OS system environment with the given key. sys: means to lookup a JVM system property. |  | String
-| *camel.component.jasypt.provider-class-name* | The class name of the security provider to be used for obtaining the encryption algorithm. | com.sun.crypto.provider.SunJCE | String
+| *camel.component.jasypt.provider-name* | The name of the security provider to be used for obtaining the encryption algorithm. |  | String
 |===
 // spring-boot-auto-configure options: END
