@@ -18,6 +18,7 @@ package org.apache.camel.component.debezium.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import org.apache.camel.component.debezium.configuration.MongoDbConnectorEmbeddedDebeziumConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -60,7 +61,7 @@ public class DebeziumMongodbComponentConfiguration
      * Allow pre-configured Configurations to be set. The option is a
      * org.apache.camel.component.debezium.configuration.MongoDbConnectorEmbeddedDebeziumConfiguration type.
      */
-    private String configuration;
+    private MongoDbConnectorEmbeddedDebeziumConfiguration configuration;
     /**
      * The Converter class that should be used to serialize and deserialize key
      * data for offsets. The default is JSON converter.
@@ -85,12 +86,12 @@ public class DebeziumMongodbComponentConfiguration
      * process and restoring the offset data to be committed in a future
      * attempt. The default is 5 seconds. The option is a long type.
      */
-    private String offsetCommitTimeoutMs = "5s";
+    private Long offsetCommitTimeoutMs = 5000L;
     /**
      * Interval at which to try committing offsets. The default is 1 minute. The
      * option is a long type.
      */
-    private String offsetFlushIntervalMs = "60s";
+    private Long offsetFlushIntervalMs = 60000L;
     /**
      * The name of the Java class that is responsible for persistence of
      * connector offsets.
@@ -137,13 +138,13 @@ public class DebeziumMongodbComponentConfiguration
      * connection cannot be made or when no primary is available. Defaults to 1
      * second (1000 ms). The option is a long type.
      */
-    private String connectBackoffInitialDelayMs = "1s";
+    private Long connectBackoffInitialDelayMs = 1000L;
     /**
      * The maximum delay when trying to reconnect to a primary after a
      * connection cannot be made or when no primary is available. Defaults to
      * 120 second (120,000 ms). The option is a long type.
      */
-    private String connectBackoffMaxDelayMs = "2m";
+    private Long connectBackoffMaxDelayMs = 120000L;
     /**
      * Maximum number of failed connection attempts to a replica set primary
      * before an exception occurs and task is aborted. Defaults to 16, which
@@ -197,7 +198,7 @@ public class DebeziumMongodbComponentConfiguration
      * disable heartbeat messages. Disabled by default. The option is a int
      * type.
      */
-    private String heartbeatIntervalMs = "0ms";
+    private Integer heartbeatIntervalMs = 0;
     /**
      * The prefix that is used to name heartbeat topics.Defaults to
      * __debezium-heartbeat.
@@ -225,7 +226,7 @@ public class DebeziumMongodbComponentConfiguration
     /**
      * The connection timeout in milliseconds. The option is a int type.
      */
-    private String mongodbConnectTimeoutMs = "10s";
+    private Integer mongodbConnectTimeoutMs = 10000;
     /**
      * The hostname and port pairs (in the form 'host' or 'host:port') of the
      * MongoDB server(s) in the replica set.
@@ -253,15 +254,15 @@ public class DebeziumMongodbComponentConfiguration
      * Frequency in milliseconds to look for new, removed, or changed replica
      * sets. Defaults to 30000 milliseconds. The option is a long type.
      */
-    private String mongodbPollIntervalMs = "30s";
+    private Long mongodbPollIntervalMs = 30000L;
     /**
      * The server selection timeout in milliseconds. The option is a int type.
      */
-    private String mongodbServerSelectionTimeoutMs = "30s";
+    private Integer mongodbServerSelectionTimeoutMs = 30000;
     /**
      * The socket timeout in milliseconds. The option is a int type.
      */
-    private String mongodbSocketTimeoutMs = "0ms";
+    private Integer mongodbSocketTimeoutMs = 0;
     /**
      * Should connector use SSL to connect to MongoDB instances
      */
@@ -279,7 +280,7 @@ public class DebeziumMongodbComponentConfiguration
      * Frequency in milliseconds to wait for new change events to appear after
      * receiving no events. Defaults to 500ms. The option is a long type.
      */
-    private String pollIntervalMs = "500ms";
+    private Long pollIntervalMs = 500L;
     /**
      * Enables transaction metadata extraction together with event counting
      */
@@ -293,7 +294,7 @@ public class DebeziumMongodbComponentConfiguration
      * Time to wait before restarting connector after retriable exception
      * occurs. Defaults to 10000ms. The option is a long type.
      */
-    private String retriableRestartConnectorWaitMs = "10s";
+    private Long retriableRestartConnectorWaitMs = 10000L;
     /**
      * Whether field names will be sanitized to Avro naming conventions
      */
@@ -308,7 +309,7 @@ public class DebeziumMongodbComponentConfiguration
      * The number of milliseconds to delay before a snapshot will begin. The
      * option is a long type.
      */
-    private String snapshotDelayMs = "0ms";
+    private Long snapshotDelayMs = 0L;
     /**
      * The maximum number of records that should be loaded into memory while
      * performing a snapshot
@@ -351,11 +352,12 @@ public class DebeziumMongodbComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public String getConfiguration() {
+    public MongoDbConnectorEmbeddedDebeziumConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(
+            MongoDbConnectorEmbeddedDebeziumConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -383,19 +385,19 @@ public class DebeziumMongodbComponentConfiguration
         this.offsetCommitPolicy = offsetCommitPolicy;
     }
 
-    public String getOffsetCommitTimeoutMs() {
+    public Long getOffsetCommitTimeoutMs() {
         return offsetCommitTimeoutMs;
     }
 
-    public void setOffsetCommitTimeoutMs(String offsetCommitTimeoutMs) {
+    public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
         this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
     }
 
-    public String getOffsetFlushIntervalMs() {
+    public Long getOffsetFlushIntervalMs() {
         return offsetFlushIntervalMs;
     }
 
-    public void setOffsetFlushIntervalMs(String offsetFlushIntervalMs) {
+    public void setOffsetFlushIntervalMs(Long offsetFlushIntervalMs) {
         this.offsetFlushIntervalMs = offsetFlushIntervalMs;
     }
 
@@ -467,20 +469,20 @@ public class DebeziumMongodbComponentConfiguration
         this.collectionIncludeList = collectionIncludeList;
     }
 
-    public String getConnectBackoffInitialDelayMs() {
+    public Long getConnectBackoffInitialDelayMs() {
         return connectBackoffInitialDelayMs;
     }
 
     public void setConnectBackoffInitialDelayMs(
-            String connectBackoffInitialDelayMs) {
+            Long connectBackoffInitialDelayMs) {
         this.connectBackoffInitialDelayMs = connectBackoffInitialDelayMs;
     }
 
-    public String getConnectBackoffMaxDelayMs() {
+    public Long getConnectBackoffMaxDelayMs() {
         return connectBackoffMaxDelayMs;
     }
 
-    public void setConnectBackoffMaxDelayMs(String connectBackoffMaxDelayMs) {
+    public void setConnectBackoffMaxDelayMs(Long connectBackoffMaxDelayMs) {
         this.connectBackoffMaxDelayMs = connectBackoffMaxDelayMs;
     }
 
@@ -550,11 +552,11 @@ public class DebeziumMongodbComponentConfiguration
         this.fieldRenames = fieldRenames;
     }
 
-    public String getHeartbeatIntervalMs() {
+    public Integer getHeartbeatIntervalMs() {
         return heartbeatIntervalMs;
     }
 
-    public void setHeartbeatIntervalMs(String heartbeatIntervalMs) {
+    public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
         this.heartbeatIntervalMs = heartbeatIntervalMs;
     }
 
@@ -598,11 +600,11 @@ public class DebeziumMongodbComponentConfiguration
         this.mongodbAuthsource = mongodbAuthsource;
     }
 
-    public String getMongodbConnectTimeoutMs() {
+    public Integer getMongodbConnectTimeoutMs() {
         return mongodbConnectTimeoutMs;
     }
 
-    public void setMongodbConnectTimeoutMs(String mongodbConnectTimeoutMs) {
+    public void setMongodbConnectTimeoutMs(Integer mongodbConnectTimeoutMs) {
         this.mongodbConnectTimeoutMs = mongodbConnectTimeoutMs;
     }
 
@@ -638,28 +640,28 @@ public class DebeziumMongodbComponentConfiguration
         this.mongodbPassword = mongodbPassword;
     }
 
-    public String getMongodbPollIntervalMs() {
+    public Long getMongodbPollIntervalMs() {
         return mongodbPollIntervalMs;
     }
 
-    public void setMongodbPollIntervalMs(String mongodbPollIntervalMs) {
+    public void setMongodbPollIntervalMs(Long mongodbPollIntervalMs) {
         this.mongodbPollIntervalMs = mongodbPollIntervalMs;
     }
 
-    public String getMongodbServerSelectionTimeoutMs() {
+    public Integer getMongodbServerSelectionTimeoutMs() {
         return mongodbServerSelectionTimeoutMs;
     }
 
     public void setMongodbServerSelectionTimeoutMs(
-            String mongodbServerSelectionTimeoutMs) {
+            Integer mongodbServerSelectionTimeoutMs) {
         this.mongodbServerSelectionTimeoutMs = mongodbServerSelectionTimeoutMs;
     }
 
-    public String getMongodbSocketTimeoutMs() {
+    public Integer getMongodbSocketTimeoutMs() {
         return mongodbSocketTimeoutMs;
     }
 
-    public void setMongodbSocketTimeoutMs(String mongodbSocketTimeoutMs) {
+    public void setMongodbSocketTimeoutMs(Integer mongodbSocketTimeoutMs) {
         this.mongodbSocketTimeoutMs = mongodbSocketTimeoutMs;
     }
 
@@ -688,11 +690,11 @@ public class DebeziumMongodbComponentConfiguration
         this.mongodbUser = mongodbUser;
     }
 
-    public String getPollIntervalMs() {
+    public Long getPollIntervalMs() {
         return pollIntervalMs;
     }
 
-    public void setPollIntervalMs(String pollIntervalMs) {
+    public void setPollIntervalMs(Long pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
     }
 
@@ -712,12 +714,12 @@ public class DebeziumMongodbComponentConfiguration
         this.queryFetchSize = queryFetchSize;
     }
 
-    public String getRetriableRestartConnectorWaitMs() {
+    public Long getRetriableRestartConnectorWaitMs() {
         return retriableRestartConnectorWaitMs;
     }
 
     public void setRetriableRestartConnectorWaitMs(
-            String retriableRestartConnectorWaitMs) {
+            Long retriableRestartConnectorWaitMs) {
         this.retriableRestartConnectorWaitMs = retriableRestartConnectorWaitMs;
     }
 
@@ -737,11 +739,11 @@ public class DebeziumMongodbComponentConfiguration
         this.skippedOperations = skippedOperations;
     }
 
-    public String getSnapshotDelayMs() {
+    public Long getSnapshotDelayMs() {
         return snapshotDelayMs;
     }
 
-    public void setSnapshotDelayMs(String snapshotDelayMs) {
+    public void setSnapshotDelayMs(Long snapshotDelayMs) {
         this.snapshotDelayMs = snapshotDelayMs;
     }
 

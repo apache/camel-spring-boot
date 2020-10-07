@@ -17,6 +17,8 @@
 package org.apache.camel.component.elsql.springboot;
 
 import javax.annotation.Generated;
+import javax.sql.DataSource;
+import com.opengamma.elsql.ElSqlConfig;
 import org.apache.camel.component.elsql.ElSqlDatabaseVendor;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -46,7 +48,7 @@ public class ElsqlComponentConfiguration
      * Sets the DataSource to use to communicate with the database. The option
      * is a javax.sql.DataSource type.
      */
-    private String dataSource;
+    private DataSource dataSource;
     /**
      * The resource file which contains the elsql SQL statements to use. You can
      * specify multiple resources separated by comma. The resources are loaded
@@ -86,7 +88,7 @@ public class ElsqlComponentConfiguration
      * databaseVendor option instead. The option is a
      * com.opengamma.elsql.ElSqlConfig type.
      */
-    private String elSqlConfig;
+    private ElSqlConfig elSqlConfig;
 
     public ElSqlDatabaseVendor getDatabaseVendor() {
         return databaseVendor;
@@ -96,11 +98,11 @@ public class ElsqlComponentConfiguration
         this.databaseVendor = databaseVendor;
     }
 
-    public String getDataSource() {
+    public DataSource getDataSource() {
         return dataSource;
     }
 
-    public void setDataSource(String dataSource) {
+    public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -139,11 +141,11 @@ public class ElsqlComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getElSqlConfig() {
+    public ElSqlConfig getElSqlConfig() {
         return elSqlConfig;
     }
 
-    public void setElSqlConfig(String elSqlConfig) {
+    public void setElSqlConfig(ElSqlConfig elSqlConfig) {
         this.elSqlConfig = elSqlConfig;
     }
 }

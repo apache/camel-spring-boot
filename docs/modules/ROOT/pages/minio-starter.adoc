@@ -29,8 +29,8 @@ The component supports 48 options, which are listed below.
 | *camel.component.minio.auto-create-bucket* | Setting the autocreation of the bucket if bucket name not exist. | true | Boolean
 | *camel.component.minio.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.minio.bypass-governance-mode* | Set this flag if you want to bypassGovernanceMode when deleting a particular object. | false | Boolean
-| *camel.component.minio.configuration* | The component configuration. The option is a org.apache.camel.component.minio.MinioConfiguration type. |  | String
-| *camel.component.minio.custom-http-client* | Set custom HTTP client for authenticated access. The option is a okhttp3.OkHttpClient type. |  | String
+| *camel.component.minio.configuration* | The component configuration. The option is a org.apache.camel.component.minio.MinioConfiguration type. |  | MinioConfiguration
+| *camel.component.minio.custom-http-client* | Set custom HTTP client for authenticated access. The option is a okhttp3.OkHttpClient type. |  | OkHttpClient
 | *camel.component.minio.delete-after-read* | Delete objects from Minio after they have been retrieved. The delete is only performed if the Exchange is committed. If a rollback occurs, the object is not deleted. If this option is false, then the same objects will be retrieve over and over again on the polls. Therefore you need to use the Idempotent Consumer EIP in the route to filter out duplicates. You can filter using the MinioConstants#BUCKET_NAME and MinioConstants#OBJECT_NAME headers, or only the MinioConstants#OBJECT_NAME header. | true | Boolean
 | *camel.component.minio.delete-after-write* | Delete file object after the Minio file has been uploaded. | false | Boolean
 | *camel.component.minio.delimiter* | The delimiter which is used in the ListObjectsRequest to only consume objects we are interested in. |  | String
@@ -48,8 +48,8 @@ The component supports 48 options, which are listed below.
 | *camel.component.minio.match-e-tag* | Set match ETag parameter for get object(s). |  | String
 | *camel.component.minio.max-connections* | Set the maxConnections parameter in the minio client configuration | 60 | Integer
 | *camel.component.minio.max-messages-per-poll* | Gets the maximum number of messages as a limit to poll at each polling. Gets the maximum number of messages as a limit to poll at each polling. The default value is 10. Use 0 or a negative number to set it as unlimited. | 10 | Integer
-| *camel.component.minio.minio-client* | Reference to a Minio Client object in the registry. The option is a io.minio.MinioClient type. |  | String
-| *camel.component.minio.modified-since* | Set modified since parameter for get object(s). The option is a java.time.ZonedDateTime type. |  | String
+| *camel.component.minio.minio-client* | Reference to a Minio Client object in the registry. The option is a io.minio.MinioClient type. |  | MinioClient
+| *camel.component.minio.modified-since* | Set modified since parameter for get object(s). The option is a java.time.ZonedDateTime type. |  | ZonedDateTime
 | *camel.component.minio.move-after-read* | Move objects from bucket to a different bucket after they have been retrieved. To accomplish the operation the destinationBucket option must be set. The copy bucket operation is only performed if the Exchange is committed. If a rollback occurs, the object is not moved. | false | Boolean
 | *camel.component.minio.not-match-e-tag* | Set not match ETag parameter for get object(s). |  | String
 | *camel.component.minio.object-lock* | Set when creating new bucket. | false | Boolean
@@ -64,11 +64,11 @@ The component supports 48 options, which are listed below.
 | *camel.component.minio.region* | The region in which Minio client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1). You'll need to use the name Region.EU_WEST_1.id() |  | String
 | *camel.component.minio.secret-key* | Amazon AWS Access Key Id or Minio Secret Key. If not set camel will connect to service for anonymous access. |  | String
 | *camel.component.minio.secure* | Flag to indicate to use secure connection to minio service or not. | false | Boolean
-| *camel.component.minio.server-side-encryption* | Server-side encryption. The option is a io.minio.ServerSideEncryption type. |  | String
-| *camel.component.minio.server-side-encryption-customer-key* | Server-side encryption for source object while copy/move objects. The option is a io.minio.ServerSideEncryptionCustomerKey type. |  | String
+| *camel.component.minio.server-side-encryption* | Server-side encryption. The option is a io.minio.ServerSideEncryption type. |  | ServerSideEncryption
+| *camel.component.minio.server-side-encryption-customer-key* | Server-side encryption for source object while copy/move objects. The option is a io.minio.ServerSideEncryptionCustomerKey type. |  | ServerSideEncryptionCustomerKey
 | *camel.component.minio.start-after* | list objects in bucket after this object name. |  | String
 | *camel.component.minio.storage-class* | The storage class to set in the request. |  | String
-| *camel.component.minio.un-modified-since* | Set un modified since parameter for get object(s). The option is a java.time.ZonedDateTime type. |  | String
+| *camel.component.minio.un-modified-since* | Set un modified since parameter for get object(s). The option is a java.time.ZonedDateTime type. |  | ZonedDateTime
 | *camel.component.minio.use-version1* | when true, version 1 of REST API is used. | false | Boolean
 | *camel.component.minio.version-id* | Set specific version_ID of a object when deleting the object. |  | String
 | *camel.component.minio.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean

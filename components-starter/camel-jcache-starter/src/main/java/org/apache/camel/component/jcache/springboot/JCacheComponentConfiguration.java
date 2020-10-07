@@ -18,6 +18,7 @@ package org.apache.camel.component.jcache.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import javax.cache.configuration.Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -42,7 +43,7 @@ public class JCacheComponentConfiguration
      * A Configuration for the Cache. The option is a
      * javax.cache.configuration.Configuration type.
      */
-    private String cacheConfiguration;
+    private Configuration cacheConfiguration;
     /**
      * Properties to configure jcache
      */
@@ -87,11 +88,11 @@ public class JCacheComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getCacheConfiguration() {
+    public Configuration getCacheConfiguration() {
         return cacheConfiguration;
     }
 
-    public void setCacheConfiguration(String cacheConfiguration) {
+    public void setCacheConfiguration(Configuration cacheConfiguration) {
         this.cacheConfiguration = cacheConfiguration;
     }
 

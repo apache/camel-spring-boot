@@ -19,6 +19,8 @@ package org.apache.camel.component.quartz.springboot;
 import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -88,12 +90,12 @@ public class QuartzComponentConfiguration
      * To use the custom configured Quartz scheduler, instead of creating a new
      * Scheduler. The option is a org.quartz.Scheduler type.
      */
-    private String scheduler;
+    private Scheduler scheduler;
     /**
      * To use the custom SchedulerFactory which is used to create the Scheduler.
      * The option is a org.quartz.SchedulerFactory type.
      */
-    private String schedulerFactory;
+    private SchedulerFactory schedulerFactory;
     /**
      * Whether or not the scheduler should be auto started. This options is
      * default true
@@ -178,19 +180,19 @@ public class QuartzComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getScheduler() {
+    public Scheduler getScheduler() {
         return scheduler;
     }
 
-    public void setScheduler(String scheduler) {
+    public void setScheduler(Scheduler scheduler) {
         this.scheduler = scheduler;
     }
 
-    public String getSchedulerFactory() {
+    public SchedulerFactory getSchedulerFactory() {
         return schedulerFactory;
     }
 
-    public void setSchedulerFactory(String schedulerFactory) {
+    public void setSchedulerFactory(SchedulerFactory schedulerFactory) {
         this.schedulerFactory = schedulerFactory;
     }
 

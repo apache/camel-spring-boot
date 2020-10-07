@@ -17,6 +17,7 @@
 package org.apache.camel.component.resteasy.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -81,7 +82,7 @@ public class ResteasyComponentConfiguration
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -126,11 +127,12 @@ public class ResteasyComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 }

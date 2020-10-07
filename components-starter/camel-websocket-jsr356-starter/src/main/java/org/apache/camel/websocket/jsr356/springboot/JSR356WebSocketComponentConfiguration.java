@@ -18,6 +18,7 @@ package org.apache.camel.websocket.jsr356.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.websocket.jsr356.ServerEndpointDeploymentStrategy;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -69,7 +70,7 @@ public class JSR356WebSocketComponentConfiguration
      * The option is a
      * org.apache.camel.websocket.jsr356.ServerEndpointDeploymentStrategy type.
      */
-    private String serverEndpointDeploymentStrategy;
+    private ServerEndpointDeploymentStrategy serverEndpointDeploymentStrategy;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -98,12 +99,12 @@ public class JSR356WebSocketComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getServerEndpointDeploymentStrategy() {
+    public ServerEndpointDeploymentStrategy getServerEndpointDeploymentStrategy() {
         return serverEndpointDeploymentStrategy;
     }
 
     public void setServerEndpointDeploymentStrategy(
-            String serverEndpointDeploymentStrategy) {
+            ServerEndpointDeploymentStrategy serverEndpointDeploymentStrategy) {
         this.serverEndpointDeploymentStrategy = serverEndpointDeploymentStrategy;
     }
 }

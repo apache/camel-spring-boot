@@ -29,8 +29,8 @@ The component supports 29 options, which are listed below.
 | *camel.component.mina.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.mina.cached-address* | Whether to create the InetAddress once and reuse. Setting this to false allows to pickup DNS changes in the network. | true | Boolean
 | *camel.component.mina.client-mode* | If the clientMode is true, mina consumer will connect the address as a TCP client. | false | Boolean
-| *camel.component.mina.codec* | To use a custom minda codec implementation. The option is a org.apache.mina.filter.codec.ProtocolCodecFactory type. |  | String
-| *camel.component.mina.configuration* | To use the shared mina configuration. The option is a org.apache.camel.component.mina.MinaConfiguration type. |  | String
+| *camel.component.mina.codec* | To use a custom minda codec implementation. The option is a org.apache.mina.filter.codec.ProtocolCodecFactory type. |  | ProtocolCodecFactory
+| *camel.component.mina.configuration* | To use the shared mina configuration. The option is a org.apache.camel.component.mina.MinaConfiguration type. |  | MinaConfiguration
 | *camel.component.mina.decoder-max-line-length* | To set the textline protocol decoder max line length. By default the default value of Mina itself is used which are 1024. | 1024 | Integer
 | *camel.component.mina.disconnect* | Whether or not to disconnect(close) from Mina session right after use. Can be used for both consumer and producer. | false | Boolean
 | *camel.component.mina.disconnect-on-no-reply* | If sync is enabled then this option dictates MinaConsumer if it should disconnect where there is no reply to send back. | true | Boolean
@@ -44,7 +44,7 @@ The component supports 29 options, which are listed below.
 | *camel.component.mina.mina-logger* | You can enable the Apache MINA logging filter. Apache MINA uses slf4j logging at INFO level to log all input and output. | false | Boolean
 | *camel.component.mina.no-reply-log-level* | If sync is enabled this option dictates MinaConsumer which logging level to use when logging a there is no reply to send back. |  | LoggingLevel
 | *camel.component.mina.ordered-thread-pool-executor* | Whether to use ordered thread pool, to ensure events are processed orderly on the same channel. | true | Boolean
-| *camel.component.mina.ssl-context-parameters* | To configure SSL security. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
+| *camel.component.mina.ssl-context-parameters* | To configure SSL security. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
 | *camel.component.mina.sync* | Setting to set endpoint as one-way or request-response. | true | Boolean
 | *camel.component.mina.textline* | Only used for TCP. If no codec is specified, you can use this flag to indicate a text line based codec; if not specified or the value is false, then Object Serialization is assumed over TCP. | false | Boolean
 | *camel.component.mina.textline-delimiter* | Only used for TCP and if textline=true. Sets the text line delimiter to use. If none provided, Camel will use DEFAULT. This delimiter is used to mark the end of text. |  | MinaTextLineDelimiter

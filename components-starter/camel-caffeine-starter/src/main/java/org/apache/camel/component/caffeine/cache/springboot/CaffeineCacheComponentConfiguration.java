@@ -17,6 +17,10 @@
 package org.apache.camel.component.caffeine.cache.springboot;
 
 import javax.annotation.Generated;
+import com.github.benmanes.caffeine.cache.CacheLoader;
+import com.github.benmanes.caffeine.cache.RemovalListener;
+import com.github.benmanes.caffeine.cache.stats.StatsCounter;
+import org.apache.camel.component.caffeine.CaffeineConfiguration;
 import org.apache.camel.component.caffeine.EvictionType;
 import org.apache.camel.component.caffeine.cache.CaffeineCacheComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -48,7 +52,7 @@ public class CaffeineCacheComponentConfiguration
      * To configure a CacheLoader in case of a LoadCache use. The option is a
      * com.github.benmanes.caffeine.cache.CacheLoader type.
      */
-    private String cacheLoader;
+    private CacheLoader cacheLoader;
     /**
      * Configure if a cache need to be created if it does exist or can't be
      * pre-configured.
@@ -77,7 +81,7 @@ public class CaffeineCacheComponentConfiguration
      * header, then the key from the header takes precedence. The option is a
      * java.lang.Object type.
      */
-    private String key;
+    private Object key;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -97,12 +101,12 @@ public class CaffeineCacheComponentConfiguration
      * Set a specific removal Listener for the cache. The option is a
      * com.github.benmanes.caffeine.cache.RemovalListener type.
      */
-    private String removalListener;
+    private RemovalListener removalListener;
     /**
      * Set a specific Stats Counter for the cache stats. The option is a
      * com.github.benmanes.caffeine.cache.stats.StatsCounter type.
      */
-    private String statsCounter;
+    private StatsCounter statsCounter;
     /**
      * To enable stats on the cache
      */
@@ -117,7 +121,7 @@ public class CaffeineCacheComponentConfiguration
      * Sets the global component configuration. The option is a
      * org.apache.camel.component.caffeine.CaffeineConfiguration type.
      */
-    private String configuration;
+    private CaffeineConfiguration configuration;
     /**
      * The cache key type, default java.lang.Object
      */
@@ -135,11 +139,11 @@ public class CaffeineCacheComponentConfiguration
         this.action = action;
     }
 
-    public String getCacheLoader() {
+    public CacheLoader getCacheLoader() {
         return cacheLoader;
     }
 
-    public void setCacheLoader(String cacheLoader) {
+    public void setCacheLoader(CacheLoader cacheLoader) {
         this.cacheLoader = cacheLoader;
     }
 
@@ -183,11 +187,11 @@ public class CaffeineCacheComponentConfiguration
         this.initialCapacity = initialCapacity;
     }
 
-    public String getKey() {
+    public Object getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(Object key) {
         this.key = key;
     }
 
@@ -207,19 +211,19 @@ public class CaffeineCacheComponentConfiguration
         this.maximumSize = maximumSize;
     }
 
-    public String getRemovalListener() {
+    public RemovalListener getRemovalListener() {
         return removalListener;
     }
 
-    public void setRemovalListener(String removalListener) {
+    public void setRemovalListener(RemovalListener removalListener) {
         this.removalListener = removalListener;
     }
 
-    public String getStatsCounter() {
+    public StatsCounter getStatsCounter() {
         return statsCounter;
     }
 
-    public void setStatsCounter(String statsCounter) {
+    public void setStatsCounter(StatsCounter statsCounter) {
         this.statsCounter = statsCounter;
     }
 
@@ -242,11 +246,11 @@ public class CaffeineCacheComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public CaffeineConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(CaffeineConfiguration configuration) {
         this.configuration = configuration;
     }
 

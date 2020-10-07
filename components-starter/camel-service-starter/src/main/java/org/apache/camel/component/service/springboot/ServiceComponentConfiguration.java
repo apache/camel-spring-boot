@@ -17,6 +17,8 @@
 package org.apache.camel.component.service.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.cloud.ServiceRegistry;
+import org.apache.camel.cloud.ServiceRegistry.Selector;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -57,12 +59,12 @@ public class ServiceComponentConfiguration
      * Inject the service to use. The option is a
      * org.apache.camel.cloud.ServiceRegistry type.
      */
-    private String service;
+    private ServiceRegistry service;
     /**
      * Inject the service selector used to lookup the ServiceRegistry to use.
      * The option is a org.apache.camel.cloud.ServiceRegistry.Selector type.
      */
-    private String serviceSelector;
+    private Selector serviceSelector;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -83,19 +85,19 @@ public class ServiceComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getService() {
+    public ServiceRegistry getService() {
         return service;
     }
 
-    public void setService(String service) {
+    public void setService(ServiceRegistry service) {
         this.service = service;
     }
 
-    public String getServiceSelector() {
+    public Selector getServiceSelector() {
         return serviceSelector;
     }
 
-    public void setServiceSelector(String serviceSelector) {
+    public void setServiceSelector(Selector serviceSelector) {
         this.serviceSelector = serviceSelector;
     }
 }

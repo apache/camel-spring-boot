@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.ec2.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.ec2.AWS2EC2Component;
+import org.apache.camel.component.aws2.ec2.AWS2EC2Configuration;
 import org.apache.camel.component.aws2.ec2.AWS2EC2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.ec2.Ec2Client;
 
 /**
  * Manage AWS EC2 instances using AWS SDK version 2.x.
@@ -54,12 +56,12 @@ public class AWS2EC2ComponentConfiguration
      * To use a existing configured AmazonEC2Client as client. The option is a
      * software.amazon.awssdk.services.ec2.Ec2Client type.
      */
-    private String amazonEc2Client;
+    private Ec2Client amazonEc2Client;
     /**
      * The component configuration. The option is a
      * org.apache.camel.component.aws2.ec2.AWS2EC2Configuration type.
      */
-    private String configuration;
+    private AWS2EC2Configuration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -131,19 +133,19 @@ public class AWS2EC2ComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public String getAmazonEc2Client() {
+    public Ec2Client getAmazonEc2Client() {
         return amazonEc2Client;
     }
 
-    public void setAmazonEc2Client(String amazonEc2Client) {
+    public void setAmazonEc2Client(Ec2Client amazonEc2Client) {
         this.amazonEc2Client = amazonEc2Client;
     }
 
-    public String getConfiguration() {
+    public AWS2EC2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(AWS2EC2Configuration configuration) {
         this.configuration = configuration;
     }
 

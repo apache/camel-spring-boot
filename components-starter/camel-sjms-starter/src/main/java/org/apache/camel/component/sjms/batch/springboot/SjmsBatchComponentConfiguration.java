@@ -17,6 +17,8 @@
 package org.apache.camel.component.sjms.batch.springboot;
 
 import javax.annotation.Generated;
+import javax.jms.ConnectionFactory;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -70,7 +72,7 @@ public class SjmsBatchComponentConfiguration
      * A ConnectionFactory is required to enable the SjmsBatchComponent. The
      * option is a javax.jms.ConnectionFactory type.
      */
-    private String connectionFactory;
+    private ConnectionFactory connectionFactory;
     /**
      * Specifies the interval between recovery attempts, i.e. when a connection
      * is being refreshed, in milliseconds. The default is 5000 ms, that is, 5
@@ -82,7 +84,7 @@ public class SjmsBatchComponentConfiguration
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -111,11 +113,11 @@ public class SjmsBatchComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConnectionFactory() {
+    public ConnectionFactory getConnectionFactory() {
         return connectionFactory;
     }
 
-    public void setConnectionFactory(String connectionFactory) {
+    public void setConnectionFactory(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
@@ -127,11 +129,12 @@ public class SjmsBatchComponentConfiguration
         this.recoveryInterval = recoveryInterval;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 }

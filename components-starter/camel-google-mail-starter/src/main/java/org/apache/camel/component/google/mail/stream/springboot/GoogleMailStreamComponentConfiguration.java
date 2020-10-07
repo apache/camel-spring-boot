@@ -17,6 +17,8 @@
 package org.apache.camel.component.google.mail.stream.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.google.mail.GoogleMailClientFactory;
+import org.apache.camel.component.google.mail.stream.GoogleMailStreamConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -80,12 +82,12 @@ public class GoogleMailStreamComponentConfiguration
      * The client Factory. The option is a
      * org.apache.camel.component.google.mail.GoogleMailClientFactory type.
      */
-    private String clientFactory;
+    private GoogleMailClientFactory clientFactory;
     /**
      * The configuration. The option is a
      * org.apache.camel.component.google.mail.stream.GoogleMailStreamConfiguration type.
      */
-    private String configuration;
+    private GoogleMailStreamConfiguration configuration;
     /**
      * OAuth 2 access token. This typically expires after an hour so
      * refreshToken is recommended for long term usage.
@@ -169,19 +171,19 @@ public class GoogleMailStreamComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getClientFactory() {
+    public GoogleMailClientFactory getClientFactory() {
         return clientFactory;
     }
 
-    public void setClientFactory(String clientFactory) {
+    public void setClientFactory(GoogleMailClientFactory clientFactory) {
         this.clientFactory = clientFactory;
     }
 
-    public String getConfiguration() {
+    public GoogleMailStreamConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(GoogleMailStreamConfiguration configuration) {
         this.configuration = configuration;
     }
 

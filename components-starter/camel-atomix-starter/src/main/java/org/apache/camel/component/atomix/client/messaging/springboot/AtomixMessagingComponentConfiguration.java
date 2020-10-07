@@ -20,11 +20,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import javax.annotation.Generated;
+import io.atomix.Atomix;
 import io.atomix.catalyst.transport.Address;
 import io.atomix.resource.ReadConsistency;
 import org.apache.camel.component.atomix.client.messaging.AtomixMessaging.Action;
 import org.apache.camel.component.atomix.client.messaging.AtomixMessaging.BroadcastType;
 import org.apache.camel.component.atomix.client.messaging.AtomixMessagingComponent;
+import org.apache.camel.component.atomix.client.messaging.AtomixMessagingConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -48,7 +50,7 @@ public class AtomixMessagingComponentConfiguration
     /**
      * The Atomix instance to use. The option is a io.atomix.Atomix type.
      */
-    private String atomix;
+    private Atomix atomix;
     /**
      * The broadcast type.
      */
@@ -61,7 +63,7 @@ public class AtomixMessagingComponentConfiguration
      * The shared component configuration. The option is a
      * org.apache.camel.component.atomix.client.messaging.AtomixMessagingConfiguration type.
      */
-    private String configuration;
+    private AtomixMessagingConfiguration configuration;
     /**
      * The path to the AtomixClient configuration
      */
@@ -116,12 +118,12 @@ public class AtomixMessagingComponentConfiguration
      * The cluster wide default resource configuration. The option is a
      * java.util.Properties type.
      */
-    private String defaultResourceConfig;
+    private Properties defaultResourceConfig;
     /**
      * The local default resource options. The option is a java.util.Properties
      * type.
      */
-    private String defaultResourceOptions;
+    private Properties defaultResourceOptions;
     /**
      * Sets if the local member should join groups as PersistentMember or not.
      * If set to ephemeral the local member will receive an auto generated ID
@@ -141,11 +143,11 @@ public class AtomixMessagingComponentConfiguration
      */
     private Map<String, Properties> resourceOptions;
 
-    public String getAtomix() {
+    public Atomix getAtomix() {
         return atomix;
     }
 
-    public void setAtomix(String atomix) {
+    public void setAtomix(Atomix atomix) {
         this.atomix = atomix;
     }
 
@@ -165,11 +167,11 @@ public class AtomixMessagingComponentConfiguration
         this.channelName = channelName;
     }
 
-    public String getConfiguration() {
+    public AtomixMessagingConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(AtomixMessagingConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -248,19 +250,19 @@ public class AtomixMessagingComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getDefaultResourceConfig() {
+    public Properties getDefaultResourceConfig() {
         return defaultResourceConfig;
     }
 
-    public void setDefaultResourceConfig(String defaultResourceConfig) {
+    public void setDefaultResourceConfig(Properties defaultResourceConfig) {
         this.defaultResourceConfig = defaultResourceConfig;
     }
 
-    public String getDefaultResourceOptions() {
+    public Properties getDefaultResourceOptions() {
         return defaultResourceOptions;
     }
 
-    public void setDefaultResourceOptions(String defaultResourceOptions) {
+    public void setDefaultResourceOptions(Properties defaultResourceOptions) {
         this.defaultResourceOptions = defaultResourceOptions;
     }
 

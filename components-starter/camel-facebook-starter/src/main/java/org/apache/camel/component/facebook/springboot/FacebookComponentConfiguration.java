@@ -17,6 +17,7 @@
 package org.apache.camel.component.facebook.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.facebook.config.FacebookConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -135,7 +136,7 @@ public class FacebookComponentConfiguration
      * To use the shared configuration. The option is a
      * org.apache.camel.component.facebook.config.FacebookConfiguration type.
      */
-    private String configuration;
+    private FacebookConfiguration configuration;
     /**
      * HTTP proxy server host name
      */
@@ -342,11 +343,11 @@ public class FacebookComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public FacebookConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(FacebookConfiguration configuration) {
         this.configuration = configuration;
     }
 

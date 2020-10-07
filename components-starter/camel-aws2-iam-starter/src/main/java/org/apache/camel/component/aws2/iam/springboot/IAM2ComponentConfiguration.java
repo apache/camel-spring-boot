@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.iam.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.iam.IAM2Component;
+import org.apache.camel.component.aws2.iam.IAM2Configuration;
 import org.apache.camel.component.aws2.iam.IAM2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.iam.IamClient;
 
 /**
  * Manage AWS IAM instances using AWS SDK version 2.x.
@@ -50,12 +52,12 @@ public class IAM2ComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.iam.IAM2Configuration type.
      */
-    private String configuration;
+    private IAM2Configuration configuration;
     /**
      * To use a existing configured AWS IAM as client. The option is a
      * software.amazon.awssdk.services.iam.IamClient type.
      */
-    private String iamClient;
+    private IamClient iamClient;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -120,19 +122,19 @@ public class IAM2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public IAM2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(IAM2Configuration configuration) {
         this.configuration = configuration;
     }
 
-    public String getIamClient() {
+    public IamClient getIamClient() {
         return iamClient;
     }
 
-    public void setIamClient(String iamClient) {
+    public void setIamClient(IamClient iamClient) {
         this.iamClient = iamClient;
     }
 

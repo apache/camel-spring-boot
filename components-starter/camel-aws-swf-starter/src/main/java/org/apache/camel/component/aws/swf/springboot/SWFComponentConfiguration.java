@@ -18,6 +18,13 @@ package org.apache.camel.component.aws.swf.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflow;
+import com.amazonaws.services.simpleworkflow.flow.ActivitySchedulingOptions;
+import com.amazonaws.services.simpleworkflow.flow.DataConverter;
+import com.amazonaws.services.simpleworkflow.flow.WorkflowTypeRegistrationOptions;
+import com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeExecutionOptions;
+import com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeRegistrationOptions;
+import org.apache.camel.component.aws.swf.SWFConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -42,18 +49,18 @@ public class SWFComponentConfiguration
      * To use the given AmazonSimpleWorkflowClient as client. The option is a
      * com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflow type.
      */
-    private String amazonSWClient;
+    private AmazonSimpleWorkflow amazonSWClient;
     /**
      * The component configuration. The option is a
      * org.apache.camel.component.aws.swf.SWFConfiguration type.
      */
-    private String configuration;
+    private SWFConfiguration configuration;
     /**
      * An instance of com.amazonaws.services.simpleworkflow.flow.DataConverter
      * to use for serializing/deserializing the data. The option is a
      * com.amazonaws.services.simpleworkflow.flow.DataConverter type.
      */
-    private String dataConverter;
+    private DataConverter dataConverter;
     /**
      * The workflow domain to use.
      */
@@ -101,7 +108,7 @@ public class SWFComponentConfiguration
      * com.amazonaws.services.simpleworkflow.flow.ActivitySchedulingOptions
      * type.
      */
-    private String activitySchedulingOptions;
+    private ActivitySchedulingOptions activitySchedulingOptions;
     /**
      * Maximum number of threads in work pool for activity.
      */
@@ -110,12 +117,12 @@ public class SWFComponentConfiguration
      * Activity execution options. The option is a
      * com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeExecutionOptions type.
      */
-    private String activityTypeExecutionOptions;
+    private ActivityTypeExecutionOptions activityTypeExecutionOptions;
     /**
      * Activity registration options. The option is a
      * com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeRegistrationOptions type.
      */
-    private String activityTypeRegistrationOptions;
+    private ActivityTypeRegistrationOptions activityTypeRegistrationOptions;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -183,29 +190,29 @@ public class SWFComponentConfiguration
      * Workflow registration options. The option is a
      * com.amazonaws.services.simpleworkflow.flow.WorkflowTypeRegistrationOptions type.
      */
-    private String workflowTypeRegistrationOptions;
+    private WorkflowTypeRegistrationOptions workflowTypeRegistrationOptions;
 
-    public String getAmazonSWClient() {
+    public AmazonSimpleWorkflow getAmazonSWClient() {
         return amazonSWClient;
     }
 
-    public void setAmazonSWClient(String amazonSWClient) {
+    public void setAmazonSWClient(AmazonSimpleWorkflow amazonSWClient) {
         this.amazonSWClient = amazonSWClient;
     }
 
-    public String getConfiguration() {
+    public SWFConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(SWFConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getDataConverter() {
+    public DataConverter getDataConverter() {
         return dataConverter;
     }
 
-    public void setDataConverter(String dataConverter) {
+    public void setDataConverter(DataConverter dataConverter) {
         this.dataConverter = dataConverter;
     }
 
@@ -265,11 +272,12 @@ public class SWFComponentConfiguration
         this.activityList = activityList;
     }
 
-    public String getActivitySchedulingOptions() {
+    public ActivitySchedulingOptions getActivitySchedulingOptions() {
         return activitySchedulingOptions;
     }
 
-    public void setActivitySchedulingOptions(String activitySchedulingOptions) {
+    public void setActivitySchedulingOptions(
+            ActivitySchedulingOptions activitySchedulingOptions) {
         this.activitySchedulingOptions = activitySchedulingOptions;
     }
 
@@ -281,21 +289,21 @@ public class SWFComponentConfiguration
         this.activityThreadPoolSize = activityThreadPoolSize;
     }
 
-    public String getActivityTypeExecutionOptions() {
+    public ActivityTypeExecutionOptions getActivityTypeExecutionOptions() {
         return activityTypeExecutionOptions;
     }
 
     public void setActivityTypeExecutionOptions(
-            String activityTypeExecutionOptions) {
+            ActivityTypeExecutionOptions activityTypeExecutionOptions) {
         this.activityTypeExecutionOptions = activityTypeExecutionOptions;
     }
 
-    public String getActivityTypeRegistrationOptions() {
+    public ActivityTypeRegistrationOptions getActivityTypeRegistrationOptions() {
         return activityTypeRegistrationOptions;
     }
 
     public void setActivityTypeRegistrationOptions(
-            String activityTypeRegistrationOptions) {
+            ActivityTypeRegistrationOptions activityTypeRegistrationOptions) {
         this.activityTypeRegistrationOptions = activityTypeRegistrationOptions;
     }
 
@@ -425,12 +433,12 @@ public class SWFComponentConfiguration
         this.workflowList = workflowList;
     }
 
-    public String getWorkflowTypeRegistrationOptions() {
+    public WorkflowTypeRegistrationOptions getWorkflowTypeRegistrationOptions() {
         return workflowTypeRegistrationOptions;
     }
 
     public void setWorkflowTypeRegistrationOptions(
-            String workflowTypeRegistrationOptions) {
+            WorkflowTypeRegistrationOptions workflowTypeRegistrationOptions) {
         this.workflowTypeRegistrationOptions = workflowTypeRegistrationOptions;
     }
 }

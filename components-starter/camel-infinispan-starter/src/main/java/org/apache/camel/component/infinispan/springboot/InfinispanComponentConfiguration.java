@@ -17,10 +17,15 @@
 package org.apache.camel.component.infinispan.springboot;
 
 import java.util.Map;
+import java.util.function.BiFunction;
 import javax.annotation.Generated;
 import org.apache.camel.component.infinispan.InfinispanComponent;
+import org.apache.camel.component.infinispan.InfinispanConfiguration;
+import org.apache.camel.component.infinispan.InfinispanCustomListener;
 import org.apache.camel.component.infinispan.InfinispanOperation;
+import org.apache.camel.component.infinispan.InfinispanQueryBuilder;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.infinispan.commons.api.BasicCacheContainer;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -44,7 +49,7 @@ public class InfinispanComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.infinispan.InfinispanConfiguration type.
      */
-    private String configuration;
+    private InfinispanConfiguration configuration;
     /**
      * Specifies the host of the cache on Infinispan instance
      */
@@ -53,7 +58,7 @@ public class InfinispanComponentConfiguration
      * Specifies the query builder. The option is a
      * org.apache.camel.component.infinispan.InfinispanQueryBuilder type.
      */
-    private String queryBuilder;
+    private InfinispanQueryBuilder queryBuilder;
     /**
      * Define if we are connecting to a secured Infinispan instance
      */
@@ -80,7 +85,7 @@ public class InfinispanComponentConfiguration
      * Returns the custom listener in use, if provided. The option is a
      * org.apache.camel.component.infinispan.InfinispanCustomListener type.
      */
-    private String customListener;
+    private InfinispanCustomListener customListener;
     /**
      * Specifies the set of event types to register by the consumer. Multiple
      * event can be separated by comma. The possible event types are:
@@ -99,12 +104,12 @@ public class InfinispanComponentConfiguration
      * Set a specific default value for some producer operations. The option is
      * a java.lang.Object type.
      */
-    private String defaultValue;
+    private Object defaultValue;
     /**
      * Set a specific key for producer operations. The option is a
      * java.lang.Object type.
      */
-    private String key;
+    private Object key;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -120,7 +125,7 @@ public class InfinispanComponentConfiguration
      * Set a specific old value for some producer operations. The option is a
      * java.lang.Object type.
      */
-    private String oldValue;
+    private Object oldValue;
     /**
      * The operation to perform.
      */
@@ -129,7 +134,7 @@ public class InfinispanComponentConfiguration
      * Set a specific value for producer operations. The option is a
      * java.lang.Object type.
      */
-    private String value;
+    private Object value;
     /**
      * Define the password to access the infinispan instance
      */
@@ -160,7 +165,7 @@ public class InfinispanComponentConfiguration
      * Specifies the cache Container to connect. The option is a
      * org.infinispan.commons.api.BasicCacheContainer type.
      */
-    private String cacheContainer;
+    private BasicCacheContainer cacheContainer;
     /**
      * The CacheContainer configuration. Uses if the cacheContainer is not
      * defined. Must be the following types:
@@ -169,7 +174,7 @@ public class InfinispanComponentConfiguration
      * org.infinispan.configuration.cache.Configuration - for embedded cache
      * interaction configuration;. The option is a java.lang.Object type.
      */
-    private String cacheContainerConfiguration;
+    private Object cacheContainerConfiguration;
     /**
      * Implementation specific properties for the CacheManager
      */
@@ -187,7 +192,7 @@ public class InfinispanComponentConfiguration
      * Set a specific remappingFunction to use in a compute operation. The
      * option is a java.util.function.BiFunction type.
      */
-    private String remappingFunction;
+    private BiFunction remappingFunction;
     /**
      * Store the operation result in a header instead of the message body. By
      * default, resultHeader == null and the query result is stored in the
@@ -198,13 +203,13 @@ public class InfinispanComponentConfiguration
      * CamelInfinispanOperationResultHeader. The option is a java.lang.Object
      * type.
      */
-    private String resultHeader;
+    private Object resultHeader;
 
-    public String getConfiguration() {
+    public InfinispanConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(InfinispanConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -216,11 +221,11 @@ public class InfinispanComponentConfiguration
         this.hosts = hosts;
     }
 
-    public String getQueryBuilder() {
+    public InfinispanQueryBuilder getQueryBuilder() {
         return queryBuilder;
     }
 
-    public void setQueryBuilder(String queryBuilder) {
+    public void setQueryBuilder(InfinispanQueryBuilder queryBuilder) {
         this.queryBuilder = queryBuilder;
     }
 
@@ -259,11 +264,11 @@ public class InfinispanComponentConfiguration
         this.command = command;
     }
 
-    public String getCustomListener() {
+    public InfinispanCustomListener getCustomListener() {
         return customListener;
     }
 
-    public void setCustomListener(String customListener) {
+    public void setCustomListener(InfinispanCustomListener customListener) {
         this.customListener = customListener;
     }
 
@@ -283,19 +288,19 @@ public class InfinispanComponentConfiguration
         this.sync = sync;
     }
 
-    public String getDefaultValue() {
+    public Object getDefaultValue() {
         return defaultValue;
     }
 
-    public void setDefaultValue(String defaultValue) {
+    public void setDefaultValue(Object defaultValue) {
         this.defaultValue = defaultValue;
     }
 
-    public String getKey() {
+    public Object getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(Object key) {
         this.key = key;
     }
 
@@ -307,11 +312,11 @@ public class InfinispanComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public String getOldValue() {
+    public Object getOldValue() {
         return oldValue;
     }
 
-    public void setOldValue(String oldValue) {
+    public void setOldValue(Object oldValue) {
         this.oldValue = oldValue;
     }
 
@@ -323,11 +328,11 @@ public class InfinispanComponentConfiguration
         this.operation = operation;
     }
 
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Object value) {
         this.value = value;
     }
 
@@ -382,20 +387,20 @@ public class InfinispanComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getCacheContainer() {
+    public BasicCacheContainer getCacheContainer() {
         return cacheContainer;
     }
 
-    public void setCacheContainer(String cacheContainer) {
+    public void setCacheContainer(BasicCacheContainer cacheContainer) {
         this.cacheContainer = cacheContainer;
     }
 
-    public String getCacheContainerConfiguration() {
+    public Object getCacheContainerConfiguration() {
         return cacheContainerConfiguration;
     }
 
     public void setCacheContainerConfiguration(
-            String cacheContainerConfiguration) {
+            Object cacheContainerConfiguration) {
         this.cacheContainerConfiguration = cacheContainerConfiguration;
     }
 
@@ -424,19 +429,19 @@ public class InfinispanComponentConfiguration
         this.flags = flags;
     }
 
-    public String getRemappingFunction() {
+    public BiFunction getRemappingFunction() {
         return remappingFunction;
     }
 
-    public void setRemappingFunction(String remappingFunction) {
+    public void setRemappingFunction(BiFunction remappingFunction) {
         this.remappingFunction = remappingFunction;
     }
 
-    public String getResultHeader() {
+    public Object getResultHeader() {
         return resultHeader;
     }
 
-    public void setResultHeader(String resultHeader) {
+    public void setResultHeader(Object resultHeader) {
         this.resultHeader = resultHeader;
     }
 }

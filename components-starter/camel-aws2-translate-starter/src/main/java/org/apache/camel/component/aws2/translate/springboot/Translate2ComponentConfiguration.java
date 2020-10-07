@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.translate.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.translate.Translate2Component;
+import org.apache.camel.component.aws2.translate.Translate2Configuration;
 import org.apache.camel.component.aws2.translate.Translate2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.translate.TranslateClient;
 
 /**
  * Translate texts using AWS Translate and AWS SDK version 2.x.
@@ -54,7 +56,7 @@ public class Translate2ComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.translate.Translate2Configuration type.
      */
-    private String configuration;
+    private Translate2Configuration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -104,7 +106,7 @@ public class Translate2ComponentConfiguration
      * To use a existing configured AWS Translate as client. The option is a
      * software.amazon.awssdk.services.translate.TranslateClient type.
      */
-    private String translateClient;
+    private TranslateClient translateClient;
     /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
@@ -140,11 +142,11 @@ public class Translate2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public Translate2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Translate2Configuration configuration) {
         this.configuration = configuration;
     }
 
@@ -220,11 +222,11 @@ public class Translate2ComponentConfiguration
         this.targetLanguage = targetLanguage;
     }
 
-    public String getTranslateClient() {
+    public TranslateClient getTranslateClient() {
         return translateClient;
     }
 
-    public void setTranslateClient(String translateClient) {
+    public void setTranslateClient(TranslateClient translateClient) {
         this.translateClient = translateClient;
     }
 

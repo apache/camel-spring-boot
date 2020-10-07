@@ -18,6 +18,10 @@ package org.apache.camel.component.xj.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import javax.xml.transform.URIResolver;
+import net.sf.saxon.Configuration;
+import org.apache.camel.component.xslt.TransformerFactoryConfigurationStrategy;
+import org.apache.camel.component.xslt.XsltUriResolverFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -67,7 +71,7 @@ public class XJComponentConfiguration
      * To use a custom Saxon configuration. The option is a
      * net.sf.saxon.Configuration type.
      */
-    private String saxonConfiguration;
+    private Configuration saxonConfiguration;
     /**
      * To set custom Saxon configuration properties
      */
@@ -89,19 +93,19 @@ public class XJComponentConfiguration
      * org.apache.camel.component.xslt.TransformerFactoryConfigurationStrategy
      * type.
      */
-    private String transformerFactoryConfigurationStrategy;
+    private TransformerFactoryConfigurationStrategy transformerFactoryConfigurationStrategy;
     /**
      * To use a custom UriResolver. Should not be used together with the option
      * 'uriResolverFactory'. The option is a javax.xml.transform.URIResolver
      * type.
      */
-    private String uriResolver;
+    private URIResolver uriResolver;
     /**
      * To use a custom UriResolver which depends on a dynamic endpoint resource
      * URI. Should not be used together with the option 'uriResolver'. The
      * option is a org.apache.camel.component.xslt.XsltUriResolverFactory type.
      */
-    private String uriResolverFactory;
+    private XsltUriResolverFactory uriResolverFactory;
 
     public Boolean getContentCache() {
         return contentCache;
@@ -130,11 +134,11 @@ public class XJComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getSaxonConfiguration() {
+    public Configuration getSaxonConfiguration() {
         return saxonConfiguration;
     }
 
-    public void setSaxonConfiguration(String saxonConfiguration) {
+    public void setSaxonConfiguration(Configuration saxonConfiguration) {
         this.saxonConfiguration = saxonConfiguration;
     }
 
@@ -163,28 +167,28 @@ public class XJComponentConfiguration
         this.transformerFactoryClass = transformerFactoryClass;
     }
 
-    public String getTransformerFactoryConfigurationStrategy() {
+    public TransformerFactoryConfigurationStrategy getTransformerFactoryConfigurationStrategy() {
         return transformerFactoryConfigurationStrategy;
     }
 
     public void setTransformerFactoryConfigurationStrategy(
-            String transformerFactoryConfigurationStrategy) {
+            TransformerFactoryConfigurationStrategy transformerFactoryConfigurationStrategy) {
         this.transformerFactoryConfigurationStrategy = transformerFactoryConfigurationStrategy;
     }
 
-    public String getUriResolver() {
+    public URIResolver getUriResolver() {
         return uriResolver;
     }
 
-    public void setUriResolver(String uriResolver) {
+    public void setUriResolver(URIResolver uriResolver) {
         this.uriResolver = uriResolver;
     }
 
-    public String getUriResolverFactory() {
+    public XsltUriResolverFactory getUriResolverFactory() {
         return uriResolverFactory;
     }
 
-    public void setUriResolverFactory(String uriResolverFactory) {
+    public void setUriResolverFactory(XsltUriResolverFactory uriResolverFactory) {
         this.uriResolverFactory = uriResolverFactory;
     }
 }

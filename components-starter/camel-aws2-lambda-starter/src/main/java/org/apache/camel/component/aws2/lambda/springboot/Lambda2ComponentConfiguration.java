@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.lambda.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.lambda.Lambda2Component;
+import org.apache.camel.component.aws2.lambda.Lambda2Configuration;
 import org.apache.camel.component.aws2.lambda.Lambda2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.lambda.LambdaClient;
 
 /**
  * Manage and invoke AWS Lambda functions using AWS SDK version 2.x.
@@ -50,7 +52,7 @@ public class Lambda2ComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.lambda.Lambda2Configuration type.
      */
-    private String configuration;
+    private Lambda2Configuration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -85,7 +87,7 @@ public class Lambda2ComponentConfiguration
      * To use a existing configured AwsLambdaClient as client. The option is a
      * software.amazon.awssdk.services.lambda.LambdaClient type.
      */
-    private String awsLambdaClient;
+    private LambdaClient awsLambdaClient;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -121,11 +123,11 @@ public class Lambda2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public Lambda2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Lambda2Configuration configuration) {
         this.configuration = configuration;
     }
 
@@ -169,11 +171,11 @@ public class Lambda2ComponentConfiguration
         this.trustAllCertificates = trustAllCertificates;
     }
 
-    public String getAwsLambdaClient() {
+    public LambdaClient getAwsLambdaClient() {
         return awsLambdaClient;
     }
 
-    public void setAwsLambdaClient(String awsLambdaClient) {
+    public void setAwsLambdaClient(LambdaClient awsLambdaClient) {
         this.awsLambdaClient = awsLambdaClient;
     }
 

@@ -20,9 +20,12 @@ import java.util.List;
 import javax.annotation.Generated;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.component.mina.MinaComponent;
+import org.apache.camel.component.mina.MinaConfiguration;
 import org.apache.camel.component.mina.MinaTextLineDelimiter;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.apache.mina.core.filterchain.IoFilter;
+import org.apache.mina.filter.codec.ProtocolCodecFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -122,7 +125,7 @@ public class MinaComponentConfiguration
      * To use the shared mina configuration. The option is a
      * org.apache.camel.component.mina.MinaConfiguration type.
      */
-    private String configuration;
+    private MinaConfiguration configuration;
     /**
      * Number of worker threads in the worker pool for TCP and UDP
      */
@@ -152,7 +155,7 @@ public class MinaComponentConfiguration
      * To use a custom minda codec implementation. The option is a
      * org.apache.mina.filter.codec.ProtocolCodecFactory type.
      */
-    private String codec;
+    private ProtocolCodecFactory codec;
     /**
      * To set the textline protocol decoder max line length. By default the
      * default value of Mina itself is used which are 1024.
@@ -193,7 +196,7 @@ public class MinaComponentConfiguration
      * To configure SSL security. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters.
      */
@@ -306,11 +309,11 @@ public class MinaComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public MinaConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(MinaConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -346,11 +349,11 @@ public class MinaComponentConfiguration
         this.allowDefaultCodec = allowDefaultCodec;
     }
 
-    public String getCodec() {
+    public ProtocolCodecFactory getCodec() {
         return codec;
     }
 
-    public void setCodec(String codec) {
+    public void setCodec(ProtocolCodecFactory codec) {
         this.codec = codec;
     }
 
@@ -410,11 +413,12 @@ public class MinaComponentConfiguration
         this.autoStartTls = autoStartTls;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

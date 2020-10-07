@@ -24,7 +24,7 @@ The component supports 8 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.nagios.configuration* | To use a shared NagiosConfiguration. The option is a org.apache.camel.component.nagios.NagiosConfiguration type. |  | String
+| *camel.component.nagios.configuration* | To use a shared NagiosConfiguration. The option is a org.apache.camel.component.nagios.NagiosConfiguration type. |  | NagiosConfiguration
 | *camel.component.nagios.connection-timeout* | Connection timeout in millis. | 5000 | Integer
 | *camel.component.nagios.enabled* | Whether to enable auto configuration of the nagios component. This is enabled by default. |  | Boolean
 | *camel.component.nagios.encryption* | To specify an encryption method. |  | Encryption

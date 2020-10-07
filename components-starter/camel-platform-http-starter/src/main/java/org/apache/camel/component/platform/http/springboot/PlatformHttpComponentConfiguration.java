@@ -17,6 +17,7 @@
 package org.apache.camel.component.platform.http.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -57,7 +58,7 @@ public class PlatformHttpComponentConfiguration
      * An HTTP Server engine implementation to serve the requests. The option is
      * a org.apache.camel.component.platform.http.spi.PlatformHttpEngine type.
      */
-    private String engine;
+    private PlatformHttpEngine engine;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -78,11 +79,11 @@ public class PlatformHttpComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getEngine() {
+    public PlatformHttpEngine getEngine() {
         return engine;
     }
 
-    public void setEngine(String engine) {
+    public void setEngine(PlatformHttpEngine engine) {
         this.engine = engine;
     }
 }

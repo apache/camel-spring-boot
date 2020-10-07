@@ -18,8 +18,16 @@ package org.apache.camel.component.jetty9.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import org.apache.camel.component.jetty.JettyHttpBinding;
+import org.apache.camel.http.common.HttpBinding;
+import org.apache.camel.http.common.HttpConfiguration;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
+import org.eclipse.jetty.jmx.MBeanContainer;
 import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.handler.ErrorHandler;
+import org.eclipse.jetty.util.thread.ThreadPool;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -111,7 +119,7 @@ public class JettyHttpComponentConfiguration9
      * used in special circumstances. The option is a
      * org.eclipse.jetty.util.thread.ThreadPool type.
      */
-    private String threadPool;
+    private ThreadPool threadPool;
     /**
      * Whether to allow java serialization when a request uses
      * context-type=application/x-java-serialized-object. This is by default
@@ -130,35 +138,35 @@ public class JettyHttpComponentConfiguration9
      * This option is used to set the ErrorHandler that Jetty server uses. The
      * option is a org.eclipse.jetty.server.handler.ErrorHandler type.
      */
-    private String errorHandler;
+    private ErrorHandler errorHandler;
     /**
      * Not to be used - use JettyHttpBinding instead. The option is a
      * org.apache.camel.http.common.HttpBinding type.
      */
-    private String httpBinding;
+    private HttpBinding httpBinding;
     /**
      * Jetty component does not use HttpConfiguration. The option is a
      * org.apache.camel.http.common.HttpConfiguration type.
      */
-    private String httpConfiguration;
+    private HttpConfiguration httpConfiguration;
     /**
      * To use a custom org.apache.camel.component.jetty.JettyHttpBinding, which
      * are used to customize how a response should be written for the producer.
      * The option is a org.apache.camel.component.jetty.JettyHttpBinding type.
      */
-    private String jettyHttpBinding;
+    private JettyHttpBinding jettyHttpBinding;
     /**
      * To use a existing configured org.eclipse.jetty.jmx.MBeanContainer if JMX
      * is enabled that Jetty uses for registering mbeans. The option is a
      * org.eclipse.jetty.jmx.MBeanContainer type.
      */
-    private String mbContainer;
+    private MBeanContainer mbContainer;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
     /**
      * To use a http proxy to configure the hostname.
      */
@@ -186,7 +194,7 @@ public class JettyHttpComponentConfiguration9
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * The key password, which is used to access the certificate's key entry in
      * the keystore (this is the same password that is supplied to the keystore
@@ -308,11 +316,11 @@ public class JettyHttpComponentConfiguration9
         this.useXForwardedForHeader = useXForwardedForHeader;
     }
 
-    public String getThreadPool() {
+    public ThreadPool getThreadPool() {
         return threadPool;
     }
 
-    public void setThreadPool(String threadPool) {
+    public void setThreadPool(ThreadPool threadPool) {
         this.threadPool = threadPool;
     }
 
@@ -335,51 +343,52 @@ public class JettyHttpComponentConfiguration9
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getErrorHandler() {
+    public ErrorHandler getErrorHandler() {
         return errorHandler;
     }
 
-    public void setErrorHandler(String errorHandler) {
+    public void setErrorHandler(ErrorHandler errorHandler) {
         this.errorHandler = errorHandler;
     }
 
-    public String getHttpBinding() {
+    public HttpBinding getHttpBinding() {
         return httpBinding;
     }
 
-    public void setHttpBinding(String httpBinding) {
+    public void setHttpBinding(HttpBinding httpBinding) {
         this.httpBinding = httpBinding;
     }
 
-    public String getHttpConfiguration() {
+    public HttpConfiguration getHttpConfiguration() {
         return httpConfiguration;
     }
 
-    public void setHttpConfiguration(String httpConfiguration) {
+    public void setHttpConfiguration(HttpConfiguration httpConfiguration) {
         this.httpConfiguration = httpConfiguration;
     }
 
-    public String getJettyHttpBinding() {
+    public JettyHttpBinding getJettyHttpBinding() {
         return jettyHttpBinding;
     }
 
-    public void setJettyHttpBinding(String jettyHttpBinding) {
+    public void setJettyHttpBinding(JettyHttpBinding jettyHttpBinding) {
         this.jettyHttpBinding = jettyHttpBinding;
     }
 
-    public String getMbContainer() {
+    public MBeanContainer getMbContainer() {
         return mbContainer;
     }
 
-    public void setMbContainer(String mbContainer) {
+    public void setMbContainer(MBeanContainer mbContainer) {
         this.mbContainer = mbContainer;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 
@@ -424,11 +433,12 @@ public class JettyHttpComponentConfiguration9
         this.socketConnectors = socketConnectors;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

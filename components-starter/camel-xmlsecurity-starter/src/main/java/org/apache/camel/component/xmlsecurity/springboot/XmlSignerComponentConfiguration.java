@@ -20,7 +20,11 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Generated;
 import javax.xml.crypto.AlgorithmMethod;
+import javax.xml.crypto.URIDereferencer;
 import javax.xml.crypto.dsig.spec.XPathFilterParameterSpec;
+import org.apache.camel.component.xmlsecurity.api.KeyAccessor;
+import org.apache.camel.component.xmlsecurity.api.XmlSignatureProperties;
+import org.apache.camel.component.xmlsecurity.processor.XmlSignerConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -61,7 +65,7 @@ public class XmlSignerComponentConfiguration
      * inclusiveNamespacePrefixes) to create a canonicalization method. The
      * option is a javax.xml.crypto.AlgorithmMethod type.
      */
-    private String canonicalizationMethod;
+    private AlgorithmMethod canonicalizationMethod;
     /**
      * Determines if the XML signature specific headers be cleared after signing
      * and verification. Defaults to true.
@@ -118,7 +122,7 @@ public class XmlSignerComponentConfiguration
      * a Java keystore. The option is a
      * org.apache.camel.component.xmlsecurity.api.KeyAccessor type.
      */
-    private String keyAccessor;
+    private KeyAccessor keyAccessor;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -168,7 +172,7 @@ public class XmlSignerComponentConfiguration
      * exception is thrown. The option is a
      * javax.xml.crypto.dsig.spec.XPathFilterParameterSpec type.
      */
-    private String parentXpath;
+    private XPathFilterParameterSpec parentXpath;
     /**
      * Indicator whether the message body contains plain text. The default value
      * is false, indicating that the message body contains XML. The value can be
@@ -196,7 +200,7 @@ public class XmlSignerComponentConfiguration
      * the XmlSignatureProperties interface. The option is a
      * org.apache.camel.component.xmlsecurity.api.XmlSignatureProperties type.
      */
-    private String properties;
+    private XmlSignatureProperties properties;
     /**
      * Classpath to the XML Schema. Must be specified in the detached XML
      * Signature case for determining the ID attributes, might be set in the
@@ -252,7 +256,7 @@ public class XmlSignerComponentConfiguration
      * org.apache.camel.component.xmlsecurity.processor.XmlSignerConfiguration
      * type.
      */
-    private String signerConfiguration;
+    private XmlSignerConfiguration signerConfiguration;
     /**
      * If you want to restrict the remote access via reference URIs, you can set
      * an own dereferencer. Optional parameter. If not set the provider default
@@ -260,7 +264,7 @@ public class XmlSignerComponentConfiguration
      * XPpointer URIs. Attention: The implementation is provider dependent!. The
      * option is a javax.xml.crypto.URIDereferencer type.
      */
-    private String uriDereferencer;
+    private URIDereferencer uriDereferencer;
 
     public Boolean getAddKeyInfoReference() {
         return addKeyInfoReference;
@@ -278,11 +282,11 @@ public class XmlSignerComponentConfiguration
         this.baseUri = baseUri;
     }
 
-    public String getCanonicalizationMethod() {
+    public AlgorithmMethod getCanonicalizationMethod() {
         return canonicalizationMethod;
     }
 
-    public void setCanonicalizationMethod(String canonicalizationMethod) {
+    public void setCanonicalizationMethod(AlgorithmMethod canonicalizationMethod) {
         this.canonicalizationMethod = canonicalizationMethod;
     }
 
@@ -343,11 +347,11 @@ public class XmlSignerComponentConfiguration
         this.disallowDoctypeDecl = disallowDoctypeDecl;
     }
 
-    public String getKeyAccessor() {
+    public KeyAccessor getKeyAccessor() {
         return keyAccessor;
     }
 
-    public void setKeyAccessor(String keyAccessor) {
+    public void setKeyAccessor(KeyAccessor keyAccessor) {
         this.keyAccessor = keyAccessor;
     }
 
@@ -391,11 +395,11 @@ public class XmlSignerComponentConfiguration
         this.parentNamespace = parentNamespace;
     }
 
-    public String getParentXpath() {
+    public XPathFilterParameterSpec getParentXpath() {
         return parentXpath;
     }
 
-    public void setParentXpath(String parentXpath) {
+    public void setParentXpath(XPathFilterParameterSpec parentXpath) {
         this.parentXpath = parentXpath;
     }
 
@@ -424,11 +428,11 @@ public class XmlSignerComponentConfiguration
         this.prefixForXmlSignatureNamespace = prefixForXmlSignatureNamespace;
     }
 
-    public String getProperties() {
+    public XmlSignatureProperties getProperties() {
         return properties;
     }
 
-    public void setProperties(String properties) {
+    public void setProperties(XmlSignatureProperties properties) {
         this.properties = properties;
     }
 
@@ -484,19 +488,20 @@ public class XmlSignerComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getSignerConfiguration() {
+    public XmlSignerConfiguration getSignerConfiguration() {
         return signerConfiguration;
     }
 
-    public void setSignerConfiguration(String signerConfiguration) {
+    public void setSignerConfiguration(
+            XmlSignerConfiguration signerConfiguration) {
         this.signerConfiguration = signerConfiguration;
     }
 
-    public String getUriDereferencer() {
+    public URIDereferencer getUriDereferencer() {
         return uriDereferencer;
     }
 
-    public void setUriDereferencer(String uriDereferencer) {
+    public void setUriDereferencer(URIDereferencer uriDereferencer) {
         this.uriDereferencer = uriDereferencer;
     }
 }

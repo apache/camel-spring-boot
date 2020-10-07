@@ -18,7 +18,9 @@ package org.apache.camel.component.aws.translate.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.translate.AmazonTranslate;
 import org.apache.camel.component.aws.translate.TranslateComponent;
+import org.apache.camel.component.aws.translate.TranslateConfiguration;
 import org.apache.camel.component.aws.translate.TranslateOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -58,7 +60,7 @@ public class TranslateComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.translate.TranslateConfiguration type.
      */
-    private String configuration;
+    private TranslateConfiguration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -109,7 +111,7 @@ public class TranslateComponentConfiguration
      * To use a existing configured AWS Translate as client. The option is a
      * com.amazonaws.services.translate.AmazonTranslate type.
      */
-    private String translateClient;
+    private AmazonTranslate translateClient;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -141,11 +143,11 @@ public class TranslateComponentConfiguration
         this.autodetectSourceLanguage = autodetectSourceLanguage;
     }
 
-    public String getConfiguration() {
+    public TranslateConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(TranslateConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -221,11 +223,11 @@ public class TranslateComponentConfiguration
         this.targetLanguage = targetLanguage;
     }
 
-    public String getTranslateClient() {
+    public AmazonTranslate getTranslateClient() {
         return translateClient;
     }
 
-    public void setTranslateClient(String translateClient) {
+    public void setTranslateClient(AmazonTranslate translateClient) {
         this.translateClient = translateClient;
     }
 

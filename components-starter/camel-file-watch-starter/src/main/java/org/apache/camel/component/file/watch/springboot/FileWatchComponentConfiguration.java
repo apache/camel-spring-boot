@@ -17,6 +17,7 @@
 package org.apache.camel.component.file.watch.springboot;
 
 import javax.annotation.Generated;
+import io.methvin.watcher.hashing.FileHasher;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -60,7 +61,7 @@ public class FileWatchComponentConfiguration
      * implementation in registry. The option is a
      * io.methvin.watcher.hashing.FileHasher type.
      */
-    private String fileHasher;
+    private FileHasher fileHasher;
     /**
      * The number of threads polling WatchService. Increase this value, if you
      * see OVERFLOW messages in log.
@@ -101,11 +102,11 @@ public class FileWatchComponentConfiguration
         this.concurrentConsumers = concurrentConsumers;
     }
 
-    public String getFileHasher() {
+    public FileHasher getFileHasher() {
         return fileHasher;
     }
 
-    public void setFileHasher(String fileHasher) {
+    public void setFileHasher(FileHasher fileHasher) {
         this.fileHasher = fileHasher;
     }
 

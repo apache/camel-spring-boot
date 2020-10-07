@@ -17,6 +17,7 @@
 package org.apache.camel.component.arangodb.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.arangodb.ArangoDbConfiguration;
 import org.apache.camel.component.arangodb.ArangoDbOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -43,7 +44,7 @@ public class ArangoDbComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.arangodb.ArangoDbConfiguration type.
      */
-    private String configuration;
+    private ArangoDbConfiguration configuration;
     /**
      * Collection name, when using ArangoDb as a Document Database. Set the
      * documentCollection name when using the CRUD operation on the document
@@ -112,11 +113,11 @@ public class ArangoDbComponentConfiguration
      */
     private String user;
 
-    public String getConfiguration() {
+    public ArangoDbConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(ArangoDbConfiguration configuration) {
         this.configuration = configuration;
     }
 

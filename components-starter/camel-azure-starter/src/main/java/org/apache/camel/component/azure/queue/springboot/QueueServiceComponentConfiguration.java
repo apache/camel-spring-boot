@@ -17,7 +17,10 @@
 package org.apache.camel.component.azure.queue.springboot;
 
 import javax.annotation.Generated;
+import com.microsoft.azure.storage.StorageCredentials;
+import com.microsoft.azure.storage.queue.CloudQueue;
 import org.apache.camel.component.azure.queue.QueueServiceComponent;
+import org.apache.camel.component.azure.queue.QueueServiceConfiguration;
 import org.apache.camel.component.azure.queue.QueueServiceOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -43,12 +46,12 @@ public class QueueServiceComponentConfiguration
      * The queue service client. The option is a
      * com.microsoft.azure.storage.queue.CloudQueue type.
      */
-    private String azureQueueClient;
+    private CloudQueue azureQueueClient;
     /**
      * Set the storage credentials, required in most cases. The option is a
      * com.microsoft.azure.storage.StorageCredentials type.
      */
-    private String credentials;
+    private StorageCredentials credentials;
     /**
      * Whether to validate the Azure client URI
      */
@@ -99,7 +102,7 @@ public class QueueServiceComponentConfiguration
      * The Queue Service configuration. The option is a
      * org.apache.camel.component.azure.queue.QueueServiceConfiguration type.
      */
-    private String configuration;
+    private QueueServiceConfiguration configuration;
     /**
      * Set the storage account key used during authentication phase
      */
@@ -109,19 +112,19 @@ public class QueueServiceComponentConfiguration
      */
     private String credentialsAccountName;
 
-    public String getAzureQueueClient() {
+    public CloudQueue getAzureQueueClient() {
         return azureQueueClient;
     }
 
-    public void setAzureQueueClient(String azureQueueClient) {
+    public void setAzureQueueClient(CloudQueue azureQueueClient) {
         this.azureQueueClient = azureQueueClient;
     }
 
-    public String getCredentials() {
+    public StorageCredentials getCredentials() {
         return credentials;
     }
 
-    public void setCredentials(String credentials) {
+    public void setCredentials(StorageCredentials credentials) {
         this.credentials = credentials;
     }
 
@@ -192,11 +195,11 @@ public class QueueServiceComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public QueueServiceConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(QueueServiceConfiguration configuration) {
         this.configuration = configuration;
     }
 

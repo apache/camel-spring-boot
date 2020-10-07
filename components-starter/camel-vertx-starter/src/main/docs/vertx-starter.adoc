@@ -30,9 +30,9 @@ The component supports 10 options, which are listed below.
 | *camel.component.vertx.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.vertx.port* | Port for creating an embedded clustered EventBus |  | Integer
 | *camel.component.vertx.timeout* | Timeout in seconds to wait for clustered Vertx EventBus to be ready. The default value is 60. | 60 | Integer
-| *camel.component.vertx.vertx* | To use the given vertx EventBus instead of creating a new embedded EventBus. The option is a io.vertx.core.Vertx type. |  | String
-| *camel.component.vertx.vertx-factory* | To use a custom VertxFactory implementation. The option is a io.vertx.core.spi.VertxFactory type. |  | String
-| *camel.component.vertx.vertx-options* | Options to use for creating vertx. The option is a io.vertx.core.VertxOptions type. |  | String
+| *camel.component.vertx.vertx* | To use the given vertx EventBus instead of creating a new embedded EventBus. The option is a io.vertx.core.Vertx type. |  | Vertx
+| *camel.component.vertx.vertx-factory* | To use a custom VertxFactory implementation. The option is a io.vertx.core.spi.VertxFactory type. |  | VertxFactory
+| *camel.component.vertx.vertx-options* | Options to use for creating vertx. The option is a io.vertx.core.VertxOptions type. |  | VertxOptions
 | *camel.component.vertx.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

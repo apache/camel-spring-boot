@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.kinesis.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.kinesis.Kinesis2Component;
+import org.apache.camel.component.aws2.kinesis.Kinesis2Configuration;
 import org.apache.camel.component.aws2.kinesis.Kinesis2ShardClosedStrategyEnum;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.kinesis.KinesisClient;
 import software.amazon.awssdk.services.kinesis.model.ShardIteratorType;
 
 /**
@@ -46,7 +48,7 @@ public class Kinesis2ComponentConfiguration
      * Amazon Kinesis client to use for all requests for this endpoint. The
      * option is a software.amazon.awssdk.services.kinesis.KinesisClient type.
      */
-    private String amazonKinesisClient;
+    private KinesisClient amazonKinesisClient;
     /**
      * Setting the autoDiscoverClient mechanism, if true, the component will
      * look for a client instance in the registry automatically otherwise it
@@ -57,7 +59,7 @@ public class Kinesis2ComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.kinesis.Kinesis2Configuration type.
      */
-    private String configuration;
+    private Kinesis2Configuration configuration;
     /**
      * To define a proxy host when instantiating the Kinesis client
      */
@@ -141,11 +143,11 @@ public class Kinesis2ComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonKinesisClient() {
+    public KinesisClient getAmazonKinesisClient() {
         return amazonKinesisClient;
     }
 
-    public void setAmazonKinesisClient(String amazonKinesisClient) {
+    public void setAmazonKinesisClient(KinesisClient amazonKinesisClient) {
         this.amazonKinesisClient = amazonKinesisClient;
     }
 
@@ -157,11 +159,11 @@ public class Kinesis2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public Kinesis2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Kinesis2Configuration configuration) {
         this.configuration = configuration;
     }
 

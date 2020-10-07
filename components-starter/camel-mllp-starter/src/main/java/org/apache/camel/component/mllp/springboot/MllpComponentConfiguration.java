@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.mllp.springboot;
 
+import java.nio.charset.Charset;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -67,7 +68,7 @@ public class MllpComponentConfiguration
      * Set the default character set to use for byte to/from String conversions.
      * The option is a java.nio.charset.Charset type.
      */
-    private String defaultCharset;
+    private Charset defaultCharset;
     /**
      * Set the component to log PHI data.
      */
@@ -105,11 +106,11 @@ public class MllpComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getDefaultCharset() {
+    public Charset getDefaultCharset() {
         return defaultCharset;
     }
 
-    public void setDefaultCharset(String defaultCharset) {
+    public void setDefaultCharset(Charset defaultCharset) {
         this.defaultCharset = defaultCharset;
     }
 

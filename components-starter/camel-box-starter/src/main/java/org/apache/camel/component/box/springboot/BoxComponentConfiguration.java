@@ -19,8 +19,11 @@ package org.apache.camel.component.box.springboot;
 import java.util.Map;
 import javax.annotation.Generated;
 import com.box.sdk.EncryptionAlgorithm;
+import com.box.sdk.IAccessTokenCache;
 import org.apache.camel.component.box.BoxComponent;
+import org.apache.camel.component.box.BoxConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -49,7 +52,7 @@ public class BoxComponentConfiguration
      * To use the shared configuration. The option is a
      * org.apache.camel.component.box.BoxConfiguration type.
      */
-    private String configuration;
+    private BoxConfiguration configuration;
     /**
      * The enterprise ID to use for an App Enterprise.
      */
@@ -98,7 +101,7 @@ public class BoxComponentConfiguration
      * Custom Access Token Cache for storing and retrieving access tokens. The
      * option is a com.box.sdk.IAccessTokenCache type.
      */
-    private String accessTokenCache;
+    private IAccessTokenCache accessTokenCache;
     /**
      * Box application client secret
      */
@@ -128,7 +131,7 @@ public class BoxComponentConfiguration
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Box user name, MUST be provided
      */
@@ -147,11 +150,11 @@ public class BoxComponentConfiguration
         this.clientId = clientId;
     }
 
-    public String getConfiguration() {
+    public BoxConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(BoxConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -214,11 +217,11 @@ public class BoxComponentConfiguration
         this.authenticationType = authenticationType;
     }
 
-    public String getAccessTokenCache() {
+    public IAccessTokenCache getAccessTokenCache() {
         return accessTokenCache;
     }
 
-    public void setAccessTokenCache(String accessTokenCache) {
+    public void setAccessTokenCache(IAccessTokenCache accessTokenCache) {
         this.accessTokenCache = accessTokenCache;
     }
 
@@ -270,11 +273,12 @@ public class BoxComponentConfiguration
         this.publicKeyId = publicKeyId;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

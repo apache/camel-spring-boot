@@ -17,6 +17,7 @@
 package org.apache.camel.component.as2.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.as2.AS2Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -67,7 +68,7 @@ public class AS2ComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.as2.AS2Configuration type.
      */
-    private String configuration;
+    private AS2Configuration configuration;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -96,11 +97,11 @@ public class AS2ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public AS2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(AS2Configuration configuration) {
         this.configuration = configuration;
     }
 }

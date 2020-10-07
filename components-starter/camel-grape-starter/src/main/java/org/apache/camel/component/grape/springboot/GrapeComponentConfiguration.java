@@ -17,6 +17,7 @@
 package org.apache.camel.component.grape.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.grape.PatchesRepository;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -60,7 +61,7 @@ public class GrapeComponentConfiguration
      * default: FilePatchesRepository. The option is a
      * org.apache.camel.component.grape.PatchesRepository type.
      */
-    private String patchesRepository;
+    private PatchesRepository patchesRepository;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -81,11 +82,11 @@ public class GrapeComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getPatchesRepository() {
+    public PatchesRepository getPatchesRepository() {
         return patchesRepository;
     }
 
-    public void setPatchesRepository(String patchesRepository) {
+    public void setPatchesRepository(PatchesRepository patchesRepository) {
         this.patchesRepository = patchesRepository;
     }
 }

@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.sts.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.sts.STS2Component;
+import org.apache.camel.component.aws2.sts.STS2Configuration;
 import org.apache.camel.component.aws2.sts.STS2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.sts.StsClient;
 
 /**
  * Manage AWS STS cluster instances using AWS SDK version 2.x.
@@ -50,7 +52,7 @@ public class STS2ComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.sts.STS2Configuration type.
      */
-    private String configuration;
+    private STS2Configuration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -92,7 +94,7 @@ public class STS2ComponentConfiguration
      * To use a existing configured AWS STS as client. The option is a
      * software.amazon.awssdk.services.sts.StsClient type.
      */
-    private String stsClient;
+    private StsClient stsClient;
     /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
@@ -120,11 +122,11 @@ public class STS2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public STS2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(STS2Configuration configuration) {
         this.configuration = configuration;
     }
 
@@ -184,11 +186,11 @@ public class STS2ComponentConfiguration
         this.region = region;
     }
 
-    public String getStsClient() {
+    public StsClient getStsClient() {
         return stsClient;
     }
 
-    public void setStsClient(String stsClient) {
+    public void setStsClient(StsClient stsClient) {
         this.stsClient = stsClient;
     }
 

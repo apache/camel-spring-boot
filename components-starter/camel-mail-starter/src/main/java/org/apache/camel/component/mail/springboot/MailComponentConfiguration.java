@@ -16,8 +16,17 @@
  */
 package org.apache.camel.component.mail.springboot;
 
+import java.util.Properties;
 import javax.annotation.Generated;
+import javax.mail.Session;
+import org.apache.camel.component.mail.AttachmentsContentTransferEncodingResolver;
+import org.apache.camel.component.mail.ContentTypeResolver;
+import org.apache.camel.component.mail.JavaMailSender;
+import org.apache.camel.component.mail.MailAuthenticator;
+import org.apache.camel.component.mail.MailConfiguration;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -176,14 +185,14 @@ public class MailComponentConfiguration
      * sending emails. The option is a
      * org.apache.camel.component.mail.JavaMailSender type.
      */
-    private String javaMailSender;
+    private JavaMailSender javaMailSender;
     /**
      * Sets additional java mail properties, that will append/override any
      * default properties that is set based on all the other options. This is
      * useful if you need to add some special options but want to keep the
      * others as is. The option is a java.util.Properties type.
      */
-    private String additionalJavaMailProperties;
+    private Properties additionalJavaMailProperties;
     /**
      * Specifies the key to an IN message header that contains an alternative
      * email body. For example, if you send emails in text/html format and want
@@ -196,14 +205,14 @@ public class MailComponentConfiguration
      * what content-type-encoding to use for attachments. The option is a
      * org.apache.camel.component.mail.AttachmentsContentTransferEncodingResolver type.
      */
-    private String attachmentsContentTransferEncodingResolver;
+    private AttachmentsContentTransferEncodingResolver attachmentsContentTransferEncodingResolver;
     /**
      * The authenticator for login. If set then the password and username are
      * ignored. Can be used for tokens which can expire and therefore must be
      * read dynamically. The option is a
      * org.apache.camel.component.mail.MailAuthenticator type.
      */
-    private String authenticator;
+    private MailAuthenticator authenticator;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -214,7 +223,7 @@ public class MailComponentConfiguration
      * Sets the Mail configuration. The option is a
      * org.apache.camel.component.mail.MailConfiguration type.
      */
-    private String configuration;
+    private MailConfiguration configuration;
     /**
      * The connection timeout in milliseconds.
      */
@@ -227,7 +236,7 @@ public class MailComponentConfiguration
      * Resolver to determine Content-Type for file attachments. The option is a
      * org.apache.camel.component.mail.ContentTypeResolver type.
      */
-    private String contentTypeResolver;
+    private ContentTypeResolver contentTypeResolver;
     /**
      * Enable debug mode on the underlying mail framework. The SUN Mail
      * framework logs the debug messages to System.out by default.
@@ -252,7 +261,7 @@ public class MailComponentConfiguration
      * use the properties provided for this method. The option is a
      * java.util.Properties type.
      */
-    private String javaMailProperties;
+    private Properties javaMailProperties;
     /**
      * Specifies the mail session that camel should use for all mail
      * interactions. Useful in scenarios where mail sessions are created and
@@ -261,7 +270,7 @@ public class MailComponentConfiguration
      * will be used (if configured on the session). The option is a
      * javax.mail.Session type.
      */
-    private String session;
+    private Session session;
     /**
      * Whether to use disposition inline or attachment.
      */
@@ -271,7 +280,7 @@ public class MailComponentConfiguration
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
     /**
      * The password for login. See also setAuthenticator(MailAuthenticator).
      */
@@ -280,7 +289,7 @@ public class MailComponentConfiguration
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters.
      */
@@ -458,20 +467,20 @@ public class MailComponentConfiguration
         this.to = to;
     }
 
-    public String getJavaMailSender() {
+    public JavaMailSender getJavaMailSender() {
         return javaMailSender;
     }
 
-    public void setJavaMailSender(String javaMailSender) {
+    public void setJavaMailSender(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 
-    public String getAdditionalJavaMailProperties() {
+    public Properties getAdditionalJavaMailProperties() {
         return additionalJavaMailProperties;
     }
 
     public void setAdditionalJavaMailProperties(
-            String additionalJavaMailProperties) {
+            Properties additionalJavaMailProperties) {
         this.additionalJavaMailProperties = additionalJavaMailProperties;
     }
 
@@ -483,20 +492,20 @@ public class MailComponentConfiguration
         this.alternativeBodyHeader = alternativeBodyHeader;
     }
 
-    public String getAttachmentsContentTransferEncodingResolver() {
+    public AttachmentsContentTransferEncodingResolver getAttachmentsContentTransferEncodingResolver() {
         return attachmentsContentTransferEncodingResolver;
     }
 
     public void setAttachmentsContentTransferEncodingResolver(
-            String attachmentsContentTransferEncodingResolver) {
+            AttachmentsContentTransferEncodingResolver attachmentsContentTransferEncodingResolver) {
         this.attachmentsContentTransferEncodingResolver = attachmentsContentTransferEncodingResolver;
     }
 
-    public String getAuthenticator() {
+    public MailAuthenticator getAuthenticator() {
         return authenticator;
     }
 
-    public void setAuthenticator(String authenticator) {
+    public void setAuthenticator(MailAuthenticator authenticator) {
         this.authenticator = authenticator;
     }
 
@@ -511,11 +520,11 @@ public class MailComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public MailConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(MailConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -535,11 +544,11 @@ public class MailComponentConfiguration
         this.contentType = contentType;
     }
 
-    public String getContentTypeResolver() {
+    public ContentTypeResolver getContentTypeResolver() {
         return contentTypeResolver;
     }
 
-    public void setContentTypeResolver(String contentTypeResolver) {
+    public void setContentTypeResolver(ContentTypeResolver contentTypeResolver) {
         this.contentTypeResolver = contentTypeResolver;
     }
 
@@ -567,19 +576,19 @@ public class MailComponentConfiguration
         this.ignoreUriScheme = ignoreUriScheme;
     }
 
-    public String getJavaMailProperties() {
+    public Properties getJavaMailProperties() {
         return javaMailProperties;
     }
 
-    public void setJavaMailProperties(String javaMailProperties) {
+    public void setJavaMailProperties(Properties javaMailProperties) {
         this.javaMailProperties = javaMailProperties;
     }
 
-    public String getSession() {
+    public Session getSession() {
         return session;
     }
 
-    public void setSession(String session) {
+    public void setSession(Session session) {
         this.session = session;
     }
 
@@ -591,11 +600,12 @@ public class MailComponentConfiguration
         this.useInlineAttachments = useInlineAttachments;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 
@@ -607,11 +617,12 @@ public class MailComponentConfiguration
         this.password = password;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

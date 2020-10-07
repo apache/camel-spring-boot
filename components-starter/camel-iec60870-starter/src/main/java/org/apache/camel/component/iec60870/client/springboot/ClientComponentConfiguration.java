@@ -17,6 +17,7 @@
 package org.apache.camel.component.iec60870.client.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.iec60870.client.ClientOptions;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -42,7 +43,7 @@ public class ClientComponentConfiguration
      * Default connection options. The option is a
      * org.apache.camel.component.iec60870.client.ClientOptions type.
      */
-    private String defaultConnectionOptions;
+    private ClientOptions defaultConnectionOptions;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -70,11 +71,12 @@ public class ClientComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getDefaultConnectionOptions() {
+    public ClientOptions getDefaultConnectionOptions() {
         return defaultConnectionOptions;
     }
 
-    public void setDefaultConnectionOptions(String defaultConnectionOptions) {
+    public void setDefaultConnectionOptions(
+            ClientOptions defaultConnectionOptions) {
         this.defaultConnectionOptions = defaultConnectionOptions;
     }
 

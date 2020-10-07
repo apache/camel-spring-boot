@@ -18,6 +18,8 @@ package org.apache.camel.component.jgroups.raft.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.jgroups.protocols.raft.StateMachine;
+import org.jgroups.raft.RaftHandle;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -45,7 +47,7 @@ public class JGroupsRaftComponentConfiguration
     /**
      * RaftHandle to use. The option is a org.jgroups.raft.RaftHandle type.
      */
-    private String raftHandle;
+    private RaftHandle raftHandle;
     /**
      * Unique raftId to use.
      */
@@ -54,7 +56,7 @@ public class JGroupsRaftComponentConfiguration
      * StateMachine to use. The option is a
      * org.jgroups.protocols.raft.StateMachine type.
      */
-    private String stateMachine;
+    private StateMachine stateMachine;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -90,11 +92,11 @@ public class JGroupsRaftComponentConfiguration
         this.channelProperties = channelProperties;
     }
 
-    public String getRaftHandle() {
+    public RaftHandle getRaftHandle() {
         return raftHandle;
     }
 
-    public void setRaftHandle(String raftHandle) {
+    public void setRaftHandle(RaftHandle raftHandle) {
         this.raftHandle = raftHandle;
     }
 
@@ -106,11 +108,11 @@ public class JGroupsRaftComponentConfiguration
         this.raftId = raftId;
     }
 
-    public String getStateMachine() {
+    public StateMachine getStateMachine() {
         return stateMachine;
     }
 
-    public void setStateMachine(String stateMachine) {
+    public void setStateMachine(StateMachine stateMachine) {
         this.stateMachine = stateMachine;
     }
 

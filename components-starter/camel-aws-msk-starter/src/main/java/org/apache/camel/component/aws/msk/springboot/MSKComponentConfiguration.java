@@ -18,7 +18,9 @@ package org.apache.camel.component.aws.msk.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.kafka.AWSKafka;
 import org.apache.camel.component.aws.msk.MSKComponent;
+import org.apache.camel.component.aws.msk.MSKConfiguration;
 import org.apache.camel.component.aws.msk.MSKOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -54,7 +56,7 @@ public class MSKComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.msk.MSKConfiguration type.
      */
-    private String configuration;
+    private MSKConfiguration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -70,7 +72,7 @@ public class MSKComponentConfiguration
      * To use a existing configured AWS MSK as client. The option is a
      * com.amazonaws.services.kafka.AWSKafka type.
      */
-    private String mskClient;
+    private AWSKafka mskClient;
     /**
      * The operation to perform
      */
@@ -120,11 +122,11 @@ public class MSKComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public String getConfiguration() {
+    public MSKConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(MSKConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -136,11 +138,11 @@ public class MSKComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public String getMskClient() {
+    public AWSKafka getMskClient() {
         return mskClient;
     }
 
-    public void setMskClient(String mskClient) {
+    public void setMskClient(AWSKafka mskClient) {
         this.mskClient = mskClient;
     }
 

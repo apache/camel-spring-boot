@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.ddb.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.ddb.Ddb2Component;
+import org.apache.camel.component.aws2.ddb.Ddb2Configuration;
 import org.apache.camel.component.aws2.ddb.Ddb2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
 /**
  * Store and retrieve data from AWS DynamoDB service using AWS SDK version 2.x.
@@ -44,7 +46,7 @@ public class Ddb2ComponentConfiguration
      * To use the AmazonDynamoDB as the client. The option is a
      * software.amazon.awssdk.services.dynamodb.DynamoDbClient type.
      */
-    private String amazonDDBClient;
+    private DynamoDbClient amazonDDBClient;
     /**
      * Setting the autoDiscoverClient mechanism, if true, the component will
      * look for a client instance in the registry automatically otherwise it
@@ -55,7 +57,7 @@ public class Ddb2ComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws2.ddb.Ddb2Configuration type.
      */
-    private String configuration;
+    private Ddb2Configuration configuration;
     /**
      * Determines whether or not strong consistency should be enforced when data
      * is read.
@@ -131,11 +133,11 @@ public class Ddb2ComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonDDBClient() {
+    public DynamoDbClient getAmazonDDBClient() {
         return amazonDDBClient;
     }
 
-    public void setAmazonDDBClient(String amazonDDBClient) {
+    public void setAmazonDDBClient(DynamoDbClient amazonDDBClient) {
         this.amazonDDBClient = amazonDDBClient;
     }
 
@@ -147,11 +149,11 @@ public class Ddb2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public Ddb2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Ddb2Configuration configuration) {
         this.configuration = configuration;
     }
 

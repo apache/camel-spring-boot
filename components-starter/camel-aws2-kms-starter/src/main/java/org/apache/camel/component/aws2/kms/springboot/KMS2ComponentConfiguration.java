@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.kms.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.kms.KMS2Component;
+import org.apache.camel.component.aws2.kms.KMS2Configuration;
 import org.apache.camel.component.aws2.kms.KMS2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.kms.KmsClient;
 
 /**
  * Manage keys stored in AWS KMS instances using AWS SDK version 2.x.
@@ -50,12 +52,12 @@ public class KMS2ComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.kms.KMS2Configuration type.
      */
-    private String configuration;
+    private KMS2Configuration configuration;
     /**
      * To use a existing configured AWS KMS as client. The option is a
      * software.amazon.awssdk.services.kms.KmsClient type.
      */
-    private String kmsClient;
+    private KmsClient kmsClient;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -120,19 +122,19 @@ public class KMS2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public KMS2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(KMS2Configuration configuration) {
         this.configuration = configuration;
     }
 
-    public String getKmsClient() {
+    public KmsClient getKmsClient() {
         return kmsClient;
     }
 
-    public void setKmsClient(String kmsClient) {
+    public void setKmsClient(KmsClient kmsClient) {
         this.kmsClient = kmsClient;
     }
 

@@ -18,6 +18,8 @@ package org.apache.camel.component.google.drive.springboot;
 
 import java.util.List;
 import javax.annotation.Generated;
+import org.apache.camel.component.google.drive.GoogleDriveClientFactory;
+import org.apache.camel.component.google.drive.GoogleDriveConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -50,7 +52,7 @@ public class GoogleDriveComponentConfiguration
      * To use the shared configuration. The option is a
      * org.apache.camel.component.google.drive.GoogleDriveConfiguration type.
      */
-    private String configuration;
+    private GoogleDriveConfiguration configuration;
     /**
      * Specifies the level of permissions you want a drive application to have
      * to a user account. See https://developers.google.com/drive/web/scopes for
@@ -88,7 +90,7 @@ public class GoogleDriveComponentConfiguration
      * client. Will by default use BatchGoogleDriveClientFactory. The option is
      * a org.apache.camel.component.google.drive.GoogleDriveClientFactory type.
      */
-    private String clientFactory;
+    private GoogleDriveClientFactory clientFactory;
     /**
      * OAuth 2 access token. This typically expires after an hour so
      * refreshToken is recommended for long term usage.
@@ -121,11 +123,11 @@ public class GoogleDriveComponentConfiguration
         this.clientId = clientId;
     }
 
-    public String getConfiguration() {
+    public GoogleDriveConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(GoogleDriveConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -164,11 +166,11 @@ public class GoogleDriveComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getClientFactory() {
+    public GoogleDriveClientFactory getClientFactory() {
         return clientFactory;
     }
 
-    public void setClientFactory(String clientFactory) {
+    public void setClientFactory(GoogleDriveClientFactory clientFactory) {
         this.clientFactory = clientFactory;
     }
 

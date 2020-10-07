@@ -18,7 +18,9 @@ package org.apache.camel.component.aws.sqs.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.sqs.AmazonSQS;
 import org.apache.camel.component.aws.sqs.SqsComponent;
+import org.apache.camel.component.aws.sqs.SqsConfiguration;
 import org.apache.camel.component.aws.sqs.SqsOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -48,7 +50,7 @@ public class SqsComponentConfiguration
      * To use the AmazonSQS as client. The option is a
      * com.amazonaws.services.sqs.AmazonSQS type.
      */
-    private String amazonSQSClient;
+    private AmazonSQS amazonSQSClient;
     /**
      * Setting the autocreation of the queue
      */
@@ -63,7 +65,7 @@ public class SqsComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.sqs.SqsConfiguration type.
      */
-    private String configuration;
+    private SqsConfiguration configuration;
     /**
      * The underlying protocol used to communicate with SQS
      */
@@ -259,11 +261,11 @@ public class SqsComponentConfiguration
         this.amazonAWSHost = amazonAWSHost;
     }
 
-    public String getAmazonSQSClient() {
+    public AmazonSQS getAmazonSQSClient() {
         return amazonSQSClient;
     }
 
-    public void setAmazonSQSClient(String amazonSQSClient) {
+    public void setAmazonSQSClient(AmazonSQS amazonSQSClient) {
         this.amazonSQSClient = amazonSQSClient;
     }
 
@@ -283,11 +285,11 @@ public class SqsComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public SqsConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(SqsConfiguration configuration) {
         this.configuration = configuration;
     }
 

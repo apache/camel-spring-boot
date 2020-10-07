@@ -25,37 +25,37 @@ The component supports 36 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.caffeine-cache.action* | To configure the default cache action. If an action is set in the message header, then the operation from the header takes precedence. |  | String
-| *camel.component.caffeine-cache.cache-loader* | To configure a CacheLoader in case of a LoadCache use. The option is a com.github.benmanes.caffeine.cache.CacheLoader type. |  | String
-| *camel.component.caffeine-cache.configuration* | Sets the global component configuration. The option is a org.apache.camel.component.caffeine.CaffeineConfiguration type. |  | String
+| *camel.component.caffeine-cache.cache-loader* | To configure a CacheLoader in case of a LoadCache use. The option is a com.github.benmanes.caffeine.cache.CacheLoader type. |  | CacheLoader
+| *camel.component.caffeine-cache.configuration* | Sets the global component configuration. The option is a org.apache.camel.component.caffeine.CaffeineConfiguration type. |  | CaffeineConfiguration
 | *camel.component.caffeine-cache.create-cache-if-not-exist* | Configure if a cache need to be created if it does exist or can't be pre-configured. | true | Boolean
 | *camel.component.caffeine-cache.enabled* | Whether to enable auto configuration of the caffeine-cache component. This is enabled by default. |  | Boolean
 | *camel.component.caffeine-cache.eviction-type* | Set the eviction Type for this cache |  | EvictionType
 | *camel.component.caffeine-cache.expire-after-access-time* | Set the expire After Access Time in case of time based Eviction (in seconds) | 300 | Integer
 | *camel.component.caffeine-cache.expire-after-write-time* | Set the expire After Access Write in case of time based Eviction (in seconds) | 300 | Integer
 | *camel.component.caffeine-cache.initial-capacity* | Set the initial Capacity for the cache | 10000 | Integer
-| *camel.component.caffeine-cache.key* | To configure the default action key. If a key is set in the message header, then the key from the header takes precedence. The option is a java.lang.Object type. |  | String
+| *camel.component.caffeine-cache.key* | To configure the default action key. If a key is set in the message header, then the key from the header takes precedence. The option is a java.lang.Object type. |  | Object
 | *camel.component.caffeine-cache.key-type* | The cache key type, default java.lang.Object |  | String
 | *camel.component.caffeine-cache.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.caffeine-cache.maximum-size* | Set the maximum size for the cache | 10000 | Integer
-| *camel.component.caffeine-cache.removal-listener* | Set a specific removal Listener for the cache. The option is a com.github.benmanes.caffeine.cache.RemovalListener type. |  | String
-| *camel.component.caffeine-cache.stats-counter* | Set a specific Stats Counter for the cache stats. The option is a com.github.benmanes.caffeine.cache.stats.StatsCounter type. |  | String
+| *camel.component.caffeine-cache.removal-listener* | Set a specific removal Listener for the cache. The option is a com.github.benmanes.caffeine.cache.RemovalListener type. |  | RemovalListener
+| *camel.component.caffeine-cache.stats-counter* | Set a specific Stats Counter for the cache stats. The option is a com.github.benmanes.caffeine.cache.stats.StatsCounter type. |  | StatsCounter
 | *camel.component.caffeine-cache.stats-enabled* | To enable stats on the cache | false | Boolean
 | *camel.component.caffeine-cache.value-type* | The cache value type, default java.lang.Object |  | String
 | *camel.component.caffeine-loadcache.action* | To configure the default cache action. If an action is set in the message header, then the operation from the header takes precedence. |  | String
-| *camel.component.caffeine-loadcache.cache-loader* | To configure a CacheLoader in case of a LoadCache use. The option is a com.github.benmanes.caffeine.cache.CacheLoader type. |  | String
-| *camel.component.caffeine-loadcache.configuration* | Sets the global component configuration. The option is a org.apache.camel.component.caffeine.CaffeineConfiguration type. |  | String
+| *camel.component.caffeine-loadcache.cache-loader* | To configure a CacheLoader in case of a LoadCache use. The option is a com.github.benmanes.caffeine.cache.CacheLoader type. |  | CacheLoader
+| *camel.component.caffeine-loadcache.configuration* | Sets the global component configuration. The option is a org.apache.camel.component.caffeine.CaffeineConfiguration type. |  | CaffeineConfiguration
 | *camel.component.caffeine-loadcache.create-cache-if-not-exist* | Configure if a cache need to be created if it does exist or can't be pre-configured. | true | Boolean
 | *camel.component.caffeine-loadcache.enabled* | Whether to enable auto configuration of the caffeine-loadcache component. This is enabled by default. |  | Boolean
 | *camel.component.caffeine-loadcache.eviction-type* | Set the eviction Type for this cache |  | EvictionType
 | *camel.component.caffeine-loadcache.expire-after-access-time* | Set the expire After Access Time in case of time based Eviction (in seconds) | 300 | Integer
 | *camel.component.caffeine-loadcache.expire-after-write-time* | Set the expire After Access Write in case of time based Eviction (in seconds) | 300 | Integer
 | *camel.component.caffeine-loadcache.initial-capacity* | Set the initial Capacity for the cache | 10000 | Integer
-| *camel.component.caffeine-loadcache.key* | To configure the default action key. If a key is set in the message header, then the key from the header takes precedence. The option is a java.lang.Object type. |  | String
+| *camel.component.caffeine-loadcache.key* | To configure the default action key. If a key is set in the message header, then the key from the header takes precedence. The option is a java.lang.Object type. |  | Object
 | *camel.component.caffeine-loadcache.key-type* | The cache key type, default java.lang.Object |  | String
 | *camel.component.caffeine-loadcache.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.caffeine-loadcache.maximum-size* | Set the maximum size for the cache | 10000 | Integer
-| *camel.component.caffeine-loadcache.removal-listener* | Set a specific removal Listener for the cache. The option is a com.github.benmanes.caffeine.cache.RemovalListener type. |  | String
-| *camel.component.caffeine-loadcache.stats-counter* | Set a specific Stats Counter for the cache stats. The option is a com.github.benmanes.caffeine.cache.stats.StatsCounter type. |  | String
+| *camel.component.caffeine-loadcache.removal-listener* | Set a specific removal Listener for the cache. The option is a com.github.benmanes.caffeine.cache.RemovalListener type. |  | RemovalListener
+| *camel.component.caffeine-loadcache.stats-counter* | Set a specific Stats Counter for the cache stats. The option is a com.github.benmanes.caffeine.cache.stats.StatsCounter type. |  | StatsCounter
 | *camel.component.caffeine-loadcache.stats-enabled* | To enable stats on the cache | false | Boolean
 | *camel.component.caffeine-loadcache.value-type* | The cache value type, default java.lang.Object |  | String
 | *camel.component.caffeine-cache.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean

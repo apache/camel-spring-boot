@@ -24,7 +24,7 @@ The component supports 16 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.ganglia.configuration* | To use the shared configuration. The option is a org.apache.camel.component.ganglia.GangliaConfiguration type. |  | String
+| *camel.component.ganglia.configuration* | To use the shared configuration. The option is a org.apache.camel.component.ganglia.GangliaConfiguration type. |  | GangliaConfiguration
 | *camel.component.ganglia.dmax* | Minumum time in seconds before Ganglia will purge the metric value if it expires. Set to 0 and the value will remain in Ganglia indefinitely until a gmond agent restart. | 0 | Integer
 | *camel.component.ganglia.enabled* | Whether to enable auto configuration of the ganglia component. This is enabled by default. |  | Boolean
 | *camel.component.ganglia.group-name* | The group that the metric belongs to. | java | String

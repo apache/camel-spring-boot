@@ -17,7 +17,12 @@
 package org.apache.camel.component.ahc.ws.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.ahc.AhcBinding;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
+import org.asynchttpclient.AsyncHttpClient;
+import org.asynchttpclient.AsyncHttpClientConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -76,24 +81,24 @@ public class WsComponentConfiguration
      * AHC and Camel. The option is a org.apache.camel.component.ahc.AhcBinding
      * type.
      */
-    private String binding;
+    private AhcBinding binding;
     /**
      * To use a custom AsyncHttpClient. The option is a
      * org.asynchttpclient.AsyncHttpClient type.
      */
-    private String client;
+    private AsyncHttpClient client;
     /**
      * To configure the AsyncHttpClient to use a custom
      * com.ning.http.client.AsyncHttpClientConfig instance. The option is a
      * org.asynchttpclient.AsyncHttpClientConfig type.
      */
-    private String clientConfig;
+    private AsyncHttpClientConfig clientConfig;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
     /**
      * Reference to a org.apache.camel.support.jsse.SSLContextParameters in the
      * Registry. Note that configuring this option will override any SSL/TLS
@@ -101,7 +106,7 @@ public class WsComponentConfiguration
      * endpoint or component level. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters.
      */
@@ -142,43 +147,45 @@ public class WsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getBinding() {
+    public AhcBinding getBinding() {
         return binding;
     }
 
-    public void setBinding(String binding) {
+    public void setBinding(AhcBinding binding) {
         this.binding = binding;
     }
 
-    public String getClient() {
+    public AsyncHttpClient getClient() {
         return client;
     }
 
-    public void setClient(String client) {
+    public void setClient(AsyncHttpClient client) {
         this.client = client;
     }
 
-    public String getClientConfig() {
+    public AsyncHttpClientConfig getClientConfig() {
         return clientConfig;
     }
 
-    public void setClientConfig(String clientConfig) {
+    public void setClientConfig(AsyncHttpClientConfig clientConfig) {
         this.clientConfig = clientConfig;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

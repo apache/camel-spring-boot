@@ -18,7 +18,9 @@ package org.apache.camel.component.lucene.springboot;
 
 import java.io.File;
 import javax.annotation.Generated;
+import org.apache.camel.component.lucene.LuceneConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.lucene.analysis.Analyzer;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -46,7 +48,7 @@ public class LuceneComponentConfiguration
      * analyzers out of the box. The option is a
      * org.apache.lucene.analysis.Analyzer type.
      */
-    private String analyzer;
+    private Analyzer analyzer;
     /**
      * A file system directory in which index files are created upon analysis of
      * the document by the specified analyzer
@@ -82,13 +84,13 @@ public class LuceneComponentConfiguration
      * To use a shared lucene configuration. The option is a
      * org.apache.camel.component.lucene.LuceneConfiguration type.
      */
-    private String config;
+    private LuceneConfiguration config;
 
-    public String getAnalyzer() {
+    public Analyzer getAnalyzer() {
         return analyzer;
     }
 
-    public void setAnalyzer(String analyzer) {
+    public void setAnalyzer(Analyzer analyzer) {
         this.analyzer = analyzer;
     }
 
@@ -135,11 +137,11 @@ public class LuceneComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfig() {
+    public LuceneConfiguration getConfig() {
         return config;
     }
 
-    public void setConfig(String config) {
+    public void setConfig(LuceneConfiguration config) {
         this.config = config;
     }
 }

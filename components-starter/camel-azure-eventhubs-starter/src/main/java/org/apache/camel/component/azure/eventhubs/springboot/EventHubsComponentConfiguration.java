@@ -18,9 +18,14 @@ package org.apache.camel.component.azure.eventhubs.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import com.azure.core.amqp.AmqpRetryOptions;
 import com.azure.core.amqp.AmqpTransportType;
+import com.azure.messaging.eventhubs.CheckpointStore;
+import com.azure.messaging.eventhubs.EventHubProducerAsyncClient;
 import com.azure.messaging.eventhubs.models.EventPosition;
+import com.azure.storage.common.StorageSharedKeyCredential;
 import org.apache.camel.component.azure.eventhubs.EventHubsComponent;
+import org.apache.camel.component.azure.eventhubs.EventHubsConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -49,7 +54,7 @@ public class EventHubsComponentConfiguration
      * default retry options are used. The option is a
      * com.azure.core.amqp.AmqpRetryOptions type.
      */
-    private String amqpRetryOptions;
+    private AmqpRetryOptions amqpRetryOptions;
     /**
      * Sets the transport type by which all the communication with Azure Event
      * Hubs occurs. Default value is AmqpTransportType#AMQP.
@@ -65,7 +70,7 @@ public class EventHubsComponentConfiguration
      * The component configurations. The option is a
      * org.apache.camel.component.azure.eventhubs.EventHubsConfiguration type.
      */
-    private String configuration;
+    private EventHubsConfiguration configuration;
     /**
      * In case you chose the default BlobCheckpointStore, this sets access key
      * for the associated azure account name to be used for authentication with
@@ -89,7 +94,7 @@ public class EventHubsComponentConfiguration
      * this holds the important authentication information. The option is a
      * com.azure.storage.common.StorageSharedKeyCredential type.
      */
-    private String blobStorageSharedKeyCredential;
+    private StorageSharedKeyCredential blobStorageSharedKeyCredential;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -108,7 +113,7 @@ public class EventHubsComponentConfiguration
      * which stores all checkpoint offsets into Azure Blob Storage. The option
      * is a com.azure.messaging.eventhubs.CheckpointStore type.
      */
-    private String checkpointStore;
+    private CheckpointStore checkpointStore;
     /**
      * Sets the name of the consumer group this consumer is associated with.
      * Events are read in the context of this group. The name of the consumer
@@ -170,7 +175,7 @@ public class EventHubsComponentConfiguration
      * produce the data in camel producer. The option is a
      * com.azure.messaging.eventhubs.EventHubProducerAsyncClient type.
      */
-    private String producerAsyncClient;
+    private EventHubProducerAsyncClient producerAsyncClient;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -195,11 +200,11 @@ public class EventHubsComponentConfiguration
      */
     private String sharedAccessName;
 
-    public String getAmqpRetryOptions() {
+    public AmqpRetryOptions getAmqpRetryOptions() {
         return amqpRetryOptions;
     }
 
-    public void setAmqpRetryOptions(String amqpRetryOptions) {
+    public void setAmqpRetryOptions(AmqpRetryOptions amqpRetryOptions) {
         this.amqpRetryOptions = amqpRetryOptions;
     }
 
@@ -219,11 +224,11 @@ public class EventHubsComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public EventHubsConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(EventHubsConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -251,12 +256,12 @@ public class EventHubsComponentConfiguration
         this.blobContainerName = blobContainerName;
     }
 
-    public String getBlobStorageSharedKeyCredential() {
+    public StorageSharedKeyCredential getBlobStorageSharedKeyCredential() {
         return blobStorageSharedKeyCredential;
     }
 
     public void setBlobStorageSharedKeyCredential(
-            String blobStorageSharedKeyCredential) {
+            StorageSharedKeyCredential blobStorageSharedKeyCredential) {
         this.blobStorageSharedKeyCredential = blobStorageSharedKeyCredential;
     }
 
@@ -268,11 +273,11 @@ public class EventHubsComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public String getCheckpointStore() {
+    public CheckpointStore getCheckpointStore() {
         return checkpointStore;
     }
 
-    public void setCheckpointStore(String checkpointStore) {
+    public void setCheckpointStore(CheckpointStore checkpointStore) {
         this.checkpointStore = checkpointStore;
     }
 
@@ -324,11 +329,12 @@ public class EventHubsComponentConfiguration
         this.partitionKey = partitionKey;
     }
 
-    public String getProducerAsyncClient() {
+    public EventHubProducerAsyncClient getProducerAsyncClient() {
         return producerAsyncClient;
     }
 
-    public void setProducerAsyncClient(String producerAsyncClient) {
+    public void setProducerAsyncClient(
+            EventHubProducerAsyncClient producerAsyncClient) {
         this.producerAsyncClient = producerAsyncClient;
     }
 

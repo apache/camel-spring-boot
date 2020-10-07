@@ -17,6 +17,7 @@
 package org.apache.camel.component.log.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.spi.ExchangeFormatter;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -60,7 +61,7 @@ public class LogComponentConfiguration
      * DefaultExchangeFormatter. The option is a
      * org.apache.camel.spi.ExchangeFormatter type.
      */
-    private String exchangeFormatter;
+    private ExchangeFormatter exchangeFormatter;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -81,11 +82,11 @@ public class LogComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getExchangeFormatter() {
+    public ExchangeFormatter getExchangeFormatter() {
         return exchangeFormatter;
     }
 
-    public void setExchangeFormatter(String exchangeFormatter) {
+    public void setExchangeFormatter(ExchangeFormatter exchangeFormatter) {
         this.exchangeFormatter = exchangeFormatter;
     }
 }

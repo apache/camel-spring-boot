@@ -16,12 +16,15 @@
  */
 package org.apache.camel.component.aws2.cw.springboot;
 
+import java.time.Instant;
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.cw.Cw2Component;
+import org.apache.camel.component.aws2.cw.Cw2Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.cloudwatch.CloudWatchClient;
 
 /**
  * Sending metrics to AWS CloudWatch using AWS SDK version 2.x.
@@ -43,7 +46,7 @@ public class Cw2ComponentConfiguration
      * To use the AmazonCloudWatch as the client. The option is a
      * software.amazon.awssdk.services.cloudwatch.CloudWatchClient type.
      */
-    private String amazonCwClient;
+    private CloudWatchClient amazonCwClient;
     /**
      * Setting the autoDiscoverClient mechanism, if true, the component will
      * look for a client instance in the registry automatically otherwise it
@@ -54,7 +57,7 @@ public class Cw2ComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws2.cw.Cw2Configuration type.
      */
-    private String configuration;
+    private Cw2Configuration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -91,7 +94,7 @@ public class Cw2ComponentConfiguration
     /**
      * The metric timestamp. The option is a java.time.Instant type.
      */
-    private String timestamp;
+    private Instant timestamp;
     /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
@@ -119,11 +122,11 @@ public class Cw2ComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonCwClient() {
+    public CloudWatchClient getAmazonCwClient() {
         return amazonCwClient;
     }
 
-    public void setAmazonCwClient(String amazonCwClient) {
+    public void setAmazonCwClient(CloudWatchClient amazonCwClient) {
         this.amazonCwClient = amazonCwClient;
     }
 
@@ -135,11 +138,11 @@ public class Cw2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public Cw2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Cw2Configuration configuration) {
         this.configuration = configuration;
     }
 
@@ -191,11 +194,11 @@ public class Cw2ComponentConfiguration
         this.region = region;
     }
 
-    public String getTimestamp() {
+    public Instant getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Instant timestamp) {
         this.timestamp = timestamp;
     }
 

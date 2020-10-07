@@ -18,6 +18,7 @@ package org.apache.camel.component.jgroups.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.jgroups.JChannel;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -40,7 +41,7 @@ public class JGroupsComponentConfiguration
     /**
      * Channel to use. The option is a org.jgroups.JChannel type.
      */
-    private String channel;
+    private JChannel channel;
     /**
      * Specifies configuration properties of the JChannel used by the endpoint.
      */
@@ -78,11 +79,11 @@ public class JGroupsComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getChannel() {
+    public JChannel getChannel() {
         return channel;
     }
 
-    public void setChannel(String channel) {
+    public void setChannel(JChannel channel) {
         this.channel = channel;
     }
 

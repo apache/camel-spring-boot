@@ -24,16 +24,16 @@ The component supports 121 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.atomix-map.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | String
+| *camel.component.atomix-map.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | Atomix
 | *camel.component.atomix-map.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.atomix-map.configuration* | The shared component configuration. The option is a org.apache.camel.component.atomix.client.map.AtomixMapConfiguration type. |  | String
+| *camel.component.atomix-map.configuration* | The shared component configuration. The option is a org.apache.camel.component.atomix.client.map.AtomixMapConfiguration type. |  | AtomixMapConfiguration
 | *camel.component.atomix-map.configuration-uri* | The path to the AtomixClient configuration |  | String
 | *camel.component.atomix-map.default-action* | The default action. |  | AtomixMap$Action
-| *camel.component.atomix-map.default-resource-config* | The cluster wide default resource configuration. The option is a java.util.Properties type. |  | String
-| *camel.component.atomix-map.default-resource-options* | The local default resource options. The option is a java.util.Properties type. |  | String
+| *camel.component.atomix-map.default-resource-config* | The cluster wide default resource configuration. The option is a java.util.Properties type. |  | Properties
+| *camel.component.atomix-map.default-resource-options* | The local default resource options. The option is a java.util.Properties type. |  | Properties
 | *camel.component.atomix-map.enabled* | Whether to enable auto configuration of the atomix-map component. This is enabled by default. |  | Boolean
 | *camel.component.atomix-map.ephemeral* | Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored. | false | Boolean
-| *camel.component.atomix-map.key* | The key to use if none is set in the header or to listen for events for a specific key. The option is a java.lang.Object type. |  | String
+| *camel.component.atomix-map.key* | The key to use if none is set in the header or to listen for events for a specific key. The option is a java.lang.Object type. |  | Object
 | *camel.component.atomix-map.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.atomix-map.nodes* | The nodes the AtomixClient should connect to |  | List
 | *camel.component.atomix-map.read-consistency* | The read consistency level. |  | ReadConsistency
@@ -41,16 +41,16 @@ The component supports 121 options, which are listed below.
 | *camel.component.atomix-map.resource-options* | Local resources configurations |  | Map
 | *camel.component.atomix-map.result-header* | The header that wil carry the result. |  | String
 | *camel.component.atomix-map.transport-class-name* | The class name (fqn) of the Atomix transport | io.atomix.catalyst.transport.netty.NettyTransport | String
-| *camel.component.atomix-map.ttl* | The resource ttl. The option is a long type. |  | String
-| *camel.component.atomix-messaging.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | String
+| *camel.component.atomix-map.ttl* | The resource ttl. The option is a long type. |  | Long
+| *camel.component.atomix-messaging.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | Atomix
 | *camel.component.atomix-messaging.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.atomix-messaging.broadcast-type* | The broadcast type. |  | AtomixMessaging$BroadcastType
 | *camel.component.atomix-messaging.channel-name* | The messaging channel name |  | String
-| *camel.component.atomix-messaging.configuration* | The shared component configuration. The option is a org.apache.camel.component.atomix.client.messaging.AtomixMessagingConfiguration type. |  | String
+| *camel.component.atomix-messaging.configuration* | The shared component configuration. The option is a org.apache.camel.component.atomix.client.messaging.AtomixMessagingConfiguration type. |  | AtomixMessagingConfiguration
 | *camel.component.atomix-messaging.configuration-uri* | The path to the AtomixClient configuration |  | String
 | *camel.component.atomix-messaging.default-action* | The default action. |  | AtomixMessaging$Action
-| *camel.component.atomix-messaging.default-resource-config* | The cluster wide default resource configuration. The option is a java.util.Properties type. |  | String
-| *camel.component.atomix-messaging.default-resource-options* | The local default resource options. The option is a java.util.Properties type. |  | String
+| *camel.component.atomix-messaging.default-resource-config* | The cluster wide default resource configuration. The option is a java.util.Properties type. |  | Properties
+| *camel.component.atomix-messaging.default-resource-options* | The local default resource options. The option is a java.util.Properties type. |  | Properties
 | *camel.component.atomix-messaging.enabled* | Whether to enable auto configuration of the atomix-messaging component. This is enabled by default. |  | Boolean
 | *camel.component.atomix-messaging.ephemeral* | Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored. | false | Boolean
 | *camel.component.atomix-messaging.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
@@ -61,15 +61,15 @@ The component supports 121 options, which are listed below.
 | *camel.component.atomix-messaging.resource-options* | Local resources configurations |  | Map
 | *camel.component.atomix-messaging.result-header* | The header that wil carry the result. |  | String
 | *camel.component.atomix-messaging.transport-class-name* | The class name (fqn) of the Atomix transport | io.atomix.catalyst.transport.netty.NettyTransport | String
-| *camel.component.atomix-multimap.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | String
-| *camel.component.atomix-multimap.configuration* | The shared component configuration. The option is a org.apache.camel.component.atomix.client.multimap.AtomixMultiMapConfiguration type. |  | String
+| *camel.component.atomix-multimap.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | Atomix
+| *camel.component.atomix-multimap.configuration* | The shared component configuration. The option is a org.apache.camel.component.atomix.client.multimap.AtomixMultiMapConfiguration type. |  | AtomixMultiMapConfiguration
 | *camel.component.atomix-multimap.configuration-uri* | The path to the AtomixClient configuration |  | String
 | *camel.component.atomix-multimap.default-action* | The default action. |  | AtomixMultiMap$Action
-| *camel.component.atomix-multimap.default-resource-config* | The cluster wide default resource configuration. The option is a java.util.Properties type. |  | String
-| *camel.component.atomix-multimap.default-resource-options* | The local default resource options. The option is a java.util.Properties type. |  | String
+| *camel.component.atomix-multimap.default-resource-config* | The cluster wide default resource configuration. The option is a java.util.Properties type. |  | Properties
+| *camel.component.atomix-multimap.default-resource-options* | The local default resource options. The option is a java.util.Properties type. |  | Properties
 | *camel.component.atomix-multimap.enabled* | Whether to enable auto configuration of the atomix-multimap component. This is enabled by default. |  | Boolean
 | *camel.component.atomix-multimap.ephemeral* | Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored. | false | Boolean
-| *camel.component.atomix-multimap.key* | The key to use if none is set in the header or to listen for events for a specific key. The option is a java.lang.Object type. |  | String
+| *camel.component.atomix-multimap.key* | The key to use if none is set in the header or to listen for events for a specific key. The option is a java.lang.Object type. |  | Object
 | *camel.component.atomix-multimap.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.atomix-multimap.nodes* | The nodes the AtomixClient should connect to |  | List
 | *camel.component.atomix-multimap.read-consistency* | The read consistency level. |  | ReadConsistency
@@ -77,14 +77,14 @@ The component supports 121 options, which are listed below.
 | *camel.component.atomix-multimap.resource-options* | Local resources configurations |  | Map
 | *camel.component.atomix-multimap.result-header* | The header that wil carry the result. |  | String
 | *camel.component.atomix-multimap.transport-class-name* | The class name (fqn) of the Atomix transport | io.atomix.catalyst.transport.netty.NettyTransport | String
-| *camel.component.atomix-multimap.ttl* | The resource ttl. The option is a long type. |  | String
-| *camel.component.atomix-queue.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | String
+| *camel.component.atomix-multimap.ttl* | The resource ttl. The option is a long type. |  | Long
+| *camel.component.atomix-queue.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | Atomix
 | *camel.component.atomix-queue.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.atomix-queue.configuration* | The shared component configuration. The option is a org.apache.camel.component.atomix.client.queue.AtomixQueueConfiguration type. |  | String
+| *camel.component.atomix-queue.configuration* | The shared component configuration. The option is a org.apache.camel.component.atomix.client.queue.AtomixQueueConfiguration type. |  | AtomixQueueConfiguration
 | *camel.component.atomix-queue.configuration-uri* | The path to the AtomixClient configuration |  | String
 | *camel.component.atomix-queue.default-action* | The default action. |  | AtomixQueue$Action
-| *camel.component.atomix-queue.default-resource-config* | The cluster wide default resource configuration. The option is a java.util.Properties type. |  | String
-| *camel.component.atomix-queue.default-resource-options* | The local default resource options. The option is a java.util.Properties type. |  | String
+| *camel.component.atomix-queue.default-resource-config* | The cluster wide default resource configuration. The option is a java.util.Properties type. |  | Properties
+| *camel.component.atomix-queue.default-resource-options* | The local default resource options. The option is a java.util.Properties type. |  | Properties
 | *camel.component.atomix-queue.enabled* | Whether to enable auto configuration of the atomix-queue component. This is enabled by default. |  | Boolean
 | *camel.component.atomix-queue.ephemeral* | Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored. | false | Boolean
 | *camel.component.atomix-queue.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
@@ -94,13 +94,13 @@ The component supports 121 options, which are listed below.
 | *camel.component.atomix-queue.resource-options* | Local resources configurations |  | Map
 | *camel.component.atomix-queue.result-header* | The header that wil carry the result. |  | String
 | *camel.component.atomix-queue.transport-class-name* | The class name (fqn) of the Atomix transport | io.atomix.catalyst.transport.netty.NettyTransport | String
-| *camel.component.atomix-set.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | String
+| *camel.component.atomix-set.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | Atomix
 | *camel.component.atomix-set.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.atomix-set.configuration* | The shared component configuration. The option is a org.apache.camel.component.atomix.client.set.AtomixSetConfiguration type. |  | String
+| *camel.component.atomix-set.configuration* | The shared component configuration. The option is a org.apache.camel.component.atomix.client.set.AtomixSetConfiguration type. |  | AtomixSetConfiguration
 | *camel.component.atomix-set.configuration-uri* | The path to the AtomixClient configuration |  | String
 | *camel.component.atomix-set.default-action* | The default action. |  | AtomixSet$Action
-| *camel.component.atomix-set.default-resource-config* | The cluster wide default resource configuration. The option is a java.util.Properties type. |  | String
-| *camel.component.atomix-set.default-resource-options* | The local default resource options. The option is a java.util.Properties type. |  | String
+| *camel.component.atomix-set.default-resource-config* | The cluster wide default resource configuration. The option is a java.util.Properties type. |  | Properties
+| *camel.component.atomix-set.default-resource-options* | The local default resource options. The option is a java.util.Properties type. |  | Properties
 | *camel.component.atomix-set.enabled* | Whether to enable auto configuration of the atomix-set component. This is enabled by default. |  | Boolean
 | *camel.component.atomix-set.ephemeral* | Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored. | false | Boolean
 | *camel.component.atomix-set.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
@@ -110,14 +110,14 @@ The component supports 121 options, which are listed below.
 | *camel.component.atomix-set.resource-options* | Local resources configurations |  | Map
 | *camel.component.atomix-set.result-header* | The header that wil carry the result. |  | String
 | *camel.component.atomix-set.transport-class-name* | The class name (fqn) of the Atomix transport | io.atomix.catalyst.transport.netty.NettyTransport | String
-| *camel.component.atomix-set.ttl* | The resource ttl. The option is a long type. |  | String
-| *camel.component.atomix-value.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | String
+| *camel.component.atomix-set.ttl* | The resource ttl. The option is a long type. |  | Long
+| *camel.component.atomix-value.atomix* | The Atomix instance to use. The option is a io.atomix.Atomix type. |  | Atomix
 | *camel.component.atomix-value.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.atomix-value.configuration* | The shared component configuration. The option is a org.apache.camel.component.atomix.client.value.AtomixValueConfiguration type. |  | String
+| *camel.component.atomix-value.configuration* | The shared component configuration. The option is a org.apache.camel.component.atomix.client.value.AtomixValueConfiguration type. |  | AtomixValueConfiguration
 | *camel.component.atomix-value.configuration-uri* | The path to the AtomixClient configuration |  | String
 | *camel.component.atomix-value.default-action* | The default action. |  | AtomixValue$Action
-| *camel.component.atomix-value.default-resource-config* | The cluster wide default resource configuration. The option is a java.util.Properties type. |  | String
-| *camel.component.atomix-value.default-resource-options* | The local default resource options. The option is a java.util.Properties type. |  | String
+| *camel.component.atomix-value.default-resource-config* | The cluster wide default resource configuration. The option is a java.util.Properties type. |  | Properties
+| *camel.component.atomix-value.default-resource-options* | The local default resource options. The option is a java.util.Properties type. |  | Properties
 | *camel.component.atomix-value.enabled* | Whether to enable auto configuration of the atomix-value component. This is enabled by default. |  | Boolean
 | *camel.component.atomix-value.ephemeral* | Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored. | false | Boolean
 | *camel.component.atomix-value.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
@@ -127,7 +127,7 @@ The component supports 121 options, which are listed below.
 | *camel.component.atomix-value.resource-options* | Local resources configurations |  | Map
 | *camel.component.atomix-value.result-header* | The header that wil carry the result. |  | String
 | *camel.component.atomix-value.transport-class-name* | The class name (fqn) of the Atomix transport | io.atomix.catalyst.transport.netty.NettyTransport | String
-| *camel.component.atomix-value.ttl* | The resource ttl. The option is a long type. |  | String
+| *camel.component.atomix-value.ttl* | The resource ttl. The option is a long type. |  | Long
 | *camel.component.atomix.cluster.service.address* | The address of the node - node only. |  | String
 | *camel.component.atomix.cluster.service.attributes* | Custom service attributes. |  | Map
 | *camel.component.atomix.cluster.service.configuration-uri* | The Atomix configuration uri. |  | String

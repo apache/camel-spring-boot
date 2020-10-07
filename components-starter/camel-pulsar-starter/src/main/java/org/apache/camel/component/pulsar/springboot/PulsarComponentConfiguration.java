@@ -18,11 +18,17 @@ package org.apache.camel.component.pulsar.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.pulsar.PulsarComponent;
+import org.apache.camel.component.pulsar.PulsarConfiguration;
+import org.apache.camel.component.pulsar.PulsarMessageReceiptFactory;
+import org.apache.camel.component.pulsar.utils.AutoConfiguration;
 import org.apache.camel.component.pulsar.utils.consumers.SubscriptionInitialPosition;
 import org.apache.camel.component.pulsar.utils.consumers.SubscriptionType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.pulsar.client.api.BatcherBuilder;
 import org.apache.pulsar.client.api.CompressionType;
+import org.apache.pulsar.client.api.MessageRouter;
 import org.apache.pulsar.client.api.MessageRoutingMode;
+import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.RegexSubscriptionMode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -48,7 +54,7 @@ public class PulsarComponentConfiguration
      * endpoints will reuse. The option is a
      * org.apache.camel.component.pulsar.PulsarConfiguration type.
      */
-    private String configuration;
+    private PulsarConfiguration configuration;
     /**
      * Group the consumer acknowledgments for the specified time in milliseconds
      * - defaults to 100
@@ -139,12 +145,12 @@ public class PulsarComponentConfiguration
      * PulsarMessageReceipt. The option is a
      * org.apache.camel.component.pulsar.PulsarMessageReceiptFactory type.
      */
-    private String pulsarMessageReceiptFactory;
+    private PulsarMessageReceiptFactory pulsarMessageReceiptFactory;
     /**
      * Control batching method used by the producer. The option is a
      * org.apache.pulsar.client.api.BatcherBuilder type.
      */
-    private String batcherBuilder;
+    private BatcherBuilder batcherBuilder;
     /**
      * Control whether automatic batching of messages is enabled for the
      * producer.
@@ -200,7 +206,7 @@ public class PulsarComponentConfiguration
      * Custom Message Router to use. The option is a
      * org.apache.pulsar.client.api.MessageRouter type.
      */
-    private String messageRouter;
+    private MessageRouter messageRouter;
     /**
      * Message Routing Mode to use
      */
@@ -217,7 +223,7 @@ public class PulsarComponentConfiguration
      * The pulsar auto configuration. The option is a
      * org.apache.camel.component.pulsar.utils.AutoConfiguration type.
      */
-    private String autoConfiguration;
+    private AutoConfiguration autoConfiguration;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -228,13 +234,13 @@ public class PulsarComponentConfiguration
      * The pulsar client. The option is a
      * org.apache.pulsar.client.api.PulsarClient type.
      */
-    private String pulsarClient;
+    private PulsarClient pulsarClient;
 
-    public String getConfiguration() {
+    public PulsarConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(PulsarConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -369,20 +375,20 @@ public class PulsarComponentConfiguration
         this.topicsPattern = topicsPattern;
     }
 
-    public String getPulsarMessageReceiptFactory() {
+    public PulsarMessageReceiptFactory getPulsarMessageReceiptFactory() {
         return pulsarMessageReceiptFactory;
     }
 
     public void setPulsarMessageReceiptFactory(
-            String pulsarMessageReceiptFactory) {
+            PulsarMessageReceiptFactory pulsarMessageReceiptFactory) {
         this.pulsarMessageReceiptFactory = pulsarMessageReceiptFactory;
     }
 
-    public String getBatcherBuilder() {
+    public BatcherBuilder getBatcherBuilder() {
         return batcherBuilder;
     }
 
-    public void setBatcherBuilder(String batcherBuilder) {
+    public void setBatcherBuilder(BatcherBuilder batcherBuilder) {
         this.batcherBuilder = batcherBuilder;
     }
 
@@ -460,11 +466,11 @@ public class PulsarComponentConfiguration
         this.maxPendingMessagesAcrossPartitions = maxPendingMessagesAcrossPartitions;
     }
 
-    public String getMessageRouter() {
+    public MessageRouter getMessageRouter() {
         return messageRouter;
     }
 
-    public void setMessageRouter(String messageRouter) {
+    public void setMessageRouter(MessageRouter messageRouter) {
         this.messageRouter = messageRouter;
     }
 
@@ -492,11 +498,11 @@ public class PulsarComponentConfiguration
         this.sendTimeoutMs = sendTimeoutMs;
     }
 
-    public String getAutoConfiguration() {
+    public AutoConfiguration getAutoConfiguration() {
         return autoConfiguration;
     }
 
-    public void setAutoConfiguration(String autoConfiguration) {
+    public void setAutoConfiguration(AutoConfiguration autoConfiguration) {
         this.autoConfiguration = autoConfiguration;
     }
 
@@ -511,11 +517,11 @@ public class PulsarComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getPulsarClient() {
+    public PulsarClient getPulsarClient() {
         return pulsarClient;
     }
 
-    public void setPulsarClient(String pulsarClient) {
+    public void setPulsarClient(PulsarClient pulsarClient) {
         this.pulsarClient = pulsarClient;
     }
 }

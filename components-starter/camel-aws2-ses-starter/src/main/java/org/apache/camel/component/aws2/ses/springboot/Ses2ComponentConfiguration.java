@@ -19,10 +19,12 @@ package org.apache.camel.component.aws2.ses.springboot;
 import java.util.List;
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.ses.Ses2Component;
+import org.apache.camel.component.aws2.ses.Ses2Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.ses.SesClient;
 
 /**
  * Send e-mails through AWS SES service using AWS SDK version 2.x.
@@ -44,7 +46,7 @@ public class Ses2ComponentConfiguration
      * To use the AmazonSimpleEmailService as the client. The option is a
      * software.amazon.awssdk.services.ses.SesClient type.
      */
-    private String amazonSESClient;
+    private SesClient amazonSESClient;
     /**
      * Setting the autoDiscoverClient mechanism, if true, the component will
      * look for a client instance in the registry automatically otherwise it
@@ -55,7 +57,7 @@ public class Ses2ComponentConfiguration
      * component configuration. The option is a
      * org.apache.camel.component.aws2.ses.Ses2Configuration type.
      */
-    private String configuration;
+    private Ses2Configuration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -124,11 +126,11 @@ public class Ses2ComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonSESClient() {
+    public SesClient getAmazonSESClient() {
         return amazonSESClient;
     }
 
-    public void setAmazonSESClient(String amazonSESClient) {
+    public void setAmazonSESClient(SesClient amazonSESClient) {
         this.amazonSESClient = amazonSESClient;
     }
 
@@ -140,11 +142,11 @@ public class Ses2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public Ses2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Ses2Configuration configuration) {
         this.configuration = configuration;
     }
 

@@ -18,6 +18,8 @@ package org.apache.camel.component.telegram.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.asynchttpclient.AsyncHttpClient;
+import org.asynchttpclient.AsyncHttpClientConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -72,13 +74,13 @@ public class TelegramComponentConfiguration
      * To use a custom AsyncHttpClient. The option is a
      * org.asynchttpclient.AsyncHttpClient type.
      */
-    private String client;
+    private AsyncHttpClient client;
     /**
      * To configure the AsyncHttpClient to use a custom
      * com.ning.http.client.AsyncHttpClientConfig instance. The option is a
      * org.asynchttpclient.AsyncHttpClientConfig type.
      */
-    private String clientConfig;
+    private AsyncHttpClientConfig clientConfig;
     /**
      * The default Telegram authorization token to be used when the information
      * is not provided in the endpoints.
@@ -120,19 +122,19 @@ public class TelegramComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getClient() {
+    public AsyncHttpClient getClient() {
         return client;
     }
 
-    public void setClient(String client) {
+    public void setClient(AsyncHttpClient client) {
         this.client = client;
     }
 
-    public String getClientConfig() {
+    public AsyncHttpClientConfig getClientConfig() {
         return clientConfig;
     }
 
-    public void setClientConfig(String clientConfig) {
+    public void setClientConfig(AsyncHttpClientConfig clientConfig) {
         this.clientConfig = clientConfig;
     }
 

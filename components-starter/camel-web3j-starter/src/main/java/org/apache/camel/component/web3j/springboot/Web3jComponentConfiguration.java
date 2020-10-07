@@ -16,11 +16,14 @@
  */
 package org.apache.camel.component.web3j.springboot;
 
+import java.math.BigInteger;
 import java.util.List;
 import javax.annotation.Generated;
+import org.apache.camel.component.web3j.Web3jConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
+import org.web3j.protocol.Web3j;
 
 /**
  * Interact with Ethereum nodes using web3j client API.
@@ -46,7 +49,7 @@ public class Web3jComponentConfiguration
      * Default configuration. The option is a
      * org.apache.camel.component.web3j.Web3jConfiguration type.
      */
-    private String configuration;
+    private Web3jConfiguration configuration;
     /**
      * The address the transaction is send from
      */
@@ -65,7 +68,7 @@ public class Web3jComponentConfiguration
      * The maximum gas allowed in this block. The option is a
      * java.math.BigInteger type.
      */
-    private String gasLimit;
+    private BigInteger gasLimit;
     /**
      * A transaction privateFor nodes with public keys in a Quorum network
      */
@@ -92,7 +95,7 @@ public class Web3jComponentConfiguration
      * The preconfigured Web3j object. The option is a org.web3j.protocol.Web3j
      * type.
      */
-    private String web3j;
+    private Web3j web3j;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -131,12 +134,12 @@ public class Web3jComponentConfiguration
     /**
      * The filter id to use. The option is a java.math.BigInteger type.
      */
-    private String filterId;
+    private BigInteger filterId;
     /**
      * Gas price used for each paid gas. The option is a java.math.BigInteger
      * type.
      */
-    private String gasPrice;
+    private BigInteger gasPrice;
     /**
      * A hexadecimal string representation (32 bytes) of the hash rate.
      */
@@ -150,7 +153,7 @@ public class Web3jComponentConfiguration
      * The transactions/uncle index position in the block. The option is a
      * java.math.BigInteger type.
      */
-    private String index;
+    private BigInteger index;
     /**
      * The key name in the database.
      */
@@ -182,12 +185,12 @@ public class Web3jComponentConfiguration
      * The transaction index position withing a block. The option is a
      * java.math.BigInteger type.
      */
-    private String position;
+    private BigInteger position;
     /**
      * The priority of a whisper message. The option is a java.math.BigInteger
      * type.
      */
-    private String priority;
+    private BigInteger priority;
     /**
      * Message to sign by calculating an Ethereum specific signature.
      */
@@ -209,12 +212,12 @@ public class Web3jComponentConfiguration
      * The time to live in seconds of a whisper message. The option is a
      * java.math.BigInteger type.
      */
-    private String ttl;
+    private BigInteger ttl;
     /**
      * The value sent within a transaction. The option is a java.math.BigInteger
      * type.
      */
-    private String value;
+    private BigInteger value;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -230,11 +233,11 @@ public class Web3jComponentConfiguration
         this.addresses = addresses;
     }
 
-    public String getConfiguration() {
+    public Web3jConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Web3jConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -262,11 +265,11 @@ public class Web3jComponentConfiguration
         this.fullTransactionObjects = fullTransactionObjects;
     }
 
-    public String getGasLimit() {
+    public BigInteger getGasLimit() {
         return gasLimit;
     }
 
-    public void setGasLimit(String gasLimit) {
+    public void setGasLimit(BigInteger gasLimit) {
         this.gasLimit = gasLimit;
     }
 
@@ -310,11 +313,11 @@ public class Web3jComponentConfiguration
         this.topics = topics;
     }
 
-    public String getWeb3j() {
+    public Web3j getWeb3j() {
         return web3j;
     }
 
-    public void setWeb3j(String web3j) {
+    public void setWeb3j(Web3j web3j) {
         this.web3j = web3j;
     }
 
@@ -374,19 +377,19 @@ public class Web3jComponentConfiguration
         this.databaseName = databaseName;
     }
 
-    public String getFilterId() {
+    public BigInteger getFilterId() {
         return filterId;
     }
 
-    public void setFilterId(String filterId) {
+    public void setFilterId(BigInteger filterId) {
         this.filterId = filterId;
     }
 
-    public String getGasPrice() {
+    public BigInteger getGasPrice() {
         return gasPrice;
     }
 
-    public void setGasPrice(String gasPrice) {
+    public void setGasPrice(BigInteger gasPrice) {
         this.gasPrice = gasPrice;
     }
 
@@ -406,11 +409,11 @@ public class Web3jComponentConfiguration
         this.headerPowHash = headerPowHash;
     }
 
-    public String getIndex() {
+    public BigInteger getIndex() {
         return index;
     }
 
-    public void setIndex(String index) {
+    public void setIndex(BigInteger index) {
         this.index = index;
     }
 
@@ -454,19 +457,19 @@ public class Web3jComponentConfiguration
         this.operation = operation;
     }
 
-    public String getPosition() {
+    public BigInteger getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(BigInteger position) {
         this.position = position;
     }
 
-    public String getPriority() {
+    public BigInteger getPriority() {
         return priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(BigInteger priority) {
         this.priority = priority;
     }
 
@@ -502,19 +505,19 @@ public class Web3jComponentConfiguration
         this.transactionHash = transactionHash;
     }
 
-    public String getTtl() {
+    public BigInteger getTtl() {
         return ttl;
     }
 
-    public void setTtl(String ttl) {
+    public void setTtl(BigInteger ttl) {
         this.ttl = ttl;
     }
 
-    public String getValue() {
+    public BigInteger getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(BigInteger value) {
         this.value = value;
     }
 

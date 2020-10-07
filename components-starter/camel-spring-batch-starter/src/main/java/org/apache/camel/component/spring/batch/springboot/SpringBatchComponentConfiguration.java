@@ -18,6 +18,8 @@ package org.apache.camel.component.spring.batch.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.springframework.batch.core.configuration.JobRegistry;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -41,12 +43,12 @@ public class SpringBatchComponentConfiguration
      * Explicitly specifies a JobLauncher to be used. The option is a
      * org.springframework.batch.core.launch.JobLauncher type.
      */
-    private String jobLauncher;
+    private JobLauncher jobLauncher;
     /**
      * Explicitly specifies a JobRegistry to be used. The option is a
      * org.springframework.batch.core.configuration.JobRegistry type.
      */
-    private String jobRegistry;
+    private JobRegistry jobRegistry;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -65,19 +67,19 @@ public class SpringBatchComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getJobLauncher() {
+    public JobLauncher getJobLauncher() {
         return jobLauncher;
     }
 
-    public void setJobLauncher(String jobLauncher) {
+    public void setJobLauncher(JobLauncher jobLauncher) {
         this.jobLauncher = jobLauncher;
     }
 
-    public String getJobRegistry() {
+    public JobRegistry getJobRegistry() {
         return jobRegistry;
     }
 
-    public void setJobRegistry(String jobRegistry) {
+    public void setJobRegistry(JobRegistry jobRegistry) {
         this.jobRegistry = jobRegistry;
     }
 

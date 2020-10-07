@@ -17,6 +17,7 @@
 package org.apache.camel.component.jdbc.springboot;
 
 import javax.annotation.Generated;
+import javax.sql.DataSource;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -41,7 +42,7 @@ public class JdbcComponentConfiguration
      * To use the DataSource instance instead of looking up the data source by
      * name from the registry. The option is a javax.sql.DataSource type.
      */
-    private String dataSource;
+    private DataSource dataSource;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -60,11 +61,11 @@ public class JdbcComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getDataSource() {
+    public DataSource getDataSource() {
         return dataSource;
     }
 
-    public void setDataSource(String dataSource) {
+    public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

@@ -17,6 +17,7 @@
 package org.apache.camel.component.google.bigquery.sql.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -42,7 +43,7 @@ public class GoogleBigQuerySQLComponentConfiguration
      * provided the default one will be used. The option is a
      * org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory type.
      */
-    private String connectionFactory;
+    private GoogleBigQueryConnectionFactory connectionFactory;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -65,11 +66,12 @@ public class GoogleBigQuerySQLComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getConnectionFactory() {
+    public GoogleBigQueryConnectionFactory getConnectionFactory() {
         return connectionFactory;
     }
 
-    public void setConnectionFactory(String connectionFactory) {
+    public void setConnectionFactory(
+            GoogleBigQueryConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 

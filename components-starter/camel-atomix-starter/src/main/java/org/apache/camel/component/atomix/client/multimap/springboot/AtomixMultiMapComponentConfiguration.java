@@ -20,10 +20,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import javax.annotation.Generated;
+import io.atomix.Atomix;
 import io.atomix.catalyst.transport.Address;
 import io.atomix.resource.ReadConsistency;
 import org.apache.camel.component.atomix.client.multimap.AtomixMultiMap.Action;
 import org.apache.camel.component.atomix.client.multimap.AtomixMultiMapComponent;
+import org.apache.camel.component.atomix.client.multimap.AtomixMultiMapConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -47,12 +49,12 @@ public class AtomixMultiMapComponentConfiguration
     /**
      * The Atomix instance to use. The option is a io.atomix.Atomix type.
      */
-    private String atomix;
+    private Atomix atomix;
     /**
      * The shared component configuration. The option is a
      * org.apache.camel.component.atomix.client.multimap.AtomixMultiMapConfiguration type.
      */
-    private String configuration;
+    private AtomixMultiMapConfiguration configuration;
     /**
      * The path to the AtomixClient configuration
      */
@@ -65,7 +67,7 @@ public class AtomixMultiMapComponentConfiguration
      * The key to use if none is set in the header or to listen for events for a
      * specific key. The option is a java.lang.Object type.
      */
-    private String key;
+    private Object key;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -92,7 +94,7 @@ public class AtomixMultiMapComponentConfiguration
     /**
      * The resource ttl. The option is a long type.
      */
-    private String ttl;
+    private Long ttl;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -103,12 +105,12 @@ public class AtomixMultiMapComponentConfiguration
      * The cluster wide default resource configuration. The option is a
      * java.util.Properties type.
      */
-    private String defaultResourceConfig;
+    private Properties defaultResourceConfig;
     /**
      * The local default resource options. The option is a java.util.Properties
      * type.
      */
-    private String defaultResourceOptions;
+    private Properties defaultResourceOptions;
     /**
      * Sets if the local member should join groups as PersistentMember or not.
      * If set to ephemeral the local member will receive an auto generated ID
@@ -128,19 +130,19 @@ public class AtomixMultiMapComponentConfiguration
      */
     private Map<String, Properties> resourceOptions;
 
-    public String getAtomix() {
+    public Atomix getAtomix() {
         return atomix;
     }
 
-    public void setAtomix(String atomix) {
+    public void setAtomix(Atomix atomix) {
         this.atomix = atomix;
     }
 
-    public String getConfiguration() {
+    public AtomixMultiMapConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(AtomixMultiMapConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -160,11 +162,11 @@ public class AtomixMultiMapComponentConfiguration
         this.defaultAction = defaultAction;
     }
 
-    public String getKey() {
+    public Object getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(Object key) {
         this.key = key;
     }
 
@@ -200,11 +202,11 @@ public class AtomixMultiMapComponentConfiguration
         this.transportClassName = transportClassName;
     }
 
-    public String getTtl() {
+    public Long getTtl() {
         return ttl;
     }
 
-    public void setTtl(String ttl) {
+    public void setTtl(Long ttl) {
         this.ttl = ttl;
     }
 
@@ -219,19 +221,19 @@ public class AtomixMultiMapComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getDefaultResourceConfig() {
+    public Properties getDefaultResourceConfig() {
         return defaultResourceConfig;
     }
 
-    public void setDefaultResourceConfig(String defaultResourceConfig) {
+    public void setDefaultResourceConfig(Properties defaultResourceConfig) {
         this.defaultResourceConfig = defaultResourceConfig;
     }
 
-    public String getDefaultResourceOptions() {
+    public Properties getDefaultResourceOptions() {
         return defaultResourceOptions;
     }
 
-    public void setDefaultResourceOptions(String defaultResourceOptions) {
+    public void setDefaultResourceOptions(Properties defaultResourceOptions) {
         this.defaultResourceOptions = defaultResourceOptions;
     }
 

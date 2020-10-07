@@ -20,10 +20,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import javax.annotation.Generated;
+import io.atomix.Atomix;
 import io.atomix.catalyst.transport.Address;
 import io.atomix.resource.ReadConsistency;
 import org.apache.camel.component.atomix.client.map.AtomixMap.Action;
 import org.apache.camel.component.atomix.client.map.AtomixMapComponent;
+import org.apache.camel.component.atomix.client.map.AtomixMapConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -47,12 +49,12 @@ public class AtomixMapComponentConfiguration
     /**
      * The Atomix instance to use. The option is a io.atomix.Atomix type.
      */
-    private String atomix;
+    private Atomix atomix;
     /**
      * The shared component configuration. The option is a
      * org.apache.camel.component.atomix.client.map.AtomixMapConfiguration type.
      */
-    private String configuration;
+    private AtomixMapConfiguration configuration;
     /**
      * The path to the AtomixClient configuration
      */
@@ -65,7 +67,7 @@ public class AtomixMapComponentConfiguration
      * The key to use if none is set in the header or to listen for events for a
      * specific key. The option is a java.lang.Object type.
      */
-    private String key;
+    private Object key;
     /**
      * The nodes the AtomixClient should connect to
      */
@@ -81,7 +83,7 @@ public class AtomixMapComponentConfiguration
     /**
      * The resource ttl. The option is a long type.
      */
-    private String ttl;
+    private Long ttl;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -112,12 +114,12 @@ public class AtomixMapComponentConfiguration
      * The cluster wide default resource configuration. The option is a
      * java.util.Properties type.
      */
-    private String defaultResourceConfig;
+    private Properties defaultResourceConfig;
     /**
      * The local default resource options. The option is a java.util.Properties
      * type.
      */
-    private String defaultResourceOptions;
+    private Properties defaultResourceOptions;
     /**
      * Sets if the local member should join groups as PersistentMember or not.
      * If set to ephemeral the local member will receive an auto generated ID
@@ -137,19 +139,19 @@ public class AtomixMapComponentConfiguration
      */
     private Map<String, Properties> resourceOptions;
 
-    public String getAtomix() {
+    public Atomix getAtomix() {
         return atomix;
     }
 
-    public void setAtomix(String atomix) {
+    public void setAtomix(Atomix atomix) {
         this.atomix = atomix;
     }
 
-    public String getConfiguration() {
+    public AtomixMapConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(AtomixMapConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -169,11 +171,11 @@ public class AtomixMapComponentConfiguration
         this.defaultAction = defaultAction;
     }
 
-    public String getKey() {
+    public Object getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(Object key) {
         this.key = key;
     }
 
@@ -201,11 +203,11 @@ public class AtomixMapComponentConfiguration
         this.transportClassName = transportClassName;
     }
 
-    public String getTtl() {
+    public Long getTtl() {
         return ttl;
     }
 
-    public void setTtl(String ttl) {
+    public void setTtl(Long ttl) {
         this.ttl = ttl;
     }
 
@@ -236,19 +238,19 @@ public class AtomixMapComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getDefaultResourceConfig() {
+    public Properties getDefaultResourceConfig() {
         return defaultResourceConfig;
     }
 
-    public void setDefaultResourceConfig(String defaultResourceConfig) {
+    public void setDefaultResourceConfig(Properties defaultResourceConfig) {
         this.defaultResourceConfig = defaultResourceConfig;
     }
 
-    public String getDefaultResourceOptions() {
+    public Properties getDefaultResourceOptions() {
         return defaultResourceOptions;
     }
 
-    public void setDefaultResourceOptions(String defaultResourceOptions) {
+    public void setDefaultResourceOptions(Properties defaultResourceOptions) {
         this.defaultResourceOptions = defaultResourceOptions;
     }
 

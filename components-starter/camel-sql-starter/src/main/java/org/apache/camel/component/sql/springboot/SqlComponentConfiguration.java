@@ -17,6 +17,7 @@
 package org.apache.camel.component.sql.springboot;
 
 import javax.annotation.Generated;
+import javax.sql.DataSource;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -41,7 +42,7 @@ public class SqlComponentConfiguration
      * Sets the DataSource to use to communicate with the database. The option
      * is a javax.sql.DataSource type.
      */
-    private String dataSource;
+    private DataSource dataSource;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -74,11 +75,11 @@ public class SqlComponentConfiguration
      */
     private Boolean usePlaceholder = true;
 
-    public String getDataSource() {
+    public DataSource getDataSource() {
         return dataSource;
     }
 
-    public void setDataSource(String dataSource) {
+    public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

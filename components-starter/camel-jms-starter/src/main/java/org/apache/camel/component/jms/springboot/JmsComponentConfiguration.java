@@ -17,16 +17,19 @@
 package org.apache.camel.component.jms.springboot;
 
 import javax.annotation.Generated;
+import javax.jms.ConnectionFactory;
+import javax.jms.ExceptionListener;
 import org.apache.camel.LoggingLevel;
-import org.apache.camel.component.jms.ConsumerType;
-import org.apache.camel.component.jms.DefaultTaskExecutorType;
-import org.apache.camel.component.jms.JmsComponent;
-import org.apache.camel.component.jms.JmsKeyFormatStrategy;
-import org.apache.camel.component.jms.JmsMessageType;
-import org.apache.camel.component.jms.ReplyToType;
+import org.apache.camel.component.jms.*;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.jms.support.converter.MessageConverter;
+import org.springframework.jms.support.destination.DestinationResolver;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.util.ErrorHandler;
 
 /**
  * Sent and receive messages to/from a JMS Queue or Topic.
@@ -56,7 +59,7 @@ public class JmsComponentConfiguration
      * either on the component or endpoint. The option is a
      * javax.jms.ConnectionFactory type.
      */
-    private String connectionFactory;
+    private ConnectionFactory connectionFactory;
     /**
      * Specifies whether Camel ignores the JMSReplyTo header in messages. If
      * true, Camel does not send a reply back to the destination specified in
@@ -261,7 +264,7 @@ public class JmsComponentConfiguration
      * Allows you to specify a custom task executor for consuming messages. The
      * option is a org.springframework.core.task.TaskExecutor type.
      */
-    private String taskExecutor;
+    private TaskExecutor taskExecutor;
     /**
      * Sets delivery delay to use for send calls for JMS. This option requires
      * JMS 2.0 compliant broker.
@@ -361,7 +364,7 @@ public class JmsComponentConfiguration
      * value, and thus have per message individual timeout values. See also the
      * requestTimeoutCheckerInterval option. The option is a long type.
      */
-    private String requestTimeout = "20000";
+    private Long requestTimeout = 20000L;
     /**
      * When sending messages, specifies the time-to-live of the message (in
      * milliseconds).
@@ -501,7 +504,7 @@ public class JmsComponentConfiguration
      * To use a shared JMS configuration. The option is a
      * org.apache.camel.component.jms.JmsConfiguration type.
      */
-    private String configuration;
+    private JmsConfiguration configuration;
     /**
      * A pluggable
      * org.springframework.jms.support.destination.DestinationResolver that
@@ -509,7 +512,7 @@ public class JmsComponentConfiguration
      * destination in a JNDI registry). The option is a
      * org.springframework.jms.support.destination.DestinationResolver type.
      */
-    private String destinationResolver;
+    private DestinationResolver destinationResolver;
     /**
      * Specifies a org.springframework.util.ErrorHandler to be invoked in case
      * of any uncaught exceptions thrown while processing a Message. By default
@@ -520,13 +523,13 @@ public class JmsComponentConfiguration
      * configure, than having to code a custom errorHandler. The option is a
      * org.springframework.util.ErrorHandler type.
      */
-    private String errorHandler;
+    private ErrorHandler errorHandler;
     /**
      * Specifies the JMS Exception Listener that is to be notified of any
      * underlying JMS exceptions. The option is a javax.jms.ExceptionListener
      * type.
      */
-    private String exceptionListener;
+    private ExceptionListener exceptionListener;
     /**
      * Specify the limit for the number of consumers that are allowed to be idle
      * at any given time.
@@ -576,14 +579,14 @@ public class JmsComponentConfiguration
      * in control how to map to/from a javax.jms.Message. The option is a
      * org.springframework.jms.support.converter.MessageConverter type.
      */
-    private String messageConverter;
+    private MessageConverter messageConverter;
     /**
      * To use the given MessageCreatedStrategy which are invoked when Camel
      * creates new instances of javax.jms.Message objects when Camel is sending
      * a JMS message. The option is a
      * org.apache.camel.component.jms.MessageCreatedStrategy type.
      */
-    private String messageCreatedStrategy;
+    private MessageCreatedStrategy messageCreatedStrategy;
     /**
      * When sending, specifies whether message IDs should be added. This is just
      * an hint to the JMS broker. If the JMS provider accepts this hint, these
@@ -598,7 +601,7 @@ public class JmsComponentConfiguration
      * Custom. The option is a
      * org.apache.camel.component.jms.MessageListenerContainerFactory type.
      */
-    private String messageListenerContainerFactory;
+    private MessageListenerContainerFactory messageListenerContainerFactory;
     /**
      * Specifies whether timestamps should be enabled by default on sending
      * messages. This is just an hint to the JMS broker. If the JMS provider
@@ -616,18 +619,18 @@ public class JmsComponentConfiguration
      * To use a custom QueueBrowseStrategy when browsing queues. The option is a
      * org.apache.camel.component.jms.QueueBrowseStrategy type.
      */
-    private String queueBrowseStrategy;
+    private QueueBrowseStrategy queueBrowseStrategy;
     /**
      * The timeout for receiving messages (in milliseconds). The option is a
      * long type.
      */
-    private String receiveTimeout = "1000";
+    private Long receiveTimeout = 1000L;
     /**
      * Specifies the interval between recovery attempts, i.e. when a connection
      * is being refreshed, in milliseconds. The default is 5000 ms, that is, 5
      * seconds. The option is a long type.
      */
-    private String recoveryInterval = "5000";
+    private Long recoveryInterval = 5000L;
     /**
      * Configures how often Camel should check for timed out Exchanges when
      * doing request/reply over JMS. By default Camel checks once per second.
@@ -635,7 +638,7 @@ public class JmsComponentConfiguration
      * this interval, to check more frequently. The timeout is determined by the
      * option requestTimeout. The option is a long type.
      */
-    private String requestTimeoutCheckerInterval = "1000";
+    private Long requestTimeoutCheckerInterval = 1000L;
     /**
      * If enabled and you are using Request Reply messaging (InOut) and an
      * Exchange failed on the consumer side, then the caused Exception will be
@@ -681,13 +684,13 @@ public class JmsComponentConfiguration
      * Interval in millis to sleep each time while waiting for provisional
      * correlation id to be updated. The option is a long type.
      */
-    private String waitForProvisionCorrelationToBeUpdatedThreadSleepingTime = "100";
+    private Long waitForProvisionCorrelationToBeUpdatedThreadSleepingTime = 100L;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
     /**
      * Allows to configure the default errorHandler logging level for logging
      * uncaught exceptions.
@@ -740,7 +743,7 @@ public class JmsComponentConfiguration
      * The Spring transaction manager to use. The option is a
      * org.springframework.transaction.PlatformTransactionManager type.
      */
-    private String transactionManager;
+    private PlatformTransactionManager transactionManager;
     /**
      * The name of the transaction to use.
      */
@@ -759,11 +762,11 @@ public class JmsComponentConfiguration
         this.clientId = clientId;
     }
 
-    public String getConnectionFactory() {
+    public ConnectionFactory getConnectionFactory() {
         return connectionFactory;
     }
 
-    public void setConnectionFactory(String connectionFactory) {
+    public void setConnectionFactory(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
@@ -970,11 +973,11 @@ public class JmsComponentConfiguration
         this.replyToSameDestinationAllowed = replyToSameDestinationAllowed;
     }
 
-    public String getTaskExecutor() {
+    public TaskExecutor getTaskExecutor() {
         return taskExecutor;
     }
 
-    public void setTaskExecutor(String taskExecutor) {
+    public void setTaskExecutor(TaskExecutor taskExecutor) {
         this.taskExecutor = taskExecutor;
     }
 
@@ -1084,11 +1087,11 @@ public class JmsComponentConfiguration
         this.replyToType = replyToType;
     }
 
-    public String getRequestTimeout() {
+    public Long getRequestTimeout() {
         return requestTimeout;
     }
 
-    public void setRequestTimeout(String requestTimeout) {
+    public void setRequestTimeout(Long requestTimeout) {
         this.requestTimeout = requestTimeout;
     }
 
@@ -1242,35 +1245,35 @@ public class JmsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public JmsConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(JmsConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getDestinationResolver() {
+    public DestinationResolver getDestinationResolver() {
         return destinationResolver;
     }
 
-    public void setDestinationResolver(String destinationResolver) {
+    public void setDestinationResolver(DestinationResolver destinationResolver) {
         this.destinationResolver = destinationResolver;
     }
 
-    public String getErrorHandler() {
+    public ErrorHandler getErrorHandler() {
         return errorHandler;
     }
 
-    public void setErrorHandler(String errorHandler) {
+    public void setErrorHandler(ErrorHandler errorHandler) {
         this.errorHandler = errorHandler;
     }
 
-    public String getExceptionListener() {
+    public ExceptionListener getExceptionListener() {
         return exceptionListener;
     }
 
-    public void setExceptionListener(String exceptionListener) {
+    public void setExceptionListener(ExceptionListener exceptionListener) {
         this.exceptionListener = exceptionListener;
     }
 
@@ -1323,19 +1326,20 @@ public class JmsComponentConfiguration
         this.maxMessagesPerTask = maxMessagesPerTask;
     }
 
-    public String getMessageConverter() {
+    public MessageConverter getMessageConverter() {
         return messageConverter;
     }
 
-    public void setMessageConverter(String messageConverter) {
+    public void setMessageConverter(MessageConverter messageConverter) {
         this.messageConverter = messageConverter;
     }
 
-    public String getMessageCreatedStrategy() {
+    public MessageCreatedStrategy getMessageCreatedStrategy() {
         return messageCreatedStrategy;
     }
 
-    public void setMessageCreatedStrategy(String messageCreatedStrategy) {
+    public void setMessageCreatedStrategy(
+            MessageCreatedStrategy messageCreatedStrategy) {
         this.messageCreatedStrategy = messageCreatedStrategy;
     }
 
@@ -1347,12 +1351,12 @@ public class JmsComponentConfiguration
         this.messageIdEnabled = messageIdEnabled;
     }
 
-    public String getMessageListenerContainerFactory() {
+    public MessageListenerContainerFactory getMessageListenerContainerFactory() {
         return messageListenerContainerFactory;
     }
 
     public void setMessageListenerContainerFactory(
-            String messageListenerContainerFactory) {
+            MessageListenerContainerFactory messageListenerContainerFactory) {
         this.messageListenerContainerFactory = messageListenerContainerFactory;
     }
 
@@ -1372,36 +1376,36 @@ public class JmsComponentConfiguration
         this.pubSubNoLocal = pubSubNoLocal;
     }
 
-    public String getQueueBrowseStrategy() {
+    public QueueBrowseStrategy getQueueBrowseStrategy() {
         return queueBrowseStrategy;
     }
 
-    public void setQueueBrowseStrategy(String queueBrowseStrategy) {
+    public void setQueueBrowseStrategy(QueueBrowseStrategy queueBrowseStrategy) {
         this.queueBrowseStrategy = queueBrowseStrategy;
     }
 
-    public String getReceiveTimeout() {
+    public Long getReceiveTimeout() {
         return receiveTimeout;
     }
 
-    public void setReceiveTimeout(String receiveTimeout) {
+    public void setReceiveTimeout(Long receiveTimeout) {
         this.receiveTimeout = receiveTimeout;
     }
 
-    public String getRecoveryInterval() {
+    public Long getRecoveryInterval() {
         return recoveryInterval;
     }
 
-    public void setRecoveryInterval(String recoveryInterval) {
+    public void setRecoveryInterval(Long recoveryInterval) {
         this.recoveryInterval = recoveryInterval;
     }
 
-    public String getRequestTimeoutCheckerInterval() {
+    public Long getRequestTimeoutCheckerInterval() {
         return requestTimeoutCheckerInterval;
     }
 
     public void setRequestTimeoutCheckerInterval(
-            String requestTimeoutCheckerInterval) {
+            Long requestTimeoutCheckerInterval) {
         this.requestTimeoutCheckerInterval = requestTimeoutCheckerInterval;
     }
 
@@ -1439,20 +1443,21 @@ public class JmsComponentConfiguration
         this.waitForProvisionCorrelationToBeUpdatedCounter = waitForProvisionCorrelationToBeUpdatedCounter;
     }
 
-    public String getWaitForProvisionCorrelationToBeUpdatedThreadSleepingTime() {
+    public Long getWaitForProvisionCorrelationToBeUpdatedThreadSleepingTime() {
         return waitForProvisionCorrelationToBeUpdatedThreadSleepingTime;
     }
 
     public void setWaitForProvisionCorrelationToBeUpdatedThreadSleepingTime(
-            String waitForProvisionCorrelationToBeUpdatedThreadSleepingTime) {
+            Long waitForProvisionCorrelationToBeUpdatedThreadSleepingTime) {
         this.waitForProvisionCorrelationToBeUpdatedThreadSleepingTime = waitForProvisionCorrelationToBeUpdatedThreadSleepingTime;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 
@@ -1514,11 +1519,12 @@ public class JmsComponentConfiguration
         this.lazyCreateTransactionManager = lazyCreateTransactionManager;
     }
 
-    public String getTransactionManager() {
+    public PlatformTransactionManager getTransactionManager() {
         return transactionManager;
     }
 
-    public void setTransactionManager(String transactionManager) {
+    public void setTransactionManager(
+            PlatformTransactionManager transactionManager) {
         this.transactionManager = transactionManager;
     }
 

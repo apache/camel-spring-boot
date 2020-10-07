@@ -16,8 +16,12 @@
  */
 package org.apache.camel.component.stomp.springboot;
 
+import java.util.Properties;
 import javax.annotation.Generated;
+import org.apache.camel.component.stomp.StompConfiguration;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -45,7 +49,7 @@ public class StompComponentConfiguration
     /**
      * To set custom headers. The option is a java.util.Properties type.
      */
-    private String customHeaders;
+    private Properties customHeaders;
     /**
      * The virtual host name
      */
@@ -84,13 +88,13 @@ public class StompComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.stomp.StompConfiguration type.
      */
-    private String configuration;
+    private StompConfiguration configuration;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
     /**
      * The username
      */
@@ -103,7 +107,7 @@ public class StompComponentConfiguration
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters.
      */
@@ -117,11 +121,11 @@ public class StompComponentConfiguration
         this.brokerUrl = brokerUrl;
     }
 
-    public String getCustomHeaders() {
+    public Properties getCustomHeaders() {
         return customHeaders;
     }
 
-    public void setCustomHeaders(String customHeaders) {
+    public void setCustomHeaders(Properties customHeaders) {
         this.customHeaders = customHeaders;
     }
 
@@ -168,19 +172,20 @@ public class StompComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public StompConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(StompConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 
@@ -200,11 +205,12 @@ public class StompComponentConfiguration
         this.passcode = passcode;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

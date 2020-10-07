@@ -26,7 +26,7 @@ The component supports 15 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.aws2-sts.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws2-sts.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
-| *camel.component.aws2-sts.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.sts.STS2Configuration type. |  | String
+| *camel.component.aws2-sts.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.sts.STS2Configuration type. |  | STS2Configuration
 | *camel.component.aws2-sts.enabled* | Whether to enable auto configuration of the aws2-sts component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-sts.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.aws2-sts.operation* | The operation to perform |  | STS2Operations
@@ -36,7 +36,7 @@ The component supports 15 options, which are listed below.
 | *camel.component.aws2-sts.proxy-protocol* | To define a proxy protocol when instantiating the STS client |  | Protocol
 | *camel.component.aws2-sts.region* | The region in which STS client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() | aws-global | String
 | *camel.component.aws2-sts.secret-key* | Amazon AWS Secret Key |  | String
-| *camel.component.aws2-sts.sts-client* | To use a existing configured AWS STS as client. The option is a software.amazon.awssdk.services.sts.StsClient type. |  | String
+| *camel.component.aws2-sts.sts-client* | To use a existing configured AWS STS as client. The option is a software.amazon.awssdk.services.sts.StsClient type. |  | StsClient
 | *camel.component.aws2-sts.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | *camel.component.aws2-sts.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===

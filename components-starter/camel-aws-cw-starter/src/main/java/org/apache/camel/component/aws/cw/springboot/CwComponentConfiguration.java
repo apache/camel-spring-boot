@@ -19,7 +19,9 @@ package org.apache.camel.component.aws.cw.springboot;
 import java.util.Date;
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.cloudwatch.AmazonCloudWatch;
 import org.apache.camel.component.aws.cw.CwComponent;
+import org.apache.camel.component.aws.cw.CwConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -44,7 +46,7 @@ public class CwComponentConfiguration
      * To use the AmazonCloudWatch as the client. The option is a
      * com.amazonaws.services.cloudwatch.AmazonCloudWatch type.
      */
-    private String amazonCwClient;
+    private AmazonCloudWatch amazonCwClient;
     /**
      * Setting the autoDiscoverClient mechanism, if true, the component will
      * look for a client instance in the registry automatically otherwise it
@@ -55,7 +57,7 @@ public class CwComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.cw.CwConfiguration type.
      */
-    private String configuration;
+    private CwConfiguration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -116,11 +118,11 @@ public class CwComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonCwClient() {
+    public AmazonCloudWatch getAmazonCwClient() {
         return amazonCwClient;
     }
 
-    public void setAmazonCwClient(String amazonCwClient) {
+    public void setAmazonCwClient(AmazonCloudWatch amazonCwClient) {
         this.amazonCwClient = amazonCwClient;
     }
 
@@ -132,11 +134,11 @@ public class CwComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public CwConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(CwConfiguration configuration) {
         this.configuration = configuration;
     }
 

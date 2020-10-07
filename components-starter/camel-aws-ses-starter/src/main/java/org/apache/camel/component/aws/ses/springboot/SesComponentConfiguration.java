@@ -19,7 +19,9 @@ package org.apache.camel.component.aws.ses.springboot;
 import java.util.List;
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import org.apache.camel.component.aws.ses.SesComponent;
+import org.apache.camel.component.aws.ses.SesConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -44,7 +46,7 @@ public class SesComponentConfiguration
      * To use the AmazonSimpleEmailService as the client. The option is a
      * com.amazonaws.services.simpleemail.AmazonSimpleEmailService type.
      */
-    private String amazonSESClient;
+    private AmazonSimpleEmailService amazonSESClient;
     /**
      * Setting the autoDiscoverClient mechanism, if true, the component will
      * look for a client instance in the registry automatically otherwise it
@@ -55,7 +57,7 @@ public class SesComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.ses.SesConfiguration type.
      */
-    private String configuration;
+    private SesConfiguration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -120,11 +122,11 @@ public class SesComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonSESClient() {
+    public AmazonSimpleEmailService getAmazonSESClient() {
         return amazonSESClient;
     }
 
-    public void setAmazonSESClient(String amazonSESClient) {
+    public void setAmazonSESClient(AmazonSimpleEmailService amazonSESClient) {
         this.amazonSESClient = amazonSESClient;
     }
 
@@ -136,11 +138,11 @@ public class SesComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public SesConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(SesConfiguration configuration) {
         this.configuration = configuration;
     }
 

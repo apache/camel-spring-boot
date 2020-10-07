@@ -17,6 +17,9 @@
 package org.apache.camel.component.vertx.springboot;
 
 import javax.annotation.Generated;
+import io.vertx.core.Vertx;
+import io.vertx.core.VertxOptions;
+import io.vertx.core.spi.VertxFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -54,12 +57,12 @@ public class VertxComponentConfiguration
      * To use the given vertx EventBus instead of creating a new embedded
      * EventBus. The option is a io.vertx.core.Vertx type.
      */
-    private String vertx;
+    private Vertx vertx;
     /**
      * Options to use for creating vertx. The option is a
      * io.vertx.core.VertxOptions type.
      */
-    private String vertxOptions;
+    private VertxOptions vertxOptions;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -90,7 +93,7 @@ public class VertxComponentConfiguration
      * To use a custom VertxFactory implementation. The option is a
      * io.vertx.core.spi.VertxFactory type.
      */
-    private String vertxFactory;
+    private VertxFactory vertxFactory;
 
     public String getHost() {
         return host;
@@ -116,19 +119,19 @@ public class VertxComponentConfiguration
         this.timeout = timeout;
     }
 
-    public String getVertx() {
+    public Vertx getVertx() {
         return vertx;
     }
 
-    public void setVertx(String vertx) {
+    public void setVertx(Vertx vertx) {
         this.vertx = vertx;
     }
 
-    public String getVertxOptions() {
+    public VertxOptions getVertxOptions() {
         return vertxOptions;
     }
 
-    public void setVertxOptions(String vertxOptions) {
+    public void setVertxOptions(VertxOptions vertxOptions) {
         this.vertxOptions = vertxOptions;
     }
 
@@ -159,11 +162,11 @@ public class VertxComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getVertxFactory() {
+    public VertxFactory getVertxFactory() {
         return vertxFactory;
     }
 
-    public void setVertxFactory(String vertxFactory) {
+    public void setVertxFactory(VertxFactory vertxFactory) {
         this.vertxFactory = vertxFactory;
     }
 }

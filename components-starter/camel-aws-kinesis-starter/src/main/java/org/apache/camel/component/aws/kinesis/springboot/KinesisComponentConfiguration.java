@@ -18,8 +18,10 @@ package org.apache.camel.component.aws.kinesis.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.kinesis.AmazonKinesis;
 import com.amazonaws.services.kinesis.model.ShardIteratorType;
 import org.apache.camel.component.aws.kinesis.KinesisComponent;
+import org.apache.camel.component.aws.kinesis.KinesisConfiguration;
 import org.apache.camel.component.aws.kinesis.KinesisShardClosedStrategyEnum;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -45,7 +47,7 @@ public class KinesisComponentConfiguration
      * Amazon Kinesis client to use for all requests for this endpoint. The
      * option is a com.amazonaws.services.kinesis.AmazonKinesis type.
      */
-    private String amazonKinesisClient;
+    private AmazonKinesis amazonKinesisClient;
     /**
      * Setting the autoDiscoverClient mechanism, if true, the component will
      * look for a client instance in the registry automatically otherwise it
@@ -56,7 +58,7 @@ public class KinesisComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.kinesis.KinesisConfiguration type.
      */
-    private String configuration;
+    private KinesisConfiguration configuration;
     /**
      * To define a proxy host when instantiating the Kinesis client
      */
@@ -136,11 +138,11 @@ public class KinesisComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonKinesisClient() {
+    public AmazonKinesis getAmazonKinesisClient() {
         return amazonKinesisClient;
     }
 
-    public void setAmazonKinesisClient(String amazonKinesisClient) {
+    public void setAmazonKinesisClient(AmazonKinesis amazonKinesisClient) {
         this.amazonKinesisClient = amazonKinesisClient;
     }
 
@@ -152,11 +154,11 @@ public class KinesisComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public KinesisConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(KinesisConfiguration configuration) {
         this.configuration = configuration;
     }
 

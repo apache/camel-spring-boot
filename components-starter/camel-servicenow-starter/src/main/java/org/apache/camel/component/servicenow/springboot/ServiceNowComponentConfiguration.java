@@ -18,9 +18,14 @@ package org.apache.camel.component.servicenow.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.component.servicenow.ServiceNowComponent;
+import org.apache.camel.component.servicenow.ServiceNowConfiguration;
 import org.apache.camel.component.servicenow.ServiceNowRelease;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
+import org.apache.cxf.configuration.security.ProxyAuthorizationPolicy;
+import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -44,7 +49,7 @@ public class ServiceNowComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.servicenow.ServiceNowConfiguration type.
      */
-    private String configuration;
+    private ServiceNowConfiguration configuration;
     /**
      * Set this parameter to true to return only scorecards where the indicator
      * Display field is selected. Set this parameter to all to return scorecards
@@ -196,7 +201,7 @@ public class ServiceNowComponentConfiguration
      * To configure http-client. The option is a
      * org.apache.cxf.transports.http.configuration.HTTPClientPolicy type.
      */
-    private String httpClientPolicy;
+    private HTTPClientPolicy httpClientPolicy;
     /**
      * The ServiceNow instance name
      */
@@ -205,12 +210,12 @@ public class ServiceNowComponentConfiguration
      * Sets Jackson's ObjectMapper to use for request/reply. The option is a
      * com.fasterxml.jackson.databind.ObjectMapper type.
      */
-    private String mapper;
+    private ObjectMapper mapper;
     /**
      * To configure proxy authentication. The option is a
      * org.apache.cxf.configuration.security.ProxyAuthorizationPolicy type.
      */
-    private String proxyAuthorizationPolicy;
+    private ProxyAuthorizationPolicy proxyAuthorizationPolicy;
     /**
      * Set this parameter to true to retrieve the target record when using
      * import set api. The import set result is then replaced by the target
@@ -262,7 +267,7 @@ public class ServiceNowComponentConfiguration
      * http://camel.apache.org/camel-configuration-utilities.html. The option is
      * a org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters.
      */
@@ -272,11 +277,11 @@ public class ServiceNowComponentConfiguration
      */
     private String userName;
 
-    public String getConfiguration() {
+    public ServiceNowConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(ServiceNowConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -515,11 +520,11 @@ public class ServiceNowComponentConfiguration
         this.dateTimeFormat = dateTimeFormat;
     }
 
-    public String getHttpClientPolicy() {
+    public HTTPClientPolicy getHttpClientPolicy() {
         return httpClientPolicy;
     }
 
-    public void setHttpClientPolicy(String httpClientPolicy) {
+    public void setHttpClientPolicy(HTTPClientPolicy httpClientPolicy) {
         this.httpClientPolicy = httpClientPolicy;
     }
 
@@ -531,19 +536,20 @@ public class ServiceNowComponentConfiguration
         this.instanceName = instanceName;
     }
 
-    public String getMapper() {
+    public ObjectMapper getMapper() {
         return mapper;
     }
 
-    public void setMapper(String mapper) {
+    public void setMapper(ObjectMapper mapper) {
         this.mapper = mapper;
     }
 
-    public String getProxyAuthorizationPolicy() {
+    public ProxyAuthorizationPolicy getProxyAuthorizationPolicy() {
         return proxyAuthorizationPolicy;
     }
 
-    public void setProxyAuthorizationPolicy(String proxyAuthorizationPolicy) {
+    public void setProxyAuthorizationPolicy(
+            ProxyAuthorizationPolicy proxyAuthorizationPolicy) {
         this.proxyAuthorizationPolicy = proxyAuthorizationPolicy;
     }
 
@@ -636,11 +642,12 @@ public class ServiceNowComponentConfiguration
         this.proxyUserName = proxyUserName;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

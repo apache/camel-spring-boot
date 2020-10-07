@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.ecs.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.ecs.ECS2Component;
+import org.apache.camel.component.aws2.ecs.ECS2Configuration;
 import org.apache.camel.component.aws2.ecs.ECS2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.ecs.EcsClient;
 
 /**
  * Manage AWS ECS cluster instances using AWS SDK version 2.x.
@@ -50,12 +52,12 @@ public class ECS2ComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.ecs.ECS2Configuration type.
      */
-    private String configuration;
+    private ECS2Configuration configuration;
     /**
      * To use a existing configured AWS ECS as client. The option is a
      * software.amazon.awssdk.services.ecs.EcsClient type.
      */
-    private String ecsClient;
+    private EcsClient ecsClient;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -120,19 +122,19 @@ public class ECS2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public ECS2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(ECS2Configuration configuration) {
         this.configuration = configuration;
     }
 
-    public String getEcsClient() {
+    public EcsClient getEcsClient() {
         return ecsClient;
     }
 
-    public void setEcsClient(String ecsClient) {
+    public void setEcsClient(EcsClient ecsClient) {
         this.ecsClient = ecsClient;
     }
 

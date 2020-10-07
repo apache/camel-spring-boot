@@ -16,10 +16,15 @@
  */
 package org.apache.camel.component.paho.springboot;
 
+import java.util.Properties;
 import javax.annotation.Generated;
+import javax.net.SocketFactory;
+import javax.net.ssl.HostnameVerifier;
 import org.apache.camel.component.paho.PahoComponent;
+import org.apache.camel.component.paho.PahoConfiguration;
 import org.apache.camel.component.paho.PahoPersistence;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -75,7 +80,7 @@ public class PahoComponentConfiguration
      * To use the shared Paho configuration. The option is a
      * org.apache.camel.component.paho.PahoConfiguration type.
      */
-    private String configuration;
+    private PahoConfiguration configuration;
     /**
      * Sets the connection timeout value. This value, measured in seconds,
      * defines the maximum time interval the client will wait for the network
@@ -222,12 +227,12 @@ public class PahoComponentConfiguration
      * To use a shared Paho client. The option is a
      * org.eclipse.paho.client.mqttv3.MqttClient type.
      */
-    private String client;
+    private MqttClient client;
     /**
      * Sets the Custom WebSocket Headers for the WebSocket Connection. The
      * option is a java.util.Properties type.
      */
-    private String customWebSocketHeaders;
+    private Properties customWebSocketHeaders;
     /**
      * Set the time in seconds that the executor service should wait when
      * terminating before forcefully terminating. It is not recommended to
@@ -250,7 +255,7 @@ public class PahoComponentConfiguration
      * application-specific security settings. The option is a
      * javax.net.SocketFactory type.
      */
-    private String socketFactory;
+    private SocketFactory socketFactory;
     /**
      * Sets the SSL properties for the connection. Note that these properties
      * are only valid if an implementation of the Java Secure Socket Extensions
@@ -291,14 +296,14 @@ public class PahoComponentConfiguration
      * algorithm available in the platform. Example values: PKIX or IBMJ9X509.
      * The option is a java.util.Properties type.
      */
-    private String sslClientProps;
+    private Properties sslClientProps;
     /**
      * Sets the HostnameVerifier for the SSL connection. Note that it will be
      * used after handshake on a connection and you should do actions by
      * yourself when hostname is verified error. There is no default
      * HostnameVerifier. The option is a javax.net.ssl.HostnameVerifier type.
      */
-    private String sslHostnameVerifier;
+    private HostnameVerifier sslHostnameVerifier;
     /**
      * Username to be used for authentication against the MQTT broker
      */
@@ -336,11 +341,11 @@ public class PahoComponentConfiguration
         this.clientId = clientId;
     }
 
-    public String getConfiguration() {
+    public PahoConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(PahoConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -483,19 +488,19 @@ public class PahoComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getClient() {
+    public MqttClient getClient() {
         return client;
     }
 
-    public void setClient(String client) {
+    public void setClient(MqttClient client) {
         this.client = client;
     }
 
-    public String getCustomWebSocketHeaders() {
+    public Properties getCustomWebSocketHeaders() {
         return customWebSocketHeaders;
     }
 
-    public void setCustomWebSocketHeaders(String customWebSocketHeaders) {
+    public void setCustomWebSocketHeaders(Properties customWebSocketHeaders) {
         this.customWebSocketHeaders = customWebSocketHeaders;
     }
 
@@ -524,27 +529,27 @@ public class PahoComponentConfiguration
         this.password = password;
     }
 
-    public String getSocketFactory() {
+    public SocketFactory getSocketFactory() {
         return socketFactory;
     }
 
-    public void setSocketFactory(String socketFactory) {
+    public void setSocketFactory(SocketFactory socketFactory) {
         this.socketFactory = socketFactory;
     }
 
-    public String getSslClientProps() {
+    public Properties getSslClientProps() {
         return sslClientProps;
     }
 
-    public void setSslClientProps(String sslClientProps) {
+    public void setSslClientProps(Properties sslClientProps) {
         this.sslClientProps = sslClientProps;
     }
 
-    public String getSslHostnameVerifier() {
+    public HostnameVerifier getSslHostnameVerifier() {
         return sslHostnameVerifier;
     }
 
-    public void setSslHostnameVerifier(String sslHostnameVerifier) {
+    public void setSslHostnameVerifier(HostnameVerifier sslHostnameVerifier) {
         this.sslHostnameVerifier = sslHostnameVerifier;
     }
 

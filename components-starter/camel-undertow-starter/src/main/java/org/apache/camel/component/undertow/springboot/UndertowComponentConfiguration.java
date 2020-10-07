@@ -17,7 +17,11 @@
 package org.apache.camel.component.undertow.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.undertow.UndertowHostOptions;
+import org.apache.camel.component.undertow.UndertowHttpBinding;
+import org.apache.camel.component.undertow.spi.UndertowSecurityProvider;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -73,13 +77,13 @@ public class UndertowComponentConfiguration
      * To configure common options, such as thread pools. The option is a
      * org.apache.camel.component.undertow.UndertowHostOptions type.
      */
-    private String hostOptions;
+    private UndertowHostOptions hostOptions;
     /**
      * To use a custom HttpBinding to control the mapping between Camel message
      * and HttpClient. The option is a
      * org.apache.camel.component.undertow.UndertowHttpBinding type.
      */
-    private String undertowHttpBinding;
+    private UndertowHttpBinding undertowHttpBinding;
     /**
      * Configuration used by UndertowSecurityProvider. Comma separated list of
      * allowed roles.
@@ -91,19 +95,19 @@ public class UndertowComponentConfiguration
      * UndertowSecurityProvider specific. Each provider decides, whether it
      * accepts configuration. The option is a java.lang.Object type.
      */
-    private String securityConfiguration;
+    private Object securityConfiguration;
     /**
      * Security provider allows plug in the provider, which will be used to
      * secure requests. SPI approach could be used too (component then finds
      * security provider using SPI). The option is a
      * org.apache.camel.component.undertow.spi.UndertowSecurityProvider type.
      */
-    private String securityProvider;
+    private UndertowSecurityProvider securityProvider;
     /**
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters.
      */
@@ -144,19 +148,19 @@ public class UndertowComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getHostOptions() {
+    public UndertowHostOptions getHostOptions() {
         return hostOptions;
     }
 
-    public void setHostOptions(String hostOptions) {
+    public void setHostOptions(UndertowHostOptions hostOptions) {
         this.hostOptions = hostOptions;
     }
 
-    public String getUndertowHttpBinding() {
+    public UndertowHttpBinding getUndertowHttpBinding() {
         return undertowHttpBinding;
     }
 
-    public void setUndertowHttpBinding(String undertowHttpBinding) {
+    public void setUndertowHttpBinding(UndertowHttpBinding undertowHttpBinding) {
         this.undertowHttpBinding = undertowHttpBinding;
     }
 
@@ -168,27 +172,28 @@ public class UndertowComponentConfiguration
         this.allowedRoles = allowedRoles;
     }
 
-    public String getSecurityConfiguration() {
+    public Object getSecurityConfiguration() {
         return securityConfiguration;
     }
 
-    public void setSecurityConfiguration(String securityConfiguration) {
+    public void setSecurityConfiguration(Object securityConfiguration) {
         this.securityConfiguration = securityConfiguration;
     }
 
-    public String getSecurityProvider() {
+    public UndertowSecurityProvider getSecurityProvider() {
         return securityProvider;
     }
 
-    public void setSecurityProvider(String securityProvider) {
+    public void setSecurityProvider(UndertowSecurityProvider securityProvider) {
         this.securityProvider = securityProvider;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

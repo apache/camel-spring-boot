@@ -17,6 +17,7 @@
 package org.apache.camel.component.milo.client.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.milo.client.MiloClientConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -46,7 +47,7 @@ public class MiloClientComponentConfiguration
      * All default options for client configurations. The option is a
      * org.apache.camel.component.milo.client.MiloClientConfiguration type.
      */
-    private String configuration;
+    private MiloClientConfiguration configuration;
     /**
      * A suffix for endpoint URI when discovering
      */
@@ -160,11 +161,11 @@ public class MiloClientComponentConfiguration
         this.clientId = clientId;
     }
 
-    public String getConfiguration() {
+    public MiloClientConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(MiloClientConfiguration configuration) {
         this.configuration = configuration;
     }
 

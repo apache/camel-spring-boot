@@ -18,6 +18,7 @@ package org.apache.camel.component.velocity.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.velocity.app.VelocityEngine;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -73,7 +74,7 @@ public class VelocityComponentConfiguration
      * To use the VelocityEngine otherwise a new engine is created. The option
      * is a org.apache.velocity.app.VelocityEngine type.
      */
-    private String velocityEngine;
+    private VelocityEngine velocityEngine;
 
     public Boolean getAllowContextMapAll() {
         return allowContextMapAll;
@@ -110,11 +111,11 @@ public class VelocityComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getVelocityEngine() {
+    public VelocityEngine getVelocityEngine() {
         return velocityEngine;
     }
 
-    public void setVelocityEngine(String velocityEngine) {
+    public void setVelocityEngine(VelocityEngine velocityEngine) {
         this.velocityEngine = velocityEngine;
     }
 }

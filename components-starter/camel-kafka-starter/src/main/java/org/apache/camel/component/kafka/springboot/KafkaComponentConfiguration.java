@@ -17,8 +17,16 @@
 package org.apache.camel.component.kafka.springboot;
 
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 import javax.annotation.Generated;
+import org.apache.camel.component.kafka.KafkaConfiguration;
+import org.apache.camel.component.kafka.KafkaManualCommitFactory;
+import org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer;
+import org.apache.camel.component.kafka.serde.KafkaHeaderSerializer;
+import org.apache.camel.spi.HeaderFilterStrategy;
+import org.apache.camel.spi.StateRepository;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -64,12 +72,12 @@ public class KafkaComponentConfiguration
      * endpoints will reuse. The option is a
      * org.apache.camel.component.kafka.KafkaConfiguration type.
      */
-    private String configuration;
+    private KafkaConfiguration configuration;
     /**
      * To use a custom HeaderFilterStrategy to filter header to and from Camel
      * message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
     /**
      * The maximum amount of time in milliseconds to wait when reconnecting to a
      * broker that has repeatedly failed to connect. If provided, the backoff
@@ -200,7 +208,7 @@ public class KafkaComponentConfiguration
      * values. The option is a
      * org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer type.
      */
-    private String kafkaHeaderDeserializer;
+    private KafkaHeaderDeserializer kafkaHeaderDeserializer;
     /**
      * Deserializer class for key that implements the Deserializer interface.
      */
@@ -223,7 +231,7 @@ public class KafkaComponentConfiguration
      * failed and the group will rebalance in order to reassign the partitions
      * to another member. The option is a java.lang.Long type.
      */
-    private String maxPollIntervalMs;
+    private Long maxPollIntervalMs;
     /**
      * The maximum number of records returned in a single call to poll()
      */
@@ -234,7 +242,7 @@ public class KafkaComponentConfiguration
      * option is a org.apache.camel.spi.StateRepository<java.lang.String,
      * java.lang.String> type.
      */
-    private String offsetRepository;
+    private StateRepository<String, String> offsetRepository;
     /**
      * The class name of the partition assignment strategy that the client will
      * use to distribute partition ownership amongst consumer instances when
@@ -245,7 +253,7 @@ public class KafkaComponentConfiguration
      * The timeout used when polling the KafkaConsumer. The option is a
      * java.lang.Long type.
      */
-    private String pollTimeoutMs = "5000";
+    private Long pollTimeoutMs = 5000L;
     /**
      * Set if KafkaConsumer will read from beginning or end on startup:
      * beginning : read from beginning end : read from end This is replacing the
@@ -280,7 +288,7 @@ public class KafkaComponentConfiguration
      * the default implementation that comes out of the box. The option is a
      * org.apache.camel.component.kafka.KafkaManualCommitFactory type.
      */
-    private String kafkaManualCommitFactory;
+    private KafkaManualCommitFactory kafkaManualCommitFactory;
     /**
      * The total bytes of memory the producer can use to buffer records waiting
      * to be sent to the server. If records are sent faster than they can be
@@ -316,7 +324,7 @@ public class KafkaComponentConfiguration
      * The option is a
      * org.apache.camel.component.kafka.serde.KafkaHeaderSerializer type.
      */
-    private String kafkaHeaderSerializer;
+    private KafkaHeaderSerializer kafkaHeaderSerializer;
     /**
      * The record key (or null if no key is specified). If this option has been
      * configured then it take precedence over header KafkaConstants#KEY
@@ -510,7 +518,7 @@ public class KafkaComponentConfiguration
      * no longer needed. The option is a java.util.concurrent.ExecutorService
      * type.
      */
-    private String workerPool;
+    private ExecutorService workerPool;
     /**
      * Number of core threads for the worker pool for continue routing Exchange
      * after kafka server has acknowledge the message that was sent to it from
@@ -611,7 +619,7 @@ public class KafkaComponentConfiguration
      * location with file: in the KeyStoreParameters.resource option. The option
      * is a org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * The list of protocols enabled for SSL connections. TLSv1.2, TLSv1.1 and
      * TLSv1 are enabled by default.
@@ -707,19 +715,20 @@ public class KafkaComponentConfiguration
         this.clientId = clientId;
     }
 
-    public String getConfiguration() {
+    public KafkaConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(KafkaConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 
@@ -867,11 +876,12 @@ public class KafkaComponentConfiguration
         this.heartbeatIntervalMs = heartbeatIntervalMs;
     }
 
-    public String getKafkaHeaderDeserializer() {
+    public KafkaHeaderDeserializer getKafkaHeaderDeserializer() {
         return kafkaHeaderDeserializer;
     }
 
-    public void setKafkaHeaderDeserializer(String kafkaHeaderDeserializer) {
+    public void setKafkaHeaderDeserializer(
+            KafkaHeaderDeserializer kafkaHeaderDeserializer) {
         this.kafkaHeaderDeserializer = kafkaHeaderDeserializer;
     }
 
@@ -891,11 +901,11 @@ public class KafkaComponentConfiguration
         this.maxPartitionFetchBytes = maxPartitionFetchBytes;
     }
 
-    public String getMaxPollIntervalMs() {
+    public Long getMaxPollIntervalMs() {
         return maxPollIntervalMs;
     }
 
-    public void setMaxPollIntervalMs(String maxPollIntervalMs) {
+    public void setMaxPollIntervalMs(Long maxPollIntervalMs) {
         this.maxPollIntervalMs = maxPollIntervalMs;
     }
 
@@ -907,11 +917,12 @@ public class KafkaComponentConfiguration
         this.maxPollRecords = maxPollRecords;
     }
 
-    public String getOffsetRepository() {
+    public StateRepository<String, String> getOffsetRepository() {
         return offsetRepository;
     }
 
-    public void setOffsetRepository(String offsetRepository) {
+    public void setOffsetRepository(
+            StateRepository<String, String> offsetRepository) {
         this.offsetRepository = offsetRepository;
     }
 
@@ -923,11 +934,11 @@ public class KafkaComponentConfiguration
         this.partitionAssignor = partitionAssignor;
     }
 
-    public String getPollTimeoutMs() {
+    public Long getPollTimeoutMs() {
         return pollTimeoutMs;
     }
 
-    public void setPollTimeoutMs(String pollTimeoutMs) {
+    public void setPollTimeoutMs(Long pollTimeoutMs) {
         this.pollTimeoutMs = pollTimeoutMs;
     }
 
@@ -971,11 +982,12 @@ public class KafkaComponentConfiguration
         this.valueDeserializer = valueDeserializer;
     }
 
-    public String getKafkaManualCommitFactory() {
+    public KafkaManualCommitFactory getKafkaManualCommitFactory() {
         return kafkaManualCommitFactory;
     }
 
-    public void setKafkaManualCommitFactory(String kafkaManualCommitFactory) {
+    public void setKafkaManualCommitFactory(
+            KafkaManualCommitFactory kafkaManualCommitFactory) {
         this.kafkaManualCommitFactory = kafkaManualCommitFactory;
     }
 
@@ -1011,11 +1023,12 @@ public class KafkaComponentConfiguration
         this.enableIdempotence = enableIdempotence;
     }
 
-    public String getKafkaHeaderSerializer() {
+    public KafkaHeaderSerializer getKafkaHeaderSerializer() {
         return kafkaHeaderSerializer;
     }
 
-    public void setKafkaHeaderSerializer(String kafkaHeaderSerializer) {
+    public void setKafkaHeaderSerializer(
+            KafkaHeaderSerializer kafkaHeaderSerializer) {
         this.kafkaHeaderSerializer = kafkaHeaderSerializer;
     }
 
@@ -1211,11 +1224,11 @@ public class KafkaComponentConfiguration
         this.serializerClass = serializerClass;
     }
 
-    public String getWorkerPool() {
+    public ExecutorService getWorkerPool() {
         return workerPool;
     }
 
-    public void setWorkerPool(String workerPool) {
+    public void setWorkerPool(ExecutorService workerPool) {
         this.workerPool = workerPool;
     }
 
@@ -1344,11 +1357,12 @@ public class KafkaComponentConfiguration
         this.sslCipherSuites = sslCipherSuites;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

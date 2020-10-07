@@ -20,10 +20,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import javax.annotation.Generated;
+import io.atomix.Atomix;
 import io.atomix.catalyst.transport.Address;
 import io.atomix.resource.ReadConsistency;
 import org.apache.camel.component.atomix.client.set.AtomixSet.Action;
 import org.apache.camel.component.atomix.client.set.AtomixSetComponent;
+import org.apache.camel.component.atomix.client.set.AtomixSetConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -47,12 +49,12 @@ public class AtomixSetComponentConfiguration
     /**
      * The Atomix instance to use. The option is a io.atomix.Atomix type.
      */
-    private String atomix;
+    private Atomix atomix;
     /**
      * The shared component configuration. The option is a
      * org.apache.camel.component.atomix.client.set.AtomixSetConfiguration type.
      */
-    private String configuration;
+    private AtomixSetConfiguration configuration;
     /**
      * The path to the AtomixClient configuration
      */
@@ -76,7 +78,7 @@ public class AtomixSetComponentConfiguration
     /**
      * The resource ttl. The option is a long type.
      */
-    private String ttl;
+    private Long ttl;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -107,12 +109,12 @@ public class AtomixSetComponentConfiguration
      * The cluster wide default resource configuration. The option is a
      * java.util.Properties type.
      */
-    private String defaultResourceConfig;
+    private Properties defaultResourceConfig;
     /**
      * The local default resource options. The option is a java.util.Properties
      * type.
      */
-    private String defaultResourceOptions;
+    private Properties defaultResourceOptions;
     /**
      * Sets if the local member should join groups as PersistentMember or not.
      * If set to ephemeral the local member will receive an auto generated ID
@@ -132,19 +134,19 @@ public class AtomixSetComponentConfiguration
      */
     private Map<String, Properties> resourceOptions;
 
-    public String getAtomix() {
+    public Atomix getAtomix() {
         return atomix;
     }
 
-    public void setAtomix(String atomix) {
+    public void setAtomix(Atomix atomix) {
         this.atomix = atomix;
     }
 
-    public String getConfiguration() {
+    public AtomixSetConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(AtomixSetConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -188,11 +190,11 @@ public class AtomixSetComponentConfiguration
         this.transportClassName = transportClassName;
     }
 
-    public String getTtl() {
+    public Long getTtl() {
         return ttl;
     }
 
-    public void setTtl(String ttl) {
+    public void setTtl(Long ttl) {
         this.ttl = ttl;
     }
 
@@ -223,19 +225,19 @@ public class AtomixSetComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getDefaultResourceConfig() {
+    public Properties getDefaultResourceConfig() {
         return defaultResourceConfig;
     }
 
-    public void setDefaultResourceConfig(String defaultResourceConfig) {
+    public void setDefaultResourceConfig(Properties defaultResourceConfig) {
         this.defaultResourceConfig = defaultResourceConfig;
     }
 
-    public String getDefaultResourceOptions() {
+    public Properties getDefaultResourceOptions() {
         return defaultResourceOptions;
     }
 
-    public void setDefaultResourceOptions(String defaultResourceOptions) {
+    public void setDefaultResourceOptions(Properties defaultResourceOptions) {
         this.defaultResourceOptions = defaultResourceOptions;
     }
 

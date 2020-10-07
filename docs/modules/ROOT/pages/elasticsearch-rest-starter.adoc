@@ -24,7 +24,7 @@ The component supports 14 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.elasticsearch-rest.client* | To use an existing configured Elasticsearch client, instead of creating a client per endpoint. This allow to customize the client with specific settings. The option is a org.elasticsearch.client.RestClient type. |  | String
+| *camel.component.elasticsearch-rest.client* | To use an existing configured Elasticsearch client, instead of creating a client per endpoint. This allow to customize the client with specific settings. The option is a org.elasticsearch.client.RestClient type. |  | RestClient
 | *camel.component.elasticsearch-rest.connection-timeout* | The time in ms to wait before connection will timeout. | 30000 | Integer
 | *camel.component.elasticsearch-rest.enable-s-s-l* | Enable SSL | false | Boolean
 | *camel.component.elasticsearch-rest.enable-sniffer* | Enable automatically discover nodes from a running Elasticsearch cluster | false | Boolean

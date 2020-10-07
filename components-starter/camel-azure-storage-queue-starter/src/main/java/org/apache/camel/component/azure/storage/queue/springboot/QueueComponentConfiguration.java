@@ -16,7 +16,11 @@
  */
 package org.apache.camel.component.azure.storage.queue.springboot;
 
+import java.time.Duration;
 import javax.annotation.Generated;
+import com.azure.storage.common.StorageSharedKeyCredential;
+import com.azure.storage.queue.QueueServiceClient;
+import org.apache.camel.component.azure.storage.queue.QueueConfiguration;
 import org.apache.camel.component.azure.storage.queue.QueueOperationDefinition;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -49,7 +53,7 @@ public class QueueComponentConfiguration
      * The component configurations. The option is a
      * org.apache.camel.component.azure.storage.queue.QueueConfiguration type.
      */
-    private String configuration;
+    private QueueConfiguration configuration;
     /**
      * Service client to a storage account to interact with the queue service.
      * This client does not hold any state about a particular storage account
@@ -60,7 +64,7 @@ public class QueueComponentConfiguration
      * updating properties of the account, and retrieving statistics of the
      * account. The option is a com.azure.storage.queue.QueueServiceClient type.
      */
-    private String serviceClient;
+    private QueueServiceClient serviceClient;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -116,7 +120,7 @@ public class QueueComponentConfiguration
      * returned before the timeout concludes a RuntimeException will be thrown.
      * The option is a java.time.Duration type.
      */
-    private String timeout;
+    private Duration timeout;
     /**
      * How long the message will stay alive in the queue. If unset the value
      * will default to 7 days, if -1 is passed the message will not expire. The
@@ -127,7 +131,7 @@ public class QueueComponentConfiguration
      * since these Java APIs are typesafe. The option is a java.time.Duration
      * type.
      */
-    private String timeToLive;
+    private Duration timeToLive;
     /**
      * The timeout period for how long the message is invisible in the queue.
      * The timeout must be between 1 seconds and 7 days. The format should be in
@@ -137,7 +141,7 @@ public class QueueComponentConfiguration
      * since these Java APIs are typesafe. The option is a java.time.Duration
      * type.
      */
-    private String visibilityTimeout;
+    private Duration visibilityTimeout;
     /**
      * Access key for the associated azure account name to be used for
      * authentication with azure queue services
@@ -148,7 +152,7 @@ public class QueueComponentConfiguration
      * this holds the important authentication information. The option is a
      * com.azure.storage.common.StorageSharedKeyCredential type.
      */
-    private String credentials;
+    private StorageSharedKeyCredential credentials;
 
     public Boolean getAutoDiscoverClient() {
         return autoDiscoverClient;
@@ -158,19 +162,19 @@ public class QueueComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public QueueConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(QueueConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getServiceClient() {
+    public QueueServiceClient getServiceClient() {
         return serviceClient;
     }
 
-    public void setServiceClient(String serviceClient) {
+    public void setServiceClient(QueueServiceClient serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -241,27 +245,27 @@ public class QueueComponentConfiguration
         this.popReceipt = popReceipt;
     }
 
-    public String getTimeout() {
+    public Duration getTimeout() {
         return timeout;
     }
 
-    public void setTimeout(String timeout) {
+    public void setTimeout(Duration timeout) {
         this.timeout = timeout;
     }
 
-    public String getTimeToLive() {
+    public Duration getTimeToLive() {
         return timeToLive;
     }
 
-    public void setTimeToLive(String timeToLive) {
+    public void setTimeToLive(Duration timeToLive) {
         this.timeToLive = timeToLive;
     }
 
-    public String getVisibilityTimeout() {
+    public Duration getVisibilityTimeout() {
         return visibilityTimeout;
     }
 
-    public void setVisibilityTimeout(String visibilityTimeout) {
+    public void setVisibilityTimeout(Duration visibilityTimeout) {
         this.visibilityTimeout = visibilityTimeout;
     }
 
@@ -273,11 +277,11 @@ public class QueueComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public String getCredentials() {
+    public StorageSharedKeyCredential getCredentials() {
         return credentials;
     }
 
-    public void setCredentials(String credentials) {
+    public void setCredentials(StorageSharedKeyCredential credentials) {
         this.credentials = credentials;
     }
 }

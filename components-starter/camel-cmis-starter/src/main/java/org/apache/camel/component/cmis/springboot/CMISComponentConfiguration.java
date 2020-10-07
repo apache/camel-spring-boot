@@ -17,6 +17,7 @@
 package org.apache.camel.component.cmis.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.cmis.CMISSessionFacadeFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -68,7 +69,7 @@ public class CMISComponentConfiguration
      * instances. The option is a
      * org.apache.camel.component.cmis.CMISSessionFacadeFactory type.
      */
-    private String sessionFacadeFactory;
+    private CMISSessionFacadeFactory sessionFacadeFactory;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -97,11 +98,12 @@ public class CMISComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getSessionFacadeFactory() {
+    public CMISSessionFacadeFactory getSessionFacadeFactory() {
         return sessionFacadeFactory;
     }
 
-    public void setSessionFacadeFactory(String sessionFacadeFactory) {
+    public void setSessionFacadeFactory(
+            CMISSessionFacadeFactory sessionFacadeFactory) {
         this.sessionFacadeFactory = sessionFacadeFactory;
     }
 }

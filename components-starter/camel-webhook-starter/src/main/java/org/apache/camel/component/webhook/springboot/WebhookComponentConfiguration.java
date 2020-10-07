@@ -17,6 +17,7 @@
 package org.apache.camel.component.webhook.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.webhook.WebhookConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -82,7 +83,7 @@ public class WebhookComponentConfiguration
      * Set the default configuration for the webhook meta-component. The option
      * is a org.apache.camel.component.webhook.WebhookConfiguration type.
      */
-    private String configuration;
+    private WebhookConfiguration configuration;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -143,11 +144,11 @@ public class WebhookComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public WebhookConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(WebhookConfiguration configuration) {
         this.configuration = configuration;
     }
 }

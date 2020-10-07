@@ -17,7 +17,16 @@
 package org.apache.camel.component.http.springboot;
 
 import javax.annotation.Generated;
+import javax.net.ssl.HostnameVerifier;
+import org.apache.camel.component.http.HttpClientConfigurer;
+import org.apache.camel.http.common.HttpBinding;
+import org.apache.camel.http.common.HttpConfiguration;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
+import org.apache.http.client.CookieStore;
+import org.apache.http.conn.HttpClientConnectionManager;
+import org.apache.http.protocol.HttpContext;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -45,7 +54,7 @@ public class HttpComponentConfiguration
      * stored as we are just bridging (eg acting as a proxy). The option is a
      * org.apache.http.client.CookieStore type.
      */
-    private String cookieStore;
+    private CookieStore cookieStore;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -77,7 +86,7 @@ public class HttpComponentConfiguration
      * endpoints created by this component. The option is a
      * org.apache.http.conn.HttpClientConnectionManager type.
      */
-    private String clientConnectionManager;
+    private HttpClientConnectionManager clientConnectionManager;
     /**
      * The maximum number of connections per route.
      */
@@ -92,23 +101,23 @@ public class HttpComponentConfiguration
      * and HttpClient. The option is a org.apache.camel.http.common.HttpBinding
      * type.
      */
-    private String httpBinding;
+    private HttpBinding httpBinding;
     /**
      * To use the custom HttpClientConfigurer to perform configuration of the
      * HttpClient that will be used. The option is a
      * org.apache.camel.component.http.HttpClientConfigurer type.
      */
-    private String httpClientConfigurer;
+    private HttpClientConfigurer httpClientConfigurer;
     /**
      * To use the shared HttpConfiguration as base configuration. The option is
      * a org.apache.camel.http.common.HttpConfiguration type.
      */
-    private String httpConfiguration;
+    private HttpConfiguration httpConfiguration;
     /**
      * To use a custom org.apache.http.protocol.HttpContext when executing
      * requests. The option is a org.apache.http.protocol.HttpContext type.
      */
-    private String httpContext;
+    private HttpContext httpContext;
     /**
      * The maximum number of connections.
      */
@@ -118,7 +127,7 @@ public class HttpComponentConfiguration
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
     /**
      * Proxy authentication domain to use
      */
@@ -154,7 +163,7 @@ public class HttpComponentConfiguration
      * instances, you need to define a new HttpComponent per instance you need.
      * The option is a org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters.
      */
@@ -164,7 +173,7 @@ public class HttpComponentConfiguration
      * NoopHostnameVerifier. The option is a javax.net.ssl.HostnameVerifier
      * type.
      */
-    private String x509HostnameVerifier;
+    private HostnameVerifier x509HostnameVerifier;
     /**
      * The timeout in milliseconds used when requesting a connection from the
      * connection manager. A timeout value of zero is interpreted as an infinite
@@ -188,11 +197,11 @@ public class HttpComponentConfiguration
      */
     private Integer socketTimeout = -1;
 
-    public String getCookieStore() {
+    public CookieStore getCookieStore() {
         return cookieStore;
     }
 
-    public void setCookieStore(String cookieStore) {
+    public void setCookieStore(CookieStore cookieStore) {
         this.cookieStore = cookieStore;
     }
 
@@ -223,11 +232,12 @@ public class HttpComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getClientConnectionManager() {
+    public HttpClientConnectionManager getClientConnectionManager() {
         return clientConnectionManager;
     }
 
-    public void setClientConnectionManager(String clientConnectionManager) {
+    public void setClientConnectionManager(
+            HttpClientConnectionManager clientConnectionManager) {
         this.clientConnectionManager = clientConnectionManager;
     }
 
@@ -247,35 +257,36 @@ public class HttpComponentConfiguration
         this.connectionTimeToLive = connectionTimeToLive;
     }
 
-    public String getHttpBinding() {
+    public HttpBinding getHttpBinding() {
         return httpBinding;
     }
 
-    public void setHttpBinding(String httpBinding) {
+    public void setHttpBinding(HttpBinding httpBinding) {
         this.httpBinding = httpBinding;
     }
 
-    public String getHttpClientConfigurer() {
+    public HttpClientConfigurer getHttpClientConfigurer() {
         return httpClientConfigurer;
     }
 
-    public void setHttpClientConfigurer(String httpClientConfigurer) {
+    public void setHttpClientConfigurer(
+            HttpClientConfigurer httpClientConfigurer) {
         this.httpClientConfigurer = httpClientConfigurer;
     }
 
-    public String getHttpConfiguration() {
+    public HttpConfiguration getHttpConfiguration() {
         return httpConfiguration;
     }
 
-    public void setHttpConfiguration(String httpConfiguration) {
+    public void setHttpConfiguration(HttpConfiguration httpConfiguration) {
         this.httpConfiguration = httpConfiguration;
     }
 
-    public String getHttpContext() {
+    public HttpContext getHttpContext() {
         return httpContext;
     }
 
-    public void setHttpContext(String httpContext) {
+    public void setHttpContext(HttpContext httpContext) {
         this.httpContext = httpContext;
     }
 
@@ -287,11 +298,12 @@ public class HttpComponentConfiguration
         this.maxTotalConnections = maxTotalConnections;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 
@@ -351,11 +363,12 @@ public class HttpComponentConfiguration
         this.proxyAuthUsername = proxyAuthUsername;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 
@@ -368,11 +381,11 @@ public class HttpComponentConfiguration
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 
-    public String getX509HostnameVerifier() {
+    public HostnameVerifier getX509HostnameVerifier() {
         return x509HostnameVerifier;
     }
 
-    public void setX509HostnameVerifier(String x509HostnameVerifier) {
+    public void setX509HostnameVerifier(HostnameVerifier x509HostnameVerifier) {
         this.x509HostnameVerifier = x509HostnameVerifier;
     }
 

@@ -18,7 +18,9 @@ package org.apache.camel.component.aws.mq.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.mq.AmazonMQ;
 import org.apache.camel.component.aws.mq.MQComponent;
+import org.apache.camel.component.aws.mq.MQConfiguration;
 import org.apache.camel.component.aws.mq.MQOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -54,12 +56,12 @@ public class MQComponentConfiguration
      * To use a existing configured AmazonMQClient as client. The option is a
      * com.amazonaws.services.mq.AmazonMQ type.
      */
-    private String amazonMqClient;
+    private AmazonMQ amazonMqClient;
     /**
      * The Component configuration. The option is a
      * org.apache.camel.component.aws.mq.MQConfiguration type.
      */
-    private String configuration;
+    private MQConfiguration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -120,19 +122,19 @@ public class MQComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public String getAmazonMqClient() {
+    public AmazonMQ getAmazonMqClient() {
         return amazonMqClient;
     }
 
-    public void setAmazonMqClient(String amazonMqClient) {
+    public void setAmazonMqClient(AmazonMQ amazonMqClient) {
         this.amazonMqClient = amazonMqClient;
     }
 
-    public String getConfiguration() {
+    public MQConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(MQConfiguration configuration) {
         this.configuration = configuration;
     }
 

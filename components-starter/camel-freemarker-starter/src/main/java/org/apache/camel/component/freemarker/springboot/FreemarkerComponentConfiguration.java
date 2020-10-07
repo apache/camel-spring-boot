@@ -17,6 +17,7 @@
 package org.apache.camel.component.freemarker.springboot;
 
 import javax.annotation.Generated;
+import freemarker.template.Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -73,7 +74,7 @@ public class FreemarkerComponentConfiguration
      * To use an existing freemarker.template.Configuration instance as the
      * configuration. The option is a freemarker.template.Configuration type.
      */
-    private String configuration;
+    private Configuration configuration;
 
     public Boolean getAllowContextMapAll() {
         return allowContextMapAll;
@@ -110,11 +111,11 @@ public class FreemarkerComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Configuration configuration) {
         this.configuration = configuration;
     }
 }

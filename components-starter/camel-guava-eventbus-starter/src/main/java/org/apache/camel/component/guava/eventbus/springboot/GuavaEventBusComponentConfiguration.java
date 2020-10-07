@@ -17,6 +17,7 @@
 package org.apache.camel.component.guava.eventbus.springboot;
 
 import javax.annotation.Generated;
+import com.google.common.eventbus.EventBus;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -41,7 +42,7 @@ public class GuavaEventBusComponentConfiguration
      * To use the given Guava EventBus instance. The option is a
      * com.google.common.eventbus.EventBus type.
      */
-    private String eventBus;
+    private EventBus eventBus;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -77,11 +78,11 @@ public class GuavaEventBusComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getEventBus() {
+    public EventBus getEventBus() {
         return eventBus;
     }
 
-    public void setEventBus(String eventBus) {
+    public void setEventBus(EventBus eventBus) {
         this.eventBus = eventBus;
     }
 

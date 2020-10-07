@@ -18,6 +18,7 @@ package org.apache.camel.component.nagios.springboot;
 
 import javax.annotation.Generated;
 import com.googlecode.jsendnsca.encryption.Encryption;
+import org.apache.camel.component.nagios.NagiosConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -67,7 +68,7 @@ public class NagiosComponentConfiguration
      * To use a shared NagiosConfiguration. The option is a
      * org.apache.camel.component.nagios.NagiosConfiguration type.
      */
-    private String configuration;
+    private NagiosConfiguration configuration;
     /**
      * To specify an encryption method.
      */
@@ -112,11 +113,11 @@ public class NagiosComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public NagiosConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(NagiosConfiguration configuration) {
         this.configuration = configuration;
     }
 

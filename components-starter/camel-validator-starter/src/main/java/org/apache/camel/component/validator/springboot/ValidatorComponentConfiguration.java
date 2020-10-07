@@ -17,6 +17,7 @@
 package org.apache.camel.component.validator.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.validator.ValidatorResourceResolverFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -60,7 +61,7 @@ public class ValidatorComponentConfiguration
      * org.apache.camel.component.validator.ValidatorResourceResolverFactory
      * type.
      */
-    private String resourceResolverFactory;
+    private ValidatorResourceResolverFactory resourceResolverFactory;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -81,11 +82,12 @@ public class ValidatorComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getResourceResolverFactory() {
+    public ValidatorResourceResolverFactory getResourceResolverFactory() {
         return resourceResolverFactory;
     }
 
-    public void setResourceResolverFactory(String resourceResolverFactory) {
+    public void setResourceResolverFactory(
+            ValidatorResourceResolverFactory resourceResolverFactory) {
         this.resourceResolverFactory = resourceResolverFactory;
     }
 }

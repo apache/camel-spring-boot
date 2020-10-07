@@ -18,6 +18,7 @@ package org.apache.camel.component.debezium.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import org.apache.camel.component.debezium.configuration.MySqlConnectorEmbeddedDebeziumConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -60,7 +61,7 @@ public class DebeziumMySqlComponentConfiguration
      * Allow pre-configured Configurations to be set. The option is a
      * org.apache.camel.component.debezium.configuration.MySqlConnectorEmbeddedDebeziumConfiguration type.
      */
-    private String configuration;
+    private MySqlConnectorEmbeddedDebeziumConfiguration configuration;
     /**
      * The Converter class that should be used to serialize and deserialize key
      * data for offsets. The default is JSON converter.
@@ -85,12 +86,12 @@ public class DebeziumMySqlComponentConfiguration
      * process and restoring the offset data to be committed in a future
      * attempt. The default is 5 seconds. The option is a long type.
      */
-    private String offsetCommitTimeoutMs = "5s";
+    private Long offsetCommitTimeoutMs = 5000L;
     /**
      * Interval at which to try committing offsets. The default is 1 minute. The
      * option is a long type.
      */
-    private String offsetFlushIntervalMs = "60s";
+    private Long offsetFlushIntervalMs = 60000L;
     /**
      * The name of the Java class that is responsible for persistence of
      * connector offsets.
@@ -168,12 +169,12 @@ public class DebeziumMySqlComponentConfiguration
      * Interval in milliseconds to wait for connection checking if keep alive
      * thread is used. The option is a long type.
      */
-    private String connectKeepAliveIntervalMs = "1m";
+    private Long connectKeepAliveIntervalMs = 60000L;
     /**
      * Maximum time in milliseconds to wait after trying to connect to the
      * database before timing out. The option is a int type.
      */
-    private String connectTimeoutMs = "30s";
+    private Integer connectTimeoutMs = 30000;
     /**
      * A comma-separated list of regular expressions that match database names
      * to be excluded from monitoring
@@ -206,7 +207,7 @@ public class DebeziumMySqlComponentConfiguration
      * The number of milliseconds to wait while polling for persisted data
      * during recovery. The option is a int type.
      */
-    private String databaseHistoryKafkaRecoveryPollIntervalMs = "100ms";
+    private Integer databaseHistoryKafkaRecoveryPollIntervalMs = 100;
     /**
      * The name of the topic for the database schema history
      */
@@ -385,7 +386,7 @@ public class DebeziumMySqlComponentConfiguration
      * disable heartbeat messages. Disabled by default. The option is a int
      * type.
      */
-    private String heartbeatIntervalMs = "0ms";
+    private Integer heartbeatIntervalMs = 0;
     /**
      * The prefix that is used to name heartbeat topics.Defaults to
      * __debezium-heartbeat.
@@ -446,7 +447,7 @@ public class DebeziumMySqlComponentConfiguration
      * Frequency in milliseconds to wait for new change events to appear after
      * receiving no events. Defaults to 500ms. The option is a long type.
      */
-    private String pollIntervalMs = "500ms";
+    private Long pollIntervalMs = 500L;
     /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no
@@ -457,7 +458,7 @@ public class DebeziumMySqlComponentConfiguration
      * The number of milliseconds to delay before a snapshot will begin. The
      * option is a long type.
      */
-    private String snapshotDelayMs = "0ms";
+    private Long snapshotDelayMs = 0L;
     /**
      * The maximum number of records that should be loaded into memory while
      * performing a snapshot
@@ -589,11 +590,12 @@ public class DebeziumMySqlComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public String getConfiguration() {
+    public MySqlConnectorEmbeddedDebeziumConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(
+            MySqlConnectorEmbeddedDebeziumConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -621,19 +623,19 @@ public class DebeziumMySqlComponentConfiguration
         this.offsetCommitPolicy = offsetCommitPolicy;
     }
 
-    public String getOffsetCommitTimeoutMs() {
+    public Long getOffsetCommitTimeoutMs() {
         return offsetCommitTimeoutMs;
     }
 
-    public void setOffsetCommitTimeoutMs(String offsetCommitTimeoutMs) {
+    public void setOffsetCommitTimeoutMs(Long offsetCommitTimeoutMs) {
         this.offsetCommitTimeoutMs = offsetCommitTimeoutMs;
     }
 
-    public String getOffsetFlushIntervalMs() {
+    public Long getOffsetFlushIntervalMs() {
         return offsetFlushIntervalMs;
     }
 
-    public void setOffsetFlushIntervalMs(String offsetFlushIntervalMs) {
+    public void setOffsetFlushIntervalMs(Long offsetFlushIntervalMs) {
         this.offsetFlushIntervalMs = offsetFlushIntervalMs;
     }
 
@@ -745,19 +747,19 @@ public class DebeziumMySqlComponentConfiguration
         this.connectKeepAlive = connectKeepAlive;
     }
 
-    public String getConnectKeepAliveIntervalMs() {
+    public Long getConnectKeepAliveIntervalMs() {
         return connectKeepAliveIntervalMs;
     }
 
-    public void setConnectKeepAliveIntervalMs(String connectKeepAliveIntervalMs) {
+    public void setConnectKeepAliveIntervalMs(Long connectKeepAliveIntervalMs) {
         this.connectKeepAliveIntervalMs = connectKeepAliveIntervalMs;
     }
 
-    public String getConnectTimeoutMs() {
+    public Integer getConnectTimeoutMs() {
         return connectTimeoutMs;
     }
 
-    public void setConnectTimeoutMs(String connectTimeoutMs) {
+    public void setConnectTimeoutMs(Integer connectTimeoutMs) {
         this.connectTimeoutMs = connectTimeoutMs;
     }
 
@@ -804,12 +806,12 @@ public class DebeziumMySqlComponentConfiguration
         this.databaseHistoryKafkaRecoveryAttempts = databaseHistoryKafkaRecoveryAttempts;
     }
 
-    public String getDatabaseHistoryKafkaRecoveryPollIntervalMs() {
+    public Integer getDatabaseHistoryKafkaRecoveryPollIntervalMs() {
         return databaseHistoryKafkaRecoveryPollIntervalMs;
     }
 
     public void setDatabaseHistoryKafkaRecoveryPollIntervalMs(
-            String databaseHistoryKafkaRecoveryPollIntervalMs) {
+            Integer databaseHistoryKafkaRecoveryPollIntervalMs) {
         this.databaseHistoryKafkaRecoveryPollIntervalMs = databaseHistoryKafkaRecoveryPollIntervalMs;
     }
 
@@ -1027,11 +1029,11 @@ public class DebeziumMySqlComponentConfiguration
         this.gtidSourceIncludes = gtidSourceIncludes;
     }
 
-    public String getHeartbeatIntervalMs() {
+    public Integer getHeartbeatIntervalMs() {
         return heartbeatIntervalMs;
     }
 
-    public void setHeartbeatIntervalMs(String heartbeatIntervalMs) {
+    public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
         this.heartbeatIntervalMs = heartbeatIntervalMs;
     }
 
@@ -1092,11 +1094,11 @@ public class DebeziumMySqlComponentConfiguration
         this.messageKeyColumns = messageKeyColumns;
     }
 
-    public String getPollIntervalMs() {
+    public Long getPollIntervalMs() {
         return pollIntervalMs;
     }
 
-    public void setPollIntervalMs(String pollIntervalMs) {
+    public void setPollIntervalMs(Long pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
     }
 
@@ -1108,11 +1110,11 @@ public class DebeziumMySqlComponentConfiguration
         this.skippedOperations = skippedOperations;
     }
 
-    public String getSnapshotDelayMs() {
+    public Long getSnapshotDelayMs() {
         return snapshotDelayMs;
     }
 
-    public void setSnapshotDelayMs(String snapshotDelayMs) {
+    public void setSnapshotDelayMs(Long snapshotDelayMs) {
         this.snapshotDelayMs = snapshotDelayMs;
     }
 

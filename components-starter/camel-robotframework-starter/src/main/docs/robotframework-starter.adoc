@@ -29,7 +29,7 @@ The component supports 52 options, which are listed below.
 | *camel.component.robotframework.argument-file* | A text file to read more arguments from. |  | File
 | *camel.component.robotframework.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.robotframework.combined-tag-stats* | Creates combined statistics based on tags. Use the format tags:title List |  | String
-| *camel.component.robotframework.configuration* | The configuration. The option is a org.apache.camel.component.robotframework.RobotFrameworkCamelConfiguration type. |  | String
+| *camel.component.robotframework.configuration* | The configuration. The option is a org.apache.camel.component.robotframework.RobotFrameworkCamelConfiguration type. |  | RobotFrameworkCamelConfiguration
 | *camel.component.robotframework.critical-tags* | Tests that have the given tags are considered critical. List |  | String
 | *camel.component.robotframework.debug-file* | A debug file that is written during execution. |  | File
 | *camel.component.robotframework.document* | Sets the documentation of the top-level tests suites. |  | String

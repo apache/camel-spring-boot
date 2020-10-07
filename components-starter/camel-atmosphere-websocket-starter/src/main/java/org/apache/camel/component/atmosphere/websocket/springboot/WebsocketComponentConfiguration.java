@@ -17,6 +17,10 @@
 package org.apache.camel.component.atmosphere.websocket.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.http.common.HttpBinding;
+import org.apache.camel.http.common.HttpConfiguration;
+import org.apache.camel.http.common.HttpRegistry;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -68,7 +72,7 @@ public class WebsocketComponentConfiguration
      * To use a custom org.apache.camel.component.servlet.HttpRegistry. The
      * option is a org.apache.camel.http.common.HttpRegistry type.
      */
-    private String httpRegistry;
+    private HttpRegistry httpRegistry;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -99,18 +103,18 @@ public class WebsocketComponentConfiguration
      * and HttpClient. The option is a org.apache.camel.http.common.HttpBinding
      * type.
      */
-    private String httpBinding;
+    private HttpBinding httpBinding;
     /**
      * To use the shared HttpConfiguration as base configuration. The option is
      * a org.apache.camel.http.common.HttpConfiguration type.
      */
-    private String httpConfiguration;
+    private HttpConfiguration httpConfiguration;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -144,11 +148,11 @@ public class WebsocketComponentConfiguration
         this.fileNameExtWhitelist = fileNameExtWhitelist;
     }
 
-    public String getHttpRegistry() {
+    public HttpRegistry getHttpRegistry() {
         return httpRegistry;
     }
 
-    public void setHttpRegistry(String httpRegistry) {
+    public void setHttpRegistry(HttpRegistry httpRegistry) {
         this.httpRegistry = httpRegistry;
     }
 
@@ -179,27 +183,28 @@ public class WebsocketComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getHttpBinding() {
+    public HttpBinding getHttpBinding() {
         return httpBinding;
     }
 
-    public void setHttpBinding(String httpBinding) {
+    public void setHttpBinding(HttpBinding httpBinding) {
         this.httpBinding = httpBinding;
     }
 
-    public String getHttpConfiguration() {
+    public HttpConfiguration getHttpConfiguration() {
         return httpConfiguration;
     }
 
-    public void setHttpConfiguration(String httpConfiguration) {
+    public void setHttpConfiguration(HttpConfiguration httpConfiguration) {
         this.httpConfiguration = httpConfiguration;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 }

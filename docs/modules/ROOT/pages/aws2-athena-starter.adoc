@@ -25,10 +25,10 @@ The component supports 31 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.aws2-athena.access-key* | Amazon AWS Access Key. |  | String
-| *camel.component.aws2-athena.amazon-athena-client* | The AmazonAthena instance to use as the client. The option is a software.amazon.awssdk.services.athena.AthenaClient type. |  | String
+| *camel.component.aws2-athena.amazon-athena-client* | The AmazonAthena instance to use as the client. The option is a software.amazon.awssdk.services.athena.AthenaClient type. |  | AthenaClient
 | *camel.component.aws2-athena.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking | true | Boolean
 | *camel.component.aws2-athena.client-request-token* | A unique string to ensure issues queries are idempotent. It is unlikely you will need to set this. |  | String
-| *camel.component.aws2-athena.configuration* | The component configuration. The option is a org.apache.camel.component.aws2.athena.Athena2Configuration type. |  | String
+| *camel.component.aws2-athena.configuration* | The component configuration. The option is a org.apache.camel.component.aws2.athena.Athena2Configuration type. |  | Athena2Configuration
 | *camel.component.aws2-athena.database* | The Athena database to use. |  | String
 | *camel.component.aws2-athena.delay* | Milliseconds before the next poll for query execution status. See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more. | 2000 | Long
 | *camel.component.aws2-athena.enabled* | Whether to enable auto configuration of the aws2-athena component. This is enabled by default. |  | Boolean

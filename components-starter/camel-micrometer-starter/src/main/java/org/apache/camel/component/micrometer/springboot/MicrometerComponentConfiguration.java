@@ -17,6 +17,7 @@
 package org.apache.camel.component.micrometer.springboot;
 
 import javax.annotation.Generated;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -59,7 +60,7 @@ public class MicrometerComponentConfiguration
      * To use a custom configured MetricRegistry. The option is a
      * io.micrometer.core.instrument.MeterRegistry type.
      */
-    private String metricsRegistry;
+    private MeterRegistry metricsRegistry;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -80,11 +81,11 @@ public class MicrometerComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getMetricsRegistry() {
+    public MeterRegistry getMetricsRegistry() {
         return metricsRegistry;
     }
 
-    public void setMetricsRegistry(String metricsRegistry) {
+    public void setMetricsRegistry(MeterRegistry metricsRegistry) {
         this.metricsRegistry = metricsRegistry;
     }
 }

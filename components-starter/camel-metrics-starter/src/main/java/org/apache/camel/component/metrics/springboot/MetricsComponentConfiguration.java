@@ -17,6 +17,7 @@
 package org.apache.camel.component.metrics.springboot;
 
 import javax.annotation.Generated;
+import com.codahale.metrics.MetricRegistry;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -59,7 +60,7 @@ public class MetricsComponentConfiguration
      * To use a custom configured MetricRegistry. The option is a
      * com.codahale.metrics.MetricRegistry type.
      */
-    private String metricRegistry;
+    private MetricRegistry metricRegistry;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -80,11 +81,11 @@ public class MetricsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getMetricRegistry() {
+    public MetricRegistry getMetricRegistry() {
         return metricRegistry;
     }
 
-    public void setMetricRegistry(String metricRegistry) {
+    public void setMetricRegistry(MetricRegistry metricRegistry) {
         this.metricRegistry = metricRegistry;
     }
 }

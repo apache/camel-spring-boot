@@ -17,6 +17,7 @@
 package org.apache.camel.component.beanstalk.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.beanstalk.ConnectionSettingsFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -70,7 +71,7 @@ public class BeanstalkComponentConfiguration
      * option is a
      * org.apache.camel.component.beanstalk.ConnectionSettingsFactory type.
      */
-    private String connectionSettingsFactory;
+    private ConnectionSettingsFactory connectionSettingsFactory;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -99,11 +100,12 @@ public class BeanstalkComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConnectionSettingsFactory() {
+    public ConnectionSettingsFactory getConnectionSettingsFactory() {
         return connectionSettingsFactory;
     }
 
-    public void setConnectionSettingsFactory(String connectionSettingsFactory) {
+    public void setConnectionSettingsFactory(
+            ConnectionSettingsFactory connectionSettingsFactory) {
         this.connectionSettingsFactory = connectionSettingsFactory;
     }
 }

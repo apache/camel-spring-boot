@@ -19,7 +19,10 @@ package org.apache.camel.component.corda.springboot;
 import javax.annotation.Generated;
 import net.corda.core.contracts.ContractState;
 import net.corda.core.flows.FlowLogic;
+import net.corda.core.node.services.vault.PageSpecification;
+import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.node.services.vault.Sort;
+import org.apache.camel.component.corda.CordaConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -44,7 +47,7 @@ public class CordaComponentConfiguration
      * To use a shared configuration. The option is a
      * org.apache.camel.component.corda.CordaConfiguration type.
      */
-    private String configuration;
+    private CordaConfiguration configuration;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -64,7 +67,7 @@ public class CordaComponentConfiguration
      * footprint. The option is a
      * net.corda.core.node.services.vault.PageSpecification type.
      */
-    private String pageSpecification;
+    private PageSpecification pageSpecification;
     /**
      * Whether to process snapshots or not
      */
@@ -104,7 +107,7 @@ public class CordaComponentConfiguration
      * performance. The option is a
      * net.corda.core.node.services.vault.QueryCriteria type.
      */
-    private String queryCriteria;
+    private QueryCriteria queryCriteria;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -135,11 +138,11 @@ public class CordaComponentConfiguration
      */
     private String username;
 
-    public String getConfiguration() {
+    public CordaConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(CordaConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -151,11 +154,11 @@ public class CordaComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public String getPageSpecification() {
+    public PageSpecification getPageSpecification() {
         return pageSpecification;
     }
 
-    public void setPageSpecification(String pageSpecification) {
+    public void setPageSpecification(PageSpecification pageSpecification) {
         this.pageSpecification = pageSpecification;
     }
 
@@ -199,11 +202,11 @@ public class CordaComponentConfiguration
         this.flowLogicClass = flowLogicClass;
     }
 
-    public String getQueryCriteria() {
+    public QueryCriteria getQueryCriteria() {
         return queryCriteria;
     }
 
-    public void setQueryCriteria(String queryCriteria) {
+    public void setQueryCriteria(QueryCriteria queryCriteria) {
         this.queryCriteria = queryCriteria;
     }
 

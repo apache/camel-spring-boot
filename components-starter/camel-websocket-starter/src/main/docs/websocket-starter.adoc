@@ -32,12 +32,12 @@ The component supports 16 options, which are listed below.
 | *camel.component.websocket.max-threads* | To set a value for maximum number of threads in server thread pool. MaxThreads/minThreads or threadPool fields are required due to switch to Jetty9. The default values for maxThreads is 1 2 noCores. |  | Integer
 | *camel.component.websocket.min-threads* | To set a value for minimum number of threads in server thread pool. MaxThreads/minThreads or threadPool fields are required due to switch to Jetty9. The default values for minThreads is 1. |  | Integer
 | *camel.component.websocket.port* | The port number. The default value is 9292 | 9292 | Integer
-| *camel.component.websocket.ssl-context-parameters* | To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
+| *camel.component.websocket.ssl-context-parameters* | To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
 | *camel.component.websocket.ssl-key-password* | The password for the keystore when using SSL. |  | String
 | *camel.component.websocket.ssl-keystore* | The path to the keystore. |  | String
 | *camel.component.websocket.ssl-password* | The password when using SSL. |  | String
 | *camel.component.websocket.static-resources* | Set a resource path for static resources (such as .html files etc). The resources can be loaded from classpath, if you prefix with classpath:, otherwise the resources is loaded from file system or from JAR files. For example to load from root classpath use classpath:., or classpath:WEB-INF/static If not configured (eg null) then no static resource is in use. |  | String
-| *camel.component.websocket.thread-pool* | To use a custom thread pool for the server. MaxThreads/minThreads or threadPool fields are required due to switch to Jetty9. The option is a org.eclipse.jetty.util.thread.ThreadPool type. |  | String
+| *camel.component.websocket.thread-pool* | To use a custom thread pool for the server. MaxThreads/minThreads or threadPool fields are required due to switch to Jetty9. The option is a org.eclipse.jetty.util.thread.ThreadPool type. |  | ThreadPool
 | *camel.component.websocket.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 | *camel.component.websocket.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===

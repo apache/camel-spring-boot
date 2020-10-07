@@ -27,7 +27,7 @@ The component supports 32 options, which are listed below.
 | *camel.component.facebook.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.facebook.client-u-r-l* | Facebook4J API client URL |  | String
 | *camel.component.facebook.client-version* | Facebook4J client API version |  | String
-| *camel.component.facebook.configuration* | To use the shared configuration. The option is a org.apache.camel.component.facebook.config.FacebookConfiguration type. |  | String
+| *camel.component.facebook.configuration* | To use the shared configuration. The option is a org.apache.camel.component.facebook.config.FacebookConfiguration type. |  | FacebookConfiguration
 | *camel.component.facebook.debug-enabled* | Enables deubg output. Effective only with the embedded logger | false | Boolean
 | *camel.component.facebook.enabled* | Whether to enable auto configuration of the facebook component. This is enabled by default. |  | Boolean
 | *camel.component.facebook.gzip-enabled* | Use Facebook GZIP encoding | true | Boolean

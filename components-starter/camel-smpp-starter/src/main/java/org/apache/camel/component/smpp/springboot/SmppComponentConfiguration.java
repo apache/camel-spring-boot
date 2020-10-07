@@ -19,8 +19,10 @@ package org.apache.camel.component.smpp.springboot;
 import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.component.smpp.SmppComponent;
+import org.apache.camel.component.smpp.SmppConfiguration;
 import org.apache.camel.component.smpp.SmppSplittingPolicy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.jsmpp.session.SessionStateListener;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -207,7 +209,7 @@ public class SmppComponentConfiguration
      * To use the shared SmppConfiguration as configuration. The option is a
      * org.apache.camel.component.smpp.SmppConfiguration type.
      */
-    private String configuration;
+    private SmppConfiguration configuration;
     /**
      * Defines the interval in milliseconds between the confidence checks. The
      * confidence check is used to test the communication path between an ESME
@@ -219,7 +221,7 @@ public class SmppComponentConfiguration
      * to receive callbacks when the session state changed. The option is a
      * org.jsmpp.session.SessionStateListener type.
      */
-    private String sessionStateListener;
+    private SessionStateListener sessionStateListener;
     /**
      * Defines the maximum period of inactivity allowed after a transaction,
      * after which an SMPP entity may assume that the session is no longer
@@ -469,11 +471,11 @@ public class SmppComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public SmppConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(SmppConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -485,11 +487,12 @@ public class SmppComponentConfiguration
         this.enquireLinkTimer = enquireLinkTimer;
     }
 
-    public String getSessionStateListener() {
+    public SessionStateListener getSessionStateListener() {
         return sessionStateListener;
     }
 
-    public void setSessionStateListener(String sessionStateListener) {
+    public void setSessionStateListener(
+            SessionStateListener sessionStateListener) {
         this.sessionStateListener = sessionStateListener;
     }
 

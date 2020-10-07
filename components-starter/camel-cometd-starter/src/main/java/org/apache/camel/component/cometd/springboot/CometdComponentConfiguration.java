@@ -19,7 +19,9 @@ package org.apache.camel.component.cometd.springboot;
 import java.util.List;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.cometd.bayeux.server.BayeuxServer.Extension;
+import org.cometd.bayeux.server.SecurityPolicy;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -75,12 +77,12 @@ public class CometdComponentConfiguration
      * To use a custom configured SecurityPolicy to control authorization. The
      * option is a org.cometd.bayeux.server.SecurityPolicy type.
      */
-    private String securityPolicy;
+    private SecurityPolicy securityPolicy;
     /**
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * The password for the keystore when using SSL.
      */
@@ -133,19 +135,20 @@ public class CometdComponentConfiguration
         this.extensions = extensions;
     }
 
-    public String getSecurityPolicy() {
+    public SecurityPolicy getSecurityPolicy() {
         return securityPolicy;
     }
 
-    public void setSecurityPolicy(String securityPolicy) {
+    public void setSecurityPolicy(SecurityPolicy securityPolicy) {
         this.securityPolicy = securityPolicy;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

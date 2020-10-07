@@ -18,6 +18,7 @@ package org.apache.camel.component.hbase.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.hadoop.conf.Configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -72,7 +73,7 @@ public class HBaseComponentConfiguration
      * To use the shared configuration. The option is a
      * org.apache.hadoop.conf.Configuration type.
      */
-    private String configuration;
+    private Configuration configuration;
 
     public Integer getPoolMaxSize() {
         return poolMaxSize;
@@ -109,11 +110,11 @@ public class HBaseComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Configuration configuration) {
         this.configuration = configuration;
     }
 }

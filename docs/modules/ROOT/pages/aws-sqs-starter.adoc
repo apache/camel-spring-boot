@@ -26,13 +26,13 @@ The component supports 40 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.aws-sqs.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws-sqs.amazon-a-w-s-host* | The hostname of the Amazon AWS cloud. | amazonaws.com | String
-| *camel.component.aws-sqs.amazon-s-q-s-client* | To use the AmazonSQS as client. The option is a com.amazonaws.services.sqs.AmazonSQS type. |  | String
+| *camel.component.aws-sqs.amazon-s-q-s-client* | To use the AmazonSQS as client. The option is a com.amazonaws.services.sqs.AmazonSQS type. |  | AmazonSQS
 | *camel.component.aws-sqs.attribute-names* | A list of attribute names to receive when consuming. Multiple names can be separated by comma. |  | String
 | *camel.component.aws-sqs.auto-create-queue* | Setting the autocreation of the queue | true | Boolean
 | *camel.component.aws-sqs.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
 | *camel.component.aws-sqs.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.aws-sqs.concurrent-consumers* | Allows you to use multiple threads to poll the sqs queue to increase throughput | 1 | Integer
-| *camel.component.aws-sqs.configuration* | The component configuration. The option is a org.apache.camel.component.aws.sqs.SqsConfiguration type. |  | String
+| *camel.component.aws-sqs.configuration* | The component configuration. The option is a org.apache.camel.component.aws.sqs.SqsConfiguration type. |  | SqsConfiguration
 | *camel.component.aws-sqs.default-visibility-timeout* | The default visibility timeout (in seconds) |  | Integer
 | *camel.component.aws-sqs.delay-queue* | Define if you want to apply delaySeconds option to the queue or on single messages | false | Boolean
 | *camel.component.aws-sqs.delay-seconds* | Delay sending messages for a number of seconds. |  | Integer

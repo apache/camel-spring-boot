@@ -19,14 +19,21 @@ package org.apache.camel.component.salesforce.springboot;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.Generated;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.component.salesforce.AuthenticationType;
 import org.apache.camel.component.salesforce.NotFoundBehaviour;
 import org.apache.camel.component.salesforce.SalesforceComponent;
+import org.apache.camel.component.salesforce.SalesforceEndpointConfig;
+import org.apache.camel.component.salesforce.SalesforceHttpClient;
+import org.apache.camel.component.salesforce.SalesforceLoginConfig;
+import org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata;
 import org.apache.camel.component.salesforce.api.dto.bulk.ContentType;
 import org.apache.camel.component.salesforce.internal.PayloadFormat;
 import org.apache.camel.component.salesforce.internal.dto.NotifyForFieldsEnum;
 import org.apache.camel.component.salesforce.internal.dto.NotifyForOperationsEnum;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.KeyStoreParameters;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -66,7 +73,7 @@ public class SalesforceComponentConfiguration
      * Backoff interval increment for Streaming connection restart attempts for
      * failures beyond CometD auto-reconnect. The option is a long type.
      */
-    private String backoffIncrement = "1000";
+    private Long backoffIncrement = 1000L;
     /**
      * Bulk API Batch ID
      */
@@ -88,7 +95,7 @@ public class SalesforceComponentConfiguration
      * Custom Jetty Http Client to use to connect to Salesforce. The option is a
      * org.apache.camel.component.salesforce.SalesforceHttpClient type.
      */
-    private String httpClient;
+    private SalesforceHttpClient httpClient;
     /**
      * Connection timeout used by the HttpClient when connecting to the
      * Salesforce server.
@@ -128,7 +135,7 @@ public class SalesforceComponentConfiguration
      * Maximum backoff interval for Streaming connection restart attempts for
      * failures beyond CometD auto-reconnect. The option is a long type.
      */
-    private String maxBackoff = "30000";
+    private Long maxBackoff = 30000L;
     /**
      * Sets the behaviour of 404 not found status received from Salesforce API.
      * Should the body be set to NULL NotFoundBehaviour#NULL or should a
@@ -166,7 +173,7 @@ public class SalesforceComponentConfiguration
      * Salesforce objects. The option is a
      * com.fasterxml.jackson.databind.ObjectMapper type.
      */
-    private String objectMapper;
+    private ObjectMapper objectMapper;
     /**
      * In what packages are the generated DTO classes. Typically the classes
      * would be generated using camel-salesforce-maven-plugin. Set it if using
@@ -187,7 +194,7 @@ public class SalesforceComponentConfiguration
      * Salesforce1 Analytics report metadata for filtering. The option is a
      * org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata type.
      */
-    private String reportMetadata;
+    private ReportMetadata reportMetadata;
     /**
      * Bulk API Result ID
      */
@@ -239,7 +246,7 @@ public class SalesforceComponentConfiguration
      * endpoints. The option is a
      * org.apache.camel.component.salesforce.SalesforceEndpointConfig type.
      */
-    private String config;
+    private SalesforceEndpointConfig config;
     /**
      * Used to set any properties that can be configured on the underlying HTTP
      * client. Have a look at properties of SalesforceHttpClient and the Jetty
@@ -357,7 +364,7 @@ public class SalesforceComponentConfiguration
      * corresponding connected app. The option is a
      * org.apache.camel.support.jsse.KeyStoreParameters type.
      */
-    private String keystore;
+    private KeyStoreParameters keystore;
     /**
      * If set to true prevents the component from authenticating to Salesforce
      * with the start of the component. You would generally set this to the
@@ -370,7 +377,7 @@ public class SalesforceComponentConfiguration
      * there can be set directly on the component as well. The option is a
      * org.apache.camel.component.salesforce.SalesforceLoginConfig type.
      */
-    private String loginConfig;
+    private SalesforceLoginConfig loginConfig;
     /**
      * URL of the Salesforce instance used for authentication, by default set to
      * https://login.salesforce.com
@@ -399,7 +406,7 @@ public class SalesforceComponentConfiguration
      * options. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters
      */
@@ -443,11 +450,11 @@ public class SalesforceComponentConfiguration
         this.apiVersion = apiVersion;
     }
 
-    public String getBackoffIncrement() {
+    public Long getBackoffIncrement() {
         return backoffIncrement;
     }
 
-    public void setBackoffIncrement(String backoffIncrement) {
+    public void setBackoffIncrement(Long backoffIncrement) {
         this.backoffIncrement = backoffIncrement;
     }
 
@@ -483,11 +490,11 @@ public class SalesforceComponentConfiguration
         this.format = format;
     }
 
-    public String getHttpClient() {
+    public SalesforceHttpClient getHttpClient() {
         return httpClient;
     }
 
-    public void setHttpClient(String httpClient) {
+    public void setHttpClient(SalesforceHttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
@@ -555,11 +562,11 @@ public class SalesforceComponentConfiguration
         this.limit = limit;
     }
 
-    public String getMaxBackoff() {
+    public Long getMaxBackoff() {
         return maxBackoff;
     }
 
-    public void setMaxBackoff(String maxBackoff) {
+    public void setMaxBackoff(Long maxBackoff) {
         this.maxBackoff = maxBackoff;
     }
 
@@ -620,11 +627,11 @@ public class SalesforceComponentConfiguration
         this.notifyForOperationUpdate = notifyForOperationUpdate;
     }
 
-    public String getObjectMapper() {
+    public ObjectMapper getObjectMapper() {
         return objectMapper;
     }
 
-    public void setObjectMapper(String objectMapper) {
+    public void setObjectMapper(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
@@ -652,11 +659,11 @@ public class SalesforceComponentConfiguration
         this.reportId = reportId;
     }
 
-    public String getReportMetadata() {
+    public ReportMetadata getReportMetadata() {
         return reportMetadata;
     }
 
-    public void setReportMetadata(String reportMetadata) {
+    public void setReportMetadata(ReportMetadata reportMetadata) {
         this.reportMetadata = reportMetadata;
     }
 
@@ -748,11 +755,11 @@ public class SalesforceComponentConfiguration
         this.updateTopic = updateTopic;
     }
 
-    public String getConfig() {
+    public SalesforceEndpointConfig getConfig() {
         return config;
     }
 
-    public void setConfig(String config) {
+    public void setConfig(SalesforceEndpointConfig config) {
         this.config = config;
     }
 
@@ -922,11 +929,11 @@ public class SalesforceComponentConfiguration
         this.instanceUrl = instanceUrl;
     }
 
-    public String getKeystore() {
+    public KeyStoreParameters getKeystore() {
         return keystore;
     }
 
-    public void setKeystore(String keystore) {
+    public void setKeystore(KeyStoreParameters keystore) {
         this.keystore = keystore;
     }
 
@@ -938,11 +945,11 @@ public class SalesforceComponentConfiguration
         this.lazyLogin = lazyLogin;
     }
 
-    public String getLoginConfig() {
+    public SalesforceLoginConfig getLoginConfig() {
         return loginConfig;
     }
 
-    public void setLoginConfig(String loginConfig) {
+    public void setLoginConfig(SalesforceLoginConfig loginConfig) {
         this.loginConfig = loginConfig;
     }
 
@@ -970,11 +977,12 @@ public class SalesforceComponentConfiguration
         this.refreshToken = refreshToken;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

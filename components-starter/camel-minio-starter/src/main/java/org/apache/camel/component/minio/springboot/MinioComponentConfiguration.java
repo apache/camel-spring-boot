@@ -16,7 +16,13 @@
  */
 package org.apache.camel.component.minio.springboot;
 
+import java.time.ZonedDateTime;
 import javax.annotation.Generated;
+import io.minio.MinioClient;
+import io.minio.ServerSideEncryption;
+import io.minio.ServerSideEncryptionCustomerKey;
+import okhttp3.OkHttpClient;
+import org.apache.camel.component.minio.MinioConfiguration;
 import org.apache.camel.component.minio.MinioOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -46,12 +52,12 @@ public class MinioComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.minio.MinioConfiguration type.
      */
-    private String configuration;
+    private MinioConfiguration configuration;
     /**
      * Set custom HTTP client for authenticated access. The option is a
      * okhttp3.OkHttpClient type.
      */
-    private String customHttpClient;
+    private OkHttpClient customHttpClient;
     /**
      * Endpoint can be an URL, domain name, IPv4 address or IPv6 address.
      */
@@ -60,7 +66,7 @@ public class MinioComponentConfiguration
      * Reference to a Minio Client object in the registry. The option is a
      * io.minio.MinioClient type.
      */
-    private String minioClient;
+    private MinioClient minioClient;
     /**
      * Set when creating new bucket.
      */
@@ -88,12 +94,12 @@ public class MinioComponentConfiguration
      * Server-side encryption. The option is a io.minio.ServerSideEncryption
      * type.
      */
-    private String serverSideEncryption;
+    private ServerSideEncryption serverSideEncryption;
     /**
      * Server-side encryption for source object while copy/move objects. The
      * option is a io.minio.ServerSideEncryptionCustomerKey type.
      */
-    private String serverSideEncryptionCustomerKey;
+    private ServerSideEncryptionCustomerKey serverSideEncryptionCustomerKey;
     /**
      * If this option is true and includeBody is true, then the
      * MinioObject.close() method will be called on exchange completion. This
@@ -188,7 +194,7 @@ public class MinioComponentConfiguration
      * Set modified since parameter for get object(s). The option is a
      * java.time.ZonedDateTime type.
      */
-    private String modifiedSince;
+    private ZonedDateTime modifiedSince;
     /**
      * Move objects from bucket to a different bucket after they have been
      * retrieved. To accomplish the operation the destinationBucket option must
@@ -224,7 +230,7 @@ public class MinioComponentConfiguration
      * Set un modified since parameter for get object(s). The option is a
      * java.time.ZonedDateTime type.
      */
-    private String unModifiedSince;
+    private ZonedDateTime unModifiedSince;
     /**
      * when true, version 1 of REST API is used.
      */
@@ -290,19 +296,19 @@ public class MinioComponentConfiguration
         this.autoCreateBucket = autoCreateBucket;
     }
 
-    public String getConfiguration() {
+    public MinioConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(MinioConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getCustomHttpClient() {
+    public OkHttpClient getCustomHttpClient() {
         return customHttpClient;
     }
 
-    public void setCustomHttpClient(String customHttpClient) {
+    public void setCustomHttpClient(OkHttpClient customHttpClient) {
         this.customHttpClient = customHttpClient;
     }
 
@@ -314,11 +320,11 @@ public class MinioComponentConfiguration
         this.endpoint = endpoint;
     }
 
-    public String getMinioClient() {
+    public MinioClient getMinioClient() {
         return minioClient;
     }
 
-    public void setMinioClient(String minioClient) {
+    public void setMinioClient(MinioClient minioClient) {
         this.minioClient = minioClient;
     }
 
@@ -362,20 +368,21 @@ public class MinioComponentConfiguration
         this.secure = secure;
     }
 
-    public String getServerSideEncryption() {
+    public ServerSideEncryption getServerSideEncryption() {
         return serverSideEncryption;
     }
 
-    public void setServerSideEncryption(String serverSideEncryption) {
+    public void setServerSideEncryption(
+            ServerSideEncryption serverSideEncryption) {
         this.serverSideEncryption = serverSideEncryption;
     }
 
-    public String getServerSideEncryptionCustomerKey() {
+    public ServerSideEncryptionCustomerKey getServerSideEncryptionCustomerKey() {
         return serverSideEncryptionCustomerKey;
     }
 
     public void setServerSideEncryptionCustomerKey(
-            String serverSideEncryptionCustomerKey) {
+            ServerSideEncryptionCustomerKey serverSideEncryptionCustomerKey) {
         this.serverSideEncryptionCustomerKey = serverSideEncryptionCustomerKey;
     }
 
@@ -499,11 +506,11 @@ public class MinioComponentConfiguration
         this.maxMessagesPerPoll = maxMessagesPerPoll;
     }
 
-    public String getModifiedSince() {
+    public ZonedDateTime getModifiedSince() {
         return modifiedSince;
     }
 
-    public void setModifiedSince(String modifiedSince) {
+    public void setModifiedSince(ZonedDateTime modifiedSince) {
         this.modifiedSince = modifiedSince;
     }
 
@@ -563,11 +570,11 @@ public class MinioComponentConfiguration
         this.startAfter = startAfter;
     }
 
-    public String getUnModifiedSince() {
+    public ZonedDateTime getUnModifiedSince() {
         return unModifiedSince;
     }
 
-    public void setUnModifiedSince(String unModifiedSince) {
+    public void setUnModifiedSince(ZonedDateTime unModifiedSince) {
         this.unModifiedSince = unModifiedSince;
     }
 

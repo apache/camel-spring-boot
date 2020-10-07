@@ -17,6 +17,7 @@
 package org.apache.camel.component.sql.stored.springboot;
 
 import javax.annotation.Generated;
+import javax.sql.DataSource;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -41,7 +42,7 @@ public class SqlStoredComponentConfiguration
      * Sets the DataSource to use to communicate with the database. The option
      * is a javax.sql.DataSource type.
      */
-    private String dataSource;
+    private DataSource dataSource;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -60,11 +61,11 @@ public class SqlStoredComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getDataSource() {
+    public DataSource getDataSource() {
         return dataSource;
     }
 
-    public void setDataSource(String dataSource) {
+    public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

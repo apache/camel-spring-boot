@@ -17,6 +17,7 @@
 package org.apache.camel.component.mustache.springboot;
 
 import javax.annotation.Generated;
+import com.github.mustachejava.MustacheFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -73,7 +74,7 @@ public class MustacheComponentConfiguration
      * To use a custom MustacheFactory. The option is a
      * com.github.mustachejava.MustacheFactory type.
      */
-    private String mustacheFactory;
+    private MustacheFactory mustacheFactory;
 
     public Boolean getAllowContextMapAll() {
         return allowContextMapAll;
@@ -110,11 +111,11 @@ public class MustacheComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getMustacheFactory() {
+    public MustacheFactory getMustacheFactory() {
         return mustacheFactory;
     }
 
-    public void setMustacheFactory(String mustacheFactory) {
+    public void setMustacheFactory(MustacheFactory mustacheFactory) {
         this.mustacheFactory = mustacheFactory;
     }
 }

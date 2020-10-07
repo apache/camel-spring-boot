@@ -18,6 +18,7 @@ package org.apache.camel.component.robotframework.springboot;
 
 import java.io.File;
 import javax.annotation.Generated;
+import org.apache.camel.component.robotframework.RobotFrameworkCamelConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -283,7 +284,7 @@ public class RobotFrameworkComponentConfiguration
      * The configuration. The option is a
      * org.apache.camel.component.robotframework.RobotFrameworkCamelConfiguration type.
      */
-    private String configuration;
+    private RobotFrameworkCamelConfiguration configuration;
 
     public Boolean getAllowContextMapAll() {
         return allowContextMapAll;
@@ -688,11 +689,11 @@ public class RobotFrameworkComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public RobotFrameworkCamelConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(RobotFrameworkCamelConfiguration configuration) {
         this.configuration = configuration;
     }
 }

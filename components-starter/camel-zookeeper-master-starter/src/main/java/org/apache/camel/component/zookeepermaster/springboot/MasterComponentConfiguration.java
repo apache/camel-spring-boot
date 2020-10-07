@@ -17,7 +17,9 @@
 package org.apache.camel.component.zookeepermaster.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.zookeepermaster.ContainerIdFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.curator.framework.CuratorFramework;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -71,13 +73,13 @@ public class MasterComponentConfiguration
      * To use a custom ContainerIdFactory for creating container ids. The option
      * is a org.apache.camel.component.zookeepermaster.ContainerIdFactory type.
      */
-    private String containerIdFactory;
+    private ContainerIdFactory containerIdFactory;
     /**
      * To use a custom configured CuratorFramework as connection to zookeeper
      * ensemble. The option is a org.apache.curator.framework.CuratorFramework
      * type.
      */
-    private String curator;
+    private CuratorFramework curator;
     /**
      * The password to use when connecting to the zookeeper ensemble
      */
@@ -126,19 +128,19 @@ public class MasterComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getContainerIdFactory() {
+    public ContainerIdFactory getContainerIdFactory() {
         return containerIdFactory;
     }
 
-    public void setContainerIdFactory(String containerIdFactory) {
+    public void setContainerIdFactory(ContainerIdFactory containerIdFactory) {
         this.containerIdFactory = containerIdFactory;
     }
 
-    public String getCurator() {
+    public CuratorFramework getCurator() {
         return curator;
     }
 
-    public void setCurator(String curator) {
+    public void setCurator(CuratorFramework curator) {
         this.curator = curator;
     }
 

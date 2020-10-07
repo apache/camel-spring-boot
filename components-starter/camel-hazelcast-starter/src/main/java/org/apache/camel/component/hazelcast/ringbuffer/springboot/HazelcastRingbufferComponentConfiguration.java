@@ -17,6 +17,7 @@
 package org.apache.camel.component.hazelcast.ringbuffer.springboot;
 
 import javax.annotation.Generated;
+import com.hazelcast.core.HazelcastInstance;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -60,7 +61,7 @@ public class HazelcastRingbufferComponentConfiguration
      * default hazelcast instance from the camel-hazelcast instance. The option
      * is a com.hazelcast.core.HazelcastInstance type.
      */
-    private String hazelcastInstance;
+    private HazelcastInstance hazelcastInstance;
     /**
      * The hazelcast mode reference which kind of instance should be used. If
      * you don't specify the mode, then the node mode will be the default.
@@ -86,11 +87,11 @@ public class HazelcastRingbufferComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getHazelcastInstance() {
+    public HazelcastInstance getHazelcastInstance() {
         return hazelcastInstance;
     }
 
-    public void setHazelcastInstance(String hazelcastInstance) {
+    public void setHazelcastInstance(HazelcastInstance hazelcastInstance) {
         this.hazelcastInstance = hazelcastInstance;
     }
 

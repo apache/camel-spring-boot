@@ -18,7 +18,11 @@ package org.apache.camel.component.aws.s3.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.EncryptionMaterials;
 import org.apache.camel.component.aws.s3.S3Component;
+import org.apache.camel.component.aws.s3.S3Configuration;
 import org.apache.camel.component.aws.s3.S3Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -44,7 +48,7 @@ public class S3ComponentConfiguration
      * Reference to a com.amazonaws.services.s3.AmazonS3 in the registry. The
      * option is a com.amazonaws.services.s3.AmazonS3 type.
      */
-    private String amazonS3Client;
+    private AmazonS3 amazonS3Client;
     /**
      * Setting the autocreation of the bucket
      */
@@ -59,12 +63,12 @@ public class S3ComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.s3.S3Configuration type.
      */
-    private String configuration;
+    private S3Configuration configuration;
     /**
      * Amazon AWS Endpoint Configuration. The option is a
      * com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration type.
      */
-    private String endpointConfiguration;
+    private EndpointConfiguration endpointConfiguration;
     /**
      * Whether or not the S3 client should use path style access
      */
@@ -102,7 +106,7 @@ public class S3ComponentConfiguration
      * usage. The option is a
      * com.amazonaws.services.s3.model.EncryptionMaterials type.
      */
-    private String encryptionMaterials;
+    private EncryptionMaterials encryptionMaterials;
     /**
      * Define if encryption must be used or not
      */
@@ -248,11 +252,11 @@ public class S3ComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonS3Client() {
+    public AmazonS3 getAmazonS3Client() {
         return amazonS3Client;
     }
 
-    public void setAmazonS3Client(String amazonS3Client) {
+    public void setAmazonS3Client(AmazonS3 amazonS3Client) {
         this.amazonS3Client = amazonS3Client;
     }
 
@@ -272,19 +276,20 @@ public class S3ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public S3Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(S3Configuration configuration) {
         this.configuration = configuration;
     }
 
-    public String getEndpointConfiguration() {
+    public EndpointConfiguration getEndpointConfiguration() {
         return endpointConfiguration;
     }
 
-    public void setEndpointConfiguration(String endpointConfiguration) {
+    public void setEndpointConfiguration(
+            EndpointConfiguration endpointConfiguration) {
         this.endpointConfiguration = endpointConfiguration;
     }
 
@@ -344,11 +349,11 @@ public class S3ComponentConfiguration
         this.useIAMCredentials = useIAMCredentials;
     }
 
-    public String getEncryptionMaterials() {
+    public EncryptionMaterials getEncryptionMaterials() {
         return encryptionMaterials;
     }
 
-    public void setEncryptionMaterials(String encryptionMaterials) {
+    public void setEncryptionMaterials(EncryptionMaterials encryptionMaterials) {
         this.encryptionMaterials = encryptionMaterials;
     }
 

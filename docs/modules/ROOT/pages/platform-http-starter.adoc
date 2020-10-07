@@ -26,7 +26,7 @@ The component supports 4 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.platform-http.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.platform-http.enabled* | Whether to enable auto configuration of the platform-http component. This is enabled by default. |  | Boolean
-| *camel.component.platform-http.engine* | An HTTP Server engine implementation to serve the requests. The option is a org.apache.camel.component.platform.http.spi.PlatformHttpEngine type. |  | String
+| *camel.component.platform-http.engine* | An HTTP Server engine implementation to serve the requests. The option is a org.apache.camel.component.platform.http.spi.PlatformHttpEngine type. |  | PlatformHttpEngine
 | *camel.component.platform-http.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

@@ -17,6 +17,8 @@
 package org.apache.camel.component.avro.springboot;
 
 import javax.annotation.Generated;
+import org.apache.avro.Protocol;
+import org.apache.camel.component.avro.AvroConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -40,7 +42,7 @@ public class AvroComponentConfiguration
     /**
      * Avro protocol to use. The option is a org.apache.avro.Protocol type.
      */
-    private String protocol;
+    private Protocol protocol;
     /**
      * Avro protocol to use defined by the FQN class name
      */
@@ -94,13 +96,13 @@ public class AvroComponentConfiguration
      * To use a shared AvroConfiguration to configure options once. The option
      * is a org.apache.camel.component.avro.AvroConfiguration type.
      */
-    private String configuration;
+    private AvroConfiguration configuration;
 
-    public String getProtocol() {
+    public Protocol getProtocol() {
         return protocol;
     }
 
-    public void setProtocol(String protocol) {
+    public void setProtocol(Protocol protocol) {
         this.protocol = protocol;
     }
 
@@ -171,11 +173,11 @@ public class AvroComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public AvroConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(AvroConfiguration configuration) {
         this.configuration = configuration;
     }
 }

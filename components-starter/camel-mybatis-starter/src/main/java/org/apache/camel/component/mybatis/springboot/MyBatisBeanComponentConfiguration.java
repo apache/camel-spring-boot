@@ -18,6 +18,7 @@ package org.apache.camel.component.mybatis.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -64,7 +65,7 @@ public class MyBatisBeanComponentConfiguration
      * To use the SqlSessionFactory. The option is a
      * org.apache.ibatis.session.SqlSessionFactory type.
      */
-    private String sqlSessionFactory;
+    private SqlSessionFactory sqlSessionFactory;
 
     public String getConfigurationUri() {
         return configurationUri;
@@ -93,11 +94,11 @@ public class MyBatisBeanComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getSqlSessionFactory() {
+    public SqlSessionFactory getSqlSessionFactory() {
         return sqlSessionFactory;
     }
 
-    public void setSqlSessionFactory(String sqlSessionFactory) {
+    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 }

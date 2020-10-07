@@ -17,8 +17,13 @@
 package org.apache.camel.component.vertx.http.springboot;
 
 import javax.annotation.Generated;
+import io.vertx.core.Vertx;
+import io.vertx.core.VertxOptions;
 import io.vertx.core.net.ProxyType;
+import org.apache.camel.component.vertx.http.VertxHttpBinding;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -66,24 +71,24 @@ public class VertxHttpComponentConfiguration
      * To use an existing vertx instead of creating a new instance. The option
      * is a io.vertx.core.Vertx type.
      */
-    private String vertx;
+    private Vertx vertx;
     /**
      * A custom VertxHttpBinding which can control how to bind between Vert.x
      * and Camel. The option is a
      * org.apache.camel.component.vertx.http.VertxHttpBinding type.
      */
-    private String vertxHttpBinding;
+    private VertxHttpBinding vertxHttpBinding;
     /**
      * To provide a custom set of vertx options for configuring vertx. The
      * option is a io.vertx.core.VertxOptions type.
      */
-    private String vertxOptions;
+    private VertxOptions vertxOptions;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
     /**
      * The proxy server host address
      */
@@ -120,7 +125,7 @@ public class VertxHttpComponentConfiguration
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters
      */
@@ -153,35 +158,36 @@ public class VertxHttpComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getVertx() {
+    public Vertx getVertx() {
         return vertx;
     }
 
-    public void setVertx(String vertx) {
+    public void setVertx(Vertx vertx) {
         this.vertx = vertx;
     }
 
-    public String getVertxHttpBinding() {
+    public VertxHttpBinding getVertxHttpBinding() {
         return vertxHttpBinding;
     }
 
-    public void setVertxHttpBinding(String vertxHttpBinding) {
+    public void setVertxHttpBinding(VertxHttpBinding vertxHttpBinding) {
         this.vertxHttpBinding = vertxHttpBinding;
     }
 
-    public String getVertxOptions() {
+    public VertxOptions getVertxOptions() {
         return vertxOptions;
     }
 
-    public void setVertxOptions(String vertxOptions) {
+    public void setVertxOptions(VertxOptions vertxOptions) {
         this.vertxOptions = vertxOptions;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 
@@ -249,11 +255,12 @@ public class VertxHttpComponentConfiguration
         this.bearerToken = bearerToken;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

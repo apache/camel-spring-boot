@@ -17,6 +17,8 @@
 package org.apache.camel.component.google.mail.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.google.mail.GoogleMailClientFactory;
+import org.apache.camel.component.google.mail.GoogleMailConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -49,7 +51,7 @@ public class GoogleMailComponentConfiguration
      * To use the shared configuration. The option is a
      * org.apache.camel.component.google.mail.GoogleMailConfiguration type.
      */
-    private String configuration;
+    private GoogleMailConfiguration configuration;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -81,7 +83,7 @@ public class GoogleMailComponentConfiguration
      * client. Will by default use BatchGoogleMailClientFactory. The option is a
      * org.apache.camel.component.google.mail.GoogleMailClientFactory type.
      */
-    private String clientFactory;
+    private GoogleMailClientFactory clientFactory;
     /**
      * OAuth 2 access token. This typically expires after an hour so
      * refreshToken is recommended for long term usage.
@@ -114,11 +116,11 @@ public class GoogleMailComponentConfiguration
         this.clientId = clientId;
     }
 
-    public String getConfiguration() {
+    public GoogleMailConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(GoogleMailConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -149,11 +151,11 @@ public class GoogleMailComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getClientFactory() {
+    public GoogleMailClientFactory getClientFactory() {
         return clientFactory;
     }
 
-    public void setClientFactory(String clientFactory) {
+    public void setClientFactory(GoogleMailClientFactory clientFactory) {
         this.clientFactory = clientFactory;
     }
 

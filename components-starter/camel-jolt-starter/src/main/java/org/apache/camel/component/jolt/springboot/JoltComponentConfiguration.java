@@ -17,6 +17,7 @@
 package org.apache.camel.component.jolt.springboot;
 
 import javax.annotation.Generated;
+import com.bazaarvoice.jolt.Transform;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -66,7 +67,7 @@ public class JoltComponentConfiguration
      * the transformDsl will be created. The option is a
      * com.bazaarvoice.jolt.Transform type.
      */
-    private String transform;
+    private Transform transform;
 
     public Boolean getAllowTemplateFromHeader() {
         return allowTemplateFromHeader;
@@ -95,11 +96,11 @@ public class JoltComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getTransform() {
+    public Transform getTransform() {
         return transform;
     }
 
-    public void setTransform(String transform) {
+    public void setTransform(Transform transform) {
         this.transform = transform;
     }
 }

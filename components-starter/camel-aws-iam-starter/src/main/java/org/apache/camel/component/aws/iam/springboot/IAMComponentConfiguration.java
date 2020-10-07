@@ -18,7 +18,9 @@ package org.apache.camel.component.aws.iam.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.identitymanagement.AmazonIdentityManagement;
 import org.apache.camel.component.aws.iam.IAMComponent;
+import org.apache.camel.component.aws.iam.IAMConfiguration;
 import org.apache.camel.component.aws.iam.IAMOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -54,12 +56,12 @@ public class IAMComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.iam.IAMConfiguration type.
      */
-    private String configuration;
+    private IAMConfiguration configuration;
     /**
      * To use a existing configured AWS IAM as client. The option is a
      * com.amazonaws.services.identitymanagement.AmazonIdentityManagement type.
      */
-    private String iamClient;
+    private AmazonIdentityManagement iamClient;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -120,19 +122,19 @@ public class IAMComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public String getConfiguration() {
+    public IAMConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(IAMConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getIamClient() {
+    public AmazonIdentityManagement getIamClient() {
         return iamClient;
     }
 
-    public void setIamClient(String iamClient) {
+    public void setIamClient(AmazonIdentityManagement iamClient) {
         this.iamClient = iamClient;
     }
 

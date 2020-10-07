@@ -18,6 +18,8 @@ package org.apache.camel.component.google.sheets.stream.springboot;
 
 import java.util.List;
 import javax.annotation.Generated;
+import org.apache.camel.component.google.sheets.GoogleSheetsClientFactory;
+import org.apache.camel.component.google.sheets.stream.GoogleSheetsStreamConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -59,7 +61,7 @@ public class GoogleSheetsStreamComponentConfiguration
      * To use the shared configuration. The option is a
      * org.apache.camel.component.google.sheets.stream.GoogleSheetsStreamConfiguration type.
      */
-    private String configuration;
+    private GoogleSheetsStreamConfiguration configuration;
     /**
      * True if grid data should be returned.
      */
@@ -112,7 +114,7 @@ public class GoogleSheetsStreamComponentConfiguration
      * Will by default use BatchGoogleSheetsClientFactory. The option is a
      * org.apache.camel.component.google.sheets.GoogleSheetsClientFactory type.
      */
-    private String clientFactory;
+    private GoogleSheetsClientFactory clientFactory;
     /**
      * OAuth 2 access token. This typically expires after an hour so
      * refreshToken is recommended for long term usage.
@@ -153,11 +155,11 @@ public class GoogleSheetsStreamComponentConfiguration
         this.clientId = clientId;
     }
 
-    public String getConfiguration() {
+    public GoogleSheetsStreamConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(GoogleSheetsStreamConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -236,11 +238,11 @@ public class GoogleSheetsStreamComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getClientFactory() {
+    public GoogleSheetsClientFactory getClientFactory() {
         return clientFactory;
     }
 
-    public void setClientFactory(String clientFactory) {
+    public void setClientFactory(GoogleSheetsClientFactory clientFactory) {
         this.clientFactory = clientFactory;
     }
 

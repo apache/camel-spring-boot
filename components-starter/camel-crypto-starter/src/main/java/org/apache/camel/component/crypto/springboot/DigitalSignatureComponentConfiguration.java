@@ -16,8 +16,15 @@
  */
 package org.apache.camel.component.crypto.springboot;
 
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.SecureRandom;
+import java.security.cert.Certificate;
 import javax.annotation.Generated;
+import org.apache.camel.component.crypto.DigitalSignatureConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.KeyStoreParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -63,7 +70,7 @@ public class DigitalSignatureComponentConfiguration
      * there is only a single entry in the Keystore, then this single entry will
      * be used. The option is a java.security.KeyStore type.
      */
-    private String keystore;
+    private KeyStore keystore;
     /**
      * Sets the reference name for a Keystore that can be found in the registry.
      */
@@ -83,7 +90,7 @@ public class DigitalSignatureComponentConfiguration
      * Set the PrivateKey that should be used to sign the exchange. The option
      * is a java.security.PrivateKey type.
      */
-    private String privateKey;
+    private PrivateKey privateKey;
     /**
      * Sets the reference name for a PrivateKey that can be found in the
      * registry.
@@ -123,7 +130,7 @@ public class DigitalSignatureComponentConfiguration
      * exchange based on its payload. The option is a
      * java.security.cert.Certificate type.
      */
-    private String certificate;
+    private Certificate certificate;
     /**
      * Determines if the Signature specific headers be cleared after signing and
      * verification. Defaults to true, and should only be made otherwise at your
@@ -136,7 +143,7 @@ public class DigitalSignatureComponentConfiguration
      * option is a
      * org.apache.camel.component.crypto.DigitalSignatureConfiguration type.
      */
-    private String configuration;
+    private DigitalSignatureConfiguration configuration;
     /**
      * Sets the KeyStore that can contain keys and Certficates for use in
      * signing and verifying exchanges based on the given KeyStoreParameters. A
@@ -146,17 +153,17 @@ public class DigitalSignatureComponentConfiguration
      * single entry in the Keystore, then this single entry will be used. The
      * option is a org.apache.camel.support.jsse.KeyStoreParameters type.
      */
-    private String keyStoreParameters;
+    private KeyStoreParameters keyStoreParameters;
     /**
      * Set the PublicKey that should be used to verify the signature in the
      * exchange. The option is a java.security.PublicKey type.
      */
-    private String publicKey;
+    private PublicKey publicKey;
     /**
      * Set the SecureRandom used to initialize the Signature service. The option
      * is a java.security.SecureRandom type.
      */
-    private String secureRandom;
+    private SecureRandom secureRandom;
     /**
      * Sets the password used to access an aliased PrivateKey in the KeyStore.
      */
@@ -186,11 +193,11 @@ public class DigitalSignatureComponentConfiguration
         this.certificateName = certificateName;
     }
 
-    public String getKeystore() {
+    public KeyStore getKeystore() {
         return keystore;
     }
 
-    public void setKeystore(String keystore) {
+    public void setKeystore(KeyStore keystore) {
         this.keystore = keystore;
     }
 
@@ -210,11 +217,11 @@ public class DigitalSignatureComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public String getPrivateKey() {
+    public PrivateKey getPrivateKey() {
         return privateKey;
     }
 
-    public void setPrivateKey(String privateKey) {
+    public void setPrivateKey(PrivateKey privateKey) {
         this.privateKey = privateKey;
     }
 
@@ -277,11 +284,11 @@ public class DigitalSignatureComponentConfiguration
         this.bufferSize = bufferSize;
     }
 
-    public String getCertificate() {
+    public Certificate getCertificate() {
         return certificate;
     }
 
-    public void setCertificate(String certificate) {
+    public void setCertificate(Certificate certificate) {
         this.certificate = certificate;
     }
 
@@ -293,35 +300,35 @@ public class DigitalSignatureComponentConfiguration
         this.clearHeaders = clearHeaders;
     }
 
-    public String getConfiguration() {
+    public DigitalSignatureConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(DigitalSignatureConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getKeyStoreParameters() {
+    public KeyStoreParameters getKeyStoreParameters() {
         return keyStoreParameters;
     }
 
-    public void setKeyStoreParameters(String keyStoreParameters) {
+    public void setKeyStoreParameters(KeyStoreParameters keyStoreParameters) {
         this.keyStoreParameters = keyStoreParameters;
     }
 
-    public String getPublicKey() {
+    public PublicKey getPublicKey() {
         return publicKey;
     }
 
-    public void setPublicKey(String publicKey) {
+    public void setPublicKey(PublicKey publicKey) {
         this.publicKey = publicKey;
     }
 
-    public String getSecureRandom() {
+    public SecureRandom getSecureRandom() {
         return secureRandom;
     }
 
-    public void setSecureRandom(String secureRandom) {
+    public void setSecureRandom(SecureRandom secureRandom) {
         this.secureRandom = secureRandom;
     }
 

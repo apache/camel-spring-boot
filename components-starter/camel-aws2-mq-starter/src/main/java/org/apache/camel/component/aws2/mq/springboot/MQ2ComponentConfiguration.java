@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.mq.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.mq.MQ2Component;
+import org.apache.camel.component.aws2.mq.MQ2Configuration;
 import org.apache.camel.component.aws2.mq.MQ2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.mq.MqClient;
 
 /**
  * Manage AWS MQ instances using AWS SDK version 2.x.
@@ -44,7 +46,7 @@ public class MQ2ComponentConfiguration
      * To use a existing configured AmazonMQClient as client. The option is a
      * software.amazon.awssdk.services.mq.MqClient type.
      */
-    private String amazonMqClient;
+    private MqClient amazonMqClient;
     /**
      * Setting the autoDiscoverClient mechanism, if true, the component will
      * look for a client instance in the registry automatically otherwise it
@@ -55,7 +57,7 @@ public class MQ2ComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.mq.MQ2Configuration type.
      */
-    private String configuration;
+    private MQ2Configuration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -112,11 +114,11 @@ public class MQ2ComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonMqClient() {
+    public MqClient getAmazonMqClient() {
         return amazonMqClient;
     }
 
-    public void setAmazonMqClient(String amazonMqClient) {
+    public void setAmazonMqClient(MqClient amazonMqClient) {
         this.amazonMqClient = amazonMqClient;
     }
 
@@ -128,11 +130,11 @@ public class MQ2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public MQ2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(MQ2Configuration configuration) {
         this.configuration = configuration;
     }
 

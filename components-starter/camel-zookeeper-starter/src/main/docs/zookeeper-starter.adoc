@@ -47,7 +47,7 @@ The component supports 57 options, which are listed below.
 | *camel.component.zookeeper.cluster.service.retry-policy* | Retry policy to use. |  | RetryPolicy
 | *camel.component.zookeeper.cluster.service.session-timeout* | Session timeout. | 60000 | Long
 | *camel.component.zookeeper.cluster.service.session-timeout-unit* | Session timeout TimeUnit. Default is TimeUnit.MILLISECONDS. |  | TimeUnit
-| *camel.component.zookeeper.configuration* | To use a shared ZooKeeperConfiguration. The option is a org.apache.camel.component.zookeeper.ZooKeeperConfiguration type. |  | String
+| *camel.component.zookeeper.configuration* | To use a shared ZooKeeperConfiguration. The option is a org.apache.camel.component.zookeeper.ZooKeeperConfiguration type. |  | ZooKeeperConfiguration
 | *camel.component.zookeeper.create* | Should the endpoint create the node if it does not currently exist. | false | Boolean
 | *camel.component.zookeeper.create-mode* | The create mode that should be used for the newly created node | EPHEMERAL | String
 | *camel.component.zookeeper.enabled* | Whether to enable auto configuration of the zookeeper component. This is enabled by default. |  | Boolean

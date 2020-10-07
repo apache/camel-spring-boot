@@ -18,6 +18,8 @@ package org.apache.camel.component.websocket.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
+import org.eclipse.jetty.util.thread.ThreadPool;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -102,12 +104,12 @@ public class WebsocketComponentConfiguration
      * threadPool fields are required due to switch to Jetty9. The option is a
      * org.eclipse.jetty.util.thread.ThreadPool type.
      */
-    private String threadPool;
+    private ThreadPool threadPool;
     /**
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * The password for the keystore when using SSL.
      */
@@ -200,19 +202,20 @@ public class WebsocketComponentConfiguration
         this.minThreads = minThreads;
     }
 
-    public String getThreadPool() {
+    public ThreadPool getThreadPool() {
         return threadPool;
     }
 
-    public void setThreadPool(String threadPool) {
+    public void setThreadPool(ThreadPool threadPool) {
         this.threadPool = threadPool;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

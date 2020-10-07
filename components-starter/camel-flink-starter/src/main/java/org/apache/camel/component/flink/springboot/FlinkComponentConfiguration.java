@@ -17,7 +17,10 @@
 package org.apache.camel.component.flink.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.flink.DataSetCallback;
+import org.apache.camel.component.flink.DataStreamCallback;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.flink.streaming.api.datastream.DataStream;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -41,17 +44,17 @@ public class FlinkComponentConfiguration
      * Function performing action against a DataSet. The option is a
      * org.apache.camel.component.flink.DataSetCallback type.
      */
-    private String dataSetCallback;
+    private DataSetCallback dataSetCallback;
     /**
      * DataStream to compute against. The option is a
      * org.apache.flink.streaming.api.datastream.DataStream type.
      */
-    private String dataStream;
+    private DataStream dataStream;
     /**
      * Function performing action against a DataStream. The option is a
      * org.apache.camel.component.flink.DataStreamCallback type.
      */
-    private String dataStreamCallback;
+    private DataStreamCallback dataStreamCallback;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -70,27 +73,27 @@ public class FlinkComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getDataSetCallback() {
+    public DataSetCallback getDataSetCallback() {
         return dataSetCallback;
     }
 
-    public void setDataSetCallback(String dataSetCallback) {
+    public void setDataSetCallback(DataSetCallback dataSetCallback) {
         this.dataSetCallback = dataSetCallback;
     }
 
-    public String getDataStream() {
+    public DataStream getDataStream() {
         return dataStream;
     }
 
-    public void setDataStream(String dataStream) {
+    public void setDataStream(DataStream dataStream) {
         this.dataStream = dataStream;
     }
 
-    public String getDataStreamCallback() {
+    public DataStreamCallback getDataStreamCallback() {
         return dataStreamCallback;
     }
 
-    public void setDataStreamCallback(String dataStreamCallback) {
+    public void setDataStreamCallback(DataStreamCallback dataStreamCallback) {
         this.dataStreamCallback = dataStreamCallback;
     }
 

@@ -17,6 +17,8 @@
 package org.apache.camel.component.google.calendar.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.google.calendar.GoogleCalendarClientFactory;
+import org.apache.camel.component.google.calendar.GoogleCalendarConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -51,7 +53,7 @@ public class GoogleCalendarComponentConfiguration
      * org.apache.camel.component.google.calendar.GoogleCalendarConfiguration
      * type.
      */
-    private String configuration;
+    private GoogleCalendarConfiguration configuration;
     /**
      * The emailAddress of the Google Service Account.
      */
@@ -105,7 +107,7 @@ public class GoogleCalendarComponentConfiguration
      * org.apache.camel.component.google.calendar.GoogleCalendarClientFactory
      * type.
      */
-    private String clientFactory;
+    private GoogleCalendarClientFactory clientFactory;
     /**
      * OAuth 2 access token. This typically expires after an hour so
      * refreshToken is recommended for long term usage.
@@ -138,11 +140,11 @@ public class GoogleCalendarComponentConfiguration
         this.clientId = clientId;
     }
 
-    public String getConfiguration() {
+    public GoogleCalendarConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(GoogleCalendarConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -205,11 +207,11 @@ public class GoogleCalendarComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getClientFactory() {
+    public GoogleCalendarClientFactory getClientFactory() {
         return clientFactory;
     }
 
-    public void setClientFactory(String clientFactory) {
+    public void setClientFactory(GoogleCalendarClientFactory clientFactory) {
         this.clientFactory = clientFactory;
     }
 

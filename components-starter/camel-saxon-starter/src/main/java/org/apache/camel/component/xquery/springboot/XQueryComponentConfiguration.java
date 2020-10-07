@@ -18,6 +18,8 @@ package org.apache.camel.component.xquery.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import net.sf.saxon.Configuration;
+import net.sf.saxon.lib.ModuleURIResolver;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -68,7 +70,7 @@ public class XQueryComponentConfiguration
      * To use a custom Saxon configuration. The option is a
      * net.sf.saxon.Configuration type.
      */
-    private String configuration;
+    private Configuration configuration;
     /**
      * To set custom Saxon configuration properties
      */
@@ -77,7 +79,7 @@ public class XQueryComponentConfiguration
      * To use the custom ModuleURIResolver. The option is a
      * net.sf.saxon.lib.ModuleURIResolver type.
      */
-    private String moduleURIResolver;
+    private ModuleURIResolver moduleURIResolver;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -106,11 +108,11 @@ public class XQueryComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Configuration configuration) {
         this.configuration = configuration;
     }
 
@@ -123,11 +125,11 @@ public class XQueryComponentConfiguration
         this.configurationProperties = configurationProperties;
     }
 
-    public String getModuleURIResolver() {
+    public ModuleURIResolver getModuleURIResolver() {
         return moduleURIResolver;
     }
 
-    public void setModuleURIResolver(String moduleURIResolver) {
+    public void setModuleURIResolver(ModuleURIResolver moduleURIResolver) {
         this.moduleURIResolver = moduleURIResolver;
     }
 }

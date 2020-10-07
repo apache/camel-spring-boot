@@ -25,13 +25,13 @@ The component supports 43 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.aws2-s3.access-key* | Amazon AWS Access Key |  | String
-| *camel.component.aws2-s3.amazon-s3-client* | Reference to a com.amazonaws.services.s3.AmazonS3 in the registry. The option is a software.amazon.awssdk.services.s3.S3Client type. |  | String
+| *camel.component.aws2-s3.amazon-s3-client* | Reference to a com.amazonaws.services.s3.AmazonS3 in the registry. The option is a software.amazon.awssdk.services.s3.S3Client type. |  | S3Client
 | *camel.component.aws2-s3.auto-create-bucket* | Setting the autocreation of the S3 bucket bucketName. This will apply also in case of moveAfterRead option enabled and it will create the destinationBucket if it doesn't exist already. | true | Boolean
 | *camel.component.aws2-s3.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
 | *camel.component.aws2-s3.autoclose-body* | If this option is true and includeBody is true, then the S3Object.close() method will be called on exchange completion. This option is strongly related to includeBody option. In case of setting includeBody to true and autocloseBody to false, it will be up to the caller to close the S3Object stream. Setting autocloseBody to true, will close the S3Object stream automatically. | true | Boolean
 | *camel.component.aws2-s3.aws-k-m-s-key-id* | Define the id of KMS key to use in case KMS is enabled |  | String
 | *camel.component.aws2-s3.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.aws2-s3.configuration* | The component configuration. The option is a org.apache.camel.component.aws2.s3.AWS2S3Configuration type. |  | String
+| *camel.component.aws2-s3.configuration* | The component configuration. The option is a org.apache.camel.component.aws2.s3.AWS2S3Configuration type. |  | AWS2S3Configuration
 | *camel.component.aws2-s3.customer-algorithm* | Define the customer algorithm to use in case CustomerKey is enabled |  | String
 | *camel.component.aws2-s3.customer-key-id* | Define the id of Customer key to use in case CustomerKey is enabled |  | String
 | *camel.component.aws2-s3.customer-key-m-d5* | Define the MD5 of Customer key to use in case CustomerKey is enabled |  | String

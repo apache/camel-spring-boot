@@ -18,8 +18,11 @@ package org.apache.camel.component.aws.ddbstream.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBStreams;
 import com.amazonaws.services.dynamodbv2.model.ShardIteratorType;
 import org.apache.camel.component.aws.ddbstream.DdbStreamComponent;
+import org.apache.camel.component.aws.ddbstream.DdbStreamConfiguration;
+import org.apache.camel.component.aws.ddbstream.SequenceNumberProvider;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -50,7 +53,7 @@ public class DdbStreamComponentConfiguration
      * Amazon DynamoDB client to use for all requests for this endpoint. The
      * option is a com.amazonaws.services.dynamodbv2.AmazonDynamoDBStreams type.
      */
-    private String amazonDynamoDbStreamsClient;
+    private AmazonDynamoDBStreams amazonDynamoDbStreamsClient;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -64,7 +67,7 @@ public class DdbStreamComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.ddbstream.DdbStreamConfiguration type.
      */
-    private String configuration;
+    private DdbStreamConfiguration configuration;
     /**
      * Defines where in the DynaboDB stream to start getting records. Note that
      * using TRIM_HORIZON can cause a significant delay before the stream has
@@ -98,7 +101,7 @@ public class DdbStreamComponentConfiguration
      * registry reference or a literal sequence number. The option is a
      * org.apache.camel.component.aws.ddbstream.SequenceNumberProvider type.
      */
-    private String sequenceNumberProvider;
+    private SequenceNumberProvider sequenceNumberProvider;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -122,12 +125,12 @@ public class DdbStreamComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getAmazonDynamoDbStreamsClient() {
+    public AmazonDynamoDBStreams getAmazonDynamoDbStreamsClient() {
         return amazonDynamoDbStreamsClient;
     }
 
     public void setAmazonDynamoDbStreamsClient(
-            String amazonDynamoDbStreamsClient) {
+            AmazonDynamoDBStreams amazonDynamoDbStreamsClient) {
         this.amazonDynamoDbStreamsClient = amazonDynamoDbStreamsClient;
     }
 
@@ -139,11 +142,11 @@ public class DdbStreamComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public String getConfiguration() {
+    public DdbStreamConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(DdbStreamConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -195,11 +198,12 @@ public class DdbStreamComponentConfiguration
         this.region = region;
     }
 
-    public String getSequenceNumberProvider() {
+    public SequenceNumberProvider getSequenceNumberProvider() {
         return sequenceNumberProvider;
     }
 
-    public void setSequenceNumberProvider(String sequenceNumberProvider) {
+    public void setSequenceNumberProvider(
+            SequenceNumberProvider sequenceNumberProvider) {
         this.sequenceNumberProvider = sequenceNumberProvider;
     }
 

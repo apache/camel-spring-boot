@@ -17,7 +17,9 @@
 package org.apache.camel.component.spark.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.spark.RddCallback;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.spark.api.java.JavaRDDLike;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -52,12 +54,12 @@ public class SparkComponentConfiguration
      * RDD to compute against. The option is a
      * org.apache.spark.api.java.JavaRDDLike type.
      */
-    private String rdd;
+    private JavaRDDLike rdd;
     /**
      * Function performing action against an RDD. The option is a
      * org.apache.camel.component.spark.RddCallback type.
      */
-    private String rddCallback;
+    private RddCallback rddCallback;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -73,19 +75,19 @@ public class SparkComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public String getRdd() {
+    public JavaRDDLike getRdd() {
         return rdd;
     }
 
-    public void setRdd(String rdd) {
+    public void setRdd(JavaRDDLike rdd) {
         this.rdd = rdd;
     }
 
-    public String getRddCallback() {
+    public RddCallback getRddCallback() {
         return rddCallback;
     }
 
-    public void setRddCallback(String rddCallback) {
+    public void setRddCallback(RddCallback rddCallback) {
         this.rddCallback = rddCallback;
     }
 

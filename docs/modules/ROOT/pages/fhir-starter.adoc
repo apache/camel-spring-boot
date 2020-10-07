@@ -26,15 +26,15 @@ The component supports 56 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.fhir.access-token* | OAuth access token |  | String
 | *camel.component.fhir.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.fhir.client* | To use the custom client. The option is a ca.uhn.fhir.rest.client.api.IGenericClient type. |  | String
-| *camel.component.fhir.client-factory* | To use the custom client factory. The option is a ca.uhn.fhir.rest.client.api.IRestfulClientFactory type. |  | String
+| *camel.component.fhir.client* | To use the custom client. The option is a ca.uhn.fhir.rest.client.api.IGenericClient type. |  | IGenericClient
+| *camel.component.fhir.client-factory* | To use the custom client factory. The option is a ca.uhn.fhir.rest.client.api.IRestfulClientFactory type. |  | IRestfulClientFactory
 | *camel.component.fhir.compress* | Compresses outgoing (POST/PUT) contents to the GZIP format | false | Boolean
-| *camel.component.fhir.configuration* | To use the shared configuration. The option is a org.apache.camel.component.fhir.FhirConfiguration type. |  | String
+| *camel.component.fhir.configuration* | To use the shared configuration. The option is a org.apache.camel.component.fhir.FhirConfiguration type. |  | FhirConfiguration
 | *camel.component.fhir.connection-timeout* | How long to try and establish the initial TCP connection (in ms) | 10000 | Integer
 | *camel.component.fhir.defer-model-scanning* | When this option is set, model classes will not be scanned for children until the child list for the given type is actually accessed. | false | Boolean
 | *camel.component.fhir.enabled* | Whether to enable auto configuration of the fhir component. This is enabled by default. |  | Boolean
 | *camel.component.fhir.encoding* | Encoding to use for all request |  | String
-| *camel.component.fhir.fhir-context* | FhirContext is an expensive object to create. To avoid creating multiple instances, it can be set directly. The option is a ca.uhn.fhir.context.FhirContext type. |  | String
+| *camel.component.fhir.fhir-context* | FhirContext is an expensive object to create. To avoid creating multiple instances, it can be set directly. The option is a ca.uhn.fhir.context.FhirContext type. |  | FhirContext
 | *camel.component.fhir.fhir-version* | The FHIR Version to use | R4 | String
 | *camel.component.fhir.force-conformance-check* | Force conformance check | false | Boolean
 | *camel.component.fhir.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean

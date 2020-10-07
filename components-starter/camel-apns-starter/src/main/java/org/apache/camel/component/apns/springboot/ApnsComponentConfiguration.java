@@ -17,6 +17,7 @@
 package org.apache.camel.component.apns.springboot;
 
 import javax.annotation.Generated;
+import com.notnoop.apns.ApnsService;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -42,7 +43,7 @@ public class ApnsComponentConfiguration
      * org.apache.camel.component.apns.factory.ApnsServiceFactory can be used to
      * build a ApnsService. The option is a com.notnoop.apns.ApnsService type.
      */
-    private String apnsService;
+    private ApnsService apnsService;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -70,11 +71,11 @@ public class ApnsComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getApnsService() {
+    public ApnsService getApnsService() {
         return apnsService;
     }
 
-    public void setApnsService(String apnsService) {
+    public void setApnsService(ApnsService apnsService) {
         this.apnsService = apnsService;
     }
 

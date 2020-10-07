@@ -34,8 +34,8 @@ The component supports 14 options, which are listed below.
 | *camel.component.quartz.properties* | Properties to configure the Quartz scheduler. |  | Map
 | *camel.component.quartz.properties-file* | File name of the properties to load from the classpath |  | String
 | *camel.component.quartz.properties-ref* | References to an existing Properties or Map to lookup in the registry to use for configuring quartz. |  | String
-| *camel.component.quartz.scheduler* | To use the custom configured Quartz scheduler, instead of creating a new Scheduler. The option is a org.quartz.Scheduler type. |  | String
-| *camel.component.quartz.scheduler-factory* | To use the custom SchedulerFactory which is used to create the Scheduler. The option is a org.quartz.SchedulerFactory type. |  | String
+| *camel.component.quartz.scheduler* | To use the custom configured Quartz scheduler, instead of creating a new Scheduler. The option is a org.quartz.Scheduler type. |  | Scheduler
+| *camel.component.quartz.scheduler-factory* | To use the custom SchedulerFactory which is used to create the Scheduler. The option is a org.quartz.SchedulerFactory type. |  | SchedulerFactory
 | *camel.component.quartz.start-delayed-seconds* | Seconds to wait before starting the quartz scheduler. |  | Integer
 | *camel.component.quartz.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===

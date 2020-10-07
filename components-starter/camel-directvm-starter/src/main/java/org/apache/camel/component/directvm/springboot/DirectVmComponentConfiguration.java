@@ -17,6 +17,7 @@
 package org.apache.camel.component.directvm.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -78,7 +79,7 @@ public class DirectVmComponentConfiguration
      * endpoints (on both directions: request and response). Default value:
      * none. The option is a org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
     /**
      * Whether to propagate or not properties from the producer side to the
      * consumer side, and vice versa. Default value: true.
@@ -128,11 +129,12 @@ public class DirectVmComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 

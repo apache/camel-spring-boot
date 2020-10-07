@@ -16,11 +16,16 @@
  */
 package org.apache.camel.component.consul.springboot;
 
+import java.math.BigInteger;
+import java.time.Duration;
 import java.util.List;
 import javax.annotation.Generated;
+import com.orbitz.consul.Consul;
 import com.orbitz.consul.option.ConsistencyMode;
 import org.apache.camel.component.consul.ConsulComponent;
+import org.apache.camel.component.consul.ConsulConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -44,7 +49,7 @@ public class ConsulComponentConfiguration
      * Connect timeout for OkHttpClient. The option is a java.time.Duration
      * type.
      */
-    private String connectTimeout;
+    private Duration connectTimeout;
     /**
      * Connect timeout for OkHttpClient. Deprecation note: Use connectTimeout
      * instead
@@ -55,7 +60,7 @@ public class ConsulComponentConfiguration
      * Reference to a com.orbitz.consul.Consul in the registry. The option is a
      * com.orbitz.consul.Consul type.
      */
-    private String consulClient;
+    private Consul consulClient;
     /**
      * The default key. Can be overridden by CamelConsulKey
      */
@@ -68,7 +73,7 @@ public class ConsulComponentConfiguration
     /**
      * Read timeout for OkHttpClient. The option is a java.time.Duration type.
      */
-    private String readTimeout;
+    private Duration readTimeout;
     /**
      * Read timeout for OkHttpClient. Deprecation note: Use readTimeout instead
      */
@@ -85,13 +90,13 @@ public class ConsulComponentConfiguration
     /**
      * Write timeout for OkHttpClient. The option is a java.time.Duration type.
      */
-    private String writeTimeout;
+    private Duration writeTimeout;
     /**
      * Write timeout for OkHttpClient. Deprecation note: Use writeTimeout
      * instead. The option is a java.lang.Long type.
      */
     @Deprecated
-    private String writeTimeoutMillis;
+    private Long writeTimeoutMillis;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -131,7 +136,7 @@ public class ConsulComponentConfiguration
      * Consul configuration. The option is a
      * org.apache.camel.component.consul.ConsulConfiguration type.
      */
-    private String configuration;
+    private ConsulConfiguration configuration;
     /**
      * The consistencyMode used for queries, default ConsistencyMode.DEFAULT
      */
@@ -161,7 +166,7 @@ public class ConsulComponentConfiguration
      * org.apache.camel.support.jsse.SSLContextParameters instance. The option
      * is a org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters.
      */
@@ -178,17 +183,17 @@ public class ConsulComponentConfiguration
      * The first index for watch for, default 0. The option is a
      * java.math.BigInteger type.
      */
-    private String firstIndex;
+    private BigInteger firstIndex;
     /**
      * Recursively watch, default false
      */
     private Boolean recursive = false;
 
-    public String getConnectTimeout() {
+    public Duration getConnectTimeout() {
         return connectTimeout;
     }
 
-    public void setConnectTimeout(String connectTimeout) {
+    public void setConnectTimeout(Duration connectTimeout) {
         this.connectTimeout = connectTimeout;
     }
 
@@ -203,11 +208,11 @@ public class ConsulComponentConfiguration
         this.connectTimeoutMillis = connectTimeoutMillis;
     }
 
-    public String getConsulClient() {
+    public Consul getConsulClient() {
         return consulClient;
     }
 
-    public void setConsulClient(String consulClient) {
+    public void setConsulClient(Consul consulClient) {
         this.consulClient = consulClient;
     }
 
@@ -227,11 +232,11 @@ public class ConsulComponentConfiguration
         this.pingInstance = pingInstance;
     }
 
-    public String getReadTimeout() {
+    public Duration getReadTimeout() {
         return readTimeout;
     }
 
-    public void setReadTimeout(String readTimeout) {
+    public void setReadTimeout(Duration readTimeout) {
         this.readTimeout = readTimeout;
     }
 
@@ -262,22 +267,22 @@ public class ConsulComponentConfiguration
         this.url = url;
     }
 
-    public String getWriteTimeout() {
+    public Duration getWriteTimeout() {
         return writeTimeout;
     }
 
-    public void setWriteTimeout(String writeTimeout) {
+    public void setWriteTimeout(Duration writeTimeout) {
         this.writeTimeout = writeTimeout;
     }
 
     @Deprecated
     @DeprecatedConfigurationProperty
-    public String getWriteTimeoutMillis() {
+    public Long getWriteTimeoutMillis() {
         return writeTimeoutMillis;
     }
 
     @Deprecated
-    public void setWriteTimeoutMillis(String writeTimeoutMillis) {
+    public void setWriteTimeoutMillis(Long writeTimeoutMillis) {
         this.writeTimeoutMillis = writeTimeoutMillis;
     }
 
@@ -324,11 +329,11 @@ public class ConsulComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public ConsulConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(ConsulConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -380,11 +385,12 @@ public class ConsulComponentConfiguration
         this.password = password;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 
@@ -413,11 +419,11 @@ public class ConsulComponentConfiguration
         this.blockSeconds = blockSeconds;
     }
 
-    public String getFirstIndex() {
+    public BigInteger getFirstIndex() {
         return firstIndex;
     }
 
-    public void setFirstIndex(String firstIndex) {
+    public void setFirstIndex(BigInteger firstIndex) {
         this.firstIndex = firstIndex;
     }
 

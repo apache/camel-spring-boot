@@ -30,26 +30,26 @@ The component supports 39 options, which are listed below.
 | *camel.component.web3j.block-hash* | Hash of the block where this transaction was in. |  | String
 | *camel.component.web3j.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.web3j.client-id* | A random hexadecimal(32 bytes) ID identifying the client. |  | String
-| *camel.component.web3j.configuration* | Default configuration. The option is a org.apache.camel.component.web3j.Web3jConfiguration type. |  | String
+| *camel.component.web3j.configuration* | Default configuration. The option is a org.apache.camel.component.web3j.Web3jConfiguration type. |  | Web3jConfiguration
 | *camel.component.web3j.data* | The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. |  | String
 | *camel.component.web3j.database-name* | The local database name. |  | String
 | *camel.component.web3j.enabled* | Whether to enable auto configuration of the web3j component. This is enabled by default. |  | Boolean
-| *camel.component.web3j.filter-id* | The filter id to use. The option is a java.math.BigInteger type. |  | String
+| *camel.component.web3j.filter-id* | The filter id to use. The option is a java.math.BigInteger type. |  | BigInteger
 | *camel.component.web3j.from-address* | The address the transaction is send from |  | String
 | *camel.component.web3j.from-block* | The block number, or the string latest for the last mined block or pending, earliest for not yet mined transactions. | latest | String
 | *camel.component.web3j.full-transaction-objects* | If true it returns the full transaction objects, if false only the hashes of the transactions. | false | Boolean
-| *camel.component.web3j.gas-limit* | The maximum gas allowed in this block. The option is a java.math.BigInteger type. |  | String
-| *camel.component.web3j.gas-price* | Gas price used for each paid gas. The option is a java.math.BigInteger type. |  | String
+| *camel.component.web3j.gas-limit* | The maximum gas allowed in this block. The option is a java.math.BigInteger type. |  | BigInteger
+| *camel.component.web3j.gas-price* | Gas price used for each paid gas. The option is a java.math.BigInteger type. |  | BigInteger
 | *camel.component.web3j.hashrate* | A hexadecimal string representation (32 bytes) of the hash rate. |  | String
 | *camel.component.web3j.header-pow-hash* | The header's pow-hash (256 bits) used for submitting a proof-of-work solution. |  | String
-| *camel.component.web3j.index* | The transactions/uncle index position in the block. The option is a java.math.BigInteger type. |  | String
+| *camel.component.web3j.index* | The transactions/uncle index position in the block. The option is a java.math.BigInteger type. |  | BigInteger
 | *camel.component.web3j.key-name* | The key name in the database. |  | String
 | *camel.component.web3j.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.web3j.mix-digest* | The mix digest (256 bits) used for submitting a proof-of-work solution. |  | String
 | *camel.component.web3j.nonce* | The nonce found (64 bits) used for submitting a proof-of-work solution. |  | String
 | *camel.component.web3j.operation* | Operation to use. | transaction | String
-| *camel.component.web3j.position* | The transaction index position withing a block. The option is a java.math.BigInteger type. |  | String
-| *camel.component.web3j.priority* | The priority of a whisper message. The option is a java.math.BigInteger type. |  | String
+| *camel.component.web3j.position* | The transaction index position withing a block. The option is a java.math.BigInteger type. |  | BigInteger
+| *camel.component.web3j.priority* | The priority of a whisper message. The option is a java.math.BigInteger type. |  | BigInteger
 | *camel.component.web3j.private-for* | A transaction privateFor nodes with public keys in a Quorum network |  | List
 | *camel.component.web3j.quorum-a-p-i* | If true, this will support Quorum API. | false | Boolean
 | *camel.component.web3j.sha3-hash-of-data-to-sign* | Message to sign by calculating an Ethereum specific signature. |  | String
@@ -59,9 +59,9 @@ The component supports 39 options, which are listed below.
 | *camel.component.web3j.to-block* | The block number, or the string latest for the last mined block or pending, earliest for not yet mined transactions. | latest | String
 | *camel.component.web3j.topics* | Topics are order-dependent. Each topic can also be a list of topics. Specify multiple topics separated by comma. |  | String
 | *camel.component.web3j.transaction-hash* | The information about a transaction requested by transaction hash. |  | String
-| *camel.component.web3j.ttl* | The time to live in seconds of a whisper message. The option is a java.math.BigInteger type. |  | String
-| *camel.component.web3j.value* | The value sent within a transaction. The option is a java.math.BigInteger type. |  | String
-| *camel.component.web3j.web3j* | The preconfigured Web3j object. The option is a org.web3j.protocol.Web3j type. |  | String
+| *camel.component.web3j.ttl* | The time to live in seconds of a whisper message. The option is a java.math.BigInteger type. |  | BigInteger
+| *camel.component.web3j.value* | The value sent within a transaction. The option is a java.math.BigInteger type. |  | BigInteger
+| *camel.component.web3j.web3j* | The preconfigured Web3j object. The option is a org.web3j.protocol.Web3j type. |  | Web3j
 | *camel.component.web3j.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

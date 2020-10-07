@@ -18,7 +18,14 @@ package org.apache.camel.component.olingo2.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import org.apache.camel.component.olingo2.Olingo2Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
+import org.apache.http.HttpHost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
+import org.apache.olingo.odata2.api.ep.EntityProviderReadProperties;
+import org.apache.olingo.odata2.api.ep.EntityProviderWriteProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -42,7 +49,7 @@ public class Olingo2ComponentConfiguration
      * To use the shared configuration. The option is a
      * org.apache.camel.component.olingo2.Olingo2Configuration type.
      */
-    private String configuration;
+    private Olingo2Configuration configuration;
     /**
      * HTTP connection creation timeout in milliseconds, defaults to 30,000 (30
      * seconds)
@@ -58,7 +65,7 @@ public class Olingo2ComponentConfiguration
      * The option is a
      * org.apache.olingo.odata2.api.ep.EntityProviderReadProperties type.
      */
-    private String entityProviderReadProperties;
+    private EntityProviderReadProperties entityProviderReadProperties;
     /**
      * Custom entity provider write properties applied to create, update, patch,
      * batch and merge operations. For instance users can skip the Json object
@@ -69,7 +76,7 @@ public class Olingo2ComponentConfiguration
      * here. The option is a
      * org.apache.olingo.odata2.api.ep.EntityProviderWriteProperties type.
      */
-    private String entityProviderWriteProperties;
+    private EntityProviderWriteProperties entityProviderWriteProperties;
     /**
      * Set this to true to filter out results that have already been
      * communicated by this component.
@@ -84,7 +91,7 @@ public class Olingo2ComponentConfiguration
      * HTTP proxy server configuration. The option is a org.apache.http.HttpHost
      * type.
      */
-    private String proxy;
+    private HttpHost proxy;
     /**
      * Target OData service base URI, e.g.
      * http://services.odata.org/OData/OData.svc
@@ -133,7 +140,7 @@ public class Olingo2ComponentConfiguration
      * otherwise OData requests could block indefinitely. The option is a
      * org.apache.http.impl.nio.client.HttpAsyncClientBuilder type.
      */
-    private String httpAsyncClientBuilder;
+    private HttpAsyncClientBuilder httpAsyncClientBuilder;
     /**
      * Custom HTTP client builder for more complex HTTP client configuration,
      * overrides connectionTimeout, socketTimeout, proxy and sslContext. Note
@@ -141,22 +148,22 @@ public class Olingo2ComponentConfiguration
      * requests could block indefinitely. The option is a
      * org.apache.http.impl.client.HttpClientBuilder type.
      */
-    private String httpClientBuilder;
+    private HttpClientBuilder httpClientBuilder;
     /**
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
 
-    public String getConfiguration() {
+    public Olingo2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Olingo2Configuration configuration) {
         this.configuration = configuration;
     }
 
@@ -176,21 +183,21 @@ public class Olingo2ComponentConfiguration
         this.contentType = contentType;
     }
 
-    public String getEntityProviderReadProperties() {
+    public EntityProviderReadProperties getEntityProviderReadProperties() {
         return entityProviderReadProperties;
     }
 
     public void setEntityProviderReadProperties(
-            String entityProviderReadProperties) {
+            EntityProviderReadProperties entityProviderReadProperties) {
         this.entityProviderReadProperties = entityProviderReadProperties;
     }
 
-    public String getEntityProviderWriteProperties() {
+    public EntityProviderWriteProperties getEntityProviderWriteProperties() {
         return entityProviderWriteProperties;
     }
 
     public void setEntityProviderWriteProperties(
-            String entityProviderWriteProperties) {
+            EntityProviderWriteProperties entityProviderWriteProperties) {
         this.entityProviderWriteProperties = entityProviderWriteProperties;
     }
 
@@ -210,11 +217,11 @@ public class Olingo2ComponentConfiguration
         this.httpHeaders = httpHeaders;
     }
 
-    public String getProxy() {
+    public HttpHost getProxy() {
         return proxy;
     }
 
-    public void setProxy(String proxy) {
+    public void setProxy(HttpHost proxy) {
         this.proxy = proxy;
     }
 
@@ -269,27 +276,29 @@ public class Olingo2ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getHttpAsyncClientBuilder() {
+    public HttpAsyncClientBuilder getHttpAsyncClientBuilder() {
         return httpAsyncClientBuilder;
     }
 
-    public void setHttpAsyncClientBuilder(String httpAsyncClientBuilder) {
+    public void setHttpAsyncClientBuilder(
+            HttpAsyncClientBuilder httpAsyncClientBuilder) {
         this.httpAsyncClientBuilder = httpAsyncClientBuilder;
     }
 
-    public String getHttpClientBuilder() {
+    public HttpClientBuilder getHttpClientBuilder() {
         return httpClientBuilder;
     }
 
-    public void setHttpClientBuilder(String httpClientBuilder) {
+    public void setHttpClientBuilder(HttpClientBuilder httpClientBuilder) {
         this.httpClientBuilder = httpClientBuilder;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

@@ -17,6 +17,7 @@
 package org.apache.camel.component.splunk.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.splunk.SplunkConfigurationFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -67,7 +68,7 @@ public class SplunkComponentConfiguration
      * To use the SplunkConfigurationFactory. The option is a
      * org.apache.camel.component.splunk.SplunkConfigurationFactory type.
      */
-    private String splunkConfigurationFactory;
+    private SplunkConfigurationFactory splunkConfigurationFactory;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -96,11 +97,12 @@ public class SplunkComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getSplunkConfigurationFactory() {
+    public SplunkConfigurationFactory getSplunkConfigurationFactory() {
         return splunkConfigurationFactory;
     }
 
-    public void setSplunkConfigurationFactory(String splunkConfigurationFactory) {
+    public void setSplunkConfigurationFactory(
+            SplunkConfigurationFactory splunkConfigurationFactory) {
         this.splunkConfigurationFactory = splunkConfigurationFactory;
     }
 }

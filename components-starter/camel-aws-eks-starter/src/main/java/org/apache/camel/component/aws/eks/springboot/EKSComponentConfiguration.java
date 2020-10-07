@@ -18,7 +18,9 @@ package org.apache.camel.component.aws.eks.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.eks.AmazonEKS;
 import org.apache.camel.component.aws.eks.EKSComponent;
+import org.apache.camel.component.aws.eks.EKSConfiguration;
 import org.apache.camel.component.aws.eks.EKSOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -54,12 +56,12 @@ public class EKSComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.eks.EKSConfiguration type.
      */
-    private String configuration;
+    private EKSConfiguration configuration;
     /**
      * To use a existing configured AWS EKS as client. The option is a
      * com.amazonaws.services.eks.AmazonEKS type.
      */
-    private String eksClient;
+    private AmazonEKS eksClient;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -120,19 +122,19 @@ public class EKSComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public String getConfiguration() {
+    public EKSConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(EKSConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getEksClient() {
+    public AmazonEKS getEksClient() {
         return eksClient;
     }
 
-    public void setEksClient(String eksClient) {
+    public void setEksClient(AmazonEKS eksClient) {
         this.eksClient = eksClient;
     }
 

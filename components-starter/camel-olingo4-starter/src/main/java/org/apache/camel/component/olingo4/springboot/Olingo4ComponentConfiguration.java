@@ -18,7 +18,12 @@ package org.apache.camel.component.olingo4.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import org.apache.camel.component.olingo4.Olingo4Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
+import org.apache.http.HttpHost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -42,7 +47,7 @@ public class Olingo4ComponentConfiguration
      * To use the shared configuration. The option is a
      * org.apache.camel.component.olingo4.Olingo4Configuration type.
      */
-    private String configuration;
+    private Olingo4Configuration configuration;
     /**
      * HTTP connection creation timeout in milliseconds, defaults to 30,000 (30
      * seconds)
@@ -67,7 +72,7 @@ public class Olingo4ComponentConfiguration
      * HTTP proxy server configuration. The option is a org.apache.http.HttpHost
      * type.
      */
-    private String proxy;
+    private HttpHost proxy;
     /**
      * Target OData service base URI, e.g.
      * http://services.odata.org/OData/OData.svc
@@ -116,7 +121,7 @@ public class Olingo4ComponentConfiguration
      * otherwise OData requests could block indefinitely. The option is a
      * org.apache.http.impl.nio.client.HttpAsyncClientBuilder type.
      */
-    private String httpAsyncClientBuilder;
+    private HttpAsyncClientBuilder httpAsyncClientBuilder;
     /**
      * Custom HTTP client builder for more complex HTTP client configuration,
      * overrides connectionTimeout, socketTimeout, proxy and sslContext. Note
@@ -124,22 +129,22 @@ public class Olingo4ComponentConfiguration
      * requests could block indefinitely. The option is a
      * org.apache.http.impl.client.HttpClientBuilder type.
      */
-    private String httpClientBuilder;
+    private HttpClientBuilder httpClientBuilder;
     /**
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
 
-    public String getConfiguration() {
+    public Olingo4Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Olingo4Configuration configuration) {
         this.configuration = configuration;
     }
 
@@ -175,11 +180,11 @@ public class Olingo4ComponentConfiguration
         this.httpHeaders = httpHeaders;
     }
 
-    public String getProxy() {
+    public HttpHost getProxy() {
         return proxy;
     }
 
-    public void setProxy(String proxy) {
+    public void setProxy(HttpHost proxy) {
         this.proxy = proxy;
     }
 
@@ -234,27 +239,29 @@ public class Olingo4ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getHttpAsyncClientBuilder() {
+    public HttpAsyncClientBuilder getHttpAsyncClientBuilder() {
         return httpAsyncClientBuilder;
     }
 
-    public void setHttpAsyncClientBuilder(String httpAsyncClientBuilder) {
+    public void setHttpAsyncClientBuilder(
+            HttpAsyncClientBuilder httpAsyncClientBuilder) {
         this.httpAsyncClientBuilder = httpAsyncClientBuilder;
     }
 
-    public String getHttpClientBuilder() {
+    public HttpClientBuilder getHttpClientBuilder() {
         return httpClientBuilder;
     }
 
-    public void setHttpClientBuilder(String httpClientBuilder) {
+    public void setHttpClientBuilder(HttpClientBuilder httpClientBuilder) {
         this.httpClientBuilder = httpClientBuilder;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

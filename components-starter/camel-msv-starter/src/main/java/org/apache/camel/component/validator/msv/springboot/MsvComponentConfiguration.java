@@ -17,6 +17,8 @@
 package org.apache.camel.component.validator.msv.springboot;
 
 import javax.annotation.Generated;
+import javax.xml.validation.SchemaFactory;
+import org.apache.camel.component.validator.ValidatorResourceResolverFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -60,12 +62,12 @@ public class MsvComponentConfiguration
      * org.apache.camel.component.validator.ValidatorResourceResolverFactory
      * type.
      */
-    private String resourceResolverFactory;
+    private ValidatorResourceResolverFactory resourceResolverFactory;
     /**
      * To use the javax.xml.validation.SchemaFactory. The option is a
      * javax.xml.validation.SchemaFactory type.
      */
-    private String schemaFactory;
+    private SchemaFactory schemaFactory;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -86,19 +88,20 @@ public class MsvComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getResourceResolverFactory() {
+    public ValidatorResourceResolverFactory getResourceResolverFactory() {
         return resourceResolverFactory;
     }
 
-    public void setResourceResolverFactory(String resourceResolverFactory) {
+    public void setResourceResolverFactory(
+            ValidatorResourceResolverFactory resourceResolverFactory) {
         this.resourceResolverFactory = resourceResolverFactory;
     }
 
-    public String getSchemaFactory() {
+    public SchemaFactory getSchemaFactory() {
         return schemaFactory;
     }
 
-    public void setSchemaFactory(String schemaFactory) {
+    public void setSchemaFactory(SchemaFactory schemaFactory) {
         this.schemaFactory = schemaFactory;
     }
 }

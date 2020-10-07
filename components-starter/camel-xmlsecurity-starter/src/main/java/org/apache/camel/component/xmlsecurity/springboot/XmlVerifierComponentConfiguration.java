@@ -18,6 +18,12 @@ package org.apache.camel.component.xmlsecurity.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import javax.xml.crypto.KeySelector;
+import javax.xml.crypto.URIDereferencer;
+import org.apache.camel.component.xmlsecurity.api.ValidationFailedHandler;
+import org.apache.camel.component.xmlsecurity.api.XmlSignature2Message;
+import org.apache.camel.component.xmlsecurity.api.XmlSignatureChecker;
+import org.apache.camel.component.xmlsecurity.processor.XmlVerifierConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -67,7 +73,7 @@ public class XmlVerifierComponentConfiguration
      * Provides the key for validating the XML signature. The option is a
      * javax.xml.crypto.KeySelector type.
      */
-    private String keySelector;
+    private KeySelector keySelector;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -92,7 +98,7 @@ public class XmlVerifierComponentConfiguration
      * output node search is forwarded to XmlSignature2Message. The option is a
      * java.lang.Object type.
      */
-    private String outputNodeSearch;
+    private Object outputNodeSearch;
     /**
      * Determines the search type for determining the output node which is
      * serialized into the output message bodyF. See
@@ -138,7 +144,7 @@ public class XmlVerifierComponentConfiguration
      * detailed information, see the JavaDoc. The option is a
      * org.apache.camel.component.xmlsecurity.api.ValidationFailedHandler type.
      */
-    private String validationFailedHandler;
+    private ValidationFailedHandler validationFailedHandler;
     /**
      * Bean which maps the XML signature to the output-message after the
      * validation. How this mapping should be done can be configured by the
@@ -162,7 +168,7 @@ public class XmlVerifierComponentConfiguration
      * Output Node Determination in Enveloping XML Signature Case. The option is
      * a org.apache.camel.component.xmlsecurity.api.XmlSignature2Message type.
      */
-    private String xmlSignature2Message;
+    private XmlSignature2Message xmlSignature2Message;
     /**
      * This interface allows the application to check the XML signature before
      * the validation is executed. This step is recommended in
@@ -170,7 +176,7 @@ public class XmlVerifierComponentConfiguration
      * option is a
      * org.apache.camel.component.xmlsecurity.api.XmlSignatureChecker type.
      */
-    private String xmlSignatureChecker;
+    private XmlSignatureChecker xmlSignatureChecker;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -184,14 +190,14 @@ public class XmlVerifierComponentConfiguration
      * XPpointer URIs. Attention: The implementation is provider dependent!. The
      * option is a javax.xml.crypto.URIDereferencer type.
      */
-    private String uriDereferencer;
+    private URIDereferencer uriDereferencer;
     /**
      * To use a shared XmlVerifierConfiguration configuration to use as base for
      * configuring endpoints. The option is a
      * org.apache.camel.component.xmlsecurity.processor.XmlVerifierConfiguration
      * type.
      */
-    private String verifierConfiguration;
+    private XmlVerifierConfiguration verifierConfiguration;
 
     public String getBaseUri() {
         return baseUri;
@@ -226,11 +232,11 @@ public class XmlVerifierComponentConfiguration
         this.disallowDoctypeDecl = disallowDoctypeDecl;
     }
 
-    public String getKeySelector() {
+    public KeySelector getKeySelector() {
         return keySelector;
     }
 
-    public void setKeySelector(String keySelector) {
+    public void setKeySelector(KeySelector keySelector) {
         this.keySelector = keySelector;
     }
 
@@ -250,11 +256,11 @@ public class XmlVerifierComponentConfiguration
         this.omitXmlDeclaration = omitXmlDeclaration;
     }
 
-    public String getOutputNodeSearch() {
+    public Object getOutputNodeSearch() {
         return outputNodeSearch;
     }
 
-    public void setOutputNodeSearch(String outputNodeSearch) {
+    public void setOutputNodeSearch(Object outputNodeSearch) {
         this.outputNodeSearch = outputNodeSearch;
     }
 
@@ -298,27 +304,29 @@ public class XmlVerifierComponentConfiguration
         this.secureValidation = secureValidation;
     }
 
-    public String getValidationFailedHandler() {
+    public ValidationFailedHandler getValidationFailedHandler() {
         return validationFailedHandler;
     }
 
-    public void setValidationFailedHandler(String validationFailedHandler) {
+    public void setValidationFailedHandler(
+            ValidationFailedHandler validationFailedHandler) {
         this.validationFailedHandler = validationFailedHandler;
     }
 
-    public String getXmlSignature2Message() {
+    public XmlSignature2Message getXmlSignature2Message() {
         return xmlSignature2Message;
     }
 
-    public void setXmlSignature2Message(String xmlSignature2Message) {
+    public void setXmlSignature2Message(
+            XmlSignature2Message xmlSignature2Message) {
         this.xmlSignature2Message = xmlSignature2Message;
     }
 
-    public String getXmlSignatureChecker() {
+    public XmlSignatureChecker getXmlSignatureChecker() {
         return xmlSignatureChecker;
     }
 
-    public void setXmlSignatureChecker(String xmlSignatureChecker) {
+    public void setXmlSignatureChecker(XmlSignatureChecker xmlSignatureChecker) {
         this.xmlSignatureChecker = xmlSignatureChecker;
     }
 
@@ -333,19 +341,20 @@ public class XmlVerifierComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getUriDereferencer() {
+    public URIDereferencer getUriDereferencer() {
         return uriDereferencer;
     }
 
-    public void setUriDereferencer(String uriDereferencer) {
+    public void setUriDereferencer(URIDereferencer uriDereferencer) {
         this.uriDereferencer = uriDereferencer;
     }
 
-    public String getVerifierConfiguration() {
+    public XmlVerifierConfiguration getVerifierConfiguration() {
         return verifierConfiguration;
     }
 
-    public void setVerifierConfiguration(String verifierConfiguration) {
+    public void setVerifierConfiguration(
+            XmlVerifierConfiguration verifierConfiguration) {
         this.verifierConfiguration = verifierConfiguration;
     }
 }

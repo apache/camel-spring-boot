@@ -17,6 +17,8 @@
 package org.apache.camel.component.twilio.springboot;
 
 import javax.annotation.Generated;
+import com.twilio.http.TwilioRestClient;
+import org.apache.camel.component.twilio.TwilioConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -41,7 +43,7 @@ public class TwilioComponentConfiguration
      * To use the shared configuration. The option is a
      * org.apache.camel.component.twilio.TwilioConfiguration type.
      */
-    private String configuration;
+    private TwilioConfiguration configuration;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -72,7 +74,7 @@ public class TwilioComponentConfiguration
      * To use the shared REST client. The option is a
      * com.twilio.http.TwilioRestClient type.
      */
-    private String restClient;
+    private TwilioRestClient restClient;
     /**
      * The account SID to use.
      */
@@ -86,11 +88,11 @@ public class TwilioComponentConfiguration
      */
     private String username;
 
-    public String getConfiguration() {
+    public TwilioConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(TwilioConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -121,11 +123,11 @@ public class TwilioComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getRestClient() {
+    public TwilioRestClient getRestClient() {
         return restClient;
     }
 
-    public void setRestClient(String restClient) {
+    public void setRestClient(TwilioRestClient restClient) {
         this.restClient = restClient;
     }
 

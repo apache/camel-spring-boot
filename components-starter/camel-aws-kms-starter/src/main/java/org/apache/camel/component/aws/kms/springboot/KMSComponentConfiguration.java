@@ -18,7 +18,9 @@ package org.apache.camel.component.aws.kms.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.kms.AWSKMS;
 import org.apache.camel.component.aws.kms.KMSComponent;
+import org.apache.camel.component.aws.kms.KMSConfiguration;
 import org.apache.camel.component.aws.kms.KMSOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -54,12 +56,12 @@ public class KMSComponentConfiguration
      * The Component configuration. The option is a
      * org.apache.camel.component.aws.kms.KMSConfiguration type.
      */
-    private String configuration;
+    private KMSConfiguration configuration;
     /**
      * To use a existing configured AWS KMS as client. The option is a
      * com.amazonaws.services.kms.AWSKMS type.
      */
-    private String kmsClient;
+    private AWSKMS kmsClient;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -120,19 +122,19 @@ public class KMSComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public String getConfiguration() {
+    public KMSConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(KMSConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getKmsClient() {
+    public AWSKMS getKmsClient() {
         return kmsClient;
     }
 
-    public void setKmsClient(String kmsClient) {
+    public void setKmsClient(AWSKMS kmsClient) {
         this.kmsClient = kmsClient;
     }
 

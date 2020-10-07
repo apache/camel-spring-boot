@@ -18,7 +18,9 @@ package org.apache.camel.component.aws.lambda.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.lambda.AWSLambda;
 import org.apache.camel.component.aws.lambda.LambdaComponent;
+import org.apache.camel.component.aws.lambda.LambdaConfiguration;
 import org.apache.camel.component.aws.lambda.LambdaOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -50,7 +52,7 @@ public class LambdaComponentConfiguration
      * The AWS Lambda default configuration. The option is a
      * org.apache.camel.component.aws.lambda.LambdaConfiguration type.
      */
-    private String configuration;
+    private LambdaConfiguration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -77,7 +79,7 @@ public class LambdaComponentConfiguration
      * To use a existing configured AwsLambdaClient as client. The option is a
      * com.amazonaws.services.lambda.AWSLambda type.
      */
-    private String awsLambdaClient;
+    private AWSLambda awsLambdaClient;
     /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
@@ -113,11 +115,11 @@ public class LambdaComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public LambdaConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(LambdaConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -145,11 +147,11 @@ public class LambdaComponentConfiguration
         this.region = region;
     }
 
-    public String getAwsLambdaClient() {
+    public AWSLambda getAwsLambdaClient() {
         return awsLambdaClient;
     }
 
-    public void setAwsLambdaClient(String awsLambdaClient) {
+    public void setAwsLambdaClient(AWSLambda awsLambdaClient) {
         this.awsLambdaClient = awsLambdaClient;
     }
 

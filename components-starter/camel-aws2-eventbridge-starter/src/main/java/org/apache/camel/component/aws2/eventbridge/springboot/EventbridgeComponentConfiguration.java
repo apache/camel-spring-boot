@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.eventbridge.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.eventbridge.EventbridgeComponent;
+import org.apache.camel.component.aws2.eventbridge.EventbridgeConfiguration;
 import org.apache.camel.component.aws2.eventbridge.EventbridgeOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.eventbridge.EventBridgeClient;
 
 /**
  * Manage AWS Eventbridge cluster instances using AWS SDK version 2.x.
@@ -51,12 +53,12 @@ public class EventbridgeComponentConfiguration
      * org.apache.camel.component.aws2.eventbridge.EventbridgeConfiguration
      * type.
      */
-    private String configuration;
+    private EventbridgeConfiguration configuration;
     /**
      * To use a existing configured AWS Eventbridge as client. The option is a
      * software.amazon.awssdk.services.eventbridge.EventBridgeClient type.
      */
-    private String eventbridgeClient;
+    private EventBridgeClient eventbridgeClient;
     /**
      * EventPattern File
      */
@@ -125,19 +127,19 @@ public class EventbridgeComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public EventbridgeConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(EventbridgeConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getEventbridgeClient() {
+    public EventBridgeClient getEventbridgeClient() {
         return eventbridgeClient;
     }
 
-    public void setEventbridgeClient(String eventbridgeClient) {
+    public void setEventbridgeClient(EventBridgeClient eventbridgeClient) {
         this.eventbridgeClient = eventbridgeClient;
     }
 

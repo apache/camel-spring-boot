@@ -20,6 +20,9 @@ import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
+import quickfix.LogFactory;
+import quickfix.MessageFactory;
+import quickfix.MessageStoreFactory;
 
 /**
  * Open a Financial Interchange (FIX) session using an embedded QuickFix/J
@@ -72,17 +75,17 @@ public class QuickfixjComponentConfiguration
     /**
      * To use the given LogFactory. The option is a quickfix.LogFactory type.
      */
-    private String logFactory;
+    private LogFactory logFactory;
     /**
      * To use the given MessageFactory. The option is a quickfix.MessageFactory
      * type.
      */
-    private String messageFactory;
+    private MessageFactory messageFactory;
     /**
      * To use the given MessageStoreFactory. The option is a
      * quickfix.MessageStoreFactory type.
      */
-    private String messageStoreFactory;
+    private MessageStoreFactory messageStoreFactory;
 
     public Boolean getLazyCreateEngines() {
         return lazyCreateEngines;
@@ -119,27 +122,27 @@ public class QuickfixjComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getLogFactory() {
+    public LogFactory getLogFactory() {
         return logFactory;
     }
 
-    public void setLogFactory(String logFactory) {
+    public void setLogFactory(LogFactory logFactory) {
         this.logFactory = logFactory;
     }
 
-    public String getMessageFactory() {
+    public MessageFactory getMessageFactory() {
         return messageFactory;
     }
 
-    public void setMessageFactory(String messageFactory) {
+    public void setMessageFactory(MessageFactory messageFactory) {
         this.messageFactory = messageFactory;
     }
 
-    public String getMessageStoreFactory() {
+    public MessageStoreFactory getMessageStoreFactory() {
         return messageStoreFactory;
     }
 
-    public void setMessageStoreFactory(String messageStoreFactory) {
+    public void setMessageStoreFactory(MessageStoreFactory messageStoreFactory) {
         this.messageStoreFactory = messageStoreFactory;
     }
 }

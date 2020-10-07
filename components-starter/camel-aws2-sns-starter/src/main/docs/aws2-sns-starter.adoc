@@ -25,10 +25,10 @@ The component supports 21 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.aws2-sns.access-key* | Amazon AWS Access Key |  | String
-| *camel.component.aws2-sns.amazon-s-n-s-client* | To use the AmazonSNS as the client. The option is a software.amazon.awssdk.services.sns.SnsClient type. |  | String
+| *camel.component.aws2-sns.amazon-s-n-s-client* | To use the AmazonSNS as the client. The option is a software.amazon.awssdk.services.sns.SnsClient type. |  | SnsClient
 | *camel.component.aws2-sns.auto-create-topic* | Setting the autocreation of the topic | true | Boolean
 | *camel.component.aws2-sns.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
-| *camel.component.aws2-sns.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.sns.Sns2Configuration type. |  | String
+| *camel.component.aws2-sns.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.sns.Sns2Configuration type. |  | Sns2Configuration
 | *camel.component.aws2-sns.enabled* | Whether to enable auto configuration of the aws2-sns component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-sns.kms-master-key-id* | The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. |  | String
 | *camel.component.aws2-sns.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean

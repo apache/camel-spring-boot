@@ -18,6 +18,7 @@ package org.apache.camel.component.docker.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import org.apache.camel.component.docker.DockerConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -42,7 +43,7 @@ public class DockerComponentConfiguration
      * To use the shared docker configuration. The option is a
      * org.apache.camel.component.docker.DockerConfiguration type.
      */
-    private String configuration;
+    private DockerConfiguration configuration;
     /**
      * Email address associated with the user
      */
@@ -139,11 +140,11 @@ public class DockerComponentConfiguration
      */
     private String username;
 
-    public String getConfiguration() {
+    public DockerConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(DockerConfiguration configuration) {
         this.configuration = configuration;
     }
 

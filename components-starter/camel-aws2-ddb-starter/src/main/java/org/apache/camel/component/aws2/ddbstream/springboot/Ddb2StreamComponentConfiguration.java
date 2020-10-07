@@ -18,11 +18,14 @@ package org.apache.camel.component.aws2.ddbstream.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.ddbstream.Ddb2StreamComponent;
+import org.apache.camel.component.aws2.ddbstream.Ddb2StreamConfiguration;
+import org.apache.camel.component.aws2.ddbstream.SequenceNumberProvider;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
 import software.amazon.awssdk.services.dynamodb.model.ShardIteratorType;
+import software.amazon.awssdk.services.dynamodb.streams.DynamoDbStreamsClient;
 
 /**
  * Receive messages from AWS DynamoDB Stream service using AWS SDK version 2.x.
@@ -52,7 +55,7 @@ public class Ddb2StreamComponentConfiguration
      * software.amazon.awssdk.services.dynamodb.streams.DynamoDbStreamsClient
      * type.
      */
-    private String amazonDynamoDbStreamsClient;
+    private DynamoDbStreamsClient amazonDynamoDbStreamsClient;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -66,7 +69,7 @@ public class Ddb2StreamComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws2.ddbstream.Ddb2StreamConfiguration type.
      */
-    private String configuration;
+    private Ddb2StreamConfiguration configuration;
     /**
      * Defines where in the DynaboDB stream to start getting records. Note that
      * using TRIM_HORIZON can cause a significant delay before the stream has
@@ -100,7 +103,7 @@ public class Ddb2StreamComponentConfiguration
      * registry reference or a literal sequence number. The option is a
      * org.apache.camel.component.aws2.ddbstream.SequenceNumberProvider type.
      */
-    private String sequenceNumberProvider;
+    private SequenceNumberProvider sequenceNumberProvider;
     /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
@@ -128,12 +131,12 @@ public class Ddb2StreamComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getAmazonDynamoDbStreamsClient() {
+    public DynamoDbStreamsClient getAmazonDynamoDbStreamsClient() {
         return amazonDynamoDbStreamsClient;
     }
 
     public void setAmazonDynamoDbStreamsClient(
-            String amazonDynamoDbStreamsClient) {
+            DynamoDbStreamsClient amazonDynamoDbStreamsClient) {
         this.amazonDynamoDbStreamsClient = amazonDynamoDbStreamsClient;
     }
 
@@ -145,11 +148,11 @@ public class Ddb2StreamComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public String getConfiguration() {
+    public Ddb2StreamConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Ddb2StreamConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -201,11 +204,12 @@ public class Ddb2StreamComponentConfiguration
         this.region = region;
     }
 
-    public String getSequenceNumberProvider() {
+    public SequenceNumberProvider getSequenceNumberProvider() {
         return sequenceNumberProvider;
     }
 
-    public void setSequenceNumberProvider(String sequenceNumberProvider) {
+    public void setSequenceNumberProvider(
+            SequenceNumberProvider sequenceNumberProvider) {
         this.sequenceNumberProvider = sequenceNumberProvider;
     }
 

@@ -18,6 +18,7 @@ package org.apache.camel.component.elasticsearch.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.elasticsearch.client.RestClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -59,7 +60,7 @@ public class ElasticsearchComponentConfiguration
      * client per endpoint. This allow to customize the client with specific
      * settings. The option is a org.elasticsearch.client.RestClient type.
      */
-    private String client;
+    private RestClient client;
     /**
      * The time in ms to wait before connection will timeout.
      */
@@ -125,11 +126,11 @@ public class ElasticsearchComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getClient() {
+    public RestClient getClient() {
         return client;
     }
 
-    public void setClient(String client) {
+    public void setClient(RestClient client) {
         this.client = client;
     }
 

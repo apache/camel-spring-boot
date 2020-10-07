@@ -21,6 +21,7 @@ import info.ganglia.gmetric4j.gmetric.GMetric.UDPAddressingMode;
 import info.ganglia.gmetric4j.gmetric.GMetricSlope;
 import info.ganglia.gmetric4j.gmetric.GMetricType;
 import org.apache.camel.component.ganglia.GangliaComponent;
+import org.apache.camel.component.ganglia.GangliaConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -116,7 +117,7 @@ public class GangliaComponentConfiguration
      * To use the shared configuration. The option is a
      * org.apache.camel.component.ganglia.GangliaConfiguration type.
      */
-    private String configuration;
+    private GangliaConfiguration configuration;
 
     public Integer getDmax() {
         return dmax;
@@ -233,11 +234,11 @@ public class GangliaComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public GangliaConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(GangliaConfiguration configuration) {
         this.configuration = configuration;
     }
 }

@@ -17,9 +17,11 @@
 package org.apache.camel.component.zendesk.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.zendesk.ZendeskConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
+import org.zendesk.client.v2.Zendesk;
 
 /**
  * Manage Zendesk tickets, users, organizations, etc.
@@ -71,12 +73,12 @@ public class ZendeskComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.zendesk.ZendeskConfiguration type.
      */
-    private String configuration;
+    private ZendeskConfiguration configuration;
     /**
      * To use a shared Zendesk instance. The option is a
      * org.zendesk.client.v2.Zendesk type.
      */
-    private String zendesk;
+    private Zendesk zendesk;
     /**
      * The OAuth token.
      */
@@ -129,19 +131,19 @@ public class ZendeskComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public ZendeskConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(ZendeskConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getZendesk() {
+    public Zendesk getZendesk() {
         return zendesk;
     }
 
-    public void setZendesk(String zendesk) {
+    public void setZendesk(Zendesk zendesk) {
         this.zendesk = zendesk;
     }
 

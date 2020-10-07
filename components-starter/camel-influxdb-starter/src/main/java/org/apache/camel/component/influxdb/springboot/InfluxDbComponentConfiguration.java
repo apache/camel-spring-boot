@@ -18,6 +18,7 @@ package org.apache.camel.component.influxdb.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.influxdb.InfluxDB;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -41,7 +42,7 @@ public class InfluxDbComponentConfiguration
      * The shared Influx DB to use for all endpoints. The option is a
      * org.influxdb.InfluxDB type.
      */
-    private String influxDB;
+    private InfluxDB influxDB;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -60,11 +61,11 @@ public class InfluxDbComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getInfluxDB() {
+    public InfluxDB getInfluxDB() {
         return influxDB;
     }
 
-    public void setInfluxDB(String influxDB) {
+    public void setInfluxDB(InfluxDB influxDB) {
         this.influxDB = influxDB;
     }
 

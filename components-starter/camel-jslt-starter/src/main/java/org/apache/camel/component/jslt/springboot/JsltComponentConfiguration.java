@@ -19,6 +19,7 @@ package org.apache.camel.component.jslt.springboot;
 import java.util.Collection;
 import javax.annotation.Generated;
 import com.schibsted.spt.data.jslt.Function;
+import com.schibsted.spt.data.jslt.filters.JsonFilter;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -71,7 +72,7 @@ public class JsltComponentConfiguration
      * JSLT can be extended by plugging in a custom jslt object filter. The
      * option is a com.schibsted.spt.data.jslt.filters.JsonFilter type.
      */
-    private String objectFilter;
+    private JsonFilter objectFilter;
 
     public Boolean getAllowTemplateFromHeader() {
         return allowTemplateFromHeader;
@@ -108,11 +109,11 @@ public class JsltComponentConfiguration
         this.functions = functions;
     }
 
-    public String getObjectFilter() {
+    public JsonFilter getObjectFilter() {
         return objectFilter;
     }
 
-    public void setObjectFilter(String objectFilter) {
+    public void setObjectFilter(JsonFilter objectFilter) {
         this.objectFilter = objectFilter;
     }
 }

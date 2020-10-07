@@ -25,9 +25,9 @@ The component supports 16 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.aws-cw.access-key* | Amazon AWS Access Key |  | String
-| *camel.component.aws-cw.amazon-cw-client* | To use the AmazonCloudWatch as the client. The option is a com.amazonaws.services.cloudwatch.AmazonCloudWatch type. |  | String
+| *camel.component.aws-cw.amazon-cw-client* | To use the AmazonCloudWatch as the client. The option is a com.amazonaws.services.cloudwatch.AmazonCloudWatch type. |  | AmazonCloudWatch
 | *camel.component.aws-cw.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
-| *camel.component.aws-cw.configuration* | The component configuration. The option is a org.apache.camel.component.aws.cw.CwConfiguration type. |  | String
+| *camel.component.aws-cw.configuration* | The component configuration. The option is a org.apache.camel.component.aws.cw.CwConfiguration type. |  | CwConfiguration
 | *camel.component.aws-cw.enabled* | Whether to enable auto configuration of the aws-cw component. This is enabled by default. |  | Boolean
 | *camel.component.aws-cw.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.aws-cw.name* | The metric name |  | String

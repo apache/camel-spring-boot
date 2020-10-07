@@ -18,7 +18,10 @@ package org.apache.camel.component.azure.blob.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import com.microsoft.azure.storage.StorageCredentials;
+import com.microsoft.azure.storage.blob.CloudBlob;
 import org.apache.camel.component.azure.blob.BlobServiceComponent;
+import org.apache.camel.component.azure.blob.BlobServiceConfiguration;
 import org.apache.camel.component.azure.blob.BlobServiceOperations;
 import org.apache.camel.component.azure.blob.BlobType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -45,7 +48,7 @@ public class BlobServiceComponentConfiguration
      * The blob service client. The option is a
      * com.microsoft.azure.storage.blob.CloudBlob type.
      */
-    private String azureBlobClient;
+    private CloudBlob azureBlobClient;
     /**
      * Set the blob offset for the upload or download operations, default is 0
      */
@@ -62,7 +65,7 @@ public class BlobServiceComponentConfiguration
      * Set the storage credentials, required in most cases. The option is a
      * com.microsoft.azure.storage.StorageCredentials type.
      */
-    private String credentials;
+    private StorageCredentials credentials;
     /**
      * Set the data length for the download or page blob upload operations
      */
@@ -138,7 +141,7 @@ public class BlobServiceComponentConfiguration
      * The Blob Service configuration. The option is a
      * org.apache.camel.component.azure.blob.BlobServiceConfiguration type.
      */
-    private String configuration;
+    private BlobServiceConfiguration configuration;
     /**
      * Set the storage account key used during authentication phase
      */
@@ -148,11 +151,11 @@ public class BlobServiceComponentConfiguration
      */
     private String credentialsAccountName;
 
-    public String getAzureBlobClient() {
+    public CloudBlob getAzureBlobClient() {
         return azureBlobClient;
     }
 
-    public void setAzureBlobClient(String azureBlobClient) {
+    public void setAzureBlobClient(CloudBlob azureBlobClient) {
         this.azureBlobClient = azureBlobClient;
     }
 
@@ -180,11 +183,11 @@ public class BlobServiceComponentConfiguration
         this.closeStreamAfterRead = closeStreamAfterRead;
     }
 
-    public String getCredentials() {
+    public StorageCredentials getCredentials() {
         return credentials;
     }
 
-    public void setCredentials(String credentials) {
+    public void setCredentials(StorageCredentials credentials) {
         this.credentials = credentials;
     }
 
@@ -303,11 +306,11 @@ public class BlobServiceComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public BlobServiceConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(BlobServiceConfiguration configuration) {
         this.configuration = configuration;
     }
 

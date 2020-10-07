@@ -17,6 +17,10 @@
 package org.apache.camel.component.fhir.springboot;
 
 import javax.annotation.Generated;
+import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.rest.client.api.IGenericClient;
+import ca.uhn.fhir.rest.client.api.IRestfulClientFactory;
+import org.apache.camel.component.fhir.FhirConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -88,12 +92,12 @@ public class FhirComponentConfiguration
      * To use the custom client. The option is a
      * ca.uhn.fhir.rest.client.api.IGenericClient type.
      */
-    private String client;
+    private IGenericClient client;
     /**
      * To use the custom client factory. The option is a
      * ca.uhn.fhir.rest.client.api.IRestfulClientFactory type.
      */
-    private String clientFactory;
+    private IRestfulClientFactory clientFactory;
     /**
      * Compresses outgoing (POST/PUT) contents to the GZIP format
      */
@@ -102,7 +106,7 @@ public class FhirComponentConfiguration
      * To use the shared configuration. The option is a
      * org.apache.camel.component.fhir.FhirConfiguration type.
      */
-    private String configuration;
+    private FhirConfiguration configuration;
     /**
      * How long to try and establish the initial TCP connection (in ms)
      */
@@ -117,7 +121,7 @@ public class FhirComponentConfiguration
      * instances, it can be set directly. The option is a
      * ca.uhn.fhir.context.FhirContext type.
      */
-    private String fhirContext;
+    private FhirContext fhirContext;
     /**
      * Force conformance check
      */
@@ -234,19 +238,19 @@ public class FhirComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getClient() {
+    public IGenericClient getClient() {
         return client;
     }
 
-    public void setClient(String client) {
+    public void setClient(IGenericClient client) {
         this.client = client;
     }
 
-    public String getClientFactory() {
+    public IRestfulClientFactory getClientFactory() {
         return clientFactory;
     }
 
-    public void setClientFactory(String clientFactory) {
+    public void setClientFactory(IRestfulClientFactory clientFactory) {
         this.clientFactory = clientFactory;
     }
 
@@ -258,11 +262,11 @@ public class FhirComponentConfiguration
         this.compress = compress;
     }
 
-    public String getConfiguration() {
+    public FhirConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(FhirConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -282,11 +286,11 @@ public class FhirComponentConfiguration
         this.deferModelScanning = deferModelScanning;
     }
 
-    public String getFhirContext() {
+    public FhirContext getFhirContext() {
         return fhirContext;
     }
 
-    public void setFhirContext(String fhirContext) {
+    public void setFhirContext(FhirContext fhirContext) {
         this.fhirContext = fhirContext;
     }
 

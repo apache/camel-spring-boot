@@ -35,10 +35,10 @@ The component supports 28 options, which are listed below.
 | *camel.component.azure-storage-blob.close-stream-after-read* | Close the stream after read or keep it open, default is true | true | Boolean
 | *camel.component.azure-storage-blob.close-stream-after-write* | Close the stream after write or keep it open, default is true | true | Boolean
 | *camel.component.azure-storage-blob.commit-block-list-later* | When is set to true, the staged blocks will not be committed directly. | true | Boolean
-| *camel.component.azure-storage-blob.configuration* | The component configurations. The option is a org.apache.camel.component.azure.storage.blob.BlobConfiguration type. |  | String
+| *camel.component.azure-storage-blob.configuration* | The component configurations. The option is a org.apache.camel.component.azure.storage.blob.BlobConfiguration type. |  | BlobConfiguration
 | *camel.component.azure-storage-blob.create-append-blob* | When is set to true, the append blocks will be created when committing append blocks. | true | Boolean
 | *camel.component.azure-storage-blob.create-page-blob* | When is set to true, the page blob will be created when uploading page blob. | true | Boolean
-| *camel.component.azure-storage-blob.credentials* | StorageSharedKeyCredential can be injected to create the azure client, this holds the important authentication information. The option is a com.azure.storage.common.StorageSharedKeyCredential type. |  | String
+| *camel.component.azure-storage-blob.credentials* | StorageSharedKeyCredential can be injected to create the azure client, this holds the important authentication information. The option is a com.azure.storage.common.StorageSharedKeyCredential type. |  | StorageSharedKeyCredential
 | *camel.component.azure-storage-blob.data-count* | How many bytes to include in the range. Must be greater than or equal to 0 if specified. |  | Long
 | *camel.component.azure-storage-blob.download-link-expiration* | Override the default expiration (millis) of URL download link. |  | Long
 | *camel.component.azure-storage-blob.enabled* | Whether to enable auto configuration of the azure-storage-blob component. This is enabled by default. |  | Boolean
@@ -49,8 +49,8 @@ The component supports 28 options, which are listed below.
 | *camel.component.azure-storage-blob.operation* | The blob operation that can be used with this component on the producer |  | BlobOperationsDefinition
 | *camel.component.azure-storage-blob.page-blob-size* | Specifies the maximum size for the page blob, up to 8 TB. The page blob size must be aligned to a 512-byte boundary. | 512 | Long
 | *camel.component.azure-storage-blob.prefix* | Filters the results to return only blobs whose names begin with the specified prefix. May be null to return all blobs. |  | String
-| *camel.component.azure-storage-blob.service-client* | Client to a storage account. This client does not hold any state about a particular storage account but is instead a convenient way of sending off appropriate requests to the resource on the service. It may also be used to construct URLs to blobs and containers. This client contains operations on a service account. Operations on a container are available on BlobContainerClient through getBlobContainerClient(String), and operations on a blob are available on BlobClient through getBlobContainerClient(String).getBlobClient(String). The option is a com.azure.storage.blob.BlobServiceClient type. |  | String
-| *camel.component.azure-storage-blob.timeout* | An optional timeout value beyond which a RuntimeException will be raised. The option is a java.time.Duration type. |  | String
+| *camel.component.azure-storage-blob.service-client* | Client to a storage account. This client does not hold any state about a particular storage account but is instead a convenient way of sending off appropriate requests to the resource on the service. It may also be used to construct URLs to blobs and containers. This client contains operations on a service account. Operations on a container are available on BlobContainerClient through getBlobContainerClient(String), and operations on a blob are available on BlobClient through getBlobContainerClient(String).getBlobClient(String). The option is a com.azure.storage.blob.BlobServiceClient type. |  | BlobServiceClient
+| *camel.component.azure-storage-blob.timeout* | An optional timeout value beyond which a RuntimeException will be raised. The option is a java.time.Duration type. |  | Duration
 | *camel.component.azure-storage-blob.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

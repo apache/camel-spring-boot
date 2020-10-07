@@ -25,10 +25,10 @@ The component supports 11 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.avro.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.avro.configuration* | To use a shared AvroConfiguration to configure options once. The option is a org.apache.camel.component.avro.AvroConfiguration type. |  | String
+| *camel.component.avro.configuration* | To use a shared AvroConfiguration to configure options once. The option is a org.apache.camel.component.avro.AvroConfiguration type. |  | AvroConfiguration
 | *camel.component.avro.enabled* | Whether to enable auto configuration of the avro component. This is enabled by default. |  | Boolean
 | *camel.component.avro.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| *camel.component.avro.protocol* | Avro protocol to use. The option is a org.apache.avro.Protocol type. |  | String
+| *camel.component.avro.protocol* | Avro protocol to use. The option is a org.apache.avro.Protocol type. |  | Protocol
 | *camel.component.avro.protocol-class-name* | Avro protocol to use defined by the FQN class name |  | String
 | *camel.component.avro.protocol-location* | Avro protocol location |  | String
 | *camel.component.avro.reflection-protocol* | If protocol object provided is reflection protocol. Should be used only with protocol parameter because for protocolClassName protocol type will be auto detected | false | Boolean

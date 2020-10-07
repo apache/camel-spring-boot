@@ -56,20 +56,20 @@ The component supports 90 options, which are listed below.
 | *camel.component.consul.cluster.service.user-name* | Sets the username to be used for basic authentication |  | String
 | *camel.component.consul.cluster.service.write-timeout* | Write timeout for OkHttpClient |  | Duration
 | *camel.component.consul.cluster.service.write-timeout-millis* | Use writeTimeout instead. |  | Long
-| *camel.component.consul.configuration* | Consul configuration. The option is a org.apache.camel.component.consul.ConsulConfiguration type. |  | String
-| *camel.component.consul.connect-timeout* | Connect timeout for OkHttpClient. The option is a java.time.Duration type. |  | String
+| *camel.component.consul.configuration* | Consul configuration. The option is a org.apache.camel.component.consul.ConsulConfiguration type. |  | ConsulConfiguration
+| *camel.component.consul.connect-timeout* | Connect timeout for OkHttpClient. The option is a java.time.Duration type. |  | Duration
 | *camel.component.consul.consistency-mode* | The consistencyMode used for queries, default ConsistencyMode.DEFAULT |  | ConsistencyMode
-| *camel.component.consul.consul-client* | Reference to a com.orbitz.consul.Consul in the registry. The option is a com.orbitz.consul.Consul type. |  | String
+| *camel.component.consul.consul-client* | Reference to a com.orbitz.consul.Consul in the registry. The option is a com.orbitz.consul.Consul type. |  | Consul
 | *camel.component.consul.datacenter* | The data center |  | String
 | *camel.component.consul.enabled* | Whether to enable auto configuration of the consul component. This is enabled by default. |  | Boolean
-| *camel.component.consul.first-index* | The first index for watch for, default 0. The option is a java.math.BigInteger type. |  | String
+| *camel.component.consul.first-index* | The first index for watch for, default 0. The option is a java.math.BigInteger type. |  | BigInteger
 | *camel.component.consul.key* | The default key. Can be overridden by CamelConsulKey |  | String
 | *camel.component.consul.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.consul.near-node* | The near node to use for queries. |  | String
 | *camel.component.consul.node-meta* | The note meta-data to use for queries. |  | List
 | *camel.component.consul.password* | Sets the password to be used for basic authentication |  | String
 | *camel.component.consul.ping-instance* | Configure if the AgentClient should attempt a ping before returning the Consul instance | true | Boolean
-| *camel.component.consul.read-timeout* | Read timeout for OkHttpClient. The option is a java.time.Duration type. |  | String
+| *camel.component.consul.read-timeout* | Read timeout for OkHttpClient. The option is a java.time.Duration type. |  | Duration
 | *camel.component.consul.recursive* | Recursively watch, default false | false | Boolean
 | *camel.component.consul.service-registry.acl-token* | Sets the ACL token to be used with Consul |  | String
 | *camel.component.consul.service-registry.attributes* | Custom service attributes. |  | Map
@@ -101,18 +101,18 @@ The component supports 90 options, which are listed below.
 | *camel.component.consul.service-registry.user-name* | Sets the username to be used for basic authentication |  | String
 | *camel.component.consul.service-registry.write-timeout* | Write timeout for OkHttpClient |  | Duration
 | *camel.component.consul.service-registry.write-timeout-millis* | Use writeTimeout instead. |  | Long
-| *camel.component.consul.ssl-context-parameters* | SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | String
+| *camel.component.consul.ssl-context-parameters* | SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
 | *camel.component.consul.tags* | Set tags. You can separate multiple tags by comma. |  | String
 | *camel.component.consul.url* | The Consul agent URL |  | String
 | *camel.component.consul.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 | *camel.component.consul.user-name* | Sets the username to be used for basic authentication |  | String
 | *camel.component.consul.value-as-string* | Default to transform values retrieved from Consul i.e. on KV endpoint to string. | false | Boolean
-| *camel.component.consul.write-timeout* | Write timeout for OkHttpClient. The option is a java.time.Duration type. |  | String
+| *camel.component.consul.write-timeout* | Write timeout for OkHttpClient. The option is a java.time.Duration type. |  | Duration
 | *camel.component.consul.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 | *camel.component.consul.cluster.service.dc* | *Deprecated* Use datacenter instead |  | String
 | *camel.component.consul.connect-timeout-millis* | *Deprecated* Connect timeout for OkHttpClient. Deprecation note: Use connectTimeout instead |  | Long
 | *camel.component.consul.read-timeout-millis* | *Deprecated* Read timeout for OkHttpClient. Deprecation note: Use readTimeout instead |  | Long
 | *camel.component.consul.service-registry.dc* | *Deprecated* Use datacenter instead |  | String
-| *camel.component.consul.write-timeout-millis* | *Deprecated* Write timeout for OkHttpClient. Deprecation note: Use writeTimeout instead. The option is a java.lang.Long type. |  | String
+| *camel.component.consul.write-timeout-millis* | *Deprecated* Write timeout for OkHttpClient. Deprecation note: Use writeTimeout instead. The option is a java.lang.Long type. |  | Long
 |===
 // spring-boot-auto-configure options: END

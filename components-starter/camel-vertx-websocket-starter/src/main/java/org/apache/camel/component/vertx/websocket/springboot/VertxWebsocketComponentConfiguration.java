@@ -17,6 +17,9 @@
 package org.apache.camel.component.vertx.websocket.springboot;
 
 import javax.annotation.Generated;
+import io.vertx.core.Vertx;
+import io.vertx.core.VertxOptions;
+import io.vertx.ext.web.Router;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -68,17 +71,17 @@ public class VertxWebsocketComponentConfiguration
      * To provide a custom vertx router to use on the WebSocket server. The
      * option is a io.vertx.ext.web.Router type.
      */
-    private String router;
+    private Router router;
     /**
      * To use an existing vertx instead of creating a new instance. The option
      * is a io.vertx.core.Vertx type.
      */
-    private String vertx;
+    private Vertx vertx;
     /**
      * To provide a custom set of vertx options for configuring vertx. The
      * option is a io.vertx.core.VertxOptions type.
      */
-    private String vertxOptions;
+    private VertxOptions vertxOptions;
     /**
      * Enable usage of global SSL context parameters.
      */
@@ -111,27 +114,27 @@ public class VertxWebsocketComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getRouter() {
+    public Router getRouter() {
         return router;
     }
 
-    public void setRouter(String router) {
+    public void setRouter(Router router) {
         this.router = router;
     }
 
-    public String getVertx() {
+    public Vertx getVertx() {
         return vertx;
     }
 
-    public void setVertx(String vertx) {
+    public void setVertx(Vertx vertx) {
         this.vertx = vertx;
     }
 
-    public String getVertxOptions() {
+    public VertxOptions getVertxOptions() {
         return vertxOptions;
     }
 
-    public void setVertxOptions(String vertxOptions) {
+    public void setVertxOptions(VertxOptions vertxOptions) {
         this.vertxOptions = vertxOptions;
     }
 

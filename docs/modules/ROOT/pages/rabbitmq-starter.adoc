@@ -37,8 +37,8 @@ The component supports 56 options, which are listed below.
 | *camel.component.rabbitmq.channel-pool-max-size* | Get maximum number of opened channel in pool | 10 | Integer
 | *camel.component.rabbitmq.channel-pool-max-wait* | Set the maximum number of milliseconds to wait for a channel from the pool | 1000 | Long
 | *camel.component.rabbitmq.client-properties* | Connection client properties (client info used in negotiating with the server) |  | Map
-| *camel.component.rabbitmq.connection-factory* | To use a custom RabbitMQ connection factory. When this option is set, all connection options (connectionTimeout, requestedChannelMax...) set on URI are not used. The option is a com.rabbitmq.client.ConnectionFactory type. |  | String
-| *camel.component.rabbitmq.connection-factory-exception-handler* | Custom rabbitmq ExceptionHandler for ConnectionFactory. The option is a com.rabbitmq.client.ExceptionHandler type. |  | String
+| *camel.component.rabbitmq.connection-factory* | To use a custom RabbitMQ connection factory. When this option is set, all connection options (connectionTimeout, requestedChannelMax...) set on URI are not used. The option is a com.rabbitmq.client.ConnectionFactory type. |  | ConnectionFactory
+| *camel.component.rabbitmq.connection-factory-exception-handler* | Custom rabbitmq ExceptionHandler for ConnectionFactory. The option is a com.rabbitmq.client.ExceptionHandler type. |  | ExceptionHandler
 | *camel.component.rabbitmq.connection-timeout* | Connection timeout | 60000 | Integer
 | *camel.component.rabbitmq.dead-letter-exchange* | The name of the dead letter exchange |  | String
 | *camel.component.rabbitmq.dead-letter-exchange-type* | The type of the dead letter exchange | direct | String
@@ -76,7 +76,7 @@ The component supports 56 options, which are listed below.
 | *camel.component.rabbitmq.thread-pool-size* | The consumer uses a Thread Pool Executor with a fixed number of threads. This setting allows you to set that number of threads. | 10 | Integer
 | *camel.component.rabbitmq.topology-recovery-enabled* | Enables connection topology recovery (should topology recovery be performed) |  | Boolean
 | *camel.component.rabbitmq.transfer-exception* | When true and an inOut Exchange failed on the consumer side send the caused Exception back in the response | false | Boolean
-| *camel.component.rabbitmq.trust-manager* | Configure SSL trust manager, SSL should be enabled for this option to be effective. The option is a javax.net.ssl.TrustManager type. |  | String
+| *camel.component.rabbitmq.trust-manager* | Configure SSL trust manager, SSL should be enabled for this option to be effective. The option is a javax.net.ssl.TrustManager type. |  | TrustManager
 | *camel.component.rabbitmq.username* | Username in case of authenticated access | guest | String
 | *camel.component.rabbitmq.vhost* | The vhost for the channel | / | String
 | *camel.component.rabbitmq.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean

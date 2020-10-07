@@ -25,9 +25,9 @@ The component supports 9 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.jooq.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.jooq.configuration* | Component configuration (database connection, database entity type, etc.). The option is a org.apache.camel.component.jooq.JooqConfiguration type. |  | String
+| *camel.component.jooq.configuration* | Component configuration (database connection, database entity type, etc.). The option is a org.apache.camel.component.jooq.JooqConfiguration type. |  | JooqConfiguration
 | *camel.component.jooq.consume-delete* | Delete entity after it is consumed | true | Boolean
-| *camel.component.jooq.database-configuration* | To use a specific database configuration. The option is a org.jooq.Configuration type. |  | String
+| *camel.component.jooq.database-configuration* | To use a specific database configuration. The option is a org.jooq.Configuration type. |  | Configuration
 | *camel.component.jooq.enabled* | Whether to enable auto configuration of the jooq component. This is enabled by default. |  | Boolean
 | *camel.component.jooq.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.jooq.operation* | Type of operation to execute on query |  | JooqOperation

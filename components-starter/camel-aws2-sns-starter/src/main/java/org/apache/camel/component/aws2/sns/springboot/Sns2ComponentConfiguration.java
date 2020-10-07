@@ -18,10 +18,12 @@ package org.apache.camel.component.aws2.sns.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.sns.Sns2Component;
+import org.apache.camel.component.aws2.sns.Sns2Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.sns.SnsClient;
 
 /**
  * Send messages to an AWS Simple Notification Topic using AWS SDK version 2.x.
@@ -43,7 +45,7 @@ public class Sns2ComponentConfiguration
      * To use the AmazonSNS as the client. The option is a
      * software.amazon.awssdk.services.sns.SnsClient type.
      */
-    private String amazonSNSClient;
+    private SnsClient amazonSNSClient;
     /**
      * Setting the autocreation of the topic
      */
@@ -58,7 +60,7 @@ public class Sns2ComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.sns.Sns2Configuration type.
      */
-    private String configuration;
+    private Sns2Configuration configuration;
     /**
      * The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a
      * custom CMK.
@@ -137,11 +139,11 @@ public class Sns2ComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonSNSClient() {
+    public SnsClient getAmazonSNSClient() {
         return amazonSNSClient;
     }
 
-    public void setAmazonSNSClient(String amazonSNSClient) {
+    public void setAmazonSNSClient(SnsClient amazonSNSClient) {
         this.amazonSNSClient = amazonSNSClient;
     }
 
@@ -161,11 +163,11 @@ public class Sns2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public Sns2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Sns2Configuration configuration) {
         this.configuration = configuration;
     }
 

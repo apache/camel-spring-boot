@@ -17,6 +17,8 @@
 package org.apache.camel.component.stub.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.Exchange;
+import org.apache.camel.component.seda.BlockingQueueFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -94,7 +96,7 @@ public class StubComponentConfiguration
      * Sets the default queue factory. The option is a
      * org.apache.camel.component.seda.BlockingQueueFactory<org.apache.camel.Exchange> type.
      */
-    private String defaultQueueFactory;
+    private BlockingQueueFactory<Exchange> defaultQueueFactory;
     /**
      * Sets the default maximum capacity of the SEDA queue (i.e., the number of
      * messages it can hold).
@@ -160,11 +162,12 @@ public class StubComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getDefaultQueueFactory() {
+    public BlockingQueueFactory<Exchange> getDefaultQueueFactory() {
         return defaultQueueFactory;
     }
 
-    public void setDefaultQueueFactory(String defaultQueueFactory) {
+    public void setDefaultQueueFactory(
+            BlockingQueueFactory<Exchange> defaultQueueFactory) {
         this.defaultQueueFactory = defaultQueueFactory;
     }
 

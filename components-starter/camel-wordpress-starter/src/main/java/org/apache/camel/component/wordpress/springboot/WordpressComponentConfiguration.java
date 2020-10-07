@@ -18,6 +18,8 @@ package org.apache.camel.component.wordpress.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import org.apache.camel.component.wordpress.WordpressConfiguration;
+import org.apache.camel.component.wordpress.api.model.SearchCriteria;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -46,7 +48,7 @@ public class WordpressComponentConfiguration
      * Wordpress configuration. The option is a
      * org.apache.camel.component.wordpress.WordpressConfiguration type.
      */
-    private String configuration;
+    private WordpressConfiguration configuration;
     /**
      * The criteria to use with complex searches.
      */
@@ -68,7 +70,7 @@ public class WordpressComponentConfiguration
      * Search criteria. The option is a
      * org.apache.camel.component.wordpress.api.model.SearchCriteria type.
      */
-    private String searchCriteria;
+    private SearchCriteria searchCriteria;
     /**
      * The Wordpress API URL from your site, e.g. http://myblog.com/wp-json/
      */
@@ -112,11 +114,11 @@ public class WordpressComponentConfiguration
         this.apiVersion = apiVersion;
     }
 
-    public String getConfiguration() {
+    public WordpressConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(WordpressConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -152,11 +154,11 @@ public class WordpressComponentConfiguration
         this.password = password;
     }
 
-    public String getSearchCriteria() {
+    public SearchCriteria getSearchCriteria() {
         return searchCriteria;
     }
 
-    public void setSearchCriteria(String searchCriteria) {
+    public void setSearchCriteria(SearchCriteria searchCriteria) {
         this.searchCriteria = searchCriteria;
     }
 

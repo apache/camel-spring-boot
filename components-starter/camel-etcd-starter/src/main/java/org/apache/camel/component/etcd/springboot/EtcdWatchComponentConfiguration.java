@@ -17,7 +17,9 @@
 package org.apache.camel.component.etcd.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.etcd.EtcdConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -50,7 +52,7 @@ public class EtcdWatchComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.etcd.EtcdConfiguration type.
      */
-    private String configuration;
+    private EtcdConfiguration configuration;
     /**
      * To apply an action recursively.
      */
@@ -63,7 +65,7 @@ public class EtcdWatchComponentConfiguration
      * To set the maximum time an action could take to complete. The option is a
      * java.lang.Long type.
      */
-    private String timeout;
+    private Long timeout;
     /**
      * To set the URIs the client connects.
      */
@@ -90,7 +92,7 @@ public class EtcdWatchComponentConfiguration
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Enable usage of global SSL context parameters.
      */
@@ -108,11 +110,11 @@ public class EtcdWatchComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public String getConfiguration() {
+    public EtcdConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(EtcdConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -132,11 +134,11 @@ public class EtcdWatchComponentConfiguration
         this.servicePath = servicePath;
     }
 
-    public String getTimeout() {
+    public Long getTimeout() {
         return timeout;
     }
 
-    public void setTimeout(String timeout) {
+    public void setTimeout(Long timeout) {
         this.timeout = timeout;
     }
 
@@ -183,11 +185,12 @@ public class EtcdWatchComponentConfiguration
         this.password = password;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 

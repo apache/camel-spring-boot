@@ -19,6 +19,7 @@ package org.apache.camel.component.reactive.streams.springboot;
 import javax.annotation.Generated;
 import org.apache.camel.component.reactive.streams.ReactiveStreamsBackpressureStrategy;
 import org.apache.camel.component.reactive.streams.ReactiveStreamsComponent;
+import org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -89,7 +90,7 @@ public class ReactiveStreamsComponentConfiguration
      * To use an existing reactive stream engine configuration. The option is a
      * org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration type.
      */
-    private String reactiveStreamsEngineConfiguration;
+    private ReactiveStreamsEngineConfiguration reactiveStreamsEngineConfiguration;
     /**
      * Set the type of the underlying reactive streams implementation to use.
      * The implementation is looked up from the registry or using a
@@ -158,12 +159,12 @@ public class ReactiveStreamsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getReactiveStreamsEngineConfiguration() {
+    public ReactiveStreamsEngineConfiguration getReactiveStreamsEngineConfiguration() {
         return reactiveStreamsEngineConfiguration;
     }
 
     public void setReactiveStreamsEngineConfiguration(
-            String reactiveStreamsEngineConfiguration) {
+            ReactiveStreamsEngineConfiguration reactiveStreamsEngineConfiguration) {
         this.reactiveStreamsEngineConfiguration = reactiveStreamsEngineConfiguration;
     }
 

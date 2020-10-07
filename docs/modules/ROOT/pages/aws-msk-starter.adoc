@@ -26,10 +26,10 @@ The component supports 13 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.aws-msk.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws-msk.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
-| *camel.component.aws-msk.configuration* | The component configuration. The option is a org.apache.camel.component.aws.msk.MSKConfiguration type. |  | String
+| *camel.component.aws-msk.configuration* | The component configuration. The option is a org.apache.camel.component.aws.msk.MSKConfiguration type. |  | MSKConfiguration
 | *camel.component.aws-msk.enabled* | Whether to enable auto configuration of the aws-msk component. This is enabled by default. |  | Boolean
 | *camel.component.aws-msk.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| *camel.component.aws-msk.msk-client* | To use a existing configured AWS MSK as client. The option is a com.amazonaws.services.kafka.AWSKafka type. |  | String
+| *camel.component.aws-msk.msk-client* | To use a existing configured AWS MSK as client. The option is a com.amazonaws.services.kafka.AWSKafka type. |  | AWSKafka
 | *camel.component.aws-msk.operation* | The operation to perform |  | MSKOperations
 | *camel.component.aws-msk.proxy-host* | To define a proxy host when instantiating the MSK client |  | String
 | *camel.component.aws-msk.proxy-port* | To define a proxy port when instantiating the MSK client |  | Integer

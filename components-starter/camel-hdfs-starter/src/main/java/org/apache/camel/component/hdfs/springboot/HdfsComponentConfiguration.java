@@ -17,6 +17,7 @@
 package org.apache.camel.component.hdfs.springboot;
 
 import javax.annotation.Generated;
+import javax.security.auth.login.Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -67,7 +68,7 @@ public class HdfsComponentConfiguration
      * To use the given configuration for security with JAAS. The option is a
      * javax.security.auth.login.Configuration type.
      */
-    private String jAASConfiguration;
+    private Configuration jAASConfiguration;
     /**
      * To use kerberos authentication, set the value of the
      * 'java.security.krb5.conf' environment variable to an existing file. If
@@ -103,11 +104,11 @@ public class HdfsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getJAASConfiguration() {
+    public Configuration getJAASConfiguration() {
         return jAASConfiguration;
     }
 
-    public void setJAASConfiguration(String jAASConfiguration) {
+    public void setJAASConfiguration(Configuration jAASConfiguration) {
         this.jAASConfiguration = jAASConfiguration;
     }
 

@@ -17,6 +17,8 @@
 package org.apache.camel.component.crypto.cms.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.crypto.cms.crypt.EnvelopedDataDecryptorConfiguration;
+import org.apache.camel.component.crypto.cms.sig.SignedDataVerifierConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -59,14 +61,14 @@ public class CryptoCmsComponentConfiguration
      * determines the uri parameters for the decrypt operation. The option is a
      * org.apache.camel.component.crypto.cms.crypt.EnvelopedDataDecryptorConfiguration type.
      */
-    private String envelopedDataDecryptorConfiguration;
+    private EnvelopedDataDecryptorConfiguration envelopedDataDecryptorConfiguration;
     /**
      * To configure the shared SignedDataVerifierConfiguration, which determines
      * the uri parameters for the verify operation. The option is a
      * org.apache.camel.component.crypto.cms.sig.SignedDataVerifierConfiguration
      * type.
      */
-    private String signedDataVerifierConfiguration;
+    private SignedDataVerifierConfiguration signedDataVerifierConfiguration;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -87,21 +89,21 @@ public class CryptoCmsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getEnvelopedDataDecryptorConfiguration() {
+    public EnvelopedDataDecryptorConfiguration getEnvelopedDataDecryptorConfiguration() {
         return envelopedDataDecryptorConfiguration;
     }
 
     public void setEnvelopedDataDecryptorConfiguration(
-            String envelopedDataDecryptorConfiguration) {
+            EnvelopedDataDecryptorConfiguration envelopedDataDecryptorConfiguration) {
         this.envelopedDataDecryptorConfiguration = envelopedDataDecryptorConfiguration;
     }
 
-    public String getSignedDataVerifierConfiguration() {
+    public SignedDataVerifierConfiguration getSignedDataVerifierConfiguration() {
         return signedDataVerifierConfiguration;
     }
 
     public void setSignedDataVerifierConfiguration(
-            String signedDataVerifierConfiguration) {
+            SignedDataVerifierConfiguration signedDataVerifierConfiguration) {
         this.signedDataVerifierConfiguration = signedDataVerifierConfiguration;
     }
 }

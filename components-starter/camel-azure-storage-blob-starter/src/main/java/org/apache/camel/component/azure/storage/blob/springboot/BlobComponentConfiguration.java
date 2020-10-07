@@ -16,9 +16,13 @@
  */
 package org.apache.camel.component.azure.storage.blob.springboot;
 
+import java.time.Duration;
 import javax.annotation.Generated;
+import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.models.BlockListType;
+import com.azure.storage.common.StorageSharedKeyCredential;
 import org.apache.camel.component.azure.storage.blob.BlobComponent;
+import org.apache.camel.component.azure.storage.blob.BlobConfiguration;
 import org.apache.camel.component.azure.storage.blob.BlobOperationsDefinition;
 import org.apache.camel.component.azure.storage.blob.BlobType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -69,13 +73,13 @@ public class BlobComponentConfiguration
      * The component configurations. The option is a
      * org.apache.camel.component.azure.storage.blob.BlobConfiguration type.
      */
-    private String configuration;
+    private BlobConfiguration configuration;
     /**
      * StorageSharedKeyCredential can be injected to create the azure client,
      * this holds the important authentication information. The option is a
      * com.azure.storage.common.StorageSharedKeyCredential type.
      */
-    private String credentials;
+    private StorageSharedKeyCredential credentials;
     /**
      * How many bytes to include in the range. Must be greater than or equal to
      * 0 if specified.
@@ -113,12 +117,12 @@ public class BlobComponentConfiguration
      * getBlobContainerClient(String).getBlobClient(String). The option is a
      * com.azure.storage.blob.BlobServiceClient type.
      */
-    private String serviceClient;
+    private BlobServiceClient serviceClient;
     /**
      * An optional timeout value beyond which a RuntimeException will be raised.
      * The option is a java.time.Duration type.
      */
-    private String timeout;
+    private Duration timeout;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -231,19 +235,19 @@ public class BlobComponentConfiguration
         this.closeStreamAfterRead = closeStreamAfterRead;
     }
 
-    public String getConfiguration() {
+    public BlobConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(BlobConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getCredentials() {
+    public StorageSharedKeyCredential getCredentials() {
         return credentials;
     }
 
-    public void setCredentials(String credentials) {
+    public void setCredentials(StorageSharedKeyCredential credentials) {
         this.credentials = credentials;
     }
 
@@ -287,19 +291,19 @@ public class BlobComponentConfiguration
         this.prefix = prefix;
     }
 
-    public String getServiceClient() {
+    public BlobServiceClient getServiceClient() {
         return serviceClient;
     }
 
-    public void setServiceClient(String serviceClient) {
+    public void setServiceClient(BlobServiceClient serviceClient) {
         this.serviceClient = serviceClient;
     }
 
-    public String getTimeout() {
+    public Duration getTimeout() {
         return timeout;
     }
 
-    public void setTimeout(String timeout) {
+    public void setTimeout(Duration timeout) {
         this.timeout = timeout;
     }
 

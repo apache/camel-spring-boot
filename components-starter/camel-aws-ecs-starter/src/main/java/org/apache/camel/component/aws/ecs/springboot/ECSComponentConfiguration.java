@@ -18,7 +18,9 @@ package org.apache.camel.component.aws.ecs.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.ecs.AmazonECS;
 import org.apache.camel.component.aws.ecs.ECSComponent;
+import org.apache.camel.component.aws.ecs.ECSConfiguration;
 import org.apache.camel.component.aws.ecs.ECSOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -54,12 +56,12 @@ public class ECSComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.ecs.ECSConfiguration type.
      */
-    private String configuration;
+    private ECSConfiguration configuration;
     /**
      * To use a existing configured AWS ECS as client. The option is a
      * com.amazonaws.services.ecs.AmazonECS type.
      */
-    private String ecsClient;
+    private AmazonECS ecsClient;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -120,19 +122,19 @@ public class ECSComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public String getConfiguration() {
+    public ECSConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(ECSConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getEcsClient() {
+    public AmazonECS getEcsClient() {
         return ecsClient;
     }
 
-    public void setEcsClient(String ecsClient) {
+    public void setEcsClient(AmazonECS ecsClient) {
         this.ecsClient = ecsClient;
     }
 

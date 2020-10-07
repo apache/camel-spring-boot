@@ -16,10 +16,14 @@
  */
 package org.apache.camel.component.milo.server.springboot;
 
+import java.security.cert.X509Certificate;
 import java.util.Set;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.eclipse.milo.opcua.stack.core.security.CertificateManager;
+import org.eclipse.milo.opcua.stack.core.security.CertificateValidator;
 import org.eclipse.milo.opcua.stack.core.security.SecurityPolicy;
+import org.eclipse.milo.opcua.stack.core.types.structured.BuildInfo;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -55,7 +59,7 @@ public class MiloServerComponentConfiguration
      * Server build info. The option is a
      * org.eclipse.milo.opcua.stack.core.types.structured.BuildInfo type.
      */
-    private String buildInfo;
+    private BuildInfo buildInfo;
     /**
      * The URI of the namespace, defaults to urn:org:apache:camel
      */
@@ -103,17 +107,17 @@ public class MiloServerComponentConfiguration
      * Server certificate. The option is a java.security.cert.X509Certificate
      * type.
      */
-    private String certificate;
+    private X509Certificate certificate;
     /**
      * Server certificate manager. The option is a
      * org.eclipse.milo.opcua.stack.core.security.CertificateManager type.
      */
-    private String certificateManager;
+    private CertificateManager certificateManager;
     /**
      * Validator for client certificates. The option is a
      * org.eclipse.milo.opcua.stack.core.security.CertificateValidator type.
      */
-    private String certificateValidator;
+    private CertificateValidator certificateValidator;
     /**
      * Validator for client certificates using default file based approach
      */
@@ -165,11 +169,11 @@ public class MiloServerComponentConfiguration
         this.bindAddresses = bindAddresses;
     }
 
-    public String getBuildInfo() {
+    public BuildInfo getBuildInfo() {
         return buildInfo;
     }
 
-    public void setBuildInfo(String buildInfo) {
+    public void setBuildInfo(BuildInfo buildInfo) {
         this.buildInfo = buildInfo;
     }
 
@@ -232,27 +236,28 @@ public class MiloServerComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getCertificate() {
+    public X509Certificate getCertificate() {
         return certificate;
     }
 
-    public void setCertificate(String certificate) {
+    public void setCertificate(X509Certificate certificate) {
         this.certificate = certificate;
     }
 
-    public String getCertificateManager() {
+    public CertificateManager getCertificateManager() {
         return certificateManager;
     }
 
-    public void setCertificateManager(String certificateManager) {
+    public void setCertificateManager(CertificateManager certificateManager) {
         this.certificateManager = certificateManager;
     }
 
-    public String getCertificateValidator() {
+    public CertificateValidator getCertificateValidator() {
         return certificateValidator;
     }
 
-    public void setCertificateValidator(String certificateValidator) {
+    public void setCertificateValidator(
+            CertificateValidator certificateValidator) {
         this.certificateValidator = certificateValidator;
     }
 

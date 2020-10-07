@@ -17,6 +17,11 @@
 package org.apache.camel.component.bean.validator.springboot;
 
 import javax.annotation.Generated;
+import javax.validation.ConstraintValidatorFactory;
+import javax.validation.MessageInterpolator;
+import javax.validation.TraversableResolver;
+import javax.validation.ValidationProviderResolver;
+import javax.validation.ValidatorFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -62,27 +67,27 @@ public class BeanValidatorComponentConfiguration
      * To use a custom ConstraintValidatorFactory. The option is a
      * javax.validation.ConstraintValidatorFactory type.
      */
-    private String constraintValidatorFactory;
+    private ConstraintValidatorFactory constraintValidatorFactory;
     /**
      * To use a custom MessageInterpolator. The option is a
      * javax.validation.MessageInterpolator type.
      */
-    private String messageInterpolator;
+    private MessageInterpolator messageInterpolator;
     /**
      * To use a custom TraversableResolver. The option is a
      * javax.validation.TraversableResolver type.
      */
-    private String traversableResolver;
+    private TraversableResolver traversableResolver;
     /**
      * To use a a custom ValidationProviderResolver. The option is a
      * javax.validation.ValidationProviderResolver type.
      */
-    private String validationProviderResolver;
+    private ValidationProviderResolver validationProviderResolver;
     /**
      * To use a custom ValidatorFactory. The option is a
      * javax.validation.ValidatorFactory type.
      */
-    private String validatorFactory;
+    private ValidatorFactory validatorFactory;
 
     public Boolean getIgnoreXmlConfiguration() {
         return ignoreXmlConfiguration;
@@ -111,43 +116,45 @@ public class BeanValidatorComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConstraintValidatorFactory() {
+    public ConstraintValidatorFactory getConstraintValidatorFactory() {
         return constraintValidatorFactory;
     }
 
-    public void setConstraintValidatorFactory(String constraintValidatorFactory) {
+    public void setConstraintValidatorFactory(
+            ConstraintValidatorFactory constraintValidatorFactory) {
         this.constraintValidatorFactory = constraintValidatorFactory;
     }
 
-    public String getMessageInterpolator() {
+    public MessageInterpolator getMessageInterpolator() {
         return messageInterpolator;
     }
 
-    public void setMessageInterpolator(String messageInterpolator) {
+    public void setMessageInterpolator(MessageInterpolator messageInterpolator) {
         this.messageInterpolator = messageInterpolator;
     }
 
-    public String getTraversableResolver() {
+    public TraversableResolver getTraversableResolver() {
         return traversableResolver;
     }
 
-    public void setTraversableResolver(String traversableResolver) {
+    public void setTraversableResolver(TraversableResolver traversableResolver) {
         this.traversableResolver = traversableResolver;
     }
 
-    public String getValidationProviderResolver() {
+    public ValidationProviderResolver getValidationProviderResolver() {
         return validationProviderResolver;
     }
 
-    public void setValidationProviderResolver(String validationProviderResolver) {
+    public void setValidationProviderResolver(
+            ValidationProviderResolver validationProviderResolver) {
         this.validationProviderResolver = validationProviderResolver;
     }
 
-    public String getValidatorFactory() {
+    public ValidatorFactory getValidatorFactory() {
         return validatorFactory;
     }
 
-    public void setValidatorFactory(String validatorFactory) {
+    public void setValidatorFactory(ValidatorFactory validatorFactory) {
         this.validatorFactory = validatorFactory;
     }
 }

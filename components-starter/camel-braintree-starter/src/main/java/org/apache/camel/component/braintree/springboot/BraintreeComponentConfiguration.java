@@ -17,6 +17,7 @@
 package org.apache.camel.component.braintree.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.braintree.BraintreeConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -58,7 +59,7 @@ public class BraintreeComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.braintree.BraintreeConfiguration type.
      */
-    private String configuration;
+    private BraintreeConfiguration configuration;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -79,11 +80,11 @@ public class BraintreeComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public BraintreeConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(BraintreeConfiguration configuration) {
         this.configuration = configuration;
     }
 }

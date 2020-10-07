@@ -25,7 +25,7 @@ The component supports 9 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.webhook.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| *camel.component.webhook.configuration* | Set the default configuration for the webhook meta-component. The option is a org.apache.camel.component.webhook.WebhookConfiguration type. |  | String
+| *camel.component.webhook.configuration* | Set the default configuration for the webhook meta-component. The option is a org.apache.camel.component.webhook.WebhookConfiguration type. |  | WebhookConfiguration
 | *camel.component.webhook.enabled* | Whether to enable auto configuration of the webhook component. This is enabled by default. |  | Boolean
 | *camel.component.webhook.webhook-auto-register* | Automatically register the webhook at startup and unregister it on shutdown. | true | Boolean
 | *camel.component.webhook.webhook-base-path* | The first (base) path element where the webhook will be exposed. It's a good practice to set it to a random string, so that it cannot be guessed by unauthorized parties. |  | String

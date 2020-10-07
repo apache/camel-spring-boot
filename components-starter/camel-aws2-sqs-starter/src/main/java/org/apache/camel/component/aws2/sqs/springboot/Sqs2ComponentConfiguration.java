@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.sqs.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.sqs.Sqs2Component;
+import org.apache.camel.component.aws2.sqs.Sqs2Configuration;
 import org.apache.camel.component.aws2.sqs.Sqs2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.sqs.SqsClient;
 
 /**
  * Sending and receive messages to/from AWS SQS service using AWS SDK version
@@ -49,7 +51,7 @@ public class Sqs2ComponentConfiguration
      * To use the AmazonSQS as client. The option is a
      * software.amazon.awssdk.services.sqs.SqsClient type.
      */
-    private String amazonSQSClient;
+    private SqsClient amazonSQSClient;
     /**
      * Setting the autocreation of the queue
      */
@@ -64,7 +66,7 @@ public class Sqs2ComponentConfiguration
      * The AWS SQS default configuration. The option is a
      * org.apache.camel.component.aws2.sqs.Sqs2Configuration type.
      */
-    private String configuration;
+    private Sqs2Configuration configuration;
     /**
      * The underlying protocol used to communicate with SQS
      */
@@ -263,11 +265,11 @@ public class Sqs2ComponentConfiguration
         this.amazonAWSHost = amazonAWSHost;
     }
 
-    public String getAmazonSQSClient() {
+    public SqsClient getAmazonSQSClient() {
         return amazonSQSClient;
     }
 
-    public void setAmazonSQSClient(String amazonSQSClient) {
+    public void setAmazonSQSClient(SqsClient amazonSQSClient) {
         this.amazonSQSClient = amazonSQSClient;
     }
 
@@ -287,11 +289,11 @@ public class Sqs2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public Sqs2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Sqs2Configuration configuration) {
         this.configuration = configuration;
     }
 

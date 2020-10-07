@@ -17,9 +17,11 @@
 package org.apache.camel.component.jpa.springboot;
 
 import javax.annotation.Generated;
+import javax.persistence.EntityManagerFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
+import org.springframework.transaction.PlatformTransactionManager;
 
 /**
  * Store and retrieve Java objects from databases using Java Persistence API
@@ -42,7 +44,7 @@ public class JpaComponentConfiguration
      * To use the EntityManagerFactory. This is strongly recommended to
      * configure. The option is a javax.persistence.EntityManagerFactory type.
      */
-    private String entityManagerFactory;
+    private EntityManagerFactory entityManagerFactory;
     /**
      * The camel-jpa component will join transaction by default. You can use
      * this option to turn this off, for example if you use LOCAL_RESOURCE and
@@ -62,7 +64,7 @@ public class JpaComponentConfiguration
      * option is a org.springframework.transaction.PlatformTransactionManager
      * type.
      */
-    private String transactionManager;
+    private PlatformTransactionManager transactionManager;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -90,11 +92,12 @@ public class JpaComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getEntityManagerFactory() {
+    public EntityManagerFactory getEntityManagerFactory() {
         return entityManagerFactory;
     }
 
-    public void setEntityManagerFactory(String entityManagerFactory) {
+    public void setEntityManagerFactory(
+            EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }
 
@@ -114,11 +117,12 @@ public class JpaComponentConfiguration
         this.sharedEntityManager = sharedEntityManager;
     }
 
-    public String getTransactionManager() {
+    public PlatformTransactionManager getTransactionManager() {
         return transactionManager;
     }
 
-    public void setTransactionManager(String transactionManager) {
+    public void setTransactionManager(
+            PlatformTransactionManager transactionManager) {
         this.transactionManager = transactionManager;
     }
 

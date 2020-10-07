@@ -18,7 +18,9 @@ package org.apache.camel.component.aws.ec2.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.ec2.AmazonEC2;
 import org.apache.camel.component.aws.ec2.EC2Component;
+import org.apache.camel.component.aws.ec2.EC2Configuration;
 import org.apache.camel.component.aws.ec2.EC2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -54,12 +56,12 @@ public class EC2ComponentConfiguration
      * To use a existing configured AmazonEC2Client as client. The option is a
      * com.amazonaws.services.ec2.AmazonEC2 type.
      */
-    private String amazonEc2Client;
+    private AmazonEC2 amazonEc2Client;
     /**
      * The component configuration. The option is a
      * org.apache.camel.component.aws.ec2.EC2Configuration type.
      */
-    private String configuration;
+    private EC2Configuration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -123,19 +125,19 @@ public class EC2ComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public String getAmazonEc2Client() {
+    public AmazonEC2 getAmazonEc2Client() {
         return amazonEc2Client;
     }
 
-    public void setAmazonEc2Client(String amazonEc2Client) {
+    public void setAmazonEc2Client(AmazonEC2 amazonEc2Client) {
         this.amazonEc2Client = amazonEc2Client;
     }
 
-    public String getConfiguration() {
+    public EC2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(EC2Configuration configuration) {
         this.configuration = configuration;
     }
 

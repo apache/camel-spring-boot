@@ -18,8 +18,10 @@ package org.apache.camel.component.jooq.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.jooq.JooqComponent;
+import org.apache.camel.component.jooq.JooqConfiguration;
 import org.apache.camel.component.jooq.JooqOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.jooq.Configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -44,12 +46,12 @@ public class JooqComponentConfiguration
      * etc.). The option is a org.apache.camel.component.jooq.JooqConfiguration
      * type.
      */
-    private String configuration;
+    private JooqConfiguration configuration;
     /**
      * To use a specific database configuration. The option is a
      * org.jooq.Configuration type.
      */
-    private String databaseConfiguration;
+    private Configuration databaseConfiguration;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -89,19 +91,19 @@ public class JooqComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getConfiguration() {
+    public JooqConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(JooqConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getDatabaseConfiguration() {
+    public Configuration getDatabaseConfiguration() {
         return databaseConfiguration;
     }
 
-    public void setDatabaseConfiguration(String databaseConfiguration) {
+    public void setDatabaseConfiguration(Configuration databaseConfiguration) {
         this.databaseConfiguration = databaseConfiguration;
     }
 

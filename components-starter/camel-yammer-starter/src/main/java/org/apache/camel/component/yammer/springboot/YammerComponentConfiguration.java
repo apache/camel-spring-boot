@@ -17,6 +17,8 @@
 package org.apache.camel.component.yammer.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.yammer.ApiRequestor;
+import org.apache.camel.component.yammer.YammerConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -53,7 +55,7 @@ public class YammerComponentConfiguration
     /**
      * Delay between polling in millis. The option is a long type.
      */
-    private String delay = "5000";
+    private Long delay = 5000L;
     /**
      * Return only the specified number of messages. Works for threaded set to
      * true and threaded set to extended.
@@ -109,12 +111,12 @@ public class YammerComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.yammer.YammerConfiguration type.
      */
-    private String configuration;
+    private YammerConfiguration configuration;
     /**
      * To use a specific requester to communicate with Yammer. The option is a
      * org.apache.camel.component.yammer.ApiRequestor type.
      */
-    private String requestor;
+    private ApiRequestor requestor;
     /**
      * The access token
      */
@@ -144,11 +146,11 @@ public class YammerComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public String getDelay() {
+    public Long getDelay() {
         return delay;
     }
 
-    public void setDelay(String delay) {
+    public void setDelay(Long delay) {
         this.delay = delay;
     }
 
@@ -211,19 +213,19 @@ public class YammerComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public YammerConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(YammerConfiguration configuration) {
         this.configuration = configuration;
     }
 
-    public String getRequestor() {
+    public ApiRequestor getRequestor() {
         return requestor;
     }
 
-    public void setRequestor(String requestor) {
+    public void setRequestor(ApiRequestor requestor) {
         this.requestor = requestor;
     }
 

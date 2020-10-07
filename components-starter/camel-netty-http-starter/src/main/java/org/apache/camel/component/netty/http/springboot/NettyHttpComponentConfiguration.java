@@ -21,9 +21,22 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Generated;
 import io.netty.channel.ChannelHandler;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.group.ChannelGroup;
+import io.netty.handler.ssl.SslHandler;
+import io.netty.util.concurrent.EventExecutorGroup;
 import org.apache.camel.LoggingLevel;
+import org.apache.camel.component.netty.ClientInitializerFactory;
+import org.apache.camel.component.netty.NettyCamelStateCorrelationManager;
+import org.apache.camel.component.netty.NettyConfiguration;
+import org.apache.camel.component.netty.NettyServerBootstrapFactory;
+import org.apache.camel.component.netty.ServerInitializerFactory;
+import org.apache.camel.component.netty.http.NettyHttpBinding;
 import org.apache.camel.component.netty.http.NettyHttpComponent;
+import org.apache.camel.component.netty.http.NettyHttpSecurityConfiguration;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -47,7 +60,7 @@ public class NettyHttpComponentConfiguration
      * To use the NettyConfiguration as configuration when creating endpoints.
      * The option is a org.apache.camel.component.netty.NettyConfiguration type.
      */
-    private String configuration;
+    private NettyConfiguration configuration;
     /**
      * Whether or not to disconnect(close) from Netty Channel right after use.
      * Can be used for both consumer and producer.
@@ -109,7 +122,7 @@ public class NettyHttpComponentConfiguration
      * the server side across the NettyEndpoint. The option is a
      * io.netty.channel.EventLoopGroup type.
      */
-    private String bossGroup;
+    private EventLoopGroup bossGroup;
     /**
      * If sync is enabled then this option dictates NettyConsumer if it should
      * disconnect where there is no reply to send back.
@@ -119,7 +132,7 @@ public class NettyHttpComponentConfiguration
      * To use the given EventExecutorGroup. The option is a
      * io.netty.util.concurrent.EventExecutorGroup type.
      */
-    private String executorService;
+    private EventExecutorGroup executorService;
     /**
      * Sets a maximum thread pool size for the netty consumer ordered thread
      * pool. The default size is 2 x cpu_core plus 1. Setting this value to eg
@@ -135,7 +148,7 @@ public class NettyHttpComponentConfiguration
      * To use a custom NettyServerBootstrapFactory. The option is a
      * org.apache.camel.component.netty.NettyServerBootstrapFactory type.
      */
-    private String nettyServerBootstrapFactory;
+    private NettyServerBootstrapFactory nettyServerBootstrapFactory;
     /**
      * If sync is enabled this option dictates NettyConsumer which logging level
      * to use when logging a there is no reply to send back.
@@ -158,7 +171,7 @@ public class NettyHttpComponentConfiguration
      * To use a custom ServerInitializerFactory. The option is a
      * org.apache.camel.component.netty.ServerInitializerFactory type.
      */
-    private String serverInitializerFactory;
+    private ServerInitializerFactory serverInitializerFactory;
     /**
      * Whether to use ordered thread pool, to ensure events are processed
      * orderly on the same channel.
@@ -191,7 +204,7 @@ public class NettyHttpComponentConfiguration
      * To use a custom ClientInitializerFactory. The option is a
      * org.apache.camel.component.netty.ClientInitializerFactory type.
      */
-    private String clientInitializerFactory;
+    private ClientInitializerFactory clientInitializerFactory;
     /**
      * To use a custom correlation manager to manage how request and reply
      * messages are mapped when using request/reply with the netty producer.
@@ -207,7 +220,7 @@ public class NettyHttpComponentConfiguration
      * also the producerPoolEnabled option for more details. The option is a
      * org.apache.camel.component.netty.NettyCamelStateCorrelationManager type.
      */
-    private String correlationManager;
+    private NettyCamelStateCorrelationManager correlationManager;
     /**
      * Channels can be lazily created to avoid exceptions, if the remote server
      * is not up and running when the Camel producer is started.
@@ -264,12 +277,12 @@ public class NettyHttpComponentConfiguration
      * To use a explicit ChannelGroup. The option is a
      * io.netty.channel.group.ChannelGroup type.
      */
-    private String channelGroup;
+    private ChannelGroup channelGroup;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * headers. The option is a org.apache.camel.spi.HeaderFilterStrategy type.
      */
-    private String headerFilterStrategy;
+    private HeaderFilterStrategy headerFilterStrategy;
     /**
      * Whether to use native transport instead of NIO. Native transport takes
      * advantage of the host operating system and is only supported on some
@@ -283,7 +296,7 @@ public class NettyHttpComponentConfiguration
      * for binding to/from Netty and Camel Message API. The option is a
      * org.apache.camel.component.netty.http.NettyHttpBinding type.
      */
-    private String nettyHttpBinding;
+    private NettyHttpBinding nettyHttpBinding;
     /**
      * Allows to configure additional netty options using option. as prefix. For
      * example option.child.keepAlive=false to set the netty option
@@ -326,7 +339,7 @@ public class NettyHttpComponentConfiguration
      * consumer or producer has their own worker pool with 2 x cpu count core
      * threads. The option is a io.netty.channel.EventLoopGroup type.
      */
-    private String workerGroup;
+    private EventLoopGroup workerGroup;
     /**
      * A list of decoders to be used. You can use a String which have values
      * separated by comma, and have the values be looked up in the Registry.
@@ -374,7 +387,7 @@ public class NettyHttpComponentConfiguration
      * org.apache.camel.component.netty.http.NettyHttpSecurityConfiguration
      * type.
      */
-    private String securityConfiguration;
+    private NettyHttpSecurityConfiguration securityConfiguration;
     /**
      * Security provider to be used for payload encryption. Defaults to SunX509
      * if not set.
@@ -395,12 +408,12 @@ public class NettyHttpComponentConfiguration
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
-    private String sslContextParameters;
+    private SSLContextParameters sslContextParameters;
     /**
      * Reference to a class that could be used to return an SSL Handler. The
      * option is a io.netty.handler.ssl.SslHandler type.
      */
-    private String sslHandler;
+    private SslHandler sslHandler;
     /**
      * Server side certificate keystore to be used for encryption
      */
@@ -416,11 +429,11 @@ public class NettyHttpComponentConfiguration
      */
     private Boolean useGlobalSslContextParameters = false;
 
-    public String getConfiguration() {
+    public NettyConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(NettyConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -496,11 +509,11 @@ public class NettyHttpComponentConfiguration
         this.bossCount = bossCount;
     }
 
-    public String getBossGroup() {
+    public EventLoopGroup getBossGroup() {
         return bossGroup;
     }
 
-    public void setBossGroup(String bossGroup) {
+    public void setBossGroup(EventLoopGroup bossGroup) {
         this.bossGroup = bossGroup;
     }
 
@@ -512,11 +525,11 @@ public class NettyHttpComponentConfiguration
         this.disconnectOnNoReply = disconnectOnNoReply;
     }
 
-    public String getExecutorService() {
+    public EventExecutorGroup getExecutorService() {
         return executorService;
     }
 
-    public void setExecutorService(String executorService) {
+    public void setExecutorService(EventExecutorGroup executorService) {
         this.executorService = executorService;
     }
 
@@ -528,12 +541,12 @@ public class NettyHttpComponentConfiguration
         this.maximumPoolSize = maximumPoolSize;
     }
 
-    public String getNettyServerBootstrapFactory() {
+    public NettyServerBootstrapFactory getNettyServerBootstrapFactory() {
         return nettyServerBootstrapFactory;
     }
 
     public void setNettyServerBootstrapFactory(
-            String nettyServerBootstrapFactory) {
+            NettyServerBootstrapFactory nettyServerBootstrapFactory) {
         this.nettyServerBootstrapFactory = nettyServerBootstrapFactory;
     }
 
@@ -563,11 +576,12 @@ public class NettyHttpComponentConfiguration
         this.serverExceptionCaughtLogLevel = serverExceptionCaughtLogLevel;
     }
 
-    public String getServerInitializerFactory() {
+    public ServerInitializerFactory getServerInitializerFactory() {
         return serverInitializerFactory;
     }
 
-    public void setServerInitializerFactory(String serverInitializerFactory) {
+    public void setServerInitializerFactory(
+            ServerInitializerFactory serverInitializerFactory) {
         this.serverInitializerFactory = serverInitializerFactory;
     }
 
@@ -603,19 +617,21 @@ public class NettyHttpComponentConfiguration
         this.requestTimeout = requestTimeout;
     }
 
-    public String getClientInitializerFactory() {
+    public ClientInitializerFactory getClientInitializerFactory() {
         return clientInitializerFactory;
     }
 
-    public void setClientInitializerFactory(String clientInitializerFactory) {
+    public void setClientInitializerFactory(
+            ClientInitializerFactory clientInitializerFactory) {
         this.clientInitializerFactory = clientInitializerFactory;
     }
 
-    public String getCorrelationManager() {
+    public NettyCamelStateCorrelationManager getCorrelationManager() {
         return correlationManager;
     }
 
-    public void setCorrelationManager(String correlationManager) {
+    public void setCorrelationManager(
+            NettyCamelStateCorrelationManager correlationManager) {
         this.correlationManager = correlationManager;
     }
 
@@ -687,19 +703,20 @@ public class NettyHttpComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getChannelGroup() {
+    public ChannelGroup getChannelGroup() {
         return channelGroup;
     }
 
-    public void setChannelGroup(String channelGroup) {
+    public void setChannelGroup(ChannelGroup channelGroup) {
         this.channelGroup = channelGroup;
     }
 
-    public String getHeaderFilterStrategy() {
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
 
-    public void setHeaderFilterStrategy(String headerFilterStrategy) {
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
     }
 
@@ -711,11 +728,11 @@ public class NettyHttpComponentConfiguration
         this.nativeTransport = nativeTransport;
     }
 
-    public String getNettyHttpBinding() {
+    public NettyHttpBinding getNettyHttpBinding() {
         return nettyHttpBinding;
     }
 
-    public void setNettyHttpBinding(String nettyHttpBinding) {
+    public void setNettyHttpBinding(NettyHttpBinding nettyHttpBinding) {
         this.nettyHttpBinding = nettyHttpBinding;
     }
 
@@ -767,11 +784,11 @@ public class NettyHttpComponentConfiguration
         this.workerCount = workerCount;
     }
 
-    public String getWorkerGroup() {
+    public EventLoopGroup getWorkerGroup() {
         return workerGroup;
     }
 
-    public void setWorkerGroup(String workerGroup) {
+    public void setWorkerGroup(EventLoopGroup workerGroup) {
         this.workerGroup = workerGroup;
     }
 
@@ -839,11 +856,12 @@ public class NettyHttpComponentConfiguration
         this.passphrase = passphrase;
     }
 
-    public String getSecurityConfiguration() {
+    public NettyHttpSecurityConfiguration getSecurityConfiguration() {
         return securityConfiguration;
     }
 
-    public void setSecurityConfiguration(String securityConfiguration) {
+    public void setSecurityConfiguration(
+            NettyHttpSecurityConfiguration securityConfiguration) {
         this.securityConfiguration = securityConfiguration;
     }
 
@@ -871,19 +889,20 @@ public class NettyHttpComponentConfiguration
         this.sslClientCertHeaders = sslClientCertHeaders;
     }
 
-    public String getSslContextParameters() {
+    public SSLContextParameters getSslContextParameters() {
         return sslContextParameters;
     }
 
-    public void setSslContextParameters(String sslContextParameters) {
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
         this.sslContextParameters = sslContextParameters;
     }
 
-    public String getSslHandler() {
+    public SslHandler getSslHandler() {
         return sslHandler;
     }
 
-    public void setSslHandler(String sslHandler) {
+    public void setSslHandler(SslHandler sslHandler) {
         this.sslHandler = sslHandler;
     }
 

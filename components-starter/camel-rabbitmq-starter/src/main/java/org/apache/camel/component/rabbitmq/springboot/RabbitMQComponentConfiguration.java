@@ -18,6 +18,9 @@ package org.apache.camel.component.rabbitmq.springboot;
 
 import java.util.Map;
 import javax.annotation.Generated;
+import javax.net.ssl.TrustManager;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.ExceptionHandler;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -53,7 +56,7 @@ public class RabbitMQComponentConfiguration
      * connection options (connectionTimeout, requestedChannelMax...) set on URI
      * are not used. The option is a com.rabbitmq.client.ConnectionFactory type.
      */
-    private String connectionFactory;
+    private ConnectionFactory connectionFactory;
     /**
      * The name of the dead letter exchange
      */
@@ -271,7 +274,7 @@ public class RabbitMQComponentConfiguration
      * Custom rabbitmq ExceptionHandler for ConnectionFactory. The option is a
      * com.rabbitmq.client.ExceptionHandler type.
      */
-    private String connectionFactoryExceptionHandler;
+    private ExceptionHandler connectionFactoryExceptionHandler;
     /**
      * Connection timeout
      */
@@ -324,7 +327,7 @@ public class RabbitMQComponentConfiguration
      * Configure SSL trust manager, SSL should be enabled for this option to be
      * effective. The option is a javax.net.ssl.TrustManager type.
      */
-    private String trustManager;
+    private TrustManager trustManager;
     /**
      * Username in case of authenticated access
      */
@@ -346,11 +349,11 @@ public class RabbitMQComponentConfiguration
         this.autoDelete = autoDelete;
     }
 
-    public String getConnectionFactory() {
+    public ConnectionFactory getConnectionFactory() {
         return connectionFactory;
     }
 
-    public void setConnectionFactory(String connectionFactory) {
+    public void setConnectionFactory(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
@@ -663,12 +666,12 @@ public class RabbitMQComponentConfiguration
         this.clientProperties = clientProperties;
     }
 
-    public String getConnectionFactoryExceptionHandler() {
+    public ExceptionHandler getConnectionFactoryExceptionHandler() {
         return connectionFactoryExceptionHandler;
     }
 
     public void setConnectionFactoryExceptionHandler(
-            String connectionFactoryExceptionHandler) {
+            ExceptionHandler connectionFactoryExceptionHandler) {
         this.connectionFactoryExceptionHandler = connectionFactoryExceptionHandler;
     }
 
@@ -761,11 +764,11 @@ public class RabbitMQComponentConfiguration
         this.sslProtocol = sslProtocol;
     }
 
-    public String getTrustManager() {
+    public TrustManager getTrustManager() {
         return trustManager;
     }
 
-    public void setTrustManager(String trustManager) {
+    public void setTrustManager(TrustManager trustManager) {
         this.trustManager = trustManager;
     }
 

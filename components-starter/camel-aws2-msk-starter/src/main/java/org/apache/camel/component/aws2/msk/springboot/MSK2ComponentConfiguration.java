@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.msk.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.msk.MSK2Component;
+import org.apache.camel.component.aws2.msk.MSK2Configuration;
 import org.apache.camel.component.aws2.msk.MSK2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.kafka.KafkaClient;
 
 /**
  * Manage AWS MSK instances using AWS SDK version 2.x.
@@ -50,7 +52,7 @@ public class MSK2ComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.msk.MSK2Configuration type.
      */
-    private String configuration;
+    private MSK2Configuration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -66,7 +68,7 @@ public class MSK2ComponentConfiguration
      * To use a existing configured AWS MSK as client. The option is a
      * software.amazon.awssdk.services.kafka.KafkaClient type.
      */
-    private String mskClient;
+    private KafkaClient mskClient;
     /**
      * The operation to perform
      */
@@ -120,11 +122,11 @@ public class MSK2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public MSK2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(MSK2Configuration configuration) {
         this.configuration = configuration;
     }
 
@@ -136,11 +138,11 @@ public class MSK2ComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public String getMskClient() {
+    public KafkaClient getMskClient() {
         return mskClient;
     }
 
-    public void setMskClient(String mskClient) {
+    public void setMskClient(KafkaClient mskClient) {
         this.mskClient = mskClient;
     }
 

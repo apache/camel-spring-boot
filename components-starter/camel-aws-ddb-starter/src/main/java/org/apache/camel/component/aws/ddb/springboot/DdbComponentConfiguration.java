@@ -18,7 +18,9 @@ package org.apache.camel.component.aws.ddb.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import org.apache.camel.component.aws.ddb.DdbComponent;
+import org.apache.camel.component.aws.ddb.DdbConfiguration;
 import org.apache.camel.component.aws.ddb.DdbOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -44,7 +46,7 @@ public class DdbComponentConfiguration
      * To use the AmazonDynamoDB as the client. The option is a
      * com.amazonaws.services.dynamodbv2.AmazonDynamoDB type.
      */
-    private String amazonDDBClient;
+    private AmazonDynamoDB amazonDDBClient;
     /**
      * Setting the autoDiscoverClient mechanism, if true, the component will
      * look for a client instance in the registry automatically otherwise it
@@ -55,7 +57,7 @@ public class DdbComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.ddb.DdbConfiguration type.
      */
-    private String configuration;
+    private DdbConfiguration configuration;
     /**
      * Determines whether or not strong consistency should be enforced when data
      * is read.
@@ -128,11 +130,11 @@ public class DdbComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonDDBClient() {
+    public AmazonDynamoDB getAmazonDDBClient() {
         return amazonDDBClient;
     }
 
-    public void setAmazonDDBClient(String amazonDDBClient) {
+    public void setAmazonDDBClient(AmazonDynamoDB amazonDDBClient) {
         this.amazonDDBClient = amazonDDBClient;
     }
 
@@ -144,11 +146,11 @@ public class DdbComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public DdbConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(DdbConfiguration configuration) {
         this.configuration = configuration;
     }
 

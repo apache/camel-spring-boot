@@ -18,7 +18,10 @@ package org.apache.camel.component.aws.sns.springboot;
 
 import javax.annotation.Generated;
 import com.amazonaws.Protocol;
+import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sqs.AmazonSQS;
 import org.apache.camel.component.aws.sns.SnsComponent;
+import org.apache.camel.component.aws.sns.SnsConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -43,12 +46,12 @@ public class SnsComponentConfiguration
      * To use the AmazonSNS as the client. The option is a
      * com.amazonaws.services.sns.AmazonSNS type.
      */
-    private String amazonSNSClient;
+    private AmazonSNS amazonSNSClient;
     /**
      * An SQS Client to use as bridge between SNS and SQS. The option is a
      * com.amazonaws.services.sqs.AmazonSQS type.
      */
-    private String amazonSQSClient;
+    private AmazonSQS amazonSQSClient;
     /**
      * Setting the autocreation of the topic
      */
@@ -63,7 +66,7 @@ public class SnsComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws.sns.SnsConfiguration type.
      */
-    private String configuration;
+    private SnsConfiguration configuration;
     /**
      * The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a
      * custom CMK.
@@ -138,19 +141,19 @@ public class SnsComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonSNSClient() {
+    public AmazonSNS getAmazonSNSClient() {
         return amazonSNSClient;
     }
 
-    public void setAmazonSNSClient(String amazonSNSClient) {
+    public void setAmazonSNSClient(AmazonSNS amazonSNSClient) {
         this.amazonSNSClient = amazonSNSClient;
     }
 
-    public String getAmazonSQSClient() {
+    public AmazonSQS getAmazonSQSClient() {
         return amazonSQSClient;
     }
 
-    public void setAmazonSQSClient(String amazonSQSClient) {
+    public void setAmazonSQSClient(AmazonSQS amazonSQSClient) {
         this.amazonSQSClient = amazonSQSClient;
     }
 
@@ -170,11 +173,11 @@ public class SnsComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public SnsConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(SnsConfiguration configuration) {
         this.configuration = configuration;
     }
 

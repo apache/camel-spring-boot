@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.firehose.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.firehose.KinesisFirehose2Component;
+import org.apache.camel.component.aws2.firehose.KinesisFirehose2Configuration;
 import org.apache.camel.component.aws2.firehose.KinesisFirehose2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.firehose.FirehoseClient;
 
 /**
  * Produce data to AWS Kinesis Firehose streams using AWS SDK version 2.x.
@@ -45,7 +47,7 @@ public class KinesisFirehose2ComponentConfiguration
      * The option is a software.amazon.awssdk.services.firehose.FirehoseClient
      * type.
      */
-    private String amazonKinesisFirehoseClient;
+    private FirehoseClient amazonKinesisFirehoseClient;
     /**
      * Setting the autoDiscoverClient mechanism, if true, the component will
      * look for a client instance in the registry automatically otherwise it
@@ -57,7 +59,7 @@ public class KinesisFirehose2ComponentConfiguration
      * org.apache.camel.component.aws2.firehose.KinesisFirehose2Configuration
      * type.
      */
-    private String configuration;
+    private KinesisFirehose2Configuration configuration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -111,12 +113,12 @@ public class KinesisFirehose2ComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonKinesisFirehoseClient() {
+    public FirehoseClient getAmazonKinesisFirehoseClient() {
         return amazonKinesisFirehoseClient;
     }
 
     public void setAmazonKinesisFirehoseClient(
-            String amazonKinesisFirehoseClient) {
+            FirehoseClient amazonKinesisFirehoseClient) {
         this.amazonKinesisFirehoseClient = amazonKinesisFirehoseClient;
     }
 
@@ -128,11 +130,11 @@ public class KinesisFirehose2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public KinesisFirehose2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(KinesisFirehose2Configuration configuration) {
         this.configuration = configuration;
     }
 

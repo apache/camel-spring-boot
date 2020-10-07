@@ -18,12 +18,14 @@ package org.apache.camel.component.aws2.athena.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.athena.Athena2Component;
+import org.apache.camel.component.aws2.athena.Athena2Configuration;
 import org.apache.camel.component.aws2.athena.Athena2Operations;
 import org.apache.camel.component.aws2.athena.Athena2OutputType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.athena.AthenaClient;
 import software.amazon.awssdk.services.athena.model.EncryptionOption;
 
 /**
@@ -50,7 +52,7 @@ public class Athena2ComponentConfiguration
      * The AmazonAthena instance to use as the client. The option is a
      * software.amazon.awssdk.services.athena.AthenaClient type.
      */
-    private String amazonAthenaClient;
+    private AthenaClient amazonAthenaClient;
     /**
      * Setting the autoDiscoverClient mechanism, if true, the component will
      * look for a client instance in the registry automatically otherwise it
@@ -61,7 +63,7 @@ public class Athena2ComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws2.athena.Athena2Configuration type.
      */
-    private String configuration;
+    private Athena2Configuration configuration;
     /**
      * The Athena database to use.
      */
@@ -219,11 +221,11 @@ public class Athena2ComponentConfiguration
         this.accessKey = accessKey;
     }
 
-    public String getAmazonAthenaClient() {
+    public AthenaClient getAmazonAthenaClient() {
         return amazonAthenaClient;
     }
 
-    public void setAmazonAthenaClient(String amazonAthenaClient) {
+    public void setAmazonAthenaClient(AthenaClient amazonAthenaClient) {
         this.amazonAthenaClient = amazonAthenaClient;
     }
 
@@ -235,11 +237,11 @@ public class Athena2ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public Athena2Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(Athena2Configuration configuration) {
         this.configuration = configuration;
     }
 

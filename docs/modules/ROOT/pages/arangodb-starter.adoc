@@ -24,7 +24,7 @@ The component supports 13 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.arangodb.configuration* | Component configuration. The option is a org.apache.camel.component.arangodb.ArangoDbConfiguration type. |  | String
+| *camel.component.arangodb.configuration* | Component configuration. The option is a org.apache.camel.component.arangodb.ArangoDbConfiguration type. |  | ArangoDbConfiguration
 | *camel.component.arangodb.document-collection* | Collection name, when using ArangoDb as a Document Database. Set the documentCollection name when using the CRUD operation on the document database collections (SAVE_DOCUMENT , FIND_DOCUMENT_BY_KEY, UPDATE_DOCUMENT, DELETE_DOCUMENT). |  | String
 | *camel.component.arangodb.edge-collection* | Collection name of vertices, when using ArangoDb as a Graph Database. Set the edgeCollection name to perform CRUD operation on edges using these operations : SAVE_VERTEX, FIND_VERTEX_BY_KEY, UPDATE_VERTEX, DELETE_VERTEX. The graph attribute is mandatory. |  | String
 | *camel.component.arangodb.enabled* | Whether to enable auto configuration of the arangodb component. This is enabled by default. |  | Boolean

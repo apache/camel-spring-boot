@@ -17,6 +17,7 @@
 package org.apache.camel.component.mongodb.springboot;
 
 import javax.annotation.Generated;
+import com.mongodb.client.MongoClient;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -42,7 +43,7 @@ public class MongoDbComponentConfiguration
      * component will share this connection client. The option is a
      * com.mongodb.client.MongoClient type.
      */
-    private String mongoConnection;
+    private MongoClient mongoConnection;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -70,11 +71,11 @@ public class MongoDbComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getMongoConnection() {
+    public MongoClient getMongoConnection() {
         return mongoConnection;
     }
 
-    public void setMongoConnection(String mongoConnection) {
+    public void setMongoConnection(MongoClient mongoConnection) {
         this.mongoConnection = mongoConnection;
     }
 

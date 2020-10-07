@@ -18,6 +18,8 @@ package org.apache.camel.component.ignite.compute.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.ignite.Ignite;
+import org.apache.ignite.configuration.IgniteConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -41,17 +43,17 @@ public class IgniteComputeComponentConfiguration
      * The resource from where to load the configuration. It can be a: URL,
      * String or InputStream type. The option is a java.lang.Object type.
      */
-    private String configurationResource;
+    private Object configurationResource;
     /**
      * To use an existing Ignite instance. The option is a
      * org.apache.ignite.Ignite type.
      */
-    private String ignite;
+    private Ignite ignite;
     /**
      * Allows the user to set a programmatic ignite configuration. The option is
      * a org.apache.ignite.configuration.IgniteConfiguration type.
      */
-    private String igniteConfiguration;
+    private IgniteConfiguration igniteConfiguration;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -70,27 +72,27 @@ public class IgniteComputeComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
 
-    public String getConfigurationResource() {
+    public Object getConfigurationResource() {
         return configurationResource;
     }
 
-    public void setConfigurationResource(String configurationResource) {
+    public void setConfigurationResource(Object configurationResource) {
         this.configurationResource = configurationResource;
     }
 
-    public String getIgnite() {
+    public Ignite getIgnite() {
         return ignite;
     }
 
-    public void setIgnite(String ignite) {
+    public void setIgnite(Ignite ignite) {
         this.ignite = ignite;
     }
 
-    public String getIgniteConfiguration() {
+    public IgniteConfiguration getIgniteConfiguration() {
         return igniteConfiguration;
     }
 
-    public void setIgniteConfiguration(String igniteConfiguration) {
+    public void setIgniteConfiguration(IgniteConfiguration igniteConfiguration) {
         this.igniteConfiguration = igniteConfiguration;
     }
 

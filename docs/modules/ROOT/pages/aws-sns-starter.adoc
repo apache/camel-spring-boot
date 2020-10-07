@@ -25,11 +25,11 @@ The component supports 21 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.aws-sns.access-key* | Amazon AWS Access Key |  | String
-| *camel.component.aws-sns.amazon-s-n-s-client* | To use the AmazonSNS as the client. The option is a com.amazonaws.services.sns.AmazonSNS type. |  | String
-| *camel.component.aws-sns.amazon-s-q-s-client* | An SQS Client to use as bridge between SNS and SQS. The option is a com.amazonaws.services.sqs.AmazonSQS type. |  | String
+| *camel.component.aws-sns.amazon-s-n-s-client* | To use the AmazonSNS as the client. The option is a com.amazonaws.services.sns.AmazonSNS type. |  | AmazonSNS
+| *camel.component.aws-sns.amazon-s-q-s-client* | An SQS Client to use as bridge between SNS and SQS. The option is a com.amazonaws.services.sqs.AmazonSQS type. |  | AmazonSQS
 | *camel.component.aws-sns.auto-create-topic* | Setting the autocreation of the topic | true | Boolean
 | *camel.component.aws-sns.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
-| *camel.component.aws-sns.configuration* | The component configuration. The option is a org.apache.camel.component.aws.sns.SnsConfiguration type. |  | String
+| *camel.component.aws-sns.configuration* | The component configuration. The option is a org.apache.camel.component.aws.sns.SnsConfiguration type. |  | SnsConfiguration
 | *camel.component.aws-sns.enabled* | Whether to enable auto configuration of the aws-sns component. This is enabled by default. |  | Boolean
 | *camel.component.aws-sns.kms-master-key-id* | The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. |  | String
 | *camel.component.aws-sns.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean

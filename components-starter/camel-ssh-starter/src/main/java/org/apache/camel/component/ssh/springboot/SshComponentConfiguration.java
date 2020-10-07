@@ -17,7 +17,9 @@
 package org.apache.camel.component.ssh.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.ssh.SshConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.sshd.common.keyprovider.KeyPairProvider;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
@@ -93,7 +95,7 @@ public class SshComponentConfiguration
      * Component configuration. The option is a
      * org.apache.camel.component.ssh.SshConfiguration type.
      */
-    private String configuration;
+    private SshConfiguration configuration;
     /**
      * Sets the shellPrompt to be dropped when response is read after command
      * execution
@@ -120,7 +122,7 @@ public class SshComponentConfiguration
      * Certificates to the remote SSH Server. The option is a
      * org.apache.sshd.common.keyprovider.KeyPairProvider type.
      */
-    private String keyPairProvider;
+    private KeyPairProvider keyPairProvider;
     /**
      * Sets the key type to pass to the KeyPairProvider as part of
      * authentication. KeyPairProvider.loadKey(...) will be passed this value.
@@ -206,11 +208,11 @@ public class SshComponentConfiguration
         this.channelType = channelType;
     }
 
-    public String getConfiguration() {
+    public SshConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(SshConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -246,11 +248,11 @@ public class SshComponentConfiguration
         this.certResourcePassword = certResourcePassword;
     }
 
-    public String getKeyPairProvider() {
+    public KeyPairProvider getKeyPairProvider() {
         return keyPairProvider;
     }
 
-    public void setKeyPairProvider(String keyPairProvider) {
+    public void setKeyPairProvider(KeyPairProvider keyPairProvider) {
         this.keyPairProvider = keyPairProvider;
     }
 

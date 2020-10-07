@@ -17,6 +17,7 @@
 package org.apache.camel.component.jt400.springboot;
 
 import javax.annotation.Generated;
+import com.ibm.as400.access.AS400ConnectionPool;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -70,7 +71,7 @@ public class Jt400ComponentConfiguration
      * provides a pool, it would be wasteful for Camel to initialize and keep an
      * idle pool. The option is a com.ibm.as400.access.AS400ConnectionPool type.
      */
-    private String connectionPool;
+    private AS400ConnectionPool connectionPool;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -99,11 +100,11 @@ public class Jt400ComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConnectionPool() {
+    public AS400ConnectionPool getConnectionPool() {
         return connectionPool;
     }
 
-    public void setConnectionPool(String connectionPool) {
+    public void setConnectionPool(AS400ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
 }

@@ -20,7 +20,9 @@ import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.component.ehcache.EhcacheComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.ehcache.CacheManager;
 import org.ehcache.config.CacheConfiguration;
+import org.ehcache.config.Configuration;
 import org.ehcache.event.EventFiring;
 import org.ehcache.event.EventOrdering;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -45,12 +47,12 @@ public class EhcacheComponentConfiguration
     /**
      * The cache manager. The option is a org.ehcache.CacheManager type.
      */
-    private String cacheManager;
+    private CacheManager cacheManager;
     /**
      * The cache manager configuration. The option is a
      * org.ehcache.config.Configuration type.
      */
-    private String cacheManagerConfiguration;
+    private Configuration cacheManagerConfiguration;
     /**
      * URI pointing to the Ehcache XML configuration file's location
      */
@@ -93,7 +95,7 @@ public class EhcacheComponentConfiguration
      * header, then the key from the header takes precedence. The option is a
      * java.lang.Object type.
      */
-    private String key;
+    private Object key;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -115,7 +117,7 @@ public class EhcacheComponentConfiguration
      * The default cache configuration to be used to create caches. The option
      * is a org.ehcache.config.CacheConfiguration type.
      */
-    private String configuration;
+    private CacheConfiguration configuration;
     /**
      * A map of cache configuration to be used to create caches.
      */
@@ -129,19 +131,20 @@ public class EhcacheComponentConfiguration
      */
     private String valueType;
 
-    public String getCacheManager() {
+    public CacheManager getCacheManager() {
         return cacheManager;
     }
 
-    public void setCacheManager(String cacheManager) {
+    public void setCacheManager(CacheManager cacheManager) {
         this.cacheManager = cacheManager;
     }
 
-    public String getCacheManagerConfiguration() {
+    public Configuration getCacheManagerConfiguration() {
         return cacheManagerConfiguration;
     }
 
-    public void setCacheManagerConfiguration(String cacheManagerConfiguration) {
+    public void setCacheManagerConfiguration(
+            Configuration cacheManagerConfiguration) {
         this.cacheManagerConfiguration = cacheManagerConfiguration;
     }
 
@@ -201,11 +204,11 @@ public class EhcacheComponentConfiguration
         this.action = action;
     }
 
-    public String getKey() {
+    public Object getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(Object key) {
         this.key = key;
     }
 
@@ -228,11 +231,11 @@ public class EhcacheComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public CacheConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(CacheConfiguration configuration) {
         this.configuration = configuration;
     }
 

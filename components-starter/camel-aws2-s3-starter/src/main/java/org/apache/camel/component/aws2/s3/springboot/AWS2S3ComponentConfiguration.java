@@ -18,11 +18,13 @@ package org.apache.camel.component.aws2.s3.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.s3.AWS2S3Component;
+import org.apache.camel.component.aws2.s3.AWS2S3Configuration;
 import org.apache.camel.component.aws2.s3.AWS2S3Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.s3.S3Client;
 
 /**
  * Store and retrieve objects from AWS S3 Storage Service using AWS SDK version
@@ -45,7 +47,7 @@ public class AWS2S3ComponentConfiguration
      * Reference to a com.amazonaws.services.s3.AmazonS3 in the registry. The
      * option is a software.amazon.awssdk.services.s3.S3Client type.
      */
-    private String amazonS3Client;
+    private S3Client amazonS3Client;
     /**
      * Setting the autocreation of the S3 bucket bucketName. This will apply
      * also in case of moveAfterRead option enabled and it will create the
@@ -62,7 +64,7 @@ public class AWS2S3ComponentConfiguration
      * The component configuration. The option is a
      * org.apache.camel.component.aws2.s3.AWS2S3Configuration type.
      */
-    private String configuration;
+    private AWS2S3Configuration configuration;
     /**
      * Set the need for overidding the endpoint. This option needs to be used in
      * combination with uriEndpointOverride option
@@ -268,11 +270,11 @@ public class AWS2S3ComponentConfiguration
      */
     private String secretKey;
 
-    public String getAmazonS3Client() {
+    public S3Client getAmazonS3Client() {
         return amazonS3Client;
     }
 
-    public void setAmazonS3Client(String amazonS3Client) {
+    public void setAmazonS3Client(S3Client amazonS3Client) {
         this.amazonS3Client = amazonS3Client;
     }
 
@@ -292,11 +294,11 @@ public class AWS2S3ComponentConfiguration
         this.autoDiscoverClient = autoDiscoverClient;
     }
 
-    public String getConfiguration() {
+    public AWS2S3Configuration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(AWS2S3Configuration configuration) {
         this.configuration = configuration;
     }
 

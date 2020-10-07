@@ -17,6 +17,8 @@
 package org.apache.camel.component.google.sheets.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.google.sheets.GoogleSheetsClientFactory;
+import org.apache.camel.component.google.sheets.GoogleSheetsConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -49,7 +51,7 @@ public class GoogleSheetsComponentConfiguration
      * To use the shared configuration. The option is a
      * org.apache.camel.component.google.sheets.GoogleSheetsConfiguration type.
      */
-    private String configuration;
+    private GoogleSheetsConfiguration configuration;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -88,7 +90,7 @@ public class GoogleSheetsComponentConfiguration
      * Will by default use BatchGoogleSheetsClientFactory. The option is a
      * org.apache.camel.component.google.sheets.GoogleSheetsClientFactory type.
      */
-    private String clientFactory;
+    private GoogleSheetsClientFactory clientFactory;
     /**
      * OAuth 2 access token. This typically expires after an hour so
      * refreshToken is recommended for long term usage.
@@ -121,11 +123,11 @@ public class GoogleSheetsComponentConfiguration
         this.clientId = clientId;
     }
 
-    public String getConfiguration() {
+    public GoogleSheetsConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(GoogleSheetsConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -164,11 +166,11 @@ public class GoogleSheetsComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getClientFactory() {
+    public GoogleSheetsClientFactory getClientFactory() {
         return clientFactory;
     }
 
-    public void setClientFactory(String clientFactory) {
+    public void setClientFactory(GoogleSheetsClientFactory clientFactory) {
         this.clientFactory = clientFactory;
     }
 

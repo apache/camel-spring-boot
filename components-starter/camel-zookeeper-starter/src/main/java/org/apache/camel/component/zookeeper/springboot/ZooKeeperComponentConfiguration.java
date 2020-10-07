@@ -17,6 +17,7 @@
 package org.apache.camel.component.zookeeper.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.zookeeper.ZooKeeperConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -96,7 +97,7 @@ public class ZooKeeperComponentConfiguration
      * To use a shared ZooKeeperConfiguration. The option is a
      * org.apache.camel.component.zookeeper.ZooKeeperConfiguration type.
      */
-    private String configuration;
+    private ZooKeeperConfiguration configuration;
 
     public Boolean getListChildren() {
         return listChildren;
@@ -181,11 +182,11 @@ public class ZooKeeperComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getConfiguration() {
+    public ZooKeeperConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(String configuration) {
+    public void setConfiguration(ZooKeeperConfiguration configuration) {
         this.configuration = configuration;
     }
 }
