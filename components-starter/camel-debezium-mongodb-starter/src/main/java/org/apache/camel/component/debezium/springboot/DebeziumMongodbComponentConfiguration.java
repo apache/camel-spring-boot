@@ -123,14 +123,15 @@ public class DebeziumMongodbComponentConfiguration
     @Deprecated
     private Boolean basicPropertyBinding = false;
     /**
-     * Description is not available here, please check Debezium website for
-     * corresponding key 'collection.blacklist' description.
+     * A comma-separated list of regular expressions that match the collection
+     * names for which changes are to be excluded
      */
-    private String collectionBlacklist;
+    private String collectionExcludeList;
     /**
-     * The collections for which changes are to be captured
+     * A comma-separated list of regular expressions that match the collection
+     * names for which changes are to be captured
      */
-    private String collectionWhitelist;
+    private String collectionIncludeList;
     /**
      * The initial delay when trying to reconnect to a primary after a
      * connection cannot be made or when no primary is available. Defaults to 1
@@ -158,17 +159,19 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String converters;
     /**
-     * The databases for which changes are to be excluded
+     * A comma-separated list of regular expressions that match the database
+     * names for which changes are to be excluded
      */
-    private String databaseBlacklist;
+    private String databaseExcludeList;
     /**
      * The path to the file that will be used to record the database history
      */
     private String databaseHistoryFileFilename;
     /**
-     * The databases for which changes are to be captured
+     * A comma-separated list of regular expressions that match the database
+     * names for which changes are to be captured
      */
-    private String databaseWhitelist;
+    private String databaseIncludeList;
     /**
      * Specify how failures during processing of events (i.e. when encountering
      * a corrupted event) should be handled, including:'fail' (the default) an
@@ -179,10 +182,10 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String eventProcessingFailureHandlingMode = "fail";
     /**
-     * Description is not available here, please check Debezium website for
-     * corresponding key 'field.blacklist' description.
+     * A comma-separated list of the fully-qualified names of fields that should
+     * be excluded from change event message values
      */
-    private String fieldBlacklist;
+    private String fieldExcludeList;
     /**
      * Description is not available here, please check Debezium website for
      * corresponding key 'field.renames' description.
@@ -220,6 +223,10 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String mongodbAuthsource = "admin";
     /**
+     * The connection timeout in milliseconds. The option is a int type.
+     */
+    private String mongodbConnectTimeoutMs = "10s";
+    /**
      * The hostname and port pairs (in the form 'host' or 'host:port') of the
      * MongoDB server(s) in the replica set.
      */
@@ -243,10 +250,18 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String mongodbPassword;
     /**
-     * Frequency in seconds to look for new, removed, or changed replica sets.
-     * Defaults to 30 seconds.
+     * Frequency in milliseconds to look for new, removed, or changed replica
+     * sets. Defaults to 30000 milliseconds. The option is a long type.
      */
-    private Integer mongodbPollIntervalSec = 30;
+    private String mongodbPollIntervalMs = "30s";
+    /**
+     * The server selection timeout in milliseconds. The option is a int type.
+     */
+    private String mongodbServerSelectionTimeoutMs = "30s";
+    /**
+     * The socket timeout in milliseconds. The option is a int type.
+     */
+    private String mongodbSocketTimeoutMs = "0ms";
     /**
      * Should connector use SSL to connect to MongoDB instances
      */
@@ -269,6 +284,16 @@ public class DebeziumMongodbComponentConfiguration
      * Enables transaction metadata extraction together with event counting
      */
     private Boolean provideTransactionMetadata = false;
+    /**
+     * The maximum number of records that should be loaded into memory while
+     * streaming. A value of 0 uses the default JDBC fetch size.
+     */
+    private Integer queryFetchSize = 0;
+    /**
+     * Time to wait before restarting connector after retriable exception
+     * occurs. Defaults to 10000ms. The option is a long type.
+     */
+    private String retriableRestartConnectorWaitMs = "10s";
     /**
      * Whether field names will be sanitized to Avro naming conventions
      */
@@ -426,20 +451,20 @@ public class DebeziumMongodbComponentConfiguration
         this.basicPropertyBinding = basicPropertyBinding;
     }
 
-    public String getCollectionBlacklist() {
-        return collectionBlacklist;
+    public String getCollectionExcludeList() {
+        return collectionExcludeList;
     }
 
-    public void setCollectionBlacklist(String collectionBlacklist) {
-        this.collectionBlacklist = collectionBlacklist;
+    public void setCollectionExcludeList(String collectionExcludeList) {
+        this.collectionExcludeList = collectionExcludeList;
     }
 
-    public String getCollectionWhitelist() {
-        return collectionWhitelist;
+    public String getCollectionIncludeList() {
+        return collectionIncludeList;
     }
 
-    public void setCollectionWhitelist(String collectionWhitelist) {
-        this.collectionWhitelist = collectionWhitelist;
+    public void setCollectionIncludeList(String collectionIncludeList) {
+        this.collectionIncludeList = collectionIncludeList;
     }
 
     public String getConnectBackoffInitialDelayMs() {
@@ -475,12 +500,12 @@ public class DebeziumMongodbComponentConfiguration
         this.converters = converters;
     }
 
-    public String getDatabaseBlacklist() {
-        return databaseBlacklist;
+    public String getDatabaseExcludeList() {
+        return databaseExcludeList;
     }
 
-    public void setDatabaseBlacklist(String databaseBlacklist) {
-        this.databaseBlacklist = databaseBlacklist;
+    public void setDatabaseExcludeList(String databaseExcludeList) {
+        this.databaseExcludeList = databaseExcludeList;
     }
 
     public String getDatabaseHistoryFileFilename() {
@@ -492,12 +517,12 @@ public class DebeziumMongodbComponentConfiguration
         this.databaseHistoryFileFilename = databaseHistoryFileFilename;
     }
 
-    public String getDatabaseWhitelist() {
-        return databaseWhitelist;
+    public String getDatabaseIncludeList() {
+        return databaseIncludeList;
     }
 
-    public void setDatabaseWhitelist(String databaseWhitelist) {
-        this.databaseWhitelist = databaseWhitelist;
+    public void setDatabaseIncludeList(String databaseIncludeList) {
+        this.databaseIncludeList = databaseIncludeList;
     }
 
     public String getEventProcessingFailureHandlingMode() {
@@ -509,12 +534,12 @@ public class DebeziumMongodbComponentConfiguration
         this.eventProcessingFailureHandlingMode = eventProcessingFailureHandlingMode;
     }
 
-    public String getFieldBlacklist() {
-        return fieldBlacklist;
+    public String getFieldExcludeList() {
+        return fieldExcludeList;
     }
 
-    public void setFieldBlacklist(String fieldBlacklist) {
-        this.fieldBlacklist = fieldBlacklist;
+    public void setFieldExcludeList(String fieldExcludeList) {
+        this.fieldExcludeList = fieldExcludeList;
     }
 
     public String getFieldRenames() {
@@ -573,6 +598,14 @@ public class DebeziumMongodbComponentConfiguration
         this.mongodbAuthsource = mongodbAuthsource;
     }
 
+    public String getMongodbConnectTimeoutMs() {
+        return mongodbConnectTimeoutMs;
+    }
+
+    public void setMongodbConnectTimeoutMs(String mongodbConnectTimeoutMs) {
+        this.mongodbConnectTimeoutMs = mongodbConnectTimeoutMs;
+    }
+
     public String getMongodbHosts() {
         return mongodbHosts;
     }
@@ -605,12 +638,29 @@ public class DebeziumMongodbComponentConfiguration
         this.mongodbPassword = mongodbPassword;
     }
 
-    public Integer getMongodbPollIntervalSec() {
-        return mongodbPollIntervalSec;
+    public String getMongodbPollIntervalMs() {
+        return mongodbPollIntervalMs;
     }
 
-    public void setMongodbPollIntervalSec(Integer mongodbPollIntervalSec) {
-        this.mongodbPollIntervalSec = mongodbPollIntervalSec;
+    public void setMongodbPollIntervalMs(String mongodbPollIntervalMs) {
+        this.mongodbPollIntervalMs = mongodbPollIntervalMs;
+    }
+
+    public String getMongodbServerSelectionTimeoutMs() {
+        return mongodbServerSelectionTimeoutMs;
+    }
+
+    public void setMongodbServerSelectionTimeoutMs(
+            String mongodbServerSelectionTimeoutMs) {
+        this.mongodbServerSelectionTimeoutMs = mongodbServerSelectionTimeoutMs;
+    }
+
+    public String getMongodbSocketTimeoutMs() {
+        return mongodbSocketTimeoutMs;
+    }
+
+    public void setMongodbSocketTimeoutMs(String mongodbSocketTimeoutMs) {
+        this.mongodbSocketTimeoutMs = mongodbSocketTimeoutMs;
     }
 
     public Boolean getMongodbSslEnabled() {
@@ -652,6 +702,23 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setProvideTransactionMetadata(Boolean provideTransactionMetadata) {
         this.provideTransactionMetadata = provideTransactionMetadata;
+    }
+
+    public Integer getQueryFetchSize() {
+        return queryFetchSize;
+    }
+
+    public void setQueryFetchSize(Integer queryFetchSize) {
+        this.queryFetchSize = queryFetchSize;
+    }
+
+    public String getRetriableRestartConnectorWaitMs() {
+        return retriableRestartConnectorWaitMs;
+    }
+
+    public void setRetriableRestartConnectorWaitMs(
+            String retriableRestartConnectorWaitMs) {
+        this.retriableRestartConnectorWaitMs = retriableRestartConnectorWaitMs;
     }
 
     public Boolean getSanitizeFieldNames() {

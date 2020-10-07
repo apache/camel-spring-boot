@@ -131,10 +131,27 @@ public class DebeziumPostgresComponentConfiguration
     private String binaryHandlingMode = "bytes";
     /**
      * Regular expressions matching columns to exclude from change events
+     * (deprecated, use column.exclude.list instead)
      */
     private String columnBlacklist;
     /**
+     * Regular expressions matching columns to exclude from change events
+     */
+    private String columnExcludeList;
+    /**
      * Regular expressions matching columns to include in change events
+     */
+    private String columnIncludeList;
+    /**
+     * A comma-separated list of regular expressions matching fully-qualified
+     * names of columns that adds the columns original type and original length
+     * as parameters to the corresponding field schemas in the emitted change
+     * records.
+     */
+    private String columnPropagateSourceType;
+    /**
+     * Regular expressions matching columns to include in change events
+     * (deprecated, use column.include.list instead)
      */
     private String columnWhitelist;
     /**
@@ -227,6 +244,13 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String databaseUser;
     /**
+     * A comma-separated list of regular expressions matching the
+     * database-specific data type names that adds the data type's original type
+     * and original length as parameters to the corresponding field schemas in
+     * the emitted change records.
+     */
+    private String datatypePropagateSourceType;
+    /**
      * Specify how DECIMAL and NUMERIC columns should be represented in change
      * events, including:'precise' (the default) uses java.math.BigDecimal to
      * represent values, which are encoded in the change events using a binary
@@ -246,7 +270,7 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String eventProcessingFailureHandlingMode = "fail";
     /**
-     * The query executed with every heartbeat. Defaults to an empty string.
+     * The query executed with every heartbeat.
      */
     private String heartbeatActionQuery;
     /**
@@ -329,7 +353,7 @@ public class DebeziumPostgresComponentConfiguration
      * exists, it will be used. i.e CREATE PUBLICATION FOR ALL TABLES;FILTERED -
      * If no publication exists, the connector will create a new publication for
      * all those tables matchingthe current filter configuration (see
-     * table/database whitelist/blacklist properties). If the publication
+     * table/database include/exclude list properties). If the publication
      * already exists, it will be used. i.e CREATE PUBLICATION FOR TABLE
      */
     private String publicationAutocreateMode = "all_tables";
@@ -339,13 +363,32 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String publicationName = "dbz_publication";
     /**
+     * The maximum number of records that should be loaded into memory while
+     * streaming. A value of 0 uses the default JDBC fetch size.
+     */
+    private Integer queryFetchSize = 0;
+    /**
+     * Time to wait before restarting connector after retriable exception
+     * occurs. Defaults to 10000ms. The option is a long type.
+     */
+    private String retriableRestartConnectorWaitMs = "10s";
+    /**
      * Whether field names will be sanitized to Avro naming conventions
      */
     private Boolean sanitizeFieldNames = false;
     /**
-     * The schemas for which events must not be captured
+     * The schemas for which events must not be captured (deprecated, use
+     * schema.exclude.list instead)
      */
     private String schemaBlacklist;
+    /**
+     * The schemas for which events must not be captured
+     */
+    private String schemaExcludeList;
+    /**
+     * The schemas for which events should be captured
+     */
+    private String schemaIncludeList;
     /**
      * Specify the conditions that trigger a refresh of the in-memory schema for
      * a table. 'columns_diff' (the default) is the safest mode, ensuring the
@@ -361,7 +404,8 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String schemaRefreshMode = "columns_diff";
     /**
-     * The schemas for which events should be captured
+     * The schemas for which events should be captured (deprecated, use
+     * schema.include.list instead)
      */
     private String schemaWhitelist;
     /**
@@ -464,16 +508,27 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String statusUpdateIntervalMs = "10s";
     /**
-     * Description is not available here, please check Debezium website for
-     * corresponding key 'table.blacklist' description.
+     * A comma-separated list of regular expressions that match the
+     * fully-qualified names of tables to be excluded from monitoring
+     * (deprecated, use table.exclude.list instead)
      */
     private String tableBlacklist;
+    /**
+     * A comma-separated list of regular expressions that match the
+     * fully-qualified names of tables to be excluded from monitoring
+     */
+    private String tableExcludeList;
     /**
      * Flag specifying whether built-in tables should be ignored.
      */
     private Boolean tableIgnoreBuiltin = true;
     /**
      * The tables for which changes are to be captured
+     */
+    private String tableIncludeList;
+    /**
+     * The tables for which changes are to be captured (deprecated, use
+     * table.include.list instead)
      */
     private String tableWhitelist;
     /**
@@ -489,7 +544,7 @@ public class DebeziumPostgresComponentConfiguration
     private String timePrecisionMode = "adaptive";
     /**
      * Specify the constant that will be provided by Debezium to indicate that
-     * the original value is a toasted value not provided by the database.If
+     * the original value is a toasted value not provided by the database. If
      * starts with 'hex:' prefix it is expected that the rest of the string
      * repesents hexadecimally encoded octets.
      */
@@ -646,6 +701,30 @@ public class DebeziumPostgresComponentConfiguration
         this.columnBlacklist = columnBlacklist;
     }
 
+    public String getColumnExcludeList() {
+        return columnExcludeList;
+    }
+
+    public void setColumnExcludeList(String columnExcludeList) {
+        this.columnExcludeList = columnExcludeList;
+    }
+
+    public String getColumnIncludeList() {
+        return columnIncludeList;
+    }
+
+    public void setColumnIncludeList(String columnIncludeList) {
+        this.columnIncludeList = columnIncludeList;
+    }
+
+    public String getColumnPropagateSourceType() {
+        return columnPropagateSourceType;
+    }
+
+    public void setColumnPropagateSourceType(String columnPropagateSourceType) {
+        this.columnPropagateSourceType = columnPropagateSourceType;
+    }
+
     public String getColumnWhitelist() {
         return columnWhitelist;
     }
@@ -783,6 +862,15 @@ public class DebeziumPostgresComponentConfiguration
         this.databaseUser = databaseUser;
     }
 
+    public String getDatatypePropagateSourceType() {
+        return datatypePropagateSourceType;
+    }
+
+    public void setDatatypePropagateSourceType(
+            String datatypePropagateSourceType) {
+        this.datatypePropagateSourceType = datatypePropagateSourceType;
+    }
+
     public String getDecimalHandlingMode() {
         return decimalHandlingMode;
     }
@@ -912,6 +1000,23 @@ public class DebeziumPostgresComponentConfiguration
         this.publicationName = publicationName;
     }
 
+    public Integer getQueryFetchSize() {
+        return queryFetchSize;
+    }
+
+    public void setQueryFetchSize(Integer queryFetchSize) {
+        this.queryFetchSize = queryFetchSize;
+    }
+
+    public String getRetriableRestartConnectorWaitMs() {
+        return retriableRestartConnectorWaitMs;
+    }
+
+    public void setRetriableRestartConnectorWaitMs(
+            String retriableRestartConnectorWaitMs) {
+        this.retriableRestartConnectorWaitMs = retriableRestartConnectorWaitMs;
+    }
+
     public Boolean getSanitizeFieldNames() {
         return sanitizeFieldNames;
     }
@@ -926,6 +1031,22 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setSchemaBlacklist(String schemaBlacklist) {
         this.schemaBlacklist = schemaBlacklist;
+    }
+
+    public String getSchemaExcludeList() {
+        return schemaExcludeList;
+    }
+
+    public void setSchemaExcludeList(String schemaExcludeList) {
+        this.schemaExcludeList = schemaExcludeList;
+    }
+
+    public String getSchemaIncludeList() {
+        return schemaIncludeList;
+    }
+
+    public void setSchemaIncludeList(String schemaIncludeList) {
+        this.schemaIncludeList = schemaIncludeList;
     }
 
     public String getSchemaRefreshMode() {
@@ -1065,12 +1186,28 @@ public class DebeziumPostgresComponentConfiguration
         this.tableBlacklist = tableBlacklist;
     }
 
+    public String getTableExcludeList() {
+        return tableExcludeList;
+    }
+
+    public void setTableExcludeList(String tableExcludeList) {
+        this.tableExcludeList = tableExcludeList;
+    }
+
     public Boolean getTableIgnoreBuiltin() {
         return tableIgnoreBuiltin;
     }
 
     public void setTableIgnoreBuiltin(Boolean tableIgnoreBuiltin) {
         this.tableIgnoreBuiltin = tableIgnoreBuiltin;
+    }
+
+    public String getTableIncludeList() {
+        return tableIncludeList;
+    }
+
+    public void setTableIncludeList(String tableIncludeList) {
+        this.tableIncludeList = tableIncludeList;
     }
 
     public String getTableWhitelist() {

@@ -69,6 +69,15 @@ public class XPathLanguageConfiguration
      */
     private Boolean threadSafety = false;
     /**
+     * Whether to enable pre-compiling the xpath expression during
+     * initialization phase. pre-compile is enabled by default. This can be used
+     * to turn off, for example in cases the compilation phase is desired at the
+     * starting phase, such as if the application is pre-built with graalvm
+     * which would then load the xpath factory of the built operating system,
+     * and not a JVM runtime.
+     */
+    private Boolean preCompile = true;
+    /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
      */
@@ -120,6 +129,14 @@ public class XPathLanguageConfiguration
 
     public void setThreadSafety(Boolean threadSafety) {
         this.threadSafety = threadSafety;
+    }
+
+    public Boolean getPreCompile() {
+        return preCompile;
+    }
+
+    public void setPreCompile(Boolean preCompile) {
+        this.preCompile = preCompile;
     }
 
     public Boolean getTrim() {

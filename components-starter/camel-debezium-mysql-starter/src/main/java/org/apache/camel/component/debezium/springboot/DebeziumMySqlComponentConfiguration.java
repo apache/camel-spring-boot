@@ -148,8 +148,17 @@ public class DebeziumMySqlComponentConfiguration
     private Integer binlogBufferSize = 0;
     /**
      * Regular expressions matching columns to exclude from change events
+     * (deprecated, use column.exclude.list instead)
      */
     private String columnBlacklist;
+    /**
+     * Regular expressions matching columns to exclude from change events
+     */
+    private String columnExcludeList;
+    /**
+     * Regular expressions matching columns to include in change events
+     */
+    private String columnIncludeList;
     /**
      * Whether a separate thread should be used to ensure the connection is kept
      * alive.
@@ -166,10 +175,10 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String connectTimeoutMs = "30s";
     /**
-     * Description is not available here, please check Debezium website for
-     * corresponding key 'database.blacklist' description.
+     * A comma-separated list of regular expressions that match database names
+     * to be excluded from monitoring
      */
-    private String databaseBlacklist;
+    private String databaseExcludeList;
     /**
      * The name of the DatabaseHistory class that should be used to store and
      * recover database schema changes. The configuration properties for the
@@ -219,6 +228,10 @@ public class DebeziumMySqlComponentConfiguration
      * Resolvable hostname or IP address of the MySQL database server.
      */
     private String databaseHostname;
+    /**
+     * The databases for which changes are to be captured
+     */
+    private String databaseIncludeList;
     /**
      * A semicolon separated list of SQL statements to be executed when a JDBC
      * connection (not binlog reading connection) to the database is
@@ -307,10 +320,6 @@ public class DebeziumMySqlComponentConfiguration
      * database.
      */
     private String databaseUser;
-    /**
-     * The databases for which changes are to be captured
-     */
-    private String databaseWhitelist;
     /**
      * Specify how DECIMAL and NUMERIC columns should be represented in change
      * events, including:'precise' (the default) uses java.math.BigDecimal to
@@ -522,16 +531,27 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String sourceStructVersion = "v2";
     /**
-     * Description is not available here, please check Debezium website for
-     * corresponding key 'table.blacklist' description.
+     * A comma-separated list of regular expressions that match the
+     * fully-qualified names of tables to be excluded from monitoring
+     * (deprecated, use table.exclude.list instead)
      */
     private String tableBlacklist;
+    /**
+     * A comma-separated list of regular expressions that match the
+     * fully-qualified names of tables to be excluded from monitoring
+     */
+    private String tableExcludeList;
     /**
      * Flag specifying whether built-in tables should be ignored.
      */
     private Boolean tableIgnoreBuiltin = true;
     /**
      * The tables for which changes are to be captured
+     */
+    private String tableIncludeList;
+    /**
+     * The tables for which changes are to be captured (deprecated, use
+     * table.include.list instead)
      */
     private String tableWhitelist;
     /**
@@ -701,6 +721,22 @@ public class DebeziumMySqlComponentConfiguration
         this.columnBlacklist = columnBlacklist;
     }
 
+    public String getColumnExcludeList() {
+        return columnExcludeList;
+    }
+
+    public void setColumnExcludeList(String columnExcludeList) {
+        this.columnExcludeList = columnExcludeList;
+    }
+
+    public String getColumnIncludeList() {
+        return columnIncludeList;
+    }
+
+    public void setColumnIncludeList(String columnIncludeList) {
+        this.columnIncludeList = columnIncludeList;
+    }
+
     public Boolean getConnectKeepAlive() {
         return connectKeepAlive;
     }
@@ -725,12 +761,12 @@ public class DebeziumMySqlComponentConfiguration
         this.connectTimeoutMs = connectTimeoutMs;
     }
 
-    public String getDatabaseBlacklist() {
-        return databaseBlacklist;
+    public String getDatabaseExcludeList() {
+        return databaseExcludeList;
     }
 
-    public void setDatabaseBlacklist(String databaseBlacklist) {
-        this.databaseBlacklist = databaseBlacklist;
+    public void setDatabaseExcludeList(String databaseExcludeList) {
+        this.databaseExcludeList = databaseExcludeList;
     }
 
     public String getDatabaseHistory() {
@@ -809,6 +845,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setDatabaseHostname(String databaseHostname) {
         this.databaseHostname = databaseHostname;
+    }
+
+    public String getDatabaseIncludeList() {
+        return databaseIncludeList;
+    }
+
+    public void setDatabaseIncludeList(String databaseIncludeList) {
+        this.databaseIncludeList = databaseIncludeList;
     }
 
     public String getDatabaseInitialStatements() {
@@ -915,14 +959,6 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setDatabaseUser(String databaseUser) {
         this.databaseUser = databaseUser;
-    }
-
-    public String getDatabaseWhitelist() {
-        return databaseWhitelist;
-    }
-
-    public void setDatabaseWhitelist(String databaseWhitelist) {
-        this.databaseWhitelist = databaseWhitelist;
     }
 
     public String getDecimalHandlingMode() {
@@ -1137,12 +1173,28 @@ public class DebeziumMySqlComponentConfiguration
         this.tableBlacklist = tableBlacklist;
     }
 
+    public String getTableExcludeList() {
+        return tableExcludeList;
+    }
+
+    public void setTableExcludeList(String tableExcludeList) {
+        this.tableExcludeList = tableExcludeList;
+    }
+
     public Boolean getTableIgnoreBuiltin() {
         return tableIgnoreBuiltin;
     }
 
     public void setTableIgnoreBuiltin(Boolean tableIgnoreBuiltin) {
         this.tableIgnoreBuiltin = tableIgnoreBuiltin;
+    }
+
+    public String getTableIncludeList() {
+        return tableIncludeList;
+    }
+
+    public void setTableIncludeList(String tableIncludeList) {
+        this.tableIncludeList = tableIncludeList;
     }
 
     public String getTableWhitelist() {
