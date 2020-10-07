@@ -62,13 +62,23 @@ public class EncryptedPropertiesCustomConfigurationBeansTest extends EncryptedPr
     @Import(Routes.class)
     @AutoConfigureBefore(CamelAutoConfiguration.class)
     public static class TestConfiguration {
+        
+        private static String OS = System.getProperty("os.name");
+
+        private String getSecureRandomAlgorithm() {
+            String secureRandomAlgorithm = "NativePRNG";
+            if (OS != null && OS.toLowerCase().indexOf("win") != -1) {
+                secureRandomAlgorithm = "Windows-PRNG";
+            }
+            return secureRandomAlgorithm;
+        }
 
         @Bean("customEnvironmentStringPBEConfig")
         public EnvironmentStringPBEConfig environmentVariablesConfiguration() {
             EnvironmentStringPBEConfig environmentStringPBEConfig = new EnvironmentStringPBEConfig();
             environmentStringPBEConfig.setAlgorithm("PBEWITHHMACSHA512ANDAES_256");
-            environmentStringPBEConfig.setIvGenerator(new RandomIvGenerator("NativePRNG"));
-            environmentStringPBEConfig.setSaltGenerator(new RandomSaltGenerator("NativePRNG"));
+            environmentStringPBEConfig.setIvGenerator(new RandomIvGenerator(getSecureRandomAlgorithm()));
+            environmentStringPBEConfig.setSaltGenerator(new RandomSaltGenerator(getSecureRandomAlgorithm()));
             environmentStringPBEConfig.setPassword("mainpassword");
             return environmentStringPBEConfig;
         }
