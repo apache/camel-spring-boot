@@ -124,10 +124,27 @@ public class DebeziumSqlserverComponentConfiguration
     private Boolean basicPropertyBinding = false;
     /**
      * Regular expressions matching columns to exclude from change events
+     * (deprecated, use column.exclude.list instead)
      */
     private String columnBlacklist;
     /**
+     * Regular expressions matching columns to exclude from change events
+     */
+    private String columnExcludeList;
+    /**
      * Regular expressions matching columns to include in change events
+     */
+    private String columnIncludeList;
+    /**
+     * A comma-separated list of regular expressions matching fully-qualified
+     * names of columns that adds the columns original type and original length
+     * as parameters to the corresponding field schemas in the emitted change
+     * records.
+     */
+    private String columnPropagateSourceType;
+    /**
+     * Regular expressions matching columns to include in change events
+     * (deprecated, use column.include.list instead)
      */
     private String columnWhitelist;
     /**
@@ -178,6 +195,10 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String databaseHostname;
     /**
+     * The SQL Server instance name
+     */
+    private String databaseInstance;
+    /**
      * Password of the SQL Server database user to be used when connecting to
      * the database.
      */
@@ -203,6 +224,13 @@ public class DebeziumSqlserverComponentConfiguration
      * database.
      */
     private String databaseUser;
+    /**
+     * A comma-separated list of regular expressions matching the
+     * database-specific data type names that adds the data type's original type
+     * and original length as parameters to the corresponding field schemas in
+     * the emitted change records.
+     */
+    private String datatypePropagateSourceType;
     /**
      * Specify how DECIMAL and NUMERIC columns should be represented in change
      * events, including:'precise' (the default) uses java.math.BigDecimal to
@@ -274,6 +302,16 @@ public class DebeziumSqlserverComponentConfiguration
      * Enables transaction metadata extraction together with event counting
      */
     private Boolean provideTransactionMetadata = false;
+    /**
+     * The maximum number of records that should be loaded into memory while
+     * streaming. A value of 0 uses the default JDBC fetch size.
+     */
+    private Integer queryFetchSize = 0;
+    /**
+     * Time to wait before restarting connector after retriable exception
+     * occurs. Defaults to 10000ms. The option is a long type.
+     */
+    private String retriableRestartConnectorWaitMs = "10s";
     /**
      * Whether field names will be sanitized to Avro naming conventions
      */
@@ -355,16 +393,27 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String sourceTimestampMode = "commit";
     /**
-     * Description is not available here, please check Debezium website for
-     * corresponding key 'table.blacklist' description.
+     * A comma-separated list of regular expressions that match the
+     * fully-qualified names of tables to be excluded from monitoring
+     * (deprecated, use table.exclude.list instead)
      */
     private String tableBlacklist;
+    /**
+     * A comma-separated list of regular expressions that match the
+     * fully-qualified names of tables to be excluded from monitoring
+     */
+    private String tableExcludeList;
     /**
      * Flag specifying whether built-in tables should be ignored.
      */
     private Boolean tableIgnoreBuiltin = true;
     /**
      * The tables for which changes are to be captured
+     */
+    private String tableIncludeList;
+    /**
+     * The tables for which changes are to be captured (deprecated, use
+     * table.include.list instead)
      */
     private String tableWhitelist;
     /**
@@ -511,6 +560,30 @@ public class DebeziumSqlserverComponentConfiguration
         this.columnBlacklist = columnBlacklist;
     }
 
+    public String getColumnExcludeList() {
+        return columnExcludeList;
+    }
+
+    public void setColumnExcludeList(String columnExcludeList) {
+        this.columnExcludeList = columnExcludeList;
+    }
+
+    public String getColumnIncludeList() {
+        return columnIncludeList;
+    }
+
+    public void setColumnIncludeList(String columnIncludeList) {
+        this.columnIncludeList = columnIncludeList;
+    }
+
+    public String getColumnPropagateSourceType() {
+        return columnPropagateSourceType;
+    }
+
+    public void setColumnPropagateSourceType(String columnPropagateSourceType) {
+        this.columnPropagateSourceType = columnPropagateSourceType;
+    }
+
     public String getColumnWhitelist() {
         return columnWhitelist;
     }
@@ -595,6 +668,14 @@ public class DebeziumSqlserverComponentConfiguration
         this.databaseHostname = databaseHostname;
     }
 
+    public String getDatabaseInstance() {
+        return databaseInstance;
+    }
+
+    public void setDatabaseInstance(String databaseInstance) {
+        this.databaseInstance = databaseInstance;
+    }
+
     public String getDatabasePassword() {
         return databasePassword;
     }
@@ -633,6 +714,15 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setDatabaseUser(String databaseUser) {
         this.databaseUser = databaseUser;
+    }
+
+    public String getDatatypePropagateSourceType() {
+        return datatypePropagateSourceType;
+    }
+
+    public void setDatatypePropagateSourceType(
+            String datatypePropagateSourceType) {
+        this.datatypePropagateSourceType = datatypePropagateSourceType;
     }
 
     public String getDecimalHandlingMode() {
@@ -714,6 +804,23 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setProvideTransactionMetadata(Boolean provideTransactionMetadata) {
         this.provideTransactionMetadata = provideTransactionMetadata;
+    }
+
+    public Integer getQueryFetchSize() {
+        return queryFetchSize;
+    }
+
+    public void setQueryFetchSize(Integer queryFetchSize) {
+        this.queryFetchSize = queryFetchSize;
+    }
+
+    public String getRetriableRestartConnectorWaitMs() {
+        return retriableRestartConnectorWaitMs;
+    }
+
+    public void setRetriableRestartConnectorWaitMs(
+            String retriableRestartConnectorWaitMs) {
+        this.retriableRestartConnectorWaitMs = retriableRestartConnectorWaitMs;
     }
 
     public Boolean getSanitizeFieldNames() {
@@ -805,12 +912,28 @@ public class DebeziumSqlserverComponentConfiguration
         this.tableBlacklist = tableBlacklist;
     }
 
+    public String getTableExcludeList() {
+        return tableExcludeList;
+    }
+
+    public void setTableExcludeList(String tableExcludeList) {
+        this.tableExcludeList = tableExcludeList;
+    }
+
     public Boolean getTableIgnoreBuiltin() {
         return tableIgnoreBuiltin;
     }
 
     public void setTableIgnoreBuiltin(Boolean tableIgnoreBuiltin) {
         this.tableIgnoreBuiltin = tableIgnoreBuiltin;
+    }
+
+    public String getTableIncludeList() {
+        return tableIncludeList;
+    }
+
+    public void setTableIncludeList(String tableIncludeList) {
+        this.tableIncludeList = tableIncludeList;
     }
 
     public String getTableWhitelist() {
