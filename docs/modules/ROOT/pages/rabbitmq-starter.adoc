@@ -17,13 +17,15 @@ When using rabbitmq with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 54 options, which are listed below.
+The component supports 56 options, which are listed below.
 
 
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| *camel.component.rabbitmq.additional-headers* | Map of additional headers. These headers will be set only when the 'allowCustomHeaders' is set to true |  | Map
+| *camel.component.rabbitmq.additional-properties* | Map of additional properties. These are standard RabbitMQ properties as defined in com.rabbitmq.client.AMQP.BasicProperties The map keys should be from org.apache.camel.component.rabbitmq.RabbitMQConstants. Any other keys will be ignored. When the message already contains these headers they will be given precedence over these properties. |  | Map
 | *camel.component.rabbitmq.addresses* | If this option is set, camel-rabbitmq will try to create connection based on the setting of option addresses. The addresses value is a string which looks like server1:12345, server2:12345 |  | String
 | *camel.component.rabbitmq.allow-null-headers* | Allow pass null values to header | false | Boolean
 | *camel.component.rabbitmq.args* | Specify arguments for configuring the different RabbitMQ concepts, a different prefix is required for each: Exchange: arg.exchange. Queue: arg.queue. Binding: arg.binding. DLQ: arg.dlq.queue. DLQ Binding: arg.dlq.binding. For example to declare a queue with message ttl argument: \http://localhost:5672/exchange/queueargs=arg.queue.x-message-ttl=60000 |  | Map

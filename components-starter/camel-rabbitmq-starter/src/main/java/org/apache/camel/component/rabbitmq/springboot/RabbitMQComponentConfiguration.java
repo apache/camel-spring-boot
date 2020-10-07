@@ -164,6 +164,19 @@ public class RabbitMQComponentConfiguration
      */
     private Integer threadPoolSize = 10;
     /**
+     * Map of additional headers. These headers will be set only when the
+     * 'allowCustomHeaders' is set to true
+     */
+    private Map<String, Object> additionalHeaders;
+    /**
+     * Map of additional properties. These are standard RabbitMQ properties as
+     * defined in com.rabbitmq.client.AMQP.BasicProperties The map keys should
+     * be from org.apache.camel.component.rabbitmq.RabbitMQConstants. Any other
+     * keys will be ignored. When the message already contains these headers
+     * they will be given precedence over these properties.
+     */
+    private Map<String, Object> additionalProperties;
+    /**
      * Allow pass null values to header
      */
     private Boolean allowNullHeaders = false;
@@ -515,6 +528,22 @@ public class RabbitMQComponentConfiguration
 
     public void setThreadPoolSize(Integer threadPoolSize) {
         this.threadPoolSize = threadPoolSize;
+    }
+
+    public Map<String, Object> getAdditionalHeaders() {
+        return additionalHeaders;
+    }
+
+    public void setAdditionalHeaders(Map<String, Object> additionalHeaders) {
+        this.additionalHeaders = additionalHeaders;
+    }
+
+    public Map<String, Object> getAdditionalProperties() {
+        return additionalProperties;
+    }
+
+    public void setAdditionalProperties(Map<String, Object> additionalProperties) {
+        this.additionalProperties = additionalProperties;
     }
 
     public Boolean getAllowNullHeaders() {
