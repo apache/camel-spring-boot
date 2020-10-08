@@ -17,6 +17,7 @@
 package org.apache.camel.component.geocoder.springboot;
 
 import javax.annotation.Generated;
+import com.google.maps.GeoApiContext;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -55,6 +56,11 @@ public class GeoCoderComponentConfiguration
      */
     @Deprecated
     private Boolean basicPropertyBinding = false;
+    /**
+     * Configuration for Google maps API. The option is a
+     * com.google.maps.GeoApiContext type.
+     */
+    private GeoApiContext geoApiContext;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -73,5 +79,13 @@ public class GeoCoderComponentConfiguration
     @Deprecated
     public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
         this.basicPropertyBinding = basicPropertyBinding;
+    }
+
+    public GeoApiContext getGeoApiContext() {
+        return geoApiContext;
+    }
+
+    public void setGeoApiContext(GeoApiContext geoApiContext) {
+        this.geoApiContext = geoApiContext;
     }
 }

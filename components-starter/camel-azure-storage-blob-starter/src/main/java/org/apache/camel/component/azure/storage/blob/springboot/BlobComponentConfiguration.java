@@ -112,9 +112,10 @@ public class BlobComponentConfiguration
      * appropriate requests to the resource on the service. It may also be used
      * to construct URLs to blobs and containers. This client contains
      * operations on a service account. Operations on a container are available
-     * on BlobContainerClient through getBlobContainerClient(String), and
-     * operations on a blob are available on BlobClient through
-     * getBlobContainerClient(String).getBlobClient(String). The option is a
+     * on BlobContainerClient through
+     * BlobServiceClient#getBlobContainerClient(String), and operations on a
+     * blob are available on BlobClient through
+     * BlobContainerClient#getBlobClient(String). The option is a
      * com.azure.storage.blob.BlobServiceClient type.
      */
     private BlobServiceClient serviceClient;
