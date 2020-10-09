@@ -37,6 +37,16 @@ public class CamelGooglePubsubTest extends AbstractSpringBootTestSupport {
                 .module(inferModuleName(CamelGooglePubsubTest.class))
                 .dependency("com.google.http-client:google-http-client-jackson2:1.34.0")
                 .dependency("com.google.http-client:google-http-client:1.34.0")
+                .dependency("io.grpc:grpc-alts:1.28.1")
+                .dependency("io.grpc:grpc-api:1.28.1")
+                .dependency("io.grpc:grpc-auth:1.28.1")
+                .dependency("io.grpc:grpc-context:1.28.1")
+                .dependency("io.grpc:grpc-core:1.28.1")
+                .dependency("io.grpc:grpc-grpclb:1.28.1")
+                .dependency("io.grpc:grpc-netty-shaded:1.28.1")
+                .dependency("io.grpc:grpc-protobuf:1.28.1")
+                .dependency("io.grpc:grpc-protobuf-lite:1.28.1")
+                .dependency("io.grpc:grpc-stub:1.28.1")
                 .build();
     }
 
