@@ -38,10 +38,34 @@ public class BeanLanguageConfiguration
      */
     private Boolean enabled;
     /**
+     * Scope of bean. When using singleton scope (default) the bean is created
+     * or looked up only once and reused for the lifetime of the endpoint. The
+     * bean should be thread-safe in case concurrent threads is calling the bean
+     * at the same time. When using request scope the bean is created or looked
+     * up once per request (exchange). This can be used if you want to store
+     * state on a bean while processing a request and you want to call the same
+     * bean instance multiple times while processing the request. The bean does
+     * not have to be thread-safe as the instance is only called from the same
+     * request. When using delegate scope, then the bean will be looked up or
+     * created per call. However in case of lookup then this is delegated to the
+     * bean registry such as Spring or CDI (if in use), which depends on their
+     * configuration can act as either singleton or prototype scope. so when
+     * using delegate then this depends on the delegated registry.
+     */
+    private String scope = "Singleton";
+    /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
      */
     private Boolean trim = true;
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
 
     public Boolean getTrim() {
         return trim;
