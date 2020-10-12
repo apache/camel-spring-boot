@@ -20,7 +20,8 @@ on:
   schedule:
     # Run at 3 during night
     - cron:  '0 4 * * *'
-
+  workflow_dispatch:
+  
 jobs:
   build:
     runs-on: ubuntu-latest
