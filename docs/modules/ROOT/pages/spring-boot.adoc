@@ -92,7 +92,7 @@ When using spring-boot with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 157 options, which are listed below.
+The component supports 158 options, which are listed below.
 
 
 
@@ -132,14 +132,14 @@ The component supports 157 options, which are listed below.
 | *camel.component.properties.ignore-missing-location* | Whether to silently ignore if a location cannot be located, such as a properties file not found. | false | Boolean
 | *camel.component.properties.initial-properties* | Sets initial properties which will be used before any locations are resolved. The option is a java.util.Properties type. |  | String
 | *camel.component.properties.location* | A list of locations to load properties. You can use comma to separate multiple locations. This option will override any default locations and only use the locations from this option. |  | String
-| *camel.component.properties.override-properties* | Sets a special list of override properties that take precedence and will use first, if a property exists. The option is a java.util.Properties type. |  | String
+| *camel.component.properties.override-properties* | Sets a special list of override properties that take precedence and will use first, if a property exist. The option is a java.util.Properties type. |  | String
 | *camel.component.properties.properties-parser* | To use a custom PropertiesParser. The option is a org.apache.camel.component.properties.PropertiesParser type. |  | String
 | *camel.component.properties.system-properties-mode* | Sets the JVM system property mode (0 = never, 1 = fallback, 2 = override). The default mode (override) is to use system properties if present, and override any existing properties. OS environment variable mode is checked before JVM system property mode | 2 | Integer
 | *camel.dataformat.enabled* | Global option to enable/disable dataformat auto-configuration, default is true. | true | Boolean
 | *camel.health.config* | Additional health check properties for fine grained configuration of health checks. |  | Map
 | *camel.health.config.allow-core-thread-time-out* | Sets whether to allow core threads to timeout |  | Boolean
 | *camel.health.config.enabled* | Set if the check associated to this configuration is enabled or not. Is default enabled. |  | Boolean
-| *camel.health.config.failure-threshold* | Set the number of failures before reporting the service as un-healthy. |  | Integer
+| *camel.health.config.failure-threshold* | Set the number of failure before reporting the service as un-healthy. |  | Integer
 | *camel.health.config.id* | Sets the id of this thread pool |  | String
 | *camel.health.config.interval* | Set the check interval in milli seconds. |  | Long
 | *camel.health.config.keep-alive-time* | Sets the keep alive time for inactive threads |  | Long
@@ -159,6 +159,7 @@ The component supports 157 options, which are listed below.
 | *camel.springboot.backlog-tracing* | Sets whether backlog tracing is enabled or not. Default is false. | false | Boolean
 | *camel.springboot.bean-introspection-extended-statistics* | Sets whether bean introspection uses extended statistics. The default is false. | false | Boolean
 | *camel.springboot.bean-introspection-logging-level* | Sets the logging level used by bean introspection, logging activity of its usage. The default is TRACE. |  | LoggingLevel
+| *camel.springboot.bean-post-processor-enabled* | Can be used to turn off bean post processing. Be careful to turn this off, as this means that beans that use Camel annotations such as org.apache.camel.EndpointInject, org.apache.camel.ProducerTemplate, org.apache.camel.Produce, org.apache.camel.Consume etc will not be injected and in use. Turning this off should only be done if you are sure you do not use any of these Camel features. Not all runtimes allow turning this off (such as camel-blueprint or camel-cdi with XML). The default value is true (enabled). | true | Boolean
 | *camel.springboot.case-insensitive-headers* | Whether to use case sensitive or insensitive headers. Important: When using case sensitive (this is set to false). Then the map is case sensitive which means headers such as content-type and Content-Type are two different keys which can be a problem for some protocols such as HTTP based, which rely on case insensitive headers. However case sensitive implementations can yield faster performance. Therefore use case sensitive implementation with care. Default is true. | true | Boolean
 | *camel.springboot.consumer-template-cache-size* | Consumer template endpoints cache size. | 1000 | Integer
 | *camel.springboot.duration-max-idle-seconds* | To specify for how long time in seconds Camel can be idle before automatic terminating the JVM. You can use this to run Spring Boot for a short while. | 0 | Integer

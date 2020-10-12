@@ -390,6 +390,21 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean useBreadcrumb;
 
     /**
+     * Can be used to turn off bean post processing.
+     *
+     * Be careful to turn this off, as this means that beans that use Camel annotations such as
+     * org.apache.camel.EndpointInject, org.apache.camel.ProducerTemplate,
+     * org.apache.camel.Produce, org.apache.camel.Consume etc will not be injected and in use.
+     *
+     * Turning this off should only be done if you are sure you do not use any of these Camel features.
+     *
+     * Not all runtimes allow turning this off (such as camel-blueprint or camel-cdi with XML).
+     *
+     * The default value is true (enabled).
+     */
+    private boolean beanPostProcessorEnabled = true;
+
+    /**
      * Whether its allowed to add new routes after Camel has been started.
      * This is enabled by default.
      * Setting this to false allows Camel to do some internal optimizations to reduce memory footprint.
