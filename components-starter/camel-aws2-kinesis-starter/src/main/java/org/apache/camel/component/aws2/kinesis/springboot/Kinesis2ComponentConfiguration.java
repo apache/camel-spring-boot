@@ -56,6 +56,10 @@ public class Kinesis2ComponentConfiguration
      */
     private Boolean autoDiscoverClient = true;
     /**
+     * This option will set the CBOR_ENABLED property during the execution
+     */
+    private Boolean cborEnabled = true;
+    /**
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.kinesis.Kinesis2Configuration type.
      */
@@ -157,6 +161,14 @@ public class Kinesis2ComponentConfiguration
 
     public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
         this.autoDiscoverClient = autoDiscoverClient;
+    }
+
+    public Boolean getCborEnabled() {
+        return cborEnabled;
+    }
+
+    public void setCborEnabled(Boolean cborEnabled) {
+        this.cborEnabled = cborEnabled;
     }
 
     public Kinesis2Configuration getConfiguration() {
