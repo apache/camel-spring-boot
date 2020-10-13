@@ -17,7 +17,7 @@ When using aws2-kinesis with Spring Boot make sure to use the following Maven de
 ----
 
 
-The component supports 33 options, which are listed below.
+The component supports 35 options, which are listed below.
 
 
 
@@ -27,6 +27,7 @@ The component supports 33 options, which are listed below.
 | *camel.component.aws2-kinesis-firehose.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws2-kinesis-firehose.amazon-kinesis-firehose-client* | Amazon Kinesis Firehose client to use for all requests for this endpoint. The option is a software.amazon.awssdk.services.firehose.FirehoseClient type. |  | FirehoseClient
 | *camel.component.aws2-kinesis-firehose.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking | true | Boolean
+| *camel.component.aws2-kinesis-firehose.cbor-enabled* | This option will set the CBOR_ENABLED property during the execution | true | Boolean
 | *camel.component.aws2-kinesis-firehose.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.firehose.KinesisFirehose2Configuration type. |  | KinesisFirehose2Configuration
 | *camel.component.aws2-kinesis-firehose.enabled* | Whether to enable auto configuration of the aws2-kinesis-firehose component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-kinesis-firehose.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
@@ -41,6 +42,7 @@ The component supports 33 options, which are listed below.
 | *camel.component.aws2-kinesis.amazon-kinesis-client* | Amazon Kinesis client to use for all requests for this endpoint. The option is a software.amazon.awssdk.services.kinesis.KinesisClient type. |  | KinesisClient
 | *camel.component.aws2-kinesis.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking | true | Boolean
 | *camel.component.aws2-kinesis.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
+| *camel.component.aws2-kinesis.cbor-enabled* | This option will set the CBOR_ENABLED property during the execution | true | Boolean
 | *camel.component.aws2-kinesis.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.kinesis.Kinesis2Configuration type. |  | Kinesis2Configuration
 | *camel.component.aws2-kinesis.enabled* | Whether to enable auto configuration of the aws2-kinesis component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-kinesis.iterator-type* | Defines where in the Kinesis stream to start getting records |  | ShardIteratorType
