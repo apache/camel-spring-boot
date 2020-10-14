@@ -52,8 +52,8 @@ public class BlobComponentConfiguration
      */
     private Boolean autoDiscoverClient = true;
     /**
-     * The blob name, required for consumer. However on producer, is only
-     * required for the operations on the blob level
+     * The blob name, to consume specific blob from a container. However on
+     * producer, is only required for the operations on the blob level
      */
     private String blobName;
     /**

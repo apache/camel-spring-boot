@@ -26,7 +26,7 @@ The component supports 28 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.azure-storage-blob.access-key* | Access key for the associated azure account name to be used for authentication with azure blob services |  | String
 | *camel.component.azure-storage-blob.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
-| *camel.component.azure-storage-blob.blob-name* | The blob name, required for consumer. However on producer, is only required for the operations on the blob level |  | String
+| *camel.component.azure-storage-blob.blob-name* | The blob name, to consume specific blob from a container. However on producer, is only required for the operations on the blob level |  | String
 | *camel.component.azure-storage-blob.blob-offset* | Set the blob offset for the upload or download operations, default is 0 | 0 | Long
 | *camel.component.azure-storage-blob.blob-sequence-number* | A user-controlled value that you can use to track requests. The value of the sequence number must be between 0 and 263 - 1.The default value is 0. | 0 | Long
 | *camel.component.azure-storage-blob.blob-type* | The blob type in order to initiate the appropriate settings for each blob type |  | BlobType
