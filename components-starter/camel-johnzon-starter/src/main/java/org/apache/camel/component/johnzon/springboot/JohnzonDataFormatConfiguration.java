@@ -37,8 +37,7 @@ public class JohnzonDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Lookup and use the existing ObjectMapper with the given id when using
-     * Jackson.
+     * Lookup and use the existing Mapper with the given id.
      */
     private String objectMapper;
     /**

@@ -25,7 +25,7 @@ The component supports 4 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.dataformat.json-johnzon.enabled* | Whether to enable auto configuration of the json-johnzon data format. This is enabled by default. |  | Boolean
-| *camel.dataformat.json-johnzon.object-mapper* | Lookup and use the existing ObjectMapper with the given id when using Jackson. |  | String
+| *camel.dataformat.json-johnzon.object-mapper* | Lookup and use the existing Mapper with the given id. |  | String
 | *camel.dataformat.json-johnzon.pretty-print* | To enable pretty printing output nicely formatted. Is by default false. | false | Boolean
 | *camel.dataformat.json-johnzon.unmarshal-type-name* | Class name of the java type to use when unmarshalling |  | String
 |===
