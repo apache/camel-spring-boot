@@ -107,6 +107,12 @@ public class BlobComponentConfiguration
      */
     private String prefix;
     /**
+     * Filters the results to return only blobs whose names match the specified
+     * regular expression. May be null to return all if both prefix and regex
+     * are set, regex takes the priority and prefix is ignored.
+     */
+    private String regex;
+    /**
      * Client to a storage account. This client does not hold any state about a
      * particular storage account but is instead a convenient way of sending off
      * appropriate requests to the resource on the service. It may also be used
@@ -290,6 +296,14 @@ public class BlobComponentConfiguration
 
     public void setPrefix(String prefix) {
         this.prefix = prefix;
+    }
+
+    public String getRegex() {
+        return regex;
+    }
+
+    public void setRegex(String regex) {
+        this.regex = regex;
     }
 
     public BlobServiceClient getServiceClient() {
