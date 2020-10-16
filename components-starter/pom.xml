@@ -292,6 +292,7 @@
     <module>camel-json-validator-starter</module>
     <module>camel-jsonapi-starter</module>
     <module>camel-jsonata-starter</module>
+    <module>camel-jsonb-starter</module>
     <module>camel-jsonpath-starter</module>
     <module>camel-jt400-starter</module>
     <module>camel-kafka-starter</module>
