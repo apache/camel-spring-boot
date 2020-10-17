@@ -1,0 +1,34 @@
+// spring-boot-auto-configure options: START
+:page-partial:
+:doctitle: Camel Spring Boot Starter for jsonb
+
+== Spring Boot Auto-Configuration
+
+When using jsonb with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-jsonb-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 4 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.dataformat.json-jsonb.enabled* | Whether to enable auto configuration of the json-jsonb data format. This is enabled by default. |  | Boolean
+| *camel.dataformat.json-jsonb.object-mapper* | Lookup and use the existing Jsonb instance with the given id. |  | String
+| *camel.dataformat.json-jsonb.pretty-print* | To enable pretty printing output nicely formatted. Is by default false. | false | Boolean
+| *camel.dataformat.json-jsonb.unmarshal-type-name* | Class name of the java type to use when unmarshalling |  | String
+|===
+
+
+// spring-boot-auto-configure options: END

@@ -696,7 +696,7 @@ Number of Camel components: 340 in 273 JAR artifacts (3 deprecated)
 == Camel Data Formats
 
 // dataformats: START
-Number of Camel data formats: 45 in 37 JAR artifacts (0 deprecated)
+Number of Camel data formats: 46 in 38 JAR artifacts (0 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -751,6 +751,8 @@ Number of Camel data formats: 45 in 37 JAR artifacts (0 deprecated)
 | link:https://camel.apache.org/components/latest/dataformats/json-jackson-dataformat.html[JSON Jackson] | camel-jackson-starter | Stable | 2.0 | Marshal POJOs to JSON and back using Jackson
 
 | link:https://camel.apache.org/components/latest/dataformats/json-johnzon-dataformat.html[JSON Johnzon] | camel-johnzon-starter | Stable | 2.18 | Marshal POJOs to JSON and back using Johnzon
+
+| link:https://camel.apache.org/components/latest/dataformats/json-jsonb-dataformat.html[JSON JSON-B] | camel-jsonb-starter | Preview | 3.7 | Marshal POJOs to JSON and back using JSON-B.
 
 | link:https://camel.apache.org/components/latest/dataformats/json-xstream-dataformat.html[JSON XStream] | camel-xstream-starter | Stable | 2.0 | Marshal POJOs to JSON and back using XStream
 
