@@ -17,7 +17,7 @@ Number of Camel components: 340 in 273 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/apns-component.html[APNS] | camel-apns-starter | Stable | 2.8 | Send notifications to Apple iOS devices.
 
-| link:https://camel.apache.org/components/latest/arangodb-component.html[ArangoDb] | camel-arangodb-starter | Preview | 3.5 | Perform operations on ArangoDb when used as a Document Database, or as a Graph Database
+| link:https://camel.apache.org/components/latest/arangodb-component.html[ArangoDb] | camel-arangodb-starter | Stable | 3.5 | Perform operations on ArangoDb when used as a Document Database, or as a Graph Database
 
 | link:https://camel.apache.org/components/latest/as2-component.html[AS2] | camel-as2-starter | Stable | 2.22 | Transfer data securely and reliably using the AS2 protocol (RFC4130).
 
@@ -79,7 +79,7 @@ Number of Camel components: 340 in 273 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/aws2-s3-component.html[AWS 2 S3 Storage Service] | camel-aws2-s3-starter | Stable | 3.2 | Store and retrieve objects from AWS S3 Storage Service using AWS SDK version 2.x.
 
-| link:https://camel.apache.org/components/latest/aws2-sts-component.html[AWS 2 Security Token Service (STS)] | camel-aws2-sts-starter | Preview | 3.5 | Manage AWS STS cluster instances using AWS SDK version 2.x.
+| link:https://camel.apache.org/components/latest/aws2-sts-component.html[AWS 2 Security Token Service (STS)] | camel-aws2-sts-starter | Stable | 3.5 | Manage AWS STS cluster instances using AWS SDK version 2.x.
 
 | link:https://camel.apache.org/components/latest/aws2-ses-component.html[AWS 2 Simple Email Service (SES)] | camel-aws2-ses-starter | Stable | 3.1 | Send e-mails through AWS SES service using AWS SDK version 2.x.
 
@@ -129,7 +129,7 @@ Number of Camel components: 340 in 273 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/aws-translate-component.html[AWS Translate] | camel-aws-translate-starter | Stable | 3.0 | Translate texts using AWS Translate.
 
-| link:https://camel.apache.org/components/latest/azure-eventhubs-component.html[Azure Event Hubs] | camel-azure-eventhubs-starter | Preview | 3.5 | The azure-eventhubs component that integrates Azure Event Hubs using AMQP protocol. Azure EventHubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers.
+| link:https://camel.apache.org/components/latest/azure-eventhubs-component.html[Azure Event Hubs] | camel-azure-eventhubs-starter | Stable | 3.5 | The azure-eventhubs component that integrates Azure Event Hubs using AMQP protocol. Azure EventHubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers.
 
 | link:https://camel.apache.org/components/latest/azure-storage-blob-component.html[Azure Storage Blob Service] | camel-azure-storage-blob-starter | Stable | 3.3 | Store and retrieve blobs from Azure Storage Blob Service using SDK v12.
 
@@ -395,7 +395,7 @@ Number of Camel components: 340 in 273 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/json-validator-component.html[JSON Schema Validator] | camel-json-validator-starter | Stable | 2.20 | Validate JSON payloads using NetworkNT JSON Schema.
 
-| link:https://camel.apache.org/components/latest/jsonata-component.html[JSONATA] | camel-jsonata-starter | Preview | 3.5 | JSON to JSON transformation using JSONATA.
+| link:https://camel.apache.org/components/latest/jsonata-component.html[JSONATA] | camel-jsonata-starter | Stable | 3.5 | JSON to JSON transformation using JSONATA.
 
 | link:https://camel.apache.org/components/latest/jt400-component.html[JT400] | camel-jt400-starter | Stable | 1.5 | Exchanges messages with an IBM i system using data queues, message queues, or program call. IBM i is the replacement for AS/400 and iSeries servers.
 
@@ -453,7 +453,7 @@ Number of Camel components: 340 in 273 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/mina-component.html[Mina] | camel-mina-starter | Stable | 2.10 | Socket level networking using TCP or UDP with Apache Mina 2.x.
 
-| link:https://camel.apache.org/components/latest/minio-component.html[Minio] | camel-minio-starter | Preview | 3.5 | Store and retrieve objects from Minio Storage Service using Minio SDK.
+| link:https://camel.apache.org/components/latest/minio-component.html[Minio] | camel-minio-starter | Stable | 3.5 | Store and retrieve objects from Minio Storage Service using Minio SDK.
 
 | link:https://camel.apache.org/components/latest/mllp-component.html[MLLP] | camel-mllp-starter | Stable | 2.17 | Communicate with external systems using the MLLP protocol.
 
@@ -485,7 +485,7 @@ Number of Camel components: 340 in 273 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/nsq-component.html[NSQ] | camel-nsq-starter | Stable | 2.23 | Send and receive messages from NSQ realtime distributed messaging platform.
 
-| link:https://camel.apache.org/components/latest/oaipmh-component.html[OAI-PMH] | camel-oaipmh-starter | Preview | 3.5 | Harvest metadata using OAI-PMH protocol
+| link:https://camel.apache.org/components/latest/oaipmh-component.html[OAI-PMH] | camel-oaipmh-starter | Stable | 3.5 | Harvest metadata using OAI-PMH protocol
 
 | link:https://camel.apache.org/components/latest/olingo2-component.html[Olingo2] | camel-olingo2-starter | Stable | 2.14 | Communicate with OData 2.0 services using Apache Olingo.
 
@@ -649,9 +649,9 @@ Number of Camel components: 340 in 273 JAR artifacts (3 deprecated)
 
 | link:https://camel.apache.org/components/latest/vertx-component.html[Vert.x] | camel-vertx-starter | Stable | 2.12 | Send and receive messages to/from Vert.x Event Bus.
 
-| link:https://camel.apache.org/components/latest/vertx-http-component.html[Vert.x HTTP Client] | camel-vertx-http-starter | Preview | 3.5 | Send requests to external HTTP servers using Vert.x
+| link:https://camel.apache.org/components/latest/vertx-http-component.html[Vert.x HTTP Client] | camel-vertx-http-starter | Stable | 3.5 | Send requests to external HTTP servers using Vert.x
 
-| link:https://camel.apache.org/components/latest/vertx-websocket-component.html[Vert.x WebSocket] | camel-vertx-websocket-starter | Preview | 3.5 | Expose WebSocket endpoints and connect to remote WebSocket servers using Vert.x
+| link:https://camel.apache.org/components/latest/vertx-websocket-component.html[Vert.x WebSocket] | camel-vertx-websocket-starter | Stable | 3.5 | Expose WebSocket endpoints and connect to remote WebSocket servers using Vert.x
 
 | link:https://camel.apache.org/components/latest/vm-component.html[VM] | camel-vm-starter | Stable | 1.1 | Call another endpoint in the same CamelContext asynchronously.
 
@@ -867,7 +867,7 @@ Number of miscellaneous extensions: 24 in 24 JAR artifacts (2 deprecated)
 
 | link:https://camel.apache.org/components/latest/others/openapi-java.html[Openapi Java] | camel-openapi-java-starter | Stable | 3.1 | Rest-dsl support for using openapi doc
 
-| link:https://camel.apache.org/components/latest/others/opentelemetry.html[OpenTelemetry] | camel-opentelemetry-starter | Preview | 3.5 | Distributed tracing using OpenTelemetry
+| link:https://camel.apache.org/components/latest/others/opentelemetry.html[OpenTelemetry] | camel-opentelemetry-starter | Stable | 3.5 | Distributed tracing using OpenTelemetry
 
 | link:https://camel.apache.org/components/latest/others/opentracing.html[OpenTracing] | camel-opentracing-starter | Stable | 2.19 | Distributed tracing using OpenTracing
 
