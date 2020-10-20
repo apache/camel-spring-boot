@@ -78,6 +78,7 @@
         <module>catalog</module>
         <module>tests</module>
         <module>docs</module>
+        <module>archetypes</module>
     </modules>
 
     <scm>
