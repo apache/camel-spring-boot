@@ -845,7 +845,7 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 24 in 24 JAR artifacts (2 deprecated)
+Number of miscellaneous extensions: 25 in 25 JAR artifacts (2 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -862,6 +862,8 @@ Number of miscellaneous extensions: 24 in 24 JAR artifacts (2 deprecated)
 | link:https://camel.apache.org/components/latest/others/jasypt.html[Jasypt] | camel-jasypt-starter | Stable | 2.5 | Security using Jasypt
 
 | link:https://camel.apache.org/components/latest/others/leveldb.html[LevelDB] | camel-leveldb-starter | Stable | 2.10 | Using LevelDB as persistent EIP store
+
+| link:https://camel.apache.org/components/latest/others/leveldb-legacy.html[LevelDB-legacy] | camel-leveldb-legacy-starter | Stable | 2.10 | Using LevelDB as persistent EIP store
 
 | link:https://camel.apache.org/components/latest/others/lra.html[LRA] | camel-lra-starter | Preview | 2.21 | Camel saga binding for Long-Running-Action framework
 
