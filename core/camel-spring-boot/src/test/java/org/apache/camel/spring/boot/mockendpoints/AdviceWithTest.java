@@ -17,10 +17,10 @@
 package org.apache.camel.spring.boot.mockendpoints;
 
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.builder.AdviceWith;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.model.ModelCamelContext;
-import org.apache.camel.reifier.RouteReifier;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.test.spring.junit5.UseAdviceWith;
 import org.junit.jupiter.api.Test;
@@ -47,7 +47,7 @@ public class AdviceWithTest {
         // context should not be started because we enabled @UseAdviceWith
         assertFalse(camelContext.getStatus().isStarted());
 
-        RouteReifier.adviceWith(camelContext.getRouteDefinitions().get(0), camelContext, new AdviceWithRouteBuilder() {
+        AdviceWith.adviceWith(camelContext.getRouteDefinitions().get(0), camelContext, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
                 replaceFromWith("seda:start");
