@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 341 in 274 JAR artifacts (3 deprecated)
+Number of Camel components: 340 in 273 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -324,8 +324,6 @@ Number of Camel components: 341 in 274 JAR artifacts (3 deprecated)
 | link:https://camel.apache.org/components/latest/hbase-component.html[HBase] | camel-hbase-starter | Stable | 2.10 | Reading and write from/to an HBase store (Hadoop database).
 
 | link:https://camel.apache.org/components/latest/hdfs-component.html[HDFS] | camel-hdfs-starter | Stable | 2.14 | Read and write from/to an HDFS filesystem using Hadoop 2.x.
-
-| link:https://camel.apache.org/components/latest/hipchat-component.html[Hipchat] | camel-hipchat-starter | Stable | 2.15 | Send and receive messages to/from Hipchat service.
 
 | link:https://camel.apache.org/components/latest/http-component.html[HTTP] | camel-http-starter | Stable | 2.3 | Send requests to external HTTP servers using Apache HTTP Client 4.x.
 
