@@ -194,6 +194,12 @@ public class KafkaComponentConfiguration
      */
     private String groupId;
     /**
+     * To use a custom KafkaHeaderDeserializer to deserialize kafka headers
+     * values. The option is a
+     * org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer type.
+     */
+    private KafkaHeaderDeserializer headerDeserializer;
+    /**
      * The expected time between heartbeats to the consumer coordinator when
      * using Kafka's group management facilities. Heartbeats are used to ensure
      * that the consumer's session stays active and to facilitate rebalancing
@@ -203,12 +209,6 @@ public class KafkaComponentConfiguration
      * for normal rebalances.
      */
     private Integer heartbeatIntervalMs = 3000;
-    /**
-     * To use a custom KafkaHeaderDeserializer to deserialize kafka headers
-     * values. The option is a
-     * org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer type.
-     */
-    private KafkaHeaderDeserializer kafkaHeaderDeserializer;
     /**
      * Deserializer class for key that implements the Deserializer interface.
      */
@@ -324,7 +324,7 @@ public class KafkaComponentConfiguration
      * The option is a
      * org.apache.camel.component.kafka.serde.KafkaHeaderSerializer type.
      */
-    private KafkaHeaderSerializer kafkaHeaderSerializer;
+    private KafkaHeaderSerializer headerSerializer;
     /**
      * The record key (or null if no key is specified). If this option has been
      * configured then it take precedence over header KafkaConstants#KEY
@@ -334,7 +334,7 @@ public class KafkaComponentConfiguration
      * The serializer class for keys (defaults to the same as for messages if
      * nothing is given).
      */
-    private String keySerializerClass = "org.apache.kafka.common.serialization.StringSerializer";
+    private String keySerializer = "org.apache.kafka.common.serialization.StringSerializer";
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -509,7 +509,7 @@ public class KafkaComponentConfiguration
     /**
      * The serializer class for messages.
      */
-    private String serializerClass = "org.apache.kafka.common.serialization.StringSerializer";
+    private String valueSerializer = "org.apache.kafka.common.serialization.StringSerializer";
     /**
      * To use a custom worker pool for continue routing Exchange after kafka
      * server has acknowledge the message that was sent to it from KafkaProducer
@@ -868,21 +868,20 @@ public class KafkaComponentConfiguration
         this.groupId = groupId;
     }
 
+    public KafkaHeaderDeserializer getHeaderDeserializer() {
+        return headerDeserializer;
+    }
+
+    public void setHeaderDeserializer(KafkaHeaderDeserializer headerDeserializer) {
+        this.headerDeserializer = headerDeserializer;
+    }
+
     public Integer getHeartbeatIntervalMs() {
         return heartbeatIntervalMs;
     }
 
     public void setHeartbeatIntervalMs(Integer heartbeatIntervalMs) {
         this.heartbeatIntervalMs = heartbeatIntervalMs;
-    }
-
-    public KafkaHeaderDeserializer getKafkaHeaderDeserializer() {
-        return kafkaHeaderDeserializer;
-    }
-
-    public void setKafkaHeaderDeserializer(
-            KafkaHeaderDeserializer kafkaHeaderDeserializer) {
-        this.kafkaHeaderDeserializer = kafkaHeaderDeserializer;
     }
 
     public String getKeyDeserializer() {
@@ -1023,13 +1022,12 @@ public class KafkaComponentConfiguration
         this.enableIdempotence = enableIdempotence;
     }
 
-    public KafkaHeaderSerializer getKafkaHeaderSerializer() {
-        return kafkaHeaderSerializer;
+    public KafkaHeaderSerializer getHeaderSerializer() {
+        return headerSerializer;
     }
 
-    public void setKafkaHeaderSerializer(
-            KafkaHeaderSerializer kafkaHeaderSerializer) {
-        this.kafkaHeaderSerializer = kafkaHeaderSerializer;
+    public void setHeaderSerializer(KafkaHeaderSerializer headerSerializer) {
+        this.headerSerializer = headerSerializer;
     }
 
     public String getKey() {
@@ -1040,12 +1038,12 @@ public class KafkaComponentConfiguration
         this.key = key;
     }
 
-    public String getKeySerializerClass() {
-        return keySerializerClass;
+    public String getKeySerializer() {
+        return keySerializer;
     }
 
-    public void setKeySerializerClass(String keySerializerClass) {
-        this.keySerializerClass = keySerializerClass;
+    public void setKeySerializer(String keySerializer) {
+        this.keySerializer = keySerializer;
     }
 
     public Boolean getLazyStartProducer() {
@@ -1216,12 +1214,12 @@ public class KafkaComponentConfiguration
         this.sendBufferBytes = sendBufferBytes;
     }
 
-    public String getSerializerClass() {
-        return serializerClass;
+    public String getValueSerializer() {
+        return valueSerializer;
     }
 
-    public void setSerializerClass(String serializerClass) {
-        this.serializerClass = serializerClass;
+    public void setValueSerializer(String valueSerializer) {
+        this.valueSerializer = valueSerializer;
     }
 
     public ExecutorService getWorkerPool() {
