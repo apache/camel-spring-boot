@@ -116,6 +116,10 @@ public class PulsarComponentConfiguration
      */
     private Integer numberOfConsumers = 1;
     /**
+     * Enable compacted topic reading.
+     */
+    private Boolean readCompacted = false;
+    /**
      * Control the initial position in the topic of a newly created
      * subscription. Default is latest message.
      */
@@ -331,6 +335,14 @@ public class PulsarComponentConfiguration
 
     public void setNumberOfConsumers(Integer numberOfConsumers) {
         this.numberOfConsumers = numberOfConsumers;
+    }
+
+    public Boolean getReadCompacted() {
+        return readCompacted;
+    }
+
+    public void setReadCompacted(Boolean readCompacted) {
+        this.readCompacted = readCompacted;
     }
 
     public SubscriptionInitialPosition getSubscriptionInitialPosition() {

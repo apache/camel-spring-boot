@@ -17,7 +17,7 @@ When using pulsar with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 36 options, which are listed below.
+The component supports 37 options, which are listed below.
 
 
 
@@ -53,6 +53,7 @@ The component supports 36 options, which are listed below.
 | *camel.component.pulsar.producer-name* | Name of the producer. If unset, lets Pulsar select a unique identifier. |  | String
 | *camel.component.pulsar.pulsar-client* | The pulsar client. The option is a org.apache.pulsar.client.api.PulsarClient type. |  | PulsarClient
 | *camel.component.pulsar.pulsar-message-receipt-factory* | Provide a factory to create an alternate implementation of PulsarMessageReceipt. The option is a org.apache.camel.component.pulsar.PulsarMessageReceiptFactory type. |  | PulsarMessageReceiptFactory
+| *camel.component.pulsar.read-compacted* | Enable compacted topic reading. | false | Boolean
 | *camel.component.pulsar.send-timeout-ms* | Send timeout in milliseconds | 30000 | Integer
 | *camel.component.pulsar.subscription-initial-position* | Control the initial position in the topic of a newly created subscription. Default is latest message. |  | SubscriptionInitialPosition
 | *camel.component.pulsar.subscription-name* | Name of the subscription to use | subs | String
