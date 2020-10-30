@@ -92,7 +92,7 @@ When using spring-boot with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 158 options, which are listed below.
+The component supports 159 options, which are listed below.
 
 
 
@@ -161,6 +161,7 @@ The component supports 158 options, which are listed below.
 | *camel.springboot.bean-introspection-logging-level* | Sets the logging level used by bean introspection, logging activity of its usage. The default is TRACE. |  | LoggingLevel
 | *camel.springboot.bean-post-processor-enabled* | Can be used to turn off bean post processing. Be careful to turn this off, as this means that beans that use Camel annotations such as org.apache.camel.EndpointInject, org.apache.camel.ProducerTemplate, org.apache.camel.Produce, org.apache.camel.Consume etc will not be injected and in use. Turning this off should only be done if you are sure you do not use any of these Camel features. Not all runtimes allow turning this off (such as camel-blueprint or camel-cdi with XML). The default value is true (enabled). | true | Boolean
 | *camel.springboot.case-insensitive-headers* | Whether to use case sensitive or insensitive headers. Important: When using case sensitive (this is set to false). Then the map is case sensitive which means headers such as content-type and Content-Type are two different keys which can be a problem for some protocols such as HTTP based, which rely on case insensitive headers. However case sensitive implementations can yield faster performance. Therefore use case sensitive implementation with care. Default is true. | true | Boolean
+| *camel.springboot.clear-reifiers* | Whether reifiers should be cleared. If enabled this will trigger some optimizations and memory reduction, however dynamic routes cannot be added after Camel has been started. | false | Boolean
 | *camel.springboot.consumer-template-cache-size* | Consumer template endpoints cache size. | 1000 | Integer
 | *camel.springboot.duration-max-idle-seconds* | To specify for how long time in seconds Camel can be idle before automatic terminating the JVM. You can use this to run Spring Boot for a short while. | 0 | Integer
 | *camel.springboot.duration-max-messages* | To specify how many messages to process by Camel before automatic terminating the JVM. You can use this to run Spring Boot for a short while. | 0 | Integer

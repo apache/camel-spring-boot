@@ -656,6 +656,12 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      */
     private boolean lightweight;
 
+    /**
+     * Whether reifiers should be cleared. If enabled this will trigger some optimizations and memory reduction, however
+     * dynamic routes cannot be added after Camel has been started.
+     */
+    private boolean clearReifiers;
+
     // Getters & setters
     // -----------------
 
