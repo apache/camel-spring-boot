@@ -9,10 +9,11 @@ The example generates messages using timer trigger, writes them to standard outp
 The Camel route is located in the `MyCamelRouter` class. In this class the route
 starts from a timer, that triggers every 2nd second and calls a Spring Bean `MyBean`
 which returns a message, that is routed to a stream endpoint which writes to standard output.
+The example contains test class demonstrating how to intercept and mock endpoints in unit tests using JUnit 5 and Camel Test Support.
 
 == Using Camel components
 
-Apache Camel provides 200+ components which you can use to integrate and route messages between many systems
+Apache Camel provides 300+ components which you can use to integrate and route messages between many systems
 and data formats. To use any of these Camel components, add the component as a dependency to your project.
 
 == How to run
@@ -20,6 +21,12 @@ and data formats. To use any of these Camel components, add the component as a d
 You can run this example using
 
     mvn spring-boot:run
+
+== How to run test
+
+You can run unit test of this example using
+
+    mvn clean test
 
 == To get info about the routes
 
