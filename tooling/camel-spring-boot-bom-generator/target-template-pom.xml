@@ -25,8 +25,9 @@
 
     <parent>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>tooling</artifactId>
+        <artifactId>spring-boot</artifactId>
         <version>${project.version}</version>
+        <relativePath>../../</relativePath>
     </parent>
 
     <artifactId>camel-spring-boot-bom</artifactId>
