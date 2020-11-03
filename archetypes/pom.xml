@@ -35,6 +35,7 @@
 
     <modules>
         <module>camel-archetype-spring-boot</module>
+        <module>camel-archetype-spring-boot-xml-dsl</module>
     </modules>
 
     <profiles>
