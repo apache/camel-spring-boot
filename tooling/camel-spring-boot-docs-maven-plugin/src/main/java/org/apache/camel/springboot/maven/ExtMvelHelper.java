@@ -60,17 +60,13 @@ public class ExtMvelHelper {
         if (localDocExists(model)) {
             return getLocalDocLink(model);
         } else if (model instanceof ComponentModel) {
-            return String.format("link:https://camel.apache.org/%s/latest/%s", "components",
-                    invokeGetter(model, "getScheme") + "-component.html");
+            return String.format("xref:latest@components:%s-component.adoc", invokeGetter(model, "getScheme"));
         } else if (model instanceof DataFormatModel) {
-            return String.format("link:https://camel.apache.org/%s/latest/%s", "components",  
-            		"dataformats/" + invokeGetter(model, "getName") + "-dataformat.html");
+            return String.format("xref:latest@components:dataformats/%s.adoc", invokeGetter(model, "getName"));
         } else if (model instanceof LanguageModel) {
-            return String.format("link:https://camel.apache.org/%s/latest/%s", "components", 
-            		"languages/" +invokeGetter(model, "getName") + "-language.html");
+            return String.format("xref:latest@components:languages/%s.adoc", invokeGetter(model, "getName"));
         } else if (model instanceof OtherModel) {
-            return String.format("link:https://camel.apache.org/%s/latest/%s", "components", 
-            		"others/" + invokeGetter(model, "getName") + ".html");
+            return String.format("xref:latest@components:others/%s.adoc", invokeGetter(model, "getName"));
         } else {
             return null;
         }
