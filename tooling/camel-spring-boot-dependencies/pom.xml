@@ -4552,6 +4552,16 @@
       </dependency>
       <dependency>
         <groupId>org.testcontainers</groupId>
+        <artifactId>couchbase</artifactId>
+        <version>1.14.3</version>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>elasticsearch</artifactId>
+        <version>1.14.3</version>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
         <artifactId>junit-jupiter</artifactId>
         <version>1.14.3</version>
       </dependency>
