@@ -53,6 +53,13 @@ public class ZipFileDataFormatConfiguration
      */
     private Boolean preservePathElements = false;
     /**
+     * Set the maximum decompressed size of a zip file (in bytes). An
+     * IOException will be thrown if the decompressed size exceeds this amount.
+     * Set to -1 to disable setting a maximum decompressed size. By default
+     * there is no maximum size enforced.
+     */
+    private Long maxDecompressedSize;
+    /**
      * Whether the data format should set the Content-Type header with the type
      * from the data format if the data format is capable of doing so. For
      * example application/xml for data formats marshalling to XML, or
@@ -82,6 +89,14 @@ public class ZipFileDataFormatConfiguration
 
     public void setPreservePathElements(Boolean preservePathElements) {
         this.preservePathElements = preservePathElements;
+    }
+
+    public Long getMaxDecompressedSize() {
+        return maxDecompressedSize;
+    }
+
+    public void setMaxDecompressedSize(Long maxDecompressedSize) {
+        this.maxDecompressedSize = maxDecompressedSize;
     }
 
     public Boolean getContentTypeHeader() {

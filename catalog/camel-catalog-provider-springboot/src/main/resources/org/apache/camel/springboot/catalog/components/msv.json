@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-msv-starter",
-    "version": "3.4.4-SNAPSHOT",
+    "version": "3.4.5-SNAPSHOT",
     "scheme": "msv",
     "extendsScheme": "",
     "syntax": "msv:resourceUri",
