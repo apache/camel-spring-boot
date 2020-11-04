@@ -1046,142 +1046,142 @@ Number of Camel data formats: 46 in 38 JAR artifacts (0 deprecated)
 |===
 | Data Format | Since | Description
 
-| xref:3.4.x@components:dataformats/any23.adoc[Any23] +
+| xref:3.4.x@components:dataformats:any23-dataformat.adoc[Any23] +
 (camel-any23-starter) | 3.0 | Extract RDF data from HTML documents.
 
-| xref:3.4.x@components:dataformats/asn1.adoc[ASN.1 File] +
+| xref:3.4.x@components:dataformats:asn1-dataformat.adoc[ASN.1 File] +
 (camel-asn1-starter) | 2.20 | Encode and decode data structures using Abstract Syntax Notation One (ASN.1).
 
-| xref:3.4.x@components:dataformats/avro.adoc[Avro] +
+| xref:3.4.x@components:dataformats:avro-dataformat.adoc[Avro] +
 (camel-avro-starter) | 2.14 | Serialize and deserialize messages using Apache Avro binary data format.
 
-| xref:3.4.x@components:dataformats/barcode.adoc[Barcode] +
+| xref:3.4.x@components:dataformats:barcode-dataformat.adoc[Barcode] +
 (camel-barcode-starter) | 2.14 | Transform strings to various 1D/2D barcode bitmap formats and back.
 
-| xref:3.4.x@components:dataformats/base64.adoc[Base64] +
+| xref:3.4.x@components:dataformats:base64-dataformat.adoc[Base64] +
 (camel-base64-starter) | 2.11 | Encode and decode data using Base64.
 
-| xref:3.4.x@components:dataformats/beanio.adoc[BeanIO] +
+| xref:3.4.x@components:dataformats:beanio-dataformat.adoc[BeanIO] +
 (camel-beanio-starter) | 2.10 | Marshal and unmarshal Java beans to and from flat files (such as CSV, delimited, or fixed length formats).
 
-| xref:3.4.x@components:dataformats/bindy.adoc[Bindy CSV] +
+| xref:3.4.x@components:dataformats:bindy-dataformat.adoc[Bindy CSV] +
 (camel-bindy-starter) | 2.0 | Marshal and unmarshal Java beans from and to flat payloads (such as CSV, delimited, fixed length formats, or FIX messages).
 
-| xref:3.4.x@components:dataformats/bindy.adoc[Bindy Fixed Length] +
+| xref:3.4.x@components:dataformats:bindy-dataformat.adoc[Bindy Fixed Length] +
 (camel-bindy-starter) | 2.0 | Marshal and unmarshal Java beans from and to flat payloads (such as CSV, delimited, fixed length formats, or FIX messages).
 
-| xref:3.4.x@components:dataformats/bindy.adoc[Bindy Key Value Pair] +
+| xref:3.4.x@components:dataformats:bindy-dataformat.adoc[Bindy Key Value Pair] +
 (camel-bindy-starter) | 2.0 | Marshal and unmarshal Java beans from and to flat payloads (such as CSV, delimited, fixed length formats, or FIX messages).
 
-| xref:3.4.x@components:dataformats/cbor.adoc[CBOR] +
+| xref:3.4.x@components:dataformats:cbor-dataformat.adoc[CBOR] +
 (camel-cbor-starter) | 3.0 | Unmarshal a CBOR payload to POJO and back.
 
-| xref:3.4.x@components:dataformats/crypto.adoc[Crypto (Java Cryptographic Extension)] +
+| xref:3.4.x@components:dataformats:crypto-dataformat.adoc[Crypto (Java Cryptographic Extension)] +
 (camel-crypto-starter) | 2.3 | Encrypt and decrypt messages using Java Cryptography Extension (JCE).
 
-| xref:3.4.x@components:dataformats/csv.adoc[CSV] +
+| xref:3.4.x@components:dataformats:csv-dataformat.adoc[CSV] +
 (camel-csv-starter) | 1.3 | Handle CSV (Comma Separated Values) payloads.
 
-| xref:3.4.x@components:dataformats/fhirJson.adoc[FHIR JSon] +
+| xref:3.4.x@components:dataformats:fhirJson-dataformat.adoc[FHIR JSon] +
 (camel-fhir-starter) | 2.21 | Marshall and unmarshall FHIR objects to/from JSON.
 
-| xref:3.4.x@components:dataformats/fhirXml.adoc[FHIR XML] +
+| xref:3.4.x@components:dataformats:fhirXml-dataformat.adoc[FHIR XML] +
 (camel-fhir-starter) | 2.21 | Marshall and unmarshall FHIR objects to/from XML.
 
-| xref:3.4.x@components:dataformats/flatpack.adoc[Flatpack] +
+| xref:3.4.x@components:dataformats:flatpack-dataformat.adoc[Flatpack] +
 (camel-flatpack-starter) | 2.1 | Marshal and unmarshal Java lists and maps to/from flat files (such as CSV, delimited, or fixed length formats) using Flatpack library.
 
-| xref:3.4.x@components:dataformats/grok.adoc[Grok] +
+| xref:3.4.x@components:dataformats:grok-dataformat.adoc[Grok] +
 (camel-grok-starter) | 3.0 | Unmarshal unstructured data to objects using Logstash based Grok patterns.
 
-| xref:3.4.x@components:dataformats/gzipdeflater.adoc[GZip Deflater] +
+| xref:3.4.x@components:dataformats:gzipdeflater-dataformat.adoc[GZip Deflater] +
 (camel-zip-deflater-starter) | 2.0 | Compress and decompress messages using java.util.zip.GZIPStream.
 
-| xref:3.4.x@components:dataformats/hl7.adoc[HL7] +
+| xref:3.4.x@components:dataformats:hl7-dataformat.adoc[HL7] +
 (camel-hl7-starter) | 2.0 | Marshal and unmarshal HL7 (Health Care) model objects using the HL7 MLLP codec.
 
-| xref:3.4.x@components:dataformats/ical.adoc[iCal] +
+| xref:3.4.x@components:dataformats:ical-dataformat.adoc[iCal] +
 (camel-ical-starter) | 2.12 | Marshal and unmarshal iCal (.ics) documents to/from model objects provided by the iCal4j library.
 
-| xref:3.4.x@components:dataformats/jacksonxml.adoc[JacksonXML] +
+| xref:3.4.x@components:dataformats:jacksonxml-dataformat.adoc[JacksonXML] +
 (camel-jacksonxml-starter) | 2.16 | Unmarshal a XML payloads to POJOs and back using XMLMapper extension of Jackson.
 
-| xref:3.4.x@components:dataformats/jaxb.adoc[JAXB] +
+| xref:3.4.x@components:dataformats:jaxb-dataformat.adoc[JAXB] +
 (camel-jaxb-starter) | 1.0 | Unmarshal XML payloads to POJOs and back using JAXB2 XML marshalling standard.
 
-| xref:3.4.x@components:dataformats/json-fastjson.adoc[JSON Fastjson] +
+| xref:3.4.x@components:dataformats:json-fastjson-dataformat.adoc[JSON Fastjson] +
 (camel-fastjson-starter) | 2.20 | Marshal POJOs to JSON and back.
 
-| xref:3.4.x@components:dataformats/json-gson.adoc[JSON Gson] +
+| xref:3.4.x@components:dataformats:json-gson-dataformat.adoc[JSON Gson] +
 (camel-gson-starter) | 2.10 | Marshal POJOs to JSON and back.
 
-| xref:3.4.x@components:dataformats/json-jackson.adoc[JSON Jackson] +
+| xref:3.4.x@components:dataformats:json-jackson-dataformat.adoc[JSON Jackson] +
 (camel-jackson-starter) | 2.0 | Marshal POJOs to JSON and back.
 
-| xref:3.4.x@components:dataformats/json-johnzon.adoc[JSON Johnzon] +
+| xref:3.4.x@components:dataformats:json-johnzon-dataformat.adoc[JSON Johnzon] +
 (camel-johnzon-starter) | 2.18 | Marshal POJOs to JSON and back.
 
-| xref:3.4.x@components:dataformats/json-jsonb.adoc[JSON JSON-B] +
+| xref:3.4.x@components:dataformats:json-jsonb-dataformat.adoc[JSON JSON-B] +
 (camel-jsonb-starter) | 3.7 | Marshal POJOs to JSON and back using JSON-B.
 
-| xref:3.4.x@components:dataformats/json-xstream.adoc[JSON XStream] +
+| xref:3.4.x@components:dataformats:json-xstream-dataformat.adoc[JSON XStream] +
 (camel-xstream-starter) | 2.0 | Marshal POJOs to JSON and back.
 
-| xref:3.4.x@components:dataformats/jsonApi.adoc[JSonApi] +
+| xref:3.4.x@components:dataformats:jsonApi-dataformat.adoc[JSonApi] +
 (camel-jsonapi-starter) | 3.0 | Marshal and unmarshal JSON:API resources using JSONAPI-Converter library.
 
-| xref:3.4.x@components:dataformats/lzf.adoc[LZF Deflate Compression] +
+| xref:3.4.x@components:dataformats:lzf-dataformat.adoc[LZF Deflate Compression] +
 (camel-lzf-starter) | 2.17 | Compress and decompress streams using LZF deflate algorithm.
 
-| xref:3.4.x@components:dataformats/mime-multipart.adoc[MIME Multipart] +
+| xref:3.4.x@components:dataformats:mime-multipart-dataformat.adoc[MIME Multipart] +
 (camel-mail-starter) | 2.17 | Marshal Camel messages with attachments into MIME-Multipart messages and back.
 
-| xref:3.4.x@components:dataformats/pgp.adoc[PGP] +
+| xref:3.4.x@components:dataformats:pgp-dataformat.adoc[PGP] +
 (camel-crypto-starter) | 2.9 | Encrypt and decrypt messages using Java Cryptographic Extension (JCE) and PGP.
 
-| xref:3.4.x@components:dataformats/protobuf.adoc[Protobuf] +
+| xref:3.4.x@components:dataformats:protobuf-dataformat.adoc[Protobuf] +
 (camel-protobuf-starter) | 2.2 | Serialize and deserialize Java objects using Google's Protocol buffers.
 
-| xref:3.4.x@components:dataformats/rss.adoc[RSS] +
+| xref:3.4.x@components:dataformats:rss-dataformat.adoc[RSS] +
 (camel-rss-starter) | 2.1 | Transform from ROME SyndFeed Java Objects to XML and vice-versa.
 
-| xref:3.4.x@components:dataformats/soapjaxb.adoc[SOAP] +
+| xref:3.4.x@components:dataformats:soapjaxb-dataformat.adoc[SOAP] +
 (camel-soap-starter) | 2.3 | Marshal Java objects to SOAP messages and back.
 
-| xref:3.4.x@components:dataformats/syslog.adoc[Syslog] +
+| xref:3.4.x@components:dataformats:syslog-dataformat.adoc[Syslog] +
 (camel-syslog-starter) | 2.6 | Marshall SyslogMessages to RFC3164 and RFC5424 messages and back.
 
-| xref:3.4.x@components:dataformats/tarfile.adoc[Tar File] +
+| xref:3.4.x@components:dataformats:tarfile-dataformat.adoc[Tar File] +
 (camel-tarfile-starter) | 2.16 | Archive files into tarballs or extract files from tarballs.
 
-| xref:3.4.x@components:dataformats/thrift.adoc[Thrift] +
+| xref:3.4.x@components:dataformats:thrift-dataformat.adoc[Thrift] +
 (camel-thrift-starter) | 2.20 | Serialize and deserialize messages using Apache Thrift binary data format.
 
-| xref:3.4.x@components:dataformats/tidyMarkup.adoc[TidyMarkup] +
+| xref:3.4.x@components:dataformats:tidyMarkup-dataformat.adoc[TidyMarkup] +
 (camel-tagsoup-starter) | 2.0 | Parse (potentially invalid) HTML into valid HTML or DOM.
 
-| xref:3.4.x@components:dataformats/univocity-csv.adoc[uniVocity CSV] +
+| xref:3.4.x@components:dataformats:univocity-csv-dataformat.adoc[uniVocity CSV] +
 (camel-univocity-parsers-starter) | 2.15 | Marshal and unmarshal Java objects from and to CSV (Comma Separated Values) using UniVocity Parsers.
 
-| xref:3.4.x@components:dataformats/univocity-fixed.adoc[uniVocity Fixed Length] +
+| xref:3.4.x@components:dataformats:univocity-fixed-dataformat.adoc[uniVocity Fixed Length] +
 (camel-univocity-parsers-starter) | 2.15 | Marshal and unmarshal Java objects from and to fixed length records using UniVocity Parsers.
 
-| xref:3.4.x@components:dataformats/univocity-tsv.adoc[uniVocity TSV] +
+| xref:3.4.x@components:dataformats:univocity-tsv-dataformat.adoc[uniVocity TSV] +
 (camel-univocity-parsers-starter) | 2.15 | Marshal and unmarshal Java objects from and to TSV (Tab-Separated Values) records using UniVocity Parsers.
 
-| xref:3.4.x@components:dataformats/secureXML.adoc[XML Security] +
+| xref:3.4.x@components:dataformats:secureXML-dataformat.adoc[XML Security] +
 (camel-xmlsecurity-starter) | 2.0 | Encrypt and decrypt XML payloads using Apache Santuario.
 
-| xref:3.4.x@components:dataformats/xstream.adoc[XStream] +
+| xref:3.4.x@components:dataformats:xstream-dataformat.adoc[XStream] +
 (camel-xstream-starter) | 1.3 | Marshal and unmarshal POJOs to/from XML using XStream library.
 
-| xref:3.4.x@components:dataformats/yaml-snakeyaml.adoc[YAML SnakeYAML] +
+| xref:3.4.x@components:dataformats:yaml-snakeyaml-dataformat.adoc[YAML SnakeYAML] +
 (camel-snakeyaml-starter) | 2.17 | Marshal and unmarshal Java objects to and from YAML.
 
-| xref:3.4.x@components:dataformats/zipdeflater.adoc[Zip Deflate Compression] +
+| xref:3.4.x@components:dataformats:zipdeflater-dataformat.adoc[Zip Deflate Compression] +
 (camel-zip-deflater-starter) | 2.12 | Compress and decompress streams using java.util.zip.Deflater and java.util.zip.Inflater.
 
-| xref:3.4.x@components:dataformats/zipfile.adoc[Zip File] +
+| xref:3.4.x@components:dataformats:zipfile-dataformat.adoc[Zip File] +
 (camel-zipfile-starter) | 2.11 | Compression and decompress streams using java.util.zip.ZipStream.
 |===
 // dataformats: END
@@ -1195,55 +1195,55 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 |===
 | Language | Since | Description
 
-| xref:3.4.x@components:languages/bean.adoc[Bean method] +
+| xref:3.4.x@components:languages:bean-language.adoc[Bean method] +
 (camel-bean-starter) | 1.3 | Call a method of the specified Java bean passing the Exchange, Body or specific headers to it.
 
-| xref:3.4.x@components:languages/constant.adoc[Constant] +
+| xref:3.4.x@components:languages:constant-language.adoc[Constant] +
 (camel-base) | 1.5 | To use a constant value in Camel expressions or predicates. Important: this is a fixed constant value that is only set once during starting up the route, do not use this if you want dynamic values during routing.
 
-| xref:3.4.x@components:languages/exchangeProperty.adoc[ExchangeProperty] +
+| xref:3.4.x@components:languages:exchangeProperty-language.adoc[ExchangeProperty] +
 (camel-base) | 2.0 | To use a Camel Exchange property in expressions or predicates.
 
-| xref:3.4.x@components:languages/file.adoc[File] +
+| xref:3.4.x@components:languages:file-language.adoc[File] +
 (camel-base) | 1.1 | For expressions and predicates using the file/simple language.
 
-| xref:3.4.x@components:languages/groovy.adoc[Groovy] +
+| xref:3.4.x@components:languages:groovy-language.adoc[Groovy] +
 (camel-groovy-starter) | 1.3 | Evaluate a Groovy script.
 
-| xref:3.4.x@components:languages/header.adoc[Header] +
+| xref:3.4.x@components:languages:header-language.adoc[Header] +
 (camel-base) | 1.5 | To use a Camel Message header in expressions or predicates.
 
-| xref:3.4.x@components:languages/hl7terser.adoc[HL7 Terser] +
+| xref:3.4.x@components:languages:hl7terser-language.adoc[HL7 Terser] +
 (camel-hl7-starter) | 2.11 | Get the value of an HL7 message field specified by terse location specification syntax.
 
-| xref:3.4.x@components:languages/jsonpath.adoc[JsonPath] +
+| xref:3.4.x@components:languages:jsonpath-language.adoc[JsonPath] +
 (camel-jsonpath-starter) | 2.13 | Evaluate a JsonPath expression against a JSON message body.
 
-| xref:3.4.x@components:languages/mvel.adoc[MVEL] +
+| xref:3.4.x@components:languages:mvel-language.adoc[MVEL] +
 (camel-mvel-starter) | 2.0 | Evaluate an MVEL template against the Camel Exchange.
 
-| xref:3.4.x@components:languages/ognl.adoc[OGNL] +
+| xref:3.4.x@components:languages:ognl-language.adoc[OGNL] +
 (camel-ognl-starter) | 1.1 | Evaluate an Apache Commons Object Graph Navigation Library (OGNL) expression against the Camel Exchange.
 
-| xref:3.4.x@components:languages/ref.adoc[Ref] +
+| xref:3.4.x@components:languages:ref-language.adoc[Ref] +
 (camel-base) | 2.8 | Reference to an existing Camel expression or predicate, which is looked up from the Camel registry.
 
-| xref:3.4.x@components:languages/simple.adoc[Simple] +
+| xref:3.4.x@components:languages:simple-language.adoc[Simple] +
 (camel-base) | 1.1 | To use Camels built-in Simple language in Camel expressions or predicates.
 
-| xref:3.4.x@components:languages/spel.adoc[SpEL] +
+| xref:3.4.x@components:languages:spel-language.adoc[SpEL] +
 (camel-spring-starter) | 2.7 | Evaluate a Spring Expression Language (SpEL) expression against the Camel Exchange.
 
-| xref:3.4.x@components:languages/tokenize.adoc[Tokenize] +
+| xref:3.4.x@components:languages:tokenize-language.adoc[Tokenize] +
 (camel-base) | 2.0 | To use Camel message body or header with a tokenizer in Camel expressions or predicates.
 
-| xref:3.4.x@components:languages/xtokenize.adoc[XML Tokenize] +
+| xref:3.4.x@components:languages:xtokenize-language.adoc[XML Tokenize] +
 (camel-xml-jaxp-starter) | 2.14 | Tokenize XML payloads using the specified path expression.
 
-| xref:3.4.x@components:languages/xpath.adoc[XPath] +
+| xref:3.4.x@components:languages:xpath-language.adoc[XPath] +
 (camel-xpath-starter) | 1.1 | Evaluate an XPath expression against an XML payload.
 
-| xref:3.4.x@components:languages/xquery.adoc[XQuery] +
+| xref:3.4.x@components:languages:xquery-language.adoc[XQuery] +
 (camel-saxon-starter) | 1.0 | Evaluate an XQuery expressions against an XML payload.
 |===
 // languages: END
@@ -1258,82 +1258,82 @@ Number of miscellaneous extensions: 26 in 26 JAR artifacts (1 deprecated)
 |===
 | Extension | Since | Description
 
-| xref:3.4.x@components:others/aws-xray.adoc[AWS XRay] +
+| xref:3.4.x@components:others:aws-xray.adoc[AWS XRay] +
 (camel-aws-xray-starter) | 2.21 | Distributed tracing using AWS XRay
 
-| xref:3.4.x@components:others/cxf-transport.adoc[CXF Transport] +
+| xref:3.4.x@components:others:cxf-transport.adoc[CXF Transport] +
 (camel-cxf-transport-starter) | 2.8 | Camel Transport for Apache CXF
 
-| xref:3.4.x@components:others/etcd3.adoc[Etcd3] +
+| xref:3.4.x@components:others:etcd3.adoc[Etcd3] +
 (camel-etcd3-starter) | 3.5 | Aggregation repository using EtcD as datastore
 
-| xref:3.4.x@components:others/hystrix.adoc[Hystrix] +
+| xref:3.4.x@components:others:hystrix.adoc[Hystrix] +
 (camel-hystrix-starter) | 2.18 | *deprecated* Circuit Breaker EIP using Netflix Hystrix
 
-| xref:3.4.x@components:others/jasypt.adoc[Jasypt] +
+| xref:3.4.x@components:others:jasypt.adoc[Jasypt] +
 (camel-jasypt-starter) | 2.5 | Security using Jasypt
 
-| xref:3.4.x@components:others/leveldb.adoc[LevelDB] +
+| xref:3.4.x@components:others:leveldb.adoc[LevelDB] +
 (camel-leveldb-starter) | 2.10 | Using LevelDB as persistent EIP store
 
-| xref:3.4.x@components:others/leveldb-legacy.adoc[LevelDB-legacy] +
+| xref:3.4.x@components:others:leveldb-legacy.adoc[LevelDB-legacy] +
 (camel-leveldb-legacy-starter) | 2.10 | Using LevelDB as persistent EIP store
 
-| xref:3.4.x@components:others/lra.adoc[LRA] +
+| xref:3.4.x@components:others:lra.adoc[LRA] +
 (camel-lra-starter) | 2.21 | Camel saga binding for Long-Running-Action framework
 
-| xref:3.4.x@components:others/openapi-java.adoc[Openapi Java] +
+| xref:3.4.x@components:others:openapi-java.adoc[Openapi Java] +
 (camel-openapi-java-starter) | 3.1 | Rest-dsl support for using openapi doc
 
-| xref:3.4.x@components:others/opentelemetry.adoc[OpenTelemetry] +
+| xref:3.4.x@components:others:opentelemetry.adoc[OpenTelemetry] +
 (camel-opentelemetry-starter) | 3.5 | Distributed tracing using OpenTelemetry
 
-| xref:3.4.x@components:others/opentracing.adoc[OpenTracing] +
+| xref:3.4.x@components:others:opentracing.adoc[OpenTracing] +
 (camel-opentracing-starter) | 2.19 | Distributed tracing using OpenTracing
 
-| xref:3.4.x@components:others/reactive-executor-vertx.adoc[Reactive Executor Vert.x] +
+| xref:3.4.x@components:others:reactive-executor-vertx.adoc[Reactive Executor Vert.x] +
 (camel-reactive-executor-vertx-starter) | 3.0 | Reactive Executor for camel-core using Vert.x
 
-| xref:3.4.x@components:others/reactor.adoc[Reactor] +
+| xref:3.4.x@components:others:reactor.adoc[Reactor] +
 (camel-reactor-starter) | 2.20 | Reactor based back-end for Camel's reactive streams component
 
-| xref:3.4.x@components:others/resilience4j.adoc[Resilience4j] +
+| xref:3.4.x@components:others:resilience4j.adoc[Resilience4j] +
 (camel-resilience4j-starter) | 3.0 | Circuit Breaker EIP using Resilience4j
 
-| xref:3.4.x@components:others/ribbon.adoc[Ribbon] +
+| xref:3.4.x@components:others:ribbon.adoc[Ribbon] +
 (camel-ribbon-starter) | 2.18 | Using Netflix Ribbon for client side load balancing
 
-| xref:3.4.x@components:others/rxjava.adoc[RxJava] +
+| xref:3.4.x@components:others:rxjava.adoc[RxJava] +
 (camel-rxjava-starter) | 2.22 | RxJava based back-end for Camel's reactive streams component
 
-| xref:3.4.x@components:others/shiro.adoc[Shiro] +
+| xref:3.4.x@components:others:shiro.adoc[Shiro] +
 (camel-shiro-starter) | 2.5 | Security using Shiro
 
-| xref:3.4.x@components:others/spring-cloud.adoc[Spring Cloud] +
+| xref:3.4.x@components:others:spring-cloud.adoc[Spring Cloud] +
 (camel-spring-cloud-starter) | 2.19 | Camel Cloud integration with Spring Cloud
 
-| xref:3.4.x@components:others/spring-cloud-consul.adoc[Spring Cloud Consul] +
+| xref:3.4.x@components:others:spring-cloud-consul.adoc[Spring Cloud Consul] +
 (camel-spring-cloud-consul-starter) | 2.19 | Camel Cloud integration with Spring Cloud Consul
 
-| xref:3.4.x@components:others/spring-cloud-netflix.adoc[Spring Cloud Netflix] +
+| xref:3.4.x@components:others:spring-cloud-netflix.adoc[Spring Cloud Netflix] +
 (camel-spring-cloud-netflix-starter) | 2.19 | Camel Cloud integration with Spring Cloud Netflix
 
-| xref:3.4.x@components:others/spring-cloud-zookeeper.adoc[Spring Cloud Zookeeper] +
+| xref:3.4.x@components:others:spring-cloud-zookeeper.adoc[Spring Cloud Zookeeper] +
 (camel-spring-cloud-zookeeper-starter) | 2.19 | Camel Cloud integration with Spring Cloud Zookeeper
 
-| xref:3.4.x@components:others/spring-javaconfig.adoc[Spring Java Configuration] +
+| xref:3.4.x@components:others:spring-javaconfig.adoc[Spring Java Configuration] +
 (camel-spring-javaconfig-starter) | 2.0 | Using Camel with Spring Java Configuration
 
-| xref:3.4.x@components:others/spring-security.adoc[Spring Security] +
+| xref:3.4.x@components:others:spring-security.adoc[Spring Security] +
 (camel-spring-security-starter) | 2.3 | Security using Spring Security
 
-| xref:3.4.x@components:others/swagger-java.adoc[Swagger Java] +
+| xref:3.4.x@components:others:swagger-java.adoc[Swagger Java] +
 (camel-swagger-java-starter) | 2.16 | Rest-dsl support for using swagger api-doc
 
-| xref:3.4.x@components:others/undertow-spring-security.adoc[Undertow Spring Security] +
+| xref:3.4.x@components:others:undertow-spring-security.adoc[Undertow Spring Security] +
 (camel-undertow-spring-security-starter) | 3.3 | Spring Security Provider for camel-undertow
 
-| xref:3.4.x@components:others/zipkin.adoc[Zipkin] +
+| xref:3.4.x@components:others:zipkin.adoc[Zipkin] +
 (camel-zipkin-starter) | 2.18 | Distributed message tracing using Zipkin
 |===
 // others: END

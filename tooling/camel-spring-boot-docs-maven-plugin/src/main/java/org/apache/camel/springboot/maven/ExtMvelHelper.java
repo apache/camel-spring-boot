@@ -48,11 +48,11 @@ public class ExtMvelHelper {
         } else if (model instanceof ComponentModel) {
             return String.format("xref:3.4.x@components::%s-component.adoc", invokeGetter(model, "getScheme"));
         } else if (model instanceof DataFormatModel) {
-            return String.format("xref:3.4.x@components:dataformats/%s.adoc", invokeGetter(model, "getName"));
+            return String.format("xref:3.4.x@components:dataformats:%s-dataformat.adoc", invokeGetter(model, "getName"));
         } else if (model instanceof LanguageModel) {
-            return String.format("xref:3.4.x@components:languages/%s.adoc", invokeGetter(model, "getName"));
+            return String.format("xref:3.4.x@components:languages:%s-language.adoc", invokeGetter(model, "getName"));
         } else if (model instanceof OtherModel) {
-            return String.format("xref:3.4.x@components:others/%s.adoc", invokeGetter(model, "getName"));
+            return String.format("xref:3.4.x@components:others:%s.adoc", invokeGetter(model, "getName"));
         } else {
             return null;
         }
