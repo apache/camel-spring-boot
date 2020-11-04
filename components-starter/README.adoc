@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 341 in 274 JAR artifacts (3 deprecated)
+Number of Camel components: 340 in 273 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -324,8 +324,6 @@ Number of Camel components: 341 in 274 JAR artifacts (3 deprecated)
 | xref:latest@components::hbase-component.adoc[HBase] | camel-hbase-starter | Stable | 2.10 | Reading and write from/to an HBase store (Hadoop database).
 
 | xref:latest@components::hdfs-component.adoc[HDFS] | camel-hdfs-starter | Stable | 2.14 | Read and write from/to an HDFS filesystem using Hadoop 2.x.
-
-| xref:latest@components::hipchat-component.adoc[Hipchat] | camel-hipchat-starter | Stable | 2.15 | Send and receive messages to/from Hipchat service.
 
 | xref:latest@components::http-component.adoc[HTTP] | camel-http-starter | Stable | 2.3 | Send requests to external HTTP servers using Apache HTTP Client 4.x.
 
@@ -847,7 +845,7 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 26 in 26 JAR artifacts (2 deprecated)
+Number of miscellaneous extensions: 25 in 25 JAR artifacts (2 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -874,8 +872,6 @@ Number of miscellaneous extensions: 26 in 26 JAR artifacts (2 deprecated)
 | xref:latest@components:others:opentelemetry.adoc[OpenTelemetry] | camel-opentelemetry-starter | Stable | 3.5 | Distributed tracing using OpenTelemetry
 
 | xref:latest@components:others:opentracing.adoc[OpenTracing] | camel-opentracing-starter | Stable | 2.19 | Distributed tracing using OpenTracing
-
-| xref:latest@components:others:reactive-executor-vertx.adoc[Reactive Executor Vert.x] | camel-reactive-executor-vertx-starter | Experimental | 3.0 | Reactive Executor for camel-core using Vert.x
 
 | xref:latest@components:others:reactor.adoc[Reactor] | camel-reactor-starter | Stable | 2.20 | Reactor based back-end for Camel's reactive streams component
 
