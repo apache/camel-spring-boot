@@ -1309,16 +1309,16 @@ Number of miscellaneous extensions: 26 in 26 JAR artifacts (1 deprecated)
 | xref:3.4.x@components:others:shiro.adoc[Shiro] +
 (camel-shiro-starter) | 2.5 | Security using Shiro
 
-| xref:3.4.x@components:others:spring-cloud.adoc[Spring Cloud] +
+| xref:spring-cloud.adoc[Spring Cloud] +
 (camel-spring-cloud-starter) | 2.19 | Camel Cloud integration with Spring Cloud
 
-| xref:3.4.x@components:others:spring-cloud-consul.adoc[Spring Cloud Consul] +
+| xref:spring-cloud-consul.adoc[Spring Cloud Consul] +
 (camel-spring-cloud-consul-starter) | 2.19 | Camel Cloud integration with Spring Cloud Consul
 
-| xref:3.4.x@components:others:spring-cloud-netflix.adoc[Spring Cloud Netflix] +
+| xref:spring-cloud-netflix.adoc[Spring Cloud Netflix] +
 (camel-spring-cloud-netflix-starter) | 2.19 | Camel Cloud integration with Spring Cloud Netflix
 
-| xref:3.4.x@components:others:spring-cloud-zookeeper.adoc[Spring Cloud Zookeeper] +
+| xref:spring-cloud-zookeeper.adoc[Spring Cloud Zookeeper] +
 (camel-spring-cloud-zookeeper-starter) | 2.19 | Camel Cloud integration with Spring Cloud Zookeeper
 
 | xref:3.4.x@components:others:spring-javaconfig.adoc[Spring Java Configuration] +

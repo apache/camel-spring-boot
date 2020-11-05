@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -628,7 +627,7 @@ public class UpdateDocComponentsListMojo extends AbstractMojo {
     }
 
     private Path getComponentsStarterDocPath() {
-        return Paths.get(websiteDocBaseDir.toString(), "components-starter");
+        return websiteDocBaseDir.toPath();
     }
 
 }

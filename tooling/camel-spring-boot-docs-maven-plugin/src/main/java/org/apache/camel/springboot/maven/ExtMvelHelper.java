@@ -16,14 +16,17 @@
  */
 package org.apache.camel.springboot.maven;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.apache.camel.maven.packaging.MvelHelper;
-import org.apache.camel.tooling.model.OtherModel;
-import org.apache.camel.tooling.util.Strings;
+import org.apache.camel.tooling.model.ArtifactModel;
+import org.apache.camel.tooling.model.BaseModel;
 import org.apache.camel.tooling.model.ComponentModel;
 import org.apache.camel.tooling.model.DataFormatModel;
 import org.apache.camel.tooling.model.LanguageModel;
+import org.apache.camel.tooling.model.OtherModel;
+import org.apache.camel.tooling.model.SupportLevel;
 
 public class ExtMvelHelper {
 
@@ -37,46 +40,38 @@ public class ExtMvelHelper {
         return MvelHelper.escape(raw);
     }
 
-    public String getFirstVersionShort(Object model) {
-        String version = (String) invokeGetter(model, "getFirstVersion");
+    public String getFirstVersionShort(BaseModel<?> model) {
+        String version = model.getFirstVersion();
         return org.apache.camel.tooling.model.Strings.cutLastZeroDigit(version);
     }
 
-    public String getDocLink(Object model) {
-        if (localDocExists(model)) {
-            return getLocalDocLink(model);
+    public String getSupportLevel(ArtifactModel<?> model) {
+        final SupportLevel supportLevel = model.getSupportLevel();
+        if (supportLevel != null) {
+            return model.getSupportLevel().name();
+        }
+
+        return SupportLevel.Preview.name();
+    }
+
+    public String getDocLink(ArtifactModel<?> model) {
+        if (isLocalComponent(model)) {
+            return String.format("xref:%s.adoc", ((ArtifactModel<?>) model).getName());
         } else if (model instanceof ComponentModel) {
-            return String.format("xref:3.4.x@components::%s-component.adoc", invokeGetter(model, "getScheme"));
+            return String.format("xref:3.4.x@components::%s-component.adoc", ((ComponentModel) model).getScheme());
         } else if (model instanceof DataFormatModel) {
-            return String.format("xref:3.4.x@components:dataformats:%s-dataformat.adoc", invokeGetter(model, "getName"));
+            return String.format("xref:3.4.x@components:dataformats:%s-dataformat.adoc", ((DataFormatModel) model).getName());
         } else if (model instanceof LanguageModel) {
-            return String.format("xref:3.4.x@components:languages:%s-language.adoc", invokeGetter(model, "getName"));
+            return String.format("xref:3.4.x@components:languages:%s-language.adoc", ((LanguageModel) model).getName());
         } else if (model instanceof OtherModel) {
-            return String.format("xref:3.4.x@components:others:%s.adoc", invokeGetter(model, "getName"));
+            return String.format("xref:3.4.x@components:others:%s.adoc", ((OtherModel) model).getName());
         } else {
             return null;
         }
     }
 
-    private Object invokeGetter(Object model, String method) {
-        try {
-            return model.getClass().getMethod(method)
-                    .invoke(model);
-        } catch (Exception e) {
-            throw new RuntimeException("Unable to access " + method + " from " + model, e);
-        }
+    private boolean isLocalComponent(ArtifactModel<?> model) {
+        return Files.exists(extensionsDocPath.resolve(((ArtifactModel<?>) model).getName() + ".adoc"));
     }
 
-    private boolean localDocExists(Object model) {
-        Path path = extensionsDocPath.resolve(getSpringBootDocName(model));
-        return path.toFile().exists();
-    }
-
-    private String getLocalDocLink(Object model) {
-        return "xref:components-starter/" + getSpringBootDocName(model);
-    }
-
-    private String getSpringBootDocName(Object model) {
-        return Strings.after((String) invokeGetter(model, "getArtifactId"), "camel-") + ".adoc";
-    }
 }
