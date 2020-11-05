@@ -885,13 +885,13 @@ Number of miscellaneous extensions: 25 in 25 JAR artifacts (2 deprecated)
 
 | xref:latest@components:others:shiro.adoc[Shiro] | camel-shiro-starter | Stable | 2.5 | Security using Shiro
 
-| xref:latest@components:others:spring-cloud.adoc[Spring Cloud] | camel-spring-cloud-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud
+| xref:spring-cloud.adoc[Spring Cloud] | camel-spring-cloud-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud
 
-| xref:latest@components:others:spring-cloud-consul.adoc[Spring Cloud Consul] | camel-spring-cloud-consul-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud Consul
+| xref:spring-cloud-consul.adoc[Spring Cloud Consul] | camel-spring-cloud-consul-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud Consul
 
-| xref:latest@components:others:spring-cloud-netflix.adoc[Spring Cloud Netflix] | camel-spring-cloud-netflix-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud Netflix
+| xref:spring-cloud-netflix.adoc[Spring Cloud Netflix] | camel-spring-cloud-netflix-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud Netflix
 
-| xref:latest@components:others:spring-cloud-zookeeper.adoc[Spring Cloud Zookeeper] | camel-spring-cloud-zookeeper-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud Zookeeper
+| xref:spring-cloud-zookeeper.adoc[Spring Cloud Zookeeper] | camel-spring-cloud-zookeeper-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud Zookeeper
 
 | xref:latest@components:others:spring-javaconfig.adoc[Spring Java Configuration] | camel-spring-javaconfig-starter | Stable | 2.0 | *deprecated* Using Camel with Spring Java Configuration
 
