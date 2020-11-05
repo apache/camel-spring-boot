@@ -20,9 +20,6 @@ Number of Camel components: 341 in 274 JAR artifacts (1 deprecated)
 | xref:3.4.x@components::apns-component.adoc[APNS] (camel-apns-starter) +
 `apns:name` | 2.8 | Send notifications to Apple iOS devices.
 
-| xref:3.4.x@components::arangodb-component.adoc[ArangoDb] (camel-arangodb-starter) +
-`arangodb:database` | 3.5 | Perform operations on ArangoDb when used as a Document Database, or as a Graph Database
-
 | xref:3.4.x@components::as2-component.adoc[AS2] (camel-as2-starter) +
 `as2:apiName/methodName` | 2.22 | Transfer data securely and reliably using the AS2 protocol (RFC4130).
 
@@ -34,9 +31,6 @@ Number of Camel components: 341 in 274 JAR artifacts (1 deprecated)
 
 | xref:3.4.x@components::ahc-ws-component.adoc[Async HTTP Client (AHC) Websocket] (camel-ahc-ws-starter) +
 `ahc-ws:httpUri` | 2.14 | Exchange data with external Websocket servers using Async Http Client.
-
-| xref:3.4.x@components::atlasmap-component.adoc[AtlasMap] (camel-atlasmap-starter) +
-`atlasmap:resourceUri` | 3.7 | Transforms the message using an AtlasMap transformation.
 
 | xref:3.4.x@components::atmos-component.adoc[Atmos] (camel-atmos-starter) +
 `atmos:name/operation` | 2.15 | Integract with EMC's ViPR object data services using the Atmos Client.
@@ -89,9 +83,6 @@ Number of Camel components: 341 in 274 JAR artifacts (1 deprecated)
 | xref:3.4.x@components::aws2-eks-component.adoc[AWS 2 Elastic Kubernetes Service (EKS)] (camel-aws2-eks-starter) +
 `aws2-eks:label` | 3.1 | Manage AWS EKS cluster instances using AWS SDK version 2.x.
 
-| xref:3.4.x@components::aws2-eventbridge-component.adoc[AWS 2 Eventbridge] (camel-aws2-eventbridge-starter) +
-`aws2-eventbridge://eventbusNameOrArn` | 3.6 | Manage AWS Eventbridge cluster instances using AWS SDK version 2.x.
-
 | xref:3.4.x@components::aws2-iam-component.adoc[AWS 2 Identity and Access Management (IAM)] (camel-aws2-iam-starter) +
 `aws2-iam:label` | 3.1 | Manage AWS IAM instances using AWS SDK version 2.x.
 
@@ -115,9 +106,6 @@ Number of Camel components: 341 in 274 JAR artifacts (1 deprecated)
 
 | xref:3.4.x@components::aws2-s3-component.adoc[AWS 2 S3 Storage Service] (camel-aws2-s3-starter) +
 `aws2-s3://bucketNameOrArn` | 3.2 | Store and retrie objects from AWS S3 Storage Service using AWS SDK version 2.x.
-
-| xref:3.4.x@components::aws2-sts-component.adoc[AWS 2 Security Token Service (STS)] (camel-aws2-sts-starter) +
-`aws2-sts:label` | 3.5 | Manage AWS STS cluster instances using AWS SDK version 2.x.
 
 | xref:3.4.x@components::aws2-ses-component.adoc[AWS 2 Simple Email Service (SES)] (camel-aws2-ses-starter) +
 `aws2-ses:from` | 3.1 | Send e-mails through AWS SES service using AWS SDK version 2.x.
@@ -190,9 +178,6 @@ Number of Camel components: 341 in 274 JAR artifacts (1 deprecated)
 
 | xref:3.4.x@components::aws-translate-component.adoc[AWS Translate] (camel-aws-translate-starter) +
 `aws-translate:label` | 3.0 | Translate texts using AWS Translate.
-
-| xref:3.4.x@components::azure-eventhubs-component.adoc[Azure Event Hubs] (camel-azure-eventhubs-starter) +
-`azure-eventhubs:namespace/eventHubName` | 3.5 | The azure-eventhubs component that integrates Azure Event Hubs using AMQP protocol. Azure EventHubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers.
 
 | xref:3.4.x@components::azure-storage-blob-component.adoc[Azure Storage Blob Service] (camel-azure-storage-blob-starter) +
 `azure-storage-blob:accountName/containerName` | 3.3 | Store and retrieve blobs from Azure Storage Blob Service using SDK v12.
@@ -590,9 +575,6 @@ Number of Camel components: 341 in 274 JAR artifacts (1 deprecated)
 | xref:3.4.x@components::json-validator-component.adoc[JSON Schema Validator] (camel-json-validator-starter) +
 `json-validator:resourceUri` | 2.20 | Validate JSON payloads using NetworkNT JSON Schema.
 
-| xref:3.4.x@components::jsonata-component.adoc[JSONATA] (camel-jsonata-starter) +
-`jsonata:resourceUri` | 3.5 | JSON to JSON transformation using JSONATA.
-
 | xref:3.4.x@components::jt400-component.adoc[JT400] (camel-jt400-starter) +
 `jt400:userID:password/systemName/objectPath.type` | 1.5 | Exchanges messages with an AS/400 system using data queues or program call.
 
@@ -677,9 +659,6 @@ Number of Camel components: 341 in 274 JAR artifacts (1 deprecated)
 | xref:3.4.x@components::mina-component.adoc[Mina] (camel-mina-starter) +
 `mina:protocol:host:port` | 2.10 | Socket level networking using TCP or UDP with Apache Mina 2.x.
 
-| xref:3.4.x@components::minio-component.adoc[Minio] (camel-minio-starter) +
-`minio:bucketName` | 3.5 | Store and retrieve objects from Minio Storage Service using Minio SDK.
-
 | xref:3.4.x@components::mllp-component.adoc[MLLP] (camel-mllp-starter) +
 `mllp:hostname:port` | 2.17 | Communicate with external systems using the MLLP protocol.
 
@@ -724,9 +703,6 @@ Number of Camel components: 341 in 274 JAR artifacts (1 deprecated)
 
 | xref:3.4.x@components::nsq-component.adoc[NSQ] (camel-nsq-starter) +
 `nsq:topic` | 2.23 | Send and receive messages from NSQ realtime distributed messaging platform.
-
-| xref:3.4.x@components::oaipmh-component.adoc[OAI-PMH] (camel-oaipmh-starter) +
-`oaipmh:baseUrl` | 3.5 | Harvest metadata using OAI-PMH protocol
 
 | xref:3.4.x@components::olingo2-component.adoc[Olingo2] (camel-olingo2-starter) +
 `olingo2:apiName/methodName` | 2.14 | Communicate with OData 2.0 services using Apache Olingo.
@@ -971,12 +947,6 @@ Number of Camel components: 341 in 274 JAR artifacts (1 deprecated)
 | xref:3.4.x@components::vertx-component.adoc[Vert.x] (camel-vertx-starter) +
 `vertx:address` | 2.12 | Send and receive messages to/from Vert.x Event Bus.
 
-| xref:3.4.x@components::vertx-http-component.adoc[Vert.x HTTP Client] (camel-vertx-http-starter) +
-`vertx-http:httpUri` | 3.5 | Send requests to external HTTP servers using Vert.x
-
-| xref:3.4.x@components::vertx-websocket-component.adoc[Vert.x WebSocket] (camel-vertx-websocket-starter) +
-`vertx-websocket:host:port/path` | 3.5 | Expose WebSocket endpoints and connect to remote WebSocket servers using Vert.x
-
 | xref:3.4.x@components::vm-component.adoc[VM] (camel-vm-starter) +
 `vm:name` | 1.1 | Call another endpoint in the same CamelContext asynchronously.
 
@@ -1121,9 +1091,6 @@ Number of Camel data formats: 46 in 38 JAR artifacts (0 deprecated)
 | xref:3.4.x@components:dataformats:json-johnzon-dataformat.adoc[JSON Johnzon] +
 (camel-johnzon-starter) | 2.18 | Marshal POJOs to JSON and back.
 
-| xref:3.4.x@components:dataformats:json-jsonb-dataformat.adoc[JSON JSON-B] +
-(camel-jsonb-starter) | 3.7 | Marshal POJOs to JSON and back using JSON-B.
-
 | xref:3.4.x@components:dataformats:json-xstream-dataformat.adoc[JSON XStream] +
 (camel-xstream-starter) | 2.0 | Marshal POJOs to JSON and back.
 
@@ -1264,9 +1231,6 @@ Number of miscellaneous extensions: 26 in 26 JAR artifacts (1 deprecated)
 | xref:3.4.x@components:others:cxf-transport.adoc[CXF Transport] +
 (camel-cxf-transport-starter) | 2.8 | Camel Transport for Apache CXF
 
-| xref:3.4.x@components:others:etcd3.adoc[Etcd3] +
-(camel-etcd3-starter) | 3.5 | Aggregation repository using EtcD as datastore
-
 | xref:3.4.x@components:others:hystrix.adoc[Hystrix] +
 (camel-hystrix-starter) | 2.18 | *deprecated* Circuit Breaker EIP using Netflix Hystrix
 
@@ -1276,17 +1240,11 @@ Number of miscellaneous extensions: 26 in 26 JAR artifacts (1 deprecated)
 | xref:3.4.x@components:others:leveldb.adoc[LevelDB] +
 (camel-leveldb-starter) | 2.10 | Using LevelDB as persistent EIP store
 
-| xref:3.4.x@components:others:leveldb-legacy.adoc[LevelDB-legacy] +
-(camel-leveldb-legacy-starter) | 2.10 | Using LevelDB as persistent EIP store
-
 | xref:3.4.x@components:others:lra.adoc[LRA] +
 (camel-lra-starter) | 2.21 | Camel saga binding for Long-Running-Action framework
 
 | xref:3.4.x@components:others:openapi-java.adoc[Openapi Java] +
 (camel-openapi-java-starter) | 3.1 | Rest-dsl support for using openapi doc
-
-| xref:3.4.x@components:others:opentelemetry.adoc[OpenTelemetry] +
-(camel-opentelemetry-starter) | 3.5 | Distributed tracing using OpenTelemetry
 
 | xref:3.4.x@components:others:opentracing.adoc[OpenTracing] +
 (camel-opentracing-starter) | 2.19 | Distributed tracing using OpenTracing
