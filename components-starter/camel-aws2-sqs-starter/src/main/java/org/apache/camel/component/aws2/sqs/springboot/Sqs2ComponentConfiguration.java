@@ -91,6 +91,11 @@ public class Sqs2ComponentConfiguration
      */
     private Boolean trustAllCertificates = false;
     /**
+     * Set whether the SQS client should expect to load credentials on an AWS
+     * infra instance or to expect static credentials to be passed in.
+     */
+    private Boolean useIAMCredentials = false;
+    /**
      * A list of attribute names to receive when consuming. Multiple names can
      * be separated by comma.
      */
@@ -335,6 +340,14 @@ public class Sqs2ComponentConfiguration
 
     public void setTrustAllCertificates(Boolean trustAllCertificates) {
         this.trustAllCertificates = trustAllCertificates;
+    }
+
+    public Boolean getUseIAMCredentials() {
+        return useIAMCredentials;
+    }
+
+    public void setUseIAMCredentials(Boolean useIAMCredentials) {
+        this.useIAMCredentials = useIAMCredentials;
     }
 
     public String getAttributeNames() {

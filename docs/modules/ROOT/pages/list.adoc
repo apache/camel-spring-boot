@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 340 in 273 JAR artifacts (3 deprecated)
+Number of Camel components: 341 in 273 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -402,6 +402,8 @@ Number of Camel components: 340 in 273 JAR artifacts (3 deprecated)
 | xref:latest@components::kafka-component.adoc[Kafka] | camel-kafka-starter | Stable | 2.13 | Sent and receive messages to/from an Apache Kafka broker.
 
 | xref:latest@components::kubernetes-config-maps-component.adoc[Kubernetes ConfigMap] | camel-kubernetes-starter | Stable | 2.17 | Perform operations on Kubernetes ConfigMaps and get notified on ConfigMaps changes.
+
+| xref:latest@components::kubernetes-custom-resources-component.adoc[Kubernetes Custom Resources] | camel-kubernetes-starter | Preview | 3.7 | Perform operations on Kubernetes Custom Resources and get notified on Deployment changes.
 
 | xref:latest@components::kubernetes-deployments-component.adoc[Kubernetes Deployments] | camel-kubernetes-starter | Stable | 2.20 | Perform operations on Kubernetes Deployments and get notified on Deployment changes.
 
