@@ -17,7 +17,7 @@ When using aws2-sns with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 21 options, which are listed below.
+The component supports 22 options, which are listed below.
 
 
 
@@ -44,6 +44,7 @@ The component supports 21 options, which are listed below.
 | *camel.component.aws2-sns.subject* | The subject which is used if the message header 'CamelAwsSnsSubject' is not present. |  | String
 | *camel.component.aws2-sns.subscribe-s-n-sto-s-q-s* | Define if the subscription between SNS Topic and SQS must be done or not | false | Boolean
 | *camel.component.aws2-sns.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
+| *camel.component.aws2-sns.use-i-a-m-credentials* | Set whether the SQS client should expect to load credentials on an AWS infra instance or to expect static credentials to be passed in. | false | Boolean
 | *camel.component.aws2-sns.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

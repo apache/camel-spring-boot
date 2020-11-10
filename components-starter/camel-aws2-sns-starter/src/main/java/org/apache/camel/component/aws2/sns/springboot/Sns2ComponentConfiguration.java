@@ -125,6 +125,11 @@ public class Sns2ComponentConfiguration
      */
     private Boolean trustAllCertificates = false;
     /**
+     * Set whether the SQS client should expect to load credentials on an AWS
+     * infra instance or to expect static credentials to be passed in.
+     */
+    private Boolean useIAMCredentials = false;
+    /**
      * Whether the component should use basic property binding (Camel 2.x) or
      * the newer property binding with additional capabilities
      */
@@ -274,6 +279,14 @@ public class Sns2ComponentConfiguration
 
     public void setTrustAllCertificates(Boolean trustAllCertificates) {
         this.trustAllCertificates = trustAllCertificates;
+    }
+
+    public Boolean getUseIAMCredentials() {
+        return useIAMCredentials;
+    }
+
+    public void setUseIAMCredentials(Boolean useIAMCredentials) {
+        this.useIAMCredentials = useIAMCredentials;
     }
 
     @Deprecated

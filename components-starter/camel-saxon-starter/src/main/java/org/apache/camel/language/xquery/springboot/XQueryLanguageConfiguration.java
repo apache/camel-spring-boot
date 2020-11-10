@@ -42,6 +42,13 @@ public class XQueryLanguageConfiguration
      */
     private String type;
     /**
+     * Reference to a saxon configuration instance in the registry to use for
+     * xquery (requires camel-saxon). This may be needed to add custom functions
+     * to a saxon configuration, so these custom functions can be used in xquery
+     * expressions.
+     */
+    private String configurationRef;
+    /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
      */
@@ -53,6 +60,14 @@ public class XQueryLanguageConfiguration
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getConfigurationRef() {
+        return configurationRef;
+    }
+
+    public void setConfigurationRef(String configurationRef) {
+        this.configurationRef = configurationRef;
     }
 
     public Boolean getTrim() {
