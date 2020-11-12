@@ -123,7 +123,7 @@
         <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
         <groovy-version>3.0.4</groovy-version>
         <hadoop2-version>2.7.4</hadoop2-version>
-        <infinispan-spring-boot-version>2.2.4.Final</infinispan-spring-boot-version>
+        <infinispan-spring-boot-version>2.3.4.Final</infinispan-spring-boot-version>
         <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
         <jetty9-version>9.4.22.v20191022</jetty9-version>
