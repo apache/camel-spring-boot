@@ -25,6 +25,7 @@ The component supports 18 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.vertx-http.allow-java-serialized-object* | Whether to allow java serialization when a request has the Content-Type application/x-java-serialized-object This is disabled by default. If you enable this, be aware that Java will deserialize the incoming data from the request. This can be a potential security risk. | false | Boolean
+| *camel.component.vertx-http.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.vertx-http.basic-auth-password* | The password to use for basic authentication |  | String
 | *camel.component.vertx-http.basic-auth-username* | The user name to use for basic authentication |  | String
 | *camel.component.vertx-http.bearer-token* | The bearer token to use for bearer token authentication |  | String
@@ -41,6 +42,5 @@ The component supports 18 options, which are listed below.
 | *camel.component.vertx-http.vertx* | To use an existing vertx instead of creating a new instance. The option is a io.vertx.core.Vertx type. |  | Vertx
 | *camel.component.vertx-http.vertx-http-binding* | A custom VertxHttpBinding which can control how to bind between Vert.x and Camel. The option is a org.apache.camel.component.vertx.http.VertxHttpBinding type. |  | VertxHttpBinding
 | *camel.component.vertx-http.vertx-options* | To provide a custom set of vertx options for configuring vertx. The option is a io.vertx.core.VertxOptions type. |  | VertxOptions
-| *camel.component.vertx-http.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

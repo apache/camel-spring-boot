@@ -24,6 +24,7 @@ The component supports 20 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| *camel.component.sjms2.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.sjms2.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.sjms2.connection-client-id* | The client ID to use when creating javax.jms.Connection when using the default org.apache.camel.component.sjms.jms.ConnectionFactoryResource. |  | String
 | *camel.component.sjms2.connection-count* | The maximum number of connections available to endpoints started under this component | 1 | Integer
@@ -43,6 +44,5 @@ The component supports 20 options, which are listed below.
 | *camel.component.sjms2.reconnect-on-error* | Try to apply reconnection logic on consumer pool | true | Boolean
 | *camel.component.sjms2.timed-task-manager* | To use a custom TimedTaskManager. The option is a org.apache.camel.component.sjms.taskmanager.TimedTaskManager type. |  | TimedTaskManager
 | *camel.component.sjms2.transaction-commit-strategy* | To configure which kind of commit strategy to use. Camel provides two implementations out of the box, default and batch. The option is a org.apache.camel.component.sjms.TransactionCommitStrategy type. |  | TransactionCommitStrategy
-| *camel.component.sjms2.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

@@ -25,6 +25,7 @@ The component supports 36 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.caffeine-cache.action* | To configure the default cache action. If an action is set in the message header, then the operation from the header takes precedence. |  | String
+| *camel.component.caffeine-cache.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.caffeine-cache.cache-loader* | To configure a CacheLoader in case of a LoadCache use. The option is a com.github.benmanes.caffeine.cache.CacheLoader type. |  | CacheLoader
 | *camel.component.caffeine-cache.configuration* | Sets the global component configuration. The option is a org.apache.camel.component.caffeine.CaffeineConfiguration type. |  | CaffeineConfiguration
 | *camel.component.caffeine-cache.create-cache-if-not-exist* | Configure if a cache need to be created if it does exist or can't be pre-configured. | true | Boolean
@@ -42,6 +43,7 @@ The component supports 36 options, which are listed below.
 | *camel.component.caffeine-cache.stats-enabled* | To enable stats on the cache | false | Boolean
 | *camel.component.caffeine-cache.value-type* | The cache value type, default java.lang.Object |  | String
 | *camel.component.caffeine-loadcache.action* | To configure the default cache action. If an action is set in the message header, then the operation from the header takes precedence. |  | String
+| *camel.component.caffeine-loadcache.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.caffeine-loadcache.cache-loader* | To configure a CacheLoader in case of a LoadCache use. The option is a com.github.benmanes.caffeine.cache.CacheLoader type. |  | CacheLoader
 | *camel.component.caffeine-loadcache.configuration* | Sets the global component configuration. The option is a org.apache.camel.component.caffeine.CaffeineConfiguration type. |  | CaffeineConfiguration
 | *camel.component.caffeine-loadcache.create-cache-if-not-exist* | Configure if a cache need to be created if it does exist or can't be pre-configured. | true | Boolean
@@ -58,7 +60,5 @@ The component supports 36 options, which are listed below.
 | *camel.component.caffeine-loadcache.stats-counter* | Set a specific Stats Counter for the cache stats. The option is a com.github.benmanes.caffeine.cache.stats.StatsCounter type. |  | StatsCounter
 | *camel.component.caffeine-loadcache.stats-enabled* | To enable stats on the cache | false | Boolean
 | *camel.component.caffeine-loadcache.value-type* | The cache value type, default java.lang.Object |  | String
-| *camel.component.caffeine-cache.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
-| *camel.component.caffeine-loadcache.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

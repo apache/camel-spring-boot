@@ -24,6 +24,7 @@ The component supports 43 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| *camel.component.etcd-keys.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.etcd-keys.configuration* | Component configuration. The option is a org.apache.camel.component.etcd.EtcdConfiguration type. |  | EtcdConfiguration
 | *camel.component.etcd-keys.enabled* | Whether to enable auto configuration of the etcd-keys component. This is enabled by default. |  | Boolean
 | *camel.component.etcd-keys.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
@@ -36,6 +37,7 @@ The component supports 43 options, which are listed below.
 | *camel.component.etcd-keys.uris* | To set the URIs the client connects. | http://localhost:2379,http://localhost:4001 | String
 | *camel.component.etcd-keys.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 | *camel.component.etcd-keys.user-name* | The user name to use for basic authentication. |  | String
+| *camel.component.etcd-stats.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.etcd-stats.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.etcd-stats.configuration* | Component configuration. The option is a org.apache.camel.component.etcd.EtcdConfiguration type. |  | EtcdConfiguration
 | *camel.component.etcd-stats.enabled* | Whether to enable auto configuration of the etcd-stats component. This is enabled by default. |  | Boolean
@@ -51,6 +53,7 @@ The component supports 43 options, which are listed below.
 | *camel.component.etcd-stats.uris* | To set the URIs the client connects. | http://localhost:2379,http://localhost:4001 | String
 | *camel.component.etcd-stats.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 | *camel.component.etcd-stats.user-name* | The user name to use for basic authentication. |  | String
+| *camel.component.etcd-watch.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.etcd-watch.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.etcd-watch.configuration* | Component configuration. The option is a org.apache.camel.component.etcd.EtcdConfiguration type. |  | EtcdConfiguration
 | *camel.component.etcd-watch.enabled* | Whether to enable auto configuration of the etcd-watch component. This is enabled by default. |  | Boolean
@@ -64,8 +67,5 @@ The component supports 43 options, which are listed below.
 | *camel.component.etcd-watch.uris* | To set the URIs the client connects. | http://localhost:2379,http://localhost:4001 | String
 | *camel.component.etcd-watch.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 | *camel.component.etcd-watch.user-name* | The user name to use for basic authentication. |  | String
-| *camel.component.etcd-keys.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
-| *camel.component.etcd-stats.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
-| *camel.component.etcd-watch.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

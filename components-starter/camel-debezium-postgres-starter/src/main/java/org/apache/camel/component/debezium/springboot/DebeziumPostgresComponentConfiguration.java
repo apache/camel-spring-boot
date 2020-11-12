@@ -21,7 +21,6 @@ import javax.annotation.Generated;
 import org.apache.camel.component.debezium.configuration.PostgresConnectorEmbeddedDebeziumConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Capture changes from a PostgresSQL database.
@@ -118,11 +117,14 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String offsetStorageTopic;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
      */
-    @Deprecated
-    private Boolean basicPropertyBinding = false;
+    private Boolean autowiredEnabled = true;
     /**
      * Specify how binary (blob, binary, etc.) columns should be represented in
      * change events, including:'bytes' represents binary data as byte array
@@ -676,15 +678,12 @@ public class DebeziumPostgresComponentConfiguration
         this.offsetStorageTopic = offsetStorageTopic;
     }
 
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
     }
 
-    @Deprecated
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
     }
 
     public String getBinaryHandlingMode() {

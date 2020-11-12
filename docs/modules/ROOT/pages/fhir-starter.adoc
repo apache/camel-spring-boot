@@ -25,6 +25,7 @@ The component supports 56 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.fhir.access-token* | OAuth access token |  | String
+| *camel.component.fhir.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.fhir.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.fhir.client* | To use the custom client. The option is a ca.uhn.fhir.rest.client.api.IGenericClient type. |  | IGenericClient
 | *camel.component.fhir.client-factory* | To use the custom client factory. The option is a ca.uhn.fhir.rest.client.api.IRestfulClientFactory type. |  | IRestfulClientFactory
@@ -79,6 +80,5 @@ The component supports 56 options, which are listed below.
 | *camel.dataformat.fhirxml.strip-versions-from-references* | If set to true (which is the default), resource references containing a version will have the version removed when the resource is encoded. This is generally good behaviour because in most situations, references from one resource to another should be to the resource by ID, not by ID and version. In some cases though, it may be desirable to preserve the version in resource links. In that case, this value should be set to false. This method provides the ability to globally disable reference encoding. If finer-grained control is needed, use setDontStripVersionsFromReferencesAtPaths(List) | false | Boolean
 | *camel.dataformat.fhirxml.summary-mode* | If set to true (default is false) only elements marked by the FHIR specification as being summary elements will be included. | false | Boolean
 | *camel.dataformat.fhirxml.suppress-narratives* | If set to true (default is false), narratives will not be included in the encoded values. | false | Boolean
-| *camel.component.fhir.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

@@ -24,6 +24,7 @@ The component supports 37 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| *camel.component.azure-blob.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.azure-blob.azure-blob-client* | The blob service client. The option is a com.microsoft.azure.storage.blob.CloudBlob type. |  | CloudBlob
 | *camel.component.azure-blob.blob-metadata* | Set the blob meta-data |  | Map
 | *camel.component.azure-blob.blob-offset* | Set the blob offset for the upload or download operations, default is 0 | 0 | Long
@@ -46,6 +47,7 @@ The component supports 37 options, which are listed below.
 | *camel.component.azure-blob.stream-write-size* | Set the size of the buffer for writing block and page blocks |  | Integer
 | *camel.component.azure-blob.use-flat-listing* | Specify if the flat or hierarchical blob listing should be used | true | Boolean
 | *camel.component.azure-blob.validate-client-u-r-i* | Whether to validate the Azure client URI | true | Boolean
+| *camel.component.azure-queue.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.azure-queue.azure-queue-client* | The queue service client. The option is a com.microsoft.azure.storage.queue.CloudQueue type. |  | CloudQueue
 | *camel.component.azure-queue.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.azure-queue.configuration* | The Queue Service configuration. The option is a org.apache.camel.component.azure.queue.QueueServiceConfiguration type. |  | QueueServiceConfiguration
@@ -59,7 +61,5 @@ The component supports 37 options, which are listed below.
 | *camel.component.azure-queue.operation* | Queue service operation hint to the producer |  | QueueServiceOperations
 | *camel.component.azure-queue.queue-prefix* | Set a prefix which can be used for listing the queues |  | String
 | *camel.component.azure-queue.validate-client-u-r-i* | Whether to validate the Azure client URI | true | Boolean
-| *camel.component.azure-blob.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
-| *camel.component.azure-queue.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

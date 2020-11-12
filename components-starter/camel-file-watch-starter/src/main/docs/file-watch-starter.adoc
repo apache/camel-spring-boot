@@ -24,6 +24,7 @@ The component supports 8 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| *camel.component.file-watch.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.file-watch.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.file-watch.concurrent-consumers* | The number of concurrent consumers. Increase this value, if your route is slow to prevent buffering in queue. | 1 | Integer
 | *camel.component.file-watch.enabled* | Whether to enable auto configuration of the file-watch component. This is enabled by default. |  | Boolean
@@ -31,6 +32,5 @@ The component supports 8 options, which are listed below.
 | *camel.component.file-watch.poll-threads* | The number of threads polling WatchService. Increase this value, if you see OVERFLOW messages in log. | 1 | Integer
 | *camel.component.file-watch.queue-size* | Maximum size of queue between WatchService and consumer. Unbounded by default. | 2147483647 | Integer
 | *camel.component.file-watch.use-file-hashing* | Enables or disables file hashing to detect duplicate events. If you disable this, you can get some events multiple times on some platforms and JDKs. Check java.nio.file.WatchService limitations for your target platform. | true | Boolean
-| *camel.component.file-watch.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

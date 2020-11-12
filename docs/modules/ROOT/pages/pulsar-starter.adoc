@@ -28,6 +28,7 @@ The component supports 37 options, which are listed below.
 | *camel.component.pulsar.ack-timeout-millis* | Timeout for unacknowledged messages in milliseconds - defaults to 10000 | 10000 | Long
 | *camel.component.pulsar.allow-manual-acknowledgement* | Whether to allow manual message acknowledgements. If this option is enabled, then messages are not acknowledged automatically after successful route completion. Instead, an instance of PulsarMessageReceipt is stored as a header on the org.apache.camel.Exchange. Messages can then be acknowledged using PulsarMessageReceipt at any time before the ackTimeout occurs. | false | Boolean
 | *camel.component.pulsar.auto-configuration* | The pulsar auto configuration. The option is a org.apache.camel.component.pulsar.utils.AutoConfiguration type. |  | AutoConfiguration
+| *camel.component.pulsar.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.pulsar.batcher-builder* | Control batching method used by the producer. The option is a org.apache.pulsar.client.api.BatcherBuilder type. |  | BatcherBuilder
 | *camel.component.pulsar.batching-enabled* | Control whether automatic batching of messages is enabled for the producer. | true | Boolean
 | *camel.component.pulsar.batching-max-messages* | The maximum size to batch messages. | 1000 | Integer
@@ -60,6 +61,5 @@ The component supports 37 options, which are listed below.
 | *camel.component.pulsar.subscription-topics-mode* | Determines to which topics this consumer should be subscribed to - Persistent, Non-Persistent, or both. Only used with pattern subscriptions. |  | RegexSubscriptionMode
 | *camel.component.pulsar.subscription-type* | Type of the subscription EXCLUSIVESHAREDFAILOVERKEY_SHARED, defaults to EXCLUSIVE |  | SubscriptionType
 | *camel.component.pulsar.topics-pattern* | Whether the topic is a pattern (regular expression) that allows the consumer to subscribe to all matching topics in the namespace | false | Boolean
-| *camel.component.pulsar.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

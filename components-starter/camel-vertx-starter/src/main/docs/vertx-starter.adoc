@@ -24,6 +24,7 @@ The component supports 10 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| *camel.component.vertx.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.vertx.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.vertx.enabled* | Whether to enable auto configuration of the vertx component. This is enabled by default. |  | Boolean
 | *camel.component.vertx.host* | Hostname for creating an embedded clustered EventBus |  | String
@@ -33,6 +34,5 @@ The component supports 10 options, which are listed below.
 | *camel.component.vertx.vertx* | To use the given vertx EventBus instead of creating a new embedded EventBus. The option is a io.vertx.core.Vertx type. |  | Vertx
 | *camel.component.vertx.vertx-factory* | To use a custom VertxFactory implementation. The option is a io.vertx.core.spi.VertxFactory type. |  | VertxFactory
 | *camel.component.vertx.vertx-options* | Options to use for creating vertx. The option is a io.vertx.core.VertxOptions type. |  | VertxOptions
-| *camel.component.vertx.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

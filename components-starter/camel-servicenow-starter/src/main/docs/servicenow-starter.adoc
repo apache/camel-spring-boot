@@ -26,6 +26,7 @@ The component supports 49 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.servicenow.api-url* | The ServiceNow REST API url |  | String
 | *camel.component.servicenow.api-version* | The ServiceNow REST API version, default latest |  | String
+| *camel.component.servicenow.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.servicenow.configuration* | Component configuration. The option is a org.apache.camel.component.servicenow.ServiceNowConfiguration type. |  | ServiceNowConfiguration
 | *camel.component.servicenow.date-format* | The date format used for Json serialization/deserialization | yyyy-MM-dd | String
 | *camel.component.servicenow.date-time-format* | The date-time format used for Json serialization/deserialization | yyyy-MM-dd HH:mm:ss | String
@@ -72,6 +73,5 @@ The component supports 49 options, which are listed below.
 | *camel.component.servicenow.top-level-only* | Gets only those categories whose parent is a catalog. |  | Boolean
 | *camel.component.servicenow.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 | *camel.component.servicenow.user-name* | ServiceNow user account name, MUST be provided |  | String
-| *camel.component.servicenow.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

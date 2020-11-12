@@ -21,7 +21,6 @@ import org.apache.camel.component.crypto.cms.crypt.EnvelopedDataDecryptorConfigu
 import org.apache.camel.component.crypto.cms.sig.SignedDataVerifierConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Encrypt, decrypt, sign and verify data in CMS Enveloped Data format.
@@ -51,11 +50,14 @@ public class CryptoCmsComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
      */
-    @Deprecated
-    private Boolean basicPropertyBinding = false;
+    private Boolean autowiredEnabled = true;
     /**
      * To configure the shared EnvelopedDataDecryptorConfiguration, which
      * determines the uri parameters for the decrypt operation. The option is a
@@ -78,15 +80,12 @@ public class CryptoCmsComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
     }
 
-    @Deprecated
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
     }
 
     public EnvelopedDataDecryptorConfiguration getEnvelopedDataDecryptorConfiguration() {

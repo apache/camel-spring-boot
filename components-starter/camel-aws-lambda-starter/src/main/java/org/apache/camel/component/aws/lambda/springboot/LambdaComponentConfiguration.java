@@ -24,7 +24,6 @@ import org.apache.camel.component.aws.lambda.LambdaConfiguration;
 import org.apache.camel.component.aws.lambda.LambdaOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Manage and invoke AWS Lambda functions.
@@ -76,16 +75,19 @@ public class LambdaComponentConfiguration
      */
     private String region;
     /**
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
+     */
+    private Boolean autowiredEnabled = true;
+    /**
      * To use a existing configured AwsLambdaClient as client. The option is a
      * com.amazonaws.services.lambda.AWSLambda type.
      */
     private AWSLambda awsLambdaClient;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    @Deprecated
-    private Boolean basicPropertyBinding = false;
     /**
      * To define a proxy host when instantiating the Lambda client
      */
@@ -147,23 +149,20 @@ public class LambdaComponentConfiguration
         this.region = region;
     }
 
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
+    }
+
     public AWSLambda getAwsLambdaClient() {
         return awsLambdaClient;
     }
 
     public void setAwsLambdaClient(AWSLambda awsLambdaClient) {
         this.awsLambdaClient = awsLambdaClient;
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    @Deprecated
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public String getProxyHost() {

@@ -23,7 +23,6 @@ import ca.uhn.fhir.rest.client.api.IRestfulClientFactory;
 import org.apache.camel.component.fhir.FhirConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Exchange information in the healthcare domain using the FHIR (Fast Healthcare
@@ -83,11 +82,14 @@ public class FhirComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
      */
-    @Deprecated
-    private Boolean basicPropertyBinding = false;
+    private Boolean autowiredEnabled = true;
     /**
      * To use the custom client. The option is a
      * ca.uhn.fhir.rest.client.api.IGenericClient type.
@@ -227,15 +229,12 @@ public class FhirComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
     }
 
-    @Deprecated
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
     }
 
     public IGenericClient getClient() {

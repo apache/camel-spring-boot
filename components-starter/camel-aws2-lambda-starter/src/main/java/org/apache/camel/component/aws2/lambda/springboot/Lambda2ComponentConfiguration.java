@@ -22,7 +22,6 @@ import org.apache.camel.component.aws2.lambda.Lambda2Configuration;
 import org.apache.camel.component.aws2.lambda.Lambda2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
 import software.amazon.awssdk.services.lambda.LambdaClient;
 
@@ -84,16 +83,19 @@ public class Lambda2ComponentConfiguration
      */
     private Boolean trustAllCertificates = false;
     /**
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
+     */
+    private Boolean autowiredEnabled = true;
+    /**
      * To use a existing configured AwsLambdaClient as client. The option is a
      * software.amazon.awssdk.services.lambda.LambdaClient type.
      */
     private LambdaClient awsLambdaClient;
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    @Deprecated
-    private Boolean basicPropertyBinding = false;
     /**
      * To define a proxy host when instantiating the Lambda client
      */
@@ -171,23 +173,20 @@ public class Lambda2ComponentConfiguration
         this.trustAllCertificates = trustAllCertificates;
     }
 
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
+    }
+
     public LambdaClient getAwsLambdaClient() {
         return awsLambdaClient;
     }
 
     public void setAwsLambdaClient(LambdaClient awsLambdaClient) {
         this.awsLambdaClient = awsLambdaClient;
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    @Deprecated
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public String getProxyHost() {

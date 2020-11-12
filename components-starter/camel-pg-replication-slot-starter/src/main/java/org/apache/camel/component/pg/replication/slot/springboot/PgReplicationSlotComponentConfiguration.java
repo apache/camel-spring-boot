@@ -19,7 +19,6 @@ package org.apache.camel.component.pg.replication.slot.springboot;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Poll for PostgreSQL Write-Ahead Log (WAL) records using Streaming Replication
@@ -48,11 +47,14 @@ public class PgReplicationSlotComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
      */
-    @Deprecated
-    private Boolean basicPropertyBinding = false;
+    private Boolean autowiredEnabled = true;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -62,14 +64,11 @@ public class PgReplicationSlotComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
     }
 
-    @Deprecated
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
     }
 }

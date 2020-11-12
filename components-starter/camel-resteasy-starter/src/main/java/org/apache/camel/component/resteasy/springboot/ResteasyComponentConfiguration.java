@@ -20,7 +20,6 @@ import javax.annotation.Generated;
 import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Expose REST endpoints and access external REST servers.
@@ -72,11 +71,14 @@ public class ResteasyComponentConfiguration
      */
     private Boolean allowJavaSerializedObject = false;
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
      */
-    @Deprecated
-    private Boolean basicPropertyBinding = false;
+    private Boolean autowiredEnabled = true;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
@@ -116,15 +118,12 @@ public class ResteasyComponentConfiguration
         this.allowJavaSerializedObject = allowJavaSerializedObject;
     }
 
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
     }
 
-    @Deprecated
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
     }
 
     public HeaderFilterStrategy getHeaderFilterStrategy() {

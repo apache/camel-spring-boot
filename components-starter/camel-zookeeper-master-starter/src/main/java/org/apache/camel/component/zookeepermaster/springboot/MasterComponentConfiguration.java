@@ -21,7 +21,6 @@ import org.apache.camel.component.zookeepermaster.ContainerIdFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.curator.framework.CuratorFramework;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Have only a single consumer in a cluster consuming from a given endpoint;
@@ -64,11 +63,14 @@ public class MasterComponentConfiguration
      */
     private String zooKeeperUrl = "localhost:2181";
     /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
      */
-    @Deprecated
-    private Boolean basicPropertyBinding = false;
+    private Boolean autowiredEnabled = true;
     /**
      * To use a custom ContainerIdFactory for creating container ids. The option
      * is a org.apache.camel.component.zookeepermaster.ContainerIdFactory type.
@@ -117,15 +119,12 @@ public class MasterComponentConfiguration
         this.zooKeeperUrl = zooKeeperUrl;
     }
 
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
     }
 
-    @Deprecated
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
     }
 
     public ContainerIdFactory getContainerIdFactory() {

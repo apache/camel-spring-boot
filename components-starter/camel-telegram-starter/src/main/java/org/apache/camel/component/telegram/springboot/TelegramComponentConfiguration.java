@@ -21,7 +21,6 @@ import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.AsyncHttpClientConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send and receive messages acting as a Telegram Bot Telegram Bot API.
@@ -60,16 +59,19 @@ public class TelegramComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
+     */
+    private Boolean autowiredEnabled = true;
+    /**
      * Can be used to set an alternative base URI, e.g. when you want to test
      * the component against a mock Telegram API
      */
     private String baseUri = "https://api.telegram.org";
-    /**
-     * Whether the component should use basic property binding (Camel 2.x) or
-     * the newer property binding with additional capabilities
-     */
-    @Deprecated
-    private Boolean basicPropertyBinding = false;
     /**
      * To use a custom AsyncHttpClient. The option is a
      * org.asynchttpclient.AsyncHttpClient type.
@@ -103,23 +105,20 @@ public class TelegramComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
+    }
+
     public String getBaseUri() {
         return baseUri;
     }
 
     public void setBaseUri(String baseUri) {
         this.baseUri = baseUri;
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Boolean getBasicPropertyBinding() {
-        return basicPropertyBinding;
-    }
-
-    @Deprecated
-    public void setBasicPropertyBinding(Boolean basicPropertyBinding) {
-        this.basicPropertyBinding = basicPropertyBinding;
     }
 
     public AsyncHttpClient getClient() {

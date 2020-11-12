@@ -26,6 +26,7 @@ The component supports 39 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.smpp.address-range* | You can specify the address range for the SmppConsumer as defined in section 5.2.7 of the SMPP 3.4 specification. The SmppConsumer will receive messages only from SMSC's which target an address (MSISDN or IP address) within this range. |  | String
 | *camel.component.smpp.alphabet* | Defines encoding of data according the SMPP 3.4 specification, section 5.2.19. 0: SMSC Default Alphabet 4: 8 bit Alphabet 8: UCS2 Alphabet |  | Byte
+| *camel.component.smpp.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.smpp.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.smpp.configuration* | To use the shared SmppConfiguration as configuration. The option is a org.apache.camel.component.smpp.SmppConfiguration type. |  | SmppConfiguration
 | *camel.component.smpp.data-coding* | Defines the data coding according the SMPP 3.4 specification, section 5.2.19. Example data encodings are: 0: SMSC Default Alphabet 3: Latin 1 (ISO-8859-1) 4: Octet unspecified (8-bit binary) 8: UCS2 (ISO/IEC-10646) 13: Extended Kanji JIS(X 0212-1990) |  | Byte
@@ -62,6 +63,5 @@ The component supports 39 options, which are listed below.
 | *camel.component.smpp.transaction-timer* | Defines the maximum period of inactivity allowed after a transaction, after which an SMPP entity may assume that the session is no longer active. This timer may be active on either communicating SMPP entity (i.e. SMSC or ESME). | 10000 | Integer
 | *camel.component.smpp.type-of-number* | Defines the type of number (TON) to be used in the SME. The following TON values are defined: 0: Unknown 1: International 2: National 3: Network Specific 4: Subscriber Number 5: Alphanumeric 6: Abbreviated |  | Byte
 | *camel.component.smpp.using-s-s-l* | Whether using SSL with the smpps protocol | false | Boolean
-| *camel.component.smpp.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

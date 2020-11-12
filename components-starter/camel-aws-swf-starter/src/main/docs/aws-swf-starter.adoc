@@ -31,6 +31,7 @@ The component supports 31 options, which are listed below.
 | *camel.component.aws-swf.activity-type-execution-options* | Activity execution options. The option is a com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeExecutionOptions type. |  | ActivityTypeExecutionOptions
 | *camel.component.aws-swf.activity-type-registration-options* | Activity registration options. The option is a com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeRegistrationOptions type. |  | ActivityTypeRegistrationOptions
 | *camel.component.aws-swf.amazon-s-w-client* | To use the given AmazonSimpleWorkflowClient as client. The option is a com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflow type. |  | AmazonSimpleWorkflow
+| *camel.component.aws-swf.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.aws-swf.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.aws-swf.child-policy* | The policy to use on child workflows when terminating a workflow. |  | String
 | *camel.component.aws-swf.client-configuration-parameters* | To configure the ClientConfiguration using the key/values from the Map. |  | Map
@@ -54,6 +55,5 @@ The component supports 31 options, which are listed below.
 | *camel.component.aws-swf.version* | The workflow or activity event version to use. |  | String
 | *camel.component.aws-swf.workflow-list* | The list name to consume workflows from. |  | String
 | *camel.component.aws-swf.workflow-type-registration-options* | Workflow registration options. The option is a com.amazonaws.services.simpleworkflow.flow.WorkflowTypeRegistrationOptions type. |  | WorkflowTypeRegistrationOptions
-| *camel.component.aws-swf.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

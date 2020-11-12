@@ -26,6 +26,7 @@ The component supports 29 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.azure-storage-blob.access-key* | Access key for the associated azure account name to be used for authentication with azure blob services |  | String
 | *camel.component.azure-storage-blob.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
+| *camel.component.azure-storage-blob.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.azure-storage-blob.blob-name* | The blob name, to consume specific blob from a container. However on producer, is only required for the operations on the blob level |  | String
 | *camel.component.azure-storage-blob.blob-offset* | Set the blob offset for the upload or download operations, default is 0 | 0 | Long
 | *camel.component.azure-storage-blob.blob-sequence-number* | A user-controlled value that you can use to track requests. The value of the sequence number must be between 0 and 263 - 1.The default value is 0. | 0 | Long
@@ -52,6 +53,5 @@ The component supports 29 options, which are listed below.
 | *camel.component.azure-storage-blob.regex* | Filters the results to return only blobs whose names match the specified regular expression. May be null to return all if both prefix and regex are set, regex takes the priority and prefix is ignored. |  | String
 | *camel.component.azure-storage-blob.service-client* | Client to a storage account. This client does not hold any state about a particular storage account but is instead a convenient way of sending off appropriate requests to the resource on the service. It may also be used to construct URLs to blobs and containers. This client contains operations on a service account. Operations on a container are available on BlobContainerClient through BlobServiceClient#getBlobContainerClient(String), and operations on a blob are available on BlobClient through BlobContainerClient#getBlobClient(String). The option is a com.azure.storage.blob.BlobServiceClient type. |  | BlobServiceClient
 | *camel.component.azure-storage-blob.timeout* | An optional timeout value beyond which a RuntimeException will be raised. The option is a java.time.Duration type. |  | Duration
-| *camel.component.azure-storage-blob.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

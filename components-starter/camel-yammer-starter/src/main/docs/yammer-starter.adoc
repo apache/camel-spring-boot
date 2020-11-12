@@ -25,6 +25,7 @@ The component supports 16 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.yammer.access-token* | The access token |  | String
+| *camel.component.yammer.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.yammer.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.yammer.configuration* | Component configuration. The option is a org.apache.camel.component.yammer.YammerConfiguration type. |  | YammerConfiguration
 | *camel.component.yammer.consumer-key* | The consumer key |  | String
@@ -39,6 +40,5 @@ The component supports 16 options, which are listed below.
 | *camel.component.yammer.threaded* | threaded equals to true will only return the first message in each thread. This parameter is intended for apps which display message threads collapsed. threaded equals to extended will return the thread starter messages in order of most recently active as well as the two most recent messages, as they are viewed in the default view on the Yammer web interface. |  | String
 | *camel.component.yammer.use-json* | Set to true if you want to use raw JSON rather than converting to POJOs. | false | Boolean
 | *camel.component.yammer.user-id* | The user id |  | String
-| *camel.component.yammer.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

@@ -26,6 +26,7 @@ The component supports 15 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.aws2-kms.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws2-kms.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
+| *camel.component.aws2-kms.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.aws2-kms.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.kms.KMS2Configuration type. |  | KMS2Configuration
 | *camel.component.aws2-kms.enabled* | Whether to enable auto configuration of the aws2-kms component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-kms.kms-client* | To use a existing configured AWS KMS as client. The option is a software.amazon.awssdk.services.kms.KmsClient type. |  | KmsClient
@@ -38,6 +39,5 @@ The component supports 15 options, which are listed below.
 | *camel.component.aws2-kms.region* | The region in which EKS client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
 | *camel.component.aws2-kms.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws2-kms.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
-| *camel.component.aws2-kms.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END

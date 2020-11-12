@@ -28,6 +28,7 @@ The component supports 22 options, which are listed below.
 | *camel.component.aws2-sns.amazon-s-n-s-client* | To use the AmazonSNS as the client. The option is a software.amazon.awssdk.services.sns.SnsClient type. |  | SnsClient
 | *camel.component.aws2-sns.auto-create-topic* | Setting the autocreation of the topic | true | Boolean
 | *camel.component.aws2-sns.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
+| *camel.component.aws2-sns.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.aws2-sns.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.sns.Sns2Configuration type. |  | Sns2Configuration
 | *camel.component.aws2-sns.enabled* | Whether to enable auto configuration of the aws2-sns component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-sns.kms-master-key-id* | The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. |  | String
@@ -45,6 +46,5 @@ The component supports 22 options, which are listed below.
 | *camel.component.aws2-sns.subscribe-s-n-sto-s-q-s* | Define if the subscription between SNS Topic and SQS must be done or not | false | Boolean
 | *camel.component.aws2-sns.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | *camel.component.aws2-sns.use-i-a-m-credentials* | Set whether the SQS client should expect to load credentials on an AWS infra instance or to expect static credentials to be passed in. | false | Boolean
-| *camel.component.aws2-sns.basic-property-binding* | *Deprecated* Whether the component should use basic property binding (Camel 2.x) or the newer property binding with additional capabilities | false | Boolean
 |===
 // spring-boot-auto-configure options: END
