@@ -47,12 +47,6 @@ public class MQ2ComponentConfiguration
      */
     private MqClient amazonMqClient;
     /**
-     * Setting the autoDiscoverClient mechanism, if true, the component will
-     * look for a client instance in the registry automatically otherwise it
-     * will skip that checking.
-     */
-    private Boolean autoDiscoverClient = true;
-    /**
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.mq.MQ2Configuration type.
      */
@@ -122,14 +116,6 @@ public class MQ2ComponentConfiguration
 
     public void setAmazonMqClient(MqClient amazonMqClient) {
         this.amazonMqClient = amazonMqClient;
-    }
-
-    public Boolean getAutoDiscoverClient() {
-        return autoDiscoverClient;
-    }
-
-    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
-        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public MQ2Configuration getConfiguration() {
