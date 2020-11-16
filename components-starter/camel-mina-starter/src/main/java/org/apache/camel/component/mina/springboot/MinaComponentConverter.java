@@ -39,10 +39,8 @@ public class MinaComponentConverter
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.LoggingLevel.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.mina.MinaConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.apache.mina.filter.codec.ProtocolCodecFactory.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.mina.MinaTextLineDelimiter.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
     }
@@ -60,10 +58,8 @@ public class MinaComponentConverter
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.apache.camel.LoggingLevel": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.LoggingLevel.class);
             case "org.apache.camel.component.mina.MinaConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.mina.MinaConfiguration.class);
             case "org.apache.mina.filter.codec.ProtocolCodecFactory": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.mina.filter.codec.ProtocolCodecFactory.class);
-            case "org.apache.camel.component.mina.MinaTextLineDelimiter": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.mina.MinaTextLineDelimiter.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }
         return null;

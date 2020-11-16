@@ -41,8 +41,6 @@ public class AWS2S3ComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.s3.S3Client.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.s3.AWS2S3Configuration.class));
-        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.core.Protocol.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.s3.AWS2S3Operations.class));
         return answer;
     }
 
@@ -61,8 +59,6 @@ public class AWS2S3ComponentConverter
         switch (targetType.getName()) {
             case "software.amazon.awssdk.services.s3.S3Client": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.services.s3.S3Client.class);
             case "org.apache.camel.component.aws2.s3.AWS2S3Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.s3.AWS2S3Configuration.class);
-            case "software.amazon.awssdk.core.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.core.Protocol.class);
-            case "org.apache.camel.component.aws2.s3.AWS2S3Operations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.s3.AWS2S3Operations.class);
         }
         return null;
     }

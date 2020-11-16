@@ -40,7 +40,6 @@ public class NagiosComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.nagios.NagiosConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, com.googlecode.jsendnsca.encryption.Encryption.class));
         return answer;
     }
 
@@ -58,7 +57,6 @@ public class NagiosComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.nagios.NagiosConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.nagios.NagiosConfiguration.class);
-            case "com.googlecode.jsendnsca.encryption.Encryption": return camelContext.getRegistry().lookupByNameAndType(ref, com.googlecode.jsendnsca.encryption.Encryption.class);
         }
         return null;
     }

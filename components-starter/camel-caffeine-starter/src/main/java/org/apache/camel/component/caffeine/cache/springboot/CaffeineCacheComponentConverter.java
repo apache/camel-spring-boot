@@ -41,7 +41,6 @@ public class CaffeineCacheComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.github.benmanes.caffeine.cache.CacheLoader.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.caffeine.EvictionType.class));
         answer.add(new ConvertiblePair(String.class, java.lang.Object.class));
         answer.add(new ConvertiblePair(String.class, com.github.benmanes.caffeine.cache.RemovalListener.class));
         answer.add(new ConvertiblePair(String.class, com.github.benmanes.caffeine.cache.stats.StatsCounter.class));
@@ -63,7 +62,6 @@ public class CaffeineCacheComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "com.github.benmanes.caffeine.cache.CacheLoader": return camelContext.getRegistry().lookupByNameAndType(ref, com.github.benmanes.caffeine.cache.CacheLoader.class);
-            case "org.apache.camel.component.caffeine.EvictionType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.caffeine.EvictionType.class);
             case "java.lang.Object": return camelContext.getRegistry().lookupByNameAndType(ref, java.lang.Object.class);
             case "com.github.benmanes.caffeine.cache.RemovalListener": return camelContext.getRegistry().lookupByNameAndType(ref, com.github.benmanes.caffeine.cache.RemovalListener.class);
             case "com.github.benmanes.caffeine.cache.stats.StatsCounter": return camelContext.getRegistry().lookupByNameAndType(ref, com.github.benmanes.caffeine.cache.stats.StatsCounter.class);

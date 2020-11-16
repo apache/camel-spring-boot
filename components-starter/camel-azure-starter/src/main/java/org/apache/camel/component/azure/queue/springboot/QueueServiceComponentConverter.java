@@ -42,7 +42,6 @@ public class QueueServiceComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.microsoft.azure.storage.queue.CloudQueue.class));
         answer.add(new ConvertiblePair(String.class, com.microsoft.azure.storage.StorageCredentials.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.queue.QueueServiceOperations.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.queue.QueueServiceConfiguration.class));
         return answer;
     }
@@ -62,7 +61,6 @@ public class QueueServiceComponentConverter
         switch (targetType.getName()) {
             case "com.microsoft.azure.storage.queue.CloudQueue": return camelContext.getRegistry().lookupByNameAndType(ref, com.microsoft.azure.storage.queue.CloudQueue.class);
             case "com.microsoft.azure.storage.StorageCredentials": return camelContext.getRegistry().lookupByNameAndType(ref, com.microsoft.azure.storage.StorageCredentials.class);
-            case "org.apache.camel.component.azure.queue.QueueServiceOperations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.azure.queue.QueueServiceOperations.class);
             case "org.apache.camel.component.azure.queue.QueueServiceConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.azure.queue.QueueServiceConfiguration.class);
         }
         return null;

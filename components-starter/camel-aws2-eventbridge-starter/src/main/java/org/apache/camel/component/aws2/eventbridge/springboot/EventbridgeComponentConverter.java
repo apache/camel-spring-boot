@@ -42,8 +42,6 @@ public class EventbridgeComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.eventbridge.EventbridgeConfiguration.class));
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.eventbridge.EventBridgeClient.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.eventbridge.EventbridgeOperations.class));
-        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.core.Protocol.class));
         return answer;
     }
 
@@ -62,8 +60,6 @@ public class EventbridgeComponentConverter
         switch (targetType.getName()) {
             case "org.apache.camel.component.aws2.eventbridge.EventbridgeConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.eventbridge.EventbridgeConfiguration.class);
             case "software.amazon.awssdk.services.eventbridge.EventBridgeClient": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.services.eventbridge.EventBridgeClient.class);
-            case "org.apache.camel.component.aws2.eventbridge.EventbridgeOperations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.eventbridge.EventbridgeOperations.class);
-            case "software.amazon.awssdk.core.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.core.Protocol.class);
         }
         return null;
     }

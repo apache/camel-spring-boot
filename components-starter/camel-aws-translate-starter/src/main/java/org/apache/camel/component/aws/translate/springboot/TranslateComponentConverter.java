@@ -41,8 +41,6 @@ public class TranslateComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.translate.TranslateConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.translate.TranslateOperations.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.translate.AmazonTranslate.class));
         return answer;
     }
@@ -61,8 +59,6 @@ public class TranslateComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.aws.translate.TranslateConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.translate.TranslateConfiguration.class);
-            case "org.apache.camel.component.aws.translate.TranslateOperations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.translate.TranslateOperations.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
             case "com.amazonaws.services.translate.AmazonTranslate": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.translate.AmazonTranslate.class);
         }
         return null;

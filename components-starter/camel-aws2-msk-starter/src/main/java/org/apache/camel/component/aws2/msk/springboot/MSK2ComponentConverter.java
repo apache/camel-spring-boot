@@ -41,8 +41,6 @@ public class MSK2ComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.msk.MSK2Configuration.class));
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.kafka.KafkaClient.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.msk.MSK2Operations.class));
-        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.core.Protocol.class));
         return answer;
     }
 
@@ -61,8 +59,6 @@ public class MSK2ComponentConverter
         switch (targetType.getName()) {
             case "org.apache.camel.component.aws2.msk.MSK2Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.msk.MSK2Configuration.class);
             case "software.amazon.awssdk.services.kafka.KafkaClient": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.services.kafka.KafkaClient.class);
-            case "org.apache.camel.component.aws2.msk.MSK2Operations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.msk.MSK2Operations.class);
-            case "software.amazon.awssdk.core.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.core.Protocol.class);
         }
         return null;
     }

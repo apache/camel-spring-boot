@@ -39,7 +39,6 @@ public class SmppComponentConverter
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.smpp.SmppSplittingPolicy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.smpp.SmppConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.jsmpp.session.SessionStateListener.class));
         return answer;
@@ -58,7 +57,6 @@ public class SmppComponentConverter
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.apache.camel.component.smpp.SmppSplittingPolicy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.smpp.SmppSplittingPolicy.class);
             case "org.apache.camel.component.smpp.SmppConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.smpp.SmppConfiguration.class);
             case "org.jsmpp.session.SessionStateListener": return camelContext.getRegistry().lookupByNameAndType(ref, org.jsmpp.session.SessionStateListener.class);
         }

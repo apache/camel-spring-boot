@@ -41,9 +41,7 @@ public class BlobServiceComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.microsoft.azure.storage.blob.CloudBlob.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.blob.BlobType.class));
         answer.add(new ConvertiblePair(String.class, com.microsoft.azure.storage.StorageCredentials.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.blob.BlobServiceOperations.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.blob.BlobServiceConfiguration.class));
         return answer;
     }
@@ -62,9 +60,7 @@ public class BlobServiceComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "com.microsoft.azure.storage.blob.CloudBlob": return camelContext.getRegistry().lookupByNameAndType(ref, com.microsoft.azure.storage.blob.CloudBlob.class);
-            case "org.apache.camel.component.azure.blob.BlobType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.azure.blob.BlobType.class);
             case "com.microsoft.azure.storage.StorageCredentials": return camelContext.getRegistry().lookupByNameAndType(ref, com.microsoft.azure.storage.StorageCredentials.class);
-            case "org.apache.camel.component.azure.blob.BlobServiceOperations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.azure.blob.BlobServiceOperations.class);
             case "org.apache.camel.component.azure.blob.BlobServiceConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.azure.blob.BlobServiceConfiguration.class);
         }
         return null;

@@ -57,8 +57,6 @@ public class DisruptorVmComponentAutoConfiguration {
     public DisruptorVmComponentAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
-        ApplicationConversionService acs = (ApplicationConversionService) ApplicationConversionService.getSharedInstance();
-        acs.addConverter(new DisruptorVmComponentConverter(camelContext));
     }
 
     @Lazy

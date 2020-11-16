@@ -40,7 +40,6 @@ public class PahoComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.paho.PahoConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.paho.PahoPersistence.class));
         answer.add(new ConvertiblePair(String.class, org.eclipse.paho.client.mqttv3.MqttClient.class));
         answer.add(new ConvertiblePair(String.class, java.util.Properties.class));
         answer.add(new ConvertiblePair(String.class, javax.net.SocketFactory.class));
@@ -62,7 +61,6 @@ public class PahoComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.paho.PahoConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.paho.PahoConfiguration.class);
-            case "org.apache.camel.component.paho.PahoPersistence": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.paho.PahoPersistence.class);
             case "org.eclipse.paho.client.mqttv3.MqttClient": return camelContext.getRegistry().lookupByNameAndType(ref, org.eclipse.paho.client.mqttv3.MqttClient.class);
             case "java.util.Properties": return camelContext.getRegistry().lookupByNameAndType(ref, java.util.Properties.class);
             case "javax.net.SocketFactory": return camelContext.getRegistry().lookupByNameAndType(ref, javax.net.SocketFactory.class);

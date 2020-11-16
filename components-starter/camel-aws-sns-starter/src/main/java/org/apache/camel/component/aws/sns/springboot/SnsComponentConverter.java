@@ -42,7 +42,6 @@ public class SnsComponentConverter
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.sns.AmazonSNS.class));
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.sqs.AmazonSQS.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.sns.SnsConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         return answer;
     }
 
@@ -62,7 +61,6 @@ public class SnsComponentConverter
             case "com.amazonaws.services.sns.AmazonSNS": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.sns.AmazonSNS.class);
             case "com.amazonaws.services.sqs.AmazonSQS": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.sqs.AmazonSQS.class);
             case "org.apache.camel.component.aws.sns.SnsConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.sns.SnsConfiguration.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
         }
         return null;
     }

@@ -39,9 +39,6 @@ public class GangliaComponentConverter
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, info.ganglia.gmetric4j.gmetric.GMetric.UDPAddressingMode.class));
-        answer.add(new ConvertiblePair(String.class, info.ganglia.gmetric4j.gmetric.GMetricSlope.class));
-        answer.add(new ConvertiblePair(String.class, info.ganglia.gmetric4j.gmetric.GMetricType.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.ganglia.GangliaConfiguration.class));
         return answer;
     }
@@ -59,9 +56,6 @@ public class GangliaComponentConverter
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "info.ganglia.gmetric4j.gmetric.GMetric.UDPAddressingMode": return camelContext.getRegistry().lookupByNameAndType(ref, info.ganglia.gmetric4j.gmetric.GMetric.UDPAddressingMode.class);
-            case "info.ganglia.gmetric4j.gmetric.GMetricSlope": return camelContext.getRegistry().lookupByNameAndType(ref, info.ganglia.gmetric4j.gmetric.GMetricSlope.class);
-            case "info.ganglia.gmetric4j.gmetric.GMetricType": return camelContext.getRegistry().lookupByNameAndType(ref, info.ganglia.gmetric4j.gmetric.GMetricType.class);
             case "org.apache.camel.component.ganglia.GangliaConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.ganglia.GangliaConfiguration.class);
         }
         return null;

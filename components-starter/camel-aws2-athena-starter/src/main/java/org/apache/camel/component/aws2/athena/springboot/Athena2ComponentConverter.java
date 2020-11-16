@@ -41,10 +41,6 @@ public class Athena2ComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.athena.AthenaClient.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.athena.Athena2Configuration.class));
-        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.athena.model.EncryptionOption.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.athena.Athena2Operations.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.athena.Athena2OutputType.class));
-        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.core.Protocol.class));
         return answer;
     }
 
@@ -63,10 +59,6 @@ public class Athena2ComponentConverter
         switch (targetType.getName()) {
             case "software.amazon.awssdk.services.athena.AthenaClient": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.services.athena.AthenaClient.class);
             case "org.apache.camel.component.aws2.athena.Athena2Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.athena.Athena2Configuration.class);
-            case "software.amazon.awssdk.services.athena.model.EncryptionOption": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.services.athena.model.EncryptionOption.class);
-            case "org.apache.camel.component.aws2.athena.Athena2Operations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.athena.Athena2Operations.class);
-            case "org.apache.camel.component.aws2.athena.Athena2OutputType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.athena.Athena2OutputType.class);
-            case "software.amazon.awssdk.core.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.core.Protocol.class);
         }
         return null;
     }

@@ -44,7 +44,6 @@ public class InfinispanComponentConverter
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.infinispan.InfinispanQueryBuilder.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.infinispan.InfinispanCustomListener.class));
         answer.add(new ConvertiblePair(String.class, java.lang.Object.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.infinispan.InfinispanOperation.class));
         answer.add(new ConvertiblePair(String.class, org.infinispan.commons.api.BasicCacheContainer.class));
         answer.add(new ConvertiblePair(String.class, java.util.function.BiFunction.class));
         return answer;
@@ -67,7 +66,6 @@ public class InfinispanComponentConverter
             case "org.apache.camel.component.infinispan.InfinispanQueryBuilder": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.infinispan.InfinispanQueryBuilder.class);
             case "org.apache.camel.component.infinispan.InfinispanCustomListener": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.infinispan.InfinispanCustomListener.class);
             case "java.lang.Object": return camelContext.getRegistry().lookupByNameAndType(ref, java.lang.Object.class);
-            case "org.apache.camel.component.infinispan.InfinispanOperation": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.infinispan.InfinispanOperation.class);
             case "org.infinispan.commons.api.BasicCacheContainer": return camelContext.getRegistry().lookupByNameAndType(ref, org.infinispan.commons.api.BasicCacheContainer.class);
             case "java.util.function.BiFunction": return camelContext.getRegistry().lookupByNameAndType(ref, java.util.function.BiFunction.class);
         }

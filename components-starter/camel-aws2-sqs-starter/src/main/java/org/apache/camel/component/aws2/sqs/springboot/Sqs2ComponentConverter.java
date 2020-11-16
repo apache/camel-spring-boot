@@ -41,8 +41,6 @@ public class Sqs2ComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.sqs.SqsClient.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.sqs.Sqs2Configuration.class));
-        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.core.Protocol.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.sqs.Sqs2Operations.class));
         return answer;
     }
 
@@ -61,8 +59,6 @@ public class Sqs2ComponentConverter
         switch (targetType.getName()) {
             case "software.amazon.awssdk.services.sqs.SqsClient": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.services.sqs.SqsClient.class);
             case "org.apache.camel.component.aws2.sqs.Sqs2Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.sqs.Sqs2Configuration.class);
-            case "software.amazon.awssdk.core.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.core.Protocol.class);
-            case "org.apache.camel.component.aws2.sqs.Sqs2Operations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.sqs.Sqs2Operations.class);
         }
         return null;
     }

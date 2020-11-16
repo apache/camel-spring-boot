@@ -41,7 +41,6 @@ public class EventHubsComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.azure.core.amqp.AmqpRetryOptions.class));
-        answer.add(new ConvertiblePair(String.class, com.azure.core.amqp.AmqpTransportType.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.eventhubs.EventHubsConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.azure.storage.common.StorageSharedKeyCredential.class));
         answer.add(new ConvertiblePair(String.class, com.azure.messaging.eventhubs.CheckpointStore.class));
@@ -63,7 +62,6 @@ public class EventHubsComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "com.azure.core.amqp.AmqpRetryOptions": return camelContext.getRegistry().lookupByNameAndType(ref, com.azure.core.amqp.AmqpRetryOptions.class);
-            case "com.azure.core.amqp.AmqpTransportType": return camelContext.getRegistry().lookupByNameAndType(ref, com.azure.core.amqp.AmqpTransportType.class);
             case "org.apache.camel.component.azure.eventhubs.EventHubsConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.azure.eventhubs.EventHubsConfiguration.class);
             case "com.azure.storage.common.StorageSharedKeyCredential": return camelContext.getRegistry().lookupByNameAndType(ref, com.azure.storage.common.StorageSharedKeyCredential.class);
             case "com.azure.messaging.eventhubs.CheckpointStore": return camelContext.getRegistry().lookupByNameAndType(ref, com.azure.messaging.eventhubs.CheckpointStore.class);

@@ -41,8 +41,6 @@ public class Ddb2ComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.dynamodb.DynamoDbClient.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.ddb.Ddb2Configuration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.ddb.Ddb2Operations.class));
-        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.core.Protocol.class));
         return answer;
     }
 
@@ -61,8 +59,6 @@ public class Ddb2ComponentConverter
         switch (targetType.getName()) {
             case "software.amazon.awssdk.services.dynamodb.DynamoDbClient": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.services.dynamodb.DynamoDbClient.class);
             case "org.apache.camel.component.aws2.ddb.Ddb2Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.ddb.Ddb2Configuration.class);
-            case "org.apache.camel.component.aws2.ddb.Ddb2Operations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.ddb.Ddb2Operations.class);
-            case "software.amazon.awssdk.core.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.core.Protocol.class);
         }
         return null;
     }

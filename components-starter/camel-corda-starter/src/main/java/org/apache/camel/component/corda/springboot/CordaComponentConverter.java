@@ -41,7 +41,6 @@ public class CordaComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.corda.CordaConfiguration.class));
         answer.add(new ConvertiblePair(String.class, net.corda.core.node.services.vault.PageSpecification.class));
-        answer.add(new ConvertiblePair(String.class, net.corda.core.node.services.vault.Sort.class));
         answer.add(new ConvertiblePair(String.class, net.corda.core.node.services.vault.QueryCriteria.class));
         return answer;
     }
@@ -61,7 +60,6 @@ public class CordaComponentConverter
         switch (targetType.getName()) {
             case "org.apache.camel.component.corda.CordaConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.corda.CordaConfiguration.class);
             case "net.corda.core.node.services.vault.PageSpecification": return camelContext.getRegistry().lookupByNameAndType(ref, net.corda.core.node.services.vault.PageSpecification.class);
-            case "net.corda.core.node.services.vault.Sort": return camelContext.getRegistry().lookupByNameAndType(ref, net.corda.core.node.services.vault.Sort.class);
             case "net.corda.core.node.services.vault.QueryCriteria": return camelContext.getRegistry().lookupByNameAndType(ref, net.corda.core.node.services.vault.QueryCriteria.class);
         }
         return null;

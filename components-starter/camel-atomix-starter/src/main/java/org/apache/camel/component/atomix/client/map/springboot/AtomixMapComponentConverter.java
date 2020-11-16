@@ -42,10 +42,8 @@ public class AtomixMapComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, io.atomix.Atomix.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.atomix.client.map.AtomixMapConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.atomix.client.map.AtomixMap.Action.class));
         answer.add(new ConvertiblePair(String.class, java.lang.Object.class));
         answer.add(new ConvertiblePair(String.class, java.util.Properties.class));
-        answer.add(new ConvertiblePair(String.class, io.atomix.resource.ReadConsistency.class));
         return answer;
     }
 
@@ -64,10 +62,8 @@ public class AtomixMapComponentConverter
         switch (targetType.getName()) {
             case "io.atomix.Atomix": return camelContext.getRegistry().lookupByNameAndType(ref, io.atomix.Atomix.class);
             case "org.apache.camel.component.atomix.client.map.AtomixMapConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.atomix.client.map.AtomixMapConfiguration.class);
-            case "org.apache.camel.component.atomix.client.map.AtomixMap.Action": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.atomix.client.map.AtomixMap.Action.class);
             case "java.lang.Object": return camelContext.getRegistry().lookupByNameAndType(ref, java.lang.Object.class);
             case "java.util.Properties": return camelContext.getRegistry().lookupByNameAndType(ref, java.util.Properties.class);
-            case "io.atomix.resource.ReadConsistency": return camelContext.getRegistry().lookupByNameAndType(ref, io.atomix.resource.ReadConsistency.class);
         }
         return null;
     }

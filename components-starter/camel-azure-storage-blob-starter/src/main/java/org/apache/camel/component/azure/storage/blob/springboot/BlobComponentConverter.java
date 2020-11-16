@@ -39,13 +39,10 @@ public class BlobComponentConverter
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.storage.blob.BlobType.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.storage.blob.BlobConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.azure.storage.common.StorageSharedKeyCredential.class));
         answer.add(new ConvertiblePair(String.class, com.azure.storage.blob.BlobServiceClient.class));
         answer.add(new ConvertiblePair(String.class, java.time.Duration.class));
-        answer.add(new ConvertiblePair(String.class, com.azure.storage.blob.models.BlockListType.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.storage.blob.BlobOperationsDefinition.class));
         return answer;
     }
 
@@ -62,13 +59,10 @@ public class BlobComponentConverter
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.apache.camel.component.azure.storage.blob.BlobType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.azure.storage.blob.BlobType.class);
             case "org.apache.camel.component.azure.storage.blob.BlobConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.azure.storage.blob.BlobConfiguration.class);
             case "com.azure.storage.common.StorageSharedKeyCredential": return camelContext.getRegistry().lookupByNameAndType(ref, com.azure.storage.common.StorageSharedKeyCredential.class);
             case "com.azure.storage.blob.BlobServiceClient": return camelContext.getRegistry().lookupByNameAndType(ref, com.azure.storage.blob.BlobServiceClient.class);
             case "java.time.Duration": return camelContext.getRegistry().lookupByNameAndType(ref, java.time.Duration.class);
-            case "com.azure.storage.blob.models.BlockListType": return camelContext.getRegistry().lookupByNameAndType(ref, com.azure.storage.blob.models.BlockListType.class);
-            case "org.apache.camel.component.azure.storage.blob.BlobOperationsDefinition": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.azure.storage.blob.BlobOperationsDefinition.class);
         }
         return null;
     }

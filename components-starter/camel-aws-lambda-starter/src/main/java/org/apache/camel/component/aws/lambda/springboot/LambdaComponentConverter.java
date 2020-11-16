@@ -40,9 +40,7 @@ public class LambdaComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.lambda.LambdaConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.lambda.LambdaOperations.class));
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.lambda.AWSLambda.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         return answer;
     }
 
@@ -60,9 +58,7 @@ public class LambdaComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.aws.lambda.LambdaConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.lambda.LambdaConfiguration.class);
-            case "org.apache.camel.component.aws.lambda.LambdaOperations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.lambda.LambdaOperations.class);
             case "com.amazonaws.services.lambda.AWSLambda": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.lambda.AWSLambda.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
         }
         return null;
     }

@@ -40,7 +40,6 @@ public class ReactiveStreamsComponentConverter
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.reactive.streams.ReactiveStreamsBackpressureStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration.class));
         return answer;
     }
@@ -58,7 +57,6 @@ public class ReactiveStreamsComponentConverter
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.apache.camel.component.reactive.streams.ReactiveStreamsBackpressureStrategy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.reactive.streams.ReactiveStreamsBackpressureStrategy.class);
             case "org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration.class);
         }
         return null;

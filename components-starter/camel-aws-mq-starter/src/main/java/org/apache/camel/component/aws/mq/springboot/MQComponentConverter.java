@@ -41,8 +41,6 @@ public class MQComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.mq.AmazonMQ.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.mq.MQConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.mq.MQOperations.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         return answer;
     }
 
@@ -61,8 +59,6 @@ public class MQComponentConverter
         switch (targetType.getName()) {
             case "com.amazonaws.services.mq.AmazonMQ": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.mq.AmazonMQ.class);
             case "org.apache.camel.component.aws.mq.MQConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.mq.MQConfiguration.class);
-            case "org.apache.camel.component.aws.mq.MQOperations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.mq.MQOperations.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
         }
         return null;
     }

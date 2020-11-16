@@ -41,9 +41,6 @@ public class KinesisComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.kinesis.AmazonKinesis.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.kinesis.KinesisConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.services.kinesis.model.ShardIteratorType.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.kinesis.KinesisShardClosedStrategyEnum.class));
         return answer;
     }
 
@@ -62,9 +59,6 @@ public class KinesisComponentConverter
         switch (targetType.getName()) {
             case "com.amazonaws.services.kinesis.AmazonKinesis": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.kinesis.AmazonKinesis.class);
             case "org.apache.camel.component.aws.kinesis.KinesisConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.kinesis.KinesisConfiguration.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
-            case "com.amazonaws.services.kinesis.model.ShardIteratorType": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.kinesis.model.ShardIteratorType.class);
-            case "org.apache.camel.component.aws.kinesis.KinesisShardClosedStrategyEnum": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.kinesis.KinesisShardClosedStrategyEnum.class);
         }
         return null;
     }

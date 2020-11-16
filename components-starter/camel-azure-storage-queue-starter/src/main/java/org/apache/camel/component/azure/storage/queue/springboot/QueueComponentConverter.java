@@ -41,7 +41,6 @@ public class QueueComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.storage.queue.QueueConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.azure.storage.queue.QueueServiceClient.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.storage.queue.QueueOperationDefinition.class));
         answer.add(new ConvertiblePair(String.class, java.time.Duration.class));
         answer.add(new ConvertiblePair(String.class, com.azure.storage.common.StorageSharedKeyCredential.class));
         return answer;
@@ -62,7 +61,6 @@ public class QueueComponentConverter
         switch (targetType.getName()) {
             case "org.apache.camel.component.azure.storage.queue.QueueConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.azure.storage.queue.QueueConfiguration.class);
             case "com.azure.storage.queue.QueueServiceClient": return camelContext.getRegistry().lookupByNameAndType(ref, com.azure.storage.queue.QueueServiceClient.class);
-            case "org.apache.camel.component.azure.storage.queue.QueueOperationDefinition": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.azure.storage.queue.QueueOperationDefinition.class);
             case "java.time.Duration": return camelContext.getRegistry().lookupByNameAndType(ref, java.time.Duration.class);
             case "com.azure.storage.common.StorageSharedKeyCredential": return camelContext.getRegistry().lookupByNameAndType(ref, com.azure.storage.common.StorageSharedKeyCredential.class);
         }

@@ -41,8 +41,6 @@ public class EC2ComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.ec2.AmazonEC2.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.ec2.EC2Configuration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.ec2.EC2Operations.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         return answer;
     }
 
@@ -61,8 +59,6 @@ public class EC2ComponentConverter
         switch (targetType.getName()) {
             case "com.amazonaws.services.ec2.AmazonEC2": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.ec2.AmazonEC2.class);
             case "org.apache.camel.component.aws.ec2.EC2Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.ec2.EC2Configuration.class);
-            case "org.apache.camel.component.aws.ec2.EC2Operations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.ec2.EC2Operations.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
         }
         return null;
     }

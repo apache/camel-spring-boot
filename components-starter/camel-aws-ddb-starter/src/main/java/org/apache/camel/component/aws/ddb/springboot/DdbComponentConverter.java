@@ -41,8 +41,6 @@ public class DdbComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.dynamodbv2.AmazonDynamoDB.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.ddb.DdbConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.ddb.DdbOperations.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         return answer;
     }
 
@@ -61,8 +59,6 @@ public class DdbComponentConverter
         switch (targetType.getName()) {
             case "com.amazonaws.services.dynamodbv2.AmazonDynamoDB": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.dynamodbv2.AmazonDynamoDB.class);
             case "org.apache.camel.component.aws.ddb.DdbConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.ddb.DdbConfiguration.class);
-            case "org.apache.camel.component.aws.ddb.DdbOperations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.ddb.DdbOperations.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
         }
         return null;
     }

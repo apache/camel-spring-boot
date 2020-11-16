@@ -42,7 +42,6 @@ public class KinesisFirehoseComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.kinesisfirehose.AmazonKinesisFirehose.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.firehose.KinesisFirehoseConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         return answer;
     }
 
@@ -61,7 +60,6 @@ public class KinesisFirehoseComponentConverter
         switch (targetType.getName()) {
             case "com.amazonaws.services.kinesisfirehose.AmazonKinesisFirehose": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.kinesisfirehose.AmazonKinesisFirehose.class);
             case "org.apache.camel.component.aws.firehose.KinesisFirehoseConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.firehose.KinesisFirehoseConfiguration.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
         }
         return null;
     }

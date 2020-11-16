@@ -39,7 +39,6 @@ public class ElsqlComponentConverter
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.elsql.ElSqlDatabaseVendor.class));
         answer.add(new ConvertiblePair(String.class, javax.sql.DataSource.class));
         answer.add(new ConvertiblePair(String.class, com.opengamma.elsql.ElSqlConfig.class));
         return answer;
@@ -58,7 +57,6 @@ public class ElsqlComponentConverter
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.apache.camel.component.elsql.ElSqlDatabaseVendor": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.elsql.ElSqlDatabaseVendor.class);
             case "javax.sql.DataSource": return camelContext.getRegistry().lookupByNameAndType(ref, javax.sql.DataSource.class);
             case "com.opengamma.elsql.ElSqlConfig": return camelContext.getRegistry().lookupByNameAndType(ref, com.opengamma.elsql.ElSqlConfig.class);
         }

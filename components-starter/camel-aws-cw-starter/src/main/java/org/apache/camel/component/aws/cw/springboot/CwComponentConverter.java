@@ -41,7 +41,6 @@ public class CwComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.cloudwatch.AmazonCloudWatch.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.cw.CwConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         return answer;
     }
 
@@ -60,7 +59,6 @@ public class CwComponentConverter
         switch (targetType.getName()) {
             case "com.amazonaws.services.cloudwatch.AmazonCloudWatch": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.cloudwatch.AmazonCloudWatch.class);
             case "org.apache.camel.component.aws.cw.CwConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.cw.CwConfiguration.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
         }
         return null;
     }

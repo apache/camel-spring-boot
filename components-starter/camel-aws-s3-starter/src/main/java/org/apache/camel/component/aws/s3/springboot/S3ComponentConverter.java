@@ -42,9 +42,7 @@ public class S3ComponentConverter
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.s3.AmazonS3.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.s3.S3Configuration.class));
         answer.add(new ConvertiblePair(String.class, com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.s3.model.EncryptionMaterials.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.s3.S3Operations.class));
         return answer;
     }
 
@@ -64,9 +62,7 @@ public class S3ComponentConverter
             case "com.amazonaws.services.s3.AmazonS3": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.s3.AmazonS3.class);
             case "org.apache.camel.component.aws.s3.S3Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.s3.S3Configuration.class);
             case "com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
             case "com.amazonaws.services.s3.model.EncryptionMaterials": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.s3.model.EncryptionMaterials.class);
-            case "org.apache.camel.component.aws.s3.S3Operations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.s3.S3Operations.class);
         }
         return null;
     }

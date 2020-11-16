@@ -40,14 +40,9 @@ public class PulsarComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.pulsar.PulsarConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.pulsar.utils.consumers.SubscriptionInitialPosition.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.RegexSubscriptionMode.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.pulsar.utils.consumers.SubscriptionType.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.pulsar.PulsarMessageReceiptFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.BatcherBuilder.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.CompressionType.class));
         answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.MessageRouter.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.MessageRoutingMode.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.pulsar.utils.AutoConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.PulsarClient.class));
         return answer;
@@ -67,14 +62,9 @@ public class PulsarComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.pulsar.PulsarConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.pulsar.PulsarConfiguration.class);
-            case "org.apache.camel.component.pulsar.utils.consumers.SubscriptionInitialPosition": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.pulsar.utils.consumers.SubscriptionInitialPosition.class);
-            case "org.apache.pulsar.client.api.RegexSubscriptionMode": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.pulsar.client.api.RegexSubscriptionMode.class);
-            case "org.apache.camel.component.pulsar.utils.consumers.SubscriptionType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.pulsar.utils.consumers.SubscriptionType.class);
             case "org.apache.camel.component.pulsar.PulsarMessageReceiptFactory": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.pulsar.PulsarMessageReceiptFactory.class);
             case "org.apache.pulsar.client.api.BatcherBuilder": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.pulsar.client.api.BatcherBuilder.class);
-            case "org.apache.pulsar.client.api.CompressionType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.pulsar.client.api.CompressionType.class);
             case "org.apache.pulsar.client.api.MessageRouter": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.pulsar.client.api.MessageRouter.class);
-            case "org.apache.pulsar.client.api.MessageRoutingMode": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.pulsar.client.api.MessageRoutingMode.class);
             case "org.apache.camel.component.pulsar.utils.AutoConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.pulsar.utils.AutoConfiguration.class);
             case "org.apache.pulsar.client.api.PulsarClient": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.pulsar.client.api.PulsarClient.class);
         }

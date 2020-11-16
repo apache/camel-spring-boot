@@ -41,7 +41,6 @@ public class BoxComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.box.BoxConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.box.sdk.IAccessTokenCache.class));
-        answer.add(new ConvertiblePair(String.class, com.box.sdk.EncryptionAlgorithm.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
     }
@@ -61,7 +60,6 @@ public class BoxComponentConverter
         switch (targetType.getName()) {
             case "org.apache.camel.component.box.BoxConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.box.BoxConfiguration.class);
             case "com.box.sdk.IAccessTokenCache": return camelContext.getRegistry().lookupByNameAndType(ref, com.box.sdk.IAccessTokenCache.class);
-            case "com.box.sdk.EncryptionAlgorithm": return camelContext.getRegistry().lookupByNameAndType(ref, com.box.sdk.EncryptionAlgorithm.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }
         return null;

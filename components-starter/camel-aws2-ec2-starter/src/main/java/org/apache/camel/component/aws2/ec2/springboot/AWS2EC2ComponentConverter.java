@@ -41,8 +41,6 @@ public class AWS2EC2ComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.ec2.Ec2Client.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.ec2.AWS2EC2Configuration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.ec2.AWS2EC2Operations.class));
-        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.core.Protocol.class));
         return answer;
     }
 
@@ -61,8 +59,6 @@ public class AWS2EC2ComponentConverter
         switch (targetType.getName()) {
             case "software.amazon.awssdk.services.ec2.Ec2Client": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.services.ec2.Ec2Client.class);
             case "org.apache.camel.component.aws2.ec2.AWS2EC2Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.ec2.AWS2EC2Configuration.class);
-            case "org.apache.camel.component.aws2.ec2.AWS2EC2Operations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.ec2.AWS2EC2Operations.class);
-            case "software.amazon.awssdk.core.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.core.Protocol.class);
         }
         return null;
     }

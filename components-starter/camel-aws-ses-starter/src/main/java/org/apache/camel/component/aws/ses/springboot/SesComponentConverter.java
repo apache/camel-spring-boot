@@ -41,7 +41,6 @@ public class SesComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.simpleemail.AmazonSimpleEmailService.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.ses.SesConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         return answer;
     }
 
@@ -60,7 +59,6 @@ public class SesComponentConverter
         switch (targetType.getName()) {
             case "com.amazonaws.services.simpleemail.AmazonSimpleEmailService": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.simpleemail.AmazonSimpleEmailService.class);
             case "org.apache.camel.component.aws.ses.SesConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.ses.SesConfiguration.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
         }
         return null;
     }

@@ -42,7 +42,6 @@ public class ConsulComponentConverter
         answer.add(new ConvertiblePair(String.class, java.time.Duration.class));
         answer.add(new ConvertiblePair(String.class, com.orbitz.consul.Consul.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.consul.ConsulConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, com.orbitz.consul.option.ConsistencyMode.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         answer.add(new ConvertiblePair(String.class, java.math.BigInteger.class));
         return answer;
@@ -64,7 +63,6 @@ public class ConsulComponentConverter
             case "java.time.Duration": return camelContext.getRegistry().lookupByNameAndType(ref, java.time.Duration.class);
             case "com.orbitz.consul.Consul": return camelContext.getRegistry().lookupByNameAndType(ref, com.orbitz.consul.Consul.class);
             case "org.apache.camel.component.consul.ConsulConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.consul.ConsulConfiguration.class);
-            case "com.orbitz.consul.option.ConsistencyMode": return camelContext.getRegistry().lookupByNameAndType(ref, com.orbitz.consul.option.ConsistencyMode.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
             case "java.math.BigInteger": return camelContext.getRegistry().lookupByNameAndType(ref, java.math.BigInteger.class);
         }

@@ -43,12 +43,10 @@ public class NettyComponentConverter
         answer.add(new ConvertiblePair(String.class, io.netty.channel.EventLoopGroup.class));
         answer.add(new ConvertiblePair(String.class, io.netty.util.concurrent.EventExecutorGroup.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.netty.NettyServerBootstrapFactory.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.LoggingLevel.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.netty.ServerInitializerFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.netty.ClientInitializerFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.netty.NettyCamelStateCorrelationManager.class));
         answer.add(new ConvertiblePair(String.class, io.netty.channel.group.ChannelGroup.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.netty.TextLineDelimiter.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         answer.add(new ConvertiblePair(String.class, io.netty.handler.ssl.SslHandler.class));
         return answer;
@@ -71,12 +69,10 @@ public class NettyComponentConverter
             case "io.netty.channel.EventLoopGroup": return camelContext.getRegistry().lookupByNameAndType(ref, io.netty.channel.EventLoopGroup.class);
             case "io.netty.util.concurrent.EventExecutorGroup": return camelContext.getRegistry().lookupByNameAndType(ref, io.netty.util.concurrent.EventExecutorGroup.class);
             case "org.apache.camel.component.netty.NettyServerBootstrapFactory": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.netty.NettyServerBootstrapFactory.class);
-            case "org.apache.camel.LoggingLevel": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.LoggingLevel.class);
             case "org.apache.camel.component.netty.ServerInitializerFactory": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.netty.ServerInitializerFactory.class);
             case "org.apache.camel.component.netty.ClientInitializerFactory": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.netty.ClientInitializerFactory.class);
             case "org.apache.camel.component.netty.NettyCamelStateCorrelationManager": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.netty.NettyCamelStateCorrelationManager.class);
             case "io.netty.channel.group.ChannelGroup": return camelContext.getRegistry().lookupByNameAndType(ref, io.netty.channel.group.ChannelGroup.class);
-            case "org.apache.camel.component.netty.TextLineDelimiter": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.netty.TextLineDelimiter.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
             case "io.netty.handler.ssl.SslHandler": return camelContext.getRegistry().lookupByNameAndType(ref, io.netty.handler.ssl.SslHandler.class);
         }

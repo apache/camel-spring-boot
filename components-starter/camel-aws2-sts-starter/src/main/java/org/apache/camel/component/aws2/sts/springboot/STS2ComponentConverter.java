@@ -40,8 +40,6 @@ public class STS2ComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.sts.STS2Configuration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.sts.STS2Operations.class));
-        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.core.Protocol.class));
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.sts.StsClient.class));
         return answer;
     }
@@ -60,8 +58,6 @@ public class STS2ComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.aws2.sts.STS2Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.sts.STS2Configuration.class);
-            case "org.apache.camel.component.aws2.sts.STS2Operations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.sts.STS2Operations.class);
-            case "software.amazon.awssdk.core.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.core.Protocol.class);
             case "software.amazon.awssdk.services.sts.StsClient": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.services.sts.StsClient.class);
         }
         return null;

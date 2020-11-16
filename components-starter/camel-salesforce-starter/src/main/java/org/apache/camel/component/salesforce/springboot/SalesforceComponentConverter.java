@@ -40,16 +40,10 @@ public class SalesforceComponentConverter
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.api.dto.bulk.ContentType.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.internal.PayloadFormat.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.SalesforceHttpClient.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.NotFoundBehaviour.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.internal.dto.NotifyForFieldsEnum.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.internal.dto.NotifyForOperationsEnum.class));
         answer.add(new ConvertiblePair(String.class, com.fasterxml.jackson.databind.ObjectMapper.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.SalesforceEndpointConfig.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.AuthenticationType.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.KeyStoreParameters.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.SalesforceLoginConfig.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
@@ -69,16 +63,10 @@ public class SalesforceComponentConverter
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.apache.camel.component.salesforce.api.dto.bulk.ContentType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.salesforce.api.dto.bulk.ContentType.class);
-            case "org.apache.camel.component.salesforce.internal.PayloadFormat": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.salesforce.internal.PayloadFormat.class);
             case "org.apache.camel.component.salesforce.SalesforceHttpClient": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.salesforce.SalesforceHttpClient.class);
-            case "org.apache.camel.component.salesforce.NotFoundBehaviour": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.salesforce.NotFoundBehaviour.class);
-            case "org.apache.camel.component.salesforce.internal.dto.NotifyForFieldsEnum": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.salesforce.internal.dto.NotifyForFieldsEnum.class);
-            case "org.apache.camel.component.salesforce.internal.dto.NotifyForOperationsEnum": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.salesforce.internal.dto.NotifyForOperationsEnum.class);
             case "com.fasterxml.jackson.databind.ObjectMapper": return camelContext.getRegistry().lookupByNameAndType(ref, com.fasterxml.jackson.databind.ObjectMapper.class);
             case "org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata.class);
             case "org.apache.camel.component.salesforce.SalesforceEndpointConfig": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.salesforce.SalesforceEndpointConfig.class);
-            case "org.apache.camel.component.salesforce.AuthenticationType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.salesforce.AuthenticationType.class);
             case "org.apache.camel.support.jsse.KeyStoreParameters": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.support.jsse.KeyStoreParameters.class);
             case "org.apache.camel.component.salesforce.SalesforceLoginConfig": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.salesforce.SalesforceLoginConfig.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.support.jsse.SSLContextParameters.class);

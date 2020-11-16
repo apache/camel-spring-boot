@@ -41,8 +41,6 @@ public class KMSComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.kms.KMSConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.kms.AWSKMS.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.kms.KMSOperations.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         return answer;
     }
 
@@ -61,8 +59,6 @@ public class KMSComponentConverter
         switch (targetType.getName()) {
             case "org.apache.camel.component.aws.kms.KMSConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.kms.KMSConfiguration.class);
             case "com.amazonaws.services.kms.AWSKMS": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.kms.AWSKMS.class);
-            case "org.apache.camel.component.aws.kms.KMSOperations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.kms.KMSOperations.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
         }
         return null;
     }

@@ -41,7 +41,6 @@ public class ServiceNowComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.servicenow.ServiceNowConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.servicenow.ServiceNowRelease.class));
         answer.add(new ConvertiblePair(String.class, org.apache.cxf.transports.http.configuration.HTTPClientPolicy.class));
         answer.add(new ConvertiblePair(String.class, com.fasterxml.jackson.databind.ObjectMapper.class));
         answer.add(new ConvertiblePair(String.class, org.apache.cxf.configuration.security.ProxyAuthorizationPolicy.class));
@@ -63,7 +62,6 @@ public class ServiceNowComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.servicenow.ServiceNowConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.servicenow.ServiceNowConfiguration.class);
-            case "org.apache.camel.component.servicenow.ServiceNowRelease": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.servicenow.ServiceNowRelease.class);
             case "org.apache.cxf.transports.http.configuration.HTTPClientPolicy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.cxf.transports.http.configuration.HTTPClientPolicy.class);
             case "com.fasterxml.jackson.databind.ObjectMapper": return camelContext.getRegistry().lookupByNameAndType(ref, com.fasterxml.jackson.databind.ObjectMapper.class);
             case "org.apache.cxf.configuration.security.ProxyAuthorizationPolicy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.cxf.configuration.security.ProxyAuthorizationPolicy.class);

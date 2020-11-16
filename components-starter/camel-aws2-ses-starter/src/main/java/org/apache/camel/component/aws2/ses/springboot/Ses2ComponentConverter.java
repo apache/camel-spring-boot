@@ -41,7 +41,6 @@ public class Ses2ComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.ses.SesClient.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.ses.Ses2Configuration.class));
-        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.core.Protocol.class));
         return answer;
     }
 
@@ -60,7 +59,6 @@ public class Ses2ComponentConverter
         switch (targetType.getName()) {
             case "software.amazon.awssdk.services.ses.SesClient": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.services.ses.SesClient.class);
             case "org.apache.camel.component.aws2.ses.Ses2Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.ses.Ses2Configuration.class);
-            case "software.amazon.awssdk.core.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.core.Protocol.class);
         }
         return null;
     }

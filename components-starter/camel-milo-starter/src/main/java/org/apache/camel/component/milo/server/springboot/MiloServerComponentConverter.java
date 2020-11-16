@@ -44,7 +44,6 @@ public class MiloServerComponentConverter
         answer.add(new ConvertiblePair(String.class, java.security.cert.X509Certificate.class));
         answer.add(new ConvertiblePair(String.class, org.eclipse.milo.opcua.stack.core.security.CertificateManager.class));
         answer.add(new ConvertiblePair(String.class, org.eclipse.milo.opcua.stack.core.security.CertificateValidator.class));
-        answer.add(new ConvertiblePair(String.class, org.eclipse.milo.opcua.stack.core.security.SecurityPolicy.class));
         return answer;
     }
 
@@ -65,7 +64,6 @@ public class MiloServerComponentConverter
             case "java.security.cert.X509Certificate": return camelContext.getRegistry().lookupByNameAndType(ref, java.security.cert.X509Certificate.class);
             case "org.eclipse.milo.opcua.stack.core.security.CertificateManager": return camelContext.getRegistry().lookupByNameAndType(ref, org.eclipse.milo.opcua.stack.core.security.CertificateManager.class);
             case "org.eclipse.milo.opcua.stack.core.security.CertificateValidator": return camelContext.getRegistry().lookupByNameAndType(ref, org.eclipse.milo.opcua.stack.core.security.CertificateValidator.class);
-            case "org.eclipse.milo.opcua.stack.core.security.SecurityPolicy": return camelContext.getRegistry().lookupByNameAndType(ref, org.eclipse.milo.opcua.stack.core.security.SecurityPolicy.class);
         }
         return null;
     }

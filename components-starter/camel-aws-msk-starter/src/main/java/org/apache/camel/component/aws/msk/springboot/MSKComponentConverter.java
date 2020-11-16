@@ -41,8 +41,6 @@ public class MSKComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.msk.MSKConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.kafka.AWSKafka.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.msk.MSKOperations.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         return answer;
     }
 
@@ -61,8 +59,6 @@ public class MSKComponentConverter
         switch (targetType.getName()) {
             case "org.apache.camel.component.aws.msk.MSKConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.msk.MSKConfiguration.class);
             case "com.amazonaws.services.kafka.AWSKafka": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.kafka.AWSKafka.class);
-            case "org.apache.camel.component.aws.msk.MSKOperations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.msk.MSKOperations.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
         }
         return null;
     }

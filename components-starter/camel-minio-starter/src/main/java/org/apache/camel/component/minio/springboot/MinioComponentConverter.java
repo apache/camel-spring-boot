@@ -45,7 +45,6 @@ public class MinioComponentConverter
         answer.add(new ConvertiblePair(String.class, io.minio.ServerSideEncryption.class));
         answer.add(new ConvertiblePair(String.class, io.minio.ServerSideEncryptionCustomerKey.class));
         answer.add(new ConvertiblePair(String.class, java.time.ZonedDateTime.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.minio.MinioOperations.class));
         return answer;
     }
 
@@ -68,7 +67,6 @@ public class MinioComponentConverter
             case "io.minio.ServerSideEncryption": return camelContext.getRegistry().lookupByNameAndType(ref, io.minio.ServerSideEncryption.class);
             case "io.minio.ServerSideEncryptionCustomerKey": return camelContext.getRegistry().lookupByNameAndType(ref, io.minio.ServerSideEncryptionCustomerKey.class);
             case "java.time.ZonedDateTime": return camelContext.getRegistry().lookupByNameAndType(ref, java.time.ZonedDateTime.class);
-            case "org.apache.camel.component.minio.MinioOperations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.minio.MinioOperations.class);
         }
         return null;
     }

@@ -41,7 +41,6 @@ import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 
 import org.apache.camel.maven.packaging.AbstractGeneratorMojo;
-import org.apache.camel.tooling.model.BaseOptionModel;
 import org.apache.camel.tooling.model.ComponentModel;
 import org.apache.camel.tooling.model.ComponentModel.ComponentOptionModel;
 import org.apache.camel.tooling.model.DataFormatModel;
@@ -784,6 +783,10 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         if (option.getJavaType().startsWith("java.util.Map") || option.getJavaType().startsWith("java.util.List") || option.getJavaType().startsWith("java.util.Set")) {
             return false;
         }
+        // enums are not complex
+        if (option.getEnums() != null && !option.getEnums().isEmpty()) {
+            return false;
+        }
         // all the object types are complex
         return "object".equals(option.getType());
     }
@@ -793,6 +796,10 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         if (option.getJavaType().startsWith("java.util.Map") || option.getJavaType().startsWith("java.util.List") || option.getJavaType().startsWith("java.util.Set")) {
             return false;
         }
+        // enums are not complex
+        if (option.getEnums() != null && !option.getEnums().isEmpty()) {
+            return false;
+        }
         // all the object types are complex
         return "object".equals(option.getType());
     }
@@ -800,6 +807,10 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     private boolean isComplexType(LanguageOptionModel option) {
         // we can configure map/list/set types from spring-boot so do not regard them as complex
         if (option.getJavaType().startsWith("java.util.Map") || option.getJavaType().startsWith("java.util.List") || option.getJavaType().startsWith("java.util.Set")) {
+            return false;
+        }
+        // enums are not complex
+        if (option.getEnums() != null && !option.getEnums().isEmpty()) {
             return false;
         }
         // all the object types are complex

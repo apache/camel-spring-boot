@@ -41,8 +41,6 @@ public class IAMComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.iam.IAMConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.identitymanagement.AmazonIdentityManagement.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.iam.IAMOperations.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         return answer;
     }
 
@@ -61,8 +59,6 @@ public class IAMComponentConverter
         switch (targetType.getName()) {
             case "org.apache.camel.component.aws.iam.IAMConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.iam.IAMConfiguration.class);
             case "com.amazonaws.services.identitymanagement.AmazonIdentityManagement": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.identitymanagement.AmazonIdentityManagement.class);
-            case "org.apache.camel.component.aws.iam.IAMOperations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.iam.IAMOperations.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
         }
         return null;
     }

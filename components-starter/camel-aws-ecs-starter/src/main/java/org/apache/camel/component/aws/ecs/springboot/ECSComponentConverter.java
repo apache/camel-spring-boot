@@ -41,8 +41,6 @@ public class ECSComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.ecs.ECSConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.ecs.AmazonECS.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.ecs.ECSOperations.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         return answer;
     }
 
@@ -61,8 +59,6 @@ public class ECSComponentConverter
         switch (targetType.getName()) {
             case "org.apache.camel.component.aws.ecs.ECSConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.ecs.ECSConfiguration.class);
             case "com.amazonaws.services.ecs.AmazonECS": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.ecs.AmazonECS.class);
-            case "org.apache.camel.component.aws.ecs.ECSOperations": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.ecs.ECSOperations.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
         }
         return null;
     }

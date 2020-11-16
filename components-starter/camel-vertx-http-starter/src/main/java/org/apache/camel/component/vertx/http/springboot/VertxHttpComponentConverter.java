@@ -44,7 +44,6 @@ public class VertxHttpComponentConverter
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.vertx.http.VertxHttpBinding.class));
         answer.add(new ConvertiblePair(String.class, io.vertx.core.VertxOptions.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
-        answer.add(new ConvertiblePair(String.class, io.vertx.core.net.ProxyType.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
     }
@@ -66,7 +65,6 @@ public class VertxHttpComponentConverter
             case "org.apache.camel.component.vertx.http.VertxHttpBinding": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.vertx.http.VertxHttpBinding.class);
             case "io.vertx.core.VertxOptions": return camelContext.getRegistry().lookupByNameAndType(ref, io.vertx.core.VertxOptions.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
-            case "io.vertx.core.net.ProxyType": return camelContext.getRegistry().lookupByNameAndType(ref, io.vertx.core.net.ProxyType.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }
         return null;

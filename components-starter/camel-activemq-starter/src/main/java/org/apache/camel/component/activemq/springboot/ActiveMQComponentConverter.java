@@ -40,22 +40,16 @@ public class ActiveMQComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, javax.jms.ConnectionFactory.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.JmsMessageType.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.ConsumerType.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.DefaultTaskExecutorType.class));
         answer.add(new ConvertiblePair(String.class, org.springframework.core.task.TaskExecutor.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.ReplyToType.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.JmsConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.springframework.jms.support.destination.DestinationResolver.class));
         answer.add(new ConvertiblePair(String.class, org.springframework.util.ErrorHandler.class));
         answer.add(new ConvertiblePair(String.class, javax.jms.ExceptionListener.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.JmsKeyFormatStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.springframework.jms.support.converter.MessageConverter.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.MessageCreatedStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.MessageListenerContainerFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.QueueBrowseStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.LoggingLevel.class));
         answer.add(new ConvertiblePair(String.class, org.springframework.transaction.PlatformTransactionManager.class));
         return answer;
     }
@@ -74,22 +68,16 @@ public class ActiveMQComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "javax.jms.ConnectionFactory": return camelContext.getRegistry().lookupByNameAndType(ref, javax.jms.ConnectionFactory.class);
-            case "org.apache.camel.component.jms.JmsMessageType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.jms.JmsMessageType.class);
-            case "org.apache.camel.component.jms.ConsumerType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.jms.ConsumerType.class);
-            case "org.apache.camel.component.jms.DefaultTaskExecutorType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.jms.DefaultTaskExecutorType.class);
             case "org.springframework.core.task.TaskExecutor": return camelContext.getRegistry().lookupByNameAndType(ref, org.springframework.core.task.TaskExecutor.class);
-            case "org.apache.camel.component.jms.ReplyToType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.jms.ReplyToType.class);
             case "org.apache.camel.component.jms.JmsConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.jms.JmsConfiguration.class);
             case "org.springframework.jms.support.destination.DestinationResolver": return camelContext.getRegistry().lookupByNameAndType(ref, org.springframework.jms.support.destination.DestinationResolver.class);
             case "org.springframework.util.ErrorHandler": return camelContext.getRegistry().lookupByNameAndType(ref, org.springframework.util.ErrorHandler.class);
             case "javax.jms.ExceptionListener": return camelContext.getRegistry().lookupByNameAndType(ref, javax.jms.ExceptionListener.class);
-            case "org.apache.camel.component.jms.JmsKeyFormatStrategy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.jms.JmsKeyFormatStrategy.class);
             case "org.springframework.jms.support.converter.MessageConverter": return camelContext.getRegistry().lookupByNameAndType(ref, org.springframework.jms.support.converter.MessageConverter.class);
             case "org.apache.camel.component.jms.MessageCreatedStrategy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.jms.MessageCreatedStrategy.class);
             case "org.apache.camel.component.jms.MessageListenerContainerFactory": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.jms.MessageListenerContainerFactory.class);
             case "org.apache.camel.component.jms.QueueBrowseStrategy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.jms.QueueBrowseStrategy.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
-            case "org.apache.camel.LoggingLevel": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.LoggingLevel.class);
             case "org.springframework.transaction.PlatformTransactionManager": return camelContext.getRegistry().lookupByNameAndType(ref, org.springframework.transaction.PlatformTransactionManager.class);
         }
         return null;

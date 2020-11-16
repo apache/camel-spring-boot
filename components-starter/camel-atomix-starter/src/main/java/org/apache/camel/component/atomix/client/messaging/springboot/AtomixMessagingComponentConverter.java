@@ -41,11 +41,8 @@ public class AtomixMessagingComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, io.atomix.Atomix.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.atomix.client.messaging.AtomixMessaging.BroadcastType.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.atomix.client.messaging.AtomixMessagingConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.atomix.client.messaging.AtomixMessaging.Action.class));
         answer.add(new ConvertiblePair(String.class, java.util.Properties.class));
-        answer.add(new ConvertiblePair(String.class, io.atomix.resource.ReadConsistency.class));
         return answer;
     }
 
@@ -63,11 +60,8 @@ public class AtomixMessagingComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "io.atomix.Atomix": return camelContext.getRegistry().lookupByNameAndType(ref, io.atomix.Atomix.class);
-            case "org.apache.camel.component.atomix.client.messaging.AtomixMessaging.BroadcastType": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.atomix.client.messaging.AtomixMessaging.BroadcastType.class);
             case "org.apache.camel.component.atomix.client.messaging.AtomixMessagingConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.atomix.client.messaging.AtomixMessagingConfiguration.class);
-            case "org.apache.camel.component.atomix.client.messaging.AtomixMessaging.Action": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.atomix.client.messaging.AtomixMessaging.Action.class);
             case "java.util.Properties": return camelContext.getRegistry().lookupByNameAndType(ref, java.util.Properties.class);
-            case "io.atomix.resource.ReadConsistency": return camelContext.getRegistry().lookupByNameAndType(ref, io.atomix.resource.ReadConsistency.class);
         }
         return null;
     }

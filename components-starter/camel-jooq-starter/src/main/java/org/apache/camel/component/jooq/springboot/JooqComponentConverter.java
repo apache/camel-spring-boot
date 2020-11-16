@@ -41,7 +41,6 @@ public class JooqComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jooq.JooqConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.jooq.Configuration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jooq.JooqOperation.class));
         return answer;
     }
 
@@ -60,7 +59,6 @@ public class JooqComponentConverter
         switch (targetType.getName()) {
             case "org.apache.camel.component.jooq.JooqConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.jooq.JooqConfiguration.class);
             case "org.jooq.Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.jooq.Configuration.class);
-            case "org.apache.camel.component.jooq.JooqOperation": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.jooq.JooqOperation.class);
         }
         return null;
     }

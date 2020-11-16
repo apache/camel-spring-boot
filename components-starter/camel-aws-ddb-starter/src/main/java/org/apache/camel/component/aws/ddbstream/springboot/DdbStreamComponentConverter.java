@@ -42,8 +42,6 @@ public class DdbStreamComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.amazonaws.services.dynamodbv2.AmazonDynamoDBStreams.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.ddbstream.DdbStreamConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.services.dynamodbv2.model.ShardIteratorType.class));
-        answer.add(new ConvertiblePair(String.class, com.amazonaws.Protocol.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.ddbstream.SequenceNumberProvider.class));
         return answer;
     }
@@ -63,8 +61,6 @@ public class DdbStreamComponentConverter
         switch (targetType.getName()) {
             case "com.amazonaws.services.dynamodbv2.AmazonDynamoDBStreams": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.dynamodbv2.AmazonDynamoDBStreams.class);
             case "org.apache.camel.component.aws.ddbstream.DdbStreamConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.ddbstream.DdbStreamConfiguration.class);
-            case "com.amazonaws.services.dynamodbv2.model.ShardIteratorType": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.services.dynamodbv2.model.ShardIteratorType.class);
-            case "com.amazonaws.Protocol": return camelContext.getRegistry().lookupByNameAndType(ref, com.amazonaws.Protocol.class);
             case "org.apache.camel.component.aws.ddbstream.SequenceNumberProvider": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws.ddbstream.SequenceNumberProvider.class);
         }
         return null;
