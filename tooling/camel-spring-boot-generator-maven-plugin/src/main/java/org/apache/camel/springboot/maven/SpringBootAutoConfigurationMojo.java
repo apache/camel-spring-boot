@@ -41,6 +41,7 @@ import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 
 import org.apache.camel.maven.packaging.AbstractGeneratorMojo;
+import org.apache.camel.tooling.model.BaseOptionModel;
 import org.apache.camel.tooling.model.ComponentModel;
 import org.apache.camel.tooling.model.ComponentModel.ComponentOptionModel;
 import org.apache.camel.tooling.model.DataFormatModel;
@@ -1364,13 +1365,11 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         sb.append("}\n");
         sb.append("ref = ref.startsWith(\"#bean:\") ? ref.substring(6) : ref.substring(1);\n");
         sb.append("switch (targetType.getName()) {\n");
-        for (ComponentOptionModel option : model.getComponentOptions()) {
-            // is it a complex type
-            if (isComplexType(option)) {
-                String type = getJavaType(option);
-                sb.append("    case \"").append(type).append("\": return camelContext.getRegistry().lookupByNameAndType(ref, ").append(type).append(".class);\n");
-            }
-        }
+        // we need complex types only which unique types only
+        Stream<String> s = model.getComponentOptions().stream().filter(this::isComplexType).map(BaseOptionModel::getJavaType).distinct();
+        s.forEach(type -> {
+            sb.append("    case \"").append(type).append("\": return camelContext.getRegistry().lookupByNameAndType(ref, ").append(type).append(".class);\n");
+        });
         sb.append("}\n");
         sb.append("return null;\n");
         return sb.toString();
@@ -1387,13 +1386,11 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         sb.append("}\n");
         sb.append("ref = ref.startsWith(\"#bean:\") ? ref.substring(6) : ref.substring(1);\n");
         sb.append("switch (targetType.getName()) {\n");
-        for (DataFormatOptionModel option : model.getOptions()) {
-            // is it a complex type
-            if (isComplexType(option)) {
-                String type = getJavaType(option);
-                sb.append("    case \"").append(type).append("\": return camelContext.getRegistry().lookupByNameAndType(ref, ").append(type).append(".class);\n");
-            }
-        }
+        // we need complex types only which unique types only
+        Stream<String> s = model.getOptions().stream().filter(this::isComplexType).map(BaseOptionModel::getJavaType).distinct();
+        s.forEach(type -> {
+            sb.append("    case \"").append(type).append("\": return camelContext.getRegistry().lookupByNameAndType(ref, ").append(type).append(".class);\n");
+        });
         sb.append("}\n");
         sb.append("return null;\n");
         return sb.toString();
@@ -1410,13 +1407,11 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         sb.append("}\n");
         sb.append("ref = ref.startsWith(\"#bean:\") ? ref.substring(6) : ref.substring(1);\n");
         sb.append("switch (targetType.getName()) {\n");
-        for (LanguageOptionModel option : model.getOptions()) {
-            // is it a complex type
-            if (isComplexType(option)) {
-                String type = getJavaType(option);
-                sb.append("    case \"").append(type).append("\": return camelContext.getRegistry().lookupByNameAndType(ref, ").append(type).append(".class);\n");
-            }
-        }
+        // we need complex types only which unique types only
+        Stream<String> s = model.getOptions().stream().filter(this::isComplexType).map(BaseOptionModel::getJavaType).distinct();
+        s.forEach(type -> {
+            sb.append("    case \"").append(type).append("\": return camelContext.getRegistry().lookupByNameAndType(ref, ").append(type).append(".class);\n");
+        });
         sb.append("}\n");
         sb.append("return null;\n");
         return sb.toString();
@@ -1425,14 +1420,13 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     private String createConverterPairBody(ComponentModel model) {
         StringBuilder sb = new StringBuilder();
         sb.append("Set<ConvertiblePair> answer = new LinkedHashSet<>();\n");
-        for (ComponentOptionModel option : model.getComponentOptions()) {
-            // is it a complex type
-            if (isComplexType(option)) {
-                sb.append("answer.add(new ConvertiblePair(String.class, ");
-                sb.append(option.getJavaType());
-                sb.append(".class));\n");
-            }
-        }
+        // we need complex types only which unique types only
+        Stream<String> s = model.getOptions().stream().filter(this::isComplexType).map(BaseOptionModel::getJavaType).distinct();
+        s.forEach(type -> {
+            sb.append("answer.add(new ConvertiblePair(String.class, ");
+            sb.append(type);
+            sb.append(".class));\n");
+        });
         sb.append("return answer;\n");
         return sb.toString();
     }
@@ -1440,14 +1434,13 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     private String createConverterPairBody(DataFormatModel model) {
         StringBuilder sb = new StringBuilder();
         sb.append("Set<ConvertiblePair> answer = new LinkedHashSet<>();\n");
-        for (DataFormatOptionModel option : model.getOptions()) {
-            // is it a complex type
-            if (isComplexType(option)) {
-                sb.append("answer.add(new ConvertiblePair(String.class, ");
-                sb.append(option.getJavaType());
-                sb.append(".class));\n");
-            }
-        }
+        // we need complex types only which unique types only
+        Stream<String> s = model.getOptions().stream().filter(this::isComplexType).map(BaseOptionModel::getJavaType).distinct();
+        s.forEach(type -> {
+            sb.append("answer.add(new ConvertiblePair(String.class, ");
+            sb.append(type);
+            sb.append(".class));\n");
+        });
         sb.append("return answer;\n");
         return sb.toString();
     }
@@ -1455,14 +1448,13 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     private String createConverterPairBody(LanguageModel model) {
         StringBuilder sb = new StringBuilder();
         sb.append("Set<ConvertiblePair> answer = new LinkedHashSet<>();\n");
-        for (LanguageOptionModel option : model.getOptions()) {
-            // is it a complex type
-            if (isComplexType(option)) {
-                sb.append("answer.add(new ConvertiblePair(String.class, ");
-                sb.append(option.getJavaType());
-                sb.append(".class));\n");
-            }
-        }
+        // we need complex types only which unique types only
+        Stream<String> s = model.getOptions().stream().filter(this::isComplexType).map(BaseOptionModel::getJavaType).distinct();
+        s.forEach(type -> {
+            sb.append("answer.add(new ConvertiblePair(String.class, ");
+            sb.append(type);
+            sb.append(".class));\n");
+        });
         sb.append("return answer;\n");
         return sb.toString();
     }
