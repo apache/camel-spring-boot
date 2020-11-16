@@ -30,6 +30,7 @@ import org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.convert.ApplicationConversionService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -49,10 +50,14 @@ public class JsonataComponentAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
-    @Autowired
-    private CamelContext camelContext;
+    private final CamelContext camelContext;
     @Autowired
     private JsonataComponentConfiguration configuration;
+
+    public JsonataComponentAutoConfiguration(
+            org.apache.camel.CamelContext camelContext) {
+        this.camelContext = camelContext;
+    }
 
     @Lazy
     @Bean

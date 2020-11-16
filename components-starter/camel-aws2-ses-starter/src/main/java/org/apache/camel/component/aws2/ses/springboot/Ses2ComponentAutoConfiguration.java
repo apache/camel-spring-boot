@@ -30,6 +30,7 @@ import org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.convert.ApplicationConversionService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -49,10 +50,16 @@ public class Ses2ComponentAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
-    @Autowired
-    private CamelContext camelContext;
+    private final CamelContext camelContext;
     @Autowired
     private Ses2ComponentConfiguration configuration;
+
+    public Ses2ComponentAutoConfiguration(
+            org.apache.camel.CamelContext camelContext) {
+        this.camelContext = camelContext;
+        ApplicationConversionService acs = (ApplicationConversionService) ApplicationConversionService.getSharedInstance();
+        acs.addConverter(new Ses2ComponentConverter(camelContext));
+    }
 
     @Lazy
     @Bean
