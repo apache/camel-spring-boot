@@ -706,7 +706,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             }
             if (!Strings.isNullOrEmpty(option.getDescription())) {
                 String desc = option.getDescription();
-                boolean complex = isComplexType(option) && isBlank(option.getEnums());
+                boolean complex = isComplexTypeOrDuration(option) && isBlank(option.getEnums());
                 if (complex) {
                     if (!desc.endsWith(".")) {
                         desc = desc + ".";
@@ -719,7 +719,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 if ("java.lang.String".equals(option.getJavaType())) {
                     prop.getField().setStringInitializer(option.getDefaultValue().toString());
                 } else if ("duration".equals(option.getType())) {
-                    String value = convertDurationToMillisec(option.getDefaultValue().toString());
+                    String value = convertDurationToMills(option.getDefaultValue().toString());
                     // duration is either long or int java type
                     if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
                         value = value + "L";
@@ -744,10 +744,10 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         writeSourceIfChanged(javaClass, fileName, true);
     }
 
-    private String convertDurationToMillisec(String pattern) {
-        String value = null;
+    private String convertDurationToMills(String pattern) {
+        String value;
         pattern = pattern.toLowerCase();
-        if (pattern.indexOf("ms") != -1) {
+        if (pattern.contains("ms")) {
             pattern = pattern.replaceAll("ms", "");
         }
         try {
@@ -769,13 +769,22 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         }
     }
 
-    private boolean isComplexType(ComponentOptionModel option) {
+    private boolean isComplexTypeOrDuration(ComponentOptionModel option) {
         // we can configure map/list/set types from spring-boot so do not regard them as complex
         if (option.getJavaType().startsWith("java.util.Map") || option.getJavaType().startsWith("java.util.List") || option.getJavaType().startsWith("java.util.Set")) {
             return false;
         }
         // all the object types are complex
         return "object".equals(option.getType()) || "duration".equals(option.getType());
+    }
+
+    private boolean isComplexType(ComponentOptionModel option) {
+        // we can configure map/list/set types from spring-boot so do not regard them as complex
+        if (option.getJavaType().startsWith("java.util.Map") || option.getJavaType().startsWith("java.util.List") || option.getJavaType().startsWith("java.util.Set")) {
+            return false;
+        }
+        // all the object types are complex
+        return "object".equals(option.getType());
     }
 
     private boolean isComplexType(DataFormatOptionModel option) {
