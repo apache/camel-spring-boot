@@ -48,12 +48,6 @@ public class KinesisFirehose2ComponentConfiguration
      */
     private FirehoseClient amazonKinesisFirehoseClient;
     /**
-     * Setting the autoDiscoverClient mechanism, if true, the component will
-     * look for a client instance in the registry automatically otherwise it
-     * will skip that checking
-     */
-    private Boolean autoDiscoverClient = true;
-    /**
      * This option will set the CBOR_ENABLED property during the execution
      */
     private Boolean cborEnabled = true;
@@ -126,14 +120,6 @@ public class KinesisFirehose2ComponentConfiguration
     public void setAmazonKinesisFirehoseClient(
             FirehoseClient amazonKinesisFirehoseClient) {
         this.amazonKinesisFirehoseClient = amazonKinesisFirehoseClient;
-    }
-
-    public Boolean getAutoDiscoverClient() {
-        return autoDiscoverClient;
-    }
-
-    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
-        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public Boolean getCborEnabled() {

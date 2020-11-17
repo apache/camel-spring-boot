@@ -17,7 +17,7 @@ When using aws2-kinesis with Spring Boot make sure to use the following Maven de
 ----
 
 
-The component supports 35 options, which are listed below.
+The component supports 33 options, which are listed below.
 
 
 
@@ -26,7 +26,6 @@ The component supports 35 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.aws2-kinesis-firehose.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws2-kinesis-firehose.amazon-kinesis-firehose-client* | Amazon Kinesis Firehose client to use for all requests for this endpoint. The option is a software.amazon.awssdk.services.firehose.FirehoseClient type. |  | FirehoseClient
-| *camel.component.aws2-kinesis-firehose.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking | true | Boolean
 | *camel.component.aws2-kinesis-firehose.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.aws2-kinesis-firehose.cbor-enabled* | This option will set the CBOR_ENABLED property during the execution | true | Boolean
 | *camel.component.aws2-kinesis-firehose.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.firehose.KinesisFirehose2Configuration type. |  | KinesisFirehose2Configuration
@@ -41,7 +40,6 @@ The component supports 35 options, which are listed below.
 | *camel.component.aws2-kinesis-firehose.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | *camel.component.aws2-kinesis.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws2-kinesis.amazon-kinesis-client* | Amazon Kinesis client to use for all requests for this endpoint. The option is a software.amazon.awssdk.services.kinesis.KinesisClient type. |  | KinesisClient
-| *camel.component.aws2-kinesis.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking | true | Boolean
 | *camel.component.aws2-kinesis.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.aws2-kinesis.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.aws2-kinesis.cbor-enabled* | This option will set the CBOR_ENABLED property during the execution | true | Boolean

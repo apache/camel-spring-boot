@@ -42,12 +42,6 @@ public class IAM2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Setting the autoDiscoverClient mechanism, if true, the component will
-     * look for a client instance in the registry automatically otherwise it
-     * will skip that checking.
-     */
-    private Boolean autoDiscoverClient = true;
-    /**
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.iam.IAM2Configuration type.
      */
@@ -115,14 +109,6 @@ public class IAM2ComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
-
-    public Boolean getAutoDiscoverClient() {
-        return autoDiscoverClient;
-    }
-
-    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
-        this.autoDiscoverClient = autoDiscoverClient;
-    }
 
     public IAM2Configuration getConfiguration() {
         return configuration;

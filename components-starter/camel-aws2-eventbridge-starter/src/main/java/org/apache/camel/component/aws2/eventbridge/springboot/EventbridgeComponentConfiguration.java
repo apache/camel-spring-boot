@@ -42,12 +42,6 @@ public class EventbridgeComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Setting the autoDiscoverClient mechanism, if true, the component will
-     * look for a client instance in the registry automatically otherwise it
-     * will skip that checking.
-     */
-    private Boolean autoDiscoverClient = true;
-    /**
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.eventbridge.EventbridgeConfiguration
      * type.
@@ -120,14 +114,6 @@ public class EventbridgeComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
-
-    public Boolean getAutoDiscoverClient() {
-        return autoDiscoverClient;
-    }
-
-    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
-        this.autoDiscoverClient = autoDiscoverClient;
-    }
 
     public EventbridgeConfiguration getConfiguration() {
         return configuration;
