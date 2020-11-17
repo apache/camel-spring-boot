@@ -49,12 +49,6 @@ public class Kinesis2ComponentConfiguration
      */
     private KinesisClient amazonKinesisClient;
     /**
-     * Setting the autoDiscoverClient mechanism, if true, the component will
-     * look for a client instance in the registry automatically otherwise it
-     * will skip that checking
-     */
-    private Boolean autoDiscoverClient = true;
-    /**
      * This option will set the CBOR_ENABLED property during the execution
      */
     private Boolean cborEnabled = true;
@@ -155,14 +149,6 @@ public class Kinesis2ComponentConfiguration
 
     public void setAmazonKinesisClient(KinesisClient amazonKinesisClient) {
         this.amazonKinesisClient = amazonKinesisClient;
-    }
-
-    public Boolean getAutoDiscoverClient() {
-        return autoDiscoverClient;
-    }
-
-    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
-        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public Boolean getCborEnabled() {
