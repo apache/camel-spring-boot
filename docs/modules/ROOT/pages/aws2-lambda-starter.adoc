@@ -17,7 +17,7 @@ When using aws2-lambda with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 15 options, which are listed below.
+The component supports 14 options, which are listed below.
 
 
 
@@ -25,7 +25,6 @@ The component supports 15 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.aws2-lambda.access-key* | Amazon AWS Access Key |  | String
-| *camel.component.aws2-lambda.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
 | *camel.component.aws2-lambda.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.aws2-lambda.aws-lambda-client* | To use a existing configured AwsLambdaClient as client. The option is a software.amazon.awssdk.services.lambda.LambdaClient type. |  | LambdaClient
 | *camel.component.aws2-lambda.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.lambda.Lambda2Configuration type. |  | Lambda2Configuration

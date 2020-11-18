@@ -47,12 +47,6 @@ public class Ses2ComponentConfiguration
      */
     private SesClient amazonSESClient;
     /**
-     * Setting the autoDiscoverClient mechanism, if true, the component will
-     * look for a client instance in the registry automatically otherwise it
-     * will skip that checking.
-     */
-    private Boolean autoDiscoverClient = true;
-    /**
      * component configuration. The option is a
      * org.apache.camel.component.aws2.ses.Ses2Configuration type.
      */
@@ -134,14 +128,6 @@ public class Ses2ComponentConfiguration
 
     public void setAmazonSESClient(SesClient amazonSESClient) {
         this.amazonSESClient = amazonSESClient;
-    }
-
-    public Boolean getAutoDiscoverClient() {
-        return autoDiscoverClient;
-    }
-
-    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
-        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public Ses2Configuration getConfiguration() {
