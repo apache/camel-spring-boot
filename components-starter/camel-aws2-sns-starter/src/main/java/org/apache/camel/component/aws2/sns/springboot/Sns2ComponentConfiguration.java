@@ -50,12 +50,6 @@ public class Sns2ComponentConfiguration
      */
     private Boolean autoCreateTopic = true;
     /**
-     * Setting the autoDiscoverClient mechanism, if true, the component will
-     * look for a client instance in the registry automatically otherwise it
-     * will skip that checking.
-     */
-    private Boolean autoDiscoverClient = true;
-    /**
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.sns.Sns2Configuration type.
      */
@@ -160,14 +154,6 @@ public class Sns2ComponentConfiguration
 
     public void setAutoCreateTopic(Boolean autoCreateTopic) {
         this.autoCreateTopic = autoCreateTopic;
-    }
-
-    public Boolean getAutoDiscoverClient() {
-        return autoDiscoverClient;
-    }
-
-    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
-        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public Sns2Configuration getConfiguration() {

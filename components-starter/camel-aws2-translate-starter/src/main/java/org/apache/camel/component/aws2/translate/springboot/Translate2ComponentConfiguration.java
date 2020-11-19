@@ -46,12 +46,6 @@ public class Translate2ComponentConfiguration
      */
     private Boolean autodetectSourceLanguage = false;
     /**
-     * Setting the autoDiscoverClient mechanism, if true, the component will
-     * look for a client instance in the registry automatically otherwise it
-     * will skip that checking.
-     */
-    private Boolean autoDiscoverClient = true;
-    /**
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.translate.Translate2Configuration type.
      */
@@ -134,14 +128,6 @@ public class Translate2ComponentConfiguration
 
     public void setAutodetectSourceLanguage(Boolean autodetectSourceLanguage) {
         this.autodetectSourceLanguage = autodetectSourceLanguage;
-    }
-
-    public Boolean getAutoDiscoverClient() {
-        return autoDiscoverClient;
-    }
-
-    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
-        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public Translate2Configuration getConfiguration() {

@@ -17,7 +17,7 @@ When using aws2-athena with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 31 options, which are listed below.
+The component supports 30 options, which are listed below.
 
 
 
@@ -26,7 +26,6 @@ The component supports 31 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.aws2-athena.access-key* | Amazon AWS Access Key. |  | String
 | *camel.component.aws2-athena.amazon-athena-client* | The AmazonAthena instance to use as the client. The option is a software.amazon.awssdk.services.athena.AthenaClient type. |  | AthenaClient
-| *camel.component.aws2-athena.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking | true | Boolean
 | *camel.component.aws2-athena.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.aws2-athena.client-request-token* | A unique string to ensure issues queries are idempotent. It is unlikely you will need to set this. |  | String
 | *camel.component.aws2-athena.configuration* | The component configuration. The option is a org.apache.camel.component.aws2.athena.Athena2Configuration type. |  | Athena2Configuration
