@@ -4562,6 +4562,11 @@
       </dependency>
       <dependency>
         <groupId>org.testcontainers</groupId>
+        <artifactId>jdbc</artifactId>
+        <version>1.15.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
         <artifactId>junit-jupiter</artifactId>
         <version>1.15.0</version>
       </dependency>
@@ -4578,6 +4583,11 @@
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>mongodb</artifactId>
+        <version>1.15.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>postgresql</artifactId>
         <version>1.15.0</version>
       </dependency>
       <dependency>

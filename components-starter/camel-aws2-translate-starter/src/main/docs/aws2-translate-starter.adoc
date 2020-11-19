@@ -17,7 +17,7 @@ When using aws2-translate with Spring Boot make sure to use the following Maven 
 ----
 
 
-The component supports 18 options, which are listed below.
+The component supports 17 options, which are listed below.
 
 
 
@@ -25,7 +25,6 @@ The component supports 18 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.aws2-translate.access-key* | Amazon AWS Access Key |  | String
-| *camel.component.aws2-translate.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
 | *camel.component.aws2-translate.autodetect-source-language* | Being able to autodetect the source language | false | Boolean
 | *camel.component.aws2-translate.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.aws2-translate.configuration* | Component configuration. The option is a org.apache.camel.component.aws2.translate.Translate2Configuration type. |  | Translate2Configuration

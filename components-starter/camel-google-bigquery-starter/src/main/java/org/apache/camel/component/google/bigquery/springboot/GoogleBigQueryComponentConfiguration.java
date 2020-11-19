@@ -38,7 +38,7 @@ public class GoogleBigQueryComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * ConnectionFactory to obtain connection to Bigquery Service. If non
+     * ConnectionFactory to obtain connection to Bigquery Service. If not
      * provided the default one will be used. The option is a
      * org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory type.
      */

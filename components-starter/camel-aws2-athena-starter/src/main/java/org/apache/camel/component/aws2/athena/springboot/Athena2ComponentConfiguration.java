@@ -53,12 +53,6 @@ public class Athena2ComponentConfiguration
      */
     private AthenaClient amazonAthenaClient;
     /**
-     * Setting the autoDiscoverClient mechanism, if true, the component will
-     * look for a client instance in the registry automatically otherwise it
-     * will skip that checking
-     */
-    private Boolean autoDiscoverClient = true;
-    /**
      * The component configuration. The option is a
      * org.apache.camel.component.aws2.athena.Athena2Configuration type.
      */
@@ -229,14 +223,6 @@ public class Athena2ComponentConfiguration
 
     public void setAmazonAthenaClient(AthenaClient amazonAthenaClient) {
         this.amazonAthenaClient = amazonAthenaClient;
-    }
-
-    public Boolean getAutoDiscoverClient() {
-        return autoDiscoverClient;
-    }
-
-    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
-        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public Athena2Configuration getConfiguration() {
