@@ -24,6 +24,7 @@ import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 /**
  * Store and retrieve objects from AWS S3 Storage Service using AWS SDK version
@@ -47,6 +48,12 @@ public class AWS2S3ComponentConfiguration
      * option is a software.amazon.awssdk.services.s3.S3Client type.
      */
     private S3Client amazonS3Client;
+    /**
+     * An S3 Presigner for Request, used mainly in createDownloadLink operation.
+     * The option is a software.amazon.awssdk.services.s3.presigner.S3Presigner
+     * type.
+     */
+    private S3Presigner amazonS3Presigner;
     /**
      * Setting the autocreation of the S3 bucket bucketName. This will apply
      * also in case of moveAfterRead option enabled and it will create the
@@ -274,6 +281,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setAmazonS3Client(S3Client amazonS3Client) {
         this.amazonS3Client = amazonS3Client;
+    }
+
+    public S3Presigner getAmazonS3Presigner() {
+        return amazonS3Presigner;
+    }
+
+    public void setAmazonS3Presigner(S3Presigner amazonS3Presigner) {
+        this.amazonS3Presigner = amazonS3Presigner;
     }
 
     public Boolean getAutoCreateBucket() {

@@ -27,7 +27,7 @@ The component supports 73 options, which are listed below.
 | *camel.component.salesforce.apex-method* | APEX method name |  | String
 | *camel.component.salesforce.apex-query-params* | Query params for APEX method |  | Map
 | *camel.component.salesforce.apex-url* | APEX method URL |  | String
-| *camel.component.salesforce.api-version* | Salesforce API version. | 34.0 | String
+| *camel.component.salesforce.api-version* | Salesforce API version. | 50.0 | String
 | *camel.component.salesforce.authentication-type* | Explicit authentication method to be used, one of USERNAME_PASSWORD, REFRESH_TOKEN or JWT. Salesforce component can auto-determine the authentication method to use from the properties set, set this property to eliminate any ambiguity. |  | AuthenticationType
 | *camel.component.salesforce.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.salesforce.backoff-increment* | Backoff interval increment for Streaming connection restart attempts for failures beyond CometD auto-reconnect. The option is a long type. | 1000 | Long

@@ -40,6 +40,7 @@ public class AWS2S3ComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.s3.S3Client.class));
+        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.s3.presigner.S3Presigner.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.s3.AWS2S3Configuration.class));
         return answer;
     }
@@ -58,6 +59,7 @@ public class AWS2S3ComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "software.amazon.awssdk.services.s3.S3Client": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.services.s3.S3Client.class);
+            case "software.amazon.awssdk.services.s3.presigner.S3Presigner": return camelContext.getRegistry().lookupByNameAndType(ref, software.amazon.awssdk.services.s3.presigner.S3Presigner.class);
             case "org.apache.camel.component.aws2.s3.AWS2S3Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.aws2.s3.AWS2S3Configuration.class);
         }
         return null;
