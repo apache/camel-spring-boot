@@ -121,7 +121,7 @@ public class Sns2ComponentConfiguration
      * Set whether the SQS client should expect to load credentials on an AWS
      * infra instance or to expect static credentials to be passed in.
      */
-    private Boolean useIAMCredentials = false;
+    private Boolean useDefaultCredentialsProvider = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -269,12 +269,13 @@ public class Sns2ComponentConfiguration
         this.trustAllCertificates = trustAllCertificates;
     }
 
-    public Boolean getUseIAMCredentials() {
-        return useIAMCredentials;
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
     }
 
-    public void setUseIAMCredentials(Boolean useIAMCredentials) {
-        this.useIAMCredentials = useIAMCredentials;
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
     }
 
     public Boolean getAutowiredEnabled() {

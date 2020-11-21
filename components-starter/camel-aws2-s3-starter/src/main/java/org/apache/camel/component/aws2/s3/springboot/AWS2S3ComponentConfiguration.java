@@ -107,10 +107,11 @@ public class AWS2S3ComponentConfiguration
      */
     private String uriEndpointOverride;
     /**
-     * Set whether the S3 client should expect to load credentials on an EC2
-     * instance or to expect static credentials to be passed in.
+     * Set whether the S3 client should expect to load credentials through a
+     * default credentials provider or to expect static credentials to be passed
+     * in.
      */
-    private Boolean useIAMCredentials = false;
+    private Boolean useDefaultCredentialsProvider = false;
     /**
      * Define the customer algorithm to use in case CustomerKey is enabled
      */
@@ -379,12 +380,13 @@ public class AWS2S3ComponentConfiguration
         this.uriEndpointOverride = uriEndpointOverride;
     }
 
-    public Boolean getUseIAMCredentials() {
-        return useIAMCredentials;
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
     }
 
-    public void setUseIAMCredentials(Boolean useIAMCredentials) {
-        this.useIAMCredentials = useIAMCredentials;
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
     }
 
     public String getCustomerAlgorithm() {

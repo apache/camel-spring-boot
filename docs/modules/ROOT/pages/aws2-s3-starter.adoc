@@ -66,6 +66,6 @@ The component supports 43 options, which are listed below.
 | *camel.component.aws2-s3.uri-endpoint-override* | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
 | *camel.component.aws2-s3.use-aws-k-m-s* | Define if KMS must be used or not | false | Boolean
 | *camel.component.aws2-s3.use-customer-key* | Define if Customer Key must be used or not | false | Boolean
-| *camel.component.aws2-s3.use-i-a-m-credentials* | Set whether the S3 client should expect to load credentials on an EC2 instance or to expect static credentials to be passed in. | false | Boolean
+| *camel.component.aws2-s3.use-default-credentials-provider* | Set whether the S3 client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in. | false | Boolean
 |===
 // spring-boot-auto-configure options: END
