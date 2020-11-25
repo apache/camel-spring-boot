@@ -110,6 +110,11 @@ public class SalesforceComponentConfiguration
      */
     private Integer httpMaxContentLength;
     /**
+     * HTTP request buffer size. May need to be increased for large SOQL
+     * queries.
+     */
+    private Integer httpRequestBufferSize = 8192;
+    /**
      * Include details in Salesforce1 Analytics report, defaults to false.
      */
     private Boolean includeDetails;
@@ -175,9 +180,10 @@ public class SalesforceComponentConfiguration
     private ObjectMapper objectMapper;
     /**
      * In what packages are the generated DTO classes. Typically the classes
-     * would be generated using camel-salesforce-maven-plugin. Set it if using
-     * the generated DTOs to gain the benefit of using short SObject names in
-     * parameters/header values. Multiple packages can be separated by comma.
+     * would be generated using camel-salesforce-maven-plugin. This must be set
+     * if using the XML format. Also, set it if using the generated DTOs to gain
+     * the benefit of using short SObject names in parameters/header values.
+     * Multiple packages can be separated by comma.
      */
     private String packages;
     /**
@@ -522,6 +528,14 @@ public class SalesforceComponentConfiguration
 
     public void setHttpMaxContentLength(Integer httpMaxContentLength) {
         this.httpMaxContentLength = httpMaxContentLength;
+    }
+
+    public Integer getHttpRequestBufferSize() {
+        return httpRequestBufferSize;
+    }
+
+    public void setHttpRequestBufferSize(Integer httpRequestBufferSize) {
+        this.httpRequestBufferSize = httpRequestBufferSize;
     }
 
     public Boolean getIncludeDetails() {

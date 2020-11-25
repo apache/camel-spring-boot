@@ -17,7 +17,7 @@ When using salesforce with Spring Boot make sure to use the following Maven depe
 ----
 
 
-The component supports 73 options, which are listed below.
+The component supports 74 options, which are listed below.
 
 
 
@@ -56,6 +56,7 @@ The component supports 73 options, which are listed below.
 | *camel.component.salesforce.http-proxy-socks4* | If set to true the configures the HTTP proxy to use as a SOCKS4 proxy. | false | Boolean
 | *camel.component.salesforce.http-proxy-use-digest-auth* | If set to true Digest authentication will be used when authenticating to the HTTP proxy, otherwise Basic authorization method will be used | false | Boolean
 | *camel.component.salesforce.http-proxy-username* | Username to use to authenticate against the HTTP proxy server. |  | String
+| *camel.component.salesforce.http-request-buffer-size* | HTTP request buffer size. May need to be increased for large SOQL queries. | 8192 | Integer
 | *camel.component.salesforce.include-details* | Include details in Salesforce1 Analytics report, defaults to false. |  | Boolean
 | *camel.component.salesforce.initial-replay-id-map* | Replay IDs to start from per channel name. |  | Map
 | *camel.component.salesforce.instance-id* | Salesforce1 Analytics report execution instance ID |  | String
@@ -77,7 +78,7 @@ The component supports 73 options, which are listed below.
 | *camel.component.salesforce.notify-for-operation-update* | Notify for update operation, defaults to false (API version = 29.0) |  | Boolean
 | *camel.component.salesforce.notify-for-operations* | Notify for operations, options are ALL, CREATE, EXTENDED, UPDATE (API version 29.0) |  | NotifyForOperationsEnum
 | *camel.component.salesforce.object-mapper* | Custom Jackson ObjectMapper to use when serializing/deserializing Salesforce objects. The option is a com.fasterxml.jackson.databind.ObjectMapper type. |  | ObjectMapper
-| *camel.component.salesforce.packages* | In what packages are the generated DTO classes. Typically the classes would be generated using camel-salesforce-maven-plugin. Set it if using the generated DTOs to gain the benefit of using short SObject names in parameters/header values. Multiple packages can be separated by comma. |  | String
+| *camel.component.salesforce.packages* | In what packages are the generated DTO classes. Typically the classes would be generated using camel-salesforce-maven-plugin. This must be set if using the XML format. Also, set it if using the generated DTOs to gain the benefit of using short SObject names in parameters/header values. Multiple packages can be separated by comma. |  | String
 | *camel.component.salesforce.password* | Password used in OAuth flow to gain access to access token. It's easy to get started with password OAuth flow, but in general one should avoid it as it is deemed less secure than other flows. Make sure that you append security token to the end of the password if using one. |  | String
 | *camel.component.salesforce.raw-payload* | Use raw payload String for request and response (either JSON or XML depending on format), instead of DTOs, false by default | false | Boolean
 | *camel.component.salesforce.refresh-token* | Refresh token already obtained in the refresh token OAuth flow. One needs to setup a web application and configure a callback URL to receive the refresh token, or configure using the builtin callback at \https://login.salesforce.com/services/oauth2/success or \https://test.salesforce.com/services/oauth2/success and then retrive the refresh_token from the URL at the end of the flow. Note that in development organizations Salesforce allows hosting the callback web application at localhost. |  | String
