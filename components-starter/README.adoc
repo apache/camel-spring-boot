@@ -801,7 +801,7 @@ Number of Camel data formats: 46 in 38 JAR artifacts (0 deprecated)
 == Camel Languages
 
 // languages: START
-Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
+Number of Camel languages: 18 in 12 JAR artifacts (0 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -820,6 +820,8 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 | xref:latest@components:languages:header-language.adoc[Header] | camel-base | Stable | 1.5 | To use a Camel Message header in expressions or predicates.
 
 | xref:latest@components:languages:hl7terser-language.adoc[HL7 Terser] | camel-hl7-starter | Stable | 2.11 | Get the value of an HL7 message field specified by terse location specification syntax.
+
+| xref:latest@components:languages:joor-language.adoc[jOOR] | camel-joor-starter | Preview | 3.7 | Evaluate a jOOR (Java compiled once at runtime) expression language.
 
 | xref:latest@components:languages:jsonpath-language.adoc[JsonPath] | camel-jsonpath-starter | Stable | 2.13 | Evaluate a JsonPath expression against a JSON message body.
 
@@ -847,13 +849,15 @@ Number of Camel languages: 17 in 11 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 25 in 25 JAR artifacts (2 deprecated)
+Number of miscellaneous extensions: 26 in 26 JAR artifacts (2 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
 | Extensions | Artifact | Support Level | Since | Description
 
 | xref:latest@components:others:aws-xray.adoc[AWS XRay] | camel-aws-xray-starter | Stable | 2.21 | Distributed tracing using AWS XRay
+
+| xref:latest@components:others:csimple-joor.adoc[CSimple jOOR] | camel-csimple-joor-starter | Preview | 3.7 | jOOR compiler for csimple language
 
 | xref:latest@components:others:cxf-transport.adoc[CXF Transport] | camel-cxf-transport-starter | Stable | 2.8 | Camel Transport for Apache CXF
 

@@ -1,0 +1,34 @@
+// spring-boot-auto-configure options: START
+:page-partial:
+:doctitle: Camel Spring Boot Starter for joor
+
+== Spring Boot Auto-Configuration
+
+When using joor with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-joor-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 4 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.language.joor.enabled* | Whether to enable auto configuration of the joor language. This is enabled by default. |  | Boolean
+| *camel.language.joor.pre-compile* | Whether the expression should be pre compiled once during initialization phase. If this is turned off, then the expression is reloaded and compiled on each evaluation. | true | Boolean
+| *camel.language.joor.single-quotes* | Whether single quotes can be used as replacement for double quotes. This is convenient when you need to work with strings inside strings. | true | Boolean
+| *camel.language.joor.trim* | Whether to trim the value to remove leading and trailing whitespaces and line breaks | true | Boolean
+|===
+
+
+// spring-boot-auto-configure options: END
