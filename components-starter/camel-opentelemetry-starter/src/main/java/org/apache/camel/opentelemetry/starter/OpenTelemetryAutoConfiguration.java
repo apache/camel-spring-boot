@@ -16,7 +16,7 @@
  */
 package org.apache.camel.opentelemetry.starter;
 
-import io.opentelemetry.trace.Tracer;
+import io.opentelemetry.api.trace.Tracer;
 import org.apache.camel.CamelContext;
 import org.apache.camel.opentelemetry.OpenTelemetryTracer;
 import org.springframework.beans.factory.annotation.Autowired;
