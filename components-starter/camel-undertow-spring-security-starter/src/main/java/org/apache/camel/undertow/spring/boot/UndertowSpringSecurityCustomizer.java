@@ -16,9 +16,12 @@
  */
 package org.apache.camel.undertow.spring.boot;
 
+import org.apache.camel.Component;
 import org.apache.camel.component.spring.security.SpringSecurityConfiguration;
 import org.apache.camel.component.spring.security.keycloak.KeycloakUsernameSubClaimAdapter;
 import org.apache.camel.component.undertow.UndertowComponent;
+import org.apache.camel.spi.ComponentCustomizer;
+import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.undertow.spring.boot.providers.AbstractProviderConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,11 +51,9 @@ import java.util.LinkedList;
  * Configuration of spring-security constraints for defined providers.
  */
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter(UndertowSpringSecurityConfiguration.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,
-        UndertowSpringSecurityConfiguration.class})
-public class UndertowSpringSecurityAutoConfiguration {
-
+@AutoConfigureAfter(CamelAutoConfiguration.class)
+@EnableConfigurationProperties({ComponentConfigurationProperties.class, UndertowSpringSecurityConfiguration.class})
+public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
     private AbstractProviderConfiguration provider;
     private ClientRegistration clientRegistration;
 
@@ -61,6 +62,23 @@ public class UndertowSpringSecurityAutoConfiguration {
 
     @Autowired
     private DelegatingFilterProxyRegistrationBean delegatingFilterProxyRegistrationBean;
+
+    @Override
+    public void configure(String name, Component target) {
+        UndertowComponent uc = (UndertowComponent)target;
+        SpringSecurityConfiguration securityConfiguration = () -> delegatingFilterProxyRegistrationBean.getFilter();
+        uc.setSecurityConfiguration(securityConfiguration);
+    }
+
+    @Override
+    public boolean isEnabled(String name, Component target) {
+        return target instanceof UndertowComponent;
+    }
+
+    @Override
+    public int getOrder() {
+        return 0;
+    }
 
     @EnableWebSecurity
     public class OAuth2LoginSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -101,14 +119,6 @@ public class UndertowSpringSecurityAutoConfiguration {
     public OAuth2AuthorizedClientService authorizedClientService(ClientRegistrationRepository repository) {
         return new InMemoryOAuth2AuthorizedClientService(repository);
     }
-
-    @Bean
-    public SpringSecurityConfiguration securityConfiguration(UndertowComponent undertowComponent) {
-        SpringSecurityConfiguration securityConfiguration = () -> delegatingFilterProxyRegistrationBean.getFilter();
-        undertowComponent.setSecurityConfiguration(securityConfiguration);
-        return securityConfiguration;
-    }
-
 
     //----------------------------------------------- provider configuration helper methods --------------------------------------
 
