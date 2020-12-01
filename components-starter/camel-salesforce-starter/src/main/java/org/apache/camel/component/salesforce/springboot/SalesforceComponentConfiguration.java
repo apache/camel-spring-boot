@@ -84,7 +84,7 @@ public class SalesforceComponentConfiguration
     /**
      * Default replayId setting if no value is found in initialReplayIdMap
      */
-    private Long defaultReplayId;
+    private Long defaultReplayId = -1L;
     /**
      * Payload format to use for Salesforce API calls, either JSON or XML,
      * defaults to JSON

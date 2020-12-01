@@ -37,7 +37,7 @@ The component supports 74 options, which are listed below.
 | *camel.component.salesforce.client-secret* | OAuth Consumer Secret of the connected app configured in the Salesforce instance setup. |  | String
 | *camel.component.salesforce.config* | Global endpoint configuration - use to set values that are common to all endpoints. The option is a org.apache.camel.component.salesforce.SalesforceEndpointConfig type. |  | SalesforceEndpointConfig
 | *camel.component.salesforce.content-type* | Bulk API content type, one of XML, CSV, ZIP_XML, ZIP_CSV |  | ContentType
-| *camel.component.salesforce.default-replay-id* | Default replayId setting if no value is found in initialReplayIdMap |  | Long
+| *camel.component.salesforce.default-replay-id* | Default replayId setting if no value is found in initialReplayIdMap | -1 | Long
 | *camel.component.salesforce.enabled* | Whether to enable auto configuration of the salesforce component. This is enabled by default. |  | Boolean
 | *camel.component.salesforce.format* | Payload format to use for Salesforce API calls, either JSON or XML, defaults to JSON |  | PayloadFormat
 | *camel.component.salesforce.http-client* | Custom Jetty Http Client to use to connect to Salesforce. The option is a org.apache.camel.component.salesforce.SalesforceHttpClient type. |  | SalesforceHttpClient
