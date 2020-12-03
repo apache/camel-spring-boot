@@ -73,7 +73,7 @@
       <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>fastjson</artifactId>
-        <version>1.2.73</version>
+        <version>1.2.75</version>
       </dependency>
       <dependency>
         <groupId>com.cloudbees.thirdparty</groupId>
@@ -129,7 +129,7 @@
       <dependency>
         <groupId>com.thoughtworks.xstream</groupId>
         <artifactId>xstream</artifactId>
-        <version>1.4.13</version>
+        <version>1.4.14</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
