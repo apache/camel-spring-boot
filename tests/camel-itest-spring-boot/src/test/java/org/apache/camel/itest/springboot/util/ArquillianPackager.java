@@ -359,6 +359,7 @@ public final class ArquillianPackager {
         ignore.add("ai.djl.mxnet:mxnet-native-auto");
         ignore.add("org.sonatype.plexus");
         ignore.add("org.sonatype.sisu");
+        ignore.add("com.healthmarketscience.jackcess");
 
         // these are from camel-spring-boot and not camel repo so ignore them
         ignore.add("org.apache.camel:camel-spring-cloud-consul");
