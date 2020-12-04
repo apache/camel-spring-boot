@@ -35,6 +35,14 @@ public class CamelGoogleBigqueryTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelGoogleBigqueryTest.class))
+                .dependency("com.google.api:gax:1.60.0")
+                .dependency("com.google.api:gax-httpjson:0.77.0")
+                .dependency("com.google.cloud:google-cloud-bigquery:1.124.7")
+                .dependency("com.google.cloud:google-cloud-core-http:1.93.10")
+                .dependency("com.google.cloud:google-cloud-core:1.93.10")
+                .dependency("com.google.http-client:google-http-client-appengine:1.38.0")
+                .dependency("com.google.http-client:google-http-client-jackson2:1.37.0")
+                .dependency("com.google.http-client:google-http-client:1.37.0")
                 .build();
     }
 

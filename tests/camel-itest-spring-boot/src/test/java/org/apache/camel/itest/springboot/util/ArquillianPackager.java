@@ -360,6 +360,9 @@ public final class ArquillianPackager {
         ignore.add("org.sonatype.plexus");
         ignore.add("org.sonatype.sisu");
         ignore.add("com.healthmarketscience.jackcess");
+        ignore.add("com.google.cloud");
+        ignore.add("com.google.api");
+        ignore.add("com.google.http-client");
 
         // these are from camel-spring-boot and not camel repo so ignore them
         ignore.add("org.apache.camel:camel-spring-cloud-consul");
