@@ -203,6 +203,7 @@
     <module>camel-cxf-transport-starter</module>
     <module>camel-dataformat-starter</module>
     <module>camel-dataset-starter</module>
+    <module>camel-datasonnet-starter</module>
     <module>camel-debezium-common-starter</module>
     <module>camel-debezium-mongodb-starter</module>
     <module>camel-debezium-mysql-starter</module>
