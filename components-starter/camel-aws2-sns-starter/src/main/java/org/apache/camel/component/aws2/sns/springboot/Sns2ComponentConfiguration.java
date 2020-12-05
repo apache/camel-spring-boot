@@ -132,7 +132,7 @@ public class Sns2ComponentConfiguration
      */
     private Boolean trustAllCertificates = false;
     /**
-     * Set whether the SQS client should expect to load credentials on an AWS
+     * Set whether the SNS client should expect to load credentials on an AWS
      * infra instance or to expect static credentials to be passed in.
      */
     private Boolean useDefaultCredentialsProvider = false;
