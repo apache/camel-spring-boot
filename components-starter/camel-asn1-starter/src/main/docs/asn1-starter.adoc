@@ -17,7 +17,7 @@ When using asn1 with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 4 options, which are listed below.
+The component supports 3 options, which are listed below.
 
 
 
@@ -25,7 +25,6 @@ The component supports 4 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.dataformat.asn1.clazz-name* | Name of class to use when unmarshalling |  | String
-| *camel.dataformat.asn1.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON etc. | false | Boolean
 | *camel.dataformat.asn1.enabled* | Whether to enable auto configuration of the asn1 data format. This is enabled by default. |  | Boolean
 | *camel.dataformat.asn1.using-iterator* | If the asn1 file has more then one entry, the setting this option to true, allows to work with the splitter EIP, to split the data using an iterator in a streaming mode. | false | Boolean
 |===

@@ -17,7 +17,7 @@ When using univocity-parsers with Spring Boot make sure to use the following Mav
 ----
 
 
-The component supports 53 options, which are listed below.
+The component supports 50 options, which are listed below.
 
 
 
@@ -26,7 +26,6 @@ The component supports 53 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.dataformat.univocity-csv.as-map* | Whether the unmarshalling should produce maps for the lines values instead of lists. It requires to have header (either defined or collected). The default value is false | false | Boolean
 | *camel.dataformat.univocity-csv.comment* | The comment symbol. The default value is # | # | String
-| *camel.dataformat.univocity-csv.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON etc. | false | Boolean
 | *camel.dataformat.univocity-csv.delimiter* | The delimiter of values | , | String
 | *camel.dataformat.univocity-csv.empty-value* | The String representation of an empty value |  | String
 | *camel.dataformat.univocity-csv.enabled* | Whether to enable auto configuration of the univocity-csv data format. This is enabled by default. |  | Boolean
@@ -45,7 +44,6 @@ The component supports 53 options, which are listed below.
 | *camel.dataformat.univocity-csv.skip-empty-lines* | Whether or not the empty lines must be ignored. The default value is true | true | Boolean
 | *camel.dataformat.univocity-fixed.as-map* | Whether the unmarshalling should produce maps for the lines values instead of lists. It requires to have header (either defined or collected). The default value is false | false | Boolean
 | *camel.dataformat.univocity-fixed.comment* | The comment symbol. The default value is # | # | String
-| *camel.dataformat.univocity-fixed.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON etc. | false | Boolean
 | *camel.dataformat.univocity-fixed.empty-value* | The String representation of an empty value |  | String
 | *camel.dataformat.univocity-fixed.enabled* | Whether to enable auto configuration of the univocity-fixed data format. This is enabled by default. |  | Boolean
 | *camel.dataformat.univocity-fixed.header-extraction-enabled* | Whether or not the header must be read in the first line of the test document The default value is false | false | Boolean
@@ -63,7 +61,6 @@ The component supports 53 options, which are listed below.
 | *camel.dataformat.univocity-fixed.skip-trailing-chars-until-newline* | Whether or not the trailing characters until new line must be ignored. The default value is false | false | Boolean
 | *camel.dataformat.univocity-tsv.as-map* | Whether the unmarshalling should produce maps for the lines values instead of lists. It requires to have header (either defined or collected). The default value is false | false | Boolean
 | *camel.dataformat.univocity-tsv.comment* | The comment symbol. The default value is # | # | String
-| *camel.dataformat.univocity-tsv.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON etc. | false | Boolean
 | *camel.dataformat.univocity-tsv.empty-value* | The String representation of an empty value |  | String
 | *camel.dataformat.univocity-tsv.enabled* | Whether to enable auto configuration of the univocity-tsv data format. This is enabled by default. |  | Boolean
 | *camel.dataformat.univocity-tsv.escape-char* | The escape character. | \ | String

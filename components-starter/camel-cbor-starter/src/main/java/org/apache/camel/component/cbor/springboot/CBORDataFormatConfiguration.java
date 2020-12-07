@@ -95,13 +95,6 @@ public class CBORDataFormatConfiguration
      * separated by comma
      */
     private String disableFeatures;
-    /**
-     * Whether the data format should set the Content-Type header with the type
-     * from the data format if the data format is capable of doing so. For
-     * example application/xml for data formats marshalling to XML, or
-     * application/json for data formats marshalling to JSON etc.
-     */
-    private Boolean contentTypeHeader = false;
 
     public String getObjectMapper() {
         return objectMapper;
@@ -181,13 +174,5 @@ public class CBORDataFormatConfiguration
 
     public void setDisableFeatures(String disableFeatures) {
         this.disableFeatures = disableFeatures;
-    }
-
-    public Boolean getContentTypeHeader() {
-        return contentTypeHeader;
-    }
-
-    public void setContentTypeHeader(Boolean contentTypeHeader) {
-        this.contentTypeHeader = contentTypeHeader;
     }
 }

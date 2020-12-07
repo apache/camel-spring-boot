@@ -40,13 +40,6 @@ public class LZFDataFormatConfiguration
      * Enable encoding (compress) using multiple processing cores.
      */
     private Boolean usingParallelCompression = false;
-    /**
-     * Whether the data format should set the Content-Type header with the type
-     * from the data format if the data format is capable of doing so. For
-     * example application/xml for data formats marshalling to XML, or
-     * application/json for data formats marshalling to JSON etc.
-     */
-    private Boolean contentTypeHeader = false;
 
     public Boolean getUsingParallelCompression() {
         return usingParallelCompression;
@@ -54,13 +47,5 @@ public class LZFDataFormatConfiguration
 
     public void setUsingParallelCompression(Boolean usingParallelCompression) {
         this.usingParallelCompression = usingParallelCompression;
-    }
-
-    public Boolean getContentTypeHeader() {
-        return contentTypeHeader;
-    }
-
-    public void setContentTypeHeader(Boolean contentTypeHeader) {
-        this.contentTypeHeader = contentTypeHeader;
     }
 }

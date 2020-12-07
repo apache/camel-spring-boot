@@ -17,7 +17,7 @@ When using csv with Spring Boot make sure to use the following Maven dependency 
 ----
 
 
-The component supports 30 options, which are listed below.
+The component supports 29 options, which are listed below.
 
 
 
@@ -27,7 +27,6 @@ The component supports 30 options, which are listed below.
 | *camel.dataformat.csv.allow-missing-column-names* | Whether to allow missing column names. | false | Boolean
 | *camel.dataformat.csv.comment-marker* | Sets the comment marker of the reference format. |  | String
 | *camel.dataformat.csv.comment-marker-disabled* | Disables the comment marker of the reference format. | false | Boolean
-| *camel.dataformat.csv.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON etc. | false | Boolean
 | *camel.dataformat.csv.delimiter* | Sets the delimiter to use. The default value is , (comma) |  | String
 | *camel.dataformat.csv.enabled* | Whether to enable auto configuration of the csv data format. This is enabled by default. |  | Boolean
 | *camel.dataformat.csv.escape* | Sets the escape character to use |  | String

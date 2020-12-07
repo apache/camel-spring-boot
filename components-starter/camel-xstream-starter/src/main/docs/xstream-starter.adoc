@@ -24,12 +24,12 @@ The component supports 13 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.dataformat.json-xstream.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON etc. | false | Boolean
+| *camel.dataformat.json-xstream.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON | true | Boolean
 | *camel.dataformat.json-xstream.drop-root-node* | Whether XStream will drop the root node in the generated JSon. You may want to enable this when using POJOs; as then the written object will include the class name as root node, which is often not intended to be written in the JSON output. | false | Boolean
 | *camel.dataformat.json-xstream.enabled* | Whether to enable auto configuration of the json-xstream data format. This is enabled by default. |  | Boolean
 | *camel.dataformat.json-xstream.pretty-print* | To enable pretty printing output nicely formatted. Is by default false. | false | Boolean
 | *camel.dataformat.xstream.aliases* | Alias a Class to a shorter name to be used in XML elements. |  | List
-| *camel.dataformat.xstream.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON etc. | false | Boolean
+| *camel.dataformat.xstream.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON | true | Boolean
 | *camel.dataformat.xstream.converters* | List of class names for using custom XStream converters. The classes must be of type com.thoughtworks.xstream.converters.Converter |  | List
 | *camel.dataformat.xstream.enabled* | Whether to enable auto configuration of the xstream data format. This is enabled by default. |  | Boolean
 | *camel.dataformat.xstream.encoding* | Sets the encoding to use |  | String

@@ -62,13 +62,6 @@ public class Any23DataFormatConfiguration
      * are provided.
      */
     private String baseURI;
-    /**
-     * Whether the data format should set the Content-Type header with the type
-     * from the data format if the data format is capable of doing so. For
-     * example application/xml for data formats marshalling to XML, or
-     * application/json for data formats marshalling to JSON etc.
-     */
-    private Boolean contentTypeHeader = false;
 
     public Any23OutputFormat getOutputFormat() {
         return outputFormat;
@@ -100,13 +93,5 @@ public class Any23DataFormatConfiguration
 
     public void setBaseURI(String baseURI) {
         this.baseURI = baseURI;
-    }
-
-    public Boolean getContentTypeHeader() {
-        return contentTypeHeader;
-    }
-
-    public void setContentTypeHeader(Boolean contentTypeHeader) {
-        this.contentTypeHeader = contentTypeHeader;
     }
 }

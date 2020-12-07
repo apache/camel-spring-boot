@@ -17,7 +17,7 @@ When using flatpack with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 14 options, which are listed below.
+The component supports 13 options, which are listed below.
 
 
 
@@ -29,7 +29,6 @@ The component supports 14 options, which are listed below.
 | *camel.component.flatpack.enabled* | Whether to enable auto configuration of the flatpack component. This is enabled by default. |  | Boolean
 | *camel.component.flatpack.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.dataformat.flatpack.allow-short-lines* | Allows for lines to be shorter than expected and ignores the extra characters | false | Boolean
-| *camel.dataformat.flatpack.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON etc. | false | Boolean
 | *camel.dataformat.flatpack.definition* | The flatpack pzmap configuration file. Can be omitted in simpler situations, but its preferred to use the pzmap. |  | String
 | *camel.dataformat.flatpack.delimiter* | The delimiter char (could be ; , or similar) | , | String
 | *camel.dataformat.flatpack.enabled* | Whether to enable auto configuration of the flatpack data format. This is enabled by default. |  | Boolean

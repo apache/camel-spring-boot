@@ -158,13 +158,6 @@ public class CsvDataFormatConfiguration
      * Refers to a custom CsvRecordConverter to lookup from the registry to use.
      */
     private String recordConverterRef;
-    /**
-     * Whether the data format should set the Content-Type header with the type
-     * from the data format if the data format is capable of doing so. For
-     * example application/xml for data formats marshalling to XML, or
-     * application/json for data formats marshalling to JSON etc.
-     */
-    private Boolean contentTypeHeader = false;
 
     public String getFormatRef() {
         return formatRef;
@@ -388,13 +381,5 @@ public class CsvDataFormatConfiguration
 
     public void setRecordConverterRef(String recordConverterRef) {
         this.recordConverterRef = recordConverterRef;
-    }
-
-    public Boolean getContentTypeHeader() {
-        return contentTypeHeader;
-    }
-
-    public void setContentTypeHeader(Boolean contentTypeHeader) {
-        this.contentTypeHeader = contentTypeHeader;
     }
 }

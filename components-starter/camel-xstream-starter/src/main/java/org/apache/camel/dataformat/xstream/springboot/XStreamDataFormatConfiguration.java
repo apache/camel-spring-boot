@@ -64,6 +64,13 @@ public class XStreamDataFormatConfiguration
      */
     private String mode;
     /**
+     * Whether the data format should set the Content-Type header with the type
+     * from the data format. For example application/xml for data formats
+     * marshalling to XML, or application/json for data formats marshalling to
+     * JSON
+     */
+    private Boolean contentTypeHeader = true;
+    /**
      * List of class names for using custom XStream converters. The classes must
      * be of type com.thoughtworks.xstream.converters.Converter
      */
@@ -83,13 +90,6 @@ public class XStreamDataFormatConfiguration
      * tag. Multiple values can be separated by comma.
      */
     private List<PropertyDefinition> implicitCollections;
-    /**
-     * Whether the data format should set the Content-Type header with the type
-     * from the data format if the data format is capable of doing so. For
-     * example application/xml for data formats marshalling to XML, or
-     * application/json for data formats marshalling to JSON etc.
-     */
-    private Boolean contentTypeHeader = false;
 
     public String getPermissions() {
         return permissions;
@@ -113,6 +113,14 @@ public class XStreamDataFormatConfiguration
 
     public void setMode(String mode) {
         this.mode = mode;
+    }
+
+    public Boolean getContentTypeHeader() {
+        return contentTypeHeader;
+    }
+
+    public void setContentTypeHeader(Boolean contentTypeHeader) {
+        this.contentTypeHeader = contentTypeHeader;
     }
 
     public List<PropertyDefinition> getConverters() {
@@ -146,13 +154,5 @@ public class XStreamDataFormatConfiguration
     public void setImplicitCollections(
             List<PropertyDefinition> implicitCollections) {
         this.implicitCollections = implicitCollections;
-    }
-
-    public Boolean getContentTypeHeader() {
-        return contentTypeHeader;
-    }
-
-    public void setContentTypeHeader(Boolean contentTypeHeader) {
-        this.contentTypeHeader = contentTypeHeader;
     }
 }

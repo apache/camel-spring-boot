@@ -17,14 +17,13 @@ When using hl7 with Spring Boot make sure to use the following Maven dependency 
 ----
 
 
-The component supports 5 options, which are listed below.
+The component supports 4 options, which are listed below.
 
 
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.dataformat.hl7.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON etc. | false | Boolean
 | *camel.dataformat.hl7.enabled* | Whether to enable auto configuration of the hl7 data format. This is enabled by default. |  | Boolean
 | *camel.dataformat.hl7.validate* | Whether to validate the HL7 message Is by default true. | true | Boolean
 | *camel.language.hl7terser.enabled* | Whether to enable auto configuration of the hl7terser language. This is enabled by default. |  | Boolean

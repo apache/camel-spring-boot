@@ -44,13 +44,6 @@ public class JsonApiDataFormatConfiguration
      * The classes to take into account while unmarshalling
      */
     private Class<Object> mainFormatType;
-    /**
-     * Whether the data format should set the Content-Type header with the type
-     * from the data format if the data format is capable of doing so. For
-     * example application/xml for data formats marshalling to XML, or
-     * application/json for data formats marshalling to JSON etc.
-     */
-    private Boolean contentTypeHeader = false;
 
     public Class<Object>[] getDataFormatTypes() {
         return dataFormatTypes;
@@ -66,13 +59,5 @@ public class JsonApiDataFormatConfiguration
 
     public void setMainFormatType(Class<Object> mainFormatType) {
         this.mainFormatType = mainFormatType;
-    }
-
-    public Boolean getContentTypeHeader() {
-        return contentTypeHeader;
-    }
-
-    public void setContentTypeHeader(Boolean contentTypeHeader) {
-        this.contentTypeHeader = contentTypeHeader;
     }
 }

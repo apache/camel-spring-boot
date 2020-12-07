@@ -59,13 +59,6 @@ public class ZipFileDataFormatConfiguration
      * setting a maximum decompressed size.
      */
     private Long maxDecompressedSize = 1073741824L;
-    /**
-     * Whether the data format should set the Content-Type header with the type
-     * from the data format if the data format is capable of doing so. For
-     * example application/xml for data formats marshalling to XML, or
-     * application/json for data formats marshalling to JSON etc.
-     */
-    private Boolean contentTypeHeader = false;
 
     public Boolean getUsingIterator() {
         return usingIterator;
@@ -97,13 +90,5 @@ public class ZipFileDataFormatConfiguration
 
     public void setMaxDecompressedSize(Long maxDecompressedSize) {
         this.maxDecompressedSize = maxDecompressedSize;
-    }
-
-    public Boolean getContentTypeHeader() {
-        return contentTypeHeader;
-    }
-
-    public void setContentTypeHeader(Boolean contentTypeHeader) {
-        this.contentTypeHeader = contentTypeHeader;
     }
 }

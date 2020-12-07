@@ -41,13 +41,6 @@ public class HL7DataFormatConfiguration
      * Whether to validate the HL7 message Is by default true.
      */
     private Boolean validate = true;
-    /**
-     * Whether the data format should set the Content-Type header with the type
-     * from the data format if the data format is capable of doing so. For
-     * example application/xml for data formats marshalling to XML, or
-     * application/json for data formats marshalling to JSON etc.
-     */
-    private Boolean contentTypeHeader = false;
 
     public Boolean getValidate() {
         return validate;
@@ -55,13 +48,5 @@ public class HL7DataFormatConfiguration
 
     public void setValidate(Boolean validate) {
         this.validate = validate;
-    }
-
-    public Boolean getContentTypeHeader() {
-        return contentTypeHeader;
-    }
-
-    public void setContentTypeHeader(Boolean contentTypeHeader) {
-        this.contentTypeHeader = contentTypeHeader;
     }
 }

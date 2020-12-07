@@ -42,13 +42,6 @@ public class ZipDeflaterDataFormatConfiguration
      * 0 is no compression, and 9 is best compression.
      */
     private Integer compressionLevel = -1;
-    /**
-     * Whether the data format should set the Content-Type header with the type
-     * from the data format if the data format is capable of doing so. For
-     * example application/xml for data formats marshalling to XML, or
-     * application/json for data formats marshalling to JSON etc.
-     */
-    private Boolean contentTypeHeader = false;
 
     public Integer getCompressionLevel() {
         return compressionLevel;
@@ -56,13 +49,5 @@ public class ZipDeflaterDataFormatConfiguration
 
     public void setCompressionLevel(Integer compressionLevel) {
         this.compressionLevel = compressionLevel;
-    }
-
-    public Boolean getContentTypeHeader() {
-        return contentTypeHeader;
-    }
-
-    public void setContentTypeHeader(Boolean contentTypeHeader) {
-        this.contentTypeHeader = contentTypeHeader;
     }
 }

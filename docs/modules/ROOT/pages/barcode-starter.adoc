@@ -17,7 +17,7 @@ When using barcode with Spring Boot make sure to use the following Maven depende
 ----
 
 
-The component supports 6 options, which are listed below.
+The component supports 5 options, which are listed below.
 
 
 
@@ -25,7 +25,6 @@ The component supports 6 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.dataformat.barcode.barcode-format* | Barcode format such as QR-Code |  | String
-| *camel.dataformat.barcode.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON etc. | false | Boolean
 | *camel.dataformat.barcode.enabled* | Whether to enable auto configuration of the barcode data format. This is enabled by default. |  | Boolean
 | *camel.dataformat.barcode.height* | Height of the barcode |  | Integer
 | *camel.dataformat.barcode.image-type* | Image type of the barcode such as png |  | String
