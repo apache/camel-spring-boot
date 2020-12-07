@@ -26,8 +26,8 @@
   </parent>
   <artifactId>camel-aws2-eventbridge-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: AWS2-Event</name>
-  <description>Spring-Boot Starter for Camel Support for AWS EC2 Service</description>
+  <name>Camel SB Starters :: AWS2-EventBridge</name>
+  <description>Spring-Boot Starter for Camel Support for AWS EventBridge Service</description>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
