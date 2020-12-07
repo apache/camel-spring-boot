@@ -26,8 +26,8 @@
   </parent>
   <artifactId>camel-azure-eventhubs-starter</artifactId>
   <packaging>jar</packaging>
-  <!--    <name>Camel Spring Boot :: Starters :: Dozer</name>-->
-  <!--    <description>Spring-Boot Starter for Camel Support for the Dozer type conversion framework</description>-->
+  <name>Camel SB Starters :: Azure-Eventhubs</name>
+  <description>Spring-Boot Starter for Camel Support for Azure Eventhubs Service</description>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
