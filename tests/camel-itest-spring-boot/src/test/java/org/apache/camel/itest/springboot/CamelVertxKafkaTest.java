@@ -34,7 +34,7 @@ public class CamelVertxKafkaTest extends AbstractSpringBootTestSupport {
 
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
-                .module(inferModuleName(CamelAzureEventhubsTest.class))
+                .module(inferModuleName(CamelVertxKafkaTest.class))
                 .build();
     }
 
