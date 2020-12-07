@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 341 in 273 JAR artifacts (3 deprecated)
+Number of Camel components: 342 in 274 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -652,6 +652,8 @@ Number of Camel components: 341 in 273 JAR artifacts (3 deprecated)
 | xref:latest@components::vertx-component.adoc[Vert.x] | camel-vertx-starter | Stable | 2.12 | Send and receive messages to/from Vert.x Event Bus.
 
 | xref:latest@components::vertx-http-component.adoc[Vert.x HTTP Client] | camel-vertx-http-starter | Stable | 3.5 | Send requests to external HTTP servers using Vert.x
+
+| xref:latest@components::vertx-kafka-component.adoc[Vert.x Kafka] | camel-vertx-kafka-starter | Preview | 3.7 | Sent and receive messages to/from an Apache Kafka broker using vert.x Kafka client
 
 | xref:latest@components::vertx-websocket-component.adoc[Vert.x WebSocket] | camel-vertx-websocket-starter | Stable | 3.5 | Expose WebSocket endpoints and connect to remote WebSocket servers using Vert.x
 
