@@ -26,8 +26,8 @@
   </parent>
   <artifactId>camel-aws2-iam-starter</artifactId>
   <packaging>jar</packaging>
-  <!--    <name>Camel Spring Boot :: Starters :: Dozer</name>-->
-  <!--    <description>Spring-Boot Starter for Camel Support for the Dozer type conversion framework</description>-->
+  <name>Camel SB Starters :: AWS2-IAM</name>
+  <description>Spring-Boot Starter for Camel Support for AWS IAM Service</description>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
