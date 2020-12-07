@@ -26,8 +26,8 @@
   </parent>
   <artifactId>camel-aws2-athena-starter</artifactId>
   <packaging>jar</packaging>
-  <!--    <name>Camel Spring Boot :: Starters :: Dozer</name>-->
-  <!--    <description>Spring-Boot Starter for Camel Support for the Dozer type conversion framework</description>-->
+  <name>Camel Spring Boot :: AWS2-Athena</name>
+  <description>Spring-Boot Starter for Camel Support for AWS Athena Service</description>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
