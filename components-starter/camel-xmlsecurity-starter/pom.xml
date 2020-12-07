@@ -26,8 +26,8 @@
   </parent>
   <artifactId>camel-xmlsecurity-starter</artifactId>
   <packaging>jar</packaging>
-  <!--    <name>Camel Spring Boot :: Starters :: Dozer</name>-->
-  <!--    <description>Spring-Boot Starter for Camel Support for the Dozer type conversion framework</description>-->
+  <name>Camel SB Starters :: XML Security</name>
+  <description>Spring-Boot Starter for Camel Support for XML security</description>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
