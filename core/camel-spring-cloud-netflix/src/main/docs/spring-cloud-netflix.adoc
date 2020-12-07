@@ -1,4 +1,7 @@
-= Spring Cloud Netflix
+= Spring Cloud Netflix (deprecated)
+:since: 2.19
+:supportLevel: Stable-deprecated
+:deprecated: *deprecated*
 
 *Since Camel 2.19*
 

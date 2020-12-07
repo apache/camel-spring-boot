@@ -28,7 +28,7 @@
         <relativePath>..</relativePath>
     </parent>
 
-    <name>Camel SB :: Spring Cloud Netflix</name>
+    <name>Camel SB :: Spring Cloud Netflix (deprecated)</name>
     <artifactId>camel-spring-cloud-netflix</artifactId>
     <description>Camel Cloud integration with Spring Cloud Netflix</description>
 
