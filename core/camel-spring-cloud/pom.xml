@@ -28,7 +28,7 @@
         <relativePath>..</relativePath>
     </parent>
 
-    <name>Camel SB :: Spring Cloud</name>
+    <name>Camel SB :: Spring Cloud (deprecated)</name>
     <artifactId>camel-spring-cloud</artifactId>
     <description>Camel Cloud integration with Spring Cloud</description>
 

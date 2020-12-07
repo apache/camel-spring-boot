@@ -28,7 +28,7 @@
         <relativePath>..</relativePath>
     </parent>
 
-    <name>Camel SB :: Spring Cloud Consul</name>
+    <name>Camel SB :: Spring Cloud Consul (deprecated)</name>
     <artifactId>camel-spring-cloud-consul</artifactId>
     <description>Camel Cloud integration with Spring Cloud Consul</description>
 

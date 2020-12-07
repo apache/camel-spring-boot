@@ -28,7 +28,7 @@
         <relativePath>..</relativePath>
     </parent>
 
-    <name>Camel SB :: Spring Cloud Zookeeper</name>
+    <name>Camel SB :: Spring Cloud Zookeeper (deprecated)</name>
     <artifactId>camel-spring-cloud-zookeeper</artifactId>
     <description>Camel Cloud integration with Spring Cloud Zookeeper</description>
 
