@@ -65,6 +65,10 @@ public class GitHubComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * GitHub OAuth token. Must be configured on either component or endpoint.
+     */
+    private String oauthToken;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -88,5 +92,13 @@ public class GitHubComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getOauthToken() {
+        return oauthToken;
+    }
+
+    public void setOauthToken(String oauthToken) {
+        this.oauthToken = oauthToken;
     }
 }
