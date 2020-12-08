@@ -720,7 +720,7 @@ public class VertxKafkaComponentConfiguration
      * (assuming both support at least TLSv1.2). This default should be fine for
      * most cases. Also see the config documentation for ssl.protocol.
      */
-    private String sslEnabledProtocols = "TLSv1.2,TLSv1.3";
+    private String sslEnabledProtocols = "TLSv1.2";
     /**
      * The endpoint identification algorithm to validate server hostname using
      * server certificate.
@@ -769,7 +769,7 @@ public class VertxKafkaComponentConfiguration
      * clients will not use 'TLSv1.3' even if it is one of the values in
      * ssl.enabled.protocols and the server only supports 'TLSv1.3'.
      */
-    private String sslProtocol = "TLSv1.3";
+    private String sslProtocol = "TLSv1.2";
     /**
      * The name of the security provider used for SSL connections. Default value
      * is the default security provider of the JVM.
