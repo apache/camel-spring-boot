@@ -137,18 +137,10 @@ The component supports 159 options, which are listed below.
 | *camel.component.properties.system-properties-mode* | Sets the JVM system property mode (0 = never, 1 = fallback, 2 = override). The default mode (override) is to use system properties if present, and override any existing properties. OS environment variable mode is checked before JVM system property mode | 2 | Integer
 | *camel.dataformat.enabled* | Global option to enable/disable dataformat auto-configuration, default is true. | true | Boolean
 | *camel.health.config* | Additional health check properties for fine grained configuration of health checks. |  | Map
-| *camel.health.config.allow-core-thread-time-out* | Sets whether to allow core threads to timeout |  | Boolean
 | *camel.health.config.enabled* | Set if the check associated to this configuration is enabled or not. Is default enabled. |  | Boolean
 | *camel.health.config.failure-threshold* | Set the number of failure before reporting the service as un-healthy. |  | Integer
-| *camel.health.config.id* | Sets the id of this thread pool |  | String
 | *camel.health.config.interval* | Set the check interval in milli seconds. |  | Long
-| *camel.health.config.keep-alive-time* | Sets the keep alive time for inactive threads |  | Long
-| *camel.health.config.max-pool-size* | Sets the maximum pool size |  | Integer
-| *camel.health.config.max-queue-size* | Sets the maximum number of tasks in the work queue. Use -1 or an unbounded queue |  | Integer
 | *camel.health.config.parent* | The id of the health check such as routes or registry (can use * as wildcard) |  | String
-| *camel.health.config.pool-size* | Sets the core pool size (threads to keep minimum in pool) |  | Integer
-| *camel.health.config.rejected-policy* | Sets the handler for tasks which cannot be executed by the thread pool. |  | ThreadPoolRejectedPolicy
-| *camel.health.config.time-unit* | Sets the time unit used for keep alive time |  | TimeUnit
 | *camel.health.context-enabled* | Whether context health check is enabled Is default enabled |  | Boolean
 | *camel.health.enabled* | Whether health check is enabled globally |  | Boolean
 | *camel.health.registry-enabled* | Whether registry health check is enabled Is default enabled |  | Boolean
@@ -244,6 +236,14 @@ The component supports 159 options, which are listed below.
 | *camel.ssl.trust-managers* | The optional trust manager configuration for creating the TrustManager used in constructing an SSLContext. |  | TrustManagersParameters
 | *camel.threadpool.allow-core-thread-time-out* | Sets default whether to allow core threads to timeout |  | Boolean
 | *camel.threadpool.config* | Adds a configuration for a specific thread pool profile (inherits default values) |  | Map
+| *camel.threadpool.config.allow-core-thread-time-out* | Sets whether to allow core threads to timeout |  | Boolean
+| *camel.threadpool.config.id* | Sets the id of this thread pool |  | String
+| *camel.threadpool.config.keep-alive-time* | Sets the keep alive time for inactive threads |  | Long
+| *camel.threadpool.config.max-pool-size* | Sets the maximum pool size |  | Integer
+| *camel.threadpool.config.max-queue-size* | Sets the maximum number of tasks in the work queue. Use -1 or an unbounded queue |  | Integer
+| *camel.threadpool.config.pool-size* | Sets the core pool size (threads to keep minimum in pool) |  | Integer
+| *camel.threadpool.config.rejected-policy* | Sets the handler for tasks which cannot be executed by the thread pool. |  | ThreadPoolRejectedPolicy
+| *camel.threadpool.config.time-unit* | Sets the time unit used for keep alive time |  | TimeUnit
 | *camel.threadpool.keep-alive-time* | Sets the default keep alive time for inactive threads |  | Long
 | *camel.threadpool.max-pool-size* | Sets the default maximum pool size |  | Integer
 | *camel.threadpool.max-queue-size* | Sets the default maximum number of tasks in the work queue. Use -1 or an unbounded queue |  | Integer

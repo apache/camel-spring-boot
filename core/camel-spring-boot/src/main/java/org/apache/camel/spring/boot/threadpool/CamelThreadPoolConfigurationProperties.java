@@ -138,7 +138,7 @@ public class CamelThreadPoolConfigurationProperties {
                 && config.isEmpty();
     }
 
-    @ConfigurationProperties(prefix = "camel.health.config")
+    @ConfigurationProperties(prefix = "camel.threadpool.config")
     public static class ThreadPoolProfileConfigurationProperties {
 
         /**
