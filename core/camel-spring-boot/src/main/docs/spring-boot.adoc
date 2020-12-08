@@ -92,7 +92,7 @@ When using spring-boot with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 159 options, which are listed below.
+The component supports 160 options, which are listed below.
 
 
 
@@ -146,6 +146,7 @@ The component supports 159 options, which are listed below.
 | *camel.health.registry-enabled* | Whether registry health check is enabled Is default enabled |  | Boolean
 | *camel.health.routes-enabled* | Whether routes health check is enabled Is default enabled |  | Boolean
 | *camel.language.enabled* | Global option to enable/disable language auto-configuration, default is true. | true | Boolean
+| *camel.routetemplate.config* |  |  | List
 | *camel.springboot.allow-use-original-message* | Sets whether to allow access to the original message from Camel's error handler, or from org.apache.camel.spi.UnitOfWork.getOriginalInMessage(). Turning this off can optimize performance, as defensive copy of the original message is not needed. Default is false. | false | Boolean
 | *camel.springboot.auto-startup* | Sets whether the object should automatically start when Camel starts. Important: Currently only routes can be disabled, as CamelContext's are always started. Note: When setting auto startup false on CamelContext then that takes precedence and no routes is started. You would need to start CamelContext explicit using the org.apache.camel.CamelContext.start() method, to start the context, and then you would need to start the routes manually using Camelcontext.getRouteController().startRoute(String). Default is true to always start up. | true | Boolean
 | *camel.springboot.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. Default is true. | true | Boolean
