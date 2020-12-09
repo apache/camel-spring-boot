@@ -16,7 +16,7 @@
 #
 
 name: camel-spring-boot
-title: Camel Spring Boot Starters
+title: Camel Spring Boot
 version: latest
 nav:
 - modules/ROOT/nav.adoc
