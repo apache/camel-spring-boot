@@ -61,10 +61,6 @@ public class SalesforceComponentConfiguration
      */
     private Map<String, Object> apexQueryParams;
     /**
-     * APEX method URL
-     */
-    private String apexUrl;
-    /**
      * Salesforce API version.
      */
     private String apiVersion = "50.0";
@@ -274,6 +270,14 @@ public class SalesforceComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * APEX method URL
+     */
+    private String apexUrl;
+    /**
+     * Composite (raw) method.
+     */
+    private String compositeMethod;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -440,14 +444,6 @@ public class SalesforceComponentConfiguration
 
     public void setApexQueryParams(Map<String, Object> apexQueryParams) {
         this.apexQueryParams = apexQueryParams;
-    }
-
-    public String getApexUrl() {
-        return apexUrl;
-    }
-
-    public void setApexUrl(String apexUrl) {
-        this.apexUrl = apexUrl;
     }
 
     public String getApiVersion() {
@@ -802,6 +798,22 @@ public class SalesforceComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public String getApexUrl() {
+        return apexUrl;
+    }
+
+    public void setApexUrl(String apexUrl) {
+        this.apexUrl = apexUrl;
+    }
+
+    public String getCompositeMethod() {
+        return compositeMethod;
+    }
+
+    public void setCompositeMethod(String compositeMethod) {
+        this.compositeMethod = compositeMethod;
     }
 
     public Boolean getLazyStartProducer() {
