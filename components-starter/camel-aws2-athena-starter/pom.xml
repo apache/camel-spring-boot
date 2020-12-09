@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws2-athena-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel Spring Boot :: AWS2-Athena</name>
+  <name>Camel SB Starters :: AWS2-Athena</name>
   <description>Spring-Boot Starter for Camel Support for AWS Athena Service</description>
   <dependencies>
     <dependency>

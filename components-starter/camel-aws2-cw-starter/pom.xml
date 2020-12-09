@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-aws2-cw-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel Spring Boot :: AWS2-CloudWatch</name>
+  <name>Camel SB Starters :: AWS2-CloudWatch</name>
   <description>Spring-Boot Starter for Camel Support for AWS Cloud Watch Service</description>
   <dependencies>
     <dependency>

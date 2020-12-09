@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-avro-rpc-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel Spring Boot :: Avro RPC</name>
+  <name>Camel SB Starters :: Avro RPC</name>
   <description>Spring-Boot Starter for Camel Support for Avro RPC</description>
   <dependencies>
     <dependency>

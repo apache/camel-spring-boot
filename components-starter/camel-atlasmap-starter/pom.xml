@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-atlasmap-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel Spring Boot :: Atlasmap</name>
+  <name>Camel SB Starters :: Atlasmap</name>
   <description>Spring-Boot Starter for Camel Support for Atlasmap</description>
   <dependencies>
     <dependency>

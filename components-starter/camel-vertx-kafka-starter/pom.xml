@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-vertx-kafka-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel Spring Boot :: Starters :: Vert.x Kafka</name>
+  <name>Camel SB Starters :: Vert.x Kafka</name>
   <description>Spring-Boot Starter for Vert.x Kafka</description>
   <dependencies>
     <dependency>

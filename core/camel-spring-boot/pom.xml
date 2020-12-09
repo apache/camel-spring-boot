@@ -29,7 +29,7 @@
         <relativePath>..</relativePath>
     </parent>
 
-    <name>Camel SB :: Spring Boot Component</name>
+    <name>Camel SB :: Spring Boot</name>
     <artifactId>camel-spring-boot</artifactId>
     <description>Using Camel with Spring Boot</description>
 

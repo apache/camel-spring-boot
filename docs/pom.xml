@@ -32,7 +32,7 @@
     <artifactId>docs</artifactId>
     <packaging>pom</packaging>
 
-    <name>Camel SB Starters :: Docs</name>
+    <name>Camel SB :: Docs</name>
 
     <build>
       <plugins>

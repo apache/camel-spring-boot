@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-resteasy-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel Spring Boot :: Starters :: Resteasy</name>
+  <name>Camel SB Starters :: Resteasy</name>
   <description>Spring-Boot Starter for Camel Resteasy Support</description>
   <dependencies>
     <dependency>
