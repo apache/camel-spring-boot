@@ -24,15 +24,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "camel.routetemplate")
 public class CamelRouteTemplateConfigurationProperties {
 
+    /**
+     * Route template configurations
+     */
     private List<Map<String, String>> config;
 
     public List<Map<String, String>> getConfig() {
         return config;
     }
 
-    /**
-     * Route template configurations
-     */
     public void setConfig(List<Map<String, String>> config) {
         this.config = config;
     }
