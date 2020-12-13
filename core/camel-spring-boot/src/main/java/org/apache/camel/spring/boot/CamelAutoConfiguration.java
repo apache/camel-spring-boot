@@ -117,10 +117,8 @@ public class CamelAutoConfiguration {
             Environment env = applicationContext.getEnvironment();
             if (env instanceof ConfigurableEnvironment) {
                 MutablePropertySources sources = ((ConfigurableEnvironment) env).getPropertySources();
-                if (sources != null) {
-                    if (!sources.contains("camel-file-configuration")) {
-                        sources.addFirst(new FilePropertySource("camel-file-configuration", applicationContext, config.getFileConfigurations()));
-                    }
+                if (!sources.contains("camel-file-configuration")) {
+                    sources.addFirst(new FilePropertySource("camel-file-configuration", applicationContext, config.getFileConfigurations()));
                 }
             }
         }
