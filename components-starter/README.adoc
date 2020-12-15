@@ -197,7 +197,7 @@ Number of Camel components: 342 in 274 JAR artifacts (3 deprecated)
 
 | xref:latest@components::dataformat-component.adoc[Data Format] | camel-dataformat-starter | Stable | 2.12 | Use a Camel Data Format as a regular Camel Component.
 
-| xref:latest@components::dataset-component.adoc[Dataset] | camel-dataset-starter | Stable | 1.3 | Provide data for load & soak testing of your Camel application.
+| xref:latest@components::dataset-component.adoc[Dataset] | camel-dataset-starter | Stable | 1.3 | Provide data for load and soak testing of your Camel application.
 
 | xref:latest@components::dataset-test-component.adoc[DataSet Test] | camel-dataset-starter | Stable | 1.3 | Extends the mock component by pulling messages from another endpoint on startup to set the expected message bodies.
 
@@ -363,7 +363,7 @@ Number of Camel components: 342 in 274 JAR artifacts (3 deprecated)
 
 | xref:latest@components::jcache-component.adoc[JCache] | camel-jcache-starter | Stable | 2.17 | Perform caching operations against JSR107/JCache.
 
-| xref:latest@components::jclouds-component.adoc[JClouds] | camel-jclouds-starter | Stable | 2.9 | Interact with jclouds compute & blobstore service.
+| xref:latest@components::jclouds-component.adoc[JClouds] | camel-jclouds-starter | Stable | 2.9 | Interact with jclouds compute and blobstore service.
 
 | xref:latest@components::jcr-component.adoc[JCR] | camel-jcr-starter | Stable | 1.3 | Read and write nodes to/from a JCR compliant content repository.
 
