@@ -114,11 +114,25 @@ public class GoogleCalendarStreamComponentConfiguration
      */
     private String clientSecret;
     /**
+     * The emailAddress of the Google Service Account.
+     */
+    private String emailAddress;
+    /**
+     * The name of the p12 file which has the private key to use with the Google
+     * Service Account.
+     */
+    private String p12FileName;
+    /**
      * OAuth 2 refresh token. Using this, the Google Calendar component can
      * obtain a new accessToken whenever the current one expires - a necessity
      * if the application is long-lived.
      */
     private String refreshToken;
+    /**
+     * The email address of the user the application is trying to impersonate in
+     * the service account flow.
+     */
+    private String user;
 
     public String getApplicationName() {
         return applicationName;
@@ -232,11 +246,35 @@ public class GoogleCalendarStreamComponentConfiguration
         this.clientSecret = clientSecret;
     }
 
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getP12FileName() {
+        return p12FileName;
+    }
+
+    public void setP12FileName(String p12FileName) {
+        this.p12FileName = p12FileName;
+    }
+
     public String getRefreshToken() {
         return refreshToken;
     }
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

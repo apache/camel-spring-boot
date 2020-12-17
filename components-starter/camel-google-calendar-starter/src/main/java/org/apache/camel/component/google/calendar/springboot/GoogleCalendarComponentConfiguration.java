@@ -54,25 +54,11 @@ public class GoogleCalendarComponentConfiguration
      */
     private GoogleCalendarConfiguration configuration;
     /**
-     * The emailAddress of the Google Service Account.
-     */
-    private String emailAddress;
-    /**
-     * The name of the p12 file which has the private key to use with the Google
-     * Service Account.
-     */
-    private String p12FileName;
-    /**
      * Specifies the level of permissions you want a calendar application to
      * have to a user account. You can separate multiple scopes by comma. See
      * https://developers.google.com/google-apps/calendar/auth for more info.
      */
     private String scopes = "https://www.googleapis.com/auth/calendar";
-    /**
-     * The email address of the user the application is trying to impersonate in
-     * the service account flow
-     */
-    private String user;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -120,11 +106,25 @@ public class GoogleCalendarComponentConfiguration
      */
     private String clientSecret;
     /**
+     * The emailAddress of the Google Service Account.
+     */
+    private String emailAddress;
+    /**
+     * The name of the p12 file which has the private key to use with the Google
+     * Service Account.
+     */
+    private String p12FileName;
+    /**
      * OAuth 2 refresh token. Using this, the Google Calendar component can
      * obtain a new accessToken whenever the current one expires - a necessity
      * if the application is long-lived.
      */
     private String refreshToken;
+    /**
+     * The email address of the user the application is trying to impersonate in
+     * the service account flow
+     */
+    private String user;
 
     public String getApplicationName() {
         return applicationName;
@@ -150,36 +150,12 @@ public class GoogleCalendarComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getP12FileName() {
-        return p12FileName;
-    }
-
-    public void setP12FileName(String p12FileName) {
-        this.p12FileName = p12FileName;
-    }
-
     public String getScopes() {
         return scopes;
     }
 
     public void setScopes(String scopes) {
         this.scopes = scopes;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -230,11 +206,35 @@ public class GoogleCalendarComponentConfiguration
         this.clientSecret = clientSecret;
     }
 
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getP12FileName() {
+        return p12FileName;
+    }
+
+    public void setP12FileName(String p12FileName) {
+        this.p12FileName = p12FileName;
+    }
+
     public String getRefreshToken() {
         return refreshToken;
     }
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

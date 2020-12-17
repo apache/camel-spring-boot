@@ -63,7 +63,7 @@ Number of Camel components: 342 in 274 JAR artifacts (3 deprecated)
 
 | xref:latest@components::aws2-eks-component.adoc[AWS 2 Elastic Kubernetes Service (EKS)] | camel-aws2-eks-starter | Stable | 3.1 | Manage AWS EKS cluster instances using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-eventbridge-component.adoc[AWS 2 Eventbridge] | camel-aws2-eventbridge-starter | Preview | 3.6 | Manage AWS Eventbridge cluster instances using AWS SDK version 2.x.
+| xref:latest@components::aws2-eventbridge-component.adoc[AWS 2 Eventbridge] | camel-aws2-eventbridge-starter | Stable | 3.6 | Manage AWS Eventbridge cluster instances using AWS SDK version 2.x.
 
 | xref:latest@components::aws2-iam-component.adoc[AWS 2 Identity and Access Management (IAM)] | camel-aws2-iam-starter | Stable | 3.1 | Manage AWS IAM instances using AWS SDK version 2.x.
 

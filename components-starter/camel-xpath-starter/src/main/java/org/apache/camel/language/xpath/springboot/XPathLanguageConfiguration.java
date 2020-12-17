@@ -72,9 +72,9 @@ public class XPathLanguageConfiguration
      * Whether to enable pre-compiling the xpath expression during
      * initialization phase. pre-compile is enabled by default. This can be used
      * to turn off, for example in cases the compilation phase is desired at the
-     * starting phase, such as if the application is pre-built with graalvm
-     * which would then load the xpath factory of the built operating system,
-     * and not a JVM runtime.
+     * starting phase, such as if the application is ahead of time compiled (for
+     * example with camel-quarkus) which would then load the xpath factory of
+     * the built operating system, and not a JVM runtime.
      */
     private Boolean preCompile = true;
     /**
