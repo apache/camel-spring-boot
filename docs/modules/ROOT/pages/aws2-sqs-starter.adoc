@@ -49,7 +49,7 @@ The component supports 41 options, which are listed below.
 | *camel.component.aws2-sqs.message-group-id-strategy* | Only for FIFO queues. Strategy for setting the messageGroupId on the message. Can be one of the following options: useConstant, useExchangeId, usePropertyValue. For the usePropertyValue option, the value of property CamelAwsMessageGroupId will be used. |  | String
 | *camel.component.aws2-sqs.message-retention-period* | The messageRetentionPeriod (in seconds) a message will be retained by SQS for this queue. |  | Integer
 | *camel.component.aws2-sqs.operation* | The operation to do in case the user don't want to send only a message |  | Sqs2Operations
-| *camel.component.aws2-sqs.policy* | The policy for this queue |  | String
+| *camel.component.aws2-sqs.policy* | The policy for this queue. It can be loaded by default from classpath, but you can prefix with classpath:, file:, or http: to load the resource from different systems. |  | String
 | *camel.component.aws2-sqs.protocol* | The underlying protocol used to communicate with SQS | https | String
 | *camel.component.aws2-sqs.proxy-host* | To define a proxy host when instantiating the SQS client |  | String
 | *camel.component.aws2-sqs.proxy-port* | To define a proxy port when instantiating the SQS client |  | Integer

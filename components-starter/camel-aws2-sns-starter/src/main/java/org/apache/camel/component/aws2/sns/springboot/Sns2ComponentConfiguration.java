@@ -89,7 +89,9 @@ public class Sns2ComponentConfiguration
      */
     private String messageStructure;
     /**
-     * The policy for this queue
+     * The policy for this queue. Is loaded by default from classpath, but you
+     * can prefix with classpath:, file:, or http: to load the resource from
+     * different systems.
      */
     private String policy;
     /**
