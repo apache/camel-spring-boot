@@ -17,7 +17,7 @@ When using mail with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 49 options, which are listed below.
+The component supports 50 options, which are listed below.
 
 
 
@@ -39,6 +39,7 @@ The component supports 49 options, which are listed below.
 | *camel.component.mail.content-type-resolver* | Resolver to determine Content-Type for file attachments. The option is a org.apache.camel.component.mail.ContentTypeResolver type. |  | ContentTypeResolver
 | *camel.component.mail.copy-to* | After processing a mail message, it can be copied to a mail folder with the given name. You can override this configuration value, with a header with the key copyTo, allowing you to copy messages to folder names configured at runtime. |  | String
 | *camel.component.mail.debug-mode* | Enable debug mode on the underlying mail framework. The SUN Mail framework logs the debug messages to System.out by default. | false | Boolean
+| *camel.component.mail.decode-filename* | If set to true, the MimeUtility.decodeText method will be used to decode the filename. This is similar to setting JVM system property mail.mime.encodefilename. | false | Boolean
 | *camel.component.mail.delete* | Deletes the messages after they have been processed. This is done by setting the DELETED flag on the mail message. If false, the SEEN flag is set instead. As of Camel 2.10 you can override this configuration option by setting a header with the key delete to determine if the mail should be deleted or not. | false | Boolean
 | *camel.component.mail.disconnect* | Whether the consumer should disconnect after polling. If enabled this forces Camel to connect on each poll. | false | Boolean
 | *camel.component.mail.enabled* | Whether to enable auto configuration of the mail component. This is enabled by default. |  | Boolean

@@ -63,7 +63,9 @@ public class IAM2ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * The operation to perform
+     * The operation to perform. You can configure a default operation on the
+     * component level, or the operation as part of the endpoint, or via a
+     * message header with the key CamelAwsIAMOperation.
      */
     private IAM2Operations operation;
     /**

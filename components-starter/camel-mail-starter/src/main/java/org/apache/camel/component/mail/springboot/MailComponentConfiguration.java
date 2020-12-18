@@ -68,6 +68,12 @@ public class MailComponentConfiguration
      */
     private String copyTo;
     /**
+     * If set to true, the MimeUtility.decodeText method will be used to decode
+     * the filename. This is similar to setting JVM system property
+     * mail.mime.encodefilename.
+     */
+    private Boolean decodeFilename = false;
+    /**
      * Deletes the messages after they have been processed. This is done by
      * setting the DELETED flag on the mail message. If false, the SEEN flag is
      * set instead. As of Camel 2.10 you can override this configuration option
@@ -323,6 +329,14 @@ public class MailComponentConfiguration
 
     public void setCopyTo(String copyTo) {
         this.copyTo = copyTo;
+    }
+
+    public Boolean getDecodeFilename() {
+        return decodeFilename;
+    }
+
+    public void setDecodeFilename(Boolean decodeFilename) {
+        this.decodeFilename = decodeFilename;
     }
 
     public Boolean getDelete() {
