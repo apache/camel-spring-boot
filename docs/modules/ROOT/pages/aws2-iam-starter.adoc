@@ -30,7 +30,7 @@ The component supports 14 options, which are listed below.
 | *camel.component.aws2-iam.enabled* | Whether to enable auto configuration of the aws2-iam component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-iam.iam-client* | To use a existing configured AWS IAM as client. The option is a software.amazon.awssdk.services.iam.IamClient type. |  | IamClient
 | *camel.component.aws2-iam.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| *camel.component.aws2-iam.operation* | The operation to perform |  | IAM2Operations
+| *camel.component.aws2-iam.operation* | The operation to perform. You can configure a default operation on the component level, or the operation as part of the endpoint, or via a message header with the key CamelAwsIAMOperation. |  | IAM2Operations
 | *camel.component.aws2-iam.pojo-request* | If we want to use a POJO request as body or not | false | Boolean
 | *camel.component.aws2-iam.proxy-host* | To define a proxy host when instantiating the IAM client |  | String
 | *camel.component.aws2-iam.proxy-port* | To define a proxy port when instantiating the IAM client |  | Integer
