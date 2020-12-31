@@ -114,8 +114,7 @@ public class SjmsComponentConfiguration
     /**
      * When using the default
      * org.apache.camel.component.sjms.jms.ConnectionFactoryResource then should
-     * each javax.jms.Connection be tested (calling start) before returned from
-     * the pool.
+     * each javax.jms.Connection be tested before being used.
      */
     private Boolean connectionTestOnBorrow = true;
     /**
