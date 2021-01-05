@@ -159,7 +159,7 @@
       <dependency>
         <groupId>io.methvin</groupId>
         <artifactId>directory-watcher</artifactId>
-        <version>0.10.1</version>
+        <version>0.11.0</version>
       </dependency>
       <dependency>
         <groupId>io.nessus</groupId>
@@ -174,7 +174,7 @@
       <dependency>
         <groupId>net.corda</groupId>
         <artifactId>corda-rpc</artifactId>
-        <version>4.6</version>
+        <version>4.7</version>
         <exclusions>
           <exclusion>
             <groupId>co.paralleluniverse</groupId>
