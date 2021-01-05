@@ -28,21 +28,6 @@ You can run unit test of this example using
 
     mvn clean test
 
-== To get info about the routes
-
-To show a summary of all the routes
-
-----
-curl -XGET -s http://localhost:8080/camelroutes
-----
-
-To show detailed information for a specific route
-
-----
-curl -XGET -s http://localhost:8080/camelroutes/{id}/detail
-----
-
-
 == More information
 
 You can find more information about Apache Camel at the website: http://camel.apache.org/
