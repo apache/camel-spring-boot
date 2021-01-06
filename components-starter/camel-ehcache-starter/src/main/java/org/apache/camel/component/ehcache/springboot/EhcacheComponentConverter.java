@@ -41,7 +41,6 @@ public class EhcacheComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.ehcache.CacheManager.class));
         answer.add(new ConvertiblePair(String.class, org.ehcache.config.Configuration.class));
-        answer.add(new ConvertiblePair(String.class, java.lang.Object.class));
         answer.add(new ConvertiblePair(String.class, org.ehcache.config.CacheConfiguration.class));
         return answer;
     }
@@ -61,7 +60,6 @@ public class EhcacheComponentConverter
         switch (targetType.getName()) {
             case "org.ehcache.CacheManager": return camelContext.getRegistry().lookupByNameAndType(ref, org.ehcache.CacheManager.class);
             case "org.ehcache.config.Configuration": return camelContext.getRegistry().lookupByNameAndType(ref, org.ehcache.config.Configuration.class);
-            case "java.lang.Object": return camelContext.getRegistry().lookupByNameAndType(ref, java.lang.Object.class);
             case "org.ehcache.config.CacheConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.ehcache.config.CacheConfiguration.class);
         }
         return null;

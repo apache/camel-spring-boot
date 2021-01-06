@@ -787,6 +787,10 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         if (option.getEnums() != null && !option.getEnums().isEmpty()) {
             return false;
         }
+        // java.lang.Object are not complex
+        if ("java.lang.Object".equals(option.getJavaType())) {
+            return false;
+        }
         // all the object types are complex
         return "object".equals(option.getType());
     }

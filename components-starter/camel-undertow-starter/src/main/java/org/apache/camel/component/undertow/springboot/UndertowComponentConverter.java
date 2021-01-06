@@ -41,7 +41,6 @@ public class UndertowComponentConverter
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.undertow.UndertowHostOptions.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.undertow.UndertowHttpBinding.class));
-        answer.add(new ConvertiblePair(String.class, java.lang.Object.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.undertow.spi.UndertowSecurityProvider.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
@@ -62,7 +61,6 @@ public class UndertowComponentConverter
         switch (targetType.getName()) {
             case "org.apache.camel.component.undertow.UndertowHostOptions": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.undertow.UndertowHostOptions.class);
             case "org.apache.camel.component.undertow.UndertowHttpBinding": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.undertow.UndertowHttpBinding.class);
-            case "java.lang.Object": return camelContext.getRegistry().lookupByNameAndType(ref, java.lang.Object.class);
             case "org.apache.camel.component.undertow.spi.UndertowSecurityProvider": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.undertow.spi.UndertowSecurityProvider.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }

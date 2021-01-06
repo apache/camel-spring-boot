@@ -40,7 +40,6 @@ public class IgniteComputeComponentConverter
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, java.lang.Object.class));
         answer.add(new ConvertiblePair(String.class, org.apache.ignite.Ignite.class));
         answer.add(new ConvertiblePair(String.class, org.apache.ignite.configuration.IgniteConfiguration.class));
         return answer;
@@ -59,7 +58,6 @@ public class IgniteComputeComponentConverter
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "java.lang.Object": return camelContext.getRegistry().lookupByNameAndType(ref, java.lang.Object.class);
             case "org.apache.ignite.Ignite": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.ignite.Ignite.class);
             case "org.apache.ignite.configuration.IgniteConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.ignite.configuration.IgniteConfiguration.class);
         }
