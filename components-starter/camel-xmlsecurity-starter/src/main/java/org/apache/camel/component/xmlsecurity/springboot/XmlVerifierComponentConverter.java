@@ -41,7 +41,6 @@ public class XmlVerifierComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, javax.xml.crypto.KeySelector.class));
-        answer.add(new ConvertiblePair(String.class, java.lang.Object.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.xmlsecurity.api.ValidationFailedHandler.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.xmlsecurity.api.XmlSignature2Message.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.xmlsecurity.api.XmlSignatureChecker.class));
@@ -64,7 +63,6 @@ public class XmlVerifierComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "javax.xml.crypto.KeySelector": return camelContext.getRegistry().lookupByNameAndType(ref, javax.xml.crypto.KeySelector.class);
-            case "java.lang.Object": return camelContext.getRegistry().lookupByNameAndType(ref, java.lang.Object.class);
             case "org.apache.camel.component.xmlsecurity.api.ValidationFailedHandler": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.xmlsecurity.api.ValidationFailedHandler.class);
             case "org.apache.camel.component.xmlsecurity.api.XmlSignature2Message": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.xmlsecurity.api.XmlSignature2Message.class);
             case "org.apache.camel.component.xmlsecurity.api.XmlSignatureChecker": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.xmlsecurity.api.XmlSignatureChecker.class);
