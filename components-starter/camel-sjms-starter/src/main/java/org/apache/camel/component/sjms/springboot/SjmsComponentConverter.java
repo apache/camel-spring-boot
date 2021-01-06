@@ -40,13 +40,10 @@ public class SjmsComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, javax.jms.ConnectionFactory.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sjms.jms.ConnectionResource.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sjms.jms.DestinationCreationStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sjms.jms.MessageCreatedStrategy.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sjms.taskmanager.TimedTaskManager.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sjms.TransactionCommitStrategy.class));
         return answer;
     }
 
@@ -64,13 +61,10 @@ public class SjmsComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "javax.jms.ConnectionFactory": return camelContext.getRegistry().lookupByNameAndType(ref, javax.jms.ConnectionFactory.class);
-            case "org.apache.camel.component.sjms.jms.ConnectionResource": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.sjms.jms.ConnectionResource.class);
             case "org.apache.camel.component.sjms.jms.DestinationCreationStrategy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.sjms.jms.DestinationCreationStrategy.class);
             case "org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy.class);
             case "org.apache.camel.component.sjms.jms.MessageCreatedStrategy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.sjms.jms.MessageCreatedStrategy.class);
-            case "org.apache.camel.component.sjms.taskmanager.TimedTaskManager": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.sjms.taskmanager.TimedTaskManager.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
-            case "org.apache.camel.component.sjms.TransactionCommitStrategy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.sjms.TransactionCommitStrategy.class);
         }
         return null;
     }

@@ -18,12 +18,9 @@ package org.apache.camel.component.sjms2.springboot;
 
 import javax.annotation.Generated;
 import javax.jms.ConnectionFactory;
-import org.apache.camel.component.sjms.TransactionCommitStrategy;
-import org.apache.camel.component.sjms.jms.ConnectionResource;
 import org.apache.camel.component.sjms.jms.DestinationCreationStrategy;
 import org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy;
 import org.apache.camel.component.sjms.jms.MessageCreatedStrategy;
-import org.apache.camel.component.sjms.taskmanager.TimedTaskManager;
 import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -46,13 +43,8 @@ public class Sjms2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The maximum number of connections available to endpoints started under
-     * this component
-     */
-    private Integer connectionCount = 1;
-    /**
-     * A ConnectionFactory is required to enable the SjmsComponent. It can be
-     * set directly or set set as part of a ConnectionResource. The option is a
+     * The connection factory to be use. A connection factory must be configured
+     * either on the component or endpoint. The option is a
      * javax.jms.ConnectionFactory type.
      */
     private ConnectionFactory connectionFactory;
@@ -65,14 +57,6 @@ public class Sjms2ComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
-    /**
-     * Backoff in millis on consumer pool reconnection attempts
-     */
-    private Long reconnectBackOff = 5000L;
-    /**
-     * Try to apply reconnection logic on consumer pool
-     */
-    private Boolean reconnectOnError = true;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -93,30 +77,6 @@ public class Sjms2ComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
-    /**
-     * The client ID to use when creating javax.jms.Connection when using the
-     * default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.
-     */
-    private String connectionClientId;
-    /**
-     * The max wait time in millis to block and wait on free connection when the
-     * pool is exhausted when using the default
-     * org.apache.camel.component.sjms.jms.ConnectionFactoryResource.
-     */
-    private Long connectionMaxWait = 5000L;
-    /**
-     * A ConnectionResource is an interface that allows for customization and
-     * container control of the ConnectionFactory. See Plugable Connection
-     * Resource Management for further details. The option is a
-     * org.apache.camel.component.sjms.jms.ConnectionResource type.
-     */
-    private ConnectionResource connectionResource;
-    /**
-     * When using the default
-     * org.apache.camel.component.sjms.jms.ConnectionFactoryResource then should
-     * each javax.jms.Connection be tested before being used.
-     */
-    private Boolean connectionTestOnBorrow = true;
     /**
      * To use a custom DestinationCreationStrategy. The option is a
      * org.apache.camel.component.sjms.jms.DestinationCreationStrategy type.
@@ -142,40 +102,30 @@ public class Sjms2ComponentConfiguration
      */
     private MessageCreatedStrategy messageCreatedStrategy;
     /**
-     * To use a custom TimedTaskManager. The option is a
-     * org.apache.camel.component.sjms.taskmanager.TimedTaskManager type.
+     * Specifies the interval between recovery attempts, i.e. when a connection
+     * is being refreshed, in milliseconds. The default is 5000 ms, that is, 5
+     * seconds. The option is a long type.
      */
-    private TimedTaskManager timedTaskManager;
+    private Long recoveryInterval = 5000L;
+    /**
+     * Specifies the maximum number of concurrent consumers for continue routing
+     * when timeout occurred when using request/reply over JMS.
+     */
+    private Integer replyToOnTimeoutMaxConcurrentConsumers = 1;
+    /**
+     * Configures how often Camel should check for timed out Exchanges when
+     * doing request/reply over JMS. By default Camel checks once per second.
+     * But if you must react faster when a timeout occurs, then you can lower
+     * this interval, to check more frequently. The timeout is determined by the
+     * option requestTimeout. The option is a long type.
+     */
+    private Long requestTimeoutCheckerInterval = 1000L;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
     private HeaderFilterStrategy headerFilterStrategy;
-    /**
-     * The password to use when creating javax.jms.Connection when using the
-     * default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.
-     */
-    private String connectionPassword;
-    /**
-     * The username to use when creating javax.jms.Connection when using the
-     * default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.
-     */
-    private String connectionUsername;
-    /**
-     * To configure which kind of commit strategy to use. Camel provides two
-     * implementations out of the box, default and batch. The option is a
-     * org.apache.camel.component.sjms.TransactionCommitStrategy type.
-     */
-    private TransactionCommitStrategy transactionCommitStrategy;
-
-    public Integer getConnectionCount() {
-        return connectionCount;
-    }
-
-    public void setConnectionCount(Integer connectionCount) {
-        this.connectionCount = connectionCount;
-    }
 
     public ConnectionFactory getConnectionFactory() {
         return connectionFactory;
@@ -193,22 +143,6 @@ public class Sjms2ComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public Long getReconnectBackOff() {
-        return reconnectBackOff;
-    }
-
-    public void setReconnectBackOff(Long reconnectBackOff) {
-        this.reconnectBackOff = reconnectBackOff;
-    }
-
-    public Boolean getReconnectOnError() {
-        return reconnectOnError;
-    }
-
-    public void setReconnectOnError(Boolean reconnectOnError) {
-        this.reconnectOnError = reconnectOnError;
-    }
-
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
@@ -223,38 +157,6 @@ public class Sjms2ComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
-    }
-
-    public String getConnectionClientId() {
-        return connectionClientId;
-    }
-
-    public void setConnectionClientId(String connectionClientId) {
-        this.connectionClientId = connectionClientId;
-    }
-
-    public Long getConnectionMaxWait() {
-        return connectionMaxWait;
-    }
-
-    public void setConnectionMaxWait(Long connectionMaxWait) {
-        this.connectionMaxWait = connectionMaxWait;
-    }
-
-    public ConnectionResource getConnectionResource() {
-        return connectionResource;
-    }
-
-    public void setConnectionResource(ConnectionResource connectionResource) {
-        this.connectionResource = connectionResource;
-    }
-
-    public Boolean getConnectionTestOnBorrow() {
-        return connectionTestOnBorrow;
-    }
-
-    public void setConnectionTestOnBorrow(Boolean connectionTestOnBorrow) {
-        this.connectionTestOnBorrow = connectionTestOnBorrow;
     }
 
     public DestinationCreationStrategy getDestinationCreationStrategy() {
@@ -284,12 +186,30 @@ public class Sjms2ComponentConfiguration
         this.messageCreatedStrategy = messageCreatedStrategy;
     }
 
-    public TimedTaskManager getTimedTaskManager() {
-        return timedTaskManager;
+    public Long getRecoveryInterval() {
+        return recoveryInterval;
     }
 
-    public void setTimedTaskManager(TimedTaskManager timedTaskManager) {
-        this.timedTaskManager = timedTaskManager;
+    public void setRecoveryInterval(Long recoveryInterval) {
+        this.recoveryInterval = recoveryInterval;
+    }
+
+    public Integer getReplyToOnTimeoutMaxConcurrentConsumers() {
+        return replyToOnTimeoutMaxConcurrentConsumers;
+    }
+
+    public void setReplyToOnTimeoutMaxConcurrentConsumers(
+            Integer replyToOnTimeoutMaxConcurrentConsumers) {
+        this.replyToOnTimeoutMaxConcurrentConsumers = replyToOnTimeoutMaxConcurrentConsumers;
+    }
+
+    public Long getRequestTimeoutCheckerInterval() {
+        return requestTimeoutCheckerInterval;
+    }
+
+    public void setRequestTimeoutCheckerInterval(
+            Long requestTimeoutCheckerInterval) {
+        this.requestTimeoutCheckerInterval = requestTimeoutCheckerInterval;
     }
 
     public HeaderFilterStrategy getHeaderFilterStrategy() {
@@ -299,30 +219,5 @@ public class Sjms2ComponentConfiguration
     public void setHeaderFilterStrategy(
             HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
-    }
-
-    public String getConnectionPassword() {
-        return connectionPassword;
-    }
-
-    public void setConnectionPassword(String connectionPassword) {
-        this.connectionPassword = connectionPassword;
-    }
-
-    public String getConnectionUsername() {
-        return connectionUsername;
-    }
-
-    public void setConnectionUsername(String connectionUsername) {
-        this.connectionUsername = connectionUsername;
-    }
-
-    public TransactionCommitStrategy getTransactionCommitStrategy() {
-        return transactionCommitStrategy;
-    }
-
-    public void setTransactionCommitStrategy(
-            TransactionCommitStrategy transactionCommitStrategy) {
-        this.transactionCommitStrategy = transactionCommitStrategy;
     }
 }
