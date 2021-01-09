@@ -207,11 +207,6 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String heartbeatTopicsPrefix = "__debezium-heartbeat";
     /**
-     * Maximum number of threads used to perform an initial sync of the
-     * collections in a replica set. Defaults to 1.
-     */
-    private Integer initialSyncMaxThreads = 1;
-    /**
      * Maximum size of each batch of source records. Defaults to 2048.
      */
     private Integer maxBatchSize = 2048;
@@ -221,6 +216,12 @@ public class DebeziumMongodbComponentConfiguration
      * larger than the maximum batch size.
      */
     private Integer maxQueueSize = 8192;
+    /**
+     * Maximum size of the queue in bytes for change events read from the
+     * database log but not yet recorded or forwarded. Defaults to 0. Mean the
+     * feature is not enabled
+     */
+    private Long maxQueueSizeInBytes = 0L;
     /**
      * Database containing user credentials.
      */
@@ -308,6 +309,13 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String skippedOperations;
     /**
+     * This property contains a comma-separated list of ., for which the initial
+     * snapshot may be a subset of data present in the data source. The subset
+     * would be defined by mongodb filter query specified as value for property
+     * snapshot.collection.filter.override..
+     */
+    private String snapshotCollectionFilterOverrides;
+    /**
      * The number of milliseconds to delay before a snapshot will begin. The
      * option is a long type.
      */
@@ -317,6 +325,16 @@ public class DebeziumMongodbComponentConfiguration
      * performing a snapshot
      */
     private Integer snapshotFetchSize;
+    /**
+     * this setting must be set to specify a list of tables/collections whose
+     * snapshot must be taken on creating or restarting the connector.
+     */
+    private String snapshotIncludeCollectionList;
+    /**
+     * The maximum number of threads used to perform the snapshot. Defaults to
+     * 1.
+     */
+    private Integer snapshotMaxThreads = 1;
     /**
      * The criteria for running a snapshot upon startup of the connector.
      * Options include: 'initial' (the default) to specify the connector should
@@ -567,14 +585,6 @@ public class DebeziumMongodbComponentConfiguration
         this.heartbeatTopicsPrefix = heartbeatTopicsPrefix;
     }
 
-    public Integer getInitialSyncMaxThreads() {
-        return initialSyncMaxThreads;
-    }
-
-    public void setInitialSyncMaxThreads(Integer initialSyncMaxThreads) {
-        this.initialSyncMaxThreads = initialSyncMaxThreads;
-    }
-
     public Integer getMaxBatchSize() {
         return maxBatchSize;
     }
@@ -589,6 +599,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setMaxQueueSize(Integer maxQueueSize) {
         this.maxQueueSize = maxQueueSize;
+    }
+
+    public Long getMaxQueueSizeInBytes() {
+        return maxQueueSizeInBytes;
+    }
+
+    public void setMaxQueueSizeInBytes(Long maxQueueSizeInBytes) {
+        this.maxQueueSizeInBytes = maxQueueSizeInBytes;
     }
 
     public String getMongodbAuthsource() {
@@ -738,6 +756,15 @@ public class DebeziumMongodbComponentConfiguration
         this.skippedOperations = skippedOperations;
     }
 
+    public String getSnapshotCollectionFilterOverrides() {
+        return snapshotCollectionFilterOverrides;
+    }
+
+    public void setSnapshotCollectionFilterOverrides(
+            String snapshotCollectionFilterOverrides) {
+        this.snapshotCollectionFilterOverrides = snapshotCollectionFilterOverrides;
+    }
+
     public Long getSnapshotDelayMs() {
         return snapshotDelayMs;
     }
@@ -752,6 +779,23 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setSnapshotFetchSize(Integer snapshotFetchSize) {
         this.snapshotFetchSize = snapshotFetchSize;
+    }
+
+    public String getSnapshotIncludeCollectionList() {
+        return snapshotIncludeCollectionList;
+    }
+
+    public void setSnapshotIncludeCollectionList(
+            String snapshotIncludeCollectionList) {
+        this.snapshotIncludeCollectionList = snapshotIncludeCollectionList;
+    }
+
+    public Integer getSnapshotMaxThreads() {
+        return snapshotMaxThreads;
+    }
+
+    public void setSnapshotMaxThreads(Integer snapshotMaxThreads) {
+        this.snapshotMaxThreads = snapshotMaxThreads;
     }
 
     public String getSnapshotMode() {

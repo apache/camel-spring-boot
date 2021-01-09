@@ -17,7 +17,7 @@ When using debezium-mysql with Spring Boot make sure to use the following Maven 
 ----
 
 
-The component supports 80 options, which are listed below.
+The component supports 81 options, which are listed below.
 
 
 
@@ -91,6 +91,7 @@ The component supports 80 options, which are listed below.
 | *camel.component.debezium-mysql.poll-interval-ms* | Frequency in milliseconds to wait for new change events to appear after receiving no events. Defaults to 500ms. The option is a long type. | 500 | Long
 | *camel.component.debezium-mysql.skipped-operations* | The comma-separated list of operations to skip during streaming, defined as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no operations will be skipped. |  | String
 | *camel.component.debezium-mysql.snapshot-delay-ms* | The number of milliseconds to delay before a snapshot will begin. The option is a long type. | 0 | Long
+| *camel.component.debezium-mysql.snapshot-events-as-inserts* | Whether or not to mark snapshot events as normal inserts (op 'c'). If disabled, the standard functionality of emitting these records as reads (op 'r') will be used. | true | Boolean
 | *camel.component.debezium-mysql.snapshot-fetch-size* | The maximum number of records that should be loaded into memory while performing a snapshot |  | Integer
 | *camel.component.debezium-mysql.snapshot-locking-mode* | Controls how long the connector holds onto the global read lock while it is performing a snapshot. The default is 'minimal', which means the connector holds the global read lock (and thus prevents any updates) for just the initial portion of the snapshot while the database schemas and other metadata are being read. The remaining work in a snapshot involves selecting all rows from each table, and this can be done using the snapshot process' REPEATABLE READ transaction even when the lock is no longer held and other operations are updating the database. However, in some cases it may be desirable to block all writes for the entire duration of the snapshot; in such cases set this property to 'extended'. Using a value of 'none' will prevent the connector from acquiring any table locks during the snapshot process. This mode can only be used in combination with snapshot.mode values of 'schema_only' or 'schema_only_recovery' and is only safe to use if no schema changes are happening while the snapshot is taken. | minimal | String
 | *camel.component.debezium-mysql.snapshot-mode* | The criteria for running a snapshot upon startup of the connector. Options include: 'when_needed' to specify that the connector run a snapshot upon startup whenever it deems it necessary; 'schema_only' to only take a snapshot of the schema (table structures) but no actual data; 'initial' (the default) to specify the connector can run a snapshot only when no offsets are available for the logical server name; 'initial_only' same as 'initial' except the connector should stop after completing the snapshot and before it would normally read the binlog; and'never' to specify the connector should never run a snapshot and that upon first startup the connector should read from the beginning of the binlog. The 'never' mode should be used with care, and only when the binlog is known to contain all history. | initial | String

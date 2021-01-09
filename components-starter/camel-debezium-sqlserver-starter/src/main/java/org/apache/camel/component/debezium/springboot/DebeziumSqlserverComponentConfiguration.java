@@ -285,6 +285,12 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Integer maxQueueSize = 8192;
     /**
+     * Maximum size of the queue in bytes for change events read from the
+     * database log but not yet recorded or forwarded. Defaults to 0. Mean the
+     * feature is not enabled
+     */
+    private Long maxQueueSizeInBytes = 0L;
+    /**
      * A semicolon-separated list of expressions that match fully-qualified
      * tables and column(s) to be used as message key. Each expression must
      * match the pattern ':',where the table names could be defined as
@@ -336,6 +342,11 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Integer snapshotFetchSize;
     /**
+     * this setting must be set to specify a list of tables/collections whose
+     * snapshot must be taken on creating or restarting the connector.
+     */
+    private String snapshotIncludeCollectionList;
+    /**
      * Controls which transaction isolation level is used and how long the
      * connector locks the monitored tables. The default is 'repeatable_read',
      * which means that repeatable read isolation level is used. In addition,
@@ -359,6 +370,11 @@ public class DebeziumSqlserverComponentConfiguration
      * will be aborted. Defaults to 10 seconds. The option is a long type.
      */
     private Long snapshotLockTimeoutMs = 10000L;
+    /**
+     * The maximum number of threads used to perform the snapshot. Defaults to
+     * 1.
+     */
+    private Integer snapshotMaxThreads = 1;
     /**
      * The criteria for running a snapshot upon startup of the connector.
      * Options include: 'initial' (the default) to specify the connector should
@@ -783,6 +799,14 @@ public class DebeziumSqlserverComponentConfiguration
         this.maxQueueSize = maxQueueSize;
     }
 
+    public Long getMaxQueueSizeInBytes() {
+        return maxQueueSizeInBytes;
+    }
+
+    public void setMaxQueueSizeInBytes(Long maxQueueSizeInBytes) {
+        this.maxQueueSizeInBytes = maxQueueSizeInBytes;
+    }
+
     public String getMessageKeyColumns() {
         return messageKeyColumns;
     }
@@ -856,6 +880,15 @@ public class DebeziumSqlserverComponentConfiguration
         this.snapshotFetchSize = snapshotFetchSize;
     }
 
+    public String getSnapshotIncludeCollectionList() {
+        return snapshotIncludeCollectionList;
+    }
+
+    public void setSnapshotIncludeCollectionList(
+            String snapshotIncludeCollectionList) {
+        this.snapshotIncludeCollectionList = snapshotIncludeCollectionList;
+    }
+
     public String getSnapshotIsolationMode() {
         return snapshotIsolationMode;
     }
@@ -870,6 +903,14 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setSnapshotLockTimeoutMs(Long snapshotLockTimeoutMs) {
         this.snapshotLockTimeoutMs = snapshotLockTimeoutMs;
+    }
+
+    public Integer getSnapshotMaxThreads() {
+        return snapshotMaxThreads;
+    }
+
+    public void setSnapshotMaxThreads(Integer snapshotMaxThreads) {
+        this.snapshotMaxThreads = snapshotMaxThreads;
     }
 
     public String getSnapshotMode() {
