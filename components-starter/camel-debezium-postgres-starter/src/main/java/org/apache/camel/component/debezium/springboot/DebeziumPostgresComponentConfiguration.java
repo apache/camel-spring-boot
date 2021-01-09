@@ -318,6 +318,12 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Integer maxQueueSize = 8192;
     /**
+     * Maximum size of the queue in bytes for change events read from the
+     * database log but not yet recorded or forwarded. Defaults to 0. Mean the
+     * feature is not enabled
+     */
+    private Long maxQueueSizeInBytes = 0L;
+    /**
      * A semicolon-separated list of expressions that match fully-qualified
      * tables and column(s) to be used as message key. Each expression must
      * match the pattern ':',where the table names could be defined as
@@ -331,8 +337,9 @@ public class DebeziumPostgresComponentConfiguration
     private String messageKeyColumns;
     /**
      * The name of the Postgres logical decoding plugin installed on the server.
-     * Supported values are 'decoderbufs' and 'wal2json'. Defaults to
-     * 'decoderbufs'.
+     * Supported values are 'decoderbufs', 'wal2json', 'pgoutput',
+     * 'wal2json_streaming', 'wal2json_rds' and 'wal2json_rds_streaming'.
+     * Defaults to 'decoderbufs'.
      */
     private String pluginName = "decoderbufs";
     /**
@@ -463,11 +470,21 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Integer snapshotFetchSize;
     /**
+     * this setting must be set to specify a list of tables/collections whose
+     * snapshot must be taken on creating or restarting the connector.
+     */
+    private String snapshotIncludeCollectionList;
+    /**
      * The maximum number of millis to wait for table locks at the beginning of
      * a snapshot. If locks cannot be acquired in this time frame, the snapshot
      * will be aborted. Defaults to 10 seconds. The option is a long type.
      */
     private Long snapshotLockTimeoutMs = 10000L;
+    /**
+     * The maximum number of threads used to perform the snapshot. Defaults to
+     * 1.
+     */
+    private Integer snapshotMaxThreads = 1;
     /**
      * The criteria for running a snapshot upon startup of the connector.
      * Options include: 'always' to specify that the connector run a snapshot
@@ -953,6 +970,14 @@ public class DebeziumPostgresComponentConfiguration
         this.maxQueueSize = maxQueueSize;
     }
 
+    public Long getMaxQueueSizeInBytes() {
+        return maxQueueSizeInBytes;
+    }
+
+    public void setMaxQueueSizeInBytes(Long maxQueueSizeInBytes) {
+        this.maxQueueSizeInBytes = maxQueueSizeInBytes;
+    }
+
     public String getMessageKeyColumns() {
         return messageKeyColumns;
     }
@@ -1138,12 +1163,29 @@ public class DebeziumPostgresComponentConfiguration
         this.snapshotFetchSize = snapshotFetchSize;
     }
 
+    public String getSnapshotIncludeCollectionList() {
+        return snapshotIncludeCollectionList;
+    }
+
+    public void setSnapshotIncludeCollectionList(
+            String snapshotIncludeCollectionList) {
+        this.snapshotIncludeCollectionList = snapshotIncludeCollectionList;
+    }
+
     public Long getSnapshotLockTimeoutMs() {
         return snapshotLockTimeoutMs;
     }
 
     public void setSnapshotLockTimeoutMs(Long snapshotLockTimeoutMs) {
         this.snapshotLockTimeoutMs = snapshotLockTimeoutMs;
+    }
+
+    public Integer getSnapshotMaxThreads() {
+        return snapshotMaxThreads;
+    }
+
+    public void setSnapshotMaxThreads(Integer snapshotMaxThreads) {
+        this.snapshotMaxThreads = snapshotMaxThreads;
     }
 
     public String getSnapshotMode() {

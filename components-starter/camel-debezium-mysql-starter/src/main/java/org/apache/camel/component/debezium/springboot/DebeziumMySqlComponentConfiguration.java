@@ -462,6 +462,12 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Long snapshotDelayMs = 0L;
     /**
+     * Whether or not to mark snapshot events as normal inserts (op 'c'). If
+     * disabled, the standard functionality of emitting these records as reads
+     * (op 'r') will be used.
+     */
+    private Boolean snapshotEventsAsInserts = true;
+    /**
      * The maximum number of records that should be loaded into memory while
      * performing a snapshot
      */
@@ -1115,6 +1121,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setSnapshotDelayMs(Long snapshotDelayMs) {
         this.snapshotDelayMs = snapshotDelayMs;
+    }
+
+    public Boolean getSnapshotEventsAsInserts() {
+        return snapshotEventsAsInserts;
+    }
+
+    public void setSnapshotEventsAsInserts(Boolean snapshotEventsAsInserts) {
+        this.snapshotEventsAsInserts = snapshotEventsAsInserts;
     }
 
     public Integer getSnapshotFetchSize() {
