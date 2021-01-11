@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 342 in 274 JAR artifacts (3 deprecated)
+Number of Camel components: 341 in 274 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -578,8 +578,6 @@ Number of Camel components: 342 in 274 JAR artifacts (3 deprecated)
 | xref:latest@components::sftp-component.adoc[SFTP] | camel-ftp-starter | Stable | 1.1 | Upload and download files to/from SFTP servers.
 
 | xref:latest@components::sjms-component.adoc[Simple JMS] | camel-sjms-starter | Stable | 2.11 | Send and receive messages to/from a JMS Queue or Topic using plain JMS 1.x API.
-
-| xref:latest@components::sjms-batch-component.adoc[Simple JMS Batch] | camel-sjms-starter | Stable | 2.16 | Highly performant and transactional batch consumption of messages from a JMS queue.
 
 | xref:latest@components::sjms2-component.adoc[Simple JMS2] | camel-sjms2-starter | Stable | 2.19 | Send and receive messages to/from a JMS Queue or Topic using plain JMS 2.x API.
 
