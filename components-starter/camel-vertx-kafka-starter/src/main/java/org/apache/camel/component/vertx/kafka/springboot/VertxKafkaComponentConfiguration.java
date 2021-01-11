@@ -182,6 +182,21 @@ public class VertxKafkaComponentConfiguration
      */
     private Integer sendBufferBytes = 131072;
     /**
+     * The maximum amount of time the client will wait for the socket connection
+     * to be established. The connection setup timeout will increase
+     * exponentially for each consecutive connection failure up to this maximum.
+     * To avoid connection storms, a randomization factor of 0.2 will be applied
+     * to the timeout resulting in a random range between 20% below and 20%
+     * above the computed value. The option is a long type.
+     */
+    private Long socketConnectionSetupTimeoutMaxMs = 127000L;
+    /**
+     * The amount of time the client will wait for the socket connection to be
+     * established. If the connection is not built before the timeout elapses,
+     * clients will close the socket channel. The option is a long type.
+     */
+    private Long socketConnectionSetupTimeoutMs = 10000L;
+    /**
      * Allow automatic topic creation on the broker when subscribing to or
      * assigning a topic. A topic being subscribed to will be automatically
      * created only if the broker allows for it using auto.create.topics.enable
@@ -502,11 +517,16 @@ public class VertxKafkaComponentConfiguration
      */
     private Long lingerMs = 0L;
     /**
-     * The configuration controls how long KafkaProducer.send() and
-     * KafkaProducer.partitionsFor() will block.These methods can be blocked
-     * either because the buffer is full or metadata unavailable.Blocking in the
-     * user-supplied serializers or partitioner will not be counted against this
-     * timeout. The option is a long type.
+     * The configuration controls how long the KafkaProducer's send(),
+     * partitionsFor(), initTransactions(), sendOffsetsToTransaction(),
+     * commitTransaction() and abortTransaction() methods will block. For send()
+     * this timeout bounds the total time waiting for both metadata fetch and
+     * buffer allocation (blocking in the user-supplied serializers or
+     * partitioner is not counted against this timeout). For partitionsFor()
+     * this timeout bounds the time spent waiting for metadata if it is
+     * unavailable. The transaction-related methods always block, but may
+     * timeout if the transaction coordinator could not be discovered or did not
+     * respond within the timeout. The option is a long type.
      */
     private Long maxBlockMs = 60000L;
     /**
@@ -574,7 +594,7 @@ public class VertxKafkaComponentConfiguration
      * wait for a transaction status update from the producer before proactively
      * aborting the ongoing transaction.If this value is larger than the
      * transaction.max.timeout.ms setting in the broker, the request will fail
-     * with a InvalidTransactionTimeout error. The option is a int type.
+     * with a InvalidTxnTimeoutException error. The option is a int type.
      */
     private Integer transactionTimeoutMs = 60000;
     /**
@@ -739,10 +759,23 @@ public class VertxKafkaComponentConfiguration
      */
     private String sslKeymanagerAlgorithm = "SunX509";
     /**
-     * The password of the private key in the key store file. This is optional
-     * for client.
+     * The password of the private key in the key store file orthe PEM key
+     * specified in ssl.keystore.key'. This is required for clients only if
+     * two-way authentication is configured.
      */
     private String sslKeyPassword;
+    /**
+     * Certificate chain in the format specified by 'ssl.keystore.type'. Default
+     * SSL engine factory supports only PEM format with a list of X.509
+     * certificates
+     */
+    private String sslKeystoreCertificateChain;
+    /**
+     * Private key in the format specified by 'ssl.keystore.type'. Default SSL
+     * engine factory supports only PEM format with PKCS#8 keys. If the key is
+     * encrypted, key password must be specified using 'ssl.key.password'
+     */
+    private String sslKeystoreKey;
     /**
      * The location of the key store file. This is optional for client and can
      * be used for two-way authentication for client.
@@ -750,7 +783,8 @@ public class VertxKafkaComponentConfiguration
     private String sslKeystoreLocation;
     /**
      * The store password for the key store file. This is optional for client
-     * and only needed if ssl.keystore.location is configured.
+     * and only needed if 'ssl.keystore.location' is configured. Key store
+     * password is not supported for PEM format.
      */
     private String sslKeystorePassword;
     /**
@@ -787,12 +821,19 @@ public class VertxKafkaComponentConfiguration
      */
     private String sslTrustmanagerAlgorithm = "PKIX";
     /**
+     * Trusted certificates in the format specified by 'ssl.truststore.type'.
+     * Default SSL engine factory supports only PEM format with X.509
+     * certificates.
+     */
+    private String sslTruststoreCertificates;
+    /**
      * The location of the trust store file.
      */
     private String sslTruststoreLocation;
     /**
-     * The password for the trust store file. If a password is not set access to
-     * the truststore is still available, but integrity checking is disabled.
+     * The password for the trust store file. If a password is not set, trust
+     * store file configured will still be used, but integrity checking is
+     * disabled. Trust store password is not supported for PEM format.
      */
     private String sslTruststorePassword;
     /**
@@ -959,6 +1000,24 @@ public class VertxKafkaComponentConfiguration
 
     public void setSendBufferBytes(Integer sendBufferBytes) {
         this.sendBufferBytes = sendBufferBytes;
+    }
+
+    public Long getSocketConnectionSetupTimeoutMaxMs() {
+        return socketConnectionSetupTimeoutMaxMs;
+    }
+
+    public void setSocketConnectionSetupTimeoutMaxMs(
+            Long socketConnectionSetupTimeoutMaxMs) {
+        this.socketConnectionSetupTimeoutMaxMs = socketConnectionSetupTimeoutMaxMs;
+    }
+
+    public Long getSocketConnectionSetupTimeoutMs() {
+        return socketConnectionSetupTimeoutMs;
+    }
+
+    public void setSocketConnectionSetupTimeoutMs(
+            Long socketConnectionSetupTimeoutMs) {
+        this.socketConnectionSetupTimeoutMs = socketConnectionSetupTimeoutMs;
     }
 
     public Boolean getAllowAutoCreateTopics() {
@@ -1517,6 +1576,23 @@ public class VertxKafkaComponentConfiguration
         this.sslKeyPassword = sslKeyPassword;
     }
 
+    public String getSslKeystoreCertificateChain() {
+        return sslKeystoreCertificateChain;
+    }
+
+    public void setSslKeystoreCertificateChain(
+            String sslKeystoreCertificateChain) {
+        this.sslKeystoreCertificateChain = sslKeystoreCertificateChain;
+    }
+
+    public String getSslKeystoreKey() {
+        return sslKeystoreKey;
+    }
+
+    public void setSslKeystoreKey(String sslKeystoreKey) {
+        this.sslKeystoreKey = sslKeystoreKey;
+    }
+
     public String getSslKeystoreLocation() {
         return sslKeystoreLocation;
     }
@@ -1572,6 +1648,14 @@ public class VertxKafkaComponentConfiguration
 
     public void setSslTrustmanagerAlgorithm(String sslTrustmanagerAlgorithm) {
         this.sslTrustmanagerAlgorithm = sslTrustmanagerAlgorithm;
+    }
+
+    public String getSslTruststoreCertificates() {
+        return sslTruststoreCertificates;
+    }
+
+    public void setSslTruststoreCertificates(String sslTruststoreCertificates) {
+        this.sslTruststoreCertificates = sslTruststoreCertificates;
     }
 
     public String getSslTruststoreLocation() {
