@@ -1,0 +1,50 @@
+// spring-boot-auto-configure options: START
+:page-partial:
+:doctitle: Camel Spring Boot Starter for spring-rabbitmq
+
+== Spring Boot Auto-Configuration
+
+When using spring-rabbitmq with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-spring-rabbitmq-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 20 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.component.spring-rabbitmq.amqp-admin* | Optional AMQP Admin service to use for auto declaring elements (queues, exchanges, bindings). The option is a org.springframework.amqp.core.AmqpAdmin type. |  | AmqpAdmin
+| *camel.component.spring-rabbitmq.auto-declare* | Specifies whether the consumer should auto declare binding between exchange, queue and routing key when starting. | true | Boolean
+| *camel.component.spring-rabbitmq.auto-startup* | Specifies whether the consumer container should auto-startup. | true | Boolean
+| *camel.component.spring-rabbitmq.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
+| *camel.component.spring-rabbitmq.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
+| *camel.component.spring-rabbitmq.connection-factory* | The connection factory to be use. A connection factory must be configured either on the component or endpoint. The option is a org.springframework.amqp.rabbit.connection.ConnectionFactory type. |  | ConnectionFactory
+| *camel.component.spring-rabbitmq.dead-letter-exchange* | The name of the dead letter exchange |  | String
+| *camel.component.spring-rabbitmq.dead-letter-exchange-type* | The type of the dead letter exchange | direct | String
+| *camel.component.spring-rabbitmq.dead-letter-queue* | The name of the dead letter queue |  | String
+| *camel.component.spring-rabbitmq.dead-letter-routing-key* | The routing key for the dead letter exchange |  | String
+| *camel.component.spring-rabbitmq.enabled* | Whether to enable auto configuration of the spring-rabbitmq component. This is enabled by default. |  | Boolean
+| *camel.component.spring-rabbitmq.error-handler* | To use a custom ErrorHandler for handling exceptions from the message listener (consumer). The option is a org.springframework.util.ErrorHandler type. |  | ErrorHandler
+| *camel.component.spring-rabbitmq.header-filter-strategy* | To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type. |  | HeaderFilterStrategy
+| *camel.component.spring-rabbitmq.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.spring-rabbitmq.listener-container-factory* | To use a custom factory for creating and configuring ListenerContainer to be used by the consumer for receiving messages. The option is a org.apache.camel.component.springrabbit.ListenerContainerFactory type. |  | ListenerContainerFactory
+| *camel.component.spring-rabbitmq.message-converter* | To use a custom MessageConverter so you can be in control how to map to/from a org.springframework.amqp.core.Message. The option is a org.springframework.amqp.support.converter.MessageConverter type. |  | MessageConverter
+| *camel.component.spring-rabbitmq.message-properties-converter* | To use a custom MessagePropertiesConverter so you can be in control how to map to/from a org.springframework.amqp.core.MessageProperties. The option is a org.apache.camel.component.springrabbit.MessagePropertiesConverter type. |  | MessagePropertiesConverter
+| *camel.component.spring-rabbitmq.prefetch-count* | Tell the broker how many messages to send to each consumer in a single request. Often this can be set quite high to improve throughput. | 250 | Integer
+| *camel.component.spring-rabbitmq.shutdown-timeout* | The time to wait for workers in milliseconds after the container is stopped. If any workers are active when the shutdown signal comes they will be allowed to finish processing as long as they can finish within this timeout. The option is a long type. | 5000 | Long
+| *camel.component.spring-rabbitmq.test-connection-on-startup* | Specifies whether to test the connection on startup. This ensures that when Camel starts that all the JMS consumers have a valid connection to the JMS broker. If a connection cannot be granted then Camel throws an exception on startup. This ensures that Camel is not started with failed connections. The JMS producers is tested as well. | false | Boolean
+|===
+
+
+// spring-boot-auto-configure options: END
