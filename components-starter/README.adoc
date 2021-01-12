@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 341 in 274 JAR artifacts (3 deprecated)
+Number of Camel components: 342 in 275 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -604,6 +604,8 @@ Number of Camel components: 341 in 274 JAR artifacts (3 deprecated)
 | xref:latest@components::spring-integration-component.adoc[Spring Integration] | camel-spring-integration-starter | Stable | 1.4 | Bridge Camel with Spring Integration.
 
 | xref:latest@components::spring-ldap-component.adoc[Spring LDAP] | camel-spring-ldap-starter | Stable | 2.11 | Perform searches in LDAP servers using filters as the message payload.
+
+| xref:latest@components::spring-rabbitmq-component.adoc[Spring RabbitMQ] | camel-spring-rabbitmq-starter | Preview | 3.8 | Send and receive messages from RabbitMQ using Spring RabbitMQ client.
 
 | xref:latest@components::spring-redis-component.adoc[Spring Redis] | camel-spring-redis-starter | Stable | 2.11 | Send and receive messages from Redis.
 
