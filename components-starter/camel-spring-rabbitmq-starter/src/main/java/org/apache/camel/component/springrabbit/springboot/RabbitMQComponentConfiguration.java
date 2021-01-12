@@ -142,6 +142,10 @@ public class RabbitMQComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Switch on ignore exceptions such as mismatched properties when declaring
+     */
+    private Boolean ignoreDeclarationExceptions = false;
+    /**
      * To use a custom MessageConverter so you can be in control how to map
      * to/from a org.springframework.amqp.core.Message. The option is a
      * org.springframework.amqp.support.converter.MessageConverter type.
@@ -288,6 +292,15 @@ public class RabbitMQComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getIgnoreDeclarationExceptions() {
+        return ignoreDeclarationExceptions;
+    }
+
+    public void setIgnoreDeclarationExceptions(
+            Boolean ignoreDeclarationExceptions) {
+        this.ignoreDeclarationExceptions = ignoreDeclarationExceptions;
     }
 
     public MessageConverter getMessageConverter() {
