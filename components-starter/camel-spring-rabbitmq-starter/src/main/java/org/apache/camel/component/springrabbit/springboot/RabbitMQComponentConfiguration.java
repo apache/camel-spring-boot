@@ -65,9 +65,11 @@ public class RabbitMQComponentConfiguration
     private Boolean testConnectionOnStartup = false;
     /**
      * Specifies whether the consumer should auto declare binding between
-     * exchange, queue and routing key when starting.
+     * exchange, queue and routing key when starting. Enabling this can be good
+     * for development to make it easy to standup exchanges, queues and bindings
+     * on the broker.
      */
-    private Boolean autoDeclare = true;
+    private Boolean autoDeclare = false;
     /**
      * Specifies whether the consumer container should auto-startup.
      */
