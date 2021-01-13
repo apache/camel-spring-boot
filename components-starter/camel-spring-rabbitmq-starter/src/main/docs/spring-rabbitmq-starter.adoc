@@ -46,4 +46,6 @@ The component supports 21 options, which are listed below.
 | *camel.component.spring-rabbitmq.shutdown-timeout* | The time to wait for workers in milliseconds after the container is stopped. If any workers are active when the shutdown signal comes they will be allowed to finish processing as long as they can finish within this timeout. The option is a long type. | 5000 | Long
 | *camel.component.spring-rabbitmq.test-connection-on-startup* | Specifies whether to test the connection on startup. This ensures that when Camel starts that all the JMS consumers have a valid connection to the JMS broker. If a connection cannot be granted then Camel throws an exception on startup. This ensures that Camel is not started with failed connections. The JMS producers is tested as well. | false | Boolean
 |===
+
+
 // spring-boot-auto-configure options: END

@@ -19,7 +19,7 @@ package org.apache.camel.component.springrabbit.springboot;
 import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
-import org.apache.camel.component.springrabbit.RabbitMQComponent;
+import org.apache.camel.component.springrabbit.SpringRabbitMQComponent;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
@@ -44,26 +44,26 @@ import org.springframework.context.annotation.Lazy;
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,RabbitMQComponentConfiguration.class})
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,SpringRabbitMQComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.spring-rabbitmq"})
-public class RabbitMQComponentAutoConfiguration {
+public class SpringRabbitMQComponentAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private RabbitMQComponentConfiguration configuration;
+    private SpringRabbitMQComponentConfiguration configuration;
 
-    public RabbitMQComponentAutoConfiguration(
+    public SpringRabbitMQComponentAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
         ApplicationConversionService acs = (ApplicationConversionService) ApplicationConversionService.getSharedInstance();
-        acs.addConverter(new RabbitMQComponentConverter(camelContext));
+        acs.addConverter(new SpringRabbitMQComponentConverter(camelContext));
     }
 
     @Lazy
     @Bean
-    public ComponentCustomizer configureRabbitMQComponent() {
+    public ComponentCustomizer configureSpringRabbitMQComponent() {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
@@ -75,7 +75,7 @@ public class RabbitMQComponentAutoConfiguration {
                         applicationContext,
                         "camel.component.customizer",
                         "camel.component.spring-rabbitmq.customizer")
-                    && target instanceof RabbitMQComponent;
+                    && target instanceof SpringRabbitMQComponent;
             }
         };
     }

@@ -16,4 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.springrabbit.springboot.RabbitMQComponentAutoConfiguration
+org.apache.camel.component.springrabbit.springboot.SpringRabbitMQComponentAutoConfiguration

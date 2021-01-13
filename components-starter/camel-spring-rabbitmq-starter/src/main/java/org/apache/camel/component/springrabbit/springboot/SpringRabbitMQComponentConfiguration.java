@@ -34,7 +34,7 @@ import org.springframework.util.ErrorHandler;
  */
 @Generated("org.apache.camel.springboot.maven.SpringBootAutoConfigurationMojo")
 @ConfigurationProperties(prefix = "camel.component.spring-rabbitmq")
-public class RabbitMQComponentConfiguration
+public class SpringRabbitMQComponentConfiguration
         extends
             ComponentConfigurationPropertiesCommon {
 
