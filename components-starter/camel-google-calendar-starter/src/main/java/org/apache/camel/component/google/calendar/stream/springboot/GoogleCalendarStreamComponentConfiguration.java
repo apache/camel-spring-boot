@@ -90,6 +90,11 @@ public class GoogleCalendarStreamComponentConfiguration
      */
     private List<String> scopes;
     /**
+     * Sync events, see https://developers.google.com/calendar/v3/sync Note: not
+     * compatible with: 'query' and 'considerLastUpdate' parameters
+     */
+    private Boolean syncFlow = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -212,6 +217,14 @@ public class GoogleCalendarStreamComponentConfiguration
 
     public void setScopes(List<String> scopes) {
         this.scopes = scopes;
+    }
+
+    public Boolean getSyncFlow() {
+        return syncFlow;
+    }
+
+    public void setSyncFlow(Boolean syncFlow) {
+        this.syncFlow = syncFlow;
     }
 
     public Boolean getAutowiredEnabled() {

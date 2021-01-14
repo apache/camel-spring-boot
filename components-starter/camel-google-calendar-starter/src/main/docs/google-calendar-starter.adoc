@@ -17,7 +17,7 @@ When using google-calendar with Spring Boot make sure to use the following Maven
 ----
 
 
-The component supports 34 options, which are listed below.
+The component supports 35 options, which are listed below.
 
 
 
@@ -42,6 +42,7 @@ The component supports 34 options, which are listed below.
 | *camel.component.google-calendar-stream.query* | The query to execute on calendar |  | String
 | *camel.component.google-calendar-stream.refresh-token* | OAuth 2 refresh token. Using this, the Google Calendar component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived. |  | String
 | *camel.component.google-calendar-stream.scopes* | Specifies the level of permissions you want a calendar application to have to a user account. See \https://developers.google.com/calendar/auth for more info. |  | List
+| *camel.component.google-calendar-stream.sync-flow* | Sync events, see \https://developers.google.com/calendar/v3/sync Note: not compatible with: 'query' and 'considerLastUpdate' parameters | false | Boolean
 | *camel.component.google-calendar-stream.user* | The email address of the user the application is trying to impersonate in the service account flow. |  | String
 | *camel.component.google-calendar.access-token* | OAuth 2 access token. This typically expires after an hour so refreshToken is recommended for long term usage. |  | String
 | *camel.component.google-calendar.application-name* | Google calendar application name. Example would be camel-google-calendar/1.0 |  | String
