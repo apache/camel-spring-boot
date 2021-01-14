@@ -540,6 +540,10 @@ public class KafkaComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Sets whether synchronous processing should be strictly used
+     */
+    private Boolean synchronous = false;
+    /**
      * URL of the Confluent Platform schema registry servers to use. The format
      * is host1:port1,host2:port2. This is known as schema.registry.url in the
      * Confluent Platform documentation. This option is only available in the
@@ -1254,6 +1258,14 @@ public class KafkaComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getSynchronous() {
+        return synchronous;
+    }
+
+    public void setSynchronous(Boolean synchronous) {
+        this.synchronous = synchronous;
     }
 
     public String getSchemaRegistryURL() {

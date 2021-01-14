@@ -17,7 +17,7 @@ When using kafka with Spring Boot make sure to use the following Maven dependenc
 ----
 
 
-The component supports 98 options, which are listed below.
+The component supports 99 options, which are listed below.
 
 
 
@@ -115,6 +115,7 @@ The component supports 98 options, which are listed below.
 | *camel.component.kafka.ssl-truststore-location* | The location of the trust store file. |  | String
 | *camel.component.kafka.ssl-truststore-password* | The password for the trust store file. |  | String
 | *camel.component.kafka.ssl-truststore-type* | The file format of the trust store file. Default value is JKS. | JKS | String
+| *camel.component.kafka.synchronous* | Sets whether synchronous processing should be strictly used | false | Boolean
 | *camel.component.kafka.topic-is-pattern* | Whether the topic is a pattern (regular expression). This can be used to subscribe to dynamic number of topics matching the pattern. | false | Boolean
 | *camel.component.kafka.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
 | *camel.component.kafka.value-deserializer* | Deserializer class for value that implements the Deserializer interface. | org.apache.kafka.common.serialization.StringDeserializer | String
