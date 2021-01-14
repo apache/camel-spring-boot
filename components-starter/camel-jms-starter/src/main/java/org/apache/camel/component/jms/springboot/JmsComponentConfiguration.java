@@ -642,6 +642,10 @@ public class JmsComponentConfiguration
      */
     private Long requestTimeoutCheckerInterval = 1000L;
     /**
+     * Sets whether synchronous processing should be strictly used
+     */
+    private Boolean synchronous = false;
+    /**
      * If enabled and you are using Request Reply messaging (InOut) and an
      * Exchange failed on the consumer side, then the caused Exception will be
      * send back in response as a javax.jms.ObjectMessage. If the client is
@@ -1406,6 +1410,14 @@ public class JmsComponentConfiguration
     public void setRequestTimeoutCheckerInterval(
             Long requestTimeoutCheckerInterval) {
         this.requestTimeoutCheckerInterval = requestTimeoutCheckerInterval;
+    }
+
+    public Boolean getSynchronous() {
+        return synchronous;
+    }
+
+    public void setSynchronous(Boolean synchronous) {
+        this.synchronous = synchronous;
     }
 
     public Boolean getTransferException() {
