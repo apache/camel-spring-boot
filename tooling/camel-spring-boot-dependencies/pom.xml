@@ -159,7 +159,7 @@
       <dependency>
         <groupId>io.methvin</groupId>
         <artifactId>directory-watcher</artifactId>
-        <version>0.11.0</version>
+        <version>0.12.0</version>
       </dependency>
       <dependency>
         <groupId>io.nessus</groupId>
@@ -1399,6 +1399,11 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-optaplanner-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-paho-mqtt5-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -3370,6 +3375,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-paho</artifactId>
+        <version>3.8.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-paho-mqtt5</artifactId>
         <version>3.8.0-SNAPSHOT</version>
       </dependency>
       <dependency>

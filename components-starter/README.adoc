@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 342 in 275 JAR artifacts (3 deprecated)
+Number of Camel components: 343 in 276 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -516,6 +516,8 @@ Number of Camel components: 342 in 275 JAR artifacts (3 deprecated)
 | xref:latest@components::optaplanner-component.adoc[OptaPlanner] | camel-optaplanner-starter | Stable | 2.13 | Solve planning problems with OptaPlanner.
 
 | xref:latest@components::paho-component.adoc[Paho] | camel-paho-starter | Stable | 2.16 | Communicate with MQTT message brokers using Eclipse Paho MQTT Client.
+
+| xref:latest@components::paho-mqtt5-component.adoc[Paho MQTT 5] | camel-paho-mqtt5-starter | Preview | 3.8 | Communicate with MQTT message brokers using Eclipse Paho MQTT v5 Client.
 
 | xref:latest@components::pdf-component.adoc[PDF] | camel-pdf-starter | Stable | 2.16 | Create, modify or extract content from PDF documents.
 
