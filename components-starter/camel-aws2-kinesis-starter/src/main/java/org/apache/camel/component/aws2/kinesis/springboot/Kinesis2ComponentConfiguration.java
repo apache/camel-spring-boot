@@ -58,6 +58,11 @@ public class Kinesis2ComponentConfiguration
      */
     private Kinesis2Configuration configuration;
     /**
+     * Set the need for overidding the endpoint. This option needs to be used in
+     * combination with uriEndpointOverride option
+     */
+    private Boolean overrideEndpoint = false;
+    /**
      * To define a proxy host when instantiating the Kinesis client
      */
     private String proxyHost;
@@ -80,6 +85,11 @@ public class Kinesis2ComponentConfiguration
      * If we want to trust all certificates in case of overriding the endpoint
      */
     private Boolean trustAllCertificates = false;
+    /**
+     * Set the overriding uri endpoint. This option needs to be used in
+     * combination with overrideEndpoint option
+     */
+    private String uriEndpointOverride;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -167,6 +177,14 @@ public class Kinesis2ComponentConfiguration
         this.configuration = configuration;
     }
 
+    public Boolean getOverrideEndpoint() {
+        return overrideEndpoint;
+    }
+
+    public void setOverrideEndpoint(Boolean overrideEndpoint) {
+        this.overrideEndpoint = overrideEndpoint;
+    }
+
     public String getProxyHost() {
         return proxyHost;
     }
@@ -205,6 +223,14 @@ public class Kinesis2ComponentConfiguration
 
     public void setTrustAllCertificates(Boolean trustAllCertificates) {
         this.trustAllCertificates = trustAllCertificates;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
     }
 
     public Boolean getBridgeErrorHandler() {
