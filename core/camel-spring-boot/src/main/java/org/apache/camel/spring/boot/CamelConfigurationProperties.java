@@ -704,9 +704,10 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * How long time to run the startup recorder.
      *
      * Use 0 (default) to stop the recorder after Camel has been started. Use -1 to keep the recorder running until
-     * Camel is being stopped. A positive value is to run the recorder for N seconds.
+     * the JVM is being stopped. A positive value is to run the recorder for N seconds.
      *
      * When the recorder is stopped then the recording is auto saved to disk
+     * (note: save to disk can be disabled by setting startupRecorderDir to false)
      */
     private long startupRecorderDuration;
 
