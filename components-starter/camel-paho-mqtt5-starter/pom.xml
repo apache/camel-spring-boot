@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-paho-mqtt5-starter</artifactId>
   <packaging>jar</packaging>
-  <name>&gt;Camel SB Starters :: Paho MQTT 5</name>
+  <name>Camel SB Starters :: Paho MQTT 5</name>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
