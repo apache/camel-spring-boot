@@ -92,7 +92,7 @@ When using spring-boot with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 159 options, which are listed below.
+The component supports 165 options, which are listed below.
 
 
 
@@ -200,6 +200,12 @@ The component supports 159 options, which are listed below.
 | *camel.springboot.shutdown-routes-in-reverse-order* | Sets whether routes should be shutdown in reverse or the same order as they where started. | true | Boolean
 | *camel.springboot.shutdown-suppress-logging-on-timeout* | Whether Camel should try to suppress logging during shutdown and timeout was triggered, meaning forced shutdown is happening. And during forced shutdown we want to avoid logging errors/warnings et all in the logs as a side-effect of the forced timeout. Notice the suppress is a best effort as there may still be some logs coming from 3rd party libraries and whatnot, which Camel cannot control. This option is default false. | false | Boolean
 | *camel.springboot.shutdown-timeout* | Timeout in seconds to graceful shutdown Camel. | 300 | Integer
+| *camel.springboot.startup-recorder* |  |  | String
+| *camel.springboot.startup-recorder-dir* |  |  | String
+| *camel.springboot.startup-recorder-duration* |  |  | Long
+| *camel.springboot.startup-recorder-max-depth* |  |  | Integer
+| *camel.springboot.startup-recorder-profile* |  |  | String
+| *camel.springboot.startup-recorder-recording* |  |  | Boolean
 | *camel.springboot.stream-caching-any-spool-rules* | Sets whether if just any of the org.apache.camel.spi.StreamCachingStrategy.SpoolRule rules returns true then shouldSpoolCache(long) returns true, to allow spooling to disk. If this option is false, then all the org.apache.camel.spi.StreamCachingStrategy.SpoolRule must return true. The default value is false which means that all the rules must return true. | false | Boolean
 | *camel.springboot.stream-caching-buffer-size* | Sets the stream caching buffer size to use when allocating in-memory buffers used for in-memory stream caches. The default size is 4096. | 0 | Integer
 | *camel.springboot.stream-caching-enabled* | Sets whether stream caching is enabled or not. Default is false. | false | Boolean

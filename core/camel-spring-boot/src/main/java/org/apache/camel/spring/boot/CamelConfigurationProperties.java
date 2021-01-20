@@ -666,6 +666,56 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      */
     private boolean lightweight;
 
+    /**
+     * To use startup recorder for capturing execution time during starting Camel. The recorder can be one of: false,
+     * logging, java-flight-recorder
+     *
+     * The default is false.
+     */
+    private String startupRecorder = "false";
+
+    /**
+     * To filter our sub steps at a maximum depth.
+     *
+     * Use -1 for no maximum. Use 0 for no sub steps. Use 1 for max 1 sub step, and so forth.
+     *
+     * The default is -1.
+     */
+    private int startupRecorderMaxDepth = -1;
+
+    /**
+     * To enable Java Flight Recorder to start a recording and automatic dump the recording to disk after startup is
+     * complete.
+     *
+     * This requires that camel-jfr is on the classpath.
+     *
+     * The default is true.
+     */
+    private boolean startupRecorderRecording = true;
+
+    /**
+     * To use a specific Java Flight Recorder profile configuration, such as default or profile.
+     *
+     * The default is default.
+     */
+    private String startupRecorderProfile = "default";
+
+    /**
+     * How long time to run the startup recorder.
+     *
+     * Use 0 (default) to stop the recorder after Camel has been started. Use -1 to keep the recorder running until
+     * Camel is being stopped. A positive value is to run the recorder for N seconds.
+     *
+     * When the recorder is stopped then the recording is auto saved to disk
+     */
+    private long startupRecorderDuration;
+
+    /**
+     * Directory to store the recording. By default the user home directory will be used. Use false to turn off saving
+     * recording to disk.
+     */
+    private String startupRecorderDir;
+
     // Getters & setters
     // -----------------
 
