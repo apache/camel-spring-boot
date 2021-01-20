@@ -58,6 +58,11 @@ public class KinesisFirehose2ComponentConfiguration
      */
     private KinesisFirehose2Configuration configuration;
     /**
+     * Set the need for overidding the endpoint. This option needs to be used in
+     * combination with uriEndpointOverride option
+     */
+    private Boolean overrideEndpoint = false;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -95,6 +100,11 @@ public class KinesisFirehose2ComponentConfiguration
      * If we want to trust all certificates in case of overriding the endpoint
      */
     private Boolean trustAllCertificates = false;
+    /**
+     * Set the overriding uri endpoint. This option needs to be used in
+     * combination with overrideEndpoint option
+     */
+    private String uriEndpointOverride;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -136,6 +146,14 @@ public class KinesisFirehose2ComponentConfiguration
 
     public void setConfiguration(KinesisFirehose2Configuration configuration) {
         this.configuration = configuration;
+    }
+
+    public Boolean getOverrideEndpoint() {
+        return overrideEndpoint;
+    }
+
+    public void setOverrideEndpoint(Boolean overrideEndpoint) {
+        this.overrideEndpoint = overrideEndpoint;
     }
 
     public Boolean getLazyStartProducer() {
@@ -192,6 +210,14 @@ public class KinesisFirehose2ComponentConfiguration
 
     public void setTrustAllCertificates(Boolean trustAllCertificates) {
         this.trustAllCertificates = trustAllCertificates;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
     }
 
     public Boolean getAutowiredEnabled() {
