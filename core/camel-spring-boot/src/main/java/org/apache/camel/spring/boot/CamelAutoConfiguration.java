@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
@@ -32,10 +33,13 @@ import org.apache.camel.main.DefaultConfigurationConfigurer;
 import org.apache.camel.main.RoutesCollector;
 import org.apache.camel.model.Model;
 import org.apache.camel.spi.BeanRepository;
+import org.apache.camel.spi.StartupStepRecorder;
 import org.apache.camel.spring.CamelBeanPostProcessor;
 import org.apache.camel.spring.spi.ApplicationContextBeanRepository;
 import org.apache.camel.spring.spi.XmlCamelContextConfigurer;
+import org.apache.camel.support.CamelContextHelper;
 import org.apache.camel.support.DefaultRegistry;
+import org.apache.camel.support.startup.LoggingStartupStepRecorder;
 import org.apache.camel.util.ObjectHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,6 +95,9 @@ public class CamelAutoConfiguration {
                                                 CamelContext camelContext,
                                                 CamelConfigurationProperties config) throws Exception {
 
+        // setup startup recorder before building context
+        configureStartupRecorder(camelContext, config);
+
         camelContext.build();
 
         // initialize properties component eager
@@ -138,6 +145,27 @@ public class CamelAutoConfiguration {
         DefaultConfigurationConfigurer.afterPropertiesSet(camelContext);
 
         return camelContext;
+    }
+
+    static void configureStartupRecorder(CamelContext camelContext, CamelConfigurationProperties config) {
+        if ("false".equals(config.getStartupRecorder())) {
+            camelContext.adapt(ExtendedCamelContext.class).getStartupStepRecorder().setEnabled(false);
+        } else if ("logging".equals(config.getStartupRecorder())) {
+            camelContext.adapt(ExtendedCamelContext.class).setStartupStepRecorder(new LoggingStartupStepRecorder());
+        } else if ("java-flight-recorder".equals(config.getStartupRecorder())
+                || config.getStartupRecorder() == null) {
+            // try to auto discover camel-jfr to use
+            StartupStepRecorder fr = camelContext.adapt(ExtendedCamelContext.class).getBootstrapFactoryFinder()
+                    .newInstance(StartupStepRecorder.FACTORY, StartupStepRecorder.class).orElse(null);
+            if (fr != null) {
+                LOG.debug("Discovered startup recorder: {} from classpath", fr);
+                fr.setRecording(config.isStartupRecorderRecording());
+                fr.setStartupRecorderDuration(config.getStartupRecorderDuration());
+                fr.setRecordingProfile(config.getStartupRecorderProfile());
+                fr.setMaxDepth(config.getStartupRecorderMaxDepth());
+                camelContext.adapt(ExtendedCamelContext.class).setStartupStepRecorder(fr);
+            }
+        }
     }
 
     @Bean
