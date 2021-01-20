@@ -855,7 +855,7 @@ Number of Camel languages: 19 in 13 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 26 in 26 JAR artifacts (2 deprecated)
+Number of miscellaneous extensions: 27 in 27 JAR artifacts (2 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -872,6 +872,8 @@ Number of miscellaneous extensions: 26 in 26 JAR artifacts (2 deprecated)
 | xref:latest@components:others:hystrix.adoc[Hystrix] | camel-hystrix-starter | Stable | 2.18 | *deprecated* Circuit Breaker EIP using Netflix Hystrix
 
 | xref:latest@components:others:jasypt.adoc[Jasypt] | camel-jasypt-starter | Stable | 2.5 | Security using Jasypt
+
+| xref:latest@components:others:jfr.adoc[Jfr] | camel-jfr-starter | Preview | 3.8 | Diagnose Camel applications with Java Flight Recorder
 
 | xref:latest@components:others:leveldb.adoc[LevelDB] | camel-leveldb-starter | Stable | 2.10 | Using LevelDB as persistent EIP store
 
