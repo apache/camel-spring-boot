@@ -67,11 +67,8 @@
         </mailingList>
     </mailingLists>
 
-    <prerequisites>
-        <maven>3.5.0</maven>
-    </prerequisites>
-
     <modules>
+        <module>parent</module>
         <module>tooling</module>
         <module>core</module>
         <module>components-starter</module>
@@ -167,38 +164,6 @@
             </releases>
         </pluginRepository>
     </pluginRepositories>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.apache.camel.springboot</groupId>
-                <artifactId>camel-core-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel.springboot</groupId>
-                <artifactId>camel-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel.springboot</groupId>
-                <artifactId>camel-spring-boot</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-parent</artifactId>
-                <version>${camel-version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${google-guava-version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <defaultGoal>install</defaultGoal>
