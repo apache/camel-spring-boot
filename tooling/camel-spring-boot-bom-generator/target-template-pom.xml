@@ -23,9 +23,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.apache.camel.springboot</groupId>
+    <parent>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>spring-boot</artifactId>
+        <version>${project.version}</version>
+        <relativePath>../../</relativePath>
+    </parent>
+
     <artifactId>camel-spring-boot-bom</artifactId>
-    <version>${project.version}</version>
     <packaging>pom</packaging>
     <name>Camel SB Tooling :: BOM</name>
     <description>Camel Spring-Boot BOM</description>
