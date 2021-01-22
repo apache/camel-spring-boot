@@ -183,6 +183,12 @@ public class SalesforceComponentConfiguration
      */
     private String packages;
     /**
+     * Query Locator provided by salesforce for use when a query results in more
+     * records than can be retrieved in a single call. Use this value in a
+     * subsequent call to retrieve additional records.
+     */
+    private String queryLocator;
+    /**
      * Use raw payload String for request and response (either JSON or XML
      * depending on format), instead of DTOs, false by default
      */
@@ -653,6 +659,14 @@ public class SalesforceComponentConfiguration
 
     public void setPackages(String packages) {
         this.packages = packages;
+    }
+
+    public String getQueryLocator() {
+        return queryLocator;
+    }
+
+    public void setQueryLocator(String queryLocator) {
+        this.queryLocator = queryLocator;
     }
 
     public Boolean getRawPayload() {
