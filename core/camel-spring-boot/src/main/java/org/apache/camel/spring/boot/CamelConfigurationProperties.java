@@ -18,7 +18,9 @@ package org.apache.camel.spring.boot;
 
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.ManagementStatisticsLevel;
+import org.apache.camel.StartupSummaryLevel;
 import org.apache.camel.main.DefaultConfigurationProperties;
+import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.springboot")
@@ -57,6 +59,11 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * Sets the name of the CamelContext.
      */
     private String name;
+
+    /**
+     * Controls the level of information logged during startup (and shutdown) of CamelContext.
+     */
+    private StartupSummaryLevel startupSummaryLevel = StartupSummaryLevel.Default;
 
     /**
      * Timeout in seconds to graceful shutdown Camel.
@@ -561,11 +568,11 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private String xmlRests = "classpath:camel-rest/*.xml";
 
     /**
-     * Sets the logging level used for logging route startup activity.
-     * By default INFO level is used. You can use this to change the level for example to OFF if
-     * this kind of logging is not wanted.
+     * Sets the logging level used for logging route activity (such as starting and stopping routes). The default
+     * logging level is DEBUG.
      */
-    private LoggingLevel routeControllerRouteStartupLoggingLevel;
+    @Deprecated
+    private LoggingLevel routeControllerLoggingLevel;
 
     /**
      * To enable using supervising route controller which allows Camel to startup

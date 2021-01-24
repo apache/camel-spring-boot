@@ -92,7 +92,7 @@ When using spring-boot with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 165 options, which are listed below.
+The component supports 166 options, which are listed below.
 
 
 
@@ -188,7 +188,6 @@ The component supports 165 options, which are listed below.
 | *camel.springboot.route-controller-exclude-routes* | Pattern for filtering routes to be included as supervised. The pattern is matching on route id, and endpoint uri for the route. Multiple patterns can be separated by comma. For example to include all kafka routes, you can say <tt>kafka:*</tt>. And to include routes with specific route ids <tt>myRoute,myOtherRoute</tt>. The pattern supports wildcards and uses the matcher from org.apache.camel.support.PatternHelper#matchPattern. |  | String
 | *camel.springboot.route-controller-include-routes* | Pattern for filtering routes to be excluded as supervised. The pattern is matching on route id, and endpoint uri for the route. Multiple patterns can be separated by comma. For example to exclude all JMS routes, you can say <tt>jms:*</tt>. And to exclude routes with specific route ids <tt>mySpecialRoute,myOtherSpecialRoute</tt>. The pattern supports wildcards and uses the matcher from org.apache.camel.support.PatternHelper#matchPattern. |  | String
 | *camel.springboot.route-controller-initial-delay* | Initial delay in milli seconds before the route controller starts, after CamelContext has been started. | 0 | Long
-| *camel.springboot.route-controller-route-startup-logging-level* | Sets the logging level used for logging route startup activity. By default INFO level is used. You can use this to change the level for example to OFF if this kind of logging is not wanted. |  | LoggingLevel
 | *camel.springboot.route-controller-supervise-enabled* | To enable using supervising route controller which allows Camel to startup and then the controller takes care of starting the routes in a safe manner. This can be used when you want to startup Camel despite a route may otherwise fail fast during startup and cause Camel to fail to startup as well. By delegating the route startup to the supervising route controller then it manages the startup using a background thread. The controller allows to be configured with various settings to attempt to restart failing routes. | false | Boolean
 | *camel.springboot.route-controller-thread-pool-size* | The number of threads used by the route controller scheduled thread pool that are used for restarting routes. The pool uses 1 thread by default, but you can increase this to allow the controller to concurrently attempt to restart multiple routes in case more than one route has problems starting. | 1 | Integer
 | *camel.springboot.route-controller-unhealthy-on-exhausted* | Whether to mark the route as unhealthy (down) when all restarting attempts (backoff) have failed and the route is not successfully started and the route manager is giving up. Setting this to true allows health checks to know about this and can report the Camel application as DOWN. The default is false. | false | Boolean
@@ -202,10 +201,11 @@ The component supports 165 options, which are listed below.
 | *camel.springboot.shutdown-timeout* | Timeout in seconds to graceful shutdown Camel. | 300 | Integer
 | *camel.springboot.startup-recorder* | To use startup recorder for capturing execution time during starting Camel. The recorder can be one of: false, logging, java-flight-recorder The default is false. | false | String
 | *camel.springboot.startup-recorder-dir* | Directory to store the recording. By default the user home directory will be used. Use false to turn off saving recording to disk. |  | String
-| *camel.springboot.startup-recorder-duration* | How long time to run the startup recorder. Use 0 (default) to stop the recorder after Camel has been started. Use -1 to keep the recorder running until the JVM is being stopped. A positive value is to run the recorder for N seconds. When the recorder is stopped then the recording is auto saved to disk (note: save to disk can be disabled by setting startupRecorderDir to false) | 0 | Long
+| *camel.springboot.startup-recorder-duration* | How long time to run the startup recorder. Use 0 (default) to keep the recorder running until the JVM is exited. Use -1 to stop the recorder right after Camel has been started (to only focus on potential Camel startup performance bottlenecks) Use a positive value to keep recording for N seconds. When the recorder is stopped then the recording is auto saved to disk (note: save to disk can be disabled by setting startupRecorderDir to false) | 0 | Long
 | *camel.springboot.startup-recorder-max-depth* | To filter our sub steps at a maximum depth. Use -1 for no maximum. Use 0 for no sub steps. Use 1 for max 1 sub step, and so forth. The default is -1. | -1 | Integer
 | *camel.springboot.startup-recorder-profile* | To use a specific Java Flight Recorder profile configuration, such as default or profile. The default is default. | default | String
 | *camel.springboot.startup-recorder-recording* | To enable Java Flight Recorder to start a recording and automatic dump the recording to disk after startup is complete. This requires that camel-jfr is on the classpath. The default is true. | true | Boolean
+| *camel.springboot.startup-summary-level* | Controls the level of information logged during startup (and shutdown) of CamelContext. |  | StartupSummaryLevel
 | *camel.springboot.stream-caching-any-spool-rules* | Sets whether if just any of the org.apache.camel.spi.StreamCachingStrategy.SpoolRule rules returns true then shouldSpoolCache(long) returns true, to allow spooling to disk. If this option is false, then all the org.apache.camel.spi.StreamCachingStrategy.SpoolRule must return true. The default value is false which means that all the rules must return true. | false | Boolean
 | *camel.springboot.stream-caching-buffer-size* | Sets the stream caching buffer size to use when allocating in-memory buffers used for in-memory stream caches. The default size is 4096. | 0 | Integer
 | *camel.springboot.stream-caching-enabled* | Sets whether stream caching is enabled or not. Default is false. | false | Boolean
@@ -264,6 +264,7 @@ The component supports 165 options, which are listed below.
 | *management.endpoint.camelroutes.enabled* | To turn on or off information about Camel Routes via actuator endpoint. | true | Boolean
 | *management.endpoint.camelroutes.read-only* | Whether Camel Routes actuator is in read-only mode. If not in read-only mode then operations to start/stop routes would be enabled. | true | Boolean
 | *management.info.camel.enabled* | Whether to enable Camel info. | true | Boolean
+| *camel.springboot.route-controller-logging-level* | *Deprecated* Sets the logging level used for logging route activity (such as starting and stopping routes). The default logging level is DEBUG. |  | LoggingLevel
 |===
 // spring-boot-auto-configure options: END
 
