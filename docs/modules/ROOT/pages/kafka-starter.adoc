@@ -17,7 +17,7 @@ When using kafka with Spring Boot make sure to use the following Maven dependenc
 ----
 
 
-The component supports 99 options, which are listed below.
+The component supports 100 options, which are listed below.
 
 
 
@@ -54,6 +54,7 @@ The component supports 99 options, which are listed below.
 | *camel.component.kafka.header-serializer* | To use a custom KafkaHeaderSerializer to serialize kafka headers values. The option is a org.apache.camel.component.kafka.serde.KafkaHeaderSerializer type. |  | KafkaHeaderSerializer
 | *camel.component.kafka.heartbeat-interval-ms* | The expected time between heartbeats to the consumer coordinator when using Kafka's group management facilities. Heartbeats are used to ensure that the consumer's session stays active and to facilitate rebalancing when new consumers join or leave the group. The value must be set lower than session.timeout.ms, but typically should be set no higher than 1/3 of that value. It can be adjusted even lower to control the expected time for normal rebalances. | 3000 | Integer
 | *camel.component.kafka.interceptor-classes* | Sets interceptors for producer or consumers. Producer interceptors have to be classes implementing org.apache.kafka.clients.producer.ProducerInterceptor Consumer interceptors have to be classes implementing org.apache.kafka.clients.consumer.ConsumerInterceptor Note that if you use Producer interceptor on a consumer it will throw a class cast exception in runtime |  | String
+| *camel.component.kafka.kafka-client-factory* | Factory to use for creating org.apache.kafka.clients.consumer.KafkaConsumer and org.apache.kafka.clients.producer.KafkaProducer instances. This allows to configure a custom factory to create org.apache.kafka.clients.consumer.KafkaConsumer and org.apache.kafka.clients.producer.KafkaProducer instances with logic that extends the vanilla Kafka clients. The option is a org.apache.camel.component.kafka.KafkaClientFactory type. |  | KafkaClientFactory
 | *camel.component.kafka.kafka-manual-commit-factory* | Factory to use for creating KafkaManualCommit instances. This allows to plugin a custom factory to create custom KafkaManualCommit instances in case special logic is needed when doing manual commits that deviates from the default implementation that comes out of the box. The option is a org.apache.camel.component.kafka.KafkaManualCommitFactory type. |  | KafkaManualCommitFactory
 | *camel.component.kafka.kerberos-before-relogin-min-time* | Login thread sleep time between refresh attempts. | 60000 | Integer
 | *camel.component.kafka.kerberos-init-cmd* | Kerberos kinit command path. Default is /usr/bin/kinit | /usr/bin/kinit | String

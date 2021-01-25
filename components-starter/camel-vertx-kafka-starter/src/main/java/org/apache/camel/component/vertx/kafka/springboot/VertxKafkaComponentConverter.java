@@ -43,6 +43,7 @@ public class VertxKafkaComponentConverter
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.vertx.kafka.configuration.VertxKafkaConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         answer.add(new ConvertiblePair(String.class, io.vertx.core.Vertx.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.vertx.kafka.VertxKafkaClientFactory.class));
         answer.add(new ConvertiblePair(String.class, io.vertx.core.VertxOptions.class));
         return answer;
     }
@@ -63,6 +64,7 @@ public class VertxKafkaComponentConverter
             case "org.apache.camel.component.vertx.kafka.configuration.VertxKafkaConfiguration": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.vertx.kafka.configuration.VertxKafkaConfiguration.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
             case "io.vertx.core.Vertx": return camelContext.getRegistry().lookupByNameAndType(ref, io.vertx.core.Vertx.class);
+            case "org.apache.camel.component.vertx.kafka.VertxKafkaClientFactory": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.vertx.kafka.VertxKafkaClientFactory.class);
             case "io.vertx.core.VertxOptions": return camelContext.getRegistry().lookupByNameAndType(ref, io.vertx.core.VertxOptions.class);
         }
         return null;

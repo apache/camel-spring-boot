@@ -17,7 +17,7 @@ When using vertx-kafka with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 104 options, which are listed below.
+The component supports 105 options, which are listed below.
 
 
 
@@ -127,6 +127,7 @@ The component supports 104 options, which are listed below.
 | *camel.component.vertx-kafka.value-deserializer* | Deserializer class for value that implements the org.apache.kafka.common.serialization.Deserializer interface. | org.apache.kafka.common.serialization.StringDeserializer | String
 | *camel.component.vertx-kafka.value-serializer* | Serializer class for value that implements the org.apache.kafka.common.serialization.Serializer interface. | org.apache.kafka.common.serialization.StringSerializer | String
 | *camel.component.vertx-kafka.vertx* | To use an existing vertx instead of creating a new instance. The option is a io.vertx.core.Vertx type. |  | Vertx
+| *camel.component.vertx-kafka.vertx-kafka-client-factory* | Factory to use for creating io.vertx.kafka.client.consumer.KafkaConsumer and io.vertx.kafka.client.consumer.KafkaProducer instances. This allows to configure a custom factory to create custom KafkaConsumer and KafkaProducer instances with logic that extends the vanilla VertX Kafka clients. The option is a org.apache.camel.component.vertx.kafka.VertxKafkaClientFactory type. |  | VertxKafkaClientFactory
 | *camel.component.vertx-kafka.vertx-options* | To provide a custom set of vertx options for configuring vertx. The option is a io.vertx.core.VertxOptions type. |  | VertxOptions
 |===
 // spring-boot-auto-configure options: END

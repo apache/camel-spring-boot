@@ -46,6 +46,7 @@ public class KafkaComponentConverter
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.KafkaManualCommitFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.serde.KafkaHeaderSerializer.class));
         answer.add(new ConvertiblePair(String.class, java.util.concurrent.ExecutorService.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.KafkaClientFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
     }
@@ -70,6 +71,7 @@ public class KafkaComponentConverter
             case "org.apache.camel.component.kafka.KafkaManualCommitFactory": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.kafka.KafkaManualCommitFactory.class);
             case "org.apache.camel.component.kafka.serde.KafkaHeaderSerializer": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.kafka.serde.KafkaHeaderSerializer.class);
             case "java.util.concurrent.ExecutorService": return camelContext.getRegistry().lookupByNameAndType(ref, java.util.concurrent.ExecutorService.class);
+            case "org.apache.camel.component.kafka.KafkaClientFactory": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.component.kafka.KafkaClientFactory.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return camelContext.getRegistry().lookupByNameAndType(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }
         return null;
