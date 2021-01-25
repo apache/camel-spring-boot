@@ -20,6 +20,7 @@ import java.util.Map;
 import javax.annotation.Generated;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
+import org.apache.camel.component.vertx.kafka.VertxKafkaClientFactory;
 import org.apache.camel.component.vertx.kafka.configuration.VertxKafkaConfiguration;
 import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -616,6 +617,15 @@ public class VertxKafkaComponentConfiguration
      * is a io.vertx.core.Vertx type.
      */
     private Vertx vertx;
+    /**
+     * Factory to use for creating io.vertx.kafka.client.consumer.KafkaConsumer
+     * and io.vertx.kafka.client.consumer.KafkaProducer instances. This allows
+     * to configure a custom factory to create custom KafkaConsumer and
+     * KafkaProducer instances with logic that extends the vanilla VertX Kafka
+     * clients. The option is a
+     * org.apache.camel.component.vertx.kafka.VertxKafkaClientFactory type.
+     */
+    private VertxKafkaClientFactory vertxKafkaClientFactory;
     /**
      * To provide a custom set of vertx options for configuring vertx. The
      * option is a io.vertx.core.VertxOptions type.
@@ -1380,6 +1390,15 @@ public class VertxKafkaComponentConfiguration
 
     public void setVertx(Vertx vertx) {
         this.vertx = vertx;
+    }
+
+    public VertxKafkaClientFactory getVertxKafkaClientFactory() {
+        return vertxKafkaClientFactory;
+    }
+
+    public void setVertxKafkaClientFactory(
+            VertxKafkaClientFactory vertxKafkaClientFactory) {
+        this.vertxKafkaClientFactory = vertxKafkaClientFactory;
     }
 
     public VertxOptions getVertxOptions() {

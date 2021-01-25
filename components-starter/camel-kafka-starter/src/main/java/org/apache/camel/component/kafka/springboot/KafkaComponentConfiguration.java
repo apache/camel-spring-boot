@@ -19,6 +19,7 @@ package org.apache.camel.component.kafka.springboot;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import javax.annotation.Generated;
+import org.apache.camel.component.kafka.KafkaClientFactory;
 import org.apache.camel.component.kafka.KafkaConfiguration;
 import org.apache.camel.component.kafka.KafkaManualCommitFactory;
 import org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer;
@@ -539,6 +540,17 @@ public class KafkaComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Factory to use for creating
+     * org.apache.kafka.clients.consumer.KafkaConsumer and
+     * org.apache.kafka.clients.producer.KafkaProducer instances. This allows to
+     * configure a custom factory to create
+     * org.apache.kafka.clients.consumer.KafkaConsumer and
+     * org.apache.kafka.clients.producer.KafkaProducer instances with logic that
+     * extends the vanilla Kafka clients. The option is a
+     * org.apache.camel.component.kafka.KafkaClientFactory type.
+     */
+    private KafkaClientFactory kafkaClientFactory;
     /**
      * Sets whether synchronous processing should be strictly used
      */
@@ -1258,6 +1270,14 @@ public class KafkaComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public KafkaClientFactory getKafkaClientFactory() {
+        return kafkaClientFactory;
+    }
+
+    public void setKafkaClientFactory(KafkaClientFactory kafkaClientFactory) {
+        this.kafkaClientFactory = kafkaClientFactory;
     }
 
     public Boolean getSynchronous() {
