@@ -374,6 +374,9 @@ public final class ArquillianPackager {
 
         // google grpc is a mix of all sort of different versions
         ignore.add("com.google.api.grpc");
+
+        // microsoft azure msal4j-persistence-extension library introduced by datalake component
+        ignore.add("com.microsoft.azure:msal4j-persistence-extension");
        
 
         Map<String, Map<String, String>> status = new TreeMap<>();

@@ -167,6 +167,7 @@
     <module>camel-azure-eventhubs-starter</module>
     <module>camel-azure-starter</module>
     <module>camel-azure-storage-blob-starter</module>
+    <module>camel-azure-storage-datalake-starter</module>
     <module>camel-azure-storage-queue-starter</module>
     <module>camel-barcode-starter</module>
     <module>camel-base64-starter</module>

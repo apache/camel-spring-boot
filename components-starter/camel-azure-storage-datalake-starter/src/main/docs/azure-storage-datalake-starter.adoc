@@ -1,0 +1,64 @@
+// spring-boot-auto-configure options: START
+:page-partial:
+:doctitle: Camel Spring Boot Starter for azure-storage-datalake
+
+== Spring Boot Auto-Configuration
+
+When using azure-storage-datalake with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-azure-storage-datalake-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 34 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.component.azure-storage-datalake.account-key* | account key for authentication |  | String
+| *camel.component.azure-storage-datalake.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
+| *camel.component.azure-storage-datalake.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
+| *camel.component.azure-storage-datalake.client-id* | client id for azure account |  | String
+| *camel.component.azure-storage-datalake.client-secret* | client secret for azure account |  | String
+| *camel.component.azure-storage-datalake.client-secret-credential* | client secret credential for authentication. The option is a com.azure.identity.ClientSecretCredential type. |  | ClientSecretCredential
+| *camel.component.azure-storage-datalake.close* | Whether or not a file changed event raised indicates completion (true) or modification (false) |  | Boolean
+| *camel.component.azure-storage-datalake.close-stream-after-read* | check for closing stream after read |  | Boolean
+| *camel.component.azure-storage-datalake.configuration* | configuration object for datalake. The option is a org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration type. |  | DataLakeConfiguration
+| *camel.component.azure-storage-datalake.data-count* | count number of bytes to download |  | Long
+| *camel.component.azure-storage-datalake.directory-name* | directory of the file to be handled in component |  | String
+| *camel.component.azure-storage-datalake.download-link-expiration* | download link expiration time |  | Long
+| *camel.component.azure-storage-datalake.enabled* | Whether to enable auto configuration of the azure-storage-datalake component. This is enabled by default. |  | Boolean
+| *camel.component.azure-storage-datalake.expression* | expression for queryInputStream |  | String
+| *camel.component.azure-storage-datalake.file-dir* | directory of file to do operations in the local system |  | String
+| *camel.component.azure-storage-datalake.file-name* | name of file to be handled in component |  | String
+| *camel.component.azure-storage-datalake.file-offset* | offset position in file for different operations |  | Long
+| *camel.component.azure-storage-datalake.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| *camel.component.azure-storage-datalake.max-results* | maximum number of results to show at a time |  | Integer
+| *camel.component.azure-storage-datalake.max-retry-requests* | no of retries to a given request |  | Integer
+| *camel.component.azure-storage-datalake.open-options* | set open options for creating file |  | Set
+| *camel.component.azure-storage-datalake.operation* | operation to be performed |  | DataLakeOperationsDefinition
+| *camel.component.azure-storage-datalake.path* | path in azure datalake for operations |  | String
+| *camel.component.azure-storage-datalake.permission* | permission string for the file |  | String
+| *camel.component.azure-storage-datalake.position* | This parameter allows the caller to upload data in parallel and control the order in which it is appended to the file. |  | Long
+| *camel.component.azure-storage-datalake.recursive* | recursively include all paths |  | Boolean
+| *camel.component.azure-storage-datalake.regex* | regular expression for matching file names |  | String
+| *camel.component.azure-storage-datalake.retain-uncommited-data* | Whether or not uncommitted data is to be retained after the operation |  | Boolean
+| *camel.component.azure-storage-datalake.service-client* | datalake service client for azure storage datalake. The option is a com.azure.storage.file.datalake.DataLakeServiceClient type. |  | DataLakeServiceClient
+| *camel.component.azure-storage-datalake.shared-key-credential* | shared key credential for azure datalake gen2. The option is a com.azure.storage.common.StorageSharedKeyCredential type. |  | StorageSharedKeyCredential
+| *camel.component.azure-storage-datalake.tenant-id* | tenant id for azure account |  | String
+| *camel.component.azure-storage-datalake.timeout* | Timeout for operation. The option is a java.time.Duration type. |  | Duration
+| *camel.component.azure-storage-datalake.umask* | umask permission for file |  | String
+| *camel.component.azure-storage-datalake.user-principal-name-returned* | whether or not to use upn |  | Boolean
+|===
+
+
+// spring-boot-auto-configure options: END
