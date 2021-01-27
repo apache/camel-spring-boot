@@ -24,7 +24,7 @@
     <artifactId>components-starter</artifactId>
     <version>3.8.0-SNAPSHOT</version>
   </parent>
-  <artifactId>camel-infinispan-starter</artifactId>
+  <artifactId>camel-infinispan-embedded-starter</artifactId>
   <packaging>jar</packaging>
   <!--    <name>Camel Spring Boot :: Starters :: Dozer</name>-->
   <!--    <description>Spring-Boot Starter for Camel Support for the Dozer type conversion framework</description>-->
@@ -36,7 +36,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-infinispan</artifactId>
+      <artifactId>camel-infinispan-embedded</artifactId>
       <version>${camel-version}</version>
     </dependency>
     <!--START OF GENERATED CODE-->

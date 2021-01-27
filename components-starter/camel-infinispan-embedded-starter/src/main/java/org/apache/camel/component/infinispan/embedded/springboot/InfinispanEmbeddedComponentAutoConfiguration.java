@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.infinispan.springboot;
+package org.apache.camel.component.infinispan.embedded.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
-import org.apache.camel.component.infinispan.InfinispanComponent;
+import org.apache.camel.component.infinispan.embedded.InfinispanEmbeddedComponent;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
@@ -44,26 +44,26 @@ import org.springframework.context.annotation.Lazy;
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,InfinispanComponentConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.infinispan"})
-public class InfinispanComponentAutoConfiguration {
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,InfinispanEmbeddedComponentConfiguration.class})
+@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.infinispan-embedded"})
+public class InfinispanEmbeddedComponentAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private InfinispanComponentConfiguration configuration;
+    private InfinispanEmbeddedComponentConfiguration configuration;
 
-    public InfinispanComponentAutoConfiguration(
+    public InfinispanEmbeddedComponentAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
         ApplicationConversionService acs = (ApplicationConversionService) ApplicationConversionService.getSharedInstance();
-        acs.addConverter(new InfinispanComponentConverter(camelContext));
+        acs.addConverter(new InfinispanEmbeddedComponentConverter(camelContext));
     }
 
     @Lazy
     @Bean
-    public ComponentCustomizer configureInfinispanComponent() {
+    public ComponentCustomizer configureInfinispanEmbeddedComponent() {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
@@ -74,8 +74,8 @@ public class InfinispanComponentAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.component.customizer",
-                        "camel.component.infinispan.customizer")
-                    && target instanceof InfinispanComponent;
+                        "camel.component.infinispan-embedded.customizer")
+                    && target instanceof InfinispanEmbeddedComponent;
             }
         };
     }
