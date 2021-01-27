@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 343 in 276 JAR artifacts (3 deprecated)
+Number of Camel components: 344 in 277 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -346,6 +346,8 @@ Number of Camel components: 343 in 276 JAR artifacts (3 deprecated)
 | xref:latest@components::ignite-set-component.adoc[Ignite Sets] | camel-ignite-starter | Stable | 2.17 | Interact with Ignite Set data structures.
 
 | xref:latest@components::infinispan-component.adoc[Infinispan] | camel-infinispan-starter | Stable | 2.13 | Read and write from/to Infinispan distributed key/value store and data grid.
+
+| xref:latest@components::infinispan-embedded-component.adoc[Infinispan Embedded] | camel-infinispan-embedded-starter | Stable | 2.13 | Read and write from/to Infinispan distributed key/value store and data grid.
 
 | xref:latest@components::influxdb-component.adoc[InfluxDB] | camel-influxdb-starter | Stable | 2.18 | Interact with InfluxDB, a time series database.
 

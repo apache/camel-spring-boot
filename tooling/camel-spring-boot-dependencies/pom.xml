@@ -1008,6 +1008,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-infinispan-embedded-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-infinispan-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2299,6 +2304,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-azure-storage-datalake</artifactId>
+        <version>3.8.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-azure-storage-queue</artifactId>
         <version>3.8.0-SNAPSHOT</version>
       </dependency>
@@ -2924,6 +2934,21 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-infinispan-common</artifactId>
+        <version>3.8.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-infinispan-embedded</artifactId>
+        <version>3.8.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-infinispan-parent</artifactId>
+        <version>3.8.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-influxdb</artifactId>
         <version>3.8.0-SNAPSHOT</version>
       </dependency>
@@ -3110,6 +3135,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-kafka</artifactId>
+        <version>3.8.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-kamelet</artifactId>
         <version>3.8.0-SNAPSHOT</version>
       </dependency>
       <dependency>
