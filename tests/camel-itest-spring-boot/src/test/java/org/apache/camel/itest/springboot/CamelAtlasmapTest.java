@@ -35,6 +35,8 @@ public class CamelAtlasmapTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelAtlasmapTest.class))
+                .dependency("org.scala-lang.modules:scala-parser-combinators_2.12:1.1.2")
+                .dependency("org.scala-lang.modules:scala-xml_2.12:1.3.0")
                 .build();
     }
 

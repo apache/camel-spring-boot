@@ -341,6 +341,8 @@ public final class ArquillianPackager {
         ignore.add("net.java.dev.jna:jna-platform"); // PR to spring-boot
         ignore.add("net.openhft");
         ignore.add("org.scala-lang.modules:scala-java8-compat_2.11");
+        ignore.add("org.scala-lang.modules:scala-parser-combinators_2.12");
+        ignore.add("org.scala-lang.modules:scala-xml_2.12");
         ignore.add("net.sourceforge.htmlunit:htmlunit-core-js"); // v 2.21 does not exist
         ignore.add("org.springframework.cloud"); // too many different versions
         ignore.add("org.springframework.data");
@@ -372,6 +374,7 @@ public final class ArquillianPackager {
 
         // google grpc is a mix of all sort of different versions
         ignore.add("com.google.api.grpc");
+       
 
         Map<String, Map<String, String>> status = new TreeMap<>();
         Set<String> mismatches = new TreeSet<>();
