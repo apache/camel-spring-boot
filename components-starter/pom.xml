@@ -409,6 +409,7 @@
     <module>camel-sql-starter</module>
     <module>camel-ssh-starter</module>
     <module>camel-stax-starter</module>
+    <module>camel-stitch-starter</module>
     <module>camel-stomp-starter</module>
     <module>camel-stream-starter</module>
     <module>camel-stringtemplate-starter</module>
