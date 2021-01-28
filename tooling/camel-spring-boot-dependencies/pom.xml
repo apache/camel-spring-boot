@@ -159,7 +159,7 @@
       <dependency>
         <groupId>io.methvin</groupId>
         <artifactId>directory-watcher</artifactId>
-        <version>0.12.0</version>
+        <version>0.13.0</version>
       </dependency>
       <dependency>
         <groupId>io.nessus</groupId>
@@ -2915,6 +2915,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-http-common</artifactId>
+        <version>3.8.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-huaweicloud-smn</artifactId>
         <version>3.8.0-SNAPSHOT</version>
       </dependency>
       <dependency>
