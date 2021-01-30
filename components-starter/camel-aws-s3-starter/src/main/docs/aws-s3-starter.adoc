@@ -17,7 +17,7 @@ When using aws-s3 with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 40 options, which are listed below.
+The component supports 41 options, which are listed below.
 
 
 
@@ -38,6 +38,7 @@ The component supports 40 options, which are listed below.
 | *camel.component.aws-s3.delete-after-read* | Delete objects from S3 after they have been retrieved. The delete is only performed if the Exchange is committed. If a rollback occurs, the object is not deleted. If this option is false, then the same objects will be retrieve over and over again on the polls. Therefore you need to use the Idempotent Consumer EIP in the route to filter out duplicates. You can filter using the S3Constants#BUCKET_NAME and S3Constants#KEY headers, or only the S3Constants#KEY header. | true | Boolean
 | *camel.component.aws-s3.delete-after-write* | Delete file object after the S3 file has been uploaded | false | Boolean
 | *camel.component.aws-s3.delimiter* | The delimiter which is used in the com.amazonaws.services.s3.model.ListObjectsRequest to only consume objects we are interested in. |  | String
+| *camel.component.aws-s3.done-file-name* | If provided, Camel will only consume files if a done file exists. |  | String
 | *camel.component.aws-s3.dualstack-enabled* | Define if Dualstack enabled is true or false | false | Boolean
 | *camel.component.aws-s3.enabled* | Whether to enable auto configuration of the aws-s3 component. This is enabled by default. |  | Boolean
 | *camel.component.aws-s3.encryption-materials* | The encryption materials to use in case of Symmetric/Asymmetric client usage. The option is a com.amazonaws.services.s3.model.EncryptionMaterials type. |  | EncryptionMaterials

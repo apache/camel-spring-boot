@@ -136,6 +136,10 @@ public class S3ComponentConfiguration
      */
     private String delimiter;
     /**
+     * If provided, Camel will only consume files if a done file exists.
+     */
+    private String doneFileName;
+    /**
      * To get the object from the bucket with the given file name
      */
     private String fileName;
@@ -389,6 +393,14 @@ public class S3ComponentConfiguration
 
     public void setDelimiter(String delimiter) {
         this.delimiter = delimiter;
+    }
+
+    public String getDoneFileName() {
+        return doneFileName;
+    }
+
+    public void setDoneFileName(String doneFileName) {
+        this.doneFileName = doneFileName;
     }
 
     public String getFileName() {

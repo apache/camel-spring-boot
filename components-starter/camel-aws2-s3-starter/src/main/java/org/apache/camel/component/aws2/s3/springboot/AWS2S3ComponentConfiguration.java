@@ -165,6 +165,10 @@ public class AWS2S3ComponentConfiguration
      */
     private String destinationBucketSuffix;
     /**
+     * If provided, Camel will only consume files if a done file exists.
+     */
+    private String doneFileName;
+    /**
      * To get the object from the bucket with the given file name
      */
     private String fileName;
@@ -459,6 +463,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setDestinationBucketSuffix(String destinationBucketSuffix) {
         this.destinationBucketSuffix = destinationBucketSuffix;
+    }
+
+    public String getDoneFileName() {
+        return doneFileName;
+    }
+
+    public void setDoneFileName(String doneFileName) {
+        this.doneFileName = doneFileName;
     }
 
     public String getFileName() {
