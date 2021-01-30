@@ -38,7 +38,7 @@ import org.springframework.context.annotation.Configuration;
 public class HystrixMappingAutoConfiguration {
 
     @Bean
-    ServletRegistrationBean servletRegistrationBean(HystrixMappingConfiguration config) {
+    ServletRegistrationBean hystrixServlet(HystrixMappingConfiguration config) {
         ServletRegistrationBean mapping = new ServletRegistrationBean();
         mapping.setServlet(new HystrixEventStreamServlet());
         mapping.addUrlMappings(config.getPath());
