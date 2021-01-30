@@ -58,7 +58,7 @@ public class JacksonDataFormatConfiguration
      * from the JSON output. With Jackson you can use JSON views to accomplish
      * this. This option is to refer to the class which has JsonView annotations
      */
-    private Class<Object> jsonView;
+    private String jsonViewTypeName;
     /**
      * If you want to marshal a pojo to JSON, and the pojo has some fields with
      * null values. And you want to skip these null values, you can set this
@@ -168,12 +168,12 @@ public class JacksonDataFormatConfiguration
         this.unmarshalTypeName = unmarshalTypeName;
     }
 
-    public Class<Object> getJsonView() {
-        return jsonView;
+    public String getJsonViewTypeName() {
+        return jsonViewTypeName;
     }
 
-    public void setJsonView(Class<Object> jsonView) {
-        this.jsonView = jsonView;
+    public void setJsonViewTypeName(String jsonViewTypeName) {
+        this.jsonViewTypeName = jsonViewTypeName;
     }
 
     public String getInclude() {

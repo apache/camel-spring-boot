@@ -33,7 +33,7 @@ The component supports 16 options, which are listed below.
 | *camel.dataformat.jacksonxml.enable-jaxb-annotation-module* | Whether to enable the JAXB annotations module when using jackson. When enabled then JAXB annotations can be used by Jackson. | false | Boolean
 | *camel.dataformat.jacksonxml.enabled* | Whether to enable auto configuration of the jacksonxml data format. This is enabled by default. |  | Boolean
 | *camel.dataformat.jacksonxml.include* | If you want to marshal a pojo to JSON, and the pojo has some fields with null values. And you want to skip these null values, you can set this option to NON_NULL |  | String
-| *camel.dataformat.jacksonxml.json-view* | When marshalling a POJO to JSON you might want to exclude certain fields from the JSON output. With Jackson you can use JSON views to accomplish this. This option is to refer to the class which has JsonView annotations |  | Class
+| *camel.dataformat.jacksonxml.json-view-type-name* | When marshalling a POJO to JSON you might want to exclude certain fields from the JSON output. With Jackson you can use JSON views to accomplish this. This option is to refer to the class which has JsonView annotations |  | String
 | *camel.dataformat.jacksonxml.module-class-names* | To use custom Jackson modules com.fasterxml.jackson.databind.Module specified as a String with FQN class names. Multiple classes can be separated by comma. |  | String
 | *camel.dataformat.jacksonxml.module-refs* | To use custom Jackson modules referred from the Camel registry. Multiple modules can be separated by comma. |  | String
 | *camel.dataformat.jacksonxml.pretty-print* | To enable pretty printing output nicely formatted. Is by default false. | false | Boolean
