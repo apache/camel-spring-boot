@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.aws.s3.springboot.S3ComponentAutoConfiguration
+org.apache.camel.component.aws.s3.springboot.S3ComponentAutoConfiguration,\
+org.apache.camel.component.aws.s3.springboot.S3ComponentConverter
+

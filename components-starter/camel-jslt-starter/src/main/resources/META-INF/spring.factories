@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.jslt.springboot.JsltComponentAutoConfiguration
+org.apache.camel.component.jslt.springboot.JsltComponentAutoConfiguration,\
+org.apache.camel.component.jslt.springboot.JsltComponentConverter
+

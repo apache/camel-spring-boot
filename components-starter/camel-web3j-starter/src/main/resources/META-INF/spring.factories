@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.web3j.springboot.Web3jComponentAutoConfiguration
+org.apache.camel.component.web3j.springboot.Web3jComponentAutoConfiguration,\
+org.apache.camel.component.web3j.springboot.Web3jComponentConverter
+

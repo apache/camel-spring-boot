@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.stitch.springboot.StitchComponentAutoConfiguration
+org.apache.camel.component.stitch.springboot.StitchComponentAutoConfiguration,\
+org.apache.camel.component.stitch.springboot.StitchComponentConverter
+

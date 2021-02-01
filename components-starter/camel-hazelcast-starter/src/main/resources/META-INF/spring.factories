@@ -36,7 +36,29 @@ org.apache.camel.component.hazelcast.ringbuffer.springboot.customizer.HazelcastI
 org.apache.camel.component.hazelcast.instance.springboot.HazelcastInstanceComponentAutoConfiguration,\
 org.apache.camel.component.hazelcast.instance.springboot.customizer.HazelcastInstanceCustomizer,\
 org.apache.camel.component.hazelcast.atomicnumber.springboot.HazelcastAtomicnumberComponentAutoConfiguration,\
-org.apache.camel.component.hazelcast.atomicnumber.springboot.customizer.HazelcastInstanceCustomizer
+org.apache.camel.component.hazelcast.atomicnumber.springboot.customizer.HazelcastInstanceCustomizer,\
+org.apache.camel.component.hazelcast.list.springboot.HazelcastListComponentConverter,\
+org.apache.camel.component.hazelcast.replicatedmap.springboot.HazelcastReplicatedmapComponentConverter,\
+org.apache.camel.component.hazelcast.queue.springboot.HazelcastQueueComponentConverter,\
+org.apache.camel.component.hazelcast.map.springboot.HazelcastMapComponentConverter,\
+org.apache.camel.component.hazelcast.set.springboot.HazelcastSetComponentConverter,\
+org.apache.camel.component.hazelcast.topic.springboot.HazelcastTopicComponentConverter,\
+org.apache.camel.component.hazelcast.seda.springboot.HazelcastSedaComponentConverter,\
+org.apache.camel.component.hazelcast.multimap.springboot.HazelcastMultimapComponentConverter,\
+org.apache.camel.component.hazelcast.ringbuffer.springboot.HazelcastRingbufferComponentConverter,\
+org.apache.camel.component.hazelcast.atomicnumber.springboot.HazelcastAtomicnumberComponentConverter,\
+org.apache.camel.component.hazelcast.instance.springboot.HazelcastInstanceComponentConverter
+
+
+
+
+
+
+
+
+
+
+
 
 
 

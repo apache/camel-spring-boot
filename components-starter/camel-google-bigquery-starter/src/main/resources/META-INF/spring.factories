@@ -17,5 +17,9 @@
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.google.bigquery.springboot.GoogleBigQueryComponentAutoConfiguration,\
-org.apache.camel.component.google.bigquery.sql.springboot.GoogleBigQuerySQLComponentAutoConfiguration
+org.apache.camel.component.google.bigquery.sql.springboot.GoogleBigQuerySQLComponentAutoConfiguration,\
+org.apache.camel.component.google.bigquery.springboot.GoogleBigQueryComponentConverter,\
+org.apache.camel.component.google.bigquery.sql.springboot.GoogleBigQuerySQLComponentConverter
+
+
 

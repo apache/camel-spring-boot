@@ -18,6 +18,12 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.etcd.springboot.EtcdKeysComponentAutoConfiguration,\
 org.apache.camel.component.etcd.springboot.EtcdWatchComponentAutoConfiguration,\
-org.apache.camel.component.etcd.springboot.EtcdStatsComponentAutoConfiguration
+org.apache.camel.component.etcd.springboot.EtcdStatsComponentAutoConfiguration,\
+org.apache.camel.component.etcd.springboot.EtcdKeysComponentConverter,\
+org.apache.camel.component.etcd.springboot.EtcdWatchComponentConverter,\
+org.apache.camel.component.etcd.springboot.EtcdStatsComponentConverter
+
+
+
 
 

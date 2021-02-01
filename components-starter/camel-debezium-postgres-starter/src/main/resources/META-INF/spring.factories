@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentAutoConfiguration
+org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentAutoConfiguration,\
+org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConverter
+

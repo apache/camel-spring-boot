@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.azure.storage.queue.springboot.QueueComponentAutoConfiguration
+org.apache.camel.component.azure.storage.queue.springboot.QueueComponentAutoConfiguration,\
+org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConverter
+

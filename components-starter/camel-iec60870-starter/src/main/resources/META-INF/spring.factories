@@ -17,5 +17,9 @@
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.iec60870.client.springboot.ClientComponentAutoConfiguration,\
-org.apache.camel.component.iec60870.server.springboot.ServerComponentAutoConfiguration
+org.apache.camel.component.iec60870.server.springboot.ServerComponentAutoConfiguration,\
+org.apache.camel.component.iec60870.client.springboot.ClientComponentConverter,\
+org.apache.camel.component.iec60870.server.springboot.ServerComponentConverter
+
+
 

@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.vm.springboot.VmComponentAutoConfiguration
+org.apache.camel.component.vm.springboot.VmComponentAutoConfiguration,\
+org.apache.camel.component.vm.springboot.VmComponentConverter
+

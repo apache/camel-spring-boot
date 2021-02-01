@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.aws2.eks.springboot.EKS2ComponentAutoConfiguration
+org.apache.camel.component.aws2.eks.springboot.EKS2ComponentAutoConfiguration,\
+org.apache.camel.component.aws2.eks.springboot.EKS2ComponentConverter
+

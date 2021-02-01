@@ -30,7 +30,6 @@ import org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.convert.ApplicationConversionService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -42,10 +41,10 @@ import org.springframework.context.annotation.Lazy;
  */
 @Generated("org.apache.camel.springboot.maven.SpringBootAutoConfigurationMojo")
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,Web3jComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.web3j"})
+@AutoConfigureAfter({CamelAutoConfiguration.class, Web3jComponentConverter.class})
 public class Web3jComponentAutoConfiguration {
 
     @Autowired
@@ -57,8 +56,6 @@ public class Web3jComponentAutoConfiguration {
     public Web3jComponentAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
-        ApplicationConversionService acs = (ApplicationConversionService) ApplicationConversionService.getSharedInstance();
-        acs.addConverter(new Web3jComponentConverter(camelContext));
     }
 
     @Lazy

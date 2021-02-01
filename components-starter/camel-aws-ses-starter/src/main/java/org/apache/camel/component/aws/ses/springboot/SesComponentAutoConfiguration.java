@@ -30,7 +30,6 @@ import org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.convert.ApplicationConversionService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -42,10 +41,10 @@ import org.springframework.context.annotation.Lazy;
  */
 @Generated("org.apache.camel.springboot.maven.SpringBootAutoConfigurationMojo")
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,SesComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.aws-ses"})
+@AutoConfigureAfter({CamelAutoConfiguration.class, SesComponentConverter.class})
 public class SesComponentAutoConfiguration {
 
     @Autowired
@@ -57,8 +56,6 @@ public class SesComponentAutoConfiguration {
     public SesComponentAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
-        ApplicationConversionService acs = (ApplicationConversionService) ApplicationConversionService.getSharedInstance();
-        acs.addConverter(new SesComponentConverter(camelContext));
     }
 
     @Lazy

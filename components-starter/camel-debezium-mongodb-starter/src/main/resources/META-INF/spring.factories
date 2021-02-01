@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentAutoConfiguration
+org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentAutoConfiguration,\
+org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConverter
+

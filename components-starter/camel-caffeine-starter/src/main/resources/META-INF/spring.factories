@@ -17,5 +17,9 @@
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentAutoConfiguration,\
-org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentAutoConfiguration
+org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentAutoConfiguration,\
+org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConverter,\
+org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConverter
+
+
 

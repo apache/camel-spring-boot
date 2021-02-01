@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.wordpress.springboot.WordpressComponentAutoConfiguration
+org.apache.camel.component.wordpress.springboot.WordpressComponentAutoConfiguration,\
+org.apache.camel.component.wordpress.springboot.WordpressComponentConverter
+

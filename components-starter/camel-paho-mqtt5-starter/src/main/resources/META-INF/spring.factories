@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.paho.mqtt5.springboot.PahoMqtt5ComponentAutoConfiguration
+org.apache.camel.component.paho.mqtt5.springboot.PahoMqtt5ComponentAutoConfiguration,\
+org.apache.camel.component.paho.mqtt5.springboot.PahoMqtt5ComponentConverter
+

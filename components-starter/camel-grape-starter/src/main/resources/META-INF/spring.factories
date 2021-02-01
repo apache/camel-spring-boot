@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.grape.springboot.GrapeComponentAutoConfiguration
+org.apache.camel.component.grape.springboot.GrapeComponentAutoConfiguration,\
+org.apache.camel.component.grape.springboot.GrapeComponentConverter
+

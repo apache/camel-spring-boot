@@ -15,4 +15,6 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.telegram.springboot.TelegramComponentAutoConfiguration
+org.apache.camel.component.telegram.springboot.TelegramComponentAutoConfiguration,\
+org.apache.camel.component.telegram.springboot.TelegramComponentConverter
+
