@@ -15,4 +15,6 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.ahc.springboot.AhcComponentAutoConfiguration
+org.apache.camel.component.ahc.springboot.AhcComponentAutoConfiguration,\
+org.apache.camel.component.ahc.springboot.AhcComponentConverter
+
