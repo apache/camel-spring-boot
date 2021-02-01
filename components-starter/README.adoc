@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 346 in 279 JAR artifacts (23 deprecated)
+Number of Camel components: 347 in 280 JAR artifacts (23 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -586,6 +586,8 @@ Number of Camel components: 346 in 279 JAR artifacts (23 deprecated)
 | xref:latest@components::sjms-component.adoc[Simple JMS] | camel-sjms-starter | Stable | 2.11 | Send and receive messages to/from a JMS Queue or Topic using plain JMS 1.x API.
 
 | xref:latest@components::sjms2-component.adoc[Simple JMS2] | camel-sjms2-starter | Stable | 2.19 | Send and receive messages to/from a JMS Queue or Topic using plain JMS 2.x API.
+
+| xref:latest@components::hwcloud-smn-component.adoc[SimpleNotification] | camel-huaweicloud-smn-starter | Preview | 3.8 | Huawei Cloud component to integrate with SimpleNotification services
 
 | xref:latest@components::sip-component.adoc[SIP] | camel-sip-starter | Stable | 2.5 | Send and receive messages using the SIP protocol (used in telecommunications).
 
