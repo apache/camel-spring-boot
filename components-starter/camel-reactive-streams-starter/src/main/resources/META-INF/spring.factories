@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.reactive.streams.springboot.ReactiveStreamsComponentAutoConfiguration,\
-org.apache.camel.component.reactive.streams.springboot.ReactiveStreamsServiceAutoConfiguration
+org.apache.camel.component.reactive.streams.springboot.ReactiveStreamsServiceAutoConfiguration,\
+org.apache.camel.component.reactive.streams.springboot.ReactiveStreamsComponentConverter
+

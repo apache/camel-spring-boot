@@ -17,5 +17,9 @@
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.google.sheets.springboot.GoogleSheetsComponentAutoConfiguration,\
-org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentAutoConfiguration
+org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentAutoConfiguration,\
+org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConverter,\
+org.apache.camel.component.google.sheets.springboot.GoogleSheetsComponentConverter
+
+
 

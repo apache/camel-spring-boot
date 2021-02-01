@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.webhook.springboot.WebhookComponentAutoConfiguration
+org.apache.camel.component.webhook.springboot.WebhookComponentAutoConfiguration,\
+org.apache.camel.component.webhook.springboot.WebhookComponentConverter
+

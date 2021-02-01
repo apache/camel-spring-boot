@@ -17,4 +17,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.infinispan.springboot.customizer.RemoteCacheManagerCustomizer,\
 org.apache.camel.component.infinispan.springboot.customizer.EmbeddedCacheManagerCustomizer,\
-org.apache.camel.component.infinispan.springboot.InfinispanComponentAutoConfiguration
+org.apache.camel.component.infinispan.springboot.InfinispanComponentAutoConfiguration,\
+org.apache.camel.component.infinispan.springboot.InfinispanComponentConverter
+

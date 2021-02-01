@@ -17,5 +17,9 @@
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.aws2.ddb.springboot.Ddb2ComponentAutoConfiguration,\
-org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentAutoConfiguration
+org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentAutoConfiguration,\
+org.apache.camel.component.aws2.ddb.springboot.Ddb2ComponentConverter,\
+org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentConverter
+
+
 

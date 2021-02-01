@@ -17,5 +17,9 @@
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentAutoConfiguration,\
-org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentAutoConfiguration
+org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentAutoConfiguration,\
+org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConverter,\
+org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConverter
+
+
 

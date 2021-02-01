@@ -17,5 +17,7 @@
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.jgroups.raft.springboot.JGroupsRaftComponentAutoConfiguration,\
-org.apache.camel.component.jgroups.raft.springboot.cluster.springboot.JGroupsRaftClusterServiceAutoConfiguration
+org.apache.camel.component.jgroups.raft.springboot.cluster.springboot.JGroupsRaftClusterServiceAutoConfiguration,\
+org.apache.camel.component.jgroups.raft.springboot.JGroupsRaftComponentConverter
+
 

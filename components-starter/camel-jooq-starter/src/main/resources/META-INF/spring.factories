@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.jooq.springboot.JooqComponentAutoConfiguration
+org.apache.camel.component.jooq.springboot.JooqComponentAutoConfiguration,\
+org.apache.camel.component.jooq.springboot.JooqComponentConverter
+

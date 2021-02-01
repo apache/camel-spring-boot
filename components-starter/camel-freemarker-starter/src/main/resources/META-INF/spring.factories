@@ -15,4 +15,6 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.freemarker.springboot.FreemarkerComponentAutoConfiguration
+org.apache.camel.component.freemarker.springboot.FreemarkerComponentAutoConfiguration,\
+org.apache.camel.component.freemarker.springboot.FreemarkerComponentConverter
+

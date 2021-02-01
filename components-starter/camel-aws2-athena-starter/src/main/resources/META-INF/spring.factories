@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.aws2.athena.springboot.Athena2ComponentAutoConfiguration
+org.apache.camel.component.aws2.athena.springboot.Athena2ComponentAutoConfiguration,\
+org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConverter
+

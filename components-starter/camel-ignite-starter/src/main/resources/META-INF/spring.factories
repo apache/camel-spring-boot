@@ -21,7 +21,21 @@ org.apache.camel.component.ignite.cache.springboot.IgniteCacheComponentAutoConfi
 org.apache.camel.component.ignite.compute.springboot.IgniteComputeComponentAutoConfiguration,\
 org.apache.camel.component.ignite.idgen.springboot.IgniteIdGenComponentAutoConfiguration,\
 org.apache.camel.component.ignite.events.springboot.IgniteEventsComponentAutoConfiguration,\
-org.apache.camel.component.ignite.messaging.springboot.IgniteMessagingComponentAutoConfiguration
+org.apache.camel.component.ignite.messaging.springboot.IgniteMessagingComponentAutoConfiguration,\
+org.apache.camel.component.ignite.queue.springboot.IgniteQueueComponentConverter,\
+org.apache.camel.component.ignite.set.springboot.IgniteSetComponentConverter,\
+org.apache.camel.component.ignite.cache.springboot.IgniteCacheComponentConverter,\
+org.apache.camel.component.ignite.idgen.springboot.IgniteIdGenComponentConverter,\
+org.apache.camel.component.ignite.compute.springboot.IgniteComputeComponentConverter,\
+org.apache.camel.component.ignite.messaging.springboot.IgniteMessagingComponentConverter,\
+org.apache.camel.component.ignite.events.springboot.IgniteEventsComponentConverter
+
+
+
+
+
+
+
 
 
 

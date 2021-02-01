@@ -16,5 +16,9 @@
 ## ---------------------------------------------------------------------------
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.google.calendar.springboot.GoogleCalendarComponentAutoConfiguration,\
-org.apache.camel.component.google.calendar.stream.springboot.GoogleCalendarStreamComponentAutoConfiguration
+org.apache.camel.component.google.calendar.stream.springboot.GoogleCalendarStreamComponentAutoConfiguration,\
+org.apache.camel.component.google.calendar.springboot.GoogleCalendarComponentConverter,\
+org.apache.camel.component.google.calendar.stream.springboot.GoogleCalendarStreamComponentConverter
+
+
 

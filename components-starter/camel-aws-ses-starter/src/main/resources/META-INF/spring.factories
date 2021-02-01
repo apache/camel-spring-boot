@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.aws.ses.springboot.SesComponentAutoConfiguration
+org.apache.camel.component.aws.ses.springboot.SesComponentAutoConfiguration,\
+org.apache.camel.component.aws.ses.springboot.SesComponentConverter
+

@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.aws.sqs.springboot.SqsComponentAutoConfiguration
+org.apache.camel.component.aws.sqs.springboot.SqsComponentAutoConfiguration,\
+org.apache.camel.component.aws.sqs.springboot.SqsComponentConverter
+
