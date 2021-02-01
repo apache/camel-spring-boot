@@ -89,50 +89,27 @@ public class SpringBootRuntimeProvider implements RuntimeProvider {
 
     @Override
     public List<String> findComponentNames() {
-        List<String> names = new ArrayList<>();
-        InputStream is = camelCatalog.getVersionManager().getResourceAsStream(COMPONENTS_CATALOG);
-        if (is != null) {
-            try {
-                CatalogHelper.loadLines(is, names);
-            } catch (IOException e) {
-                // ignore
-            }
-        }
-        return names;
+        return findNames(COMPONENTS_CATALOG);
     }
 
     @Override
     public List<String> findDataFormatNames() {
-        List<String> names = new ArrayList<>();
-        InputStream is = camelCatalog.getVersionManager().getResourceAsStream(DATA_FORMATS_CATALOG);
-        if (is != null) {
-            try {
-                CatalogHelper.loadLines(is, names);
-            } catch (IOException e) {
-                // ignore
-            }
-        }
-        return names;
+        return findNames(DATA_FORMATS_CATALOG);
     }
 
     @Override
     public List<String> findLanguageNames() {
-        List<String> names = new ArrayList<>();
-        InputStream is = camelCatalog.getVersionManager().getResourceAsStream(LANGUAGE_CATALOG);
-        if (is != null) {
-            try {
-                CatalogHelper.loadLines(is, names);
-            } catch (IOException e) {
-                // ignore
-            }
-        }
-        return names;
+        return findNames(LANGUAGE_CATALOG);
     }
 
     @Override
     public List<String> findOtherNames() {
+        return findNames(OTHER_CATALOG);
+    }
+    
+    private List<String> findNames(String pathToPropertyCatalogDescriptor) {
         List<String> names = new ArrayList<>();
-        InputStream is = camelCatalog.getVersionManager().getResourceAsStream(OTHER_CATALOG);
+        InputStream is = camelCatalog.getVersionManager().getResourceAsStream(pathToPropertyCatalogDescriptor);
         if (is != null) {
             try {
                 CatalogHelper.loadLines(is, names);
