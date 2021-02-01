@@ -11,7 +11,7 @@
     "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-jsonb-starter",
-    "version": "3.7.1-SNAPSHOT",
+    "version": "3.7.2-SNAPSHOT",
     "modelName": "json",
     "modelJavaType": "org.apache.camel.model.dataformat.JsonDataFormat"
   },
