@@ -30,6 +30,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: apache/camel
+          persist-credentials: false
           ref: master
           path: camel
       - name: Set Up Java
@@ -43,6 +44,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: master
+          persist-credentials: false
           fetch-depth: 0
       - name: Build Camel-spring-boot Project
         run: ./mvnw -V --no-transfer-progress clean install -DskipTests
