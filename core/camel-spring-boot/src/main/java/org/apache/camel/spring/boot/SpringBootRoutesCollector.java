@@ -132,7 +132,7 @@ public class SpringBootRoutesCollector extends DefaultRoutesCollector {
 
         String[] parts = directory.split(",");
         for (String part : parts) {
-            log.info("Loading additional Camel XML routes from: {}", part);
+            log.debug("Loading additional Camel XML routes from: {}", part);
             try {
                 Resource[] xmlRoutes = applicationContext.getResources(part);
                 for (Resource xmlRoute : xmlRoutes) {
@@ -160,7 +160,7 @@ public class SpringBootRoutesCollector extends DefaultRoutesCollector {
 
         String[] parts = directory.split(",");
         for (String part : parts) {
-            log.info("Loading additional Camel XML route templates from: {}", part);
+            log.debug("Loading additional Camel XML route templates from: {}", part);
             try {
                 Resource[] xmlRouteTemplates = applicationContext.getResources(part);
                 for (Resource xmlRoute : xmlRouteTemplates) {
@@ -188,7 +188,7 @@ public class SpringBootRoutesCollector extends DefaultRoutesCollector {
 
         String[] parts = directory.split(",");
         for (String part : parts) {
-            log.info("Loading additional Camel XML rests from: {}", part);
+            log.debug("Loading additional Camel XML rests from: {}", part);
             try {
                 final Resource[] xmlRests = applicationContext.getResources(part);
                 for (final Resource xmlRest : xmlRests) {
