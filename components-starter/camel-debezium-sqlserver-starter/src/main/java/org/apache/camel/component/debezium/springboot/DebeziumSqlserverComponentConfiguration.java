@@ -126,6 +126,13 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Specify how binary (blob, binary, etc.) columns should be represented in
+     * change events, including:'bytes' represents binary data as byte array
+     * (default)'base64' represents binary data as base64-encoded string'hex'
+     * represents binary data as hex-encoded (base16) string
+     */
+    private String binaryHandlingMode = "bytes";
+    /**
      * Regular expressions matching columns to exclude from change events
      * (deprecated, use column.exclude.list instead)
      */
@@ -327,8 +334,8 @@ public class DebeziumSqlserverComponentConfiguration
     private Boolean sanitizeFieldNames = false;
     /**
      * The comma-separated list of operations to skip during streaming, defined
-     * as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no
-     * operations will be skipped.
+     * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes. By default,
+     * no operations will be skipped.
      */
     private String skippedOperations;
     /**
@@ -567,6 +574,14 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getBinaryHandlingMode() {
+        return binaryHandlingMode;
+    }
+
+    public void setBinaryHandlingMode(String binaryHandlingMode) {
+        this.binaryHandlingMode = binaryHandlingMode;
     }
 
     public String getColumnBlacklist() {
