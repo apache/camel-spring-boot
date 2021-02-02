@@ -38,7 +38,7 @@ import org.springframework.context.annotation.Configuration;
 public class ServletMappingAutoConfiguration {
 
     @Bean
-    ServletRegistrationBean servletRegistrationBean(ServletMappingConfiguration config) {
+    ServletRegistrationBean camelServletRegistrationBean(ServletMappingConfiguration config) {
         ServletRegistrationBean mapping = new ServletRegistrationBean();
         mapping.setServlet(new CamelHttpTransportServlet());
         mapping.addUrlMappings(config.getContextPath());
