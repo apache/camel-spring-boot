@@ -73,7 +73,7 @@ The component supports 58 options, which are listed below.
 | *camel.component.debezium-mongodb.query-fetch-size* | The maximum number of records that should be loaded into memory while streaming. A value of 0 uses the default JDBC fetch size. | 0 | Integer
 | *camel.component.debezium-mongodb.retriable-restart-connector-wait-ms* | Time to wait before restarting connector after retriable exception occurs. Defaults to 10000ms. The option is a long type. | 10000 | Long
 | *camel.component.debezium-mongodb.sanitize-field-names* | Whether field names will be sanitized to Avro naming conventions | false | Boolean
-| *camel.component.debezium-mongodb.skipped-operations* | The comma-separated list of operations to skip during streaming, defined as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no operations will be skipped. |  | String
+| *camel.component.debezium-mongodb.skipped-operations* | The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts/create; 'u' for updates; 'd' for deletes. By default, no operations will be skipped. |  | String
 | *camel.component.debezium-mongodb.snapshot-collection-filter-overrides* | This property contains a comma-separated list of ., for which the initial snapshot may be a subset of data present in the data source. The subset would be defined by mongodb filter query specified as value for property snapshot.collection.filter.override.. |  | String
 | *camel.component.debezium-mongodb.snapshot-delay-ms* | The number of milliseconds to delay before a snapshot will begin. The option is a long type. | 0 | Long
 | *camel.component.debezium-mongodb.snapshot-fetch-size* | The maximum number of records that should be loaded into memory while performing a snapshot |  | Integer

@@ -17,7 +17,7 @@ When using debezium-sqlserver with Spring Boot make sure to use the following Ma
 ----
 
 
-The component supports 68 options, which are listed below.
+The component supports 69 options, which are listed below.
 
 
 
@@ -26,6 +26,7 @@ The component supports 68 options, which are listed below.
 | Name | Description | Default | Type
 | *camel.component.debezium-sqlserver.additional-properties* | Additional properties for debezium components in case they can't be set directly on the camel configurations (e.g: setting Kafka Connect properties needed by Debezium engine, for example setting KafkaOffsetBackingStore), the properties have to be prefixed with additionalProperties.. E.g: additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=\http://localhost:8811/avro |  | Map
 | *camel.component.debezium-sqlserver.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
+| *camel.component.debezium-sqlserver.binary-handling-mode* | Specify how binary (blob, binary, etc.) columns should be represented in change events, including:'bytes' represents binary data as byte array (default)'base64' represents binary data as base64-encoded string'hex' represents binary data as hex-encoded (base16) string | bytes | String
 | *camel.component.debezium-sqlserver.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.debezium-sqlserver.column-blacklist* | Regular expressions matching columns to exclude from change events (deprecated, use column.exclude.list instead) |  | String
 | *camel.component.debezium-sqlserver.column-exclude-list* | Regular expressions matching columns to exclude from change events |  | String
@@ -74,7 +75,7 @@ The component supports 68 options, which are listed below.
 | *camel.component.debezium-sqlserver.query-fetch-size* | The maximum number of records that should be loaded into memory while streaming. A value of 0 uses the default JDBC fetch size. | 0 | Integer
 | *camel.component.debezium-sqlserver.retriable-restart-connector-wait-ms* | Time to wait before restarting connector after retriable exception occurs. Defaults to 10000ms. The option is a long type. | 10000 | Long
 | *camel.component.debezium-sqlserver.sanitize-field-names* | Whether field names will be sanitized to Avro naming conventions | false | Boolean
-| *camel.component.debezium-sqlserver.skipped-operations* | The comma-separated list of operations to skip during streaming, defined as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no operations will be skipped. |  | String
+| *camel.component.debezium-sqlserver.skipped-operations* | The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts/create; 'u' for updates; 'd' for deletes. By default, no operations will be skipped. |  | String
 | *camel.component.debezium-sqlserver.snapshot-delay-ms* | The number of milliseconds to delay before a snapshot will begin. The option is a long type. | 0 | Long
 | *camel.component.debezium-sqlserver.snapshot-fetch-size* | The maximum number of records that should be loaded into memory while performing a snapshot |  | Integer
 | *camel.component.debezium-sqlserver.snapshot-include-collection-list* | this setting must be set to specify a list of tables/collections whose snapshot must be taken on creating or restarting the connector. |  | String

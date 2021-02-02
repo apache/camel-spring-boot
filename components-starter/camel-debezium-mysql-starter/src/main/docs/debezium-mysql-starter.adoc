@@ -89,7 +89,7 @@ The component supports 81 options, which are listed below.
 | *camel.component.debezium-mysql.offset-storage-replication-factor* | Replication factor used when creating the offset storage topic. Required when offset.storage is set to the KafkaOffsetBackingStore |  | Integer
 | *camel.component.debezium-mysql.offset-storage-topic* | The name of the Kafka topic where offsets are to be stored. Required when offset.storage is set to the KafkaOffsetBackingStore. |  | String
 | *camel.component.debezium-mysql.poll-interval-ms* | Frequency in milliseconds to wait for new change events to appear after receiving no events. Defaults to 500ms. The option is a long type. | 500 | Long
-| *camel.component.debezium-mysql.skipped-operations* | The comma-separated list of operations to skip during streaming, defined as: 'i' for inserts; 'u' for updates; 'd' for deletes. By default, no operations will be skipped. |  | String
+| *camel.component.debezium-mysql.skipped-operations* | The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts/create; 'u' for updates; 'd' for deletes. By default, no operations will be skipped. |  | String
 | *camel.component.debezium-mysql.snapshot-delay-ms* | The number of milliseconds to delay before a snapshot will begin. The option is a long type. | 0 | Long
 | *camel.component.debezium-mysql.snapshot-events-as-inserts* | Whether or not to mark snapshot events as normal inserts (op 'c'). If disabled, the standard functionality of emitting these records as reads (op 'r') will be used. | true | Boolean
 | *camel.component.debezium-mysql.snapshot-fetch-size* | The maximum number of records that should be loaded into memory while performing a snapshot |  | Integer
