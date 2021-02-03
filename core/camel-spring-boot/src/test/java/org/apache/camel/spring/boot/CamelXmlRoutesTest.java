@@ -35,7 +35,7 @@ import org.springframework.test.context.junit4.SpringRunner;
         CamelXmlRoutesTest.class,
         RouteConfigWithCamelContextInjected.class },
     properties = {
-        "camel.springboot.xml-routes=file:src/test/resources/routes/foo.xml,file:src/test/resources/routes/bar.xml"}
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/foo.xml,file:src/test/resources/routes/bar.xml"}
 )
 public class CamelXmlRoutesTest extends Assert {
 
