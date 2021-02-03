@@ -35,7 +35,7 @@ The component supports 23 options, which are listed below.
 | *camel.component.aws2-sns.message-deduplication-id-strategy* | Only for FIFO Topic. Strategy for setting the messageDeduplicationId on the message. Can be one of the following options: useExchangeId, useContentBasedDeduplication. For the useContentBasedDeduplication option, no messageDeduplicationId will be set on the message. | useExchangeId | String
 | *camel.component.aws2-sns.message-group-id-strategy* | Only for FIFO Topic. Strategy for setting the messageGroupId on the message. Can be one of the following options: useConstant, useExchangeId, usePropertyValue. For the usePropertyValue option, the value of property CamelAwsMessageGroupId will be used. |  | String
 | *camel.component.aws2-sns.message-structure* | The message structure to use such as json |  | String
-| *camel.component.aws2-sns.policy* | The policy for this queue. Is loaded by default from classpath, but you can prefix with classpath:, file:, or http: to load the resource from different systems. |  | String
+| *camel.component.aws2-sns.policy* | The policy for this topic. Is loaded by default from classpath, but you can prefix with classpath:, file:, or http: to load the resource from different systems. |  | String
 | *camel.component.aws2-sns.proxy-host* | To define a proxy host when instantiating the SNS client |  | String
 | *camel.component.aws2-sns.proxy-port* | To define a proxy port when instantiating the SNS client |  | Integer
 | *camel.component.aws2-sns.proxy-protocol* | To define a proxy protocol when instantiating the SNS client |  | Protocol
