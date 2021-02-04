@@ -495,36 +495,52 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     /**
      * Whether the routes collector is enabled or not.
      *
-     * When enabled Camel will auto-discover routes (RouteBuilder instances from the registry and
-     * also load additional XML routes from the file system.
+     * When enabled Camel will auto-discover routes (RouteBuilder instances from the registry and also load additional
+     * routes from the file system).
      *
      * The routes collector is default enabled.
      */
     private boolean routesCollectorEnabled = true;
 
     /**
-     * Used for inclusive filtering component scanning of RouteBuilder classes with @Component annotation.
-     * The exclusive filtering takes precedence over inclusive filtering.
-     * The pattern is using Ant-path style pattern.
+     * Used for inclusive filtering of routes from directories. The exclusive filtering takes precedence over inclusive
+     * filtering. The pattern is using Ant-path style pattern.
      *
-     * Multiple patterns can be specified separated by comma.
-     * For example to include all classes starting with Foo use: &#42;&#42;/Foo*
-     * To include all routes form a specific package use: com/mycompany/foo/&#42;
-     * To include all routes form a specific package and its sub-packages use double wildcards: com/mycompany/foo/&#42;&#42;
-     * And to include all routes from two specific packages use: com/mycompany/foo/&#42;,com/mycompany/stuff/&#42;
+     * Multiple patterns can be specified separated by comma, as example, to include all the routes from a directory
+     * whose name contains foo use: &#42;&#42;/*foo*.
+     */
+    private String routesIncludePattern = "classpath:camel/*.xml,classpath:camel-template/*.xml,classpath:camel-rest/*.xml";
+
+    /**
+     * Used for exclusive filtering of routes from directories. The exclusive filtering takes precedence over inclusive
+     * filtering. The pattern is using Ant-path style pattern.
+     *
+     * Multiple patterns can be specified separated by comma, as example, to exclude all the routes from a directory
+     * whose name contains foo use: &#42;&#42;/*foo*.
+     */
+    private String routesExcludePattern;
+
+    /**
+     * Used for inclusive filtering RouteBuilder classes which are collected from the registry or via classpath
+     * scanning. The exclusive filtering takes precedence over inclusive filtering. The pattern is using Ant-path style
+     * pattern. Multiple patterns can be specified separated by comma.
+     *
+     * Multiple patterns can be specified separated by comma. For example to include all classes starting with Foo use:
+     * &#42;&#42;/Foo* To include all routes form a specific package use: com/mycompany/foo/&#42; To include all routes
+     * form a specific package and its sub-packages use double wildcards: com/mycompany/foo/&#42;&#42; And to include
+     * all routes from two specific packages use: com/mycompany/foo/&#42;,com/mycompany/stuff/&#42;
      */
     private String javaRoutesIncludePattern;
 
     /**
-     * Used for exclusive filtering component scanning of RouteBuilder classes with @Component annotation.
-     * The exclusive filtering takes precedence over inclusive filtering.
-     * The pattern is using Ant-path style pattern.
-     * Multiple patterns can be specified separated by comma.
+     * Used for exclusive filtering RouteBuilder classes which are collected from the registry or via classpath
+     * scanning. The exclusive filtering takes precedence over inclusive filtering. The pattern is using Ant-path style
+     * pattern. Multiple patterns can be specified separated by comma.
      *
-     * For example to exclude all classes starting with Bar use: &#42;&#42;/Bar&#42;
-     * To exclude all routes form a specific package use: com/mycompany/bar/&#42;
-     * To exclude all routes form a specific package and its sub-packages use double wildcards: com/mycompany/bar/&#42;&#42;
-     * And to exclude all routes from two specific packages use: com/mycompany/bar/&#42;,com/mycompany/stuff/&#42;
+     * For example to exclude all classes starting with Bar use: &#42;&#42;/Bar&#42; To exclude all routes form a
+     * specific package use: com/mycompany/bar/&#42; To exclude all routes form a specific package and its sub-packages
+     * use double wildcards: com/mycompany/bar/&#42;&#42; And to exclude all routes from two specific packages use:
+     * com/mycompany/bar/&#42;,com/mycompany/stuff/&#42;
      */
     private String javaRoutesExcludePattern;
 
