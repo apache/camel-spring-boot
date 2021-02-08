@@ -183,6 +183,30 @@ public class SalesforceComponentConfiguration
      */
     private String packages;
     /**
+     * Use PK Chunking. Only for use in original Bulk API. Bulk 2.0 API performs
+     * PK chunking automatically, if necessary.
+     */
+    private Boolean pkChunking;
+    /**
+     * Chunk size for use with PK Chunking. If unspecified, salesforce default
+     * is 100,000. Maximum size is 250,000.
+     */
+    private Integer pkChunkingChunkSize;
+    /**
+     * Specifies the parent object when you're enabling PK chunking for queries
+     * on sharing objects. The chunks are based on the parent object's records
+     * rather than the sharing object's records. For example, when querying on
+     * AccountShare, specify Account as the parent object. PK chunking is
+     * supported for sharing objects as long as the parent object is supported.
+     */
+    private String pkChunkingParent;
+    /**
+     * Specifies the 15-character or 18-character record ID to be used as the
+     * lower boundary for the first chunk. Use this parameter to specify a
+     * starting ID when restarting a job that failed between batches.
+     */
+    private String pkChunkingStartRow;
+    /**
      * Query Locator provided by salesforce for use when a query results in more
      * records than can be retrieved in a single call. Use this value in a
      * subsequent call to retrieve additional records.
@@ -659,6 +683,38 @@ public class SalesforceComponentConfiguration
 
     public void setPackages(String packages) {
         this.packages = packages;
+    }
+
+    public Boolean getPkChunking() {
+        return pkChunking;
+    }
+
+    public void setPkChunking(Boolean pkChunking) {
+        this.pkChunking = pkChunking;
+    }
+
+    public Integer getPkChunkingChunkSize() {
+        return pkChunkingChunkSize;
+    }
+
+    public void setPkChunkingChunkSize(Integer pkChunkingChunkSize) {
+        this.pkChunkingChunkSize = pkChunkingChunkSize;
+    }
+
+    public String getPkChunkingParent() {
+        return pkChunkingParent;
+    }
+
+    public void setPkChunkingParent(String pkChunkingParent) {
+        this.pkChunkingParent = pkChunkingParent;
+    }
+
+    public String getPkChunkingStartRow() {
+        return pkChunkingStartRow;
+    }
+
+    public void setPkChunkingStartRow(String pkChunkingStartRow) {
+        this.pkChunkingStartRow = pkChunkingStartRow;
     }
 
     public String getQueryLocator() {
