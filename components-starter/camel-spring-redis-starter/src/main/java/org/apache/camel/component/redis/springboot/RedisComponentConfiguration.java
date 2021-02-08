@@ -19,6 +19,7 @@ package org.apache.camel.component.redis.springboot;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * Send and receive messages from Redis.
@@ -36,6 +37,11 @@ public class RedisComponentConfiguration
      * is enabled by default.
      */
     private Boolean enabled;
+    /**
+     * Reference to a pre-configured RedisTemplate instance to use. The option
+     * is a org.springframework.data.redis.core.RedisTemplate type.
+     */
+    private RedisTemplate redisTemplate;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -65,6 +71,14 @@ public class RedisComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public RedisTemplate getRedisTemplate() {
+        return redisTemplate;
+    }
+
+    public void setRedisTemplate(RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;

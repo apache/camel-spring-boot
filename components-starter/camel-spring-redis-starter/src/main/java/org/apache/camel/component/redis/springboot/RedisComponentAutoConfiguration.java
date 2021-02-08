@@ -44,7 +44,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,RedisComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.spring-redis"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, RedisComponentConverter.class})
 public class RedisComponentAutoConfiguration {
 
     @Autowired
