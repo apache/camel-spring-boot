@@ -23,12 +23,12 @@
     <parent>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-dependencies</artifactId>
-        <version>3.7.2-SNAPSHOT</version>
+        <version>3.7.2</version>
     </parent>
 
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>spring-boot</artifactId>
-    <version>3.7.2-SNAPSHOT</version>
+    <version>3.7.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Camel SB</name>
@@ -112,7 +112,7 @@
         <spring-boot-version>2.4.2</spring-boot-version>
 
         <!-- Camel target version -->
-        <camel-version>3.7.2-SNAPSHOT</camel-version>
+        <camel-version>3.7.2</camel-version>
 
         <!-- versions -->
         <aether-version>1.0.2.v20150114</aether-version>
@@ -490,7 +490,7 @@
         <profile>
             <id>dev</id>
             <properties>
-                <camel-version>3.7.2-SNAPSHOT</camel-version>
+                <camel-version>3.7.2</camel-version>
             </properties>
         </profile>
 
