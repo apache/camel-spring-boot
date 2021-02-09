@@ -710,11 +710,9 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * To enable Java Flight Recorder to start a recording and automatic dump the recording to disk after startup is
      * complete.
      *
-     * This requires that camel-jfr is on the classpath.
-     *
-     * The default is true.
+     * This requires that camel-jfr is on the classpath, and to enable this option.
      */
-    private boolean startupRecorderRecording = true;
+    private boolean startupRecorderRecording;
 
     /**
      * To use a specific Java Flight Recorder profile configuration, such as default or profile.
