@@ -544,10 +544,8 @@ public class KafkaComponentConfiguration
      * Factory to use for creating
      * org.apache.kafka.clients.consumer.KafkaConsumer and
      * org.apache.kafka.clients.producer.KafkaProducer instances. This allows to
-     * configure a custom factory to create
-     * org.apache.kafka.clients.consumer.KafkaConsumer and
-     * org.apache.kafka.clients.producer.KafkaProducer instances with logic that
-     * extends the vanilla Kafka clients. The option is a
+     * configure a custom factory to create instances with logic that extends
+     * the vanilla Kafka clients. The option is a
      * org.apache.camel.component.kafka.KafkaClientFactory type.
      */
     private KafkaClientFactory kafkaClientFactory;

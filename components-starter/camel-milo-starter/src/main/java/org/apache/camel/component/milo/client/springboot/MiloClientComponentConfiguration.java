@@ -18,6 +18,7 @@ package org.apache.camel.component.milo.client.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.component.milo.client.MiloClientConfiguration;
+import org.apache.camel.component.milo.client.MiloClientConnectionManager;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -129,6 +130,11 @@ public class MiloClientComponentConfiguration
      * The maximum number of bytes a response message may have
      */
     private Long maxResponseMessageSize;
+    /**
+     * Instance for managing client connections. The option is a
+     * org.apache.camel.component.milo.client.MiloClientConnectionManager type.
+     */
+    private MiloClientConnectionManager miloClientConnectionManager;
     /**
      * Override the server reported endpoint host with the host from the
      * endpoint URI.
@@ -297,6 +303,15 @@ public class MiloClientComponentConfiguration
 
     public void setMaxResponseMessageSize(Long maxResponseMessageSize) {
         this.maxResponseMessageSize = maxResponseMessageSize;
+    }
+
+    public MiloClientConnectionManager getMiloClientConnectionManager() {
+        return miloClientConnectionManager;
+    }
+
+    public void setMiloClientConnectionManager(
+            MiloClientConnectionManager miloClientConnectionManager) {
+        this.miloClientConnectionManager = miloClientConnectionManager;
     }
 
     public Boolean getOverrideHost() {
