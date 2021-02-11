@@ -16,15 +16,14 @@
  */
 package org.apache.camel.component.file.springboot.cluster;
 
-
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.camel.catalog.impl.TimePatternConverter;
 import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.component.file.cluster.FileLockClusterService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration;
+import org.apache.camel.spring.boot.cluster.TimePatternConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;

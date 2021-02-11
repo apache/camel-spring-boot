@@ -18,7 +18,7 @@ package org.apache.camel.spring.boot;
 
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.spring.SpringCamelContext;
-import org.apache.camel.spring.spi.XmlCamelContextConfigurer;
+import org.apache.camel.spring.xml.XmlCamelContextConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
