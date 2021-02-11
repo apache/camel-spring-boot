@@ -58,13 +58,13 @@ public class ExtMvelHelper {
         if (isLocalComponent(model)) {
             return String.format("xref:%s.adoc", ((ArtifactModel<?>) model).getName());
         } else if (model instanceof ComponentModel) {
-            return String.format("xref:latest@components::%s-component.adoc", ((ComponentModel) model).getScheme());
+            return String.format("xref:3.8.x@components::%s-component.adoc", ((ComponentModel) model).getScheme());
         } else if (model instanceof DataFormatModel) {
-            return String.format("xref:latest@components:dataformats:%s-dataformat.adoc", ((DataFormatModel) model).getName());
+            return String.format("xref:3.8.x@components:dataformats:%s-dataformat.adoc", ((DataFormatModel) model).getName());
         } else if (model instanceof LanguageModel) {
-            return String.format("xref:latest@components:languages:%s-language.adoc", ((LanguageModel) model).getName());
+            return String.format("xref:3.8.x@components:languages:%s-language.adoc", ((LanguageModel) model).getName());
         } else if (model instanceof OtherModel) {
-            return String.format("xref:latest@components:others:%s.adoc", ((OtherModel) model).getName());
+            return String.format("xref:3.8.x@components:others:%s.adoc", ((OtherModel) model).getName());
         } else {
             return null;
         }
