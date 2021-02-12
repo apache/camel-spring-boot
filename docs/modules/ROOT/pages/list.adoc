@@ -27,7 +27,7 @@ Number of Camel components: 347 in 280 JAR artifacts (23 deprecated)
 
 | xref:latest@components::ahc-ws-component.adoc[Async HTTP Client (AHC) Websocket] | camel-ahc-ws-starter | Stable | 2.14 | Exchange data with external Websocket servers using Async Http Client.
 
-| xref:latest@components::atlasmap-component.adoc[AtlasMap] | camel-atlasmap-starter | Preview | 3.7 | Transforms the message using an AtlasMap transformation.
+| xref:latest@components::atlasmap-component.adoc[AtlasMap] | camel-atlasmap-starter | Stable | 3.7 | Transforms the message using an AtlasMap transformation.
 
 | xref:latest@components::atmos-component.adoc[Atmos] | camel-atmos-starter | Stable | 2.15 | Integrate with EMC's ViPR object data services using the Atmos Client.
 
@@ -407,7 +407,7 @@ Number of Camel components: 347 in 280 JAR artifacts (23 deprecated)
 
 | xref:latest@components::kubernetes-config-maps-component.adoc[Kubernetes ConfigMap] | camel-kubernetes-starter | Stable | 2.17 | Perform operations on Kubernetes ConfigMaps and get notified on ConfigMaps changes.
 
-| xref:latest@components::kubernetes-custom-resources-component.adoc[Kubernetes Custom Resources] | camel-kubernetes-starter | Preview | 3.7 | Perform operations on Kubernetes Custom Resources and get notified on Deployment changes.
+| xref:latest@components::kubernetes-custom-resources-component.adoc[Kubernetes Custom Resources] | camel-kubernetes-starter | Stable | 3.7 | Perform operations on Kubernetes Custom Resources and get notified on Deployment changes.
 
 | xref:latest@components::kubernetes-deployments-component.adoc[Kubernetes Deployments] | camel-kubernetes-starter | Stable | 2.20 | Perform operations on Kubernetes Deployments and get notified on Deployment changes.
 
@@ -663,7 +663,7 @@ Number of Camel components: 347 in 280 JAR artifacts (23 deprecated)
 
 | xref:latest@components::vertx-http-component.adoc[Vert.x HTTP Client] | camel-vertx-http-starter | Stable | 3.5 | Send requests to external HTTP servers using Vert.x
 
-| xref:latest@components::vertx-kafka-component.adoc[Vert.x Kafka] | camel-vertx-kafka-starter | Preview | 3.7 | Sent and receive messages to/from an Apache Kafka broker using vert.x Kafka client
+| xref:latest@components::vertx-kafka-component.adoc[Vert.x Kafka] | camel-vertx-kafka-starter | Stable | 3.7 | Sent and receive messages to/from an Apache Kafka broker using vert.x Kafka client
 
 | xref:latest@components::vertx-websocket-component.adoc[Vert.x WebSocket] | camel-vertx-websocket-starter | Stable | 3.5 | Expose WebSocket endpoints and connect to remote WebSocket servers using Vert.x
 
@@ -766,7 +766,7 @@ Number of Camel data formats: 46 in 38 JAR artifacts (0 deprecated)
 
 | xref:latest@components:dataformats:json-johnzon-dataformat.adoc[JSON Johnzon] | camel-johnzon-starter | Stable | 2.18 | Marshal POJOs to JSON and back using Johnzon
 
-| xref:latest@components:dataformats:json-jsonb-dataformat.adoc[JSON JSON-B] | camel-jsonb-starter | Preview | 3.7 | Marshal POJOs to JSON and back using JSON-B.
+| xref:latest@components:dataformats:json-jsonb-dataformat.adoc[JSON JSON-B] | camel-jsonb-starter | Stable | 3.7 | Marshal POJOs to JSON and back using JSON-B.
 
 | xref:latest@components:dataformats:json-xstream-dataformat.adoc[JSON XStream] | camel-xstream-starter | Stable | 2.0 | Marshal POJOs to JSON and back using XStream
 
@@ -823,7 +823,7 @@ Number of Camel languages: 19 in 13 JAR artifacts (0 deprecated)
 
 | xref:latest@components:languages:constant-language.adoc[Constant] | camel-base | Stable | 1.5 | To use a constant value in Camel expressions or predicates. Important: this is a fixed constant value that is only set once during starting up the route, do not use this if you want dynamic values during routing.
 
-| xref:latest@components:languages:datasonnet-language.adoc[DataSonnet] | camel-datasonnet-starter | Preview | 3.7 | To use DataSonnet scripts in Camel expressions or predicates.
+| xref:latest@components:languages:datasonnet-language.adoc[DataSonnet] | camel-datasonnet-starter | Stable | 3.7 | To use DataSonnet scripts in Camel expressions or predicates.
 
 | xref:latest@components:languages:exchangeProperty-language.adoc[ExchangeProperty] | camel-base | Stable | 2.0 | To use a Camel Exchange property in expressions or predicates.
 
@@ -835,7 +835,7 @@ Number of Camel languages: 19 in 13 JAR artifacts (0 deprecated)
 
 | xref:latest@components:languages:hl7terser-language.adoc[HL7 Terser] | camel-hl7-starter | Stable | 2.11 | Get the value of an HL7 message field specified by terse location specification syntax.
 
-| xref:latest@components:languages:joor-language.adoc[jOOR] | camel-joor-starter | Preview | 3.7 | Evaluate a jOOR (Java compiled once at runtime) expression language.
+| xref:latest@components:languages:joor-language.adoc[jOOR] | camel-joor-starter | Stable | 3.7 | Evaluate a jOOR (Java compiled once at runtime) expression language.
 
 | xref:latest@components:languages:jsonpath-language.adoc[JsonPath] | camel-jsonpath-starter | Stable | 2.13 | Evaluate a JsonPath expression against a JSON message body.
 
@@ -871,7 +871,7 @@ Number of miscellaneous extensions: 27 in 27 JAR artifacts (2 deprecated)
 
 | xref:latest@components:others:aws-xray.adoc[AWS XRay] | camel-aws-xray-starter | Stable | 2.21 | Distributed tracing using AWS XRay
 
-| xref:latest@components:others:csimple-joor.adoc[CSimple jOOR] | camel-csimple-joor-starter | Preview | 3.7 | jOOR compiler for csimple language
+| xref:latest@components:others:csimple-joor.adoc[CSimple jOOR] | camel-csimple-joor-starter | Stable | 3.7 | jOOR compiler for csimple language
 
 | xref:latest@components:others:cxf-transport.adoc[CXF Transport] | camel-cxf-transport-starter | Stable | 2.8 | Camel Transport for Apache CXF
 
