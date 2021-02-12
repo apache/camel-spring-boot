@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot.zlast;
+package org.apache.camel.spring.boot.xml;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,10 +66,9 @@ public class MixedJavaDslAndXmlTest {
     @Test
     public void thereShouldBeTwoRoutesConfigured() {
         final List<Route> routes = camel.getRoutes();
-        assertThat(routes).as("There should be two routes configured, one from Java DSL and one from XML").hasSize(3);
+        assertThat(routes).as("There should be two routes configured, one from Java DSL and one from XML").hasSize(2);
         final List<String> routeIds = routes.stream().map(Route::getId).collect(Collectors.toList());
-        assertThat(routeIds).as("Should contain routes from Java DSL, XML and auto-loaded XML").containsOnly("java",
-            "xml", "xmlAutoLoading");
+        assertThat(routeIds).as("Should contain routes from Java DSL, XML and auto-loaded XML").containsOnly("java", "xml");
         assertThat(routes).as("All routes should be started").are(new Condition<Route>() {
             @Override
             public boolean matches(final Route route) {

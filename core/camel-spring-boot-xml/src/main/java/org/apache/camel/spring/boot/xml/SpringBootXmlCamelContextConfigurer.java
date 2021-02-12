@@ -14,10 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot;
+package org.apache.camel.spring.boot.xml;
 
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.spring.SpringCamelContext;
+import org.apache.camel.spring.boot.CamelAutoConfiguration;
+import org.apache.camel.spring.boot.CamelConfigurationProperties;
 import org.apache.camel.spring.xml.XmlCamelContextConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -49,6 +49,10 @@
       <artifactId>camel-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-spring-boot-xml-starter</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.eclipse.mylyn.github</groupId>
       <artifactId>org.eclipse.egit.github.core</artifactId>
       <version>${egit-github-core-version}</version>

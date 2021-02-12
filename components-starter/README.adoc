@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 347 in 280 JAR artifacts (23 deprecated)
+Number of Camel components: 348 in 281 JAR artifacts (23 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -294,6 +294,8 @@ Number of Camel components: 347 in 280 JAR artifacts (23 deprecated)
 | xref:latest@components::google-sheets-stream-component.adoc[Google Sheets Stream] | camel-google-sheets-starter | Stable | 2.23 | Poll for changes in Google Sheets.
 
 | xref:latest@components::gora-component.adoc[Gora] | camel-gora-starter | Stable | 2.14 | Access NoSQL databases using the Apache Gora framework.
+
+| xref:latest@components::grape-component.adoc[Grape] | camel-grape-starter | Stable | 2.16 | Fetch, load and manage additional jars dynamically after Camel Context was started.
 
 | xref:latest@components::graphql-component.adoc[GraphQL] | camel-graphql-starter | Stable | 3.0 | Send GraphQL queries and mutations to external systems.
 

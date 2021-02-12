@@ -46,7 +46,7 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
         defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
 
-    protected static final String[] IGNORE_MODULES = {/* Non-standard -> */ "camel-grape"};
+    private static final String[] IGNORE_MODULES = {"camel-spring-boot-xml"};
 
     /**
      * The catalog directory

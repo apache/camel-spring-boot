@@ -1678,6 +1678,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-spring-boot-xml-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-cloud-consul-starter</artifactId>
         <version>${project.version}</version>
       </dependency>

@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
@@ -35,9 +34,7 @@ import org.apache.camel.model.Model;
 import org.apache.camel.spi.BeanRepository;
 import org.apache.camel.spi.StartupStepRecorder;
 import org.apache.camel.spring.spi.ApplicationContextBeanRepository;
-import org.apache.camel.spring.xml.CamelBeanPostProcessor;
-import org.apache.camel.spring.xml.XmlCamelContextConfigurer;
-import org.apache.camel.support.CamelContextHelper;
+import org.apache.camel.spring.spi.CamelBeanPostProcessor;
 import org.apache.camel.support.DefaultRegistry;
 import org.apache.camel.support.startup.LoggingStartupStepRecorder;
 import org.apache.camel.util.ObjectHelper;
@@ -66,15 +63,6 @@ public class CamelAutoConfiguration {
     private static final Logger LOG = LoggerFactory.getLogger(CamelAutoConfiguration.class);
 
     /**
-     * Allows to do custom configuration when running XML based Camel in Spring Boot
-     */
-    // must be named xmlCamelContextConfigurer
-    @Bean(name = "xmlCamelContextConfigurer")
-    XmlCamelContextConfigurer springBootCamelContextConfigurer() {
-        return new SpringBootXmlCamelContextConfigurer();
-    }
-
-    /**
      * Spring-aware Camel context for the application. Auto-detects and loads all routes available in the Spring context.
      */
     // We explicitly declare the destroyMethod to be "" as the Spring @Bean
@@ -91,7 +79,10 @@ public class CamelAutoConfiguration {
         return doConfigureCamelContext(applicationContext, camelContext, config);
     }
 
-    static CamelContext doConfigureCamelContext(ApplicationContext applicationContext,
+    /**
+     * Not to be used by Camel end users
+     */
+    public static CamelContext doConfigureCamelContext(ApplicationContext applicationContext,
                                                 CamelContext camelContext,
                                                 CamelConfigurationProperties config) throws Exception {
 

@@ -25,14 +25,7 @@ import java.lang.reflect.Type;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.jar.JarFile;
@@ -90,6 +83,8 @@ import org.springframework.context.annotation.Lazy;
         defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator {
 
+    private static final String[] IGNORE_MODULES = {"camel-spring-boot-xml"};
+
     /**
      * Useful to move configuration towards starters. Warning: the
      * spring.factories files sometimes are used also on the main artifacts.
@@ -137,6 +132,11 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     DynamicClassLoader projectClassLoader;
 
     JarFile componentJar;
+
+    @Override
+    protected boolean isIgnore(String artifactId) {
+        return Arrays.asList(IGNORE_MODULES).contains(artifactId);
+    }
 
     protected void executeAll() throws MojoExecutionException, MojoFailureException, IOException {
         if ("camel-core".equals(getMainDepArtifactId())) {

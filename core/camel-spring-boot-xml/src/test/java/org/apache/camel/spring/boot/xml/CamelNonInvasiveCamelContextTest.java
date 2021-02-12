@@ -14,14 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot;
+package org.apache.camel.spring.boot.xml;
 
 import javax.annotation.Resource;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.spring.boot.CamelNonInvasiveCamelContextTest.TestApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,7 @@ import static org.junit.Assert.assertNotNull;
 @DirtiesContext
 @RunWith(SpringRunner.class)
 @EnableAutoConfiguration
-@SpringBootTest(classes = { TestApplication.class, CamelNonInvasiveCamelContextTest.class })
+@SpringBootTest(classes = {CamelNonInvasiveCamelContextTest.TestApplication.class, CamelNonInvasiveCamelContextTest.class })
 public class CamelNonInvasiveCamelContextTest {
 
     // Collaborators fixtures

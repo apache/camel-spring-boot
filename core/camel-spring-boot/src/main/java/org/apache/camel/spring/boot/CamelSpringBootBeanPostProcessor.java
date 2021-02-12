@@ -16,7 +16,7 @@
  */
 package org.apache.camel.spring.boot;
 
-import org.apache.camel.spring.xml.CamelBeanPostProcessor;
+import org.apache.camel.spring.spi.CamelBeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 
 public final class CamelSpringBootBeanPostProcessor extends CamelBeanPostProcessor {

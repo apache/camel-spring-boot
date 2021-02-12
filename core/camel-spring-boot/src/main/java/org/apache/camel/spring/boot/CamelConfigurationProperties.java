@@ -545,45 +545,6 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private String javaRoutesExcludePattern;
 
     /**
-     * Directory to scan for adding additional XML routes.
-     * You can turn this off by setting the value to false.
-     *
-     * Files can be loaded from either classpath or file by prefixing with classpath: or file:
-     * Wildcards is supported using an ANT pattern style paths, such as classpath:&#42;&#42;/&#42;camel&#42;.xml
-     *
-     * Multiple directories can be specified and separated by comma, such as:
-     * file:/myapp/mycamel/&#42;.xml,file:/myapp/myothercamel/&#42;.xml
-     */
-    private String xmlRoutes = "classpath:camel/*.xml";
-
-    /**
-     * Directory to scan for adding additional XML route templates.
-     * You can turn this off by setting the value to false.
-     *
-     * Files can be loaded from either classpath or file by prefixing with classpath: or file:
-     * Wildcards is supported using an ANT pattern style paths, such as classpath:&#42;&#42;/&#42;template-&#42;.xml
-     *
-     * Notice when using wildcards, then there is additional overhead as the classpath is scanned, where
-     * as if you specific the exact name for each XML file is faster as no classpath scanning is needed.
-     *
-     * Multiple directories can be specified and separated by comma, such as:
-     * file:/myapp/mycamel/&#42;.xml,file:/myapp/myothercamel/&#42;.xml
-     */
-    private String xmlRouteTemplates = "classpath:camel-template/*.xml";
-
-    /**
-     * Directory to scan for adding additional XML rests.
-     * You can turn this off by setting the value to false.
-     *
-     * Files can be loaded from either classpath or file by prefixing with classpath: or file:
-     * Wildcards is supported using an ANT pattern style paths, such as classpath:&#42;&#42;/&#42;camel&#42;.xml
-     *
-     * Multiple directories can be specified and separated by comma, such as:
-     * file:/myapp/mycamel/&#42;.xml,file:/myapp/myothercamel/&#42;.xml
-     */
-    private String xmlRests = "classpath:camel-rest/*.xml";
-
-    /**
      * Sets the logging level used for logging route activity (such as starting and stopping routes). The default
      * logging level is DEBUG.
      */
