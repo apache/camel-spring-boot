@@ -165,6 +165,10 @@ public class Sqs2ComponentConfiguration
      */
     private Integer waitTimeSeconds;
     /**
+     * Set the separator when passing a String to send batch message operation
+     */
+    private String batchSeparator = ",";
+    /**
      * Delay sending messages for a number of seconds.
      */
     private Integer delaySeconds;
@@ -445,6 +449,14 @@ public class Sqs2ComponentConfiguration
 
     public void setWaitTimeSeconds(Integer waitTimeSeconds) {
         this.waitTimeSeconds = waitTimeSeconds;
+    }
+
+    public String getBatchSeparator() {
+        return batchSeparator;
+    }
+
+    public void setBatchSeparator(String batchSeparator) {
+        this.batchSeparator = batchSeparator;
     }
 
     public Integer getDelaySeconds() {
