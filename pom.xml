@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-dependencies</artifactId>
-        <version>3.8.0</version>
+        <version>3.8.1-SNAPSHOT</version>
     </parent>
 
     <groupId>org.apache.camel.springboot</groupId>
@@ -109,7 +109,7 @@
         <spring-boot-version>2.4.2</spring-boot-version>
 
         <!-- Camel target version -->
-        <camel-version>3.8.0</camel-version>
+        <camel-version>3.8.1-SNAPSHOT</camel-version>
 
         <!-- versions -->
         <aether-version>1.0.2.v20150114</aether-version>
@@ -455,7 +455,7 @@
         <profile>
             <id>dev</id>
             <properties>
-                <camel-version>3.8.0</camel-version>
+                <camel-version>3.8.1-SNAPSHOT</camel-version>
             </properties>
         </profile>
 
