@@ -77,7 +77,12 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
     }
 
     protected String getMainDepArtifactId() {
-        return project.getArtifactId().substring(0, project.getArtifactId().length() - "-starter".length());
+        // its called camel-core-starter but we use camel-core-engine as the artifact as runtime target
+        if (project.getArtifactId().equals("camel-core-starter")) {
+            return "camel-core-engine";
+        } else {
+            return project.getArtifactId().substring(0, project.getArtifactId().length() - "-starter".length());
+        }
     }
 
     protected String getMainDepGroupId() {

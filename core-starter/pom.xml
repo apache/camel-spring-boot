@@ -21,23 +21,17 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
-    <artifactId>components-starter</artifactId>
+    <artifactId>camel-starter-parent</artifactId>
     <version>3.9.0-SNAPSHOT</version>
+    <relativePath>../tooling/camel-starter-parent</relativePath>
   </parent>
-  <artifactId>camel-spring-boot-xml-starter</artifactId>
-  <packaging>jar</packaging>
-  <name>Camel SB Starters :: Spring Boot XML</name>
-  <description>Spring-Boot Starter for Camel :: Spring Boot XML</description>
-  <dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-      <version>${spring-boot-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel.springboot</groupId>
-      <artifactId>camel-spring-boot-xml</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-  </dependencies>
+  <artifactId>core-starter</artifactId>
+  <packaging>pom</packaging>
+  <name>Camel SB Core Starters</name>
+  <description>Camel Core Starter</description>
+  <modules>
+    <module>camel-spring-boot-starter</module>
+    <module>camel-spring-boot-engine-starter</module>
+    <module>camel-spring-boot-xml-starter</module>
+  </modules>
 </project>

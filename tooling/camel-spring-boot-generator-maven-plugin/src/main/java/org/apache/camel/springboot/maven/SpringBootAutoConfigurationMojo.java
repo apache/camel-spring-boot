@@ -83,7 +83,7 @@ import org.springframework.context.annotation.Lazy;
         defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator {
 
-    private static final String[] IGNORE_MODULES = {"camel-spring-boot-xml"};
+    private static final String[] IGNORE_MODULES = {"camel-spring-boot-xml", "camel-spring-boot-engine"};
 
     /**
      * Useful to move configuration towards starters. Warning: the

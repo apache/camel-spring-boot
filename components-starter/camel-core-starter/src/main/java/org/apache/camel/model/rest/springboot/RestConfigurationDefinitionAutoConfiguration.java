@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
-import org.apache.camel.component.rest.RestComponent;
 import org.apache.camel.spi.RestConfiguration;
 import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.apache.camel.support.IntrospectionSupport;
@@ -53,7 +52,7 @@ public class RestConfigurationDefinitionAutoConfiguration {
     private RestConfigurationDefinitionProperties config;
 
     @Lazy
-    @Bean(name = RestComponent.DEFAULT_REST_CONFIGURATION_ID)
+    @Bean(name = "rest-configuration")
     @ConditionalOnClass(CamelContext.class)
     @ConditionalOnMissingBean
     public RestConfiguration configureRestConfigurationDefinition()

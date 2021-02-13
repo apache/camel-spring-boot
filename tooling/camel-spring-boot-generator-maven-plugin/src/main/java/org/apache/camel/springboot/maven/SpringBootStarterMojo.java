@@ -81,10 +81,6 @@ import org.apache.maven.project.ProjectBuildingResult;
         defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
 
-    // this is a bit complex generator as it messes up camel-spring-boot-starter/camel-spring-boot-xml-starter
-    // with the regular component starters. So lets skip those 2 so they can be left alone.
-    private static final String[] SKIP_ARTIFACTS = new String[]{"camel-spring-boot-starter", "camel-spring-boot-xml-starter"};
-
     private static final String GENERATED_SECTION_START = "START OF GENERATED CODE";
     private static final String GENERATED_SECTION_START_COMMENT = "<!--" + GENERATED_SECTION_START + "-->";
     private static final String GENERATED_SECTION_END = "END OF GENERATED CODE";
@@ -110,13 +106,6 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
 
     @Override
     protected void executeAll() throws MojoExecutionException, MojoFailureException {
-        for (String aid : SKIP_ARTIFACTS) {
-            if (aid.equals(project.getArtifactId())) {
-                getLog().debug("Skipping artifact: " + project.getArtifactId());
-                return;
-            }
-        }
-
         try {
             // create the starter directory
             File starterDir = baseDir;

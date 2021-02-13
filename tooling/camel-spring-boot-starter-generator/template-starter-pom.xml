@@ -26,8 +26,7 @@
     </parent>
     <artifactId>camel-%NAME%-starter</artifactId>
     <packaging>jar</packaging>
-<!--    <name>Camel Spring Boot :: Starters :: Dozer</name>-->
-<!--    <description>Spring-Boot Starter for Camel Support for the Dozer type conversion framework</description>-->
+<!--    <name>Camel SB Starters :: Name Here</name>-->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -42,11 +41,7 @@
         <!--START OF GENERATED CODE-->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-core-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-spring-boot-starter</artifactId>
+            <artifactId>camel-spring-boot-engine-starter</artifactId>
         </dependency>
         <!--END OF GENERATED CODE-->
     </dependencies>

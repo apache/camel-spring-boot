@@ -112,10 +112,27 @@ public class BomGeneratorMojo extends AbstractMojo {
                 })
                 .forEach(outDependencies::add);
 
+        // include core starters
+        Dependency dep = new Dependency();
+        dep.setGroupId("org.apache.camel.springboot");
+        dep.setArtifactId("camel-spring-boot-starter");
+        dep.setVersion("${project.version}");
+        outDependencies.add(dep);
+        dep = new Dependency();
+        dep.setGroupId("org.apache.camel.springboot");
+        dep.setArtifactId("camel-spring-boot-engine-starter");
+        dep.setVersion("${project.version}");
+        outDependencies.add(dep);
+        dep = new Dependency();
+        dep.setGroupId("org.apache.camel.springboot");
+        dep.setArtifactId("camel-spring-boot-xml-starter");
+        dep.setVersion("${project.version}");
+        outDependencies.add(dep);
+
         outDependencies.sort(Comparator.comparing(d -> (d.getGroupId() + ":" + d.getArtifactId())));
 
         // include some dependencies for testing and management
-        Dependency dep = new Dependency();
+        dep = new Dependency();
         dep.setGroupId("org.apache.camel");
         dep.setArtifactId("camel-management");
         dep.setVersion("${project.version}");
