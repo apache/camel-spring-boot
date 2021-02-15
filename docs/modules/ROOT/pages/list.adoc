@@ -865,13 +865,15 @@ Number of Camel languages: 19 in 13 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 27 in 27 JAR artifacts (2 deprecated)
+Number of miscellaneous extensions: 28 in 28 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
 | Extensions | Artifact | Support Level | Since | Description
 
 | xref:latest@components:others:aws-xray.adoc[AWS XRay] | camel-aws-xray-starter | Stable | 2.21 | Distributed tracing using AWS XRay
+
+| xref:latest@components:others:caffeine-lrucache.adoc[Caffeine Lrucache] | camel-caffeine-lrucache-starter | Stable | 3.0 | *deprecated* Camel Caffeine LRUCache support
 
 | xref:latest@components:others:csimple-joor.adoc[CSimple jOOR] | camel-csimple-joor-starter | Stable | 3.7 | jOOR compiler for csimple language
 
