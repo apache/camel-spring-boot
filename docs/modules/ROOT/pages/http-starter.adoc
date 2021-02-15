@@ -17,7 +17,7 @@ When using http with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 27 options, which are listed below.
+The component supports 28 options, which are listed below.
 
 
 
@@ -47,6 +47,7 @@ The component supports 27 options, which are listed below.
 | *camel.component.http.proxy-auth-password* | Proxy authentication password |  | String
 | *camel.component.http.proxy-auth-port* | Proxy authentication port |  | Integer
 | *camel.component.http.proxy-auth-username* | Proxy authentication username |  | String
+| *camel.component.http.response-payload-streaming-threshold* | This threshold in bytes controls whether the response payload should be stored in memory as a byte array or be streaming based. Set this to -1 to always use streaming mode. | 8192 | Integer
 | *camel.component.http.socket-timeout* | Defines the socket timeout in milliseconds, which is the timeout for waiting for data or, put differently, a maximum period inactivity between two consecutive data packets). A timeout value of zero is interpreted as an infinite timeout. A negative value is interpreted as undefined (system default). | -1 | Integer
 | *camel.component.http.ssl-context-parameters* | To configure security using SSLContextParameters. Important: Only one instance of org.apache.camel.support.jsse.SSLContextParameters is supported per HttpComponent. If you need to use 2 or more different instances, you need to define a new HttpComponent per instance you need. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
 | *camel.component.http.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters. | false | Boolean
