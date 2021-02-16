@@ -403,11 +403,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-aws-translate-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws-xray-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2200,11 +2195,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws-swf</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-translate</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>
