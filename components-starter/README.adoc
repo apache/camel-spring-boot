@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 347 in 280 JAR artifacts (22 deprecated)
+Number of Camel components: 346 in 279 JAR artifacts (21 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -126,8 +126,6 @@ Number of Camel components: 347 in 280 JAR artifacts (22 deprecated)
 | xref:latest@components::aws-sqs-component.adoc[AWS Simple Queue Service (SQS)] | camel-aws-sqs-starter | Stable | 2.6 | *deprecated* Sending and receive messages to/from AWS SQS service.
 
 | xref:latest@components::aws-swf-component.adoc[AWS Simple Workflow (SWF)] | camel-aws-swf-starter | Stable | 2.13 | *deprecated* Manage workflows in the AWS Simple Workflow service.
-
-| xref:latest@components::aws-translate-component.adoc[AWS Translate] | camel-aws-translate-starter | Stable | 3.0 | *deprecated* Translate texts using AWS Translate.
 
 | xref:latest@components::azure-eventhubs-component.adoc[Azure Event Hubs] | camel-azure-eventhubs-starter | Stable | 3.5 | The azure-eventhubs component that integrates Azure Event Hubs using AMQP protocol. Azure EventHubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers.
 
