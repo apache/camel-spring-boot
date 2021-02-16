@@ -63,12 +63,6 @@ public class ResteasyComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * This threshold in bytes controls whether the response payload should be
-     * stored in memory as a byte array or be streaming based. Set this to -1 to
-     * always use streaming mode.
-     */
-    private Integer responsePayloadStreamingThreshold = 8192;
-    /**
      * Whether to allow java serialization when a request uses
      * context-type=application/x-java-serialized-object. This is by default
      * turned off. If you enable this then be aware that Java will deserialize
@@ -114,15 +108,6 @@ public class ResteasyComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public Integer getResponsePayloadStreamingThreshold() {
-        return responsePayloadStreamingThreshold;
-    }
-
-    public void setResponsePayloadStreamingThreshold(
-            Integer responsePayloadStreamingThreshold) {
-        this.responsePayloadStreamingThreshold = responsePayloadStreamingThreshold;
     }
 
     public Boolean getAllowJavaSerializedObject() {

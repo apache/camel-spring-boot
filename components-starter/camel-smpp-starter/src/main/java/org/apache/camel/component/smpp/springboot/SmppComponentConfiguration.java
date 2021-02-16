@@ -217,7 +217,7 @@ public class SmppComponentConfiguration
      * confidence check is used to test the communication path between an ESME
      * and an SMSC.
      */
-    private Integer enquireLinkTimer = 5000;
+    private Integer enquireLinkTimer = 60000;
     /**
      * You can refer to a org.jsmpp.session.SessionStateListener in the Registry
      * to receive callbacks when the session state changed. The option is a
