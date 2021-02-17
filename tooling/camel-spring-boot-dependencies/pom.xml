@@ -393,11 +393,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-aws-sqs-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws-swf-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2185,11 +2180,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws-sns</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-sqs</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>
