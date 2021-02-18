@@ -54,6 +54,11 @@ public class VertxHttpComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Whether the response body should be byte or as
+     * io.vertx.core.buffer.Buffer
+     */
+    private Boolean responsePayloadAsByteArray = true;
+    /**
      * Whether to allow java serialization when a request has the Content-Type
      * application/x-java-serialized-object This is disabled by default. If you
      * enable this, be aware that Java will deserialize the incoming data from
@@ -139,6 +144,14 @@ public class VertxHttpComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getResponsePayloadAsByteArray() {
+        return responsePayloadAsByteArray;
+    }
+
+    public void setResponsePayloadAsByteArray(Boolean responsePayloadAsByteArray) {
+        this.responsePayloadAsByteArray = responsePayloadAsByteArray;
     }
 
     public Boolean getAllowJavaSerializedObject() {
