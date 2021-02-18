@@ -383,11 +383,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-aws-ses-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws-sns-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2175,11 +2170,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws-ses</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-sns</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>
