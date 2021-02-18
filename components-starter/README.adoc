@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 344 in 277 JAR artifacts (19 deprecated)
+Number of Camel components: 343 in 276 JAR artifacts (18 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
