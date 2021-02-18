@@ -138,7 +138,6 @@
     <module>camel-aws-mq-starter</module>
     <module>camel-aws-msk-starter</module>
     <module>camel-aws-s3-starter</module>
-    <module>camel-aws-ses-starter</module>
     <module>camel-aws-swf-starter</module>
     <module>camel-aws-xray-starter</module>
     <module>camel-aws2-athena-starter</module>
