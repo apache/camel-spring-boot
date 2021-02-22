@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 340 in 273 JAR artifacts (15 deprecated)
+Number of Camel components: 339 in 272 JAR artifacts (14 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -104,8 +104,6 @@ Number of Camel components: 340 in 273 JAR artifacts (15 deprecated)
 | xref:latest@components::aws-eks-component.adoc[AWS Elastic Kubernetes Service (EKS)] | camel-aws-eks-starter | Stable | 3.0 | *deprecated* Manage AWS EKS cluster instances.
 
 | xref:latest@components::aws-iam-component.adoc[AWS Identity and Access Management (IAM)] | camel-aws-iam-starter | Stable | 2.23 | *deprecated* Manage AWS IAM instances.
-
-| xref:latest@components::aws-kms-component.adoc[AWS Key Management Service (KMS)] | camel-aws-kms-starter | Stable | 2.21 | *deprecated* Manage keys stored in AWS KMS instances.
 
 | xref:latest@components::aws-kinesis-component.adoc[AWS Kinesis] | camel-aws-kinesis-starter | Stable | 2.17 | *deprecated* Consume and produce records from AWS Kinesis Streams.
 
