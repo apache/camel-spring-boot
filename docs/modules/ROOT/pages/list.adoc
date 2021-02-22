@@ -113,8 +113,6 @@ Number of Camel components: 343 in 276 JAR artifacts (18 deprecated)
 
 | xref:latest@components::aws-lambda-component.adoc[AWS Lambda] | camel-aws-lambda-starter | Stable | 2.20 | *deprecated* Manage and invoke AWS Lambda functions.
 
-| xref:latest@components::aws-msk-component.adoc[AWS Managed Streaming for Apache Kafka (MSK)] | camel-aws-msk-starter | Stable | 3.0 | *deprecated* Manage AWS MSK instances.
-
 | xref:latest@components::aws-mq-component.adoc[AWS MQ] | camel-aws-mq-starter | Stable | 2.21 | *deprecated* Manage AWS MQ instances.
 
 | xref:latest@components::aws-s3-component.adoc[AWS S3 Storage Service] | camel-aws-s3-starter | Stable | 2.8 | *deprecated* Store and retrieve objects from AWS S3 Storage Service.
