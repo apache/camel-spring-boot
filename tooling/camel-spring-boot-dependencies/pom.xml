@@ -918,6 +918,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-google-storage-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-gora-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2149,47 +2154,7 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-kinesis</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-kms</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-lambda</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-mq</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-msk</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws-s3</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-ses</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-sns</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-sqs</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -2830,6 +2795,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-google-sheets</artifactId>
+        <version>3.9.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-google-storage</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>
