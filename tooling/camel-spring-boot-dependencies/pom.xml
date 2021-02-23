@@ -338,11 +338,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-aws-ecs-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws-s3-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2080,11 +2075,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws-ec2</artifactId>
-        <version>3.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-ecs</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>
