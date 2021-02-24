@@ -97,8 +97,6 @@ Number of Camel components: 334 in 268 JAR artifacts (9 deprecated)
 
 | xref:latest@components::aws-ddbstream-component.adoc[AWS DynamoDB Streams] | camel-aws-ddb-starter | Stable | 2.17 | *deprecated* Receive messages from AWS DynamoDB Stream service.
 
-| xref:latest@components::aws-ec2-component.adoc[AWS Elastic Compute Cloud (EC2)] | camel-aws-ec2-starter | Stable | 2.16 | *deprecated* Manage AWS EC2 instances.
-
 | xref:latest@components::aws-s3-component.adoc[AWS S3 Storage Service] | camel-aws-s3-starter | Stable | 2.8 | *deprecated* Store and retrieve objects from AWS S3 Storage Service.
 
 | xref:latest@components::aws-swf-component.adoc[AWS Simple Workflow (SWF)] | camel-aws-swf-starter | Stable | 2.13 | *deprecated* Manage workflows in the AWS Simple Workflow service.
