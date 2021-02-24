@@ -99,13 +99,9 @@ Number of Camel components: 331 in 266 JAR artifacts (5 deprecated)
 
 | xref:latest@components::azure-storage-blob-component.adoc[Azure Storage Blob Service] | camel-azure-storage-blob-starter | Stable | 3.3 | Store and retrieve blobs from Azure Storage Blob Service using SDK v12.
 
-| xref:latest@components::azure-blob-component.adoc[Azure Storage Blob Service (Deprecated)] | camel-azure-starter | Stable | 2.19 | *deprecated* Store and retrieve blobs from Azure Storage Blob Service.
-
 | xref:latest@components::azure-storage-datalake-component.adoc[Azure storage datalake service] | camel-azure-storage-datalake-starter | Preview | 3.8 | Camel Azure Datalake Gen2 Component
 
 | xref:latest@components::azure-storage-queue-component.adoc[Azure Storage Queue Service] | camel-azure-storage-queue-starter | Stable | 3.3 | The azure-storage-queue component is used for storing and retrieving the messages to/from Azure Storage Queue using Azure SDK v12.
-
-| xref:latest@components::azure-queue-component.adoc[Azure Storage Queue Service (Deprecated)] | camel-azure-starter | Stable | 2.19 | *deprecated* Store and retrieve messages from Azure Storage Queue Service.
 
 | xref:latest@components::bean-component.adoc[Bean] | camel-bean-starter | Stable | 1.0 | Invoke methods of Java beans stored in Camel registry.
 
