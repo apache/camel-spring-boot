@@ -263,6 +263,8 @@ Number of Camel components: 333 in 267 JAR artifacts (8 deprecated)
 
 | xref:latest@components::google-sheets-stream-component.adoc[Google Sheets Stream] | camel-google-sheets-starter | Stable | 2.23 | Poll for changes in Google Sheets.
 
+| xref:latest@components::google-storage-component.adoc[Google Storage] | camel-google-storage-starter | Preview | 3.9 | Store and retrieve objects from Google Cloud Storage Service using the google-cloud-storage library.
+
 | xref:latest@components::gora-component.adoc[Gora] | camel-gora-starter | Stable | 2.14 | Access NoSQL databases using the Apache Gora framework.
 
 | xref:latest@components::grape-component.adoc[Grape] | camel-grape-starter | Stable | 2.16 | Fetch, load and manage additional jars dynamically after Camel Context was started.
@@ -835,7 +837,7 @@ Number of Camel languages: 19 in 13 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 28 in 28 JAR artifacts (3 deprecated)
+Number of miscellaneous extensions: 29 in 29 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -850,6 +852,8 @@ Number of miscellaneous extensions: 28 in 28 JAR artifacts (3 deprecated)
 | xref:latest@components:others:cxf-transport.adoc[CXF Transport] | camel-cxf-transport-starter | Stable | 2.8 | Camel Transport for Apache CXF
 
 | xref:latest@components:others:etcd3.adoc[Etcd3] | camel-etcd3-starter | Preview | 3.5 | Aggregation repository using EtcD as datastore
+
+| xref:latest@components:others:google-storage.adoc[Google Storage] | camel-google-storage-starter | Preview | 3.9 | Camel Component for Google Cloud Platform Storage
 
 | xref:latest@components:others:hystrix.adoc[Hystrix] | camel-hystrix-starter | Stable | 2.18 | *deprecated* Circuit Breaker EIP using Netflix Hystrix
 
