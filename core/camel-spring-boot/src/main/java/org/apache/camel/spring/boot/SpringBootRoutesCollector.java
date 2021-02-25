@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.LambdaRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
@@ -66,10 +67,16 @@ public class SpringBootRoutesCollector extends DefaultRoutesCollector {
                 name = name.replace('.', '/');
 
                 boolean match = !"false".equals(includePattern);
+
+                // special support for testing with @ExcludeRoutes annotation with camel-test modules
+                String exclude = camelContext.adapt(ExtendedCamelContext.class).getTestExcludeRoutes();
                 // exclude take precedence over include
-                if (match && ObjectHelper.isNotEmpty(excludePattern)) {
+                if (match && ObjectHelper.isNotEmpty(exclude)) {
+                    // this property is a comma separated list of FQN class names, so we need to make
+                    // name as path so we can use ant patch matcher
+                    exclude = exclude.replace('.', '/');
                     // there may be multiple separated by comma
-                    String[] parts = excludePattern.split(",");
+                    String[] parts = exclude.split(",");
                     for (String part : parts) {
                         // must negate when excluding, and hence !
                         match = !matcher.match(part, name);
@@ -79,15 +86,10 @@ public class SpringBootRoutesCollector extends DefaultRoutesCollector {
                         }
                     }
                 }
-                // special support for testing with @ExcludeRoutes annotation with camel-test-spring
-                String sysExcludePattern = System.getProperty("CamelTestSpringExcludeRoutes");
                 // exclude take precedence over include
-                if (match && ObjectHelper.isNotEmpty(sysExcludePattern)) {
-                    // this property is a comma separated list of FQN class names, so we need to make
-                    // name as path so we can use ant patch matcher
-                    sysExcludePattern = sysExcludePattern.replace('.', '/');
+                if (match && ObjectHelper.isNotEmpty(excludePattern)) {
                     // there may be multiple separated by comma
-                    String[] parts = sysExcludePattern.split(",");
+                    String[] parts = excludePattern.split(",");
                     for (String part : parts) {
                         // must negate when excluding, and hence !
                         match = !matcher.match(part, name);
