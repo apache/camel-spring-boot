@@ -20,7 +20,6 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.ManagementStatisticsLevel;
 import org.apache.camel.StartupSummaryLevel;
 import org.apache.camel.main.DefaultConfigurationProperties;
-import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.springboot")
@@ -649,6 +648,22 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * At this moment, dynamic endpoint destinations are not supported.
      */
     private boolean lightweight;
+
+    /**
+     * Controls whether to pool (reuse) exchanges or create new fresh exchanges (default). Using pooled will reduce JVM
+     * garbage collection overhead by avoiding to re-create Exchange instances per message each consumer receives.
+     */
+    private String exchangeFactory = "default";
+
+    /**
+     * The capacity the pool (for each consumer) uses for storing exchanges. The default capacity is 100.
+     */
+    private int exchangeFactoryCapacity = 100;
+
+    /**
+     * Configures whether statistics is enabled on exchange factory.
+     */
+    private boolean exchangeFactoryStatisticsEnabled;
 
     /**
      * To use startup recorder for capturing execution time during starting Camel. The recorder can be one of: false,
