@@ -91,8 +91,6 @@ Number of Camel components: 329 in 265 JAR artifacts (3 deprecated)
 
 | xref:latest@components::aws2-translate-component.adoc[AWS 2 Translate] | camel-aws2-translate-starter | Stable | 3.1 | Translate texts using AWS Translate and AWS SDK version 2.x.
 
-| xref:latest@components::aws-s3-component.adoc[AWS S3 Storage Service] | camel-aws-s3-starter | Stable | 2.8 | *deprecated* Store and retrieve objects from AWS S3 Storage Service.
-
 | xref:latest@components::aws-swf-component.adoc[AWS Simple Workflow (SWF)] | camel-aws-swf-starter | Stable | 2.13 | *deprecated* Manage workflows in the AWS Simple Workflow service.
 
 | xref:latest@components::azure-eventhubs-component.adoc[Azure Event Hubs] | camel-azure-eventhubs-starter | Stable | 3.5 | The azure-eventhubs component that integrates Azure Event Hubs using AMQP protocol. Azure EventHubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers.
