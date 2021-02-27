@@ -86,8 +86,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
         CamelContext camelContext = applicationContext.getBean(CamelContext.class);
 
         // only add and start Camel if its stopped (initial state)
-        if ((event.getApplicationContext() == this.applicationContext
-            || event.getApplicationContext().getParent() == this.applicationContext)
+        if (event.getApplicationContext() == this.applicationContext
             && camelContext.getStatus().isStopped()) {
             LOG.debug("Post-processing CamelContext bean: {}", camelContext.getName());
 
