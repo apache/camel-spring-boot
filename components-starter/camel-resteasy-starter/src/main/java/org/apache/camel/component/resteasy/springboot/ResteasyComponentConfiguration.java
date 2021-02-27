@@ -52,6 +52,13 @@ public class ResteasyComponentConfiguration
      */
     private String proxyConsumersClasses;
     /**
+     * If this option is true then IN exchange headers will be copied to OUT
+     * exchange headers according to copy strategy. Setting this to false,
+     * allows to only include the headers from the HTTP response (not
+     * propagating IN headers).
+     */
+    private Boolean copyHeaders = true;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -69,6 +76,19 @@ public class ResteasyComponentConfiguration
      */
     private Integer responsePayloadStreamingThreshold = 8192;
     /**
+     * Whether to skip mapping all the Camel headers as HTTP request headers. If
+     * there are no data from Camel headers needed to be included in the HTTP
+     * request then this can avoid parsing overhead with many object allocations
+     * for the JVM garbage collector.
+     */
+    private Boolean skipRequestHeaders = false;
+    /**
+     * Whether to skip mapping all the HTTP response headers to Camel headers.
+     * If there are no data needed from HTTP headers then this can avoid parsing
+     * overhead with many object allocations for the JVM garbage collector.
+     */
+    private Boolean skipResponseHeaders = false;
+    /**
      * Whether to allow java serialization when a request uses
      * context-type=application/x-java-serialized-object. This is by default
      * turned off. If you enable this then be aware that Java will deserialize
@@ -76,6 +96,14 @@ public class ResteasyComponentConfiguration
      * security risk.
      */
     private Boolean allowJavaSerializedObject = false;
+    /**
+     * Disables authentication scheme caching
+     */
+    private Boolean authCachingDisabled = false;
+    /**
+     * Disables automatic request recovery and re-execution
+     */
+    private Boolean automaticRetriesDisabled = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -85,6 +113,27 @@ public class ResteasyComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Disables connection state tracking
+     */
+    private Boolean connectionStateDisabled = false;
+    /**
+     * Disables automatic content decompression
+     */
+    private Boolean contentCompressionDisabled = false;
+    /**
+     * Disables state (cookie) management
+     */
+    private Boolean cookieManagementDisabled = false;
+    /**
+     * Disables the default user agent set by this builder if none has been
+     * provided by the user
+     */
+    private Boolean defaultUserAgentDisabled = false;
+    /**
+     * Disables automatic redirect handling
+     */
+    private Boolean redirectHandlingDisabled = false;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
@@ -108,6 +157,14 @@ public class ResteasyComponentConfiguration
         this.proxyConsumersClasses = proxyConsumersClasses;
     }
 
+    public Boolean getCopyHeaders() {
+        return copyHeaders;
+    }
+
+    public void setCopyHeaders(Boolean copyHeaders) {
+        this.copyHeaders = copyHeaders;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
@@ -125,6 +182,22 @@ public class ResteasyComponentConfiguration
         this.responsePayloadStreamingThreshold = responsePayloadStreamingThreshold;
     }
 
+    public Boolean getSkipRequestHeaders() {
+        return skipRequestHeaders;
+    }
+
+    public void setSkipRequestHeaders(Boolean skipRequestHeaders) {
+        this.skipRequestHeaders = skipRequestHeaders;
+    }
+
+    public Boolean getSkipResponseHeaders() {
+        return skipResponseHeaders;
+    }
+
+    public void setSkipResponseHeaders(Boolean skipResponseHeaders) {
+        this.skipResponseHeaders = skipResponseHeaders;
+    }
+
     public Boolean getAllowJavaSerializedObject() {
         return allowJavaSerializedObject;
     }
@@ -133,12 +206,68 @@ public class ResteasyComponentConfiguration
         this.allowJavaSerializedObject = allowJavaSerializedObject;
     }
 
+    public Boolean getAuthCachingDisabled() {
+        return authCachingDisabled;
+    }
+
+    public void setAuthCachingDisabled(Boolean authCachingDisabled) {
+        this.authCachingDisabled = authCachingDisabled;
+    }
+
+    public Boolean getAutomaticRetriesDisabled() {
+        return automaticRetriesDisabled;
+    }
+
+    public void setAutomaticRetriesDisabled(Boolean automaticRetriesDisabled) {
+        this.automaticRetriesDisabled = automaticRetriesDisabled;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getConnectionStateDisabled() {
+        return connectionStateDisabled;
+    }
+
+    public void setConnectionStateDisabled(Boolean connectionStateDisabled) {
+        this.connectionStateDisabled = connectionStateDisabled;
+    }
+
+    public Boolean getContentCompressionDisabled() {
+        return contentCompressionDisabled;
+    }
+
+    public void setContentCompressionDisabled(Boolean contentCompressionDisabled) {
+        this.contentCompressionDisabled = contentCompressionDisabled;
+    }
+
+    public Boolean getCookieManagementDisabled() {
+        return cookieManagementDisabled;
+    }
+
+    public void setCookieManagementDisabled(Boolean cookieManagementDisabled) {
+        this.cookieManagementDisabled = cookieManagementDisabled;
+    }
+
+    public Boolean getDefaultUserAgentDisabled() {
+        return defaultUserAgentDisabled;
+    }
+
+    public void setDefaultUserAgentDisabled(Boolean defaultUserAgentDisabled) {
+        this.defaultUserAgentDisabled = defaultUserAgentDisabled;
+    }
+
+    public Boolean getRedirectHandlingDisabled() {
+        return redirectHandlingDisabled;
+    }
+
+    public void setRedirectHandlingDisabled(Boolean redirectHandlingDisabled) {
+        this.redirectHandlingDisabled = redirectHandlingDisabled;
     }
 
     public HeaderFilterStrategy getHeaderFilterStrategy() {

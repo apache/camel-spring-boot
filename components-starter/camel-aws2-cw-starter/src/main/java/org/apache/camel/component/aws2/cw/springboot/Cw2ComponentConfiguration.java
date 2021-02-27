@@ -67,6 +67,11 @@ public class Cw2ComponentConfiguration
      */
     private String name;
     /**
+     * Set the need for overidding the endpoint. This option needs to be used in
+     * combination with uriEndpointOverride option
+     */
+    private Boolean overrideEndpoint = false;
+    /**
      * To define a proxy host when instantiating the CW client
      */
     private String proxyHost;
@@ -96,6 +101,11 @@ public class Cw2ComponentConfiguration
      * The metric unit
      */
     private String unit;
+    /**
+     * Set the overriding uri endpoint. This option needs to be used in
+     * combination with overrideEndpoint option
+     */
+    private String uriEndpointOverride;
     /**
      * The metric value
      */
@@ -148,6 +158,14 @@ public class Cw2ComponentConfiguration
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getOverrideEndpoint() {
+        return overrideEndpoint;
+    }
+
+    public void setOverrideEndpoint(Boolean overrideEndpoint) {
+        this.overrideEndpoint = overrideEndpoint;
     }
 
     public String getProxyHost() {
@@ -204,6 +222,14 @@ public class Cw2ComponentConfiguration
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
     }
 
     public Double getValue() {
