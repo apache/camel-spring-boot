@@ -37,7 +37,7 @@ The component supports 17 options, which are listed below.
 | *camel.component.google-storage.move-after-read* | Move objects from the origin bucket to a different bucket after they have been retrieved. To accomplish the operation the destinationBucket option must be set. The copy bucket operation is only performed if the Exchange is committed. If a rollback occurs, the object is not moved. | false | Boolean
 | *camel.component.google-storage.object-name* | The Object name inside the bucket |  | String
 | *camel.component.google-storage.operation* | Set the operation for the producer |  | GoogleCloudStorageOperations
-| *camel.component.google-storage.service-account-key* | Service account key to authenticate an application as a service account |  | String
+| *camel.component.google-storage.service-account-key* | The Service account key that can be used as credentials for the Storage client. It can be loaded by default from classpath, but you can prefix with classpath:, file:, or http: to load the resource from different systems. |  | String
 | *camel.component.google-storage.storage-class* | The Cloud Storage class to use when creating the new buckets. The option is a com.google.cloud.storage.StorageClass type. |  | StorageClass
 | *camel.component.google-storage.storage-client* | The storage client. The option is a com.google.cloud.storage.Storage type. |  | Storage
 | *camel.component.google-storage.storage-location* | The Cloud Storage location to use when creating the new buckets | US-EAST1 | String

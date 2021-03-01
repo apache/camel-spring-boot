@@ -17,7 +17,7 @@ When using aws2-eventbridge with Spring Boot make sure to use the following Mave
 ----
 
 
-The component supports 15 options, which are listed below.
+The component supports 17 options, which are listed below.
 
 
 
@@ -32,6 +32,7 @@ The component supports 15 options, which are listed below.
 | *camel.component.aws2-eventbridge.eventbridge-client* | To use a existing configured AWS Eventbridge as client. The option is a software.amazon.awssdk.services.eventbridge.EventBridgeClient type. |  | EventBridgeClient
 | *camel.component.aws2-eventbridge.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.aws2-eventbridge.operation* | The operation to perform |  | EventbridgeOperations
+| *camel.component.aws2-eventbridge.override-endpoint* | Set the need for overidding the endpoint. This option needs to be used in combination with uriEndpointOverride option | false | Boolean
 | *camel.component.aws2-eventbridge.pojo-request* | If we want to use a POJO request as body or not | false | Boolean
 | *camel.component.aws2-eventbridge.proxy-host* | To define a proxy host when instantiating the Eventbridge client |  | String
 | *camel.component.aws2-eventbridge.proxy-port* | To define a proxy port when instantiating the Eventbridge client |  | Integer
@@ -39,5 +40,6 @@ The component supports 15 options, which are listed below.
 | *camel.component.aws2-eventbridge.region* | The region in which Eventbridge client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
 | *camel.component.aws2-eventbridge.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws2-eventbridge.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
+| *camel.component.aws2-eventbridge.uri-endpoint-override* | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
 |===
 // spring-boot-auto-configure options: END

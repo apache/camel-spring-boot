@@ -52,7 +52,10 @@ public class GoogleCloudStorageComponentConfiguration
      */
     private GoogleCloudStorageConfiguration configuration;
     /**
-     * Service account key to authenticate an application as a service account
+     * The Service account key that can be used as credentials for the Storage
+     * client. It can be loaded by default from classpath, but you can prefix
+     * with classpath:, file:, or http: to load the resource from different
+     * systems.
      */
     private String serviceAccountKey;
     /**
