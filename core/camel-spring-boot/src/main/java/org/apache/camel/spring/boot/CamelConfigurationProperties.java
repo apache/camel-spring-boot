@@ -650,8 +650,9 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean lightweight;
 
     /**
-     * Controls whether to pool (reuse) exchanges or create new fresh exchanges (default). Using pooled will reduce JVM
-     * garbage collection overhead by avoiding to re-create Exchange instances per message each consumer receives.
+     * Controls whether to pool (reuse) exchanges or create new exchanges (prototype). Using pooled will reduce JVM
+     * garbage collection overhead by avoiding to re-create Exchange instances per message each consumer receives. The
+     * default is prototype mode.
      */
     private String exchangeFactory = "default";
 
