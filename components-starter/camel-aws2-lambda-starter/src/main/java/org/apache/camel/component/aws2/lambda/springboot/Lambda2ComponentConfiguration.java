@@ -63,6 +63,11 @@ public class Lambda2ComponentConfiguration
      */
     private Lambda2Operations operation = Lambda2Operations.invokeFunction;
     /**
+     * Set the need for overidding the endpoint. This option needs to be used in
+     * combination with uriEndpointOverride option
+     */
+    private Boolean overrideEndpoint = false;
+    /**
      * If we want to use a POJO request as body or not
      */
     private Boolean pojoRequest = false;
@@ -76,6 +81,11 @@ public class Lambda2ComponentConfiguration
      * If we want to trust all certificates in case of overriding the endpoint
      */
     private Boolean trustAllCertificates = false;
+    /**
+     * Set the overriding uri endpoint. This option needs to be used in
+     * combination with overrideEndpoint option
+     */
+    private String uriEndpointOverride;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -135,6 +145,14 @@ public class Lambda2ComponentConfiguration
         this.operation = operation;
     }
 
+    public Boolean getOverrideEndpoint() {
+        return overrideEndpoint;
+    }
+
+    public void setOverrideEndpoint(Boolean overrideEndpoint) {
+        this.overrideEndpoint = overrideEndpoint;
+    }
+
     public Boolean getPojoRequest() {
         return pojoRequest;
     }
@@ -157,6 +175,14 @@ public class Lambda2ComponentConfiguration
 
     public void setTrustAllCertificates(Boolean trustAllCertificates) {
         this.trustAllCertificates = trustAllCertificates;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
     }
 
     public Boolean getAutowiredEnabled() {
