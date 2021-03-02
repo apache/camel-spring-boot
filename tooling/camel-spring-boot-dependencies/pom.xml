@@ -983,6 +983,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-java-joor-dsl-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jaxb-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1853,6 +1858,16 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-xml-io-dsl-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-xml-jaxb-dsl-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xml-jaxp-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1884,6 +1899,11 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xstream-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-yaml-dsl-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -2840,6 +2860,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-jasypt</artifactId>
+        <version>3.9.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-java-joor-dsl</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -3889,7 +3914,17 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-xml-io-dsl</artifactId>
+        <version>3.9.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-xml-jaxb</artifactId>
+        <version>3.9.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-xml-jaxb-dsl</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>

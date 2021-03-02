@@ -16,6 +16,16 @@
  */
 package org.apache.camel.springboot.maven;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,15 +39,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.model.Dependency;
@@ -126,6 +127,28 @@ public class BomGeneratorMojo extends AbstractMojo {
         dep = new Dependency();
         dep.setGroupId("org.apache.camel.springboot");
         dep.setArtifactId("camel-spring-boot-xml-starter");
+        dep.setVersion("${project.version}");
+        outDependencies.add(dep);
+
+        // include dsl starters
+        dep = new Dependency();
+        dep.setGroupId("org.apache.camel.springboot");
+        dep.setArtifactId("camel-java-joor-dsl-starter");
+        dep.setVersion("${project.version}");
+        outDependencies.add(dep);
+        dep = new Dependency();
+        dep.setGroupId("org.apache.camel.springboot");
+        dep.setArtifactId("camel-xml-io-dsl-starter");
+        dep.setVersion("${project.version}");
+        outDependencies.add(dep);
+        dep = new Dependency();
+        dep.setGroupId("org.apache.camel.springboot");
+        dep.setArtifactId("camel-xml-jaxb-dsl-starter");
+        dep.setVersion("${project.version}");
+        outDependencies.add(dep);
+        dep = new Dependency();
+        dep.setGroupId("org.apache.camel.springboot");
+        dep.setArtifactId("camel-yaml-dsl-starter");
         dep.setVersion("${project.version}");
         outDependencies.add(dep);
 

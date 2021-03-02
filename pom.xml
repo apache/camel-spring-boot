@@ -74,6 +74,7 @@
         <module>components-starter</module>
         <module>core-starter</module>
         <module>catalog</module>
+        <module>dsl-starter</module>
         <module>tests</module>
         <module>docs</module>
         <module>archetypes</module>

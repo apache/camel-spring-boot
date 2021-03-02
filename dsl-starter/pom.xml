@@ -21,29 +21,18 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
-    <artifactId>components-starter</artifactId>
+    <artifactId>camel-starter-parent</artifactId>
     <version>3.9.0-SNAPSHOT</version>
+    <relativePath>../tooling/camel-starter-parent</relativePath>
   </parent>
-  <artifactId>camel-iota-starter</artifactId>
-  <packaging>jar</packaging>
-  <name>Camel SB Starters :: IOTA</name>
-  <description>Spring-Boot Starter for Camel IOTA component</description>
-  <dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-      <version>${spring-boot-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-iota</artifactId>
-      <version>${camel-version}</version>
-    </dependency>
-    <!--START OF GENERATED CODE-->
-    <dependency>
-      <groupId>org.apache.camel.springboot</groupId>
-      <artifactId>camel-core-starter</artifactId>
-    </dependency>
-    <!--END OF GENERATED CODE-->
-  </dependencies>
+  <artifactId>dsl-starter</artifactId>
+  <packaging>pom</packaging>
+  <name>Camel SB DSL Starters</name>
+  <description>Camel DSL Starter</description>
+  <modules>
+    <module>camel-java-joor-dsl-starter</module>
+    <module>camel-xml-io-dsl-starter</module>
+    <module>camel-xml-jaxb-dsl-starter</module>
+    <module>camel-yaml-dsl-starter</module>
+  </modules>
 </project>
