@@ -89,6 +89,11 @@ public class Sns2ComponentConfiguration
      */
     private String messageStructure;
     /**
+     * Set the need for overidding the endpoint. This option needs to be used in
+     * combination with uriEndpointOverride option
+     */
+    private Boolean overrideEndpoint = false;
+    /**
      * The policy for this topic. Is loaded by default from classpath, but you
      * can prefix with classpath:, file:, or http: to load the resource from
      * different systems.
@@ -133,6 +138,11 @@ public class Sns2ComponentConfiguration
      * If we want to trust all certificates in case of overriding the endpoint
      */
     private Boolean trustAllCertificates = false;
+    /**
+     * Set the overriding uri endpoint. This option needs to be used in
+     * combination with overrideEndpoint option
+     */
+    private String uriEndpointOverride;
     /**
      * Set whether the SNS client should expect to load credentials on an AWS
      * infra instance or to expect static credentials to be passed in.
@@ -221,6 +231,14 @@ public class Sns2ComponentConfiguration
         this.messageStructure = messageStructure;
     }
 
+    public Boolean getOverrideEndpoint() {
+        return overrideEndpoint;
+    }
+
+    public void setOverrideEndpoint(Boolean overrideEndpoint) {
+        this.overrideEndpoint = overrideEndpoint;
+    }
+
     public String getPolicy() {
         return policy;
     }
@@ -300,6 +318,14 @@ public class Sns2ComponentConfiguration
 
     public void setTrustAllCertificates(Boolean trustAllCertificates) {
         this.trustAllCertificates = trustAllCertificates;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
     }
 
     public Boolean getUseDefaultCredentialsProvider() {
