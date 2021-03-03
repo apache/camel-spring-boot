@@ -17,7 +17,7 @@ When using aws2-sqs with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 42 options, which are listed below.
+The component supports 44 options, which are listed below.
 
 
 
@@ -50,6 +50,7 @@ The component supports 42 options, which are listed below.
 | *camel.component.aws2-sqs.message-group-id-strategy* | Only for FIFO queues. Strategy for setting the messageGroupId on the message. Can be one of the following options: useConstant, useExchangeId, usePropertyValue. For the usePropertyValue option, the value of property CamelAwsMessageGroupId will be used. |  | String
 | *camel.component.aws2-sqs.message-retention-period* | The messageRetentionPeriod (in seconds) a message will be retained by SQS for this queue. |  | Integer
 | *camel.component.aws2-sqs.operation* | The operation to do in case the user don't want to send only a message |  | Sqs2Operations
+| *camel.component.aws2-sqs.override-endpoint* | Set the need for overidding the endpoint. This option needs to be used in combination with uriEndpointOverride option | false | Boolean
 | *camel.component.aws2-sqs.policy* | The policy for this queue. It can be loaded by default from classpath, but you can prefix with classpath:, file:, or http: to load the resource from different systems. |  | String
 | *camel.component.aws2-sqs.protocol* | The underlying protocol used to communicate with SQS | https | String
 | *camel.component.aws2-sqs.proxy-host* | To define a proxy host when instantiating the SQS client |  | String
@@ -63,6 +64,7 @@ The component supports 42 options, which are listed below.
 | *camel.component.aws2-sqs.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws2-sqs.server-side-encryption-enabled* | Define if Server Side Encryption is enabled or not on the queue | false | Boolean
 | *camel.component.aws2-sqs.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
+| *camel.component.aws2-sqs.uri-endpoint-override* | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
 | *camel.component.aws2-sqs.use-default-credentials-provider* | Set whether the SQS client should expect to load credentials on an AWS infra instance or to expect static credentials to be passed in. | false | Boolean
 | *camel.component.aws2-sqs.visibility-timeout* | The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request to set in the com.amazonaws.services.sqs.model.SetQueueAttributesRequest. This only make sense if its different from defaultVisibilityTimeout. It changes the queue visibility timeout attribute permanently. |  | Integer
 | *camel.component.aws2-sqs.wait-time-seconds* | Duration in seconds (0 to 20) that the ReceiveMessage action call will wait until a message is in the queue to include in the response. |  | Integer
