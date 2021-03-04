@@ -41,6 +41,13 @@ public class GooglePubsubComponentConfiguration
      */
     private String endpoint;
     /**
+     * The Service account key that can be used as credentials for the PubSub
+     * publisher/subscriber. It can be loaded by default from classpath, but you
+     * can prefix with classpath:, file:, or http: to load the resource from
+     * different systems.
+     */
+    private String serviceAccountKey;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -89,6 +96,14 @@ public class GooglePubsubComponentConfiguration
 
     public void setEndpoint(String endpoint) {
         this.endpoint = endpoint;
+    }
+
+    public String getServiceAccountKey() {
+        return serviceAccountKey;
+    }
+
+    public void setServiceAccountKey(String serviceAccountKey) {
+        this.serviceAccountKey = serviceAccountKey;
     }
 
     public Boolean getBridgeErrorHandler() {
