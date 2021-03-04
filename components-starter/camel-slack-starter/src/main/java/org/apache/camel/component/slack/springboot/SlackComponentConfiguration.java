@@ -66,6 +66,10 @@ public class SlackComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * The token to use
+     */
+    private String token;
+    /**
      * The incoming webhook URL
      */
     private String webhookUrl;
@@ -92,6 +96,14 @@ public class SlackComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getWebhookUrl() {
