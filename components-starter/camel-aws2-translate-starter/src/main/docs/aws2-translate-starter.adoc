@@ -17,7 +17,7 @@ When using aws2-translate with Spring Boot make sure to use the following Maven 
 ----
 
 
-The component supports 17 options, which are listed below.
+The component supports 19 options, which are listed below.
 
 
 
@@ -31,6 +31,7 @@ The component supports 17 options, which are listed below.
 | *camel.component.aws2-translate.enabled* | Whether to enable auto configuration of the aws2-translate component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-translate.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.aws2-translate.operation* | The operation to perform |  | Translate2Operations
+| *camel.component.aws2-translate.override-endpoint* | Set the need for overidding the endpoint. This option needs to be used in combination with uriEndpointOverride option | false | Boolean
 | *camel.component.aws2-translate.pojo-request* | If we want to use a POJO request as body or not | false | Boolean
 | *camel.component.aws2-translate.proxy-host* | To define a proxy host when instantiating the Translate client |  | String
 | *camel.component.aws2-translate.proxy-port* | To define a proxy port when instantiating the Translate client |  | Integer
@@ -41,5 +42,6 @@ The component supports 17 options, which are listed below.
 | *camel.component.aws2-translate.target-language* | Target language to use |  | String
 | *camel.component.aws2-translate.translate-client* | To use a existing configured AWS Translate as client. The option is a software.amazon.awssdk.services.translate.TranslateClient type. |  | TranslateClient
 | *camel.component.aws2-translate.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
+| *camel.component.aws2-translate.uri-endpoint-override* | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
 |===
 // spring-boot-auto-configure options: END
