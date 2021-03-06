@@ -64,6 +64,10 @@ public class FreemarkerComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Enables/disables localized template lookup. Disabled by default.
+     */
+    private Boolean localizedLookup = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -100,6 +104,14 @@ public class FreemarkerComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getLocalizedLookup() {
+        return localizedLookup;
+    }
+
+    public void setLocalizedLookup(Boolean localizedLookup) {
+        this.localizedLookup = localizedLookup;
     }
 
     public Boolean getAutowiredEnabled() {
