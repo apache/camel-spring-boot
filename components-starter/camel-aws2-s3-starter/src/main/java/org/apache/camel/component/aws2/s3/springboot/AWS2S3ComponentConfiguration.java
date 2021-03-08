@@ -59,7 +59,7 @@ public class AWS2S3ComponentConfiguration
      * also in case of moveAfterRead option enabled and it will create the
      * destinationBucket if it doesn't exist already.
      */
-    private Boolean autoCreateBucket = true;
+    private Boolean autoCreateBucket = false;
     /**
      * The component configuration. The option is a
      * org.apache.camel.component.aws2.s3.AWS2S3Configuration type.
