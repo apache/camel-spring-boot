@@ -48,7 +48,7 @@ public class Sns2ComponentConfiguration
     /**
      * Setting the autocreation of the topic
      */
-    private Boolean autoCreateTopic = true;
+    private Boolean autoCreateTopic = false;
     /**
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.sns.Sns2Configuration type.
