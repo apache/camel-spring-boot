@@ -28,7 +28,7 @@ The component supports 44 options, which are listed below.
 | *camel.component.aws2-sqs.amazon-a-w-s-host* | The hostname of the Amazon AWS cloud. | amazonaws.com | String
 | *camel.component.aws2-sqs.amazon-s-q-s-client* | To use the AmazonSQS as client. The option is a software.amazon.awssdk.services.sqs.SqsClient type. |  | SqsClient
 | *camel.component.aws2-sqs.attribute-names* | A list of attribute names to receive when consuming. Multiple names can be separated by comma. |  | String
-| *camel.component.aws2-sqs.auto-create-queue* | Setting the autocreation of the queue | true | Boolean
+| *camel.component.aws2-sqs.auto-create-queue* | Setting the autocreation of the queue | false | Boolean
 | *camel.component.aws2-sqs.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.aws2-sqs.batch-separator* | Set the separator when passing a String to send batch message operation | , | String
 | *camel.component.aws2-sqs.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean

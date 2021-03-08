@@ -54,7 +54,7 @@ public class Sqs2ComponentConfiguration
     /**
      * Setting the autocreation of the queue
      */
-    private Boolean autoCreateQueue = true;
+    private Boolean autoCreateQueue = false;
     /**
      * The AWS SQS default configuration. The option is a
      * org.apache.camel.component.aws2.sqs.Sqs2Configuration type.
