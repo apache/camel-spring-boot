@@ -100,6 +100,10 @@ public class SpringRabbitMQComponentConfiguration
      */
     private String deadLetterRoutingKey;
     /**
+     * The number of consumers
+     */
+    private Integer concurrentConsumers = 1;
+    /**
      * To use a custom ErrorHandler for handling exceptions from the message
      * listener (consumer). The option is a
      * org.springframework.util.ErrorHandler type.
@@ -111,6 +115,14 @@ public class SpringRabbitMQComponentConfiguration
      * org.apache.camel.component.springrabbit.ListenerContainerFactory type.
      */
     private ListenerContainerFactory listenerContainerFactory;
+    /**
+     * The maximum number of consumers (available only with SMLC)
+     */
+    private Integer maxConcurrentConsumers;
+    /**
+     * The type of the MessageListenerContainer
+     */
+    private String messageListenerContainerType = "DMLC";
     /**
      * Tell the broker how many messages to send to each consumer in a single
      * request. Often this can be set quite high to improve throughput.
@@ -247,6 +259,14 @@ public class SpringRabbitMQComponentConfiguration
         this.deadLetterRoutingKey = deadLetterRoutingKey;
     }
 
+    public Integer getConcurrentConsumers() {
+        return concurrentConsumers;
+    }
+
+    public void setConcurrentConsumers(Integer concurrentConsumers) {
+        this.concurrentConsumers = concurrentConsumers;
+    }
+
     public ErrorHandler getErrorHandler() {
         return errorHandler;
     }
@@ -262,6 +282,23 @@ public class SpringRabbitMQComponentConfiguration
     public void setListenerContainerFactory(
             ListenerContainerFactory listenerContainerFactory) {
         this.listenerContainerFactory = listenerContainerFactory;
+    }
+
+    public Integer getMaxConcurrentConsumers() {
+        return maxConcurrentConsumers;
+    }
+
+    public void setMaxConcurrentConsumers(Integer maxConcurrentConsumers) {
+        this.maxConcurrentConsumers = maxConcurrentConsumers;
+    }
+
+    public String getMessageListenerContainerType() {
+        return messageListenerContainerType;
+    }
+
+    public void setMessageListenerContainerType(
+            String messageListenerContainerType) {
+        this.messageListenerContainerType = messageListenerContainerType;
     }
 
     public Integer getPrefetchCount() {

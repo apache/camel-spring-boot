@@ -260,6 +260,10 @@ public class NettyHttpComponentConfiguration
      */
     private Integer producerPoolMinIdle;
     /**
+     * To enable/disable hostname verification on SSLEngine
+     */
+    private Boolean hostnameVerification = false;
+    /**
      * Only used for TCP when transferExchange is true. When set to true,
      * serializable objects in headers and properties will be added to the
      * exchange. Otherwise Camel will exclude any non-serializable objects and
@@ -684,6 +688,14 @@ public class NettyHttpComponentConfiguration
 
     public void setProducerPoolMinIdle(Integer producerPoolMinIdle) {
         this.producerPoolMinIdle = producerPoolMinIdle;
+    }
+
+    public Boolean getHostnameVerification() {
+        return hostnameVerification;
+    }
+
+    public void setHostnameVerification(Boolean hostnameVerification) {
+        this.hostnameVerification = hostnameVerification;
     }
 
     public Boolean getAllowSerializedHeaders() {
