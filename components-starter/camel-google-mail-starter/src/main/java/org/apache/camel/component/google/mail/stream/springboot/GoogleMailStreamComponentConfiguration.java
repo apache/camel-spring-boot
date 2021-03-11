@@ -62,7 +62,7 @@ public class GoogleMailStreamComponentConfiguration
     /**
      * Mark the message as read once it has been consumed
      */
-    private Boolean markAsRead = false;
+    private Boolean markAsRead = true;
     /**
      * Max results to be returned
      */

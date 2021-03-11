@@ -22,6 +22,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import org.apache.camel.component.vertx.kafka.VertxKafkaClientFactory;
 import org.apache.camel.component.vertx.kafka.configuration.VertxKafkaConfiguration;
+import org.apache.camel.component.vertx.kafka.offset.VertxKafkaManualCommitFactory;
 import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -205,6 +206,18 @@ public class VertxKafkaComponentConfiguration
      * brokers older than 0.11.0
      */
     private Boolean allowAutoCreateTopics = true;
+    /**
+     * Whether to allow doing manual commits via
+     * org.apache.camel.component.vertx.kafka.offset.VertxKafkaManualCommit. If
+     * this option is enabled then an instance of
+     * org.apache.camel.component.vertx.kafka.offset.VertxKafkaManualCommit is
+     * stored on the Exchange message header, which allows end users to access
+     * this API and perform manual offset commits via the Kafka consumer. Note:
+     * To take full control of the offset committing, you may need to disable
+     * the Kafka Consumer default auto commit behavior by setting
+     * 'enableAutoCommit' to 'false'.
+     */
+    private Boolean allowManualCommit = false;
     /**
      * The frequency in milliseconds that the consumer offsets are
      * auto-committed to Kafka if enable.auto.commit is set to true. The option
@@ -402,6 +415,17 @@ public class VertxKafkaComponentConfiguration
      * org.apache.kafka.common.serialization.Deserializer interface.
      */
     private String valueDeserializer = "org.apache.kafka.common.serialization.StringDeserializer";
+    /**
+     * Factory to use for creating
+     * org.apache.camel.component.vertx.kafka.offset.VertxKafkaManualCommit
+     * instances. This allows to plugin a custom factory to create custom
+     * org.apache.camel.component.vertx.kafka.offset.VertxKafkaManualCommit
+     * instances in case special logic is needed when doing manual commits that
+     * deviates from the default implementation that comes out of the box. The
+     * option is a
+     * org.apache.camel.component.vertx.kafka.offset.VertxKafkaManualCommitFactory type.
+     */
+    private VertxKafkaManualCommitFactory kafkaManualCommitFactory;
     /**
      * The number of acknowledgments the producer requires the leader to have
      * received before considering a request complete. This controls the
@@ -1038,6 +1062,14 @@ public class VertxKafkaComponentConfiguration
         this.allowAutoCreateTopics = allowAutoCreateTopics;
     }
 
+    public Boolean getAllowManualCommit() {
+        return allowManualCommit;
+    }
+
+    public void setAllowManualCommit(Boolean allowManualCommit) {
+        this.allowManualCommit = allowManualCommit;
+    }
+
     public Integer getAutoCommitIntervalMs() {
         return autoCommitIntervalMs;
     }
@@ -1229,6 +1261,15 @@ public class VertxKafkaComponentConfiguration
 
     public void setValueDeserializer(String valueDeserializer) {
         this.valueDeserializer = valueDeserializer;
+    }
+
+    public VertxKafkaManualCommitFactory getKafkaManualCommitFactory() {
+        return kafkaManualCommitFactory;
+    }
+
+    public void setKafkaManualCommitFactory(
+            VertxKafkaManualCommitFactory kafkaManualCommitFactory) {
+        this.kafkaManualCommitFactory = kafkaManualCommitFactory;
     }
 
     public String getAcks() {

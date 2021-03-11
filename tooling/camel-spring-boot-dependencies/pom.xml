@@ -2059,6 +2059,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-aws-parent</artifactId>
+        <version>3.9.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws-xray</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
@@ -2160,6 +2165,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-azure-eventhubs</artifactId>
+        <version>3.9.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-azure-parent</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -2459,6 +2469,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-debezium-common-parent</artifactId>
+        <version>3.9.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-debezium-maven-plugin</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
@@ -2675,6 +2690,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-google-mail</artifactId>
+        <version>3.9.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-google-parent</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -3140,6 +3160,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-microprofile-metrics</artifactId>
+        <version>3.9.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-microprofile-parent</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>
