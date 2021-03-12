@@ -102,6 +102,13 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean shutdownLogInflightExchangesOnTimeout = true;
 
     /**
+     * UUID generator to use.
+     *
+     * default (32 bytes), short (16 bytes), classic (32 bytes or longer), simple (long incrementing counter)
+     */
+    private String uuidGenerator = "default";
+
+    /**
      * Enable JMX in your Camel application.
      */
     private boolean jmxEnabled = true;
