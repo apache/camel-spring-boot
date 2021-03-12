@@ -92,7 +92,7 @@ When using spring-boot with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 168 options, which are listed below.
+The component supports 169 options, which are listed below.
 
 
 
@@ -227,6 +227,7 @@ The component supports 168 options, which are listed below.
 | *camel.springboot.use-breadcrumb* | Set whether breadcrumb is enabled. The default value is false. | false | Boolean
 | *camel.springboot.use-data-type* | Whether to enable using data type on Camel messages. Data type are automatic turned on if one or more routes has been explicit configured with input and output types. Otherwise data type is default off. | false | Boolean
 | *camel.springboot.use-mdc-logging* | To turn on MDC logging | false | Boolean
+| *camel.springboot.uuid-generator* | UUID generator to use. default (32 bytes), short (16 bytes), classic (32 bytes or longer), simple (long incrementing counter) | default | String
 | *camel.springboot.warn-on-early-shutdown* | Whether to log a WARN if Camel on Spring Boot was immediately shutdown after starting which very likely is because there is no JVM thread to keep the application running. | true | Boolean
 | *camel.ssl.cert-alias* | An optional certificate alias to use. This is useful when the keystore has multiple certificates. |  | String
 | *camel.ssl.cipher-suites* | The optional explicitly configured cipher suites for this configuration. |  | CipherSuitesParameters

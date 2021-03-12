@@ -3744,6 +3744,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-test-parent</artifactId>
+        <version>3.9.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-test-spring</artifactId>
         <version>3.9.0-SNAPSHOT</version>
       </dependency>
