@@ -22,6 +22,7 @@ import org.apache.camel.component.aws2.sqs.Sqs2Configuration;
 import org.apache.camel.component.aws2.sqs.Sqs2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
@@ -131,6 +132,7 @@ public class Sqs2ComponentConfiguration
      * through a Camel filter upstream in the route, then don't send
      * DeleteMessage.
      */
+    @Deprecated
     private Boolean deleteIfFiltered = true;
     /**
      * If enabled then a scheduled background task will keep extending the
@@ -411,10 +413,13 @@ public class Sqs2ComponentConfiguration
         this.deleteAfterRead = deleteAfterRead;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getDeleteIfFiltered() {
         return deleteIfFiltered;
     }
 
+    @Deprecated
     public void setDeleteIfFiltered(Boolean deleteIfFiltered) {
         this.deleteIfFiltered = deleteIfFiltered;
     }
