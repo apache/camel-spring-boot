@@ -22,7 +22,6 @@ import org.apache.camel.component.aws2.sqs.Sqs2Configuration;
 import org.apache.camel.component.aws2.sqs.Sqs2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
@@ -127,12 +126,10 @@ public class Sqs2ComponentConfiguration
      */
     private Boolean deleteAfterRead = true;
     /**
-     * Whether or not to send the DeleteMessage to the SQS queue if an exchange
-     * fails to get through a filter. If 'false' and exchange does not make it
-     * through a Camel filter upstream in the route, then don't send
-     * DeleteMessage.
+     * Whether or not to send the DeleteMessage to the SQS queue if the exchange
+     * has property with key Sqs2Constants#SQS_DELETE_FILTERED
+     * (CamelAwsSqsDeleteFiltered) set to true.
      */
-    @Deprecated
     private Boolean deleteIfFiltered = true;
     /**
      * If enabled then a scheduled background task will keep extending the
@@ -413,13 +410,10 @@ public class Sqs2ComponentConfiguration
         this.deleteAfterRead = deleteAfterRead;
     }
 
-    @Deprecated
-    @DeprecatedConfigurationProperty
     public Boolean getDeleteIfFiltered() {
         return deleteIfFiltered;
     }
 
-    @Deprecated
     public void setDeleteIfFiltered(Boolean deleteIfFiltered) {
         this.deleteIfFiltered = deleteIfFiltered;
     }

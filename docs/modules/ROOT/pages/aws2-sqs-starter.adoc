@@ -38,6 +38,7 @@ The component supports 44 options, which are listed below.
 | *camel.component.aws2-sqs.delay-queue* | Define if you want to apply delaySeconds option to the queue or on single messages | false | Boolean
 | *camel.component.aws2-sqs.delay-seconds* | Delay sending messages for a number of seconds. |  | Integer
 | *camel.component.aws2-sqs.delete-after-read* | Delete message from SQS after it has been read | true | Boolean
+| *camel.component.aws2-sqs.delete-if-filtered* | Whether or not to send the DeleteMessage to the SQS queue if the exchange has property with key Sqs2Constants#SQS_DELETE_FILTERED (CamelAwsSqsDeleteFiltered) set to true. | true | Boolean
 | *camel.component.aws2-sqs.enabled* | Whether to enable auto configuration of the aws2-sqs component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-sqs.extend-message-visibility* | If enabled then a scheduled background task will keep extending the message visibility on SQS. This is needed if it takes a long time to process the message. If set to true defaultVisibilityTimeout must be set. See details at Amazon docs. | false | Boolean
 | *camel.component.aws2-sqs.kms-data-key-reuse-period-seconds* | The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again. An integer representing seconds, between 60 seconds (1 minute) and 86,400 seconds (24 hours). Default: 300 (5 minutes). |  | Integer
@@ -67,6 +68,5 @@ The component supports 44 options, which are listed below.
 | *camel.component.aws2-sqs.use-default-credentials-provider* | Set whether the SQS client should expect to load credentials on an AWS infra instance or to expect static credentials to be passed in. | false | Boolean
 | *camel.component.aws2-sqs.visibility-timeout* | The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request to set in the com.amazonaws.services.sqs.model.SetQueueAttributesRequest. This only make sense if its different from defaultVisibilityTimeout. It changes the queue visibility timeout attribute permanently. |  | Integer
 | *camel.component.aws2-sqs.wait-time-seconds* | Duration in seconds (0 to 20) that the ReceiveMessage action call will wait until a message is in the queue to include in the response. |  | Integer
-| *camel.component.aws2-sqs.delete-if-filtered* | *Deprecated* Whether or not to send the DeleteMessage to the SQS queue if an exchange fails to get through a filter. If 'false' and exchange does not make it through a Camel filter upstream in the route, then don't send DeleteMessage. | true | Boolean
 |===
 // spring-boot-auto-configure options: END
