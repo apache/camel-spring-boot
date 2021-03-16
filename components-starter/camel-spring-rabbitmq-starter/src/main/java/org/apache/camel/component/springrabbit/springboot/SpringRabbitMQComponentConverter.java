@@ -45,6 +45,7 @@ public class SpringRabbitMQComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.springframework.amqp.rabbit.connection.ConnectionFactory.class));
         answer.add(new ConvertiblePair(String.class, org.springframework.util.ErrorHandler.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.springrabbit.ListenerContainerFactory.class));
+        answer.add(new ConvertiblePair(String.class, org.springframework.retry.interceptor.RetryOperationsInterceptor.class));
         answer.add(new ConvertiblePair(String.class, org.springframework.amqp.support.converter.MessageConverter.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.springrabbit.MessagePropertiesConverter.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
@@ -68,6 +69,7 @@ public class SpringRabbitMQComponentConverter implements GenericConverter {
             case "org.springframework.amqp.rabbit.connection.ConnectionFactory": return applicationContext.getBean(ref, org.springframework.amqp.rabbit.connection.ConnectionFactory.class);
             case "org.springframework.util.ErrorHandler": return applicationContext.getBean(ref, org.springframework.util.ErrorHandler.class);
             case "org.apache.camel.component.springrabbit.ListenerContainerFactory": return applicationContext.getBean(ref, org.apache.camel.component.springrabbit.ListenerContainerFactory.class);
+            case "org.springframework.retry.interceptor.RetryOperationsInterceptor": return applicationContext.getBean(ref, org.springframework.retry.interceptor.RetryOperationsInterceptor.class);
             case "org.springframework.amqp.support.converter.MessageConverter": return applicationContext.getBean(ref, org.springframework.amqp.support.converter.MessageConverter.class);
             case "org.apache.camel.component.springrabbit.MessagePropertiesConverter": return applicationContext.getBean(ref, org.apache.camel.component.springrabbit.MessagePropertiesConverter.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);

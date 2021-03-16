@@ -25,6 +25,7 @@ import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.retry.interceptor.RetryOperationsInterceptor;
 import org.springframework.util.ErrorHandler;
 
 /**
@@ -100,6 +101,22 @@ public class SpringRabbitMQComponentConfiguration
      */
     private String deadLetterRoutingKey;
     /**
+     * How many times a Rabbitmq consumer will retry the same message if Camel
+     * failed to process the message
+     */
+    private Integer maximumRetryAttempts = 5;
+    /**
+     * Whether a Rabbitmq consumer should reject the message without requeuing.
+     * This enables failed messages to be sent to a Dead Letter Exchange/Queue,
+     * if the broker is so configured.
+     */
+    private Boolean rejectAndDontRequeue = true;
+    /**
+     * Delay in msec a Rabbitmq consumer will wait before redelivering a message
+     * that Camel failed to process
+     */
+    private Integer retryDelay = 1000;
+    /**
      * The number of consumers
      */
     private Integer concurrentConsumers = 1;
@@ -129,6 +146,13 @@ public class SpringRabbitMQComponentConfiguration
      */
     private Integer prefetchCount = 250;
     /**
+     * Custom retry configuration to use. If this is configured then the other
+     * settings such as maximumRetryAttempts for retry are not in use. The
+     * option is a
+     * org.springframework.retry.interceptor.RetryOperationsInterceptor type.
+     */
+    private RetryOperationsInterceptor retry;
+    /**
      * The time to wait for workers in milliseconds after the container is
      * stopped. If any workers are active when the shutdown signal comes they
      * will be allowed to finish processing as long as they can finish within
@@ -146,6 +170,13 @@ public class SpringRabbitMQComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Specify the timeout in milliseconds to be used when waiting for a reply
+     * message when doing request/reply messaging. The default value is 5
+     * seconds. A negative value indicates an indefinite timeout. The option is
+     * a long type.
+     */
+    private Long replyTimeout = 5000L;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -259,6 +290,30 @@ public class SpringRabbitMQComponentConfiguration
         this.deadLetterRoutingKey = deadLetterRoutingKey;
     }
 
+    public Integer getMaximumRetryAttempts() {
+        return maximumRetryAttempts;
+    }
+
+    public void setMaximumRetryAttempts(Integer maximumRetryAttempts) {
+        this.maximumRetryAttempts = maximumRetryAttempts;
+    }
+
+    public Boolean getRejectAndDontRequeue() {
+        return rejectAndDontRequeue;
+    }
+
+    public void setRejectAndDontRequeue(Boolean rejectAndDontRequeue) {
+        this.rejectAndDontRequeue = rejectAndDontRequeue;
+    }
+
+    public Integer getRetryDelay() {
+        return retryDelay;
+    }
+
+    public void setRetryDelay(Integer retryDelay) {
+        this.retryDelay = retryDelay;
+    }
+
     public Integer getConcurrentConsumers() {
         return concurrentConsumers;
     }
@@ -309,6 +364,14 @@ public class SpringRabbitMQComponentConfiguration
         this.prefetchCount = prefetchCount;
     }
 
+    public RetryOperationsInterceptor getRetry() {
+        return retry;
+    }
+
+    public void setRetry(RetryOperationsInterceptor retry) {
+        this.retry = retry;
+    }
+
     public Long getShutdownTimeout() {
         return shutdownTimeout;
     }
@@ -323,6 +386,14 @@ public class SpringRabbitMQComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Long getReplyTimeout() {
+        return replyTimeout;
+    }
+
+    public void setReplyTimeout(Long replyTimeout) {
+        this.replyTimeout = replyTimeout;
     }
 
     public Boolean getAutowiredEnabled() {
