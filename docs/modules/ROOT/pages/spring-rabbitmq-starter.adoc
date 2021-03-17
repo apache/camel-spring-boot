@@ -17,7 +17,7 @@ When using spring-rabbitmq with Spring Boot make sure to use the following Maven
 ----
 
 
-The component supports 24 options, which are listed below.
+The component supports 29 options, which are listed below.
 
 
 
@@ -42,10 +42,15 @@ The component supports 24 options, which are listed below.
 | *camel.component.spring-rabbitmq.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.spring-rabbitmq.listener-container-factory* | To use a custom factory for creating and configuring ListenerContainer to be used by the consumer for receiving messages. The option is a org.apache.camel.component.springrabbit.ListenerContainerFactory type. |  | ListenerContainerFactory
 | *camel.component.spring-rabbitmq.max-concurrent-consumers* | The maximum number of consumers (available only with SMLC) |  | Integer
+| *camel.component.spring-rabbitmq.maximum-retry-attempts* | How many times a Rabbitmq consumer will retry the same message if Camel failed to process the message | 5 | Integer
 | *camel.component.spring-rabbitmq.message-converter* | To use a custom MessageConverter so you can be in control how to map to/from a org.springframework.amqp.core.Message. The option is a org.springframework.amqp.support.converter.MessageConverter type. |  | MessageConverter
 | *camel.component.spring-rabbitmq.message-listener-container-type* | The type of the MessageListenerContainer | DMLC | String
 | *camel.component.spring-rabbitmq.message-properties-converter* | To use a custom MessagePropertiesConverter so you can be in control how to map to/from a org.springframework.amqp.core.MessageProperties. The option is a org.apache.camel.component.springrabbit.MessagePropertiesConverter type. |  | MessagePropertiesConverter
 | *camel.component.spring-rabbitmq.prefetch-count* | Tell the broker how many messages to send to each consumer in a single request. Often this can be set quite high to improve throughput. | 250 | Integer
+| *camel.component.spring-rabbitmq.reject-and-dont-requeue* | Whether a Rabbitmq consumer should reject the message without requeuing. This enables failed messages to be sent to a Dead Letter Exchange/Queue, if the broker is so configured. | true | Boolean
+| *camel.component.spring-rabbitmq.reply-timeout* | Specify the timeout in milliseconds to be used when waiting for a reply message when doing request/reply messaging. The default value is 5 seconds. A negative value indicates an indefinite timeout. The option is a long type. | 5000 | Long
+| *camel.component.spring-rabbitmq.retry* | Custom retry configuration to use. If this is configured then the other settings such as maximumRetryAttempts for retry are not in use. The option is a org.springframework.retry.interceptor.RetryOperationsInterceptor type. |  | RetryOperationsInterceptor
+| *camel.component.spring-rabbitmq.retry-delay* | Delay in msec a Rabbitmq consumer will wait before redelivering a message that Camel failed to process | 1000 | Integer
 | *camel.component.spring-rabbitmq.shutdown-timeout* | The time to wait for workers in milliseconds after the container is stopped. If any workers are active when the shutdown signal comes they will be allowed to finish processing as long as they can finish within this timeout. The option is a long type. | 5000 | Long
 | *camel.component.spring-rabbitmq.test-connection-on-startup* | Specifies whether to test the connection on startup. This ensures that when Camel starts that all the JMS consumers have a valid connection to the JMS broker. If a connection cannot be granted then Camel throws an exception on startup. This ensures that Camel is not started with failed connections. The JMS producers is tested as well. | false | Boolean
 |===

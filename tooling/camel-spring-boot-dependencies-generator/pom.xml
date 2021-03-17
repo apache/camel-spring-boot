@@ -189,6 +189,12 @@
                             <exclude>io.netty*:*</exclude>
                             <exclude>org.scala-lang:*</exclude>
                             <exclude>org.apache.lucene:*</exclude>
+                            <exclude>io.projectreactor*:*</exclude>
+                            <exclude>org.reactivestreams*:*</exclude>
+                            <exclude>io.dropwizard.metrics*:*</exclude>
+                            <exclude>com.nimbusds:oauth2-oidc-sdk</exclude>
+                            <exclude>com.squareup.okhttp3:okhttp</exclude>
+                            <exclude>io.micrometer:micrometer-core</exclude>
 
                             <!-- Kafka -->
                             <exclude>org.apache.kafka:*</exclude>
