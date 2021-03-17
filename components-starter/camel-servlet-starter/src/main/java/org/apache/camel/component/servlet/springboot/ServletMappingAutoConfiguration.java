@@ -16,15 +16,19 @@
  */
 package org.apache.camel.component.servlet.springboot;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.component.servlet.CamelHttpTransportServlet;
+import org.apache.camel.component.servlet.ServletComponent;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 /**
  * Servlet mapping auto-configuration.
@@ -46,6 +50,18 @@ public class ServletMappingAutoConfiguration {
         mapping.setLoadOnStartup(1);
 
         return mapping;
+    }
+
+    /**
+     * Ensures the Camel Servlet component is automatic created if no custom exists.
+     */
+    @Lazy
+    @Bean(name = "servlet-component")
+    @ConditionalOnMissingBean(ServletComponent.class)
+    public ServletComponent configureServletComponent(CamelContext camelContext) throws Exception {
+        ServletComponent component = new ServletComponent();
+        component.setCamelContext(camelContext);
+        return component;
     }
 
 }
