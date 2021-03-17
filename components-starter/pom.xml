@@ -126,6 +126,7 @@
     <module>camel-atomix-starter</module>
     <module>camel-avro-rpc-starter</module>
     <module>camel-avro-starter</module>
+    <module>camel-aws-secrets-manager-starter</module>
     <module>camel-aws-xray-starter</module>
     <module>camel-aws2-athena-starter</module>
     <module>camel-aws2-cw-starter</module>
