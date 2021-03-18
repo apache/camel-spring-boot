@@ -674,12 +674,10 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean exchangeFactoryStatisticsEnabled;
 
     /**
-     * To use startup recorder for capturing execution time during starting Camel. The recorder can be one of: false,
-     * logging, java-flight-recorder
-     *
-     * The default is false.
+     * To use startup recorder for capturing execution time during starting Camel. The recorder can be one of: false (or
+     * off), logging, java-flight-recorder (or jfr).
      */
-    private String startupRecorder = "false";
+    private String startupRecorder;
 
     /**
      * To filter our sub steps at a maximum depth.
