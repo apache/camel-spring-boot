@@ -243,7 +243,7 @@
       <dependency>
         <groupId>com.github.jasminb</groupId>
         <artifactId>jsonapi-converter</artifactId>
-        <version>0.10</version>
+        <version>0.11</version>
       </dependency>
       <dependency>
         <groupId>com.lmax</groupId>
