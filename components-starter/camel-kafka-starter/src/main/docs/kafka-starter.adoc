@@ -17,7 +17,7 @@ When using kafka with Spring Boot make sure to use the following Maven dependenc
 ----
 
 
-The component supports 100 options, which are listed below.
+The component supports 102 options, which are listed below.
 
 
 
@@ -80,6 +80,8 @@ The component supports 100 options, which are listed below.
 | *camel.component.kafka.partition-assignor* | The class name of the partition assignment strategy that the client will use to distribute partition ownership amongst consumer instances when group management is used | org.apache.kafka.clients.consumer.RangeAssignor | String
 | *camel.component.kafka.partition-key* | The partition to which the record will be sent (or null if no partition was specified). If this option has been configured then it take precedence over header KafkaConstants#PARTITION_KEY |  | Integer
 | *camel.component.kafka.partitioner* | The partitioner class for partitioning messages amongst sub-topics. The default partitioner is based on the hash of the key. | org.apache.kafka.clients.producer.internals.DefaultPartitioner | String
+| *camel.component.kafka.poll-exception-strategy* | To use a custom strategy with the consumer to control how to handle exceptions thrown from the Kafka broker while pooling messages. The option is a org.apache.camel.component.kafka.PollExceptionStrategy type. |  | PollExceptionStrategy
+| *camel.component.kafka.poll-on-error* | What to do if kafka threw an exception while polling for new messages. Will by default use the value from the component configuration unless an explicit value has been configured on the endpoint level. DISCARD will discard the message and continue to poll next message. ERROR_HANDLER will use Camel's error handler to process the exception, and afterwards continue to poll next message. RECONNECT will re-connect the consumer and try poll the message again RETRY will let the consumer retry polling the same message again STOP will stop the consumer (have to be manually started/restarted if the consumer should be able to consume messages again) |  | PollOnError
 | *camel.component.kafka.poll-timeout-ms* | The timeout used when polling the KafkaConsumer. The option is a java.lang.Long type. | 5000 | Long
 | *camel.component.kafka.producer-batch-size* | The producer will attempt to batch records together into fewer requests whenever multiple records are being sent to the same partition. This helps performance on both the client and the server. This configuration controls the default batch size in bytes. No attempt will be made to batch records larger than this size.Requests sent to brokers will contain multiple batches, one for each partition with data available to be sent.A small batch size will make batching less common and may reduce throughput (a batch size of zero will disable batching entirely). A very large batch size may use memory a bit more wastefully as we will always allocate a buffer of the specified batch size in anticipation of additional records. | 16384 | Integer
 | *camel.component.kafka.queue-buffering-max-messages* | The maximum number of unsent messages that can be queued up the producer when using async mode before either the producer must be blocked or data must be dropped. | 10000 | Integer

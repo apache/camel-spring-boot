@@ -56,10 +56,10 @@ public class SchedulerComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * Number of threads used by the scheduling thread pool. Is by default using
-     * a single thread
+     * Number of core threads in the thread pool used by the scheduling thread
+     * pool. Is by default using a single thread
      */
-    private Integer concurrentTasks = 1;
+    private Integer poolSize = 1;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -77,11 +77,11 @@ public class SchedulerComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
-    public Integer getConcurrentTasks() {
-        return concurrentTasks;
+    public Integer getPoolSize() {
+        return poolSize;
     }
 
-    public void setConcurrentTasks(Integer concurrentTasks) {
-        this.concurrentTasks = concurrentTasks;
+    public void setPoolSize(Integer poolSize) {
+        this.poolSize = poolSize;
     }
 }

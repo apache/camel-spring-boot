@@ -22,6 +22,8 @@ import javax.annotation.Generated;
 import org.apache.camel.component.kafka.KafkaClientFactory;
 import org.apache.camel.component.kafka.KafkaConfiguration;
 import org.apache.camel.component.kafka.KafkaManualCommitFactory;
+import org.apache.camel.component.kafka.PollExceptionStrategy;
+import org.apache.camel.component.kafka.PollOnError;
 import org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer;
 import org.apache.camel.component.kafka.serde.KafkaHeaderSerializer;
 import org.apache.camel.spi.HeaderFilterStrategy;
@@ -250,6 +252,19 @@ public class KafkaComponentConfiguration
      */
     private String partitionAssignor = "org.apache.kafka.clients.consumer.RangeAssignor";
     /**
+     * What to do if kafka threw an exception while polling for new messages.
+     * Will by default use the value from the component configuration unless an
+     * explicit value has been configured on the endpoint level. DISCARD will
+     * discard the message and continue to poll next message. ERROR_HANDLER will
+     * use Camel's error handler to process the exception, and afterwards
+     * continue to poll next message. RECONNECT will re-connect the consumer and
+     * try poll the message again RETRY will let the consumer retry polling the
+     * same message again STOP will stop the consumer (have to be manually
+     * started/restarted if the consumer should be able to consume messages
+     * again)
+     */
+    private PollOnError pollOnError;
+    /**
      * The timeout used when polling the KafkaConsumer. The option is a
      * java.lang.Long type.
      */
@@ -289,6 +304,12 @@ public class KafkaComponentConfiguration
      * org.apache.camel.component.kafka.KafkaManualCommitFactory type.
      */
     private KafkaManualCommitFactory kafkaManualCommitFactory;
+    /**
+     * To use a custom strategy with the consumer to control how to handle
+     * exceptions thrown from the Kafka broker while pooling messages. The
+     * option is a org.apache.camel.component.kafka.PollExceptionStrategy type.
+     */
+    private PollExceptionStrategy pollExceptionStrategy;
     /**
      * The total bytes of memory the producer can use to buffer records waiting
      * to be sent to the server. If records are sent faster than they can be
@@ -949,6 +970,14 @@ public class KafkaComponentConfiguration
         this.partitionAssignor = partitionAssignor;
     }
 
+    public PollOnError getPollOnError() {
+        return pollOnError;
+    }
+
+    public void setPollOnError(PollOnError pollOnError) {
+        this.pollOnError = pollOnError;
+    }
+
     public Long getPollTimeoutMs() {
         return pollTimeoutMs;
     }
@@ -1004,6 +1033,15 @@ public class KafkaComponentConfiguration
     public void setKafkaManualCommitFactory(
             KafkaManualCommitFactory kafkaManualCommitFactory) {
         this.kafkaManualCommitFactory = kafkaManualCommitFactory;
+    }
+
+    public PollExceptionStrategy getPollExceptionStrategy() {
+        return pollExceptionStrategy;
+    }
+
+    public void setPollExceptionStrategy(
+            PollExceptionStrategy pollExceptionStrategy) {
+        this.pollExceptionStrategy = pollExceptionStrategy;
     }
 
     public Integer getBufferMemorySize() {
