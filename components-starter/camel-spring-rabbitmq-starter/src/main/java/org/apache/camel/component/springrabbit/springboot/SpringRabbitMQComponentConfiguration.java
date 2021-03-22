@@ -160,6 +160,12 @@ public class SpringRabbitMQComponentConfiguration
      */
     private Long shutdownTimeout = 5000L;
     /**
+     * Whether to allow sending messages with no body. If this option is false
+     * and the message body is null, then an MessageConversionException is
+     * thrown.
+     */
+    private Boolean allowNullBody = false;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -378,6 +384,14 @@ public class SpringRabbitMQComponentConfiguration
 
     public void setShutdownTimeout(Long shutdownTimeout) {
         this.shutdownTimeout = shutdownTimeout;
+    }
+
+    public Boolean getAllowNullBody() {
+        return allowNullBody;
+    }
+
+    public void setAllowNullBody(Boolean allowNullBody) {
+        this.allowNullBody = allowNullBody;
     }
 
     public Boolean getLazyStartProducer() {
