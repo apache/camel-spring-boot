@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import javax.annotation.Generated;
 import org.apache.camel.component.kafka.KafkaClientFactory;
+import org.apache.camel.component.kafka.KafkaComponent;
 import org.apache.camel.component.kafka.KafkaConfiguration;
 import org.apache.camel.component.kafka.KafkaManualCommitFactory;
 import org.apache.camel.component.kafka.PollExceptionStrategy;
@@ -263,7 +264,7 @@ public class KafkaComponentConfiguration
      * started/restarted if the consumer should be able to consume messages
      * again)
      */
-    private PollOnError pollOnError;
+    private PollOnError pollOnError = PollOnError.ERROR_HANDLER;
     /**
      * The timeout used when polling the KafkaConsumer. The option is a
      * java.lang.Long type.
