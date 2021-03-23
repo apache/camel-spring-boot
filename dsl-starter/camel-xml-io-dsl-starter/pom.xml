@@ -31,8 +31,8 @@
 
     <artifactId>camel-xml-io-dsl-starter</artifactId>
     <packaging>jar</packaging>
-    <name>Camel SB DSL Starters :: XML Io Starter</name>
-    <description>Spring-Boot Starter for Camel DSL :: XML Io</description>
+    <name>Camel SB DSL Starters :: XML IO Starter</name>
+    <description>Spring-Boot Starter for Camel DSL :: XML IO</description>
 
     <dependencies>
         <dependency>
