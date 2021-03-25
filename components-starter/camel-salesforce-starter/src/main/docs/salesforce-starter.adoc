@@ -17,13 +17,14 @@ When using salesforce with Spring Boot make sure to use the following Maven depe
 ----
 
 
-The component supports 80 options, which are listed below.
+The component supports 81 options, which are listed below.
 
 
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| *camel.component.salesforce.all-or-none* | Composite API option to indicate to rollback all records if any are not successful. | false | Boolean
 | *camel.component.salesforce.apex-method* | APEX method name |  | String
 | *camel.component.salesforce.apex-query-params* | Query params for APEX method |  | Map
 | *camel.component.salesforce.apex-url* | APEX method URL |  | String

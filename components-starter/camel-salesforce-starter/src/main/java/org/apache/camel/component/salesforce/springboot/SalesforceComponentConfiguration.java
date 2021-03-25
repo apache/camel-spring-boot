@@ -300,6 +300,11 @@ public class SalesforceComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Composite API option to indicate to rollback all records if any are not
+     * successful.
+     */
+    private Boolean allOrNone = false;
+    /**
      * APEX method URL
      */
     private String apexUrl;
@@ -868,6 +873,14 @@ public class SalesforceComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getAllOrNone() {
+        return allOrNone;
+    }
+
+    public void setAllOrNone(Boolean allOrNone) {
+        this.allOrNone = allOrNone;
     }
 
     public String getApexUrl() {
