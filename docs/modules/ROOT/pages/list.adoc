@@ -253,7 +253,7 @@ Number of Camel components: 329 in 265 JAR artifacts (1 deprecated)
 
 | xref:latest@components::google-storage-component.adoc[Google Storage] | camel-google-storage-starter | Preview | 3.9 | Store and retrieve objects from Google Cloud Storage Service using the google-cloud-storage library.
 
-| xref:latest@components::google-functions-component.adoc[GoogleCloudFunctions] | camel-google-functions-starter | Preview | 3.9 | Store and retrieve objects from Google Cloud Functions Service using the google-cloud-storage library.
+| xref:latest@components::google-functions-component.adoc[GoogleCloudFunctions] | camel-google-functions-starter | Preview | 3.9 | Manage and invoke Google Cloud Functions
 
 | xref:latest@components::gora-component.adoc[Gora] | camel-gora-starter | Stable | 2.14 | Access NoSQL databases using the Apache Gora framework.
 
