@@ -77,7 +77,8 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
 
     @Override
     public int getOrder() {
-        return 0;
+        // must run before regular customizers
+        return -1;
     }
 
     @EnableWebSecurity
@@ -90,15 +91,11 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                    .authorizeRequests()
-                    .anyRequest().authenticated()
-                    .and()
-                    .oauth2ResourceServer()
-                    .jwt()
-                    .jwtAuthenticationConverter(getProvider().getJwtAuthenticationConverter());
+            http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().authorizeRequests()
+                .anyRequest().authenticated()
+                .and().oauth2ResourceServer()
+                .jwt().jwtAuthenticationConverter(getProvider().getJwtAuthenticationConverter());
         }
     }
 
