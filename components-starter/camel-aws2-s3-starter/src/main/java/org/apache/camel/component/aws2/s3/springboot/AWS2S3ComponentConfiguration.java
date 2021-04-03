@@ -20,6 +20,7 @@ import javax.annotation.Generated;
 import org.apache.camel.component.aws2.s3.AWS2S3Component;
 import org.apache.camel.component.aws2.s3.AWS2S3Configuration;
 import org.apache.camel.component.aws2.s3.AWS2S3Operations;
+import org.apache.camel.component.aws2.s3.stream.AWSS3NamingStrategyEnum;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
@@ -212,6 +213,14 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean autocloseBody = true;
     /**
+     * The number of messages composing a batch in stream mode
+     */
+    private Integer batchMessageNumber = 10;
+    /**
+     * The batch size (in bytes) in stream mode
+     */
+    private Integer batchSize = 1000000;
+    /**
      * Delete file object after the S3 file has been uploaded
      */
     private Boolean deleteAfterWrite = false;
@@ -237,6 +246,10 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean multiPartUpload = false;
     /**
+     * The naming strategy to use in stream mode
+     */
+    private AWSS3NamingStrategyEnum namingStrategy = AWSS3NamingStrategyEnum.progressive;
+    /**
      * The operation to do in case the user don't want to do only an upload
      */
     private AWS2S3Operations operation;
@@ -250,6 +263,10 @@ public class AWS2S3ComponentConfiguration
      * com.amazonaws.services.s3.model.PutObjectRequest request.
      */
     private String storageClass;
+    /**
+     * When stream mode is true the upload to bucket will be done in streaming
+     */
+    private Boolean streamMode = false;
     /**
      * Define the id of KMS key to use in case KMS is enabled
      */
@@ -521,6 +538,22 @@ public class AWS2S3ComponentConfiguration
         this.autocloseBody = autocloseBody;
     }
 
+    public Integer getBatchMessageNumber() {
+        return batchMessageNumber;
+    }
+
+    public void setBatchMessageNumber(Integer batchMessageNumber) {
+        this.batchMessageNumber = batchMessageNumber;
+    }
+
+    public Integer getBatchSize() {
+        return batchSize;
+    }
+
+    public void setBatchSize(Integer batchSize) {
+        this.batchSize = batchSize;
+    }
+
     public Boolean getDeleteAfterWrite() {
         return deleteAfterWrite;
     }
@@ -553,6 +586,14 @@ public class AWS2S3ComponentConfiguration
         this.multiPartUpload = multiPartUpload;
     }
 
+    public AWSS3NamingStrategyEnum getNamingStrategy() {
+        return namingStrategy;
+    }
+
+    public void setNamingStrategy(AWSS3NamingStrategyEnum namingStrategy) {
+        this.namingStrategy = namingStrategy;
+    }
+
     public AWS2S3Operations getOperation() {
         return operation;
     }
@@ -575,6 +616,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setStorageClass(String storageClass) {
         this.storageClass = storageClass;
+    }
+
+    public Boolean getStreamMode() {
+        return streamMode;
+    }
+
+    public void setStreamMode(Boolean streamMode) {
+        this.streamMode = streamMode;
     }
 
     public String getAwsKMSKeyId() {

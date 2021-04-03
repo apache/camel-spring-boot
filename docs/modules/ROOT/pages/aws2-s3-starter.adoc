@@ -17,7 +17,7 @@ When using aws2-s3 with Spring Boot make sure to use the following Maven depende
 ----
 
 
-The component supports 44 options, which are listed below.
+The component supports 48 options, which are listed below.
 
 
 
@@ -31,6 +31,8 @@ The component supports 44 options, which are listed below.
 | *camel.component.aws2-s3.autoclose-body* | If this option is true and includeBody is false, then the S3Object.close() method will be called on exchange completion. This option is strongly related to includeBody option. In case of setting includeBody to false and autocloseBody to false, it will be up to the caller to close the S3Object stream. Setting autocloseBody to true, will close the S3Object stream automatically. | true | Boolean
 | *camel.component.aws2-s3.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.aws2-s3.aws-k-m-s-key-id* | Define the id of KMS key to use in case KMS is enabled |  | String
+| *camel.component.aws2-s3.batch-message-number* | The number of messages composing a batch in stream mode | 10 | Integer
+| *camel.component.aws2-s3.batch-size* | The batch size (in bytes) in stream mode | 1000000 | Integer
 | *camel.component.aws2-s3.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.aws2-s3.configuration* | The component configuration. The option is a org.apache.camel.component.aws2.s3.AWS2S3Configuration type. |  | AWS2S3Configuration
 | *camel.component.aws2-s3.customer-algorithm* | Define the customer algorithm to use in case CustomerKey is enabled |  | String
@@ -51,6 +53,7 @@ The component supports 44 options, which are listed below.
 | *camel.component.aws2-s3.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.aws2-s3.move-after-read* | Move objects from S3 bucket to a different bucket after they have been retrieved. To accomplish the operation the destinationBucket option must be set. The copy bucket operation is only performed if the Exchange is committed. If a rollback occurs, the object is not moved. | false | Boolean
 | *camel.component.aws2-s3.multi-part-upload* | If it is true, camel will upload the file with multi part format, the part size is decided by the option of partSize | false | Boolean
+| *camel.component.aws2-s3.naming-strategy* | The naming strategy to use in stream mode |  | AWSS3NamingStrategyEnum
 | *camel.component.aws2-s3.operation* | The operation to do in case the user don't want to do only an upload |  | AWS2S3Operations
 | *camel.component.aws2-s3.override-endpoint* | Set the need for overidding the endpoint. This option needs to be used in combination with uriEndpointOverride option | false | Boolean
 | *camel.component.aws2-s3.part-size* | Setup the partSize which is used in multi part upload, the default size is 25M. | 26214400 | Long
@@ -63,6 +66,7 @@ The component supports 44 options, which are listed below.
 | *camel.component.aws2-s3.region* | The region in which S3 client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
 | *camel.component.aws2-s3.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws2-s3.storage-class* | The storage class to set in the com.amazonaws.services.s3.model.PutObjectRequest request. |  | String
+| *camel.component.aws2-s3.stream-mode* | When stream mode is true the upload to bucket will be done in streaming | false | Boolean
 | *camel.component.aws2-s3.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | *camel.component.aws2-s3.uri-endpoint-override* | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
 | *camel.component.aws2-s3.use-aws-k-m-s* | Define if KMS must be used or not | false | Boolean
