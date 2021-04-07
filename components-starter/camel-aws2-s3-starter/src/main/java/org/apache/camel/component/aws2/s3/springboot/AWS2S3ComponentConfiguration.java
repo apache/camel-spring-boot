@@ -266,7 +266,12 @@ public class AWS2S3ComponentConfiguration
     /**
      * When stream mode is true the upload to bucket will be done in streaming
      */
-    private Boolean streamMode = false;
+    private Boolean streamingUploadMode = false;
+    /**
+     * While streaming upload mode is true, this option set the timeout to
+     * complete upload
+     */
+    private Long streamingUploadTimeout;
     /**
      * Define the id of KMS key to use in case KMS is enabled
      */
@@ -618,12 +623,20 @@ public class AWS2S3ComponentConfiguration
         this.storageClass = storageClass;
     }
 
-    public Boolean getStreamMode() {
-        return streamMode;
+    public Boolean getStreamingUploadMode() {
+        return streamingUploadMode;
     }
 
-    public void setStreamMode(Boolean streamMode) {
-        this.streamMode = streamMode;
+    public void setStreamingUploadMode(Boolean streamingUploadMode) {
+        this.streamingUploadMode = streamingUploadMode;
+    }
+
+    public Long getStreamingUploadTimeout() {
+        return streamingUploadTimeout;
+    }
+
+    public void setStreamingUploadTimeout(Long streamingUploadTimeout) {
+        this.streamingUploadTimeout = streamingUploadTimeout;
     }
 
     public String getAwsKMSKeyId() {
