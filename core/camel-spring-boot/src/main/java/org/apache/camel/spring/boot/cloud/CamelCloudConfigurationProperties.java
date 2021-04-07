@@ -218,13 +218,21 @@ public class CamelCloudConfigurationProperties {
 
     public static class ServiceDiscoveryConfiguration {
         /**
-         * Configure service discoveries.
+         * Configure static service discovery using simple host:port strings.
          */
         private Map<String, List<String>> services = new HashMap<>();
 
+        /**
+         * Configure static service discovery with distinct id, host, port, and metadata properties.
+         */
+        private Map<String, List<ServiceDefinitionConfiguration>> serviceDefinitions = new HashMap<>();
 
         public Map<String, List<String>> getServices() {
             return services;
+        }
+
+        public Map<String, List<ServiceDefinitionConfiguration>> getServiceDefinitions() {
+            return serviceDefinitions;
         }
     }
 
@@ -248,6 +256,60 @@ public class CamelCloudConfigurationProperties {
 
         public Map<String, ServiceDiscoveryConfiguration> getConfigurations() {
             return configurations;
+        }
+    }
+
+    public static class ServiceDefinitionConfiguration {
+        /**
+         * Service definition id.
+         */
+        private String id;
+
+        /**
+         * Service host.
+         */
+        private String host;
+
+        /**
+         * Service port.
+         */
+        private int port;
+
+        /**
+         * Service metadata to register with the service.
+         */
+        private Map<String, String> metadata;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getHost() {
+            return host;
+        }
+
+        public void setHost(String host) {
+            this.host = host;
+        }
+
+        public int getPort() {
+            return port;
+        }
+
+        public void setPort(int port) {
+            this.port = port;
+        }
+
+        public Map<String, String> getMetadata() {
+            return metadata;
+        }
+
+        public void setMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
         }
     }
 

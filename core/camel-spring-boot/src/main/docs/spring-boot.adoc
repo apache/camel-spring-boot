@@ -111,9 +111,10 @@ The component supports 170 options, which are listed below.
 | *camel.cloud.service-call.service-filter* | A reference to the org.apache.camel.cloud.ServiceFilter to use. |  | String
 | *camel.cloud.service-call.uri* | The uri of the endpoint to send to. The uri can be dynamic computed using the simple language expression. |  | String
 | *camel.cloud.service-chooser.enabled* | Global option to enable/disable Camel cloud service chooser, default is true. | true | Boolean
-| *camel.cloud.service-discovery.configurations* | Configure the service discovery rules. |  | Map
+| *camel.cloud.service-discovery.configurations* | Configure additional static service discoveries using a map of custom service discovery names, each associated with a map of service names associated with `org.apache.camel.spring.boot.cloud.CamelCloudConfigurationProperties.ServiceDiscovery` objects. |  | Map
 | *camel.cloud.service-discovery.enabled* | Global option to enable/disable Camel cloud service discovery, default is true. | true | Boolean
-| *camel.cloud.service-discovery.services* | Configure service discoveries. |  | Map
+| *camel.cloud.service-discovery.services* | Configure static service discovery using a map of service names associated with simple host:port Strings. |  | Map
+| *camel.cloud.service-discovery.service-definitions* | Configure static service discovery using a map of service names associated with `org.apache.camel.spring.boot.cloud.CamelCloudConfigurationProperties.ServiceDefinitionConfiguration` objects. |  | Map
 | *camel.cloud.service-filter.blacklist* | Configure service filter blacklists. |  | Map
 | *camel.cloud.service-filter.configurations* | Configure the service filtering rules. |  | Map
 | *camel.cloud.service-filter.enabled* | Global option to enable/disable Camel cloud service filter, default is true. | true | Boolean

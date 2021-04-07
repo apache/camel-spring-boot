@@ -24,6 +24,7 @@ import javax.annotation.PostConstruct;
 import org.apache.camel.CamelContext;
 import org.apache.camel.NoTypeConversionAvailableException;
 import org.apache.camel.cloud.ServiceDiscovery;
+import org.apache.camel.impl.cloud.DefaultServiceDefinition;
 import org.apache.camel.impl.cloud.StaticServiceDiscovery;
 import org.apache.camel.spring.boot.util.GroupCondition;
 import org.slf4j.Logger;
@@ -115,6 +116,19 @@ public class CamelCloudServiceDiscoveryAutoConfiguration implements BeanFactoryA
         for (Map.Entry<String, List<String>> entry : services.entrySet()) {
             staticServiceDiscovery.addServers(entry.getKey(), entry.getValue());
         }
+
+        configuration.getServiceDefinitions().entrySet()
+            .stream()
+            .flatMap(serviceDefinitionEntry -> serviceDefinitionEntry.getValue()
+                .stream()
+                .map(serviceDefinitionConf -> DefaultServiceDefinition.builder()
+                    .withName(serviceDefinitionEntry.getKey())
+                    .withId(serviceDefinitionConf.getId())
+                    .withHost(serviceDefinitionConf.getHost())
+                    .withPort(serviceDefinitionConf.getPort())
+                    .withMeta(serviceDefinitionConf.getMetadata())
+                    .build())
+            ).forEach(staticServiceDiscovery::addServer);
 
         return staticServiceDiscovery;
     }
