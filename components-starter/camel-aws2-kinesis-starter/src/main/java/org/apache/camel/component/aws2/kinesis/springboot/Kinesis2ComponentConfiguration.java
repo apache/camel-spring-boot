@@ -91,6 +91,12 @@ public class Kinesis2ComponentConfiguration
      */
     private String uriEndpointOverride;
     /**
+     * Set whether the Kinesis client should expect to load credentials through
+     * a default credentials provider or to expect static credentials to be
+     * passed in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -231,6 +237,15 @@ public class Kinesis2ComponentConfiguration
 
     public void setUriEndpointOverride(String uriEndpointOverride) {
         this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
     }
 
     public Boolean getBridgeErrorHandler() {
