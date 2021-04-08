@@ -73,7 +73,7 @@
       <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>fastjson</artifactId>
-        <version>1.2.75</version>
+        <version>1.2.76</version>
       </dependency>
       <dependency>
         <groupId>com.azure</groupId>
@@ -4571,7 +4571,7 @@
       <dependency>
         <groupId>org.knowm.xchange</groupId>
         <artifactId>xchange-core</artifactId>
-        <version>5.0.6</version>
+        <version>5.0.7</version>
       </dependency>
       <dependency>
         <groupId>org.linguafranca.pwdb</groupId>
