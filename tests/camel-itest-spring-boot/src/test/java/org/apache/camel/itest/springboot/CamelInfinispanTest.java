@@ -36,12 +36,16 @@ public class CamelInfinispanTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelInfinispanTest.class))
-                .dependency("org.infinispan:infinispan-client-hotrod:11.0.5.Final")
-                .dependency("org.infinispan:infinispan-commons:11.0.5.Final")
-                .dependency("org.infinispan:infinispan-component-annotations:11.0.5.Final")
-                .dependency("org.infinispan:infinispan-core:11.0.5.Final")
-                .dependency("org.infinispan:infinispan-query-dsl:11.0.5.Final")
-                .dependency("org.infinispan:infinispan-remote-query-client:11.0.5.Final")
+                .dependency("org.infinispan:infinispan-client-hotrod:12.1.0.Final")
+                .dependency("org.infinispan:infinispan-commons:12.1.0.Final")
+                .dependency("org.infinispan:infinispan-component-annotations:12.1.0.Final")
+                .dependency("org.infinispan:infinispan-core:12.1.0.Final")
+                .dependency("org.infinispan:infinispan-query-dsl:12.1.0.Final")
+                .dependency("org.infinispan:infinispan-jboss-marshalling:12.1.0.Final")
+                .dependency("org.infinispan:infinispan-marshaller-protostuff:12.1.0.Final")
+                .dependency("org.infinispan:infinispan-remote-query-client:12.1.0.Final")
+                .dependency("org.infinispan.protostream:protostream-types:4.4.0.Beta3")
+                .dependency("org.infinispan.protostream:protostream:4.4.0.Beta3")
                 .disableJmx("org.infinispan:*")
                 .build();
     }
