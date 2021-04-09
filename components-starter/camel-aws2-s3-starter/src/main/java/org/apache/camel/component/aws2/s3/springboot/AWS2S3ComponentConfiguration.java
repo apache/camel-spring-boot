@@ -21,6 +21,7 @@ import org.apache.camel.component.aws2.s3.AWS2S3Component;
 import org.apache.camel.component.aws2.s3.AWS2S3Configuration;
 import org.apache.camel.component.aws2.s3.AWS2S3Operations;
 import org.apache.camel.component.aws2.s3.stream.AWSS3NamingStrategyEnum;
+import org.apache.camel.component.aws2.s3.stream.AWSS3RestartingPolicyEnum;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
@@ -213,11 +214,11 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean autocloseBody = true;
     /**
-     * The number of messages composing a batch in stream mode
+     * The number of messages composing a batch in streaming upload mode
      */
     private Integer batchMessageNumber = 10;
     /**
-     * The batch size (in bytes) in stream mode
+     * The batch size (in bytes) in streaming upload mode
      */
     private Integer batchSize = 1000000;
     /**
@@ -246,7 +247,7 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean multiPartUpload = false;
     /**
-     * The naming strategy to use in stream mode
+     * The naming strategy to use in streaming upload mode
      */
     private AWSS3NamingStrategyEnum namingStrategy = AWSS3NamingStrategyEnum.progressive;
     /**
@@ -258,6 +259,10 @@ public class AWS2S3ComponentConfiguration
      * is 25M.
      */
     private Long partSize = 26214400L;
+    /**
+     * The restarting policy to use in streaming upload mode
+     */
+    private AWSS3RestartingPolicyEnum restartingPolicy = AWSS3RestartingPolicyEnum.override;
     /**
      * The storage class to set in the
      * com.amazonaws.services.s3.model.PutObjectRequest request.
@@ -613,6 +618,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setPartSize(Long partSize) {
         this.partSize = partSize;
+    }
+
+    public AWSS3RestartingPolicyEnum getRestartingPolicy() {
+        return restartingPolicy;
+    }
+
+    public void setRestartingPolicy(AWSS3RestartingPolicyEnum restartingPolicy) {
+        this.restartingPolicy = restartingPolicy;
     }
 
     public String getStorageClass() {
