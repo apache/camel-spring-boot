@@ -164,8 +164,7 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String converters;
     /**
-     * The name of the database the connector should be monitoring. When working
-     * with a multi-tenant set-up, must be set to the CDB name.
+     * The name of the database the connector should be monitoring
      */
     private String databaseDbname;
     /**
@@ -201,7 +200,7 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String databaseHistoryKafkaTopic;
     /**
-     * Resolvable hostname or IP address of the SQL Server database server.
+     * Resolvable hostname or IP address of the database server.
      */
     private String databaseHostname;
     /**
@@ -209,12 +208,11 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String databaseInstance;
     /**
-     * Password of the SQL Server database user to be used when connecting to
-     * the database.
+     * Password of the database user to be used when connecting to the database.
      */
     private String databasePassword;
     /**
-     * Port of the SQL Server database server.
+     * Port of the database server.
      */
     private Integer databasePort = 1433;
     /**
@@ -230,8 +228,7 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String databaseServerTimezone;
     /**
-     * Name of the SQL Server database user to be used when connecting to the
-     * database.
+     * Name of the database user to be used when connecting to the database.
      */
     private String databaseUser;
     /**
@@ -310,8 +307,8 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String messageKeyColumns;
     /**
-     * Frequency in milliseconds to wait for new change events to appear after
-     * receiving no events. Defaults to 500ms. The option is a long type.
+     * Time to wait for new change events to appear after receiving no events,
+     * given in milliseconds. Defaults to 500 ms. The option is a long type.
      */
     private Long pollIntervalMs = 500L;
     /**
@@ -333,14 +330,19 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Boolean sanitizeFieldNames = false;
     /**
+     * The name of the data collection that is used to send signals/commands to
+     * Debezium. Signaling is disabled when not set.
+     */
+    private String signalDataCollection;
+    /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes. By default,
      * no operations will be skipped.
      */
     private String skippedOperations;
     /**
-     * The number of milliseconds to delay before a snapshot will begin. The
-     * option is a long type.
+     * A delay period before a snapshot will begin, given in milliseconds.
+     * Defaults to 0 ms. The option is a long type.
      */
     private Long snapshotDelayMs = 0L;
     /**
@@ -869,6 +871,14 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setSanitizeFieldNames(Boolean sanitizeFieldNames) {
         this.sanitizeFieldNames = sanitizeFieldNames;
+    }
+
+    public String getSignalDataCollection() {
+        return signalDataCollection;
+    }
+
+    public void setSignalDataCollection(String signalDataCollection) {
+        this.signalDataCollection = signalDataCollection;
     }
 
     public String getSkippedOperations() {
