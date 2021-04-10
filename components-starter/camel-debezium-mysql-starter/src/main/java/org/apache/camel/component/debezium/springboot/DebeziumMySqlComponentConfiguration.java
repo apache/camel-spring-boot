@@ -136,13 +136,6 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String bigintUnsignedHandlingMode = "long";
     /**
-     * Specify how binary (blob, binary, etc.) columns should be represented in
-     * change events, including:'bytes' represents binary data as byte array
-     * (default)'base64' represents binary data as base64-encoded string'hex'
-     * represents binary data as hex-encoded (base16) string
-     */
-    private String binaryHandlingMode = "bytes";
-    /**
      * The size of a look-ahead buffer used by the binlog reader to decide
      * whether the transaction in progress is going to be committed or rolled
      * back. Use 0 to disable look-ahead buffering. Defaults to 0 (i.e.
@@ -163,20 +156,39 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String columnIncludeList;
     /**
+     * A comma-separated list of regular expressions matching fully-qualified
+     * names of columns that adds the columns original type and original length
+     * as parameters to the corresponding field schemas in the emitted change
+     * records.
+     */
+    private String columnPropagateSourceType;
+    /**
+     * Regular expressions matching columns to include in change events
+     * (deprecated, use column.include.list instead)
+     */
+    private String columnWhitelist;
+    /**
      * Whether a separate thread should be used to ensure the connection is kept
      * alive.
      */
     private Boolean connectKeepAlive = true;
     /**
-     * Interval in milliseconds to wait for connection checking if keep alive
-     * thread is used. The option is a long type.
+     * Interval for connection checking if keep alive thread is used, given in
+     * milliseconds Defaults to 1 minute (60,000 ms). The option is a long type.
      */
     private Long connectKeepAliveIntervalMs = 60000L;
     /**
-     * Maximum time in milliseconds to wait after trying to connect to the
-     * database before timing out. The option is a int type.
+     * Maximum time to wait after trying to connect to the database before
+     * timing out, given in milliseconds. Defaults to 30 seconds (30,000 ms).
+     * The option is a int type.
      */
     private Integer connectTimeoutMs = 30000;
+    /**
+     * Optional list of custom converters that would be used instead of default
+     * ones. The converters are defined using '.type' config option and
+     * configured using options '.'
+     */
+    private String converters;
     /**
      * A comma-separated list of regular expressions that match database names
      * to be excluded from monitoring
@@ -215,20 +227,7 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String databaseHistoryKafkaTopic;
     /**
-     * Controls the action Debezium will take when it meets a DDL statement in
-     * binlog, that it cannot parse.By default the connector will stop operating
-     * but by changing the setting it can ignore the statements which it cannot
-     * parse. If skipping is enabled then Debezium can miss metadata changes.
-     */
-    private Boolean databaseHistorySkipUnparseableDdl = false;
-    /**
-     * Controls what DDL will Debezium store in database history.By default
-     * (false) Debezium will store all incoming DDL statements. If set to
-     * truethen only DDL that manipulates a monitored table will be stored.
-     */
-    private Boolean databaseHistoryStoreOnlyMonitoredTablesDdl = false;
-    /**
-     * Resolvable hostname or IP address of the MySQL database server.
+     * Resolvable hostname or IP address of the database server.
      */
     private String databaseHostname;
     /**
@@ -250,12 +249,11 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String databaseJdbcDriver = "class com.mysql.cj.jdbc.Driver";
     /**
-     * Password of the MySQL database user to be used when connecting to the
-     * database.
+     * Password of the database user to be used when connecting to the database.
      */
     private String databasePassword;
     /**
-     * Port of the MySQL database server.
+     * Port of the database server.
      */
     private Integer databasePort = 3306;
     /**
@@ -319,10 +317,16 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String databaseSslTruststorePassword;
     /**
-     * Name of the MySQL database user to be used when connecting to the
-     * database.
+     * Name of the database user to be used when connecting to the database.
      */
     private String databaseUser;
+    /**
+     * A comma-separated list of regular expressions matching the
+     * database-specific data type names that adds the data type's original type
+     * and original length as parameters to the corresponding field schemas in
+     * the emitted change records.
+     */
+    private String datatypePropagateSourceType;
     /**
      * Specify how DECIMAL and NUMERIC columns should be represented in change
      * events, including:'precise' (the default) uses java.math.BigDecimal to
@@ -358,13 +362,6 @@ public class DebeziumMySqlComponentConfiguration
      * problematic event will be skipped.
      */
     private String eventProcessingFailureHandlingMode = "fail";
-    /**
-     * If set to 'latest', when connector sees new GTID, it will start consuming
-     * gtid channel from the server latest executed gtid position. If 'earliest'
-     * (the default) connector starts reading channel from first available (not
-     * purged) gtid position on the server.
-     */
-    private String gtidNewChannelPosition = "earliest";
     /**
      * The source UUIDs used to exclude GTID ranges when determine the starting
      * position in the MySQL server's binlog.
@@ -434,6 +431,12 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Integer maxQueueSize = 8192;
     /**
+     * Maximum size of the queue in bytes for change events read from the
+     * database log but not yet recorded or forwarded. Defaults to 0. Mean the
+     * feature is not enabled
+     */
+    private Long maxQueueSizeInBytes = 0L;
+    /**
      * A semicolon-separated list of expressions that match fully-qualified
      * tables and column(s) to be used as message key. Each expression must
      * match the pattern ':',where the table names could be defined as
@@ -446,10 +449,33 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String messageKeyColumns;
     /**
-     * Frequency in milliseconds to wait for new change events to appear after
-     * receiving no events. Defaults to 500ms. The option is a long type.
+     * Time to wait for new change events to appear after receiving no events,
+     * given in milliseconds. Defaults to 500 ms. The option is a long type.
      */
     private Long pollIntervalMs = 500L;
+    /**
+     * Enables transaction metadata extraction together with event counting
+     */
+    private Boolean provideTransactionMetadata = false;
+    /**
+     * The maximum number of records that should be loaded into memory while
+     * streaming. A value of 0 uses the default JDBC fetch size.
+     */
+    private Integer queryFetchSize = 0;
+    /**
+     * Time to wait before restarting connector after retriable exception
+     * occurs. Defaults to 10000ms. The option is a long type.
+     */
+    private Long retriableRestartConnectorWaitMs = 10000L;
+    /**
+     * Whether field names will be sanitized to Avro naming conventions
+     */
+    private Boolean sanitizeFieldNames = false;
+    /**
+     * The name of the data collection that is used to send signals/commands to
+     * Debezium. Signaling is disabled when not set.
+     */
+    private String signalDataCollection;
     /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes. By default,
@@ -457,21 +483,20 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String skippedOperations;
     /**
-     * The number of milliseconds to delay before a snapshot will begin. The
-     * option is a long type.
+     * A delay period before a snapshot will begin, given in milliseconds.
+     * Defaults to 0 ms. The option is a long type.
      */
     private Long snapshotDelayMs = 0L;
-    /**
-     * Whether or not to mark snapshot events as normal inserts (op 'c'). If
-     * disabled, the standard functionality of emitting these records as reads
-     * (op 'r') will be used.
-     */
-    private Boolean snapshotEventsAsInserts = true;
     /**
      * The maximum number of records that should be loaded into memory while
      * performing a snapshot
      */
     private Integer snapshotFetchSize;
+    /**
+     * this setting must be set to specify a list of tables/collections whose
+     * snapshot must be taken on creating or restarting the connector.
+     */
+    private String snapshotIncludeCollectionList;
     /**
      * Controls how long the connector holds onto the global read lock while it
      * is performing a snapshot. The default is 'minimal', which means the
@@ -490,6 +515,17 @@ public class DebeziumMySqlComponentConfiguration
      * happening while the snapshot is taken.
      */
     private String snapshotLockingMode = "minimal";
+    /**
+     * The maximum number of millis to wait for table locks at the beginning of
+     * a snapshot. If locks cannot be acquired in this time frame, the snapshot
+     * will be aborted. Defaults to 10 seconds. The option is a long type.
+     */
+    private Long snapshotLockTimeoutMs = 10000L;
+    /**
+     * The maximum number of threads used to perform the snapshot. Defaults to
+     * 1.
+     */
+    private Integer snapshotMaxThreads = 1;
     /**
      * The criteria for running a snapshot upon startup of the connector.
      * Options include: 'when_needed' to specify that the connector run a
@@ -704,14 +740,6 @@ public class DebeziumMySqlComponentConfiguration
         this.bigintUnsignedHandlingMode = bigintUnsignedHandlingMode;
     }
 
-    public String getBinaryHandlingMode() {
-        return binaryHandlingMode;
-    }
-
-    public void setBinaryHandlingMode(String binaryHandlingMode) {
-        this.binaryHandlingMode = binaryHandlingMode;
-    }
-
     public Integer getBinlogBufferSize() {
         return binlogBufferSize;
     }
@@ -744,6 +772,22 @@ public class DebeziumMySqlComponentConfiguration
         this.columnIncludeList = columnIncludeList;
     }
 
+    public String getColumnPropagateSourceType() {
+        return columnPropagateSourceType;
+    }
+
+    public void setColumnPropagateSourceType(String columnPropagateSourceType) {
+        this.columnPropagateSourceType = columnPropagateSourceType;
+    }
+
+    public String getColumnWhitelist() {
+        return columnWhitelist;
+    }
+
+    public void setColumnWhitelist(String columnWhitelist) {
+        this.columnWhitelist = columnWhitelist;
+    }
+
     public Boolean getConnectKeepAlive() {
         return connectKeepAlive;
     }
@@ -766,6 +810,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setConnectTimeoutMs(Integer connectTimeoutMs) {
         this.connectTimeoutMs = connectTimeoutMs;
+    }
+
+    public String getConverters() {
+        return converters;
+    }
+
+    public void setConverters(String converters) {
+        this.converters = converters;
     }
 
     public String getDatabaseExcludeList() {
@@ -826,24 +878,6 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setDatabaseHistoryKafkaTopic(String databaseHistoryKafkaTopic) {
         this.databaseHistoryKafkaTopic = databaseHistoryKafkaTopic;
-    }
-
-    public Boolean getDatabaseHistorySkipUnparseableDdl() {
-        return databaseHistorySkipUnparseableDdl;
-    }
-
-    public void setDatabaseHistorySkipUnparseableDdl(
-            Boolean databaseHistorySkipUnparseableDdl) {
-        this.databaseHistorySkipUnparseableDdl = databaseHistorySkipUnparseableDdl;
-    }
-
-    public Boolean getDatabaseHistoryStoreOnlyMonitoredTablesDdl() {
-        return databaseHistoryStoreOnlyMonitoredTablesDdl;
-    }
-
-    public void setDatabaseHistoryStoreOnlyMonitoredTablesDdl(
-            Boolean databaseHistoryStoreOnlyMonitoredTablesDdl) {
-        this.databaseHistoryStoreOnlyMonitoredTablesDdl = databaseHistoryStoreOnlyMonitoredTablesDdl;
     }
 
     public String getDatabaseHostname() {
@@ -968,6 +1002,15 @@ public class DebeziumMySqlComponentConfiguration
         this.databaseUser = databaseUser;
     }
 
+    public String getDatatypePropagateSourceType() {
+        return datatypePropagateSourceType;
+    }
+
+    public void setDatatypePropagateSourceType(
+            String datatypePropagateSourceType) {
+        this.datatypePropagateSourceType = datatypePropagateSourceType;
+    }
+
     public String getDecimalHandlingMode() {
         return decimalHandlingMode;
     }
@@ -1000,14 +1043,6 @@ public class DebeziumMySqlComponentConfiguration
     public void setEventProcessingFailureHandlingMode(
             String eventProcessingFailureHandlingMode) {
         this.eventProcessingFailureHandlingMode = eventProcessingFailureHandlingMode;
-    }
-
-    public String getGtidNewChannelPosition() {
-        return gtidNewChannelPosition;
-    }
-
-    public void setGtidNewChannelPosition(String gtidNewChannelPosition) {
-        this.gtidNewChannelPosition = gtidNewChannelPosition;
     }
 
     public String getGtidSourceExcludes() {
@@ -1091,6 +1126,14 @@ public class DebeziumMySqlComponentConfiguration
         this.maxQueueSize = maxQueueSize;
     }
 
+    public Long getMaxQueueSizeInBytes() {
+        return maxQueueSizeInBytes;
+    }
+
+    public void setMaxQueueSizeInBytes(Long maxQueueSizeInBytes) {
+        this.maxQueueSizeInBytes = maxQueueSizeInBytes;
+    }
+
     public String getMessageKeyColumns() {
         return messageKeyColumns;
     }
@@ -1105,6 +1148,47 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setPollIntervalMs(Long pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
+    }
+
+    public Boolean getProvideTransactionMetadata() {
+        return provideTransactionMetadata;
+    }
+
+    public void setProvideTransactionMetadata(Boolean provideTransactionMetadata) {
+        this.provideTransactionMetadata = provideTransactionMetadata;
+    }
+
+    public Integer getQueryFetchSize() {
+        return queryFetchSize;
+    }
+
+    public void setQueryFetchSize(Integer queryFetchSize) {
+        this.queryFetchSize = queryFetchSize;
+    }
+
+    public Long getRetriableRestartConnectorWaitMs() {
+        return retriableRestartConnectorWaitMs;
+    }
+
+    public void setRetriableRestartConnectorWaitMs(
+            Long retriableRestartConnectorWaitMs) {
+        this.retriableRestartConnectorWaitMs = retriableRestartConnectorWaitMs;
+    }
+
+    public Boolean getSanitizeFieldNames() {
+        return sanitizeFieldNames;
+    }
+
+    public void setSanitizeFieldNames(Boolean sanitizeFieldNames) {
+        this.sanitizeFieldNames = sanitizeFieldNames;
+    }
+
+    public String getSignalDataCollection() {
+        return signalDataCollection;
+    }
+
+    public void setSignalDataCollection(String signalDataCollection) {
+        this.signalDataCollection = signalDataCollection;
     }
 
     public String getSkippedOperations() {
@@ -1123,14 +1207,6 @@ public class DebeziumMySqlComponentConfiguration
         this.snapshotDelayMs = snapshotDelayMs;
     }
 
-    public Boolean getSnapshotEventsAsInserts() {
-        return snapshotEventsAsInserts;
-    }
-
-    public void setSnapshotEventsAsInserts(Boolean snapshotEventsAsInserts) {
-        this.snapshotEventsAsInserts = snapshotEventsAsInserts;
-    }
-
     public Integer getSnapshotFetchSize() {
         return snapshotFetchSize;
     }
@@ -1139,12 +1215,37 @@ public class DebeziumMySqlComponentConfiguration
         this.snapshotFetchSize = snapshotFetchSize;
     }
 
+    public String getSnapshotIncludeCollectionList() {
+        return snapshotIncludeCollectionList;
+    }
+
+    public void setSnapshotIncludeCollectionList(
+            String snapshotIncludeCollectionList) {
+        this.snapshotIncludeCollectionList = snapshotIncludeCollectionList;
+    }
+
     public String getSnapshotLockingMode() {
         return snapshotLockingMode;
     }
 
     public void setSnapshotLockingMode(String snapshotLockingMode) {
         this.snapshotLockingMode = snapshotLockingMode;
+    }
+
+    public Long getSnapshotLockTimeoutMs() {
+        return snapshotLockTimeoutMs;
+    }
+
+    public void setSnapshotLockTimeoutMs(Long snapshotLockTimeoutMs) {
+        this.snapshotLockTimeoutMs = snapshotLockTimeoutMs;
+    }
+
+    public Integer getSnapshotMaxThreads() {
+        return snapshotMaxThreads;
+    }
+
+    public void setSnapshotMaxThreads(Integer snapshotMaxThreads) {
+        this.snapshotMaxThreads = snapshotMaxThreads;
     }
 
     public String getSnapshotMode() {

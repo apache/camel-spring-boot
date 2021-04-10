@@ -172,7 +172,7 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String databaseHistoryFileFilename;
     /**
-     * Resolvable hostname or IP address of the Postgres database server.
+     * Resolvable hostname or IP address of the database server.
      */
     private String databaseHostname;
     /**
@@ -185,12 +185,11 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String databaseInitialStatements;
     /**
-     * Password of the Postgres database user to be used when connecting to the
-     * database.
+     * Password of the database user to be used when connecting to the database.
      */
     private String databasePassword;
     /**
-     * Port of the Postgres database server.
+     * Port of the database server.
      */
     private Integer databasePort = 5432;
     /**
@@ -242,8 +241,7 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Boolean databaseTcpkeepalive = true;
     /**
-     * Name of the Postgres database user to be used when connecting to the
-     * database.
+     * Name of the database user to be used when connecting to the database.
      */
     private String databaseUser;
     /**
@@ -343,8 +341,8 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String pluginName = "decoderbufs";
     /**
-     * Frequency in milliseconds to wait for new change events to appear after
-     * receiving no events. Defaults to 500ms. The option is a long type.
+     * Time to wait for new change events to appear after receiving no events,
+     * given in milliseconds. Defaults to 500 ms. The option is a long type.
      */
     private Long pollIntervalMs = 500L;
     /**
@@ -419,6 +417,11 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String schemaWhitelist;
     /**
+     * The name of the data collection that is used to send signals/commands to
+     * Debezium. Signaling is disabled when not set.
+     */
+    private String signalDataCollection;
+    /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes. By default,
      * no operations will be skipped.
@@ -441,9 +444,9 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String slotName = "debezium";
     /**
-     * The number of milli-seconds to wait between retry attempts when the
-     * connector fails to connect to a replication slot. The option is a long
-     * type.
+     * Time to wait between retry attempts when the connector fails to connect
+     * to a replication slot, given in milliseconds. Defaults to 10 seconds
+     * (10,000 ms). The option is a long type.
      */
     private Long slotRetryDelayMs = 10000L;
     /**
@@ -460,8 +463,8 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String snapshotCustomClass;
     /**
-     * The number of milliseconds to delay before a snapshot will begin. The
-     * option is a long type.
+     * A delay period before a snapshot will begin, given in milliseconds.
+     * Defaults to 0 ms. The option is a long type.
      */
     private Long snapshotDelayMs = 0L;
     /**
@@ -522,9 +525,9 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String sourceStructVersion = "v2";
     /**
-     * Frequency in milliseconds for sending replication connection status
-     * updates to the server. Defaults to 10 seconds (10000 ms). The option is a
-     * int type.
+     * Frequency for sending replication connection status updates to the
+     * server, given in milliseconds. Defaults to 10 seconds (10,000 ms). The
+     * option is a int type.
      */
     private Integer statusUpdateIntervalMs = 10000;
     /**
@@ -1089,6 +1092,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setSchemaWhitelist(String schemaWhitelist) {
         this.schemaWhitelist = schemaWhitelist;
+    }
+
+    public String getSignalDataCollection() {
+        return signalDataCollection;
+    }
+
+    public void setSignalDataCollection(String signalDataCollection) {
+        this.signalDataCollection = signalDataCollection;
     }
 
     public String getSkippedOperations() {

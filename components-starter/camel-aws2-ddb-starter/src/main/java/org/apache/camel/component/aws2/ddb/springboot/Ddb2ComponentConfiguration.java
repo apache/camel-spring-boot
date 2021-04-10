@@ -65,6 +65,10 @@ public class Ddb2ComponentConfiguration
      */
     private String keyAttributeType;
     /**
+     * The key scalar type, it can be S (String), N (Number) and B (Bytes)
+     */
+    private String keyScalarType;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -177,6 +181,14 @@ public class Ddb2ComponentConfiguration
 
     public void setKeyAttributeType(String keyAttributeType) {
         this.keyAttributeType = keyAttributeType;
+    }
+
+    public String getKeyScalarType() {
+        return keyScalarType;
+    }
+
+    public void setKeyScalarType(String keyScalarType) {
+        this.keyScalarType = keyScalarType;
     }
 
     public Boolean getLazyStartProducer() {

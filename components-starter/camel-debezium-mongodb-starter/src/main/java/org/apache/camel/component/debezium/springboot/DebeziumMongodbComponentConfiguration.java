@@ -137,14 +137,15 @@ public class DebeziumMongodbComponentConfiguration
     private String collectionIncludeList;
     /**
      * The initial delay when trying to reconnect to a primary after a
-     * connection cannot be made or when no primary is available. Defaults to 1
-     * second (1000 ms). The option is a long type.
+     * connection cannot be made or when no primary is available, given in
+     * milliseconds. Defaults to 1 second (1,000 ms). The option is a long type.
      */
     private Long connectBackoffInitialDelayMs = 1000L;
     /**
      * The maximum delay when trying to reconnect to a primary after a
-     * connection cannot be made or when no primary is available. Defaults to
-     * 120 second (120,000 ms). The option is a long type.
+     * connection cannot be made or when no primary is available, given in
+     * milliseconds. Defaults to 120 second (120,000 ms). The option is a long
+     * type.
      */
     private Long connectBackoffMaxDelayMs = 120000L;
     /**
@@ -227,7 +228,8 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String mongodbAuthsource = "admin";
     /**
-     * The connection timeout in milliseconds. The option is a int type.
+     * The connection timeout, given in milliseconds. Defaults to 10 seconds
+     * (10,000 ms). The option is a int type.
      */
     private Integer mongodbConnectTimeoutMs = 10000;
     /**
@@ -254,16 +256,19 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String mongodbPassword;
     /**
-     * Frequency in milliseconds to look for new, removed, or changed replica
-     * sets. Defaults to 30000 milliseconds. The option is a long type.
+     * Interval for looking for new, removed, or changed replica sets, given in
+     * milliseconds. Defaults to 30 seconds (30,000 ms). The option is a long
+     * type.
      */
     private Long mongodbPollIntervalMs = 30000L;
     /**
-     * The server selection timeout in milliseconds. The option is a int type.
+     * The server selection timeout, given in milliseconds. Defaults to 10
+     * seconds (10,000 ms). The option is a int type.
      */
     private Integer mongodbServerSelectionTimeoutMs = 30000;
     /**
-     * The socket timeout in milliseconds. The option is a int type.
+     * The socket timeout, given in milliseconds. Defaults to 0 ms. The option
+     * is a int type.
      */
     private Integer mongodbSocketTimeoutMs = 0;
     /**
@@ -280,8 +285,8 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String mongodbUser;
     /**
-     * Frequency in milliseconds to wait for new change events to appear after
-     * receiving no events. Defaults to 500ms. The option is a long type.
+     * Time to wait for new change events to appear after receiving no events,
+     * given in milliseconds. Defaults to 500 ms. The option is a long type.
      */
     private Long pollIntervalMs = 500L;
     /**
@@ -303,6 +308,11 @@ public class DebeziumMongodbComponentConfiguration
      */
     private Boolean sanitizeFieldNames = false;
     /**
+     * The name of the data collection that is used to send signals/commands to
+     * Debezium. Signaling is disabled when not set.
+     */
+    private String signalDataCollection;
+    /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes. By default,
      * no operations will be skipped.
@@ -316,8 +326,8 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String snapshotCollectionFilterOverrides;
     /**
-     * The number of milliseconds to delay before a snapshot will begin. The
-     * option is a long type.
+     * A delay period before a snapshot will begin, given in milliseconds.
+     * Defaults to 0 ms. The option is a long type.
      */
     private Long snapshotDelayMs = 0L;
     /**
@@ -746,6 +756,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setSanitizeFieldNames(Boolean sanitizeFieldNames) {
         this.sanitizeFieldNames = sanitizeFieldNames;
+    }
+
+    public String getSignalDataCollection() {
+        return signalDataCollection;
+    }
+
+    public void setSignalDataCollection(String signalDataCollection) {
+        this.signalDataCollection = signalDataCollection;
     }
 
     public String getSkippedOperations() {

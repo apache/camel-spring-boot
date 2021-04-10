@@ -17,7 +17,7 @@ When using aws2-ddb with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 37 options, which are listed below.
+The component supports 38 options, which are listed below.
 
 
 
@@ -32,6 +32,7 @@ The component supports 37 options, which are listed below.
 | *camel.component.aws2-ddb.enabled* | Whether to enable auto configuration of the aws2-ddb component. This is enabled by default. |  | Boolean
 | *camel.component.aws2-ddb.key-attribute-name* | Attribute name when creating table |  | String
 | *camel.component.aws2-ddb.key-attribute-type* | Attribute type when creating table |  | String
+| *camel.component.aws2-ddb.key-scalar-type* | The key scalar type, it can be S (String), N (Number) and B (Bytes) |  | String
 | *camel.component.aws2-ddb.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | *camel.component.aws2-ddb.operation* | What operation to perform |  | Ddb2Operations
 | *camel.component.aws2-ddb.override-endpoint* | Set the need for overidding the endpoint. This option needs to be used in combination with uriEndpointOverride option | false | Boolean
