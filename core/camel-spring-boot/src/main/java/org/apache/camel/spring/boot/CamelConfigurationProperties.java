@@ -104,7 +104,8 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     /**
      * UUID generator to use.
      *
-     * default (32 bytes), short (16 bytes), classic (32 bytes or longer), simple (long incrementing counter)
+     * default (32 bytes), short (16 bytes), classic (32 bytes or longer), simple (long incrementing counter), off
+     * (turned off for exchanges - only intended for performance profiling)
      */
     private String uuidGenerator = "default";
 
