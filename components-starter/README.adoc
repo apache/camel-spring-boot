@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 329 in 265 JAR artifacts (1 deprecated)
+Number of Camel components: 329 in 265 JAR artifacts (2 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -15,7 +15,7 @@ Number of Camel components: 329 in 265 JAR artifacts (1 deprecated)
 
 | xref:latest@components::amqp-component.adoc[AMQP] | camel-amqp-starter | Stable | 1.2 | Messaging with AMQP protocol using Apache QPid Client.
 
-| xref:latest@components::apns-component.adoc[APNS] | camel-apns-starter | Stable | 2.8 | Send notifications to Apple iOS devices.
+| xref:latest@components::apns-component.adoc[APNS] | camel-apns-starter | Stable | 2.8 | *deprecated* Send notifications to Apple iOS devices.
 
 | xref:latest@components::arangodb-component.adoc[ArangoDb] | camel-arangodb-starter | Stable | 3.5 | Perform operations on ArangoDb when used as a Document Database, or as a Graph Database
 
