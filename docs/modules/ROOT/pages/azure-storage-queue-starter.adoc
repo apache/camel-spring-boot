@@ -17,7 +17,7 @@ When using azure-storage-queue with Spring Boot make sure to use the following M
 ----
 
 
-The component supports 17 options, which are listed below.
+The component supports 16 options, which are listed below.
 
 
 
@@ -25,7 +25,6 @@ The component supports 17 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | *camel.component.azure-storage-queue.access-key* | Access key for the associated azure account name to be used for authentication with azure queue services |  | String
-| *camel.component.azure-storage-queue.auto-discover-client* | Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking. | true | Boolean
 | *camel.component.azure-storage-queue.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.azure-storage-queue.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.azure-storage-queue.configuration* | The component configurations. The option is a org.apache.camel.component.azure.storage.queue.QueueConfiguration type. |  | QueueConfiguration

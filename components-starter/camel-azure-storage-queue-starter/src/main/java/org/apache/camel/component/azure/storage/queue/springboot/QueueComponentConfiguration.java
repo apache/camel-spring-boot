@@ -43,12 +43,6 @@ public class QueueComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Setting the autoDiscoverClient mechanism, if true, the component will
-     * look for a client instance in the registry automatically otherwise it
-     * will skip that checking.
-     */
-    private Boolean autoDiscoverClient = true;
-    /**
      * The component configurations. The option is a
      * org.apache.camel.component.azure.storage.queue.QueueConfiguration type.
      */
@@ -155,14 +149,6 @@ public class QueueComponentConfiguration
      * com.azure.storage.common.StorageSharedKeyCredential type.
      */
     private StorageSharedKeyCredential credentials;
-
-    public Boolean getAutoDiscoverClient() {
-        return autoDiscoverClient;
-    }
-
-    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
-        this.autoDiscoverClient = autoDiscoverClient;
-    }
 
     public QueueConfiguration getConfiguration() {
         return configuration;

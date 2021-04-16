@@ -45,12 +45,6 @@ public class BlobComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Setting the autoDiscoverClient mechanism, if true, the component will
-     * look for a client instance in the registry automatically otherwise it
-     * will skip that checking.
-     */
-    private Boolean autoDiscoverClient = true;
-    /**
      * The blob name, to consume specific blob from a container. However on
      * producer, is only required for the operations on the blob level
      */
@@ -203,14 +197,6 @@ public class BlobComponentConfiguration
      * authentication with azure blob services
      */
     private String accessKey;
-
-    public Boolean getAutoDiscoverClient() {
-        return autoDiscoverClient;
-    }
-
-    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
-        this.autoDiscoverClient = autoDiscoverClient;
-    }
 
     public String getBlobName() {
         return blobName;
