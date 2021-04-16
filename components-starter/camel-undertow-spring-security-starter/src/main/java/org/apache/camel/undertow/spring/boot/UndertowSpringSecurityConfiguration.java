@@ -27,7 +27,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * Contains configuration object for each provider (see AbstractUndertowSpringSecurityProviderConfiguration.TYPE)
  */
 @AutoConfigureAfter(UndertowComponent.class)
-@ConfigurationProperties(prefix = "camel.component.undertow.spring.security")
+@ConfigurationProperties(prefix = "camel.security.undertow")
 public class UndertowSpringSecurityConfiguration {
 
     /**
@@ -36,7 +36,7 @@ public class UndertowSpringSecurityConfiguration {
      */
     private KeycloakProviderConfiguration keycloak;
 
-    @ConfigurationProperties(prefix = "camel.component.undertow.spring.security.keycloak")
+    @ConfigurationProperties(prefix = "camel.security.undertow.keycloak")
     public KeycloakProviderConfiguration getKeycloak() {
         return keycloak;
     }
