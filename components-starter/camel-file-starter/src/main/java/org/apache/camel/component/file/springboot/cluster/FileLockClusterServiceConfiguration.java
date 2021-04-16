@@ -20,7 +20,7 @@ import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "camel.component.file.cluster.service")
+@ConfigurationProperties(prefix = "camel.cluster.file")
 public class FileLockClusterServiceConfiguration {
     /**
      * Sets if the file cluster service should be enabled or not, default is false.

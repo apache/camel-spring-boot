@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Scope;
 
 @Configuration
 @AutoConfigureBefore({ ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
-@ConditionalOnProperty(prefix = "camel.component.file.cluster.service", name = "enabled")
+@ConditionalOnProperty(prefix = "camel.cluster.file", name = "enabled")
 @EnableConfigurationProperties(FileLockClusterServiceConfiguration.class)
 public class FileLockClusterServiceAutoConfiguration {
     @Autowired
