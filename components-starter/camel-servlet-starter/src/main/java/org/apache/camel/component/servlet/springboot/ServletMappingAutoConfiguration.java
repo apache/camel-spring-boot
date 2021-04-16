@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Lazy;
  * Servlet mapping auto-configuration.
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnProperty(name = "camel.component.servlet.mapping.enabled", matchIfMissing = true)
+@ConditionalOnProperty(name = "camel.servlet.mapping.enabled", matchIfMissing = true)
 @ConditionalOnBean(type = "org.apache.camel.spring.boot.CamelAutoConfiguration")
 @AutoConfigureAfter(name = "org.apache.camel.spring.boot.CamelAutoConfiguration")
 @ConditionalOnWebApplication

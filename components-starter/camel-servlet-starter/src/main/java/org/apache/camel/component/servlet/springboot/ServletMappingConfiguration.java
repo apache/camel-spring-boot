@@ -19,9 +19,9 @@ package org.apache.camel.component.servlet.springboot;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Mapping settings for the servlet component.
+ * Mapping settings for the Camel Servlet
  */
-@ConfigurationProperties(prefix = "camel.component.servlet.mapping")
+@ConfigurationProperties(prefix = "camel.servlet.mapping")
 public class ServletMappingConfiguration {
 
     /**
