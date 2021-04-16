@@ -46,7 +46,7 @@ public class AtomixClusterServiceAutoConfiguration {
 
     @Bean(name = "atomix-cluster-service")
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-    @ConditionalOnProperty(prefix = "camel.component.atomix.cluster.service", name = "mode", havingValue = "node")
+    @ConditionalOnProperty(prefix = "camel.cluster.atomix", name = "mode", havingValue = "node")
     public CamelClusterService atomixClusterService() {
         AtomixClusterService service = new AtomixClusterService();
         service.setNodes(configuration.getNodes().stream().map(Address::new).collect(Collectors.toList()));
@@ -65,7 +65,7 @@ public class AtomixClusterServiceAutoConfiguration {
 
     @Bean(name = "atomix-cluster-client-service")
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-    @ConditionalOnProperty(prefix = "camel.component.atomix.cluster.service", name = "mode", havingValue = "client")
+    @ConditionalOnProperty(prefix = "camel.cluster.atomix", name = "mode", havingValue = "client")
     public CamelClusterService atomixClusterClientService() {
         AtomixClusterClientService service = new AtomixClusterClientService();
         service.setNodes(configuration.getNodes().stream().map(Address::new).collect(Collectors.toList()));
@@ -87,11 +87,11 @@ public class AtomixClusterServiceAutoConfiguration {
             super(ConfigurationPhase.REGISTER_BEAN);
         }
 
-        @ConditionalOnProperty(prefix = "camel.component.atomix.cluster.service", name = "enabled")
+        @ConditionalOnProperty(prefix = "camel.cluster.atomix", name = "enabled")
         static class IfEnabled {
         }
 
-        @ConditionalOnProperty(prefix = "camel.component.atomix.cluster.service", name = "mode")
+        @ConditionalOnProperty(prefix = "camel.cluster.atomix", name = "mode")
         static class WithMode {
         }
     }
