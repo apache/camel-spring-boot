@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Scope;
 
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore({ ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
-@ConditionalOnProperty(prefix = "camel.component.consul.cluster.service", name = "enabled")
+@ConditionalOnProperty(prefix = "camel.cluster.consul", name = "enabled")
 @EnableConfigurationProperties(ConsulClusterServiceConfiguration.class)
 public class ConsulClusterServiceAutoConfiguration {
     @Autowired

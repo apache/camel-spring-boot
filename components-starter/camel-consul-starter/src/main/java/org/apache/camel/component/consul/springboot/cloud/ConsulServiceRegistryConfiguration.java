@@ -27,7 +27,7 @@ import com.orbitz.consul.option.ConsistencyMode;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "camel.component.consul.service-registry")
+@ConfigurationProperties(prefix = "camel.cloud.consul.service-registry")
 public class ConsulServiceRegistryConfiguration extends org.apache.camel.component.consul.cloud.ConsulServiceRegistryConfiguration {
     /**
      * Sets if the consul service registry should be enabled or not, default is false.

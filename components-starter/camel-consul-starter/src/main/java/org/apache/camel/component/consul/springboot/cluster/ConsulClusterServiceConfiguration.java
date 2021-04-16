@@ -28,7 +28,7 @@ import org.apache.camel.component.consul.cluster.ConsulClusterConfiguration;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "camel.component.consul.cluster.service")
+@ConfigurationProperties(prefix = "camel.cluster.consul")
 public class ConsulClusterServiceConfiguration extends ConsulClusterConfiguration {
     /**
      * Sets if the consul cluster service should be enabled or not, default is false.
