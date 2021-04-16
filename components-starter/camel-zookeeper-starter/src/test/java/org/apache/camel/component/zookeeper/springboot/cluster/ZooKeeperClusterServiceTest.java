@@ -56,11 +56,11 @@ public class ZooKeeperClusterServiceTest {
                 .withPropertyValues(
                     "debug=false",
                     "spring.main.banner-mode=OFF",
-                    "spring.application.name=" + UUID.randomUUID().toString(),
-                    "camel.component.zookeeper.cluster.service.enabled=true",
-                    "camel.component.zookeeper.cluster.service.nodes=localhost:" + zkPort,
-                    "camel.component.zookeeper.cluster.service.id=" + UUID.randomUUID().toString(),
-                    "camel.component.zookeeper.cluster.service.base-path=" + SERVICE_PATH)
+                    "spring.application.name=" + UUID.randomUUID(),
+                    "camel.cluster.zookeeper.enabled=true",
+                    "camel.cluster.zookeeper.nodes=localhost:" + zkPort,
+                    "camel.cluster.zookeeper.id=" + UUID.randomUUID(),
+                    "camel.cluster.zookeeper.base-path=" + SERVICE_PATH)
                 .run(
                     context -> {
                         assertThat(context).hasSingleBean(CamelContext.class);

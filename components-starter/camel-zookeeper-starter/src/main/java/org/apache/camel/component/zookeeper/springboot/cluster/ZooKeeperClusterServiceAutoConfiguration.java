@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Scope;
 
 @Configuration
 @AutoConfigureBefore({ ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
-@ConditionalOnProperty(prefix = "camel.component.zookeeper.cluster.service", name = "enabled")
+@ConditionalOnProperty(prefix = "camel.cluster.zookeeper", name = "enabled")
 @EnableConfigurationProperties(ZooKeeperClusterServiceConfiguration.class)
 public class ZooKeeperClusterServiceAutoConfiguration {
     @Autowired

@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Scope;
 
 @Configuration
 @AutoConfigureBefore(CamelAutoConfiguration.class)
-@ConditionalOnProperty(prefix = "camel.component.zookeeper.service-registry", name = "enabled")
+@ConditionalOnProperty(prefix = "camel.cloud.zookeeper", name = "enabled")
 @EnableConfigurationProperties(ZooKeeperServiceRegistryConfiguration.class)
 public class ZooKeeperServiceRegistryAutoConfiguration {
 

@@ -79,11 +79,11 @@ public class ZooKeeperServiceRegistryTest {
                     "debug=false",
                     "spring.main.banner-mode=OFF",
                     "spring.application.name=" + UUID.randomUUID().toString(),
-                    "camel.component.zookeeper.service-registry.enabled=true",
-                    "camel.component.zookeeper.service-registry.nodes=localhost:" + zkPort,
-                    "camel.component.zookeeper.service-registry.id=" + UUID.randomUUID().toString(),
-                    "camel.component.zookeeper.service-registry.base-path=" + SERVICE_PATH,
-                    "camel.component.zookeeper.service-registry.service-host=localhost")
+                    "camel.cloud.zookeeper.enabled=true",
+                    "camel.cloud.zookeeper.nodes=localhost:" + zkPort,
+                    "camel.cloud.zookeeper.id=" + UUID.randomUUID().toString(),
+                    "camel.cloud.zookeeper.base-path=" + SERVICE_PATH,
+                    "camel.cloud.zookeeper.service-host=localhost")
                 .run(
                     context -> {
                         assertThat(context).hasSingleBean(CamelContext.class);

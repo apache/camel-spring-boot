@@ -26,7 +26,7 @@ import org.apache.curator.framework.AuthInfo;
 import org.apache.curator.framework.CuratorFramework;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "camel.component.zookeeper.cluster.service")
+@ConfigurationProperties(prefix = "camel.cluster.zookeeper")
 public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfiguration {
     /**
      * Sets if the zookeeper cluster service should be enabled or not, default is false.
