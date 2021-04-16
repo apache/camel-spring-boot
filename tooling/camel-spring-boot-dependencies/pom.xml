@@ -758,11 +758,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-crypto-cms-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-crypto-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2605,11 +2600,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-crypto</artifactId>
-        <version>3.10.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-crypto-cms</artifactId>
         <version>3.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>
