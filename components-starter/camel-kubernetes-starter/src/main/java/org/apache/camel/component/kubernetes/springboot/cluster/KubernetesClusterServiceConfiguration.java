@@ -20,7 +20,7 @@ import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "camel.component.kubernetes.cluster.service")
+@ConfigurationProperties(prefix = "camel.cluster.kubernetes")
 public class KubernetesClusterServiceConfiguration {
 
     /**
