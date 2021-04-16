@@ -24,6 +24,11 @@ The component supports 13 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| *camel.cluster.jgroups-raft.enabled* | Sets if the jgroups raft cluster service should be enabled or not, default is false. | false | Boolean
+| *camel.cluster.jgroups-raft.id* | Cluster Service ID |  | String
+| *camel.cluster.jgroups-raft.jgroups-raft-cluster-name* | JGroups Cluster name |  | String
+| *camel.cluster.jgroups-raft.jgroups-raft-config* | JGrups-raft configuration File name |  | String
+| *camel.cluster.jgroups-raft.raft-id* | JGroups-raft ID |  | String
 | *camel.component.jgroups-raft.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.jgroups-raft.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.jgroups-raft.channel-properties* | Specifies configuration properties of the RaftHandle JChannel used by the endpoint (ignored if raftHandle ref is provided). | raft.xml | String
@@ -32,10 +37,5 @@ The component supports 13 options, which are listed below.
 | *camel.component.jgroups-raft.raft-handle* | RaftHandle to use. The option is a org.jgroups.raft.RaftHandle type. |  | RaftHandle
 | *camel.component.jgroups-raft.raft-id* | Unique raftId to use. |  | String
 | *camel.component.jgroups-raft.state-machine* | StateMachine to use. The option is a org.jgroups.protocols.raft.StateMachine type. |  | StateMachine
-| *camel.component.jgroups.raft.cluster.service.enabled* | Sets if the jgroups raft cluster service should be enabled or not, default is false. | false | Boolean
-| *camel.component.jgroups.raft.cluster.service.id* | Cluster Service ID |  | String
-| *camel.component.jgroups.raft.cluster.service.jgroups-raft-cluster-name* | JGroups Cluster name |  | String
-| *camel.component.jgroups.raft.cluster.service.jgroups-raft-config* | JGrups-raft configuration File name |  | String
-| *camel.component.jgroups.raft.cluster.service.raft-id* | JGroups-raft ID |  | String
 |===
 // spring-boot-auto-configure options: END
