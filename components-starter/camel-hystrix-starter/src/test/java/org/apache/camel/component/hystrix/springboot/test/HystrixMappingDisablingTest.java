@@ -35,7 +35,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @DirtiesContext
 @ContextConfiguration(classes = HystrixMappingDisablingTest.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = {
-        "camel.component.hystrix.mapping.enabled=false"
+        "camel.hystrix.mapping.enabled=false"
 })
 public class HystrixMappingDisablingTest {
 

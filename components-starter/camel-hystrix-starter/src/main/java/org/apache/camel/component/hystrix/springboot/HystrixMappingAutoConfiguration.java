@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Configuration;
  * Servlet mapping auto-configuration.
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnProperty(name = "camel.component.hystrix.mapping.enabled", matchIfMissing = true)
+@ConditionalOnProperty(name = "camel.hystrix.mapping.enabled", matchIfMissing = true)
 @ConditionalOnBean(type = "org.apache.camel.spring.boot.CamelAutoConfiguration")
 @AutoConfigureAfter(name = "org.apache.camel.spring.boot.CamelAutoConfiguration")
 @ConditionalOnWebApplication

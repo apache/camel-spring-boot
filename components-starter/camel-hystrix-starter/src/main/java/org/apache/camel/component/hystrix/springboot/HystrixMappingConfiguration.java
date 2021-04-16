@@ -19,9 +19,9 @@ package org.apache.camel.component.hystrix.springboot;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Mapping settings for the hystrix component.
+ * Mapping settings for the hystrix servlet.
  */
-@ConfigurationProperties(prefix = "camel.component.hystrix.mapping")
+@ConfigurationProperties(prefix = "camel.hystrix.mapping")
 public class HystrixMappingConfiguration {
 
     /**
