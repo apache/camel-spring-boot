@@ -179,7 +179,6 @@
     <module>camel-couchbase-starter</module>
     <module>camel-couchdb-starter</module>
     <module>camel-cron-starter</module>
-    <module>camel-crypto-cms-starter</module>
     <module>camel-crypto-starter</module>
     <module>camel-csimple-joor-starter</module>
     <module>camel-csv-starter</module>
