@@ -18,7 +18,7 @@ package org.apache.camel.component.jgroups.springboot.cluster.springboot;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "camel.component.jgroups.lock.cluster.service")
+@ConfigurationProperties(prefix = "camel.cluster.jgroups")
 public class JGroupsLockClusterServiceConfiguration {
     /**
      * Sets if the jgroups lock cluster service should be enabled or not, default is false.
