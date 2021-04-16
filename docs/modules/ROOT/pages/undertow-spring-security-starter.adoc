@@ -24,10 +24,10 @@ The component supports 5 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.component.undertow.spring.security.keycloak* | Properties defined for keycloak provider. Value is gathered together from properties with prefix "camel.component.undertow.spring.security.keycloak" |  | KeycloakProviderConfiguration
-| *camel.component.undertow.spring.security.keycloak.client-id* | Client id from the Keycloak server used for authentication. |  | String
-| *camel.component.undertow.spring.security.keycloak.realm-id* | Realm id from the keycloak server used for authentication. |  | String
-| *camel.component.undertow.spring.security.keycloak.url* | Url to keycloak server which will be used in spring security configuration. (Example "\http://localhost:8080") |  | String
-| *camel.component.undertow.spring.security.keycloak.user-name-attribute* | Name of the attribute, which will be used as username. | preferred_username | String
+| *camel.security.undertow.keycloak* | Properties defined for keycloak provider. Value is gathered together from properties with prefix "camel.component.undertow.spring.security.keycloak" |  | KeycloakProviderConfiguration
+| *camel.security.undertow.keycloak.client-id* | Client id from the Keycloak server used for authentication. |  | String
+| *camel.security.undertow.keycloak.realm-id* | Realm id from the keycloak server used for authentication. |  | String
+| *camel.security.undertow.keycloak.url* | Url to keycloak server which will be used in spring security configuration. (Example "\http://localhost:8080") |  | String
+| *camel.security.undertow.keycloak.user-name-attribute* | Name of the attribute, which will be used as username. | preferred_username | String
 |===
 // spring-boot-auto-configure options: END
