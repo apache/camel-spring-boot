@@ -71,7 +71,7 @@ public class QueueComponentConfiguration
      * When is set to true, the queue will be automatically created when sending
      * messages to the queue.
      */
-    private Boolean createQueue = true;
+    private Boolean createQueue = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
