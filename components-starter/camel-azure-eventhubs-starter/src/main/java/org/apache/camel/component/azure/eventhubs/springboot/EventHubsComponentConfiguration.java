@@ -60,12 +60,6 @@ public class EventHubsComponentConfiguration
      */
     private AmqpTransportType amqpTransportType = AmqpTransportType.AMQP;
     /**
-     * Setting the autoDiscoverClient mechanism, if true, the component will
-     * look for a client instance in the registry automatically otherwise it
-     * will skip that checking.
-     */
-    private Boolean autoDiscoverClient = true;
-    /**
      * The component configurations. The option is a
      * org.apache.camel.component.azure.eventhubs.EventHubsConfiguration type.
      */
@@ -216,14 +210,6 @@ public class EventHubsComponentConfiguration
 
     public void setAmqpTransportType(AmqpTransportType amqpTransportType) {
         this.amqpTransportType = amqpTransportType;
-    }
-
-    public Boolean getAutoDiscoverClient() {
-        return autoDiscoverClient;
-    }
-
-    public void setAutoDiscoverClient(Boolean autoDiscoverClient) {
-        this.autoDiscoverClient = autoDiscoverClient;
     }
 
     public EventHubsConfiguration getConfiguration() {
