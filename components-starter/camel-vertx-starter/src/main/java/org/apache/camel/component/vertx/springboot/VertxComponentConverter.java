@@ -43,7 +43,7 @@ public class VertxComponentConverter implements GenericConverter {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, io.vertx.core.Vertx.class));
         answer.add(new ConvertiblePair(String.class, io.vertx.core.VertxOptions.class));
-        answer.add(new ConvertiblePair(String.class, io.vertx.core.spi.VertxFactory.class));
+        answer.add(new ConvertiblePair(String.class, io.vertx.core.impl.VertxBuilder.class));
         return answer;
     }
 
@@ -62,7 +62,7 @@ public class VertxComponentConverter implements GenericConverter {
         switch (targetType.getName()) {
             case "io.vertx.core.Vertx": return applicationContext.getBean(ref, io.vertx.core.Vertx.class);
             case "io.vertx.core.VertxOptions": return applicationContext.getBean(ref, io.vertx.core.VertxOptions.class);
-            case "io.vertx.core.spi.VertxFactory": return applicationContext.getBean(ref, io.vertx.core.spi.VertxFactory.class);
+            case "io.vertx.core.impl.VertxBuilder": return applicationContext.getBean(ref, io.vertx.core.impl.VertxBuilder.class);
         }
         return null;
     }

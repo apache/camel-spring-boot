@@ -19,7 +19,7 @@ package org.apache.camel.component.vertx.springboot;
 import javax.annotation.Generated;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
-import io.vertx.core.spi.VertxFactory;
+import io.vertx.core.impl.VertxBuilder;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -93,9 +93,9 @@ public class VertxComponentConfiguration
     private Boolean autowiredEnabled = true;
     /**
      * To use a custom VertxFactory implementation. The option is a
-     * io.vertx.core.spi.VertxFactory type.
+     * io.vertx.core.impl.VertxBuilder type.
      */
-    private VertxFactory vertxFactory;
+    private VertxBuilder vertxFactory;
 
     public String getHost() {
         return host;
@@ -161,11 +161,11 @@ public class VertxComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
-    public VertxFactory getVertxFactory() {
+    public VertxBuilder getVertxFactory() {
         return vertxFactory;
     }
 
-    public void setVertxFactory(VertxFactory vertxFactory) {
+    public void setVertxFactory(VertxBuilder vertxFactory) {
         this.vertxFactory = vertxFactory;
     }
 }
