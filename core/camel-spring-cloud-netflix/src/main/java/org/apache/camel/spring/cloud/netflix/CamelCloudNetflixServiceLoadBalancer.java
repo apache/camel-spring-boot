@@ -19,6 +19,7 @@ package org.apache.camel.spring.cloud.netflix;
 import java.util.List;
 
 import com.netflix.loadbalancer.Server;
+import org.apache.camel.Exchange;
 import org.apache.camel.cloud.ServiceDefinition;
 import org.apache.camel.cloud.ServiceLoadBalancer;
 import org.apache.camel.cloud.ServiceLoadBalancerFunction;
@@ -37,7 +38,7 @@ public class CamelCloudNetflixServiceLoadBalancer implements ServiceLoadBalancer
     }
 
     @Override
-    public <T> T process(String serviceName, ServiceLoadBalancerFunction<T> function) throws Exception {
+    public <T> T process(Exchange exchange, String serviceName, ServiceLoadBalancerFunction<T> function) throws Exception {
         return client.execute(serviceName, instance -> {
             ServiceDefinition definition = null;
 

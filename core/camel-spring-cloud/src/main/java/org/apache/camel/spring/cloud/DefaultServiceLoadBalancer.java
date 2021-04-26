@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.cloud;
 
+import org.apache.camel.Exchange;
 import org.apache.camel.cloud.ServiceDefinition;
 import org.apache.camel.cloud.ServiceLoadBalancer;
 import org.apache.camel.cloud.ServiceLoadBalancerFunction;
@@ -31,12 +32,10 @@ public class DefaultServiceLoadBalancer implements ServiceLoadBalancer {
     }
 
     @Override
-    public <T> T process(String serviceName, ServiceLoadBalancerFunction<T> function) throws Exception {
-        return client.execute(serviceName, instance -> {
-            return function.apply(
+    public <T> T process(Exchange exchange, String serviceName, ServiceLoadBalancerFunction<T> function) throws Exception {
+        return client.execute(serviceName, instance -> function.apply(
                 convertServiceInstanceToServiceDefinition(instance)
-            );
-        });
+        ));
     }
 
     protected ServiceDefinition convertServiceInstanceToServiceDefinition(ServiceInstance instance) {

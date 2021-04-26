@@ -20,6 +20,7 @@ import java.util.Optional;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelContextAware;
+import org.apache.camel.Exchange;
 import org.apache.camel.cloud.ServiceLoadBalancer;
 import org.apache.camel.cloud.ServiceLoadBalancerFunction;
 import org.apache.camel.support.service.ServiceSupport;
@@ -63,8 +64,8 @@ public class CamelSpringCloudServiceLoadBalancer extends ServiceSupport implemen
     }
 
     @Override
-    public <T> T process(String serviceName, ServiceLoadBalancerFunction<T> function) throws Exception {
-        return loadBalancer.process(serviceName, function);
+    public <T> T process(Exchange exchange, String serviceName, ServiceLoadBalancerFunction<T> function) throws Exception {
+        return loadBalancer.process(exchange, serviceName, function);
     }
 
     // *******************************

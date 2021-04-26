@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.cloud;
 
 import java.util.List;
 
+import org.apache.camel.Exchange;
 import org.apache.camel.cloud.ServiceDefinition;
 import org.apache.camel.cloud.ServiceFilter;
 import org.apache.camel.impl.cloud.CombinedServiceFilter;
@@ -30,7 +31,7 @@ public class CamelCloudServiceFilter implements ServiceFilter {
     }
 
     @Override
-    public List<ServiceDefinition> apply(List<ServiceDefinition> serviceDefinitionList) {
-        return  this.serviceFilter.apply(serviceDefinitionList);
+    public List<ServiceDefinition> apply(Exchange exchange, List<ServiceDefinition> services) {
+        return this.serviceFilter.apply(exchange, services);
     }
 }
