@@ -43,10 +43,21 @@ public class CamelRouteTemplateAutoConfiguration {
         PropertiesRouteTemplateParametersSource source = new PropertiesRouteTemplateParametersSource();
         int counter = 0;
         for (Map<String, String> e : rt.getConfig()) {
-            for (Map.Entry<String, String> entry : e.entrySet()) {
-                source.addParameter(String.valueOf(counter), entry.getKey(), entry.getValue());
+            boolean customRouteId = true;
+            String routeId = e.remove("routeId");
+            if (routeId == null) {
+                routeId = e.remove("route-id");
             }
-            counter++;
+            if (routeId == null) {
+                routeId = String.valueOf(counter);
+                customRouteId = false;
+            }
+            for (Map.Entry<String, String> entry : e.entrySet()) {
+                source.addParameter(routeId, entry.getKey(), entry.getValue());
+            }
+            if (!customRouteId) {
+                counter++;
+            }
         }
 
         camelContext.getRegistry().bind("CamelSpringBootRouteTemplateParametersSource", RouteTemplateParameterSource.class, source);
