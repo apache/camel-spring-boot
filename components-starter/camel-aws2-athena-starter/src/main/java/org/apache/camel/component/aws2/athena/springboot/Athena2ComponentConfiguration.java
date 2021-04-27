@@ -185,6 +185,12 @@ public class Athena2ComponentConfiguration
      */
     private String secretKey;
     /**
+     * Set whether the Athena client should expect to load credentials through a
+     * default credentials provider or to expect static credentials to be passed
+     * in
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
      * Optional max wait time in millis to wait for a successful query
      * completion. See the section 'Waiting for Query Completion and Retrying
      * Failed Queries' to learn more.
@@ -407,6 +413,15 @@ public class Athena2ComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
     }
 
     public Long getWaitTimeout() {
