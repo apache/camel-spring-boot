@@ -43,20 +43,17 @@ public class CamelRouteTemplateAutoConfiguration {
         PropertiesRouteTemplateParametersSource source = new PropertiesRouteTemplateParametersSource();
         int counter = 0;
         for (Map<String, String> e : rt.getConfig()) {
-            boolean customRouteId = true;
             String routeId = e.remove("routeId");
             if (routeId == null) {
                 routeId = e.remove("route-id");
             }
             if (routeId == null) {
                 routeId = String.valueOf(counter);
-                customRouteId = false;
+                // use counter as route id since none was specified
+                counter++;
             }
             for (Map.Entry<String, String> entry : e.entrySet()) {
                 source.addParameter(routeId, entry.getKey(), entry.getValue());
-            }
-            if (!customRouteId) {
-                counter++;
             }
         }
 
