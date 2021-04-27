@@ -107,6 +107,12 @@ public class Cw2ComponentConfiguration
      */
     private String uriEndpointOverride;
     /**
+     * Set whether the S3 client should expect to load credentials through a
+     * default credentials provider or to expect static credentials to be passed
+     * in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
      * The metric value
      */
     private Double value;
@@ -230,6 +236,15 @@ public class Cw2ComponentConfiguration
 
     public void setUriEndpointOverride(String uriEndpointOverride) {
         this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
     }
 
     public Double getValue() {
