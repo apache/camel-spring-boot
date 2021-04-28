@@ -17,7 +17,7 @@ When using aws2-ddb with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 38 options, which are listed below.
+The component supports 39 options, which are listed below.
 
 
 
@@ -44,6 +44,7 @@ The component supports 38 options, which are listed below.
 | *camel.component.aws2-ddb.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws2-ddb.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | *camel.component.aws2-ddb.uri-endpoint-override* | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
+| *camel.component.aws2-ddb.use-default-credentials-provider* | Set whether the S3 client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in. | false | Boolean
 | *camel.component.aws2-ddb.write-capacity* | The provisioned throughput to reserved for writing resources to your table |  | Long
 | *camel.component.aws2-ddbstream.access-key* | Amazon AWS Access Key |  | String
 | *camel.component.aws2-ddbstream.amazon-dynamo-db-streams-client* | Amazon DynamoDB client to use for all requests for this endpoint. The option is a software.amazon.awssdk.services.dynamodb.streams.DynamoDbStreamsClient type. |  | DynamoDbStreamsClient
