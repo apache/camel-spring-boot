@@ -121,6 +121,12 @@ public class Ddb2ComponentConfiguration
      */
     private String uriEndpointOverride;
     /**
+     * Set whether the S3 client should expect to load credentials through a
+     * default credentials provider or to expect static credentials to be passed
+     * in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
      * The provisioned throughput to reserved for writing resources to your
      * table
      */
@@ -269,6 +275,15 @@ public class Ddb2ComponentConfiguration
 
     public void setUriEndpointOverride(String uriEndpointOverride) {
         this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
     }
 
     public Long getWriteCapacity() {

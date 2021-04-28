@@ -62,6 +62,11 @@ public class AtlasMapComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * The URI of the properties file which is used for AtlasContextFactory
+     * initialization.
+     */
+    private String propertiesFile;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -85,5 +90,13 @@ public class AtlasMapComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getPropertiesFile() {
+        return propertiesFile;
+    }
+
+    public void setPropertiesFile(String propertiesFile) {
+        this.propertiesFile = propertiesFile;
     }
 }
