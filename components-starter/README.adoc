@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 328 in 264 JAR artifacts (1 deprecated)
+Number of Camel components: 329 in 265 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -573,6 +573,8 @@ Number of Camel components: 328 in 264 JAR artifacts (1 deprecated)
 
 | xref:latest@components::spring-integration-component.adoc[Spring Integration] | camel-spring-integration-starter | Stable | 1.4 | Bridge Camel with Spring Integration.
 
+| xref:latest@components::spring-jdbc-component.adoc[Spring JDBC] | camel-spring-jdbc-starter | Preview | 3.10 | Access databases through SQL and JDBC with Spring Transaction support.
+
 | xref:latest@components::spring-ldap-component.adoc[Spring LDAP] | camel-spring-ldap-starter | Stable | 2.11 | Perform searches in LDAP servers using filters as the message payload.
 
 | xref:latest@components::spring-rabbitmq-component.adoc[Spring RabbitMQ] | camel-spring-rabbitmq-starter | Stable | 3.8 | Send and receive messages from RabbitMQ using Spring RabbitMQ client.
@@ -825,7 +827,7 @@ Number of Camel languages: 19 in 13 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 28 in 28 JAR artifacts (3 deprecated)
+Number of miscellaneous extensions: 29 in 29 JAR artifacts (3 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -878,6 +880,8 @@ Number of miscellaneous extensions: 28 in 28 JAR artifacts (3 deprecated)
 | xref:spring-cloud-zookeeper.adoc[Spring Cloud Zookeeper] | camel-spring-cloud-zookeeper-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud Zookeeper
 
 | xref:latest@components:others:spring-javaconfig.adoc[Spring Java Configuration] | camel-spring-javaconfig-starter | Stable | 2.0 | *deprecated* Using Camel with Spring Java Configuration
+
+| xref:latest@components:others:spring-jdbc.adoc[Spring Jdbc] | camel-spring-jdbc-starter | Preview | 3.10 | Camel Spring JDBC support
 
 | xref:latest@components:others:spring-security.adoc[Spring Security] | camel-spring-security-starter | Stable | 2.3 | Security using Spring Security
 
