@@ -248,7 +248,7 @@
       <dependency>
         <groupId>com.lmax</groupId>
         <artifactId>disruptor</artifactId>
-        <version>3.4.3</version>
+        <version>3.4.4</version>
       </dependency>
       <dependency>
         <groupId>com.microsoft.azure</groupId>
@@ -594,6 +594,11 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-translate-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-azure-cosmosdb-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -2340,6 +2345,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws2-translate</artifactId>
+        <version>3.10.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-azure-cosmosdb</artifactId>
         <version>3.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>
