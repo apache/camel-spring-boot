@@ -18,6 +18,7 @@ package org.apache.camel.component.jdbc.springboot;
 
 import javax.annotation.Generated;
 import javax.sql.DataSource;
+import org.apache.camel.component.jdbc.ConnectionStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -62,6 +63,14 @@ public class JdbcComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use a custom strategy for working with connections. Do not use a
+     * custom strategy when using the spring-jdbc component because a special
+     * Spring ConnectionStrategy is used by default to support Spring
+     * Transactions. The option is a
+     * org.apache.camel.component.jdbc.ConnectionStrategy type.
+     */
+    private ConnectionStrategy connectionStrategy;
 
     public DataSource getDataSource() {
         return dataSource;
@@ -85,5 +94,13 @@ public class JdbcComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public ConnectionStrategy getConnectionStrategy() {
+        return connectionStrategy;
+    }
+
+    public void setConnectionStrategy(ConnectionStrategy connectionStrategy) {
+        this.connectionStrategy = connectionStrategy;
     }
 }
