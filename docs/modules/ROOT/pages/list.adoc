@@ -883,8 +883,6 @@ Number of miscellaneous extensions: 29 in 29 JAR artifacts (3 deprecated)
 
 | xref:latest@components:others:spring-javaconfig.adoc[Spring Java Configuration] | camel-spring-javaconfig-starter | Stable | 2.0 | *deprecated* Using Camel with Spring Java Configuration
 
-| xref:latest@components:others:spring-jdbc.adoc[Spring Jdbc] | camel-spring-jdbc-starter | Preview | 3.10 | Camel Spring JDBC support
-
 | xref:latest@components:others:spring-security.adoc[Spring Security] | camel-spring-security-starter | Stable | 2.3 | Security using Spring Security
 
 | xref:latest@components:others:swagger-java.adoc[Swagger Java] | camel-swagger-java-starter | Stable | 2.16 | Rest-dsl support for using swagger api-doc
