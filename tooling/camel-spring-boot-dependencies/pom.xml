@@ -4596,7 +4596,7 @@
       <dependency>
         <groupId>org.knowm.xchange</groupId>
         <artifactId>xchange-core</artifactId>
-        <version>5.0.7</version>
+        <version>5.0.8</version>
       </dependency>
       <dependency>
         <groupId>org.linguafranca.pwdb</groupId>
