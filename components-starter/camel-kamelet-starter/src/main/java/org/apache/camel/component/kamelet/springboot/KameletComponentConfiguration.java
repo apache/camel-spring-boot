@@ -39,6 +39,10 @@ public class KameletComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The location of the Kamelets on the file system.
+     */
+    private String location = "classpath:/kamelets";
+    /**
      * Set route local parameters.
      */
     private Map<String, Properties> routeProperties;
@@ -85,6 +89,14 @@ public class KameletComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public Map<String, Properties> getRouteProperties() {
         return routeProperties;
