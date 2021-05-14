@@ -17,7 +17,7 @@ When using aws2-eventbridge with Spring Boot make sure to use the following Mave
 ----
 
 
-The component supports 17 options, which are listed below.
+The component supports 18 options, which are listed below.
 
 
 
@@ -41,5 +41,6 @@ The component supports 17 options, which are listed below.
 | *camel.component.aws2-eventbridge.secret-key* | Amazon AWS Secret Key |  | String
 | *camel.component.aws2-eventbridge.trust-all-certificates* | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | *camel.component.aws2-eventbridge.uri-endpoint-override* | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
+| *camel.component.aws2-eventbridge.use-default-credentials-provider* | Set whether the Eventbridge client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in. | false | Boolean
 |===
 // spring-boot-auto-configure options: END
