@@ -680,7 +680,7 @@ Number of Camel components: 332 in 268 JAR artifacts (1 deprecated)
 == Camel Data Formats
 
 // dataformats: START
-Number of Camel data formats: 46 in 38 JAR artifacts (0 deprecated)
+Number of Camel data formats: 48 in 40 JAR artifacts (0 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -691,6 +691,8 @@ Number of Camel data formats: 46 in 38 JAR artifacts (0 deprecated)
 | xref:latest@components:dataformats:asn1-dataformat.adoc[ASN.1 File] | camel-asn1-starter | Stable | 2.20 | Encode and decode data structures using Abstract Syntax Notation One (ASN.1).
 
 | xref:latest@components:dataformats:avro-dataformat.adoc[Avro] | camel-avro-starter | Stable | 2.14 | Serialize and deserialize messages using Apache Avro binary data format.
+
+| xref:latest@components:dataformats:avro-jackson-dataformat.adoc[Avro Jackson] | camel-jackson-avro-starter | Preview | 3.10 | Marshal POJOs to Avro and back using Jackson.
 
 | xref:latest@components:dataformats:barcode-dataformat.adoc[Barcode] | camel-barcode-starter | Stable | 2.14 | Transform strings to various 1D/2D barcode bitmap formats and back.
 
@@ -749,6 +751,8 @@ Number of Camel data formats: 46 in 38 JAR artifacts (0 deprecated)
 | xref:latest@components:dataformats:pgp-dataformat.adoc[PGP] | camel-crypto-starter | Stable | 2.9 | Encrypt and decrypt messages using Java Cryptographic Extension (JCE) and PGP.
 
 | xref:latest@components:dataformats:protobuf-dataformat.adoc[Protobuf] | camel-protobuf-starter | Stable | 2.2 | Serialize and deserialize Java objects using Google's Protocol buffers.
+
+| xref:latest@components:dataformats:protobuf-jackson-dataformat.adoc[Protobuf Jackson] | camel-jackson-protobuf-starter | Preview | 3.10 | Marshal POJOs to Protobuf and back using Jackson.
 
 | xref:latest@components:dataformats:rss-dataformat.adoc[RSS] | camel-rss-starter | Stable | 2.1 | Transform from ROME SyndFeed Java Objects to XML and vice-versa.
 

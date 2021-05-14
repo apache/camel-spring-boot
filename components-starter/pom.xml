@@ -257,6 +257,8 @@
     <module>camel-ipfs-starter</module>
     <module>camel-irc-starter</module>
     <module>camel-ironmq-starter</module>
+    <module>camel-jackson-avro-starter</module>
+    <module>camel-jackson-protobuf-starter</module>
     <module>camel-jackson-starter</module>
     <module>camel-jacksonxml-starter</module>
     <module>camel-jasypt-starter</module>

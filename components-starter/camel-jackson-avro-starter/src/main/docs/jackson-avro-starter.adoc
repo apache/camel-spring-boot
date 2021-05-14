@@ -1,0 +1,49 @@
+// spring-boot-auto-configure options: START
+:page-partial:
+:doctitle: Camel Spring Boot Starter for jackson-avro
+
+== Spring Boot Auto-Configuration
+
+When using jackson-avro with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>camel-jackson-avro-starter</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+
+The component supports 19 options, which are listed below.
+
+
+
+[width="100%",cols="2,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+| *camel.dataformat.avro-jackson.allow-jms-type* | Used for JMS users to allow the JMSType header from the JMS spec to specify a FQN classname to use to unmarshal to. | false | Boolean
+| *camel.dataformat.avro-jackson.allow-unmarshall-type* | If enabled then Jackson is allowed to attempt to use the CamelJacksonUnmarshalType header during the unmarshalling. This should only be enabled when desired to be used. | false | Boolean
+| *camel.dataformat.avro-jackson.auto-discover-object-mapper* | If set to true then Jackson will lookup for an objectMapper into the registry | false | Boolean
+| *camel.dataformat.avro-jackson.auto-discover-schema-resolver* | When not disabled, the SchemaResolver will be looked up into the registry | true | Boolean
+| *camel.dataformat.avro-jackson.collection-type-name* | Refers to a custom collection type to lookup in the registry to use. This option should rarely be used, but allows to use different collection types than java.util.Collection based as default. |  | String
+| *camel.dataformat.avro-jackson.content-type-header* | Whether the data format should set the Content-Type header with the type from the data format. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON | true | Boolean
+| *camel.dataformat.avro-jackson.disable-features* | Set of features to disable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. The features should be a name that matches a enum from com.fasterxml.jackson.databind.SerializationFeature, com.fasterxml.jackson.databind.DeserializationFeature, or com.fasterxml.jackson.databind.MapperFeature Multiple features can be separated by comma |  | String
+| *camel.dataformat.avro-jackson.enable-features* | Set of features to enable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. The features should be a name that matches a enum from com.fasterxml.jackson.databind.SerializationFeature, com.fasterxml.jackson.databind.DeserializationFeature, or com.fasterxml.jackson.databind.MapperFeature Multiple features can be separated by comma |  | String
+| *camel.dataformat.avro-jackson.enabled* | Whether to enable auto configuration of the avro-jackson data format. This is enabled by default. |  | Boolean
+| *camel.dataformat.avro-jackson.include* | If you want to marshal a pojo to JSON, and the pojo has some fields with null values. And you want to skip these null values, you can set this option to NON_NULL |  | String
+| *camel.dataformat.avro-jackson.json-view-type-name* | When marshalling a POJO to JSON you might want to exclude certain fields from the JSON output. With Jackson you can use JSON views to accomplish this. This option is to refer to the class which has JsonView annotations |  | String
+| *camel.dataformat.avro-jackson.module-class-names* | To use custom Jackson modules com.fasterxml.jackson.databind.Module specified as a String with FQN class names. Multiple classes can be separated by comma. |  | String
+| *camel.dataformat.avro-jackson.module-refs* | To use custom Jackson modules referred from the Camel registry. Multiple modules can be separated by comma. |  | String
+| *camel.dataformat.avro-jackson.object-mapper* | Lookup and use the existing ObjectMapper with the given id when using Jackson. |  | String
+| *camel.dataformat.avro-jackson.schema-resolver* | Optional schema resolver used to lookup schemas for the data in transit. |  | String
+| *camel.dataformat.avro-jackson.timezone* | If set then Jackson will use the Timezone when marshalling/unmarshalling. |  | String
+| *camel.dataformat.avro-jackson.unmarshal-type-name* | Class name of the java type to use when unmarshalling |  | String
+| *camel.dataformat.avro-jackson.use-default-object-mapper* | Whether to lookup and use default Jackson ObjectMapper from the registry. | true | Boolean
+| *camel.dataformat.avro-jackson.use-list* | To unmarshal to a List of Map or a List of Pojo. | false | Boolean
+|===
+
+
+// spring-boot-auto-configure options: END
