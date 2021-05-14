@@ -72,9 +72,9 @@ public class Lambda2ComponentConfiguration
      */
     private Boolean pojoRequest = false;
     /**
-     * The region in which ECS client needs to work. When using this parameter,
-     * the configuration will expect the lowercase name of the region (for
-     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
+     * The region in which Lambda client needs to work. When using this
+     * parameter, the configuration will expect the lowercase name of the region
+     * (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
     /**
@@ -86,6 +86,12 @@ public class Lambda2ComponentConfiguration
      * combination with overrideEndpoint option
      */
     private String uriEndpointOverride;
+    /**
+     * Set whether the Lambda client should expect to load credentials through a
+     * default credentials provider or to expect static credentials to be passed
+     * in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -183,6 +189,15 @@ public class Lambda2ComponentConfiguration
 
     public void setUriEndpointOverride(String uriEndpointOverride) {
         this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
     }
 
     public Boolean getAutowiredEnabled() {

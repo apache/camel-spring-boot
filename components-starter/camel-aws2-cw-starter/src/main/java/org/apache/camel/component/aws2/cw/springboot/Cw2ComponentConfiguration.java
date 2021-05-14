@@ -84,7 +84,7 @@ public class Cw2ComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which EKS client needs to work. When using this parameter,
+     * The region in which CW client needs to work. When using this parameter,
      * the configuration will expect the lowercase name of the region (for
      * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */

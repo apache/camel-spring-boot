@@ -135,6 +135,14 @@ public class JacksonDataFormatConfiguration
      * JSON
      */
     private Boolean contentTypeHeader = true;
+    /**
+     * Optional schema resolver used to lookup schemas for the data in transit.
+     */
+    private String schemaResolver;
+    /**
+     * When not disabled, the SchemaResolver will be looked up into the registry
+     */
+    private Boolean autoDiscoverSchemaResolver = true;
 
     public String getObjectMapper() {
         return objectMapper;
@@ -270,5 +278,21 @@ public class JacksonDataFormatConfiguration
 
     public void setContentTypeHeader(Boolean contentTypeHeader) {
         this.contentTypeHeader = contentTypeHeader;
+    }
+
+    public String getSchemaResolver() {
+        return schemaResolver;
+    }
+
+    public void setSchemaResolver(String schemaResolver) {
+        this.schemaResolver = schemaResolver;
+    }
+
+    public Boolean getAutoDiscoverSchemaResolver() {
+        return autoDiscoverSchemaResolver;
+    }
+
+    public void setAutoDiscoverSchemaResolver(Boolean autoDiscoverSchemaResolver) {
+        this.autoDiscoverSchemaResolver = autoDiscoverSchemaResolver;
     }
 }
