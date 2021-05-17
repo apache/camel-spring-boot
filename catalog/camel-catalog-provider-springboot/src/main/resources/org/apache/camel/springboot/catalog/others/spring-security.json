@@ -10,6 +10,6 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-spring-security-starter",
-    "version": "3.4.5-SNAPSHOT"
+    "version": "3.4.6-SNAPSHOT"
   }
 }

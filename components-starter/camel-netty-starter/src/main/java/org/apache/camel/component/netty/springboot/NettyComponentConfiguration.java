@@ -405,6 +405,10 @@ public class NettyComponentConfiguration
      */
     private String enabledProtocols = "TLSv1,TLSv1.1,TLSv1.2";
     /**
+     * To enable/disable hostname verification on SSLEngine
+     */
+    private Boolean hostnameVerification = false;
+    /**
      * Client side certificate keystore to be used for encryption
      */
     private File keyStoreFile;
@@ -943,6 +947,14 @@ public class NettyComponentConfiguration
 
     public void setEnabledProtocols(String enabledProtocols) {
         this.enabledProtocols = enabledProtocols;
+    }
+
+    public Boolean getHostnameVerification() {
+        return hostnameVerification;
+    }
+
+    public void setHostnameVerification(Boolean hostnameVerification) {
+        this.hostnameVerification = hostnameVerification;
     }
 
     public File getKeyStoreFile() {

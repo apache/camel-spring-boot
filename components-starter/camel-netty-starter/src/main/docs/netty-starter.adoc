@@ -17,7 +17,7 @@ When using netty with Spring Boot make sure to use the following Maven dependenc
 ----
 
 
-The component supports 73 options, which are listed below.
+The component supports 74 options, which are listed below.
 
 
 
@@ -49,6 +49,7 @@ The component supports 73 options, which are listed below.
 | *camel.component.netty.encoders* | A list of encoders to be used. You can use a String which have values separated by comma, and have the values be looked up in the Registry. Just remember to prefix the value with # so Camel knows it should lookup. |  | List
 | *camel.component.netty.encoding* | The encoding (a charset name) to use for the textline codec. If not provided, Camel will use the JVM default Charset. |  | String
 | *camel.component.netty.executor-service* | To use the given EventExecutorGroup. The option is a io.netty.util.concurrent.EventExecutorGroup type. |  | String
+| *camel.component.netty.hostname-verification* | To enable/disable hostname verification on SSLEngine | false | Boolean
 | *camel.component.netty.keep-alive* | Setting to ensure socket is not closed due to inactivity | true | Boolean
 | *camel.component.netty.key-store-file* | Client side certificate keystore to be used for encryption |  | File
 | *camel.component.netty.key-store-format* | Keystore format to be used for payload encryption. Defaults to JKS if not set |  | String
