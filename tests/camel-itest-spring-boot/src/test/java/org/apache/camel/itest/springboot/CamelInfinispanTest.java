@@ -44,8 +44,8 @@ public class CamelInfinispanTest extends AbstractSpringBootTestSupport {
                 .dependency("org.infinispan:infinispan-jboss-marshalling:12.1.3.Final")
                 .dependency("org.infinispan:infinispan-marshaller-protostuff:12.1.3.Final")
                 .dependency("org.infinispan:infinispan-remote-query-client:12.1.3.Final")
-                .dependency("org.infinispan.protostream:protostream-types:4.4.0.Beta3")
-                .dependency("org.infinispan.protostream:protostream:4.4.0.Beta3")
+                .dependency("org.infinispan.protostream:protostream-types:4.4.1.Final")
+                .dependency("org.infinispan.protostream:protostream:4.4.1.Final")
                 .disableJmx("org.infinispan:*")
                 .build();
     }
