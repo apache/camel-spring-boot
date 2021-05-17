@@ -108,7 +108,7 @@
         <compiler.fork>false</compiler.fork>
 
         <!-- Spring-Boot target version -->
-        <spring-boot-version>2.3.4.RELEASE</spring-boot-version>
+        <spring-boot-version>2.3.10.RELEASE</spring-boot-version>
 
         <!-- Camel target version -->
         <camel-version>3.4.6-SNAPSHOT</camel-version>
@@ -120,12 +120,12 @@
         <asciidoctorj-version>2.3.0</asciidoctorj-version>
         <avro-version>1.8.1</avro-version>
         <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
-        <groovy-version>3.0.4</groovy-version>
+        <groovy-version>3.0.8</groovy-version>
         <hadoop2-version>2.7.4</hadoop2-version>
         <infinispan-spring-boot-version>2.2.4.Final</infinispan-spring-boot-version>
         <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
-        <jetty9-version>9.4.22.v20191022</jetty9-version>
+        <jetty9-version>9.4.39.v20210325</jetty9-version>
         <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
         <maven-javadoc-plugin-version>3.2.0</maven-javadoc-plugin-version>
         <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
@@ -136,7 +136,7 @@
         <spring-cloud-netflix-version>2.2.4.RELEASE</spring-cloud-netflix-version>
         <spring-cloud-zookeeper-version>2.2.3.RELEASE</spring-cloud-zookeeper-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
-        <undertow-version>2.1.1.Final</undertow-version>
+        <undertow-version>2.1.7.Final</undertow-version>
     </properties>
 
 
