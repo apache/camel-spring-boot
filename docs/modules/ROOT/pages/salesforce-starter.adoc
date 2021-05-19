@@ -17,7 +17,7 @@ When using salesforce with Spring Boot make sure to use the following Maven depe
 ----
 
 
-The component supports 81 options, which are listed below.
+The component supports 85 options, which are listed below.
 
 
 
@@ -87,7 +87,11 @@ The component supports 81 options, which are listed below.
 | *camel.component.salesforce.pk-chunking-parent* | Specifies the parent object when you're enabling PK chunking for queries on sharing objects. The chunks are based on the parent object's records rather than the sharing object's records. For example, when querying on AccountShare, specify Account as the parent object. PK chunking is supported for sharing objects as long as the parent object is supported. |  | String
 | *camel.component.salesforce.pk-chunking-start-row* | Specifies the 15-character or 18-character record ID to be used as the lower boundary for the first chunk. Use this parameter to specify a starting ID when restarting a job that failed between batches. |  | String
 | *camel.component.salesforce.query-locator* | Query Locator provided by salesforce for use when a query results in more records than can be retrieved in a single call. Use this value in a subsequent call to retrieve additional records. |  | String
+| *camel.component.salesforce.raw-http-headers* | Comma separated list of message headers to include as HTTP parameters for Raw operation. |  | String
+| *camel.component.salesforce.raw-method* | HTTP method to use for the Raw operation |  | String
+| *camel.component.salesforce.raw-path* | The portion of the endpoint URL after the domain name. E.g., '/services/data/v52.0/sobjects/Account/' |  | String
 | *camel.component.salesforce.raw-payload* | Use raw payload String for request and response (either JSON or XML depending on format), instead of DTOs, false by default | false | Boolean
+| *camel.component.salesforce.raw-query-parameters* | Comma separated list of message headers to include as query parameters for Raw operation. Do not url-encode values as this will be done automatically. |  | String
 | *camel.component.salesforce.refresh-token* | Refresh token already obtained in the refresh token OAuth flow. One needs to setup a web application and configure a callback URL to receive the refresh token, or configure using the builtin callback at \https://login.salesforce.com/services/oauth2/success or \https://test.salesforce.com/services/oauth2/success and then retrive the refresh_token from the URL at the end of the flow. Note that in development organizations Salesforce allows hosting the callback web application at localhost. |  | String
 | *camel.component.salesforce.report-id* | Salesforce1 Analytics report Id |  | String
 | *camel.component.salesforce.report-metadata* | Salesforce1 Analytics report metadata for filtering. The option is a org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata type. |  | ReportMetadata

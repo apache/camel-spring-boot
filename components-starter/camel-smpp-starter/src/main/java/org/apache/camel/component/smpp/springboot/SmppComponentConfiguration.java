@@ -219,6 +219,15 @@ public class SmppComponentConfiguration
      */
     private Integer enquireLinkTimer = 60000;
     /**
+     * Sets the number of threads which can read PDU and process them in
+     * parallel.
+     */
+    private Integer pduProcessorDegree = 3;
+    /**
+     * Sets the capacity of the working queue for PDU processing.
+     */
+    private Integer pduProcessorQueueCapacity = 100;
+    /**
      * You can refer to a org.jsmpp.session.SessionStateListener in the Registry
      * to receive callbacks when the session state changed. The option is a
      * org.jsmpp.session.SessionStateListener type.
@@ -484,6 +493,22 @@ public class SmppComponentConfiguration
 
     public void setEnquireLinkTimer(Integer enquireLinkTimer) {
         this.enquireLinkTimer = enquireLinkTimer;
+    }
+
+    public Integer getPduProcessorDegree() {
+        return pduProcessorDegree;
+    }
+
+    public void setPduProcessorDegree(Integer pduProcessorDegree) {
+        this.pduProcessorDegree = pduProcessorDegree;
+    }
+
+    public Integer getPduProcessorQueueCapacity() {
+        return pduProcessorQueueCapacity;
+    }
+
+    public void setPduProcessorQueueCapacity(Integer pduProcessorQueueCapacity) {
+        this.pduProcessorQueueCapacity = pduProcessorQueueCapacity;
     }
 
     public SessionStateListener getSessionStateListener() {
