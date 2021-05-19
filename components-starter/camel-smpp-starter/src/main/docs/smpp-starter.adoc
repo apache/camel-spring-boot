@@ -17,7 +17,7 @@ When using smpp with Spring Boot make sure to use the following Maven dependency
 ----
 
 
-The component supports 39 options, which are listed below.
+The component supports 41 options, which are listed below.
 
 
 
@@ -46,6 +46,8 @@ The component supports 39 options, which are listed below.
 | *camel.component.smpp.max-reconnect* | Defines the maximum number of attempts to reconnect to the SMSC, if SMSC returns a negative bind response | 2147483647 | Integer
 | *camel.component.smpp.numbering-plan-indicator* | Defines the numeric plan indicator (NPI) to be used in the SME. The following NPI values are defined: 0: Unknown 1: ISDN (E163/E164) 2: Data (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8: National 9: Private 10: ERMES 13: Internet (IP) 18: WAP Client Id (to be defined by WAP Forum) |  | Byte
 | *camel.component.smpp.password* | The password for connecting to SMSC server. |  | String
+| *camel.component.smpp.pdu-processor-degree* | Sets the number of threads which can read PDU and process them in parallel. | 3 | Integer
+| *camel.component.smpp.pdu-processor-queue-capacity* | Sets the capacity of the working queue for PDU processing. | 100 | Integer
 | *camel.component.smpp.priority-flag* | Allows the originating SME to assign a priority level to the short message. Only for SubmitSm and SubmitMulti. Four Priority Levels are supported: 0: Level 0 (lowest) priority 1: Level 1 priority 2: Level 2 priority 3: Level 3 (highest) priority |  | Byte
 | *camel.component.smpp.protocol-id* | The protocol id |  | Byte
 | *camel.component.smpp.proxy-headers* | These headers will be passed to the proxy server while establishing the connection. |  | Map

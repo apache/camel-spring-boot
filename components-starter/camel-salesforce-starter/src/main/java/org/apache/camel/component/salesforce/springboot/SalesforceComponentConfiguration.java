@@ -324,6 +324,26 @@ public class SalesforceComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Comma separated list of message headers to include as HTTP parameters for
+     * Raw operation.
+     */
+    private String rawHttpHeaders;
+    /**
+     * HTTP method to use for the Raw operation
+     */
+    private String rawMethod;
+    /**
+     * The portion of the endpoint URL after the domain name. E.g.,
+     * '/services/data/v52.0/sobjects/Account/'
+     */
+    private String rawPath;
+    /**
+     * Comma separated list of message headers to include as query parameters
+     * for Raw operation. Do not url-encode values as this will be done
+     * automatically.
+     */
+    private String rawQueryParameters;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -905,6 +925,38 @@ public class SalesforceComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public String getRawHttpHeaders() {
+        return rawHttpHeaders;
+    }
+
+    public void setRawHttpHeaders(String rawHttpHeaders) {
+        this.rawHttpHeaders = rawHttpHeaders;
+    }
+
+    public String getRawMethod() {
+        return rawMethod;
+    }
+
+    public void setRawMethod(String rawMethod) {
+        this.rawMethod = rawMethod;
+    }
+
+    public String getRawPath() {
+        return rawPath;
+    }
+
+    public void setRawPath(String rawPath) {
+        this.rawPath = rawPath;
+    }
+
+    public String getRawQueryParameters() {
+        return rawQueryParameters;
+    }
+
+    public void setRawQueryParameters(String rawQueryParameters) {
+        this.rawQueryParameters = rawQueryParameters;
     }
 
     public Boolean getAutowiredEnabled() {
