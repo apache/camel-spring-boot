@@ -76,7 +76,7 @@ Each xref:list.adoc[component starter] lists configuration parameters you can co
 
 [source]
 ----
-camel.component.activemq.broker-u-r-l=tcp://localhost:61616
+camel.component.activemq.broker-url=tcp://localhost:61616
 ----
 
 == Adding Camel routes
