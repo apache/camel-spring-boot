@@ -91,7 +91,7 @@ Number of Camel components: 332 in 268 JAR artifacts (1 deprecated)
 
 | xref:latest@components::aws2-translate-component.adoc[AWS 2 Translate] | camel-aws2-translate-starter | Stable | 3.1 | Translate texts using AWS Translate and AWS SDK version 2.x.
 
-| xref:latest@components::aws-secrets-manager-component.adoc[AWS Secrets Manager] | camel-aws-secrets-manager-starter | Preview | 3.9 | Manage AWS Secrets Manager services using AWS SDK version 2.x.
+| xref:latest@components::aws-secrets-manager-component.adoc[AWS Secrets Manager] | camel-aws-secrets-manager-starter | Stable | 3.9 | Manage AWS Secrets Manager services using AWS SDK version 2.x.
 
 | xref:latest@components::azure-cosmosdb-component.adoc[Azure CosmosDB] | camel-azure-cosmosdb-starter | Preview | 3.10 | To read and write records to the CosmosDB database on Azure cloud platform.
 
@@ -251,9 +251,9 @@ Number of Camel components: 332 in 268 JAR artifacts (1 deprecated)
 
 | xref:latest@components::google-sheets-stream-component.adoc[Google Sheets Stream] | camel-google-sheets-starter | Stable | 2.23 | Poll for changes in Google Sheets.
 
-| xref:latest@components::google-storage-component.adoc[Google Storage] | camel-google-storage-starter | Preview | 3.9 | Store and retrieve objects from Google Cloud Storage Service using the google-cloud-storage library.
+| xref:latest@components::google-storage-component.adoc[Google Storage] | camel-google-storage-starter | Stable | 3.9 | Store and retrieve objects from Google Cloud Storage Service using the google-cloud-storage library.
 
-| xref:latest@components::google-functions-component.adoc[GoogleCloudFunctions] | camel-google-functions-starter | Preview | 3.9 | Manage and invoke Google Cloud Functions
+| xref:latest@components::google-functions-component.adoc[GoogleCloudFunctions] | camel-google-functions-starter | Stable | 3.9 | Manage and invoke Google Cloud Functions
 
 | xref:latest@components::gora-component.adoc[Gora] | camel-gora-starter | Stable | 2.14 | Access NoSQL databases using the Apache Gora framework.
 

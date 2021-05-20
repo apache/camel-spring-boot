@@ -8,7 +8,7 @@
     "firstVersion": "3.9.0",
     "label": "cloud",
     "javaType": "org.apache.camel.component.google.functions.GoogleCloudFunctionsComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-google-functions-starter",
     "version": "3.11.0-SNAPSHOT",
