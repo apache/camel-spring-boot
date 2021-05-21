@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-jgroups-starter",
-    "version": "3.10.0-SNAPSHOT",
+    "version": "3.10.1-SNAPSHOT",
     "scheme": "jgroups",
     "extendsScheme": "",
     "syntax": "jgroups:clusterName",
