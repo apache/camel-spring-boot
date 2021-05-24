@@ -36,7 +36,7 @@ public class CamelJpaTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelJpaTest.class))
-                .dependency("org.apache.openjpa:openjpa:3.1.2")
+                .dependency("org.apache.openjpa:openjpa:3.2.0")
                 .dependency("org.apache.openjpa:openjpa-persistence-jdbc")
                 .exclusion("org.apache.geronimo.specs:geronimo-jpa_2.0_spec")
                 // Exclude tests which require build time enhancement of @Entity annotated classes
