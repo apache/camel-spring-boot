@@ -44,7 +44,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,KameletComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.kamelet"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, KameletComponentConverter.class})
 public class KameletComponentAutoConfiguration {
 
     @Autowired

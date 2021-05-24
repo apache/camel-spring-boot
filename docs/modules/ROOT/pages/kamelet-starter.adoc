@@ -17,7 +17,7 @@ When using kamelet with Spring Boot make sure to use the following Maven depende
 ----
 
 
-The component supports 9 options, which are listed below.
+The component supports 10 options, which are listed below.
 
 
 
@@ -28,8 +28,9 @@ The component supports 9 options, which are listed below.
 | *camel.component.kamelet.block* | If sending a message to a kamelet endpoint which has no active consumer, then we can tell the producer to block and wait for the consumer to become active. | true | Boolean
 | *camel.component.kamelet.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.kamelet.enabled* | Whether to enable auto configuration of the kamelet component. This is enabled by default. |  | Boolean
+| *camel.component.kamelet.kamelet-resource-loader-listener* | To plugin a custom listener for when the Kamelet component is loading Kamelets from external resources. The option is a org.apache.camel.component.kamelet.KameletResourceLoaderListener type. |  | KameletResourceLoaderListener
 | *camel.component.kamelet.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| *camel.component.kamelet.location* | The location of the Kamelets on the file system. | classpath:/kamelets | String
+| *camel.component.kamelet.location* | The location(s) of the Kamelets on the file system. Multiple locations can be set separated by comma. | classpath:/kamelets | String
 | *camel.component.kamelet.route-properties* | Set route local parameters. |  | Map
 | *camel.component.kamelet.template-properties* | Set template local parameters. |  | Map
 | *camel.component.kamelet.timeout* | The timeout value to use if block is enabled. | 30000 | Long

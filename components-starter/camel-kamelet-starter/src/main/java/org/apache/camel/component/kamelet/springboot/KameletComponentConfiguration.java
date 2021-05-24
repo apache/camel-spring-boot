@@ -19,6 +19,7 @@ package org.apache.camel.component.kamelet.springboot;
 import java.util.Map;
 import java.util.Properties;
 import javax.annotation.Generated;
+import org.apache.camel.component.kamelet.KameletResourceLoaderListener;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -39,7 +40,8 @@ public class KameletComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The location of the Kamelets on the file system.
+     * The location(s) of the Kamelets on the file system. Multiple locations
+     * can be set separated by comma.
      */
     private String location = "classpath:/kamelets";
     /**
@@ -89,6 +91,12 @@ public class KameletComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To plugin a custom listener for when the Kamelet component is loading
+     * Kamelets from external resources. The option is a
+     * org.apache.camel.component.kamelet.KameletResourceLoaderListener type.
+     */
+    private KameletResourceLoaderListener kameletResourceLoaderListener;
 
     public String getLocation() {
         return location;
@@ -152,5 +160,14 @@ public class KameletComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public KameletResourceLoaderListener getKameletResourceLoaderListener() {
+        return kameletResourceLoaderListener;
+    }
+
+    public void setKameletResourceLoaderListener(
+            KameletResourceLoaderListener kameletResourceLoaderListener) {
+        this.kameletResourceLoaderListener = kameletResourceLoaderListener;
     }
 }
