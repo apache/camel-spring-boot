@@ -109,6 +109,12 @@ public class SecretsManagerComponentConfiguration
      */
     private String uriEndpointOverride;
     /**
+     * Set whether the Translate client should expect to load credentials
+     * through a default credentials provider or to expect static credentials to
+     * be passed in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -229,6 +235,15 @@ public class SecretsManagerComponentConfiguration
 
     public void setUriEndpointOverride(String uriEndpointOverride) {
         this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
     }
 
     public Boolean getAutowiredEnabled() {
