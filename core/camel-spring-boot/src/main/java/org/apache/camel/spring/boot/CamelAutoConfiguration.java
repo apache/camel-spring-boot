@@ -122,6 +122,7 @@ public class CamelAutoConfiguration {
         }
 
         camelContext.adapt(ExtendedCamelContext.class).setPackageScanClassResolver(new FatJarPackageScanClassResolver());
+        camelContext.adapt(ExtendedCamelContext.class).setPackageScanResourceResolver(new FatJarPackageScanResourceResolver());
 
         if (config.getRouteFilterIncludePattern() != null || config.getRouteFilterExcludePattern() != null) {
             LOG.info("Route filtering pattern: include={}, exclude={}", config.getRouteFilterIncludePattern(), config.getRouteFilterExcludePattern());
