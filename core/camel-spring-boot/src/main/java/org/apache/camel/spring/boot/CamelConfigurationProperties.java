@@ -527,7 +527,7 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * Multiple patterns can be specified separated by comma, as example, to include all the routes from a directory
      * whose name contains foo use: &#42;&#42;/*foo*.
      */
-    private String routesIncludePattern = "classpath:camel/*.xml,classpath:camel-template/*.xml,classpath:camel-rest/*.xml";
+    private String routesIncludePattern = "classpath:camel/*,classpath:camel-template/*,classpath:camel-rest/*";
 
     /**
      * Used for exclusive filtering of routes from directories. The exclusive filtering takes precedence over inclusive
