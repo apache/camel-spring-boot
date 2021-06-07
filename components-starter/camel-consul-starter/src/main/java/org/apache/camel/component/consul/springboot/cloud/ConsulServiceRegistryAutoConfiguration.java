@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Scope;
 
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(CamelAutoConfiguration.class)
-@ConditionalOnProperty(prefix = "camel.cloud.consul.service-registry", name = "enabled")
+@ConditionalOnProperty(prefix = "camel.cloud.consul", name = "enabled")
 @EnableConfigurationProperties(ConsulServiceRegistryConfiguration.class)
 public class ConsulServiceRegistryAutoConfiguration {
 
