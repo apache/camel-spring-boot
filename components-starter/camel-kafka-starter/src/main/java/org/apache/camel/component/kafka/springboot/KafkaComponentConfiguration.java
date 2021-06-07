@@ -334,6 +334,13 @@ public class KafkaComponentConfiguration
      */
     private Integer connectionMaxIdleMs = 540000;
     /**
+     * An upper bound on the time to report success or failure after a call to
+     * send() returns. This limits the total time that a record will be delayed
+     * prior to sending, the time to await acknowledgement from the broker (if
+     * expected), and the time allowed for retriable send failures.
+     */
+    private Integer deliveryTimeoutMs = 120000;
+    /**
      * If set to 'true' the producer will ensure that exactly one copy of each
      * message is written in the stream. If 'false', producer retries may write
      * duplicates of the retried message in the stream. If set to true this
@@ -1067,6 +1074,14 @@ public class KafkaComponentConfiguration
 
     public void setConnectionMaxIdleMs(Integer connectionMaxIdleMs) {
         this.connectionMaxIdleMs = connectionMaxIdleMs;
+    }
+
+    public Integer getDeliveryTimeoutMs() {
+        return deliveryTimeoutMs;
+    }
+
+    public void setDeliveryTimeoutMs(Integer deliveryTimeoutMs) {
+        this.deliveryTimeoutMs = deliveryTimeoutMs;
     }
 
     public Boolean getEnableIdempotence() {

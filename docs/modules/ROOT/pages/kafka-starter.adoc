@@ -17,7 +17,7 @@ When using kafka with Spring Boot make sure to use the following Maven dependenc
 ----
 
 
-The component supports 102 options, which are listed below.
+The component supports 103 options, which are listed below.
 
 
 
@@ -43,6 +43,7 @@ The component supports 102 options, which are listed below.
 | *camel.component.kafka.consumer-request-timeout-ms* | The configuration controls the maximum amount of time the client will wait for the response of a request. If the response is not received before the timeout elapses the client will resend the request if necessary or fail the request if retries are exhausted. | 40000 | Integer
 | *camel.component.kafka.consumer-streams* | Number of concurrent consumers on the consumer | 10 | Integer
 | *camel.component.kafka.consumers-count* | The number of consumers that connect to kafka server | 1 | Integer
+| *camel.component.kafka.delivery-timeout-ms* | An upper bound on the time to report success or failure after a call to send() returns. This limits the total time that a record will be delayed prior to sending, the time to await acknowledgement from the broker (if expected), and the time allowed for retriable send failures. | 120000 | Integer
 | *camel.component.kafka.enable-idempotence* | If set to 'true' the producer will ensure that exactly one copy of each message is written in the stream. If 'false', producer retries may write duplicates of the retried message in the stream. If set to true this option will require max.in.flight.requests.per.connection to be set to 1 and retries cannot be zero and additionally acks must be set to 'all'. | false | Boolean
 | *camel.component.kafka.enabled* | Whether to enable auto configuration of the kafka component. This is enabled by default. |  | Boolean
 | *camel.component.kafka.fetch-max-bytes* | The maximum amount of data the server should return for a fetch request This is not an absolute maximum, if the first message in the first non-empty partition of the fetch is larger than this value, the message will still be returned to ensure that the consumer can make progress. The maximum message size accepted by the broker is defined via message.max.bytes (broker config) or max.message.bytes (topic config). Note that the consumer performs multiple fetches in parallel. | 52428800 | Integer
