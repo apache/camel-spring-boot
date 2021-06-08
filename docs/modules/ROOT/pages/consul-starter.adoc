@@ -24,36 +24,36 @@ The component supports 90 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.cloud.consul.service-registry.acl-token* | Sets the ACL token to be used with Consul |  | String
-| *camel.cloud.consul.service-registry.attributes* | Custom service attributes. |  | Map
-| *camel.cloud.consul.service-registry.block-seconds* | The time (in seconds) to wait for a watch event, default 10 seconds | 10 | Integer
-| *camel.cloud.consul.service-registry.check-interval* | How often (in seconds) a service has to be marked as healthy if its check is TTL or how often the check should run. Default is 5 seconds. | 5 | Integer
-| *camel.cloud.consul.service-registry.check-ttl* | The time (in seconds) to live for TTL checks. Default is 1 minute. | 60 | Integer
-| *camel.cloud.consul.service-registry.connect-timeout* | Connect timeout for OkHttpClient |  | Duration
-| *camel.cloud.consul.service-registry.connect-timeout-millis* | Use connectTimeout instead |  | Long
-| *camel.cloud.consul.service-registry.consistency-mode* | The consistencyMode used for queries, default ConsistencyMode.DEFAULT |  | ConsistencyMode
-| *camel.cloud.consul.service-registry.datacenter* | The data center |  | String
-| *camel.cloud.consul.service-registry.deregister-after* | How long (in seconds) to wait to deregister a service in case of unclean shutdown. Default is 1 hour. | 3600 | Integer
-| *camel.cloud.consul.service-registry.deregister-services-on-stop* | Should we remove all the registered services know by this registry on stop? | true | Boolean
-| *camel.cloud.consul.service-registry.enabled* | Sets if the consul service registry should be enabled or not, default is false. | false | Boolean
-| *camel.cloud.consul.service-registry.first-index* | The first index for watch for, default 0 | 0 | BigInteger
-| *camel.cloud.consul.service-registry.id* | Service Registry ID |  | String
-| *camel.cloud.consul.service-registry.near-node* | The near node to use for queries. |  | String
-| *camel.cloud.consul.service-registry.node-meta* | The note meta-data to use for queries. |  | List
-| *camel.cloud.consul.service-registry.order* | Service lookup order/priority. |  | Integer
-| *camel.cloud.consul.service-registry.override-service-host* | Should we override the service host if given ? | true | Boolean
-| *camel.cloud.consul.service-registry.password* | Sets the password to be used for basic authentication |  | String
-| *camel.cloud.consul.service-registry.ping-instance* | Configure if the AgentClient should attempt a ping before returning the Consul instance | true | Boolean
-| *camel.cloud.consul.service-registry.read-timeout* | Read timeout for OkHttpClient |  | Duration
-| *camel.cloud.consul.service-registry.read-timeout-millis* | Use readTimeout instead. |  | Long
-| *camel.cloud.consul.service-registry.recursive* | Recursively watch, default false | false | Boolean
-| *camel.cloud.consul.service-registry.service-host* | Service host. |  | String
-| *camel.cloud.consul.service-registry.ssl-context-parameters* | SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance. |  | SSLContextParameters
-| *camel.cloud.consul.service-registry.tags* | Set tags. You can separate multiple tags by comma. |  | Set
-| *camel.cloud.consul.service-registry.url* | The Consul agent URL |  | String
-| *camel.cloud.consul.service-registry.user-name* | Sets the username to be used for basic authentication |  | String
-| *camel.cloud.consul.service-registry.write-timeout* | Write timeout for OkHttpClient |  | Duration
-| *camel.cloud.consul.service-registry.write-timeout-millis* | Use writeTimeout instead. |  | Long
+| *camel.cloud.consul.acl-token* | Sets the ACL token to be used with Consul |  | String
+| *camel.cloud.consul.attributes* | Custom service attributes. |  | Map
+| *camel.cloud.consul.block-seconds* | The time (in seconds) to wait for a watch event, default 10 seconds | 10 | Integer
+| *camel.cloud.consul.check-interval* | How often (in seconds) a service has to be marked as healthy if its check is TTL or how often the check should run. Default is 5 seconds. | 5 | Integer
+| *camel.cloud.consul.check-ttl* | The time (in seconds) to live for TTL checks. Default is 1 minute. | 60 | Integer
+| *camel.cloud.consul.connect-timeout* | Connect timeout for OkHttpClient |  | Duration
+| *camel.cloud.consul.connect-timeout-millis* | Use connectTimeout instead |  | Long
+| *camel.cloud.consul.consistency-mode* | The consistencyMode used for queries, default ConsistencyMode.DEFAULT |  | ConsistencyMode
+| *camel.cloud.consul.datacenter* | The data center |  | String
+| *camel.cloud.consul.deregister-after* | How long (in seconds) to wait to deregister a service in case of unclean shutdown. Default is 1 hour. | 3600 | Integer
+| *camel.cloud.consul.deregister-services-on-stop* | Should we remove all the registered services know by this registry on stop? | true | Boolean
+| *camel.cloud.consul.enabled* | Sets if the consul service registry should be enabled or not, default is false. | false | Boolean
+| *camel.cloud.consul.first-index* | The first index for watch for, default 0 | 0 | BigInteger
+| *camel.cloud.consul.id* | Service Registry ID |  | String
+| *camel.cloud.consul.near-node* | The near node to use for queries. |  | String
+| *camel.cloud.consul.node-meta* | The note meta-data to use for queries. |  | List
+| *camel.cloud.consul.order* | Service lookup order/priority. |  | Integer
+| *camel.cloud.consul.override-service-host* | Should we override the service host if given ? | true | Boolean
+| *camel.cloud.consul.password* | Sets the password to be used for basic authentication |  | String
+| *camel.cloud.consul.ping-instance* | Configure if the AgentClient should attempt a ping before returning the Consul instance | true | Boolean
+| *camel.cloud.consul.read-timeout* | Read timeout for OkHttpClient |  | Duration
+| *camel.cloud.consul.read-timeout-millis* | Use readTimeout instead. |  | Long
+| *camel.cloud.consul.recursive* | Recursively watch, default false | false | Boolean
+| *camel.cloud.consul.service-host* | Service host. |  | String
+| *camel.cloud.consul.ssl-context-parameters* | SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance. |  | SSLContextParameters
+| *camel.cloud.consul.tags* | Set tags. You can separate multiple tags by comma. |  | Set
+| *camel.cloud.consul.url* | The Consul agent URL |  | String
+| *camel.cloud.consul.user-name* | Sets the username to be used for basic authentication |  | String
+| *camel.cloud.consul.write-timeout* | Write timeout for OkHttpClient |  | Duration
+| *camel.cloud.consul.write-timeout-millis* | Use writeTimeout instead. |  | Long
 | *camel.cluster.consul.acl-token* | Sets the ACL token to be used with Consul |  | String
 | *camel.cluster.consul.attributes* | Custom service attributes. |  | Map
 | *camel.cluster.consul.block-seconds* | The time (in seconds) to wait for a watch event, default 10 seconds | 10 | Integer
@@ -109,7 +109,7 @@ The component supports 90 options, which are listed below.
 | *camel.component.consul.user-name* | Sets the username to be used for basic authentication |  | String
 | *camel.component.consul.value-as-string* | Default to transform values retrieved from Consul i.e. on KV endpoint to string. | false | Boolean
 | *camel.component.consul.write-timeout* | Write timeout for OkHttpClient. The option is a java.time.Duration type. |  | Duration
-| *camel.cloud.consul.service-registry.dc* | *Deprecated* Use datacenter instead |  | String
+| *camel.cloud.consul.dc* | *Deprecated* Use datacenter instead |  | String
 | *camel.cluster.consul.dc* | *Deprecated* Use datacenter instead |  | String
 | *camel.component.consul.connect-timeout-millis* | *Deprecated* Connect timeout for OkHttpClient. Deprecation note: Use connectTimeout instead |  | Long
 | *camel.component.consul.read-timeout-millis* | *Deprecated* Read timeout for OkHttpClient. Deprecation note: Use readTimeout instead |  | Long
