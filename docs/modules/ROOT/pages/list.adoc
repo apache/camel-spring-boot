@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 332 in 268 JAR artifacts (1 deprecated)
+Number of Camel components: 331 in 267 JAR artifacts (0 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -237,6 +237,8 @@ Number of Camel components: 332 in 268 JAR artifacts (1 deprecated)
 
 | xref:latest@components::google-calendar-stream-component.adoc[Google Calendar Stream] | camel-google-calendar-starter | Stable | 2.23 | Poll for changes in a Google Calendar.
 
+| xref:latest@components::google-functions-component.adoc[Google Cloud Functions] | camel-google-functions-starter | Stable | 3.9 | Manage and invoke Google Cloud Functions
+
 | xref:latest@components::google-drive-component.adoc[Google Drive] | camel-google-drive-starter | Stable | 2.14 | Manage files in Google Drive.
 
 | xref:latest@components::google-mail-component.adoc[Google Mail] | camel-google-mail-starter | Stable | 2.15 | Manage messages in Google Mail.
@@ -250,8 +252,6 @@ Number of Camel components: 332 in 268 JAR artifacts (1 deprecated)
 | xref:latest@components::google-sheets-stream-component.adoc[Google Sheets Stream] | camel-google-sheets-starter | Stable | 2.23 | Poll for changes in Google Sheets.
 
 | xref:latest@components::google-storage-component.adoc[Google Storage] | camel-google-storage-starter | Stable | 3.9 | Store and retrieve objects from Google Cloud Storage Service using the google-cloud-storage library.
-
-| xref:latest@components::google-functions-component.adoc[GoogleCloudFunctions] | camel-google-functions-starter | Stable | 3.9 | Manage and invoke Google Cloud Functions
 
 | xref:latest@components::gora-component.adoc[Gora] | camel-gora-starter | Stable | 2.14 | Access NoSQL databases using the Apache Gora framework.
 
