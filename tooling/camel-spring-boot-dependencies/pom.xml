@@ -433,11 +433,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-apns-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-arangodb-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2185,11 +2180,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-api</artifactId>
-        <version>3.11.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-apns</artifactId>
         <version>3.11.0-SNAPSHOT</version>
       </dependency>
       <dependency>
