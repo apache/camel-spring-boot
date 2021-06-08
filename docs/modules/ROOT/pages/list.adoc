@@ -15,8 +15,6 @@ Number of Camel components: 332 in 268 JAR artifacts (1 deprecated)
 
 | xref:latest@components::amqp-component.adoc[AMQP] | camel-amqp-starter | Stable | 1.2 | Messaging with AMQP protocol using Apache QPid Client.
 
-| xref:latest@components::apns-component.adoc[APNS] | camel-apns-starter | Stable | 2.8 | *deprecated* Send notifications to Apple iOS devices.
-
 | xref:latest@components::arangodb-component.adoc[ArangoDb] | camel-arangodb-starter | Stable | 3.5 | Perform operations on ArangoDb when used as a Document Database, or as a Graph Database
 
 | xref:latest@components::as2-component.adoc[AS2] | camel-as2-starter | Stable | 2.22 | Transfer data securely and reliably using the AS2 protocol (RFC4130).
