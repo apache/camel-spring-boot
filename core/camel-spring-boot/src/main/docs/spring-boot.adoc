@@ -92,7 +92,7 @@ When using spring-boot with Spring Boot make sure to use the following Maven dep
 ----
 
 
-The component supports 172 options, which are listed below.
+The component supports 173 options, which are listed below.
 
 
 
@@ -169,6 +169,7 @@ The component supports 172 options, which are listed below.
 | *camel.springboot.exchange-factory-capacity* | The capacity the pool (for each consumer) uses for storing exchanges. The default capacity is 100. | 100 | Integer
 | *camel.springboot.exchange-factory-statistics-enabled* | Configures whether statistics is enabled on exchange factory. | false | Boolean
 | *camel.springboot.file-configurations* | Directory to load additional configuration files that contains configuration values that takes precedence over any other configuration. This can be used to refer to files that may have secret configuration that has been mounted on the file system for containers. You must use either file: or classpath: as prefix to load from file system or classpath. Then you can specify a pattern to load from sub directories and a name pattern such as file:/var/app/secret/*.properties |  | String
+| *camel.springboot.global-options* | Sets global options that can be referenced in the camel context  Important: This has nothing to do with property placeholders, and is just a plain set of key/value pairs which are used to configure global options on CamelContext, such as a maximum debug logging length etc. |  | Map
 | *camel.springboot.include-non-singletons* | Whether to include non-singleton beans (prototypes) when scanning for RouteBuilder instances. By default only singleton beans is included in the context scan. | false | Boolean
 | *camel.springboot.inflight-repository-browse-enabled* | Sets whether the inflight repository should allow browsing each inflight exchange. This is by default disabled as there is a very slight performance overhead when enabled. | false | Boolean
 | *camel.springboot.java-routes-exclude-pattern* | Used for exclusive filtering RouteBuilder classes which are collected from the registry or via classpath scanning. The exclusive filtering takes precedence over inclusive filtering. The pattern is using Ant-path style pattern. Multiple patterns can be specified separated by comma. For example to exclude all classes starting with Bar use: &#42;&#42;/Bar&#42; To exclude all routes form a specific package use: com/mycompany/bar/&#42; To exclude all routes form a specific package and its sub-packages use double wildcards: com/mycompany/bar/&#42;&#42; And to exclude all routes from two specific packages use: com/mycompany/bar/&#42;,com/mycompany/stuff/&#42; |  | String
