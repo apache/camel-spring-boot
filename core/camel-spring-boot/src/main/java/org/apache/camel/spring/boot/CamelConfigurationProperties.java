@@ -468,7 +468,7 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
 
     /**
      * Sets global options that can be referenced in the camel context
-     * 
+     *
      * Important: This has nothing to do with property placeholders, and is just a plain set of key/value pairs
      * which are used to configure global options on CamelContext, such as a maximum debug logging length etc.
      */
