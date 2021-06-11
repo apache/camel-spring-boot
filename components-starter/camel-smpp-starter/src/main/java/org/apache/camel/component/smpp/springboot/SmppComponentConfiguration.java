@@ -234,6 +234,12 @@ public class SmppComponentConfiguration
      */
     private SessionStateListener sessionStateListener;
     /**
+     * When true, the SMSC delivery receipt would be requested only for the last
+     * segment of a multi-segment (long) message. For short messages, with only
+     * 1 segment the behaviour is unchanged.
+     */
+    private Boolean singleDLR = false;
+    /**
      * Defines the maximum period of inactivity allowed after a transaction,
      * after which an SMPP entity may assume that the session is no longer
      * active. This timer may be active on either communicating SMPP entity
@@ -518,6 +524,14 @@ public class SmppComponentConfiguration
     public void setSessionStateListener(
             SessionStateListener sessionStateListener) {
         this.sessionStateListener = sessionStateListener;
+    }
+
+    public Boolean getSingleDLR() {
+        return singleDLR;
+    }
+
+    public void setSingleDLR(Boolean singleDLR) {
+        this.singleDLR = singleDLR;
     }
 
     public Integer getTransactionTimer() {
