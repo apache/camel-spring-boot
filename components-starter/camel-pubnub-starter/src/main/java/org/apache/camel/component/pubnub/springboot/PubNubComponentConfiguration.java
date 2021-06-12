@@ -17,6 +17,7 @@
 package org.apache.camel.component.pubnub.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.component.pubnub.PubNubConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -38,6 +39,16 @@ public class PubNubComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The component configurations. The option is a
+     * org.apache.camel.component.pubnub.PubNubConfiguration type.
+     */
+    private PubNubConfiguration configuration;
+    /**
+     * UUID to be used as a device identifier, a default UUID is generated if
+     * not passed.
+     */
+    private String uuid;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -46,6 +57,10 @@ public class PubNubComponentConfiguration
      * will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
+    /**
+     * Also subscribe to related presence information
+     */
+    private Boolean withPresence = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -58,6 +73,20 @@ public class PubNubComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The operation to perform. PUBLISH: Default. Send a message to all
+     * subscribers of a channel. FIRE: allows the client to send a message to
+     * BLOCKS Event Handlers. These messages will go directly to any Event
+     * Handlers registered on the channel. HERENOW: Obtain information about the
+     * current state of a channel including a list of unique user-ids currently
+     * subscribed to the channel and the total occupancy count. WHERENOW: Obtain
+     * information about the current list of channels to which a uuid is
+     * subscribed to. GETSTATE: Used to get key/value pairs specific to a
+     * subscriber uuid. State information is supplied as a JSON object of
+     * key/value pairs SETSTATE: Used to set key/value pairs specific to a
+     * subscriber uuid GETHISTORY: Fetches historical messages of a channel.
+     */
+    private String operation;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -66,6 +95,49 @@ public class PubNubComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * If Access Manager is utilized, client will use this authKey in all
+     * restricted requests.
+     */
+    private String authKey;
+    /**
+     * If cipher is passed, all communications to/from PubNub will be encrypted.
+     */
+    private String cipherKey;
+    /**
+     * The publish key obtained from your PubNub account. Required when
+     * publishing messages.
+     */
+    private String publishKey;
+    /**
+     * The secret key used for message signing.
+     */
+    private String secretKey;
+    /**
+     * Use SSL for secure transmission.
+     */
+    private Boolean secure = true;
+    /**
+     * The subscribe key obtained from your PubNub account. Required when
+     * subscribing to channels or listening for presence events
+     */
+    private String subscribeKey;
+
+    public PubNubConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(PubNubConfiguration configuration) {
+        this.configuration = configuration;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -73,6 +145,14 @@ public class PubNubComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getWithPresence() {
+        return withPresence;
+    }
+
+    public void setWithPresence(Boolean withPresence) {
+        this.withPresence = withPresence;
     }
 
     public Boolean getLazyStartProducer() {
@@ -83,11 +163,67 @@ public class PubNubComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getAuthKey() {
+        return authKey;
+    }
+
+    public void setAuthKey(String authKey) {
+        this.authKey = authKey;
+    }
+
+    public String getCipherKey() {
+        return cipherKey;
+    }
+
+    public void setCipherKey(String cipherKey) {
+        this.cipherKey = cipherKey;
+    }
+
+    public String getPublishKey() {
+        return publishKey;
+    }
+
+    public void setPublishKey(String publishKey) {
+        this.publishKey = publishKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
+    public Boolean getSecure() {
+        return secure;
+    }
+
+    public void setSecure(Boolean secure) {
+        this.secure = secure;
+    }
+
+    public String getSubscribeKey() {
+        return subscribeKey;
+    }
+
+    public void setSubscribeKey(String subscribeKey) {
+        this.subscribeKey = subscribeKey;
     }
 }
