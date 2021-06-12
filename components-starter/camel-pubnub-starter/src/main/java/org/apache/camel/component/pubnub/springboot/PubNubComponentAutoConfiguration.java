@@ -44,7 +44,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,PubNubComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.pubnub"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, PubNubComponentConverter.class})
 public class PubNubComponentAutoConfiguration {
 
     @Autowired
