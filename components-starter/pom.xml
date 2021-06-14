@@ -245,6 +245,7 @@
     <module>camel-http-common-starter</module>
     <module>camel-http-starter</module>
     <module>camel-huaweicloud-functiongraph-starter</module>
+    <module>camel-huaweicloud-iam-starter</module>
     <module>camel-huaweicloud-smn-starter</module>
     <module>camel-hystrix-starter</module>
     <module>camel-ical-starter</module>

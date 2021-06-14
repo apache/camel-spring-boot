@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 332 in 268 JAR artifacts (0 deprecated)
+Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -293,6 +293,8 @@ Number of Camel components: 332 in 268 JAR artifacts (0 deprecated)
 
 | xref:latest@components::http-component.adoc[HTTP] | camel-http-starter | Stable | 2.3 | Send requests to external HTTP servers using Apache HTTP Client 4.x.
 
+| xref:latest@components::hwcloud-iam-component.adoc[IAM] | camel-huaweicloud-iam-starter | Preview | 3.11 | To securely manage users on Huawei Cloud
+
 | xref:latest@components::iec60870-client-component.adoc[IEC 60870 Client] | camel-iec60870-starter | Stable | 2.20 | IEC 60870 supervisory control and data acquisition (SCADA) client using NeoSCADA implementation.
 
 | xref:latest@components::iec60870-server-component.adoc[IEC 60870 Server] | camel-iec60870-starter | Stable | 2.20 | IEC 60870 supervisory control and data acquisition (SCADA) server using NeoSCADA implementation.
@@ -371,7 +373,7 @@ Number of Camel components: 332 in 268 JAR artifacts (0 deprecated)
 
 | xref:latest@components::kamelet-component.adoc[Kamelet] | camel-kamelet-starter | Stable | 3.8 | To call Kamelets
 
-| xref:latest@components::kamelet-reify-component.adoc[Kamelet Reify] | camel-kamelet-reify-starter | Stable | 3.6 | To call Kamelets (indirectly)
+| xref:latest@components::kamelet-reify-component.adoc[Kamelet Reify] | camel-kamelet-reify-starter | Stable | 3.6 | *deprecated* To call Kamelets (indirectly)
 
 | xref:latest@components::kubernetes-config-maps-component.adoc[Kubernetes ConfigMap] | camel-kubernetes-starter | Stable | 2.17 | Perform operations on Kubernetes ConfigMaps and get notified on ConfigMaps changes.
 
