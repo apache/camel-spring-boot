@@ -197,6 +197,17 @@ public class KafkaComponentConfiguration
      */
     private String groupId;
     /**
+     * A unique identifier of the consumer instance provided by the end user.
+     * Only non-empty strings are permitted. If set, the consumer is treated as
+     * a static member, which means that only one instance with this ID is
+     * allowed in the consumer group at any time. This can be used in
+     * combination with a larger session timeout to avoid group rebalances
+     * caused by transient unavailability (e.g. process restarts). If not set,
+     * the consumer will join the group as a dynamic member, which is the
+     * traditional behavior.
+     */
+    private String groupInstanceId;
+    /**
      * To use a custom KafkaHeaderDeserializer to deserialize kafka headers
      * values. The option is a
      * org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer type.
@@ -911,6 +922,14 @@ public class KafkaComponentConfiguration
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
+    }
+
+    public String getGroupInstanceId() {
+        return groupInstanceId;
+    }
+
+    public void setGroupInstanceId(String groupInstanceId) {
+        this.groupInstanceId = groupInstanceId;
     }
 
     public KafkaHeaderDeserializer getHeaderDeserializer() {

@@ -17,7 +17,7 @@ When using kafka with Spring Boot make sure to use the following Maven dependenc
 ----
 
 
-The component supports 103 options, which are listed below.
+The component supports 104 options, which are listed below.
 
 
 
@@ -50,6 +50,7 @@ The component supports 103 options, which are listed below.
 | *camel.component.kafka.fetch-min-bytes* | The minimum amount of data the server should return for a fetch request. If insufficient data is available the request will wait for that much data to accumulate before answering the request. | 1 | Integer
 | *camel.component.kafka.fetch-wait-max-ms* | The maximum amount of time the server will block before answering the fetch request if there isn't sufficient data to immediately satisfy fetch.min.bytes | 500 | Integer
 | *camel.component.kafka.group-id* | A string that uniquely identifies the group of consumer processes to which this consumer belongs. By setting the same group id multiple processes indicate that they are all part of the same consumer group. This option is required for consumers. |  | String
+| *camel.component.kafka.group-instance-id* | A unique identifier of the consumer instance provided by the end user. Only non-empty strings are permitted. If set, the consumer is treated as a static member, which means that only one instance with this ID is allowed in the consumer group at any time. This can be used in combination with a larger session timeout to avoid group rebalances caused by transient unavailability (e.g. process restarts). If not set, the consumer will join the group as a dynamic member, which is the traditional behavior. |  | String
 | *camel.component.kafka.header-deserializer* | To use a custom KafkaHeaderDeserializer to deserialize kafka headers values. The option is a org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer type. |  | KafkaHeaderDeserializer
 | *camel.component.kafka.header-filter-strategy* | To use a custom HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type. |  | HeaderFilterStrategy
 | *camel.component.kafka.header-serializer* | To use a custom KafkaHeaderSerializer to serialize kafka headers values. The option is a org.apache.camel.component.kafka.serde.KafkaHeaderSerializer type. |  | KafkaHeaderSerializer
