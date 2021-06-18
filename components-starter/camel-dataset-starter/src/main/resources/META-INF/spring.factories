@@ -17,5 +17,9 @@
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.dataset.springboot.DataSetComponentAutoConfiguration,\
-org.apache.camel.component.dataset.springboot.DataSetTestComponentAutoConfiguration
+org.apache.camel.component.dataset.springboot.DataSetTestComponentAutoConfiguration,\
+org.apache.camel.component.dataset.springboot.DataSetComponentConverter,\
+org.apache.camel.component.dataset.springboot.DataSetTestComponentConverter
+
+
 

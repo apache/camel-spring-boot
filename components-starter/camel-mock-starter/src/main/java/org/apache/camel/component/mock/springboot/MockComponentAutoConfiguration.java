@@ -44,7 +44,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,MockComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.mock"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, MockComponentConverter.class})
 public class MockComponentAutoConfiguration {
 
     @Autowired

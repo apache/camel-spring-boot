@@ -17,6 +17,7 @@
 package org.apache.camel.component.mock.springboot;
 
 import javax.annotation.Generated;
+import org.apache.camel.spi.ExchangeFormatter;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -48,6 +49,13 @@ public class MockComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * To turn on logging when the mock receives an incoming message. This will
+     * log only one time at INFO level for the incoming message. For more
+     * detailed logging then set the logger to DEBUG level for the
+     * org.apache.camel.component.mock.MockEndpoint class.
+     */
+    private Boolean log = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -56,6 +64,13 @@ public class MockComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Sets a custom ExchangeFormatter to convert the Exchange to a String
+     * suitable for logging. If not specified, we default to
+     * DefaultExchangeFormatter. The option is a
+     * org.apache.camel.spi.ExchangeFormatter type.
+     */
+    private ExchangeFormatter exchangeFormatter;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -65,11 +80,27 @@ public class MockComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Boolean getLog() {
+        return log;
+    }
+
+    public void setLog(Boolean log) {
+        this.log = log;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public ExchangeFormatter getExchangeFormatter() {
+        return exchangeFormatter;
+    }
+
+    public void setExchangeFormatter(ExchangeFormatter exchangeFormatter) {
+        this.exchangeFormatter = exchangeFormatter;
     }
 }

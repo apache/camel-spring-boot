@@ -47,49 +47,49 @@ Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 
 | xref:latest@components::avro-component.adoc[Avro RPC] | camel-avro-rpc-starter | Stable | 2.10 | Produce or consume Apache Avro RPC services.
 
-| xref:latest@components::aws2-athena-component.adoc[AWS 2 Athena] | camel-aws2-athena-starter | Stable | 3.4 | Access AWS Athena service using AWS SDK version 2.x.
+| xref:latest@components::aws2-athena-component.adoc[AWS Athena] | camel-aws2-athena-starter | Stable | 3.4 | Access AWS Athena service using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-cw-component.adoc[AWS 2 CloudWatch] | camel-aws2-cw-starter | Stable | 3.1 | Sending metrics to AWS CloudWatch using AWS SDK version 2.x.
+| xref:latest@components::aws2-cw-component.adoc[AWS CloudWatch] | camel-aws2-cw-starter | Stable | 3.1 | Sending metrics to AWS CloudWatch using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-ddb-component.adoc[AWS 2 DynamoDB] | camel-aws2-ddb-starter | Stable | 3.1 | Store and retrieve data from AWS DynamoDB service using AWS SDK version 2.x.
+| xref:latest@components::aws2-ddb-component.adoc[AWS DynamoDB] | camel-aws2-ddb-starter | Stable | 3.1 | Store and retrieve data from AWS DynamoDB service using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-ddbstream-component.adoc[AWS 2 DynamoDB Streams] | camel-aws2-ddb-starter | Stable | 3.1 | Receive messages from AWS DynamoDB Stream service using AWS SDK version 2.x.
+| xref:latest@components::aws2-ddbstream-component.adoc[AWS DynamoDB Streams] | camel-aws2-ddb-starter | Stable | 3.1 | Receive messages from AWS DynamoDB Stream service using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-ec2-component.adoc[AWS 2 Elastic Compute Cloud (EC2)] | camel-aws2-ec2-starter | Stable | 3.1 | Manage AWS EC2 instances using AWS SDK version 2.x.
+| xref:latest@components::aws2-ec2-component.adoc[AWS Elastic Compute Cloud (EC2)] | camel-aws2-ec2-starter | Stable | 3.1 | Manage AWS EC2 instances using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-ecs-component.adoc[AWS 2 Elastic Container Service (ECS)] | camel-aws2-ecs-starter | Stable | 3.1 | Manage AWS ECS cluster instances using AWS SDK version 2.x.
+| xref:latest@components::aws2-ecs-component.adoc[AWS Elastic Container Service (ECS)] | camel-aws2-ecs-starter | Stable | 3.1 | Manage AWS ECS cluster instances using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-eks-component.adoc[AWS 2 Elastic Kubernetes Service (EKS)] | camel-aws2-eks-starter | Stable | 3.1 | Manage AWS EKS cluster instances using AWS SDK version 2.x.
+| xref:latest@components::aws2-eks-component.adoc[AWS Elastic Kubernetes Service (EKS)] | camel-aws2-eks-starter | Stable | 3.1 | Manage AWS EKS cluster instances using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-eventbridge-component.adoc[AWS 2 Eventbridge] | camel-aws2-eventbridge-starter | Stable | 3.6 | Manage AWS Eventbridge cluster instances using AWS SDK version 2.x.
+| xref:latest@components::aws2-eventbridge-component.adoc[AWS Eventbridge] | camel-aws2-eventbridge-starter | Stable | 3.6 | Manage AWS Eventbridge cluster instances using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-iam-component.adoc[AWS 2 Identity and Access Management (IAM)] | camel-aws2-iam-starter | Stable | 3.1 | Manage AWS IAM instances using AWS SDK version 2.x.
+| xref:latest@components::aws2-iam-component.adoc[AWS Identity and Access Management (IAM)] | camel-aws2-iam-starter | Stable | 3.1 | Manage AWS IAM instances using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-kms-component.adoc[AWS 2 Key Management Service (KMS)] | camel-aws2-kms-starter | Stable | 3.1 | Manage keys stored in AWS KMS instances using AWS SDK version 2.x.
+| xref:latest@components::aws2-kms-component.adoc[AWS Key Management Service (KMS)] | camel-aws2-kms-starter | Stable | 3.1 | Manage keys stored in AWS KMS instances using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-kinesis-component.adoc[AWS 2 Kinesis] | camel-aws2-kinesis-starter | Stable | 3.2 | Consume and produce records from and to AWS Kinesis Streams using AWS SDK version 2.x.
+| xref:latest@components::aws2-kinesis-component.adoc[AWS Kinesis] | camel-aws2-kinesis-starter | Stable | 3.2 | Consume and produce records from and to AWS Kinesis Streams using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-kinesis-firehose-component.adoc[AWS 2 Kinesis Firehose] | camel-aws2-kinesis-starter | Stable | 3.2 | Produce data to AWS Kinesis Firehose streams using AWS SDK version 2.x.
+| xref:latest@components::aws2-kinesis-firehose-component.adoc[AWS Kinesis Firehose] | camel-aws2-kinesis-starter | Stable | 3.2 | Produce data to AWS Kinesis Firehose streams using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-lambda-component.adoc[AWS 2 Lambda] | camel-aws2-lambda-starter | Stable | 3.2 | Manage and invoke AWS Lambda functions using AWS SDK version 2.x.
+| xref:latest@components::aws2-lambda-component.adoc[AWS Lambda] | camel-aws2-lambda-starter | Stable | 3.2 | Manage and invoke AWS Lambda functions using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-msk-component.adoc[AWS 2 Managed Streaming for Apache Kafka (MSK)] | camel-aws2-msk-starter | Stable | 3.1 | Manage AWS MSK instances using AWS SDK version 2.x.
+| xref:latest@components::aws2-msk-component.adoc[AWS Managed Streaming for Apache Kafka (MSK)] | camel-aws2-msk-starter | Stable | 3.1 | Manage AWS MSK instances using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-mq-component.adoc[AWS 2 MQ] | camel-aws2-mq-starter | Stable | 3.1 | Manage AWS MQ instances using AWS SDK version 2.x.
+| xref:latest@components::aws2-mq-component.adoc[AWS MQ] | camel-aws2-mq-starter | Stable | 3.1 | Manage AWS MQ instances using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-s3-component.adoc[AWS 2 S3 Storage Service] | camel-aws2-s3-starter | Stable | 3.2 | Store and retrieve objects from AWS S3 Storage Service using AWS SDK version 2.x.
-
-| xref:latest@components::aws2-sts-component.adoc[AWS 2 Security Token Service (STS)] | camel-aws2-sts-starter | Stable | 3.5 | Manage AWS STS cluster instances using AWS SDK version 2.x.
-
-| xref:latest@components::aws2-ses-component.adoc[AWS 2 Simple Email Service (SES)] | camel-aws2-ses-starter | Stable | 3.1 | Send e-mails through AWS SES service using AWS SDK version 2.x.
-
-| xref:latest@components::aws2-sns-component.adoc[AWS 2 Simple Notification System (SNS)] | camel-aws2-sns-starter | Stable | 3.1 | Send messages to an AWS Simple Notification Topic using AWS SDK version 2.x.
-
-| xref:latest@components::aws2-sqs-component.adoc[AWS 2 Simple Queue Service (SQS)] | camel-aws2-sqs-starter | Stable | 3.1 | Sending and receive messages to/from AWS SQS service using AWS SDK version 2.x.
-
-| xref:latest@components::aws2-translate-component.adoc[AWS 2 Translate] | camel-aws2-translate-starter | Stable | 3.1 | Translate texts using AWS Translate and AWS SDK version 2.x.
+| xref:latest@components::aws2-s3-component.adoc[AWS S3 Storage Service] | camel-aws2-s3-starter | Stable | 3.2 | Store and retrieve objects from AWS S3 Storage Service using AWS SDK version 2.x.
 
 | xref:latest@components::aws-secrets-manager-component.adoc[AWS Secrets Manager] | camel-aws-secrets-manager-starter | Stable | 3.9 | Manage AWS Secrets Manager services using AWS SDK version 2.x.
+
+| xref:latest@components::aws2-sts-component.adoc[AWS Security Token Service (STS)] | camel-aws2-sts-starter | Stable | 3.5 | Manage AWS STS cluster instances using AWS SDK version 2.x.
+
+| xref:latest@components::aws2-ses-component.adoc[AWS Simple Email Service (SES)] | camel-aws2-ses-starter | Stable | 3.1 | Send e-mails through AWS SES service using AWS SDK version 2.x.
+
+| xref:latest@components::aws2-sns-component.adoc[AWS Simple Notification System (SNS)] | camel-aws2-sns-starter | Stable | 3.1 | Send messages to an AWS Simple Notification Topic using AWS SDK version 2.x.
+
+| xref:latest@components::aws2-sqs-component.adoc[AWS Simple Queue Service (SQS)] | camel-aws2-sqs-starter | Stable | 3.1 | Sending and receive messages to/from AWS SQS service using AWS SDK version 2.x.
+
+| xref:latest@components::aws2-translate-component.adoc[AWS Translate] | camel-aws2-translate-starter | Stable | 3.1 | Translate texts using AWS Translate and AWS SDK version 2.x.
 
 | xref:latest@components::azure-cosmosdb-component.adoc[Azure CosmosDB] | camel-azure-cosmosdb-starter | Preview | 3.10 | To read and write records to the CosmosDB database on Azure cloud platform.
 
@@ -293,7 +293,7 @@ Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 
 | xref:latest@components::http-component.adoc[HTTP] | camel-http-starter | Stable | 2.3 | Send requests to external HTTP servers using Apache HTTP Client 4.x.
 
-| xref:latest@components::hwcloud-iam-component.adoc[IAM] | camel-huaweicloud-iam-starter | Preview | 3.11 | To securely manage users on Huawei Cloud
+| xref:latest@components::hwcloud-iam-component.adoc[Huawei Cloud Identity and Access Management (IAM)] | camel-huaweicloud-iam-starter | Preview | 3.11 | To securely manage users on Huawei Cloud
 
 | xref:latest@components::iec60870-client-component.adoc[IEC 60870 Client] | camel-iec60870-starter | Stable | 2.20 | IEC 60870 supervisory control and data acquisition (SCADA) client using NeoSCADA implementation.
 

@@ -16,4 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.mock.springboot.MockComponentAutoConfiguration
+org.apache.camel.component.mock.springboot.MockComponentAutoConfiguration,\
+org.apache.camel.component.mock.springboot.MockComponentConverter
+

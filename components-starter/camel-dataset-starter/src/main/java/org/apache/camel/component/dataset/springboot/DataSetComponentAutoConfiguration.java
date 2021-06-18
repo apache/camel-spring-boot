@@ -44,7 +44,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,DataSetComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.dataset"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, DataSetComponentConverter.class})
 public class DataSetComponentAutoConfiguration {
 
     @Autowired
