@@ -221,8 +221,6 @@ Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 
 | xref:latest@components::ftps-component.adoc[FTPS] | camel-ftp-starter | Stable | 2.2 | Upload and download files to/from FTP servers supporting the FTPS protocol.
 
-| xref:latest@components::hwcloud-functiongraph-component.adoc[FunctionGraph] | camel-huaweicloud-functiongraph-starter | Preview | 3.11 | To call serverless functions on Huawei Cloud
-
 | xref:latest@components::ganglia-component.adoc[Ganglia] | camel-ganglia-starter | Stable | 2.15 | Send metrics to Ganglia monitoring system.
 
 | xref:latest@components::geocoder-component.adoc[Geocoder] | camel-geocoder-starter | Stable | 2.12 | Find geocodes (latitude and longitude) for a given address or the other way round.
@@ -293,7 +291,11 @@ Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 
 | xref:latest@components::http-component.adoc[HTTP] | camel-http-starter | Stable | 2.3 | Send requests to external HTTP servers using Apache HTTP Client 4.x.
 
+| xref:latest@components::hwcloud-functiongraph-component.adoc[Huawei Cloud FunctionGraph] | camel-huaweicloud-functiongraph-starter | Preview | 3.11 | To call serverless functions on Huawei Cloud
+
 | xref:latest@components::hwcloud-iam-component.adoc[Huawei Cloud Identity and Access Management (IAM)] | camel-huaweicloud-iam-starter | Preview | 3.11 | To securely manage users on Huawei Cloud
+
+| xref:latest@components::hwcloud-smn-component.adoc[Huawei Cloud Simple Message Notification (SMN)] | camel-huaweicloud-smn-starter | Stable | 3.8 | To broadcast messages and connect cloud services through notifications on Huawei Cloud
 
 | xref:latest@components::iec60870-client-component.adoc[IEC 60870 Client] | camel-iec60870-starter | Stable | 2.20 | IEC 60870 supervisory control and data acquisition (SCADA) client using NeoSCADA implementation.
 
@@ -556,8 +558,6 @@ Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 | xref:latest@components::sjms-component.adoc[Simple JMS] | camel-sjms-starter | Stable | 2.11 | Send and receive messages to/from a JMS Queue or Topic using plain JMS 1.x API.
 
 | xref:latest@components::sjms2-component.adoc[Simple JMS2] | camel-sjms2-starter | Stable | 2.19 | Send and receive messages to/from a JMS Queue or Topic using plain JMS 2.x API.
-
-| xref:latest@components::hwcloud-smn-component.adoc[SimpleNotification] | camel-huaweicloud-smn-starter | Stable | 3.8 | Huawei Cloud component to integrate with SimpleNotification services
 
 | xref:latest@components::sip-component.adoc[SIP] | camel-sip-starter | Stable | 2.5 | Send and receive messages using the SIP protocol (used in telecommunications).
 

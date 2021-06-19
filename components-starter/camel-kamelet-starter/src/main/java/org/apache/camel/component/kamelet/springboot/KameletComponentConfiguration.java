@@ -19,7 +19,7 @@ package org.apache.camel.component.kamelet.springboot;
 import java.util.Map;
 import java.util.Properties;
 import javax.annotation.Generated;
-import org.apache.camel.component.kamelet.KameletResourceLoaderListener;
+import org.apache.camel.spi.RouteTemplateLoaderListener;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -94,9 +94,9 @@ public class KameletComponentConfiguration
     /**
      * To plugin a custom listener for when the Kamelet component is loading
      * Kamelets from external resources. The option is a
-     * org.apache.camel.component.kamelet.KameletResourceLoaderListener type.
+     * org.apache.camel.spi.RouteTemplateLoaderListener type.
      */
-    private KameletResourceLoaderListener kameletResourceLoaderListener;
+    private RouteTemplateLoaderListener routeTemplateLoaderListener;
 
     public String getLocation() {
         return location;
@@ -162,12 +162,12 @@ public class KameletComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
-    public KameletResourceLoaderListener getKameletResourceLoaderListener() {
-        return kameletResourceLoaderListener;
+    public RouteTemplateLoaderListener getRouteTemplateLoaderListener() {
+        return routeTemplateLoaderListener;
     }
 
-    public void setKameletResourceLoaderListener(
-            KameletResourceLoaderListener kameletResourceLoaderListener) {
-        this.kameletResourceLoaderListener = kameletResourceLoaderListener;
+    public void setRouteTemplateLoaderListener(
+            RouteTemplateLoaderListener routeTemplateLoaderListener) {
+        this.routeTemplateLoaderListener = routeTemplateLoaderListener;
     }
 }

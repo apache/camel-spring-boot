@@ -49,7 +49,7 @@ public class BeanLanguageConfiguration
      * request. When using prototype scope, then the bean will be looked up or
      * created per call. However in case of lookup then this is delegated to the
      * bean registry such as Spring or CDI (if in use), which depends on their
-     * configuration can act as either singleton or prototype scope. so when
+     * configuration can act as either singleton or prototype scope. So when
      * using prototype scope then this depends on the bean registry
      * implementation.
      */

@@ -41,7 +41,7 @@ public class KameletComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kamelet.KameletResourceLoaderListener.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.RouteTemplateLoaderListener.class));
         return answer;
     }
 
@@ -58,7 +58,7 @@ public class KameletComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.apache.camel.component.kamelet.KameletResourceLoaderListener": return applicationContext.getBean(ref, org.apache.camel.component.kamelet.KameletResourceLoaderListener.class);
+            case "org.apache.camel.spi.RouteTemplateLoaderListener": return applicationContext.getBean(ref, org.apache.camel.spi.RouteTemplateLoaderListener.class);
         }
         return null;
     }
