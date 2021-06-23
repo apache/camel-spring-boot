@@ -158,6 +158,11 @@ public class CsvDataFormatConfiguration
      * Refers to a custom CsvRecordConverter to lookup from the registry to use.
      */
     private String recordConverterRef;
+    /**
+     * Whether the unmarshalling should capture the header record and store it
+     * in the message header
+     */
+    private Boolean captureHeaderRecord = false;
 
     public String getFormatRef() {
         return formatRef;
@@ -381,5 +386,13 @@ public class CsvDataFormatConfiguration
 
     public void setRecordConverterRef(String recordConverterRef) {
         this.recordConverterRef = recordConverterRef;
+    }
+
+    public Boolean getCaptureHeaderRecord() {
+        return captureHeaderRecord;
+    }
+
+    public void setCaptureHeaderRecord(Boolean captureHeaderRecord) {
+        this.captureHeaderRecord = captureHeaderRecord;
     }
 }
