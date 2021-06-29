@@ -87,7 +87,7 @@ Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 
 | xref:latest@components::aws2-sns-component.adoc[AWS Simple Notification System (SNS)] | camel-aws2-sns-starter | Stable | 3.1 | Send messages to an AWS Simple Notification Topic using AWS SDK version 2.x.
 
-| xref:latest@components::aws2-sqs-component.adoc[AWS Simple Queue Service (SQS)] | camel-aws2-sqs-starter | Stable | 3.1 | Sending and receive messages to/from AWS SQS service using AWS SDK version 2.x.
+| xref:latest@components::aws2-sqs-component.adoc[AWS Simple Queue Service (SQS)] | camel-aws2-sqs-starter | Stable | 3.1 | Send and receive messages to/from AWS SQS service using AWS SDK version 2.x.
 
 | xref:latest@components::aws2-translate-component.adoc[AWS Translate] | camel-aws2-translate-starter | Stable | 3.1 | Translate texts using AWS Translate and AWS SDK version 2.x.
 
@@ -189,7 +189,7 @@ Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 
 | xref:latest@components::ehcache-component.adoc[Ehcache] | camel-ehcache-starter | Stable | 2.18 | Perform caching operations using Ehcache.
 
-| xref:latest@components::elasticsearch-rest-component.adoc[Elasticsearch Rest] | camel-elasticsearch-rest-starter | Stable | 2.21 | Send requests to with an ElasticSearch via REST API.
+| xref:latest@components::elasticsearch-rest-component.adoc[Elasticsearch Rest] | camel-elasticsearch-rest-starter | Stable | 2.21 | Send requests to ElasticSearch via REST API
 
 | xref:latest@components::elsql-component.adoc[ElSQL] | camel-elsql-starter | Stable | 2.16 | Use ElSql to define SQL queries. Extends the SQL Component.
 
@@ -455,7 +455,7 @@ Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 
 | xref:latest@components::nats-component.adoc[Nats] | camel-nats-starter | Stable | 2.17 | Send and receive messages from NATS messaging system.
 
-| xref:latest@components::netty-component.adoc[Netty] | camel-netty-starter | Stable | 2.14 | Socket level networking using TCP or UDP with the Netty 4.x.
+| xref:latest@components::netty-component.adoc[Netty] | camel-netty-starter | Stable | 2.14 | Socket level networking using TCP or UDP with Netty 4.x.
 
 | xref:latest@components::netty-http-component.adoc[Netty HTTP] | camel-netty-http-starter | Stable | 2.14 | Netty HTTP server and client using the Netty 4.x.
 
