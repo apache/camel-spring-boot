@@ -47,7 +47,7 @@ public class JsonbDataFormatConfiguration
     /**
      * Class name of the java type to use when unmarshalling
      */
-    private String unmarshalTypeName;
+    private String unmarshalType;
 
     public String getObjectMapper() {
         return objectMapper;
@@ -65,11 +65,11 @@ public class JsonbDataFormatConfiguration
         this.prettyPrint = prettyPrint;
     }
 
-    public String getUnmarshalTypeName() {
-        return unmarshalTypeName;
+    public String getUnmarshalType() {
+        return unmarshalType;
     }
 
-    public void setUnmarshalTypeName(String unmarshalTypeName) {
-        this.unmarshalTypeName = unmarshalTypeName;
+    public void setUnmarshalType(String unmarshalType) {
+        this.unmarshalType = unmarshalType;
     }
 }

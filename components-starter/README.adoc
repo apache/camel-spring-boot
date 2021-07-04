@@ -91,7 +91,7 @@ Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 
 | xref:latest@components::aws2-translate-component.adoc[AWS Translate] | camel-aws2-translate-starter | Stable | 3.1 | Translate texts using AWS Translate and AWS SDK version 2.x.
 
-| xref:latest@components::azure-cosmosdb-component.adoc[Azure CosmosDB] | camel-azure-cosmosdb-starter | Preview | 3.10 | To read and write records to the CosmosDB database on Azure cloud platform.
+| xref:latest@components::azure-cosmosdb-component.adoc[Azure CosmosDB] | camel-azure-cosmosdb-starter | Stable | 3.10 | To read and write records to the CosmosDB database on Azure cloud platform.
 
 | xref:latest@components::azure-eventhubs-component.adoc[Azure Event Hubs] | camel-azure-eventhubs-starter | Stable | 3.5 | The azure-eventhubs component that integrates Azure Event Hubs using AMQP protocol. Azure EventHubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers.
 
@@ -291,11 +291,11 @@ Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 
 | xref:latest@components::http-component.adoc[HTTP] | camel-http-starter | Stable | 2.3 | Send requests to external HTTP servers using Apache HTTP Client 4.x.
 
-| xref:latest@components::hwcloud-functiongraph-component.adoc[Huawei Cloud FunctionGraph] | camel-huaweicloud-functiongraph-starter | Preview | 3.11 | To call serverless functions on Huawei Cloud
+| xref:latest@components::hwcloud-functiongraph-component.adoc[Huawei FunctionGraph] | camel-huaweicloud-functiongraph-starter | Preview | 3.11 | To call serverless functions on Huawei Cloud
 
-| xref:latest@components::hwcloud-iam-component.adoc[Huawei Cloud Identity and Access Management (IAM)] | camel-huaweicloud-iam-starter | Preview | 3.11 | To securely manage users on Huawei Cloud
+| xref:latest@components::hwcloud-iam-component.adoc[Huawei Identity and Access Management (IAM)] | camel-huaweicloud-iam-starter | Preview | 3.11 | To securely manage users on Huawei Cloud
 
-| xref:latest@components::hwcloud-smn-component.adoc[Huawei Cloud Simple Message Notification (SMN)] | camel-huaweicloud-smn-starter | Stable | 3.8 | To broadcast messages and connect cloud services through notifications on Huawei Cloud
+| xref:latest@components::hwcloud-smn-component.adoc[Huawei Simple Message Notification (SMN)] | camel-huaweicloud-smn-starter | Stable | 3.8 | To broadcast messages and connect cloud services through notifications on Huawei Cloud
 
 | xref:latest@components::iec60870-client-component.adoc[IEC 60870 Client] | camel-iec60870-starter | Stable | 2.20 | IEC 60870 supervisory control and data acquisition (SCADA) client using NeoSCADA implementation.
 
@@ -581,7 +581,7 @@ Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 
 | xref:latest@components::spring-integration-component.adoc[Spring Integration] | camel-spring-integration-starter | Stable | 1.4 | Bridge Camel with Spring Integration.
 
-| xref:latest@components::spring-jdbc-component.adoc[Spring JDBC] | camel-spring-jdbc-starter | Preview | 3.10 | Access databases through SQL and JDBC with Spring Transaction support.
+| xref:latest@components::spring-jdbc-component.adoc[Spring JDBC] | camel-spring-jdbc-starter | Stable | 3.10 | Access databases through SQL and JDBC with Spring Transaction support.
 
 | xref:latest@components::spring-ldap-component.adoc[Spring LDAP] | camel-spring-ldap-starter | Stable | 2.11 | Perform searches in LDAP servers using filters as the message payload.
 
@@ -694,7 +694,7 @@ Number of Camel data formats: 48 in 40 JAR artifacts (0 deprecated)
 
 | xref:latest@components:dataformats:avro-dataformat.adoc[Avro] | camel-avro-starter | Stable | 2.14 | Serialize and deserialize messages using Apache Avro binary data format.
 
-| xref:latest@components:dataformats:avro-jackson-dataformat.adoc[Avro Jackson] | camel-jackson-avro-starter | Preview | 3.10 | Marshal POJOs to Avro and back using Jackson.
+| xref:latest@components:dataformats:avro-jackson-dataformat.adoc[Avro Jackson] | camel-jackson-avro-starter | Stable | 3.10 | Marshal POJOs to Avro and back using Jackson.
 
 | xref:latest@components:dataformats:barcode-dataformat.adoc[Barcode] | camel-barcode-starter | Stable | 2.14 | Transform strings to various 1D/2D barcode bitmap formats and back.
 
@@ -754,7 +754,7 @@ Number of Camel data formats: 48 in 40 JAR artifacts (0 deprecated)
 
 | xref:latest@components:dataformats:protobuf-dataformat.adoc[Protobuf] | camel-protobuf-starter | Stable | 2.2 | Serialize and deserialize Java objects using Google's Protocol buffers.
 
-| xref:latest@components:dataformats:protobuf-jackson-dataformat.adoc[Protobuf Jackson] | camel-jackson-protobuf-starter | Preview | 3.10 | Marshal POJOs to Protobuf and back using Jackson.
+| xref:latest@components:dataformats:protobuf-jackson-dataformat.adoc[Protobuf Jackson] | camel-jackson-protobuf-starter | Stable | 3.10 | Marshal POJOs to Protobuf and back using Jackson.
 
 | xref:latest@components:dataformats:rss-dataformat.adoc[RSS] | camel-rss-starter | Stable | 2.1 | Transform from ROME SyndFeed Java Objects to XML and vice-versa.
 

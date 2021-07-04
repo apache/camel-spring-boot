@@ -39,7 +39,7 @@ public class FastjsonDataFormatConfiguration
     /**
      * Class name of the java type to use when unmarshalling
      */
-    private String unmarshalTypeName;
+    private String unmarshalType;
     /**
      * Whether the data format should set the Content-Type header with the type
      * from the data format. For example application/xml for data formats
@@ -48,12 +48,12 @@ public class FastjsonDataFormatConfiguration
      */
     private Boolean contentTypeHeader = true;
 
-    public String getUnmarshalTypeName() {
-        return unmarshalTypeName;
+    public String getUnmarshalType() {
+        return unmarshalType;
     }
 
-    public void setUnmarshalTypeName(String unmarshalTypeName) {
-        this.unmarshalTypeName = unmarshalTypeName;
+    public void setUnmarshalType(String unmarshalType) {
+        this.unmarshalType = unmarshalType;
     }
 
     public Boolean getContentTypeHeader() {

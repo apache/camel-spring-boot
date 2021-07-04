@@ -33,7 +33,7 @@ The component supports 11 options, which are listed below.
 | *camel.dataformat.yaml-snakeyaml.pretty-flow* | Force the emitter to produce a pretty YAML document when using the flow style. | false | Boolean
 | *camel.dataformat.yaml-snakeyaml.representer* | Representer to emit outgoing objects. |  | String
 | *camel.dataformat.yaml-snakeyaml.resolver* | Resolver to detect implicit type |  | String
-| *camel.dataformat.yaml-snakeyaml.unmarshal-type-name* | Class name of the java type to use when unmarshalling |  | String
+| *camel.dataformat.yaml-snakeyaml.unmarshal-type* | Class name of the java type to use when unmarshalling |  | String
 | *camel.dataformat.yaml-snakeyaml.use-application-context-class-loader* | Use ApplicationContextClassLoader as custom ClassLoader | true | Boolean
 |===
 // spring-boot-auto-configure options: END

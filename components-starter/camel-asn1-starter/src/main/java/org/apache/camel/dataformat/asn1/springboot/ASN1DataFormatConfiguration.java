@@ -43,9 +43,9 @@ public class ASN1DataFormatConfiguration
      */
     private Boolean usingIterator = false;
     /**
-     * Name of class to use when unmarshalling
+     * Class to use when unmarshalling.
      */
-    private String clazzName;
+    private String unmarshalType;
 
     public Boolean getUsingIterator() {
         return usingIterator;
@@ -55,11 +55,11 @@ public class ASN1DataFormatConfiguration
         this.usingIterator = usingIterator;
     }
 
-    public String getClazzName() {
-        return clazzName;
+    public String getUnmarshalType() {
+        return unmarshalType;
     }
 
-    public void setClazzName(String clazzName) {
-        this.clazzName = clazzName;
+    public void setUnmarshalType(String unmarshalType) {
+        this.unmarshalType = unmarshalType;
     }
 }

@@ -49,13 +49,13 @@ public class CBORDataFormatConfiguration
     /**
      * Class name of the java type to use when unmarshalling
      */
-    private String unmarshalTypeName;
+    private String unmarshalType;
     /**
      * Refers to a custom collection type to lookup in the registry to use. This
      * option should rarely be used, but allows to use different collection
      * types than java.util.Collection based as default.
      */
-    private String collectionTypeName;
+    private String collectionType;
     /**
      * To unmarshal to a List of Map or a List of Pojo.
      */
@@ -112,20 +112,20 @@ public class CBORDataFormatConfiguration
         this.useDefaultObjectMapper = useDefaultObjectMapper;
     }
 
-    public String getUnmarshalTypeName() {
-        return unmarshalTypeName;
+    public String getUnmarshalType() {
+        return unmarshalType;
     }
 
-    public void setUnmarshalTypeName(String unmarshalTypeName) {
-        this.unmarshalTypeName = unmarshalTypeName;
+    public void setUnmarshalType(String unmarshalType) {
+        this.unmarshalType = unmarshalType;
     }
 
-    public String getCollectionTypeName() {
-        return collectionTypeName;
+    public String getCollectionType() {
+        return collectionType;
     }
 
-    public void setCollectionTypeName(String collectionTypeName) {
-        this.collectionTypeName = collectionTypeName;
+    public void setCollectionType(String collectionType) {
+        this.collectionType = collectionType;
     }
 
     public Boolean getUseList() {

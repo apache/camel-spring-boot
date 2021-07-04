@@ -8,7 +8,7 @@
     "firstVersion": "3.10.0",
     "label": "cloud,database",
     "javaType": "org.apache.camel.component.azure.cosmosdb.CosmosDbComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-azure-cosmosdb-starter",
     "version": "3.12.0-SNAPSHOT",

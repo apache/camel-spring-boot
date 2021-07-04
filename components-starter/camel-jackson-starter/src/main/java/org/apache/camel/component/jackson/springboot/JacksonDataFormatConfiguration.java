@@ -52,13 +52,13 @@ public class JacksonDataFormatConfiguration
     /**
      * Class name of the java type to use when unmarshalling
      */
-    private String unmarshalTypeName;
+    private String unmarshalType;
     /**
      * When marshalling a POJO to JSON you might want to exclude certain fields
      * from the JSON output. With Jackson you can use JSON views to accomplish
      * this. This option is to refer to the class which has JsonView annotations
      */
-    private String jsonViewTypeName;
+    private String jsonView;
     /**
      * If you want to marshal a pojo to JSON, and the pojo has some fields with
      * null values. And you want to skip these null values, you can set this
@@ -75,7 +75,7 @@ public class JacksonDataFormatConfiguration
      * option should rarely be used, but allows to use different collection
      * types than java.util.Collection based as default.
      */
-    private String collectionTypeName;
+    private String collectionType;
     /**
      * To unmarshal to a List of Map or a List of Pojo.
      */
@@ -168,20 +168,20 @@ public class JacksonDataFormatConfiguration
         this.prettyPrint = prettyPrint;
     }
 
-    public String getUnmarshalTypeName() {
-        return unmarshalTypeName;
+    public String getUnmarshalType() {
+        return unmarshalType;
     }
 
-    public void setUnmarshalTypeName(String unmarshalTypeName) {
-        this.unmarshalTypeName = unmarshalTypeName;
+    public void setUnmarshalType(String unmarshalType) {
+        this.unmarshalType = unmarshalType;
     }
 
-    public String getJsonViewTypeName() {
-        return jsonViewTypeName;
+    public String getJsonView() {
+        return jsonView;
     }
 
-    public void setJsonViewTypeName(String jsonViewTypeName) {
-        this.jsonViewTypeName = jsonViewTypeName;
+    public void setJsonView(String jsonView) {
+        this.jsonView = jsonView;
     }
 
     public String getInclude() {
@@ -200,12 +200,12 @@ public class JacksonDataFormatConfiguration
         this.allowJmsType = allowJmsType;
     }
 
-    public String getCollectionTypeName() {
-        return collectionTypeName;
+    public String getCollectionType() {
+        return collectionType;
     }
 
-    public void setCollectionTypeName(String collectionTypeName) {
-        this.collectionTypeName = collectionTypeName;
+    public void setCollectionType(String collectionType) {
+        this.collectionType = collectionType;
     }
 
     public Boolean getUseList() {

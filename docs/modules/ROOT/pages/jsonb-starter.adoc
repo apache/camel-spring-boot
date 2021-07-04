@@ -27,8 +27,6 @@ The component supports 4 options, which are listed below.
 | *camel.dataformat.json-jsonb.enabled* | Whether to enable auto configuration of the json-jsonb data format. This is enabled by default. |  | Boolean
 | *camel.dataformat.json-jsonb.object-mapper* | Lookup and use the existing Jsonb instance with the given id. |  | String
 | *camel.dataformat.json-jsonb.pretty-print* | To enable pretty printing output nicely formatted. Is by default false. | false | Boolean
-| *camel.dataformat.json-jsonb.unmarshal-type-name* | Class name of the java type to use when unmarshalling |  | String
+| *camel.dataformat.json-jsonb.unmarshal-type* | Class name of the java type to use when unmarshalling |  | String
 |===
-
-
 // spring-boot-auto-configure options: END

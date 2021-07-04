@@ -39,7 +39,7 @@ public class SnakeYAMLDataFormatConfiguration
     /**
      * Class name of the java type to use when unmarshalling
      */
-    private String unmarshalTypeName;
+    private String unmarshalType;
     /**
      * BaseConstructor to construct incoming documents.
      */
@@ -78,12 +78,12 @@ public class SnakeYAMLDataFormatConfiguration
      */
     private Boolean allowRecursiveKeys = false;
 
-    public String getUnmarshalTypeName() {
-        return unmarshalTypeName;
+    public String getUnmarshalType() {
+        return unmarshalType;
     }
 
-    public void setUnmarshalTypeName(String unmarshalTypeName) {
-        this.unmarshalTypeName = unmarshalTypeName;
+    public void setUnmarshalType(String unmarshalType) {
+        this.unmarshalType = unmarshalType;
     }
 
     public String getConstructor() {
