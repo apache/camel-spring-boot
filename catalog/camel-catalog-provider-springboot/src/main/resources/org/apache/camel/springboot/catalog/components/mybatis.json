@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-mybatis-starter",
-    "version": "3.7.4-SNAPSHOT",
+    "version": "3.7.5-SNAPSHOT",
     "scheme": "mybatis",
     "extendsScheme": "",
     "syntax": "mybatis:statement",

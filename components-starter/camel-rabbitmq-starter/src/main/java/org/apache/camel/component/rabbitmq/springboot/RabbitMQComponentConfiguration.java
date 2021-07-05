@@ -161,6 +161,15 @@ public class RabbitMQComponentConfiguration
      */
     private Integer prefetchSize;
     /**
+     * Decides whether an exception during declaration of exchanges or queues is
+     * recoverable or not. If the option is false, camel will throw an exception
+     * when starting the consumer, which will interrupt application startup
+     * (e.g. in the case when the exchange / queue is already declared in
+     * RabbitMQ and has incompatible configuration). If set to true, the
+     * consumer will try to reconnect periodically.
+     */
+    private Boolean recoverFromDeclareException = false;
+    /**
      * The consumer uses a Thread Pool Executor with a fixed number of threads.
      * This setting allows you to set that number of threads.
      */
@@ -525,6 +534,15 @@ public class RabbitMQComponentConfiguration
 
     public void setPrefetchSize(Integer prefetchSize) {
         this.prefetchSize = prefetchSize;
+    }
+
+    public Boolean getRecoverFromDeclareException() {
+        return recoverFromDeclareException;
+    }
+
+    public void setRecoverFromDeclareException(
+            Boolean recoverFromDeclareException) {
+        this.recoverFromDeclareException = recoverFromDeclareException;
     }
 
     public Integer getThreadPoolSize() {

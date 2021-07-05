@@ -17,7 +17,7 @@ When using rabbitmq with Spring Boot make sure to use the following Maven depend
 ----
 
 
-The component supports 56 options, which are listed below.
+The component supports 57 options, which are listed below.
 
 
 
@@ -65,6 +65,7 @@ The component supports 56 options, which are listed below.
 | *camel.component.rabbitmq.prefetch-size* | The maximum amount of content (measured in octets) that the server will deliver, 0 if unlimited. You need to specify the option of prefetchSize, prefetchCount, prefetchGlobal at the same time |  | Integer
 | *camel.component.rabbitmq.publisher-acknowledgements* | When true, the message will be published with publisher acknowledgements turned on | false | Boolean
 | *camel.component.rabbitmq.publisher-acknowledgements-timeout* | The amount of time in milliseconds to wait for a basic.ack response from RabbitMQ server |  | Long
+| *camel.component.rabbitmq.recover-from-declare-exception* | Decides whether an exception during declaration of exchanges or queues is recoverable or not. If the option is false, camel will throw an exception when starting the consumer, which will interrupt application startup (e.g. in the case when the exchange / queue is already declared in RabbitMQ and has incompatible configuration). If set to true, the consumer will try to reconnect periodically. | false | Boolean
 | *camel.component.rabbitmq.request-timeout* | Set timeout for waiting for a reply when using the InOut Exchange Pattern (in milliseconds) | 20000 | Long
 | *camel.component.rabbitmq.request-timeout-checker-interval* | Set requestTimeoutCheckerInterval for inOut exchange | 1000 | Long
 | *camel.component.rabbitmq.requested-channel-max* | Connection requested channel max (max number of channels offered) | 2047 | Integer
