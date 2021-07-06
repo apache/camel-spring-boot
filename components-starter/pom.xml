@@ -148,6 +148,7 @@
     <module>camel-aws2-translate-starter</module>
     <module>camel-azure-cosmosdb-starter</module>
     <module>camel-azure-eventhubs-starter</module>
+    <module>camel-azure-servicebus-starter</module>
     <module>camel-azure-storage-blob-starter</module>
     <module>camel-azure-storage-datalake-starter</module>
     <module>camel-azure-storage-queue-starter</module>
