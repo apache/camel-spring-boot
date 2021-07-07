@@ -299,6 +299,10 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Boolean includeUnknownDatatypes = false;
     /**
+     * The maximum size of chunk for incremental snapshotting
+     */
+    private Integer incrementalSnapshotChunkSize = 1024;
+    /**
      * Specify how INTERVAL columns should be represented in change events,
      * including:'string' represents values as an exact ISO formatted
      * string'numeric' (default) represents values using the inexact conversion
@@ -497,9 +501,8 @@ public class DebeziumPostgresComponentConfiguration
      * stop after completing the snapshot and before it would normally start
      * emitting changes;'never' to specify the connector should never run a
      * snapshot and that upon first startup the connector should read from the
-     * last position (LSN) recorded by the server; and'exported' to specify the
-     * connector should run a snapshot based on the position when the
-     * replication slot was created; 'custom' to specify a custom class with
+     * last position (LSN) recorded by the server; and'exported' deprecated, use
+     * 'initial' instead; 'custom' to specify a custom class with
      * 'snapshot.custom_class' which will be loaded and used to determine the
      * snapshot, see docs for more details.
      */
@@ -507,7 +510,7 @@ public class DebeziumPostgresComponentConfiguration
     /**
      * This property contains a comma-separated list of fully-qualified tables
      * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on
-     * thespecific connectors . Select statements for the individual tables are
+     * thespecific connectors. Select statements for the individual tables are
      * specified in further configuration properties, one for each table,
      * identified by the id
      * 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or
@@ -947,6 +950,15 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setIncludeUnknownDatatypes(Boolean includeUnknownDatatypes) {
         this.includeUnknownDatatypes = includeUnknownDatatypes;
+    }
+
+    public Integer getIncrementalSnapshotChunkSize() {
+        return incrementalSnapshotChunkSize;
+    }
+
+    public void setIncrementalSnapshotChunkSize(
+            Integer incrementalSnapshotChunkSize) {
+        this.incrementalSnapshotChunkSize = incrementalSnapshotChunkSize;
     }
 
     public String getIntervalHandlingMode() {

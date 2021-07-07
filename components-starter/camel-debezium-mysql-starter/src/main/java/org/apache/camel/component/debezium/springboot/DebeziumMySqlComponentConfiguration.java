@@ -227,6 +227,26 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String databaseHistoryKafkaTopic;
     /**
+     * Controls the action Debezium will take when it meets a DDL statement in
+     * binlog, that it cannot parse.By default the connector will stop operating
+     * but by changing the setting it can ignore the statements which it cannot
+     * parse. If skipping is enabled then Debezium can miss metadata changes.
+     */
+    private Boolean databaseHistorySkipUnparseableDdl = false;
+    /**
+     * Controls what DDL will Debezium store in database history. By default
+     * (false) Debezium will store all incoming DDL statements. If set to true,
+     * then only DDL that manipulates a captured table will be stored.
+     */
+    private Boolean databaseHistoryStoreOnlyCapturedTablesDdl = false;
+    /**
+     * Controls what DDL will Debezium store in database history. By default
+     * (false) Debezium will store all incoming DDL statements. If set to true,
+     * then only DDL that manipulates a monitored table will be stored
+     * (deprecated, use database.history.store.only.captured.tables.ddl instead)
+     */
+    private Boolean databaseHistoryStoreOnlyMonitoredTablesDdl = false;
+    /**
      * Resolvable hostname or IP address of the database server.
      */
     private String databaseHostname;
@@ -421,6 +441,10 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String inconsistentSchemaHandlingMode = "fail";
     /**
+     * The maximum size of chunk for incremental snapshotting
+     */
+    private Integer incrementalSnapshotChunkSize = 1024;
+    /**
      * Maximum size of each batch of source records. Defaults to 2048.
      */
     private Integer maxBatchSize = 2048;
@@ -558,7 +582,7 @@ public class DebeziumMySqlComponentConfiguration
     /**
      * This property contains a comma-separated list of fully-qualified tables
      * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on
-     * thespecific connectors . Select statements for the individual tables are
+     * thespecific connectors. Select statements for the individual tables are
      * specified in further configuration properties, one for each table,
      * identified by the id
      * 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or
@@ -880,6 +904,33 @@ public class DebeziumMySqlComponentConfiguration
         this.databaseHistoryKafkaTopic = databaseHistoryKafkaTopic;
     }
 
+    public Boolean getDatabaseHistorySkipUnparseableDdl() {
+        return databaseHistorySkipUnparseableDdl;
+    }
+
+    public void setDatabaseHistorySkipUnparseableDdl(
+            Boolean databaseHistorySkipUnparseableDdl) {
+        this.databaseHistorySkipUnparseableDdl = databaseHistorySkipUnparseableDdl;
+    }
+
+    public Boolean getDatabaseHistoryStoreOnlyCapturedTablesDdl() {
+        return databaseHistoryStoreOnlyCapturedTablesDdl;
+    }
+
+    public void setDatabaseHistoryStoreOnlyCapturedTablesDdl(
+            Boolean databaseHistoryStoreOnlyCapturedTablesDdl) {
+        this.databaseHistoryStoreOnlyCapturedTablesDdl = databaseHistoryStoreOnlyCapturedTablesDdl;
+    }
+
+    public Boolean getDatabaseHistoryStoreOnlyMonitoredTablesDdl() {
+        return databaseHistoryStoreOnlyMonitoredTablesDdl;
+    }
+
+    public void setDatabaseHistoryStoreOnlyMonitoredTablesDdl(
+            Boolean databaseHistoryStoreOnlyMonitoredTablesDdl) {
+        this.databaseHistoryStoreOnlyMonitoredTablesDdl = databaseHistoryStoreOnlyMonitoredTablesDdl;
+    }
+
     public String getDatabaseHostname() {
         return databaseHostname;
     }
@@ -1108,6 +1159,15 @@ public class DebeziumMySqlComponentConfiguration
     public void setInconsistentSchemaHandlingMode(
             String inconsistentSchemaHandlingMode) {
         this.inconsistentSchemaHandlingMode = inconsistentSchemaHandlingMode;
+    }
+
+    public Integer getIncrementalSnapshotChunkSize() {
+        return incrementalSnapshotChunkSize;
+    }
+
+    public void setIncrementalSnapshotChunkSize(
+            Integer incrementalSnapshotChunkSize) {
+        this.incrementalSnapshotChunkSize = incrementalSnapshotChunkSize;
     }
 
     public Integer getMaxBatchSize() {
