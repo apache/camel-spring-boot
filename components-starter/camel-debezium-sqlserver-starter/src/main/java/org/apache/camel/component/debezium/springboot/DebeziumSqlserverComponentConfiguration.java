@@ -200,6 +200,26 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String databaseHistoryKafkaTopic;
     /**
+     * Controls the action Debezium will take when it meets a DDL statement in
+     * binlog, that it cannot parse.By default the connector will stop operating
+     * but by changing the setting it can ignore the statements which it cannot
+     * parse. If skipping is enabled then Debezium can miss metadata changes.
+     */
+    private Boolean databaseHistorySkipUnparseableDdl = false;
+    /**
+     * Controls what DDL will Debezium store in database history. By default
+     * (false) Debezium will store all incoming DDL statements. If set to true,
+     * then only DDL that manipulates a captured table will be stored.
+     */
+    private Boolean databaseHistoryStoreOnlyCapturedTablesDdl = false;
+    /**
+     * Controls what DDL will Debezium store in database history. By default
+     * (false) Debezium will store all incoming DDL statements. If set to true,
+     * then only DDL that manipulates a monitored table will be stored
+     * (deprecated, use database.history.store.only.captured.tables.ddl instead)
+     */
+    private Boolean databaseHistoryStoreOnlyMonitoredTablesDdl = false;
+    /**
      * Resolvable hostname or IP address of the database server.
      */
     private String databaseHostname;
@@ -282,6 +302,11 @@ public class DebeziumSqlserverComponentConfiguration
      * Maximum size of each batch of source records. Defaults to 2048.
      */
     private Integer maxBatchSize = 2048;
+    /**
+     * This property can be used to reduce the connector memory usage footprint
+     * when changes are streamed from multiple tables per database.
+     */
+    private Integer maxIterationTransactions = 0;
     /**
      * Maximum size of the queue for change events read from the database log
      * but not yet recorded or forwarded. Defaults to 8192, and should always be
@@ -395,7 +420,7 @@ public class DebeziumSqlserverComponentConfiguration
     /**
      * This property contains a comma-separated list of fully-qualified tables
      * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on
-     * thespecific connectors . Select statements for the individual tables are
+     * thespecific connectors. Select statements for the individual tables are
      * specified in further configuration properties, one for each table,
      * identified by the id
      * 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or
@@ -416,8 +441,8 @@ public class DebeziumSqlserverComponentConfiguration
      * Configures the criteria of the attached timestamp within the source
      * record (ts_ms).Options include:'commit', (default) the source timestamp
      * is set to the instant where the record was committed in the
-     * database'processing', the source timestamp is set to the instant where
-     * the record was processed by Debezium.
+     * database'processing', (deprecated) the source timestamp is set to the
+     * instant where the record was processed by Debezium.
      */
     private String sourceTimestampMode = "commit";
     /**
@@ -694,6 +719,33 @@ public class DebeziumSqlserverComponentConfiguration
         this.databaseHistoryKafkaTopic = databaseHistoryKafkaTopic;
     }
 
+    public Boolean getDatabaseHistorySkipUnparseableDdl() {
+        return databaseHistorySkipUnparseableDdl;
+    }
+
+    public void setDatabaseHistorySkipUnparseableDdl(
+            Boolean databaseHistorySkipUnparseableDdl) {
+        this.databaseHistorySkipUnparseableDdl = databaseHistorySkipUnparseableDdl;
+    }
+
+    public Boolean getDatabaseHistoryStoreOnlyCapturedTablesDdl() {
+        return databaseHistoryStoreOnlyCapturedTablesDdl;
+    }
+
+    public void setDatabaseHistoryStoreOnlyCapturedTablesDdl(
+            Boolean databaseHistoryStoreOnlyCapturedTablesDdl) {
+        this.databaseHistoryStoreOnlyCapturedTablesDdl = databaseHistoryStoreOnlyCapturedTablesDdl;
+    }
+
+    public Boolean getDatabaseHistoryStoreOnlyMonitoredTablesDdl() {
+        return databaseHistoryStoreOnlyMonitoredTablesDdl;
+    }
+
+    public void setDatabaseHistoryStoreOnlyMonitoredTablesDdl(
+            Boolean databaseHistoryStoreOnlyMonitoredTablesDdl) {
+        this.databaseHistoryStoreOnlyMonitoredTablesDdl = databaseHistoryStoreOnlyMonitoredTablesDdl;
+    }
+
     public String getDatabaseHostname() {
         return databaseHostname;
     }
@@ -806,6 +858,14 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setMaxBatchSize(Integer maxBatchSize) {
         this.maxBatchSize = maxBatchSize;
+    }
+
+    public Integer getMaxIterationTransactions() {
+        return maxIterationTransactions;
+    }
+
+    public void setMaxIterationTransactions(Integer maxIterationTransactions) {
+        this.maxIterationTransactions = maxIterationTransactions;
     }
 
     public Integer getMaxQueueSize() {

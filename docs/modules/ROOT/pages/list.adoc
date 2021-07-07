@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
+Number of Camel components: 334 in 270 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -94,6 +94,8 @@ Number of Camel components: 333 in 269 JAR artifacts (1 deprecated)
 | xref:latest@components::azure-cosmosdb-component.adoc[Azure CosmosDB] | camel-azure-cosmosdb-starter | Stable | 3.10 | To read and write records to the CosmosDB database on Azure cloud platform.
 
 | xref:latest@components::azure-eventhubs-component.adoc[Azure Event Hubs] | camel-azure-eventhubs-starter | Stable | 3.5 | The azure-eventhubs component that integrates Azure Event Hubs using AMQP protocol. Azure EventHubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers.
+
+| xref:latest@components::azure-servicebus-component.adoc[Azure ServiceBus] | camel-azure-servicebus-starter | Preview | 3.12 | The azure-servicebus component that integrates Azure ServiceBus. Azure ServiceBus is a fully managed enterprise integration message broker. Service Bus can decouple applications and services. Service Bus offers a reliable and secure platform for asynchronous transfer of data and state. Data is transferred between different applications and services using messages.
 
 | xref:latest@components::azure-storage-blob-component.adoc[Azure Storage Blob Service] | camel-azure-storage-blob-starter | Stable | 3.3 | Store and retrieve blobs from Azure Storage Blob Service using SDK v12.
 

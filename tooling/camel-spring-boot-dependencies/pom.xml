@@ -633,6 +633,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-azure-servicebus-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-azure-storage-blob-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -644,11 +649,6 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-azure-storage-queue-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-azure-servicebus-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -2445,6 +2445,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-azure-parent</artifactId>
+        <version>3.12.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-azure-servicebus</artifactId>
         <version>3.12.0-SNAPSHOT</version>
       </dependency>
       <dependency>
