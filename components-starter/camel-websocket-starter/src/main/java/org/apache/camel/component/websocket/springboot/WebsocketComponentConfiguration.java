@@ -102,6 +102,17 @@ public class WebsocketComponentConfiguration
      */
     private Integer minThreads;
     /**
+     * This is a comma-separated list of subprotocols that are supported by the
+     * application. The list is in priority order. The first subprotocol on this
+     * list that is proposed by the client is the one that will be accepted. If
+     * no subprotocol on this list is proposed by the client, then the websocket
+     * connection is refused. The special value 'any' means that any subprotocol
+     * is acceptable. 'any' can be used on its own, or as a failsafe at the end
+     * of a list of more specific protocols. 'any' will also match the case
+     * where no subprotocol is proposed by the client.
+     */
+    private String subprotocol = "any";
+    /**
      * To use a custom thread pool for the server. MaxThreads/minThreads or
      * threadPool fields are required due to switch to Jetty9. The option is a
      * org.eclipse.jetty.util.thread.ThreadPool type.
@@ -199,6 +210,14 @@ public class WebsocketComponentConfiguration
 
     public void setMinThreads(Integer minThreads) {
         this.minThreads = minThreads;
+    }
+
+    public String getSubprotocol() {
+        return subprotocol;
+    }
+
+    public void setSubprotocol(String subprotocol) {
+        this.subprotocol = subprotocol;
     }
 
     public ThreadPool getThreadPool() {
