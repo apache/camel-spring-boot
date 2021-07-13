@@ -18,31 +18,36 @@
 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>components-starter</artifactId>
-        <version>3.12.0-SNAPSHOT</version>
-    </parent>
-    <artifactId>camel-jcr-starter</artifactId>
-    <packaging>jar</packaging>
-    <name>Camel SB Starters :: JCR</name>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <version>${spring-boot-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-jcr</artifactId>
-            <version>${camel-version}</version>
-        </dependency>
-        <!--START OF GENERATED CODE-->
-        <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-spring-boot-engine-starter</artifactId>
-        </dependency>
-        <!--END OF GENERATED CODE-->
-    </dependencies>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.apache.camel.springboot</groupId>
+    <artifactId>components-starter</artifactId>
+    <version>3.12.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>camel-jcr-starter</artifactId>
+  <packaging>jar</packaging>
+  <name>Camel SB Starters :: JCR</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+      <version>${spring-boot-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-jcr</artifactId>
+      <version>${camel-version}</version>
+    </dependency>
+    <!--START OF GENERATED CODE-->
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-core-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-core</artifactId>
+      <version>${lucene3-version}</version>
+    </dependency>
+    <!--END OF GENERATED CODE-->
+  </dependencies>
 </project>
