@@ -107,6 +107,11 @@ public class PulsarComponentConfiguration
      */
     private Integer maxRedeliverCount;
     /**
+     * Whether to use the messageListener interface, or to receive messages
+     * using a separate thread pool
+     */
+    private Boolean messageListener = true;
+    /**
      * Set the negative acknowledgement delay
      */
     private Long negativeAckRedeliveryDelayMicros = 60000000L;
@@ -114,6 +119,11 @@ public class PulsarComponentConfiguration
      * Number of consumers - defaults to 1
      */
     private Integer numberOfConsumers = 1;
+    /**
+     * Number of threads to receive and handle messages when using a separate
+     * thread pool
+     */
+    private Integer numberOfConsumerThreads = 1;
     /**
      * Enable compacted topic reading.
      */
@@ -322,6 +332,14 @@ public class PulsarComponentConfiguration
         this.maxRedeliverCount = maxRedeliverCount;
     }
 
+    public Boolean getMessageListener() {
+        return messageListener;
+    }
+
+    public void setMessageListener(Boolean messageListener) {
+        this.messageListener = messageListener;
+    }
+
     public Long getNegativeAckRedeliveryDelayMicros() {
         return negativeAckRedeliveryDelayMicros;
     }
@@ -337,6 +355,14 @@ public class PulsarComponentConfiguration
 
     public void setNumberOfConsumers(Integer numberOfConsumers) {
         this.numberOfConsumers = numberOfConsumers;
+    }
+
+    public Integer getNumberOfConsumerThreads() {
+        return numberOfConsumerThreads;
+    }
+
+    public void setNumberOfConsumerThreads(Integer numberOfConsumerThreads) {
+        this.numberOfConsumerThreads = numberOfConsumerThreads;
     }
 
     public Boolean getReadCompacted() {
