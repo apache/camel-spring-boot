@@ -17,7 +17,7 @@ When using pulsar with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 37 options, which are listed below.
+The component supports 39 options, which are listed below.
 
 
 
@@ -47,9 +47,11 @@ The component supports 37 options, which are listed below.
 | *camel.component.pulsar.max-pending-messages* | Size of the pending massages queue. When the queue is full, by default, any further sends will fail unless blockIfQueueFull=true | 1000 | Integer
 | *camel.component.pulsar.max-pending-messages-across-partitions* | The maximum number of pending messages for partitioned topics. The maxPendingMessages value will be reduced if (number of partitions maxPendingMessages) exceeds this value. Partitioned topics have a pending message queue for each partition. | 50000 | Integer
 | *camel.component.pulsar.max-redeliver-count* | Maximum number of times that a message will be redelivered before being sent to the dead letter queue. If this value is not set, no Dead Letter Policy will be created |  | Integer
+| *camel.component.pulsar.message-listener* | Whether to use the messageListener interface, or to receive messages using a separate thread pool | true | Boolean
 | *camel.component.pulsar.message-router* | Custom Message Router to use. The option is a org.apache.pulsar.client.api.MessageRouter type. |  | MessageRouter
 | *camel.component.pulsar.message-routing-mode* | Message Routing Mode to use |  | MessageRoutingMode
 | *camel.component.pulsar.negative-ack-redelivery-delay-micros* | Set the negative acknowledgement delay | 60000000 | Long
+| *camel.component.pulsar.number-of-consumer-threads* | Number of threads to receive and handle messages when using a separate thread pool | 1 | Integer
 | *camel.component.pulsar.number-of-consumers* | Number of consumers - defaults to 1 | 1 | Integer
 | *camel.component.pulsar.producer-name* | Name of the producer. If unset, lets Pulsar select a unique identifier. |  | String
 | *camel.component.pulsar.pulsar-client* | The pulsar client. The option is a org.apache.pulsar.client.api.PulsarClient type. |  | PulsarClient
