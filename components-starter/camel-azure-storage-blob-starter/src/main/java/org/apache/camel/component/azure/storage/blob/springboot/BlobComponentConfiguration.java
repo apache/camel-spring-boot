@@ -17,7 +17,9 @@
 package org.apache.camel.component.azure.storage.blob.springboot;
 
 import java.time.Duration;
+import java.time.OffsetDateTime;
 import javax.annotation.Generated;
+import com.azure.core.util.Context;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.models.BlockListType;
 import com.azure.storage.common.StorageSharedKeyCredential;
@@ -141,6 +143,30 @@ public class BlobComponentConfiguration
      * Specifies which type of blocks to return.
      */
     private BlockListType blockListType = BlockListType.COMMITTED;
+    /**
+     * When using getChangeFeed producer operation, this gives additional
+     * context that is passed through the Http pipeline during the service call.
+     * The option is a com.azure.core.util.Context type.
+     */
+    private Context changeFeedContext;
+    /**
+     * When using getChangeFeed producer operation, this filters the results to
+     * return events approximately before the end time. Note: A few events
+     * belonging to the next hour can also be returned. A few events belonging
+     * to this hour can be missing; to ensure all events from the hour are
+     * returned, round the end time up by an hour. The option is a
+     * java.time.OffsetDateTime type.
+     */
+    private OffsetDateTime changeFeedEndTime;
+    /**
+     * When using getChangeFeed producer operation, this filters the results to
+     * return events approximately after the start time. Note: A few events
+     * belonging to the previous hour can also be returned. A few events
+     * belonging to this hour can be missing; to ensure all events from the hour
+     * are returned, round the start time down by an hour. The option is a
+     * java.time.OffsetDateTime type.
+     */
+    private OffsetDateTime changeFeedStartTime;
     /**
      * Close the stream after write or keep it open, default is true
      */
@@ -332,6 +358,30 @@ public class BlobComponentConfiguration
 
     public void setBlockListType(BlockListType blockListType) {
         this.blockListType = blockListType;
+    }
+
+    public Context getChangeFeedContext() {
+        return changeFeedContext;
+    }
+
+    public void setChangeFeedContext(Context changeFeedContext) {
+        this.changeFeedContext = changeFeedContext;
+    }
+
+    public OffsetDateTime getChangeFeedEndTime() {
+        return changeFeedEndTime;
+    }
+
+    public void setChangeFeedEndTime(OffsetDateTime changeFeedEndTime) {
+        this.changeFeedEndTime = changeFeedEndTime;
+    }
+
+    public OffsetDateTime getChangeFeedStartTime() {
+        return changeFeedStartTime;
+    }
+
+    public void setChangeFeedStartTime(OffsetDateTime changeFeedStartTime) {
+        this.changeFeedStartTime = changeFeedStartTime;
     }
 
     public Boolean getCloseStreamAfterWrite() {

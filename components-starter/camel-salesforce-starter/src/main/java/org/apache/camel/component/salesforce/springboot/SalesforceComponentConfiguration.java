@@ -424,6 +424,11 @@ public class SalesforceComponentConfiguration
      */
     private String instanceUrl;
     /**
+     * Value to use for the Audience claim (aud) when using OAuth JWT flow. If
+     * not set, the login URL will be used, which is appropriate in most cases.
+     */
+    private String jwtAudience;
+    /**
      * KeyStore parameters to use in OAuth JWT flow. The KeyStore should contain
      * only one entry with private key and certificate. Salesforce does not
      * verify the certificate chain, so this can easily be a selfsigned
@@ -1087,6 +1092,14 @@ public class SalesforceComponentConfiguration
 
     public void setInstanceUrl(String instanceUrl) {
         this.instanceUrl = instanceUrl;
+    }
+
+    public String getJwtAudience() {
+        return jwtAudience;
+    }
+
+    public void setJwtAudience(String jwtAudience) {
+        this.jwtAudience = jwtAudience;
     }
 
     public KeyStoreParameters getKeystore() {

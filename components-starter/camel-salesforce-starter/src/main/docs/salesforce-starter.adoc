@@ -17,7 +17,7 @@ When using salesforce with Spring Boot make sure to use the following Maven depe
 ----
 
 
-The component supports 85 options, which are listed below.
+The component supports 86 options, which are listed below.
 
 
 
@@ -64,6 +64,7 @@ The component supports 85 options, which are listed below.
 | *camel.component.salesforce.instance-id* | Salesforce1 Analytics report execution instance ID |  | String
 | *camel.component.salesforce.instance-url* | URL of the Salesforce instance used after authentication, by default received from Salesforce on successful authentication |  | String
 | *camel.component.salesforce.job-id* | Bulk API Job ID |  | String
+| *camel.component.salesforce.jwt-audience* | Value to use for the Audience claim (aud) when using OAuth JWT flow. If not set, the login URL will be used, which is appropriate in most cases. |  | String
 | *camel.component.salesforce.keystore* | KeyStore parameters to use in OAuth JWT flow. The KeyStore should contain only one entry with private key and certificate. Salesforce does not verify the certificate chain, so this can easily be a selfsigned certificate. Make sure that you upload the certificate to the corresponding connected app. The option is a org.apache.camel.support.jsse.KeyStoreParameters type. |  | KeyStoreParameters
 | *camel.component.salesforce.lazy-login* | If set to true prevents the component from authenticating to Salesforce with the start of the component. You would generally set this to the (default) false and authenticate early and be immediately aware of any authentication issues. | false | Boolean
 | *camel.component.salesforce.lazy-start-producer* | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean

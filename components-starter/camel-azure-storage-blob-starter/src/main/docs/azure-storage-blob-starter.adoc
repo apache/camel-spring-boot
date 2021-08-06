@@ -17,7 +17,7 @@ When using azure-storage-blob with Spring Boot make sure to use the following Ma
 ----
 
 
-The component supports 28 options, which are listed below.
+The component supports 31 options, which are listed below.
 
 
 
@@ -32,6 +32,9 @@ The component supports 28 options, which are listed below.
 | *camel.component.azure-storage-blob.blob-type* | The blob type in order to initiate the appropriate settings for each blob type |  | BlobType
 | *camel.component.azure-storage-blob.block-list-type* | Specifies which type of blocks to return. |  | BlockListType
 | *camel.component.azure-storage-blob.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
+| *camel.component.azure-storage-blob.change-feed-context* | When using getChangeFeed producer operation, this gives additional context that is passed through the Http pipeline during the service call. The option is a com.azure.core.util.Context type. |  | Context
+| *camel.component.azure-storage-blob.change-feed-end-time* | When using getChangeFeed producer operation, this filters the results to return events approximately before the end time. Note: A few events belonging to the next hour can also be returned. A few events belonging to this hour can be missing; to ensure all events from the hour are returned, round the end time up by an hour. The option is a java.time.OffsetDateTime type. |  | OffsetDateTime
+| *camel.component.azure-storage-blob.change-feed-start-time* | When using getChangeFeed producer operation, this filters the results to return events approximately after the start time. Note: A few events belonging to the previous hour can also be returned. A few events belonging to this hour can be missing; to ensure all events from the hour are returned, round the start time down by an hour. The option is a java.time.OffsetDateTime type. |  | OffsetDateTime
 | *camel.component.azure-storage-blob.close-stream-after-read* | Close the stream after read or keep it open, default is true | true | Boolean
 | *camel.component.azure-storage-blob.close-stream-after-write* | Close the stream after write or keep it open, default is true | true | Boolean
 | *camel.component.azure-storage-blob.commit-block-list-later* | When is set to true, the staged blocks will not be committed directly. | true | Boolean
