@@ -49,11 +49,24 @@ public class PulsarComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The Authentication FQCN to be used while creating the client from URI
+     */
+    private String authenticationClass;
+    /**
+     * The Authentication Parameters to be used while creating the client from
+     * URI
+     */
+    private String authenticationParams;
+    /**
      * Allows to pre-configure the Pulsar component with common options that the
      * endpoints will reuse. The option is a
      * org.apache.camel.component.pulsar.PulsarConfiguration type.
      */
     private PulsarConfiguration configuration;
+    /**
+     * The Pulsar Service URL to point while creating the client from URI
+     */
+    private String serviceUrl;
     /**
      * Group the consumer acknowledgments for the specified time in milliseconds
      * - defaults to 100
@@ -252,12 +265,36 @@ public class PulsarComponentConfiguration
      */
     private PulsarClient pulsarClient;
 
+    public String getAuthenticationClass() {
+        return authenticationClass;
+    }
+
+    public void setAuthenticationClass(String authenticationClass) {
+        this.authenticationClass = authenticationClass;
+    }
+
+    public String getAuthenticationParams() {
+        return authenticationParams;
+    }
+
+    public void setAuthenticationParams(String authenticationParams) {
+        this.authenticationParams = authenticationParams;
+    }
+
     public PulsarConfiguration getConfiguration() {
         return configuration;
     }
 
     public void setConfiguration(PulsarConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getServiceUrl() {
+        return serviceUrl;
+    }
+
+    public void setServiceUrl(String serviceUrl) {
+        this.serviceUrl = serviceUrl;
     }
 
     public Long getAckGroupTimeMillis() {

@@ -17,7 +17,7 @@ When using pulsar with Spring Boot make sure to use the following Maven dependen
 ----
 
 
-The component supports 39 options, which are listed below.
+The component supports 42 options, which are listed below.
 
 
 
@@ -27,6 +27,8 @@ The component supports 39 options, which are listed below.
 | *camel.component.pulsar.ack-group-time-millis* | Group the consumer acknowledgments for the specified time in milliseconds - defaults to 100 | 100 | Long
 | *camel.component.pulsar.ack-timeout-millis* | Timeout for unacknowledged messages in milliseconds - defaults to 10000 | 10000 | Long
 | *camel.component.pulsar.allow-manual-acknowledgement* | Whether to allow manual message acknowledgements. If this option is enabled, then messages are not acknowledged automatically after successful route completion. Instead, an instance of PulsarMessageReceipt is stored as a header on the org.apache.camel.Exchange. Messages can then be acknowledged using PulsarMessageReceipt at any time before the ackTimeout occurs. | false | Boolean
+| *camel.component.pulsar.authentication-class* | The Authentication FQCN to be used while creating the client from URI |  | String
+| *camel.component.pulsar.authentication-params* | The Authentication Parameters to be used while creating the client from URI |  | String
 | *camel.component.pulsar.auto-configuration* | The pulsar auto configuration. The option is a org.apache.camel.component.pulsar.utils.AutoConfiguration type. |  | AutoConfiguration
 | *camel.component.pulsar.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.pulsar.batcher-builder* | Control batching method used by the producer. The option is a org.apache.pulsar.client.api.BatcherBuilder type. |  | BatcherBuilder
@@ -58,6 +60,7 @@ The component supports 39 options, which are listed below.
 | *camel.component.pulsar.pulsar-message-receipt-factory* | Provide a factory to create an alternate implementation of PulsarMessageReceipt. The option is a org.apache.camel.component.pulsar.PulsarMessageReceiptFactory type. |  | PulsarMessageReceiptFactory
 | *camel.component.pulsar.read-compacted* | Enable compacted topic reading. | false | Boolean
 | *camel.component.pulsar.send-timeout-ms* | Send timeout in milliseconds | 30000 | Integer
+| *camel.component.pulsar.service-url* | The Pulsar Service URL to point while creating the client from URI |  | String
 | *camel.component.pulsar.subscription-initial-position* | Control the initial position in the topic of a newly created subscription. Default is latest message. |  | SubscriptionInitialPosition
 | *camel.component.pulsar.subscription-name* | Name of the subscription to use | subs | String
 | *camel.component.pulsar.subscription-topics-mode* | Determines to which topics this consumer should be subscribed to - Persistent, Non-Persistent, or both. Only used with pattern subscriptions. |  | RegexSubscriptionMode
