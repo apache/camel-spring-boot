@@ -40,7 +40,7 @@ public class CamelJsonPatchTest extends AbstractSpringBootTestSupport {
 
     @Test
     public void componentTests() throws Exception {
-        this.runDataformatTest(config, "json-patch");
+        this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
 
