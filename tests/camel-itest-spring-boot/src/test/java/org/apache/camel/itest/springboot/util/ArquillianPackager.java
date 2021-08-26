@@ -366,6 +366,9 @@ public final class ArquillianPackager {
         ignore.add("com.google.api");
         ignore.add("com.google.http-client");
         ignore.add("org.eclipse.rdf4j");
+        ignore.add("org.scala-lang");
+        ignore.add("org.datanucleus");
+        ignore.add("org.apache.hive");
 
         // these are from camel-spring-boot and not camel repo so ignore them
         ignore.add("org.apache.camel:camel-spring-cloud-consul");
