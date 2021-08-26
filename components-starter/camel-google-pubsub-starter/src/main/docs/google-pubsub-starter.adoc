@@ -17,13 +17,14 @@ When using google-pubsub with Spring Boot make sure to use the following Maven d
 ----
 
 
-The component supports 9 options, which are listed below.
+The component supports 10 options, which are listed below.
 
 
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| *camel.component.google-pubsub.authenticate* | Use Credentials when interacting with PubSub service (no authentication is required when using emulator). | true | Boolean
 | *camel.component.google-pubsub.autowired-enabled* | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | *camel.component.google-pubsub.bridge-error-handler* | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | *camel.component.google-pubsub.enabled* | Whether to enable auto configuration of the google-pubsub component. This is enabled by default. |  | Boolean

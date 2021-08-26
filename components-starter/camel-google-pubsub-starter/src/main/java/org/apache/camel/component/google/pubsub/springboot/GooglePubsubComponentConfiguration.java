@@ -37,6 +37,11 @@ public class GooglePubsubComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Use Credentials when interacting with PubSub service (no authentication
+     * is required when using emulator).
+     */
+    private Boolean authenticate = true;
+    /**
      * Endpoint to use with local Pub/Sub emulator.
      */
     private String endpoint;
@@ -89,6 +94,14 @@ public class GooglePubsubComponentConfiguration
      * How many milliseconds should a producer be allowed to terminate.
      */
     private Integer publisherTerminationTimeout;
+
+    public Boolean getAuthenticate() {
+        return authenticate;
+    }
+
+    public void setAuthenticate(Boolean authenticate) {
+        this.authenticate = authenticate;
+    }
 
     public String getEndpoint() {
         return endpoint;
