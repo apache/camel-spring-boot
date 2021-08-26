@@ -485,9 +485,11 @@ public class JmsComponentConfiguration
      */
     private Boolean allowSerializedHeaders = false;
     /**
-     * Whether optimizing for Apache Artemis streaming mode.
+     * Whether optimizing for Apache Artemis streaming mode. This can reduce
+     * memory overhead when using Artemis with JMS StreamMessage types. This
+     * option must only be enabled if Apache Artemis is being used.
      */
-    private Boolean artemisStreamingEnabled = true;
+    private Boolean artemisStreamingEnabled = false;
     /**
      * Whether to startup the JmsConsumer message listener asynchronously, when
      * starting a route. For example if a JmsConsumer cannot get a connection to
