@@ -94,11 +94,6 @@ public class GoogleSheetsStreamComponentConfiguration
      */
     private Boolean splitResults = false;
     /**
-     * Specifies the spreadsheet identifier that is used to identify the target
-     * to obtain.
-     */
-    private String spreadsheetId;
-    /**
      * Determines how values should be rendered in the output.
      */
     private String valueRenderOption = "FORMATTED_VALUE";
@@ -211,14 +206,6 @@ public class GoogleSheetsStreamComponentConfiguration
 
     public void setSplitResults(Boolean splitResults) {
         this.splitResults = splitResults;
-    }
-
-    public String getSpreadsheetId() {
-        return spreadsheetId;
-    }
-
-    public void setSpreadsheetId(String spreadsheetId) {
-        this.spreadsheetId = spreadsheetId;
     }
 
     public String getValueRenderOption() {
