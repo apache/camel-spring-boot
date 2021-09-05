@@ -344,7 +344,7 @@
       <dependency>
         <groupId>info.picocli</groupId>
         <artifactId>picocli</artifactId>
-        <version>4.5.0</version>
+        <version>4.6.1</version>
       </dependency>
       <dependency>
         <groupId>io.apicurio</groupId>
@@ -4746,7 +4746,7 @@
       <dependency>
         <groupId>org.knowm.xchange</groupId>
         <artifactId>xchange-core</artifactId>
-        <version>5.0.8</version>
+        <version>5.0.11</version>
       </dependency>
       <dependency>
         <groupId>org.linguafranca.pwdb</groupId>
