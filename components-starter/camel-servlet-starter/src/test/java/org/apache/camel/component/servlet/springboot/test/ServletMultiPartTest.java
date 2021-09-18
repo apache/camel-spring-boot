@@ -62,17 +62,18 @@ public class ServletMultiPartTest {
                             HttpServletRequest httpServletRequest = exchange.getIn().getBody(HttpServletRequest.class);
                             exchange.getIn().setBody(httpServletRequest.getPart("file").getName());
                         });
-                    }
-                 });
-              }
+            }
+        });
+    }
+
     @Test
     public void testMultipartRequest() throws Exception {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
         LinkedMultiValueMap<String, Object> message = new LinkedMultiValueMap<>();
-        message.add("file","Multipart Test");
-        HttpEntity<LinkedMultiValueMap<String, Object>> httpEntity = new HttpEntity<>(message,httpHeaders);
-        Assert.assertEquals("file", restTemplate.postForEntity("/camel/test",httpEntity,String.class).getBody());
+        message.add("file", "Multipart Test");
+        HttpEntity<LinkedMultiValueMap<String, Object>> httpEntity = new HttpEntity<>(message, httpHeaders);
+        Assert.assertEquals("file", restTemplate.postForEntity("/camel/test", httpEntity, String.class).getBody());
     }
 
 }
