@@ -799,43 +799,43 @@ Number of Camel languages: 19 in 13 JAR artifacts (0 deprecated)
 |===
 | Language | Artifact | Support Level | Since | Description
 
-| xref:latest@components:languages:bean-language.adoc[Bean method] | camel-bean-starter | Stable | 1.3 | Call a method of the specified Java bean passing the Exchange, Body or specific headers to it.
+| xref:latest@components:languages:bean-language.adoc[Bean Method] | camel-bean-starter | Stable | 1.3 | Calls a Java bean method.
 
 | xref:latest@components:languages:constant-language.adoc[Constant] | camel-base | Stable | 1.5 | To use a constant value in Camel expressions or predicates. Important: this is a fixed constant value that is only set once during starting up the route, do not use this if you want dynamic values during routing.
 
-| xref:latest@components:languages:datasonnet-language.adoc[DataSonnet] | camel-datasonnet-starter | Stable | 3.7 | To use DataSonnet scripts in Camel expressions or predicates.
+| xref:latest@components:languages:datasonnet-language.adoc[DataSonnet] | camel-datasonnet-starter | Stable | 3.7 | To use DataSonnet scripts for message transformations.
 
 | xref:latest@components:languages:exchangeProperty-language.adoc[ExchangeProperty] | camel-base | Stable | 2.0 | To use a Camel Exchange property in expressions or predicates.
 
 | xref:latest@components:languages:file-language.adoc[File] | camel-base | Stable | 1.1 | For expressions and predicates using the file/simple language.
 
-| xref:latest@components:languages:groovy-language.adoc[Groovy] | camel-groovy-starter | Stable | 1.3 | Evaluate a Groovy script.
+| xref:latest@components:languages:groovy-language.adoc[Groovy] | camel-groovy-starter | Stable | 1.3 | Evaluates a Groovy script.
 
 | xref:latest@components:languages:header-language.adoc[Header] | camel-base | Stable | 1.5 | To use a Camel Message header in expressions or predicates.
 
-| xref:latest@components:languages:hl7terser-language.adoc[HL7 Terser] | camel-hl7-starter | Stable | 2.11 | Get the value of an HL7 message field specified by terse location specification syntax.
+| xref:latest@components:languages:hl7terser-language.adoc[HL7 Terser] | camel-hl7-starter | Stable | 2.11 | Get the value of a HL7 message field specified by terse location specification syntax.
 
-| xref:latest@components:languages:joor-language.adoc[jOOR] | camel-joor-starter | Stable | 3.7 | Evaluate a jOOR (Java compiled once at runtime) expression language.
+| xref:latest@components:languages:joor-language.adoc[jOOR] | camel-joor-starter | Stable | 3.7 | Evaluates a jOOR (Java compiled once at runtime) expression.
 
-| xref:latest@components:languages:jsonpath-language.adoc[JsonPath] | camel-jsonpath-starter | Stable | 2.13 | Evaluate a JsonPath expression against a JSON message body.
+| xref:latest@components:languages:jsonpath-language.adoc[JSONPath] | camel-jsonpath-starter | Stable | 2.13 | Evaluates a JSONPath expression against a JSON message body.
 
-| xref:latest@components:languages:mvel-language.adoc[MVEL] | camel-mvel-starter | Stable | 2.0 | Evaluate an MVEL template against the Camel Exchange.
+| xref:latest@components:languages:mvel-language.adoc[MVEL] | camel-mvel-starter | Stable | 2.0 | Evaluates a MVEL template.
 
-| xref:latest@components:languages:ognl-language.adoc[OGNL] | camel-ognl-starter | Stable | 1.1 | Evaluate an Apache Commons Object Graph Navigation Library (OGNL) expression against the Camel Exchange.
+| xref:latest@components:languages:ognl-language.adoc[OGNL] | camel-ognl-starter | Stable | 1.1 | Evaluates an OGNL expression (Apache Commons OGNL).
 
 | xref:latest@components:languages:ref-language.adoc[Ref] | camel-base | Stable | 2.8 | Reference to an existing Camel expression or predicate, which is looked up from the Camel registry.
 
 | xref:latest@components:languages:simple-language.adoc[Simple] | camel-base | Stable | 1.1 | To use Camels built-in Simple language in Camel expressions or predicates.
 
-| xref:latest@components:languages:spel-language.adoc[SpEL] | camel-spring-starter | Stable | 2.7 | Evaluate a Spring Expression Language (SpEL) expression against the Camel Exchange.
+| xref:latest@components:languages:spel-language.adoc[SpEL] | camel-spring-starter | Stable | 2.7 | Evaluates a Spring expression (SpEL).
 
 | xref:latest@components:languages:tokenize-language.adoc[Tokenize] | camel-base | Stable | 2.0 | To use Camel message body or header with a tokenizer in Camel expressions or predicates.
 
-| xref:latest@components:languages:xtokenize-language.adoc[XML Tokenize] | camel-xml-jaxp-starter | Stable | 2.14 | Tokenize XML payloads using the specified path expression.
+| xref:latest@components:languages:xtokenize-language.adoc[XML Tokenize] | camel-xml-jaxp-starter | Stable | 2.14 | Tokenize XML payloads.
 
-| xref:latest@components:languages:xpath-language.adoc[XPath] | camel-xpath-starter | Stable | 1.1 | Evaluate an XPath expression against an XML payload.
+| xref:latest@components:languages:xpath-language.adoc[XPath] | camel-xpath-starter | Stable | 1.1 | Evaluates an XPath expression against an XML payload.
 
-| xref:latest@components:languages:xquery-language.adoc[XQuery] | camel-saxon-starter | Stable | 1.0 | Evaluate an XQuery expressions against an XML payload.
+| xref:latest@components:languages:xquery-language.adoc[XQuery] | camel-saxon-starter | Stable | 1.0 | Evaluates an XQuery expressions against an XML payload.
 |===
 // languages: END
 

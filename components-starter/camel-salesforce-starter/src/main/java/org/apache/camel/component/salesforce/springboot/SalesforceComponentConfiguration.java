@@ -291,6 +291,14 @@ public class SalesforceComponentConfiguration
      */
     private Map<String, Object> longPollingTransportProperties;
     /**
+     * Maximum size of the thread pool used to handle HTTP responses.
+     */
+    private Integer workerPoolMaxSize = 20;
+    /**
+     * Size of the thread pool used to handle HTTP responses.
+     */
+    private Integer workerPoolSize = 10;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -890,6 +898,22 @@ public class SalesforceComponentConfiguration
     public void setLongPollingTransportProperties(
             Map<String, Object> longPollingTransportProperties) {
         this.longPollingTransportProperties = longPollingTransportProperties;
+    }
+
+    public Integer getWorkerPoolMaxSize() {
+        return workerPoolMaxSize;
+    }
+
+    public void setWorkerPoolMaxSize(Integer workerPoolMaxSize) {
+        this.workerPoolMaxSize = workerPoolMaxSize;
+    }
+
+    public Integer getWorkerPoolSize() {
+        return workerPoolSize;
+    }
+
+    public void setWorkerPoolSize(Integer workerPoolSize) {
+        this.workerPoolSize = workerPoolSize;
     }
 
     public Boolean getBridgeErrorHandler() {

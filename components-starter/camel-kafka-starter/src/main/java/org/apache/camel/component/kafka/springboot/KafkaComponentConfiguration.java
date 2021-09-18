@@ -90,7 +90,7 @@ public class KafkaComponentConfiguration
      */
     private Integer reconnectBackoffMaxMs = 1000;
     /**
-     * Timeout in milli seconds to wait gracefully for the consumer or producer
+     * Timeout in milliseconds to wait gracefully for the consumer or producer
      * to shutdown and terminate its worker threads.
      */
     private Integer shutdownTimeout = 30000;
@@ -152,6 +152,11 @@ public class KafkaComponentConfiguration
      * performance.
      */
     private Boolean checkCrcs = true;
+    /**
+     * The maximum time, in milliseconds, that the code will wait for a
+     * synchronous commit to complete. The option is a java.lang.Long type.
+     */
+    private Long commitTimeoutMs = 5000L;
     /**
      * The configuration controls the maximum amount of time the client will
      * wait for the response of a request. If the response is not received
@@ -866,6 +871,14 @@ public class KafkaComponentConfiguration
 
     public void setCheckCrcs(Boolean checkCrcs) {
         this.checkCrcs = checkCrcs;
+    }
+
+    public Long getCommitTimeoutMs() {
+        return commitTimeoutMs;
+    }
+
+    public void setCommitTimeoutMs(Long commitTimeoutMs) {
+        this.commitTimeoutMs = commitTimeoutMs;
     }
 
     public Integer getConsumerRequestTimeoutMs() {
