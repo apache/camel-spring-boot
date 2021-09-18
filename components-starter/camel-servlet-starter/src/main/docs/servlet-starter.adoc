@@ -41,5 +41,9 @@ The component supports 14 options, which are listed below.
 |===
 // spring-boot-auto-configure options: END
 
-==== Advance Multipart configuration
-The multipart configuration is enabled by default. It is inherited from spring servlet's https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/web/servlet/MultipartProperties.html[multipart properties] which can be used for further customization.
+=== Multipart configuration
+
+The multipart configuration is enabled by default.
+It is inherited from Spring Servlet https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/web/servlet/MultipartProperties.html[multipart properties]
+which can be used for further customization.
+
