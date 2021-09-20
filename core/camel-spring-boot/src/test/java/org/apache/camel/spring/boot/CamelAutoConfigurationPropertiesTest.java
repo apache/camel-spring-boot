@@ -20,9 +20,8 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -30,13 +29,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(properties = "camel.springboot.jmxEnabled=false")
-public class CamelAutoConfigurationPropertiesTest extends Assert {
+public class CamelAutoConfigurationPropertiesTest {
 
     // Route fixtures
 

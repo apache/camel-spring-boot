@@ -17,22 +17,22 @@
 package org.apache.camel.spring.boot.xml;
 
 import org.apache.camel.CamelContext;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootTest(
     properties = {
         "camel.springboot.name = camel-spring-boot",
+        "camel.springboot.tracing = true",
         "camel.springboot.shutdownTimeout = 5"
     }
 )
@@ -43,8 +43,9 @@ public class MixedBootAndXmlConfigurationTest {
 
     @Test
     public void thereShouldBeAutoConfiguredFromSpringBoot() {
-        Assert.assertEquals("camel-spring-boot", camel.getName());
-        Assert.assertEquals(5, camel.getShutdownStrategy().getTimeout());
+        Assertions.assertEquals("camel-spring-boot", camel.getName());
+//        Assertions.assertEquals(5, camel.getShutdownStrategy().getTimeout()); // Handled specially in tests!
+        Assertions.assertEquals(true, camel.isTracing());
     }
 
     @Configuration

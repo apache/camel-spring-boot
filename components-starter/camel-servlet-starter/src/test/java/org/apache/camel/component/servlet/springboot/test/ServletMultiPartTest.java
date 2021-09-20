@@ -18,10 +18,10 @@ package org.apache.camel.component.servlet.springboot.test;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,7 +31,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.LinkedMultiValueMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +38,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Testing multipart processing with camel servlet
  */
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootApplication
 @DirtiesContext
 @ContextConfiguration(classes = ServletMultiPartTest.class)
@@ -52,7 +51,7 @@ public class ServletMultiPartTest {
     @Autowired
     private CamelContext context;
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         context.addRoutes(new RouteBuilder() {
             @Override
@@ -73,7 +72,7 @@ public class ServletMultiPartTest {
         LinkedMultiValueMap<String, Object> message = new LinkedMultiValueMap<>();
         message.add("file", "Multipart Test");
         HttpEntity<LinkedMultiValueMap<String, Object>> httpEntity = new HttpEntity<>(message, httpHeaders);
-        Assert.assertEquals("file", restTemplate.postForEntity("/camel/test", httpEntity, String.class).getBody());
+        Assertions.assertEquals("file", restTemplate.postForEntity("/camel/test", httpEntity, String.class).getBody());
     }
 
 }

@@ -18,22 +18,21 @@ package org.apache.camel.component.servlet.springboot.test;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Testing the servlet mapping
  */
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootApplication
 @DirtiesContext
 @ContextConfiguration(classes = ServletMappingAutoConfigurationTest.class)
@@ -46,7 +45,7 @@ public class ServletMappingAutoConfigurationTest {
     @Autowired
     private CamelContext context;
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         context.addRoutes(new RouteBuilder() {
             @Override
@@ -62,7 +61,7 @@ public class ServletMappingAutoConfigurationTest {
 
     @Test
     public void testServletMapping() {
-        Assert.assertEquals("Hello", restTemplate.getForEntity("/camel/thepath", String.class).getBody());
+        Assertions.assertEquals("Hello", restTemplate.getForEntity("/camel/thepath", String.class).getBody());
     }
 
 }

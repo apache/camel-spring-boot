@@ -19,24 +19,23 @@ package org.apache.camel.spring.boot;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Route;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(
     classes = {
         CamelLambdaRouteBuilderTest.class,
-            LambdaRouteBuilderConfiguration.class }
+        LambdaRouteBuilderConfiguration.class}
 )
-public class CamelLambdaRouteBuilderTest extends Assert {
+public class CamelLambdaRouteBuilderTest {
 
     // Collaborators fixtures
 
@@ -49,7 +48,7 @@ public class CamelLambdaRouteBuilderTest extends Assert {
         Route route = camelContext.getRoute("foo");
 
         // Then
-        assertNotNull(route);
+        Assertions.assertNotNull(route);
 
         MockEndpoint mock = camelContext.getEndpoint("mock:result", MockEndpoint.class);
         mock.expectedBodiesReceived("Hello World");

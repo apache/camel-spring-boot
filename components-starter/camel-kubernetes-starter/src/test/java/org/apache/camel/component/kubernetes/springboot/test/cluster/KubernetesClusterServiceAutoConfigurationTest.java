@@ -18,15 +18,15 @@ package org.apache.camel.component.kubernetes.springboot.test.cluster;
 
 import org.apache.camel.component.kubernetes.cluster.KubernetesClusterService;
 import org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceAutoConfiguration;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.context.annotation.Configuration;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class KubernetesClusterServiceAutoConfigurationTest {
 
@@ -52,18 +52,18 @@ public class KubernetesClusterServiceAutoConfigurationTest {
             .withUserConfiguration(TestConfiguration.class)
             .withPropertyValues(
                 "spring.main.banner-mode=off",
-                "camel.component.kubernetes.cluster.service.enabled=true",
-                "camel.component.kubernetes.cluster.service.id=myid1",
-                "camel.component.kubernetes.cluster.service.master-url=http://myurl:9000",
-                "camel.component.kubernetes.cluster.service.connection-timeout-millis=1234",
-                "camel.component.kubernetes.cluster.service.kubernetes-namespace=ns1",
-                "camel.component.kubernetes.cluster.service.config-map-name=cm",
-                "camel.component.kubernetes.cluster.service.pod-name=mypod1",
-                "camel.component.kubernetes.cluster.service.cluster-labels.app=myapp",
-                "camel.component.kubernetes.cluster.service.cluster-labels.provider=myprovider",
-                "camel.component.kubernetes.cluster.service.lease-duration-millis=10000",
-                "camel.component.kubernetes.cluster.service.renew-deadline-millis=8000",
-                "camel.component.kubernetes.cluster.service.retry-period-millis=4000")
+                "camel.cluster.kubernetes.enabled=true",
+                "camel.cluster.kubernetes.id=myid1",
+                "camel.cluster.kubernetes.master-url=http://myurl:9000",
+                "camel.cluster.kubernetes.connection-timeout-millis=1234",
+                "camel.cluster.kubernetes.kubernetes-namespace=ns1",
+                "camel.cluster.kubernetes.config-map-name=cm",
+                "camel.cluster.kubernetes.pod-name=mypod1",
+                "camel.cluster.kubernetes.cluster-labels.app=myapp",
+                "camel.cluster.kubernetes.cluster-labels.provider=myprovider",
+                "camel.cluster.kubernetes.lease-duration-millis=10000",
+                "camel.cluster.kubernetes.renew-deadline-millis=8000",
+                "camel.cluster.kubernetes.retry-period-millis=4000")
             .run(
                 context -> {
                     final KubernetesClusterService clusterService = context.getBean(KubernetesClusterService.class);

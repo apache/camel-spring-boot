@@ -33,6 +33,10 @@
     </encoder>
     <file>target/camel-spring-boot-test.log</file>
   </appender>
+  
+    <logger name="org.springframework" level="DEBUG">
+        <appender-ref ref="FILE"/>
+    </logger>
 
   <root level="INFO">
     <!--<appender-ref ref="STDOUT"/>-->

@@ -17,6 +17,7 @@
 package org.apache.camel.component.zookeeper.springboot.cloud;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -34,10 +35,8 @@ import org.apache.curator.x.discovery.ServiceDiscovery;
 import org.apache.curator.x.discovery.ServiceDiscoveryBuilder;
 import org.apache.curator.x.discovery.ServiceInstance;
 import org.apache.curator.x.discovery.details.JsonInstanceSerializer;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -56,15 +55,13 @@ public class ZooKeeperServiceRegistryTest {
     private static final String SERVICE_HOST = "localhost";
     private static final int SERVICE_PORT = SocketUtils.findAvailableTcpPort();
 
-    @Rule
-    public final TestName testName = new TestName();
-    @Rule
-    public final TemporaryFolder temporaryFolder = new TemporaryFolder();
+    @TempDir
+    Path temporaryFolder ;
 
     @Test
     public void testServiceRegistry() throws Exception {
         final int zkPort =  AvailablePortFinder.getNextAvailable();
-        final File zkDir =  temporaryFolder.newFolder();
+        final File zkDir =  temporaryFolder.toFile();
 
         final TestingServer zkServer = new TestingServer(zkPort, zkDir);
         zkServer.start();

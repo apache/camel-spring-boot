@@ -19,23 +19,22 @@ package org.apache.camel.component.undertow;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.test.AvailablePortFinder;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Testing the ssl configuration
  */
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
 @SpringBootTest(
@@ -61,7 +60,7 @@ public class UndertowSSLTest {
     @Autowired
     private ProducerTemplate producerTemplate;
 
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         port = AvailablePortFinder.getNextAvailable();
     }

@@ -17,15 +17,11 @@
 package org.apache.camel.component.jasypt.springboot;
 
 import org.jasypt.registry.AlgorithmRegistry;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 import java.security.Security;
 import java.util.Collection;
 import java.util.Set;
 
-@RunWith(Parameterized.class)
 public class EncryptedPropertiesIvGeneratorAutoDetectionTest extends AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest{
 
 
@@ -33,7 +29,6 @@ public class EncryptedPropertiesIvGeneratorAutoDetectionTest extends AbstractEnc
         provider = SUN_JCE_PROVIDER_NAME;
     }
 
-    @Parameters(name = "{0}")
     public static Collection<String> data() {
         Security.removeProvider(BOUNCY_CASTLE_PROVIDER_NAME);
         return (Set<String>) AlgorithmRegistry.getAllPBEAlgorithms();

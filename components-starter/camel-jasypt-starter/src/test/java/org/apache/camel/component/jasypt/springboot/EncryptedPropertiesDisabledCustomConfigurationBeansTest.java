@@ -16,29 +16,19 @@
  */
 package org.apache.camel.component.jasypt.springboot;
 
-import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
-import org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig;
-import org.jasypt.iv.RandomIvGenerator;
-import org.jasypt.salt.RandomSaltGenerator;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_TEST_ENCRYPTED_PROPS_IN_CC;
 import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_TEST_ENCRYPTED_PROPS_OUT_CC;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
 @SpringBootTest(
@@ -50,12 +40,12 @@ public class EncryptedPropertiesDisabledCustomConfigurationBeansTest extends Enc
 
     @Test
     public void testCustomEnvironmentVariablesConfiguration() {
-        Assert.assertFalse(context.containsBean("environmentVariablesConfiguration"));
-        Assert.assertTrue(context.containsBean("customEnvironmentStringPBEConfig"));
-        Assert.assertTrue(context.containsBean("customStringEncryptor"));
-        Assert.assertFalse(context.containsBean("stringEncryptor"));
-        Assert.assertFalse(context.containsBean("propertyConfigurer"));
-        Assert.assertFalse(context.containsBean("encryptedPropertiesParser"));
+        Assertions.assertFalse(context.containsBean("environmentVariablesConfiguration"));
+        Assertions.assertTrue(context.containsBean("customEnvironmentStringPBEConfig"));
+        Assertions.assertTrue(context.containsBean("customStringEncryptor"));
+        Assertions.assertFalse(context.containsBean("stringEncryptor"));
+        Assertions.assertFalse(context.containsBean("propertyConfigurer"));
+        Assertions.assertFalse(context.containsBean("encryptedPropertiesParser"));
     }
 
     @Test

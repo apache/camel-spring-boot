@@ -17,23 +17,21 @@
 package org.apache.camel.component.jasypt.springboot;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_TEST_ENCRYPTED_PROPS_IN_CC;
 import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_TEST_ENCRYPTED_PROPS_OUT_CC;
 import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_TEST_UNENCRYPTED_PROPS_IN_CC;
 import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_TEST_UNENCRYPTED_PROPS_OUT_CC;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
 @SpringBootTest(classes = {EncryptedPropertiesTest.TestConfiguration.class})

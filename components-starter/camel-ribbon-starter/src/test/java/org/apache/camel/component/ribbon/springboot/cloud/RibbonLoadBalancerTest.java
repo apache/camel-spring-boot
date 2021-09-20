@@ -30,8 +30,8 @@ import org.apache.camel.impl.cloud.DefaultServiceCallProcessor;
 import org.apache.camel.spring.boot.cloud.CamelCloudServiceDiscovery;
 import org.apache.camel.spring.boot.cloud.CamelCloudServiceFilter;
 import org.apache.camel.test.AvailablePortFinder;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.context.annotation.Bean;
@@ -106,7 +106,7 @@ public class RibbonLoadBalancerTest {
     protected DefaultServiceCallProcessor findServiceCallProcessor(CamelContext context) {
         Route route = context.getRoute("scall");
 
-        Assert.assertNotNull("ServiceCall Route should be present", route);
+        Assertions.assertNotNull(route, "ServiceCall Route should be present");
 
         return findServiceCallProcessor(route.navigate())
             .orElseThrow(() -> new IllegalStateException("Unable to find a ServiceCallProcessor"));

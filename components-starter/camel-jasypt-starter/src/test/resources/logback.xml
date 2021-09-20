@@ -41,6 +41,7 @@
   </appender>
 
   <logger name="org.apache.camel.component.jasypt.springboot" level="DEBUG"/>
+  <logger name="org.springframework.beans" level="DEBUG"/>
 
   <root level="INFO">
     <appender-ref ref="FILE"/>

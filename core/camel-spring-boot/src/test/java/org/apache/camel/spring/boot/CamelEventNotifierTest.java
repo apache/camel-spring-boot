@@ -25,22 +25,21 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spi.CamelEvent;
 import org.apache.camel.spi.EventNotifier;
 import org.apache.camel.support.EventNotifierSupport;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest
-public class CamelEventNotifierTest extends Assert {
+public class CamelEventNotifierTest {
 
     @Configuration
     static class Config {
@@ -78,8 +77,8 @@ public class CamelEventNotifierTest extends Assert {
         mockEndpoint.assertIsSatisfied();
 
         MyEventNotifier notifier = (MyEventNotifier) camelContext.getManagementStrategy().getEventNotifiers().get(0);
-        assertNotNull(notifier);
-        assertTrue(notifier.getCount() > 0);
+        Assertions.assertNotNull(notifier);
+        Assertions.assertTrue(notifier.getCount() > 0);
     }
 
     public static class MyEventNotifier extends EventNotifierSupport {

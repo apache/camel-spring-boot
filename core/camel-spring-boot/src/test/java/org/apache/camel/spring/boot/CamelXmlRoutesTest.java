@@ -18,17 +18,17 @@ package org.apache.camel.spring.boot;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Route;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(
     classes = {
@@ -37,7 +37,7 @@ import org.springframework.test.context.junit4.SpringRunner;
     properties = {
         "camel.springboot.routes-include-pattern=file:src/test/resources/routes/foo.xml,file:src/test/resources/routes/bar.xml"}
 )
-public class CamelXmlRoutesTest extends Assert {
+public class CamelXmlRoutesTest {
 
     // Collaborators fixtures
 

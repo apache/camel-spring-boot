@@ -21,10 +21,9 @@ import java.util.Properties;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,10 +34,10 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootApplication
 @SpringBootTest(
     classes = {
@@ -46,17 +45,19 @@ import org.springframework.test.context.junit4.SpringRunner;
         CamelCloudServiceCallGlobalConfigurationTest.TestConfiguration.class,
         CamelCloudServiceCallGlobalConfigurationTest.SpringBootPropertySourceConfig.class,
     }
-   
+
 )
-@Ignore("TODO: Fix me later")
+@Disabled("TODO: Fix me later")
 public class CamelCloudServiceCallGlobalConfigurationTest {
     @Autowired
     private ProducerTemplate template;
 
     @Test
     public void testServiceCall() throws Exception {
-        Assert.assertEquals(String.valueOf(SpringBootPropertyUtil.PORT1), template.requestBody("direct:start", null, String.class));
-        Assert.assertEquals(String.valueOf(SpringBootPropertyUtil.PORT3), template.requestBody("direct:start", null, String.class));
+        Assertions.assertEquals(String.valueOf(SpringBootPropertyUtil.PORT1),
+                template.requestBody("direct:start", null, String.class));
+        Assertions.assertEquals(String.valueOf(SpringBootPropertyUtil.PORT3),
+                template.requestBody("direct:start", null, String.class));
     }
 
     // *************************************
@@ -126,4 +127,3 @@ public class CamelCloudServiceCallGlobalConfigurationTest {
     }
     
 }
-

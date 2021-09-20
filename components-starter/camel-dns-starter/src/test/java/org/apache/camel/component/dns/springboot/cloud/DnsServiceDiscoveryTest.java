@@ -18,7 +18,7 @@ package org.apache.camel.component.dns.springboot.cloud;
 
 import org.apache.camel.cloud.ServiceDiscovery;
 import org.apache.camel.model.cloud.springboot.DnsServiceCallServiceDiscoveryConfigurationProperties;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.context.annotation.Configuration;

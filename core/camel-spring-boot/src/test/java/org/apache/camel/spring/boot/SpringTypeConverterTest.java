@@ -20,9 +20,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -36,10 +35,10 @@ import org.springframework.core.convert.ConverterNotFoundException;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(classes = SpringTypeConverterTest.SpringTypeConversionConfiguration.class)
 public class SpringTypeConverterTest {
@@ -55,8 +54,8 @@ public class SpringTypeConverterTest {
     public void testConversionService() {
         Collection<?> source = Arrays.asList(new Person("Name", 30));
 
-        Assert.assertFalse(conversionService.canConvert(Person.class, String.class));
-        Assert.assertTrue(conversionService.canConvert(source.getClass(), String.class));
+        Assertions.assertFalse(conversionService.canConvert(Person.class, String.class));
+        Assertions.assertTrue(conversionService.canConvert(source.getClass(), String.class));
 
         try {
             conversionService.convert(source, String.class);
@@ -66,11 +65,10 @@ public class SpringTypeConverterTest {
             //
             //   org.springframework.core.convert.support.FallbackObjectToStringConverter
             //
-            Assert.assertTrue(e.getCause() instanceof ConverterNotFoundException);
+            Assertions.assertTrue(e.getCause() instanceof ConverterNotFoundException);
         }
 
-
-        Assert.assertNull(converter.convertTo(String.class, source));
+        Assertions.assertNull(converter.convertTo(String.class, source));
     }
 
     public static class Person {
@@ -118,6 +116,7 @@ public class SpringTypeConverterTest {
 
             return service;
         }
+
         @Bean
         SpringTypeConverter camelSpringTypeConverter(List<ConversionService> conversionServices) {
             return new SpringTypeConverter(conversionServices);

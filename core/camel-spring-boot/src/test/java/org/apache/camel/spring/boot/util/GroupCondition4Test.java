@@ -16,17 +16,16 @@
  */
 package org.apache.camel.spring.boot.util;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
 @SpringBootTest(
@@ -44,6 +43,6 @@ public class GroupCondition4Test extends GroupConditionTestBase {
 
     @Test
     public void testCondition() {
-        Assert.assertEquals(1, context.getBeansOfType(MyClass.class).size());
+        Assertions.assertEquals(1, context.getBeansOfType(MyClass.class).size());
     }
 }

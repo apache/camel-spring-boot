@@ -18,27 +18,26 @@ package org.apache.camel.component.servlet.springboot.test;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Testing that the servlet mapping can be disabled.
  */
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootApplication
 @DirtiesContext
 @ContextConfiguration(classes = ServletMappingDisablingTest.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = {
-        "camel.component.servlet.mapping.enabled=false"
+        "camel.servlet.mapping.enabled=false"
 })
 public class ServletMappingDisablingTest {
 
@@ -48,7 +47,7 @@ public class ServletMappingDisablingTest {
     @Autowired
     private CamelContext context;
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         context.addRoutes(new RouteBuilder() {
             @Override
@@ -64,7 +63,7 @@ public class ServletMappingDisablingTest {
 
     @Test
     public void testServletMapping() {
-        Assert.assertEquals(404, restTemplate.getForEntity("/camel/thepath", String.class).getStatusCodeValue());
+        Assertions.assertEquals(404, restTemplate.getForEntity("/camel/thepath", String.class).getStatusCodeValue());
     }
 
 }

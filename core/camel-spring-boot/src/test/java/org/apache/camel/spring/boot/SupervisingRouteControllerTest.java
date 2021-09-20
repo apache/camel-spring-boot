@@ -23,20 +23,19 @@ import org.apache.camel.ServiceStatus;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spi.SupervisingRouteController;
 import org.apache.camel.test.AvailablePortFinder;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 import static org.awaitility.Awaitility.await;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootTest(
     classes = {
         CamelAutoConfiguration.class,
@@ -57,19 +56,19 @@ public class SupervisingRouteControllerTest {
 
     @Test
     public void test() throws Exception {
-        Assert.assertNotNull(context.getRouteController());
-        Assert.assertTrue(context.getRouteController() instanceof SupervisingRouteController);
+        Assertions.assertNotNull(context.getRouteController());
+        Assertions.assertTrue(context.getRouteController() instanceof SupervisingRouteController);
 
         SupervisingRouteController controller = context.getRouteController().adapt(SupervisingRouteController.class);
 
         // Wait for the controller to start the routes
         await().atMost(5, TimeUnit.SECONDS).untilAsserted(() -> {
-            Assert.assertEquals(3, controller.getControlledRoutes().size());
-            Assert.assertEquals(500, controller.getInitialDelay());
+            Assertions.assertEquals(3, controller.getControlledRoutes().size());
+            Assertions.assertEquals(500, controller.getInitialDelay());
 
-            Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("foo"));
-            Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("bar"));
-            Assert.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("jetty"));
+            Assertions.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("foo"));
+            Assertions.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("bar"));
+            Assertions.assertEquals(ServiceStatus.Started, context.getRouteController().getRouteStatus("jetty"));
         });
     }
 

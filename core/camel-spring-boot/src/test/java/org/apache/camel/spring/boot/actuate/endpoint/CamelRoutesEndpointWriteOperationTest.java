@@ -22,27 +22,26 @@ import org.apache.camel.impl.engine.AbstractCamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint.TimeInfo;
 import org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint.WriteAction;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 /*
  * Test for the {@link CamelRoutesEndpoint} actuator endpoint.
  */
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootApplication
 @SpringBootTest(
     classes = {CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class, ActuatorTestRoute.class},
     properties = {"management.endpoint.camelroutes.read-only = false"})
-public class CamelRoutesEndpointWriteOperationTest extends Assert {
+public class CamelRoutesEndpointWriteOperationTest {
 
     @Autowired
     CamelRoutesEndpoint endpoint;
@@ -54,12 +53,12 @@ public class CamelRoutesEndpointWriteOperationTest extends Assert {
     public void testWriteOperation() throws Exception {
         AbstractCamelContext acontext = camelContext.getExtension(AbstractCamelContext.class);
         ServiceStatus status = acontext.getRouteStatus("foo-route");
-        Assert.assertTrue(status.isStarted());
+        Assertions.assertTrue(status.isStarted());
         TimeInfo timeInfo = new TimeInfo();
         timeInfo.setAbortAfterTimeout(true);
         timeInfo.setTimeout(10L);
         endpoint.doWriteAction("foo-route", WriteAction.STOP, timeInfo);
         status = acontext.getRouteStatus("foo-route");
-        Assert.assertTrue(status.isStopped());
+        Assertions.assertTrue(status.isStopped());
     }
 }

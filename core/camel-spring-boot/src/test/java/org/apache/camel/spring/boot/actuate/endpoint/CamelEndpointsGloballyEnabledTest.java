@@ -18,16 +18,15 @@
 package org.apache.camel.spring.boot.actuate.endpoint;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootTest(
     classes = {CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class,
                CamelRoutesEndpointAutoConfiguration.class},
@@ -42,7 +41,7 @@ public class CamelEndpointsGloballyEnabledTest {
 
     @Test
     public void testHealthCheckEndpointPresent() throws Exception {
-        Assert.assertNotNull(routeControllerEndpoint);
-        Assert.assertNotNull(routesEndpoint);
+        Assertions.assertNotNull(routeControllerEndpoint);
+        Assertions.assertNotNull(routesEndpoint);
     }
 }

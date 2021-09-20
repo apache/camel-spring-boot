@@ -17,9 +17,7 @@
 package org.apache.camel.spring.boot;
 
 import org.apache.camel.TypeConverter;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,13 +25,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(properties = "camel.springboot.typeConversion=true")
-public class SpringConverterDelegationTest extends Assert {
+public class SpringConverterDelegationTest {
 
     @Autowired
     TypeConverter typeConverter;

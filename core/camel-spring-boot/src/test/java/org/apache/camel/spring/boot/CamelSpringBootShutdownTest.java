@@ -25,8 +25,7 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.TypeConverter;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.converter.DefaultTypeConverter;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
@@ -34,7 +33,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 /**
  * Test class illustrating the invalid shutdown sequence when using the autoconfiguration
@@ -42,14 +41,14 @@ import org.springframework.test.context.junit4.SpringRunner;
  * <p>
  * This is caused by the {@link TypeConversionConfiguration} class registering a
  * {@link TypeConverter} (of actual type {@link DefaultTypeConverter}) in the Spring
- * {@link ApplicationContext}. Its '{@code public void shutdown()}' method is inferred as a destroy-method by <i>Spring</i>,
- * which will thus be called before the {@link CamelContext} shutdown
- * when the context is closed.
+ * {@link ApplicationContext}. Its '{@code public void shutdown()}' method is inferred as a
+ * destroy-method by <i>Spring</i>, which will thus be called before the {@link CamelContext}
+ * shutdown when the context is closed.
  * <p>
  * As a consequence, any inflight message that should be processed during the graceful
  * shutdown period of Camel won't have access to any type conversion support.
  */
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 // Let the CamelAutoConfiguration do all the configuration for us
 // including the TypeConverter registration into the ApplicationContext

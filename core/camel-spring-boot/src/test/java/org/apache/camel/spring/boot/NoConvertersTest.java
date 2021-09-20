@@ -16,31 +16,31 @@
  */
 package org.apache.camel.spring.boot;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.apache.camel.TypeConverter;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(classes = NoConvertersTest.class, properties = "camel.springboot.typeConversion=false")
-public class NoConvertersTest extends Assert {
+public class NoConvertersTest {
 
     @Autowired
     ApplicationContext applicationContext;
 
-    @Test(expected = NoSuchBeanDefinitionException.class)
+    @Test
     public void shouldNotProvideConverter() {
-        applicationContext.getBean(TypeConverter.class);
+        assertThrows(NoSuchBeanDefinitionException.class,
+                () -> applicationContext.getBean(TypeConverter.class));
     }
 
 }
-
