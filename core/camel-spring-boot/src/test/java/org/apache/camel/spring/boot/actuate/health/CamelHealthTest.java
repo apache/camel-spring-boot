@@ -18,22 +18,21 @@ package org.apache.camel.spring.boot.actuate.health;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootApplication
 @SpringBootTest(
     classes = {CamelAutoConfiguration.class, CamelHealthCheckAutoConfiguration.class, MyCamelRoute.class})
-public class CamelHealthTest extends Assert {
+public class CamelHealthTest {
 
     @Autowired
     CamelHealthCheckIndicator indicator;
@@ -44,10 +43,10 @@ public class CamelHealthTest extends Assert {
     @Test
     public void shouldHaveHealth() throws Exception {
         Health health = indicator.health();
-        assertNotNull(health);
+        Assertions.assertNotNull(health);
 
         String code = health.getStatus().getCode();
-        assertEquals("UP", code);
+        Assertions.assertEquals("UP", code);
     }
 
 }

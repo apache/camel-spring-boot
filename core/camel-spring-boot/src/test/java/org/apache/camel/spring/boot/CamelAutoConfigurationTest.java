@@ -27,9 +27,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spi.BeanRepository;
 import org.apache.camel.spi.Registry;
 import org.assertj.core.api.Assertions;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,7 +35,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -45,7 +43,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.withSettings;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(
     classes = {
@@ -59,7 +57,7 @@ import static org.mockito.Mockito.withSettings;
         "camel.springboot.typeConversion=true",
         "camel.springboot.threadNamePattern=customThreadName #counter#"}
 )
-public class CamelAutoConfigurationTest extends Assert {
+public class CamelAutoConfigurationTest extends org.junit.jupiter.api.Assertions {
 
     // Collaborators fixtures
 

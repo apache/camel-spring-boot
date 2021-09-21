@@ -20,18 +20,17 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.component.reactive.streams.api.CamelReactiveStreams;
 import org.apache.camel.component.reactive.streams.api.CamelReactiveStreamsService;
 import org.apache.camel.component.reactive.streams.springboot.test.support.ReactiveStreamsServiceTestSupport;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootApplication
 @DirtiesContext
 @SpringBootTest(
@@ -51,8 +50,8 @@ public class ReactiveStreamsNamedEngineTest {
     @Test
     public void testAutoConfiguration() throws InterruptedException {
         CamelReactiveStreamsService service = CamelReactiveStreams.get(context);
-        Assert.assertTrue(service instanceof MyEngine);
-        Assert.assertEquals(service, reactiveStreamsService);
+        Assertions.assertTrue(service instanceof MyEngine);
+        Assertions.assertEquals(service, reactiveStreamsService);
     }
 
     @Component("my-engine")

@@ -21,18 +21,17 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spi.ThreadPoolProfile;
 import org.apache.camel.spring.boot.threadpool.CamelThreadPoolAutoConfiguration;
 import org.apache.camel.util.concurrent.ThreadPoolRejectedPolicy;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootTest(
     classes = {
         CamelAutoConfiguration.class,
@@ -58,28 +57,28 @@ public class ThreadPoolConfigurationTest {
     @Test
     public void testThreadPool() throws Exception {
         ThreadPoolProfile dpp = context.getExecutorServiceManager().getDefaultThreadPoolProfile();
-        Assert.assertNotNull(dpp);
-        Assert.assertEquals("default", dpp.getId());
-        Assert.assertEquals(5, dpp.getPoolSize().intValue());
-        Assert.assertEquals(10, dpp.getMaxPoolSize().intValue());
-        Assert.assertEquals(20, dpp.getMaxQueueSize().intValue());
-        Assert.assertEquals(ThreadPoolRejectedPolicy.DiscardOldest, dpp.getRejectedPolicy());
+        Assertions.assertNotNull(dpp);
+        Assertions.assertEquals("default", dpp.getId());
+        Assertions.assertEquals(5, dpp.getPoolSize().intValue());
+        Assertions.assertEquals(10, dpp.getMaxPoolSize().intValue());
+        Assertions.assertEquals(20, dpp.getMaxQueueSize().intValue());
+        Assertions.assertEquals(ThreadPoolRejectedPolicy.DiscardOldest, dpp.getRejectedPolicy());
 
         ThreadPoolProfile sp = context.getExecutorServiceManager().getThreadPoolProfile("smallPool");
-        Assert.assertNotNull(sp);
-        Assert.assertEquals("smallPool", sp.getId());
-        Assert.assertEquals(2, sp.getPoolSize().intValue());
-        Assert.assertEquals(10, sp.getMaxPoolSize().intValue());
-        Assert.assertEquals(20, sp.getMaxQueueSize().intValue());
-        Assert.assertEquals(ThreadPoolRejectedPolicy.Abort, sp.getRejectedPolicy());
+        Assertions.assertNotNull(sp);
+        Assertions.assertEquals("smallPool", sp.getId());
+        Assertions.assertEquals(2, sp.getPoolSize().intValue());
+        Assertions.assertEquals(10, sp.getMaxPoolSize().intValue());
+        Assertions.assertEquals(20, sp.getMaxQueueSize().intValue());
+        Assertions.assertEquals(ThreadPoolRejectedPolicy.Abort, sp.getRejectedPolicy());
 
         ThreadPoolProfile bp = context.getExecutorServiceManager().getThreadPoolProfile("bigPool");
-        Assert.assertNotNull(bp);
-        Assert.assertEquals("bigPool", bp.getId());
-        Assert.assertEquals(20, bp.getPoolSize().intValue());
-        Assert.assertEquals(50, bp.getMaxPoolSize().intValue());
-        Assert.assertEquals(500, bp.getMaxQueueSize().intValue());
-        Assert.assertEquals(ThreadPoolRejectedPolicy.DiscardOldest, bp.getRejectedPolicy());
+        Assertions.assertNotNull(bp);
+        Assertions.assertEquals("bigPool", bp.getId());
+        Assertions.assertEquals(20, bp.getPoolSize().intValue());
+        Assertions.assertEquals(50, bp.getMaxPoolSize().intValue());
+        Assertions.assertEquals(500, bp.getMaxQueueSize().intValue());
+        Assertions.assertEquals(ThreadPoolRejectedPolicy.DiscardOldest, bp.getRejectedPolicy());
     }
 
     // *************************************

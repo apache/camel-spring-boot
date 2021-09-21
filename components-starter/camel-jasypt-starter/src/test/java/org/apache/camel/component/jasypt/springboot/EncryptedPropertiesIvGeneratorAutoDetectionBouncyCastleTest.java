@@ -16,31 +16,29 @@
  */
 package org.apache.camel.component.jasypt.springboot;
 
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jasypt.registry.AlgorithmRegistry;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.security.Security;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@RunWith(Parameterized.class)
+@CamelSpringBootTest
 public class EncryptedPropertiesIvGeneratorAutoDetectionBouncyCastleTest extends AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest {
 
     public EncryptedPropertiesIvGeneratorAutoDetectionBouncyCastleTest() {
         provider = BOUNCY_CASTLE_PROVIDER_NAME;
     }
 
-    @Before
+    @BeforeEach
     public void setUp(){
         Security.addProvider( new BouncyCastleProvider());
     }
 
 
-    @Parameterized.Parameters(name = "{0}")
     public static Collection<String> data() {
         return new BouncyCastleProvider().keySet()
                 .stream()

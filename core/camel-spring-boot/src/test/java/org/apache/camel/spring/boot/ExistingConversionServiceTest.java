@@ -16,9 +16,7 @@
  */
 package org.apache.camel.spring.boot;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -28,13 +26,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(classes = ExistingConversionServiceTest.TestConfig.class)
-public class ExistingConversionServiceTest extends Assert {
+public class ExistingConversionServiceTest {
 
     @Autowired
     @Qualifier("myService")
@@ -55,4 +55,3 @@ public class ExistingConversionServiceTest extends Assert {
         }
     }
 }
-

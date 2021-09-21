@@ -20,7 +20,7 @@ import org.jasypt.exceptions.EncryptionInitializationException;
 import org.jasypt.iv.IvGenerator;
 import org.jasypt.iv.NoIvGenerator;
 import org.jasypt.iv.RandomIvGenerator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesUtils.getIVGenerator;
 import static org.assertj.core.api.Assertions.assertThat;

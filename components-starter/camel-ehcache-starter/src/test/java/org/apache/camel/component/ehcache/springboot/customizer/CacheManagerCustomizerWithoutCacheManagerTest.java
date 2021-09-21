@@ -18,19 +18,18 @@ package org.apache.camel.component.ehcache.springboot.customizer;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.ehcache.EhcacheComponent;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @DirtiesContext
-@SpringBootApplication
+@EnableAutoConfiguration
 @SpringBootTest(
     classes = {
         CacheManagerCustomizerWithoutCacheManagerTest.TestConfiguration.class
@@ -46,8 +45,8 @@ public class CacheManagerCustomizerWithoutCacheManagerTest {
     public void testComponentConfiguration() {
         EhcacheComponent component = context.getComponent("ehcache", EhcacheComponent.class);
 
-        Assert.assertNotNull(component);
-        Assert.assertNull(component.getCacheManager());
+        Assertions.assertNotNull(component);
+        Assertions.assertNull(component.getCacheManager());
     }
 
     @Configuration

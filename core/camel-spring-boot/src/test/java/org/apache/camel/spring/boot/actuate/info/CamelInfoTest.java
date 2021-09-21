@@ -18,21 +18,20 @@ package org.apache.camel.spring.boot.actuate.info;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootApplication
 @SpringBootTest(classes = {CamelAutoConfiguration.class, CamelInfoAutoConfiguration.class})
-public class CamelInfoTest extends Assert {
+public class CamelInfoTest {
 
     @Autowired
     CamelInfoContributor indicator;
@@ -44,10 +43,10 @@ public class CamelInfoTest extends Assert {
     public void shouldHaveInfo() throws Exception {
         Info.Builder builder = new Info.Builder();
         indicator.contribute(builder);
-        assertNotNull(builder);
+        Assertions.assertNotNull(builder);
 
-        assertEquals(camelContext.getName(), builder.build().get("camel.name"));
-        assertEquals(camelContext.getVersion(), builder.build().get("camel.version"));
+        Assertions.assertEquals(camelContext.getName(), builder.build().get("camel.name"));
+        Assertions.assertEquals(camelContext.getVersion(), builder.build().get("camel.version"));
     }
 
 }

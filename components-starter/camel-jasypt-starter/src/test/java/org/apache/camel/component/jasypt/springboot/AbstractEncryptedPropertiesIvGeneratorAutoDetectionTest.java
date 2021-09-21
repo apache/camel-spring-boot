@@ -21,8 +21,8 @@ import org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig;
 import org.jasypt.iv.NoIvGenerator;
 import org.jasypt.iv.RandomIvGenerator;
 import org.jasypt.salt.RandomSaltGenerator;
-import org.junit.Test;
-import org.junit.runners.Parameterized.Parameter;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,13 +44,12 @@ public abstract class AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest {
     String password = "s0m3R@nD0mP@ssW0rD";
 
 
-    @Parameter
-    public String algorithm;
 
     protected String provider;
 
-    @Test
-    public void testEncryptionAndDecryption() {
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testEncryptionAndDecryption(String algorithm) {
 
         LOG.info("Testing Algorithm: '{}', requires IV: {}", algorithm, isIVNeeded(algorithm));
 

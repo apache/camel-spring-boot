@@ -16,18 +16,17 @@
  */
 package org.apache.camel.spring.boot.util;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
 @SpringBootTest(
@@ -50,11 +49,11 @@ public class HierarchicalPropertiesEvaluatorTest {
 
     @Test
     public void testEvaluator() {
-        Assert.assertFalse(HierarchicalPropertiesEvaluator.evaluate(environment, "test.group1", "test.group1.subgroup1"));
-        Assert.assertTrue(HierarchicalPropertiesEvaluator.evaluate(environment, "test.group1", "test.group1.subgroup2"));
-        Assert.assertFalse(HierarchicalPropertiesEvaluator.evaluate(environment, "test.group2", "test.group2.subgroup1"));
-        Assert.assertTrue(HierarchicalPropertiesEvaluator.evaluate(environment, "test.group2", "test.group2.subgroup2"));
-        Assert.assertFalse(HierarchicalPropertiesEvaluator.evaluate(environment, "test.group2", "test.group2.subgroup3"));
+        Assertions.assertFalse(HierarchicalPropertiesEvaluator.evaluate(environment, "test.group1", "test.group1.subgroup1"));
+        Assertions.assertTrue(HierarchicalPropertiesEvaluator.evaluate(environment, "test.group1", "test.group1.subgroup2"));
+        Assertions.assertFalse(HierarchicalPropertiesEvaluator.evaluate(environment, "test.group2", "test.group2.subgroup1"));
+        Assertions.assertTrue(HierarchicalPropertiesEvaluator.evaluate(environment, "test.group2", "test.group2.subgroup2"));
+        Assertions.assertFalse(HierarchicalPropertiesEvaluator.evaluate(environment, "test.group2", "test.group2.subgroup3"));
     }
 
     @Configuration

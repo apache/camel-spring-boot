@@ -21,20 +21,19 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.reactive.streams.api.CamelReactiveStreams;
 import org.apache.camel.component.reactive.streams.api.CamelReactiveStreamsService;
 import org.apache.camel.component.reactive.streams.engine.DefaultCamelReactiveStreamsService;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Checking that the deadlock does not occur when the {@code CamelReactiveStreamsService} is not injected anywhere.
  */
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
 @SpringBootTest(
@@ -57,9 +56,9 @@ public class ReactiveStreamsDefaultEngineTest {
             }
         }.addRoutesToCamelContext(context);
 
-        Assert.assertTrue(context.getStatus().isStarted());
+        Assertions.assertTrue(context.getStatus().isStarted());
         CamelReactiveStreamsService service = CamelReactiveStreams.get(context);
-        Assert.assertTrue(service instanceof DefaultCamelReactiveStreamsService);
+        Assertions.assertTrue(service instanceof DefaultCamelReactiveStreamsService);
     }
 
     @Configuration

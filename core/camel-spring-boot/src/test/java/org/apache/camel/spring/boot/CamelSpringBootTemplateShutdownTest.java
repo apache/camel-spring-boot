@@ -21,14 +21,14 @@ import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.FluentProducerTemplate;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.support.service.ServiceSupport;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext
 public class CamelSpringBootTemplateShutdownTest {
@@ -43,7 +43,7 @@ public class CamelSpringBootTemplateShutdownTest {
 
     FluentProducerTemplate fluentProducerTemplate;
 
-    @Before
+    @BeforeEach
     public void setupApplicationContext() {
         applicationContext = new AnnotationConfigApplicationContext(CamelAutoConfiguration.class);
         camelContext = applicationContext.getBean(CamelContext.class);

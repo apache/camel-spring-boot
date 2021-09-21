@@ -17,6 +17,7 @@
 package org.apache.camel.component.zookeeper.springboot.cluster;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.UUID;
 
 import org.apache.camel.CamelContext;
@@ -24,10 +25,8 @@ import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.component.zookeeper.cluster.ZooKeeperClusterService;
 import org.apache.camel.test.AvailablePortFinder;
 import org.apache.curator.test.TestingServer;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.context.annotation.Configuration;
@@ -37,15 +36,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ZooKeeperClusterServiceTest {
     private static final String SERVICE_PATH = "/camel";
 
-    @Rule
-    public final TestName testName = new TestName();
-    @Rule
-    public final TemporaryFolder temporaryFolder = new TemporaryFolder();
+    @TempDir
+    Path temporaryFolder;
 
     @Test
     public void testClusterService() throws Exception {
         final int zkPort =  AvailablePortFinder.getNextAvailable();
-        final File zkDir =  temporaryFolder.newFolder();
+        final File zkDir =  temporaryFolder.toFile();
 
         final TestingServer zkServer = new TestingServer(zkPort, zkDir);
         zkServer.start();

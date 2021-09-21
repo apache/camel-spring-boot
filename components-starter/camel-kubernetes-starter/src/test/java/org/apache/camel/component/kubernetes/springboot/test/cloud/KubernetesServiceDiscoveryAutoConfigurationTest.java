@@ -22,7 +22,7 @@ import org.apache.camel.component.kubernetes.cloud.KubernetesDnsServiceDiscovery
 import org.apache.camel.component.kubernetes.cloud.KubernetesDnsSrvServiceDiscovery;
 import org.apache.camel.component.kubernetes.cloud.KubernetesEnvServiceDiscovery;
 import org.apache.camel.model.cloud.springboot.KubernetesServiceCallServiceDiscoveryConfigurationProperties;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.context.annotation.Configuration;

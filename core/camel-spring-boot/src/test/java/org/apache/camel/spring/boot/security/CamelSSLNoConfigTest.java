@@ -18,8 +18,8 @@ package org.apache.camel.spring.boot.security;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.support.jsse.GlobalSSLContextParametersSupplier;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,27 +27,30 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 /**
- * Testing that the ssl configuration is not created if a subproperty of "camel.ssl.config." (note the last dot) is not present.
+ * Testing that the ssl configuration is not created if a subproperty of "camel.ssl.config."
+ * (note the last dot) is not present.
  */
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootApplication
 @DirtiesContext
 @ContextConfiguration(classes = {CamelSSLAutoConfiguration.class, CamelAutoConfiguration.class})
-@SpringBootTest(properties = {
+@SpringBootTest(
+    properties = {
         "camel.ssl.configxxx=true"
-})
+    }
+)
 public class CamelSSLNoConfigTest {
 
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Test(expected = NoSuchBeanDefinitionException.class)
+    @Test
     public void checkSSLPropertiesNotPresent() {
-        applicationContext.getBean(GlobalSSLContextParametersSupplier.class);
+        Assertions.assertThrows(NoSuchBeanDefinitionException.class,
+            () -> applicationContext.getBean(GlobalSSLContextParametersSupplier.class));
     }
 
 }
-

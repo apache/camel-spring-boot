@@ -24,25 +24,24 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Ordered;
 import org.apache.camel.component.ehcache.EhcacheComponent;
 import org.apache.camel.spi.ComponentCustomizer;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.ehcache.config.CacheConfiguration;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
 import org.ehcache.config.units.EntryUnit;
 import org.ehcache.config.units.MemoryUnit;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @DirtiesContext
-@SpringBootApplication
+@EnableAutoConfiguration
 @SpringBootTest(
     classes = {
         CacheConfigurationCustomizerEnabledReplaceTest.TestConfiguration.class,
@@ -66,14 +65,14 @@ public class CacheConfigurationCustomizerEnabledReplaceTest {
     public void testComponentConfiguration() {
         EhcacheComponent component = context.getComponent("ehcache", EhcacheComponent.class);
 
-        Assert.assertNotNull(configurations);
-        Assert.assertEquals(2, configurations.size());
-        Assert.assertNotNull(component);
-        Assert.assertNotNull(component.getCachesConfigurations());
-        Assert.assertEquals(2, component.getCachesConfigurations().size());
-        Assert.assertTrue(component.getCachesConfigurations().containsKey("myConfig1"));
-        Assert.assertTrue(component.getCachesConfigurations().containsKey("myConfig2"));
-        Assert.assertFalse(component.getCachesConfigurations().containsKey(CACHE_CONFIG_ID));
+        Assertions.assertNotNull(configurations);
+        Assertions.assertEquals(2, configurations.size());
+        Assertions.assertNotNull(component);
+        Assertions.assertNotNull(component.getCachesConfigurations());
+        Assertions.assertEquals(2, component.getCachesConfigurations().size());
+        Assertions.assertTrue(component.getCachesConfigurations().containsKey("myConfig1"));
+        Assertions.assertTrue(component.getCachesConfigurations().containsKey("myConfig2"));
+        Assertions.assertFalse(component.getCachesConfigurations().containsKey(CACHE_CONFIG_ID));
     }
 
     @Configuration

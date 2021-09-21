@@ -45,7 +45,8 @@ public class StreamCachingTest extends CamelTestSupport {
         return new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                context.getTypeConverterRegistry().addFallbackTypeConverter(springTypeConverter(context, new ConversionService[]{new DefaultConversionService()}), true);
+                context.getTypeConverterRegistry().addFallbackTypeConverter(
+                    springTypeConverter(context, new ConversionService[] {new DefaultConversionService()}), true);
 
                 from("direct:foo")
                     .streamCaching()
@@ -71,7 +72,8 @@ public class StreamCachingTest extends CamelTestSupport {
     }
 
     /**
-     * Copied from org.apache.camel.spring.boot.TypeConversionConfiguration (they are package protected)
+     * Copied from org.apache.camel.spring.boot.TypeConversionConfiguration (they are package
+     * protected)
      **/
     SpringTypeConverter springTypeConverter(CamelContext camelContext, ConversionService[] conversionServices) {
         SpringTypeConverter springTypeConverter = new SpringTypeConverter(asList(conversionServices));

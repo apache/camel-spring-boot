@@ -17,19 +17,18 @@
 package org.apache.camel.spring.boot;
 
 import org.apache.camel.CamelContext;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootTest
 public class PlainTest {
 
@@ -48,7 +47,8 @@ public class PlainTest {
 
     @Test
     public void testPlain() {
-        Assert.assertNull("Should not auto configure CamelContext", camelContext);
-        Assert.assertEquals("Should not auto configure CamelAutoConfiguration", 0, applicationContext.getBeanNamesForType(CamelAutoConfiguration.class).length);
+        Assertions.assertNull(camelContext, "Should not auto configure CamelContext");
+        Assertions.assertEquals(0, applicationContext.getBeanNamesForType(CamelAutoConfiguration.class).length,
+                "Should not auto configure CamelAutoConfiguration");
     }
 }

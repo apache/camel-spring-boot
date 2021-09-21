@@ -16,22 +16,22 @@
  */
 package org.apache.camel.component.hystrix.springboot.test;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Testing that the hystrix mapping can be disabled.
  */
-@RunWith(SpringRunner.class)
 @SpringBootApplication
+@CamelSpringBootTest
 @DirtiesContext
 @ContextConfiguration(classes = HystrixMappingDisablingTest.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = {
@@ -45,7 +45,7 @@ public class HystrixMappingDisablingTest {
 
     @Test
     public void testHystrixServletMapping() {
-        Assert.assertEquals(404, restTemplate.getForEntity("/hystrix.stream", String.class).getStatusCodeValue());
+        assertEquals(404, restTemplate.getForEntity("/hystrix.stream", String.class).getStatusCodeValue());
     }
 
 }

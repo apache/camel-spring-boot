@@ -19,22 +19,21 @@ package org.apache.camel.spring.boot;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(properties = "camel.springboot.file-configurations=file:src/test/secret/*.properties")
-public class CamelConfigurationLocationsTest extends Assert {
+public class CamelConfigurationLocationsTest {
 
     @Configuration
     static class Config {
@@ -61,7 +60,7 @@ public class CamelConfigurationLocationsTest extends Assert {
     @Test
     public void shouldSecret() throws InterruptedException {
         Object endpoint = camelContext.hasEndpoint("stub:foo?password=1234");
-        assertNotNull(endpoint);
+        Assertions.assertNotNull(endpoint);
     }
 
 }

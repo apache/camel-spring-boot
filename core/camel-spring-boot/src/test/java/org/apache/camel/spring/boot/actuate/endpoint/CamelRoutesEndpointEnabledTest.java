@@ -18,29 +18,27 @@ package org.apache.camel.spring.boot.actuate.endpoint;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
-
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 /*
  * Test for the {@link CamelRoutesEndpoint} actuator endpoint.
  */
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootApplication
 @SpringBootTest(
     classes = {CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class, ActuatorTestRoute.class},
     properties = {"management.endpoint.camelroutes.enabled = true"}
 )
-public class CamelRoutesEndpointEnabledTest extends Assert {
+public class CamelRoutesEndpointEnabledTest {
 
     @Autowired
     CamelRoutesEndpoint routesEndpoint;
@@ -50,7 +48,7 @@ public class CamelRoutesEndpointEnabledTest extends Assert {
 
     @Test
     public void testRoutesEndpointNotPresent() throws Exception {
-        Assert.assertNotNull(routesEndpoint);
+        Assertions.assertNotNull(routesEndpoint);
     }
 
 }

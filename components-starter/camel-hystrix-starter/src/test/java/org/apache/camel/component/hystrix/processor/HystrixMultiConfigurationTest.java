@@ -22,21 +22,20 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Navigate;
 import org.apache.camel.Processor;
 import org.apache.camel.model.HystrixConfigurationDefinition;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Testing the Hystrix multi configuration
  */
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootApplication
 @DirtiesContext
 @ContextConfiguration(classes = HystrixMultiConfiguration.class)
@@ -57,11 +56,11 @@ public class HystrixMultiConfigurationTest {
     public void testBeans() throws Exception {
         Map<String, HystrixConfigurationDefinition> beans = context.getBeansOfType(HystrixConfigurationDefinition.class);
 
-        Assert.assertEquals(4, beans.size());
-        Assert.assertEquals("global-group", beans.get(HystrixConstants.DEFAULT_HYSTRIX_CONFIGURATION_ID).getGroupKey());
-        Assert.assertEquals("bean-group", beans.get("bean-conf").getGroupKey());
-        Assert.assertEquals("conf-1-group", beans.get("conf-1").getGroupKey());
-        Assert.assertEquals("conf-2-group", beans.get("conf-2").getGroupKey());
+        assertEquals(4, beans.size());
+        assertEquals("global-group", beans.get(HystrixConstants.DEFAULT_HYSTRIX_CONFIGURATION_ID).getGroupKey());
+        assertEquals("bean-group", beans.get("bean-conf").getGroupKey());
+        assertEquals("conf-1-group", beans.get("conf-1").getGroupKey());
+        assertEquals("conf-2-group", beans.get("conf-2").getGroupKey());
     }
 
     @Test
@@ -69,8 +68,8 @@ public class HystrixMultiConfigurationTest {
         HystrixProcessor processor1 = findHystrixProcessor(camelContext.getRoute("hystrix-route-1").navigate());
         HystrixProcessor processor2 = findHystrixProcessor(camelContext.getRoute("hystrix-route-2").navigate());
 
-        Assert.assertEquals("conf-1-group", processor1.getHystrixGroupKey());
-        Assert.assertEquals("conf-2-group", processor2.getHystrixGroupKey());
+        assertEquals("conf-1-group", processor1.getHystrixGroupKey());
+        assertEquals("conf-2-group", processor2.getHystrixGroupKey());
     }
 
     // **********************************************

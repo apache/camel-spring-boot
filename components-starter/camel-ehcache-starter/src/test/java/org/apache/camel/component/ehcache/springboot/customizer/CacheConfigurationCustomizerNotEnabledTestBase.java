@@ -25,8 +25,8 @@ import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
 import org.ehcache.config.units.EntryUnit;
 import org.ehcache.config.units.MemoryUnit;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,10 +41,10 @@ class CacheConfigurationCustomizerNotEnabledTestBase {
     public void testComponentConfiguration() {
         EhcacheComponent component = context.getComponent("ehcache", EhcacheComponent.class);
 
-        Assert.assertNotNull(configurations);
-        Assert.assertEquals(2, configurations.size());
-        Assert.assertNotNull(component);
-        Assert.assertNull(component.getCachesConfigurations());
+        Assertions.assertNotNull(configurations);
+        Assertions.assertEquals(2, configurations.size());
+        Assertions.assertNotNull(component);
+        Assertions.assertNull(component.getCachesConfigurations());
     }
 
     @Configuration

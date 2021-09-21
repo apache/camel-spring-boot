@@ -21,9 +21,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.camel.CamelContext;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,9 +30,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
 @SpringBootTest(
@@ -120,10 +119,10 @@ public class CamelPropertiesHelperTest {
 
         CamelPropertiesHelper.setCamelProperties(camelContext, target, map, true);
 
-        Assert.assertEquals("Should configure all options", 0, map.size());
-        Assert.assertEquals(123, target.getId());
-        Assert.assertEquals("Donald Duck", target.getName());
-        Assert.assertSame(context.getBean("myCoolOption"), target.getOption());
+        Assertions.assertEquals(0, map.size(), "Should configure all options");
+        Assertions.assertEquals(123, target.getId());
+        Assertions.assertEquals("Donald Duck", target.getName());
+        Assertions.assertSame(context.getBean("myCoolOption"), target.getOption());
     }
 
     @Test
@@ -138,11 +137,11 @@ public class CamelPropertiesHelperTest {
 
         CamelPropertiesHelper.setCamelProperties(camelContext, target, map, true);
 
-        Assert.assertEquals("Should configure all options", 0, map.size());
-        Assert.assertEquals(123, target.getId());
-        Assert.assertEquals("Donald Duck", target.getName());
-        Assert.assertSame(context.getBean("myCoolOption"), target.getOption());
-        Assert.assertSame(camelContext, target.getCamelContext());
+        Assertions.assertEquals(0, map.size(), "Should configure all options");
+        Assertions.assertEquals(123, target.getId());
+        Assertions.assertEquals("Donald Duck", target.getName());
+        Assertions.assertSame(context.getBean("myCoolOption"), target.getOption());
+        Assertions.assertSame(camelContext, target.getCamelContext());
     }
 
     @Test
@@ -157,11 +156,11 @@ public class CamelPropertiesHelperTest {
 
         CamelPropertiesHelper.setCamelProperties(camelContext, target, map, true);
 
-        Assert.assertEquals("Should configure all options", 0, map.size());
-        Assert.assertEquals(123, target.getId());
-        Assert.assertEquals("Donald Duck", target.getName());
-        Assert.assertSame(context.getBean("myCoolOption"), target.getOption());
-        Assert.assertSame(camelContext, target.getCamelContext());
+        Assertions.assertEquals(0, map.size(), "Should configure all options");
+        Assertions.assertEquals(123, target.getId());
+        Assertions.assertEquals("Donald Duck", target.getName());
+        Assertions.assertSame(context.getBean("myCoolOption"), target.getOption());
+        Assertions.assertSame(camelContext, target.getCamelContext());
     }
 
     @Test
@@ -179,16 +178,16 @@ public class CamelPropertiesHelperTest {
 
         CamelPropertiesHelper.setCamelProperties(camelContext, target, map, true);
 
-        Assert.assertEquals("Should configure all options", 0, map.size());
-        Assert.assertEquals(123, target.getId());
-        Assert.assertEquals("Donald Duck", target.getName());
-        Assert.assertSame(context.getBean("myCoolOption"), target.getOption());
-        Assert.assertSame(camelContext, target.getCamelContext());
+        Assertions.assertEquals(0, map.size(), "Should configure all options");
+        Assertions.assertEquals(123, target.getId());
+        Assertions.assertEquals("Donald Duck", target.getName());
+        Assertions.assertSame(context.getBean("myCoolOption"), target.getOption());
+        Assertions.assertSame(camelContext, target.getCamelContext());
 
         MyFooClass myFooClass = target.getMyFooClass();
-        Assert.assertNotNull(myFooClass);
-        Assert.assertSame(camelContext, myFooClass.getCamelContext());
-        Assert.assertEquals("Goofy", myFooClass.getName());
+        Assertions.assertNotNull(myFooClass);
+        Assertions.assertSame(camelContext, myFooClass.getCamelContext());
+        Assertions.assertEquals("Goofy", myFooClass.getName());
     }
 
     @Test
@@ -202,10 +201,10 @@ public class CamelPropertiesHelperTest {
 
         CamelPropertiesHelper.setCamelProperties(camelContext, target, map, true);
 
-        Assert.assertEquals("Should configure all options", 0, map.size());
-        Assert.assertEquals(123, target.getId());
-        Assert.assertEquals("Donald Duck", target.getName());
-        Assert.assertSame(context.getBean("myCoolOption"), target.getOption());
+        Assertions.assertEquals(0, map.size(), "Should configure all options");
+        Assertions.assertEquals(123, target.getId());
+        Assertions.assertEquals("Donald Duck", target.getName());
+        Assertions.assertSame(context.getBean("myCoolOption"), target.getOption());
     }
 
     @Test
@@ -220,16 +219,16 @@ public class CamelPropertiesHelperTest {
 
         try {
             CamelPropertiesHelper.setCamelProperties(camelContext, target, map, true);
-            Assert.fail("Should have thrown exception");
+            Assertions.fail("Should have thrown exception");
         } catch (IllegalArgumentException e) {
             // expected
-            Assert.assertTrue(e.getMessage().startsWith("Cannot configure option [unknown] with value [foo]"));
+            Assertions.assertTrue(e.getMessage().startsWith("Cannot configure option [unknown] with value [foo]"));
         }
 
-        Assert.assertEquals("Should configure the three first options", 1, map.size());
-        Assert.assertEquals(123, target.getId());
-        Assert.assertEquals("Donald Duck", target.getName());
-        Assert.assertSame(context.getBean("myCoolOption"), target.getOption());
+        Assertions.assertEquals(1, map.size(), "Should configure the three first options");
+        Assertions.assertEquals(123, target.getId());
+        Assertions.assertEquals("Donald Duck", target.getName());
+        Assertions.assertSame(context.getBean("myCoolOption"), target.getOption());
     }
 
     @Test
@@ -244,10 +243,10 @@ public class CamelPropertiesHelperTest {
 
         CamelPropertiesHelper.setCamelProperties(camelContext, target, map, false);
 
-        Assert.assertEquals("Should configure the three first options", 1, map.size());
-        Assert.assertEquals(123, target.getId());
-        Assert.assertEquals("Donald Duck", target.getName());
-        Assert.assertSame(context.getBean("myCoolOption"), target.getOption());
+        Assertions.assertEquals(1, map.size(), "Should configure the three first options");
+        Assertions.assertEquals(123, target.getId());
+        Assertions.assertEquals("Donald Duck", target.getName());
+        Assertions.assertSame(context.getBean("myCoolOption"), target.getOption());
     }
 
 }

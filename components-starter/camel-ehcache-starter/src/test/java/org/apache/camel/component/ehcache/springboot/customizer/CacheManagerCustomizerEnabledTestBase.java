@@ -20,8 +20,8 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.component.ehcache.EhcacheComponent;
 import org.ehcache.CacheManager;
 import org.ehcache.config.builders.CacheManagerBuilder;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,9 +36,9 @@ class CacheManagerCustomizerEnabledTestBase {
     public void testComponentConfiguration() {
         EhcacheComponent component = context.getComponent("ehcache", EhcacheComponent.class);
 
-        Assert.assertNotNull(cacheManager);
-        Assert.assertNotNull(component);
-        Assert.assertNotNull(component.getCacheManager());
+        Assertions.assertNotNull(cacheManager);
+        Assertions.assertNotNull(component);
+        Assertions.assertNotNull(component.getCacheManager());
     }
 
     @Configuration

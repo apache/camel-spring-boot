@@ -20,26 +20,24 @@ import java.util.List;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
-
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 /*
  * Test for the {@link CamelRouteControllerEndpoint} actuator endpoint.
  */
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootApplication
 @SpringBootTest(classes = {CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class, ActuatorTestRoute.class})
-public class CamelRouteControllerEndpointTest extends Assert {
+public class CamelRouteControllerEndpointTest {
 
     @Autowired
     CamelRouteControllerEndpoint endpoint;
@@ -51,7 +49,7 @@ public class CamelRouteControllerEndpointTest extends Assert {
     public void testRouteControllerEndpoint() throws Exception {
         List<String> routesId = endpoint.getControlledRoutes();
 
-        assertNotNull(routesId);
+        Assertions.assertNotNull(routesId);
         /* FIXME DefaultRouteController returns empty list while it does control any route...
         assertFalse(routesId.isEmpty());
         assertEquals(routesId.size(), camelContext.getRoutes().size());

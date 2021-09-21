@@ -24,21 +24,22 @@ import org.apache.camel.model.HystrixConfigurationDefinition;
 import org.apache.camel.model.Model;
 import org.apache.camel.model.ModelCamelContext;
 import org.apache.camel.model.RouteDefinition;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Testing the Hystrix configuration hierarchy
  */
-@RunWith(SpringRunner.class)
 @SpringBootApplication
+@CamelSpringBootTest
 @DirtiesContext
 @ContextConfiguration(classes = HystrixHierarchicalConfiguration.class)
 @SpringBootTest(properties = {
@@ -57,15 +58,15 @@ public class HystrixHierarchicalConfigurationTest {
         RouteDefinition routeDefinition = camelContext.getExtension(Model.class).getRouteDefinition("hystrix-route");
         CircuitBreakerDefinition hystrixDefinition = findCircuitBreaker(routeDefinition);
 
-        Assert.assertNotNull(hystrixDefinition);
+        assertNotNull(hystrixDefinition);
 
         Route rc = new DefaultRoute(camelContext, null, null, null, null);
         HystrixReifier reifier = new HystrixReifier(rc, hystrixDefinition);
         HystrixConfigurationDefinition config = reifier.buildHystrixConfiguration();
 
-        Assert.assertEquals("local-conf-group-key", config.getGroupKey());
-        Assert.assertEquals("global-thread-key", config.getThreadPoolKey());
-        Assert.assertEquals("5", config.getCorePoolSize());
+        assertEquals("local-conf-group-key", config.getGroupKey());
+        assertEquals("global-thread-key", config.getThreadPoolKey());
+        assertEquals("5", config.getCorePoolSize());
     }
 
     // **********************************************

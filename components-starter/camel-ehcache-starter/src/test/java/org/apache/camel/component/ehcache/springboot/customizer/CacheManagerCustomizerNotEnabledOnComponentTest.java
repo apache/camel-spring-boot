@@ -16,15 +16,14 @@
  */
 package org.apache.camel.component.ehcache.springboot.customizer;
 
-import org.junit.runner.RunWith;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @DirtiesContext
-@SpringBootApplication
+@EnableAutoConfiguration
 @SpringBootTest(
     classes = {
         CacheManagerCustomizerNotEnabledTestBase.TestConfiguration.class

@@ -18,16 +18,15 @@ package org.apache.camel.component.salesforce.springboot;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.salesforce.SalesforceComponent;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
 @SpringBootTest(properties = {
@@ -47,9 +46,9 @@ public class SalesforceComponentTest {
     public void testSalesforceComponent() {
         SalesforceComponent sf = context.getComponent("salesforce", SalesforceComponent.class);
 
-        Assert.assertNotNull(sf);
-        Assert.assertNotNull(sf.getHttpClientProperties());
-        Assert.assertEquals("12345", sf.getHttpClientProperties().get("requestBufferSize"));
-        Assert.assertEquals("yes", sf.getHttpClientProperties().get("bar"));
+        Assertions.assertNotNull(sf);
+        Assertions.assertNotNull(sf.getHttpClientProperties());
+        Assertions.assertEquals("12345", sf.getHttpClientProperties().get("requestBufferSize"));
+        Assertions.assertEquals("yes", sf.getHttpClientProperties().get("bar"));
     }
 }

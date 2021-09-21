@@ -25,23 +25,22 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.seda.SedaEndpoint;
 import org.apache.camel.support.ClassicUuidGenerator;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.spi.RestApiConsumerFactory;
 import org.apache.camel.spi.RestConfiguration;
 import org.apache.camel.spi.RestConsumerFactory;
 import org.apache.camel.support.CamelContextHelper;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
 @DirtiesContext
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(
     classes = {
@@ -73,14 +72,14 @@ public class CamelRestTest {
         ProducerTemplate template = context.createProducerTemplate();
         String result = template.requestBody("seda:get-say-hello", "test", String.class);
 
-        Assert.assertEquals("Hello World", result);
+        Assertions.assertEquals("Hello World", result);
 
-        Assert.assertEquals("true", context.getRestConfiguration().getDataFormatProperties().get("prettyPrint"));
-        Assert.assertEquals("My cool API", context.getRestConfiguration().getApiProperties().get("api.title"));
-        Assert.assertEquals("1.0.0", context.getRestConfiguration().getApiProperties().get("api.version"));
-        Assert.assertEquals("true", context.getRestConfiguration().getApiProperties().get("cors"));
-        Assert.assertEquals("123", context.getRestConfiguration().getCorsHeaders().get("foo"));
-        Assert.assertEquals("456", context.getRestConfiguration().getCorsHeaders().get("bar"));
+        Assertions.assertEquals("true", context.getRestConfiguration().getDataFormatProperties().get("prettyPrint"));
+        Assertions.assertEquals("My cool API", context.getRestConfiguration().getApiProperties().get("api.title"));
+        Assertions.assertEquals("1.0.0", context.getRestConfiguration().getApiProperties().get("api.version"));
+        Assertions.assertEquals("true", context.getRestConfiguration().getApiProperties().get("cors"));
+        Assertions.assertEquals("123", context.getRestConfiguration().getCorsHeaders().get("foo"));
+        Assertions.assertEquals("456", context.getRestConfiguration().getCorsHeaders().get("bar"));
     }
 
     // ***********************************

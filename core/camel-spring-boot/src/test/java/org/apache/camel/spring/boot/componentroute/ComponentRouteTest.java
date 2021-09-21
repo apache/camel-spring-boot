@@ -19,18 +19,16 @@ package org.apache.camel.spring.boot.componentroute;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-@RunWith(SpringRunner.class)
+@CamelSpringBootTest
 @SpringBootApplication
 @SpringBootTest(classes = ComponentRouteTest.class)
-public class ComponentRouteTest extends Assert {
+public class ComponentRouteTest {
 
     @EndpointInject("mock:componentRoute")
     MockEndpoint mock;
@@ -52,4 +50,3 @@ public class ComponentRouteTest extends Assert {
     }
 
 }
-

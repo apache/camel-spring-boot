@@ -25,8 +25,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.cloud.ServiceRegistry;
 import org.apache.camel.impl.cloud.DefaultServiceDefinition;
 import org.apache.camel.test.testcontainers.Wait;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -35,9 +34,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.util.SocketUtils;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Testcontainers
 public class ConsulServiceRegistryIT {
     private static final Logger LOGGER = LoggerFactory.getLogger(ConsulServiceRegistryIT.class);
     private static final String SERVICE_ID = UUID.randomUUID().toString();
@@ -45,7 +47,7 @@ public class ConsulServiceRegistryIT {
     private static final String SERVICE_HOST = "localhost";
     private static final int SERVICE_PORT = SocketUtils.findAvailableTcpPort();
 
-    @Rule
+    @Container
     public GenericContainer container = new GenericContainer("consul:1.5.3")
         .withExposedPorts(Consul.DEFAULT_HTTP_PORT)
         .waitingFor(Wait.forLogMessageContaining("Synced node info", 1))
@@ -71,10 +73,10 @@ public class ConsulServiceRegistryIT {
                 "debug=false",
                 "spring.main.banner-mode=OFF",
                 "spring.application.name=" + UUID.randomUUID().toString(),
-                "camel.component.consul.service-registry.enabled=true",
-                "camel.component.consul.service-registry.url=" + consulUrl,
-                "camel.component.consul.service-registry.id=" + UUID.randomUUID().toString(),
-                "camel.component.consul.service-registry.service-host=localhost")
+                "camel.cloud.consul.enabled=true",
+                "camel.cloud.consul.url=" + consulUrl,
+                "camel.cloud.consul.id=" + UUID.randomUUID().toString(),
+                "camel.cloud.consul.service-host=localhost")
             .run(
                 context -> {
                     assertThat(context).hasSingleBean(CamelContext.class);

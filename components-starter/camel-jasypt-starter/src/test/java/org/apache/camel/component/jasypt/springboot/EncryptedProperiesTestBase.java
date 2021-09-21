@@ -20,7 +20,7 @@ import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
@@ -28,7 +28,7 @@ import static org.apache.camel.ExchangePattern.InOut;
 import static org.apache.camel.component.jasypt.springboot.Constants.MOCK_URI;
 import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_TEST_UNENCRYPTED_PROPS_IN_CC;
 import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_TEST_UNENCRYPTED_PROPS_OUT_CC;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class EncryptedProperiesTestBase {
 
