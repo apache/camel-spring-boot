@@ -245,8 +245,11 @@
     <module>camel-hl7-starter</module>
     <module>camel-http-common-starter</module>
     <module>camel-http-starter</module>
+    <module>camel-huaweicloud-dms-starter</module>
     <module>camel-huaweicloud-functiongraph-starter</module>
     <module>camel-huaweicloud-iam-starter</module>
+    <module>camel-huaweicloud-imagerecognition-starter</module>
+    <module>camel-huaweicloud-obs-starter</module>
     <module>camel-huaweicloud-smn-starter</module>
     <module>camel-hystrix-starter</module>
     <module>camel-ical-starter</module>

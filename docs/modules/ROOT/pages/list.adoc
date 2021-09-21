@@ -5,7 +5,7 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 == Camel Components
 
 // components: START
-Number of Camel components: 335 in 271 JAR artifacts (1 deprecated)
+Number of Camel components: 338 in 274 JAR artifacts (1 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -293,9 +293,15 @@ Number of Camel components: 335 in 271 JAR artifacts (1 deprecated)
 
 | xref:latest@components::http-component.adoc[HTTP] | camel-http-starter | Stable | 2.3 | Send requests to external HTTP servers using Apache HTTP Client 4.x.
 
+| xref:latest@components::hwcloud-image-component.adoc[Huawei Cloud Image Recognition] | camel-huaweicloud-imagerecognition-starter | Preview | 3.12 | To identify objects, scenes, and concepts in images on Huawei Cloud
+
+| xref:latest@components::hwcloud-dms-component.adoc[Huawei Distributed Message Service (DMS)] | camel-huaweicloud-dms-starter | Preview | 3.12 | To integrate with a fully managed, high-performance message queuing service on Huawei Cloud
+
 | xref:latest@components::hwcloud-functiongraph-component.adoc[Huawei FunctionGraph] | camel-huaweicloud-functiongraph-starter | Preview | 3.11 | To call serverless functions on Huawei Cloud
 
 | xref:latest@components::hwcloud-iam-component.adoc[Huawei Identity and Access Management (IAM)] | camel-huaweicloud-iam-starter | Preview | 3.11 | To securely manage users on Huawei Cloud
+
+| xref:latest@components::hwcloud-obs-component.adoc[Huawei Object Storage Service (OBS)] | camel-huaweicloud-obs-starter | Preview | 3.12 | To provide stable, secure, efficient, and easy-to-use cloud storage service on Huawei Cloud
 
 | xref:latest@components::hwcloud-smn-component.adoc[Huawei Simple Message Notification (SMN)] | camel-huaweicloud-smn-starter | Stable | 3.8 | To broadcast messages and connect cloud services through notifications on Huawei Cloud
 
