@@ -843,7 +843,7 @@ Number of Camel languages: 19 in 13 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 28 in 28 JAR artifacts (3 deprecated)
+Number of miscellaneous extensions: 28 in 28 JAR artifacts (4 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -881,7 +881,7 @@ Number of miscellaneous extensions: 28 in 28 JAR artifacts (3 deprecated)
 
 | xref:latest@components:others:resilience4j.adoc[Resilience4j] | camel-resilience4j-starter | Stable | 3.0 | Circuit Breaker EIP using Resilience4j
 
-| xref:latest@components:others:ribbon.adoc[Ribbon] | camel-ribbon-starter | Stable | 2.18 | Using Netflix Ribbon for client side load balancing
+| xref:latest@components:others:ribbon.adoc[Ribbon] | camel-ribbon-starter | Stable | 2.18 | *deprecated* Using Netflix Ribbon for client side load balancing
 
 | xref:latest@components:others:rxjava.adoc[RxJava] | camel-rxjava-starter | Stable | 2.22 | RxJava based back-end for Camel's reactive streams component
 
