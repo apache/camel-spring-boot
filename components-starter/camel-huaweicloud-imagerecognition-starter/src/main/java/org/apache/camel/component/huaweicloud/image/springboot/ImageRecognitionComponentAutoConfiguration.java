@@ -43,7 +43,7 @@ import org.springframework.context.annotation.Lazy;
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,ImageRecognitionComponentConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.hwcloud-image"})
+@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.hwcloud-imagerecognition"})
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 public class ImageRecognitionComponentAutoConfiguration {
 
@@ -71,7 +71,7 @@ public class ImageRecognitionComponentAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.component.customizer",
-                        "camel.component.hwcloud-image.customizer")
+                        "camel.component.hwcloud-imagerecognition.customizer")
                     && target instanceof ImageRecognitionComponent;
             }
         };

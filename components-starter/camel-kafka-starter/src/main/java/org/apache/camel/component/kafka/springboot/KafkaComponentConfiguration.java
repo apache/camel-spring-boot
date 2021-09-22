@@ -165,13 +165,10 @@ public class KafkaComponentConfiguration
      */
     private Integer consumerRequestTimeoutMs = 40000;
     /**
-     * The number of consumers that connect to kafka server
+     * The number of consumers that connect to kafka server. Each consumer is
+     * run on a separate thread, that retrieves and process the incoming data.
      */
     private Integer consumersCount = 1;
-    /**
-     * Number of concurrent consumers on the consumer
-     */
-    private Integer consumerStreams = 10;
     /**
      * The maximum amount of data the server should return for a fetch request
      * This is not an absolute maximum, if the first message in the first
@@ -895,14 +892,6 @@ public class KafkaComponentConfiguration
 
     public void setConsumersCount(Integer consumersCount) {
         this.consumersCount = consumersCount;
-    }
-
-    public Integer getConsumerStreams() {
-        return consumerStreams;
-    }
-
-    public void setConsumerStreams(Integer consumerStreams) {
-        this.consumerStreams = consumerStreams;
     }
 
     public Integer getFetchMaxBytes() {
