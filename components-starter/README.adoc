@@ -293,8 +293,6 @@ Number of Camel components: 339 in 274 JAR artifacts (1 deprecated)
 
 | xref:latest@components::http-component.adoc[HTTP] | camel-http-starter | Stable | 2.3 | Send requests to external HTTP servers using Apache HTTP Client 4.x.
 
-| xref:latest@components::hwcloud-image-component.adoc[Huawei Cloud Image Recognition] | camel-huaweicloud-imagerecognition-starter | Preview | 3.12 | To identify objects, scenes, and concepts in images on Huawei Cloud
-
 | xref:latest@components::hwcloud-imagerecognition-component.adoc[Huawei Cloud Image Recognition] | camel-huaweicloud-imagerecognition-starter | Preview | 3.12 | To identify objects, scenes, and concepts in images on Huawei Cloud
 
 | xref:latest@components::hwcloud-dms-component.adoc[Huawei Distributed Message Service (DMS)] | camel-huaweicloud-dms-starter | Preview | 3.12 | To integrate with a fully managed, high-performance message queuing service on Huawei Cloud
