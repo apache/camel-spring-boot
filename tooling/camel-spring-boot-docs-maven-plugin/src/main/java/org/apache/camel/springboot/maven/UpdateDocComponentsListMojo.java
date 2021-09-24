@@ -56,7 +56,7 @@ import static org.apache.camel.tooling.util.PackageHelper.writeText;
  *
  * - component-starter/readme.adoc
  *
- * to be up to date with all the component starters that Apache Camel Spring Boot ships.
+ * to be up-to-date with all the component starters that Apache Camel Spring Boot ships.
  */
 @Mojo(name = "update-doc-components-list", threadSafe = true)
 public class UpdateDocComponentsListMojo extends AbstractMojo {
