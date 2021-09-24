@@ -43,7 +43,6 @@ public class Ddb2StreamComponentConverter implements GenericConverter {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.dynamodb.streams.DynamoDbStreamsClient.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.ddbstream.Ddb2StreamConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.ddbstream.SequenceNumberProvider.class));
         return answer;
     }
 
@@ -62,7 +61,6 @@ public class Ddb2StreamComponentConverter implements GenericConverter {
         switch (targetType.getName()) {
             case "software.amazon.awssdk.services.dynamodb.streams.DynamoDbStreamsClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.dynamodb.streams.DynamoDbStreamsClient.class);
             case "org.apache.camel.component.aws2.ddbstream.Ddb2StreamConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.aws2.ddbstream.Ddb2StreamConfiguration.class);
-            case "org.apache.camel.component.aws2.ddbstream.SequenceNumberProvider": return applicationContext.getBean(ref, org.apache.camel.component.aws2.ddbstream.SequenceNumberProvider.class);
         }
         return null;
     }

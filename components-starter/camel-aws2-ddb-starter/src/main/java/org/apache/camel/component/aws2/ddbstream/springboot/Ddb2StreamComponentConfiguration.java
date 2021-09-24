@@ -19,11 +19,10 @@ package org.apache.camel.component.aws2.ddbstream.springboot;
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.ddbstream.Ddb2StreamComponent;
 import org.apache.camel.component.aws2.ddbstream.Ddb2StreamConfiguration;
-import org.apache.camel.component.aws2.ddbstream.SequenceNumberProvider;
+import org.apache.camel.component.aws2.ddbstream.Ddb2StreamConfiguration.StreamIteratorType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
-import software.amazon.awssdk.services.dynamodb.model.ShardIteratorType;
 import software.amazon.awssdk.services.dynamodb.streams.DynamoDbStreamsClient;
 
 /**
@@ -64,13 +63,6 @@ public class Ddb2StreamComponentConfiguration
      */
     private Ddb2StreamConfiguration configuration;
     /**
-     * Defines where in the DynaboDB stream to start getting records. Note that
-     * using TRIM_HORIZON can cause a significant delay before the stream has
-     * caught up to real-time. if {AT,AFTER}_SEQUENCE_NUMBER are used, then a
-     * sequenceNumberProvider MUST be supplied.
-     */
-    private ShardIteratorType iteratorType = ShardIteratorType.LATEST;
-    /**
      * Maximum number of records that will be fetched in each poll
      */
     private Integer maxResultsPerRequest;
@@ -96,12 +88,11 @@ public class Ddb2StreamComponentConfiguration
      */
     private String region;
     /**
-     * Provider for the sequence number when using one of the two
-     * ShardIteratorType.{AT,AFTER}_SEQUENCE_NUMBER iterator types. Can be a
-     * registry reference or a literal sequence number. The option is a
-     * org.apache.camel.component.aws2.ddbstream.SequenceNumberProvider type.
+     * Defines where in the DynamoDB stream to start getting records. Note that
+     * using FROM_START can cause a significant delay before the stream has
+     * caught up to real-time.
      */
-    private SequenceNumberProvider sequenceNumberProvider;
+    private StreamIteratorType streamIteratorType = StreamIteratorType.FROM_LATEST;
     /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
@@ -160,14 +151,6 @@ public class Ddb2StreamComponentConfiguration
         this.configuration = configuration;
     }
 
-    public ShardIteratorType getIteratorType() {
-        return iteratorType;
-    }
-
-    public void setIteratorType(ShardIteratorType iteratorType) {
-        this.iteratorType = iteratorType;
-    }
-
     public Integer getMaxResultsPerRequest() {
         return maxResultsPerRequest;
     }
@@ -216,13 +199,12 @@ public class Ddb2StreamComponentConfiguration
         this.region = region;
     }
 
-    public SequenceNumberProvider getSequenceNumberProvider() {
-        return sequenceNumberProvider;
+    public StreamIteratorType getStreamIteratorType() {
+        return streamIteratorType;
     }
 
-    public void setSequenceNumberProvider(
-            SequenceNumberProvider sequenceNumberProvider) {
-        this.sequenceNumberProvider = sequenceNumberProvider;
+    public void setStreamIteratorType(StreamIteratorType streamIteratorType) {
+        this.streamIteratorType = streamIteratorType;
     }
 
     public Boolean getTrustAllCertificates() {
