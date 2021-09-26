@@ -17,7 +17,7 @@ When using salesforce with Spring Boot make sure to use the following Maven depe
 ----
 
 
-The component supports 75 options, which are listed below.
+The component supports 77 options, which are listed below.
 
 
 
@@ -99,5 +99,7 @@ The component supports 75 options, which are listed below.
 | *camel.component.salesforce.update-topic* | Whether to update an existing Push Topic when using the Streaming API, defaults to false | false | Boolean
 | *camel.component.salesforce.use-global-ssl-context-parameters* | Enable usage of global SSL context parameters | false | Boolean
 | *camel.component.salesforce.user-name* | Username used in OAuth flow to gain access to access token. It's easy to get started with password OAuth flow, but in general one should avoid it as it is deemed less secure than other flows. |  | String
+| *camel.component.salesforce.worker-pool-max-size* | Maximum size of the thread pool used to handle HTTP responses. | 20 | Integer
+| *camel.component.salesforce.worker-pool-size* | Size of the thread pool used to handle HTTP responses. | 10 | Integer
 |===
 // spring-boot-auto-configure options: END

@@ -9,6 +9,6 @@
     "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-csimple-joor-starter",
-    "version": "3.7.5-SNAPSHOT"
+    "version": "3.7.6-SNAPSHOT"
   }
 }
