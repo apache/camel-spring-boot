@@ -129,7 +129,7 @@
         <maven-javadoc-plugin-version>3.2.0</maven-javadoc-plugin-version>
         <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
         <mycila-license-version>3.0</mycila-license-version>
-        <roaster-version>2.22.0.Final</roaster-version>
+        <roaster-version>2.23.2.Final</roaster-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
         <undertow-version>2.2.0.Final</undertow-version>
     </properties>
