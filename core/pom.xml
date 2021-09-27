@@ -38,10 +38,6 @@
     <modules>
         <module>camel-spring-boot</module>
         <module>camel-spring-boot-xml</module>
-        <module>camel-spring-cloud</module>
-        <module>camel-spring-cloud-consul</module>
-        <module>camel-spring-cloud-netflix</module>
-        <module>camel-spring-cloud-zookeeper</module>
     </modules>
 
     <build>

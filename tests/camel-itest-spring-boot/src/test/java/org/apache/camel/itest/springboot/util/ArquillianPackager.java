@@ -371,9 +371,6 @@ public final class ArquillianPackager {
         ignore.add("org.apache.hive");
 
         // these are from camel-spring-boot and not camel repo so ignore them
-        ignore.add("org.apache.camel:camel-spring-cloud-consul");
-        ignore.add("org.apache.camel:camel-spring-cloud-netflix");
-        ignore.add("org.apache.camel:camel-spring-cloud");
         ignore.add("org.apache.camel:camel-spring-boot");
 
         // google grpc is a mix of all sort of different versions
@@ -489,13 +486,6 @@ public final class ArquillianPackager {
 
         // some modules are not in component-starter
         String path = config.getModuleBasePath();
-        if (path.contains("camel-spring-cloud-netflix")) {
-            path = "../camel-spring-cloud-netflix";
-        } else if (path.contains("camel-spring-cloud-consul")) {
-            path = "../camel-spring-cloud-consul";
-        } else if (path.contains("camel-spring-cloud")) {
-            path = "../camel-spring-cloud";
-        }
         File pomFile = new File(path + "/target/itest-spring-boot-pom.xml");
         pomFile.getParentFile().mkdirs();
         try (FileWriter fw = new FileWriter(pomFile)) {
