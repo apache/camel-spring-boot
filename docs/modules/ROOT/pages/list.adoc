@@ -849,7 +849,7 @@ Number of Camel languages: 19 in 13 JAR artifacts (0 deprecated)
 == Miscellaneous Extensions
 
 // others: START
-Number of miscellaneous extensions: 28 in 28 JAR artifacts (4 deprecated)
+Number of miscellaneous extensions: 24 in 24 JAR artifacts (4 deprecated)
 
 [width="100%",cols="4,3,3,3,6",options="header"]
 |===
@@ -892,14 +892,6 @@ Number of miscellaneous extensions: 28 in 28 JAR artifacts (4 deprecated)
 | xref:latest@components:others:rxjava.adoc[RxJava] | camel-rxjava-starter | Stable | 2.22 | RxJava based back-end for Camel's reactive streams component
 
 | xref:latest@components:others:shiro.adoc[Shiro] | camel-shiro-starter | Stable | 2.5 | Security using Shiro
-
-| xref:spring-cloud.adoc[Spring Cloud] | camel-spring-cloud-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud
-
-| xref:spring-cloud-consul.adoc[Spring Cloud Consul] | camel-spring-cloud-consul-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud Consul
-
-| xref:spring-cloud-netflix.adoc[Spring Cloud Netflix] | camel-spring-cloud-netflix-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud Netflix
-
-| xref:spring-cloud-zookeeper.adoc[Spring Cloud Zookeeper] | camel-spring-cloud-zookeeper-starter | Stable | 2.19 | Camel Cloud integration with Spring Cloud Zookeeper
 
 | xref:latest@components:others:spring-javaconfig.adoc[Spring Java Configuration] | camel-spring-javaconfig-starter | Stable | 2.0 | *deprecated* Using Camel with Spring Java Configuration
 
