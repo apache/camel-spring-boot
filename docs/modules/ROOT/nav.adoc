@@ -1,8 +1,4 @@
 * xref:index.adoc[About]
 * xref:spring-boot.adoc[Camel Context starter]
-* xref:spring-cloud.adoc[Camel Spring Cloud starter]
-** xref:spring-cloud-zookeeper.adoc[Camel Spring Cloud Zookeeper]
-** xref:spring-cloud-netflix.adoc[Camel Spring Cloud Netflix]
-** xref:spring-cloud-consul.adoc[Camel Spring Cloud Consul]
 * xref:list.adoc[List of starters]
 
