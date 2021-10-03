@@ -45,8 +45,8 @@ public class MinaComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Whether or not to disconnect(close) from Mina session right after use.
-     * Can be used for both consumer and producer.
+     * Whether to disconnect(close) from Mina session right after use. Can be
+     * used for both consumer and producer.
      */
     private Boolean disconnect = false;
     /**
@@ -83,11 +83,6 @@ public class MinaComponentConfiguration
      * TCP client.
      */
     private Boolean clientMode = false;
-    /**
-     * If sync is enabled then this option dictates MinaConsumer if it should
-     * disconnect where there is no reply to send back.
-     */
-    private Boolean disconnectOnNoReply = true;
     /**
      * If sync is enabled this option dictates MinaConsumer which logging level
      * to use when logging a there is no reply to send back.
@@ -128,6 +123,11 @@ public class MinaComponentConfiguration
      * org.apache.camel.component.mina.MinaConfiguration type.
      */
     private MinaConfiguration configuration;
+    /**
+     * If sync is enabled then this option dictates MinaConsumer if it should
+     * disconnect where there is no reply to send back.
+     */
+    private Boolean disconnectOnNoReply = true;
     /**
      * Number of worker threads in the worker pool for TCP and UDP
      */
@@ -260,14 +260,6 @@ public class MinaComponentConfiguration
         this.clientMode = clientMode;
     }
 
-    public Boolean getDisconnectOnNoReply() {
-        return disconnectOnNoReply;
-    }
-
-    public void setDisconnectOnNoReply(Boolean disconnectOnNoReply) {
-        this.disconnectOnNoReply = disconnectOnNoReply;
-    }
-
     public LoggingLevel getNoReplyLogLevel() {
         return noReplyLogLevel;
     }
@@ -314,6 +306,14 @@ public class MinaComponentConfiguration
 
     public void setConfiguration(MinaConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public Boolean getDisconnectOnNoReply() {
+        return disconnectOnNoReply;
+    }
+
+    public void setDisconnectOnNoReply(Boolean disconnectOnNoReply) {
+        this.disconnectOnNoReply = disconnectOnNoReply;
     }
 
     public Integer getMaximumPoolSize() {
