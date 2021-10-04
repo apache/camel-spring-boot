@@ -30,6 +30,8 @@ import org.apache.camel.tooling.model.SupportLevel;
 
 public class ExtMvelHelper {
 
+    private static final String CAMEL_VERSION = "latest";
+
     private final Path extensionsDocPath;
 
     public ExtMvelHelper(Path extensionsDocPath) {
@@ -56,15 +58,16 @@ public class ExtMvelHelper {
 
     public String getDocLink(ArtifactModel<?> model) {
         if (isLocalComponent(model)) {
-            return String.format("xref:%s.adoc", ((ArtifactModel<?>) model).getName());
+            throw new RuntimeException("unexpected local model " + ((ArtifactModel<?>) model).getName());
+//            return String.format("xref:%s.adoc", ((ArtifactModel<?>) model).getName());
         } else if (model instanceof ComponentModel) {
-            return String.format("xref:latest@components::%s-component.adoc", ((ComponentModel) model).getScheme());
+            return String.format("xref:%s@components::%s-component.adoc", CAMEL_VERSION, ((ComponentModel) model).getScheme());
         } else if (model instanceof DataFormatModel) {
-            return String.format("xref:latest@components:dataformats:%s-dataformat.adoc", ((DataFormatModel) model).getName());
+            return String.format("xref:%s@components:dataformats:%s-dataformat.adoc", CAMEL_VERSION, ((DataFormatModel) model).getName());
         } else if (model instanceof LanguageModel) {
-            return String.format("xref:latest@components:languages:%s-language.adoc", ((LanguageModel) model).getName());
+            return String.format("xref:%s@components:languages:%s-language.adoc", CAMEL_VERSION, ((LanguageModel) model).getName());
         } else if (model instanceof OtherModel) {
-            return String.format("xref:latest@components:others:%s.adoc", ((OtherModel) model).getName());
+            return String.format("xref:%s@components:others:%s.adoc", CAMEL_VERSION, ((OtherModel) model).getName());
         } else {
             return null;
         }
