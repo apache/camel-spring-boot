@@ -377,7 +377,7 @@ Number of Camel components: 338 in 274 JAR artifacts (1 deprecated)
 
 | xref:latest@components::jsonata-component.adoc[JSONata] | camel-jsonata-starter | Stable | 3.5 | Transforms JSON payload using JSONata transformation.
 
-| xref:latest@components::json-patch-component.adoc[JsonPatch] | camel-json-patch-starter | Preview | 3.12.0-SNAPSHOT | JsonPatch component which transform JSON using JSON patch (RFC 6902).
+| xref:latest@components::json-patch-component.adoc[JsonPatch] | camel-json-patch-starter | Preview | 3.13.0-SNAPSHOT | JsonPatch component which transform JSON using JSON patch (RFC 6902).
 
 | xref:latest@components::jt400-component.adoc[JT400] | camel-jt400-starter | Stable | 1.5 | Exchanges messages with an IBM i system using data queues, message queues, or program call. IBM i is the replacement for AS/400 and iSeries servers.
 
