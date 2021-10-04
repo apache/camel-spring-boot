@@ -23,5 +23,6 @@ github:
     - integration
     - java
     - spring-boot
+    - hacktoberfest
 notifications:
   pullrequests: commits@camel.apache.org
