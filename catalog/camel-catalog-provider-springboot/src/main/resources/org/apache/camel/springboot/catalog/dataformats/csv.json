@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-csv-starter",
-    "version": "3.12.0-SNAPSHOT",
+    "version": "3.12.1-SNAPSHOT",
     "modelName": "csv",
     "modelJavaType": "org.apache.camel.model.dataformat.CsvDataFormat"
   },
