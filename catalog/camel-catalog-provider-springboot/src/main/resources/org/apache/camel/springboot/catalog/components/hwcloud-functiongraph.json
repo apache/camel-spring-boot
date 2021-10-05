@@ -8,7 +8,7 @@
     "firstVersion": "3.11.0",
     "label": "cloud,serverless",
     "javaType": "org.apache.camel.FunctionGraphComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-huaweicloud-functiongraph-starter",
     "version": "3.13.0-SNAPSHOT",

@@ -8,7 +8,7 @@
     "firstVersion": "3.11.0",
     "label": "cloud",
     "javaType": "org.apache.camel.component.huaweicloud.iam.IAMComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-huaweicloud-iam-starter",
     "version": "3.13.0-SNAPSHOT",
