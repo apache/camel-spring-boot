@@ -164,7 +164,7 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String converters;
     /**
-     * The name of the database the connector should be monitoring
+     * The name of the database from which the connector should capture changes
      */
     private String databaseDbname;
     /**
@@ -583,6 +583,13 @@ public class DebeziumPostgresComponentConfiguration
      * record got deleted.
      */
     private Boolean tombstonesOnDelete = false;
+    /**
+     * Specify how TRUNCATE operations are handled for change events (supported
+     * only on pg11 pgoutput plugin), including: 'skip' to skip / ignore
+     * TRUNCATE events (default), 'include' to handle and include TRUNCATE
+     * events
+     */
+    private String truncateHandlingMode = "skip";
     /**
      * Specify how often (in ms) the xmin will be fetched from the replication
      * slot. This xmin value is exposed by the slot which gives a lower bound of
@@ -1306,6 +1313,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setTombstonesOnDelete(Boolean tombstonesOnDelete) {
         this.tombstonesOnDelete = tombstonesOnDelete;
+    }
+
+    public String getTruncateHandlingMode() {
+        return truncateHandlingMode;
+    }
+
+    public void setTruncateHandlingMode(String truncateHandlingMode) {
+        this.truncateHandlingMode = truncateHandlingMode;
     }
 
     public Long getXminFetchIntervalMs() {

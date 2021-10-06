@@ -163,6 +163,11 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String converters;
     /**
+     * The maximum processing time in milliseconds to wait for the oplog cursor
+     * to process a single poll request. The option is a int type.
+     */
+    private Integer cursorMaxAwaitTimeMs;
+    /**
      * A comma-separated list of regular expressions that match the database
      * names for which changes are to be excluded
      */
@@ -191,8 +196,13 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String fieldExcludeList;
     /**
-     * Description is not available here, please check Debezium website for
-     * corresponding key 'field.renames' description.
+     * A comma-separated list of the fully-qualified replacements of fields that
+     * should be used to rename fields in change event message values.
+     * Fully-qualified replacements for fields are of the form
+     * databaseName.collectionName.fieldName.nestedFieldName:newNestedFieldName,
+     * where databaseName and collectionName may contain the wildcard () which
+     * matches any characters, the colon character (:) is used to determine
+     * rename mapping of field.
      */
     private String fieldRenames;
     /**
@@ -527,6 +537,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setConverters(String converters) {
         this.converters = converters;
+    }
+
+    public Integer getCursorMaxAwaitTimeMs() {
+        return cursorMaxAwaitTimeMs;
+    }
+
+    public void setCursorMaxAwaitTimeMs(Integer cursorMaxAwaitTimeMs) {
+        this.cursorMaxAwaitTimeMs = cursorMaxAwaitTimeMs;
     }
 
     public String getDatabaseExcludeList() {
