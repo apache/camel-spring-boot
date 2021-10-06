@@ -47,13 +47,13 @@
               </goals>
               <configuration>
                 <target>
-                  <copy file="${project.basedir}/../components-starter/README.adoc" tofile="${project.basedir}/modules/ROOT/pages/list.adoc" />
-                  <copy todir="${project.basedir}/modules/ROOT/pages/" flatten="true">
+                  <copy file="${project.basedir}/../components-starter/README.adoc" tofile="${project.basedir}/spring-boot/modules/ROOT/pages/list.adoc" />
+                  <copy todir="${project.basedir}/spring-boot/modules/ROOT/pages/" flatten="true">
                     <fileset dir="${project.basedir}/../core/">
                       <include name="**/src/main/docs/*.adoc" />
                     </fileset>
                   </copy>
-                  <copy todir="${project.basedir}/modules/ROOT/pages" flatten="true">
+                  <copy todir="${project.basedir}/components/modules/spring-boot/partials" flatten="true">
                     <fileset dir="${project.basedir}/../components-starter/">
                       <include name="*/src/main/docs/*.adoc" />
                     </fileset>
