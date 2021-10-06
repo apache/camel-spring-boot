@@ -136,6 +136,13 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String bigintUnsignedHandlingMode = "long";
     /**
+     * Specify how binary (blob, binary, etc.) columns should be represented in
+     * change events, including:'bytes' represents binary data as byte array
+     * (default)'base64' represents binary data as base64-encoded string'hex'
+     * represents binary data as hex-encoded (base16) string
+     */
+    private String binaryHandlingMode = "bytes";
+    /**
      * The size of a look-ahead buffer used by the binlog reader to decide
      * whether the transaction in progress is going to be committed or rolled
      * back. Use 0 to disable look-ahead buffering. Defaults to 0 (i.e.
@@ -473,6 +480,12 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String messageKeyColumns;
     /**
+     * The number of rows a table must contain to stream results rather than
+     * pull all into memory during snapshots. Defaults to 1,000. Use 0 to stream
+     * all results and completely avoid checking the size of each table.
+     */
+    private Integer minRowCountToStreamResults = 1000;
+    /**
      * Time to wait for new change events to appear after receiving no events,
      * given in milliseconds. Defaults to 500 ms. The option is a long type.
      */
@@ -762,6 +775,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setBigintUnsignedHandlingMode(String bigintUnsignedHandlingMode) {
         this.bigintUnsignedHandlingMode = bigintUnsignedHandlingMode;
+    }
+
+    public String getBinaryHandlingMode() {
+        return binaryHandlingMode;
+    }
+
+    public void setBinaryHandlingMode(String binaryHandlingMode) {
+        this.binaryHandlingMode = binaryHandlingMode;
     }
 
     public Integer getBinlogBufferSize() {
@@ -1200,6 +1221,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setMessageKeyColumns(String messageKeyColumns) {
         this.messageKeyColumns = messageKeyColumns;
+    }
+
+    public Integer getMinRowCountToStreamResults() {
+        return minRowCountToStreamResults;
+    }
+
+    public void setMinRowCountToStreamResults(Integer minRowCountToStreamResults) {
+        this.minRowCountToStreamResults = minRowCountToStreamResults;
     }
 
     public Long getPollIntervalMs() {

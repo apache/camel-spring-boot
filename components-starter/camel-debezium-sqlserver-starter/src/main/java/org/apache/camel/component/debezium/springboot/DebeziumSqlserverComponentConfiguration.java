@@ -164,7 +164,7 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String converters;
     /**
-     * The name of the database the connector should be monitoring
+     * The name of the database from which the connector should capture changes
      */
     private String databaseDbname;
     /**
@@ -228,6 +228,11 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String databaseInstance;
     /**
+     * The names of the databases from which the connector should capture
+     * changes
+     */
+    private String databaseNames;
+    /**
      * Password of the database user to be used when connecting to the database.
      */
     private String databasePassword;
@@ -242,11 +247,6 @@ public class DebeziumSqlserverComponentConfiguration
      * one Debezium connector.
      */
     private String databaseServerName;
-    /**
-     * The timezone of the server used to correctly shift the commit transaction
-     * timestamp on the client sideOptions include: Any valid Java ZoneId
-     */
-    private String databaseServerTimezone;
     /**
      * Name of the database user to be used when connecting to the database.
      */
@@ -762,6 +762,14 @@ public class DebeziumSqlserverComponentConfiguration
         this.databaseInstance = databaseInstance;
     }
 
+    public String getDatabaseNames() {
+        return databaseNames;
+    }
+
+    public void setDatabaseNames(String databaseNames) {
+        this.databaseNames = databaseNames;
+    }
+
     public String getDatabasePassword() {
         return databasePassword;
     }
@@ -784,14 +792,6 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setDatabaseServerName(String databaseServerName) {
         this.databaseServerName = databaseServerName;
-    }
-
-    public String getDatabaseServerTimezone() {
-        return databaseServerTimezone;
-    }
-
-    public void setDatabaseServerTimezone(String databaseServerTimezone) {
-        this.databaseServerTimezone = databaseServerTimezone;
     }
 
     public String getDatabaseUser() {

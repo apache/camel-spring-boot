@@ -45,7 +45,7 @@ public class KafkaComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.StateRepository.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.consumer.support.ResumeStrategy.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.consumer.support.KafkaConsumerResumeStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.KafkaManualCommitFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.PollExceptionStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.serde.KafkaHeaderSerializer.class));
@@ -72,7 +72,7 @@ public class KafkaComponentConverter implements GenericConverter {
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
             case "org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer": return applicationContext.getBean(ref, org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer.class);
             case "org.apache.camel.spi.StateRepository": return applicationContext.getBean(ref, org.apache.camel.spi.StateRepository.class);
-            case "org.apache.camel.component.kafka.consumer.support.ResumeStrategy": return applicationContext.getBean(ref, org.apache.camel.component.kafka.consumer.support.ResumeStrategy.class);
+            case "org.apache.camel.component.kafka.consumer.support.KafkaConsumerResumeStrategy": return applicationContext.getBean(ref, org.apache.camel.component.kafka.consumer.support.KafkaConsumerResumeStrategy.class);
             case "org.apache.camel.component.kafka.KafkaManualCommitFactory": return applicationContext.getBean(ref, org.apache.camel.component.kafka.KafkaManualCommitFactory.class);
             case "org.apache.camel.component.kafka.PollExceptionStrategy": return applicationContext.getBean(ref, org.apache.camel.component.kafka.PollExceptionStrategy.class);
             case "org.apache.camel.component.kafka.serde.KafkaHeaderSerializer": return applicationContext.getBean(ref, org.apache.camel.component.kafka.serde.KafkaHeaderSerializer.class);
