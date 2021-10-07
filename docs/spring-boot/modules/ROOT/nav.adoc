@@ -5,4 +5,5 @@
 ** xref:spring-cloud-netflix.adoc[Camel Spring Cloud Netflix]
 ** xref:spring-cloud-consul.adoc[Camel Spring Cloud Consul]
 * xref:list.adoc[List of starters]
+//* xref:list-old.adoc[old List of starters]
 
