@@ -100,7 +100,7 @@ public class UpdateDocComponentsListMojo extends AbstractMojo {
     /**
      * The website doc base directory
      */
-    @Parameter(defaultValue = "${project.directory}/../../../docs/modules/ROOT/pages")
+    @Parameter(defaultValue = "${project.directory}/../../../docs/spring-boot/modules/ROOT/pages")
     protected File websiteDocBaseDir;
 
     /**
