@@ -10,6 +10,6 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-openapi-java-starter",
-    "version": "3.7.6-SNAPSHOT"
+    "version": "3.7.7-SNAPSHOT"
   }
 }

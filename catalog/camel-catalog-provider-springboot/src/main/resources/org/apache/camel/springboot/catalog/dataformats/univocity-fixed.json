@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-univocity-parsers-starter",
-    "version": "3.7.6-SNAPSHOT",
+    "version": "3.7.7-SNAPSHOT",
     "modelName": "univocity-fixed",
     "modelJavaType": "org.apache.camel.model.dataformat.UniVocityFixedWidthDataFormat"
   },

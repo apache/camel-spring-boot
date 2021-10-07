@@ -12,7 +12,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-box-starter",
-    "version": "3.7.6-SNAPSHOT",
+    "version": "3.7.7-SNAPSHOT",
     "scheme": "box",
     "extendsScheme": "",
     "syntax": "box:apiName\/methodName",
