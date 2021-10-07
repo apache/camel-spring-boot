@@ -33,7 +33,7 @@ The component supports 29 options, which are listed below.
 | *camel.component.mina.codec* | To use a custom minda codec implementation. The option is a org.apache.mina.filter.codec.ProtocolCodecFactory type. |  | ProtocolCodecFactory
 | *camel.component.mina.configuration* | To use the shared mina configuration. The option is a org.apache.camel.component.mina.MinaConfiguration type. |  | MinaConfiguration
 | *camel.component.mina.decoder-max-line-length* | To set the textline protocol decoder max line length. By default the default value of Mina itself is used which are 1024. | 1024 | Integer
-| *camel.component.mina.disconnect* | Whether or not to disconnect(close) from Mina session right after use. Can be used for both consumer and producer. | false | Boolean
+| *camel.component.mina.disconnect* | Whether to disconnect(close) from Mina session right after use. Can be used for both consumer and producer. | false | Boolean
 | *camel.component.mina.disconnect-on-no-reply* | If sync is enabled then this option dictates MinaConsumer if it should disconnect where there is no reply to send back. | true | Boolean
 | *camel.component.mina.enabled* | Whether to enable auto configuration of the mina component. This is enabled by default. |  | Boolean
 | *camel.component.mina.encoder-max-line-length* | To set the textline protocol encoder max line length. By default the default value of Mina itself is used which are Integer.MAX_VALUE. | -1 | Integer
