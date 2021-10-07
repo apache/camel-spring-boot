@@ -1,4 +1,5 @@
 * xref:index.adoc[About]
 * xref:spring-boot.adoc[Camel Context starter]
 * xref:list.adoc[List of starters]
+//* xref:_list-old.adoc[old List of starters]
 

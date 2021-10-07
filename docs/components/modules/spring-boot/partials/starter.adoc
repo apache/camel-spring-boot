@@ -1,0 +1,33 @@
+include::jsonpathcount$spring-boot:example$json/{camel-spring-boot-name}.json[queries='sbpropertiescount=query$.properties[?(!(@.name.endsWith("customizer.enabled")))]']
+
+ifndef::starter-artifactid[]
+:starter-artifactid: {artifactid}-starter
+endif::[]
+
+== Spring Boot Auto-Configuration
+
+When using {shortname} with Spring Boot make sure to use the following Maven dependency to have support for auto configuration:
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>org.apache.camel.springboot</groupId>
+  <artifactId>{starter-artifactid}</artifactId>
+  <version>x.x.x</version>
+  <!-- use the same version as your Camel core version -->
+</dependency>
+----
+
+ifeval::[{sbpropertiescount} == 0]
+The component has no Spring Boot auto configuration options.
+endif::[]
+ifeval::[{sbpropertiescount} != 0]
+The component supports {sbpropertiescount} options, which are listed below.
+
+[width="100%",cols="2a,5,^1,2",options="header"]
+|===
+| Name | Description | Default | Type
+|===
+
+jsonpathTable2::spring-boot:example$json/{camel-spring-boot-name}.json[query='nodes$.properties[?(!(@.name.endsWith("customizer.enabled")))]', cellformats='util.boldLink(value.name, "sb_option")|util.description(value)|util.valueAsString(value.defaultValue)|util.javaSimpleName(value.type)', {requires}]
+endif::[]
