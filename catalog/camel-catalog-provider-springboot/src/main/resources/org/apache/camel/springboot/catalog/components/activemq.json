@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-activemq-starter",
-    "version": "3.11.1-SNAPSHOT",
+    "version": "3.11.3-SNAPSHOT",
     "scheme": "activemq",
     "extendsScheme": "jms",
     "syntax": "activemq:destinationType:destinationName",

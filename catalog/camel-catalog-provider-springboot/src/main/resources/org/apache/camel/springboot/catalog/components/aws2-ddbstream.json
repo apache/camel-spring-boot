@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-aws2-ddb-starter",
-    "version": "3.11.1-SNAPSHOT",
+    "version": "3.11.3-SNAPSHOT",
     "scheme": "aws2-ddbstream",
     "extendsScheme": "",
     "syntax": "aws2-ddbstream:tableName",

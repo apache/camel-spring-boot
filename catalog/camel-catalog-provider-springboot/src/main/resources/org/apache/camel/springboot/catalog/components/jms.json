@@ -12,7 +12,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-jms-starter",
-    "version": "3.11.1-SNAPSHOT",
+    "version": "3.11.3-SNAPSHOT",
     "scheme": "jms",
     "extendsScheme": "",
     "syntax": "jms:destinationType:destinationName",
