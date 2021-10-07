@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-json-validator-starter",
-    "version": "3.7.6-SNAPSHOT",
+    "version": "3.7.7-SNAPSHOT",
     "scheme": "json-validator",
     "extendsScheme": "",
     "syntax": "json-validator:resourceUri",

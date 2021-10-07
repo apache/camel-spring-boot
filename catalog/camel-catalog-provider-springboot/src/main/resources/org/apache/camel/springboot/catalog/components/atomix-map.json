@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-atomix-starter",
-    "version": "3.7.6-SNAPSHOT",
+    "version": "3.7.7-SNAPSHOT",
     "scheme": "atomix-map",
     "extendsScheme": "",
     "syntax": "atomix-map:resourceName",
