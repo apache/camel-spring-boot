@@ -1,0 +1,81 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.jooq",
+      "type": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration",
+      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration"
+    },
+    {
+      "name": "camel.component.jooq.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.jooq.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.jooq.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.jooq.configuration",
+      "type": "org.apache.camel.component.jooq.JooqConfiguration",
+      "description": "Component configuration (database connection, database entity type, etc.). The option is a org.apache.camel.component.jooq.JooqConfiguration type.",
+      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration"
+    },
+    {
+      "name": "camel.component.jooq.consume-delete",
+      "type": "java.lang.Boolean",
+      "description": "Delete entity after it is consumed",
+      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.jooq.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.jooq.database-configuration",
+      "type": "org.jooq.Configuration",
+      "description": "To use a specific database configuration. The option is a org.jooq.Configuration type.",
+      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration"
+    },
+    {
+      "name": "camel.component.jooq.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the jooq component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration"
+    },
+    {
+      "name": "camel.component.jooq.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.jooq.operation",
+      "type": "org.apache.camel.component.jooq.JooqOperation",
+      "description": "Type of operation to execute on query",
+      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration"
+    },
+    {
+      "name": "camel.component.jooq.query",
+      "type": "java.lang.String",
+      "description": "To execute plain SQL query",
+      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

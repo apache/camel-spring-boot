@@ -1,0 +1,134 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.google-storage",
+      "type": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-storage.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.google-storage.auto-create-bucket",
+      "type": "java.lang.Boolean",
+      "description": "Setting the autocreation of the bucket bucketName.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-storage.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-storage.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.google-storage.configuration",
+      "type": "org.apache.camel.component.google.storage.GoogleCloudStorageConfiguration",
+      "description": "The component configuration. The option is a org.apache.camel.component.google.storage.GoogleCloudStorageConfiguration type.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-storage.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.google-storage.delete-after-read",
+      "type": "java.lang.Boolean",
+      "description": "Delete objects from the bucket after they have been retrieved. The delete is only performed if the Exchange is committed. If a rollback occurs, the object is not deleted. If this option is false, then the same objects will be retrieve over and over again on the polls.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-storage.destination-bucket",
+      "type": "java.lang.String",
+      "description": "Define the destination bucket where an object must be moved when moveAfterRead is set to true.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-storage.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the google-storage component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-storage.include-body",
+      "type": "java.lang.Boolean",
+      "description": "If it is true, the Object exchange will be consumed and put into the body. If false the Object stream will be put raw into the body and the headers will be set with the object metadata.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-storage.include-folders",
+      "type": "java.lang.Boolean",
+      "description": "If it is true, the folders\/directories will be consumed. If it is false, they will be ignored, and Exchanges will not be created for those",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-storage.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.google-storage.move-after-read",
+      "type": "java.lang.Boolean",
+      "description": "Move objects from the origin bucket to a different bucket after they have been retrieved. To accomplish the operation the destinationBucket option must be set. The copy bucket operation is only performed if the Exchange is committed. If a rollback occurs, the object is not moved.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.google-storage.object-name",
+      "type": "java.lang.String",
+      "description": "The Object name inside the bucket",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-storage.operation",
+      "type": "org.apache.camel.component.google.storage.GoogleCloudStorageOperations",
+      "description": "Set the operation for the producer",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-storage.service-account-key",
+      "type": "java.lang.String",
+      "description": "The Service account key that can be used as credentials for the Storage client. It can be loaded by default from classpath, but you can prefix with classpath:, file:, or http: to load the resource from different systems.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-storage.storage-class",
+      "type": "com.google.cloud.storage.StorageClass",
+      "description": "The Cloud Storage class to use when creating the new buckets. The option is a com.google.cloud.storage.StorageClass type.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-storage.storage-client",
+      "type": "com.google.cloud.storage.Storage",
+      "description": "The storage client. The option is a com.google.cloud.storage.Storage type.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-storage.storage-location",
+      "type": "java.lang.String",
+      "description": "The Cloud Storage location to use when creating the new buckets",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": "US-EAST1"
+    }
+  ],
+  "hints": []
+}
