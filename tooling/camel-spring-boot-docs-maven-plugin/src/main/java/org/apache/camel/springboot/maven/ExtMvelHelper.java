@@ -58,8 +58,9 @@ public class ExtMvelHelper {
 
     public String getDocLink(ArtifactModel<?> model) {
         if (isLocalComponent(model)) {
-            throw new RuntimeException("unexpected local model " + ((ArtifactModel<?>) model).getName());
-//            return String.format("xref:%s.adoc", ((ArtifactModel<?>) model).getName());
+//            throw new RuntimeException("unexpected local model " + ((ArtifactModel<?>) model).getName());
+            //there is at least one local component
+            return String.format("xref:%s.adoc", ((ArtifactModel<?>) model).getName());
         } else if (model instanceof ComponentModel) {
             return String.format("xref:%s@components::%s-component.adoc", CAMEL_VERSION, ((ComponentModel) model).getScheme());
         } else if (model instanceof DataFormatModel) {
