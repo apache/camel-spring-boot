@@ -1,0 +1,148 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.box",
+      "type": "org.apache.camel.component.box.springboot.BoxComponentConfiguration",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.box.access-token-cache",
+      "type": "com.box.sdk.IAccessTokenCache",
+      "description": "Custom Access Token Cache for storing and retrieving access tokens. The option is a com.box.sdk.IAccessTokenCache type.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.authentication-type",
+      "type": "java.lang.String",
+      "description": "The type of authentication for connection. Types of Authentication: STANDARD_AUTHENTICATION - OAuth 2.0 (3-legged) SERVER_AUTHENTICATION - OAuth 2.0 with JSON Web Tokens",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration",
+      "defaultValue": "APP_USER_AUTHENTICATION"
+    },
+    {
+      "name": "camel.component.box.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.box.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.box.client-id",
+      "type": "java.lang.String",
+      "description": "Box application client ID",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.client-secret",
+      "type": "java.lang.String",
+      "description": "Box application client secret",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.configuration",
+      "type": "org.apache.camel.component.box.BoxConfiguration",
+      "description": "To use the shared configuration. The option is a org.apache.camel.component.box.BoxConfiguration type.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.box.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the box component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.encryption-algorithm",
+      "type": "com.box.sdk.EncryptionAlgorithm",
+      "description": "The type of encryption algorithm for JWT. Supported Algorithms: RSA_SHA_256 RSA_SHA_384 RSA_SHA_512",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.enterprise-id",
+      "type": "java.lang.String",
+      "description": "The enterprise ID to use for an App Enterprise.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.http-params",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Custom HTTP params for settings like proxy host",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.box.max-cache-entries",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of access tokens in cache.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration",
+      "defaultValue": 100
+    },
+    {
+      "name": "camel.component.box.private-key-file",
+      "type": "java.lang.String",
+      "description": "The private key for generating the JWT signature.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.private-key-password",
+      "type": "java.lang.String",
+      "description": "The password for the private key.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.public-key-id",
+      "type": "java.lang.String",
+      "description": "The ID for public key for validating the JWT signature.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.user-id",
+      "type": "java.lang.String",
+      "description": "The user ID to use for an App User.",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.user-name",
+      "type": "java.lang.String",
+      "description": "Box user name, MUST be provided",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.box.user-password",
+      "type": "java.lang.String",
+      "description": "Box user password, MUST be provided if authSecureStorage is not set, or returns null on first call",
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+    }
+  ],
+  "hints": []
+}
