@@ -39,7 +39,7 @@ Next, add the xref:spring-boot.adoc[Camel Spring Boot starter] to startup the xr
     </dependencies>
 ----
 
-And any xref:list.adoc[component starters] your Spring Boot application requires. For example this adds the xref:activemq-starter.adoc[starter] for the xref:components::activemq-component.adoc[ActiveMQ component].
+And any xref:list.adoc[component starters] your Spring Boot application requires. For example this adds the xref:components::activemq-component.adoc#_spring_boot_auto_configuration[auto-configuration starter] for the xref:components::activemq-component.adoc[ActiveMQ component].
 
 [source,xml]
 ----
