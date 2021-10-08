@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.jpa.springboot;
 
+import java.util.Map;
 import javax.annotation.Generated;
 import javax.persistence.EntityManagerFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -39,6 +40,11 @@ public class JpaComponentConfiguration
      * enabled by default.
      */
     private Boolean enabled;
+    /**
+     * Maps an alias to a JPA entity class. The alias can then be used in the
+     * endpoint URI (instead of the fully qualified class name).
+     */
+    private Map<String, Class<Object>> aliases;
     /**
      * To use the EntityManagerFactory. This is strongly recommended to
      * configure. The option is a javax.persistence.EntityManagerFactory type.
@@ -93,6 +99,14 @@ public class JpaComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public Map<String, Class<Object>> getAliases() {
+        return aliases;
+    }
+
+    public void setAliases(Map<String, Class<Object>> aliases) {
+        this.aliases = aliases;
+    }
 
     public EntityManagerFactory getEntityManagerFactory() {
         return entityManagerFactory;
