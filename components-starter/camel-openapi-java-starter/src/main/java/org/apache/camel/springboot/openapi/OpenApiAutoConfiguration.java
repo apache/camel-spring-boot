@@ -97,13 +97,10 @@ public class OpenApiAutoConfiguration {
                         if (created.getPaths() != null) {
                             openAPI.setPaths(created.getPaths());
                         }
-                        // TODO: servers is not correct
-//                        if (created.getServers() != null) {
-//                            openAPI.setServers(created.getServers());
-//                        }
                         if (created.getTags() != null) {
                             openAPI.setTags(created.getTags());
                         }
+                        // do not copy servers as we use the spring-boot configured setting
                     }
                 } catch (Exception e) {
                     LOG.warn("Error generating OpenAPI from Camel Rest DSL due to: " + e.getMessage() + ". This exception is ignored.", e);
