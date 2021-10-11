@@ -1,0 +1,216 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.aws-swf",
+      "type": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.aws-swf.access-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Access Key.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.activity-list",
+      "type": "java.lang.String",
+      "description": "The list name to consume activities from.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.activity-scheduling-options",
+      "type": "com.amazonaws.services.simpleworkflow.flow.ActivitySchedulingOptions",
+      "description": "Activity scheduling options. The option is a com.amazonaws.services.simpleworkflow.flow.ActivitySchedulingOptions type.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.activity-thread-pool-size",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of threads in work pool for activity.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration",
+      "defaultValue": 100
+    },
+    {
+      "name": "camel.component.aws-swf.activity-type-execution-options",
+      "type": "com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeExecutionOptions",
+      "description": "Activity execution options. The option is a com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeExecutionOptions type.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.activity-type-registration-options",
+      "type": "com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeRegistrationOptions",
+      "description": "Activity registration options. The option is a com.amazonaws.services.simpleworkflow.flow.worker.ActivityTypeRegistrationOptions type.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.amazon-s-w-client",
+      "type": "com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflow",
+      "description": "To use the given AmazonSimpleWorkflowClient as client. The option is a com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflow type.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws-swf.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-swf.child-policy",
+      "type": "java.lang.String",
+      "description": "The policy to use on child workflows when terminating a workflow.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.client-configuration-parameters",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "To configure the ClientConfiguration using the key\/values from the Map.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.configuration",
+      "type": "org.apache.camel.component.aws.swf.SWFConfiguration",
+      "description": "The component configuration. The option is a org.apache.camel.component.aws.swf.SWFConfiguration type.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.aws-swf.data-converter",
+      "type": "com.amazonaws.services.simpleworkflow.flow.DataConverter",
+      "description": "An instance of com.amazonaws.services.simpleworkflow.flow.DataConverter to use for serializing\/deserializing the data. The option is a com.amazonaws.services.simpleworkflow.flow.DataConverter type.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.domain-name",
+      "type": "java.lang.String",
+      "description": "The workflow domain to use.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the aws-swf component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.event-name",
+      "type": "java.lang.String",
+      "description": "The workflow or activity event name to use.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.execution-start-to-close-timeout",
+      "type": "java.lang.String",
+      "description": "Set the execution start to close timeout.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration",
+      "defaultValue": "3600"
+    },
+    {
+      "name": "camel.component.aws-swf.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-swf.operation",
+      "type": "java.lang.String",
+      "description": "Workflow operation",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration",
+      "defaultValue": "START"
+    },
+    {
+      "name": "camel.component.aws-swf.region",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Region. When using this parameter, the configuration will expect the capitalized name of the region (for example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name()",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.s-w-client-parameters",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "To configure the AmazonSimpleWorkflowClient using the key\/values from the Map.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.secret-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Secret Key.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.signal-name",
+      "type": "java.lang.String",
+      "description": "The name of the signal to send to the workflow.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.start-workflow-options-parameters",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "To configure the StartWorkflowOptions using the key\/values from the Map.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.state-result-type",
+      "type": "java.lang.String",
+      "description": "The type of the result when a workflow state is queried.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.task-start-to-close-timeout",
+      "type": "java.lang.String",
+      "description": "Set the task start to close timeout.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration",
+      "defaultValue": "600"
+    },
+    {
+      "name": "camel.component.aws-swf.termination-details",
+      "type": "java.lang.String",
+      "description": "Details for terminating a workflow.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.termination-reason",
+      "type": "java.lang.String",
+      "description": "The reason for terminating a workflow.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.version",
+      "type": "java.lang.String",
+      "description": "The workflow or activity event version to use.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.workflow-list",
+      "type": "java.lang.String",
+      "description": "The list name to consume workflows from.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-swf.workflow-type-registration-options",
+      "type": "com.amazonaws.services.simpleworkflow.flow.WorkflowTypeRegistrationOptions",
+      "description": "Workflow registration options. The option is a com.amazonaws.services.simpleworkflow.flow.WorkflowTypeRegistrationOptions type.",
+      "sourceType": "org.apache.camel.component.aws.swf.springboot.SWFComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

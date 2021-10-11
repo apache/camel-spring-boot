@@ -1,0 +1,87 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.vertx",
+      "type": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration",
+      "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.vertx.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.vertx.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.vertx.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.vertx.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the vertx component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx.host",
+      "type": "java.lang.String",
+      "description": "Hostname for creating an embedded clustered EventBus",
+      "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.vertx.port",
+      "type": "java.lang.Integer",
+      "description": "Port for creating an embedded clustered EventBus",
+      "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx.timeout",
+      "type": "java.lang.Integer",
+      "description": "Timeout in seconds to wait for clustered Vertx EventBus to be ready. The default value is 60.",
+      "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration",
+      "defaultValue": 60
+    },
+    {
+      "name": "camel.component.vertx.vertx",
+      "type": "io.vertx.core.Vertx",
+      "description": "To use the given vertx EventBus instead of creating a new embedded EventBus. The option is a io.vertx.core.Vertx type.",
+      "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx.vertx-factory",
+      "type": "io.vertx.core.spi.VertxFactory",
+      "description": "To use a custom VertxFactory implementation. The option is a io.vertx.core.spi.VertxFactory type.",
+      "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx.vertx-options",
+      "type": "io.vertx.core.VertxOptions",
+      "description": "Options to use for creating vertx. The option is a io.vertx.core.VertxOptions type.",
+      "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

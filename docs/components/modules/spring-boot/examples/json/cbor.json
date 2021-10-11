@@ -1,0 +1,94 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.cbor",
+      "type": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.cbor.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.cbor.allow-jms-type",
+      "type": "java.lang.Boolean",
+      "description": "Used for JMS users to allow the JMSType header from the JMS spec to specify a FQN classname to use to unmarshal to.",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.cbor.allow-unmarshall-type",
+      "type": "java.lang.Boolean",
+      "description": "If enabled then Jackson CBOR is allowed to attempt to use the CamelCBORUnmarshalType header during the unmarshalling. This should only be enabled when desired to be used.",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.cbor.collection-type-name",
+      "type": "java.lang.String",
+      "description": "Refers to a custom collection type to lookup in the registry to use. This option should rarely be used, but allows to use different collection types than java.util.Collection based as default.",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.cbor.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.cbor.disable-features",
+      "type": "java.lang.String",
+      "description": "Set of features to disable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. The features should be a name that matches a enum from com.fasterxml.jackson.databind.SerializationFeature, com.fasterxml.jackson.databind.DeserializationFeature, or com.fasterxml.jackson.databind.MapperFeature Multiple features can be separated by comma",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.cbor.enable-features",
+      "type": "java.lang.String",
+      "description": "Set of features to enable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. The features should be a name that matches a enum from com.fasterxml.jackson.databind.SerializationFeature, com.fasterxml.jackson.databind.DeserializationFeature, or com.fasterxml.jackson.databind.MapperFeature Multiple features can be separated by comma",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.cbor.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the cbor data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.cbor.object-mapper",
+      "type": "java.lang.String",
+      "description": "Lookup and use the existing CBOR ObjectMapper with the given id when using Jackson.",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.cbor.pretty-print",
+      "type": "java.lang.Boolean",
+      "description": "To enable pretty printing output nicely formatted. Is by default false.",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.cbor.unmarshal-type-name",
+      "type": "java.lang.String",
+      "description": "Class name of the java type to use when unmarshalling",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.cbor.use-default-object-mapper",
+      "type": "java.lang.Boolean",
+      "description": "Whether to lookup and use default Jackson CBOR ObjectMapper from the registry.",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.cbor.use-list",
+      "type": "java.lang.Boolean",
+      "description": "To unmarshal to a List of Map or a List of Pojo.",
+      "sourceType": "org.apache.camel.component.cbor.springboot.CBORDataFormatConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}

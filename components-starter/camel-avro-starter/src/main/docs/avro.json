@@ -1,0 +1,35 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.avro",
+      "type": "org.apache.camel.dataformat.avro.springboot.AvroDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.avro.springboot.AvroDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.avro.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.avro.springboot.AvroDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.avro.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.avro.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the avro data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.avro.springboot.AvroDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.avro.instance-class-name",
+      "type": "java.lang.String",
+      "description": "Class name to use for marshal and unmarshalling",
+      "sourceType": "org.apache.camel.dataformat.avro.springboot.AvroDataFormatConfiguration"
+    }
+  ],
+  "hints": []
+}

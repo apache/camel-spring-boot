@@ -1,0 +1,36 @@
+{
+  "groups": [
+    {
+      "name": "camel.language.ognl",
+      "type": "org.apache.camel.language.ognl.springboot.OgnlLanguageConfiguration",
+      "sourceType": "org.apache.camel.language.ognl.springboot.OgnlLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.ognl.customizer",
+      "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.language.ognl.springboot.OgnlLanguageConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.language.ognl.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.language.ognl.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the ognl language. This is enabled by default.",
+      "sourceType": "org.apache.camel.language.ognl.springboot.OgnlLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.ognl.trim",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "sourceType": "org.apache.camel.language.ognl.springboot.OgnlLanguageConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}

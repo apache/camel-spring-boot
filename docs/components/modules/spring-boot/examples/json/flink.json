@@ -1,0 +1,61 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.flink",
+      "type": "org.apache.camel.component.flink.springboot.FlinkComponentConfiguration",
+      "sourceType": "org.apache.camel.component.flink.springboot.FlinkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.flink.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.flink.springboot.FlinkComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.flink.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.flink.springboot.FlinkComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.flink.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.flink.data-set-callback",
+      "type": "org.apache.camel.component.flink.DataSetCallback",
+      "description": "Function performing action against a DataSet. The option is a org.apache.camel.component.flink.DataSetCallback type.",
+      "sourceType": "org.apache.camel.component.flink.springboot.FlinkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.flink.data-stream",
+      "type": "org.apache.flink.streaming.api.datastream.DataStream",
+      "description": "DataStream to compute against. The option is a org.apache.flink.streaming.api.datastream.DataStream type.",
+      "sourceType": "org.apache.camel.component.flink.springboot.FlinkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.flink.data-stream-callback",
+      "type": "org.apache.camel.component.flink.DataStreamCallback",
+      "description": "Function performing action against a DataStream. The option is a org.apache.camel.component.flink.DataStreamCallback type.",
+      "sourceType": "org.apache.camel.component.flink.springboot.FlinkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.flink.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the flink component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.flink.springboot.FlinkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.flink.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.flink.springboot.FlinkComponentConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,33 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.hystrix.mapping",
+      "type": "org.apache.camel.component.hystrix.springboot.HystrixMappingConfiguration",
+      "sourceType": "org.apache.camel.component.hystrix.springboot.HystrixMappingConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.hystrix.mapping.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables the automatic mapping of the hystrics metric servlet into the Spring web context.",
+      "sourceType": "org.apache.camel.component.hystrix.springboot.HystrixMappingConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.hystrix.mapping.path",
+      "type": "java.lang.String",
+      "description": "Endpoint for hystrix metrics servlet.",
+      "sourceType": "org.apache.camel.component.hystrix.springboot.HystrixMappingConfiguration",
+      "defaultValue": "\/hystrix.stream"
+    },
+    {
+      "name": "camel.component.hystrix.mapping.servlet-name",
+      "type": "java.lang.String",
+      "description": "Name of the Hystrix metrics servlet.",
+      "sourceType": "org.apache.camel.component.hystrix.springboot.HystrixMappingConfiguration",
+      "defaultValue": "HystrixEventStreamServlet"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,112 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.mybatis",
+      "type": "org.apache.camel.component.mybatis.springboot.MyBatisComponentConfiguration",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisComponentConfiguration"
+    },
+    {
+      "name": "camel.component.mybatis-bean",
+      "type": "org.apache.camel.component.mybatis.springboot.MyBatisBeanComponentConfiguration",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisBeanComponentConfiguration"
+    },
+    {
+      "name": "camel.component.mybatis-bean.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisBeanComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.mybatis.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.mybatis-bean.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisBeanComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.mybatis-bean.configuration-uri",
+      "type": "java.lang.String",
+      "description": "Location of MyBatis xml configuration file. The default value is: SqlMapConfig.xml loaded from the classpath",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisBeanComponentConfiguration",
+      "defaultValue": "SqlMapConfig.xml"
+    },
+    {
+      "name": "camel.component.mybatis-bean.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.mybatis-bean.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the mybatis-bean component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisBeanComponentConfiguration"
+    },
+    {
+      "name": "camel.component.mybatis-bean.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisBeanComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.mybatis-bean.sql-session-factory",
+      "type": "org.apache.ibatis.session.SqlSessionFactory",
+      "description": "To use the SqlSessionFactory. The option is a org.apache.ibatis.session.SqlSessionFactory type.",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisBeanComponentConfiguration"
+    },
+    {
+      "name": "camel.component.mybatis.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.mybatis.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.mybatis.configuration-uri",
+      "type": "java.lang.String",
+      "description": "Location of MyBatis xml configuration file. The default value is: SqlMapConfig.xml loaded from the classpath",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisComponentConfiguration",
+      "defaultValue": "SqlMapConfig.xml"
+    },
+    {
+      "name": "camel.component.mybatis.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.mybatis.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the mybatis component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisComponentConfiguration"
+    },
+    {
+      "name": "camel.component.mybatis.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.mybatis.sql-session-factory",
+      "type": "org.apache.ibatis.session.SqlSessionFactory",
+      "description": "To use the SqlSessionFactory. The option is a org.apache.ibatis.session.SqlSessionFactory type.",
+      "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

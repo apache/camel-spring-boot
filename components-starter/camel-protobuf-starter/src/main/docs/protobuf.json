@@ -1,0 +1,49 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.protobuf",
+      "type": "org.apache.camel.dataformat.protobuf.springboot.ProtobufDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.protobuf.springboot.ProtobufDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.protobuf.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.protobuf.springboot.ProtobufDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.protobuf.content-type-format",
+      "type": "java.lang.String",
+      "description": "Defines a content type format in which protobuf message will be serialized\/deserialized from(to) the Java been. The format can either be native or json for either native protobuf or json fields representation. The default value is native.",
+      "sourceType": "org.apache.camel.dataformat.protobuf.springboot.ProtobufDataFormatConfiguration",
+      "defaultValue": "native"
+    },
+    {
+      "name": "camel.dataformat.protobuf.content-type-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether the data format should set the Content-Type header with the type from the data format. For example application\/xml for data formats marshalling to XML, or application\/json for data formats marshalling to JSON",
+      "sourceType": "org.apache.camel.dataformat.protobuf.springboot.ProtobufDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.protobuf.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.protobuf.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the protobuf data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.protobuf.springboot.ProtobufDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.protobuf.instance-class",
+      "type": "java.lang.String",
+      "description": "Name of class to use when unmarshalling",
+      "sourceType": "org.apache.camel.dataformat.protobuf.springboot.ProtobufDataFormatConfiguration"
+    }
+  ],
+  "hints": []
+}

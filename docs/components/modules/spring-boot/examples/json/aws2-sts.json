@@ -1,0 +1,112 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.aws2-sts",
+      "type": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-sts.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.aws2-sts.access-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Access Key",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-sts.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-sts.configuration",
+      "type": "org.apache.camel.component.aws2.sts.STS2Configuration",
+      "description": "Component configuration. The option is a org.apache.camel.component.aws2.sts.STS2Configuration type.",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-sts.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.aws2-sts.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the aws2-sts component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-sts.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-sts.operation",
+      "type": "org.apache.camel.component.aws2.sts.STS2Operations",
+      "description": "The operation to perform",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-sts.pojo-request",
+      "type": "java.lang.Boolean",
+      "description": "If we want to use a POJO request as body or not",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-sts.proxy-host",
+      "type": "java.lang.String",
+      "description": "To define a proxy host when instantiating the STS client",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-sts.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "To define a proxy port when instantiating the STS client",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-sts.proxy-protocol",
+      "type": "software.amazon.awssdk.core.Protocol",
+      "description": "To define a proxy protocol when instantiating the STS client",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-sts.region",
+      "type": "java.lang.String",
+      "description": "The region in which STS client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration",
+      "defaultValue": "aws-global"
+    },
+    {
+      "name": "camel.component.aws2-sts.secret-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Secret Key",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-sts.sts-client",
+      "type": "software.amazon.awssdk.services.sts.StsClient",
+      "description": "To use a existing configured AWS STS as client. The option is a software.amazon.awssdk.services.sts.StsClient type.",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-sts.trust-all-certificates",
+      "type": "java.lang.Boolean",
+      "description": "If we want to trust all certificates in case of overriding the endpoint",
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}

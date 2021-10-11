@@ -1,0 +1,48 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.json-jsonb",
+      "type": "org.apache.camel.component.jsonb.springboot.JsonbDataFormatConfiguration",
+      "sourceType": "org.apache.camel.component.jsonb.springboot.JsonbDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.json-jsonb.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.jsonb.springboot.JsonbDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.json-jsonb.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.json-jsonb.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the json-jsonb data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.jsonb.springboot.JsonbDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.json-jsonb.object-mapper",
+      "type": "java.lang.String",
+      "description": "Lookup and use the existing Jsonb instance with the given id.",
+      "sourceType": "org.apache.camel.component.jsonb.springboot.JsonbDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.json-jsonb.pretty-print",
+      "type": "java.lang.Boolean",
+      "description": "To enable pretty printing output nicely formatted. Is by default false.",
+      "sourceType": "org.apache.camel.component.jsonb.springboot.JsonbDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.json-jsonb.unmarshal-type-name",
+      "type": "java.lang.String",
+      "description": "Class name of the java type to use when unmarshalling",
+      "sourceType": "org.apache.camel.component.jsonb.springboot.JsonbDataFormatConfiguration"
+    }
+  ],
+  "hints": []
+}
