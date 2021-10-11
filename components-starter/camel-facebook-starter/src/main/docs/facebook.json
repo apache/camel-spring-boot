@@ -1,0 +1,235 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.facebook",
+      "type": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.facebook.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.facebook.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.facebook.client-u-r-l",
+      "type": "java.lang.String",
+      "description": "Facebook4J API client URL",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.client-version",
+      "type": "java.lang.String",
+      "description": "Facebook4J client API version",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.configuration",
+      "type": "org.apache.camel.component.facebook.config.FacebookConfiguration",
+      "description": "To use the shared configuration. The option is a org.apache.camel.component.facebook.config.FacebookConfiguration type.",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.facebook.debug-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables deubg output. Effective only with the embedded logger",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.facebook.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the facebook component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.gzip-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Use Facebook GZIP encoding",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.facebook.http-connection-timeout",
+      "type": "java.lang.Integer",
+      "description": "Http connection timeout in milliseconds",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": 20000
+    },
+    {
+      "name": "camel.component.facebook.http-default-max-per-route",
+      "type": "java.lang.Integer",
+      "description": "HTTP maximum connections per route",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": 2
+    },
+    {
+      "name": "camel.component.facebook.http-max-total-connections",
+      "type": "java.lang.Integer",
+      "description": "HTTP maximum total connections",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": 20
+    },
+    {
+      "name": "camel.component.facebook.http-proxy-host",
+      "type": "java.lang.String",
+      "description": "HTTP proxy server host name",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.http-proxy-password",
+      "type": "java.lang.String",
+      "description": "HTTP proxy server password",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.http-proxy-port",
+      "type": "java.lang.Integer",
+      "description": "HTTP proxy server port",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.http-proxy-user",
+      "type": "java.lang.String",
+      "description": "HTTP proxy server user name",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.http-read-timeout",
+      "type": "java.lang.Integer",
+      "description": "Http read timeout in milliseconds",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": 120000
+    },
+    {
+      "name": "camel.component.facebook.http-retry-count",
+      "type": "java.lang.Integer",
+      "description": "Number of HTTP retries",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.facebook.http-retry-interval-seconds",
+      "type": "java.lang.Integer",
+      "description": "HTTP retry interval in seconds",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": 5
+    },
+    {
+      "name": "camel.component.facebook.http-streaming-read-timeout",
+      "type": "java.lang.Integer",
+      "description": "HTTP streaming read timeout in milliseconds",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": 40000
+    },
+    {
+      "name": "camel.component.facebook.json-store-enabled",
+      "type": "java.lang.Boolean",
+      "description": "If set to true, raw JSON forms will be stored in DataObjectFactory",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.facebook.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.facebook.mbean-enabled",
+      "type": "java.lang.Boolean",
+      "description": "If set to true, Facebook4J mbean will be registerd",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.facebook.o-auth-access-token",
+      "type": "java.lang.String",
+      "description": "The user access token",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.o-auth-access-token-u-r-l",
+      "type": "java.lang.String",
+      "description": "OAuth access token URL",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": "https:\/\/graph.facebook.com\/oauth\/access_token"
+    },
+    {
+      "name": "camel.component.facebook.o-auth-app-id",
+      "type": "java.lang.String",
+      "description": "The application Id",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.o-auth-app-secret",
+      "type": "java.lang.String",
+      "description": "The application Secret",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.o-auth-authorization-u-r-l",
+      "type": "java.lang.String",
+      "description": "OAuth authorization URL",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": "https:\/\/www.facebook.com\/dialog\/oauth"
+    },
+    {
+      "name": "camel.component.facebook.o-auth-permissions",
+      "type": "java.lang.String",
+      "description": "Default OAuth permissions. Comma separated permission names. See https:\/\/developers.facebook.com\/docs\/reference\/login\/#permissions for the detail",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration"
+    },
+    {
+      "name": "camel.component.facebook.pretty-debug-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Prettify JSON debug output if set to true",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.facebook.rest-base-u-r-l",
+      "type": "java.lang.String",
+      "description": "API base URL",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": "https:\/\/graph.facebook.com\/"
+    },
+    {
+      "name": "camel.component.facebook.use-s-s-l",
+      "type": "java.lang.Boolean",
+      "description": "Use SSL",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.facebook.video-base-u-r-l",
+      "type": "java.lang.String",
+      "description": "Video API base URL",
+      "sourceType": "org.apache.camel.component.facebook.springboot.FacebookComponentConfiguration",
+      "defaultValue": "https:\/\/graph-video.facebook.com\/"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,103 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.arangodb",
+      "type": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.arangodb.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.arangodb.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.arangodb.configuration",
+      "type": "org.apache.camel.component.arangodb.ArangoDbConfiguration",
+      "description": "Component configuration. The option is a org.apache.camel.component.arangodb.ArangoDbConfiguration type.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.arangodb.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.arangodb.document-collection",
+      "type": "java.lang.String",
+      "description": "Collection name, when using ArangoDb as a Document Database. Set the documentCollection name when using the CRUD operation on the document database collections (SAVE_DOCUMENT , FIND_DOCUMENT_BY_KEY, UPDATE_DOCUMENT, DELETE_DOCUMENT).",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.arangodb.edge-collection",
+      "type": "java.lang.String",
+      "description": "Collection name of vertices, when using ArangoDb as a Graph Database. Set the edgeCollection name to perform CRUD operation on edges using these operations : SAVE_VERTEX, FIND_VERTEX_BY_KEY, UPDATE_VERTEX, DELETE_VERTEX. The graph attribute is mandatory.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.arangodb.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the arangodb component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.arangodb.graph",
+      "type": "java.lang.String",
+      "description": "Graph name, when using ArangoDb as a Graph Database. Combine this attribute with one of the two attributes vertexCollection and edgeCollection.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.arangodb.host",
+      "type": "java.lang.String",
+      "description": "ArangoDB host. If host and port are default, this field is Optional.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.arangodb.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.arangodb.operation",
+      "type": "org.apache.camel.component.arangodb.ArangoDbOperation",
+      "description": "Operations to perform on ArangoDb. For the operation AQL_QUERY, no need to specify a collection or graph.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.arangodb.password",
+      "type": "java.lang.String",
+      "description": "ArangoDB password. If user and password are default, this field is Optional.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.arangodb.port",
+      "type": "java.lang.Integer",
+      "description": "ArangoDB exposed port. If host and port are default, this field is Optional.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.arangodb.user",
+      "type": "java.lang.String",
+      "description": "ArangoDB user. If user and password are default, this field is Optional.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.arangodb.vertex-collection",
+      "type": "java.lang.String",
+      "description": "Collection name of vertices, when using ArangoDb as a Graph Database. Set the vertexCollection name to perform CRUD operation on vertices using these operations : SAVE_EDGE, FIND_EDGE_BY_KEY, UPDATE_EDGE, DELETE_EDGE. The graph attribute is mandatory.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

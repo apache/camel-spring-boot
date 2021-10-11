@@ -1,0 +1,90 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.seda",
+      "type": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration",
+      "sourceType": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.seda.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.seda.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.seda.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.seda.concurrent-consumers",
+      "type": "java.lang.Integer",
+      "description": "Sets the default number of concurrent threads processing exchanges.",
+      "sourceType": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration",
+      "defaultValue": 1
+    },
+    {
+      "name": "camel.component.seda.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.seda.default-block-when-full",
+      "type": "java.lang.Boolean",
+      "description": "Whether a thread that sends messages to a full SEDA queue will block until the queue's capacity is no longer exhausted. By default, an exception will be thrown stating that the queue is full. By enabling this option, the calling thread will instead block and wait until the message can be accepted.",
+      "sourceType": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.seda.default-discard-when-full",
+      "type": "java.lang.Boolean",
+      "description": "Whether a thread that sends messages to a full SEDA queue will be discarded. By default, an exception will be thrown stating that the queue is full. By enabling this option, the calling thread will give up sending and continue, meaning that the message was not sent to the SEDA queue.",
+      "sourceType": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.seda.default-offer-timeout",
+      "type": "java.lang.Long",
+      "description": "Whether a thread that sends messages to a full SEDA queue will block until the queue's capacity is no longer exhausted. By default, an exception will be thrown stating that the queue is full. By enabling this option, where a configured timeout can be added to the block case. Utilizing the .offer(timeout) method of the underlining java queue",
+      "sourceType": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.seda.default-queue-factory",
+      "type": "org.apache.camel.component.seda.BlockingQueueFactory<org.apache.camel.Exchange>",
+      "description": "Sets the default queue factory. The option is a org.apache.camel.component.seda.BlockingQueueFactory<org.apache.camel.Exchange> type.",
+      "sourceType": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.seda.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the seda component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.seda.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.seda.queue-size",
+      "type": "java.lang.Integer",
+      "description": "Sets the default maximum capacity of the SEDA queue (i.e., the number of messages it can hold).",
+      "sourceType": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration",
+      "defaultValue": 1000
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,36 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.ical",
+      "type": "org.apache.camel.component.ical.springboot.ICalDataFormatConfiguration",
+      "sourceType": "org.apache.camel.component.ical.springboot.ICalDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.ical.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.ical.springboot.ICalDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.ical.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.ical.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the ical data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.ical.springboot.ICalDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.ical.validating",
+      "type": "java.lang.Boolean",
+      "description": "Whether to validate.",
+      "sourceType": "org.apache.camel.component.ical.springboot.ICalDataFormatConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}
