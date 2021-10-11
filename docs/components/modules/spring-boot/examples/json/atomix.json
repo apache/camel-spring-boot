@@ -1,0 +1,864 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.atomix-map",
+      "type": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.atomix-messaging",
+      "type": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.atomix-multimap",
+      "type": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.atomix-queue",
+      "type": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.atomix-set",
+      "type": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.atomix-value",
+      "type": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.atomix.cluster.service",
+      "type": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration",
+      "sourceType": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.atomix-map.atomix",
+      "type": "io.atomix.Atomix",
+      "description": "The Atomix instance to use. The option is a io.atomix.Atomix type.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.atomix-map.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-map.configuration",
+      "type": "org.apache.camel.component.atomix.client.map.AtomixMapConfiguration",
+      "description": "The shared component configuration. The option is a org.apache.camel.component.atomix.client.map.AtomixMapConfiguration type.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.configuration-uri",
+      "type": "java.lang.String",
+      "description": "The path to the AtomixClient configuration",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.atomix-map.default-action",
+      "type": "org.apache.camel.component.atomix.client.map.AtomixMap$Action",
+      "description": "The default action.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.default-resource-config",
+      "type": "java.util.Properties",
+      "description": "The cluster wide default resource configuration. The option is a java.util.Properties type.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.default-resource-options",
+      "type": "java.util.Properties",
+      "description": "The local default resource options. The option is a java.util.Properties type.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the atomix-map component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.ephemeral",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-map.key",
+      "type": "java.lang.Object",
+      "description": "The key to use if none is set in the header or to listen for events for a specific key. The option is a java.lang.Object type.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-map.nodes",
+      "type": "java.util.List<io.atomix.catalyst.transport.Address>",
+      "description": "The nodes the AtomixClient should connect to",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.read-consistency",
+      "type": "io.atomix.resource.ReadConsistency",
+      "description": "The read consistency level.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.resource-configs",
+      "type": "java.util.Map<java.lang.String,java.util.Properties>",
+      "description": "Cluster wide resources configuration.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.resource-options",
+      "type": "java.util.Map<java.lang.String,java.util.Properties>",
+      "description": "Local resources configurations",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.result-header",
+      "type": "java.lang.String",
+      "description": "The header that wil carry the result.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-map.transport-class-name",
+      "type": "java.lang.String",
+      "description": "The class name (fqn) of the Atomix transport",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration",
+      "defaultValue": "io.atomix.catalyst.transport.netty.NettyTransport"
+    },
+    {
+      "name": "camel.component.atomix-map.ttl",
+      "type": "java.lang.Long",
+      "description": "The resource ttl. The option is a long type.",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.atomix",
+      "type": "io.atomix.Atomix",
+      "description": "The Atomix instance to use. The option is a io.atomix.Atomix type.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.atomix-messaging.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-messaging.broadcast-type",
+      "type": "org.apache.camel.component.atomix.client.messaging.AtomixMessaging$BroadcastType",
+      "description": "The broadcast type.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.channel-name",
+      "type": "java.lang.String",
+      "description": "The messaging channel name",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.configuration",
+      "type": "org.apache.camel.component.atomix.client.messaging.AtomixMessagingConfiguration",
+      "description": "The shared component configuration. The option is a org.apache.camel.component.atomix.client.messaging.AtomixMessagingConfiguration type.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.configuration-uri",
+      "type": "java.lang.String",
+      "description": "The path to the AtomixClient configuration",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.atomix-messaging.default-action",
+      "type": "org.apache.camel.component.atomix.client.messaging.AtomixMessaging$Action",
+      "description": "The default action.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.default-resource-config",
+      "type": "java.util.Properties",
+      "description": "The cluster wide default resource configuration. The option is a java.util.Properties type.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.default-resource-options",
+      "type": "java.util.Properties",
+      "description": "The local default resource options. The option is a java.util.Properties type.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the atomix-messaging component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.ephemeral",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-messaging.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-messaging.member-name",
+      "type": "java.lang.String",
+      "description": "The Atomix Group member name",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.nodes",
+      "type": "java.util.List<io.atomix.catalyst.transport.Address>",
+      "description": "The nodes the AtomixClient should connect to",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.read-consistency",
+      "type": "io.atomix.resource.ReadConsistency",
+      "description": "The read consistency level.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.resource-configs",
+      "type": "java.util.Map<java.lang.String,java.util.Properties>",
+      "description": "Cluster wide resources configuration.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.resource-options",
+      "type": "java.util.Map<java.lang.String,java.util.Properties>",
+      "description": "Local resources configurations",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.result-header",
+      "type": "java.lang.String",
+      "description": "The header that wil carry the result.",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-messaging.transport-class-name",
+      "type": "java.lang.String",
+      "description": "The class name (fqn) of the Atomix transport",
+      "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration",
+      "defaultValue": "io.atomix.catalyst.transport.netty.NettyTransport"
+    },
+    {
+      "name": "camel.component.atomix-multimap.atomix",
+      "type": "io.atomix.Atomix",
+      "description": "The Atomix instance to use. The option is a io.atomix.Atomix type.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.atomix-multimap.configuration",
+      "type": "org.apache.camel.component.atomix.client.multimap.AtomixMultiMapConfiguration",
+      "description": "The shared component configuration. The option is a org.apache.camel.component.atomix.client.multimap.AtomixMultiMapConfiguration type.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.configuration-uri",
+      "type": "java.lang.String",
+      "description": "The path to the AtomixClient configuration",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.atomix-multimap.default-action",
+      "type": "org.apache.camel.component.atomix.client.multimap.AtomixMultiMap$Action",
+      "description": "The default action.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.default-resource-config",
+      "type": "java.util.Properties",
+      "description": "The cluster wide default resource configuration. The option is a java.util.Properties type.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.default-resource-options",
+      "type": "java.util.Properties",
+      "description": "The local default resource options. The option is a java.util.Properties type.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the atomix-multimap component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.ephemeral",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-multimap.key",
+      "type": "java.lang.Object",
+      "description": "The key to use if none is set in the header or to listen for events for a specific key. The option is a java.lang.Object type.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-multimap.nodes",
+      "type": "java.util.List<io.atomix.catalyst.transport.Address>",
+      "description": "The nodes the AtomixClient should connect to",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.read-consistency",
+      "type": "io.atomix.resource.ReadConsistency",
+      "description": "The read consistency level.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.resource-configs",
+      "type": "java.util.Map<java.lang.String,java.util.Properties>",
+      "description": "Cluster wide resources configuration.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.resource-options",
+      "type": "java.util.Map<java.lang.String,java.util.Properties>",
+      "description": "Local resources configurations",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.result-header",
+      "type": "java.lang.String",
+      "description": "The header that wil carry the result.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-multimap.transport-class-name",
+      "type": "java.lang.String",
+      "description": "The class name (fqn) of the Atomix transport",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration",
+      "defaultValue": "io.atomix.catalyst.transport.netty.NettyTransport"
+    },
+    {
+      "name": "camel.component.atomix-multimap.ttl",
+      "type": "java.lang.Long",
+      "description": "The resource ttl. The option is a long type.",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.atomix",
+      "type": "io.atomix.Atomix",
+      "description": "The Atomix instance to use. The option is a io.atomix.Atomix type.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.atomix-queue.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-queue.configuration",
+      "type": "org.apache.camel.component.atomix.client.queue.AtomixQueueConfiguration",
+      "description": "The shared component configuration. The option is a org.apache.camel.component.atomix.client.queue.AtomixQueueConfiguration type.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.configuration-uri",
+      "type": "java.lang.String",
+      "description": "The path to the AtomixClient configuration",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.atomix-queue.default-action",
+      "type": "org.apache.camel.component.atomix.client.queue.AtomixQueue$Action",
+      "description": "The default action.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.default-resource-config",
+      "type": "java.util.Properties",
+      "description": "The cluster wide default resource configuration. The option is a java.util.Properties type.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.default-resource-options",
+      "type": "java.util.Properties",
+      "description": "The local default resource options. The option is a java.util.Properties type.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the atomix-queue component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.ephemeral",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-queue.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-queue.nodes",
+      "type": "java.util.List<io.atomix.catalyst.transport.Address>",
+      "description": "The nodes the AtomixClient should connect to",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.read-consistency",
+      "type": "io.atomix.resource.ReadConsistency",
+      "description": "The read consistency level.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.resource-configs",
+      "type": "java.util.Map<java.lang.String,java.util.Properties>",
+      "description": "Cluster wide resources configuration.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.resource-options",
+      "type": "java.util.Map<java.lang.String,java.util.Properties>",
+      "description": "Local resources configurations",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.result-header",
+      "type": "java.lang.String",
+      "description": "The header that wil carry the result.",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-queue.transport-class-name",
+      "type": "java.lang.String",
+      "description": "The class name (fqn) of the Atomix transport",
+      "sourceType": "org.apache.camel.component.atomix.client.queue.springboot.AtomixQueueComponentConfiguration",
+      "defaultValue": "io.atomix.catalyst.transport.netty.NettyTransport"
+    },
+    {
+      "name": "camel.component.atomix-set.atomix",
+      "type": "io.atomix.Atomix",
+      "description": "The Atomix instance to use. The option is a io.atomix.Atomix type.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.atomix-set.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-set.configuration",
+      "type": "org.apache.camel.component.atomix.client.set.AtomixSetConfiguration",
+      "description": "The shared component configuration. The option is a org.apache.camel.component.atomix.client.set.AtomixSetConfiguration type.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.configuration-uri",
+      "type": "java.lang.String",
+      "description": "The path to the AtomixClient configuration",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.atomix-set.default-action",
+      "type": "org.apache.camel.component.atomix.client.set.AtomixSet$Action",
+      "description": "The default action.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.default-resource-config",
+      "type": "java.util.Properties",
+      "description": "The cluster wide default resource configuration. The option is a java.util.Properties type.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.default-resource-options",
+      "type": "java.util.Properties",
+      "description": "The local default resource options. The option is a java.util.Properties type.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the atomix-set component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.ephemeral",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-set.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-set.nodes",
+      "type": "java.util.List<io.atomix.catalyst.transport.Address>",
+      "description": "The nodes the AtomixClient should connect to",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.read-consistency",
+      "type": "io.atomix.resource.ReadConsistency",
+      "description": "The read consistency level.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.resource-configs",
+      "type": "java.util.Map<java.lang.String,java.util.Properties>",
+      "description": "Cluster wide resources configuration.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.resource-options",
+      "type": "java.util.Map<java.lang.String,java.util.Properties>",
+      "description": "Local resources configurations",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.result-header",
+      "type": "java.lang.String",
+      "description": "The header that wil carry the result.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-set.transport-class-name",
+      "type": "java.lang.String",
+      "description": "The class name (fqn) of the Atomix transport",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration",
+      "defaultValue": "io.atomix.catalyst.transport.netty.NettyTransport"
+    },
+    {
+      "name": "camel.component.atomix-set.ttl",
+      "type": "java.lang.Long",
+      "description": "The resource ttl. The option is a long type.",
+      "sourceType": "org.apache.camel.component.atomix.client.set.springboot.AtomixSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.atomix",
+      "type": "io.atomix.Atomix",
+      "description": "The Atomix instance to use. The option is a io.atomix.Atomix type.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.atomix-value.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-value.configuration",
+      "type": "org.apache.camel.component.atomix.client.value.AtomixValueConfiguration",
+      "description": "The shared component configuration. The option is a org.apache.camel.component.atomix.client.value.AtomixValueConfiguration type.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.configuration-uri",
+      "type": "java.lang.String",
+      "description": "The path to the AtomixClient configuration",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.atomix-value.default-action",
+      "type": "org.apache.camel.component.atomix.client.value.AtomixValue$Action",
+      "description": "The default action.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.default-resource-config",
+      "type": "java.util.Properties",
+      "description": "The cluster wide default resource configuration. The option is a java.util.Properties type.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.default-resource-options",
+      "type": "java.util.Properties",
+      "description": "The local default resource options. The option is a java.util.Properties type.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the atomix-value component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.ephemeral",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-value.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix-value.nodes",
+      "type": "java.util.List<io.atomix.catalyst.transport.Address>",
+      "description": "The nodes the AtomixClient should connect to",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.read-consistency",
+      "type": "io.atomix.resource.ReadConsistency",
+      "description": "The read consistency level.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.resource-configs",
+      "type": "java.util.Map<java.lang.String,java.util.Properties>",
+      "description": "Cluster wide resources configuration.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.resource-options",
+      "type": "java.util.Map<java.lang.String,java.util.Properties>",
+      "description": "Local resources configurations",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.result-header",
+      "type": "java.lang.String",
+      "description": "The header that wil carry the result.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix-value.transport-class-name",
+      "type": "java.lang.String",
+      "description": "The class name (fqn) of the Atomix transport",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration",
+      "defaultValue": "io.atomix.catalyst.transport.netty.NettyTransport"
+    },
+    {
+      "name": "camel.component.atomix-value.ttl",
+      "type": "java.lang.Long",
+      "description": "The resource ttl. The option is a long type.",
+      "sourceType": "org.apache.camel.component.atomix.client.value.springboot.AtomixValueComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atomix.cluster.service.address",
+      "type": "java.lang.String",
+      "description": "The address of the node - node only.",
+      "sourceType": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.component.atomix.cluster.service.attributes",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Custom service attributes.",
+      "sourceType": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.component.atomix.cluster.service.configuration-uri",
+      "type": "java.lang.String",
+      "description": "The Atomix configuration uri.",
+      "sourceType": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.component.atomix.cluster.service.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the atomix cluster service should be enabled or not, default is false.",
+      "sourceType": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atomix.cluster.service.ephemeral",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the local member should join groups as PersistentMember or not (node only).",
+      "sourceType": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.component.atomix.cluster.service.id",
+      "type": "java.lang.String",
+      "description": "The cluster id.",
+      "sourceType": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.component.atomix.cluster.service.mode",
+      "type": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration$Mode",
+      "description": "Sets the cluster mode.",
+      "sourceType": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.component.atomix.cluster.service.nodes",
+      "type": "java.util.Set<java.lang.String>",
+      "description": "The address of the nodes composing the cluster.",
+      "sourceType": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.component.atomix.cluster.service.order",
+      "type": "java.lang.Integer",
+      "description": "Service lookup order\/priority.",
+      "sourceType": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.component.atomix.cluster.service.storage-level",
+      "type": "io.atomix.copycat.server.storage.StorageLevel",
+      "description": "The storage mode - node only.",
+      "sourceType": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.component.atomix.cluster.service.storage-path",
+      "type": "java.lang.String",
+      "description": "The storage directory - node only.",
+      "sourceType": "org.apache.camel.component.atomix.cluster.springboot.AtomixClusterServiceConfiguration"
+    }
+  ],
+  "hints": []
+}

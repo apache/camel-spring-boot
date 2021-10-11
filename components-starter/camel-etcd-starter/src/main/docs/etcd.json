@@ -1,0 +1,336 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.etcd-keys",
+      "type": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-keys.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.etcd-stats",
+      "type": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-stats.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.etcd-watch",
+      "type": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-watch.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.etcd-keys.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.etcd-keys.configuration",
+      "type": "org.apache.camel.component.etcd.EtcdConfiguration",
+      "description": "Component configuration. The option is a org.apache.camel.component.etcd.EtcdConfiguration type.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-keys.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.etcd-keys.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the etcd-keys component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-keys.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd-keys.password",
+      "type": "java.lang.String",
+      "description": "The password to use for basic authentication.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-keys.recursive",
+      "type": "java.lang.Boolean",
+      "description": "To apply an action recursively.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd-keys.service-path",
+      "type": "java.lang.String",
+      "description": "The path to look for for service discovery",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration",
+      "defaultValue": "\/services\/"
+    },
+    {
+      "name": "camel.component.etcd-keys.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-keys.time-to-live",
+      "type": "java.lang.Integer",
+      "description": "To set the lifespan of a key in milliseconds.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-keys.timeout",
+      "type": "java.lang.Long",
+      "description": "To set the maximum time an action could take to complete. The option is a java.lang.Long type.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-keys.uris",
+      "type": "java.lang.String",
+      "description": "To set the URIs the client connects.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration",
+      "defaultValue": "http:\/\/localhost:2379,http:\/\/localhost:4001"
+    },
+    {
+      "name": "camel.component.etcd-keys.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable usage of global SSL context parameters.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd-keys.user-name",
+      "type": "java.lang.String",
+      "description": "The user name to use for basic authentication.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdKeysComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-stats.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.etcd-stats.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd-stats.configuration",
+      "type": "org.apache.camel.component.etcd.EtcdConfiguration",
+      "description": "Component configuration. The option is a org.apache.camel.component.etcd.EtcdConfiguration type.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-stats.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.etcd-stats.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the etcd-stats component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-stats.from-index",
+      "type": "java.lang.Long",
+      "description": "The index to watch from",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.etcd-stats.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd-stats.password",
+      "type": "java.lang.String",
+      "description": "The password to use for basic authentication.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-stats.recursive",
+      "type": "java.lang.Boolean",
+      "description": "To apply an action recursively.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd-stats.send-empty-exchange-on-timeout",
+      "type": "java.lang.Boolean",
+      "description": "To send an empty message in case of timeout watching for a key.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd-stats.service-path",
+      "type": "java.lang.String",
+      "description": "The path to look for for service discovery",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration",
+      "defaultValue": "\/services\/"
+    },
+    {
+      "name": "camel.component.etcd-stats.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-stats.time-to-live",
+      "type": "java.lang.Integer",
+      "description": "To set the lifespan of a key in milliseconds.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-stats.timeout",
+      "type": "java.lang.Long",
+      "description": "To set the maximum time an action could take to complete. The option is a java.lang.Long type.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-stats.uris",
+      "type": "java.lang.String",
+      "description": "To set the URIs the client connects.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration",
+      "defaultValue": "http:\/\/localhost:2379,http:\/\/localhost:4001"
+    },
+    {
+      "name": "camel.component.etcd-stats.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable usage of global SSL context parameters.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd-stats.user-name",
+      "type": "java.lang.String",
+      "description": "The user name to use for basic authentication.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdStatsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-watch.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.etcd-watch.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd-watch.configuration",
+      "type": "org.apache.camel.component.etcd.EtcdConfiguration",
+      "description": "Component configuration. The option is a org.apache.camel.component.etcd.EtcdConfiguration type.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-watch.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.etcd-watch.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the etcd-watch component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-watch.from-index",
+      "type": "java.lang.Long",
+      "description": "The index to watch from",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.etcd-watch.password",
+      "type": "java.lang.String",
+      "description": "The password to use for basic authentication.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-watch.recursive",
+      "type": "java.lang.Boolean",
+      "description": "To apply an action recursively.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd-watch.send-empty-exchange-on-timeout",
+      "type": "java.lang.Boolean",
+      "description": "To send an empty message in case of timeout watching for a key.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd-watch.service-path",
+      "type": "java.lang.String",
+      "description": "The path to look for for service discovery",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration",
+      "defaultValue": "\/services\/"
+    },
+    {
+      "name": "camel.component.etcd-watch.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-watch.timeout",
+      "type": "java.lang.Long",
+      "description": "To set the maximum time an action could take to complete. The option is a java.lang.Long type.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd-watch.uris",
+      "type": "java.lang.String",
+      "description": "To set the URIs the client connects.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration",
+      "defaultValue": "http:\/\/localhost:2379,http:\/\/localhost:4001"
+    },
+    {
+      "name": "camel.component.etcd-watch.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable usage of global SSL context parameters.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd-watch.user-name",
+      "type": "java.lang.String",
+      "description": "The user name to use for basic authentication.",
+      "sourceType": "org.apache.camel.component.etcd.springboot.EtcdWatchComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,53 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.barcode",
+      "type": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.barcode.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.barcode.barcode-format",
+      "type": "java.lang.String",
+      "description": "Barcode format such as QR-Code",
+      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.barcode.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.barcode.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the barcode data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.barcode.height",
+      "type": "java.lang.Integer",
+      "description": "Height of the barcode",
+      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.barcode.image-type",
+      "type": "java.lang.String",
+      "description": "Image type of the barcode such as png",
+      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.barcode.width",
+      "type": "java.lang.Integer",
+      "description": "Width of the barcode",
+      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration"
+    }
+  ],
+  "hints": []
+}

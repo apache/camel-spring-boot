@@ -1,0 +1,117 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.corda",
+      "type": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.corda.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.corda.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.corda.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.corda.configuration",
+      "type": "org.apache.camel.component.corda.CordaConfiguration",
+      "description": "To use a shared configuration. The option is a org.apache.camel.component.corda.CordaConfiguration type.",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.corda.contract-state-class",
+      "type": "java.lang.Class<net.corda.core.contracts.ContractState>",
+      "description": "A contract state (or just state) contains opaque data used by a contract program. It can be thought of as a disk file that the program can use to persist data across transactions. States are immutable: once created they are never updated, instead, any changes must generate a new successor state. States can be updated (consumed) only once: the notary is responsible for ensuring there is no double spending by only signing a transaction if the input states are all free.",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.corda.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.corda.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the corda component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.corda.flow-logic-arguments",
+      "type": "java.lang.Object[]",
+      "description": "Start the given flow with the given arguments, returning an Observable with a single observation of the result of running the flow. The flowLogicClass must be annotated with net.corda.core.flows.StartableByRPC.",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.corda.flow-logic-class",
+      "type": "java.lang.Class<net.corda.core.flows.FlowLogic<java.lang.Object>>",
+      "description": "Start the given flow with the given arguments, returning an Observable with a single observation of the result of running the flow. The flowLogicClass must be annotated with net.corda.core.flows.StartableByRPC.",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.corda.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.corda.operation",
+      "type": "java.lang.String",
+      "description": "Operation to use",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.corda.page-specification",
+      "type": "net.corda.core.node.services.vault.PageSpecification",
+      "description": "PageSpecification allows specification of a page number (starting from 1) and page size (defaulting to 200 with a maximum page size of (Integer.MAX_INT) Note: we default the page number to 200 to enable queries without requiring a page specification but enabling detection of large results sets that fall out of the 200 requirement. Max page size should be used with extreme caution as results may exceed your JVM memory footprint. The option is a net.corda.core.node.services.vault.PageSpecification type.",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.corda.password",
+      "type": "java.lang.String",
+      "description": "Password for login",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.corda.process-snapshot",
+      "type": "java.lang.Boolean",
+      "description": "Whether to process snapshots or not",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.corda.query-criteria",
+      "type": "net.corda.core.node.services.vault.QueryCriteria",
+      "description": "QueryCriteria assumes underlying schema tables are correctly indexed for performance. The option is a net.corda.core.node.services.vault.QueryCriteria type.",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.corda.sort",
+      "type": "net.corda.core.node.services.vault.Sort",
+      "description": "Sort allows specification of a set of entity attribute names and their associated directionality and null handling, to be applied upon processing a query specification.",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.corda.username",
+      "type": "java.lang.String",
+      "description": "Username for login",
+      "sourceType": "org.apache.camel.component.corda.springboot.CordaComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

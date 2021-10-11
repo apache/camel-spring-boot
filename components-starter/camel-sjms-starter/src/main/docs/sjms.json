@@ -1,0 +1,213 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.sjms",
+      "type": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms-batch",
+      "type": "org.apache.camel.component.sjms.batch.springboot.SjmsBatchComponentConfiguration",
+      "sourceType": "org.apache.camel.component.sjms.batch.springboot.SjmsBatchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms-batch.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.sjms.batch.springboot.SjmsBatchComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.sjms.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.sjms-batch.async-start-listener",
+      "type": "java.lang.Boolean",
+      "description": "Whether to startup the consumer message listener asynchronously, when starting a route. For example if a JmsConsumer cannot get a connection to a remote JMS broker, then it may block while retrying and\/or failover. This will cause Camel to block while starting routes. By setting this option to true, you will let routes startup, while the JmsConsumer connects to the JMS broker using a dedicated thread in asynchronous mode. If this option is used, then beware that if the connection could not be established, then an exception is logged at WARN level, and the consumer will not be able to receive messages; You can then restart the route to retry.",
+      "sourceType": "org.apache.camel.component.sjms.batch.springboot.SjmsBatchComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.sjms-batch.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.sjms.batch.springboot.SjmsBatchComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.sjms-batch.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.sjms.batch.springboot.SjmsBatchComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.sjms-batch.connection-factory",
+      "type": "javax.jms.ConnectionFactory",
+      "description": "A ConnectionFactory is required to enable the SjmsBatchComponent. The option is a javax.jms.ConnectionFactory type.",
+      "sourceType": "org.apache.camel.component.sjms.batch.springboot.SjmsBatchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms-batch.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.sjms-batch.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the sjms-batch component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.sjms.batch.springboot.SjmsBatchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms-batch.header-filter-strategy",
+      "type": "org.apache.camel.spi.HeaderFilterStrategy",
+      "description": "To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.",
+      "sourceType": "org.apache.camel.component.sjms.batch.springboot.SjmsBatchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms-batch.recovery-interval",
+      "type": "java.lang.Integer",
+      "description": "Specifies the interval between recovery attempts, i.e. when a connection is being refreshed, in milliseconds. The default is 5000 ms, that is, 5 seconds.",
+      "sourceType": "org.apache.camel.component.sjms.batch.springboot.SjmsBatchComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.sjms.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.sjms.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.sjms.connection-client-id",
+      "type": "java.lang.String",
+      "description": "The client ID to use when creating javax.jms.Connection when using the default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms.connection-count",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of connections available to endpoints started under this component",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration",
+      "defaultValue": 1
+    },
+    {
+      "name": "camel.component.sjms.connection-factory",
+      "type": "javax.jms.ConnectionFactory",
+      "description": "A ConnectionFactory is required to enable the SjmsComponent. It can be set directly or set set as part of a ConnectionResource. The option is a javax.jms.ConnectionFactory type.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms.connection-max-wait",
+      "type": "java.lang.Long",
+      "description": "The max wait time in millis to block and wait on free connection when the pool is exhausted when using the default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.sjms.connection-password",
+      "type": "java.lang.String",
+      "description": "The password to use when creating javax.jms.Connection when using the default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms.connection-resource",
+      "type": "org.apache.camel.component.sjms.jms.ConnectionResource",
+      "description": "A ConnectionResource is an interface that allows for customization and container control of the ConnectionFactory. See Plugable Connection Resource Management for further details. The option is a org.apache.camel.component.sjms.jms.ConnectionResource type.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms.connection-test-on-borrow",
+      "type": "java.lang.Boolean",
+      "description": "When using the default org.apache.camel.component.sjms.jms.ConnectionFactoryResource then should each javax.jms.Connection be tested (calling start) before returned from the pool.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.sjms.connection-username",
+      "type": "java.lang.String",
+      "description": "The username to use when creating javax.jms.Connection when using the default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.sjms.destination-creation-strategy",
+      "type": "org.apache.camel.component.sjms.jms.DestinationCreationStrategy",
+      "description": "To use a custom DestinationCreationStrategy. The option is a org.apache.camel.component.sjms.jms.DestinationCreationStrategy type.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the sjms component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms.header-filter-strategy",
+      "type": "org.apache.camel.spi.HeaderFilterStrategy",
+      "description": "To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms.jms-key-format-strategy",
+      "type": "org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy",
+      "description": "Pluggable strategy for encoding and decoding JMS keys so they can be compliant with the JMS specification. Camel provides one implementation out of the box: default. The default strategy will safely marshal dots and hyphens (. and -). Can be used for JMS brokers which do not care whether JMS header keys contain illegal characters. You can provide your own implementation of the org.apache.camel.component.jms.JmsKeyFormatStrategy and refer to it using the # notation. The option is a org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy type.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.sjms.message-created-strategy",
+      "type": "org.apache.camel.component.sjms.jms.MessageCreatedStrategy",
+      "description": "To use the given MessageCreatedStrategy which are invoked when Camel creates new instances of javax.jms.Message objects when Camel is sending a JMS message. The option is a org.apache.camel.component.sjms.jms.MessageCreatedStrategy type.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms.reconnect-back-off",
+      "type": "java.lang.Long",
+      "description": "Backoff in millis on consumer pool reconnection attempts",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.sjms.reconnect-on-error",
+      "type": "java.lang.Boolean",
+      "description": "Try to apply reconnection logic on consumer pool",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.sjms.timed-task-manager",
+      "type": "org.apache.camel.component.sjms.taskmanager.TimedTaskManager",
+      "description": "To use a custom TimedTaskManager. The option is a org.apache.camel.component.sjms.taskmanager.TimedTaskManager type.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sjms.transaction-commit-strategy",
+      "type": "org.apache.camel.component.sjms.TransactionCommitStrategy",
+      "description": "To configure which kind of commit strategy to use. Camel provides two implementations out of the box, default and batch. The option is a org.apache.camel.component.sjms.TransactionCommitStrategy type.",
+      "sourceType": "org.apache.camel.component.sjms.springboot.SjmsComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

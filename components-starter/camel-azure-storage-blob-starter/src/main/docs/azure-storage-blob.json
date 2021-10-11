@@ -1,0 +1,210 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.azure-storage-blob",
+      "type": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.azure-storage-blob.access-key",
+      "type": "java.lang.String",
+      "description": "Access key for the associated azure account name to be used for authentication with azure blob services",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.auto-discover-client",
+      "type": "java.lang.Boolean",
+      "description": "Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.azure-storage-blob.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.azure-storage-blob.blob-name",
+      "type": "java.lang.String",
+      "description": "The blob name, to consume specific blob from a container. However on producer, is only required for the operations on the blob level",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.blob-offset",
+      "type": "java.lang.Long",
+      "description": "Set the blob offset for the upload or download operations, default is 0",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.azure-storage-blob.blob-sequence-number",
+      "type": "java.lang.Long",
+      "description": "A user-controlled value that you can use to track requests. The value of the sequence number must be between 0 and 263 - 1.The default value is 0.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.azure-storage-blob.blob-type",
+      "type": "org.apache.camel.component.azure.storage.blob.BlobType",
+      "description": "The blob type in order to initiate the appropriate settings for each blob type",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.block-list-type",
+      "type": "com.azure.storage.blob.models.BlockListType",
+      "description": "Specifies which type of blocks to return.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.azure-storage-blob.close-stream-after-read",
+      "type": "java.lang.Boolean",
+      "description": "Close the stream after read or keep it open, default is true",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.azure-storage-blob.close-stream-after-write",
+      "type": "java.lang.Boolean",
+      "description": "Close the stream after write or keep it open, default is true",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.azure-storage-blob.commit-block-list-later",
+      "type": "java.lang.Boolean",
+      "description": "When is set to true, the staged blocks will not be committed directly.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.azure-storage-blob.configuration",
+      "type": "org.apache.camel.component.azure.storage.blob.BlobConfiguration",
+      "description": "The component configurations. The option is a org.apache.camel.component.azure.storage.blob.BlobConfiguration type.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.create-append-blob",
+      "type": "java.lang.Boolean",
+      "description": "When is set to true, the append blocks will be created when committing append blocks.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.azure-storage-blob.create-page-blob",
+      "type": "java.lang.Boolean",
+      "description": "When is set to true, the page blob will be created when uploading page blob.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.azure-storage-blob.credentials",
+      "type": "com.azure.storage.common.StorageSharedKeyCredential",
+      "description": "StorageSharedKeyCredential can be injected to create the azure client, this holds the important authentication information. The option is a com.azure.storage.common.StorageSharedKeyCredential type.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.data-count",
+      "type": "java.lang.Long",
+      "description": "How many bytes to include in the range. Must be greater than or equal to 0 if specified.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.download-link-expiration",
+      "type": "java.lang.Long",
+      "description": "Override the default expiration (millis) of URL download link.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the azure-storage-blob component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.file-dir",
+      "type": "java.lang.String",
+      "description": "The file directory where the downloaded blobs will be saved to, this can be used in both, producer and consumer",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.azure-storage-blob.max-results-per-page",
+      "type": "java.lang.Integer",
+      "description": "Specifies the maximum number of blobs to return, including all BlobPrefix elements. If the request does not specify maxResultsPerPage or specifies a value greater than 5,000, the server will return up to 5,000 items.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.max-retry-requests",
+      "type": "java.lang.Integer",
+      "description": "Specifies the maximum number of additional HTTP Get requests that will be made while reading the data from a response body.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.azure-storage-blob.operation",
+      "type": "org.apache.camel.component.azure.storage.blob.BlobOperationsDefinition",
+      "description": "The blob operation that can be used with this component on the producer",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.page-blob-size",
+      "type": "java.lang.Long",
+      "description": "Specifies the maximum size for the page blob, up to 8 TB. The page blob size must be aligned to a 512-byte boundary.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": 512
+    },
+    {
+      "name": "camel.component.azure-storage-blob.prefix",
+      "type": "java.lang.String",
+      "description": "Filters the results to return only blobs whose names begin with the specified prefix. May be null to return all blobs.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.regex",
+      "type": "java.lang.String",
+      "description": "Filters the results to return only blobs whose names match the specified regular expression. May be null to return all if both prefix and regex are set, regex takes the priority and prefix is ignored.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.service-client",
+      "type": "com.azure.storage.blob.BlobServiceClient",
+      "description": "Client to a storage account. This client does not hold any state about a particular storage account but is instead a convenient way of sending off appropriate requests to the resource on the service. It may also be used to construct URLs to blobs and containers. This client contains operations on a service account. Operations on a container are available on BlobContainerClient through BlobServiceClient#getBlobContainerClient(String), and operations on a blob are available on BlobClient through BlobContainerClient#getBlobClient(String). The option is a com.azure.storage.blob.BlobServiceClient type.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.timeout",
+      "type": "java.time.Duration",
+      "description": "An optional timeout value beyond which a RuntimeException will be raised. The option is a java.time.Duration type.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

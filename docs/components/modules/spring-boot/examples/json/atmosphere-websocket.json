@@ -1,0 +1,101 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.atmosphere-websocket",
+      "type": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.atmosphere-websocket.allow-java-serialized-object",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow java serialization when a request uses context-type=application\/x-java-serialized-object. This is by default turned off. If you enable this then be aware that Java will deserialize the incoming data from the request to Java and that can be a potential security risk.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.attachment-multipart-binding",
+      "type": "java.lang.Boolean",
+      "description": "Whether to automatic bind multipart\/form-data as attachments on the Camel Exchange. The options attachmentMultipartBinding=true and disableStreamCache=false cannot work together. Remove disableStreamCache to use AttachmentMultipartBinding. This is turn off by default as this may require servlet specific configuration to enable this when using Servlet's.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the atmosphere-websocket component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.file-name-ext-whitelist",
+      "type": "java.lang.String",
+      "description": "Whitelist of accepted filename extensions for accepting uploaded files. Multiple extensions can be separated by comma, such as txt,xml.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.header-filter-strategy",
+      "type": "org.apache.camel.spi.HeaderFilterStrategy",
+      "description": "To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.http-binding",
+      "type": "org.apache.camel.http.common.HttpBinding",
+      "description": "To use a custom HttpBinding to control the mapping between Camel message and HttpClient. The option is a org.apache.camel.http.common.HttpBinding type.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.http-configuration",
+      "type": "org.apache.camel.http.common.HttpConfiguration",
+      "description": "To use the shared HttpConfiguration as base configuration. The option is a org.apache.camel.http.common.HttpConfiguration type.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.http-registry",
+      "type": "org.apache.camel.http.common.HttpRegistry",
+      "description": "To use a custom org.apache.camel.component.servlet.HttpRegistry. The option is a org.apache.camel.http.common.HttpRegistry type.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atmosphere-websocket.servlet-name",
+      "type": "java.lang.String",
+      "description": "Default name of servlet to use. The default name is CamelServlet.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration",
+      "defaultValue": "CamelServlet"
+    }
+  ],
+  "hints": []
+}

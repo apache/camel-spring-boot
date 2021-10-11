@@ -1,0 +1,327 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.servicenow",
+      "type": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.servicenow.api-url",
+      "type": "java.lang.String",
+      "description": "The ServiceNow REST API url",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.api-version",
+      "type": "java.lang.String",
+      "description": "The ServiceNow REST API version, default latest",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.servicenow.configuration",
+      "type": "org.apache.camel.component.servicenow.ServiceNowConfiguration",
+      "description": "Component configuration. The option is a org.apache.camel.component.servicenow.ServiceNowConfiguration type.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.servicenow.date-format",
+      "type": "java.lang.String",
+      "description": "The date format used for Json serialization\/deserialization",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": "yyyy-MM-dd"
+    },
+    {
+      "name": "camel.component.servicenow.date-time-format",
+      "type": "java.lang.String",
+      "description": "The date-time format used for Json serialization\/deserialization",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": "yyyy-MM-dd HH:mm:ss"
+    },
+    {
+      "name": "camel.component.servicenow.display",
+      "type": "java.lang.String",
+      "description": "Set this parameter to true to return only scorecards where the indicator Display field is selected. Set this parameter to all to return scorecards with any Display field value. This parameter is true by default.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": "true"
+    },
+    {
+      "name": "camel.component.servicenow.display-value",
+      "type": "java.lang.String",
+      "description": "Return the display value (true), actual value (false), or both (all) for reference fields (default: false)",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": "false"
+    },
+    {
+      "name": "camel.component.servicenow.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the servicenow component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.exclude-reference-link",
+      "type": "java.lang.Boolean",
+      "description": "True to exclude Table API links for reference fields (default: false)",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.favorites",
+      "type": "java.lang.Boolean",
+      "description": "Set this parameter to true to return only scorecards that are favorites of the querying user.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.http-client-policy",
+      "type": "org.apache.cxf.transports.http.configuration.HTTPClientPolicy",
+      "description": "To configure http-client. The option is a org.apache.cxf.transports.http.configuration.HTTPClientPolicy type.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.include-aggregates",
+      "type": "java.lang.Boolean",
+      "description": "Set this parameter to true to always return all available aggregates for an indicator, including when an aggregate has already been applied. If a value is not specified, this parameter defaults to false and returns no aggregates.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.include-available-aggregates",
+      "type": "java.lang.Boolean",
+      "description": "Set this parameter to true to return all available aggregates for an indicator when no aggregate has been applied. If a value is not specified, this parameter defaults to false and returns no aggregates.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.include-available-breakdowns",
+      "type": "java.lang.Boolean",
+      "description": "Set this parameter to true to return all available breakdowns for an indicator. If a value is not specified, this parameter defaults to false and returns no breakdowns.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.include-score-notes",
+      "type": "java.lang.Boolean",
+      "description": "Set this parameter to true to return all notes associated with the score. The note element contains the note text as well as the author and timestamp when the note was added.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.include-scores",
+      "type": "java.lang.Boolean",
+      "description": "Set this parameter to true to return all scores for a scorecard. If a value is not specified, this parameter defaults to false and returns only the most recent score value.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.input-display-value",
+      "type": "java.lang.Boolean",
+      "description": "True to set raw value of input fields (default: false)",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.instance-name",
+      "type": "java.lang.String",
+      "description": "The ServiceNow instance name",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.key",
+      "type": "java.lang.Boolean",
+      "description": "Set this parameter to true to return only scorecards for key indicators.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.servicenow.mapper",
+      "type": "com.fasterxml.jackson.databind.ObjectMapper",
+      "description": "Sets Jackson's ObjectMapper to use for request\/reply. The option is a com.fasterxml.jackson.databind.ObjectMapper type.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.models",
+      "type": "java.util.Map<java.lang.String,java.lang.Class<java.lang.Object>>",
+      "description": "Defines both request and response models",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.oauth-client-id",
+      "type": "java.lang.String",
+      "description": "OAuth2 ClientID",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.oauth-client-secret",
+      "type": "java.lang.String",
+      "description": "OAuth2 ClientSecret",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.oauth-token-url",
+      "type": "java.lang.String",
+      "description": "OAuth token Url",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.password",
+      "type": "java.lang.String",
+      "description": "ServiceNow account password, MUST be provided",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.per-page",
+      "type": "java.lang.Integer",
+      "description": "Enter the maximum number of scorecards each query can return. By default this value is 10, and the maximum is 100.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": 10
+    },
+    {
+      "name": "camel.component.servicenow.proxy-authorization-policy",
+      "type": "org.apache.cxf.configuration.security.ProxyAuthorizationPolicy",
+      "description": "To configure proxy authentication. The option is a org.apache.cxf.configuration.security.ProxyAuthorizationPolicy type.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.proxy-host",
+      "type": "java.lang.String",
+      "description": "The proxy host name",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.proxy-password",
+      "type": "java.lang.String",
+      "description": "Password for proxy authentication",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "The proxy port number",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.proxy-user-name",
+      "type": "java.lang.String",
+      "description": "Username for proxy authentication",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.release",
+      "type": "org.apache.camel.component.servicenow.ServiceNowRelease",
+      "description": "The ServiceNow release to target, default to Helsinki See https:\/\/docs.servicenow.com",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.request-models",
+      "type": "java.util.Map<java.lang.String,java.lang.Class<java.lang.Object>>",
+      "description": "Defines the request model",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.resource",
+      "type": "java.lang.String",
+      "description": "The default resource, can be overridden by header CamelServiceNowResource",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.response-models",
+      "type": "java.util.Map<java.lang.String,java.lang.Class<java.lang.Object>>",
+      "description": "Defines the response model",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.retrieve-target-record-on-import",
+      "type": "java.lang.Boolean",
+      "description": "Set this parameter to true to retrieve the target record when using import set api. The import set result is then replaced by the target record",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.servicenow.sort-by",
+      "type": "java.lang.String",
+      "description": "Specify the value to use when sorting results. By default, queries sort records by value.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.sort-dir",
+      "type": "java.lang.String",
+      "description": "Specify the sort direction, ascending or descending. By default, queries sort records in descending order. Use sysparm_sortdir=asc to sort in ascending order.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "To configure security using SSLContextParameters. See http:\/\/camel.apache.org\/camel-configuration-utilities.html. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.suppress-auto-sys-field",
+      "type": "java.lang.Boolean",
+      "description": "True to suppress auto generation of system fields (default: false)",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.suppress-pagination-header",
+      "type": "java.lang.Boolean",
+      "description": "Set this value to true to remove the Link header from the response. The Link header allows you to request additional pages of data when the number of records matching your query exceeds the query limit",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.table",
+      "type": "java.lang.String",
+      "description": "The default table, can be overridden by header CamelServiceNowTable",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.target",
+      "type": "java.lang.Boolean",
+      "description": "Set this parameter to true to return only scorecards that have a target.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.time-format",
+      "type": "java.lang.String",
+      "description": "The time format used for Json serialization\/deserialization",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": "HH:mm:ss"
+    },
+    {
+      "name": "camel.component.servicenow.top-level-only",
+      "type": "java.lang.Boolean",
+      "description": "Gets only those categories whose parent is a catalog.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servicenow.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable usage of global SSL context parameters.",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.servicenow.user-name",
+      "type": "java.lang.String",
+      "description": "ServiceNow user account name, MUST be provided",
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

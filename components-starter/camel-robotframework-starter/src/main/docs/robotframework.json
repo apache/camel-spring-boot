@@ -1,0 +1,348 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.robotframework",
+      "type": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.robotframework.allow-context-map-all",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether the context map should allow access to all details. By default only the message body and headers can be accessed. This option can be enabled for full access to the current Exchange and CamelContext. Doing so impose a potential security risk as this opens access to the full power of CamelContext API.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.robotframework.allow-template-from-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow to use resource template from header or not (default false). Enabling this allows to specify dynamic templates via message header. However this can be seen as a potential security vulnerability if the header is coming from a malicious user, so use this with care.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.robotframework.argument-file",
+      "type": "java.io.File",
+      "description": "A text file to read more arguments from.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.robotframework.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.robotframework.combined-tag-stats",
+      "type": "java.lang.String",
+      "description": "Creates combined statistics based on tags. Use the format tags:title List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.configuration",
+      "type": "org.apache.camel.component.robotframework.RobotFrameworkCamelConfiguration",
+      "description": "The configuration. The option is a org.apache.camel.component.robotframework.RobotFrameworkCamelConfiguration type.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.critical-tags",
+      "type": "java.lang.String",
+      "description": "Tests that have the given tags are considered critical. List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.robotframework.debug-file",
+      "type": "java.io.File",
+      "description": "A debug file that is written during execution.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.document",
+      "type": "java.lang.String",
+      "description": "Sets the documentation of the top-level tests suites.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.dryrun",
+      "type": "java.lang.Boolean",
+      "description": "Sets dryrun mode on use. In the dry run mode tests are run without executing keywords originating from test libraries. Useful for validating test data syntax.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.robotframework.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the robotframework component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.excludes",
+      "type": "java.lang.String",
+      "description": "Selects the tests cases by tags. List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.exit-on-failure",
+      "type": "java.lang.Boolean",
+      "description": "Sets robot to stop execution immediately if a critical test fails.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.robotframework.includes",
+      "type": "java.lang.String",
+      "description": "Selects the tests cases by tags. List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.robotframework.listener",
+      "type": "java.lang.String",
+      "description": "Sets a single listener for monitoring tests execution",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.listeners",
+      "type": "java.lang.String",
+      "description": "Sets multiple listeners for monitoring tests execution. Use the format ListenerWithArgs:arg1:arg2 or simply ListenerWithoutArgs List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.log",
+      "type": "java.io.File",
+      "description": "Sets the path to the generated log file.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.log-level",
+      "type": "java.lang.String",
+      "description": "Sets the threshold level for logging.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.log-title",
+      "type": "java.lang.String",
+      "description": "Sets a title for the generated tests log.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.metadata",
+      "type": "java.lang.String",
+      "description": "Sets free metadata for the top level tests suites. comma seperated list of string resulting as List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.monitor-colors",
+      "type": "java.lang.String",
+      "description": "Using ANSI colors in console. Normally colors work in unixes but not in Windows. Default is 'on'. 'on' - use colors in unixes but not in Windows 'off' - never use colors 'force' - always use colors (also in Windows)",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.monitor-width",
+      "type": "java.lang.String",
+      "description": "Width of the monitor output. Default is 78.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": "78"
+    },
+    {
+      "name": "camel.component.robotframework.name",
+      "type": "java.lang.String",
+      "description": "Sets the name of the top-level tests suites.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.no-status-return-code",
+      "type": "java.lang.Boolean",
+      "description": "If true, sets the return code to zero regardless of failures in test cases. Error codes are returned normally.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.robotframework.non-critical-tags",
+      "type": "java.lang.String",
+      "description": "Tests that have the given tags are not critical. List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.output",
+      "type": "java.io.File",
+      "description": "Sets the path to the generated output file.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.output-directory",
+      "type": "java.io.File",
+      "description": "Configures where generated reports are to be placed.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.randomize",
+      "type": "java.lang.String",
+      "description": "Sets the test execution order to be randomized. Valid values are all, suite, and test",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.report",
+      "type": "java.io.File",
+      "description": "Sets the path to the generated report file.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.report-background",
+      "type": "java.lang.String",
+      "description": "Sets background colors for the generated report and summary.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.report-title",
+      "type": "java.lang.String",
+      "description": "Sets a title for the generated tests report.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.run-empty-suite",
+      "type": "java.lang.Boolean",
+      "description": "Executes tests also if the top level test suite is empty. Useful e.g. with --include\/--exclude when it is not an error that no test matches the condition.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.robotframework.run-failed",
+      "type": "java.io.File",
+      "description": "Re-run failed tests, based on output.xml file.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.run-mode",
+      "type": "java.lang.String",
+      "description": "Sets the execution mode for this tests run. Note that this setting has been deprecated in Robot Framework 2.8. Use separate dryryn, skipTeardownOnExit, exitOnFailure, and randomize settings instead.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.skip-teardown-on-exit",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether the teardowns are skipped if the test execution is prematurely stopped.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.robotframework.split-outputs",
+      "type": "java.lang.String",
+      "description": "Splits output and log files.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.suite-stat-level",
+      "type": "java.lang.String",
+      "description": "Defines how many levels to show in the Statistics by Suite table in outputs.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.suites",
+      "type": "java.lang.String",
+      "description": "Selects the tests suites by name. List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.summary-title",
+      "type": "java.lang.String",
+      "description": "Sets a title for the generated summary report.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.tag-docs",
+      "type": "java.lang.String",
+      "description": "Adds documentation to the specified tags. List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.tag-stat-excludes",
+      "type": "java.lang.String",
+      "description": "Excludes these tags from the Statistics by Tag and Test Details by Tag tables in outputs. List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.tag-stat-includes",
+      "type": "java.lang.String",
+      "description": "Includes only these tags in the Statistics by Tag and Test Details by Tag tables in outputs. List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.tag-stat-links",
+      "type": "java.lang.String",
+      "description": "Adds external links to the Statistics by Tag table in outputs. Use the format pattern:link:title List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.tags",
+      "type": "java.lang.String",
+      "description": "Sets the tags(s) to all executed tests cases. List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.tests",
+      "type": "java.lang.String",
+      "description": "Selects the tests cases by name. List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.timestamp-outputs",
+      "type": "java.lang.Boolean",
+      "description": "Adds a timestamp to all output files.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.robotframework.variable-files",
+      "type": "java.lang.String",
+      "description": "Sets variables using variables files. Use the format path:args List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.variables",
+      "type": "java.lang.String",
+      "description": "Sets individual variables. Use the format name:value List",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.robotframework.warn-on-skipped-files",
+      "type": "java.lang.Boolean",
+      "description": "Show a warning when an invalid file is skipped.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.robotframework.xunit-file",
+      "type": "java.io.File",
+      "description": "Sets the path to the generated XUnit compatible result file, relative to outputDirectory. The file is in xml format. By default, the file name is derived from the testCasesDirectory parameter, replacing blanks in the directory name by underscores.",
+      "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,120 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.servlet",
+      "type": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servlet.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.servlet.mapping",
+      "type": "org.apache.camel.component.servlet.springboot.ServletMappingConfiguration",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletMappingConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.servlet.allow-java-serialized-object",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow java serialization when a request uses context-type=application\/x-java-serialized-object. This is by default turned off. If you enable this then be aware that Java will deserialize the incoming data from the request to Java and that can be a potential security risk.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.servlet.attachment-multipart-binding",
+      "type": "java.lang.Boolean",
+      "description": "Whether to automatic bind multipart\/form-data as attachments on the Camel Exchange. The options attachmentMultipartBinding=true and disableStreamCache=false cannot work together. Remove disableStreamCache to use AttachmentMultipartBinding. This is turn off by default as this may require servlet specific configuration to enable this when using Servlet's.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.servlet.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.servlet.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.servlet.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.servlet.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the servlet component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servlet.file-name-ext-whitelist",
+      "type": "java.lang.String",
+      "description": "Whitelist of accepted filename extensions for accepting uploaded files. Multiple extensions can be separated by comma, such as txt,xml.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servlet.header-filter-strategy",
+      "type": "org.apache.camel.spi.HeaderFilterStrategy",
+      "description": "To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servlet.http-binding",
+      "type": "org.apache.camel.http.common.HttpBinding",
+      "description": "To use a custom HttpBinding to control the mapping between Camel message and HttpClient. The option is a org.apache.camel.http.common.HttpBinding type.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servlet.http-configuration",
+      "type": "org.apache.camel.http.common.HttpConfiguration",
+      "description": "To use the shared HttpConfiguration as base configuration. The option is a org.apache.camel.http.common.HttpConfiguration type.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servlet.http-registry",
+      "type": "org.apache.camel.http.common.HttpRegistry",
+      "description": "To use a custom org.apache.camel.component.servlet.HttpRegistry. The option is a org.apache.camel.http.common.HttpRegistry type.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration"
+    },
+    {
+      "name": "camel.component.servlet.mapping.context-path",
+      "type": "java.lang.String",
+      "description": "Context path used by the servlet component for automatic mapping.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletMappingConfiguration",
+      "defaultValue": "\/camel\/*"
+    },
+    {
+      "name": "camel.component.servlet.mapping.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables the automatic mapping of the servlet component into the Spring web context.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletMappingConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.servlet.mapping.servlet-name",
+      "type": "java.lang.String",
+      "description": "The name of the Camel servlet.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletMappingConfiguration",
+      "defaultValue": "CamelServlet"
+    },
+    {
+      "name": "camel.component.servlet.servlet-name",
+      "type": "java.lang.String",
+      "description": "Default name of servlet to use. The default name is CamelServlet.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration",
+      "defaultValue": "CamelServlet"
+    }
+  ],
+  "hints": []
+}

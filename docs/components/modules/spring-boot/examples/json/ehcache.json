@@ -1,0 +1,166 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.ehcache",
+      "type": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.ehcache.customizer.cache-configuration",
+      "type": "org.apache.camel.component.ehcache.springboot.customizer.CacheConfigurationCustomizerConfiguration",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.customizer.CacheConfigurationCustomizerConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.customizer.cache-manager",
+      "type": "org.apache.camel.component.ehcache.springboot.customizer.CacheManagerCustomizerConfiguration",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.customizer.CacheManagerCustomizerConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.ehcache.action",
+      "type": "java.lang.String",
+      "description": "To configure the default cache action. If an action is set in the message header, then the operation from the header takes precedence.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ehcache.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ehcache.cache-manager",
+      "type": "org.ehcache.CacheManager",
+      "description": "The cache manager. The option is a org.ehcache.CacheManager type.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.cache-manager-configuration",
+      "type": "org.ehcache.config.Configuration",
+      "description": "The cache manager configuration. The option is a org.ehcache.config.Configuration type.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.configuration",
+      "type": "org.ehcache.config.CacheConfiguration",
+      "description": "The default cache configuration to be used to create caches. The option is a org.ehcache.config.CacheConfiguration type.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.configuration-uri",
+      "type": "java.lang.String",
+      "description": "URI pointing to the Ehcache XML configuration file's location",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.configurations",
+      "type": "java.util.Map<java.lang.String,org.ehcache.config.CacheConfiguration>",
+      "description": "A map of cache configuration to be used to create caches.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.create-cache-if-not-exist",
+      "type": "java.lang.Boolean",
+      "description": "Configure if a cache need to be created if it does exist or can't be pre-configured.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ehcache.customizer.cache-configuration.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable or disable the cache-configuration customizer.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.customizer.CacheConfigurationCustomizerConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ehcache.customizer.cache-configuration.mode",
+      "type": "org.apache.camel.component.ehcache.springboot.customizer.CacheConfigurationCustomizerConfiguration$Mode",
+      "description": "Configure if the cache configurations have be added or they have to replace those already configured on the component.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.customizer.CacheConfigurationCustomizerConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.customizer.cache-manager.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable or disable the cache-manager customizer.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.customizer.CacheManagerCustomizerConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ehcache.customizer.cache-manager.override",
+      "type": "java.lang.Boolean",
+      "description": "Configure if the cache manager eventually set on the component should be overridden by the customizer.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.customizer.CacheManagerCustomizerConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ehcache.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.ehcache.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the ehcache component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.event-firing",
+      "type": "org.ehcache.event.EventFiring",
+      "description": "Set the delivery mode (synchronous, asynchronous)",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.event-ordering",
+      "type": "org.ehcache.event.EventOrdering",
+      "description": "Set the delivery mode (ordered, unordered)",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.event-types",
+      "type": "java.lang.String",
+      "description": "Set the type of events to listen for (EVICTED,EXPIRED,REMOVED,CREATED,UPDATED). You can specify multiple entries separated by comma.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.key",
+      "type": "java.lang.Object",
+      "description": "To configure the default action key. If a key is set in the message header, then the key from the header takes precedence. The option is a java.lang.Object type.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.key-type",
+      "type": "java.lang.String",
+      "description": "The cache key type, default java.lang.Object",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ehcache.value-type",
+      "type": "java.lang.String",
+      "description": "The cache value type, default java.lang.Object",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

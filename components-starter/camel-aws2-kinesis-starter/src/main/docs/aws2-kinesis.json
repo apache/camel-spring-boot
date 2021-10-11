@@ -1,0 +1,247 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.aws2-kinesis",
+      "type": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose",
+      "type": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.aws2-kinesis-firehose.access-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Access Key",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.amazon-kinesis-firehose-client",
+      "type": "software.amazon.awssdk.services.firehose.FirehoseClient",
+      "description": "Amazon Kinesis Firehose client to use for all requests for this endpoint. The option is a software.amazon.awssdk.services.firehose.FirehoseClient type.",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.cbor-enabled",
+      "type": "java.lang.Boolean",
+      "description": "This option will set the CBOR_ENABLED property during the execution",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.configuration",
+      "type": "org.apache.camel.component.aws2.firehose.KinesisFirehose2Configuration",
+      "description": "Component configuration. The option is a org.apache.camel.component.aws2.firehose.KinesisFirehose2Configuration type.",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the aws2-kinesis-firehose component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.operation",
+      "type": "org.apache.camel.component.aws2.firehose.KinesisFirehose2Operations",
+      "description": "The operation to do in case the user don't want to send only a record",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.proxy-host",
+      "type": "java.lang.String",
+      "description": "To define a proxy host when instantiating the Kinesis Firehose client",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "To define a proxy port when instantiating the Kinesis Firehose client",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.proxy-protocol",
+      "type": "software.amazon.awssdk.core.Protocol",
+      "description": "To define a proxy protocol when instantiating the Kinesis Firehose client",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.region",
+      "type": "java.lang.String",
+      "description": "The region in which Kinesis Firehose client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.secret-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Secret Key",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.trust-all-certificates",
+      "type": "java.lang.Boolean",
+      "description": "If we want to trust all certificates in case of overriding the endpoint",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-kinesis.access-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Access Key",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.amazon-kinesis-client",
+      "type": "software.amazon.awssdk.services.kinesis.KinesisClient",
+      "description": "Amazon Kinesis client to use for all requests for this endpoint. The option is a software.amazon.awssdk.services.kinesis.KinesisClient type.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-kinesis.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-kinesis.cbor-enabled",
+      "type": "java.lang.Boolean",
+      "description": "This option will set the CBOR_ENABLED property during the execution",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-kinesis.configuration",
+      "type": "org.apache.camel.component.aws2.kinesis.Kinesis2Configuration",
+      "description": "Component configuration. The option is a org.apache.camel.component.aws2.kinesis.Kinesis2Configuration type.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the aws2-kinesis component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.iterator-type",
+      "type": "software.amazon.awssdk.services.kinesis.model.ShardIteratorType",
+      "description": "Defines where in the Kinesis stream to start getting records",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-kinesis.max-results-per-request",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of records that will be fetched in each poll",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "defaultValue": 1
+    },
+    {
+      "name": "camel.component.aws2-kinesis.proxy-host",
+      "type": "java.lang.String",
+      "description": "To define a proxy host when instantiating the Kinesis client",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "To define a proxy port when instantiating the Kinesis client",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.proxy-protocol",
+      "type": "software.amazon.awssdk.core.Protocol",
+      "description": "To define a proxy protocol when instantiating the Kinesis client",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.region",
+      "type": "java.lang.String",
+      "description": "The region in which Kinesis Firehose client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.secret-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Secret Key",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.sequence-number",
+      "type": "java.lang.String",
+      "description": "The sequence number to start polling from. Required if iteratorType is set to AFTER_SEQUENCE_NUMBER or AT_SEQUENCE_NUMBER",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.shard-closed",
+      "type": "org.apache.camel.component.aws2.kinesis.Kinesis2ShardClosedStrategyEnum",
+      "description": "Define what will be the behavior in case of shard closed. Possible value are ignore, silent and fail. In case of ignore a message will be logged and the consumer will restart from the beginning,in case of silent there will be no logging and the consumer will start from the beginning,in case of fail a ReachedClosedStateException will be raised",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.shard-id",
+      "type": "java.lang.String",
+      "description": "Defines which shardId in the Kinesis stream to get records from",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.trust-all-certificates",
+      "type": "java.lang.Boolean",
+      "description": "If we want to trust all certificates in case of overriding the endpoint",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}

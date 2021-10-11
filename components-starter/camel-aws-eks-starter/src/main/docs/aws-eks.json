@@ -1,0 +1,104 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.aws-eks",
+      "type": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-eks.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.aws-eks.access-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Access Key",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-eks.auto-discover-client",
+      "type": "java.lang.Boolean",
+      "description": "Setting the autoDiscoverClient mechanism, if true, the component will look for a client instance in the registry automatically otherwise it will skip that checking.",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws-eks.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws-eks.configuration",
+      "type": "org.apache.camel.component.aws.eks.EKSConfiguration",
+      "description": "The component configuration. The option is a org.apache.camel.component.aws.eks.EKSConfiguration type.",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-eks.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.aws-eks.eks-client",
+      "type": "com.amazonaws.services.eks.AmazonEKS",
+      "description": "To use a existing configured AWS EKS as client. The option is a com.amazonaws.services.eks.AmazonEKS type.",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-eks.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the aws-eks component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-eks.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-eks.operation",
+      "type": "org.apache.camel.component.aws.eks.EKSOperations",
+      "description": "The operation to perform",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-eks.proxy-host",
+      "type": "java.lang.String",
+      "description": "To define a proxy host when instantiating the EKS client",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-eks.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "To define a proxy port when instantiating the EKS client",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-eks.proxy-protocol",
+      "type": "com.amazonaws.Protocol",
+      "description": "To define a proxy protocol when instantiating the EKS client",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-eks.region",
+      "type": "java.lang.String",
+      "description": "The region in which EKS client needs to work. When using this parameter, the configuration will expect the capitalized name of the region (for example AP_EAST_1) You'll need to use the name Regions.EU_WEST_1.name()",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-eks.secret-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Secret Key",
+      "sourceType": "org.apache.camel.component.aws.eks.springboot.EKSComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

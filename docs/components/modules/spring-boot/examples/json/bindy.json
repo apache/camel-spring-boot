@@ -1,0 +1,169 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.bindy-csv",
+      "type": "org.apache.camel.dataformat.bindy.csv.springboot.BindyCsvDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.bindy.csv.springboot.BindyCsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-csv.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.bindy.csv.springboot.BindyCsvDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.dataformat.bindy-fixed",
+      "type": "org.apache.camel.dataformat.bindy.fixed.springboot.BindyFixedLengthDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.bindy.fixed.springboot.BindyFixedLengthDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-fixed.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.bindy.fixed.springboot.BindyFixedLengthDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.dataformat.bindy-kvp",
+      "type": "org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-kvp.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.bindy-csv.allow-empty-stream",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow empty streams in the unmarshal process. If true, no exception will be thrown when a body without records is provided.",
+      "sourceType": "org.apache.camel.dataformat.bindy.csv.springboot.BindyCsvDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.bindy-csv.class-type",
+      "type": "java.lang.String",
+      "description": "Name of model class to use.",
+      "sourceType": "org.apache.camel.dataformat.bindy.csv.springboot.BindyCsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-csv.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.bindy-csv.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the bindy-csv data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.bindy.csv.springboot.BindyCsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-csv.locale",
+      "type": "java.lang.String",
+      "description": "To configure a default locale to use, such as us for united states. To use the JVM platform default locale then use the name default",
+      "sourceType": "org.apache.camel.dataformat.bindy.csv.springboot.BindyCsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-csv.type",
+      "type": "java.lang.String",
+      "description": "Whether to use Csv, Fixed, or KeyValue.",
+      "sourceType": "org.apache.camel.dataformat.bindy.csv.springboot.BindyCsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-csv.unwrap-single-instance",
+      "type": "java.lang.Boolean",
+      "description": "When unmarshalling should a single instance be unwrapped and returned instead of wrapped in a java.util.List.",
+      "sourceType": "org.apache.camel.dataformat.bindy.csv.springboot.BindyCsvDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.bindy-fixed.allow-empty-stream",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow empty streams in the unmarshal process. If true, no exception will be thrown when a body without records is provided.",
+      "sourceType": "org.apache.camel.dataformat.bindy.fixed.springboot.BindyFixedLengthDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.bindy-fixed.class-type",
+      "type": "java.lang.String",
+      "description": "Name of model class to use.",
+      "sourceType": "org.apache.camel.dataformat.bindy.fixed.springboot.BindyFixedLengthDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-fixed.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.bindy-fixed.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the bindy-fixed data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.bindy.fixed.springboot.BindyFixedLengthDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-fixed.locale",
+      "type": "java.lang.String",
+      "description": "To configure a default locale to use, such as us for united states. To use the JVM platform default locale then use the name default",
+      "sourceType": "org.apache.camel.dataformat.bindy.fixed.springboot.BindyFixedLengthDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-fixed.type",
+      "type": "java.lang.String",
+      "description": "Whether to use Csv, Fixed, or KeyValue.",
+      "sourceType": "org.apache.camel.dataformat.bindy.fixed.springboot.BindyFixedLengthDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-fixed.unwrap-single-instance",
+      "type": "java.lang.Boolean",
+      "description": "When unmarshalling should a single instance be unwrapped and returned instead of wrapped in a java.util.List.",
+      "sourceType": "org.apache.camel.dataformat.bindy.fixed.springboot.BindyFixedLengthDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.bindy-kvp.allow-empty-stream",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow empty streams in the unmarshal process. If true, no exception will be thrown when a body without records is provided.",
+      "sourceType": "org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.bindy-kvp.class-type",
+      "type": "java.lang.String",
+      "description": "Name of model class to use.",
+      "sourceType": "org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-kvp.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.bindy-kvp.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the bindy-kvp data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-kvp.locale",
+      "type": "java.lang.String",
+      "description": "To configure a default locale to use, such as us for united states. To use the JVM platform default locale then use the name default",
+      "sourceType": "org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-kvp.type",
+      "type": "java.lang.String",
+      "description": "Whether to use Csv, Fixed, or KeyValue.",
+      "sourceType": "org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.bindy-kvp.unwrap-single-instance",
+      "type": "java.lang.Boolean",
+      "description": "When unmarshalling should a single instance be unwrapped and returned instead of wrapped in a java.util.List.",
+      "sourceType": "org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}
