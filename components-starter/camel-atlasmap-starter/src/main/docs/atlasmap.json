@@ -1,0 +1,55 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.atlasmap",
+      "type": "org.apache.camel.component.atlasmap.springboot.AtlasMapComponentConfiguration",
+      "sourceType": "org.apache.camel.component.atlasmap.springboot.AtlasMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atlasmap.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.atlasmap.springboot.AtlasMapComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.atlasmap.atlas-context-factory",
+      "type": "io.atlasmap.api.AtlasContextFactory",
+      "description": "To use the AtlasContextFactory otherwise a new engine is created. The option is a io.atlasmap.api.AtlasContextFactory type.",
+      "sourceType": "org.apache.camel.component.atlasmap.springboot.AtlasMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atlasmap.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.atlasmap.springboot.AtlasMapComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.atlasmap.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.atlasmap.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the atlasmap component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.atlasmap.springboot.AtlasMapComponentConfiguration"
+    },
+    {
+      "name": "camel.component.atlasmap.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.atlasmap.springboot.AtlasMapComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.atlasmap.properties-file",
+      "type": "java.lang.String",
+      "description": "The URI of the properties file which is used for AtlasContextFactory initialization.",
+      "sourceType": "org.apache.camel.component.atlasmap.springboot.AtlasMapComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

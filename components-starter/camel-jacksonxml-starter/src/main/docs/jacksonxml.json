@@ -1,0 +1,125 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.jacksonxml",
+      "type": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.jacksonxml.allow-jms-type",
+      "type": "java.lang.Boolean",
+      "description": "Used for JMS users to allow the JMSType header from the JMS spec to specify a FQN classname to use to unmarshal to.",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.allow-unmarshall-type",
+      "type": "java.lang.Boolean",
+      "description": "If enabled then Jackson is allowed to attempt to use the CamelJacksonUnmarshalType header during the unmarshalling. This should only be enabled when desired to be used.",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.collection-type-name",
+      "type": "java.lang.String",
+      "description": "Refers to a custom collection type to lookup in the registry to use. This option should rarely be used, but allows to use different collection types than java.util.Collection based as default.",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.content-type-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether the data format should set the Content-Type header with the type from the data format. For example application\/xml for data formats marshalling to XML, or application\/json for data formats marshalling to JSON",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.disable-features",
+      "type": "java.lang.String",
+      "description": "Set of features to disable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. The features should be a name that matches a enum from com.fasterxml.jackson.databind.SerializationFeature, com.fasterxml.jackson.databind.DeserializationFeature, or com.fasterxml.jackson.databind.MapperFeature Multiple features can be separated by comma",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.enable-features",
+      "type": "java.lang.String",
+      "description": "Set of features to enable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. The features should be a name that matches a enum from com.fasterxml.jackson.databind.SerializationFeature, com.fasterxml.jackson.databind.DeserializationFeature, or com.fasterxml.jackson.databind.MapperFeature Multiple features can be separated by comma",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.enable-jaxb-annotation-module",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the JAXB annotations module when using jackson. When enabled then JAXB annotations can be used by Jackson.",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the jacksonxml data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.include",
+      "type": "java.lang.String",
+      "description": "If you want to marshal a pojo to JSON, and the pojo has some fields with null values. And you want to skip these null values, you can set this option to NON_NULL",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.json-view-type-name",
+      "type": "java.lang.String",
+      "description": "When marshalling a POJO to JSON you might want to exclude certain fields from the JSON output. With Jackson you can use JSON views to accomplish this. This option is to refer to the class which has JsonView annotations",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.module-class-names",
+      "type": "java.lang.String",
+      "description": "To use custom Jackson modules com.fasterxml.jackson.databind.Module specified as a String with FQN class names. Multiple classes can be separated by comma.",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.module-refs",
+      "type": "java.lang.String",
+      "description": "To use custom Jackson modules referred from the Camel registry. Multiple modules can be separated by comma.",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.pretty-print",
+      "type": "java.lang.Boolean",
+      "description": "To enable pretty printing output nicely formatted. Is by default false.",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.unmarshal-type-name",
+      "type": "java.lang.String",
+      "description": "Class name of the java type to use when unmarshalling",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.use-list",
+      "type": "java.lang.Boolean",
+      "description": "To unmarshal to a List of Map or a List of Pojo.",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.jacksonxml.xml-mapper",
+      "type": "java.lang.String",
+      "description": "Lookup and use the existing XmlMapper with the given id.",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
+    }
+  ],
+  "hints": []
+}

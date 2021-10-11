@@ -1,0 +1,223 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.openstack-cinder",
+      "type": "org.apache.camel.component.openstack.cinder.springboot.CinderComponentConfiguration",
+      "sourceType": "org.apache.camel.component.openstack.cinder.springboot.CinderComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openstack-cinder.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.openstack.cinder.springboot.CinderComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.openstack-glance",
+      "type": "org.apache.camel.component.openstack.glance.springboot.GlanceComponentConfiguration",
+      "sourceType": "org.apache.camel.component.openstack.glance.springboot.GlanceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openstack-glance.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.openstack.glance.springboot.GlanceComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.openstack-keystone",
+      "type": "org.apache.camel.component.openstack.keystone.springboot.KeystoneComponentConfiguration",
+      "sourceType": "org.apache.camel.component.openstack.keystone.springboot.KeystoneComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openstack-keystone.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.openstack.keystone.springboot.KeystoneComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.openstack-neutron",
+      "type": "org.apache.camel.component.openstack.neutron.springboot.NeutronComponentConfiguration",
+      "sourceType": "org.apache.camel.component.openstack.neutron.springboot.NeutronComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openstack-neutron.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.openstack.neutron.springboot.NeutronComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.openstack-nova",
+      "type": "org.apache.camel.component.openstack.nova.springboot.NovaComponentConfiguration",
+      "sourceType": "org.apache.camel.component.openstack.nova.springboot.NovaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openstack-nova.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.openstack.nova.springboot.NovaComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.openstack-swift",
+      "type": "org.apache.camel.component.openstack.swift.springboot.SwiftComponentConfiguration",
+      "sourceType": "org.apache.camel.component.openstack.swift.springboot.SwiftComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openstack-swift.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.openstack.swift.springboot.SwiftComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.openstack-cinder.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.openstack.cinder.springboot.CinderComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.openstack-cinder.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.openstack-cinder.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the openstack-cinder component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.openstack.cinder.springboot.CinderComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openstack-cinder.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.openstack.cinder.springboot.CinderComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.openstack-glance.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.openstack.glance.springboot.GlanceComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.openstack-glance.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.openstack-glance.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the openstack-glance component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.openstack.glance.springboot.GlanceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openstack-glance.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.openstack.glance.springboot.GlanceComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.openstack-keystone.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.openstack.keystone.springboot.KeystoneComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.openstack-keystone.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.openstack-keystone.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the openstack-keystone component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.openstack.keystone.springboot.KeystoneComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openstack-keystone.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.openstack.keystone.springboot.KeystoneComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.openstack-neutron.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.openstack.neutron.springboot.NeutronComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.openstack-neutron.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.openstack-neutron.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the openstack-neutron component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.openstack.neutron.springboot.NeutronComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openstack-neutron.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.openstack.neutron.springboot.NeutronComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.openstack-nova.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.openstack.nova.springboot.NovaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.openstack-nova.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.openstack-nova.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the openstack-nova component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.openstack.nova.springboot.NovaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openstack-nova.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.openstack.nova.springboot.NovaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.openstack-swift.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.openstack.swift.springboot.SwiftComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.openstack-swift.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.openstack-swift.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the openstack-swift component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.openstack.swift.springboot.SwiftComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openstack-swift.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.openstack.swift.springboot.SwiftComponentConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}

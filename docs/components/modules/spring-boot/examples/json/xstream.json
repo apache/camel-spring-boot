@@ -1,0 +1,121 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.json-xstream",
+      "type": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.json-xstream.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.dataformat.xstream",
+      "type": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xstream.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.json-xstream.content-type-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether the data format should set the Content-Type header with the type from the data format. For example application\/xml for data formats marshalling to XML, or application\/json for data formats marshalling to JSON",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.json-xstream.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.json-xstream.drop-root-node",
+      "type": "java.lang.Boolean",
+      "description": "Whether XStream will drop the root node in the generated JSon. You may want to enable this when using POJOs; as then the written object will include the class name as root node, which is often not intended to be written in the JSON output.",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.json-xstream.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the json-xstream data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.json-xstream.pretty-print",
+      "type": "java.lang.Boolean",
+      "description": "To enable pretty printing output nicely formatted. Is by default false.",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.xstream.aliases",
+      "type": "java.util.List<org.apache.camel.model.PropertyDefinition>",
+      "description": "Alias a Class to a shorter name to be used in XML elements.",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xstream.content-type-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether the data format should set the Content-Type header with the type from the data format. For example application\/xml for data formats marshalling to XML, or application\/json for data formats marshalling to JSON",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.xstream.converters",
+      "type": "java.util.List<org.apache.camel.model.PropertyDefinition>",
+      "description": "List of class names for using custom XStream converters. The classes must be of type com.thoughtworks.xstream.converters.Converter",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xstream.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.xstream.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the xstream data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xstream.encoding",
+      "type": "java.lang.String",
+      "description": "Sets the encoding to use",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xstream.implicit-collections",
+      "type": "java.util.List<org.apache.camel.model.PropertyDefinition>",
+      "description": "Adds a default implicit collection which is used for any unmapped XML tag. Multiple values can be separated by comma.",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xstream.mode",
+      "type": "java.lang.String",
+      "description": "Mode for dealing with duplicate references The possible values are: NO_REFERENCES ID_REFERENCES XPATH_RELATIVE_REFERENCES XPATH_ABSOLUTE_REFERENCES SINGLE_NODE_XPATH_RELATIVE_REFERENCES SINGLE_NODE_XPATH_ABSOLUTE_REFERENCES",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xstream.omit-fields",
+      "type": "java.util.List<org.apache.camel.model.PropertyDefinition>",
+      "description": "Prevents a field from being serialized. To omit a field you must always provide the declaring type and not necessarily the type that is converted. Multiple values can be separated by comma.",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xstream.permissions",
+      "type": "java.lang.String",
+      "description": "Adds permissions that controls which Java packages and classes XStream is allowed to use during unmarshal from xml\/json to Java beans. A permission must be configured either here or globally using a JVM system property. The permission can be specified in a syntax where a plus sign is allow, and minus sign is deny. Wildcards is supported by using . as prefix. For example to allow com.foo and all subpackages then specify com.foo.. Multiple permissions can be configured separated by comma, such as com.foo.,-com.foo.bar.MySecretBean. The following default permission is always included: -,java.lang.,java.util. unless its overridden by specifying a JVM system property with they key org.apache.camel.xstream.permissions.",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration"
+    }
+  ],
+  "hints": []
+}
