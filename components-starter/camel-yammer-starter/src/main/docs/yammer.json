@@ -1,0 +1,127 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.yammer",
+      "type": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.yammer.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.yammer.access-token",
+      "type": "java.lang.String",
+      "description": "The access token",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.yammer.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.yammer.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.yammer.configuration",
+      "type": "org.apache.camel.component.yammer.YammerConfiguration",
+      "description": "Component configuration. The option is a org.apache.camel.component.yammer.YammerConfiguration type.",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.yammer.consumer-key",
+      "type": "java.lang.String",
+      "description": "The consumer key",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.yammer.consumer-secret",
+      "type": "java.lang.String",
+      "description": "The consumer secret",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.yammer.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.yammer.delay",
+      "type": "java.lang.Long",
+      "description": "Delay between polling in millis. The option is a long type.",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.yammer.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the yammer component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.yammer.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.yammer.limit",
+      "type": "java.lang.Integer",
+      "description": "Return only the specified number of messages. Works for threaded set to true and threaded set to extended.",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration",
+      "defaultValue": -1
+    },
+    {
+      "name": "camel.component.yammer.newer-than",
+      "type": "java.lang.Long",
+      "description": "Returns messages newer than the message ID specified as a numeric string. This should be used when polling for new messages. If you're looking at messages, and the most recent message returned is 3516, you can make a request with the parameter newerThan equals to 3516 to ensure that you do not get duplicate copies of messages already on your page.",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration",
+      "defaultValue": -1
+    },
+    {
+      "name": "camel.component.yammer.older-than",
+      "type": "java.lang.Long",
+      "description": "Returns messages older than the message ID specified as a numeric string. This is useful for paginating messages. For example, if you're currently viewing 20 messages and the oldest is number 2912, you could append olderThan equals to 2912 to your request to get the 20 messages prior to those you're seeing.",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration",
+      "defaultValue": -1
+    },
+    {
+      "name": "camel.component.yammer.requestor",
+      "type": "org.apache.camel.component.yammer.ApiRequestor",
+      "description": "To use a specific requester to communicate with Yammer. The option is a org.apache.camel.component.yammer.ApiRequestor type.",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.yammer.threaded",
+      "type": "java.lang.String",
+      "description": "threaded equals to true will only return the first message in each thread. This parameter is intended for apps which display message threads collapsed. threaded equals to extended will return the thread starter messages in order of most recently active as well as the two most recent messages, as they are viewed in the default view on the Yammer web interface.",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.yammer.use-json",
+      "type": "java.lang.Boolean",
+      "description": "Set to true if you want to use raw JSON rather than converting to POJOs.",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.yammer.user-id",
+      "type": "java.lang.String",
+      "description": "The user id",
+      "sourceType": "org.apache.camel.component.yammer.springboot.YammerComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

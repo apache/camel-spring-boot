@@ -1,0 +1,421 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.fhir",
+      "type": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.dataformat.fhirjson",
+      "type": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhirjson.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.dataformat.fhirxml",
+      "type": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhirxml.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.fhir.access-token",
+      "type": "java.lang.String",
+      "description": "OAuth access token",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.fhir.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.fhir.client",
+      "type": "ca.uhn.fhir.rest.client.api.IGenericClient",
+      "description": "To use the custom client. The option is a ca.uhn.fhir.rest.client.api.IGenericClient type.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.client-factory",
+      "type": "ca.uhn.fhir.rest.client.api.IRestfulClientFactory",
+      "description": "To use the custom client factory. The option is a ca.uhn.fhir.rest.client.api.IRestfulClientFactory type.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.compress",
+      "type": "java.lang.Boolean",
+      "description": "Compresses outgoing (POST\/PUT) contents to the GZIP format",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.fhir.configuration",
+      "type": "org.apache.camel.component.fhir.FhirConfiguration",
+      "description": "To use the shared configuration. The option is a org.apache.camel.component.fhir.FhirConfiguration type.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.connection-timeout",
+      "type": "java.lang.Integer",
+      "description": "How long to try and establish the initial TCP connection (in ms)",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
+      "name": "camel.component.fhir.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.fhir.defer-model-scanning",
+      "type": "java.lang.Boolean",
+      "description": "When this option is set, model classes will not be scanned for children until the child list for the given type is actually accessed.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.fhir.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the fhir component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.encoding",
+      "type": "java.lang.String",
+      "description": "Encoding to use for all request",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.fhir-context",
+      "type": "ca.uhn.fhir.context.FhirContext",
+      "description": "FhirContext is an expensive object to create. To avoid creating multiple instances, it can be set directly. The option is a ca.uhn.fhir.context.FhirContext type.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.fhir-version",
+      "type": "java.lang.String",
+      "description": "The FHIR Version to use",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "defaultValue": "R4"
+    },
+    {
+      "name": "camel.component.fhir.force-conformance-check",
+      "type": "java.lang.Boolean",
+      "description": "Force conformance check",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.fhir.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.fhir.log",
+      "type": "java.lang.Boolean",
+      "description": "Will log every requests and responses",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.fhir.password",
+      "type": "java.lang.String",
+      "description": "Username to use for basic authentication",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.pretty-print",
+      "type": "java.lang.Boolean",
+      "description": "Pretty print all request",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.fhir.proxy-host",
+      "type": "java.lang.String",
+      "description": "The proxy host",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.proxy-password",
+      "type": "java.lang.String",
+      "description": "The proxy password",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "The proxy port",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.proxy-user",
+      "type": "java.lang.String",
+      "description": "The proxy username",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.server-url",
+      "type": "java.lang.String",
+      "description": "The FHIR server base URL",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.session-cookie",
+      "type": "java.lang.String",
+      "description": "HTTP session cookie to add to every request",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.socket-timeout",
+      "type": "java.lang.Integer",
+      "description": "How long to block for individual read\/write operations (in ms)",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
+      "name": "camel.component.fhir.summary",
+      "type": "java.lang.String",
+      "description": "Request that the server modify the response using the _summary param",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.username",
+      "type": "java.lang.String",
+      "description": "Username to use for basic authentication",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
+    },
+    {
+      "name": "camel.component.fhir.validation-mode",
+      "type": "java.lang.String",
+      "description": "When should Camel validate the FHIR Server's conformance statement",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration",
+      "defaultValue": "ONCE"
+    },
+    {
+      "name": "camel.dataformat.fhirjson.content-type-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether the data format should set the Content-Type header with the type from the data format. For example application\/xml for data formats marshalling to XML, or application\/json for data formats marshalling to JSON",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.fhirjson.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.fhirjson.dont-encode-elements",
+      "type": "java.util.Set<java.lang.String>",
+      "description": "If provided, specifies the elements which should NOT be encoded. Valid values for this field would include: Patient - Don't encode patient and all its children Patient.name - Don't encode the patient's name Patient.name.family - Don't encode the patient's family name .text - Don't encode the text element on any resource (only the very first position may contain a wildcard) DSTU2 note: Note that values including meta, such as Patient.meta will work for DSTU2 parsers, but values with subelements on meta such as Patient.meta.lastUpdated will only work in DSTU3 mode.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhirjson.dont-strip-versions-from-references-at-paths",
+      "type": "java.util.List<java.lang.String>",
+      "description": "If supplied value(s), any resource references at the specified paths will have their resource versions encoded instead of being automatically stripped during the encoding process. This setting has no effect on the parsing process. This method provides a finer-grained level of control than setStripVersionsFromReferences(String) and any paths specified by this method will be encoded even if setStripVersionsFromReferences(String) has been set to true (which is the default)",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhirjson.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the fhirJson data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhirjson.encode-elements",
+      "type": "java.util.Set<java.lang.String>",
+      "description": "If provided, specifies the elements which should be encoded, to the exclusion of all others. Valid values for this field would include: Patient - Encode patient and all its children Patient.name - Encode only the patient's name Patient.name.family - Encode only the patient's family name .text - Encode the text element on any resource (only the very first position may contain a wildcard) .(mandatory) - This is a special case which causes any mandatory fields (min 0) to be encoded",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhirjson.encode-elements-applies-to-child-resources-only",
+      "type": "java.lang.Boolean",
+      "description": "If set to true (default is false), the values supplied to setEncodeElements(Set) will not be applied to the root resource (typically a Bundle), but will be applied to any sub-resources contained within it (i.e. search result resources in that bundle)",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirjson.fhir-version",
+      "type": "java.lang.String",
+      "description": "The version of FHIR to use. Possible values are: DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
+      "defaultValue": "DSTU3"
+    },
+    {
+      "name": "camel.dataformat.fhirjson.omit-resource-id",
+      "type": "java.lang.Boolean",
+      "description": "If set to true (default is false) the ID of any resources being encoded will not be included in the output. Note that this does not apply to contained resources, only to root resources. In other words, if this is set to true, contained resources will still have local IDs but the outer\/containing ID will not have an ID.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirjson.override-resource-id-with-bundle-entry-full-url",
+      "type": "java.lang.Boolean",
+      "description": "If set to true (which is the default), the Bundle.entry.fullUrl will override the Bundle.entry.resource's resource id if the fullUrl is defined. This behavior happens when parsing the source data into a Bundle object. Set this to false if this is not the desired behavior (e.g. the client code wishes to perform additional validation checks between the fullUrl and the resource id).",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirjson.pretty-print",
+      "type": "java.lang.Boolean",
+      "description": "Sets the pretty print flag, meaning that the parser will encode resources with human-readable spacing and newlines between elements instead of condensing output as much as possible.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirjson.server-base-url",
+      "type": "java.lang.String",
+      "description": "Sets the server's base URL used by this parser. If a value is set, resource references will be turned into relative references if they are provided as absolute URLs but have a base matching the given base.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhirjson.strip-versions-from-references",
+      "type": "java.lang.Boolean",
+      "description": "If set to true (which is the default), resource references containing a version will have the version removed when the resource is encoded. This is generally good behaviour because in most situations, references from one resource to another should be to the resource by ID, not by ID and version. In some cases though, it may be desirable to preserve the version in resource links. In that case, this value should be set to false. This method provides the ability to globally disable reference encoding. If finer-grained control is needed, use setDontStripVersionsFromReferencesAtPaths(List)",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirjson.summary-mode",
+      "type": "java.lang.Boolean",
+      "description": "If set to true (default is false) only elements marked by the FHIR specification as being summary elements will be included.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirjson.suppress-narratives",
+      "type": "java.lang.Boolean",
+      "description": "If set to true (default is false), narratives will not be included in the encoded values.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirxml.content-type-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether the data format should set the Content-Type header with the type from the data format. For example application\/xml for data formats marshalling to XML, or application\/json for data formats marshalling to JSON",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.fhirxml.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.fhirxml.dont-encode-elements",
+      "type": "java.util.Set<java.lang.String>",
+      "description": "If provided, specifies the elements which should NOT be encoded. Valid values for this field would include: Patient - Don't encode patient and all its children Patient.name - Don't encode the patient's name Patient.name.family - Don't encode the patient's family name .text - Don't encode the text element on any resource (only the very first position may contain a wildcard) DSTU2 note: Note that values including meta, such as Patient.meta will work for DSTU2 parsers, but values with subelements on meta such as Patient.meta.lastUpdated will only work in DSTU3 mode.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhirxml.dont-strip-versions-from-references-at-paths",
+      "type": "java.util.List<java.lang.String>",
+      "description": "If supplied value(s), any resource references at the specified paths will have their resource versions encoded instead of being automatically stripped during the encoding process. This setting has no effect on the parsing process. This method provides a finer-grained level of control than setStripVersionsFromReferences(String) and any paths specified by this method will be encoded even if setStripVersionsFromReferences(String) has been set to true (which is the default)",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhirxml.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the fhirXml data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhirxml.encode-elements",
+      "type": "java.util.Set<java.lang.String>",
+      "description": "If provided, specifies the elements which should be encoded, to the exclusion of all others. Valid values for this field would include: Patient - Encode patient and all its children Patient.name - Encode only the patient's name Patient.name.family - Encode only the patient's family name .text - Encode the text element on any resource (only the very first position may contain a wildcard) .(mandatory) - This is a special case which causes any mandatory fields (min 0) to be encoded",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhirxml.encode-elements-applies-to-child-resources-only",
+      "type": "java.lang.Boolean",
+      "description": "If set to true (default is false), the values supplied to setEncodeElements(Set) will not be applied to the root resource (typically a Bundle), but will be applied to any sub-resources contained within it (i.e. search result resources in that bundle)",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirxml.fhir-version",
+      "type": "java.lang.String",
+      "description": "The version of FHIR to use. Possible values are: DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
+      "defaultValue": "DSTU3"
+    },
+    {
+      "name": "camel.dataformat.fhirxml.omit-resource-id",
+      "type": "java.lang.Boolean",
+      "description": "If set to true (default is false) the ID of any resources being encoded will not be included in the output. Note that this does not apply to contained resources, only to root resources. In other words, if this is set to true, contained resources will still have local IDs but the outer\/containing ID will not have an ID.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirxml.override-resource-id-with-bundle-entry-full-url",
+      "type": "java.lang.Boolean",
+      "description": "If set to true (which is the default), the Bundle.entry.fullUrl will override the Bundle.entry.resource's resource id if the fullUrl is defined. This behavior happens when parsing the source data into a Bundle object. Set this to false if this is not the desired behavior (e.g. the client code wishes to perform additional validation checks between the fullUrl and the resource id).",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirxml.pretty-print",
+      "type": "java.lang.Boolean",
+      "description": "Sets the pretty print flag, meaning that the parser will encode resources with human-readable spacing and newlines between elements instead of condensing output as much as possible.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirxml.server-base-url",
+      "type": "java.lang.String",
+      "description": "Sets the server's base URL used by this parser. If a value is set, resource references will be turned into relative references if they are provided as absolute URLs but have a base matching the given base.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhirxml.strip-versions-from-references",
+      "type": "java.lang.Boolean",
+      "description": "If set to true (which is the default), resource references containing a version will have the version removed when the resource is encoded. This is generally good behaviour because in most situations, references from one resource to another should be to the resource by ID, not by ID and version. In some cases though, it may be desirable to preserve the version in resource links. In that case, this value should be set to false. This method provides the ability to globally disable reference encoding. If finer-grained control is needed, use setDontStripVersionsFromReferencesAtPaths(List)",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirxml.summary-mode",
+      "type": "java.lang.Boolean",
+      "description": "If set to true (default is false) only elements marked by the FHIR specification as being summary elements will be included.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhirxml.suppress-narratives",
+      "type": "java.lang.Boolean",
+      "description": "If set to true (default is false), narratives will not be included in the encoded values.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}

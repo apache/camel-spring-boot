@@ -1,0 +1,91 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.stitch",
+      "type": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.stitch.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.stitch.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.stitch.configuration",
+      "type": "org.apache.camel.component.stitch.StitchConfiguration",
+      "description": "The component configurations. The option is a org.apache.camel.component.stitch.StitchConfiguration type.",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.stitch.connection-provider",
+      "type": "reactor.netty.resources.ConnectionProvider",
+      "description": "ConnectionProvider contain configuration for the HttpClient like Maximum connection limit .. etc, you can inject this ConnectionProvider and the StitchClient will initialize HttpClient with this ConnectionProvider. The option is a reactor.netty.resources.ConnectionProvider type.",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.stitch.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.stitch.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the stitch component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.stitch.http-client",
+      "type": "reactor.netty.http.client.HttpClient",
+      "description": "Reactor Netty HttpClient, you can injected it if you want to have custom HttpClient. The option is a reactor.netty.http.client.HttpClient type.",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.stitch.key-names",
+      "type": "java.lang.String",
+      "description": "A collection of comma separated strings representing the Primary Key fields in the source table. Stitch use these Primary Keys to de-dupe data during loading If not provided, the table will be loaded in an append-only manner.",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.stitch.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.stitch.region",
+      "type": "org.apache.camel.component.stitch.client.StitchRegion",
+      "description": "Stitch account region, e.g: europe",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.stitch.stitch-client",
+      "type": "org.apache.camel.component.stitch.client.StitchClient",
+      "description": "Set a custom StitchClient that implements org.apache.camel.component.stitch.client.StitchClient interface. The option is a org.apache.camel.component.stitch.client.StitchClient type.",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.stitch.stitch-schema",
+      "type": "org.apache.camel.component.stitch.client.models.StitchSchema",
+      "description": "A schema that describes the record(s). The option is a org.apache.camel.component.stitch.client.models.StitchSchema type.",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.stitch.token",
+      "type": "java.lang.String",
+      "description": "Stitch access token for the Stitch Import API",
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

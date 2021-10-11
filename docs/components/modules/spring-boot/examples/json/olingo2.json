@@ -1,0 +1,146 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.olingo2",
+      "type": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.olingo2.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.olingo2.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.olingo2.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.olingo2.configuration",
+      "type": "org.apache.camel.component.olingo2.Olingo2Configuration",
+      "description": "To use the shared configuration. The option is a org.apache.camel.component.olingo2.Olingo2Configuration type.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.olingo2.connect-timeout",
+      "type": "java.lang.Integer",
+      "description": "HTTP connection creation timeout in milliseconds, defaults to 30,000 (30 seconds)",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.olingo2.content-type",
+      "type": "java.lang.String",
+      "description": "Content-Type header value can be used to specify JSON or XML message format, defaults to application\/json;charset=utf-8",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration",
+      "defaultValue": "application\/json;charset=utf-8"
+    },
+    {
+      "name": "camel.component.olingo2.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.olingo2.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the olingo2 component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.olingo2.entity-provider-read-properties",
+      "type": "org.apache.olingo.odata2.api.ep.EntityProviderReadProperties",
+      "description": "Custom entity provider read properties applied to all read operations. The option is a org.apache.olingo.odata2.api.ep.EntityProviderReadProperties type.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.olingo2.entity-provider-write-properties",
+      "type": "org.apache.olingo.odata2.api.ep.EntityProviderWriteProperties",
+      "description": "Custom entity provider write properties applied to create, update, patch, batch and merge operations. For instance users can skip the Json object wrapper or enable content only mode when sending request data. A service URI set in the properties will always be overwritten by the serviceUri configuration parameter. Please consider to using the serviceUri configuration parameter instead of setting the respective write property here. The option is a org.apache.olingo.odata2.api.ep.EntityProviderWriteProperties type.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.olingo2.filter-already-seen",
+      "type": "java.lang.Boolean",
+      "description": "Set this to true to filter out results that have already been communicated by this component.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.olingo2.http-async-client-builder",
+      "type": "org.apache.http.impl.nio.client.HttpAsyncClientBuilder",
+      "description": "Custom HTTP async client builder for more complex HTTP client configuration, overrides connectionTimeout, socketTimeout, proxy and sslContext. Note that a socketTimeout MUST be specified in the builder, otherwise OData requests could block indefinitely. The option is a org.apache.http.impl.nio.client.HttpAsyncClientBuilder type.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.olingo2.http-client-builder",
+      "type": "org.apache.http.impl.client.HttpClientBuilder",
+      "description": "Custom HTTP client builder for more complex HTTP client configuration, overrides connectionTimeout, socketTimeout, proxy and sslContext. Note that a socketTimeout MUST be specified in the builder, otherwise OData requests could block indefinitely. The option is a org.apache.http.impl.client.HttpClientBuilder type.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.olingo2.http-headers",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "description": "Custom HTTP headers to inject into every request, this could include OAuth tokens, etc.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.olingo2.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.olingo2.proxy",
+      "type": "org.apache.http.HttpHost",
+      "description": "HTTP proxy server configuration. The option is a org.apache.http.HttpHost type.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.olingo2.service-uri",
+      "type": "java.lang.String",
+      "description": "Target OData service base URI, e.g. http:\/\/services.odata.org\/OData\/OData.svc",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.olingo2.socket-timeout",
+      "type": "java.lang.Integer",
+      "description": "HTTP request timeout in milliseconds, defaults to 30,000 (30 seconds)",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.olingo2.split-result",
+      "type": "java.lang.Boolean",
+      "description": "For endpoints that return an array or collection, a consumer endpoint will map every element to distinct messages, unless splitResult is set to false.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.olingo2.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.olingo2.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable usage of global SSL context parameters.",
+      "sourceType": "org.apache.camel.component.olingo2.springboot.Olingo2ComponentConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}

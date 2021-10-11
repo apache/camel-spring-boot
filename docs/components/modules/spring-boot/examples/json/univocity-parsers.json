@@ -1,0 +1,389 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.univocity-csv",
+      "type": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed",
+      "type": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv",
+      "type": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.univocity-csv.as-map",
+      "type": "java.lang.Boolean",
+      "description": "Whether the unmarshalling should produce maps for the lines values instead of lists. It requires to have header (either defined or collected). The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.comment",
+      "type": "java.lang.String",
+      "description": "The comment symbol. The default value is #",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": "#"
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.delimiter",
+      "type": "java.lang.String",
+      "description": "The delimiter of values",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": ","
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.empty-value",
+      "type": "java.lang.String",
+      "description": "The String representation of an empty value",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the univocity-csv data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.header-extraction-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the header must be read in the first line of the test document The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.headers-disabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the headers are disabled. When defined, this option explicitly sets the headers as null which indicates that there is no header. The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.ignore-leading-whitespaces",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the leading white spaces must be ignored. The default value is true",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.ignore-trailing-whitespaces",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the trailing white spaces must ignored. The default value is true",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.lazy-load",
+      "type": "java.lang.Boolean",
+      "description": "Whether the unmarshalling should produce an iterator that reads the lines on the fly or if all the lines must be read at one. The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.line-separator",
+      "type": "java.lang.String",
+      "description": "The line separator of the files The default value is to use the JVM platform line separator",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.normalized-line-separator",
+      "type": "java.lang.String",
+      "description": "The normalized line separator of the files The default value is a new line character.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": "\\n"
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.null-value",
+      "type": "java.lang.String",
+      "description": "The string representation of a null value. The default value is null",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.number-of-records-to-read",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of record to read.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.quote",
+      "type": "java.lang.String",
+      "description": "The quote symbol.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": "\""
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.quote-all-fields",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not all values must be quoted when writing them.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.quote-escape",
+      "type": "java.lang.String",
+      "description": "The quote escape symbol",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": "\""
+    },
+    {
+      "name": "camel.dataformat.univocity-csv.skip-empty-lines",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the empty lines must be ignored. The default value is true",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.as-map",
+      "type": "java.lang.Boolean",
+      "description": "Whether the unmarshalling should produce maps for the lines values instead of lists. It requires to have header (either defined or collected). The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.comment",
+      "type": "java.lang.String",
+      "description": "The comment symbol. The default value is #",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "defaultValue": "#"
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.empty-value",
+      "type": "java.lang.String",
+      "description": "The String representation of an empty value",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the univocity-fixed data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.header-extraction-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the header must be read in the first line of the test document The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.headers-disabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the headers are disabled. When defined, this option explicitly sets the headers as null which indicates that there is no header. The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.ignore-leading-whitespaces",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the leading white spaces must be ignored. The default value is true",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.ignore-trailing-whitespaces",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the trailing white spaces must ignored. The default value is true",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.lazy-load",
+      "type": "java.lang.Boolean",
+      "description": "Whether the unmarshalling should produce an iterator that reads the lines on the fly or if all the lines must be read at one. The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.line-separator",
+      "type": "java.lang.String",
+      "description": "The line separator of the files The default value is to use the JVM platform line separator",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.normalized-line-separator",
+      "type": "java.lang.String",
+      "description": "The normalized line separator of the files The default value is a new line character.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "defaultValue": "\\n"
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.null-value",
+      "type": "java.lang.String",
+      "description": "The string representation of a null value. The default value is null",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.number-of-records-to-read",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of record to read.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.padding",
+      "type": "java.lang.String",
+      "description": "The padding character. The default value is a space",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.record-ends-on-newline",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the record ends on new line. The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.skip-empty-lines",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the empty lines must be ignored. The default value is true",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.univocity-fixed.skip-trailing-chars-until-newline",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the trailing characters until new line must be ignored. The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedWidthDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.as-map",
+      "type": "java.lang.Boolean",
+      "description": "Whether the unmarshalling should produce maps for the lines values instead of lists. It requires to have header (either defined or collected). The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.comment",
+      "type": "java.lang.String",
+      "description": "The comment symbol. The default value is #",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
+      "defaultValue": "#"
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.empty-value",
+      "type": "java.lang.String",
+      "description": "The String representation of an empty value",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the univocity-tsv data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.escape-char",
+      "type": "java.lang.String",
+      "description": "The escape character.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
+      "defaultValue": "\\"
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.header-extraction-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the header must be read in the first line of the test document The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.headers-disabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the headers are disabled. When defined, this option explicitly sets the headers as null which indicates that there is no header. The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.ignore-leading-whitespaces",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the leading white spaces must be ignored. The default value is true",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.ignore-trailing-whitespaces",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the trailing white spaces must ignored. The default value is true",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.lazy-load",
+      "type": "java.lang.Boolean",
+      "description": "Whether the unmarshalling should produce an iterator that reads the lines on the fly or if all the lines must be read at one. The default value is false",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.line-separator",
+      "type": "java.lang.String",
+      "description": "The line separator of the files The default value is to use the JVM platform line separator",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.normalized-line-separator",
+      "type": "java.lang.String",
+      "description": "The normalized line separator of the files The default value is a new line character.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
+      "defaultValue": "\\n"
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.null-value",
+      "type": "java.lang.String",
+      "description": "The string representation of a null value. The default value is null",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.number-of-records-to-read",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of record to read.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.univocity-tsv.skip-empty-lines",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not the empty lines must be ignored. The default value is true",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}
