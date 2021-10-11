@@ -1,0 +1,351 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.aws2-s3",
+      "type": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.aws2-s3.access-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Access Key",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.amazon-s3-client",
+      "type": "software.amazon.awssdk.services.s3.S3Client",
+      "description": "Reference to a com.amazonaws.services.s3.AmazonS3 in the registry. The option is a software.amazon.awssdk.services.s3.S3Client type.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.amazon-s3-presigner",
+      "type": "software.amazon.awssdk.services.s3.presigner.S3Presigner",
+      "description": "An S3 Presigner for Request, used mainly in createDownloadLink operation. The option is a software.amazon.awssdk.services.s3.presigner.S3Presigner type.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.auto-create-bucket",
+      "type": "java.lang.Boolean",
+      "description": "Setting the autocreation of the S3 bucket bucketName. This will apply also in case of moveAfterRead option enabled and it will create the destinationBucket if it doesn't exist already.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.autoclose-body",
+      "type": "java.lang.Boolean",
+      "description": "If this option is true and includeBody is false, then the S3Object.close() method will be called on exchange completion. This option is strongly related to includeBody option. In case of setting includeBody to false and autocloseBody to false, it will be up to the caller to close the S3Object stream. Setting autocloseBody to true, will close the S3Object stream automatically.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-s3.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-s3.aws-k-m-s-key-id",
+      "type": "java.lang.String",
+      "description": "Define the id of KMS key to use in case KMS is enabled",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.batch-message-number",
+      "type": "java.lang.Integer",
+      "description": "The number of messages composing a batch in streaming upload mode",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": 10
+    },
+    {
+      "name": "camel.component.aws2-s3.batch-size",
+      "type": "java.lang.Integer",
+      "description": "The batch size (in bytes) in streaming upload mode",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": 1000000
+    },
+    {
+      "name": "camel.component.aws2-s3.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.configuration",
+      "type": "org.apache.camel.component.aws2.s3.AWS2S3Configuration",
+      "description": "The component configuration. The option is a org.apache.camel.component.aws2.s3.AWS2S3Configuration type.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.customer-algorithm",
+      "type": "java.lang.String",
+      "description": "Define the customer algorithm to use in case CustomerKey is enabled",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.customer-key-id",
+      "type": "java.lang.String",
+      "description": "Define the id of Customer key to use in case CustomerKey is enabled",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.customer-key-m-d5",
+      "type": "java.lang.String",
+      "description": "Define the MD5 of Customer key to use in case CustomerKey is enabled",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.aws2-s3.delete-after-read",
+      "type": "java.lang.Boolean",
+      "description": "Delete objects from S3 after they have been retrieved. The delete is only performed if the Exchange is committed. If a rollback occurs, the object is not deleted. If this option is false, then the same objects will be retrieve over and over again on the polls. Therefore you need to use the Idempotent Consumer EIP in the route to filter out duplicates. You can filter using the AWS2S3Constants#BUCKET_NAME and AWS2S3Constants#KEY headers, or only the AWS2S3Constants#KEY header.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-s3.delete-after-write",
+      "type": "java.lang.Boolean",
+      "description": "Delete file object after the S3 file has been uploaded",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.delimiter",
+      "type": "java.lang.String",
+      "description": "The delimiter which is used in the com.amazonaws.services.s3.model.ListObjectsRequest to only consume objects we are interested in.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.destination-bucket",
+      "type": "java.lang.String",
+      "description": "Define the destination bucket where an object must be moved when moveAfterRead is set to true.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.destination-bucket-prefix",
+      "type": "java.lang.String",
+      "description": "Define the destination bucket prefix to use when an object must be moved and moveAfterRead is set to true.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.destination-bucket-suffix",
+      "type": "java.lang.String",
+      "description": "Define the destination bucket suffix to use when an object must be moved and moveAfterRead is set to true.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.done-file-name",
+      "type": "java.lang.String",
+      "description": "If provided, Camel will only consume files if a done file exists.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the aws2-s3 component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.file-name",
+      "type": "java.lang.String",
+      "description": "To get the object from the bucket with the given file name",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.ignore-body",
+      "type": "java.lang.Boolean",
+      "description": "If it is true, the S3 Object Body will be ignored completely, if it is set to false the S3 Object will be put in the body. Setting this to true, will override any behavior defined by includeBody option.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.include-body",
+      "type": "java.lang.Boolean",
+      "description": "If it is true, the S3Object exchange will be consumed and put into the body and closed. If false the S3Object stream will be put raw into the body and the headers will be set with the S3 object metadata. This option is strongly related to autocloseBody option. In case of setting includeBody to true because the S3Object stream will be consumed then it will also be closed, while in case of includeBody false then it will be up to the caller to close the S3Object stream. However setting autocloseBody to true when includeBody is false it will schedule to close the S3Object stream automatically on exchange completion.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-s3.include-folders",
+      "type": "java.lang.Boolean",
+      "description": "If it is true, the folders\/directories will be consumed. If it is false, they will be ignored, and Exchanges will not be created for those",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-s3.key-name",
+      "type": "java.lang.String",
+      "description": "Setting the key name for an element in the bucket through endpoint parameter",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.move-after-read",
+      "type": "java.lang.Boolean",
+      "description": "Move objects from S3 bucket to a different bucket after they have been retrieved. To accomplish the operation the destinationBucket option must be set. The copy bucket operation is only performed if the Exchange is committed. If a rollback occurs, the object is not moved.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.multi-part-upload",
+      "type": "java.lang.Boolean",
+      "description": "If it is true, camel will upload the file with multi part format, the part size is decided by the option of partSize",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.naming-strategy",
+      "type": "org.apache.camel.component.aws2.s3.stream.AWSS3NamingStrategyEnum",
+      "description": "The naming strategy to use in streaming upload mode",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.operation",
+      "type": "org.apache.camel.component.aws2.s3.AWS2S3Operations",
+      "description": "The operation to do in case the user don't want to do only an upload",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.override-endpoint",
+      "type": "java.lang.Boolean",
+      "description": "Set the need for overidding the endpoint. This option needs to be used in combination with uriEndpointOverride option",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.part-size",
+      "type": "java.lang.Long",
+      "description": "Setup the partSize which is used in multi part upload, the default size is 25M.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": 26214400
+    },
+    {
+      "name": "camel.component.aws2-s3.pojo-request",
+      "type": "java.lang.Boolean",
+      "description": "If we want to use a POJO request as body or not",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.policy",
+      "type": "java.lang.String",
+      "description": "The policy for this queue to set in the com.amazonaws.services.s3.AmazonS3#setBucketPolicy() method.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.prefix",
+      "type": "java.lang.String",
+      "description": "The prefix which is used in the com.amazonaws.services.s3.model.ListObjectsRequest to only consume objects we are interested in.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.proxy-host",
+      "type": "java.lang.String",
+      "description": "To define a proxy host when instantiating the SQS client",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "Specify a proxy port to be used inside the client definition.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.proxy-protocol",
+      "type": "software.amazon.awssdk.core.Protocol",
+      "description": "To define a proxy protocol when instantiating the S3 client",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.region",
+      "type": "java.lang.String",
+      "description": "The region in which S3 client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.restarting-policy",
+      "type": "org.apache.camel.component.aws2.s3.stream.AWSS3RestartingPolicyEnum",
+      "description": "The restarting policy to use in streaming upload mode",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.secret-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Secret Key",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.storage-class",
+      "type": "java.lang.String",
+      "description": "The storage class to set in the com.amazonaws.services.s3.model.PutObjectRequest request.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.streaming-upload-mode",
+      "type": "java.lang.Boolean",
+      "description": "When stream mode is true the upload to bucket will be done in streaming",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.streaming-upload-timeout",
+      "type": "java.lang.Long",
+      "description": "While streaming upload mode is true, this option set the timeout to complete upload",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.trust-all-certificates",
+      "type": "java.lang.Boolean",
+      "description": "If we want to trust all certificates in case of overriding the endpoint",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.uri-endpoint-override",
+      "type": "java.lang.String",
+      "description": "Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3.use-aws-k-m-s",
+      "type": "java.lang.Boolean",
+      "description": "Define if KMS must be used or not",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.use-customer-key",
+      "type": "java.lang.Boolean",
+      "description": "Define if Customer Key must be used or not",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.use-default-credentials-provider",
+      "type": "java.lang.Boolean",
+      "description": "Set whether the S3 client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}

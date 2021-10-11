@@ -1,0 +1,457 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.xmlsecurity-sign",
+      "type": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify",
+      "type": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.dataformat.securexml",
+      "type": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.securexml.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.xmlsecurity-sign.add-key-info-reference",
+      "type": "java.lang.Boolean",
+      "description": "In order to protect the KeyInfo element from tampering you can add a reference to the signed info element so that it is protected via the signature value. The default value is true. Only relevant when a KeyInfo is returned by KeyAccessor. and KeyInfo#getId() is not null.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.base-uri",
+      "type": "java.lang.String",
+      "description": "You can set a base URI which is used in the URI dereferencing. Relative URIs are then concatenated with the base URI.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.canonicalization-method",
+      "type": "javax.xml.crypto.AlgorithmMethod",
+      "description": "Canonicalization method used to canonicalize the SignedInfo element before the digest is calculated. You can use the helper methods XmlSignatureHelper.getCanonicalizationMethod(String algorithm) or getCanonicalizationMethod(String algorithm, List inclusiveNamespacePrefixes) to create a canonicalization method. The option is a javax.xml.crypto.AlgorithmMethod type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.clear-headers",
+      "type": "java.lang.Boolean",
+      "description": "Determines if the XML signature specific headers be cleared after signing and verification. Defaults to true.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.content-object-id",
+      "type": "java.lang.String",
+      "description": "Sets the content object Id attribute value. By default a UUID is generated. If you set the null value, then a new UUID will be generated. Only used in the enveloping case.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.content-reference-type",
+      "type": "java.lang.String",
+      "description": "Type of the content reference. The default value is null. This value can be overwritten by the header XmlSignatureConstants#HEADER_CONTENT_REFERENCE_TYPE.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.content-reference-uri",
+      "type": "java.lang.String",
+      "description": "Reference URI for the content to be signed. Only used in the enveloped case. If the reference URI contains an ID attribute value, then the resource schema URI ( setSchemaResourceUri(String)) must also be set because the schema validator will then find out which attributes are ID attributes. Will be ignored in the enveloping or detached case.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.crypto-context-properties",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Sets the crypto context properties. See {link XMLCryptoContext#setProperty(String, Object)}. Possible properties are defined in XMLSignContext an XMLValidateContext (see Supported Properties). The following properties are set by default to the value Boolean#TRUE for the XML validation. If you want to switch these features off you must set the property value to Boolean#FALSE. org.jcp.xml.dsig.validateManifests javax.xml.crypto.dsig.cacheReference",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.digest-algorithm",
+      "type": "java.lang.String",
+      "description": "Digest algorithm URI. Optional parameter. This digest algorithm is used for calculating the digest of the input message. If this digest algorithm is not specified then the digest algorithm is calculated from the signature algorithm. Example: http:\/\/www.w3.org\/2001\/04\/xmlenc#sha256",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.disallow-doctype-decl",
+      "type": "java.lang.Boolean",
+      "description": "Disallows that the incoming XML document contains DTD DOCTYPE declaration. The default value is Boolean#TRUE.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the xmlsecurity-sign component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.key-accessor",
+      "type": "org.apache.camel.component.xmlsecurity.api.KeyAccessor",
+      "description": "For the signing process, a private key is necessary. You specify a key accessor bean which provides this private key. The key accessor bean must implement the KeyAccessor interface. The package org.apache.camel.component.xmlsecurity.api contains the default implementation class DefaultKeyAccessor which reads the private key from a Java keystore. The option is a org.apache.camel.component.xmlsecurity.api.KeyAccessor type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.omit-xml-declaration",
+      "type": "java.lang.Boolean",
+      "description": "Indicator whether the XML declaration in the outgoing message body should be omitted. Default value is false. Can be overwritten by the header XmlSignatureConstants#HEADER_OMIT_XML_DECLARATION.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.output-xml-encoding",
+      "type": "java.lang.String",
+      "description": "The character encoding of the resulting signed XML document. If null then the encoding of the original XML document is used.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.parent-local-name",
+      "type": "java.lang.String",
+      "description": "Local name of the parent element to which the XML signature element will be added. Only relevant for enveloped XML signature. Alternatively you can also use setParentXpath(XPathFilterParameterSpec). Default value is null. The value must be null for enveloping and detached XML signature. This parameter or the parameter setParentXpath(XPathFilterParameterSpec) for enveloped signature and the parameter setXpathsToIdAttributes(List) for detached signature must not be set in the same configuration. If the parameters parentXpath and parentLocalName are specified in the same configuration then an exception is thrown.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.parent-namespace",
+      "type": "java.lang.String",
+      "description": "Namespace of the parent element to which the XML signature element will be added.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.parent-xpath",
+      "type": "javax.xml.crypto.dsig.spec.XPathFilterParameterSpec",
+      "description": "Sets the XPath to find the parent node in the enveloped case. Either you specify the parent node via this method or the local name and namespace of the parent with the methods setParentLocalName(String) and setParentNamespace(String). Default value is null. The value must be null for enveloping and detached XML signature. If the parameters parentXpath and parentLocalName are specified in the same configuration then an exception is thrown. The option is a javax.xml.crypto.dsig.spec.XPathFilterParameterSpec type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.plain-text",
+      "type": "java.lang.Boolean",
+      "description": "Indicator whether the message body contains plain text. The default value is false, indicating that the message body contains XML. The value can be overwritten by the header XmlSignatureConstants#HEADER_MESSAGE_IS_PLAIN_TEXT.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.plain-text-encoding",
+      "type": "java.lang.String",
+      "description": "Encoding of the plain text. Only relevant if the message body is plain text (see parameter plainText. Default value is UTF-8.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration",
+      "defaultValue": "UTF-8"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.prefix-for-xml-signature-namespace",
+      "type": "java.lang.String",
+      "description": "Namespace prefix for the XML signature namespace http:\/\/www.w3.org\/2000\/09\/xmldsig#. Default value is ds. If null or an empty value is set then no prefix is used for the XML signature namespace. See best practice http:\/\/www.w3.org\/TR\/xmldsig-bestpractices\/#signing-xml- without-namespaces",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration",
+      "defaultValue": "ds"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.properties",
+      "type": "org.apache.camel.component.xmlsecurity.api.XmlSignatureProperties",
+      "description": "For adding additional References and Objects to the XML signature which contain additional properties, you can provide a bean which implements the XmlSignatureProperties interface. The option is a org.apache.camel.component.xmlsecurity.api.XmlSignatureProperties type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.schema-resource-uri",
+      "type": "java.lang.String",
+      "description": "Classpath to the XML Schema. Must be specified in the detached XML Signature case for determining the ID attributes, might be set in the enveloped and enveloping case. If set, then the XML document is validated with the specified XML schema. The schema resource URI can be overwritten by the header XmlSignatureConstants#HEADER_SCHEMA_RESOURCE_URI.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.signature-algorithm",
+      "type": "java.lang.String",
+      "description": "Signature algorithm. Default value is http:\/\/www.w3.org\/2000\/09\/xmldsig#rsa-sha1.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration",
+      "defaultValue": "http:\/\/www.w3.org\/2001\/04\/xmldsig-more#rsa-sha256"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.signature-id",
+      "type": "java.lang.String",
+      "description": "Sets the signature Id. If this parameter is not set (null value) then a unique ID is generated for the signature ID (default). If this parameter is set to (empty string) then no Id attribute is created in the signature element.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.signer-configuration",
+      "type": "org.apache.camel.component.xmlsecurity.processor.XmlSignerConfiguration",
+      "description": "To use a shared XmlSignerConfiguration configuration to use as base for configuring endpoints. The option is a org.apache.camel.component.xmlsecurity.processor.XmlSignerConfiguration type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.transform-methods",
+      "type": "java.util.List<javax.xml.crypto.AlgorithmMethod>",
+      "description": "Transforms which are executed on the message body before the digest is calculated. By default, C14n is added and in the case of enveloped signature (see option parentLocalName) also http:\/\/www.w3.org\/2000\/09\/xmldsig#enveloped-signature is added at position 0 of the list. Use methods in XmlSignatureHelper to create the transform methods.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.uri-dereferencer",
+      "type": "javax.xml.crypto.URIDereferencer",
+      "description": "If you want to restrict the remote access via reference URIs, you can set an own dereferencer. Optional parameter. If not set the provider default dereferencer is used which can resolve URI fragments, HTTP, file and XPpointer URIs. Attention: The implementation is provider dependent!. The option is a javax.xml.crypto.URIDereferencer type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-sign.xpaths-to-id-attributes",
+      "type": "java.util.List<javax.xml.crypto.dsig.spec.XPathFilterParameterSpec>",
+      "description": "Define the elements which are signed in the detached case via XPATH expressions to ID attributes (attributes of type ID). For each element found via the XPATH expression a detached signature is created whose reference URI contains the corresponding attribute value (preceded by '#'). The signature becomes the last sibling of the signed element. Elements with deeper hierarchy level are signed first. You can also set the XPATH list dynamically via the header XmlSignatureConstants#HEADER_XPATHS_TO_ID_ATTRIBUTES. The parameter setParentLocalName(String) or setParentXpath(XPathFilterParameterSpec) for enveloped signature and this parameter for detached signature must not be set in the same configuration.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.base-uri",
+      "type": "java.lang.String",
+      "description": "You can set a base URI which is used in the URI dereferencing. Relative URIs are then concatenated with the base URI.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.clear-headers",
+      "type": "java.lang.Boolean",
+      "description": "Determines if the XML signature specific headers be cleared after signing and verification. Defaults to true.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.crypto-context-properties",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Sets the crypto context properties. See {link XMLCryptoContext#setProperty(String, Object)}. Possible properties are defined in XMLSignContext an XMLValidateContext (see Supported Properties). The following properties are set by default to the value Boolean#TRUE for the XML validation. If you want to switch these features off you must set the property value to Boolean#FALSE. org.jcp.xml.dsig.validateManifests javax.xml.crypto.dsig.cacheReference",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.disallow-doctype-decl",
+      "type": "java.lang.Boolean",
+      "description": "Disallows that the incoming XML document contains DTD DOCTYPE declaration. The default value is Boolean#TRUE.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the xmlsecurity-verify component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.key-selector",
+      "type": "javax.xml.crypto.KeySelector",
+      "description": "Provides the key for validating the XML signature. The option is a javax.xml.crypto.KeySelector type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.omit-xml-declaration",
+      "type": "java.lang.Boolean",
+      "description": "Indicator whether the XML declaration in the outgoing message body should be omitted. Default value is false. Can be overwritten by the header XmlSignatureConstants#HEADER_OMIT_XML_DECLARATION.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.output-node-search",
+      "type": "java.lang.Object",
+      "description": "Sets the output node search value for determining the node from the XML signature document which shall be set to the output message body. The class of the value depends on the type of the output node search. The output node search is forwarded to XmlSignature2Message. The option is a java.lang.Object type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.output-node-search-type",
+      "type": "java.lang.String",
+      "description": "Determines the search type for determining the output node which is serialized into the output message bodyF. See setOutputNodeSearch(Object). The supported default search types you can find in DefaultXmlSignature2Message.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration",
+      "defaultValue": "Default"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.output-xml-encoding",
+      "type": "java.lang.String",
+      "description": "The character encoding of the resulting signed XML document. If null then the encoding of the original XML document is used.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.remove-signature-elements",
+      "type": "java.lang.Boolean",
+      "description": "Indicator whether the XML signature elements (elements with local name Signature and namesapce http:\/\/www.w3.org\/2000\/09\/xmldsig#) shall be removed from the document set to the output message. Normally, this is only necessary, if the XML signature is enveloped. The default value is Boolean#FALSE. This parameter is forwarded to XmlSignature2Message. This indicator has no effect if the output node search is of type DefaultXmlSignature2Message#OUTPUT_NODE_SEARCH_TYPE_DEFAULT.F",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.schema-resource-uri",
+      "type": "java.lang.String",
+      "description": "Classpath to the XML Schema. Must be specified in the detached XML Signature case for determining the ID attributes, might be set in the enveloped and enveloping case. If set, then the XML document is validated with the specified XML schema. The schema resource URI can be overwritten by the header XmlSignatureConstants#HEADER_SCHEMA_RESOURCE_URI.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.secure-validation",
+      "type": "java.lang.Boolean",
+      "description": "Enables secure validation. If true then secure validation is enabled.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.uri-dereferencer",
+      "type": "javax.xml.crypto.URIDereferencer",
+      "description": "If you want to restrict the remote access via reference URIs, you can set an own dereferencer. Optional parameter. If not set the provider default dereferencer is used which can resolve URI fragments, HTTP, file and XPpointer URIs. Attention: The implementation is provider dependent!. The option is a javax.xml.crypto.URIDereferencer type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.validation-failed-handler",
+      "type": "org.apache.camel.component.xmlsecurity.api.ValidationFailedHandler",
+      "description": "Handles the different validation failed situations. The default implementation throws specific exceptions for the different situations (All exceptions have the package name org.apache.camel.component.xmlsecurity.api and are a sub-class of XmlSignatureInvalidException. If the signature value validation fails, a XmlSignatureInvalidValueException is thrown. If a reference validation fails, a XmlSignatureInvalidContentHashException is thrown. For more detailed information, see the JavaDoc. The option is a org.apache.camel.component.xmlsecurity.api.ValidationFailedHandler type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.verifier-configuration",
+      "type": "org.apache.camel.component.xmlsecurity.processor.XmlVerifierConfiguration",
+      "description": "To use a shared XmlVerifierConfiguration configuration to use as base for configuring endpoints. The option is a org.apache.camel.component.xmlsecurity.processor.XmlVerifierConfiguration type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.xml-signature-checker",
+      "type": "org.apache.camel.component.xmlsecurity.api.XmlSignatureChecker",
+      "description": "This interface allows the application to check the XML signature before the validation is executed. This step is recommended in http:\/\/www.w3.org\/TR\/xmldsig-bestpractices\/#check-what-is-signed. The option is a org.apache.camel.component.xmlsecurity.api.XmlSignatureChecker type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xmlsecurity-verify.xml-signature2-message",
+      "type": "org.apache.camel.component.xmlsecurity.api.XmlSignature2Message",
+      "description": "Bean which maps the XML signature to the output-message after the validation. How this mapping should be done can be configured by the options outputNodeSearchType, outputNodeSearch, and removeSignatureElements. The default implementation offers three possibilities which are related to the three output node search types Default, ElementName, and XPath. The default implementation determines a node which is then serialized and set to the body of the output message If the search type is ElementName then the output node (which must be in this case an element) is determined by the local name and namespace defined in the search value (see option outputNodeSearch). If the search type is XPath then the output node is determined by the XPath specified in the search value (in this case the output node can be of type Element, TextNode or Document). If the output node search type is Default then the following rules apply: In the enveloped XML signature case (there is a reference with URI= and transform http:\/\/www.w3.org\/2000\/09\/xmldsig#enveloped-signature), the incoming XML document without the Signature element is set to the output message body. In the non-enveloped XML signature case, the message body is determined from a referenced Object; this is explained in more detail in chapter Output Node Determination in Enveloping XML Signature Case. The option is a org.apache.camel.component.xmlsecurity.api.XmlSignature2Message type.",
+      "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
+    },
+    {
+      "name": "camel.dataformat.securexml.add-key-value-for-encrypted-key",
+      "type": "java.lang.Boolean",
+      "description": "Whether to add the public key used to encrypt the session key as a KeyValue in the EncryptedKey structure or not.",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.securexml.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.securexml.digest-algorithm",
+      "type": "java.lang.String",
+      "description": "The digest algorithm to use with the RSA OAEP algorithm. The available choices are: XMLCipher.SHA1 XMLCipher.SHA256 XMLCipher.SHA512 The default value is XMLCipher.SHA1",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
+      "defaultValue": "SHA1"
+    },
+    {
+      "name": "camel.dataformat.securexml.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the secureXML data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.securexml.key-cipher-algorithm",
+      "type": "java.lang.String",
+      "description": "The cipher algorithm to be used for encryption\/decryption of the asymmetric key. The available choices are: XMLCipher.RSA_v1dot5 XMLCipher.RSA_OAEP XMLCipher.RSA_OAEP_11 The default value is XMLCipher.RSA_OAEP",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
+      "defaultValue": "RSA_OAEP"
+    },
+    {
+      "name": "camel.dataformat.securexml.key-or-trust-store-parameters-ref",
+      "type": "java.lang.String",
+      "description": "Refers to a KeyStore instance to lookup in the registry, which is used for configuration options for creating and loading a KeyStore instance that represents the sender's trustStore or recipient's keyStore.",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.securexml.key-password",
+      "type": "java.lang.String",
+      "description": "The password to be used for retrieving the private key from the KeyStore. This key is used for asymmetric decryption.",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.securexml.mgf-algorithm",
+      "type": "java.lang.String",
+      "description": "The MGF Algorithm to use with the RSA OAEP algorithm. The available choices are: EncryptionConstants.MGF1_SHA1 EncryptionConstants.MGF1_SHA256 EncryptionConstants.MGF1_SHA512 The default value is EncryptionConstants.MGF1_SHA1",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
+      "defaultValue": "MGF1_SHA1"
+    },
+    {
+      "name": "camel.dataformat.securexml.pass-phrase",
+      "type": "java.lang.String",
+      "description": "A String used as passPhrase to encrypt\/decrypt content. The passPhrase has to be provided. The passPhrase needs to be put together in conjunction with the appropriate encryption algorithm. For example using TRIPLEDES the passPhase can be a Only another 24 Byte key",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.securexml.pass-phrase-byte",
+      "type": "java.lang.Byte[]",
+      "description": "A byte used as passPhrase to encrypt\/decrypt content. The passPhrase has to be provided. The passPhrase needs to be put together in conjunction with the appropriate encryption algorithm. For example using TRIPLEDES the passPhase can be a Only another 24 Byte key",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.securexml.recipient-key-alias",
+      "type": "java.lang.String",
+      "description": "The key alias to be used when retrieving the recipient's public or private key from a KeyStore when performing asymmetric key encryption or decryption.",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.securexml.secure-tag",
+      "type": "java.lang.String",
+      "description": "The XPath reference to the XML Element selected for encryption\/decryption. If no tag is specified, the entire payload is encrypted\/decrypted.",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.securexml.secure-tag-contents",
+      "type": "java.lang.Boolean",
+      "description": "A boolean value to specify whether the XML Element is to be encrypted or the contents of the XML Element false = Element Level true = Element Content Level",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.securexml.xml-cipher-algorithm",
+      "type": "java.lang.String",
+      "description": "The cipher algorithm to be used for encryption\/decryption of the XML message content. The available choices are: XMLCipher.TRIPLEDES XMLCipher.AES_128 XMLCipher.AES_128_GCM XMLCipher.AES_192 XMLCipher.AES_192_GCM XMLCipher.AES_256 XMLCipher.AES_256_GCM XMLCipher.SEED_128 XMLCipher.CAMELLIA_128 XMLCipher.CAMELLIA_192 XMLCipher.CAMELLIA_256 The default value is XMLCipher.AES_256_GCM",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
+      "defaultValue": "AES-256-GCM"
+    }
+  ],
+  "hints": []
+}

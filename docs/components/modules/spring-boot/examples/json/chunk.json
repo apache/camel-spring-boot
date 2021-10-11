@@ -1,0 +1,57 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.chunk",
+      "type": "org.apache.camel.component.chunk.springboot.ChunkComponentConfiguration",
+      "sourceType": "org.apache.camel.component.chunk.springboot.ChunkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.chunk.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.chunk.springboot.ChunkComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.chunk.allow-context-map-all",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether the context map should allow access to all details. By default only the message body and headers can be accessed. This option can be enabled for full access to the current Exchange and CamelContext. Doing so impose a potential security risk as this opens access to the full power of CamelContext API.",
+      "sourceType": "org.apache.camel.component.chunk.springboot.ChunkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.chunk.allow-template-from-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow to use resource template from header or not (default false). Enabling this allows to specify dynamic templates via message header. However this can be seen as a potential security vulnerability if the header is coming from a malicious user, so use this with care.",
+      "sourceType": "org.apache.camel.component.chunk.springboot.ChunkComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.chunk.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.chunk.springboot.ChunkComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.chunk.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.chunk.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the chunk component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.chunk.springboot.ChunkComponentConfiguration"
+    },
+    {
+      "name": "camel.component.chunk.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.chunk.springboot.ChunkComponentConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}

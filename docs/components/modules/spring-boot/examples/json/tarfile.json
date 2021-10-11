@@ -1,0 +1,57 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.tarfile",
+      "type": "org.apache.camel.dataformat.tarfile.springboot.TarFileDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.tarfile.springboot.TarFileDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.tarfile.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.tarfile.springboot.TarFileDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.tarfile.allow-empty-directory",
+      "type": "java.lang.Boolean",
+      "description": "If the tar file has more then one entry, setting this option to true, allows to get the iterator even if the directory is empty",
+      "sourceType": "org.apache.camel.dataformat.tarfile.springboot.TarFileDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.tarfile.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.tarfile.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the tarfile data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.tarfile.springboot.TarFileDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.tarfile.max-decompressed-size",
+      "type": "java.lang.Long",
+      "description": "Set the maximum decompressed size of a tar file (in bytes). The default value if not specified corresponds to 1 gigabyte. An IOException will be thrown if the decompressed size exceeds this amount. Set to -1 to disable setting a maximum decompressed size.",
+      "sourceType": "org.apache.camel.dataformat.tarfile.springboot.TarFileDataFormatConfiguration",
+      "defaultValue": 1073741824
+    },
+    {
+      "name": "camel.dataformat.tarfile.preserve-path-elements",
+      "type": "java.lang.Boolean",
+      "description": "If the file name contains path elements, setting this option to true, allows the path to be maintained in the tar file.",
+      "sourceType": "org.apache.camel.dataformat.tarfile.springboot.TarFileDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.tarfile.using-iterator",
+      "type": "java.lang.Boolean",
+      "description": "If the tar file has more then one entry, the setting this option to true, allows to work with the splitter EIP, to split the data using an iterator in a streaming mode.",
+      "sourceType": "org.apache.camel.dataformat.tarfile.springboot.TarFileDataFormatConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}

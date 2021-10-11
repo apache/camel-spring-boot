@@ -1,0 +1,24 @@
+{
+  "groups": [
+    {
+      "name": "camel.opentracing",
+      "type": "org.apache.camel.opentracing.starter.OpenTracingConfigurationProperties",
+      "sourceType": "org.apache.camel.opentracing.starter.OpenTracingConfigurationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.opentracing.encoding",
+      "type": "java.lang.Boolean",
+      "description": "Activate or deactivate dash encoding in headers (required by JMS) for messaging",
+      "sourceType": "org.apache.camel.opentracing.starter.OpenTracingConfigurationProperties"
+    },
+    {
+      "name": "camel.opentracing.exclude-patterns",
+      "type": "java.util.Set<java.lang.String>",
+      "description": "Sets exclude pattern(s) that will disable tracing for Camel messages that matches the pattern.",
+      "sourceType": "org.apache.camel.opentracing.starter.OpenTracingConfigurationProperties"
+    }
+  ],
+  "hints": []
+}
