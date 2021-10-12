@@ -1,10 +1,12 @@
 [[SpringCloud-SpringCloud]]
 = Spring Cloud (deprecated)
+:artifactid: camel-spring-cloud
 :since: 2.19
 :supportLevel: Stable-deprecated
 :deprecated: *deprecated*
+:description: Camel Cloud integration with Spring Cloud
 
-*Since Camel 2.19*
+*Since Camel {since}*
 
 Spring Cloud component
 

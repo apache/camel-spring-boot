@@ -1,9 +1,11 @@
 = Spring Cloud Netflix (deprecated)
 :since: 2.19
+:artifactid: camel-spring-cloud-netflix
 :supportLevel: Stable-deprecated
 :deprecated: *deprecated*
+:description: Camel Cloud integration with Spring Cloud Netflix
 
-*Since Camel 2.19*
+*Since Camel {since}*
 
 The Spring Cloud Netflix component bridges Camel Cloud and Spring Cloud Netflix so you can leverage Spring Cloud Netflix service discovery and load balance features in Camel and/or you can use Camel Service Discovery implementations as ServerList source for Spring Cloud Netflix's Ribbon load balancer.
 
