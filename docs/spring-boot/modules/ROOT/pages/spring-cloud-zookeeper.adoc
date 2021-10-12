@@ -1,6 +1,8 @@
 = Spring Cloud Zookeeper (deprecated)
 :since: 2.22
+:artifactid: camel-spring-cloud-zookeeper
 :supportLevel: Stable-deprecated
 :deprecated: *deprecated*
+:description: Camel Cloud integration with Spring Cloud Zookeeper
 
-*Since Camel 2.22*
+*Since Camel {since}*
