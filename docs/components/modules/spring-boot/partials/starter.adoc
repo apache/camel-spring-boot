@@ -29,5 +29,5 @@ The component supports {sbpropertiescount} options, which are listed below.
 | Name | Description | Default | Type
 |===
 
-jsonpathTable2::spring-boot:example$json/{camel-spring-boot-name}.json[query='nodes$.properties[?(!(@.name.endsWith("customizer.enabled")))]', cellformats='util.boldLink(value.name, "sb_option")|util.description(value)|util.valueAsString(value.defaultValue)|util.javaSimpleName(value.type)', {requires}]
+jsonpathTable::spring-boot:example$json/{camel-spring-boot-name}.json[query='nodes$.properties[?(!(@.name.endsWith("customizer.enabled")))]', cellformats='util.boldLink(value.name, "sb_option")|util.description(value)|util.valueAsString(value.defaultValue)|util.javaSimpleName(value.type)', {requires}]
 endif::[]
