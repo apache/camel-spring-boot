@@ -1008,6 +1008,11 @@
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
     },
     {
+      "name": "camel.springboot.tracing-standby",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+    },
+    {
       "name": "camel.springboot.use-breadcrumb",
       "type": "java.lang.Boolean",
       "description": "Set whether breadcrumb is enabled. The default value is false.",
