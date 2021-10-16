@@ -1,35 +1,38 @@
 = Component Starters
-:cellformats: cells="$xref,=`$\{artifactid}-starter`,supportlevel,since,description"
+:cellformats: cellformats="$xref|util.starterArtifactId(this)|supportlevel|since|description"
 :base-query: component=components,relative=*.adoc,exclude='*-summary.adoc,index.adoc'
 :base-attributes-query: {base-query},attributes=camel-spring-boot-name
 :base-deprecated-query: {base-query},attributes='camel-spring-boot-name,deprecated'
 :base-missing-query: {base-query},attributes=!camel-spring-boot-name
 
+include::indexcount$[component=components,module=spring-boot,family=example,queries='existing=']
+include::indexuniquecount$[component=components,module=*,attributes=camel-spring-boot-name,formats='used=camelSpringBootName']
+
+ifeval::[{used} != {existing}]
+:sb-statistics: true
+There are unused json files.
+endif::[]
+
 ifdef::sb-statistics[]
 == Statistics
 
-:used: indexUniqueCount:[component=components,module=*,attributes=camel-spring-boot-name,unique=camel-spring-boot-name]
+There are {existing} spring boot starter json files.
 
-Used json files: {used}
+Of these {used} are used in components, dataformats, etc.
 
-:existing: indexCount:[component=components,module=spring-boot,family=example]
+=== Unused spring-boot-starter names
 
-Existing json files: {existing}
+[indexBlock, 'resourceid=$resourceid,sbname=util.extractSBName($resourceid)',component=components,module=spring-boot,family=example,requires={requires}]
+----
 
-ifeval::[{used} == {existing}]
-There are ???? unused json files.
-endif::[]
+%include::indexcount$[component=components,module=*,attributes='camel-spring-boot-name={sbname}',queries='using=']
 
-//[indexBlock, 'resourceid,json1=resourceid.slice(43),json2=(resourceid.slice(43)).slice(-5)',component=components,module=spring-boot,family=example]
-//----
-//resourceid: {resourceid}
-//
-//json1: {json1}
-//
-//json2: {json2}
-// //,json3=resourceid.slice(43).split(".")[0\]
-// //json3: {json3}
-//----
+%ifeval::[{using} == 0]
+{sbname}
+%endif::[]
+----
+
+== Camel Spring Boot
 endif::[]
 
 Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot Starters
@@ -38,13 +41,13 @@ Apache Camel Spring Boot supports the following Camel artifacts as Spring Boot S
 
 :components-query: module=ROOT,{base-attributes-query}
 
-Number of Camel components: indexCount:[{components-query}] in indexUniqueCount:[{components-query},unique=artifactid] JAR artifacts (indexCount:[module=ROOT,{base-deprecated-query}] deprecated)
+Number of Camel components: indexCount:[{components-query}] in indexUniqueCount:[{components-query},format=artifactid] JAR artifacts (indexCount:[module=ROOT,{base-deprecated-query}] deprecated)
 
 [{index-table-format}]
 |===
 | Component | Artifact | Support Level | Since | Description
 |===
-indexTable::[{components-query},{cellformats}]
+indexTable::[{cellformats},{requires},{components-query}]
 
 ifdef::sb-statistics[]
 === Non-Spring-Boot Components
@@ -53,20 +56,20 @@ ifdef::sb-statistics[]
 |===
 | Component | Artifact | Support Level | Since | Description
 |===
-indexTable::[module=ROOT,{base-missing-query},{cellformats}]
+indexTable::[{cellformats},{requires},module=ROOT,{base-missing-query}]
 endif::[]
 
 == Camel Data Formats
 
 :dataformats-query: module=dataformats,{base-attributes-query}
 
-Number of Camel data formats: indexCount:[{dataformats-query}] in indexUniqueCount:[{dataformats-query},unique=artifactid] JAR artifacts (indexCount:[module=dataformats,{base-deprecated-query}] deprecated)
+Number of Camel data formats: indexCount:[{dataformats-query}] in indexUniqueCount:[{dataformats-query},format=artifactid] JAR artifacts (indexCount:[module=dataformats,{base-deprecated-query}] deprecated)
 
 [{index-table-format}]
 |===
 | Data Format | Artifact | Support Level | Since | Description
 |===
-indexTable::[{dataformats-query},{cellformats}]
+indexTable::[{cellformats},{requires},{dataformats-query}]
 
 ifdef::sb-statistics[]
 === Non-Spring-Boot Data Formats
@@ -75,32 +78,20 @@ ifdef::sb-statistics[]
 |===
 | Data Format | Artifact | Support Level | Since | Description
 |===
-indexTable::[module=dataformats,{base-missing-query},{cellformats}]
+indexTable::[{cellformats},{requires},module=dataformats,{base-missing-query}]
 endif::[]
 
 == Camel Languages
 
 :languages-query: module=languages,{base-attributes-query}
 
-Number of Camel languages: indexCount:[{languages-query}] in indexUniqueCount:[{languages-query},unique=artifactid] JAR artifacts (indexCount:[module=languages,{base-deprecated-query}] deprecated)
-
-:languages-query-non-core: module=languages,{base-query},attributes='camel-spring-boot-name,!starter-artifactid'
-:languages-query-core: module=languages,{base-query},attributes='camel-spring-boot-name,starter-artifactid'
-=== Non-core languages
+Number of Camel languages: indexCount:[{languages-query}] in indexUniqueCount:[{languages-query},format=artifactid] JAR artifacts (indexCount:[module=languages,{base-deprecated-query}] deprecated)
 
 [{index-table-format}]
 |===
 | Language | Artifact | Support Level | Since | Description
 |===
-indexTable::[{languages-query-non-core},{cellformats}]
-
-=== Core languages
-
-[{index-table-format}]
-|===
-| Language | Artifact | Support Level | Since | Description
-|===
-indexTable::[{languages-query-core},cells="$xref,=starterArtifactid,supportlevel,since,description"]
+indexTable::[{cellformats},{requires},{languages-query}]
 
 ifdef::sb-statistics[]
 === Non-Spring-Boot Languages
@@ -109,20 +100,20 @@ ifdef::sb-statistics[]
 |===
 | Language | Artifact | Support Level | Since | Description
 |===
-indexTable::[module=languages,{base-missing-query},{cellformats}]
+indexTable::[{cellformats},{requires},module=languages,{base-missing-query}]
 endif::[]
 
 == Miscellaneous Extensions
 
 :others-query: module=others,{base-attributes-query}
 
-Number of miscellaneous extensions: indexCount:[{others-query}] in indexUniqueCount:[{others-query},unique=artifactid] JAR artifacts (indexCount:[module=others,{base-deprecated-query}] deprecated)
+Number of miscellaneous extensions: indexCount:[{others-query}] in indexUniqueCount:[{others-query},format=artifactid] JAR artifacts (indexCount:[module=others,{base-deprecated-query}] deprecated)
 
 [{index-table-format}]
 |===
 | Extensions | Artifact | Support Level | Since | Description
 |===
-indexTable::[{others-query},{cellformats}]
+indexTable::[{cellformats},{requires},{others-query}]
 
 ifdef::sb-statistics[]
 === Non-Spring-Boot Miscellaneous Extensions
@@ -131,5 +122,5 @@ ifdef::sb-statistics[]
 |===
 | Extensions | Artifact | Support Level | Since | Description
 |===
-indexTable::[module=others,{base-missing-query},{cellformats}]
+indexTable::[{cellformats},{requires},module=others,{base-missing-query}]
 endif::[]
