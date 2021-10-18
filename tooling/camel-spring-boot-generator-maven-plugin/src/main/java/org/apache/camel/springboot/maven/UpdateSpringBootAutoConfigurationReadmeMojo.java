@@ -56,10 +56,6 @@ import static org.apache.camel.tooling.util.PackageHelper.writeText;
 @Mojo(name = "update-spring-boot-auto-configuration-readme", threadSafe = true)
 public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
 
-    private static final String NO_OPTIONS = "{\n" +
-            "  \"properties\": []\n" +
-            "}";
-
     /**
      * The maven project.
      */
@@ -119,9 +115,6 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
             getLog().debug("Copying generated Spring Boot auto-configuration file to: " + jsonFileCopy);
             byte[] contents = Files.readAllBytes(jsonFile.toPath());
             Files.write(jsonFileCopy, contents);
-        } else {
-            getLog().debug("Generating no-options Spring Boot auto-configuration file: " + jsonFileCopy);
-            Files.write(jsonFileCopy, NO_OPTIONS.getBytes(StandardCharsets.UTF_8));
         }
     }
 
