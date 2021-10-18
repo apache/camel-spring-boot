@@ -187,7 +187,6 @@
     <module>camel-dataformat-starter</module>
     <module>camel-dataset-starter</module>
     <module>camel-datasonnet-starter</module>
-    <module>camel-debezium-common-starter</module>
     <module>camel-debezium-mongodb-starter</module>
     <module>camel-debezium-mysql-starter</module>
     <module>camel-debezium-postgres-starter</module>
@@ -242,7 +241,6 @@
     <module>camel-hbase-starter</module>
     <module>camel-hdfs-starter</module>
     <module>camel-hl7-starter</module>
-    <module>camel-http-common-starter</module>
     <module>camel-http-starter</module>
     <module>camel-huaweicloud-functiongraph-starter</module>
     <module>camel-huaweicloud-iam-starter</module>
@@ -269,7 +267,6 @@
     <module>camel-jclouds-starter</module>
     <module>camel-jcr-starter</module>
     <module>camel-jdbc-starter</module>
-    <module>camel-jetty-common-starter</module>
     <module>camel-jetty-starter</module>
     <module>camel-jfr-starter</module>
     <module>camel-jgroups-raft-starter</module>
