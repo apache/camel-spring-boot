@@ -46,7 +46,6 @@
               </goals>
               <configuration>
                 <target>
-                  <copy file="${project.basedir}/../components-starter/README.adoc" tofile="${project.basedir}/spring-boot/modules/ROOT/pages/_list-old.adoc" />
                   <copy todir="${project.basedir}/spring-boot/modules/ROOT/pages/" flatten="true">
                     <fileset dir="${project.basedir}/../core/">
                       <include name="**/src/main/docs/*.adoc" />
