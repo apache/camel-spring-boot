@@ -713,11 +713,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-debezium-common-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-debezium-mongodb-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -978,11 +973,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-http-common-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-http-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1079,11 +1069,6 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jdbc-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-jetty-common-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
