@@ -16,6 +16,8 @@ endif::[]
 ifdef::sb-statistics[]
 == Statistics
 
+include::Error-unused-starter-json-in-3.12.x.adoc[]
+
 There are {existing} spring boot starter json files.
 
 Of these {used} are used in components, dataformats, etc.
