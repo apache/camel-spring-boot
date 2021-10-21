@@ -119,12 +119,14 @@ public class RestConfigurationDefinitionProperties {
      * CamelContext only. For any other value, the pattern uses the rules from
      * PatternHelper#matchPattern(String,String)
      */
+    @Deprecated
     private String apiContextIdPattern;
     /**
      * Sets whether listing of all available CamelContext's with REST services
      * in the JVM is enabled. If enabled it allows to discover these contexts,
      * if false then only the current CamelContext is in use.
      */
+    @Deprecated
     private Boolean apiContextListing = false;
     /**
      * Whether vendor extension is enabled in the Rest APIs. If enabled then
@@ -306,18 +308,22 @@ public class RestConfigurationDefinitionProperties {
         this.apiContextRouteId = apiContextRouteId;
     }
 
+    @Deprecated
     public String getApiContextIdPattern() {
         return apiContextIdPattern;
     }
 
+    @Deprecated
     public void setApiContextIdPattern(String apiContextIdPattern) {
         this.apiContextIdPattern = apiContextIdPattern;
     }
 
+    @Deprecated
     public Boolean getApiContextListing() {
         return apiContextListing;
     }
 
+    @Deprecated
     public void setApiContextListing(Boolean apiContextListing) {
         this.apiContextListing = apiContextListing;
     }
