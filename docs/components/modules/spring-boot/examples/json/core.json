@@ -951,19 +951,6 @@
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
     },
     {
-      "name": "camel.rest.api-context-id-pattern",
-      "type": "java.lang.String",
-      "description": "Sets an CamelContext id pattern to only allow Rest APIs from rest services within CamelContext's which name matches the pattern. The pattern #name# refers to the CamelContext name, to match on the current CamelContext only. For any other value, the pattern uses the rules from PatternHelper#matchPattern(String,String)",
-      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
-    },
-    {
-      "name": "camel.rest.api-context-listing",
-      "type": "java.lang.Boolean",
-      "description": "Sets whether listing of all available CamelContext's with REST services in the JVM is enabled. If enabled it allows to discover these contexts, if false then only the current CamelContext is in use.",
-      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties",
-      "defaultValue": false
-    },
-    {
       "name": "camel.rest.api-context-path",
       "type": "java.lang.String",
       "description": "Sets a leading API context-path the REST API services will be using. This can be used when using components such as camel-servlet where the deployed web application is deployed using a context-path.",
@@ -1117,6 +1104,23 @@
       "type": "java.lang.String",
       "description": "Name of specific XML data format to use. By default jaxb will be used. Important: This option is only for setting a custom name of the data format, not to refer to an existing data format instance.",
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
+    },
+    {
+      "name": "camel.rest.api-context-id-pattern",
+      "type": "java.lang.String",
+      "description": "Sets an CamelContext id pattern to only allow Rest APIs from rest services within CamelContext's which name matches the pattern. The pattern #name# refers to the CamelContext name, to match on the current CamelContext only. For any other value, the pattern uses the rules from PatternHelper#matchPattern(String,String)",
+      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.rest.api-context-listing",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether listing of all available CamelContext's with REST services in the JVM is enabled. If enabled it allows to discover these contexts, if false then only the current CamelContext is in use.",
+      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties",
+      "defaultValue": false,
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": []
