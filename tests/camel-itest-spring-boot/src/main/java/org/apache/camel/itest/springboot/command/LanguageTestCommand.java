@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * A command that tries to lookup a camel language.
@@ -44,7 +44,7 @@ public class LanguageTestCommand extends AbstractTestCommand implements Command 
         logger.info("Getting Camel language: {}", language);
 
         Language lan = context.resolveLanguage(language);
-        assertNotNull("Cannot get language with name: " + language, lan);
+        assertNotNull(lan, "Cannot get language with name: " + language);
 
         logger.info("Found Camel language: {} instance: {} with className: {}", language, lan, lan.getClass());
         return true;

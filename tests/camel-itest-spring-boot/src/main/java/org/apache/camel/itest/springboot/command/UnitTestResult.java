@@ -18,7 +18,7 @@ package org.apache.camel.itest.springboot.command;
 
 import java.io.Serializable;
 
-import org.junit.runner.Result;
+import org.junit.platform.launcher.listeners.TestExecutionSummary;
 
 /**
  * Contains the result of the execution of a test suite.
@@ -41,12 +41,12 @@ public class UnitTestResult implements Serializable {
     public UnitTestResult() {
     }
 
-    public UnitTestResult(Result jr) {
-        this.runCount = jr.getRunCount();
-        this.failureCount = jr.getFailureCount();
-        this.runTime = jr.getRunTime();
-        this.ignoreCount = jr.getIgnoreCount();
-        this.successful = jr.wasSuccessful();
+    public UnitTestResult(TestExecutionSummary jr) {
+        this.runCount = (int) jr.getTestsStartedCount();
+        this.failureCount = (int) jr.getTestsFailedCount();
+        this.runTime = jr.getTimeFinished()-jr.getTimeStarted();
+        this.ignoreCount = (int) jr.getTestsSkippedCount();
+        this.successful = jr.getTestsFailedCount()==0;
     }
 
     public int getRunCount() {

@@ -63,10 +63,17 @@
             <artifactId>#{module}-starter</artifactId>
         </dependency>
 
-        <!-- Required by the integration tests to run -->
+	 <!-- Required by the integration tests to run in Junit5 -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+        	<groupId>org.junit.jupiter</groupId>
+        	<artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--  Required for UnitTestCommand -->
+        <dependency>
+        	<groupId>org.junit.platform</groupId>
+        	<artifactId>junit-platform-launcher</artifactId>
+             <scope>test</scope>
         </dependency>
 
         <!-- DEPENDENCIES -->
@@ -88,7 +95,7 @@
         <repository>
             <id>apache-snapshots</id>
             <name>Apache Snapshots</name>
-            <url>http://repository.apache.org/snapshots/</url>
+            <url>https://repository.apache.org/snapshots</url>
             <releases>
                 <enabled>false</enabled>
             </releases>

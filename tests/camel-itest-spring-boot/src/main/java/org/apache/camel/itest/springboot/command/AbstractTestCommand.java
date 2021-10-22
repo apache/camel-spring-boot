@@ -20,7 +20,7 @@ import java.util.concurrent.Future;
 
 import org.apache.camel.itest.springboot.Command;
 import org.apache.camel.itest.springboot.ITestConfig;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 
@@ -32,15 +32,17 @@ public abstract class AbstractTestCommand implements Command {
     @Async // needs to run on a spring background thread
     @Override
     public Future<Object> execute(Object[] parameters) throws Exception {
-        Assert.assertNotNull("Parameters cannot be null", parameters);
-        Assert.assertEquals("Parameters should contain two elements", 2, parameters.length);
+        Assertions.assertNotNull(parameters, "Parameters cannot be null");
+        Assertions.assertEquals(2, parameters.length, "Parameters should contain two elements");
         Object configObj = parameters[0];
-        Assert.assertNotNull("The first parameter cannot be null", configObj);
-        Assert.assertTrue("First parameter should be of type ITestConfig, found type " + configObj.getClass().getName(), configObj instanceof ITestConfig);
+        Assertions.assertNotNull(configObj, "The first parameter cannot be null");
+        Assertions.assertTrue(configObj instanceof ITestConfig,
+            "First parameter should be of type ITestConfig, found type " + configObj.getClass().getName());
 
         Object compNameObj = parameters[1];
-        Assert.assertNotNull("The second parameter cannot be null", compNameObj);
-        Assert.assertTrue("Second parameter should be of type String, found type " + compNameObj.getClass().getName(), compNameObj instanceof String);
+        Assertions.assertNotNull(compNameObj, "The second parameter cannot be null");
+        Assertions.assertTrue(compNameObj instanceof String,
+            "Second parameter should be of type String, found type " + compNameObj.getClass().getName());
 
         String compName = (String) compNameObj;
 

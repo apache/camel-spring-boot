@@ -18,13 +18,13 @@ package org.apache.camel.itest.springboot;
 
 import org.apache.camel.itest.springboot.util.ArquillianPackager;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.Archive;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 
-@RunWith(Arquillian.class)
+@ExtendWith(ArquillianExtension.class)
 public class CamelSparkTest extends AbstractSpringBootTestSupport {
 
     @Deployment
@@ -37,6 +37,7 @@ public class CamelSparkTest extends AbstractSpringBootTestSupport {
                 .module(inferModuleName(CamelSparkTest.class))
                 .ignoreLibraryMismatch("org.scala-lang.modules:scala-parser-combinators_2.11")
                 .ignoreLibraryMismatch("org.scala-lang.modules:scala-xml_2.11")
+                .ignoreLibraryMismatch("org.objenesis")
                 .build();
     }
 

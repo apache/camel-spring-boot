@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * A command that tries to lookup a camel data-format.
@@ -44,7 +44,7 @@ public class DataFormatTestCommand extends AbstractTestCommand implements Comman
         logger.info("Getting Camel dataFormat: {}", dataFormat);
 
         DataFormat df = context.resolveDataFormat(dataFormat);
-        assertNotNull("Cannot get dataformat with name: " + dataFormat, df);
+        assertNotNull(df, "Cannot get dataformat with name: " + dataFormat);
 
         logger.info("Found Camel dataformat: {} instance: {} with className: {}", dataFormat, df, df.getClass());
         return true;

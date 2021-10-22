@@ -18,15 +18,15 @@ package org.apache.camel.itest.springboot;
 
 import org.apache.camel.itest.springboot.util.ArquillianPackager;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.Archive;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 
-@Ignore("It doesn't work with Flink 1.11.0")
-@RunWith(Arquillian.class)
+@Disabled("It doesn't work with Flink 1.11.0")
+@ExtendWith(ArquillianExtension.class)
 public class CamelFlinkTest extends AbstractSpringBootTestSupport {
 
     @Deployment

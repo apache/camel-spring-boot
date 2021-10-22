@@ -19,13 +19,13 @@ package org.apache.camel.itest.springboot;
 import org.apache.camel.itest.springboot.util.ArquillianPackager;
 import org.apache.camel.itest.springboot.util.DependencyResolver;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.Archive;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 
-@RunWith(Arquillian.class)
+@ExtendWith(ArquillianExtension.class)
 public class CamelSalesforceTest extends AbstractSpringBootTestSupport {
 
     @Deployment
@@ -36,10 +36,8 @@ public class CamelSalesforceTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelSalesforceTest.class))
-//                .basePath("../../components/camel-salesforce/camel-salesforce-component")
                 .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest.*|MSPTest$)")
                 .autostart(false) // needs configuration
-                .dependency("org.codehaus.groovy:groovy:" + DependencyResolver.resolveParentProperty("${groovy-version}"))
                 .build();
     }
 
@@ -47,7 +45,7 @@ public class CamelSalesforceTest extends AbstractSpringBootTestSupport {
     public void componentTests() throws Exception {
         this.runComponentTest(config);
         // unit tests is too complex to run
-        // this.runModuleUnitTestsIfEnabled(config);
+        this.runModuleUnitTestsIfEnabled(config);
     }
 
 

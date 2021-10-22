@@ -169,6 +169,11 @@ public class ITestConfigBuilder {
         config.setSpringBootVersion(springBootVersion);
         return this;
     }
+    
+    public ITestConfigBuilder mavenOfflineResolution(Boolean offlineResolution) {
+        config.setMavenOfflineResolution(offlineResolution);
+        return this;
+    }
 
     public ITestConfig build() {
 

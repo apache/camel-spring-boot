@@ -20,20 +20,25 @@
 <configuration>
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <layout class="ch.qos.logback.classic.PatternLayout">
-      <Pattern>
-        %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
-      </Pattern>
-    </layout>
+      	<encoder>
+      		<pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    	</encoder>
+  </appender>
+  
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-15.15thread] %-5level %-30.30logger - %msg%n</pattern>
+    </encoder>
+    <file>target/camel-spring-boot-itest.log</file>
   </appender>
 
   <logger name="org.apache.camel.component" level="info"
           additivity="false">
-    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE"/>
   </logger>
 
   <root level="info">
-    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE"/>
   </root>
 
 </configuration>

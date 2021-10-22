@@ -27,6 +27,8 @@
             <property name="debug">false</property>
 
             <property name="librariesPath">${user.dir}/target</property>
+            <!--  Avoid exceptions during Spring shutdown after container undeploy. -->
+            <property name="keepDeploymentArchives">true</property>
         </configuration>
 
     </container>
