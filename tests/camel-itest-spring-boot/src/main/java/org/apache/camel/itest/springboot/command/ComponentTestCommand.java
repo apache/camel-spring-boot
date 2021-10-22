@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * A command that tries to lookup a camel component.
@@ -44,7 +44,7 @@ public class ComponentTestCommand extends AbstractTestCommand implements Command
 
         org.apache.camel.Component comp = context.getComponent(component, true, config.getAutoStartComponent());
 
-        assertNotNull("Cannot get module with name: " + component, comp);
+        assertNotNull(comp, "Cannot get module with name: " + component);
 
         logger.info("Found Camel module: {} instance: {} with className: {}", component, comp, comp.getClass());
         return true;

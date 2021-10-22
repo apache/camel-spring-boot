@@ -112,10 +112,17 @@ public class ManagedSEDeployableContainer implements DeployableContainer<Managed
     }
 
     private void configureLogging(ManagedSEContainerConfiguration configuration) {
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setLevel(configuration.getLogLevel());
-        LOGGER.setUseParentHandlers(false);
-        LOGGER.addHandler(consoleHandler);
+        final String loggingConfigFile = System.getProperty("java.util.logging.config.file");
+        if (loggingConfigFile==null) {
+          ConsoleHandler consoleHandler = new ConsoleHandler();
+          consoleHandler.setLevel(configuration.getLogLevel());
+          LOGGER.setUseParentHandlers(false);
+          LOGGER.addHandler(consoleHandler);
+          LOGGER.info("No logging configured, using console");
+        } else {
+            // suppose that logging has been configured using the specified file 
+            LOGGER.info("Logging configured using file " + loggingConfigFile);
+        }
         LOGGER.setLevel(configuration.getLogLevel());
     }
 

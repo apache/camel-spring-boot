@@ -18,13 +18,13 @@ package org.apache.camel.itest.springboot;
 
 import org.apache.camel.itest.springboot.util.ArquillianPackager;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.Archive;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 
-@RunWith(Arquillian.class)
+@ExtendWith(ArquillianExtension.class)
 public class CamelGoraTest extends AbstractSpringBootTestSupport {
 
     @Deployment
@@ -36,6 +36,7 @@ public class CamelGoraTest extends AbstractSpringBootTestSupport {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelGoraTest.class))
                 .ignoreLibraryMismatch("com.sun.jersey")
+                .ignoreLibraryMismatch("org.objenesis")
                 .build();
     }
 

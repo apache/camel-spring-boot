@@ -117,7 +117,8 @@ public final class ArquillianPackager {
         }
 
         if (config.getUseCustomLog()) {
-            ark = ark.addAsResource("spring-logback.xml", CLASSES_FOLDER + "/spring-logback.xml");
+            // Spring loads logback-spring not spring-logback
+            ark = ark.addAsResource("logback-spring.xml", CLASSES_FOLDER + "/logback-spring.xml");
         }
 
         for (Map.Entry<String, String> res : config.getResources().entrySet()) {
@@ -172,59 +173,39 @@ public final class ArquillianPackager {
             additionalDependencies.add(dep);
         }
 
-//        String mainArtifactId = config.getModuleName() + "-starter";
-//        MavenCoordinate mainJar = MavenCoordinates.createCoordinate(config.getMavenGroup(), mainArtifactId, version, PackagingType.JAR, null);
-//        // Add exclusions only when not using the starters
-//        MavenDependency mainDep = MavenDependencies.createDependency(mainJar, ScopeType.COMPILE, false);
-//        moduleDependencies.add(mainDep);
 
-
-        List<String> testProvidedDependenciesXml = new LinkedList<>();
+        List<String> providedDependenciesXml = new LinkedList<>();
         List<ScopeType> scopes = new LinkedList<>();
         if (config.getIncludeProvidedDependencies() || config.getIncludeTestDependencies() || config.getUnitTestEnabled()) {
 
             if (config.getIncludeTestDependencies() || config.getUnitTestEnabled()) {
-                testProvidedDependenciesXml.addAll(DependencyResolver.getDependencies(config.getModuleBasePath() + "/pom.xml", ScopeType.TEST.toString()));
                 scopes.add(ScopeType.TEST);
             }
             if (config.getIncludeProvidedDependencies()) {
-                testProvidedDependenciesXml.addAll(DependencyResolver.getDependencies(config.getModuleBasePath() + "/pom.xml", ScopeType.PROVIDED.toString()));
+                providedDependenciesXml.addAll(DependencyResolver.getDependencies(config.getModuleBasePath() + "/pom.xml", ScopeType.PROVIDED.toString()));
                 scopes.add(ScopeType.PROVIDED);
             }
 
         }
 
-        List<String> cleanTestProvidedDependenciesXml = new LinkedList<>();
-        for (String depXml : testProvidedDependenciesXml) {
+        List<String> cleanProvidedDependenciesXml = new LinkedList<>();
+        for (String depXml : providedDependenciesXml) {
             if (validTestDependency(config, depXml, commonExclusions)) {
                 depXml = useBOMVersionIfPresent(config, depXml);
                 depXml = enforceExclusions(config, depXml, commonExclusions);
                 depXml = switchToStarterIfPresent(config, depXml);
-                cleanTestProvidedDependenciesXml.add(depXml);
+                cleanProvidedDependenciesXml.add(depXml);
             }
         }
 
-//        List<MavenResolvedArtifact> testDependencies = new LinkedList<>();
-//        if (!cleanTestProvidedDependenciesXml.isEmpty()) {
-//
-//            File testProvidedResolverPom = createResolverPom(config, cleanTestProvidedDependenciesXml);
-//
-//            testDependencies.addAll(Arrays.asList(resolver(config)
-//                    .loadPomFromFile(testProvidedResolverPom)
-//                    .importDependencies(scopes.toArray(new ScopeType[0]))
-//                    .resolve()
-//                    .withTransitivity()
-//                    .asResolvedArtifact()));
-//        }
-
-        File moduleSpringBootPom = createUserPom(config, cleanTestProvidedDependenciesXml);
+        File moduleSpringBootPom = createUserPom(config, cleanProvidedDependenciesXml);
 
         List<ScopeType> resolvedScopes = new LinkedList<>();
         resolvedScopes.add(ScopeType.COMPILE);
         resolvedScopes.add(ScopeType.RUNTIME);
         resolvedScopes.addAll(scopes);
 
-        List<MavenResolvedArtifact> runtimeDependencies = new LinkedList<>();
+        Set<MavenResolvedArtifact> runtimeDependencies = new HashSet<>();
         try {
             runtimeDependencies.addAll(Arrays.asList(resolver(config)
                     .loadPomFromFile(moduleSpringBootPom)
@@ -236,9 +217,24 @@ public final class ArquillianPackager {
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
+        
+        // Load the test dependencies from the actual starter pom with transitivity
+        // since most are defined in the parent pom
+        Set<MavenResolvedArtifact> testProvidedDependenciesPom = new HashSet<>();
+        try {
+            testProvidedDependenciesPom.addAll(Arrays.asList(resolver(config)
+                    .loadPomFromFile(new File(config.getModuleBasePath() + "/pom.xml"))
+                    .importTestDependencies()
+                    .resolve()
+                    .withTransitivity()
+                    .asResolvedArtifact()));
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
 
-
-        List<MavenResolvedArtifact> dependencyArtifacts = runtimeDependencies; //merge(config, runtimeDependencies, testDependencies);
+        // Remove duplicates between test and runtime dependencies
+        runtimeDependencies.addAll(testProvidedDependenciesPom);
+        List<MavenResolvedArtifact> dependencyArtifacts = new LinkedList<>(runtimeDependencies);
         lookForVersionMismatch(config, dependencyArtifacts);
 
         List<File> dependencies = new LinkedList<>();
@@ -269,6 +265,8 @@ public final class ArquillianPackager {
         // overcome limitations of some JDKs
         external.addSystemProperty("javax.xml.accessExternalDTD", "all");
         external.addSystemProperty("javax.xml.accessExternalSchema", "all");
+        // Set a java logging configuration which will not log to console
+        external.addSystemProperty("java.util.logging.config.file", new File(".").getCanonicalPath() + "/target/test-classes/jul.properties");
 
         if (config.getUnitTestEnabled()) {
             external.addSystemProperty("container.user.dir", new File(config.getModuleBasePath()).getCanonicalPath());

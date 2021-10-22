@@ -17,33 +17,37 @@
 package org.apache.camel.itest.springboot.command;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Pattern;
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
 import javax.management.ObjectName;
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.itest.springboot.Command;
 import org.apache.camel.itest.springboot.ITestConfig;
-import org.junit.Assert;
-import org.junit.runner.Description;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
-import org.junit.runner.notification.RunListener;
+import org.junit.jupiter.api.Assertions;
+import org.junit.platform.engine.FilterResult;
+import org.junit.platform.engine.TestDescriptor;
+import org.junit.platform.engine.TestSource;
+import org.junit.platform.engine.support.descriptor.ClassSource;
+import org.junit.platform.launcher.Launcher;
+import org.junit.platform.launcher.LauncherDiscoveryRequest;
+import org.junit.platform.launcher.PostDiscoveryFilter;
+import org.junit.platform.launcher.TestExecutionListener;
+import org.junit.platform.launcher.TestIdentifier;
+import org.junit.platform.launcher.TestPlan;
+import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
+import static org.junit.platform.engine.discovery.DiscoverySelectors.*;
+import static org.junit.platform.engine.discovery.ClassNameFilter.*;
+import org.junit.platform.launcher.core.LauncherFactory;
+import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
+import org.junit.platform.launcher.listeners.TestExecutionSummary;
+import org.junit.platform.launcher.listeners.TestExecutionSummary.Failure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
-import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import org.springframework.stereotype.Component;
 
 /**
@@ -52,93 +56,83 @@ import org.springframework.stereotype.Component;
 @Component("unittest")
 public class UnitTestCommand extends AbstractTestCommand implements Command {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-
-    @Autowired
-    private CamelContext context;
+    Logger logger = LoggerFactory.getLogger(UnitTestCommand.class);
 
     @Override
     public UnitTestResult executeTest(final ITestConfig config, String component) throws Exception {
 
         logger.info("Spring-Boot test configuration {}", config);
 
-        Pattern pattern = Pattern.compile(config.getUnitTestInclusionPattern());
+        logger.info("Scanning the classpath for test classes");
+        LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder.request()
+            .selectors(selectDirectory(config.getModuleBasePath()), selectPackage(config.getUnitTestBasePackage()))
+            .filters(
+                includeClassNamePatterns(config.getUnitTestInclusionPattern()),
+                excludeClassNamePatterns(config.getUnitTestExclusionPattern()),
+                new IsAdmissableFilter()
+                )
+            .build();
+        
 
-        logger.info("Scaning the classpath for test classes");
-        ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(false);
+            // Add classes to the Request
+            Launcher launcher = LauncherFactory.create();
+            SummaryGeneratingListener listener = new SummaryGeneratingListener();
+            launcher.registerTestExecutionListeners(listener);
+            if (!config.getJmxDisabledNames().isEmpty()) {
+                launcher.registerTestExecutionListeners(new TestExecutionListener() {
+                    @Override
+                    public void executionStarted(TestIdentifier testId) {
+                        if (testId.isTest()) {
+                            try {
+                                disableJmx(config.getJmxDisabledNames());
+                            } catch (Exception e) {
+                                logger.error("Exception disabling JMX for test " + testId.getDisplayName(), e);
+                            }
+                        }
+                    }
+                });
+            }
+            TestPlan testPlan = launcher.discover(request);
+            long nbTests = testPlan.countTestIdentifiers( (t)-> {return t.isTest();});
+            if (nbTests > 0) {
+                logger.info("Found {} JUnit5 tests", nbTests );
+                launcher.execute(testPlan);
 
-        scanner.addIncludeFilter(new RegexPatternTypeFilter(pattern));
+                TestExecutionSummary result = listener.getSummary();
+                boolean testSucceeded = result.getTestsFailedCount()==0;
 
-        Set<BeanDefinition> defs = scanner.findCandidateComponents(config.getUnitTestBasePackage());
-        List<String> testClasses = new LinkedList<>();
-        for (BeanDefinition bd : defs) {
-            testClasses.add(bd.getBeanClassName());
-        }
+                logger.info(config.getModuleName() + " unit tests. "
+                    + "Success: " + testSucceeded+ " - Test Run: " + result.getTestsStartedCount() 
+                    + " - Failures: " + result.getTestsFailedCount()
+                    + " - Skipped Tests: " + result.getTestsSkippedCount());
 
-        if (config.getUnitTestExclusionPattern() != null) {
-            Pattern exclusionPattern = Pattern.compile(config.getUnitTestExclusionPattern());
-            for (Iterator<String> it = testClasses.iterator(); it.hasNext();) {
-                String cn = it.next();
-                if (exclusionPattern.matcher(cn).matches()) {
-                    logger.warn("Excluding Test Class: {}", cn);
-                    it.remove();
+                for (Failure f : result.getFailures()) {
+                    logger.warn("Failed test description: {}", f.getTestIdentifier());
+                    logger.warn("Message: {}", f.getException().getMessage());
+                    if (f.getException() != null) {
+                        logger.warn("Exception thrown from test", f.getException());
+                    }
                 }
-            }
-        }
 
-        final List<Class<?>> classes = new ArrayList<>();
-        for (String cn : testClasses) {
-            try {
-                Class<?> clazz = Class.forName(cn);
-                if (isAdmissible(clazz)) {
-                    logger.info("Found admissible test class: {}", cn);
-                    classes.add(clazz);
+                if (!testSucceeded) {
+                    Assertions.fail("Some unit tests failed (" + result.getTestsFailedCount() + "/" + result.getTestsStartedCount() + "), check the logs for more details");
                 }
-            } catch (Throwable t) {
-                logger.warn("Test class {} has thrown an exception during initialization", cn);
-                logger.debug("Exception for test cass " + cn + " is:", t);
+
+                if (result.getTestsStartedCount() == 0 && config.getUnitTestsExpectedNumber() == null) {
+                    Assertions.fail("No tests have been found");
+                }
+
+                Integer expectedTests = config.getUnitTestsExpectedNumber();
+                if (expectedTests != null && expectedTests != result.getTestsStartedCount()) {
+                    Assertions.fail("Wrong number of tests: expected " + expectedTests + " found " + result.getTestsStartedCount());
+                }
+
+                return new UnitTestResult(result);
             }
-        }
-
-
-        logger.info("Run JUnit tests on {} test classes", classes.size());
-
-        JUnitCore runner = new JUnitCore();
-        runner.addListener(new RunListener() {
-            @Override
-            public void testStarted(Description description) throws Exception {
-                disableJmx(config.getJmxDisabledNames());
+            else {
+                logger.warn("No JUnit5 tests found for component {}", component );
+                return null;
             }
-        });
-        Result result = runner.run(classes.toArray(new Class[]{}));
-
-        logger.info(config.getModuleName() + " unit tests. "
-                + "Success: " + result.wasSuccessful() + " - Test Run: " + result.getRunCount() + " - Failures: " + result.getFailureCount()
-                + " - Ignored Tests: " + result.getIgnoreCount());
-
-
-        for (Failure f : result.getFailures()) {
-            logger.warn("Failed test description: {}", f.getDescription());
-            logger.warn("Message: {}", f.getMessage());
-            if (f.getException() != null) {
-                logger.warn("Exception thrown from test", f.getException());
-            }
-        }
-
-        if (!result.wasSuccessful()) {
-            Assert.fail("Some unit tests failed (" + result.getFailureCount() + "/" + result.getRunCount() + "), check the logs for more details");
-        }
-
-        if (result.getRunCount() == 0 && config.getUnitTestsExpectedNumber() == null) {
-            Assert.fail("No tests have been found");
-        }
-
-        Integer expectedTests = config.getUnitTestsExpectedNumber();
-        if (expectedTests != null && expectedTests != result.getRunCount()) {
-            Assert.fail("Wrong number of tests: expected " + expectedTests + " found " + result.getRunCount());
-        }
-
-        return new UnitTestResult(result);
     }
 
     private void disableJmx(Set<String> disabledJmx) throws Exception {
@@ -163,6 +157,27 @@ public class UnitTestCommand extends AbstractTestCommand implements Command {
             servers = Collections.emptyList();
         }
         return servers;
+    }
+    
+    private class IsAdmissableFilter implements PostDiscoveryFilter {
+
+        @Override
+        public FilterResult apply(TestDescriptor testDescriptor) {
+            Optional<TestSource> source = testDescriptor.getSource();
+            if (source.isPresent() && source.get() instanceof ClassSource) {
+                Class<?> testClass =  ((ClassSource)source.get()).getJavaClass();
+                logger.debug("Checking class " + testClass.getName());
+                if (!isAdmissible(testClass)) {
+                    return FilterResult.excluded("Not admissable");
+                }
+                else {
+                    return FilterResult.included("Admissable");
+                }
+            } else {
+                return FilterResult.included("");
+            }
+        }
+        
     }
 
     private boolean isAdmissible(Class<?> testClass) {

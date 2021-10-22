@@ -21,7 +21,7 @@ import java.io.File;
 import org.apache.camel.itest.springboot.ITestConfigBuilder;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.impl.base.exporter.zip.ZipExporterImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Utility to export a spring-boot jar and check the content.

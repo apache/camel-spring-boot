@@ -16,15 +16,10 @@
  */
 package org.apache.camel.itest.springboot;
 
-import java.net.URL;
-
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
-import ch.qos.logback.core.util.StatusPrinter;
-
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.Banner.Mode;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -34,7 +29,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * module under test.
  *
  */
-@SpringBootApplication
+// Don't load the datasource bean here because the properties are only defined in the unit test class (CamelSqlTest)
+@SpringBootApplication(excludeName = {"org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"}
+)
 @EnableAsync
 @Import(ITestXmlConfiguration.class)
 public class ITestApplication {
@@ -42,9 +39,12 @@ public class ITestApplication {
     public static void main(String[] args) throws Exception {
 
         try {
-            overrideLoggingConfig();
-
-            SpringApplication.run(ITestApplication.class, args);
+            SpringApplication app = new SpringApplication(ITestApplication.class);
+            // Prevent writing to stdout
+            app.setBannerMode(Mode.OFF);
+            // Prevent starting webserver; it will be started in unit tests if required
+            app.setWebApplicationType(WebApplicationType.NONE);
+            app.run(args);
         } catch (Throwable t) {
             LoggerFactory.getLogger(ITestApplication.class).error("Error while executing test", t);
             throw t;
@@ -57,25 +57,4 @@ public class ITestApplication {
         return "spring-boot-main";
     }
 
-    private static void overrideLoggingConfig() {
-
-        URL logbackFile = ITestApplication.class.getResource("/spring-logback.xml");
-        if (logbackFile != null) {
-
-            LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
-
-            try {
-                JoranConfigurator configurator = new JoranConfigurator();
-                configurator.setContext(context);
-                // Call context.reset() to clear any previous configuration, e.g. default
-                // configuration. For multi-step configuration, omit calling context.reset().
-                context.reset();
-                configurator.doConfigure(logbackFile);
-            } catch (JoranException je) {
-                // StatusPrinter will handle this
-            }
-            StatusPrinter.printInCaseOfErrorsOrWarnings(context);
-        }
-
-    }
 }

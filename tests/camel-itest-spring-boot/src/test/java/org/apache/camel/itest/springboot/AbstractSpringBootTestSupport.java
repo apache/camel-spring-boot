@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 
 import org.apache.camel.itest.springboot.arquillian.ArquillianSyncBootJarLauncher;
 import org.apache.camel.itest.springboot.util.SpringBootContainerFacade;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * This is the base class of all spring-boot integration tests.
@@ -36,7 +36,7 @@ public abstract class AbstractSpringBootTestSupport {
      *
      * @throws Exception
      */
-    @Before
+    @BeforeEach
     public void startSpringBoot() throws Exception {
         this.config = retrieveConfig();
 
