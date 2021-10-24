@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-# A distributed part of main camel "docs/components" 'components' component descriptor:
+# A distributed part of camel-spring-boot docs/spring-boot:
 
-name: components
+name: camel-spring-boot
 version: 3.13.x

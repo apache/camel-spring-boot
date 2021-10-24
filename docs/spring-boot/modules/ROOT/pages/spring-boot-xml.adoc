@@ -1,9 +1,0 @@
-[[SpringBootXml-SpringBootXml]]
-= Spring Boot XML
-
-*Since Camel 3.9*
-
-Support for using Spring XML files containing Camel XML routes.
-
-However this is not a recommended practice as Camel XML is creating and managing a `SpringCamelContext`
-created by standard Spring framework that predates Spring Boot.
