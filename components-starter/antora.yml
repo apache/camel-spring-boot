@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-# A distributed part of main camel "docs/components" 'components' component descriptor:
+# A distributed part of main camel "components" docs/components:
 
 name: components
 version: 3.13.x
