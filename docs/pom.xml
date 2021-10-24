@@ -32,36 +32,5 @@
     <packaging>pom</packaging>
 
     <name>Camel SB :: Docs</name>
-
-    <build>
-      <plugins>
-        <plugin>
-          <artifactId>maven-antrun-plugin</artifactId>
-          <executions>
-            <execution>
-              <id>copy-docs</id>
-              <phase>package</phase>
-              <goals>
-                <goal>run</goal>
-              </goals>
-              <configuration>
-                <target>
-                  <copy todir="${project.basedir}/spring-boot/modules/ROOT/pages/" flatten="true">
-                    <fileset dir="${project.basedir}/../core/">
-                      <include name="**/src/main/docs/*.adoc"/>
-                    </fileset>
-                  </copy>
-                  <copy todir="${project.basedir}/components/modules/spring-boot/examples/json" flatten="true">
-                    <fileset dir="${project.basedir}/../components-starter/">
-                      <include name="*/src/main/docs/*.json"/>
-                    </fileset>
-                  </copy>
-                </target>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-      </plugins>
-    </build>
-
+    
 </project>
