@@ -41,7 +41,7 @@ public class MllpComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, java.nio.charset.Charset.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.mllp.MllpConfiguration.class));
         return answer;
     }
 
@@ -58,7 +58,7 @@ public class MllpComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "java.nio.charset.Charset": return applicationContext.getBean(ref, java.nio.charset.Charset.class);
+            case "org.apache.camel.component.mllp.MllpConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.mllp.MllpConfiguration.class);
         }
         return null;
     }
