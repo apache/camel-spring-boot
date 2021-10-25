@@ -17,9 +17,9 @@
 
 name: camel-spring-boot
 title: Camel Spring Boot
-version: latest
+version: next
 prerelease: true
-display_version: 3.13.x (Prerelease)
+display-version: Next (Pre-release)
 nav:
 - modules/ROOT/nav.adoc
 
