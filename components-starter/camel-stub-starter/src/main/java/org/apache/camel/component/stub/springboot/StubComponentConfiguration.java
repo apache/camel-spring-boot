@@ -52,6 +52,12 @@ public class StubComponentConfiguration
      */
     private Integer concurrentConsumers = 1;
     /**
+     * The timeout (in milliseconds) used when polling. When a timeout occurs,
+     * the consumer can check whether it is allowed to continue running. Setting
+     * a lower value allows the consumer to react more quickly upon shutdown.
+     */
+    private Integer defaultPollTimeout = 1000;
+    /**
      * Whether a thread that sends messages to a full SEDA queue will block
      * until the queue's capacity is no longer exhausted. By default, an
      * exception will be thrown stating that the queue is full. By enabling this
@@ -119,6 +125,14 @@ public class StubComponentConfiguration
 
     public void setConcurrentConsumers(Integer concurrentConsumers) {
         this.concurrentConsumers = concurrentConsumers;
+    }
+
+    public Integer getDefaultPollTimeout() {
+        return defaultPollTimeout;
+    }
+
+    public void setDefaultPollTimeout(Integer defaultPollTimeout) {
+        this.defaultPollTimeout = defaultPollTimeout;
     }
 
     public Boolean getDefaultBlockWhenFull() {

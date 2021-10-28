@@ -60,6 +60,13 @@
       "sourceType": "org.apache.camel.component.stub.springboot.StubComponentConfiguration"
     },
     {
+      "name": "camel.component.stub.default-poll-timeout",
+      "type": "java.lang.Integer",
+      "description": "The timeout (in milliseconds) used when polling. When a timeout occurs, the consumer can check whether it is allowed to continue running. Setting a lower value allows the consumer to react more quickly upon shutdown.",
+      "sourceType": "org.apache.camel.component.stub.springboot.StubComponentConfiguration",
+      "defaultValue": 1000
+    },
+    {
       "name": "camel.component.stub.default-queue-factory",
       "type": "org.apache.camel.component.seda.BlockingQueueFactory<org.apache.camel.Exchange>",
       "description": "Sets the default queue factory. The option is a org.apache.camel.component.seda.BlockingQueueFactory<org.apache.camel.Exchange> type.",
