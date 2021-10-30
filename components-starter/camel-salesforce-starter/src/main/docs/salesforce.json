@@ -303,6 +303,12 @@
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
+      "name": "camel.component.salesforce.locator",
+      "type": "java.lang.String",
+      "description": "Locator provided by salesforce Bulk 2.0 API for use in getting results for a Query job.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+    },
+    {
       "name": "camel.component.salesforce.login-config",
       "type": "org.apache.camel.component.salesforce.SalesforceLoginConfig",
       "description": "All authentication configuration in one nested bean, all properties set there can be set directly on the component as well. The option is a org.apache.camel.component.salesforce.SalesforceLoginConfig type.",
@@ -327,6 +333,12 @@
       "description": "Maximum backoff interval for Streaming connection restart attempts for failures beyond CometD auto-reconnect. The option is a long type.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
       "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.salesforce.max-records",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of records to retrieve per set of results for a Bulk 2.0 Query. The request is still subject to the size limits. If you are working with a very large number of query results, you may experience a timeout before receiving all the data from Salesforce. To prevent a timeout, specify the maximum number of records your client is expecting to receive in the maxRecords parameter. This splits the results into smaller sets with this value as the maximum size.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
       "name": "camel.component.salesforce.not-found-behaviour",

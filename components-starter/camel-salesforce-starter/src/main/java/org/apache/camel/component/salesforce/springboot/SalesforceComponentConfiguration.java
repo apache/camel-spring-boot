@@ -133,10 +133,25 @@ public class SalesforceComponentConfiguration
      */
     private Integer limit;
     /**
+     * Locator provided by salesforce Bulk 2.0 API for use in getting results
+     * for a Query job.
+     */
+    private String locator;
+    /**
      * Maximum backoff interval for Streaming connection restart attempts for
      * failures beyond CometD auto-reconnect. The option is a long type.
      */
     private Long maxBackoff = 30000L;
+    /**
+     * The maximum number of records to retrieve per set of results for a Bulk
+     * 2.0 Query. The request is still subject to the size limits. If you are
+     * working with a very large number of query results, you may experience a
+     * timeout before receiving all the data from Salesforce. To prevent a
+     * timeout, specify the maximum number of records your client is expecting
+     * to receive in the maxRecords parameter. This splits the results into
+     * smaller sets with this value as the maximum size.
+     */
+    private Integer maxRecords;
     /**
      * Sets the behaviour of 404 not found status received from Salesforce API.
      * Should the body be set to NULL NotFoundBehaviour#NULL or should a
@@ -642,12 +657,28 @@ public class SalesforceComponentConfiguration
         this.limit = limit;
     }
 
+    public String getLocator() {
+        return locator;
+    }
+
+    public void setLocator(String locator) {
+        this.locator = locator;
+    }
+
     public Long getMaxBackoff() {
         return maxBackoff;
     }
 
     public void setMaxBackoff(Long maxBackoff) {
         this.maxBackoff = maxBackoff;
+    }
+
+    public Integer getMaxRecords() {
+        return maxRecords;
+    }
+
+    public void setMaxRecords(Integer maxRecords) {
+        this.maxRecords = maxRecords;
     }
 
     public NotFoundBehaviour getNotFoundBehaviour() {
