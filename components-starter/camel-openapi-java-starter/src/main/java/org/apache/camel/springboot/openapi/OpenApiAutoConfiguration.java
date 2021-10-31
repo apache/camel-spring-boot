@@ -134,7 +134,7 @@ public class OpenApiAutoConfiguration {
         RestConfiguration rc = camelContext.getRestConfiguration();
         initOpenApi(bc, info, rc.getApiProperties());
 
-        OasDocument openApi = reader.read(camelContext, rests, "", bc, null, camelContext.getClassResolver());
+        OasDocument openApi = reader.read(camelContext, rests, bc, null, camelContext.getClassResolver());
         if (!rc.isApiVendorExtension()) {
             clearVendorExtensions(openApi);
         }

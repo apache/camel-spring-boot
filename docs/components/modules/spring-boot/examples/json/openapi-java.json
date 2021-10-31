@@ -1,3 +1,19 @@
 {
-  "properties": []
+  "groups": [
+    {
+      "name": "camel.openapi",
+      "type": "org.apache.camel.springboot.openapi.OpenApiConfiguration",
+      "sourceType": "org.apache.camel.springboot.openapi.OpenApiConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.openapi.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables Camel Rest DSL to automatic register its OpenAPI (eg swagger doc) in Spring Boot which allows tooling such as SpringDoc to integrate with Camel.",
+      "sourceType": "org.apache.camel.springboot.openapi.OpenApiConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
 }
