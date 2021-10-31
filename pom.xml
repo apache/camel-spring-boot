@@ -130,6 +130,7 @@
         <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
         <mycila-license-version>3.0</mycila-license-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
+        <swagger-parser-v3-version>2.0.28</swagger-parser-v3-version>
         <undertow-version>2.2.0.Final</undertow-version>
     </properties>
 
