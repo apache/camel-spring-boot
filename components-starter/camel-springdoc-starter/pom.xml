@@ -29,9 +29,6 @@
     <packaging>jar</packaging>
     <name>Camel SB Starters :: Springdoc</name>
     <description>Spring-Boot Starter for Rest-dsl support when using openapi doc and the Springdoc Swagger UI</description>
-    <properties>
-        <springdoc-version>1.5.11</springdoc-version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
