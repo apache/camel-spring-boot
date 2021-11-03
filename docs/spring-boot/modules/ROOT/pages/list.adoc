@@ -18,6 +18,15 @@ ifdef::sb-statistics[]
 
 include::Error-unused-starter-json.adoc[]
 
+If this section appears in the (failed) website build, there is a mismatch between the camel spring boot starter json files, which are used to generate the spring-boot section of main camel component documentation, and the names used in those main camel component documentation pages.
+The names of the unused spring boot starter json files are listed below.
+Each of these needs to be used in a component doc page as the `camel-spring-boot-name` header attribute, like this:
+
+[source,adoc]
+----
+:camel-spring-boot-name: springdoc
+----
+
 There are {existing} spring boot starter json files.
 
 Of these {used} are used in components, dataformats, etc.
