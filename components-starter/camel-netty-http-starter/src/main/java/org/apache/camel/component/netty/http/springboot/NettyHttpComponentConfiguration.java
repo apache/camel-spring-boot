@@ -103,6 +103,11 @@ public class NettyHttpComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * If enabled and an Exchange failed processing on the consumer side the
+     * response's body won't contain the exception's stack trace.
+     */
+    private Boolean muteException = false;
+    /**
      * Allows to configure a backlog for netty consumer (server). Note the
      * backlog is just a best effort depending on the OS. Setting this option to
      * a value such as 200, 500 or 1000, tells the TCP stack how long the accept
@@ -497,6 +502,14 @@ public class NettyHttpComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getMuteException() {
+        return muteException;
+    }
+
+    public void setMuteException(Boolean muteException) {
+        this.muteException = muteException;
     }
 
     public Integer getBacklog() {

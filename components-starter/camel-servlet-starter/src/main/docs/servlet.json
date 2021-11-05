@@ -88,6 +88,13 @@
       "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration"
     },
     {
+      "name": "camel.component.servlet.mute-exception",
+      "type": "java.lang.Boolean",
+      "description": "If enabled and an Exchange failed processing on the consumer side the response's body won't contain the exception's stack trace.",
+      "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.servlet.servlet-name",
       "type": "java.lang.String",
       "description": "Default name of servlet to use. The default name is CamelServlet.",
