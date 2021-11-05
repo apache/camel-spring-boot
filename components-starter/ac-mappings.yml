@@ -1,0 +1,9 @@
+mappings:
+  - module: spring-boot
+    family: example
+    path:
+      include:
+        - '*/src/main/docs/*.json'
+    relativemap:
+      - match: '*/src/main/docs/(?<name>*).json'
+        format: 'json/{name}.json'
