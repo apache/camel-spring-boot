@@ -41,8 +41,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootApplication
 @SpringBootTest(
     classes = {CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class, ActuatorTestRoute.class},
-    properties = {"management.endpoint.camelroutes.read-only = false"})
-public class CamelRoutesEndpointWriteOperationTest extends Assert {
+    properties = {"management.endpoints.web.exposure.include=*",
+            "management.endpoint.camelroutes.read-only = false"})
+public class CamelRoutesEndpointWriteOperationTest {
 
     @Autowired
     CamelRoutesEndpoint endpoint;

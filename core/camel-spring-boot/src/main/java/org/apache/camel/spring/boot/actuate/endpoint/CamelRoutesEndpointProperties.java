@@ -21,8 +21,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("management.endpoint.camelroutes")
 public class CamelRoutesEndpointProperties {
 
+    /**
+     * Whether Camel Routes actuator is in read-only mode.
+     * If not in read-only mode then operations to start/stop routes would be enabled.
+     */
     private boolean readOnly = true;
-    private boolean enabled = false;
 
     public boolean isReadOnly() {
         return readOnly;
@@ -32,14 +35,4 @@ public class CamelRoutesEndpointProperties {
         this.readOnly = readOnly;
     }
     
-    public boolean isEnabled() {
-        return enabled;
-    }
-    
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-    
-    
-
 }

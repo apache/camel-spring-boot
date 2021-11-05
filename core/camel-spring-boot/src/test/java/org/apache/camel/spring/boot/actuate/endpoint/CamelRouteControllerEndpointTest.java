@@ -38,8 +38,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @EnableAutoConfiguration
 @SpringBootApplication
-@SpringBootTest(classes = {CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class, ActuatorTestRoute.class})
-public class CamelRouteControllerEndpointTest extends Assert {
+@SpringBootTest(
+        classes = {CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class,
+                CamelRoutesEndpointAutoConfiguration.class, ActuatorTestRoute.class},
+        properties = {"management.endpoints.web.exposure.include=*",
+                      "camel.springboot.routeControllerSuperviseEnabled=true"})
+public class CamelRouteControllerEndpointTest {
 
     @Autowired
     CamelRouteControllerEndpoint endpoint;
@@ -50,13 +54,8 @@ public class CamelRouteControllerEndpointTest extends Assert {
     @Test
     public void testRouteControllerEndpoint() throws Exception {
         List<String> routesId = endpoint.getControlledRoutes();
-
-        assertNotNull(routesId);
-        /* FIXME DefaultRouteController returns empty list while it does control any route...
-        assertFalse(routesId.isEmpty());
-        assertEquals(routesId.size(), camelContext.getRoutes().size());
-        assertTrue(routesId.stream().anyMatch(r -> "foo-route".equals(r)));
-        */
+        Assert.assertTrue(routesId.size() > 0);
+        Assert.assertTrue(routesId.contains("foo-route"));
     }
 
 }
