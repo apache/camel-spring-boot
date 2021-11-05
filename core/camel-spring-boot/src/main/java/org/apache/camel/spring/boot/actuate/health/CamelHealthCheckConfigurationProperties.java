@@ -26,33 +26,42 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class CamelHealthCheckConfigurationProperties {
 
     /**
-     * Whether health check is enabled globally
+     * Whether health check is enabled globally.
+     *
+     * Is default enabled
      */
     private Boolean enabled;
 
     /**
-     * Whether context health check is enabled
+     * Whether context health check is enabled.
      *
      * Is default enabled
      */
     private Boolean contextEnabled;
 
     /**
-     * Whether routes health check is enabled
+     * Whether routes health check is enabled.
      *
      * Is default enabled
      */
     private Boolean routesEnabled;
 
     /**
-     * Whether registry health check is enabled
+     * Whether consumers health check is enabled.
+     *
+     * Is default enabled
+     */
+    private Boolean consumersEnabled;
+
+    /**
+     * Whether registry health check is enabled.
      *
      * Is default enabled
      */
     private Boolean registryEnabled;
 
     /**
-     * Additional health check properties for fine grained configuration of health checks.
+     * Additional health check properties for fine-grained configuration of health checks.
      */
     private Map<String, HealthCheckConfigurationProperties> config = new HashMap<>();
 
@@ -78,6 +87,14 @@ public class CamelHealthCheckConfigurationProperties {
 
     public void setRoutesEnabled(Boolean routesEnabled) {
         this.routesEnabled = routesEnabled;
+    }
+
+    public Boolean getConsumersEnabled() {
+        return consumersEnabled;
+    }
+
+    public void setConsumersEnabled(Boolean consumersEnabled) {
+        this.consumersEnabled = consumersEnabled;
     }
 
     public Boolean getRegistryEnabled() {

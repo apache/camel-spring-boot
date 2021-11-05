@@ -77,7 +77,7 @@ public class CamelHealthCheckAutoConfiguration {
                     hcr.register(hc);
                 }
             }
-            // routes is enabled by default
+            // routes are enabled by default
             if (hcr.isEnabled() && (!config.getConfig().containsKey("routes") || config.getRoutesEnabled() != null)) {
                 HealthCheckRepository hc = hcr.getRepository("routes").orElse((HealthCheckRepository) hcr.resolveById("routes"));
                 if (hc != null) {
@@ -87,14 +87,26 @@ public class CamelHealthCheckAutoConfiguration {
                     hcr.register(hc);
                 }
             }
-            // registry is enabled by default
-            final CamelHealthCheckConfigurationProperties lambdaConfig = config;
-            if (hcr.isEnabled() && (!config.getConfig().containsKey("registry") || config.getRegistryEnabled() != null)) {
-                hcr.getRepository("registry").ifPresent(h -> {
-                    if (lambdaConfig.getRegistryEnabled() != null) {
-                        h.setEnabled(lambdaConfig.getRegistryEnabled());
+            // consumers are enabled by default
+            if (hcr.isEnabled() && (!config.getConfig().containsKey("consumers") || config.getConsumersEnabled() != null)) {
+                HealthCheckRepository hc = hcr.getRepository("consumers").orElse((HealthCheckRepository) hcr.resolveById("consumers"));
+                if (hc != null) {
+                    if (config.getConsumersEnabled() != null) {
+                        hc.setEnabled(config.getConsumersEnabled());
                     }
-                });
+                    hcr.register(hc);
+                }
+            }
+            // registry are enabled by default
+            if (hcr.isEnabled() && (!config.getConfig().containsKey("registry") || config.getRegistryEnabled() != null)) {
+                HealthCheckRepository hc
+                        = hcr.getRepository("registry").orElse((HealthCheckRepository) hcr.resolveById("registry"));
+                if (hc != null) {
+                    if (config.getRegistryEnabled() != null) {
+                        hc.setEnabled(config.getRegistryEnabled());
+                    }
+                    hcr.register(hc);
+                }
             }
 
             // configure health checks configurations

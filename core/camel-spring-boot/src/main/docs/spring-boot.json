@@ -397,7 +397,7 @@
     {
       "name": "camel.health.config",
       "type": "java.util.Map<java.lang.String,org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties$HealthCheckConfigurationProperties>",
-      "description": "Additional health check properties for fine grained configuration of health checks.",
+      "description": "Additional health check properties for fine-grained configuration of health checks.",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {
@@ -425,27 +425,33 @@
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties$HealthCheckConfigurationProperties"
     },
     {
+      "name": "camel.health.consumers-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether consumers health check is enabled. Is default enabled",
+      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
+    },
+    {
       "name": "camel.health.context-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether context health check is enabled Is default enabled",
+      "description": "Whether context health check is enabled. Is default enabled",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {
       "name": "camel.health.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether health check is enabled globally",
+      "description": "Whether health check is enabled globally. Is default enabled",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {
       "name": "camel.health.registry-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether registry health check is enabled Is default enabled",
+      "description": "Whether registry health check is enabled. Is default enabled",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {
       "name": "camel.health.routes-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether routes health check is enabled Is default enabled",
+      "description": "Whether routes health check is enabled. Is default enabled",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {
