@@ -37,15 +37,16 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @SpringBootTest(
     classes = {CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class,
                CamelRouteControllerEndpointAutoConfiguration.class, ActuatorTestRoute.class},
-    properties = {"management.endpoints.enabled-by-default = true",
-                  "management.endpoint.camelroutecontroller.enabled = true"}
+    properties = {"management.endpoints.web.exposure.include=*",
+                  "management.endpoint.camelroute.enabled=true",
+                  "management.endpoint.camelroutecontroller.enabled=false"}
 )
 public class CamelRouteControllerEndpointGloballyDisabledAndReenabledTest {
 
-    @Autowired
+    @Autowired(required = false)
     CamelRouteControllerEndpoint routeControllerEndpoint;
 
-    @Autowired
+    @Autowired(required = false)
     CamelRoutesEndpoint routesEndpoint;
 
     @Autowired
@@ -53,9 +54,10 @@ public class CamelRouteControllerEndpointGloballyDisabledAndReenabledTest {
 
     @Test
     public void testRoutesEndpointPresent() throws Exception {
-
+        // routes is enabled
         Assertions.assertNotNull(routesEndpoint);
-        Assertions.assertNotNull(routeControllerEndpoint);
+        // controller is disabled
+        Assertions.assertNull(routeControllerEndpoint);
     }
 
 }

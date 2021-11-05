@@ -27,9 +27,9 @@ import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 
 /*
- * {@link Endpoint} to expose {@link RouteController} information.
+ * Spring Boot Management Endpoint to expose Camel RouteController information.
  */
-@Endpoint(id = "camelroutecontroller", enableByDefault = true)
+@Endpoint(id = "camelroutecontroller")
 public class CamelRouteControllerEndpoint {
 
     private CamelContext camelContext;
