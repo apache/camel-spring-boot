@@ -1232,7 +1232,7 @@
     {
       "name": "management.endpoint.camelroutecontroller.enabled",
       "type": "java.lang.Boolean",
-      "description": "To turn on or off information about Camel Route Controller via actuator endpoint.",
+      "description": "Whether to enable the camelroutecontroller endpoint.",
       "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpoint",
       "defaultValue": true
     },
@@ -1246,21 +1246,9 @@
     {
       "name": "management.endpoint.camelroutes.enabled",
       "type": "java.lang.Boolean",
-      "description": "To turn on or off information about Camel Routes via actuator endpoint.",
-      "defaultValue": true
-    },
-    {
-      "name": "management.endpoint.camelroutes.enabled",
-      "type": "java.lang.Boolean",
       "description": "Whether to enable the camelroutes endpoint.",
       "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint",
       "defaultValue": true
-    },
-    {
-      "name": "management.endpoint.camelroutes.enabled",
-      "type": "java.lang.Boolean",
-      "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpointProperties",
-      "defaultValue": false
     },
     {
       "name": "management.endpoint.camelroutes.read-only",

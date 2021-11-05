@@ -20,23 +20,29 @@ import java.util.List;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
 
 /*
  * Test for the {@link CamelRouteControllerEndpoint} actuator endpoint.
  */
 @DirtiesContext
-@CamelSpringBootTest
+@RunWith(SpringRunner.class)
 @EnableAutoConfiguration
 @SpringBootApplication
-@SpringBootTest(classes = {CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class, ActuatorTestRoute.class})
+@SpringBootTest(
+        classes = {CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class,
+                CamelRoutesEndpointAutoConfiguration.class, ActuatorTestRoute.class},
+        properties = {"management.endpoints.web.exposure.include=*",
+                "camel.springboot.routeControllerSuperviseEnabled=true"})
 public class CamelRouteControllerEndpointTest {
 
     @Autowired
@@ -48,13 +54,8 @@ public class CamelRouteControllerEndpointTest {
     @Test
     public void testRouteControllerEndpoint() throws Exception {
         List<String> routesId = endpoint.getControlledRoutes();
-
-        Assertions.assertNotNull(routesId);
-        /* FIXME DefaultRouteController returns empty list while it does control any route...
-        assertFalse(routesId.isEmpty());
-        assertEquals(routesId.size(), camelContext.getRoutes().size());
-        assertTrue(routesId.stream().anyMatch(r -> "foo-route".equals(r)));
-        */
+        Assert.assertTrue(routesId.size() > 0);
+        Assert.assertTrue(routesId.contains("foo-route"));
     }
 
 }

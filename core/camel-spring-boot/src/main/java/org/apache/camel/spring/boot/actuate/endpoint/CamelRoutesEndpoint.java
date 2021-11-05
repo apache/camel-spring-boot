@@ -26,14 +26,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.Route;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.StatefulService;
 import org.apache.camel.api.management.ManagedCamelContext;
 import org.apache.camel.api.management.mbean.ManagedRouteMBean;
-import org.apache.camel.impl.DefaultCamelContext;
-import org.apache.camel.spi.RouteError;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.annotation.Selector;
@@ -44,24 +41,19 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
 /*
- * {@link Endpoint} to expose {@link org.apache.camel.Route} information.
+ * Spring Boot Management Endpoint to expose Camel Route information.
  */
-@Endpoint(id = "camelroutes", enableByDefault = true)
+@Endpoint(id = "camelroutes")
 public class CamelRoutesEndpoint {
 
     private CamelContext camelContext;
-    private static ExtendedCamelContext extendedContext;
-    private static ManagedCamelContext mcontext;
-    private static DefaultCamelContext dcontext; 
+    private ManagedCamelContext managedCamelContext;
     private CamelRoutesEndpointProperties properties;
 
     public CamelRoutesEndpoint(CamelContext camelContext, CamelRoutesEndpointProperties properties) {
         this.camelContext = camelContext;
-        this.extendedContext = camelContext.getExtension(ExtendedCamelContext.class);
-        this.mcontext = camelContext.getExtension(ManagedCamelContext.class);;
-        this.dcontext = camelContext.getExtension(DefaultCamelContext.class);
+        this.managedCamelContext = camelContext.getExtension(ManagedCamelContext.class);
         this.properties = properties;
     }
 
@@ -73,12 +65,12 @@ public class CamelRoutesEndpoint {
     @ReadOperation
     public Object doReadAction(@Selector String id, @Selector ReadAction action) {
         switch (action) {
-        case DETAIL:
-            return getRouteDetailsInfo(id);
-        case INFO:
-            return getRouteInfo(id);
-        default:
-            throw new IllegalArgumentException("Unsupported read action " + action);
+            case DETAIL:
+                return getRouteDetailsInfo(id);
+            case INFO:
+                return getRouteInfo(id);
+            default:
+                throw new IllegalArgumentException("Unsupported read action " + action);
         }
     }
 
@@ -89,29 +81,29 @@ public class CamelRoutesEndpoint {
         }
 
         switch (action) {
-        case STOP:
-            stopRoute(
-                    id,
-                    Optional.ofNullable(timeInfo).flatMap(ti -> Optional.ofNullable(ti.getTimeout())),
-                    Optional.of(TimeUnit.SECONDS),
-                    Optional.ofNullable(timeInfo).flatMap(ti -> Optional.ofNullable(ti.getAbortAfterTimeout())));
-            break;
-        case START:
-            startRoute(id);
-            break;
-        case RESET:
-            resetRoute(id);
-            break;
-        case SUSPEND:
-            suspendRoute(id,
-                    Optional.ofNullable(timeInfo).flatMap(ti -> Optional.ofNullable(ti.getTimeout())),
-                    Optional.of(TimeUnit.SECONDS));
-            break;
-        case RESUME:
-            resumeRoute(id);
-            break;
-        default:
-            throw new IllegalArgumentException("Unsupported write action " + action);
+            case STOP:
+                stopRoute(
+                        id,
+                        Optional.ofNullable(timeInfo).flatMap(ti -> Optional.ofNullable(ti.getTimeout())),
+                        Optional.of(TimeUnit.SECONDS),
+                        Optional.ofNullable(timeInfo).flatMap(ti -> Optional.ofNullable(ti.getAbortAfterTimeout())));
+                break;
+            case START:
+                startRoute(id);
+                break;
+            case RESET:
+                resetRoute(id);
+                break;
+            case SUSPEND:
+                suspendRoute(id,
+                        Optional.ofNullable(timeInfo).flatMap(ti -> Optional.ofNullable(ti.getTimeout())),
+                        Optional.of(TimeUnit.SECONDS));
+                break;
+            case RESUME:
+                resumeRoute(id);
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported write action " + action);
         }
     }
 
@@ -149,7 +141,7 @@ public class CamelRoutesEndpoint {
 
     private void resetRoute(String id) {
         try {
-            ManagedRouteMBean managedRouteMBean = mcontext.getManagedRoute(id, ManagedRouteMBean.class);
+            ManagedRouteMBean managedRouteMBean = managedCamelContext.getManagedRoute(id, ManagedRouteMBean.class);
             if (managedRouteMBean != null) {
                 managedRouteMBean.reset(true);
             }
@@ -198,17 +190,11 @@ public class CamelRoutesEndpoint {
     public static class RouteEndpointInfo {
 
         private final String id;
-        
         private final String group;
-
         private final Map<String, Object> properties;
-
         private final String description;
-
         private final String uptime;
-
         private final long uptimeMillis;
-
         private final String status;
 
         public RouteEndpointInfo(Route route) {
@@ -234,7 +220,7 @@ public class CamelRoutesEndpoint {
         public String getId() {
             return id;
         }
-        
+
         public String getGroup() {
             return group;
         }
@@ -271,9 +257,9 @@ public class CamelRoutesEndpoint {
 
         public RouteDetailsEndpointInfo(final CamelContext camelContext, final Route route) {
             super(route);
-
             if (camelContext.getManagementStrategy().getManagementAgent() != null) {
-               this.routeDetails = new RouteDetails(mcontext.getManagedRoute(route.getId(), ManagedRouteMBean.class));
+                ManagedCamelContext mcc = camelContext.getExtension(ManagedCamelContext.class);
+                this.routeDetails = new RouteDetails(mcc.getManagedRoute(route.getId(), ManagedRouteMBean.class));
             }
         }
 
@@ -281,55 +267,29 @@ public class CamelRoutesEndpoint {
         static class RouteDetails {
 
             private long deltaProcessingTime;
-
             private long exchangesInflight;
-
             private long exchangesTotal;
-
             private long externalRedeliveries;
-
             private long failuresHandled;
-
             private String firstExchangeCompletedExchangeId;
-
             private Date firstExchangeCompletedTimestamp;
-
             private String firstExchangeFailureExchangeId;
-
             private Date firstExchangeFailureTimestamp;
-
             private String lastExchangeCompletedExchangeId;
-
             private Date lastExchangeCompletedTimestamp;
-
             private String lastExchangeFailureExchangeId;
-
             private Date lastExchangeFailureTimestamp;
-
             private long lastProcessingTime;
-
             private String load01;
-
             private String load05;
-
             private String load15;
-
             private long maxProcessingTime;
-
             private long meanProcessingTime;
-
             private long minProcessingTime;
-
             private Long oldestInflightDuration;
-
             private String oldestInflightExchangeId;
-
             private long redeliveries;
-
             private long totalProcessingTime;
-
-            private RouteError lastError;
-
             private boolean hasRouteController;
 
             RouteDetails(ManagedRouteMBean managedRoute) {
@@ -358,7 +318,6 @@ public class CamelRoutesEndpoint {
                     this.oldestInflightExchangeId = managedRoute.getOldestInflightExchangeId();
                     this.redeliveries = managedRoute.getRedeliveries();
                     this.totalProcessingTime = managedRoute.getTotalProcessingTime();
-                    //this.lastError = managedRoute.getLastError();
                     this.hasRouteController = managedRoute.getHasRouteController();
                 } catch (Exception e) {
                     // Ignore
@@ -459,10 +418,6 @@ public class CamelRoutesEndpoint {
 
             public long getTotalProcessingTime() {
                 return totalProcessingTime;
-            }
-
-            public RouteError getLastError() {
-                return lastError;
             }
 
             public boolean getHasRouteController() {
