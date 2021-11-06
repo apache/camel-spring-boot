@@ -79,6 +79,11 @@ public class JettyHttpComponentConfiguration9
      */
     private Integer minThreads;
     /**
+     * If enabled and an Exchange failed processing on the consumer side the
+     * response's body won't contain the exception's stack trace.
+     */
+    private Boolean muteException = false;
+    /**
      * Allows to configure a custom value of the request buffer size on the
      * Jetty connectors.
      */
@@ -260,6 +265,14 @@ public class JettyHttpComponentConfiguration9
 
     public void setMinThreads(Integer minThreads) {
         this.minThreads = minThreads;
+    }
+
+    public Boolean getMuteException() {
+        return muteException;
+    }
+
+    public void setMuteException(Boolean muteException) {
+        this.muteException = muteException;
     }
 
     public Integer getRequestBufferSize() {
