@@ -114,6 +114,13 @@
       "sourceType": "org.apache.camel.component.jetty9.springboot.JettyHttpComponentConfiguration9"
     },
     {
+      "name": "camel.component.jetty.mute-exception",
+      "type": "java.lang.Boolean",
+      "description": "If enabled and an Exchange failed processing on the consumer side the response's body won't contain the exception's stack trace.",
+      "sourceType": "org.apache.camel.component.jetty9.springboot.JettyHttpComponentConfiguration9",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.jetty.proxy-host",
       "type": "java.lang.String",
       "description": "To use a http proxy to configure the hostname.",

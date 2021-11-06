@@ -50,6 +50,11 @@ public class WebsocketComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * If enabled and an Exchange failed processing on the consumer side the
+     * response's body won't contain the exception's stack trace.
+     */
+    private Boolean muteException = false;
+    /**
      * Default name of servlet to use. The default name is CamelServlet.
      */
     private String servletName = "CamelServlet";
@@ -124,6 +129,14 @@ public class WebsocketComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getMuteException() {
+        return muteException;
+    }
+
+    public void setMuteException(Boolean muteException) {
+        this.muteException = muteException;
     }
 
     public String getServletName() {

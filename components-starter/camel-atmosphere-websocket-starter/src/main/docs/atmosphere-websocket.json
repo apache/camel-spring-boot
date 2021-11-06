@@ -90,6 +90,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.atmosphere-websocket.mute-exception",
+      "type": "java.lang.Boolean",
+      "description": "If enabled and an Exchange failed processing on the consumer side the response's body won't contain the exception's stack trace.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.atmosphere-websocket.servlet-name",
       "type": "java.lang.String",
       "description": "Default name of servlet to use. The default name is CamelServlet.",
