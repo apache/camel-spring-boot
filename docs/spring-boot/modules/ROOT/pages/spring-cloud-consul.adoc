@@ -1,8 +1,0 @@
-= Spring Cloud Consul (deprecated)
-:since: 2.22
-:artifactid: camel-spring-cloud-consul
-:supportLevel: Stable-deprecated
-:deprecated: *deprecated*
-:description: Camel Cloud integration with Spring Cloud Consul
-
-*Since Camel {since}*
