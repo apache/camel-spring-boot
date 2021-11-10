@@ -24,7 +24,7 @@ endif::[]
 ifeval::[{sbpropertiescount} != 0]
 The component supports {sbpropertiescount} options, which are listed below.
 
-[width="100%",cols="2a,5,^1,2",options="header"]
+[width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
 |===
