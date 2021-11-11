@@ -43,6 +43,7 @@ public class Kinesis2ComponentConverter implements GenericConverter {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.kinesis.KinesisClient.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.kinesis.Kinesis2Configuration.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.kinesis.consumer.KinesisResumeStrategy.class));
         return answer;
     }
 
@@ -61,6 +62,7 @@ public class Kinesis2ComponentConverter implements GenericConverter {
         switch (targetType.getName()) {
             case "software.amazon.awssdk.services.kinesis.KinesisClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.kinesis.KinesisClient.class);
             case "org.apache.camel.component.aws2.kinesis.Kinesis2Configuration": return applicationContext.getBean(ref, org.apache.camel.component.aws2.kinesis.Kinesis2Configuration.class);
+            case "org.apache.camel.component.aws2.kinesis.consumer.KinesisResumeStrategy": return applicationContext.getBean(ref, org.apache.camel.component.aws2.kinesis.consumer.KinesisResumeStrategy.class);
         }
         return null;
     }
