@@ -20,6 +20,7 @@ import javax.annotation.Generated;
 import org.apache.camel.component.aws2.kinesis.Kinesis2Component;
 import org.apache.camel.component.aws2.kinesis.Kinesis2Configuration;
 import org.apache.camel.component.aws2.kinesis.Kinesis2ShardClosedStrategyEnum;
+import org.apache.camel.component.aws2.kinesis.consumer.KinesisResumeStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
@@ -113,6 +114,13 @@ public class Kinesis2ComponentConfiguration
      * Maximum number of records that will be fetched in each poll
      */
     private Integer maxResultsPerRequest = 1;
+    /**
+     * Defines a resume strategy for AWS Kinesis. The default strategy reads the
+     * sequenceNumber if provided. The option is a
+     * org.apache.camel.component.aws2.kinesis.consumer.KinesisResumeStrategy
+     * type.
+     */
+    private KinesisResumeStrategy resumeStrategy;
     /**
      * The sequence number to start polling from. Required if iteratorType is
      * set to AFTER_SEQUENCE_NUMBER or AT_SEQUENCE_NUMBER
@@ -270,6 +278,14 @@ public class Kinesis2ComponentConfiguration
 
     public void setMaxResultsPerRequest(Integer maxResultsPerRequest) {
         this.maxResultsPerRequest = maxResultsPerRequest;
+    }
+
+    public KinesisResumeStrategy getResumeStrategy() {
+        return resumeStrategy;
+    }
+
+    public void setResumeStrategy(KinesisResumeStrategy resumeStrategy) {
+        this.resumeStrategy = resumeStrategy;
     }
 
     public String getSequenceNumber() {
