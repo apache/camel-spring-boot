@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>spring-boot-parent</artifactId>
-        <version>3.13.0-SNAPSHOT</version>
+        <version>3.13.1-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
@@ -48,12 +48,12 @@
                 <target>
                   <copy todir="${project.basedir}/spring-boot/modules/ROOT/pages/" flatten="true">
                     <fileset dir="${project.basedir}/../core/">
-                      <include name="**/src/main/docs/*.adoc"/>
+                      <include name="**/src/main/docs/*.adoc" />
                     </fileset>
                   </copy>
                   <copy todir="${project.basedir}/components/modules/spring-boot/examples/json" flatten="true">
                     <fileset dir="${project.basedir}/../components-starter/">
-                      <include name="*/src/main/docs/*.json"/>
+                      <include name="*/src/main/docs/*.json" />
                     </fileset>
                   </copy>
                 </target>
