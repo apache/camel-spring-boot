@@ -39,7 +39,7 @@
     {
       "name": "camel.language.xpath.log-namespaces",
       "type": "java.lang.Boolean",
-      "description": "Whether to log namespaces which can assist during trouble shooting",
+      "description": "Whether to log namespaces which can assist during troubleshooting",
       "sourceType": "org.apache.camel.language.xpath.springboot.XPathLanguageConfiguration",
       "defaultValue": false
     },
