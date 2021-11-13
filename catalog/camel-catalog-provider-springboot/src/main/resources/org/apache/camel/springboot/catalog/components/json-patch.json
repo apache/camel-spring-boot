@@ -8,7 +8,7 @@
     "firstVersion": "3.12.0",
     "label": "transformation",
     "javaType": "org.apache.camel.component.jsonpatch.JsonPatchComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-json-patch-starter",
     "version": "3.14.0-SNAPSHOT",

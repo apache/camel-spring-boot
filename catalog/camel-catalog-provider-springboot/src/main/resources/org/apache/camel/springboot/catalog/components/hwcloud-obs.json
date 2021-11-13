@@ -8,7 +8,7 @@
     "firstVersion": "3.12.0",
     "label": "cloud",
     "javaType": "org.apache.camel.component.huaweicloud.obs.OBSComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-huaweicloud-obs-starter",
     "version": "3.14.0-SNAPSHOT",

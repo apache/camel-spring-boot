@@ -81,6 +81,12 @@
       "type": "java.lang.String",
       "description": "The Service account key that can be used as credentials for the PubSub publisher\/subscriber. It can be loaded by default from classpath, but you can prefix with classpath:, file:, or http: to load the resource from different systems.",
       "sourceType": "org.apache.camel.component.google.pubsub.springboot.GooglePubsubComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-pubsub.synchronous-pull-retryable-codes",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of additional retryable error codes for synchronous pull. By default the PubSub client library retries ABORTED, UNAVAILABLE, UNKNOWN",
+      "sourceType": "org.apache.camel.component.google.pubsub.springboot.GooglePubsubComponentConfiguration"
     }
   ],
   "hints": []

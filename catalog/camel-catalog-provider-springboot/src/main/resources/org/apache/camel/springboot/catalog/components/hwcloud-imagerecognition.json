@@ -8,7 +8,7 @@
     "firstVersion": "3.12.0",
     "label": "cloud,messaging",
     "javaType": "org.apache.camel.component.huaweicloud.image.ImageRecognitionComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-huaweicloud-imagerecognition-starter",
     "version": "3.14.0-SNAPSHOT",

@@ -62,6 +62,12 @@ public class GooglePubsubComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Comma-separated list of additional retryable error codes for synchronous
+     * pull. By default the PubSub client library retries ABORTED, UNAVAILABLE,
+     * UNKNOWN
+     */
+    private String synchronousPullRetryableCodes;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -125,6 +131,15 @@ public class GooglePubsubComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public String getSynchronousPullRetryableCodes() {
+        return synchronousPullRetryableCodes;
+    }
+
+    public void setSynchronousPullRetryableCodes(
+            String synchronousPullRetryableCodes) {
+        this.synchronousPullRetryableCodes = synchronousPullRetryableCodes;
     }
 
     public Boolean getLazyStartProducer() {
