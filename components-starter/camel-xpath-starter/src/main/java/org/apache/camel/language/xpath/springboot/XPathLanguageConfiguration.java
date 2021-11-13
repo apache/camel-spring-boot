@@ -53,7 +53,7 @@ public class XPathLanguageConfiguration
      */
     private String objectModel;
     /**
-     * Whether to log namespaces which can assist during trouble shooting
+     * Whether to log namespaces which can assist during troubleshooting
      */
     private Boolean logNamespaces = false;
     /**
