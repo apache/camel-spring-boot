@@ -41,6 +41,14 @@ public class QuickfixjComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Whether to eager stop engines when there are no active consumer or
+     * producers using the engine. For example when stopping a route, then the
+     * engine can be stopped as well. And when the route is started, then the
+     * engine is started again. This can be turned off to only stop the engines
+     * when Camel is shutdown.
+     */
+    private Boolean eagerStopEngines = true;
+    /**
      * If set to true, the engines will be created and started when needed (when
      * first message is send)
      */
@@ -88,6 +96,14 @@ public class QuickfixjComponentConfiguration
      * quickfix.MessageStoreFactory type.
      */
     private MessageStoreFactory messageStoreFactory;
+
+    public Boolean getEagerStopEngines() {
+        return eagerStopEngines;
+    }
+
+    public void setEagerStopEngines(Boolean eagerStopEngines) {
+        this.eagerStopEngines = eagerStopEngines;
+    }
 
     public Boolean getLazyCreateEngines() {
         return lazyCreateEngines;
