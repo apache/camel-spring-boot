@@ -211,6 +211,12 @@
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
     },
     {
+      "name": "camel.component.azure-storage-blob.source-blob-access-key",
+      "type": "java.lang.String",
+      "description": "Source Blob Access Key: for copyblob operation, sadly, we need to have an accessKey for the source blob we want to copy Passing an accessKey as header, it's unsafe so we could set as key.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
       "name": "camel.component.azure-storage-blob.timeout",
       "type": "java.time.Duration",
       "description": "An optional timeout value beyond which a RuntimeException will be raised. The option is a java.time.Duration type.",

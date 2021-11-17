@@ -38,6 +38,16 @@ public class ElasticsearchComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The time in ms to wait before connection will timeout.
+     */
+    private Integer connectionTimeout = 30000;
+    /**
+     * Comma separated list with ip:port formatted remote transport addresses to
+     * use. The ip and port options must be left blank for hostAddresses to be
+     * considered instead.
+     */
+    private String hostAddresses;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -48,6 +58,14 @@ public class ElasticsearchComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * The time in ms before retry
+     */
+    private Integer maxRetryTimeout = 30000;
+    /**
+     * The timeout in ms to wait before the socket will timeout.
+     */
+    private Integer socketTimeout = 30000;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -64,23 +82,9 @@ public class ElasticsearchComponentConfiguration
      */
     private RestClient client;
     /**
-     * The time in ms to wait before connection will timeout.
-     */
-    private Integer connectionTimeout = 30000;
-    /**
      * Enable automatically discover nodes from a running Elasticsearch cluster
      */
     private Boolean enableSniffer = false;
-    /**
-     * Comma separated list with ip:port formatted remote transport addresses to
-     * use. The ip and port options must be left blank for hostAddresses to be
-     * considered instead.
-     */
-    private String hostAddresses;
-    /**
-     * The time in ms before retry
-     */
-    private Integer maxRetryTimeout = 30000;
     /**
      * The delay of a sniff execution scheduled after a failure (in
      * milliseconds)
@@ -92,10 +96,6 @@ public class ElasticsearchComponentConfiguration
      * there are no failures between consecutive sniff executions
      */
     private Integer snifferInterval = 300000;
-    /**
-     * The timeout in ms to wait before the socket will timeout.
-     */
-    private Integer socketTimeout = 30000;
     /**
      * Enable SSL
      */
@@ -109,12 +109,44 @@ public class ElasticsearchComponentConfiguration
      */
     private String user;
 
+    public Integer getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Integer connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public String getHostAddresses() {
+        return hostAddresses;
+    }
+
+    public void setHostAddresses(String hostAddresses) {
+        this.hostAddresses = hostAddresses;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Integer getMaxRetryTimeout() {
+        return maxRetryTimeout;
+    }
+
+    public void setMaxRetryTimeout(Integer maxRetryTimeout) {
+        this.maxRetryTimeout = maxRetryTimeout;
+    }
+
+    public Integer getSocketTimeout() {
+        return socketTimeout;
+    }
+
+    public void setSocketTimeout(Integer socketTimeout) {
+        this.socketTimeout = socketTimeout;
     }
 
     public Boolean getAutowiredEnabled() {
@@ -133,36 +165,12 @@ public class ElasticsearchComponentConfiguration
         this.client = client;
     }
 
-    public Integer getConnectionTimeout() {
-        return connectionTimeout;
-    }
-
-    public void setConnectionTimeout(Integer connectionTimeout) {
-        this.connectionTimeout = connectionTimeout;
-    }
-
     public Boolean getEnableSniffer() {
         return enableSniffer;
     }
 
     public void setEnableSniffer(Boolean enableSniffer) {
         this.enableSniffer = enableSniffer;
-    }
-
-    public String getHostAddresses() {
-        return hostAddresses;
-    }
-
-    public void setHostAddresses(String hostAddresses) {
-        this.hostAddresses = hostAddresses;
-    }
-
-    public Integer getMaxRetryTimeout() {
-        return maxRetryTimeout;
-    }
-
-    public void setMaxRetryTimeout(Integer maxRetryTimeout) {
-        this.maxRetryTimeout = maxRetryTimeout;
     }
 
     public Integer getSniffAfterFailureDelay() {
@@ -179,14 +187,6 @@ public class ElasticsearchComponentConfiguration
 
     public void setSnifferInterval(Integer snifferInterval) {
         this.snifferInterval = snifferInterval;
-    }
-
-    public Integer getSocketTimeout() {
-        return socketTimeout;
-    }
-
-    public void setSocketTimeout(Integer socketTimeout) {
-        this.socketTimeout = socketTimeout;
     }
 
     public Boolean getEnableSSL() {

@@ -63,7 +63,7 @@ public class SalesforceComponentConfiguration
     /**
      * Salesforce API version.
      */
-    private String apiVersion = "50.0";
+    private String apiVersion = "53.0";
     /**
      * Backoff interval increment for Streaming connection restart attempts for
      * failures beyond CometD auto-reconnect. The option is a long type.
@@ -81,6 +81,10 @@ public class SalesforceComponentConfiguration
      * Default replayId setting if no value is found in initialReplayIdMap
      */
     private Long defaultReplayId = -1L;
+    /**
+     * ReplayId to fall back to after an Invalid Replay Id response
+     */
+    private Long fallBackReplayId = -1L;
     /**
      * Payload format to use for Salesforce API calls, either JSON or XML,
      * defaults to JSON. As of Camel 3.12, this option only applies to the Raw
@@ -567,6 +571,14 @@ public class SalesforceComponentConfiguration
 
     public void setDefaultReplayId(Long defaultReplayId) {
         this.defaultReplayId = defaultReplayId;
+    }
+
+    public Long getFallBackReplayId() {
+        return fallBackReplayId;
+    }
+
+    public void setFallBackReplayId(Long fallBackReplayId) {
+        this.fallBackReplayId = fallBackReplayId;
     }
 
     public PayloadFormat getFormat() {
