@@ -43,7 +43,7 @@
       "type": "java.lang.String",
       "description": "Salesforce API version.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
-      "defaultValue": "50.0"
+      "defaultValue": "53.0"
     },
     {
       "name": "camel.component.salesforce.authentication-type",
@@ -125,6 +125,13 @@
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the salesforce component. This is enabled by default.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.salesforce.fall-back-replay-id",
+      "type": "java.lang.Long",
+      "description": "ReplayId to fall back to after an Invalid Replay Id response",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": -1
     },
     {
       "name": "camel.component.salesforce.format",

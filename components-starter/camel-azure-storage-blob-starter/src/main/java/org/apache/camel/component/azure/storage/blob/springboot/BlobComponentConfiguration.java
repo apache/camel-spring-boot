@@ -223,6 +223,12 @@ public class BlobComponentConfiguration
      * authentication with azure blob services
      */
     private String accessKey;
+    /**
+     * Source Blob Access Key: for copyblob operation, sadly, we need to have an
+     * accessKey for the source blob we want to copy Passing an accessKey as
+     * header, it's unsafe so we could set as key.
+     */
+    private String sourceBlobAccessKey;
 
     public String getBlobName() {
         return blobName;
@@ -462,5 +468,13 @@ public class BlobComponentConfiguration
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public String getSourceBlobAccessKey() {
+        return sourceBlobAccessKey;
+    }
+
+    public void setSourceBlobAccessKey(String sourceBlobAccessKey) {
+        this.sourceBlobAccessKey = sourceBlobAccessKey;
     }
 }
