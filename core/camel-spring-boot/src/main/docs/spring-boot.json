@@ -817,7 +817,7 @@
     {
       "name": "camel.springboot.route-filter-exclude-pattern",
       "type": "java.lang.String",
-      "description": "Used for filtering routes routes matching the given pattern, which follows the following rules: - Match by route id - Match by route input endpoint uri The matching is using exact match, by wildcard and regular expression. For example to only include routes which starts with foo in their route id's, use: include=foo&#42; And to exclude routes which starts from JMS endpoints, use: exclude=jms:&#42; Multiple patterns can be separated by comma, for example to exclude both foo and bar routes, use: exclude=foo&#42;,bar&#42; Exclude takes precedence over include.",
+      "description": "Used for filtering routes matching the given pattern, which follows the following rules: - Match by route id - Match by route input endpoint uri The matching is using exact match, by wildcard and regular expression. For example to only include routes which starts with foo in their route id's, use: include=foo&#42; And to exclude routes which starts from JMS endpoints, use: exclude=jms:&#42; Multiple patterns can be separated by comma, for example to exclude both foo and bar routes, use: exclude=foo&#42;,bar&#42; Exclude takes precedence over include.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
     },
     {
@@ -845,6 +845,27 @@
       "description": "Used for inclusive filtering of routes from directories. The exclusive filtering takes precedence over inclusive filtering. The pattern is using Ant-path style pattern. Multiple patterns can be specified separated by comma, as example, to include all the routes from a directory whose name contains foo use: &#42;&#42;\/*foo*.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
       "defaultValue": "classpath:camel\/*,classpath:camel-template\/*,classpath:camel-rest\/*"
+    },
+    {
+      "name": "camel.springboot.routes-reload-directory",
+      "type": "java.lang.String",
+      "description": "Directory to scan (incl subdirectories) for route changes. Camel cannot scan the classpath, so this must be configured to a file directory. Development with Maven as build tool, you can configure the directory to be src\/main\/resources to scan for Camel routes in XML or YAML files.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": "src\/main\/resources"
+    },
+    {
+      "name": "camel.springboot.routes-reload-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling automatic routes reloading. If enabled then Camel will watch for file changes in the given reload directory, and trigger reloading routes if files are changed.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.springboot.routes-reload-pattern",
+      "type": "java.lang.String",
+      "description": "Used for inclusive filtering of routes from directories. Typical used for specifying to accept routes in XML or YAML files. Multiple patterns can be specified separated by comma.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": "camel\/*"
     },
     {
       "name": "camel.springboot.shutdown-log-inflight-exchanges-on-timeout",

@@ -20,6 +20,7 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.ManagementStatisticsLevel;
 import org.apache.camel.StartupSummaryLevel;
 import org.apache.camel.main.DefaultConfigurationProperties;
+import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Map;
@@ -165,7 +166,7 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private String routeFilterIncludePattern;
 
     /**
-     * Used for filtering routes routes matching the given pattern, which follows the following rules:
+     * Used for filtering routes matching the given pattern, which follows the following rules:
      *
      * - Match by route id
      * - Match by route input endpoint uri
@@ -180,6 +181,27 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * Exclude takes precedence over include.
      */
     private String routeFilterExcludePattern;
+
+    /**
+     * Used for enabling automatic routes reloading. If enabled then Camel will watch for file changes in the given
+     * reload directory, and trigger reloading routes if files are changed.
+     */
+    private boolean routesReloadEnabled;
+
+    /**
+     * Directory to scan (incl subdirectories) for route changes. Camel cannot scan the classpath, so this must be
+     * configured to a file directory. Development with Maven as build tool, you can configure the directory to be
+     * src/main/resources to scan for Camel routes in XML or YAML files.
+     */
+    private String routesReloadDirectory = "src/main/resources";
+
+    /**
+     * Used for inclusive filtering of routes from directories.
+     *
+     * Typical used for specifying to accept routes in XML or YAML files.
+     * Multiple patterns can be specified separated by comma.
+     */
+    private String routesReloadPattern = "camel/*";
 
     /**
      * To specify for how long time in seconds to keep running the JVM before automatic terminating the JVM.
