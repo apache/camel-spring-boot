@@ -143,6 +143,12 @@ public class JacksonDataFormatConfiguration
      * When not disabled, the SchemaResolver will be looked up into the registry
      */
     private Boolean autoDiscoverSchemaResolver = true;
+    /**
+     * If set then Jackson will use the the defined Property Naming
+     * Strategy.Possible values are: LOWER_CAMEL_CASE, LOWER_DOT_CASE,
+     * LOWER_CASE, KEBAB_CASE, SNAKE_CASE and UPPER_CAMEL_CASE
+     */
+    private String namingStrategy;
 
     public String getObjectMapper() {
         return objectMapper;
@@ -294,5 +300,13 @@ public class JacksonDataFormatConfiguration
 
     public void setAutoDiscoverSchemaResolver(Boolean autoDiscoverSchemaResolver) {
         this.autoDiscoverSchemaResolver = autoDiscoverSchemaResolver;
+    }
+
+    public String getNamingStrategy() {
+        return namingStrategy;
+    }
+
+    public void setNamingStrategy(String namingStrategy) {
+        this.namingStrategy = namingStrategy;
     }
 }
