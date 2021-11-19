@@ -868,6 +868,13 @@
       "defaultValue": "camel\/*"
     },
     {
+      "name": "camel.springboot.routes-reload-remove-all-routes",
+      "type": "java.lang.Boolean",
+      "description": "When reloading routes should all existing routes be stopped and removed. By default, Camel will stop and remove all existing routes before reloading routes. This ensures that only the reloaded routes will be active. If disabled then only routes with the same route id is updated, and any existing routes are continued to run.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": true
+    },
+    {
       "name": "camel.springboot.shutdown-log-inflight-exchanges-on-timeout",
       "type": "java.lang.Boolean",
       "description": "Sets whether to log information about the inflight Exchanges which are still running during a shutdown which didn't complete without the given timeout. This requires to enable the option inflightRepositoryExchangeEnabled.",

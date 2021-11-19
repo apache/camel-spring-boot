@@ -204,6 +204,15 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private String routesReloadPattern = "camel/*";
 
     /**
+     * When reloading routes should all existing routes be stopped and removed.
+     *
+     * By default, Camel will stop and remove all existing routes before reloading routes. This ensures that only the
+     * reloaded routes will be active. If disabled then only routes with the same route id is updated, and any existing
+     * routes are continued to run.
+     */
+    private boolean routesReloadRemoveAllRoutes = true;
+
+    /**
      * To specify for how long time in seconds to keep running the JVM before automatic terminating the JVM.
      * You can use this to run Spring Boot for a short while.
      */
