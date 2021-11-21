@@ -196,6 +196,14 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private String routesReloadDirectory = "src/main/resources";
 
     /**
+     * Whether the directory to scan should include sub directories.
+     *
+     * Depending on the number of sub directories, then this can cause the JVM to startup slower as Camel uses the JDK
+     * file-watch service to scan for file changes.
+     */
+    private boolean routesReloadDirectoryRecursive;
+
+    /**
      * Used for inclusive filtering of routes from directories.
      *
      * Typical used for specifying to accept routes in XML or YAML files.

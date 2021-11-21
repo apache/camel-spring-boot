@@ -854,6 +854,13 @@
       "defaultValue": "src\/main\/resources"
     },
     {
+      "name": "camel.springboot.routes-reload-directory-recursive",
+      "type": "java.lang.Boolean",
+      "description": "Whether the directory to scan should include sub directories. Depending on the number of sub directories, then this can cause the JVM to startup slower as Camel uses the JDK file-watch service to scan for file changes.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.springboot.routes-reload-enabled",
       "type": "java.lang.Boolean",
       "description": "Used for enabling automatic routes reloading. If enabled then Camel will watch for file changes in the given reload directory, and trigger reloading routes if files are changed.",
