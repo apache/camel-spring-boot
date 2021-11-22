@@ -221,6 +221,12 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean routesReloadRemoveAllRoutes = true;
 
     /**
+     * Whether to restart max duration when routes are reloaded. For example if max duration is 60 seconds, and a route
+     * is reloaded after 25 seconds, then this will restart the count and wait 60 seconds again.
+     */
+     private boolean routesReloadRestartDuration = true;
+
+    /**
      * To specify for how long time in seconds to keep running the JVM before automatic terminating the JVM.
      * You can use this to run Spring Boot for a short while.
      */

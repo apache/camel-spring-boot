@@ -882,6 +882,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.springboot.routes-reload-restart-duration",
+      "type": "java.lang.Boolean",
+      "description": "Whether to restart max duration when routes are reloaded. For example if max duration is 60 seconds, and a route is reloaded after 25 seconds, then this will restart the count and wait 60 seconds again.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": true
+    },
+    {
       "name": "camel.springboot.shutdown-log-inflight-exchanges-on-timeout",
       "type": "java.lang.Boolean",
       "description": "Sets whether to log information about the inflight Exchanges which are still running during a shutdown which didn't complete without the given timeout. This requires to enable the option inflightRepositoryExchangeEnabled.",

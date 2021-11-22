@@ -123,7 +123,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                         // register lifecycle so we can trigger to shutdown the JVM when maximum number of messages has been processed
                         EventNotifier notifier = new MainDurationEventNotifier(camelContext,
                             configurationProperties.getDurationMaxMessages(), configurationProperties.getDurationMaxIdleSeconds(),
-                            controller.getMainShutdownStrategy(), true);
+                            controller.getMainShutdownStrategy(), true, configurationProperties.isRoutesReloadRestartDuration());
                         // register our event notifier
                         ServiceHelper.startService(notifier);
                         camelContext.getManagementStrategy().addEventNotifier(notifier);
@@ -172,7 +172,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                             EventNotifier notifier = new MainDurationEventNotifier(camelContext,
                                 configurationProperties.getDurationMaxMessages(),
                                 configurationProperties.getDurationMaxIdleSeconds(),
-                                strategy, false);
+                                strategy, false, configurationProperties.isRoutesReloadRestartDuration());
 
                             // register our event notifier
                             ServiceHelper.startService(notifier);
