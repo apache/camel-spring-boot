@@ -544,6 +544,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.springboot.duration-max-action",
+      "type": "java.lang.String",
+      "description": "Controls whether the Camel application should shutdown the JVM, or stop all routes, when duration max is triggered.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": "shutdown"
+    },
+    {
       "name": "camel.springboot.duration-max-idle-seconds",
       "type": "java.lang.Integer",
       "description": "To specify for how long time in seconds Camel can be idle before automatic terminating the JVM. You can use this to run Spring Boot for a short while.",

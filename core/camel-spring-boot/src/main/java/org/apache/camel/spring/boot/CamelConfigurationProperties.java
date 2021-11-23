@@ -245,6 +245,12 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private int durationMaxMessages;
 
     /**
+     * Controls whether the Camel application should shutdown the JVM, or stop all routes, when duration max is
+     * triggered.
+     */
+    private String durationMaxAction = "shutdown";
+
+    /**
      * Is used to limit the maximum length of the logging Camel message bodies. If the message body
      * is longer than the limit, the log message is clipped. Use -1 to have unlimited length.
      * Use for example 1000 to log at most 1000 characters.
