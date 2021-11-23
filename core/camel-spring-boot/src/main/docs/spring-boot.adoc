@@ -5,8 +5,6 @@
 :shortname: spring-boot
 :camel-spring-boot-name: spring-boot
 
-*Since Camel 2.15*
-
 Spring Boot component provides auto-configuration for Apache Camel. Our
 opinionated auto-configuration of the Camel context auto-detects Camel
 routes available in the Spring context and registers the key Camel
@@ -29,16 +27,13 @@ in order to use this component:
 soon as you add that dependency into your classpath, Spring Boot will
 automatically auto-configure Camel for you.
 
-[[SpringBoot-CamelSpringBootStarter]]
 == Camel Spring Boot Starter
 
-*Since Camel 2.17*
-
 Apache Camel ships
-a https://github.com/spring-projects/spring-boot/tree/master/spring-boot-project/spring-boot-starters[Spring
+a https://github.com/spring-projects/spring-boot/tree/main/spring-boot-project/spring-boot-starters[Spring
 Boot Starter] module that allows you to develop Spring Boot applications
 using starters. There is a
-https://github.com/apache/camel-spring-boot-examples/tree/master/camel-example-spring-boot[sample
+https://github.com/apache/camel-spring-boot-examples/tree/main/spring-boot[sample
 application] in the source code also.
 
 To use the starter, add the following to your spring boot pom.xml file:
@@ -46,8 +41,8 @@ To use the starter, add the following to your spring boot pom.xml file:
 [source,xml]
 ----
 <dependency>
-    <groupId>org.apache.camel</groupId>
-    <artifactId>camel-spring-boot-starter</artifactId>
+    <groupId>org.apache.camel.springboot</groupId>
+    <artifactId>camel-spring-boot-bom</artifactId>
     <version>${camel.version}</version> <!-- use the same version as your Camel core version -->
 </dependency>
 ----
@@ -81,7 +76,6 @@ or `application.yml` file.
 include::{page-component-version}@components:spring-boot:partial$starter.adoc[]
 // spring-boot-auto-configure options: END
 
-[[SpringBoot-Auto-configuredCamelcontext]]
 == Auto-configured Camel context
 
 The most important piece of functionality provided by the Camel
@@ -108,12 +102,11 @@ public class MyAppConfig {
 }
 ----
 
-[[SpringBoot-Auto-detectingCamelroutes]]
 == Auto-detecting Camel routes
 
 Camel auto-configuration collects all the `RouteBuilder` instances from
 the Spring context and automatically injects them into the provided
-`CamelContext`. That means that creating new Camel route with the Spring
+`CamelContext`. That means that creating new Camel routes with the Spring
 Boot starter is as simple as adding the `@Component` annotated class to
 your classpath:
 
@@ -152,7 +145,6 @@ public class MyRouterConfiguration {
 }
 ----
 
-[[SpringBoot-Camelproperties]]
 == Camel properties
 
 Spring Boot auto-configuration automatically connects
@@ -162,14 +154,14 @@ environment variables or system properties) with
 the Camel properties support. It basically means
 that any property defined in `application.properties` file:  
 
-[source,text]
+[source,properties]
 ----
 route.from = jms:invoices
 ----
 
 Or set via system property:
 
-[source,text]
+[source,properties]
 ----
 java -Droute.to=jms:processed.invoices -jar mySpringApp.jar
 ----
@@ -189,7 +181,6 @@ public class MyRouter extends RouteBuilder {
 }
 ----
 
-[[SpringBoot-CustomCamelcontextconfiguration]]
 == Custom Camel context configuration
 
 If you would like to perform some operations on `CamelContext` bean
@@ -221,20 +212,7 @@ fully auto-configured. You can add many instances of
 `CamelContextConfiguration` into your Spring context - all of them will
 be executed.
 
-[[SpringBoot-DisablingJMX]]
-== Disabling JMX
 
-To disable JMX of the auto-configured `CamelContext` use
-`camel.springboot.jmxEnabled` property (JMX is enabled by default). For
-example you could add the following property to your
-`application.properties` file:
-
-[source,text]
-----
-camel.springboot.jmx-enabled = false
-----
-
-[[SpringBoot-Auto-configuredconsumerandproducertemplates]]
 == Auto-configured consumer and producer templates
 
 Camel auto-configuration provides pre-configured `ConsumerTemplate` and
@@ -261,17 +239,16 @@ public class InvoiceProcessor {
 }
 ----
 
-By default consumer templates and producer templates come with the
+By default, consumer templates and producer templates come with the
 endpoint cache sizes set to 1000. You can change those values via the
 following Spring properties:
 
-[source,text]
+[source,properties]
 ----
 camel.springboot.consumer-template-cache-size = 100
 camel.springboot.producer-template-cache-size = 200
 ----
 
-[[SpringBoot-Auto-configuredTypeConverter]]
 == Auto-configured TypeConverter
 
 Camel auto-configuration registers a `TypeConverter` instance named
@@ -293,7 +270,6 @@ public class InvoiceProcessor {
 }
 ----
 
-[[SpringBoot-SpringtypeconversionAPIbridge]]
 === Spring type conversion API bridge
 
 Spring comes with
@@ -327,30 +303,17 @@ Under the hood Camel Spring Boot delegates conversion to the Spring's
 no `ConversionService` instance is available, Camel Spring Boot
 auto-configuration will create one for you.
 
-[[SpringBoot-Disablingtypeconversionsfeatures]]
-== Disabling type conversions features
 
-If you don't want Camel Spring Boot to register type-conversions related
-features (like `TypeConverter` instance or Spring bridge) set the
-`camel.springboot.type-conversion` property to `false`.
-
-[source,text]
-----
-camel.springboot.type-conversion = false
-----
-
-
-[[SpringBoot-Keepingapplicationalive]]
 == Keeping the application alive
 
 Camel applications having this feature enabled launch a new thread on startup for the sole purpose of
 keeping the application alive by preventing JVM termination.
 It means that after you start a Camel application with Spring Boot, your
-application waits for a Ctrl+C signal and does not exit immediately.
+application waits for a `Ctrl+C` signal and does not exit immediately.
 
 The controller thread can be activated using the `camel.springboot.main-run-controller` to `true`.
 
-[source,text]
+[source,properties]
 ----
 camel.springboot.main-run-controller = true
 ----
@@ -358,19 +321,18 @@ camel.springboot.main-run-controller = true
 Applications using web modules (e.g. importing the `org.springframework.boot:spring-boot-web-starter` module),
 usually don't need to use this feature because the application is kept alive by the presence of other non-daemon threads.
 
-[[SpringBoot-AddingXMLroutes]]
 == Adding XML routes
 
-By default you can put Camel XML routes in the classpath under the
-directory camel, which camel-spring-boot will auto detect and include.
+By default, you can put Camel XML routes in the classpath under the
+directory camel, which camel-spring-boot will auto-detect and include.
 You can configure the directory name or turn
 this off using the configuration option
 
-[source,text]
+[source,properties]
 ----
-// turn off
+# turn off
 camel.springboot.xml-routes = false
-// scan in the com/foo/routes classpath
+# scan in the com/foo/routes classpath
 camel.springboot.xml-routes = classpath:com/foo/routes/*.xml
 ----
 
@@ -389,18 +351,17 @@ The XML files should be Camel XML routes (not CamelContext) such as
 </routes>
 ----
 
-[[SpringBoot-AddingREST]]
 == Adding XML Rest-DSL
 
-By default you can put Camel Rest-DSL XML routes in the classpath under the
-directory camel-rest, which camel-spring-boot will auto detect and include.
+By default, you can put Camel Rest-DSL XML routes in the classpath under the
+directory camel-rest, which camel-spring-boot will auto-detect and include.
 You can configure the directory name or turn this off using the configuration option
 
-[source,text]
+[source,properties]
 ----
-// turn off
+# turn off
 camel.springboot.xml-rests = false
-// scan in the com/foo/routes classpath
+# scan in the com/foo/routes classpath
 camel.springboot.xml-rests = classpath:com/foo/rests/*.xml
 ----
 
@@ -429,8 +390,8 @@ The Rest-DSL XML files should be Camel XML rests (not CamelContext) such as
 </rests>
 ----
 
-[[SpringBoot-Testing]]
-== Testing the JUnit 4 way
+== Testing the JUnit 4 way (deprecated)
+
 For testing, Maven users will need to add the following dependencies to their `pom.xml`:
 
 [source,xml]
@@ -480,7 +441,9 @@ public class MyApplicationTest {
 
 }
 ----
+
 == Testing the JUnit 5 way
+
 For testing, Maven users will need to add the following dependencies to their `pom.xml`:
 
 [source,xml]

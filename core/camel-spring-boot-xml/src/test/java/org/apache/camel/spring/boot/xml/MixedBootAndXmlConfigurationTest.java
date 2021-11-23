@@ -44,7 +44,6 @@ public class MixedBootAndXmlConfigurationTest {
     @Test
     public void thereShouldBeAutoConfiguredFromSpringBoot() {
         Assertions.assertEquals("camel-spring-boot", camel.getName());
-//        Assertions.assertEquals(5, camel.getShutdownStrategy().getTimeout()); // Handled specially in tests!
         Assertions.assertEquals(true, camel.isTracing());
     }
 
