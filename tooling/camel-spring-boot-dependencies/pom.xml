@@ -177,25 +177,6 @@
         <version>1.0</version>
       </dependency>
       <dependency>
-        <groupId>net.corda</groupId>
-        <artifactId>corda-rpc</artifactId>
-        <version>4.8</version>
-        <exclusions>
-          <exclusion>
-            <groupId>co.paralleluniverse</groupId>
-            <artifactId>quasar-core</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
         <groupId>net.sf.saxon</groupId>
         <artifactId>Saxon-HE</artifactId>
         <version>9.9.1-8</version>

@@ -686,6 +686,11 @@
       "defaultValue": false
     },
     {
+      "name": "camel.springboot.load-health-checks",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+    },
+    {
       "name": "camel.springboot.load-type-converters",
       "type": "java.lang.Boolean",
       "description": "Whether to load custom type converters by scanning classpath. This is used for backwards compatibility with Camel 2.x. Its recommended to migrate to use fast type converter loading by setting <tt>@Converter(generateLoader = true)<\/tt> on your custom type converter classes.",
