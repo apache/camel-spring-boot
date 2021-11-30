@@ -688,7 +688,9 @@
     {
       "name": "camel.springboot.load-health-checks",
       "type": "java.lang.Boolean",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+      "description": "Whether to load custom health checks by scanning classpath.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
     },
     {
       "name": "camel.springboot.load-type-converters",

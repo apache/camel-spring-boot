@@ -137,6 +137,11 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean loadTypeConverters = true;
 
     /**
+     * Whether to load custom health checks by scanning classpath.
+     */
+    private boolean loadHealthChecks;
+
+    /**
      * Directory to load additional configuration files that contains
      * configuration values that takes precedence over any other configuration.
      * This can be used to refer to files that may have secret configuration that
