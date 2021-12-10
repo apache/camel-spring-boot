@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.ses.springboot;
 
-import java.util.List;
 import javax.annotation.Generated;
 import org.apache.camel.component.aws2.ses.Ses2Component;
 import org.apache.camel.component.aws2.ses.Ses2Configuration;
@@ -86,10 +85,10 @@ public class Ses2ComponentConfiguration
      */
     private String region;
     /**
-     * List of reply-to email address(es) for the message, override it using
-     * 'CamelAwsSesReplyToAddresses' header.
+     * List of comma separated reply-to email address(es) for the message,
+     * override it using 'CamelAwsSesReplyToAddresses' header.
      */
-    private List<String> replyToAddresses;
+    private String replyToAddresses;
     /**
      * The email address to which bounce notifications are to be forwarded,
      * override it using 'CamelAwsSesReturnPath' header.
@@ -101,10 +100,10 @@ public class Ses2ComponentConfiguration
      */
     private String subject;
     /**
-     * List of destination email address. Can be overriden with 'CamelAwsSesTo'
-     * header.
+     * List of comma separated destination email address. Can be overriden with
+     * 'CamelAwsSesTo' header.
      */
-    private List<String> to;
+    private String to;
     /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
@@ -202,11 +201,11 @@ public class Ses2ComponentConfiguration
         this.region = region;
     }
 
-    public List<String> getReplyToAddresses() {
+    public String getReplyToAddresses() {
         return replyToAddresses;
     }
 
-    public void setReplyToAddresses(List<String> replyToAddresses) {
+    public void setReplyToAddresses(String replyToAddresses) {
         this.replyToAddresses = replyToAddresses;
     }
 
@@ -226,11 +225,11 @@ public class Ses2ComponentConfiguration
         this.subject = subject;
     }
 
-    public List<String> getTo() {
+    public String getTo() {
         return to;
     }
 
-    public void setTo(List<String> to) {
+    public void setTo(String to) {
         this.to = to;
     }
 

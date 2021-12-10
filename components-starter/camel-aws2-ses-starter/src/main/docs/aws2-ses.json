@@ -89,8 +89,8 @@
     },
     {
       "name": "camel.component.aws2-ses.reply-to-addresses",
-      "type": "java.util.List<java.lang.String>",
-      "description": "List of reply-to email address(es) for the message, override it using 'CamelAwsSesReplyToAddresses' header.",
+      "type": "java.lang.String",
+      "description": "List of comma separated reply-to email address(es) for the message, override it using 'CamelAwsSesReplyToAddresses' header.",
       "sourceType": "org.apache.camel.component.aws2.ses.springboot.Ses2ComponentConfiguration"
     },
     {
@@ -113,8 +113,8 @@
     },
     {
       "name": "camel.component.aws2-ses.to",
-      "type": "java.util.List<java.lang.String>",
-      "description": "List of destination email address. Can be overriden with 'CamelAwsSesTo' header.",
+      "type": "java.lang.String",
+      "description": "List of comma separated destination email address. Can be overriden with 'CamelAwsSesTo' header.",
       "sourceType": "org.apache.camel.component.aws2.ses.springboot.Ses2ComponentConfiguration"
     },
     {
