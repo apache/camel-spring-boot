@@ -10,6 +10,6 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-swagger-java-starter",
-    "version": "3.11.4-SNAPSHOT"
+    "version": "3.11.5-SNAPSHOT"
   }
 }
