@@ -89,6 +89,10 @@ public class RestSwaggerComponentConfiguration
      */
     private String produces;
     /**
+     * Resolve references in Swagger specification.
+     */
+    private Boolean resolveReferences = false;
+    /**
      * Path to the Swagger specification file. The scheme, host base path are
      * taken from this specification, but these can be overridden with
      * properties on the component or endpoint level. If not given the component
@@ -165,6 +169,14 @@ public class RestSwaggerComponentConfiguration
 
     public void setProduces(String produces) {
         this.produces = produces;
+    }
+
+    public Boolean getResolveReferences() {
+        return resolveReferences;
+    }
+
+    public void setResolveReferences(Boolean resolveReferences) {
+        this.resolveReferences = resolveReferences;
     }
 
     public URI getSpecificationUri() {
