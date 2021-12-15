@@ -69,6 +69,13 @@
       "sourceType": "org.apache.camel.component.rest.swagger.springboot.RestSwaggerComponentConfiguration"
     },
     {
+      "name": "camel.component.rest-swagger.resolve-references",
+      "type": "java.lang.Boolean",
+      "description": "Resolve references in Swagger specification.",
+      "sourceType": "org.apache.camel.component.rest.swagger.springboot.RestSwaggerComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.rest-swagger.specification-uri",
       "type": "java.net.URI",
       "description": "Path to the Swagger specification file. The scheme, host base path are taken from this specification, but these can be overridden with properties on the component or endpoint level. If not given the component tries to load swagger.json resource. Note that the host defined on the component and endpoint of this Component should contain the scheme, hostname and optionally the port in the URI syntax (i.e. https:\/\/api.example.com:8080). Can be overridden in endpoint configuration.",
