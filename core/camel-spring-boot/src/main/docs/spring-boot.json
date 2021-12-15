@@ -537,6 +537,13 @@
       "defaultValue": 1000
     },
     {
+      "name": "camel.springboot.debugging",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether debugging is enabled or not. Default is false.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.springboot.dump-routes",
       "type": "java.lang.Boolean",
       "description": "If dumping is enabled then Camel will during startup dump all loaded routes (incl rests and route templates) represented as XML DSL into the log. This is intended for trouble shooting or to assist during development. Sensitive information that may be configured in the route endpoints could potentially be included in the dump output and is therefore not recommended to be used for production usage. This requires to have camel-xml-jaxb on the classpath to be able to dump the routes as XML.",
