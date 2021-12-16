@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.azure.cosmosdb.springboot;
 
-import java.util.List;
 import javax.annotation.Generated;
 import com.azure.cosmos.ConsistencyLevel;
 import com.azure.cosmos.CosmosAsyncClient;
@@ -125,13 +124,13 @@ public class CosmosDbComponentConfiguration
      */
     private Boolean multipleWriteRegionsEnabled = true;
     /**
-     * Sets the preferred regions for geo-replicated database accounts. For
-     * example, East US as the preferred region. When EnableEndpointDiscovery is
-     * true and PreferredRegions is non-empty, the SDK will prefer to use the
-     * regions in the container in the order they are specified to perform
-     * operations.
+     * Sets the comma separated preferred regions for geo-replicated database
+     * accounts. For example, East US as the preferred region. When
+     * EnableEndpointDiscovery is true and PreferredRegions is non-empty, the
+     * SDK will prefer to use the regions in the container in the order they are
+     * specified to perform operations.
      */
-    private List<String> preferredRegions;
+    private String preferredRegions;
     /**
      * Sets whether to allow for reads to go to multiple regions configured on
      * an account of Azure Cosmos DB service. DEFAULT value is true. If this
@@ -343,11 +342,11 @@ public class CosmosDbComponentConfiguration
         this.multipleWriteRegionsEnabled = multipleWriteRegionsEnabled;
     }
 
-    public List<String> getPreferredRegions() {
+    public String getPreferredRegions() {
         return preferredRegions;
     }
 
-    public void setPreferredRegions(List<String> preferredRegions) {
+    public void setPreferredRegions(String preferredRegions) {
         this.preferredRegions = preferredRegions;
     }
 
