@@ -32,16 +32,6 @@
     <name>Camel SB Tooling :: Starter Parent</name>
 
     <dependencies>
-        <!-- Dependencies added for all starters -->
-
-        <!-- Logback is the default logging implementation in spring-boot but it doesn't provide the log4j2 binding -->
-        <!-- Not a problem for now -->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.logging.log4j</groupId>-->
-        <!--<artifactId>log4j-to-slf4j</artifactId>-->
-        <!--<version>${log4j2-version}</version>-->
-        <!--</dependency>-->
-
         <!-- Force the reactor build order -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
