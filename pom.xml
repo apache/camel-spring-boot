@@ -104,7 +104,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <site-repo-url>scpexe://people.apache.org/www/camel.apache.org/maven/</site-repo-url>
-        <jdk.version>1.8</jdk.version>
+        <jdk.version>11</jdk.version>
         <compiler.fork>false</compiler.fork>
 
         <!-- Spring-Boot target version -->
