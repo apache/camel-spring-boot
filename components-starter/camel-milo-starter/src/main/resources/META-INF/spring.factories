@@ -18,7 +18,11 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.milo.server.springboot.MiloServerComponentAutoConfiguration,\
 org.apache.camel.component.milo.client.springboot.MiloClientComponentAutoConfiguration,\
 org.apache.camel.component.milo.server.springboot.MiloServerComponentConverter,\
-org.apache.camel.component.milo.client.springboot.MiloClientComponentConverter
+org.apache.camel.component.milo.client.springboot.MiloClientComponentConverter,\
+org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConverter,\
+org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentAutoConfiguration
+
+
 
 
 

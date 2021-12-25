@@ -1,6 +1,17 @@
 {
   "groups": [
     {
+      "name": "camel.component.milo-browse",
+      "type": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
       "name": "camel.component.milo-client",
       "type": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
@@ -24,6 +35,167 @@
     }
   ],
   "properties": [
+    {
+      "name": "camel.component.milo-browse.allowed-security-policies",
+      "type": "java.lang.String",
+      "description": "A set of allowed security policy URIs. Default is to accept all and use the highest.",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.application-name",
+      "type": "java.lang.String",
+      "description": "The application name",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
+      "defaultValue": "Apache Camel adapter for Eclipse Milo"
+    },
+    {
+      "name": "camel.component.milo-browse.application-uri",
+      "type": "java.lang.String",
+      "description": "The application URI",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
+      "defaultValue": "http:\/\/camel.apache.org\/EclipseMilo\/Client"
+    },
+    {
+      "name": "camel.component.milo-browse.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.milo-browse.channel-lifetime",
+      "type": "java.lang.Long",
+      "description": "Channel lifetime in milliseconds",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.client-id",
+      "type": "java.lang.String",
+      "description": "A virtual client id to force the creation of a new connection instance",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.configuration",
+      "type": "org.apache.camel.component.milo.client.MiloClientConfiguration",
+      "description": "All default options for client configurations. The option is a org.apache.camel.component.milo.client.MiloClientConfiguration type.",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.milo-browse.discovery-endpoint-suffix",
+      "type": "java.lang.String",
+      "description": "A suffix for endpoint URI when discovering",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.discovery-endpoint-uri",
+      "type": "java.lang.String",
+      "description": "An alternative discovery URI",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the milo-browse component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.key-alias",
+      "type": "java.lang.String",
+      "description": "The name of the key in the keystore file",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.key-password",
+      "type": "java.lang.String",
+      "description": "The key password",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.key-store-password",
+      "type": "java.lang.String",
+      "description": "The keystore password",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.key-store-type",
+      "type": "java.lang.String",
+      "description": "The key store type",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.key-store-url",
+      "type": "java.lang.String",
+      "description": "The URL where the key should be loaded from",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.milo-browse.max-pending-publish-requests",
+      "type": "java.lang.Long",
+      "description": "The maximum number of pending publish requests",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.max-response-message-size",
+      "type": "java.lang.Long",
+      "description": "The maximum number of bytes a response message may have",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.milo-client-connection-manager",
+      "type": "org.apache.camel.component.milo.client.MiloClientConnectionManager",
+      "description": "Instance for managing client connections. The option is a org.apache.camel.component.milo.client.MiloClientConnectionManager type.",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.override-host",
+      "type": "java.lang.Boolean",
+      "description": "Override the server reported endpoint host with the host from the endpoint URI.",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.milo-browse.product-uri",
+      "type": "java.lang.String",
+      "description": "The product URI",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
+      "defaultValue": "http:\/\/camel.apache.org\/EclipseMilo"
+    },
+    {
+      "name": "camel.component.milo-browse.request-timeout",
+      "type": "java.lang.Long",
+      "description": "Request timeout in milliseconds",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.requested-publishing-interval",
+      "type": "java.lang.Double",
+      "description": "The requested publishing interval in milliseconds",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.session-name",
+      "type": "java.lang.String",
+      "description": "Session name",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.session-timeout",
+      "type": "java.lang.Long",
+      "description": "Session timeout in milliseconds",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
     {
       "name": "camel.component.milo-client.allowed-security-policies",
       "type": "java.lang.String",
