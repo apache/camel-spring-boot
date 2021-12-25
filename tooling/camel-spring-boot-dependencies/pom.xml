@@ -2645,6 +2645,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-endpointdsl-support</artifactId>
+        <version>3.15.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-etcd</artifactId>
         <version>3.15.0-SNAPSHOT</version>
       </dependency>
@@ -3181,11 +3186,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-kamelet-main</artifactId>
-        <version>3.15.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-kamelet-reify</artifactId>
         <version>3.15.0-SNAPSHOT</version>
       </dependency>
       <dependency>
