@@ -203,6 +203,7 @@
     <module>camel-dozer-starter</module>
     <module>camel-drill-starter</module>
     <module>camel-dropbox-starter</module>
+    <module>camel-dynamic-router-starter</module>
     <module>camel-ehcache-starter</module>
     <module>camel-elasticsearch-rest-starter</module>
     <module>camel-elsql-starter</module>

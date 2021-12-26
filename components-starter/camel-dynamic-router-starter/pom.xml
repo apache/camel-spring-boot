@@ -24,9 +24,10 @@
     <artifactId>components-starter</artifactId>
     <version>3.15.0-SNAPSHOT</version>
   </parent>
-  <artifactId>camel-huaweicloud-obs-starter</artifactId>
+  <artifactId>camel-dynamic-router-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: Huawei Cloud OBS</name>
+  <name>Camel SB Starters :: Dynamic Router</name>
+  <description>Spring-Boot Starter for Camel Dynamic Router component</description>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -35,16 +36,8 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-huaweicloud-obs</artifactId>
+      <artifactId>camel-dynamic-router</artifactId>
       <version>${camel-version}</version>
-      <!--START OF GENERATED CODE-->
-      <exclusions>
-        <exclusion>
-          <groupId>org.apache.logging.log4j</groupId>
-          <artifactId>log4j-core</artifactId>
-        </exclusion>
-      </exclusions>
-      <!--END OF GENERATED CODE-->
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
