@@ -295,7 +295,6 @@
     <module>camel-jsonpath-starter</module>
     <module>camel-jt400-starter</module>
     <module>camel-kafka-starter</module>
-    <module>camel-kamelet-reify-starter</module>
     <module>camel-kamelet-starter</module>
     <module>camel-kubernetes-starter</module>
     <module>camel-kudu-starter</module>
