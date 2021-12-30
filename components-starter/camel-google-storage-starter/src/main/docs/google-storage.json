@@ -71,6 +71,12 @@
       "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
     },
     {
+      "name": "camel.component.google-storage.filter",
+      "type": "java.lang.String",
+      "description": "A regular expression to include only blobs with name matching it.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
       "name": "camel.component.google-storage.include-body",
       "type": "java.lang.Boolean",
       "description": "If it is true, the Object exchange will be consumed and put into the body. If false the Object stream will be put raw into the body and the headers will be set with the object metadata.",

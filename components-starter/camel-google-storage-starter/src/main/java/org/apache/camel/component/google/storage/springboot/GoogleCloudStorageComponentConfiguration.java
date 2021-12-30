@@ -104,6 +104,10 @@ public class GoogleCloudStorageComponentConfiguration
      */
     private String downloadFileName;
     /**
+     * A regular expression to include only blobs with name matching it.
+     */
+    private String filter;
+    /**
      * If it is true, the Object exchange will be consumed and put into the
      * body. If false the Object stream will be put raw into the body and the
      * headers will be set with the object metadata.
@@ -228,6 +232,14 @@ public class GoogleCloudStorageComponentConfiguration
 
     public void setDownloadFileName(String downloadFileName) {
         this.downloadFileName = downloadFileName;
+    }
+
+    public String getFilter() {
+        return filter;
+    }
+
+    public void setFilter(String filter) {
+        this.filter = filter;
     }
 
     public Boolean getIncludeBody() {
