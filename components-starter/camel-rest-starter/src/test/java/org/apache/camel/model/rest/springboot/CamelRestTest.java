@@ -49,8 +49,7 @@ import org.springframework.test.annotation.DirtiesContext;
     },
     properties = {
         "debug=false",
-        "camel.springboot.xml-rests=false",
-        "camel.springboot.xml-routes=false",
+        "camel.springboot.routes-include-pattern=false",
         "camel.rest.enabled=true",
         "camel.rest.component=dummy-rest",
         "camel.rest.host=localhost",

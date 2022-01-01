@@ -42,7 +42,6 @@ import static org.awaitility.Awaitility.await;
         SupervisingRouteControllerRestartTest.TestConfiguration.class
     },
     properties = {
-        "camel.springboot.xml-routes = false",
         "camel.springboot.main-run-controller = true",
         "camel.springboot.routeControllerSuperviseEnabled = true",
         "camel.springboot.routeControllerInitialDelay = 500",

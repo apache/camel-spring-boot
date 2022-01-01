@@ -331,12 +331,12 @@ this off using the configuration option
 [source,properties]
 ----
 # turn off
-camel.springboot.xml-routes = false
-# scan in the com/foo/routes classpath
-camel.springboot.xml-routes = classpath:com/foo/routes/*.xml
+camel.springboot.routes-include-pattern = false
+# scan only in the com/foo/routes classpath
+camel.springboot.routes-include-pattern = classpath:com/foo/routes/*.xml
 ----
 
-The XML files should be Camel XML routes (not CamelContext) such as
+The XML files should be Camel XML routes (*not* `<CamelContext>`) such as
 
 [source,xml]
 ----
@@ -349,45 +349,6 @@ The XML files should be Camel XML routes (not CamelContext) such as
         <to uri="log:out"/>
     </route>
 </routes>
-----
-
-== Adding XML Rest-DSL
-
-By default, you can put Camel Rest-DSL XML routes in the classpath under the
-directory camel-rest, which camel-spring-boot will auto-detect and include.
-You can configure the directory name or turn this off using the configuration option
-
-[source,properties]
-----
-# turn off
-camel.springboot.xml-rests = false
-# scan in the com/foo/routes classpath
-camel.springboot.xml-rests = classpath:com/foo/rests/*.xml
-----
-
-The Rest-DSL XML files should be Camel XML rests (not CamelContext) such as
-
-[source,xml]
-----
-<rests xmlns="http://camel.apache.org/schema/spring">
-  <rest>
-     <post uri="/persons">
-        <to uri="direct:postPersons"/>
-     </post>
-     <get uri="/persons">
-        <to uri="direct:getPersons"/>
-     </get>
-     <get uri="/persons/{personId}">
-         <to uri="direct:getPersionId"/>
-     </get>
-     <put uri="/persons/{personId}">
-         <to uri="direct:putPersionId"/>
-     </put>
-     <delete uri="/persons/{personId}">
-         <to uri="direct:deletePersionId"/>
-     </delete>
-  </rest>
-</rests>
 ----
 
 == Testing the JUnit 4 way (deprecated)
