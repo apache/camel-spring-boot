@@ -945,6 +945,13 @@
       "defaultValue": 300
     },
     {
+      "name": "camel.springboot.source-location-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to capture precise source location:line-number for all EIPs in Camel routes. Enabling this will impact parsing Java based routes (also Groovy, Kotlin, etc.) on startup as this uses JDK StackTraceElement to calculate the location from the Camel route, which comes with a performance cost. This only impact startup, not the performance of the routes at runtime.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.springboot.startup-recorder",
       "type": "java.lang.String",
       "description": "To use startup recorder for capturing execution time during starting Camel. The recorder can be one of: false (or off), logging, java-flight-recorder (or jfr).",

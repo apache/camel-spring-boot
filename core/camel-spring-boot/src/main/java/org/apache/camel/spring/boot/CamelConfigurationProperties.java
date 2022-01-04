@@ -364,6 +364,15 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean messageHistory = true;
 
     /**
+     * Whether to capture precise source location:line-number for all EIPs in Camel routes.
+     *
+     * Enabling this will impact parsing Java based routes (also Groovy, Kotlin, etc.) on startup as this uses JDK
+     * StackTraceElement to calculate the location from the Camel route, which comes with a performance cost. This only
+     * impact startup, not the performance of the routes at runtime.
+     */
+    private boolean sourceLocationEnabled;
+
+    /**
      * Sets whether log mask is enabled or not.
      *
      * Default is false.
