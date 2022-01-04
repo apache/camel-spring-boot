@@ -168,24 +168,25 @@ public class SalesforceComponentConfiguration
      */
     private NotifyForFieldsEnum notifyForFields;
     /**
-     * Notify for create operation, defaults to false (API version = 29.0)
+     * Notify for create operation, defaults to false (API version &gt;= 29.0)
      */
     private Boolean notifyForOperationCreate;
     /**
-     * Notify for delete operation, defaults to false (API version = 29.0)
+     * Notify for delete operation, defaults to false (API version &gt;= 29.0)
      */
     private Boolean notifyForOperationDelete;
     /**
      * Notify for operations, options are ALL, CREATE, EXTENDED, UPDATE (API
-     * version 29.0)
+     * version &lt; 29.0)
      */
     private NotifyForOperationsEnum notifyForOperations;
     /**
-     * Notify for un-delete operation, defaults to false (API version = 29.0)
+     * Notify for un-delete operation, defaults to false (API version &gt;=
+     * 29.0)
      */
     private Boolean notifyForOperationUndelete;
     /**
-     * Notify for update operation, defaults to false (API version = 29.0)
+     * Notify for update operation, defaults to false (API version &gt;= 29.0)
      */
     private Boolean notifyForOperationUpdate;
     /**

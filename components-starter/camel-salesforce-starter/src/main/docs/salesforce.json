@@ -362,31 +362,31 @@
     {
       "name": "camel.component.salesforce.notify-for-operation-create",
       "type": "java.lang.Boolean",
-      "description": "Notify for create operation, defaults to false (API version = 29.0)",
+      "description": "Notify for create operation, defaults to false (API version &gt;= 29.0)",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
       "name": "camel.component.salesforce.notify-for-operation-delete",
       "type": "java.lang.Boolean",
-      "description": "Notify for delete operation, defaults to false (API version = 29.0)",
+      "description": "Notify for delete operation, defaults to false (API version &gt;= 29.0)",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
       "name": "camel.component.salesforce.notify-for-operation-undelete",
       "type": "java.lang.Boolean",
-      "description": "Notify for un-delete operation, defaults to false (API version = 29.0)",
+      "description": "Notify for un-delete operation, defaults to false (API version &gt;= 29.0)",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
       "name": "camel.component.salesforce.notify-for-operation-update",
       "type": "java.lang.Boolean",
-      "description": "Notify for update operation, defaults to false (API version = 29.0)",
+      "description": "Notify for update operation, defaults to false (API version &gt;= 29.0)",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
       "name": "camel.component.salesforce.notify-for-operations",
       "type": "org.apache.camel.component.salesforce.internal.dto.NotifyForOperationsEnum",
-      "description": "Notify for operations, options are ALL, CREATE, EXTENDED, UPDATE (API version 29.0)",
+      "description": "Notify for operations, options are ALL, CREATE, EXTENDED, UPDATE (API version &lt; 29.0)",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
