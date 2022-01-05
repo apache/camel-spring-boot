@@ -113,6 +113,9 @@ public class CamelHealthCheckAutoConfiguration {
             for (String id : config.getConfig().keySet()) {
                 CamelHealthCheckConfigurationProperties.HealthCheckConfigurationProperties hcc = config.getConfig().get(id);
                 String parent = hcc.getParent();
+                if (parent == null) {
+                    throw new IllegalArgumentException("HealthCheck with id: " + id + " must have parent configured");
+                }
                 // lookup health check by id
                 Object hc = hcr.getCheck(id).orElse(null);
                 if (hc == null) {
