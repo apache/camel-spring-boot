@@ -29,10 +29,12 @@ import org.springframework.boot.actuate.health.Status;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 @CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootApplication
+@DirtiesContext
 @SpringBootTest(
     classes = {CamelAutoConfiguration.class, CamelHealthCheckAutoConfiguration.class, DownRoute.class, MyCamelRoute.class},
     properties = {"camel.health.config[consumer\\:down-route].parent=consumers",
@@ -67,7 +69,7 @@ class CamelHealthCheckConfigurationTest {
             .get()
             .matches(hc -> !hc.getConfiguration().isEnabled());
 
-        assertThat(registry.getCheck("consumer:route1"))
+        assertThat(registry.getCheck("consumer:foo-route"))
             .as("other route health check is enabled")
             .isPresent()
             .get()
