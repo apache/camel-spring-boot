@@ -114,7 +114,7 @@ public class CamelHealthCheckAutoConfiguration {
                 CamelHealthCheckConfigurationProperties.HealthCheckConfigurationProperties hcc = config.getConfig().get(id);
                 String parent = hcc.getParent();
                 // lookup health check by id
-                Object hc = hcr.getCheck(parent).orElse(null);
+                Object hc = hcr.getCheck(id).orElse(null);
                 if (hc == null) {
                     hc = hcr.resolveById(parent);
                     if (hc == null) {
@@ -122,15 +122,15 @@ public class CamelHealthCheckAutoConfiguration {
                         continue;
                     }
                     hcr.register(hc);
-                    if (hc instanceof HealthCheck) {
-                        ((HealthCheck) hc).getConfiguration().setParent(hcc.getParent());
-                        ((HealthCheck) hc).getConfiguration().setEnabled(hcc.getEnabled() != null ? hcc.getEnabled() : true);
-                        ((HealthCheck) hc).getConfiguration().setFailureThreshold(hcc.getFailureThreshold());
-                        ((HealthCheck) hc).getConfiguration().setInterval(hcc.getInterval());
-                    } else if (hc instanceof HealthCheckRepository) {
-                        ((HealthCheckRepository) hc).setEnabled(hcc.getEnabled() != null ? hcc.getEnabled() : true);
-                        ((HealthCheckRepository) hc).addConfiguration(id, hcc.toHealthCheckConfiguration());
-                    }
+                }
+
+                if (hc instanceof HealthCheck) {
+                    ((HealthCheck) hc).getConfiguration().setParent(hcc.getParent());
+                    ((HealthCheck) hc).getConfiguration().setEnabled(hcc.getEnabled() != null ? hcc.getEnabled() : true);
+                    ((HealthCheck) hc).getConfiguration().setFailureThreshold(hcc.getFailureThreshold());
+                    ((HealthCheck) hc).getConfiguration().setInterval(hcc.getInterval());
+                } else if (hc instanceof HealthCheckRepository) {
+                    ((HealthCheckRepository) hc).addConfiguration(id, hcc.toHealthCheckConfiguration());
                 }
             }
 
