@@ -24,6 +24,6 @@ public class MyCamelRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("timer:foo").to("log:foo");
+        from("timer:foo").routeId("foo-route").to("log:foo");
     }
 }
