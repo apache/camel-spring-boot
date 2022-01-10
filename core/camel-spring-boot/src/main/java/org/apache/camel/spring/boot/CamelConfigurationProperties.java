@@ -357,6 +357,13 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private String tracingPattern;
 
     /**
+     * To use a custom tracing logging format.
+     *
+     * The default format (arrow, routeId, label) is: %-4.4s [%-12.12s] [%-33.33s]
+     */
+    private String tracingLoggingFormat;
+
+    /**
      * Sets whether message history is enabled or not.
      *
      * Default is true.
