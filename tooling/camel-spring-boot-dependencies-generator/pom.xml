@@ -213,9 +213,17 @@
                             <exclude>org.apache.maven.archetype:*</exclude>
                             <exclude>org.osgi:*</exclude>
 
+                            <!-- Modified on Camel due to CAMEL-17435 -->
+                            <exclude>com.sun.xml.messaging.saaj:saaj-impl:*</exclude>
+                            <exclude>jakarta.xml.bind:jakarta.xml.bind-api:*</exclude>
+                            <exclude>javax.annotation:javax.annotation-api:*</exclude>
+                            <exclude>javax.xml.ws:jaxws-api:*</exclude>
+                            <exclude>org.glassfish.jaxb:jaxb-runtime:*</exclude>
+
                             <!-- Unuseful -->
                             <exclude>org.springframework:springloaded</exclude>
                             <exclude>com.zaxxer:HikariCP-java6</exclude>
+
                         </excludes>
                     </dependencies>
 
