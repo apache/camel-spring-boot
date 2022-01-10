@@ -177,6 +177,11 @@
         <version>1.0</version>
       </dependency>
       <dependency>
+        <groupId>javax.xml.soap</groupId>
+        <artifactId>javax.xml.soap-api</artifactId>
+        <version>1.4.0</version>
+      </dependency>
+      <dependency>
         <groupId>net.sf.saxon</groupId>
         <artifactId>Saxon-HE</artifactId>
         <version>9.9.1-8</version>
@@ -194,7 +199,7 @@
       <dependency>
         <groupId>org.apache.any23</groupId>
         <artifactId>apache-any23-core</artifactId>
-        <version>2.4</version>
+        <version>2.6</version>
       </dependency>
       <dependency>
         <groupId>org.apache.avro</groupId>
@@ -4409,6 +4414,11 @@
         <version>1.1.1</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.geronimo.specs</groupId>
+        <artifactId>geronimo-ws-metadata_2.0_spec</artifactId>
+        <version>1.1.3</version>
+      </dependency>
+      <dependency>
         <groupId>org.apache.mina</groupId>
         <artifactId>mina-core</artifactId>
         <version>2.1.4</version>
@@ -4517,12 +4527,12 @@
       <dependency>
         <groupId>org.eclipse.rdf4j</groupId>
         <artifactId>rdf4j-model</artifactId>
-        <version>3.7.2</version>
+        <version>3.7.4</version>
       </dependency>
       <dependency>
         <groupId>org.eclipse.rdf4j</groupId>
         <artifactId>rdf4j-rio-api</artifactId>
-        <version>3.7.2</version>
+        <version>3.7.4</version>
       </dependency>
       <dependency>
         <groupId>org.knowm.xchange</groupId>

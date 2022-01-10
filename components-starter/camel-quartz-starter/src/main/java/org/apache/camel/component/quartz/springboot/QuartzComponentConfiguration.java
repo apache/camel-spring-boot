@@ -50,20 +50,20 @@ public class QuartzComponentConfiguration
     private Boolean bridgeErrorHandler = false;
     /**
      * Whether to enable Quartz JMX which allows to manage the Quartz scheduler
-     * from JMX. <p/> This options is default true
+     * from JMX. This options is default true
      */
     private Boolean enableJmx = true;
     /**
      * Whether to prefix the Quartz Scheduler instance name with the
-     * CamelContext name. <p/> This is enabled by default, to let each
-     * CamelContext use its own Quartz scheduler instance by default. You can
-     * set this option to <tt>false to reuse Quartz scheduler instances between
-     * multiple CamelContext's.
+     * CamelContext name. This is enabled by default, to let each CamelContext
+     * use its own Quartz scheduler instance by default. You can set this option
+     * to false to reuse Quartz scheduler instances between multiple
+     * CamelContext's.
      */
     private Boolean prefixInstanceName = true;
     /**
-     * Whether to prefix the quartz job with the endpoint id. <p/> This option
-     * is default false.
+     * Whether to prefix the quartz job with the endpoint id. This option is
+     * default false.
      */
     private Boolean prefixJobNameWithEndpointId = false;
     /**
@@ -99,7 +99,7 @@ public class QuartzComponentConfiguration
      */
     private SchedulerFactory schedulerFactory;
     /**
-     * Whether or not the scheduler should be auto started. <p/> This options is
+     * Whether or not the scheduler should be auto started. This options is
      * default true
      */
     private Boolean autoStartScheduler = true;

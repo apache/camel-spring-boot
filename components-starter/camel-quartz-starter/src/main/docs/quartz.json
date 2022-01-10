@@ -16,7 +16,7 @@
     {
       "name": "camel.component.quartz.auto-start-scheduler",
       "type": "java.lang.Boolean",
-      "description": "Whether or not the scheduler should be auto started. <p\/> This options is default true",
+      "description": "Whether or not the scheduler should be auto started. This options is default true",
       "sourceType": "org.apache.camel.component.quartz.springboot.QuartzComponentConfiguration",
       "defaultValue": true
     },
@@ -42,7 +42,7 @@
     {
       "name": "camel.component.quartz.enable-jmx",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable Quartz JMX which allows to manage the Quartz scheduler from JMX. <p\/> This options is default true",
+      "description": "Whether to enable Quartz JMX which allows to manage the Quartz scheduler from JMX. This options is default true",
       "sourceType": "org.apache.camel.component.quartz.springboot.QuartzComponentConfiguration",
       "defaultValue": true
     },
@@ -62,14 +62,14 @@
     {
       "name": "camel.component.quartz.prefix-instance-name",
       "type": "java.lang.Boolean",
-      "description": "Whether to prefix the Quartz Scheduler instance name with the CamelContext name. <p\/> This is enabled by default, to let each CamelContext use its own Quartz scheduler instance by default. You can set this option to <tt>false to reuse Quartz scheduler instances between multiple CamelContext's.",
+      "description": "Whether to prefix the Quartz Scheduler instance name with the CamelContext name. This is enabled by default, to let each CamelContext use its own Quartz scheduler instance by default. You can set this option to false to reuse Quartz scheduler instances between multiple CamelContext's.",
       "sourceType": "org.apache.camel.component.quartz.springboot.QuartzComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.quartz.prefix-job-name-with-endpoint-id",
       "type": "java.lang.Boolean",
-      "description": "Whether to prefix the quartz job with the endpoint id. <p\/> This option is default false.",
+      "description": "Whether to prefix the quartz job with the endpoint id. This option is default false.",
       "sourceType": "org.apache.camel.component.quartz.springboot.QuartzComponentConfiguration",
       "defaultValue": false
     },

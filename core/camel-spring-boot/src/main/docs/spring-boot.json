@@ -1078,6 +1078,11 @@
       "defaultValue": false
     },
     {
+      "name": "camel.springboot.tracing-logging-format",
+      "type": "java.lang.String",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+    },
+    {
       "name": "camel.springboot.tracing-pattern",
       "type": "java.lang.String",
       "description": "Tracing pattern to match which node EIPs to trace. For example to match all To EIP nodes, use to*. The pattern matches by node and route id's Multiple patterns can be separated by comma.",
