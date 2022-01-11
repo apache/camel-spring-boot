@@ -73,7 +73,7 @@
       <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>fastjson</artifactId>
-        <version>1.2.78</version>
+        <version>1.2.79</version>
       </dependency>
       <dependency>
         <groupId>com.cloudbees.thirdparty</groupId>
@@ -2575,6 +2575,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-debug</artifactId>
+        <version>3.15.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-digitalocean</artifactId>
         <version>3.15.0-SNAPSHOT</version>
       </dependency>
@@ -4456,12 +4461,12 @@
       <dependency>
         <groupId>org.apache.pulsar</groupId>
         <artifactId>pulsar-client</artifactId>
-        <version>2.9.0</version>
+        <version>2.9.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.pulsar</groupId>
         <artifactId>pulsar-client-admin</artifactId>
-        <version>2.9.0</version>
+        <version>2.9.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ws.commons.axiom</groupId>
