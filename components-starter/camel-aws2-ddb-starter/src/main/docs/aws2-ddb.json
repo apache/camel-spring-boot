@@ -68,13 +68,6 @@
       "sourceType": "org.apache.camel.component.aws2.ddb.springboot.Ddb2ComponentConfiguration"
     },
     {
-      "name": "camel.component.aws2-ddb.enabled-initial-describe-table",
-      "type": "java.lang.Boolean",
-      "description": "Set whether the initial Describe table operation in the DDB Endpoint must be done, or not.",
-      "sourceType": "org.apache.camel.component.aws2.ddb.springboot.Ddb2ComponentConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.component.aws2-ddb.key-attribute-name",
       "type": "java.lang.String",
       "description": "Attribute name when creating table",

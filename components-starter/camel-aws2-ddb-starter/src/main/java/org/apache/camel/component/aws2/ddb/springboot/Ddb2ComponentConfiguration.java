@@ -57,11 +57,6 @@ public class Ddb2ComponentConfiguration
      */
     private Boolean consistentRead = false;
     /**
-     * Set whether the initial Describe table operation in the DDB Endpoint must
-     * be done, or not.
-     */
-    private Boolean enabledInitialDescribeTable = true;
-    /**
      * Attribute name when creating table
      */
     private String keyAttributeName;
@@ -176,15 +171,6 @@ public class Ddb2ComponentConfiguration
 
     public void setConsistentRead(Boolean consistentRead) {
         this.consistentRead = consistentRead;
-    }
-
-    public Boolean getEnabledInitialDescribeTable() {
-        return enabledInitialDescribeTable;
-    }
-
-    public void setEnabledInitialDescribeTable(
-            Boolean enabledInitialDescribeTable) {
-        this.enabledInitialDescribeTable = enabledInitialDescribeTable;
     }
 
     public String getKeyAttributeName() {
