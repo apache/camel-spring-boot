@@ -1,0 +1,8 @@
+= SpringDoc
+//Manually maintained attributes
+:artifactid: camel-springdoc
+:shortname: springdoc
+:camel-spring-boot-name: springdoc
+
+Integrates Camel Rest DSL to automatic register its OpenAPI (eg swagger doc)
+in Spring Boot which allows tooling such as SpringDoc to integrate with Camel.
