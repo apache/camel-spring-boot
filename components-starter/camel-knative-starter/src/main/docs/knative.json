@@ -1,0 +1,150 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.knative",
+      "type": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.knative.api-version",
+      "type": "java.lang.String",
+      "description": "The version of the k8s resource referenced by the endpoint.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.knative.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.knative.ce-override",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "description": "CloudEvent headers to override",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.cloud-events-spec-version",
+      "type": "java.lang.String",
+      "description": "Set the version of the cloudevents spec.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
+      "defaultValue": "1.0"
+    },
+    {
+      "name": "camel.component.knative.cloud-events-type",
+      "type": "java.lang.String",
+      "description": "Set the event-type information of the produced events.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
+      "defaultValue": "org.apache.camel.event"
+    },
+    {
+      "name": "camel.component.knative.configuration",
+      "type": "org.apache.camel.component.knative.KnativeConfiguration",
+      "description": "Set the configuration. The option is a org.apache.camel.component.knative.KnativeConfiguration type.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.consumer-factory",
+      "type": "org.apache.camel.component.knative.spi.KnativeConsumerFactory",
+      "description": "The protocol consumer factory. The option is a org.apache.camel.component.knative.spi.KnativeConsumerFactory type.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.knative.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the knative component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.environment",
+      "type": "org.apache.camel.component.knative.spi.KnativeEnvironment",
+      "description": "The environment. The option is a org.apache.camel.component.knative.spi.KnativeEnvironment type.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.environment-path",
+      "type": "java.lang.String",
+      "description": "The path ot the environment definition",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.filters",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "description": "Set the filters.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.kind",
+      "type": "java.lang.String",
+      "description": "The type of the k8s resource referenced by the endpoint.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.knative.name",
+      "type": "java.lang.String",
+      "description": "The name of the k8s resource referenced by the endpoint.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.producer-factory",
+      "type": "org.apache.camel.component.knative.spi.KnativeProducerFactory",
+      "description": "The protocol producer factory. The option is a org.apache.camel.component.knative.spi.KnativeProducerFactory type.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.reply",
+      "type": "java.lang.Boolean",
+      "description": "If the consumer should construct a full reply to knative request.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.knative.reply-with-cloud-event",
+      "type": "java.lang.Boolean",
+      "description": "Transforms the reply into a cloud event that will be processed by the caller. When listening to events from a Knative Broker, if this flag is enabled, replies will be published to the same Broker where the request comes from (beware that if you don't change the type of the received message, you may create a loop and receive your same reply). When this flag is disabled, CloudEvent headers are removed from the reply.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.knative.transport-options",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Set the transport options.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.knative.type-id",
+      "type": "java.lang.String",
+      "description": "The name of the service to lookup from the KnativeEnvironment.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
+    }
+  ],
+  "hints": []
+}
