@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.google.mail.springboot;
 
+import java.util.List;
 import javax.annotation.Generated;
 import org.apache.camel.component.google.mail.GoogleMailClientFactory;
 import org.apache.camel.component.google.mail.GoogleMailConfiguration;
@@ -51,6 +52,14 @@ public class GoogleMailComponentConfiguration
      * org.apache.camel.component.google.mail.GoogleMailConfiguration type.
      */
     private GoogleMailConfiguration configuration;
+    /**
+     * Delegate for wide-domain service account
+     */
+    private String delegate;
+    /**
+     * GMail scopes
+     */
+    private List<String> scopes;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -96,6 +105,10 @@ public class GoogleMailComponentConfiguration
      */
     private String clientSecret;
     /**
+     * Sets .json file with credentials for Service account
+     */
+    private String keyResource;
+    /**
      * OAuth 2 refresh token. Using this, the Google Calendar component can
      * obtain a new accessToken whenever the current one expires - a necessity
      * if the application is long-lived.
@@ -124,6 +137,22 @@ public class GoogleMailComponentConfiguration
 
     public void setConfiguration(GoogleMailConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getDelegate() {
+        return delegate;
+    }
+
+    public void setDelegate(String delegate) {
+        this.delegate = delegate;
+    }
+
+    public List<String> getScopes() {
+        return scopes;
+    }
+
+    public void setScopes(List<String> scopes) {
+        this.scopes = scopes;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -172,6 +201,14 @@ public class GoogleMailComponentConfiguration
 
     public void setClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
+    }
+
+    public String getKeyResource() {
+        return keyResource;
+    }
+
+    public void setKeyResource(String keyResource) {
+        this.keyResource = keyResource;
     }
 
     public String getRefreshToken() {
