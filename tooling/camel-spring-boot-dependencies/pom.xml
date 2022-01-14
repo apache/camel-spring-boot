@@ -2405,6 +2405,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-cloudevents</artifactId>
+        <version>3.15.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-cluster</artifactId>
         <version>3.15.0-SNAPSHOT</version>
       </dependency>
@@ -3221,6 +3226,21 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-kamelet-main</artifactId>
+        <version>3.15.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-knative</artifactId>
+        <version>3.15.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-knative-api</artifactId>
+        <version>3.15.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-knative-http</artifactId>
         <version>3.15.0-SNAPSHOT</version>
       </dependency>
       <dependency>

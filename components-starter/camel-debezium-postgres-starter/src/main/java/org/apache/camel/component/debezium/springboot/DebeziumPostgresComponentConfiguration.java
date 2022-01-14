@@ -293,6 +293,15 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String hstoreHandlingMode = "json";
     /**
+     * Whether the connector parse table and column's comment to metadata
+     * object.Note: Enable this option will bring the implications on memory
+     * usage. The number and size of ColumnImpl objects is what largely impacts
+     * how much memory is consumed by the Debezium connectors, and adding a
+     * String to each of them can potentially be quite heavy. The default is
+     * 'false'.
+     */
+    private Boolean includeSchemaComments = false;
+    /**
      * Specify whether the fields of data type not supported by Debezium should
      * be processed:'false' (the default) omits the fields; 'true' converts the
      * field into an implementation dependent binary representation.
@@ -337,6 +346,17 @@ public class DebeziumPostgresComponentConfiguration
      * dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id
      */
     private String messageKeyColumns;
+    /**
+     * A comma-separated list of regular expressions that match the logical
+     * decoding message prefixes to be excluded from monitoring.
+     */
+    private String messagePrefixExcludeList;
+    /**
+     * A comma-separated list of regular expressions that match the logical
+     * decoding message prefixes to be monitored. All prefixes are monitored by
+     * default.
+     */
+    private String messagePrefixIncludeList;
     /**
      * The name of the Postgres logical decoding plugin installed on the server.
      * Supported values are 'decoderbufs', 'wal2json', 'pgoutput',
@@ -569,13 +589,6 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String timePrecisionMode = "adaptive";
     /**
-     * Specify the constant that will be provided by Debezium to indicate that
-     * the original value is a toasted value not provided by the database. If
-     * starts with 'hex:' prefix it is expected that the rest of the string
-     * repesents hexadecimally encoded octets.
-     */
-    private String toastedValuePlaceholder = "__debezium_unavailable_value";
-    /**
      * Whether delete operations should be represented by a delete event and a
      * subsquenttombstone event (true) or only by a delete event (false).
      * Emitting the tombstone event (the default behavior) allows Kafka to
@@ -584,12 +597,25 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Boolean tombstonesOnDelete = false;
     /**
+     * The name of the transaction metadata topic. The placeholder
+     * ${database.server.name} can be used for referring to the connector's
+     * logical name; defaults to ${database.server.name}.transaction.
+     */
+    private String transactionTopic = "${database.server.name}.transaction";
+    /**
      * Specify how TRUNCATE operations are handled for change events (supported
      * only on pg11 pgoutput plugin), including: 'skip' to skip / ignore
      * TRUNCATE events (default), 'include' to handle and include TRUNCATE
      * events
      */
     private String truncateHandlingMode = "skip";
+    /**
+     * Specify the constant that will be provided by Debezium to indicate that
+     * the original value is a toasted value not provided by the database. If
+     * starts with 'hex:' prefix it is expected that the rest of the string
+     * represents hexadecimal encoded octets.
+     */
+    private String unavailableValuePlaceholder = "__debezium_unavailable_value";
     /**
      * Specify how often (in ms) the xmin will be fetched from the replication
      * slot. This xmin value is exposed by the slot which gives a lower bound of
@@ -951,6 +977,14 @@ public class DebeziumPostgresComponentConfiguration
         this.hstoreHandlingMode = hstoreHandlingMode;
     }
 
+    public Boolean getIncludeSchemaComments() {
+        return includeSchemaComments;
+    }
+
+    public void setIncludeSchemaComments(Boolean includeSchemaComments) {
+        this.includeSchemaComments = includeSchemaComments;
+    }
+
     public Boolean getIncludeUnknownDatatypes() {
         return includeUnknownDatatypes;
     }
@@ -1006,6 +1040,22 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setMessageKeyColumns(String messageKeyColumns) {
         this.messageKeyColumns = messageKeyColumns;
+    }
+
+    public String getMessagePrefixExcludeList() {
+        return messagePrefixExcludeList;
+    }
+
+    public void setMessagePrefixExcludeList(String messagePrefixExcludeList) {
+        this.messagePrefixExcludeList = messagePrefixExcludeList;
+    }
+
+    public String getMessagePrefixIncludeList() {
+        return messagePrefixIncludeList;
+    }
+
+    public void setMessagePrefixIncludeList(String messagePrefixIncludeList) {
+        this.messagePrefixIncludeList = messagePrefixIncludeList;
     }
 
     public String getPluginName() {
@@ -1299,14 +1349,6 @@ public class DebeziumPostgresComponentConfiguration
         this.timePrecisionMode = timePrecisionMode;
     }
 
-    public String getToastedValuePlaceholder() {
-        return toastedValuePlaceholder;
-    }
-
-    public void setToastedValuePlaceholder(String toastedValuePlaceholder) {
-        this.toastedValuePlaceholder = toastedValuePlaceholder;
-    }
-
     public Boolean getTombstonesOnDelete() {
         return tombstonesOnDelete;
     }
@@ -1315,12 +1357,29 @@ public class DebeziumPostgresComponentConfiguration
         this.tombstonesOnDelete = tombstonesOnDelete;
     }
 
+    public String getTransactionTopic() {
+        return transactionTopic;
+    }
+
+    public void setTransactionTopic(String transactionTopic) {
+        this.transactionTopic = transactionTopic;
+    }
+
     public String getTruncateHandlingMode() {
         return truncateHandlingMode;
     }
 
     public void setTruncateHandlingMode(String truncateHandlingMode) {
         this.truncateHandlingMode = truncateHandlingMode;
+    }
+
+    public String getUnavailableValuePlaceholder() {
+        return unavailableValuePlaceholder;
+    }
+
+    public void setUnavailableValuePlaceholder(
+            String unavailableValuePlaceholder) {
+        this.unavailableValuePlaceholder = unavailableValuePlaceholder;
     }
 
     public Long getXminFetchIntervalMs() {

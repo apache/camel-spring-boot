@@ -407,6 +407,10 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String gtidSourceIncludes;
     /**
+     * The query executed with every heartbeat.
+     */
+    private String heartbeatActionQuery;
+    /**
      * Length of an interval in milli-seconds in in which the connector
      * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
      * disable heartbeat messages. Disabled by default. The option is a int
@@ -438,6 +442,15 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Boolean includeSchemaChanges = true;
     /**
+     * Whether the connector parse table and column's comment to metadata
+     * object.Note: Enable this option will bring the implications on memory
+     * usage. The number and size of ColumnImpl objects is what largely impacts
+     * how much memory is consumed by the Debezium connectors, and adding a
+     * String to each of them can potentially be quite heavy. The default is
+     * 'false'.
+     */
+    private Boolean includeSchemaComments = false;
+    /**
      * Specify how binlog events that belong to a table missing from internal
      * schema representation (i.e. internal representation is not consistent
      * with database) should be handled, including:'fail' (the default) an
@@ -447,6 +460,17 @@ public class DebeziumMySqlComponentConfiguration
      * skipped;'skip' the problematic event will be skipped.
      */
     private String inconsistentSchemaHandlingMode = "fail";
+    /**
+     * Detect schema change during an incremental snapshot and re-select a
+     * current chunk to avoid locking DDLs. Note that changes to a primary key
+     * are not supported and can cause incorrect results if performed during an
+     * incremental snapshot. Another limitation is that if a schema change
+     * affects only columns' default values, then the change won't be detected
+     * until the DDL is processed from the binlog stream. This doesn't affect
+     * the snapshot events' values, but the schema of snapshot events may have
+     * outdated defaults.
+     */
+    private Boolean incrementalSnapshotAllowSchemaChanges = false;
     /**
      * The maximum size of chunk for incremental snapshotting
      */
@@ -654,6 +678,12 @@ public class DebeziumMySqlComponentConfiguration
      * record got deleted.
      */
     private Boolean tombstonesOnDelete = false;
+    /**
+     * The name of the transaction metadata topic. The placeholder
+     * ${database.server.name} can be used for referring to the connector's
+     * logical name; defaults to ${database.server.name}.transaction.
+     */
+    private String transactionTopic = "${database.server.name}.transaction";
 
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
@@ -1141,6 +1171,14 @@ public class DebeziumMySqlComponentConfiguration
         this.gtidSourceIncludes = gtidSourceIncludes;
     }
 
+    public String getHeartbeatActionQuery() {
+        return heartbeatActionQuery;
+    }
+
+    public void setHeartbeatActionQuery(String heartbeatActionQuery) {
+        this.heartbeatActionQuery = heartbeatActionQuery;
+    }
+
     public Integer getHeartbeatIntervalMs() {
         return heartbeatIntervalMs;
     }
@@ -1173,6 +1211,14 @@ public class DebeziumMySqlComponentConfiguration
         this.includeSchemaChanges = includeSchemaChanges;
     }
 
+    public Boolean getIncludeSchemaComments() {
+        return includeSchemaComments;
+    }
+
+    public void setIncludeSchemaComments(Boolean includeSchemaComments) {
+        this.includeSchemaComments = includeSchemaComments;
+    }
+
     public String getInconsistentSchemaHandlingMode() {
         return inconsistentSchemaHandlingMode;
     }
@@ -1180,6 +1226,15 @@ public class DebeziumMySqlComponentConfiguration
     public void setInconsistentSchemaHandlingMode(
             String inconsistentSchemaHandlingMode) {
         this.inconsistentSchemaHandlingMode = inconsistentSchemaHandlingMode;
+    }
+
+    public Boolean getIncrementalSnapshotAllowSchemaChanges() {
+        return incrementalSnapshotAllowSchemaChanges;
+    }
+
+    public void setIncrementalSnapshotAllowSchemaChanges(
+            Boolean incrementalSnapshotAllowSchemaChanges) {
+        this.incrementalSnapshotAllowSchemaChanges = incrementalSnapshotAllowSchemaChanges;
     }
 
     public Integer getIncrementalSnapshotChunkSize() {
@@ -1424,5 +1479,13 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setTombstonesOnDelete(Boolean tombstonesOnDelete) {
         this.tombstonesOnDelete = tombstonesOnDelete;
+    }
+
+    public String getTransactionTopic() {
+        return transactionTopic;
+    }
+
+    public void setTransactionTopic(String transactionTopic) {
+        this.transactionTopic = transactionTopic;
     }
 }

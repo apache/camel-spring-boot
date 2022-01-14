@@ -126,6 +126,14 @@ public class DebeziumMongodbComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * The method used to capture changes from MongoDB server. Options include:
+     * 'oplog' to capture changes from the oplog; 'change_streams' to capture
+     * changes via MongoDB Change Streams, update events do not contain full
+     * documents; 'change_streams_update_full' (the default) to capture changes
+     * via MongoDB Change Streams, update events contain full documents
+     */
+    private String captureMode = "change_streams_update_full";
+    /**
      * A comma-separated list of regular expressions that match the collection
      * names for which changes are to be excluded
      */
@@ -375,6 +383,12 @@ public class DebeziumMongodbComponentConfiguration
      * record got deleted.
      */
     private Boolean tombstonesOnDelete = false;
+    /**
+     * The name of the transaction metadata topic. The placeholder
+     * ${database.server.name} can be used for referring to the connector's
+     * logical name; defaults to ${database.server.name}.transaction.
+     */
+    private String transactionTopic = "${database.server.name}.transaction";
 
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
@@ -488,6 +502,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getCaptureMode() {
+        return captureMode;
+    }
+
+    public void setCaptureMode(String captureMode) {
+        this.captureMode = captureMode;
     }
 
     public String getCollectionExcludeList() {
@@ -856,5 +878,13 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setTombstonesOnDelete(Boolean tombstonesOnDelete) {
         this.tombstonesOnDelete = tombstonesOnDelete;
+    }
+
+    public String getTransactionTopic() {
+        return transactionTopic;
+    }
+
+    public void setTransactionTopic(String transactionTopic) {
+        this.transactionTopic = transactionTopic;
     }
 }

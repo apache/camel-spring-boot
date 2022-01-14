@@ -34,6 +34,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-mongodb.capture-mode",
+      "type": "java.lang.String",
+      "description": "The method used to capture changes from MongoDB server. Options include: 'oplog' to capture changes from the oplog; 'change_streams' to capture changes via MongoDB Change Streams, update events do not contain full documents; 'change_streams_update_full' (the default) to capture changes via MongoDB Change Streams, update events contain full documents",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": "change_streams_update_full"
+    },
+    {
       "name": "camel.component.debezium-mongodb.collection-exclude-list",
       "type": "java.lang.String",
       "description": "A comma-separated list of regular expressions that match the collection names for which changes are to be excluded",
@@ -412,6 +419,13 @@
       "description": "Whether delete operations should be represented by a delete event and a subsquenttombstone event (true) or only by a delete event (false). Emitting the tombstone event (the default behavior) allows Kafka to completely delete all events pertaining to the given key once the source record got deleted.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mongodb.transaction-topic",
+      "type": "java.lang.String",
+      "description": "The name of the transaction metadata topic. The placeholder ${database.server.name} can be used for referring to the connector's logical name; defaults to ${database.server.name}.transaction.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": "${database.server.name}.transaction"
     }
   ],
   "hints": []

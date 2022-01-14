@@ -234,6 +234,13 @@
       "defaultValue": "json"
     },
     {
+      "name": "camel.component.debezium-postgres.include-schema-comments",
+      "type": "java.lang.Boolean",
+      "description": "Whether the connector parse table and column's comment to metadata object.Note: Enable this option will bring the implications on memory usage. The number and size of ColumnImpl objects is what largely impacts how much memory is consumed by the Debezium connectors, and adding a String to each of them can potentially be quite heavy. The default is 'false'.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.debezium-postgres.include-unknown-datatypes",
       "type": "java.lang.Boolean",
       "description": "Specify whether the fields of data type not supported by Debezium should be processed:'false' (the default) omits the fields; 'true' converts the field into an implementation dependent binary representation.",
@@ -293,6 +300,18 @@
       "name": "camel.component.debezium-postgres.message-key-columns",
       "type": "java.lang.String",
       "description": "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern ':',where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector,and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key.Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-postgres.message-prefix-exclude-list",
+      "type": "java.lang.String",
+      "description": "A comma-separated list of regular expressions that match the logical decoding message prefixes to be excluded from monitoring.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-postgres.message-prefix-include-list",
+      "type": "java.lang.String",
+      "description": "A comma-separated list of regular expressions that match the logical decoding message prefixes to be monitored. All prefixes are monitored by default.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
@@ -585,13 +604,6 @@
       "defaultValue": "adaptive"
     },
     {
-      "name": "camel.component.debezium-postgres.toasted-value-placeholder",
-      "type": "java.lang.String",
-      "description": "Specify the constant that will be provided by Debezium to indicate that the original value is a toasted value not provided by the database. If starts with 'hex:' prefix it is expected that the rest of the string repesents hexadecimally encoded octets.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
-      "defaultValue": "__debezium_unavailable_value"
-    },
-    {
       "name": "camel.component.debezium-postgres.tombstones-on-delete",
       "type": "java.lang.Boolean",
       "description": "Whether delete operations should be represented by a delete event and a subsquenttombstone event (true) or only by a delete event (false). Emitting the tombstone event (the default behavior) allows Kafka to completely delete all events pertaining to the given key once the source record got deleted.",
@@ -599,11 +611,25 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-postgres.transaction-topic",
+      "type": "java.lang.String",
+      "description": "The name of the transaction metadata topic. The placeholder ${database.server.name} can be used for referring to the connector's logical name; defaults to ${database.server.name}.transaction.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "${database.server.name}.transaction"
+    },
+    {
       "name": "camel.component.debezium-postgres.truncate-handling-mode",
       "type": "java.lang.String",
       "description": "Specify how TRUNCATE operations are handled for change events (supported only on pg11 pgoutput plugin), including: 'skip' to skip \/ ignore TRUNCATE events (default), 'include' to handle and include TRUNCATE events",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": "skip"
+    },
+    {
+      "name": "camel.component.debezium-postgres.unavailable-value-placeholder",
+      "type": "java.lang.String",
+      "description": "Specify the constant that will be provided by Debezium to indicate that the original value is a toasted value not provided by the database. If starts with 'hex:' prefix it is expected that the rest of the string represents hexadecimal encoded octets.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "__debezium_unavailable_value"
     },
     {
       "name": "camel.component.debezium-postgres.xmin-fetch-interval-ms",
