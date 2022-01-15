@@ -74,8 +74,12 @@ public class CamelAutoConfiguration {
     @Bean(destroyMethod = "")
     @ConditionalOnMissingBean(CamelContext.class)
     CamelContext camelContext(ApplicationContext applicationContext,
-                              CamelConfigurationProperties config) throws Exception {
+                              CamelConfigurationProperties config,
+                              CamelBeanPostProcessor beanPostProcessor) throws Exception {
         CamelContext camelContext = new SpringBootCamelContext(applicationContext, config.isWarnOnEarlyShutdown());
+        // bean post processor is created before CamelContext
+        beanPostProcessor.setCamelContext(camelContext);
+        camelContext.adapt(ExtendedCamelContext.class).setBeanPostProcessor(beanPostProcessor);
         return doConfigureCamelContext(applicationContext, camelContext, config);
     }
 
