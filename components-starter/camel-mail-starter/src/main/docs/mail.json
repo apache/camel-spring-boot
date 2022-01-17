@@ -12,12 +12,12 @@
       "sourceMethod": "getCustomizer()"
     },
     {
-      "name": "camel.dataformat.mime-multipart",
+      "name": "camel.dataformat.mimemultipart",
       "type": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.mime-multipart.customizer",
+      "name": "camel.dataformat.mimemultipart.customizer",
       "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration",
       "sourceMethod": "getCustomizer()"
@@ -318,45 +318,45 @@
       "sourceType": "org.apache.camel.component.mail.springboot.MailComponentConfiguration"
     },
     {
-      "name": "camel.dataformat.mime-multipart.binary-content",
+      "name": "camel.dataformat.mimemultipart.binary-content",
       "type": "java.lang.Boolean",
       "description": "Defines whether the content of binary parts in the MIME multipart is binary (true) or Base-64 encoded (false) Default is false.",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration",
       "defaultValue": false
     },
     {
-      "name": "camel.dataformat.mime-multipart.customizer.enabled",
+      "name": "camel.dataformat.mimemultipart.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
-      "name": "camel.dataformat.mime-multipart.enabled",
+      "name": "camel.dataformat.mimemultipart.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the mime-multipart data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the mimeMultipart data format. This is enabled by default.",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.mime-multipart.headers-inline",
+      "name": "camel.dataformat.mimemultipart.headers-inline",
       "type": "java.lang.Boolean",
       "description": "Defines whether the MIME-Multipart headers are part of the message body (true) or are set as Camel headers (false). Default is false.",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration",
       "defaultValue": false
     },
     {
-      "name": "camel.dataformat.mime-multipart.include-headers",
+      "name": "camel.dataformat.mimemultipart.include-headers",
       "type": "java.lang.String",
       "description": "A regex that defines which Camel headers are also included as MIME headers into the MIME multipart. This will only work if headersInline is set to true. Default is to include no headers",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.mime-multipart.multipart-sub-type",
+      "name": "camel.dataformat.mimemultipart.multipart-sub-type",
       "type": "java.lang.String",
       "description": "Specify the subtype of the MIME Multipart. Default is mixed.",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration",
       "defaultValue": "mixed"
     },
     {
-      "name": "camel.dataformat.mime-multipart.multipart-without-attachment",
+      "name": "camel.dataformat.mimemultipart.multipart-without-attachment",
       "type": "java.lang.Boolean",
       "description": "Defines whether a message without attachment is also marshaled into a MIME Multipart (with only one body part). Default is false.",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration",

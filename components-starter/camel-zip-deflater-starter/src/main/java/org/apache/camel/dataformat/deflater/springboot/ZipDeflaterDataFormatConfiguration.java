@@ -33,13 +33,13 @@ public class ZipDeflaterDataFormatConfiguration
             DataFormatConfigurationPropertiesCommon {
 
     /**
-     * Whether to enable auto configuration of the zipdeflater data format. This
+     * Whether to enable auto configuration of the zipDeflater data format. This
      * is enabled by default.
      */
     private Boolean enabled;
     /**
      * To specify a specific compression between 0-9. -1 is default compression,
-     * 0 is no compression, and 9 is best compression.
+     * 0 is no compression, and 9 is the best compression.
      */
     private Integer compressionLevel = -1;
 

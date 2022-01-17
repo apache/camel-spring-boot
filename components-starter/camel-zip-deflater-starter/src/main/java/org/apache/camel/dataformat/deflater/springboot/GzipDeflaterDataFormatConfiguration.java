@@ -32,7 +32,7 @@ public class GzipDeflaterDataFormatConfiguration
             DataFormatConfigurationPropertiesCommon {
 
     /**
-     * Whether to enable auto configuration of the gzipdeflater data format.
+     * Whether to enable auto configuration of the gzipDeflater data format.
      * This is enabled by default.
      */
     private Boolean enabled;

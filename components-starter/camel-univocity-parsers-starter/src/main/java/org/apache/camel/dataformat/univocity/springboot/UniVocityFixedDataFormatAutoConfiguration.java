@@ -18,7 +18,7 @@ package org.apache.camel.dataformat.univocity.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
-import org.apache.camel.dataformat.univocity.UniVocityFixedWidthDataFormat;
+import org.apache.camel.dataformat.univocity.UniVocityFixedDataFormat;
 import org.apache.camel.spi.DataFormat;
 import org.apache.camel.spi.DataFormatCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -44,24 +44,24 @@ import org.springframework.context.annotation.Lazy;
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({DataFormatConfigurationProperties.class,UniVocityFixedWidthDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.univocity-fixed"})
-public class UniVocityFixedWidthDataFormatAutoConfiguration {
+@EnableConfigurationProperties({DataFormatConfigurationProperties.class,UniVocityFixedDataFormatConfiguration.class})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.univocityfixed"})
+public class UniVocityFixedDataFormatAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private UniVocityFixedWidthDataFormatConfiguration configuration;
+    private UniVocityFixedDataFormatConfiguration configuration;
 
-    public UniVocityFixedWidthDataFormatAutoConfiguration(
+    public UniVocityFixedDataFormatAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
     }
 
     @Lazy
     @Bean
-    public DataFormatCustomizer configureUniVocityFixedWidthDataFormatFactory() {
+    public DataFormatCustomizer configureUniVocityFixedDataFormatFactory() {
         return new DataFormatCustomizer() {
             @Override
             public void configure(String name, DataFormat target) {
@@ -72,8 +72,8 @@ public class UniVocityFixedWidthDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.univocity-fixed.customizer")
-                    && target instanceof UniVocityFixedWidthDataFormat;
+                        "camel.dataformat.univocityfixed.customizer")
+                    && target instanceof UniVocityFixedDataFormat;
             }
         };
     }

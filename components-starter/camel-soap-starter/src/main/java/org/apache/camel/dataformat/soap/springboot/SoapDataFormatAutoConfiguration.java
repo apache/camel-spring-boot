@@ -18,7 +18,7 @@ package org.apache.camel.dataformat.soap.springboot;
 
 import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
-import org.apache.camel.dataformat.soap.SoapJaxbDataFormat;
+import org.apache.camel.dataformat.soap.SoapDataFormat;
 import org.apache.camel.spi.DataFormat;
 import org.apache.camel.spi.DataFormatCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -44,24 +44,24 @@ import org.springframework.context.annotation.Lazy;
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({DataFormatConfigurationProperties.class,SoapJaxbDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.soapjaxb"})
-public class SoapJaxbDataFormatAutoConfiguration {
+@EnableConfigurationProperties({DataFormatConfigurationProperties.class,SoapDataFormatConfiguration.class})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.soap"})
+public class SoapDataFormatAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private SoapJaxbDataFormatConfiguration configuration;
+    private SoapDataFormatConfiguration configuration;
 
-    public SoapJaxbDataFormatAutoConfiguration(
+    public SoapDataFormatAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
     }
 
     @Lazy
     @Bean
-    public DataFormatCustomizer configureSoapJaxbDataFormatFactory() {
+    public DataFormatCustomizer configureSoapDataFormatFactory() {
         return new DataFormatCustomizer() {
             @Override
             public void configure(String name, DataFormat target) {
@@ -72,8 +72,8 @@ public class SoapJaxbDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.soapjaxb.customizer")
-                    && target instanceof SoapJaxbDataFormat;
+                        "camel.dataformat.soap.customizer")
+                    && target instanceof SoapDataFormat;
             }
         };
     }

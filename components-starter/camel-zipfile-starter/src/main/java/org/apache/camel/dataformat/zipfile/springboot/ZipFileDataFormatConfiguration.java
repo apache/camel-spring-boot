@@ -32,7 +32,7 @@ public class ZipFileDataFormatConfiguration
             DataFormatConfigurationPropertiesCommon {
 
     /**
-     * Whether to enable auto configuration of the zipfile data format. This is
+     * Whether to enable auto configuration of the zipFile data format. This is
      * enabled by default.
      */
     private Boolean enabled;

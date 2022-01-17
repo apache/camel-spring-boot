@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,MimeMultipartDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.mime-multipart"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.mimemultipart"})
 public class MimeMultipartDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class MimeMultipartDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.mime-multipart.customizer")
+                        "camel.dataformat.mimemultipart.customizer")
                     && target instanceof MimeMultipartDataFormat;
             }
         };

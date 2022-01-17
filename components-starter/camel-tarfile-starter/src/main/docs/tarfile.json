@@ -28,7 +28,7 @@
     {
       "name": "camel.dataformat.tarfile.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the tarfile data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the tarFile data format. This is enabled by default.",
       "sourceType": "org.apache.camel.dataformat.tarfile.springboot.TarFileDataFormatConfiguration"
     },
     {

@@ -67,7 +67,7 @@
     {
       "name": "camel.dataformat.jacksonxml.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the jacksonxml data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the jacksonXml data format. This is enabled by default.",
       "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
     },
     {

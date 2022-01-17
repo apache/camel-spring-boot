@@ -32,13 +32,13 @@
     {
       "name": "camel.dataformat.gzipdeflater.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the gzipdeflater data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the gzipDeflater data format. This is enabled by default.",
       "sourceType": "org.apache.camel.dataformat.deflater.springboot.GzipDeflaterDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.zipdeflater.compression-level",
       "type": "java.lang.Integer",
-      "description": "To specify a specific compression between 0-9. -1 is default compression, 0 is no compression, and 9 is best compression.",
+      "description": "To specify a specific compression between 0-9. -1 is default compression, 0 is no compression, and 9 is the best compression.",
       "sourceType": "org.apache.camel.dataformat.deflater.springboot.ZipDeflaterDataFormatConfiguration",
       "defaultValue": -1
     },
@@ -50,7 +50,7 @@
     {
       "name": "camel.dataformat.zipdeflater.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the zipdeflater data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the zipDeflater data format. This is enabled by default.",
       "sourceType": "org.apache.camel.dataformat.deflater.springboot.ZipDeflaterDataFormatConfiguration"
     }
   ],

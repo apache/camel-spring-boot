@@ -23,12 +23,12 @@
       "sourceMethod": "getCustomizer()"
     },
     {
-      "name": "camel.dataformat.securexml",
+      "name": "camel.dataformat.xmlsecurity",
       "type": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.securexml.customizer",
+      "name": "camel.dataformat.xmlsecurity.customizer",
       "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
       "sourceMethod": "getCustomizer()"
@@ -364,89 +364,89 @@
       "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlVerifierComponentConfiguration"
     },
     {
-      "name": "camel.dataformat.securexml.add-key-value-for-encrypted-key",
+      "name": "camel.dataformat.xmlsecurity.add-key-value-for-encrypted-key",
       "type": "java.lang.Boolean",
       "description": "Whether to add the public key used to encrypt the session key as a KeyValue in the EncryptedKey structure or not.",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
       "defaultValue": true
     },
     {
-      "name": "camel.dataformat.securexml.customizer.enabled",
+      "name": "camel.dataformat.xmlsecurity.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
-      "name": "camel.dataformat.securexml.digest-algorithm",
+      "name": "camel.dataformat.xmlsecurity.digest-algorithm",
       "type": "java.lang.String",
       "description": "The digest algorithm to use with the RSA OAEP algorithm. The available choices are: XMLCipher.SHA1 XMLCipher.SHA256 XMLCipher.SHA512 The default value is XMLCipher.SHA1",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
       "defaultValue": "SHA1"
     },
     {
-      "name": "camel.dataformat.securexml.enabled",
+      "name": "camel.dataformat.xmlsecurity.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the secureXML data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the xmlSecurity data format. This is enabled by default.",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.securexml.key-cipher-algorithm",
+      "name": "camel.dataformat.xmlsecurity.key-cipher-algorithm",
       "type": "java.lang.String",
       "description": "The cipher algorithm to be used for encryption\/decryption of the asymmetric key. The available choices are: XMLCipher.RSA_v1dot5 XMLCipher.RSA_OAEP XMLCipher.RSA_OAEP_11 The default value is XMLCipher.RSA_OAEP",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
       "defaultValue": "RSA_OAEP"
     },
     {
-      "name": "camel.dataformat.securexml.key-or-trust-store-parameters-ref",
+      "name": "camel.dataformat.xmlsecurity.key-or-trust-store-parameters-ref",
       "type": "java.lang.String",
       "description": "Refers to a KeyStore instance to lookup in the registry, which is used for configuration options for creating and loading a KeyStore instance that represents the sender's trustStore or recipient's keyStore.",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.securexml.key-password",
+      "name": "camel.dataformat.xmlsecurity.key-password",
       "type": "java.lang.String",
       "description": "The password to be used for retrieving the private key from the KeyStore. This key is used for asymmetric decryption.",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.securexml.mgf-algorithm",
+      "name": "camel.dataformat.xmlsecurity.mgf-algorithm",
       "type": "java.lang.String",
       "description": "The MGF Algorithm to use with the RSA OAEP algorithm. The available choices are: EncryptionConstants.MGF1_SHA1 EncryptionConstants.MGF1_SHA256 EncryptionConstants.MGF1_SHA512 The default value is EncryptionConstants.MGF1_SHA1",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
       "defaultValue": "MGF1_SHA1"
     },
     {
-      "name": "camel.dataformat.securexml.pass-phrase",
+      "name": "camel.dataformat.xmlsecurity.pass-phrase",
       "type": "java.lang.String",
       "description": "A String used as passPhrase to encrypt\/decrypt content. The passPhrase has to be provided. The passPhrase needs to be put together in conjunction with the appropriate encryption algorithm. For example using TRIPLEDES the passPhase can be a Only another 24 Byte key",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.securexml.pass-phrase-byte",
+      "name": "camel.dataformat.xmlsecurity.pass-phrase-byte",
       "type": "java.lang.Byte[]",
       "description": "A byte used as passPhrase to encrypt\/decrypt content. The passPhrase has to be provided. The passPhrase needs to be put together in conjunction with the appropriate encryption algorithm. For example using TRIPLEDES the passPhase can be a Only another 24 Byte key",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.securexml.recipient-key-alias",
+      "name": "camel.dataformat.xmlsecurity.recipient-key-alias",
       "type": "java.lang.String",
       "description": "The key alias to be used when retrieving the recipient's public or private key from a KeyStore when performing asymmetric key encryption or decryption.",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.securexml.secure-tag",
+      "name": "camel.dataformat.xmlsecurity.secure-tag",
       "type": "java.lang.String",
       "description": "The XPath reference to the XML Element selected for encryption\/decryption. If no tag is specified, the entire payload is encrypted\/decrypted.",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.securexml.secure-tag-contents",
+      "name": "camel.dataformat.xmlsecurity.secure-tag-contents",
       "type": "java.lang.Boolean",
       "description": "A boolean value to specify whether the XML Element is to be encrypted or the contents of the XML Element false = Element Level true = Element Content Level",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
       "defaultValue": false
     },
     {
-      "name": "camel.dataformat.securexml.xml-cipher-algorithm",
+      "name": "camel.dataformat.xmlsecurity.xml-cipher-algorithm",
       "type": "java.lang.String",
       "description": "The cipher algorithm to be used for encryption\/decryption of the XML message content. The available choices are: XMLCipher.TRIPLEDES XMLCipher.AES_128 XMLCipher.AES_128_GCM XMLCipher.AES_192 XMLCipher.AES_192_GCM XMLCipher.AES_256 XMLCipher.AES_256_GCM XMLCipher.SEED_128 XMLCipher.CAMELLIA_128 XMLCipher.CAMELLIA_192 XMLCipher.CAMELLIA_256 The default value is XMLCipher.AES_256_GCM",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",

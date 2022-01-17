@@ -32,7 +32,7 @@ public class TarFileDataFormatConfiguration
             DataFormatConfigurationPropertiesCommon {
 
     /**
-     * Whether to enable auto configuration of the tarfile data format. This is
+     * Whether to enable auto configuration of the tarFile data format. This is
      * enabled by default.
      */
     private Boolean enabled;

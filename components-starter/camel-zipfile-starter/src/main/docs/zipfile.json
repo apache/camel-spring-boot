@@ -28,7 +28,7 @@
     {
       "name": "camel.dataformat.zipfile.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the zipfile data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the zipFile data format. This is enabled by default.",
       "sourceType": "org.apache.camel.dataformat.zipfile.springboot.ZipFileDataFormatConfiguration"
     },
     {
