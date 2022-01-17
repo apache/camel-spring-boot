@@ -64,9 +64,9 @@ public class ZooKeeperClusterServiceTest {
                         assertThat(context).hasSingleBean(CamelClusterService.class);
 
                         final CamelContext camelContext = context.getBean(CamelContext.class);
-                        final CamelClusterService clusterService = camelContext.hasService(CamelClusterService.class);
-
+                        final CamelClusterService clusterService = context.getBean(CamelClusterService.class);
                         assertThat(clusterService).isNotNull();
+                        clusterService.start();
                         assertThat(clusterService).isInstanceOf(ZooKeeperClusterService.class);
                     }
                 );

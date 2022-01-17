@@ -83,10 +83,11 @@ public class ConsulServiceRegistryIT {
                     assertThat(context).hasSingleBean(ServiceRegistry.class);
 
                     final CamelContext camelContext =  context.getBean(CamelContext.class);
-                    final ServiceRegistry serviceRegistry = camelContext.hasService(ServiceRegistry.class);
+                    final ServiceRegistry serviceRegistry = context.getBean(ServiceRegistry.class);
+                    
 
                     assertThat(serviceRegistry).isNotNull();
-
+                    serviceRegistry.start();
                     serviceRegistry.register(
                         DefaultServiceDefinition.builder()
                             .withHost(SERVICE_HOST)
