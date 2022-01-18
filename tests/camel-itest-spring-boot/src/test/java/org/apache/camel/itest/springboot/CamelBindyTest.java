@@ -40,9 +40,9 @@ public class CamelBindyTest extends AbstractSpringBootTestSupport {
 
     @Test
     public void componentTests() throws Exception {
-        this.runDataformatTest(config, "bindy-csv");
-        this.runDataformatTest(config, "bindy-fixed");
-        this.runDataformatTest(config, "bindy-kvp");
+        this.runDataformatTest(config, "bindyCsv");
+        this.runDataformatTest(config, "bindyFixed");
+        this.runDataformatTest(config, "bindyKvp");
         this.runModuleUnitTestsIfEnabled(config);
     }
 

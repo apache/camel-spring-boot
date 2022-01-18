@@ -33,8 +33,8 @@ public class BindyCsvDataFormatConfiguration
             DataFormatConfigurationPropertiesCommon {
 
     /**
-     * Whether to enable auto configuration of the bindy-csv data format. This
-     * is enabled by default.
+     * Whether to enable auto configuration of the bindyCsv data format. This is
+     * enabled by default.
      */
     private Boolean enabled;
     /**

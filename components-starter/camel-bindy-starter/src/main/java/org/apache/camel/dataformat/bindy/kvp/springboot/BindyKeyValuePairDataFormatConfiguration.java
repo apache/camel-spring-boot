@@ -33,8 +33,8 @@ public class BindyKeyValuePairDataFormatConfiguration
             DataFormatConfigurationPropertiesCommon {
 
     /**
-     * Whether to enable auto configuration of the bindy-kvp data format. This
-     * is enabled by default.
+     * Whether to enable auto configuration of the bindyKvp data format. This is
+     * enabled by default.
      */
     private Boolean enabled;
     /**

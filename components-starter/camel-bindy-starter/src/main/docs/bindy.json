@@ -56,7 +56,7 @@
     {
       "name": "camel.dataformat.bindy-csv.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the bindy-csv data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the bindyCsv data format. This is enabled by default.",
       "sourceType": "org.apache.camel.dataformat.bindy.csv.springboot.BindyCsvDataFormatConfiguration"
     },
     {
@@ -99,7 +99,7 @@
     {
       "name": "camel.dataformat.bindy-fixed.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the bindy-fixed data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the bindyFixed data format. This is enabled by default.",
       "sourceType": "org.apache.camel.dataformat.bindy.fixed.springboot.BindyFixedLengthDataFormatConfiguration"
     },
     {
@@ -142,7 +142,7 @@
     {
       "name": "camel.dataformat.bindy-kvp.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the bindy-kvp data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the bindyKvp data format. This is enabled by default.",
       "sourceType": "org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration"
     },
     {

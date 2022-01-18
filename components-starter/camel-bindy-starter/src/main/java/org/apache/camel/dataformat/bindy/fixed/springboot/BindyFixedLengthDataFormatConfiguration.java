@@ -33,7 +33,7 @@ public class BindyFixedLengthDataFormatConfiguration
             DataFormatConfigurationPropertiesCommon {
 
     /**
-     * Whether to enable auto configuration of the bindy-fixed data format. This
+     * Whether to enable auto configuration of the bindyFixed data format. This
      * is enabled by default.
      */
     private Boolean enabled;

@@ -74,7 +74,7 @@ public class SpringBootRuntimeProviderTest {
         assertNotNull(names);
         assertFalse(names.isEmpty());
 
-        assertTrue(names.contains("bindy-csv"));
+        assertTrue(names.contains("bindyCsv"));
         assertTrue(names.contains("zipdeflater"));
         assertTrue(names.contains("zipfile"));
     }
@@ -114,7 +114,7 @@ public class SpringBootRuntimeProviderTest {
 
     @Test
     public void testDataFormatArtifactId() throws Exception {
-        String json = catalog.dataFormatJSonSchema("bindy-csv");
+        String json = catalog.dataFormatJSonSchema("bindyCsv");
 
         assertNotNull(json);
         assertTrue(json.contains("camel-bindy-starter"));

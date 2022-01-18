@@ -73,6 +73,8 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
+import static org.apache.camel.tooling.util.Strings.camelCaseToDash;
+
 /**
  * Generate Spring Boot auto configuration files for Camel components and data
  * formats.
@@ -678,7 +680,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         }
         javaClass.getJavaDoc().setText(doc);
 
-        String prefix = "camel.component." + (overrideComponentName != null ? overrideComponentName : model.getScheme());
+        String prefix = "camel.component." + camelCaseToDash(overrideComponentName != null ? overrideComponentName : model.getScheme());
         // make sure prefix is in lower case
         prefix = prefix.toLowerCase(Locale.US);
         javaClass.addAnnotation(Generated.class.getName()).setStringValue("value", SpringBootAutoConfigurationMojo.class.getName());
@@ -1054,7 +1056,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         }
         javaClass.getJavaDoc().setFullText(doc);
 
-        String prefix = "camel.dataformat." + (overrideDataFormatName != null ? overrideDataFormatName : model.getName());
+        String prefix = "camel.dataformat." + camelCaseToDash(overrideDataFormatName != null ? overrideDataFormatName : model.getName());
         // make sure prefix is in lower case
         prefix = prefix.toLowerCase(Locale.US);
         javaClass.addAnnotation(Generated.class).setStringValue("value", SpringBootAutoConfigurationMojo.class.getName());
@@ -1158,7 +1160,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         }
         javaClass.getJavaDoc().setFullText(doc);
 
-        String prefix = "camel.language." + (overrideLanguageName != null ? overrideLanguageName : model.getName());
+        String prefix = "camel.language." + (camelCaseToDash(overrideLanguageName != null ? overrideLanguageName : model.getName()));
         // make sure prefix is in lower case
         prefix = prefix.toLowerCase(Locale.US);
         javaClass.addAnnotation(Generated.class).setStringValue("value", SpringBootAutoConfigurationMojo.class.getName());
@@ -1268,7 +1270,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
 
         final String name = model.getJavaType().substring(model.getJavaType().lastIndexOf(".") + 1).replace("Component", "ComponentAutoConfiguration");
         final String configurationName = name.replace("ComponentAutoConfiguration", "ComponentConfiguration");
-        final String componentName = (overrideName != null ? overrideName : model.getScheme()).toLowerCase(Locale.US);
+        final String componentName = camelCaseToDash(overrideName != null ? overrideName : model.getScheme()).toLowerCase(Locale.US);
         final Class<?> configClass = generateDummyClass(packageName + "." + configurationName);
         JavaClass javaClass = new JavaClass(getProjectClassLoader());
 
@@ -1478,7 +1480,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
 
         final String name = model.getJavaType().substring(model.getJavaType().lastIndexOf(".") + 1).replace("DataFormat", "DataFormatAutoConfiguration");
         final String configurationName = name.replace("DataFormatAutoConfiguration", "DataFormatConfiguration");
-        final String dataformatName = (overrideName != null ? overrideName : model.getName()).toLowerCase(Locale.US);
+        final String dataformatName = camelCaseToDash(overrideName != null ? overrideName : model.getName()).toLowerCase(Locale.US);
         final Class<?> configClass = generateDummyClass(packageName + "." + configurationName);
         final JavaClass javaClass = new JavaClass(getProjectClassLoader());
 
@@ -1576,7 +1578,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
 
         final String name = model.getJavaType().substring(model.getJavaType().lastIndexOf(".") + 1).replace("Language", "LanguageAutoConfiguration");
         final String configurationName = name.replace("LanguageAutoConfiguration", "LanguageConfiguration");
-        final String languageName = (overrideName != null ? overrideName : model.getName()).toLowerCase(Locale.US);
+        final String languageName = camelCaseToDash(overrideName != null ? overrideName : model.getName()).toLowerCase(Locale.US);
         final Class<?> configClass = generateDummyClass(packageName + "." + configurationName);
         final JavaClass javaClass = new JavaClass(getProjectClassLoader());
 
