@@ -74,7 +74,7 @@
     {
       "name": "camel.dataformat.avro-jackson.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the avro-jackson data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the avroJackson data format. This is enabled by default.",
       "sourceType": "org.apache.camel.component.jackson.avro.springboot.JacksonAvroDataFormatConfiguration"
     },
     {

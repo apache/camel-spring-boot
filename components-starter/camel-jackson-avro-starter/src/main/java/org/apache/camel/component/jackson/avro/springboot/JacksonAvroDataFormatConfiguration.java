@@ -32,8 +32,8 @@ public class JacksonAvroDataFormatConfiguration
             DataFormatConfigurationPropertiesCommon {
 
     /**
-     * Whether to enable auto configuration of the avro-jackson data format.
-     * This is enabled by default.
+     * Whether to enable auto configuration of the avroJackson data format. This
+     * is enabled by default.
      */
     private Boolean enabled;
     /**
