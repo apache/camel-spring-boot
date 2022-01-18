@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,TarFileDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.tarfile"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.tar-file"})
 public class TarFileDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class TarFileDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.tarfile.customizer")
+                        "camel.dataformat.tar-file.customizer")
                     && target instanceof TarFileDataFormat;
             }
         };

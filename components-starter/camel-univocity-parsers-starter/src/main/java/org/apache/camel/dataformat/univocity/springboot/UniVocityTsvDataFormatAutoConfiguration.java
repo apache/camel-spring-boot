@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,UniVocityTsvDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.univocitytsv"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.univocity-tsv"})
 public class UniVocityTsvDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class UniVocityTsvDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.univocitytsv.customizer")
+                        "camel.dataformat.univocity-tsv.customizer")
                     && target instanceof UniVocityTsvDataFormat;
             }
         };

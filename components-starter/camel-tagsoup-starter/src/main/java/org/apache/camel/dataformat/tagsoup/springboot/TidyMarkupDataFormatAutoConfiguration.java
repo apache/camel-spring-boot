@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,TidyMarkupDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.tidymarkup"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.tidy-markup"})
 public class TidyMarkupDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class TidyMarkupDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.tidymarkup.customizer")
+                        "camel.dataformat.tidy-markup.customizer")
                     && target instanceof TidyMarkupDataFormat;
             }
         };

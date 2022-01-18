@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,ZipFileDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.zipfile"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.zip-file"})
 public class ZipFileDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class ZipFileDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.zipfile.customizer")
+                        "camel.dataformat.zip-file.customizer")
                     && target instanceof ZipFileDataFormat;
             }
         };

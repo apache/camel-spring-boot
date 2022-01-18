@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,FhirJsonDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.fhirjson"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.fhir-json"})
 public class FhirJsonDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class FhirJsonDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.fhirjson.customizer")
+                        "camel.dataformat.fhir-json.customizer")
                     && target instanceof FhirJsonDataFormat;
             }
         };

@@ -1,12 +1,12 @@
 {
   "groups": [
     {
-      "name": "camel.dataformat.jsonapi",
+      "name": "camel.dataformat.json-api",
       "type": "org.apache.camel.component.jsonapi.springboot.JsonApiDataFormatConfiguration",
       "sourceType": "org.apache.camel.component.jsonapi.springboot.JsonApiDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.jsonapi.customizer",
+      "name": "camel.dataformat.json-api.customizer",
       "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.jsonapi.springboot.JsonApiDataFormatConfiguration",
       "sourceMethod": "getCustomizer()"
@@ -14,24 +14,24 @@
   ],
   "properties": [
     {
-      "name": "camel.dataformat.jsonapi.customizer.enabled",
+      "name": "camel.dataformat.json-api.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
-      "name": "camel.dataformat.jsonapi.data-format-types",
+      "name": "camel.dataformat.json-api.data-format-types",
       "type": "java.lang.Class<java.lang.Object>[]",
       "description": "The classes to take into account for the marshalling",
       "sourceType": "org.apache.camel.component.jsonapi.springboot.JsonApiDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.jsonapi.enabled",
+      "name": "camel.dataformat.json-api.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the jsonApi data format. This is enabled by default.",
       "sourceType": "org.apache.camel.component.jsonapi.springboot.JsonApiDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.jsonapi.main-format-type",
+      "name": "camel.dataformat.json-api.main-format-type",
       "type": "java.lang.Class<java.lang.Object>",
       "description": "The classes to take into account while unmarshalling",
       "sourceType": "org.apache.camel.component.jsonapi.springboot.JsonApiDataFormatConfiguration"

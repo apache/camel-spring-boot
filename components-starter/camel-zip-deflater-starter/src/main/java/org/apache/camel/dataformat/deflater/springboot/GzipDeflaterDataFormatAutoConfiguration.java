@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,GzipDeflaterDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.gzipdeflater"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.gzip-deflater"})
 public class GzipDeflaterDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class GzipDeflaterDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.gzipdeflater.customizer")
+                        "camel.dataformat.gzip-deflater.customizer")
                     && target instanceof GzipDeflaterDataFormat;
             }
         };

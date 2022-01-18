@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,UniVocityFixedDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.univocityfixed"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.univocity-fixed"})
 public class UniVocityFixedDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class UniVocityFixedDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.univocityfixed.customizer")
+                        "camel.dataformat.univocity-fixed.customizer")
                     && target instanceof UniVocityFixedDataFormat;
             }
         };

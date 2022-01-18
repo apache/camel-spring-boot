@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,FhirXmlDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.fhirxml"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.fhir-xml"})
 public class FhirXmlDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class FhirXmlDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.fhirxml.customizer")
+                        "camel.dataformat.fhir-xml.customizer")
                     && target instanceof FhirXmlDataFormat;
             }
         };

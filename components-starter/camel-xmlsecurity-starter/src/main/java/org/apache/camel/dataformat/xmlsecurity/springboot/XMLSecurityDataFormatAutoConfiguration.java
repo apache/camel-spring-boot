@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,XMLSecurityDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.xmlsecurity"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.xml-security"})
 public class XMLSecurityDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class XMLSecurityDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.xmlsecurity.customizer")
+                        "camel.dataformat.xml-security.customizer")
                     && target instanceof XMLSecurityDataFormat;
             }
         };
