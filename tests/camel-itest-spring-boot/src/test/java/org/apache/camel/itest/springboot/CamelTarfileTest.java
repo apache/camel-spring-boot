@@ -40,7 +40,7 @@ public class CamelTarfileTest extends AbstractSpringBootTestSupport {
 
     @Test
     public void componentTests() throws Exception {
-        this.runDataformatTest(config);
+        this.runDataformatTest(config, "tarFile");
         this.runModuleUnitTestsIfEnabled(config);
     }
 

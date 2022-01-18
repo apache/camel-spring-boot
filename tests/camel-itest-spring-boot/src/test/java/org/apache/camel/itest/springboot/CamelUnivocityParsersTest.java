@@ -40,9 +40,9 @@ public class CamelUnivocityParsersTest extends AbstractSpringBootTestSupport {
 
     @Test
     public void componentTests() throws Exception {
-        this.runDataformatTest(config, "univocity-csv");
-        this.runDataformatTest(config, "univocity-fixed");
-        this.runDataformatTest(config, "univocity-tsv");
+        this.runDataformatTest(config, "univocityCsv");
+        this.runDataformatTest(config, "univocityFixed");
+        this.runDataformatTest(config, "univocityTsv");
 
         this.runModuleUnitTestsIfEnabled(config);
     }

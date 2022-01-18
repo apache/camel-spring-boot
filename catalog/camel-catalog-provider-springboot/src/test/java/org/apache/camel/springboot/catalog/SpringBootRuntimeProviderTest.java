@@ -75,8 +75,8 @@ public class SpringBootRuntimeProviderTest {
         assertFalse(names.isEmpty());
 
         assertTrue(names.contains("bindyCsv"));
-        assertTrue(names.contains("zipdeflater"));
-        assertTrue(names.contains("zipfile"));
+        assertTrue(names.contains("zipDeflater"));
+        assertTrue(names.contains("zipFile"));
     }
 
     @Test
