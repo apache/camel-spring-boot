@@ -40,7 +40,7 @@ public class CamelJacksonxmlTest extends AbstractSpringBootTestSupport {
 
     @Test
     public void componentTests() throws Exception {
-        this.runDataformatTest(config);
+        this.runDataformatTest(config, "jacksonXml");
         this.runModuleUnitTestsIfEnabled(config);
     }
 

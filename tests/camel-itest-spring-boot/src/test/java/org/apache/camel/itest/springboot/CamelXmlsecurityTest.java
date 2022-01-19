@@ -40,7 +40,7 @@ public class CamelXmlsecurityTest extends AbstractSpringBootTestSupport {
 
     @Test
     public void componentTests() throws Exception {
-        this.runDataformatTest(config, "secureXML");
+        this.runDataformatTest(config, "xmlSecurity");
         this.runModuleUnitTestsIfEnabled(config);
     }
 
