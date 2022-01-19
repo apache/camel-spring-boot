@@ -40,7 +40,7 @@ public class CamelJacksonTest extends AbstractSpringBootTestSupport {
 
     @Test
     public void componentTests() throws Exception {
-        this.runDataformatTest(config, "json-jackson");
+        this.runDataformatTest(config, "jackson");
         this.runModuleUnitTestsIfEnabled(config);
     }
 

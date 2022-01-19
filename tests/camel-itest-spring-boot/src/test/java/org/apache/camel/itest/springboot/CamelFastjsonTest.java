@@ -40,7 +40,7 @@ public class CamelFastjsonTest extends AbstractSpringBootTestSupport {
 
     @Test
     public void componentTests() throws Exception {
-        this.runDataformatTest(config, "json-fastjson");
+        this.runDataformatTest(config, "fastjson");
         this.runModuleUnitTestsIfEnabled(config);
     }
 

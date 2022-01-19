@@ -40,7 +40,7 @@ public class CamelGsonTest extends AbstractSpringBootTestSupport {
 
     @Test
     public void componentTests() throws Exception {
-        this.runDataformatTest(config, "json-gson");
+        this.runDataformatTest(config, "gson");
         this.runModuleUnitTestsIfEnabled(config);
     }
 

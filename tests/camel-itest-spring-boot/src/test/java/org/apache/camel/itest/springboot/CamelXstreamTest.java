@@ -40,7 +40,7 @@ public class CamelXstreamTest extends AbstractSpringBootTestSupport {
 
     @Test
     public void componentTests() throws Exception {
-        this.runDataformatTest(config, "json-xstream");
+        this.runDataformatTest(config, "xstreamJson");
         this.runDataformatTest(config, "xstream");
 
         this.runModuleUnitTestsIfEnabled(config);
