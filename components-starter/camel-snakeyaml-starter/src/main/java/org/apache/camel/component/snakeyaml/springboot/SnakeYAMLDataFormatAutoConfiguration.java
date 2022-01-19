@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,SnakeYAMLDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.yaml-snakeyaml"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.snake-yaml"})
 public class SnakeYAMLDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class SnakeYAMLDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.yaml-snakeyaml.customizer")
+                        "camel.dataformat.snake-yaml.customizer")
                     && target instanceof SnakeYAMLDataFormat;
             }
         };
