@@ -32,7 +32,7 @@ public class JacksonProtobufDataFormatConfiguration
             DataFormatConfigurationPropertiesCommon {
 
     /**
-     * Whether to enable auto configuration of the protobuf-jackson data format.
+     * Whether to enable auto configuration of the protobufJackson data format.
      * This is enabled by default.
      */
     private Boolean enabled;

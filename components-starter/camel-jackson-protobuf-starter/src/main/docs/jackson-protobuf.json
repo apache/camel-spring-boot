@@ -74,7 +74,7 @@
     {
       "name": "camel.dataformat.protobuf-jackson.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the protobuf-jackson data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the protobufJackson data format. This is enabled by default.",
       "sourceType": "org.apache.camel.component.jackson.protobuf.springboot.JacksonProtobufDataFormatConfiguration"
     },
     {
