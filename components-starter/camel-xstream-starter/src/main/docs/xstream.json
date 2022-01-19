@@ -1,20 +1,20 @@
 {
   "groups": [
     {
-      "name": "camel.dataformat.json-xstream",
+      "name": "camel.dataformat.xstream",
+      "type": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xstream-json",
       "type": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration",
       "sourceType": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.json-xstream.customizer",
+      "name": "camel.dataformat.xstream-json.customizer",
       "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration",
       "sourceMethod": "getCustomizer()"
-    },
-    {
-      "name": "camel.dataformat.xstream",
-      "type": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration",
-      "sourceType": "org.apache.camel.dataformat.xstream.springboot.XStreamDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.xstream.customizer",
@@ -25,32 +25,32 @@
   ],
   "properties": [
     {
-      "name": "camel.dataformat.json-xstream.content-type-header",
+      "name": "camel.dataformat.xstream-json.content-type-header",
       "type": "java.lang.Boolean",
       "description": "Whether the data format should set the Content-Type header with the type from the data format. For example application\/xml for data formats marshalling to XML, or application\/json for data formats marshalling to JSON",
       "sourceType": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration",
       "defaultValue": true
     },
     {
-      "name": "camel.dataformat.json-xstream.customizer.enabled",
+      "name": "camel.dataformat.xstream-json.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
-      "name": "camel.dataformat.json-xstream.drop-root-node",
+      "name": "camel.dataformat.xstream-json.drop-root-node",
       "type": "java.lang.Boolean",
       "description": "Whether XStream will drop the root node in the generated JSon. You may want to enable this when using POJOs; as then the written object will include the class name as root node, which is often not intended to be written in the JSON output.",
       "sourceType": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration",
       "defaultValue": false
     },
     {
-      "name": "camel.dataformat.json-xstream.enabled",
+      "name": "camel.dataformat.xstream-json.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the json-xstream data format. This is enabled by default.",
+      "description": "Whether to enable auto configuration of the xstreamJson data format. This is enabled by default.",
       "sourceType": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.json-xstream.pretty-print",
+      "name": "camel.dataformat.xstream-json.pretty-print",
       "type": "java.lang.Boolean",
       "description": "To enable pretty printing output nicely formatted. Is by default false.",
       "sourceType": "org.apache.camel.dataformat.xstream.springboot.JsonDataFormatConfiguration",

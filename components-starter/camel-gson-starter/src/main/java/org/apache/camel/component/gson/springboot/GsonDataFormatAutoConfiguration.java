@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,GsonDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.json-gson"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.gson"})
 public class GsonDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class GsonDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.json-gson.customizer")
+                        "camel.dataformat.gson.customizer")
                     && target instanceof GsonDataFormat;
             }
         };

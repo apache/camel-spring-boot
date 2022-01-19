@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,FastjsonDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.json-fastjson"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.fastjson"})
 public class FastjsonDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class FastjsonDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.json-fastjson.customizer")
+                        "camel.dataformat.fastjson.customizer")
                     && target instanceof FastjsonDataFormat;
             }
         };

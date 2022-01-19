@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,JacksonDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.json-jackson"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.jackson"})
 public class JacksonDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class JacksonDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.json-jackson.customizer")
+                        "camel.dataformat.jackson.customizer")
                     && target instanceof JacksonDataFormat;
             }
         };

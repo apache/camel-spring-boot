@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,JsonDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.json-xstream"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.xstream-json"})
 public class JsonDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class JsonDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.json-xstream.customizer")
+                        "camel.dataformat.xstream-json.customizer")
                     && target instanceof JsonDataFormat;
             }
         };

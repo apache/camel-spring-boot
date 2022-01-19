@@ -1,7 +1,7 @@
 {
   "dataformat": {
     "kind": "dataformat",
-    "name": "json-gson",
+    "name": "gson",
     "title": "JSON Gson",
     "description": "Marshal POJOs to JSON and back using Gson",
     "deprecated": false,

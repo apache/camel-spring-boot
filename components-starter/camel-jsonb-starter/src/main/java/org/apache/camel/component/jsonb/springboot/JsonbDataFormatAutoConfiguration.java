@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({DataFormatConfigurationProperties.class,JsonbDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.json-jsonb"})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.jsonb"})
 public class JsonbDataFormatAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class JsonbDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.json-jsonb.customizer")
+                        "camel.dataformat.jsonb.customizer")
                     && target instanceof JsonbDataFormat;
             }
         };

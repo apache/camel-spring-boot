@@ -1,7 +1,7 @@
 {
   "dataformat": {
     "kind": "dataformat",
-    "name": "json-fastjson",
+    "name": "fastjson",
     "title": "JSON Fastjson",
     "description": "Marshal POJOs to JSON and back using Fastjson",
     "deprecated": false,
