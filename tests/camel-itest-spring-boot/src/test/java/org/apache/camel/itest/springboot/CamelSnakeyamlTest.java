@@ -40,7 +40,7 @@ public class CamelSnakeyamlTest extends AbstractSpringBootTestSupport {
 
     @Test
     public void componentTests() throws Exception {
-        this.runDataformatTest(config, "yaml-snakeyaml");
+        this.runDataformatTest(config, "snakeYaml");
 
         this.runModuleUnitTestsIfEnabled(config);
     }

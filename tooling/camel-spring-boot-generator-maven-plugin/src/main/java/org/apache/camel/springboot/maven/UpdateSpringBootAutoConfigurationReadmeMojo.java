@@ -118,36 +118,5 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
         }
     }
 
-    // TODO: later
-    private static String asComponentName(String componentName) {
-        if ("fastjson".equals(componentName)) {
-            return "json-fastjson";
-        } else if ("gson".equals(componentName)) {
-            return "json-gson";
-        } else if ("jackson".equals(componentName)) {
-            return "json-jackson";
-        } else if ("johnzon".equals(componentName)) {
-            return "json-johnzon";
-        } else if ("snakeyaml".equals(componentName)) {
-            return "yaml-snakeyaml";
-        } else if ("cassandraql".equals(componentName)) {
-            return "cql";
-        } else if ("josql".equals(componentName)) {
-            return "sql";
-        } else if ("juel".equals(componentName)) {
-            return "el";
-        } else if ("jsch".equals(componentName)) {
-            return "scp";
-        } else if ("printer".equals(componentName)) {
-            return "lpr";
-        } else if ("saxon".equals(componentName)) {
-            return "xquery";
-        } else if ("stringtemplate".equals(componentName)) {
-            return "string-template";
-        } else if ("tagsoup".equals(componentName)) {
-            return "tidyMarkup";
-        }
-        return componentName;
-    }
 
 }
