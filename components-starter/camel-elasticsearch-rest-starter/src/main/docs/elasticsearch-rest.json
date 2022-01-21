@@ -48,7 +48,7 @@
     {
       "name": "camel.component.elasticsearch-rest.enable-sniffer",
       "type": "java.lang.Boolean",
-      "description": "Enable automatically discover nodes from a running Elasticsearch cluster",
+      "description": "Enable automatically discover nodes from a running Elasticsearch cluster. If this option is used in conjunction with Spring Boot then it's managed by the Spring Boot configuration (see: Disable Sniffer in Spring Boot).",
       "sourceType": "org.apache.camel.component.elasticsearch.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": false
     },

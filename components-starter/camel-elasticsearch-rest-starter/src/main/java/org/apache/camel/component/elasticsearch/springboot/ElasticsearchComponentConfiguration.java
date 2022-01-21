@@ -82,7 +82,9 @@ public class ElasticsearchComponentConfiguration
      */
     private RestClient client;
     /**
-     * Enable automatically discover nodes from a running Elasticsearch cluster
+     * Enable automatically discover nodes from a running Elasticsearch cluster.
+     * If this option is used in conjunction with Spring Boot then it's managed
+     * by the Spring Boot configuration (see: Disable Sniffer in Spring Boot).
      */
     private Boolean enableSniffer = false;
     /**

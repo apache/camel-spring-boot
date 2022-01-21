@@ -22,9 +22,9 @@ import javax.annotation.Generated;
 import org.apache.camel.component.kafka.KafkaClientFactory;
 import org.apache.camel.component.kafka.KafkaComponent;
 import org.apache.camel.component.kafka.KafkaConfiguration;
-import org.apache.camel.component.kafka.KafkaManualCommitFactory;
 import org.apache.camel.component.kafka.PollExceptionStrategy;
 import org.apache.camel.component.kafka.PollOnError;
+import org.apache.camel.component.kafka.consumer.KafkaManualCommitFactory;
 import org.apache.camel.component.kafka.consumer.support.KafkaConsumerResumeStrategy;
 import org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer;
 import org.apache.camel.component.kafka.serde.KafkaHeaderSerializer;
@@ -329,7 +329,7 @@ public class KafkaComponentConfiguration
      * plugin a custom factory to create custom KafkaManualCommit instances in
      * case special logic is needed when doing manual commits that deviates from
      * the default implementation that comes out of the box. The option is a
-     * org.apache.camel.component.kafka.KafkaManualCommitFactory type.
+     * org.apache.camel.component.kafka.consumer.KafkaManualCommitFactory type.
      */
     private KafkaManualCommitFactory kafkaManualCommitFactory;
     /**

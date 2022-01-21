@@ -239,8 +239,8 @@
     },
     {
       "name": "camel.component.kafka.kafka-manual-commit-factory",
-      "type": "org.apache.camel.component.kafka.KafkaManualCommitFactory",
-      "description": "Factory to use for creating KafkaManualCommit instances. This allows to plugin a custom factory to create custom KafkaManualCommit instances in case special logic is needed when doing manual commits that deviates from the default implementation that comes out of the box. The option is a org.apache.camel.component.kafka.KafkaManualCommitFactory type.",
+      "type": "org.apache.camel.component.kafka.consumer.KafkaManualCommitFactory",
+      "description": "Factory to use for creating KafkaManualCommit instances. This allows to plugin a custom factory to create custom KafkaManualCommit instances in case special logic is needed when doing manual commits that deviates from the default implementation that comes out of the box. The option is a org.apache.camel.component.kafka.consumer.KafkaManualCommitFactory type.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
     },
     {
