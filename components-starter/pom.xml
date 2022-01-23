@@ -174,6 +174,7 @@
     <module>camel-cmis-starter</module>
     <module>camel-coap-starter</module>
     <module>camel-cometd-starter</module>
+    <module>camel-console-starter</module>
     <module>camel-consul-starter</module>
     <module>camel-controlbus-starter</module>
     <module>camel-corda-starter</module>
