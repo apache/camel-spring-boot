@@ -47,6 +47,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -125,7 +126,7 @@ public class SpringdocAutoConfiguration {
         final Info info = new Info();
 
         final RestConfiguration rc = camelContext.getRestConfiguration();
-        initOpenApi(bc, info, rc.getApiProperties());
+        initOpenApi(bc, info, Optional.ofNullable(rc.getApiProperties()).orElseGet(HashMap::new));
 
         final OasDocument openApi = reader.read(camelContext, rests, bc, null, camelContext.getClassResolver());
         if (!rc.isApiVendorExtension()) {
