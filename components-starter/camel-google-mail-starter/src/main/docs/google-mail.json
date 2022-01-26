@@ -80,9 +80,21 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.google-mail-stream.delegate",
+      "type": "java.lang.String",
+      "description": "Delegate for wide-domain service account",
+      "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration"
+    },
+    {
       "name": "camel.component.google-mail-stream.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the google-mail-stream component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-mail-stream.key-resource",
+      "type": "java.lang.String",
+      "description": "Sets .json file with credentials for Service account",
       "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration"
     },
     {
@@ -116,6 +128,12 @@
       "name": "camel.component.google-mail-stream.refresh-token",
       "type": "java.lang.String",
       "description": "OAuth 2 refresh token. Using this, the Google Calendar component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived.",
+      "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-mail-stream.scopes",
+      "type": "java.util.List<java.lang.String>",
+      "description": "GMail scopes",
       "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration"
     },
     {
@@ -206,7 +224,7 @@
     },
     {
       "name": "camel.component.google-mail.scopes",
-      "type": "java.util.List<java.lang.String>",
+      "type": "java.util.Collection<java.lang.String>",
       "description": "GMail scopes",
       "sourceType": "org.apache.camel.component.google.mail.springboot.GoogleMailComponentConfiguration"
     }

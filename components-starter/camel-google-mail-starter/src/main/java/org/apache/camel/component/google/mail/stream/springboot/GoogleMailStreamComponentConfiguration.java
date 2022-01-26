@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.google.mail.stream.springboot;
 
+import java.util.List;
 import javax.annotation.Generated;
 import org.apache.camel.component.google.mail.GoogleMailClientFactory;
 import org.apache.camel.component.google.mail.stream.GoogleMailStreamConfiguration;
@@ -56,6 +57,10 @@ public class GoogleMailStreamComponentConfiguration
      */
     private String clientId;
     /**
+     * Delegate for wide-domain service account
+     */
+    private String delegate;
+    /**
      * Comma separated list of labels to take into account
      */
     private String labels;
@@ -71,6 +76,10 @@ public class GoogleMailStreamComponentConfiguration
      * The query to execute on gmail box
      */
     private String query = "is:unread";
+    /**
+     * GMail scopes
+     */
+    private List<String> scopes;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -100,6 +109,10 @@ public class GoogleMailStreamComponentConfiguration
      */
     private String clientSecret;
     /**
+     * Sets .json file with credentials for Service account
+     */
+    private String keyResource;
+    /**
      * OAuth 2 refresh token. Using this, the Google Calendar component can
      * obtain a new accessToken whenever the current one expires - a necessity
      * if the application is long-lived.
@@ -128,6 +141,14 @@ public class GoogleMailStreamComponentConfiguration
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
+    }
+
+    public String getDelegate() {
+        return delegate;
+    }
+
+    public void setDelegate(String delegate) {
+        this.delegate = delegate;
     }
 
     public String getLabels() {
@@ -160,6 +181,14 @@ public class GoogleMailStreamComponentConfiguration
 
     public void setQuery(String query) {
         this.query = query;
+    }
+
+    public List<String> getScopes() {
+        return scopes;
+    }
+
+    public void setScopes(List<String> scopes) {
+        this.scopes = scopes;
     }
 
     public Boolean getAutowiredEnabled() {
@@ -200,6 +229,14 @@ public class GoogleMailStreamComponentConfiguration
 
     public void setClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
+    }
+
+    public String getKeyResource() {
+        return keyResource;
+    }
+
+    public void setKeyResource(String keyResource) {
+        this.keyResource = keyResource;
     }
 
     public String getRefreshToken() {

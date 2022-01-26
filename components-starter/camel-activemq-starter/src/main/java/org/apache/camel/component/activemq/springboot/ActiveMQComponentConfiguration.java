@@ -301,6 +301,17 @@ public class ActiveMQComponentConfiguration
      */
     private Boolean exposeListenerSession = false;
     /**
+     * The consumer type of the reply consumer (when doing request/reply), which
+     * can be one of: Simple, Default, or Custom. The consumer type determines
+     * which Spring JMS listener to use. Default will use
+     * org.springframework.jms.listener.DefaultMessageListenerContainer, Simple
+     * will use org.springframework.jms.listener.SimpleMessageListenerContainer.
+     * When Custom is specified, the MessageListenerContainerFactory defined by
+     * the messageListenerContainerFactory option will determine what
+     * org.springframework.jms.listener.AbstractMessageListenerContainer to use.
+     */
+    private ConsumerType replyToConsumerType = ConsumerType.Default;
+    /**
      * Whether a JMS consumer is allowed to send a reply message to the same
      * destination that the consumer is using to consume from. This prevents an
      * endless loop by consuming and sending back the same message to itself.
@@ -1056,6 +1067,14 @@ public class ActiveMQComponentConfiguration
 
     public void setExposeListenerSession(Boolean exposeListenerSession) {
         this.exposeListenerSession = exposeListenerSession;
+    }
+
+    public ConsumerType getReplyToConsumerType() {
+        return replyToConsumerType;
+    }
+
+    public void setReplyToConsumerType(ConsumerType replyToConsumerType) {
+        this.replyToConsumerType = replyToConsumerType;
     }
 
     public Boolean getReplyToSameDestinationAllowed() {

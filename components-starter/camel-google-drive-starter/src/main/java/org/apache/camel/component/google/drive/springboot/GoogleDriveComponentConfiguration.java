@@ -53,6 +53,10 @@ public class GoogleDriveComponentConfiguration
      */
     private GoogleDriveConfiguration configuration;
     /**
+     * Delegate for wide-domain service account
+     */
+    private String delegate;
+    /**
      * Specifies the level of permissions you want a drive application to have
      * to a user account. See https://developers.google.com/drive/web/scopes for
      * more info.
@@ -103,6 +107,10 @@ public class GoogleDriveComponentConfiguration
      */
     private String clientSecret;
     /**
+     * Sets .json file with credentials for Service account
+     */
+    private String keyResource;
+    /**
      * OAuth 2 refresh token. Using this, the Google Calendar component can
      * obtain a new accessToken whenever the current one expires - a necessity
      * if the application is long-lived.
@@ -131,6 +139,14 @@ public class GoogleDriveComponentConfiguration
 
     public void setConfiguration(GoogleDriveConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getDelegate() {
+        return delegate;
+    }
+
+    public void setDelegate(String delegate) {
+        this.delegate = delegate;
     }
 
     public List<String> getScopes() {
@@ -187,6 +203,14 @@ public class GoogleDriveComponentConfiguration
 
     public void setClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
+    }
+
+    public String getKeyResource() {
+        return keyResource;
+    }
+
+    public void setKeyResource(String keyResource) {
+        this.keyResource = keyResource;
     }
 
     public String getRefreshToken() {

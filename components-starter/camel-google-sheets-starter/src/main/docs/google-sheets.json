@@ -80,6 +80,12 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.google-sheets-stream.delegate",
+      "type": "java.lang.String",
+      "description": "Delegate for wide-domain service account",
+      "sourceType": "org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConfiguration"
+    },
+    {
       "name": "camel.component.google-sheets-stream.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the google-sheets-stream component. This is enabled by default.",
@@ -91,6 +97,12 @@
       "description": "True if grid data should be returned.",
       "sourceType": "org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.google-sheets-stream.key-resource",
+      "type": "java.lang.String",
+      "description": "Sets .json file with credentials for Service account",
+      "sourceType": "org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConfiguration"
     },
     {
       "name": "camel.component.google-sheets-stream.major-dimension",
@@ -193,9 +205,21 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.google-sheets.delegate",
+      "type": "java.lang.String",
+      "description": "Delegate for wide-domain service account",
+      "sourceType": "org.apache.camel.component.google.sheets.springboot.GoogleSheetsComponentConfiguration"
+    },
+    {
       "name": "camel.component.google-sheets.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the google-sheets component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.google.sheets.springboot.GoogleSheetsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-sheets.key-resource",
+      "type": "java.lang.String",
+      "description": "Sets .json file with credentials for Service account",
       "sourceType": "org.apache.camel.component.google.sheets.springboot.GoogleSheetsComponentConfiguration"
     },
     {
@@ -209,6 +233,12 @@
       "name": "camel.component.google-sheets.refresh-token",
       "type": "java.lang.String",
       "description": "OAuth 2 refresh token. Using this, the Google Sheets component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived.",
+      "sourceType": "org.apache.camel.component.google.sheets.springboot.GoogleSheetsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-sheets.scopes",
+      "type": "java.util.Collection<java.lang.String>",
+      "description": "Sheets scopes",
       "sourceType": "org.apache.camel.component.google.sheets.springboot.GoogleSheetsComponentConfiguration"
     },
     {

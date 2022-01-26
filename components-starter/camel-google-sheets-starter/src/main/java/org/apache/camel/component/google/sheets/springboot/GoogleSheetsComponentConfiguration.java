@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.google.sheets.springboot;
 
+import java.util.Collection;
 import javax.annotation.Generated;
 import org.apache.camel.component.google.sheets.GoogleSheetsClientFactory;
 import org.apache.camel.component.google.sheets.GoogleSheetsConfiguration;
@@ -51,6 +52,14 @@ public class GoogleSheetsComponentConfiguration
      * org.apache.camel.component.google.sheets.GoogleSheetsConfiguration type.
      */
     private GoogleSheetsConfiguration configuration;
+    /**
+     * Delegate for wide-domain service account
+     */
+    private String delegate;
+    /**
+     * Sheets scopes
+     */
+    private Collection<String> scopes;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -103,6 +112,10 @@ public class GoogleSheetsComponentConfiguration
      */
     private String clientSecret;
     /**
+     * Sets .json file with credentials for Service account
+     */
+    private String keyResource;
+    /**
      * OAuth 2 refresh token. Using this, the Google Sheets component can obtain
      * a new accessToken whenever the current one expires - a necessity if the
      * application is long-lived.
@@ -131,6 +144,22 @@ public class GoogleSheetsComponentConfiguration
 
     public void setConfiguration(GoogleSheetsConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getDelegate() {
+        return delegate;
+    }
+
+    public void setDelegate(String delegate) {
+        this.delegate = delegate;
+    }
+
+    public Collection<String> getScopes() {
+        return scopes;
+    }
+
+    public void setScopes(Collection<String> scopes) {
+        this.scopes = scopes;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -187,6 +216,14 @@ public class GoogleSheetsComponentConfiguration
 
     public void setClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
+    }
+
+    public String getKeyResource() {
+        return keyResource;
+    }
+
+    public void setKeyResource(String keyResource) {
+        this.keyResource = keyResource;
     }
 
     public String getRefreshToken() {

@@ -62,6 +62,10 @@ public class GoogleSheetsStreamComponentConfiguration
      */
     private GoogleSheetsStreamConfiguration configuration;
     /**
+     * Delegate for wide-domain service account
+     */
+    private String delegate;
+    /**
      * True if grid data should be returned.
      */
     private Boolean includeGridData = false;
@@ -122,6 +126,10 @@ public class GoogleSheetsStreamComponentConfiguration
      */
     private String clientSecret;
     /**
+     * Sets .json file with credentials for Service account
+     */
+    private String keyResource;
+    /**
      * OAuth 2 refresh token. Using this, the Google Calendar component can
      * obtain a new accessToken whenever the current one expires - a necessity
      * if the application is long-lived.
@@ -158,6 +166,14 @@ public class GoogleSheetsStreamComponentConfiguration
 
     public void setConfiguration(GoogleSheetsStreamConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getDelegate() {
+        return delegate;
+    }
+
+    public void setDelegate(String delegate) {
+        this.delegate = delegate;
     }
 
     public Boolean getIncludeGridData() {
@@ -246,6 +262,14 @@ public class GoogleSheetsStreamComponentConfiguration
 
     public void setClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
+    }
+
+    public String getKeyResource() {
+        return keyResource;
+    }
+
+    public void setKeyResource(String keyResource) {
+        this.keyResource = keyResource;
     }
 
     public String getRefreshToken() {

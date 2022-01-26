@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.google.calendar.springboot;
 
+import java.util.List;
 import javax.annotation.Generated;
 import org.apache.camel.component.google.calendar.GoogleCalendarClientFactory;
 import org.apache.camel.component.google.calendar.GoogleCalendarConfiguration;
@@ -54,11 +55,15 @@ public class GoogleCalendarComponentConfiguration
      */
     private GoogleCalendarConfiguration configuration;
     /**
+     * Delegate for wide-domain service account
+     */
+    private String delegate;
+    /**
      * Specifies the level of permissions you want a calendar application to
      * have to a user account. You can separate multiple scopes by comma. See
      * https://developers.google.com/google-apps/calendar/auth for more info.
      */
-    private String scopes = "https://www.googleapis.com/auth/calendar";
+    private List<String> scopes;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -110,6 +115,10 @@ public class GoogleCalendarComponentConfiguration
      */
     private String emailAddress;
     /**
+     * Sets .json file with credentials for Service account
+     */
+    private String keyResource;
+    /**
      * The name of the p12 file which has the private key to use with the Google
      * Service Account.
      */
@@ -150,11 +159,19 @@ public class GoogleCalendarComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getScopes() {
+    public String getDelegate() {
+        return delegate;
+    }
+
+    public void setDelegate(String delegate) {
+        this.delegate = delegate;
+    }
+
+    public List<String> getScopes() {
         return scopes;
     }
 
-    public void setScopes(String scopes) {
+    public void setScopes(List<String> scopes) {
         this.scopes = scopes;
     }
 
@@ -212,6 +229,14 @@ public class GoogleCalendarComponentConfiguration
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public String getKeyResource() {
+        return keyResource;
+    }
+
+    public void setKeyResource(String keyResource) {
+        this.keyResource = keyResource;
     }
 
     public String getP12FileName() {

@@ -49,6 +49,13 @@ public class LogComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * If enabled then the source location of where the log endpoint is used in
+     * Camel routes, would be used as logger name, instead of the given name.
+     * However, if the source location is disabled or not possible to resolve
+     * then the existing logger name will be used.
+     */
+    private Boolean sourceLocationLoggerName = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -71,6 +78,14 @@ public class LogComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getSourceLocationLoggerName() {
+        return sourceLocationLoggerName;
+    }
+
+    public void setSourceLocationLoggerName(Boolean sourceLocationLoggerName) {
+        this.sourceLocationLoggerName = sourceLocationLoggerName;
     }
 
     public Boolean getAutowiredEnabled() {

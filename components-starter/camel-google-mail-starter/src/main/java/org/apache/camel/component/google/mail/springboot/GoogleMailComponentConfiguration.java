@@ -16,7 +16,7 @@
  */
 package org.apache.camel.component.google.mail.springboot;
 
-import java.util.List;
+import java.util.Collection;
 import javax.annotation.Generated;
 import org.apache.camel.component.google.mail.GoogleMailClientFactory;
 import org.apache.camel.component.google.mail.GoogleMailConfiguration;
@@ -59,7 +59,7 @@ public class GoogleMailComponentConfiguration
     /**
      * GMail scopes
      */
-    private List<String> scopes;
+    private Collection<String> scopes;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -147,11 +147,11 @@ public class GoogleMailComponentConfiguration
         this.delegate = delegate;
     }
 
-    public List<String> getScopes() {
+    public Collection<String> getScopes() {
         return scopes;
     }
 
-    public void setScopes(List<String> scopes) {
+    public void setScopes(Collection<String> scopes) {
         this.scopes = scopes;
     }
 

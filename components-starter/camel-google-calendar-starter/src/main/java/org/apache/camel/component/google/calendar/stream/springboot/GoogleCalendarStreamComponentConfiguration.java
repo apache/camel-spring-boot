@@ -76,6 +76,10 @@ public class GoogleCalendarStreamComponentConfiguration
      */
     private Boolean consumeFromNow = true;
     /**
+     * Delegate for wide-domain service account
+     */
+    private String delegate;
+    /**
      * Max results to be returned
      */
     private Integer maxResults = 10;
@@ -122,6 +126,10 @@ public class GoogleCalendarStreamComponentConfiguration
      * The emailAddress of the Google Service Account.
      */
     private String emailAddress;
+    /**
+     * Sets .json file with credentials for Service account
+     */
+    private String keyResource;
     /**
      * The name of the p12 file which has the private key to use with the Google
      * Service Account.
@@ -195,6 +203,14 @@ public class GoogleCalendarStreamComponentConfiguration
         this.consumeFromNow = consumeFromNow;
     }
 
+    public String getDelegate() {
+        return delegate;
+    }
+
+    public void setDelegate(String delegate) {
+        this.delegate = delegate;
+    }
+
     public Integer getMaxResults() {
         return maxResults;
     }
@@ -265,6 +281,14 @@ public class GoogleCalendarStreamComponentConfiguration
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public String getKeyResource() {
+        return keyResource;
+    }
+
+    public void setKeyResource(String keyResource) {
+        this.keyResource = keyResource;
     }
 
     public String getP12FileName() {
