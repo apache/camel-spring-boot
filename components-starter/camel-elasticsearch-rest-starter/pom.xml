@@ -28,12 +28,38 @@
   <packaging>jar</packaging>
   <name>Camel SB Starters :: ElasticSearch :: REST</name>
   <description>Spring-Boot Starter for Camel ElasticSearch REST support</description>
+
+
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
       <version>${spring-boot-version}</version>
     </dependency>
+    
+    <!-- in favor of elasticsearch version used from camel-->
+    <dependency>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>elasticsearch-rest-high-level-client</artifactId>
+      <version>${elasticsearch-rest-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>elasticsearch-rest-client-sniffer</artifactId>
+      <version>${elasticsearch-rest-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.elasticsearch</groupId>
+      <artifactId>elasticsearch</artifactId>
+      <version>${elasticsearch-rest-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>elasticsearch-rest-client</artifactId>
+      <version>${elasticsearch-rest-version}</version>
+    </dependency>
+    
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-elasticsearch-rest</artifactId>
