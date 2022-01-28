@@ -18,7 +18,7 @@
       "type": "java.lang.String",
       "description": "The number of acknowledgments the producer requires the leader to have received before considering a request complete. This controls the durability of records that are sent. The following settings are allowed: acks=0 If set to zero then the producer will not wait for any acknowledgment from the server at all. The record will be immediately added to the socket buffer and considered sent. No guarantee can be made that the server has received the record in this case, and the retries configuration will not take effect (as the client won't generally know of any failures). The offset given back for each record will always be set to -1. acks=1 This will mean the leader will write the record to its local log but will respond without awaiting full acknowledgement from all followers. In this case should the leader fail immediately after acknowledging the record but before the followers have replicated it then the record will be lost. acks=all This means the leader will wait for the full set of in-sync replicas to acknowledge the record. This guarantees that the record will not be lost as long as at least one in-sync replica remains alive. This is the strongest available guarantee. This is equivalent to the acks=-1 setting.",
       "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
-      "defaultValue": "all"
+      "defaultValue": "1"
     },
     {
       "name": "camel.component.vertx-kafka.additional-properties",
@@ -64,7 +64,7 @@
     {
       "name": "camel.component.vertx-kafka.batch-size",
       "type": "java.lang.Integer",
-      "description": "The producer will attempt to batch records together into fewer requests whenever multiple records are being sent to the same partition. This helps performance on both the client and the server. This configuration controls the default batch size in bytes. No attempt will be made to batch records larger than this size. Requests sent to brokers will contain multiple batches, one for each partition with data available to be sent. A small batch size will make batching less common and may reduce throughput (a batch size of zero will disable batching entirely). A very large batch size may use memory a bit more wastefully as we will always allocate a buffer of the specified batch size in anticipation of additional records.Note: This setting gives the upper bound of the batch size to be sent. If we have fewer than this many bytes accumulated for this partition, we will 'linger' for the linger.ms time waiting for more records to show up. This linger.ms setting defaults to 0, which means we'll immediately send out a record even the accumulated batch size is under this batch.size setting.",
+      "description": "The producer will attempt to batch records together into fewer requests whenever multiple records are being sent to the same partition. This helps performance on both the client and the server. This configuration controls the default batch size in bytes. No attempt will be made to batch records larger than this size. Requests sent to brokers will contain multiple batches, one for each partition with data available to be sent. A small batch size will make batching less common and may reduce throughput (a batch size of zero will disable batching entirely). A very large batch size may use memory a bit more wastefully as we will always allocate a buffer of the specified batch size in anticipation of additional records.",
       "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
       "defaultValue": 16384
     },
@@ -98,7 +98,7 @@
     {
       "name": "camel.component.vertx-kafka.client-dns-lookup",
       "type": "java.lang.String",
-      "description": "Controls how the client uses DNS lookups. If set to use_all_dns_ips, connect to each returned IP address in sequence until a successful connection is established. After a disconnection, the next IP is used. Once all IPs have been used once, the client resolves the IP(s) from the hostname again (both the JVM and the OS cache DNS name lookups, however). If set to resolve_canonical_bootstrap_servers_only, resolve each bootstrap address into a list of canonical names. After the bootstrap phase, this behaves the same as use_all_dns_ips.",
+      "description": "Controls how the client uses DNS lookups. If set to use_all_dns_ips, connect to each returned IP address in sequence until a successful connection is established. After a disconnection, the next IP is used. Once all IPs have been used once, the client resolves the IP(s) from the hostname again (both the JVM and the OS cache DNS name lookups, however). If set to resolve_canonical_bootstrap_servers_only, resolve each bootstrap address into a list of canonical names. After the bootstrap phase, this behaves the same as use_all_dns_ips. If set to default (deprecated), attempt to connect to the first IP address returned by the lookup, even if the lookup returns multiple IP addresses.",
       "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
       "defaultValue": "use_all_dns_ips"
     },
@@ -163,9 +163,9 @@
     {
       "name": "camel.component.vertx-kafka.enable-idempotence",
       "type": "java.lang.Boolean",
-      "description": "When set to 'true', the producer will ensure that exactly one copy of each message is written in the stream. If 'false', producer retries due to broker failures, etc., may write duplicates of the retried message in the stream. Note that enabling idempotence requires max.in.flight.requests.per.connection to be less than or equal to 5 (with message ordering preserved for any allowable value), retries to be greater than 0, and acks must be 'all'. If these values are not explicitly set by the user, suitable values will be chosen. If incompatible values are set, a ConfigException will be thrown.",
+      "description": "When set to 'true', the producer will ensure that exactly one copy of each message is written in the stream. If 'false', producer retries due to broker failures, etc., may write duplicates of the retried message in the stream. Note that enabling idempotence requires max.in.flight.requests.per.connection to be less than or equal to 5, retries to be greater than 0 and acks must be 'all'. If these values are not explicitly set by the user, suitable values will be chosen. If incompatible values are set, a ConfigException will be thrown.",
       "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
-      "defaultValue": true
+      "defaultValue": false
     },
     {
       "name": "camel.component.vertx-kafka.enabled",
@@ -269,7 +269,7 @@
     {
       "name": "camel.component.vertx-kafka.linger-ms",
       "type": "java.lang.Long",
-      "description": "The producer groups together any records that arrive in between request transmissions into a single batched request. Normally this occurs only under load when records arrive faster than they can be sent out. However in some circumstances the client may want to reduce the number of requests even under moderate load. This setting accomplishes this by adding a small amount of artificial delay&mdash;that is, rather than immediately sending out a record, the producer will wait for up to the given delay to allow other records to be sent so that the sends can be batched together. This can be thought of as analogous to Nagle's algorithm in TCP. This setting gives the upper bound on the delay for batching: once we get batch.size worth of records for a partition it will be sent immediately regardless of this setting, however if we have fewer than this many bytes accumulated for this partition we will 'linger' for the specified time waiting for more records to show up. This setting defaults to 0 (i.e. no delay). Setting linger.ms=5, for example, would have the effect of reducing the number of requests sent but would add up to 5ms of latency to records sent in the absence of load. The option is a long type.",
+      "description": "The producer groups together any records that arrive in between request transmissions into a single batched request. Normally this occurs only under load when records arrive faster than they can be sent out. However in some circumstances the client may want to reduce the number of requests even under moderate load. This setting accomplishes this by adding a small amount of artificial delay&mdash;that is, rather than immediately sending out a record the producer will wait for up to the given delay to allow other records to be sent so that the sends can be batched together. This can be thought of as analogous to Nagle's algorithm in TCP. This setting gives the upper bound on the delay for batching: once we get batch.size worth of records for a partition it will be sent immediately regardless of this setting, however if we have fewer than this many bytes accumulated for this partition we will 'linger' for the specified time waiting for more records to show up. This setting defaults to 0 (i.e. no delay). Setting linger.ms=5, for example, would have the effect of reducing the number of requests sent but would add up to 5ms of latency to records sent in the absence of load. The option is a long type.",
       "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
       "defaultValue": 0
     },
@@ -283,7 +283,7 @@
     {
       "name": "camel.component.vertx-kafka.max-in-flight-requests-per-connection",
       "type": "java.lang.Integer",
-      "description": "The maximum number of unacknowledged requests the client will send on a single connection before blocking. Note that if this config is set to be greater than 1 and enable.idempotence is set to false, there is a risk of message re-ordering after a failed send due to retries (i.e., if retries are enabled).",
+      "description": "The maximum number of unacknowledged requests the client will send on a single connection before blocking. Note that if this setting is set to be greater than 1 and there are failed sends, there is a risk of message re-ordering due to retries (i.e., if retries are enabled).",
       "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
       "defaultValue": 5
     },
@@ -359,9 +359,9 @@
     {
       "name": "camel.component.vertx-kafka.partition-assignment-strategy",
       "type": "java.lang.String",
-      "description": "A list of class names or class types, ordered by preference, of supported partition assignment strategies that the client will use to distribute partition ownership amongst consumer instances when group management is used. Available options are:org.apache.kafka.clients.consumer.RangeAssignor: Assigns partitions on a per-topic basis.org.apache.kafka.clients.consumer.RoundRobinAssignor: Assigns partitions to consumers in a round-robin fashion.org.apache.kafka.clients.consumer.StickyAssignor: Guarantees an assignment that is maximally balanced while preserving as many existing partition assignments as possible.org.apache.kafka.clients.consumer.CooperativeStickyAssignor: Follows the same StickyAssignor logic, but allows for cooperative rebalancing.The default assignor is RangeAssignor, CooperativeStickyAssignor, which will use the RangeAssignor by default, but allows upgrading to the CooperativeStickyAssignor with just a single rolling bounce that removes the RangeAssignor from the list.Implementing the org.apache.kafka.clients.consumer.ConsumerPartitionAssignor interface allows you to plug in a custom assignment strategy.",
+      "description": "A list of class names or class types, ordered by preference, of supported partition assignment strategies that the client will use to distribute partition ownership amongst consumer instances when group management is used. Available options are:org.apache.kafka.clients.consumer.RangeAssignor: The default assignor, which works on a per-topic basis.org.apache.kafka.clients.consumer.RoundRobinAssignor: Assigns partitions to consumers in a round-robin fashion.org.apache.kafka.clients.consumer.StickyAssignor: Guarantees an assignment that is maximally balanced while preserving as many existing partition assignments as possible.org.apache.kafka.clients.consumer.CooperativeStickyAssignor: Follows the same StickyAssignor logic, but allows for cooperative rebalancing.Implementing the org.apache.kafka.clients.consumer.ConsumerPartitionAssignor interface allows you to plug in a custom assignment strategy.",
       "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
-      "defaultValue": "org.apache.kafka.clients.consumer.RangeAssignor,org.apache.kafka.clients.consumer.CooperativeStickyAssignor"
+      "defaultValue": "org.apache.kafka.clients.consumer.RangeAssignor"
     },
     {
       "name": "camel.component.vertx-kafka.partition-id",
@@ -372,7 +372,7 @@
     {
       "name": "camel.component.vertx-kafka.partitioner-class",
       "type": "java.lang.String",
-      "description": "A class to use to determine which partition to be send to when produce the records. Available options are:org.apache.kafka.clients.producer.internals.DefaultPartitioner: The default partitioner. This strategy will try sticking to a partition until the batch is full, or linger.ms is up. It works with the strategy:If no partition is specified but a key is present, choose a partition based on a hash of the keyIf no partition or key is present, choose the sticky partition that changes when the batch is full, or linger.ms is up.org.apache.kafka.clients.producer.RoundRobinPartitioner: This partitioning strategy is that each record in a series of consecutive records will be sent to a different partition(no matter if the 'key' is provided or not), until we run out of partitions and start over again. Note: There's a known issue that will cause uneven distribution when new batch is created. Please check KAFKA-9965 for more detail.org.apache.kafka.clients.producer.UniformStickyPartitioner: This partitioning strategy will try sticking to a partition(no matter if the 'key' is provided or not) until the batch is full, or linger.ms is up.Implementing the org.apache.kafka.clients.producer.Partitioner interface allows you to plug in a custom partitioner.",
+      "description": "Partitioner class that implements the org.apache.kafka.clients.producer.Partitioner interface.",
       "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
       "defaultValue": "org.apache.kafka.clients.producer.internals.DefaultPartitioner"
     },
@@ -475,18 +475,6 @@
       "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration"
     },
     {
-      "name": "camel.component.vertx-kafka.sasl-login-connect-timeout-ms",
-      "type": "java.lang.Integer",
-      "description": "The (optional) value in milliseconds for the external authentication provider connection timeout. Currently applies only to OAUTHBEARER. The option is a java.lang.Integer type.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration"
-    },
-    {
-      "name": "camel.component.vertx-kafka.sasl-login-read-timeout-ms",
-      "type": "java.lang.Integer",
-      "description": "The (optional) value in milliseconds for the external authentication provider read timeout. Currently applies only to OAUTHBEARER. The option is a java.lang.Integer type.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration"
-    },
-    {
       "name": "camel.component.vertx-kafka.sasl-login-refresh-buffer-seconds",
       "type": "java.lang.Short",
       "description": "The amount of buffer time before credential expiration to maintain when refreshing a credential, in seconds. If a refresh would otherwise occur closer to expiration than the number of buffer seconds then the refresh will be moved up to maintain as much of the buffer time as possible. Legal values are between 0 and 3600 (1 hour); a default value of 300 (5 minutes) is used if no value is specified. This value and sasl.login.refresh.min.period.seconds are both ignored if their sum exceeds the remaining lifetime of a credential. Currently applies only to OAUTHBEARER.",
@@ -513,91 +501,11 @@
       "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration"
     },
     {
-      "name": "camel.component.vertx-kafka.sasl-login-retry-backoff-max-ms",
-      "type": "java.lang.Long",
-      "description": "The (optional) value in milliseconds for the maximum wait between login attempts to the external authentication provider. Login uses an exponential backoff algorithm with an initial wait based on the sasl.login.retry.backoff.ms setting and will double in wait length between attempts up to a maximum wait length specified by the sasl.login.retry.backoff.max.ms setting. Currently applies only to OAUTHBEARER. The option is a long type.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
-      "defaultValue": 10000
-    },
-    {
-      "name": "camel.component.vertx-kafka.sasl-login-retry-backoff-ms",
-      "type": "java.lang.Long",
-      "description": "The (optional) value in milliseconds for the initial wait between login attempts to the external authentication provider. Login uses an exponential backoff algorithm with an initial wait based on the sasl.login.retry.backoff.ms setting and will double in wait length between attempts up to a maximum wait length specified by the sasl.login.retry.backoff.max.ms setting. Currently applies only to OAUTHBEARER. The option is a long type.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
-      "defaultValue": 100
-    },
-    {
       "name": "camel.component.vertx-kafka.sasl-mechanism",
       "type": "java.lang.String",
       "description": "SASL mechanism used for client connections. This may be any mechanism for which a security provider is available. GSSAPI is the default mechanism.",
       "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
       "defaultValue": "GSSAPI"
-    },
-    {
-      "name": "camel.component.vertx-kafka.sasl-oauthbearer-clock-skew-seconds",
-      "type": "java.lang.Integer",
-      "description": "The (optional) value in seconds to allow for differences between the time of the OAuth\/OIDC identity provider and the broker.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
-      "defaultValue": 30
-    },
-    {
-      "name": "camel.component.vertx-kafka.sasl-oauthbearer-expected-audience",
-      "type": "java.lang.String",
-      "description": "The (optional) comma-delimited setting for the broker to use to verify that the JWT was issued for one of the expected audiences. The JWT will be inspected for the standard OAuth aud claim and if this value is set, the broker will match the value from JWT's aud claim to see if there is an exact match. If there is no match, the broker will reject the JWT and authentication will fail.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration"
-    },
-    {
-      "name": "camel.component.vertx-kafka.sasl-oauthbearer-expected-issuer",
-      "type": "java.lang.String",
-      "description": "The (optional) setting for the broker to use to verify that the JWT was created by the expected issuer. The JWT will be inspected for the standard OAuth iss claim and if this value is set, the broker will match it exactly against what is in the JWT's iss claim. If there is no match, the broker will reject the JWT and authentication will fail.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration"
-    },
-    {
-      "name": "camel.component.vertx-kafka.sasl-oauthbearer-jwks-endpoint-refresh-ms",
-      "type": "java.lang.Long",
-      "description": "The (optional) value in milliseconds for the broker to wait between refreshing its JWKS (JSON Web Key Set) cache that contains the keys to verify the signature of the JWT. The option is a long type.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
-      "defaultValue": 3600000
-    },
-    {
-      "name": "camel.component.vertx-kafka.sasl-oauthbearer-jwks-endpoint-retry-backoff-max-ms",
-      "type": "java.lang.Long",
-      "description": "The (optional) value in milliseconds for the maximum wait between attempts to retrieve the JWKS (JSON Web Key Set) from the external authentication provider. JWKS retrieval uses an exponential backoff algorithm with an initial wait based on the sasl.oauthbearer.jwks.endpoint.retry.backoff.ms setting and will double in wait length between attempts up to a maximum wait length specified by the sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms setting. The option is a long type.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
-      "defaultValue": 10000
-    },
-    {
-      "name": "camel.component.vertx-kafka.sasl-oauthbearer-jwks-endpoint-retry-backoff-ms",
-      "type": "java.lang.Long",
-      "description": "The (optional) value in milliseconds for the initial wait between JWKS (JSON Web Key Set) retrieval attempts from the external authentication provider. JWKS retrieval uses an exponential backoff algorithm with an initial wait based on the sasl.oauthbearer.jwks.endpoint.retry.backoff.ms setting and will double in wait length between attempts up to a maximum wait length specified by the sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms setting. The option is a long type.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
-      "defaultValue": 100
-    },
-    {
-      "name": "camel.component.vertx-kafka.sasl-oauthbearer-jwks-endpoint-url",
-      "type": "java.lang.String",
-      "description": "The OAuth\/OIDC provider URL from which the provider's JWKS (JSON Web Key Set) can be retrieved. The URL can be HTTP(S)-based or file-based. If the URL is HTTP(S)-based, the JWKS data will be retrieved from the OAuth\/OIDC provider via the configured URL on broker startup. All then-current keys will be cached on the broker for incoming requests. If an authentication request is received for a JWT that includes a kid header claim value that isn't yet in the cache, the JWKS endpoint will be queried again on demand. However, the broker polls the URL every sasl.oauthbearer.jwks.endpoint.refresh.ms milliseconds to refresh the cache with any forthcoming keys before any JWT requests that include them are received. If the URL is file-based, the broker will load the JWKS file from a configured location on startup. In the event that the JWT includes a kid header value that isn't in the JWKS file, the broker will reject the JWT and authentication will fail.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration"
-    },
-    {
-      "name": "camel.component.vertx-kafka.sasl-oauthbearer-scope-claim-name",
-      "type": "java.lang.String",
-      "description": "The OAuth claim for the scope is often named scope, but this (optional) setting can provide a different name to use for the scope included in the JWT payload's claims if the OAuth\/OIDC provider uses a different name for that claim.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
-      "defaultValue": "scope"
-    },
-    {
-      "name": "camel.component.vertx-kafka.sasl-oauthbearer-sub-claim-name",
-      "type": "java.lang.String",
-      "description": "The OAuth claim for the subject is often named sub, but this (optional) setting can provide a different name to use for the subject included in the JWT payload's claims if the OAuth\/OIDC provider uses a different name for that claim.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
-      "defaultValue": "sub"
-    },
-    {
-      "name": "camel.component.vertx-kafka.sasl-oauthbearer-token-endpoint-url",
-      "type": "java.lang.String",
-      "description": "The URL for the OAuth\/OIDC identity provider. If the URL is HTTP(S)-based, it is the issuer's token endpoint URL to which requests will be made to login based on the configuration in sasl.jaas.config. If the URL is file-based, it specifies a file containing an access token (in JWT serialized form) issued by the OAuth\/OIDC identity provider to use for authorization.",
-      "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration"
     },
     {
       "name": "camel.component.vertx-kafka.security-protocol",
@@ -636,7 +544,7 @@
       "type": "java.lang.Integer",
       "description": "The timeout used to detect client failures when using Kafka's group management facility. The client sends periodic heartbeats to indicate its liveness to the broker. If no heartbeats are received by the broker before the expiration of this session timeout, then the broker will remove this client from the group and initiate a rebalance. Note that the value must be in the allowable range as configured in the broker configuration by group.min.session.timeout.ms and group.max.session.timeout.ms. The option is a int type.",
       "sourceType": "org.apache.camel.component.vertx.kafka.springboot.VertxKafkaComponentConfiguration",
-      "defaultValue": 45000
+      "defaultValue": 10000
     },
     {
       "name": "camel.component.vertx-kafka.socket-connection-setup-timeout-max-ms",
