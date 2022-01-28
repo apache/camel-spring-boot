@@ -39,6 +39,12 @@
       "sourceType": "org.apache.camel.component.aws2.ses.springboot.Ses2ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-ses.configuration-set",
+      "type": "java.lang.String",
+      "description": "Set the configuration set to send with every request. Override it with 'CamelAwsSesConfigurationSet' header.",
+      "sourceType": "org.apache.camel.component.aws2.ses.springboot.Ses2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws2-ses.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"

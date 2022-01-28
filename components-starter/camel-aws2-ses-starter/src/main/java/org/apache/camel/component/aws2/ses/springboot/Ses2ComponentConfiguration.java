@@ -51,6 +51,11 @@ public class Ses2ComponentConfiguration
      */
     private Ses2Configuration configuration;
     /**
+     * Set the configuration set to send with every request. Override it with
+     * 'CamelAwsSesConfigurationSet' header.
+     */
+    private String configurationSet;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -151,6 +156,14 @@ public class Ses2ComponentConfiguration
 
     public void setConfiguration(Ses2Configuration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getConfigurationSet() {
+        return configurationSet;
+    }
+
+    public void setConfigurationSet(String configurationSet) {
+        this.configurationSet = configurationSet;
     }
 
     public Boolean getLazyStartProducer() {
