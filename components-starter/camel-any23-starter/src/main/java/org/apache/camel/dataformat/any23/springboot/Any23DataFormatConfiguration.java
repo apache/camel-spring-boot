@@ -61,7 +61,7 @@ public class Any23DataFormatConfiguration
      * The URI to use as base for building RDF entities if only relative paths
      * are provided.
      */
-    private String baseURI;
+    private String baseUri;
 
     public Any23OutputFormat getOutputFormat() {
         return outputFormat;
@@ -87,11 +87,11 @@ public class Any23DataFormatConfiguration
         this.extractors = extractors;
     }
 
-    public String getBaseURI() {
-        return baseURI;
+    public String getBaseUri() {
+        return baseUri;
     }
 
-    public void setBaseURI(String baseURI) {
-        this.baseURI = baseURI;
+    public void setBaseUri(String baseUri) {
+        this.baseUri = baseUri;
     }
 }

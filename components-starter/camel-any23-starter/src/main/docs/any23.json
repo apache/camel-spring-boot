@@ -14,7 +14,7 @@
   ],
   "properties": [
     {
-      "name": "camel.dataformat.any23.base-u-r-i",
+      "name": "camel.dataformat.any23.base-uri",
       "type": "java.lang.String",
       "description": "The URI to use as base for building RDF entities if only relative paths are provided.",
       "sourceType": "org.apache.camel.dataformat.any23.springboot.Any23DataFormatConfiguration"
