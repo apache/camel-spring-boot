@@ -11,6 +11,6 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-caffeine-lrucache-starter",
-    "version": "3.15.0-SNAPSHOT"
+    "version": "3.16.0-SNAPSHOT"
   }
 }
