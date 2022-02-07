@@ -35,7 +35,9 @@ import org.infinispan.configuration.cache.CacheMode;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.testcontainers.shaded.org.apache.commons.lang.SystemUtils;
 
+import java.util.Properties;
 import java.util.Random;
 import java.util.UUID;
 
@@ -108,6 +110,11 @@ public class InfinispanTest extends SpringBootBaseIntegration {
 					.serverName("infinispan")
 					.saslMechanism("DIGEST-MD5")
 					.realm("default");
+			if (SystemUtils.IS_OS_MAC) {
+		            Properties properties = new Properties();
+		            properties.put("infinispan.client.hotrod.client_intelligence", "BASIC");
+		            clientBuilder.withProperties(properties);
+			}
 
 			return clientBuilder;
 		}
