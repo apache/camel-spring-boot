@@ -407,18 +407,6 @@
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties$HealthCheckConfigurationProperties"
     },
     {
-      "name": "camel.health.config.failure-threshold",
-      "type": "java.lang.Integer",
-      "description": "Set the number of failure before reporting the service as un-healthy.",
-      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties$HealthCheckConfigurationProperties"
-    },
-    {
-      "name": "camel.health.config.interval",
-      "type": "java.lang.Long",
-      "description": "Set the check interval in milli seconds.",
-      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties$HealthCheckConfigurationProperties"
-    },
-    {
       "name": "camel.health.config.parent",
       "type": "java.lang.String",
       "description": "The id of the health check such as routes or registry (can use * as wildcard)",

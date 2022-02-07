@@ -128,16 +128,6 @@ public class CamelHealthCheckConfigurationProperties {
          */
         private Boolean enabled;
 
-        /**
-         * Set the check interval in milli seconds.
-         */
-        private Long interval;
-
-        /**
-         * Set the number of failure before reporting the service as un-healthy.
-         */
-        private Integer failureThreshold;
-
         public String getParent() {
             return parent;
         }
@@ -154,33 +144,11 @@ public class CamelHealthCheckConfigurationProperties {
             this.enabled = enabled;
         }
 
-        public Long getInterval() {
-            return interval;
-        }
-
-        public void setInterval(Long interval) {
-            this.interval = interval;
-        }
-
-        public Integer getFailureThreshold() {
-            return failureThreshold;
-        }
-
-        public void setFailureThreshold(Integer failureThreshold) {
-            this.failureThreshold = failureThreshold;
-        }
-
         public HealthCheckConfiguration toHealthCheckConfiguration() {
             HealthCheckConfiguration answer = new HealthCheckConfiguration();
             answer.setParent(parent);
             if (enabled != null) {
                 answer.setEnabled(enabled);
-            }
-            if (interval != null) {
-                answer.setInterval(interval);
-            }
-            if (failureThreshold != null) {
-                answer.setFailureThreshold(failureThreshold);
             }
             return answer;
         }

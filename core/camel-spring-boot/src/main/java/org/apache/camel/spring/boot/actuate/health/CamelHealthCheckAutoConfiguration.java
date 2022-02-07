@@ -130,8 +130,6 @@ public class CamelHealthCheckAutoConfiguration {
                 if (hc instanceof HealthCheck) {
                     ((HealthCheck) hc).getConfiguration().setParent(hcc.getParent());
                     ((HealthCheck) hc).getConfiguration().setEnabled(hcc.getEnabled() != null ? hcc.getEnabled() : true);
-                    ((HealthCheck) hc).getConfiguration().setFailureThreshold(hcc.getFailureThreshold());
-                    ((HealthCheck) hc).getConfiguration().setInterval(hcc.getInterval());
                 } else if (hc instanceof HealthCheckRepository) {
                     ((HealthCheckRepository) hc).addConfiguration(id, hcc.toHealthCheckConfiguration());
                 }
