@@ -66,19 +66,25 @@ public class CamelHealthCheckAutoConfiguration {
             // lets signal we are integrated with spring boot
             hcr.setId("camel-spring-boot");
 
-            // configure camel health check
+            if (config.getEnabled() != null) {
+                hcr.setEnabled(config.getEnabled());
+            }
+            if (config.getExcludePattern() != null) {
+                hcr.setExcludePattern(config.getExcludePattern());
+            }
+
             // context is enabled by default
-            if (!config.getConfig().containsKey("context") || config.getContextEnabled() != null) {
+            if (hcr.isEnabled()) {
                 HealthCheck hc = (HealthCheck) hcr.resolveById("context");
                 if (hc != null) {
                     if (config.getContextEnabled() != null) {
-                        hc.getConfiguration().setEnabled(config.getContextEnabled());
+                        hc.setEnabled(config.getContextEnabled());
                     }
                     hcr.register(hc);
                 }
             }
             // routes are enabled by default
-            if (hcr.isEnabled() && (!config.getConfig().containsKey("routes") || config.getRoutesEnabled() != null)) {
+            if (hcr.isEnabled()) {
                 HealthCheckRepository hc = hcr.getRepository("routes").orElse((HealthCheckRepository) hcr.resolveById("routes"));
                 if (hc != null) {
                     if (config.getRoutesEnabled() != null) {
@@ -88,8 +94,9 @@ public class CamelHealthCheckAutoConfiguration {
                 }
             }
             // consumers are enabled by default
-            if (hcr.isEnabled() && (!config.getConfig().containsKey("consumers") || config.getConsumersEnabled() != null)) {
-                HealthCheckRepository hc = hcr.getRepository("consumers").orElse((HealthCheckRepository) hcr.resolveById("consumers"));
+            if (hcr.isEnabled()) {
+                HealthCheckRepository hc
+                        = hcr.getRepository("consumers").orElse((HealthCheckRepository) hcr.resolveById("consumers"));
                 if (hc != null) {
                     if (config.getConsumersEnabled() != null) {
                         hc.setEnabled(config.getConsumersEnabled());
@@ -98,7 +105,7 @@ public class CamelHealthCheckAutoConfiguration {
                 }
             }
             // registry are enabled by default
-            if (hcr.isEnabled() && (!config.getConfig().containsKey("registry") || config.getRegistryEnabled() != null)) {
+            if (hcr.isEnabled()) {
                 HealthCheckRepository hc
                         = hcr.getRepository("registry").orElse((HealthCheckRepository) hcr.resolveById("registry"));
                 if (hc != null) {
@@ -106,32 +113,6 @@ public class CamelHealthCheckAutoConfiguration {
                         hc.setEnabled(config.getRegistryEnabled());
                     }
                     hcr.register(hc);
-                }
-            }
-
-            // configure health checks configurations
-            for (String id : config.getConfig().keySet()) {
-                CamelHealthCheckConfigurationProperties.HealthCheckConfigurationProperties hcc = config.getConfig().get(id);
-                String parent = hcc.getParent();
-                if (parent == null) {
-                    throw new IllegalArgumentException("HealthCheck with id: " + id + " must have parent configured");
-                }
-                // lookup health check by id
-                Object hc = hcr.getCheck(id).orElse(null);
-                if (hc == null) {
-                    hc = hcr.resolveById(parent);
-                    if (hc == null) {
-                        LOG.warn("Cannot resolve HealthCheck with id: " + parent + " from classpath.");
-                        continue;
-                    }
-                    hcr.register(hc);
-                }
-
-                if (hc instanceof HealthCheck) {
-                    ((HealthCheck) hc).getConfiguration().setParent(hcc.getParent());
-                    ((HealthCheck) hc).getConfiguration().setEnabled(hcc.getEnabled() != null ? hcc.getEnabled() : true);
-                } else if (hc instanceof HealthCheckRepository) {
-                    ((HealthCheckRepository) hc).addConfiguration(id, hcc.toHealthCheckConfiguration());
                 }
             }
 

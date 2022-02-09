@@ -46,6 +46,16 @@ public class Ses2ComponentConfiguration
      */
     private SesClient amazonSESClient;
     /**
+     * List of comma separated destination blind carbon copy (bcc) email
+     * address. Can be overriden with 'CamelAwsSesBcc' header.
+     */
+    private String bcc;
+    /**
+     * List of comma separated destination carbon copy (cc) email address. Can
+     * be overriden with 'CamelAwsSesCc' header.
+     */
+    private String cc;
+    /**
      * component configuration. The option is a
      * org.apache.camel.component.aws2.ses.Ses2Configuration type.
      */
@@ -148,6 +158,22 @@ public class Ses2ComponentConfiguration
 
     public void setAmazonSESClient(SesClient amazonSESClient) {
         this.amazonSESClient = amazonSESClient;
+    }
+
+    public String getBcc() {
+        return bcc;
+    }
+
+    public void setBcc(String bcc) {
+        this.bcc = bcc;
+    }
+
+    public String getCc() {
+        return cc;
+    }
+
+    public void setCc(String cc) {
+        this.cc = cc;
     }
 
     public Ses2Configuration getConfiguration() {

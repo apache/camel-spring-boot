@@ -33,6 +33,18 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.aws2-ses.bcc",
+      "type": "java.lang.String",
+      "description": "List of comma separated destination blind carbon copy (bcc) email address. Can be overriden with 'CamelAwsSesBcc' header.",
+      "sourceType": "org.apache.camel.component.aws2.ses.springboot.Ses2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-ses.cc",
+      "type": "java.lang.String",
+      "description": "List of comma separated destination carbon copy (cc) email address. Can be overriden with 'CamelAwsSesCc' header.",
+      "sourceType": "org.apache.camel.component.aws2.ses.springboot.Ses2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws2-ses.configuration",
       "type": "org.apache.camel.component.aws2.ses.Ses2Configuration",
       "description": "component configuration. The option is a org.apache.camel.component.aws2.ses.Ses2Configuration type.",

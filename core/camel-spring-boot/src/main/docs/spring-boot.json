@@ -79,11 +79,6 @@
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {
-      "name": "camel.health.config",
-      "type": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties$HealthCheckConfigurationProperties",
-      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties$HealthCheckConfigurationProperties"
-    },
-    {
       "name": "camel.language",
       "type": "org.apache.camel.spring.boot.LanguageConfigurationProperties",
       "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationProperties"
@@ -395,51 +390,39 @@
       "defaultValue": true
     },
     {
-      "name": "camel.health.config",
-      "type": "java.util.Map<java.lang.String,org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties$HealthCheckConfigurationProperties>",
-      "description": "Additional health check properties for fine-grained configuration of health checks.",
-      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
-    },
-    {
-      "name": "camel.health.config.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Set if the check associated to this configuration is enabled or not. Is default enabled.",
-      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties$HealthCheckConfigurationProperties"
-    },
-    {
-      "name": "camel.health.config.parent",
-      "type": "java.lang.String",
-      "description": "The id of the health check such as routes or registry (can use * as wildcard)",
-      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties$HealthCheckConfigurationProperties"
-    },
-    {
       "name": "camel.health.consumers-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether consumers health check is enabled. Is default enabled",
+      "description": "Whether consumers health check is enabled. <p> Is default enabled",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {
       "name": "camel.health.context-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether context health check is enabled. Is default enabled",
+      "description": "Whether context health check is enabled. <p> Is default enabled",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {
       "name": "camel.health.enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether health check is enabled globally. Is default enabled",
+      "description": "Whether health check is enabled globally. <p> Is default enabled",
+      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
+    },
+    {
+      "name": "camel.health.exclude-pattern",
+      "type": "java.lang.String",
+      "description": "Pattern to exclude health checks from being invoked by Camel when checking healths. Multiple patterns can be separated by comma.",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {
       "name": "camel.health.registry-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether registry health check is enabled. Is default enabled",
+      "description": "Whether registry health check is enabled. <p> Is default enabled",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {
       "name": "camel.health.routes-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether routes health check is enabled. Is default enabled",
+      "description": "Whether routes health check is enabled. <p> Is default enabled",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {

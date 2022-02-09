@@ -16,10 +16,6 @@
  */
 package org.apache.camel.spring.boot.actuate.health;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.camel.health.HealthCheckConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.health")
@@ -27,43 +23,44 @@ public class CamelHealthCheckConfigurationProperties {
 
     /**
      * Whether health check is enabled globally.
-     *
+     * <p>
      * Is default enabled
      */
     private Boolean enabled;
 
     /**
      * Whether context health check is enabled.
-     *
+     * <p>
      * Is default enabled
      */
     private Boolean contextEnabled;
 
     /**
      * Whether routes health check is enabled.
-     *
+     * <p>
      * Is default enabled
      */
     private Boolean routesEnabled;
 
     /**
      * Whether consumers health check is enabled.
-     *
+     * <p>
      * Is default enabled
      */
     private Boolean consumersEnabled;
 
     /**
      * Whether registry health check is enabled.
-     *
+     * <p>
      * Is default enabled
      */
     private Boolean registryEnabled;
 
     /**
-     * Additional health check properties for fine-grained configuration of health checks.
+     * Pattern to exclude health checks from being invoked by Camel when checking healths. Multiple patterns can be
+     * separated by comma.
      */
-    private Map<String, HealthCheckConfigurationProperties> config = new HashMap<>();
+    private String excludePattern;
 
     public Boolean getEnabled() {
         return enabled;
@@ -105,54 +102,14 @@ public class CamelHealthCheckConfigurationProperties {
         this.registryEnabled = registryEnabled;
     }
 
-    public Map<String, HealthCheckConfigurationProperties> getConfig() {
-        return config;
+    public String getExcludePattern() {
+        return excludePattern;
     }
 
-    public void setConfig(Map<String, HealthCheckConfigurationProperties> config) {
-        this.config = config;
-    }
-
-    @ConfigurationProperties(prefix = "camel.health.config")
-    public static class HealthCheckConfigurationProperties {
-
-        /**
-         * The id of the health check such as routes or registry (can use * as wildcard)
-         */
-        private String parent;
-
-        /**
-         * Set if the check associated to this configuration is enabled or not.
-         *
-         * Is default enabled.
-         */
-        private Boolean enabled;
-
-        public String getParent() {
-            return parent;
-        }
-
-        public void setParent(String parent) {
-            this.parent = parent;
-        }
-
-        public Boolean getEnabled() {
-            return enabled;
-        }
-
-        public void setEnabled(Boolean enabled) {
-            this.enabled = enabled;
-        }
-
-        public HealthCheckConfiguration toHealthCheckConfiguration() {
-            HealthCheckConfiguration answer = new HealthCheckConfiguration();
-            answer.setParent(parent);
-            if (enabled != null) {
-                answer.setEnabled(enabled);
-            }
-            return answer;
-        }
+    public void setExcludePattern(String excludePattern) {
+        this.excludePattern = excludePattern;
     }
 }
+
 
 
