@@ -414,6 +414,13 @@
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {
+      "name": "camel.health.exposure-level",
+      "type": "java.lang.String",
+      "description": "Sets the level of details to exposure as result of invoking health checks. There are the following levels: full, default, oneline The full level will include all details and status from all the invoked health checks. The default level will report UP if everything is okay, and only include detailed information for health checks that was DOWN. The oneline level will only report either UP or DOWN.",
+      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties",
+      "defaultValue": "default"
+    },
+    {
       "name": "camel.health.registry-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether registry health check is enabled. <p> Is default enabled",

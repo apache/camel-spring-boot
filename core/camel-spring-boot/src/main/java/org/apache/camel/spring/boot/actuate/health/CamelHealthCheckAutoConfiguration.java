@@ -72,6 +72,9 @@ public class CamelHealthCheckAutoConfiguration {
             if (config.getExcludePattern() != null) {
                 hcr.setExcludePattern(config.getExcludePattern());
             }
+            if (config.getExposureLevel() != null) {
+                hcr.setExposureLevel(config.getExposureLevel());
+            }
 
             // context is enabled by default
             if (hcr.isEnabled()) {

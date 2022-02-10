@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.boot.actuate.health;
 
+import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.health")
@@ -61,6 +62,20 @@ public class CamelHealthCheckConfigurationProperties {
      * separated by comma.
      */
     private String excludePattern;
+
+    /**
+     * Sets the level of details to exposure as result of invoking health checks. There are the following levels: full,
+     * default, oneline
+     *
+     * The full level will include all details and status from all the invoked health checks.
+     *
+     * The default level will report UP if everything is okay, and only include detailed information for health checks
+     * that was DOWN.
+     *
+     * The oneline level will only report either UP or DOWN.
+     */
+    @Metadata(enums = "full,default,oneline", defaultValue = "default")
+    private String exposureLevel = "default";
 
     public Boolean getEnabled() {
         return enabled;
@@ -108,6 +123,14 @@ public class CamelHealthCheckConfigurationProperties {
 
     public void setExcludePattern(String excludePattern) {
         this.excludePattern = excludePattern;
+    }
+
+    public String getExposureLevel() {
+        return exposureLevel;
+    }
+
+    public void setExposureLevel(String exposureLevel) {
+        this.exposureLevel = exposureLevel;
     }
 }
 
