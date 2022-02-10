@@ -396,12 +396,6 @@
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
     },
     {
-      "name": "camel.health.context-enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether context health check is enabled. <p> Is default enabled",
-      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
-    },
-    {
       "name": "camel.health.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether health check is enabled globally. <p> Is default enabled",

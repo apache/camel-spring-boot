@@ -30,13 +30,6 @@ public class CamelHealthCheckConfigurationProperties {
     private Boolean enabled;
 
     /**
-     * Whether context health check is enabled.
-     * <p>
-     * Is default enabled
-     */
-    private Boolean contextEnabled;
-
-    /**
      * Whether routes health check is enabled.
      * <p>
      * Is default enabled
@@ -83,14 +76,6 @@ public class CamelHealthCheckConfigurationProperties {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public Boolean getContextEnabled() {
-        return contextEnabled;
-    }
-
-    public void setContextEnabled(Boolean contextEnabled) {
-        this.contextEnabled = contextEnabled;
     }
 
     public Boolean getRoutesEnabled() {

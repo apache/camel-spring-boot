@@ -80,9 +80,6 @@ public class CamelHealthCheckAutoConfiguration {
             if (hcr.isEnabled()) {
                 HealthCheck hc = (HealthCheck) hcr.resolveById("context");
                 if (hc != null) {
-                    if (config.getContextEnabled() != null) {
-                        hc.setEnabled(config.getContextEnabled());
-                    }
                     hcr.register(hc);
                 }
             }
