@@ -143,7 +143,7 @@ public class SpringdocAutoConfiguration {
         if (bc.getBasePath()!=null && !bc.getBasePath().isEmpty() && openApi.is3xDocument()) {
             for (Server server : ((Oas30Document)openApi).getServers()) {
                 if (server.url.endsWith(bc.getBasePath())) {
-                    LOG.info("Setting relative URL " + bc.getBasePath());
+                    LOG.info("Setting Server URL in ApiDoc to base path: {}", bc.getBasePath());
                     server.url = bc.getBasePath();
                 }
             }
@@ -183,7 +183,7 @@ public class SpringdocAutoConfiguration {
         }
         else {
             // This will cause problems when using the Camel servlet as the REST component! 
-            LOG.warn("No REST context path set in Camel!");
+            LOG.warn("No REST context path set in Camel Rest-DSL!");
             return springContextPath;
         }
     }
