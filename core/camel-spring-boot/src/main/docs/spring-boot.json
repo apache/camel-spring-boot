@@ -727,7 +727,7 @@
       "defaultValue": true
     },
     {
-      "name": "camel.springboot.mode-line",
+      "name": "camel.springboot.modeline",
       "type": "java.lang.Boolean",
       "description": "Whether camel-k style modeline is also enabled when not using camel-k. Enabling this allows to use a camel-k like experience by being able to configure various settings using modeline directly in your route source code.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
