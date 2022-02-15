@@ -2665,6 +2665,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-dsl-modeline</artifactId>
+        <version>3.16.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-dsl-support</artifactId>
         <version>3.16.0-SNAPSHOT</version>
       </dependency>

@@ -518,7 +518,9 @@
     {
       "name": "camel.springboot.dev-console-enabled",
       "type": "java.lang.Boolean",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+      "description": "Whether to enable developer console (requires camel-console on classpath). The developer console is only for assisting during development. This is NOT for production usage.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
     },
     {
       "name": "camel.springboot.dump-routes",
@@ -723,6 +725,13 @@
       "description": "Sets whether message history is enabled or not. Default is true.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
       "defaultValue": true
+    },
+    {
+      "name": "camel.springboot.mode-line",
+      "type": "java.lang.Boolean",
+      "description": "Whether camel-k style modeline is also enabled when not using camel-k. Enabling this allows to use a camel-k like experience by being able to configure various settings using modeline directly in your route source code.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
     },
     {
       "name": "camel.springboot.name",
