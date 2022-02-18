@@ -1830,8 +1830,10 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             try (InputStream is = getClass().getClassLoader().getResourceAsStream("license-header-java.txt")) {
                 header = PackageHelper.loadText(is);
             }
-            String code = header + source;
-            getLog().debug("Source code generated:\n" + code);
+            String code = header + "\n" + source;
+            if (getLog().isDebugEnabled()) {
+                getLog().debug("Source code generated:\n" + code);
+            }
 
             AbstractGeneratorMojo.updateResource(null, target.toPath(), code);
         } catch (Exception e) {
@@ -1901,7 +1903,9 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 String code = sb.toString();
                 // add empty new line after header
                 code = header + "\n" + code;
-                getLog().debug("Source code generated:\n" + code);
+                if (getLog().isDebugEnabled()) {
+                    getLog().debug("Source code generated:\n" + code);
+                }
 
                 FileUtils.write(target, code, StandardCharsets.UTF_8);
                 getLog().info("Created file: " + target);
