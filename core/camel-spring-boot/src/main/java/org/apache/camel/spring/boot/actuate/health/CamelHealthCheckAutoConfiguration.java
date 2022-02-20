@@ -58,9 +58,12 @@ public class CamelHealthCheckAutoConfiguration {
                 config = new CamelHealthCheckConfigurationProperties();
             }
 
+            // auto-detect camel-health on classpath
             HealthCheckRegistry hcr = camelContext.getExtension(HealthCheckRegistry.class);
             if (hcr == null) {
-                LOG.warn("Cannot find HealthCheckRegistry from classpath. Add camel-health to classpath.");
+                if (config.getEnabled() != null && config.getEnabled()) {
+                    LOG.warn("Cannot find HealthCheckRegistry from classpath. Add camel-health to classpath.");
+                }
                 return null;
             }
             // lets signal we are integrated with spring boot
