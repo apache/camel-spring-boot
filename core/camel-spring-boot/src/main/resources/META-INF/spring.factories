@@ -46,5 +46,6 @@ org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration,\
 org.apache.camel.spring.boot.properties.PropertiesComponentAutoConfiguration,\
 org.apache.camel.spring.boot.security.CamelSSLAutoConfiguration,\
 org.apache.camel.spring.boot.threadpool.CamelThreadPoolAutoConfiguration,\
-org.apache.camel.spring.boot.routetemplate.CamelRouteTemplateAutoConfiguration
+org.apache.camel.spring.boot.routetemplate.CamelRouteTemplateAutoConfiguration,\
+org.apache.camel.spring.boot.vault.AwsVaultAutoConfiguration
 

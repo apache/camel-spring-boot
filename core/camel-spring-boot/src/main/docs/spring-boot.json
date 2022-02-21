@@ -115,6 +115,11 @@
       "sourceType": "org.apache.camel.spring.boot.threadpool.CamelThreadPoolConfigurationProperties$ThreadPoolProfileConfigurationProperties"
     },
     {
+      "name": "camel.vault.aws",
+      "type": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties",
+      "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
+    },
+    {
       "name": "management.endpoint.camelroutecontroller",
       "type": "org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpoint",
       "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpoint"
@@ -1294,6 +1299,24 @@
       "type": "java.util.concurrent.TimeUnit",
       "description": "Sets the default time unit used for keep alive time",
       "sourceType": "org.apache.camel.spring.boot.threadpool.CamelThreadPoolConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.aws.access-key",
+      "type": "java.lang.String",
+      "description": "The AWS access key",
+      "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.aws.region",
+      "type": "java.lang.String",
+      "description": "The AWS region",
+      "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.aws.secret-key",
+      "type": "java.lang.String",
+      "description": "The AWS secret key",
+      "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
     },
     {
       "name": "management.endpoint.camelroutecontroller.cache.time-to-live",
