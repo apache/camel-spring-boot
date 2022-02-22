@@ -54,8 +54,9 @@ public class ServletMappingDisablingTest {
             public void configure() throws Exception {
 
                 rest().get("/thepath")
-                        .produces("text/plain")
-                        .route()
+                        .produces("text/plain").to("direct:hello");
+
+                from("direct:hello")
                         .transform().constant("Hello");
             }
         });

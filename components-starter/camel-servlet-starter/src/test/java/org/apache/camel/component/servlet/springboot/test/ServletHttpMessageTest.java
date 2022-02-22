@@ -53,7 +53,9 @@ public class ServletHttpMessageTest {
 
                 rest().get("/outMessageNullBody")
                         .produces("text/plain")
-                        .route()
+                        .to("direct:nullbody");
+
+                from("direct:nullbody")
                         // read body at least once
                         .log("${body}")
                         // simulate endpoints that may put null to out message body

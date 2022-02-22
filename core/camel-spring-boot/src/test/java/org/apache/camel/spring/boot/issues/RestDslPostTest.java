@@ -79,7 +79,6 @@ public class RestDslPostTest {
 
         resultEndpointCountry.assertIsSatisfied();
         resultEndpointUser.assertIsSatisfied();
-
     }
 
     @Configuration
@@ -90,9 +89,9 @@ public class RestDslPostTest {
                 public void configure() {
                     restConfiguration().host("localhost").port(PORT).bindingMode(RestBindingMode.json);
 
-                    rest("/").post("/user").type(UserPojo.class).route().to("mock:user").endRest().post("/country")
-                            .type(CountryPojo.class).route().to("mock:country").endRest();
-
+                    rest("/")
+                            .post("/user").type(UserPojo.class).to("mock:user")
+                            .post("/country").type(CountryPojo.class).to("mock:country");
                 }
             };
         }
