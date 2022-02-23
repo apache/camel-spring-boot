@@ -2845,11 +2845,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-google-secrets-manager</artifactId>
-        <version>3.16.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-google-sheets</artifactId>
         <version>3.16.0-SNAPSHOT</version>
       </dependency>
