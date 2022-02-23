@@ -232,6 +232,7 @@
     <module>camel-google-functions-starter</module>
     <module>camel-google-mail-starter</module>
     <module>camel-google-pubsub-starter</module>
+    <module>camel-google-secret-manager-starter</module>
     <module>camel-google-sheets-starter</module>
     <module>camel-google-storage-starter</module>
     <module>camel-gora-starter</module>
