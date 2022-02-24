@@ -113,22 +113,6 @@ public class RestConfigurationDefinitionProperties {
      */
     private String apiContextRouteId;
     /**
-     * Sets an CamelContext id pattern to only allow Rest APIs from rest
-     * services within CamelContext's which name matches the pattern. The
-     * pattern #name# refers to the CamelContext name, to match on the current
-     * CamelContext only. For any other value, the pattern uses the rules from
-     * PatternHelper#matchPattern(String,String)
-     */
-    @Deprecated
-    private String apiContextIdPattern;
-    /**
-     * Sets whether listing of all available CamelContext's with REST services
-     * in the JVM is enabled. If enabled it allows to discover these contexts,
-     * if false then only the current CamelContext is in use.
-     */
-    @Deprecated
-    private Boolean apiContextListing = false;
-    /**
      * Whether vendor extension is enabled in the Rest APIs. If enabled then
      * Camel will include additional information as vendor extension (eg keys
      * starting with x-) such as route ids, class names etc. Not all 3rd party
@@ -306,26 +290,6 @@ public class RestConfigurationDefinitionProperties {
 
     public void setApiContextRouteId(String apiContextRouteId) {
         this.apiContextRouteId = apiContextRouteId;
-    }
-
-    @Deprecated
-    public String getApiContextIdPattern() {
-        return apiContextIdPattern;
-    }
-
-    @Deprecated
-    public void setApiContextIdPattern(String apiContextIdPattern) {
-        this.apiContextIdPattern = apiContextIdPattern;
-    }
-
-    @Deprecated
-    public Boolean getApiContextListing() {
-        return apiContextListing;
-    }
-
-    @Deprecated
-    public void setApiContextListing(Boolean apiContextListing) {
-        this.apiContextListing = apiContextListing;
     }
 
     public Boolean getApiVendorExtension() {
