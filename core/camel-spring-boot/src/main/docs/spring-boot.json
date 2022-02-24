@@ -1307,6 +1307,13 @@
       "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
     },
     {
+      "name": "camel.vault.aws.default-credentials-provider",
+      "type": "java.lang.Boolean",
+      "description": "Define if we want to use the AWS Default Credentials Provider or not",
+      "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.vault.aws.region",
       "type": "java.lang.String",
       "description": "The AWS region",

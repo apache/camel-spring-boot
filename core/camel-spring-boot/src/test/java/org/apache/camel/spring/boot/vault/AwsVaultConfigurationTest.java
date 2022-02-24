@@ -18,7 +18,8 @@ import org.springframework.test.annotation.DirtiesContext;
         properties = {
                 "camel.vault.aws.accessKey=myAccessKey",
                 "camel.vault.aws.secretKey=mySecretKey",
-                "camel.vault.aws.region=myRegion"}
+                "camel.vault.aws.region=myRegion",
+                "camel.vault.aws.defaultCredentialsProvider=true"}
 )
 public class AwsVaultConfigurationTest {
 
@@ -30,5 +31,6 @@ public class AwsVaultConfigurationTest {
         Assertions.assertEquals("myAccessKey", camelContext.getVaultConfiguration().aws().getAccessKey());
         Assertions.assertEquals("mySecretKey", camelContext.getVaultConfiguration().aws().getSecretKey());
         Assertions.assertEquals("myRegion", camelContext.getVaultConfiguration().aws().getRegion());
+        Assertions.assertEquals(true, camelContext.getVaultConfiguration().aws().isDefaultCredentialsProvider());
     }
 }

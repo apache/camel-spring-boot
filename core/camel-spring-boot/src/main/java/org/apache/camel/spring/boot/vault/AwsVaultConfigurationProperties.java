@@ -36,6 +36,11 @@ public class AwsVaultConfigurationProperties {
      */
     private String region;
 
+    /**
+     * Define if we want to use the AWS Default Credentials Provider or not
+     */
+    private boolean defaultCredentialsProvider;
+
     public String getAccessKey() {
         return accessKey;
     }
@@ -58,5 +63,13 @@ public class AwsVaultConfigurationProperties {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public boolean isDefaultCredentialsProvider() {
+        return defaultCredentialsProvider;
+    }
+
+    public void setDefaultCredentialsProvider(boolean defaultCredentialsProvider) {
+        this.defaultCredentialsProvider = defaultCredentialsProvider;
     }
 }

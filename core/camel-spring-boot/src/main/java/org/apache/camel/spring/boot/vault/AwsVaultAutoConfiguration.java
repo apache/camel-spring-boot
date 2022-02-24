@@ -36,6 +36,7 @@ public class AwsVaultAutoConfiguration {
         answer.setAccessKey(config.getAccessKey());
         answer.setSecretKey(config.getSecretKey());
         answer.setRegion(config.getRegion());
+        answer.setDefaultCredentialsProvider(config.isDefaultCredentialsProvider());
         return answer;
     }
 
