@@ -22,6 +22,7 @@ import javax.annotation.Generated;
 import com.azure.core.amqp.AmqpRetryOptions;
 import com.azure.core.amqp.AmqpTransportType;
 import com.azure.core.amqp.ProxyOptions;
+import com.azure.core.credential.TokenCredential;
 import com.azure.core.util.ClientOptions;
 import com.azure.messaging.servicebus.ServiceBusReceiverAsyncClient;
 import com.azure.messaging.servicebus.ServiceBusSenderAsyncClient;
@@ -132,7 +133,7 @@ public class ServiceBusComponentConfiguration
      * will prefetch that number of messages. Setting the value to zero turns
      * prefetch off.
      */
-    private Integer prefetchCount = 0;
+    private Integer prefetchCount;
     /**
      * Sets the receiverAsyncClient in order to consume messages in the
      * Consumer. The option is a
@@ -197,6 +198,16 @@ public class ServiceBusComponentConfiguration
      * Service Bus resource.
      */
     private String connectionString;
+    /**
+     * Fully Qualified Namespace of the service bus
+     */
+    private String fullyQualifiedNamespace;
+    /**
+     * A TokenCredential for Azure AD authentication, implemented in
+     * com.azure.identity. The option is a
+     * com.azure.core.credential.TokenCredential type.
+     */
+    private TokenCredential tokenCredential;
 
     public AmqpRetryOptions getAmqpRetryOptions() {
         return amqpRetryOptions;
@@ -386,5 +397,21 @@ public class ServiceBusComponentConfiguration
 
     public void setConnectionString(String connectionString) {
         this.connectionString = connectionString;
+    }
+
+    public String getFullyQualifiedNamespace() {
+        return fullyQualifiedNamespace;
+    }
+
+    public void setFullyQualifiedNamespace(String fullyQualifiedNamespace) {
+        this.fullyQualifiedNamespace = fullyQualifiedNamespace;
+    }
+
+    public TokenCredential getTokenCredential() {
+        return tokenCredential;
+    }
+
+    public void setTokenCredential(TokenCredential tokenCredential) {
+        this.tokenCredential = tokenCredential;
     }
 }

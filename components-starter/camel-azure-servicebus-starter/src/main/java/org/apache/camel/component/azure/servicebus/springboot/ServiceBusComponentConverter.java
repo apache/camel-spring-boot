@@ -50,6 +50,7 @@ public class ServiceBusComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, java.time.OffsetDateTime.class));
         answer.add(new ConvertiblePair(String.class, com.azure.messaging.servicebus.ServiceBusSenderAsyncClient.class));
         answer.add(new ConvertiblePair(String.class, com.azure.messaging.servicebus.ServiceBusTransactionContext.class));
+        answer.add(new ConvertiblePair(String.class, com.azure.core.credential.TokenCredential.class));
         return answer;
     }
 
@@ -75,6 +76,7 @@ public class ServiceBusComponentConverter implements GenericConverter {
             case "java.time.OffsetDateTime": return applicationContext.getBean(ref, java.time.OffsetDateTime.class);
             case "com.azure.messaging.servicebus.ServiceBusSenderAsyncClient": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusSenderAsyncClient.class);
             case "com.azure.messaging.servicebus.ServiceBusTransactionContext": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusTransactionContext.class);
+            case "com.azure.core.credential.TokenCredential": return applicationContext.getBean(ref, com.azure.core.credential.TokenCredential.class);
         }
         return null;
     }
