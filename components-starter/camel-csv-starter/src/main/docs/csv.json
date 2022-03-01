@@ -74,7 +74,8 @@
       "name": "camel.dataformat.csv.format-name",
       "type": "java.lang.String",
       "description": "The name of the format to use, the default value is CSVFormat.DEFAULT",
-      "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration"
+      "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
+      "defaultValue": "DEFAULT"
     },
     {
       "name": "camel.dataformat.csv.format-ref",

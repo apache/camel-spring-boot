@@ -37,23 +37,15 @@ public class ASN1DataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * If the asn1 file has more then one entry, the setting this option to
-     * true, allows to work with the splitter EIP, to split the data using an
-     * iterator in a streaming mode.
-     */
-    private Boolean usingIterator = false;
-    /**
      * Class to use when unmarshalling.
      */
     private String unmarshalType;
-
-    public Boolean getUsingIterator() {
-        return usingIterator;
-    }
-
-    public void setUsingIterator(Boolean usingIterator) {
-        this.usingIterator = usingIterator;
-    }
+    /**
+     * If the asn1 file has more than one entry, the setting this option to
+     * true, allows working with the splitter EIP, to split the data using an
+     * iterator in a streaming mode.
+     */
+    private Boolean usingIterator = false;
 
     public String getUnmarshalType() {
         return unmarshalType;
@@ -61,5 +53,13 @@ public class ASN1DataFormatConfiguration
 
     public void setUnmarshalType(String unmarshalType) {
         this.unmarshalType = unmarshalType;
+    }
+
+    public Boolean getUsingIterator() {
+        return usingIterator;
+    }
+
+    public void setUsingIterator(Boolean usingIterator) {
+        this.usingIterator = usingIterator;
     }
 }

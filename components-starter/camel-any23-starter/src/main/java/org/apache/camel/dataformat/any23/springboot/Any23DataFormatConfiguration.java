@@ -46,6 +46,11 @@ public class Any23DataFormatConfiguration
      */
     private Any23OutputFormat outputFormat = Any23OutputFormat.RDF4JMODEL;
     /**
+     * The URI to use as base for building RDF entities if only relative paths
+     * are provided.
+     */
+    private String baseUri;
+    /**
      * Configurations for Apache Any23 as key-value pairs in order to customize
      * the extraction process. The list of supported parameters can be found
      * here. If not provided, a default configuration is used.
@@ -57,11 +62,6 @@ public class Any23DataFormatConfiguration
      * available extractors are used.
      */
     private List<String> extractors;
-    /**
-     * The URI to use as base for building RDF entities if only relative paths
-     * are provided.
-     */
-    private String baseUri;
 
     public Any23OutputFormat getOutputFormat() {
         return outputFormat;
@@ -69,6 +69,14 @@ public class Any23DataFormatConfiguration
 
     public void setOutputFormat(Any23OutputFormat outputFormat) {
         this.outputFormat = outputFormat;
+    }
+
+    public String getBaseUri() {
+        return baseUri;
+    }
+
+    public void setBaseUri(String baseUri) {
+        this.baseUri = baseUri;
     }
 
     public List<PropertyDefinition> getConfiguration() {
@@ -85,13 +93,5 @@ public class Any23DataFormatConfiguration
 
     public void setExtractors(List<String> extractors) {
         this.extractors = extractors;
-    }
-
-    public String getBaseUri() {
-        return baseUri;
-    }
-
-    public void setBaseUri(String baseUri) {
-        this.baseUri = baseUri;
     }
 }

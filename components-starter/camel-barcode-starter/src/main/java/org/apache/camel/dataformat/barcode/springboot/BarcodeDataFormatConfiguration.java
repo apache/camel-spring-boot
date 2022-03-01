@@ -37,6 +37,14 @@ public class BarcodeDataFormatConfiguration
      */
     private Boolean enabled;
     /**
+     * Barcode format such as QR-Code
+     */
+    private String barcodeFormat;
+    /**
+     * Image type of the barcode such as png
+     */
+    private String imageType;
+    /**
      * Width of the barcode
      */
     private Integer width;
@@ -44,14 +52,22 @@ public class BarcodeDataFormatConfiguration
      * Height of the barcode
      */
     private Integer height;
-    /**
-     * Image type of the barcode such as png
-     */
-    private String imageType;
-    /**
-     * Barcode format such as QR-Code
-     */
-    private String barcodeFormat;
+
+    public String getBarcodeFormat() {
+        return barcodeFormat;
+    }
+
+    public void setBarcodeFormat(String barcodeFormat) {
+        this.barcodeFormat = barcodeFormat;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
 
     public Integer getWidth() {
         return width;
@@ -67,21 +83,5 @@ public class BarcodeDataFormatConfiguration
 
     public void setHeight(Integer height) {
         this.height = height;
-    }
-
-    public String getImageType() {
-        return imageType;
-    }
-
-    public void setImageType(String imageType) {
-        this.imageType = imageType;
-    }
-
-    public String getBarcodeFormat() {
-        return barcodeFormat;
-    }
-
-    public void setBarcodeFormat(String barcodeFormat) {
-        this.barcodeFormat = barcodeFormat;
     }
 }
