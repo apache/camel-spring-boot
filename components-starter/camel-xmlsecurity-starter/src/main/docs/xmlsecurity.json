@@ -441,7 +441,7 @@
     {
       "name": "camel.dataformat.xml-security.secure-tag-contents",
       "type": "java.lang.Boolean",
-      "description": "A boolean value to specify whether the XML Element is to be encrypted or the contents of the XML Element false = Element Level true = Element Content Level",
+      "description": "A boolean value to specify whether the XML Element is to be encrypted or the contents of the XML Element. false = Element Level. true = Element Content Level.",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
       "defaultValue": false
     },

@@ -48,7 +48,7 @@ public class JaxbDataFormatConfiguration
     private Boolean contextPathIsClassName = false;
     /**
      * To validate against an existing schema. Your can use the prefix
-     * classpath:, file: or http: to specify how the resource should by
+     * classpath:, file: or http: to specify how the resource should be
      * resolved. You can separate multiple schema files by using the ','
      * character.
      */

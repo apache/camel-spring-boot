@@ -102,6 +102,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.dataformat.jackson-xml.timezone",
+      "type": "java.lang.String",
+      "description": "If set then Jackson will use the Timezone when marshalling\/unmarshalling.",
+      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
+    },
+    {
       "name": "camel.dataformat.jackson-xml.unmarshal-type",
       "type": "java.lang.String",
       "description": "Class name of the java type to use when unmarshalling",

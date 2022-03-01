@@ -46,6 +46,11 @@ public class JacksonDataFormatConfiguration
      */
     private Boolean useDefaultObjectMapper = true;
     /**
+     * If set to true then Jackson will lookup for an objectMapper into the
+     * registry
+     */
+    private Boolean autoDiscoverObjectMapper = false;
+    /**
      * To enable pretty printing output nicely formatted. Is by default false.
      */
     private Boolean prettyPrint = false;
@@ -124,18 +129,6 @@ public class JacksonDataFormatConfiguration
      */
     private String timezone;
     /**
-     * If set to true then Jackson will lookup for an objectMapper into the
-     * registry
-     */
-    private Boolean autoDiscoverObjectMapper = false;
-    /**
-     * Whether the data format should set the Content-Type header with the type
-     * from the data format. For example application/xml for data formats
-     * marshalling to XML, or application/json for data formats marshalling to
-     * JSON
-     */
-    private Boolean contentTypeHeader = true;
-    /**
      * Optional schema resolver used to lookup schemas for the data in transit.
      */
     private String schemaResolver;
@@ -149,6 +142,13 @@ public class JacksonDataFormatConfiguration
      * LOWER_CASE, KEBAB_CASE, SNAKE_CASE and UPPER_CAMEL_CASE
      */
     private String namingStrategy;
+    /**
+     * Whether the data format should set the Content-Type header with the type
+     * from the data format. For example application/xml for data formats
+     * marshalling to XML, or application/json for data formats marshalling to
+     * JSON
+     */
+    private Boolean contentTypeHeader = true;
 
     public String getObjectMapper() {
         return objectMapper;
@@ -164,6 +164,14 @@ public class JacksonDataFormatConfiguration
 
     public void setUseDefaultObjectMapper(Boolean useDefaultObjectMapper) {
         this.useDefaultObjectMapper = useDefaultObjectMapper;
+    }
+
+    public Boolean getAutoDiscoverObjectMapper() {
+        return autoDiscoverObjectMapper;
+    }
+
+    public void setAutoDiscoverObjectMapper(Boolean autoDiscoverObjectMapper) {
+        this.autoDiscoverObjectMapper = autoDiscoverObjectMapper;
     }
 
     public Boolean getPrettyPrint() {
@@ -270,22 +278,6 @@ public class JacksonDataFormatConfiguration
         this.timezone = timezone;
     }
 
-    public Boolean getAutoDiscoverObjectMapper() {
-        return autoDiscoverObjectMapper;
-    }
-
-    public void setAutoDiscoverObjectMapper(Boolean autoDiscoverObjectMapper) {
-        this.autoDiscoverObjectMapper = autoDiscoverObjectMapper;
-    }
-
-    public Boolean getContentTypeHeader() {
-        return contentTypeHeader;
-    }
-
-    public void setContentTypeHeader(Boolean contentTypeHeader) {
-        this.contentTypeHeader = contentTypeHeader;
-    }
-
     public String getSchemaResolver() {
         return schemaResolver;
     }
@@ -308,5 +300,13 @@ public class JacksonDataFormatConfiguration
 
     public void setNamingStrategy(String namingStrategy) {
         this.namingStrategy = namingStrategy;
+    }
+
+    public Boolean getContentTypeHeader() {
+        return contentTypeHeader;
+    }
+
+    public void setContentTypeHeader(Boolean contentTypeHeader) {
+        this.contentTypeHeader = contentTypeHeader;
     }
 }

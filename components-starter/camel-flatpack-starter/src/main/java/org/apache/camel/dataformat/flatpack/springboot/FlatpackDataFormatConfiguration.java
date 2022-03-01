@@ -47,19 +47,14 @@ public class FlatpackDataFormatConfiguration
      */
     private Boolean fixed = false;
     /**
+     * The delimiter char (could be ; , or similar)
+     */
+    private String delimiter = ",";
+    /**
      * Whether the first line is ignored for delimited files (for the column
      * headers). Is by default true.
      */
     private Boolean ignoreFirstRecord = true;
-    /**
-     * If the text is qualified with a character. Uses quote character by
-     * default.
-     */
-    private String textQualifier;
-    /**
-     * The delimiter char (could be ; , or similar)
-     */
-    private String delimiter = ",";
     /**
      * Allows for lines to be shorter than expected and ignores the extra
      * characters
@@ -70,6 +65,11 @@ public class FlatpackDataFormatConfiguration
      * characters.
      */
     private Boolean ignoreExtraColumns = false;
+    /**
+     * If the text is qualified with a character. Uses quote character by
+     * default.
+     */
+    private String textQualifier;
     /**
      * References to a custom parser factory to lookup in the registry
      */
@@ -91,28 +91,20 @@ public class FlatpackDataFormatConfiguration
         this.fixed = fixed;
     }
 
-    public Boolean getIgnoreFirstRecord() {
-        return ignoreFirstRecord;
-    }
-
-    public void setIgnoreFirstRecord(Boolean ignoreFirstRecord) {
-        this.ignoreFirstRecord = ignoreFirstRecord;
-    }
-
-    public String getTextQualifier() {
-        return textQualifier;
-    }
-
-    public void setTextQualifier(String textQualifier) {
-        this.textQualifier = textQualifier;
-    }
-
     public String getDelimiter() {
         return delimiter;
     }
 
     public void setDelimiter(String delimiter) {
         this.delimiter = delimiter;
+    }
+
+    public Boolean getIgnoreFirstRecord() {
+        return ignoreFirstRecord;
+    }
+
+    public void setIgnoreFirstRecord(Boolean ignoreFirstRecord) {
+        this.ignoreFirstRecord = ignoreFirstRecord;
     }
 
     public Boolean getAllowShortLines() {
@@ -129,6 +121,14 @@ public class FlatpackDataFormatConfiguration
 
     public void setIgnoreExtraColumns(Boolean ignoreExtraColumns) {
         this.ignoreExtraColumns = ignoreExtraColumns;
+    }
+
+    public String getTextQualifier() {
+        return textQualifier;
+    }
+
+    public void setTextQualifier(String textQualifier) {
+        this.textQualifier = textQualifier;
     }
 
     public String getParserFactoryRef() {

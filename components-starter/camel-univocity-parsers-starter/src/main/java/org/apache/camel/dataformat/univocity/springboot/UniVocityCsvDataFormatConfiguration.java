@@ -38,6 +38,10 @@ public class UniVocityCsvDataFormatConfiguration
      */
     private Boolean enabled;
     /**
+     * The delimiter of values
+     */
+    private String delimiter = ",";
+    /**
      * Whether or not all values must be quoted when writing them.
      */
     private Boolean quoteAllFields = false;
@@ -49,10 +53,6 @@ public class UniVocityCsvDataFormatConfiguration
      * The quote escape symbol
      */
     private String quoteEscape = "\"";
-    /**
-     * The delimiter of values
-     */
-    private String delimiter = ",";
     /**
      * The string representation of a null value. The default value is null
      */
@@ -117,6 +117,14 @@ public class UniVocityCsvDataFormatConfiguration
      */
     private Boolean asMap = false;
 
+    public String getDelimiter() {
+        return delimiter;
+    }
+
+    public void setDelimiter(String delimiter) {
+        this.delimiter = delimiter;
+    }
+
     public Boolean getQuoteAllFields() {
         return quoteAllFields;
     }
@@ -139,14 +147,6 @@ public class UniVocityCsvDataFormatConfiguration
 
     public void setQuoteEscape(String quoteEscape) {
         this.quoteEscape = quoteEscape;
-    }
-
-    public String getDelimiter() {
-        return delimiter;
-    }
-
-    public void setDelimiter(String delimiter) {
-        this.delimiter = delimiter;
     }
 
     public String getNullValue() {

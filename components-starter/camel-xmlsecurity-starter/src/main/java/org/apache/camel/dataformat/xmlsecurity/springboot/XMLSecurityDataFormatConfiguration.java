@@ -67,8 +67,8 @@ public class XMLSecurityDataFormatConfiguration
     private String secureTag;
     /**
      * A boolean value to specify whether the XML Element is to be encrypted or
-     * the contents of the XML Element false = Element Level true = Element
-     * Content Level
+     * the contents of the XML Element. false = Element Level. true = Element
+     * Content Level.
      */
     private Boolean secureTagContents = false;
     /**

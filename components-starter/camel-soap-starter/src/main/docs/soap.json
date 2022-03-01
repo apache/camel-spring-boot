@@ -51,7 +51,7 @@
     {
       "name": "camel.dataformat.soap.schema",
       "type": "java.lang.String",
-      "description": "To validate against an existing schema. Your can use the prefix classpath:, file: or http: to specify how the resource should by resolved. You can separate multiple schema files by using the ',' character.",
+      "description": "To validate against an existing schema. Your can use the prefix classpath:, file: or http: to specify how the resource should be resolved. You can separate multiple schema files by using the ',' character.",
       "sourceType": "org.apache.camel.dataformat.soap.springboot.SoapDataFormatConfiguration"
     },
     {

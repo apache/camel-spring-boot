@@ -37,13 +37,6 @@ public class JacksonProtobufDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Whether the data format should set the Content-Type header with the type
-     * from the data format. For example application/xml for data formats
-     * marshalling to XML, or application/json for data formats marshalling to
-     * JSON
-     */
-    private Boolean contentTypeHeader = true;
-    /**
      * Lookup and use the existing ObjectMapper with the given id when using
      * Jackson.
      */
@@ -52,6 +45,11 @@ public class JacksonProtobufDataFormatConfiguration
      * Whether to lookup and use default Jackson ObjectMapper from the registry.
      */
     private Boolean useDefaultObjectMapper = true;
+    /**
+     * If set to true then Jackson will lookup for an objectMapper into the
+     * registry
+     */
+    private Boolean autoDiscoverObjectMapper = false;
     /**
      * Class name of the java type to use when unmarshalling
      */
@@ -125,11 +123,6 @@ public class JacksonProtobufDataFormatConfiguration
      */
     private String timezone;
     /**
-     * If set to true then Jackson will lookup for an objectMapper into the
-     * registry
-     */
-    private Boolean autoDiscoverObjectMapper = false;
-    /**
      * Optional schema resolver used to lookup schemas for the data in transit.
      */
     private String schemaResolver;
@@ -137,14 +130,13 @@ public class JacksonProtobufDataFormatConfiguration
      * When not disabled, the SchemaResolver will be looked up into the registry
      */
     private Boolean autoDiscoverSchemaResolver = true;
-
-    public Boolean getContentTypeHeader() {
-        return contentTypeHeader;
-    }
-
-    public void setContentTypeHeader(Boolean contentTypeHeader) {
-        this.contentTypeHeader = contentTypeHeader;
-    }
+    /**
+     * Whether the data format should set the Content-Type header with the type
+     * from the data format. For example application/xml for data formats
+     * marshalling to XML, or application/json for data formats marshalling to
+     * JSON
+     */
+    private Boolean contentTypeHeader = true;
 
     public String getObjectMapper() {
         return objectMapper;
@@ -160,6 +152,14 @@ public class JacksonProtobufDataFormatConfiguration
 
     public void setUseDefaultObjectMapper(Boolean useDefaultObjectMapper) {
         this.useDefaultObjectMapper = useDefaultObjectMapper;
+    }
+
+    public Boolean getAutoDiscoverObjectMapper() {
+        return autoDiscoverObjectMapper;
+    }
+
+    public void setAutoDiscoverObjectMapper(Boolean autoDiscoverObjectMapper) {
+        this.autoDiscoverObjectMapper = autoDiscoverObjectMapper;
     }
 
     public String getUnmarshalType() {
@@ -258,14 +258,6 @@ public class JacksonProtobufDataFormatConfiguration
         this.timezone = timezone;
     }
 
-    public Boolean getAutoDiscoverObjectMapper() {
-        return autoDiscoverObjectMapper;
-    }
-
-    public void setAutoDiscoverObjectMapper(Boolean autoDiscoverObjectMapper) {
-        this.autoDiscoverObjectMapper = autoDiscoverObjectMapper;
-    }
-
     public String getSchemaResolver() {
         return schemaResolver;
     }
@@ -280,5 +272,13 @@ public class JacksonProtobufDataFormatConfiguration
 
     public void setAutoDiscoverSchemaResolver(Boolean autoDiscoverSchemaResolver) {
         this.autoDiscoverSchemaResolver = autoDiscoverSchemaResolver;
+    }
+
+    public Boolean getContentTypeHeader() {
+        return contentTypeHeader;
+    }
+
+    public void setContentTypeHeader(Boolean contentTypeHeader) {
+        this.contentTypeHeader = contentTypeHeader;
     }
 }

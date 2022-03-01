@@ -38,6 +38,10 @@ public class UniVocityFixedDataFormatConfiguration
      */
     private Boolean enabled;
     /**
+     * The padding character. The default value is a space
+     */
+    private String padding;
+    /**
      * Whether or not the trailing characters until new line must be ignored.
      * The default value is false
      */
@@ -46,10 +50,6 @@ public class UniVocityFixedDataFormatConfiguration
      * Whether or not the record ends on new line. The default value is false
      */
     private Boolean recordEndsOnNewline = false;
-    /**
-     * The padding character. The default value is a space
-     */
-    private String padding;
     /**
      * The string representation of a null value. The default value is null
      */
@@ -114,6 +114,14 @@ public class UniVocityFixedDataFormatConfiguration
      */
     private Boolean asMap = false;
 
+    public String getPadding() {
+        return padding;
+    }
+
+    public void setPadding(String padding) {
+        this.padding = padding;
+    }
+
     public Boolean getSkipTrailingCharsUntilNewline() {
         return skipTrailingCharsUntilNewline;
     }
@@ -129,14 +137,6 @@ public class UniVocityFixedDataFormatConfiguration
 
     public void setRecordEndsOnNewline(Boolean recordEndsOnNewline) {
         this.recordEndsOnNewline = recordEndsOnNewline;
-    }
-
-    public String getPadding() {
-        return padding;
-    }
-
-    public void setPadding(String padding) {
-        this.padding = padding;
     }
 
     public String getNullValue() {

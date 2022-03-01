@@ -37,13 +37,13 @@ public class TarFileDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * If the tar file has more then one entry, the setting this option to true,
-     * allows to work with the splitter EIP, to split the data using an iterator
+     * If the tar file has more than one entry, the setting this option to true,
+     * allows working with the splitter EIP, to split the data using an iterator
      * in a streaming mode.
      */
     private Boolean usingIterator = false;
     /**
-     * If the tar file has more then one entry, setting this option to true,
+     * If the tar file has more than one entry, setting this option to true,
      * allows to get the iterator even if the directory is empty
      */
     private Boolean allowEmptyDirectory = false;
