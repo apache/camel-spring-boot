@@ -42,13 +42,13 @@ public class CryptoDataFormatConfiguration
      */
     private String algorithm;
     /**
-     * The name of the JCE Security Provider that should be used.
-     */
-    private String cryptoProvider;
-    /**
      * Refers to the secret key to lookup from the register to use.
      */
     private String keyRef;
+    /**
+     * The name of the JCE Security Provider that should be used.
+     */
+    private String cryptoProvider;
     /**
      * Refers to a byte array containing the Initialization Vector that will be
      * used to initialize the Cipher.
@@ -63,7 +63,7 @@ public class CryptoDataFormatConfiguration
     /**
      * The size of the buffer used in the signature process.
      */
-    private Integer buffersize;
+    private Integer bufferSize = 4096;
     /**
      * The JCE algorithm name indicating the Message Authentication algorithm.
      */
@@ -87,20 +87,20 @@ public class CryptoDataFormatConfiguration
         this.algorithm = algorithm;
     }
 
-    public String getCryptoProvider() {
-        return cryptoProvider;
-    }
-
-    public void setCryptoProvider(String cryptoProvider) {
-        this.cryptoProvider = cryptoProvider;
-    }
-
     public String getKeyRef() {
         return keyRef;
     }
 
     public void setKeyRef(String keyRef) {
         this.keyRef = keyRef;
+    }
+
+    public String getCryptoProvider() {
+        return cryptoProvider;
+    }
+
+    public void setCryptoProvider(String cryptoProvider) {
+        this.cryptoProvider = cryptoProvider;
     }
 
     public String getInitVectorRef() {
@@ -119,12 +119,12 @@ public class CryptoDataFormatConfiguration
         this.algorithmParameterRef = algorithmParameterRef;
     }
 
-    public Integer getBuffersize() {
-        return buffersize;
+    public Integer getBufferSize() {
+        return bufferSize;
     }
 
-    public void setBuffersize(Integer buffersize) {
-        this.buffersize = buffersize;
+    public void setBufferSize(Integer bufferSize) {
+        this.bufferSize = bufferSize;
     }
 
     public String getMacAlgorithm() {

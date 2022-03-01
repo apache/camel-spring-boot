@@ -45,7 +45,7 @@ public class CsvDataFormatConfiguration
     /**
      * The name of the format to use, the default value is CSVFormat.DEFAULT
      */
-    private String formatName;
+    private String formatName = "DEFAULT";
     /**
      * Disables the comment marker of the reference format.
      */

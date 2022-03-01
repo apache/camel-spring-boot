@@ -46,20 +46,20 @@ public class BindyCsvDataFormatConfiguration
      */
     private String classType;
     /**
-     * To configure a default locale to use, such as us for united states. To
-     * use the JVM platform default locale then use the name default
+     * Whether to allow empty streams in the unmarshal process. If true, no
+     * exception will be thrown when a body without records is provided.
      */
-    private String locale;
+    private Boolean allowEmptyStream = false;
     /**
      * When unmarshalling should a single instance be unwrapped and returned
      * instead of wrapped in a java.util.List.
      */
     private Boolean unwrapSingleInstance = true;
     /**
-     * Whether to allow empty streams in the unmarshal process. If true, no
-     * exception will be thrown when a body without records is provided.
+     * To configure a default locale to use, such as us for united states. To
+     * use the JVM platform default locale then use the name default
      */
-    private Boolean allowEmptyStream = false;
+    private String locale;
 
     public String getType() {
         return type;
@@ -77,12 +77,12 @@ public class BindyCsvDataFormatConfiguration
         this.classType = classType;
     }
 
-    public String getLocale() {
-        return locale;
+    public Boolean getAllowEmptyStream() {
+        return allowEmptyStream;
     }
 
-    public void setLocale(String locale) {
-        this.locale = locale;
+    public void setAllowEmptyStream(Boolean allowEmptyStream) {
+        this.allowEmptyStream = allowEmptyStream;
     }
 
     public Boolean getUnwrapSingleInstance() {
@@ -93,11 +93,11 @@ public class BindyCsvDataFormatConfiguration
         this.unwrapSingleInstance = unwrapSingleInstance;
     }
 
-    public Boolean getAllowEmptyStream() {
-        return allowEmptyStream;
+    public String getLocale() {
+        return locale;
     }
 
-    public void setAllowEmptyStream(Boolean allowEmptyStream) {
-        this.allowEmptyStream = allowEmptyStream;
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 }

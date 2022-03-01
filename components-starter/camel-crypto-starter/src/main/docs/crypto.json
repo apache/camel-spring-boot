@@ -190,10 +190,11 @@
       "sourceType": "org.apache.camel.converter.crypto.springboot.CryptoDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.crypto.buffersize",
+      "name": "camel.dataformat.crypto.buffer-size",
       "type": "java.lang.Integer",
       "description": "The size of the buffer used in the signature process.",
-      "sourceType": "org.apache.camel.converter.crypto.springboot.CryptoDataFormatConfiguration"
+      "sourceType": "org.apache.camel.converter.crypto.springboot.CryptoDataFormatConfiguration",
+      "defaultValue": 4096
     },
     {
       "name": "camel.dataformat.crypto.crypto-provider",

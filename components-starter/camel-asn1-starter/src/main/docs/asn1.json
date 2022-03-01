@@ -33,7 +33,7 @@
     {
       "name": "camel.dataformat.asn1.using-iterator",
       "type": "java.lang.Boolean",
-      "description": "If the asn1 file has more then one entry, the setting this option to true, allows to work with the splitter EIP, to split the data using an iterator in a streaming mode.",
+      "description": "If the asn1 file has more than one entry, the setting this option to true, allows working with the splitter EIP, to split the data using an iterator in a streaming mode.",
       "sourceType": "org.apache.camel.dataformat.asn1.springboot.ASN1DataFormatConfiguration",
       "defaultValue": false
     }
