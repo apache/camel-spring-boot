@@ -33,7 +33,7 @@ import org.springframework.test.annotation.DirtiesContext;
                 GcpVaultConfigurationTest.class},
         properties = {
                 "camel.vault.gcp.serviceAccountKey=file:////key.json",
-                "camel.vault.aws.projectId=gcp-project"}
+                "camel.vault.gcp.projectId=gcp-project"}
 )
 public class GcpVaultConfigurationTest {
 
