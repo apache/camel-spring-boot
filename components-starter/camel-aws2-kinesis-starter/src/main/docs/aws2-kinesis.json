@@ -239,12 +239,6 @@
       "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
     },
     {
-      "name": "camel.component.aws2-kinesis.resume-strategy",
-      "type": "org.apache.camel.component.aws2.kinesis.consumer.KinesisResumeStrategy",
-      "description": "Defines a resume strategy for AWS Kinesis. The default strategy reads the sequenceNumber if provided. The option is a org.apache.camel.component.aws2.kinesis.consumer.KinesisResumeStrategy type.",
-      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
-    },
-    {
       "name": "camel.component.aws2-kinesis.secret-key",
       "type": "java.lang.String",
       "description": "Amazon AWS Secret Key",

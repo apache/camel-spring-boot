@@ -25,7 +25,6 @@ import org.apache.camel.component.kafka.KafkaConfiguration;
 import org.apache.camel.component.kafka.PollExceptionStrategy;
 import org.apache.camel.component.kafka.PollOnError;
 import org.apache.camel.component.kafka.consumer.KafkaManualCommitFactory;
-import org.apache.camel.component.kafka.consumer.support.KafkaConsumerResumeStrategy;
 import org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer;
 import org.apache.camel.component.kafka.serde.KafkaHeaderSerializer;
 import org.apache.camel.spi.HeaderFilterStrategy;
@@ -284,19 +283,6 @@ public class KafkaComponentConfiguration
      * java.lang.Long type.
      */
     private Long pollTimeoutMs = 5000L;
-    /**
-     * This option allows the user to set a custom resume strategy. The resume
-     * strategy is executed when partitions are assigned (i.e.: when connecting
-     * or reconnecting). It allows implementations to customize how to resume
-     * operations and serve as more flexible alternative to the seekTo and the
-     * offsetRepository mechanisms. See the KafkaConsumerResumeStrategy for
-     * implementation details. This option does not affect the auto commit
-     * setting. It is likely that implementations using this setting will also
-     * want to evaluate using the manual commit option along with this. The
-     * option is a
-     * org.apache.camel.component.kafka.consumer.support.KafkaConsumerResumeStrategy type.
-     */
-    private KafkaConsumerResumeStrategy resumeStrategy;
     /**
      * Set if KafkaConsumer will read from beginning or end on startup:
      * beginning : read from beginning end : read from end This is replacing the
@@ -1027,14 +1013,6 @@ public class KafkaComponentConfiguration
 
     public void setPollTimeoutMs(Long pollTimeoutMs) {
         this.pollTimeoutMs = pollTimeoutMs;
-    }
-
-    public KafkaConsumerResumeStrategy getResumeStrategy() {
-        return resumeStrategy;
-    }
-
-    public void setResumeStrategy(KafkaConsumerResumeStrategy resumeStrategy) {
-        this.resumeStrategy = resumeStrategy;
     }
 
     public String getSeekTo() {
