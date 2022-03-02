@@ -244,15 +244,15 @@ public class NettyHttpComponentConfiguration
      */
     private Boolean producerPoolEnabled = true;
     /**
+     * Sets the cap on the number of idle instances in the pool.
+     */
+    private Integer producerPoolMaxIdle = 100;
+    /**
      * Sets the cap on the number of objects that can be allocated by the pool
      * (checked out to clients, or idle awaiting checkout) at a given time. Use
      * a negative value for no limit.
      */
-    private Integer producerPoolMaxActive = -1;
-    /**
-     * Sets the cap on the number of idle instances in the pool.
-     */
-    private Integer producerPoolMaxIdle = 100;
+    private Integer producerPoolMaxTotal = -1;
     /**
      * Sets the minimum amount of time (value in millis) an object may sit idle
      * in the pool before it is eligible for eviction by the idle object
@@ -670,20 +670,20 @@ public class NettyHttpComponentConfiguration
         this.producerPoolEnabled = producerPoolEnabled;
     }
 
-    public Integer getProducerPoolMaxActive() {
-        return producerPoolMaxActive;
-    }
-
-    public void setProducerPoolMaxActive(Integer producerPoolMaxActive) {
-        this.producerPoolMaxActive = producerPoolMaxActive;
-    }
-
     public Integer getProducerPoolMaxIdle() {
         return producerPoolMaxIdle;
     }
 
     public void setProducerPoolMaxIdle(Integer producerPoolMaxIdle) {
         this.producerPoolMaxIdle = producerPoolMaxIdle;
+    }
+
+    public Integer getProducerPoolMaxTotal() {
+        return producerPoolMaxTotal;
+    }
+
+    public void setProducerPoolMaxTotal(Integer producerPoolMaxTotal) {
+        this.producerPoolMaxTotal = producerPoolMaxTotal;
     }
 
     public Long getProducerPoolMinEvictableIdle() {

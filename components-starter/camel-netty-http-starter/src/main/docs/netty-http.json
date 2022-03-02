@@ -251,18 +251,18 @@
       "defaultValue": true
     },
     {
-      "name": "camel.component.netty-http.producer-pool-max-active",
-      "type": "java.lang.Integer",
-      "description": "Sets the cap on the number of objects that can be allocated by the pool (checked out to clients, or idle awaiting checkout) at a given time. Use a negative value for no limit.",
-      "sourceType": "org.apache.camel.component.netty.http.springboot.NettyHttpComponentConfiguration",
-      "defaultValue": -1
-    },
-    {
       "name": "camel.component.netty-http.producer-pool-max-idle",
       "type": "java.lang.Integer",
       "description": "Sets the cap on the number of idle instances in the pool.",
       "sourceType": "org.apache.camel.component.netty.http.springboot.NettyHttpComponentConfiguration",
       "defaultValue": 100
+    },
+    {
+      "name": "camel.component.netty-http.producer-pool-max-total",
+      "type": "java.lang.Integer",
+      "description": "Sets the cap on the number of objects that can be allocated by the pool (checked out to clients, or idle awaiting checkout) at a given time. Use a negative value for no limit.",
+      "sourceType": "org.apache.camel.component.netty.http.springboot.NettyHttpComponentConfiguration",
+      "defaultValue": -1
     },
     {
       "name": "camel.component.netty-http.producer-pool-min-evictable-idle",
