@@ -17,10 +17,8 @@
 package org.apache.camel.component.netty.http.springboot;
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 import javax.annotation.Generated;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.handler.ssl.SslHandler;
@@ -356,13 +354,13 @@ public class NettyHttpComponentConfiguration
      * separated by comma, and have the values be looked up in the Registry.
      * Just remember to prefix the value with # so Camel knows it should lookup.
      */
-    private List<ChannelHandler> decoders;
+    private String decoders;
     /**
      * A list of encoders to be used. You can use a String which have values
      * separated by comma, and have the values be looked up in the Registry.
      * Just remember to prefix the value with # so Camel knows it should lookup.
      */
-    private List<ChannelHandler> encoders;
+    private String encoders;
     /**
      * Which protocols to enable when using SSL
      */
@@ -816,19 +814,19 @@ public class NettyHttpComponentConfiguration
         this.workerGroup = workerGroup;
     }
 
-    public List<ChannelHandler> getDecoders() {
+    public String getDecoders() {
         return decoders;
     }
 
-    public void setDecoders(List<ChannelHandler> decoders) {
+    public void setDecoders(String decoders) {
         this.decoders = decoders;
     }
 
-    public List<ChannelHandler> getEncoders() {
+    public String getEncoders() {
         return encoders;
     }
 
-    public void setEncoders(List<ChannelHandler> encoders) {
+    public void setEncoders(String encoders) {
         this.encoders = encoders;
     }
 

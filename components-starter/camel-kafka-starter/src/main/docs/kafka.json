@@ -480,12 +480,6 @@
       "defaultValue": 30000
     },
     {
-      "name": "camel.component.kafka.resume-strategy",
-      "type": "org.apache.camel.component.kafka.consumer.support.KafkaConsumerResumeStrategy",
-      "description": "This option allows the user to set a custom resume strategy. The resume strategy is executed when partitions are assigned (i.e.: when connecting or reconnecting). It allows implementations to customize how to resume operations and serve as more flexible alternative to the seekTo and the offsetRepository mechanisms. See the KafkaConsumerResumeStrategy for implementation details. This option does not affect the auto commit setting. It is likely that implementations using this setting will also want to evaluate using the manual commit option along with this. The option is a org.apache.camel.component.kafka.consumer.support.KafkaConsumerResumeStrategy type.",
-      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
-    },
-    {
       "name": "camel.component.kafka.retries",
       "type": "java.lang.Integer",
       "description": "Setting a value greater than zero will cause the client to resend any record whose send fails with a potentially transient error. Note that this retry is no different than if the client resent the record upon receiving the error. Allowing retries will potentially change the ordering of records because if two records are sent to a single partition, and the first fails and is retried but the second succeeds, then the second record may appear first.",
