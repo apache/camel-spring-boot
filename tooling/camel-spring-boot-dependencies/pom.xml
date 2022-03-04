@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>tooling</artifactId>
-    <version>3.14.2</version>
+    <version>3.14.3-SNAPSHOT</version>
   </parent>
   <artifactId>camel-spring-boot-dependencies</artifactId>
   <packaging>pom</packaging>
@@ -1620,7 +1620,7 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-boot</artifactId>
-        <version>3.14.2</version>
+        <version>3.14.3-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
