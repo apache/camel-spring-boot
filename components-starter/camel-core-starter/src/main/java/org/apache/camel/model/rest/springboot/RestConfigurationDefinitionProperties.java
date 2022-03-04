@@ -42,12 +42,12 @@ public class RestConfigurationDefinitionProperties {
      */
     private String component;
     /**
-     * The name of the Camel component to use as the REST API (such as swagger)
-     * If no API Component has been explicit configured, then Camel will lookup
-     * if there is a Camel component responsible for servicing and generating
-     * the REST API documentation, or if a
-     * org.apache.camel.spi.RestApiProcessorFactory is registered in the
-     * registry. If either one is found, then that is being used.
+     * The name of the Camel component to use as the REST API. If no API
+     * Component has been explicit configured, then Camel will lookup if there
+     * is a Camel component responsible for servicing and generating the REST
+     * API documentation, or if a org.apache.camel.spi.RestApiProcessorFactory
+     * is registered in the registry. If either one is found, then that is being
+     * used.
      */
     private String apiComponent;
     /**
@@ -64,16 +64,6 @@ public class RestConfigurationDefinitionProperties {
      */
     private String host;
     /**
-     * To use an specific hostname for the API documentation (eg swagger) This
-     * can be used to override the generated host with this configured hostname
-     */
-    private String apiHost;
-    /**
-     * Whether to use X-Forward headers for Host and related setting. The
-     * default value is true.
-     */
-    private Boolean useXForwardHeaders = true;
-    /**
      * The port number to use for exposing the REST service. Notice if you use
      * servlet component then the port number configured here does not apply, as
      * the port number in use is the actual port number the servlet component is
@@ -85,13 +75,22 @@ public class RestConfigurationDefinitionProperties {
      */
     private String port;
     /**
-     * Sets the location of the api document (swagger api) the REST producer
-     * will use to validate the REST uri and query parameters are valid
-     * accordingly to the api document. This requires adding camel-swagger-java
-     * to the classpath, and any miss configuration will let Camel fail on
-     * startup and report the error(s). The location of the api document is
-     * loaded from classpath by default, but you can use file: or http: to refer
-     * to resources to load from file or http url.
+     * To use a specific hostname for the API documentation (such as swagger or
+     * openapi) This can be used to override the generated host with this
+     * configured hostname
+     */
+    private String apiHost;
+    /**
+     * Whether to use X-Forward headers for Host and related setting. The
+     * default value is true.
+     */
+    private Boolean useXForwardHeaders = true;
+    /**
+     * Sets the location of the api document the REST producer will use to
+     * validate the REST uri and query parameters are valid accordingly to the
+     * api document. The location of the api document is loaded from classpath
+     * by default, but you can use file: or http: to refer to resources to load
+     * from file or http url.
      */
     private String producerApiDoc;
     /**
@@ -108,11 +107,6 @@ public class RestConfigurationDefinitionProperties {
      */
     private String apiContextPath;
     /**
-     * Sets the route id to use for the route that services the REST API. The
-     * route will by default use an auto assigned route id.
-     */
-    private String apiContextRouteId;
-    /**
      * Whether vendor extension is enabled in the Rest APIs. If enabled then
      * Camel will include additional information as vendor extension (eg keys
      * starting with x-) such as route ids, class names etc. Not all 3rd party
@@ -124,7 +118,7 @@ public class RestConfigurationDefinitionProperties {
      * If no hostname has been explicit configured, then this resolver is used
      * to compute the hostname the REST service will be using.
      */
-    private RestHostNameResolver hostNameResolver;
+    private RestHostNameResolver hostNameResolver = RestHostNameResolver.allLocalIp;
     /**
      * Sets the binding mode to use. The default value is off
      */
@@ -136,11 +130,14 @@ public class RestConfigurationDefinitionProperties {
      */
     private Boolean skipBindingOnErrorCode = false;
     /**
-     * Whether to enable validation of the client request to check whether the
-     * Content-Type and Accept headers from the client is supported by the
-     * Rest-DSL configuration of its consumes/produces settings. This can be
-     * turned on, to enable this check. In case of validation error, then HTTP
-     * Status codes 415 or 406 is returned. The default value is false.
+     * Whether to enable validation of the client request to check: 1)
+     * Content-Type header matches what the Rest DSL consumes; returns HTTP
+     * Status 415 if validation error. 2) Accept header matches what the Rest
+     * DSL produces; returns HTTP Status 406 if validation error. 3) Missing
+     * required data (query parameters, HTTP headers, body); returns HTTP Status
+     * 400 if validation error. 4) Parsing error of the message body (JSon, XML
+     * or Auto binding mode must be enabled); returns HTTP Status 400 if
+     * validation error.
      */
     private Boolean clientRequestValidation = false;
     /**
@@ -149,7 +146,7 @@ public class RestConfigurationDefinitionProperties {
      */
     private Boolean enableCors = false;
     /**
-     * Name of specific json data format to use. By default json-jackson will be
+     * Name of specific json data format to use. By default jackson will be
      * used. Important: This option is only for setting a custom name of the
      * data format, not to refer to an existing data format instance.
      */
@@ -187,8 +184,7 @@ public class RestConfigurationDefinitionProperties {
     private Map<String, Object> dataFormatProperty;
     /**
      * Allows to configure as many additional properties for the api
-     * documentation (swagger). For example set property api.title to my cool
-     * stuff
+     * documentation. For example set property api.title to my cool stuff
      */
     private Map<String, Object> apiProperty;
     /**
@@ -236,6 +232,14 @@ public class RestConfigurationDefinitionProperties {
         this.host = host;
     }
 
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
     public String getApiHost() {
         return apiHost;
     }
@@ -250,14 +254,6 @@ public class RestConfigurationDefinitionProperties {
 
     public void setUseXForwardHeaders(Boolean useXForwardHeaders) {
         this.useXForwardHeaders = useXForwardHeaders;
-    }
-
-    public String getPort() {
-        return port;
-    }
-
-    public void setPort(String port) {
-        this.port = port;
     }
 
     public String getProducerApiDoc() {
@@ -282,14 +278,6 @@ public class RestConfigurationDefinitionProperties {
 
     public void setApiContextPath(String apiContextPath) {
         this.apiContextPath = apiContextPath;
-    }
-
-    public String getApiContextRouteId() {
-        return apiContextRouteId;
-    }
-
-    public void setApiContextRouteId(String apiContextRouteId) {
-        this.apiContextRouteId = apiContextRouteId;
     }
 
     public Boolean getApiVendorExtension() {

@@ -141,10 +141,9 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     }
 
     protected void executeAll() throws MojoExecutionException, MojoFailureException, IOException {
-        if ("camel-core".equals(getMainDepArtifactId())) {
-            executeAll(getMainDepGroupId(), "camel-core");
-            executeAll(getMainDepGroupId(), "camel-base");
+        if ("camel-core-engine".equals(getMainDepArtifactId())) {
             executeAll(getMainDepGroupId(), "camel-core-engine");
+            executeAll(getMainDepGroupId(), "camel-core-model");
             executeAll(getMainDepGroupId(), "camel-core-languages");
         } else {
             executeAll(getMainDepGroupId(), getMainDepArtifactId());
@@ -452,7 +451,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.addImport("org.apache.camel.support.IntrospectionSupport");
         javaClass.addImport("org.apache.camel.spring.boot.util.CamelPropertiesHelper");
         javaClass.addImport("org.apache.camel.CamelContext");
-        javaClass.addImport("org.apache.camel.component.rest.RestComponent");
         javaClass.addImport("org.apache.camel.spi.RestConfiguration");
 
         javaClass.addField().setName("camelContext").setType(loadClass("org.apache.camel.CamelContext")).setPrivate().addAnnotation(Autowired.class);
@@ -467,7 +465,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         method.addThrows(Exception.class);
         method.setReturnType(loadClass("org.apache.camel.spi.RestConfiguration"));
         method.addAnnotation(Lazy.class);
-        method.addAnnotation(Bean.class).setLiteralValue("name", "RestComponent.DEFAULT_REST_CONFIGURATION_ID");
+        method.addAnnotation(Bean.class).setLiteralValue("name", "\"rest-configuration\"");
         method.addAnnotation(ConditionalOnClass.class).setLiteralValue("value", "CamelContext.class");
         method.addAnnotation(ConditionalOnMissingBean.class);
         method.setBody("" + "Map<String, Object> properties = new HashMap<>();\n" + "IntrospectionSupport.getProperties(config, properties, null, false);\n"

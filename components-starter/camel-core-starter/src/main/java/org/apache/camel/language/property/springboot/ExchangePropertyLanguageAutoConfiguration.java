@@ -45,7 +45,7 @@ import org.springframework.context.annotation.Lazy;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({LanguageConfigurationProperties.class,ExchangePropertyLanguageConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.language", "camel.language.exchangeproperty"})
+@ConditionalOnHierarchicalProperties({"camel.language", "camel.language.exchange-property"})
 public class ExchangePropertyLanguageAutoConfiguration {
 
     @Autowired
@@ -72,7 +72,7 @@ public class ExchangePropertyLanguageAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.language.customizer",
-                        "camel.language.exchangeproperty.customizer")
+                        "camel.language.exchange-property.customizer")
                     && target instanceof ExchangePropertyLanguage;
             }
         };

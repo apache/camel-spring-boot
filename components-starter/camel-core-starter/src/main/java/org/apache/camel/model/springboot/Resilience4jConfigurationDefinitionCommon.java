@@ -32,13 +32,13 @@ public class Resilience4jConfigurationDefinitionCommon {
      * and use from the registry. When using this, then any other circuit
      * breaker options are not in use.
      */
-    private String circuitBreakerRef;
+    private String circuitBreaker;
     /**
      * Refers to an existing
      * io.github.resilience4j.circuitbreaker.CircuitBreakerConfig instance to
      * lookup and use from the registry.
      */
-    private String configRef;
+    private String config;
     /**
      * Configures the failure rate threshold in percentage. If the failure rate
      * is equal or greater than the threshold the CircuitBreaker transitions to
@@ -119,20 +119,20 @@ public class Resilience4jConfigurationDefinitionCommon {
      */
     private Integer slowCallDurationThreshold = 60;
 
-    public String getCircuitBreakerRef() {
-        return circuitBreakerRef;
+    public String getCircuitBreaker() {
+        return circuitBreaker;
     }
 
-    public void setCircuitBreakerRef(String circuitBreakerRef) {
-        this.circuitBreakerRef = circuitBreakerRef;
+    public void setCircuitBreaker(String circuitBreaker) {
+        this.circuitBreaker = circuitBreaker;
     }
 
-    public String getConfigRef() {
-        return configRef;
+    public String getConfig() {
+        return config;
     }
 
-    public void setConfigRef(String configRef) {
-        this.configRef = configRef;
+    public void setConfig(String config) {
+        this.config = config;
     }
 
     public Float getFailureRateThreshold() {
