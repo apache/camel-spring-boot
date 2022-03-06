@@ -45,8 +45,6 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
 
     protected List<String> doLoadImplementationsInJar(String packageName, InputStream stream, String urlPath,
                                                       boolean inspectNestedJars, boolean closeStream) {
-
-
         List<String> entries = new ArrayList<>();
 
         JarInputStream jarStream = null;
@@ -55,21 +53,18 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
 
             JarEntry entry;
             while ((entry = jarStream.getNextJarEntry()) != null) {
-                String name = entry.getName();
-
-                name = name.trim();
-                if (!entry.isDirectory() && !name.endsWith(".class")) {
+                String name = entry.getName().trim();
+                if (inspectNestedJars && !entry.isDirectory() && isSpringBootNestedJar(name)) {
+                    String nestedUrl = urlPath + "!/" + name;
+                    log.trace("Inspecting nested jar: {}", nestedUrl);
+                    List<String> nestedEntries = doLoadImplementationsInJar(packageName, jarStream, nestedUrl, false, false);
+                    entries.addAll(nestedEntries);
+                } else if (!entry.isDirectory() && !name.endsWith(".class")) {
                     name = cleanupSpringBootClassName(name);
                     // name is FQN so it must start with package name
                     if (name.startsWith(packageName)) {
                         entries.add(name);
                     }
-                } else if (inspectNestedJars && !entry.isDirectory() && isSpringBootNestedJar(name)) {
-                    String nestedUrl = urlPath + "!/" + name;
-                    log.trace("Inspecting nested jar: {}", nestedUrl);
-
-                    List<String> nestedEntries = doLoadImplementationsInJar(packageName, jarStream, nestedUrl, false, false);
-                    entries.addAll(nestedEntries);
                 }
             }
         } catch (IOException ioe) {
