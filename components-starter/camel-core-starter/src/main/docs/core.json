@@ -53,12 +53,12 @@
       "sourceMethod": "getCustomizer()"
     },
     {
-      "name": "camel.language.exchangeproperty",
+      "name": "camel.language.exchange-property",
       "type": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration",
       "sourceType": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration"
     },
     {
-      "name": "camel.language.exchangeproperty.customizer",
+      "name": "camel.language.exchange-property.customizer",
       "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration",
       "sourceMethod": "getCustomizer()"
@@ -738,18 +738,18 @@
       "defaultValue": true
     },
     {
-      "name": "camel.language.exchangeproperty.customizer.enabled",
+      "name": "camel.language.exchange-property.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
-      "name": "camel.language.exchangeproperty.enabled",
+      "name": "camel.language.exchange-property.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the exchangeProperty language. This is enabled by default.",
       "sourceType": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration"
     },
     {
-      "name": "camel.language.exchangeproperty.trim",
+      "name": "camel.language.exchange-property.trim",
       "type": "java.lang.Boolean",
       "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
       "sourceType": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration",
@@ -859,13 +859,13 @@
       "defaultValue": false
     },
     {
-      "name": "camel.resilience4j.circuit-breaker-ref",
+      "name": "camel.resilience4j.circuit-breaker",
       "type": "java.lang.String",
       "description": "Refers to an existing io.github.resilience4j.circuitbreaker.CircuitBreaker instance to lookup and use from the registry. When using this, then any other circuit breaker options are not in use.",
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties"
     },
     {
-      "name": "camel.resilience4j.config-ref",
+      "name": "camel.resilience4j.config",
       "type": "java.lang.String",
       "description": "Refers to an existing io.github.resilience4j.circuitbreaker.CircuitBreakerConfig instance to lookup and use from the registry.",
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties"
@@ -947,7 +947,7 @@
     {
       "name": "camel.rest.api-component",
       "type": "java.lang.String",
-      "description": "The name of the Camel component to use as the REST API (such as swagger) If no API Component has been explicit configured, then Camel will lookup if there is a Camel component responsible for servicing and generating the REST API documentation, or if a org.apache.camel.spi.RestApiProcessorFactory is registered in the registry. If either one is found, then that is being used.",
+      "description": "The name of the Camel component to use as the REST API. If no API Component has been explicit configured, then Camel will lookup if there is a Camel component responsible for servicing and generating the REST API documentation, or if a org.apache.camel.spi.RestApiProcessorFactory is registered in the registry. If either one is found, then that is being used.",
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
     },
     {
@@ -957,21 +957,15 @@
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
     },
     {
-      "name": "camel.rest.api-context-route-id",
-      "type": "java.lang.String",
-      "description": "Sets the route id to use for the route that services the REST API. The route will by default use an auto assigned route id.",
-      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
-    },
-    {
       "name": "camel.rest.api-host",
       "type": "java.lang.String",
-      "description": "To use an specific hostname for the API documentation (eg swagger) This can be used to override the generated host with this configured hostname",
+      "description": "To use a specific hostname for the API documentation (such as swagger or openapi) This can be used to override the generated host with this configured hostname",
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
     },
     {
       "name": "camel.rest.api-property",
       "type": "java.util.Map<java.lang.String,java.lang.Object>",
-      "description": "Allows to configure as many additional properties for the api documentation (swagger). For example set property api.title to my cool stuff",
+      "description": "Allows to configure as many additional properties for the api documentation. For example set property api.title to my cool stuff",
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
     },
     {
@@ -990,7 +984,7 @@
     {
       "name": "camel.rest.client-request-validation",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable validation of the client request to check whether the Content-Type and Accept headers from the client is supported by the Rest-DSL configuration of its consumes\/produces settings. This can be turned on, to enable this check. In case of validation error, then HTTP Status codes 415 or 406 is returned. The default value is false.",
+      "description": "Whether to enable validation of the client request to check: 1) Content-Type header matches what the Rest DSL consumes; returns HTTP Status 415 if validation error. 2) Accept header matches what the Rest DSL produces; returns HTTP Status 406 if validation error. 3) Missing required data (query parameters, HTTP headers, body); returns HTTP Status 400 if validation error. 4) Parsing error of the message body (JSon, XML or Auto binding mode must be enabled); returns HTTP Status 400 if validation error.",
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties",
       "defaultValue": false
     },
@@ -1058,7 +1052,7 @@
     {
       "name": "camel.rest.json-data-format",
       "type": "java.lang.String",
-      "description": "Name of specific json data format to use. By default json-jackson will be used. Important: This option is only for setting a custom name of the data format, not to refer to an existing data format instance.",
+      "description": "Name of specific json data format to use. By default jackson will be used. Important: This option is only for setting a custom name of the data format, not to refer to an existing data format instance.",
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
     },
     {
@@ -1070,7 +1064,7 @@
     {
       "name": "camel.rest.producer-api-doc",
       "type": "java.lang.String",
-      "description": "Sets the location of the api document (swagger api) the REST producer will use to validate the REST uri and query parameters are valid accordingly to the api document. This requires adding camel-swagger-java to the classpath, and any miss configuration will let Camel fail on startup and report the error(s). The location of the api document is loaded from classpath by default, but you can use file: or http: to refer to resources to load from file or http url.",
+      "description": "Sets the location of the api document the REST producer will use to validate the REST uri and query parameters are valid accordingly to the api document. The location of the api document is loaded from classpath by default, but you can use file: or http: to refer to resources to load from file or http url.",
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
     },
     {
