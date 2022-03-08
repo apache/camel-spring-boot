@@ -175,6 +175,13 @@
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-sqs.message-header-exceeded-limit",
+      "type": "java.lang.String",
+      "description": "What to do if sending to AWS SQS has more messages than AWS allows (currently only maximum 10 message headers is allowed). WARN will log a WARN about the limit is for each additional header, so the message can be sent to AWS. WARN_ONCE will only log one time a WARN about the limit is hit, and drop additional headers, so the message can be sent to AWS. IGNORE will ignore (no logging) and drop additional headers, so the message can be sent to AWS. FAIL will cause an exception to be thrown and the message is not sent to AWS.",
+      "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
+      "defaultValue": "WARN"
+    },
+    {
       "name": "camel.component.aws2-sqs.message-retention-period",
       "type": "java.lang.Integer",
       "description": "The messageRetentionPeriod (in seconds) a message will be retained by SQS for this queue.",
@@ -189,7 +196,7 @@
     {
       "name": "camel.component.aws2-sqs.override-endpoint",
       "type": "java.lang.Boolean",
-      "description": "Set the need for overidding the endpoint. This option needs to be used in combination with uriEndpointOverride option",
+      "description": "Set the need for overriding the endpoint. This option needs to be used in combination with uriEndpointOverride option",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
       "defaultValue": false
     },
