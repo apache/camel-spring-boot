@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>spring-boot-parent</artifactId>
-        <version>3.11.6</version>
+        <version>3.11.7-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
