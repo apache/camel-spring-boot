@@ -26,3 +26,4 @@ Similarly, to delete the starter for the `zoot` component, run the following com
 ./starter-delete zoot
 ```
 
+More information can be found on the [Camel website](https://camel.apache.org/camel-spring-boot/latest/)
