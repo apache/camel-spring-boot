@@ -23,16 +23,22 @@ import ca.uhn.fhir.rest.server.exceptions.ResourceGoneException;
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.test.infra.fhir.services.FhirService;
+import org.apache.camel.test.infra.fhir.services.FhirServiceFactory;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.HumanName;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class AbstractFhirTestSupport {
+
+    @RegisterExtension
+    public static FhirService service = FhirServiceFactory.createService();
 
     protected Patient patient;
     @Autowired

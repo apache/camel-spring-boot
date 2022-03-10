@@ -28,25 +28,16 @@ import org.springframework.context.annotation.Bean;
  */
 public class FhirServer {
 
-    static FhirService service;
-
-    static {
-        // We don't want a new FHIR server for every test class
-        // https://www.testcontainers.org/test_framework_integration/manual_lifecycle_control/
-        service = FhirServiceFactory.createService();
-        service.initialize();
-    }
-
     @Bean
     FhirContext fhirContext(){
         FhirContext fhirContext = new FhirContext(FhirVersionEnum.DSTU3);
         // Set proxy so that FHIR resource URLs returned by the server are using the correct host and port
-        fhirContext.getRestfulClientFactory().setProxy(service.getHost(), service.getPort());
+        fhirContext.getRestfulClientFactory().setProxy(AbstractFhirTestSupport.service.getHost(), AbstractFhirTestSupport.service.getPort());
         return fhirContext;
     }
 
     @Bean
     IGenericClient fhirClient(FhirContext fc){
-        return  fc.newRestfulGenericClient(service.getServiceBaseURL());
+        return  fc.newRestfulGenericClient(AbstractFhirTestSupport.service.getServiceBaseURL());
     }
 }

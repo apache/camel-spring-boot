@@ -78,7 +78,7 @@ public class FhirSimpleTest extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     from("direct://RESOURCE")
-                            .to("fhir://" + PATH_PREFIX + "/resource?inBody=resource&serverUrl=" + FhirServer.service.getServiceBaseURL()
+                            .to("fhir://" + PATH_PREFIX + "/resource?inBody=resource&serverUrl=" + service.getServiceBaseURL()
                                     + "&fhirVersion=DSTU3");
                 }
             };

@@ -19,10 +19,9 @@ package org.apache.camel.component.fhir;
 import ca.uhn.fhir.context.FhirContext;
 import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
+import org.apache.camel.test.infra.fhir.services.FhirService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-
-import static org.apache.camel.component.fhir.FhirServer.service;
 
 public class DefaultCamelContext {
 
@@ -35,7 +34,7 @@ public class DefaultCamelContext {
             @Override
             public void beforeApplicationStart(CamelContext context) {
                 final FhirConfiguration configuration = new FhirConfiguration();
-                configuration.setServerUrl(service.getServiceBaseURL());
+                configuration.setServerUrl(AbstractFhirTestSupport.service.getServiceBaseURL());
                 configuration.setFhirContext(fhirContext);
 
                 // add FhirComponent to Camel context

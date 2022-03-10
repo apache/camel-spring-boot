@@ -102,7 +102,7 @@ public class FhirCreateTest extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for resource
-                    String serverUrl = FhirServer.service.getServiceBaseURL();
+                    String serverUrl = service.getServiceBaseURL();
                     from("direct://RESOURCE")
                             .to("fhir://" + PATH_PREFIX + "/resource?inBody=resource&serverUrl="
                                     + serverUrl);
