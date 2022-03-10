@@ -60,7 +60,7 @@ public class Sqs2ComponentConfiguration
      */
     private Sqs2Configuration configuration;
     /**
-     * Set the need for overidding the endpoint. This option needs to be used in
+     * Set the need for overriding the endpoint. This option needs to be used in
      * combination with uriEndpointOverride option
      */
     private Boolean overrideEndpoint = false;
@@ -206,6 +206,17 @@ public class Sqs2ComponentConfiguration
      */
     private String messageGroupIdStrategy;
     /**
+     * What to do if sending to AWS SQS has more messages than AWS allows
+     * (currently only maximum 10 message headers is allowed). WARN will log a
+     * WARN about the limit is for each additional header, so the message can be
+     * sent to AWS. WARN_ONCE will only log one time a WARN about the limit is
+     * hit, and drop additional headers, so the message can be sent to AWS.
+     * IGNORE will ignore (no logging) and drop additional headers, so the
+     * message can be sent to AWS. FAIL will cause an exception to be thrown and
+     * the message is not sent to AWS.
+     */
+    private String messageHeaderExceededLimit = "WARN";
+    /**
      * The operation to do in case the user don't want to send only a message
      */
     private Sqs2Operations operation;
@@ -223,12 +234,6 @@ public class Sqs2ComponentConfiguration
      * messages
      */
     private Boolean delayQueue = false;
-    /**
-     * To define the queueUrl explicitly. All other parameters, which would
-     * influence the queueUrl, are ignored. This parameter is intended to be
-     * used, to connect to a mock implementation of SQS, for testing purposes.
-     */
-    private String queueUrl;
     /**
      * To define a proxy host when instantiating the SQS client
      */
@@ -253,6 +258,12 @@ public class Sqs2ComponentConfiguration
      * from different systems.
      */
     private String policy;
+    /**
+     * To define the queueUrl explicitly. All other parameters, which would
+     * influence the queueUrl, are ignored. This parameter is intended to be
+     * used, to connect to a mock implementation of SQS, for testing purposes.
+     */
+    private String queueUrl;
     /**
      * If you do not specify WaitTimeSeconds in the request, the queue attribute
      * ReceiveMessageWaitTimeSeconds is used to determine how long to wait.
@@ -516,6 +527,14 @@ public class Sqs2ComponentConfiguration
         this.messageGroupIdStrategy = messageGroupIdStrategy;
     }
 
+    public String getMessageHeaderExceededLimit() {
+        return messageHeaderExceededLimit;
+    }
+
+    public void setMessageHeaderExceededLimit(String messageHeaderExceededLimit) {
+        this.messageHeaderExceededLimit = messageHeaderExceededLimit;
+    }
+
     public Sqs2Operations getOperation() {
         return operation;
     }
@@ -538,14 +557,6 @@ public class Sqs2ComponentConfiguration
 
     public void setDelayQueue(Boolean delayQueue) {
         this.delayQueue = delayQueue;
-    }
-
-    public String getQueueUrl() {
-        return queueUrl;
-    }
-
-    public void setQueueUrl(String queueUrl) {
-        this.queueUrl = queueUrl;
     }
 
     public String getProxyHost() {
@@ -586,6 +597,14 @@ public class Sqs2ComponentConfiguration
 
     public void setPolicy(String policy) {
         this.policy = policy;
+    }
+
+    public String getQueueUrl() {
+        return queueUrl;
+    }
+
+    public void setQueueUrl(String queueUrl) {
+        this.queueUrl = queueUrl;
     }
 
     public Integer getReceiveMessageWaitTimeSeconds() {
