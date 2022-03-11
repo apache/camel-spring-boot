@@ -319,6 +319,11 @@ public class FhirCustomClientConfigurationTest extends AbstractFhirTestSupport {
         }
 
         @Override
+        public void registerInterceptor(Object o) {
+
+        }
+
+        @Override
         public IInterceptorService getInterceptorService() {
             return null;
         }
@@ -354,11 +359,6 @@ public class FhirCustomClientConfigurationTest extends AbstractFhirTestSupport {
         }
 
         @Override
-        public void registerInterceptor(IClientInterceptor theInterceptor) {
-
-        }
-
-        @Override
         public void setEncoding(EncodingEnum theEncoding) {
 
         }
@@ -389,7 +389,7 @@ public class FhirCustomClientConfigurationTest extends AbstractFhirTestSupport {
         }
 
         @Override
-        public void unregisterInterceptor(IClientInterceptor theInterceptor) {
+        public void unregisterInterceptor(Object o) {
 
         }
 
