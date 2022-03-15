@@ -60,7 +60,7 @@ public class FhirConfigurationTest extends AbstractFhirTestSupport {
 
     private static final String TEST_URI = "fhir://" + PATH_PREFIX + "/resource?inBody=resourceAsString&log=true&"
                                            + "encoding=JSON&summary=TEXT&compress=true&username=art&password=tatum&sessionCookie=mycookie%3DChips%20Ahoy"
-                                           + "&accessToken=token&serverUrl=http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3&fhirVersion=DSTU3";
+                                           + "&accessToken=token&serverUrl=http://localhost:8080/hapi-fhir-jpaserver-example/baseR4&fhirVersion=R4";
 
     @Autowired
     private IClientInterceptor mockClientInterceptor;
@@ -95,7 +95,7 @@ public class FhirConfigurationTest extends AbstractFhirTestSupport {
         GenericClient client = (GenericClient) endpoint.getClient();
         FhirConfiguration configuration = endpoint.getConfiguration();
         assertEquals(this.componentConfiguration, configuration);
-        assertEquals("http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3", client.getUrlBase());
+        assertEquals("http://localhost:8080/hapi-fhir-jpaserver-example/baseR4", client.getUrlBase());
         assertEquals(EncodingEnum.JSON, client.getEncoding());
         assertEquals(SummaryEnum.TEXT, client.getSummary());
         List<Object> interceptors = client.getInterceptorService().getAllRegisteredInterceptors();

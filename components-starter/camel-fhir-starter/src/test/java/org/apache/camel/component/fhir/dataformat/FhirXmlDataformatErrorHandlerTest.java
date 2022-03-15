@@ -30,7 +30,7 @@ import org.apache.camel.component.fhir.FhirXmlDataFormat;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-import org.hl7.fhir.dstu3.model.Patient;
+import org.hl7.fhir.r4.model.Patient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ public class FhirXmlDataformatErrorHandlerTest {
     private static final String INPUT = "<Patient><active value=\"true\"/><active value=\"false\"/></Patient>";
 
     private MockEndpoint mockEndpoint;
-    private final FhirContext fhirContext = FhirContext.forDstu3();
+    private final FhirContext fhirContext = FhirContext.forR4();
     @Autowired
     CamelContext camelContext;
     @Autowired

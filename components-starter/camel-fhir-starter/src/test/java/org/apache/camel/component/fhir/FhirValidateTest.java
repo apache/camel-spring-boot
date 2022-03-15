@@ -22,9 +22,10 @@ import org.apache.camel.component.fhir.internal.FhirApiCollection;
 import org.apache.camel.component.fhir.internal.FhirValidateApiMethod;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-import org.hl7.fhir.dstu3.model.HumanName;
-import org.hl7.fhir.dstu3.model.OperationOutcome;
-import org.hl7.fhir.dstu3.model.Patient;
+import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.Narrative;
+import org.hl7.fhir.r4.model.OperationOutcome;
+import org.hl7.fhir.r4.model.Patient;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -60,27 +64,43 @@ public class FhirValidateTest extends AbstractFhirTestSupport {
     @Test
     public void testResource() throws Exception {
         Patient bobbyHebb = new Patient().addName(new HumanName().addGiven("Bobby").setFamily("Hebb"));
+        bobbyHebb.getText().setStatus(Narrative.NarrativeStatus.GENERATED);
+        bobbyHebb.getText().setDivAsString("<div>This is the narrative text</div>");
+
         // using org.hl7.fhir.instance.model.api.IBaseResource message body for single parameter "resource"
         MethodOutcome result = requestBody("direct://RESOURCE", bobbyHebb);
 
         assertNotNull(result, "resource result");
         LOG.debug("resource: " + result);
-        assertNotNull(result.getOperationOutcome());
-        assertTrue(((OperationOutcome) result.getOperationOutcome()).getText().getDivAsString()
+        OperationOutcome operationOutcome = (OperationOutcome) result.getOperationOutcome();
+        assertNotNull(operationOutcome);
+
+        List<OperationOutcome.OperationOutcomeIssueComponent> issue = operationOutcome.getIssue();
+        assertNotNull(issue);
+        assertEquals(1, issue.size());
+        assertTrue(issue.get(0).getDiagnostics()
                 .contains("No issues detected during validation"));
     }
 
     @Test
     public void testResourceAsString() throws Exception {
         Patient bobbyHebb = new Patient().addName(new HumanName().addGiven("Bobby").setFamily("Hebb"));
+        bobbyHebb.getText().setStatus(Narrative.NarrativeStatus.GENERATED);
+        bobbyHebb.getText().setDivAsString("<div>This is the narrative text</div>");
+
         // using org.hl7.fhir.instance.model.api.IBaseResource message body for single parameter "resource"
         MethodOutcome result
                 = requestBody("direct://RESOURCE_AS_STRING", this.fhirContext.newXmlParser().encodeResourceToString(bobbyHebb));
 
         assertNotNull(result, "resource result");
         LOG.debug("resource: " + result);
-        assertNotNull(result.getOperationOutcome());
-        assertTrue(((OperationOutcome) result.getOperationOutcome()).getText().getDivAsString()
+        OperationOutcome operationOutcome = (OperationOutcome) result.getOperationOutcome();
+        assertNotNull(operationOutcome);
+
+        List<OperationOutcome.OperationOutcomeIssueComponent> issue = operationOutcome.getIssue();
+        assertNotNull(issue);
+        assertEquals(1, issue.size());
+        assertTrue(issue.get(0).getDiagnostics()
                 .contains("No issues detected during validation"));
     }
 
