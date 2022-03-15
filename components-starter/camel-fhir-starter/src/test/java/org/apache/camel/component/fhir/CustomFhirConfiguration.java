@@ -32,8 +32,8 @@ public class CustomFhirConfiguration {
         fhirConfiguration.setPassword("tatum");
         fhirConfiguration.setSessionCookie("mycookie=Chips Ahoy");
         fhirConfiguration.setAccessToken("token");
-        fhirConfiguration.setServerUrl("http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3");
-        fhirConfiguration.setFhirVersion("DSTU3");
+        fhirConfiguration.setServerUrl("http://localhost:8080/hapi-fhir-jpaserver-example/baseR4");
+        fhirConfiguration.setFhirVersion("R4");
         return fhirConfiguration;
     }
 
