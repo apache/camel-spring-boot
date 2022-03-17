@@ -47,12 +47,12 @@ public class Ses2ComponentConfiguration
     private SesClient amazonSESClient;
     /**
      * List of comma separated destination blind carbon copy (bcc) email
-     * address. Can be overriden with 'CamelAwsSesBcc' header.
+     * address. Can be overridden with 'CamelAwsSesBcc' header.
      */
     private String bcc;
     /**
      * List of comma separated destination carbon copy (cc) email address. Can
-     * be overriden with 'CamelAwsSesCc' header.
+     * be overridden with 'CamelAwsSesCc' header.
      */
     private String cc;
     /**
@@ -115,7 +115,7 @@ public class Ses2ComponentConfiguration
      */
     private String subject;
     /**
-     * List of comma separated destination email address. Can be overriden with
+     * List of comma separated destination email address. Can be overridden with
      * 'CamelAwsSesTo' header.
      */
     private String to;
