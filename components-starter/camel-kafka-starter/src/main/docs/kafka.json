@@ -143,6 +143,19 @@
       "defaultValue": 1
     },
     {
+      "name": "camel.component.kafka.create-consumer-backoff-interval",
+      "type": "java.lang.Long",
+      "description": "The delay in millis seconds to wait before trying again to create the kafka consumer (kafka-client).",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.kafka.create-consumer-backoff-max-attempts",
+      "type": "java.lang.Integer",
+      "description": "Maximum attempts to create the kafka consumer (kafka-client), before eventually giving up and failing. Error during creating the consumer may be fatal due to invalid configuration and as such recovery is not possible. However, one part of the validation is DNS resolution of the bootstrap broker hostnames. This may be a temporary networking problem, and could potentially be recoverable. While other errors are fatal such as some invalid kafka configurations. Unfortunately kafka-client does not separate this kind of errors. Camel will by default retry forever, and therefore never give up. If you want to give up after many attempts then set this option and Camel will then when giving up terminate the consumer. You can manually restart the consumer by stopping and starting the route, to try again.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
+    },
+    {
       "name": "camel.component.kafka.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
@@ -653,6 +666,19 @@
       "description": "The file format of the trust store file. Default value is JKS.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
       "defaultValue": "JKS"
+    },
+    {
+      "name": "camel.component.kafka.subscribe-consumer-backoff-interval",
+      "type": "java.lang.Long",
+      "description": "The delay in millis seconds to wait before trying again to subscribe to the kafka broker.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.kafka.subscribe-consumer-backoff-max-attempts",
+      "type": "java.lang.Integer",
+      "description": "Maximum number the kafka consumer will attempt to subscribe to the kafka broker, before eventually giving up and failing. Error during subscribing the consumer to the kafka topic could be temporary errors due to network issues, and could potentially be recoverable. Camel will by default retry forever, and therefore never give up. If you want to give up after many attempts then set this option and Camel will then when giving up terminate the consumer. You can manually restart the consumer by stopping and starting the route, to try again.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
     },
     {
       "name": "camel.component.kafka.synchronous",

@@ -311,6 +311,26 @@ public class KafkaComponentConfiguration
      */
     private String valueDeserializer = "org.apache.kafka.common.serialization.StringDeserializer";
     /**
+     * The delay in millis seconds to wait before trying again to create the
+     * kafka consumer (kafka-client).
+     */
+    private Long createConsumerBackoffInterval = 5000L;
+    /**
+     * Maximum attempts to create the kafka consumer (kafka-client), before
+     * eventually giving up and failing. Error during creating the consumer may
+     * be fatal due to invalid configuration and as such recovery is not
+     * possible. However, one part of the validation is DNS resolution of the
+     * bootstrap broker hostnames. This may be a temporary networking problem,
+     * and could potentially be recoverable. While other errors are fatal such
+     * as some invalid kafka configurations. Unfortunately kafka-client does not
+     * separate this kind of errors. Camel will by default retry forever, and
+     * therefore never give up. If you want to give up after many attempts then
+     * set this option and Camel will then when giving up terminate the
+     * consumer. You can manually restart the consumer by stopping and starting
+     * the route, to try again.
+     */
+    private Integer createConsumerBackoffMaxAttempts;
+    /**
      * Factory to use for creating KafkaManualCommit instances. This allows to
      * plugin a custom factory to create custom KafkaManualCommit instances in
      * case special logic is needed when doing manual commits that deviates from
@@ -324,6 +344,22 @@ public class KafkaComponentConfiguration
      * option is a org.apache.camel.component.kafka.PollExceptionStrategy type.
      */
     private PollExceptionStrategy pollExceptionStrategy;
+    /**
+     * The delay in millis seconds to wait before trying again to subscribe to
+     * the kafka broker.
+     */
+    private Long subscribeConsumerBackoffInterval = 5000L;
+    /**
+     * Maximum number the kafka consumer will attempt to subscribe to the kafka
+     * broker, before eventually giving up and failing. Error during subscribing
+     * the consumer to the kafka topic could be temporary errors due to network
+     * issues, and could potentially be recoverable. Camel will by default retry
+     * forever, and therefore never give up. If you want to give up after many
+     * attempts then set this option and Camel will then when giving up
+     * terminate the consumer. You can manually restart the consumer by stopping
+     * and starting the route, to try again.
+     */
+    private Integer subscribeConsumerBackoffMaxAttempts;
     /**
      * The total bytes of memory the producer can use to buffer records waiting
      * to be sent to the server. If records are sent faster than they can be
@@ -1055,6 +1091,24 @@ public class KafkaComponentConfiguration
         this.valueDeserializer = valueDeserializer;
     }
 
+    public Long getCreateConsumerBackoffInterval() {
+        return createConsumerBackoffInterval;
+    }
+
+    public void setCreateConsumerBackoffInterval(
+            Long createConsumerBackoffInterval) {
+        this.createConsumerBackoffInterval = createConsumerBackoffInterval;
+    }
+
+    public Integer getCreateConsumerBackoffMaxAttempts() {
+        return createConsumerBackoffMaxAttempts;
+    }
+
+    public void setCreateConsumerBackoffMaxAttempts(
+            Integer createConsumerBackoffMaxAttempts) {
+        this.createConsumerBackoffMaxAttempts = createConsumerBackoffMaxAttempts;
+    }
+
     public KafkaManualCommitFactory getKafkaManualCommitFactory() {
         return kafkaManualCommitFactory;
     }
@@ -1071,6 +1125,24 @@ public class KafkaComponentConfiguration
     public void setPollExceptionStrategy(
             PollExceptionStrategy pollExceptionStrategy) {
         this.pollExceptionStrategy = pollExceptionStrategy;
+    }
+
+    public Long getSubscribeConsumerBackoffInterval() {
+        return subscribeConsumerBackoffInterval;
+    }
+
+    public void setSubscribeConsumerBackoffInterval(
+            Long subscribeConsumerBackoffInterval) {
+        this.subscribeConsumerBackoffInterval = subscribeConsumerBackoffInterval;
+    }
+
+    public Integer getSubscribeConsumerBackoffMaxAttempts() {
+        return subscribeConsumerBackoffMaxAttempts;
+    }
+
+    public void setSubscribeConsumerBackoffMaxAttempts(
+            Integer subscribeConsumerBackoffMaxAttempts) {
+        this.subscribeConsumerBackoffMaxAttempts = subscribeConsumerBackoffMaxAttempts;
     }
 
     public Integer getBufferMemorySize() {
