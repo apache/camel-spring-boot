@@ -52,15 +52,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(
         classes = {
                 CamelAutoConfiguration.class,
-                FhirTransactionTest.class,
-                FhirTransactionTest.TestConfiguration.class,
+                FhirTransactionIT.class,
+                FhirTransactionIT.TestConfiguration.class,
                 DefaultCamelContext.class,
                 FhirServer.class,
         }
 )
-public class FhirTransactionTest extends AbstractFhirTestSupport {
+public class FhirTransactionIT extends AbstractFhirTestSupport {
 
-    private static final Logger LOG = LoggerFactory.getLogger(FhirTransactionTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FhirTransactionIT.class);
     private static final String PATH_PREFIX
             = FhirApiCollection.getCollection().getApiName(FhirTransactionApiMethod.class).getName();
 

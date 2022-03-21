@@ -47,16 +47,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest(
         classes = {
                 CamelAutoConfiguration.class,
-                FhirOperationTest.class,
-                FhirOperationTest.TestConfiguration.class,
+                FhirOperationIT.class,
+                FhirOperationIT.TestConfiguration.class,
                 DefaultCamelContext.class,
                 FhirServer.class,
         }
 )
 
-public class FhirOperationTest extends AbstractFhirTestSupport {
+public class FhirOperationIT extends AbstractFhirTestSupport {
 
-    private static final Logger LOG = LoggerFactory.getLogger(FhirOperationTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FhirOperationIT.class);
     private static final String PATH_PREFIX
             = FhirApiCollection.getCollection().getApiName(FhirOperationApiMethod.class).getName();
 
