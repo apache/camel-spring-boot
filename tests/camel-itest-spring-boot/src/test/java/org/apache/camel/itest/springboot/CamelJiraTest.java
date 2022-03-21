@@ -35,7 +35,6 @@ public class CamelJiraTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelJiraTest.class))
-                .unitTestExpectedNumber(0)
                 .build();
     }
 
