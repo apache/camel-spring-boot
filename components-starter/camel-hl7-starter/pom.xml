@@ -90,6 +90,7 @@
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-mina</artifactId>
+      <version>${camel-version}</version>
       <scope>test</scope>
     </dependency>
     <!--START OF GENERATED CODE-->
