@@ -43,6 +43,7 @@
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-test-junit5</artifactId>
+      <version>${camel-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -58,6 +59,7 @@
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-netty-http</artifactId>
+      <version>${camel-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
