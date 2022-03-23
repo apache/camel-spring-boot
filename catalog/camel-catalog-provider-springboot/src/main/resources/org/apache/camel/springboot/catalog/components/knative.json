@@ -8,7 +8,7 @@
     "firstVersion": "3.15.0",
     "label": "cloud",
     "javaType": "org.apache.camel.component.knative.KnativeComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-knative-starter",
     "version": "3.17.0-SNAPSHOT",
