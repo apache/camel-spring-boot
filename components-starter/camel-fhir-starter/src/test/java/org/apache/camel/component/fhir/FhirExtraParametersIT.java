@@ -21,11 +21,11 @@ import java.util.Map;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.fhir.api.ExtraParameters;
 import org.apache.camel.component.fhir.internal.FhirApiCollection;
-import org.apache.camel.component.fhir.internal.FhirCapabilitiesApiMethod;
+import org.apache.camel.component.fhir.internal.FhirSearchApiMethod;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-import org.hl7.fhir.r4.model.CapabilityStatement;
-import org.hl7.fhir.r4.model.Enumerations;
+import org.hl7.fhir.r4.model.Bundle;
+import org.hl7.fhir.r4.model.Patient;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,46 +38,39 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * Test class for {@link org.apache.camel.component.fhir.api.FhirCapabilities} APIs.
+ * Test class for {@link org.apache.camel.component.fhir.api.FhirSearch} APIs. The class source won't be generated again
+ * if the generator MOJO finds it under src/test/java.
  */
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
 @SpringBootTest(
         classes = {
                 CamelAutoConfiguration.class,
-                FhirCapabilitiesTest.class,
-                FhirCapabilitiesTest.TestConfiguration.class,
+                FhirExtraParametersIT.class,
+                FhirExtraParametersIT.TestConfiguration.class,
                 DefaultCamelContext.class,
                 FhirServer.class,
         }
 )
-public class FhirCapabilitiesTest extends AbstractFhirTestSupport {
+public class FhirExtraParametersIT extends AbstractFhirTestSupport {
 
-    private static final Logger LOG = LoggerFactory.getLogger(FhirCapabilitiesTest.class);
-    private static final String PATH_PREFIX
-            = FhirApiCollection.getCollection().getApiName(FhirCapabilitiesApiMethod.class).getName();
-
-    @Test
-    public void testOfType() throws Exception {
-        org.hl7.fhir.instance.model.api.IBaseConformance result = requestBody("direct://OF_TYPE", CapabilityStatement.class);
-
-        LOG.debug("ofType: " + result);
-        assertNotNull(result, "ofType result");
-        assertEquals(Enumerations.PublicationStatus.ACTIVE, ((CapabilityStatement) result).getStatus());
-    }
+    private static final Logger LOG = LoggerFactory.getLogger(FhirExtraParametersIT.class);
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirSearchApiMethod.class).getName();
 
     @Test
-    public void testEncodeJSON() throws Exception {
-        Map<String, Object> headers = new HashMap<>();
-        headers.put(ExtraParameters.ENCODE_JSON.getHeaderName(), Boolean.TRUE);
+    public void testEncodeRequestToXml() throws Exception {
+        final Map<String, Object> headers = new HashMap<>();
+        // encode request to XML
+        headers.put(ExtraParameters.ENCODE_XML.getHeaderName(), Boolean.TRUE);
+        String url = "Patient?given=Vincent&family=Freeman&_format=json";
 
-        org.hl7.fhir.instance.model.api.IBaseConformance result
-                = requestBodyAndHeaders("direct://OF_TYPE", CapabilityStatement.class, headers);
+        Bundle result = requestBodyAndHeaders("direct://SEARCH_BY_URL", url, headers);
 
-        LOG.debug("ofType: " + result);
-        assertNotNull(result, "ofType result");
-        assertEquals(Enumerations.PublicationStatus.ACTIVE, ((CapabilityStatement) result).getStatus());
+        LOG.debug("searchByUrl: " + result);
+        assertNotNull(result, "searchByUrl result");
+        Patient patient = (Patient) result.getEntry().get(0).getResource();
+        assertNotNull(patient);
+        assertEquals("Freeman", patient.getName().get(0).getFamily());
     }
 
     @Configuration
@@ -87,9 +80,9 @@ public class FhirCapabilitiesTest extends AbstractFhirTestSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    // test route for ofType
-                    from("direct://OF_TYPE")
-                            .to("fhir://" + PATH_PREFIX + "/ofType?inBody=type&log=true");
+                    // test route for searchByUrl
+                    from("direct://SEARCH_BY_URL")
+                            .to("fhir://" + PATH_PREFIX + "/searchByUrl?inBody=url");
                 }
             };
         }

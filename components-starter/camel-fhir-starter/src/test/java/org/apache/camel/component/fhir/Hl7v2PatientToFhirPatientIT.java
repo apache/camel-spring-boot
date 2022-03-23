@@ -42,13 +42,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(
         classes = {
                 CamelAutoConfiguration.class,
-                Hl7v2PatientToFhirPatientTest.class,
-                Hl7v2PatientToFhirPatientTest.TestConfiguration.class,
+                Hl7v2PatientToFhirPatientIT.class,
+                Hl7v2PatientToFhirPatientIT.TestConfiguration.class,
                 DefaultCamelContext.class,
                 FhirServer.class,
         }
 )
-public class Hl7v2PatientToFhirPatientTest extends AbstractFhirTestSupport {
+public class Hl7v2PatientToFhirPatientIT extends AbstractFhirTestSupport {
 
     /*
     Segment Purpose                 FHIR Resource

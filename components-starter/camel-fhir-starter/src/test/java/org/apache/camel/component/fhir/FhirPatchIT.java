@@ -51,16 +51,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(
         classes = {
                 CamelAutoConfiguration.class,
-                FhirPatchTest.class,
-                FhirPatchTest.TestConfiguration.class,
+                FhirPatchIT.class,
+                FhirPatchIT.TestConfiguration.class,
                 DefaultCamelContext.class,
                 FhirServer.class,
         }
 )
 
-public class FhirPatchTest extends AbstractFhirTestSupport {
+public class FhirPatchIT extends AbstractFhirTestSupport {
 
-    private static final Logger LOG = LoggerFactory.getLogger(FhirPatchTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FhirPatchIT.class);
     private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirPatchApiMethod.class).getName();
     private static final String PATCH = "[ { \"op\":\"replace\", \"path\":\"/active\", \"value\":true } ]";
 

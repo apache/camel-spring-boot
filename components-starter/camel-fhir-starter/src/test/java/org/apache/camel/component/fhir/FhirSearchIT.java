@@ -16,58 +16,54 @@
  */
 package org.apache.camel.component.fhir;
 
-import java.util.UUID;
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.fhir.internal.FhirApiCollection;
-import org.apache.camel.component.fhir.internal.FhirCreateApiMethod;
+import org.apache.camel.component.fhir.internal.FhirSearchApiMethod;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Patient;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Test simple scenario, without custom component configuration
+ * Test class for {@link org.apache.camel.component.fhir.api.FhirSearch} APIs. The class source won't be generated again
+ * if the generator MOJO finds it under src/test/java.
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
 @SpringBootTest(
         classes = {
                 CamelAutoConfiguration.class,
-                FhirSimpleTest.class,
-                FhirSimpleTest.TestConfiguration.class,
+                FhirSearchIT.class,
+                FhirSearchIT.TestConfiguration.class,
+                DefaultCamelContext.class,
                 FhirServer.class,
         }
 )
-public class FhirSimpleTest extends AbstractFhirTestSupport {
+public class FhirSearchIT extends AbstractFhirTestSupport {
 
-    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirCreateApiMethod.class).getName();
-    private static final String GIVEN_NAME = UUID.randomUUID().toString();
-    private static final String FAMILY_NAME = UUID.randomUUID().toString();
-
-    @BeforeEach
-    @Override
-    public void cleanFhirServerState() {
-        // NO-OP
-    }
+    private static final Logger LOG = LoggerFactory.getLogger(FhirSearchIT.class);
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirSearchApiMethod.class).getName();
 
     @Test
-    public void testCreateResource() throws Exception {
-        Patient patient = new Patient().addName(new HumanName().addGiven(GIVEN_NAME).setFamily(FAMILY_NAME));
+    public void testSearchByUrl() throws Exception {
+        String url = "Patient?given=Vincent&family=Freeman&_format=json";
+        Bundle result = requestBody("direct://SEARCH_BY_URL", url);
 
-        MethodOutcome result = requestBody("direct://RESOURCE", patient);
-
-        assertNotNull(result, "resource result");
-        assertTrue(result.getCreated());
+        LOG.debug("searchByUrl: " + result);
+        assertNotNull(result, "searchByUrl result");
+        Patient patient = (Patient) result.getEntry().get(0).getResource();
+        assertNotNull(patient);
+        assertEquals("Freeman", patient.getName().get(0).getFamily());
     }
 
     @Configuration
@@ -77,9 +73,9 @@ public class FhirSimpleTest extends AbstractFhirTestSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct://RESOURCE")
-                            .to("fhir://" + PATH_PREFIX + "/resource?inBody=resource&serverUrl=" + service.getServiceBaseURL()
-                                    + "&fhirVersion=R4");
+                    // test route for searchByUrl
+                    from("direct://SEARCH_BY_URL")
+                            .to("fhir://" + PATH_PREFIX + "/searchByUrl?inBody=url");
                 }
             };
         }

@@ -28,7 +28,6 @@ import ca.uhn.fhir.rest.api.RequestFormatParamStyleEnum;
 import ca.uhn.fhir.rest.api.RequestTypeEnum;
 import ca.uhn.fhir.rest.api.SummaryEnum;
 import ca.uhn.fhir.rest.client.api.Header;
-import ca.uhn.fhir.rest.client.api.IClientInterceptor;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.client.api.IHttpClient;
 import ca.uhn.fhir.rest.client.api.IRestfulClient;
@@ -71,13 +70,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(
         classes = {
                 CamelAutoConfiguration.class,
-                FhirCustomClientConfigurationTest.class,
-                FhirCustomClientConfigurationTest.TestConfiguration.class,
+                FhirCustomClientConfigurationIT.class,
+                FhirCustomClientConfigurationIT.TestConfiguration.class,
                 CustomNoFhirServerUrlCamelContext.class,
                 FhirServer.class,
         }
 )
-public class FhirCustomClientConfigurationTest extends AbstractFhirTestSupport {
+public class FhirCustomClientConfigurationIT extends AbstractFhirTestSupport {
 
     private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirCreateApiMethod.class).getName();
 
