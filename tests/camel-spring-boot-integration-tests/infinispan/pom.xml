@@ -21,7 +21,7 @@
 	<parent>
 		<artifactId>camel-spring-boot-integration-tests</artifactId>
 		<groupId>org.apache.camel.springboot</groupId>
-		<version>3.16.0</version>
+		<version>3.16.1-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
