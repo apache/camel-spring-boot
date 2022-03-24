@@ -1350,6 +1350,13 @@
       "sourceType": "org.apache.camel.spring.boot.vault.GcpVaultConfigurationProperties"
     },
     {
+      "name": "camel.vault.gcp.use-default-instance",
+      "type": "java.lang.Boolean",
+      "description": "Define if we want to use the GCP Client Default Instance or not",
+      "sourceType": "org.apache.camel.spring.boot.vault.GcpVaultConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "management.endpoint.camelroutecontroller.cache.time-to-live",
       "type": "java.time.Duration",
       "description": "Maximum time that a response can be cached.",

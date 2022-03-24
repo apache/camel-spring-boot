@@ -36,6 +36,7 @@ public class GcpVaultAutoConfiguration {
         GcpVaultConfiguration answer = new GcpVaultConfiguration();
         answer.setServiceAccountKey(config.getServiceAccountKey());
         answer.setProjectId(config.getProjectId());
+        answer.setUseDefaultInstance(config.isUseDefaultInstance());
         return answer;
     }
 

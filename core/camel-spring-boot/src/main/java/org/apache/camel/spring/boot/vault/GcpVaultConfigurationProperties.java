@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.boot.vault;
 
+import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.vault.gcp")
@@ -31,6 +32,11 @@ public class GcpVaultConfigurationProperties {
      */
     private String projectId;
 
+    /**
+     * Define if we want to use the GCP Client Default Instance or not
+     */
+    private boolean useDefaultInstance;
+
     public String getServiceAccountKey() {
         return serviceAccountKey;
     }
@@ -45,5 +51,13 @@ public class GcpVaultConfigurationProperties {
 
     public void setProjectId(String projectId) {
         this.projectId = projectId;
+    }
+
+    public boolean isUseDefaultInstance() {
+        return useDefaultInstance;
+    }
+
+    public void setUseDefaultInstance(boolean useDefaultInstance) {
+        this.useDefaultInstance = useDefaultInstance;
     }
 }
