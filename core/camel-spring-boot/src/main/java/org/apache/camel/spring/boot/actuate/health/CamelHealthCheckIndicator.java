@@ -26,15 +26,18 @@ import org.apache.camel.impl.health.AbstractHealthCheck;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
+import org.springframework.context.ApplicationContext;
 
 /**
  * Camel {@link HealthIndicator}.
  */
 public class CamelHealthCheckIndicator extends AbstractHealthIndicator {
 
+    private final ApplicationContext applicationContext;
     private final CamelContext camelContext;
 
-    public CamelHealthCheckIndicator(CamelContext camelContext) {
+    public CamelHealthCheckIndicator(ApplicationContext applicationContext, CamelContext camelContext) {
+        this.applicationContext = applicationContext;
         this.camelContext = camelContext;
     }
 
@@ -43,22 +46,20 @@ public class CamelHealthCheckIndicator extends AbstractHealthIndicator {
         builder.withDetail("name", "camel-health-check");
         builder.up();
 
-        if (camelContext != null) {
-            Collection<HealthCheck.Result> results = HealthCheckHelper.invoke(camelContext);
+        Collection<HealthCheck.Result> results = HealthCheckHelper.invoke(camelContext);
 
-            for (HealthCheck.Result result : results) {
-                Map<String, Object> details = result.getDetails();
-                boolean enabled = true;
+        for (HealthCheck.Result result : results) {
+            Map<String, Object> details = result.getDetails();
+            boolean enabled = true;
 
-                if (details.containsKey(AbstractHealthCheck.CHECK_ENABLED)) {
-                    enabled = (boolean) details.get(AbstractHealthCheck.CHECK_ENABLED);
-                }
+            if (details.containsKey(AbstractHealthCheck.CHECK_ENABLED)) {
+                enabled = (boolean) details.get(AbstractHealthCheck.CHECK_ENABLED);
+            }
 
-                if (enabled) {
-                    builder.withDetail(result.getCheck().getId(), result.getState().name());
-                    if (result.getState() == HealthCheck.State.DOWN) {
-                        builder.down();
-                    }
+            if (enabled) {
+                builder.withDetail(result.getCheck().getId(), result.getState().name());
+                if (result.getState() == HealthCheck.State.DOWN) {
+                    builder.down();
                 }
             }
         }

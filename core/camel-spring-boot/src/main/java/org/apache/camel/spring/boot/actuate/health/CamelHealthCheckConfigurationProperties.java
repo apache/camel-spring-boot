@@ -70,6 +70,24 @@ public class CamelHealthCheckConfigurationProperties {
     @Metadata(enums = "full,default,oneline", defaultValue = "default")
     private String exposureLevel = "default";
 
+    /**
+     * The initial state of health-checks (readiness). There are the following states: UP, DOWN, UNKNOWN.
+     *
+     * By default, the state is DOWN, is regarded as being pessimistic/careful. This means that the overall health
+     * checks may report as DOWN during startup and then only if everything is up and running flip to being UP.
+     *
+     * Setting the initial state to UP, is regarded as being optimistic. This means that the overall health checks may
+     * report as UP during startup and then if a consumer or other service is in fact un-healthy, then the health-checks
+     * can flip being DOWN.
+     *
+     * Setting the state to UNKNOWN means that some health-check would be reported in unknown state, especially during
+     * early bootstrap where a consumer may not be fully initialized or validated a connection to a remote system.
+     *
+     * This option allows to pre-configure the state for different modes.
+     */
+    @Metadata(enums = "up,down,unknown", defaultValue = "down")
+    private String initialState = "down";
+
     public Boolean getEnabled() {
         return enabled;
     }
@@ -116,6 +134,14 @@ public class CamelHealthCheckConfigurationProperties {
 
     public void setExposureLevel(String exposureLevel) {
         this.exposureLevel = exposureLevel;
+    }
+
+    public String getInitialState() {
+        return initialState;
+    }
+
+    public void setInitialState(String initialState) {
+        this.initialState = initialState;
     }
 }
 

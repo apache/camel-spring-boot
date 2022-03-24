@@ -30,6 +30,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -49,7 +50,8 @@ public class CamelHealthCheckAutoConfiguration {
     protected class CamelHealthCheckIndicatorInitializer {
 
         @Bean(name = "camelHealth")
-        public HealthIndicator camelHealthCheckIndicator(CamelContext camelContext, CamelHealthCheckConfigurationProperties config) {
+        public HealthIndicator camelHealthCheckIndicator(ApplicationContext applicationContext,
+                                                         CamelContext camelContext, CamelHealthCheckConfigurationProperties config) {
             if (config != null && config.getEnabled() != null && !config.getEnabled()) {
                 // health check is disabled
                 return null;
@@ -77,6 +79,9 @@ public class CamelHealthCheckAutoConfiguration {
             }
             if (config.getExposureLevel() != null) {
                 hcr.setExposureLevel(config.getExposureLevel());
+            }
+            if (config.getInitialState() != null) {
+                hcr.setInitialState(camelContext.getTypeConverter().convertTo(HealthCheck.State.class, config.getInitialState()));
             }
 
             // context is enabled by default
@@ -119,7 +124,7 @@ public class CamelHealthCheckAutoConfiguration {
                 }
             }
 
-            return new CamelHealthCheckIndicator(camelContext);
+            return new CamelHealthCheckIndicator(applicationContext, camelContext);
         }
     }
 
