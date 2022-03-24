@@ -288,6 +288,12 @@ public class SalesforceComponentConfiguration
      */
     private String sObjectSearch;
     /**
+     * If true, streams SOQL query result and transparently handles subsequent
+     * requests if there are multiple pages. Otherwise, results are returned one
+     * page at a time.
+     */
+    private Boolean streamQueryResult = false;
+    /**
      * Whether to update an existing Push Topic when using the Streaming API,
      * defaults to false
      */
@@ -909,6 +915,14 @@ public class SalesforceComponentConfiguration
 
     public void setSObjectSearch(String sObjectSearch) {
         this.sObjectSearch = sObjectSearch;
+    }
+
+    public Boolean getStreamQueryResult() {
+        return streamQueryResult;
+    }
+
+    public void setStreamQueryResult(Boolean streamQueryResult) {
+        this.streamQueryResult = streamQueryResult;
     }
 
     public Boolean getUpdateTopic() {

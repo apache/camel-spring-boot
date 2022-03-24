@@ -553,6 +553,13 @@
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
+      "name": "camel.component.salesforce.stream-query-result",
+      "type": "java.lang.Boolean",
+      "description": "If true, streams SOQL query result and transparently handles subsequent requests if there are multiple pages. Otherwise, results are returned one page at a time.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.salesforce.update-topic",
       "type": "java.lang.Boolean",
       "description": "Whether to update an existing Push Topic when using the Streaming API, defaults to false",
