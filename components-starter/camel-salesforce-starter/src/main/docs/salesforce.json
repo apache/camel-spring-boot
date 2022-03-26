@@ -248,6 +248,13 @@
       "defaultValue": 8192
     },
     {
+      "name": "camel.component.salesforce.http-request-timeout",
+      "type": "java.lang.Long",
+      "description": "Timeout value for HTTP requests.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
       "name": "camel.component.salesforce.include-details",
       "type": "java.lang.Boolean",
       "description": "Include details in Salesforce1 Analytics report, defaults to false.",
