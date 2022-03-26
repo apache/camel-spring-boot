@@ -121,7 +121,7 @@
         <avro-version>1.8.1</avro-version>
         <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
         <groovy-version>3.0.10</groovy-version>
-        <hadoop2-version>2.7.4</hadoop2-version>
+        <hadoop2-version>2.10.0</hadoop2-version>
         <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
         <jetty9-version>9.4.45.v20220203</jetty9-version>
