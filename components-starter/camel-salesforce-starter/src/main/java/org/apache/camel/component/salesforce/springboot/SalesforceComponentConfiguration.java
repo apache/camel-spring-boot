@@ -116,6 +116,10 @@ public class SalesforceComponentConfiguration
      */
     private Integer httpRequestBufferSize = 8192;
     /**
+     * Timeout value for HTTP requests.
+     */
+    private Long httpRequestTimeout = 60000L;
+    /**
      * Include details in Salesforce1 Analytics report, defaults to false.
      */
     private Boolean includeDetails;
@@ -634,6 +638,14 @@ public class SalesforceComponentConfiguration
 
     public void setHttpRequestBufferSize(Integer httpRequestBufferSize) {
         this.httpRequestBufferSize = httpRequestBufferSize;
+    }
+
+    public Long getHttpRequestTimeout() {
+        return httpRequestTimeout;
+    }
+
+    public void setHttpRequestTimeout(Long httpRequestTimeout) {
+        this.httpRequestTimeout = httpRequestTimeout;
     }
 
     public Boolean getIncludeDetails() {
