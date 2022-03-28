@@ -48,12 +48,6 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.avro</groupId>
-                <artifactId>avro-mapred</artifactId>
-                <classifier>hadoop2</classifier>
-                <version>${avro-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.avro</groupId>
                 <artifactId>avro-protobuf</artifactId>
                 <version>${avro-version}</version>
             </dependency>
