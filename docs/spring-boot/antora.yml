@@ -17,7 +17,7 @@
 
 name: camel-spring-boot
 title: Camel Spring Boot
-version: next
+version: 3.16.x
 prerelease: true
 display-version: Next (Pre-release)
 nav:
