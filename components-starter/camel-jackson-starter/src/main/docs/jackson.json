@@ -30,7 +30,7 @@
     {
       "name": "camel.dataformat.jackson.auto-discover-object-mapper",
       "type": "java.lang.Boolean",
-      "description": "If set to true then Jackson will lookup for an objectMapper into the registry",
+      "description": "If set to true then Jackson will look for an objectMapper to use from the registry",
       "sourceType": "org.apache.camel.component.jackson.springboot.JacksonDataFormatConfiguration",
       "defaultValue": false
     },
@@ -44,7 +44,7 @@
     {
       "name": "camel.dataformat.jackson.collection-type",
       "type": "java.lang.String",
-      "description": "Refers to a custom collection type to lookup in the registry to use. This option should rarely be used, but allows to use different collection types than java.util.Collection based as default.",
+      "description": "Refers to a custom collection type to lookup in the registry to use. This option should rarely be used, but allows using different collection types than java.util.Collection based as default.",
       "sourceType": "org.apache.camel.component.jackson.springboot.JacksonDataFormatConfiguration"
     },
     {
