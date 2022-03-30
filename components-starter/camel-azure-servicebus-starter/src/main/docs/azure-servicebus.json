@@ -127,7 +127,7 @@
     {
       "name": "camel.component.azure-servicebus.receiver-async-client",
       "type": "com.azure.messaging.servicebus.ServiceBusReceiverAsyncClient",
-      "description": "Sets the receiverAsyncClient in order to consume messages in the Consumer. The option is a com.azure.messaging.servicebus.ServiceBusReceiverAsyncClient type.",
+      "description": "Sets the receiverAsyncClient in order to consume messages by the consumer. The option is a com.azure.messaging.servicebus.ServiceBusReceiverAsyncClient type.",
       "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
     },
     {
@@ -169,7 +169,7 @@
     {
       "name": "camel.component.azure-servicebus.subscription-name",
       "type": "java.lang.String",
-      "description": "Sets the name of the subscription in the topic to listen to. topicOrQueueName and serviceBusType=topic must also be set.",
+      "description": "Sets the name of the subscription in the topic to listen to. topicOrQueueName and serviceBusType=topic must also be set. This property is required if serviceBusType=topic and the consumer is in use.",
       "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
     },
     {

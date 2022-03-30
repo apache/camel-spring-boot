@@ -46,7 +46,7 @@ public class JacksonDataFormatConfiguration
      */
     private Boolean useDefaultObjectMapper = true;
     /**
-     * If set to true then Jackson will lookup for an objectMapper into the
+     * If set to true then Jackson will look for an objectMapper to use from the
      * registry
      */
     private Boolean autoDiscoverObjectMapper = false;
@@ -77,8 +77,8 @@ public class JacksonDataFormatConfiguration
     private Boolean allowJmsType = false;
     /**
      * Refers to a custom collection type to lookup in the registry to use. This
-     * option should rarely be used, but allows to use different collection
-     * types than java.util.Collection based as default.
+     * option should rarely be used, but allows using different collection types
+     * than java.util.Collection based as default.
      */
     private String collectionType;
     /**
