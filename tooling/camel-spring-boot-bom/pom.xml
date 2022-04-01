@@ -1010,11 +1010,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-leveldb-legacy-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-leveldb-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
