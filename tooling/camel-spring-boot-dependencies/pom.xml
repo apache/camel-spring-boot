@@ -1618,11 +1618,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-soroush-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spark-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2569,6 +2564,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-debezium-oracle</artifactId>
+        <version>3.17.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-debezium-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
       </dependency>
@@ -2664,11 +2664,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-elsql</artifactId>
-        <version>3.17.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-elytron</artifactId>
         <version>3.17.0-SNAPSHOT</version>
       </dependency>
@@ -2755,11 +2750,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-ftp</artifactId>
-        <version>3.17.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-ganglia</artifactId>
         <version>3.17.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -3805,11 +3795,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-solr</artifactId>
-        <version>3.17.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-soroush</artifactId>
         <version>3.17.0-SNAPSHOT</version>
       </dependency>
       <dependency>
