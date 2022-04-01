@@ -288,11 +288,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-atomix-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-avro-rpc-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2305,16 +2300,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-bean-validator</artifactId>
-        <version>3.17.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-beanio</artifactId>
-        <version>3.17.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-beanstalk</artifactId>
         <version>3.17.0-SNAPSHOT</version>
       </dependency>
       <dependency>
