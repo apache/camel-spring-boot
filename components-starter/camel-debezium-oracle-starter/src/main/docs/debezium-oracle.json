@@ -1,0 +1,700 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.debezium-oracle",
+      "type": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.debezium-oracle.additional-properties",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Additional properties for debezium components in case they can't be set directly on the camel configurations (e.g: setting Kafka Connect properties needed by Debezium engine, for example setting KafkaOffsetBackingStore), the properties have to be prefixed with additionalProperties.. E.g: additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http:\/\/localhost:8811\/avro",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.debezium-oracle.binary-handling-mode",
+      "type": "java.lang.String",
+      "description": "Specify how binary (blob, binary, etc.) columns should be represented in change events, including:'bytes' represents binary data as byte array (default)'base64' represents binary data as base64-encoded string'hex' represents binary data as hex-encoded (base16) string",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "bytes"
+    },
+    {
+      "name": "camel.component.debezium-oracle.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.column-blacklist",
+      "type": "java.lang.String",
+      "description": "Regular expressions matching columns to exclude from change events (deprecated, use column.exclude.list instead)",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.column-exclude-list",
+      "type": "java.lang.String",
+      "description": "Regular expressions matching columns to exclude from change events",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.column-include-list",
+      "type": "java.lang.String",
+      "description": "Regular expressions matching columns to include in change events",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.column-propagate-source-type",
+      "type": "java.lang.String",
+      "description": "A comma-separated list of regular expressions matching fully-qualified names of columns that adds the columns original type and original length as parameters to the corresponding field schemas in the emitted change records.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.column-whitelist",
+      "type": "java.lang.String",
+      "description": "Regular expressions matching columns to include in change events (deprecated, use column.include.list instead)",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.configuration",
+      "type": "org.apache.camel.component.debezium.configuration.OracleConnectorEmbeddedDebeziumConfiguration",
+      "description": "Allow pre-configured Configurations to be set. The option is a org.apache.camel.component.debezium.configuration.OracleConnectorEmbeddedDebeziumConfiguration type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.converters",
+      "type": "java.lang.String",
+      "description": "Optional list of custom converters that would be used instead of default ones. The converters are defined using '.type' config option and configured using options '.'",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-connection-adapter",
+      "type": "java.lang.String",
+      "description": "The adapter to use when capturing changes from the database. Options include: 'logminer': (the default) to capture changes using native Oracle LogMiner; 'xstream' to capture changes using Oracle XStreams",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "LogMiner"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-dbname",
+      "type": "java.lang.String",
+      "description": "The name of the database from which the connector should capture changes",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-history",
+      "type": "java.lang.String",
+      "description": "The name of the DatabaseHistory class that should be used to store and recover database schema changes. The configuration properties for the history are prefixed with the 'database.history.' string.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "class io.debezium.relational.history.KafkaDatabaseHistory"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-history-file-filename",
+      "type": "java.lang.String",
+      "description": "The path to the file that will be used to record the database history",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-history-kafka-bootstrap-servers",
+      "type": "java.lang.String",
+      "description": "A list of host\/port pairs that the connector will use for establishing the initial connection to the Kafka cluster for retrieving database schema history previously stored by the connector. This should point to the same Kafka cluster used by the Kafka Connect process.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-history-kafka-recovery-attempts",
+      "type": "java.lang.Integer",
+      "description": "The number of attempts in a row that no data are returned from Kafka before recover completes. The maximum amount of time to wait after receiving no data is (recovery.attempts) x (recovery.poll.interval.ms).",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 100
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-history-kafka-recovery-poll-interval-ms",
+      "type": "java.lang.Integer",
+      "description": "The number of milliseconds to wait while polling for persisted data during recovery. The option is a int type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 100
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-history-kafka-topic",
+      "type": "java.lang.String",
+      "description": "The name of the topic for the database schema history",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-history-skip-unparseable-ddl",
+      "type": "java.lang.Boolean",
+      "description": "Controls the action Debezium will take when it meets a DDL statement in binlog, that it cannot parse.By default the connector will stop operating but by changing the setting it can ignore the statements which it cannot parse. If skipping is enabled then Debezium can miss metadata changes.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-history-store-only-captured-tables-ddl",
+      "type": "java.lang.Boolean",
+      "description": "Controls what DDL will Debezium store in database history. By default (false) Debezium will store all incoming DDL statements. If set to true, then only DDL that manipulates a captured table will be stored.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-history-store-only-monitored-tables-ddl",
+      "type": "java.lang.Boolean",
+      "description": "Controls what DDL will Debezium store in database history. By default (false) Debezium will store all incoming DDL statements. If set to true, then only DDL that manipulates a monitored table will be stored (deprecated, use database.history.store.only.captured.tables.ddl instead)",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-hostname",
+      "type": "java.lang.String",
+      "description": "Resolvable hostname or IP address of the database server.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-out-server-name",
+      "type": "java.lang.String",
+      "description": "Name of the XStream Out server to connect to.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-password",
+      "type": "java.lang.String",
+      "description": "Password of the database user to be used when connecting to the database.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-pdb-name",
+      "type": "java.lang.String",
+      "description": "Name of the pluggable database when working with a multi-tenant set-up. The CDB name must be given via database.dbname in this case.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-port",
+      "type": "java.lang.Integer",
+      "description": "Port of the database server.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 1528
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-server-name",
+      "type": "java.lang.String",
+      "description": "Unique name that identifies the database server and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct installation should have a separate namespace and be monitored by at most one Debezium connector.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-url",
+      "type": "java.lang.String",
+      "description": "Complete JDBC URL as an alternative to specifying hostname, port and database provided as a way to support alternative connection scenarios.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-user",
+      "type": "java.lang.String",
+      "description": "Name of the database user to be used when connecting to the database.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.datatype-propagate-source-type",
+      "type": "java.lang.String",
+      "description": "A comma-separated list of regular expressions matching the database-specific data type names that adds the data type's original type and original length as parameters to the corresponding field schemas in the emitted change records.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.decimal-handling-mode",
+      "type": "java.lang.String",
+      "description": "Specify how DECIMAL and NUMERIC columns should be represented in change events, including:'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "precise"
+    },
+    {
+      "name": "camel.component.debezium-oracle.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the debezium-oracle component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.event-processing-failure-handling-mode",
+      "type": "java.lang.String",
+      "description": "Specify how failures during processing of events (i.e. when encountering a corrupted event) should be handled, including:'fail' (the default) an exception indicating the problematic event and its position is raised, causing the connector to be stopped; 'warn' the problematic event and its position will be logged and the event will be skipped;'ignore' the problematic event will be skipped.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "fail"
+    },
+    {
+      "name": "camel.component.debezium-oracle.heartbeat-action-query",
+      "type": "java.lang.String",
+      "description": "The query executed with every heartbeat.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.heartbeat-interval-ms",
+      "type": "java.lang.Integer",
+      "description": "Length of an interval in milli-seconds in in which the connector periodically sends heartbeat messages to a heartbeat topic. Use 0 to disable heartbeat messages. Disabled by default. The option is a int type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.debezium-oracle.heartbeat-topics-prefix",
+      "type": "java.lang.String",
+      "description": "The prefix that is used to name heartbeat topics.Defaults to __debezium-heartbeat.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "__debezium-heartbeat"
+    },
+    {
+      "name": "camel.component.debezium-oracle.include-schema-changes",
+      "type": "java.lang.Boolean",
+      "description": "Whether the connector should publish changes in the database schema to a Kafka topic with the same name as the database server ID. Each schema change will be recorded using a key that contains the database name and whose value include logical description of the new schema and optionally the DDL statement(s).The default is 'true'. This is independent of how the connector internally records database history.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.debezium-oracle.include-schema-comments",
+      "type": "java.lang.Boolean",
+      "description": "Whether the connector parse table and column's comment to metadata object.Note: Enable this option will bring the implications on memory usage. The number and size of ColumnImpl objects is what largely impacts how much memory is consumed by the Debezium connectors, and adding a String to each of them can potentially be quite heavy. The default is 'false'.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.internal-key-converter",
+      "type": "java.lang.String",
+      "description": "The Converter class that should be used to serialize and deserialize key data for offsets. The default is JSON converter.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "org.apache.kafka.connect.json.JsonConverter"
+    },
+    {
+      "name": "camel.component.debezium-oracle.internal-value-converter",
+      "type": "java.lang.String",
+      "description": "The Converter class that should be used to serialize and deserialize value data for offsets. The default is JSON converter.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "org.apache.kafka.connect.json.JsonConverter"
+    },
+    {
+      "name": "camel.component.debezium-oracle.interval-handling-mode",
+      "type": "java.lang.String",
+      "description": "Specify how INTERVAL columns should be represented in change events, including:'string' represents values as an exact ISO formatted string'numeric' (default) represents values using the inexact conversion into microseconds",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "numeric"
+    },
+    {
+      "name": "camel.component.debezium-oracle.lob-enabled",
+      "type": "java.lang.Boolean",
+      "description": "When set to false, the default, LOB fields will not be captured nor emitted. When set to true, the connector will capture LOB fields and emit changes for those fields like any other column type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-archive-destination-name",
+      "type": "java.lang.String",
+      "description": "Sets the specific archive log destination as the source for reading archive logs.When not set, the connector will automatically select the first LOCAL and VALID destination.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-archive-log-hours",
+      "type": "java.lang.Long",
+      "description": "The number of hours in the past from SYSDATE to mine archive logs. Using 0 mines all available archive logs",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-archive-log-only-mode",
+      "type": "java.lang.Boolean",
+      "description": "When set to false, the default, the connector will mine both archive log and redo logs to emit change events. When set to true, the connector will only mine archive logs. There are circumstances where its advantageous to only mine archive logs and accept latency in event emission due to frequent revolving redo logs.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-archive-log-only-scn-poll-interval-ms",
+      "type": "java.lang.Long",
+      "description": "The interval in milliseconds to wait between polls checking to see if the SCN is in the archive logs. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-batch-size-default",
+      "type": "java.lang.Long",
+      "description": "The starting SCN interval size that the connector will use for reading data from redo\/archive logs.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 20000
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-batch-size-max",
+      "type": "java.lang.Long",
+      "description": "The maximum SCN interval size that this connector will use when reading from redo\/archive logs.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 100000
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-batch-size-min",
+      "type": "java.lang.Long",
+      "description": "The minimum SCN interval size that this connector will try to read from redo\/archive logs. Active batch size will be also increased\/decreased by this amount for tuning connector throughput when needed.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 1000
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-drop-on-stop",
+      "type": "java.lang.Boolean",
+      "description": "When set to true the underlying buffer cache is not retained when the connector is stopped. When set to false (the default), the buffer cache is retained across restarts.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-infinispan-cache-events",
+      "type": "java.lang.String",
+      "description": "Specifies the XML configuration for the Infinispan 'events' cache",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-infinispan-cache-processed-transactions",
+      "type": "java.lang.String",
+      "description": "Specifies the XML configuration for the Infinispan 'processed-transactions' cache",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-infinispan-cache-schema-changes",
+      "type": "java.lang.String",
+      "description": "Specifies the XML configuration for the Infinispan 'schema-changes' cache",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-infinispan-cache-transactions",
+      "type": "java.lang.String",
+      "description": "Specifies the XML configuration for the Infinispan 'transactions' cache",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-type",
+      "type": "java.lang.String",
+      "description": "The buffer type controls how the connector manages buffering transaction data. memory - Uses the JVM process' heap to buffer all transaction data. infinispan_embedded - This option uses an embedded Infinispan cache to buffer transaction data and persist it to disk. infinispan_remote - This option uses a remote Infinispan cluster to buffer transaction data and persist it to disk.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "memory"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-scn-gap-detection-gap-size-min",
+      "type": "java.lang.Long",
+      "description": "Used for SCN gap detection, if the difference between current SCN and previous end SCN is bigger than this value, and the time difference of current SCN and previous end SCN is smaller than log.mining.scn.gap.detection.time.interval.max.ms, consider it a SCN gap.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 1000000
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-scn-gap-detection-time-interval-max-ms",
+      "type": "java.lang.Long",
+      "description": "Used for SCN gap detection, if the difference between current SCN and previous end SCN is bigger than log.mining.scn.gap.detection.gap.size.min, and the time difference of current SCN and previous end SCN is smaller than this value, consider it a SCN gap. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 20000
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-sleep-time-default-ms",
+      "type": "java.lang.Long",
+      "description": "The amount of time that the connector will sleep after reading data from redo\/archive logs and before starting reading data again. Value is in milliseconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 1000
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-sleep-time-increment-ms",
+      "type": "java.lang.Long",
+      "description": "The maximum amount of time that the connector will use to tune the optimal sleep time when reading data from LogMiner. Value is in milliseconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 200
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-sleep-time-max-ms",
+      "type": "java.lang.Long",
+      "description": "The maximum amount of time that the connector will sleep after reading data from redo\/archive logs and before starting reading data again. Value is in milliseconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 3000
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-sleep-time-min-ms",
+      "type": "java.lang.Long",
+      "description": "The minimum amount of time that the connector will sleep after reading data from redo\/archive logs and before starting reading data again. Value is in milliseconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-strategy",
+      "type": "java.lang.String",
+      "description": "There are strategies: Online catalog with faster mining but no captured DDL. Another - with data dictionary loaded into REDO LOG files",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "redo_log_catalog"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-transaction-retention-hours",
+      "type": "java.lang.Long",
+      "description": "Hours to keep long running transactions in transaction buffer between log mining sessions. By default, all transactions are retained.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-username-exclude-list",
+      "type": "java.lang.String",
+      "description": "Comma separated list of usernames to exclude from LogMiner query.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.max-batch-size",
+      "type": "java.lang.Integer",
+      "description": "Maximum size of each batch of source records. Defaults to 2048.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 2048
+    },
+    {
+      "name": "camel.component.debezium-oracle.max-queue-size",
+      "type": "java.lang.Integer",
+      "description": "Maximum size of the queue for change events read from the database log but not yet recorded or forwarded. Defaults to 8192, and should always be larger than the maximum batch size.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 8192
+    },
+    {
+      "name": "camel.component.debezium-oracle.max-queue-size-in-bytes",
+      "type": "java.lang.Long",
+      "description": "Maximum size of the queue in bytes for change events read from the database log but not yet recorded or forwarded. Defaults to 0. Mean the feature is not enabled",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.debezium-oracle.message-key-columns",
+      "type": "java.lang.String",
+      "description": "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern ':',where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector,and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key.Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.offset-commit-policy",
+      "type": "java.lang.String",
+      "description": "The name of the Java class of the commit policy. It defines when offsets commit has to be triggered based on the number of events processed and the time elapsed since the last commit. This class must implement the interface 'OffsetCommitPolicy'. The default is a periodic commit policy based upon time intervals.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "io.debezium.embedded.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy"
+    },
+    {
+      "name": "camel.component.debezium-oracle.offset-commit-timeout-ms",
+      "type": "java.lang.Long",
+      "description": "Maximum number of milliseconds to wait for records to flush and partition offset data to be committed to offset storage before cancelling the process and restoring the offset data to be committed in a future attempt. The default is 5 seconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.debezium-oracle.offset-flush-interval-ms",
+      "type": "java.lang.Long",
+      "description": "Interval at which to try committing offsets. The default is 1 minute. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
+      "name": "camel.component.debezium-oracle.offset-storage",
+      "type": "java.lang.String",
+      "description": "The name of the Java class that is responsible for persistence of connector offsets.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "org.apache.kafka.connect.storage.FileOffsetBackingStore"
+    },
+    {
+      "name": "camel.component.debezium-oracle.offset-storage-file-name",
+      "type": "java.lang.String",
+      "description": "Path to file where offsets are to be stored. Required when offset.storage is set to the FileOffsetBackingStore.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.offset-storage-partitions",
+      "type": "java.lang.Integer",
+      "description": "The number of partitions used when creating the offset storage topic. Required when offset.storage is set to the 'KafkaOffsetBackingStore'.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.offset-storage-replication-factor",
+      "type": "java.lang.Integer",
+      "description": "Replication factor used when creating the offset storage topic. Required when offset.storage is set to the KafkaOffsetBackingStore",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.offset-storage-topic",
+      "type": "java.lang.String",
+      "description": "The name of the Kafka topic where offsets are to be stored. Required when offset.storage is set to the KafkaOffsetBackingStore.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.poll-interval-ms",
+      "type": "java.lang.Long",
+      "description": "Time to wait for new change events to appear after receiving no events, given in milliseconds. Defaults to 500 ms. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 500
+    },
+    {
+      "name": "camel.component.debezium-oracle.provide-transaction-metadata",
+      "type": "java.lang.Boolean",
+      "description": "Enables transaction metadata extraction together with event counting",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.query-fetch-size",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of records that should be loaded into memory while streaming. A value of 0 uses the default JDBC fetch size.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.debezium-oracle.rac-nodes",
+      "type": "java.lang.String",
+      "description": "A comma-separated list of RAC node hostnames or ip addresses",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.retriable-restart-connector-wait-ms",
+      "type": "java.lang.Long",
+      "description": "Time to wait before restarting connector after retriable exception occurs. Defaults to 10000ms. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
+      "name": "camel.component.debezium-oracle.sanitize-field-names",
+      "type": "java.lang.Boolean",
+      "description": "Whether field names will be sanitized to Avro naming conventions",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.signal-data-collection",
+      "type": "java.lang.String",
+      "description": "The name of the data collection that is used to send signals\/commands to Debezium. Signaling is disabled when not set.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.skipped-operations",
+      "type": "java.lang.String",
+      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes. By default, no operations will be skipped.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-delay-ms",
+      "type": "java.lang.Long",
+      "description": "A delay period before a snapshot will begin, given in milliseconds. Defaults to 0 ms. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-enhance-predicate-scn",
+      "type": "java.lang.String",
+      "description": "A token to replace on snapshot predicate template",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-fetch-size",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of records that should be loaded into memory while performing a snapshot",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-include-collection-list",
+      "type": "java.lang.String",
+      "description": "this setting must be set to specify a list of tables\/collections whose snapshot must be taken on creating or restarting the connector.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-lock-timeout-ms",
+      "type": "java.lang.Long",
+      "description": "The maximum number of millis to wait for table locks at the beginning of a snapshot. If locks cannot be acquired in this time frame, the snapshot will be aborted. Defaults to 10 seconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-locking-mode",
+      "type": "java.lang.String",
+      "description": "Controls how the connector holds locks on tables while performing the schema snapshot. The default is 'shared', which means the connector will hold a table lock that prevents exclusive table access for just the initial portion of the snapshot while the database schemas and other metadata are being read. The remaining work in a snapshot involves selecting all rows from each table, and this is done using a flashback query that requires no locks. However, in some cases it may be desirable to avoid locks entirely which can be done by specifying 'none'. This mode is only safe to use if no schema changes are happening while the snapshot is taken.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "shared"
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-max-threads",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of threads used to perform the snapshot. Defaults to 1.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 1
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-mode",
+      "type": "java.lang.String",
+      "description": "The criteria for running a snapshot upon startup of the connector. Options include: 'initial' (the default) to specify the connector should run a snapshot only when no offsets are available for the logical server name; 'schema_only' to specify the connector should run a snapshot of the schema when no offsets are available for the logical server name.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "initial"
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-select-statement-overrides",
+      "type": "java.lang.String",
+      "description": "This property contains a comma-separated list of fully-qualified tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on thespecific connectors. Select statements for the individual tables are specified in further configuration properties, one for each table, identified by the id 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME', respectively. The value of those properties is the select statement to use when retrieving data from the specific table during snapshotting. A possible use case for large append-only tables is setting a specific point where to start (resume) snapshotting, in case a previous snapshotting was interrupted.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.source-struct-version",
+      "type": "java.lang.String",
+      "description": "A version of the format of the publicly visible source part in the message",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "v2"
+    },
+    {
+      "name": "camel.component.debezium-oracle.table-blacklist",
+      "type": "java.lang.String",
+      "description": "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring (deprecated, use table.exclude.list instead)",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.table-exclude-list",
+      "type": "java.lang.String",
+      "description": "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.table-include-list",
+      "type": "java.lang.String",
+      "description": "The tables for which changes are to be captured",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.table-whitelist",
+      "type": "java.lang.String",
+      "description": "The tables for which changes are to be captured (deprecated, use table.include.list instead)",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.time-precision-mode",
+      "type": "java.lang.String",
+      "description": "Time, date, and timestamps can be represented with different kinds of precisions, including:'adaptive' (the default) bases the precision of time, date, and timestamp values on the database column's precision; 'adaptive_time_microseconds' like 'adaptive' mode, but TIME fields always use microseconds precision;'connect' always represents time, date, and timestamp values using Kafka Connect's built-in representations for Time, Date, and Timestamp, which uses millisecond precision regardless of the database columns' precision .",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "adaptive"
+    },
+    {
+      "name": "camel.component.debezium-oracle.tombstones-on-delete",
+      "type": "java.lang.Boolean",
+      "description": "Whether delete operations should be represented by a delete event and a subsquenttombstone event (true) or only by a delete event (false). Emitting the tombstone event (the default behavior) allows Kafka to completely delete all events pertaining to the given key once the source record got deleted.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.transaction-topic",
+      "type": "java.lang.String",
+      "description": "The name of the transaction metadata topic. The placeholder ${database.server.name} can be used for referring to the connector's logical name; defaults to ${database.server.name}.transaction.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "${database.server.name}.transaction"
+    },
+    {
+      "name": "camel.component.debezium-oracle.unavailable-value-placeholder",
+      "type": "java.lang.String",
+      "description": "Specify the constant that will be provided by Debezium to indicate that the original value is unavailable and not provided by the database.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "__debezium_unavailable_value"
+    }
+  ],
+  "hints": []
+}
