@@ -17,7 +17,6 @@
 package org.apache.camel.spring.boot.vault;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.vault.AwsVaultConfiguration;
 import org.apache.camel.vault.AzureVaultConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
