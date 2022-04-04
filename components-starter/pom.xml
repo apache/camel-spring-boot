@@ -325,7 +325,6 @@
     <module>camel-mustache-starter</module>
     <module>camel-mvel-starter</module>
     <module>camel-mybatis-starter</module>
-    <module>camel-nagios-starter</module>
     <module>camel-nats-starter</module>
     <module>camel-netty-http-starter</module>
     <module>camel-netty-starter</module>
