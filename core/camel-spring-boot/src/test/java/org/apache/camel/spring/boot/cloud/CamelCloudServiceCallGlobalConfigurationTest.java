@@ -98,7 +98,6 @@ public class CamelCloudServiceCallGlobalConfigurationTest {
         prop.put("camel.cloud.service-call.service-filter", "sf");
         prop.put("camel.cloud.service-discovery.configurations[sd].services[custom-svc-list]", SpringBootPropertyUtil.getDiscoveryServices());
         prop.put("camel.cloud.service-filter.configurations[sf].blacklist[custom-svc-list]", SpringBootPropertyUtil.getServiceFilterBlacklist());
-        prop.put("ribbon.enabled", false);
         prop.put("debug", false);
         return prop;
     }

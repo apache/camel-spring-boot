@@ -21,11 +21,6 @@
       "sourceType": "org.apache.camel.model.cloud.springboot.KubernetesServiceCallServiceDiscoveryConfigurationProperties"
     },
     {
-      "name": "camel.cloud.ribbon.load-balancer",
-      "type": "org.apache.camel.model.cloud.springboot.RibbonServiceCallServiceLoadBalancerConfigurationProperties",
-      "sourceType": "org.apache.camel.model.cloud.springboot.RibbonServiceCallServiceLoadBalancerConfigurationProperties"
-    },
-    {
       "name": "camel.hystrix",
       "type": "org.apache.camel.model.springboot.HystrixConfigurationDefinitionProperties",
       "sourceType": "org.apache.camel.model.springboot.HystrixConfigurationDefinitionProperties"
@@ -177,7 +172,7 @@
     {
       "name": "camel.cloud.consul.service-discovery.properties",
       "type": "java.util.Map<java.lang.String,java.lang.String>",
-      "description": "Set client properties to use. These properties are specific to what service call implementation are in use. For example if using ribbon, then the client properties are define in com.netflix.client.config.CommonClientConfigKey.",
+      "description": "Set client properties to use. These properties are specific to what service call implementation are in use. For example if using a different one, then the client properties are defined according to the specific service in use.",
       "sourceType": "org.apache.camel.model.cloud.springboot.ConsulServiceCallServiceDiscoveryConfigurationProperties"
     },
     {
@@ -226,7 +221,7 @@
     {
       "name": "camel.cloud.dns.service-discovery.properties",
       "type": "java.util.Map<java.lang.String,java.lang.String>",
-      "description": "Set client properties to use. These properties are specific to what service call implementation are in use. For example if using ribbon, then the client properties are define in com.netflix.client.config.CommonClientConfigKey.",
+      "description": "Set client properties to use. These properties are specific to what service call implementation are in use. For example if using a different one, then the client properties are defined according to the specific service in use.",
       "sourceType": "org.apache.camel.model.cloud.springboot.DnsServiceCallServiceDiscoveryConfigurationProperties"
     },
     {
@@ -258,7 +253,7 @@
     {
       "name": "camel.cloud.etcd.service-discovery.properties",
       "type": "java.util.Map<java.lang.String,java.lang.String>",
-      "description": "Set client properties to use. These properties are specific to what service call implementation are in use. For example if using ribbon, then the client properties are define in com.netflix.client.config.CommonClientConfigKey.",
+      "description": "Set client properties to use. These properties are specific to what service call implementation are in use. For example if using a different one, then the client properties are defined according to the specific service in use.",
       "sourceType": "org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationProperties"
     },
     {
@@ -412,7 +407,7 @@
     {
       "name": "camel.cloud.kubernetes.service-discovery.properties",
       "type": "java.util.Map<java.lang.String,java.lang.String>",
-      "description": "Set client properties to use. These properties are specific to what service call implementation are in use. For example if using ribbon, then the client properties are define in com.netflix.client.config.CommonClientConfigKey.",
+      "description": "Set client properties to use. These properties are specific to what service call implementation are in use. For example if using a different one, then the client properties are defined according to the specific service in use.",
       "sourceType": "org.apache.camel.model.cloud.springboot.KubernetesServiceCallServiceDiscoveryConfigurationProperties"
     },
     {
@@ -427,49 +422,6 @@
       "type": "java.lang.String",
       "description": "Sets the username for authentication when using client lookup",
       "sourceType": "org.apache.camel.model.cloud.springboot.KubernetesServiceCallServiceDiscoveryConfigurationProperties"
-    },
-    {
-      "name": "camel.cloud.ribbon.load-balancer.client-name",
-      "type": "java.lang.String",
-      "description": "Sets the Ribbon client name",
-      "sourceType": "org.apache.camel.model.cloud.springboot.RibbonServiceCallServiceLoadBalancerConfigurationProperties"
-    },
-    {
-      "name": "camel.cloud.ribbon.load-balancer.configurations",
-      "type": "java.util.Map<java.lang.String,org.apache.camel.model.cloud.springboot.RibbonServiceCallServiceLoadBalancerConfigurationCommon>",
-      "description": "Define additional configuration definitions",
-      "sourceType": "org.apache.camel.model.cloud.springboot.RibbonServiceCallServiceLoadBalancerConfigurationProperties"
-    },
-    {
-      "name": "camel.cloud.ribbon.load-balancer.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Enable the component",
-      "sourceType": "org.apache.camel.model.cloud.springboot.RibbonServiceCallServiceLoadBalancerConfigurationProperties",
-      "defaultValue": true
-    },
-    {
-      "name": "camel.cloud.ribbon.load-balancer.namespace",
-      "type": "java.lang.String",
-      "description": "The namespace",
-      "sourceType": "org.apache.camel.model.cloud.springboot.RibbonServiceCallServiceLoadBalancerConfigurationProperties"
-    },
-    {
-      "name": "camel.cloud.ribbon.load-balancer.password",
-      "type": "java.lang.String",
-      "description": "The password",
-      "sourceType": "org.apache.camel.model.cloud.springboot.RibbonServiceCallServiceLoadBalancerConfigurationProperties"
-    },
-    {
-      "name": "camel.cloud.ribbon.load-balancer.properties",
-      "type": "java.util.Map<java.lang.String,java.lang.String>",
-      "description": "Set client properties to use. These properties are specific to what service call implementation are in use. For example if using ribbon, then the client properties are define in com.netflix.client.config.CommonClientConfigKey.",
-      "sourceType": "org.apache.camel.model.cloud.springboot.RibbonServiceCallServiceLoadBalancerConfigurationProperties"
-    },
-    {
-      "name": "camel.cloud.ribbon.load-balancer.username",
-      "type": "java.lang.String",
-      "description": "The username",
-      "sourceType": "org.apache.camel.model.cloud.springboot.RibbonServiceCallServiceLoadBalancerConfigurationProperties"
     },
     {
       "name": "camel.hystrix.allow-maximum-size-to-diverge-from-core-size",
