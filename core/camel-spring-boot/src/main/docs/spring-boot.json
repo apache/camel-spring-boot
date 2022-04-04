@@ -120,6 +120,11 @@
       "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
     },
     {
+      "name": "camel.vault.azure",
+      "type": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties"
+    },
+    {
       "name": "camel.vault.gcp",
       "type": "org.apache.camel.spring.boot.vault.GcpVaultConfigurationProperties",
       "sourceType": "org.apache.camel.spring.boot.vault.GcpVaultConfigurationProperties"
@@ -1336,6 +1341,30 @@
       "type": "java.lang.String",
       "description": "The AWS secret key",
       "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.azure.client-id",
+      "type": "java.lang.String",
+      "description": "The Client Id",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.azure.client-secret",
+      "type": "java.lang.String",
+      "description": "The Client secret",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.azure.tenant-id",
+      "type": "java.lang.String",
+      "description": "The tenant Id",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.azure.vault-name",
+      "type": "java.lang.String",
+      "description": "The Vault Name",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties"
     },
     {
       "name": "camel.vault.gcp.project-id",
