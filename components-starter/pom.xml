@@ -376,7 +376,6 @@
     <module>camel-servicenow-starter</module>
     <module>camel-servlet-starter</module>
     <module>camel-shiro-starter</module>
-    <module>camel-sip-starter</module>
     <module>camel-sjms-starter</module>
     <module>camel-sjms2-starter</module>
     <module>camel-slack-starter</module>

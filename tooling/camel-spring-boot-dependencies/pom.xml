@@ -1568,11 +1568,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-sip-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-sjms-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3735,11 +3730,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-shiro</artifactId>
-        <version>3.17.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-sip</artifactId>
         <version>3.17.0-SNAPSHOT</version>
       </dependency>
       <dependency>
