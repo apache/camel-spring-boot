@@ -35,9 +35,9 @@ public class DnsServiceCallServiceDiscoveryConfigurationCommon {
     private String domain;
     /**
      * Set client properties to use. These properties are specific to what
-     * service call implementation are in use. For example if using ribbon, then
-     * the client properties are define in
-     * com.netflix.client.config.CommonClientConfigKey.
+     * service call implementation are in use. For example if using a different
+     * one, then the client properties are defined according to the specific
+     * service in use.
      */
     private Map<String, String> properties;
 
