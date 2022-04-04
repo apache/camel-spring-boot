@@ -406,7 +406,6 @@
     <module>camel-stub-starter</module>
     <module>camel-swagger-java-starter</module>
     <module>camel-syslog-starter</module>
-    <module>camel-tagsoup-starter</module>
     <module>camel-tarfile-starter</module>
     <module>camel-telegram-starter</module>
     <module>camel-thrift-starter</module>
