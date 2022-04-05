@@ -2524,6 +2524,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-debezium-db2</artifactId>
+        <version>3.17.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-debezium-maven-plugin</artifactId>
         <version>3.17.0-SNAPSHOT</version>
       </dependency>
@@ -3374,11 +3379,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-msv</artifactId>
-        <version>3.17.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-mustache</artifactId>
         <version>3.17.0-SNAPSHOT</version>
       </dependency>
@@ -3390,11 +3390,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-mybatis</artifactId>
-        <version>3.17.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-nagios</artifactId>
         <version>3.17.0-SNAPSHOT</version>
       </dependency>
       <dependency>
