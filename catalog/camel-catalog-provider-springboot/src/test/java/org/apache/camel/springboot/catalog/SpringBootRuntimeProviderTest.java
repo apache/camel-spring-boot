@@ -97,7 +97,6 @@ public class SpringBootRuntimeProviderTest {
         assertNotNull(names);
         assertFalse(names.isEmpty());
 
-        assertTrue(names.contains("hystrix"));
         assertTrue(names.contains("zipkin"));
 
         assertFalse(names.contains("blueprint"));

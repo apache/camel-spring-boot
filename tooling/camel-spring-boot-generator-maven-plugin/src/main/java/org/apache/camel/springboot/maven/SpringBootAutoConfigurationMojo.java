@@ -161,22 +161,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     }
 
     private void executeModels(JarFile componentJar, Map<String, Supplier<String>> files) throws MojoExecutionException, MojoFailureException {
-        String json;
-
-        // Hystrix
-        json = loadModelJson(files, "hystrixConfiguration");
-        if (json != null) {
-            EipModel model = JsonMapper.generateEipModel(json);
-
-            int pos = model.getJavaType().lastIndexOf(".");
-            String pkg = model.getJavaType().substring(0, pos) + ".springboot";
-
-            // Generate properties, auto-configuration for camel-core-starter
-            createEipModelConfigurationSource(pkg, model, "camel.hystrix", true);
-        }
-
         // Resilience4j
-        json = loadModelJson(files, "resilience4jConfiguration");
+        String json = loadModelJson(files, "resilience4jConfiguration");
         if (json != null) {
             EipModel model = JsonMapper.generateEipModel(json);
 
