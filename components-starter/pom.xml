@@ -206,7 +206,6 @@
     <module>camel-dynamic-router-starter</module>
     <module>camel-ehcache-starter</module>
     <module>camel-elasticsearch-rest-starter</module>
-    <module>camel-etcd-starter</module>
     <module>camel-etcd3-starter</module>
     <module>camel-exec-starter</module>
     <module>camel-facebook-starter</module>
