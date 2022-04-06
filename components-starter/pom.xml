@@ -206,7 +206,6 @@
     <module>camel-dynamic-router-starter</module>
     <module>camel-ehcache-starter</module>
     <module>camel-elasticsearch-rest-starter</module>
-    <module>camel-etcd-starter</module>
     <module>camel-etcd3-starter</module>
     <module>camel-exec-starter</module>
     <module>camel-facebook-starter</module>
@@ -326,7 +325,6 @@
     <module>camel-netty-http-starter</module>
     <module>camel-netty-starter</module>
     <module>camel-nitrite-starter</module>
-    <module>camel-nsq-starter</module>
     <module>camel-oaipmh-starter</module>
     <module>camel-ognl-starter</module>
     <module>camel-olingo2-starter</module>

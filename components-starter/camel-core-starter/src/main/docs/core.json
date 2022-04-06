@@ -11,11 +11,6 @@
       "sourceType": "org.apache.camel.model.cloud.springboot.DnsServiceCallServiceDiscoveryConfigurationProperties"
     },
     {
-      "name": "camel.cloud.etcd.service-discovery",
-      "type": "org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationProperties",
-      "sourceType": "org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationProperties"
-    },
-    {
       "name": "camel.cloud.kubernetes.service-discovery",
       "type": "org.apache.camel.model.cloud.springboot.KubernetesServiceCallServiceDiscoveryConfigurationProperties",
       "sourceType": "org.apache.camel.model.cloud.springboot.KubernetesServiceCallServiceDiscoveryConfigurationProperties"
@@ -225,63 +220,6 @@
       "description": "The transport protocol of the desired service.",
       "sourceType": "org.apache.camel.model.cloud.springboot.DnsServiceCallServiceDiscoveryConfigurationProperties",
       "defaultValue": "_tcp"
-    },
-    {
-      "name": "camel.cloud.etcd.service-discovery.configurations",
-      "type": "java.util.Map<java.lang.String,org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationCommon>",
-      "description": "Define additional configuration definitions",
-      "sourceType": "org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationProperties"
-    },
-    {
-      "name": "camel.cloud.etcd.service-discovery.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Enable the component",
-      "sourceType": "org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationProperties",
-      "defaultValue": true
-    },
-    {
-      "name": "camel.cloud.etcd.service-discovery.password",
-      "type": "java.lang.String",
-      "description": "The password to use for basic authentication.",
-      "sourceType": "org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationProperties"
-    },
-    {
-      "name": "camel.cloud.etcd.service-discovery.properties",
-      "type": "java.util.Map<java.lang.String,java.lang.String>",
-      "description": "Set client properties to use. These properties are specific to what service call implementation are in use. For example if using a different one, then the client properties are defined according to the specific service in use.",
-      "sourceType": "org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationProperties"
-    },
-    {
-      "name": "camel.cloud.etcd.service-discovery.service-path",
-      "type": "java.lang.String",
-      "description": "The path to look for for service discovery",
-      "sourceType": "org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationProperties",
-      "defaultValue": "\/services\/"
-    },
-    {
-      "name": "camel.cloud.etcd.service-discovery.timeout",
-      "type": "java.lang.Long",
-      "description": "To set the maximum time an action could take to complete.",
-      "sourceType": "org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationProperties"
-    },
-    {
-      "name": "camel.cloud.etcd.service-discovery.type",
-      "type": "java.lang.String",
-      "description": "To set the discovery type, valid values are on-demand and watch.",
-      "sourceType": "org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationProperties",
-      "defaultValue": "on-demand"
-    },
-    {
-      "name": "camel.cloud.etcd.service-discovery.uris",
-      "type": "java.lang.String",
-      "description": "The URIs the client can connect to.",
-      "sourceType": "org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationProperties"
-    },
-    {
-      "name": "camel.cloud.etcd.service-discovery.user-name",
-      "type": "java.lang.String",
-      "description": "The user name to use for basic authentication.",
-      "sourceType": "org.apache.camel.model.cloud.springboot.EtcdServiceCallServiceDiscoveryConfigurationProperties"
     },
     {
       "name": "camel.cloud.kubernetes.service-discovery.api-version",
