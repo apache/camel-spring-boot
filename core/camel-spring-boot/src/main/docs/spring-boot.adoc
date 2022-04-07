@@ -248,7 +248,7 @@ following Spring properties:
 camel.springboot.consumer-template-cache-size = 100
 camel.springboot.producer-template-cache-size = 200
 ----
-
+[[typeconverter]]
 == Auto-configured TypeConverter
 
 Camel auto-configuration registers a `TypeConverter` instance named

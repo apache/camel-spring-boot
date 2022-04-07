@@ -1,5 +1,6 @@
 * xref:index.adoc[About]
 * xref:spring-boot.adoc[Camel Context starter]
 * xref:list.adoc[List of starters]
+* xref:starter-confuguration.adoc[Starter Configuration]
 //* xref:_list-old.adoc[old List of starters]
 
