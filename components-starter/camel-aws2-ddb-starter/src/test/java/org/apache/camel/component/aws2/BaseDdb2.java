@@ -1,7 +1,6 @@
 package org.apache.camel.component.aws2;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.Configuration;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.infra.aws2.clients.AWSSDKClientUtils;
@@ -10,6 +9,7 @@ import org.apache.camel.test.infra.aws.common.services.AWSService;
 import org.apache.camel.test.infra.aws2.services.AWSServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
 public class BaseDdb2 {
