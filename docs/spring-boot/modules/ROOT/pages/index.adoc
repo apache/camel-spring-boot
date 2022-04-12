@@ -72,7 +72,7 @@ camel.springboot.main-run-controller = true
 
 == Spring Boot configuration support
 
-Each xref:list.adoc[component starter] lists configuration parameters you can configure in the standard `application.properties` or `application.yml` files. These parameters have the form of `camel.component.[component-name].[parameter]`. For example to configure the URL of the ActiveMQ broker you can set:
+Each xref:list.adoc[starter] lists configuration parameters you can configure in the standard `application.properties` or `application.yml` files. These parameters have the form of `camel.component.[component-name].[parameter]`. For example to configure the URL of the ActiveMQ broker you can set:
 
 [source]
 ----

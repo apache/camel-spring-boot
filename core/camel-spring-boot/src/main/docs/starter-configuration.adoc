@@ -1,0 +1,65 @@
+[[Component-configuration]]
+= Starter Configuration
+
+Clear and accessible configuration is a crucial part of any application. Camel xref:list.adoc[starters] (Components, Data Formats, Languages) fully support Spring Boot's https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config[external configuration] mechanism. We've also added the possibility to configure them through Spring https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-definition[Beans] for more complex uses cases.
+
+== Using External Configuration
+
+Internally, every xref:list.adoc[starter] is configured through Spring Boot's https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config.typesafe-configuration-properties.java-bean-binding[ConfigurationProperties]. Each configuration parameter can be set in various https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config[ways] (`application.[properties|json|yaml]` files, command line arguments, environments variables etc...). Parameters have the form of `camel.[component|language|dataformat].[name].[parameter]`
+
+For example to configure the URL of the ActiveMQ broker you can set:
+
+[source]
+----
+camel.component.activemq.broker-url=tcp://localhost:61616
+----
+
+Or to configure the `delimeter` of the CSV dataformat to be a semicolon(;) you can set:
+
+[source]
+----
+camel.dataformat.csv.delimiter=;
+----
+
+Camel will use it's xref:spring-boot.adoc#typeconverter[TypeConverter] mechanism when setting properties to the desired type.
+
+You can refer to beans in the Registry using the `#bean:name`:
+
+[source]
+----
+camel.component.jms.transactionManager=#bean:myjtaTransactionManager
+----
+
+The `Bean` would be typically created in Java:
+
+[source,java]
+----
+@Bean("myjtaTransactionManager")
+public JmsTransactionManager myjtaTransactionManager(PooledConnectionFactory pool) {
+    JmsTransactionManager manager = new JmsTransactionManager(pool);
+    manager.setDefaultTimeout(45);
+    return manager;
+}
+----
+
+Beans can also be created in https://camel.apache.org/components/latest/others/main.html#_specifying_custom_beans[configuration files] but it isn't recommended for complex use cases.
+
+== Using Beans
+
+Starters can also be created and configured via Spring https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-definition[Beans]. Before creating a starter (Component, Dataformat, Language), Camel will first lookup it up in the Registry by it's name if it already exists. For example to configure a Kafka component:
+
+[source,java]
+----
+@Bean("kafka")
+public KafkaComponent kafka(KafkaConfiguration kafkaconfiguration){
+    return ComponentsBuilderFactory.kafka()
+                        .brokers("{{kafka.host}}:{{kafka.port}}")
+                        .build();
+}
+----
+
+The `Bean` name has to be equal to that of the Component, Dataformat or Language your are configuring. If the `Bean` name isn't specified in the annotation it will be set to the method name.
+
+Typical Camel Spring Boot projects will use a combination of external configuration and Beans to configure their application. For more complete examples on how to configure your Camel Spring Boot project, you can refer to our example https://github.com/apache/camel-spring-boot-examples[repository].
+
+All contributions are welcome!
