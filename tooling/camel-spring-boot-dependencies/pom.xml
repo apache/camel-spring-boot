@@ -164,7 +164,7 @@
       <dependency>
         <groupId>io.methvin</groupId>
         <artifactId>directory-watcher</artifactId>
-        <version>0.15.0</version>
+        <version>0.15.1</version>
       </dependency>
       <dependency>
         <groupId>io.nessus</groupId>
@@ -4456,7 +4456,7 @@
       <dependency>
         <groupId>org.dizitart</groupId>
         <artifactId>nitrite</artifactId>
-        <version>3.4.3</version>
+        <version>3.4.4</version>
       </dependency>
       <dependency>
         <groupId>org.eclipse.rdf4j</groupId>
