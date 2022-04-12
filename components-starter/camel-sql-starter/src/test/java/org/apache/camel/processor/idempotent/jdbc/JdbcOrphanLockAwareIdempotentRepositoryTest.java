@@ -16,7 +16,6 @@
  */
 package org.apache.camel.processor.idempotent.jdbc;
 
-import org.apache.camel.Configuration;
 import org.apache.camel.component.sql.BaseSql;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.processor.idempotent.jdbc.JdbcMessageIdRepository;
@@ -27,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
