@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.sqs;
 
-import org.apache.camel.Configuration;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -31,6 +30,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.testcontainers.shaded.org.apache.commons.lang.RandomStringUtils;
 import software.amazon.awssdk.services.sqs.SqsClient;
