@@ -42,7 +42,7 @@ public JmsTransactionManager myjtaTransactionManager(PooledConnectionFactory poo
 }
 ----
 
-Beans can also be created in xref:others:main.adoc#_specifying_custom_beans[configuration files] but it isn't recommended for complex use cases.
+Beans can also be created in xref:components:others:main.adoc#_specifying_custom_beans[configuration files] but it isn't recommended for complex use cases.
 
 == Using Beans
 
