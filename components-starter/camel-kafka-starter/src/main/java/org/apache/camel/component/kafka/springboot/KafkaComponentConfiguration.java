@@ -24,6 +24,7 @@ import org.apache.camel.component.kafka.KafkaComponent;
 import org.apache.camel.component.kafka.KafkaConfiguration;
 import org.apache.camel.component.kafka.PollExceptionStrategy;
 import org.apache.camel.component.kafka.PollOnError;
+import org.apache.camel.component.kafka.SeekPolicy;
 import org.apache.camel.component.kafka.consumer.KafkaManualCommitFactory;
 import org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer;
 import org.apache.camel.component.kafka.serde.KafkaHeaderSerializer;
@@ -278,10 +279,9 @@ public class KafkaComponentConfiguration
     private Long pollTimeoutMs = 5000L;
     /**
      * Set if KafkaConsumer will read from beginning or end on startup:
-     * beginning : read from beginning end : read from end This is replacing the
-     * earlier property seekToBeginning
+     * SeekPolicy.BEGINNING: read from beginning. SeekPolicy.END: read from end.
      */
-    private String seekTo;
+    private SeekPolicy seekTo;
     /**
      * The timeout used to detect failures when using Kafka's group management
      * facilities.
@@ -1036,11 +1036,11 @@ public class KafkaComponentConfiguration
         this.pollTimeoutMs = pollTimeoutMs;
     }
 
-    public String getSeekTo() {
+    public SeekPolicy getSeekTo() {
         return seekTo;
     }
 
-    public void setSeekTo(String seekTo) {
+    public void setSeekTo(SeekPolicy seekTo) {
         this.seekTo = seekTo;
     }
 
