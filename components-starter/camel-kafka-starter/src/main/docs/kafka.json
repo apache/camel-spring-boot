@@ -533,8 +533,8 @@
     },
     {
       "name": "camel.component.kafka.seek-to",
-      "type": "java.lang.String",
-      "description": "Set if KafkaConsumer will read from beginning or end on startup: beginning : read from beginning end : read from end This is replacing the earlier property seekToBeginning",
+      "type": "org.apache.camel.component.kafka.SeekPolicy",
+      "description": "Set if KafkaConsumer will read from beginning or end on startup: SeekPolicy.BEGINNING: read from beginning. SeekPolicy.END: read from end.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
     },
     {
