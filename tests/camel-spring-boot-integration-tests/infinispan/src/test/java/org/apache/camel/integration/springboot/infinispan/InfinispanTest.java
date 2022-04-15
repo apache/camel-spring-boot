@@ -35,7 +35,7 @@ import org.infinispan.configuration.cache.CacheMode;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.testcontainers.shaded.org.apache.commons.lang.SystemUtils;
+import org.testcontainers.shaded.org.apache.commons.lang3.SystemUtils;
 
 import java.util.Properties;
 import java.util.Random;
