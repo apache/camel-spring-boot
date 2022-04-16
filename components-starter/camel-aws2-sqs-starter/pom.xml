@@ -48,6 +48,11 @@
       <!--END OF GENERATED CODE-->
     </dependency>
     <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>${commons-lang-version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-test-infra-aws-v2</artifactId>
       <version>${camel-version}</version>
