@@ -21,10 +21,12 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 
 @ExtendWith(ArquillianExtension.class)
+@Disabled
 public class CamelWebhookTest extends AbstractSpringBootTestSupport {
 
     @Deployment
