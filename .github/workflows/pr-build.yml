@@ -46,3 +46,12 @@ jobs:
       with:
         name: build.log
         path: build.log
+    - name: Archive Surefire Logs
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: integration-test-surefire-logs
+        path: |
+          tests/camel-itest-spring-boot/target/surefire-reports
+          tests/camel-spring-boot-integration-tests/infinispan/target/surefire-reports
+        retention-days: 2 
