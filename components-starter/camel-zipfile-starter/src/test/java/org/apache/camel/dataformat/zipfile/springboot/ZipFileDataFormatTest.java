@@ -151,6 +151,7 @@ public class ZipFileDataFormatTest {
     }
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
     public void testZipWithPathElements() throws Exception {
         mockZip.reset();
         mockZip.expectedBodiesReceived(getZippedText("poem.txt"));
@@ -343,13 +344,18 @@ public class ZipFileDataFormatTest {
     public class TestConfiguration {
 
         @Bean
-        public RouteBuilder routeBuilder() {
+        public ZipFileDataFormat zip() {
+            return new ZipFileDataFormat();
+        }
+
+        @Bean
+        public RouteBuilder routeBuilder(ZipFileDataFormat zipDataFormat) {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
                     interceptSendToEndpoint("file:*").to("mock:intercepted");
 
-                    zip = new ZipFileDataFormat();
+                    zip = zipDataFormat;
 
                     from("direct:zip").marshal(zip).to("mock:zip");
                     from("direct:unzip").unmarshal(zip).to("mock:unzip");
