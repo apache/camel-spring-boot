@@ -46,7 +46,7 @@ public class BaseSql {
     }
 
     protected static EmbeddedDatabase initDb(String script) {
-        return initDb(EmbeddedDatabaseType.DERBY, script);
+        return initDb(EmbeddedDatabaseType.H2, script);
     }
 
     protected static EmbeddedDatabase initDb(EmbeddedDatabaseType type, String script) {
