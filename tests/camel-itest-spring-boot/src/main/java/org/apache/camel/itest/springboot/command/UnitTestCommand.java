@@ -106,16 +106,26 @@ public class UnitTestCommand extends AbstractTestCommand implements Command {
                     + " - Failures: " + result.getTestsFailedCount()
                     + " - Skipped Tests: " + result.getTestsSkippedCount());
 
+
+                StringBuilder failureString = new StringBuilder();
+                Throwable failureException = null;
                 for (Failure f : result.getFailures()) {
+                    failureString.append(f.getTestIdentifier().getDisplayName() + " - "
+                        + f.getException().getMessage() + "\n");
                     logger.warn("Failed test description: {}", f.getTestIdentifier());
                     logger.warn("Message: {}", f.getException().getMessage());
                     if (f.getException() != null) {
-                        logger.warn("Exception thrown from test", f.getException());
+                        logger.error("Exception thrown from test", f.getException());
+                        failureException = f.getException();
                     }
                 }
 
                 if (!testSucceeded) {
-                    Assertions.fail("Some unit tests failed (" + result.getTestsFailedCount() + "/" + result.getTestsStartedCount() + "), check the logs for more details");
+                    if (failureException != null) {
+                        Assertions.fail("Some unit tests failed (" + result.getTestsFailedCount() + "/" + result.getTestsStartedCount() + ") : " + failureString.toString(), failureException);
+                    } else {
+                        Assertions.fail("Some unit tests failed (" + result.getTestsFailedCount() + "/" + result.getTestsStartedCount() + ") : " + failureString.toString());
+                    }
                 }
 
                 if (result.getTestsStartedCount() == 0 && config.getUnitTestsExpectedNumber() == null) {
