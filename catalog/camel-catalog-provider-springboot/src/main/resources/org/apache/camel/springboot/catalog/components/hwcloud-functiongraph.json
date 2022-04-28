@@ -11,7 +11,7 @@
     "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-huaweicloud-functiongraph-starter",
-    "version": "3.11.5-SNAPSHOT",
+    "version": "3.11.7-SNAPSHOT",
     "scheme": "hwcloud-functiongraph",
     "extendsScheme": "",
     "syntax": "hwcloud-functiongraph:operation",

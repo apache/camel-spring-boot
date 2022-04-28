@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-olingo2-starter",
-    "version": "3.11.5-SNAPSHOT",
+    "version": "3.11.7-SNAPSHOT",
     "scheme": "olingo2",
     "extendsScheme": "",
     "syntax": "olingo2:apiName\/methodName",
