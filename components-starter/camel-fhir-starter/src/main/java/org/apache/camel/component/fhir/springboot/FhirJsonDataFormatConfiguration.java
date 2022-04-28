@@ -40,9 +40,9 @@ public class FhirJsonDataFormatConfiguration
     private Boolean enabled;
     /**
      * The version of FHIR to use. Possible values are:
-     * DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4
+     * DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4,R5
      */
-    private String fhirVersion = "DSTU3";
+    private String fhirVersion = "R4";
     /**
      * Sets the pretty print flag, meaning that the parser will encode resources
      * with human-readable spacing and newlines between elements instead of

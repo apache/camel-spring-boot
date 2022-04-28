@@ -266,9 +266,9 @@
     {
       "name": "camel.dataformat.fhirjson.fhir-version",
       "type": "java.lang.String",
-      "description": "The version of FHIR to use. Possible values are: DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4",
+      "description": "The version of FHIR to use. Possible values are: DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4,R5",
       "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
-      "defaultValue": "DSTU3"
+      "defaultValue": "R4"
     },
     {
       "name": "camel.dataformat.fhirjson.omit-resource-id",
@@ -364,9 +364,9 @@
     {
       "name": "camel.dataformat.fhirxml.fhir-version",
       "type": "java.lang.String",
-      "description": "The version of FHIR to use. Possible values are: DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4",
+      "description": "The version of FHIR to use. Possible values are: DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4,R5",
       "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
-      "defaultValue": "DSTU3"
+      "defaultValue": "R4"
     },
     {
       "name": "camel.dataformat.fhirxml.omit-resource-id",
