@@ -369,7 +369,7 @@
     {
       "name": "camel.component.debezium-postgres.plugin-name",
       "type": "java.lang.String",
-      "description": "The name of the Postgres logical decoding plugin installed on the server. Supported values are 'decoderbufs', 'wal2json', 'pgoutput', 'wal2json_streaming', 'wal2json_rds' and 'wal2json_rds_streaming'. Defaults to 'decoderbufs'.",
+      "description": "The name of the Postgres logical decoding plugin installed on the server. Supported values are 'decoderbufs' and 'pgoutput'. Defaults to 'decoderbufs'.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": "decoderbufs"
     },
@@ -441,6 +441,13 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-postgres.schema-name-adjustment-mode",
+      "type": "java.lang.String",
+      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including:'avro' replaces the characters that cannot be used in the Avro type name with underscore (default)'none' does not apply any adjustment",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "avro"
+    },
+    {
       "name": "camel.component.debezium-postgres.schema-refresh-mode",
       "type": "java.lang.String",
       "description": "Specify the conditions that trigger a refresh of the in-memory schema for a table. 'columns_diff' (the default) is the safest mode, ensuring the in-memory schema stays in-sync with the database table's schema at all times. 'columns_diff_exclude_unchanged_toast' instructs the connector to refresh the in-memory schema cache if there is a discrepancy between it and the schema derived from the incoming message, unless unchanged TOASTable data fully accounts for the discrepancy. This setting can improve connector performance significantly if there are frequently-updated tables that have TOASTed data that are rarely part of these updates. However, it is possible for the in-memory schema to become outdated if TOASTable columns are dropped from the table.",
@@ -462,8 +469,9 @@
     {
       "name": "camel.component.debezium-postgres.skipped-operations",
       "type": "java.lang.String",
-      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes. By default, no operations will be skipped.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
+      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes, 't' for truncates, and 'none' to indicate nothing skipped. By default, no operations will be skipped.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "t"
     },
     {
       "name": "camel.component.debezium-postgres.slot-drop-on-stop",
@@ -616,13 +624,6 @@
       "description": "The name of the transaction metadata topic. The placeholder ${database.server.name} can be used for referring to the connector's logical name; defaults to ${database.server.name}.transaction.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": "${database.server.name}.transaction"
-    },
-    {
-      "name": "camel.component.debezium-postgres.truncate-handling-mode",
-      "type": "java.lang.String",
-      "description": "Specify how TRUNCATE operations are handled for change events (supported only on pg11 pgoutput plugin), including: 'skip' to skip \/ ignore TRUNCATE events (default), 'include' to handle and include TRUNCATE events",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
-      "defaultValue": "skip"
     },
     {
       "name": "camel.component.debezium-postgres.unavailable-value-placeholder",
