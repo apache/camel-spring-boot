@@ -359,9 +359,8 @@ public class DebeziumPostgresComponentConfiguration
     private String messagePrefixIncludeList;
     /**
      * The name of the Postgres logical decoding plugin installed on the server.
-     * Supported values are 'decoderbufs', 'wal2json', 'pgoutput',
-     * 'wal2json_streaming', 'wal2json_rds' and 'wal2json_rds_streaming'.
-     * Defaults to 'decoderbufs'.
+     * Supported values are 'decoderbufs' and 'pgoutput'. Defaults to
+     * 'decoderbufs'.
      */
     private String pluginName = "decoderbufs";
     /**
@@ -422,6 +421,13 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String schemaIncludeList;
     /**
+     * Specify how schema names should be adjusted for compatibility with the
+     * message converter used by the connector, including:'avro' replaces the
+     * characters that cannot be used in the Avro type name with underscore
+     * (default)'none' does not apply any adjustment
+     */
+    private String schemaNameAdjustmentMode = "avro";
+    /**
      * Specify the conditions that trigger a refresh of the in-memory schema for
      * a table. 'columns_diff' (the default) is the safest mode, ensuring the
      * in-memory schema stays in-sync with the database table's schema at all
@@ -447,10 +453,11 @@ public class DebeziumPostgresComponentConfiguration
     private String signalDataCollection;
     /**
      * The comma-separated list of operations to skip during streaming, defined
-     * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes. By default,
-     * no operations will be skipped.
+     * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
+     * truncates, and 'none' to indicate nothing skipped. By default, no
+     * operations will be skipped.
      */
-    private String skippedOperations;
+    private String skippedOperations = "t";
     /**
      * Whether or not to drop the logical replication slot when the connector
      * finishes orderlyBy default the replication is kept so that on restart
@@ -602,13 +609,6 @@ public class DebeziumPostgresComponentConfiguration
      * logical name; defaults to ${database.server.name}.transaction.
      */
     private String transactionTopic = "${database.server.name}.transaction";
-    /**
-     * Specify how TRUNCATE operations are handled for change events (supported
-     * only on pg11 pgoutput plugin), including: 'skip' to skip / ignore
-     * TRUNCATE events (default), 'include' to handle and include TRUNCATE
-     * events
-     */
-    private String truncateHandlingMode = "skip";
     /**
      * Specify the constant that will be provided by Debezium to indicate that
      * the original value is a toasted value not provided by the database. If
@@ -1147,6 +1147,14 @@ public class DebeziumPostgresComponentConfiguration
         this.schemaIncludeList = schemaIncludeList;
     }
 
+    public String getSchemaNameAdjustmentMode() {
+        return schemaNameAdjustmentMode;
+    }
+
+    public void setSchemaNameAdjustmentMode(String schemaNameAdjustmentMode) {
+        this.schemaNameAdjustmentMode = schemaNameAdjustmentMode;
+    }
+
     public String getSchemaRefreshMode() {
         return schemaRefreshMode;
     }
@@ -1363,14 +1371,6 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setTransactionTopic(String transactionTopic) {
         this.transactionTopic = transactionTopic;
-    }
-
-    public String getTruncateHandlingMode() {
-        return truncateHandlingMode;
-    }
-
-    public void setTruncateHandlingMode(String truncateHandlingMode) {
-        this.truncateHandlingMode = truncateHandlingMode;
     }
 
     public String getUnavailableValuePlaceholder() {

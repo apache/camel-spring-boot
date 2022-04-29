@@ -185,6 +185,11 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String databaseHistoryKafkaBootstrapServers;
     /**
+     * The number of milliseconds to wait while fetching cluster information
+     * using Kafka admin client. The option is a long type.
+     */
+    private Long databaseHistoryKafkaQueryTimeoutMs = 3000L;
+    /**
      * The number of attempts in a row that no data are returned from Kafka
      * before recover completes. The maximum amount of time to wait after
      * receiving no data is (recovery.attempts) x (recovery.poll.interval.ms).
@@ -389,14 +394,22 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Boolean sanitizeFieldNames = false;
     /**
+     * Specify how schema names should be adjusted for compatibility with the
+     * message converter used by the connector, including:'avro' replaces the
+     * characters that cannot be used in the Avro type name with underscore
+     * (default)'none' does not apply any adjustment
+     */
+    private String schemaNameAdjustmentMode = "avro";
+    /**
      * The name of the data collection that is used to send signals/commands to
      * Debezium. Signaling is disabled when not set.
      */
     private String signalDataCollection;
     /**
      * The comma-separated list of operations to skip during streaming, defined
-     * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes. By default,
-     * no operations will be skipped.
+     * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
+     * truncates, and 'none' to indicate nothing skipped. By default, no
+     * operations will be skipped.
      */
     private String skippedOperations;
     /**
@@ -733,6 +746,15 @@ public class DebeziumSqlserverComponentConfiguration
         this.databaseHistoryKafkaBootstrapServers = databaseHistoryKafkaBootstrapServers;
     }
 
+    public Long getDatabaseHistoryKafkaQueryTimeoutMs() {
+        return databaseHistoryKafkaQueryTimeoutMs;
+    }
+
+    public void setDatabaseHistoryKafkaQueryTimeoutMs(
+            Long databaseHistoryKafkaQueryTimeoutMs) {
+        this.databaseHistoryKafkaQueryTimeoutMs = databaseHistoryKafkaQueryTimeoutMs;
+    }
+
     public Integer getDatabaseHistoryKafkaRecoveryAttempts() {
         return databaseHistoryKafkaRecoveryAttempts;
     }
@@ -1014,6 +1036,14 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setSanitizeFieldNames(Boolean sanitizeFieldNames) {
         this.sanitizeFieldNames = sanitizeFieldNames;
+    }
+
+    public String getSchemaNameAdjustmentMode() {
+        return schemaNameAdjustmentMode;
+    }
+
+    public void setSchemaNameAdjustmentMode(String schemaNameAdjustmentMode) {
+        this.schemaNameAdjustmentMode = schemaNameAdjustmentMode;
     }
 
     public String getSignalDataCollection() {

@@ -113,6 +113,13 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-sqlserver.database-history-kafka-query-timeout-ms",
+      "type": "java.lang.Long",
+      "description": "The number of milliseconds to wait while fetching cluster information using Kafka admin client. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": 3000
+    },
+    {
       "name": "camel.component.debezium-sqlserver.database-history-kafka-recovery-attempts",
       "type": "java.lang.Integer",
       "description": "The number of attempts in a row that no data are returned from Kafka before recover completes. The maximum amount of time to wait after receiving no data is (recovery.attempts) x (recovery.poll.interval.ms).",
@@ -413,6 +420,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-sqlserver.schema-name-adjustment-mode",
+      "type": "java.lang.String",
+      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including:'avro' replaces the characters that cannot be used in the Avro type name with underscore (default)'none' does not apply any adjustment",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": "avro"
+    },
+    {
       "name": "camel.component.debezium-sqlserver.signal-data-collection",
       "type": "java.lang.String",
       "description": "The name of the data collection that is used to send signals\/commands to Debezium. Signaling is disabled when not set.",
@@ -421,7 +435,7 @@
     {
       "name": "camel.component.debezium-sqlserver.skipped-operations",
       "type": "java.lang.String",
-      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes. By default, no operations will be skipped.",
+      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes, 't' for truncates, and 'none' to indicate nothing skipped. By default, no operations will be skipped.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {

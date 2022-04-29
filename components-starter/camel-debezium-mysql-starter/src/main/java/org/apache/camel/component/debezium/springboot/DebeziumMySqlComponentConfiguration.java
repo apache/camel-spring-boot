@@ -219,6 +219,11 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String databaseHistoryKafkaBootstrapServers;
     /**
+     * The number of milliseconds to wait while fetching cluster information
+     * using Kafka admin client. The option is a long type.
+     */
+    private Long databaseHistoryKafkaQueryTimeoutMs = 3000L;
+    /**
      * The number of attempts in a row that no data are returned from Kafka
      * before recover completes. The maximum amount of time to wait after
      * receiving no data is (recovery.attempts) x (recovery.poll.interval.ms).
@@ -274,7 +279,7 @@ public class DebeziumMySqlComponentConfiguration
     /**
      * JDBC Driver class name used to connect to the MySQL database server.
      */
-    private String databaseJdbcDriver = "class com.mysql.cj.jdbc.Driver";
+    private String databaseJdbcDriver = "com.mysql.cj.jdbc.Driver";
     /**
      * Password of the database user to be used when connecting to the database.
      */
@@ -306,16 +311,13 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String databaseServerName;
     /**
-     * Location of the Java keystore file containing an application process's
-     * own certificate and private key.
+     * The location of the key store file. This is optional and can be used for
+     * two-way authentication between the client and the MySQL Server.
      */
     private String databaseSslKeystore;
     /**
-     * Password to access the private key from the keystore file specified by
-     * 'ssl.keystore' configuration property or the 'javax.net.ssl.keyStore'
-     * system or JVM property. This password is used to unlock the keystore file
-     * (store password), and to decrypt the private key stored in the keystore
-     * (key password).
+     * The password for the key store file. This is optional and only needed if
+     * 'database.ssl.keystore' is configured.
      */
     private String databaseSslKeystorePassword;
     /**
@@ -333,14 +335,13 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String databaseSslMode = "disabled";
     /**
-     * Location of the Java truststore file containing the collection of CA
-     * certificates trusted by this application process (trust store).
+     * The location of the trust store file for the server certificate
+     * verification.
      */
     private String databaseSslTruststore;
     /**
-     * Password to unlock the keystore file (store password) specified by
-     * 'ssl.trustore' configuration property or the 'javax.net.ssl.trustStore'
-     * system or JVM property.
+     * The password for the trust store file. Used to check the integrity of the
+     * truststore, and unlock the truststore.
      */
     private String databaseSslTruststorePassword;
     /**
@@ -533,14 +534,22 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Boolean sanitizeFieldNames = false;
     /**
+     * Specify how schema names should be adjusted for compatibility with the
+     * message converter used by the connector, including:'avro' replaces the
+     * characters that cannot be used in the Avro type name with underscore
+     * (default)'none' does not apply any adjustment
+     */
+    private String schemaNameAdjustmentMode = "avro";
+    /**
      * The name of the data collection that is used to send signals/commands to
      * Debezium. Signaling is disabled when not set.
      */
     private String signalDataCollection;
     /**
      * The comma-separated list of operations to skip during streaming, defined
-     * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes. By default,
-     * no operations will be skipped.
+     * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
+     * truncates, and 'none' to indicate nothing skipped. By default, no
+     * operations will be skipped.
      */
     private String skippedOperations;
     /**
@@ -927,6 +936,15 @@ public class DebeziumMySqlComponentConfiguration
     public void setDatabaseHistoryKafkaBootstrapServers(
             String databaseHistoryKafkaBootstrapServers) {
         this.databaseHistoryKafkaBootstrapServers = databaseHistoryKafkaBootstrapServers;
+    }
+
+    public Long getDatabaseHistoryKafkaQueryTimeoutMs() {
+        return databaseHistoryKafkaQueryTimeoutMs;
+    }
+
+    public void setDatabaseHistoryKafkaQueryTimeoutMs(
+            Long databaseHistoryKafkaQueryTimeoutMs) {
+        this.databaseHistoryKafkaQueryTimeoutMs = databaseHistoryKafkaQueryTimeoutMs;
     }
 
     public Integer getDatabaseHistoryKafkaRecoveryAttempts() {
@@ -1325,6 +1343,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setSanitizeFieldNames(Boolean sanitizeFieldNames) {
         this.sanitizeFieldNames = sanitizeFieldNames;
+    }
+
+    public String getSchemaNameAdjustmentMode() {
+        return schemaNameAdjustmentMode;
+    }
+
+    public void setSchemaNameAdjustmentMode(String schemaNameAdjustmentMode) {
+        this.schemaNameAdjustmentMode = schemaNameAdjustmentMode;
     }
 
     public String getSignalDataCollection() {

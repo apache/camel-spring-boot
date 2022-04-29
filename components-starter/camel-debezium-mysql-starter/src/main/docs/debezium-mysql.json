@@ -148,6 +148,13 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-mysql.database-history-kafka-query-timeout-ms",
+      "type": "java.lang.Long",
+      "description": "The number of milliseconds to wait while fetching cluster information using Kafka admin client. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": 3000
+    },
+    {
       "name": "camel.component.debezium-mysql.database-history-kafka-recovery-attempts",
       "type": "java.lang.Integer",
       "description": "The number of attempts in a row that no data are returned from Kafka before recover completes. The maximum amount of time to wait after receiving no data is (recovery.attempts) x (recovery.poll.interval.ms).",
@@ -211,7 +218,7 @@
       "type": "java.lang.String",
       "description": "JDBC Driver class name used to connect to the MySQL database server.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
-      "defaultValue": "class com.mysql.cj.jdbc.Driver"
+      "defaultValue": "com.mysql.cj.jdbc.Driver"
     },
     {
       "name": "camel.component.debezium-mysql.database-password",
@@ -248,13 +255,13 @@
     {
       "name": "camel.component.debezium-mysql.database-ssl-keystore",
       "type": "java.lang.String",
-      "description": "Location of the Java keystore file containing an application process's own certificate and private key.",
+      "description": "The location of the key store file. This is optional and can be used for two-way authentication between the client and the MySQL Server.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-mysql.database-ssl-keystore-password",
       "type": "java.lang.String",
-      "description": "Password to access the private key from the keystore file specified by 'ssl.keystore' configuration property or the 'javax.net.ssl.keyStore' system or JVM property. This password is used to unlock the keystore file (store password), and to decrypt the private key stored in the keystore (key password).",
+      "description": "The password for the key store file. This is optional and only needed if 'database.ssl.keystore' is configured.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
@@ -267,13 +274,13 @@
     {
       "name": "camel.component.debezium-mysql.database-ssl-truststore",
       "type": "java.lang.String",
-      "description": "Location of the Java truststore file containing the collection of CA certificates trusted by this application process (trust store).",
+      "description": "The location of the trust store file for the server certificate verification.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-mysql.database-ssl-truststore-password",
       "type": "java.lang.String",
-      "description": "Password to unlock the keystore file (store password) specified by 'ssl.trustore' configuration property or the 'javax.net.ssl.trustStore' system or JVM property.",
+      "description": "The password for the trust store file. Used to check the integrity of the truststore, and unlock the truststore.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
@@ -539,6 +546,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-mysql.schema-name-adjustment-mode",
+      "type": "java.lang.String",
+      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including:'avro' replaces the characters that cannot be used in the Avro type name with underscore (default)'none' does not apply any adjustment",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "avro"
+    },
+    {
       "name": "camel.component.debezium-mysql.signal-data-collection",
       "type": "java.lang.String",
       "description": "The name of the data collection that is used to send signals\/commands to Debezium. Signaling is disabled when not set.",
@@ -547,7 +561,7 @@
     {
       "name": "camel.component.debezium-mysql.skipped-operations",
       "type": "java.lang.String",
-      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes. By default, no operations will be skipped.",
+      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes, 't' for truncates, and 'none' to indicate nothing skipped. By default, no operations will be skipped.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
