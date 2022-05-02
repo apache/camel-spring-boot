@@ -1,0 +1,1 @@
+server.jks is copied from camel-quarkus/integration-tests/ftp/src/test/resources/server.jks
