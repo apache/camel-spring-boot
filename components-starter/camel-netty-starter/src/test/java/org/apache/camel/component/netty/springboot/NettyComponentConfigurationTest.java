@@ -48,6 +48,10 @@ import org.springframework.test.annotation.DirtiesContext;
     classes = {
         NettyComponentConfigurationTest.class,
         NettyComponentConfigurationTest.TestConfiguration.class
+    },
+    properties = { 
+        "camel.component.netty.ssl=true", 
+        "camel.component.netty.ssl-context-parameters=#sslContextParameters" 
     }
 )
 class NettyComponentConfigurationTest {
