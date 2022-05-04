@@ -39,6 +39,19 @@
       <artifactId>camel-mllp</artifactId>
       <version>${camel-version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-sjms</artifactId>
+      <version>${camel-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-test-infra-activemq</artifactId>
+      <version>${camel-version}</version>
+      <scope>test</scope>
+      <type>test-jar</type>
+    </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
