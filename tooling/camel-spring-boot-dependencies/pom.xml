@@ -1981,6 +1981,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-as2-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2041,6 +2042,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-avro-rpc-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2056,6 +2058,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2181,6 +2184,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-azure-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2256,6 +2260,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-box-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2496,6 +2501,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-debezium-common-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2526,6 +2532,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-debezium-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2666,6 +2673,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-fhir-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2746,6 +2754,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-google-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2866,6 +2875,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-huawei-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2941,6 +2951,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-infinispan-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -3301,6 +3312,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-microprofile-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -3396,6 +3408,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-olingo2-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -3411,6 +3424,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-olingo4-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -3611,6 +3625,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-salesforce-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -3656,6 +3671,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-servicenow-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -3871,6 +3887,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-test-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -3991,6 +4008,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-vertx-parent</artifactId>
         <version>3.17.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>

@@ -174,6 +174,10 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
                             && dep.getArtifactId().endsWith("-starter"));
             getLog().debug(dep + (accept ? " included in the BOM" : " excluded from BOM"));
 
+            if (dep.getArtifactId().startsWith("camel-") && dep.getArtifactId().endsWith("-parent")) {
+                dep.setType("pom");
+            }
+
             // skip test-jars
             boolean testJar = dep.getType() != null && dep.getType().equals("test-jar");
             boolean sourcesJar = dep.getClassifier() != null && dep.getClassifier().equals("sources");
