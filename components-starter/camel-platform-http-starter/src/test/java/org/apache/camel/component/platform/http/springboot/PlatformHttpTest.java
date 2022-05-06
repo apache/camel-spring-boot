@@ -23,6 +23,7 @@ import java.util.Iterator;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.platform.http.HttpEndpointModel;
 import org.apache.camel.component.platform.http.PlatformHttpComponent;
 import org.apache.camel.component.platform.http.PlatformHttpConstants;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -115,9 +116,9 @@ public class PlatformHttpTest {
 
         PlatformHttpComponent phc = context.getComponent("platform-http", PlatformHttpComponent.class);
         assertEquals(2, phc.getHttpEndpoints().size());
-        Iterator<String> it = phc.getHttpEndpoints().iterator();
-        assertEquals("/get", it.next());
-        assertEquals("/post", it.next());
+        Iterator<HttpEndpointModel> it = phc.getHttpEndpoints().iterator();
+        assertEquals("/get", it.next().getUri());
+        assertEquals("/post", it.next().getUri());
     }
 
 
