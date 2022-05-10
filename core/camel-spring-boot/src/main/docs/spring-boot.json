@@ -1022,9 +1022,9 @@
     {
       "name": "camel.springboot.stream-caching-enabled",
       "type": "java.lang.Boolean",
-      "description": "Sets whether stream caching is enabled or not. Default is false.",
+      "description": "Sets whether stream caching is enabled or not. While stream types (like StreamSource, InputStream and Reader) are commonly used in messaging for performance reasons, they also have an important drawback: they can only be read once. In order to be able to work with message content multiple times, the stream needs to be cached. Streams are cached in memory. However, for large stream messages (over 128 KB by default) will be cached in a temporary file instead, and Camel will handle deleting the temporary file once the cached stream is no longer necessary. Default is true.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.springboot.stream-caching-remove-spool-directory-when-stopping",

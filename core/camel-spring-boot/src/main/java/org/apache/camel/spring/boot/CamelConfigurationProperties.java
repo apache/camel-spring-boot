@@ -277,9 +277,17 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     /**
      * Sets whether stream caching is enabled or not.
      *
-     * Default is false.
+     * While stream types (like StreamSource, InputStream and Reader) are commonly used in messaging for performance
+     * reasons, they also have an important drawback: they can only be read once. In order to be able to work with
+     * message content multiple times, the stream needs to be cached.
+     *
+     * Streams are cached in memory. However, for large stream messages (over 128 KB by default) will be cached in a
+     * temporary file instead, and Camel will handle deleting the temporary file once the cached stream is no longer
+     * necessary.
+     *
+     * Default is true.
      */
-    private boolean streamCachingEnabled;
+    private boolean streamCachingEnabled = true;
 
     /**
      * Sets the stream caching spool (temporary) directory to use for overflow and spooling to disk.
