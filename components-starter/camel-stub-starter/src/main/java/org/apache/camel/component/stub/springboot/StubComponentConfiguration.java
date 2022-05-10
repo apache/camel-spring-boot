@@ -39,6 +39,12 @@ public class StubComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * If shadow is enabled then the stub component will register a shadow
+     * endpoint with the actual uri that refers to the stub endpoint, meaning
+     * you can lookup the endpoint via both stub:kafka:cheese and kafka:cheese.
+     */
+    private Boolean shadow = false;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -110,6 +116,14 @@ public class StubComponentConfiguration
      * messages it can hold).
      */
     private Integer queueSize = 1000;
+
+    public Boolean getShadow() {
+        return shadow;
+    }
+
+    public void setShadow(Boolean shadow) {
+        this.shadow = shadow;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;

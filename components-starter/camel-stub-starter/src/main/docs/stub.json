@@ -91,6 +91,13 @@
       "description": "Sets the default maximum capacity of the SEDA queue (i.e., the number of messages it can hold).",
       "sourceType": "org.apache.camel.component.stub.springboot.StubComponentConfiguration",
       "defaultValue": 1000
+    },
+    {
+      "name": "camel.component.stub.shadow",
+      "type": "java.lang.Boolean",
+      "description": "If shadow is enabled then the stub component will register a shadow endpoint with the actual uri that refers to the stub endpoint, meaning you can lookup the endpoint via both stub:kafka:cheese and kafka:cheese.",
+      "sourceType": "org.apache.camel.component.stub.springboot.StubComponentConfiguration",
+      "defaultValue": false
     }
   ],
   "hints": []
