@@ -345,6 +345,13 @@
       "description": "Set whether the S3 client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in.",
       "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.use-s-s-e-s3",
+      "type": "java.lang.Boolean",
+      "description": "Define if SSE S3 must be used or not",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
     }
   ],
   "hints": []

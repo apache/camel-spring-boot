@@ -296,6 +296,10 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean useCustomerKey = false;
     /**
+     * Define if SSE S3 must be used or not
+     */
+    private Boolean useSSES3 = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -688,6 +692,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setUseCustomerKey(Boolean useCustomerKey) {
         this.useCustomerKey = useCustomerKey;
+    }
+
+    public Boolean getUseSSES3() {
+        return useSSES3;
+    }
+
+    public void setUseSSES3(Boolean useSSES3) {
+        this.useSSES3 = useSSES3;
     }
 
     public Boolean getAutowiredEnabled() {
