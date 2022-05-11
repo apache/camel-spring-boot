@@ -674,6 +674,11 @@
       "defaultValue": true
     },
     {
+      "name": "camel.springboot.jmx-management-m-beans-level",
+      "type": "org.apache.camel.ManagementMBeansLevel",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+    },
+    {
       "name": "camel.springboot.jmx-management-name-pattern",
       "type": "java.lang.String",
       "description": "The naming pattern for creating the CamelContext JMX management name. The default pattern is #name#",

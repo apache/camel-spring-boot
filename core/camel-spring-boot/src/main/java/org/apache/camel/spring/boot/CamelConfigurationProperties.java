@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot;
 
 import org.apache.camel.LoggingLevel;
+import org.apache.camel.ManagementMBeansLevel;
 import org.apache.camel.ManagementStatisticsLevel;
 import org.apache.camel.StartupSummaryLevel;
 import org.apache.camel.main.DefaultConfigurationProperties;
@@ -538,6 +539,14 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * As this affects the entire JVM where Camel JARs are on the classpath.
      */
     private boolean allowAddingNewRoutes = true;
+
+    /**
+     * Sets the JMX statistics level
+     * The level can be set to Extended to gather additional information
+     *
+     * The default value is Default.
+     */
+    private ManagementMBeansLevel jmxManagementMBeansLevel = ManagementMBeansLevel.Default;
 
     /**
      * Sets the JMX statistics level
