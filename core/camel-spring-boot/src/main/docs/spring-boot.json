@@ -676,6 +676,7 @@
     {
       "name": "camel.springboot.jmx-management-m-beans-level",
       "type": "org.apache.camel.ManagementMBeansLevel",
+      "description": "Sets the JMX statistics level The level can be set to Extended to gather additional information The default value is Default.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
     },
     {
