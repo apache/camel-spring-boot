@@ -282,13 +282,24 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * reasons, they also have an important drawback: they can only be read once. In order to be able to work with
      * message content multiple times, the stream needs to be cached.
      *
-     * Streams are cached in memory. However, for large stream messages (over 128 KB by default) will be cached in a
+     * Streams are cached in memory only (by default).
+     *
+     * If streamCachingSpoolEnabled=true, then, for large stream messages (over 128 KB by default) will be cached in a
      * temporary file instead, and Camel will handle deleting the temporary file once the cached stream is no longer
      * necessary.
      *
      * Default is true.
      */
     private boolean streamCachingEnabled = true;
+
+    /**
+     * To enable stream caching spooling to disk. This means, for large stream messages (over 128 KB by default) will be cached in a
+     * temporary file instead, and Camel will handle deleting the temporary file once the cached stream is no longer
+     * necessary.
+     *
+     * Default is false.
+     */
+    private boolean streamCachingSpoolEnabled;
 
     /**
      * Sets the stream caching spool (temporary) directory to use for overflow and spooling to disk.
