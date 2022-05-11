@@ -324,6 +324,23 @@ public class KafkaComponentConfiguration
      */
     private Integer createConsumerBackoffMaxAttempts;
     /**
+     * Controls how to read messages written transactionally. If set to
+     * read_committed, consumer.poll() will only return transactional messages
+     * which have been committed. If set to read_uncommitted (the default),
+     * consumer.poll() will return all messages, even transactional messages
+     * which have been aborted. Non-transactional messages will be returned
+     * unconditionally in either mode. Messages will always be returned in
+     * offset order. Hence, in read_committed mode, consumer.poll() will only
+     * return messages up to the last stable offset (LSO), which is the one less
+     * than the offset of the first open transaction. In particular any messages
+     * appearing after messages belonging to ongoing transactions will be
+     * withheld until the relevant transaction has been completed. As a result,
+     * read_committed consumers will not be able to read up to the high
+     * watermark when there are in flight transactions. Further, when in
+     * read_committed the seekToEnd method will return the LSO
+     */
+    private String isolationLevel = "read_uncommitted";
+    /**
      * Factory to use for creating KafkaManualCommit instances. This allows to
      * plugin a custom factory to create custom KafkaManualCommit instances in
      * case special logic is needed when doing manual commits that deviates from
@@ -1092,6 +1109,14 @@ public class KafkaComponentConfiguration
     public void setCreateConsumerBackoffMaxAttempts(
             Integer createConsumerBackoffMaxAttempts) {
         this.createConsumerBackoffMaxAttempts = createConsumerBackoffMaxAttempts;
+    }
+
+    public String getIsolationLevel() {
+        return isolationLevel;
+    }
+
+    public void setIsolationLevel(String isolationLevel) {
+        this.isolationLevel = isolationLevel;
     }
 
     public KafkaManualCommitFactory getKafkaManualCommitFactory() {
