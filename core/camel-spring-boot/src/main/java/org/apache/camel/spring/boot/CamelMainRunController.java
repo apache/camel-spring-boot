@@ -16,9 +16,6 @@
  */
 package org.apache.camel.spring.boot;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.main.MainShutdownStrategy;
 import org.springframework.context.ApplicationContext;
@@ -37,7 +34,10 @@ public class CamelMainRunController {
     }
 
     public void start() {
-        daemon.start();
+        // avoid starting twice such as suspending and resuming a camel context
+        if (!daemon.isAlive()) {
+            daemon.start();
+        }
     }
 
     public MainShutdownStrategy getMainShutdownStrategy() {
