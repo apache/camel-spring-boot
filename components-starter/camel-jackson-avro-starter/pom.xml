@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>components-starter</artifactId>
-    <version>3.17.0</version>
+    <version>3.17.1-SNAPSHOT</version>
   </parent>
   <artifactId>camel-jackson-avro-starter</artifactId>
   <packaging>jar</packaging>
