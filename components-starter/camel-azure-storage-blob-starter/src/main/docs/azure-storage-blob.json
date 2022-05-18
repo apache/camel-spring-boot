@@ -29,7 +29,7 @@
     {
       "name": "camel.component.azure-storage-blob.blob-name",
       "type": "java.lang.String",
-      "description": "The blob name, to consume specific blob from a container. However on producer, is only required for the operations on the blob level",
+      "description": "The blob name, to consume specific blob from a container. However, on producer it is only required for the operations on the blob level",
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
     },
     {
@@ -123,6 +123,12 @@
       "description": "When is set to true, the page blob will be created when uploading page blob.",
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.component.azure-storage-blob.credential-type",
+      "type": "org.apache.camel.component.azure.storage.blob.CredentialType",
+      "description": "Determines the credential strategy to adopt",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
     },
     {
       "name": "camel.component.azure-storage-blob.credentials",

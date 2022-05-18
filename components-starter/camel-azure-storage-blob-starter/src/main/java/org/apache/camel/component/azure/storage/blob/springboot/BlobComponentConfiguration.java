@@ -27,6 +27,7 @@ import org.apache.camel.component.azure.storage.blob.BlobComponent;
 import org.apache.camel.component.azure.storage.blob.BlobConfiguration;
 import org.apache.camel.component.azure.storage.blob.BlobOperationsDefinition;
 import org.apache.camel.component.azure.storage.blob.BlobType;
+import org.apache.camel.component.azure.storage.blob.CredentialType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -47,8 +48,8 @@ public class BlobComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The blob name, to consume specific blob from a container. However on
-     * producer, is only required for the operations on the blob level
+     * The blob name, to consume specific blob from a container. However, on
+     * producer it is only required for the operations on the blob level
      */
     private String blobName;
     /**
@@ -75,6 +76,10 @@ public class BlobComponentConfiguration
      * com.azure.storage.common.StorageSharedKeyCredential type.
      */
     private StorageSharedKeyCredential credentials;
+    /**
+     * Determines the credential strategy to adopt
+     */
+    private CredentialType credentialType = CredentialType.AZURE_IDENTITY;
     /**
      * How many bytes to include in the range. Must be greater than or equal to
      * 0 if specified.
@@ -276,6 +281,14 @@ public class BlobComponentConfiguration
 
     public void setCredentials(StorageSharedKeyCredential credentials) {
         this.credentials = credentials;
+    }
+
+    public CredentialType getCredentialType() {
+        return credentialType;
+    }
+
+    public void setCredentialType(CredentialType credentialType) {
+        this.credentialType = credentialType;
     }
 
     public Long getDataCount() {
