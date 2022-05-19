@@ -16,9 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
-import static org.apache.camel.test.junit5.TestSupport.assertCollectionSize;
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
@@ -64,7 +61,7 @@ public class TelegramConsumerMediaPhotoTest extends TelegramTestSupport {
         IncomingMessage msg = mediaExchange.getIn().getBody(IncomingMessage.class);
 
         assertNotNull(msg.getPhoto());
-        assertCollectionSize(msg.getPhoto(), 4);
+        assertEquals(msg.getPhoto().size(), 4, "List should be of size: " + 4 + " but is: " + msg.getPhoto().size());
         assertEquals(4, msg.getPhoto().stream().map(ph -> ph.getFileId()).distinct().count());
     }
 

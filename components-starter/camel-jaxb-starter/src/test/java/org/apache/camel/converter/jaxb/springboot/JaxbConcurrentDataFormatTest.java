@@ -16,9 +16,6 @@
  */
 package org.apache.camel.converter.jaxb.springboot;
 
-
-import static org.apache.camel.test.junit5.TestSupport.body;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,6 +23,7 @@ import java.util.concurrent.Executors;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.builder.Builder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.converter.jaxb.JaxbDataFormat;
@@ -33,7 +31,6 @@ import org.apache.camel.example.PurchaseOrder;
 import org.apache.camel.spi.DataFormat;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -77,7 +74,7 @@ public class JaxbConcurrentDataFormatTest {
     private void doSendMessages(int files, int poolSize) throws Exception {
         result.reset();
         result.expectedMessageCount(files);
-        result.assertNoDuplicates(body());
+        result.assertNoDuplicates(Builder.body());
 
         ExecutorService executor = Executors.newFixedThreadPool(poolSize);
         for (int i = 0; i < files; i++) {

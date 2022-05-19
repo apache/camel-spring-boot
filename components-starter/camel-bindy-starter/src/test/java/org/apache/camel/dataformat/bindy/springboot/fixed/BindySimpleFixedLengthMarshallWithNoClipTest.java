@@ -16,8 +16,6 @@
  */
 package org.apache.camel.dataformat.bindy.springboot.fixed;
 
-import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,6 +35,7 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +68,7 @@ public class BindySimpleFixedLengthMarshallWithNoClipTest {
         Exception ex = assertThrows(CamelExecutionException.class,
                 () -> template.sendBody("direct:start", model));
 
-        IllegalArgumentException cause = assertIsInstanceOf(IllegalArgumentException.class, ex.getCause());
+        IllegalArgumentException cause = assertInstanceOf(IllegalArgumentException.class, ex.getCause());
         assertEquals("Length for the firstName must not be larger than allowed, was: 13, allowed: 9",
                 cause.getMessage());
     }

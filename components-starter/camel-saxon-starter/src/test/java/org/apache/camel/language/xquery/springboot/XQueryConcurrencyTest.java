@@ -16,17 +16,14 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
-import static org.apache.camel.test.junit5.TestSupport.body;
-
 import java.security.SecureRandom;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.builder.Builder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,9 +34,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
@@ -88,7 +83,7 @@ public class XQueryConcurrencyTest {
             });
         }
 
-        mock.assertNoDuplicates(body());
+        mock.assertNoDuplicates(Builder.body());
 
         mock.assertIsSatisfied();
         executor.shutdown();

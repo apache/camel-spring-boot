@@ -16,12 +16,9 @@
  */
 package org.apache.camel.component.jacksonxml.springboot;
 
-
-import static org.apache.camel.test.junit5.TestSupport.body;
-
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.builder.Builder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jacksonxml.JacksonXMLDataFormat;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -61,7 +58,7 @@ public class JacksonObjectListSplitTest {
     @Test
     public void testJackson() throws InterruptedException {
         mock.expectedMessageCount(2);
-        mock.expectedMessagesMatches(body().isInstanceOf(DummyObject.class));
+        mock.expectedMessagesMatches(Builder.body().isInstanceOf(DummyObject.class));
 
         template.sendBody("direct:start", "<list><pojo dummy=\"value1\"/><pojo dummy=\"value2\"/></list>");
 

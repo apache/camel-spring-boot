@@ -23,7 +23,6 @@ import org.apache.camel.spi.Registry;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.spi.SpringTransactionPolicy;
 import org.apache.camel.support.SimpleRegistry;
-import org.apache.camel.test.junit5.CamelTestSupport;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

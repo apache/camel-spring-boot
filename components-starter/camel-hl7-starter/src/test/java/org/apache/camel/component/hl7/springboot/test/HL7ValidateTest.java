@@ -16,10 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
-import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
-
-
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -29,6 +25,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -90,8 +87,8 @@ public class HL7ValidateTest extends HL7TestSupport {
             template.sendBody("direct:unmarshalFailed", body);
             fail("Should have thrown exception");
         } catch (CamelExecutionException e) {
-            assertIsInstanceOf(HL7Exception.class, e.getCause());
-            assertIsInstanceOf(DataTypeException.class, e.getCause());
+            assertInstanceOf(HL7Exception.class, e.getCause());
+            assertInstanceOf(DataTypeException.class, e.getCause());
             assertTrue(e.getCause().getMessage().startsWith("ca.uhn.hl7v2.validation.ValidationException: Validation failed:"),
                     "Should be a validation error message");
         }
@@ -130,8 +127,8 @@ public class HL7ValidateTest extends HL7TestSupport {
             template.sendBody("direct:start1", message);
             fail("Should have thrown exception");
         } catch (CamelExecutionException e) {
-            assertIsInstanceOf(HL7Exception.class, e.getCause());
-            assertIsInstanceOf(ValidationException.class, e.getCause().getCause());
+            assertInstanceOf(HL7Exception.class, e.getCause());
+            assertInstanceOf(ValidationException.class, e.getCause().getCause());
             System.out.println(e.getCause().getCause().getMessage());
             assertTrue(e.getCause().getCause().getMessage().startsWith("Validation failed:"),
                     "Should be a validation error message");

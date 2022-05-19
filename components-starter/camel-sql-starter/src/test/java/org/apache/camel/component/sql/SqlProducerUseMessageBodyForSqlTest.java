@@ -34,8 +34,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
@@ -68,12 +68,12 @@ public class SqlProducerUseMessageBodyForSqlTest extends BaseSql {
 
         template.sendBodyAndHeader("direct:start", null, "lic", "ASF");
 
-        List<?> received = assertIsInstanceOf(List.class, resultEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+        List<?> received = assertInstanceOf(List.class, resultEndpoint.getReceivedExchanges().get(0).getIn().getBody());
         assertEquals(2, received.size());
-        Map<?, ?> row = assertIsInstanceOf(Map.class, received.get(0));
+        Map<?, ?> row = assertInstanceOf(Map.class, received.get(0));
         assertEquals("Camel", row.get("PROJECT"));
 
-        row = assertIsInstanceOf(Map.class, received.get(1));
+        row = assertInstanceOf(Map.class, received.get(1));
         assertEquals("AMQ", row.get("PROJECT"));
     }
 
@@ -97,7 +97,7 @@ public class SqlProducerUseMessageBodyForSqlTest extends BaseSql {
         rows.add(row);
         template.sendBodyAndHeader("direct:insert", null, SqlConstants.SQL_PARAMETERS, rows);
 
-        String origSql = assertIsInstanceOf(String.class, resultInsertEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+        String origSql = assertInstanceOf(String.class, resultInsertEndpoint.getReceivedExchanges().get(0).getIn().getBody());
         assertEquals("insert into projects(id, project, license) values(:?id,:?project,:?lic)", origSql);
 
         assertEquals(null, resultInsertEndpoint.getReceivedExchanges().get(0).getOut().getBody());
@@ -110,12 +110,12 @@ public class SqlProducerUseMessageBodyForSqlTest extends BaseSql {
 
         template.sendBodyAndHeader("direct:start", null, "lic", "OPEN1");
 
-        List<?> received = assertIsInstanceOf(List.class, resultEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+        List<?> received = assertInstanceOf(List.class, resultEndpoint.getReceivedExchanges().get(0).getIn().getBody());
         assertEquals(2, received.size());
-        row = assertIsInstanceOf(Map.class, received.get(0));
+        row = assertInstanceOf(Map.class, received.get(0));
         assertEquals("MyProject1", row.get("PROJECT"));
 
-        row = assertIsInstanceOf(Map.class, received.get(1));
+        row = assertInstanceOf(Map.class, received.get(1));
         assertEquals("MyProject2", row.get("PROJECT"));
     }
 

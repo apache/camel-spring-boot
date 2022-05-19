@@ -16,9 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
-import static org.apache.camel.test.junit5.TestSupport.assertCollectionSize;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -32,6 +29,7 @@ import org.apache.camel.component.telegram.model.UpdateResult;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.springframework.boot.test.context.SpringBootTest;
@@ -70,7 +68,7 @@ public class TelegramChatBotTest extends TelegramTestSupport {
                 .map(message -> (OutgoingTextMessage) message)
                 .collect(Collectors.toList());
 
-        assertCollectionSize(msgs, 2);
+        assertEquals(msgs.size(), 2, "List should be of size: " + 2 + " but is: " + msgs.size());
         assertTrue(msgs.stream().anyMatch(m -> "echo from the bot: Hello World!".equals(m.getText())));
         assertTrue(msgs.stream().anyMatch(m -> "echo from the bot: taken".equals(m.getText())));
         assertTrue(msgs.stream().noneMatch(m -> m.getParseMode() != null));

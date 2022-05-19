@@ -16,14 +16,12 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
-import static org.apache.camel.test.junit5.TestSupport.bodyAs;
-
 import java.security.SecureRandom;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.builder.Builder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -37,7 +35,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
-
 
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
@@ -99,7 +96,7 @@ public class XQueryURLBasedConcurrencyTest {
         mock.assertIsSatisfied();
         // must use bodyAs(String.class) to force DOM to be converted to String XML
         // for duplication detection
-        mock.assertNoDuplicates(bodyAs(String.class));
+        mock.assertNoDuplicates(Builder.bodyAs(String.class));
         executor.shutdown();
     }
     
