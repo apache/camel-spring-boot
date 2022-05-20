@@ -16,18 +16,15 @@
  */
 package org.apache.camel.component.jacksonxml.springboot;
 
-
-import static org.apache.camel.test.junit5.TestSupport.body;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.builder.Builder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -80,7 +77,7 @@ public class JacksonConcurrentTest {
 
     private void doSendMessages(int files, int poolSize) throws Exception {
         mock.expectedMessageCount(files);
-        mock.assertNoDuplicates(body());
+        mock.assertNoDuplicates(Builder.body());
 
         ExecutorService executor = Executors.newFixedThreadPool(poolSize);
         for (int i = 0; i < files; i++) {

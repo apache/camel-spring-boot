@@ -25,8 +25,6 @@ import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssue;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssueWithLinks;
 import static org.apache.camel.component.jira.springboot.test.Utils.newIssueLink;
-import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
-import static org.apache.camel.test.junit5.TestSupport.assertStringContains;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
@@ -61,8 +59,9 @@ import org.mockito.stubbing.Answer;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -192,8 +191,8 @@ public class AddIssueLinkProducerTest {
             template.sendBodyAndHeaders(comment, headers);
             fail("Should have thrown an exception");
         } catch (CamelExecutionException e) {
-            IllegalArgumentException cause = assertIsInstanceOf(IllegalArgumentException.class, e.getCause());
-            assertStringContains(cause.getMessage(), PARENT_ISSUE_KEY);
+            IllegalArgumentException cause = assertInstanceOf(IllegalArgumentException.class, e.getCause());
+            assertTrue(cause.getMessage().contains(PARENT_ISSUE_KEY));
         }
 
         mockResult.expectedMessageCount(0);
@@ -214,8 +213,8 @@ public class AddIssueLinkProducerTest {
             template.sendBodyAndHeaders(comment, headers);
             fail("Should have thrown an exception");
         } catch (CamelExecutionException e) {
-            IllegalArgumentException cause = assertIsInstanceOf(IllegalArgumentException.class, e.getCause());
-            assertStringContains(cause.getMessage(), CHILD_ISSUE_KEY);
+            IllegalArgumentException cause = assertInstanceOf(IllegalArgumentException.class, e.getCause());
+            assertTrue(cause.getMessage().contains(CHILD_ISSUE_KEY));
         }
 
         mockResult.expectedMessageCount(0);
@@ -235,8 +234,8 @@ public class AddIssueLinkProducerTest {
             template.sendBodyAndHeaders(comment, headers);
             fail("Should have thrown an exception");
         } catch (CamelExecutionException e) {
-            IllegalArgumentException cause = assertIsInstanceOf(IllegalArgumentException.class, e.getCause());
-            assertStringContains(cause.getMessage(), LINK_TYPE);
+            IllegalArgumentException cause = assertInstanceOf(IllegalArgumentException.class, e.getCause());
+            assertTrue(cause.getMessage().contains(LINK_TYPE));
         }
 
         mockResult.expectedMessageCount(0);

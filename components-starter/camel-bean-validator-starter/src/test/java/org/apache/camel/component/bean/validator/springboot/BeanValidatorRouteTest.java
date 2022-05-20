@@ -16,19 +16,12 @@
  */
 package org.apache.camel.component.bean.validator.springboot;
 
-
-
-
-
-import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
-
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import javax.validation.ConstraintViolation;
-
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelExecutionException;
@@ -50,6 +43,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.condition.OS.AIX;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,7 +125,7 @@ public class BeanValidatorRouteTest {
             template.requestBody(url, cars);
             fail("should throw exception");
         } catch (CamelExecutionException e) {
-            assertIsInstanceOf(BeanValidationException.class, e.getCause());
+            assertInstanceOf(BeanValidationException.class, e.getCause());
 
             BeanValidationException exception = (BeanValidationException) e.getCause();
             Set<ConstraintViolation<Object>> constraintViolations = exception.getConstraintViolations();
@@ -166,7 +160,7 @@ public class BeanValidatorRouteTest {
             template.requestBody(url, cars);
             fail("should throw exception");
         } catch (CamelExecutionException e) {
-            assertIsInstanceOf(BeanValidationException.class, e.getCause());
+            assertInstanceOf(BeanValidationException.class, e.getCause());
 
             BeanValidationException exception = (BeanValidationException) e.getCause();
             Set<ConstraintViolation<Object>> constraintViolations = exception.getConstraintViolations();
@@ -201,7 +195,7 @@ public class BeanValidatorRouteTest {
             template.requestBody(url, cars);
             fail("should throw exception");
         } catch (CamelExecutionException e) {
-            assertIsInstanceOf(BeanValidationException.class, e.getCause());
+            assertInstanceOf(BeanValidationException.class, e.getCause());
 
             BeanValidationException exception = (BeanValidationException) e.getCause();
             Set<ConstraintViolation<Object>> constraintViolations = exception.getConstraintViolations();
@@ -236,7 +230,7 @@ public class BeanValidatorRouteTest {
             template.requestBody(url, cars);
             fail("should throw exception");
         } catch (CamelExecutionException e) {
-            assertIsInstanceOf(BeanValidationException.class, e.getCause());
+            assertInstanceOf(BeanValidationException.class, e.getCause());
 
             BeanValidationException exception = (BeanValidationException) e.getCause();
             Set<ConstraintViolation<Object>> constraintViolations = exception.getConstraintViolations();
@@ -255,7 +249,7 @@ public class BeanValidatorRouteTest {
             template.requestBody(url, cars);
             fail("should throw exception");
         } catch (CamelExecutionException e) {
-            assertIsInstanceOf(BeanValidationException.class, e.getCause());
+            assertInstanceOf(BeanValidationException.class, e.getCause());
 
             BeanValidationException exception = (BeanValidationException) e.getCause();
             Set<ConstraintViolation<Object>> constraintViolations = exception.getConstraintViolations();
@@ -306,7 +300,7 @@ public class BeanValidatorRouteTest {
             template.requestBody(url, cars);
             fail("should throw exception");
         } catch (CamelExecutionException e) {
-            assertIsInstanceOf(BeanValidationException.class, e.getCause());
+            assertInstanceOf(BeanValidationException.class, e.getCause());
 
             BeanValidationException exception = (BeanValidationException) e.getCause();
             Set<ConstraintViolation<Object>> constraintViolations = exception.getConstraintViolations();

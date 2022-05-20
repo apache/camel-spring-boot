@@ -23,8 +23,6 @@ import static org.apache.camel.component.jira.JiraConstants.MINUTES_SPENT;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssueWithComments;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssueWithWorkLogs;
 import static org.apache.camel.component.jira.springboot.test.Utils.newWorkLog;
-import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
-import static org.apache.camel.test.junit5.TestSupport.assertStringContains;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.JIRA_CREDENTIALS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -62,6 +60,8 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.atlassian.util.concurrent.Promises;
 
@@ -168,8 +168,8 @@ public class AddWorkLogProducerTest {
             template.sendBodyAndHeaders(comment, headers);
             fail("Should have thrown an exception");
         } catch (CamelExecutionException e) {
-            IllegalArgumentException cause = assertIsInstanceOf(IllegalArgumentException.class, e.getCause());
-            assertStringContains(cause.getMessage(), ISSUE_KEY);
+            IllegalArgumentException cause = assertInstanceOf(IllegalArgumentException.class, e.getCause());
+            assertTrue(cause.getMessage().contains(ISSUE_KEY));
         }
         mockResult.reset();
         mockResult.expectedMessageCount(0);
@@ -190,8 +190,8 @@ public class AddWorkLogProducerTest {
             template.sendBodyAndHeaders(comment, headers);
             fail("Should have thrown an exception");
         } catch (CamelExecutionException e) {
-            IllegalArgumentException cause = assertIsInstanceOf(IllegalArgumentException.class, e.getCause());
-            assertStringContains(cause.getMessage(), MINUTES_SPENT);
+            IllegalArgumentException cause = assertInstanceOf(IllegalArgumentException.class, e.getCause());
+            assertTrue(cause.getMessage().contains(MINUTES_SPENT));
         }
         
         mockResult.reset();
@@ -213,8 +213,8 @@ public class AddWorkLogProducerTest {
             template.sendBodyAndHeaders(null, headers);
             fail("Should have thrown an exception");
         } catch (CamelExecutionException e) {
-            IllegalArgumentException cause = assertIsInstanceOf(IllegalArgumentException.class, e.getCause());
-            assertStringContains(cause.getMessage(), "Missing exchange body");
+            IllegalArgumentException cause = assertInstanceOf(IllegalArgumentException.class, e.getCause());
+            assertTrue(cause.getMessage().contains("Missing exchange body"));
         }
         mockResult.reset();
         mockResult.expectedMessageCount(0);

@@ -33,7 +33,7 @@ import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
 
-import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
@@ -59,11 +59,11 @@ public class SqlProducerExpressionParameterTest extends BaseSql {
 
         result.assertIsSatisfied();
 
-        List<?> received = assertIsInstanceOf(List.class, result.getReceivedExchanges().get(0).getIn().getBody());
+        List<?> received = assertInstanceOf(List.class, result.getReceivedExchanges().get(0).getIn().getBody());
         assertEquals(2, received.size());
-        Map<?, ?> row = assertIsInstanceOf(Map.class, received.get(0));
+        Map<?, ?> row = assertInstanceOf(Map.class, received.get(0));
         assertEquals("Camel", row.get("PROJECT"));
-        row = assertIsInstanceOf(Map.class, received.get(1));
+        row = assertInstanceOf(Map.class, received.get(1));
         assertEquals("AMQ", row.get("PROJECT"));
     }
 

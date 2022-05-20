@@ -16,10 +16,7 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
-import static org.apache.camel.test.junit5.TestSupport.isPlatform;
-
+import java.util.Locale;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
@@ -42,7 +39,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
@@ -68,7 +64,8 @@ public class QuartzManagementTest extends BaseQuartzTest {
     @Test
     public void testQuartzRoute() throws Exception {
         // JMX tests dont work well on AIX CI servers (hangs them)
-        assumeFalse(isPlatform("aix"));
+        String osName = System.getProperty("os.name").toLowerCase(Locale.US);
+        assumeFalse(osName.contains("aix".toLowerCase(Locale.US)));
 
         mock.expectedMessageCount(2);
 

@@ -16,9 +16,6 @@
  */
 package org.apache.camel.dataformat.bindy.springboot.csv;
 
-import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
-
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
@@ -30,6 +27,7 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -102,7 +100,7 @@ public class BindySimpleCsvUnmarshallBadIntegerTest {
 
         // and check that we have the caused exception stored
         Exception cause = error.getReceivedExchanges().get(0).getProperty(Exchange.EXCEPTION_CAUGHT, Exception.class);
-        assertIsInstanceOf(Exception.class, cause.getCause());
+        assertInstanceOf(Exception.class, cause.getCause());
         assertEquals("Parsing error detected for field defined at the position: 1, line: 1", cause.getMessage());
 
     }

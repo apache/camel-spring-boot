@@ -16,9 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
-import static org.apache.camel.test.junit5.TestSupport.assertCollectionSize;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -74,7 +71,7 @@ public class TelegramConsumerFallbackConversionTest extends TelegramTestSupport 
                 .map(message -> (OutgoingTextMessage) message)
                 .collect(Collectors.toList());
 
-        assertCollectionSize(msgs, 1);
+        assertEquals(msgs.size(), 1, "List should be of size: " + 1 + " but is: " + msgs.size());
         String text = msgs.get(0).getText();
         assertEquals("wrapped message", text);
     }

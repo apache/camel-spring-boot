@@ -18,7 +18,6 @@ package org.apache.camel.component.cassandra.integration;
 
 
 import static com.datastax.oss.driver.api.querybuilder.QueryBuilder.literal;
-import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,6 +37,7 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.springframework.boot.test.context.SpringBootTest;
@@ -88,7 +88,7 @@ public class CassandraComponentProducerUnpreparedIT extends BaseCassandra {
         Object response = noParameterProducerTemplate.requestBody(null);
 
         assertNotNull(response);
-        assertIsInstanceOf(List.class, response);
+        assertInstanceOf(List.class, response);
     }
 
     @Test
@@ -96,7 +96,7 @@ public class CassandraComponentProducerUnpreparedIT extends BaseCassandra {
         Object response = noParameterProducerTemplate.requestBody(null);
 
         assertNotNull(response);
-        assertIsInstanceOf(List.class, response);
+        assertInstanceOf(List.class, response);
     }
 
     @Test
