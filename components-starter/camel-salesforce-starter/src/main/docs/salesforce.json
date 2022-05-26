@@ -43,7 +43,7 @@
       "type": "java.lang.String",
       "description": "Salesforce API version.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
-      "defaultValue": "53.0"
+      "defaultValue": "54.0"
     },
     {
       "name": "camel.component.salesforce.authentication-type",
