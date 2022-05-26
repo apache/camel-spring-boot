@@ -44,7 +44,7 @@ public class MiloServerComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.eclipse.milo.opcua.stack.core.types.structured.BuildInfo.class));
         answer.add(new ConvertiblePair(String.class, java.security.cert.X509Certificate.class));
         answer.add(new ConvertiblePair(String.class, org.eclipse.milo.opcua.stack.core.security.CertificateManager.class));
-        answer.add(new ConvertiblePair(String.class, org.eclipse.milo.opcua.stack.core.security.CertificateValidator.class));
+        answer.add(new ConvertiblePair(String.class, org.eclipse.milo.opcua.stack.server.security.ServerCertificateValidator.class));
         return answer;
     }
 
@@ -64,7 +64,7 @@ public class MiloServerComponentConverter implements GenericConverter {
             case "org.eclipse.milo.opcua.stack.core.types.structured.BuildInfo": return applicationContext.getBean(ref, org.eclipse.milo.opcua.stack.core.types.structured.BuildInfo.class);
             case "java.security.cert.X509Certificate": return applicationContext.getBean(ref, java.security.cert.X509Certificate.class);
             case "org.eclipse.milo.opcua.stack.core.security.CertificateManager": return applicationContext.getBean(ref, org.eclipse.milo.opcua.stack.core.security.CertificateManager.class);
-            case "org.eclipse.milo.opcua.stack.core.security.CertificateValidator": return applicationContext.getBean(ref, org.eclipse.milo.opcua.stack.core.security.CertificateValidator.class);
+            case "org.eclipse.milo.opcua.stack.server.security.ServerCertificateValidator": return applicationContext.getBean(ref, org.eclipse.milo.opcua.stack.server.security.ServerCertificateValidator.class);
         }
         return null;
     }

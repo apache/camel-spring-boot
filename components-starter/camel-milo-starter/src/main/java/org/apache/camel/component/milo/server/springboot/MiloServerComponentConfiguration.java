@@ -21,9 +21,9 @@ import java.util.Set;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.eclipse.milo.opcua.stack.core.security.CertificateManager;
-import org.eclipse.milo.opcua.stack.core.security.CertificateValidator;
 import org.eclipse.milo.opcua.stack.core.security.SecurityPolicy;
 import org.eclipse.milo.opcua.stack.core.types.structured.BuildInfo;
+import org.eclipse.milo.opcua.stack.server.security.ServerCertificateValidator;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -117,9 +117,10 @@ public class MiloServerComponentConfiguration
     private CertificateManager certificateManager;
     /**
      * Validator for client certificates. The option is a
-     * org.eclipse.milo.opcua.stack.core.security.CertificateValidator type.
+     * org.eclipse.milo.opcua.stack.server.security.ServerCertificateValidator
+     * type.
      */
-    private CertificateValidator certificateValidator;
+    private ServerCertificateValidator certificateValidator;
     /**
      * Validator for client certificates using default file based approach
      */
@@ -251,12 +252,12 @@ public class MiloServerComponentConfiguration
         this.certificateManager = certificateManager;
     }
 
-    public CertificateValidator getCertificateValidator() {
+    public ServerCertificateValidator getCertificateValidator() {
         return certificateValidator;
     }
 
     public void setCertificateValidator(
-            CertificateValidator certificateValidator) {
+            ServerCertificateValidator certificateValidator) {
         this.certificateValidator = certificateValidator;
     }
 

@@ -416,8 +416,8 @@
     },
     {
       "name": "camel.component.milo-server.certificate-validator",
-      "type": "org.eclipse.milo.opcua.stack.core.security.CertificateValidator",
-      "description": "Validator for client certificates. The option is a org.eclipse.milo.opcua.stack.core.security.CertificateValidator type.",
+      "type": "org.eclipse.milo.opcua.stack.server.security.ServerCertificateValidator",
+      "description": "Validator for client certificates. The option is a org.eclipse.milo.opcua.stack.server.security.ServerCertificateValidator type.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
