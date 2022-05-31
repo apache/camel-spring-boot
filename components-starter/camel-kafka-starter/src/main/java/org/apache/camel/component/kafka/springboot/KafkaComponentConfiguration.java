@@ -731,7 +731,8 @@ public class KafkaComponentConfiguration
     private String sslEnabledProtocols;
     /**
      * The endpoint identification algorithm to validate server hostname using
-     * server certificate.
+     * server certificate. Use none or false to disable server hostname
+     * verification.
      */
     private String sslEndpointAlgorithm = "https";
     /**

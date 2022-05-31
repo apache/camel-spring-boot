@@ -593,7 +593,7 @@
     {
       "name": "camel.component.kafka.ssl-endpoint-algorithm",
       "type": "java.lang.String",
-      "description": "The endpoint identification algorithm to validate server hostname using server certificate.",
+      "description": "The endpoint identification algorithm to validate server hostname using server certificate. Use none or false to disable server hostname verification.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
       "defaultValue": "https"
     },
