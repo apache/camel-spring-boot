@@ -42,6 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -171,6 +172,7 @@ public class CamelAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(RoutesCollector.class)
+    @ConditionalOnMissingClass("org.apache.camel.spring.boot.endpointdsl.EndpointDslRouteCollector")
     RoutesCollector routesCollector(ApplicationContext applicationContext) {
         return new SpringBootRoutesCollector(applicationContext);
     }
