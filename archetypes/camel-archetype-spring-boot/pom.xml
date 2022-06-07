@@ -34,7 +34,6 @@
     <packaging>maven-archetype</packaging>
 
     <properties>
-         <spring-boot-version>2.7.0</spring-boot-version>
          <archetype.test.settingsFile>src/test/resources/settings.xml</archetype.test.settingsFile> <!-- Needed to download camel-spring-boot snapshots -->
     </properties>
 
