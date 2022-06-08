@@ -283,6 +283,7 @@
     <module>camel-jooq-starter</module>
     <module>camel-joor-starter</module>
     <module>camel-jpa-starter</module>
+    <module>camel-jq-starter</module>
     <module>camel-jsch-starter</module>
     <module>camel-jslt-starter</module>
     <module>camel-json-patch-starter</module>
