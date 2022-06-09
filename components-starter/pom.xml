@@ -238,6 +238,7 @@
     <module>camel-grpc-starter</module>
     <module>camel-gson-starter</module>
     <module>camel-guava-eventbus-starter</module>
+    <module>camel-hashicorp-vault-starter</module>
     <module>camel-hazelcast-starter</module>
     <module>camel-hbase-starter</module>
     <module>camel-hdfs-starter</module>
