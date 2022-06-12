@@ -81,12 +81,6 @@
       "sourceType": "org.apache.camel.component.google.drive.springboot.GoogleDriveComponentConfiguration"
     },
     {
-      "name": "camel.component.google-drive.key-resource",
-      "type": "java.lang.String",
-      "description": "Sets .json file with credentials for Service account",
-      "sourceType": "org.apache.camel.component.google.drive.springboot.GoogleDriveComponentConfiguration"
-    },
-    {
       "name": "camel.component.google-drive.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
@@ -103,6 +97,12 @@
       "name": "camel.component.google-drive.scopes",
       "type": "java.util.List<java.lang.String>",
       "description": "Specifies the level of permissions you want a drive application to have to a user account. See https:\/\/developers.google.com\/drive\/web\/scopes for more info.",
+      "sourceType": "org.apache.camel.component.google.drive.springboot.GoogleDriveComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-drive.service-account-key",
+      "type": "java.lang.String",
+      "description": "Service account key in json format to authenticate an application as a service account. Accept base64 adding the prefix base64:",
       "sourceType": "org.apache.camel.component.google.drive.springboot.GoogleDriveComponentConfiguration"
     }
   ],
