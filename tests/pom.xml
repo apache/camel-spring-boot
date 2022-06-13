@@ -36,7 +36,6 @@
 
     <modules>
         <module>camel-itest-spring-boot</module>
-        <module>camel-spring-boot-integration-tests</module>
     </modules>
 
 </project>
