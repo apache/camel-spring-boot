@@ -51,6 +51,12 @@
       "sourceType": "org.apache.camel.component.sjms2.springboot.Sjms2ComponentConfiguration"
     },
     {
+      "name": "camel.component.sjms2.exception-listener",
+      "type": "javax.jms.ExceptionListener",
+      "description": "Specifies the JMS Exception Listener that is to be notified of any underlying JMS exceptions. The option is a javax.jms.ExceptionListener type.",
+      "sourceType": "org.apache.camel.component.sjms2.springboot.Sjms2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.sjms2.header-filter-strategy",
       "type": "org.apache.camel.spi.HeaderFilterStrategy",
       "description": "To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.",

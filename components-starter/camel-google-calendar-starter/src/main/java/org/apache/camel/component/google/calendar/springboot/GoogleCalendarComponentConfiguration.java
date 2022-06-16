@@ -115,10 +115,6 @@ public class GoogleCalendarComponentConfiguration
      */
     private String emailAddress;
     /**
-     * Sets .json file with credentials for Service account
-     */
-    private String keyResource;
-    /**
      * The name of the p12 file which has the private key to use with the Google
      * Service Account.
      */
@@ -129,6 +125,11 @@ public class GoogleCalendarComponentConfiguration
      * if the application is long-lived.
      */
     private String refreshToken;
+    /**
+     * Service account key in json format to authenticate an application as a
+     * service account. Accept base64 adding the prefix base64:
+     */
+    private String serviceAccountKey;
     /**
      * The email address of the user the application is trying to impersonate in
      * the service account flow
@@ -231,14 +232,6 @@ public class GoogleCalendarComponentConfiguration
         this.emailAddress = emailAddress;
     }
 
-    public String getKeyResource() {
-        return keyResource;
-    }
-
-    public void setKeyResource(String keyResource) {
-        this.keyResource = keyResource;
-    }
-
     public String getP12FileName() {
         return p12FileName;
     }
@@ -253,6 +246,14 @@ public class GoogleCalendarComponentConfiguration
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public String getServiceAccountKey() {
+        return serviceAccountKey;
+    }
+
+    public void setServiceAccountKey(String serviceAccountKey) {
+        this.serviceAccountKey = serviceAccountKey;
     }
 
     public String getUser() {
