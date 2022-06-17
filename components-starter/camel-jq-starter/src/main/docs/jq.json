@@ -27,7 +27,7 @@
     {
       "name": "camel.language.jq.header-name",
       "type": "java.lang.String",
-      "description": "Name of header to use as input, instead of the message body",
+      "description": "Name of header to use as input, instead of the message body It has as higher precedent than the propertyName if both are set.",
       "sourceType": "org.apache.camel.language.jq.springboot.JqLanguageConfiguration"
     },
     {

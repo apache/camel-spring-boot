@@ -37,7 +37,8 @@ public class JqLanguageConfiguration
      */
     private Boolean enabled;
     /**
-     * Name of header to use as input, instead of the message body
+     * Name of header to use as input, instead of the message body It has as
+     * higher precedent than the propertyName if both are set.
      */
     private String headerName;
     /**
