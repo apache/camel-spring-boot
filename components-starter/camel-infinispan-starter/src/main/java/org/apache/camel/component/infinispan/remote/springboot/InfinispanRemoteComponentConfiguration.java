@@ -121,26 +121,6 @@ public class InfinispanRemoteComponentConfiguration
      */
     private Object value;
     /**
-     * Define the password to access the infinispan instance
-     */
-    private String password;
-    /**
-     * Define the SASL Mechanism to access the infinispan instance
-     */
-    private String saslMechanism;
-    /**
-     * Define the security realm to access the infinispan instance
-     */
-    private String securityRealm;
-    /**
-     * Define the security server name to access the infinispan instance
-     */
-    private String securityServerName;
-    /**
-     * Define the username to access the infinispan instance
-     */
-    private String username;
-    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -188,6 +168,26 @@ public class InfinispanRemoteComponentConfiguration
      * CamelInfinispanOperationResultHeader
      */
     private String resultHeader;
+    /**
+     * Define the password to access the infinispan instance
+     */
+    private String password;
+    /**
+     * Define the SASL Mechanism to access the infinispan instance
+     */
+    private String saslMechanism;
+    /**
+     * Define the security realm to access the infinispan instance
+     */
+    private String securityRealm;
+    /**
+     * Define the security server name to access the infinispan instance
+     */
+    private String securityServerName;
+    /**
+     * Define the username to access the infinispan instance
+     */
+    private String username;
 
     public InfinispanRemoteConfiguration getConfiguration() {
         return configuration;
@@ -293,46 +293,6 @@ public class InfinispanRemoteComponentConfiguration
         this.value = value;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getSaslMechanism() {
-        return saslMechanism;
-    }
-
-    public void setSaslMechanism(String saslMechanism) {
-        this.saslMechanism = saslMechanism;
-    }
-
-    public String getSecurityRealm() {
-        return securityRealm;
-    }
-
-    public void setSecurityRealm(String securityRealm) {
-        this.securityRealm = securityRealm;
-    }
-
-    public String getSecurityServerName() {
-        return securityServerName;
-    }
-
-    public void setSecurityServerName(String securityServerName) {
-        this.securityServerName = securityServerName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
@@ -397,5 +357,45 @@ public class InfinispanRemoteComponentConfiguration
 
     public void setResultHeader(String resultHeader) {
         this.resultHeader = resultHeader;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSaslMechanism() {
+        return saslMechanism;
+    }
+
+    public void setSaslMechanism(String saslMechanism) {
+        this.saslMechanism = saslMechanism;
+    }
+
+    public String getSecurityRealm() {
+        return securityRealm;
+    }
+
+    public void setSecurityRealm(String securityRealm) {
+        this.securityRealm = securityRealm;
+    }
+
+    public String getSecurityServerName() {
+        return securityServerName;
+    }
+
+    public void setSecurityServerName(String securityServerName) {
+        this.securityServerName = securityServerName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

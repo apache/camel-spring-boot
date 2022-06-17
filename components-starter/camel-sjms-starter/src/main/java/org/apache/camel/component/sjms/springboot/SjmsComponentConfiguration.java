@@ -18,6 +18,7 @@ package org.apache.camel.component.sjms.springboot;
 
 import javax.annotation.Generated;
 import javax.jms.ConnectionFactory;
+import javax.jms.ExceptionListener;
 import org.apache.camel.component.sjms.jms.DestinationCreationStrategy;
 import org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy;
 import org.apache.camel.component.sjms.jms.MessageCreatedStrategy;
@@ -82,6 +83,12 @@ public class SjmsComponentConfiguration
      * org.apache.camel.component.sjms.jms.DestinationCreationStrategy type.
      */
     private DestinationCreationStrategy destinationCreationStrategy;
+    /**
+     * Specifies the JMS Exception Listener that is to be notified of any
+     * underlying JMS exceptions. The option is a javax.jms.ExceptionListener
+     * type.
+     */
+    private ExceptionListener exceptionListener;
     /**
      * Pluggable strategy for encoding and decoding JMS keys so they can be
      * compliant with the JMS specification. Camel provides one implementation
@@ -166,6 +173,14 @@ public class SjmsComponentConfiguration
     public void setDestinationCreationStrategy(
             DestinationCreationStrategy destinationCreationStrategy) {
         this.destinationCreationStrategy = destinationCreationStrategy;
+    }
+
+    public ExceptionListener getExceptionListener() {
+        return exceptionListener;
+    }
+
+    public void setExceptionListener(ExceptionListener exceptionListener) {
+        this.exceptionListener = exceptionListener;
     }
 
     public JmsKeyFormatStrategy getJmsKeyFormatStrategy() {

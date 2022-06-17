@@ -43,6 +43,7 @@ public class SjmsComponentConverter implements GenericConverter {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, javax.jms.ConnectionFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sjms.jms.DestinationCreationStrategy.class));
+        answer.add(new ConvertiblePair(String.class, javax.jms.ExceptionListener.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sjms.jms.MessageCreatedStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
@@ -64,6 +65,7 @@ public class SjmsComponentConverter implements GenericConverter {
         switch (targetType.getName()) {
             case "javax.jms.ConnectionFactory": return applicationContext.getBean(ref, javax.jms.ConnectionFactory.class);
             case "org.apache.camel.component.sjms.jms.DestinationCreationStrategy": return applicationContext.getBean(ref, org.apache.camel.component.sjms.jms.DestinationCreationStrategy.class);
+            case "javax.jms.ExceptionListener": return applicationContext.getBean(ref, javax.jms.ExceptionListener.class);
             case "org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy": return applicationContext.getBean(ref, org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy.class);
             case "org.apache.camel.component.sjms.jms.MessageCreatedStrategy": return applicationContext.getBean(ref, org.apache.camel.component.sjms.jms.MessageCreatedStrategy.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
