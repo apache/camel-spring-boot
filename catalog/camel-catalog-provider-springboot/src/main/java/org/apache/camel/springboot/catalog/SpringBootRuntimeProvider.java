@@ -24,7 +24,6 @@ import java.util.List;
 import org.apache.camel.catalog.CamelCatalog;
 import org.apache.camel.catalog.RuntimeProvider;
 import org.apache.camel.catalog.impl.CatalogHelper;
-import org.apache.camel.util.IOHelper;
 
 /**
  * A Spring Boot based {@link RuntimeProvider} which only includes the supported Camel components, data formats, and languages
@@ -110,15 +109,16 @@ public class SpringBootRuntimeProvider implements RuntimeProvider {
     
     private List<String> findNames(String pathToPropertyCatalogDescriptor) {
         List<String> names = new ArrayList<>();
-        InputStream is = camelCatalog.getVersionManager().getResourceAsStream(pathToPropertyCatalogDescriptor);
-        if (is != null) {
-            try {
-                CatalogHelper.loadLines(is, names);
-            } catch (IOException e) {
-                // ignore
-            } finally {
-                IOHelper.close(is);
+        try (InputStream is = camelCatalog.getVersionManager().getResourceAsStream(pathToPropertyCatalogDescriptor)) {
+            if (is != null) {
+                try {
+                    CatalogHelper.loadLines(is, names);
+                } catch (IOException e) {
+                    // ignore
+                }
             }
+        } catch (IOException e1) {
+            // ignore
         }
         return names;
     }
