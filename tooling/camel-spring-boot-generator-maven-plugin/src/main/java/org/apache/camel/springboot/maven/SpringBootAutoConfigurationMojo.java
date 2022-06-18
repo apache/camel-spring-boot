@@ -151,12 +151,14 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     }
 
     private void executeAll(String groupId, String artifactId) throws MojoExecutionException, MojoFailureException, IOException {
-        try (JarFile componentJar = getJarFile(groupId, artifactId)) {
-            Map<String, Supplier<String>> files = getJSonFiles(componentJar);
-            executeModels(componentJar, files);
-            executeComponents(componentJar, files);
-            executeDataFormats(componentJar, files);
-            executeLanguages(componentJar, files);
+        try (JarFile jar = getJarFile(groupId, artifactId)) {
+            if (jar != null) {
+                Map<String, Supplier<String>> files = getJSonFiles(jar);
+                executeModels(jar, files);
+                executeComponents(jar, files);
+                executeDataFormats(jar, files);
+                executeLanguages(jar, files);
+            }
         }
     }
 

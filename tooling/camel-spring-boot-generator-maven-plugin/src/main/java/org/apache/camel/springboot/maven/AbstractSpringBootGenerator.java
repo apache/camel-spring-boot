@@ -109,7 +109,12 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
     }
 
     protected JarFile getJarFile(String groupId, String artifactId) throws IOException {
-        return new JarFile(project.getArtifactMap().get(groupId + ":" + artifactId).getFile());
+        Artifact a = project.getArtifactMap().get(groupId + ":" + artifactId);
+        if (a != null) {
+            return new JarFile(a.getFile());
+        } else {
+            return null;
+        }
     }
 
     protected Map<String, Supplier<String>> getJSonFiles(JarFile componentJar) {

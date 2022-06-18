@@ -63,12 +63,14 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
     }
 
     private void executeAll(String groupId, String artifactId) throws MojoExecutionException, MojoFailureException, IOException {
-        try (JarFile componentJar = getJarFile(groupId, artifactId)) {
-            Map<String, Supplier<String>> files = getJSonFiles(componentJar);
-            executeOthers(componentJar, files);
-            executeComponents(componentJar, files);
-            executeDataFormats(componentJar, files);
-            executeLanguages(componentJar, files);
+        try (JarFile jar = getJarFile(groupId, artifactId)) {
+            if (jar != null) {
+                Map<String, Supplier<String>> files = getJSonFiles(jar);
+                executeOthers(jar, files);
+                executeComponents(jar, files);
+                executeDataFormats(jar, files);
+                executeLanguages(jar, files);
+            }
         }
     }
 
