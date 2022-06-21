@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-sjms2-starter",
-    "version": "3.14.3-SNAPSHOT",
+    "version": "3.14.4-SNAPSHOT",
     "scheme": "sjms2",
     "extendsScheme": "sjms",
     "syntax": "sjms2:destinationType:destinationName",
