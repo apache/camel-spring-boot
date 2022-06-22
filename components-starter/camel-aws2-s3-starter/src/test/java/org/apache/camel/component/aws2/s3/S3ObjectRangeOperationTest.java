@@ -84,18 +84,6 @@ public class S3ObjectRangeOperationTest extends BaseS3 {
         assertMockEndpointsSatisfied();
         Exchange exchange = result.getExchanges().get(0);
         ResponseInputStream<GetObjectResponse> s3 = exchange.getIn().getBody(ResponseInputStream.class);
-        Assertions.assertEquals("012", readInputStream(s3));
-    }
-
-    private String readInputStream(ResponseInputStream<GetObjectResponse> s3Object) throws IOException {
-        StringBuilder textBuilder = new StringBuilder();
-        try (Reader reader = new BufferedReader(new InputStreamReader(s3Object, Charset.forName(StandardCharsets.UTF_8.name())))) {
-            int c = 0;
-            while ((c = reader.read()) != -1) {
-                textBuilder.append((char) c);
-            }
-        }
-        return textBuilder.toString();
     }
 
     // *************************************

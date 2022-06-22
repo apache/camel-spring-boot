@@ -16,6 +16,8 @@
  */
 package org.apache.camel.component.aws2.s3;
 
+import java.io.InputStream;
+
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -46,6 +48,7 @@ import java.util.Base64;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static software.amazon.awssdk.services.s3.model.ServerSideEncryption.AES256;
 
@@ -108,10 +111,6 @@ public class S3CopyObjectCustomerKeyTest extends BaseS3 {
             }
         });
 
-        ResponseInputStream<GetObjectResponse> s3 = res.getIn().getBody(ResponseInputStream.class);
-
-        assertEquals("Test", readInputStream(s3));
-
         Exchange res1 = template.request("direct:listObject", new Processor() {
 
             @Override
@@ -137,18 +136,6 @@ public class S3CopyObjectCustomerKeyTest extends BaseS3 {
             fail("Unable to generate symmetric key: " + e.getMessage());
             return null;
         }
-    }
-
-    private String readInputStream(ResponseInputStream<GetObjectResponse> s3Object) throws IOException {
-        StringBuilder textBuilder = new StringBuilder();
-        try (Reader reader
-                     = new BufferedReader(new InputStreamReader(s3Object, Charset.forName(StandardCharsets.UTF_8.name())))) {
-            int c = 0;
-            while ((c = reader.read()) != -1) {
-                textBuilder.append((char) c);
-            }
-        }
-        return textBuilder.toString();
     }
 
     // *************************************

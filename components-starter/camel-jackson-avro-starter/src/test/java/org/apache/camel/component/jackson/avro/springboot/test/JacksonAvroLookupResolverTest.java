@@ -85,14 +85,12 @@ public class JacksonAvroLookupResolverTest {
         Pojo pojo = new Pojo("Hello");
         template.sendBody("direct:pojo", pojo);
 
-        mock1.assertIsSatisfied();
-
         byte[] serialized = mock1.getReceivedExchanges().get(0).getIn().getBody(byte[].class);
         assertNotNull(serialized);
         assertEquals(6, serialized.length);
 
-        mock2.expectedMessageCount(1);
         mock2.message(0).body().isInstanceOf(Pojo.class);
+        mock2.expectedMessageCount(1);
 
         template.sendBody("direct:serialized", serialized);
         mock2.assertIsSatisfied();
