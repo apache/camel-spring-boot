@@ -130,6 +130,11 @@
       "sourceType": "org.apache.camel.spring.boot.vault.GcpVaultConfigurationProperties"
     },
     {
+      "name": "management.endpoint.camel",
+      "type": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint",
+      "sourceType": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint"
+    },
+    {
       "name": "management.endpoint.camelroutecontroller",
       "type": "org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpoint",
       "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpoint"
@@ -1397,6 +1402,20 @@
       "description": "Define if we want to use the GCP Client Default Instance or not",
       "sourceType": "org.apache.camel.spring.boot.vault.GcpVaultConfigurationProperties",
       "defaultValue": false
+    },
+    {
+      "name": "management.endpoint.camel.cache.time-to-live",
+      "type": "java.time.Duration",
+      "description": "Maximum time that a response can be cached.",
+      "sourceType": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint",
+      "defaultValue": "0ms"
+    },
+    {
+      "name": "management.endpoint.camel.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the camel endpoint.",
+      "sourceType": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint",
+      "defaultValue": true
     },
     {
       "name": "management.endpoint.camelroutecontroller.cache.time-to-live",
