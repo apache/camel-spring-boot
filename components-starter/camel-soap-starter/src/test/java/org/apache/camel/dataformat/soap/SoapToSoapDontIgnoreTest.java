@@ -108,7 +108,7 @@ public class SoapToSoapDontIgnoreTest {
         mock.assertIsSatisfied();
         Exchange result = mock.assertExchangeReceived(0);
 
-        byte[] body = (byte[]) result.getIn().getBody();
+        byte[] body = (byte[]) result.getIn().getBody(byte[].class);
         InputStream stream = new ByteArrayInputStream(body);
         SOAPMessage request = MessageFactory.newInstance().createMessage(null, stream);
         assertTrue(null != request.getSOAPHeader()

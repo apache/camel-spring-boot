@@ -97,8 +97,6 @@ public class JacksonAvroMarshalUnmarshalPojoListTest {
 
         template.sendBody("direct:pojo", pojos);
 
-        mock1.assertIsSatisfied();
-
         byte[] serialized = mock1.getReceivedExchanges().get(0).getIn().getBody(byte[].class);
         assertNotNull(serialized);
         assertEquals(14, serialized.length);

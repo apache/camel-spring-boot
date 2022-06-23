@@ -17,7 +17,7 @@
 package org.apache.camel.component.jackson.protobuf.springboot;
 
 
-
+import java.io.InputStream;
 import java.io.IOException;
 
 import com.fasterxml.jackson.dataformat.protobuf.schema.ProtobufSchema;
@@ -79,7 +79,7 @@ public class JacksonProtobufLookupResolverTest {
     public void testMarshalUnmarshalPojo() throws Exception {
         
         mock1.expectedMessageCount(1);
-        mock1.message(0).body().isInstanceOf(byte[].class);
+        mock1.message(0).body().isInstanceOf(InputStream.class);
 
         Pojo pojo = new Pojo("Hello");
         template.sendBody("direct:pojo", pojo);

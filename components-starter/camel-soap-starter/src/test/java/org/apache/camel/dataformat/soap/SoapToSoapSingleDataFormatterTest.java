@@ -102,7 +102,7 @@ public class SoapToSoapSingleDataFormatterTest {
         endpoint.assertIsSatisfied();
         Exchange result = endpoint.assertExchangeReceived(0);
 
-        byte[] body = (byte[]) result.getIn().getBody();
+        byte[] body = (byte[]) result.getIn().getBody(byte[].class);
         InputStream stream = new ByteArrayInputStream(body);
         SOAPMessage request = MessageFactory.newInstance().createMessage(null, stream);
         assertTrue(null != request.getSOAPHeader()

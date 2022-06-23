@@ -98,8 +98,6 @@ public class JacksonAvroMarshalUnmarshalJsonNodeTest {
         Pojo pojo = new Pojo("Hello");
         template.sendBody("direct:pojo", pojo);
 
-        mock1.assertIsSatisfied();
-
         byte[] serialized = mock1.getReceivedExchanges().get(0).getIn().getBody(byte[].class);
         assertNotNull(serialized);
         assertEquals(6, serialized.length);
@@ -126,8 +124,6 @@ public class JacksonAvroMarshalUnmarshalJsonNodeTest {
         pojos.add(new Pojo("World"));
 
         template.sendBodyAndHeader("direct:pojo", pojos, "list", true);
-
-        mock1.assertIsSatisfied();
 
         byte[] serialized = mock1.getReceivedExchanges().get(0).getIn().getBody(byte[].class);
         assertNotNull(serialized);

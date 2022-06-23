@@ -31,6 +31,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.io.InputStream;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext
@@ -70,8 +71,8 @@ public class FtpSimpleConsumeStreamingStepwiseFalseTest extends BaseFtp {
     }
 
     void assertMore(MockEndpoint mock) {
-        GenericFile<?> remoteFile = (GenericFile<?>) mock.getExchanges().get(0).getIn().getBody();
-        assertTrue(remoteFile.getBody() instanceof InputStream);
+        InputStream is = mock.getExchanges().get(0).getIn().getBody(InputStream.class);
+        assertNotNull(is);
     }
 
     // *************************************
