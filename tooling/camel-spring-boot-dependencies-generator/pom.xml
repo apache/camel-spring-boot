@@ -168,6 +168,8 @@
 
                             <exclude>com.google.code.gson:*</exclude>
                             <exclude>javax.servlet:javax.servlet-api</exclude>
+                            <exclude>javax.annotation:jsr250-api</exclude>
+                            <exclude>javax.xml.soap:javax.xml.soap-api</exclude>
                             <exclude>junit:*</exclude>
                             <exclude>org.junit.jupiter:*</exclude>
                             <exclude>org.junit.vintage:*</exclude>
@@ -209,8 +211,10 @@
 
                             <!-- Modified on Camel due to CAMEL-17435 -->
                             <exclude>com.sun.xml.messaging.saaj:saaj-impl:*</exclude>
+                            <exclude>jakarta.annotation:jakarta.annotation-api</exclude>
+                            <exclude>jakarta.servlet:jakarta.servlet-api</exclude>
                             <exclude>jakarta.xml.bind:jakarta.xml.bind-api:*</exclude>
-                            <exclude>javax.annotation:javax.annotation-api:*</exclude>
+                            <exclude>jakarta.xml.soap:jakarta.xml.soap-api</exclude>
                             <exclude>javax.xml.ws:jaxws-api:*</exclude>
                             <exclude>org.glassfish.jaxb:jaxb-runtime:*</exclude>
 
