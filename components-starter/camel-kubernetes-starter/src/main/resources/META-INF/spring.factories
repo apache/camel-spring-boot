@@ -34,7 +34,9 @@ org.apache.camel.component.openshift.builds.springboot.OpenshiftBuildsComponentA
 org.apache.camel.component.openshift.build_configs.springboot.OpenshiftBuildConfigsComponentAutoConfiguration,\
 org.apache.camel.component.kubernetes.hpa.springboot.KubernetesHPAComponentAutoConfiguration,\
 org.apache.camel.component.kubernetes.job.springboot.KubernetesJobComponentAutoConfiguration,\
-org.apache.camel.component.kubernetes.customresources.springboot.KubernetesCustomResourcesComponentAutoConfiguration
+org.apache.camel.component.kubernetes.customresources.springboot.KubernetesCustomResourcesComponentAutoConfiguration,\
+org.apache.camel.component.openshift.deploymentconfigs.springboot.OpenshiftDeploymentConfigsComponentAutoConfiguration
+
 
 
 
