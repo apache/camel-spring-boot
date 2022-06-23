@@ -4542,6 +4542,11 @@
         <version>3.7.4</version>
       </dependency>
       <dependency>
+        <groupId>org.junit-pioneer</groupId>
+        <artifactId>junit-pioneer</artifactId>
+        <version>1.7.1</version>
+      </dependency>
+      <dependency>
         <groupId>org.knowm.xchange</groupId>
         <artifactId>xchange-core</artifactId>
         <version>5.0.13</version>
