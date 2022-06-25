@@ -31,7 +31,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         persist-credentials: false
     - name: Set Up Java
@@ -39,7 +39,7 @@ jobs:
       with:
         java-version: 11
     - name: Maven Build
-      run: ./mvnw -l build.log -V --no-transfer-progress -Psourcecheck clean install 
+      run: ./mvnw -l build.log -V --no-transfer-progress -Psourcecheck clean install
     - name: Archive Logs
       uses: actions/upload-artifact@v3
       if: always()
@@ -54,4 +54,4 @@ jobs:
         path: |
           tests/camel-itest-spring-boot/target/surefire-reports
           tests/camel-spring-boot-integration-tests/infinispan/target/surefire-reports
-        retention-days: 2 
+        retention-days: 2
