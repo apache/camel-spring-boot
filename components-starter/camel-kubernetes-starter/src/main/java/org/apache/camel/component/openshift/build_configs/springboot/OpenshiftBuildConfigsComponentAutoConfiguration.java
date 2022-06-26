@@ -44,7 +44,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,OpenshiftBuildConfigsComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.openshift-build-configs"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, OpenshiftBuildConfigsComponentConverter.class})
 public class OpenshiftBuildConfigsComponentAutoConfiguration {
 
     @Autowired

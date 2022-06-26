@@ -44,7 +44,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,KubernetesConfigMapsComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.kubernetes-config-maps"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, KubernetesConfigMapsComponentConverter.class})
 public class KubernetesConfigMapsComponentAutoConfiguration {
 
     @Autowired

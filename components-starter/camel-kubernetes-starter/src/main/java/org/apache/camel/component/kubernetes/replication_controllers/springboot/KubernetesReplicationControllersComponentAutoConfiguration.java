@@ -44,7 +44,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,KubernetesReplicationControllersComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.kubernetes-replication-controllers"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, KubernetesReplicationControllersComponentConverter.class})
 public class KubernetesReplicationControllersComponentAutoConfiguration {
 
     @Autowired

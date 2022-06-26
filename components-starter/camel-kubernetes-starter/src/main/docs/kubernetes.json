@@ -309,6 +309,12 @@
       "sourceType": "org.apache.camel.component.kubernetes.config_maps.springboot.KubernetesConfigMapsComponentConfiguration"
     },
     {
+      "name": "camel.component.kubernetes-config-maps.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
+      "sourceType": "org.apache.camel.component.kubernetes.config_maps.springboot.KubernetesConfigMapsComponentConfiguration"
+    },
+    {
       "name": "camel.component.kubernetes-config-maps.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
@@ -338,6 +344,12 @@
       "name": "camel.component.kubernetes-custom-resources.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the kubernetes-custom-resources component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.kubernetes.customresources.springboot.KubernetesCustomResourcesComponentConfiguration"
+    },
+    {
+      "name": "camel.component.kubernetes-custom-resources.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
       "sourceType": "org.apache.camel.component.kubernetes.customresources.springboot.KubernetesCustomResourcesComponentConfiguration"
     },
     {
@@ -373,6 +385,12 @@
       "sourceType": "org.apache.camel.component.kubernetes.deployments.springboot.KubernetesDeploymentsComponentConfiguration"
     },
     {
+      "name": "camel.component.kubernetes-deployments.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
+      "sourceType": "org.apache.camel.component.kubernetes.deployments.springboot.KubernetesDeploymentsComponentConfiguration"
+    },
+    {
       "name": "camel.component.kubernetes-deployments.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
@@ -402,6 +420,12 @@
       "name": "camel.component.kubernetes-hpa.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the kubernetes-hpa component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.kubernetes.hpa.springboot.KubernetesHPAComponentConfiguration"
+    },
+    {
+      "name": "camel.component.kubernetes-hpa.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
       "sourceType": "org.apache.camel.component.kubernetes.hpa.springboot.KubernetesHPAComponentConfiguration"
     },
     {
@@ -437,6 +461,12 @@
       "sourceType": "org.apache.camel.component.kubernetes.job.springboot.KubernetesJobComponentConfiguration"
     },
     {
+      "name": "camel.component.kubernetes-job.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
+      "sourceType": "org.apache.camel.component.kubernetes.job.springboot.KubernetesJobComponentConfiguration"
+    },
+    {
       "name": "camel.component.kubernetes-job.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
@@ -466,6 +496,12 @@
       "name": "camel.component.kubernetes-namespaces.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the kubernetes-namespaces component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.kubernetes.namespaces.springboot.KubernetesNamespacesComponentConfiguration"
+    },
+    {
+      "name": "camel.component.kubernetes-namespaces.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
       "sourceType": "org.apache.camel.component.kubernetes.namespaces.springboot.KubernetesNamespacesComponentConfiguration"
     },
     {
@@ -501,6 +537,12 @@
       "sourceType": "org.apache.camel.component.kubernetes.nodes.springboot.KubernetesNodesComponentConfiguration"
     },
     {
+      "name": "camel.component.kubernetes-nodes.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
+      "sourceType": "org.apache.camel.component.kubernetes.nodes.springboot.KubernetesNodesComponentConfiguration"
+    },
+    {
       "name": "camel.component.kubernetes-nodes.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
@@ -526,6 +568,12 @@
       "sourceType": "org.apache.camel.component.kubernetes.persistent_volumes_claims.springboot.KubernetesPersistentVolumesClaimsComponentConfiguration"
     },
     {
+      "name": "camel.component.kubernetes-persistent-volumes-claims.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
+      "sourceType": "org.apache.camel.component.kubernetes.persistent_volumes_claims.springboot.KubernetesPersistentVolumesClaimsComponentConfiguration"
+    },
+    {
       "name": "camel.component.kubernetes-persistent-volumes-claims.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
@@ -548,6 +596,12 @@
       "name": "camel.component.kubernetes-persistent-volumes.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the kubernetes-persistent-volumes component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.kubernetes.persistent_volumes.springboot.KubernetesPersistentVolumesComponentConfiguration"
+    },
+    {
+      "name": "camel.component.kubernetes-persistent-volumes.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
       "sourceType": "org.apache.camel.component.kubernetes.persistent_volumes.springboot.KubernetesPersistentVolumesComponentConfiguration"
     },
     {
@@ -583,6 +637,12 @@
       "sourceType": "org.apache.camel.component.kubernetes.pods.springboot.KubernetesPodsComponentConfiguration"
     },
     {
+      "name": "camel.component.kubernetes-pods.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
+      "sourceType": "org.apache.camel.component.kubernetes.pods.springboot.KubernetesPodsComponentConfiguration"
+    },
+    {
       "name": "camel.component.kubernetes-pods.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
@@ -615,6 +675,12 @@
       "sourceType": "org.apache.camel.component.kubernetes.replication_controllers.springboot.KubernetesReplicationControllersComponentConfiguration"
     },
     {
+      "name": "camel.component.kubernetes-replication-controllers.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
+      "sourceType": "org.apache.camel.component.kubernetes.replication_controllers.springboot.KubernetesReplicationControllersComponentConfiguration"
+    },
+    {
       "name": "camel.component.kubernetes-replication-controllers.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
@@ -637,6 +703,12 @@
       "name": "camel.component.kubernetes-resources-quota.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the kubernetes-resources-quota component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.kubernetes.resources_quota.springboot.KubernetesResourcesQuotaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.kubernetes-resources-quota.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
       "sourceType": "org.apache.camel.component.kubernetes.resources_quota.springboot.KubernetesResourcesQuotaComponentConfiguration"
     },
     {
@@ -665,6 +737,12 @@
       "sourceType": "org.apache.camel.component.kubernetes.secrets.springboot.KubernetesSecretsComponentConfiguration"
     },
     {
+      "name": "camel.component.kubernetes-secrets.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
+      "sourceType": "org.apache.camel.component.kubernetes.secrets.springboot.KubernetesSecretsComponentConfiguration"
+    },
+    {
       "name": "camel.component.kubernetes-secrets.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
@@ -687,6 +765,12 @@
       "name": "camel.component.kubernetes-service-accounts.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the kubernetes-service-accounts component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.kubernetes.service_accounts.springboot.KubernetesServiceAccountsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.kubernetes-service-accounts.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
       "sourceType": "org.apache.camel.component.kubernetes.service_accounts.springboot.KubernetesServiceAccountsComponentConfiguration"
     },
     {
@@ -722,6 +806,12 @@
       "sourceType": "org.apache.camel.component.kubernetes.services.springboot.KubernetesServicesComponentConfiguration"
     },
     {
+      "name": "camel.component.kubernetes-services.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
+      "sourceType": "org.apache.camel.component.kubernetes.services.springboot.KubernetesServicesComponentConfiguration"
+    },
+    {
       "name": "camel.component.kubernetes-services.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
@@ -747,6 +837,12 @@
       "sourceType": "org.apache.camel.component.openshift.build_configs.springboot.OpenshiftBuildConfigsComponentConfiguration"
     },
     {
+      "name": "camel.component.openshift-build-configs.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
+      "sourceType": "org.apache.camel.component.openshift.build_configs.springboot.OpenshiftBuildConfigsComponentConfiguration"
+    },
+    {
       "name": "camel.component.openshift-build-configs.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
@@ -769,6 +865,12 @@
       "name": "camel.component.openshift-builds.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the openshift-builds component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.openshift.builds.springboot.OpenshiftBuildsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openshift-builds.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
       "sourceType": "org.apache.camel.component.openshift.builds.springboot.OpenshiftBuildsComponentConfiguration"
     },
     {
@@ -801,6 +903,12 @@
       "name": "camel.component.openshift-deploymentconfigs.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the openshift-deploymentconfigs component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.openshift.deploymentconfigs.springboot.OpenshiftDeploymentConfigsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openshift-deploymentconfigs.kubernetes-client",
+      "type": "io.fabric8.kubernetes.client.KubernetesClient",
+      "description": "To use an existing kubernetes client. The option is a io.fabric8.kubernetes.client.KubernetesClient type.",
       "sourceType": "org.apache.camel.component.openshift.deploymentconfigs.springboot.OpenshiftDeploymentConfigsComponentConfiguration"
     },
     {

@@ -44,7 +44,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,KubernetesPersistentVolumesComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.kubernetes-persistent-volumes"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, KubernetesPersistentVolumesComponentConverter.class})
 public class KubernetesPersistentVolumesComponentAutoConfiguration {
 
     @Autowired

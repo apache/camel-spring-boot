@@ -35,7 +35,43 @@ org.apache.camel.component.openshift.build_configs.springboot.OpenshiftBuildConf
 org.apache.camel.component.kubernetes.hpa.springboot.KubernetesHPAComponentAutoConfiguration,\
 org.apache.camel.component.kubernetes.job.springboot.KubernetesJobComponentAutoConfiguration,\
 org.apache.camel.component.kubernetes.customresources.springboot.KubernetesCustomResourcesComponentAutoConfiguration,\
-org.apache.camel.component.openshift.deploymentconfigs.springboot.OpenshiftDeploymentConfigsComponentAutoConfiguration
+org.apache.camel.component.openshift.deploymentconfigs.springboot.OpenshiftDeploymentConfigsComponentAutoConfiguration,\
+org.apache.camel.component.kubernetes.services.springboot.KubernetesServicesComponentConverter,\
+org.apache.camel.component.kubernetes.namespaces.springboot.KubernetesNamespacesComponentConverter,\
+org.apache.camel.component.kubernetes.nodes.springboot.KubernetesNodesComponentConverter,\
+org.apache.camel.component.kubernetes.pods.springboot.KubernetesPodsComponentConverter,\
+org.apache.camel.component.kubernetes.job.springboot.KubernetesJobComponentConverter,\
+org.apache.camel.component.kubernetes.deployments.springboot.KubernetesDeploymentsComponentConverter,\
+org.apache.camel.component.kubernetes.replication_controllers.springboot.KubernetesReplicationControllersComponentConverter,\
+org.apache.camel.component.kubernetes.persistent_volumes.springboot.KubernetesPersistentVolumesComponentConverter,\
+org.apache.camel.component.kubernetes.persistent_volumes_claims.springboot.KubernetesPersistentVolumesClaimsComponentConverter,\
+org.apache.camel.component.kubernetes.config_maps.springboot.KubernetesConfigMapsComponentConverter,\
+org.apache.camel.component.openshift.deploymentconfigs.springboot.OpenshiftDeploymentConfigsComponentConverter,\
+org.apache.camel.component.kubernetes.resources_quota.springboot.KubernetesResourcesQuotaComponentConverter,\
+org.apache.camel.component.kubernetes.secrets.springboot.KubernetesSecretsComponentConverter,\
+org.apache.camel.component.kubernetes.customresources.springboot.KubernetesCustomResourcesComponentConverter,\
+org.apache.camel.component.openshift.builds.springboot.OpenshiftBuildsComponentConverter,\
+org.apache.camel.component.kubernetes.hpa.springboot.KubernetesHPAComponentConverter,\
+org.apache.camel.component.openshift.build_configs.springboot.OpenshiftBuildConfigsComponentConverter,\
+org.apache.camel.component.kubernetes.service_accounts.springboot.KubernetesServiceAccountsComponentConverter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
