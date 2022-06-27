@@ -17,6 +17,7 @@
 package org.apache.camel.component.kubernetes.services.springboot;
 
 import javax.annotation.Generated;
+import io.fabric8.kubernetes.client.KubernetesClient;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -37,6 +38,11 @@ public class KubernetesServicesComponentConfiguration
      * component. This is enabled by default.
      */
     private Boolean enabled;
+    /**
+     * To use an existing kubernetes client. The option is a
+     * io.fabric8.kubernetes.client.KubernetesClient type.
+     */
+    private KubernetesClient kubernetesClient;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -66,6 +72,14 @@ public class KubernetesServicesComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public KubernetesClient getKubernetesClient() {
+        return kubernetesClient;
+    }
+
+    public void setKubernetesClient(KubernetesClient kubernetesClient) {
+        this.kubernetesClient = kubernetesClient;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;

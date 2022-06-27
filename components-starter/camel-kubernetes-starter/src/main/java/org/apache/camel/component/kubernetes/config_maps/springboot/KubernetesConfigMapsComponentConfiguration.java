@@ -17,6 +17,7 @@
 package org.apache.camel.component.kubernetes.config_maps.springboot;
 
 import javax.annotation.Generated;
+import io.fabric8.kubernetes.client.KubernetesClient;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -38,6 +39,11 @@ public class KubernetesConfigMapsComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * To use an existing kubernetes client. The option is a
+     * io.fabric8.kubernetes.client.KubernetesClient type.
+     */
+    private KubernetesClient kubernetesClient;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -57,6 +63,14 @@ public class KubernetesConfigMapsComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public KubernetesClient getKubernetesClient() {
+        return kubernetesClient;
+    }
+
+    public void setKubernetesClient(KubernetesClient kubernetesClient) {
+        this.kubernetesClient = kubernetesClient;
+    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
