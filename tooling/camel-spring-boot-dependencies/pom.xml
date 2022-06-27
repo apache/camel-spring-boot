@@ -1633,6 +1633,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-splunk-hec-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-splunk-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -4540,11 +4545,6 @@
         <groupId>org.eclipse.rdf4j</groupId>
         <artifactId>rdf4j-rio-api</artifactId>
         <version>3.7.4</version>
-      </dependency>
-      <dependency>
-        <groupId>org.junit-pioneer</groupId>
-        <artifactId>junit-pioneer</artifactId>
-        <version>1.7.1</version>
       </dependency>
       <dependency>
         <groupId>org.knowm.xchange</groupId>
