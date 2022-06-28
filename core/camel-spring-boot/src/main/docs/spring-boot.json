@@ -522,6 +522,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.springboot.camel-events-timestamp-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include timestamps for all emitted Camel Events. Enabling this allows to know fine-grained at what time each event was emitted, which can be used for reporting to report exactly the time of the events. This is by default false to avoid the overhead of including this information.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.springboot.case-insensitive-headers",
       "type": "java.lang.Boolean",
       "description": "Whether to use case sensitive or insensitive headers. Important: When using case sensitive (this is set to false). Then the map is case sensitive which means headers such as content-type and Content-Type are two different keys which can be a problem for some protocols such as HTTP based, which rely on case insensitive headers. However case sensitive implementations can yield faster performance. Therefore use case sensitive implementation with care. Default is true.",

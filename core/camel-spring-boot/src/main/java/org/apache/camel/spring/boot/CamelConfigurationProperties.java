@@ -594,6 +594,13 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private Map<String, String> globalOptions;
 
     /**
+     * Whether to include timestamps for all emitted Camel Events. Enabling this allows to know fine-grained at what
+     * time each event was emitted, which can be used for reporting to report exactly the time of the events. This is by
+     * default false to avoid the overhead of including this information.
+     */
+    private boolean camelEventsTimestampEnabled;
+
+    /**
      * To turn on MDC logging
      */
     private boolean useMdcLogging;
