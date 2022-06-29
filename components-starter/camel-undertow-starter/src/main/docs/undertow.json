@@ -10,6 +10,12 @@
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.undertow.springboot.UndertowComponentConfiguration",
       "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.undertow.security-configuration",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.undertow.springboot.UndertowComponentConfiguration",
+      "sourceMethod": "getSecurityConfiguration()"
     }
   ],
   "properties": [
@@ -63,12 +69,6 @@
       "description": "If enabled and an Exchange failed processing on the consumer side the response's body won't contain the exception's stack trace.",
       "sourceType": "org.apache.camel.component.undertow.springboot.UndertowComponentConfiguration",
       "defaultValue": false
-    },
-    {
-      "name": "camel.component.undertow.security-configuration",
-      "type": "java.lang.Object",
-      "description": "Configuration used by UndertowSecurityProvider. Security configuration object for use from UndertowSecurityProvider. Configuration is UndertowSecurityProvider specific. Each provider decides, whether it accepts configuration. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.undertow.springboot.UndertowComponentConfiguration"
     },
     {
       "name": "camel.component.undertow.security-provider",

@@ -20,6 +20,12 @@
       "name": "camel.component.ehcache.customizer.cache-manager",
       "type": "org.apache.camel.component.ehcache.springboot.customizer.CacheManagerCustomizerConfiguration",
       "sourceType": "org.apache.camel.component.ehcache.springboot.customizer.CacheManagerCustomizerConfiguration"
+    },
+    {
+      "name": "camel.component.ehcache.key",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration",
+      "sourceMethod": "getKey()"
     }
   ],
   "properties": [
@@ -134,12 +140,6 @@
       "name": "camel.component.ehcache.event-types",
       "type": "java.lang.String",
       "description": "Set the type of events to listen for (EVICTED,EXPIRED,REMOVED,CREATED,UPDATED). You can specify multiple entries separated by comma.",
-      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
-    },
-    {
-      "name": "camel.component.ehcache.key",
-      "type": "java.lang.Object",
-      "description": "To configure the default action key. If a key is set in the message header, then the key from the header takes precedence. The option is a java.lang.Object type.",
       "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
     },
     {
