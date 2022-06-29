@@ -10,6 +10,30 @@
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
       "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.infinispan.default-value",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
+      "sourceMethod": "getDefaultValue()"
+    },
+    {
+      "name": "camel.component.infinispan.key",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
+      "sourceMethod": "getKey()"
+    },
+    {
+      "name": "camel.component.infinispan.old-value",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
+      "sourceMethod": "getOldValue()"
+    },
+    {
+      "name": "camel.component.infinispan.value",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
+      "sourceMethod": "getValue()"
     }
   ],
   "properties": [
@@ -69,12 +93,6 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
-      "name": "camel.component.infinispan.default-value",
-      "type": "java.lang.Object",
-      "description": "Set a specific default value for some producer operations. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
-    },
-    {
       "name": "camel.component.infinispan.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the infinispan component. This is enabled by default.",
@@ -99,23 +117,11 @@
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
     },
     {
-      "name": "camel.component.infinispan.key",
-      "type": "java.lang.Object",
-      "description": "Set a specific key for producer operations. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
-    },
-    {
       "name": "camel.component.infinispan.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
       "defaultValue": false
-    },
-    {
-      "name": "camel.component.infinispan.old-value",
-      "type": "java.lang.Object",
-      "description": "Set a specific old value for some producer operations. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
     },
     {
       "name": "camel.component.infinispan.operation",
@@ -176,12 +182,6 @@
       "name": "camel.component.infinispan.username",
       "type": "java.lang.String",
       "description": "Define the username to access the infinispan instance",
-      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
-    },
-    {
-      "name": "camel.component.infinispan.value",
-      "type": "java.lang.Object",
-      "description": "Set a specific value for producer operations. The option is a java.lang.Object type.",
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
     }
   ],

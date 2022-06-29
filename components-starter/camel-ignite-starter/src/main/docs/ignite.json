@@ -6,6 +6,12 @@
       "sourceType": "org.apache.camel.component.ignite.cache.springboot.IgniteCacheComponentConfiguration"
     },
     {
+      "name": "camel.component.ignite-cache.configuration-resource",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.ignite.cache.springboot.IgniteCacheComponentConfiguration",
+      "sourceMethod": "getConfigurationResource()"
+    },
+    {
       "name": "camel.component.ignite-cache.customizer",
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.ignite.cache.springboot.IgniteCacheComponentConfiguration",
@@ -15,6 +21,12 @@
       "name": "camel.component.ignite-compute",
       "type": "org.apache.camel.component.ignite.compute.springboot.IgniteComputeComponentConfiguration",
       "sourceType": "org.apache.camel.component.ignite.compute.springboot.IgniteComputeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ignite-compute.configuration-resource",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.ignite.compute.springboot.IgniteComputeComponentConfiguration",
+      "sourceMethod": "getConfigurationResource()"
     },
     {
       "name": "camel.component.ignite-compute.customizer",
@@ -28,6 +40,12 @@
       "sourceType": "org.apache.camel.component.ignite.events.springboot.IgniteEventsComponentConfiguration"
     },
     {
+      "name": "camel.component.ignite-events.configuration-resource",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.ignite.events.springboot.IgniteEventsComponentConfiguration",
+      "sourceMethod": "getConfigurationResource()"
+    },
+    {
       "name": "camel.component.ignite-events.customizer",
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.ignite.events.springboot.IgniteEventsComponentConfiguration",
@@ -37,6 +55,12 @@
       "name": "camel.component.ignite-idgen",
       "type": "org.apache.camel.component.ignite.idgen.springboot.IgniteIdGenComponentConfiguration",
       "sourceType": "org.apache.camel.component.ignite.idgen.springboot.IgniteIdGenComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ignite-idgen.configuration-resource",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.ignite.idgen.springboot.IgniteIdGenComponentConfiguration",
+      "sourceMethod": "getConfigurationResource()"
     },
     {
       "name": "camel.component.ignite-idgen.customizer",
@@ -50,6 +74,12 @@
       "sourceType": "org.apache.camel.component.ignite.messaging.springboot.IgniteMessagingComponentConfiguration"
     },
     {
+      "name": "camel.component.ignite-messaging.configuration-resource",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.ignite.messaging.springboot.IgniteMessagingComponentConfiguration",
+      "sourceMethod": "getConfigurationResource()"
+    },
+    {
       "name": "camel.component.ignite-messaging.customizer",
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.ignite.messaging.springboot.IgniteMessagingComponentConfiguration",
@@ -61,6 +91,12 @@
       "sourceType": "org.apache.camel.component.ignite.queue.springboot.IgniteQueueComponentConfiguration"
     },
     {
+      "name": "camel.component.ignite-queue.configuration-resource",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.ignite.queue.springboot.IgniteQueueComponentConfiguration",
+      "sourceMethod": "getConfigurationResource()"
+    },
+    {
       "name": "camel.component.ignite-queue.customizer",
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.ignite.queue.springboot.IgniteQueueComponentConfiguration",
@@ -70,6 +106,12 @@
       "name": "camel.component.ignite-set",
       "type": "org.apache.camel.component.ignite.set.springboot.IgniteSetComponentConfiguration",
       "sourceType": "org.apache.camel.component.ignite.set.springboot.IgniteSetComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ignite-set.configuration-resource",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.ignite.set.springboot.IgniteSetComponentConfiguration",
+      "sourceMethod": "getConfigurationResource()"
     },
     {
       "name": "camel.component.ignite-set.customizer",
@@ -92,12 +134,6 @@
       "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
       "sourceType": "org.apache.camel.component.ignite.cache.springboot.IgniteCacheComponentConfiguration",
       "defaultValue": false
-    },
-    {
-      "name": "camel.component.ignite-cache.configuration-resource",
-      "type": "java.lang.Object",
-      "description": "The resource from where to load the configuration. It can be a: URL, String or InputStream type. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.ignite.cache.springboot.IgniteCacheComponentConfiguration"
     },
     {
       "name": "camel.component.ignite-cache.customizer.enabled",
@@ -135,12 +171,6 @@
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
       "sourceType": "org.apache.camel.component.ignite.compute.springboot.IgniteComputeComponentConfiguration",
       "defaultValue": true
-    },
-    {
-      "name": "camel.component.ignite-compute.configuration-resource",
-      "type": "java.lang.Object",
-      "description": "The resource from where to load the configuration. It can be a: URL, String or InputStream type. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.ignite.compute.springboot.IgniteComputeComponentConfiguration"
     },
     {
       "name": "camel.component.ignite-compute.customizer.enabled",
@@ -187,12 +217,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.component.ignite-events.configuration-resource",
-      "type": "java.lang.Object",
-      "description": "The resource from where to load the configuration. It can be a: URL, String or InputStream type. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.ignite.events.springboot.IgniteEventsComponentConfiguration"
-    },
-    {
       "name": "camel.component.ignite-events.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
@@ -221,12 +245,6 @@
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
       "sourceType": "org.apache.camel.component.ignite.idgen.springboot.IgniteIdGenComponentConfiguration",
       "defaultValue": true
-    },
-    {
-      "name": "camel.component.ignite-idgen.configuration-resource",
-      "type": "java.lang.Object",
-      "description": "The resource from where to load the configuration. It can be a: URL, String or InputStream type. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.ignite.idgen.springboot.IgniteIdGenComponentConfiguration"
     },
     {
       "name": "camel.component.ignite-idgen.customizer.enabled",
@@ -273,12 +291,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.component.ignite-messaging.configuration-resource",
-      "type": "java.lang.Object",
-      "description": "The resource from where to load the configuration. It can be a: URL, String or InputStream type. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.ignite.messaging.springboot.IgniteMessagingComponentConfiguration"
-    },
-    {
       "name": "camel.component.ignite-messaging.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
@@ -316,12 +328,6 @@
       "defaultValue": true
     },
     {
-      "name": "camel.component.ignite-queue.configuration-resource",
-      "type": "java.lang.Object",
-      "description": "The resource from where to load the configuration. It can be a: URL, String or InputStream type. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.ignite.queue.springboot.IgniteQueueComponentConfiguration"
-    },
-    {
       "name": "camel.component.ignite-queue.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
@@ -357,12 +363,6 @@
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
       "sourceType": "org.apache.camel.component.ignite.set.springboot.IgniteSetComponentConfiguration",
       "defaultValue": true
-    },
-    {
-      "name": "camel.component.ignite-set.configuration-resource",
-      "type": "java.lang.Object",
-      "description": "The resource from where to load the configuration. It can be a: URL, String or InputStream type. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.ignite.set.springboot.IgniteSetComponentConfiguration"
     },
     {
       "name": "camel.component.ignite-set.customizer.enabled",
