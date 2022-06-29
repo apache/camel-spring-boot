@@ -24,10 +24,10 @@
     <artifactId>components-starter</artifactId>
     <version>3.18.0-SNAPSHOT</version>
   </parent>
-  <artifactId>camel-cxf-transport-starter</artifactId>
+  <artifactId>camel-cxf-soap-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: CXF :: Transport</name>
-  <description>Spring-Boot Starter for Camel Transport for CXF</description>
+  <name>Camel SB Starters :: CXF</name>
+  <description>Spring-Boot Starter for Camel CXF support</description>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -36,8 +36,19 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-cxf-spring-transport</artifactId>
+      <artifactId>camel-cxf-spring-soap</artifactId>
       <version>${camel-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http-undertow</artifactId>
+      <version>${cxf-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-http</artifactId>
+      <scope>test</scope>
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
@@ -46,4 +57,35 @@
     </dependency>
     <!--END OF GENERATED CODE-->
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-codegen-plugin</artifactId>
+        <version>${cxf-version}</version>
+        <executions>
+          <execution>
+            <id>generate-sources</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <fork>${cxf.codegenplugin.forkmode}</fork>
+              <additionalJvmArgs>${cxf.codegen.jvmArgs}</additionalJvmArgs>
+              <testSourceRoot>${basedir}/target/generated/src/test/java</testSourceRoot>
+              <defaultOptions>
+                <frontEnd>jaxws21</frontEnd>
+              </defaultOptions>
+              <wsdlOptions>
+                <wsdlOption>
+                  <wsdl>${basedir}/src/test/resources/MultiPartTest.wsdl</wsdl>
+                </wsdlOption>
+              </wsdlOptions>
+            </configuration>
+            <goals>
+              <goal>wsdl2java</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

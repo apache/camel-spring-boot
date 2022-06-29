@@ -24,10 +24,10 @@
     <artifactId>components-starter</artifactId>
     <version>3.18.0-SNAPSHOT</version>
   </parent>
-  <artifactId>camel-cxf-transport-starter</artifactId>
+  <artifactId>camel-cxf-rest-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: CXF :: Transport</name>
-  <description>Spring-Boot Starter for Camel Transport for CXF</description>
+  <name>Camel SB Starters :: CXF</name>
+  <description>Spring-Boot Starter for Camel CXF support</description>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -36,8 +36,25 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-cxf-spring-transport</artifactId>
+      <artifactId>camel-cxf-spring-rest</artifactId>
       <version>${camel-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http-undertow</artifactId>
+      <version>${cxf-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-http</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib-nodep</artifactId>
+      <version>${cglib-version}</version>
+      <scope>test</scope>
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>

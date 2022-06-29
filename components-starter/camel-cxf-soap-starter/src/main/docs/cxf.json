@@ -1,0 +1,69 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.cxf",
+      "type": "org.apache.camel.component.cxf.springboot.CxfComponentConfiguration",
+      "sourceType": "org.apache.camel.component.cxf.springboot.CxfComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cxf.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.cxf.springboot.CxfComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.cxf.allow-streaming",
+      "type": "java.lang.Boolean",
+      "description": "This option controls whether the CXF component, when running in PAYLOAD mode, will DOM parse the incoming messages into DOM Elements or keep the payload as a javax.xml.transform.Source object that would allow streaming in some cases.",
+      "sourceType": "org.apache.camel.component.cxf.springboot.CxfComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cxf.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.cxf.springboot.CxfComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.cxf.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.cxf.springboot.CxfComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.cxf.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.cxf.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the cxf component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.cxf.springboot.CxfComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cxf.header-filter-strategy",
+      "type": "org.apache.camel.spi.HeaderFilterStrategy",
+      "description": "To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.",
+      "sourceType": "org.apache.camel.component.cxf.springboot.CxfComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cxf.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.cxf.springboot.CxfComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.cxf.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable usage of global SSL context parameters.",
+      "sourceType": "org.apache.camel.component.cxf.springboot.CxfComponentConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}

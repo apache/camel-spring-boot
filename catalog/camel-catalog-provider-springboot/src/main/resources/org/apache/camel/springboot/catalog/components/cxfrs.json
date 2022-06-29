@@ -10,7 +10,7 @@
     "javaType": "org.apache.camel.component.cxf.jaxrs.CxfRsComponent",
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
-    "artifactId": "camel-cxf-starter",
+    "artifactId": "camel-cxf-rest-starter",
     "version": "3.18.0-SNAPSHOT",
     "scheme": "cxfrs",
     "extendsScheme": "",

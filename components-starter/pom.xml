@@ -183,7 +183,8 @@
     <module>camel-crypto-starter</module>
     <module>camel-csimple-joor-starter</module>
     <module>camel-csv-starter</module>
-    <module>camel-cxf-starter</module>
+    <module>camel-cxf-soap-starter</module>
+    <module>camel-cxf-rest-starter</module>
     <module>camel-cxf-transport-starter</module>
     <module>camel-dataformat-starter</module>
     <module>camel-dataset-starter</module>
