@@ -2529,11 +2529,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-cxf</artifactId>
-        <version>3.18.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-cxf-common</artifactId>
         <version>3.18.0-SNAPSHOT</version>
       </dependency>
