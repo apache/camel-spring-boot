@@ -81,6 +81,11 @@ public class ResteasyComponentConfiguration
      */
     private Integer responsePayloadStreamingThreshold = 8192;
     /**
+     * Whether to the HTTP request should follow redirects. By default the HTTP
+     * request does not follow redirects
+     */
+    private Boolean followRedirects = false;
+    /**
      * Whether to skip mapping all the Camel headers as HTTP request headers. If
      * there are no data from Camel headers needed to be included in the HTTP
      * request then this can avoid parsing overhead with many object allocations
@@ -193,6 +198,14 @@ public class ResteasyComponentConfiguration
     public void setResponsePayloadStreamingThreshold(
             Integer responsePayloadStreamingThreshold) {
         this.responsePayloadStreamingThreshold = responsePayloadStreamingThreshold;
+    }
+
+    public Boolean getFollowRedirects() {
+        return followRedirects;
+    }
+
+    public void setFollowRedirects(Boolean followRedirects) {
+        this.followRedirects = followRedirects;
     }
 
     public Boolean getSkipRequestHeaders() {

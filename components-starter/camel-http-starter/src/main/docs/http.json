@@ -127,6 +127,13 @@
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
+      "name": "camel.component.http.follow-redirects",
+      "type": "java.lang.Boolean",
+      "description": "Whether to the HTTP request should follow redirects. By default the HTTP request does not follow redirects",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.http.header-filter-strategy",
       "type": "org.apache.camel.spi.HeaderFilterStrategy",
       "description": "To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.",
