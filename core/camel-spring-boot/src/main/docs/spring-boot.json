@@ -130,6 +130,11 @@
       "sourceType": "org.apache.camel.spring.boot.vault.GcpVaultConfigurationProperties"
     },
     {
+      "name": "camel.vault.hashicorp",
+      "type": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
       "name": "management.endpoint.camel",
       "type": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint",
       "sourceType": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint"
@@ -1409,6 +1414,36 @@
       "description": "Define if we want to use the GCP Client Default Instance or not",
       "sourceType": "org.apache.camel.spring.boot.vault.GcpVaultConfigurationProperties",
       "defaultValue": false
+    },
+    {
+      "name": "camel.vault.hashicorp.engine",
+      "type": "java.lang.String",
+      "description": "The Hashicorp Vault Engine for accessing secrets",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.host",
+      "type": "java.lang.String",
+      "description": "The Hashicorp Vault Host for accessing the service",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.port",
+      "type": "java.lang.String",
+      "description": "The Hashicorp Vault port for accessing the service",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.scheme",
+      "type": "java.lang.String",
+      "description": "The Hashicorp Vault Scheme for accessing the service",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.token",
+      "type": "java.lang.String",
+      "description": "The Hashicorp Vault Token for accessing the service",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
     },
     {
       "name": "management.endpoint.camel.cache.time-to-live",
