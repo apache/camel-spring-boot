@@ -92,12 +92,6 @@
       "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration"
     },
     {
-      "name": "camel.component.google-mail-stream.key-resource",
-      "type": "java.lang.String",
-      "description": "Sets .json file with credentials for Service account",
-      "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration"
-    },
-    {
       "name": "camel.component.google-mail-stream.labels",
       "type": "java.lang.String",
       "description": "Comma separated list of labels to take into account",
@@ -134,6 +128,12 @@
       "name": "camel.component.google-mail-stream.scopes",
       "type": "java.util.List<java.lang.String>",
       "description": "GMail scopes",
+      "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-mail-stream.service-account-key",
+      "type": "java.lang.String",
+      "description": "Sets .json file with credentials for Service account",
       "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration"
     },
     {

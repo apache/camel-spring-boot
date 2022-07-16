@@ -109,15 +109,15 @@ public class GoogleMailStreamComponentConfiguration
      */
     private String clientSecret;
     /**
-     * Sets .json file with credentials for Service account
-     */
-    private String keyResource;
-    /**
      * OAuth 2 refresh token. Using this, the Google Calendar component can
      * obtain a new accessToken whenever the current one expires - a necessity
      * if the application is long-lived.
      */
     private String refreshToken;
+    /**
+     * Sets .json file with credentials for Service account
+     */
+    private String serviceAccountKey;
 
     public String getApplicationName() {
         return applicationName;
@@ -231,19 +231,19 @@ public class GoogleMailStreamComponentConfiguration
         this.clientSecret = clientSecret;
     }
 
-    public String getKeyResource() {
-        return keyResource;
-    }
-
-    public void setKeyResource(String keyResource) {
-        this.keyResource = keyResource;
-    }
-
     public String getRefreshToken() {
         return refreshToken;
     }
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public String getServiceAccountKey() {
+        return serviceAccountKey;
+    }
+
+    public void setServiceAccountKey(String serviceAccountKey) {
+        this.serviceAccountKey = serviceAccountKey;
     }
 }
