@@ -47,7 +47,7 @@ import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
+@DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(
     classes = {
