@@ -95,6 +95,16 @@ public class EventHubsComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Sets the batch size between each checkpoint updates. Works jointly with
+     * checkpointBatchTimeout
+     */
+    private Integer checkpointBatchSize = 500;
+    /**
+     * Sets the batch timeout between each checkpoint updates. Works jointly
+     * with checkpointBatchSize
+     */
+    private Integer checkpointBatchTimeout = 5000;
+    /**
      * Sets the CheckpointStore the EventProcessorClient will use for storing
      * partition ownership and checkpoint information. Users can, optionally,
      * provide their own implementation of CheckpointStore which will store
@@ -256,6 +266,22 @@ public class EventHubsComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Integer getCheckpointBatchSize() {
+        return checkpointBatchSize;
+    }
+
+    public void setCheckpointBatchSize(Integer checkpointBatchSize) {
+        this.checkpointBatchSize = checkpointBatchSize;
+    }
+
+    public Integer getCheckpointBatchTimeout() {
+        return checkpointBatchTimeout;
+    }
+
+    public void setCheckpointBatchTimeout(Integer checkpointBatchTimeout) {
+        this.checkpointBatchTimeout = checkpointBatchTimeout;
     }
 
     public CheckpointStore getCheckpointStore() {
