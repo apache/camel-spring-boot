@@ -453,7 +453,7 @@
         <profile>
             <id>dev</id>
             <properties>
-                <camel-version>3.18.0-SNAPSHOT</camel-version>
+                <camel-version>3.19.0-SNAPSHOT</camel-version>
             </properties>
         </profile>
 
