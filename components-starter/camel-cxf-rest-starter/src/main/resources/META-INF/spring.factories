@@ -16,7 +16,7 @@
 ## ---------------------------------------------------------------------------
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.cxf.jaxrs.springboot.CxfRsComponentAutoConfiguration,\
-org.apache.camel.component.cxf.jaxrs.springboot.CxfRsComponentConverter,\
+org.apache.camel.component.cxf.jaxrs.springboot.CxfRsComponentConverter
 
 
 
