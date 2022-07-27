@@ -298,6 +298,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.kubernetes-config-maps.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.kubernetes.config_maps.springboot.KubernetesConfigMapsComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.kubernetes-config-maps.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
