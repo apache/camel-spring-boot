@@ -39,6 +39,10 @@
       <artifactId>camel-lra</artifactId>
       <version>${camel-version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-servlet-starter</artifactId>
+    </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
