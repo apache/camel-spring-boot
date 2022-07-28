@@ -46,6 +46,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-ws-security</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-cxf-common</artifactId>
       <version>${camel-version}</version>
