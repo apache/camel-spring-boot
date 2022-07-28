@@ -44,6 +44,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.language.xpath.namespace",
+      "type": "java.util.List<org.apache.camel.model.PropertyDefinition>",
+      "description": "Injects the XML Namespaces of prefix - uri mappings",
+      "sourceType": "org.apache.camel.language.xpath.springboot.XPathLanguageConfiguration"
+    },
+    {
       "name": "camel.language.xpath.object-model",
       "type": "java.lang.String",
       "description": "The XPath object model to use",

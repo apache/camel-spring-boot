@@ -16,7 +16,9 @@
  */
 package org.apache.camel.language.xpath.springboot;
 
+import java.util.List;
 import javax.annotation.Generated;
+import org.apache.camel.model.PropertyDefinition;
 import org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -78,6 +80,10 @@ public class XPathLanguageConfiguration
      */
     private Boolean preCompile = true;
     /**
+     * Injects the XML Namespaces of prefix - uri mappings
+     */
+    private List<PropertyDefinition> namespace;
+    /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
      */
@@ -137,6 +143,14 @@ public class XPathLanguageConfiguration
 
     public void setPreCompile(Boolean preCompile) {
         this.preCompile = preCompile;
+    }
+
+    public List<PropertyDefinition> getNamespace() {
+        return namespace;
+    }
+
+    public void setNamespace(List<PropertyDefinition> namespace) {
+        this.namespace = namespace;
     }
 
     public Boolean getTrim() {

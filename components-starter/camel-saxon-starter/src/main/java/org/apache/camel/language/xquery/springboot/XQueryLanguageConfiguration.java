@@ -16,7 +16,9 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
+import java.util.List;
 import javax.annotation.Generated;
+import org.apache.camel.model.PropertyDefinition;
 import org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -49,6 +51,10 @@ public class XQueryLanguageConfiguration
      */
     private String configurationRef;
     /**
+     * Injects the XML Namespaces of prefix - uri mappings
+     */
+    private List<PropertyDefinition> namespace;
+    /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
      */
@@ -68,6 +74,14 @@ public class XQueryLanguageConfiguration
 
     public void setConfigurationRef(String configurationRef) {
         this.configurationRef = configurationRef;
+    }
+
+    public List<PropertyDefinition> getNamespace() {
+        return namespace;
+    }
+
+    public void setNamespace(List<PropertyDefinition> namespace) {
+        this.namespace = namespace;
     }
 
     public Boolean getTrim() {
