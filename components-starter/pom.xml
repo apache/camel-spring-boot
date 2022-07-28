@@ -183,8 +183,8 @@
     <module>camel-crypto-starter</module>
     <module>camel-csimple-joor-starter</module>
     <module>camel-csv-starter</module>
-    <module>camel-cxf-soap-starter</module>
     <module>camel-cxf-rest-starter</module>
+    <module>camel-cxf-soap-starter</module>
     <module>camel-cxf-transport-starter</module>
     <module>camel-dataformat-starter</module>
     <module>camel-dataset-starter</module>
@@ -252,6 +252,7 @@
     <module>camel-huaweicloud-imagerecognition-starter</module>
     <module>camel-huaweicloud-obs-starter</module>
     <module>camel-huaweicloud-smn-starter</module>
+    <module>camel-hyperledger-aries-starter</module>
     <module>camel-ical-starter</module>
     <module>camel-iec60870-starter</module>
     <module>camel-ignite-starter</module>
