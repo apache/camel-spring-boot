@@ -31,6 +31,12 @@
       "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration"
     },
     {
+      "name": "camel.language.xtokenize.namespace",
+      "type": "java.util.List<org.apache.camel.model.PropertyDefinition>",
+      "description": "Injects the XML Namespaces of prefix - uri mappings",
+      "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration"
+    },
+    {
       "name": "camel.language.xtokenize.trim",
       "type": "java.lang.Boolean",
       "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
