@@ -19,6 +19,7 @@ package org.apache.camel.component.jpa.springboot;
 import java.util.Map;
 import javax.annotation.Generated;
 import javax.persistence.EntityManagerFactory;
+import org.apache.camel.component.jpa.TransactionStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -70,6 +71,12 @@ public class JpaComponentConfiguration
      * type.
      */
     private PlatformTransactionManager transactionManager;
+    /**
+     * To use the TransactionStrategy for running the operations in a
+     * transaction. The option is a
+     * org.apache.camel.component.jpa.TransactionStrategy type.
+     */
+    private TransactionStrategy transactionStrategy;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -140,6 +147,14 @@ public class JpaComponentConfiguration
     public void setTransactionManager(
             PlatformTransactionManager transactionManager) {
         this.transactionManager = transactionManager;
+    }
+
+    public TransactionStrategy getTransactionStrategy() {
+        return transactionStrategy;
+    }
+
+    public void setTransactionStrategy(TransactionStrategy transactionStrategy) {
+        this.transactionStrategy = transactionStrategy;
     }
 
     public Boolean getBridgeErrorHandler() {

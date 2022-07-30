@@ -76,6 +76,12 @@
       "type": "org.springframework.transaction.PlatformTransactionManager",
       "description": "To use the PlatformTransactionManager for managing transactions. The option is a org.springframework.transaction.PlatformTransactionManager type.",
       "sourceType": "org.apache.camel.component.jpa.springboot.JpaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.jpa.transaction-strategy",
+      "type": "org.apache.camel.component.jpa.TransactionStrategy",
+      "description": "To use the TransactionStrategy for running the operations in a transaction. The option is a org.apache.camel.component.jpa.TransactionStrategy type.",
+      "sourceType": "org.apache.camel.component.jpa.springboot.JpaComponentConfiguration"
     }
   ],
   "hints": []
