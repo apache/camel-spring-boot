@@ -1,0 +1,138 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.aws-cloudtrail",
+      "type": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.aws-cloudtrail.access-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Access Key",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.cloud-trail-client",
+      "type": "software.amazon.awssdk.services.cloudtrail.CloudTrailClient",
+      "description": "Amazon Cloudtrail client to use for all requests for this endpoint. The option is a software.amazon.awssdk.services.cloudtrail.CloudTrailClient type.",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.configuration",
+      "type": "org.apache.camel.component.aws.cloudtrail.CloudtrailConfiguration",
+      "description": "Component configuration. The option is a org.apache.camel.component.aws.cloudtrail.CloudtrailConfiguration type.",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the aws-cloudtrail component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.event-source",
+      "type": "java.lang.String",
+      "description": "Specify an event source to select events",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.max-results",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of records that will be fetched in each poll",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": 1
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.override-endpoint",
+      "type": "java.lang.Boolean",
+      "description": "Set the need for overidding the endpoint. This option needs to be used in combination with uriEndpointOverride option",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.proxy-host",
+      "type": "java.lang.String",
+      "description": "To define a proxy host when instantiating the Cloudtrail client",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "To define a proxy port when instantiating the Cloudtrail client",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.proxy-protocol",
+      "type": "software.amazon.awssdk.core.Protocol",
+      "description": "To define a proxy protocol when instantiating the Cloudtrail client",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.region",
+      "type": "java.lang.String",
+      "description": "The region in which Cloudtrail client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.secret-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Secret Key",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.trust-all-certificates",
+      "type": "java.lang.Boolean",
+      "description": "If we want to trust all certificates in case of overriding the endpoint",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.uri-endpoint-override",
+      "type": "java.lang.String",
+      "description": "Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.use-default-credentials-provider",
+      "type": "java.lang.Boolean",
+      "description": "Set whether the Cloudtrail client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in.",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}
