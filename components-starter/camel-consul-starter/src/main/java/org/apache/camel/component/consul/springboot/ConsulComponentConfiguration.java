@@ -27,7 +27,6 @@ import org.apache.camel.component.consul.ConsulConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Integrate with Consul service discovery and configuration store.
@@ -51,12 +50,6 @@ public class ConsulComponentConfiguration
      */
     private Duration connectTimeout;
     /**
-     * Connect timeout for OkHttpClient. Deprecation note: Use connectTimeout
-     * instead
-     */
-    @Deprecated
-    private Long connectTimeoutMillis;
-    /**
      * Reference to a com.orbitz.consul.Consul in the registry. The option is a
      * com.orbitz.consul.Consul type.
      */
@@ -75,11 +68,6 @@ public class ConsulComponentConfiguration
      */
     private Duration readTimeout;
     /**
-     * Read timeout for OkHttpClient. Deprecation note: Use readTimeout instead
-     */
-    @Deprecated
-    private Long readTimeoutMillis;
-    /**
      * Set tags. You can separate multiple tags by comma.
      */
     private String tags;
@@ -91,12 +79,6 @@ public class ConsulComponentConfiguration
      * Write timeout for OkHttpClient. The option is a java.time.Duration type.
      */
     private Duration writeTimeout;
-    /**
-     * Write timeout for OkHttpClient. Deprecation note: Use writeTimeout
-     * instead. The option is a java.lang.Long type.
-     */
-    @Deprecated
-    private Long writeTimeoutMillis;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -200,17 +182,6 @@ public class ConsulComponentConfiguration
         this.connectTimeout = connectTimeout;
     }
 
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Long getConnectTimeoutMillis() {
-        return connectTimeoutMillis;
-    }
-
-    @Deprecated
-    public void setConnectTimeoutMillis(Long connectTimeoutMillis) {
-        this.connectTimeoutMillis = connectTimeoutMillis;
-    }
-
     public Consul getConsulClient() {
         return consulClient;
     }
@@ -243,17 +214,6 @@ public class ConsulComponentConfiguration
         this.readTimeout = readTimeout;
     }
 
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Long getReadTimeoutMillis() {
-        return readTimeoutMillis;
-    }
-
-    @Deprecated
-    public void setReadTimeoutMillis(Long readTimeoutMillis) {
-        this.readTimeoutMillis = readTimeoutMillis;
-    }
-
     public String getTags() {
         return tags;
     }
@@ -276,17 +236,6 @@ public class ConsulComponentConfiguration
 
     public void setWriteTimeout(Duration writeTimeout) {
         this.writeTimeout = writeTimeout;
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Long getWriteTimeoutMillis() {
-        return writeTimeoutMillis;
-    }
-
-    @Deprecated
-    public void setWriteTimeoutMillis(Long writeTimeoutMillis) {
-        this.writeTimeoutMillis = writeTimeoutMillis;
     }
 
     public Boolean getBridgeErrorHandler() {
