@@ -63,12 +63,6 @@
       "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
     },
     {
-      "name": "camel.cloud.consul.connect-timeout-millis",
-      "type": "java.lang.Long",
-      "description": "Use connectTimeout instead",
-      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
-    },
-    {
       "name": "camel.cloud.consul.consistency-mode",
       "type": "com.orbitz.consul.option.ConsistencyMode",
       "description": "The consistencyMode used for queries, default ConsistencyMode.DEFAULT",
@@ -159,12 +153,6 @@
       "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
     },
     {
-      "name": "camel.cloud.consul.read-timeout-millis",
-      "type": "java.lang.Long",
-      "description": "Use readTimeout instead.",
-      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
-    },
-    {
       "name": "camel.cloud.consul.recursive",
       "type": "java.lang.Boolean",
       "description": "Recursively watch, default false",
@@ -208,12 +196,6 @@
       "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
     },
     {
-      "name": "camel.cloud.consul.write-timeout-millis",
-      "type": "java.lang.Long",
-      "description": "Use writeTimeout instead.",
-      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
-    },
-    {
       "name": "camel.cluster.consul.acl-token",
       "type": "java.lang.String",
       "description": "Sets the ACL token to be used with Consul",
@@ -236,12 +218,6 @@
       "name": "camel.cluster.consul.connect-timeout",
       "type": "java.time.Duration",
       "description": "Connect timeout for OkHttpClient",
-      "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration"
-    },
-    {
-      "name": "camel.cluster.consul.connect-timeout-millis",
-      "type": "java.lang.Long",
-      "description": "Use connectTimeout instead",
       "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration"
     },
     {
@@ -314,12 +290,6 @@
       "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration"
     },
     {
-      "name": "camel.cluster.consul.read-timeout-millis",
-      "type": "java.lang.Long",
-      "description": "Use readTimeout instead.",
-      "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration"
-    },
-    {
       "name": "camel.cluster.consul.recursive",
       "type": "java.lang.Boolean",
       "description": "Recursively watch, default false",
@@ -382,12 +352,6 @@
       "name": "camel.cluster.consul.write-timeout",
       "type": "java.time.Duration",
       "description": "Write timeout for OkHttpClient",
-      "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration"
-    },
-    {
-      "name": "camel.cluster.consul.write-timeout-millis",
-      "type": "java.lang.Long",
-      "description": "Use writeTimeout instead.",
       "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration"
     },
     {
@@ -578,30 +542,6 @@
       "type": "java.lang.String",
       "description": "Use datacenter instead",
       "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
-      "deprecated": true,
-      "deprecation": {}
-    },
-    {
-      "name": "camel.component.consul.connect-timeout-millis",
-      "type": "java.lang.Long",
-      "description": "Connect timeout for OkHttpClient. Deprecation note: Use connectTimeout instead",
-      "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration",
-      "deprecated": true,
-      "deprecation": {}
-    },
-    {
-      "name": "camel.component.consul.read-timeout-millis",
-      "type": "java.lang.Long",
-      "description": "Read timeout for OkHttpClient. Deprecation note: Use readTimeout instead",
-      "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration",
-      "deprecated": true,
-      "deprecation": {}
-    },
-    {
-      "name": "camel.component.consul.write-timeout-millis",
-      "type": "java.lang.Long",
-      "description": "Write timeout for OkHttpClient. Deprecation note: Use writeTimeout instead. The option is a java.lang.Long type.",
-      "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration",
       "deprecated": true,
       "deprecation": {}
     }
