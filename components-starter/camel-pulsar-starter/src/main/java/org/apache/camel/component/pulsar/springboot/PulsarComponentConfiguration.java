@@ -29,6 +29,7 @@ import org.apache.pulsar.client.api.CompressionType;
 import org.apache.pulsar.client.api.MessageRouter;
 import org.apache.pulsar.client.api.MessageRoutingMode;
 import org.apache.pulsar.client.api.PulsarClient;
+import org.apache.pulsar.client.api.RedeliveryBackoff;
 import org.apache.pulsar.client.api.RegexSubscriptionMode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -77,6 +78,11 @@ public class PulsarComponentConfiguration
      */
     private Long ackTimeoutMillis = 10000L;
     /**
+     * RedeliveryBackoff to use for ack timeout redelivery backoff. The option
+     * is a org.apache.pulsar.client.api.RedeliveryBackoff type.
+     */
+    private RedeliveryBackoff ackTimeoutRedeliveryBackoff;
+    /**
      * Whether to allow manual message acknowledgements. If this option is
      * enabled, then messages are not acknowledged automatically after
      * successful route completion. Instead, an instance of PulsarMessageReceipt
@@ -124,6 +130,11 @@ public class PulsarComponentConfiguration
      * using a separate thread pool
      */
     private Boolean messageListener = true;
+    /**
+     * RedeliveryBackoff to use for negative ack redelivery backoff. The option
+     * is a org.apache.pulsar.client.api.RedeliveryBackoff type.
+     */
+    private RedeliveryBackoff negativeAckRedeliveryBackoff;
     /**
      * Set the negative acknowledgement delay
      */
@@ -313,6 +324,15 @@ public class PulsarComponentConfiguration
         this.ackTimeoutMillis = ackTimeoutMillis;
     }
 
+    public RedeliveryBackoff getAckTimeoutRedeliveryBackoff() {
+        return ackTimeoutRedeliveryBackoff;
+    }
+
+    public void setAckTimeoutRedeliveryBackoff(
+            RedeliveryBackoff ackTimeoutRedeliveryBackoff) {
+        this.ackTimeoutRedeliveryBackoff = ackTimeoutRedeliveryBackoff;
+    }
+
     public Boolean getAllowManualAcknowledgement() {
         return allowManualAcknowledgement;
     }
@@ -375,6 +395,15 @@ public class PulsarComponentConfiguration
 
     public void setMessageListener(Boolean messageListener) {
         this.messageListener = messageListener;
+    }
+
+    public RedeliveryBackoff getNegativeAckRedeliveryBackoff() {
+        return negativeAckRedeliveryBackoff;
+    }
+
+    public void setNegativeAckRedeliveryBackoff(
+            RedeliveryBackoff negativeAckRedeliveryBackoff) {
+        this.negativeAckRedeliveryBackoff = negativeAckRedeliveryBackoff;
     }
 
     public Long getNegativeAckRedeliveryDelayMicros() {

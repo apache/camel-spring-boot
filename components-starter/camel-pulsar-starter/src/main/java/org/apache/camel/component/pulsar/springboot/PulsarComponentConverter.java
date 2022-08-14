@@ -42,6 +42,7 @@ public class PulsarComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.pulsar.PulsarConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.RedeliveryBackoff.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.pulsar.PulsarMessageReceiptFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.BatcherBuilder.class));
         answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.MessageRouter.class));
@@ -64,6 +65,7 @@ public class PulsarComponentConverter implements GenericConverter {
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.pulsar.PulsarConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.pulsar.PulsarConfiguration.class);
+            case "org.apache.pulsar.client.api.RedeliveryBackoff": return applicationContext.getBean(ref, org.apache.pulsar.client.api.RedeliveryBackoff.class);
             case "org.apache.camel.component.pulsar.PulsarMessageReceiptFactory": return applicationContext.getBean(ref, org.apache.camel.component.pulsar.PulsarMessageReceiptFactory.class);
             case "org.apache.pulsar.client.api.BatcherBuilder": return applicationContext.getBean(ref, org.apache.pulsar.client.api.BatcherBuilder.class);
             case "org.apache.pulsar.client.api.MessageRouter": return applicationContext.getBean(ref, org.apache.pulsar.client.api.MessageRouter.class);

@@ -28,6 +28,12 @@
       "defaultValue": 10000
     },
     {
+      "name": "camel.component.pulsar.ack-timeout-redelivery-backoff",
+      "type": "org.apache.pulsar.client.api.RedeliveryBackoff",
+      "description": "RedeliveryBackoff to use for ack timeout redelivery backoff. The option is a org.apache.pulsar.client.api.RedeliveryBackoff type.",
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
+    },
+    {
       "name": "camel.component.pulsar.allow-manual-acknowledgement",
       "type": "java.lang.Boolean",
       "description": "Whether to allow manual message acknowledgements. If this option is enabled, then messages are not acknowledged automatically after successful route completion. Instead, an instance of PulsarMessageReceipt is stored as a header on the org.apache.camel.Exchange. Messages can then be acknowledged using PulsarMessageReceipt at any time before the ackTimeout occurs.",
@@ -201,6 +207,12 @@
       "name": "camel.component.pulsar.message-routing-mode",
       "type": "org.apache.pulsar.client.api.MessageRoutingMode",
       "description": "Message Routing Mode to use",
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pulsar.negative-ack-redelivery-backoff",
+      "type": "org.apache.pulsar.client.api.RedeliveryBackoff",
+      "description": "RedeliveryBackoff to use for negative ack redelivery backoff. The option is a org.apache.pulsar.client.api.RedeliveryBackoff type.",
       "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
     },
     {
