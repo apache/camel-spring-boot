@@ -10,6 +10,30 @@
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration",
       "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.infinispan-embedded.default-value",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration",
+      "sourceMethod": "getDefaultValue()"
+    },
+    {
+      "name": "camel.component.infinispan-embedded.key",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration",
+      "sourceMethod": "getKey()"
+    },
+    {
+      "name": "camel.component.infinispan-embedded.old-value",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration",
+      "sourceMethod": "getOldValue()"
+    },
+    {
+      "name": "camel.component.infinispan-embedded.value",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration",
+      "sourceMethod": "getValue()"
     }
   ],
   "properties": [
@@ -70,12 +94,6 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
-      "name": "camel.component.infinispan-embedded.default-value",
-      "type": "java.lang.Object",
-      "description": "Set a specific default value for some producer operations. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration"
-    },
-    {
       "name": "camel.component.infinispan-embedded.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the infinispan-embedded component. This is enabled by default.",
@@ -94,23 +112,11 @@
       "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration"
     },
     {
-      "name": "camel.component.infinispan-embedded.key",
-      "type": "java.lang.Object",
-      "description": "Set a specific key for producer operations. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration"
-    },
-    {
       "name": "camel.component.infinispan-embedded.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration",
       "defaultValue": false
-    },
-    {
-      "name": "camel.component.infinispan-embedded.old-value",
-      "type": "java.lang.Object",
-      "description": "Set a specific old value for some producer operations. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration"
     },
     {
       "name": "camel.component.infinispan-embedded.operation",
@@ -142,12 +148,6 @@
       "description": "If true, the consumer will receive notifications synchronously",
       "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration",
       "defaultValue": true
-    },
-    {
-      "name": "camel.component.infinispan-embedded.value",
-      "type": "java.lang.Object",
-      "description": "Set a specific value for producer operations. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration"
     }
   ],
   "hints": []

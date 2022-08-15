@@ -17,6 +17,12 @@
       "sourceMethod": "getCustomizer()"
     },
     {
+      "name": "camel.component.atomix-map.key",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration",
+      "sourceMethod": "getKey()"
+    },
+    {
       "name": "camel.component.atomix-messaging",
       "type": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration",
       "sourceType": "org.apache.camel.component.atomix.client.messaging.springboot.AtomixMessagingComponentConfiguration"
@@ -37,6 +43,12 @@
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration",
       "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.atomix-multimap.key",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration",
+      "sourceMethod": "getKey()"
     },
     {
       "name": "camel.component.atomix-queue",
@@ -207,12 +219,6 @@
       "description": "Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored.",
       "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration",
       "defaultValue": false
-    },
-    {
-      "name": "camel.component.atomix-map.key",
-      "type": "java.lang.Object",
-      "description": "The key to use if none is set in the header or to listen for events for a specific key. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.atomix.client.map.springboot.AtomixMapComponentConfiguration"
     },
     {
       "name": "camel.component.atomix-map.lazy-start-producer",
@@ -454,12 +460,6 @@
       "description": "Sets if the local member should join groups as PersistentMember or not. If set to ephemeral the local member will receive an auto generated ID thus the local one is ignored.",
       "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration",
       "defaultValue": false
-    },
-    {
-      "name": "camel.component.atomix-multimap.key",
-      "type": "java.lang.Object",
-      "description": "The key to use if none is set in the header or to listen for events for a specific key. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.atomix.client.multimap.springboot.AtomixMultiMapComponentConfiguration"
     },
     {
       "name": "camel.component.atomix-multimap.lazy-start-producer",

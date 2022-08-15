@@ -12,6 +12,12 @@
       "sourceMethod": "getCustomizer()"
     },
     {
+      "name": "camel.component.caffeine-cache.key",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConfiguration",
+      "sourceMethod": "getKey()"
+    },
+    {
       "name": "camel.component.caffeine-loadcache",
       "type": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration",
       "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration"
@@ -21,6 +27,12 @@
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration",
       "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.caffeine-loadcache.key",
+      "type": "java.lang.Object",
+      "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration",
+      "sourceMethod": "getKey()"
     }
   ],
   "properties": [
@@ -93,12 +105,6 @@
       "description": "Set the initial Capacity for the cache",
       "sourceType": "org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConfiguration",
       "defaultValue": 10000
-    },
-    {
-      "name": "camel.component.caffeine-cache.key",
-      "type": "java.lang.Object",
-      "description": "To configure the default action key. If a key is set in the message header, then the key from the header takes precedence. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConfiguration"
     },
     {
       "name": "camel.component.caffeine-cache.key-type",
@@ -214,12 +220,6 @@
       "description": "Set the initial Capacity for the cache",
       "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration",
       "defaultValue": 10000
-    },
-    {
-      "name": "camel.component.caffeine-loadcache.key",
-      "type": "java.lang.Object",
-      "description": "To configure the default action key. If a key is set in the message header, then the key from the header takes precedence. The option is a java.lang.Object type.",
-      "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration"
     },
     {
       "name": "camel.component.caffeine-loadcache.key-type",
