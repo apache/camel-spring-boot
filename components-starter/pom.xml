@@ -313,6 +313,7 @@
     <module>camel-lzf-starter</module>
     <module>camel-mail-starter</module>
     <module>camel-management-starter</module>
+    <module>camel-mapstruct-starter</module>
     <module>camel-master-starter</module>
     <module>camel-metrics-starter</module>
     <module>camel-micrometer-starter</module>
