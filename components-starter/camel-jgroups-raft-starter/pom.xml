@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>components-starter</artifactId>
-    <version>3.14.5-SNAPSHOT</version>
+    <version>3.14.6-SNAPSHOT</version>
   </parent>
   <artifactId>camel-jgroups-raft-starter</artifactId>
   <packaging>jar</packaging>
