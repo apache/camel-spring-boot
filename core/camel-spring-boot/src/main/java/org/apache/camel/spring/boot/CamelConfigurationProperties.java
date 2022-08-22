@@ -361,6 +361,14 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean streamCachingStatisticsEnabled;
 
     /**
+     * Sets whether type converter statistics is enabled.
+     *
+     * By default the type converter utilization statistics is disabled.
+     * Notice: If enabled then there is a slight performance impact under very heavy load.
+     */
+    private boolean typeConverterStatisticsEnabled;
+
+    /**
      * Sets whether debugging is enabled or not.
      *
      * Default is false.

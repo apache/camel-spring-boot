@@ -1133,6 +1133,13 @@
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
     },
     {
+      "name": "camel.springboot.type-converter-statistics-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether type converter statistics is enabled. By default the type converter utilization statistics is disabled. Notice: If enabled then there is a slight performance impact under very heavy load.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.springboot.use-breadcrumb",
       "type": "java.lang.Boolean",
       "description": "Set whether breadcrumb is enabled. The default value is false.",
