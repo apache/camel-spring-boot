@@ -1,0 +1,19 @@
+{
+  "groups": [
+    {
+      "name": "camel.cli",
+      "type": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.cli.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether CLI connector is enabled.",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}
