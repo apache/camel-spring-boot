@@ -165,7 +165,7 @@ public class FhirComponentConfiguration
      */
     private String accessToken;
     /**
-     * Username to use for basic authentication
+     * Password to use for basic authentication
      */
     private String password;
     /**
