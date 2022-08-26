@@ -16,6 +16,7 @@
  */
 package org.apache.camel.springboot.cli.connector;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.cli.connector.DefaultCliConnectorFactory;
 import org.apache.camel.spi.CliConnectorFactory;
 import org.springframework.boot.SpringBootVersion;
@@ -27,6 +28,11 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Enumeration;
+import java.util.jar.Manifest;
+
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(name = "camel.cli.enabled", matchIfMissing = true)
 @ConditionalOnBean(type = "org.apache.camel.spring.boot.CamelAutoConfiguration")
@@ -36,11 +42,30 @@ public class CliConnectorAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(CliConnectorFactory.class)
-    public CliConnectorFactory cliConnectorFactory(CliConnectorConfiguration config) {
+    public CliConnectorFactory cliConnectorFactory(CamelContext camelContext, CliConnectorConfiguration config) {
         CliConnectorFactory answer = new DefaultCliConnectorFactory();
         answer.setEnabled(config.getEnabled());
         answer.setRuntime("Spring Boot");
         answer.setRuntimeVersion(SpringBootVersion.getVersion());
+
+        // if packaged as fat-jar then we need to know what was the main class that started this integration
+        try {
+            Enumeration<URL> en = this.getClass().getClassLoader().getResources("META-INF/MANIFEST.MF");
+            while (en.hasMoreElements()) {
+                URL u = en.nextElement();
+                try (InputStream is = u.openStream()) {
+                    Manifest manifest = new Manifest(is);
+                    String sc = manifest.getMainAttributes().getValue("Start-Class");
+                    if (sc != null) {
+                        answer.setRuntimeStartClass(sc);
+                        break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // ignore
+        }
+
         return answer;
     }
 
