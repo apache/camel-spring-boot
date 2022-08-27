@@ -23,8 +23,7 @@ import java.util.jar.Manifest;
 
 import org.apache.camel.spi.CliConnectorFactory;
 import org.springframework.boot.SpringBootVersion;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -34,8 +33,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(name = "camel.cli.enabled", matchIfMissing = true)
-@ConditionalOnBean(type = "org.apache.camel.spring.boot.CamelAutoConfiguration")
-@AutoConfigureAfter(name = "org.apache.camel.spring.boot.CamelAutoConfiguration")
+@AutoConfigureBefore(name = "org.apache.camel.spring.boot.CamelAutoConfiguration") // configure early to have Camel CLI during startup
 @EnableConfigurationProperties({CliConnectorConfiguration.class})
 public class CliConnectorAutoConfiguration {
 

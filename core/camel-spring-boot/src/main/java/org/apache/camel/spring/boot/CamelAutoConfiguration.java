@@ -26,20 +26,25 @@ import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.FluentProducerTemplate;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.component.properties.PropertiesParser;
 import org.apache.camel.main.DefaultConfigurationConfigurer;
 import org.apache.camel.main.RoutesCollector;
 import org.apache.camel.model.Model;
 import org.apache.camel.spi.BeanRepository;
+import org.apache.camel.spi.CliConnector;
+import org.apache.camel.spi.CliConnectorFactory;
 import org.apache.camel.spi.StartupStepRecorder;
 import org.apache.camel.spring.spi.ApplicationContextBeanRepository;
 import org.apache.camel.spring.spi.CamelBeanPostProcessor;
 import org.apache.camel.support.DefaultRegistry;
+import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.support.startup.LoggingStartupStepRecorder;
 import org.apache.camel.util.ObjectHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
@@ -126,6 +131,9 @@ public class CamelAutoConfiguration {
             }
         }
 
+        // setup cli connector eager
+        configureCliConnector(applicationContext, camelContext);
+
         camelContext.adapt(ExtendedCamelContext.class).setPackageScanClassResolver(new FatJarPackageScanClassResolver());
         camelContext.adapt(ExtendedCamelContext.class).setPackageScanResourceResolver(new FatJarPackageScanResourceResolver());
 
@@ -142,6 +150,24 @@ public class CamelAutoConfiguration {
         DefaultConfigurationConfigurer.afterPropertiesSet(camelContext);
 
         return camelContext;
+    }
+
+    static void configureCliConnector(ApplicationContext applicationContext,
+                                      CamelContext camelContext) {
+
+        // factory is bound eager into spring bean registry
+        try {
+            CliConnectorFactory ccf = applicationContext.getBean(CliConnectorFactory.class);
+            CliConnector connector = ccf.createConnector();
+            camelContext.addService(connector, true);
+            // force start cli connector early as otherwise it will be deferred until context is started
+            // but, we want status available during startup phase
+            ServiceHelper.startService(connector);
+        } catch (BeansException e) {
+            // optional so ignore
+        } catch (Exception e) {
+            throw RuntimeCamelException.wrapRuntimeException(e);
+        }
     }
 
     static void configureStartupRecorder(CamelContext camelContext, CamelConfigurationProperties config) {
