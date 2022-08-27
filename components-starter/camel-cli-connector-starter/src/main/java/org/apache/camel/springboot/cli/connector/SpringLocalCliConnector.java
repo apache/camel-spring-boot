@@ -17,13 +17,15 @@
 package org.apache.camel.springboot.cli.connector;
 
 import org.apache.camel.cli.connector.LocalCliConnector;
+import org.apache.camel.spi.CliConnectorFactory;
 import org.springframework.context.support.AbstractApplicationContext;
 
 public class SpringLocalCliConnector extends LocalCliConnector {
 
     private final AbstractApplicationContext applicationContext;
 
-    public SpringLocalCliConnector(AbstractApplicationContext applicationContext) {
+    public SpringLocalCliConnector(CliConnectorFactory cliConnectorFactory, AbstractApplicationContext applicationContext) {
+        super(cliConnectorFactory);
         this.applicationContext = applicationContext;
     }
 

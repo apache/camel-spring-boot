@@ -31,7 +31,7 @@ public class SpringCliConnectorFactory extends DefaultCliConnectorFactory {
     @Override
     public CliConnector createConnector() {
         if (isEnabled()) {
-            return new SpringLocalCliConnector(applicationContext);
+            return new SpringLocalCliConnector(this, applicationContext);
         } else {
             return null;
         }
