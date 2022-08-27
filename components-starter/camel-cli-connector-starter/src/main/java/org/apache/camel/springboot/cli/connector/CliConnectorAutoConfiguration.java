@@ -16,8 +16,11 @@
  */
 package org.apache.camel.springboot.cli.connector;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.cli.connector.DefaultCliConnectorFactory;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Enumeration;
+import java.util.jar.Manifest;
+
 import org.apache.camel.spi.CliConnectorFactory;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -27,11 +30,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Enumeration;
-import java.util.jar.Manifest;
+import org.springframework.context.support.AbstractApplicationContext;
 
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(name = "camel.cli.enabled", matchIfMissing = true)
@@ -42,8 +41,10 @@ public class CliConnectorAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(CliConnectorFactory.class)
-    public CliConnectorFactory cliConnectorFactory(CamelContext camelContext, CliConnectorConfiguration config) {
-        CliConnectorFactory answer = new DefaultCliConnectorFactory();
+    public CliConnectorFactory cliConnectorFactory(AbstractApplicationContext applicationContext,
+                                                   CliConnectorConfiguration config) {
+
+        CliConnectorFactory answer = new SpringCliConnectorFactory(applicationContext);
         answer.setEnabled(config.getEnabled());
         answer.setRuntime("Spring Boot");
         answer.setRuntimeVersion(SpringBootVersion.getVersion());
