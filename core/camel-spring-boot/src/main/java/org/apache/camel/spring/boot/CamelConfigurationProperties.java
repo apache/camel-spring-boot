@@ -63,6 +63,11 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private String name;
 
     /**
+     * Sets the description (intended for humans) of the Camel application.
+     */
+    private String description;
+
+    /**
      * Controls the level of information logged during startup (and shutdown) of CamelContext.
      */
     private StartupSummaryLevel startupSummaryLevel = StartupSummaryLevel.Default;

@@ -555,6 +555,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.springboot.description",
+      "type": "java.lang.String",
+      "description": "Sets the description (intended for humans) of the Camel application.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+    },
+    {
       "name": "camel.springboot.dev-console-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable developer console (requires camel-console on classpath). The developer console is only for assisting during development. This is NOT for production usage.",
