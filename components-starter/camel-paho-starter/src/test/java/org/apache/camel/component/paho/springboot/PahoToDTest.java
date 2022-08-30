@@ -26,6 +26,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.component.paho.PahoComponent;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
@@ -54,7 +55,7 @@ public class PahoToDTest {
     static int mqttPort = AvailablePortFinder.getNextAvailable();
 
     @RegisterExtension
-    public static ActiveMQEmbeddedService service = ActiveMQEmbeddedServiceBuilder
+    public ActiveMQEmbeddedService service = ActiveMQEmbeddedServiceBuilder
             .bare()
             .withPersistent(false)
             .withMqttTransport(mqttPort)
@@ -84,6 +85,11 @@ public class PahoToDTest {
 
         mockBar.assertIsSatisfied();
         mockBeer.assertIsSatisfied();
+    }
+
+    @AfterAll
+    public void cleanUp() {
+        service.shutdown();
     }
     
     // *************************************

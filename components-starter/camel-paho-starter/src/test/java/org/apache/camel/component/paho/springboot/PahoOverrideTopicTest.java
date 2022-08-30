@@ -27,6 +27,7 @@ import org.apache.camel.component.paho.PahoComponent;
 import org.apache.camel.component.paho.PahoConstants;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
@@ -55,7 +56,7 @@ public class PahoOverrideTopicTest {
     static int mqttPort = AvailablePortFinder.getNextAvailable();
 
     @RegisterExtension
-    public static ActiveMQEmbeddedService service = ActiveMQEmbeddedServiceBuilder
+    public ActiveMQEmbeddedService service = ActiveMQEmbeddedServiceBuilder
             .bare()
             .withPersistent(false)
             .withMqttTransport(mqttPort)
@@ -82,6 +83,11 @@ public class PahoOverrideTopicTest {
 
         // Then
         mock.assertIsSatisfied();
+    }
+
+    @AfterAll
+    public void cleanUp() {
+        service.shutdown();
     }
     
     // *************************************
