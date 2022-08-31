@@ -31,7 +31,7 @@
 
     <artifactId>camel-yaml-dsl-starter</artifactId>
     <packaging>jar</packaging>
-    <name>Camel SB DSL Starters :: YAML Starter</name>
+    <name>Camel SB DSL Starters :: YAML DSL</name>
     <description>Spring-Boot Starter for Camel DSL :: YAML</description>
 
     <dependencies>

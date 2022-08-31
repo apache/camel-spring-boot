@@ -31,7 +31,7 @@
 
     <artifactId>camel-dsl-modeline-starter</artifactId>
     <packaging>jar</packaging>
-    <name>Camel SB DSL Starters :: DSL Modeline Starter</name>
+    <name>Camel SB DSL Starters :: DSL Modeline</name>
     <description>Spring-Boot Starter for Camel DSL :: DSL Modeline</description>
 
     <dependencies>

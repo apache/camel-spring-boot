@@ -31,7 +31,7 @@
 
     <artifactId>camel-jsh-dsl-starter</artifactId>
     <packaging>jar</packaging>
-    <name>Camel SB DSL Starters :: JavaShell Starter</name>
+    <name>Camel SB DSL Starters :: JavaShell DSL</name>
     <description>Spring-Boot Starter for Camel DSL :: JavaShell</description>
 
     <dependencies>

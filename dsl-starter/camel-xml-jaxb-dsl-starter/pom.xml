@@ -31,8 +31,8 @@
 
     <artifactId>camel-xml-jaxb-dsl-starter</artifactId>
     <packaging>jar</packaging>
-    <name>Camel SB DSL Starters :: XML Jaxb Starter</name>
-    <description>Spring-Boot Starter for Camel DSL :: XML Jaxb</description>
+    <name>Camel SB DSL Starters :: XML JAXB DSL</name>
+    <description>Spring-Boot Starter for Camel DSL :: XML JAXB</description>
 
     <dependencies>
         <dependency>

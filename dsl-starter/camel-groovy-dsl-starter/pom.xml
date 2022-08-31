@@ -31,7 +31,7 @@
 
     <artifactId>camel-groovy-dsl-starter</artifactId>
     <packaging>jar</packaging>
-    <name>Camel SB DSL Starters :: Groovy Starter</name>
+    <name>Camel SB DSL Starters :: Groovy DSL</name>
     <description>Spring-Boot Starter for Camel DSL :: Groovy</description>
 
     <dependencies>
