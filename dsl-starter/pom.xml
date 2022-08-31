@@ -35,6 +35,7 @@
     <description>Camel DSL Starter</description>
 
     <modules>
+        <module>camel-cli-connector-starter</module>
         <module>camel-componentdsl-starter</module>
         <module>camel-dsl-modeline-starter</module>
         <module>camel-endpointdsl-starter</module>
