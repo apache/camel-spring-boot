@@ -548,6 +548,13 @@
       "defaultValue": 1000
     },
     {
+      "name": "camel.springboot.context-reload-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling context reloading. If enabled then Camel allow external systems such as security vaults (AWS secrets manager, etc.) to trigger refreshing Camel by updating property placeholders and reload all existing routes to take changes into effect.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.springboot.debugging",
       "type": "java.lang.Boolean",
       "description": "Sets whether debugging is enabled or not. Default is false.",

@@ -654,6 +654,13 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean beanIntrospectionExtendedStatistics;
 
     /**
+     * Used for enabling context reloading. If enabled then Camel allow external systems such as
+     * security vaults (AWS secrets manager, etc.) to trigger refreshing Camel by updating
+     * property placeholders and reload all existing routes to take changes into effect.
+     */
+    private boolean contextReloadEnabled;
+
+    /**
      * Sets the logging level used by bean introspection, logging activity of its usage.
      * The default is TRACE.
      */
