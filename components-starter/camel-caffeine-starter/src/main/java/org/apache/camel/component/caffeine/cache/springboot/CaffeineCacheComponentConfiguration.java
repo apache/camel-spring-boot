@@ -48,13 +48,8 @@ public class CaffeineCacheComponentConfiguration
      */
     private String action;
     /**
-     * To configure a CacheLoader in case of a LoadCache use. The option is a
-     * com.github.benmanes.caffeine.cache.CacheLoader type.
-     */
-    private CacheLoader cacheLoader;
-    /**
-     * Configure if a cache need to be created if it does exist or can't be
-     * pre-configured.
+     * Automatic create the Caffeine cache if none has been configured or exists
+     * in the registry.
      */
     private Boolean createCacheIfNotExist = true;
     /**
@@ -62,19 +57,25 @@ public class CaffeineCacheComponentConfiguration
      */
     private EvictionType evictionType = EvictionType.SIZE_BASED;
     /**
-     * Set the expire After Access Time in case of time based Eviction (in
-     * seconds)
+     * Specifies that each entry should be automatically removed from the cache
+     * once a fixed duration has elapsed after the entry's creation, the most
+     * recent replacement of its value, or its last read. Access time is reset
+     * by all cache read and write operations. The unit is in seconds.
      */
     private Integer expireAfterAccessTime = 300;
     /**
-     * Set the expire After Access Write in case of time based Eviction (in
-     * seconds)
+     * Specifies that each entry should be automatically removed from the cache
+     * once a fixed duration has elapsed after the entry's creation, or the most
+     * recent replacement of its value. The unit is in seconds.
      */
     private Integer expireAfterWriteTime = 300;
     /**
-     * Set the initial Capacity for the cache
+     * Sets the minimum total size for the internal data structures. Providing a
+     * large enough estimate at construction time avoids the need for expensive
+     * resizing operations later, but setting this value unnecessarily high
+     * wastes memory.
      */
-    private Integer initialCapacity = 10000;
+    private Integer initialCapacity;
     /**
      * To configure the default action key. If a key is set in the message
      * header, then the key from the header takes precedence. The option is a
@@ -93,9 +94,42 @@ public class CaffeineCacheComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Set the maximum size for the cache
+     * Specifies the maximum number of entries the cache may contain. Note that
+     * the cache may evict an entry before this limit is exceeded or temporarily
+     * exceed the threshold while evicting. As the cache size grows close to the
+     * maximum, the cache evicts entries that are less likely to be used again.
+     * For example, the cache may evict an entry because it hasn't been used
+     * recently or very often. When size is zero, elements will be evicted
+     * immediately after being loaded into the cache. This can be useful in
+     * testing, or to disable caching temporarily without a code change. As
+     * eviction is scheduled on the configured executor, tests may instead
+     * prefer to configure the cache to execute tasks directly on the same
+     * thread.
      */
-    private Integer maximumSize = 10000;
+    private Integer maximumSize;
+    /**
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
+     */
+    private Boolean autowiredEnabled = true;
+    /**
+     * To configure a CacheLoader in case of a LoadCache use. The option is a
+     * com.github.benmanes.caffeine.cache.CacheLoader type.
+     */
+    private CacheLoader cacheLoader;
+    /**
+     * Sets the global component configuration. The option is a
+     * org.apache.camel.component.caffeine.CaffeineConfiguration type.
+     */
+    private CaffeineConfiguration configuration;
+    /**
+     * The cache key type, default java.lang.Object
+     */
+    private String keyType;
     /**
      * Set a specific removal Listener for the cache. The option is a
      * com.github.benmanes.caffeine.cache.RemovalListener type.
@@ -111,24 +145,6 @@ public class CaffeineCacheComponentConfiguration
      */
     private Boolean statsEnabled = false;
     /**
-     * Whether autowiring is enabled. This is used for automatic autowiring
-     * options (the option must be marked as autowired) by looking up in the
-     * registry to find if there is a single instance of matching type, which
-     * then gets configured on the component. This can be used for automatic
-     * configuring JDBC data sources, JMS connection factories, AWS Clients,
-     * etc.
-     */
-    private Boolean autowiredEnabled = true;
-    /**
-     * Sets the global component configuration. The option is a
-     * org.apache.camel.component.caffeine.CaffeineConfiguration type.
-     */
-    private CaffeineConfiguration configuration;
-    /**
-     * The cache key type, default java.lang.Object
-     */
-    private String keyType;
-    /**
      * The cache value type, default java.lang.Object
      */
     private String valueType;
@@ -139,14 +155,6 @@ public class CaffeineCacheComponentConfiguration
 
     public void setAction(String action) {
         this.action = action;
-    }
-
-    public CacheLoader getCacheLoader() {
-        return cacheLoader;
-    }
-
-    public void setCacheLoader(CacheLoader cacheLoader) {
-        this.cacheLoader = cacheLoader;
     }
 
     public Boolean getCreateCacheIfNotExist() {
@@ -213,6 +221,38 @@ public class CaffeineCacheComponentConfiguration
         this.maximumSize = maximumSize;
     }
 
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public CacheLoader getCacheLoader() {
+        return cacheLoader;
+    }
+
+    public void setCacheLoader(CacheLoader cacheLoader) {
+        this.cacheLoader = cacheLoader;
+    }
+
+    public CaffeineConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(CaffeineConfiguration configuration) {
+        this.configuration = configuration;
+    }
+
+    public String getKeyType() {
+        return keyType;
+    }
+
+    public void setKeyType(String keyType) {
+        this.keyType = keyType;
+    }
+
     public RemovalListener getRemovalListener() {
         return removalListener;
     }
@@ -235,30 +275,6 @@ public class CaffeineCacheComponentConfiguration
 
     public void setStatsEnabled(Boolean statsEnabled) {
         this.statsEnabled = statsEnabled;
-    }
-
-    public Boolean getAutowiredEnabled() {
-        return autowiredEnabled;
-    }
-
-    public void setAutowiredEnabled(Boolean autowiredEnabled) {
-        this.autowiredEnabled = autowiredEnabled;
-    }
-
-    public CaffeineConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(CaffeineConfiguration configuration) {
-        this.configuration = configuration;
-    }
-
-    public String getKeyType() {
-        return keyType;
-    }
-
-    public void setKeyType(String keyType) {
-        this.keyType = keyType;
     }
 
     public String getValueType() {

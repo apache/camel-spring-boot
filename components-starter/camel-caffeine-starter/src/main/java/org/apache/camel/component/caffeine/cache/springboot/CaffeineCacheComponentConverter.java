@@ -42,9 +42,9 @@ public class CaffeineCacheComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, com.github.benmanes.caffeine.cache.CacheLoader.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.caffeine.CaffeineConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.github.benmanes.caffeine.cache.RemovalListener.class));
         answer.add(new ConvertiblePair(String.class, com.github.benmanes.caffeine.cache.stats.StatsCounter.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.caffeine.CaffeineConfiguration.class));
         return answer;
     }
 
@@ -62,9 +62,9 @@ public class CaffeineCacheComponentConverter implements GenericConverter {
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "com.github.benmanes.caffeine.cache.CacheLoader": return applicationContext.getBean(ref, com.github.benmanes.caffeine.cache.CacheLoader.class);
+            case "org.apache.camel.component.caffeine.CaffeineConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.caffeine.CaffeineConfiguration.class);
             case "com.github.benmanes.caffeine.cache.RemovalListener": return applicationContext.getBean(ref, com.github.benmanes.caffeine.cache.RemovalListener.class);
             case "com.github.benmanes.caffeine.cache.stats.StatsCounter": return applicationContext.getBean(ref, com.github.benmanes.caffeine.cache.stats.StatsCounter.class);
-            case "org.apache.camel.component.caffeine.CaffeineConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.caffeine.CaffeineConfiguration.class);
         }
         return null;
     }
