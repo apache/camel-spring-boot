@@ -148,7 +148,7 @@
     {
       "name": "camel.component.fhir.password",
       "type": "java.lang.String",
-      "description": "Username to use for basic authentication",
+      "description": "Password to use for basic authentication",
       "sourceType": "org.apache.camel.component.fhir.springboot.FhirComponentConfiguration"
     },
     {

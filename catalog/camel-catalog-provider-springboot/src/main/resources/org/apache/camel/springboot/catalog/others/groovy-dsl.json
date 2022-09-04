@@ -10,6 +10,6 @@
     "supportLevel": "Experimental",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-groovy-dsl-starter",
-    "version": "3.18.1-SNAPSHOT"
+    "version": "3.18.2-SNAPSHOT"
   }
 }

@@ -64,7 +64,7 @@
     {
       "name": "camel.component.caffeine-cache.create-cache-if-not-exist",
       "type": "java.lang.Boolean",
-      "description": "Configure if a cache need to be created if it does exist or can't be pre-configured.",
+      "description": "Automatic create the Caffeine cache if none has been configured or exists in the registry.",
       "sourceType": "org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConfiguration",
       "defaultValue": true
     },
@@ -88,23 +88,22 @@
     {
       "name": "camel.component.caffeine-cache.expire-after-access-time",
       "type": "java.lang.Integer",
-      "description": "Set the expire After Access Time in case of time based Eviction (in seconds)",
+      "description": "Specifies that each entry should be automatically removed from the cache once a fixed duration has elapsed after the entry's creation, the most recent replacement of its value, or its last read. Access time is reset by all cache read and write operations. The unit is in seconds.",
       "sourceType": "org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConfiguration",
       "defaultValue": 300
     },
     {
       "name": "camel.component.caffeine-cache.expire-after-write-time",
       "type": "java.lang.Integer",
-      "description": "Set the expire After Access Write in case of time based Eviction (in seconds)",
+      "description": "Specifies that each entry should be automatically removed from the cache once a fixed duration has elapsed after the entry's creation, or the most recent replacement of its value. The unit is in seconds.",
       "sourceType": "org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConfiguration",
       "defaultValue": 300
     },
     {
       "name": "camel.component.caffeine-cache.initial-capacity",
       "type": "java.lang.Integer",
-      "description": "Set the initial Capacity for the cache",
-      "sourceType": "org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConfiguration",
-      "defaultValue": 10000
+      "description": "Sets the minimum total size for the internal data structures. Providing a large enough estimate at construction time avoids the need for expensive resizing operations later, but setting this value unnecessarily high wastes memory.",
+      "sourceType": "org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConfiguration"
     },
     {
       "name": "camel.component.caffeine-cache.key-type",
@@ -122,9 +121,8 @@
     {
       "name": "camel.component.caffeine-cache.maximum-size",
       "type": "java.lang.Integer",
-      "description": "Set the maximum size for the cache",
-      "sourceType": "org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConfiguration",
-      "defaultValue": 10000
+      "description": "Specifies the maximum number of entries the cache may contain. Note that the cache may evict an entry before this limit is exceeded or temporarily exceed the threshold while evicting. As the cache size grows close to the maximum, the cache evicts entries that are less likely to be used again. For example, the cache may evict an entry because it hasn't been used recently or very often. When size is zero, elements will be evicted immediately after being loaded into the cache. This can be useful in testing, or to disable caching temporarily without a code change. As eviction is scheduled on the configured executor, tests may instead prefer to configure the cache to execute tasks directly on the same thread.",
+      "sourceType": "org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConfiguration"
     },
     {
       "name": "camel.component.caffeine-cache.removal-listener",
@@ -179,7 +177,7 @@
     {
       "name": "camel.component.caffeine-loadcache.create-cache-if-not-exist",
       "type": "java.lang.Boolean",
-      "description": "Configure if a cache need to be created if it does exist or can't be pre-configured.",
+      "description": "Automatic create the Caffeine cache if none has been configured or exists in the registry.",
       "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration",
       "defaultValue": true
     },
@@ -203,23 +201,22 @@
     {
       "name": "camel.component.caffeine-loadcache.expire-after-access-time",
       "type": "java.lang.Integer",
-      "description": "Set the expire After Access Time in case of time based Eviction (in seconds)",
+      "description": "Specifies that each entry should be automatically removed from the cache once a fixed duration has elapsed after the entry's creation, the most recent replacement of its value, or its last read. Access time is reset by all cache read and write operations. The unit is in seconds.",
       "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration",
       "defaultValue": 300
     },
     {
       "name": "camel.component.caffeine-loadcache.expire-after-write-time",
       "type": "java.lang.Integer",
-      "description": "Set the expire After Access Write in case of time based Eviction (in seconds)",
+      "description": "Specifies that each entry should be automatically removed from the cache once a fixed duration has elapsed after the entry's creation, or the most recent replacement of its value. The unit is in seconds.",
       "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration",
       "defaultValue": 300
     },
     {
       "name": "camel.component.caffeine-loadcache.initial-capacity",
       "type": "java.lang.Integer",
-      "description": "Set the initial Capacity for the cache",
-      "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration",
-      "defaultValue": 10000
+      "description": "Sets the minimum total size for the internal data structures. Providing a large enough estimate at construction time avoids the need for expensive resizing operations later, but setting this value unnecessarily high wastes memory.",
+      "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration"
     },
     {
       "name": "camel.component.caffeine-loadcache.key-type",
@@ -237,9 +234,8 @@
     {
       "name": "camel.component.caffeine-loadcache.maximum-size",
       "type": "java.lang.Integer",
-      "description": "Set the maximum size for the cache",
-      "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration",
-      "defaultValue": 10000
+      "description": "Specifies the maximum number of entries the cache may contain. Note that the cache may evict an entry before this limit is exceeded or temporarily exceed the threshold while evicting. As the cache size grows close to the maximum, the cache evicts entries that are less likely to be used again. For example, the cache may evict an entry because it hasn't been used recently or very often. When size is zero, elements will be evicted immediately after being loaded into the cache. This can be useful in testing, or to disable caching temporarily without a code change. As eviction is scheduled on the configured executor, tests may instead prefer to configure the cache to execute tasks directly on the same thread.",
+      "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration"
     },
     {
       "name": "camel.component.caffeine-loadcache.removal-listener",
