@@ -234,6 +234,11 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
         // include dsl starters
         dep = new Dependency();
         dep.setGroupId("org.apache.camel.springboot");
+        dep.setArtifactId("camel-cli-connector-starter");
+        dep.setVersion("${project.version}");
+        outDependencies.add(dep);
+        dep = new Dependency();
+        dep.setGroupId("org.apache.camel.springboot");
         dep.setArtifactId("camel-componentdsl-starter");
         dep.setVersion("${project.version}");
         outDependencies.add(dep);
