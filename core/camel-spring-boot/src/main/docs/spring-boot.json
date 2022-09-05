@@ -610,13 +610,6 @@
       "defaultValue": 0
     },
     {
-      "name": "camel.springboot.eager-classloading",
-      "type": "java.lang.Boolean",
-      "description": "Whether to eager load a common set of Camel classes that would otherwise first be loaded on processing the first message. By eager loading these classes then the JVM has already loaded the classes during build phase, which allows Camel to process the first message faster.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
-      "defaultValue": false
-    },
-    {
       "name": "camel.springboot.endpoint-bridge-error-handler",
       "type": "java.lang.Boolean",
       "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. <p\/> By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN\/ERROR level and ignored. The default value is false.",

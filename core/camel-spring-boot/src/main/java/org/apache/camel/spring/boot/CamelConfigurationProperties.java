@@ -825,13 +825,6 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean lightweight;
 
     /**
-     * Whether to eager load a common set of Camel classes that would otherwise first be loaded on processing the first
-     * message. By eager loading these classes then the JVM has already loaded the classes during build phase, which
-     * allows Camel to process the first message faster.
-     */
-    private boolean eagerClassloading;
-
-    /**
      * Controls whether to pool (reuse) exchanges or create new exchanges (prototype). Using pooled will reduce JVM
      * garbage collection overhead by avoiding to re-create Exchange instances per message each consumer receives. The
      * default is prototype mode.
