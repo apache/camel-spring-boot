@@ -30,5 +30,6 @@ import org.springframework.context.annotation.Import;
 @Documented
 @Inherited
 @Import(ZipkinAutoConfiguration.class)
+@Deprecated
 public @interface CamelZipkin {
 }

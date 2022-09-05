@@ -22,6 +22,7 @@ import java.util.Set;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.zipkin")
+@Deprecated
 public class ZipkinConfigurationProperties {
     /**
      * Sets the POST URL for zipkin's <a href="http://zipkin.io/zipkin-api/#/">v2 api</a>, usually

@@ -28,6 +28,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(ZipkinConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.zipkin.enabled", matchIfMissing = true)
+@Deprecated
 public class ZipkinAutoConfiguration {
 
     @Bean(initMethod = "", destroyMethod = "")
