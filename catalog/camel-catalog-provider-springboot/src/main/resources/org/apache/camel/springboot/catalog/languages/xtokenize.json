@@ -10,7 +10,7 @@
     "javaType": "org.apache.camel.language.xtokenizer.XMLTokenizeLanguage",
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
-    "artifactId": "camel-xml-jaxp-starter",
+    "artifactId": "camel-stax-starter",
     "version": "3.19.0-SNAPSHOT",
     "modelName": "xtokenize",
     "modelJavaType": "org.apache.camel.model.language.XMLTokenizerExpression"

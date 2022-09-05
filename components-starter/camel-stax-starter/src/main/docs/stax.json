@@ -10,6 +10,17 @@
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.stax.springboot.StAXComponentConfiguration",
       "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.language.xtokenize",
+      "type": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration",
+      "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.xtokenize.customizer",
+      "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration",
+      "sourceMethod": "getCustomizer()"
     }
   ],
   "properties": [
@@ -37,6 +48,36 @@
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.stax.springboot.StAXComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.language.xtokenize.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.language.xtokenize.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the xtokenize language. This is enabled by default.",
+      "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.xtokenize.mode",
+      "type": "java.lang.String",
+      "description": "The extraction mode. The available extraction modes are: i - injecting the contextual namespace bindings into the extracted token (default) w - wrapping the extracted token in its ancestor context u - unwrapping the extracted token to its child content t - extracting the text content of the specified element",
+      "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.xtokenize.namespace",
+      "type": "java.util.List<org.apache.camel.model.PropertyDefinition>",
+      "description": "Injects the XML Namespaces of prefix - uri mappings",
+      "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.xtokenize.trim",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration",
+      "defaultValue": true
     }
   ],
   "hints": []
