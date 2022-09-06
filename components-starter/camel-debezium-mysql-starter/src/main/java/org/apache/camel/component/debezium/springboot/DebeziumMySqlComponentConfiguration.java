@@ -78,7 +78,7 @@ public class DebeziumMySqlComponentConfiguration
      * interface 'OffsetCommitPolicy'. The default is a periodic commit policy
      * based upon time intervals.
      */
-    private String offsetCommitPolicy = "io.debezium.embedded.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy";
+    private String offsetCommitPolicy;
     /**
      * Maximum number of milliseconds to wait for records to flush and partition
      * offset data to be committed to offset storage before cancelling the

@@ -336,8 +336,7 @@
       "name": "camel.component.debezium-sqlserver.offset-commit-policy",
       "type": "java.lang.String",
       "description": "The name of the Java class of the commit policy. It defines when offsets commit has to be triggered based on the number of events processed and the time elapsed since the last commit. This class must implement the interface 'OffsetCommitPolicy'. The default is a periodic commit policy based upon time intervals.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
-      "defaultValue": "io.debezium.embedded.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy"
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.offset-commit-timeout-ms",
