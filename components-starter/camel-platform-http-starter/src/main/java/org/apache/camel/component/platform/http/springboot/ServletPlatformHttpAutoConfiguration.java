@@ -21,7 +21,6 @@ import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
 import org.apache.camel.component.servlet.ServletComponent;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +28,6 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Lazy;
 
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnBean(type = "org.apache.camel.component.servlet.springboot.ServletComponentAutoConfiguration")
 @AutoConfigureAfter(name = {
 		"org.apache.camel.component.servlet.springboot.ServletComponentAutoConfiguration",
 		"org.apache.camel.component.servlet.springboot.ServletComponentConverter"})
@@ -47,6 +45,6 @@ public class ServletPlatformHttpAutoConfiguration {
 	@ConditionalOnMissingBean(PlatformHttpEngine.class)
 	@DependsOn("configureServletComponent")
 	public PlatformHttpEngine servletPlatformHttpEngine() {
-		return new ServletPlatformHttpEngine((ServletComponent) camelContext.getComponent("servlet"));
+		return new ServletPlatformHttpEngine(camelContext.getComponent("servlet", ServletComponent.class));
 	}
 }
