@@ -127,6 +127,13 @@ public class MailComponentConfiguration
      */
     private Boolean unseen = true;
     /**
+     * Whether to fail processing the mail if the mail message contains
+     * attachments with duplicate file names. If set to false, then the
+     * duplicate attachment is skipped and a WARN is logged. If set to true then
+     * an exception is thrown failing to process the mail message.
+     */
+    private Boolean failOnDuplicateFileAttachment = false;
+    /**
      * Sets the maximum number of messages to consume during a poll. This can be
      * used to avoid overloading a mail server, if a mailbox folder contains a
      * lot of messages. Default value of -1 means no fetch size and all messages
@@ -401,6 +408,15 @@ public class MailComponentConfiguration
 
     public void setUnseen(Boolean unseen) {
         this.unseen = unseen;
+    }
+
+    public Boolean getFailOnDuplicateFileAttachment() {
+        return failOnDuplicateFileAttachment;
+    }
+
+    public void setFailOnDuplicateFileAttachment(
+            Boolean failOnDuplicateFileAttachment) {
+        this.failOnDuplicateFileAttachment = failOnDuplicateFileAttachment;
     }
 
     public Integer getFetchSize() {
