@@ -40,14 +40,9 @@
       <version>${camel-version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-servlet</artifactId>
-      <version>${camel-version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-servlet-starter</artifactId>
-      <scope>test</scope>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
