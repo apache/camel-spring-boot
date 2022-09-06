@@ -35,8 +35,8 @@ public class CamelMongodbTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelMongodbTest.class))
-                .dependency("org.mongodb:mongodb-driver-sync:4.0.4")
-                .dependency("org.mongodb:mongodb-driver-core:4.0.4")
+                .dependency("org.mongodb:mongodb-driver-sync")
+                .dependency("org.mongodb:mongodb-driver-core")
                 .build();
     }
 
