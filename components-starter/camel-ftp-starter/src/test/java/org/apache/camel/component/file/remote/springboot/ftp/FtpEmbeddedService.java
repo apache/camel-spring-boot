@@ -34,6 +34,7 @@ import org.apache.ftpserver.usermanager.ClearTextPasswordEncryptor;
 import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,6 +57,8 @@ public class FtpEmbeddedService extends AbstractTestService implements FtpServic
     protected int port;
 
     protected Path rootDir;
+
+    private ExtensionContext context;
 
     public FtpEmbeddedService() {
     }
@@ -189,5 +192,33 @@ public class FtpEmbeddedService extends AbstractTestService implements FtpServic
         }
 
         return count;
+    }
+
+    @Override
+    public void registerProperties() {
+        ExtensionContext.Store store = context.getStore(ExtensionContext.Namespace.GLOBAL);
+        registerProperties(store::put);
+    }
+
+    @Override
+    public void beforeAll(ExtensionContext extensionContext) {
+        this.context = extensionContext;
+    }
+
+    @Override
+    public void afterAll(ExtensionContext extensionContext) {
+        this.context = null;
+    }
+
+    @Override
+    public void afterEach(ExtensionContext extensionContext) {
+        shutdown();
+        this.context = null;
+    }
+
+    @Override
+    public void beforeEach(ExtensionContext extensionContext) {
+        this.context = extensionContext;
+        initialize();
     }
 }

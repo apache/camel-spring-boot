@@ -30,6 +30,7 @@ import org.apache.sshd.scp.server.ScpCommandFactory;
 import org.apache.sshd.server.SshServer;
 import org.apache.sshd.server.auth.pubkey.PublickeyAuthenticator;
 import org.apache.sshd.sftp.server.SftpSubsystemFactory;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,6 +55,7 @@ public class SftpEmbeddedService extends AbstractTestService implements FtpServi
 
     private Path rootDir;
     private Path knownHosts;
+    private ExtensionContext context;
 
     public SftpEmbeddedService() {
         this(false);
@@ -170,5 +172,33 @@ public class SftpEmbeddedService extends AbstractTestService implements FtpServi
             LOG.warn("SunX509 is not available on this platform [{}] Testing is skipped! Real cause: {}", name, message, e);
             return false;
         }
+    }
+
+    @Override
+    public void registerProperties() {
+        ExtensionContext.Store store = context.getStore(ExtensionContext.Namespace.GLOBAL);
+        registerProperties(store::put);
+    }
+
+    @Override
+    public void beforeAll(ExtensionContext extensionContext) {
+        this.context = extensionContext;
+    }
+
+    @Override
+    public void afterAll(ExtensionContext extensionContext) {
+        this.context = null;
+    }
+
+    @Override
+    public void afterEach(ExtensionContext extensionContext) {
+        shutdown();
+        this.context = null;
+    }
+
+    @Override
+    public void beforeEach(ExtensionContext extensionContext) {
+        this.context = extensionContext;
+        initialize();
     }
 }
