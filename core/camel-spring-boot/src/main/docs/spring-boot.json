@@ -1374,6 +1374,20 @@
       "defaultValue": false
     },
     {
+      "name": "camel.vault.aws.refresh-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Define if we want to refresh the secrets on update",
+      "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.vault.aws.refresh-period",
+      "type": "java.lang.Long",
+      "description": "Define the refresh period",
+      "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties",
+      "defaultValue": 30000
+    },
+    {
       "name": "camel.vault.aws.region",
       "type": "java.lang.String",
       "description": "The AWS region",
@@ -1383,6 +1397,12 @@
       "name": "camel.vault.aws.secret-key",
       "type": "java.lang.String",
       "description": "The AWS secret key",
+      "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.aws.secrets",
+      "type": "java.lang.String",
+      "description": "Define the secrets to look at",
       "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
     },
     {

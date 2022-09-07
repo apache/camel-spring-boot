@@ -41,6 +41,21 @@ public class AwsVaultConfigurationProperties {
      */
     private boolean defaultCredentialsProvider;
 
+    /**
+     * Define if we want to refresh the secrets on update
+     */
+    private boolean refreshEnabled;
+
+    /**
+     * Define the refresh period
+     */
+    private long refreshPeriod = 30000;
+
+    /**
+     * Define the secrets to look at
+     */
+    private String secrets;
+
     public String getAccessKey() {
         return accessKey;
     }
@@ -71,5 +86,29 @@ public class AwsVaultConfigurationProperties {
 
     public void setDefaultCredentialsProvider(boolean defaultCredentialsProvider) {
         this.defaultCredentialsProvider = defaultCredentialsProvider;
+    }
+
+    public boolean isRefreshEnabled() {
+        return refreshEnabled;
+    }
+
+    public void setRefreshEnabled(boolean refreshEnabled) {
+        this.refreshEnabled = refreshEnabled;
+    }
+
+    public long getRefreshPeriod() {
+        return refreshPeriod;
+    }
+
+    public void setRefreshPeriod(long refreshPeriod) {
+        this.refreshPeriod = refreshPeriod;
+    }
+
+    public String getSecrets() {
+        return secrets;
+    }
+
+    public void setSecrets(String secrets) {
+        this.secrets = secrets;
     }
 }
