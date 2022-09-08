@@ -730,6 +730,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.springboot.load-statistics-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether context load statistics is enabled (something like the unix load average). The statistics requires to have camel-management on the classpath as JMX is required. The default value is false.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.springboot.load-type-converters",
       "type": "java.lang.Boolean",
       "description": "Whether to load custom type converters by scanning classpath. This is used for backwards compatibility with Camel 2.x. Its recommended to migrate to use fast type converter loading by setting <tt>@Converter(generateLoader = true)<\/tt> on your custom type converter classes.",

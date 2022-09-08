@@ -497,6 +497,14 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean endpointRuntimeStatisticsEnabled;
 
     /**
+     * Sets whether context load statistics is enabled (something like the unix load average).
+     * The statistics requires to have camel-management on the classpath as JMX is required.
+     *
+     * The default value is false.
+     */
+    private boolean loadStatisticsEnabled;
+
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while
      * the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and
      * handled by the routing Error Handler.
