@@ -20,6 +20,7 @@ import java.util.Map;
 import javax.annotation.Generated;
 import com.azure.core.amqp.AmqpRetryOptions;
 import com.azure.core.amqp.AmqpTransportType;
+import com.azure.core.credential.TokenCredential;
 import com.azure.messaging.eventhubs.CheckpointStore;
 import com.azure.messaging.eventhubs.EventHubProducerAsyncClient;
 import com.azure.messaging.eventhubs.models.EventPosition;
@@ -64,7 +65,7 @@ public class EventHubsComponentConfiguration
     /**
      * In case you chose the default BlobCheckpointStore, this sets access key
      * for the associated azure account name to be used for authentication with
-     * azure blob services
+     * azure blob services.
      */
     private String blobAccessKey;
     /**
@@ -75,7 +76,7 @@ public class EventHubsComponentConfiguration
     /**
      * In case you chose the default BlobCheckpointStore, this sets the blob
      * container that shall be used by the BlobCheckpointStore to store the
-     * checkpoint offsets
+     * checkpoint offsets.
      */
     private String blobContainerName;
     /**
@@ -96,12 +97,12 @@ public class EventHubsComponentConfiguration
     private Boolean bridgeErrorHandler = false;
     /**
      * Sets the batch size between each checkpoint updates. Works jointly with
-     * checkpointBatchTimeout
+     * checkpointBatchTimeout.
      */
     private Integer checkpointBatchSize = 500;
     /**
      * Sets the batch timeout between each checkpoint updates. Works jointly
-     * with checkpointBatchSize
+     * with checkpointBatchSize.
      */
     private Integer checkpointBatchTimeout = 5000;
     /**
@@ -117,8 +118,7 @@ public class EventHubsComponentConfiguration
     /**
      * Sets the name of the consumer group this consumer is associated with.
      * Events are read in the context of this group. The name of the consumer
-     * group that is created by default is {link #DEFAULT_CONSUMER_GROUP_NAME
-     * $Default}.
+     * group that is created by default is {code $Default}.
      */
     private String consumerGroupName = "$Default";
     /**
@@ -195,13 +195,21 @@ public class EventHubsComponentConfiguration
      */
     private String connectionString;
     /**
-     * The generated value for the SharedAccessName
+     * The generated value for the SharedAccessName.
      */
     private String sharedAccessKey;
     /**
-     * The name you chose for your EventHubs SAS keys
+     * The name you chose for your EventHubs SAS keys.
      */
     private String sharedAccessName;
+    /**
+     * Still another way of authentication (beside supplying namespace,
+     * sharedAccessKey, sharedAccessName or connection string) is through
+     * Azure-AD authentication using an implementation instance of
+     * TokenCredential. The option is a
+     * com.azure.core.credential.TokenCredential type.
+     */
+    private TokenCredential tokenCredential;
 
     public AmqpRetryOptions getAmqpRetryOptions() {
         return amqpRetryOptions;
@@ -379,5 +387,13 @@ public class EventHubsComponentConfiguration
 
     public void setSharedAccessName(String sharedAccessName) {
         this.sharedAccessName = sharedAccessName;
+    }
+
+    public TokenCredential getTokenCredential() {
+        return tokenCredential;
+    }
+
+    public void setTokenCredential(TokenCredential tokenCredential) {
+        this.tokenCredential = tokenCredential;
     }
 }
