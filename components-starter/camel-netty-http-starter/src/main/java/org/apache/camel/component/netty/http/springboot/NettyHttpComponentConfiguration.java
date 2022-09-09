@@ -364,7 +364,7 @@ public class NettyHttpComponentConfiguration
     /**
      * Which protocols to enable when using SSL
      */
-    private String enabledProtocols = "TLSv1,TLSv1.1,TLSv1.2";
+    private String enabledProtocols = "TLSv1.2,TLSv1.3";
     /**
      * Client side certificate keystore to be used for encryption
      */

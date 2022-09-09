@@ -120,7 +120,7 @@
       "type": "java.lang.String",
       "description": "Which protocols to enable when using SSL",
       "sourceType": "org.apache.camel.component.netty.http.springboot.NettyHttpComponentConfiguration",
-      "defaultValue": "TLSv1,TLSv1.1,TLSv1.2"
+      "defaultValue": "TLSv1.2,TLSv1.3"
     },
     {
       "name": "camel.component.netty-http.encoders",
