@@ -35,7 +35,7 @@ import org.springframework.test.annotation.DirtiesContext;
                 "camel.vault.gcp.serviceAccountKey=file:////key.json",
                 "camel.vault.gcp.projectId=gcp-project,",
                 "camel.vault.gcp.subscriptionName=sub-1",
-                "camel.vault.gcp.refreshEnabled=true,",
+                "camel.vault.gcp.refreshEnabled=true",
                 "camel.vault.gcp.refreshPeriod=300000,",
                 "camel.vault.gcp.secrets=hello*,"
                 }
@@ -49,5 +49,9 @@ public class GcpVaultConfigurationTest {
     public void testGcpVault() throws Exception {
         Assertions.assertEquals("file:////key.json", camelContext.getVaultConfiguration().gcp().getServiceAccountKey());
         Assertions.assertEquals("gcp-project", camelContext.getVaultConfiguration().gcp().getProjectId());
+        Assertions.assertEquals("sub-1", camelContext.getVaultConfiguration().gcp().getSubscriptionName());
+        Assertions.assertEquals(true, camelContext.getVaultConfiguration().gcp().isRefreshEnabled());
+        Assertions.assertEquals(300000, camelContext.getVaultConfiguration().gcp().getRefreshPeriod());
+        Assertions.assertEquals("hello*", camelContext.getVaultConfiguration().gcp().getSecrets());
     }
 }
