@@ -17,7 +17,6 @@
 package org.apache.camel.spring.boot.vault;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.vault.AwsVaultConfiguration;
 import org.apache.camel.vault.GcpVaultConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -37,6 +36,10 @@ public class GcpVaultAutoConfiguration {
         answer.setServiceAccountKey(config.getServiceAccountKey());
         answer.setProjectId(config.getProjectId());
         answer.setUseDefaultInstance(config.isUseDefaultInstance());
+        answer.setRefreshEnabled(config.isRefreshEnabled());
+        answer.setRefreshPeriod(config.getRefreshPeriod());
+        answer.setSecrets(config.getSecrets());
+        answer.setSubscriptionName(config.getSubscriptionName());
         return answer;
     }
 
