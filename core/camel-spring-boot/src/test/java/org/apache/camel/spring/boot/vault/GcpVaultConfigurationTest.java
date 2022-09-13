@@ -33,7 +33,7 @@ import org.springframework.test.annotation.DirtiesContext;
                 GcpVaultConfigurationTest.class},
         properties = {
                 "camel.vault.gcp.serviceAccountKey=file:////key.json",
-                "camel.vault.gcp.projectId=gcp-project,",
+                "camel.vault.gcp.projectId=gcp-project",
                 "camel.vault.gcp.subscriptionName=sub-1",
                 "camel.vault.gcp.refreshEnabled=true",
                 "camel.vault.gcp.refreshPeriod=300000",
