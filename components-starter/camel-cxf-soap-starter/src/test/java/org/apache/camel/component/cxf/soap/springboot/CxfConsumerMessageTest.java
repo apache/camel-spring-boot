@@ -23,7 +23,6 @@ import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.cxf.common.CXFTestSupport;
 import org.apache.camel.component.cxf.jaxws.HelloService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
@@ -36,6 +35,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
@@ -43,6 +44,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.cxf.BusFactory;
 import org.apache.cxf.frontend.ClientFactoryBean;
 import org.apache.cxf.frontend.ClientProxyFactoryBean;
+import org.apache.cxf.spring.boot.autoconfigure.CxfAutoConfiguration;
 
 
 @DirtiesContext
@@ -51,8 +53,10 @@ import org.apache.cxf.frontend.ClientProxyFactoryBean;
     classes = {
         CamelAutoConfiguration.class,
         CxfConsumerMessageTest.class,
-        CxfConsumerMessageTest.TestConfiguration.class
-    }
+        CxfConsumerMessageTest.TestConfiguration.class,
+        CxfAutoConfiguration.class
+    }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+       
 )
 public class CxfConsumerMessageTest {
 
@@ -70,8 +74,7 @@ public class CxfConsumerMessageTest {
               + "<return xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">true</return>"
               + "</ns1:echoBooleanResponse></soap:Body></soap:Envelope>";
 
-    protected final String simpleEndpointAddress = "http://localhost:"
-                                                   + CXFTestSupport.getPort1() + "/" + getClass().getSimpleName() + "/test";
+    protected final String simpleEndpointAddress = "/" + getClass().getSimpleName() + "-test";
     protected final String simpleEndpointURI = "cxf://" + simpleEndpointAddress
                                                + "?serviceClass=org.apache.camel.component.cxf.jaxws.HelloService";
 
@@ -79,11 +82,16 @@ public class CxfConsumerMessageTest {
     @Autowired
     ProducerTemplate template;
     
+    @Bean
+    public ServletWebServerFactory servletWebServerFactory() {
+        return new UndertowServletWebServerFactory();
+    }
+    
     @Test
     public void testInvokingServiceFromClient() throws Exception {
         ClientProxyFactoryBean proxyFactory = new ClientProxyFactoryBean();
         ClientFactoryBean clientBean = proxyFactory.getClientFactoryBean();
-        clientBean.setAddress(simpleEndpointAddress);
+        clientBean.setAddress("http://localhost:8080/services" + simpleEndpointAddress);
         clientBean.setServiceClass(HelloService.class);
         clientBean.setBus(BusFactory.getDefaultBus());
 

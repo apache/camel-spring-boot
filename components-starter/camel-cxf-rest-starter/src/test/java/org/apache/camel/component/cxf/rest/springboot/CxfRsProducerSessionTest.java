@@ -31,16 +31,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.cxf.spring.boot.autoconfigure.CxfAutoConfiguration;
 
-@DirtiesContext
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(classes = {
                            CamelAutoConfiguration.class, 
-                           CxfRsProducerSessionTest.class
-    },
+                           CxfRsProducerSessionTest.class,
+                           CxfAutoConfiguration.class
+}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     properties = {
               "camel.springboot.routes-include-pattern=file:src/test/resources/routes/CxfRsSpringProducerSessionRoute.xml"}
 )
@@ -50,17 +56,11 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 })
 public class CxfRsProducerSessionTest {
 
-    private static int port1 = 12261;
-    private static int port2 = 12262;
-
-    public int getPort1() {
-        return port1;
+    @Bean
+    public ServletWebServerFactory servletWebServerFactory() {
+        return new UndertowServletWebServerFactory();
     }
-
-    public int getPort2() {
-        return port2;
-    }
-
+    
     @Test
     public void testNoSessionProxy() {
         String response = sendMessage("direct://proxy", "World", Boolean.FALSE).getMessage().getBody(String.class);

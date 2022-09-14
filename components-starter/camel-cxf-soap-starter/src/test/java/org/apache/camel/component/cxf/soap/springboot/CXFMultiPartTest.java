@@ -31,16 +31,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.cxf.spring.boot.autoconfigure.CxfAutoConfiguration;
 
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(classes = {
                            CamelAutoConfiguration.class, 
-                           CXFMultiPartTest.class
-    },
+                           CXFMultiPartTest.class,
+                           CxfAutoConfiguration.class
+    }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     properties = {
               "camel.springboot.routes-include-pattern=file:src/test/resources/routes/multipartRoute.xml"}
 )
@@ -57,6 +62,10 @@ public class CXFMultiPartTest {
                                                           "MultiPartInvokePort");
     protected static Endpoint endpoint;
 
+    @Bean
+    public ServletWebServerFactory servletWebServerFactory() {
+        return new UndertowServletWebServerFactory();
+    }
     
     public void startService() {
         Object implementor = new MultiPartInvokeImpl();
@@ -76,8 +85,7 @@ public class CXFMultiPartTest {
     @Test
     public void testInvokingServiceFromCXFClient() throws Exception {
         startService();
-        String reply = invokeMultiPartService("http://localhost:16233"
-                                              + "/CXFMultiPartTest/CamelContext/RouterPort", "in0", "in1");
+        String reply = invokeMultiPartService("http://localhost:8080/services/CXFMultiPartTest/CamelContext/RouterPort", "in0", "in1");
         assertNotNull(reply, "No response received from service");
         assertEquals("in0 in1", reply);
 
