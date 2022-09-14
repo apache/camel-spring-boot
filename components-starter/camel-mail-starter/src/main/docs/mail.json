@@ -182,6 +182,18 @@
       "defaultValue": "camel@localhost"
     },
     {
+      "name": "camel.component.mail.generate-missing-attachment-names",
+      "type": "java.lang.String",
+      "description": "Set this to 'uuid' to set a UUID for the filename of the attachment if no filename was set",
+      "sourceType": "org.apache.camel.component.mail.springboot.MailComponentConfiguration"
+    },
+    {
+      "name": "camel.component.mail.handle-duplicate-attachment-names",
+      "type": "java.lang.String",
+      "description": "Set the strategy to handle duplicate filenames of attachments never: attachments that have a filename which is already present in the attachments will be ignored unless failOnDuplicateFileAttachment is set to true uuidPrefix: this will prefix the duplicate attachment filenames each with a uuid and underscore (uuid_)",
+      "sourceType": "org.apache.camel.component.mail.springboot.MailComponentConfiguration"
+    },
+    {
       "name": "camel.component.mail.handle-failed-message",
       "type": "java.lang.Boolean",
       "description": "If the mail consumer cannot retrieve a given mail message, then this option allows to handle the caused exception by the consumer's error handler. By enable the bridge error handler on the consumer, then the Camel routing error handler can handle the exception instead. The default behavior would be the consumer throws an exception and no mails from the batch would be able to be routed by Camel.",

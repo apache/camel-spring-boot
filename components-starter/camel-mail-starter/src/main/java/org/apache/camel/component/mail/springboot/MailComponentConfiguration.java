@@ -146,6 +146,19 @@ public class MailComponentConfiguration
      */
     private String folderName = "INBOX";
     /**
+     * Set this to 'uuid' to set a UUID for the filename of the attachment if no
+     * filename was set
+     */
+    private String generateMissingAttachmentNames;
+    /**
+     * Set the strategy to handle duplicate filenames of attachments never:
+     * attachments that have a filename which is already present in the
+     * attachments will be ignored unless failOnDuplicateFileAttachment is set
+     * to true uuidPrefix: this will prefix the duplicate attachment filenames
+     * each with a uuid and underscore (uuid_)
+     */
+    private String handleDuplicateAttachmentNames;
+    /**
      * Specifies whether Camel should map the received mail message to Camel
      * body/headers/attachments. If set to true, the body of the mail message is
      * mapped to the body of the Camel IN message, the mail headers are mapped
@@ -433,6 +446,24 @@ public class MailComponentConfiguration
 
     public void setFolderName(String folderName) {
         this.folderName = folderName;
+    }
+
+    public String getGenerateMissingAttachmentNames() {
+        return generateMissingAttachmentNames;
+    }
+
+    public void setGenerateMissingAttachmentNames(
+            String generateMissingAttachmentNames) {
+        this.generateMissingAttachmentNames = generateMissingAttachmentNames;
+    }
+
+    public String getHandleDuplicateAttachmentNames() {
+        return handleDuplicateAttachmentNames;
+    }
+
+    public void setHandleDuplicateAttachmentNames(
+            String handleDuplicateAttachmentNames) {
+        this.handleDuplicateAttachmentNames = handleDuplicateAttachmentNames;
     }
 
     public Boolean getMapMailMessage() {
