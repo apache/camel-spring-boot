@@ -52,6 +52,12 @@ public class Resilience4jConfigurationDefinitionCommon {
      */
     private Integer permittedNumberOfCallsInHalfOpenState = 10;
     /**
+     * Whether to throw
+     * io.github.resilience4j.circuitbreaker.CallNotPermittedException when the
+     * call is rejected due circuit breaker is half open or open.
+     */
+    private Boolean throwExceptionWhenHalfOpenOrOpenState = false;
+    /**
      * Configures the size of the sliding window which is used to record the
      * outcome of calls when the CircuitBreaker is closed. slidingWindowSize
      * configures the size of the sliding window. Sliding window can either be
@@ -150,6 +156,15 @@ public class Resilience4jConfigurationDefinitionCommon {
     public void setPermittedNumberOfCallsInHalfOpenState(
             Integer permittedNumberOfCallsInHalfOpenState) {
         this.permittedNumberOfCallsInHalfOpenState = permittedNumberOfCallsInHalfOpenState;
+    }
+
+    public Boolean getThrowExceptionWhenHalfOpenOrOpenState() {
+        return throwExceptionWhenHalfOpenOrOpenState;
+    }
+
+    public void setThrowExceptionWhenHalfOpenOrOpenState(
+            Boolean throwExceptionWhenHalfOpenOrOpenState) {
+        this.throwExceptionWhenHalfOpenOrOpenState = throwExceptionWhenHalfOpenOrOpenState;
     }
 
     public Integer getSlidingWindowSize() {
