@@ -26,7 +26,7 @@
          http://camel.apache.org/schema/cxf/jaxws http://camel.apache.org/schema/cxf/jaxws/camel-cxf.xsd
 		 http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
-	<jaxws:endpoint id="greetingService" address="http://localhost:16232/cxf/ws/greeting-service" implementor="org.apache.camel.component.cxf.security.GreetingServiceImpl">
+	<jaxws:endpoint id="greetingService" address="/greeting-service" implementor="org.apache.camel.component.cxf.security.GreetingServiceImpl">
 
 		<jaxws:inInterceptors>
 			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">

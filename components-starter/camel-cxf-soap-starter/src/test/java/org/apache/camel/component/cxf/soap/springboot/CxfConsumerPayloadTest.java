@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.cxf.soap.springboot;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,57 +32,56 @@ import org.apache.camel.component.cxf.common.CxfPayload;
 import org.apache.camel.converter.jaxp.XmlConverter;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.cxf.binding.soap.SoapHeader;
-
+import org.apache.cxf.spring.boot.autoconfigure.CxfAutoConfiguration;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        CxfConsumerPayloadTest.class,
-        CxfConsumerPayloadTest.TestConfiguration.class
-    }
-)
-public class CxfConsumerPayloadTest extends CxfConsumerMessageTest{
+@SpringBootTest(classes = {
+                           CamelAutoConfiguration.class, CxfConsumerPayloadTest.class,
+                           CxfConsumerPayloadTest.TestConfiguration.class,
+                           CxfAutoConfiguration.class
+}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class CxfConsumerPayloadTest extends CxfConsumerMessageTest {
 
     protected static final String ECHO_RESPONSE = "<ns1:echoResponse xmlns:ns1=\"http://jaxws.cxf.component.camel.apache.org/\">"
-        + "<return xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">echo Hello World!</return>"
-        + "</ns1:echoResponse>";
-protected static final String ECHO_BOOLEAN_RESPONSE
-= "<ns1:echoBooleanResponse xmlns:ns1=\"http://jaxws.cxf.component.camel.apache.org/\">"
-+ "<return xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">true</return>"
-+ "</ns1:echoBooleanResponse>";
-protected static final String ECHO_REQUEST = "<ns1:echo xmlns:ns1=\"http://jaxws.cxf.component.camel.apache.org/\">"
-       + "<arg0 xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">Hello World!</arg0></ns1:echo>";
-protected static final String ECHO_BOOLEAN_REQUEST
-= "<ns1:echoBoolean xmlns:ns1=\"http://jaxws.cxf.component.camel.apache.org/\">"
-+ "<arg0 xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">true</arg0></ns1:echoBoolean>";
+                                                  + "<return xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">echo Hello World!</return>"
+                                                  + "</ns1:echoResponse>";
+    protected static final String ECHO_BOOLEAN_RESPONSE = "<ns1:echoBooleanResponse xmlns:ns1=\"http://jaxws.cxf.component.camel.apache.org/\">"
+                                                          + "<return xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">true</return>"
+                                                          + "</ns1:echoBooleanResponse>";
+    protected static final String ECHO_REQUEST = "<ns1:echo xmlns:ns1=\"http://jaxws.cxf.component.camel.apache.org/\">"
+                                                 + "<arg0 xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">Hello World!</arg0></ns1:echo>";
+    protected static final String ECHO_BOOLEAN_REQUEST = "<ns1:echoBoolean xmlns:ns1=\"http://jaxws.cxf.component.camel.apache.org/\">"
+                                                         + "<arg0 xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">true</arg0></ns1:echoBoolean>";
 
-protected static final String ELEMENT_NAMESPACE = "http://jaxws.cxf.component.camel.apache.org/";
+    protected static final String ELEMENT_NAMESPACE = "http://jaxws.cxf.component.camel.apache.org/";
+    
+    @Bean
+    public ServletWebServerFactory servletWebServerFactory() {
+        return new UndertowServletWebServerFactory();
+    }
 
-protected void checkRequest(String expect, String request) {
-//REVIST use a more reliable comparison to tolerate some namespaces being added to the root element
-if (expect.equals("ECHO_REQUEST")) {
-assertTrue(request.startsWith(ECHO_REQUEST.substring(0, 66))
-&& request.endsWith(ECHO_REQUEST.substring(67)), "Get a wrong request");
-} else {
-assertTrue(request.startsWith(ECHO_BOOLEAN_REQUEST.substring(0, 73))
-&& request.endsWith(ECHO_BOOLEAN_REQUEST.substring(74)), "Get a wrong request");
-}
-}
+    protected void checkRequest(String expect, String request) {
 
-    
-    
-    
+        if (expect.equals("ECHO_REQUEST")) {
+            assertTrue(request.startsWith(ECHO_REQUEST.substring(0, 66))
+                       && request.endsWith(ECHO_REQUEST.substring(67)), "Get a wrong request");
+        } else {
+            assertTrue(request.startsWith(ECHO_BOOLEAN_REQUEST.substring(0, 73))
+                       && request.endsWith(ECHO_BOOLEAN_REQUEST.substring(74)), "Get a wrong request");
+        }
+    }
+
     // *************************************
     // Config
     // *************************************
@@ -99,10 +97,12 @@ assertTrue(request.startsWith(ECHO_BOOLEAN_REQUEST.substring(0, 73))
                     from(simpleEndpointURI + "&dataFormat=PAYLOAD").to("log:info").process(new Processor() {
                         @SuppressWarnings("unchecked")
                         public void process(final Exchange exchange) throws Exception {
-                            CxfPayload<SoapHeader> requestPayload = exchange.getIn().getBody(CxfPayload.class);
+                            CxfPayload<SoapHeader> requestPayload = exchange.getIn()
+                                .getBody(CxfPayload.class);
                             List<Source> inElements = requestPayload.getBodySources();
                             List<Source> outElements = new ArrayList<>();
-                            // You can use a customer toStringConverter to turn a CxfPayLoad message into String as you want                        
+                            // You can use a customer toStringConverter to turn a CxfPayLoad message into
+                            // String as you want
                             String request = exchange.getIn().getBody(String.class);
                             XmlConverter converter = new XmlConverter();
                             String documentString = ECHO_RESPONSE;
@@ -122,7 +122,8 @@ assertTrue(request.startsWith(ECHO_BOOLEAN_REQUEST.substring(0, 73))
                             Document outDocument = converter.toDOMDocument(documentString, exchange);
                             outElements.add(new DOMSource(outDocument.getDocumentElement()));
                             // set the payload header with null
-                            CxfPayload<SoapHeader> responsePayload = new CxfPayload<>(null, outElements, null);
+                            CxfPayload<SoapHeader> responsePayload = new CxfPayload<>(null, outElements,
+                                                                                      null);
                             exchange.getMessage().setBody(responsePayload);
                         }
                     });
@@ -130,6 +131,5 @@ assertTrue(request.startsWith(ECHO_BOOLEAN_REQUEST.substring(0, 73))
             };
         }
     }
-    
-    
+
 }

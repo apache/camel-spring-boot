@@ -23,7 +23,6 @@ import org.apache.camel.Exchange;
 import org.apache.camel.ExtendedExchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.cxf.common.CXFTestSupport;
 import org.apache.camel.component.cxf.jaxrs.testbean.Customer;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.converter.stream.CachedOutputStream;
@@ -37,10 +36,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
+
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.cxf.spring.boot.autoconfigure.CxfAutoConfiguration;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
@@ -49,23 +53,24 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 
-@DirtiesContext
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(
     classes = {
         CamelAutoConfiguration.class,
         CxfRsStreamCacheTest.class,
-        CxfRsStreamCacheTest.TestConfiguration.class
-    }
+        CxfRsStreamCacheTest.TestConfiguration.class,
+        CxfAutoConfiguration.class
+    }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 public class CxfRsStreamCacheTest {
 
     private static final String PUT_REQUEST = "<Customer><name>Mary</name><id>123</id></Customer>";
     private static final String CONTEXT = "/CxfRsStreamCacheTest";
-    private static final String CXT = CXFTestSupport.getPort1() + CONTEXT;
+    private static final String CXT = "8080/services" + CONTEXT;
     private static final String RESPONSE = "<pong xmlns=\"test/service\"/>";
 
-    private String cxfRsEndpointUri = "cxfrs://http://localhost:" + CXT + "/rest?synchronous=" + isSynchronous()
+    private String cxfRsEndpointUri = "cxfrs://" + CONTEXT + "?synchronous=" + isSynchronous()
                                       + "&dataFormat=PAYLOAD&resourceClasses=org.apache.camel.component.cxf.jaxrs.testbean.CustomerService";
 
     @Autowired
@@ -77,6 +82,12 @@ public class CxfRsStreamCacheTest {
     @EndpointInject("mock:onComplete")
     MockEndpoint onComplete;
     
+    @Bean
+    public ServletWebServerFactory servletWebServerFactory() {
+        return new UndertowServletWebServerFactory();
+    }
+    
+    
     @Test
     public void testPutConsumer() throws Exception {
         
@@ -86,7 +97,7 @@ public class CxfRsStreamCacheTest {
         
         onComplete.expectedMessageCount(1);
 
-        HttpPut put = new HttpPut("http://localhost:" + CXT + "/rest/customerservice/customers");
+        HttpPut put = new HttpPut("http://localhost:" + CXT + "/customerservice/customers");
         StringEntity entity = new StringEntity(PUT_REQUEST, "ISO-8859-1");
         entity.setContentType("text/xml; charset=ISO-8859-1");
         put.addHeader("test", "header1;header2");

@@ -24,7 +24,6 @@ import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.cxf.common.CXFTestSupport;
 import org.apache.camel.converter.jaxp.XmlConverter;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
@@ -36,10 +35,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.cxf.spring.boot.autoconfigure.CxfAutoConfiguration;
 
 
 @DirtiesContext
@@ -48,8 +50,9 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
     classes = {
         CamelAutoConfiguration.class,
         CxfConsumerProviderTest.class,
-        CxfConsumerProviderTest.TestConfiguration.class
-    }
+        CxfConsumerProviderTest.TestConfiguration.class,
+        CxfAutoConfiguration.class
+    }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 public class CxfConsumerProviderTest {
 
@@ -64,14 +67,21 @@ public class CxfConsumerProviderTest {
 
     protected static final String RESPONSE = "<pong xmlns=\"test/service\"/>";
 
-    protected final String simpleEndpointAddress = "http://localhost:"
-                                           + CXFTestSupport.getPort1() + "/" + getClass().getSimpleName() + "/test";
-    protected final String simpleEndpointURI = "cxf://" + simpleEndpointAddress
+    protected final String relativeAddress = "/" + getClass().getSimpleName() + "/test";
+    
+    protected final String simpleEndpointAddress = "http://localhost:8080/services"
+                                            + relativeAddress;
+    protected final String simpleEndpointURI = "cxf://" + relativeAddress
                                        + "?serviceClass=org.apache.camel.component.cxf.soap.springboot.ServiceProvider";
 
 
     @Autowired
     ProducerTemplate template;
+    
+    @Bean
+    public ServletWebServerFactory servletWebServerFactory() {
+        return new UndertowServletWebServerFactory();
+    }
     
     @Test
     public void testInvokingServiceFromHttpCompnent() throws Exception {

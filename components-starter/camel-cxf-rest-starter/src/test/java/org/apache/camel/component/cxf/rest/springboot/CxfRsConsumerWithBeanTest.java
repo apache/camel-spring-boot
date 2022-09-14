@@ -18,7 +18,6 @@ package org.apache.camel.component.cxf.rest.springboot;
 
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.cxf.common.CXFTestSupport;
 import org.apache.camel.component.cxf.jaxrs.testbean.ServiceUtil;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
@@ -28,10 +27,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.cxf.spring.boot.autoconfigure.CxfAutoConfiguration;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
@@ -40,23 +43,24 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 
-@DirtiesContext
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(
     classes = {
         CamelAutoConfiguration.class,
         CxfRsConsumerWithBeanTest.class,
-        CxfRsConsumerWithBeanTest.TestConfiguration.class
-    }
+        CxfRsConsumerWithBeanTest.TestConfiguration.class,
+        CxfAutoConfiguration.class
+    }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 public class CxfRsConsumerWithBeanTest {
 
-    private static final String CXT = CXFTestSupport.getPort1() + "/CxfRsConsumerWithBeanTest";
+    private static final String CXT = "/CxfRsConsumerWithBeanTest";
     private static final String CXF_RS_ENDPOINT_URI
-            = "cxfrs://http://localhost:" + CXT
+            = "cxfrs://" + CXT
               + "/rest?resourceClasses=org.apache.camel.component.cxf.jaxrs.testbean.CustomerServiceResource";
     private static final String CXF_RS_ENDPOINT_URI_2
-            = "cxfrs://http://localhost:" + CXT
+            = "cxfrs://" + CXT
               + "/rest2?resourceClasses=org.apache.camel.component.cxf.jaxrs.testbean.CustomerServiceResource";
 
     @Bean("service")
@@ -64,10 +68,15 @@ public class CxfRsConsumerWithBeanTest {
         return new ServiceUtil();
     }
     
+    @Bean
+    public ServletWebServerFactory servletWebServerFactory() {
+        return new UndertowServletWebServerFactory();
+    }
+    
     @Test
     public void testPutConsumer() throws Exception {
-        sendPutRequest("http://localhost:" + CXT + "/rest/customerservice/c20");
-        sendPutRequest("http://localhost:" + CXT + "/rest2/customerservice/c20");
+        sendPutRequest("http://localhost:8080/services" + CXT + "/rest/customerservice/c20");
+        sendPutRequest("http://localhost:8080/services" + CXT + "/rest2/customerservice/c20");
     }
 
     private void sendPutRequest(String uri) throws Exception {

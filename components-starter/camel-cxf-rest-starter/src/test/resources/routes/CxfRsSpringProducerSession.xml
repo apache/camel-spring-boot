@@ -32,7 +32,7 @@
   <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>
 
   <jaxrs:server id="restService"
-		        address="http://127.0.0.1:12261/CxfRsProducerSessionTest/" 
+		        address="/CxfRsProducerSessionTest/" 
 		        staticSubresourceResolution="true">
     <jaxrs:serviceBeans>
       <ref bean="echoService"/>
@@ -41,11 +41,11 @@
   
   <bean id="echoService" class="org.apache.camel.component.cxf.jaxrs.testbean.EchoService" />
 
-  <cxf:rsClient id="rsClientProxy" address="http://127.0.0.1:12261/CxfRsProducerSessionTest/"
+  <cxf:rsClient id="rsClientProxy" address="http://localhost:8080/services/CxfRsProducerSessionTest/"
     serviceClass="org.apache.camel.component.cxf.jaxrs.testbean.EchoService"
     loggingFeatureEnabled="true" />
    
-  <cxf:rsClient id="rsClientHttp" address="http://127.0.0.1:12261/CxfRsProducerSessionTest/"/>
+  <cxf:rsClient id="rsClientHttp" address="http://localhost:8080/services/CxfRsProducerSessionTest/"/>
 
 
   <bean id="instanceCookieHandler" class="org.apache.camel.http.base.cookie.InstanceCookieHandler"/>
