@@ -64,6 +64,13 @@
       "sourceType": "org.apache.camel.component.xslt.saxon.springboot.XsltSaxonComponentConfiguration"
     },
     {
+      "name": "camel.component.xslt-saxon.secure-processing",
+      "type": "java.lang.Boolean",
+      "description": "Feature for XML secure processing (see javax.xml.XMLConstants). This is enabled by default. However, when using Saxon Professional you may need to turn this off to allow Saxon to be able to use Java extension functions.",
+      "sourceType": "org.apache.camel.component.xslt.saxon.springboot.XsltSaxonComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.xslt-saxon.transformer-factory-class",
       "type": "java.lang.String",
       "description": "To use a custom XSLT transformer factory, specified as a FQN class name",
