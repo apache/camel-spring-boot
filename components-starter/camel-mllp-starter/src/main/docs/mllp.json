@@ -160,11 +160,25 @@
       "defaultValue": 5120
     },
     {
+      "name": "camel.component.mllp.max-buffer-size",
+      "type": "java.lang.Integer",
+      "description": "Maximum buffer size used when receiving or sending data over the wire.",
+      "sourceType": "org.apache.camel.component.mllp.springboot.MllpComponentConfiguration",
+      "defaultValue": 1073741824
+    },
+    {
       "name": "camel.component.mllp.max-concurrent-consumers",
       "type": "java.lang.Integer",
       "description": "The maximum number of concurrent MLLP Consumer connections that will be allowed. If a new connection is received and the maximum is number are already established, the new connection will be reset immediately.",
       "sourceType": "org.apache.camel.component.mllp.springboot.MllpComponentConfiguration",
       "defaultValue": 5
+    },
+    {
+      "name": "camel.component.mllp.min-buffer-size",
+      "type": "java.lang.Integer",
+      "description": "Minimum buffer size used when receiving or sending data over the wire.",
+      "sourceType": "org.apache.camel.component.mllp.springboot.MllpComponentConfiguration",
+      "defaultValue": 2048
     },
     {
       "name": "camel.component.mllp.read-timeout",
