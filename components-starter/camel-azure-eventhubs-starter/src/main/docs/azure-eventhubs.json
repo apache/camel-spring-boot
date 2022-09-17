@@ -35,7 +35,7 @@
     {
       "name": "camel.component.azure-eventhubs.blob-access-key",
       "type": "java.lang.String",
-      "description": "In case you chose the default BlobCheckpointStore, this sets access key for the associated azure account name to be used for authentication with azure blob services",
+      "description": "In case you chose the default BlobCheckpointStore, this sets access key for the associated azure account name to be used for authentication with azure blob services.",
       "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration"
     },
     {
@@ -47,7 +47,7 @@
     {
       "name": "camel.component.azure-eventhubs.blob-container-name",
       "type": "java.lang.String",
-      "description": "In case you chose the default BlobCheckpointStore, this sets the blob container that shall be used by the BlobCheckpointStore to store the checkpoint offsets",
+      "description": "In case you chose the default BlobCheckpointStore, this sets the blob container that shall be used by the BlobCheckpointStore to store the checkpoint offsets.",
       "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration"
     },
     {
@@ -84,7 +84,7 @@
     {
       "name": "camel.component.azure-eventhubs.consumer-group-name",
       "type": "java.lang.String",
-      "description": "Sets the name of the consumer group this consumer is associated with. Events are read in the context of this group. The name of the consumer group that is created by default is {link #DEFAULT_CONSUMER_GROUP_NAME $Default}.",
+      "description": "Sets the name of the consumer group this consumer is associated with. Events are read in the context of this group. The name of the consumer group that is created by default is {code $Default}.",
       "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration",
       "defaultValue": "$Default"
     },
@@ -140,13 +140,19 @@
     {
       "name": "camel.component.azure-eventhubs.shared-access-key",
       "type": "java.lang.String",
-      "description": "The generated value for the SharedAccessName",
+      "description": "The generated value for the SharedAccessName.",
       "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration"
     },
     {
       "name": "camel.component.azure-eventhubs.shared-access-name",
       "type": "java.lang.String",
-      "description": "The name you chose for your EventHubs SAS keys",
+      "description": "The name you chose for your EventHubs SAS keys.",
+      "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-eventhubs.token-credential",
+      "type": "com.azure.core.credential.TokenCredential",
+      "description": "Still another way of authentication (beside supplying namespace, sharedAccessKey, sharedAccessName or connection string) is through Azure-AD authentication using an implementation instance of TokenCredential. The option is a com.azure.core.credential.TokenCredential type.",
       "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration"
     }
   ],

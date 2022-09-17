@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-optaplanner-starter",
-    "version": "3.18.2-SNAPSHOT",
+    "version": "3.18.3-SNAPSHOT",
     "scheme": "optaplanner",
     "extendsScheme": "",
     "syntax": "optaplanner:configFile",

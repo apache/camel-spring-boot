@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-ognl-starter",
-    "version": "3.18.2-SNAPSHOT",
+    "version": "3.18.3-SNAPSHOT",
     "modelName": "ognl",
     "modelJavaType": "org.apache.camel.model.language.OgnlExpression"
   },
