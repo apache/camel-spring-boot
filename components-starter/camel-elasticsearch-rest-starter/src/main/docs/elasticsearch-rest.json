@@ -23,7 +23,7 @@
     {
       "name": "camel.component.elasticsearch-rest.client",
       "type": "org.elasticsearch.client.RestClient",
-      "description": "To use an existing configured Elasticsearch client, instead of creating a client per endpoint. This allow to customize the client with specific settings. The option is a org.elasticsearch.client.RestClient type.",
+      "description": "To use an existing configured Elasticsearch client, instead of creating a client per endpoint. This allows to customize the client with specific settings. The option is a org.elasticsearch.client.RestClient type.",
       "sourceType": "org.apache.camel.component.elasticsearch.springboot.ElasticsearchComponentConfiguration"
     },
     {
