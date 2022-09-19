@@ -35,7 +35,8 @@ import org.springframework.test.annotation.DirtiesContext;
                 "camel.vault.azure.vaultName=myVault",
                 "camel.vault.azure.clientId=myClientId",
                 "camel.vault.azure.clientSecret=myClientSecret",
-                "camel.vault.azure.tenantId=myTenantId"}
+                "camel.vault.azure.tenantId=myTenantId",
+                "camel.vault.azure.eventhubConnectionString=connString"}
 )
 public class AzureVaultConfigurationTest {
 
@@ -48,5 +49,6 @@ public class AzureVaultConfigurationTest {
         Assertions.assertEquals("myClientSecret", camelContext.getVaultConfiguration().azure().getClientSecret());
         Assertions.assertEquals("myClientId", camelContext.getVaultConfiguration().azure().getClientId());
         Assertions.assertEquals("myTenantId", camelContext.getVaultConfiguration().azure().getTenantId());
+        Assertions.assertEquals("connString", camelContext.getVaultConfiguration().azure().getEventhubConnectionString());
     }
 }

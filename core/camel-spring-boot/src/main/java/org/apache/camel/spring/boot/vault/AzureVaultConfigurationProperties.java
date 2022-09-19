@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.boot.vault;
 
+import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.vault.azure")
@@ -40,6 +41,41 @@ public class AzureVaultConfigurationProperties {
      * The tenant Id
      */
     private String tenantId;
+    
+    /**
+     * Whether to automatically reload Camel upon secrets being updated in Azure.
+     */
+    private boolean refreshEnabled;
+    
+    /**
+     * The period (millis) between checking Azure for updated secrets.
+     */
+    private long refreshPeriod = 30000;
+    
+    /**
+     * Specify the secret names (or pattern) to check for updates. Multiple secrets can be separated by comma.
+     */
+    private String secrets;
+    
+    /**
+     * The Eventhubs connection String for Key Vault Secret events notifications
+     */
+    private String eventhubConnectionString;
+
+    /**
+     * The Eventhubs Blob Access Key for CheckpointStore purpose
+     */
+    private String blobAccessKey;
+
+    /**
+     * The Eventhubs Blob Account Name for CheckpointStore purpose
+     */
+    private String blobAccountName;
+
+    /**
+     * The Eventhubs Blob Container Name for CheckpointStore purpose
+     */
+    private String blobContainerName;
 
     public String getVaultName() {
         return vaultName;
@@ -71,5 +107,61 @@ public class AzureVaultConfigurationProperties {
 
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId;
+    }
+    
+    public boolean isRefreshEnabled() {
+        return refreshEnabled;
+    }
+
+    public void setRefreshEnabled(boolean refreshEnabled) {
+        this.refreshEnabled = refreshEnabled;
+    }
+
+    public long getRefreshPeriod() {
+        return refreshPeriod;
+    }
+
+    public void setRefreshPeriod(long refreshPeriod) {
+        this.refreshPeriod = refreshPeriod;
+    }
+
+    public String getSecrets() {
+        return secrets;
+    }
+
+    public void setSecrets(String secrets) {
+        this.secrets = secrets;
+    }
+
+    public String getEventhubConnectionString() {
+        return eventhubConnectionString;
+    }
+
+    public void setEventhubConnectionString(String eventhubConnectionString) {
+        this.eventhubConnectionString = eventhubConnectionString;
+    }
+
+    public String getBlobAccessKey() {
+        return blobAccessKey;
+    }
+
+    public void setBlobAccessKey(String blobAccessKey) {
+        this.blobAccessKey = blobAccessKey;
+    }
+
+    public String getBlobAccountName() {
+        return blobAccountName;
+    }
+
+    public void setBlobAccountName(String blobAccountName) {
+        this.blobAccountName = blobAccountName;
+    }
+
+    public String getBlobContainerName() {
+        return blobContainerName;
+    }
+
+    public void setBlobContainerName(String blobContainerName) {
+        this.blobContainerName = blobContainerName;
     }
 }

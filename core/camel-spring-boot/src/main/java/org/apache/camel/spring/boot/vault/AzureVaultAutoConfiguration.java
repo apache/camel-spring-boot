@@ -37,6 +37,13 @@ public class AzureVaultAutoConfiguration {
         answer.setClientSecret(config.getClientSecret());
         answer.setVaultName(config.getVaultName());
         answer.setTenantId(config.getTenantId());
+        answer.setRefreshEnabled(config.isRefreshEnabled());
+        answer.setRefreshPeriod(config.getRefreshPeriod());
+        answer.setSecrets(config.getSecrets());
+        answer.setEventhubConnectionString(config.getEventhubConnectionString());
+        answer.setBlobAccessKey(config.getBlobAccessKey());
+        answer.setBlobAccountName(config.getBlobAccountName());
+        answer.setBlobContainerName(config.getBlobContainerName());
         return answer;
     }
 
