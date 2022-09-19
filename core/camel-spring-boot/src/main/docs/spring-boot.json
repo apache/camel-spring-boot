@@ -1413,6 +1413,24 @@
       "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
     },
     {
+      "name": "camel.vault.azure.blob-access-key",
+      "type": "java.lang.String",
+      "description": "The Eventhubs Blob Access Key for CheckpointStore purpose",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.azure.blob-account-name",
+      "type": "java.lang.String",
+      "description": "The Eventhubs Blob Account Name for CheckpointStore purpose",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.azure.blob-container-name",
+      "type": "java.lang.String",
+      "description": "The Eventhubs Blob Container Name for CheckpointStore purpose",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties"
+    },
+    {
       "name": "camel.vault.azure.client-id",
       "type": "java.lang.String",
       "description": "The Client Id",
@@ -1422,6 +1440,32 @@
       "name": "camel.vault.azure.client-secret",
       "type": "java.lang.String",
       "description": "The Client secret",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.azure.eventhub-connection-string",
+      "type": "java.lang.String",
+      "description": "The Eventhubs connection String for Key Vault Secret events notifications",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.azure.refresh-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to automatically reload Camel upon secrets being updated in Azure.",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.vault.azure.refresh-period",
+      "type": "java.lang.Long",
+      "description": "The period (millis) between checking Azure for updated secrets.",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.vault.azure.secrets",
+      "type": "java.lang.String",
+      "description": "Specify the secret names (or pattern) to check for updates. Multiple secrets can be separated by comma.",
       "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties"
     },
     {
