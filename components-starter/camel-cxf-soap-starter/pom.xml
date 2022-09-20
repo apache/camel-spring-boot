@@ -59,7 +59,27 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
+      <artifactId>camel-cxf-spring-soap</artifactId>
+      <version>${camel-version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-cxf-soap</artifactId>
+      <version>${camel-version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
       <artifactId>camel-http</artifactId>
+      <version>${camel-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-jaxb</artifactId>
       <version>${camel-version}</version>
       <scope>test</scope>
     </dependency>
@@ -85,6 +105,33 @@
       <scope>test</scope>
       <version>${cxf-version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-ws-rm</artifactId>
+      <scope>test</scope>
+      <version>${cxf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-testutils</artifactId>
+      <scope>test</scope>
+      <version>${cxf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-jms</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-broker</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-kahadb-store</artifactId>
+      <scope>test</scope>
+    </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
@@ -95,31 +142,10 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-codegen-plugin</artifactId>
-        <version>${cxf-version}</version>
-        <executions>
-          <execution>
-            <id>generate-sources</id>
-            <phase>generate-sources</phase>
-            <configuration>
-              <fork>${cxf.codegenplugin.forkmode}</fork>
-              <additionalJvmArgs>${cxf.codegen.jvmArgs}</additionalJvmArgs>
-              <testSourceRoot>${basedir}/target/generated/src/test/java</testSourceRoot>
-              <defaultOptions>
-                <frontEnd>jaxws21</frontEnd>
-              </defaultOptions>
-              <wsdlOptions>
-                <wsdlOption>
-                  <wsdl>${basedir}/src/test/resources/MultiPartTest.wsdl</wsdl>
-                </wsdlOption>
-              </wsdlOptions>
-            </configuration>
-            <goals>
-              <goal>wsdl2java</goal>
-            </goals>
-          </execution>
-        </executions>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <rerunFailingTestsCount>0</rerunFailingTestsCount>
+        </configuration>
       </plugin>
     </plugins>
   </build>

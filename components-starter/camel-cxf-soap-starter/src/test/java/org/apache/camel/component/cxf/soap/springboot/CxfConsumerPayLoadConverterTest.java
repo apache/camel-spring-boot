@@ -32,8 +32,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
-import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
@@ -49,17 +47,14 @@ import org.apache.cxf.spring.boot.autoconfigure.CxfAutoConfiguration;
         CamelAutoConfiguration.class,
         CxfConsumerPayLoadConverterTest.class,
         CxfConsumerPayLoadConverterTest.TestConfiguration.class,
+        CxfConsumerMessageTest.ServletConfiguration.class,
         CxfAutoConfiguration.class
     }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 public class CxfConsumerPayLoadConverterTest extends CxfConsumerPayloadTest {
 
         
-    @Bean
-    public ServletWebServerFactory servletWebServerFactory() {
-        return new UndertowServletWebServerFactory();
-    }
-    
+        
     // *************************************
     // Config
     // *************************************

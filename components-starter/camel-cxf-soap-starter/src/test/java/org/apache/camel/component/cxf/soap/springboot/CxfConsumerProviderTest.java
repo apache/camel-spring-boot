@@ -24,6 +24,7 @@ import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.cxf.common.CXFTestSupport;
 import org.apache.camel.converter.jaxp.XmlConverter;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
@@ -69,19 +70,17 @@ public class CxfConsumerProviderTest {
 
     protected final String relativeAddress = "/" + getClass().getSimpleName() + "/test";
     
-    protected final String simpleEndpointAddress = "http://localhost:8080/services"
+    protected final String simpleEndpointAddress = "http://localhost:" + port + "/services"
                                             + relativeAddress;
     protected final String simpleEndpointURI = "cxf://" + relativeAddress
-                                       + "?serviceClass=org.apache.camel.component.cxf.soap.springboot.ServiceProvider";
+                                       + "?serviceClass=org.apache.camel.component.cxf.ServiceProvider";
 
+    static int port = CXFTestSupport.getPort1();
 
     @Autowired
     ProducerTemplate template;
     
-    @Bean
-    public ServletWebServerFactory servletWebServerFactory() {
-        return new UndertowServletWebServerFactory();
-    }
+    
     
     @Test
     public void testInvokingServiceFromHttpCompnent() throws Exception {
@@ -110,6 +109,11 @@ public class CxfConsumerProviderTest {
 
     @Configuration
     public class TestConfiguration {
+        
+        @Bean
+        public ServletWebServerFactory servletWebServerFactory() {
+            return new UndertowServletWebServerFactory(port);
+        }
 
         @Bean
         public RouteBuilder routeBuilder() {

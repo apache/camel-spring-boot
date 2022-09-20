@@ -14,8 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.cxf.soap.springboot;
+package org.apache.camel.component.cxf.soap.springboot.springxml;
 
+import org.apache.camel.component.cxf.common.CXFTestSupport;
 import org.apache.camel.component.cxf.security.GreetingService;
 import org.apache.camel.component.cxf.security.jaas.SimpleLoginModule;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -60,10 +61,13 @@ public class WSSUsernameTokenTest {
 	private static final String BAD_PASSWORD = "123";
 
 	private static final URL WSDL_URL;
+	
+	static int port = CXFTestSupport.getPort1();
 
 	static {
 		try {
-			WSDL_URL = new URL("http://localhost:8080/services/greeting-service?wsdl");
+			WSDL_URL = new URL("http://localhost:" + port 
+			                   + "/services/greeting-service?wsdl");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -74,7 +78,7 @@ public class WSSUsernameTokenTest {
 	
 	@Bean
 	public ServletWebServerFactory servletWebServerFactory() {
-	    return new UndertowServletWebServerFactory();
+	    return new UndertowServletWebServerFactory(port);
 	}
 
 	private void addWSSUsernameTokenHandler(Service service, final String username, final String password) {
