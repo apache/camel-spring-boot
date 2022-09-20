@@ -35,8 +35,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
-import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
@@ -47,38 +45,36 @@ import org.apache.cxf.spring.boot.autoconfigure.CxfAutoConfiguration;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(classes = {
-                           CamelAutoConfiguration.class, CxfConsumerPayloadTest.class,
+                           CamelAutoConfiguration.class, 
+                           CxfConsumerPayloadTest.class,
                            CxfConsumerPayloadTest.TestConfiguration.class,
+                           CxfConsumerMessageTest.ServletConfiguration.class,
                            CxfAutoConfiguration.class
 }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CxfConsumerPayloadTest extends CxfConsumerMessageTest {
 
-    protected static final String ECHO_RESPONSE = "<ns1:echoResponse xmlns:ns1=\"http://jaxws.cxf.component.camel.apache.org/\">"
-                                                  + "<return xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">echo Hello World!</return>"
+    protected static final String ECHO_RESPONSE = "<ns1:echoResponse xmlns:ns1=\"http://cxf.component.camel.apache.org/\">"
+                                                  + "<return xmlns=\"http://cxf.component.camel.apache.org/\">echo Hello World!</return>"
                                                   + "</ns1:echoResponse>";
-    protected static final String ECHO_BOOLEAN_RESPONSE = "<ns1:echoBooleanResponse xmlns:ns1=\"http://jaxws.cxf.component.camel.apache.org/\">"
-                                                          + "<return xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">true</return>"
+    protected static final String ECHO_BOOLEAN_RESPONSE = "<ns1:echoBooleanResponse xmlns:ns1=\"http://cxf.component.camel.apache.org/\">"
+                                                          + "<return xmlns=\"http://cxf.component.camel.apache.org/\">true</return>"
                                                           + "</ns1:echoBooleanResponse>";
-    protected static final String ECHO_REQUEST = "<ns1:echo xmlns:ns1=\"http://jaxws.cxf.component.camel.apache.org/\">"
-                                                 + "<arg0 xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">Hello World!</arg0></ns1:echo>";
-    protected static final String ECHO_BOOLEAN_REQUEST = "<ns1:echoBoolean xmlns:ns1=\"http://jaxws.cxf.component.camel.apache.org/\">"
-                                                         + "<arg0 xmlns=\"http://jaxws.cxf.component.camel.apache.org/\">true</arg0></ns1:echoBoolean>";
+    protected static final String ECHO_REQUEST = "<ns1:echo xmlns:ns1=\"http://cxf.component.camel.apache.org/\">"
+                                                 + "<arg0 xmlns=\"http://cxf.component.camel.apache.org/\">Hello World!</arg0></ns1:echo>";
+    protected static final String ECHO_BOOLEAN_REQUEST = "<ns1:echoBoolean xmlns:ns1=\"http://cxf.component.camel.apache.org/\">"
+                                                         + "<arg0 xmlns=\"http://cxf.component.camel.apache.org/\">true</arg0></ns1:echoBoolean>";
 
-    protected static final String ELEMENT_NAMESPACE = "http://jaxws.cxf.component.camel.apache.org/";
+    protected static final String ELEMENT_NAMESPACE = "http://cxf.component.camel.apache.org/";
     
-    @Bean
-    public ServletWebServerFactory servletWebServerFactory() {
-        return new UndertowServletWebServerFactory();
-    }
-
+   
     protected void checkRequest(String expect, String request) {
 
         if (expect.equals("ECHO_REQUEST")) {
-            assertTrue(request.startsWith(ECHO_REQUEST.substring(0, 66))
-                       && request.endsWith(ECHO_REQUEST.substring(67)), "Get a wrong request");
+            assertTrue(request.startsWith(ECHO_REQUEST.substring(0, 60))
+                       && request.endsWith(ECHO_REQUEST.substring(61)), "Get a wrong request");
         } else {
-            assertTrue(request.startsWith(ECHO_BOOLEAN_REQUEST.substring(0, 73))
-                       && request.endsWith(ECHO_BOOLEAN_REQUEST.substring(74)), "Get a wrong request");
+            assertTrue(request.startsWith(ECHO_BOOLEAN_REQUEST.substring(0, 67))
+                       && request.endsWith(ECHO_BOOLEAN_REQUEST.substring(68)), "Get a wrong request");
         }
     }
 

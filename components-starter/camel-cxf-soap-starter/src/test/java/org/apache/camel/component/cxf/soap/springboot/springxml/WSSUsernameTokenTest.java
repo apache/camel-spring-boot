@@ -14,19 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.cxf.soap.springboot;
+package org.apache.camel.component.cxf.soap.springboot.springxml;
 
+import org.apache.camel.component.cxf.common.CXFTestSupport;
 import org.apache.camel.component.cxf.security.GreetingService;
 import org.apache.camel.component.cxf.security.jaas.SimpleLoginModule;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.cxf.spring.boot.autoconfigure.CxfAutoConfiguration;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -46,22 +49,25 @@ import java.util.List;
 @SpringBootTest(classes = {
 		CamelAutoConfiguration.class,
 		WSSUsernameTokenTest.class,
-		SimpleLoginModule.class
-}
+		SimpleLoginModule.class,
+		CxfAutoConfiguration.class
+}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 @ImportResource({
 		"classpath:routes/soap-security.xml"
 })
 public class WSSUsernameTokenTest {
-	private static final Logger LOG = LoggerFactory.getLogger(WSSUsernameTokenTest.class);
-
+	
 	private static final String BAD_PASSWORD = "123";
 
 	private static final URL WSDL_URL;
+	
+	static int port = CXFTestSupport.getPort1();
 
 	static {
 		try {
-			WSDL_URL = new URL("http://localhost:16232/cxf/ws/greeting-service?wsdl");
+			WSDL_URL = new URL("http://localhost:" + port 
+			                   + "/services/greeting-service?wsdl");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -69,6 +75,11 @@ public class WSSUsernameTokenTest {
 
 	private static final QName SERVICE_NAME = new QName("http://security.cxf.component.camel.apache.org/",
 			"GreetingServiceImplService");
+	
+	@Bean
+	public ServletWebServerFactory servletWebServerFactory() {
+	    return new UndertowServletWebServerFactory(port);
+	}
 
 	private void addWSSUsernameTokenHandler(Service service, final String username, final String password) {
 		// set a handler resolver providing WSSUsernameTokenHandler in the handler chain
