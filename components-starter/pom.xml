@@ -110,8 +110,6 @@
   </build>
   <modules>
     <module>camel-activemq-starter</module>
-    <module>camel-ahc-starter</module>
-    <module>camel-ahc-ws-starter</module>
     <module>camel-amqp-starter</module>
     <module>camel-any23-starter</module>
     <module>camel-arangodb-starter</module>
