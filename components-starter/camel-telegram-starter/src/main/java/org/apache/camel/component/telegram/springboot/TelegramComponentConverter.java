@@ -41,8 +41,7 @@ public class TelegramComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.asynchttpclient.AsyncHttpClient.class));
-        answer.add(new ConvertiblePair(String.class, org.asynchttpclient.AsyncHttpClientConfig.class));
+        answer.add(new ConvertiblePair(String.class, java.net.http.HttpClient.class));
         return answer;
     }
 
@@ -59,8 +58,7 @@ public class TelegramComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.asynchttpclient.AsyncHttpClient": return applicationContext.getBean(ref, org.asynchttpclient.AsyncHttpClient.class);
-            case "org.asynchttpclient.AsyncHttpClientConfig": return applicationContext.getBean(ref, org.asynchttpclient.AsyncHttpClientConfig.class);
+            case "java.net.http.HttpClient": return applicationContext.getBean(ref, java.net.http.HttpClient.class);
         }
         return null;
     }

@@ -42,14 +42,8 @@
     },
     {
       "name": "camel.component.telegram.client",
-      "type": "org.asynchttpclient.AsyncHttpClient",
-      "description": "To use a custom AsyncHttpClient. The option is a org.asynchttpclient.AsyncHttpClient type.",
-      "sourceType": "org.apache.camel.component.telegram.springboot.TelegramComponentConfiguration"
-    },
-    {
-      "name": "camel.component.telegram.client-config",
-      "type": "org.asynchttpclient.AsyncHttpClientConfig",
-      "description": "To configure the AsyncHttpClient to use a custom com.ning.http.client.AsyncHttpClientConfig instance. The option is a org.asynchttpclient.AsyncHttpClientConfig type.",
+      "type": "java.net.http.HttpClient",
+      "description": "To use a custom java.net.http.HttpClient. The option is a java.net.http.HttpClient type.",
       "sourceType": "org.apache.camel.component.telegram.springboot.TelegramComponentConfiguration"
     },
     {
