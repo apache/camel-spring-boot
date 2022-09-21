@@ -24,10 +24,10 @@
     <artifactId>components-starter</artifactId>
     <version>3.19.0-SNAPSHOT</version>
   </parent>
-  <artifactId>camel-elasticsearch-rest-starter</artifactId>
+  <artifactId>camel-elasticsearch-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: ElasticSearch :: REST (deprecated)</name>
-  <description>Spring-Boot Starter for Camel ElasticSearch REST support</description>
+  <name>Camel SB Starters :: ElasticSearch :: Java API Client</name>
+  <description>Spring-Boot Starter for Camel ElasticSearch Java API Client support</description>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -36,28 +36,23 @@
     </dependency>
     <!-- in favor of elasticsearch version used from camel-->
     <dependency>
-      <groupId>org.elasticsearch.client</groupId>
-      <artifactId>elasticsearch-rest-high-level-client</artifactId>
-      <version>${elasticsearch-rest-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.elasticsearch.client</groupId>
-      <artifactId>elasticsearch-rest-client-sniffer</artifactId>
-      <version>${elasticsearch-rest-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.elasticsearch</groupId>
-      <artifactId>elasticsearch</artifactId>
-      <version>${elasticsearch-rest-version}</version>
+      <groupId>co.elastic.clients</groupId>
+      <artifactId>elasticsearch-java</artifactId>
+      <version>${elasticsearch-java-client-version}</version>
     </dependency>
     <dependency>
       <groupId>org.elasticsearch.client</groupId>
       <artifactId>elasticsearch-rest-client</artifactId>
-      <version>${elasticsearch-rest-version}</version>
+      <version>${elasticsearch-java-client-sniffer-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>elasticsearch-rest-client-sniffer</artifactId>
+      <version>${elasticsearch-java-client-sniffer-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-elasticsearch-rest</artifactId>
+      <artifactId>camel-elasticsearch</artifactId>
       <version>${camel-version}</version>
       <!--START OF GENERATED CODE-->
       <exclusions>

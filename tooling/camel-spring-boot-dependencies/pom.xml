@@ -748,6 +748,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-elasticsearch-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-endpointdsl-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2737,6 +2742,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-ehcache</artifactId>
+        <version>3.19.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-elasticsearch</artifactId>
         <version>3.19.0-SNAPSHOT</version>
       </dependency>
       <dependency>

@@ -1,0 +1,122 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.elasticsearch",
+      "type": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.elasticsearch.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.elasticsearch.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.elasticsearch.certificate-path",
+      "type": "java.lang.String",
+      "description": "The path of the self-signed certificate to use to access to Elasticsearch.",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.elasticsearch.client",
+      "type": "org.elasticsearch.client.RestClient",
+      "description": "To use an existing configured Elasticsearch client, instead of creating a client per endpoint. This allow to customize the client with specific settings. The option is a org.elasticsearch.client.RestClient type.",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.elasticsearch.connection-timeout",
+      "type": "java.lang.Integer",
+      "description": "The time in ms to wait before connection will timeout.",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.elasticsearch.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.elasticsearch.enable-s-s-l",
+      "type": "java.lang.Boolean",
+      "description": "Enable SSL",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.elasticsearch.enable-sniffer",
+      "type": "java.lang.Boolean",
+      "description": "Enable automatically discover nodes from a running Elasticsearch cluster. If this option is used in conjunction with Spring Boot then it's managed by the Spring Boot configuration (see: Disable Sniffer in Spring Boot).",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.elasticsearch.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the elasticsearch component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.elasticsearch.host-addresses",
+      "type": "java.lang.String",
+      "description": "Comma separated list with ip:port formatted remote transport addresses to use. The ip and port options must be left blank for hostAddresses to be considered instead.",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.elasticsearch.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.elasticsearch.max-retry-timeout",
+      "type": "java.lang.Integer",
+      "description": "The time in ms before retry",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.elasticsearch.password",
+      "type": "java.lang.String",
+      "description": "Password for authenticate",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.elasticsearch.sniff-after-failure-delay",
+      "type": "java.lang.Integer",
+      "description": "The delay of a sniff execution scheduled after a failure (in milliseconds)",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
+      "name": "camel.component.elasticsearch.sniffer-interval",
+      "type": "java.lang.Integer",
+      "description": "The interval between consecutive ordinary sniff executions in milliseconds. Will be honoured when sniffOnFailure is disabled or when there are no failures between consecutive sniff executions",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "defaultValue": 300000
+    },
+    {
+      "name": "camel.component.elasticsearch.socket-timeout",
+      "type": "java.lang.Integer",
+      "description": "The timeout in ms to wait before the socket will timeout.",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.elasticsearch.user",
+      "type": "java.lang.String",
+      "description": "Basic authenticate user",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
+    }
+  ],
+  "hints": []
+}
