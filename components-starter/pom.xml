@@ -349,6 +349,7 @@
     <module>camel-protobuf-starter</module>
     <module>camel-pubnub-starter</module>
     <module>camel-pulsar-starter</module>
+    <module>camel-python-starter</module>
     <module>camel-quartz-starter</module>
     <module>camel-quickfix-starter</module>
     <module>camel-rabbitmq-starter</module>

@@ -371,6 +371,14 @@ public class KafkaComponentConfiguration
      */
     private Integer subscribeConsumerBackoffMaxAttempts;
     /**
+     * If this feature is enabled and a single element of a batch is an Exchange
+     * or Message, the producer will generate individual kafka header values for
+     * it by using the batch Message to determine the values. Normal behaviour
+     * consists in always using the same header values (which are determined by
+     * the parent Exchange which contains the Iterable or Iterator).
+     */
+    private Boolean batchWithIndividualHeaders = false;
+    /**
      * The total bytes of memory the producer can use to buffer records waiting
      * to be sent to the server. If records are sent faster than they can be
      * delivered to the server the producer will either block or throw an
@@ -1171,6 +1179,14 @@ public class KafkaComponentConfiguration
     public void setSubscribeConsumerBackoffMaxAttempts(
             Integer subscribeConsumerBackoffMaxAttempts) {
         this.subscribeConsumerBackoffMaxAttempts = subscribeConsumerBackoffMaxAttempts;
+    }
+
+    public Boolean getBatchWithIndividualHeaders() {
+        return batchWithIndividualHeaders;
+    }
+
+    public void setBatchWithIndividualHeaders(Boolean batchWithIndividualHeaders) {
+        this.batchWithIndividualHeaders = batchWithIndividualHeaders;
     }
 
     public Integer getBufferMemorySize() {

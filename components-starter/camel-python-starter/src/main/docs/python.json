@@ -1,0 +1,36 @@
+{
+  "groups": [
+    {
+      "name": "camel.language.python",
+      "type": "org.apache.camel.language.python.springboot.PythonLanguageConfiguration",
+      "sourceType": "org.apache.camel.language.python.springboot.PythonLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.python.customizer",
+      "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.language.python.springboot.PythonLanguageConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.language.python.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.language.python.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the python language. This is enabled by default.",
+      "sourceType": "org.apache.camel.language.python.springboot.PythonLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.python.trim",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "sourceType": "org.apache.camel.language.python.springboot.PythonLanguageConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}

@@ -1483,6 +1483,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-python-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-quartz-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3629,6 +3634,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-pulsar</artifactId>
+        <version>3.19.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-python</artifactId>
         <version>3.19.0-SNAPSHOT</version>
       </dependency>
       <dependency>
