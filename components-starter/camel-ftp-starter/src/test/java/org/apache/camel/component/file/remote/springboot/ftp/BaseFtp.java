@@ -24,7 +24,7 @@ import java.nio.file.Path;
 
 public class BaseFtp extends AbstractBaseFtp {
     protected static final String AUTH_VALUE_SSL = "SSLv3";
-    protected static final String AUTH_VALUE_TLS = "TLSv1.2";
+    protected static final String AUTH_VALUE_TLS = "TLSv1.3";
 
     @RegisterExtension
     static FtpEmbeddedService service = new FtpEmbeddedService();

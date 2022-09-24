@@ -44,7 +44,7 @@ public class FileToFtpsWithCustomTrustStorePropertiesTest extends BaseFtpsClient
     private String getFtpUrl() {
         return "ftps://admin@localhost:" + getPort()
                + "/tmp2/camel?password=admin&initialDelay=2000&disableSecureDataChannelDefaults=true"
-               + "&securityProtocol=TLSv1.2&implicit=false&ftpClient.trustStore.file=./src/test/resources/server.jks&ftpClient.trustStore.type=PKCS12"
+               + "&securityProtocol=TLSv1.3&implicit=false&ftpClient.trustStore.file=./src/test/resources/server.jks&ftpClient.trustStore.type=PKCS12"
                + "&ftpClient.trustStore.algorithm=SunX509&ftpClient.trustStore.password=password&delete=true";
 
     }

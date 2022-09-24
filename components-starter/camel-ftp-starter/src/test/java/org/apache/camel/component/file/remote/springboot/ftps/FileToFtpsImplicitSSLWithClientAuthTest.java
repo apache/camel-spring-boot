@@ -22,9 +22,7 @@ import org.apache.camel.component.file.remote.springboot.ftp.BaseFtp;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledIf;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,7 +44,7 @@ public class FileToFtpsImplicitSSLWithClientAuthTest extends BaseFtpsImplicitCli
     protected String getFtpUrl() {
         return "ftps://admin@localhost:" + getPort()
                + "/tmp2/camel?password=admin&initialDelay=2000&disableSecureDataChannelDefaults=true"
-               + "&securityProtocol=TLSv1.2&implicit=true&ftpClient.keyStore.file=./src/test/resources/server.jks&ftpClient.keyStore.type=JKS"
+               + "&securityProtocol=TLSv1.3&implicit=true&ftpClient.keyStore.file=./src/test/resources/server.jks&ftpClient.keyStore.type=JKS"
                + "&ftpClient.keyStore.algorithm=SunX509&ftpClient.keyStore.password=password&ftpClient.keyStore.keyPassword=password&delete=true";
     }
 

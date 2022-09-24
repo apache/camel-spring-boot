@@ -35,7 +35,7 @@ import static org.apache.camel.language.simple.SimpleLanguage.simple;
 
 public abstract class AbstractBaseFtp {
     protected static final String AUTH_VALUE_SSL = "SSLv3";
-    protected static final String AUTH_VALUE_TLS = "TLSv1.2";
+    protected static final String AUTH_VALUE_TLS = "TLSv1.3";
 
     @Autowired
     protected CamelContext context;
