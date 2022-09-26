@@ -62,7 +62,7 @@ public class FtpsImplicitEmbeddedService extends FtpEmbeddedService {
 
     protected SslConfigurationFactory createSslConfiguration() {
         // comment in, if you have trouble with SSL
-         System.setProperty("javax.net.debug", "all");
+        System.setProperty("javax.net.debug", "all");
 
         SslConfigurationFactory sslConfigFactory = new SslConfigurationFactory();
         sslConfigFactory.setSslProtocol(authValue);

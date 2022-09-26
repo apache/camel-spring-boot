@@ -44,7 +44,7 @@ public class FtpsTest extends BaseFtpsClientAuth {
     private String getFtpUrl() {
         return "ftps://admin@localhost:" + getPort()
                + "/tmp1/camel?password=admin&initialDelay=2000&disableSecureDataChannelDefaults=true"
-               + "&securityProtocol=TLSv1.2&implicit=false";
+               + "&securityProtocol=TLSv1.3&implicit=false";
 
     }
 
