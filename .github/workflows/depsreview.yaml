@@ -6,6 +6,7 @@ permissions:
 
 jobs:
   dependency-review:
+    if: github.repository == 'apache/camel-spring-boot'
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'

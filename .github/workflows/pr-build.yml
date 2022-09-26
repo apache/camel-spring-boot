@@ -29,6 +29,7 @@ on:
 
 jobs:
   build:
+    if: github.repository == 'apache/camel-spring-boot'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
