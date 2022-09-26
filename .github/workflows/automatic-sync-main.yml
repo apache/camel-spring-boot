@@ -51,7 +51,7 @@ jobs:
       - name: Build Camel-spring-boot Project
         run: ./mvnw -V --no-transfer-progress clean install -DskipTests
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4.1.1
+        uses: peter-evans/create-pull-request@v4.1.2
         with:
           base: main
           token: ${{ secrets.GITHUB_TOKEN }}
