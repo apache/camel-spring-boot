@@ -24,6 +24,7 @@ on:
 jobs:
   build:
     name: Sync Camel Spring Boot Main Branch
+    if: github.repository == 'apache/camel-spring-boot'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Camel project
