@@ -25,8 +25,8 @@ import org.apache.camel.spi.IdempotentRepository;
 import org.infinispan.commons.api.BasicCache;
 import org.junit.jupiter.api.Test;
 
-import static org.jgroups.util.Util.assertFalse;
-import static org.jgroups.util.Util.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public interface InfinispanIdempotentRepositoryTestSupport {
     IdempotentRepository getIdempotentRepository();
