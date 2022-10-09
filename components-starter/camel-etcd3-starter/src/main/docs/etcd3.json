@@ -1,3 +1,189 @@
 {
-  "properties": []
+  "groups": [
+    {
+      "name": "camel.component.etcd3",
+      "type": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.etcd3.auth-headers",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "description": "Configure the headers to be added to auth request headers.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.authority",
+      "type": "java.lang.String",
+      "description": "Configure the authority used to authenticate connections to servers.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.etcd3.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd3.configuration",
+      "type": "org.apache.camel.component.etcd3.Etcd3Configuration",
+      "description": "Component configuration. The option is a org.apache.camel.component.etcd3.Etcd3Configuration type.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.connection-timeout",
+      "type": "java.time.Duration",
+      "description": "Configure the connection timeout. The option is a java.time.Duration type.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.etcd3.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the etcd3 component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.endpoints",
+      "type": "java.lang.String[]",
+      "description": "Configure etcd server endpoints using the IPNameResolver.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.from-index",
+      "type": "java.lang.Long",
+      "description": "The index to watch from",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.etcd3.headers",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "description": "Configure the headers to be added to http request headers.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.keep-alive-time",
+      "type": "java.time.Duration",
+      "description": "Configure the interval for gRPC keepalives. The current minimum allowed by gRPC is 10 seconds. The option is a java.time.Duration type.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.keep-alive-timeout",
+      "type": "java.time.Duration",
+      "description": "Configure the timeout for gRPC keepalives. The option is a java.time.Duration type.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.key-charset",
+      "type": "java.lang.String",
+      "description": "Configure the charset to use for the keys.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "defaultValue": "UTF-8"
+    },
+    {
+      "name": "camel.component.etcd3.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd3.load-balancer-policy",
+      "type": "java.lang.String",
+      "description": "Configure etcd load balancer policy.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.max-inbound-message-size",
+      "type": "java.lang.Integer",
+      "description": "Configure the maximum message size allowed for a single gRPC frame.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.namespace",
+      "type": "java.lang.String",
+      "description": "Configure the namespace of keys used. \/ will be treated as no namespace.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.password",
+      "type": "java.lang.String",
+      "description": "Configure etcd auth password.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.prefix",
+      "type": "java.lang.Boolean",
+      "description": "To apply an action on all the key-value pairs whose key that starts with the target path.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.etcd3.retry-delay",
+      "type": "java.lang.Long",
+      "description": "Configure the delay between retries in milliseconds.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "defaultValue": 500
+    },
+    {
+      "name": "camel.component.etcd3.retry-max-delay",
+      "type": "java.lang.Long",
+      "description": "Configure the max backing off delay between retries in milliseconds.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "defaultValue": 2500
+    },
+    {
+      "name": "camel.component.etcd3.retry-max-duration",
+      "type": "java.time.Duration",
+      "description": "Configure the retries max duration. The option is a java.time.Duration type.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.service-path",
+      "type": "java.lang.String",
+      "description": "The path to look for service discovery.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "defaultValue": "\/services\/"
+    },
+    {
+      "name": "camel.component.etcd3.ssl-context",
+      "type": "io.netty.handler.ssl.SslContext",
+      "description": "Configure SSL\/TLS context to use instead of the system default. The option is a io.netty.handler.ssl.SslContext type.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.user-name",
+      "type": "java.lang.String",
+      "description": "Configure etcd auth user.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.etcd3.value-charset",
+      "type": "java.lang.String",
+      "description": "Configure the charset to use for the values.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "defaultValue": "UTF-8"
+    }
+  ],
+  "hints": []
 }

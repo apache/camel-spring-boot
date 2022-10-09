@@ -8,7 +8,7 @@
     "firstVersion": "3.18.0",
     "label": "language,json",
     "javaType": "org.apache.camel.language.jq.JqLanguage",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-jq-starter",
     "version": "3.20.0-SNAPSHOT",
