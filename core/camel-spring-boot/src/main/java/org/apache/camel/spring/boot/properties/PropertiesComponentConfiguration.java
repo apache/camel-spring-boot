@@ -53,6 +53,11 @@ public class PropertiesComponentConfiguration {
      */
     private Boolean ignoreMissingLocation = false;
     /**
+     * Whether to support nested property placeholders. A nested placeholder, means that a placeholder, has also a
+     * placeholder, that should be resolved (recursively).
+     */
+    private Boolean nestedPlaceholder = false;
+    /**
      * Sets initial properties which will be used before any locations are
      * resolved. The option is a java.util.Properties type.
      */
@@ -121,6 +126,14 @@ public class PropertiesComponentConfiguration {
 
     public void setIgnoreMissingLocation(Boolean ignoreMissingLocation) {
         this.ignoreMissingLocation = ignoreMissingLocation;
+    }
+
+    public Boolean getNestedPlaceholder() {
+        return nestedPlaceholder;
+    }
+
+    public void setNestedPlaceholder(Boolean nestedPlaceholder) {
+        this.nestedPlaceholder = nestedPlaceholder;
     }
 
     public String getInitialProperties() {

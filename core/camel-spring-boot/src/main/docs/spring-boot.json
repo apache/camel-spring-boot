@@ -382,6 +382,13 @@
       "sourceType": "org.apache.camel.spring.boot.properties.PropertiesComponentConfiguration"
     },
     {
+      "name": "camel.component.properties.nested-placeholder",
+      "type": "java.lang.Boolean",
+      "description": "Whether to support nested property placeholders. A nested placeholder, means that a placeholder, has also a placeholder, that should be resolved (recursively).",
+      "sourceType": "org.apache.camel.spring.boot.properties.PropertiesComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.properties.override-properties",
       "type": "java.lang.String",
       "description": "Sets a special list of override properties that take precedence and will use first, if a property exist. The option is a java.util.Properties type.",

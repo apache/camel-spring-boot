@@ -69,6 +69,9 @@ public class PropertiesComponentAutoConfiguration {
         if (configuration.getIgnoreMissingLocation() != null) {
             component.setIgnoreMissingLocation(configuration.getIgnoreMissingLocation());
         }
+        if (configuration.getNestedPlaceholder() != null) {
+            component.setNestedPlaceholder(configuration.getNestedPlaceholder());
+        }
         if (configuration.getLocation() != null) {
             component.setLocation(configuration.getLocation());
         }
