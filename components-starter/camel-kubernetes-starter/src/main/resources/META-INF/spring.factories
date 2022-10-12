@@ -53,7 +53,11 @@ org.apache.camel.component.kubernetes.customresources.springboot.KubernetesCusto
 org.apache.camel.component.openshift.builds.springboot.OpenshiftBuildsComponentConverter,\
 org.apache.camel.component.kubernetes.hpa.springboot.KubernetesHPAComponentConverter,\
 org.apache.camel.component.openshift.build_configs.springboot.OpenshiftBuildConfigsComponentConverter,\
-org.apache.camel.component.kubernetes.service_accounts.springboot.KubernetesServiceAccountsComponentConverter
+org.apache.camel.component.kubernetes.service_accounts.springboot.KubernetesServiceAccountsComponentConverter,\
+org.apache.camel.component.kubernetes.events.springboot.KubernetesEventsComponentConverter,\
+org.apache.camel.component.kubernetes.events.springboot.KubernetesEventsComponentAutoConfiguration
+
+
 
 
 
