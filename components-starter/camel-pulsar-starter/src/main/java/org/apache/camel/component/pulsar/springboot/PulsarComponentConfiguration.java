@@ -32,6 +32,7 @@ import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.RedeliveryBackoff;
 import org.apache.pulsar.client.api.RegexSubscriptionMode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send and receive messages from/to Apache Pulsar messaging system.
@@ -238,6 +239,7 @@ public class PulsarComponentConfiguration
      * maxPendingMessages) exceeds this value. Partitioned topics have a pending
      * message queue for each partition.
      */
+    @Deprecated
     private Integer maxPendingMessagesAcrossPartitions = 50000;
     /**
      * Custom Message Router to use. The option is a
@@ -563,10 +565,13 @@ public class PulsarComponentConfiguration
         this.maxPendingMessages = maxPendingMessages;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Integer getMaxPendingMessagesAcrossPartitions() {
         return maxPendingMessagesAcrossPartitions;
     }
 
+    @Deprecated
     public void setMaxPendingMessagesAcrossPartitions(
             Integer maxPendingMessagesAcrossPartitions) {
         this.maxPendingMessagesAcrossPartitions = maxPendingMessagesAcrossPartitions;
