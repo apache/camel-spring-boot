@@ -188,6 +188,14 @@ public class MllpComponentConfiguration
      */
     private Integer logPhiMaxBytes = 5120;
     /**
+     * Maximum buffer size used when receiving or sending data over the wire.
+     */
+    private Integer maxBufferSize = 1073741824;
+    /**
+     * Minimum buffer size used when receiving or sending data over the wire.
+     */
+    private Integer minBufferSize = 2048;
+    /**
      * The SO_TIMEOUT value (in milliseconds) used after the start of an MLLP
      * frame has been received
      */
@@ -411,6 +419,22 @@ public class MllpComponentConfiguration
 
     public void setLogPhiMaxBytes(Integer logPhiMaxBytes) {
         this.logPhiMaxBytes = logPhiMaxBytes;
+    }
+
+    public Integer getMaxBufferSize() {
+        return maxBufferSize;
+    }
+
+    public void setMaxBufferSize(Integer maxBufferSize) {
+        this.maxBufferSize = maxBufferSize;
+    }
+
+    public Integer getMinBufferSize() {
+        return minBufferSize;
+    }
+
+    public void setMinBufferSize(Integer minBufferSize) {
+        this.minBufferSize = minBufferSize;
     }
 
     public Integer getReadTimeout() {

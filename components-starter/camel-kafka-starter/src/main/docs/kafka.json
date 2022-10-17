@@ -55,6 +55,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.kafka.batch-with-individual-headers",
+      "type": "java.lang.Boolean",
+      "description": "If this feature is enabled and a single element of a batch is an Exchange or Message, the producer will generate individual kafka header values for it by using the batch Message to determine the values. Normal behaviour consists in always using the same header values (which are determined by the parent Exchange which contains the Iterable or Iterator).",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.kafka.break-on-first-error",
       "type": "java.lang.Boolean",
       "description": "This options controls what happens when a consumer is processing an exchange and it fails. If the option is false then the consumer continues to the next message and processes it. If the option is true then the consumer breaks out, and will seek back to offset of the message that caused a failure, and then re-attempt to process this message. However this can lead to endless processing of the same message if its bound to fail every time, eg a poison message. Therefore its recommended to deal with that for example by using Camel's error handler.",

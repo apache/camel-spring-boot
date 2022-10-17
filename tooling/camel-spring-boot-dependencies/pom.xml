@@ -4553,7 +4553,7 @@
       <dependency>
         <groupId>org.codehaus.jettison</groupId>
         <artifactId>jettison</artifactId>
-        <version>1.4.1</version>
+        <version>1.5.0</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.woodstox</groupId>
@@ -4885,11 +4885,6 @@
         <groupId>stax</groupId>
         <artifactId>stax-api</artifactId>
         <version>1.0.1</version>
-      </dependency>
-      <dependency>
-        <groupId>xalan</groupId>
-        <artifactId>xalan</artifactId>
-        <version>2.7.2</version>
       </dependency>
       <dependency>
         <groupId>xerces</groupId>

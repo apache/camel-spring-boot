@@ -586,6 +586,13 @@
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties"
     },
     {
+      "name": "camel.resilience4j.throw-exception-when-half-open-or-open-state",
+      "type": "java.lang.Boolean",
+      "description": "Whether to throw io.github.resilience4j.circuitbreaker.CallNotPermittedException when the call is rejected due circuit breaker is half open or open.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.resilience4j.wait-duration-in-open-state",
       "type": "java.lang.Integer",
       "description": "Configures the wait duration (in seconds) which specifies how long the CircuitBreaker should stay open, before it switches to half open. Default value is 60 seconds.",
