@@ -37,6 +37,13 @@ public class CamelHealthCheckConfigurationProperties {
     private Boolean routesEnabled;
 
     /**
+     * Whether components health check is enabled.
+     * <p>
+     * Is default enabled
+     */
+    private Boolean componentsEnabled;
+
+    /**
      * Whether consumers health check is enabled.
      * <p>
      * Is default enabled
@@ -118,6 +125,14 @@ public class CamelHealthCheckConfigurationProperties {
 
     public void setRegistryEnabled(Boolean registryEnabled) {
         this.registryEnabled = registryEnabled;
+    }
+
+    public Boolean getComponentsEnabled() {
+        return componentsEnabled;
+    }
+
+    public void setComponentsEnabled(Boolean componentsEnabled) {
+        this.componentsEnabled = componentsEnabled;
     }
 
     public String getExcludePattern() {

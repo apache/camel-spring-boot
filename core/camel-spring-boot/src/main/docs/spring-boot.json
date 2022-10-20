@@ -422,6 +422,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.health.components-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether components health check is enabled. <p> Is default enabled",
+      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
+    },
+    {
       "name": "camel.health.consumers-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether consumers health check is enabled. <p> Is default enabled",
