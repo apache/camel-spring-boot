@@ -54,6 +54,10 @@ public class JsonPathLanguageConfiguration
      */
     private Boolean writeAsString = false;
     /**
+     * Whether to unpack a single element json-array into an object.
+     */
+    private Boolean unpackArray = false;
+    /**
      * Name of header to use as input, instead of the message body
      */
     private String headerName;
@@ -98,6 +102,14 @@ public class JsonPathLanguageConfiguration
 
     public void setWriteAsString(Boolean writeAsString) {
         this.writeAsString = writeAsString;
+    }
+
+    public Boolean getUnpackArray() {
+        return unpackArray;
+    }
+
+    public void setUnpackArray(Boolean unpackArray) {
+        this.unpackArray = unpackArray;
     }
 
     public String getHeaderName() {
