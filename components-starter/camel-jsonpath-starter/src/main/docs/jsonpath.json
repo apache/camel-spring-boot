@@ -65,6 +65,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.language.jsonpath.unpack-array",
+      "type": "java.lang.Boolean",
+      "description": "Whether to unpack a single element json-array into an object.",
+      "sourceType": "org.apache.camel.jsonpath.springboot.JsonPathLanguageConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.language.jsonpath.write-as-string",
       "type": "java.lang.Boolean",
       "description": "Whether to write the output of each row\/element as a JSON String value instead of a Map\/POJO value.",
