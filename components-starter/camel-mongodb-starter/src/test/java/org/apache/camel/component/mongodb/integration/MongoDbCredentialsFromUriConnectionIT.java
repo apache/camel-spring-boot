@@ -65,8 +65,8 @@ public class MongoDbCredentialsFromUriConnectionIT extends MongoDbOperationsIT {
                     String uriWithCredentials = String.format("%susername=%s&password=%s&", uriHostnameOnly, USER, PASSWORD);
 
                     String uriWithAuthSource = String.format(
-                            "%susername=%s&password=%s&authSource=%s&",
-                            uriHostnameOnly, AUTH_SOURCE_USER, AUTH_SOURCE_PASSWORD, dbName);
+                            "%susername=%s&password=%s&",
+                            uriHostnameOnly, AUTH_SOURCE_USER, AUTH_SOURCE_PASSWORD);
 
                     from("direct:count").to(
                             uriHostnameOnly + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=count&dynamicity=true");
