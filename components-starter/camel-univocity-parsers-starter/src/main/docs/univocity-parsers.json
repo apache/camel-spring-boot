@@ -97,7 +97,7 @@
     {
       "name": "camel.dataformat.univocity-csv.ignore-trailing-whitespaces",
       "type": "java.lang.Boolean",
-      "description": "Whether or not the trailing white spaces must ignored. The default value is true",
+      "description": "Whether or not the trailing white spaces must be ignored. The default value is true",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
       "defaultValue": true
     },
@@ -216,7 +216,7 @@
     {
       "name": "camel.dataformat.univocity-fixed.ignore-trailing-whitespaces",
       "type": "java.lang.Boolean",
-      "description": "Whether or not the trailing white spaces must ignored. The default value is true",
+      "description": "Whether or not the trailing white spaces must be ignored. The default value is true",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedDataFormatConfiguration",
       "defaultValue": true
     },
@@ -341,7 +341,7 @@
     {
       "name": "camel.dataformat.univocity-tsv.ignore-trailing-whitespaces",
       "type": "java.lang.Boolean",
-      "description": "Whether or not the trailing white spaces must ignored. The default value is true",
+      "description": "Whether or not the trailing white spaces must be ignored. The default value is true",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
       "defaultValue": true
     },

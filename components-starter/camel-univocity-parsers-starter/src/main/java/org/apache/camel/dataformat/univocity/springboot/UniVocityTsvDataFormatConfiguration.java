@@ -50,8 +50,8 @@ public class UniVocityTsvDataFormatConfiguration
      */
     private Boolean skipEmptyLines = true;
     /**
-     * Whether or not the trailing white spaces must ignored. The default value
-     * is true
+     * Whether or not the trailing white spaces must be ignored. The default
+     * value is true
      */
     private Boolean ignoreTrailingWhitespaces = true;
     /**
