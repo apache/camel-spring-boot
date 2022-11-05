@@ -44,6 +44,7 @@ public class VertxHttpComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, io.vertx.core.Vertx.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.vertx.http.VertxHttpBinding.class));
         answer.add(new ConvertiblePair(String.class, io.vertx.core.VertxOptions.class));
+        answer.add(new ConvertiblePair(String.class, io.vertx.ext.web.client.WebClientOptions.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
@@ -65,6 +66,7 @@ public class VertxHttpComponentConverter implements GenericConverter {
             case "io.vertx.core.Vertx": return applicationContext.getBean(ref, io.vertx.core.Vertx.class);
             case "org.apache.camel.component.vertx.http.VertxHttpBinding": return applicationContext.getBean(ref, org.apache.camel.component.vertx.http.VertxHttpBinding.class);
             case "io.vertx.core.VertxOptions": return applicationContext.getBean(ref, io.vertx.core.VertxOptions.class);
+            case "io.vertx.ext.web.client.WebClientOptions": return applicationContext.getBean(ref, io.vertx.ext.web.client.WebClientOptions.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }

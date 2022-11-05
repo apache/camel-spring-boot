@@ -20,6 +20,7 @@ import javax.annotation.Generated;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.net.ProxyType;
+import io.vertx.ext.web.client.WebClientOptions;
 import org.apache.camel.component.vertx.http.VertxHttpBinding;
 import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -90,6 +91,11 @@ public class VertxHttpComponentConfiguration
      * option is a io.vertx.core.VertxOptions type.
      */
     private VertxOptions vertxOptions;
+    /**
+     * To provide a custom set of options for configuring vertx web client. The
+     * option is a io.vertx.ext.web.client.WebClientOptions type.
+     */
+    private WebClientOptions webClientOptions;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
@@ -192,6 +198,14 @@ public class VertxHttpComponentConfiguration
 
     public void setVertxOptions(VertxOptions vertxOptions) {
         this.vertxOptions = vertxOptions;
+    }
+
+    public WebClientOptions getWebClientOptions() {
+        return webClientOptions;
+    }
+
+    public void setWebClientOptions(WebClientOptions webClientOptions) {
+        this.webClientOptions = webClientOptions;
     }
 
     public HeaderFilterStrategy getHeaderFilterStrategy() {

@@ -136,6 +136,12 @@
       "type": "io.vertx.core.VertxOptions",
       "description": "To provide a custom set of vertx options for configuring vertx. The option is a io.vertx.core.VertxOptions type.",
       "sourceType": "org.apache.camel.component.vertx.http.springboot.VertxHttpComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx-http.web-client-options",
+      "type": "io.vertx.ext.web.client.WebClientOptions",
+      "description": "To provide a custom set of options for configuring vertx web client. The option is a io.vertx.ext.web.client.WebClientOptions type.",
+      "sourceType": "org.apache.camel.component.vertx.http.springboot.VertxHttpComponentConfiguration"
     }
   ],
   "hints": []
