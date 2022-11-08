@@ -215,6 +215,10 @@ public class HttpComponentConfiguration
      */
     private Integer proxyAuthPort;
     /**
+     * Proxy authentication protocol scheme
+     */
+    private String proxyAuthScheme;
+    /**
      * Proxy authentication username
      */
     private String proxyAuthUsername;
@@ -509,6 +513,14 @@ public class HttpComponentConfiguration
 
     public void setProxyAuthPort(Integer proxyAuthPort) {
         this.proxyAuthPort = proxyAuthPort;
+    }
+
+    public String getProxyAuthScheme() {
+        return proxyAuthScheme;
+    }
+
+    public void setProxyAuthScheme(String proxyAuthScheme) {
+        this.proxyAuthScheme = proxyAuthScheme;
     }
 
     public String getProxyAuthUsername() {

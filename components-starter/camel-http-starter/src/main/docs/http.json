@@ -214,6 +214,12 @@
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
+      "name": "camel.component.http.proxy-auth-scheme",
+      "type": "java.lang.String",
+      "description": "Proxy authentication protocol scheme",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
+    },
+    {
       "name": "camel.component.http.proxy-auth-username",
       "type": "java.lang.String",
       "description": "Proxy authentication username",
