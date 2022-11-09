@@ -1293,6 +1293,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-mail-microsoft-oauth-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mail-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3396,6 +3401,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-mail</artifactId>
+        <version>3.20.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-mail-microsoft-oauth</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
       <dependency>
