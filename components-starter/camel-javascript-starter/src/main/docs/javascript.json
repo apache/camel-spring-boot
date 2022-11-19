@@ -1,0 +1,42 @@
+{
+  "groups": [
+    {
+      "name": "camel.language.js",
+      "type": "org.apache.camel.language.js.springboot.JavaScriptLanguageConfiguration",
+      "sourceType": "org.apache.camel.language.js.springboot.JavaScriptLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.js.customizer",
+      "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.language.js.springboot.JavaScriptLanguageConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.language.js.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.language.js.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the js language. This is enabled by default.",
+      "sourceType": "org.apache.camel.language.js.springboot.JavaScriptLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.js.header-name",
+      "type": "java.lang.String",
+      "description": "Name of header to use as input, instead of the message body It has as higher precedent than the propertyName if both are set.",
+      "sourceType": "org.apache.camel.language.js.springboot.JavaScriptLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.js.trim",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "sourceType": "org.apache.camel.language.js.springboot.JavaScriptLanguageConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}

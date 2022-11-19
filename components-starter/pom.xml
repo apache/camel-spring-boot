@@ -268,6 +268,7 @@
     <module>camel-jackson-starter</module>
     <module>camel-jacksonxml-starter</module>
     <module>camel-jasypt-starter</module>
+    <module>camel-javascript-starter</module>
     <module>camel-jaxb-starter</module>
     <module>camel-jbpm-starter</module>
     <module>camel-jcache-starter</module>
