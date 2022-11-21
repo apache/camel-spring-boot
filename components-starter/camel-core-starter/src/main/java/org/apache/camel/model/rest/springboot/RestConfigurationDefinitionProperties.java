@@ -107,6 +107,11 @@ public class RestConfigurationDefinitionProperties {
      */
     private String apiContextPath;
     /**
+     * Sets the route id to use for the route that services the REST API. The
+     * route will by default use an auto assigned route id.
+     */
+    private String apiContextRouteId;
+    /**
      * Whether vendor extension is enabled in the Rest APIs. If enabled then
      * Camel will include additional information as vendor extension (eg keys
      * starting with x-) such as route ids, class names etc. Not all 3rd party
@@ -287,6 +292,14 @@ public class RestConfigurationDefinitionProperties {
 
     public void setApiContextPath(String apiContextPath) {
         this.apiContextPath = apiContextPath;
+    }
+
+    public String getApiContextRouteId() {
+        return apiContextRouteId;
+    }
+
+    public void setApiContextRouteId(String apiContextRouteId) {
+        this.apiContextRouteId = apiContextRouteId;
     }
 
     public Boolean getApiVendorExtension() {

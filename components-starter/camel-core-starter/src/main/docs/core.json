@@ -619,6 +619,12 @@
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
     },
     {
+      "name": "camel.rest.api-context-route-id",
+      "type": "java.lang.String",
+      "description": "Sets the route id to use for the route that services the REST API. The route will by default use an auto assigned route id.",
+      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
+    },
+    {
       "name": "camel.rest.api-host",
       "type": "java.lang.String",
       "description": "To use a specific hostname for the API documentation (such as swagger or openapi) This can be used to override the generated host with this configured hostname",
