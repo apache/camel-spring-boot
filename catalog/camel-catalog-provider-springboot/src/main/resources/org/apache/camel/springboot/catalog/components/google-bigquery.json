@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-google-bigquery-starter",
-    "version": "3.18.3-SNAPSHOT",
+    "version": "3.18.4-SNAPSHOT",
     "scheme": "google-bigquery",
     "extendsScheme": "",
     "syntax": "google-bigquery:projectId:datasetId:tableId",
