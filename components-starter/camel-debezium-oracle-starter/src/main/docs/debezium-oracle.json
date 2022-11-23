@@ -105,7 +105,7 @@
       "type": "java.lang.String",
       "description": "The name of the DatabaseHistory class that should be used to store and recover database schema changes. The configuration properties for the history are prefixed with the 'database.history.' string.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": "class io.debezium.relational.history.KafkaDatabaseHistory"
+      "defaultValue": "io.debezium.relational.history.KafkaDatabaseHistory"
     },
     {
       "name": "camel.component.debezium-oracle.database-history-file-filename",
@@ -118,6 +118,13 @@
       "type": "java.lang.String",
       "description": "A list of host\/port pairs that the connector will use for establishing the initial connection to the Kafka cluster for retrieving database schema history previously stored by the connector. This should point to the same Kafka cluster used by the Kafka Connect process.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.database-history-kafka-query-timeout-ms",
+      "type": "java.lang.Long",
+      "description": "The number of milliseconds to wait while fetching cluster information using Kafka admin client. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 3000
     },
     {
       "name": "camel.component.debezium-oracle.database-history-kafka-recovery-attempts",
@@ -398,6 +405,13 @@
       "defaultValue": 20000
     },
     {
+      "name": "camel.component.debezium-oracle.log-mining-session-max-ms",
+      "type": "java.lang.Long",
+      "description": "The maximum number of milliseconds that a LogMiner session lives for before being restarted. Defaults to 0 (indefinite until a log switch occurs). The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-oracle.log-mining-sleep-time-default-ms",
       "type": "java.lang.Long",
       "description": "The amount of time that the connector will sleep after reading data from redo\/archive logs and before starting reading data again. Value is in milliseconds. The option is a long type.",
@@ -476,8 +490,7 @@
       "name": "camel.component.debezium-oracle.offset-commit-policy",
       "type": "java.lang.String",
       "description": "The name of the Java class of the commit policy. It defines when offsets commit has to be triggered based on the number of events processed and the time elapsed since the last commit. This class must implement the interface 'OffsetCommitPolicy'. The default is a periodic commit policy based upon time intervals.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": "io.debezium.embedded.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy"
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-oracle.offset-commit-timeout-ms",
@@ -566,6 +579,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-oracle.schema-name-adjustment-mode",
+      "type": "java.lang.String",
+      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including:'avro' replaces the characters that cannot be used in the Avro type name with underscore (default)'none' does not apply any adjustment",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "avro"
+    },
+    {
       "name": "camel.component.debezium-oracle.signal-data-collection",
       "type": "java.lang.String",
       "description": "The name of the data collection that is used to send signals\/commands to Debezium. Signaling is disabled when not set.",
@@ -574,7 +594,7 @@
     {
       "name": "camel.component.debezium-oracle.skipped-operations",
       "type": "java.lang.String",
-      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes. By default, no operations will be skipped.",
+      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes, 't' for truncates, and 'none' to indicate nothing skipped. By default, no operations will be skipped.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
     },
     {
