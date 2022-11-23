@@ -78,7 +78,7 @@ public class DebeziumOracleComponentConfiguration
      * interface 'OffsetCommitPolicy'. The default is a periodic commit policy
      * based upon time intervals.
      */
-    private String offsetCommitPolicy = "io.debezium.embedded.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy";
+    private String offsetCommitPolicy;
     /**
      * Maximum number of milliseconds to wait for records to flush and partition
      * offset data to be committed to offset storage before cancelling the
@@ -178,7 +178,7 @@ public class DebeziumOracleComponentConfiguration
      * recover database schema changes. The configuration properties for the
      * history are prefixed with the 'database.history.' string.
      */
-    private String databaseHistory = "class io.debezium.relational.history.KafkaDatabaseHistory";
+    private String databaseHistory = "io.debezium.relational.history.KafkaDatabaseHistory";
     /**
      * The path to the file that will be used to record the database history
      */
@@ -190,6 +190,11 @@ public class DebeziumOracleComponentConfiguration
      * the same Kafka cluster used by the Kafka Connect process.
      */
     private String databaseHistoryKafkaBootstrapServers;
+    /**
+     * The number of milliseconds to wait while fetching cluster information
+     * using Kafka admin client. The option is a long type.
+     */
+    private Long databaseHistoryKafkaQueryTimeoutMs = 3000L;
     /**
      * The number of attempts in a row that no data are returned from Kafka
      * before recover completes. The maximum amount of time to wait after
@@ -423,6 +428,12 @@ public class DebeziumOracleComponentConfiguration
      */
     private Long logMiningScnGapDetectionTimeIntervalMaxMs = 20000L;
     /**
+     * The maximum number of milliseconds that a LogMiner session lives for
+     * before being restarted. Defaults to 0 (indefinite until a log switch
+     * occurs). The option is a long type.
+     */
+    private Long logMiningSessionMaxMs = 0L;
+    /**
      * The amount of time that the connector will sleep after reading data from
      * redo/archive logs and before starting reading data again. Value is in
      * milliseconds. The option is a long type.
@@ -516,14 +527,22 @@ public class DebeziumOracleComponentConfiguration
      */
     private Boolean sanitizeFieldNames = false;
     /**
+     * Specify how schema names should be adjusted for compatibility with the
+     * message converter used by the connector, including:'avro' replaces the
+     * characters that cannot be used in the Avro type name with underscore
+     * (default)'none' does not apply any adjustment
+     */
+    private String schemaNameAdjustmentMode = "avro";
+    /**
      * The name of the data collection that is used to send signals/commands to
      * Debezium. Signaling is disabled when not set.
      */
     private String signalDataCollection;
     /**
      * The comma-separated list of operations to skip during streaming, defined
-     * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes. By default,
-     * no operations will be skipped.
+     * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
+     * truncates, and 'none' to indicate nothing skipped. By default, no
+     * operations will be skipped.
      */
     private String skippedOperations;
     /**
@@ -860,6 +879,15 @@ public class DebeziumOracleComponentConfiguration
         this.databaseHistoryKafkaBootstrapServers = databaseHistoryKafkaBootstrapServers;
     }
 
+    public Long getDatabaseHistoryKafkaQueryTimeoutMs() {
+        return databaseHistoryKafkaQueryTimeoutMs;
+    }
+
+    public void setDatabaseHistoryKafkaQueryTimeoutMs(
+            Long databaseHistoryKafkaQueryTimeoutMs) {
+        this.databaseHistoryKafkaQueryTimeoutMs = databaseHistoryKafkaQueryTimeoutMs;
+    }
+
     public Integer getDatabaseHistoryKafkaRecoveryAttempts() {
         return databaseHistoryKafkaRecoveryAttempts;
     }
@@ -1188,6 +1216,14 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningScnGapDetectionTimeIntervalMaxMs = logMiningScnGapDetectionTimeIntervalMaxMs;
     }
 
+    public Long getLogMiningSessionMaxMs() {
+        return logMiningSessionMaxMs;
+    }
+
+    public void setLogMiningSessionMaxMs(Long logMiningSessionMaxMs) {
+        this.logMiningSessionMaxMs = logMiningSessionMaxMs;
+    }
+
     public Long getLogMiningSleepTimeDefaultMs() {
         return logMiningSleepTimeDefaultMs;
     }
@@ -1326,6 +1362,14 @@ public class DebeziumOracleComponentConfiguration
 
     public void setSanitizeFieldNames(Boolean sanitizeFieldNames) {
         this.sanitizeFieldNames = sanitizeFieldNames;
+    }
+
+    public String getSchemaNameAdjustmentMode() {
+        return schemaNameAdjustmentMode;
+    }
+
+    public void setSchemaNameAdjustmentMode(String schemaNameAdjustmentMode) {
+        this.schemaNameAdjustmentMode = schemaNameAdjustmentMode;
     }
 
     public String getSignalDataCollection() {

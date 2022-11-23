@@ -12,7 +12,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-http-starter",
-    "version": "3.18.3-SNAPSHOT",
+    "version": "3.18.4-SNAPSHOT",
     "scheme": "https",
     "extendsScheme": "",
     "alternativeSchemes": "http,https",
