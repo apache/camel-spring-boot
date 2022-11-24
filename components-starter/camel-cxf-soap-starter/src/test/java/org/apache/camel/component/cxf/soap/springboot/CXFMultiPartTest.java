@@ -14,14 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.cxf.soap.springboot.springxml;
+package org.apache.camel.component.cxf.soap.springboot;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.Service;
 
-import org.apache.camel.component.cxf.common.CXFTestSupport;
-import org.apache.camel.component.cxf.multipart.MultiPartInvokeImpl;
 import org.apache.camel.cxf.multipart.MultiPartInvoke;
 import org.apache.camel.cxf.multipart.types.InE;
 import org.apache.camel.cxf.multipart.types.ObjectFactory;
@@ -40,9 +38,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.cxf.spring.boot.autoconfigure.CxfAutoConfiguration;
-/*
- * This test uses xml beans and camel route definition
- */
+
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(classes = {
@@ -65,18 +61,15 @@ public class CXFMultiPartTest {
     public static final QName ROUTE_PORT_NAME = new QName("http://camel.apache.org/cxf/multipart",
                                                           "MultiPartInvokePort");
     protected static Endpoint endpoint;
-    
-    static int backendSerivcePort = CXFTestSupport.getPort1();
-    static int servletPort = CXFTestSupport.getPort2();
 
     @Bean
     public ServletWebServerFactory servletWebServerFactory() {
-        return new UndertowServletWebServerFactory(servletPort);
+        return new UndertowServletWebServerFactory();
     }
     
     public void startService() {
         Object implementor = new MultiPartInvokeImpl();
-        String address = "http://localhost:" + backendSerivcePort
+        String address = "http://localhost:16231"
                          + "/CXFMultiPartTest/SoapContext/SoapPort";
         endpoint = Endpoint.publish(address, implementor);
 
@@ -92,8 +85,7 @@ public class CXFMultiPartTest {
     @Test
     public void testInvokingServiceFromCXFClient() throws Exception {
         startService();
-        String reply = invokeMultiPartService("http://localhost:" + servletPort 
-                                              + "/services/CXFMultiPartTest/CamelContext/RouterPort", "in0", "in1");
+        String reply = invokeMultiPartService("http://localhost:8080/services/CXFMultiPartTest/CamelContext/RouterPort", "in0", "in1");
         assertNotNull(reply, "No response received from service");
         assertEquals("in0 in1", reply);
 

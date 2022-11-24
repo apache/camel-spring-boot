@@ -14,20 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.cxf.soap.springboot.mtom;
+package org.apache.camel.component.cxf.jaxws;
 
-import java.awt.Image;
-import javax.jws.WebParam;
-import javax.jws.WebService;
-import javax.xml.ws.soap.MTOM;
+import java.util.List;
 
-@WebService(name = "ImageService", targetNamespace = "http://apache.org/camel/cxf/mtom_feature")
-@MTOM
-public interface ImageService {
+public interface HelloService {
+    String sayHello();
 
-    Image downloadImage(@WebParam(name = "name") String name);
+    void ping();
 
-    
-    String uploadImage(@WebParam(name = "data") Image data, @WebParam(name = "name") String name);
+    int getInvocationCount();
+
+    String echo(String text) throws Exception;
+
+    Boolean echoBoolean(Boolean bool);
+
+    String complexParameters(List<String> par1, List<String> par2);
 
 }

@@ -37,12 +37,12 @@
         xmlns:s="http://camel.apache.org/cxf/multipart">
 
         <cxf:outInterceptors>
-            <bean class="org.apache.camel.component.cxf.WriteXmlDeclarationInterceptor"/>
+            <bean class="org.apache.camel.component.cxf.soap.springboot.WriteXmlDeclarationInterceptor"/>
         </cxf:outInterceptors>
    </cxf:cxfEndpoint>
   
     <cxf:cxfEndpoint id="serviceEndpoint" 
-        address="http://localhost:${CXFTestSupport.port1}/CXFMultiPartTest/SoapContext/SoapPort"
+        address="http://localhost:16231/CXFMultiPartTest/SoapContext/SoapPort"
         wsdlURL="classpath:MultiPartTest.wsdl"
         endpointName="s:MultiPartInvokePort"
         serviceName="s:MultiPartInvokeService"
