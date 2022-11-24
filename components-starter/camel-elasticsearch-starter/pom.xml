@@ -35,6 +35,12 @@
       <version>${spring-boot-version}</version>
     </dependency>
     <!-- in favor of elasticsearch version used from camel-->
+    <!-- must use json-api v2 -->
+    <dependency>
+      <groupId>jakarta.json</groupId>
+      <artifactId>jakarta.json-api</artifactId>
+      <version>2.0.2</version>
+    </dependency>
     <dependency>
       <groupId>co.elastic.clients</groupId>
       <artifactId>elasticsearch-java</artifactId>
