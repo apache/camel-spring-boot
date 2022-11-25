@@ -84,7 +84,7 @@ public class WSSecurityRouteTest {
         BusFactory.setDefaultBus(bus);
         BusFactory.setThreadDefaultBus(bus);
 
-        GreeterService gs = new GreeterService();
+        GreeterService gs = new GreeterService(null);
         Greeter greeter = gs.getGreeterSignaturePort();
 
         ((BindingProvider) greeter).getRequestContext().put(
@@ -104,7 +104,7 @@ public class WSSecurityRouteTest {
         BusFactory.setDefaultBus(bus);
         BusFactory.setThreadDefaultBus(bus);
 
-        GreeterService gs = new GreeterService();
+        GreeterService gs = new GreeterService(null);
         Greeter greeter = gs.getGreeterUsernameTokenPort();
 
         ((BindingProvider) greeter).getRequestContext().put(
@@ -124,7 +124,7 @@ public class WSSecurityRouteTest {
         BusFactory.setDefaultBus(bus);
         BusFactory.setThreadDefaultBus(bus);
 
-        GreeterService gs = new GreeterService();
+        GreeterService gs = new GreeterService(null);
         Greeter greeter = gs.getGreeterEncryptionPort();
 
         ((BindingProvider) greeter).getRequestContext().put(
@@ -144,7 +144,7 @@ public class WSSecurityRouteTest {
         BusFactory.setDefaultBus(bus);
         BusFactory.setThreadDefaultBus(bus);
 
-        GreeterService gs = new GreeterService();
+        GreeterService gs = new GreeterService(null);
         Greeter greeter = gs.getGreeterSecurityPolicyPort();
 
         ((BindingProvider) greeter).getRequestContext().put(
