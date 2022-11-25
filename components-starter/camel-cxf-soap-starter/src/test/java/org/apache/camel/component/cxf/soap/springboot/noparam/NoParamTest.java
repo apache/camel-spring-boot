@@ -18,7 +18,6 @@ package org.apache.camel.component.cxf.soap.springboot.noparam;
 
 
 
-import javax.xml.ws.Endpoint;
 
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
@@ -35,7 +34,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -63,14 +61,7 @@ public class NoParamTest {
     static int port = CXFTestSupport.getPort1();
 
 
-    @BeforeEach
-    public void setup() {
-        Object implementor = new org.apache.camel.component.cxf.noparam.NoParamEndpoint();
-        String address = "/cxf-noparam/";
-        Endpoint.publish(address, implementor);
-    }
-
-    
+     
     
     
     @Autowired
@@ -105,6 +96,15 @@ public class NoParamTest {
         }
         
         @Bean
+        CxfEndpoint noParamServiceEndpoint() {
+            CxfSpringEndpoint cxfEndpoint = new CxfSpringEndpoint();
+            cxfEndpoint.setServiceClass(org.apache.camel.component.cxf.noparam.NoParamEndpoint.class);
+            cxfEndpoint.setAddress("http://localhost:" + port 
+                                   + "/services/camel-noparam/");
+            return cxfEndpoint;
+        }
+        
+        @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
@@ -114,8 +114,7 @@ public class NoParamTest {
                     .to("mock:end");
                     
                     from("direct:noParam")
-                    .to("cxf:bean:noParamEndpoint?address=" + "http://localhost:" + port 
-                        + "/services/camel-noparam/");
+                    .to("cxf:bean:noParamServiceEndpoint");
                 }
             };
         }
