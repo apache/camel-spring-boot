@@ -55,6 +55,11 @@ public class XQueryLanguageConfiguration
      */
     private List<PropertyDefinition> namespace;
     /**
+     * Name of property to use as input, instead of the message body. It has a
+     * lower precedent than the headerName if both are set.
+     */
+    private String propertyName;
+    /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
      */
@@ -82,6 +87,14 @@ public class XQueryLanguageConfiguration
 
     public void setNamespace(List<PropertyDefinition> namespace) {
         this.namespace = namespace;
+    }
+
+    public String getPropertyName() {
+        return propertyName;
+    }
+
+    public void setPropertyName(String propertyName) {
+        this.propertyName = propertyName;
     }
 
     public Boolean getTrim() {
