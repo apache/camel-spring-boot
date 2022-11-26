@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.micrometer.springboot;
+package org.apache.camel.component.micrometer.springboot.metrics;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.metrics")
-public class CamelMicrometerConfiguration {
+public class CamelMetricsConfiguration {
 
     /**
      * Set whether to enable the MicrometerRoutePolicyFactory for capturing metrics

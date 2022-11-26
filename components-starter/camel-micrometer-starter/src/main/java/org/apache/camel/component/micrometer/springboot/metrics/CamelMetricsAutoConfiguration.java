@@ -14,62 +14,58 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.micrometer.springboot;
+package org.apache.camel.component.micrometer.springboot.metrics;
 
+import io.micrometer.core.instrument.MeterRegistry;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.micrometer.eventnotifier.MicrometerExchangeEventNotifier;
 import org.apache.camel.component.micrometer.eventnotifier.MicrometerRouteEventNotifier;
 import org.apache.camel.component.micrometer.messagehistory.MicrometerMessageHistoryFactory;
 import org.apache.camel.component.micrometer.routepolicy.MicrometerRoutePolicyFactory;
-import org.apache.camel.spi.CamelContextCustomizer;
 import org.apache.camel.spi.ManagementStrategy;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({CamelMicrometerConfiguration.class})
+@EnableConfigurationProperties({CamelMetricsConfiguration.class})
 @AutoConfigureAfter({CamelAutoConfiguration.class})
-public class CamelMicrometerAutoConfiguration {
+public class CamelMetricsAutoConfiguration {
 
-    @Autowired
-    private ApplicationContext applicationContext;
-    private final CamelContext camelContext;
-    @Autowired
-    private CamelMicrometerConfiguration configuration;
-
-    public CamelMicrometerAutoConfiguration(
-            CamelContext camelContext) {
-        this.camelContext = camelContext;
+    public CamelMetricsAutoConfiguration(
+            CamelContext camelContext, CamelMetricsConfiguration configuration, MeterRegistry meterRegistry) {
+        configureMicrometer(camelContext, configuration, meterRegistry);
     }
 
-    @Bean
-    public CamelContextCustomizer configureMicrometer() {
+    private void configureMicrometer(CamelContext camelContext, CamelMetricsConfiguration configuration, MeterRegistry meterRegistry) {
         if (configuration.isEnableRoutePolicy()) {
-            camelContext.addRoutePolicyFactory(new MicrometerRoutePolicyFactory());
+            MicrometerRoutePolicyFactory factory = new MicrometerRoutePolicyFactory();
+            factory.setMeterRegistry(meterRegistry);
+            camelContext.addRoutePolicyFactory(factory);
         }
 
         ManagementStrategy managementStrategy = camelContext.getManagementStrategy();
         if (configuration.isEnableExchangeEventNotifier()) {
-            managementStrategy.addEventNotifier(new MicrometerExchangeEventNotifier());
+            MicrometerExchangeEventNotifier notifier = new MicrometerExchangeEventNotifier();
+            notifier.setMeterRegistry(meterRegistry);
+            managementStrategy.addEventNotifier(notifier);
         }
 
         if (configuration.isEnableRouteEventNotifier()) {
-            managementStrategy.addEventNotifier(new MicrometerRouteEventNotifier());
+            MicrometerRouteEventNotifier notifier = new MicrometerRouteEventNotifier();
+            notifier.setMeterRegistry(meterRegistry);
+            managementStrategy.addEventNotifier(notifier);
         }
 
         if (configuration.isEnableMessageHistory()) {
             if (!camelContext.isMessageHistory()) {
                 camelContext.setMessageHistory(true);
             }
-            camelContext.setMessageHistoryFactory(new MicrometerMessageHistoryFactory());
+            MicrometerMessageHistoryFactory factory = new MicrometerMessageHistoryFactory();
+            factory.setMeterRegistry(meterRegistry);
+            camelContext.setMessageHistoryFactory(factory);
         }
-
-        return null;
     }
 }
