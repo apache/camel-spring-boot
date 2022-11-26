@@ -25,18 +25,15 @@ import org.apache.camel.spi.CamelContextCustomizer;
 import org.apache.camel.spi.ManagementStrategy;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
-import org.apache.camel.spring.boot.util.ConditionalOnHierarchicalProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Lazy;
 
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({CamelMicrometerConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.metrics"})
 @AutoConfigureAfter({CamelAutoConfiguration.class})
 public class CamelMicrometerAutoConfiguration {
 
@@ -51,32 +48,28 @@ public class CamelMicrometerAutoConfiguration {
         this.camelContext = camelContext;
     }
 
-    @Lazy
     @Bean
     public CamelContextCustomizer configureMicrometer() {
-        return new CamelContextCustomizer() {
-            @Override
-            public void configure(CamelContext camelContext) {
-                if (configuration.isEnableRoutePolicy()) {
-                    camelContext.addRoutePolicyFactory(new MicrometerRoutePolicyFactory());
-                }
+        if (configuration.isEnableRoutePolicy()) {
+            camelContext.addRoutePolicyFactory(new MicrometerRoutePolicyFactory());
+        }
 
-                ManagementStrategy managementStrategy = camelContext.getManagementStrategy();
-                if (configuration.isEnableExchangeEventNotifier()) {
-                    managementStrategy.addEventNotifier(new MicrometerExchangeEventNotifier());
-                }
+        ManagementStrategy managementStrategy = camelContext.getManagementStrategy();
+        if (configuration.isEnableExchangeEventNotifier()) {
+            managementStrategy.addEventNotifier(new MicrometerExchangeEventNotifier());
+        }
 
-                if (configuration.isEnableRouteEventNotifier()) {
-                    managementStrategy.addEventNotifier(new MicrometerRouteEventNotifier());
-                }
+        if (configuration.isEnableRouteEventNotifier()) {
+            managementStrategy.addEventNotifier(new MicrometerRouteEventNotifier());
+        }
 
-                if (configuration.isEnableMessageHistory()) {
-                    if (!camelContext.isMessageHistory()) {
-                        camelContext.setMessageHistory(true);
-                    }
-                    camelContext.setMessageHistoryFactory(new MicrometerMessageHistoryFactory());
-                }
+        if (configuration.isEnableMessageHistory()) {
+            if (!camelContext.isMessageHistory()) {
+                camelContext.setMessageHistory(true);
             }
-        };
+            camelContext.setMessageHistoryFactory(new MicrometerMessageHistoryFactory());
+        }
+
+        return null;
     }
 }

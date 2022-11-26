@@ -18,5 +18,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.apache.camel.component.micrometer.springboot.MicrometerComponentAutoConfiguration,\
 org.apache.camel.component.micrometer.springboot.MicrometerComponentConverter,\
-org.apache.camel.component.micrometer.springboot.CamelMicrometerConfiguration
+org.apache.camel.component.micrometer.springboot.CamelMicrometerAutoConfiguration
 
