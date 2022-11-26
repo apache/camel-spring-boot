@@ -500,6 +500,12 @@
       "sourceType": "org.apache.camel.language.tokenizer.springboot.TokenizeLanguageConfiguration"
     },
     {
+      "name": "camel.language.tokenize.property-name",
+      "type": "java.lang.String",
+      "description": "Name of property to use as input, instead of the message body. It has a lower precedent than the headerName if both are set.",
+      "sourceType": "org.apache.camel.language.tokenizer.springboot.TokenizeLanguageConfiguration"
+    },
+    {
       "name": "camel.language.tokenize.trim",
       "type": "java.lang.Boolean",
       "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",

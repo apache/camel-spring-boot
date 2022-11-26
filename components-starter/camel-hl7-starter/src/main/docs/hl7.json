@@ -54,6 +54,18 @@
       "sourceType": "org.apache.camel.component.hl7.springboot.Hl7TerserLanguageConfiguration"
     },
     {
+      "name": "camel.language.hl7terser.header-name",
+      "type": "java.lang.String",
+      "description": "Name of header to use as input, instead of the message body It has as higher precedent than the propertyName if both are set.",
+      "sourceType": "org.apache.camel.component.hl7.springboot.Hl7TerserLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.hl7terser.property-name",
+      "type": "java.lang.String",
+      "description": "Name of property to use as input, instead of the message body. It has a lower precedent than the headerName if both are set.",
+      "sourceType": "org.apache.camel.component.hl7.springboot.Hl7TerserLanguageConfiguration"
+    },
+    {
       "name": "camel.language.hl7terser.trim",
       "type": "java.lang.Boolean",
       "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",

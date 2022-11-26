@@ -37,23 +37,10 @@ public class PythonLanguageConfiguration
      */
     private Boolean enabled;
     /**
-     * Name of header to use as input, instead of the message body It has as
-     * higher precedent than the propertyName if both are set.
-     */
-    private String headerName;
-    /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
      */
     private Boolean trim = true;
-
-    public String getHeaderName() {
-        return headerName;
-    }
-
-    public void setHeaderName(String headerName) {
-        this.headerName = headerName;
-    }
 
     public Boolean getTrim() {
         return trim;

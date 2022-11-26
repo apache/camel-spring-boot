@@ -58,14 +58,20 @@ public class JsonPathLanguageConfiguration
      */
     private Boolean unpackArray = false;
     /**
-     * Name of header to use as input, instead of the message body
-     */
-    private String headerName;
-    /**
      * To configure additional options on JSONPath. Multiple values can be
      * separated by comma.
      */
     private String option;
+    /**
+     * Name of header to use as input, instead of the message body It has as
+     * higher precedent than the propertyName if both are set.
+     */
+    private String headerName;
+    /**
+     * Name of property to use as input, instead of the message body. It has a
+     * lower precedent than the headerName if both are set.
+     */
+    private String propertyName;
     /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
@@ -112,6 +118,14 @@ public class JsonPathLanguageConfiguration
         this.unpackArray = unpackArray;
     }
 
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
+    }
+
     public String getHeaderName() {
         return headerName;
     }
@@ -120,12 +134,12 @@ public class JsonPathLanguageConfiguration
         this.headerName = headerName;
     }
 
-    public String getOption() {
-        return option;
+    public String getPropertyName() {
+        return propertyName;
     }
 
-    public void setOption(String option) {
-        this.option = option;
+    public void setPropertyName(String propertyName) {
+        this.propertyName = propertyName;
     }
 
     public Boolean getTrim() {

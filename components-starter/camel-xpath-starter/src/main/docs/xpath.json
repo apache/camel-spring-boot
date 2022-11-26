@@ -63,6 +63,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.language.xpath.property-name",
+      "type": "java.lang.String",
+      "description": "Name of property to use as input, instead of the message body. It has a lower precedent than the headerName if both are set.",
+      "sourceType": "org.apache.camel.language.xpath.springboot.XPathLanguageConfiguration"
+    },
+    {
       "name": "camel.language.xpath.saxon",
       "type": "java.lang.Boolean",
       "description": "Whether to use Saxon.",

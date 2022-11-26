@@ -42,6 +42,11 @@ public class JqLanguageConfiguration
      */
     private String headerName;
     /**
+     * Name of property to use as input, instead of the message body. It has a
+     * lower precedent than the headerName if both are set.
+     */
+    private String propertyName;
+    /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
      */
@@ -53,6 +58,14 @@ public class JqLanguageConfiguration
 
     public void setHeaderName(String headerName) {
         this.headerName = headerName;
+    }
+
+    public String getPropertyName() {
+        return propertyName;
+    }
+
+    public void setPropertyName(String propertyName) {
+        this.propertyName = propertyName;
     }
 
     public Boolean getTrim() {
