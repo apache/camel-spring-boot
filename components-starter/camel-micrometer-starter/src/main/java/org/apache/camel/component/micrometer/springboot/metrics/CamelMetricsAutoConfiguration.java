@@ -36,7 +36,9 @@ public class CamelMetricsAutoConfiguration {
 
     public CamelMetricsAutoConfiguration(
             CamelContext camelContext, CamelMetricsConfiguration configuration, MeterRegistry meterRegistry) {
-        configureMicrometer(camelContext, configuration, meterRegistry);
+        if (meterRegistry != null) {
+            configureMicrometer(camelContext, configuration, meterRegistry);
+        }
     }
 
     private void configureMicrometer(CamelContext camelContext, CamelMetricsConfiguration configuration, MeterRegistry meterRegistry) {
