@@ -2074,12 +2074,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-as2-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-asn1</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -2125,19 +2119,8 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-avro-rpc-component</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-avro-rpc-jetty</artifactId>
         <version>3.20.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-avro-rpc-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2146,19 +2129,8 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-avro-spi</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws-cloudtrail</artifactId>
         <version>3.20.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2282,12 +2254,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-azure-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-azure-servicebus</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -2355,12 +2321,6 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-box-api</artifactId>
         <version>3.20.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-box-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2509,6 +2469,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-core-all</artifactId>
+        <version>3.20.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-core-catalog</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -2565,6 +2530,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-csimple-joor</artifactId>
+        <version>3.20.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-csimple-maven-plugin</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -2634,12 +2604,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-debezium-common-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-debezium-db2</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -2662,12 +2626,6 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-debezium-oracle</artifactId>
         <version>3.20.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-debezium-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -2811,12 +2769,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-fhir-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-file</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -2889,12 +2841,6 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-google-mail</artifactId>
         <version>3.20.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-google-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -3018,12 +2964,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-huawei-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-huaweicloud-common</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -3099,12 +3039,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-infinispan-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-influxdb</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -3166,6 +3100,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-jaxb</artifactId>
+        <version>3.20.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-jbang</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -3355,6 +3294,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-kotlin-dsl</artifactId>
+        <version>3.20.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-kubernetes</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -3475,12 +3419,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-microprofile-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-milo</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -3571,12 +3509,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-olingo2-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-olingo4</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -3584,12 +3516,6 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-olingo4-api</artifactId>
         <version>3.20.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-olingo4-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -3728,6 +3654,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-report-maven-plugin</artifactId>
+        <version>3.20.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-resilience4j</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -3798,12 +3729,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-salesforce-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-sap-netweaver</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -3841,12 +3766,6 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-servicenow-maven-plugin</artifactId>
         <version>3.20.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-servicenow-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -4065,12 +3984,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-test-parent</artifactId>
-        <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-test-spring</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
@@ -4181,9 +4094,8 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-vertx-parent</artifactId>
+        <artifactId>camel-vertx-kafka-maven-plugin</artifactId>
         <version>3.20.0-SNAPSHOT</version>
-        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -4278,6 +4190,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-xml-jaxb-dsl</artifactId>
+        <version>3.20.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-xml-jaxb-dsl-test</artifactId>
         <version>3.20.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -4689,237 +4606,237 @@
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-benchmark</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-benchmark</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-constraint-drl</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-constraint-drl</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-constraint-streams-bavet</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-constraint-streams-bavet</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-constraint-streams-common</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-constraint-streams-common</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-constraint-streams-drools</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-constraint-streams-drools</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-core</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-core-impl</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-core-impl</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-distribution-internal</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <type>zip</type>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-docs</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <type>zip</type>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-examples</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-operator</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-operator</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-common</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-common</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-jackson</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-jackson</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-jaxb</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-jaxb</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-jpa</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-jpa</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-jsonb</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-jsonb</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-xstream</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-persistence-xstream</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-quarkus</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-quarkus-benchmark</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-quarkus-benchmark-deployment</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-quarkus-deployment</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-quarkus-jackson</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-quarkus-jackson-deployment</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-quarkus-jackson-integration-test</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-quarkus-jsonb</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-quarkus-jsonb-deployment</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-quarkus-jsonb-integration-test</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-spring-boot-autoconfigure</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-spring-boot-starter</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-test</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.optaplanner</groupId>
         <artifactId>optaplanner-test</artifactId>
-        <version>8.30.0.Final</version>
+        <version>8.31.0.Final</version>
         <classifier>javadoc</classifier>
       </dependency>
       <dependency>
