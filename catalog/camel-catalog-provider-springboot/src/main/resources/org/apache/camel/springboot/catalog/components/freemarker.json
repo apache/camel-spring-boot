@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-freemarker-starter",
-    "version": "3.18.4-SNAPSHOT",
+    "version": "3.18.5-SNAPSHOT",
     "scheme": "freemarker",
     "extendsScheme": "",
     "syntax": "freemarker:resourceUri",

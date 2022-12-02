@@ -11,7 +11,7 @@
     "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-hashicorp-vault-starter",
-    "version": "3.18.4-SNAPSHOT",
+    "version": "3.18.5-SNAPSHOT",
     "scheme": "hashicorp-vault",
     "extendsScheme": "",
     "syntax": "hashicorp-vault:secretsEngine",
