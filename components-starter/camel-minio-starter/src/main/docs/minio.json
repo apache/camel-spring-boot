@@ -94,13 +94,13 @@
     {
       "name": "camel.component.minio.destination-bucket-name",
       "type": "java.lang.String",
-      "description": "Source bucket name.",
+      "description": "Destination bucket name.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.destination-object-name",
       "type": "java.lang.String",
-      "description": "Source object name.",
+      "description": "Destination object name.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {

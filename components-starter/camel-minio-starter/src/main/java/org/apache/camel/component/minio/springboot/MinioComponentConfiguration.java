@@ -139,11 +139,11 @@ public class MinioComponentConfiguration
      */
     private String delimiter;
     /**
-     * Source bucket name.
+     * Destination bucket name.
      */
     private String destinationBucketName;
     /**
-     * Source object name.
+     * Destination object name.
      */
     private String destinationObjectName;
     /**
