@@ -55,6 +55,7 @@ import org.apache.cxf.spring.boot.autoconfigure.CxfAutoConfiguration;
 import org.apache.cxf.testutil.common.TestUtil;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
+import org.apache.cxf.ws.addressing.WSAContextUtils;
 import org.apache.cxf.ws.rm.manager.AcksPolicyType;
 import org.apache.cxf.ws.rm.manager.DestinationPolicyType;
 import org.apache.cxf.ws.rmp.v200502.RMAssertion;
@@ -112,16 +113,16 @@ public class WSRMTest {
         proxyFactory.getOutInterceptors().add(new MessageLossSimulator());
         HelloWorld helloWorld = (HelloWorld) proxyFactory.create();
         Client client = ClientProxy.getClient(helloWorld);
-        String decoupledEndpoint = "http://localhost:"
-            + TestUtil.getPortNumber("decoupled") + "/wsrm/decoupled_endpoint";
-
+        String decoupledEndpoint = "/wsrm/decoupled_endpoint";
+        client.getBus().setProperty(WSAContextUtils.DECOUPLED_ENDPOINT_BASE_PROPERTY, 
+                                       "http://localhost:" + port + "/services/wsrm/decoupled_endpoint");
         HTTPConduit hc = (HTTPConduit)(client.getConduit());
         HTTPClientPolicy cp = hc.getClient();
         cp.setDecoupledEndpoint(decoupledEndpoint);
-        String result = helloWorld.sayHi("world!");
-        assertEquals("Hello world!", result, "Get a wrong response");
-        result = helloWorld.sayHi("world!");//second call will trigger MessageLoss and resend
-        assertEquals("Hello world!", result, "Get a wrong response");
+        String result = helloWorld.sayHi("world1!");
+        assertEquals("Hello world1!", result, "Get a wrong response");
+        result = helloWorld.sayHi("world2!");//second call will trigger MessageLoss and resend
+        assertEquals("Hello world2!", result, "Get a wrong response");
     }
     
     // *************************************
