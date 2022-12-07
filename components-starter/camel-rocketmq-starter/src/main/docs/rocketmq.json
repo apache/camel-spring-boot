@@ -1,0 +1,127 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.rocketmq",
+      "type": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rocketmq.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.rocketmq.access-key",
+      "type": "java.lang.String",
+      "description": "Access key for RocketMQ ACL.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rocketmq.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.rocketmq.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.rocketmq.consumer-group",
+      "type": "java.lang.String",
+      "description": "Consumer group name.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rocketmq.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.rocketmq.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the rocketmq component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rocketmq.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.rocketmq.namesrv-addr",
+      "type": "java.lang.String",
+      "description": "Name server address of RocketMQ cluster.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "defaultValue": "localhost:9876"
+    },
+    {
+      "name": "camel.component.rocketmq.producer-group",
+      "type": "java.lang.String",
+      "description": "Producer group name.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rocketmq.reply-to-consumer-group",
+      "type": "java.lang.String",
+      "description": "Consumer group name used for receiving response.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rocketmq.reply-to-topic",
+      "type": "java.lang.String",
+      "description": "Topic used for receiving response when using in-out pattern.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rocketmq.request-timeout-checker-interval-millis",
+      "type": "java.lang.Long",
+      "description": "Check interval milliseconds of request timeout.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "defaultValue": 1000
+    },
+    {
+      "name": "camel.component.rocketmq.request-timeout-millis",
+      "type": "java.lang.Long",
+      "description": "Timeout milliseconds of receiving response when using in-out pattern.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
+      "name": "camel.component.rocketmq.secret-key",
+      "type": "java.lang.String",
+      "description": "Secret key for RocketMQ ACL.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rocketmq.send-tag",
+      "type": "java.lang.String",
+      "description": "Each message would be sent with this tag.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rocketmq.subscribe-tags",
+      "type": "java.lang.String",
+      "description": "Subscribe tags of consumer. Multiple tags could be split by , such as TagATagB",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "defaultValue": "*"
+    },
+    {
+      "name": "camel.component.rocketmq.wait-for-send-result",
+      "type": "java.lang.Boolean",
+      "description": "Whether waiting for send result before routing to next endpoint.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}
