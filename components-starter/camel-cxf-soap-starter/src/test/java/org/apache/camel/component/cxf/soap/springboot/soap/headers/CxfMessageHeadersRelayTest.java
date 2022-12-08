@@ -84,6 +84,7 @@ import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFa
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.cxf.binding.soap.SoapHeader;
@@ -883,6 +884,7 @@ public class CxfMessageHeadersRelayTest {
         
         
         @Bean
+        @Scope("prototype")
         CxfEndpoint routerNoRelayNoServiceClassEndpoint(HeaderFilterStrategy dropAllMessageHeadersStrategy) {
             CxfSpringEndpoint cxfEndpoint = new CxfSpringEndpoint();
             cxfEndpoint.setAddress("/CxfMessageHeadersRelayTest/HeaderService/routerNoRelayNoServiceClassEndpoint");
@@ -914,6 +916,7 @@ public class CxfMessageHeadersRelayTest {
         }
         
         @Bean
+        @Scope("prototype")
         CxfEndpoint serviceExtraRelays(HeaderFilterStrategy customMessageFilterStrategy) {
             CxfSpringEndpoint cxfEndpoint = new CxfSpringEndpoint();
             cxfEndpoint.setAddress("/CxfMessageHeadersRelayTest/HeaderService/serviceExtraRelays");

@@ -27,6 +27,7 @@ import javax.xml.ws.Endpoint;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.ResolveEndpointFailedException;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.cxf.GreeterImplWithSleep;
 import org.apache.camel.component.cxf.common.CXFTestSupport;
@@ -45,6 +46,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -66,11 +68,11 @@ import org.apache.hello_world_soap_http.Greeter;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(classes = {
-                           CamelAutoConfiguration.class, CxfTimeoutTest.class,
-                           CxfTimeoutTest.TestConfiguration.class,
+                           CamelAutoConfiguration.class, CxfBeanScopeTest.class,
+                           CxfBeanScopeTest.TestConfiguration.class,
                            CxfAutoConfiguration.class
 }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CxfTimeoutTest {
+public class CxfBeanScopeTest {
 
       
     static int port = CXFTestSupport.getPort1();;
@@ -95,30 +97,35 @@ public class CxfTimeoutTest {
     
     
 
+       
     @Test
-    public void testInvokingJaxWsServerWithBusUriParams() throws Exception {
-        sendTimeOutMessage("cxf://" + JAXWS_SERVER_ADDRESS + "?serviceClass=org.apache.hello_world_soap_http.Greeter&bus=#cxf&cxfConfigurer=#origConfigurer");
+    public void testSingltonScopeWithConflict() throws Exception {
+        try {
+            sendTimeOutMessage("cxf://bean:springEndpoint");
+            fail("Should get the Exception here.");
+        } catch (ResolveEndpointFailedException ex) {
+            assertTrue(ex.getMessage().contains(
+                "Different URI refer to the same CxfEndpoint Bean instance"));
+        }
+    }
+    
+    @Test
+    public void testSingltonScopeWithoutConflict() throws Exception {
+        sendTimeOutMessage("cxf://bean:springEndpoint?sslContextParameters=#mySslContext&hostnameVerifier=#defaultHostnameVerifier");
+    }
+    
+    @Test
+    public void testSingltonScopeWithoutConflictWithDifferentParaOrder() throws Exception {
+        sendTimeOutMessage("cxf://bean:springEndpoint?hostnameVerifier=#defaultHostnameVerifier&sslContextParameters=#mySslContext");
+    }
+    
+    @Test
+    public void testPrototyeScopeWithoutConflict() throws Exception {
+        //since it's prototype scope, so can't cause conflict even with different parameters
+        sendTimeOutMessage("cxf://bean:springEndpointNoParas?sslContextParameters=#mySslContext&hostnameVerifier=#defaultHostnameVerifier");
     }
 
-    @Test
-    public void testInvokingJaxWsServerWithoutBusUriParams() throws Exception {
-        sendTimeOutMessage("cxf://" + JAXWS_SERVER_ADDRESS + "?serviceClass=org.apache.hello_world_soap_http.Greeter&cxfConfigurer=#origConfigurer");
-    }
-
-    @Test
-    public void testInvokingJaxWsServerWithCxfEndpoint() throws Exception {
-        sendTimeOutMessage("cxf://bean:springEndpoint");
-    }
-
-    @Test
-    public void testInvokingFromCamelRoute() throws Exception {
-        sendTimeOutMessage("direct:start");
-    }
-
-    @Test
-    public void testDoCatchWithTimeOutException() throws Exception {
-        sendTimeOutMessage("direct:doCatch");
-    }
+    
 
     protected void sendTimeOutMessage(String endpointUri) throws Exception {
         Exchange reply = sendJaxWsMessage(endpointUri);
@@ -238,8 +245,18 @@ public class CxfTimeoutTest {
 
         
         @Bean
-        @Scope("prototype")
         CxfEndpoint springEndpoint() {
+            
+            CxfSpringEndpoint cxfEndpoint = new CxfSpringEndpoint();
+            cxfEndpoint.setServiceClass(org.apache.hello_world_soap_http.Greeter.class);
+            cxfEndpoint.setAddress(JAXWS_SERVER_ADDRESS);
+            cxfEndpoint.setCxfConfigurer(new OrigCxfConfigurer());
+            return cxfEndpoint;
+        }
+        
+        @Bean
+        @Scope("prototype")
+        CxfEndpoint springEndpointNoParas() {
             
             CxfSpringEndpoint cxfEndpoint = new CxfSpringEndpoint();
             cxfEndpoint.setServiceClass(org.apache.hello_world_soap_http.Greeter.class);
@@ -257,7 +274,7 @@ public class CxfTimeoutTest {
                     from("direct:start").
                         to("cxf:bean:springEndpoint?sslContextParameters=#mySslContext&hostnameVerifier=#defaultHostnameVerifier");
                     from("direct:doCatch").
-                        to("cxf:bean:springEndpoint");
+                        to("cxf:bean:springEndpointNoParas");
                    
                    
                 }
