@@ -32,6 +32,8 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -95,7 +97,9 @@ public class GsonMarshalExclusionTest {
 
         Object marshalled = template.requestBody("direct:inPojoExcludeAge", in);
         String marshalledAsString = context.getTypeConverter().convertTo(String.class, marshalled);
-        assertEquals("{\"height\":190,\"weight\":70}", marshalledAsString);
+        assertTrue(marshalledAsString.contains("\"height\":190"));
+        assertTrue(marshalledAsString.contains("\"weight\":70"));
+        assertFalse(marshalledAsString.contains("\"age\":30"));
 
         template.sendBody("direct:backPojoExcludeAge", marshalled);
 
