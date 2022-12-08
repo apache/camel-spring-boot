@@ -115,7 +115,7 @@ public class WSRMTest {
         Client client = ClientProxy.getClient(helloWorld);
         String decoupledEndpoint = "/wsrm/decoupled_endpoint";
         client.getBus().setProperty(WSAContextUtils.DECOUPLED_ENDPOINT_BASE_PROPERTY, 
-                                       "http://localhost:" + port + "/services/wsrm/decoupled_endpoint");
+                                       "http://localhost:" + port + "/services");
         HTTPConduit hc = (HTTPConduit)(client.getConduit());
         HTTPClientPolicy cp = hc.getClient();
         cp.setDecoupledEndpoint(decoupledEndpoint);
