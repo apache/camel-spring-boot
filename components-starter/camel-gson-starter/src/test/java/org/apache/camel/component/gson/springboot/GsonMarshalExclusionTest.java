@@ -31,14 +31,14 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @DirtiesContext
@@ -95,7 +95,9 @@ public class GsonMarshalExclusionTest {
 
         Object marshalled = template.requestBody("direct:inPojoExcludeAge", in);
         String marshalledAsString = context.getTypeConverter().convertTo(String.class, marshalled);
-        assertEquals("{\"height\":190,\"weight\":70}", marshalledAsString);
+        assertTrue(marshalledAsString.contains("\"height\":190"));
+        assertTrue(marshalledAsString.contains("\"weight\":70"));
+        assertFalse(marshalledAsString.contains("\"age\":30"));
 
         template.sendBody("direct:backPojoExcludeAge", marshalled);
 

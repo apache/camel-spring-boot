@@ -26,15 +26,14 @@ import org.apache.camel.component.gson.GsonDataFormat;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @DirtiesContext
@@ -72,9 +71,10 @@ public class GsonFieldNamePolicyTest {
         pojo.setFirstName("Donald");
         pojo.setLastName("Duck");
 
-        String expected = "{\"id\":123,\"first_name\":\"Donald\",\"last_name\":\"Duck\"}";
         String json = template.requestBody("direct:inPojo", pojo, String.class);
-        assertEquals(expected, json);
+        assertTrue(json.contains("\"id\":123"));
+        assertTrue(json.contains("\"first_name\":\"Donald\""));
+        assertTrue(json.contains("\"last_name\":\"Duck\""));
     }
 
     // *************************************
