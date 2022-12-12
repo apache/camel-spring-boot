@@ -16,4 +16,5 @@
 #
 
 name: camel-spring-boot
-version: next
+version: 3.19.x
+display-version: 3.19.x
