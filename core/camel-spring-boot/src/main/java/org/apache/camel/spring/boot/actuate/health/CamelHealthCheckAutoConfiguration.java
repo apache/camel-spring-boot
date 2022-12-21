@@ -135,7 +135,7 @@ public class CamelHealthCheckAutoConfiguration {
                 }
             }
 
-            return new CamelHealthCheckIndicator(applicationContext, camelContext);
+            return new CamelHealthCheckIndicator(applicationContext, camelContext, config.getExposureLevel());
         }
     }
 
