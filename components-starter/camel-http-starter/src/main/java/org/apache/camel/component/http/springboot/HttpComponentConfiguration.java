@@ -46,6 +46,22 @@ public class HttpComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Whether to the HTTP request should follow redirects. By default the HTTP
+     * request does not follow redirects
+     */
+    private Boolean followRedirects = false;
+    /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
      * To use a custom org.apache.http.client.CookieStore. By default the
      * org.apache.http.impl.client.BasicCookieStore is used which is an
      * in-memory only cookie store. Notice if bridgeEndpoint=true then the
@@ -62,27 +78,11 @@ public class HttpComponentConfiguration
      */
     private Boolean copyHeaders = true;
     /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
-    /**
      * This threshold in bytes controls whether the response payload should be
      * stored in memory as a byte array or be streaming based. Set this to -1 to
      * always use streaming mode.
      */
     private Integer responsePayloadStreamingThreshold = 8192;
-    /**
-     * Whether to the HTTP request should follow redirects. By default the HTTP
-     * request does not follow redirects
-     */
-    private Boolean followRedirects = false;
     /**
      * Whether to skip mapping all the Camel headers as HTTP request headers. If
      * there are no data from Camel headers needed to be included in the HTTP
@@ -263,6 +263,22 @@ public class HttpComponentConfiguration
      */
     private Integer socketTimeout = -1;
 
+    public Boolean getFollowRedirects() {
+        return followRedirects;
+    }
+
+    public void setFollowRedirects(Boolean followRedirects) {
+        this.followRedirects = followRedirects;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
     public CookieStore getCookieStore() {
         return cookieStore;
     }
@@ -279,14 +295,6 @@ public class HttpComponentConfiguration
         this.copyHeaders = copyHeaders;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
     public Integer getResponsePayloadStreamingThreshold() {
         return responsePayloadStreamingThreshold;
     }
@@ -294,14 +302,6 @@ public class HttpComponentConfiguration
     public void setResponsePayloadStreamingThreshold(
             Integer responsePayloadStreamingThreshold) {
         this.responsePayloadStreamingThreshold = responsePayloadStreamingThreshold;
-    }
-
-    public Boolean getFollowRedirects() {
-        return followRedirects;
-    }
-
-    public void setFollowRedirects(Boolean followRedirects) {
-        this.followRedirects = followRedirects;
     }
 
     public Boolean getSkipRequestHeaders() {

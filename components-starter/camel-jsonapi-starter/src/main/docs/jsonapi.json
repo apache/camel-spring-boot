@@ -20,8 +20,8 @@
     },
     {
       "name": "camel.dataformat.json-api.data-format-types",
-      "type": "java.lang.Class<java.lang.Object>[]",
-      "description": "The classes to take into account for the marshalling",
+      "type": "java.lang.String",
+      "description": "The classes to take into account for the marshalling. Multiple classes can be separated by comma.",
       "sourceType": "org.apache.camel.component.jsonapi.springboot.JsonApiDataFormatConfiguration"
     },
     {
@@ -32,8 +32,8 @@
     },
     {
       "name": "camel.dataformat.json-api.main-format-type",
-      "type": "java.lang.Class<java.lang.Object>",
-      "description": "The classes to take into account while unmarshalling",
+      "type": "java.lang.String",
+      "description": "The class to take into account while unmarshalling.",
       "sourceType": "org.apache.camel.component.jsonapi.springboot.JsonApiDataFormatConfiguration"
     }
   ],

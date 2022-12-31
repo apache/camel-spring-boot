@@ -57,12 +57,10 @@ public class ResteasyComponentConfiguration
      */
     private String proxyConsumersClasses;
     /**
-     * If this option is true then IN exchange headers will be copied to OUT
-     * exchange headers according to copy strategy. Setting this to false,
-     * allows to only include the headers from the HTTP response (not
-     * propagating IN headers).
+     * Whether to the HTTP request should follow redirects. By default the HTTP
+     * request does not follow redirects
      */
-    private Boolean copyHeaders = true;
+    private Boolean followRedirects = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -75,16 +73,18 @@ public class ResteasyComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * If this option is true then IN exchange headers will be copied to OUT
+     * exchange headers according to copy strategy. Setting this to false,
+     * allows to only include the headers from the HTTP response (not
+     * propagating IN headers).
+     */
+    private Boolean copyHeaders = true;
+    /**
      * This threshold in bytes controls whether the response payload should be
      * stored in memory as a byte array or be streaming based. Set this to -1 to
      * always use streaming mode.
      */
     private Integer responsePayloadStreamingThreshold = 8192;
-    /**
-     * Whether to the HTTP request should follow redirects. By default the HTTP
-     * request does not follow redirects
-     */
-    private Boolean followRedirects = false;
     /**
      * Whether to skip mapping all the Camel headers as HTTP request headers. If
      * there are no data from Camel headers needed to be included in the HTTP
@@ -175,12 +175,12 @@ public class ResteasyComponentConfiguration
         this.proxyConsumersClasses = proxyConsumersClasses;
     }
 
-    public Boolean getCopyHeaders() {
-        return copyHeaders;
+    public Boolean getFollowRedirects() {
+        return followRedirects;
     }
 
-    public void setCopyHeaders(Boolean copyHeaders) {
-        this.copyHeaders = copyHeaders;
+    public void setFollowRedirects(Boolean followRedirects) {
+        this.followRedirects = followRedirects;
     }
 
     public Boolean getLazyStartProducer() {
@@ -191,6 +191,14 @@ public class ResteasyComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Boolean getCopyHeaders() {
+        return copyHeaders;
+    }
+
+    public void setCopyHeaders(Boolean copyHeaders) {
+        this.copyHeaders = copyHeaders;
+    }
+
     public Integer getResponsePayloadStreamingThreshold() {
         return responsePayloadStreamingThreshold;
     }
@@ -198,14 +206,6 @@ public class ResteasyComponentConfiguration
     public void setResponsePayloadStreamingThreshold(
             Integer responsePayloadStreamingThreshold) {
         this.responsePayloadStreamingThreshold = responsePayloadStreamingThreshold;
-    }
-
-    public Boolean getFollowRedirects() {
-        return followRedirects;
-    }
-
-    public void setFollowRedirects(Boolean followRedirects) {
-        this.followRedirects = followRedirects;
     }
 
     public Boolean getSkipRequestHeaders() {

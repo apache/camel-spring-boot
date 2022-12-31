@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.fhir.springboot;
 
-import java.util.List;
-import java.util.Set;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -50,6 +48,16 @@ public class FhirJsonDataFormatConfiguration
      */
     private Boolean prettyPrint = false;
     /**
+     * If set (FQN class names), when parsing resources the parser will try to
+     * use the given types when possible, in the order that they are provided
+     * (from highest to lowest priority). For example, if a custom type which
+     * declares to implement the Patient resource is passed in here, and the
+     * parser is parsing a Bundle containing a Patient resource, the parser will
+     * use the given custom type. Multiple class names can be separated by
+     * comma.
+     */
+    private String preferTypes;
+    /**
      * Sets the server's base URL used by this parser. If a value is set,
      * resource references will be turned into relative references if they are
      * provided as absolute URLs but have a base matching the given base.
@@ -72,16 +80,18 @@ public class FhirJsonDataFormatConfiguration
     private Boolean encodeElementsAppliesToChildResourcesOnly = false;
     /**
      * If provided, specifies the elements which should be encoded, to the
-     * exclusion of all others. Valid values for this field would include:
+     * exclusion of all others. Multiple elements can be separated by comma when
+     * using String parameter. Valid values for this field would include:
      * Patient - Encode patient and all its children Patient.name - Encode only
      * the patient's name Patient.name.family - Encode only the patient's family
      * name .text - Encode the text element on any resource (only the very first
      * position may contain a wildcard) .(mandatory) - This is a special case
      * which causes any mandatory fields (min 0) to be encoded
      */
-    private Set<String> encodeElements;
+    private String encodeElements;
     /**
-     * If provided, specifies the elements which should NOT be encoded. Valid
+     * If provided, specifies the elements which should NOT be encoded. Multiple
+     * elements can be separated by comma when using String parameter. Valid
      * values for this field would include: Patient - Don't encode patient and
      * all its children Patient.name - Don't encode the patient's name
      * Patient.name.family - Don't encode the patient's family name .text -
@@ -91,7 +101,7 @@ public class FhirJsonDataFormatConfiguration
      * subelements on meta such as Patient.meta.lastUpdated will only work in
      * DSTU3 mode.
      */
-    private Set<String> dontEncodeElements;
+    private String dontEncodeElements;
     /**
      * If set to true (which is the default), resource references containing a
      * version will have the version removed when the resource is encoded. This
@@ -127,13 +137,14 @@ public class FhirJsonDataFormatConfiguration
      * If supplied value(s), any resource references at the specified paths will
      * have their resource versions encoded instead of being automatically
      * stripped during the encoding process. This setting has no effect on the
-     * parsing process. This method provides a finer-grained level of control
+     * parsing process. Multiple elements can be separated by comma when using
+     * String parameter. This method provides a finer-grained level of control
      * than setStripVersionsFromReferences(String) and any paths specified by
      * this method will be encoded even if
      * setStripVersionsFromReferences(String) has been set to true (which is the
      * default)
      */
-    private List<String> dontStripVersionsFromReferencesAtPaths;
+    private String dontStripVersionsFromReferencesAtPaths;
     /**
      * Whether the data format should set the Content-Type header with the type
      * from the data format. For example application/xml for data formats
@@ -156,6 +167,14 @@ public class FhirJsonDataFormatConfiguration
 
     public void setPrettyPrint(Boolean prettyPrint) {
         this.prettyPrint = prettyPrint;
+    }
+
+    public String getPreferTypes() {
+        return preferTypes;
+    }
+
+    public void setPreferTypes(String preferTypes) {
+        this.preferTypes = preferTypes;
     }
 
     public String getServerBaseUrl() {
@@ -183,19 +202,19 @@ public class FhirJsonDataFormatConfiguration
         this.encodeElementsAppliesToChildResourcesOnly = encodeElementsAppliesToChildResourcesOnly;
     }
 
-    public Set<String> getEncodeElements() {
+    public String getEncodeElements() {
         return encodeElements;
     }
 
-    public void setEncodeElements(Set<String> encodeElements) {
+    public void setEncodeElements(String encodeElements) {
         this.encodeElements = encodeElements;
     }
 
-    public Set<String> getDontEncodeElements() {
+    public String getDontEncodeElements() {
         return dontEncodeElements;
     }
 
-    public void setDontEncodeElements(Set<String> dontEncodeElements) {
+    public void setDontEncodeElements(String dontEncodeElements) {
         this.dontEncodeElements = dontEncodeElements;
     }
 
@@ -233,12 +252,12 @@ public class FhirJsonDataFormatConfiguration
         this.suppressNarratives = suppressNarratives;
     }
 
-    public List<String> getDontStripVersionsFromReferencesAtPaths() {
+    public String getDontStripVersionsFromReferencesAtPaths() {
         return dontStripVersionsFromReferencesAtPaths;
     }
 
     public void setDontStripVersionsFromReferencesAtPaths(
-            List<String> dontStripVersionsFromReferencesAtPaths) {
+            String dontStripVersionsFromReferencesAtPaths) {
         this.dontStripVersionsFromReferencesAtPaths = dontStripVersionsFromReferencesAtPaths;
     }
 
