@@ -7,7 +7,7 @@
     "deprecated": false,
     "firstVersion": "3.19.0",
     "label": "tooling",
-    "supportLevel": "Stable",
+    "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-cli-connector-starter",
     "version": "3.20.1-SNAPSHOT"
