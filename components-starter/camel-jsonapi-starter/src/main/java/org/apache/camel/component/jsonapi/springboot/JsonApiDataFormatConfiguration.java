@@ -37,27 +37,28 @@ public class JsonApiDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * The classes to take into account for the marshalling
+     * The classes to take into account for the marshalling. Multiple classes
+     * can be separated by comma.
      */
-    private Class<Object>[] dataFormatTypes;
+    private String dataFormatTypes;
     /**
-     * The classes to take into account while unmarshalling
+     * The class to take into account while unmarshalling.
      */
-    private Class<Object> mainFormatType;
+    private String mainFormatType;
 
-    public Class<Object>[] getDataFormatTypes() {
+    public String getDataFormatTypes() {
         return dataFormatTypes;
     }
 
-    public void setDataFormatTypes(Class<Object>[] dataFormatTypes) {
+    public void setDataFormatTypes(String dataFormatTypes) {
         this.dataFormatTypes = dataFormatTypes;
     }
 
-    public Class<Object> getMainFormatType() {
+    public String getMainFormatType() {
         return mainFormatType;
     }
 
-    public void setMainFormatType(Class<Object> mainFormatType) {
+    public void setMainFormatType(String mainFormatType) {
         this.mainFormatType = mainFormatType;
     }
 }
