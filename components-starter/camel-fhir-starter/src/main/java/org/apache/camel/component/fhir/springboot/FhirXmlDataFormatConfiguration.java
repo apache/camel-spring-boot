@@ -42,11 +42,28 @@ public class FhirXmlDataFormatConfiguration
      */
     private String fhirVersion = "R4";
     /**
+     * To use a custom fhir context. Reference to object of type
+     * ca.uhn.fhir.context.FhirContext
+     */
+    private String fhirContext;
+    /**
      * Sets the pretty print flag, meaning that the parser will encode resources
      * with human-readable spacing and newlines between elements instead of
      * condensing output as much as possible.
      */
     private Boolean prettyPrint = false;
+    /**
+     * Registers an error handler which will be invoked when any parse errors
+     * are found. Reference to object of type
+     * ca.uhn.fhir.parser.IParserErrorHandler
+     */
+    private String parserErrorHandler;
+    /**
+     * Sets the parser options object which will be used to supply default
+     * options to newly created parsers. Reference to object of type
+     * ca.uhn.fhir.context.ParserOptions.
+     */
+    private String parserOptions;
     /**
      * If set (FQN class names), when parsing resources the parser will try to
      * use the given types when possible, in the order that they are provided
@@ -57,6 +74,11 @@ public class FhirXmlDataFormatConfiguration
      * comma.
      */
     private String preferTypes;
+    /**
+     * When encoding, force this resource ID to be encoded as the resource ID.
+     * Reference to object of type org.hl7.fhir.instance.model.api.IIdType
+     */
+    private String forceResourceId;
     /**
      * Sets the server's base URL used by this parser. If a value is set,
      * resource references will be turned into relative references if they are
@@ -161,6 +183,14 @@ public class FhirXmlDataFormatConfiguration
         this.fhirVersion = fhirVersion;
     }
 
+    public String getFhirContext() {
+        return fhirContext;
+    }
+
+    public void setFhirContext(String fhirContext) {
+        this.fhirContext = fhirContext;
+    }
+
     public Boolean getPrettyPrint() {
         return prettyPrint;
     }
@@ -169,12 +199,36 @@ public class FhirXmlDataFormatConfiguration
         this.prettyPrint = prettyPrint;
     }
 
+    public String getParserErrorHandler() {
+        return parserErrorHandler;
+    }
+
+    public void setParserErrorHandler(String parserErrorHandler) {
+        this.parserErrorHandler = parserErrorHandler;
+    }
+
+    public String getParserOptions() {
+        return parserOptions;
+    }
+
+    public void setParserOptions(String parserOptions) {
+        this.parserOptions = parserOptions;
+    }
+
     public String getPreferTypes() {
         return preferTypes;
     }
 
     public void setPreferTypes(String preferTypes) {
         this.preferTypes = preferTypes;
+    }
+
+    public String getForceResourceId() {
+        return forceResourceId;
+    }
+
+    public void setForceResourceId(String forceResourceId) {
+        this.forceResourceId = forceResourceId;
     }
 
     public String getServerBaseUrl() {

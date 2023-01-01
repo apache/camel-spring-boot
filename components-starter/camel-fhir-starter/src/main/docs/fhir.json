@@ -264,11 +264,23 @@
       "defaultValue": false
     },
     {
+      "name": "camel.dataformat.fhir-json.fhir-context",
+      "type": "java.lang.String",
+      "description": "To use a custom fhir context. Reference to object of type ca.uhn.fhir.context.FhirContext",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration"
+    },
+    {
       "name": "camel.dataformat.fhir-json.fhir-version",
       "type": "java.lang.String",
       "description": "The version of FHIR to use. Possible values are: DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4,R5",
       "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
       "defaultValue": "R4"
+    },
+    {
+      "name": "camel.dataformat.fhir-json.force-resource-id",
+      "type": "java.lang.String",
+      "description": "When encoding, force this resource ID to be encoded as the resource ID. Reference to object of type org.hl7.fhir.instance.model.api.IIdType",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.fhir-json.omit-resource-id",
@@ -283,6 +295,18 @@
       "description": "If set to true (which is the default), the Bundle.entry.fullUrl will override the Bundle.entry.resource's resource id if the fullUrl is defined. This behavior happens when parsing the source data into a Bundle object. Set this to false if this is not the desired behavior (e.g. the client code wishes to perform additional validation checks between the fullUrl and the resource id).",
       "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhir-json.parser-error-handler",
+      "type": "java.lang.String",
+      "description": "Registers an error handler which will be invoked when any parse errors are found. Reference to object of type ca.uhn.fhir.parser.IParserErrorHandler",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhir-json.parser-options",
+      "type": "java.lang.String",
+      "description": "Sets the parser options object which will be used to supply default options to newly created parsers. Reference to object of type ca.uhn.fhir.context.ParserOptions.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirJsonDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.fhir-json.prefer-types",
@@ -368,11 +392,23 @@
       "defaultValue": false
     },
     {
+      "name": "camel.dataformat.fhir-xml.fhir-context",
+      "type": "java.lang.String",
+      "description": "To use a custom fhir context. Reference to object of type ca.uhn.fhir.context.FhirContext",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration"
+    },
+    {
       "name": "camel.dataformat.fhir-xml.fhir-version",
       "type": "java.lang.String",
       "description": "The version of FHIR to use. Possible values are: DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4,R5",
       "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
       "defaultValue": "R4"
+    },
+    {
+      "name": "camel.dataformat.fhir-xml.force-resource-id",
+      "type": "java.lang.String",
+      "description": "When encoding, force this resource ID to be encoded as the resource ID. Reference to object of type org.hl7.fhir.instance.model.api.IIdType",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.fhir-xml.omit-resource-id",
@@ -387,6 +423,18 @@
       "description": "If set to true (which is the default), the Bundle.entry.fullUrl will override the Bundle.entry.resource's resource id if the fullUrl is defined. This behavior happens when parsing the source data into a Bundle object. Set this to false if this is not the desired behavior (e.g. the client code wishes to perform additional validation checks between the fullUrl and the resource id).",
       "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.fhir-xml.parser-error-handler",
+      "type": "java.lang.String",
+      "description": "Registers an error handler which will be invoked when any parse errors are found. Reference to object of type ca.uhn.fhir.parser.IParserErrorHandler",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.fhir-xml.parser-options",
+      "type": "java.lang.String",
+      "description": "Sets the parser options object which will be used to supply default options to newly created parsers. Reference to object of type ca.uhn.fhir.context.ParserOptions.",
+      "sourceType": "org.apache.camel.component.fhir.springboot.FhirXmlDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.fhir-xml.prefer-types",
