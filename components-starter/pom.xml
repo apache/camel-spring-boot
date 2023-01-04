@@ -202,7 +202,6 @@
     <module>camel-djl-starter</module>
     <module>camel-dns-starter</module>
     <module>camel-docker-starter</module>
-    <module>camel-dozer-starter</module>
     <module>camel-drill-starter</module>
     <module>camel-dropbox-starter</module>
     <module>camel-dynamic-router-starter</module>
