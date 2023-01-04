@@ -131,6 +131,14 @@ public class SmppComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Set this on producer in order to benefit from transceiver (TRX) binding
+     * type. So once set, you don't need to define an 'SMTPP consumer' endpoint
+     * anymore. You would set this to a 'Direct consumer' endpoint instead.
+     * DISCALIMER: This feature is only tested with 'Direct consumer' endpoint.
+     * The behavior with any other consumer type is unknown and not tested.
+     */
+    private String messageReceiverRouteId;
+    /**
      * Defines the numeric plan indicator (NPI) to be used in the SME. The
      * following NPI values are defined: 0: Unknown 1: ISDN (E163/E164) 2: Data
      * (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8: National 9: Private 10:
@@ -395,6 +403,14 @@ public class SmppComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public String getMessageReceiverRouteId() {
+        return messageReceiverRouteId;
+    }
+
+    public void setMessageReceiverRouteId(String messageReceiverRouteId) {
+        this.messageReceiverRouteId = messageReceiverRouteId;
     }
 
     public Byte getNumberingPlanIndicator() {

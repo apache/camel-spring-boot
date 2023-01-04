@@ -149,6 +149,12 @@
       "defaultValue": 2147483647
     },
     {
+      "name": "camel.component.smpp.message-receiver-route-id",
+      "type": "java.lang.String",
+      "description": "Set this on producer in order to benefit from transceiver (TRX) binding type. So once set, you don't need to define an 'SMTPP consumer' endpoint anymore. You would set this to a 'Direct consumer' endpoint instead. DISCALIMER: This feature is only tested with 'Direct consumer' endpoint. The behavior with any other consumer type is unknown and not tested.",
+      "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
+    },
+    {
       "name": "camel.component.smpp.numbering-plan-indicator",
       "type": "java.lang.Byte",
       "description": "Defines the numeric plan indicator (NPI) to be used in the SME. The following NPI values are defined: 0: Unknown 1: ISDN (E163\/E164) 2: Data (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8: National 9: Private 10: ERMES 13: Internet (IP) 18: WAP Client Id (to be defined by WAP Forum)",

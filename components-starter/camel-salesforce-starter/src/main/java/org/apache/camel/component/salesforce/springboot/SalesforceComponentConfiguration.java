@@ -63,7 +63,7 @@ public class SalesforceComponentConfiguration
     /**
      * Salesforce API version.
      */
-    private String apiVersion = "54.0";
+    private String apiVersion = "56.0";
     /**
      * Backoff interval increment for Streaming connection restart attempts for
      * failures beyond CometD auto-reconnect. The option is a long type.
