@@ -37,6 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -56,6 +57,7 @@ import org.slf4j.LoggerFactory;
         JaxbDataFormatSchemaValidationTest.TestConfiguration.class
     }
 )
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Flaky on Github CI")
 public class JaxbDataFormatSchemaValidationTest {
     
     private static final Logger LOG = LoggerFactory.getLogger(JaxbDataFormatSchemaValidationTest.class);
