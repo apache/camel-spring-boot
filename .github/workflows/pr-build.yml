@@ -39,6 +39,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: 11
+        distribution: 'temurin'
     - name: Maven Build
       run: ./mvnw -l build.log -V --no-transfer-progress -Psourcecheck clean install
     - name: Archive Logs
