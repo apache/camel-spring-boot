@@ -40,6 +40,7 @@ jobs:
       with:
         java-version: 11
         distribution: 'temurin'
+        cache: 'maven'
     - name: Maven Build
       run: ./mvnw -l build.log -V --no-transfer-progress -Psourcecheck clean install
     - name: Archive Logs
