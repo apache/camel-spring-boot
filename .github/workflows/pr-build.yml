@@ -42,7 +42,7 @@ jobs:
         distribution: 'temurin'
         cache: 'maven'
     - name: Maven Build
-      run: ./mvnw -l build.log -V --no-transfer-progress -Psourcecheck clean install
+      run: ./mvnw -l build.log -V --no-transfer-progress -Psourcecheck -Dci.env.name=github.com clean install
     - name: Archive Logs
       uses: actions/upload-artifact@v3
       if: always()
