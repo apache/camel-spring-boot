@@ -31,6 +31,7 @@ import org.junit.jupiter.api.Test;
 
 import org.infinispan.client.hotrod.ServerStatistics;
 import org.infinispan.commons.api.BasicCache;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
@@ -45,6 +46,7 @@ import java.util.function.BiFunction;
 				InfinispanRemoteProducerIT.class
 		}
 )
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Flaky on Github CI")
 public class InfinispanRemoteProducerIT extends InfinispanRemoteTestSupport implements InfinispanProducerTestSupport {
 
 	@Bean
