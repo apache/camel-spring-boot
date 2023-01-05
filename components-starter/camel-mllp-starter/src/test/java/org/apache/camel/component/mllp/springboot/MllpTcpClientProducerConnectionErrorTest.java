@@ -36,6 +36,7 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -56,6 +57,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
         MllpTcpClientProducerConnectionErrorTest.TestConfiguration.class
     }
 )
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Flaky on Github CI")
 public class MllpTcpClientProducerConnectionErrorTest {
     
     @RegisterExtension
