@@ -107,6 +107,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.pulsar.chunking-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Control whether chunking of messages is enabled for the producer.",
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.pulsar.compression-type",
       "type": "org.apache.pulsar.client.api.CompressionType",
       "description": "Compression type to use",

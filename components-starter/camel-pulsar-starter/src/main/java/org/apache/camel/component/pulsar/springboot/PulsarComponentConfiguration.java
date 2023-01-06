@@ -209,6 +209,10 @@ public class PulsarComponentConfiguration
      */
     private Boolean blockIfQueueFull = false;
     /**
+     * Control whether chunking of messages is enabled for the producer.
+     */
+    private Boolean chunkingEnabled = false;
+    /**
      * Compression type to use
      */
     private CompressionType compressionType = CompressionType.NONE;
@@ -531,6 +535,14 @@ public class PulsarComponentConfiguration
 
     public void setBlockIfQueueFull(Boolean blockIfQueueFull) {
         this.blockIfQueueFull = blockIfQueueFull;
+    }
+
+    public Boolean getChunkingEnabled() {
+        return chunkingEnabled;
+    }
+
+    public void setChunkingEnabled(Boolean chunkingEnabled) {
+        this.chunkingEnabled = chunkingEnabled;
     }
 
     public CompressionType getCompressionType() {
