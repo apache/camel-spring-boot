@@ -18,7 +18,6 @@ package org.apache.camel.spring.boot.endpointdsl;
 
 import org.apache.camel.main.RoutesCollector;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Role;
@@ -27,9 +26,12 @@ import org.springframework.context.annotation.Role;
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 public class EndpointDslAutoConfiguration {
 
+    /**
+     * Special routes collector when using Endpoint DSL.
+     */
     @Bean
-    RoutesCollector endpointDslRoutesCollector(ApplicationContext applicationContext) {
-        return new EndpointDslRouteCollector(applicationContext);
+    RoutesCollector endpointDslRoutesCollector() {
+        return new EndpointDslRouteCollector();
     }
 
 }
