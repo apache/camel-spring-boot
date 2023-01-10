@@ -395,6 +395,12 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean tracing;
 
     /**
+     * Whether to set tracing on standby. If on standby then the tracer is installed and made available. Then the tracer
+     * can be enabled later at runtime via JMX or via Tracer.setEnabled(true).
+     */
+    private boolean tracingStandby;
+
+    /**
      * Tracing pattern to match which node EIPs to trace.
      * For example to match all To EIP nodes, use to*.
      * The pattern matches by node and route id's

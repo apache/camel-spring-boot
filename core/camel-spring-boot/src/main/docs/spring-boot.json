@@ -1156,7 +1156,9 @@
     {
       "name": "camel.springboot.tracing-standby",
       "type": "java.lang.Boolean",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+      "description": "Whether to set tracing on standby. If on standby then the tracer is installed and made available. Then the tracer can be enabled later at runtime via JMX or via Tracer.setEnabled(true).",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
     },
     {
       "name": "camel.springboot.type-converter-statistics-enabled",
