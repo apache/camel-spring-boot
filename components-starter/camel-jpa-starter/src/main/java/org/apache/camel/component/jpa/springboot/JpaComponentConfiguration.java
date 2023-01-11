@@ -22,6 +22,7 @@ import javax.persistence.EntityManagerFactory;
 import org.apache.camel.component.jpa.TransactionStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import org.springframework.transaction.PlatformTransactionManager;
 
 /**
@@ -70,6 +71,7 @@ public class JpaComponentConfiguration
      * option is a org.springframework.transaction.PlatformTransactionManager
      * type.
      */
+    @Deprecated
     private PlatformTransactionManager transactionManager;
     /**
      * To use the TransactionStrategy for running the operations in a
@@ -140,10 +142,13 @@ public class JpaComponentConfiguration
         this.sharedEntityManager = sharedEntityManager;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public PlatformTransactionManager getTransactionManager() {
         return transactionManager;
     }
 
+    @Deprecated
     public void setTransactionManager(
             PlatformTransactionManager transactionManager) {
         this.transactionManager = transactionManager;
