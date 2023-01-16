@@ -16,8 +16,7 @@
  */
 package org.apache.camel.spring.boot.xml;
 
-import javax.annotation.Resource;
-
+import jakarta.annotation.Resource;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.ProducerTemplate;

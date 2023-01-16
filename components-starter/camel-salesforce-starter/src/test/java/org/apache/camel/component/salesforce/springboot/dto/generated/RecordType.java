@@ -30,7 +30,6 @@ import org.apache.camel.component.salesforce.api.dto.SObjectField;
 /**
  * Salesforce DTO for SObject RecordType
  */
-@Generated("org.apache.camel.maven.CamelSalesforceMojo")
 public class RecordType extends AbstractDescribedSObjectBase {
 
     public RecordType() {
