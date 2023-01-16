@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-name: PR Build
+name: PR Build (Camel 4)
 
 on:
   pull_request:
