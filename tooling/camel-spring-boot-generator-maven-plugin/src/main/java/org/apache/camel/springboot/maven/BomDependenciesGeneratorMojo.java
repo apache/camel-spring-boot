@@ -135,6 +135,12 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
     @Parameter(defaultValue = "${basedir}/../../components-starter")
     protected File startersDir;
 
+    /**
+     * The user configuration
+     */
+    @Parameter
+    protected boolean failOnError = true;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         try {
@@ -475,7 +481,7 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
             }
         }
 
-        if (errors.size() > 0) {
+        if (failOnError && errors.size() > 0) {
             StringBuilder msg = new StringBuilder();
             msg.append("Found ").append(errors.size()).append(" conflicts between the current managed dependencies and the external BOMS:\n");
             for (String error : errors) {
