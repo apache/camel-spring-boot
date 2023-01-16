@@ -33,6 +33,11 @@
     <name>Camel SB :: Integration Tests</name>
     <description>Spring-Boot Camel test</description>
 
+    <properties>
+        <shrinkwrap-version>1.2.6</shrinkwrap-version>
+        <shrinkwrap-resolver-version>3.1.4</shrinkwrap-resolver-version>
+    </properties>
+
 
     <dependencies>
 
