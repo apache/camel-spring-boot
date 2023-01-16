@@ -17,7 +17,6 @@
 package org.apache.camel.component.stomp.springboot;
 
 import java.util.Properties;
-import javax.annotation.Generated;
 import org.apache.camel.component.stomp.StompConfiguration;
 import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

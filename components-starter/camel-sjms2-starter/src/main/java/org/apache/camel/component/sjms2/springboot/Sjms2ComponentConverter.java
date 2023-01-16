@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.stomp.springboot;
+package org.apache.camel.component.sjms2.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -32,17 +32,19 @@ import org.springframework.stereotype.Component;
 @Configuration(proxyBeanMethods = false)
 @ConfigurationPropertiesBinding
 @Component
-public class StompComponentConverter implements GenericConverter {
+public class Sjms2ComponentConverter implements GenericConverter {
 
     @Autowired
     private ApplicationContext applicationContext;
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, java.util.Properties.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.stomp.StompConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, jakarta.jms.ConnectionFactory.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sjms.jms.DestinationCreationStrategy.class));
+        answer.add(new ConvertiblePair(String.class, jakarta.jms.ExceptionListener.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sjms.jms.MessageCreatedStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
     }
 
@@ -59,10 +61,12 @@ public class StompComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "java.util.Properties": return applicationContext.getBean(ref, java.util.Properties.class);
-            case "org.apache.camel.component.stomp.StompConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.stomp.StompConfiguration.class);
+            case "jakarta.jms.ConnectionFactory": return applicationContext.getBean(ref, jakarta.jms.ConnectionFactory.class);
+            case "org.apache.camel.component.sjms.jms.DestinationCreationStrategy": return applicationContext.getBean(ref, org.apache.camel.component.sjms.jms.DestinationCreationStrategy.class);
+            case "jakarta.jms.ExceptionListener": return applicationContext.getBean(ref, jakarta.jms.ExceptionListener.class);
+            case "org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy": return applicationContext.getBean(ref, org.apache.camel.component.sjms.jms.JmsKeyFormatStrategy.class);
+            case "org.apache.camel.component.sjms.jms.MessageCreatedStrategy": return applicationContext.getBean(ref, org.apache.camel.component.sjms.jms.MessageCreatedStrategy.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
-            case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }
         return null;
     }
