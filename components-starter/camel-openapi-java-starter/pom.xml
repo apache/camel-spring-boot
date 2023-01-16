@@ -39,6 +39,11 @@
       <artifactId>camel-openapi-java</artifactId>
       <version>${camel-version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.swagger.parser.v3</groupId>
+      <artifactId>swagger-parser-v3</artifactId>
+      <version>${swagger-parser-v3-version}</version>
+    </dependency>
     <!-- test dependencies -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -48,12 +53,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.swagger.parser.v3</groupId>
-      <artifactId>swagger-parser-v3</artifactId>
-      <version>${swagger-parser-v3-version}</version>
       <scope>test</scope>
     </dependency>
     <!--START OF GENERATED CODE-->
