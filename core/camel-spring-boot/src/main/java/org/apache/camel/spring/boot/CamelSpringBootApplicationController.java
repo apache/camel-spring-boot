@@ -16,8 +16,7 @@
  */
 package org.apache.camel.spring.boot;
 
-import javax.annotation.PreDestroy;
-
+import jakarta.annotation.PreDestroy;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.main.Main;
