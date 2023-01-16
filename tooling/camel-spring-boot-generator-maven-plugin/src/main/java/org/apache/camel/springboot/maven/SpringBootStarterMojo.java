@@ -237,7 +237,7 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
         loggingImpl.add("org.apache.logging.log4j:log4j");
         loggingImpl.add("org.apache.logging.log4j:log4j-jcl");
         loggingImpl.add("org.apache.logging.log4j:log4j-core");
-        loggingImpl.add("org.apache.logging.log4j:log4j-slf4j-impl");
+        loggingImpl.add("org.apache.logging.log4j:log4j-slf4j2-impl");
 
         loggingImpl.add("org.slf4j:slf4j-jcl");
         loggingImpl.add("org.slf4j:slf4j-jdk14");
