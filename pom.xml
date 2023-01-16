@@ -122,7 +122,7 @@
         <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
         <groovy-version>3.0.10</groovy-version>
         <hadoop2-version>2.10.0</hadoop2-version>
-        <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
+        <jakarta-jaxb-version>4.0.0</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
         <jetty9-version>9.4.45.v20220203</jetty9-version>
         <maven-compiler-plugin-version>3.10.1</maven-compiler-plugin-version>
