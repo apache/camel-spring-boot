@@ -32,7 +32,7 @@ jobs:
         with:
           repository: apache/camel
           persist-credentials: false
-          ref: main
+          ref: camel-spring-boot-3.x
           path: camel
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -46,7 +46,7 @@ jobs:
       - name: Checkout Camel-spring-boot project
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: camel-spring-boot-3.x
           persist-credentials: false
           fetch-depth: 0
       - name: Build Camel-spring-boot Project
@@ -54,10 +54,10 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.2.3
         with:
-          base: main
+          base: camel-spring-boot-3.x
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: automatic-periodic-sync
-          title: '[Github Actions] Periodic Sync Camel Spring Boot (Camel 4)'
+          title: '[Github Actions] Periodic Sync Camel Spring Boot (Camel 3)'
           body: |
             Periodic Sync of Camel Spring Boot Main Branch with main Camel Main.
-            see https://github.com/apache/camel-spring-boot/blob/main/.github/workflows/automatic-sync-main.yml
+            see https://github.com/apache/camel-spring-boot/blob/main/.github/workflows/automatic-sync-camel-3.yml
