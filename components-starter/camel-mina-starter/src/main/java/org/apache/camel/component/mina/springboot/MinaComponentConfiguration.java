@@ -17,7 +17,6 @@
 package org.apache.camel.component.mina.springboot;
 
 import java.util.List;
-import javax.annotation.Generated;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.component.mina.MinaComponent;
 import org.apache.camel.component.mina.MinaConfiguration;

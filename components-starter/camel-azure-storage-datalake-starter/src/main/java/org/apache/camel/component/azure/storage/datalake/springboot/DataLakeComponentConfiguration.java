@@ -19,7 +19,6 @@ package org.apache.camel.component.azure.storage.datalake.springboot;
 import java.nio.file.OpenOption;
 import java.time.Duration;
 import java.util.Set;
-import javax.annotation.Generated;
 import com.azure.identity.ClientSecretCredential;
 import com.azure.storage.common.StorageSharedKeyCredential;
 import com.azure.storage.file.datalake.DataLakeServiceClient;

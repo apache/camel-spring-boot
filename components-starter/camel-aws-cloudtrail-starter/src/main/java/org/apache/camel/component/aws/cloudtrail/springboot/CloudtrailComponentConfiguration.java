@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws.cloudtrail.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws.cloudtrail.CloudtrailComponent;
 import org.apache.camel.component.aws.cloudtrail.CloudtrailConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.ignite.messaging.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.configuration.IgniteConfiguration;

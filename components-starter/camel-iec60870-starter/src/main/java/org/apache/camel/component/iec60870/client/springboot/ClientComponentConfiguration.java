@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.iec60870.client.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.iec60870.client.ClientOptions;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

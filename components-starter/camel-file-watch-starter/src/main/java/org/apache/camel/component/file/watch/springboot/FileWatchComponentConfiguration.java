@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.file.watch.springboot;
 
-import javax.annotation.Generated;
 import io.methvin.watcher.hashing.FileHasher;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

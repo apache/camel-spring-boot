@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.iam.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.iam.IAM2Component;
 import org.apache.camel.component.aws2.iam.IAM2Configuration;
 import org.apache.camel.component.aws2.iam.IAM2Operations;

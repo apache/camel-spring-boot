@@ -17,7 +17,6 @@
 package org.apache.camel.dataformat.any23.springboot;
 
 import java.util.List;
-import javax.annotation.Generated;
 import org.apache.camel.dataformat.any23.Any23DataFormat;
 import org.apache.camel.dataformat.any23.Any23OutputFormat;
 import org.apache.camel.model.PropertyDefinition;

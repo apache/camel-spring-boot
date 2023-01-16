@@ -16,7 +16,6 @@
  */
 package org.apache.camel.converter.crypto.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.converter.crypto.CryptoDataFormat;
 import org.apache.camel.spi.DataFormat;

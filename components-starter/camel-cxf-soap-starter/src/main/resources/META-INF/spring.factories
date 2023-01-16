@@ -14,9 +14,8 @@
 ## See the License for the specific language governing permissions and
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
+
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.cxf.jaxws.springboot.CxfComponentAutoConfiguration,\
-org.apache.camel.component.cxf.jaxws.springboot.CxfComponentConverter
-
-
+org.apache.camel.component.cxf.jaxws.springboot.CxfComponentConverter,\
+org.apache.camel.component.cxf.jaxws.springboot.CxfComponentAutoConfiguration
 

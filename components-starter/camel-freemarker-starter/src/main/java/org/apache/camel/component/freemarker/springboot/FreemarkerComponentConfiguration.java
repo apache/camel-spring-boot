@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.freemarker.springboot;
 
-import javax.annotation.Generated;
 import freemarker.template.Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

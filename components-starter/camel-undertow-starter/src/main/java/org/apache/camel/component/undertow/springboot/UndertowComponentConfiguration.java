@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.undertow.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.undertow.UndertowHostOptions;
 import org.apache.camel.component.undertow.UndertowHttpBinding;
 import org.apache.camel.component.undertow.spi.UndertowSecurityProvider;

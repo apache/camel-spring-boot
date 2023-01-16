@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.twilio.springboot;
 
-import javax.annotation.Generated;
 import com.twilio.http.TwilioRestClient;
 import org.apache.camel.component.twilio.TwilioConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

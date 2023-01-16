@@ -17,7 +17,6 @@
 package org.apache.camel.component.google.calendar.stream.springboot;
 
 import java.util.List;
-import javax.annotation.Generated;
 import org.apache.camel.component.google.calendar.GoogleCalendarClientFactory;
 import org.apache.camel.component.google.calendar.stream.GoogleCalendarStreamConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

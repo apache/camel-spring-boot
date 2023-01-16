@@ -109,7 +109,6 @@
     </plugins>
   </build>
   <modules>
-    <module>camel-activemq-starter</module>
     <module>camel-amqp-starter</module>
     <module>camel-any23-starter</module>
     <module>camel-arangodb-starter</module>
@@ -272,7 +271,6 @@
     <module>camel-jaxb-starter</module>
     <module>camel-jbpm-starter</module>
     <module>camel-jcache-starter</module>
-    <module>camel-jclouds-starter</module>
     <module>camel-jcr-starter</module>
     <module>camel-jdbc-starter</module>
     <module>camel-jetty-starter</module>
@@ -282,7 +280,6 @@
     <module>camel-jira-starter</module>
     <module>camel-jms-starter</module>
     <module>camel-jmx-starter</module>
-    <module>camel-johnzon-starter</module>
     <module>camel-jolt-starter</module>
     <module>camel-jooq-starter</module>
     <module>camel-joor-starter</module>
@@ -362,8 +359,6 @@
     <module>camel-resilience4j-starter</module>
     <module>camel-rest-openapi-starter</module>
     <module>camel-rest-starter</module>
-    <module>camel-rest-swagger-starter</module>
-    <module>camel-resteasy-starter</module>
     <module>camel-robotframework-starter</module>
     <module>camel-rocketmq-starter</module>
     <module>camel-rss-starter</module>
@@ -408,7 +403,6 @@
     <module>camel-stream-starter</module>
     <module>camel-stringtemplate-starter</module>
     <module>camel-stub-starter</module>
-    <module>camel-swagger-java-starter</module>
     <module>camel-swift-starter</module>
     <module>camel-syslog-starter</module>
     <module>camel-tarfile-starter</module>
@@ -424,14 +418,12 @@
     <module>camel-validator-starter</module>
     <module>camel-velocity-starter</module>
     <module>camel-vertx-http-starter</module>
-    <module>camel-vertx-kafka-starter</module>
     <module>camel-vertx-starter</module>
     <module>camel-vertx-websocket-starter</module>
     <module>camel-vm-starter</module>
     <module>camel-weather-starter</module>
     <module>camel-web3j-starter</module>
     <module>camel-webhook-starter</module>
-    <module>camel-websocket-jsr356-starter</module>
     <module>camel-websocket-starter</module>
     <module>camel-weka-starter</module>
     <module>camel-wordpress-starter</module>
@@ -448,7 +440,6 @@
     <module>camel-zendesk-starter</module>
     <module>camel-zip-deflater-starter</module>
     <module>camel-zipfile-starter</module>
-    <module>camel-zipkin-starter</module>
     <module>camel-zookeeper-master-starter</module>
     <module>camel-zookeeper-starter</module>
   </modules>

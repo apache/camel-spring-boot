@@ -17,8 +17,7 @@
 package org.apache.camel.component.mail.springboot;
 
 import java.util.Properties;
-import javax.annotation.Generated;
-import javax.mail.Session;
+import jakarta.mail.Session;
 import org.apache.camel.component.mail.AttachmentsContentTransferEncodingResolver;
 import org.apache.camel.component.mail.ContentTypeResolver;
 import org.apache.camel.component.mail.JavaMailSender;
@@ -107,7 +106,7 @@ public class MailComponentConfiguration
      */
     private String moveTo;
     /**
-     * Will mark the javax.mail.Message as peeked before processing the mail
+     * Will mark the jakarta.mail.Message as peeked before processing the mail
      * message. This applies to IMAPMessage messages types only. By using peek
      * the mail will not be eager marked as SEEN on the mail server, which
      * allows us to rollback the mail message if there is an error processing in
@@ -165,8 +164,8 @@ public class MailComponentConfiguration
      * mapped to the body of the Camel IN message, the mail headers are mapped
      * to IN headers, and the attachments to Camel IN attachment message. If
      * this option is set to false then the IN message contains a raw
-     * javax.mail.Message. You can retrieve this raw message by calling
-     * exchange.getIn().getBody(javax.mail.Message.class).
+     * jakarta.mail.Message. You can retrieve this raw message by calling
+     * exchange.getIn().getBody(jakarta.mail.Message.class).
      */
     private Boolean mapMailMessage = true;
     /**
@@ -297,7 +296,7 @@ public class MailComponentConfiguration
      * managed by some other resource, such as a JavaEE container. When using a
      * custom mail session, then the hostname and port from the mail session
      * will be used (if configured on the session). The option is a
-     * javax.mail.Session type.
+     * jakarta.mail.Session type.
      */
     private Session session;
     /**

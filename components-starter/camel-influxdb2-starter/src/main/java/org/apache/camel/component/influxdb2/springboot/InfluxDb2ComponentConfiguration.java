@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.influxdb2.springboot;
 
-import javax.annotation.Generated;
 import com.influxdb.client.InfluxDBClient;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

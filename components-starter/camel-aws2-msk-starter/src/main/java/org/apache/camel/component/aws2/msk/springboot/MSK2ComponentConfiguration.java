@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.msk.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.msk.MSK2Component;
 import org.apache.camel.component.aws2.msk.MSK2Configuration;
 import org.apache.camel.component.aws2.msk.MSK2Operations;

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.vertx.springboot;
 
-import javax.annotation.Generated;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.impl.VertxBuilder;

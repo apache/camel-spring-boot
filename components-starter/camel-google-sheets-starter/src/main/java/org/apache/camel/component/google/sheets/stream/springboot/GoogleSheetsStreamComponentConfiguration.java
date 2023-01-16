@@ -17,7 +17,6 @@
 package org.apache.camel.component.google.sheets.stream.springboot;
 
 import java.util.List;
-import javax.annotation.Generated;
 import org.apache.camel.component.google.sheets.GoogleSheetsClientFactory;
 import org.apache.camel.component.google.sheets.stream.GoogleSheetsStreamConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

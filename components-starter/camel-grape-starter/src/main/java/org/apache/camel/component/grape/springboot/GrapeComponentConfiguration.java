@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.grape.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.grape.PatchesRepository;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

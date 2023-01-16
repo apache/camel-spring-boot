@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.sts.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.sts.STS2Component;
 import org.apache.camel.component.aws2.sts.STS2Configuration;
 import org.apache.camel.component.aws2.sts.STS2Operations;

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.language.xquery.XQueryLanguage;
 import org.apache.camel.spi.Language;

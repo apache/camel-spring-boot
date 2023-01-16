@@ -17,7 +17,6 @@
 package org.apache.camel.component.xmlsecurity.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import javax.xml.crypto.KeySelector;
 import javax.xml.crypto.URIDereferencer;
 import org.apache.camel.component.xmlsecurity.api.ValidationFailedHandler;

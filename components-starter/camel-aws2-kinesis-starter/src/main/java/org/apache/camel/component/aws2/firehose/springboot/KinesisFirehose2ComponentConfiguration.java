@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.firehose.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.firehose.KinesisFirehose2Component;
 import org.apache.camel.component.aws2.firehose.KinesisFirehose2Configuration;
 import org.apache.camel.component.aws2.firehose.KinesisFirehose2Operations;

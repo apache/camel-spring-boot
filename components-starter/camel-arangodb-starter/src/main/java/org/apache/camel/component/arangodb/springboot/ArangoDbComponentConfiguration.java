@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.arangodb.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.arangodb.ArangoDbConfiguration;
 import org.apache.camel.component.arangodb.ArangoDbOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

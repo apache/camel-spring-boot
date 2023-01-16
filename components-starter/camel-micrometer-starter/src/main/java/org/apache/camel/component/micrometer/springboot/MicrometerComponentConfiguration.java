@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.micrometer.springboot;
 
-import javax.annotation.Generated;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -17,7 +17,6 @@
 package org.apache.camel.component.rest.openapi.springboot;
 
 import java.net.URI;
-import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;

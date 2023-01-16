@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.mime.multipart.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.dataformat.mime.multipart.MimeMultipartDataFormat;
 import org.apache.camel.spi.DataFormat;

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.ddbstream.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.ddbstream.Ddb2StreamComponent;
 import org.apache.camel.component.aws2.ddbstream.Ddb2StreamConfiguration;
 import org.apache.camel.component.aws2.ddbstream.Ddb2StreamConfiguration.StreamIteratorType;

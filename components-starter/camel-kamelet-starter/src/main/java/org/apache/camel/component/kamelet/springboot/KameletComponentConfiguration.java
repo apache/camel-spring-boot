@@ -18,7 +18,6 @@ package org.apache.camel.component.kamelet.springboot;
 
 import java.util.Map;
 import java.util.Properties;
-import javax.annotation.Generated;
 import org.apache.camel.spi.RouteTemplateLoaderListener;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.seda.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.Exchange;
 import org.apache.camel.component.seda.BlockingQueueFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

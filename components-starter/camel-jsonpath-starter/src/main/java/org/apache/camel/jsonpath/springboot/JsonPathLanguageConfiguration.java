@@ -16,7 +16,6 @@
  */
 package org.apache.camel.jsonpath.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jgroups.raft.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.jgroups.protocols.raft.StateMachine;
 import org.jgroups.raft.RaftHandle;

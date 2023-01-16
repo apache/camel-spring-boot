@@ -242,7 +242,7 @@
     {
       "name": "camel.component.mail.map-mail-message",
       "type": "java.lang.Boolean",
-      "description": "Specifies whether Camel should map the received mail message to Camel body\/headers\/attachments. If set to true, the body of the mail message is mapped to the body of the Camel IN message, the mail headers are mapped to IN headers, and the attachments to Camel IN attachment message. If this option is set to false then the IN message contains a raw javax.mail.Message. You can retrieve this raw message by calling exchange.getIn().getBody(javax.mail.Message.class).",
+      "description": "Specifies whether Camel should map the received mail message to Camel body\/headers\/attachments. If set to true, the body of the mail message is mapped to the body of the Camel IN message, the mail headers are mapped to IN headers, and the attachments to Camel IN attachment message. If this option is set to false then the IN message contains a raw jakarta.mail.Message. You can retrieve this raw message by calling exchange.getIn().getBody(jakarta.mail.Message.class).",
       "sourceType": "org.apache.camel.component.mail.springboot.MailComponentConfiguration",
       "defaultValue": true
     },
@@ -268,7 +268,7 @@
     {
       "name": "camel.component.mail.peek",
       "type": "java.lang.Boolean",
-      "description": "Will mark the javax.mail.Message as peeked before processing the mail message. This applies to IMAPMessage messages types only. By using peek the mail will not be eager marked as SEEN on the mail server, which allows us to rollback the mail message if there is an error processing in Camel.",
+      "description": "Will mark the jakarta.mail.Message as peeked before processing the mail message. This applies to IMAPMessage messages types only. By using peek the mail will not be eager marked as SEEN on the mail server, which allows us to rollback the mail message if there is an error processing in Camel.",
       "sourceType": "org.apache.camel.component.mail.springboot.MailComponentConfiguration",
       "defaultValue": true
     },
@@ -280,8 +280,8 @@
     },
     {
       "name": "camel.component.mail.session",
-      "type": "javax.mail.Session",
-      "description": "Specifies the mail session that camel should use for all mail interactions. Useful in scenarios where mail sessions are created and managed by some other resource, such as a JavaEE container. When using a custom mail session, then the hostname and port from the mail session will be used (if configured on the session). The option is a javax.mail.Session type.",
+      "type": "jakarta.mail.Session",
+      "description": "Specifies the mail session that camel should use for all mail interactions. Useful in scenarios where mail sessions are created and managed by some other resource, such as a JavaEE container. When using a custom mail session, then the hostname and port from the mail session will be used (if configured on the session). The option is a jakarta.mail.Session type.",
       "sourceType": "org.apache.camel.component.mail.springboot.MailComponentConfiguration"
     },
     {

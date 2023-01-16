@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.mq.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.mq.MQ2Component;
 import org.apache.camel.component.aws2.mq.MQ2Configuration;
 import org.apache.camel.component.aws2.mq.MQ2Operations;

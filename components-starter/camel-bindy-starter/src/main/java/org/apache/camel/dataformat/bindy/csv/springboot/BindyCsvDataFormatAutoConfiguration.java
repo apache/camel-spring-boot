@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.bindy.csv.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;
 import org.apache.camel.spi.DataFormat;

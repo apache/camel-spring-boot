@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.xslt.springboot;
 
-import javax.annotation.Generated;
 import javax.xml.transform.URIResolver;
 import org.apache.camel.component.xslt.TransformerFactoryConfigurationStrategy;
 import org.apache.camel.component.xslt.XsltUriResolverFactory;

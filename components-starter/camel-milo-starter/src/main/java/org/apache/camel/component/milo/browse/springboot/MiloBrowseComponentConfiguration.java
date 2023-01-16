@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.milo.browse.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.milo.client.MiloClientConfiguration;
 import org.apache.camel.component.milo.client.MiloClientConnectionManager;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

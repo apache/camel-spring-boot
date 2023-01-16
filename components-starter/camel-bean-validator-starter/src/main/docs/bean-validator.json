@@ -22,8 +22,8 @@
     },
     {
       "name": "camel.component.bean-validator.constraint-validator-factory",
-      "type": "javax.validation.ConstraintValidatorFactory",
-      "description": "To use a custom ConstraintValidatorFactory. The option is a javax.validation.ConstraintValidatorFactory type.",
+      "type": "jakarta.validation.ConstraintValidatorFactory",
+      "description": "To use a custom ConstraintValidatorFactory. The option is a jakarta.validation.ConstraintValidatorFactory type.",
       "sourceType": "org.apache.camel.component.bean.validator.springboot.BeanValidatorComponentConfiguration"
     },
     {
@@ -53,26 +53,26 @@
     },
     {
       "name": "camel.component.bean-validator.message-interpolator",
-      "type": "javax.validation.MessageInterpolator",
-      "description": "To use a custom MessageInterpolator. The option is a javax.validation.MessageInterpolator type.",
+      "type": "jakarta.validation.MessageInterpolator",
+      "description": "To use a custom MessageInterpolator. The option is a jakarta.validation.MessageInterpolator type.",
       "sourceType": "org.apache.camel.component.bean.validator.springboot.BeanValidatorComponentConfiguration"
     },
     {
       "name": "camel.component.bean-validator.traversable-resolver",
-      "type": "javax.validation.TraversableResolver",
-      "description": "To use a custom TraversableResolver. The option is a javax.validation.TraversableResolver type.",
+      "type": "jakarta.validation.TraversableResolver",
+      "description": "To use a custom TraversableResolver. The option is a jakarta.validation.TraversableResolver type.",
       "sourceType": "org.apache.camel.component.bean.validator.springboot.BeanValidatorComponentConfiguration"
     },
     {
       "name": "camel.component.bean-validator.validation-provider-resolver",
-      "type": "javax.validation.ValidationProviderResolver",
-      "description": "To use a a custom ValidationProviderResolver. The option is a javax.validation.ValidationProviderResolver type.",
+      "type": "jakarta.validation.ValidationProviderResolver",
+      "description": "To use a a custom ValidationProviderResolver. The option is a jakarta.validation.ValidationProviderResolver type.",
       "sourceType": "org.apache.camel.component.bean.validator.springboot.BeanValidatorComponentConfiguration"
     },
     {
       "name": "camel.component.bean-validator.validator-factory",
-      "type": "javax.validation.ValidatorFactory",
-      "description": "To use a custom ValidatorFactory. The option is a javax.validation.ValidatorFactory type.",
+      "type": "jakarta.validation.ValidatorFactory",
+      "description": "To use a custom ValidatorFactory. The option is a jakarta.validation.ValidatorFactory type.",
       "sourceType": "org.apache.camel.component.bean.validator.springboot.BeanValidatorComponentConfiguration"
     }
   ],

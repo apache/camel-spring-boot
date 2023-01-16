@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.sql.stored.springboot;
 
-import javax.annotation.Generated;
 import javax.sql.DataSource;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

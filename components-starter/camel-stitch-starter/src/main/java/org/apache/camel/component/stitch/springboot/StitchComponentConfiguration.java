@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.stitch.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.stitch.StitchComponent;
 import org.apache.camel.component.stitch.StitchConfiguration;
 import org.apache.camel.component.stitch.client.StitchClient;

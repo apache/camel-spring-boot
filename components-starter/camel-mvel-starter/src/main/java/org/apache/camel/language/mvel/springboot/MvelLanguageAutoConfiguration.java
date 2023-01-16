@@ -16,7 +16,6 @@
  */
 package org.apache.camel.language.mvel.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.language.mvel.MvelLanguage;
 import org.apache.camel.spi.Language;

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.validator.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.validator.ValidatorResourceResolverFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

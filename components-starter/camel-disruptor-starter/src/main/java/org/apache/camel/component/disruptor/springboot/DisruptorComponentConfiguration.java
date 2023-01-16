@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.disruptor.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.disruptor.DisruptorComponent;
 import org.apache.camel.component.disruptor.DisruptorProducerType;
 import org.apache.camel.component.disruptor.DisruptorWaitStrategy;

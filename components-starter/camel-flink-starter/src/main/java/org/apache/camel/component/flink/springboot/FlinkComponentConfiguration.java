@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.flink.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.flink.DataSetCallback;
 import org.apache.camel.component.flink.DataStreamCallback;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

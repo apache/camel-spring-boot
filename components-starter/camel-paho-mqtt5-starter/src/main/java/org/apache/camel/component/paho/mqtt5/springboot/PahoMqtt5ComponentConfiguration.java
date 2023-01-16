@@ -18,7 +18,6 @@ package org.apache.camel.component.paho.mqtt5.springboot;
 
 import java.util.Map;
 import java.util.Properties;
-import javax.annotation.Generated;
 import javax.net.SocketFactory;
 import javax.net.ssl.HostnameVerifier;
 import org.apache.camel.component.paho.mqtt5.PahoMqtt5Component;

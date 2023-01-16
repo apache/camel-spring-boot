@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.http.springboot;
 
-import javax.annotation.Generated;
 import javax.net.ssl.HostnameVerifier;
 import org.apache.camel.component.http.HttpClientConfigurer;
 import org.apache.camel.http.common.HttpBinding;

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.ecs.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.ecs.ECS2Component;
 import org.apache.camel.component.aws2.ecs.ECS2Configuration;
 import org.apache.camel.component.aws2.ecs.ECS2Operations;

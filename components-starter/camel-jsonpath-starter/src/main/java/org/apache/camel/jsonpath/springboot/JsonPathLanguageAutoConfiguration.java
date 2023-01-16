@@ -16,7 +16,6 @@
  */
 package org.apache.camel.jsonpath.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.jsonpath.JsonPathLanguage;
 import org.apache.camel.spi.Language;

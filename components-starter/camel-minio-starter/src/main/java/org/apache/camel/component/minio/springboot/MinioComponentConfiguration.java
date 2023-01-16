@@ -17,7 +17,6 @@
 package org.apache.camel.component.minio.springboot;
 
 import java.time.ZonedDateTime;
-import javax.annotation.Generated;
 import io.minio.MinioClient;
 import io.minio.ServerSideEncryption;
 import io.minio.ServerSideEncryptionCustomerKey;

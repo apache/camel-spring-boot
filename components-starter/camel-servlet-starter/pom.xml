@@ -26,8 +26,7 @@
   </parent>
   <artifactId>camel-servlet-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: Servlet</name>
-  <description>Spring-Boot Starter for Camel servlet transport support</description>
+  <!--    <name>Camel SB Starters :: Name Here</name>-->
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -46,10 +45,10 @@
       </exclusions>
     </dependency>
     <dependency>
-        <groupId>jakarta.servlet</groupId>
-        <artifactId>jakarta.servlet-api</artifactId>
-        <version>${jakarta-servlet-api-version}</version>
-        <scope>provided</scope>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>${jakarta-servlet-api-version}</version>
+      <scope>provided</scope>
     </dependency>
     <!-- Test dependencies -->
     <dependency>
@@ -58,7 +57,6 @@
       <version>${spring-boot-version}</version>
       <scope>test</scope>
     </dependency>
-    <!-- End of test dependencies -->
     <!--START OF GENERATED CODE-->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>

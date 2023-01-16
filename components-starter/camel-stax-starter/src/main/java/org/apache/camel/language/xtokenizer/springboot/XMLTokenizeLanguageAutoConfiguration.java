@@ -16,7 +16,6 @@
  */
 package org.apache.camel.language.xtokenizer.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.language.xtokenizer.XMLTokenizeLanguage;
 import org.apache.camel.spi.Language;

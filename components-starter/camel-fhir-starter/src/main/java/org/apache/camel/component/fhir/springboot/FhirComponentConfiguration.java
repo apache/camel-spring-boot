@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.fhir.springboot;
 
-import javax.annotation.Generated;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.client.api.IRestfulClientFactory;

@@ -18,7 +18,6 @@ package org.apache.camel.component.geocoder.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.annotation.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.reactive.streams.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.reactive.streams.ReactiveStreamsBackpressureStrategy;
 import org.apache.camel.component.reactive.streams.ReactiveStreamsComponent;
 import org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration;

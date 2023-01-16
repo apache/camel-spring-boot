@@ -17,7 +17,6 @@
 package org.apache.camel.component.xslt.saxon.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import javax.xml.transform.URIResolver;
 import net.sf.saxon.Configuration;
 import org.apache.camel.component.xslt.TransformerFactoryConfigurationStrategy;

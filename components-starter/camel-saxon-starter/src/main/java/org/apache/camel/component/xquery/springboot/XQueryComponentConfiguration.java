@@ -17,7 +17,6 @@
 package org.apache.camel.component.xquery.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import net.sf.saxon.Configuration;
 import net.sf.saxon.lib.ModuleURIResolver;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

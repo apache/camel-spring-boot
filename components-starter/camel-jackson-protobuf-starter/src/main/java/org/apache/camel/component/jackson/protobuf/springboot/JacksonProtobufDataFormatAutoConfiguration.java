@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jackson.protobuf.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.jackson.protobuf.JacksonProtobufDataFormat;
 import org.apache.camel.spi.DataFormat;

@@ -18,7 +18,6 @@ package org.apache.camel.component.kafka.springboot;
 
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
-import javax.annotation.Generated;
 import org.apache.camel.component.kafka.KafkaClientFactory;
 import org.apache.camel.component.kafka.KafkaComponent;
 import org.apache.camel.component.kafka.KafkaConfiguration;

@@ -18,7 +18,6 @@ package org.apache.camel.component.netty.springboot;
 
 import java.io.File;
 import java.util.Map;
-import javax.annotation.Generated;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.handler.ssl.SslHandler;
@@ -245,10 +244,10 @@ public class NettyComponentConfiguration
      */
     private Boolean lazyChannelCreation = true;
     /**
-     * Sets the value for the blockWhenExhausted configuration attribute.
-     * It determines whether to block when the borrowObject() method is
-     * invoked when the pool is exhausted (the maximum number of "active"
-     * objects has been reached).
+     * Sets the value for the blockWhenExhausted configuration attribute. It
+     * determines whether to block when the borrowObject() method is invoked
+     * when the pool is exhausted (the maximum number of active objects has been
+     * reached).
      */
     private Boolean producerPoolBlockWhenExhausted = true;
     /**
@@ -276,11 +275,11 @@ public class NettyComponentConfiguration
     private Integer producerPoolMaxTotal = -1;
     /**
      * Sets the maximum duration (value in millis) the borrowObject() method
-     * should block before throwing an exception when the pool is exhausted
-     * and producerPoolBlockWhenExhausted is true. When less than 0,
-     * the borrowObject() method may block indefinitely.
+     * should block before throwing an exception when the pool is exhausted and
+     * producerPoolBlockWhenExhausted is true. When less than 0, the
+     * borrowObject() method may block indefinitely.
      */
-    private Long producerPoolMaxWait = -1;
+    private Long producerPoolMaxWait = -1L;
     /**
      * Sets the minimum amount of time (value in millis) an object may sit idle
      * in the pool before it is eligible for eviction by the idle object
@@ -756,7 +755,8 @@ public class NettyComponentConfiguration
         return producerPoolBlockWhenExhausted;
     }
 
-    public void setProducerPoolBlockWhenExhausted(Boolean producerPoolBlockWhenExhausted) {
+    public void setProducerPoolBlockWhenExhausted(
+            Boolean producerPoolBlockWhenExhausted) {
         this.producerPoolBlockWhenExhausted = producerPoolBlockWhenExhausted;
     }
 

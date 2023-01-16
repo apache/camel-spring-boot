@@ -16,9 +16,8 @@
  */
 package org.apache.camel.component.amqp.springboot;
 
-import javax.annotation.Generated;
-import javax.jms.ConnectionFactory;
-import javax.jms.ExceptionListener;
+import jakarta.jms.ConnectionFactory;
+import jakarta.jms.ExceptionListener;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.component.amqp.AMQPComponent;
 import org.apache.camel.component.jms.ConsumerType;
@@ -64,7 +63,7 @@ public class AMQPComponentConfiguration
     /**
      * The connection factory to be use. A connection factory must be configured
      * either on the component or endpoint. The option is a
-     * javax.jms.ConnectionFactory type.
+     * jakarta.jms.ConnectionFactory type.
      */
     private ConnectionFactory connectionFactory;
     /**
@@ -91,7 +90,7 @@ public class AMQPComponentConfiguration
      */
     private Boolean includeAmqpAnnotations = false;
     /**
-     * Allows you to force the use of a specific javax.jms.Message
+     * Allows you to force the use of a specific jakarta.jms.Message
      * implementation for sending JMS messages. Possible values are: Bytes, Map,
      * Object, Stream, Text. By default, Camel would determine which JMS message
      * type to use from the In body type. This option allows you to specify it.
@@ -310,7 +309,7 @@ public class AMQPComponentConfiguration
     private Long deliveryDelay = -1L;
     /**
      * Specifies the delivery mode to be used. Possible values are those defined
-     * by javax.jms.DeliveryMode. NON_PERSISTENT = 1 and PERSISTENT = 2.
+     * by jakarta.jms.DeliveryMode. NON_PERSISTENT = 1 and PERSISTENT = 2.
      */
     private Integer deliveryMode;
     /**
@@ -569,7 +568,7 @@ public class AMQPComponentConfiguration
     private ErrorHandler errorHandler;
     /**
      * Specifies the JMS Exception Listener that is to be notified of any
-     * underlying JMS exceptions. The option is a javax.jms.ExceptionListener
+     * underlying JMS exceptions. The option is a jakarta.jms.ExceptionListener
      * type.
      */
     private ExceptionListener exceptionListener;
@@ -606,7 +605,7 @@ public class AMQPComponentConfiguration
     private JmsKeyFormatStrategy jmsKeyFormatStrategy;
     /**
      * Specifies whether Camel should auto map the received JMS message to a
-     * suited payload type, such as javax.jms.TextMessage to a String etc.
+     * suited payload type, such as jakarta.jms.TextMessage to a String etc.
      */
     private Boolean mapJmsMessage = true;
     /**
@@ -619,14 +618,14 @@ public class AMQPComponentConfiguration
     /**
      * To use a custom Spring
      * org.springframework.jms.support.converter.MessageConverter so you can be
-     * in control how to map to/from a javax.jms.Message. The option is a
+     * in control how to map to/from a jakarta.jms.Message. The option is a
      * org.springframework.jms.support.converter.MessageConverter type.
      */
     private MessageConverter messageConverter;
     /**
      * To use the given MessageCreatedStrategy which are invoked when Camel
-     * creates new instances of javax.jms.Message objects when Camel is sending
-     * a JMS message. The option is a
+     * creates new instances of jakarta.jms.Message objects when Camel is
+     * sending a JMS message. The option is a
      * org.apache.camel.component.jms.MessageCreatedStrategy type.
      */
     private MessageCreatedStrategy messageCreatedStrategy;
@@ -689,7 +688,7 @@ public class AMQPComponentConfiguration
     /**
      * If enabled and you are using Request Reply messaging (InOut) and an
      * Exchange failed on the consumer side, then the caused Exception will be
-     * send back in response as a javax.jms.ObjectMessage. If the client is
+     * send back in response as a jakarta.jms.ObjectMessage. If the client is
      * Camel, the returned Exception is rethrown. This allows you to use Camel
      * JMS as a bridge in your routing - for example, using persistent queues to
      * enable robust routing. Notice that if you also have transferExchange

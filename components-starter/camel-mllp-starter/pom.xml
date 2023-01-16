@@ -26,8 +26,7 @@
   </parent>
   <artifactId>camel-mllp-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: MLLP</name>
-  <description>Spring-Boot Starter for Camel MLLP Component</description>
+  <!--    <name>Camel SB Starters :: Name Here</name>-->
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -38,19 +37,6 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-mllp</artifactId>
       <version>${camel-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-sjms</artifactId>
-      <version>${camel-version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-test-infra-activemq</artifactId>
-      <version>${camel-version}</version>
-      <scope>test</scope>
-      <type>test-jar</type>
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>

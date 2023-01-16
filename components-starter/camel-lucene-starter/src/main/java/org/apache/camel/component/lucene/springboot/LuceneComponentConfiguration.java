@@ -17,7 +17,6 @@
 package org.apache.camel.component.lucene.springboot;
 
 import java.io.File;
-import javax.annotation.Generated;
 import org.apache.camel.component.lucene.LuceneConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.lucene.analysis.Analyzer;

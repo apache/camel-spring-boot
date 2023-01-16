@@ -18,7 +18,6 @@ package org.apache.camel.component.xmlsecurity.springboot;
 
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Generated;
 import javax.xml.crypto.AlgorithmMethod;
 import javax.xml.crypto.URIDereferencer;
 import javax.xml.crypto.dsig.spec.XPathFilterParameterSpec;

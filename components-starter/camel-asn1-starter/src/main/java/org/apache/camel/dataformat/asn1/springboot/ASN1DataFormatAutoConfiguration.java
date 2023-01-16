@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.asn1.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.dataformat.asn1.ASN1DataFormat;
 import org.apache.camel.spi.DataFormat;

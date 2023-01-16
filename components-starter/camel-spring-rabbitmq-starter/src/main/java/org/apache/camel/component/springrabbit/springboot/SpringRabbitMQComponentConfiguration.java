@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.springrabbit.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.springrabbit.ListenerContainerFactory;
 import org.apache.camel.component.springrabbit.MessagePropertiesConverter;
 import org.apache.camel.spi.HeaderFilterStrategy;

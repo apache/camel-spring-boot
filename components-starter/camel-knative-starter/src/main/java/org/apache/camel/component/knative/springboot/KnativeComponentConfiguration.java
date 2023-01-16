@@ -17,7 +17,6 @@
 package org.apache.camel.component.knative.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import org.apache.camel.component.knative.KnativeConfiguration;
 import org.apache.camel.component.knative.spi.KnativeConsumerFactory;
 import org.apache.camel.component.knative.spi.KnativeEnvironment;

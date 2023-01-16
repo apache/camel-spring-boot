@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.cbor.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.cbor.CBORDataFormat;
 import org.apache.camel.spi.DataFormat;

@@ -17,7 +17,6 @@
 package org.apache.camel.component.jslt.springboot;
 
 import java.util.Collection;
-import javax.annotation.Generated;
 import com.schibsted.spt.data.jslt.Function;
 import com.schibsted.spt.data.jslt.filters.JsonFilter;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

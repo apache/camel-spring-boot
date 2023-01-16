@@ -17,7 +17,6 @@
 package org.apache.camel.language.xpath.springboot;
 
 import java.util.List;
-import javax.annotation.Generated;
 import org.apache.camel.model.PropertyDefinition;
 import org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

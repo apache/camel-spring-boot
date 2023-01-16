@@ -26,8 +26,7 @@
   </parent>
   <artifactId>camel-jetty-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: Jetty</name>
-  <description>Spring-Boot Starter for Camel Jetty Component</description>
+  <!--    <name>Camel SB Starters :: Name Here</name>-->
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>

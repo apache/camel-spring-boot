@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jackson.avro.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.jackson.avro.JacksonAvroDataFormat;
 import org.apache.camel.spi.DataFormat;

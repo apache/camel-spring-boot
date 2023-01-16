@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.kubernetes.services.springboot;
 
-import javax.annotation.Generated;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

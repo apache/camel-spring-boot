@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.master.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.cluster.CamelClusterService.Selector;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

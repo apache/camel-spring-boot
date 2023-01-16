@@ -17,7 +17,6 @@
 package org.apache.camel.component.google.mail.stream.springboot;
 
 import java.util.List;
-import javax.annotation.Generated;
 import org.apache.camel.component.google.mail.GoogleMailClientFactory;
 import org.apache.camel.component.google.mail.stream.GoogleMailStreamConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

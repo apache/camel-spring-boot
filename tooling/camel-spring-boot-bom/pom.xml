@@ -35,11 +35,6 @@
     <dependencies>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-activemq-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-amqp-starter</artifactId>
         <version>${project.version}</version>
       </dependency>

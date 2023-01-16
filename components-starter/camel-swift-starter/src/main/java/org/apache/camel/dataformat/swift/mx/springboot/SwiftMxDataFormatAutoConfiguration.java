@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.swift.mx.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.dataformat.swift.mx.SwiftMxDataFormat;
 import org.apache.camel.spi.DataFormat;

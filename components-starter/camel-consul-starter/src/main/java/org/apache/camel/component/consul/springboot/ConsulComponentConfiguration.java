@@ -19,7 +19,6 @@ package org.apache.camel.component.consul.springboot;
 import java.math.BigInteger;
 import java.time.Duration;
 import java.util.List;
-import javax.annotation.Generated;
 import com.orbitz.consul.Consul;
 import com.orbitz.consul.option.ConsistencyMode;
 import org.apache.camel.component.consul.ConsulComponent;

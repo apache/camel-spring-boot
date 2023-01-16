@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.service.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.cloud.ServiceRegistry;
 import org.apache.camel.cloud.ServiceRegistry.Selector;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

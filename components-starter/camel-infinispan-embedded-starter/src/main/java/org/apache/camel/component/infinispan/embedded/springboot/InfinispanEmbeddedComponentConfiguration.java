@@ -17,7 +17,6 @@
 package org.apache.camel.component.infinispan.embedded.springboot;
 
 import java.util.function.BiFunction;
-import javax.annotation.Generated;
 import org.apache.camel.component.infinispan.InfinispanOperation;
 import org.apache.camel.component.infinispan.InfinispanQueryBuilder;
 import org.apache.camel.component.infinispan.embedded.InfinispanEmbeddedComponent;

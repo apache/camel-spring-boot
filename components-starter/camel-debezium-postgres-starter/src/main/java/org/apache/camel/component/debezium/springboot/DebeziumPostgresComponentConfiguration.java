@@ -17,7 +17,6 @@
 package org.apache.camel.component.debezium.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import org.apache.camel.component.debezium.configuration.PostgresConnectorEmbeddedDebeziumConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

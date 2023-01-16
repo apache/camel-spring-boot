@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jdbc.springboot;
 
-import javax.annotation.Generated;
 import javax.sql.DataSource;
 import org.apache.camel.component.jdbc.ConnectionStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

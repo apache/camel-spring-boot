@@ -18,7 +18,6 @@ package org.apache.camel.component.netty.http.springboot;
 
 import java.io.File;
 import java.util.Map;
-import javax.annotation.Generated;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.handler.ssl.SslHandler;
@@ -228,6 +227,13 @@ public class NettyHttpComponentConfiguration
      */
     private Boolean lazyChannelCreation = true;
     /**
+     * Sets the value for the blockWhenExhausted configuration attribute. It
+     * determines whether to block when the borrowObject() method is invoked
+     * when the pool is exhausted (the maximum number of active objects has been
+     * reached).
+     */
+    private Boolean producerPoolBlockWhenExhausted = true;
+    /**
      * Whether producer pool is enabled or not. Important: If you turn this off
      * then a single shared connection is used for the producer, also if you are
      * doing request/reply. That means there is a potential issue with
@@ -250,6 +256,13 @@ public class NettyHttpComponentConfiguration
      * a negative value for no limit.
      */
     private Integer producerPoolMaxTotal = -1;
+    /**
+     * Sets the maximum duration (value in millis) the borrowObject() method
+     * should block before throwing an exception when the pool is exhausted and
+     * producerPoolBlockWhenExhausted is true. When less than 0, the
+     * borrowObject() method may block indefinitely.
+     */
+    private Long producerPoolMaxWait = -1L;
     /**
      * Sets the minimum amount of time (value in millis) an object may sit idle
      * in the pool before it is eligible for eviction by the idle object
@@ -659,6 +672,15 @@ public class NettyHttpComponentConfiguration
         this.lazyChannelCreation = lazyChannelCreation;
     }
 
+    public Boolean getProducerPoolBlockWhenExhausted() {
+        return producerPoolBlockWhenExhausted;
+    }
+
+    public void setProducerPoolBlockWhenExhausted(
+            Boolean producerPoolBlockWhenExhausted) {
+        this.producerPoolBlockWhenExhausted = producerPoolBlockWhenExhausted;
+    }
+
     public Boolean getProducerPoolEnabled() {
         return producerPoolEnabled;
     }
@@ -681,6 +703,14 @@ public class NettyHttpComponentConfiguration
 
     public void setProducerPoolMaxTotal(Integer producerPoolMaxTotal) {
         this.producerPoolMaxTotal = producerPoolMaxTotal;
+    }
+
+    public Long getProducerPoolMaxWait() {
+        return producerPoolMaxWait;
+    }
+
+    public void setProducerPoolMaxWait(Long producerPoolMaxWait) {
+        this.producerPoolMaxWait = producerPoolMaxWait;
     }
 
     public Long getProducerPoolMinEvictableIdle() {

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.braintree.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.braintree.BraintreeConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -19,7 +19,7 @@ package org.apache.camel.component.salesforce.springboot.dto.generated;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.camel.component.salesforce.api.dto.AbstractDescribedSObjectBase;

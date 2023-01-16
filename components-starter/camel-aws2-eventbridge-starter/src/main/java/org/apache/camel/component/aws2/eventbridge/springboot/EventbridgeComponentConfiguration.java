@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.eventbridge.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.eventbridge.EventbridgeComponent;
 import org.apache.camel.component.aws2.eventbridge.EventbridgeConfiguration;
 import org.apache.camel.component.aws2.eventbridge.EventbridgeOperations;

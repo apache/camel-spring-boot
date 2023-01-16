@@ -18,7 +18,6 @@ package org.apache.camel.component.salesforce.springboot;
 
 import java.util.Map;
 import java.util.Set;
-import javax.annotation.Generated;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.component.salesforce.AuthenticationType;
 import org.apache.camel.component.salesforce.NotFoundBehaviour;

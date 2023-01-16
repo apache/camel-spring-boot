@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.fhir.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.fhir.FhirJsonDataFormat;
 import org.apache.camel.spi.DataFormat;

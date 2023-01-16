@@ -18,7 +18,6 @@ package org.apache.camel.component.beanclass.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.GenericConverter;

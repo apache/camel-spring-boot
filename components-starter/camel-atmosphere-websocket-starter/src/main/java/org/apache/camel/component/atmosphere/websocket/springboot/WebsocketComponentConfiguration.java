@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.atmosphere.websocket.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.http.common.HttpBinding;
 import org.apache.camel.http.common.HttpConfiguration;
 import org.apache.camel.http.common.HttpRegistry;

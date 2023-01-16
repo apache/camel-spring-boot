@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.spring.batch.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.batch.core.configuration.JobRegistry;
 import org.springframework.batch.core.launch.JobLauncher;

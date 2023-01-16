@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.base64.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.dataformat.base64.Base64DataFormat;
 import org.apache.camel.spi.DataFormat;

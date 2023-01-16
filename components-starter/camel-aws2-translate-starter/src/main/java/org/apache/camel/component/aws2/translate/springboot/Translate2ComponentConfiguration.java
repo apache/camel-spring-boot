@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.translate.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.translate.Translate2Component;
 import org.apache.camel.component.aws2.translate.Translate2Configuration;
 import org.apache.camel.component.aws2.translate.Translate2Operations;

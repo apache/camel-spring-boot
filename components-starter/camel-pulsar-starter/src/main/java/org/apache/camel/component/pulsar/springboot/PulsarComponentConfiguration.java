@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.pulsar.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.pulsar.PulsarComponent;
 import org.apache.camel.component.pulsar.PulsarConfiguration;
 import org.apache.camel.component.pulsar.PulsarMessageReceiptFactory;

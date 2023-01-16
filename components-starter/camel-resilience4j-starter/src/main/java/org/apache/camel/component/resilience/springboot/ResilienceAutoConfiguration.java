@@ -18,7 +18,7 @@ package org.apache.camel.component.resilience.springboot;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.resilience4j.ResilienceConstants;

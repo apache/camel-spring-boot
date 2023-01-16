@@ -42,7 +42,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.SocketUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -53,7 +52,7 @@ public class ZooKeeperServiceRegistryTest {
     private static final String SERVICE_ID = UUID.randomUUID().toString();
     private static final String SERVICE_NAME = "my-service";
     private static final String SERVICE_HOST = "localhost";
-    private static final int SERVICE_PORT = SocketUtils.findAvailableTcpPort();
+    private static final int SERVICE_PORT = AvailablePortFinder.getNextAvailable();
 
     @TempDir
     Path temporaryFolder ;

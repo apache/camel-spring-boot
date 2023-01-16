@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.beanclass.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.BeanScope;
 import org.apache.camel.component.beanclass.ClassComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

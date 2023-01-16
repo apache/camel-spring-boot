@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.google.pubsub.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
 import org.apache.camel.component.google.pubsub.GooglePubsubComponent;

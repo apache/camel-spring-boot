@@ -17,7 +17,6 @@
 package org.apache.camel.component.paho.springboot;
 
 import java.util.Properties;
-import javax.annotation.Generated;
 import javax.net.SocketFactory;
 import javax.net.ssl.HostnameVerifier;
 import org.apache.camel.component.paho.PahoComponent;

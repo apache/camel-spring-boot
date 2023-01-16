@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jooq.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.jooq.JooqComponent;
 import org.apache.camel.component.jooq.JooqConfiguration;
 import org.apache.camel.component.jooq.JooqOperation;

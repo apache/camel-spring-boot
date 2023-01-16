@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.mustache.springboot;
 
-import javax.annotation.Generated;
 import com.github.mustachejava.MustacheFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

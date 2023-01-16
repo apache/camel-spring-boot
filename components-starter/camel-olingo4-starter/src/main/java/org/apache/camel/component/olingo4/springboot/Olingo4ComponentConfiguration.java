@@ -17,7 +17,6 @@
 package org.apache.camel.component.olingo4.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import org.apache.camel.component.olingo4.Olingo4Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;

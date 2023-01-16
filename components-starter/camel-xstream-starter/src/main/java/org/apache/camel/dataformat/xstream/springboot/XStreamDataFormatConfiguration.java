@@ -17,7 +17,6 @@
 package org.apache.camel.dataformat.xstream.springboot;
 
 import java.util.List;
-import javax.annotation.Generated;
 import org.apache.camel.model.PropertyDefinition;
 import org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

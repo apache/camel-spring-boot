@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.metrics.springboot;
 
-import javax.annotation.Generated;
 import com.codahale.metrics.MetricRegistry;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

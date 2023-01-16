@@ -18,7 +18,6 @@ package org.apache.camel.component.azure.storage.blob.springboot;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
-import javax.annotation.Generated;
 import com.azure.core.util.Context;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.models.BlockListType;

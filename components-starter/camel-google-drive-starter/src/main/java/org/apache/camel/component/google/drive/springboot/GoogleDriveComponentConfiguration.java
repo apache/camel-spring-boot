@@ -17,7 +17,6 @@
 package org.apache.camel.component.google.drive.springboot;
 
 import java.util.List;
-import javax.annotation.Generated;
 import org.apache.camel.component.google.drive.GoogleDriveClientFactory;
 import org.apache.camel.component.google.drive.GoogleDriveConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

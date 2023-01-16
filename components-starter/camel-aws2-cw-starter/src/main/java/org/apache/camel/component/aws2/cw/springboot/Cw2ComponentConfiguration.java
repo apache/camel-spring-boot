@@ -17,7 +17,6 @@
 package org.apache.camel.component.aws2.cw.springboot;
 
 import java.time.Instant;
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.cw.Cw2Component;
 import org.apache.camel.component.aws2.cw.Cw2Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

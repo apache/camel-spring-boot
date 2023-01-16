@@ -18,7 +18,6 @@ package org.apache.camel.component.infinispan.remote.springboot;
 
 import java.util.Map;
 import java.util.function.BiFunction;
-import javax.annotation.Generated;
 import org.apache.camel.component.infinispan.InfinispanOperation;
 import org.apache.camel.component.infinispan.InfinispanQueryBuilder;
 import org.apache.camel.component.infinispan.remote.InfinispanRemoteComponent;

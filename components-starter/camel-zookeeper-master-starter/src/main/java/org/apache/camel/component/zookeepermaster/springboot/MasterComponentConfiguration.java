@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.zookeepermaster.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.zookeepermaster.ContainerIdFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.curator.framework.CuratorFramework;

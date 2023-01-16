@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.atlasmap.springboot;
 
-import javax.annotation.Generated;
 import io.atlasmap.api.AtlasContextFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

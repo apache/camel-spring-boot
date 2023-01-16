@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.elasticsearch.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.elasticsearch.client.RestClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;

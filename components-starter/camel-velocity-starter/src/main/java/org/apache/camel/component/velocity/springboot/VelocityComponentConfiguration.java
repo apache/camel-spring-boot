@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.velocity.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.boot.context.properties.ConfigurationProperties;

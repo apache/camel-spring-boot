@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.kms.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.kms.KMS2Component;
 import org.apache.camel.component.aws2.kms.KMS2Configuration;
 import org.apache.camel.component.aws2.kms.KMS2Operations;

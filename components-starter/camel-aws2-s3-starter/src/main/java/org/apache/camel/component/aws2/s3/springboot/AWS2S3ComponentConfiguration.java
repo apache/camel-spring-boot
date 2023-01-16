@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.s3.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.s3.AWS2S3Component;
 import org.apache.camel.component.aws2.s3.AWS2S3Configuration;
 import org.apache.camel.component.aws2.s3.AWS2S3Operations;

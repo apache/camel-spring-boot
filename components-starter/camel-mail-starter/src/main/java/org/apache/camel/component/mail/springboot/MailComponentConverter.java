@@ -18,7 +18,6 @@ package org.apache.camel.component.mail.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.annotation.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -46,7 +45,7 @@ public class MailComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.mail.MailAuthenticator.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.mail.MailConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.mail.ContentTypeResolver.class));
-        answer.add(new ConvertiblePair(String.class, javax.mail.Session.class));
+        answer.add(new ConvertiblePair(String.class, jakarta.mail.Session.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
@@ -71,7 +70,7 @@ public class MailComponentConverter implements GenericConverter {
             case "org.apache.camel.component.mail.MailAuthenticator": return applicationContext.getBean(ref, org.apache.camel.component.mail.MailAuthenticator.class);
             case "org.apache.camel.component.mail.MailConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.mail.MailConfiguration.class);
             case "org.apache.camel.component.mail.ContentTypeResolver": return applicationContext.getBean(ref, org.apache.camel.component.mail.ContentTypeResolver.class);
-            case "javax.mail.Session": return applicationContext.getBean(ref, javax.mail.Session.class);
+            case "jakarta.mail.Session": return applicationContext.getBean(ref, jakarta.mail.Session.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }

@@ -157,8 +157,8 @@
     },
     {
       "name": "camel.component.amqp.connection-factory",
-      "type": "javax.jms.ConnectionFactory",
-      "description": "The connection factory to be use. A connection factory must be configured either on the component or endpoint. The option is a javax.jms.ConnectionFactory type.",
+      "type": "jakarta.jms.ConnectionFactory",
+      "description": "The connection factory to be use. A connection factory must be configured either on the component or endpoint. The option is a jakarta.jms.ConnectionFactory type.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {
@@ -194,7 +194,7 @@
     {
       "name": "camel.component.amqp.delivery-mode",
       "type": "java.lang.Integer",
-      "description": "Specifies the delivery mode to be used. Possible values are those defined by javax.jms.DeliveryMode. NON_PERSISTENT = 1 and PERSISTENT = 2.",
+      "description": "Specifies the delivery mode to be used. Possible values are those defined by jakarta.jms.DeliveryMode. NON_PERSISTENT = 1 and PERSISTENT = 2.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {
@@ -271,8 +271,8 @@
     },
     {
       "name": "camel.component.amqp.exception-listener",
-      "type": "javax.jms.ExceptionListener",
-      "description": "Specifies the JMS Exception Listener that is to be notified of any underlying JMS exceptions. The option is a javax.jms.ExceptionListener type.",
+      "type": "jakarta.jms.ExceptionListener",
+      "description": "Specifies the JMS Exception Listener that is to be notified of any underlying JMS exceptions. The option is a jakarta.jms.ExceptionListener type.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {
@@ -353,7 +353,7 @@
     {
       "name": "camel.component.amqp.jms-message-type",
       "type": "org.apache.camel.component.jms.JmsMessageType",
-      "description": "Allows you to force the use of a specific javax.jms.Message implementation for sending JMS messages. Possible values are: Bytes, Map, Object, Stream, Text. By default, Camel would determine which JMS message type to use from the In body type. This option allows you to specify it.",
+      "description": "Allows you to force the use of a specific jakarta.jms.Message implementation for sending JMS messages. Possible values are: Bytes, Map, Object, Stream, Text. By default, Camel would determine which JMS message type to use from the In body type. This option allows you to specify it.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {
@@ -373,7 +373,7 @@
     {
       "name": "camel.component.amqp.map-jms-message",
       "type": "java.lang.Boolean",
-      "description": "Specifies whether Camel should auto map the received JMS message to a suited payload type, such as javax.jms.TextMessage to a String etc.",
+      "description": "Specifies whether Camel should auto map the received JMS message to a suited payload type, such as jakarta.jms.TextMessage to a String etc.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
       "defaultValue": true
     },
@@ -393,13 +393,13 @@
     {
       "name": "camel.component.amqp.message-converter",
       "type": "org.springframework.jms.support.converter.MessageConverter",
-      "description": "To use a custom Spring org.springframework.jms.support.converter.MessageConverter so you can be in control how to map to\/from a javax.jms.Message. The option is a org.springframework.jms.support.converter.MessageConverter type.",
+      "description": "To use a custom Spring org.springframework.jms.support.converter.MessageConverter so you can be in control how to map to\/from a jakarta.jms.Message. The option is a org.springframework.jms.support.converter.MessageConverter type.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {
       "name": "camel.component.amqp.message-created-strategy",
       "type": "org.apache.camel.component.jms.MessageCreatedStrategy",
-      "description": "To use the given MessageCreatedStrategy which are invoked when Camel creates new instances of javax.jms.Message objects when Camel is sending a JMS message. The option is a org.apache.camel.component.jms.MessageCreatedStrategy type.",
+      "description": "To use the given MessageCreatedStrategy which are invoked when Camel creates new instances of jakarta.jms.Message objects when Camel is sending a JMS message. The option is a org.apache.camel.component.jms.MessageCreatedStrategy type.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {
@@ -649,7 +649,7 @@
     {
       "name": "camel.component.amqp.transfer-exception",
       "type": "java.lang.Boolean",
-      "description": "If enabled and you are using Request Reply messaging (InOut) and an Exchange failed on the consumer side, then the caused Exception will be send back in response as a javax.jms.ObjectMessage. If the client is Camel, the returned Exception is rethrown. This allows you to use Camel JMS as a bridge in your routing - for example, using persistent queues to enable robust routing. Notice that if you also have transferExchange enabled, this option takes precedence. The caught exception is required to be serializable. The original Exception on the consumer side can be wrapped in an outer exception such as org.apache.camel.RuntimeCamelException when returned to the producer. Use this with caution as the data is using Java Object serialization and requires the received to be able to deserialize the data at Class level, which forces a strong coupling between the producers and consumer!",
+      "description": "If enabled and you are using Request Reply messaging (InOut) and an Exchange failed on the consumer side, then the caused Exception will be send back in response as a jakarta.jms.ObjectMessage. If the client is Camel, the returned Exception is rethrown. This allows you to use Camel JMS as a bridge in your routing - for example, using persistent queues to enable robust routing. Notice that if you also have transferExchange enabled, this option takes precedence. The caught exception is required to be serializable. The original Exception on the consumer side can be wrapped in an outer exception such as org.apache.camel.RuntimeCamelException when returned to the producer. Use this with caution as the data is using Java Object serialization and requires the received to be able to deserialize the data at Class level, which forces a strong coupling between the producers and consumer!",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
       "defaultValue": false
     },

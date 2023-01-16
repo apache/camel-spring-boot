@@ -18,7 +18,6 @@ package org.apache.camel.component.web3j.springboot;
 
 import java.math.BigInteger;
 import java.util.List;
-import javax.annotation.Generated;
 import org.apache.camel.component.web3j.Web3jConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

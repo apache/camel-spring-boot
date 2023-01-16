@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.snakeyaml.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.snakeyaml.SnakeYAMLDataFormat;
 import org.apache.camel.spi.DataFormat;

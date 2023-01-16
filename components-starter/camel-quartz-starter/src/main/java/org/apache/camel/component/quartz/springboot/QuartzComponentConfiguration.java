@@ -17,7 +17,6 @@
 package org.apache.camel.component.quartz.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerFactory;

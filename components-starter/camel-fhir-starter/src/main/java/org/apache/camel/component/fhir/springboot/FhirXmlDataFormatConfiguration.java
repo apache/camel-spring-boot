@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.fhir.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

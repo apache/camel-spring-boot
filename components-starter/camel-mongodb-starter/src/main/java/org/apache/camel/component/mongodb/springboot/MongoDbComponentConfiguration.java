@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.mongodb.springboot;
 
-import javax.annotation.Generated;
 import com.mongodb.client.MongoClient;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

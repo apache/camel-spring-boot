@@ -17,7 +17,6 @@
 package org.apache.camel.component.jcache.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import javax.cache.configuration.Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -18,7 +18,6 @@ package org.apache.camel.component.etcd3.springboot;
 
 import java.time.Duration;
 import java.util.Map;
-import javax.annotation.Generated;
 import io.netty.handler.ssl.SslContext;
 import org.apache.camel.component.etcd3.Etcd3Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

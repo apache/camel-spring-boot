@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.corda.springboot;
 
-import javax.annotation.Generated;
 import net.corda.core.contracts.ContractState;
 import net.corda.core.flows.FlowLogic;
 import net.corda.core.node.services.vault.PageSpecification;

@@ -26,8 +26,7 @@
   </parent>
   <artifactId>camel-paho-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: Paho</name>
-  <description>Spring-Boot Starter for Camel Eclipse Paho support</description>
+  <!--    <name>Camel SB Starters :: Name Here</name>-->
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -39,13 +38,6 @@
       <artifactId>camel-paho</artifactId>
       <version>${camel-version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-test-infra-activemq</artifactId>
-      <version>${camel-version}</version>
-      <scope>test</scope>
-      <type>test-jar</type>
-    </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
@@ -53,15 +45,4 @@
     </dependency>
     <!--END OF GENERATED CODE-->
   </dependencies>
-  <!--START OF GENERATED CODE-->
-  <repositories>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>eclipse-paho</id>
-      <url>https://repo.eclipse.org/content/repositories/paho-releases</url>
-    </repository>
-  </repositories>
-  <!--END OF GENERATED CODE-->
 </project>

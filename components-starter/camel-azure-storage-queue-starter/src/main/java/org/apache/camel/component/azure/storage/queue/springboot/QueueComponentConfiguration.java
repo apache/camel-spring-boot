@@ -17,7 +17,6 @@
 package org.apache.camel.component.azure.storage.queue.springboot;
 
 import java.time.Duration;
-import javax.annotation.Generated;
 import com.azure.storage.common.StorageSharedKeyCredential;
 import com.azure.storage.queue.QueueServiceClient;
 import org.apache.camel.component.azure.storage.queue.QueueConfiguration;

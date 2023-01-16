@@ -17,7 +17,6 @@
 package org.apache.camel.component.cometd.springboot;
 
 import java.util.List;
-import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.cometd.bayeux.server.BayeuxServer.Extension;

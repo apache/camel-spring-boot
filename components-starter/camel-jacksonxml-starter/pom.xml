@@ -26,8 +26,7 @@
   </parent>
   <artifactId>camel-jacksonxml-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: Jackson XML</name>
-  <description>Spring-Boot Starter for Camel Jackson XML support</description>
+  <!--    <name>Camel SB Starters :: Name Here</name>-->
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.azure.cosmosdb.springboot;
 
-import javax.annotation.Generated;
 import com.azure.cosmos.ConsistencyLevel;
 import com.azure.cosmos.CosmosAsyncClient;
 import com.azure.cosmos.models.ChangeFeedProcessorOptions;

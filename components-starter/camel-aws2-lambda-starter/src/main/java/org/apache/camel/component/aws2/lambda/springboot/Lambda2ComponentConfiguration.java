@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.lambda.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.lambda.Lambda2Component;
 import org.apache.camel.component.aws2.lambda.Lambda2Configuration;
 import org.apache.camel.component.aws2.lambda.Lambda2Operations;

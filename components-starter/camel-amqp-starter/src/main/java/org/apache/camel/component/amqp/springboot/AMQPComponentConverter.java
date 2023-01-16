@@ -18,7 +18,6 @@ package org.apache.camel.component.amqp.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.annotation.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -40,12 +39,12 @@ public class AMQPComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, javax.jms.ConnectionFactory.class));
+        answer.add(new ConvertiblePair(String.class, jakarta.jms.ConnectionFactory.class));
         answer.add(new ConvertiblePair(String.class, org.springframework.core.task.TaskExecutor.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.JmsConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.springframework.jms.support.destination.DestinationResolver.class));
         answer.add(new ConvertiblePair(String.class, org.springframework.util.ErrorHandler.class));
-        answer.add(new ConvertiblePair(String.class, javax.jms.ExceptionListener.class));
+        answer.add(new ConvertiblePair(String.class, jakarta.jms.ExceptionListener.class));
         answer.add(new ConvertiblePair(String.class, org.springframework.jms.support.converter.MessageConverter.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.MessageCreatedStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.MessageListenerContainerFactory.class));
@@ -68,12 +67,12 @@ public class AMQPComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "javax.jms.ConnectionFactory": return applicationContext.getBean(ref, javax.jms.ConnectionFactory.class);
+            case "jakarta.jms.ConnectionFactory": return applicationContext.getBean(ref, jakarta.jms.ConnectionFactory.class);
             case "org.springframework.core.task.TaskExecutor": return applicationContext.getBean(ref, org.springframework.core.task.TaskExecutor.class);
             case "org.apache.camel.component.jms.JmsConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.jms.JmsConfiguration.class);
             case "org.springframework.jms.support.destination.DestinationResolver": return applicationContext.getBean(ref, org.springframework.jms.support.destination.DestinationResolver.class);
             case "org.springframework.util.ErrorHandler": return applicationContext.getBean(ref, org.springframework.util.ErrorHandler.class);
-            case "javax.jms.ExceptionListener": return applicationContext.getBean(ref, javax.jms.ExceptionListener.class);
+            case "jakarta.jms.ExceptionListener": return applicationContext.getBean(ref, jakarta.jms.ExceptionListener.class);
             case "org.springframework.jms.support.converter.MessageConverter": return applicationContext.getBean(ref, org.springframework.jms.support.converter.MessageConverter.class);
             case "org.apache.camel.component.jms.MessageCreatedStrategy": return applicationContext.getBean(ref, org.apache.camel.component.jms.MessageCreatedStrategy.class);
             case "org.apache.camel.component.jms.MessageListenerContainerFactory": return applicationContext.getBean(ref, org.apache.camel.component.jms.MessageListenerContainerFactory.class);

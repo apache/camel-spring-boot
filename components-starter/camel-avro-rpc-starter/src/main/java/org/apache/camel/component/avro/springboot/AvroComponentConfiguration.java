@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.avro.springboot;
 
-import javax.annotation.Generated;
 import org.apache.avro.Protocol;
 import org.apache.camel.component.avro.AvroConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

@@ -17,7 +17,6 @@
 package org.apache.camel.component.servicenow.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.component.servicenow.ServiceNowComponent;
 import org.apache.camel.component.servicenow.ServiceNowConfiguration;

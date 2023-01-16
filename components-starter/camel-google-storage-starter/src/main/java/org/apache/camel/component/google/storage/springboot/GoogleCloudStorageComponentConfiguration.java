@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.google.storage.springboot;
 
-import javax.annotation.Generated;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageClass;
 import org.apache.camel.component.google.storage.GoogleCloudStorageConfiguration;

@@ -26,8 +26,7 @@
   </parent>
   <artifactId>camel-mail-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: Mail</name>
-  <description>Spring-Boot Starter for Camel Mail support</description>
+  <!--    <name>Camel SB Starters :: Name Here</name>-->
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -38,23 +37,6 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-mail</artifactId>
       <version>${camel-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jvnet.mock-javamail</groupId>
-      <artifactId>mock-javamail</artifactId>
-      <version>${mock-javamail-version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>javax.mail</groupId>
-          <artifactId>mail</artifactId>
-        </exclusion>
-      </exclusions>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <scope>test</scope>
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>

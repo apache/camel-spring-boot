@@ -18,7 +18,6 @@ package org.apache.camel.component.milo.server.springboot;
 
 import java.security.cert.X509Certificate;
 import java.util.Set;
-import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.eclipse.milo.opcua.stack.core.security.CertificateManager;
 import org.eclipse.milo.opcua.stack.core.security.SecurityPolicy;

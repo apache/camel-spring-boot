@@ -26,8 +26,7 @@
   </parent>
   <artifactId>camel-soap-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: SOAP</name>
-  <description>Spring-Boot Starter for Camel SOAP support</description>
+  <!--    <name>Camel SB Starters :: Name Here</name>-->
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -39,29 +38,6 @@
       <artifactId>camel-soap</artifactId>
       <version>${camel-version}</version>
     </dependency>
-    <!-- test dependencies -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-cxf-spring-transport</artifactId>
-      <version>${camel-version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-cxf-soap</artifactId>
-      <version>${camel-version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <scope>test</scope>
-    </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
@@ -69,103 +45,4 @@
     </dependency>
     <!--END OF GENERATED CODE-->
   </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-xjc-plugin</artifactId>
-        <version>${cxf-xjc-plugin-version}</version>
-        <executions>
-          <execution>
-            <id>generate-sources-jaxb</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>xsdtojava-tests</goal>
-            </goals>
-            <configuration>
-              <fork>${cxf.codegenplugin.forkmode}</fork>
-              <additionalJvmArgs>${cxf.xjc.jvmArgs}</additionalJvmArgs>
-              <testSourceRoot>${basedir}/target/generated/src/test/java</testSourceRoot>
-              <xsdOptions>
-                <xsdOption>
-                  <extension>true</extension>
-                  <xsd>
-                    ${basedir}/src/test/resources/org/apache/camel/dataformat/soap/custom-soap-headers.xsd
-                  </xsd>
-                  <bindingFile>
-                    ${basedir}/src/test/resources/org/apache/camel/dataformat/soap/xjc-bindings.xml
-                  </bindingFile>
-                </xsdOption>
-                <xsdOption>
-                  <extension>true</extension>
-                  <xsd>
-                    ${basedir}/src/test/resources/org/apache/camel/dataformat/soap/contact.xsd
-                  </xsd>
-                  <bindingFile>
-                    ${basedir}/src/test/resources/org/apache/camel/dataformat/soap/xjc-bindings.xml
-                  </bindingFile>
-                </xsdOption>
-              </xsdOptions>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-codegen-plugin</artifactId>
-        <version>${cxf-version}</version>
-        <executions>
-          <execution>
-            <id>generate-sources-wsdl</id>
-            <phase>generate-sources</phase>
-            <configuration>
-              <fork>${cxf.codegenplugin.forkmode}</fork>
-              <additionalJvmArgs>${cxf.codegen.jvmArgs}</additionalJvmArgs>
-              <testSourceRoot>${basedir}/target/generated/src/test/java</testSourceRoot>
-              <defaultOptions>
-                <frontEnd>jaxws21</frontEnd>
-              </defaultOptions>
-              <wsdlOptions>
-                <wsdlOption>
-                  <wsdl>
-                    ${basedir}/src/test/resources/org/apache/camel/dataformat/soap/CustomerService.wsdl
-                  </wsdl>
-                  <bindingFiles>
-                    <bindingFile>
-                      ${basedir}/src/test/resources/org/apache/camel/dataformat/soap/binding.xml
-                    </bindingFile>
-                  </bindingFiles>
-                </wsdlOption>
-                <wsdlOption>
-                  <wsdl>
-                    ${basedir}/src/test/resources/org/apache/camel/dataformat/soap/CustomerService2.wsdl
-                  </wsdl>
-                </wsdlOption>
-                <wsdlOption>
-                  <wsdl>
-                    ${basedir}/src/test/resources/org/apache/camel/dataformat/soap/MultiPartCustomerService.wsdl
-                  </wsdl>
-                  <bindingFiles>
-                    <bindingFile>
-                      ${basedir}/src/test/resources/org/apache/camel/dataformat/soap/binding.xml
-                    </bindingFile>
-                  </bindingFiles>
-                </wsdlOption>
-              </wsdlOptions>
-            </configuration>
-            <goals>
-              <goal>wsdl2java</goal>
-            </goals>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.cxf.xjcplugins</groupId>
-            <artifactId>cxf-xjc-ts</artifactId>
-            <version>${cxf-xjc-utils-version}</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-    </plugins>
-  </build>
 </project>

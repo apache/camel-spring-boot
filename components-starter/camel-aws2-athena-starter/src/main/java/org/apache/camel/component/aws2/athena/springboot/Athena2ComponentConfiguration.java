@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.aws2.athena.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.component.aws2.athena.Athena2Component;
 import org.apache.camel.component.aws2.athena.Athena2Configuration;
 import org.apache.camel.component.aws2.athena.Athena2Operations;

@@ -16,12 +16,11 @@
  */
 package org.apache.camel.component.bean.validator.springboot;
 
-import javax.annotation.Generated;
-import javax.validation.ConstraintValidatorFactory;
-import javax.validation.MessageInterpolator;
-import javax.validation.TraversableResolver;
-import javax.validation.ValidationProviderResolver;
-import javax.validation.ValidatorFactory;
+import jakarta.validation.ConstraintValidatorFactory;
+import jakarta.validation.MessageInterpolator;
+import jakarta.validation.TraversableResolver;
+import jakarta.validation.ValidationProviderResolver;
+import jakarta.validation.ValidatorFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -66,27 +65,27 @@ public class BeanValidatorComponentConfiguration
     private Boolean autowiredEnabled = true;
     /**
      * To use a custom ConstraintValidatorFactory. The option is a
-     * javax.validation.ConstraintValidatorFactory type.
+     * jakarta.validation.ConstraintValidatorFactory type.
      */
     private ConstraintValidatorFactory constraintValidatorFactory;
     /**
      * To use a custom MessageInterpolator. The option is a
-     * javax.validation.MessageInterpolator type.
+     * jakarta.validation.MessageInterpolator type.
      */
     private MessageInterpolator messageInterpolator;
     /**
      * To use a custom TraversableResolver. The option is a
-     * javax.validation.TraversableResolver type.
+     * jakarta.validation.TraversableResolver type.
      */
     private TraversableResolver traversableResolver;
     /**
      * To use a a custom ValidationProviderResolver. The option is a
-     * javax.validation.ValidationProviderResolver type.
+     * jakarta.validation.ValidationProviderResolver type.
      */
     private ValidationProviderResolver validationProviderResolver;
     /**
      * To use a custom ValidatorFactory. The option is a
-     * javax.validation.ValidatorFactory type.
+     * jakarta.validation.ValidatorFactory type.
      */
     private ValidatorFactory validatorFactory;
 

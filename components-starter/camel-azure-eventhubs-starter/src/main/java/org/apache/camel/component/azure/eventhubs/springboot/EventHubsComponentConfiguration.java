@@ -17,7 +17,6 @@
 package org.apache.camel.component.azure.eventhubs.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import com.azure.core.amqp.AmqpRetryOptions;
 import com.azure.core.amqp.AmqpTransportType;
 import com.azure.core.credential.TokenCredential;

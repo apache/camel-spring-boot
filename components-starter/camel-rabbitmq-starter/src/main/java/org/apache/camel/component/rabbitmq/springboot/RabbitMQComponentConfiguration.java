@@ -17,7 +17,6 @@
 package org.apache.camel.component.rabbitmq.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import javax.net.ssl.TrustManager;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.ExceptionHandler;

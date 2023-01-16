@@ -16,6 +16,6 @@
 ## ---------------------------------------------------------------------------
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.camel.component.jetty9.springboot.JettyHttpComponentAutoConfiguration9,\
-org.apache.camel.component.jetty9.springboot.JettyHttpComponentConverter9
+org.apache.camel.component.jetty11.springboot.JettyHttpComponentConverter11,\
+org.apache.camel.component.jetty11.springboot.JettyHttpComponentAutoConfiguration11
 

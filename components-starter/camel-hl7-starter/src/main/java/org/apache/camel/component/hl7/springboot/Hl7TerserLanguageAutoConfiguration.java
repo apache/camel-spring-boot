@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.hl7.Hl7TerserLanguage;
 import org.apache.camel.spi.Language;

@@ -17,7 +17,6 @@
 package org.apache.camel.component.wordpress.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import org.apache.camel.component.wordpress.WordpressConfiguration;
 import org.apache.camel.component.wordpress.api.model.SearchCriteria;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

@@ -18,7 +18,6 @@ package org.apache.camel.component.bean.validator.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.annotation.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -40,11 +39,11 @@ public class BeanValidatorComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, javax.validation.ConstraintValidatorFactory.class));
-        answer.add(new ConvertiblePair(String.class, javax.validation.MessageInterpolator.class));
-        answer.add(new ConvertiblePair(String.class, javax.validation.TraversableResolver.class));
-        answer.add(new ConvertiblePair(String.class, javax.validation.ValidationProviderResolver.class));
-        answer.add(new ConvertiblePair(String.class, javax.validation.ValidatorFactory.class));
+        answer.add(new ConvertiblePair(String.class, jakarta.validation.ConstraintValidatorFactory.class));
+        answer.add(new ConvertiblePair(String.class, jakarta.validation.MessageInterpolator.class));
+        answer.add(new ConvertiblePair(String.class, jakarta.validation.TraversableResolver.class));
+        answer.add(new ConvertiblePair(String.class, jakarta.validation.ValidationProviderResolver.class));
+        answer.add(new ConvertiblePair(String.class, jakarta.validation.ValidatorFactory.class));
         return answer;
     }
 
@@ -61,11 +60,11 @@ public class BeanValidatorComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "javax.validation.ConstraintValidatorFactory": return applicationContext.getBean(ref, javax.validation.ConstraintValidatorFactory.class);
-            case "javax.validation.MessageInterpolator": return applicationContext.getBean(ref, javax.validation.MessageInterpolator.class);
-            case "javax.validation.TraversableResolver": return applicationContext.getBean(ref, javax.validation.TraversableResolver.class);
-            case "javax.validation.ValidationProviderResolver": return applicationContext.getBean(ref, javax.validation.ValidationProviderResolver.class);
-            case "javax.validation.ValidatorFactory": return applicationContext.getBean(ref, javax.validation.ValidatorFactory.class);
+            case "jakarta.validation.ConstraintValidatorFactory": return applicationContext.getBean(ref, jakarta.validation.ConstraintValidatorFactory.class);
+            case "jakarta.validation.MessageInterpolator": return applicationContext.getBean(ref, jakarta.validation.MessageInterpolator.class);
+            case "jakarta.validation.TraversableResolver": return applicationContext.getBean(ref, jakarta.validation.TraversableResolver.class);
+            case "jakarta.validation.ValidationProviderResolver": return applicationContext.getBean(ref, jakarta.validation.ValidationProviderResolver.class);
+            case "jakarta.validation.ValidatorFactory": return applicationContext.getBean(ref, jakarta.validation.ValidatorFactory.class);
         }
         return null;
     }

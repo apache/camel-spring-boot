@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.mllp.springboot;
 
-import javax.annotation.Generated;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.component.mllp.MllpComponent;
 import org.apache.camel.component.mllp.MllpConfiguration;

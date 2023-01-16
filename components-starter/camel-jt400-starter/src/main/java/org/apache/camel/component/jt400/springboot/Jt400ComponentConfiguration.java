@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jt400.springboot;
 
-import javax.annotation.Generated;
 import com.ibm.as400.access.AS400ConnectionPool;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

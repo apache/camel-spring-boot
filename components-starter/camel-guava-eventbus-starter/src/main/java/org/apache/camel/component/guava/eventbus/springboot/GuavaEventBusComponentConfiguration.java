@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.guava.eventbus.springboot;
 
-import javax.annotation.Generated;
 import com.google.common.eventbus.EventBus;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;

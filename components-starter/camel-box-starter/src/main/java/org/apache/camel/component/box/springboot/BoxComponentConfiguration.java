@@ -17,7 +17,6 @@
 package org.apache.camel.component.box.springboot;
 
 import java.util.Map;
-import javax.annotation.Generated;
 import com.box.sdk.EncryptionAlgorithm;
 import com.box.sdk.IAccessTokenCache;
 import org.apache.camel.component.box.BoxComponent;
