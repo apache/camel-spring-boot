@@ -330,7 +330,7 @@
     <module>camel-openapi-java-starter</module>
     <module>camel-openstack-starter</module>
     <module>camel-opentelemetry-starter</module>
-    <module>camel-optaplanner-starter</module>
+    
     <module>camel-paho-mqtt5-starter</module>
     <module>camel-paho-starter</module>
     <module>camel-pdf-starter</module>
