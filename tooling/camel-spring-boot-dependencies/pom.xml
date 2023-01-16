@@ -288,11 +288,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-atmos-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-atmosphere-websocket-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2100,11 +2095,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-atlasmap</artifactId>
-        <version>3.21.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-atmos</artifactId>
         <version>3.21.0-SNAPSHOT</version>
       </dependency>
       <dependency>
