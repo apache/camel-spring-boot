@@ -23,6 +23,8 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.*;
 import java.util.function.Function;
@@ -1802,13 +1804,9 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     }
 
     private void writeComponentSpringFactorySource(String packageName, String name) throws MojoFailureException {
-        StringBuilder sb = new StringBuilder();
-        sb.append("org.springframework.boot.autoconfigure.EnableAutoConfiguration=\\\n");
+        String lineToAdd = packageName + "." + name;
 
-        String lineToAdd = packageName + "." + name + "\n";
-        sb.append(lineToAdd);
-
-        String fileName = "META-INF/spring.factories";
+        String fileName = "META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports";
         File target = new File(new File(baseDir, "src/main/resources"), fileName);
 
         deleteFileOnMainArtifact(target);
@@ -1817,7 +1815,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             try {
                 // is the auto configuration already in the file
                 boolean found = false;
-                List<String> lines = FileUtils.readLines(target, StandardCharsets.UTF_8);
+                List<String> lines = Files.readAllLines(target.toPath(), StandardCharsets.UTF_8);
                 for (String line : lines) {
                     if (line.contains(name)) {
                         found = true;
@@ -1828,20 +1826,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 if (found) {
                     getLog().debug("No changes to existing file: " + target);
                 } else {
-                    // find last non empty line, so we can add our new line
-                    // after that
-                    int lastLine = 0;
-                    for (int i = lines.size() - 1; i >= 0; i--) {
-                        String line = lines.get(i);
-                        if (!line.trim().isEmpty()) {
-                            // adjust existing line so its being continued
-                            line = line + ",\\";
-                            lines.set(i, line);
-                            lastLine = i;
-                            break;
-                        }
-                    }
-                    lines.add(lastLine + 1, lineToAdd);
+                    lines.add(lineToAdd);
 
                     StringBuilder code = new StringBuilder();
                     for (String line : lines) {
@@ -1860,7 +1845,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             try {
                 InputStream is = getClass().getClassLoader().getResourceAsStream("license-header.txt");
                 String header = PackageHelper.loadText(is);
-                String code = sb.toString();
+                String code = lineToAdd;
                 // add empty new line after header
                 code = header + "\n" + code;
                 if (getLog().isDebugEnabled()) {
