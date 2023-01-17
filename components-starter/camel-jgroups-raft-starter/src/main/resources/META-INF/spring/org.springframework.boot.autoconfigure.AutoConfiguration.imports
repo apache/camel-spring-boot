@@ -17,3 +17,4 @@
 
 org.apache.camel.component.jgroups.raft.springboot.JGroupsRaftComponentConverter
 org.apache.camel.component.jgroups.raft.springboot.JGroupsRaftComponentAutoConfiguration
+org.apache.camel.component.jgroups.raft.springboot.cluster.springboot.JGroupsRaftClusterServiceAutoConfiguration

@@ -23,3 +23,4 @@ org.apache.camel.language.header.springboot.HeaderLanguageAutoConfiguration
 org.apache.camel.language.simple.springboot.FileLanguageAutoConfiguration
 org.apache.camel.language.property.springboot.ExchangePropertyLanguageAutoConfiguration
 org.apache.camel.language.tokenizer.springboot.TokenizeLanguageAutoConfiguration
+org.apache.camel.language.simple.springboot.SimpleLanguageAutoConfiguration

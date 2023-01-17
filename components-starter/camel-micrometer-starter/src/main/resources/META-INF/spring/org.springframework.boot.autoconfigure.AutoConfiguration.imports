@@ -17,3 +17,5 @@
 
 org.apache.camel.component.micrometer.springboot.MicrometerComponentConverter
 org.apache.camel.component.micrometer.springboot.MicrometerComponentAutoConfiguration
+org.apache.camel.component.micrometer.springboot.MicrometerTagsAutoConfiguration
+org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsAutoConfiguration

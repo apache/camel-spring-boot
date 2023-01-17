@@ -17,3 +17,6 @@
 
 org.apache.camel.component.consul.springboot.ConsulComponentConverter
 org.apache.camel.component.consul.springboot.ConsulComponentAutoConfiguration
+org.apache.camel.component.consul.springboot.cloud.ConsulServiceDiscoveryAutoConfiguration
+org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryAutoConfiguration
+org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceAutoConfiguration

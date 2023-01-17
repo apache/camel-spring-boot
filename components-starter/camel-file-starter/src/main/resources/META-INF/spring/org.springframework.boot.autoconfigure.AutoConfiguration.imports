@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.file.springboot.FileComponentAutoConfiguration
+org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceAutoConfiguration
