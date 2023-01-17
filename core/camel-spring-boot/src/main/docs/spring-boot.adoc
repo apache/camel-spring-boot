@@ -23,7 +23,7 @@ in order to use this component:
 </dependency>
 ----
 
-`camel-spring-boot` jar comes with the `spring.factories` file, so as
+`camel-spring-boot` jar comes with the `org.springframework.boot.autoconfigure.AutoConfiguration.imports` file, so as
 soon as you add that dependency into your classpath, Spring Boot will
 automatically auto-configure Camel for you.
 
