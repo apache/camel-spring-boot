@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-name: Sync Camel Spring Boot (Camel 4)
+name: Sync Camel Spring Boot (Camel 3)
 
 on:
   schedule:
@@ -38,7 +38,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: 17
+          java-version: 11
           cache: 'maven'
       - name: Build Camel Project
         run: ./mvnw -V --no-transfer-progress clean install -DskipTests
