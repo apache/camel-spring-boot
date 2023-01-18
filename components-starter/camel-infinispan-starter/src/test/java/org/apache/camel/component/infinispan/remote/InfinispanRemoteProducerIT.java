@@ -18,7 +18,6 @@ package org.apache.camel.component.infinispan.remote;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.apache.camel.BindToRegistry;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.infinispan.InfinispanConstants;
 import org.apache.camel.component.infinispan.InfinispanOperation;
@@ -80,7 +79,7 @@ public class InfinispanRemoteProducerIT extends InfinispanRemoteTestSupport impl
 						.to("direct:start")
 						.withHeader(InfinispanConstants.OPERATION, InfinispanOperation.STATS)
 						.request(ServerStatistics.class)
-						.getIntStatistic(ServerStatistics.CURRENT_NR_OF_ENTRIES));
+						.getIntStatistic(ServerStatistics.APPROXIMATE_ENTRIES));
 	}
 
 	// *****************************
