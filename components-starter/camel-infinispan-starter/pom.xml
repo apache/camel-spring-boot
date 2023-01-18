@@ -64,9 +64,8 @@
     <!-- testing - infinispan -->
     <dependency>
       <groupId>org.infinispan</groupId>
-      <artifactId>infinispan-core</artifactId>
+      <artifactId>infinispan-core-jakarta</artifactId>
       <version>${infinispan-version}</version>
-      <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <dependency>
