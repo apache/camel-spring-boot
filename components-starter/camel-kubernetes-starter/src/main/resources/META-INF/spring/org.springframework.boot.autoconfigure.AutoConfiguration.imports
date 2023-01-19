@@ -55,4 +55,4 @@ org.apache.camel.component.kubernetes.service_accounts.springboot.KubernetesServ
 org.apache.camel.component.kubernetes.service_accounts.springboot.KubernetesServiceAccountsComponentAutoConfiguration
 org.apache.camel.component.kubernetes.springboot.cloud.KubernetesServiceDiscoveryAutoConfiguration
 org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceAutoConfiguration
-org.apache.camel.component.kubernetes.deployments.springboot.KubernetesDeploymentsComponentAutoConfiguration,
+org.apache.camel.component.kubernetes.deployments.springboot.KubernetesDeploymentsComponentAutoConfiguration
