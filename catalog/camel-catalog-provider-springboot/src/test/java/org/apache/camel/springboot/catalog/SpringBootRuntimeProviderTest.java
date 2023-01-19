@@ -97,9 +97,9 @@ public class SpringBootRuntimeProviderTest {
         assertNotNull(names);
         assertFalse(names.isEmpty());
 
-        assertTrue(names.contains("zipkin"));
+        assertTrue(names.contains("lra"));
 
-        assertFalse(names.contains("blueprint"));
+        assertFalse(names.contains("endpoint"));
     }
 
     @Test
@@ -128,10 +128,10 @@ public class SpringBootRuntimeProviderTest {
 
     @Test
     public void testOtherArtifactId() throws Exception {
-        String json = catalog.otherJSonSchema("zipkin");
+        String json = catalog.otherJSonSchema("lra");
 
         assertNotNull(json);
-        assertTrue(json.contains("camel-zipkin-starter"));
+        assertTrue(json.contains("camel-lra-starter"));
     }
 
 }
