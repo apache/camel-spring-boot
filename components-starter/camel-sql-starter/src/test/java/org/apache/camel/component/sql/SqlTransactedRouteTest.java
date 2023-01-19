@@ -126,7 +126,7 @@ public class SqlTransactedRouteTest extends BaseSql {
         }
 
         @Bean(name = "required")
-        public SpringTransactionPolicy transactionManager(PlatformTransactionManager platformTransactionManager) {
+        public SpringTransactionPolicy requiredTransactionPolicy(PlatformTransactionManager platformTransactionManager) {
             SpringTransactionPolicy txPolicy = new SpringTransactionPolicy();
             txPolicy.setTransactionManager(platformTransactionManager);
             txPolicy.setPropagationBehaviorName("PROPAGATION_REQUIRED");
@@ -134,7 +134,7 @@ public class SqlTransactedRouteTest extends BaseSql {
         }
 
         @Bean(name = "txManager")
-        public PlatformTransactionManager transactionManager(DataSource dataSource) {
+        public PlatformTransactionManager txManager(DataSource dataSource) {
             return new DataSourceTransactionManager(dataSource);
         }
 
