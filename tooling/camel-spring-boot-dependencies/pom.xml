@@ -3650,11 +3650,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-spring-integration</artifactId>
-        <version>4.0.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-spring-jdbc</artifactId>
         <version>4.0.0-SNAPSHOT</version>
       </dependency>
@@ -4312,12 +4307,12 @@
       <dependency>
         <groupId>org.eclipse.rdf4j</groupId>
         <artifactId>rdf4j-model</artifactId>
-        <version>3.7.4</version>
+        <version>4.2.2</version>
       </dependency>
       <dependency>
         <groupId>org.eclipse.rdf4j</groupId>
         <artifactId>rdf4j-rio-api</artifactId>
-        <version>3.7.4</version>
+        <version>4.2.2</version>
       </dependency>
       <dependency>
         <groupId>org.junit-pioneer</groupId>
