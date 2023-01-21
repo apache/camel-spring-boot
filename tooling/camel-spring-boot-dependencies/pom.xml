@@ -2367,6 +2367,7 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-core-all</artifactId>
         <version>4.0.0-SNAPSHOT</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
