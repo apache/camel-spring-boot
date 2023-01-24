@@ -32,7 +32,7 @@ jobs:
         with:
           repository: apache/camel
           persist-credentials: false
-          ref: camel-spring-boot-3.x
+          ref: camel-3.x
           path: camel
       - name: Set up JDK
         uses: actions/setup-java@v3
