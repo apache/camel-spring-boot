@@ -733,8 +733,8 @@ public class KafkaComponentConfiguration
      */
     private String saslMechanism = "GSSAPI";
     /**
-     * Protocol used to communicate with brokers. SASL_PLAINTEXT, PLAINTEXT and
-     * SSL are supported
+     * Protocol used to communicate with brokers. SASL_PLAINTEXT, PLAINTEXT,
+     * SASL_SSL and SSL are supported
      */
     private String securityProtocol = "PLAINTEXT";
     /**
