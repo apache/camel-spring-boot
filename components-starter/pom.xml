@@ -110,7 +110,6 @@
   </build>
   <modules>
     <module>camel-amqp-starter</module>
-    <module>camel-any23-starter</module>
     <module>camel-arangodb-starter</module>
     <module>camel-as2-starter</module>
     <module>camel-asn1-starter</module>
