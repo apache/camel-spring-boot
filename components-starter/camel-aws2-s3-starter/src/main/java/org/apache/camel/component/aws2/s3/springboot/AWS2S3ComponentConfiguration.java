@@ -66,6 +66,12 @@ public class AWS2S3ComponentConfiguration
      */
     private AWS2S3Configuration configuration;
     /**
+     * The delimiter which is used in the
+     * com.amazonaws.services.s3.model.ListObjectsRequest to only consume
+     * objects we are interested in.
+     */
+    private String delimiter;
+    /**
      * Set the need for overidding the endpoint. This option needs to be used in
      * combination with uriEndpointOverride option
      */
@@ -79,6 +85,12 @@ public class AWS2S3ComponentConfiguration
      * com.amazonaws.services.s3.AmazonS3#setBucketPolicy() method.
      */
     private String policy;
+    /**
+     * The prefix which is used in the
+     * com.amazonaws.services.s3.model.ListObjectsRequest to only consume
+     * objects we are interested in.
+     */
+    private String prefix;
     /**
      * To define a proxy host when instantiating the SQS client
      */
@@ -144,12 +156,6 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean deleteAfterRead = true;
     /**
-     * The delimiter which is used in the
-     * com.amazonaws.services.s3.model.ListObjectsRequest to only consume
-     * objects we are interested in.
-     */
-    private String delimiter;
-    /**
      * Define the destination bucket where an object must be moved when
      * moveAfterRead is set to true.
      */
@@ -202,12 +208,6 @@ public class AWS2S3ComponentConfiguration
      * committed. If a rollback occurs, the object is not moved.
      */
     private Boolean moveAfterRead = false;
-    /**
-     * The prefix which is used in the
-     * com.amazonaws.services.s3.model.ListObjectsRequest to only consume
-     * objects we are interested in.
-     */
-    private String prefix;
     /**
      * If this option is true and includeBody is false, then the
      * S3Object.close() method will be called on exchange completion. This
@@ -347,6 +347,14 @@ public class AWS2S3ComponentConfiguration
         this.configuration = configuration;
     }
 
+    public String getDelimiter() {
+        return delimiter;
+    }
+
+    public void setDelimiter(String delimiter) {
+        this.delimiter = delimiter;
+    }
+
     public Boolean getOverrideEndpoint() {
         return overrideEndpoint;
     }
@@ -369,6 +377,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setPolicy(String policy) {
         this.policy = policy;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 
     public String getProxyHost() {
@@ -468,14 +484,6 @@ public class AWS2S3ComponentConfiguration
         this.deleteAfterRead = deleteAfterRead;
     }
 
-    public String getDelimiter() {
-        return delimiter;
-    }
-
-    public void setDelimiter(String delimiter) {
-        this.delimiter = delimiter;
-    }
-
     public String getDestinationBucket() {
         return destinationBucket;
     }
@@ -546,14 +554,6 @@ public class AWS2S3ComponentConfiguration
 
     public void setMoveAfterRead(Boolean moveAfterRead) {
         this.moveAfterRead = moveAfterRead;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
     }
 
     public Boolean getAutocloseBody() {
