@@ -412,7 +412,6 @@
     <module>camel-weather-starter</module>
     <module>camel-web3j-starter</module>
     <module>camel-webhook-starter</module>
-    <module>camel-websocket-starter</module>
     <module>camel-weka-starter</module>
     <module>camel-wordpress-starter</module>
     <module>camel-workday-starter</module>
