@@ -1,0 +1,14 @@
+{
+  "other": {
+    "kind": "other",
+    "name": "zeebe",
+    "title": "Zeebe",
+    "description": "Camel Zeebe support",
+    "deprecated": false,
+    "firstVersion": "3.20",
+    "supportLevel": "Experimental",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-zeebe-starter",
+    "version": "3.20.1-SNAPSHOT"
+  }
+}

@@ -109,6 +109,7 @@
     </plugins>
   </build>
   <modules>
+    
     <module>camel-amqp-starter</module>
     <module>camel-arangodb-starter</module>
     <module>camel-as2-starter</module>
@@ -262,7 +263,6 @@
     <module>camel-jasypt-starter</module>
     <module>camel-javascript-starter</module>
     <module>camel-jaxb-starter</module>
-    
     <module>camel-jcache-starter</module>
     <module>camel-jcr-starter</module>
     <module>camel-jdbc-starter</module>
@@ -308,7 +308,6 @@
     <module>camel-master-starter</module>
     <module>camel-metrics-starter</module>
     <module>camel-micrometer-starter</module>
-    
     <module>camel-mina-starter</module>
     <module>camel-minio-starter</module>
     <module>camel-mllp-starter</module>
@@ -329,7 +328,6 @@
     <module>camel-openapi-java-starter</module>
     <module>camel-openstack-starter</module>
     <module>camel-opentelemetry-starter</module>
-    
     <module>camel-paho-mqtt5-starter</module>
     <module>camel-paho-starter</module>
     <module>camel-pdf-starter</module>
@@ -394,7 +392,6 @@
     <module>camel-stream-starter</module>
     <module>camel-stringtemplate-starter</module>
     <module>camel-stub-starter</module>
-    
     <module>camel-syslog-starter</module>
     <module>camel-tarfile-starter</module>
     <module>camel-telegram-starter</module>
@@ -403,9 +400,7 @@
     <module>camel-timer-starter</module>
     <module>camel-twilio-starter</module>
     <module>camel-twitter-starter</module>
-  <!-- TODO: https://issues.apache.org/jira/browse/CAMEL-18930 
     <module>camel-undertow-spring-security-starter</module>
-  -->
     <module>camel-undertow-starter</module>
     <module>camel-univocity-parsers-starter</module>
     <module>camel-validator-starter</module>
@@ -417,9 +412,7 @@
     <module>camel-weather-starter</module>
     <module>camel-web3j-starter</module>
     <module>camel-webhook-starter</module>
-  <!-- TODO: Camel v4
     <module>camel-websocket-starter</module>
-  -->
     <module>camel-weka-starter</module>
     <module>camel-wordpress-starter</module>
     <module>camel-workday-starter</module>
@@ -432,6 +425,7 @@
     <module>camel-xslt-saxon-starter</module>
     <module>camel-xslt-starter</module>
     <module>camel-xstream-starter</module>
+    <module>camel-zeebe-starter</module>
     <module>camel-zendesk-starter</module>
     <module>camel-zip-deflater-starter</module>
     <module>camel-zipfile-starter</module>
