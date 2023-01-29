@@ -19,7 +19,6 @@ package org.apache.camel.component.rest.springboot;
 import javax.annotation.Generated;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Expose REST services or call external REST services.
@@ -60,15 +59,6 @@ public class RestComponentConfiguration
      * classpath by default and must be in JSON format.
      */
     private String apiDoc;
-    /**
-     * The Camel Rest component to use for the producer REST transport, such as
-     * http, undertow. If no component has been explicitly configured, then
-     * Camel will lookup if there is a Camel component that integrates with the
-     * Rest DSL, or if a org.apache.camel.spi.RestProducerFactory is registered
-     * in the registry. If either one is found, then that is being used.
-     */
-    @Deprecated
-    private String componentName;
     /**
      * Host and port of HTTP service to use (override host in swagger schema)
      */
@@ -124,17 +114,6 @@ public class RestComponentConfiguration
 
     public void setApiDoc(String apiDoc) {
         this.apiDoc = apiDoc;
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public String getComponentName() {
-        return componentName;
-    }
-
-    @Deprecated
-    public void setComponentName(String componentName) {
-        this.componentName = componentName;
     }
 
     public String getHost() {

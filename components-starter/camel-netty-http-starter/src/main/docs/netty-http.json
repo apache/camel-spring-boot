@@ -244,6 +244,13 @@
       "sourceType": "org.apache.camel.component.netty.http.springboot.NettyHttpComponentConfiguration"
     },
     {
+      "name": "camel.component.netty-http.producer-pool-block-when-exhausted",
+      "type": "java.lang.Boolean",
+      "description": "Sets the value for the blockWhenExhausted configuration attribute. It determines whether to block when the borrowObject() method is invoked when the pool is exhausted (the maximum number of active objects has been reached).",
+      "sourceType": "org.apache.camel.component.netty.http.springboot.NettyHttpComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.netty-http.producer-pool-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether producer pool is enabled or not. Important: If you turn this off then a single shared connection is used for the producer, also if you are doing request\/reply. That means there is a potential issue with interleaved responses if replies comes back out-of-order. Therefore you need to have a correlation id in both the request and reply messages so you can properly correlate the replies to the Camel callback that is responsible for continue processing the message in Camel. To do this you need to implement NettyCamelStateCorrelationManager as correlation manager and configure it via the correlationManager option. See also the correlationManager option for more details.",
@@ -261,6 +268,13 @@
       "name": "camel.component.netty-http.producer-pool-max-total",
       "type": "java.lang.Integer",
       "description": "Sets the cap on the number of objects that can be allocated by the pool (checked out to clients, or idle awaiting checkout) at a given time. Use a negative value for no limit.",
+      "sourceType": "org.apache.camel.component.netty.http.springboot.NettyHttpComponentConfiguration",
+      "defaultValue": -1
+    },
+    {
+      "name": "camel.component.netty-http.producer-pool-max-wait",
+      "type": "java.lang.Long",
+      "description": "Sets the maximum duration (value in millis) the borrowObject() method should block before throwing an exception when the pool is exhausted and producerPoolBlockWhenExhausted is true. When less than 0, the borrowObject() method may block indefinitely.",
       "sourceType": "org.apache.camel.component.netty.http.springboot.NettyHttpComponentConfiguration",
       "defaultValue": -1
     },

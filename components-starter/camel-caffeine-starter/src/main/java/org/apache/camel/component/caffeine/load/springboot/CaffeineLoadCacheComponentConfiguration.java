@@ -78,10 +78,9 @@ public class CaffeineLoadCacheComponentConfiguration
     private Integer initialCapacity;
     /**
      * To configure the default action key. If a key is set in the message
-     * header, then the key from the header takes precedence. The option is a
-     * java.lang.Object type.
+     * header, then the key from the header takes precedence.
      */
-    private Object key;
+    private String key;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -126,10 +125,6 @@ public class CaffeineLoadCacheComponentConfiguration
      * org.apache.camel.component.caffeine.CaffeineConfiguration type.
      */
     private CaffeineConfiguration configuration;
-    /**
-     * The cache key type, default java.lang.Object
-     */
-    private String keyType;
     /**
      * Set a specific removal Listener for the cache. The option is a
      * com.github.benmanes.caffeine.cache.RemovalListener type.
@@ -197,11 +192,11 @@ public class CaffeineLoadCacheComponentConfiguration
         this.initialCapacity = initialCapacity;
     }
 
-    public Object getKey() {
+    public String getKey() {
         return key;
     }
 
-    public void setKey(Object key) {
+    public void setKey(String key) {
         this.key = key;
     }
 
@@ -243,14 +238,6 @@ public class CaffeineLoadCacheComponentConfiguration
 
     public void setConfiguration(CaffeineConfiguration configuration) {
         this.configuration = configuration;
-    }
-
-    public String getKeyType() {
-        return keyType;
-    }
-
-    public void setKeyType(String keyType) {
-        this.keyType = keyType;
     }
 
     public RemovalListener getRemovalListener() {
