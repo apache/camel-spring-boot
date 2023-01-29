@@ -1924,6 +1924,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-zeebe-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-zendesk-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3977,6 +3982,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-yaml-dsl-deserializers</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-zeebe</artifactId>
         <version>4.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
