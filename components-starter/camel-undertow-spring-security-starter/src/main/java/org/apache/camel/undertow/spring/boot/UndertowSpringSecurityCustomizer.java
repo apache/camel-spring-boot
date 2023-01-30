@@ -16,6 +16,10 @@
  */
 package org.apache.camel.undertow.spring.boot;
 
+import java.net.URISyntaxException;
+import java.util.Collections;
+import java.util.LinkedList;
+
 import org.apache.camel.Component;
 import org.apache.camel.component.spring.security.SpringSecurityConfiguration;
 import org.apache.camel.component.spring.security.keycloak.KeycloakUsernameSubClaimAdapter;
@@ -42,10 +46,6 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.net.URISyntaxException;
-import java.util.Collections;
-import java.util.LinkedList;
-
 /**
  * Configuration of spring-security constraints for defined providers.
  */
@@ -64,7 +64,7 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
 
     @Override
     public void configure(String name, Component target) {
-        UndertowComponent uc = (UndertowComponent)target;
+        UndertowComponent uc = (UndertowComponent) target;
         SpringSecurityConfiguration securityConfiguration = () -> delegatingFilterProxyRegistrationBean.getFilter();
         uc.setSecurityConfiguration(securityConfiguration);
     }
@@ -86,10 +86,10 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
         @Bean
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests()
-                .anyRequest().authenticated()
-                .and().oauth2ResourceServer()
-                .jwt().jwtAuthenticationConverter(getProvider().getJwtAuthenticationConverter());
+                    .and().authorizeRequests()
+                    .anyRequest().authenticated()
+                    .and().oauth2ResourceServer()
+                    .jwt().jwtAuthenticationConverter(getProvider().getJwtAuthenticationConverter());
             return http.build();
         }
     }
@@ -98,7 +98,8 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
     public JwtDecoder jwtDecoderByIssuerUri() {
         final String jwkSetUri = getClientRegistration().getProviderDetails().getJwkSetUri();
         final NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
-        jwtDecoder.setClaimSetConverter(new KeycloakUsernameSubClaimAdapter(getProvider().getUserNameAttribute()));;
+        jwtDecoder.setClaimSetConverter(new KeycloakUsernameSubClaimAdapter(getProvider().getUserNameAttribute()));
+        ;
         return jwtDecoder;
     }
 
@@ -122,14 +123,14 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
         if (provider == null) {
             LinkedList<AbstractProviderConfiguration> definedProviders = new LinkedList<>();
 
-            if(configuration.getKeycloak() != null) {
+            if (configuration.getKeycloak() != null) {
                 definedProviders.add(configuration.getKeycloak());
             }
 
-            if(definedProviders.isEmpty()) {
+            if (definedProviders.isEmpty()) {
                 throw new IllegalArgumentException(String.format("Properties camel.component.undertow.spring.security.provider.* are not defined. Allowed providers are (%s)", ProviderType.values()));
             }
-            if(definedProviders.size() > 1) {
+            if (definedProviders.size() > 1) {
                 throw new IllegalArgumentException(String.format("Two or more providers are defined (%s)", definedProviders));
             }
 
