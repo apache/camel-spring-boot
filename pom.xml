@@ -906,8 +906,8 @@
                              <phase>package</phase>
                              <configuration>
                                  <target>
-                                     <copy file="${project.build.directory}/camel-sbom.json" todir="${project.basedir}/camel-spring-boot-sbom/" />
-                                     <copy file="${project.build.directory}/camel-sbom.xml" todir="${project.basedir}/camel-spring-boot-sbom/" />
+                                     <copy file="${project.build.directory}/camel-spring-boot-sbom.json" todir="${project.basedir}/camel-spring-boot-sbom/" />
+                                     <copy file="${project.build.directory}/camel-spring-boot-sbom.xml" todir="${project.basedir}/camel-spring-boot-sbom/" />
                                  </target>
                              </configuration>
                              <goals>
