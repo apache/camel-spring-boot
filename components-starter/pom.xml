@@ -420,7 +420,6 @@
     <module>camel-xpath-starter</module>
     <module>camel-xslt-saxon-starter</module>
     <module>camel-xslt-starter</module>
-    <module>camel-xstream-starter</module>
     <module>camel-zeebe-starter</module>
     <module>camel-zendesk-starter</module>
     <module>camel-zip-deflater-starter</module>
