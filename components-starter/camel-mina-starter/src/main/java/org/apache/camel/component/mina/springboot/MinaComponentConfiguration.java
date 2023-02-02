@@ -189,10 +189,6 @@ public class MinaComponentConfiguration
      */
     private MinaTextLineDelimiter textlineDelimiter;
     /**
-     * Whether to auto start SSL handshake.
-     */
-    private Boolean autoStartTls = true;
-    /**
      * To configure SSL security. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
@@ -400,14 +396,6 @@ public class MinaComponentConfiguration
 
     public void setTextlineDelimiter(MinaTextLineDelimiter textlineDelimiter) {
         this.textlineDelimiter = textlineDelimiter;
-    }
-
-    public Boolean getAutoStartTls() {
-        return autoStartTls;
-    }
-
-    public void setAutoStartTls(Boolean autoStartTls) {
-        this.autoStartTls = autoStartTls;
     }
 
     public SSLContextParameters getSslContextParameters() {

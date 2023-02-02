@@ -21,13 +21,6 @@
       "defaultValue": true
     },
     {
-      "name": "camel.component.mina.auto-start-tls",
-      "type": "java.lang.Boolean",
-      "description": "Whether to auto start SSL handshake.",
-      "sourceType": "org.apache.camel.component.mina.springboot.MinaComponentConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.component.mina.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
