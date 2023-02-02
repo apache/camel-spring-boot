@@ -39,7 +39,7 @@ Next, add the xref:spring-boot.adoc[Camel Spring Boot starter] to startup the xr
     </dependencies>
 ----
 
-Also add any xref:list.adoc[component starters] your Spring Boot application requires. For example this adds the xref:components::activemq-component.adoc#_spring_boot_auto_configuration[auto-configuration starter] for the xref:components::activemq-component.adoc[ActiveMQ component].
+Also add any xref:list.adoc[component starters] your Spring Boot application requires. For example this adds the xref:components::jms-component.adoc#_spring_boot_auto_configuration[auto-configuration starter] for the xref:components::jms-component.adoc[JMS component].
 
 [source,xml]
 ----
@@ -47,7 +47,7 @@ Also add any xref:list.adoc[component starters] your Spring Boot application req
         <!-- ... other dependencies ... -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-activemq-starter</artifactId>
+            <artifactId>camel-jms-starter</artifactId>
         </dependency>
     </dependencies>
 ----
@@ -72,11 +72,11 @@ camel.springboot.main-run-controller = true
 
 == Spring Boot configuration support
 
-Each xref:list.adoc[starter] lists configuration parameters you can configure in the standard `application.properties` or `application.yml` files. These parameters have the form of `camel.component.[component-name].[parameter]`. For example to configure the URL of the ActiveMQ broker you can set:
+Each xref:list.adoc[starter] lists configuration parameters you can configure in the standard `application.properties` or `application.yml` files. These parameters have the form of `camel.component.[component-name].[parameter]`. For example to configure the URL of the MQTT5 broker you can set:
 
 [source]
 ----
-camel.component.activemq.broker-url=tcp://localhost:61616
+camel.component.paho-mqtt5.broker-url=tcp://localhost:61616
 ----
 
 == Adding Camel routes

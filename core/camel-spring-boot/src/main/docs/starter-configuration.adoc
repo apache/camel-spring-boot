@@ -7,11 +7,11 @@ Clear and accessible configuration is a crucial part of any application. Camel x
 
 Internally, every xref:list.adoc[starter] is configured through Spring Boot's https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config.typesafe-configuration-properties.java-bean-binding[ConfigurationProperties]. Each configuration parameter can be set in various https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config[ways] (`application.[properties|json|yaml]` files, command line arguments, environments variables etc...). Parameters have the form of `camel.[component|language|dataformat].[name].[parameter]`
 
-For example to configure the URL of the ActiveMQ broker you can set:
+For example to configure the URL of the MQTT5 broker you can set:
 
 [source]
 ----
-camel.component.activemq.broker-url=tcp://localhost:61616
+camel.component.paho-mqtt5.broker-url=tcp://localhost:61616
 ----
 
 Or to configure the `delimeter` of the CSV dataformat to be a semicolon(;) you can set:
