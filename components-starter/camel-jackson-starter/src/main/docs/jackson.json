@@ -129,7 +129,7 @@
     {
       "name": "camel.dataformat.jackson.timezone",
       "type": "java.lang.String",
-      "description": "If set then Jackson will use the Timezone when marshalling\/unmarshalling. This option will have no effect on the others Json DataFormat, like gson, fastjson and xstream.",
+      "description": "If set then Jackson will use the Timezone when marshalling\/unmarshalling. This option will have no effect on the others Json DataFormat, like gson and fastjson.",
       "sourceType": "org.apache.camel.component.jackson.springboot.JacksonDataFormatConfiguration"
     },
     {
