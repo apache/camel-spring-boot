@@ -49,6 +49,11 @@ public class GsonDataFormatConfiguration
      * JSON
      */
     private Boolean contentTypeHeader = true;
+    /**
+     * To configure the date format while marshall or unmarshall Date fields in
+     * JSON using Gson
+     */
+    private String dateFormatPattern;
 
     public Boolean getPrettyPrint() {
         return prettyPrint;
@@ -72,5 +77,13 @@ public class GsonDataFormatConfiguration
 
     public void setContentTypeHeader(Boolean contentTypeHeader) {
         this.contentTypeHeader = contentTypeHeader;
+    }
+
+    public String getDateFormatPattern() {
+        return dateFormatPattern;
+    }
+
+    public void setDateFormatPattern(String dateFormatPattern) {
+        this.dateFormatPattern = dateFormatPattern;
     }
 }
