@@ -37,7 +37,6 @@ public class CamelSpringTest extends AbstractSpringBootTestSupport {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelSpringTest.class))
                 .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|ManagedRefEndpointTest$|SpringLogProcessorWithProvidedLoggerTest$|SpringManagedCamelContextTest$)")
-                .testLibraryVersion("com.google.guava:guava", DependencyResolver.resolveCamelParentProperty("${google-guava-version}"))
                 .build();
     }
 

@@ -37,7 +37,6 @@ public class CamelIgniteTest extends AbstractSpringBootTestSupport {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelIgniteTest.class))
                 .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|AbstractIgniteTest$)")
-                .testLibraryVersion("com.google.guava:guava", DependencyResolver.resolveCamelParentProperty("${google-guava-version}"))
                 .build();
     }
 
