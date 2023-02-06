@@ -86,7 +86,7 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
         @Bean
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and().authorizeRequests()
+                    .and().authorizeHttpRequests()
                     .anyRequest().authenticated()
                     .and().oauth2ResourceServer()
                     .jwt().jwtAuthenticationConverter(getProvider().getJwtAuthenticationConverter());
@@ -99,7 +99,6 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
         final String jwkSetUri = getClientRegistration().getProviderDetails().getJwkSetUri();
         final NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
         jwtDecoder.setClaimSetConverter(new KeycloakUsernameSubClaimAdapter(getProvider().getUserNameAttribute()));
-        ;
         return jwtDecoder;
     }
 
