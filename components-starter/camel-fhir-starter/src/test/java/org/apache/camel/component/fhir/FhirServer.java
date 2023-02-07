@@ -31,6 +31,7 @@ public class FhirServer {
     @Bean
     FhirContext fhirContext(){
         FhirContext fhirContext = new FhirContext(FhirVersionEnum.R4);
+        fhirContext.getRestfulClientFactory().setSocketTimeout(20 * 1000);
         // Set proxy so that FHIR resource URLs returned by the server are using the correct host and port
         fhirContext.getRestfulClientFactory().setProxy(AbstractFhirTestSupport.service.getHost(), AbstractFhirTestSupport.service.getPort());
         return fhirContext;

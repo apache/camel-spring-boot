@@ -19,13 +19,14 @@ package org.apache.camel.component.fhir;
 import java.util.HashMap;
 import java.util.Map;
 import ca.uhn.fhir.rest.api.CacheControlDirective;
+import ca.uhn.fhir.rest.api.MethodOutcome;
+
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.fhir.api.ExtraParameters;
 import org.apache.camel.component.fhir.internal.FhirApiCollection;
 import org.apache.camel.component.fhir.internal.FhirDeleteApiMethod;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-import org.hl7.fhir.instance.model.api.IBaseOperationOutcome;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +62,7 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
     public void testDeleteResource() throws Exception {
         assertTrue(patientExists());
         // using org.hl7.fhir.instance.model.api.IBaseResource message body for single parameter "resource"
-        IBaseOperationOutcome result = requestBody("direct://RESOURCE", this.patient);
+        MethodOutcome result = requestBody("direct://RESOURCE", this.patient);
 
         LOG.debug("resource: " + result);
         assertNotNull(result, "resource result");
@@ -73,7 +74,7 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
         assertTrue(patientExists());
 
         // using org.hl7.fhir.instance.model.api.IIdType message body for single parameter "id"
-        IBaseOperationOutcome result = requestBody("direct://RESOURCE_BY_ID", this.patient.getIdElement());
+        MethodOutcome result = requestBody("direct://RESOURCE_BY_ID", this.patient.getIdElement());
 
         LOG.debug("resourceById: " + result);
         assertNotNull(result, "resourceById result");
@@ -90,7 +91,7 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
         // parameter type is String
         headers.put("CamelFhir.stringId", this.patient.getIdElement().getIdPart());
 
-        IBaseOperationOutcome result = requestBodyAndHeaders("direct://RESOURCE_BY_STRING_ID", null, headers);
+        MethodOutcome result = requestBodyAndHeaders("direct://RESOURCE_BY_STRING_ID", null, headers);
 
         LOG.debug("resourceById: " + result);
         assertNotNull(result, "resourceById result");
@@ -101,7 +102,7 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
     public void testDeleteResourceConditionalByUrl() throws Exception {
         assertTrue(patientExists());
 
-        IBaseOperationOutcome result
+        MethodOutcome result
                 = requestBody("direct://RESOURCE_CONDITIONAL_BY_URL", "Patient?given=Vincent&family=Freeman");
 
         LOG.debug("resourceConditionalByUrl: " + result);
@@ -115,7 +116,7 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
         Map<String, Object> headers = new HashMap<>();
         headers.put(ExtraParameters.CACHE_CONTROL_DIRECTIVE.getHeaderName(), new CacheControlDirective().setNoCache(true));
 
-        IBaseOperationOutcome result = requestBodyAndHeaders("direct://RESOURCE_CONDITIONAL_BY_URL",
+        MethodOutcome result = requestBodyAndHeaders("direct://RESOURCE_CONDITIONAL_BY_URL",
                 "Patient?given=Vincent&family=Freeman", headers);
 
         LOG.debug("resourceConditionalByUrl: " + result);
