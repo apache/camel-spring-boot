@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>components-starter</artifactId>
-    <version>3.20.2-SNAPSHOT</version>
+    <version>3.20.3-SNAPSHOT</version>
   </parent>
   <artifactId>camel-aws2-athena-starter</artifactId>
   <packaging>jar</packaging>
