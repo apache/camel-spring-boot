@@ -39,7 +39,7 @@
     </jaxrs:serviceBeans>       
   </jaxrs:server>
   
-  <bean id="echoService" class="org.apache.camel.component.cxf.jaxrs.testbean.EchoService" />
+  <bean id="echoService" class="org.apache.camel.component.cxf.jaxrs.testbean.EchoServiceImpl" />
 
   <cxf:rsClient id="rsClientProxy" address="http://localhost:8080/services/CxfRsProducerSessionTest/"
     serviceClass="org.apache.camel.component.cxf.jaxrs.testbean.EchoService"
