@@ -210,8 +210,16 @@
 
                             <!-- Modified on Camel due to CAMEL-17435 -->
                             <exclude>com.sun.xml.messaging.saaj:saaj-impl:*</exclude>
+                            <exclude>jakarta.annotation:jakarta.annotation-api</exclude>
+                            <exclude>jakarta.servlet:jakarta.servlet-api</exclude>
+                            <exclude>jakarta.jms:jakarta.jms-api</exclude>
+                            <exclude>jakarta.jws:jakarta.jws-api</exclude>
+                            <exclude>jakarta.persistence:jakarta.persistence-api</exclude>
+                            <exclude>jakarta.transaction:jakarta.transaction-api</exclude>
+                            <exclude>jakarta.xml.ws:jakarta.xml.ws-api</exclude>
+                            <exclude>javax.annotation:jsr250-api</exclude>
                             <exclude>jakarta.xml.bind:jakarta.xml.bind-api:*</exclude>
-                            <exclude>javax.annotation:javax.annotation-api:*</exclude>
+                            <exclude>jakarta.xml.soap:jakarta.xml.soap-api</exclude>
                             <exclude>javax.xml.ws:jaxws-api:*</exclude>
                             <exclude>org.glassfish.jaxb:jaxb-runtime:*</exclude>
 
