@@ -16,14 +16,21 @@
  */
 package org.apache.camel.component.cxf.jaxrs.testbean;
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Cookie;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
-@Path("/echoservice/")
-public interface EchoService {
+public class EchoServiceImpl implements EchoService {
+    @Context
+    private HttpHeaders headers;
 
-    @POST
-    @Path("/echo/")
-    Response echo(String string);
+    public Response echo(String string) {
+        Cookie fooCookie = headers.getCookies().get("foo");
+        if (fooCookie != null && "bar".equals(fooCookie.getValue())) {
+            return Response.ok("Old " + string).build();
+        }
+        return Response.ok("New " + string).cookie(new NewCookie("foo", "bar", "/", null, 1, null, -1, false)).build();
+    }
 }
