@@ -388,6 +388,14 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean backlogTracing;
 
     /**
+     * Whether to set backlog tracing on standby. If on standby then the backlog tracer is installed and made available.
+     * Then the backlog tracer can be enabled later at runtime via JMX or via Java API.
+     *
+     * Default is false.
+     */
+    private boolean backlogTracingStandby;
+
+    /**
      * Sets whether tracing is enabled or not.
      *
      * Default is false.
