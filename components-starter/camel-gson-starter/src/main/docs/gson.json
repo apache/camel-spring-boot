@@ -26,6 +26,12 @@
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.dataformat.gson.date-format-pattern",
+      "type": "java.lang.String",
+      "description": "To configure the date format while marshall or unmarshall Date fields in JSON using Gson",
+      "sourceType": "org.apache.camel.component.gson.springboot.GsonDataFormatConfiguration"
+    },
+    {
       "name": "camel.dataformat.gson.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the gson data format. This is enabled by default.",

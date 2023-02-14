@@ -520,6 +520,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.springboot.backlog-tracing-standby",
+      "type": "java.lang.Boolean",
+      "description": "Whether to set backlog tracing on standby. If on standby then the backlog tracer is installed and made available. Then the backlog tracer can be enabled later at runtime via JMX or via Java API. Default is false.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.springboot.bean-introspection-extended-statistics",
       "type": "java.lang.Boolean",
       "description": "Sets whether bean introspection uses extended statistics. The default is false.",
