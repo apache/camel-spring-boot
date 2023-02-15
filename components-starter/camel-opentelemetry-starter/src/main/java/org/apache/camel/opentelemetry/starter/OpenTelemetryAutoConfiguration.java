@@ -17,6 +17,7 @@
 package org.apache.camel.opentelemetry.starter;
 
 import io.opentelemetry.api.trace.Tracer;
+import io.opentelemetry.context.propagation.ContextPropagators;
 import org.apache.camel.CamelContext;
 import org.apache.camel.opentelemetry.OpenTelemetryTracer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class OpenTelemetryAutoConfiguration {
     @Autowired(required = false)
     private Tracer tracer;
 
+    @Autowired(required = false)
+    private ContextPropagators contextPropagators;
+
     @Bean(initMethod = "", destroyMethod = "")
     // Camel handles the lifecycle of this bean
     @ConditionalOnMissingBean(OpenTelemetryTracer.class)
@@ -42,6 +46,9 @@ public class OpenTelemetryAutoConfiguration {
         OpenTelemetryTracer ottracer = new OpenTelemetryTracer();
         if (tracer != null) {
             ottracer.setTracer(tracer);
+        }
+        if (contextPropagators != null) {
+            ottracer.setContextPropagators(contextPropagators);
         }
         if (config.getExcludePatterns() != null) {
             ottracer.setExcludePatterns(config.getExcludePatterns());
