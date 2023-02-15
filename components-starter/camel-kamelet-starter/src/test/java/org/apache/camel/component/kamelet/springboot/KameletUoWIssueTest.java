@@ -80,7 +80,7 @@ public class KameletUoWIssueTest {
                         .process(new Processor() {
                             @Override
                             public void process(Exchange exchange) {
-                                exchange.adapt(ExtendedExchange.class).addOnCompletion(new SynchronizationAdapter() {
+                                exchange.getExchangeExtension().addOnCompletion(new SynchronizationAdapter() {
                                     @Override
                                     public void onDone(Exchange exchange) {
                                         super.onDone(exchange);
