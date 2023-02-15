@@ -34,12 +34,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.component.debezium-db2.column-blacklist",
-      "type": "java.lang.String",
-      "description": "Regular expressions matching columns to exclude from change events (deprecated, use column.exclude.list instead)",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
-    },
-    {
       "name": "camel.component.debezium-db2.column-exclude-list",
       "type": "java.lang.String",
       "description": "Regular expressions matching columns to exclude from change events",
@@ -55,12 +49,6 @@
       "name": "camel.component.debezium-db2.column-propagate-source-type",
       "type": "java.lang.String",
       "description": "A comma-separated list of regular expressions matching fully-qualified names of columns that adds the columns original type and original length as parameters to the corresponding field schemas in the emitted change records.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
-    },
-    {
-      "name": "camel.component.debezium-db2.column-whitelist",
-      "type": "java.lang.String",
-      "description": "Regular expressions matching columns to include in change events (deprecated, use column.include.list instead)",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
     },
     {
@@ -87,73 +75,6 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
     },
     {
-      "name": "camel.component.debezium-db2.database-history",
-      "type": "java.lang.String",
-      "description": "The name of the DatabaseHistory class that should be used to store and recover database schema changes. The configuration properties for the history are prefixed with the 'database.history.' string.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
-      "defaultValue": "io.debezium.relational.history.KafkaDatabaseHistory"
-    },
-    {
-      "name": "camel.component.debezium-db2.database-history-file-filename",
-      "type": "java.lang.String",
-      "description": "The path to the file that will be used to record the database history",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
-    },
-    {
-      "name": "camel.component.debezium-db2.database-history-kafka-bootstrap-servers",
-      "type": "java.lang.String",
-      "description": "A list of host\/port pairs that the connector will use for establishing the initial connection to the Kafka cluster for retrieving database schema history previously stored by the connector. This should point to the same Kafka cluster used by the Kafka Connect process.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
-    },
-    {
-      "name": "camel.component.debezium-db2.database-history-kafka-query-timeout-ms",
-      "type": "java.lang.Long",
-      "description": "The number of milliseconds to wait while fetching cluster information using Kafka admin client. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
-      "defaultValue": 3000
-    },
-    {
-      "name": "camel.component.debezium-db2.database-history-kafka-recovery-attempts",
-      "type": "java.lang.Integer",
-      "description": "The number of attempts in a row that no data are returned from Kafka before recover completes. The maximum amount of time to wait after receiving no data is (recovery.attempts) x (recovery.poll.interval.ms).",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
-      "defaultValue": 100
-    },
-    {
-      "name": "camel.component.debezium-db2.database-history-kafka-recovery-poll-interval-ms",
-      "type": "java.lang.Integer",
-      "description": "The number of milliseconds to wait while polling for persisted data during recovery. The option is a int type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
-      "defaultValue": 100
-    },
-    {
-      "name": "camel.component.debezium-db2.database-history-kafka-topic",
-      "type": "java.lang.String",
-      "description": "The name of the topic for the database schema history",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
-    },
-    {
-      "name": "camel.component.debezium-db2.database-history-skip-unparseable-ddl",
-      "type": "java.lang.Boolean",
-      "description": "Controls the action Debezium will take when it meets a DDL statement in binlog, that it cannot parse.By default the connector will stop operating but by changing the setting it can ignore the statements which it cannot parse. If skipping is enabled then Debezium can miss metadata changes.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.component.debezium-db2.database-history-store-only-captured-tables-ddl",
-      "type": "java.lang.Boolean",
-      "description": "Controls what DDL will Debezium store in database history. By default (false) Debezium will store all incoming DDL statements. If set to true, then only DDL that manipulates a captured table will be stored.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.component.debezium-db2.database-history-store-only-monitored-tables-ddl",
-      "type": "java.lang.Boolean",
-      "description": "Controls what DDL will Debezium store in database history. By default (false) Debezium will store all incoming DDL statements. If set to true, then only DDL that manipulates a monitored table will be stored (deprecated, use database.history.store.only.captured.tables.ddl instead)",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
-      "defaultValue": false
-    },
-    {
       "name": "camel.component.debezium-db2.database-hostname",
       "type": "java.lang.String",
       "description": "Resolvable hostname or IP address of the database server.",
@@ -173,12 +94,6 @@
       "defaultValue": 50000
     },
     {
-      "name": "camel.component.debezium-db2.database-server-name",
-      "type": "java.lang.String",
-      "description": "Unique name that identifies the database server and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct installation should have a separate namespace and be monitored by at most one Debezium connector.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
-    },
-    {
       "name": "camel.component.debezium-db2.database-user",
       "type": "java.lang.String",
       "description": "Name of the database user to be used when connecting to the database.",
@@ -193,7 +108,7 @@
     {
       "name": "camel.component.debezium-db2.decimal-handling-mode",
       "type": "java.lang.String",
-      "description": "Specify how DECIMAL and NUMERIC columns should be represented in change events, including:'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
+      "description": "Specify how DECIMAL and NUMERIC columns should be represented in change events, including: 'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
       "defaultValue": "precise"
     },
@@ -206,7 +121,7 @@
     {
       "name": "camel.component.debezium-db2.event-processing-failure-handling-mode",
       "type": "java.lang.String",
-      "description": "Specify how failures during processing of events (i.e. when encountering a corrupted event) should be handled, including:'fail' (the default) an exception indicating the problematic event and its position is raised, causing the connector to be stopped; 'warn' the problematic event and its position will be logged and the event will be skipped;'ignore' the problematic event will be skipped.",
+      "description": "Specify how failures during processing of events (i.e. when encountering a corrupted event) should be handled, including: 'fail' (the default) an exception indicating the problematic event and its position is raised, causing the connector to be stopped; 'warn' the problematic event and its position will be logged and the event will be skipped; 'ignore' the problematic event will be skipped.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
       "defaultValue": "fail"
     },
@@ -227,7 +142,7 @@
     {
       "name": "camel.component.debezium-db2.include-schema-changes",
       "type": "java.lang.Boolean",
-      "description": "Whether the connector should publish changes in the database schema to a Kafka topic with the same name as the database server ID. Each schema change will be recorded using a key that contains the database name and whose value include logical description of the new schema and optionally the DDL statement(s).The default is 'true'. This is independent of how the connector internally records database history.",
+      "description": "Whether the connector should publish changes in the database schema to a Kafka topic with the same name as the database server ID. Each schema change will be recorded using a key that contains the database name and whose value include logical description of the new schema and optionally the DDL statement(s). The default is 'true'. This is independent of how the connector internally records database schema history.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
       "defaultValue": true
     },
@@ -276,7 +191,7 @@
     {
       "name": "camel.component.debezium-db2.message-key-columns",
       "type": "java.lang.String",
-      "description": "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern ':',where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector,and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key.Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
+      "description": "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern ':', where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector, and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key. Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
     },
     {
@@ -347,9 +262,9 @@
     {
       "name": "camel.component.debezium-db2.query-fetch-size",
       "type": "java.lang.Integer",
-      "description": "The maximum number of records that should be loaded into memory while streaming. A value of 0 uses the default JDBC fetch size.",
+      "description": "The maximum number of records that should be loaded into memory while streaming. A value of '0' uses the default JDBC fetch size. The default value is '10000'.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
-      "defaultValue": 0
+      "defaultValue": 10000
     },
     {
       "name": "camel.component.debezium-db2.retriable-restart-connector-wait-ms",
@@ -366,11 +281,38 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-db2.schema-history-internal",
+      "type": "java.lang.String",
+      "description": "The name of the SchemaHistory class that should be used to store and recover database schema changes. The configuration properties for the history are prefixed with the 'schema.history.internal.' string.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": "io.debezium.storage.kafka.history.KafkaSchemaHistory"
+    },
+    {
+      "name": "camel.component.debezium-db2.schema-history-internal-file-filename",
+      "type": "java.lang.String",
+      "description": "The path to the file that will be used to record the database schema history",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-db2.schema-history-internal-skip-unparseable-ddl",
+      "type": "java.lang.Boolean",
+      "description": "Controls the action Debezium will take when it meets a DDL statement in binlog, that it cannot parse.By default the connector will stop operating but by changing the setting it can ignore the statements which it cannot parse. If skipping is enabled then Debezium can miss metadata changes.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-db2.schema-history-internal-store-only-captured-tables-ddl",
+      "type": "java.lang.Boolean",
+      "description": "Controls what DDL will Debezium store in database schema history. By default (false) Debezium will store all incoming DDL statements. If set to true, then only DDL that manipulates a captured table will be stored.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.debezium-db2.schema-name-adjustment-mode",
       "type": "java.lang.String",
-      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including:'avro' replaces the characters that cannot be used in the Avro type name with underscore (default)'none' does not apply any adjustment",
+      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including: 'avro' replaces the characters that cannot be used in the Avro type name with underscore; 'none' does not apply any adjustment (default)",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
-      "defaultValue": "avro"
+      "defaultValue": "none"
     },
     {
       "name": "camel.component.debezium-db2.signal-data-collection",
@@ -381,8 +323,9 @@
     {
       "name": "camel.component.debezium-db2.skipped-operations",
       "type": "java.lang.String",
-      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes, 't' for truncates, and 'none' to indicate nothing skipped. By default, no operations will be skipped.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
+      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes, 't' for truncates, and 'none' to indicate nothing skipped. By default, only truncate operations will be skipped.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": "t"
     },
     {
       "name": "camel.component.debezium-db2.snapshot-delay-ms",
@@ -394,13 +337,13 @@
     {
       "name": "camel.component.debezium-db2.snapshot-fetch-size",
       "type": "java.lang.Integer",
-      "description": "The maximum number of records that should be loaded into memory while performing a snapshot",
+      "description": "The maximum number of records that should be loaded into memory while performing a snapshot.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-db2.snapshot-include-collection-list",
       "type": "java.lang.String",
-      "description": "this setting must be set to specify a list of tables\/collections whose snapshot must be taken on creating or restarting the connector.",
+      "description": "This setting must be set to specify a list of tables\/collections whose snapshot must be taken on creating or restarting the connector.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
     },
     {
@@ -420,20 +363,7 @@
     {
       "name": "camel.component.debezium-db2.snapshot-select-statement-overrides",
       "type": "java.lang.String",
-      "description": "This property contains a comma-separated list of fully-qualified tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on thespecific connectors. Select statements for the individual tables are specified in further configuration properties, one for each table, identified by the id 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME', respectively. The value of those properties is the select statement to use when retrieving data from the specific table during snapshotting. A possible use case for large append-only tables is setting a specific point where to start (resume) snapshotting, in case a previous snapshotting was interrupted.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
-    },
-    {
-      "name": "camel.component.debezium-db2.source-struct-version",
-      "type": "java.lang.String",
-      "description": "A version of the format of the publicly visible source part in the message",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
-      "defaultValue": "v2"
-    },
-    {
-      "name": "camel.component.debezium-db2.table-blacklist",
-      "type": "java.lang.String",
-      "description": "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring (deprecated, use table.exclude.list instead)",
+      "description": "This property contains a comma-separated list of fully-qualified tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connectors. Select statements for the individual tables are specified in further configuration properties, one for each table, identified by the id 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME', respectively. The value of those properties is the select statement to use when retrieving data from the specific table during snapshotting. A possible use case for large append-only tables is setting a specific point where to start (resume) snapshotting, in case a previous snapshotting was interrupted.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
     },
     {
@@ -456,31 +386,31 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
     },
     {
-      "name": "camel.component.debezium-db2.table-whitelist",
-      "type": "java.lang.String",
-      "description": "The tables for which changes are to be captured (deprecated, use table.include.list instead)",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
-    },
-    {
       "name": "camel.component.debezium-db2.time-precision-mode",
       "type": "java.lang.String",
-      "description": "Time, date, and timestamps can be represented with different kinds of precisions, including:'adaptive' (the default) bases the precision of time, date, and timestamp values on the database column's precision; 'adaptive_time_microseconds' like 'adaptive' mode, but TIME fields always use microseconds precision;'connect' always represents time, date, and timestamp values using Kafka Connect's built-in representations for Time, Date, and Timestamp, which uses millisecond precision regardless of the database columns' precision .",
+      "description": "Time, date, and timestamps can be represented with different kinds of precisions, including: 'adaptive' (the default) bases the precision of time, date, and timestamp values on the database column's precision; 'adaptive_time_microseconds' like 'adaptive' mode, but TIME fields always use microseconds precision; 'connect' always represents time, date, and timestamp values using Kafka Connect's built-in representations for Time, Date, and Timestamp, which uses millisecond precision regardless of the database columns' precision.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
       "defaultValue": "adaptive"
     },
     {
       "name": "camel.component.debezium-db2.tombstones-on-delete",
       "type": "java.lang.Boolean",
-      "description": "Whether delete operations should be represented by a delete event and a subsquenttombstone event (true) or only by a delete event (false). Emitting the tombstone event (the default behavior) allows Kafka to completely delete all events pertaining to the given key once the source record got deleted.",
+      "description": "Whether delete operations should be represented by a delete event and a subsequent tombstone event (true) or only by a delete event (false). Emitting the tombstone event (the default behavior) allows Kafka to completely delete all events pertaining to the given key once the source record got deleted.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
       "defaultValue": false
     },
     {
-      "name": "camel.component.debezium-db2.transaction-topic",
+      "name": "camel.component.debezium-db2.topic-naming-strategy",
       "type": "java.lang.String",
-      "description": "The name of the transaction metadata topic. The placeholder ${database.server.name} can be used for referring to the connector's logical name; defaults to ${database.server.name}.transaction.",
+      "description": "The name of the TopicNamingStrategy class that should be used to determine the topic name for data change, schema change, transaction, heartbeat event etc.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
-      "defaultValue": "${database.server.name}.transaction"
+      "defaultValue": "io.debezium.schema.SchemaTopicNamingStrategy"
+    },
+    {
+      "name": "camel.component.debezium-db2.topic-prefix",
+      "type": "java.lang.String",
+      "description": "Topic prefix that identifies and provides a namespace for the particular database server\/cluster is capturing changes. The topic prefix should be unique across all other connectors, since it is used as a prefix for all Kafka topic names that receive events emitted by this connector. Only alphanumeric characters, hyphens, dots and underscores must be accepted.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
     }
   ],
   "hints": []

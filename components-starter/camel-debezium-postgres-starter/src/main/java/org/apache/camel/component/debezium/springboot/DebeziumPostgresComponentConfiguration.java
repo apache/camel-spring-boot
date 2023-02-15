@@ -125,16 +125,12 @@ public class DebeziumPostgresComponentConfiguration
     private Boolean autowiredEnabled = true;
     /**
      * Specify how binary (blob, binary, etc.) columns should be represented in
-     * change events, including:'bytes' represents binary data as byte array
-     * (default)'base64' represents binary data as base64-encoded string'hex'
-     * represents binary data as hex-encoded (base16) string
+     * change events, including: 'bytes' represents binary data as byte array
+     * (default); 'base64' represents binary data as base64-encoded string;
+     * 'base64-url-safe' represents binary data as base64-url-safe-encoded
+     * string; 'hex' represents binary data as hex-encoded (base16) string
      */
     private String binaryHandlingMode = "bytes";
-    /**
-     * Regular expressions matching columns to exclude from change events
-     * (deprecated, use column.exclude.list instead)
-     */
-    private String columnBlacklist;
     /**
      * Regular expressions matching columns to exclude from change events
      */
@@ -151,11 +147,6 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String columnPropagateSourceType;
     /**
-     * Regular expressions matching columns to include in change events
-     * (deprecated, use column.include.list instead)
-     */
-    private String columnWhitelist;
-    /**
      * Optional list of custom converters that would be used instead of default
      * ones. The converters are defined using '.type' config option and
      * configured using options '.'
@@ -166,10 +157,6 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String databaseDbname;
     /**
-     * The path to the file that will be used to record the database history
-     */
-    private String databaseHistoryFileFilename;
-    /**
      * Resolvable hostname or IP address of the database server.
      */
     private String databaseHostname;
@@ -177,7 +164,7 @@ public class DebeziumPostgresComponentConfiguration
      * A semicolon separated list of SQL statements to be executed when a JDBC
      * connection to the database is established. Note that the connector may
      * establish JDBC connections at its own discretion, so this should
-     * typically be used for configurationof session parameters only, but not
+     * typically be used for configuration of session parameters only, but not
      * for executing DML statements. Use doubled semicolon (';;') to use a
      * semicolon as a character and not as a delimiter.
      */
@@ -190,13 +177,6 @@ public class DebeziumPostgresComponentConfiguration
      * Port of the database server.
      */
     private Integer databasePort = 5432;
-    /**
-     * Unique name that identifies the database server and all recorded offsets,
-     * and that is used as a prefix for all schemas and topics. Each distinct
-     * installation should have a separate namespace and be monitored by at most
-     * one Debezium connector.
-     */
-    private String databaseServerName;
     /**
      * File containing the SSL Certificate for the client. See the Postgres SSL
      * docs for further information
@@ -214,13 +194,13 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String databaseSslkey;
     /**
-     * Whether to use an encrypted connection to Postgres. Options
-     * include'disable' (the default) to use an unencrypted connection;
-     * 'require' to use a secure (encrypted) connection, and fail if one cannot
-     * be established; 'verify-ca' like 'required' but additionally verify the
+     * Whether to use an encrypted connection to Postgres. Options include:
+     * 'disable' (the default) to use an unencrypted connection; 'require' to
+     * use a secure (encrypted) connection, and fail if one cannot be
+     * established; 'verify-ca' like 'required' but additionally verify the
      * server TLS certificate against the configured Certificate Authority (CA)
-     * certificates, or fail if no valid matching CA certificates are found;
-     * or'verify-full' like 'verify-ca' but additionally verify that the server
+     * certificates, or fail if no valid matching CA certificates are found; or
+     * 'verify-full' like 'verify-ca' but additionally verify that the server
      * certificate matches the host to which the connection is attempted.
      */
     private String databaseSslmode = "disable";
@@ -251,7 +231,7 @@ public class DebeziumPostgresComponentConfiguration
     private String datatypePropagateSourceType;
     /**
      * Specify how DECIMAL and NUMERIC columns should be represented in change
-     * events, including:'precise' (the default) uses java.math.BigDecimal to
+     * events, including: 'precise' (the default) uses java.math.BigDecimal to
      * represent values, which are encoded in the change events using a binary
      * representation and Kafka Connect's
      * 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to
@@ -261,13 +241,19 @@ public class DebeziumPostgresComponentConfiguration
     private String decimalHandlingMode = "precise";
     /**
      * Specify how failures during processing of events (i.e. when encountering
-     * a corrupted event) should be handled, including:'fail' (the default) an
+     * a corrupted event) should be handled, including: 'fail' (the default) an
      * exception indicating the problematic event and its position is raised,
      * causing the connector to be stopped; 'warn' the problematic event and its
-     * position will be logged and the event will be skipped;'ignore' the
+     * position will be logged and the event will be skipped; 'ignore' the
      * problematic event will be skipped.
      */
     private String eventProcessingFailureHandlingMode = "fail";
+    /**
+     * Boolean to determine if Debezium should flush LSN in the source postgres
+     * database. If set to false, user will have to flush the LSN manually
+     * outside Debezium.
+     */
+    private Boolean flushLsnSource = true;
     /**
      * The query executed with every heartbeat.
      */
@@ -286,13 +272,13 @@ public class DebeziumPostgresComponentConfiguration
     private String heartbeatTopicsPrefix = "__debezium-heartbeat";
     /**
      * Specify how HSTORE columns should be represented in change events,
-     * including:'json' represents values as string-ified JSON (default)'map'
+     * including: 'json' represents values as string-ified JSON (default); 'map'
      * represents values as a key/value map
      */
     private String hstoreHandlingMode = "json";
     /**
      * Whether the connector parse table and column's comment to metadata
-     * object.Note: Enable this option will bring the implications on memory
+     * object. Note: Enable this option will bring the implications on memory
      * usage. The number and size of ColumnImpl objects is what largely impacts
      * how much memory is consumed by the Debezium connectors, and adding a
      * String to each of them can potentially be quite heavy. The default is
@@ -301,7 +287,7 @@ public class DebeziumPostgresComponentConfiguration
     private Boolean includeSchemaComments = false;
     /**
      * Specify whether the fields of data type not supported by Debezium should
-     * be processed:'false' (the default) omits the fields; 'true' converts the
+     * be processed: 'false' (the default) omits the fields; 'true' converts the
      * field into an implementation dependent binary representation.
      */
     private Boolean includeUnknownDatatypes = false;
@@ -311,9 +297,9 @@ public class DebeziumPostgresComponentConfiguration
     private Integer incrementalSnapshotChunkSize = 1024;
     /**
      * Specify how INTERVAL columns should be represented in change events,
-     * including:'string' represents values as an exact ISO formatted
-     * string'numeric' (default) represents values using the inexact conversion
-     * into microseconds
+     * including: 'string' represents values as an exact ISO formatted string;
+     * 'numeric' (default) represents values using the inexact conversion into
+     * microseconds
      */
     private String intervalHandlingMode = "numeric";
     /**
@@ -335,12 +321,12 @@ public class DebeziumPostgresComponentConfiguration
     /**
      * A semicolon-separated list of expressions that match fully-qualified
      * tables and column(s) to be used as message key. Each expression must
-     * match the pattern ':',where the table names could be defined as
+     * match the pattern ':', where the table names could be defined as
      * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the
-     * specific connector,and the key columns are a comma-separated list of
+     * specific connector, and the key columns are a comma-separated list of
      * columns representing the custom key. For any table without an explicit
      * key configuration the table's primary key column(s) will be used as
-     * message key.Example:
+     * message key. Example:
      * dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id
      */
     private String messageKeyColumns;
@@ -388,12 +374,12 @@ public class DebeziumPostgresComponentConfiguration
     private String publicationAutocreateMode = "all_tables";
     /**
      * The name of the Postgres 10 publication used for streaming changes from a
-     * plugin.Defaults to 'dbz_publication'
+     * plugin. Defaults to 'dbz_publication'
      */
     private String publicationName = "dbz_publication";
     /**
      * The maximum number of records that should be loaded into memory while
-     * streaming. A value of 0 uses the default JDBC fetch size.
+     * streaming. A value of '0' uses the default JDBC fetch size.
      */
     private Integer queryFetchSize = 0;
     /**
@@ -406,25 +392,25 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Boolean sanitizeFieldNames = false;
     /**
-     * The schemas for which events must not be captured (deprecated, use
-     * schema.exclude.list instead)
-     */
-    private String schemaBlacklist;
-    /**
      * The schemas for which events must not be captured
      */
     private String schemaExcludeList;
+    /**
+     * The path to the file that will be used to record the database schema
+     * history
+     */
+    private String schemaHistoryInternalFileFilename;
     /**
      * The schemas for which events should be captured
      */
     private String schemaIncludeList;
     /**
      * Specify how schema names should be adjusted for compatibility with the
-     * message converter used by the connector, including:'avro' replaces the
-     * characters that cannot be used in the Avro type name with underscore
-     * (default)'none' does not apply any adjustment
+     * message converter used by the connector, including: 'avro' replaces the
+     * characters that cannot be used in the Avro type name with underscore;
+     * 'none' does not apply any adjustment (default)
      */
-    private String schemaNameAdjustmentMode = "avro";
+    private String schemaNameAdjustmentMode = "none";
     /**
      * Specify the conditions that trigger a refresh of the in-memory schema for
      * a table. 'columns_diff' (the default) is the safest mode, ensuring the
@@ -440,11 +426,6 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String schemaRefreshMode = "columns_diff";
     /**
-     * The schemas for which events should be captured (deprecated, use
-     * schema.include.list instead)
-     */
-    private String schemaWhitelist;
-    /**
      * The name of the data collection that is used to send signals/commands to
      * Debezium. Signaling is disabled when not set.
      */
@@ -452,13 +433,13 @@ public class DebeziumPostgresComponentConfiguration
     /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
-     * truncates, and 'none' to indicate nothing skipped. By default, no
-     * operations will be skipped.
+     * truncates, and 'none' to indicate nothing skipped. By default, only
+     * truncate operations will be skipped.
      */
     private String skippedOperations = "t";
     /**
      * Whether or not to drop the logical replication slot when the connector
-     * finishes orderlyBy default the replication is kept so that on restart
+     * finishes orderly. By default the replication is kept so that on restart
      * progress can resume from the last recorded location
      */
     private Boolean slotDropOnStop = false;
@@ -469,7 +450,7 @@ public class DebeziumPostgresComponentConfiguration
     private Integer slotMaxRetries = 6;
     /**
      * The name of the Postgres logical decoding slot created for streaming
-     * changes from a plugin.Defaults to 'debezium
+     * changes from a plugin. Defaults to 'debezium
      */
     private String slotName = "debezium";
     /**
@@ -486,7 +467,7 @@ public class DebeziumPostgresComponentConfiguration
     /**
      * When 'snapshot.mode' is set as custom, this setting must be set to
      * specify a fully qualified class name to load (via the default class
-     * loader).This class must implement the 'Snapshotter' interface and is
+     * loader). This class must implement the 'Snapshotter' interface and is
      * called on each app boot to determine whether to do a snapshot and how to
      * build queries.
      */
@@ -498,11 +479,11 @@ public class DebeziumPostgresComponentConfiguration
     private Long snapshotDelayMs = 0L;
     /**
      * The maximum number of records that should be loaded into memory while
-     * performing a snapshot
+     * performing a snapshot.
      */
     private Integer snapshotFetchSize;
     /**
-     * this setting must be set to specify a list of tables/collections whose
+     * This setting must be set to specify a list of tables/collections whose
      * snapshot must be taken on creating or restarting the connector.
      */
     private String snapshotIncludeCollectionList;
@@ -534,8 +515,8 @@ public class DebeziumPostgresComponentConfiguration
     private String snapshotMode = "initial";
     /**
      * This property contains a comma-separated list of fully-qualified tables
-     * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on
-     * thespecific connectors. Select statements for the individual tables are
+     * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the
+     * specific connectors. Select statements for the individual tables are
      * specified in further configuration properties, one for each table,
      * identified by the id
      * 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or
@@ -548,22 +529,11 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String snapshotSelectStatementOverrides;
     /**
-     * A version of the format of the publicly visible source part in the
-     * message
-     */
-    private String sourceStructVersion = "v2";
-    /**
      * Frequency for sending replication connection status updates to the
      * server, given in milliseconds. Defaults to 10 seconds (10,000 ms). The
      * option is a int type.
      */
     private Integer statusUpdateIntervalMs = 10000;
-    /**
-     * A comma-separated list of regular expressions that match the
-     * fully-qualified names of tables to be excluded from monitoring
-     * (deprecated, use table.exclude.list instead)
-     */
-    private String tableBlacklist;
     /**
      * A comma-separated list of regular expressions that match the
      * fully-qualified names of tables to be excluded from monitoring
@@ -578,35 +548,38 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String tableIncludeList;
     /**
-     * The tables for which changes are to be captured (deprecated, use
-     * table.include.list instead)
-     */
-    private String tableWhitelist;
-    /**
      * Time, date, and timestamps can be represented with different kinds of
-     * precisions, including:'adaptive' (the default) bases the precision of
+     * precisions, including: 'adaptive' (the default) bases the precision of
      * time, date, and timestamp values on the database column's precision;
      * 'adaptive_time_microseconds' like 'adaptive' mode, but TIME fields always
-     * use microseconds precision;'connect' always represents time, date, and
+     * use microseconds precision; 'connect' always represents time, date, and
      * timestamp values using Kafka Connect's built-in representations for Time,
      * Date, and Timestamp, which uses millisecond precision regardless of the
-     * database columns' precision .
+     * database columns' precision.
      */
     private String timePrecisionMode = "adaptive";
     /**
      * Whether delete operations should be represented by a delete event and a
-     * subsquenttombstone event (true) or only by a delete event (false).
+     * subsequent tombstone event (true) or only by a delete event (false).
      * Emitting the tombstone event (the default behavior) allows Kafka to
      * completely delete all events pertaining to the given key once the source
      * record got deleted.
      */
     private Boolean tombstonesOnDelete = false;
     /**
-     * The name of the transaction metadata topic. The placeholder
-     * ${database.server.name} can be used for referring to the connector's
-     * logical name; defaults to ${database.server.name}.transaction.
+     * The name of the TopicNamingStrategy class that should be used to
+     * determine the topic name for data change, schema change, transaction,
+     * heartbeat event etc.
      */
-    private String transactionTopic = "${database.server.name}.transaction";
+    private String topicNamingStrategy = "io.debezium.schema.SchemaTopicNamingStrategy";
+    /**
+     * Topic prefix that identifies and provides a namespace for the particular
+     * database server/cluster is capturing changes. The topic prefix should be
+     * unique across all other connectors, since it is used as a prefix for all
+     * Kafka topic names that receive events emitted by this connector. Only
+     * alphanumeric characters, hyphens, dots and underscores must be accepted.
+     */
+    private String topicPrefix;
     /**
      * Specify the constant that will be provided by Debezium to indicate that
      * the original value is a toasted value not provided by the database. If
@@ -748,14 +721,6 @@ public class DebeziumPostgresComponentConfiguration
         this.binaryHandlingMode = binaryHandlingMode;
     }
 
-    public String getColumnBlacklist() {
-        return columnBlacklist;
-    }
-
-    public void setColumnBlacklist(String columnBlacklist) {
-        this.columnBlacklist = columnBlacklist;
-    }
-
     public String getColumnExcludeList() {
         return columnExcludeList;
     }
@@ -780,14 +745,6 @@ public class DebeziumPostgresComponentConfiguration
         this.columnPropagateSourceType = columnPropagateSourceType;
     }
 
-    public String getColumnWhitelist() {
-        return columnWhitelist;
-    }
-
-    public void setColumnWhitelist(String columnWhitelist) {
-        this.columnWhitelist = columnWhitelist;
-    }
-
     public String getConverters() {
         return converters;
     }
@@ -802,15 +759,6 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setDatabaseDbname(String databaseDbname) {
         this.databaseDbname = databaseDbname;
-    }
-
-    public String getDatabaseHistoryFileFilename() {
-        return databaseHistoryFileFilename;
-    }
-
-    public void setDatabaseHistoryFileFilename(
-            String databaseHistoryFileFilename) {
-        this.databaseHistoryFileFilename = databaseHistoryFileFilename;
     }
 
     public String getDatabaseHostname() {
@@ -843,14 +791,6 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setDatabasePort(Integer databasePort) {
         this.databasePort = databasePort;
-    }
-
-    public String getDatabaseServerName() {
-        return databaseServerName;
-    }
-
-    public void setDatabaseServerName(String databaseServerName) {
-        this.databaseServerName = databaseServerName;
     }
 
     public String getDatabaseSslcert() {
@@ -941,6 +881,14 @@ public class DebeziumPostgresComponentConfiguration
     public void setEventProcessingFailureHandlingMode(
             String eventProcessingFailureHandlingMode) {
         this.eventProcessingFailureHandlingMode = eventProcessingFailureHandlingMode;
+    }
+
+    public Boolean getFlushLsnSource() {
+        return flushLsnSource;
+    }
+
+    public void setFlushLsnSource(Boolean flushLsnSource) {
+        this.flushLsnSource = flushLsnSource;
     }
 
     public String getHeartbeatActionQuery() {
@@ -1121,20 +1069,21 @@ public class DebeziumPostgresComponentConfiguration
         this.sanitizeFieldNames = sanitizeFieldNames;
     }
 
-    public String getSchemaBlacklist() {
-        return schemaBlacklist;
-    }
-
-    public void setSchemaBlacklist(String schemaBlacklist) {
-        this.schemaBlacklist = schemaBlacklist;
-    }
-
     public String getSchemaExcludeList() {
         return schemaExcludeList;
     }
 
     public void setSchemaExcludeList(String schemaExcludeList) {
         this.schemaExcludeList = schemaExcludeList;
+    }
+
+    public String getSchemaHistoryInternalFileFilename() {
+        return schemaHistoryInternalFileFilename;
+    }
+
+    public void setSchemaHistoryInternalFileFilename(
+            String schemaHistoryInternalFileFilename) {
+        this.schemaHistoryInternalFileFilename = schemaHistoryInternalFileFilename;
     }
 
     public String getSchemaIncludeList() {
@@ -1159,14 +1108,6 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setSchemaRefreshMode(String schemaRefreshMode) {
         this.schemaRefreshMode = schemaRefreshMode;
-    }
-
-    public String getSchemaWhitelist() {
-        return schemaWhitelist;
-    }
-
-    public void setSchemaWhitelist(String schemaWhitelist) {
-        this.schemaWhitelist = schemaWhitelist;
     }
 
     public String getSignalDataCollection() {
@@ -1291,28 +1232,12 @@ public class DebeziumPostgresComponentConfiguration
         this.snapshotSelectStatementOverrides = snapshotSelectStatementOverrides;
     }
 
-    public String getSourceStructVersion() {
-        return sourceStructVersion;
-    }
-
-    public void setSourceStructVersion(String sourceStructVersion) {
-        this.sourceStructVersion = sourceStructVersion;
-    }
-
     public Integer getStatusUpdateIntervalMs() {
         return statusUpdateIntervalMs;
     }
 
     public void setStatusUpdateIntervalMs(Integer statusUpdateIntervalMs) {
         this.statusUpdateIntervalMs = statusUpdateIntervalMs;
-    }
-
-    public String getTableBlacklist() {
-        return tableBlacklist;
-    }
-
-    public void setTableBlacklist(String tableBlacklist) {
-        this.tableBlacklist = tableBlacklist;
     }
 
     public String getTableExcludeList() {
@@ -1339,14 +1264,6 @@ public class DebeziumPostgresComponentConfiguration
         this.tableIncludeList = tableIncludeList;
     }
 
-    public String getTableWhitelist() {
-        return tableWhitelist;
-    }
-
-    public void setTableWhitelist(String tableWhitelist) {
-        this.tableWhitelist = tableWhitelist;
-    }
-
     public String getTimePrecisionMode() {
         return timePrecisionMode;
     }
@@ -1363,12 +1280,20 @@ public class DebeziumPostgresComponentConfiguration
         this.tombstonesOnDelete = tombstonesOnDelete;
     }
 
-    public String getTransactionTopic() {
-        return transactionTopic;
+    public String getTopicNamingStrategy() {
+        return topicNamingStrategy;
     }
 
-    public void setTransactionTopic(String transactionTopic) {
-        this.transactionTopic = transactionTopic;
+    public void setTopicNamingStrategy(String topicNamingStrategy) {
+        this.topicNamingStrategy = topicNamingStrategy;
+    }
+
+    public String getTopicPrefix() {
+        return topicPrefix;
+    }
+
+    public void setTopicPrefix(String topicPrefix) {
+        this.topicPrefix = topicPrefix;
     }
 
     public String getUnavailableValuePlaceholder() {

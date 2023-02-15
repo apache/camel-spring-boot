@@ -36,7 +36,7 @@
     {
       "name": "camel.component.debezium-mongodb.capture-mode",
       "type": "java.lang.String",
-      "description": "The method used to capture changes from MongoDB server. Options include: 'oplog' to capture changes from the oplog; 'change_streams' to capture changes via MongoDB Change Streams, update events do not contain full documents; 'change_streams_update_full' (the default) to capture changes via MongoDB Change Streams, update events contain full documents",
+      "description": "The method used to capture changes from MongoDB server. Options include: 'change_streams' to capture changes via MongoDB Change Streams, update events do not contain full documents; 'change_streams_update_full' (the default) to capture changes via MongoDB Change Streams, update events contain full documents",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": "change_streams_update_full"
     },
@@ -103,12 +103,6 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
-      "name": "camel.component.debezium-mongodb.database-history-file-filename",
-      "type": "java.lang.String",
-      "description": "The path to the file that will be used to record the database history",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
-    },
-    {
       "name": "camel.component.debezium-mongodb.database-include-list",
       "type": "java.lang.String",
       "description": "A comma-separated list of regular expressions that match the database names for which changes are to be captured",
@@ -123,7 +117,7 @@
     {
       "name": "camel.component.debezium-mongodb.event-processing-failure-handling-mode",
       "type": "java.lang.String",
-      "description": "Specify how failures during processing of events (i.e. when encountering a corrupted event) should be handled, including:'fail' (the default) an exception indicating the problematic event and its position is raised, causing the connector to be stopped; 'warn' the problematic event and its position will be logged and the event will be skipped;'ignore' the problematic event will be skipped.",
+      "description": "Specify how failures during processing of events (i.e. when encountering a corrupted event) should be handled, including: 'fail' (the default) an exception indicating the problematic event and its position is raised, causing the connector to be stopped; 'warn' the problematic event and its position will be logged and the event will be skipped; 'ignore' the problematic event will be skipped.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": "fail"
     },
@@ -203,6 +197,19 @@
       "defaultValue": 10000
     },
     {
+      "name": "camel.component.debezium-mongodb.mongodb-connection-string",
+      "type": "java.lang.String",
+      "description": "Database connection string.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-mongodb.mongodb-heartbeat-frequency-ms",
+      "type": "java.lang.Integer",
+      "description": "The frequency that the cluster monitor attempts to reach each server. Defaults to 10 seconds (10,000 ms). The option is a int type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
       "name": "camel.component.debezium-mongodb.mongodb-hosts",
       "type": "java.lang.String",
       "description": "The hostname and port pairs (in the form 'host' or 'host:port') of the MongoDB server(s) in the replica set.",
@@ -214,12 +221,6 @@
       "description": "Specifies whether the addresses in 'hosts' are seeds that should be used to discover all members of the cluster or replica set ('true'), or whether the address(es) in 'hosts' should be used as is ('false'). The default is 'true'.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": true
-    },
-    {
-      "name": "camel.component.debezium-mongodb.mongodb-name",
-      "type": "java.lang.String",
-      "description": "Unique name that identifies the MongoDB replica set or cluster and all recorded offsets, and that is used as a prefix for all schemas and topics. Each distinct MongoDB installation should have a separate namespace and monitored by at most one Debezium connector.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-mongodb.mongodb-password",
@@ -336,7 +337,7 @@
     {
       "name": "camel.component.debezium-mongodb.query-fetch-size",
       "type": "java.lang.Integer",
-      "description": "The maximum number of records that should be loaded into memory while streaming. A value of 0 uses the default JDBC fetch size.",
+      "description": "The maximum number of records that should be loaded into memory while streaming. A value of '0' uses the default JDBC fetch size.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": 0
     },
@@ -355,11 +356,17 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-mongodb.schema-history-internal-file-filename",
+      "type": "java.lang.String",
+      "description": "The path to the file that will be used to record the database schema history",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-mongodb.schema-name-adjustment-mode",
       "type": "java.lang.String",
-      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including:'avro' replaces the characters that cannot be used in the Avro type name with underscore (default)'none' does not apply any adjustment",
+      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including: 'avro' replaces the characters that cannot be used in the Avro type name with underscore; 'none' does not apply any adjustment (default)",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
-      "defaultValue": "avro"
+      "defaultValue": "none"
     },
     {
       "name": "camel.component.debezium-mongodb.signal-data-collection",
@@ -370,8 +377,9 @@
     {
       "name": "camel.component.debezium-mongodb.skipped-operations",
       "type": "java.lang.String",
-      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes, 't' for truncates, and 'none' to indicate nothing skipped. By default, no operations will be skipped.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
+      "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes, 't' for truncates, and 'none' to indicate nothing skipped. By default, only truncate operations will be skipped.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": "t"
     },
     {
       "name": "camel.component.debezium-mongodb.snapshot-collection-filter-overrides",
@@ -389,13 +397,13 @@
     {
       "name": "camel.component.debezium-mongodb.snapshot-fetch-size",
       "type": "java.lang.Integer",
-      "description": "The maximum number of records that should be loaded into memory while performing a snapshot",
+      "description": "The maximum number of records that should be loaded into memory while performing a snapshot.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-mongodb.snapshot-include-collection-list",
       "type": "java.lang.String",
-      "description": "this setting must be set to specify a list of tables\/collections whose snapshot must be taken on creating or restarting the connector.",
+      "description": "This setting must be set to specify a list of tables\/collections whose snapshot must be taken on creating or restarting the connector.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
@@ -413,25 +421,24 @@
       "defaultValue": "initial"
     },
     {
-      "name": "camel.component.debezium-mongodb.source-struct-version",
-      "type": "java.lang.String",
-      "description": "A version of the format of the publicly visible source part in the message",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
-      "defaultValue": "v2"
-    },
-    {
       "name": "camel.component.debezium-mongodb.tombstones-on-delete",
       "type": "java.lang.Boolean",
-      "description": "Whether delete operations should be represented by a delete event and a subsquenttombstone event (true) or only by a delete event (false). Emitting the tombstone event (the default behavior) allows Kafka to completely delete all events pertaining to the given key once the source record got deleted.",
+      "description": "Whether delete operations should be represented by a delete event and a subsequent tombstone event (true) or only by a delete event (false). Emitting the tombstone event (the default behavior) allows Kafka to completely delete all events pertaining to the given key once the source record got deleted.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": false
     },
     {
-      "name": "camel.component.debezium-mongodb.transaction-topic",
+      "name": "camel.component.debezium-mongodb.topic-naming-strategy",
       "type": "java.lang.String",
-      "description": "The name of the transaction metadata topic. The placeholder ${database.server.name} can be used for referring to the connector's logical name; defaults to ${database.server.name}.transaction.",
+      "description": "The name of the TopicNamingStrategy class that should be used to determine the topic name for data change, schema change, transaction, heartbeat event etc.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
-      "defaultValue": "${database.server.name}.transaction"
+      "defaultValue": "io.debezium.schema.SchemaTopicNamingStrategy"
+    },
+    {
+      "name": "camel.component.debezium-mongodb.topic-prefix",
+      "type": "java.lang.String",
+      "description": "Topic prefix that identifies and provides a namespace for the particular database server\/cluster is capturing changes. The topic prefix should be unique across all other connectors, since it is used as a prefix for all Kafka topic names that receive events emitted by this connector. Only alphanumeric characters, hyphens, dots and underscores must be accepted.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
     }
   ],
   "hints": []

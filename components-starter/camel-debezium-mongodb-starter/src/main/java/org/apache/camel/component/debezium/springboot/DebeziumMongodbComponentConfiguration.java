@@ -125,10 +125,10 @@ public class DebeziumMongodbComponentConfiguration
     private Boolean autowiredEnabled = true;
     /**
      * The method used to capture changes from MongoDB server. Options include:
-     * 'oplog' to capture changes from the oplog; 'change_streams' to capture
-     * changes via MongoDB Change Streams, update events do not contain full
-     * documents; 'change_streams_update_full' (the default) to capture changes
-     * via MongoDB Change Streams, update events contain full documents
+     * 'change_streams' to capture changes via MongoDB Change Streams, update
+     * events do not contain full documents; 'change_streams_update_full' (the
+     * default) to capture changes via MongoDB Change Streams, update events
+     * contain full documents
      */
     private String captureMode = "change_streams_update_full";
     /**
@@ -179,20 +179,16 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String databaseExcludeList;
     /**
-     * The path to the file that will be used to record the database history
-     */
-    private String databaseHistoryFileFilename;
-    /**
      * A comma-separated list of regular expressions that match the database
      * names for which changes are to be captured
      */
     private String databaseIncludeList;
     /**
      * Specify how failures during processing of events (i.e. when encountering
-     * a corrupted event) should be handled, including:'fail' (the default) an
+     * a corrupted event) should be handled, including: 'fail' (the default) an
      * exception indicating the problematic event and its position is raised,
      * causing the connector to be stopped; 'warn' the problematic event and its
-     * position will be logged and the event will be skipped;'ignore' the
+     * position will be logged and the event will be skipped; 'ignore' the
      * problematic event will be skipped.
      */
     private String eventProcessingFailureHandlingMode = "fail";
@@ -244,10 +240,19 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String mongodbAuthsource = "admin";
     /**
+     * Database connection string.
+     */
+    private String mongodbConnectionString;
+    /**
      * The connection timeout, given in milliseconds. Defaults to 10 seconds
      * (10,000 ms). The option is a int type.
      */
     private Integer mongodbConnectTimeoutMs = 10000;
+    /**
+     * The frequency that the cluster monitor attempts to reach each server.
+     * Defaults to 10 seconds (10,000 ms). The option is a int type.
+     */
+    private Integer mongodbHeartbeatFrequencyMs = 10000;
     /**
      * The hostname and port pairs (in the form 'host' or 'host:port') of the
      * MongoDB server(s) in the replica set.
@@ -260,13 +265,6 @@ public class DebeziumMongodbComponentConfiguration
      * default is 'true'.
      */
     private Boolean mongodbMembersAutoDiscover = true;
-    /**
-     * Unique name that identifies the MongoDB replica set or cluster and all
-     * recorded offsets, and that is used as a prefix for all schemas and
-     * topics. Each distinct MongoDB installation should have a separate
-     * namespace and monitored by at most one Debezium connector.
-     */
-    private String mongodbName;
     /**
      * Password to be used when connecting to MongoDB, if necessary.
      */
@@ -311,7 +309,7 @@ public class DebeziumMongodbComponentConfiguration
     private Boolean provideTransactionMetadata = false;
     /**
      * The maximum number of records that should be loaded into memory while
-     * streaming. A value of 0 uses the default JDBC fetch size.
+     * streaming. A value of '0' uses the default JDBC fetch size.
      */
     private Integer queryFetchSize = 0;
     /**
@@ -324,12 +322,17 @@ public class DebeziumMongodbComponentConfiguration
      */
     private Boolean sanitizeFieldNames = false;
     /**
-     * Specify how schema names should be adjusted for compatibility with the
-     * message converter used by the connector, including:'avro' replaces the
-     * characters that cannot be used in the Avro type name with underscore
-     * (default)'none' does not apply any adjustment
+     * The path to the file that will be used to record the database schema
+     * history
      */
-    private String schemaNameAdjustmentMode = "avro";
+    private String schemaHistoryInternalFileFilename;
+    /**
+     * Specify how schema names should be adjusted for compatibility with the
+     * message converter used by the connector, including: 'avro' replaces the
+     * characters that cannot be used in the Avro type name with underscore;
+     * 'none' does not apply any adjustment (default)
+     */
+    private String schemaNameAdjustmentMode = "none";
     /**
      * The name of the data collection that is used to send signals/commands to
      * Debezium. Signaling is disabled when not set.
@@ -338,10 +341,10 @@ public class DebeziumMongodbComponentConfiguration
     /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
-     * truncates, and 'none' to indicate nothing skipped. By default, no
-     * operations will be skipped.
+     * truncates, and 'none' to indicate nothing skipped. By default, only
+     * truncate operations will be skipped.
      */
-    private String skippedOperations;
+    private String skippedOperations = "t";
     /**
      * This property contains a comma-separated list of ., for which the initial
      * snapshot may be a subset of data present in the data source. The subset
@@ -356,11 +359,11 @@ public class DebeziumMongodbComponentConfiguration
     private Long snapshotDelayMs = 0L;
     /**
      * The maximum number of records that should be loaded into memory while
-     * performing a snapshot
+     * performing a snapshot.
      */
     private Integer snapshotFetchSize;
     /**
-     * this setting must be set to specify a list of tables/collections whose
+     * This setting must be set to specify a list of tables/collections whose
      * snapshot must be taken on creating or restarting the connector.
      */
     private String snapshotIncludeCollectionList;
@@ -377,24 +380,27 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String snapshotMode = "initial";
     /**
-     * A version of the format of the publicly visible source part in the
-     * message
-     */
-    private String sourceStructVersion = "v2";
-    /**
      * Whether delete operations should be represented by a delete event and a
-     * subsquenttombstone event (true) or only by a delete event (false).
+     * subsequent tombstone event (true) or only by a delete event (false).
      * Emitting the tombstone event (the default behavior) allows Kafka to
      * completely delete all events pertaining to the given key once the source
      * record got deleted.
      */
     private Boolean tombstonesOnDelete = false;
     /**
-     * The name of the transaction metadata topic. The placeholder
-     * ${database.server.name} can be used for referring to the connector's
-     * logical name; defaults to ${database.server.name}.transaction.
+     * The name of the TopicNamingStrategy class that should be used to
+     * determine the topic name for data change, schema change, transaction,
+     * heartbeat event etc.
      */
-    private String transactionTopic = "${database.server.name}.transaction";
+    private String topicNamingStrategy = "io.debezium.schema.SchemaTopicNamingStrategy";
+    /**
+     * Topic prefix that identifies and provides a namespace for the particular
+     * database server/cluster is capturing changes. The topic prefix should be
+     * unique across all other connectors, since it is used as a prefix for all
+     * Kafka topic names that receive events emitted by this connector. Only
+     * alphanumeric characters, hyphens, dots and underscores must be accepted.
+     */
+    private String topicPrefix;
 
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
@@ -583,15 +589,6 @@ public class DebeziumMongodbComponentConfiguration
         this.databaseExcludeList = databaseExcludeList;
     }
 
-    public String getDatabaseHistoryFileFilename() {
-        return databaseHistoryFileFilename;
-    }
-
-    public void setDatabaseHistoryFileFilename(
-            String databaseHistoryFileFilename) {
-        this.databaseHistoryFileFilename = databaseHistoryFileFilename;
-    }
-
     public String getDatabaseIncludeList() {
         return databaseIncludeList;
     }
@@ -673,12 +670,29 @@ public class DebeziumMongodbComponentConfiguration
         this.mongodbAuthsource = mongodbAuthsource;
     }
 
+    public String getMongodbConnectionString() {
+        return mongodbConnectionString;
+    }
+
+    public void setMongodbConnectionString(String mongodbConnectionString) {
+        this.mongodbConnectionString = mongodbConnectionString;
+    }
+
     public Integer getMongodbConnectTimeoutMs() {
         return mongodbConnectTimeoutMs;
     }
 
     public void setMongodbConnectTimeoutMs(Integer mongodbConnectTimeoutMs) {
         this.mongodbConnectTimeoutMs = mongodbConnectTimeoutMs;
+    }
+
+    public Integer getMongodbHeartbeatFrequencyMs() {
+        return mongodbHeartbeatFrequencyMs;
+    }
+
+    public void setMongodbHeartbeatFrequencyMs(
+            Integer mongodbHeartbeatFrequencyMs) {
+        this.mongodbHeartbeatFrequencyMs = mongodbHeartbeatFrequencyMs;
     }
 
     public String getMongodbHosts() {
@@ -695,14 +709,6 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setMongodbMembersAutoDiscover(Boolean mongodbMembersAutoDiscover) {
         this.mongodbMembersAutoDiscover = mongodbMembersAutoDiscover;
-    }
-
-    public String getMongodbName() {
-        return mongodbName;
-    }
-
-    public void setMongodbName(String mongodbName) {
-        this.mongodbName = mongodbName;
     }
 
     public String getMongodbPassword() {
@@ -804,6 +810,15 @@ public class DebeziumMongodbComponentConfiguration
         this.sanitizeFieldNames = sanitizeFieldNames;
     }
 
+    public String getSchemaHistoryInternalFileFilename() {
+        return schemaHistoryInternalFileFilename;
+    }
+
+    public void setSchemaHistoryInternalFileFilename(
+            String schemaHistoryInternalFileFilename) {
+        this.schemaHistoryInternalFileFilename = schemaHistoryInternalFileFilename;
+    }
+
     public String getSchemaNameAdjustmentMode() {
         return schemaNameAdjustmentMode;
     }
@@ -878,14 +893,6 @@ public class DebeziumMongodbComponentConfiguration
         this.snapshotMode = snapshotMode;
     }
 
-    public String getSourceStructVersion() {
-        return sourceStructVersion;
-    }
-
-    public void setSourceStructVersion(String sourceStructVersion) {
-        this.sourceStructVersion = sourceStructVersion;
-    }
-
     public Boolean getTombstonesOnDelete() {
         return tombstonesOnDelete;
     }
@@ -894,11 +901,19 @@ public class DebeziumMongodbComponentConfiguration
         this.tombstonesOnDelete = tombstonesOnDelete;
     }
 
-    public String getTransactionTopic() {
-        return transactionTopic;
+    public String getTopicNamingStrategy() {
+        return topicNamingStrategy;
     }
 
-    public void setTransactionTopic(String transactionTopic) {
-        this.transactionTopic = transactionTopic;
+    public void setTopicNamingStrategy(String topicNamingStrategy) {
+        this.topicNamingStrategy = topicNamingStrategy;
+    }
+
+    public String getTopicPrefix() {
+        return topicPrefix;
+    }
+
+    public void setTopicPrefix(String topicPrefix) {
+        this.topicPrefix = topicPrefix;
     }
 }
