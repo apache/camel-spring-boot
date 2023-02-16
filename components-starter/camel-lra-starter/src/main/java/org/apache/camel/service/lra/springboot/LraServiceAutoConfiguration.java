@@ -54,7 +54,7 @@ public class LraServiceAutoConfiguration {
 
     @Bean(name = "lra-service")
     @ConditionalOnMissingBean(CamelSagaService.class)
-    @ConditionalOnProperty(value = "camel.service.lra.enabled", havingValue = "true")
+    @ConditionalOnProperty(value = "camel.lra.enabled", havingValue = "true")
     public LRASagaService configureLraSagaService(LraServiceConfiguration configuration) throws Exception {
         LRASagaService service = new LRASagaService();
 
