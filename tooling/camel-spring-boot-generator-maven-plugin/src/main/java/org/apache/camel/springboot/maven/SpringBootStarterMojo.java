@@ -413,7 +413,7 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
 
 
     private Template getTemplate(String name) throws IOException {
-        Configuration cfg = new Configuration(Configuration.getVersion());
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_32);
 
         cfg.setTemplateLoader(new URLTemplateLoader() {
             @Override
