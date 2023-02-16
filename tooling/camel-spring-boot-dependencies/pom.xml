@@ -73,7 +73,7 @@
       <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>fastjson</artifactId>
-        <version>1.2.83</version>
+        <version>2.0.23</version>
       </dependency>
       <dependency>
         <groupId>com.cloudbees.thirdparty</groupId>
@@ -144,7 +144,7 @@
       <dependency>
         <groupId>info.picocli</groupId>
         <artifactId>picocli</artifactId>
-        <version>4.7.0</version>
+        <version>4.7.1</version>
       </dependency>
       <dependency>
         <groupId>io.apicurio</groupId>
@@ -159,7 +159,7 @@
       <dependency>
         <groupId>io.methvin</groupId>
         <artifactId>directory-watcher</artifactId>
-        <version>0.17.1</version>
+        <version>0.18.0</version>
       </dependency>
       <dependency>
         <groupId>net.sf.saxon</groupId>
@@ -4228,16 +4228,6 @@
         <groupId>org.eclipse.angus</groupId>
         <artifactId>angus-mail</artifactId>
         <version>1.1.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.eclipse.rdf4j</groupId>
-        <artifactId>rdf4j-model</artifactId>
-        <version>4.2.2</version>
-      </dependency>
-      <dependency>
-        <groupId>org.eclipse.rdf4j</groupId>
-        <artifactId>rdf4j-rio-api</artifactId>
-        <version>4.2.2</version>
       </dependency>
       <dependency>
         <groupId>org.junit-pioneer</groupId>
