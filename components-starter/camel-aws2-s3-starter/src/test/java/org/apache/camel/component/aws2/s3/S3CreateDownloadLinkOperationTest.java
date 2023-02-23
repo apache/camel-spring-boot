@@ -100,7 +100,7 @@ public class S3CreateDownloadLinkOperationTest extends BaseS3 {
 
                     from("direct:createDownloadLinkWithoutCredentials").to(awsEndpoint).to("mock:result");
 
-                    from("direct:createDownloadLink").to(awsEndpoint + "&accessKey=xxx&secretKey=yyy&region=eu-west-1")
+                    from("direct:createDownloadLink").to(awsEndpoint + "&accessKey=xxx&secretKey=randomatleast16bytesyy&region=eu-west-1")
                             .to("mock:result");
                 }
             };
