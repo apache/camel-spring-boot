@@ -20,7 +20,6 @@ import org.apache.camel.BeanScope;
 import org.apache.camel.component.beanclass.ClassComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Invoke methods of Java beans specified by class name.
@@ -37,11 +36,6 @@ public class ClassComponentConfiguration
      * enabled by default.
      */
     private Boolean enabled;
-    /**
-     * Use singleton option instead.
-     */
-    @Deprecated
-    private Boolean cache = true;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -78,17 +72,6 @@ public class ClassComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
-
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public Boolean getCache() {
-        return cache;
-    }
-
-    @Deprecated
-    public void setCache(Boolean cache) {
-        this.cache = cache;
-    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;

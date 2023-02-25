@@ -260,7 +260,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
         final ScheduledFuture<?> future = executorService.schedule(task, seconds, TimeUnit.SECONDS);
         camelContext.addLifecycleStrategy(new LifecycleStrategySupport() {
             @Override
-            public void onContextStop(CamelContext context) {
+            public void onContextStopping(CamelContext context) {
                 // we are stopping then cancel the task so we can shutdown quicker
                 if (!running.get()) {
                     future.cancel(true);
@@ -291,7 +291,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
         final ScheduledFuture<?> future = executorService.schedule(task, seconds, TimeUnit.SECONDS);
         camelContext.addLifecycleStrategy(new LifecycleStrategySupport() {
             @Override
-            public void onContextStop(CamelContext context) {
+            public void onContextStopping(CamelContext context) {
                 // we are stopping then cancel the task so we can shutdown quicker
                 if (!running.get()) {
                     future.cancel(true);
@@ -322,7 +322,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
         final Future<?> future = executorService.submit(task);
         camelContext.addLifecycleStrategy(new LifecycleStrategySupport() {
             @Override
-            public void onContextStop(CamelContext context) {
+            public void onContextStopping(CamelContext context) {
                 // we are stopping then cancel the task so we can shutdown quicker
                 if (!running.get()) {
                     future.cancel(true);
