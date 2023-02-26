@@ -20,6 +20,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
+import org.apache.camel.model.language.SimpleExpression;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -30,8 +31,6 @@ import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import static org.apache.camel.language.simple.SimpleLanguage.simple;
 
 public abstract class AbstractBaseFtp {
     protected static final String AUTH_VALUE_SSL = "SSLv3";
@@ -50,7 +49,7 @@ public abstract class AbstractBaseFtp {
     }
 
     protected void sendFile(String url, Object body, String fileName) {
-        template.sendBodyAndHeader(url, body, Exchange.FILE_NAME, simple(fileName));
+        template.sendBodyAndHeader(url, body, Exchange.FILE_NAME, new SimpleExpression(fileName));
     }
 
     protected static void assertFileExists(String filename) {
