@@ -98,7 +98,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                     configurer.setRoutesCollector(springBootRoutesCollector);
                 }
 
-                configurer.setBeanPostProcessor(camelContext.adapt(ExtendedCamelContext.class).getBeanPostProcessor());
+                configurer.setBeanPostProcessor(camelContext.getCamelContextExtension().getBeanPostProcessor());
                 configurer.setJavaRoutesExcludePattern(configurationProperties.getJavaRoutesExcludePattern());
                 configurer.setJavaRoutesIncludePattern(configurationProperties.getJavaRoutesIncludePattern());
                 configurer.setRoutesExcludePattern(configurationProperties.getRoutesExcludePattern());

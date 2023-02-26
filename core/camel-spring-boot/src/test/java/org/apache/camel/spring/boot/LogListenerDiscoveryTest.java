@@ -46,7 +46,7 @@ public class LogListenerDiscoveryTest {
 
     @Test
     public void testUuidDiscovery() {
-        assertThat(camelContext.adapt(ExtendedCamelContext.class).getLogListeners()).contains(logListener);
+        assertThat(camelContext.getCamelContextExtension().getLogListeners()).contains(logListener);
     }
 
     @Component

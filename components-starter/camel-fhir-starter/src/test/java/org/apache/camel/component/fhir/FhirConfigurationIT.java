@@ -103,7 +103,7 @@ public class FhirConfigurationIT extends AbstractFhirTestSupport {
 
         assertTrue(interceptors.contains(this.mockClientInterceptor), "User defined IClientInterceptor not found");
 
-        long counter = camelContext.adapt(ExtendedCamelContext.class).getBeanIntrospection().getInvokedCounter();
+        long counter = camelContext.getCamelContextExtension().getBeanIntrospection().getInvokedCounter();
         assertEquals(0, counter, "Should not use reflection");
     }
 

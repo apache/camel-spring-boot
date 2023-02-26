@@ -86,7 +86,7 @@ public class CamelAutoConfiguration {
         CamelContext camelContext = new SpringBootCamelContext(applicationContext, config.isWarnOnEarlyShutdown());
         // bean post processor is created before CamelContext
         beanPostProcessor.setCamelContext(camelContext);
-        camelContext.adapt(ExtendedCamelContext.class).setBeanPostProcessor(beanPostProcessor);
+        camelContext.getCamelContextExtension().setBeanPostProcessor(beanPostProcessor);
         return doConfigureCamelContext(applicationContext, camelContext, config);
     }
 
@@ -119,7 +119,7 @@ public class CamelAutoConfiguration {
             // sort by ordered
             OrderComparator.sort(reps);
             // and plugin as new registry
-            camelContext.adapt(ExtendedCamelContext.class).setRegistry(new DefaultRegistry(reps));
+            camelContext.getCamelContextExtension().setRegistry(new DefaultRegistry(reps));
         }
 
         if (ObjectHelper.isNotEmpty(config.getFileConfigurations())) {
@@ -135,8 +135,8 @@ public class CamelAutoConfiguration {
         // setup cli connector eager
         configureCliConnector(applicationContext, camelContext);
 
-        camelContext.adapt(ExtendedCamelContext.class).setPackageScanClassResolver(new FatJarPackageScanClassResolver());
-        camelContext.adapt(ExtendedCamelContext.class).setPackageScanResourceResolver(new FatJarPackageScanResourceResolver());
+        camelContext.getCamelContextExtension().setPackageScanClassResolver(new FatJarPackageScanClassResolver());
+        camelContext.getCamelContextExtension().setPackageScanResourceResolver(new FatJarPackageScanResourceResolver());
 
         if (config.getRouteFilterIncludePattern() != null || config.getRouteFilterExcludePattern() != null) {
             LOG.info("Route filtering pattern: include={}, exclude={}", config.getRouteFilterIncludePattern(), config.getRouteFilterExcludePattern());
@@ -173,13 +173,13 @@ public class CamelAutoConfiguration {
 
     static void configureStartupRecorder(CamelContext camelContext, CamelConfigurationProperties config) {
         if ("false".equals(config.getStartupRecorder())) {
-            camelContext.adapt(ExtendedCamelContext.class).getStartupStepRecorder().setEnabled(false);
+            camelContext.getCamelContextExtension().getStartupStepRecorder().setEnabled(false);
         } else if ("logging".equals(config.getStartupRecorder())) {
-            camelContext.adapt(ExtendedCamelContext.class).setStartupStepRecorder(new LoggingStartupStepRecorder());
+            camelContext.getCamelContextExtension().setStartupStepRecorder(new LoggingStartupStepRecorder());
         } else if ("java-flight-recorder".equals(config.getStartupRecorder())
                 || config.getStartupRecorder() == null) {
             // try to auto discover camel-jfr to use
-            StartupStepRecorder fr = camelContext.adapt(ExtendedCamelContext.class).getBootstrapFactoryFinder()
+            StartupStepRecorder fr = camelContext.getCamelContextExtension().getBootstrapFactoryFinder()
                     .newInstance(StartupStepRecorder.FACTORY, StartupStepRecorder.class).orElse(null);
             if (fr != null) {
                 LOG.debug("Discovered startup recorder: {} from classpath", fr);
@@ -187,7 +187,7 @@ public class CamelAutoConfiguration {
                 fr.setStartupRecorderDuration(config.getStartupRecorderDuration());
                 fr.setRecordingProfile(config.getStartupRecorderProfile());
                 fr.setMaxDepth(config.getStartupRecorderMaxDepth());
-                camelContext.adapt(ExtendedCamelContext.class).setStartupStepRecorder(fr);
+                camelContext.getCamelContextExtension().setStartupStepRecorder(fr);
             }
         }
     }
