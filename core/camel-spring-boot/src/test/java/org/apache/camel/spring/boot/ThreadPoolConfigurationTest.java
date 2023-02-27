@@ -42,7 +42,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
         "camel.threadpool.pool-size = 5",
         "camel.threadpool.max-pool-size = 10",
         "camel.threadpool.max-queue-size = 20",
-        "camel.threadpool.rejected-policy = DiscardOldest",
+        "camel.threadpool.rejected-policy = CallerRuns",
         "camel.threadpool.config[smallPool].pool-size = 2",
         "camel.threadpool.config[smallPool].rejected-policy = Abort",
         "camel.threadpool.config[bigPool].pool-size = 20",
@@ -62,7 +62,7 @@ public class ThreadPoolConfigurationTest {
         Assertions.assertEquals(5, dpp.getPoolSize().intValue());
         Assertions.assertEquals(10, dpp.getMaxPoolSize().intValue());
         Assertions.assertEquals(20, dpp.getMaxQueueSize().intValue());
-        Assertions.assertEquals(ThreadPoolRejectedPolicy.DiscardOldest, dpp.getRejectedPolicy());
+        Assertions.assertEquals(ThreadPoolRejectedPolicy.CallerRuns, dpp.getRejectedPolicy());
 
         ThreadPoolProfile sp = context.getExecutorServiceManager().getThreadPoolProfile("smallPool");
         Assertions.assertNotNull(sp);
@@ -78,7 +78,7 @@ public class ThreadPoolConfigurationTest {
         Assertions.assertEquals(20, bp.getPoolSize().intValue());
         Assertions.assertEquals(50, bp.getMaxPoolSize().intValue());
         Assertions.assertEquals(500, bp.getMaxQueueSize().intValue());
-        Assertions.assertEquals(ThreadPoolRejectedPolicy.DiscardOldest, bp.getRejectedPolicy());
+        Assertions.assertEquals(ThreadPoolRejectedPolicy.CallerRuns, bp.getRejectedPolicy());
     }
 
     // *************************************

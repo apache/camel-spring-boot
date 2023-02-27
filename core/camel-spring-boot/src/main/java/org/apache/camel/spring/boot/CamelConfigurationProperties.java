@@ -741,13 +741,6 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private String javaRoutesExcludePattern;
 
     /**
-     * Sets the logging level used for logging route activity (such as starting and stopping routes). The default
-     * logging level is DEBUG.
-     */
-    @Deprecated
-    private LoggingLevel routeControllerLoggingLevel;
-
-    /**
      * To enable using supervising route controller which allows Camel to startup
      * and then the controller takes care of starting the routes in a safe manner.
      *

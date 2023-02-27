@@ -71,11 +71,6 @@
         <version>11.4</version>
       </dependency>
       <dependency>
-        <groupId>ognl</groupId>
-        <artifactId>ognl</artifactId>
-        <version>3.3.4</version>
-      </dependency>
-      <dependency>
         <groupId>org.apache.avro</groupId>
         <artifactId>avro</artifactId>
         <version>1.11.0</version>

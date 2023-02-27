@@ -1631,14 +1631,6 @@
       "type": "java.lang.Boolean",
       "description": "Whether to enable Camel info.",
       "defaultValue": true
-    },
-    {
-      "name": "camel.springboot.route-controller-logging-level",
-      "type": "org.apache.camel.LoggingLevel",
-      "description": "Sets the logging level used for logging route activity (such as starting and stopping routes). The default logging level is DEBUG.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
-      "deprecated": true,
-      "deprecation": {}
     }
   ],
   "hints": []
