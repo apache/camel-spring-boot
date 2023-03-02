@@ -540,7 +540,7 @@
     {
       "name": "camel.component.kafka.security-protocol",
       "type": "java.lang.String",
-      "description": "Protocol used to communicate with brokers. SASL_PLAINTEXT, PLAINTEXT and SSL are supported",
+      "description": "Protocol used to communicate with brokers. SASL_PLAINTEXT, PLAINTEXT, SASL_SSL and SSL are supported",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
       "defaultValue": "PLAINTEXT"
     },
