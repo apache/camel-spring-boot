@@ -43,7 +43,7 @@ public class XMLTokenizeLanguageConfiguration
      * extracted token to its child content t - extracting the text content of
      * the specified element
      */
-    private String mode;
+    private String mode = "i";
     /**
      * Injects the XML Namespaces of prefix - uri mappings
      */

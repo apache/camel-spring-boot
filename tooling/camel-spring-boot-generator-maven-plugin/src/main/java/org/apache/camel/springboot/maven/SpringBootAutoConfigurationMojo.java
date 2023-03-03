@@ -421,7 +421,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.addImport("java.util.Map");
         javaClass.addImport("java.util.HashMap");
         javaClass.addImport("org.apache.camel.util.CollectionHelper");
-        javaClass.addImport("org.apache.camel.support.IntrospectionSupport");
         javaClass.addImport("org.apache.camel.spring.boot.util.CamelPropertiesHelper");
         javaClass.addImport("org.apache.camel.CamelContext");
         javaClass.addImport("org.apache.camel.spi.RestConfiguration");
@@ -441,7 +440,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         method.addAnnotation(Bean.class).setLiteralValue("name", "\"rest-configuration\"");
         method.addAnnotation(ConditionalOnClass.class).setLiteralValue("value", "CamelContext.class");
         method.addAnnotation(ConditionalOnMissingBean.class);
-        method.setBody("" + "Map<String, Object> properties = new HashMap<>();\n" + "IntrospectionSupport.getProperties(config, properties, null, false);\n"
+        method.setBody("" + "Map<String, Object> properties = new HashMap<>();\n" + "camelContext.getCamelContextExtension().getBeanIntrospection().getProperties(config, properties, null, false);\n"
                 + "// These options is configured specially further below, so remove them first\n" + "properties.remove(\"enableCors\");\n"
                 + "properties.remove(\"apiProperty\");\n" + "properties.remove(\"componentProperty\");\n" + "properties.remove(\"consumerProperty\");\n"
                 + "properties.remove(\"dataFormatProperty\");\n" + "properties.remove(\"endpointProperty\");\n" + "properties.remove(\"corsHeaders\");\n" + "\n"

@@ -25,8 +25,9 @@ import org.apache.camel.component.resilience4j.ResilienceConstants;
 import org.apache.camel.model.Resilience4jConfigurationDefinition;
 import org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionCommon;
 import org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties;
+import org.apache.camel.spi.BeanIntrospection;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.support.IntrospectionSupport;
+import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -61,9 +62,10 @@ public class ResilienceAutoConfiguration {
     public Resilience4jConfigurationDefinition defaultResilienceConfigurationDefinition() throws Exception {
         Map<String, Object> properties = new HashMap<>();
 
-        IntrospectionSupport.getProperties(config, properties, null, false);
+        BeanIntrospection bi = camelContext.getCamelContextExtension().getBeanIntrospection();
+        bi.getProperties(config, properties, null, false);
         Resilience4jConfigurationDefinition definition = new Resilience4jConfigurationDefinition();
-        IntrospectionSupport.setProperties(camelContext, camelContext.getTypeConverter(), definition, properties);
+        CamelPropertiesHelper.setCamelProperties(camelContext, definition, properties, false);
 
         return definition;
     }
@@ -82,11 +84,12 @@ public class ResilienceAutoConfiguration {
             properties.clear();
 
             // extract properties
-            IntrospectionSupport.getProperties(entry.getValue(), properties, null, false);
+            BeanIntrospection bi = camelContext.getCamelContextExtension().getBeanIntrospection();
+            bi.getProperties(entry.getValue(), properties, null, false);
 
             try {
                 Resilience4jConfigurationDefinition definition = new Resilience4jConfigurationDefinition();
-                IntrospectionSupport.setProperties(camelContext, camelContext.getTypeConverter(), definition, properties);
+                CamelPropertiesHelper.setCamelProperties(camelContext, definition, properties, false);
 
                 // Registry the definition
                 beanFactory.registerSingleton(entry.getKey(), definition);

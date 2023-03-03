@@ -16,11 +16,12 @@
  */
 package org.apache.camel.component.zookeeper.springboot.cluster;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.component.zookeeper.cluster.ZooKeeperClusterService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration;
-import org.apache.camel.support.IntrospectionSupport;
+import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -35,6 +36,10 @@ import org.springframework.context.annotation.Scope;
 @ConditionalOnProperty(prefix = "camel.cluster.zookeeper", name = "enabled")
 @EnableConfigurationProperties(ZooKeeperClusterServiceConfiguration.class)
 public class ZooKeeperClusterServiceAutoConfiguration {
+
+    @Autowired
+    private CamelContext camelContext;
+
     @Autowired
     private ZooKeeperClusterServiceConfiguration configuration;
 
@@ -43,10 +48,8 @@ public class ZooKeeperClusterServiceAutoConfiguration {
     public CamelClusterService zookeeperClusterService() throws Exception {
         ZooKeeperClusterService service = new ZooKeeperClusterService();
 
-        IntrospectionSupport.setProperties(
-            service,
-            IntrospectionSupport.getNonNullProperties(configuration)
-        );
+        CamelPropertiesHelper.setCamelProperties(camelContext, service,
+                CamelPropertiesHelper.getNonNullProperties(camelContext, configuration), false);
 
         return service;
     }

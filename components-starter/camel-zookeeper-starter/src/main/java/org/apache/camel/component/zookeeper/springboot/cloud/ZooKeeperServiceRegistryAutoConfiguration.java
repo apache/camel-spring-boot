@@ -16,9 +16,11 @@
  */
 package org.apache.camel.component.zookeeper.springboot.cloud;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.component.zookeeper.cloud.ZooKeeperServiceRegistry;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.support.IntrospectionSupport;
+import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -33,15 +35,16 @@ import org.springframework.context.annotation.Scope;
 @EnableConfigurationProperties(ZooKeeperServiceRegistryConfiguration.class)
 public class ZooKeeperServiceRegistryAutoConfiguration {
 
+    @Autowired
+    private CamelContext camelContext;
+
     @Bean(name = "zookeeper-service-registry")
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public ZooKeeperServiceRegistry zookeeperServiceRegistry(ZooKeeperServiceRegistryConfiguration configuration) throws Exception {
         ZooKeeperServiceRegistry service = new ZooKeeperServiceRegistry();
 
-        IntrospectionSupport.setProperties(
-            service,
-            IntrospectionSupport.getNonNullProperties(configuration)
-        );
+        CamelPropertiesHelper.setCamelProperties(camelContext, service,
+                CamelPropertiesHelper.getNonNullProperties(camelContext, configuration), false);
 
         return service;
     }

@@ -16,14 +16,15 @@
  */
 package org.apache.camel.spring.boot.util;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
 import org.apache.camel.PropertyBindingException;
+import org.apache.camel.spi.BeanIntrospection;
 import org.apache.camel.spi.PropertyConfigurer;
-import org.apache.camel.support.IntrospectionSupport;
 import org.apache.camel.support.PropertyBindingSupport;
 import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.util.ObjectHelper;
@@ -36,7 +37,7 @@ public final class CamelPropertiesHelper {
     private CamelPropertiesHelper() {
     }
 
-    @SuppressWarnings({"unchecked", "deprecation"})
+    @SuppressWarnings({"unchecked"})
     public static void copyProperties(CamelContext camelContext, Object source, Object target) {
         ObjectHelper.notNull(camelContext, "camel context");
         ObjectHelper.notNull(source, "source");
@@ -45,7 +46,7 @@ public final class CamelPropertiesHelper {
         CamelPropertiesHelper.setCamelProperties(
             camelContext,
             target,
-            source instanceof Map ? (Map)source : IntrospectionSupport.getNonNullProperties(source),
+            source instanceof Map ? (Map)source : getNonNullProperties(camelContext, source),
             false);
     }
 
@@ -128,6 +129,22 @@ public final class CamelPropertiesHelper {
         }
 
         return rc;
+    }
+
+    /**
+     * Gets all the non-null properties from the given object,
+     *
+     * @param camelContext the camel context
+     * @param target       the object
+     * @return the properties (non-null only)
+     */
+    public static Map<String, Object> getNonNullProperties(CamelContext camelContext, Object target) {
+        Map<String, Object> properties = new HashMap<>();
+
+        BeanIntrospection bi = camelContext.getCamelContextExtension().getBeanIntrospection();
+        bi.getProperties(target, properties, null, false);
+
+        return properties;
     }
 
 }

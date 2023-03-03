@@ -26,9 +26,10 @@ import org.apache.camel.cloud.ServiceDiscovery;
 import org.apache.camel.component.consul.cloud.ConsulServiceDiscoveryFactory;
 import org.apache.camel.model.cloud.springboot.ConsulServiceCallServiceDiscoveryConfigurationCommon;
 import org.apache.camel.model.cloud.springboot.ConsulServiceCallServiceDiscoveryConfigurationProperties;
+import org.apache.camel.spi.BeanIntrospection;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
+import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.apache.camel.spring.boot.util.GroupCondition;
-import org.apache.camel.support.IntrospectionSupport;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -58,11 +59,8 @@ public class ConsulServiceDiscoveryAutoConfiguration {
     public ServiceDiscovery configureServiceDiscoveryFactory() throws Exception {
         ConsulServiceDiscoveryFactory factory = new ConsulServiceDiscoveryFactory();
 
-        IntrospectionSupport.setProperties(
-            camelContext,
-            camelContext.getTypeConverter(),
-            factory,
-            IntrospectionSupport.getNonNullProperties(configuration));
+        CamelPropertiesHelper.setCamelProperties(camelContext, factory,
+                CamelPropertiesHelper.getNonNullProperties(camelContext, configuration), false);
 
         return factory.newInstance(camelContext);
     }
@@ -79,9 +77,10 @@ public class ConsulServiceDiscoveryAutoConfiguration {
                 // The instance factory
                 ConsulServiceDiscoveryFactory factory = new ConsulServiceDiscoveryFactory();
 
+                BeanIntrospection bi = camelContext.getCamelContextExtension().getBeanIntrospection();
                 try {
-                    IntrospectionSupport.getProperties(entry.getValue(), parameters, null, false);
-                    IntrospectionSupport.setProperties(camelContext, camelContext.getTypeConverter(), factory, parameters);
+                    bi.getProperties(entry.getValue(), parameters, null, false);
+                    CamelPropertiesHelper.setCamelProperties(camelContext, factory, parameters, false);
 
                     beanFactory.registerSingleton(entry.getKey(), factory.newInstance(camelContext));
                 } catch (Exception e) {

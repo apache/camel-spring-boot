@@ -16,11 +16,12 @@
  */
 package org.apache.camel.component.consul.springboot.cluster;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.component.consul.cluster.ConsulClusterService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration;
-import org.apache.camel.support.IntrospectionSupport;
+import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -35,6 +36,9 @@ import org.springframework.context.annotation.Scope;
 @ConditionalOnProperty(prefix = "camel.cluster.consul", name = "enabled")
 @EnableConfigurationProperties(ConsulClusterServiceConfiguration.class)
 public class ConsulClusterServiceAutoConfiguration {
+
+    @Autowired
+    private CamelContext camelContext;
     @Autowired
     private ConsulClusterServiceConfiguration configuration;
 
@@ -43,10 +47,8 @@ public class ConsulClusterServiceAutoConfiguration {
     public CamelClusterService consulClusterService() throws Exception {
         ConsulClusterService service = new ConsulClusterService();
 
-        IntrospectionSupport.setProperties(
-            service,
-            IntrospectionSupport.getNonNullProperties(configuration)
-        );
+        CamelPropertiesHelper.setCamelProperties(camelContext, service,
+                CamelPropertiesHelper.getNonNullProperties(camelContext, configuration), false);
 
         return service;
     }

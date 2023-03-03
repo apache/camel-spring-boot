@@ -27,6 +27,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.cloud.zookeeper")
 public class ZooKeeperServiceRegistryConfiguration extends org.apache.camel.component.zookeeper.cloud.ZooKeeperServiceRegistryConfiguration {
+
     /**
      * Sets if the zookeeper service registry should be enabled or not, default is false.
      */

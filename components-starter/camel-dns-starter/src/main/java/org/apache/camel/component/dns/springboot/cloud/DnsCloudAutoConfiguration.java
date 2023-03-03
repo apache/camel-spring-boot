@@ -26,9 +26,10 @@ import org.apache.camel.cloud.ServiceDiscovery;
 import org.apache.camel.component.dns.cloud.DnsServiceDiscoveryFactory;
 import org.apache.camel.model.cloud.springboot.DnsServiceCallServiceDiscoveryConfigurationCommon;
 import org.apache.camel.model.cloud.springboot.DnsServiceCallServiceDiscoveryConfigurationProperties;
+import org.apache.camel.spi.BeanIntrospection;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
+import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.apache.camel.spring.boot.util.GroupCondition;
-import org.apache.camel.support.IntrospectionSupport;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -60,11 +61,8 @@ public class DnsCloudAutoConfiguration {
     public ServiceDiscovery configureServiceDiscoveryFactory() throws Exception {
         DnsServiceDiscoveryFactory factory = new DnsServiceDiscoveryFactory();
 
-        IntrospectionSupport.setProperties(
-            camelContext,
-            camelContext.getTypeConverter(),
-            factory,
-            IntrospectionSupport.getNonNullProperties(configuration));
+        CamelPropertiesHelper.setCamelProperties(camelContext, factory,
+                CamelPropertiesHelper.getNonNullProperties(camelContext, configuration), false);
 
         return factory.newInstance(camelContext);
     }
@@ -81,9 +79,10 @@ public class DnsCloudAutoConfiguration {
                 // The instance factory
                 DnsServiceDiscoveryFactory factory = new DnsServiceDiscoveryFactory();
 
+                BeanIntrospection bi = camelContext.getCamelContextExtension().getBeanIntrospection();
                 try {
-                    IntrospectionSupport.getProperties(entry.getValue(), parameters, null, false);
-                    IntrospectionSupport.setProperties(camelContext, camelContext.getTypeConverter(), factory, parameters);
+                    bi.getProperties(entry.getValue(), parameters, null, false);
+                    CamelPropertiesHelper.setCamelProperties(camelContext, factory, parameters, false);
 
                     beanFactory.registerSingleton(entry.getKey(), factory.newInstance(camelContext));
                 } catch (Exception e) {

@@ -20,6 +20,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.cluster.jgroups-raft")
 public class JGroupsRaftClusterServiceConfiguration {
+
     /**
      * Sets if the jgroups raft cluster service should be enabled or not, default is false.
      */

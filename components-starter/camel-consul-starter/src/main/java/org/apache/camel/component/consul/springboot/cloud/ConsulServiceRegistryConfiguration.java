@@ -29,6 +29,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.cloud.consul")
 public class ConsulServiceRegistryConfiguration extends org.apache.camel.component.consul.cloud.ConsulServiceRegistryConfiguration {
+
     /**
      * Sets if the consul service registry should be enabled or not, default is false.
      */

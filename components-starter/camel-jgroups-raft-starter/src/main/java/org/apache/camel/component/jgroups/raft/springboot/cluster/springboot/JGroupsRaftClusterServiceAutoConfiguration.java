@@ -16,11 +16,12 @@
  */
 package org.apache.camel.component.jgroups.raft.springboot.cluster.springboot;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.component.jgroups.raft.cluster.JGroupsRaftClusterService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration;
-import org.apache.camel.support.IntrospectionSupport;
+import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -35,6 +36,10 @@ import org.springframework.context.annotation.Scope;
 @ConditionalOnProperty(prefix = "camel.cluster.jgroups-raft", name = "enabled")
 @EnableConfigurationProperties(JGroupsRaftClusterServiceConfiguration.class)
 public class JGroupsRaftClusterServiceAutoConfiguration {
+
+    @Autowired
+    private CamelContext camelContext;
+
     @Autowired
     private JGroupsRaftClusterServiceConfiguration configuration;
 
@@ -43,10 +48,8 @@ public class JGroupsRaftClusterServiceAutoConfiguration {
     public CamelClusterService jgroupsRaftClusterService() throws Exception {
         JGroupsRaftClusterService service = new JGroupsRaftClusterService();
 
-        IntrospectionSupport.setProperties(
-            service,
-            IntrospectionSupport.getNonNullProperties(configuration)
-        );
+        CamelPropertiesHelper.setCamelProperties(camelContext, service,
+                CamelPropertiesHelper.getNonNullProperties(camelContext, configuration), false);
 
         return service;
     }

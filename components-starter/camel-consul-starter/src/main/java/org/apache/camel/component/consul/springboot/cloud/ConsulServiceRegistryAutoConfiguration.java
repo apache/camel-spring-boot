@@ -16,9 +16,11 @@
  */
 package org.apache.camel.component.consul.springboot.cloud;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.component.consul.cloud.ConsulServiceRegistry;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.support.IntrospectionSupport;
+import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -33,15 +35,16 @@ import org.springframework.context.annotation.Scope;
 @EnableConfigurationProperties(ConsulServiceRegistryConfiguration.class)
 public class ConsulServiceRegistryAutoConfiguration {
 
+    @Autowired
+    private CamelContext camelContext;
+
     @Bean(name = "consul-service-registry")
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public ConsulServiceRegistry consulServiceRegistry(ConsulServiceRegistryConfiguration configuration) throws Exception {
         ConsulServiceRegistry service = new ConsulServiceRegistry();
 
-        IntrospectionSupport.setProperties(
-            service,
-            IntrospectionSupport.getNonNullProperties(configuration)
-        );
+        CamelPropertiesHelper.setCamelProperties(camelContext, service,
+                CamelPropertiesHelper.getNonNullProperties(camelContext, configuration), false);
 
         return service;
     }

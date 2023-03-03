@@ -16,17 +16,12 @@
  */
 package org.apache.camel.service.lra.springboot;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.saga.CamelSagaService;
 import org.apache.camel.service.lra.LRASagaService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
 import org.apache.camel.spring.boot.util.GroupCondition;
-import org.apache.camel.support.IntrospectionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

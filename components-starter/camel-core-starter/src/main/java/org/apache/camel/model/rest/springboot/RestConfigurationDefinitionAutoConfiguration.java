@@ -21,7 +21,6 @@ import java.util.Map;
 import org.apache.camel.CamelContext;
 import org.apache.camel.spi.RestConfiguration;
 import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
-import org.apache.camel.support.IntrospectionSupport;
 import org.apache.camel.util.CollectionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -56,7 +55,7 @@ public class RestConfigurationDefinitionAutoConfiguration {
     public RestConfiguration configureRestConfigurationDefinition()
             throws Exception {
         Map<String, Object> properties = new HashMap<>();
-        IntrospectionSupport.getProperties(config, properties, null, false);
+        camelContext.getCamelContextExtension().getBeanIntrospection().getProperties(config, properties, null, false);
         // These options is configured specially further below, so remove them first
         properties.remove("enableCors");
         properties.remove("apiProperty");
