@@ -520,6 +520,11 @@
       "defaultValue": false
     },
     {
+      "name": "camel.springboot.backlog-tracing-standby",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+    },
+    {
       "name": "camel.springboot.bean-introspection-extended-statistics",
       "type": "java.lang.Boolean",
       "description": "Sets whether bean introspection uses extended statistics. The default is false.",
