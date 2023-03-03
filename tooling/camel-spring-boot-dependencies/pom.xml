@@ -41,11 +41,6 @@
         <version>2.11.0</version>
       </dependency>
       <dependency>
-        <groupId>httpunit</groupId>
-        <artifactId>httpunit</artifactId>
-        <version>1.7</version>
-      </dependency>
-      <dependency>
         <groupId>info.picocli</groupId>
         <artifactId>picocli</artifactId>
         <version>4.7.1</version>
@@ -3858,11 +3853,6 @@
         <version>3.6.4</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.openjpa</groupId>
-        <artifactId>openjpa-persistence-jdbc</artifactId>
-        <version>3.2.2</version>
-      </dependency>
-      <dependency>
         <groupId>org.apache.pdfbox</groupId>
         <artifactId>fontbox</artifactId>
         <version>2.0.27</version>
@@ -3928,11 +3918,6 @@
         <version>1.9.12</version>
       </dependency>
       <dependency>
-        <groupId>org.codehaus.jettison</groupId>
-        <artifactId>jettison</artifactId>
-        <version>1.5.3</version>
-      </dependency>
-      <dependency>
         <groupId>org.codehaus.woodstox</groupId>
         <artifactId>woodstox-core-asl</artifactId>
         <version>4.4.1</version>
@@ -3952,11 +3937,6 @@
         <groupId>org.eclipse.angus</groupId>
         <artifactId>angus-mail</artifactId>
         <version>1.1.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>junit-jupiter</artifactId>
-        <version>1.17.6</version>
       </dependency>
       <dependency>
         <groupId>xerces</groupId>
