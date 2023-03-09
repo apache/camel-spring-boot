@@ -31,31 +31,6 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>commons-io</groupId>
-        <artifactId>commons-io</artifactId>
-        <version>2.11.0</version>
-      </dependency>
-      <dependency>
-        <groupId>info.picocli</groupId>
-        <artifactId>picocli</artifactId>
-        <version>4.7.1</version>
-      </dependency>
-      <dependency>
-        <groupId>io.apicurio</groupId>
-        <artifactId>apicurio-data-models</artifactId>
-        <version>1.1.26</version>
-      </dependency>
-      <dependency>
-        <groupId>io.krakens</groupId>
-        <artifactId>java-grok</artifactId>
-        <version>0.1.9</version>
-      </dependency>
-      <dependency>
-        <groupId>io.methvin</groupId>
-        <artifactId>directory-watcher</artifactId>
-        <version>0.18.0</version>
-      </dependency>
-      <dependency>
         <groupId>org.apache.avro</groupId>
         <artifactId>avro</artifactId>
         <version>1.11.0</version>
@@ -3833,54 +3808,9 @@
         <version>4.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.ftpserver</groupId>
-        <artifactId>ftplet-api</artifactId>
-        <version>1.1.2</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.ftpserver</groupId>
-        <artifactId>ftpserver-core</artifactId>
-        <version>1.1.2</version>
-      </dependency>
-      <dependency>
         <groupId>org.apache.maven.plugin-tools</groupId>
         <artifactId>maven-plugin-annotations</artifactId>
         <version>3.6.4</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.pdfbox</groupId>
-        <artifactId>fontbox</artifactId>
-        <version>2.0.27</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.pdfbox</groupId>
-        <artifactId>pdfbox</artifactId>
-        <version>2.0.27</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.pdfbox</groupId>
-        <artifactId>pdfbox-debugger</artifactId>
-        <version>2.0.27</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.pdfbox</groupId>
-        <artifactId>pdfbox-tools</artifactId>
-        <version>2.0.27</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.pulsar</groupId>
-        <artifactId>pulsar-client</artifactId>
-        <version>2.11.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.pulsar</groupId>
-        <artifactId>pulsar-client-admin</artifactId>
-        <version>2.11.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.zookeeper</groupId>
-        <artifactId>zookeeper</artifactId>
-        <version>3.8.1</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.jackson</groupId>
@@ -3903,30 +3833,9 @@
         <version>1.9.12</version>
       </dependency>
       <dependency>
-        <groupId>org.codehaus.woodstox</groupId>
-        <artifactId>woodstox-core-asl</artifactId>
-        <version>4.4.1</version>
-        <exclusions>
-          <exclusion>
-            <groupId>javax.xml.stream</groupId>
-            <artifactId>stax-api</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.dizitart</groupId>
-        <artifactId>nitrite</artifactId>
-        <version>3.4.4</version>
-      </dependency>
-      <dependency>
         <groupId>org.eclipse.angus</groupId>
         <artifactId>angus-mail</artifactId>
         <version>1.1.0</version>
-      </dependency>
-      <dependency>
-        <groupId>xerces</groupId>
-        <artifactId>xercesImpl</artifactId>
-        <version>2.12.2</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
