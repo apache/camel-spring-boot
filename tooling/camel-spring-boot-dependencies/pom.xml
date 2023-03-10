@@ -3832,11 +3832,6 @@
         <artifactId>jackson-xc</artifactId>
         <version>1.9.12</version>
       </dependency>
-      <dependency>
-        <groupId>org.eclipse.angus</groupId>
-        <artifactId>angus-mail</artifactId>
-        <version>1.1.0</version>
-      </dependency>
     </dependencies>
   </dependencyManagement>
   <!-- Force the reactor build order -->
