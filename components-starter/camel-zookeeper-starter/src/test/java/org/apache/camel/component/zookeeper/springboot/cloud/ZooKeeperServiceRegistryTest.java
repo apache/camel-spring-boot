@@ -23,7 +23,7 @@ import java.util.UUID;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.cloud.ServiceRegistry;
-import org.apache.camel.component.zookeeper.cloud.ZooKeeperServiceRegistry;
+import org.apache.camel.component.zookeeper.cloud.MetaData;
 import org.apache.camel.impl.cloud.DefaultServiceDefinition;
 import org.apache.camel.test.AvailablePortFinder;
 import org.apache.curator.framework.CuratorFramework;
@@ -100,7 +100,7 @@ public class ZooKeeperServiceRegistryTest {
                                 .build()
                         );
 
-                        final Collection<ServiceInstance<ZooKeeperServiceRegistry.MetaData>> services = zkClient.discovery().queryForInstances(SERVICE_NAME);
+                        final Collection<ServiceInstance<MetaData>> services = zkClient.discovery().queryForInstances(SERVICE_NAME);
 
                         assertThat(services).hasSize(1);
                         assertThat(services).first().hasFieldOrPropertyWithValue("id", SERVICE_ID);
@@ -130,17 +130,17 @@ public class ZooKeeperServiceRegistryTest {
 
     public static class ZooKeeperTestClient {
         private final CuratorFramework curator;
-        private final ServiceDiscovery<ZooKeeperServiceRegistry.MetaData> discovery;
+        private final ServiceDiscovery<MetaData> discovery;
 
         public ZooKeeperTestClient(String nodes) {
             curator = CuratorFrameworkFactory.builder()
                 .connectString(nodes)
                 .retryPolicy(new ExponentialBackoffRetry(1000, 3))
                 .build();
-            discovery = ServiceDiscoveryBuilder.builder(ZooKeeperServiceRegistry.MetaData.class)
+            discovery = ServiceDiscoveryBuilder.builder(MetaData.class)
                 .client(curator)
                 .basePath(SERVICE_PATH)
-                .serializer(new JsonInstanceSerializer<>(ZooKeeperServiceRegistry.MetaData.class))
+                .serializer(new JsonInstanceSerializer<>(MetaData.class))
                 .build();
         }
 
@@ -148,7 +148,7 @@ public class ZooKeeperServiceRegistryTest {
             return curator;
         }
 
-        public ServiceDiscovery<ZooKeeperServiceRegistry.MetaData> discovery() {
+        public ServiceDiscovery<MetaData> discovery() {
             return discovery;
         }
 
