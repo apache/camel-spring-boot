@@ -193,7 +193,6 @@
     <module>camel-debug-starter</module>
     <module>camel-digitalocean-starter</module>
     <module>camel-direct-starter</module>
-    <module>camel-directvm-starter</module>
     <module>camel-disruptor-starter</module>
     <module>camel-djl-starter</module>
     <module>camel-dns-starter</module>
