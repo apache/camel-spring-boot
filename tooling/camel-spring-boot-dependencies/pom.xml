@@ -1607,11 +1607,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-vm-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-weather-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3635,11 +3630,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-vertx-websocket</artifactId>
-        <version>4.0.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-vm</artifactId>
         <version>4.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
