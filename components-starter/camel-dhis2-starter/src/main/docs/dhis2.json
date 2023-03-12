@@ -1,0 +1,80 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.dhis2",
+      "type": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration",
+      "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dhis2.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.dhis2.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.dhis2.base-api-url",
+      "type": "java.lang.String",
+      "description": "DHIS2 server base API URL (e.g., https:\/\/play.dhis2.org\/2.39.1.1\/api)",
+      "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dhis2.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions occurred while the consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.dhis2.client",
+      "type": "org.hisp.dhis.integration.sdk.api.Dhis2Client",
+      "description": "References a user-defined org.hisp.dhis.integration.sdk.api.Dhis2Client. The option is a org.hisp.dhis.integration.sdk.api.Dhis2Client type.",
+      "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dhis2.configuration",
+      "type": "org.apache.camel.component.dhis2.Dhis2Configuration",
+      "description": "To use the shared configuration. The option is a org.apache.camel.component.dhis2.Dhis2Configuration type.",
+      "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dhis2.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.dhis2.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the dhis2 component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dhis2.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.dhis2.password",
+      "type": "java.lang.String",
+      "description": "DHIS2 account password for accessing the DHIS2 API",
+      "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dhis2.username",
+      "type": "java.lang.String",
+      "description": "DHIS2 account username for accessing the DHIS2 API",
+      "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration"
+    }
+  ],
+  "hints": []
+}
