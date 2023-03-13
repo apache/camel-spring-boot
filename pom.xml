@@ -133,7 +133,6 @@
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
         <swagger-parser-v3-version>2.1.10</swagger-parser-v3-version>
 	<cyclonedx-maven-plugin-version>2.7.5</cyclonedx-maven-plugin-version>
-	<antrun-maven-plugin-version>3.1.0</antrun-maven-plugin-version>
     </properties>
 
 
