@@ -38,17 +38,9 @@ public class Dhis2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Base API URL
+     * DHIS2 server base API URL (e.g., https://play.dhis2.org/2.39.1.1/api)
      */
     private String baseApiUrl;
-    /**
-     * Password
-     */
-    private String password;
-    /**
-     * Username
-     */
-    private String username;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -79,8 +71,8 @@ public class Dhis2ComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * To use the custom client. The option is a
-     * org.hisp.dhis.integration.sdk.api.Dhis2Client type.
+     * References a user-defined org.hisp.dhis.integration.sdk.api.Dhis2Client.
+     * The option is a org.hisp.dhis.integration.sdk.api.Dhis2Client type.
      */
     private Dhis2Client client;
     /**
@@ -88,6 +80,14 @@ public class Dhis2ComponentConfiguration
      * org.apache.camel.component.dhis2.Dhis2Configuration type.
      */
     private Dhis2Configuration configuration;
+    /**
+     * DHIS2 account password for accessing the DHIS2 API
+     */
+    private String password;
+    /**
+     * DHIS2 account username for accessing the DHIS2 API
+     */
+    private String username;
 
     public String getBaseApiUrl() {
         return baseApiUrl;
@@ -95,22 +95,6 @@ public class Dhis2ComponentConfiguration
 
     public void setBaseApiUrl(String baseApiUrl) {
         this.baseApiUrl = baseApiUrl;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -151,5 +135,21 @@ public class Dhis2ComponentConfiguration
 
     public void setConfiguration(Dhis2Configuration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
