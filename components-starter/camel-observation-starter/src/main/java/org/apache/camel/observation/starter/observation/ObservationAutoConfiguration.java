@@ -33,9 +33,8 @@ import io.micrometer.tracing.handler.TracingObservationHandler;
 
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.actuate.autoconfigure.metrics.CompositeMeterRegistryAutoConfiguration;
-import org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration;
+import org.apache.camel.observation.starter.tracing.MicrometerTracingAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -46,11 +45,12 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Taken from https://github.com/spring-projects/spring-boot/tree/v3.0.2/spring-boot-project/spring-boot-actuator-autoconfigure/src/main/java/org/springframework/boot/actuate/autoconfigure/observation.
+ *
+ * This should be only applied for Spring Boot 2.x, Spring Boot 3.x brings it in.
  */
-@AutoConfiguration(after = { CompositeMeterRegistryAutoConfiguration.class, MicrometerTracingAutoConfiguration.class }, afterName = "org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration")
+@AutoConfiguration(after = MicrometerTracingAutoConfiguration.class, before = org.apache.camel.observation.starter.ObservationAutoConfiguration.class, afterName = "org.springframework.boot.actuate.autoconfigure.metrics.CompositeMeterRegistryAutoConfiguration")
 @ConditionalOnClass(ObservationRegistry.class)
 @ConditionalOnMissingBean(ObservationRegistry.class)
-@EnableConfigurationProperties(ObservationProperties.class)
 public class ObservationAutoConfiguration {
 
 	@Bean

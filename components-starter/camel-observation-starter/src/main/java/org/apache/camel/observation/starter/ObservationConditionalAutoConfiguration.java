@@ -16,18 +16,16 @@
  */
 package org.apache.camel.observation.starter;
 
-import org.apache.camel.observation.starter.OpenTelemetryAutoConfiguration;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * A configuration controller to enable OpenTracing via the configuration property.
- * Useful to bootstrap OpenTracing when not using the {@link CamelObservation} annotation.
+ * A configuration controller to enable Micrometer Observation via the configuration property.
+ * Useful to bootstrap Micrometer Observation when not using the {@link CamelObservation} annotation.
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnProperty(value = "camel.opentelemetry.enabled")
-@Import(OpenTelemetryAutoConfiguration.class)
-public class OpenTelemetryConditionalAutoConfiguration {
+@ConditionalOnProperty(value = "camel.observation.enabled")
+@Import(ObservationAutoConfiguration.class)
+public class ObservationConditionalAutoConfiguration {
 }

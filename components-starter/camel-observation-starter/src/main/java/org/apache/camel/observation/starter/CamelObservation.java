@@ -29,6 +29,6 @@ import org.springframework.context.annotation.Import;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@Import(OpenTelemetryAutoConfiguration.class)
+@Import(ObservationAutoConfiguration.class)
 public @interface CamelObservation {
 }

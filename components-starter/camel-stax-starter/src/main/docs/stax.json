@@ -64,8 +64,7 @@
       "name": "camel.language.xtokenize.mode",
       "type": "java.lang.String",
       "description": "The extraction mode. The available extraction modes are: i - injecting the contextual namespace bindings into the extracted token (default) w - wrapping the extracted token in its ancestor context u - unwrapping the extracted token to its child content t - extracting the text content of the specified element",
-      "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration",
-      "defaultValue": "i"
+      "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration"
     },
     {
       "name": "camel.language.xtokenize.namespace",

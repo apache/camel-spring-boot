@@ -21,7 +21,7 @@ import java.util.Set;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.observation")
-public class OpenTelemetryConfigurationProperties {
+public class ObservationConfigurationProperties {
 
     /**
      * Sets exclude pattern(s) that will disable observability for Camel messages that

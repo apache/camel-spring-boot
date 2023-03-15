@@ -29,15 +29,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties(OpenTelemetryConfigurationProperties.class)
+@EnableConfigurationProperties(ObservationConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.observation.enabled", matchIfMissing = true)
-public class OpenTelemetryAutoConfiguration {
+public class ObservationAutoConfiguration {
 
     @Bean(initMethod = "", destroyMethod = "")
     // Camel handles the lifecycle of this bean
     @ConditionalOnMissingBean(MicrometerObservationTracer.class)
-    MicrometerObservationTracer openTelemetryEventNotifier(CamelContext camelContext,
-                                                 OpenTelemetryConfigurationProperties config,
+    MicrometerObservationTracer micrometerObservationTracer(CamelContext camelContext,
+                                                 ObservationConfigurationProperties config,
                                                  ObjectProvider<Tracer> tracer,
                                                  ObjectProvider<ObservationRegistry> observationRegistry) {
         MicrometerObservationTracer micrometerObservationTracer = new MicrometerObservationTracer();
