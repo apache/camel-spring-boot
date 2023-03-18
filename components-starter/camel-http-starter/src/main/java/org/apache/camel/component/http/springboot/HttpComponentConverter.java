@@ -39,15 +39,16 @@ public class HttpComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.apache.http.client.CookieStore.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.http.conn.HttpClientConnectionManager.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.hc.client5.http.cookie.CookieStore.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.hc.client5.http.io.HttpClientConnectionManager.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.http.common.HttpBinding.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.http.HttpClientConfigurer.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.http.common.HttpConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.http.protocol.HttpContext.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.hc.core5.http.protocol.HttpContext.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         answer.add(new ConvertiblePair(String.class, javax.net.ssl.HostnameVerifier.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.hc.core5.util.Timeout.class));
         return answer;
     }
 
@@ -64,15 +65,16 @@ public class HttpComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.apache.http.client.CookieStore": return applicationContext.getBean(ref, org.apache.http.client.CookieStore.class);
-            case "org.apache.http.conn.HttpClientConnectionManager": return applicationContext.getBean(ref, org.apache.http.conn.HttpClientConnectionManager.class);
+            case "org.apache.hc.client5.http.cookie.CookieStore": return applicationContext.getBean(ref, org.apache.hc.client5.http.cookie.CookieStore.class);
+            case "org.apache.hc.client5.http.io.HttpClientConnectionManager": return applicationContext.getBean(ref, org.apache.hc.client5.http.io.HttpClientConnectionManager.class);
             case "org.apache.camel.http.common.HttpBinding": return applicationContext.getBean(ref, org.apache.camel.http.common.HttpBinding.class);
             case "org.apache.camel.component.http.HttpClientConfigurer": return applicationContext.getBean(ref, org.apache.camel.component.http.HttpClientConfigurer.class);
             case "org.apache.camel.http.common.HttpConfiguration": return applicationContext.getBean(ref, org.apache.camel.http.common.HttpConfiguration.class);
-            case "org.apache.http.protocol.HttpContext": return applicationContext.getBean(ref, org.apache.http.protocol.HttpContext.class);
+            case "org.apache.hc.core5.http.protocol.HttpContext": return applicationContext.getBean(ref, org.apache.hc.core5.http.protocol.HttpContext.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
             case "javax.net.ssl.HostnameVerifier": return applicationContext.getBean(ref, javax.net.ssl.HostnameVerifier.class);
+            case "org.apache.hc.core5.util.Timeout": return applicationContext.getBean(ref, org.apache.hc.core5.util.Timeout.class);
         }
         return null;
     }

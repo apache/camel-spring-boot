@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
 @Conditional({ConditionalOnCamelContextAndAutoConfigurationBeans.class})
-@ConditionalOnProperty(prefix = "camel.metrics", name = "uriTagExpandValues", havingValue = "true")
+@ConditionalOnProperty(prefix = "camel.metrics", name = "uriTagEnabled", havingValue = "true")
 @AutoConfigureAfter({CamelAutoConfiguration.class})
 public class MicrometerTagsAutoConfiguration {
 
@@ -51,9 +51,6 @@ public class MicrometerTagsAutoConfiguration {
             @Override
             public Iterable<Tag> getTags(HttpServletRequest request, HttpServletResponse response,
                                          Object handler, Throwable exception) {
-
-                camelContext.getComponent("servlet");
-
                 String uri = request.getServletPath();
                 if (uri == null || uri.isEmpty()) {
                     uri = request.getPathInfo();
