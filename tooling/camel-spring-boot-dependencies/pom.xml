@@ -4039,6 +4039,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-tooling-maven</artifactId>
+        <version>3.21.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-tooling-model</artifactId>
         <version>3.21.0-SNAPSHOT</version>
       </dependency>
@@ -4295,6 +4300,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-zookeeper-master</artifactId>
+        <version>3.21.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>dummy-component</artifactId>
         <version>3.21.0-SNAPSHOT</version>
       </dependency>
       <dependency>
