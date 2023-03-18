@@ -20,22 +20,29 @@ import io.micrometer.core.instrument.Tag;
 import io.micrometer.core.instrument.Tags;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.metrics.web.servlet.DefaultWebMvcTagsProvider;
 import org.springframework.boot.actuate.metrics.web.servlet.WebMvcTagsProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
-@Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
+@Conditional({ConditionalOnCamelContextAndAutoConfigurationBeans.class})
+@ConditionalOnProperty(prefix = "camel.metrics", name = "uriTagExpandValues", havingValue = "true")
 @AutoConfigureAfter({CamelAutoConfiguration.class})
 public class MicrometerTagsAutoConfiguration {
 
+    @Autowired
+    CamelContext camelContext;
+
     /**
-     * To integrate with micrometer to include uri in tags when for example using
+     * To integrate with micrometer to include expanded uri in tags when for example using
      * camel rest-dsl with servlet.
      */
     @Bean
@@ -44,6 +51,9 @@ public class MicrometerTagsAutoConfiguration {
             @Override
             public Iterable<Tag> getTags(HttpServletRequest request, HttpServletResponse response,
                                          Object handler, Throwable exception) {
+
+                camelContext.getComponent("servlet");
+
                 String uri = request.getServletPath();
                 if (uri == null || uri.isEmpty()) {
                     uri = request.getPathInfo();
