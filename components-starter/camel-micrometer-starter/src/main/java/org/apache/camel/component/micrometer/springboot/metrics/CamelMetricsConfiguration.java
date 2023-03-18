@@ -22,6 +22,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class CamelMetricsConfiguration {
 
     /**
+     * Whether HTTP uri tags should be expanded or not. For example a REST service defined with
+     * base URL: /users/{id} will capture metrics with uri tag: /users/{id}.
+     *
+     * There can be some use-cases where you want to expand the URI tag to include the actual requested value instead,
+     * so the uri tag will be something like: /users/123
+     * However this can lead to many tags as the URI is dynamic, so use this with care.
+     */
+    private boolean uriTagExpandValues;
+
+    /**
      * Set whether to enable the MicrometerRoutePolicyFactory for capturing metrics
      * on route processing times.
      */
@@ -47,6 +57,14 @@ public class CamelMetricsConfiguration {
      * on the total number of routes and total number of routes running.
      */
     private boolean enableRouteEventNotifier = true;
+
+    public boolean isUriTagExpandValues() {
+        return uriTagExpandValues;
+    }
+
+    public void setUriTagExpandValues(boolean uriTagExpandValues) {
+        this.uriTagExpandValues = uriTagExpandValues;
+    }
 
     public boolean isEnableRoutePolicy() {
         return enableRoutePolicy;
