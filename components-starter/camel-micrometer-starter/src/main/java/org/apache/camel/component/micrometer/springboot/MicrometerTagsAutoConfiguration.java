@@ -23,6 +23,7 @@ import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigu
 import org.springframework.boot.actuate.metrics.web.servlet.DefaultWebMvcTagsProvider;
 import org.springframework.boot.actuate.metrics.web.servlet.WebMvcTagsProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
+@ConditionalOnProperty(prefix = "camel.metrics", name = "uriTagEnabled", havingValue = "true")
 @AutoConfigureAfter({CamelAutoConfiguration.class})
 public class MicrometerTagsAutoConfiguration {
 
