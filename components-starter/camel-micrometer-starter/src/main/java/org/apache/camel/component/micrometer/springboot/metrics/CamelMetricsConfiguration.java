@@ -22,14 +22,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class CamelMetricsConfiguration {
 
     /**
-     * Whether HTTP uri tags should be expanded or not. For example a REST service defined with
-     * base URL: /users/{id} will capture metrics with uri tag: /users/{id}.
-     *
-     * There can be some use-cases where you want to expand the URI tag to include the actual requested value instead,
-     * so the uri tag will be something like: /users/123
-     * However this can lead to many tags as the URI is dynamic, so use this with care.
+     * Whether HTTP uri tags should be enabled or not in captured metrics.
+     * If disabled then the uri tag, is likely not able to be resolved and will be marked as UNKNOWN.
      */
-    private boolean uriTagExpandValues;
+    private boolean uriTagEnabled = true;
+
+    /**
+     * Whether to use static or dynamic values for URI tags in captured metrics.
+     *
+     * When using dynamic tags, then a REST service with base URL: /users/{id} will capture metrics
+     * with uri tag with the actual dynamic value such as: /users/123.
+     * However, this can lead to many tags as the URI is dynamic, so use this with care.
+     */
+    private boolean uriTagDynamic;
 
     /**
      * Set whether to enable the MicrometerRoutePolicyFactory for capturing metrics
@@ -58,12 +63,12 @@ public class CamelMetricsConfiguration {
      */
     private boolean enableRouteEventNotifier = true;
 
-    public boolean isUriTagExpandValues() {
-        return uriTagExpandValues;
+    public boolean isUriTagDynamic() {
+        return uriTagDynamic;
     }
 
-    public void setUriTagExpandValues(boolean uriTagExpandValues) {
-        this.uriTagExpandValues = uriTagExpandValues;
+    public void setUriTagDynamic(boolean uriTagDynamic) {
+        this.uriTagDynamic = uriTagDynamic;
     }
 
     public boolean isEnableRoutePolicy() {

@@ -42,10 +42,23 @@ import org.springframework.context.annotation.Lazy;
 @EnableConfigurationProperties({ServletMappingConfiguration.class, MultipartProperties.class})
 public class ServletMappingAutoConfiguration {
 
+    /**
+     * Camel servlet
+     */
     @Bean
-    ServletRegistrationBean camelServletRegistrationBean(ServletMappingConfiguration config, MultipartProperties multipartProperties) {
+    CamelHttpTransportServlet camelHttpTransportServlet() {
+        CamelHttpTransportServlet servlet = new CamelHttpTransportServlet();
+        return servlet;
+    }
+
+    /**
+     * Spring Boot servlet registration with the Camel server
+     */
+    @Bean
+    ServletRegistrationBean camelServletRegistrationBean(CamelHttpTransportServlet servlet,
+                                                         ServletMappingConfiguration config, MultipartProperties multipartProperties) {
         ServletRegistrationBean mapping = new ServletRegistrationBean();
-        mapping.setServlet(new CamelHttpTransportServlet());
+        mapping.setServlet(servlet);
         mapping.addUrlMappings(config.getContextPath());
         mapping.setName(config.getServletName());
         mapping.setLoadOnStartup(1);
