@@ -78,11 +78,18 @@
       "defaultValue": true
     },
     {
-      "name": "camel.metrics.uri-tag-enabled",
+      "name": "camel.metrics.uri-tag-dynamic",
       "type": "java.lang.Boolean",
-      "description": "Whether HTTP uri tags should be enabled or not. For example a REST service defined with base URL: \/users\/{id} will capture metrics with uri tag with actual dynamic value such as: \/users\/123. However, this can lead to many tags as the URI is dynamic, so use this with care.",
+      "description": "Whether to use static or dynamic values for URI tags in captured metrics. When using dynamic tags, then a REST service with base URL: \/users\/{id} will capture metrics with uri tag with the actual dynamic value such as: \/users\/123. However, this can lead to many tags as the URI is dynamic, so use this with care.",
       "sourceType": "org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.metrics.uri-tag-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether HTTP uri tags should be enabled or not in captured metrics. If disabled then the uri tag, is likely not able to be resolved and will be marked as UNKNOWN.",
+      "sourceType": "org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration",
+      "defaultValue": true
     }
   ],
   "hints": []
