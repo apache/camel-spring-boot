@@ -18,6 +18,9 @@ package org.apache.camel.component.micrometer.springboot;
 
 import io.micrometer.core.instrument.Tag;
 import io.micrometer.core.instrument.Tags;
+import org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration;
+import org.apache.camel.http.common.CamelServlet;
+import org.apache.camel.http.common.HttpConsumer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
 import org.springframework.boot.actuate.metrics.web.servlet.DefaultWebMvcTagsProvider;
@@ -30,6 +33,7 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
@@ -42,19 +46,35 @@ public class MicrometerTagsAutoConfiguration {
      * camel rest-dsl with servlet.
      */
     @Bean
-    WebMvcTagsProvider webMvcTagsProvider() {
+    WebMvcTagsProvider webMvcTagsProvider(Optional<CamelServlet> servlet, CamelMetricsConfiguration configuration) {
         return new DefaultWebMvcTagsProvider() {
             @Override
             public Iterable<Tag> getTags(HttpServletRequest request, HttpServletResponse response,
                                          Object handler, Throwable exception) {
-                String uri = request.getServletPath();
-                if (uri == null || uri.isEmpty()) {
-                    uri = request.getPathInfo();
-                } else {
-                    String p = request.getPathInfo();
-                    if (p != null) {
-                        uri = uri + p;
+
+                String uri = null;
+                if (servlet.isPresent() && !configuration.isUriTagDynamic()) {
+                    HttpConsumer consumer = servlet.get().getServletResolveConsumerStrategy().resolve(request, servlet.get().getConsumers());
+                    if (consumer != null) {
+                        uri = consumer.getPath();
                     }
+                }
+
+                // the request may not be for camel servlet, so we need to capture uri from request
+                if (uri == null || uri.isEmpty()) {
+                    // dynamic uri with the actual value from the http request
+                    uri = request.getServletPath();
+                    if (uri == null || uri.isEmpty()) {
+                        uri = request.getPathInfo();
+                    } else {
+                        String p = request.getPathInfo();
+                        if (p != null) {
+                            uri = uri + p;
+                        }
+                    }
+                }
+                if (uri == null) {
+                    uri = "";
                 }
                 return Tags.concat(
                         super.getTags(request, response, handler, exception),
