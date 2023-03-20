@@ -68,8 +68,6 @@ import org.springframework.core.env.Environment;
 
 /**
  * {@link EnableAutoConfiguration Auto-configuration} for OpenTelemetry.
- *
- * @author Moritz Halbritter
  */
 @AutoConfiguration(before = MicrometerTracingAutoConfiguration.class)
 @ConditionalOnEnabledTracing

@@ -69,9 +69,6 @@ import org.springframework.core.env.Environment;
 
 /**
  * {@link EnableAutoConfiguration Auto-configuration} for Brave.
- *
- * @author Moritz Halbritter
- * @author Marcin Grzejszczak
  */
 @AutoConfiguration(before = MicrometerTracingAutoConfiguration.class)
 @ConditionalOnClass({ Tracer.class, BraveTracer.class })

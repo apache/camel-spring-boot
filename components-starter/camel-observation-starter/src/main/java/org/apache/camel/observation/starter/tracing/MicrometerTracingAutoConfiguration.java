@@ -34,8 +34,6 @@ import org.springframework.core.annotation.Order;
 
 /**
  * {@link EnableAutoConfiguration Auto-configuration} for the Micrometer Tracing API.
- *
- * @author Moritz Halbritter
  */
 @AutoConfiguration(before = ObservationAutoConfiguration.class)
 @ConditionalOnClass(Tracer.class)

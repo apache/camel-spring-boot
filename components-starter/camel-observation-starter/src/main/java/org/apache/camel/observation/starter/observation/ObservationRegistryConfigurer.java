@@ -27,9 +27,6 @@ import io.micrometer.observation.ObservationRegistry;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.util.LambdaSafe;
 
-/**
- * Taken from https://github.com/spring-projects/spring-boot/tree/v3.0.2/spring-boot-project/spring-boot-actuator-autoconfigure/src/main/java/org/springframework/boot/actuate/autoconfigure/observation.
- */
 class ObservationRegistryConfigurer {
 
 	private final ObjectProvider<ObservationRegistryCustomizer<?>> customizers;

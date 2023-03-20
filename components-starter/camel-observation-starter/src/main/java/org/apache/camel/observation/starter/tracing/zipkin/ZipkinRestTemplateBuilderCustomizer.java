@@ -20,9 +20,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 
 /**
  * Callback interface that can be implemented by beans wishing to customize the
- * {@link RestTemplateBuilder} used to send spans to Zipkin.
- *
- * @author Marcin Grzejszczak
+ * {@link RestTemplateBuilder} used to send spans to Zipkin.=
  */
 @FunctionalInterface
 public interface ZipkinRestTemplateBuilderCustomizer {

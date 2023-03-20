@@ -35,8 +35,6 @@ import org.springframework.util.function.SingletonSupplier;
 /**
  * {@link EnableAutoConfiguration Auto-configuration} for Prometheus Exemplars with
  * Micrometer Tracing.
- *
- * @author Jonatan Ivanov
  */
 @AutoConfiguration(before = PrometheusMetricsExportAutoConfiguration.class,
 		after = MicrometerTracingAutoConfiguration.class)

@@ -21,9 +21,7 @@ import java.time.Duration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Configuration properties for {@link ZipkinAutoConfiguration}.
- *
- * @author Moritz Halbritter
+ * Configuration properties for {@link ZipkinAutoConfiguration}.=
  */
 @ConfigurationProperties("management.zipkin.tracing")
 public class ZipkinProperties {

@@ -26,8 +26,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 /**
  * An {@link HttpSender} which uses {@link WebClient} for HTTP communication.
- *
- * @author Stefan Bratanov
  */
 class ZipkinWebClientSender extends HttpSender {
 

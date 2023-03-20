@@ -23,8 +23,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * Configuration properties for tracing.
- *
- * @author Moritz Halbritter
  */
 @ConfigurationProperties("management.tracing")
 public class TracingProperties {

@@ -18,9 +18,6 @@ package org.apache.camel.observation.starter.observation;
 
 import io.micrometer.observation.ObservationRegistry;
 
-/**
- * Taken from https://github.com/spring-projects/spring-boot/tree/v3.0.2/spring-boot-project/spring-boot-actuator-autoconfigure/src/main/java/org/springframework/boot/actuate/autoconfigure/observation.
- */
 @FunctionalInterface
 public interface ObservationRegistryCustomizer<T extends ObservationRegistry> {
 

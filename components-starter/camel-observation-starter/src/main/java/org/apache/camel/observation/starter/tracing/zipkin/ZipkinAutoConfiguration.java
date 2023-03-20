@@ -39,8 +39,6 @@ import org.springframework.context.annotation.Import;
  *
  * It uses imports on {@link ZipkinConfigurations} to guarantee the correct configuration
  * ordering.
- *
- * @author Moritz Halbritter
  */
 @AutoConfiguration(after = RestTemplateAutoConfiguration.class)
 @ConditionalOnClass(Sender.class)

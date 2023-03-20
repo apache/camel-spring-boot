@@ -38,10 +38,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 /**
- * Configurations for Zipkin. Those are imported by {@link ZipkinAutoConfiguration}.
- *
- * @author Moritz Halbritter
- * @author Stefan Bratanov
+ * Configurations for Zipkin. Those are imported by {@link ZipkinAutoConfiguration}.=
  */
 class ZipkinConfigurations {
 

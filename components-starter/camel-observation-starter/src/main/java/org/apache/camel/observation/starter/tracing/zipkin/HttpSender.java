@@ -36,9 +36,6 @@ import org.springframework.util.unit.DataSize;
 /**
  * A Zipkin {@link Sender} that uses an HTTP client to send JSON spans. Supports automatic
  * compression with gzip.
- *
- * @author Moritz Halbritter
- * @author Stefan Bratanov
  */
 abstract class HttpSender extends Sender {
 

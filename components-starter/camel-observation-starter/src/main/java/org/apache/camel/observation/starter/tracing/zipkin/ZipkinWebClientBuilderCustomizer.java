@@ -22,8 +22,6 @@ import org.springframework.web.reactive.function.client.WebClient.Builder;
 /**
  * Callback interface that can be implemented by beans wishing to customize the
  * {@link Builder} used to send spans to Zipkin.
- *
- * @author Marcin Grzejszczak
  */
 @FunctionalInterface
 public interface ZipkinWebClientBuilderCustomizer {
