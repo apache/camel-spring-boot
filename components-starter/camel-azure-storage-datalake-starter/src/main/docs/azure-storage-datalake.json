@@ -190,6 +190,18 @@
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
     },
     {
+      "name": "camel.component.azure-storage-datalake.sas-credential",
+      "type": "com.azure.core.credential.AzureSasCredential",
+      "description": "SAS token credential. The option is a com.azure.core.credential.AzureSasCredential type.",
+      "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-datalake.sas-signature",
+      "type": "java.lang.String",
+      "description": "SAS token signature",
+      "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
+    },
+    {
       "name": "camel.component.azure-storage-datalake.service-client",
       "type": "com.azure.storage.file.datalake.DataLakeServiceClient",
       "description": "datalake service client for azure storage datalake. The option is a com.azure.storage.file.datalake.DataLakeServiceClient type.",
@@ -217,6 +229,12 @@
       "name": "camel.component.azure-storage-datalake.umask",
       "type": "java.lang.String",
       "description": "umask permission for file",
+      "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-datalake.use-default-identity",
+      "type": "java.lang.Boolean",
+      "description": "Use default identity",
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
     },
     {

@@ -19,6 +19,7 @@ package org.apache.camel.component.azure.storage.datalake.springboot;
 import java.nio.file.OpenOption;
 import java.time.Duration;
 import java.util.Set;
+import com.azure.core.credential.AzureSasCredential;
 import com.azure.identity.ClientSecretCredential;
 import com.azure.storage.common.StorageSharedKeyCredential;
 import com.azure.storage.file.datalake.DataLakeServiceClient;
@@ -44,22 +45,9 @@ public class DataLakeComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * account key for authentication
-     */
-    private String accountKey;
-    /**
      * client id for azure account
      */
     private String clientId;
-    /**
-     * client secret for azure account
-     */
-    private String clientSecret;
-    /**
-     * client secret credential for authentication. The option is a
-     * com.azure.identity.ClientSecretCredential type.
-     */
-    private ClientSecretCredential clientSecretCredential;
     /**
      * Whether or not a file changed event raised indicates completion (true) or
      * modification (false)
@@ -199,14 +187,32 @@ public class DataLakeComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
-
-    public String getAccountKey() {
-        return accountKey;
-    }
-
-    public void setAccountKey(String accountKey) {
-        this.accountKey = accountKey;
-    }
+    /**
+     * account key for authentication
+     */
+    private String accountKey;
+    /**
+     * client secret for azure account
+     */
+    private String clientSecret;
+    /**
+     * client secret credential for authentication. The option is a
+     * com.azure.identity.ClientSecretCredential type.
+     */
+    private ClientSecretCredential clientSecretCredential;
+    /**
+     * SAS token credential. The option is a
+     * com.azure.core.credential.AzureSasCredential type.
+     */
+    private AzureSasCredential sasCredential;
+    /**
+     * SAS token signature
+     */
+    private String sasSignature;
+    /**
+     * Use default identity
+     */
+    private Boolean useDefaultIdentity;
 
     public String getClientId() {
         return clientId;
@@ -214,23 +220,6 @@ public class DataLakeComponentConfiguration
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
-    }
-
-    public String getClientSecret() {
-        return clientSecret;
-    }
-
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
-    }
-
-    public ClientSecretCredential getClientSecretCredential() {
-        return clientSecretCredential;
-    }
-
-    public void setClientSecretCredential(
-            ClientSecretCredential clientSecretCredential) {
-        this.clientSecretCredential = clientSecretCredential;
     }
 
     public Boolean getClose() {
@@ -464,5 +453,54 @@ public class DataLakeComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getAccountKey() {
+        return accountKey;
+    }
+
+    public void setAccountKey(String accountKey) {
+        this.accountKey = accountKey;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
+    public ClientSecretCredential getClientSecretCredential() {
+        return clientSecretCredential;
+    }
+
+    public void setClientSecretCredential(
+            ClientSecretCredential clientSecretCredential) {
+        this.clientSecretCredential = clientSecretCredential;
+    }
+
+    public AzureSasCredential getSasCredential() {
+        return sasCredential;
+    }
+
+    public void setSasCredential(AzureSasCredential sasCredential) {
+        this.sasCredential = sasCredential;
+    }
+
+    public String getSasSignature() {
+        return sasSignature;
+    }
+
+    public void setSasSignature(String sasSignature) {
+        this.sasSignature = sasSignature;
+    }
+
+    public Boolean getUseDefaultIdentity() {
+        return useDefaultIdentity;
+    }
+
+    public void setUseDefaultIdentity(Boolean useDefaultIdentity) {
+        this.useDefaultIdentity = useDefaultIdentity;
     }
 }
