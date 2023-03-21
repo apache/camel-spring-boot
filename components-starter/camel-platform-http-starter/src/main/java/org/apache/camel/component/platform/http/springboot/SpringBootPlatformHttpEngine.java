@@ -20,29 +20,12 @@ import org.apache.camel.Consumer;
 import org.apache.camel.Processor;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
 import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
-import org.apache.camel.component.servlet.ServletComponent;
-import org.apache.camel.component.servlet.ServletConsumer;
-import org.apache.camel.component.servlet.ServletEndpoint;
 
-public class ServletPlatformHttpEngine implements PlatformHttpEngine {
+public class SpringBootPlatformHttpEngine implements PlatformHttpEngine {
 
-	private final ServletComponent servletComponent;
+    @Override
+    public Consumer createConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
+        return new SpringBootPlatformHttpConsumer(endpoint, processor);
+    }
 
-	public ServletPlatformHttpEngine(ServletComponent servletComponent) {
-		this.servletComponent = servletComponent;
-	}
-
-	@Override
-	public Consumer createConsumer(PlatformHttpEndpoint platformHttpEndpoint, Processor processor) {
-		try {
-			return new ServletConsumer((ServletEndpoint) servletComponent.createEndpoint(platformHttpEndpoint.getEndpointUri()), processor);
-		} catch (Exception e) {
-			throw new IllegalArgumentException("The following  endpoint uri " + platformHttpEndpoint.getEndpointUri() + " is not supported", e);
-		}
-	}
-
-	@Override
-	public int getServerPort() {
-		return PlatformHttpEngine.super.getServerPort();
-	}
 }

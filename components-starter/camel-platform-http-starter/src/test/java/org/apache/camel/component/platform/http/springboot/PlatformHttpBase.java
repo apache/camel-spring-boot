@@ -22,7 +22,7 @@ import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
-public class ServletPlatformHttpBase {
+public class PlatformHttpBase {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
@@ -30,14 +30,14 @@ public class ServletPlatformHttpBase {
 	@Test
 	public void testGet() {
 		Assertions.assertThat(
-						restTemplate.getForEntity("/camel/get", String.class).getStatusCodeValue())
+						restTemplate.getForEntity("/myget", String.class).getStatusCodeValue())
 				.isEqualTo(200);
 	}
 
 	@Test
 	public void testPost() {
 		Assertions.assertThat(
-						restTemplate.postForEntity("/camel/post", "test", String.class).getBody())
+						restTemplate.postForEntity("/mypost", "test", String.class).getBody())
 				.isEqualTo("TEST");
 	}
 }
