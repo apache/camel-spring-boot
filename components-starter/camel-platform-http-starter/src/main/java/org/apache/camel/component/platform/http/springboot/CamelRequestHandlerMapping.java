@@ -32,15 +32,12 @@ import org.springframework.web.util.ServletRequestPathUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping implements PlatformHttpListener {
 
     private final PlatformHttpComponent component;
     private final PlatformHttpEngine engine;
-    private final Map<String, RequestMappingInfo> mappings = new HashMap<>();
 
     public CamelRequestHandlerMapping(PlatformHttpComponent component, PlatformHttpEngine engine) {
         this.component = component;
