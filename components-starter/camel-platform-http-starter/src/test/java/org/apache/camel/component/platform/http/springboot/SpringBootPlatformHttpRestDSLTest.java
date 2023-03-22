@@ -17,8 +17,6 @@
 package org.apache.camel.component.platform.http.springboot;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.servlet.springboot.ServletComponentAutoConfiguration;
-import org.apache.camel.component.servlet.springboot.ServletMappingAutoConfiguration;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
@@ -35,14 +33,13 @@ import org.springframework.test.annotation.DirtiesContext;
 		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
 		classes = {
 				CamelAutoConfiguration.class,
-				ServletPlatformHttpRestDSLTest.class,
-				ServletPlatformHttpRestDSLTest.TestConfiguration.class,
-				ServletPlatformHttpAutoConfiguration.class,
-				ServletComponentAutoConfiguration.class,
-				ServletMappingAutoConfiguration.class
+				SpringBootPlatformHttpRestDSLTest.class,
+				SpringBootPlatformHttpRestDSLTest.TestConfiguration.class,
+				PlatformHttpComponentAutoConfiguration.class,
+				SpringBootPlatformHttpAutoConfiguration.class,
 		}
 )
-public class ServletPlatformHttpRestDSLTest extends ServletPlatformHttpBase {
+public class SpringBootPlatformHttpRestDSLTest extends PlatformHttpBase {
 
 	// *************************************
 	// Config
@@ -51,13 +48,13 @@ public class ServletPlatformHttpRestDSLTest extends ServletPlatformHttpBase {
 	public static class TestConfiguration {
 
 		@Bean
-		public RouteBuilder servletPlatformHttpRestDSLRouteBuilder() {
+		public RouteBuilder springBootPlatformHttpRestDSLRouteBuilder() {
 			return new RouteBuilder() {
 				@Override
 				public void configure() throws Exception {
 					rest()
-							.get("get").to("direct:get")
-							.post("post").to("direct:post");
+							.get("myget").to("direct:get")
+							.post("mypost").to("direct:post");
 
 					from("direct:post").transform().body(String.class, b -> b.toUpperCase());
 					from("direct:get").setBody().constant("get");

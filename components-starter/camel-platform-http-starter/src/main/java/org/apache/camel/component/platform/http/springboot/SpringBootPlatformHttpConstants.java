@@ -16,16 +16,10 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
-import org.apache.camel.Consumer;
-import org.apache.camel.Processor;
-import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
-import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
+public final class SpringBootPlatformHttpConstants {
 
+    public static final String CONTEXT_PATH = "CamelPlatformHttpContextPath";
 
-public class JettyCustomPlatformHttpEngine implements PlatformHttpEngine {
-
-    @Override
-    public Consumer createConsumer(PlatformHttpEndpoint platformHttpEndpoint, Processor processor) {
-        return new JettyCustomPlatformHttpConsumer(platformHttpEndpoint, processor);
+    private SpringBootPlatformHttpConstants() {
     }
 }

@@ -17,34 +17,36 @@
 package org.apache.camel.component.platform.http.springboot;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.component.platform.http.PlatformHttpComponent;
 import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
-import org.apache.camel.component.servlet.ServletComponent;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.Lazy;
 
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(name = {
-		"org.apache.camel.component.servlet.springboot.ServletComponentAutoConfiguration",
-		"org.apache.camel.component.servlet.springboot.ServletComponentConverter"})
-public class ServletPlatformHttpAutoConfiguration {
+        "org.apache.camel.component.servlet.springboot.PlatformHttpComponentAutoConfiguration",
+        "org.apache.camel.component.servlet.springboot.PlatformHttpComponentConverter"})
+public class SpringBootPlatformHttpAutoConfiguration {
 
-	private final CamelContext camelContext;
+    @Autowired
+    CamelContext camelContext;
 
-	public ServletPlatformHttpAutoConfiguration(
-			CamelContext camelContext) {
-		this.camelContext = camelContext;
-	}
+    @Bean(name = "platform-http-engine")
+    @ConditionalOnMissingBean(PlatformHttpEngine.class)
+    public PlatformHttpEngine springBootPlatformHttpEngine() {
+        return new SpringBootPlatformHttpEngine();
+    }
 
-	@Lazy
-	@Bean(name = "platform-http-engine")
-	@ConditionalOnMissingBean(PlatformHttpEngine.class)
-	@DependsOn("configureServletComponent")
-	public PlatformHttpEngine servletPlatformHttpEngine() {
-		return new ServletPlatformHttpEngine(camelContext.getComponent("servlet", ServletComponent.class));
-	}
+    @Bean
+	@DependsOn("configurePlatformHttpComponent")
+    public CamelRequestHandlerMapping platformHttpEngineRequestMapping(PlatformHttpEngine engine) {
+        PlatformHttpComponent component = camelContext.getComponent("platform-http", PlatformHttpComponent.class);
+        CamelRequestHandlerMapping answer = new CamelRequestHandlerMapping(component, engine);
+        return answer;
+    }
+
 }
