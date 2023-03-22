@@ -63,6 +63,11 @@ public class Sqs2ComponentConfiguration
      */
     private Boolean overrideEndpoint = false;
     /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
+    /**
      * The underlying protocol used to communicate with SQS
      */
     private String protocol = "https";
@@ -95,6 +100,11 @@ public class Sqs2ComponentConfiguration
      * infra instance or to expect static credentials to be passed in.
      */
     private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the SQS client should expect to load credentials through a
+     * profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
     /**
      * A list of attribute names to receive when consuming. Multiple names can
      * be separated by comma.
@@ -321,6 +331,14 @@ public class Sqs2ComponentConfiguration
         this.overrideEndpoint = overrideEndpoint;
     }
 
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
     public String getProtocol() {
         return protocol;
     }
@@ -376,6 +394,15 @@ public class Sqs2ComponentConfiguration
     public void setUseDefaultCredentialsProvider(
             Boolean useDefaultCredentialsProvider) {
         this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
+    }
+
+    public Boolean getUseProfileCredentialsProvider() {
+        return useProfileCredentialsProvider;
+    }
+
+    public void setUseProfileCredentialsProvider(
+            Boolean useProfileCredentialsProvider) {
+        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
     }
 
     public String getAttributeNames() {
