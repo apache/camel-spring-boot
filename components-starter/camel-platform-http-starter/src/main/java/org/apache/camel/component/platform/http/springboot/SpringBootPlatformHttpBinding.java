@@ -16,11 +16,12 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.apache.camel.Message;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
 import org.apache.camel.http.base.HttpHelper;
 import org.apache.camel.http.common.DefaultHttpBinding;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
 

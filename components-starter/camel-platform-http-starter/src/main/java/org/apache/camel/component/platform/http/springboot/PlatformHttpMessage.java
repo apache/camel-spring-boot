@@ -16,14 +16,14 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.apache.camel.Exchange;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.http.common.HttpBinding;
 import org.apache.camel.support.DefaultMessage;
 import org.apache.camel.util.ObjectHelper;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class PlatformHttpMessage extends DefaultMessage {
