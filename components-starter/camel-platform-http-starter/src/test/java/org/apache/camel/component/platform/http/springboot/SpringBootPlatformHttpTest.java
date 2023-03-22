@@ -17,8 +17,6 @@
 package org.apache.camel.component.platform.http.springboot;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.servlet.springboot.ServletComponentAutoConfiguration;
-import org.apache.camel.component.servlet.springboot.ServletMappingAutoConfiguration;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
@@ -35,14 +33,13 @@ import org.springframework.test.annotation.DirtiesContext;
 		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
 		classes = {
 				CamelAutoConfiguration.class,
-				ServletPlatformHttpTest.class,
-				ServletPlatformHttpTest.TestConfiguration.class,
-				ServletPlatformHttpAutoConfiguration.class,
-				ServletComponentAutoConfiguration.class,
-				ServletMappingAutoConfiguration.class
+				SpringBootPlatformHttpTest.class,
+				SpringBootPlatformHttpTest.TestConfiguration.class,
+				PlatformHttpComponentAutoConfiguration.class,
+				SpringBootPlatformHttpAutoConfiguration.class
 		}
 )
-public class ServletPlatformHttpTest extends ServletPlatformHttpBase {
+public class SpringBootPlatformHttpTest extends PlatformHttpBase {
 
 	// *************************************
 	// Config
@@ -55,9 +52,9 @@ public class ServletPlatformHttpTest extends ServletPlatformHttpBase {
 			return new RouteBuilder() {
 				@Override
 				public void configure() throws Exception {
-					from("platform-http:/get")
+					from("platform-http:/myget")
 							.setBody().constant("get");
-					from("platform-http:/post")
+					from("platform-http:/mypost")
 							.transform().body(String.class, b -> b.toUpperCase());
 				}
 			};
