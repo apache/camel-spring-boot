@@ -43,7 +43,6 @@ public class JettyHttpComponentConverter11 implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.eclipse.jetty.server.handler.ErrorHandler.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.http.common.HttpBinding.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.http.common.HttpConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jetty.JettyHttpBinding.class));
         answer.add(new ConvertiblePair(String.class, org.eclipse.jetty.jmx.MBeanContainer.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
@@ -67,7 +66,6 @@ public class JettyHttpComponentConverter11 implements GenericConverter {
             case "org.eclipse.jetty.server.handler.ErrorHandler": return applicationContext.getBean(ref, org.eclipse.jetty.server.handler.ErrorHandler.class);
             case "org.apache.camel.http.common.HttpBinding": return applicationContext.getBean(ref, org.apache.camel.http.common.HttpBinding.class);
             case "org.apache.camel.http.common.HttpConfiguration": return applicationContext.getBean(ref, org.apache.camel.http.common.HttpConfiguration.class);
-            case "org.apache.camel.component.jetty.JettyHttpBinding": return applicationContext.getBean(ref, org.apache.camel.component.jetty.JettyHttpBinding.class);
             case "org.eclipse.jetty.jmx.MBeanContainer": return applicationContext.getBean(ref, org.eclipse.jetty.jmx.MBeanContainer.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
