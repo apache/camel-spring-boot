@@ -17,7 +17,6 @@
 package org.apache.camel.component.jetty11.springboot;
 
 import java.util.Map;
-import org.apache.camel.component.jetty.JettyHttpBinding;
 import org.apache.camel.http.common.HttpBinding;
 import org.apache.camel.http.common.HttpConfiguration;
 import org.apache.camel.spi.HeaderFilterStrategy;
@@ -154,12 +153,6 @@ public class JettyHttpComponentConfiguration11
      * org.apache.camel.http.common.HttpConfiguration type.
      */
     private HttpConfiguration httpConfiguration;
-    /**
-     * To use a custom org.apache.camel.component.jetty.JettyHttpBinding, which
-     * are used to customize how a response should be written for the producer.
-     * The option is a org.apache.camel.component.jetty.JettyHttpBinding type.
-     */
-    private JettyHttpBinding jettyHttpBinding;
     /**
      * To use a existing configured org.eclipse.jetty.jmx.MBeanContainer if JMX
      * is enabled that Jetty uses for registering mbeans. The option is a
@@ -375,14 +368,6 @@ public class JettyHttpComponentConfiguration11
 
     public void setHttpConfiguration(HttpConfiguration httpConfiguration) {
         this.httpConfiguration = httpConfiguration;
-    }
-
-    public JettyHttpBinding getJettyHttpBinding() {
-        return jettyHttpBinding;
-    }
-
-    public void setJettyHttpBinding(JettyHttpBinding jettyHttpBinding) {
-        this.jettyHttpBinding = jettyHttpBinding;
     }
 
     public MBeanContainer getMbContainer() {

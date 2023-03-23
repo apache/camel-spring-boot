@@ -84,12 +84,6 @@
       "sourceType": "org.apache.camel.component.jetty11.springboot.JettyHttpComponentConfiguration11"
     },
     {
-      "name": "camel.component.jetty.jetty-http-binding",
-      "type": "org.apache.camel.component.jetty.JettyHttpBinding",
-      "description": "To use a custom org.apache.camel.component.jetty.JettyHttpBinding, which are used to customize how a response should be written for the producer. The option is a org.apache.camel.component.jetty.JettyHttpBinding type.",
-      "sourceType": "org.apache.camel.component.jetty11.springboot.JettyHttpComponentConfiguration11"
-    },
-    {
       "name": "camel.component.jetty.keystore",
       "type": "java.lang.String",
       "description": "Specifies the location of the Java keystore file, which contains the Jetty server's own X.509 certificate in a key entry.",
