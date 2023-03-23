@@ -17,3 +17,4 @@
 
 org.apache.camel.component.mapstruct.springboot.MapstructComponentConverter
 org.apache.camel.component.mapstruct.springboot.MapstructComponentAutoConfiguration
+org.apache.camel.component.mapstruct.springboot.MapstructMappingAutoConfiguration
