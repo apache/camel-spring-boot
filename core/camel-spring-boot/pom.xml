@@ -78,15 +78,6 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-util-json</artifactId>
         </dependency>
-        <!-- requires xml routes loader that is jaxb based -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-xml-jaxb-dsl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-spring-xml</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-cloud</artifactId>
@@ -114,6 +105,16 @@
         </dependency>
 
         <!-- Testing dependencies -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-xml</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-xml-jaxb-dsl</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-test-spring-junit5</artifactId>
