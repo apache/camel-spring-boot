@@ -44,7 +44,7 @@
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-spring-boot</artifactId>
             <exclusions>
-                <!-- we want to use jaxb xml based routes loader -->
+                <!-- we want to use jaxb xml based routes loader that works with Spring XML <beans> files -->
                 <exclusion>
                     <groupId>org.apache.camel</groupId>
                     <artifactId>camel-xml-io</artifactId>
