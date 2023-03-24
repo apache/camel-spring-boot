@@ -33,6 +33,20 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.vertx-websocket.default-host",
+      "type": "java.lang.String",
+      "description": "Default value for host name that the WebSocket should bind to",
+      "sourceType": "org.apache.camel.component.vertx.websocket.springboot.VertxWebsocketComponentConfiguration",
+      "defaultValue": "0.0.0.0"
+    },
+    {
+      "name": "camel.component.vertx-websocket.default-port",
+      "type": "java.lang.Integer",
+      "description": "Default value for the port that the WebSocket should bind to",
+      "sourceType": "org.apache.camel.component.vertx.websocket.springboot.VertxWebsocketComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.vertx-websocket.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the vertx-websocket component. This is enabled by default.",

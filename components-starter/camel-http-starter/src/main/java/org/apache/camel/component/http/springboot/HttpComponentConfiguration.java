@@ -262,11 +262,6 @@ public class HttpComponentConfiguration
      */
     private Timeout responseTimeout;
     /**
-     * Determines the default socket timeout value for I/O operations. The
-     * option is a org.apache.hc.core5.util.Timeout type.
-     */
-    private Timeout socketTimeout;
-    /**
      * Determines the default socket timeout value for blocking I/O operations.
      * The option is a org.apache.hc.core5.util.Timeout type.
      */
@@ -588,14 +583,6 @@ public class HttpComponentConfiguration
 
     public void setResponseTimeout(Timeout responseTimeout) {
         this.responseTimeout = responseTimeout;
-    }
-
-    public Timeout getSocketTimeout() {
-        return socketTimeout;
-    }
-
-    public void setSocketTimeout(Timeout socketTimeout) {
-        this.socketTimeout = socketTimeout;
     }
 
     public Timeout getSoTimeout() {

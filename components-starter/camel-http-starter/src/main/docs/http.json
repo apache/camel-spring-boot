@@ -264,12 +264,6 @@
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
-      "name": "camel.component.http.socket-timeout",
-      "type": "org.apache.hc.core5.util.Timeout",
-      "description": "Determines the default socket timeout value for I\/O operations. The option is a org.apache.hc.core5.util.Timeout type.",
-      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
-    },
-    {
       "name": "camel.component.http.ssl-context-parameters",
       "type": "org.apache.camel.support.jsse.SSLContextParameters",
       "description": "To configure security using SSLContextParameters. Important: Only one instance of org.apache.camel.support.jsse.SSLContextParameters is supported per HttpComponent. If you need to use 2 or more different instances, you need to define a new HttpComponent per instance you need. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
