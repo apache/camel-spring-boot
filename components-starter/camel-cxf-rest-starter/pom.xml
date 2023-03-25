@@ -35,7 +35,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-cxf-rest</artifactId>
+      <artifactId>camel-cxf-spring-rest</artifactId>
       <version>${camel-version}</version>
     </dependency>
     <!--START OF GENERATED CODE-->
