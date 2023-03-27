@@ -1,0 +1,125 @@
+{
+  "groups": [
+    {
+      "name": "camel.observation",
+      "type": "org.apache.camel.observation.starter.ObservationConfigurationProperties",
+      "sourceType": "org.apache.camel.observation.starter.ObservationConfigurationProperties"
+    },
+    {
+      "name": "management.tracing",
+      "type": "org.apache.camel.observation.starter.tracing.TracingProperties",
+      "sourceType": "org.apache.camel.observation.starter.tracing.TracingProperties"
+    },
+    {
+      "name": "management.tracing.baggage",
+      "type": "org.apache.camel.observation.starter.tracing.TracingProperties$Baggage",
+      "sourceType": "org.apache.camel.observation.starter.tracing.TracingProperties",
+      "sourceMethod": "getBaggage()"
+    },
+    {
+      "name": "management.tracing.baggage.correlation",
+      "type": "org.apache.camel.observation.starter.tracing.TracingProperties$Baggage$Correlation",
+      "sourceType": "org.apache.camel.observation.starter.tracing.TracingProperties$Baggage",
+      "sourceMethod": "getCorrelation()"
+    },
+    {
+      "name": "management.tracing.propagation",
+      "type": "org.apache.camel.observation.starter.tracing.TracingProperties$Propagation",
+      "sourceType": "org.apache.camel.observation.starter.tracing.TracingProperties",
+      "sourceMethod": "getPropagation()"
+    },
+    {
+      "name": "management.tracing.sampling",
+      "type": "org.apache.camel.observation.starter.tracing.TracingProperties$Sampling",
+      "sourceType": "org.apache.camel.observation.starter.tracing.TracingProperties",
+      "sourceMethod": "getSampling()"
+    },
+    {
+      "name": "management.zipkin.tracing",
+      "type": "org.apache.camel.observation.starter.tracing.zipkin.ZipkinProperties",
+      "sourceType": "org.apache.camel.observation.starter.tracing.zipkin.ZipkinProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.observation.encoding",
+      "type": "java.lang.Boolean",
+      "description": "Activate or deactivate dash encoding in headers (required by JMS) for messaging",
+      "sourceType": "org.apache.camel.observation.starter.ObservationConfigurationProperties"
+    },
+    {
+      "name": "camel.observation.exclude-patterns",
+      "type": "java.util.Set<java.lang.String>",
+      "description": "Sets exclude pattern(s) that will disable observability for Camel messages that matches the pattern.",
+      "sourceType": "org.apache.camel.observation.starter.ObservationConfigurationProperties"
+    },
+    {
+      "name": "management.tracing.baggage.correlation.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable correlation of the baggage context with logging contexts.",
+      "sourceType": "org.apache.camel.observation.starter.tracing.TracingProperties$Baggage$Correlation",
+      "defaultValue": true
+    },
+    {
+      "name": "management.tracing.baggage.correlation.fields",
+      "type": "java.util.List<java.lang.String>",
+      "description": "List of fields that should be correlated with the logging context. That means that these fields would end up as key-value pairs in e.g. MDC.",
+      "sourceType": "org.apache.camel.observation.starter.tracing.TracingProperties$Baggage$Correlation"
+    },
+    {
+      "name": "management.tracing.baggage.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable Micrometer Tracing baggage propagation.",
+      "sourceType": "org.apache.camel.observation.starter.tracing.TracingProperties$Baggage",
+      "defaultValue": true
+    },
+    {
+      "name": "management.tracing.baggage.remote-fields",
+      "type": "java.util.List<java.lang.String>",
+      "description": "List of fields that are referenced the same in-process as it is on the wire. For example, the field \"x-vcap-request-id\" would be set as-is including the prefix.",
+      "sourceType": "org.apache.camel.observation.starter.tracing.TracingProperties$Baggage"
+    },
+    {
+      "name": "management.tracing.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether auto-configuration of tracing is enabled.",
+      "sourceType": "org.apache.camel.observation.starter.tracing.TracingProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "management.tracing.propagation.type",
+      "type": "org.apache.camel.observation.starter.tracing.TracingProperties$Propagation$PropagationType",
+      "description": "Tracing context propagation type.",
+      "sourceType": "org.apache.camel.observation.starter.tracing.TracingProperties$Propagation"
+    },
+    {
+      "name": "management.tracing.sampling.probability",
+      "type": "java.lang.Float",
+      "description": "Probability in the range from 0.0 to 1.0 that a trace will be sampled.",
+      "sourceType": "org.apache.camel.observation.starter.tracing.TracingProperties$Sampling",
+      "defaultValue": 0.1
+    },
+    {
+      "name": "management.zipkin.tracing.connect-timeout",
+      "type": "java.time.Duration",
+      "description": "Connection timeout for requests to Zipkin.",
+      "sourceType": "org.apache.camel.observation.starter.tracing.zipkin.ZipkinProperties",
+      "defaultValue": "1s"
+    },
+    {
+      "name": "management.zipkin.tracing.endpoint",
+      "type": "java.lang.String",
+      "description": "URL to the Zipkin API.",
+      "sourceType": "org.apache.camel.observation.starter.tracing.zipkin.ZipkinProperties",
+      "defaultValue": "http:\/\/localhost:9411\/api\/v2\/spans"
+    },
+    {
+      "name": "management.zipkin.tracing.read-timeout",
+      "type": "java.time.Duration",
+      "description": "Read timeout for requests to Zipkin.",
+      "sourceType": "org.apache.camel.observation.starter.tracing.zipkin.ZipkinProperties",
+      "defaultValue": "10s"
+    }
+  ],
+  "hints": []
+}
