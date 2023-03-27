@@ -70,6 +70,14 @@ public class VertxWebsocketComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Default value for host name that the WebSocket should bind to
+     */
+    private String defaultHost = "0.0.0.0";
+    /**
+     * Default value for the port that the WebSocket should bind to
+     */
+    private Integer defaultPort = 0;
+    /**
      * To provide a custom vertx router to use on the WebSocket server. The
      * option is a io.vertx.ext.web.Router type.
      */
@@ -111,6 +119,22 @@ public class VertxWebsocketComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getDefaultHost() {
+        return defaultHost;
+    }
+
+    public void setDefaultHost(String defaultHost) {
+        this.defaultHost = defaultHost;
+    }
+
+    public Integer getDefaultPort() {
+        return defaultPort;
+    }
+
+    public void setDefaultPort(Integer defaultPort) {
+        this.defaultPort = defaultPort;
     }
 
     public Router getRouter() {
