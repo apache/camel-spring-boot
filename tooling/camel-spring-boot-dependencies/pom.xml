@@ -1172,6 +1172,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-observation-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ognl-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3105,6 +3110,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-oaipmh</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-observation</artifactId>
         <version>4.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>

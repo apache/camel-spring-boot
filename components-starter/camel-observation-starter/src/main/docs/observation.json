@@ -1,0 +1,24 @@
+{
+  "groups": [
+    {
+      "name": "camel.observation",
+      "type": "org.apache.camel.observation.starter.ObservationConfigurationProperties",
+      "sourceType": "org.apache.camel.observation.starter.ObservationConfigurationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.observation.encoding",
+      "type": "java.lang.Boolean",
+      "description": "Activate or deactivate dash encoding in headers (required by JMS) for messaging",
+      "sourceType": "org.apache.camel.observation.starter.ObservationConfigurationProperties"
+    },
+    {
+      "name": "camel.observation.exclude-patterns",
+      "type": "java.util.Set<java.lang.String>",
+      "description": "Sets exclude pattern(s) that will disable observability for Camel messages that matches the pattern.",
+      "sourceType": "org.apache.camel.observation.starter.ObservationConfigurationProperties"
+    }
+  ],
+  "hints": []
+}
