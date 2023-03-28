@@ -19,8 +19,10 @@ package org.apache.camel.component.salesforce.springboot;
 import java.util.Map;
 import java.util.Set;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.salesforce.eventbus.protobuf.ReplayPreset;
 import org.apache.camel.component.salesforce.AuthenticationType;
 import org.apache.camel.component.salesforce.NotFoundBehaviour;
+import org.apache.camel.component.salesforce.PubSubDeserializeType;
 import org.apache.camel.component.salesforce.SalesforceComponent;
 import org.apache.camel.component.salesforce.SalesforceEndpointConfig;
 import org.apache.camel.component.salesforce.SalesforceHttpClient;
@@ -336,6 +338,23 @@ public class SalesforceComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Max number of events to receive in a batch from the Pub/Sub API.
+     */
+    private Integer pubSubBatchSize = 100;
+    /**
+     * How to deserialize events consume from the Pub/Sub API. AVRO will try a
+     * SpecificRecord subclass if found, otherwise GenericRecord.
+     */
+    private PubSubDeserializeType pubSubDeserializeType = PubSubDeserializeType.AVRO;
+    /**
+     * Fully qualified class name to deserialize Pub/Sub API event to.
+     */
+    private String pubSubPojoClass;
+    /**
+     * Replay preset for Pub/Sub API.
+     */
+    private ReplayPreset replayPreset = ReplayPreset.LATEST;
+    /**
      * Composite API option to indicate to rollback all records if any are not
      * successful.
      */
@@ -498,6 +517,14 @@ public class SalesforceComponentConfiguration
      * security token to the end of the password if using one.
      */
     private String password;
+    /**
+     * Pub/Sub host
+     */
+    private String pubSubHost = "api.pubsub.salesforce.com";
+    /**
+     * Pub/Sub port
+     */
+    private Integer pubSubPort = 7443;
     /**
      * Refresh token already obtained in the refresh token OAuth flow. One needs
      * to setup a web application and configure a callback URL to receive the
@@ -992,6 +1019,39 @@ public class SalesforceComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
+    public Integer getPubSubBatchSize() {
+        return pubSubBatchSize;
+    }
+
+    public void setPubSubBatchSize(Integer pubSubBatchSize) {
+        this.pubSubBatchSize = pubSubBatchSize;
+    }
+
+    public PubSubDeserializeType getPubSubDeserializeType() {
+        return pubSubDeserializeType;
+    }
+
+    public void setPubSubDeserializeType(
+            PubSubDeserializeType pubSubDeserializeType) {
+        this.pubSubDeserializeType = pubSubDeserializeType;
+    }
+
+    public String getPubSubPojoClass() {
+        return pubSubPojoClass;
+    }
+
+    public void setPubSubPojoClass(String pubSubPojoClass) {
+        this.pubSubPojoClass = pubSubPojoClass;
+    }
+
+    public ReplayPreset getReplayPreset() {
+        return replayPreset;
+    }
+
+    public void setReplayPreset(ReplayPreset replayPreset) {
+        this.replayPreset = replayPreset;
+    }
+
     public Boolean getAllOrNone() {
         return allOrNone;
     }
@@ -1232,6 +1292,22 @@ public class SalesforceComponentConfiguration
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPubSubHost() {
+        return pubSubHost;
+    }
+
+    public void setPubSubHost(String pubSubHost) {
+        this.pubSubHost = pubSubHost;
+    }
+
+    public Integer getPubSubPort() {
+        return pubSubPort;
+    }
+
+    public void setPubSubPort(Integer pubSubPort) {
+        this.pubSubPort = pubSubPort;
     }
 
     public String getRefreshToken() {
