@@ -439,6 +439,39 @@
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
+      "name": "camel.component.salesforce.pub-sub-batch-size",
+      "type": "java.lang.Integer",
+      "description": "Max number of events to receive in a batch from the Pub\/Sub API.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": 100
+    },
+    {
+      "name": "camel.component.salesforce.pub-sub-deserialize-type",
+      "type": "org.apache.camel.component.salesforce.PubSubDeserializeType",
+      "description": "How to deserialize events consume from the Pub\/Sub API. AVRO will try a SpecificRecord subclass if found, otherwise GenericRecord.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.salesforce.pub-sub-host",
+      "type": "java.lang.String",
+      "description": "Pub\/Sub host",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": "api.pubsub.salesforce.com"
+    },
+    {
+      "name": "camel.component.salesforce.pub-sub-pojo-class",
+      "type": "java.lang.String",
+      "description": "Fully qualified class name to deserialize Pub\/Sub API event to.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.salesforce.pub-sub-port",
+      "type": "java.lang.Integer",
+      "description": "Pub\/Sub port",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": 7443
+    },
+    {
       "name": "camel.component.salesforce.query-locator",
       "type": "java.lang.String",
       "description": "Query Locator provided by salesforce for use when a query results in more records than can be retrieved in a single call. Use this value in a subsequent call to retrieve additional records.",
@@ -479,6 +512,12 @@
       "name": "camel.component.salesforce.refresh-token",
       "type": "java.lang.String",
       "description": "Refresh token already obtained in the refresh token OAuth flow. One needs to setup a web application and configure a callback URL to receive the refresh token, or configure using the builtin callback at https:\/\/login.salesforce.com\/services\/oauth2\/success or https:\/\/test.salesforce.com\/services\/oauth2\/success and then retrive the refresh_token from the URL at the end of the flow. Note that in development organizations Salesforce allows hosting the callback web application at localhost.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.salesforce.replay-preset",
+      "type": "com.salesforce.eventbus.protobuf.ReplayPreset",
+      "description": "Replay preset for Pub\/Sub API.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
