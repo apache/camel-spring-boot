@@ -38,6 +38,7 @@ import org.apache.camel.spi.CamelEvent.Type;
 import org.apache.camel.spi.EventNotifier;
 import org.apache.camel.support.EventNotifierSupport;
 import org.apache.camel.support.LifecycleStrategySupport;
+import org.apache.camel.support.PluginHelper;
 import org.apache.camel.support.service.ServiceHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,7 +99,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                     configurer.setRoutesCollector(springBootRoutesCollector);
                 }
 
-                configurer.setBeanPostProcessor(camelContext.getCamelContextExtension().getBeanPostProcessor());
+                configurer.setBeanPostProcessor(PluginHelper.getBeanPostProcessor(camelContext));
                 configurer.setJavaRoutesExcludePattern(configurationProperties.getJavaRoutesExcludePattern());
                 configurer.setJavaRoutesIncludePattern(configurationProperties.getJavaRoutesIncludePattern());
                 configurer.setRoutesExcludePattern(configurationProperties.getRoutesExcludePattern());

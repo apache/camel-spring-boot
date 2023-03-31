@@ -86,7 +86,7 @@ public class CamelAutoConfiguration {
         CamelContext camelContext = new SpringBootCamelContext(applicationContext, config.isWarnOnEarlyShutdown());
         // bean post processor is created before CamelContext
         beanPostProcessor.setCamelContext(camelContext);
-        camelContext.getCamelContextExtension().setBeanPostProcessor(beanPostProcessor);
+        camelContext.getCamelContextExtension().addContextPlugin(CamelBeanPostProcessor.class, beanPostProcessor);
         return doConfigureCamelContext(applicationContext, camelContext, config);
     }
 
