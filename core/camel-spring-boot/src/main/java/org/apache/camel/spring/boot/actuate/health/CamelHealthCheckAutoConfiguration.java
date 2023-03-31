@@ -61,7 +61,7 @@ public class CamelHealthCheckAutoConfiguration {
             }
 
             // auto-detect camel-health on classpath
-            HealthCheckRegistry hcr = camelContext.getExtension(HealthCheckRegistry.class);
+            HealthCheckRegistry hcr = camelContext.getCamelContextExtension().getContextPlugin(HealthCheckRegistry.class);
             if (hcr == null) {
                 if (config.getEnabled() != null && config.getEnabled()) {
                     LOG.warn("Cannot find HealthCheckRegistry from classpath. Add camel-health to classpath.");

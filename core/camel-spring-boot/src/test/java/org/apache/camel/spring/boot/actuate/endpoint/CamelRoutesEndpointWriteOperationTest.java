@@ -52,7 +52,7 @@ public class CamelRoutesEndpointWriteOperationTest {
 
     @Test
     public void testWriteOperation() throws Exception {
-        AbstractCamelContext acontext = camelContext.getExtension(AbstractCamelContext.class);
+        AbstractCamelContext acontext = camelContext.getCamelContextExtension().getContextPlugin(AbstractCamelContext.class);
         ServiceStatus status = acontext.getRouteStatus("foo-route");
         Assertions.assertTrue(status.isStarted());
         TimeInfo timeInfo = new TimeInfo();

@@ -53,7 +53,7 @@ public class CamelRoutesEndpoint {
 
     public CamelRoutesEndpoint(CamelContext camelContext, CamelRoutesEndpointProperties properties) {
         this.camelContext = camelContext;
-        this.managedCamelContext = camelContext.getExtension(ManagedCamelContext.class);
+        this.managedCamelContext = camelContext.getCamelContextExtension().getContextPlugin(ManagedCamelContext.class);
         this.properties = properties;
     }
 
@@ -258,7 +258,7 @@ public class CamelRoutesEndpoint {
         public RouteDetailsEndpointInfo(final CamelContext camelContext, final Route route) {
             super(route);
             if (camelContext.getManagementStrategy().getManagementAgent() != null) {
-                ManagedCamelContext mcc = camelContext.getExtension(ManagedCamelContext.class);
+                ManagedCamelContext mcc = camelContext.getCamelContextExtension().getContextPlugin(ManagedCamelContext.class);
                 this.routeDetails = new RouteDetails(mcc.getManagedRoute(route.getId(), ManagedRouteMBean.class));
             }
         }

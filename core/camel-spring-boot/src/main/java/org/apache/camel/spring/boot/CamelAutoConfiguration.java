@@ -140,7 +140,7 @@ public class CamelAutoConfiguration {
 
         if (config.getRouteFilterIncludePattern() != null || config.getRouteFilterExcludePattern() != null) {
             LOG.info("Route filtering pattern: include={}, exclude={}", config.getRouteFilterIncludePattern(), config.getRouteFilterExcludePattern());
-            camelContext.getExtension(Model.class).setRouteFilterPattern(config.getRouteFilterIncludePattern(), config.getRouteFilterExcludePattern());
+            camelContext.getCamelContextExtension().getContextPlugin(Model.class).setRouteFilterPattern(config.getRouteFilterIncludePattern(), config.getRouteFilterExcludePattern());
         }
 
         // configure the common/default options
