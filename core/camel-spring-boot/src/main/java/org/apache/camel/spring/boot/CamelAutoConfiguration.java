@@ -36,6 +36,7 @@ import org.apache.camel.model.Model;
 import org.apache.camel.spi.BeanRepository;
 import org.apache.camel.spi.CliConnector;
 import org.apache.camel.spi.CliConnectorFactory;
+import org.apache.camel.spi.PackageScanClassResolver;
 import org.apache.camel.spi.StartupStepRecorder;
 import org.apache.camel.spring.spi.ApplicationContextBeanRepository;
 import org.apache.camel.spring.spi.CamelBeanPostProcessor;
@@ -135,7 +136,7 @@ public class CamelAutoConfiguration {
         // setup cli connector eager
         configureCliConnector(applicationContext, camelContext);
 
-        camelContext.getCamelContextExtension().setPackageScanClassResolver(new FatJarPackageScanClassResolver());
+        camelContext.getCamelContextExtension().addContextPlugin(PackageScanClassResolver.class, new FatJarPackageScanClassResolver());
         camelContext.getCamelContextExtension().setPackageScanResourceResolver(new FatJarPackageScanResourceResolver());
 
         if (config.getRouteFilterIncludePattern() != null || config.getRouteFilterExcludePattern() != null) {
