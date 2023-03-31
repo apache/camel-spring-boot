@@ -37,6 +37,7 @@ import org.apache.camel.spi.BeanRepository;
 import org.apache.camel.spi.CliConnector;
 import org.apache.camel.spi.CliConnectorFactory;
 import org.apache.camel.spi.PackageScanClassResolver;
+import org.apache.camel.spi.PackageScanResourceResolver;
 import org.apache.camel.spi.StartupStepRecorder;
 import org.apache.camel.spring.spi.ApplicationContextBeanRepository;
 import org.apache.camel.spring.spi.CamelBeanPostProcessor;
@@ -137,7 +138,7 @@ public class CamelAutoConfiguration {
         configureCliConnector(applicationContext, camelContext);
 
         camelContext.getCamelContextExtension().addContextPlugin(PackageScanClassResolver.class, new FatJarPackageScanClassResolver());
-        camelContext.getCamelContextExtension().setPackageScanResourceResolver(new FatJarPackageScanResourceResolver());
+        camelContext.getCamelContextExtension().addContextPlugin(PackageScanResourceResolver.class, new FatJarPackageScanResourceResolver());
 
         if (config.getRouteFilterIncludePattern() != null || config.getRouteFilterExcludePattern() != null) {
             LOG.info("Route filtering pattern: include={}, exclude={}", config.getRouteFilterIncludePattern(), config.getRouteFilterExcludePattern());
