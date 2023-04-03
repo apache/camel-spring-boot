@@ -28,6 +28,7 @@ import org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProp
 import org.apache.camel.spi.BeanIntrospection;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
+import org.apache.camel.support.PluginHelper;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -62,7 +63,7 @@ public class ResilienceAutoConfiguration {
     public Resilience4jConfigurationDefinition defaultResilienceConfigurationDefinition() throws Exception {
         Map<String, Object> properties = new HashMap<>();
 
-        BeanIntrospection bi = camelContext.getCamelContextExtension().getBeanIntrospection();
+        final BeanIntrospection bi = PluginHelper.getBeanIntrospection(camelContext);
         bi.getProperties(config, properties, null, false);
         Resilience4jConfigurationDefinition definition = new Resilience4jConfigurationDefinition();
         CamelPropertiesHelper.setCamelProperties(camelContext, definition, properties, false);
@@ -84,7 +85,7 @@ public class ResilienceAutoConfiguration {
             properties.clear();
 
             // extract properties
-            BeanIntrospection bi = camelContext.getCamelContextExtension().getBeanIntrospection();
+            final BeanIntrospection bi = PluginHelper.getBeanIntrospection(camelContext);
             bi.getProperties(entry.getValue(), properties, null, false);
 
             try {
