@@ -25,6 +25,7 @@ import org.apache.camel.Component;
 import org.apache.camel.PropertyBindingException;
 import org.apache.camel.spi.BeanIntrospection;
 import org.apache.camel.spi.PropertyConfigurer;
+import org.apache.camel.support.PluginHelper;
 import org.apache.camel.support.PropertyBindingSupport;
 import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.util.ObjectHelper;
@@ -141,7 +142,7 @@ public final class CamelPropertiesHelper {
     public static Map<String, Object> getNonNullProperties(CamelContext camelContext, Object target) {
         Map<String, Object> properties = new HashMap<>();
 
-        BeanIntrospection bi = camelContext.getCamelContextExtension().getBeanIntrospection();
+        BeanIntrospection bi = PluginHelper.getBeanIntrospection(camelContext);
         bi.getProperties(target, properties, null, false);
 
         return properties;

@@ -30,6 +30,7 @@ import org.apache.camel.spi.BeanIntrospection;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.apache.camel.spring.boot.util.GroupCondition;
+import org.apache.camel.support.PluginHelper;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -77,7 +78,7 @@ public class KubernetesServiceDiscoveryAutoConfiguration {
                 // The instance factory
                 KubernetesServiceDiscoveryFactory factory = new KubernetesServiceDiscoveryFactory();
 
-                BeanIntrospection bi = camelContext.getCamelContextExtension().getBeanIntrospection();
+                BeanIntrospection bi = PluginHelper.getBeanIntrospection(camelContext);
                 try {
                     bi.getProperties(entry.getValue(), parameters, null, false);
                     CamelPropertiesHelper.setCamelProperties(camelContext, factory, parameters, true);
