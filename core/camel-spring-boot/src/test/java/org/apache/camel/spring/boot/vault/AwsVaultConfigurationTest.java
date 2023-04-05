@@ -35,10 +35,12 @@ import org.springframework.test.annotation.DirtiesContext;
                 "camel.vault.aws.accessKey=myAccessKey",
                 "camel.vault.aws.secretKey=mySecretKey",
                 "camel.vault.aws.region=myRegion",
-                "camel.vault.aws.defaultCredentialsProvider=true",
+                "camel.vault.aws.defaultCredentialsProvider=false",
                 "camel.vault.aws.refreshPeriod=60000",
-                "camel.vault.aws.refreshEnabled=true",
-                "camel.vault.aws.secrets=supersecret"
+                "camel.vault.aws.refreshEnabled=false",
+                "camel.vault.aws.secrets=supersecret",
+                "camel.vault.aws.profile-credentials-provider=true",
+                "camel.vault.aws.profile-name=test"
         }
 )
 public class AwsVaultConfigurationTest {
@@ -51,9 +53,11 @@ public class AwsVaultConfigurationTest {
         Assertions.assertEquals("myAccessKey", camelContext.getVaultConfiguration().aws().getAccessKey());
         Assertions.assertEquals("mySecretKey", camelContext.getVaultConfiguration().aws().getSecretKey());
         Assertions.assertEquals("myRegion", camelContext.getVaultConfiguration().aws().getRegion());
-        Assertions.assertEquals(true, camelContext.getVaultConfiguration().aws().isDefaultCredentialsProvider());
-        Assertions.assertEquals(true, camelContext.getVaultConfiguration().aws().isRefreshEnabled());
+        Assertions.assertEquals(false, camelContext.getVaultConfiguration().aws().isDefaultCredentialsProvider());
+        Assertions.assertEquals(false, camelContext.getVaultConfiguration().aws().isRefreshEnabled());
         Assertions.assertEquals(60000, camelContext.getVaultConfiguration().aws().getRefreshPeriod());
         Assertions.assertEquals("supersecret", camelContext.getVaultConfiguration().aws().getSecrets());
+        Assertions.assertEquals("test", camelContext.getVaultConfiguration().aws().getProfileName());
+        Assertions.assertEquals(true, camelContext.getVaultConfiguration().aws().isProfileCredentialsProvider());
     }
 }

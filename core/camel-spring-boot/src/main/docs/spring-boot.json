@@ -1403,6 +1403,19 @@
       "defaultValue": false
     },
     {
+      "name": "camel.vault.aws.profile-credentials-provider",
+      "type": "java.lang.Boolean",
+      "description": "Define if we want to use the AWS Profile Credentials Provider or not",
+      "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.vault.aws.profile-name",
+      "type": "java.lang.String",
+      "description": "Define the profile name in case we are using profile credentials provider",
+      "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
+    },
+    {
       "name": "camel.vault.aws.refresh-enabled",
       "type": "java.lang.Boolean",
       "description": "Define if we want to refresh the secrets on update",
