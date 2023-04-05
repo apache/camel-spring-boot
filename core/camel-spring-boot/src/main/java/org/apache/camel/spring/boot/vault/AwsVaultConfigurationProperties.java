@@ -42,6 +42,16 @@ public class AwsVaultConfigurationProperties {
     private boolean defaultCredentialsProvider;
 
     /**
+     * Define if we want to use the AWS Profile Credentials Provider or not
+     */
+    private boolean profileCredentialsProvider;
+
+    /**
+     * Define the profile name in case we are using profile credentials provider
+     */
+    private String profileName;
+
+    /**
      * Define if we want to refresh the secrets on update
      */
     private boolean refreshEnabled;
@@ -86,6 +96,21 @@ public class AwsVaultConfigurationProperties {
 
     public void setDefaultCredentialsProvider(boolean defaultCredentialsProvider) {
         this.defaultCredentialsProvider = defaultCredentialsProvider;
+    }
+    public boolean isProfileCredentialsProvider() {
+        return profileCredentialsProvider;
+    }
+
+    public void setProfileCredentialsProvider(boolean profileCredentialsProvider) {
+        this.profileCredentialsProvider = profileCredentialsProvider;
+    }
+
+    public String getProfileName() {
+        return profileName;
+    }
+
+    public void setProfileName(String profileName) {
+        this.profileName = profileName;
     }
 
     public boolean isRefreshEnabled() {

@@ -37,6 +37,8 @@ public class AwsVaultAutoConfiguration {
         answer.setSecretKey(config.getSecretKey());
         answer.setRegion(config.getRegion());
         answer.setDefaultCredentialsProvider(config.isDefaultCredentialsProvider());
+        answer.setProfileCredentialsProvider(config.isProfileCredentialsProvider());
+        answer.setProfileName(config.getProfileName());
         answer.setRefreshEnabled(config.isRefreshEnabled());
         answer.setRefreshPeriod(config.getRefreshPeriod());
         answer.setSecrets(config.getSecrets());
