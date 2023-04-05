@@ -14,6 +14,13 @@
   ],
   "properties": [
     {
+      "name": "camel.component.vertx-websocket.allow-origin-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether the WebSocket client should add the Origin header to the WebSocket handshake request.",
+      "sourceType": "org.apache.camel.component.vertx.websocket.springboot.VertxWebsocketComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.vertx-websocket.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
@@ -58,6 +65,12 @@
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.vertx.websocket.springboot.VertxWebsocketComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.vertx-websocket.origin-header-url",
+      "type": "java.lang.String",
+      "description": "The value of the Origin header that the WebSocket client should use on the WebSocket handshake request. When not specified, the WebSocket client will automatically determine the value for the Origin from the request URL.",
+      "sourceType": "org.apache.camel.component.vertx.websocket.springboot.VertxWebsocketComponentConfiguration"
     },
     {
       "name": "camel.component.vertx-websocket.router",

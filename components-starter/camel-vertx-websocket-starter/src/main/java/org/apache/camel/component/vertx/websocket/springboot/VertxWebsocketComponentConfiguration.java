@@ -59,6 +59,11 @@ public class VertxWebsocketComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Whether the WebSocket client should add the Origin header to the
+     * WebSocket handshake request.
+     */
+    private Boolean allowOriginHeader = true;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -75,6 +80,13 @@ public class VertxWebsocketComponentConfiguration
      * Default value for the port that the WebSocket should bind to
      */
     private Integer defaultPort = 0;
+    /**
+     * The value of the Origin header that the WebSocket client should use on
+     * the WebSocket handshake request. When not specified, the WebSocket client
+     * will automatically determine the value for the Origin from the request
+     * URL.
+     */
+    private String originHeaderUrl;
     /**
      * To provide a custom vertx router to use on the WebSocket server. The
      * option is a io.vertx.ext.web.Router type.
@@ -111,6 +123,14 @@ public class VertxWebsocketComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Boolean getAllowOriginHeader() {
+        return allowOriginHeader;
+    }
+
+    public void setAllowOriginHeader(Boolean allowOriginHeader) {
+        this.allowOriginHeader = allowOriginHeader;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
@@ -133,6 +153,14 @@ public class VertxWebsocketComponentConfiguration
 
     public void setDefaultPort(Integer defaultPort) {
         this.defaultPort = defaultPort;
+    }
+
+    public String getOriginHeaderUrl() {
+        return originHeaderUrl;
+    }
+
+    public void setOriginHeaderUrl(String originHeaderUrl) {
+        this.originHeaderUrl = originHeaderUrl;
     }
 
     public Router getRouter() {
