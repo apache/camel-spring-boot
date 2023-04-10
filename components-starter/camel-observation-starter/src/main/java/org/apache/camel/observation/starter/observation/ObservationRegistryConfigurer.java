@@ -17,6 +17,7 @@
 package org.apache.camel.observation.starter.observation;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import io.micrometer.observation.GlobalObservationConvention;
 import io.micrometer.observation.ObservationFilter;
@@ -87,7 +88,7 @@ class ObservationRegistryConfigurer {
 	}
 
 	private <T> List<T> asOrderedList(ObjectProvider<T> provider) {
-		return provider.orderedStream().toList();
+		return provider.orderedStream().collect(Collectors.toList());
 	}
 
 }
