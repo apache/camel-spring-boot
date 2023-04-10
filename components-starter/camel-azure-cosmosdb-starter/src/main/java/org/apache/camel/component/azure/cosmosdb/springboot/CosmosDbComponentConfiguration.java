@@ -21,7 +21,6 @@ import com.azure.cosmos.ConsistencyLevel;
 import com.azure.cosmos.CosmosAsyncClient;
 import com.azure.cosmos.models.ChangeFeedProcessorOptions;
 import com.azure.cosmos.models.CosmosQueryRequestOptions;
-import com.azure.cosmos.models.PartitionKey;
 import com.azure.cosmos.models.ThroughputProperties;
 import org.apache.camel.component.azure.cosmosdb.CosmosDbComponent;
 import org.apache.camel.component.azure.cosmosdb.CosmosDbConfiguration;
@@ -203,10 +202,9 @@ public class CosmosDbComponentConfiguration
     /**
      * Sets partition key. Represents a partition key value in the Azure Cosmos
      * DB database service. A partition key identifies the partition where the
-     * item is stored in. The option is a com.azure.cosmos.models.PartitionKey
-     * type.
+     * item is stored in.
      */
-    private PartitionKey itemPartitionKey;
+    private String itemPartitionKey;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -435,11 +433,11 @@ public class CosmosDbComponentConfiguration
         this.itemId = itemId;
     }
 
-    public PartitionKey getItemPartitionKey() {
+    public String getItemPartitionKey() {
         return itemPartitionKey;
     }
 
-    public void setItemPartitionKey(PartitionKey itemPartitionKey) {
+    public void setItemPartitionKey(String itemPartitionKey) {
         this.itemPartitionKey = itemPartitionKey;
     }
 

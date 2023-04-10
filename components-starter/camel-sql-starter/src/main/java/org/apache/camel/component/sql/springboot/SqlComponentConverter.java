@@ -42,6 +42,7 @@ public class SqlComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, javax.sql.DataSource.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.sql.RowMapperFactory.class));
         return answer;
     }
 
@@ -59,6 +60,7 @@ public class SqlComponentConverter implements GenericConverter {
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "javax.sql.DataSource": return applicationContext.getBean(ref, javax.sql.DataSource.class);
+            case "org.apache.camel.component.sql.RowMapperFactory": return applicationContext.getBean(ref, org.apache.camel.component.sql.RowMapperFactory.class);
         }
         return null;
     }

@@ -82,6 +82,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.sql.row-mapper-factory",
+      "type": "org.apache.camel.component.sql.RowMapperFactory",
+      "description": "Factory for creating RowMapper. The option is a org.apache.camel.component.sql.RowMapperFactory type.",
+      "sourceType": "org.apache.camel.component.sql.springboot.SqlComponentConfiguration"
+    },
+    {
       "name": "camel.component.sql.use-placeholder",
       "type": "java.lang.Boolean",
       "description": "Sets whether to use placeholder and replace all placeholder characters with sign in the SQL queries. This option is default true",

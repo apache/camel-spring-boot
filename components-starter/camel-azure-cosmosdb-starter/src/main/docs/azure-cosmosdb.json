@@ -143,8 +143,8 @@
     },
     {
       "name": "camel.component.azure-cosmosdb.item-partition-key",
-      "type": "com.azure.cosmos.models.PartitionKey",
-      "description": "Sets partition key. Represents a partition key value in the Azure Cosmos DB database service. A partition key identifies the partition where the item is stored in. The option is a com.azure.cosmos.models.PartitionKey type.",
+      "type": "java.lang.String",
+      "description": "Sets partition key. Represents a partition key value in the Azure Cosmos DB database service. A partition key identifies the partition where the item is stored in.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {

@@ -18,6 +18,7 @@ package org.apache.camel.component.sql.springboot;
 
 import javax.annotation.Generated;
 import javax.sql.DataSource;
+import org.apache.camel.component.sql.RowMapperFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -72,6 +73,11 @@ public class SqlComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Factory for creating RowMapper. The option is a
+     * org.apache.camel.component.sql.RowMapperFactory type.
+     */
+    private RowMapperFactory rowMapperFactory;
+    /**
      * Sets whether to use placeholder and replace all placeholder characters
      * with sign in the SQL queries. This option is default true
      */
@@ -107,6 +113,14 @@ public class SqlComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public RowMapperFactory getRowMapperFactory() {
+        return rowMapperFactory;
+    }
+
+    public void setRowMapperFactory(RowMapperFactory rowMapperFactory) {
+        this.rowMapperFactory = rowMapperFactory;
     }
 
     public Boolean getUsePlaceholder() {
