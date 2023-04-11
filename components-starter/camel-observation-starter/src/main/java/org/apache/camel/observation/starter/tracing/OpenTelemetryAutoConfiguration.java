@@ -18,6 +18,7 @@ package org.apache.camel.observation.starter.tracing;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import io.micrometer.tracing.SpanCustomizer;
 import io.micrometer.tracing.exporter.SpanExportingPredicate;
@@ -110,7 +111,7 @@ public class OpenTelemetryAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	ContextPropagators otelContextPropagators(ObjectProvider<TextMapPropagator> textMapPropagators) {
-		return ContextPropagators.create(TextMapPropagator.composite(textMapPropagators.orderedStream().toList()));
+		return ContextPropagators.create(TextMapPropagator.composite(textMapPropagators.orderedStream().collect(Collectors.toList())));
 	}
 
 	@Bean
@@ -125,9 +126,9 @@ public class OpenTelemetryAutoConfiguration {
 			ObjectProvider<SpanExportingPredicate> spanExportingPredicates, ObjectProvider<SpanReporter> spanReporters,
 			ObjectProvider<SpanFilter> spanFilters) {
 		return BatchSpanProcessor
-			.builder(new CompositeSpanExporter(spanExporters.orderedStream().toList(),
-					spanExportingPredicates.orderedStream().toList(), spanReporters.orderedStream().toList(),
-					spanFilters.orderedStream().toList()))
+			.builder(new CompositeSpanExporter(spanExporters.orderedStream().collect(Collectors.toList()),
+					spanExportingPredicates.orderedStream().collect(Collectors.toList()), spanReporters.orderedStream().collect(Collectors.toList()),
+					spanFilters.orderedStream().collect(Collectors.toList())))
 			.build();
 	}
 
