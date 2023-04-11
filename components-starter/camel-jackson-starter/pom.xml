@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-jackson-starter</artifactId>
   <packaging>jar</packaging>
-  <!--    <name>Camel SB Starters :: Name Here</name>-->
+  <name>Camel SB Starters :: Jackson</name>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
