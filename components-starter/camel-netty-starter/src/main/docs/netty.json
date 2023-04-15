@@ -484,6 +484,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.netty.unix-domain-socket-path",
+      "type": "java.lang.String",
+      "description": "Path to unix domain socket to use instead of inet socket. Host and port parameters will not be used, however required. It is ok to set dummy values for them. Must be used with nativeTransport=true and clientMode=false.",
+      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
+    },
+    {
       "name": "camel.component.netty.use-byte-buf",
       "type": "java.lang.Boolean",
       "description": "If the useByteBuf is true, netty producer will turn the message body into ByteBuf before sending it out.",
