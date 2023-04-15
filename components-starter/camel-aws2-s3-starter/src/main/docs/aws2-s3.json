@@ -165,6 +165,13 @@
       "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-s3.force-path-style",
+      "type": "java.lang.Boolean",
+      "description": "Set whether the S3 client should use path-style URL instead of virtual-hosted-style",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.aws2-s3.ignore-body",
       "type": "java.lang.Boolean",
       "description": "If it is true, the S3 Object Body will be ignored completely, if it is set to false the S3 Object will be put in the body. Setting this to true, will override any behavior defined by includeBody option.",
