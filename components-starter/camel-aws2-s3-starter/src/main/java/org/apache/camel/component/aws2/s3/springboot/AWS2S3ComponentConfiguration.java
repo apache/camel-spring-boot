@@ -74,6 +74,11 @@ public class AWS2S3ComponentConfiguration
      */
     private String delimiter;
     /**
+     * Set whether the S3 client should use path-style URL instead of
+     * virtual-hosted-style
+     */
+    private Boolean forcePathStyle = false;
+    /**
      * Set the need for overidding the endpoint. This option needs to be used in
      * combination with uriEndpointOverride option
      */
@@ -355,6 +360,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setDelimiter(String delimiter) {
         this.delimiter = delimiter;
+    }
+
+    public Boolean getForcePathStyle() {
+        return forcePathStyle;
+    }
+
+    public void setForcePathStyle(Boolean forcePathStyle) {
+        this.forcePathStyle = forcePathStyle;
     }
 
     public Boolean getOverrideEndpoint() {
