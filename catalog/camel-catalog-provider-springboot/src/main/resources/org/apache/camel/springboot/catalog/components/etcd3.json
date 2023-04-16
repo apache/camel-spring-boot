@@ -11,7 +11,7 @@
     "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-etcd3-starter",
-    "version": "3.20.3-SNAPSHOT",
+    "version": "3.20.4-SNAPSHOT",
     "scheme": "etcd3",
     "extendsScheme": "",
     "syntax": "etcd3:path",

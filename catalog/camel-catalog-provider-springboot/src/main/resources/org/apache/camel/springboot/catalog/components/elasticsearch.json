@@ -11,7 +11,7 @@
     "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-elasticsearch-starter",
-    "version": "3.20.3-SNAPSHOT",
+    "version": "3.20.4-SNAPSHOT",
     "scheme": "elasticsearch",
     "extendsScheme": "",
     "syntax": "elasticsearch:clusterName",
