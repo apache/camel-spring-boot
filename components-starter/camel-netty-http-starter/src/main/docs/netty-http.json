@@ -421,6 +421,12 @@
       "sourceType": "org.apache.camel.component.netty.http.springboot.NettyHttpComponentConfiguration"
     },
     {
+      "name": "camel.component.netty-http.unix-domain-socket-path",
+      "type": "java.lang.String",
+      "description": "Path to unix domain socket to use instead of inet socket. Host and port parameters will not be used, however required. It is ok to set dummy values for them. Must be used with nativeTransport=true and clientMode=false.",
+      "sourceType": "org.apache.camel.component.netty.http.springboot.NettyHttpComponentConfiguration"
+    },
+    {
       "name": "camel.component.netty-http.use-global-ssl-context-parameters",
       "type": "java.lang.Boolean",
       "description": "Enable usage of global SSL context parameters.",

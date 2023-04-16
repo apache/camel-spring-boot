@@ -373,6 +373,13 @@ public class NettyComponentConfiguration
      */
     private Boolean udpByteArrayCodec = false;
     /**
+     * Path to unix domain socket to use instead of inet socket. Host and port
+     * parameters will not be used, however required. It is ok to set dummy
+     * values for them. Must be used with nativeTransport=true and
+     * clientMode=false.
+     */
+    private String unixDomainSocketPath;
+    /**
      * When netty works on nio mode, it uses default workerCount parameter from
      * Netty (which is cpu_core_threads x 2). User can use this option to
      * override the default workerCount from Netty.
@@ -913,6 +920,14 @@ public class NettyComponentConfiguration
 
     public void setUdpByteArrayCodec(Boolean udpByteArrayCodec) {
         this.udpByteArrayCodec = udpByteArrayCodec;
+    }
+
+    public String getUnixDomainSocketPath() {
+        return unixDomainSocketPath;
+    }
+
+    public void setUnixDomainSocketPath(String unixDomainSocketPath) {
+        this.unixDomainSocketPath = unixDomainSocketPath;
     }
 
     public Integer getWorkerCount() {
