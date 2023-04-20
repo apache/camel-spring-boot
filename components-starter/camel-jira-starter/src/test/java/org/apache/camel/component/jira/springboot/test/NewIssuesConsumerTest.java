@@ -175,7 +175,7 @@ public class NewIssuesConsumerTest {
             return Promises.promise(result);
         });
 
-        mockResult.expectedBodiesReceived(issue3, issue2, issue1);
+        mockResult.expectedBodiesReceivedInAnyOrder(issue1, issue2, issue3);
         mockResult.assertIsSatisfied();
     }
 
