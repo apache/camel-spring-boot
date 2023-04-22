@@ -59,27 +59,6 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
-      "name": "camel.component.debezium-mongodb.connect-backoff-initial-delay-ms",
-      "type": "java.lang.Long",
-      "description": "The initial delay when trying to reconnect to a primary after a connection cannot be made or when no primary is available, given in milliseconds. Defaults to 1 second (1,000 ms). The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
-      "defaultValue": 1000
-    },
-    {
-      "name": "camel.component.debezium-mongodb.connect-backoff-max-delay-ms",
-      "type": "java.lang.Long",
-      "description": "The maximum delay when trying to reconnect to a primary after a connection cannot be made or when no primary is available, given in milliseconds. Defaults to 120 second (120,000 ms). The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
-      "defaultValue": 120000
-    },
-    {
-      "name": "camel.component.debezium-mongodb.connect-max-attempts",
-      "type": "java.lang.Integer",
-      "description": "Maximum number of failed connection attempts to a replica set primary before an exception occurs and task is aborted. Defaults to 16, which with the defaults for 'connect.backoff.initial.delay.ms' and 'connect.backoff.max.delay.ms' results in just over 20 minutes of attempts before failing.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
-      "defaultValue": 16
-    },
-    {
       "name": "camel.component.debezium-mongodb.converters",
       "type": "java.lang.String",
       "description": "Optional list of custom converters that would be used instead of default ones. The converters are defined using '.type' config option and configured using options '.'",
@@ -197,6 +176,13 @@
       "defaultValue": 10000
     },
     {
+      "name": "camel.component.debezium-mongodb.mongodb-connection-mode",
+      "type": "java.lang.String",
+      "description": "The method used to connect to MongoDB cluster. Options include: 'replica_set' (the default) to individually connect to each replica set \/ shard 'sharded' to connect via single connection obtained from connection string",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": "replica_set"
+    },
+    {
       "name": "camel.component.debezium-mongodb.mongodb-connection-string",
       "type": "java.lang.String",
       "description": "Database connection string.",
@@ -208,19 +194,6 @@
       "description": "The frequency that the cluster monitor attempts to reach each server. Defaults to 10 seconds (10,000 ms). The option is a int type.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": 10000
-    },
-    {
-      "name": "camel.component.debezium-mongodb.mongodb-hosts",
-      "type": "java.lang.String",
-      "description": "The hostname and port pairs (in the form 'host' or 'host:port') of the MongoDB server(s) in the replica set.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
-    },
-    {
-      "name": "camel.component.debezium-mongodb.mongodb-members-auto-discover",
-      "type": "java.lang.Boolean",
-      "description": "Specifies whether the addresses in 'hosts' are seeds that should be used to discover all members of the cluster or replica set ('true'), or whether the address(es) in 'hosts' should be used as is ('false'). The default is 'true'.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
-      "defaultValue": true
     },
     {
       "name": "camel.component.debezium-mongodb.mongodb-password",
@@ -349,13 +322,6 @@
       "defaultValue": 10000
     },
     {
-      "name": "camel.component.debezium-mongodb.sanitize-field-names",
-      "type": "java.lang.Boolean",
-      "description": "Whether field names will be sanitized to Avro naming conventions",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
-      "defaultValue": false
-    },
-    {
       "name": "camel.component.debezium-mongodb.schema-history-internal-file-filename",
       "type": "java.lang.String",
       "description": "The path to the file that will be used to record the database schema history",
@@ -364,7 +330,7 @@
     {
       "name": "camel.component.debezium-mongodb.schema-name-adjustment-mode",
       "type": "java.lang.String",
-      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including: 'avro' replaces the characters that cannot be used in the Avro type name with underscore; 'none' does not apply any adjustment (default)",
+      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including: 'avro' replaces the characters that cannot be used in the Avro type name with underscore; 'avro_unicode' replaces the underscore or characters that cannot be used in the Avro type name with corresponding unicode like _uxxxx. Note: _ is an escape sequence like backslash in Java;'none' does not apply any adjustment (default)",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": "none"
     },

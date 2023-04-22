@@ -398,13 +398,6 @@
       "defaultValue": 10000
     },
     {
-      "name": "camel.component.debezium-postgres.sanitize-field-names",
-      "type": "java.lang.Boolean",
-      "description": "Whether field names will be sanitized to Avro naming conventions",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
-      "defaultValue": false
-    },
-    {
       "name": "camel.component.debezium-postgres.schema-exclude-list",
       "type": "java.lang.String",
       "description": "The schemas for which events must not be captured",
@@ -425,7 +418,7 @@
     {
       "name": "camel.component.debezium-postgres.schema-name-adjustment-mode",
       "type": "java.lang.String",
-      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including: 'avro' replaces the characters that cannot be used in the Avro type name with underscore; 'none' does not apply any adjustment (default)",
+      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including: 'avro' replaces the characters that cannot be used in the Avro type name with underscore; 'avro_unicode' replaces the underscore or characters that cannot be used in the Avro type name with corresponding unicode like _uxxxx. Note: _ is an escape sequence like backslash in Java;'none' does not apply any adjustment (default)",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": "none"
     },
@@ -534,6 +527,13 @@
       "type": "java.lang.String",
       "description": "This property contains a comma-separated list of fully-qualified tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connectors. Select statements for the individual tables are specified in further configuration properties, one for each table, identified by the id 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME', respectively. The value of those properties is the select statement to use when retrieving data from the specific table during snapshotting. A possible use case for large append-only tables is setting a specific point where to start (resume) snapshotting, in case a previous snapshotting was interrupted.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-postgres.snapshot-tables-order-by-row-count",
+      "type": "java.lang.String",
+      "description": "Controls the order in which tables are processed in the initial snapshot. A descending value will order the tables by row count descending. A ascending value will order the tables by row count ascending. A value of disabled (the default) will disable ordering by row count.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "disabled"
     },
     {
       "name": "camel.component.debezium-postgres.status-update-interval-ms",

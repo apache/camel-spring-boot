@@ -388,10 +388,6 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Long retriableRestartConnectorWaitMs = 10000L;
     /**
-     * Whether field names will be sanitized to Avro naming conventions
-     */
-    private Boolean sanitizeFieldNames = false;
-    /**
      * The schemas for which events must not be captured
      */
     private String schemaExcludeList;
@@ -408,7 +404,10 @@ public class DebeziumPostgresComponentConfiguration
      * Specify how schema names should be adjusted for compatibility with the
      * message converter used by the connector, including: 'avro' replaces the
      * characters that cannot be used in the Avro type name with underscore;
-     * 'none' does not apply any adjustment (default)
+     * 'avro_unicode' replaces the underscore or characters that cannot be used
+     * in the Avro type name with corresponding unicode like _uxxxx. Note: _ is
+     * an escape sequence like backslash in Java;'none' does not apply any
+     * adjustment (default)
      */
     private String schemaNameAdjustmentMode = "none";
     /**
@@ -528,6 +527,13 @@ public class DebeziumPostgresComponentConfiguration
      * snapshotting was interrupted.
      */
     private String snapshotSelectStatementOverrides;
+    /**
+     * Controls the order in which tables are processed in the initial snapshot.
+     * A descending value will order the tables by row count descending. A
+     * ascending value will order the tables by row count ascending. A value of
+     * disabled (the default) will disable ordering by row count.
+     */
+    private String snapshotTablesOrderByRowCount = "disabled";
     /**
      * Frequency for sending replication connection status updates to the
      * server, given in milliseconds. Defaults to 10 seconds (10,000 ms). The
@@ -1061,14 +1067,6 @@ public class DebeziumPostgresComponentConfiguration
         this.retriableRestartConnectorWaitMs = retriableRestartConnectorWaitMs;
     }
 
-    public Boolean getSanitizeFieldNames() {
-        return sanitizeFieldNames;
-    }
-
-    public void setSanitizeFieldNames(Boolean sanitizeFieldNames) {
-        this.sanitizeFieldNames = sanitizeFieldNames;
-    }
-
     public String getSchemaExcludeList() {
         return schemaExcludeList;
     }
@@ -1230,6 +1228,15 @@ public class DebeziumPostgresComponentConfiguration
     public void setSnapshotSelectStatementOverrides(
             String snapshotSelectStatementOverrides) {
         this.snapshotSelectStatementOverrides = snapshotSelectStatementOverrides;
+    }
+
+    public String getSnapshotTablesOrderByRowCount() {
+        return snapshotTablesOrderByRowCount;
+    }
+
+    public void setSnapshotTablesOrderByRowCount(
+            String snapshotTablesOrderByRowCount) {
+        this.snapshotTablesOrderByRowCount = snapshotTablesOrderByRowCount;
     }
 
     public Integer getStatusUpdateIntervalMs() {

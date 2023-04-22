@@ -195,6 +195,11 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String decimalHandlingMode = "precise";
     /**
+     * The maximum number of retries on connection errors before failing (-1 =
+     * no limit, 0 = disabled, 0 = num of retries).
+     */
+    private Integer errorsMaxRetries = -1;
+    /**
      * Specify how failures during processing of events (i.e. when encountering
      * a corrupted event) should be handled, including: 'fail' (the default) an
      * exception indicating the problematic event and its position is raised,
@@ -311,10 +316,6 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Long retriableRestartConnectorWaitMs = 10000L;
     /**
-     * Whether field names will be sanitized to Avro naming conventions
-     */
-    private Boolean sanitizeFieldNames = false;
-    /**
      * The name of the SchemaHistory class that should be used to store and
      * recover database schema changes. The configuration properties for the
      * history are prefixed with the 'schema.history.internal.' string.
@@ -334,6 +335,13 @@ public class DebeziumSqlserverComponentConfiguration
     private Boolean schemaHistoryInternalSkipUnparseableDdl = false;
     /**
      * Controls what DDL will Debezium store in database schema history. By
+     * default (true) only DDL that manipulates a table from captured
+     * schema/database will be stored. If set to false, then Debezium will store
+     * all incoming DDL statements.
+     */
+    private Boolean schemaHistoryInternalStoreOnlyCapturedDatabasesDdl = false;
+    /**
+     * Controls what DDL will Debezium store in database schema history. By
      * default (false) Debezium will store all incoming DDL statements. If set
      * to true, then only DDL that manipulates a captured table will be stored.
      */
@@ -342,7 +350,10 @@ public class DebeziumSqlserverComponentConfiguration
      * Specify how schema names should be adjusted for compatibility with the
      * message converter used by the connector, including: 'avro' replaces the
      * characters that cannot be used in the Avro type name with underscore;
-     * 'none' does not apply any adjustment (default)
+     * 'avro_unicode' replaces the underscore or characters that cannot be used
+     * in the Avro type name with corresponding unicode like _uxxxx. Note: _ is
+     * an escape sequence like backslash in Java;'none' does not apply any
+     * adjustment (default)
      */
     private String schemaNameAdjustmentMode = "none";
     /**
@@ -424,6 +435,13 @@ public class DebeziumSqlserverComponentConfiguration
      * snapshotting was interrupted.
      */
     private String snapshotSelectStatementOverrides;
+    /**
+     * Controls the order in which tables are processed in the initial snapshot.
+     * A descending value will order the tables by row count descending. A
+     * ascending value will order the tables by row count ascending. A value of
+     * disabled (the default) will disable ordering by row count.
+     */
+    private String snapshotTablesOrderByRowCount = "disabled";
     /**
      * A comma-separated list of regular expressions that match the
      * fully-qualified names of tables to be excluded from monitoring
@@ -690,6 +708,14 @@ public class DebeziumSqlserverComponentConfiguration
         this.decimalHandlingMode = decimalHandlingMode;
     }
 
+    public Integer getErrorsMaxRetries() {
+        return errorsMaxRetries;
+    }
+
+    public void setErrorsMaxRetries(Integer errorsMaxRetries) {
+        this.errorsMaxRetries = errorsMaxRetries;
+    }
+
     public String getEventProcessingFailureHandlingMode() {
         return eventProcessingFailureHandlingMode;
     }
@@ -839,14 +865,6 @@ public class DebeziumSqlserverComponentConfiguration
         this.retriableRestartConnectorWaitMs = retriableRestartConnectorWaitMs;
     }
 
-    public Boolean getSanitizeFieldNames() {
-        return sanitizeFieldNames;
-    }
-
-    public void setSanitizeFieldNames(Boolean sanitizeFieldNames) {
-        this.sanitizeFieldNames = sanitizeFieldNames;
-    }
-
     public String getSchemaHistoryInternal() {
         return schemaHistoryInternal;
     }
@@ -871,6 +889,15 @@ public class DebeziumSqlserverComponentConfiguration
     public void setSchemaHistoryInternalSkipUnparseableDdl(
             Boolean schemaHistoryInternalSkipUnparseableDdl) {
         this.schemaHistoryInternalSkipUnparseableDdl = schemaHistoryInternalSkipUnparseableDdl;
+    }
+
+    public Boolean getSchemaHistoryInternalStoreOnlyCapturedDatabasesDdl() {
+        return schemaHistoryInternalStoreOnlyCapturedDatabasesDdl;
+    }
+
+    public void setSchemaHistoryInternalStoreOnlyCapturedDatabasesDdl(
+            Boolean schemaHistoryInternalStoreOnlyCapturedDatabasesDdl) {
+        this.schemaHistoryInternalStoreOnlyCapturedDatabasesDdl = schemaHistoryInternalStoreOnlyCapturedDatabasesDdl;
     }
 
     public Boolean getSchemaHistoryInternalStoreOnlyCapturedTablesDdl() {
@@ -970,6 +997,15 @@ public class DebeziumSqlserverComponentConfiguration
     public void setSnapshotSelectStatementOverrides(
             String snapshotSelectStatementOverrides) {
         this.snapshotSelectStatementOverrides = snapshotSelectStatementOverrides;
+    }
+
+    public String getSnapshotTablesOrderByRowCount() {
+        return snapshotTablesOrderByRowCount;
+    }
+
+    public void setSnapshotTablesOrderByRowCount(
+            String snapshotTablesOrderByRowCount) {
+        this.snapshotTablesOrderByRowCount = snapshotTablesOrderByRowCount;
     }
 
     public String getTableExcludeList() {

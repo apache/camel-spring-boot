@@ -142,27 +142,6 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String collectionIncludeList;
     /**
-     * The initial delay when trying to reconnect to a primary after a
-     * connection cannot be made or when no primary is available, given in
-     * milliseconds. Defaults to 1 second (1,000 ms). The option is a long type.
-     */
-    private Long connectBackoffInitialDelayMs = 1000L;
-    /**
-     * The maximum delay when trying to reconnect to a primary after a
-     * connection cannot be made or when no primary is available, given in
-     * milliseconds. Defaults to 120 second (120,000 ms). The option is a long
-     * type.
-     */
-    private Long connectBackoffMaxDelayMs = 120000L;
-    /**
-     * Maximum number of failed connection attempts to a replica set primary
-     * before an exception occurs and task is aborted. Defaults to 16, which
-     * with the defaults for 'connect.backoff.initial.delay.ms' and
-     * 'connect.backoff.max.delay.ms' results in just over 20 minutes of
-     * attempts before failing.
-     */
-    private Integer connectMaxAttempts = 16;
-    /**
      * Optional list of custom converters that would be used instead of default
      * ones. The converters are defined using '.type' config option and
      * configured using options '.'
@@ -240,6 +219,13 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String mongodbAuthsource = "admin";
     /**
+     * The method used to connect to MongoDB cluster. Options include:
+     * 'replica_set' (the default) to individually connect to each replica set /
+     * shard 'sharded' to connect via single connection obtained from connection
+     * string
+     */
+    private String mongodbConnectionMode = "replica_set";
+    /**
      * Database connection string.
      */
     private String mongodbConnectionString;
@@ -253,18 +239,6 @@ public class DebeziumMongodbComponentConfiguration
      * Defaults to 10 seconds (10,000 ms). The option is a int type.
      */
     private Integer mongodbHeartbeatFrequencyMs = 10000;
-    /**
-     * The hostname and port pairs (in the form 'host' or 'host:port') of the
-     * MongoDB server(s) in the replica set.
-     */
-    private String mongodbHosts;
-    /**
-     * Specifies whether the addresses in 'hosts' are seeds that should be used
-     * to discover all members of the cluster or replica set ('true'), or
-     * whether the address(es) in 'hosts' should be used as is ('false'). The
-     * default is 'true'.
-     */
-    private Boolean mongodbMembersAutoDiscover = true;
     /**
      * Password to be used when connecting to MongoDB, if necessary.
      */
@@ -318,10 +292,6 @@ public class DebeziumMongodbComponentConfiguration
      */
     private Long retriableRestartConnectorWaitMs = 10000L;
     /**
-     * Whether field names will be sanitized to Avro naming conventions
-     */
-    private Boolean sanitizeFieldNames = false;
-    /**
      * The path to the file that will be used to record the database schema
      * history
      */
@@ -330,7 +300,10 @@ public class DebeziumMongodbComponentConfiguration
      * Specify how schema names should be adjusted for compatibility with the
      * message converter used by the connector, including: 'avro' replaces the
      * characters that cannot be used in the Avro type name with underscore;
-     * 'none' does not apply any adjustment (default)
+     * 'avro_unicode' replaces the underscore or characters that cannot be used
+     * in the Avro type name with corresponding unicode like _uxxxx. Note: _ is
+     * an escape sequence like backslash in Java;'none' does not apply any
+     * adjustment (default)
      */
     private String schemaNameAdjustmentMode = "none";
     /**
@@ -540,31 +513,6 @@ public class DebeziumMongodbComponentConfiguration
         this.collectionIncludeList = collectionIncludeList;
     }
 
-    public Long getConnectBackoffInitialDelayMs() {
-        return connectBackoffInitialDelayMs;
-    }
-
-    public void setConnectBackoffInitialDelayMs(
-            Long connectBackoffInitialDelayMs) {
-        this.connectBackoffInitialDelayMs = connectBackoffInitialDelayMs;
-    }
-
-    public Long getConnectBackoffMaxDelayMs() {
-        return connectBackoffMaxDelayMs;
-    }
-
-    public void setConnectBackoffMaxDelayMs(Long connectBackoffMaxDelayMs) {
-        this.connectBackoffMaxDelayMs = connectBackoffMaxDelayMs;
-    }
-
-    public Integer getConnectMaxAttempts() {
-        return connectMaxAttempts;
-    }
-
-    public void setConnectMaxAttempts(Integer connectMaxAttempts) {
-        this.connectMaxAttempts = connectMaxAttempts;
-    }
-
     public String getConverters() {
         return converters;
     }
@@ -670,6 +618,14 @@ public class DebeziumMongodbComponentConfiguration
         this.mongodbAuthsource = mongodbAuthsource;
     }
 
+    public String getMongodbConnectionMode() {
+        return mongodbConnectionMode;
+    }
+
+    public void setMongodbConnectionMode(String mongodbConnectionMode) {
+        this.mongodbConnectionMode = mongodbConnectionMode;
+    }
+
     public String getMongodbConnectionString() {
         return mongodbConnectionString;
     }
@@ -693,22 +649,6 @@ public class DebeziumMongodbComponentConfiguration
     public void setMongodbHeartbeatFrequencyMs(
             Integer mongodbHeartbeatFrequencyMs) {
         this.mongodbHeartbeatFrequencyMs = mongodbHeartbeatFrequencyMs;
-    }
-
-    public String getMongodbHosts() {
-        return mongodbHosts;
-    }
-
-    public void setMongodbHosts(String mongodbHosts) {
-        this.mongodbHosts = mongodbHosts;
-    }
-
-    public Boolean getMongodbMembersAutoDiscover() {
-        return mongodbMembersAutoDiscover;
-    }
-
-    public void setMongodbMembersAutoDiscover(Boolean mongodbMembersAutoDiscover) {
-        this.mongodbMembersAutoDiscover = mongodbMembersAutoDiscover;
     }
 
     public String getMongodbPassword() {
@@ -800,14 +740,6 @@ public class DebeziumMongodbComponentConfiguration
     public void setRetriableRestartConnectorWaitMs(
             Long retriableRestartConnectorWaitMs) {
         this.retriableRestartConnectorWaitMs = retriableRestartConnectorWaitMs;
-    }
-
-    public Boolean getSanitizeFieldNames() {
-        return sanitizeFieldNames;
-    }
-
-    public void setSanitizeFieldNames(Boolean sanitizeFieldNames) {
-        this.sanitizeFieldNames = sanitizeFieldNames;
     }
 
     public String getSchemaHistoryInternalFileFilename() {

@@ -476,9 +476,9 @@
     {
       "name": "camel.component.debezium-oracle.query-fetch-size",
       "type": "java.lang.Integer",
-      "description": "The maximum number of records that should be loaded into memory while streaming. A value of '0' uses the default JDBC fetch size.",
+      "description": "The maximum number of records that should be loaded into memory while streaming. A value of '0' uses the default JDBC fetch size, defaults to '2000'.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": 0
+      "defaultValue": 2000
     },
     {
       "name": "camel.component.debezium-oracle.rac-nodes",
@@ -492,13 +492,6 @@
       "description": "Time to wait before restarting connector after retriable exception occurs. Defaults to 10000ms. The option is a long type.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": 10000
-    },
-    {
-      "name": "camel.component.debezium-oracle.sanitize-field-names",
-      "type": "java.lang.Boolean",
-      "description": "Whether field names will be sanitized to Avro naming conventions",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": false
     },
     {
       "name": "camel.component.debezium-oracle.schema-history-internal",
@@ -521,6 +514,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-oracle.schema-history-internal-store-only-captured-databases-ddl",
+      "type": "java.lang.Boolean",
+      "description": "Controls what DDL will Debezium store in database schema history. By default (true) only DDL that manipulates a table from captured schema\/database will be stored. If set to false, then Debezium will store all incoming DDL statements.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.debezium-oracle.schema-history-internal-store-only-captured-tables-ddl",
       "type": "java.lang.Boolean",
       "description": "Controls what DDL will Debezium store in database schema history. By default (false) Debezium will store all incoming DDL statements. If set to true, then only DDL that manipulates a captured table will be stored.",
@@ -530,7 +530,7 @@
     {
       "name": "camel.component.debezium-oracle.schema-name-adjustment-mode",
       "type": "java.lang.String",
-      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including: 'avro' replaces the characters that cannot be used in the Avro type name with underscore; 'none' does not apply any adjustment (default)",
+      "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including: 'avro' replaces the characters that cannot be used in the Avro type name with underscore; 'avro_unicode' replaces the underscore or characters that cannot be used in the Avro type name with corresponding unicode like _uxxxx. Note: _ is an escape sequence like backslash in Java;'none' does not apply any adjustment (default)",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "none"
     },
@@ -605,6 +605,13 @@
       "type": "java.lang.String",
       "description": "This property contains a comma-separated list of fully-qualified tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connectors. Select statements for the individual tables are specified in further configuration properties, one for each table, identified by the id 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME', respectively. The value of those properties is the select statement to use when retrieving data from the specific table during snapshotting. A possible use case for large append-only tables is setting a specific point where to start (resume) snapshotting, in case a previous snapshotting was interrupted.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-tables-order-by-row-count",
+      "type": "java.lang.String",
+      "description": "Controls the order in which tables are processed in the initial snapshot. A descending value will order the tables by row count descending. A ascending value will order the tables by row count ascending. A value of disabled (the default) will disable ordering by row count.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "disabled"
     },
     {
       "name": "camel.component.debezium-oracle.table-exclude-list",
