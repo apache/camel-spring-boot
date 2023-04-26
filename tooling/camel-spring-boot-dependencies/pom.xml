@@ -1422,11 +1422,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-solr-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-splunk-hec-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3415,11 +3410,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-soap</artifactId>
-        <version>4.0.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-solr</artifactId>
         <version>4.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
