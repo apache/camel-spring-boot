@@ -322,7 +322,6 @@ public final class ArquillianPackager {
         ignore.add("org.apache.logging.log4j:log4j-jcl");
         ignore.add("org.apache.maven");
         ignore.add("org.apache.parquet");
-        ignore.add("org.apache.solr:solr-solrj"); // PR to spring-boot
         ignore.add("org.apache.velocity");
         ignore.add("org.apache.qpid:qpid-jms-client");
         ignore.add("org.opensaml");
