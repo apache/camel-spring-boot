@@ -1175,6 +1175,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-optaplanner-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-paho-mqtt5-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
