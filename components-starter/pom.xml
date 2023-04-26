@@ -372,7 +372,6 @@
     <module>camel-snakeyaml-starter</module>
     <module>camel-snmp-starter</module>
     <module>camel-soap-starter</module>
-    <module>camel-solr-starter</module>
     <module>camel-splunk-hec-starter</module>
     <module>camel-splunk-starter</module>
     <module>camel-spring-batch-starter</module>
