@@ -210,6 +210,13 @@
       "type": "com.azure.cosmos.models.ThroughputProperties",
       "description": "Sets throughput of the resources in the Azure Cosmos DB service. The option is a com.azure.cosmos.models.ThroughputProperties type.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-cosmosdb.use-default-identity",
+      "type": "java.lang.Boolean",
+      "description": "Indicates whether to use the default identity mechanism instead of the access key.",
+      "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
+      "defaultValue": false
     }
   ],
   "hints": []
