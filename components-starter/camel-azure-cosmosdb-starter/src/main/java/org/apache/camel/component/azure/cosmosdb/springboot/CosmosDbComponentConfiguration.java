@@ -248,6 +248,11 @@ public class CosmosDbComponentConfiguration
      * accessing resource.
      */
     private String accountKey;
+    /**
+     * Indicates whether to use the default identity mechanism instead of the
+     * access key.
+     */
+    private Boolean useDefaultIdentity = false;
 
     public Boolean getClientTelemetryEnabled() {
         return clientTelemetryEnabled;
@@ -488,5 +493,13 @@ public class CosmosDbComponentConfiguration
 
     public void setAccountKey(String accountKey) {
         this.accountKey = accountKey;
+    }
+
+    public Boolean getUseDefaultIdentity() {
+        return useDefaultIdentity;
+    }
+
+    public void setUseDefaultIdentity(Boolean useDefaultIdentity) {
+        this.useDefaultIdentity = useDefaultIdentity;
     }
 }
