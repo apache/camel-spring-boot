@@ -82,7 +82,6 @@
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
-      <scope>test</scope>
       <version>${cxf-version}</version>
     </dependency>
     <!--START OF GENERATED CODE-->
