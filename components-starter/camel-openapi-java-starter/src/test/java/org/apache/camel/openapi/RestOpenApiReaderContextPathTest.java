@@ -39,14 +39,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
-import io.apicurio.datamodels.Library;
-import io.apicurio.datamodels.openapi.models.OasDocument;
-import io.apicurio.datamodels.openapi.v2.models.Oas20Info;
-import io.apicurio.datamodels.openapi.v3.models.Oas30Info;
+import io.swagger.v3.core.util.Json;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 
 @DirtiesContext
 @CamelSpringBootTest
@@ -102,20 +98,16 @@ public class RestOpenApiReaderContextPathTest {
 		config.setHost("localhost:8080");
 		config.setSchemes(new String[] {"http"});
 		config.setBasePath("/api");
-		Oas20Info info = new Oas20Info();
+		Info info = new Info();
 		config.setInfo(info);
 		config.setVersion("2.0");
 		RestOpenApiReader reader = new RestOpenApiReader();
 
-		OasDocument openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
+		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
 				new DefaultClassResolver());
 		assertNotNull(openApi);
 
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(SerializationFeature.INDENT_OUTPUT);
-		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-		Object dump = Library.writeNode(openApi);
-		String json = mapper.writeValueAsString(dump);
+		String json = RestOpenApiSupport.getJsonFromOpenAPI(openApi, config);
 
 		log.info(json);
 
@@ -144,22 +136,19 @@ public class RestOpenApiReaderContextPathTest {
 		config.setHost("localhost:8080");
 		config.setSchemes(new String[] {"http"});
 		config.setBasePath("/api");
-		Oas30Info info = new Oas30Info();
+		Info info = new Info();
 		config.setInfo(info);
 		RestOpenApiReader reader = new RestOpenApiReader();
 
-		OasDocument openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
+		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
 				new DefaultClassResolver());
 		assertNotNull(openApi);
 
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(SerializationFeature.INDENT_OUTPUT);
-		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-		Object dump = Library.writeNode(openApi);
-		String json = mapper.writeValueAsString(dump);
+		String json = Json.pretty(openApi);
 
 		log.info(json);
-
+		json = json.replace("\n", " ").replaceAll("\\s+", " ");
+		
 		assertTrue(json.contains("\"url\" : \"http://localhost:8080/api\""));
 		assertTrue(json.contains("\"/hello/bye\""));
 		assertTrue(json.contains("\"summary\" : \"To update the greeting message\""));
@@ -169,10 +158,12 @@ public class RestOpenApiReaderContextPathTest {
 		assertFalse(json.contains("\"/api/hello/hi/{name}\""));
 		assertTrue(json.contains("\"type\" : \"number\""));
 		assertTrue(json.contains("\"format\" : \"float\""));
-		assertTrue(json.contains("\"application/xml\" : \"<hello>Hi</hello>\""));
-		assertTrue(json.contains("\"x-example\" : \"Donald Duck\""));
-		assertTrue(json.contains("\"success\" : \"123\""));
-		assertTrue(json.contains("\"error\" : \"-1\""));
+		// The example is under the section for this media type
+        assertTrue(json.contains("\"application/xml\" : {"));
+        assertTrue(json.contains("\"example\" : \"<hello>Hi</hello>\""));
+		assertTrue(json.contains("\"example\" : \"Donald Duck\""));
+		assertTrue(json.contains("\"success\" : { \"value\" : \"123\" }"));
+        assertTrue(json.contains("\"error\" : { \"value\" : \"-1\" }"));
 		assertTrue(json.contains("\"type\" : \"array\""));
 		assertTrue(json.contains("\"format\" : \"date-time\""));
 
