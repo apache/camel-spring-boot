@@ -16,20 +16,11 @@
  */
 package org.apache.camel.springboot.springdoc;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-import io.apicurio.datamodels.openapi.models.OasDocument;
-import io.apicurio.datamodels.openapi.v3.models.Oas30Document;
-import io.apicurio.datamodels.core.models.common.Server;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.parser.OpenAPIV3Parser;
-import io.swagger.v3.parser.core.models.SwaggerParseResult;
+import io.swagger.v3.oas.models.servers.Server;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.model.rest.RestDefinition;
 import org.apache.camel.openapi.BeanConfig;
@@ -135,35 +126,22 @@ public class SpringdocAutoConfiguration {
         initOpenApi(bc, info, apiProps, 
                 getBasePath(springContextPath, apiProps.get("base.path"), rc.getContextPath()));
 
-        final OasDocument openApi = reader.read(camelContext, rests, bc, null, camelContext.getClassResolver());
+        final OpenAPI openApi = reader.read(camelContext, rests, bc, null, camelContext.getClassResolver());
         if (!rc.isApiVendorExtension()) {
             clearVendorExtensions(openApi);
         }
         // Set relative path in URL if basepath is set
-        if (bc.getBasePath()!=null && !bc.getBasePath().isEmpty() && openApi.is3xDocument()) {
-            for (Server server : ((Oas30Document)openApi).getServers()) {
-                if (server.url.endsWith(bc.getBasePath())) {
+        if (bc.getBasePath()!=null && !bc.getBasePath().isEmpty() 
+               /* && openApi.getSpecVersion().equals(SpecVersion)*/) {
+            for (Server server : openApi.getServers()) {
+                if (server.getUrl().endsWith(bc.getBasePath())) {
                     LOG.info("Setting Server URL in ApiDoc to base path: {}", bc.getBasePath());
-                    server.url = bc.getBasePath();
+                    server.setUrl(bc.getBasePath());
                 }
             }
         }
 
-        // dump to json
-        final ObjectMapper mapper = new ObjectMapper(new JsonFactory());
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        final Object dump = io.apicurio.datamodels.Library.writeNode(openApi);
-        final byte[] jsonData = mapper.writeValueAsBytes(dump);
-        // json to yaml
-        final JsonNode node = mapper.readTree(jsonData);
-        final String yaml = new YAMLMapper().writeValueAsString(node);
-
-        // parse bytes into swagger
-        return Optional.ofNullable(new OpenAPIV3Parser().readContents(yaml))
-                .map(SwaggerParseResult::getOpenAPI)
-                .map(a -> a.info(info))
-                .orElse(null);
+        return openApi;
     }
 
     /**

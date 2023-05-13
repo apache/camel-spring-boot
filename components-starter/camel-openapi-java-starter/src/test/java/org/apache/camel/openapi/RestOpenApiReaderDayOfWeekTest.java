@@ -38,12 +38,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
-import io.apicurio.datamodels.Library;
-import io.apicurio.datamodels.openapi.models.OasDocument;
+import io.swagger.v3.core.util.Json;
+import io.swagger.v3.oas.models.OpenAPI;
 
 @DirtiesContext
 @CamelSpringBootTest
@@ -101,15 +98,11 @@ public class RestOpenApiReaderDayOfWeekTest {
 		config.setVersion("2.0");
 		RestOpenApiReader reader = new RestOpenApiReader();
 
-		OasDocument openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
+		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
 				new DefaultClassResolver());
 		assertNotNull(openApi);
 
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(SerializationFeature.INDENT_OUTPUT);
-		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-		Object dump = Library.writeNode(openApi);
-		String json = mapper.writeValueAsString(dump);
+		String json = RestOpenApiSupport.getJsonFromOpenAPI(openApi, config);
 
 		log.info(json);
 
@@ -136,15 +129,11 @@ public class RestOpenApiReaderDayOfWeekTest {
 		//config.setVersion("2.0");
 		RestOpenApiReader reader = new RestOpenApiReader();
 
-		OasDocument openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
+		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
 				new DefaultClassResolver());
 		assertNotNull(openApi);
 
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(SerializationFeature.INDENT_OUTPUT);
-		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-		Object dump = Library.writeNode(openApi);
-		String json = mapper.writeValueAsString(dump);
+		String json = Json.pretty(openApi);
 
 		log.info(json);
 

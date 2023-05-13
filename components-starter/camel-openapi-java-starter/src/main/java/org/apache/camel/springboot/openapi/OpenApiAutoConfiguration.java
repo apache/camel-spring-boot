@@ -16,17 +16,9 @@
  */
 package org.apache.camel.springboot.openapi;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-import io.apicurio.datamodels.openapi.models.OasDocument;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.parser.OpenAPIV3Parser;
-import io.swagger.v3.parser.core.models.SwaggerParseResult;
 import org.apache.camel.CamelContext;
 import org.apache.camel.model.rest.RestDefinition;
 import org.apache.camel.openapi.BeanConfig;
@@ -134,29 +126,14 @@ public class OpenApiAutoConfiguration {
         RestConfiguration rc = camelContext.getRestConfiguration();
         initOpenApi(bc, info, rc.getApiProperties());
 
-        OasDocument openApi = reader.read(camelContext, rests, bc, null, camelContext.getClassResolver());
-        if (!rc.isApiVendorExtension()) {
-            clearVendorExtensions(openApi);
+        OpenAPI openApi = reader.read(camelContext, rests, bc, null, camelContext.getClassResolver());
+        if (openApi != null){
+            if (!rc.isApiVendorExtension()) {
+                clearVendorExtensions(openApi);
+            }
+            openApi.setInfo(info);
         }
-
-        // dump to json
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        Object dump = io.apicurio.datamodels.Library.writeNode(openApi);
-        byte[] jsonData = mapper.writeValueAsBytes(dump);
-        // json to yaml
-        JsonNode node = mapper.readTree(jsonData);
-        String yaml = new YAMLMapper().writeValueAsString(node);
-
-        // parse bytes into swagger
-        OpenAPIV3Parser parser = new OpenAPIV3Parser();
-        SwaggerParseResult spr = parser.readContents(yaml);
-        OpenAPI answer = spr.getOpenAPI();
-        if (answer != null) {
-            answer.setInfo(info);
-        }
-        return answer;
+        return openApi;
     }
 
     private static void initOpenApi(BeanConfig bc, Info info, Map<String, Object> config) {
