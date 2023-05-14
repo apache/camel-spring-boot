@@ -520,6 +520,27 @@
       "defaultValue": false
     },
     {
+      "name": "camel.resilience4j.bulkhead-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether bulkhead is enabled or not on the circuit breaker. Default is false.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.resilience4j.bulkhead-max-concurrent-calls",
+      "type": "java.lang.Integer",
+      "description": "Configures the max amount of concurrent calls the bulkhead will support.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
+      "defaultValue": 25
+    },
+    {
+      "name": "camel.resilience4j.bulkhead-max-wait-duration",
+      "type": "java.lang.Integer",
+      "description": "Configures a maximum amount of time which the calling thread will wait to enter the bulkhead. If bulkhead has space available, entry is guaranteed and immediate. If bulkhead is full, calling threads will contest for space, if it becomes available. maxWaitDuration can be set to 0. Note: for threads running on an event-loop or equivalent (rx computation pool, etc), setting maxWaitDuration to 0 is highly recommended. Blocking an event-loop thread will most likely have a negative effect on application throughput.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.resilience4j.circuit-breaker",
       "type": "java.lang.String",
       "description": "Refers to an existing io.github.resilience4j.circuitbreaker.CircuitBreaker instance to lookup and use from the registry. When using this, then any other circuit breaker options are not in use.",
@@ -597,6 +618,33 @@
       "description": "Whether to throw io.github.resilience4j.circuitbreaker.CallNotPermittedException when the call is rejected due circuit breaker is half open or open.",
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
       "defaultValue": false
+    },
+    {
+      "name": "camel.resilience4j.timeout-cancel-running-future",
+      "type": "java.lang.Boolean",
+      "description": "Configures whether cancel is called on the running future. Defaults to true.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.resilience4j.timeout-duration",
+      "type": "java.lang.Integer",
+      "description": "Configures the thread execution timeout. Default value is 1 second.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
+      "defaultValue": 1000
+    },
+    {
+      "name": "camel.resilience4j.timeout-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether timeout is enabled or not on the circuit breaker. Default is false.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.resilience4j.timeout-executor-service",
+      "type": "java.util.concurrent.ExecutorService",
+      "description": "References to a custom thread pool to use when timeout is enabled (uses ForkJoinPool#commonPool() by default)",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties"
     },
     {
       "name": "camel.resilience4j.wait-duration-in-open-state",

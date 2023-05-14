@@ -16,6 +16,8 @@
  */
 package org.apache.camel.model.springboot;
 
+import java.util.concurrent.ExecutorService;
+
 /**
  * Resilience4j Circuit Breaker EIP configuration
  * 
@@ -121,6 +123,45 @@ public class Resilience4jConfigurationDefinitionCommon {
      * is 60 seconds.
      */
     private Integer slowCallDurationThreshold = 60;
+    /**
+     * Whether bulkhead is enabled or not on the circuit breaker. Default is
+     * false.
+     */
+    private Boolean bulkheadEnabled = false;
+    /**
+     * Configures the max amount of concurrent calls the bulkhead will support.
+     */
+    private Integer bulkheadMaxConcurrentCalls = 25;
+    /**
+     * Configures a maximum amount of time which the calling thread will wait to
+     * enter the bulkhead. If bulkhead has space available, entry is guaranteed
+     * and immediate. If bulkhead is full, calling threads will contest for
+     * space, if it becomes available. maxWaitDuration can be set to 0. Note:
+     * for threads running on an event-loop or equivalent (rx computation pool,
+     * etc), setting maxWaitDuration to 0 is highly recommended. Blocking an
+     * event-loop thread will most likely have a negative effect on application
+     * throughput.
+     */
+    private Integer bulkheadMaxWaitDuration = 0;
+    /**
+     * Whether timeout is enabled or not on the circuit breaker. Default is
+     * false.
+     */
+    private Boolean timeoutEnabled = false;
+    /**
+     * References to a custom thread pool to use when timeout is enabled (uses
+     * ForkJoinPool#commonPool() by default)
+     */
+    private ExecutorService timeoutExecutorService;
+    /**
+     * Configures the thread execution timeout. Default value is 1 second.
+     */
+    private Integer timeoutDuration = 1000;
+    /**
+     * Configures whether cancel is called on the running future. Defaults to
+     * true.
+     */
+    private Boolean timeoutCancelRunningFuture = true;
 
     public String getCircuitBreaker() {
         return circuitBreaker;
@@ -227,5 +268,61 @@ public class Resilience4jConfigurationDefinitionCommon {
 
     public void setSlowCallDurationThreshold(Integer slowCallDurationThreshold) {
         this.slowCallDurationThreshold = slowCallDurationThreshold;
+    }
+
+    public Boolean getBulkheadEnabled() {
+        return bulkheadEnabled;
+    }
+
+    public void setBulkheadEnabled(Boolean bulkheadEnabled) {
+        this.bulkheadEnabled = bulkheadEnabled;
+    }
+
+    public Integer getBulkheadMaxConcurrentCalls() {
+        return bulkheadMaxConcurrentCalls;
+    }
+
+    public void setBulkheadMaxConcurrentCalls(Integer bulkheadMaxConcurrentCalls) {
+        this.bulkheadMaxConcurrentCalls = bulkheadMaxConcurrentCalls;
+    }
+
+    public Integer getBulkheadMaxWaitDuration() {
+        return bulkheadMaxWaitDuration;
+    }
+
+    public void setBulkheadMaxWaitDuration(Integer bulkheadMaxWaitDuration) {
+        this.bulkheadMaxWaitDuration = bulkheadMaxWaitDuration;
+    }
+
+    public Boolean getTimeoutEnabled() {
+        return timeoutEnabled;
+    }
+
+    public void setTimeoutEnabled(Boolean timeoutEnabled) {
+        this.timeoutEnabled = timeoutEnabled;
+    }
+
+    public ExecutorService getTimeoutExecutorService() {
+        return timeoutExecutorService;
+    }
+
+    public void setTimeoutExecutorService(ExecutorService timeoutExecutorService) {
+        this.timeoutExecutorService = timeoutExecutorService;
+    }
+
+    public Integer getTimeoutDuration() {
+        return timeoutDuration;
+    }
+
+    public void setTimeoutDuration(Integer timeoutDuration) {
+        this.timeoutDuration = timeoutDuration;
+    }
+
+    public Boolean getTimeoutCancelRunningFuture() {
+        return timeoutCancelRunningFuture;
+    }
+
+    public void setTimeoutCancelRunningFuture(Boolean timeoutCancelRunningFuture) {
+        this.timeoutCancelRunningFuture = timeoutCancelRunningFuture;
     }
 }
