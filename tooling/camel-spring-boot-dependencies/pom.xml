@@ -3134,6 +3134,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-jbang-console</artifactId>
+        <version>3.21.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-jbang-core</artifactId>
         <version>3.21.0-SNAPSHOT</version>
       </dependency>
