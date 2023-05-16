@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-azure-storage-queue-starter",
-    "version": "3.18.5-SNAPSHOT",
+    "version": "3.18.7-SNAPSHOT",
     "scheme": "azure-storage-queue",
     "extendsScheme": "",
     "syntax": "azure-storage-queue:accountName\/queueName",

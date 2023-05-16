@@ -10,6 +10,6 @@
     "supportLevel": "Experimental",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-kotlin-dsl-starter",
-    "version": "3.18.5-SNAPSHOT"
+    "version": "3.18.7-SNAPSHOT"
   }
 }

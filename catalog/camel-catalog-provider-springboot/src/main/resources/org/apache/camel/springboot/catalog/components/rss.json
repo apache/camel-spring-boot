@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-rss-starter",
-    "version": "3.18.5-SNAPSHOT",
+    "version": "3.18.7-SNAPSHOT",
     "scheme": "rss",
     "extendsScheme": "atom",
     "syntax": "rss:feedUri",

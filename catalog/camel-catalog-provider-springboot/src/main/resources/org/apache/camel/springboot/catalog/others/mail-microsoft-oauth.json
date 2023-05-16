@@ -6,9 +6,9 @@
     "description": "Camel Mail OAuth2 Authenticator for Microsoft Exchange Online",
     "deprecated": false,
     "firstVersion": "3.18.4",
-    "supportLevel": "Stable",
+    "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-mail-microsoft-oauth-starter",
-    "version": "3.20.0-SNAPSHOT"
+    "version": "3.18.7-SNAPSHOT"
   }
 }
