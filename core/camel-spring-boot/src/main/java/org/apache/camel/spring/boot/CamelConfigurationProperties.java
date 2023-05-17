@@ -396,6 +396,12 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean backlogTracingStandby;
 
     /**
+     * Whether backlog tracing should trace inner details from route templates (or kamelets). Turning this on increases the
+     * verbosity of tracing by including events from internal routes in the templates or kamelets.
+     */
+    private boolean backlogTracingTemplates;
+
+    /**
      * Sets whether tracing is enabled or not.
      *
      * Default is false.
@@ -407,6 +413,12 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
      * can be enabled later at runtime via JMX or via Tracer.setEnabled(true).
      */
     private boolean tracingStandby;
+
+    /**
+     * Whether tracing should trace inner details from route templates (or kamelets). Turning this on increases the
+     * verbosity of tracing by including events from internal routes in the templates or kamelets.
+     */
+    private boolean tracingTemplates;
 
     /**
      * Tracing pattern to match which node EIPs to trace.
