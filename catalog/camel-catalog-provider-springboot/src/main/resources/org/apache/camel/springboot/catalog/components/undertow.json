@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-undertow-starter",
-    "version": "3.14.6-SNAPSHOT",
+    "version": "3.14.8-SNAPSHOT",
     "scheme": "undertow",
     "extendsScheme": "",
     "syntax": "undertow:httpURI",

@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-solr-starter",
-    "version": "3.14.6-SNAPSHOT",
+    "version": "3.14.8-SNAPSHOT",
     "scheme": "solrs",
     "extendsScheme": "",
     "alternativeSchemes": "solr,solrs,solrCloud",

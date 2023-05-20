@@ -10,6 +10,6 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-ribbon-starter",
-    "version": "3.14.6-SNAPSHOT"
+    "version": "3.14.8-SNAPSHOT"
   }
 }
