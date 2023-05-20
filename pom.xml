@@ -120,11 +120,11 @@
         <asciidoctorj-version>2.3.0</asciidoctorj-version>
         <avro-version>1.11.0</avro-version>
         <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
-        <groovy-version>3.0.10</groovy-version>
+        <groovy-version>3.0.17</groovy-version>
         <hadoop2-version>2.10.0</hadoop2-version>
         <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
-        <jetty9-version>9.4.45.v20220203</jetty9-version>
+        <jetty9-version>9.4.51.v20230217</jetty9-version>
         <maven-compiler-plugin-version>3.10.1</maven-compiler-plugin-version>
         <maven-javadoc-plugin-version>3.2.0</maven-javadoc-plugin-version>
         <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
@@ -132,7 +132,7 @@
         <springdoc-version>1.6.6</springdoc-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
         <swagger-parser-v3-version>2.0.31</swagger-parser-v3-version>
-        <undertow-version>2.2.16.Final</undertow-version>
+        <undertow-version>2.2.24.Final</undertow-version>
     </properties>
 
 
