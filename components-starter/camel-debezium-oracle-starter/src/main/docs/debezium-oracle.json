@@ -369,9 +369,9 @@
       "defaultValue": "redo_log_catalog"
     },
     {
-      "name": "camel.component.debezium-oracle.log-mining-transaction-retention-hours",
+      "name": "camel.component.debezium-oracle.log-mining-transaction-retention-ms",
       "type": "java.lang.Long",
-      "description": "Hours to keep long running transactions in transaction buffer between log mining sessions. By default, all transactions are retained.",
+      "description": "Duration in milliseconds to keep long running transactions in transaction buffer between log mining sessions. By default, all transactions are retained. The option is a long type.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": 0
     },

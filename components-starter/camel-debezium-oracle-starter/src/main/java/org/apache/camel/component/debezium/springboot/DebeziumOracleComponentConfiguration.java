@@ -395,10 +395,11 @@ public class DebeziumOracleComponentConfiguration
      */
     private String logMiningStrategy = "redo_log_catalog";
     /**
-     * Hours to keep long running transactions in transaction buffer between log
-     * mining sessions. By default, all transactions are retained.
+     * Duration in milliseconds to keep long running transactions in transaction
+     * buffer between log mining sessions. By default, all transactions are
+     * retained. The option is a long type.
      */
-    private Long logMiningTransactionRetentionHours = 0L;
+    private Long logMiningTransactionRetentionMs = 0L;
     /**
      * Comma separated list of usernames to exclude from LogMiner query.
      */
@@ -1124,13 +1125,13 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningStrategy = logMiningStrategy;
     }
 
-    public Long getLogMiningTransactionRetentionHours() {
-        return logMiningTransactionRetentionHours;
+    public Long getLogMiningTransactionRetentionMs() {
+        return logMiningTransactionRetentionMs;
     }
 
-    public void setLogMiningTransactionRetentionHours(
-            Long logMiningTransactionRetentionHours) {
-        this.logMiningTransactionRetentionHours = logMiningTransactionRetentionHours;
+    public void setLogMiningTransactionRetentionMs(
+            Long logMiningTransactionRetentionMs) {
+        this.logMiningTransactionRetentionMs = logMiningTransactionRetentionMs;
     }
 
     public String getLogMiningUsernameExcludeList() {
