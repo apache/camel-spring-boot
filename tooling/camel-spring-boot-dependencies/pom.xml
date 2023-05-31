@@ -3174,6 +3174,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-parquet-avro</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-pdf</artifactId>
         <version>4.0.0-SNAPSHOT</version>
       </dependency>
