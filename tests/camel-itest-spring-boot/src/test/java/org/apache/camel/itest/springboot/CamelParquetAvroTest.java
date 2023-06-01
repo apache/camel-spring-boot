@@ -25,7 +25,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 
 @ExtendWith(ArquillianExtension.class)
-public class CamelBase64Test extends AbstractSpringBootTestSupport {
+public class CamelParquetAvroTest extends AbstractSpringBootTestSupport {
 
     @Deployment
     public static Archive<?> createSpringBootPackage() throws Exception {
