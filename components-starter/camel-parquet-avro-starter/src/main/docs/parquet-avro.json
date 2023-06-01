@@ -1,0 +1,35 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.parquet-avro",
+      "type": "org.apache.camel.dataformat.parquet.avro.springboot.ParquetAvroDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.parquet.avro.springboot.ParquetAvroDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.parquet-avro.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.parquet.avro.springboot.ParquetAvroDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.parquet-avro.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.parquet-avro.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the parquetAvro data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.parquet.avro.springboot.ParquetAvroDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.parquet-avro.unmarshal-type",
+      "type": "java.lang.String",
+      "description": "Class to use when unmarshalling.",
+      "sourceType": "org.apache.camel.dataformat.parquet.avro.springboot.ParquetAvroDataFormatConfiguration"
+    }
+  ],
+  "hints": []
+}
