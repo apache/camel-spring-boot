@@ -14,7 +14,7 @@
     "version": "4.0.0-SNAPSHOT",
     "scheme": "dhis2",
     "extendsScheme": "",
-    "syntax": "dhis2:methodName",
+    "syntax": "dhis2:apiName\/methodName",
     "async": false,
     "api": true,
     "apiSyntax": "apiName\/methodName",
