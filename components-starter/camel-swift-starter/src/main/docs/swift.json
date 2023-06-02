@@ -1,0 +1,83 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.swift-mt",
+      "type": "org.apache.camel.dataformat.swift.mt.springboot.SwiftMtDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.swift.mt.springboot.SwiftMtDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.swift-mt.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.swift.mt.springboot.SwiftMtDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.dataformat.swift-mx",
+      "type": "org.apache.camel.dataformat.swift.mx.springboot.SwiftMxDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.swift.mx.springboot.SwiftMxDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.swift-mx.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.swift.mx.springboot.SwiftMxDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.swift-mt.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.swift-mt.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the swiftMt data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.swift.mt.springboot.SwiftMtDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.swift-mt.write-in-json",
+      "type": "java.lang.Boolean",
+      "description": "The flag indicating that messages must be marshalled in a JSON format.",
+      "sourceType": "org.apache.camel.dataformat.swift.mt.springboot.SwiftMtDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.swift-mx.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.swift-mx.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the swiftMx data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.swift.mx.springboot.SwiftMxDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.swift-mx.read-config-ref",
+      "type": "java.lang.String",
+      "description": "Refers to a specific configuration to use when unmarshalling an input stream to lookup from the registry.",
+      "sourceType": "org.apache.camel.dataformat.swift.mx.springboot.SwiftMxDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.swift-mx.read-message-id",
+      "type": "java.lang.String",
+      "description": "The type of MX message to produce when unmarshalling an input stream. If not set, it will be automatically detected from the namespace used.",
+      "sourceType": "org.apache.camel.dataformat.swift.mx.springboot.SwiftMxDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.swift-mx.write-config-ref",
+      "type": "java.lang.String",
+      "description": "Refers to a specific configuration to use when marshalling a message to lookup from the registry.",
+      "sourceType": "org.apache.camel.dataformat.swift.mx.springboot.SwiftMxDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.swift-mx.write-in-json",
+      "type": "java.lang.Boolean",
+      "description": "The flag indicating that messages must be marshalled in a JSON format.",
+      "sourceType": "org.apache.camel.dataformat.swift.mx.springboot.SwiftMxDataFormatConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}
