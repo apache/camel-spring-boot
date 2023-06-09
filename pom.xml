@@ -120,19 +120,19 @@
         <asciidoctorj-version>2.5.5</asciidoctorj-version>
         <avro-version>1.11.0</avro-version>
         <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
-        <groovy-version>4.0.9</groovy-version>
+        <groovy-version>4.0.12</groovy-version>
         <hadoop2-version>2.10.0</hadoop2-version>
         <jakarta-jaxb-version>4.0.0</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
         <jetty9-version>9.4.45.v20220203</jetty9-version>
-        <maven-compiler-plugin-version>3.10.1</maven-compiler-plugin-version>
-        <maven-javadoc-plugin-version>3.2.0</maven-javadoc-plugin-version>
-        <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
+        <maven-compiler-plugin-version>3.11.0</maven-compiler-plugin-version>
+        <maven-javadoc-plugin-version>3.4.1</maven-javadoc-plugin-version>
+        <maven-surefire-plugin-version>3.1.0</maven-surefire-plugin-version>
         <mycila-license-version>3.0</mycila-license-version>
         <springdoc-version>1.6.6</springdoc-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
         <swagger-parser-v3-version>2.1.10</swagger-parser-v3-version>
-	<cyclonedx-maven-plugin-version>2.7.9</cyclonedx-maven-plugin-version>
+	    <cyclonedx-maven-plugin-version>2.7.9</cyclonedx-maven-plugin-version>
     </properties>
 
 
