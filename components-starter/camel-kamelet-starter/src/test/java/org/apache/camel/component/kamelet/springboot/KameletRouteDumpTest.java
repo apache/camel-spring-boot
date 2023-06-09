@@ -51,7 +51,7 @@ public class KameletRouteDumpTest {
     private CamelContext context;
 
     protected void postProcessTest() throws Exception {
-        context.setDumpRoutes(true);
+        context.setDumpRoutes("xml");
     }
 
     @Test
