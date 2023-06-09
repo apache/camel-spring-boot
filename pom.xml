@@ -117,7 +117,6 @@
         <aether-version>1.0.2.v20150114</aether-version>
         <arquillian-container-se-managed-version>1.0.2.Final</arquillian-container-se-managed-version>
         <arquillian-version>1.7.0.Alpha10</arquillian-version>
-        <asciidoctorj-version>2.5.5</asciidoctorj-version>
         <avro-version>1.11.0</avro-version>
         <glassfish-jaxb-runtime-version>${jakarta-jaxb-version}</glassfish-jaxb-runtime-version>
         <groovy-version>4.0.12</groovy-version>
