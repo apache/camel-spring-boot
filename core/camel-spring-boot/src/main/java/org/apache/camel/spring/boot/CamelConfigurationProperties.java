@@ -623,14 +623,14 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
 
     /**
      * If dumping is enabled then Camel will during startup dump all loaded routes (incl rests and route templates)
-     * represented as XML DSL into the log. This is intended for trouble shooting or to assist during development.
+     * represented as XML/YAML DSL into the log. This is intended for trouble shooting or to assist during development.
      *
      * Sensitive information that may be configured in the route endpoints could potentially be included in the dump
-     * output and is therefore not recommended to be used for production usage.
+     * output and is therefore not recommended being used for production usage.
      *
-     * This requires to have camel-xml-jaxb on the classpath to be able to dump the routes as XML.
+     * This requires to have camel-xml-io/camel-yaml-io on the classpath to be able to dump the routes as XML/YAML.
      */
-    private boolean dumpRoutes;
+    private String dumpRoutes;
 
     /**
      * Sets global options that can be referenced in the camel context
