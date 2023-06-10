@@ -70,6 +70,11 @@ public class Lambda2ComponentConfiguration
      */
     private Boolean pojoRequest = false;
     /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
+    /**
      * The region in which Lambda client needs to work. When using this
      * parameter, the configuration will expect the lowercase name of the region
      * (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
@@ -90,6 +95,11 @@ public class Lambda2ComponentConfiguration
      * in.
      */
     private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the Lambda client should expect to load credentials through a
+     * profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -165,6 +175,14 @@ public class Lambda2ComponentConfiguration
         this.pojoRequest = pojoRequest;
     }
 
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
     public String getRegion() {
         return region;
     }
@@ -196,6 +214,15 @@ public class Lambda2ComponentConfiguration
     public void setUseDefaultCredentialsProvider(
             Boolean useDefaultCredentialsProvider) {
         this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
+    }
+
+    public Boolean getUseProfileCredentialsProvider() {
+        return useProfileCredentialsProvider;
+    }
+
+    public void setUseProfileCredentialsProvider(
+            Boolean useProfileCredentialsProvider) {
+        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
     }
 
     public Boolean getAutowiredEnabled() {
