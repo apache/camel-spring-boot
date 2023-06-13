@@ -40,7 +40,7 @@ public class CamelParquetAvroTest extends AbstractSpringBootTestSupport {
 
     @Test
     public void componentTests() throws Exception {
-        this.runDataformatTest(config);
+        this.runDataformatTest(config, "parquetAvro");
         this.runModuleUnitTestsIfEnabled(config);
     }
 
