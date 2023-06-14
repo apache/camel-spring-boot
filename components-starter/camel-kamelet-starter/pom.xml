@@ -47,6 +47,12 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
+      <artifactId>camel-xml-jaxb-dsl</artifactId>
+      <version>${camel-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
       <artifactId>camel-groovy</artifactId>
       <version>${camel-version}</version>
       <scope>test</scope>
