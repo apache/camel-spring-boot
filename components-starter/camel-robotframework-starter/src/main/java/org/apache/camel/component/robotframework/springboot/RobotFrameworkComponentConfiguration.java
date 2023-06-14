@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.robotframework.springboot;
 
-import java.io.File;
 import org.apache.camel.component.robotframework.RobotFrameworkCamelConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -52,9 +51,9 @@ public class RobotFrameworkComponentConfiguration
      */
     private Boolean allowTemplateFromHeader = false;
     /**
-     * A text file to read more arguments from.
+     * A text String to read more arguments from.
      */
-    private File argumentFile;
+    private String argumentFiles;
     /**
      * Creates combined statistics based on tags. Use the format tags:title List
      */
@@ -64,9 +63,9 @@ public class RobotFrameworkComponentConfiguration
      */
     private String criticalTags;
     /**
-     * A debug file that is written during execution.
+     * A debug String that is written during execution.
      */
-    private File debugFile;
+    private String debugFile;
     /**
      * Sets the documentation of the top-level tests suites.
      */
@@ -99,9 +98,9 @@ public class RobotFrameworkComponentConfiguration
      */
     private String listeners;
     /**
-     * Sets the path to the generated log file.
+     * Sets the path to the generated log String.
      */
-    private File log;
+    private String log;
     /**
      * Sets the threshold level for logging.
      */
@@ -139,22 +138,22 @@ public class RobotFrameworkComponentConfiguration
      */
     private Boolean noStatusReturnCode = false;
     /**
-     * Sets the path to the generated output file.
+     * Sets the path to the generated output String.
      */
-    private File output;
+    private String output;
     /**
      * Configures where generated reports are to be placed.
      */
-    private File outputDirectory;
+    private String outputDirectory;
     /**
      * Sets the test execution order to be randomized. Valid values are all,
      * suite, and test
      */
     private String randomize;
     /**
-     * Sets the path to the generated report file.
+     * Sets the path to the generated report String.
      */
-    private File report;
+    private String report;
     /**
      * Sets background colors for the generated report and summary.
      */
@@ -170,9 +169,9 @@ public class RobotFrameworkComponentConfiguration
      */
     private Boolean runEmptySuite = false;
     /**
-     * Re-run failed tests, based on output.xml file.
+     * Re-run failed tests, based on output.xml String.
      */
-    private File runFailed;
+    private String runFailed;
     /**
      * Sets the execution mode for this tests run. Note that this setting has
      * been deprecated in Robot Framework 2.8. Use separate dryryn,
@@ -241,16 +240,16 @@ public class RobotFrameworkComponentConfiguration
      */
     private String variables;
     /**
-     * Show a warning when an invalid file is skipped.
+     * Show a warning when an invalid String is skipped.
      */
     private Boolean warnOnSkippedFiles = false;
     /**
-     * Sets the path to the generated XUnit compatible result file, relative to
-     * outputDirectory. The file is in xml format. By default, the file name is
-     * derived from the testCasesDirectory parameter, replacing blanks in the
-     * directory name by underscores.
+     * Sets the path to the generated XUnit compatible result String, relative
+     * to outputDirectory. The String is in xml format. By default, the String
+     * name is derived from the testCasesDirectory parameter, replacing blanks
+     * in the directory name by underscores.
      */
-    private File xunitFile;
+    private String xunitFile;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -302,12 +301,12 @@ public class RobotFrameworkComponentConfiguration
         this.allowTemplateFromHeader = allowTemplateFromHeader;
     }
 
-    public File getArgumentFile() {
-        return argumentFile;
+    public String getArgumentFiles() {
+        return argumentFiles;
     }
 
-    public void setArgumentFile(File argumentFile) {
-        this.argumentFile = argumentFile;
+    public void setArgumentFiles(String argumentFiles) {
+        this.argumentFiles = argumentFiles;
     }
 
     public String getCombinedTagStats() {
@@ -326,11 +325,11 @@ public class RobotFrameworkComponentConfiguration
         this.criticalTags = criticalTags;
     }
 
-    public File getDebugFile() {
+    public String getDebugFile() {
         return debugFile;
     }
 
-    public void setDebugFile(File debugFile) {
+    public void setDebugFile(String debugFile) {
         this.debugFile = debugFile;
     }
 
@@ -390,11 +389,11 @@ public class RobotFrameworkComponentConfiguration
         this.listeners = listeners;
     }
 
-    public File getLog() {
+    public String getLog() {
         return log;
     }
 
-    public void setLog(File log) {
+    public void setLog(String log) {
         this.log = log;
     }
 
@@ -462,19 +461,19 @@ public class RobotFrameworkComponentConfiguration
         this.noStatusReturnCode = noStatusReturnCode;
     }
 
-    public File getOutput() {
+    public String getOutput() {
         return output;
     }
 
-    public void setOutput(File output) {
+    public void setOutput(String output) {
         this.output = output;
     }
 
-    public File getOutputDirectory() {
+    public String getOutputDirectory() {
         return outputDirectory;
     }
 
-    public void setOutputDirectory(File outputDirectory) {
+    public void setOutputDirectory(String outputDirectory) {
         this.outputDirectory = outputDirectory;
     }
 
@@ -486,11 +485,11 @@ public class RobotFrameworkComponentConfiguration
         this.randomize = randomize;
     }
 
-    public File getReport() {
+    public String getReport() {
         return report;
     }
 
-    public void setReport(File report) {
+    public void setReport(String report) {
         this.report = report;
     }
 
@@ -518,11 +517,11 @@ public class RobotFrameworkComponentConfiguration
         this.runEmptySuite = runEmptySuite;
     }
 
-    public File getRunFailed() {
+    public String getRunFailed() {
         return runFailed;
     }
 
-    public void setRunFailed(File runFailed) {
+    public void setRunFailed(String runFailed) {
         this.runFailed = runFailed;
     }
 
@@ -654,11 +653,11 @@ public class RobotFrameworkComponentConfiguration
         this.warnOnSkippedFiles = warnOnSkippedFiles;
     }
 
-    public File getXunitFile() {
+    public String getXunitFile() {
         return xunitFile;
     }
 
-    public void setXunitFile(File xunitFile) {
+    public void setXunitFile(String xunitFile) {
         this.xunitFile = xunitFile;
     }
 

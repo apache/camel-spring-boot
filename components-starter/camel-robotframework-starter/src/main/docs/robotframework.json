@@ -28,9 +28,9 @@
       "defaultValue": false
     },
     {
-      "name": "camel.component.robotframework.argument-file",
-      "type": "java.io.File",
-      "description": "A text file to read more arguments from.",
+      "name": "camel.component.robotframework.argument-files",
+      "type": "java.lang.String",
+      "description": "A text String to read more arguments from.",
       "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
     },
     {
@@ -72,8 +72,8 @@
     },
     {
       "name": "camel.component.robotframework.debug-file",
-      "type": "java.io.File",
-      "description": "A debug file that is written during execution.",
+      "type": "java.lang.String",
+      "description": "A debug String that is written during execution.",
       "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
     },
     {
@@ -135,8 +135,8 @@
     },
     {
       "name": "camel.component.robotframework.log",
-      "type": "java.io.File",
-      "description": "Sets the path to the generated log file.",
+      "type": "java.lang.String",
+      "description": "Sets the path to the generated log String.",
       "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
     },
     {
@@ -191,13 +191,13 @@
     },
     {
       "name": "camel.component.robotframework.output",
-      "type": "java.io.File",
-      "description": "Sets the path to the generated output file.",
+      "type": "java.lang.String",
+      "description": "Sets the path to the generated output String.",
       "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
     },
     {
       "name": "camel.component.robotframework.output-directory",
-      "type": "java.io.File",
+      "type": "java.lang.String",
       "description": "Configures where generated reports are to be placed.",
       "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
     },
@@ -209,8 +209,8 @@
     },
     {
       "name": "camel.component.robotframework.report",
-      "type": "java.io.File",
-      "description": "Sets the path to the generated report file.",
+      "type": "java.lang.String",
+      "description": "Sets the path to the generated report String.",
       "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
     },
     {
@@ -234,8 +234,8 @@
     },
     {
       "name": "camel.component.robotframework.run-failed",
-      "type": "java.io.File",
-      "description": "Re-run failed tests, based on output.xml file.",
+      "type": "java.lang.String",
+      "description": "Re-run failed tests, based on output.xml String.",
       "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
     },
     {
@@ -333,14 +333,14 @@
     {
       "name": "camel.component.robotframework.warn-on-skipped-files",
       "type": "java.lang.Boolean",
-      "description": "Show a warning when an invalid file is skipped.",
+      "description": "Show a warning when an invalid String is skipped.",
       "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.robotframework.xunit-file",
-      "type": "java.io.File",
-      "description": "Sets the path to the generated XUnit compatible result file, relative to outputDirectory. The file is in xml format. By default, the file name is derived from the testCasesDirectory parameter, replacing blanks in the directory name by underscores.",
+      "type": "java.lang.String",
+      "description": "Sets the path to the generated XUnit compatible result String, relative to outputDirectory. The String is in xml format. By default, the String name is derived from the testCasesDirectory parameter, replacing blanks in the directory name by underscores.",
       "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
     }
   ],
