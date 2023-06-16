@@ -119,6 +119,7 @@
         <arquillian-version>1.7.0.Alpha10</arquillian-version>
         <avro-version>1.11.0</avro-version>
         <groovy-version>4.0.12</groovy-version>
+        <graal-sdk-version>22.3.2</graal-sdk-version>
         <jakarta-jaxb-version>4.0.0</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
         <maven-compiler-plugin-version>3.11.0</maven-compiler-plugin-version>

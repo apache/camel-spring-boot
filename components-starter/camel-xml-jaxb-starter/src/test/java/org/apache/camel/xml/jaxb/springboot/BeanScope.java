@@ -14,26 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot;
+package org.apache.camel.xml.jaxb.springboot;
 
-import org.apache.camel.component.properties.DefaultPropertiesParser;
-import org.apache.camel.component.properties.PropertiesLookup;
-import org.springframework.core.env.Environment;
+import jakarta.xml.bind.annotation.XmlEnum;
 
-class SpringPropertiesParser extends DefaultPropertiesParser {
+@XmlEnum
+public enum BeanScope {
+    Singleton,
+    Request,
+    Prototype;
 
-    // Members
-    private final Environment env;
-
-    SpringPropertiesParser(Environment env) {
-        this.env = env;
+    BeanScope() {
     }
-
-    // Overridden
-
-    @Override
-    public String parseProperty(String key, String value, PropertiesLookup properties) {
-        return env.getProperty(key);
-    }
-
 }

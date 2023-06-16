@@ -411,6 +411,7 @@
     <module>camel-workday-starter</module>
     <module>camel-xchange-starter</module>
     <module>camel-xj-starter</module>
+    <module>camel-xml-jaxb-starter</module>
     <module>camel-xml-jaxp-starter</module>
     <module>camel-xmlsecurity-starter</module>
     <module>camel-xmpp-starter</module>

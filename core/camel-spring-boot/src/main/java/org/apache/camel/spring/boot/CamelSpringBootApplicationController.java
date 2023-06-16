@@ -67,8 +67,10 @@ public class CamelSpringBootApplicationController {
         run();
     }
 
+    // The method cannot to be private to prevent a failure at startup in native mode
+    // Refer to https://github.com/spring-projects/spring-framework/pull/30654 for more details
     @PreDestroy
-    private void destroy() {
+    void destroy() {
         main.completed();
     }
 
