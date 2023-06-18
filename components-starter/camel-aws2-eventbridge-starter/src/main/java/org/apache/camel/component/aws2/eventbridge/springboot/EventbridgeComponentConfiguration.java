@@ -79,6 +79,11 @@ public class EventbridgeComponentConfiguration
      */
     private Boolean pojoRequest = false;
     /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
+    /**
      * To define a proxy host when instantiating the Eventbridge client
      */
     private String proxyHost;
@@ -111,6 +116,11 @@ public class EventbridgeComponentConfiguration
      * be passed in.
      */
     private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the Eventbridge client should expect to load credentials
+     * through a profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -185,6 +195,14 @@ public class EventbridgeComponentConfiguration
         this.pojoRequest = pojoRequest;
     }
 
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
     public String getProxyHost() {
         return proxyHost;
     }
@@ -240,6 +258,15 @@ public class EventbridgeComponentConfiguration
     public void setUseDefaultCredentialsProvider(
             Boolean useDefaultCredentialsProvider) {
         this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
+    }
+
+    public Boolean getUseProfileCredentialsProvider() {
+        return useProfileCredentialsProvider;
+    }
+
+    public void setUseProfileCredentialsProvider(
+            Boolean useProfileCredentialsProvider) {
+        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
     }
 
     public Boolean getAutowiredEnabled() {

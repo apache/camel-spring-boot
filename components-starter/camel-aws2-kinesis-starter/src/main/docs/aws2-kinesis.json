@@ -88,6 +88,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.aws2-kinesis-firehose.profile-credentials-name",
+      "type": "java.lang.String",
+      "description": "If using a profile credentials provider this parameter will set the profile name.",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws2-kinesis-firehose.proxy-host",
       "type": "java.lang.String",
       "description": "To define a proxy host when instantiating the Kinesis Firehose client",
@@ -134,6 +140,13 @@
       "name": "camel.component.aws2-kinesis-firehose.use-default-credentials-provider",
       "type": "java.lang.Boolean",
       "description": "Set whether the Kinesis Firehose client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in.",
+      "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-kinesis-firehose.use-profile-credentials-provider",
+      "type": "java.lang.Boolean",
+      "description": "Set whether the Kinesis Firehose client should expect to load credentials through a profile credentials provider.",
       "sourceType": "org.apache.camel.component.aws2.firehose.springboot.KinesisFirehose2ComponentConfiguration",
       "defaultValue": false
     },
@@ -215,6 +228,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.aws2-kinesis.profile-credentials-name",
+      "type": "java.lang.String",
+      "description": "If using a profile credentials provider this parameter will set the profile name.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws2-kinesis.proxy-host",
       "type": "java.lang.String",
       "description": "To define a proxy host when instantiating the Kinesis client",
@@ -279,6 +298,13 @@
       "name": "camel.component.aws2-kinesis.use-default-credentials-provider",
       "type": "java.lang.Boolean",
       "description": "Set whether the Kinesis client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-kinesis.use-profile-credentials-provider",
+      "type": "java.lang.Boolean",
+      "description": "Set whether the Kinesis client should expect to load credentials through a profile credentials provider.",
       "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
       "defaultValue": false
     }
