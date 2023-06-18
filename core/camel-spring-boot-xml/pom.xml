@@ -96,12 +96,6 @@
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-package-maven-plugin</artifactId>
                 <version>${camel-version}</version>
-                <configuration>
-                    <!-- set to true to make build fail fast if missing documentation in docs files -->
-                    <failFast>true</failFast>
-                    <!-- set to true to make build fail if an option has no description -->
-                    <failOnMissingDescription>true</failOnMissingDescription>
-                </configuration>
                 <executions>
                     <execution>
                         <id>generate</id>

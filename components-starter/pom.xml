@@ -81,12 +81,6 @@
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-boot-generator-maven-plugin</artifactId>
         <version>${project.version}</version>
-        <configuration>
-          <!-- set to true to make build fail fast if missing documentation in docs files -->
-          <failFast>false</failFast>
-          <!-- set to true to make build fail if an option has no description -->
-          <failOnMissingDescription>false</failOnMissingDescription>
-        </configuration>
         <executions>
           <execution>
             <id>generate</id>
