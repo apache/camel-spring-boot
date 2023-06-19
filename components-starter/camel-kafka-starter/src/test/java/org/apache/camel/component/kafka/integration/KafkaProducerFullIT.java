@@ -47,6 +47,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.header.Header;
 import org.apache.kafka.common.header.Headers;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -128,7 +129,7 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
     }
 
     @AfterAll
-    public void after() {
+    public static void after() {
         // clean all test topics
         final List<String> topics = new ArrayList<>();
         topics.add(TOPIC_BYTES);
@@ -137,6 +138,10 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         topics.add(TOPIC_STRINGS);
 
         kafkaAdminClient.deleteTopics(topics);
+    }
+
+    @AfterEach
+    public void reset() {
         mockEndpoint.reset();
     }
 
