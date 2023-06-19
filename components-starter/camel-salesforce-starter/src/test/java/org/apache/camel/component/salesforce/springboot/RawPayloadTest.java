@@ -127,10 +127,16 @@ public class RawPayloadTest extends AbstractSalesforceTestBase {
 
         server.setDispatcher(new Dispatcher() {
             @Override
-            public MockResponse dispatch(RecordedRequest recordedRequest) throws InterruptedException {
+            public MockResponse dispatch(RecordedRequest recordedRequest) {
                 if (recordedRequest.getPath().equals(OAUTH2_TOKEN_PATH)) {
                     return new MockResponse().setResponseCode(200)
-                            .setBody("{ \"access_token\": \"mock_token\", \"instance_url\": \"" + loginUrl + "\"}");
+                            .setBody(String.format("""
+                             {
+                                "access_token": "mock_token",
+                                "instance_url": "%s",
+                                "id": "https://login.salesforce.com/id/00D4100000xxxxxxxx/0054100000xxxxxxxx"
+                             }
+                             """, loginUrl));
                 } else {
                     return new MockResponse().setResponseCode(200)
                             .setHeader(HttpHeader.CONTENT_TYPE.toString(),
