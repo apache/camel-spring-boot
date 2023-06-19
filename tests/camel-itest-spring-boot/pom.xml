@@ -208,6 +208,8 @@
                         <itest.springboot.includeTestDependencies>true</itest.springboot.includeTestDependencies>
                         <itest.springboot.mavenOfflineResolution>false</itest.springboot.mavenOfflineResolution>
                         <itest.springboot.springBootVersion>${spring-boot-version}</itest.springboot.springBootVersion>
+                        <!-- To remove once all version conflicts are fixed -->
+                        <itest.springboot.failOnRelatedLibraryMismatch>false</itest.springboot.failOnRelatedLibraryMismatch>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

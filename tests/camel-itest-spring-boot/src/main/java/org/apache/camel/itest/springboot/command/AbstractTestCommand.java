@@ -16,13 +16,13 @@
  */
 package org.apache.camel.itest.springboot.command;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 import org.apache.camel.itest.springboot.Command;
 import org.apache.camel.itest.springboot.ITestConfig;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 
 /**
  * An abstract class for commands that need standard test parameters.
@@ -49,7 +49,7 @@ public abstract class AbstractTestCommand implements Command {
         ITestConfig config = (ITestConfig) configObj;
         Object result = this.executeTest(config, compName);
 
-        return new AsyncResult<>(result);
+        return CompletableFuture.completedFuture(result);
     }
 
     public abstract Object executeTest(ITestConfig config, String component) throws Exception;
