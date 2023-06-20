@@ -25,7 +25,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 
 @ExtendWith(ArquillianExtension.class)
-public class CamelSjms2Test extends AbstractSpringBootTestSupport {
+public class CamelCxfRestTest extends AbstractSpringBootTestSupport {
 
     @Deployment
     public static Archive<?> createSpringBootPackage() throws Exception {
@@ -34,14 +34,13 @@ public class CamelSjms2Test extends AbstractSpringBootTestSupport {
 
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
-                .module(inferModuleName(CamelSjms2Test.class))
+                .module(inferModuleName(CamelCxfRestTest.class))
                 .build();
     }
 
     @Test
     public void componentTests() throws Exception {
-        this.runComponentTest(config);
-        //this.runModuleUnitTestsIfEnabled(config);
+        this.runComponentTest(config, "cxfrs");
+        this.runModuleUnitTestsIfEnabled(config);
     }
-
 }

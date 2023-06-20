@@ -19,6 +19,7 @@ package org.apache.camel.itest.springboot.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Arrays;
@@ -26,9 +27,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -74,25 +77,12 @@ import org.jboss.shrinkwrap.resolver.api.maven.coordinate.MavenDependencyExclusi
 public final class ArquillianPackager {
 
     /**
-     * A flag to enable system-out logging.
-     * Cannot use logging libraries here.
-     */
-    private static final boolean DEBUG_ENABLED = false;
-
-    /**
-     * Configuration of the library checker.
-     */
-    private static final boolean FAIL_ON_TEST_LIBRARY_MISMATCH = false;
-    private static final boolean FAIL_ON_RELATED_LIBRARY_MISMATCH = true;
-    private static final boolean VERSION_EQUALITY_MINOR_VERSION = true;
-
-    /**
      * Spring-boot 1.4+ packaging model
      */
     private static final String LIB_FOLDER = "/BOOT-INF/lib";
     private static final String CLASSES_FOLDER = "BOOT-INF/classes";
 
-    private static final Pattern PROP_PATTERN = Pattern.compile("(\\$\\{[^}]*\\})");
+    private static final Pattern PROP_PATTERN = Pattern.compile("(\\$\\{[^}]*})");
 
     private ArquillianPackager() {
     }
@@ -112,9 +102,7 @@ public final class ArquillianPackager {
         JavaArchive ark = domain.getArchiveFactory().create(JavaArchive.class, "test.jar");
         ark = ark.addAsManifestResource("BOOT-MANIFEST.MF", "MANIFEST.MF");
         ark = ark.addAsDirectories(LIB_FOLDER);
-        if (!CLASSES_FOLDER.equals("")) {
-            ark = ark.addAsDirectories(CLASSES_FOLDER);
-        }
+        ark = ark.addAsDirectories(CLASSES_FOLDER);
 
         if (config.getUseCustomLog()) {
             // Spring loads logback-spring not spring-logback
@@ -127,12 +115,12 @@ public final class ArquillianPackager {
 
         String version = System.getProperty("version_org.apache.camel:camel-core");
         if (version == null) {
-            config.getMavenVersion();
+            version = config.getMavenVersion();
         }
         if (version == null) {
             // It is missing when launching from IDE
             PomEquippedResolveStage pom = resolver(config).loadPomFromFile("pom.xml");
-            List<MavenResolvedArtifact> resolved = Arrays.asList(pom.importCompileAndRuntimeDependencies().resolve().withoutTransitivity().asResolvedArtifact());
+            MavenResolvedArtifact[] resolved = pom.importCompileAndRuntimeDependencies().resolve().withoutTransitivity().asResolvedArtifact();
             for (MavenResolvedArtifact dep : resolved) {
                 if (dep.getCoordinate().getGroupId().equals("org.apache.camel.springboot")) {
                     version = dep.getCoordinate().getVersion();
@@ -141,7 +129,7 @@ public final class ArquillianPackager {
             }
         }
 
-        debug("Resolved version: " + version);
+        debug(config, "Resolved version: " + version);
         if (version == null) {
             throw new IllegalStateException("Cannot determine the current version of the camel component");
         }
@@ -192,8 +180,8 @@ public final class ArquillianPackager {
         for (String depXml : providedDependenciesXml) {
             if (validTestDependency(config, depXml, commonExclusions)) {
                 depXml = useBOMVersionIfPresent(config, depXml);
-                depXml = enforceExclusions(config, depXml, commonExclusions);
-                depXml = switchToStarterIfPresent(config, depXml);
+                depXml = enforceExclusions(depXml, commonExclusions);
+                depXml = switchToStarterIfPresent(depXml);
                 cleanProvidedDependenciesXml.add(depXml);
             }
         }
@@ -205,9 +193,9 @@ public final class ArquillianPackager {
         resolvedScopes.add(ScopeType.RUNTIME);
         resolvedScopes.addAll(scopes);
 
-        Set<MavenResolvedArtifact> runtimeDependencies = new HashSet<>();
+        Set<MavenResolvedArtifact> runtimeDependencies;
         try {
-            runtimeDependencies.addAll(Arrays.asList(resolver(config)
+            runtimeDependencies = new HashSet<>(Arrays.asList(resolver(config)
                     .loadPomFromFile(moduleSpringBootPom)
                     .importDependencies(resolvedScopes.toArray(new ScopeType[0]))
                     .addDependencies(additionalDependencies)
@@ -220,9 +208,9 @@ public final class ArquillianPackager {
         
         // Load the test dependencies from the actual starter pom with transitivity
         // since most are defined in the parent pom
-        Set<MavenResolvedArtifact> testProvidedDependenciesPom = new HashSet<>();
+        Set<MavenResolvedArtifact> testProvidedDependenciesPom;
         try {
-            testProvidedDependenciesPom.addAll(Arrays.asList(resolver(config)
+            testProvidedDependenciesPom = new HashSet<>(Arrays.asList(resolver(config)
                     .loadPomFromFile(new File(config.getModuleBasePath() + "/pom.xml"))
                     .importTestDependencies()
                     .resolve()
@@ -246,7 +234,7 @@ public final class ArquillianPackager {
         excludeDependencyRegex(dependencies, "^spring-boot-loader-[0-9].*");
 
         // Add all dependencies as spring-boot nested jars
-        ark = addDependencies(ark, dependencies);
+        ark = addDependencies(config, ark, dependencies);
 
         // Add common packages to main jar
         ark = ark.addPackages(true, "org.jboss.shrinkwrap");
@@ -275,8 +263,7 @@ public final class ArquillianPackager {
 
         // Adding configuration properties
         for (Map.Entry<Object, Object> e : System.getProperties().entrySet()) {
-            if (e.getKey() instanceof String && e.getValue() instanceof String) {
-                String key = (String) e.getKey();
+            if (e.getKey() instanceof String key && e.getValue() instanceof String) {
                 if (key.startsWith(ITestConfigBuilder.CONFIG_PREFIX)) {
                     external.addSystemProperty(key, (String) e.getValue());
                 }
@@ -291,8 +278,7 @@ public final class ArquillianPackager {
     }
 
     private static void lookForVersionMismatch(ITestConfig config, List<MavenResolvedArtifact> dependencyArtifacts) {
-        Set<String> ignore = new HashSet<>();
-        ignore.addAll(config.getIgnoreLibraryMismatch());
+        Set<String> ignore = new HashSet<>(config.getIgnoreLibraryMismatch());
 
         // A list of known libraries that don't follow the all-artifacts-same-version convention
         ignore.add("com.atlassian.jira:jira-rest-java-client-api");
@@ -377,12 +363,14 @@ public final class ArquillianPackager {
         ignore.add("com.microsoft.azure:msal4j-persistence-extension");
        
 
-        Map<String, Map<String, String>> status = new TreeMap<>();
+        Map<String, Map<String, Set<String>>> status = new TreeMap<>();
         Set<String> mismatches = new TreeSet<>();
+        Set<String> potentialMismatches = new TreeSet<>();
         for (MavenResolvedArtifact a : dependencyArtifacts) {
             boolean ignoreCheck = false;
+            String identifier = getIdentifier(a);
             for (String i : ignore) {
-                if (getIdentifier(a).startsWith(i)) {
+                if (identifier.startsWith(i)) {
                     ignoreCheck = true;
                     break;
                 }
@@ -405,44 +393,60 @@ public final class ArquillianPackager {
                 status.put(prefixId, new TreeMap<>());
             }
 
-            for (String anotherVersion : status.get(prefixId).values()) {
-                if (!sameVersion(anotherVersion, version)) {
-                    mismatches.add(prefixId);
+            for (Map.Entry<String, Set<String>> entry : status.get(prefixId).entrySet()) {
+                Set<String> anotherVersions = entry.getValue();
+                if (anotherVersions.size() == 1 && !sameVersion(anotherVersions.iterator().next(), version)) {
+                    if (identifier.equals(entry.getKey())) {
+                        // Same coordinates but different versions
+                        mismatches.add(prefixId);
+                    } else {
+                        // Same prefix but different versions
+                        potentialMismatches.add(prefixId);
+                    }
                 }
             }
 
-            status.get(prefixId).put(getIdentifier(a), version);
+            status.get(prefixId).computeIfAbsent(identifier, k -> new LinkedHashSet<>()).add(version);
         }
 
         StringBuilder message = new StringBuilder();
         for (String mismatch : mismatches) {
-            message.append("Found mismatch for dependency " + mismatch + ":\n");
-            for (String art : status.get(mismatch).keySet()) {
-                String ver = status.get(mismatch).get(art);
-                message.append(" - " + art + " --> " + ver + "\n");
+            message.append("Found mismatch for dependency ").append(mismatch).append(":\n");
+            Map<String, Set<String>> artifacts = status.get(mismatch);
+            for (String art : artifacts.keySet()) {
+                Set<String> versions = artifacts.get(art);
+                message.append(" - ").append(art).append(" --> ").append(versions).append("\n");
             }
         }
 
         if (message.length() > 0) {
             String alert = "Library version mismatch found.\n" + message;
-            if (FAIL_ON_RELATED_LIBRARY_MISMATCH) {
+            if (config.getFailOnRelatedLibraryMismatch()) {
                 throw new InvocationException(new RuntimeException(alert));
             } else {
-                debug(alert);
+                warn(alert);
             }
+        }
+        for (String mismatch : potentialMismatches) {
+            message.setLength(0);
+            message.append("Found a potential version mismatch for dependency ").append(mismatch).append(":\n");
+            Map<String, Set<String>> artifacts = status.get(mismatch);
+            for (String art : artifacts.keySet()) {
+                Set<String> versions = artifacts.get(art);
+                message.append(" - ").append(art).append(" --> ").append(versions).append("\n");
+            }
+            warn(message.toString());
         }
     }
 
     private static boolean sameVersion(String v1, String v2) {
-        if (VERSION_EQUALITY_MINOR_VERSION) {
-            if (v1.indexOf(".") != v1.lastIndexOf(".") && v2.indexOf(".") != v2.lastIndexOf(".")) {
-                // truncate up to minor version
-                int v1MinSplit = v1.indexOf(".", v1.indexOf(".") + 1);
-                v1 = v1.substring(0, v1MinSplit);
+        if (v1.indexOf(".") != v1.lastIndexOf(".") && v2.indexOf(".") != v2.lastIndexOf(".")) {
+            // truncate up to minor version
+            int v1MinSplit = v1.indexOf(".", v1.indexOf(".") + 1);
+            v1 = v1.substring(0, v1MinSplit);
 
-                int v2MinSplit = v2.indexOf(".", v2.indexOf(".") + 1);
-                v2 = v2.substring(0, v2MinSplit);
-            }
+            int v2MinSplit = v2.indexOf(".", v2.indexOf(".") + 1);
+            v2 = v2.substring(0, v2MinSplit);
         }
 
         return v1.equals(v2);
@@ -456,7 +460,7 @@ public final class ArquillianPackager {
         String pom;
         String template = "/application-pom-sb" + config.getSpringBootMajorVersion() + ".xml";
         try (InputStream pomTemplate = ArquillianPackager.class.getResourceAsStream(template)) {
-            pom = IOUtils.toString(pomTemplate);
+            pom = IOUtils.toString(Objects.requireNonNull(pomTemplate), StandardCharsets.UTF_8);
         }
 
         StringBuilder dependencies = new StringBuilder();
@@ -518,7 +522,7 @@ public final class ArquillianPackager {
             String groupId = excl.getGroupId();
             String artifactId = excl.getArtifactId();
 
-            boolean notExclusion = dependencyXml.indexOf("<exclusions>") < 0 || dependencyXml.indexOf(groupId) < dependencyXml.indexOf("<exclusions>");
+            boolean notExclusion = !dependencyXml.contains("<exclusions>") || dependencyXml.indexOf(groupId) < dependencyXml.indexOf("<exclusions>");
 
             if (dependencyXml.contains(groupId) && dependencyXml.contains(artifactId) && notExclusion) {
                 valid = false;
@@ -527,13 +531,13 @@ public final class ArquillianPackager {
         }
 
         if (!valid) {
-            debug("Discarded test dependency: " + dependencyXml.replace("\n", "").replace("\r", "").replace("\t", ""));
+            debug(config, "Discarded test dependency: " + dependencyXml.replace("\n", "").replace("\r", "").replace("\t", ""));
         }
 
         return valid;
     }
 
-    private static String enforceExclusions(ITestConfig config, String dependencyXml, List<MavenDependencyExclusion> exclusions) {
+    private static String enforceExclusions(String dependencyXml, List<MavenDependencyExclusion> exclusions) {
 
         if (!dependencyXml.contains("<exclusions>")) {
             dependencyXml = dependencyXml.replace("</dependency>", "<exclusions></exclusions></dependency>");
@@ -549,7 +553,7 @@ public final class ArquillianPackager {
         return dependencyXml;
     }
 
-    private static String switchToStarterIfPresent(ITestConfig config, String dependencyXml) {
+    private static String switchToStarterIfPresent(String dependencyXml) {
 
         String groupId = textBetween(dependencyXml, "<groupId>", "</groupId>");
         String artifactId = textBetween(dependencyXml, "<artifactId>", "</artifactId>");
@@ -607,11 +611,10 @@ public final class ArquillianPackager {
         int rsp = sp + start.length();
         int ep = text.indexOf(end);
         if (sp < 0 || ep < 0 || ep <= rsp) {
-            return null;
+            return "";
         }
 
-        String res = text.substring(rsp, ep);
-        return res;
+        return text.substring(rsp, ep);
     }
 
     private static boolean excludeDependencyRegex(List<File> dependencies, String regex) {
@@ -628,17 +631,17 @@ public final class ArquillianPackager {
         return count > 0;
     }
 
-    private static JavaArchive addDependencies(JavaArchive ark, Collection<File> deps) {
+    private static JavaArchive addDependencies(ITestConfig config, JavaArchive ark, Collection<File> deps) {
         Set<File> dependencySet = new HashSet<>(deps);
         for (File d : dependencySet) {
-            debug("Adding spring-boot dependency: " + d.getName());
+            debug(config, "Adding spring-boot dependency: " + d.getName());
             ark = ark.add(new FileAsset(d), LIB_FOLDER + "/" + d.getName());
         }
 
         return ark;
     }
 
-    private static JavaArchive addSpringbootPackage(JavaArchive ark, String... packageNames) throws Exception {
+    private static JavaArchive addSpringbootPackage(JavaArchive ark, String... packageNames) {
 
         Iterable<ClassLoader> classLoaders = Collections.singleton(Thread.currentThread().getContextClassLoader());
 
@@ -663,11 +666,13 @@ public final class ArquillianPackager {
         return ark;
     }
 
-
-    private static void debug(String str) {
-        if (DEBUG_ENABLED) {
+    private static void debug(ITestConfig config, String str) {
+        if (config.getDebugEnabled()) {
             System.out.println("DEBUG>>> " + str);
         }
     }
 
+    private static void warn(String str) {
+        System.out.println("WARN>>> " + str);
+    }
 }

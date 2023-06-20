@@ -27,7 +27,7 @@ public class ITestConfigBuilder {
 
     public static final String CONFIG_PREFIX = "itest.springboot.";
 
-    private ITestConfig config;
+    private final ITestConfig config;
 
     public ITestConfigBuilder() {
         this.config = new ITestConfig();
@@ -141,7 +141,7 @@ public class ITestConfigBuilder {
 
     public ITestConfigBuilder ignoreLibraryMismatch(String libraryPrefix) {
         if (config.getIgnoreLibraryMismatch() == null) {
-            config.setIgnoreLibraryMismatch(new HashSet<String>());
+            config.setIgnoreLibraryMismatch(new HashSet<>());
         }
         config.getIgnoreLibraryMismatch().add(libraryPrefix);
         return this;
@@ -172,6 +172,16 @@ public class ITestConfigBuilder {
     
     public ITestConfigBuilder mavenOfflineResolution(Boolean offlineResolution) {
         config.setMavenOfflineResolution(offlineResolution);
+        return this;
+    }
+
+    public ITestConfigBuilder debugEnabled(Boolean debugEnabled) {
+        config.setDebugEnabled(debugEnabled);
+        return this;
+    }
+
+    public ITestConfigBuilder failOnRelatedLibraryMismatch(Boolean failOnRelatedLibraryMismatch) {
+        config.setFailOnRelatedLibraryMismatch(failOnRelatedLibraryMismatch);
         return this;
     }
 
@@ -267,6 +277,13 @@ public class ITestConfigBuilder {
             config.setSpringBootVersion(propertyOr("springBootVersion", null));
         }
 
+        if (config.getDebugEnabled() == null) {
+            config.setDebugEnabled(booleanPropertyOr("debugEnabled", false));
+        }
+
+        if (config.getFailOnRelatedLibraryMismatch() == null) {
+            config.setFailOnRelatedLibraryMismatch(booleanPropertyOr("failOnRelatedLibraryMismatch", true));
+        }
         return config;
     }
 
@@ -287,16 +304,6 @@ public class ITestConfigBuilder {
         Boolean res = defaultVal;
         if (prop != null) {
             res = Boolean.valueOf(prop);
-        }
-
-        return res;
-    }
-
-    private Integer integerPropertyOr(String name, Integer defaultVal) {
-        String prop = propertyOr(name, null);
-        Integer res = defaultVal;
-        if (prop != null) {
-            res = Integer.valueOf(prop);
         }
 
         return res;

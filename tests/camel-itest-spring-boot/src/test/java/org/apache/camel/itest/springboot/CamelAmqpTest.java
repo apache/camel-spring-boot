@@ -35,7 +35,6 @@ public class CamelAmqpTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelAmqpTest.class))
-                .dependency("javax.json:javax.json-api")
                 .build();
     }
 

@@ -75,6 +75,17 @@ public class ITestConfig implements Serializable {
 
     private String springBootVersion;
 
+    /**
+     * A flag to enable system-out logging.
+     * Cannot use logging libraries here.
+     */
+    private Boolean debugEnabled;
+
+    /**
+     * Configuration of the library checker.
+     */
+    private Boolean failOnRelatedLibraryMismatch;
+
     public ITestConfig() {
     }
 
@@ -270,6 +281,22 @@ public class ITestConfig implements Serializable {
         this.springBootVersion = springBootVersion;
     }
 
+    public Boolean getDebugEnabled() {
+        return debugEnabled;
+    }
+
+    public void setDebugEnabled(Boolean debugEnabled) {
+        this.debugEnabled = debugEnabled;
+    }
+
+    public Boolean getFailOnRelatedLibraryMismatch() {
+        return failOnRelatedLibraryMismatch;
+    }
+
+    public void setFailOnRelatedLibraryMismatch(Boolean failOnRelatedLibraryMismatch) {
+        this.failOnRelatedLibraryMismatch = failOnRelatedLibraryMismatch;
+    }
+
     @Override
     public String toString() {
         return "ITestConfig{"
@@ -296,6 +323,8 @@ public class ITestConfig implements Serializable {
                 + ", ignoreLibraryMismatch=" + ignoreLibraryMismatch
                 + ", testLibraryVersions=" + testLibraryVersions
                 + ", springBootVersion=" + springBootVersion
+                + ", debugEnabled=" + debugEnabled
+                + ", failOnRelatedLibraryMismatch=" + failOnRelatedLibraryMismatch
                 + '}';
     }
 }
