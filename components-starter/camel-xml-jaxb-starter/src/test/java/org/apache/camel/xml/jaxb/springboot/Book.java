@@ -14,26 +14,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot;
+package org.apache.camel.xml.jaxb.springboot;
 
-import org.apache.camel.component.properties.DefaultPropertiesParser;
-import org.apache.camel.component.properties.PropertiesLookup;
-import org.springframework.core.env.Environment;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
 
-class SpringPropertiesParser extends DefaultPropertiesParser {
+@XmlRootElement(name = "book")
+@XmlType(propOrder = { "id", "name", "date" })
+public class Book extends IdentifiedType {
+    private String name;
+    private String author;
 
-    // Members
-    private final Environment env;
-
-    SpringPropertiesParser(Environment env) {
-        this.env = env;
+    @XmlElement(name = "title")
+    public void setName(String name) {
+        this.name = name;
     }
 
-    // Overridden
-
-    @Override
-    public String parseProperty(String key, String value, PropertiesLookup properties) {
-        return env.getProperty(key);
+    @XmlTransient
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
 }

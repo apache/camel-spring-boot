@@ -23,7 +23,6 @@ import java.util.Map;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
-import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.FluentProducerTemplate;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.RuntimeCamelException;
@@ -39,6 +38,7 @@ import org.apache.camel.spi.CliConnectorFactory;
 import org.apache.camel.spi.PackageScanClassResolver;
 import org.apache.camel.spi.PackageScanResourceResolver;
 import org.apache.camel.spi.StartupStepRecorder;
+import org.apache.camel.spring.boot.aot.CamelRuntimeHints;
 import org.apache.camel.spring.spi.ApplicationContextBeanRepository;
 import org.apache.camel.spring.spi.CamelBeanPostProcessor;
 import org.apache.camel.support.DefaultRegistry;
@@ -56,6 +56,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportRuntimeHints;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Role;
 import org.springframework.core.OrderComparator;
@@ -63,6 +64,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MutablePropertySources;
 
+@ImportRuntimeHints(CamelRuntimeHints.class)
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(CamelConfigurationProperties.class)
 @Import(TypeConversionConfiguration.class)
@@ -279,8 +281,8 @@ public class CamelAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(PropertiesParser.class)
-    PropertiesParser propertiesParser() {
-        return new SpringPropertiesParser();
+    PropertiesParser propertiesParser(Environment env) {
+        return new SpringPropertiesParser(env);
     }
 
     // We explicitly declare the destroyMethod to be "" as the Spring @Bean

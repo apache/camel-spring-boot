@@ -49,5 +49,10 @@
             <artifactId>camel-xml-jaxb-dsl</artifactId>
             <version>${camel-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-xml-jaxb-starter</artifactId>
+            <version>${camel-version}</version>
+        </dependency>
     </dependencies>
 </project>

@@ -14,26 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot;
+package org.apache.camel.dsl.xml.jaxb.springboot.aot;
 
-import org.apache.camel.component.properties.DefaultPropertiesParser;
-import org.apache.camel.component.properties.PropertiesLookup;
-import org.springframework.core.env.Environment;
+import java.util.ArrayList;
 
-class SpringPropertiesParser extends DefaultPropertiesParser {
+import org.springframework.aot.hint.MemberCategory;
+import org.springframework.aot.hint.RuntimeHints;
+import org.springframework.aot.hint.RuntimeHintsRegistrar;
 
-    // Members
-    private final Environment env;
-
-    SpringPropertiesParser(Environment env) {
-        this.env = env;
-    }
-
-    // Overridden
-
+final class XMLDSLRuntimeHints implements RuntimeHintsRegistrar {
     @Override
-    public String parseProperty(String key, String value, PropertiesLookup properties) {
-        return env.getProperty(key);
+    public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
+        hints.reflection().registerType(ArrayList.class, MemberCategory.INVOKE_DECLARED_CONSTRUCTORS);
     }
-
 }

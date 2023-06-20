@@ -1,0 +1,2 @@
+org.springframework.aot.hint.RuntimeHintsRegistrar=\
+org.apache.camel.dsl.xml.jaxb.springboot.aot.XMLDSLRuntimeHints
