@@ -23,12 +23,12 @@
     <parent>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>spring-boot</artifactId>
-        <version>3.20.6-SNAPSHOT</version>
+        <version>3.20.7-SNAPSHOT</version>
     </parent>
 
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>spring-boot-parent</artifactId>
-    <version>3.20.6-SNAPSHOT</version>
+    <version>3.20.7-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Camel SB :: Parent</name>
