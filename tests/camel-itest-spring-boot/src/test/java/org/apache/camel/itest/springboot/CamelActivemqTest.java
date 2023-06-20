@@ -35,12 +35,13 @@ public class CamelActivemqTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelActivemqTest.class))
-                // excluded tests that use JMX heavily and tests that pass when run separately
                 .build();
     }
 
     @Test
     public void componentTests() throws Exception {
+        this.runComponentTest(config);
+        this.runModuleUnitTestsIfEnabled(config);
     }
 
 
