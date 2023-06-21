@@ -31,6 +31,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Isolated;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,8 +47,7 @@ import java.util.List;
 @SpringBootTest(
         classes = {
                 CamelAutoConfiguration.class,
-                SftpKeyExchangeProtocolsTest.class,
-                SftpKeyExchangeProtocolsTest.TestConfiguration.class
+                SftpKeyExchangeProtocolsTest.class
         }
 )
 //Based on SftpKeyExchangeProtocolsIT
@@ -118,6 +118,11 @@ public class SftpKeyExchangeProtocolsTest extends BaseSftp {
                 "a.txt");
 
         result.assertIsSatisfied();
+    }
+
+    @BeforeEach
+    public void addRoute() throws Exception {
+        context.addRoutes(new TestConfiguration().routeBuilder());
     }
 
     // *************************************

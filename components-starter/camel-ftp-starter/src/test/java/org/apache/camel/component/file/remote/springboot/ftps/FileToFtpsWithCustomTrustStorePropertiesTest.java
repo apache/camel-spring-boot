@@ -22,6 +22,8 @@ import org.apache.camel.component.file.remote.springboot.ftp.BaseFtp;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -31,8 +33,7 @@ import org.springframework.context.annotation.Configuration;
 @SpringBootTest(
         classes = {
                 CamelAutoConfiguration.class,
-                FileToFtpsWithCustomTrustStorePropertiesTest.class,
-                FileToFtpsWithCustomTrustStorePropertiesTest.TestConfiguration.class
+                FileToFtpsWithCustomTrustStorePropertiesTest.class
         }
 )
 //based on FileToFtpsWithCustomTrustStorePropertiesIT
@@ -55,6 +56,11 @@ public class FileToFtpsWithCustomTrustStorePropertiesTest extends BaseFtpsClient
         result.expectedMessageCount(2);
 
         assertMockEndpointsSatisfied();
+    }
+
+    @BeforeEach
+    public void addRoute() throws Exception {
+        context.addRoutes(new TestConfiguration().routeBuilder());
     }
 
     // *************************************

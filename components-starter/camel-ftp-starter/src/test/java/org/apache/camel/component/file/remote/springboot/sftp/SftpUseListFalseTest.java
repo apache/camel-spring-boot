@@ -25,6 +25,8 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.FileUtil;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIf;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,8 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(
         classes = {
                 CamelAutoConfiguration.class,
-                SftpUseListFalseTest.class,
-                SftpUseListFalseTest.TestConfiguration.class
+                SftpUseListFalseTest.class
         }
 )
 //Based on SftpUseListFalseIT
@@ -65,6 +66,11 @@ public class SftpUseListFalseTest extends BaseSftp {
         context.getRouteController().startRoute("foo");
 
         assertMockEndpointsSatisfied();
+    }
+
+    @BeforeEach
+    public void addRoute() throws Exception {
+        context.addRoutes(new TestConfiguration().routeBuilder());
     }
 
     // *************************************
