@@ -40,8 +40,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest(
         classes = {
                 CamelAutoConfiguration.class,
-                Ddb2BatchGetItemsTest.class,
-                Ddb2BatchGetItemsTest.TestConfiguration.class
+                Ddb2DescribeTableRuleIT.class,
+                Ddb2DescribeTableRuleIT.TestConfiguration.class
         }
 )
 public class Ddb2DescribeTableRuleIT extends BaseDdb2 {
