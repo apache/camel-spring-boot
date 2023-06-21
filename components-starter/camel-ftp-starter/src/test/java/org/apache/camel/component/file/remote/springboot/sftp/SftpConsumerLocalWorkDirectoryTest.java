@@ -44,8 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(
         classes = {
                 CamelAutoConfiguration.class,
-                SftpConsumerLocalWorkDirectoryTest.class,
-                SftpConsumerLocalWorkDirectoryTest.TestConfiguration.class
+                SftpConsumerLocalWorkDirectoryTest.class
         }
 )
 //Based on SftpConsumerLocalWorkDirectoryIT
@@ -97,6 +96,11 @@ public class SftpConsumerLocalWorkDirectoryTest extends BaseSftp {
 
         // now the lwd file should be deleted
         assertFileNotExists(ftpFile("lwd/hello.txt"));
+    }
+
+    @BeforeEach
+    public void addRoute() throws Exception {
+        context.addRoutes(new TestConfiguration().routeBuilder());
     }
 
     // *************************************
