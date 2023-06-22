@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-dataset-starter",
-    "version": "3.20.6-SNAPSHOT",
+    "version": "3.20.7-SNAPSHOT",
     "scheme": "dataset",
     "extendsScheme": "",
     "syntax": "dataset:name",

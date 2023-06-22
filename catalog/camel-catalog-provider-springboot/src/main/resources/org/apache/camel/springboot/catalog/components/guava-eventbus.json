@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-guava-eventbus-starter",
-    "version": "3.20.6-SNAPSHOT",
+    "version": "3.20.7-SNAPSHOT",
     "scheme": "guava-eventbus",
     "extendsScheme": "",
     "syntax": "guava-eventbus:eventBusRef",

@@ -11,7 +11,7 @@
     "supportLevel": "Experimental",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-python-starter",
-    "version": "3.20.6-SNAPSHOT",
+    "version": "3.20.7-SNAPSHOT",
     "modelName": "python",
     "modelJavaType": "org.apache.camel.model.language.PythonExpression"
   },

@@ -10,6 +10,6 @@
     "supportLevel": "Experimental",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-js-dsl-starter",
-    "version": "3.20.6-SNAPSHOT"
+    "version": "3.20.7-SNAPSHOT"
   }
 }

@@ -11,7 +11,7 @@
     "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-kubernetes-starter",
-    "version": "3.20.6-SNAPSHOT",
+    "version": "3.20.7-SNAPSHOT",
     "scheme": "kubernetes-events",
     "extendsScheme": "",
     "syntax": "kubernetes-events:masterUrl",

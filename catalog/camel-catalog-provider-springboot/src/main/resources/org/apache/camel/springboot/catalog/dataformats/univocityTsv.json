@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-univocity-parsers-starter",
-    "version": "3.20.6-SNAPSHOT",
+    "version": "3.20.7-SNAPSHOT",
     "modelName": "univocityTsv",
     "modelJavaType": "org.apache.camel.model.dataformat.UniVocityTsvDataFormat"
   },
