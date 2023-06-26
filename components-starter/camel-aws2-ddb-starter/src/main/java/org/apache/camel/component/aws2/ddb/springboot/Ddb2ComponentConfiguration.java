@@ -92,6 +92,11 @@ public class Ddb2ComponentConfiguration
      */
     private Boolean overrideEndpoint = false;
     /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
+    /**
      * To define a proxy host when instantiating the DDB client
      */
     private String proxyHost;
@@ -129,6 +134,11 @@ public class Ddb2ComponentConfiguration
      * in.
      */
     private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the DDB client should expect to load credentials through a
+     * profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
     /**
      * The provisioned throughput to reserved for writing resources to your
      * table
@@ -233,6 +243,14 @@ public class Ddb2ComponentConfiguration
         this.overrideEndpoint = overrideEndpoint;
     }
 
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
     public String getProxyHost() {
         return proxyHost;
     }
@@ -296,6 +314,15 @@ public class Ddb2ComponentConfiguration
     public void setUseDefaultCredentialsProvider(
             Boolean useDefaultCredentialsProvider) {
         this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
+    }
+
+    public Boolean getUseProfileCredentialsProvider() {
+        return useProfileCredentialsProvider;
+    }
+
+    public void setUseProfileCredentialsProvider(
+            Boolean useProfileCredentialsProvider) {
+        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
     }
 
     public Long getWriteCapacity() {
