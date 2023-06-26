@@ -41,7 +41,7 @@ jobs:
           java-version: 17
           cache: 'maven'
       - name: Build Camel Project
-        run: ./mvnw -V --no-transfer-progress clean install -DskipTests
+        run: ./mvnw -V --no-transfer-progress clean install -Dquickly
         working-directory: ${{ github.workspace }}/camel
       - name: Checkout Camel-spring-boot project
         uses: actions/checkout@v3
