@@ -43,7 +43,7 @@ jobs:
           java-version: 17
           cache: 'maven'
       - name: Build Camel Project
-        run: ./mvnw -V --no-transfer-progress clean install -DskipTests
+        run: ./mvnw -B -V -D'http.keepAlive=false' -l build.log -D'maven.wagon.http.pool=false' -D'maven.wagon.httpconnectionManager.ttlSeconds=120' --no-transfer-progress -Dquickly -DskipTests
         working-directory: ${{ github.workspace }}/camel
       - name: Checkout Camel-spring-boot project
         uses: actions/checkout@v3
