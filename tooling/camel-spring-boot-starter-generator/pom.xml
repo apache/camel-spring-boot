@@ -51,7 +51,7 @@
                     </executions>
                     <configuration>
                         <action>${action}</action>
-                        <name>${name}</name>
+                        <name>${project.name}</name>
                     </configuration>
                 </plugin>
             </plugins>
