@@ -313,6 +313,27 @@
       "defaultValue": "memory"
     },
     {
+      "name": "camel.component.debezium-oracle.log-mining-flush-table-name",
+      "type": "java.lang.String",
+      "description": "The name of the flush table used by the connector, defaults to LOG_MINING_FLUSH.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "LOG_MINING_FLUSH"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-query-filter-mode",
+      "type": "java.lang.String",
+      "description": "Specifies how the filter configuration is applied to the LogMiner database query. none - The query does not apply any schema or table filters, all filtering is at runtime by the connector. in - The query uses SQL in-clause expressions to specify the schema or table filters. regex - The query uses Oracle REGEXP_LIKE expressions to specify the schema or table filters.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "none"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-restart-connection",
+      "type": "java.lang.Boolean",
+      "description": "Debezium opens a database connection and keeps that connection open throughout the entire streaming phase. In some situations, this can lead to excessive SGA memory usage. By setting this option to 'true' (the default is 'false'), the connector will close and re-open a database connection after every detected log switch or if the log.mining.session.max.ms has been reached.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.debezium-oracle.log-mining-scn-gap-detection-gap-size-min",
       "type": "java.lang.Long",
       "description": "Used for SCN gap detection, if the difference between current SCN and previous end SCN is bigger than this value, and the time difference of current SCN and previous end SCN is smaller than log.mining.scn.gap.detection.time.interval.max.ms, consider it a SCN gap.",
@@ -382,6 +403,12 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-oracle.log-mining-username-include-list",
+      "type": "java.lang.String",
+      "description": "Comma separated list of usernames to include from LogMiner query.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-oracle.max-batch-size",
       "type": "java.lang.Integer",
       "description": "Maximum size of each batch of source records. Defaults to 2048.",
@@ -406,6 +433,18 @@
       "name": "camel.component.debezium-oracle.message-key-columns",
       "type": "java.lang.String",
       "description": "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern ':', where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector, and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key. Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.notification-enabled-channels",
+      "type": "java.lang.String",
+      "description": "List of notification channels names that are enabled.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.notification-sink-topic-name",
+      "type": "java.lang.String",
+      "description": "The name of the topic for the notifications. This is required in case 'sink' is in the list of enabled channels",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
     },
     {
@@ -541,6 +580,20 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-oracle.signal-enabled-channels",
+      "type": "java.lang.String",
+      "description": "List of channels names that are enabled. Source channel is enabled by default",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "source"
+    },
+    {
+      "name": "camel.component.debezium-oracle.signal-poll-interval-ms",
+      "type": "java.lang.Long",
+      "description": "Interval for looking for new signals in registered channels, given in milliseconds. Defaults to 5 seconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
       "name": "camel.component.debezium-oracle.skipped-operations",
       "type": "java.lang.String",
       "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes, 't' for truncates, and 'none' to indicate nothing skipped. By default, only truncate operations will be skipped.",
@@ -596,7 +649,7 @@
     {
       "name": "camel.component.debezium-oracle.snapshot-mode",
       "type": "java.lang.String",
-      "description": "The criteria for running a snapshot upon startup of the connector. Options include: 'initial' (the default) to specify the connector should run a snapshot only when no offsets are available for the logical server name; 'schema_only' to specify the connector should run a snapshot of the schema when no offsets are available for the logical server name.",
+      "description": "The criteria for running a snapshot upon startup of the connector. Select one of the following snapshot options: 'always': The connector runs a snapshot every time that it starts. After the snapshot completes, the connector begins to stream changes from the redo logs.; 'initial' (default): If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures the current full state of the configured tables. After the snapshot completes, the connector begins to stream changes from the redo logs. 'initial_only': The connector performs a snapshot as it does for the 'initial' option, but after the connector completes the snapshot, it stops, and does not stream changes from the redo logs.; 'schema_only': If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures only the schema (table structures), but not any table data. After the snapshot completes, the connector begins to stream changes from the redo logs.; 'schema_only_recovery': The connector performs a snapshot that captures only the database schema history. The connector then transitions to streaming from the redo logs. Use this setting to restore a corrupted or lost database schema history topic. Do not use if the database schema was modified after the connector stopped.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "initial"
     },
@@ -612,6 +665,13 @@
       "description": "Controls the order in which tables are processed in the initial snapshot. A descending value will order the tables by row count descending. A ascending value will order the tables by row count ascending. A value of disabled (the default) will disable ordering by row count.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "disabled"
+    },
+    {
+      "name": "camel.component.debezium-oracle.sourceinfo-struct-maker",
+      "type": "java.lang.String",
+      "description": "The name of the SourceInfoStructMaker class that returns SourceInfo schema and struct.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "io.debezium.connector.oracle.OracleSourceInfoStructMaker"
     },
     {
       "name": "camel.component.debezium-oracle.table-exclude-list",

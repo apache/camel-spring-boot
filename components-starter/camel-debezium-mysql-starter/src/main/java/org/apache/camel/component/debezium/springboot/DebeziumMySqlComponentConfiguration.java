@@ -246,7 +246,7 @@ public class DebeziumMySqlComponentConfiguration
     private String databaseSslKeystorePassword;
     /**
      * Whether to use an encrypted connection to MySQL. Options include:
-     * 'disabled' (the default) to use an unencrypted connection; 'preferred' to
+     * 'disabled' to use an unencrypted connection; 'preferred' (the default) to
      * establish a secure (encrypted) connection if the server supports secure
      * connections, but fall back to an unencrypted connection otherwise;
      * 'required' to use a secure (encrypted) connection, and fail if one cannot
@@ -256,7 +256,7 @@ public class DebeziumMySqlComponentConfiguration
      * or'verify_identity' like 'verify_ca' but additionally verify that the
      * server certificate matches the host to which the connection is attempted.
      */
-    private String databaseSslMode = "disabled";
+    private String databaseSslMode = "preferred";
     /**
      * The location of the trust store file for the server certificate
      * verification.
@@ -396,7 +396,8 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Boolean incrementalSnapshotAllowSchemaChanges = false;
     /**
-     * The maximum size of chunk for incremental snapshotting
+     * The maximum size of chunk (number of documents/rows) for incremental
+     * snapshotting
      */
     private Integer incrementalSnapshotChunkSize = 1024;
     /**
@@ -433,6 +434,15 @@ public class DebeziumMySqlComponentConfiguration
      * all results and completely avoid checking the size of each table.
      */
     private Integer minRowCountToStreamResults = 1000;
+    /**
+     * List of notification channels names that are enabled.
+     */
+    private String notificationEnabledChannels;
+    /**
+     * The name of the topic for the notifications. This is required in case
+     * 'sink' is in the list of enabled channels
+     */
+    private String notificationSinkTopicName;
     /**
      * Time to wait for new change events to appear after receiving no events,
      * given in milliseconds. Defaults to 500 ms. The option is a long type.
@@ -499,6 +509,16 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String signalDataCollection;
     /**
+     * List of channels names that are enabled. Source channel is enabled by
+     * default
+     */
+    private String signalEnabledChannels = "source";
+    /**
+     * Interval for looking for new signals in registered channels, given in
+     * milliseconds. Defaults to 5 seconds. The option is a long type.
+     */
+    private Long signalPollIntervalMs = 5000L;
+    /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
      * truncates, and 'none' to indicate nothing skipped. By default, only
@@ -550,18 +570,27 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Integer snapshotMaxThreads = 1;
     /**
-     * The criteria for running a snapshot upon startup of the connector.
-     * Options include: 'when_needed' to specify that the connector run a
-     * snapshot upon startup whenever it deems it necessary; 'schema_only' to
-     * only take a snapshot of the schema (table structures) but no actual data;
-     * 'initial' (the default) to specify the connector can run a snapshot only
-     * when no offsets are available for the logical server name; 'initial_only'
-     * same as 'initial' except the connector should stop after completing the
-     * snapshot and before it would normally read the binlog; and'never' to
-     * specify the connector should never run a snapshot and that upon first
-     * startup the connector should read from the beginning of the binlog. The
-     * 'never' mode should be used with care, and only when the binlog is known
-     * to contain all history.
+     * The criteria for running a snapshot upon startup of the connector. Select
+     * one of the following snapshot options: 'when_needed': On startup, the
+     * connector runs a snapshot if one is needed.; 'schema_only': If the
+     * connector does not detect any offsets for the logical server name, it
+     * runs a snapshot that captures only the schema (table structures), but not
+     * any table data. After the snapshot completes, the connector begins to
+     * stream changes from the binlog.; 'schema_only_recovery': The connector
+     * performs a snapshot that captures only the database schema history. The
+     * connector then transitions back to streaming. Use this setting to restore
+     * a corrupted or lost database schema history topic. Do not use if the
+     * database schema was modified after the connector stopped.; 'initial'
+     * (default): If the connector does not detect any offsets for the logical
+     * server name, it runs a snapshot that captures the current full state of
+     * the configured tables. After the snapshot completes, the connector begins
+     * to stream changes from the binlog.; 'initial_only': The connector
+     * performs a snapshot as it does for the 'initial' option, but after the
+     * connector completes the snapshot, it stops, and does not stream changes
+     * from the binlog.; 'never': The connector does not run a snapshot. Upon
+     * first startup, the connector immediately begins reading from the
+     * beginning of the binlog. The 'never' mode should be used with care, and
+     * only when the binlog is known to contain all history.
      */
     private String snapshotMode = "initial";
     /**
@@ -600,6 +629,11 @@ public class DebeziumMySqlComponentConfiguration
      * disabled (the default) will disable ordering by row count.
      */
     private String snapshotTablesOrderByRowCount = "disabled";
+    /**
+     * The name of the SourceInfoStructMaker class that returns SourceInfo
+     * schema and struct.
+     */
+    private String sourceinfoStructMaker = "io.debezium.connector.mysql.MySqlSourceInfoStructMaker";
     /**
      * A comma-separated list of regular expressions that match the
      * fully-qualified names of tables to be excluded from monitoring
@@ -1144,6 +1178,23 @@ public class DebeziumMySqlComponentConfiguration
         this.minRowCountToStreamResults = minRowCountToStreamResults;
     }
 
+    public String getNotificationEnabledChannels() {
+        return notificationEnabledChannels;
+    }
+
+    public void setNotificationEnabledChannels(
+            String notificationEnabledChannels) {
+        this.notificationEnabledChannels = notificationEnabledChannels;
+    }
+
+    public String getNotificationSinkTopicName() {
+        return notificationSinkTopicName;
+    }
+
+    public void setNotificationSinkTopicName(String notificationSinkTopicName) {
+        this.notificationSinkTopicName = notificationSinkTopicName;
+    }
+
     public Long getPollIntervalMs() {
         return pollIntervalMs;
     }
@@ -1237,6 +1288,22 @@ public class DebeziumMySqlComponentConfiguration
         this.signalDataCollection = signalDataCollection;
     }
 
+    public String getSignalEnabledChannels() {
+        return signalEnabledChannels;
+    }
+
+    public void setSignalEnabledChannels(String signalEnabledChannels) {
+        this.signalEnabledChannels = signalEnabledChannels;
+    }
+
+    public Long getSignalPollIntervalMs() {
+        return signalPollIntervalMs;
+    }
+
+    public void setSignalPollIntervalMs(Long signalPollIntervalMs) {
+        this.signalPollIntervalMs = signalPollIntervalMs;
+    }
+
     public String getSkippedOperations() {
         return skippedOperations;
     }
@@ -1326,6 +1393,14 @@ public class DebeziumMySqlComponentConfiguration
     public void setSnapshotTablesOrderByRowCount(
             String snapshotTablesOrderByRowCount) {
         this.snapshotTablesOrderByRowCount = snapshotTablesOrderByRowCount;
+    }
+
+    public String getSourceinfoStructMaker() {
+        return sourceinfoStructMaker;
+    }
+
+    public void setSourceinfoStructMaker(String sourceinfoStructMaker) {
+        this.sourceinfoStructMaker = sourceinfoStructMaker;
     }
 
     public String getTableExcludeList() {

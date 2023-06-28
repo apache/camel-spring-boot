@@ -273,6 +273,15 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String mongodbUser;
     /**
+     * List of notification channels names that are enabled.
+     */
+    private String notificationEnabledChannels;
+    /**
+     * The name of the topic for the notifications. This is required in case
+     * 'sink' is in the list of enabled channels
+     */
+    private String notificationSinkTopicName;
+    /**
      * Time to wait for new change events to appear after receiving no events,
      * given in milliseconds. Defaults to 500 ms. The option is a long type.
      */
@@ -312,6 +321,16 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String signalDataCollection;
     /**
+     * List of channels names that are enabled. Source channel is enabled by
+     * default
+     */
+    private String signalEnabledChannels = "source";
+    /**
+     * Interval for looking for new signals in registered channels, given in
+     * milliseconds. Defaults to 5 seconds. The option is a long type.
+     */
+    private Long signalPollIntervalMs = 5000L;
+    /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
      * truncates, and 'none' to indicate nothing skipped. By default, only
@@ -346,12 +365,21 @@ public class DebeziumMongodbComponentConfiguration
      */
     private Integer snapshotMaxThreads = 1;
     /**
-     * The criteria for running a snapshot upon startup of the connector.
-     * Options include: 'initial' (the default) to specify the connector should
-     * always perform an initial sync when required; 'never' to specify the
-     * connector should never perform an initial sync
+     * The criteria for running a snapshot upon startup of the connector. Select
+     * one of the following snapshot options: 'initial' (default): If the
+     * connector does not detect any offsets for the logical server name, it
+     * runs a snapshot that captures the current full state of the configured
+     * tables. After the snapshot completes, the connector begins to stream
+     * changes from the oplog. 'never': The connector does not run a snapshot.
+     * Upon first startup, the connector immediately begins reading from the
+     * beginning of the oplog.
      */
     private String snapshotMode = "initial";
+    /**
+     * The name of the SourceInfoStructMaker class that returns SourceInfo
+     * schema and struct.
+     */
+    private String sourceinfoStructMaker = "io.debezium.connector.mongodb.MongoDbSourceInfoStructMaker";
     /**
      * Whether delete operations should be represented by a delete event and a
      * subsequent tombstone event (true) or only by a delete event (false).
@@ -709,6 +737,23 @@ public class DebeziumMongodbComponentConfiguration
         this.mongodbUser = mongodbUser;
     }
 
+    public String getNotificationEnabledChannels() {
+        return notificationEnabledChannels;
+    }
+
+    public void setNotificationEnabledChannels(
+            String notificationEnabledChannels) {
+        this.notificationEnabledChannels = notificationEnabledChannels;
+    }
+
+    public String getNotificationSinkTopicName() {
+        return notificationSinkTopicName;
+    }
+
+    public void setNotificationSinkTopicName(String notificationSinkTopicName) {
+        this.notificationSinkTopicName = notificationSinkTopicName;
+    }
+
     public Long getPollIntervalMs() {
         return pollIntervalMs;
     }
@@ -767,6 +812,22 @@ public class DebeziumMongodbComponentConfiguration
         this.signalDataCollection = signalDataCollection;
     }
 
+    public String getSignalEnabledChannels() {
+        return signalEnabledChannels;
+    }
+
+    public void setSignalEnabledChannels(String signalEnabledChannels) {
+        this.signalEnabledChannels = signalEnabledChannels;
+    }
+
+    public Long getSignalPollIntervalMs() {
+        return signalPollIntervalMs;
+    }
+
+    public void setSignalPollIntervalMs(Long signalPollIntervalMs) {
+        this.signalPollIntervalMs = signalPollIntervalMs;
+    }
+
     public String getSkippedOperations() {
         return skippedOperations;
     }
@@ -823,6 +884,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setSnapshotMode(String snapshotMode) {
         this.snapshotMode = snapshotMode;
+    }
+
+    public String getSourceinfoStructMaker() {
+        return sourceinfoStructMaker;
+    }
+
+    public void setSourceinfoStructMaker(String sourceinfoStructMaker) {
+        this.sourceinfoStructMaker = sourceinfoStructMaker;
     }
 
     public Boolean getTombstonesOnDelete() {

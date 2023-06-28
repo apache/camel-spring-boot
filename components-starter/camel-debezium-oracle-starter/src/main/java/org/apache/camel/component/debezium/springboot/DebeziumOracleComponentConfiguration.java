@@ -345,6 +345,29 @@ public class DebeziumOracleComponentConfiguration
      */
     private String logMiningBufferType = "memory";
     /**
+     * The name of the flush table used by the connector, defaults to
+     * LOG_MINING_FLUSH.
+     */
+    private String logMiningFlushTableName = "LOG_MINING_FLUSH";
+    /**
+     * Specifies how the filter configuration is applied to the LogMiner
+     * database query. none - The query does not apply any schema or table
+     * filters, all filtering is at runtime by the connector. in - The query
+     * uses SQL in-clause expressions to specify the schema or table filters.
+     * regex - The query uses Oracle REGEXP_LIKE expressions to specify the
+     * schema or table filters.
+     */
+    private String logMiningQueryFilterMode = "none";
+    /**
+     * Debezium opens a database connection and keeps that connection open
+     * throughout the entire streaming phase. In some situations, this can lead
+     * to excessive SGA memory usage. By setting this option to 'true' (the
+     * default is 'false'), the connector will close and re-open a database
+     * connection after every detected log switch or if the
+     * log.mining.session.max.ms has been reached.
+     */
+    private Boolean logMiningRestartConnection = false;
+    /**
      * Used for SCN gap detection, if the difference between current SCN and
      * previous end SCN is bigger than this value, and the time difference of
      * current SCN and previous end SCN is smaller than
@@ -405,6 +428,10 @@ public class DebeziumOracleComponentConfiguration
      */
     private String logMiningUsernameExcludeList;
     /**
+     * Comma separated list of usernames to include from LogMiner query.
+     */
+    private String logMiningUsernameIncludeList;
+    /**
      * Maximum size of each batch of source records. Defaults to 2048.
      */
     private Integer maxBatchSize = 2048;
@@ -432,6 +459,15 @@ public class DebeziumOracleComponentConfiguration
      * dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id
      */
     private String messageKeyColumns;
+    /**
+     * List of notification channels names that are enabled.
+     */
+    private String notificationEnabledChannels;
+    /**
+     * The name of the topic for the notifications. This is required in case
+     * 'sink' is in the list of enabled channels
+     */
+    private String notificationSinkTopicName;
     /**
      * Time to wait for new change events to appear after receiving no events,
      * given in milliseconds. Defaults to 500 ms. The option is a long type.
@@ -503,6 +539,16 @@ public class DebeziumOracleComponentConfiguration
      */
     private String signalDataCollection;
     /**
+     * List of channels names that are enabled. Source channel is enabled by
+     * default
+     */
+    private String signalEnabledChannels = "source";
+    /**
+     * Interval for looking for new signals in registered channels, given in
+     * milliseconds. Defaults to 5 seconds. The option is a long type.
+     */
+    private Long signalPollIntervalMs = 5000L;
+    /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
      * truncates, and 'none' to indicate nothing skipped. By default, only
@@ -553,11 +599,25 @@ public class DebeziumOracleComponentConfiguration
      */
     private Integer snapshotMaxThreads = 1;
     /**
-     * The criteria for running a snapshot upon startup of the connector.
-     * Options include: 'initial' (the default) to specify the connector should
-     * run a snapshot only when no offsets are available for the logical server
-     * name; 'schema_only' to specify the connector should run a snapshot of the
-     * schema when no offsets are available for the logical server name.
+     * The criteria for running a snapshot upon startup of the connector. Select
+     * one of the following snapshot options: 'always': The connector runs a
+     * snapshot every time that it starts. After the snapshot completes, the
+     * connector begins to stream changes from the redo logs.; 'initial'
+     * (default): If the connector does not detect any offsets for the logical
+     * server name, it runs a snapshot that captures the current full state of
+     * the configured tables. After the snapshot completes, the connector begins
+     * to stream changes from the redo logs. 'initial_only': The connector
+     * performs a snapshot as it does for the 'initial' option, but after the
+     * connector completes the snapshot, it stops, and does not stream changes
+     * from the redo logs.; 'schema_only': If the connector does not detect any
+     * offsets for the logical server name, it runs a snapshot that captures
+     * only the schema (table structures), but not any table data. After the
+     * snapshot completes, the connector begins to stream changes from the redo
+     * logs.; 'schema_only_recovery': The connector performs a snapshot that
+     * captures only the database schema history. The connector then transitions
+     * to streaming from the redo logs. Use this setting to restore a corrupted
+     * or lost database schema history topic. Do not use if the database schema
+     * was modified after the connector stopped.
      */
     private String snapshotMode = "initial";
     /**
@@ -582,6 +642,11 @@ public class DebeziumOracleComponentConfiguration
      * disabled (the default) will disable ordering by row count.
      */
     private String snapshotTablesOrderByRowCount = "disabled";
+    /**
+     * The name of the SourceInfoStructMaker class that returns SourceInfo
+     * schema and struct.
+     */
+    private String sourceinfoStructMaker = "io.debezium.connector.oracle.OracleSourceInfoStructMaker";
     /**
      * A comma-separated list of regular expressions that match the
      * fully-qualified names of tables to be excluded from monitoring
@@ -1058,6 +1123,30 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningBufferType = logMiningBufferType;
     }
 
+    public String getLogMiningFlushTableName() {
+        return logMiningFlushTableName;
+    }
+
+    public void setLogMiningFlushTableName(String logMiningFlushTableName) {
+        this.logMiningFlushTableName = logMiningFlushTableName;
+    }
+
+    public String getLogMiningQueryFilterMode() {
+        return logMiningQueryFilterMode;
+    }
+
+    public void setLogMiningQueryFilterMode(String logMiningQueryFilterMode) {
+        this.logMiningQueryFilterMode = logMiningQueryFilterMode;
+    }
+
+    public Boolean getLogMiningRestartConnection() {
+        return logMiningRestartConnection;
+    }
+
+    public void setLogMiningRestartConnection(Boolean logMiningRestartConnection) {
+        this.logMiningRestartConnection = logMiningRestartConnection;
+    }
+
     public Long getLogMiningScnGapDetectionGapSizeMin() {
         return logMiningScnGapDetectionGapSizeMin;
     }
@@ -1143,6 +1232,15 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningUsernameExcludeList = logMiningUsernameExcludeList;
     }
 
+    public String getLogMiningUsernameIncludeList() {
+        return logMiningUsernameIncludeList;
+    }
+
+    public void setLogMiningUsernameIncludeList(
+            String logMiningUsernameIncludeList) {
+        this.logMiningUsernameIncludeList = logMiningUsernameIncludeList;
+    }
+
     public Integer getMaxBatchSize() {
         return maxBatchSize;
     }
@@ -1173,6 +1271,23 @@ public class DebeziumOracleComponentConfiguration
 
     public void setMessageKeyColumns(String messageKeyColumns) {
         this.messageKeyColumns = messageKeyColumns;
+    }
+
+    public String getNotificationEnabledChannels() {
+        return notificationEnabledChannels;
+    }
+
+    public void setNotificationEnabledChannels(
+            String notificationEnabledChannels) {
+        this.notificationEnabledChannels = notificationEnabledChannels;
+    }
+
+    public String getNotificationSinkTopicName() {
+        return notificationSinkTopicName;
+    }
+
+    public void setNotificationSinkTopicName(String notificationSinkTopicName) {
+        this.notificationSinkTopicName = notificationSinkTopicName;
     }
 
     public Long getPollIntervalMs() {
@@ -1276,6 +1391,22 @@ public class DebeziumOracleComponentConfiguration
         this.signalDataCollection = signalDataCollection;
     }
 
+    public String getSignalEnabledChannels() {
+        return signalEnabledChannels;
+    }
+
+    public void setSignalEnabledChannels(String signalEnabledChannels) {
+        this.signalEnabledChannels = signalEnabledChannels;
+    }
+
+    public Long getSignalPollIntervalMs() {
+        return signalPollIntervalMs;
+    }
+
+    public void setSignalPollIntervalMs(Long signalPollIntervalMs) {
+        this.signalPollIntervalMs = signalPollIntervalMs;
+    }
+
     public String getSkippedOperations() {
         return skippedOperations;
     }
@@ -1366,6 +1497,14 @@ public class DebeziumOracleComponentConfiguration
     public void setSnapshotTablesOrderByRowCount(
             String snapshotTablesOrderByRowCount) {
         this.snapshotTablesOrderByRowCount = snapshotTablesOrderByRowCount;
+    }
+
+    public String getSourceinfoStructMaker() {
+        return sourceinfoStructMaker;
+    }
+
+    public void setSourceinfoStructMaker(String sourceinfoStructMaker) {
+        this.sourceinfoStructMaker = sourceinfoStructMaker;
     }
 
     public String getTableExcludeList() {

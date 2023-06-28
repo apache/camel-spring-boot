@@ -212,7 +212,8 @@ public class DebeziumDb2ComponentConfiguration
      */
     private Boolean includeSchemaChanges = true;
     /**
-     * The maximum size of chunk for incremental snapshotting
+     * The maximum size of chunk (number of documents/rows) for incremental
+     * snapshotting
      */
     private Integer incrementalSnapshotChunkSize = 1024;
     /**
@@ -243,6 +244,15 @@ public class DebeziumDb2ComponentConfiguration
      * dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id
      */
     private String messageKeyColumns;
+    /**
+     * List of notification channels names that are enabled.
+     */
+    private String notificationEnabledChannels;
+    /**
+     * The name of the topic for the notifications. This is required in case
+     * 'sink' is in the list of enabled channels
+     */
+    private String notificationSinkTopicName;
     /**
      * Time to wait for new change events to appear after receiving no events,
      * given in milliseconds. Defaults to 500 ms. The option is a long type.
@@ -310,6 +320,16 @@ public class DebeziumDb2ComponentConfiguration
      */
     private String signalDataCollection;
     /**
+     * List of channels names that are enabled. Source channel is enabled by
+     * default
+     */
+    private String signalEnabledChannels = "source";
+    /**
+     * Interval for looking for new signals in registered channels, given in
+     * milliseconds. Defaults to 5 seconds. The option is a long type.
+     */
+    private Long signalPollIntervalMs = 5000L;
+    /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
      * truncates, and 'none' to indicate nothing skipped. By default, only
@@ -367,6 +387,11 @@ public class DebeziumDb2ComponentConfiguration
      * disabled (the default) will disable ordering by row count.
      */
     private String snapshotTablesOrderByRowCount = "disabled";
+    /**
+     * The name of the SourceInfoStructMaker class that returns SourceInfo
+     * schema and struct.
+     */
+    private String sourceinfoStructMaker = "io.debezium.connector.db2.Db2SourceInfoStructMaker";
     /**
      * A comma-separated list of regular expressions that match the
      * fully-qualified names of tables to be excluded from monitoring
@@ -691,6 +716,23 @@ public class DebeziumDb2ComponentConfiguration
         this.messageKeyColumns = messageKeyColumns;
     }
 
+    public String getNotificationEnabledChannels() {
+        return notificationEnabledChannels;
+    }
+
+    public void setNotificationEnabledChannels(
+            String notificationEnabledChannels) {
+        this.notificationEnabledChannels = notificationEnabledChannels;
+    }
+
+    public String getNotificationSinkTopicName() {
+        return notificationSinkTopicName;
+    }
+
+    public void setNotificationSinkTopicName(String notificationSinkTopicName) {
+        this.notificationSinkTopicName = notificationSinkTopicName;
+    }
+
     public Long getPollIntervalMs() {
         return pollIntervalMs;
     }
@@ -784,6 +826,22 @@ public class DebeziumDb2ComponentConfiguration
         this.signalDataCollection = signalDataCollection;
     }
 
+    public String getSignalEnabledChannels() {
+        return signalEnabledChannels;
+    }
+
+    public void setSignalEnabledChannels(String signalEnabledChannels) {
+        this.signalEnabledChannels = signalEnabledChannels;
+    }
+
+    public Long getSignalPollIntervalMs() {
+        return signalPollIntervalMs;
+    }
+
+    public void setSignalPollIntervalMs(Long signalPollIntervalMs) {
+        this.signalPollIntervalMs = signalPollIntervalMs;
+    }
+
     public String getSkippedOperations() {
         return skippedOperations;
     }
@@ -849,6 +907,14 @@ public class DebeziumDb2ComponentConfiguration
     public void setSnapshotTablesOrderByRowCount(
             String snapshotTablesOrderByRowCount) {
         this.snapshotTablesOrderByRowCount = snapshotTablesOrderByRowCount;
+    }
+
+    public String getSourceinfoStructMaker() {
+        return sourceinfoStructMaker;
+    }
+
+    public void setSourceinfoStructMaker(String sourceinfoStructMaker) {
+        this.sourceinfoStructMaker = sourceinfoStructMaker;
     }
 
     public String getTableExcludeList() {

@@ -182,9 +182,9 @@
     {
       "name": "camel.component.debezium-mysql.database-ssl-mode",
       "type": "java.lang.String",
-      "description": "Whether to use an encrypted connection to MySQL. Options include: 'disabled' (the default) to use an unencrypted connection; 'preferred' to establish a secure (encrypted) connection if the server supports secure connections, but fall back to an unencrypted connection otherwise; 'required' to use a secure (encrypted) connection, and fail if one cannot be established; 'verify_ca' like 'required' but additionally verify the server TLS certificate against the configured Certificate Authority (CA) certificates, or fail if no valid matching CA certificates are found; or'verify_identity' like 'verify_ca' but additionally verify that the server certificate matches the host to which the connection is attempted.",
+      "description": "Whether to use an encrypted connection to MySQL. Options include: 'disabled' to use an unencrypted connection; 'preferred' (the default) to establish a secure (encrypted) connection if the server supports secure connections, but fall back to an unencrypted connection otherwise; 'required' to use a secure (encrypted) connection, and fail if one cannot be established; 'verify_ca' like 'required' but additionally verify the server TLS certificate against the configured Certificate Authority (CA) certificates, or fail if no valid matching CA certificates are found; or'verify_identity' like 'verify_ca' but additionally verify that the server certificate matches the host to which the connection is attempted.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
-      "defaultValue": "disabled"
+      "defaultValue": "preferred"
     },
     {
       "name": "camel.component.debezium-mysql.database-ssl-truststore",
@@ -321,7 +321,7 @@
     {
       "name": "camel.component.debezium-mysql.incremental-snapshot-chunk-size",
       "type": "java.lang.Integer",
-      "description": "The maximum size of chunk for incremental snapshotting",
+      "description": "The maximum size of chunk (number of documents\/rows) for incremental snapshotting",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": 1024
     },
@@ -372,6 +372,18 @@
       "description": "The number of rows a table must contain to stream results rather than pull all into memory during snapshots. Defaults to 1,000. Use 0 to stream all results and completely avoid checking the size of each table.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": 1000
+    },
+    {
+      "name": "camel.component.debezium-mysql.notification-enabled-channels",
+      "type": "java.lang.String",
+      "description": "List of notification channels names that are enabled.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-mysql.notification-sink-topic-name",
+      "type": "java.lang.String",
+      "description": "The name of the topic for the notifications. This is required in case 'sink' is in the list of enabled channels",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-mysql.offset-commit-policy",
@@ -500,6 +512,20 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-mysql.signal-enabled-channels",
+      "type": "java.lang.String",
+      "description": "List of channels names that are enabled. Source channel is enabled by default",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "source"
+    },
+    {
+      "name": "camel.component.debezium-mysql.signal-poll-interval-ms",
+      "type": "java.lang.Long",
+      "description": "Interval for looking for new signals in registered channels, given in milliseconds. Defaults to 5 seconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
       "name": "camel.component.debezium-mysql.skipped-operations",
       "type": "java.lang.String",
       "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes, 't' for truncates, and 'none' to indicate nothing skipped. By default, only truncate operations will be skipped.",
@@ -549,7 +575,7 @@
     {
       "name": "camel.component.debezium-mysql.snapshot-mode",
       "type": "java.lang.String",
-      "description": "The criteria for running a snapshot upon startup of the connector. Options include: 'when_needed' to specify that the connector run a snapshot upon startup whenever it deems it necessary; 'schema_only' to only take a snapshot of the schema (table structures) but no actual data; 'initial' (the default) to specify the connector can run a snapshot only when no offsets are available for the logical server name; 'initial_only' same as 'initial' except the connector should stop after completing the snapshot and before it would normally read the binlog; and'never' to specify the connector should never run a snapshot and that upon first startup the connector should read from the beginning of the binlog. The 'never' mode should be used with care, and only when the binlog is known to contain all history.",
+      "description": "The criteria for running a snapshot upon startup of the connector. Select one of the following snapshot options: 'when_needed': On startup, the connector runs a snapshot if one is needed.; 'schema_only': If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures only the schema (table structures), but not any table data. After the snapshot completes, the connector begins to stream changes from the binlog.; 'schema_only_recovery': The connector performs a snapshot that captures only the database schema history. The connector then transitions back to streaming. Use this setting to restore a corrupted or lost database schema history topic. Do not use if the database schema was modified after the connector stopped.; 'initial' (default): If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures the current full state of the configured tables. After the snapshot completes, the connector begins to stream changes from the binlog.; 'initial_only': The connector performs a snapshot as it does for the 'initial' option, but after the connector completes the snapshot, it stops, and does not stream changes from the binlog.; 'never': The connector does not run a snapshot. Upon first startup, the connector immediately begins reading from the beginning of the binlog. The 'never' mode should be used with care, and only when the binlog is known to contain all history.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": "initial"
     },
@@ -572,6 +598,13 @@
       "description": "Controls the order in which tables are processed in the initial snapshot. A descending value will order the tables by row count descending. A ascending value will order the tables by row count ascending. A value of disabled (the default) will disable ordering by row count.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": "disabled"
+    },
+    {
+      "name": "camel.component.debezium-mysql.sourceinfo-struct-maker",
+      "type": "java.lang.String",
+      "description": "The name of the SourceInfoStructMaker class that returns SourceInfo schema and struct.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "io.debezium.connector.mysql.MySqlSourceInfoStructMaker"
     },
     {
       "name": "camel.component.debezium-mysql.table-exclude-list",

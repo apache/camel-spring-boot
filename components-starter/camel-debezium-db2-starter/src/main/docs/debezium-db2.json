@@ -149,7 +149,7 @@
     {
       "name": "camel.component.debezium-db2.incremental-snapshot-chunk-size",
       "type": "java.lang.Integer",
-      "description": "The maximum size of chunk for incremental snapshotting",
+      "description": "The maximum size of chunk (number of documents\/rows) for incremental snapshotting",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
       "defaultValue": 1024
     },
@@ -192,6 +192,18 @@
       "name": "camel.component.debezium-db2.message-key-columns",
       "type": "java.lang.String",
       "description": "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern ':', where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector, and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key. Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-db2.notification-enabled-channels",
+      "type": "java.lang.String",
+      "description": "List of notification channels names that are enabled.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-db2.notification-sink-topic-name",
+      "type": "java.lang.String",
+      "description": "The name of the topic for the notifications. This is required in case 'sink' is in the list of enabled channels",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
     },
     {
@@ -321,6 +333,20 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-db2.signal-enabled-channels",
+      "type": "java.lang.String",
+      "description": "List of channels names that are enabled. Source channel is enabled by default",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": "source"
+    },
+    {
+      "name": "camel.component.debezium-db2.signal-poll-interval-ms",
+      "type": "java.lang.Long",
+      "description": "Interval for looking for new signals in registered channels, given in milliseconds. Defaults to 5 seconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
       "name": "camel.component.debezium-db2.skipped-operations",
       "type": "java.lang.String",
       "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes, 't' for truncates, and 'none' to indicate nothing skipped. By default, only truncate operations will be skipped.",
@@ -372,6 +398,13 @@
       "description": "Controls the order in which tables are processed in the initial snapshot. A descending value will order the tables by row count descending. A ascending value will order the tables by row count ascending. A value of disabled (the default) will disable ordering by row count.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
       "defaultValue": "disabled"
+    },
+    {
+      "name": "camel.component.debezium-db2.sourceinfo-struct-maker",
+      "type": "java.lang.String",
+      "description": "The name of the SourceInfoStructMaker class that returns SourceInfo schema and struct.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": "io.debezium.connector.db2.Db2SourceInfoStructMaker"
     },
     {
       "name": "camel.component.debezium-db2.table-exclude-list",
