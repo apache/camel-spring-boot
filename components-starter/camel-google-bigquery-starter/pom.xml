@@ -37,7 +37,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>${google-cloud-guava-version}</version>
+      <version>${guava-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
