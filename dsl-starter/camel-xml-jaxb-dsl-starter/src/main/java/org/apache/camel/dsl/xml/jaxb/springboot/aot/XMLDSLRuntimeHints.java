@@ -22,7 +22,7 @@ import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 
-final class XMLDSLRuntimeHints implements RuntimeHintsRegistrar {
+public final class XMLDSLRuntimeHints implements RuntimeHintsRegistrar {
     @Override
     public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
         hints.reflection().registerType(ArrayList.class, MemberCategory.INVOKE_DECLARED_CONSTRUCTORS);
