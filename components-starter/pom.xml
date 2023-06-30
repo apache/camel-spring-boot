@@ -146,6 +146,7 @@
     <module>camel-aws2-translate-starter</module>
     <module>camel-azure-cosmosdb-starter</module>
     <module>camel-azure-eventhubs-starter</module>
+    <module>camel-azure-files-starter</module>
     <module>camel-azure-key-vault-starter</module>
     <module>camel-azure-servicebus-starter</module>
     <module>camel-azure-storage-blob-starter</module>
