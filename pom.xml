@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-dependencies</artifactId>
-        <version>4.0.0-SNAPSHOT</version>
+        <version>4.0.0-RC1</version>
     </parent>
 
     <groupId>org.apache.camel.springboot</groupId>
@@ -111,7 +111,7 @@
         <spring-boot-version>3.1.1</spring-boot-version>
 
         <!-- Camel target version -->
-        <camel-version>4.0.0-SNAPSHOT</camel-version>
+        <camel-version>4.0.0-RC1</camel-version>
 
         <!-- versions -->
         <aether-version>1.0.2.v20150114</aether-version>
@@ -420,6 +420,7 @@
                         <childDelegation>false</childDelegation>
                         <useFile>true</useFile>
                         <failIfNoTests>false</failIfNoTests>
+                        <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
                         <runOrder>alphabetical</runOrder>
                         <!-- lets re-run the failed test one more time, just to be sure -->
                         <rerunFailingTestsCount>2</rerunFailingTestsCount>
@@ -450,7 +451,7 @@
         <profile>
             <id>dev</id>
             <properties>
-                <camel-version>4.0.0-SNAPSHOT</camel-version>
+                <camel-version>4.0.0-RC1</camel-version>
             </properties>
         </profile>
 

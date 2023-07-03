@@ -31,7 +31,7 @@ import org.glassfish.jaxb.core.v2.model.annotation.Locatable;
 import org.glassfish.jaxb.runtime.v2.model.annotation.LocatableAnnotation;
 import org.glassfish.jaxb.runtime.v2.model.annotation.RuntimeInlineAnnotationReader;
 
-class JAXBSubstitutions {
+public class JAXBSubstitutions {
 }
 
 @TargetClass(RuntimeInlineAnnotationReader.class)
