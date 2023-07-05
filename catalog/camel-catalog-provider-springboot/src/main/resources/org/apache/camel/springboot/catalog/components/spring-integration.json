@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-spring-integration-starter",
-    "version": "3.21.0-SNAPSHOT",
+    "version": "3.21.1-SNAPSHOT",
     "scheme": "spring-integration",
     "extendsScheme": "",
     "syntax": "spring-integration:defaultChannel",
