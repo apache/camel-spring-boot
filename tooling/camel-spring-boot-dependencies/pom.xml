@@ -183,6 +183,26 @@
         <type>pom</type>
       </dependency>
       <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-commons</artifactId>
+        <version>1.11.1</version>
+      </dependency>
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-observation</artifactId>
+        <version>1.11.1</version>
+      </dependency>
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-registry-jmx</artifactId>
+        <version>1.11.1</version>
+      </dependency>
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-tracing</artifactId>
+        <version>1.1.2</version>
+      </dependency>
+      <dependency>
         <groupId>org.apache.avro</groupId>
         <artifactId>avro</artifactId>
         <version>1.11.0</version>
