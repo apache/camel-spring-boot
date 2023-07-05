@@ -353,8 +353,8 @@
     },
     {
       "name": "camel.component.kafka.max-poll-interval-ms",
-      "type": "java.lang.Long",
-      "description": "The maximum delay between invocations of poll() when using consumer group management. This places an upper bound on the amount of time that the consumer can be idle before fetching more records. If poll() is not called before expiration of this timeout, then the consumer is considered failed and the group will rebalance in order to reassign the partitions to another member. The option is a java.lang.Long type.",
+      "type": "java.lang.Integer",
+      "description": "The maximum delay between invocations of poll() when using consumer group management. This places an upper bound on the amount of time that the consumer can be idle before fetching more records. If poll() is not called before expiration of this timeout, then the consumer is considered failed and the group will rebalance in order to reassign the partitions to another member. The option is a java.lang.Integer type.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
     },
     {

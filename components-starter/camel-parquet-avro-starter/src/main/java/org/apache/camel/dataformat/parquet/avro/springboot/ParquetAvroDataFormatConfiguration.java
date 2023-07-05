@@ -35,9 +35,21 @@ public class ParquetAvroDataFormatConfiguration
      */
     private Boolean enabled;
     /**
+     * Compression codec to use when marshalling.
+     */
+    private String compressionCodecName = "GZIP";
+    /**
      * Class to use when unmarshalling.
      */
     private String unmarshalType;
+
+    public String getCompressionCodecName() {
+        return compressionCodecName;
+    }
+
+    public void setCompressionCodecName(String compressionCodecName) {
+        this.compressionCodecName = compressionCodecName;
+    }
 
     public String getUnmarshalType() {
         return unmarshalType;

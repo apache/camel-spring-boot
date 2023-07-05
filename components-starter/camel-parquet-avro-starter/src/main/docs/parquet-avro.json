@@ -14,6 +14,13 @@
   ],
   "properties": [
     {
+      "name": "camel.dataformat.parquet-avro.compression-codec-name",
+      "type": "java.lang.String",
+      "description": "Compression codec to use when marshalling.",
+      "sourceType": "org.apache.camel.dataformat.parquet.avro.springboot.ParquetAvroDataFormatConfiguration",
+      "defaultValue": "GZIP"
+    },
+    {
       "name": "camel.dataformat.parquet-avro.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"

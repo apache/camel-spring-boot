@@ -237,9 +237,9 @@ public class KafkaComponentConfiguration
      * consumer can be idle before fetching more records. If poll() is not
      * called before expiration of this timeout, then the consumer is considered
      * failed and the group will rebalance in order to reassign the partitions
-     * to another member. The option is a java.lang.Long type.
+     * to another member. The option is a java.lang.Integer type.
      */
-    private Long maxPollIntervalMs;
+    private Integer maxPollIntervalMs;
     /**
      * The maximum number of records returned in a single call to poll()
      */
@@ -1047,11 +1047,11 @@ public class KafkaComponentConfiguration
         this.maxPartitionFetchBytes = maxPartitionFetchBytes;
     }
 
-    public Long getMaxPollIntervalMs() {
+    public Integer getMaxPollIntervalMs() {
         return maxPollIntervalMs;
     }
 
-    public void setMaxPollIntervalMs(Long maxPollIntervalMs) {
+    public void setMaxPollIntervalMs(Integer maxPollIntervalMs) {
         this.maxPollIntervalMs = maxPollIntervalMs;
     }
 
