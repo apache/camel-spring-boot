@@ -34,7 +34,7 @@
     {
       "name": "camel.dataformat.parquet-avro.unmarshal-type",
       "type": "java.lang.String",
-      "description": "Class to use when unmarshalling.",
+      "description": "Class to use when (un)marshalling. If omitted, parquet files are converted into Avro's GenericRecords for unmarshalling and input objects are assumed as GenericRecords for marshalling.",
       "sourceType": "org.apache.camel.dataformat.parquet.avro.springboot.ParquetAvroDataFormatConfiguration"
     }
   ],

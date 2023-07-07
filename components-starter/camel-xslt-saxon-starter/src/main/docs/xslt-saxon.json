@@ -60,7 +60,7 @@
     {
       "name": "camel.component.xslt-saxon.saxon-extension-functions",
       "type": "java.lang.String",
-      "description": "Allows you to use a custom net.sf.saxon.lib.ExtensionFunctionDefinition. You would need to add camel-saxon to the classpath. The function is looked up in the registry, where you can comma to separate multiple values to lookup.",
+      "description": "Allows you to use a custom net.sf.saxon.lib.ExtensionFunctionDefinition. You would need to add camel-saxon to the classpath. The function is looked up in the registry, where you can use commas to separate multiple values to lookup.",
       "sourceType": "org.apache.camel.component.xslt.saxon.springboot.XsltSaxonComponentConfiguration"
     },
     {
