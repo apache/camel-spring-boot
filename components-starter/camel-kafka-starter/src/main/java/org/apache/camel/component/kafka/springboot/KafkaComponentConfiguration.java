@@ -659,8 +659,8 @@ public class KafkaComponentConfiguration
     /**
      * Factory to use for creating
      * org.apache.kafka.clients.consumer.KafkaConsumer and
-     * org.apache.kafka.clients.producer.KafkaProducer instances. This allows to
-     * configure a custom factory to create instances with logic that extends
+     * org.apache.kafka.clients.producer.KafkaProducer instances. This allows
+     * configuring a custom factory to create instances with logic that extends
      * the vanilla Kafka clients. The option is a
      * org.apache.camel.component.kafka.KafkaClientFactory type.
      */
@@ -690,6 +690,10 @@ public class KafkaComponentConfiguration
      * Login thread sleep time between refresh attempts.
      */
     private Integer kerberosBeforeReloginMinTime = 60000;
+    /**
+     * Location of the kerberos config file.
+     */
+    private String kerberosConfigLocation;
     /**
      * Kerberos kinit command path. Default is /usr/bin/kinit
      */
@@ -1517,6 +1521,14 @@ public class KafkaComponentConfiguration
     public void setKerberosBeforeReloginMinTime(
             Integer kerberosBeforeReloginMinTime) {
         this.kerberosBeforeReloginMinTime = kerberosBeforeReloginMinTime;
+    }
+
+    public String getKerberosConfigLocation() {
+        return kerberosConfigLocation;
+    }
+
+    public void setKerberosConfigLocation(String kerberosConfigLocation) {
+        this.kerberosConfigLocation = kerberosConfigLocation;
     }
 
     public String getKerberosInitCmd() {
