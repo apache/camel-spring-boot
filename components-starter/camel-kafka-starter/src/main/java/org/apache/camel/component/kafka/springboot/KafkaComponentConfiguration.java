@@ -124,7 +124,7 @@ public class KafkaComponentConfiguration
      * consumer breaks out, and will seek back to offset of the message that
      * caused a failure, and then re-attempt to process this message. However
      * this can lead to endless processing of the same message if its bound to
-     * fail every time, eg a poison message. Therefore its recommended to deal
+     * fail every time, eg a poison message. Therefore it is recommended to deal
      * with that for example by using Camel's error handler.
      */
     private Boolean breakOnFirstError = false;
@@ -218,7 +218,8 @@ public class KafkaComponentConfiguration
      */
     private Integer heartbeatIntervalMs = 3000;
     /**
-     * Deserializer class for key that implements the Deserializer interface.
+     * Deserializer class for the key that implements the Deserializer
+     * interface.
      */
     private String keyDeserializer = "org.apache.kafka.common.serialization.StringDeserializer";
     /**
@@ -276,8 +277,9 @@ public class KafkaComponentConfiguration
      */
     private Long pollTimeoutMs = 5000L;
     /**
-     * Set if KafkaConsumer will read from beginning or end on startup:
-     * SeekPolicy.BEGINNING: read from beginning. SeekPolicy.END: read from end.
+     * Set if KafkaConsumer will read from the beginning or the end on startup:
+     * SeekPolicy.BEGINNING: read from the beginning. SeekPolicy.END: read from
+     * the end.
      */
     private SeekPolicy seekTo;
     /**
@@ -312,13 +314,13 @@ public class KafkaComponentConfiguration
      * be fatal due to invalid configuration and as such recovery is not
      * possible. However, one part of the validation is DNS resolution of the
      * bootstrap broker hostnames. This may be a temporary networking problem,
-     * and could potentially be recoverable. While other errors are fatal such
-     * as some invalid kafka configurations. Unfortunately kafka-client does not
-     * separate this kind of errors. Camel will by default retry forever, and
-     * therefore never give up. If you want to give up after many attempts then
-     * set this option and Camel will then when giving up terminate the
-     * consumer. You can manually restart the consumer by stopping and starting
-     * the route, to try again.
+     * and could potentially be recoverable. While other errors are fatal, such
+     * as some invalid kafka configurations. Unfortunately, kafka-client does
+     * not separate this kind of errors. Camel will by default retry forever,
+     * and therefore never give up. If you want to give up after many attempts
+     * then set this option and Camel will then when giving up terminate the
+     * consumer. To try again, you can manually restart the consumer by
+     * stopping, and starting the route.
      */
     private Integer createConsumerBackoffMaxAttempts;
     /**
@@ -363,7 +365,7 @@ public class KafkaComponentConfiguration
      * the consumer to the kafka topic could be temporary errors due to network
      * issues, and could potentially be recoverable. Camel will by default retry
      * forever, and therefore never give up. If you want to give up after many
-     * attempts then set this option and Camel will then when giving up
+     * attempts, then set this option and Camel will then when giving up
      * terminate the consumer. You can manually restart the consumer by stopping
      * and starting the route, to try again.
      */
@@ -455,16 +457,16 @@ public class KafkaComponentConfiguration
      * requests even under moderate load. This setting accomplishes this by
      * adding a small amount of artificial delay that is, rather than
      * immediately sending out a record the producer will wait for up to the
-     * given delay to allow other records to be sent so that the sends can be
-     * batched together. This can be thought of as analogous to Nagle's
-     * algorithm in TCP. This setting gives the upper bound on the delay for
-     * batching: once we get batch.size worth of records for a partition it will
-     * be sent immediately regardless of this setting, however if we have fewer
-     * than this many bytes accumulated for this partition we will 'linger' for
-     * the specified time waiting for more records to show up. This setting
-     * defaults to 0 (i.e. no delay). Setting linger.ms=5, for example, would
-     * have the effect of reducing the number of requests sent but would add up
-     * to 5ms of latency to records sent in the absense of load.
+     * given delay to allow other records to be sent so that they can be batched
+     * together. This can be thought of as analogous to Nagle's algorithm in
+     * TCP. This setting gives the upper bound on the delay for batching: once
+     * we get batch.size worth of records for a partition it will be sent
+     * immediately regardless of this setting, however if we have fewer than
+     * this many bytes accumulated for this partition we will 'linger' for the
+     * specified time waiting for more records to show up. This setting defaults
+     * to 0 (i.e. no delay). Setting linger.ms=5, for example, would have the
+     * effect of reducing the number of requests sent but would add up to 5ms of
+     * latency to records sent in the absense of load.
      */
     private Integer lingerMs = 0;
     /**
@@ -475,8 +477,8 @@ public class KafkaComponentConfiguration
      * buffer allocation (blocking in the user-supplied serializers or
      * partitioner is not counted against this timeout). For partitionsFor()
      * this timeout bounds the time spent waiting for metadata if it is
-     * unavailable. The transaction-related methods always block, but may
-     * timeout if the transaction coordinator could not be discovered or did not
+     * unavailable. The transaction-related methods always block, but may time
+     * out if the transaction coordinator could not be discovered or did not
      * respond within the timeout.
      */
     private Integer maxBlockMs = 60000;
@@ -532,12 +534,13 @@ public class KafkaComponentConfiguration
      * whenever multiple records are being sent to the same partition. This
      * helps performance on both the client and the server. This configuration
      * controls the default batch size in bytes. No attempt will be made to
-     * batch records larger than this size.Requests sent to brokers will contain
-     * multiple batches, one for each partition with data available to be sent.A
-     * small batch size will make batching less common and may reduce throughput
-     * (a batch size of zero will disable batching entirely). A very large batch
-     * size may use memory a bit more wastefully as we will always allocate a
-     * buffer of the specified batch size in anticipation of additional records.
+     * batch records larger than this size. Requests sent to brokers will
+     * contain multiple batches, one for each partition with data available to
+     * be sent. A small batch size will make batching less common and may reduce
+     * throughput (a batch size of zero will disable batching entirely). A very
+     * large batch size may use memory a bit more wastefully as we will always
+     * allocate a buffer of the specified batch size in anticipation of
+     * additional records.
      */
     private Integer producerBatchSize = 16384;
     /**
@@ -613,9 +616,9 @@ public class KafkaComponentConfiguration
     private Integer retries;
     /**
      * Before each retry, the producer refreshes the metadata of relevant topics
-     * to see if a new leader has been elected. Since leader election takes a
-     * bit of time, this property specifies the amount of time that the producer
-     * waits before refreshing the metadata.
+     * to see if a new leader has been elected. Since the leader election takes
+     * a bit of time, this property specifies the amount of time that the
+     * producer waits before refreshing the metadata.
      */
     private Integer retryBackoffMs = 100;
     /**
@@ -784,14 +787,14 @@ public class KafkaComponentConfiguration
      */
     private String sslKeyPassword;
     /**
-     * The location of the key store file. This is optional for client and can
-     * be used for two-way authentication for client.
+     * The location of the key store file. This is optional for the client and
+     * can be used for two-way authentication for the client.
      */
     private String sslKeystoreLocation;
     /**
-     * The store password for the key store file. This is optional for client
-     * and only needed if sslKeystoreLocation' is configured. Key store password
-     * is not supported for PEM format.
+     * The store password for the key store file. This is optional for the
+     * client and only needed if sslKeystoreLocation' is configured. Key store
+     * password is not supported for PEM format.
      */
     private String sslKeystorePassword;
     /**
