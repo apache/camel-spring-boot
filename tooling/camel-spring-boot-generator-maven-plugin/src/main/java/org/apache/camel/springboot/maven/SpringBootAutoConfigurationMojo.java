@@ -803,8 +803,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     }
 
     // try loading class, looking for inner classes if needed
-    private Class<?> loadClass(String loadClassName) throws MojoFailureException {
-        Class<?> optionClass;
+    private Class loadClass(String loadClassName) throws MojoFailureException {
+        Class optionClass;
         while (true) {
             try {
                 optionClass = getProjectClassLoader().loadClass(loadClassName);
