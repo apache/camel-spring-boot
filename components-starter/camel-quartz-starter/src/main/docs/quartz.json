@@ -16,7 +16,7 @@
     {
       "name": "camel.component.quartz.auto-start-scheduler",
       "type": "java.lang.Boolean",
-      "description": "Whether or not the scheduler should be auto started. This options is default true",
+      "description": "Whether the scheduler should be auto started. This option is default true",
       "sourceType": "org.apache.camel.component.quartz.springboot.QuartzComponentConfiguration",
       "defaultValue": true
     },

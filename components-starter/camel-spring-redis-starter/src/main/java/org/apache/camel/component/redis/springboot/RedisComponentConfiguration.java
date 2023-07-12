@@ -37,9 +37,10 @@ public class RedisComponentConfiguration
     private Boolean enabled;
     /**
      * Reference to a pre-configured RedisTemplate instance to use. The option
-     * is a org.springframework.data.redis.core.RedisTemplate type.
+     * is a org.springframework.data.redis.core.RedisTemplate<java.lang.Object,
+     * java.lang.Object> type.
      */
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<Object, Object> redisTemplate;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
@@ -70,11 +71,11 @@ public class RedisComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
 
-    public RedisTemplate getRedisTemplate() {
+    public RedisTemplate<Object, Object> getRedisTemplate() {
         return redisTemplate;
     }
 
-    public void setRedisTemplate(RedisTemplate redisTemplate) {
+    public void setRedisTemplate(RedisTemplate<Object, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 

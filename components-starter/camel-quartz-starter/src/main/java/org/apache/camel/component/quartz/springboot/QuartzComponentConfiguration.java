@@ -97,8 +97,7 @@ public class QuartzComponentConfiguration
      */
     private SchedulerFactory schedulerFactory;
     /**
-     * Whether or not the scheduler should be auto started. This options is
-     * default true
+     * Whether the scheduler should be auto started. This option is default true
      */
     private Boolean autoStartScheduler = true;
     /**
