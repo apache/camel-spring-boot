@@ -1069,6 +1069,12 @@
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
     },
     {
+      "name": "camel.springboot.stream-caching-allow-classes",
+      "type": "java.lang.String",
+      "description": "To filter stream caching of a given set of allowed\/denied classes. By default, all classes that are {@link java.io.InputStream} is allowed. Multiple class names can be separated by comma.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+    },
+    {
       "name": "camel.springboot.stream-caching-any-spool-rules",
       "type": "java.lang.Boolean",
       "description": "Sets whether if just any of the org.apache.camel.spi.StreamCachingStrategy.SpoolRule rules returns true then shouldSpoolCache(long) returns true, to allow spooling to disk. If this option is false, then all the org.apache.camel.spi.StreamCachingStrategy.SpoolRule must return true. The default value is false which means that all the rules must return true.",
@@ -1081,6 +1087,12 @@
       "description": "Sets the stream caching buffer size to use when allocating in-memory buffers used for in-memory stream caches. The default size is 4096.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
       "defaultValue": 0
+    },
+    {
+      "name": "camel.springboot.stream-caching-deny-classes",
+      "type": "java.lang.String",
+      "description": "To filter stream caching of a given set of allowed\/denied classes. By default, all classes that are {@link java.io.InputStream} is allowed. Multiple class names can be separated by comma.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
     },
     {
       "name": "camel.springboot.stream-caching-enabled",
