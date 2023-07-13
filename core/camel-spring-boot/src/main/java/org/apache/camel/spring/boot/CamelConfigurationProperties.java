@@ -298,6 +298,18 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean streamCachingEnabled = true;
 
     /**
+     * To filter stream caching of a given set of allowed/denied classes. By default, all classes that are
+     * {@link java.io.InputStream} is allowed. Multiple class names can be separated by comma.
+     */
+    private String streamCachingAllowClasses;
+
+    /**
+     * To filter stream caching of a given set of allowed/denied classes. By default, all classes that are
+     * {@link java.io.InputStream} is allowed. Multiple class names can be separated by comma.
+     */
+    private String streamCachingDenyClasses;
+
+    /**
      * To enable stream caching spooling to disk. This means, for large stream messages (over 128 KB by default) will be cached in a
      * temporary file instead, and Camel will handle deleting the temporary file once the cached stream is no longer
      * necessary.
