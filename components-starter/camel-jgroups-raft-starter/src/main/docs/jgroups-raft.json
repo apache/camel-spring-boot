@@ -102,8 +102,8 @@
     },
     {
       "name": "camel.component.jgroups-raft.state-machine",
-      "type": "org.jgroups.protocols.raft.StateMachine",
-      "description": "StateMachine to use. The option is a org.jgroups.protocols.raft.StateMachine type.",
+      "type": "org.jgroups.raft.StateMachine",
+      "description": "StateMachine to use. The option is a org.jgroups.raft.StateMachine type.",
       "sourceType": "org.apache.camel.component.jgroups.raft.springboot.JGroupsRaftComponentConfiguration"
     }
   ],

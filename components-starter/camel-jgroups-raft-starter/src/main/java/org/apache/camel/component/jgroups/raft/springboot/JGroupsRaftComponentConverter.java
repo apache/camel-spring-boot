@@ -40,7 +40,7 @@ public class JGroupsRaftComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.jgroups.raft.RaftHandle.class));
-        answer.add(new ConvertiblePair(String.class, org.jgroups.protocols.raft.StateMachine.class));
+        answer.add(new ConvertiblePair(String.class, org.jgroups.raft.StateMachine.class));
         return answer;
     }
 
@@ -58,7 +58,7 @@ public class JGroupsRaftComponentConverter implements GenericConverter {
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.jgroups.raft.RaftHandle": return applicationContext.getBean(ref, org.jgroups.raft.RaftHandle.class);
-            case "org.jgroups.protocols.raft.StateMachine": return applicationContext.getBean(ref, org.jgroups.protocols.raft.StateMachine.class);
+            case "org.jgroups.raft.StateMachine": return applicationContext.getBean(ref, org.jgroups.raft.StateMachine.class);
         }
         return null;
     }

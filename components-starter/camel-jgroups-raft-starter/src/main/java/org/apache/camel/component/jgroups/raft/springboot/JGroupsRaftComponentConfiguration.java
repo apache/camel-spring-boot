@@ -17,8 +17,8 @@
 package org.apache.camel.component.jgroups.raft.springboot;
 
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
-import org.jgroups.protocols.raft.StateMachine;
 import org.jgroups.raft.RaftHandle;
+import org.jgroups.raft.StateMachine;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -50,8 +50,7 @@ public class JGroupsRaftComponentConfiguration
      */
     private String raftId;
     /**
-     * StateMachine to use. The option is a
-     * org.jgroups.protocols.raft.StateMachine type.
+     * StateMachine to use. The option is a org.jgroups.raft.StateMachine type.
      */
     private StateMachine stateMachine;
     /**
