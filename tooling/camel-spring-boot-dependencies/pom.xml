@@ -32,18 +32,18 @@
     <dependencies>
       <dependency>
         <groupId>com.google.api.grpc</groupId>
-        <artifactId>proto-google-common-protos</artifactId>
-        <version>2.21.0</version>
+        <artifactId>proto-google-2common-protos</artifactId>
+        <version>2.22.0</version>
       </dependency>
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java</artifactId>
-        <version>3.23.2</version>
+        <version>3.23.4</version>
       </dependency>
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java-util</artifactId>
-        <version>3.23.2</version>
+        <version>3.23.4</version>
         <exclusions>
           <exclusion>
             <groupId>org.checkerframework</groupId>
