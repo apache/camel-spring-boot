@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.arangodb.springboot;
 
+import com.arangodb.ArangoDB;
 import org.apache.camel.component.arangodb.ArangoDbConfiguration;
 import org.apache.camel.component.arangodb.ArangoDbOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -94,6 +95,11 @@ public class ArangoDbComponentConfiguration
      * The graph attribute is mandatory.
      */
     private String vertexCollection;
+    /**
+     * To use an existing ArangDB client. The option is a com.arangodb.ArangoDB
+     * type.
+     */
+    private ArangoDB arangoDB;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -183,6 +189,14 @@ public class ArangoDbComponentConfiguration
 
     public void setVertexCollection(String vertexCollection) {
         this.vertexCollection = vertexCollection;
+    }
+
+    public ArangoDB getArangoDB() {
+        return arangoDB;
+    }
+
+    public void setArangoDB(ArangoDB arangoDB) {
+        this.arangoDB = arangoDB;
     }
 
     public Boolean getAutowiredEnabled() {
