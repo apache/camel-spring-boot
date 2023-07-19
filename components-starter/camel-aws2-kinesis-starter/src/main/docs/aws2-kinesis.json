@@ -163,6 +163,13 @@
       "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-kinesis.async-client",
+      "type": "java.lang.Boolean",
+      "description": "If we want to a KinesisAsyncClient instance set it to true",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.aws2-kinesis.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",

@@ -47,6 +47,10 @@ public class Kinesis2ComponentConfiguration
      */
     private KinesisClient amazonKinesisClient;
     /**
+     * If we want to a KinesisAsyncClient instance set it to true
+     */
+    private Boolean asyncClient = false;
+    /**
      * This option will set the CBOR_ENABLED property during the execution
      */
     private Boolean cborEnabled = true;
@@ -173,6 +177,14 @@ public class Kinesis2ComponentConfiguration
 
     public void setAmazonKinesisClient(KinesisClient amazonKinesisClient) {
         this.amazonKinesisClient = amazonKinesisClient;
+    }
+
+    public Boolean getAsyncClient() {
+        return asyncClient;
+    }
+
+    public void setAsyncClient(Boolean asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     public Boolean getCborEnabled() {
