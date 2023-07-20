@@ -242,7 +242,6 @@
     <module>camel-huaweicloud-imagerecognition-starter</module>
     <module>camel-huaweicloud-obs-starter</module>
     <module>camel-huaweicloud-smn-starter</module>
-    <module>camel-hyperledger-aries-starter</module>
     <module>camel-ical-starter</module>
     <module>camel-iec60870-starter</module>
     <module>camel-ignite-starter</module>
@@ -409,7 +408,6 @@
     <module>camel-weather-starter</module>
     <module>camel-web3j-starter</module>
     <module>camel-webhook-starter</module>
-    <module>camel-weka-starter</module>
     <module>camel-wordpress-starter</module>
     <module>camel-workday-starter</module>
     <module>camel-xchange-starter</module>
