@@ -343,6 +343,7 @@ public final class ArquillianPackager {
         ignore.add("ai.djl.mxnet:mxnet-model-zoo");
         ignore.add("ai.djl.mxnet:mxnet-native-auto");
         ignore.add("org.sonatype.plexus");
+        ignore.add("org.codehaus.plexus");
         ignore.add("org.sonatype.sisu");
         ignore.add("com.healthmarketscience.jackcess");
         ignore.add("com.google.cloud");
