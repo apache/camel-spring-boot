@@ -46,6 +46,22 @@ public class FileWatchComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Enables or disables file hashing to detect duplicate events. If you
+     * disable this, you can get some events multiple times on some platforms
+     * and JDKs. Check java.nio.file.WatchService limitations for your target
+     * platform.
+     */
+    private Boolean useFileHashing = true;
+    /**
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
+     */
+    private Boolean autowiredEnabled = true;
+    /**
      * The number of concurrent consumers. Increase this value, if your route is
      * slow to prevent buffering in queue.
      */
@@ -69,22 +85,6 @@ public class FileWatchComponentConfiguration
      * default.
      */
     private Integer queueSize = 2147483647;
-    /**
-     * Enables or disables file hashing to detect duplicate events. If you
-     * disable this, you can get some events multiple times on some platforms
-     * and JDKs. Check java.nio.file.WatchService limitations for your target
-     * platform.
-     */
-    private Boolean useFileHashing = true;
-    /**
-     * Whether autowiring is enabled. This is used for automatic autowiring
-     * options (the option must be marked as autowired) by looking up in the
-     * registry to find if there is a single instance of matching type, which
-     * then gets configured on the component. This can be used for automatic
-     * configuring JDBC data sources, JMS connection factories, AWS Clients,
-     * etc.
-     */
-    private Boolean autowiredEnabled = true;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -92,6 +92,22 @@ public class FileWatchComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getUseFileHashing() {
+        return useFileHashing;
+    }
+
+    public void setUseFileHashing(Boolean useFileHashing) {
+        this.useFileHashing = useFileHashing;
+    }
+
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
     }
 
     public Integer getConcurrentConsumers() {
@@ -124,21 +140,5 @@ public class FileWatchComponentConfiguration
 
     public void setQueueSize(Integer queueSize) {
         this.queueSize = queueSize;
-    }
-
-    public Boolean getUseFileHashing() {
-        return useFileHashing;
-    }
-
-    public void setUseFileHashing(Boolean useFileHashing) {
-        this.useFileHashing = useFileHashing;
-    }
-
-    public Boolean getAutowiredEnabled() {
-        return autowiredEnabled;
-    }
-
-    public void setAutowiredEnabled(Boolean autowiredEnabled) {
-        this.autowiredEnabled = autowiredEnabled;
     }
 }
