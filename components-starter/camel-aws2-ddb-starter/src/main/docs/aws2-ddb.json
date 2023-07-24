@@ -231,6 +231,27 @@
       "sourceType": "org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-ddbstream.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-ddbstream.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-ddbstream.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.aws2-ddbstream.max-results-per-request",
       "type": "java.lang.Integer",
       "description": "Maximum number of records that will be fetched in each poll",

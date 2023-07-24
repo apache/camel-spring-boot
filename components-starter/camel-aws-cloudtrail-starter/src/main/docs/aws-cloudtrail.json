@@ -63,6 +63,27 @@
       "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
     },
     {
+      "name": "camel.component.aws-cloudtrail.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.aws-cloudtrail.max-results",
       "type": "java.lang.Integer",
       "description": "Maximum number of records that will be fetched in each poll",

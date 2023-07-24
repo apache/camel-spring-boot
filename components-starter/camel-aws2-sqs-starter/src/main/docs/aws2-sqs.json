@@ -131,6 +131,27 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.aws2-sqs.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-sqs.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-sqs.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.aws2-sqs.kms-data-key-reuse-period-seconds",
       "type": "java.lang.Integer",
       "description": "The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again. An integer representing seconds, between 60 seconds (1 minute) and 86,400 seconds (24 hours). Default: 300 (5 minutes).",

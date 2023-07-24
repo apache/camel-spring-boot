@@ -77,6 +77,27 @@
       "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
     },
     {
+      "name": "camel.component.google-storage.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-storage.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-storage.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.google-storage.include-body",
       "type": "java.lang.Boolean",
       "description": "If it is true, the Object exchange will be consumed and put into the body. If false the Object stream will be put raw into the body and the headers will be set with the object metadata.",
