@@ -119,6 +119,10 @@ public class PulsarComponentConfiguration
      */
     private String deadLetterTopic;
     /**
+     * Policy to use by consumer when using key-shared subscription type.
+     */
+    private String keySharedPolicy;
+    /**
      * Maximum number of times that a message will be redelivered before being
      * sent to the dead letter queue. If this value is not set, no Dead Letter
      * Policy will be created
@@ -383,6 +387,14 @@ public class PulsarComponentConfiguration
 
     public void setDeadLetterTopic(String deadLetterTopic) {
         this.deadLetterTopic = deadLetterTopic;
+    }
+
+    public String getKeySharedPolicy() {
+        return keySharedPolicy;
+    }
+
+    public void setKeySharedPolicy(String keySharedPolicy) {
+        this.keySharedPolicy = keySharedPolicy;
     }
 
     public Integer getMaxRedeliverCount() {
