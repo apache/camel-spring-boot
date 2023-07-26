@@ -522,7 +522,12 @@ public class KafkaComponentConfiguration
      * The partitioner class for partitioning messages amongst sub-topics. The
      * default partitioner is based on the hash of the key.
      */
-    private String partitioner = "org.apache.kafka.clients.producer.internals.DefaultPartitioner";
+    private String partitioner;
+    /**
+     * Whether the message keys should be ignored when computing partition. This
+     * setting has effect only when partitioner is not set
+     */
+    private Boolean partitionerIgnoreKeys = false;
     /**
      * The partition to which the record will be sent (or null if no partition
      * was specified). If this option has been configured then it take
@@ -1369,6 +1374,14 @@ public class KafkaComponentConfiguration
 
     public void setPartitioner(String partitioner) {
         this.partitioner = partitioner;
+    }
+
+    public Boolean getPartitionerIgnoreKeys() {
+        return partitionerIgnoreKeys;
+    }
+
+    public void setPartitionerIgnoreKeys(Boolean partitionerIgnoreKeys) {
+        this.partitionerIgnoreKeys = partitionerIgnoreKeys;
     }
 
     public Integer getPartitionKey() {

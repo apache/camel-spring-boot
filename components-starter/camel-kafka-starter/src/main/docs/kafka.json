@@ -448,8 +448,14 @@
       "name": "camel.component.kafka.partitioner",
       "type": "java.lang.String",
       "description": "The partitioner class for partitioning messages amongst sub-topics. The default partitioner is based on the hash of the key.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.kafka.partitioner-ignore-keys",
+      "type": "java.lang.Boolean",
+      "description": "Whether the message keys should be ignored when computing partition. This setting has effect only when partitioner is not set",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
-      "defaultValue": "org.apache.kafka.clients.producer.internals.DefaultPartitioner"
+      "defaultValue": false
     },
     {
       "name": "camel.component.kafka.poll-exception-strategy",
