@@ -158,6 +158,13 @@
       "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
     },
     {
+      "name": "camel.component.pulsar.enable-retry",
+      "type": "java.lang.Boolean",
+      "description": "To enable retry letter topic mode. The default retry letter topic uses this format: topicname-subscriptionname-RETRY",
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.pulsar.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the pulsar component. This is enabled by default.",
@@ -266,6 +273,12 @@
       "description": "Enable compacted topic reading.",
       "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.pulsar.retry-letter-topic",
+      "type": "java.lang.String",
+      "description": "Name of the topic to use in retry mode. Note: if not set, default topic name will be topicName-subscriptionName-RETRY",
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
     },
     {
       "name": "camel.component.pulsar.send-timeout-ms",

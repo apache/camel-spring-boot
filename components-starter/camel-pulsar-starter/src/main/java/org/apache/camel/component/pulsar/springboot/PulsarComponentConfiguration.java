@@ -119,6 +119,11 @@ public class PulsarComponentConfiguration
      */
     private String deadLetterTopic;
     /**
+     * To enable retry letter topic mode. The default retry letter topic uses
+     * this format: topicname-subscriptionname-RETRY
+     */
+    private Boolean enableRetry = false;
+    /**
      * Policy to use by consumer when using key-shared subscription type.
      */
     private String keySharedPolicy;
@@ -155,6 +160,11 @@ public class PulsarComponentConfiguration
      * Enable compacted topic reading.
      */
     private Boolean readCompacted = false;
+    /**
+     * Name of the topic to use in retry mode. Note: if not set, default topic
+     * name will be topicName-subscriptionName-RETRY
+     */
+    private String retryLetterTopic;
     /**
      * Control the initial position in the topic of a newly created
      * subscription. Default is latest message.
@@ -389,6 +399,14 @@ public class PulsarComponentConfiguration
         this.deadLetterTopic = deadLetterTopic;
     }
 
+    public Boolean getEnableRetry() {
+        return enableRetry;
+    }
+
+    public void setEnableRetry(Boolean enableRetry) {
+        this.enableRetry = enableRetry;
+    }
+
     public String getKeySharedPolicy() {
         return keySharedPolicy;
     }
@@ -453,6 +471,14 @@ public class PulsarComponentConfiguration
 
     public void setReadCompacted(Boolean readCompacted) {
         this.readCompacted = readCompacted;
+    }
+
+    public String getRetryLetterTopic() {
+        return retryLetterTopic;
+    }
+
+    public void setRetryLetterTopic(String retryLetterTopic) {
+        this.retryLetterTopic = retryLetterTopic;
     }
 
     public SubscriptionInitialPosition getSubscriptionInitialPosition() {

@@ -119,6 +119,13 @@
       "defaultValue": "is:unread"
     },
     {
+      "name": "camel.component.google-mail-stream.raw",
+      "type": "java.lang.Boolean",
+      "description": "Whether to store the entire email message in an RFC 2822 formatted and base64url encoded string (in JSon format), in the Camel message body.",
+      "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.google-mail-stream.refresh-token",
       "type": "java.lang.String",
       "description": "OAuth 2 refresh token. Using this, the Google Calendar component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived.",

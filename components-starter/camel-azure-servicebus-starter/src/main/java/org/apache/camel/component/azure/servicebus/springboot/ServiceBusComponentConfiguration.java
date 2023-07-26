@@ -59,14 +59,13 @@ public class ServiceBusComponentConfiguration
     private AmqpRetryOptions amqpRetryOptions;
     /**
      * Sets the transport type by which all the communication with Azure Service
-     * Bus occurs. Default value is AmqpTransportType#AMQP.
+     * Bus occurs. Default value is AMQP.
      */
     private AmqpTransportType amqpTransportType = AmqpTransportType.AMQP;
     /**
      * Sets the ClientOptions to be sent from the client built from this
      * builder, enabling customization of certain properties, as well as support
-     * the addition of custom header information. Refer to the ClientOptions
-     * documentation for more information. The option is a
+     * the addition of custom header information. The option is a
      * com.azure.core.util.ClientOptions type.
      */
     private ClientOptions clientOptions;
@@ -77,9 +76,8 @@ public class ServiceBusComponentConfiguration
     private ServiceBusConfiguration configuration;
     /**
      * Sets the proxy configuration to use for ServiceBusSenderAsyncClient. When
-     * a proxy is configured, AmqpTransportType#AMQP_WEB_SOCKETS must be used
-     * for the transport type. The option is a com.azure.core.amqp.ProxyOptions
-     * type.
+     * a proxy is configured, AMQP_WEB_SOCKETS must be used for the transport
+     * type. The option is a com.azure.core.amqp.ProxyOptions type.
      */
     private ProxyOptions proxyOptions;
     /**
@@ -102,18 +100,15 @@ public class ServiceBusComponentConfiguration
     private ServiceBusConsumerOperationDefinition consumerOperation = ServiceBusConsumerOperationDefinition.receiveMessages;
     /**
      * Disables auto-complete and auto-abandon of received messages. By default,
-     * a successfully processed message is {link
-     * ServiceBusReceiverAsyncClient#complete(ServiceBusReceivedMessage)
-     * completed}. If an error happens when the message is processed, it is
-     * {link ServiceBusReceiverAsyncClient#abandon(ServiceBusReceivedMessage)
-     * abandoned}.
+     * a successfully processed message is completed. If an error happens when
+     * the message is abandoned.
      */
     private Boolean disableAutoComplete = false;
     /**
-     * Sets the amount of time to continue auto-renewing the lock. Setting
-     * Duration#ZERO or null disables auto-renewal. For {link
-     * ServiceBusReceiveMode#RECEIVE_AND_DELETE RECEIVE_AND_DELETE} mode,
-     * auto-renewal is disabled. The option is a java.time.Duration type.
+     * Sets the amount of time to continue auto-renewing the lock. Setting ZERO
+     * disables auto-renewal. For ServiceBus receive mode (RECEIVE_AND_DELETE
+     * RECEIVE_AND_DELETE), auto-renewal is disabled. The option is a
+     * java.time.Duration type.
      */
     private Duration maxAutoLockRenewDuration;
     /**
@@ -121,14 +116,12 @@ public class ServiceBusComponentConfiguration
      */
     private Integer peekNumMaxMessages;
     /**
-     * Sets the prefetch count of the receiver. For both {link
-     * ServiceBusReceiveMode#PEEK_LOCK PEEK_LOCK} and {link
-     * ServiceBusReceiveMode#RECEIVE_AND_DELETE RECEIVE_AND_DELETE} modes the
-     * default value is 1. Prefetch speeds up the message flow by aiming to have
-     * a message readily available for local retrieval when and before the
-     * application asks for one using
-     * ServiceBusReceiverAsyncClient#receiveMessages(). Setting a non-zero value
-     * will prefetch that number of messages. Setting the value to zero turns
+     * Sets the prefetch count of the receiver. For both PEEK_LOCK PEEK_LOCK and
+     * RECEIVE_AND_DELETE RECEIVE_AND_DELETE receive modes the default value is
+     * 1. Prefetch speeds up the message flow by aiming to have a message
+     * readily available for local retrieval when and before the application
+     * asks for one using receive message. Setting a non-zero value will
+     * prefetch that number of messages. Setting the value to zero turns
      * prefetch off.
      */
     private Integer prefetchCount;
@@ -202,8 +195,7 @@ public class ServiceBusComponentConfiguration
      */
     private String fullyQualifiedNamespace;
     /**
-     * A TokenCredential for Azure AD authentication, implemented in
-     * com.azure.identity. The option is a
+     * A TokenCredential for Azure AD authentication. The option is a
      * com.azure.core.credential.TokenCredential type.
      */
     private TokenCredential tokenCredential;

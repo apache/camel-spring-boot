@@ -75,6 +75,11 @@ public class GoogleMailStreamComponentConfiguration
      */
     private String query = "is:unread";
     /**
+     * Whether to store the entire email message in an RFC 2822 formatted and
+     * base64url encoded string (in JSon format), in the Camel message body.
+     */
+    private Boolean raw = false;
+    /**
      * GMail scopes
      */
     private List<String> scopes;
@@ -179,6 +184,14 @@ public class GoogleMailStreamComponentConfiguration
 
     public void setQuery(String query) {
         this.query = query;
+    }
+
+    public Boolean getRaw() {
+        return raw;
+    }
+
+    public void setRaw(Boolean raw) {
+        this.raw = raw;
     }
 
     public List<String> getScopes() {
