@@ -166,7 +166,6 @@
     <module>camel-console-starter</module>
     <module>camel-consul-starter</module>
     <module>camel-controlbus-starter</module>
-    <module>camel-corda-starter</module>
     <module>camel-core-starter</module>
     <module>camel-couchbase-starter</module>
     <module>camel-couchdb-starter</module>
