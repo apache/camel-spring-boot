@@ -39,6 +39,27 @@
       "sourceType": "org.apache.camel.component.hdfs.springboot.HdfsComponentConfiguration"
     },
     {
+      "name": "camel.component.hdfs.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.hdfs.springboot.HdfsComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.hdfs.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.hdfs.springboot.HdfsComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.hdfs.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.hdfs.springboot.HdfsComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.hdfs.j-a-a-s-configuration",
       "type": "javax.security.auth.login.Configuration",
       "description": "To use the given configuration for security with JAAS. The option is a javax.security.auth.login.Configuration type.",

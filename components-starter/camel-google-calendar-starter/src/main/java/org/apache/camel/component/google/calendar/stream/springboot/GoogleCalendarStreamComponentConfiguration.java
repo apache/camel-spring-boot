@@ -112,6 +112,20 @@ public class GoogleCalendarStreamComponentConfiguration
      */
     private GoogleCalendarClientFactory clientFactory;
     /**
+     * Used for enabling or disabling all consumer based health checks from this
+     * component
+     */
+    private Boolean healthCheckConsumerEnabled = true;
+    /**
+     * Used for enabling or disabling all health checks from this component
+     */
+    private Boolean healthCheckEnabled = true;
+    /**
+     * Used for enabling or disabling all producer based health checks from this
+     * component
+     */
+    private Boolean healthCheckProducerEnabled = true;
+    /**
      * OAuth 2 access token. This typically expires after an hour so
      * refreshToken is recommended for long term usage.
      */
@@ -256,6 +270,30 @@ public class GoogleCalendarStreamComponentConfiguration
 
     public void setClientFactory(GoogleCalendarClientFactory clientFactory) {
         this.clientFactory = clientFactory;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckEnabled() {
+        return healthCheckEnabled;
+    }
+
+    public void setHealthCheckEnabled(Boolean healthCheckEnabled) {
+        this.healthCheckEnabled = healthCheckEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
     public String getAccessToken() {

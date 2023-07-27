@@ -92,6 +92,27 @@
       "sourceType": "org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConfiguration"
     },
     {
+      "name": "camel.component.google-sheets-stream.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-sheets-stream.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-sheets-stream.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.google-sheets-stream.include-grid-data",
       "type": "java.lang.Boolean",
       "description": "True if grid data should be returned.",

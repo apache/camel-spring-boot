@@ -119,6 +119,27 @@
       "sourceType": "org.apache.camel.component.google.calendar.stream.springboot.GoogleCalendarStreamComponentConfiguration"
     },
     {
+      "name": "camel.component.google-calendar-stream.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.google.calendar.stream.springboot.GoogleCalendarStreamComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-calendar-stream.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.google.calendar.stream.springboot.GoogleCalendarStreamComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-calendar-stream.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.google.calendar.stream.springboot.GoogleCalendarStreamComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.google-calendar-stream.max-results",
       "type": "java.lang.Integer",
       "description": "Max results to be returned",

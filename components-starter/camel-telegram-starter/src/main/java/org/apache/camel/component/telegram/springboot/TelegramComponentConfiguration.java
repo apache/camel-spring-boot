@@ -75,6 +75,20 @@ public class TelegramComponentConfiguration
      */
     private HttpClient client;
     /**
+     * Used for enabling or disabling all consumer based health checks from this
+     * component
+     */
+    private Boolean healthCheckConsumerEnabled = true;
+    /**
+     * Used for enabling or disabling all health checks from this component
+     */
+    private Boolean healthCheckEnabled = true;
+    /**
+     * Used for enabling or disabling all producer based health checks from this
+     * component
+     */
+    private Boolean healthCheckProducerEnabled = true;
+    /**
      * The default Telegram authorization token to be used when the information
      * is not provided in the endpoints.
      */
@@ -118,6 +132,30 @@ public class TelegramComponentConfiguration
 
     public void setClient(HttpClient client) {
         this.client = client;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckEnabled() {
+        return healthCheckEnabled;
+    }
+
+    public void setHealthCheckEnabled(Boolean healthCheckEnabled) {
+        this.healthCheckEnabled = healthCheckEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
     public String getAuthorizationToken() {

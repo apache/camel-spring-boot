@@ -64,6 +64,27 @@
       "sourceType": "org.apache.camel.component.jira.springboot.JiraComponentConfiguration"
     },
     {
+      "name": "camel.component.jira.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.jira.springboot.JiraComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.jira.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.jira.springboot.JiraComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.jira.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.jira.springboot.JiraComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.jira.jira-url",
       "type": "java.lang.String",
       "description": "The Jira server url, example: http:\/\/my_jira.com:8081",

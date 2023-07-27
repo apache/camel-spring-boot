@@ -51,6 +51,27 @@
       "sourceType": "org.apache.camel.component.jpa.springboot.JpaComponentConfiguration"
     },
     {
+      "name": "camel.component.jpa.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.jpa.springboot.JpaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.jpa.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.jpa.springboot.JpaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.jpa.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.jpa.springboot.JpaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.jpa.join-transaction",
       "type": "java.lang.Boolean",
       "description": "The camel-jpa component will join transaction by default. You can use this option to turn this off, for example if you use LOCAL_RESOURCE and join transaction doesn't work with your JPA provider. This option can also be set globally on the JpaComponent, instead of having to set it on all endpoints.",

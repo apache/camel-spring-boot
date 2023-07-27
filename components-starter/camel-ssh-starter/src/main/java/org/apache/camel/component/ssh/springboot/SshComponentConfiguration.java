@@ -107,6 +107,20 @@ public class SshComponentConfiguration
      */
     private Long sleepForShellPrompt = 100L;
     /**
+     * Used for enabling or disabling all consumer based health checks from this
+     * component
+     */
+    private Boolean healthCheckConsumerEnabled = true;
+    /**
+     * Used for enabling or disabling all health checks from this component
+     */
+    private Boolean healthCheckEnabled = true;
+    /**
+     * Used for enabling or disabling all producer based health checks from this
+     * component
+     */
+    private Boolean healthCheckProducerEnabled = true;
+    /**
      * Sets the resource path of the certificate to use for Authentication. Will
      * use ResourceHelperKeyPairProvider to resolve file based certificate, and
      * depends on keyType setting.
@@ -227,6 +241,30 @@ public class SshComponentConfiguration
 
     public void setSleepForShellPrompt(Long sleepForShellPrompt) {
         this.sleepForShellPrompt = sleepForShellPrompt;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckEnabled() {
+        return healthCheckEnabled;
+    }
+
+    public void setHealthCheckEnabled(Boolean healthCheckEnabled) {
+        this.healthCheckEnabled = healthCheckEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
     public String getCertResource() {

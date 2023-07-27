@@ -65,6 +65,27 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.wordpress.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.wordpress.springboot.WordpressComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.wordpress.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.wordpress.springboot.WordpressComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.wordpress.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.wordpress.springboot.WordpressComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.wordpress.id",
       "type": "java.lang.Integer",
       "description": "The entity ID. Should be passed when the operation performed requires a specific entity, e.g. deleting a post",

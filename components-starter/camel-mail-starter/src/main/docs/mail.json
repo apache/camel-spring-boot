@@ -207,6 +207,27 @@
       "sourceType": "org.apache.camel.component.mail.springboot.MailComponentConfiguration"
     },
     {
+      "name": "camel.component.mail.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.mail.springboot.MailComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.mail.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.mail.springboot.MailComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.mail.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.mail.springboot.MailComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.mail.ignore-unsupported-charset",
       "type": "java.lang.Boolean",
       "description": "Option to let Camel ignore unsupported charset in the local JVM when sending mails. If the charset is unsupported then charset=XXX (where XXX represents the unsupported charset) is removed from the content-type and it relies on the platform default instead.",

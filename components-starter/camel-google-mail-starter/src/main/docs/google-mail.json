@@ -92,6 +92,27 @@
       "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration"
     },
     {
+      "name": "camel.component.google-mail-stream.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-mail-stream.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-mail-stream.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.google-mail-stream.labels",
       "type": "java.lang.String",
       "description": "Comma separated list of labels to take into account",

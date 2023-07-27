@@ -71,6 +71,27 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.ssh.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ssh.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ssh.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.ssh.key-pair-provider",
       "type": "org.apache.sshd.common.keyprovider.KeyPairProvider",
       "description": "Sets the KeyPairProvider reference to use when connecting using Certificates to the remote SSH Server. The option is a org.apache.sshd.common.keyprovider.KeyPairProvider type.",

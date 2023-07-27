@@ -39,6 +39,27 @@
       "sourceType": "org.apache.camel.component.scheduler.springboot.SchedulerComponentConfiguration"
     },
     {
+      "name": "camel.component.scheduler.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.scheduler.springboot.SchedulerComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.scheduler.health-check-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all health checks from this component",
+      "sourceType": "org.apache.camel.component.scheduler.springboot.SchedulerComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.scheduler.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "sourceType": "org.apache.camel.component.scheduler.springboot.SchedulerComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.scheduler.pool-size",
       "type": "java.lang.Integer",
       "description": "Number of core threads in the thread pool used by the scheduling thread pool. Is by default using a single thread",
