@@ -58,7 +58,7 @@
     {
       "name": "camel.component.aws2-athena.delay",
       "type": "java.lang.Long",
-      "description": "Milliseconds before the next poll for query execution status. See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more.",
+      "description": "Milliseconds before the next poll for query execution status. See the section Waiting for Query Completion and Retrying Failed Queries to learn more.",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
       "defaultValue": 2000
     },
@@ -75,6 +75,20 @@
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-athena.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-athena.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.aws2-athena.include-trace",
       "type": "java.lang.Boolean",
       "description": "Include useful trace information at the beginning of queries as an SQL comment (prefixed with --).",
@@ -84,7 +98,7 @@
     {
       "name": "camel.component.aws2-athena.initial-delay",
       "type": "java.lang.Long",
-      "description": "Milliseconds before the first poll for query execution status. See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more.",
+      "description": "Milliseconds before the first poll for query execution status. See the section Waiting for Query Completion and Retrying Failed Queries to learn more.",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
       "defaultValue": 1000
     },
@@ -104,7 +118,7 @@
     {
       "name": "camel.component.aws2-athena.max-attempts",
       "type": "java.lang.Integer",
-      "description": "Maximum number of times to attempt a query. Set to 1 to disable retries. See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more.",
+      "description": "Maximum number of times to attempt a query. Set to 1 to disable retries. See the section Waiting for Query Completion and Retrying Failed Queries to learn more.",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
       "defaultValue": 1
     },
@@ -129,13 +143,13 @@
     {
       "name": "camel.component.aws2-athena.output-location",
       "type": "java.lang.String",
-      "description": "The location in Amazon S3 where query results are stored, such as s3:\/\/path\/to\/query\/bucket\/. Ensure this value ends with a forward slash ('\/').",
+      "description": "The location in Amazon S3 where query results are stored, such as s3:\/\/path\/to\/query\/bucket\/. Ensure this value ends with a forward slash.",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-athena.output-type",
       "type": "org.apache.camel.component.aws2.athena.Athena2OutputType",
-      "description": "How query results should be returned. One of StreamList (default - return a GetQueryResultsIterable that can page through all results), SelectList (returns at most 1,000 rows at a time, plus a NextToken value as a header than can be used for manual pagination of results), S3Pointer (return an S3 path pointing to the results).",
+      "description": "How query results should be returned. One of StreamList (default - return a GetQueryResultsIterable that can page through all results), SelectList (returns at most 1000 rows at a time, plus a NextToken value as a header than can be used for manual pagination of results), S3Pointer (return an S3 path pointing to the results).",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration"
     },
     {
@@ -177,20 +191,20 @@
     {
       "name": "camel.component.aws2-athena.region",
       "type": "java.lang.String",
-      "description": "The region in which Athena client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1). You'll need to use the name Region.EU_WEST_1.id().",
+      "description": "The region in which Athena client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1).",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-athena.reset-wait-timeout-on-retry",
       "type": "java.lang.Boolean",
-      "description": "Reset the waitTimeout countdown in the event of a query retry. If set to true, potential max time spent waiting for queries is equal to waitTimeout x maxAttempts. See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more.",
+      "description": "Reset the waitTimeout countdown in the event of a query retry. If set to true, potential max time spent waiting for queries is equal to waitTimeout x maxAttempts. See the section Waiting for Query Completion and Retrying Failed Queries to learn more.",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.aws2-athena.retry",
       "type": "java.lang.String",
-      "description": "Optional comma separated list of error types to retry the query for. Use 'retryable' to retry all retryable failure conditions (e.g. generic errors and resources exhausted), 'generic' to retry 'GENERIC_INTERNAL_ERROR' failures, 'exhausted' to retry queries that have exhausted resource limits, 'always' to always retry regardless of failure condition, or 'never' or null to never retry (default). See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more.",
+      "description": "Optional comma separated list of error types to retry the query for. Use: 'retryable' to retry all retryable failure conditions (e.g. generic errors and resources exhausted), 'generic' to retry 'GENERIC_INTERNAL_ERROR' failures, 'exhausted' to retry queries that have exhausted resource limits, 'always' to always retry regardless of failure condition, or 'never' or null to never retry (default). See the section Waiting for Query Completion and Retrying Failed Queries to learn more.",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
       "defaultValue": "never"
     },
@@ -217,7 +231,7 @@
     {
       "name": "camel.component.aws2-athena.wait-timeout",
       "type": "java.lang.Long",
-      "description": "Optional max wait time in millis to wait for a successful query completion. See the section 'Waiting for Query Completion and Retrying Failed Queries' to learn more.",
+      "description": "Optional max wait time in millis to wait for a successful query completion. See the section Waiting for Query Completion and Retrying Failed Queries to learn more.",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
       "defaultValue": 0
     },

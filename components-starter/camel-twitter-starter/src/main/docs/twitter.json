@@ -92,16 +92,9 @@
       "defaultValue": true
     },
     {
-      "name": "camel.component.twitter-directmessage.health-check-enabled",
-      "type": "java.lang.Boolean",
-      "description": "Used for enabling or disabling all health checks from this component",
-      "sourceType": "org.apache.camel.component.twitter.directmessage.springboot.TwitterDirectMessageComponentConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.component.twitter-directmessage.health-check-producer-enabled",
       "type": "java.lang.Boolean",
-      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
       "sourceType": "org.apache.camel.component.twitter.directmessage.springboot.TwitterDirectMessageComponentConfiguration",
       "defaultValue": true
     },
@@ -193,16 +186,9 @@
       "defaultValue": true
     },
     {
-      "name": "camel.component.twitter-search.health-check-enabled",
-      "type": "java.lang.Boolean",
-      "description": "Used for enabling or disabling all health checks from this component",
-      "sourceType": "org.apache.camel.component.twitter.search.springboot.TwitterSearchComponentConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.component.twitter-search.health-check-producer-enabled",
       "type": "java.lang.Boolean",
-      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
       "sourceType": "org.apache.camel.component.twitter.search.springboot.TwitterSearchComponentConfiguration",
       "defaultValue": true
     },
@@ -294,16 +280,9 @@
       "defaultValue": true
     },
     {
-      "name": "camel.component.twitter-timeline.health-check-enabled",
-      "type": "java.lang.Boolean",
-      "description": "Used for enabling or disabling all health checks from this component",
-      "sourceType": "org.apache.camel.component.twitter.timeline.springboot.TwitterTimelineComponentConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.component.twitter-timeline.health-check-producer-enabled",
       "type": "java.lang.Boolean",
-      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
       "sourceType": "org.apache.camel.component.twitter.timeline.springboot.TwitterTimelineComponentConfiguration",
       "defaultValue": true
     },

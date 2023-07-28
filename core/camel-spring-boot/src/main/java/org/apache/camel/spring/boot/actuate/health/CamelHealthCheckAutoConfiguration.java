@@ -101,13 +101,13 @@ public class CamelHealthCheckAutoConfiguration {
                     hcr.register(hc);
                 }
             }
-            // components are enabled by default
+            // producers are disabled by default
             if (hcr.isEnabled()) {
                 HealthCheckRepository hc
-                    = hcr.getRepository("components").orElse((HealthCheckRepository) hcr.resolveById("components"));
+                    = hcr.getRepository("producers").orElse((HealthCheckRepository) hcr.resolveById("producers"));
                 if (hc != null) {
-                    if (config.getComponentsEnabled() != null) {
-                        hc.setEnabled(config.getComponentsEnabled());
+                    if (config.getProducersEnabled() != null) {
+                        hc.setEnabled(config.getProducersEnabled());
                     }
                     hcr.register(hc);
                 }

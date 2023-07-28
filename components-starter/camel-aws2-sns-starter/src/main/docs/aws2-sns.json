@@ -57,6 +57,20 @@
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-sns.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-sns.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.aws2-sns.kms-master-key-id",
       "type": "java.lang.String",
       "description": "The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK.",

@@ -111,12 +111,10 @@ public class WordpressComponentConfiguration
      */
     private Boolean healthCheckConsumerEnabled = true;
     /**
-     * Used for enabling or disabling all health checks from this component
-     */
-    private Boolean healthCheckEnabled = true;
-    /**
      * Used for enabling or disabling all producer based health checks from this
-     * component
+     * component. Notice: Camel has by default disabled all producer based
+     * health-checks. You can turn on producer checks globally by setting
+     * camel.health.producersEnabled=true.
      */
     private Boolean healthCheckProducerEnabled = true;
 
@@ -222,14 +220,6 @@ public class WordpressComponentConfiguration
 
     public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
         this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
-    }
-
-    public Boolean getHealthCheckEnabled() {
-        return healthCheckEnabled;
-    }
-
-    public void setHealthCheckEnabled(Boolean healthCheckEnabled) {
-        this.healthCheckEnabled = healthCheckEnabled;
     }
 
     public Boolean getHealthCheckProducerEnabled() {

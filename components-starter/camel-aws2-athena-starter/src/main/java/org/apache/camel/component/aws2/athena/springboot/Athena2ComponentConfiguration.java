@@ -42,15 +42,6 @@ public class Athena2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key.
-     */
-    private String accessKey;
-    /**
-     * The AmazonAthena instance to use as the client. The option is a
-     * software.amazon.awssdk.services.athena.AthenaClient type.
-     */
-    private AthenaClient amazonAthenaClient;
-    /**
      * The component configuration. The option is a
      * org.apache.camel.component.aws2.athena.Athena2Configuration type.
      */
@@ -61,30 +52,16 @@ public class Athena2ComponentConfiguration
     private String database;
     /**
      * Milliseconds before the next poll for query execution status. See the
-     * section 'Waiting for Query Completion and Retrying Failed Queries' to
-     * learn more.
+     * section Waiting for Query Completion and Retrying Failed Queries to learn
+     * more.
      */
     private Long delay = 2000L;
     /**
-     * The encryption type to use when storing query results in S3. One of
-     * SSE_S3, SSE_KMS, or CSE_KMS.
-     */
-    private EncryptionOption encryptionOption;
-    /**
-     * Include useful trace information at the beginning of queries as an SQL
-     * comment (prefixed with --).
-     */
-    private Boolean includeTrace = false;
-    /**
      * Milliseconds before the first poll for query execution status. See the
-     * section 'Waiting for Query Completion and Retrying Failed Queries' to
-     * learn more.
+     * section Waiting for Query Completion and Retrying Failed Queries to learn
+     * more.
      */
     private Long initialDelay = 1000L;
-    /**
-     * For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
-     */
-    private String kmsKey;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -98,8 +75,8 @@ public class Athena2ComponentConfiguration
     private Boolean lazyStartProducer = false;
     /**
      * Maximum number of times to attempt a query. Set to 1 to disable retries.
-     * See the section 'Waiting for Query Completion and Retrying Failed
-     * Queries' to learn more.
+     * See the section Waiting for Query Completion and Retrying Failed Queries
+     * to learn more.
      */
     private Integer maxAttempts = 1;
     /**
@@ -119,35 +96,17 @@ public class Athena2ComponentConfiguration
     private Athena2Operations operation = Athena2Operations.startQueryExecution;
     /**
      * The location in Amazon S3 where query results are stored, such as
-     * s3://path/to/query/bucket/. Ensure this value ends with a forward slash
-     * ('/').
+     * s3://path/to/query/bucket/. Ensure this value ends with a forward slash.
      */
     private String outputLocation;
     /**
      * How query results should be returned. One of StreamList (default - return
      * a GetQueryResultsIterable that can page through all results), SelectList
-     * (returns at most 1,000 rows at a time, plus a NextToken value as a header
+     * (returns at most 1000 rows at a time, plus a NextToken value as a header
      * than can be used for manual pagination of results), S3Pointer (return an
      * S3 path pointing to the results).
      */
     private Athena2OutputType outputType = Athena2OutputType.StreamList;
-    /**
-     * If using a profile credentials provider this parameter will set the
-     * profile name
-     */
-    private String profileCredentialsName;
-    /**
-     * To define a proxy host when instantiating the Athena client.
-     */
-    private String proxyHost;
-    /**
-     * To define a proxy port when instantiating the Athena client.
-     */
-    private Integer proxyPort;
-    /**
-     * To define a proxy protocol when instantiating the Athena client.
-     */
-    private Protocol proxyProtocol = Protocol.HTTPS;
     /**
      * The unique ID identifying the query execution.
      */
@@ -162,27 +121,102 @@ public class Athena2ComponentConfiguration
     /**
      * The region in which Athena client needs to work. When using this
      * parameter, the configuration will expect the lowercase name of the region
-     * (for example ap-east-1). You'll need to use the name
-     * Region.EU_WEST_1.id().
+     * (for example ap-east-1).
      */
     private String region;
     /**
      * Reset the waitTimeout countdown in the event of a query retry. If set to
      * true, potential max time spent waiting for queries is equal to
-     * waitTimeout x maxAttempts. See the section 'Waiting for Query Completion
-     * and Retrying Failed Queries' to learn more.
+     * waitTimeout x maxAttempts. See the section Waiting for Query Completion
+     * and Retrying Failed Queries to learn more.
      */
     private Boolean resetWaitTimeoutOnRetry = true;
     /**
-     * Optional comma separated list of error types to retry the query for. Use
+     * Optional comma separated list of error types to retry the query for. Use:
      * 'retryable' to retry all retryable failure conditions (e.g. generic
      * errors and resources exhausted), 'generic' to retry
      * 'GENERIC_INTERNAL_ERROR' failures, 'exhausted' to retry queries that have
      * exhausted resource limits, 'always' to always retry regardless of failure
      * condition, or 'never' or null to never retry (default). See the section
-     * 'Waiting for Query Completion and Retrying Failed Queries' to learn more.
+     * Waiting for Query Completion and Retrying Failed Queries to learn more.
      */
     private String retry = "never";
+    /**
+     * Optional max wait time in millis to wait for a successful query
+     * completion. See the section Waiting for Query Completion and Retrying
+     * Failed Queries to learn more.
+     */
+    private Long waitTimeout = 0L;
+    /**
+     * The workgroup to use for running the query.
+     */
+    private String workGroup;
+    /**
+     * The AmazonAthena instance to use as the client. The option is a
+     * software.amazon.awssdk.services.athena.AthenaClient type.
+     */
+    private AthenaClient amazonAthenaClient;
+    /**
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
+     */
+    private Boolean autowiredEnabled = true;
+    /**
+     * A unique string to ensure issues queries are idempotent. It is unlikely
+     * you will need to set this.
+     */
+    private String clientRequestToken;
+    /**
+     * Include useful trace information at the beginning of queries as an SQL
+     * comment (prefixed with --).
+     */
+    private Boolean includeTrace = false;
+    /**
+     * Used for enabling or disabling all consumer based health checks from this
+     * component
+     */
+    private Boolean healthCheckConsumerEnabled = true;
+    /**
+     * Used for enabling or disabling all producer based health checks from this
+     * component. Notice: Camel has by default disabled all producer based
+     * health-checks. You can turn on producer checks globally by setting
+     * camel.health.producersEnabled=true.
+     */
+    private Boolean healthCheckProducerEnabled = true;
+    /**
+     * To define a proxy host when instantiating the Athena client.
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the Athena client.
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the Athena client.
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
+     * Amazon AWS Access Key.
+     */
+    private String accessKey;
+    /**
+     * The encryption type to use when storing query results in S3. One of
+     * SSE_S3, SSE_KMS, or CSE_KMS.
+     */
+    private EncryptionOption encryptionOption;
+    /**
+     * For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
+     */
+    private String kmsKey;
+    /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
     /**
      * Amazon AWS Secret Key.
      */
@@ -198,46 +232,6 @@ public class Athena2ComponentConfiguration
      * profile credentials provider.
      */
     private Boolean useProfileCredentialsProvider = false;
-    /**
-     * Optional max wait time in millis to wait for a successful query
-     * completion. See the section 'Waiting for Query Completion and Retrying
-     * Failed Queries' to learn more.
-     */
-    private Long waitTimeout = 0L;
-    /**
-     * The workgroup to use for running the query.
-     */
-    private String workGroup;
-    /**
-     * Whether autowiring is enabled. This is used for automatic autowiring
-     * options (the option must be marked as autowired) by looking up in the
-     * registry to find if there is a single instance of matching type, which
-     * then gets configured on the component. This can be used for automatic
-     * configuring JDBC data sources, JMS connection factories, AWS Clients,
-     * etc.
-     */
-    private Boolean autowiredEnabled = true;
-    /**
-     * A unique string to ensure issues queries are idempotent. It is unlikely
-     * you will need to set this.
-     */
-    private String clientRequestToken;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
-
-    public AthenaClient getAmazonAthenaClient() {
-        return amazonAthenaClient;
-    }
-
-    public void setAmazonAthenaClient(AthenaClient amazonAthenaClient) {
-        this.amazonAthenaClient = amazonAthenaClient;
-    }
 
     public Athena2Configuration getConfiguration() {
         return configuration;
@@ -263,36 +257,12 @@ public class Athena2ComponentConfiguration
         this.delay = delay;
     }
 
-    public EncryptionOption getEncryptionOption() {
-        return encryptionOption;
-    }
-
-    public void setEncryptionOption(EncryptionOption encryptionOption) {
-        this.encryptionOption = encryptionOption;
-    }
-
-    public Boolean getIncludeTrace() {
-        return includeTrace;
-    }
-
-    public void setIncludeTrace(Boolean includeTrace) {
-        this.includeTrace = includeTrace;
-    }
-
     public Long getInitialDelay() {
         return initialDelay;
     }
 
     public void setInitialDelay(Long initialDelay) {
         this.initialDelay = initialDelay;
-    }
-
-    public String getKmsKey() {
-        return kmsKey;
-    }
-
-    public void setKmsKey(String kmsKey) {
-        this.kmsKey = kmsKey;
     }
 
     public Boolean getLazyStartProducer() {
@@ -351,38 +321,6 @@ public class Athena2ComponentConfiguration
         this.outputType = outputType;
     }
 
-    public String getProfileCredentialsName() {
-        return profileCredentialsName;
-    }
-
-    public void setProfileCredentialsName(String profileCredentialsName) {
-        this.profileCredentialsName = profileCredentialsName;
-    }
-
-    public String getProxyHost() {
-        return proxyHost;
-    }
-
-    public void setProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-    }
-
-    public Integer getProxyPort() {
-        return proxyPort;
-    }
-
-    public void setProxyPort(Integer proxyPort) {
-        this.proxyPort = proxyPort;
-    }
-
-    public Protocol getProxyProtocol() {
-        return proxyProtocol;
-    }
-
-    public void setProxyProtocol(Protocol proxyProtocol) {
-        this.proxyProtocol = proxyProtocol;
-    }
-
     public String getQueryExecutionId() {
         return queryExecutionId;
     }
@@ -423,6 +361,126 @@ public class Athena2ComponentConfiguration
         this.retry = retry;
     }
 
+    public Long getWaitTimeout() {
+        return waitTimeout;
+    }
+
+    public void setWaitTimeout(Long waitTimeout) {
+        this.waitTimeout = waitTimeout;
+    }
+
+    public String getWorkGroup() {
+        return workGroup;
+    }
+
+    public void setWorkGroup(String workGroup) {
+        this.workGroup = workGroup;
+    }
+
+    public AthenaClient getAmazonAthenaClient() {
+        return amazonAthenaClient;
+    }
+
+    public void setAmazonAthenaClient(AthenaClient amazonAthenaClient) {
+        this.amazonAthenaClient = amazonAthenaClient;
+    }
+
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getClientRequestToken() {
+        return clientRequestToken;
+    }
+
+    public void setClientRequestToken(String clientRequestToken) {
+        this.clientRequestToken = clientRequestToken;
+    }
+
+    public Boolean getIncludeTrace() {
+        return includeTrace;
+    }
+
+    public void setIncludeTrace(Boolean includeTrace) {
+        this.includeTrace = includeTrace;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
+    }
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public EncryptionOption getEncryptionOption() {
+        return encryptionOption;
+    }
+
+    public void setEncryptionOption(EncryptionOption encryptionOption) {
+        this.encryptionOption = encryptionOption;
+    }
+
+    public String getKmsKey() {
+        return kmsKey;
+    }
+
+    public void setKmsKey(String kmsKey) {
+        this.kmsKey = kmsKey;
+    }
+
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
     public String getSecretKey() {
         return secretKey;
     }
@@ -447,37 +505,5 @@ public class Athena2ComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
-    }
-
-    public Long getWaitTimeout() {
-        return waitTimeout;
-    }
-
-    public void setWaitTimeout(Long waitTimeout) {
-        this.waitTimeout = waitTimeout;
-    }
-
-    public String getWorkGroup() {
-        return workGroup;
-    }
-
-    public void setWorkGroup(String workGroup) {
-        this.workGroup = workGroup;
-    }
-
-    public Boolean getAutowiredEnabled() {
-        return autowiredEnabled;
-    }
-
-    public void setAutowiredEnabled(Boolean autowiredEnabled) {
-        this.autowiredEnabled = autowiredEnabled;
-    }
-
-    public String getClientRequestToken() {
-        return clientRequestToken;
-    }
-
-    public void setClientRequestToken(String clientRequestToken) {
-        this.clientRequestToken = clientRequestToken;
     }
 }

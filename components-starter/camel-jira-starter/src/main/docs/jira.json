@@ -71,16 +71,9 @@
       "defaultValue": true
     },
     {
-      "name": "camel.component.jira.health-check-enabled",
-      "type": "java.lang.Boolean",
-      "description": "Used for enabling or disabling all health checks from this component",
-      "sourceType": "org.apache.camel.component.jira.springboot.JiraComponentConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.component.jira.health-check-producer-enabled",
       "type": "java.lang.Boolean",
-      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
       "sourceType": "org.apache.camel.component.jira.springboot.JiraComponentConfiguration",
       "defaultValue": true
     },

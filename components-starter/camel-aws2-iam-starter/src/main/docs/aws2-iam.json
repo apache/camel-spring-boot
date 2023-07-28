@@ -44,6 +44,20 @@
       "sourceType": "org.apache.camel.component.aws2.iam.springboot.IAM2ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-iam.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.aws2.iam.springboot.IAM2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-iam.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.aws2.iam.springboot.IAM2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.aws2-iam.iam-client",
       "type": "software.amazon.awssdk.services.iam.IamClient",
       "description": "To use a existing configured AWS IAM as client. The option is a software.amazon.awssdk.services.iam.IamClient type.",

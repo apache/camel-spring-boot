@@ -75,6 +75,20 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.aws2-ddb.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.aws2.ddb.springboot.Ddb2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws2-ddb.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.aws2.ddb.springboot.Ddb2ComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.aws2-ddb.key-attribute-name",
       "type": "java.lang.String",
       "description": "Attribute name when creating table",
@@ -238,16 +252,9 @@
       "defaultValue": true
     },
     {
-      "name": "camel.component.aws2-ddbstream.health-check-enabled",
-      "type": "java.lang.Boolean",
-      "description": "Used for enabling or disabling all health checks from this component",
-      "sourceType": "org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.component.aws2-ddbstream.health-check-producer-enabled",
       "type": "java.lang.Boolean",
-      "description": "Used for enabling or disabling all producer based health checks from this component",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
       "sourceType": "org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentConfiguration",
       "defaultValue": true
     },

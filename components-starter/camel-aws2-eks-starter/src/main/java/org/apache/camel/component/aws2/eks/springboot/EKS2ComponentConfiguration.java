@@ -126,6 +126,18 @@ public class EKS2ComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Used for enabling or disabling all consumer based health checks from this
+     * component
+     */
+    private Boolean healthCheckConsumerEnabled = true;
+    /**
+     * Used for enabling or disabling all producer based health checks from this
+     * component. Notice: Camel has by default disabled all producer based
+     * health-checks. You can turn on producer checks globally by setting
+     * camel.health.producersEnabled=true.
+     */
+    private Boolean healthCheckProducerEnabled = true;
+    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
@@ -262,6 +274,22 @@ public class EKS2ComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
     public String getAccessKey() {
