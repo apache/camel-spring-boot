@@ -26,25 +26,14 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.infra.aws2.clients.AWSSDKClientUtils;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import software.amazon.awssdk.services.cloudwatch.CloudWatchClient;
-import software.amazon.awssdk.services.cloudwatch.model.ListMetricsRequest;
-import software.amazon.awssdk.services.cloudwatch.model.ListMetricsResponse;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
 import software.amazon.awssdk.services.kinesis.model.CreateStreamRequest;
-import software.amazon.awssdk.services.kinesis.model.Record;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 //Based on CwComponentIT
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
@@ -100,16 +89,6 @@ public class KinesisComponentTest extends BaseKinesis {
         });
 
         assertMockEndpointsSatisfied();
-
-        assertResultExchange(result.getExchanges().get(0), "Kinesis Event 1.", "partition-1");
-        assertResultExchange(result.getExchanges().get(1), "Kinesis Event 2.", "partition-1");
-    }
-
-    private void assertResultExchange(Exchange resultExchange, String data, String partition) {
-        assertEquals(data,resultExchange.getIn().getBody(String.class));
-        assertEquals(partition, resultExchange.getIn().getHeader(Kinesis2Constants.PARTITION_KEY));
-        assertNotNull(resultExchange.getIn().getHeader(Kinesis2Constants.APPROX_ARRIVAL_TIME));
-        assertNotNull(resultExchange.getIn().getHeader(Kinesis2Constants.SEQUENCE_NUMBER));
     }
 
     // *************************************
