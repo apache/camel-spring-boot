@@ -103,7 +103,7 @@ public class S3ComponentTest extends BaseS3 {
         assertEquals("This is my bucket content.", resultExchange.getIn().getBody(String.class));
         assertEquals("mycamelbucket", resultExchange.getIn().getHeader(AWS2S3Constants.BUCKET_NAME));
         assertTrue(resultExchange.getIn().getHeader(AWS2S3Constants.KEY, String.class).startsWith("CamelUnitTest"));
-        assertEquals("null", resultExchange.getIn().getHeader(AWS2S3Constants.VERSION_ID));
+        assertNull(resultExchange.getIn().getHeader(AWS2S3Constants.VERSION_ID));
         // enabled
         // on
         // this
