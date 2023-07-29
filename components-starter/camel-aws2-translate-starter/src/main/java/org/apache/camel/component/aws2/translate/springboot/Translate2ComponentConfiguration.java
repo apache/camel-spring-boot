@@ -73,23 +73,6 @@ public class Translate2ComponentConfiguration
      */
     private Boolean pojoRequest = false;
     /**
-     * If using a profile credentials provider this parameter will set the
-     * profile name
-     */
-    private String profileCredentialsName;
-    /**
-     * To define a proxy host when instantiating the Translate client
-     */
-    private String proxyHost;
-    /**
-     * To define a proxy port when instantiating the Translate client
-     */
-    private Integer proxyPort;
-    /**
-     * To define a proxy protocol when instantiating the Translate client
-     */
-    private Protocol proxyProtocol = Protocol.HTTPS;
-    /**
      * The region in which Translate client needs to work. When using this
      * parameter, the configuration will expect the lowercase name of the region
      * (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
@@ -104,30 +87,10 @@ public class Translate2ComponentConfiguration
      */
     private String targetLanguage;
     /**
-     * To use a existing configured AWS Translate as client. The option is a
-     * software.amazon.awssdk.services.translate.TranslateClient type.
-     */
-    private TranslateClient translateClient;
-    /**
-     * If we want to trust all certificates in case of overriding the endpoint
-     */
-    private Boolean trustAllCertificates = false;
-    /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
      */
     private String uriEndpointOverride;
-    /**
-     * Set whether the Translate client should expect to load credentials
-     * through a default credentials provider or to expect static credentials to
-     * be passed in.
-     */
-    private Boolean useDefaultCredentialsProvider = false;
-    /**
-     * Set whether the Translate client should expect to load credentials
-     * through a profile credentials provider.
-     */
-    private Boolean useProfileCredentialsProvider = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -137,6 +100,11 @@ public class Translate2ComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use a existing configured AWS Translate as client. The option is a
+     * software.amazon.awssdk.services.translate.TranslateClient type.
+     */
+    private TranslateClient translateClient;
     /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
@@ -150,13 +118,45 @@ public class Translate2ComponentConfiguration
      */
     private Boolean healthCheckProducerEnabled = true;
     /**
+     * To define a proxy host when instantiating the Translate client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the Translate client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the Translate client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
     /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
+    /**
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
+     * Set whether the Translate client should expect to load credentials
+     * through a default credentials provider or to expect static credentials to
+     * be passed in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the Translate client should expect to load credentials
+     * through a profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
 
     public Boolean getAutodetectSourceLanguage() {
         return autodetectSourceLanguage;
@@ -206,12 +206,68 @@ public class Translate2ComponentConfiguration
         this.pojoRequest = pojoRequest;
     }
 
-    public String getProfileCredentialsName() {
-        return profileCredentialsName;
+    public String getRegion() {
+        return region;
     }
 
-    public void setProfileCredentialsName(String profileCredentialsName) {
-        this.profileCredentialsName = profileCredentialsName;
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getSourceLanguage() {
+        return sourceLanguage;
+    }
+
+    public void setSourceLanguage(String sourceLanguage) {
+        this.sourceLanguage = sourceLanguage;
+    }
+
+    public String getTargetLanguage() {
+        return targetLanguage;
+    }
+
+    public void setTargetLanguage(String targetLanguage) {
+        this.targetLanguage = targetLanguage;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public TranslateClient getTranslateClient() {
+        return translateClient;
+    }
+
+    public void setTranslateClient(TranslateClient translateClient) {
+        this.translateClient = translateClient;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
     public String getProxyHost() {
@@ -238,36 +294,28 @@ public class Translate2ComponentConfiguration
         this.proxyProtocol = proxyProtocol;
     }
 
-    public String getRegion() {
-        return region;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
     }
 
-    public String getSourceLanguage() {
-        return sourceLanguage;
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
     }
 
-    public void setSourceLanguage(String sourceLanguage) {
-        this.sourceLanguage = sourceLanguage;
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
     }
 
-    public String getTargetLanguage() {
-        return targetLanguage;
+    public String getSecretKey() {
+        return secretKey;
     }
 
-    public void setTargetLanguage(String targetLanguage) {
-        this.targetLanguage = targetLanguage;
-    }
-
-    public TranslateClient getTranslateClient() {
-        return translateClient;
-    }
-
-    public void setTranslateClient(TranslateClient translateClient) {
-        this.translateClient = translateClient;
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public Boolean getTrustAllCertificates() {
@@ -276,14 +324,6 @@ public class Translate2ComponentConfiguration
 
     public void setTrustAllCertificates(Boolean trustAllCertificates) {
         this.trustAllCertificates = trustAllCertificates;
-    }
-
-    public String getUriEndpointOverride() {
-        return uriEndpointOverride;
-    }
-
-    public void setUriEndpointOverride(String uriEndpointOverride) {
-        this.uriEndpointOverride = uriEndpointOverride;
     }
 
     public Boolean getUseDefaultCredentialsProvider() {
@@ -302,45 +342,5 @@ public class Translate2ComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
-    }
-
-    public Boolean getAutowiredEnabled() {
-        return autowiredEnabled;
-    }
-
-    public void setAutowiredEnabled(Boolean autowiredEnabled) {
-        this.autowiredEnabled = autowiredEnabled;
-    }
-
-    public Boolean getHealthCheckConsumerEnabled() {
-        return healthCheckConsumerEnabled;
-    }
-
-    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
-        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
-    }
-
-    public Boolean getHealthCheckProducerEnabled() {
-        return healthCheckProducerEnabled;
-    }
-
-    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
-        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
-    }
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 }

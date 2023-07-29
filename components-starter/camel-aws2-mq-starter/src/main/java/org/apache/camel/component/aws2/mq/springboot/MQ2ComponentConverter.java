@@ -39,8 +39,8 @@ public class MQ2ComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.mq.MqClient.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.mq.MQ2Configuration.class));
+        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.mq.MqClient.class));
         return answer;
     }
 
@@ -57,8 +57,8 @@ public class MQ2ComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "software.amazon.awssdk.services.mq.MqClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.mq.MqClient.class);
             case "org.apache.camel.component.aws2.mq.MQ2Configuration": return applicationContext.getBean(ref, org.apache.camel.component.aws2.mq.MQ2Configuration.class);
+            case "software.amazon.awssdk.services.mq.MqClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.mq.MqClient.class);
         }
         return null;
     }

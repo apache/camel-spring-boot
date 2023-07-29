@@ -45,11 +45,6 @@ public class EKS2ComponentConfiguration
      */
     private EKS2Configuration configuration;
     /**
-     * To use a existing configured AWS EKS as client. The option is a
-     * software.amazon.awssdk.services.eks.EksClient type.
-     */
-    private EksClient eksClient;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -77,29 +72,13 @@ public class EKS2ComponentConfiguration
      * If using a profile credentials provider this parameter will set the
      * profile name
      */
-    private String profileCredentialsName;
-    /**
-     * To define a proxy host when instantiating the EKS client
-     */
-    private String proxyHost;
-    /**
-     * To define a proxy port when instantiating the EKS client
-     */
-    private Integer proxyPort;
-    /**
-     * To define a proxy protocol when instantiating the EKS client
-     */
-    private Protocol proxyProtocol = Protocol.HTTPS;
+    private String profileCredentialsName = "false";
     /**
      * The region in which EKS client needs to work. When using this parameter,
      * the configuration will expect the lowercase name of the region (for
      * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
-    /**
-     * If we want to trust all certificates in case of overriding the endpoint
-     */
-    private Boolean trustAllCertificates = false;
     /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
@@ -126,6 +105,11 @@ public class EKS2ComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * To use a existing configured AWS EKS as client. The option is a
+     * software.amazon.awssdk.services.eks.EksClient type.
+     */
+    private EksClient eksClient;
+    /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
      */
@@ -138,6 +122,18 @@ public class EKS2ComponentConfiguration
      */
     private Boolean healthCheckProducerEnabled = true;
     /**
+     * To define a proxy host when instantiating the EKS client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the EKS client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the EKS client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
@@ -145,6 +141,10 @@ public class EKS2ComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
 
     public EKS2Configuration getConfiguration() {
         return configuration;
@@ -152,14 +152,6 @@ public class EKS2ComponentConfiguration
 
     public void setConfiguration(EKS2Configuration configuration) {
         this.configuration = configuration;
-    }
-
-    public EksClient getEksClient() {
-        return eksClient;
-    }
-
-    public void setEksClient(EksClient eksClient) {
-        this.eksClient = eksClient;
     }
 
     public Boolean getLazyStartProducer() {
@@ -202,44 +194,12 @@ public class EKS2ComponentConfiguration
         this.profileCredentialsName = profileCredentialsName;
     }
 
-    public String getProxyHost() {
-        return proxyHost;
-    }
-
-    public void setProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-    }
-
-    public Integer getProxyPort() {
-        return proxyPort;
-    }
-
-    public void setProxyPort(Integer proxyPort) {
-        this.proxyPort = proxyPort;
-    }
-
-    public Protocol getProxyProtocol() {
-        return proxyProtocol;
-    }
-
-    public void setProxyProtocol(Protocol proxyProtocol) {
-        this.proxyProtocol = proxyProtocol;
-    }
-
     public String getRegion() {
         return region;
     }
 
     public void setRegion(String region) {
         this.region = region;
-    }
-
-    public Boolean getTrustAllCertificates() {
-        return trustAllCertificates;
-    }
-
-    public void setTrustAllCertificates(Boolean trustAllCertificates) {
-        this.trustAllCertificates = trustAllCertificates;
     }
 
     public String getUriEndpointOverride() {
@@ -276,6 +236,14 @@ public class EKS2ComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
+    public EksClient getEksClient() {
+        return eksClient;
+    }
+
+    public void setEksClient(EksClient eksClient) {
+        this.eksClient = eksClient;
+    }
+
     public Boolean getHealthCheckConsumerEnabled() {
         return healthCheckConsumerEnabled;
     }
@@ -292,6 +260,30 @@ public class EKS2ComponentConfiguration
         this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
+    }
+
     public String getAccessKey() {
         return accessKey;
     }
@@ -306,5 +298,13 @@ public class EKS2ComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
     }
 }

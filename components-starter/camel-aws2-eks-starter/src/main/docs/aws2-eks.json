@@ -94,7 +94,8 @@
       "name": "camel.component.aws2-eks.profile-credentials-name",
       "type": "java.lang.String",
       "description": "If using a profile credentials provider this parameter will set the profile name",
-      "sourceType": "org.apache.camel.component.aws2.eks.springboot.EKS2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.eks.springboot.EKS2ComponentConfiguration",
+      "defaultValue": "false"
     },
     {
       "name": "camel.component.aws2-eks.proxy-host",

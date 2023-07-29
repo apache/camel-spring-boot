@@ -40,11 +40,6 @@ public class Cw2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * To use the AmazonCloudWatch as the client. The option is a
-     * software.amazon.awssdk.services.cloudwatch.CloudWatchClient type.
-     */
-    private CloudWatchClient amazonCwClient;
-    /**
      * The component configuration. The option is a
      * org.apache.camel.component.aws2.cw.Cw2Configuration type.
      */
@@ -70,23 +65,6 @@ public class Cw2ComponentConfiguration
      */
     private Boolean overrideEndpoint = false;
     /**
-     * If using a profile credentials provider this parameter will set the
-     * profile name
-     */
-    private String profileCredentialsName;
-    /**
-     * To define a proxy host when instantiating the CW client
-     */
-    private String proxyHost;
-    /**
-     * To define a proxy port when instantiating the CW client
-     */
-    private Integer proxyPort;
-    /**
-     * To define a proxy protocol when instantiating the CW client
-     */
-    private Protocol proxyProtocol = Protocol.HTTPS;
-    /**
      * The region in which CW client needs to work. When using this parameter,
      * the configuration will expect the lowercase name of the region (for
      * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
@@ -97,10 +75,6 @@ public class Cw2ComponentConfiguration
      */
     private Instant timestamp;
     /**
-     * If we want to trust all certificates in case of overriding the endpoint
-     */
-    private Boolean trustAllCertificates = false;
-    /**
      * The metric unit
      */
     private String unit;
@@ -110,20 +84,14 @@ public class Cw2ComponentConfiguration
      */
     private String uriEndpointOverride;
     /**
-     * Set whether the S3 client should expect to load credentials through a
-     * default credentials provider or to expect static credentials to be passed
-     * in.
-     */
-    private Boolean useDefaultCredentialsProvider = false;
-    /**
-     * Set whether the Cloudwatch client should expect to load credentials
-     * through a profile credentials provider.
-     */
-    private Boolean useProfileCredentialsProvider = false;
-    /**
      * The metric value
      */
     private Double value;
+    /**
+     * To use the AmazonCloudWatch as the client. The option is a
+     * software.amazon.awssdk.services.cloudwatch.CloudWatchClient type.
+     */
+    private CloudWatchClient amazonCwClient;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -146,21 +114,45 @@ public class Cw2ComponentConfiguration
      */
     private Boolean healthCheckProducerEnabled = true;
     /**
+     * To define a proxy host when instantiating the CW client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the CW client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the CW client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
     /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
+    /**
      * Amazon AWS Secret Key
      */
     private String secretKey;
-
-    public CloudWatchClient getAmazonCwClient() {
-        return amazonCwClient;
-    }
-
-    public void setAmazonCwClient(CloudWatchClient amazonCwClient) {
-        this.amazonCwClient = amazonCwClient;
-    }
+    /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
+     * Set whether the S3 client should expect to load credentials through a
+     * default credentials provider or to expect static credentials to be passed
+     * in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the Cloudwatch client should expect to load credentials
+     * through a profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
 
     public Cw2Configuration getConfiguration() {
         return configuration;
@@ -194,38 +186,6 @@ public class Cw2ComponentConfiguration
         this.overrideEndpoint = overrideEndpoint;
     }
 
-    public String getProfileCredentialsName() {
-        return profileCredentialsName;
-    }
-
-    public void setProfileCredentialsName(String profileCredentialsName) {
-        this.profileCredentialsName = profileCredentialsName;
-    }
-
-    public String getProxyHost() {
-        return proxyHost;
-    }
-
-    public void setProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-    }
-
-    public Integer getProxyPort() {
-        return proxyPort;
-    }
-
-    public void setProxyPort(Integer proxyPort) {
-        this.proxyPort = proxyPort;
-    }
-
-    public Protocol getProxyProtocol() {
-        return proxyProtocol;
-    }
-
-    public void setProxyProtocol(Protocol proxyProtocol) {
-        this.proxyProtocol = proxyProtocol;
-    }
-
     public String getRegion() {
         return region;
     }
@@ -240,14 +200,6 @@ public class Cw2ComponentConfiguration
 
     public void setTimestamp(Instant timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public Boolean getTrustAllCertificates() {
-        return trustAllCertificates;
-    }
-
-    public void setTrustAllCertificates(Boolean trustAllCertificates) {
-        this.trustAllCertificates = trustAllCertificates;
     }
 
     public String getUnit() {
@@ -266,30 +218,20 @@ public class Cw2ComponentConfiguration
         this.uriEndpointOverride = uriEndpointOverride;
     }
 
-    public Boolean getUseDefaultCredentialsProvider() {
-        return useDefaultCredentialsProvider;
-    }
-
-    public void setUseDefaultCredentialsProvider(
-            Boolean useDefaultCredentialsProvider) {
-        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
-    }
-
-    public Boolean getUseProfileCredentialsProvider() {
-        return useProfileCredentialsProvider;
-    }
-
-    public void setUseProfileCredentialsProvider(
-            Boolean useProfileCredentialsProvider) {
-        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
-    }
-
     public Double getValue() {
         return value;
     }
 
     public void setValue(Double value) {
         this.value = value;
+    }
+
+    public CloudWatchClient getAmazonCwClient() {
+        return amazonCwClient;
+    }
+
+    public void setAmazonCwClient(CloudWatchClient amazonCwClient) {
+        this.amazonCwClient = amazonCwClient;
     }
 
     public Boolean getAutowiredEnabled() {
@@ -316,6 +258,30 @@ public class Cw2ComponentConfiguration
         this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
+    }
+
     public String getAccessKey() {
         return accessKey;
     }
@@ -324,11 +290,45 @@ public class Cw2ComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
     public String getSecretKey() {
         return secretKey;
     }
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
+    }
+
+    public Boolean getUseProfileCredentialsProvider() {
+        return useProfileCredentialsProvider;
+    }
+
+    public void setUseProfileCredentialsProvider(
+            Boolean useProfileCredentialsProvider) {
+        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
     }
 }

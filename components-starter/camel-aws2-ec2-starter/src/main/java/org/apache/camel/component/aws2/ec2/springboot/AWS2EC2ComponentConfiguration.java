@@ -81,23 +81,6 @@ public class AWS2EC2ComponentConfiguration
      */
     private Boolean pojoRequest = false;
     /**
-     * If using a profile credentials provider this parameter will set the
-     * profile name
-     */
-    private String profileCredentialsName;
-    /**
-     * To define a proxy host when instantiating the EC2 client
-     */
-    private String proxyHost;
-    /**
-     * To define a proxy port when instantiating the EC2 client
-     */
-    private Integer proxyPort;
-    /**
-     * To define a proxy protocol when instantiating the EC2 client
-     */
-    private Protocol proxyProtocol = Protocol.HTTPS;
-    /**
      * The region in which EC2 client needs to work. When using this parameter,
      * the configuration will expect the lowercase name of the region (for
      * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
@@ -108,25 +91,10 @@ public class AWS2EC2ComponentConfiguration
      */
     private String secretKey;
     /**
-     * If we want to trust all certificates in case of overriding the endpoint
-     */
-    private Boolean trustAllCertificates = false;
-    /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
      */
     private String uriEndpointOverride;
-    /**
-     * Set whether the EC2 client should expect to load credentials through a
-     * default credentials provider or to expect static credentials to be passed
-     * in.
-     */
-    private Boolean useDefaultCredentialsProvider = false;
-    /**
-     * Set whether the EC2 client should expect to load credentials through a
-     * profile credentials provider.
-     */
-    private Boolean useProfileCredentialsProvider = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -148,6 +116,38 @@ public class AWS2EC2ComponentConfiguration
      * camel.health.producersEnabled=true.
      */
     private Boolean healthCheckProducerEnabled = true;
+    /**
+     * To define a proxy host when instantiating the EC2 client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the EC2 client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the EC2 client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
+    /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
+     * Set whether the EC2 client should expect to load credentials through a
+     * default credentials provider or to expect static credentials to be passed
+     * in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the EC2 client should expect to load credentials through a
+     * profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
 
     public String getAccessKey() {
         return accessKey;
@@ -205,12 +205,52 @@ public class AWS2EC2ComponentConfiguration
         this.pojoRequest = pojoRequest;
     }
 
-    public String getProfileCredentialsName() {
-        return profileCredentialsName;
+    public String getRegion() {
+        return region;
     }
 
-    public void setProfileCredentialsName(String profileCredentialsName) {
-        this.profileCredentialsName = profileCredentialsName;
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
     public String getProxyHost() {
@@ -237,20 +277,12 @@ public class AWS2EC2ComponentConfiguration
         this.proxyProtocol = proxyProtocol;
     }
 
-    public String getRegion() {
-        return region;
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
     }
 
     public Boolean getTrustAllCertificates() {
@@ -259,14 +291,6 @@ public class AWS2EC2ComponentConfiguration
 
     public void setTrustAllCertificates(Boolean trustAllCertificates) {
         this.trustAllCertificates = trustAllCertificates;
-    }
-
-    public String getUriEndpointOverride() {
-        return uriEndpointOverride;
-    }
-
-    public void setUriEndpointOverride(String uriEndpointOverride) {
-        this.uriEndpointOverride = uriEndpointOverride;
     }
 
     public Boolean getUseDefaultCredentialsProvider() {
@@ -285,29 +309,5 @@ public class AWS2EC2ComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
-    }
-
-    public Boolean getAutowiredEnabled() {
-        return autowiredEnabled;
-    }
-
-    public void setAutowiredEnabled(Boolean autowiredEnabled) {
-        this.autowiredEnabled = autowiredEnabled;
-    }
-
-    public Boolean getHealthCheckConsumerEnabled() {
-        return healthCheckConsumerEnabled;
-    }
-
-    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
-        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
-    }
-
-    public Boolean getHealthCheckProducerEnabled() {
-        return healthCheckProducerEnabled;
-    }
-
-    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
-        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 }

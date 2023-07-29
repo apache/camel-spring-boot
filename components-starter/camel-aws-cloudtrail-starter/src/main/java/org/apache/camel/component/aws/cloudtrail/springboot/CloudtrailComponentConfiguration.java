@@ -48,12 +48,6 @@ public class CloudtrailComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
-     * Amazon Cloudtrail client to use for all requests for this endpoint. The
-     * option is a software.amazon.awssdk.services.cloudtrail.CloudTrailClient
-     * type.
-     */
-    private CloudTrailClient cloudTrailClient;
-    /**
      * Component configuration. The option is a
      * org.apache.camel.component.aws.cloudtrail.CloudtrailConfiguration type.
      */
@@ -72,48 +66,16 @@ public class CloudtrailComponentConfiguration
      */
     private Boolean overrideEndpoint = false;
     /**
-     * If using a profile credentials provider this parameter will set the
-     * profile name.
-     */
-    private String profileCredentialsName;
-    /**
-     * To define a proxy host when instantiating the Cloudtrail client
-     */
-    private String proxyHost;
-    /**
-     * To define a proxy port when instantiating the Cloudtrail client
-     */
-    private Integer proxyPort;
-    /**
-     * To define a proxy protocol when instantiating the Cloudtrail client
-     */
-    private Protocol proxyProtocol = Protocol.HTTPS;
-    /**
      * The region in which Cloudtrail client needs to work. When using this
      * parameter, the configuration will expect the lowercase name of the region
      * (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
     /**
-     * If we want to trust all certificates in case of overriding the endpoint
-     */
-    private Boolean trustAllCertificates = false;
-    /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
      */
     private String uriEndpointOverride;
-    /**
-     * Set whether the Cloudtrail client should expect to load credentials
-     * through a default credentials provider or to expect static credentials to
-     * be passed in.
-     */
-    private Boolean useDefaultCredentialsProvider = false;
-    /**
-     * Set whether the Cloudtrail client should expect to load credentials
-     * through a profile credentials provider.
-     */
-    private Boolean useProfileCredentialsProvider = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -123,6 +85,12 @@ public class CloudtrailComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Amazon Cloudtrail client to use for all requests for this endpoint. The
+     * option is a software.amazon.awssdk.services.cloudtrail.CloudTrailClient
+     * type.
+     */
+    private CloudTrailClient cloudTrailClient;
     /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
@@ -136,13 +104,45 @@ public class CloudtrailComponentConfiguration
      */
     private Boolean healthCheckProducerEnabled = true;
     /**
+     * To define a proxy host when instantiating the Cloudtrail client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the Cloudtrail client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the Cloudtrail client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
     /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name.
+     */
+    private String profileCredentialsName;
+    /**
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
+     * Set whether the Cloudtrail client should expect to load credentials
+     * through a default credentials provider or to expect static credentials to
+     * be passed in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the Cloudtrail client should expect to load credentials
+     * through a profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -150,14 +150,6 @@ public class CloudtrailComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
-    }
-
-    public CloudTrailClient getCloudTrailClient() {
-        return cloudTrailClient;
-    }
-
-    public void setCloudTrailClient(CloudTrailClient cloudTrailClient) {
-        this.cloudTrailClient = cloudTrailClient;
     }
 
     public CloudtrailConfiguration getConfiguration() {
@@ -192,12 +184,52 @@ public class CloudtrailComponentConfiguration
         this.overrideEndpoint = overrideEndpoint;
     }
 
-    public String getProfileCredentialsName() {
-        return profileCredentialsName;
+    public String getRegion() {
+        return region;
     }
 
-    public void setProfileCredentialsName(String profileCredentialsName) {
-        this.profileCredentialsName = profileCredentialsName;
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public CloudTrailClient getCloudTrailClient() {
+        return cloudTrailClient;
+    }
+
+    public void setCloudTrailClient(CloudTrailClient cloudTrailClient) {
+        this.cloudTrailClient = cloudTrailClient;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
     public String getProxyHost() {
@@ -224,12 +256,28 @@ public class CloudtrailComponentConfiguration
         this.proxyProtocol = proxyProtocol;
     }
 
-    public String getRegion() {
-        return region;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public Boolean getTrustAllCertificates() {
@@ -238,14 +286,6 @@ public class CloudtrailComponentConfiguration
 
     public void setTrustAllCertificates(Boolean trustAllCertificates) {
         this.trustAllCertificates = trustAllCertificates;
-    }
-
-    public String getUriEndpointOverride() {
-        return uriEndpointOverride;
-    }
-
-    public void setUriEndpointOverride(String uriEndpointOverride) {
-        this.uriEndpointOverride = uriEndpointOverride;
     }
 
     public Boolean getUseDefaultCredentialsProvider() {
@@ -264,45 +304,5 @@ public class CloudtrailComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
-    }
-
-    public Boolean getAutowiredEnabled() {
-        return autowiredEnabled;
-    }
-
-    public void setAutowiredEnabled(Boolean autowiredEnabled) {
-        this.autowiredEnabled = autowiredEnabled;
-    }
-
-    public Boolean getHealthCheckConsumerEnabled() {
-        return healthCheckConsumerEnabled;
-    }
-
-    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
-        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
-    }
-
-    public Boolean getHealthCheckProducerEnabled() {
-        return healthCheckProducerEnabled;
-    }
-
-    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
-        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
-    }
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 }

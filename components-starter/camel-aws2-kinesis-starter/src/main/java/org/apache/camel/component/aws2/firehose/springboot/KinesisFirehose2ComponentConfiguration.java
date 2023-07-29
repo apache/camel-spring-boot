@@ -40,12 +40,6 @@ public class KinesisFirehose2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon Kinesis Firehose client to use for all requests for this endpoint.
-     * The option is a software.amazon.awssdk.services.firehose.FirehoseClient
-     * type.
-     */
-    private FirehoseClient amazonKinesisFirehoseClient;
-    /**
      * This option will set the CBOR_ENABLED property during the execution
      */
     private Boolean cborEnabled = true;
@@ -61,10 +55,16 @@ public class KinesisFirehose2ComponentConfiguration
      */
     private Boolean overrideEndpoint = false;
     /**
-     * If using a profile credentials provider this parameter will set the
-     * profile name.
+     * Set the overriding uri endpoint. This option needs to be used in
+     * combination with overrideEndpoint option
      */
-    private String profileCredentialsName;
+    private String uriEndpointOverride;
+    /**
+     * Set whether the Kinesis Firehose client should expect to load credentials
+     * through a default credentials provider or to expect static credentials to
+     * be passed in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -81,6 +81,28 @@ public class KinesisFirehose2ComponentConfiguration
      */
     private KinesisFirehose2Operations operation;
     /**
+     * The region in which Kinesis Firehose client needs to work. When using
+     * this parameter, the configuration will expect the lowercase name of the
+     * region (for example ap-east-1) You'll need to use the name
+     * Region.EU_WEST_1.id()
+     */
+    private String region;
+    /**
+     * Amazon Kinesis Firehose client to use for all requests for this endpoint.
+     * The option is a software.amazon.awssdk.services.firehose.FirehoseClient
+     * type.
+     */
+    private FirehoseClient amazonKinesisFirehoseClient;
+    /**
+     * Whether autowiring is enabled. This is used for automatic autowiring
+     * options (the option must be marked as autowired) by looking up in the
+     * registry to find if there is a single instance of matching type, which
+     * then gets configured on the component. This can be used for automatic
+     * configuring JDBC data sources, JMS connection factories, AWS Clients,
+     * etc.
+     */
+    private Boolean autowiredEnabled = true;
+    /**
      * To define a proxy host when instantiating the Kinesis Firehose client
      */
     private String proxyHost;
@@ -93,58 +115,27 @@ public class KinesisFirehose2ComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
-     * The region in which Kinesis Firehose client needs to work. When using
-     * this parameter, the configuration will expect the lowercase name of the
-     * region (for example ap-east-1) You'll need to use the name
-     * Region.EU_WEST_1.id()
+     * Amazon AWS Access Key
      */
-    private String region;
+    private String accessKey;
+    /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name.
+     */
+    private String profileCredentialsName;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
     /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
     private Boolean trustAllCertificates = false;
     /**
-     * Set the overriding uri endpoint. This option needs to be used in
-     * combination with overrideEndpoint option
-     */
-    private String uriEndpointOverride;
-    /**
-     * Set whether the Kinesis Firehose client should expect to load credentials
-     * through a default credentials provider or to expect static credentials to
-     * be passed in.
-     */
-    private Boolean useDefaultCredentialsProvider = false;
-    /**
      * Set whether the Kinesis Firehose client should expect to load credentials
      * through a profile credentials provider.
      */
     private Boolean useProfileCredentialsProvider = false;
-    /**
-     * Whether autowiring is enabled. This is used for automatic autowiring
-     * options (the option must be marked as autowired) by looking up in the
-     * registry to find if there is a single instance of matching type, which
-     * then gets configured on the component. This can be used for automatic
-     * configuring JDBC data sources, JMS connection factories, AWS Clients,
-     * etc.
-     */
-    private Boolean autowiredEnabled = true;
-    /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
-
-    public FirehoseClient getAmazonKinesisFirehoseClient() {
-        return amazonKinesisFirehoseClient;
-    }
-
-    public void setAmazonKinesisFirehoseClient(
-            FirehoseClient amazonKinesisFirehoseClient) {
-        this.amazonKinesisFirehoseClient = amazonKinesisFirehoseClient;
-    }
 
     public Boolean getCborEnabled() {
         return cborEnabled;
@@ -170,12 +161,21 @@ public class KinesisFirehose2ComponentConfiguration
         this.overrideEndpoint = overrideEndpoint;
     }
 
-    public String getProfileCredentialsName() {
-        return profileCredentialsName;
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
     }
 
-    public void setProfileCredentialsName(String profileCredentialsName) {
-        this.profileCredentialsName = profileCredentialsName;
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
     }
 
     public Boolean getLazyStartProducer() {
@@ -192,6 +192,31 @@ public class KinesisFirehose2ComponentConfiguration
 
     public void setOperation(KinesisFirehose2Operations operation) {
         this.operation = operation;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public FirehoseClient getAmazonKinesisFirehoseClient() {
+        return amazonKinesisFirehoseClient;
+    }
+
+    public void setAmazonKinesisFirehoseClient(
+            FirehoseClient amazonKinesisFirehoseClient) {
+        this.amazonKinesisFirehoseClient = amazonKinesisFirehoseClient;
+    }
+
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
     }
 
     public String getProxyHost() {
@@ -218,12 +243,28 @@ public class KinesisFirehose2ComponentConfiguration
         this.proxyProtocol = proxyProtocol;
     }
 
-    public String getRegion() {
-        return region;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public Boolean getTrustAllCertificates() {
@@ -234,23 +275,6 @@ public class KinesisFirehose2ComponentConfiguration
         this.trustAllCertificates = trustAllCertificates;
     }
 
-    public String getUriEndpointOverride() {
-        return uriEndpointOverride;
-    }
-
-    public void setUriEndpointOverride(String uriEndpointOverride) {
-        this.uriEndpointOverride = uriEndpointOverride;
-    }
-
-    public Boolean getUseDefaultCredentialsProvider() {
-        return useDefaultCredentialsProvider;
-    }
-
-    public void setUseDefaultCredentialsProvider(
-            Boolean useDefaultCredentialsProvider) {
-        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
-    }
-
     public Boolean getUseProfileCredentialsProvider() {
         return useProfileCredentialsProvider;
     }
@@ -258,29 +282,5 @@ public class KinesisFirehose2ComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
-    }
-
-    public Boolean getAutowiredEnabled() {
-        return autowiredEnabled;
-    }
-
-    public void setAutowiredEnabled(Boolean autowiredEnabled) {
-        this.autowiredEnabled = autowiredEnabled;
-    }
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 }

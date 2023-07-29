@@ -79,44 +79,16 @@ public class SecretsManagerComponentConfiguration
      */
     private String profileCredentialsName;
     /**
-     * To define a proxy host when instantiating the Secrets Manager client
-     */
-    private String proxyHost;
-    /**
-     * To define a proxy port when instantiating the Secrets Manager client
-     */
-    private Integer proxyPort;
-    /**
-     * To define a proxy protocol when instantiating the Secrets Manager client
-     */
-    private Protocol proxyProtocol = Protocol.HTTPS;
-    /**
      * The region in which Secrets Manager client needs to work. When using this
      * parameter, the configuration will expect the lowercase name of the region
      * (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
     /**
-     * To use a existing configured AWS Secrets Manager as client. The option is
-     * a software.amazon.awssdk.services.secretsmanager.SecretsManagerClient
-     * type.
-     */
-    private SecretsManagerClient secretsManagerClient;
-    /**
-     * If we want to trust all certificates in case of overriding the endpoint
-     */
-    private Boolean trustAllCertificates = false;
-    /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
      */
     private String uriEndpointOverride;
-    /**
-     * Set whether the Translate client should expect to load credentials
-     * through a default credentials provider or to expect static credentials to
-     * be passed in.
-     */
-    private Boolean useDefaultCredentialsProvider = false;
     /**
      * Set whether the Secrets Manager client should expect to load credentials
      * through a profile credentials provider.
@@ -132,6 +104,12 @@ public class SecretsManagerComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * To use a existing configured AWS Secrets Manager as client. The option is
+     * a software.amazon.awssdk.services.secretsmanager.SecretsManagerClient
+     * type.
+     */
+    private SecretsManagerClient secretsManagerClient;
+    /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
      */
@@ -144,6 +122,18 @@ public class SecretsManagerComponentConfiguration
      */
     private Boolean healthCheckProducerEnabled = true;
     /**
+     * To define a proxy host when instantiating the Secrets Manager client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the Secrets Manager client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the Secrets Manager client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
@@ -151,6 +141,16 @@ public class SecretsManagerComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
+     * Set whether the Translate client should expect to load credentials
+     * through a default credentials provider or to expect static credentials to
+     * be passed in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
 
     public Boolean getBinaryPayload() {
         return binaryPayload;
@@ -208,6 +208,64 @@ public class SecretsManagerComponentConfiguration
         this.profileCredentialsName = profileCredentialsName;
     }
 
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getUseProfileCredentialsProvider() {
+        return useProfileCredentialsProvider;
+    }
+
+    public void setUseProfileCredentialsProvider(
+            Boolean useProfileCredentialsProvider) {
+        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
+    }
+
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public SecretsManagerClient getSecretsManagerClient() {
+        return secretsManagerClient;
+    }
+
+    public void setSecretsManagerClient(
+            SecretsManagerClient secretsManagerClient) {
+        this.secretsManagerClient = secretsManagerClient;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
+    }
+
     public String getProxyHost() {
         return proxyHost;
     }
@@ -232,81 +290,6 @@ public class SecretsManagerComponentConfiguration
         this.proxyProtocol = proxyProtocol;
     }
 
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public SecretsManagerClient getSecretsManagerClient() {
-        return secretsManagerClient;
-    }
-
-    public void setSecretsManagerClient(
-            SecretsManagerClient secretsManagerClient) {
-        this.secretsManagerClient = secretsManagerClient;
-    }
-
-    public Boolean getTrustAllCertificates() {
-        return trustAllCertificates;
-    }
-
-    public void setTrustAllCertificates(Boolean trustAllCertificates) {
-        this.trustAllCertificates = trustAllCertificates;
-    }
-
-    public String getUriEndpointOverride() {
-        return uriEndpointOverride;
-    }
-
-    public void setUriEndpointOverride(String uriEndpointOverride) {
-        this.uriEndpointOverride = uriEndpointOverride;
-    }
-
-    public Boolean getUseDefaultCredentialsProvider() {
-        return useDefaultCredentialsProvider;
-    }
-
-    public void setUseDefaultCredentialsProvider(
-            Boolean useDefaultCredentialsProvider) {
-        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
-    }
-
-    public Boolean getUseProfileCredentialsProvider() {
-        return useProfileCredentialsProvider;
-    }
-
-    public void setUseProfileCredentialsProvider(
-            Boolean useProfileCredentialsProvider) {
-        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
-    }
-
-    public Boolean getAutowiredEnabled() {
-        return autowiredEnabled;
-    }
-
-    public void setAutowiredEnabled(Boolean autowiredEnabled) {
-        this.autowiredEnabled = autowiredEnabled;
-    }
-
-    public Boolean getHealthCheckConsumerEnabled() {
-        return healthCheckConsumerEnabled;
-    }
-
-    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
-        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
-    }
-
-    public Boolean getHealthCheckProducerEnabled() {
-        return healthCheckProducerEnabled;
-    }
-
-    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
-        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
-    }
-
     public String getAccessKey() {
         return accessKey;
     }
@@ -321,5 +304,22 @@ public class SecretsManagerComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
     }
 }

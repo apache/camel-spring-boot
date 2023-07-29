@@ -44,11 +44,6 @@ public class Sqs2ComponentConfiguration
      */
     private String amazonAWSHost = "amazonaws.com";
     /**
-     * To use the AmazonSQS as client. The option is a
-     * software.amazon.awssdk.services.sqs.SqsClient type.
-     */
-    private SqsClient amazonSQSClient;
-    /**
      * Setting the autocreation of the queue
      */
     private Boolean autoCreateQueue = false;
@@ -63,18 +58,9 @@ public class Sqs2ComponentConfiguration
      */
     private Boolean overrideEndpoint = false;
     /**
-     * If using a profile credentials provider this parameter will set the
-     * profile name
-     */
-    private String profileCredentialsName;
-    /**
      * The underlying protocol used to communicate with SQS
      */
     private String protocol = "https";
-    /**
-     * To define a proxy protocol when instantiating the SQS client
-     */
-    private Protocol proxyProtocol = Protocol.HTTPS;
     /**
      * Specify the queue owner aws account id when you need to connect the queue
      * with different account owner.
@@ -87,24 +73,10 @@ public class Sqs2ComponentConfiguration
      */
     private String region;
     /**
-     * If we want to trust all certificates in case of overriding the endpoint
-     */
-    private Boolean trustAllCertificates = false;
-    /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
      */
     private String uriEndpointOverride;
-    /**
-     * Set whether the SQS client should expect to load credentials on an AWS
-     * infra instance or to expect static credentials to be passed in.
-     */
-    private Boolean useDefaultCredentialsProvider = false;
-    /**
-     * Set whether the SQS client should expect to load credentials through a
-     * profile credentials provider.
-     */
-    private Boolean useProfileCredentialsProvider = false;
     /**
      * A list of attribute names to receive when consuming. Multiple names can
      * be separated by comma.
@@ -229,6 +201,11 @@ public class Sqs2ComponentConfiguration
      */
     private Sqs2Operations operation;
     /**
+     * To use the AmazonSQS as client. The option is a
+     * software.amazon.awssdk.services.sqs.SqsClient type.
+     */
+    private SqsClient amazonSQSClient;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -262,6 +239,10 @@ public class Sqs2ComponentConfiguration
      * To define a proxy port when instantiating the SQS client
      */
     private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the SQS client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
     /**
      * The maximumMessageSize (in bytes) an SQS message can contain for this
      * queue.
@@ -299,9 +280,28 @@ public class Sqs2ComponentConfiguration
      */
     private String accessKey;
     /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
+    /**
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
+     * Set whether the SQS client should expect to load credentials on an AWS
+     * infra instance or to expect static credentials to be passed in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the SQS client should expect to load credentials through a
+     * profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
 
     public String getAmazonAWSHost() {
         return amazonAWSHost;
@@ -309,14 +309,6 @@ public class Sqs2ComponentConfiguration
 
     public void setAmazonAWSHost(String amazonAWSHost) {
         this.amazonAWSHost = amazonAWSHost;
-    }
-
-    public SqsClient getAmazonSQSClient() {
-        return amazonSQSClient;
-    }
-
-    public void setAmazonSQSClient(SqsClient amazonSQSClient) {
-        this.amazonSQSClient = amazonSQSClient;
     }
 
     public Boolean getAutoCreateQueue() {
@@ -343,28 +335,12 @@ public class Sqs2ComponentConfiguration
         this.overrideEndpoint = overrideEndpoint;
     }
 
-    public String getProfileCredentialsName() {
-        return profileCredentialsName;
-    }
-
-    public void setProfileCredentialsName(String profileCredentialsName) {
-        this.profileCredentialsName = profileCredentialsName;
-    }
-
     public String getProtocol() {
         return protocol;
     }
 
     public void setProtocol(String protocol) {
         this.protocol = protocol;
-    }
-
-    public Protocol getProxyProtocol() {
-        return proxyProtocol;
-    }
-
-    public void setProxyProtocol(Protocol proxyProtocol) {
-        this.proxyProtocol = proxyProtocol;
     }
 
     public String getQueueOwnerAWSAccountId() {
@@ -383,38 +359,12 @@ public class Sqs2ComponentConfiguration
         this.region = region;
     }
 
-    public Boolean getTrustAllCertificates() {
-        return trustAllCertificates;
-    }
-
-    public void setTrustAllCertificates(Boolean trustAllCertificates) {
-        this.trustAllCertificates = trustAllCertificates;
-    }
-
     public String getUriEndpointOverride() {
         return uriEndpointOverride;
     }
 
     public void setUriEndpointOverride(String uriEndpointOverride) {
         this.uriEndpointOverride = uriEndpointOverride;
-    }
-
-    public Boolean getUseDefaultCredentialsProvider() {
-        return useDefaultCredentialsProvider;
-    }
-
-    public void setUseDefaultCredentialsProvider(
-            Boolean useDefaultCredentialsProvider) {
-        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
-    }
-
-    public Boolean getUseProfileCredentialsProvider() {
-        return useProfileCredentialsProvider;
-    }
-
-    public void setUseProfileCredentialsProvider(
-            Boolean useProfileCredentialsProvider) {
-        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
     }
 
     public String getAttributeNames() {
@@ -580,6 +530,14 @@ public class Sqs2ComponentConfiguration
         this.operation = operation;
     }
 
+    public SqsClient getAmazonSQSClient() {
+        return amazonSQSClient;
+    }
+
+    public void setAmazonSQSClient(SqsClient amazonSQSClient) {
+        this.amazonSQSClient = amazonSQSClient;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
@@ -626,6 +584,14 @@ public class Sqs2ComponentConfiguration
 
     public void setProxyPort(Integer proxyPort) {
         this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
     }
 
     public Integer getMaximumMessageSize() {
@@ -685,11 +651,45 @@ public class Sqs2ComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
     public String getSecretKey() {
         return secretKey;
     }
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
+    }
+
+    public Boolean getUseProfileCredentialsProvider() {
+        return useProfileCredentialsProvider;
+    }
+
+    public void setUseProfileCredentialsProvider(
+            Boolean useProfileCredentialsProvider) {
+        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
     }
 }

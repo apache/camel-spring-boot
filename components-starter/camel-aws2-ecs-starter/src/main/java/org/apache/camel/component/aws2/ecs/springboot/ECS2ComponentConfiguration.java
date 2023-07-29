@@ -45,11 +45,6 @@ public class ECS2ComponentConfiguration
      */
     private ECS2Configuration configuration;
     /**
-     * To use a existing configured AWS ECS as client. The option is a
-     * software.amazon.awssdk.services.ecs.EcsClient type.
-     */
-    private EcsClient ecsClient;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -74,48 +69,16 @@ public class ECS2ComponentConfiguration
      */
     private Boolean pojoRequest = false;
     /**
-     * If using a profile credentials provider this parameter will set the
-     * profile name
-     */
-    private String profileCredentialsName;
-    /**
-     * To define a proxy host when instantiating the ECS client
-     */
-    private String proxyHost;
-    /**
-     * To define a proxy port when instantiating the ECS client
-     */
-    private Integer proxyPort;
-    /**
-     * To define a proxy protocol when instantiating the ECS client
-     */
-    private Protocol proxyProtocol = Protocol.HTTPS;
-    /**
      * The region in which ECS client needs to work. When using this parameter,
      * the configuration will expect the lowercase name of the region (for
      * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
     /**
-     * If we want to trust all certificates in case of overriding the endpoint
-     */
-    private Boolean trustAllCertificates = false;
-    /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
      */
     private String uriEndpointOverride;
-    /**
-     * Set whether the ECS client should expect to load credentials through a
-     * default credentials provider or to expect static credentials to be passed
-     * in.
-     */
-    private Boolean useDefaultCredentialsProvider = false;
-    /**
-     * Set whether the ECS client should expect to load credentials through a
-     * profile credentials provider.
-     */
-    private Boolean useProfileCredentialsProvider = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -125,6 +88,11 @@ public class ECS2ComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use a existing configured AWS ECS as client. The option is a
+     * software.amazon.awssdk.services.ecs.EcsClient type.
+     */
+    private EcsClient ecsClient;
     /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
@@ -138,13 +106,45 @@ public class ECS2ComponentConfiguration
      */
     private Boolean healthCheckProducerEnabled = true;
     /**
+     * To define a proxy host when instantiating the ECS client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the ECS client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the ECS client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
     /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
+    /**
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
+     * Set whether the ECS client should expect to load credentials through a
+     * default credentials provider or to expect static credentials to be passed
+     * in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the ECS client should expect to load credentials through a
+     * profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
 
     public ECS2Configuration getConfiguration() {
         return configuration;
@@ -152,14 +152,6 @@ public class ECS2ComponentConfiguration
 
     public void setConfiguration(ECS2Configuration configuration) {
         this.configuration = configuration;
-    }
-
-    public EcsClient getEcsClient() {
-        return ecsClient;
-    }
-
-    public void setEcsClient(EcsClient ecsClient) {
-        this.ecsClient = ecsClient;
     }
 
     public Boolean getLazyStartProducer() {
@@ -194,12 +186,52 @@ public class ECS2ComponentConfiguration
         this.pojoRequest = pojoRequest;
     }
 
-    public String getProfileCredentialsName() {
-        return profileCredentialsName;
+    public String getRegion() {
+        return region;
     }
 
-    public void setProfileCredentialsName(String profileCredentialsName) {
-        this.profileCredentialsName = profileCredentialsName;
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public EcsClient getEcsClient() {
+        return ecsClient;
+    }
+
+    public void setEcsClient(EcsClient ecsClient) {
+        this.ecsClient = ecsClient;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
     public String getProxyHost() {
@@ -226,12 +258,28 @@ public class ECS2ComponentConfiguration
         this.proxyProtocol = proxyProtocol;
     }
 
-    public String getRegion() {
-        return region;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public Boolean getTrustAllCertificates() {
@@ -240,14 +288,6 @@ public class ECS2ComponentConfiguration
 
     public void setTrustAllCertificates(Boolean trustAllCertificates) {
         this.trustAllCertificates = trustAllCertificates;
-    }
-
-    public String getUriEndpointOverride() {
-        return uriEndpointOverride;
-    }
-
-    public void setUriEndpointOverride(String uriEndpointOverride) {
-        this.uriEndpointOverride = uriEndpointOverride;
     }
 
     public Boolean getUseDefaultCredentialsProvider() {
@@ -266,45 +306,5 @@ public class ECS2ComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
-    }
-
-    public Boolean getAutowiredEnabled() {
-        return autowiredEnabled;
-    }
-
-    public void setAutowiredEnabled(Boolean autowiredEnabled) {
-        this.autowiredEnabled = autowiredEnabled;
-    }
-
-    public Boolean getHealthCheckConsumerEnabled() {
-        return healthCheckConsumerEnabled;
-    }
-
-    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
-        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
-    }
-
-    public Boolean getHealthCheckProducerEnabled() {
-        return healthCheckProducerEnabled;
-    }
-
-    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
-        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
-    }
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 }

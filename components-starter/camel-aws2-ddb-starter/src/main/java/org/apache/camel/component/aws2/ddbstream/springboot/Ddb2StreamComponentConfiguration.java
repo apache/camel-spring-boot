@@ -40,13 +40,6 @@ public class Ddb2StreamComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon DynamoDB client to use for all requests for this endpoint. The
-     * option is a
-     * software.amazon.awssdk.services.dynamodb.streams.DynamoDbStreamsClient
-     * type.
-     */
-    private DynamoDbStreamsClient amazonDynamoDbStreamsClient;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -70,23 +63,6 @@ public class Ddb2StreamComponentConfiguration
      */
     private Boolean overrideEndpoint = false;
     /**
-     * If using a profile credentials provider this parameter will set the
-     * profile name.
-     */
-    private String profileCredentialsName;
-    /**
-     * To define a proxy host when instantiating the DDBStreams client
-     */
-    private String proxyHost;
-    /**
-     * To define a proxy port when instantiating the DDBStreams client
-     */
-    private Integer proxyPort;
-    /**
-     * To define a proxy protocol when instantiating the DDBStreams client
-     */
-    private Protocol proxyProtocol = Protocol.HTTPS;
-    /**
      * The region in which DDBStreams client needs to work
      */
     private String region;
@@ -97,25 +73,17 @@ public class Ddb2StreamComponentConfiguration
      */
     private StreamIteratorType streamIteratorType = StreamIteratorType.FROM_LATEST;
     /**
-     * If we want to trust all certificates in case of overriding the endpoint
-     */
-    private Boolean trustAllCertificates = false;
-    /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
      */
     private String uriEndpointOverride;
     /**
-     * Set whether the DynamoDB Streams client should expect to load credentials
-     * through a default credentials provider or to expect static credentials to
-     * be passed in.
+     * Amazon DynamoDB client to use for all requests for this endpoint. The
+     * option is a
+     * software.amazon.awssdk.services.dynamodb.streams.DynamoDbStreamsClient
+     * type.
      */
-    private Boolean useDefaultCredentialsProvider = false;
-    /**
-     * Set whether the Cloudtrail client should expect to load credentials
-     * through a profile credentials provider.
-     */
-    private Boolean useProfileCredentialsProvider = false;
+    private DynamoDbStreamsClient amazonDynamoDbStreamsClient;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -138,22 +106,45 @@ public class Ddb2StreamComponentConfiguration
      */
     private Boolean healthCheckProducerEnabled = true;
     /**
+     * To define a proxy host when instantiating the DDBStreams client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the DDBStreams client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the DDBStreams client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
     /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name.
+     */
+    private String profileCredentialsName;
+    /**
      * Amazon AWS Secret Key
      */
     private String secretKey;
-
-    public DynamoDbStreamsClient getAmazonDynamoDbStreamsClient() {
-        return amazonDynamoDbStreamsClient;
-    }
-
-    public void setAmazonDynamoDbStreamsClient(
-            DynamoDbStreamsClient amazonDynamoDbStreamsClient) {
-        this.amazonDynamoDbStreamsClient = amazonDynamoDbStreamsClient;
-    }
+    /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
+     * Set whether the DynamoDB Streams client should expect to load credentials
+     * through a default credentials provider or to expect static credentials to
+     * be passed in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the Cloudtrail client should expect to load credentials
+     * through a profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -187,38 +178,6 @@ public class Ddb2StreamComponentConfiguration
         this.overrideEndpoint = overrideEndpoint;
     }
 
-    public String getProfileCredentialsName() {
-        return profileCredentialsName;
-    }
-
-    public void setProfileCredentialsName(String profileCredentialsName) {
-        this.profileCredentialsName = profileCredentialsName;
-    }
-
-    public String getProxyHost() {
-        return proxyHost;
-    }
-
-    public void setProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-    }
-
-    public Integer getProxyPort() {
-        return proxyPort;
-    }
-
-    public void setProxyPort(Integer proxyPort) {
-        this.proxyPort = proxyPort;
-    }
-
-    public Protocol getProxyProtocol() {
-        return proxyProtocol;
-    }
-
-    public void setProxyProtocol(Protocol proxyProtocol) {
-        this.proxyProtocol = proxyProtocol;
-    }
-
     public String getRegion() {
         return region;
     }
@@ -235,14 +194,6 @@ public class Ddb2StreamComponentConfiguration
         this.streamIteratorType = streamIteratorType;
     }
 
-    public Boolean getTrustAllCertificates() {
-        return trustAllCertificates;
-    }
-
-    public void setTrustAllCertificates(Boolean trustAllCertificates) {
-        this.trustAllCertificates = trustAllCertificates;
-    }
-
     public String getUriEndpointOverride() {
         return uriEndpointOverride;
     }
@@ -251,22 +202,13 @@ public class Ddb2StreamComponentConfiguration
         this.uriEndpointOverride = uriEndpointOverride;
     }
 
-    public Boolean getUseDefaultCredentialsProvider() {
-        return useDefaultCredentialsProvider;
+    public DynamoDbStreamsClient getAmazonDynamoDbStreamsClient() {
+        return amazonDynamoDbStreamsClient;
     }
 
-    public void setUseDefaultCredentialsProvider(
-            Boolean useDefaultCredentialsProvider) {
-        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
-    }
-
-    public Boolean getUseProfileCredentialsProvider() {
-        return useProfileCredentialsProvider;
-    }
-
-    public void setUseProfileCredentialsProvider(
-            Boolean useProfileCredentialsProvider) {
-        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
+    public void setAmazonDynamoDbStreamsClient(
+            DynamoDbStreamsClient amazonDynamoDbStreamsClient) {
+        this.amazonDynamoDbStreamsClient = amazonDynamoDbStreamsClient;
     }
 
     public Boolean getAutowiredEnabled() {
@@ -293,6 +235,30 @@ public class Ddb2StreamComponentConfiguration
         this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
+    }
+
     public String getAccessKey() {
         return accessKey;
     }
@@ -301,11 +267,45 @@ public class Ddb2StreamComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
     public String getSecretKey() {
         return secretKey;
     }
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
+    }
+
+    public Boolean getUseProfileCredentialsProvider() {
+        return useProfileCredentialsProvider;
+    }
+
+    public void setUseProfileCredentialsProvider(
+            Boolean useProfileCredentialsProvider) {
+        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
     }
 }

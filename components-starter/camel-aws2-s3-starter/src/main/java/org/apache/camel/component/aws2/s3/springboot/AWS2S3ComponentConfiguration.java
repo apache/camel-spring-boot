@@ -44,17 +44,6 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Reference to a com.amazonaws.services.s3.AmazonS3 in the registry. The
-     * option is a software.amazon.awssdk.services.s3.S3Client type.
-     */
-    private S3Client amazonS3Client;
-    /**
-     * An S3 Presigner for Request, used mainly in createDownloadLink operation.
-     * The option is a software.amazon.awssdk.services.s3.presigner.S3Presigner
-     * type.
-     */
-    private S3Presigner amazonS3Presigner;
-    /**
      * Setting the autocreation of the S3 bucket bucketName. This will apply
      * also in case of moveAfterRead option enabled and it will create the
      * destinationBucket if it doesn't exist already.
@@ -97,47 +86,16 @@ public class AWS2S3ComponentConfiguration
      */
     private String prefix;
     /**
-     * If using a profile credentials provider this parameter will set the
-     * profile name
-     */
-    private String profileCredentialsName;
-    /**
-     * To define a proxy host when instantiating the SQS client
-     */
-    private String proxyHost;
-    /**
-     * Specify a proxy port to be used inside the client definition.
-     */
-    private Integer proxyPort;
-    /**
-     * To define a proxy protocol when instantiating the S3 client
-     */
-    private Protocol proxyProtocol = Protocol.HTTPS;
-    /**
      * The region in which S3 client needs to work. When using this parameter,
      * the configuration will expect the lowercase name of the region (for
      * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
     /**
-     * If we want to trust all certificates in case of overriding the endpoint
-     */
-    private Boolean trustAllCertificates = false;
-    /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
      */
     private String uriEndpointOverride;
-    /**
-     * Set whether the S3 client should expect to load credentials through a
-     * default credentials provider.
-     */
-    private Boolean useDefaultCredentialsProvider = false;
-    /**
-     * Set whether the S3 client should expect to load credentials through a
-     * profile credentials provider.
-     */
-    private Boolean useProfileCredentialsProvider = false;
     /**
      * Define the customer algorithm to use in case CustomerKey is enabled
      */
@@ -312,6 +270,17 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean useSSES3 = false;
     /**
+     * Reference to a com.amazonaws.services.s3.AmazonS3 in the registry. The
+     * option is a software.amazon.awssdk.services.s3.S3Client type.
+     */
+    private S3Client amazonS3Client;
+    /**
+     * An S3 Presigner for Request, used mainly in createDownloadLink operation.
+     * The option is a software.amazon.awssdk.services.s3.presigner.S3Presigner
+     * type.
+     */
+    private S3Presigner amazonS3Presigner;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -333,29 +302,44 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean healthCheckProducerEnabled = true;
     /**
+     * To define a proxy host when instantiating the SQS client
+     */
+    private String proxyHost;
+    /**
+     * Specify a proxy port to be used inside the client definition.
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the S3 client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
     /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
+    /**
      * Amazon AWS Secret Key
      */
     private String secretKey;
-
-    public S3Client getAmazonS3Client() {
-        return amazonS3Client;
-    }
-
-    public void setAmazonS3Client(S3Client amazonS3Client) {
-        this.amazonS3Client = amazonS3Client;
-    }
-
-    public S3Presigner getAmazonS3Presigner() {
-        return amazonS3Presigner;
-    }
-
-    public void setAmazonS3Presigner(S3Presigner amazonS3Presigner) {
-        this.amazonS3Presigner = amazonS3Presigner;
-    }
+    /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
+     * Set whether the S3 client should expect to load credentials through a
+     * default credentials provider.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the S3 client should expect to load credentials through a
+     * profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
 
     public Boolean getAutoCreateBucket() {
         return autoCreateBucket;
@@ -421,38 +405,6 @@ public class AWS2S3ComponentConfiguration
         this.prefix = prefix;
     }
 
-    public String getProfileCredentialsName() {
-        return profileCredentialsName;
-    }
-
-    public void setProfileCredentialsName(String profileCredentialsName) {
-        this.profileCredentialsName = profileCredentialsName;
-    }
-
-    public String getProxyHost() {
-        return proxyHost;
-    }
-
-    public void setProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-    }
-
-    public Integer getProxyPort() {
-        return proxyPort;
-    }
-
-    public void setProxyPort(Integer proxyPort) {
-        this.proxyPort = proxyPort;
-    }
-
-    public Protocol getProxyProtocol() {
-        return proxyProtocol;
-    }
-
-    public void setProxyProtocol(Protocol proxyProtocol) {
-        this.proxyProtocol = proxyProtocol;
-    }
-
     public String getRegion() {
         return region;
     }
@@ -461,38 +413,12 @@ public class AWS2S3ComponentConfiguration
         this.region = region;
     }
 
-    public Boolean getTrustAllCertificates() {
-        return trustAllCertificates;
-    }
-
-    public void setTrustAllCertificates(Boolean trustAllCertificates) {
-        this.trustAllCertificates = trustAllCertificates;
-    }
-
     public String getUriEndpointOverride() {
         return uriEndpointOverride;
     }
 
     public void setUriEndpointOverride(String uriEndpointOverride) {
         this.uriEndpointOverride = uriEndpointOverride;
-    }
-
-    public Boolean getUseDefaultCredentialsProvider() {
-        return useDefaultCredentialsProvider;
-    }
-
-    public void setUseDefaultCredentialsProvider(
-            Boolean useDefaultCredentialsProvider) {
-        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
-    }
-
-    public Boolean getUseProfileCredentialsProvider() {
-        return useProfileCredentialsProvider;
-    }
-
-    public void setUseProfileCredentialsProvider(
-            Boolean useProfileCredentialsProvider) {
-        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
     }
 
     public String getCustomerAlgorithm() {
@@ -751,6 +677,22 @@ public class AWS2S3ComponentConfiguration
         this.useSSES3 = useSSES3;
     }
 
+    public S3Client getAmazonS3Client() {
+        return amazonS3Client;
+    }
+
+    public void setAmazonS3Client(S3Client amazonS3Client) {
+        this.amazonS3Client = amazonS3Client;
+    }
+
+    public S3Presigner getAmazonS3Presigner() {
+        return amazonS3Presigner;
+    }
+
+    public void setAmazonS3Presigner(S3Presigner amazonS3Presigner) {
+        this.amazonS3Presigner = amazonS3Presigner;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
@@ -775,6 +717,30 @@ public class AWS2S3ComponentConfiguration
         this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Protocol getProxyProtocol() {
+        return proxyProtocol;
+    }
+
+    public void setProxyProtocol(Protocol proxyProtocol) {
+        this.proxyProtocol = proxyProtocol;
+    }
+
     public String getAccessKey() {
         return accessKey;
     }
@@ -783,11 +749,45 @@ public class AWS2S3ComponentConfiguration
         this.accessKey = accessKey;
     }
 
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
     public String getSecretKey() {
         return secretKey;
     }
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
+    }
+
+    public Boolean getUseProfileCredentialsProvider() {
+        return useProfileCredentialsProvider;
+    }
+
+    public void setUseProfileCredentialsProvider(
+            Boolean useProfileCredentialsProvider) {
+        this.useProfileCredentialsProvider = useProfileCredentialsProvider;
     }
 }

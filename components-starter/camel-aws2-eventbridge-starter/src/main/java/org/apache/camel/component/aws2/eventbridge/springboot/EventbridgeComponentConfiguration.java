@@ -46,11 +46,6 @@ public class EventbridgeComponentConfiguration
      */
     private EventbridgeConfiguration configuration;
     /**
-     * To use a existing configured AWS Eventbridge as client. The option is a
-     * software.amazon.awssdk.services.eventbridge.EventBridgeClient type.
-     */
-    private EventBridgeClient eventbridgeClient;
-    /**
      * EventPattern File
      */
     private String eventPatternFile;
@@ -79,48 +74,16 @@ public class EventbridgeComponentConfiguration
      */
     private Boolean pojoRequest = false;
     /**
-     * If using a profile credentials provider this parameter will set the
-     * profile name
-     */
-    private String profileCredentialsName;
-    /**
-     * To define a proxy host when instantiating the Eventbridge client
-     */
-    private String proxyHost;
-    /**
-     * To define a proxy port when instantiating the Eventbridge client
-     */
-    private Integer proxyPort;
-    /**
-     * To define a proxy protocol when instantiating the Eventbridge client
-     */
-    private Protocol proxyProtocol = Protocol.HTTPS;
-    /**
      * The region in which Eventbridge client needs to work. When using this
      * parameter, the configuration will expect the lowercase name of the region
      * (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
     /**
-     * If we want to trust all certificates in case of overriding the endpoint
-     */
-    private Boolean trustAllCertificates = false;
-    /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
      */
     private String uriEndpointOverride;
-    /**
-     * Set whether the Eventbridge client should expect to load credentials
-     * through a default credentials provider or to expect static credentials to
-     * be passed in.
-     */
-    private Boolean useDefaultCredentialsProvider = false;
-    /**
-     * Set whether the Eventbridge client should expect to load credentials
-     * through a profile credentials provider.
-     */
-    private Boolean useProfileCredentialsProvider = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -130,6 +93,11 @@ public class EventbridgeComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use a existing configured AWS Eventbridge as client. The option is a
+     * software.amazon.awssdk.services.eventbridge.EventBridgeClient type.
+     */
+    private EventBridgeClient eventbridgeClient;
     /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
@@ -143,13 +111,45 @@ public class EventbridgeComponentConfiguration
      */
     private Boolean healthCheckProducerEnabled = true;
     /**
+     * To define a proxy host when instantiating the Eventbridge client
+     */
+    private String proxyHost;
+    /**
+     * To define a proxy port when instantiating the Eventbridge client
+     */
+    private Integer proxyPort;
+    /**
+     * To define a proxy protocol when instantiating the Eventbridge client
+     */
+    private Protocol proxyProtocol = Protocol.HTTPS;
+    /**
      * Amazon AWS Access Key
      */
     private String accessKey;
     /**
+     * If using a profile credentials provider this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
+    /**
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
+    /**
+     * Set whether the Eventbridge client should expect to load credentials
+     * through a default credentials provider or to expect static credentials to
+     * be passed in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the Eventbridge client should expect to load credentials
+     * through a profile credentials provider.
+     */
+    private Boolean useProfileCredentialsProvider = false;
 
     public EventbridgeConfiguration getConfiguration() {
         return configuration;
@@ -157,14 +157,6 @@ public class EventbridgeComponentConfiguration
 
     public void setConfiguration(EventbridgeConfiguration configuration) {
         this.configuration = configuration;
-    }
-
-    public EventBridgeClient getEventbridgeClient() {
-        return eventbridgeClient;
-    }
-
-    public void setEventbridgeClient(EventBridgeClient eventbridgeClient) {
-        this.eventbridgeClient = eventbridgeClient;
     }
 
     public String getEventPatternFile() {
@@ -207,12 +199,52 @@ public class EventbridgeComponentConfiguration
         this.pojoRequest = pojoRequest;
     }
 
-    public String getProfileCredentialsName() {
-        return profileCredentialsName;
+    public String getRegion() {
+        return region;
     }
 
-    public void setProfileCredentialsName(String profileCredentialsName) {
-        this.profileCredentialsName = profileCredentialsName;
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public EventBridgeClient getEventbridgeClient() {
+        return eventbridgeClient;
+    }
+
+    public void setEventbridgeClient(EventBridgeClient eventbridgeClient) {
+        this.eventbridgeClient = eventbridgeClient;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
     public String getProxyHost() {
@@ -239,12 +271,28 @@ public class EventbridgeComponentConfiguration
         this.proxyProtocol = proxyProtocol;
     }
 
-    public String getRegion() {
-        return region;
+    public String getAccessKey() {
+        return accessKey;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public Boolean getTrustAllCertificates() {
@@ -253,14 +301,6 @@ public class EventbridgeComponentConfiguration
 
     public void setTrustAllCertificates(Boolean trustAllCertificates) {
         this.trustAllCertificates = trustAllCertificates;
-    }
-
-    public String getUriEndpointOverride() {
-        return uriEndpointOverride;
-    }
-
-    public void setUriEndpointOverride(String uriEndpointOverride) {
-        this.uriEndpointOverride = uriEndpointOverride;
     }
 
     public Boolean getUseDefaultCredentialsProvider() {
@@ -279,45 +319,5 @@ public class EventbridgeComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
-    }
-
-    public Boolean getAutowiredEnabled() {
-        return autowiredEnabled;
-    }
-
-    public void setAutowiredEnabled(Boolean autowiredEnabled) {
-        this.autowiredEnabled = autowiredEnabled;
-    }
-
-    public Boolean getHealthCheckConsumerEnabled() {
-        return healthCheckConsumerEnabled;
-    }
-
-    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
-        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
-    }
-
-    public Boolean getHealthCheckProducerEnabled() {
-        return healthCheckProducerEnabled;
-    }
-
-    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
-        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
-    }
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 }

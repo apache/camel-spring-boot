@@ -39,8 +39,8 @@ public class CloudtrailComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.cloudtrail.CloudTrailClient.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws.cloudtrail.CloudtrailConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.cloudtrail.CloudTrailClient.class));
         return answer;
     }
 
@@ -57,8 +57,8 @@ public class CloudtrailComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "software.amazon.awssdk.services.cloudtrail.CloudTrailClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.cloudtrail.CloudTrailClient.class);
             case "org.apache.camel.component.aws.cloudtrail.CloudtrailConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.aws.cloudtrail.CloudtrailConfiguration.class);
+            case "software.amazon.awssdk.services.cloudtrail.CloudTrailClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.cloudtrail.CloudTrailClient.class);
         }
         return null;
     }
