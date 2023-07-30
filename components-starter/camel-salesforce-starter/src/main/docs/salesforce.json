@@ -299,7 +299,7 @@
     {
       "name": "camel.component.salesforce.lazy-login",
       "type": "java.lang.Boolean",
-      "description": "If set to true prevents the component from authenticating to Salesforce with the start of the component. You would generally set this to the (default) false and authenticate early and be immediately aware of any authentication issues.",
+      "description": "If set to true prevents the component from authenticating to Salesforce with the start of the component. You would generally set this to the (default) false and authenticate early and be immediately aware of any authentication issues. Lazy login is not supported by salesforce consumers.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
       "defaultValue": false
     },

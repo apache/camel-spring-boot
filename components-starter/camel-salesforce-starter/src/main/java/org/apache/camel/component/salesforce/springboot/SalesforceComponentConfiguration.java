@@ -496,7 +496,8 @@ public class SalesforceComponentConfiguration
      * If set to true prevents the component from authenticating to Salesforce
      * with the start of the component. You would generally set this to the
      * (default) false and authenticate early and be immediately aware of any
-     * authentication issues.
+     * authentication issues. Lazy login is not supported by salesforce
+     * consumers.
      */
     private Boolean lazyLogin = false;
     /**
