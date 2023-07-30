@@ -54,7 +54,13 @@ pipeline {
 
         stage('Build & Deploy') {
             when {
-                branch 'main'
+                anyOf {
+                    branch 'main'
+                    branch 'camel-spring-boot-3.x'
+                    branch 'camel-spring-boot-3.21.x'
+                    branch 'camel-spring-boot-3.20.x'
+                    branch 'camel-spring-boot-3.14.x'
+                }
             }
             steps {
                 sh "./mvnw $MAVEN_PARAMS -Pdeploy -Dmaven.test.skip.exec=true clean deploy"
