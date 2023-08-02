@@ -40,7 +40,6 @@ public class JpaComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, jakarta.persistence.EntityManagerFactory.class));
-        answer.add(new ConvertiblePair(String.class, org.springframework.transaction.PlatformTransactionManager.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jpa.TransactionStrategy.class));
         return answer;
     }
@@ -59,7 +58,6 @@ public class JpaComponentConverter implements GenericConverter {
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "jakarta.persistence.EntityManagerFactory": return applicationContext.getBean(ref, jakarta.persistence.EntityManagerFactory.class);
-            case "org.springframework.transaction.PlatformTransactionManager": return applicationContext.getBean(ref, org.springframework.transaction.PlatformTransactionManager.class);
             case "org.apache.camel.component.jpa.TransactionStrategy": return applicationContext.getBean(ref, org.apache.camel.component.jpa.TransactionStrategy.class);
         }
         return null;
