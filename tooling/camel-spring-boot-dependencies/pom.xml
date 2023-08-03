@@ -4629,6 +4629,11 @@
         <version>3.7.4</version>
       </dependency>
       <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20230618</version>
+      </dependency>
+      <dependency>
         <groupId>org.junit-pioneer</groupId>
         <artifactId>junit-pioneer</artifactId>
         <version>1.7.1</version>
