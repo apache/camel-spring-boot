@@ -63,25 +63,25 @@ public class StarterGeneratorMojo extends AbstractMojo {
     @Parameter(property = "action", required = true)
     protected String action;
 
-    @Parameter(property = "name", required = true)
-    protected String name;
+    @Parameter(property = "componentName", required = true)
+    protected String componentName;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         if (!"create".equals(action) && !"delete".equals(action))
             throw new MojoFailureException("Unknown action: " + action);
-        if (name == null || name.isEmpty())
+        if (componentName == null || componentName.isEmpty())
             throw new MojoFailureException("Starter name must be specified as the parameter");
-        if (name.startsWith("camel-"))
-            name = name.substring("camel-".length());
-        if (name.endsWith("-starter"))
-            name = name.substring(0, name.length() - "-starter".length());
+        if (componentName.startsWith("camel-"))
+            componentName = componentName.substring("camel-".length());
+        if (componentName.endsWith("-starter"))
+            componentName = componentName.substring(0, componentName.length() - "-starter".length());
         try {
             doExecute();
         } catch (MojoExecutionException | MojoFailureException e) {
             throw e;
         } catch (Exception e) {
-            throw new MojoExecutionException("Unable to " + action + " starter " + name, e);
+            throw new MojoExecutionException("Unable to " + action + " starter " + componentName, e);
         }
     }
 
@@ -97,10 +97,10 @@ public class StarterGeneratorMojo extends AbstractMojo {
     }
 
     private void deleteStarter() throws MojoFailureException, IOException {
-        getLog().info("Deleting starter for " + name);
-        File directory = new File(startersDir, "camel-" + name + "-starter");
+        getLog().info("Deleting starter for " + componentName);
+        File directory = new File(startersDir, "camel-" + componentName + "-starter");
         if (!directory.exists()) {
-            throw new MojoFailureException("Starter does not exist: " + name);
+            throw new MojoFailureException("Starter does not exist: " + componentName);
         }
         FileUtils.deleteDirectory(directory);
         Path parent = new File(startersDir, "pom.xml").toPath();
@@ -115,15 +115,15 @@ public class StarterGeneratorMojo extends AbstractMojo {
         }
         lines = concat(lines.subList(0, modulesStart).stream(),
                        lines.subList(modulesStart, modulesEnd).stream()
-                            .filter(s -> !s.contains("<module>camel-" + name + "-starter</module>")),
+                            .filter(s -> !s.contains("<module>camel-" + componentName + "-starter</module>")),
                        lines.subList(modulesEnd, lines.size()).stream())
                  .collect(Collectors.toList());
         Files.write(parent, lines);
     }
 
     private void createStarter() throws MojoFailureException, IOException {
-        getLog().info("Creating starter for " + name);
-        File directory = new File(startersDir, "camel-" + name + "-starter");
+        getLog().info("Creating starter for " + componentName);
+        File directory = new File(startersDir, "camel-" + componentName + "-starter");
         if (directory.exists()) {
             if (directory.isDirectory()) {
                 throw new MojoFailureException("Directory already exists: " + directory);
@@ -136,7 +136,7 @@ public class StarterGeneratorMojo extends AbstractMojo {
         }
         Files.write(new File(directory, "pom.xml").toPath(),
                 Files.lines(sourcePom.toPath())
-                        .map(s -> s.replaceAll("%NAME%", name))
+                        .map(s -> s.replaceAll("%NAME%", componentName))
                         .collect(Collectors.toList()));
         Path parent = new File(startersDir, "pom.xml").toPath();
         List<String> lines = Files.readAllLines(parent);
@@ -150,7 +150,7 @@ public class StarterGeneratorMojo extends AbstractMojo {
         }
         lines = concat(lines.subList(0, modulesStart).stream(),
                        Stream.concat(lines.subList(modulesStart, modulesEnd).stream(),
-                                     Stream.of("    <module>camel-" + name + "-starter</module>"))
+                                     Stream.of("    <module>camel-" + componentName + "-starter</module>"))
                              .sorted().distinct(),
                        lines.subList(modulesEnd, lines.size()).stream())
                            .collect(Collectors.toList());
