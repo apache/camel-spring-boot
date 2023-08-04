@@ -94,6 +94,13 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-mongodb.errors-max-retries",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of retries on connection errors before failing (-1 = no limit, 0 = disabled, 0 = num of retries).",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": -1
+    },
+    {
       "name": "camel.component.debezium-mongodb.event-processing-failure-handling-mode",
       "type": "java.lang.String",
       "description": "Specify how failures during processing of events (i.e. when encountering a corrupted event) should be handled, including: 'fail' (the default) an exception indicating the problematic event and its position is raised, causing the connector to be stopped; 'warn' the problematic event and its position will be logged and the event will be skipped; 'ignore' the problematic event will be skipped.",

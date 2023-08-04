@@ -231,6 +231,13 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-mysql.errors-max-retries",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of retries on connection errors before failing (-1 = no limit, 0 = disabled, 0 = num of retries).",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": -1
+    },
+    {
       "name": "camel.component.debezium-mysql.event-deserialization-failure-handling-mode",
       "type": "java.lang.String",
       "description": "Specify how failures during deserialization of binlog events (i.e. when encountering a corrupted event) should be handled, including: 'fail' (the default) an exception indicating the problematic event and its binlog position is raised, causing the connector to be stopped; 'warn' the problematic event and its binlog position will be logged and the event will be skipped; 'ignore' the problematic event will be skipped.",

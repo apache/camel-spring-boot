@@ -296,6 +296,11 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Boolean enableTimeAdjuster = true;
     /**
+     * The maximum number of retries on connection errors before failing (-1 =
+     * no limit, 0 = disabled, 0 = num of retries).
+     */
+    private Integer errorsMaxRetries = -1;
+    /**
      * Specify how failures during deserialization of binlog events (i.e. when
      * encountering a corrupted event) should be handled, including: 'fail' (the
      * default) an exception indicating the problematic event and its binlog
@@ -1019,6 +1024,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setEnableTimeAdjuster(Boolean enableTimeAdjuster) {
         this.enableTimeAdjuster = enableTimeAdjuster;
+    }
+
+    public Integer getErrorsMaxRetries() {
+        return errorsMaxRetries;
+    }
+
+    public void setErrorsMaxRetries(Integer errorsMaxRetries) {
+        this.errorsMaxRetries = errorsMaxRetries;
     }
 
     public String getEventDeserializationFailureHandlingMode() {

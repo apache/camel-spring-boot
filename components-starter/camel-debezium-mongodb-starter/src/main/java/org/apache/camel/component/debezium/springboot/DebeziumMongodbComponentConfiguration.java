@@ -163,6 +163,11 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String databaseIncludeList;
     /**
+     * The maximum number of retries on connection errors before failing (-1 =
+     * no limit, 0 = disabled, 0 = num of retries).
+     */
+    private Integer errorsMaxRetries = -1;
+    /**
      * Specify how failures during processing of events (i.e. when encountering
      * a corrupted event) should be handled, including: 'fail' (the default) an
      * exception indicating the problematic event and its position is raised,
@@ -571,6 +576,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setDatabaseIncludeList(String databaseIncludeList) {
         this.databaseIncludeList = databaseIncludeList;
+    }
+
+    public Integer getErrorsMaxRetries() {
+        return errorsMaxRetries;
+    }
+
+    public void setErrorsMaxRetries(Integer errorsMaxRetries) {
+        this.errorsMaxRetries = errorsMaxRetries;
     }
 
     public String getEventProcessingFailureHandlingMode() {
