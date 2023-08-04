@@ -52,7 +52,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.artifact.repository.ArtifactRepository;
-import org.apache.maven.artifact.resolver.ArtifactResolver;
+import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.DependencyManagement;
 import org.apache.maven.model.Exclusion;
@@ -65,7 +65,10 @@ import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.DefaultProjectBuildingRequest;
 import org.apache.maven.project.MavenProject;
+import org.apache.maven.project.ProjectBuildingRequest;
+import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -84,6 +87,12 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
     protected MavenProject project;
 
     /**
+     * The maven session.
+     */
+    @Parameter(defaultValue = "${session}", required = true, readonly = true)
+    private MavenSession session;
+
+    /**
      * The source pom template file.
      */
     @Parameter(defaultValue = "${basedir}/pom.xml")
@@ -99,13 +108,13 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
     /**
      * The user configuration
      */
-    @Parameter(readonly = true)
+    @Parameter
     protected DependencySet dependencies;
 
     /**
      * The conflict checks configured by the user
      */
-    @Parameter(readonly = true)
+    @Parameter
     protected ExternalBomConflictCheckSet checkConflicts;
 
     /**
@@ -124,7 +133,7 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
      * List of Remote Repositories used by the resolver
      */
     @Parameter(property = "project.remoteArtifactRepositories", readonly = true, required = true)
-    protected List remoteRepositories;
+    protected List<ArtifactRepository> remoteRepositories;
 
     /**
      * Location of the local repository.
@@ -559,9 +568,15 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
 
         Artifact art = artifactFactory.createArtifact(groupId, artifactId, version, "runtime", type);
 
-        artifactResolver.resolve(art, remoteRepositories, localRepository);
+        ProjectBuildingRequest buildingRequest =
+                new DefaultProjectBuildingRequest(session.getProjectBuildingRequest());
+        buildingRequest
+                .setRemoteRepositories(remoteRepositories)
+                .setLocalRepository(localRepository);
 
-        return art;
+        return artifactResolver
+                .resolveArtifact(buildingRequest, art)
+                .getArtifact();
     }
 
     private MavenProject loadExternalProjectPom(File pomFile) throws Exception {
