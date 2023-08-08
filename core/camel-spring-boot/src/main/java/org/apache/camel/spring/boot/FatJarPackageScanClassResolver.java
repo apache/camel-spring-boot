@@ -25,12 +25,15 @@ import java.util.jar.JarInputStream;
 
 import org.apache.camel.impl.engine.DefaultPackageScanClassResolver;
 import org.apache.camel.util.IOHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * An implementation of the {@code org.apache.camel.spi.PackageScanClassResolver} that is able to
  * scan spring-boot fat jars to find classes contained also in nested jars.
  */
 public class FatJarPackageScanClassResolver extends DefaultPackageScanClassResolver {
+    private static final Logger LOG = LoggerFactory.getLogger(FatJarPackageScanClassResolver.class);
 
     private static final String SPRING_BOOT_CLASSIC_LIB_ROOT = "lib/";
     private static final String SPRING_BOOT_BOOT_INF_LIB_ROOT = "BOOT-INF/lib/";
@@ -59,18 +62,18 @@ public class FatJarPackageScanClassResolver extends DefaultPackageScanClassResol
                     entries.add(cleanupSpringBootClassName(name));
                 } else if (inspectNestedJars && !entry.isDirectory() && isSpringBootNestedJar(name)) {
                     String nestedUrl = urlPath + "!/" + name;
-                    log.trace("Inspecting nested jar: {}", nestedUrl);
+                    LOG.trace("Inspecting nested jar: {}", nestedUrl);
 
                     List<String> nestedEntries = doLoadJarClassEntries(jarStream, nestedUrl, false, false);
                     entries.addAll(nestedEntries);
                 }
             }
         } catch (IOException ioe) {
-            log.warn("Cannot search jar file '" + urlPath + " due to an IOException: " + ioe.getMessage() + ". This exception is ignored.", ioe);
+            LOG.warn("Cannot search jar file '" + urlPath + " due to an IOException: " + ioe.getMessage() + ". This exception is ignored.", ioe);
         } finally {
             if (closeStream) {
                 // stream is left open when scanning nested jars, otherwise the fat jar stream gets closed
-                IOHelper.close(jarStream, urlPath, log);
+                IOHelper.close(jarStream, urlPath, LOG);
             }
         }
 

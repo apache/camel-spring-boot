@@ -18,6 +18,8 @@ package org.apache.camel.spring.boot;
 
 import org.apache.camel.impl.engine.DefaultPackageScanResourceResolver;
 import org.apache.camel.util.IOHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +33,7 @@ import java.util.jar.JarInputStream;
  * scan spring-boot fat jars to find resources contained also in nested jars.
  */
 public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourceResolver {
+    private static final Logger LOG = LoggerFactory.getLogger(FatJarPackageScanResourceResolver.class);
 
     private static final String SPRING_BOOT_CLASSIC_LIB_ROOT = "lib/";
     private static final String SPRING_BOOT_BOOT_INF_LIB_ROOT = "BOOT-INF/lib/";
@@ -56,7 +59,7 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
                 String name = entry.getName().trim();
                 if (inspectNestedJars && !entry.isDirectory() && isSpringBootNestedJar(name)) {
                     String nestedUrl = urlPath + "!/" + name;
-                    log.trace("Inspecting nested jar: {}", nestedUrl);
+                    LOG.trace("Inspecting nested jar: {}", nestedUrl);
                     List<String> nestedEntries = doLoadImplementationsInJar(packageName, jarStream, nestedUrl, false, false);
                     entries.addAll(nestedEntries);
                 } else if (!entry.isDirectory() && !name.endsWith(".class")) {
@@ -68,11 +71,11 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
                 }
             }
         } catch (IOException ioe) {
-            log.warn("Cannot search jar file '" + urlPath + " due to an IOException: " + ioe.getMessage() + ". This exception is ignored.", ioe);
+            LOG.warn("Cannot search jar file '" + urlPath + " due to an IOException: " + ioe.getMessage() + ". This exception is ignored.", ioe);
         } finally {
             if (closeStream) {
                 // stream is left open when scanning nested jars, otherwise the fat jar stream gets closed
-                IOHelper.close(jarStream, urlPath, log);
+                IOHelper.close(jarStream, urlPath, LOG);
             }
         }
 
