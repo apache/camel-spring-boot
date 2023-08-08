@@ -198,7 +198,8 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                                 try {
                                     camelContextConfiguration.afterApplicationStart(camelContext);
                                 } catch (Exception e) {
-                                    LOG.warn("Error during calling afterApplicationStart due " + e.getMessage() + ". This exception is ignored", e);
+                                    LOG.warn("Error during calling afterApplicationStart due {}. This exception is ignored",
+                                            e.getMessage(), e);
                                 }
                             }
                         }

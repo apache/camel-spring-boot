@@ -64,7 +64,7 @@ public class FhirCreateIT extends AbstractFhirTestSupport {
 
         MethodOutcome result = requestBody("direct://RESOURCE", patient);
 
-        LOG.debug("resource: " + result);
+        LOG.debug("resource: {}", result);
         assertNotNull(result, "resource result");
         assertTrue(result.getCreated());
     }
@@ -76,7 +76,7 @@ public class FhirCreateIT extends AbstractFhirTestSupport {
 
         MethodOutcome result = requestBody("direct://RESOURCE_STRING", patientString);
 
-        LOG.debug("resource: " + result);
+        LOG.debug("resource: {}", result);
         assertNotNull(result, "resource result");
         assertTrue(result.getCreated());
     }
@@ -89,7 +89,7 @@ public class FhirCreateIT extends AbstractFhirTestSupport {
         headers.put(ExtraParameters.ENCODE_XML.getHeaderName(), Boolean.TRUE);
         MethodOutcome result = requestBodyAndHeaders("direct://RESOURCE_STRING", patientString, headers);
 
-        LOG.debug("resource: " + result);
+        LOG.debug("resource: {}", result);
         assertNotNull(result, "resource result");
         assertTrue(result.getCreated());
     }

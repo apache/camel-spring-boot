@@ -68,7 +68,7 @@ public class JdbcAggregateSerializedHeadersTest extends BaseSql {
         resultEndpoint.expectedMinimumMessageCount(1);
         resultEndpoint.setResultWaitTime(50 * 1000);
 
-        LOG.info("Staring to send " + SIZE + " messages.");
+        LOG.info("Staring to send {} messages.", SIZE);
 
         for (int i = 0; i < SIZE; i++) {
             final int value = 1;
@@ -77,7 +77,7 @@ public class JdbcAggregateSerializedHeadersTest extends BaseSql {
             template.sendBodyAndHeader("seda:start?size=" + SIZE, value, "id", headerDto);
         }
 
-        LOG.info("Sending all " + SIZE + " message done. Now waiting for aggregation to complete.");
+        LOG.info("Sending all {} message done. Now waiting for aggregation to complete.", SIZE);
 
         assertMockEndpointsSatisfied();
     }

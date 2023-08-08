@@ -62,7 +62,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements S
             handleService(request, response);
         } catch (Exception e) {
             // do not leak exception back to caller
-            LOG.warn("Error handling request due to: " + e.getMessage(), e);
+            LOG.warn("Error handling request due to: {}", e.getMessage(), e);
             try {
                 if (!response.isCommitted()) {
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
