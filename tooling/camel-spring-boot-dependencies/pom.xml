@@ -2120,6 +2120,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-aws2-step-functions</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws2-sts</artifactId>
         <version>4.0.0-SNAPSHOT</version>
       </dependency>
