@@ -74,7 +74,7 @@ public class FhirMetaIT extends AbstractFhirTestSupport {
 
         IBaseMetaType result = requestBodyAndHeaders("direct://ADD", null, headers);
 
-        LOG.debug("add: " + result);
+        LOG.debug("add: {}", result);
         assertNotNull(result, "add result");
         assertEquals(1, result.getTag().size());
     }
@@ -99,7 +99,7 @@ public class FhirMetaIT extends AbstractFhirTestSupport {
 
         IBaseMetaType result = requestBodyAndHeaders("direct://DELETE", null, headers);
 
-        LOG.debug("delete: " + result);
+        LOG.debug("delete: {}", result);
         assertNotNull(result, "delete result");
         assertEquals(0, result.getTag().size());
     }
@@ -114,7 +114,7 @@ public class FhirMetaIT extends AbstractFhirTestSupport {
 
         IBaseMetaType result = requestBodyAndHeaders("direct://GET_FROM_RESOURCE", null, headers);
 
-        LOG.debug("getFromResource: " + result);
+        LOG.debug("getFromResource: {}", result);
         assertNotNull(result, "getFromResource result");
         assertEquals(0, result.getTag().size());
     }
@@ -124,7 +124,7 @@ public class FhirMetaIT extends AbstractFhirTestSupport {
         // using Class message body for single parameter "metaType"
         IBaseMetaType result = requestBody("direct://GET_FROM_SERVER", Meta.class);
         assertNotNull(result, "getFromServer result");
-        LOG.debug("getFromServer: " + result);
+        LOG.debug("getFromServer: {}", result);
     }
 
     @Test
@@ -137,7 +137,7 @@ public class FhirMetaIT extends AbstractFhirTestSupport {
 
         IBaseMetaType result = requestBodyAndHeaders("direct://GET_FROM_TYPE", null, headers);
 
-        LOG.debug("getFromType: " + result);
+        LOG.debug("getFromType: {}", result);
         assertNotNull(result, "getFromType result");
     }
 
@@ -152,7 +152,7 @@ public class FhirMetaIT extends AbstractFhirTestSupport {
 
         Meta result = requestBodyAndHeaders("direct://GET_FROM_TYPE", null, headers);
 
-        LOG.debug("getFromType: " + result);
+        LOG.debug("getFromType: {}", result);
         assertNotNull(result, "getFromType result");
     }
 

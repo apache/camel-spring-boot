@@ -64,7 +64,7 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
         // using org.hl7.fhir.instance.model.api.IBaseResource message body for single parameter "resource"
         MethodOutcome result = requestBody("direct://RESOURCE", this.patient);
 
-        LOG.debug("resource: " + result);
+        LOG.debug("resource: {}", result);
         assertNotNull(result, "resource result");
         assertFalse(patientExists());
     }
@@ -76,7 +76,7 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
         // using org.hl7.fhir.instance.model.api.IIdType message body for single parameter "id"
         MethodOutcome result = requestBody("direct://RESOURCE_BY_ID", this.patient.getIdElement());
 
-        LOG.debug("resourceById: " + result);
+        LOG.debug("resourceById: {}", result);
         assertNotNull(result, "resourceById result");
         assertFalse(patientExists());
     }
@@ -93,7 +93,7 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
 
         MethodOutcome result = requestBodyAndHeaders("direct://RESOURCE_BY_STRING_ID", null, headers);
 
-        LOG.debug("resourceById: " + result);
+        LOG.debug("resourceById: {}", result);
         assertNotNull(result, "resourceById result");
         assertFalse(patientExists());
     }
@@ -105,7 +105,7 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
         MethodOutcome result
                 = requestBody("direct://RESOURCE_CONDITIONAL_BY_URL", "Patient?given=Vincent&family=Freeman");
 
-        LOG.debug("resourceConditionalByUrl: " + result);
+        LOG.debug("resourceConditionalByUrl: {}", result);
         assertNotNull(result, "resourceConditionalByUrl result");
         assertFalse(patientExists());
     }
@@ -119,7 +119,7 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
         MethodOutcome result = requestBodyAndHeaders("direct://RESOURCE_CONDITIONAL_BY_URL",
                 "Patient?given=Vincent&family=Freeman", headers);
 
-        LOG.debug("resourceConditionalByUrl: " + result);
+        LOG.debug("resourceConditionalByUrl: {}", result);
         assertNotNull(result, "resourceConditionalByUrl result");
         assertFalse(patientExists());
     }

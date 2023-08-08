@@ -104,7 +104,7 @@ public class BeanWithXQueryInjectionTest {
         public void read(String body, @XQuery("/foo/@id") String foo) {
             this.foo = foo;
             this.body = body;
-            LOG.info("read() method called on " + this);
+            LOG.info("read() method called on {}", this);
         }
     }
 }

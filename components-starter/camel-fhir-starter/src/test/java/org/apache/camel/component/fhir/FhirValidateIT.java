@@ -71,7 +71,7 @@ public class FhirValidateIT extends AbstractFhirTestSupport {
         MethodOutcome result = requestBody("direct://RESOURCE", bobbyHebb);
 
         assertNotNull(result, "resource result");
-        LOG.debug("resource: " + result);
+        LOG.debug("resource: {}", result);
         OperationOutcome operationOutcome = (OperationOutcome) result.getOperationOutcome();
         assertNotNull(operationOutcome);
 
@@ -93,7 +93,7 @@ public class FhirValidateIT extends AbstractFhirTestSupport {
                 = requestBody("direct://RESOURCE_AS_STRING", this.fhirContext.newXmlParser().encodeResourceToString(bobbyHebb));
 
         assertNotNull(result, "resource result");
-        LOG.debug("resource: " + result);
+        LOG.debug("resource: {}", result);
         OperationOutcome operationOutcome = (OperationOutcome) result.getOperationOutcome();
         assertNotNull(operationOutcome);
 

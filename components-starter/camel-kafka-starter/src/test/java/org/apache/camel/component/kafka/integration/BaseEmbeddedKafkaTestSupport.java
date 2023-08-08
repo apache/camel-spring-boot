@@ -49,7 +49,7 @@ public abstract class BaseEmbeddedKafkaTestSupport {
 
     @BeforeAll
     public static void beforeClass() {
-        LOG.info("### Embedded Kafka cluster broker list: " + service.getBootstrapServers());
+        LOG.info("### Embedded Kafka cluster broker list: {}", service.getBootstrapServers());
         System.setProperty("bootstrapServers", service.getBootstrapServers());
     }
 

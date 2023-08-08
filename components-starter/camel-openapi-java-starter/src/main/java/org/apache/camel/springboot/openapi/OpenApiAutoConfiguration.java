@@ -95,7 +95,8 @@ public class OpenApiAutoConfiguration {
                         // do not copy servers as we use the spring-boot configured setting
                     }
                 } catch (Exception e) {
-                    LOG.warn("Error generating OpenAPI from Camel Rest DSL due to: " + e.getMessage() + ". This exception is ignored.", e);
+                    LOG.warn("Error generating OpenAPI from Camel Rest DSL due to: {}. This exception is ignored.",
+                            e.getMessage(), e);
                 }
             }
 
