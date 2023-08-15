@@ -93,9 +93,9 @@ public class Sns2ComponentConfiguration
      */
     private String policy;
     /**
-     * The queueUrl to subscribe to
+     * The ARN endpoint to subscribe to
      */
-    private String queueUrl;
+    private String queueArn;
     /**
      * The region in which SNS client needs to work. When using this parameter,
      * the configuration will expect the lowercase name of the region (for
@@ -259,12 +259,12 @@ public class Sns2ComponentConfiguration
         this.policy = policy;
     }
 
-    public String getQueueUrl() {
-        return queueUrl;
+    public String getQueueArn() {
+        return queueArn;
     }
 
-    public void setQueueUrl(String queueUrl) {
-        this.queueUrl = queueUrl;
+    public void setQueueArn(String queueArn) {
+        this.queueArn = queueArn;
     }
 
     public String getRegion() {
