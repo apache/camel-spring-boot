@@ -43,6 +43,11 @@ public class StubComponentConfiguration
      */
     private Boolean shadow = false;
     /**
+     * If shadow is enabled then this pattern can be used to filter which
+     * components to match. Multiple patterns can be separated by comma.
+     */
+    private String shadowPattern;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions occurred while the consumer is trying to pickup
      * incoming messages, or the likes, will now be processed as a message and
@@ -121,6 +126,14 @@ public class StubComponentConfiguration
 
     public void setShadow(Boolean shadow) {
         this.shadow = shadow;
+    }
+
+    public String getShadowPattern() {
+        return shadowPattern;
+    }
+
+    public void setShadowPattern(String shadowPattern) {
+        this.shadowPattern = shadowPattern;
     }
 
     public Boolean getBridgeErrorHandler() {
