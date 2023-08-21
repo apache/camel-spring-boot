@@ -197,6 +197,10 @@ public class AWS2S3ComponentConfiguration
      */
     private Integer batchSize = 1000000;
     /**
+     * The buffer size (in bytes) in streaming upload mode
+     */
+    private Integer bufferSize = 1000000;
+    /**
      * Delete file object after the S3 file has been uploaded
      */
     private Boolean deleteAfterWrite = false;
@@ -554,6 +558,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setBatchSize(Integer batchSize) {
         this.batchSize = batchSize;
+    }
+
+    public Integer getBufferSize() {
+        return bufferSize;
+    }
+
+    public void setBufferSize(Integer bufferSize) {
+        this.bufferSize = bufferSize;
     }
 
     public Boolean getDeleteAfterWrite() {

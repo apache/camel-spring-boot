@@ -80,6 +80,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.aws2-s3.buffer-size",
+      "type": "java.lang.Integer",
+      "description": "The buffer size (in bytes) in streaming upload mode",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": 1000000
+    },
+    {
       "name": "camel.component.aws2-s3.configuration",
       "type": "org.apache.camel.component.aws2.s3.AWS2S3Configuration",
       "description": "The component configuration. The option is a org.apache.camel.component.aws2.s3.AWS2S3Configuration type.",
