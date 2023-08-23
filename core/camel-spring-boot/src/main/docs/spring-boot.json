@@ -614,6 +614,13 @@
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
     },
     {
+      "name": "camel.springboot.dump-routes-generated-ids",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include auto generated IDs in the dumped output. Default is false.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.springboot.dump-routes-include",
       "type": "java.lang.String",
       "description": "Controls what to include in output for route dumping. Possible values: routes, rests, routeTemplates. Multiple values can be separated by comma. Default is routes.",

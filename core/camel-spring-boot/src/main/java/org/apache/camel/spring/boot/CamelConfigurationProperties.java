@@ -662,6 +662,11 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean dumpRoutesResolvePlaceholders = true;
 
     /**
+     * Whether to include auto generated IDs in the dumped output. Default is false.
+     */
+    private boolean dumpRoutesGeneratedIds;
+
+    /**
      * When dumping routes to YAML format, then this option controls whether endpoint URIs should be expanded into a
      * key/value parameters.
      */
