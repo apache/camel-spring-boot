@@ -4950,6 +4950,11 @@
         <version>1.17.6</version>
       </dependency>
       <dependency>
+        <groupId>org.xerial.snappy</groupId>
+        <artifactId>snappy-java</artifactId>
+        <version>1.1.10.3</version>
+      </dependency>
+      <dependency>
         <groupId>stax</groupId>
         <artifactId>stax-api</artifactId>
         <version>1.0.1</version>
