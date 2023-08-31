@@ -121,6 +121,7 @@ public class SpringdocAutoConfiguration {
 
         final BeanConfig bc = new BeanConfig();
         final Info info = new Info();
+        bc.setInfo(info);
         final RestConfiguration rc = camelContext.getRestConfiguration();
         Map<String, Object> apiProps = Optional.ofNullable(rc.getApiProperties()).orElseGet(HashMap::new);
         initOpenApi(bc, info, apiProps, 
