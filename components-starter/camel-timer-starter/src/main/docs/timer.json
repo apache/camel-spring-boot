@@ -37,6 +37,13 @@
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the timer component. This is enabled by default.",
       "sourceType": "org.apache.camel.component.timer.springboot.TimerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.timer.include-metadata",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include metadata in the exchange such as fired time, timer name, timer count etc.",
+      "sourceType": "org.apache.camel.component.timer.springboot.TimerComponentConfiguration",
+      "defaultValue": false
     }
   ],
   "hints": []

@@ -44,6 +44,11 @@ public class TimerComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Whether to include metadata in the exchange such as fired time, timer
+     * name, timer count etc.
+     */
+    private Boolean includeMetadata = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -59,6 +64,14 @@ public class TimerComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getIncludeMetadata() {
+        return includeMetadata;
+    }
+
+    public void setIncludeMetadata(Boolean includeMetadata) {
+        this.includeMetadata = includeMetadata;
     }
 
     public Boolean getAutowiredEnabled() {
