@@ -45,6 +45,13 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.elasticsearch.enable-document-only-mode",
+      "type": "java.lang.Boolean",
+      "description": "Indicates whether the body of the message contains only documents. By default, it is set to false to be able to do the same requests as what the Document API supports (see https:\/\/www.elastic.co\/guide\/en\/elasticsearch\/reference\/current\/docs.html for more details). To ease the migration of routes based on the legacy component camel-elasticsearch-rest, you should consider enabling the mode especially if your routes do update operations.",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.elasticsearch.enable-s-s-l",
       "type": "java.lang.Boolean",
       "description": "Enable SSL",
