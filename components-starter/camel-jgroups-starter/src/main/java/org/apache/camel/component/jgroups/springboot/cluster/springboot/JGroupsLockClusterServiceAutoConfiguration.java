@@ -16,12 +16,10 @@
  */
 package org.apache.camel.component.jgroups.springboot.cluster.springboot;
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.component.jgroups.cluster.JGroupsLockClusterService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration;
-import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -31,14 +29,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import java.util.Optional;
+
 @Configuration
 @AutoConfigureBefore({ ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
 @ConditionalOnProperty(prefix = "camel.cluster.jgroups", name = "enabled")
 @EnableConfigurationProperties(JGroupsLockClusterServiceConfiguration.class)
 public class JGroupsLockClusterServiceAutoConfiguration {
-
-    @Autowired
-    private CamelContext camelContext;
 
     @Autowired
     private JGroupsLockClusterServiceConfiguration configuration;
@@ -48,8 +45,12 @@ public class JGroupsLockClusterServiceAutoConfiguration {
     public CamelClusterService zookeeperClusterService() throws Exception {
         JGroupsLockClusterService service = new JGroupsLockClusterService();
 
-        CamelPropertiesHelper.setCamelProperties(camelContext, service,
-                CamelPropertiesHelper.getNonNullProperties(camelContext, configuration), false);
+        Optional.ofNullable(configuration.getId())
+                .ifPresent(service::setId);
+        Optional.ofNullable(configuration.getJgroupsClusterName())
+                .ifPresent(service::setJgroupsClusterName);
+        Optional.ofNullable(configuration.getJgroupsConfig())
+                .ifPresent(service::setJgroupsConfig);
 
         return service;
     }

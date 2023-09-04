@@ -1,6 +1,11 @@
 {
   "groups": [
     {
+      "name": "camel.cluster.infinispan.remote",
+      "type": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
       "name": "camel.component.infinispan",
       "type": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
@@ -37,6 +42,91 @@
     }
   ],
   "properties": [
+    {
+      "name": "camel.cluster.infinispan.remote.attributes",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Custom service attributes.",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.cache-container",
+      "type": "org.infinispan.client.hotrod.RemoteCacheManager",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.cache-container-configuration",
+      "type": "org.infinispan.client.hotrod.configuration.Configuration",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.configuration-properties",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the zookeeper cluster service should be enabled or not, default is false.",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.hosts",
+      "type": "java.lang.String",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.id",
+      "type": "java.lang.String",
+      "description": "Cluster Service ID",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.lifespan",
+      "type": "java.lang.Long",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.lifespan-time-unit",
+      "type": "java.util.concurrent.TimeUnit",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.order",
+      "type": "java.lang.Integer",
+      "description": "Service lookup order\/priority.",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.password",
+      "type": "java.lang.String",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.sasl-mechanism",
+      "type": "java.lang.String",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.secure",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.security-realm",
+      "type": "java.lang.String",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.security-server-name",
+      "type": "java.lang.String",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.infinispan.remote.username",
+      "type": "java.lang.String",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
     {
       "name": "camel.component.infinispan.autowired-enabled",
       "type": "java.lang.Boolean",

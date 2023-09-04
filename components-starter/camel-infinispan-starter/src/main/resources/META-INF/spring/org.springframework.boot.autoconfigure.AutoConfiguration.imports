@@ -17,3 +17,4 @@
 
 org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConverter
 org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentAutoConfiguration
+org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceAutoConfiguration
