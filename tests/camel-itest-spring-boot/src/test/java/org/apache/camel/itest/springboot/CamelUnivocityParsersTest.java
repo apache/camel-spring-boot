@@ -20,6 +20,7 @@ import org.apache.camel.itest.springboot.util.ArquillianPackager;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.Archive;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -38,6 +39,7 @@ public class CamelUnivocityParsersTest extends AbstractSpringBootTestSupport {
                 .build();
     }
 
+    @Disabled("https://issues.apache.org/jira/browse/CAMEL-19864")
     @Test
     public void componentTests() throws Exception {
         this.runDataformatTest(config, "univocityCsv");
