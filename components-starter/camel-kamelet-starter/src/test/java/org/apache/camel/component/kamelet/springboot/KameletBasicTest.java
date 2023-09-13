@@ -22,6 +22,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.RouteBuilder;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.FluentProducerTemplate;
@@ -64,6 +65,7 @@ public class KameletBasicTest {
                 fluentTemplate.toF("kamelet:setBody/test?bodyValue=%s", body).request(String.class)).isEqualTo(body);
     }
 
+    @Disabled("https://issues.apache.org/jira/browse/CAMEL-19863")
     @Test
     public void canConsumeFromKamelet() {
         assertThat(
