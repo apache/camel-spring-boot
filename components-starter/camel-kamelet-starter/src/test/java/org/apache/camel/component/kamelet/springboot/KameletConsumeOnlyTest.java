@@ -19,6 +19,7 @@ package org.apache.camel.component.kamelet.springboot;
 import org.apache.camel.Exchange;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.RouteBuilder;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.apache.camel.ConsumerTemplate;
 
@@ -40,7 +41,7 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
         KameletConsumeOnlyTest.class,
     }
 )
-
+@Disabled("https://issues.apache.org/jira/browse/CAMEL-19863")
 public class KameletConsumeOnlyTest {
 
     @Autowired

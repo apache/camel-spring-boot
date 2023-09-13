@@ -22,6 +22,7 @@ import org.apache.camel.Processor;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.support.SynchronizationAdapter;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -43,7 +44,7 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
         KameletConsumerUoWIssueTest.class,
     }
 )
-
+@Disabled("https://issues.apache.org/jira/browse/CAMEL-19863")
 public class KameletConsumerUoWIssueTest {
 
     @Autowired
