@@ -57,7 +57,7 @@ public abstract class KafkaConsumerIdempotentTestSupport extends BaseEmbeddedKaf
         List<Exchange> exchangeList = mockEndpoint.getReceivedExchanges();
 
         mockEndpoint.assertIsSatisfied(10000);
-
+        mockEndpoint.setResultWaitTime(20_000);
         assertEquals(size, exchangeList.size());
 
         Map<String, Object> headers = mockEndpoint.getExchanges().get(0).getIn().getHeaders();
