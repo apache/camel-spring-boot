@@ -26,6 +26,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -46,6 +47,7 @@ import org.springframework.test.annotation.DirtiesContext;
                 InfinispanRemoteAggregationRepositoryOperationsIT.class
         }
 )
+@Disabled("https://issues.apache.org/jira/browse/CAMEL-19869")
 public class InfinispanRemoteAggregationRepositoryOperationsIT extends InfinispanRemoteTestSupport {
     private static InfinispanRemoteAggregationRepository aggregationRepository;
 
