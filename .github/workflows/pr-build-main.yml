@@ -21,6 +21,7 @@ on:
   pull_request:
     branches:
       - main
+      - camel-spring-boot-4.0.x
     paths-ignore:
       - README.md
       - Jenkinsfile
