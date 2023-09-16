@@ -65,7 +65,6 @@ public class KameletBasicTest {
                 fluentTemplate.toF("kamelet:setBody/test?bodyValue=%s", body).request(String.class)).isEqualTo(body);
     }
 
-    @Disabled("https://issues.apache.org/jira/browse/CAMEL-19863")
     @Test
     public void canConsumeFromKamelet() {
         assertThat(
@@ -107,7 +106,7 @@ public class KameletBasicTest {
                         .setBody().constant("{{bodyValue}}");
 
                 routeTemplate("tick")
-                        .from("timer:{{routeId}}?repeatCount=1&delay=-1")
+                        .from("timer:{{routeId}}?repeatCount=1&delay=-1&includeMetadata=true")
                         .setBody().exchangeProperty(Exchange.TIMER_COUNTER)
                         .to("kamelet:sink");
 

@@ -44,7 +44,7 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
         KameletConsumerUoWIssueTest.class,
     }
 )
-@Disabled("https://issues.apache.org/jira/browse/CAMEL-19863")
+
 public class KameletConsumerUoWIssueTest {
 
     @Autowired
@@ -77,7 +77,7 @@ public class KameletConsumerUoWIssueTest {
             @Override
             public void configure() {
                 routeTemplate("tick")
-                        .from("timer:tick?repeatCount=1&delay=-1")
+                        .from("timer:tick?repeatCount=1&delay=-1&includeMetadata=true")
                         .setBody().exchangeProperty(Exchange.TIMER_COUNTER)
                         .process(new Processor() {
                             @Override
