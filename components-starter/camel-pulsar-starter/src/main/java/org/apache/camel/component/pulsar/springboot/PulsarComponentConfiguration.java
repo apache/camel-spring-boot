@@ -229,6 +229,11 @@ public class PulsarComponentConfiguration
      */
     private CompressionType compressionType = CompressionType.NONE;
     /**
+     * Hashing function to use when choosing the partition to use for a
+     * particular message
+     */
+    private String hashingScheme = "JavaStringHash";
+    /**
      * The first message published will have a sequence Id of initialSequenceId
      * 1.
      */
@@ -587,6 +592,14 @@ public class PulsarComponentConfiguration
 
     public void setCompressionType(CompressionType compressionType) {
         this.compressionType = compressionType;
+    }
+
+    public String getHashingScheme() {
+        return hashingScheme;
+    }
+
+    public void setHashingScheme(String hashingScheme) {
+        this.hashingScheme = hashingScheme;
     }
 
     public Long getInitialSequenceId() {

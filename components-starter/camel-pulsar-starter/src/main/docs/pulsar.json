@@ -171,6 +171,13 @@
       "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
     },
     {
+      "name": "camel.component.pulsar.hashing-scheme",
+      "type": "java.lang.String",
+      "description": "Hashing function to use when choosing the partition to use for a particular message",
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": "JavaStringHash"
+    },
+    {
       "name": "camel.component.pulsar.initial-sequence-id",
       "type": "java.lang.Long",
       "description": "The first message published will have a sequence Id of initialSequenceId 1.",
