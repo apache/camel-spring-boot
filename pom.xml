@@ -124,7 +124,7 @@
         <hadoop2-version>2.10.0</hadoop2-version>
         <jakarta-jaxb-version>2.3.2</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
-        <jetty9-version>9.4.45.v20220203</jetty9-version>
+        <jetty9-version>9.4.52.v20230823</jetty9-version>
         <maven-compiler-plugin-version>3.10.1</maven-compiler-plugin-version>
         <maven-javadoc-plugin-version>3.4.1</maven-javadoc-plugin-version>
         <maven-surefire-plugin-version>3.0.0-M4</maven-surefire-plugin-version>
