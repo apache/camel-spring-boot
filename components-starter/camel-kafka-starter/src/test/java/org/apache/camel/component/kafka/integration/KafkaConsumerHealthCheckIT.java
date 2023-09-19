@@ -41,7 +41,6 @@ import org.apache.kafka.common.header.internals.RecordHeader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -69,7 +68,6 @@ import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
                 KafkaConsumerHealthCheckIT.TestConfiguration.class,
         }
 )
-@Disabled("https://issues.apache.org/jira/browse/CAMEL-19854")
 public class KafkaConsumerHealthCheckIT extends BaseEmbeddedKafkaTestSupport {
     public static final String TOPIC = "test-health";
 
