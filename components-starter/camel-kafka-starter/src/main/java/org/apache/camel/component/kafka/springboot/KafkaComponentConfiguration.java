@@ -288,10 +288,10 @@ public class KafkaComponentConfiguration
      */
     private Integer sessionTimeoutMs = 10000;
     /**
-     * This enables the use of a specific Avro reader for use with the Confluent
-     * Platform schema registry and the
-     * io.confluent.kafka.serializers.KafkaAvroDeserializer. This option is only
-     * available in the Confluent Platform (not standard Apache Kafka)
+     * This enables the use of a specific Avro reader for use with the in
+     * multiple Schema registries documentation with Avro Deserializers
+     * implementation. This option is only available externally (not standard
+     * Apache Kafka)
      */
     private Boolean specificAvroReader = false;
     /**
@@ -678,13 +678,6 @@ public class KafkaComponentConfiguration
      */
     private Boolean synchronous = false;
     /**
-     * URL of the Confluent Platform schema registry servers to use. The format
-     * is host1:port1,host2:port2. This is known as schema.registry.url in the
-     * Confluent Platform documentation. This option is only available in the
-     * Confluent Platform (not standard Apache Kafka)
-     */
-    private String schemaRegistryURL;
-    /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
      */
@@ -706,6 +699,13 @@ public class KafkaComponentConfiguration
      * exception in runtime
      */
     private String interceptorClasses;
+    /**
+     * URL of the schema registry servers to use. The format is
+     * host1:port1,host2:port2. This is known as schema.registry.url in multiple
+     * Schema registries documentation. This option is only available externally
+     * (not standard Apache Kafka)
+     */
+    private String schemaRegistryURL;
     /**
      * Login thread sleep time between refresh attempts.
      */
@@ -1526,14 +1526,6 @@ public class KafkaComponentConfiguration
         this.synchronous = synchronous;
     }
 
-    public String getSchemaRegistryURL() {
-        return schemaRegistryURL;
-    }
-
-    public void setSchemaRegistryURL(String schemaRegistryURL) {
-        this.schemaRegistryURL = schemaRegistryURL;
-    }
-
     public Boolean getHealthCheckConsumerEnabled() {
         return healthCheckConsumerEnabled;
     }
@@ -1556,6 +1548,14 @@ public class KafkaComponentConfiguration
 
     public void setInterceptorClasses(String interceptorClasses) {
         this.interceptorClasses = interceptorClasses;
+    }
+
+    public String getSchemaRegistryURL() {
+        return schemaRegistryURL;
+    }
+
+    public void setSchemaRegistryURL(String schemaRegistryURL) {
+        this.schemaRegistryURL = schemaRegistryURL;
     }
 
     public Integer getKerberosBeforeReloginMinTime() {

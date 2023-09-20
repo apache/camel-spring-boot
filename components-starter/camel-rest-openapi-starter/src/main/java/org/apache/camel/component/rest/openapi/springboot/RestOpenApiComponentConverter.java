@@ -39,6 +39,7 @@ public class RestOpenApiComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
     }
@@ -56,6 +57,7 @@ public class RestOpenApiComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
+            case "org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer": return applicationContext.getBean(ref, org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }
         return null;

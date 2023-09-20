@@ -17,6 +17,7 @@
 package org.apache.camel.component.rest.openapi.springboot;
 
 import java.net.URI;
+import org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -86,6 +87,18 @@ public class RestOpenApiComponentConfiguration
      * OpenApi specification. Can be overridden in endpoint configuration.
      */
     private String produces;
+    /**
+     * If request validation is enabled, this option provides the capability to
+     * customize the creation of OpenApiInteractionValidator used to validate
+     * requests. The option is a
+     * org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer type.
+     */
+    private RequestValidationCustomizer requestValidationCustomizer;
+    /**
+     * Enable validation of requests against the configured OpenAPI
+     * specification
+     */
+    private Boolean requestValidationEnabled = false;
     /**
      * Path to the OpenApi specification file. The scheme, host base path are
      * taken from this specification, but these can be overridden with
@@ -163,6 +176,23 @@ public class RestOpenApiComponentConfiguration
 
     public void setProduces(String produces) {
         this.produces = produces;
+    }
+
+    public RequestValidationCustomizer getRequestValidationCustomizer() {
+        return requestValidationCustomizer;
+    }
+
+    public void setRequestValidationCustomizer(
+            RequestValidationCustomizer requestValidationCustomizer) {
+        this.requestValidationCustomizer = requestValidationCustomizer;
+    }
+
+    public Boolean getRequestValidationEnabled() {
+        return requestValidationEnabled;
+    }
+
+    public void setRequestValidationEnabled(Boolean requestValidationEnabled) {
+        this.requestValidationEnabled = requestValidationEnabled;
     }
 
     public URI getSpecificationUri() {

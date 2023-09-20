@@ -33,7 +33,7 @@
     {
       "name": "camel.component.google-sheets-stream.application-name",
       "type": "java.lang.String",
-      "description": "Google sheets application name. Example would be camel-google-sheets\/1.0",
+      "description": "Google Sheets application name. Example would be camel-google-sheets\/1.0",
       "sourceType": "org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConfiguration"
     },
     {
@@ -134,12 +134,12 @@
     {
       "name": "camel.component.google-sheets-stream.refresh-token",
       "type": "java.lang.String",
-      "description": "OAuth 2 refresh token. Using this, the Google Calendar component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived.",
+      "description": "OAuth 2 refresh token. Using this, the Google Sheets component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived.",
       "sourceType": "org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConfiguration"
     },
     {
       "name": "camel.component.google-sheets-stream.scopes",
-      "type": "java.util.List<java.lang.String>",
+      "type": "java.util.Collection<java.lang.String>",
       "description": "Specifies the level of permissions you want a sheets application to have to a user account. See https:\/\/developers.google.com\/identity\/protocols\/googlescopes for more info.",
       "sourceType": "org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConfiguration"
     },
@@ -246,7 +246,7 @@
     {
       "name": "camel.component.google-sheets.scopes",
       "type": "java.util.Collection<java.lang.String>",
-      "description": "Sheets scopes",
+      "description": "Specifies the level of permissions you want a sheets application to have to a user account. See https:\/\/developers.google.com\/identity\/protocols\/googlescopes for more info.",
       "sourceType": "org.apache.camel.component.google.sheets.springboot.GoogleSheetsComponentConfiguration"
     },
     {
