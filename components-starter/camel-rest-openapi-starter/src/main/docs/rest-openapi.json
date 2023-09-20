@@ -69,6 +69,19 @@
       "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration"
     },
     {
+      "name": "camel.component.rest-openapi.request-validation-customizer",
+      "type": "org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer",
+      "description": "If request validation is enabled, this option provides the capability to customize the creation of OpenApiInteractionValidator used to validate requests. The option is a org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer type.",
+      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rest-openapi.request-validation-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable validation of requests against the configured OpenAPI specification",
+      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.rest-openapi.specification-uri",
       "type": "java.net.URI",
       "description": "Path to the OpenApi specification file. The scheme, host base path are taken from this specification, but these can be overridden with properties on the component or endpoint level. If not given the component tries to load openapi.json resource. Note that the host defined on the component and endpoint of this Component should contain the scheme, hostname and optionally the port in the URI syntax (i.e. https:\/\/api.example.com:8080). Can be overridden in endpoint configuration.",
