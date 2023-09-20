@@ -79,7 +79,7 @@ public class JettyHttpComponentConfiguration11
      * If enabled and an Exchange failed processing on the consumer side the
      * response's body won't contain the exception's stack trace.
      */
-    private Boolean muteException = false;
+    private Boolean muteException = true;
     /**
      * Allows to configure a custom value of the request buffer size on the
      * Jetty connectors.

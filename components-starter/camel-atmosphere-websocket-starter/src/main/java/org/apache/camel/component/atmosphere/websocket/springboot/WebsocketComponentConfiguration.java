@@ -51,7 +51,7 @@ public class WebsocketComponentConfiguration
      * If enabled and an Exchange failed processing on the consumer side the
      * response's body won't contain the exception's stack trace.
      */
-    private Boolean muteException = false;
+    private Boolean muteException = true;
     /**
      * Default name of servlet to use. The default name is CamelServlet.
      */

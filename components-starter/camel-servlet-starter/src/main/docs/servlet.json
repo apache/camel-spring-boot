@@ -92,7 +92,7 @@
       "type": "java.lang.Boolean",
       "description": "If enabled and an Exchange failed processing on the consumer side the response's body won't contain the exception's stack trace.",
       "sourceType": "org.apache.camel.component.servlet.springboot.ServletComponentConfiguration",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.component.servlet.servlet-name",
