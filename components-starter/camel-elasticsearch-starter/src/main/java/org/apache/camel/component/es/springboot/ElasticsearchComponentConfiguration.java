@@ -40,6 +40,16 @@ public class ElasticsearchComponentConfiguration
      */
     private Integer connectionTimeout = 30000;
     /**
+     * Indicates whether the body of the message contains only documents. By
+     * default, it is set to false to be able to do the same requests as what
+     * the Document API supports (see
+     * https://www.elastic.co/guide/en/elasticsearch/reference/current/docs.html
+     * for more details). To ease the migration of routes based on the legacy
+     * component camel-elasticsearch-rest, you should consider enabling the mode
+     * especially if your routes do update operations.
+     */
+    private Boolean enableDocumentOnlyMode = false;
+    /**
      * Comma separated list with ip:port formatted remote transport addresses to
      * use. The ip and port options must be left blank for hostAddresses to be
      * considered instead.
@@ -120,6 +130,14 @@ public class ElasticsearchComponentConfiguration
 
     public void setConnectionTimeout(Integer connectionTimeout) {
         this.connectionTimeout = connectionTimeout;
+    }
+
+    public Boolean getEnableDocumentOnlyMode() {
+        return enableDocumentOnlyMode;
+    }
+
+    public void setEnableDocumentOnlyMode(Boolean enableDocumentOnlyMode) {
+        this.enableDocumentOnlyMode = enableDocumentOnlyMode;
     }
 
     public String getHostAddresses() {

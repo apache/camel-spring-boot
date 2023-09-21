@@ -16,7 +16,7 @@
  */
 package org.apache.camel.component.google.sheets.stream.springboot;
 
-import java.util.List;
+import java.util.Collection;
 import org.apache.camel.component.google.sheets.GoogleSheetsClientFactory;
 import org.apache.camel.component.google.sheets.stream.GoogleSheetsStreamConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -38,7 +38,7 @@ public class GoogleSheetsStreamComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Google sheets application name. Example would be camel-google-sheets/1.0
+     * Google Sheets application name. Example would be camel-google-sheets/1.0
      */
     private String applicationName;
     /**
@@ -87,7 +87,7 @@ public class GoogleSheetsStreamComponentConfiguration
      * https://developers.google.com/identity/protocols/googlescopes for more
      * info.
      */
-    private List<String> scopes;
+    private Collection<String> scopes;
     /**
      * True if value range result should be split into rows or columns to
      * process each of them individually. When true each row or column is
@@ -136,9 +136,9 @@ public class GoogleSheetsStreamComponentConfiguration
      */
     private String clientSecret;
     /**
-     * OAuth 2 refresh token. Using this, the Google Calendar component can
-     * obtain a new accessToken whenever the current one expires - a necessity
-     * if the application is long-lived.
+     * OAuth 2 refresh token. Using this, the Google Sheets component can obtain
+     * a new accessToken whenever the current one expires - a necessity if the
+     * application is long-lived.
      */
     private String refreshToken;
     /**
@@ -218,11 +218,11 @@ public class GoogleSheetsStreamComponentConfiguration
         this.range = range;
     }
 
-    public List<String> getScopes() {
+    public Collection<String> getScopes() {
         return scopes;
     }
 
-    public void setScopes(List<String> scopes) {
+    public void setScopes(Collection<String> scopes) {
         this.scopes = scopes;
     }
 

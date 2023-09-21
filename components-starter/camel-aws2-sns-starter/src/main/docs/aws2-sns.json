@@ -140,9 +140,9 @@
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
-      "name": "camel.component.aws2-sns.queue-url",
+      "name": "camel.component.aws2-sns.queue-arn",
       "type": "java.lang.String",
-      "description": "The queueUrl to subscribe to",
+      "description": "The ARN endpoint to subscribe to",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {

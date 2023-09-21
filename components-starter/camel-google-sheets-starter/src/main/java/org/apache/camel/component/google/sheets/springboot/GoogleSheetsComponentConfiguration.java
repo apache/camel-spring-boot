@@ -55,7 +55,10 @@ public class GoogleSheetsComponentConfiguration
      */
     private String delegate;
     /**
-     * Sheets scopes
+     * Specifies the level of permissions you want a sheets application to have
+     * to a user account. See
+     * https://developers.google.com/identity/protocols/googlescopes for more
+     * info.
      */
     private Collection<String> scopes;
     /**
