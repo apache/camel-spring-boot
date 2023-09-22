@@ -110,6 +110,12 @@ public class CosmosDbComponentConfiguration
      */
     private String databaseEndpoint;
     /**
+     * The CosmosDB Indexing Policy that will be set in case of container
+     * creation, this option is related to createLeaseContainerIfNotExists and
+     * it will be taken into account when the latter is true.
+     */
+    private String indexingPolicy = "CONSISTENT";
+    /**
      * Sets the flag to enable writes on any regions for geo-replicated database
      * accounts in the Azure Cosmos DB service. When the value of this property
      * is true, the SDK will direct write operations to available writable
@@ -332,6 +338,14 @@ public class CosmosDbComponentConfiguration
 
     public void setDatabaseEndpoint(String databaseEndpoint) {
         this.databaseEndpoint = databaseEndpoint;
+    }
+
+    public String getIndexingPolicy() {
+        return indexingPolicy;
+    }
+
+    public void setIndexingPolicy(String indexingPolicy) {
+        this.indexingPolicy = indexingPolicy;
     }
 
     public Boolean getMultipleWriteRegionsEnabled() {
