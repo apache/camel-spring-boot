@@ -20,6 +20,7 @@ import com.azure.cosmos.ConsistencyLevel;
 import com.azure.cosmos.CosmosAsyncClient;
 import com.azure.cosmos.models.ChangeFeedProcessorOptions;
 import com.azure.cosmos.models.CosmosQueryRequestOptions;
+import com.azure.cosmos.models.IndexingPolicy;
 import com.azure.cosmos.models.ThroughputProperties;
 import org.apache.camel.component.azure.cosmosdb.CosmosDbComponent;
 import org.apache.camel.component.azure.cosmosdb.CosmosDbConfiguration;
@@ -109,12 +110,6 @@ public class CosmosDbComponentConfiguration
      * Sets the Azure Cosmos database endpoint the component will connect to.
      */
     private String databaseEndpoint;
-    /**
-     * The CosmosDB Indexing Policy that will be set in case of container
-     * creation, this option is related to createLeaseContainerIfNotExists and
-     * it will be taken into account when the latter is true.
-     */
-    private String indexingPolicy = "CONSISTENT";
     /**
      * Sets the flag to enable writes on any regions for geo-replicated database
      * accounts in the Azure Cosmos DB service. When the value of this property
@@ -239,6 +234,13 @@ public class CosmosDbComponentConfiguration
      */
     private CosmosQueryRequestOptions queryRequestOptions;
     /**
+     * The CosmosDB Indexing Policy that will be set in case of container
+     * creation, this option is related to createLeaseContainerIfNotExists and
+     * it will be taken into account when the latter is true. The option is a
+     * com.azure.cosmos.models.IndexingPolicy type.
+     */
+    private IndexingPolicy indexingPolicy;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -338,14 +340,6 @@ public class CosmosDbComponentConfiguration
 
     public void setDatabaseEndpoint(String databaseEndpoint) {
         this.databaseEndpoint = databaseEndpoint;
-    }
-
-    public String getIndexingPolicy() {
-        return indexingPolicy;
-    }
-
-    public void setIndexingPolicy(String indexingPolicy) {
-        this.indexingPolicy = indexingPolicy;
     }
 
     public Boolean getMultipleWriteRegionsEnabled() {
@@ -489,6 +483,14 @@ public class CosmosDbComponentConfiguration
     public void setQueryRequestOptions(
             CosmosQueryRequestOptions queryRequestOptions) {
         this.queryRequestOptions = queryRequestOptions;
+    }
+
+    public IndexingPolicy getIndexingPolicy() {
+        return indexingPolicy;
+    }
+
+    public void setIndexingPolicy(IndexingPolicy indexingPolicy) {
+        this.indexingPolicy = indexingPolicy;
     }
 
     public Boolean getAutowiredEnabled() {

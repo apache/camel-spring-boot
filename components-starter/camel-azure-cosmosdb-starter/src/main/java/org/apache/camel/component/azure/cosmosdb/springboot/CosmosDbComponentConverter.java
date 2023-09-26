@@ -44,6 +44,7 @@ public class CosmosDbComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, com.azure.cosmos.models.ThroughputProperties.class));
         answer.add(new ConvertiblePair(String.class, com.azure.cosmos.models.ChangeFeedProcessorOptions.class));
         answer.add(new ConvertiblePair(String.class, com.azure.cosmos.models.CosmosQueryRequestOptions.class));
+        answer.add(new ConvertiblePair(String.class, com.azure.cosmos.models.IndexingPolicy.class));
         return answer;
     }
 
@@ -65,6 +66,7 @@ public class CosmosDbComponentConverter implements GenericConverter {
             case "com.azure.cosmos.models.ThroughputProperties": return applicationContext.getBean(ref, com.azure.cosmos.models.ThroughputProperties.class);
             case "com.azure.cosmos.models.ChangeFeedProcessorOptions": return applicationContext.getBean(ref, com.azure.cosmos.models.ChangeFeedProcessorOptions.class);
             case "com.azure.cosmos.models.CosmosQueryRequestOptions": return applicationContext.getBean(ref, com.azure.cosmos.models.CosmosQueryRequestOptions.class);
+            case "com.azure.cosmos.models.IndexingPolicy": return applicationContext.getBean(ref, com.azure.cosmos.models.IndexingPolicy.class);
         }
         return null;
     }
