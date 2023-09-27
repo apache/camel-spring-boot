@@ -133,7 +133,7 @@
       "type": "java.lang.Integer",
       "description": "The configuration controls the maximum amount of time the client will wait for the response of a request. If the response is not received before the timeout elapses the client will resend the request if necessary or fail the request if retries are exhausted.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
-      "defaultValue": 40000
+      "defaultValue": 30000
     },
     {
       "name": "camel.component.kafka.consumers-count",
@@ -588,7 +588,7 @@
       "type": "java.lang.Integer",
       "description": "The timeout used to detect failures when using Kafka's group management facilities.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
-      "defaultValue": 10000
+      "defaultValue": 45000
     },
     {
       "name": "camel.component.kafka.shutdown-timeout",
