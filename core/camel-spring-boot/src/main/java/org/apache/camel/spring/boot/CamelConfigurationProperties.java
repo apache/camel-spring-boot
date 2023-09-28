@@ -760,6 +760,13 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean routesCollectorEnabled = true;
 
     /**
+     * Whether the routes collector should ignore any errors during loading and compiling routes.
+     *
+     * This is only intended for development or tooling.
+     */
+    private boolean routesCollectorIgnoreLoadingError;
+
+    /**
      * Used for inclusive filtering of routes from directories. The exclusive filtering takes precedence over inclusive
      * filtering. The pattern is using Ant-path style pattern.
      *

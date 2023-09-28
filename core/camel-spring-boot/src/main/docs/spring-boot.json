@@ -966,6 +966,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.springboot.routes-collector-ignore-loading-error",
+      "type": "java.lang.Boolean",
+      "description": "Whether the routes collector should ignore any errors during loading and compiling routes. This is only intended for development or tooling.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.springboot.routes-exclude-pattern",
       "type": "java.lang.String",
       "description": "Used for exclusive filtering of routes from directories. The exclusive filtering takes precedence over inclusive filtering. The pattern is using Ant-path style pattern. Multiple patterns can be specified separated by comma, as example, to exclude all the routes from a directory whose name contains foo use: &#42;&#42;\/*foo*.",
