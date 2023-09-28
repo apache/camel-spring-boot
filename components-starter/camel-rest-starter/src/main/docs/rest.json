@@ -87,6 +87,12 @@
       "sourceType": "org.apache.camel.component.rest.springboot.RestComponentConfiguration"
     },
     {
+      "name": "camel.component.rest.header-filter-strategy",
+      "type": "org.apache.camel.spi.HeaderFilterStrategy",
+      "description": "To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.",
+      "sourceType": "org.apache.camel.component.rest.springboot.RestComponentConfiguration"
+    },
+    {
       "name": "camel.component.rest.host",
       "type": "java.lang.String",
       "description": "Host and port of HTTP service to use (override host in swagger schema)",

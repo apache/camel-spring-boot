@@ -17,3 +17,4 @@
 
 org.apache.camel.component.rest.springboot.RestApiComponentAutoConfiguration
 org.apache.camel.component.rest.springboot.RestComponentAutoConfiguration
+org.apache.camel.component.rest.springboot.RestComponentConverter

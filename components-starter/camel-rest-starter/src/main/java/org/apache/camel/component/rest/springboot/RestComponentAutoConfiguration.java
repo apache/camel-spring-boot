@@ -42,7 +42,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,RestComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.rest"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, RestComponentConverter.class})
 public class RestComponentAutoConfiguration {
 
     @Autowired
