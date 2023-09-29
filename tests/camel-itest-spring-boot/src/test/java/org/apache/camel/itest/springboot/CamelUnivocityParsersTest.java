@@ -39,7 +39,6 @@ public class CamelUnivocityParsersTest extends AbstractSpringBootTestSupport {
                 .build();
     }
 
-    @Disabled("https://issues.apache.org/jira/browse/CAMEL-19864")
     @Test
     public void componentTests() throws Exception {
         this.runDataformatTest(config, "univocityCsv");
