@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>dsl-starter</artifactId>
-        <version>3.21.1-SNAPSHOT</version>
+        <version>3.21.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-spring-boot-xml-starter</artifactId>
-            <version>${camel-version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
