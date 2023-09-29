@@ -64,7 +64,7 @@
     {
       "name": "camel.dataformat.univocity-csv.empty-value",
       "type": "java.lang.String",
-      "description": "The String representation of an empty value",
+      "description": "The String representation of an empty value.",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration"
     },
     {
@@ -76,7 +76,7 @@
     {
       "name": "camel.dataformat.univocity-csv.header-extraction-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not the header must be read in the first line of the test document The default value is false",
+      "description": "Whether or not the header must be read in the first line of the test document. The default value is false",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
       "defaultValue": false
     },
@@ -104,22 +104,21 @@
     {
       "name": "camel.dataformat.univocity-csv.lazy-load",
       "type": "java.lang.Boolean",
-      "description": "Whether the unmarshalling should produce an iterator that reads the lines on the fly or if all the lines must be read at one. The default value is false",
+      "description": "Whether the unmarshalling should produce an iterator that reads the lines on the fly or if all the lines must be read at once. The default value is false",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.univocity-csv.line-separator",
       "type": "java.lang.String",
-      "description": "The line separator of the files The default value is to use the JVM platform line separator",
+      "description": "The line separator of the files. The default value is to use the JVM platform line separator",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.univocity-csv.normalized-line-separator",
       "type": "java.lang.String",
-      "description": "The normalized line separator of the files The default value is a new line character.",
-      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration",
-      "defaultValue": "\\n"
+      "description": "The normalized line separator of the files. The default value is a new line character.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityCsvDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.univocity-csv.null-value",
@@ -183,7 +182,7 @@
     {
       "name": "camel.dataformat.univocity-fixed.empty-value",
       "type": "java.lang.String",
-      "description": "The String representation of an empty value",
+      "description": "The String representation of an empty value.",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedDataFormatConfiguration"
     },
     {
@@ -195,7 +194,7 @@
     {
       "name": "camel.dataformat.univocity-fixed.header-extraction-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not the header must be read in the first line of the test document The default value is false",
+      "description": "Whether or not the header must be read in the first line of the test document. The default value is false",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedDataFormatConfiguration",
       "defaultValue": false
     },
@@ -223,22 +222,21 @@
     {
       "name": "camel.dataformat.univocity-fixed.lazy-load",
       "type": "java.lang.Boolean",
-      "description": "Whether the unmarshalling should produce an iterator that reads the lines on the fly or if all the lines must be read at one. The default value is false",
+      "description": "Whether the unmarshalling should produce an iterator that reads the lines on the fly or if all the lines must be read at once. The default value is false",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.univocity-fixed.line-separator",
       "type": "java.lang.String",
-      "description": "The line separator of the files The default value is to use the JVM platform line separator",
+      "description": "The line separator of the files. The default value is to use the JVM platform line separator",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.univocity-fixed.normalized-line-separator",
       "type": "java.lang.String",
-      "description": "The normalized line separator of the files The default value is a new line character.",
-      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedDataFormatConfiguration",
-      "defaultValue": "\\n"
+      "description": "The normalized line separator of the files. The default value is a new line character.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityFixedDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.univocity-fixed.null-value",
@@ -301,7 +299,7 @@
     {
       "name": "camel.dataformat.univocity-tsv.empty-value",
       "type": "java.lang.String",
-      "description": "The String representation of an empty value",
+      "description": "The String representation of an empty value.",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration"
     },
     {
@@ -320,7 +318,7 @@
     {
       "name": "camel.dataformat.univocity-tsv.header-extraction-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether or not the header must be read in the first line of the test document The default value is false",
+      "description": "Whether or not the header must be read in the first line of the test document. The default value is false",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
       "defaultValue": false
     },
@@ -348,22 +346,21 @@
     {
       "name": "camel.dataformat.univocity-tsv.lazy-load",
       "type": "java.lang.Boolean",
-      "description": "Whether the unmarshalling should produce an iterator that reads the lines on the fly or if all the lines must be read at one. The default value is false",
+      "description": "Whether the unmarshalling should produce an iterator that reads the lines on the fly or if all the lines must be read at once. The default value is false",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.univocity-tsv.line-separator",
       "type": "java.lang.String",
-      "description": "The line separator of the files The default value is to use the JVM platform line separator",
+      "description": "The line separator of the files. The default value is to use the JVM platform line separator",
       "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.univocity-tsv.normalized-line-separator",
       "type": "java.lang.String",
-      "description": "The normalized line separator of the files The default value is a new line character.",
-      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration",
-      "defaultValue": "\\n"
+      "description": "The normalized line separator of the files. The default value is a new line character.",
+      "sourceType": "org.apache.camel.dataformat.univocity.springboot.UniVocityTsvDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.univocity-tsv.null-value",

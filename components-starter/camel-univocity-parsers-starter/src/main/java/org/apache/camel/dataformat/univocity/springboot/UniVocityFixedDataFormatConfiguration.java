@@ -74,7 +74,7 @@ public class UniVocityFixedDataFormatConfiguration
     private Boolean headersDisabled = false;
     /**
      * Whether or not the header must be read in the first line of the test
-     * document The default value is false
+     * document. The default value is false
      */
     private Boolean headerExtractionEnabled = false;
     /**
@@ -82,26 +82,26 @@ public class UniVocityFixedDataFormatConfiguration
      */
     private Integer numberOfRecordsToRead;
     /**
-     * The String representation of an empty value
+     * The String representation of an empty value.
      */
     private String emptyValue;
     /**
-     * The line separator of the files The default value is to use the JVM
+     * The line separator of the files. The default value is to use the JVM
      * platform line separator
      */
     private String lineSeparator;
     /**
-     * The normalized line separator of the files The default value is a new
+     * The normalized line separator of the files. The default value is a new
      * line character.
      */
-    private String normalizedLineSeparator = "\\n";
+    private String normalizedLineSeparator;
     /**
      * The comment symbol. The default value is #
      */
     private String comment = "#";
     /**
      * Whether the unmarshalling should produce an iterator that reads the lines
-     * on the fly or if all the lines must be read at one. The default value is
+     * on the fly or if all the lines must be read at once. The default value is
      * false
      */
     private Boolean lazyLoad = false;
