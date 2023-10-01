@@ -121,6 +121,13 @@
       "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
       "sourceType": "org.apache.camel.language.bean.springboot.BeanLanguageConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.language.bean.validate",
+      "type": "java.lang.Boolean",
+      "description": "Whether to validate the bean has the configured method.",
+      "sourceType": "org.apache.camel.language.bean.springboot.BeanLanguageConfiguration",
+      "defaultValue": true
     }
   ],
   "hints": []

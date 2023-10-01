@@ -52,6 +52,10 @@ public class BeanLanguageConfiguration
      */
     private String scope = "Singleton";
     /**
+     * Whether to validate the bean has the configured method.
+     */
+    private Boolean validate = true;
+    /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
      */
@@ -63,6 +67,14 @@ public class BeanLanguageConfiguration
 
     public void setScope(String scope) {
         this.scope = scope;
+    }
+
+    public Boolean getValidate() {
+        return validate;
+    }
+
+    public void setValidate(Boolean validate) {
+        this.validate = validate;
     }
 
     public Boolean getTrim() {
