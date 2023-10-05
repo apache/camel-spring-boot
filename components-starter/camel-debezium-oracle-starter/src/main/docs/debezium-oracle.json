@@ -71,6 +71,12 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-oracle.custom-metric-tags",
+      "type": "java.lang.String",
+      "description": "The custom metric tags will accept key-value pairs to customize the MBean object name which should be appended the end of regular name, each key would represent a tag for the MBean object name, and the corresponding value would be the value of that tag the key is. For example: k1=v1,k2=v2",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-oracle.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
@@ -285,6 +291,12 @@
       "name": "camel.component.debezium-oracle.log-mining-buffer-infinispan-cache-events",
       "type": "java.lang.String",
       "description": "Specifies the XML configuration for the Infinispan 'events' cache",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-infinispan-cache-global",
+      "type": "java.lang.String",
+      "description": "Specifies the XML configuration for the Infinispan 'global' configuration",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
     },
     {
@@ -503,6 +515,24 @@
       "name": "camel.component.debezium-oracle.offset-storage-topic",
       "type": "java.lang.String",
       "description": "The name of the Kafka topic where offsets are to be stored. Required when offset.storage is set to the KafkaOffsetBackingStore.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.openlogreplicator-host",
+      "type": "java.lang.String",
+      "description": "The hostname of the OpenLogReplicator network service",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.openlogreplicator-port",
+      "type": "java.lang.Integer",
+      "description": "The port of the OpenLogReplicator network service",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.openlogreplicator-source",
+      "type": "java.lang.String",
+      "description": "The configured logical source name in the OpenLogReplicator configuration that is to stream changes",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
     },
     {

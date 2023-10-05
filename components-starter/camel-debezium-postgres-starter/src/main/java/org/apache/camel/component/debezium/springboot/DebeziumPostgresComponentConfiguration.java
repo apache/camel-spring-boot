@@ -153,6 +153,13 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String converters;
     /**
+     * The custom metric tags will accept key-value pairs to customize the MBean
+     * object name which should be appended the end of regular name, each key
+     * would represent a tag for the MBean object name, and the corresponding
+     * value would be the value of that tag the key is. For example: k1=v1,k2=v2
+     */
+    private String customMetricTags;
+    /**
      * The name of the database from which the connector should capture changes
      */
     private String databaseDbname;
@@ -813,6 +820,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setConverters(String converters) {
         this.converters = converters;
+    }
+
+    public String getCustomMetricTags() {
+        return customMetricTags;
+    }
+
+    public void setCustomMetricTags(String customMetricTags) {
+        this.customMetricTags = customMetricTags;
     }
 
     public String getDatabaseDbname() {

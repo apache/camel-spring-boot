@@ -132,13 +132,13 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String captureMode = "change_streams_update_full";
     /**
-     * A comma-separated list of regular expressions that match the collection
-     * names for which changes are to be excluded
+     * A comma-separated list of regular expressions or literals that match the
+     * collection names for which changes are to be excluded
      */
     private String collectionExcludeList;
     /**
-     * A comma-separated list of regular expressions that match the collection
-     * names for which changes are to be captured
+     * A comma-separated list of regular expressions or literals that match the
+     * collection names for which changes are to be captured
      */
     private String collectionIncludeList;
     /**
@@ -153,13 +153,20 @@ public class DebeziumMongodbComponentConfiguration
      */
     private Integer cursorMaxAwaitTimeMs;
     /**
-     * A comma-separated list of regular expressions that match the database
-     * names for which changes are to be excluded
+     * The custom metric tags will accept key-value pairs to customize the MBean
+     * object name which should be appended the end of regular name, each key
+     * would represent a tag for the MBean object name, and the corresponding
+     * value would be the value of that tag the key is. For example: k1=v1,k2=v2
+     */
+    private String customMetricTags;
+    /**
+     * A comma-separated list of regular expressions or literals that match the
+     * database names for which changes are to be excluded
      */
     private String databaseExcludeList;
     /**
-     * A comma-separated list of regular expressions that match the database
-     * names for which changes are to be captured
+     * A comma-separated list of regular expressions or literals that match the
+     * database names for which changes are to be captured
      */
     private String databaseIncludeList;
     /**
@@ -560,6 +567,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setCursorMaxAwaitTimeMs(Integer cursorMaxAwaitTimeMs) {
         this.cursorMaxAwaitTimeMs = cursorMaxAwaitTimeMs;
+    }
+
+    public String getCustomMetricTags() {
+        return customMetricTags;
+    }
+
+    public void setCustomMetricTags(String customMetricTags) {
+        this.customMetricTags = customMetricTags;
     }
 
     public String getDatabaseExcludeList() {

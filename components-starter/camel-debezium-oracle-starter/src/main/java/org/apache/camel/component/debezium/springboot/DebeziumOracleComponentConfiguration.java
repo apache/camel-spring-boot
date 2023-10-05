@@ -153,6 +153,13 @@ public class DebeziumOracleComponentConfiguration
      */
     private String converters;
     /**
+     * The custom metric tags will accept key-value pairs to customize the MBean
+     * object name which should be appended the end of regular name, each key
+     * would represent a tag for the MBean object name, and the corresponding
+     * value would be the value of that tag the key is. For example: k1=v1,k2=v2
+     */
+    private String customMetricTags;
+    /**
      * The adapter to use when capturing changes from the database. Options
      * include: 'logminer': (the default) to capture changes using native Oracle
      * LogMiner; 'xstream' to capture changes using Oracle XStreams
@@ -321,6 +328,10 @@ public class DebeziumOracleComponentConfiguration
      */
     private String logMiningBufferInfinispanCacheEvents;
     /**
+     * Specifies the XML configuration for the Infinispan 'global' configuration
+     */
+    private String logMiningBufferInfinispanCacheGlobal;
+    /**
      * Specifies the XML configuration for the Infinispan
      * 'processed-transactions' cache
      */
@@ -473,6 +484,19 @@ public class DebeziumOracleComponentConfiguration
      * 'sink' is in the list of enabled channels
      */
     private String notificationSinkTopicName;
+    /**
+     * The hostname of the OpenLogReplicator network service
+     */
+    private String openlogreplicatorHost;
+    /**
+     * The port of the OpenLogReplicator network service
+     */
+    private Integer openlogreplicatorPort;
+    /**
+     * The configured logical source name in the OpenLogReplicator configuration
+     * that is to stream changes
+     */
+    private String openlogreplicatorSource;
     /**
      * Time to wait for new change events to appear after receiving no events,
      * given in milliseconds. Defaults to 500 ms. The option is a long type.
@@ -854,6 +878,14 @@ public class DebeziumOracleComponentConfiguration
         this.converters = converters;
     }
 
+    public String getCustomMetricTags() {
+        return customMetricTags;
+    }
+
+    public void setCustomMetricTags(String customMetricTags) {
+        this.customMetricTags = customMetricTags;
+    }
+
     public String getDatabaseConnectionAdapter() {
         return databaseConnectionAdapter;
     }
@@ -1092,6 +1124,15 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningBufferInfinispanCacheEvents = logMiningBufferInfinispanCacheEvents;
     }
 
+    public String getLogMiningBufferInfinispanCacheGlobal() {
+        return logMiningBufferInfinispanCacheGlobal;
+    }
+
+    public void setLogMiningBufferInfinispanCacheGlobal(
+            String logMiningBufferInfinispanCacheGlobal) {
+        this.logMiningBufferInfinispanCacheGlobal = logMiningBufferInfinispanCacheGlobal;
+    }
+
     public String getLogMiningBufferInfinispanCacheProcessedTransactions() {
         return logMiningBufferInfinispanCacheProcessedTransactions;
     }
@@ -1301,6 +1342,30 @@ public class DebeziumOracleComponentConfiguration
 
     public void setNotificationSinkTopicName(String notificationSinkTopicName) {
         this.notificationSinkTopicName = notificationSinkTopicName;
+    }
+
+    public String getOpenlogreplicatorHost() {
+        return openlogreplicatorHost;
+    }
+
+    public void setOpenlogreplicatorHost(String openlogreplicatorHost) {
+        this.openlogreplicatorHost = openlogreplicatorHost;
+    }
+
+    public Integer getOpenlogreplicatorPort() {
+        return openlogreplicatorPort;
+    }
+
+    public void setOpenlogreplicatorPort(Integer openlogreplicatorPort) {
+        this.openlogreplicatorPort = openlogreplicatorPort;
+    }
+
+    public String getOpenlogreplicatorSource() {
+        return openlogreplicatorSource;
+    }
+
+    public void setOpenlogreplicatorSource(String openlogreplicatorSource) {
+        this.openlogreplicatorSource = openlogreplicatorSource;
     }
 
     public Long getPollIntervalMs() {

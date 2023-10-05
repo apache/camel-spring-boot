@@ -153,6 +153,13 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String converters;
     /**
+     * The custom metric tags will accept key-value pairs to customize the MBean
+     * object name which should be appended the end of regular name, each key
+     * would represent a tag for the MBean object name, and the corresponding
+     * value would be the value of that tag the key is. For example: k1=v1,k2=v2
+     */
+    private String customMetricTags;
+    /**
      * Resolvable hostname or IP address of the database server.
      */
     private String databaseHostname;
@@ -315,11 +322,6 @@ public class DebeziumSqlserverComponentConfiguration
      * Enables transaction metadata extraction together with event counting
      */
     private Boolean provideTransactionMetadata = false;
-    /**
-     * The maximum number of records that should be loaded into memory while
-     * streaming. A value of '0' uses the default JDBC fetch size.
-     */
-    private Integer queryFetchSize = 0;
     /**
      * Time to wait before restarting connector after retriable exception
      * occurs. Defaults to 10000ms. The option is a long type.
@@ -676,6 +678,14 @@ public class DebeziumSqlserverComponentConfiguration
         this.converters = converters;
     }
 
+    public String getCustomMetricTags() {
+        return customMetricTags;
+    }
+
+    public void setCustomMetricTags(String customMetricTags) {
+        this.customMetricTags = customMetricTags;
+    }
+
     public String getDatabaseHostname() {
         return databaseHostname;
     }
@@ -896,14 +906,6 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setProvideTransactionMetadata(Boolean provideTransactionMetadata) {
         this.provideTransactionMetadata = provideTransactionMetadata;
-    }
-
-    public Integer getQueryFetchSize() {
-        return queryFetchSize;
-    }
-
-    public void setQueryFetchSize(Integer queryFetchSize) {
-        this.queryFetchSize = queryFetchSize;
     }
 
     public Long getRetriableRestartConnectorWaitMs() {
