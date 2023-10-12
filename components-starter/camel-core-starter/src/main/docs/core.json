@@ -754,6 +754,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.rest.enable-no-content-response",
+      "type": "java.lang.Boolean",
+      "description": "Whether to return HTTP 204 with an empty body when a response contains an empty JSON object or XML root object. The default value is false.",
+      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.rest.endpoint-property",
       "type": "java.util.Map<java.lang.String,java.lang.Object>",
       "description": "Allows to configure as many additional properties for the rest endpoint in use.",

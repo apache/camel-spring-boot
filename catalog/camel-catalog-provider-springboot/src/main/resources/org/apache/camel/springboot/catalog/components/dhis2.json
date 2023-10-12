@@ -8,7 +8,7 @@
     "firstVersion": "4.0.0",
     "label": "api",
     "javaType": "org.apache.camel.component.dhis2.Dhis2Component",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-dhis2-starter",
     "version": "4.2.0-SNAPSHOT",

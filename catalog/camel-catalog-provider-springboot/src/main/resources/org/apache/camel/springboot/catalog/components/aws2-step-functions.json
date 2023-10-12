@@ -8,7 +8,7 @@
     "firstVersion": "4.0.0",
     "label": "cloud,serverless",
     "javaType": "org.apache.camel.component.aws2.stepfunctions.StepFunctions2Component",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-aws2-step-functions-starter",
     "version": "4.2.0-SNAPSHOT",

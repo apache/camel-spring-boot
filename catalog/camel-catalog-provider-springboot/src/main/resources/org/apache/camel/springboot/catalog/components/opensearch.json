@@ -8,7 +8,7 @@
     "firstVersion": "4.0.0",
     "label": "search,monitoring",
     "javaType": "org.apache.camel.component.opensearch.OpensearchComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-opensearch-starter",
     "version": "4.2.0-SNAPSHOT",

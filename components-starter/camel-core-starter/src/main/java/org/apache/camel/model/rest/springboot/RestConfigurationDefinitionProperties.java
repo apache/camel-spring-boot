@@ -149,6 +149,11 @@ public class RestConfigurationDefinitionProperties {
      */
     private Boolean enableCors = false;
     /**
+     * Whether to return HTTP 204 with an empty body when a response contains an
+     * empty JSON object or XML root object. The default value is false.
+     */
+    private Boolean enableNoContentResponse = false;
+    /**
      * Inline routes in rest-dsl which are linked using direct endpoints. By
      * default, each service in Rest DSL is an individual route, meaning that
      * you would have at least two routes per service (rest-dsl, and the route
@@ -346,6 +351,14 @@ public class RestConfigurationDefinitionProperties {
 
     public void setEnableCors(Boolean enableCors) {
         this.enableCors = enableCors;
+    }
+
+    public Boolean getEnableNoContentResponse() {
+        return enableNoContentResponse;
+    }
+
+    public void setEnableNoContentResponse(Boolean enableNoContentResponse) {
+        this.enableNoContentResponse = enableNoContentResponse;
     }
 
     public Boolean getInlineRoutes() {
