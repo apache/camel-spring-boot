@@ -277,6 +277,15 @@ public class KafkaComponentConfiguration
      */
     private Long pollTimeoutMs = 5000L;
     /**
+     * Whether to eager validate that broker host:port is valid and can be DNS
+     * resolved to known host during starting this consumer. If the validation
+     * fails then an exception is thrown which makes Camel fail fast. Disabling
+     * this will postpone the validation after the consumer is started, and
+     * Camel will keep re-connecting in case of validation or DNS resolution
+     * error.
+     */
+    private Boolean preValidateHostAndPort = true;
+    /**
      * Set if KafkaConsumer will read from the beginning or the end on startup:
      * SeekPolicy.BEGINNING: read from the beginning. SeekPolicy.END: read from
      * the end.
@@ -1118,6 +1127,14 @@ public class KafkaComponentConfiguration
 
     public void setPollTimeoutMs(Long pollTimeoutMs) {
         this.pollTimeoutMs = pollTimeoutMs;
+    }
+
+    public Boolean getPreValidateHostAndPort() {
+        return preValidateHostAndPort;
+    }
+
+    public void setPreValidateHostAndPort(Boolean preValidateHostAndPort) {
+        this.preValidateHostAndPort = preValidateHostAndPort;
     }
 
     public SeekPolicy getSeekTo() {

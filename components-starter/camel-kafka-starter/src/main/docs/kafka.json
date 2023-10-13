@@ -470,6 +470,13 @@
       "defaultValue": 5000
     },
     {
+      "name": "camel.component.kafka.pre-validate-host-and-port",
+      "type": "java.lang.Boolean",
+      "description": "Whether to eager validate that broker host:port is valid and can be DNS resolved to known host during starting this consumer. If the validation fails then an exception is thrown which makes Camel fail fast. Disabling this will postpone the validation after the consumer is started, and Camel will keep re-connecting in case of validation or DNS resolution error.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.kafka.producer-batch-size",
       "type": "java.lang.Integer",
       "description": "The producer will attempt to batch records together into fewer requests whenever multiple records are being sent to the same partition. This helps performance on both the client and the server. This configuration controls the default batch size in bytes. No attempt will be made to batch records larger than this size. Requests sent to brokers will contain multiple batches, one for each partition with data available to be sent. A small batch size will make batching less common and may reduce throughput (a batch size of zero will disable batching entirely). A very large batch size may use memory a bit more wastefully as we will always allocate a buffer of the specified batch size in anticipation of additional records.",
