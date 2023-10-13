@@ -155,7 +155,7 @@ public class KafkaComponentConfiguration
      * before the timeout elapses the client will resend the request if
      * necessary or fail the request if retries are exhausted.
      */
-    private Integer consumerRequestTimeoutMs = 40000;
+    private Integer consumerRequestTimeoutMs = 30000;
     /**
      * The number of consumers that connect to kafka server. Each consumer is
      * run on a separate thread, that retrieves and process the incoming data.
@@ -286,7 +286,7 @@ public class KafkaComponentConfiguration
      * The timeout used to detect failures when using Kafka's group management
      * facilities.
      */
-    private Integer sessionTimeoutMs = 10000;
+    private Integer sessionTimeoutMs = 45000;
     /**
      * This enables the use of a specific Avro reader for use with the Confluent
      * Platform schema registry and the
