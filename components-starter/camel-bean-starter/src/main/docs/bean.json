@@ -43,6 +43,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.bean.bean-info-cache-size",
+      "type": "java.lang.Integer",
+      "description": "Maximum cache size of internal cache for bean introspection. Setting a value of 0 or negative will disable the cache.",
+      "sourceType": "org.apache.camel.component.bean.springboot.BeanComponentConfiguration",
+      "defaultValue": 1000
+    },
+    {
       "name": "camel.component.bean.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
@@ -72,6 +79,13 @@
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
       "sourceType": "org.apache.camel.component.beanclass.springboot.ClassComponentConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.component.class.bean-info-cache-size",
+      "type": "java.lang.Integer",
+      "description": "Maximum cache size of internal cache for bean introspection. Setting a value of 0 or negative will disable the cache.",
+      "sourceType": "org.apache.camel.component.beanclass.springboot.ClassComponentConfiguration",
+      "defaultValue": 1000
     },
     {
       "name": "camel.component.class.customizer.enabled",
