@@ -466,7 +466,7 @@ public class KafkaComponentConfiguration
      * the specified time waiting for more records to show up. This setting
      * defaults to 0 (i.e. no delay). Setting linger.ms=5, for example, would
      * have the effect of reducing the number of requests sent but would add up
-     * to 5ms of latency to records sent in the absense of load.
+     * to 5ms of latency to records sent in the absence of load.
      */
     private Integer lingerMs = 0;
     /**
