@@ -17,22 +17,23 @@
 package org.apache.camel.spring.boot;
 
 import org.apache.camel.component.properties.DefaultPropertiesParser;
-import org.apache.camel.component.properties.PropertiesLookup;
 import org.springframework.core.env.Environment;
 
-class SpringPropertiesParser extends DefaultPropertiesParser {
+/**
+ * Extension to {@link DefaultPropertiesParser} that will lookup
+ * in Spring via {@link Environment#getProperty(String)}.
+ */
+public class SpringPropertiesParser extends DefaultPropertiesParser {
 
     // Members
     private final Environment env;
 
-    SpringPropertiesParser(Environment env) {
+    public SpringPropertiesParser(Environment env) {
         this.env = env;
     }
 
-    // Overridden
-
     @Override
-    public String parseProperty(String key, String value, PropertiesLookup properties) {
+    public String customLookup(String key) {
         return env.getProperty(key);
     }
 
