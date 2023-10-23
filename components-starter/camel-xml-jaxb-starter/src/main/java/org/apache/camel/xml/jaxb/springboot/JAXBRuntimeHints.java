@@ -196,9 +196,11 @@ final class JAXBRuntimeHints implements RuntimeHintsRegistrar {
             }
             applyIfMatch(c, XmlJavaTypeAdapter.class, XmlJavaTypeAdapter::value,
                     type -> hints.reflection().registerType(type, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
-                    MemberCategory.INVOKE_DECLARED_METHODS, MemberCategory.DECLARED_FIELDS));
+                            MemberCategory.INVOKE_DECLARED_METHODS, MemberCategory.INVOKE_PUBLIC_METHODS,
+                            MemberCategory.DECLARED_FIELDS));
             hints.reflection().registerType(c, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
-                    MemberCategory.INVOKE_DECLARED_METHODS, MemberCategory.DECLARED_FIELDS);
+                    MemberCategory.INVOKE_DECLARED_METHODS, MemberCategory.INVOKE_PUBLIC_METHODS,
+                    MemberCategory.DECLARED_FIELDS);
         }
         boolean classDetected = false;
         for (String className : getClassesFromIndexes(classLoader)) {
@@ -217,7 +219,7 @@ final class JAXBRuntimeHints implements RuntimeHintsRegistrar {
                 MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS);
         for (Class<?> c : JAXB_ANNOTATIONS) {
             hints.reflection().registerType(c, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
-                    MemberCategory.INVOKE_DECLARED_METHODS);
+                    MemberCategory.INVOKE_DECLARED_METHODS, MemberCategory.INVOKE_PUBLIC_METHODS);
         }
         hints.proxies().registerJdkProxy(TypeReference.of(XmlSeeAlso.class), TypeReference.of("org.glassfish.jaxb.core.v2.model.annotation.Locatable"));
         for (String className : NATIVE_PROXY_DEFINITIONS) {
@@ -225,7 +227,8 @@ final class JAXBRuntimeHints implements RuntimeHintsRegistrar {
         }
         for (String className : JAXB_RUNTIME_CLASSES) {
             hints.reflection().registerTypeIfPresent(classLoader, className,
-                    MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
+                    MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
+                    MemberCategory.INVOKE_DECLARED_METHODS, MemberCategory.INVOKE_PUBLIC_METHODS);
         }
         // Register the JAXB resource bundles
         hints.reflection().registerTypeIfPresent(classLoader, "jakarta.xml.bind.Messages");
