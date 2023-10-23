@@ -236,7 +236,7 @@
     {
       "name": "camel.component.aws2-s3.multi-part-upload",
       "type": "java.lang.Boolean",
-      "description": "If it is true, camel will upload the file with multi part format, the part size is decided by the option of partSize",
+      "description": "If it is true, camel will upload the file with multi-part format, the part size is decided by the partSize option. Camel will only do multi-part uploads for files that are larger than the part-size thresholds. Files that are smaller will be uploaded in a single operation.",
       "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
       "defaultValue": false
     },
@@ -262,7 +262,7 @@
     {
       "name": "camel.component.aws2-s3.part-size",
       "type": "java.lang.Long",
-      "description": "Setup the partSize which is used in multi part upload, the default size is 25M.",
+      "description": "Setup the partSize which is used in multi-part upload, the default size is 25M. Camel will only do multi-part uploads for files that are larger than the part-size thresholds. Files that are smaller will be uploaded in a single operation.",
       "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
       "defaultValue": 26214400
     },
