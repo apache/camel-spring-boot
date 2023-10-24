@@ -23,7 +23,6 @@ import static org.apache.camel.component.jira.JiraConstants.MINUTES_SPENT;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssueWithComments;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssueWithWorkLogs;
 import static org.apache.camel.component.jira.springboot.test.Utils.newWorkLog;
-import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.JIRA_CREDENTIALS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.lenient;
@@ -236,7 +235,7 @@ public class AddWorkLogProducerTest {
                 @Override
                 public void configure() throws Exception {
                     from("direct:start")
-                    .to("jira://addWorkLog?jiraUrl=" + JIRA_CREDENTIALS)
+                    .to("jira://addWorkLog?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                     .to(mockResult);
                 }
             };

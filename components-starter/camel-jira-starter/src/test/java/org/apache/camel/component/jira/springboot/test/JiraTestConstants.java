@@ -16,13 +16,24 @@
  */
 package org.apache.camel.component.jira.springboot.test;
 
-public interface JiraTestConstants {
+import java.io.IOException;
+import java.util.Properties;
 
-    String KEY = "TST";
-    String TEST_JIRA_URL = "https://somerepo.atlassian.net";
-    String PROJECT = "TST";
-    String USERNAME = "someguy";
-    String PASSWORD = "my_password";
-    String JIRA_CREDENTIALS = TEST_JIRA_URL + "&username=" + USERNAME + "&password=" + PASSWORD;
-    String WATCHED_COMPONENTS = "Priority,Status,Resolution";
+public class JiraTestConstants {
+
+    static String KEY = "TST";
+    static String TEST_JIRA_URL = "https://somerepo.atlassian.net";
+    static String PROJECT = "TST";
+    static String WATCHED_COMPONENTS = "Priority,Status,Resolution";
+
+    private static Properties loadAuthProperties() throws IOException {
+        Properties properties = new Properties();
+        properties.load(JiraTestConstants.class.getClassLoader().getResourceAsStream("jiraauth.properties"));
+        return properties;
+    }
+
+    public static String getJiraCredentials() throws IOException {
+        Properties props = loadAuthProperties();
+        return TEST_JIRA_URL + "&username=" + props.getProperty("username") + "&password=" + props.getProperty("password");
+    }
 }

@@ -23,7 +23,6 @@ import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FAC
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.TEST_JIRA_URL;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssue;
 import static org.apache.camel.component.jira.springboot.test.Utils.transitionIssueDone;
-import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.JIRA_CREDENTIALS;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.KEY;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
@@ -158,7 +157,7 @@ public class TransitionIssueProducerTest {
                     from("direct:start")
                             .setHeader(ISSUE_KEY, () -> KEY + "-1")
                             .setHeader(ISSUE_TRANSITION_ID, () -> 31)
-                            .to("jira://transitionIssue?jiraUrl=" + JIRA_CREDENTIALS)
+                            .to("jira://transitionIssue?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                             .to(mockResult);
                 }
             };

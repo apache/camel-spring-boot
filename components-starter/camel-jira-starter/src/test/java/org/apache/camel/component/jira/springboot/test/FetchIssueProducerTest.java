@@ -19,7 +19,6 @@ package org.apache.camel.component.jira.springboot.test;
 
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_KEY;
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
-import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.JIRA_CREDENTIALS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
@@ -159,7 +158,7 @@ public class FetchIssueProducerTest {
                 @Override
                 public void configure() throws Exception {
                     from("direct:start")
-                    .to("jira://fetchIssue?jiraUrl=" + JIRA_CREDENTIALS)
+                    .to("jira://fetchIssue?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                     .to(mockResult);
                 }
             };

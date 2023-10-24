@@ -18,7 +18,6 @@ package org.apache.camel.component.jira.springboot.test;
 
 
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
-import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.JIRA_CREDENTIALS;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.PROJECT;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.WATCHED_COMPONENTS;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssue;
@@ -29,6 +28,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -203,8 +203,8 @@ public class WatchUpdatesConsumerTest {
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
-                public void configure() {
-                    from("jira://watchUpdates?jiraUrl=" + JIRA_CREDENTIALS
+                public void configure() throws IOException {
+                    from("jira://watchUpdates?jiraUrl=" + JiraTestConstants.getJiraCredentials()
                          + "&jql=project=" + PROJECT + "&delay=5000&watchedFields=" + WATCHED_COMPONENTS)
                                  .to(mockResult);
                 }
