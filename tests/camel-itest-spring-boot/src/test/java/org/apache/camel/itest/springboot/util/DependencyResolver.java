@@ -151,6 +151,9 @@ public final class DependencyResolver {
     }
 
     private static String xpath(File pom, String expression) throws Exception {
+        factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl",true);
+        factory.setFeature("http://xml.org/sax/features/external-general-entities",false);
+        factory.setFeature("http://xml.org/sax/features/external-parameter-entities",false);
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document doc = builder.parse(pom);
         XPath xpath = xPathfactory.newXPath();
