@@ -25,7 +25,6 @@ import static org.apache.camel.component.jira.JiraConstants.ISSUE_SUMMARY;
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_TYPE_ID;
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_TYPE_NAME;
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
-import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.JIRA_CREDENTIALS;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.KEY;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssue;
 import static org.apache.camel.component.jira.springboot.test.Utils.userAssignee;
@@ -33,6 +32,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -222,9 +222,9 @@ public class AddIssueProducerTest {
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
-                public void configure() {
+                public void configure() throws IOException {
                     from("direct:start")
-                            .to("jira://addIssue?jiraUrl=" + JIRA_CREDENTIALS)
+                            .to("jira://addIssue?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                             .to(mockResult);
                 }
             };

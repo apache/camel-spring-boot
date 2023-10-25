@@ -19,7 +19,6 @@ package org.apache.camel.component.jira.springboot.test;
 
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_KEY;
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
-import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.JIRA_CREDENTIALS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
@@ -27,6 +26,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 
 import com.atlassian.jira.rest.client.api.IssueRestClient;
 import com.atlassian.jira.rest.client.api.JiraRestClient;
@@ -160,9 +160,9 @@ public class FetchCommentsProducerTest {
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
-                public void configure() {
+                public void configure() throws IOException {
                     from("direct:start")
-                            .to("jira://fetchComments?jiraUrl=" + JIRA_CREDENTIALS)
+                            .to("jira://fetchComments?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                             .to(mockResult);
                 }
             };

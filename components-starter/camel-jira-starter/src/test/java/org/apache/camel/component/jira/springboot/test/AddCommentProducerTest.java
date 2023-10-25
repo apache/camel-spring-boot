@@ -19,7 +19,6 @@ package org.apache.camel.component.jira.springboot.test;
 
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_KEY;
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
-import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.JIRA_CREDENTIALS;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssueWithComments;
 import static org.apache.camel.component.jira.springboot.test.Utils.newComment;
 import static org.mockito.ArgumentMatchers.any;
@@ -27,6 +26,7 @@ import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -151,16 +151,14 @@ public class AddCommentProducerTest {
     @Configuration
     public class TestConfiguration {
         
-        
-
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
-                public void configure() {
+                public void configure() throws IOException {
                     comment = "A new test comment " + new Date();
                     from("direct:start")
-                            .to("jira://addComment?jiraUrl=" + JIRA_CREDENTIALS)
+                            .to("jira://addComment?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                             .to(mockResult);
                 }
             };

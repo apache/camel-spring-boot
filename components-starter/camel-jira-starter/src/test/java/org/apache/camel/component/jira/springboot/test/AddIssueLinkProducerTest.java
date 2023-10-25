@@ -21,7 +21,6 @@ import static org.apache.camel.component.jira.JiraConstants.CHILD_ISSUE_KEY;
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
 import static org.apache.camel.component.jira.JiraConstants.LINK_TYPE;
 import static org.apache.camel.component.jira.JiraConstants.PARENT_ISSUE_KEY;
-import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.JIRA_CREDENTIALS;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssue;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssueWithLinks;
 import static org.apache.camel.component.jira.springboot.test.Utils.newIssueLink;
@@ -32,6 +31,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -254,9 +254,9 @@ public class AddIssueLinkProducerTest {
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
-                public void configure() {
+                public void configure() throws IOException {
                     from("direct:start")
-                            .to("jira://addIssueLink?jiraUrl=" + JIRA_CREDENTIALS)
+                            .to("jira://addIssueLink?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                             .to(mockResult);
                 }
             };

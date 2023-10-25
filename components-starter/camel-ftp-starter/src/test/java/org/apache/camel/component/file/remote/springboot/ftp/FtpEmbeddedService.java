@@ -38,10 +38,12 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
@@ -94,6 +96,12 @@ public class FtpEmbeddedService extends AbstractTestService implements FtpServic
         }
     }
 
+    private static Properties loadAuthProperties() throws IOException {
+        Properties properties = new Properties();
+        properties.load(FtpEmbeddedService.class.getClassLoader().getResourceAsStream("users.properties"));
+        return properties;
+    }
+
     protected FtpServerFactory createFtpServerFactory() {
         NativeFileSystemFactory fsf = new NativeFileSystemFactory();
         fsf.setCreateHome(true);
@@ -103,13 +111,17 @@ public class FtpEmbeddedService extends AbstractTestService implements FtpServic
         pumf.setPasswordEncryptor(new ClearTextPasswordEncryptor());
         pumf.setFile(null);
         UserManager userMgr = pumf.createUserManager();
-        createUser(userMgr, "admin", "admin", rootDir, true);
-        createUser(userMgr, "scott", "tiger", rootDir, true);
-        createUser(userMgr, "dummy", "foo", rootDir, false);
-        createUser(userMgr, "us@r", "t%st", rootDir, true);
+        Properties users;
+        try {
+            users = loadAuthProperties();
+        } catch (IOException ioe) {
+            throw new IllegalStateException(ioe);
+        }
+        for (String username : users.stringPropertyNames()) {
+            createUser(userMgr, username, users.getProperty(username), rootDir, true);
+        }
         createUser(userMgr, "anonymous", null, rootDir, false);
-        createUser(userMgr, "joe", "p+%w0&r)d", rootDir, true);
-        createUser(userMgr, "jane", "%j#7%c6i", rootDir, true);
+        createUser(userMgr, "dummy", "foo", rootDir, false);
 
         ListenerFactory factory = new ListenerFactory();
         factory.setPort(port);

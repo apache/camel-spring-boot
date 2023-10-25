@@ -21,7 +21,6 @@ import static org.apache.camel.component.jira.JiraConstants.ISSUE_KEY;
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_WATCHERS_ADD;
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_WATCHERS_REMOVE;
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
-import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.JIRA_CREDENTIALS;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.KEY;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.TEST_JIRA_URL;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssue;
@@ -30,6 +29,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -247,9 +247,9 @@ public class WatcherProducerTest {
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
-                public void configure() {
+                public void configure() throws IOException {
                     from("direct:start")
-                            .to("jira://watchers?jiraUrl=" + JIRA_CREDENTIALS)
+                            .to("jira://watchers?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                             .to(mockResult);
                 }
             };

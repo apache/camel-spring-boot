@@ -19,7 +19,6 @@ package org.apache.camel.component.jira.springboot.test;
 
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_KEY;
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
-import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.JIRA_CREDENTIALS;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.KEY;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssue;
 import static org.mockito.ArgumentMatchers.any;
@@ -148,7 +147,7 @@ public class DeleteIssueProducerTest {
                 public void configure() throws IOException {
                     from("direct:start")
                             .setHeader(ISSUE_KEY, () -> KEY + "-1")
-                            .to("jira://deleteIssue?jiraUrl=" + JIRA_CREDENTIALS)
+                            .to("jira://deleteIssue?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                             .to(mockResult);
                 }
             };
