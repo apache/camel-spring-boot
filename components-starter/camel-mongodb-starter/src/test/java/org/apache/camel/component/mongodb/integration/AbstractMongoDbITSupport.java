@@ -46,15 +46,15 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import java.io.IOException;
 import java.util.Formatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Properties;
 
 public abstract class AbstractMongoDbITSupport {
 
 	protected static final String SCHEME = "mongodb";
-	protected static final String USER = "test-user";
-	protected static final String PASSWORD = "test-pwd";
 	@RegisterExtension
 	public static MongoDBService service = MongoDBServiceFactory.createService();
 	protected static MongoClient mongo;
@@ -101,11 +101,18 @@ public abstract class AbstractMongoDbITSupport {
 		dynamicCollection.drop();
 	}
 
+    public static Properties loadAuthProperties() throws IOException {
+        Properties properties = new Properties();
+        properties.load(AbstractMongoDbITSupport.class.getClassLoader().getResourceAsStream("test.properties"));
+        return properties;
+    }
+
 	/**
 	 * Useful to simulate the presence of an authenticated user with name {@value #USER} and password {@value #PASSWORD}
 	 */
-	protected void createAuthorizationUser() {
-		createAuthorizationUser("admin", USER, PASSWORD);
+	protected void createAuthorizationUser() throws IOException {
+		Properties properties = loadAuthProperties();
+		createAuthorizationUser("admin", properties.getProperty("testusername"), properties.getProperty("testpassword"));
 	}
 
 	protected void createAuthorizationUser(String database, String user, String password) {

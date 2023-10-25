@@ -30,7 +30,7 @@ import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_T
 import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_TEST_UNENCRYPTED_PROPS_OUT_CC;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public abstract class EncryptedProperiesTestBase {
+public abstract class EncryptedPropertiesTestBase {
 
 
     @EndpointInject(MOCK_URI)

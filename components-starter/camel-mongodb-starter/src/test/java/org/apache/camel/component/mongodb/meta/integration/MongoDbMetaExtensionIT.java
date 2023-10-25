@@ -16,9 +16,11 @@
  */
 package org.apache.camel.component.mongodb.meta.integration;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Properties;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.mongodb.client.model.CreateCollectionOptions;
@@ -54,7 +56,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class MongoDbMetaExtensionIT extends AbstractMongoDbITSupport {
     // We simulate the presence of an authenticated user
     @BeforeEach
-    public void createAuthorizationUser() {
+    public void createAuthorizationUser() throws IOException {
         super.createAuthorizationUser();
     }
 
@@ -63,7 +65,8 @@ public class MongoDbMetaExtensionIT extends AbstractMongoDbITSupport {
     }
 
     @Test
-    public void testValidMetaData() {
+    public void testValidMetaData() throws IOException {
+        Properties properties = loadAuthProperties();
         // When
         final String database = "test";
         final String collection = "validatedCollection";
@@ -99,8 +102,8 @@ public class MongoDbMetaExtensionIT extends AbstractMongoDbITSupport {
         parameters.put("database", database);
         parameters.put("collection", collection);
         parameters.put("host", service.getConnectionAddress());
-        parameters.put("user", USER);
-        parameters.put("password", PASSWORD);
+        parameters.put("user", properties.getProperty("testusername"));
+        parameters.put("password", properties.getProperty("testpassword"));
 
         MetaDataExtension.MetaData result = component.getExtension(MetaDataExtension.class).get().meta(parameters)
                 .orElseThrow(UnsupportedOperationException::new);
@@ -116,7 +119,9 @@ public class MongoDbMetaExtensionIT extends AbstractMongoDbITSupport {
     }
 
     @Test
-    public void testMissingCollection() {
+    public void testMissingCollection() throws IOException {
+        Properties properties = loadAuthProperties();
+
         // When
         final String database = "test";
         final String collection = "missingCollection";
@@ -126,8 +131,8 @@ public class MongoDbMetaExtensionIT extends AbstractMongoDbITSupport {
         parameters.put("database", database);
         parameters.put("collection", collection);
         parameters.put("host", service.getConnectionAddress());
-        parameters.put("user", USER);
-        parameters.put("password", PASSWORD);
+        parameters.put("user", properties.getProperty("testusername"));
+        parameters.put("password", properties.getProperty("testpassword"));
 
         final Optional<MetaDataExtension.MetaData> meta
                 = component.getExtension(MetaDataExtension.class).get().meta(parameters);
@@ -150,7 +155,8 @@ public class MongoDbMetaExtensionIT extends AbstractMongoDbITSupport {
     }
 
     @Test
-    public void testNotValidatedCollection() {
+    public void testNotValidatedCollection() throws IOException {
+        Properties properties = loadAuthProperties();
         // When
         final String database = "test";
         final String collection = "notValidatedCollection";
@@ -161,8 +167,8 @@ public class MongoDbMetaExtensionIT extends AbstractMongoDbITSupport {
         parameters.put("database", database);
         parameters.put("collection", collection);
         parameters.put("host", service.getConnectionAddress());
-        parameters.put("user", USER);
-        parameters.put("password", PASSWORD);
+        parameters.put("user", properties.getProperty("testusername"));
+        parameters.put("password", properties.getProperty("testpassword"));
 
         final Optional<MetaDataExtension.MetaData> meta
                 = component.getExtension(MetaDataExtension.class).get().meta(parameters);

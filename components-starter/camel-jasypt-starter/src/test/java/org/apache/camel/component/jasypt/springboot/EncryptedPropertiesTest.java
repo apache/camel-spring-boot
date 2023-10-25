@@ -35,7 +35,7 @@ import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_T
 @DirtiesContext
 @SpringBootApplication
 @SpringBootTest(classes = {EncryptedPropertiesTest.TestConfiguration.class})
-public class EncryptedPropertiesTest extends EncryptedProperiesTestBase {
+public class EncryptedPropertiesTest extends EncryptedPropertiesTestBase {
 
     @Test
     public void testEncryptionInsideCamelContext() {

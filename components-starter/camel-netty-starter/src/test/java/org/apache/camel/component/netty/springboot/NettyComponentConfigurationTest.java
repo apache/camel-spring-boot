@@ -18,6 +18,9 @@ package org.apache.camel.component.netty.springboot;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
+import java.util.Properties;
+
 import javax.net.ssl.SSLSession;
 
 import org.apache.camel.CamelContext;
@@ -66,9 +69,16 @@ class NettyComponentConfigurationTest {
     
     @EndpointInject("mock:result")
     private MockEndpoint mockResult;
+    
+    private static Properties loadAuthProperties() throws IOException {
+        Properties properties = new Properties();
+        properties.load(NettyComponentConfigurationTest.class.getClassLoader().getResourceAsStream("nettycomponentconfigurationtest.properties"));
+        return properties;
+    }
 
     @Test
-    void testAutoConfiguration() {
+    void testAutoConfiguration() throws IOException {
+        Properties properties = loadAuthProperties();
         NettyComponent component = context.getComponent("netty", NettyComponent.class);
         assertNotNull(component);
         assertNotNull(component.getConfiguration());
@@ -77,7 +87,7 @@ class NettyComponentConfigurationTest {
         assertNotNull(scp);
         assertEquals(TLSv13, scp.getSecureSocketProtocol());
         KeyManagersParameters kmp = scp.getKeyManagers();
-        assertEquals("changeit", kmp.getKeyPassword());
+        assertEquals(properties.getProperty("password"), kmp.getKeyPassword());
     }
     
     @Test
@@ -96,16 +106,16 @@ class NettyComponentConfigurationTest {
     public static class TestConfiguration {
 
         @Bean(name = "sslContextParameters")
-        public SSLContextParameters getSSLContextParameters() {
+        public SSLContextParameters getSSLContextParameters() throws IOException {
+            Properties authProperties = loadAuthProperties();
             SSLContextParameters scp = new SSLContextParameters();
             scp.setSecureSocketProtocol(TLSv13);
             KeyStoreParameters ksp = new KeyStoreParameters();
             ksp.setResource(this.getClass().getClassLoader().getResource("keystore.jks").toString());
-            ksp.setPassword("changeit");
-
+            ksp.setPassword(authProperties.getProperty("password"));
             KeyManagersParameters kmp = new KeyManagersParameters();
             kmp.setKeyStore(ksp);
-            kmp.setKeyPassword("changeit");
+            kmp.setKeyPassword(authProperties.getProperty("password"));
             TrustManagersParameters tmp = new TrustManagersParameters();
             tmp.setKeyStore(ksp);
             scp.setKeyManagers(kmp);

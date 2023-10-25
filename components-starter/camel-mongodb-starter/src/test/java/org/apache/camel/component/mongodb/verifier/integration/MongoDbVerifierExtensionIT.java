@@ -16,8 +16,10 @@
  */
 package org.apache.camel.component.mongodb.verifier.integration;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.camel.Component;
 import org.apache.camel.component.extension.ComponentVerifierExtension;
@@ -47,7 +49,7 @@ import org.springframework.test.annotation.DirtiesContext;
 public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     // We simulate the presence of an authenticated user
     @BeforeEach
-    public void createAuthorizationUser() {
+    public void createAuthorizationUser() throws IOException {
         super.createAuthorizationUser();
     }
 
@@ -60,12 +62,13 @@ public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     }
 
     @Test
-    public void verifyConnectionOK() {
+    public void verifyConnectionOK() throws IOException {
+        Properties properties = loadAuthProperties();
         //When
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("host", service.getConnectionAddress());
-        parameters.put("user", USER);
-        parameters.put("password", PASSWORD);
+        parameters.put("user", properties.getProperty("testusername"));
+        parameters.put("password", properties.getProperty("testpassword"));
         //Given
         ComponentVerifierExtension.Result result
                 = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY, parameters);
@@ -74,12 +77,13 @@ public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     }
 
     @Test
-    public void verifyConnectionKO() {
+    public void verifyConnectionKO() throws IOException {
+        Properties properties = loadAuthProperties();
         //When
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("host", "notReachable.host");
-        parameters.put("user", USER);
-        parameters.put("password", PASSWORD);
+        parameters.put("user", properties.getProperty("testusername"));
+        parameters.put("password", properties.getProperty("testpassword"));
         //Given
         ComponentVerifierExtension.Result result
                 = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY, parameters);
@@ -89,11 +93,13 @@ public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     }
 
     @Test
-    public void verifyConnectionMissingParams() {
+    public void verifyConnectionMissingParams() throws IOException {
+        Properties properties = loadAuthProperties();
+
         //When
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("host", service.getConnectionAddress());
-        parameters.put("user", USER);
+        parameters.put("user", properties.getProperty("testusername"));
         //Given
         ComponentVerifierExtension.Result result
                 = getExtension().verify(ComponentVerifierExtension.Scope.PARAMETERS, parameters);
@@ -103,12 +109,14 @@ public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     }
 
     @Test
-    public void verifyConnectionNotAuthenticated() {
+    public void verifyConnectionNotAuthenticated() throws IOException {
+        Properties properties = loadAuthProperties();
+
         //When
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("host", service.getConnectionAddress());
-        parameters.put("user", USER);
-        parameters.put("password", "wrongPassword");
+        parameters.put("user", properties.getProperty("wrongusername"));
+        parameters.put("password", properties.getProperty("wrongpassword"));
         //Given
         ComponentVerifierExtension.Result result
                 = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY, parameters);
@@ -118,12 +126,14 @@ public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     }
 
     @Test
-    public void verifyConnectionAdminDBKO() {
+    public void verifyConnectionAdminDBKO() throws IOException {
+        Properties properties = loadAuthProperties();
+
         //When
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("host", service.getConnectionAddress());
-        parameters.put("user", USER);
-        parameters.put("password", PASSWORD);
+        parameters.put("user", properties.getProperty("testusername"));
+        parameters.put("password", properties.getProperty("testpassword"));
         parameters.put("adminDB", "someAdminDB");
         //Given
         ComponentVerifierExtension.Result result
@@ -134,12 +144,14 @@ public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     }
 
     @Test
-    public void verifyConnectionPortKO() {
+    public void verifyConnectionPortKO() throws IOException {
+        Properties properties = loadAuthProperties();
+
         //When
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("host", "localhost:12343");
-        parameters.put("user", USER);
-        parameters.put("password", PASSWORD);
+        parameters.put("user", properties.getProperty("testusername"));
+        parameters.put("password", properties.getProperty("testpassword"));
         //Given
         ComponentVerifierExtension.Result result
                 = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY, parameters);

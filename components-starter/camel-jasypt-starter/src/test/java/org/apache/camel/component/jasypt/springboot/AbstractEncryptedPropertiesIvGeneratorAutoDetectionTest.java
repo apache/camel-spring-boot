@@ -27,7 +27,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Properties;
 
 import static org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesUtils.isIVNeeded;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,17 +43,23 @@ public abstract class AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest {
 
 
     String stringToEncrypt = "A password-cracker walks into a bar. Orders a beer. Then a Beer. Then a BEER. beer. b33r. BeeR. Be3r. bEeR. bE3R. BeEr";
-    String password = "s0m3R@nD0mP@ssW0rD";
-
-
+    //String password = "s0m3R@nD0mP@ssW0rD";
 
     protected String provider;
 
+    public static Properties loadAuthProperties() throws IOException {
+        Properties properties = new Properties();
+        properties.load(AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest.class.getClassLoader().getResourceAsStream("test.properties"));
+        return properties;
+    }
+
     @ParameterizedTest
     @MethodSource("data")
-    public void testEncryptionAndDecryption(String algorithm) {
+    public void testEncryptionAndDecryption(String algorithm) throws IOException {
 
         LOG.info("Testing Algorithm: '{}', requires IV: {}", algorithm, isIVNeeded(algorithm));
+
+        Properties properties = loadAuthProperties();
 
         // Create a ByteArrayOutputStream so that we can get the output
         // from the call to print
@@ -64,7 +72,7 @@ public abstract class AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest {
         environmentStringPBEConfig.setIvGenerator(isIVNeeded(algorithm)?new RandomIvGenerator():new NoIvGenerator());
         environmentStringPBEConfig.setSaltGenerator(new RandomSaltGenerator());
         environmentStringPBEConfig.setProviderName(provider);
-        environmentStringPBEConfig.setPassword(password);
+        environmentStringPBEConfig.setPassword(properties.getProperty("password"));
 
         StandardPBEStringEncryptor standardPBEStringEncryptor = new StandardPBEStringEncryptor();
         standardPBEStringEncryptor.setConfig(environmentStringPBEConfig);

@@ -16,6 +16,9 @@
  */
 package org.apache.camel.component.jasypt.springboot;
 
+import java.io.IOException;
+import java.util.Properties;
+
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
@@ -38,9 +41,13 @@ import org.springframework.test.annotation.DirtiesContext;
 @SpringBootTest(
         classes = {EncryptedPropertiesCustomConfigurationBeansTest.TestConfiguration.class},
         properties = {"encrypted.password=ENC(6q7H+bWqPbSZVW1hUzDVgnl7iSnC04zRmKwD31ounBMPM/2CtDS7fwb4u1OGZ2Q4)"})
-public class EncryptedPropertiesCustomConfigurationBeansTest extends EncryptedProperiesTestBase {
+public class EncryptedPropertiesCustomConfigurationBeansTest extends EncryptedPropertiesTestBase {
 
-
+    public static Properties loadAuthProperties() throws IOException {
+        Properties properties = new Properties();
+        properties.load(EncryptedPropertiesCustomConfigurationBeansTest.class.getClassLoader().getResourceAsStream("test.properties"));
+        return properties;
+    }
 
     @Test
     public void testCustomEnvironmentVariablesConfiguration() {
@@ -68,12 +75,14 @@ public class EncryptedPropertiesCustomConfigurationBeansTest extends EncryptedPr
         }
 
         @Bean("customEnvironmentStringPBEConfig")
-        public EnvironmentStringPBEConfig environmentVariablesConfiguration() {
+        public EnvironmentStringPBEConfig environmentVariablesConfiguration() throws IOException {
+            Properties props = loadAuthProperties();
+
             EnvironmentStringPBEConfig environmentStringPBEConfig = new EnvironmentStringPBEConfig();
             environmentStringPBEConfig.setAlgorithm("PBEWITHHMACSHA512ANDAES_256");
             environmentStringPBEConfig.setIvGenerator(new RandomIvGenerator(getSecureRandomAlgorithm()));
             environmentStringPBEConfig.setSaltGenerator(new RandomSaltGenerator(getSecureRandomAlgorithm()));
-            environmentStringPBEConfig.setPassword("mainpassword");
+            environmentStringPBEConfig.setPassword(props.getProperty("mainpassword"));
             return environmentStringPBEConfig;
         }
 

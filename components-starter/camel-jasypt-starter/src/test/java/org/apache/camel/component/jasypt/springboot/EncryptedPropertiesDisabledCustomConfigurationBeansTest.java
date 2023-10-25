@@ -36,7 +36,7 @@ import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_T
         properties = {
                 "camel.component.jasypt.enabled = false",
                 "encrypted.password=ENC(6q7H+bWqPbSZVW1hUzDVgnl7iSnC04zRmKwD31ounBMPM/2CtDS7fwb4u1OGZ2Q4)"})
-public class EncryptedPropertiesDisabledCustomConfigurationBeansTest extends EncryptedProperiesTestBase {
+public class EncryptedPropertiesDisabledCustomConfigurationBeansTest extends EncryptedPropertiesTestBase {
 
     @Test
     public void testCustomEnvironmentVariablesConfiguration() {
