@@ -34,7 +34,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @SpringBootTest(
         properties = {"camel.component.jasypt.enabled = false"},
         classes = {EncryptedPropertiesCustomConfigurationBeansTest.TestConfiguration.class})
-public class EncryptedPropertiesDisabledTest extends EncryptedProperiesTestBase{
+public class EncryptedPropertiesDisabledTest extends EncryptedPropertiesTestBase{
 
 
     /**

@@ -17,6 +17,9 @@
 
 package org.apache.camel.component.mongodb.integration;
 
+import java.io.IOException;
+import java.util.Properties;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mongodb.MongoDbConstants;
@@ -49,9 +52,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 )
 public class MongoDbCredentialsFromUriConnectionIT extends MongoDbOperationsIT {
 
-    protected static final String AUTH_SOURCE_USER = "auth-source-user";
-    protected static final String AUTH_SOURCE_PASSWORD = "auth-source-password";
-
     @Configuration
     public class TestConfiguration {
 
@@ -59,14 +59,15 @@ public class MongoDbCredentialsFromUriConnectionIT extends MongoDbOperationsIT {
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
-                public void configure() {
+                public void configure() throws IOException {
+                    Properties properties = loadAuthProperties();
                     String uriHostnameOnly = String.format("mongodb:mongo?hosts=%s&", service.getConnectionAddress());
                     //connecting with credentials for created user
-                    String uriWithCredentials = String.format("%susername=%s&password=%s&", uriHostnameOnly, USER, PASSWORD);
+                    String uriWithCredentials = String.format("%susername=%s&password=%s&", uriHostnameOnly, properties.getProperty("testusername"), properties.getProperty("testpassword"));
 
                     String uriWithAuthSource = String.format(
                             "%susername=%s&password=%s&authSource=%s&",
-                            uriHostnameOnly, AUTH_SOURCE_USER, AUTH_SOURCE_PASSWORD, dbName);
+                            uriHostnameOnly, properties.getProperty("authsourceusername"), properties.getProperty("authsourceuserpassword"), dbName);
 
                     from("direct:count").to(
                             uriHostnameOnly + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=count&dynamicity=true");
@@ -107,9 +108,10 @@ public class MongoDbCredentialsFromUriConnectionIT extends MongoDbOperationsIT {
     }
 
     @BeforeEach
-    public void before() {
+    public void before() throws IOException {
+        Properties properties = loadAuthProperties();
         createAuthorizationUser();
-        createAuthorizationUser(dbName, AUTH_SOURCE_USER, AUTH_SOURCE_PASSWORD);
+        createAuthorizationUser(dbName, properties.getProperty("authsourceusername"), properties.getProperty("authsourcepassword"));
     }
 
     @Test

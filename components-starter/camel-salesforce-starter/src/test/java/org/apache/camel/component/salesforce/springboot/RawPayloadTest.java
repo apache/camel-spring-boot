@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -77,7 +78,6 @@ public class RawPayloadTest extends AbstractSalesforceTestBase {
 
     public static String endpointUri;
 
-    private static final String OAUTH2_TOKEN_PATH = "/services/oauth2/token";
     private static final String XML_RESPONSE = "<response/>";
     private static final String JSON_RESPONSE = "{ \"response\" : \"mock\" }";
 
@@ -88,6 +88,12 @@ public class RawPayloadTest extends AbstractSalesforceTestBase {
     private static String expectedResponse;
     private static String requestBody;
     private static Map<String, Object> headers;
+
+    private static Properties loadProperties() throws IOException {
+        Properties properties = new Properties();
+        properties.load(RawPayloadTest.class.getClassLoader().getResourceAsStream("rawpayload.properties"));
+        return properties;
+    }
 
     @Override
     @Bean("salesforce")
@@ -127,8 +133,15 @@ public class RawPayloadTest extends AbstractSalesforceTestBase {
 
         server.setDispatcher(new Dispatcher() {
             @Override
-            public MockResponse dispatch(RecordedRequest recordedRequest) {
-                if (recordedRequest.getPath().equals(OAUTH2_TOKEN_PATH)) {
+            public MockResponse dispatch(RecordedRequest recordedRequest)  {
+
+                Properties props;
+                try {
+                    props = loadProperties();
+                } catch (IOException ioe) {
+                    throw new IllegalStateException(ioe);
+                }
+                if (recordedRequest.getPath().equals(props.getProperty("tokenpath"))) {
                     return new MockResponse().setResponseCode(200)
                             .setBody(String.format("""
                              {
