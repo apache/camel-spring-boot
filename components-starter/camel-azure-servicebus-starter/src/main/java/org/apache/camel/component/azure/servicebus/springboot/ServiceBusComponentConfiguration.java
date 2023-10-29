@@ -151,6 +151,11 @@ public class ServiceBusComponentConfiguration
      */
     private String subscriptionName;
     /**
+     * Set binary mode. If true, message body will be sent as byte. By default,
+     * it is false.
+     */
+    private Boolean binary = false;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -334,6 +339,14 @@ public class ServiceBusComponentConfiguration
 
     public void setSubscriptionName(String subscriptionName) {
         this.subscriptionName = subscriptionName;
+    }
+
+    public Boolean getBinary() {
+        return binary;
+    }
+
+    public void setBinary(Boolean binary) {
+        this.binary = binary;
     }
 
     public Boolean getLazyStartProducer() {
