@@ -49,6 +49,8 @@ public class InfinispanRemoteTestSupport {
 	public static InfinispanService service = InfinispanServiceFactory.createService();
 	protected static RemoteCacheManager cacheContainer;
 
+	public static final boolean CLIENT_INTELLIGENCE_BASIC = SystemUtils.IS_OS_MAC || Boolean.parseBoolean(System.getProperty("infinispan.client_intelligence.basic", "false"));
+
 	@Autowired
 	ProducerTemplate template;
 
@@ -133,7 +135,7 @@ public class InfinispanRemoteTestSupport {
 				.saslMechanism("DIGEST-MD5")
 				.realm("default");
 
-		if (SystemUtils.IS_OS_MAC) {
+		if (CLIENT_INTELLIGENCE_BASIC) {
 			Properties properties = new Properties();
 			properties.put("infinispan.client.hotrod.client_intelligence", "BASIC");
 			clientBuilder.withProperties(properties);
