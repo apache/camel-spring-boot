@@ -129,7 +129,7 @@
         <springdoc-version>2.2.0</springdoc-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
         <swagger-parser-v3-version>2.1.10</swagger-parser-v3-version>
-	    <cyclonedx-maven-plugin-version>2.7.9</cyclonedx-maven-plugin-version>
+	<cyclonedx-maven-plugin-version>2.7.10</cyclonedx-maven-plugin-version>
     </properties>
 
 
