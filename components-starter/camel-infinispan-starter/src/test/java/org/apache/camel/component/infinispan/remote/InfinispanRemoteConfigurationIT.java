@@ -16,6 +16,8 @@
  */
 package org.apache.camel.component.infinispan.remote;
 
+import static org.apache.camel.component.infinispan.remote.InfinispanRemoteTestSupport.CLIENT_INTELLIGENCE_BASIC;
+
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.infra.infinispan.services.InfinispanService;
 import org.apache.camel.test.infra.infinispan.services.InfinispanServiceFactory;
@@ -59,7 +61,7 @@ public class InfinispanRemoteConfigurationIT {
 		configuration.setSecurityServerName("infinispan");
 		configuration.setSaslMechanism("DIGEST-MD5");
 		configuration.setSecurityRealm("default");
-		if (SystemUtils.IS_OS_MAC) {
+		if (CLIENT_INTELLIGENCE_BASIC) {
 			configuration.addConfigurationProperty(
 					"infinispan.client.hotrod.client_intelligence", "BASIC");
 		}
