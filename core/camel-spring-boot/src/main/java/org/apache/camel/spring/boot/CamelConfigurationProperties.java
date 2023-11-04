@@ -386,13 +386,6 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean typeConverterStatisticsEnabled;
 
     /**
-     * Sets whether debugging is enabled or not.
-     *
-     * Default is false.
-     */
-    private boolean debugging;
-
-    /**
      * Sets whether backlog tracing is enabled or not.
      *
      * Default is false.
