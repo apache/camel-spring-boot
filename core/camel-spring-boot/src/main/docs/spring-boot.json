@@ -461,6 +461,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.debug.fallback-timeout",
+      "type": "java.lang.Long",
+      "description": "Fallback Timeout in seconds (300 seconds as default) when block the message processing in Camel. A timeout used for waiting for a message to arrive at a given breakpoint.",
+      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
+      "defaultValue": 300
+    },
+    {
       "name": "camel.debug.include-exception",
       "type": "java.lang.Boolean",
       "description": "Trace messages to include exception if the message failed",

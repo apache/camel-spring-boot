@@ -82,6 +82,13 @@ public class CamelDebugConfigurationProperties {
      */
     private boolean includeException = true;
 
+    /**
+     * Fallback Timeout in seconds (300 seconds as default) when block the message processing in Camel. A timeout used
+     * for waiting for a message to arrive at a given breakpoint.
+     */
+    @Metadata(label = "advanced", defaultValue = "300")
+    private long fallbackTimeout = 300;
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -160,5 +167,13 @@ public class CamelDebugConfigurationProperties {
 
     public void setIncludeException(boolean includeException) {
         this.includeException = includeException;
+    }
+
+    public long getFallbackTimeout() {
+        return fallbackTimeout;
+    }
+
+    public void setFallbackTimeout(long fallbackTimeout) {
+        this.fallbackTimeout = fallbackTimeout;
     }
 }
