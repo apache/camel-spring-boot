@@ -25,20 +25,20 @@ public class ObservationConfigurationProperties {
 
     /**
      * Sets exclude pattern(s) that will disable observability for Camel messages that
-     * matches the pattern.
+     * matches the pattern. Multiple patterns can be separated by comma.
      */
-    private Set<String> excludePatterns;
+    private String excludePatterns;
     /**
      * Activate or deactivate dash encoding in headers (required by JMS) for
      * messaging
      */
     private Boolean encoding;
 
-    public Set<String> getExcludePatterns() {
+    public String getExcludePatterns() {
         return excludePatterns;
     }
 
-    public void setExcludePatterns(Set<String> excludePatterns) {
+    public void setExcludePatterns(String excludePatterns) {
         this.excludePatterns = excludePatterns;
     }
 
