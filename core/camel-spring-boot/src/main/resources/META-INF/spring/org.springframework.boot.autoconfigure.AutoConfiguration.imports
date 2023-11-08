@@ -20,6 +20,7 @@ org.apache.camel.spring.boot.actuate.console.CamelDevConsoleAutoConfiguration
 org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpointAutoConfiguration
 org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpointAutoConfiguration
 org.apache.camel.spring.boot.actuate.health.CamelHealthCheckAutoConfiguration
+org.apache.camel.spring.boot.actuate.health.CamelAvailabilityCheckAutoConfiguration
 org.apache.camel.spring.boot.actuate.info.CamelInfoAutoConfiguration
 org.apache.camel.spring.boot.cloud.CamelCloudAutoConfiguration
 org.apache.camel.spring.boot.cloud.CamelCloudServiceCallConfigurationAutoConfiguration
