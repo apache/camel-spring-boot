@@ -8,6 +8,13 @@
   ],
   "properties": [
     {
+      "name": "camel.opentelemetry.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Global option to enable\/disable OpenTelemetry integration, default is true.",
+      "sourceType": "org.apache.camel.opentelemetry.starter.OpenTelemetryConfigurationProperties",
+      "defaultValue": true
+    },
+    {
       "name": "camel.opentelemetry.encoding",
       "type": "java.lang.Boolean",
       "description": "Activate or deactivate dash encoding in headers (required by JMS) for messaging",

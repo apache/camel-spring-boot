@@ -16,13 +16,15 @@
  */
 package org.apache.camel.opentelemetry.starter;
 
-import java.util.Set;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.opentelemetry")
 public class OpenTelemetryConfigurationProperties {
 
+    /**
+     * Global option to enable/disable OpenTelemetry integration, default is true.
+     */
+    private boolean enabled = true;
     /**
      * Sets exclude pattern(s) that will disable tracing for Camel messages that
      * matches the pattern. Multiple patterns can be separated by comma.
@@ -33,6 +35,14 @@ public class OpenTelemetryConfigurationProperties {
      * messaging
      */
     private Boolean encoding;
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public String getExcludePatterns() {
         return excludePatterns;
