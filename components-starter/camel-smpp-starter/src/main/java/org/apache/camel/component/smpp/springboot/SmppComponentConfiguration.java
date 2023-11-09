@@ -230,6 +230,14 @@ public class SmppComponentConfiguration
      */
     private Integer enquireLinkTimer = 60000;
     /**
+     * Defines the interface version to be used in the binding request with the
+     * SMSC. The following values are allowed, as defined in the SMPP protocol
+     * (and the underlying implementation using the jSMPP library,
+     * respectively): legacy (0x00), 3.3 (0x33), 3.4 (0x34), and 5.0 (0x50). The
+     * default (fallback) value is version 3.4.
+     */
+    private String interfaceVersion = "3.4";
+    /**
      * Sets the number of threads which can read PDU and process them in
      * parallel.
      */
@@ -518,6 +526,14 @@ public class SmppComponentConfiguration
 
     public void setEnquireLinkTimer(Integer enquireLinkTimer) {
         this.enquireLinkTimer = enquireLinkTimer;
+    }
+
+    public String getInterfaceVersion() {
+        return interfaceVersion;
+    }
+
+    public void setInterfaceVersion(String interfaceVersion) {
+        this.interfaceVersion = interfaceVersion;
     }
 
     public Integer getPduProcessorDegree() {

@@ -128,6 +128,13 @@
       "defaultValue": 5000
     },
     {
+      "name": "camel.component.smpp.interface-version",
+      "type": "java.lang.String",
+      "description": "Defines the interface version to be used in the binding request with the SMSC. The following values are allowed, as defined in the SMPP protocol (and the underlying implementation using the jSMPP library, respectively): legacy (0x00), 3.3 (0x33), 3.4 (0x34), and 5.0 (0x50). The default (fallback) value is version 3.4.",
+      "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
+      "defaultValue": "3.4"
+    },
+    {
       "name": "camel.component.smpp.lazy-session-creation",
       "type": "java.lang.Boolean",
       "description": "Sessions can be lazily created to avoid exceptions, if the SMSC is not available when the Camel producer is started. Camel will check the in message headers 'CamelSmppSystemId' and 'CamelSmppPassword' of the first exchange. If they are present, Camel will use these data to connect to the SMSC.",
