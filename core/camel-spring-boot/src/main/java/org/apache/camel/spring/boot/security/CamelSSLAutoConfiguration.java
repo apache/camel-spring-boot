@@ -30,6 +30,7 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionMessage;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.properties.bind.Bindable;
@@ -46,6 +47,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 public class CamelSSLAutoConfiguration {
 
     @Bean
+    @ConditionalOnMissingBean
     @Conditional(CamelSSLAutoConfiguration.SSLCondition.class)
     public SSLContextParameters sslContextParameters(CamelContext camelContext, CamelSSLConfigurationProperties properties) {
         // use any camel.ssl.config props
@@ -73,6 +75,7 @@ public class CamelSSLAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     @Conditional(CamelSSLAutoConfiguration.SSLConfigCondition.class)
     public GlobalSSLContextParametersSupplier sslContextParametersSupplier(CamelSSLConfigurationProperties properties) {
         final SSLContextParameters config = properties.getConfig() != null ? properties.getConfig() : new SSLContextParameters();
@@ -100,7 +103,7 @@ public class CamelSSLAutoConfiguration {
             Binder binder = Binder.get(context.getEnvironment());
             Map<String, Object> sslProperties = binder.bind("camel.ssl.config", Bindable.mapOf(String.class, Object.class)).orElse(Collections.emptyMap());
             ConditionMessage.Builder message = ConditionMessage.forCondition("camel.ssl.config");
-            if (sslProperties.size() > 0) {
+            if (!sslProperties.isEmpty()) {
                 return ConditionOutcome.match(message.because("enabled"));
             }
 
