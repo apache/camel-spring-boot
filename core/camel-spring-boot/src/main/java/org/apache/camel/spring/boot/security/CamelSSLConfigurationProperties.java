@@ -128,107 +128,107 @@ public class CamelSSLConfigurationProperties {
     }
 
     public KeyManagersParameters getKeyManagers() {
-        return config.getKeyManagers();
+        return this.keyManagers;
     }
 
     public void setKeyManagers(KeyManagersParameters keyManagers) {
-        config.setKeyManagers(keyManagers);
+        this.keyManagers = keyManagers;
     }
 
     public TrustManagersParameters getTrustManagers() {
-        return config.getTrustManagers();
+        return this.trustManagers;
     }
 
     public void setTrustManagers(TrustManagersParameters trustManagers) {
-        config.setTrustManagers(trustManagers);
+        this.trustManagers = trustManagers;
     }
 
     public SecureRandomParameters getSecureRandom() {
-        return config.getSecureRandom();
+        return this.secureRandom;
     }
 
     public void setSecureRandom(SecureRandomParameters secureRandom) {
-        config.setSecureRandom(secureRandom);
+        this.secureRandom = secureRandom;
     }
 
     public SSLContextClientParameters getClientParameters() {
-        return config.getClientParameters();
+        return this.clientParameters;
     }
 
     public void setClientParameters(SSLContextClientParameters clientParameters) {
-        config.setClientParameters(clientParameters);
+        this.clientParameters = clientParameters;
     }
 
     public SSLContextServerParameters getServerParameters() {
-        return config.getServerParameters();
+        return this.serverParameters;
     }
 
     public void setServerParameters(SSLContextServerParameters serverParameters) {
-        config.setServerParameters(serverParameters);
+        this.serverParameters = serverParameters;
     }
 
     public String getProvider() {
-        return config.getProvider();
+        return this.provider;
     }
 
     public void setProvider(String provider) {
-        config.setProvider(provider);
+        this.provider = provider;
     }
 
     public String getSecureSocketProtocol() {
-        return config.getSecureSocketProtocol();
+        return this.secureSocketProtocol;
     }
 
     public void setSecureSocketProtocol(String secureSocketProtocol) {
-        config.setSecureSocketProtocol(secureSocketProtocol);
+        this.secureSocketProtocol = secureSocketProtocol;
     }
 
     public String getCertAlias() {
-        return config.getCertAlias();
+        return this.certAlias;
     }
 
     public void setCertAlias(String certAlias) {
-        config.setCertAlias(certAlias);
+        this.certAlias = certAlias;
     }
 
     public CipherSuitesParameters getCipherSuites() {
-        return config.getCipherSuites();
+        return this.cipherSuites;
     }
 
     public void setCipherSuites(CipherSuitesParameters cipherSuites) {
-        config.setCipherSuites(cipherSuites);
+        this.cipherSuites = cipherSuites;
     }
 
     public FilterParameters getCipherSuitesFilter() {
-        return config.getCipherSuitesFilter();
+        return this.cipherSuitesFilter;
     }
 
     public void setCipherSuitesFilter(FilterParameters cipherSuitesFilter) {
-        config.setCipherSuitesFilter(cipherSuitesFilter);
+        this.cipherSuitesFilter = cipherSuitesFilter;
     }
 
     public SecureSocketProtocolsParameters getSecureSocketProtocols() {
-        return config.getSecureSocketProtocols();
+        return this.secureSocketProtocols;
     }
 
     public void setSecureSocketProtocols(SecureSocketProtocolsParameters secureSocketProtocols) {
-        config.setSecureSocketProtocols(secureSocketProtocols);
+        this.secureSocketProtocols = secureSocketProtocols;
     }
 
     public FilterParameters getSecureSocketProtocolsFilter() {
-        return config.getSecureSocketProtocolsFilter();
+        return this.secureSocketProtocolsFilter;
     }
 
     public void setSecureSocketProtocolsFilter(FilterParameters secureSocketProtocolsFilter) {
-        config.setSecureSocketProtocolsFilter(secureSocketProtocolsFilter);
+        this.secureSocketProtocolsFilter = secureSocketProtocolsFilter;
     }
 
     public String getSessionTimeout() {
-        return config.getSessionTimeout();
+        return this.sessionTimeout;
     }
 
     public void setSessionTimeout(String sessionTimeout) {
-        config.setSessionTimeout(sessionTimeout);
+        this.sessionTimeout = sessionTimeout;
     }
 
 }
