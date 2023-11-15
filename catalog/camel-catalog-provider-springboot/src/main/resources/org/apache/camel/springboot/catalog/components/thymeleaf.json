@@ -8,7 +8,7 @@
     "firstVersion": "4.1.0",
     "label": "transformation",
     "javaType": "org.apache.camel.component.thymeleaf.ThymeleafComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-thymeleaf-starter",
     "version": "4.3.0-SNAPSHOT",
