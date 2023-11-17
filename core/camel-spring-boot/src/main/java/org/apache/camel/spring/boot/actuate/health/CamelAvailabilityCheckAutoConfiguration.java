@@ -23,7 +23,6 @@ import org.apache.camel.spring.boot.actuate.health.readiness.CamelReadinessState
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.availability.ApplicationAvailabilityAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.availability.ApplicationAvailability;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,14 +33,13 @@ import org.springframework.context.annotation.Configuration;
 public class CamelAvailabilityCheckAutoConfiguration {
 
 	@Bean
-	@ConditionalOnMissingBean(CamelLivenessStateHealthIndicator.class)
-	public CamelLivenessStateHealthIndicator camelLivenessStateHealthIndicator(ApplicationAvailability applicationAvailability,
-																			   CamelContext camelContext) {
+	public CamelLivenessStateHealthIndicator camelLivenessStateHealthIndicator(
+			ApplicationAvailability applicationAvailability,
+			CamelContext camelContext) {
 		return new CamelLivenessStateHealthIndicator(applicationAvailability, camelContext);
 	}
 
 	@Bean
-	@ConditionalOnMissingBean({CamelReadinessStateHealthIndicator.class})
 	public CamelReadinessStateHealthIndicator camelReadinessStateHealthIndicator(
 			ApplicationAvailability applicationAvailability,
 			CamelContext camelContext) {

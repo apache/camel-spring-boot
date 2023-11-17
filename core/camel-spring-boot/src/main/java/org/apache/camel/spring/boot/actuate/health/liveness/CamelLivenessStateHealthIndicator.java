@@ -19,7 +19,7 @@ package org.apache.camel.spring.boot.actuate.health.liveness;
 import org.apache.camel.CamelContext;
 import org.apache.camel.health.HealthCheck;
 import org.apache.camel.health.HealthCheckHelper;
-import org.apache.camel.spring.boot.actuate.health.readiness.CamelReadinessStateHealthIndicator;
+import org.apache.camel.spring.boot.actuate.health.CamelProbesHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.availability.LivenessStateHealthIndicator;
@@ -33,7 +33,7 @@ public class CamelLivenessStateHealthIndicator extends LivenessStateHealthIndica
 
 	private static final Logger LOG = LoggerFactory.getLogger(CamelLivenessStateHealthIndicator.class);
 
-	private CamelContext camelContext;
+	private final CamelContext camelContext;
 
 	public CamelLivenessStateHealthIndicator(
 			ApplicationAvailability availability,
@@ -47,7 +47,7 @@ public class CamelLivenessStateHealthIndicator extends LivenessStateHealthIndica
 	protected AvailabilityState getState(ApplicationAvailability applicationAvailability) {
 		Collection<HealthCheck.Result> results = HealthCheckHelper.invokeLiveness(camelContext);
 
-		boolean isLive = CamelReadinessStateHealthIndicator.checkState(results, LOG);
+		boolean isLive = CamelProbesHelper.checkProbeState(results, LOG);
 
 		return isLive ?
 				LivenessState.CORRECT : LivenessState.BROKEN;
