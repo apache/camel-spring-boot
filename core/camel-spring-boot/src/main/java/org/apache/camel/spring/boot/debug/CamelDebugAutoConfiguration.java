@@ -35,7 +35,7 @@ public class CamelDebugAutoConfiguration {
 
     @Bean
     public BacklogDebugger backlogDebugger(CamelContext camelContext, CamelDebugConfigurationProperties config) throws Exception {
-        if (!config.isEnabled()) {
+        if (!config.isEnabled() && !config.isStandby()) {
             return null;
         }
 
@@ -43,9 +43,11 @@ public class CamelDebugAutoConfiguration {
         camelContext.setSourceLocationEnabled(true);
 
         // enable debugger on camel
-        camelContext.setDebugging(true);
+        camelContext.setDebugging(config.isEnabled());
+        camelContext.setDebugStandby(config.isStandby());
 
         BacklogDebugger debugger = DefaultBacklogDebugger.createDebugger(camelContext);
+        debugger.setStandby(config.isStandby());
         debugger.setInitialBreakpoints(config.getBreakpoints());
         debugger.setSingleStepIncludeStartEnd(config.isSingleStepIncludeStartEnd());
         debugger.setBodyMaxChars(config.getBodyMaxChars());
@@ -61,7 +63,10 @@ public class CamelDebugAutoConfiguration {
         camelContext.addLifecycleStrategy(new LifecycleStrategySupport() {
             @Override
             public void onContextStarted(CamelContext context) {
-                debugger.enableDebugger();
+                // only enable debugger if not in standby mode
+                if (!debugger.isStandby()) {
+                    debugger.enableDebugger();
+                }
             }
 
             @Override

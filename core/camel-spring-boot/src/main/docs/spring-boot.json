@@ -495,6 +495,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.debug.standby",
+      "type": "java.lang.Boolean",
+      "description": "To set the debugger in standby mode, where the debugger will be installed by not automatic enabled. The debugger can then later be enabled explicit from Java, JMX or tooling.",
+      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.debug.wait-for-attach",
       "type": "java.lang.Boolean",
       "description": "Whether the debugger should suspend on startup, and wait for a remote debugger to attach. This is what the IDEA and VSCode tooling is using.",

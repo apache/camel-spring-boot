@@ -29,6 +29,12 @@ public class CamelDebugConfigurationProperties {
     private boolean enabled;
 
     /**
+     * To set the debugger in standby mode, where the debugger will be installed by not automatic enabled. The debugger
+     * can then later be enabled explicit from Java, JMX or tooling.
+     */
+    private boolean standby;
+
+    /**
      * Whether the debugger should suspend on startup, and wait for a remote debugger to attach. This is what the IDEA
      * and VSCode tooling is using.
      */
@@ -95,6 +101,14 @@ public class CamelDebugConfigurationProperties {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public boolean isStandby() {
+        return standby;
+    }
+
+    public void setStandby(boolean standby) {
+        this.standby = standby;
     }
 
     public boolean isWaitForAttach() {
