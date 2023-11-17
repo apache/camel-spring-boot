@@ -19,6 +19,7 @@ package org.apache.camel.spring.boot.actuate.health.readiness;
 import org.apache.camel.CamelContext;
 import org.apache.camel.health.HealthCheck;
 import org.apache.camel.health.HealthCheckHelper;
+import org.apache.camel.spring.boot.actuate.health.CamelProbesHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.availability.ReadinessStateHealthIndicator;
@@ -32,7 +33,7 @@ public class CamelReadinessStateHealthIndicator extends ReadinessStateHealthIndi
 
 	private static final Logger LOG = LoggerFactory.getLogger(CamelReadinessStateHealthIndicator.class);
 
-	private CamelContext camelContext;
+	private final CamelContext camelContext;
 
 	public CamelReadinessStateHealthIndicator(
 			ApplicationAvailability availability,
@@ -46,22 +47,9 @@ public class CamelReadinessStateHealthIndicator extends ReadinessStateHealthIndi
 	protected AvailabilityState getState(ApplicationAvailability applicationAvailability) {
 		Collection<HealthCheck.Result> results = HealthCheckHelper.invokeReadiness(camelContext);
 
-		boolean isReady = checkState(results, LOG);
+		boolean isReady = CamelProbesHelper.checkProbeState(results, LOG);
 
 		return isReady ?
 				ReadinessState.ACCEPTING_TRAFFIC : ReadinessState.REFUSING_TRAFFIC;
-	}
-
-	public static boolean checkState(Collection<HealthCheck.Result> results, Logger log) {
-		boolean isUp = true;
-		for (HealthCheck.Result result : results) {
-			if (!HealthCheck.State.UP.equals(result.getState())) {
-				isUp = false;
-
-				result.getError().ifPresent(error -> log.warn(result.getCheck().getId(), error));
-			}
-		}
-
-		return isUp;
 	}
 }
