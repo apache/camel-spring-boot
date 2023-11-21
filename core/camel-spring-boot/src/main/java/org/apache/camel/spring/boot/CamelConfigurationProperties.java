@@ -160,6 +160,11 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean loadHealthChecks;
 
     /**
+     * Work directory for compiler. Can be used to write compiled classes or other resources.
+     */
+    private String compileWorkDir;
+
+    /**
      * Directory to load additional configuration files that contains
      * configuration values that takes precedence over any other configuration.
      * This can be used to refer to files that may have secret configuration that

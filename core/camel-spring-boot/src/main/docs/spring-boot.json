@@ -655,6 +655,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.springboot.compile-work-dir",
+      "type": "java.lang.String",
+      "description": "Work directory for compiler. Can be used to write compiled classes or other resources.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+    },
+    {
       "name": "camel.springboot.consumer-template-cache-size",
       "type": "java.lang.Integer",
       "description": "Consumer template endpoints cache size.",
