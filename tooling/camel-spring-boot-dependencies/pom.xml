@@ -3829,6 +3829,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-smb</artifactId>
+        <version>3.22.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-smpp</artifactId>
         <version>3.22.0-SNAPSHOT</version>
       </dependency>
