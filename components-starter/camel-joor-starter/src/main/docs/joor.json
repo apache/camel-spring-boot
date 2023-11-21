@@ -1,6 +1,17 @@
 {
   "groups": [
     {
+      "name": "camel.language.java",
+      "type": "org.apache.camel.language.joor.springboot.JavaLanguageConfiguration",
+      "sourceType": "org.apache.camel.language.joor.springboot.JavaLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.java.customizer",
+      "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.language.joor.springboot.JavaLanguageConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
       "name": "camel.language.joor",
       "type": "org.apache.camel.language.joor.springboot.JoorLanguageConfiguration",
       "sourceType": "org.apache.camel.language.joor.springboot.JoorLanguageConfiguration"
@@ -13,6 +24,38 @@
     }
   ],
   "properties": [
+    {
+      "name": "camel.language.java.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.language.java.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the java language. This is enabled by default.",
+      "sourceType": "org.apache.camel.language.joor.springboot.JavaLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.java.pre-compile",
+      "type": "java.lang.Boolean",
+      "description": "Whether the expression should be pre compiled once during initialization phase. If this is turned off, then the expression is reloaded and compiled on each evaluation.",
+      "sourceType": "org.apache.camel.language.joor.springboot.JavaLanguageConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.language.java.single-quotes",
+      "type": "java.lang.Boolean",
+      "description": "Whether single quotes can be used as replacement for double quotes. This is convenient when you need to work with strings inside strings.",
+      "sourceType": "org.apache.camel.language.joor.springboot.JavaLanguageConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.language.java.trim",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "sourceType": "org.apache.camel.language.joor.springboot.JavaLanguageConfiguration",
+      "defaultValue": true
+    },
     {
       "name": "camel.language.joor.customizer.enabled",
       "type": "java.lang.Boolean",

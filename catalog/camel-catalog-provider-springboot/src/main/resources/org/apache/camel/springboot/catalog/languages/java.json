@@ -1,19 +1,19 @@
 {
   "language": {
     "kind": "language",
-    "name": "joor",
-    "title": "jOOR",
-    "description": "Evaluates a jOOR (Java compiled once at runtime) expression.",
-    "deprecated": true,
-    "firstVersion": "3.7.0",
+    "name": "java",
+    "title": "Java",
+    "description": "Evaluates a Java (Java compiled once at runtime) expression.",
+    "deprecated": false,
+    "firstVersion": "4.3.0",
     "label": "language",
-    "javaType": "org.apache.camel.language.joor.JoorLanguage",
-    "supportLevel": "Stable",
+    "javaType": "org.apache.camel.language.joor.JavaLanguage",
+    "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-joor-starter",
     "version": "4.3.0-SNAPSHOT",
-    "modelName": "joor",
-    "modelJavaType": "org.apache.camel.model.language.JoorExpression"
+    "modelName": "java",
+    "modelJavaType": "org.apache.camel.model.language.JavaExpression"
   },
   "properties": {
     "expression": { "index": 0, "kind": "value", "displayName": "Expression", "required": true, "type": "string", "javaType": "java.lang.String", "deprecated": false, "autowired": false, "secret": false, "description": "The expression value in your chosen language syntax" },

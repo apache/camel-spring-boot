@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.language.joor.springboot.JoorLanguageAutoConfiguration
+org.apache.camel.language.joor.springboot.JavaLanguageAutoConfiguration
