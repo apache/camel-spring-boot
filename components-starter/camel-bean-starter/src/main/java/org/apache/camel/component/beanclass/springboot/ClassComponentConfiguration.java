@@ -72,6 +72,11 @@ public class ClassComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Maximum cache size of internal cache for bean introspection. Setting a
+     * value of 0 or negative will disable the cache.
+     */
+    private Integer beanInfoCacheSize = 1000;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -95,5 +100,13 @@ public class ClassComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Integer getBeanInfoCacheSize() {
+        return beanInfoCacheSize;
+    }
+
+    public void setBeanInfoCacheSize(Integer beanInfoCacheSize) {
+        this.beanInfoCacheSize = beanInfoCacheSize;
     }
 }
