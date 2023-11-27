@@ -18,18 +18,17 @@ package org.apache.camel.itest.springboot.arquillian;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.springframework.boot.loader.JarLauncher;
-import org.springframework.boot.loader.LaunchedURLClassLoader;
-import org.springframework.boot.loader.MainMethodRunner;
+import org.springframework.boot.loader.launch.JarLauncher;
+import org.springframework.boot.loader.launch.LaunchedClassLoader;
+
 /**
  * A Spring-boot jar launcher that uses the current thread instead of creating a new thread for spring-boot.
  */
@@ -37,7 +36,8 @@ public class ArquillianSyncBootJarLauncher extends JarLauncher {
 
     private ClassLoader classLoader;
 
-    public ArquillianSyncBootJarLauncher() {
+    public ArquillianSyncBootJarLauncher() throws Exception {
+        super();
     }
 
     public void run(String[] args) throws Exception {
@@ -45,32 +45,29 @@ public class ArquillianSyncBootJarLauncher extends JarLauncher {
     }
 
     @Override
-    protected void launch(String[] args, String mainClass, ClassLoader classLoader) throws Exception {
+    protected void launch(ClassLoader classLoader, String mainClassName, String[] args) throws Exception {
         this.classLoader = classLoader;
 
-        MainMethodRunner runner = createMainMethodRunner(mainClass, args, classLoader);
-
         Thread.currentThread().setContextClassLoader(classLoader);
-        runner.run();
+        Class<?> mainClass = Class.forName(mainClassName, false, classLoader);
+        Method mainMethod = mainClass.getDeclaredMethod("main", String[].class);
+        mainMethod.setAccessible(true);
+        mainMethod.invoke(null, new Object[] { args });
     }
 
     @Override
-    protected ClassLoader createClassLoader(URL[] urls) throws Exception {
+    protected ClassLoader createClassLoader(Collection<URL> urls) throws Exception {
         // The spring classloader should not be built on top of the current classloader, it should just share the test classes if available
         List<URL> parentUrls = Arrays.asList(urlsFromClassLoader(this.getClassLoader()));
         List<URL> additionalURLs = parentUrls.stream().filter(u -> u.toString().startsWith("file") && !u.toString().endsWith(".jar")).collect(Collectors.toList());
 
-        ArrayList<URL> newURLs = new ArrayList(Arrays.asList(urls));
+        ArrayList<URL> newURLs = new ArrayList<>();
+        newURLs.addAll(urls);
         newURLs.addAll(additionalURLs);
 
-        ClassLoader appClassLoader = null;
-        // Until https://github.com/spring-projects/spring-boot/issues/12832 is resolved
-        if (getJavaMajorVersion() >= 9) {
-            // use the Platform classloader to resolve classes on the module path
-            appClassLoader = getClass().getClassLoader().getParent();
-        }
-        LaunchedURLClassLoader launchedURLClassLoader = new LaunchedURLClassLoader(newURLs.toArray(new URL[0]), appClassLoader);
-        return launchedURLClassLoader;
+        ClassLoader appClassLoader = getClass().getClassLoader().getParent();
+
+        return new LaunchedClassLoader(isExploded(), getArchive(), newURLs.toArray(new URL[0]), appClassLoader);
     }
 
     /**
