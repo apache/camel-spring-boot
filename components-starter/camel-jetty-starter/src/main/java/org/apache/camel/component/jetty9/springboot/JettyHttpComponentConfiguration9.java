@@ -119,6 +119,26 @@ public class JettyHttpComponentConfiguration9
      */
     private Boolean useXForwardedForHeader = false;
     /**
+     * The size threshold after which files will be written to disk for
+     * multipart/form-data requests. By default the files are not written to
+     * disk
+     */
+    private Integer fileSizeThreshold = 0;
+    /**
+     * The directory location where files will be store for multipart/form-data
+     * requests. By default the files are written in the system temporary folder
+     */
+    private String filesLocation;
+    /**
+     * The maximum size allowed for uploaded files. -1 means no limit
+     */
+    private Long maxFileSize = -1L;
+    /**
+     * The maximum size allowed for multipart/form-data requests. -1 means no
+     * limit
+     */
+    private Long maxRequestSize = -1L;
+    /**
      * To use a custom thread pool for the server. This option should only be
      * used in special circumstances. The option is a
      * org.eclipse.jetty.util.thread.ThreadPool type.
@@ -329,6 +349,38 @@ public class JettyHttpComponentConfiguration9
 
     public void setUseXForwardedForHeader(Boolean useXForwardedForHeader) {
         this.useXForwardedForHeader = useXForwardedForHeader;
+    }
+
+    public Integer getFileSizeThreshold() {
+        return fileSizeThreshold;
+    }
+
+    public void setFileSizeThreshold(Integer fileSizeThreshold) {
+        this.fileSizeThreshold = fileSizeThreshold;
+    }
+
+    public String getFilesLocation() {
+        return filesLocation;
+    }
+
+    public void setFilesLocation(String filesLocation) {
+        this.filesLocation = filesLocation;
+    }
+
+    public Long getMaxFileSize() {
+        return maxFileSize;
+    }
+
+    public void setMaxFileSize(Long maxFileSize) {
+        this.maxFileSize = maxFileSize;
+    }
+
+    public Long getMaxRequestSize() {
+        return maxRequestSize;
+    }
+
+    public void setMaxRequestSize(Long maxRequestSize) {
+        this.maxRequestSize = maxRequestSize;
     }
 
     public ThreadPool getThreadPool() {

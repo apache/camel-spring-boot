@@ -66,6 +66,19 @@
       "sourceType": "org.apache.camel.component.jetty9.springboot.JettyHttpComponentConfiguration9"
     },
     {
+      "name": "camel.component.jetty.file-size-threshold",
+      "type": "java.lang.Integer",
+      "description": "The size threshold after which files will be written to disk for multipart\/form-data requests. By default the files are not written to disk",
+      "sourceType": "org.apache.camel.component.jetty9.springboot.JettyHttpComponentConfiguration9",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.jetty.files-location",
+      "type": "java.lang.String",
+      "description": "The directory location where files will be store for multipart\/form-data requests. By default the files are written in the system temporary folder",
+      "sourceType": "org.apache.camel.component.jetty9.springboot.JettyHttpComponentConfiguration9"
+    },
+    {
       "name": "camel.component.jetty.header-filter-strategy",
       "type": "org.apache.camel.spi.HeaderFilterStrategy",
       "description": "To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.",
@@ -94,6 +107,20 @@
       "type": "java.lang.String",
       "description": "Specifies the location of the Java keystore file, which contains the Jetty server's own X.509 certificate in a key entry.",
       "sourceType": "org.apache.camel.component.jetty9.springboot.JettyHttpComponentConfiguration9"
+    },
+    {
+      "name": "camel.component.jetty.max-file-size",
+      "type": "java.lang.Long",
+      "description": "The maximum size allowed for uploaded files. -1 means no limit",
+      "sourceType": "org.apache.camel.component.jetty9.springboot.JettyHttpComponentConfiguration9",
+      "defaultValue": -1
+    },
+    {
+      "name": "camel.component.jetty.max-request-size",
+      "type": "java.lang.Long",
+      "description": "The maximum size allowed for multipart\/form-data requests. -1 means no limit",
+      "sourceType": "org.apache.camel.component.jetty9.springboot.JettyHttpComponentConfiguration9",
+      "defaultValue": -1
     },
     {
       "name": "camel.component.jetty.max-threads",
