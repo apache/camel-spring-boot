@@ -18,11 +18,17 @@ package org.apache.camel.spring.boot;
 
 import org.apache.camel.impl.engine.DefaultPackageScanResourceResolver;
 import org.apache.camel.util.IOHelper;
+import org.apache.camel.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -80,6 +86,33 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
         }
 
         return entries;
+    }
+
+    protected String parseUrlPath(URL url) {
+        String urlPath = url.getFile();
+        urlPath = URLDecoder.decode(urlPath, StandardCharsets.UTF_8);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("Decoded urlPath: {} with protocol: {}", urlPath, url.getProtocol());
+        }
+
+        String nested = "nested:";
+
+        if (urlPath.startsWith(nested)) {
+            try {
+                urlPath = (new URI(url.getFile())).getPath();
+
+                return StringHelper.before(urlPath, "!", urlPath);
+            } catch (URISyntaxException var4) {
+            }
+
+            if (urlPath.startsWith(nested)) {
+                urlPath = urlPath.substring(nested.length());
+
+                return StringHelper.before(urlPath, "!", urlPath);
+            }
+        }
+
+        return super.parseUrlPath(url);
     }
 
     private boolean isSpringBootNestedJar(String name) {
