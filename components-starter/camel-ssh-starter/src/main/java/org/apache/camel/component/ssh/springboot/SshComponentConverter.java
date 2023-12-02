@@ -39,6 +39,7 @@ public class SshComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
+        answer.add(new ConvertiblePair(String.class, org.apache.sshd.client.ClientBuilder.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.ssh.SshConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.apache.sshd.common.keyprovider.KeyPairProvider.class));
         return answer;
@@ -57,6 +58,7 @@ public class SshComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
+            case "org.apache.sshd.client.ClientBuilder": return applicationContext.getBean(ref, org.apache.sshd.client.ClientBuilder.class);
             case "org.apache.camel.component.ssh.SshConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.ssh.SshConfiguration.class);
             case "org.apache.sshd.common.keyprovider.KeyPairProvider": return applicationContext.getBean(ref, org.apache.sshd.common.keyprovider.KeyPairProvider.class);
         }

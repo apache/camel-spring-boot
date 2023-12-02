@@ -18,6 +18,7 @@ package org.apache.camel.component.ssh.springboot;
 
 import org.apache.camel.component.ssh.SshConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.sshd.client.ClientBuilder;
 import org.apache.sshd.common.keyprovider.KeyPairProvider;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -97,6 +98,15 @@ public class SshComponentConfiguration
      */
     private String channelType = "exec";
     /**
+     * Instance of ClientBuilder used by the producer or consumer to create a
+     * new SshClient. The option is a org.apache.sshd.client.ClientBuilder type.
+     */
+    private ClientBuilder clientBuilder;
+    /**
+     * Whether to use compression, and if so which.
+     */
+    private String compressions;
+    /**
      * Component configuration. The option is a
      * org.apache.camel.component.ssh.SshConfiguration type.
      */
@@ -135,6 +145,16 @@ public class SshComponentConfiguration
      */
     private String certResourcePassword;
     /**
+     * Comma-separated list of allowed/supported ciphers in their order of
+     * preference.
+     */
+    private String ciphers;
+    /**
+     * Comma-separated list of allowed/supported key exchange algorithms in
+     * their order of preference.
+     */
+    private String kex;
+    /**
      * Sets the KeyPairProvider reference to use when connecting using
      * Certificates to the remote SSH Server. The option is a
      * org.apache.sshd.common.keyprovider.KeyPairProvider type.
@@ -149,10 +169,21 @@ public class SshComponentConfiguration
      */
     private String keyType;
     /**
+     * Comma-separated list of allowed/supported message authentication code
+     * algorithms in their order of preference. The MAC algorithm is used for
+     * data integrity protection.
+     */
+    private String macs;
+    /**
      * Sets the password to use in connecting to remote SSH server. Requires
      * keyPairProvider to be set to null.
      */
     private String password;
+    /**
+     * Comma-separated list of allowed/supported signature algorithms in their
+     * order of preference.
+     */
+    private String signatures;
     /**
      * Sets the username to use in logging into the remote SSH server.
      */
@@ -222,6 +253,22 @@ public class SshComponentConfiguration
         this.channelType = channelType;
     }
 
+    public ClientBuilder getClientBuilder() {
+        return clientBuilder;
+    }
+
+    public void setClientBuilder(ClientBuilder clientBuilder) {
+        this.clientBuilder = clientBuilder;
+    }
+
+    public String getCompressions() {
+        return compressions;
+    }
+
+    public void setCompressions(String compressions) {
+        this.compressions = compressions;
+    }
+
     public SshConfiguration getConfiguration() {
         return configuration;
     }
@@ -278,6 +325,22 @@ public class SshComponentConfiguration
         this.certResourcePassword = certResourcePassword;
     }
 
+    public String getCiphers() {
+        return ciphers;
+    }
+
+    public void setCiphers(String ciphers) {
+        this.ciphers = ciphers;
+    }
+
+    public String getKex() {
+        return kex;
+    }
+
+    public void setKex(String kex) {
+        this.kex = kex;
+    }
+
     public KeyPairProvider getKeyPairProvider() {
         return keyPairProvider;
     }
@@ -294,12 +357,28 @@ public class SshComponentConfiguration
         this.keyType = keyType;
     }
 
+    public String getMacs() {
+        return macs;
+    }
+
+    public void setMacs(String macs) {
+        this.macs = macs;
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSignatures() {
+        return signatures;
+    }
+
+    public void setSignatures(String signatures) {
+        this.signatures = signatures;
     }
 
     public String getUsername() {

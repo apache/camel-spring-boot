@@ -47,6 +47,24 @@
       "defaultValue": "exec"
     },
     {
+      "name": "camel.component.ssh.ciphers",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of allowed\/supported ciphers in their order of preference.",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ssh.client-builder",
+      "type": "org.apache.sshd.client.ClientBuilder",
+      "description": "Instance of ClientBuilder used by the producer or consumer to create a new SshClient. The option is a org.apache.sshd.client.ClientBuilder type.",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ssh.compressions",
+      "type": "java.lang.String",
+      "description": "Whether to use compression, and if so which.",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
+    },
+    {
       "name": "camel.component.ssh.configuration",
       "type": "org.apache.camel.component.ssh.SshConfiguration",
       "description": "Component configuration. The option is a org.apache.camel.component.ssh.SshConfiguration type.",
@@ -85,6 +103,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.ssh.kex",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of allowed\/supported key exchange algorithms in their order of preference.",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
+    },
+    {
       "name": "camel.component.ssh.key-pair-provider",
       "type": "org.apache.sshd.common.keyprovider.KeyPairProvider",
       "description": "Sets the KeyPairProvider reference to use when connecting using Certificates to the remote SSH Server. The option is a org.apache.sshd.common.keyprovider.KeyPairProvider type.",
@@ -110,6 +134,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.ssh.macs",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of allowed\/supported message authentication code algorithms in their order of preference. The MAC algorithm is used for data integrity protection.",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
+    },
+    {
       "name": "camel.component.ssh.password",
       "type": "java.lang.String",
       "description": "Sets the password to use in connecting to remote SSH server. Requires keyPairProvider to be set to null.",
@@ -125,6 +155,12 @@
       "name": "camel.component.ssh.shell-prompt",
       "type": "java.lang.String",
       "description": "Sets the shellPrompt to be dropped when response is read after command execution",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ssh.signatures",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of allowed\/supported signature algorithms in their order of preference.",
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
     },
     {
