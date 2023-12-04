@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.jetty11.springboot;
+package org.apache.camel.component.jetty12.springboot;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
-import org.apache.camel.component.jetty11.JettyHttpComponent11;
+import org.apache.camel.component.jetty12.JettyHttpComponent12;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
@@ -40,25 +40,25 @@ import org.springframework.context.annotation.Lazy;
  */
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,JettyHttpComponentConfiguration11.class})
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,JettyHttpComponentConfiguration12.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.jetty"})
-@AutoConfigureAfter({CamelAutoConfiguration.class, JettyHttpComponentConverter11.class})
-public class JettyHttpComponentAutoConfiguration11 {
+@AutoConfigureAfter({CamelAutoConfiguration.class, JettyHttpComponentConverter12.class})
+public class JettyHttpComponentAutoConfiguration12 {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private JettyHttpComponentConfiguration11 configuration;
+    private JettyHttpComponentConfiguration12 configuration;
 
-    public JettyHttpComponentAutoConfiguration11(
+    public JettyHttpComponentAutoConfiguration12(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
     }
 
     @Lazy
     @Bean
-    public ComponentCustomizer configureJettyHttpComponent11() {
+    public ComponentCustomizer configureJettyHttpComponent12() {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
@@ -70,7 +70,7 @@ public class JettyHttpComponentAutoConfiguration11 {
                         applicationContext,
                         "camel.component.customizer",
                         "camel.component.jetty.customizer")
-                    && target instanceof JettyHttpComponent11;
+                    && target instanceof JettyHttpComponent12;
             }
         };
     }

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.jetty11.springboot;
+package org.apache.camel.component.jetty12.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -32,7 +32,7 @@ import org.springframework.stereotype.Component;
 @Configuration(proxyBeanMethods = false)
 @ConfigurationPropertiesBinding
 @Component
-public class JettyHttpComponentConverter11 implements GenericConverter {
+public class JettyHttpComponentConverter12 implements GenericConverter {
 
     @Autowired
     private ApplicationContext applicationContext;

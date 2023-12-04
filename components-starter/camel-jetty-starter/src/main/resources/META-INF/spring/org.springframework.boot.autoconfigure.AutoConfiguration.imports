@@ -15,5 +15,5 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-org.apache.camel.component.jetty11.springboot.JettyHttpComponentConverter11
-org.apache.camel.component.jetty11.springboot.JettyHttpComponentAutoConfiguration11
+org.apache.camel.component.jetty12.springboot.JettyHttpComponentConverter12
+org.apache.camel.component.jetty12.springboot.JettyHttpComponentAutoConfiguration12
