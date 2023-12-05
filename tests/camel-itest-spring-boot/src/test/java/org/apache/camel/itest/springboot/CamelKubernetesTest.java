@@ -57,6 +57,7 @@ public class CamelKubernetesTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(createTestConfig(), "kubernetes-services");
         this.runComponentTest(createTestConfig(), "openshift-builds");
         this.runComponentTest(createTestConfig(), "openshift-build-configs");
+        this.runComponentTest(createTestConfig(), "kubernetes-cronjob");
 
         this.runModuleUnitTestsIfEnabled(config);
     }
