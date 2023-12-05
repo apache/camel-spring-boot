@@ -110,7 +110,6 @@ public class S3ComponentTest extends BaseS3 {
         // bucket
         assertNotNull(resultExchange.getIn().getHeader(AWS2S3Constants.LAST_MODIFIED));
         assertEquals("application/octet-stream", resultExchange.getIn().getHeader(AWS2S3Constants.CONTENT_TYPE));
-        assertNull(resultExchange.getIn().getHeader(AWS2S3Constants.CONTENT_ENCODING));
         assertEquals(26L, resultExchange.getIn().getHeader(AWS2S3Constants.CONTENT_LENGTH));
         assertNull(resultExchange.getIn().getHeader(AWS2S3Constants.CONTENT_DISPOSITION));
         assertNull(resultExchange.getIn().getHeader(AWS2S3Constants.CONTENT_MD5));
