@@ -36,8 +36,8 @@ public class CamelElasticsearchRestTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelElasticsearchRestTest.class))
-                .dependency("org.elasticsearch.client:elasticsearch-rest-client-sniffer:7.7.0")
-                .dependency("org.elasticsearch.client:elasticsearch-rest-client:7.7.0")
+                .dependency("org.elasticsearch.client:elasticsearch-rest-client-sniffer:8.10.4")
+                .dependency("org.elasticsearch.client:elasticsearch-rest-client:8.10.4")
                 .build();
     }
 

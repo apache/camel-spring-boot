@@ -26,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import static com.mongodb.client.model.Filters.eq;
 
+import jakarta.annotation.PostConstruct;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
@@ -428,8 +429,8 @@ public class MongoDbFindOperationIT {
 			return component;
 		}
 
-		@Bean
-		public void setProperties() {
+		@PostConstruct
+		public void setUp() {
 			context.getPropertiesComponent().setLocation("classpath:mongodb.test.properties");
 		}
 
