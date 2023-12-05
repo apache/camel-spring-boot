@@ -179,8 +179,11 @@ public abstract class AbstractMongoDbITSupport {
 		}
 
 		@Bean
-		public void propertyLocation() {
+		public String propertyLocation() {
+			String propertyLocation = "classpath:mongodb.test.properties";
 			context.getPropertiesComponent().setLocation("classpath:mongodb.test.properties");
+
+			return propertyLocation;
 		}
 	}
 }
