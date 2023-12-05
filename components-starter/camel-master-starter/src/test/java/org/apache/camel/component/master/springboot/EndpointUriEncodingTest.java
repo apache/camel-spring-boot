@@ -17,6 +17,7 @@
 package org.apache.camel.component.master.springboot;
 
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.camel.Consumer;
 import org.apache.camel.Endpoint;
@@ -71,8 +72,9 @@ public class EndpointUriEncodingTest {
         setupClusterService();
         return new RouteBuilder() {
             public void configure() {
+                final String randomMasterId = UUID.randomUUID().toString();
                 context.addComponent("dummy", new DummyComponent());
-                from("master:test:dummy://path?foo=hello}+world&bar=RAW(hello}+world)")
+                from("master:" + randomMasterId + ":dummy://path?foo=hello}+world&bar=RAW(hello}+world)")
                         .to("mock:result");
             }
         };

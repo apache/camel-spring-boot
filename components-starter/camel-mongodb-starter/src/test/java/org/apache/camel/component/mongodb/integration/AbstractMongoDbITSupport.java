@@ -19,6 +19,7 @@ package org.apache.camel.component.mongodb.integration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import jakarta.annotation.PostConstruct;
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.ProducerTemplate;
@@ -178,8 +179,8 @@ public abstract class AbstractMongoDbITSupport {
 			return component;
 		}
 
-		@Bean
-		public void propertyLocation() {
+		@PostConstruct
+		public void setUp() {
 			context.getPropertiesComponent().setLocation("classpath:mongodb.test.properties");
 		}
 	}

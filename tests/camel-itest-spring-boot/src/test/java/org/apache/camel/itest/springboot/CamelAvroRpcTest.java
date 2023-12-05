@@ -35,10 +35,10 @@ public class CamelAvroRpcTest extends AbstractSpringBootTestSupport {
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder()
                 .module(inferModuleName(CamelAvroRpcTest.class))
-                .dependency("org.apache.avro:avro:1.9.1")
-                .dependency("org.apache.avro:avro-ipc:1.9.1")
-                .dependency("org.apache.avro:avro-ipc-jetty:1.9.1")
-                .dependency("org.apache.avro:avro-ipc-netty:1.9.1")
+                .dependency("org.apache.avro:avro:1.11.3")
+                .dependency("org.apache.avro:avro-ipc:1.11.3")
+                .dependency("org.apache.avro:avro-ipc-jetty:1.11.3")
+                .dependency("org.apache.avro:avro-ipc-netty:1.11.3")
                 .build();
     }
 

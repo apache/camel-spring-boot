@@ -42,7 +42,7 @@ public class BaseS3 {
     protected ProducerTemplate template;
 
     @RegisterExtension
-    public static AWSService service = AWSServiceFactory.createDynamodbService();
+    public static AWSService service = AWSServiceFactory.createS3Service();
 
     @RegisterExtension
     public static SharedNameGenerator sharedNameGenerator = new TestEntityNameGenerator();
