@@ -19,31 +19,28 @@ package org.apache.camel.component.reactive.streams.springboot;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.reactive.streams.ReactiveStreamsHelper;
 import org.apache.camel.component.reactive.streams.api.CamelReactiveStreamsService;
+import org.apache.camel.component.reactive.streams.api.CamelReactiveStreamsServiceFactory;
+import org.apache.camel.component.reactive.streams.engine.DefaultCamelReactiveStreamsServiceFactory;
 import org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
 @AutoConfigureAfter(ReactiveStreamsComponentAutoConfiguration.class)
 @ConditionalOnBean(ReactiveStreamsComponentAutoConfiguration.class)
 @EnableConfigurationProperties(ReactiveStreamsComponentConfiguration.class)
+@Configuration
 public class ReactiveStreamsServiceAutoConfiguration {
-    @Autowired
-    private CamelContext context;
-    @Autowired
-    private ReactiveStreamsComponentConfiguration configuration;
 
     @Lazy
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnClass(CamelContext.class)
-    public CamelReactiveStreamsService camelReactiveStreamsService(ApplicationContext ac) throws Exception {
+    public CamelReactiveStreamsService camelReactiveStreamsService(CamelContext context,
+                                                                   ReactiveStreamsComponentConfiguration configuration) {
         ReactiveStreamsEngineConfiguration engineConfiguration = new ReactiveStreamsEngineConfiguration();
 
         if (configuration.getReactiveStreamsEngineConfiguration() != null) {
@@ -58,7 +55,7 @@ public class ReactiveStreamsServiceAutoConfiguration {
             }
         }
 
-        return ReactiveStreamsHelper.resolveReactiveStreamsService(context, configuration.getServiceType(), engineConfiguration);
+        return new DefaultCamelReactiveStreamsServiceFactory().newInstance(context, engineConfiguration);
     }
 
 }
