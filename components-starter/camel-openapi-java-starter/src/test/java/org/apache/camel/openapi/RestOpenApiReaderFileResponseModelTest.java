@@ -95,7 +95,7 @@ public class RestOpenApiReaderFileResponseModelTest {
 				new DefaultClassResolver());
 		assertNotNull(openApi);
 
-		String json = RestOpenApiSupport.getJsonFromOpenAPI(openApi, config);
+		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
 
 		LOG.info(json);
 		assertTrue(json.contains("\"type\" : \"file\""));
