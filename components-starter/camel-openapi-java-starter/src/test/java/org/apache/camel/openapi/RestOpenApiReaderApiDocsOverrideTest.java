@@ -101,7 +101,7 @@ public class RestOpenApiReaderApiDocsOverrideTest {
 
 		assertNotNull(openApi);
 
-		String json = RestOpenApiSupport.getJsonFromOpenAPI(openApi, config);
+		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
 		log.info(json);
 
 		assertFalse(json.contains("\"/hello/bye\""));

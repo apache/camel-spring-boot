@@ -157,7 +157,7 @@ public class ComplexTypesTest {
 		RestOpenApiReader reader = new RestOpenApiReader();
 		OpenAPI openApi = reader.read(context, rests, config, context.getName(), new DefaultClassResolver());
 		assertNotNull(openApi);
-		String json = RestOpenApiSupport.getJsonFromOpenAPI(openApi, config);
+		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
 
 		LOG.info(json);
 

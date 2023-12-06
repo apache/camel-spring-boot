@@ -116,7 +116,7 @@ public class RestOpenApiReaderModelBookOrderTest {
 				new DefaultClassResolver());
 		assertNotNull(openApi);
 
-		String json = RestOpenApiSupport.getJsonFromOpenAPI(openApi, config);
+		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
 
 		log.info(json);
 

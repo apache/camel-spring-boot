@@ -97,7 +97,7 @@ public class RestOpenApiModelApiSecurityRequirementsTest {
 		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
 				new DefaultClassResolver());
 		assertNotNull(openApi);
-		String json = RestOpenApiSupport.getJsonFromOpenAPI(openApi, config);
+		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
 		log.info(json);
 
 		assertTrue(json.contains("\"securityDefinitions\" : {"));
