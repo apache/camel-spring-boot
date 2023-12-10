@@ -32,6 +32,13 @@
       "sourceType": "org.apache.camel.dataformat.parquet.avro.springboot.ParquetAvroDataFormatConfiguration"
     },
     {
+      "name": "camel.dataformat.parquet-avro.lazy-load",
+      "type": "java.lang.Boolean",
+      "description": "Whether the unmarshalling should produce an iterator of records or read all the records at once.",
+      "sourceType": "org.apache.camel.dataformat.parquet.avro.springboot.ParquetAvroDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.dataformat.parquet-avro.unmarshal-type",
       "type": "java.lang.String",
       "description": "Class to use when (un)marshalling. If omitted, parquet files are converted into Avro's GenericRecords for unmarshalling and input objects are assumed as GenericRecords for marshalling.",

@@ -44,6 +44,11 @@ public class ParquetAvroDataFormatConfiguration
      * are assumed as GenericRecords for marshalling.
      */
     private String unmarshalType;
+    /**
+     * Whether the unmarshalling should produce an iterator of records or read
+     * all the records at once.
+     */
+    private Boolean lazyLoad = false;
 
     public String getCompressionCodecName() {
         return compressionCodecName;
@@ -59,5 +64,13 @@ public class ParquetAvroDataFormatConfiguration
 
     public void setUnmarshalType(String unmarshalType) {
         this.unmarshalType = unmarshalType;
+    }
+
+    public Boolean getLazyLoad() {
+        return lazyLoad;
+    }
+
+    public void setLazyLoad(Boolean lazyLoad) {
+        this.lazyLoad = lazyLoad;
     }
 }
