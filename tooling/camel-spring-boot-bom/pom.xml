@@ -530,6 +530,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-elasticsearch-rest-client-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-elasticsearch-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
