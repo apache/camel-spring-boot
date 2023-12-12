@@ -37,6 +37,7 @@ public class AzureVaultAutoConfiguration {
         answer.setClientSecret(config.getClientSecret());
         answer.setVaultName(config.getVaultName());
         answer.setTenantId(config.getTenantId());
+        answer.setAzureIdentityEnabled(config.isAzureIdentityEnabled());
         answer.setRefreshEnabled(config.isRefreshEnabled());
         answer.setRefreshPeriod(config.getRefreshPeriod());
         answer.setSecrets(config.getSecrets());
