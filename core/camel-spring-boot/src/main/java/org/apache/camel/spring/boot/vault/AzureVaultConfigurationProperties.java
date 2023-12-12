@@ -41,7 +41,13 @@ public class AzureVaultConfigurationProperties {
      * The tenant Id
      */
     private String tenantId;
-    
+
+
+    /**
+     * Whether the Azure Identity Authentication should be used or not.
+     */
+    private boolean azureIdentityEnabled;
+
     /**
      * Whether to automatically reload Camel upon secrets being updated in Azure.
      */
@@ -108,7 +114,15 @@ public class AzureVaultConfigurationProperties {
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId;
     }
-    
+
+    public boolean isAzureIdentityEnabled() {
+        return azureIdentityEnabled;
+    }
+
+    public void setAzureIdentityEnabled(boolean azureIdentityEnabled) {
+        this.azureIdentityEnabled = azureIdentityEnabled;
+    }
+
     public boolean isRefreshEnabled() {
         return refreshEnabled;
     }

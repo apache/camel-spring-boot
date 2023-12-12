@@ -1607,6 +1607,13 @@
       "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
     },
     {
+      "name": "camel.vault.azure.azure-identity-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether the Azure Identity Authentication should be used or not.",
+      "sourceType": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.vault.azure.blob-access-key",
       "type": "java.lang.String",
       "description": "The Eventhubs Blob Access Key for CheckpointStore purpose",
