@@ -110,7 +110,12 @@ public class JasyptEncryptedPropertiesUtils {
         String ivGeneratorClassName = configuration.getIvGeneratorClassName();
         String algorithm = configuration.getAlgorithm();
         if (isBlank(ivGeneratorClassName)) {
-            return isIVNeeded(algorithm) ? new RandomIvGenerator() : new NoIvGenerator();
+            if (isIVNeeded(algorithm)) {
+                return configuration.getRandomIvGeneratorAlgorithm() != null ?
+                        new RandomIvGenerator(configuration.getRandomIvGeneratorAlgorithm()) : new RandomIvGenerator();
+            } else {
+                return new NoIvGenerator();
+            }
         }
         IvGenerator ivGenerator = loadClass(ivGeneratorClassName);
         return ivGenerator;
