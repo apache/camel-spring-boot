@@ -116,6 +116,8 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
         if (saltGenerator != null) {
             return saltGenerator;
         }
-        return new RandomSaltGenerator();
+
+        return configuration.getRandomSaltGeneratorAlgorithm() != null ?
+            new RandomSaltGenerator(configuration.getRandomSaltGeneratorAlgorithm()) : new RandomSaltGenerator();
     }
 }
