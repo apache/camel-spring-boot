@@ -56,11 +56,17 @@ public class JasyptEncryptedPropertiesConfiguration {
     @Value("${camel.component.jasypt.salt-generator-class-name}")
     private String saltGeneratorClassName = "org.jasypt.salt.RandomSaltGenerator";
 
+    /**
+     * The algorithm for the random iv generator
+     */
     @Value("${camel.component.jasypt.random-iv-generator-algorithm}")
-    private String randomIvGeneratorAlgorithm;
+    private String randomIvGeneratorAlgorithm = "SHA1PRNG";
 
+    /**
+     * The algorithm for the salt generator
+     */
     @Value("${camel.component.jasypt.random-salt-generator-algorithm}")
-    private String randomSaltGeneratorAlgorithm;
+    private String randomSaltGeneratorAlgorithm = "SHA1PRNG";
 
     /**
      * The class name of the security provider to be used for obtaining the encryption
@@ -68,7 +74,6 @@ public class JasyptEncryptedPropertiesConfiguration {
      */
     @Value("${camel.component.jasypt.provider-name}")
     private String providerName;
-
 
     public boolean isEnabled() {
         return enabled;
