@@ -1,3 +1,65 @@
 {
-  "properties": []
+  "groups": [
+    {
+      "name": "camel.component.jasypt",
+      "type": "org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration",
+      "sourceType": "org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.jasypt.algorithm",
+      "type": "java.lang.String",
+      "description": "The algorithm to be used for decryption. Default: PBEWithMD5AndDES",
+      "sourceType": "org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration",
+      "defaultValue": "PBEWithMD5AndDES"
+    },
+    {
+      "name": "camel.component.jasypt.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable the component",
+      "sourceType": "org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.jasypt.iv-generator-class-name",
+      "type": "java.lang.String",
+      "description": "The initialization vector (IV) generator applied in decryption operations. Default: org.jasypt.iv.",
+      "sourceType": "org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration"
+    },
+    {
+      "name": "camel.component.jasypt.password",
+      "type": "java.lang.String",
+      "description": "The master password used by Jasypt for decrypting the values. This option supports prefixes which influence the master password lookup behaviour: sysenv: means to lookup the OS system environment with the given key. sys: means to lookup a JVM system property.",
+      "sourceType": "org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration"
+    },
+    {
+      "name": "camel.component.jasypt.provider-name",
+      "type": "java.lang.String",
+      "description": "The class name of the security provider to be used for obtaining the encryption algorithm.",
+      "sourceType": "org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration"
+    },
+    {
+      "name": "camel.component.jasypt.random-iv-generator-algorithm",
+      "type": "java.lang.String",
+      "description": "The algorithm for the random iv generator",
+      "sourceType": "org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration",
+      "defaultValue": "SHA1PRNG"
+    },
+    {
+      "name": "camel.component.jasypt.random-salt-generator-algorithm",
+      "type": "java.lang.String",
+      "description": "The algorithm for the salt generator",
+      "sourceType": "org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration",
+      "defaultValue": "SHA1PRNG"
+    },
+    {
+      "name": "camel.component.jasypt.salt-generator-class-name",
+      "type": "java.lang.String",
+      "description": "The salt generator applied in decryption operations. Default: org.jasypt.salt.RandomSaltGenerator",
+      "sourceType": "org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration",
+      "defaultValue": "org.jasypt.salt.RandomSaltGenerator"
+    }
+  ],
+  "hints": []
 }

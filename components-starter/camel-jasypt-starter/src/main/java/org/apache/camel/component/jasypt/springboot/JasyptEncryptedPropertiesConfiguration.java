@@ -16,8 +16,9 @@
  */
 package org.apache.camel.component.jasypt.springboot;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
+@ConfigurationProperties(prefix = "camel.component.jasypt")
 public class JasyptEncryptedPropertiesConfiguration {
 
     static final String PREFIX = "camel.component.jasypt";
@@ -25,13 +26,11 @@ public class JasyptEncryptedPropertiesConfiguration {
     /**
      * Enable the component
      */
-    @Value("${camel.component.jasypt.enabled}")
     private boolean enabled;
 
     /**
      * The algorithm to be used for decryption. Default: PBEWithMD5AndDES
      */
-    @Value("${camel.component.jasypt.algorithm}")
     private String algorithm = "PBEWithMD5AndDES";
 
     /**
@@ -40,39 +39,33 @@ public class JasyptEncryptedPropertiesConfiguration {
      * sysenv: means to lookup the OS system environment with the given key.
      * sys: means to lookup a JVM system property.
      */
-    @Value("${camel.component.jasypt.password}")
     private String password;
 
     /**
      * The initialization vector (IV) generator applied in decryption operations.
      * Default: org.jasypt.iv.
      */
-    @Value("${camel.component.jasypt.iv-generator-class-name}")
     private String ivGeneratorClassName;
 
     /**
      * The salt generator applied in decryption operations. Default: org.jasypt.salt.RandomSaltGenerator
      */
-    @Value("${camel.component.jasypt.salt-generator-class-name}")
     private String saltGeneratorClassName = "org.jasypt.salt.RandomSaltGenerator";
 
     /**
      * The algorithm for the random iv generator
      */
-    @Value("${camel.component.jasypt.random-iv-generator-algorithm}")
     private String randomIvGeneratorAlgorithm = "SHA1PRNG";
 
     /**
      * The algorithm for the salt generator
      */
-    @Value("${camel.component.jasypt.random-salt-generator-algorithm}")
     private String randomSaltGeneratorAlgorithm = "SHA1PRNG";
 
     /**
      * The class name of the security provider to be used for obtaining the encryption
      * algorithm.
      */
-    @Value("${camel.component.jasypt.provider-name}")
     private String providerName;
 
     public boolean isEnabled() {
