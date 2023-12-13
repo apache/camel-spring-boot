@@ -25,6 +25,7 @@ import com.azure.cosmos.models.ThroughputProperties;
 import org.apache.camel.component.azure.cosmosdb.CosmosDbComponent;
 import org.apache.camel.component.azure.cosmosdb.CosmosDbConfiguration;
 import org.apache.camel.component.azure.cosmosdb.CosmosDbOperationsDefinition;
+import org.apache.camel.component.azure.cosmosdb.CredentialType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -260,10 +261,9 @@ public class CosmosDbComponentConfiguration
      */
     private String accountKey;
     /**
-     * Indicates whether to use the default identity mechanism instead of the
-     * access key.
+     * Determines the credential strategy to adopt
      */
-    private Boolean useDefaultIdentity = false;
+    private CredentialType credentialType = CredentialType.AZURE_IDENTITY;
 
     public Boolean getClientTelemetryEnabled() {
         return clientTelemetryEnabled;
@@ -514,11 +514,11 @@ public class CosmosDbComponentConfiguration
         this.accountKey = accountKey;
     }
 
-    public Boolean getUseDefaultIdentity() {
-        return useDefaultIdentity;
+    public CredentialType getCredentialType() {
+        return credentialType;
     }
 
-    public void setUseDefaultIdentity(Boolean useDefaultIdentity) {
-        this.useDefaultIdentity = useDefaultIdentity;
+    public void setCredentialType(CredentialType credentialType) {
+        this.credentialType = credentialType;
     }
 }
