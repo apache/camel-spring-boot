@@ -263,7 +263,7 @@ public class CosmosDbComponentConfiguration
     /**
      * Determines the credential strategy to adopt
      */
-    private CredentialType credentialType = CredentialType.SHARED_ACCOUNT_KEY;
+    private CredentialType credentialType = CredentialType.AZURE_IDENTITY;
 
     public Boolean getClientTelemetryEnabled() {
         return clientTelemetryEnabled;

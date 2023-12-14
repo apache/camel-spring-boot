@@ -32,6 +32,7 @@ import org.apache.camel.test.infra.infinispan.services.InfinispanServiceFactory;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 import org.infinispan.client.hotrod.RemoteCacheManager;
@@ -51,6 +52,7 @@ import java.util.concurrent.TimeUnit;
 				InfinispanRemoteClusteredViewIT.class
 		}
 )
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class InfinispanRemoteClusteredViewIT {
 	@RegisterExtension
 	public static InfinispanService service = InfinispanServiceFactory.createService();

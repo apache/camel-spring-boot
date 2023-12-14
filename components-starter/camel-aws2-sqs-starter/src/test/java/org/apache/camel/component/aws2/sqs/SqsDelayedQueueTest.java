@@ -24,6 +24,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import software.amazon.awssdk.services.sqs.model.ListQueuesResponse;
@@ -45,6 +46,7 @@ import static org.hamcrest.Matchers.is;
                 BaseSqs.TestConfiguration.class
         }
 )
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 /**
  * Based on camel-quarkus Aws2SqsTest#sqsAutoCreateDelayedQueue
  */

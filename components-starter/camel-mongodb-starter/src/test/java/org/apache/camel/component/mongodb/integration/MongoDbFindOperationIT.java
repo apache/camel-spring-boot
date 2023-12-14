@@ -45,6 +45,7 @@ import org.junit.jupiter.api.Test;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -71,6 +72,7 @@ import java.util.Map;
                 MongoDbFindOperationIT.TestConfiguration.class
 		}
 )
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbFindOperationIT extends AbstractMongoDbITSupport {
 
 	protected static String dbName = "test";

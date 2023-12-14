@@ -27,12 +27,12 @@ import com.datastax.oss.driver.api.core.config.DriverConfigLoader;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.test.infra.cassandra.services.CassandraLocalContainerService;
+import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.testcontainers.shaded.org.apache.commons.io.IOUtils;
 
 public class BaseCassandra {
     
@@ -66,7 +66,7 @@ public class BaseCassandra {
     }
 
     public void executeScript(String pathToScript) throws IOException {
-        String s = IOUtils.toString(getClass().getResourceAsStream("/" + pathToScript), "UTF-8");
+        String s = new String(IOUtils.toByteArray(getClass().getResourceAsStream("/" + pathToScript)));
         String[] statements = s.split(";");
         for (int i = 0; i < statements.length; i++) {
             if (!statements[i].isEmpty()) {

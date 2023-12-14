@@ -23,12 +23,13 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.testcontainers.shaded.org.awaitility.Awaitility;
 import software.amazon.awssdk.services.s3.model.S3Object;
 
 import java.util.List;
@@ -47,6 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
                 S3MoveAfterReadConsumerTest.TestConfiguration.class
         }
 )
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class S3MoveAfterReadConsumerTest extends BaseS3 {
 
     @EndpointInject("mock:result")

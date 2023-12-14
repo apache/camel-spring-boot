@@ -27,6 +27,7 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
                 KafkaConsumerRebalanceIT.TestConfiguration.class,
         }
 )
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaConsumerRebalanceIT extends BaseEmbeddedKafkaTestSupport {
     private static final String TOPIC = "offset-rebalance";
 

@@ -37,6 +37,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -60,6 +61,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
                 KafkaConsumerFullIT.TestConfiguration.class,
         }
 )
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
     public static final String TOPIC = "test-full";
 

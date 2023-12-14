@@ -24,10 +24,12 @@ import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.test.infra.infinispan.services.InfinispanService;
 import org.apache.camel.test.infra.infinispan.services.InfinispanServiceFactory;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 import org.infinispan.client.hotrod.RemoteCacheManager;
@@ -38,11 +40,11 @@ import org.infinispan.configuration.cache.CacheMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
-import org.testcontainers.shaded.org.apache.commons.lang3.SystemUtils;
 
 import java.util.Properties;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class InfinispanRemoteTestSupport {
 	public static final String TEST_CACHE = "mycache";
 	@RegisterExtension
