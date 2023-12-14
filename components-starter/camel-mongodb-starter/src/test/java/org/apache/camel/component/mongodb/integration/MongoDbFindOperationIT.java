@@ -31,11 +31,9 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.component.mongodb.MongoDbComponent;
 import org.apache.camel.component.mongodb.MongoDbConstants;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.test.infra.mongodb.services.MongoDBLocalContainerService;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 import org.apache.commons.lang3.ObjectUtils;
@@ -43,7 +41,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.RegisterExtension;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -53,7 +50,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.testcontainers.containers.wait.strategy.Wait;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -75,10 +71,7 @@ import java.util.Map;
                 MongoDbFindOperationIT.TestConfiguration.class
 		}
 )
-public class MongoDbFindOperationIT {
-
-	@RegisterExtension
-	public static MongoDBLocalContainerService service;
+public class MongoDbFindOperationIT extends AbstractMongoDbITSupport {
 
 	protected static String dbName = "test";
 	protected static String testCollectionName;
@@ -89,20 +82,6 @@ public class MongoDbFindOperationIT {
 	@Autowired
 	CamelContext context;
 	private ProducerTemplate template;
-
-	static {
-		// This one requires Mongo 4.4. This is related to
-		// "CAMEL-15604 support allowDiskUse for MongoDB find operations"
-		service = new MongoDBLocalContainerService("mongo:4.4");
-
-		service.getContainer()
-				.waitingFor(Wait.forListeningPort())
-				.withCommand(
-						"--replSet", "replicationName",
-						"--oplogSize", "5000",
-						"--syncdelay", "0",
-						"--noauth");
-	}
 
 	@BeforeAll
 	public static void beforeClass() {
@@ -121,10 +100,6 @@ public class MongoDbFindOperationIT {
 		testCollection = db.getCollection(testCollectionName, Document.class);
 
 		template = context.createProducerTemplate();
-	}
-
-	private MockEndpoint getMockEndpoint(String endpoint) {
-		return (MockEndpoint) context.getEndpoint(endpoint);
 	}
 
 	protected void pumpDataIntoTestCollection() {
