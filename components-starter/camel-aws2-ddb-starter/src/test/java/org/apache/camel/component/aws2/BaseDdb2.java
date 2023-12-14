@@ -18,7 +18,6 @@ package org.apache.camel.component.aws2;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.infra.aws2.clients.AWSSDKClientUtils;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.apache.camel.test.infra.aws.common.services.AWSService;

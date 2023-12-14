@@ -21,6 +21,7 @@ import org.apache.camel.spring.processor.idempotent.SpringCacheIdempotentReposit
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 import org.infinispan.spring.remote.provider.SpringRemoteCacheManagerFactoryBean;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
@@ -37,6 +38,7 @@ import java.util.Properties;
 		},
 		properties = {"camel.springboot.routes-include-pattern=file:src/test/resources/org/apache/camel/component/infinispan/spring/SpringInfinispanRemoteIdempotentRepositorySpringTest.xml"}
 )
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class SpringInfinispanRemoteIdempotentRepositorySpringIT
 		extends SpringInfinispanRemoteIdempotentRepositoryTestSupport {
 

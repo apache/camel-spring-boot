@@ -38,6 +38,7 @@ import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.internals.RecordHeader;
+import org.awaitility.Awaitility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,6 +46,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -55,7 +57,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DirtiesContext
@@ -68,6 +69,7 @@ import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
                 KafkaConsumerHealthCheckIT.TestConfiguration.class,
         }
 )
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaConsumerHealthCheckIT extends BaseEmbeddedKafkaTestSupport {
     public static final String TOPIC = "test-health";
 
@@ -133,7 +135,7 @@ public class KafkaConsumerHealthCheckIT extends BaseEmbeddedKafkaTestSupport {
         Assertions.assertTrue(up, "liveness check");
 
         // health-check readiness should be ready
-        await().atMost(20, TimeUnit.SECONDS).untilAsserted(() -> {
+        Awaitility.await().atMost(20, TimeUnit.SECONDS).untilAsserted(() -> {
             Collection<HealthCheck.Result> res2 = HealthCheckHelper.invokeReadiness(context);
             boolean up2 = res2.stream().allMatch(r -> r.getState().equals(HealthCheck.State.UP));
             Assertions.assertTrue(up2, "readiness check");
@@ -174,7 +176,7 @@ public class KafkaConsumerHealthCheckIT extends BaseEmbeddedKafkaTestSupport {
         up = res.stream().allMatch(r -> r.getState().equals(HealthCheck.State.UP));
         Assertions.assertTrue(up, "liveness check");
         // but health-check readiness should NOT be ready
-        await().atMost(20, TimeUnit.SECONDS).untilAsserted(() -> {
+        Awaitility.await().atMost(20, TimeUnit.SECONDS).untilAsserted(() -> {
             Collection<HealthCheck.Result> res2 = HealthCheckHelper.invoke(context);
             Optional<HealthCheck.Result> down
                     = res2.stream().filter(r -> r.getState().equals(HealthCheck.State.DOWN)).findFirst();

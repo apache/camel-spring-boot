@@ -26,7 +26,6 @@ import org.apache.camel.test.infra.aws2.services.AWSServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import software.amazon.awssdk.services.cloudwatch.CloudWatchClient;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
 
 public class BaseKinesis {

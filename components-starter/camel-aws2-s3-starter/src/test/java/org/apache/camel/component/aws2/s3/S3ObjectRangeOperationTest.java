@@ -25,6 +25,7 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -52,6 +53,7 @@ import java.nio.charset.StandardCharsets;
                 S3ObjectRangeOperationTest.TestConfiguration.class
         }
 )
+@DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class S3ObjectRangeOperationTest extends BaseS3 {
     private static final Logger LOG = LoggerFactory.getLogger(S3ObjectRangeOperationTest.class);
 
