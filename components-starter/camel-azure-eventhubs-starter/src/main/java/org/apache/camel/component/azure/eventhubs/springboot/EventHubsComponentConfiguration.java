@@ -24,6 +24,7 @@ import com.azure.messaging.eventhubs.CheckpointStore;
 import com.azure.messaging.eventhubs.EventHubProducerAsyncClient;
 import com.azure.messaging.eventhubs.models.EventPosition;
 import com.azure.storage.common.StorageSharedKeyCredential;
+import org.apache.camel.component.azure.eventhubs.CredentialType;
 import org.apache.camel.component.azure.eventhubs.EventHubsComponent;
 import org.apache.camel.component.azure.eventhubs.EventHubsConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -197,6 +198,10 @@ public class EventHubsComponentConfiguration
      * https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-get-connection-string
      */
     private String connectionString;
+    /**
+     * Determines the credential strategy to adopt
+     */
+    private CredentialType credentialType = CredentialType.CONNECTION_STRING;
     /**
      * The generated value for the SharedAccessName.
      */
@@ -374,6 +379,14 @@ public class EventHubsComponentConfiguration
 
     public void setConnectionString(String connectionString) {
         this.connectionString = connectionString;
+    }
+
+    public CredentialType getCredentialType() {
+        return credentialType;
+    }
+
+    public void setCredentialType(CredentialType credentialType) {
+        this.credentialType = credentialType;
     }
 
     public String getSharedAccessKey() {

@@ -103,6 +103,12 @@
       "defaultValue": "$Default"
     },
     {
+      "name": "camel.component.azure-eventhubs.credential-type",
+      "type": "org.apache.camel.component.azure.eventhubs.CredentialType",
+      "description": "Determines the credential strategy to adopt",
+      "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration"
+    },
+    {
       "name": "camel.component.azure-eventhubs.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
