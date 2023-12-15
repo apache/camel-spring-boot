@@ -71,6 +71,12 @@
       "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
     },
     {
+      "name": "camel.component.azure-servicebus.credential-type",
+      "type": "org.apache.camel.component.azure.servicebus.CredentialType",
+      "description": "Determines the credential strategy to adopt",
+      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
+    },
+    {
       "name": "camel.component.azure-servicebus.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"

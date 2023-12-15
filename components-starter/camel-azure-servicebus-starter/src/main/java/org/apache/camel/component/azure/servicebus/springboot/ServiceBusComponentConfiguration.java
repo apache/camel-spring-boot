@@ -28,6 +28,7 @@ import com.azure.messaging.servicebus.ServiceBusSenderAsyncClient;
 import com.azure.messaging.servicebus.ServiceBusTransactionContext;
 import com.azure.messaging.servicebus.models.ServiceBusReceiveMode;
 import com.azure.messaging.servicebus.models.SubQueue;
+import org.apache.camel.component.azure.servicebus.CredentialType;
 import org.apache.camel.component.azure.servicebus.ServiceBusComponent;
 import org.apache.camel.component.azure.servicebus.ServiceBusConfiguration;
 import org.apache.camel.component.azure.servicebus.ServiceBusConsumerOperationDefinition;
@@ -200,6 +201,10 @@ public class ServiceBusComponentConfiguration
      * Service Bus resource.
      */
     private String connectionString;
+    /**
+     * Determines the credential strategy to adopt
+     */
+    private CredentialType credentialType = CredentialType.CONNECTION_STRING;
     /**
      * Fully Qualified Namespace of the service bus
      */
@@ -406,6 +411,14 @@ public class ServiceBusComponentConfiguration
 
     public void setConnectionString(String connectionString) {
         this.connectionString = connectionString;
+    }
+
+    public CredentialType getCredentialType() {
+        return credentialType;
+    }
+
+    public void setCredentialType(CredentialType credentialType) {
+        this.credentialType = credentialType;
     }
 
     public String getFullyQualifiedNamespace() {
