@@ -1033,6 +1033,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.springboot.route-controller-unhealthy-on-restarting",
+      "type": "java.lang.Boolean",
+      "description": "Whether to mark the route as unhealthy (down) when the route failed to initially start, and is being controlled for restarting (backoff). Setting this to true allows health checks to know about this and can report the Camel application as DOWN. The default is false.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.springboot.route-filter-exclude-pattern",
       "type": "java.lang.String",
       "description": "Used for filtering routes matching the given pattern, which follows the following rules: - Match by route id - Match by route input endpoint uri The matching is using exact match, by wildcard and regular expression. For example to only include routes which starts with foo in their route id's, use: include=foo&#42; And to exclude routes which starts from JMS endpoints, use: exclude=jms:&#42; Multiple patterns can be separated by comma, for example to exclude both foo and bar routes, use: exclude=foo&#42;,bar&#42; Exclude takes precedence over include.",

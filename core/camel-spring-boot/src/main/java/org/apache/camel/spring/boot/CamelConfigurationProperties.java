@@ -898,6 +898,16 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean routeControllerUnhealthyOnExhausted;
 
     /**
+     * Whether to mark the route as unhealthy (down) when the route failed to initially start, and is being controlled
+     * for restarting (backoff).
+     *
+     * Setting this to true allows health checks to know about this and can report the Camel application as DOWN.
+     *
+     * The default is false.
+     */
+    private boolean routeControllerUnhealthyOnRestarting;
+
+    /**
      * Experimental: Configure the context to be lightweight.
      * This will trigger some optimizations and memory reduction options.
      * Lightweight context has some limitations.
