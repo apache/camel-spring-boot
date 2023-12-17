@@ -26,6 +26,7 @@ import org.apache.camel.spring.boot.dummy.DummyComponent;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +37,7 @@ import static org.awaitility.Awaitility.await;
 
 @DirtiesContext
 @CamelSpringBootTest
+@EnableAutoConfiguration
 @SpringBootTest(
     classes = {
         CamelAutoConfiguration.class,
@@ -43,10 +45,10 @@ import static org.awaitility.Awaitility.await;
     },
     properties = {
         "camel.springboot.main-run-controller = true",
-        "camel.springboot.routeControllerSuperviseEnabled = true",
-        "camel.springboot.routeControllerInitialDelay = 500",
-        "camel.springboot.routeControllerBackoffDelay = 1000",
-        "camel.springboot.routeControllerBackoffMaxAttempts = 5",
+        "camel.routecontroller.enabled = true",
+        "camel.routecontroller.initialDelay = 500",
+        "camel.routecontroller.backoffDelay = 1000",
+        "camel.routecontroller.backoffMaxAttempts = 5",
     }
 )
 public class SupervisingRouteControllerRestartTest {
