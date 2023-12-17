@@ -35,8 +35,6 @@
     <properties>
         <firstVersion>3.9.0</firstVersion>
         <label>spring,microservice</label>
-
-        <camel.osgi.export.pkg />
     </properties>
 
     <dependencies>
