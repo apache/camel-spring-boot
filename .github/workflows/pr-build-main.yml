@@ -45,13 +45,13 @@ jobs:
     - name: Maven Build
       run: ./mvnw -l build.log -V --no-transfer-progress -Psourcecheck -Dci.env.name=github.com clean install
     - name: Archive Logs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: build.log
         path: build.log
     - name: Archive Surefire Logs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: integration-test-surefire-logs
