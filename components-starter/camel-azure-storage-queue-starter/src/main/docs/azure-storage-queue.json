@@ -47,6 +47,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.azure-storage-queue.credential-type",
+      "type": "org.apache.camel.component.azure.storage.queue.CredentialType",
+      "description": "Determines the credential strategy to adopt",
+      "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
+    },
+    {
       "name": "camel.component.azure-storage-queue.credentials",
       "type": "com.azure.storage.common.StorageSharedKeyCredential",
       "description": "StorageSharedKeyCredential can be injected to create the azure client, this holds the important authentication information. The option is a com.azure.storage.common.StorageSharedKeyCredential type.",

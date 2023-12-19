@@ -23,6 +23,7 @@ import com.azure.core.credential.AzureSasCredential;
 import com.azure.identity.ClientSecretCredential;
 import com.azure.storage.common.StorageSharedKeyCredential;
 import com.azure.storage.file.datalake.DataLakeServiceClient;
+import org.apache.camel.component.azure.storage.datalake.CredentialType;
 import org.apache.camel.component.azure.storage.datalake.DataLakeComponent;
 import org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration;
 import org.apache.camel.component.azure.storage.datalake.DataLakeOperationsDefinition;
@@ -63,6 +64,10 @@ public class DataLakeComponentConfiguration
      * type.
      */
     private DataLakeConfiguration configuration;
+    /**
+     * Determines the credential strategy to adopt
+     */
+    private CredentialType credentialType = CredentialType.CLIENT_SECRET;
     /**
      * count number of bytes to download
      */
@@ -226,10 +231,6 @@ public class DataLakeComponentConfiguration
      * SAS token signature
      */
     private String sasSignature;
-    /**
-     * Use default identity
-     */
-    private Boolean useDefaultIdentity;
 
     public String getClientId() {
         return clientId;
@@ -261,6 +262,14 @@ public class DataLakeComponentConfiguration
 
     public void setConfiguration(DataLakeConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public CredentialType getCredentialType() {
+        return credentialType;
+    }
+
+    public void setCredentialType(CredentialType credentialType) {
+        this.credentialType = credentialType;
     }
 
     public Long getDataCount() {
@@ -527,13 +536,5 @@ public class DataLakeComponentConfiguration
 
     public void setSasSignature(String sasSignature) {
         this.sasSignature = sasSignature;
-    }
-
-    public Boolean getUseDefaultIdentity() {
-        return useDefaultIdentity;
-    }
-
-    public void setUseDefaultIdentity(Boolean useDefaultIdentity) {
-        this.useDefaultIdentity = useDefaultIdentity;
     }
 }

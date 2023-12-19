@@ -70,6 +70,12 @@
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
     },
     {
+      "name": "camel.component.azure-storage-datalake.credential-type",
+      "type": "org.apache.camel.component.azure.storage.datalake.CredentialType",
+      "description": "Determines the credential strategy to adopt",
+      "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
+    },
+    {
       "name": "camel.component.azure-storage-datalake.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
@@ -243,12 +249,6 @@
       "name": "camel.component.azure-storage-datalake.umask",
       "type": "java.lang.String",
       "description": "umask permission for file",
-      "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
-    },
-    {
-      "name": "camel.component.azure-storage-datalake.use-default-identity",
-      "type": "java.lang.Boolean",
-      "description": "Use default identity",
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
     },
     {

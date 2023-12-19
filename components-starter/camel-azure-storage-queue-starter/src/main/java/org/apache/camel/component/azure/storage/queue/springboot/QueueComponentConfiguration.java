@@ -19,6 +19,8 @@ package org.apache.camel.component.azure.storage.queue.springboot;
 import java.time.Duration;
 import com.azure.storage.common.StorageSharedKeyCredential;
 import com.azure.storage.queue.QueueServiceClient;
+import org.apache.camel.component.azure.storage.queue.CredentialType;
+import org.apache.camel.component.azure.storage.queue.QueueComponent;
 import org.apache.camel.component.azure.storage.queue.QueueConfiguration;
 import org.apache.camel.component.azure.storage.queue.QueueOperationDefinition;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -44,6 +46,10 @@ public class QueueComponentConfiguration
      * org.apache.camel.component.azure.storage.queue.QueueConfiguration type.
      */
     private QueueConfiguration configuration;
+    /**
+     * Determines the credential strategy to adopt
+     */
+    private CredentialType credentialType = CredentialType.SHARED_ACCOUNT_KEY;
     /**
      * Service client to a storage account to interact with the queue service.
      * This client does not hold any state about a particular storage account
@@ -170,6 +176,14 @@ public class QueueComponentConfiguration
 
     public void setConfiguration(QueueConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public CredentialType getCredentialType() {
+        return credentialType;
+    }
+
+    public void setCredentialType(CredentialType credentialType) {
+        this.credentialType = credentialType;
     }
 
     public QueueServiceClient getServiceClient() {
