@@ -144,6 +144,13 @@
       "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
     },
     {
+      "name": "camel.component.azure-servicebus.reconnect-delay",
+      "type": "java.lang.Integer",
+      "description": "If the consumer has connection failure to Azure ServiceBus, then delay (millis) some time before re-connecting.",
+      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
       "name": "camel.component.azure-servicebus.scheduled-enqueue-time",
       "type": "java.time.OffsetDateTime",
       "description": "Sets OffsetDateTime at which the message should appear in the Service Bus queue or topic. The option is a java.time.OffsetDateTime type.",

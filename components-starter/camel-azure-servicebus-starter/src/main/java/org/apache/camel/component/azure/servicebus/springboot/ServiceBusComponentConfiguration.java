@@ -152,6 +152,11 @@ public class ServiceBusComponentConfiguration
      */
     private String subscriptionName;
     /**
+     * If the consumer has connection failure to Azure ServiceBus, then delay
+     * (millis) some time before re-connecting.
+     */
+    private Integer reconnectDelay = 5000;
+    /**
      * Set binary mode. If true, message body will be sent as byte. By default,
      * it is false.
      */
@@ -344,6 +349,14 @@ public class ServiceBusComponentConfiguration
 
     public void setSubscriptionName(String subscriptionName) {
         this.subscriptionName = subscriptionName;
+    }
+
+    public Integer getReconnectDelay() {
+        return reconnectDelay;
+    }
+
+    public void setReconnectDelay(Integer reconnectDelay) {
+        this.reconnectDelay = reconnectDelay;
     }
 
     public Boolean getBinary() {
