@@ -958,7 +958,9 @@
     {
       "name": "camel.springboot.jmx-update-route-enabled",
       "type": "java.lang.Boolean",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+      "description": "Whether to allow updating routes at runtime via JMX using the ManagedRouteMBean. This is disabled by default, but can be enabled for development and troubleshooting purposes, such as updating routes in an existing running Camel via JMX and other tools.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+      "defaultValue": false
     },
     {
       "name": "camel.springboot.lightweight",

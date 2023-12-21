@@ -632,6 +632,14 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private String jmxManagementNamePattern = "#name#";
 
     /**
+     * Whether to allow updating routes at runtime via JMX using the ManagedRouteMBean.
+     *
+     * This is disabled by default, but can be enabled for development and troubleshooting purposes, such as updating
+     * routes in an existing running Camel via JMX and other tools.
+     */
+    private boolean jmxUpdateRouteEnabled;
+
+    /**
      * If dumping is enabled then Camel will during startup dump all loaded routes (incl rests and route templates)
      * represented as XML/YAML DSL into the log. This is intended for trouble shooting or to assist during development.
      *
