@@ -179,6 +179,10 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Long connectKeepAliveIntervalMs = 60000L;
     /**
+     * Specifies the connection adapter to be used
+     */
+    private String connectorAdapter = "mysql";
+    /**
      * Maximum time to wait after trying to connect to the database before
      * timing out, given in milliseconds. Defaults to 30 seconds (30,000 ms).
      * The option is a int type.
@@ -366,11 +370,12 @@ public class DebeziumMySqlComponentConfiguration
     /**
      * Whether the connector should include the original SQL query that
      * generated the change event. Note: This option requires MySQL be
-     * configured with the binlog_rows_query_log_events option set to ON. Query
-     * will not be present for events generated from snapshot. WARNING: Enabling
-     * this option may expose tables or fields explicitly excluded or masked by
-     * including the original SQL statement in the change event. For this reason
-     * the default value is 'false'.
+     * configured with the binlog_rows_query_log_events option set to ON. If
+     * using MariaDB, configure the binlog_annotate_row_events option must be
+     * set to ON. Query will not be present for events generated from snapshot.
+     * WARNING: Enabling this option may expose tables or fields explicitly
+     * excluded or masked by including the original SQL statement in the change
+     * event. For this reason the default value is 'false'.
      */
     private Boolean includeQuery = false;
     /**
@@ -417,6 +422,14 @@ public class DebeziumMySqlComponentConfiguration
      * snapshotting
      */
     private Integer incrementalSnapshotChunkSize = 1024;
+    /**
+     * Specify the strategy used for watermarking during an incremental
+     * snapshot: 'insert_insert' both open and close signal is written into
+     * signal data collection (default); 'insert_delete' only open signal is
+     * written on signal data collection, the close will delete the relative
+     * open signal;
+     */
+    private String incrementalSnapshotWatermarkingStrategy = "INSERT_INSERT";
     /**
      * Maximum size of each batch of source records. Defaults to 2048.
      */
@@ -465,6 +478,11 @@ public class DebeziumMySqlComponentConfiguration
      * given in milliseconds. Defaults to 500 ms. The option is a long type.
      */
     private Long pollIntervalMs = 500L;
+    /**
+     * Optional list of post processors. The processors are defined using
+     * '.type' config option and configured using options ''
+     */
+    private String postProcessors;
     /**
      * Enables transaction metadata extraction together with event counting
      */
@@ -875,6 +893,14 @@ public class DebeziumMySqlComponentConfiguration
         this.connectKeepAliveIntervalMs = connectKeepAliveIntervalMs;
     }
 
+    public String getConnectorAdapter() {
+        return connectorAdapter;
+    }
+
+    public void setConnectorAdapter(String connectorAdapter) {
+        this.connectorAdapter = connectorAdapter;
+    }
+
     public Integer getConnectTimeoutMs() {
         return connectTimeoutMs;
     }
@@ -1171,6 +1197,15 @@ public class DebeziumMySqlComponentConfiguration
         this.incrementalSnapshotChunkSize = incrementalSnapshotChunkSize;
     }
 
+    public String getIncrementalSnapshotWatermarkingStrategy() {
+        return incrementalSnapshotWatermarkingStrategy;
+    }
+
+    public void setIncrementalSnapshotWatermarkingStrategy(
+            String incrementalSnapshotWatermarkingStrategy) {
+        this.incrementalSnapshotWatermarkingStrategy = incrementalSnapshotWatermarkingStrategy;
+    }
+
     public Integer getMaxBatchSize() {
         return maxBatchSize;
     }
@@ -1234,6 +1269,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setPollIntervalMs(Long pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
+    }
+
+    public String getPostProcessors() {
+        return postProcessors;
+    }
+
+    public void setPostProcessors(String postProcessors) {
+        this.postProcessors = postProcessors;
     }
 
     public Boolean getProvideTransactionMetadata() {

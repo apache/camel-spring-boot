@@ -234,6 +234,14 @@ public class DebeziumDb2ComponentConfiguration
      */
     private Integer incrementalSnapshotChunkSize = 1024;
     /**
+     * Specify the strategy used for watermarking during an incremental
+     * snapshot: 'insert_insert' both open and close signal is written into
+     * signal data collection (default); 'insert_delete' only open signal is
+     * written on signal data collection, the close will delete the relative
+     * open signal;
+     */
+    private String incrementalSnapshotWatermarkingStrategy = "INSERT_INSERT";
+    /**
      * Maximum size of each batch of source records. Defaults to 2048.
      */
     private Integer maxBatchSize = 2048;
@@ -275,6 +283,11 @@ public class DebeziumDb2ComponentConfiguration
      * given in milliseconds. Defaults to 500 ms. The option is a long type.
      */
     private Long pollIntervalMs = 500L;
+    /**
+     * Optional list of post processors. The processors are defined using
+     * '.type' config option and configured using options ''
+     */
+    private String postProcessors;
     /**
      * Enables transaction metadata extraction together with event counting
      */
@@ -717,6 +730,15 @@ public class DebeziumDb2ComponentConfiguration
         this.incrementalSnapshotChunkSize = incrementalSnapshotChunkSize;
     }
 
+    public String getIncrementalSnapshotWatermarkingStrategy() {
+        return incrementalSnapshotWatermarkingStrategy;
+    }
+
+    public void setIncrementalSnapshotWatermarkingStrategy(
+            String incrementalSnapshotWatermarkingStrategy) {
+        this.incrementalSnapshotWatermarkingStrategy = incrementalSnapshotWatermarkingStrategy;
+    }
+
     public Integer getMaxBatchSize() {
         return maxBatchSize;
     }
@@ -772,6 +794,14 @@ public class DebeziumDb2ComponentConfiguration
 
     public void setPollIntervalMs(Long pollIntervalMs) {
         this.pollIntervalMs = pollIntervalMs;
+    }
+
+    public String getPostProcessors() {
+        return postProcessors;
+    }
+
+    public void setPostProcessors(String postProcessors) {
+        this.postProcessors = postProcessors;
     }
 
     public Boolean getProvideTransactionMetadata() {

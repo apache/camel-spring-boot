@@ -140,6 +140,13 @@
       "defaultValue": "__debezium-heartbeat"
     },
     {
+      "name": "camel.component.debezium-mongodb.incremental-snapshot-watermarking-strategy",
+      "type": "java.lang.String",
+      "description": "Specify the strategy used for watermarking during an incremental snapshot: 'insert_insert' both open and close signal is written into signal data collection (default); 'insert_delete' only open signal is written on signal data collection, the close will delete the relative open signal;",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": "INSERT_INSERT"
+    },
+    {
       "name": "camel.component.debezium-mongodb.internal-key-converter",
       "type": "java.lang.String",
       "description": "The Converter class that should be used to serialize and deserialize key data for offsets. The default is JSON converter.",
@@ -191,9 +198,9 @@
     {
       "name": "camel.component.debezium-mongodb.mongodb-connection-mode",
       "type": "java.lang.String",
-      "description": "The method used to connect to MongoDB cluster. Options include: 'replica_set' (the default) to individually connect to each replica set \/ shard 'sharded' to connect via single connection obtained from connection string",
+      "description": "The method used to connect to MongoDB cluster. Options include: 'replica_set' to individually connect to each replica set \/ shard 'sharded' (the default) to connect via single connection obtained from connection string",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
-      "defaultValue": "replica_set"
+      "defaultValue": "sharded"
     },
     {
       "name": "camel.component.debezium-mongodb.mongodb-connection-string",
@@ -324,6 +331,12 @@
       "description": "Time to wait for new change events to appear after receiving no events, given in milliseconds. Defaults to 500 ms. The option is a long type.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": 500
+    },
+    {
+      "name": "camel.component.debezium-mongodb.post-processors",
+      "type": "java.lang.String",
+      "description": "Optional list of post processors. The processors are defined using '.type' config option and configured using options ''",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-mongodb.provide-transaction-metadata",

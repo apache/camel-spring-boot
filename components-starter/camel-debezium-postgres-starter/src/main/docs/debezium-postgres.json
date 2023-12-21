@@ -251,6 +251,13 @@
       "defaultValue": 1024
     },
     {
+      "name": "camel.component.debezium-postgres.incremental-snapshot-watermarking-strategy",
+      "type": "java.lang.String",
+      "description": "Specify the strategy used for watermarking during an incremental snapshot: 'insert_insert' both open and close signal is written into signal data collection (default); 'insert_delete' only open signal is written on signal data collection, the close will delete the relative open signal;",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "INSERT_INSERT"
+    },
+    {
       "name": "camel.component.debezium-postgres.internal-key-converter",
       "type": "java.lang.String",
       "description": "The Converter class that should be used to serialize and deserialize key data for offsets. The default is JSON converter.",
@@ -386,6 +393,12 @@
       "description": "Time to wait for new change events to appear after receiving no events, given in milliseconds. Defaults to 500 ms. The option is a long type.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": 500
+    },
+    {
+      "name": "camel.component.debezium-postgres.post-processors",
+      "type": "java.lang.String",
+      "description": "Optional list of post processors. The processors are defined using '.type' config option and configured using options ''",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-postgres.provide-transaction-metadata",
