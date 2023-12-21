@@ -88,26 +88,25 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
         return entries;
     }
 
+    @Override
     protected String parseUrlPath(URL url) {
         String urlPath = url.getFile();
+
         urlPath = URLDecoder.decode(urlPath, StandardCharsets.UTF_8);
         if (LOG.isTraceEnabled()) {
             LOG.trace("Decoded urlPath: {} with protocol: {}", urlPath, url.getProtocol());
         }
 
         String nested = "nested:";
-
         if (urlPath.startsWith(nested)) {
             try {
                 urlPath = (new URI(url.getFile())).getPath();
-
                 return StringHelper.before(urlPath, "!", urlPath);
-            } catch (URISyntaxException var4) {
+            } catch (URISyntaxException e) {
+                // ignore
             }
-
             if (urlPath.startsWith(nested)) {
                 urlPath = urlPath.substring(nested.length());
-
                 return StringHelper.before(urlPath, "!", urlPath);
             }
         }
@@ -130,6 +129,5 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
         }
         return name;
     }
-
 
 }

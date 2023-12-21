@@ -18,6 +18,11 @@ package org.apache.camel.spring.boot;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -25,6 +30,7 @@ import java.util.jar.JarInputStream;
 
 import org.apache.camel.impl.engine.DefaultPackageScanClassResolver;
 import org.apache.camel.util.IOHelper;
+import org.apache.camel.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,6 +50,32 @@ public class FatJarPackageScanClassResolver extends DefaultPackageScanClassResol
     @Override
     protected List<String> doLoadJarClassEntries(InputStream stream, String urlPath) {
         return doLoadJarClassEntries(stream, urlPath, true, true);
+    }
+
+    @Override
+    protected String parseUrlPath(URL url) {
+        String urlPath = url.getFile();
+
+        urlPath = URLDecoder.decode(urlPath, StandardCharsets.UTF_8);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("Decoded urlPath: {} with protocol: {}", urlPath, url.getProtocol());
+        }
+
+        String nested = "nested:";
+        if (urlPath.startsWith(nested)) {
+            try {
+                urlPath = (new URI(url.getFile())).getPath();
+                return StringHelper.before(urlPath, "!", urlPath);
+            } catch (URISyntaxException e) {
+                // ignore
+            }
+            if (urlPath.startsWith(nested)) {
+                urlPath = urlPath.substring(nested.length());
+                return StringHelper.before(urlPath, "!", urlPath);
+            }
+        }
+
+        return super.parseUrlPath(url);
     }
 
     protected List<String> doLoadJarClassEntries(InputStream stream, String urlPath, boolean inspectNestedJars, boolean closeStream) {
