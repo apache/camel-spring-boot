@@ -956,6 +956,11 @@
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
     },
     {
+      "name": "camel.springboot.jmx-update-route-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+    },
+    {
       "name": "camel.springboot.lightweight",
       "type": "java.lang.Boolean",
       "description": "Experimental: Configure the context to be lightweight. This will trigger some optimizations and memory reduction options. Lightweight context has some limitations. At this moment, dynamic endpoint destinations are not supported.",
