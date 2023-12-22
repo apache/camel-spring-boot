@@ -19,12 +19,12 @@ package org.apache.camel.component.consul.springboot;
 import java.math.BigInteger;
 import java.time.Duration;
 import java.util.List;
-import com.orbitz.consul.Consul;
-import com.orbitz.consul.option.ConsistencyMode;
 import org.apache.camel.component.consul.ConsulComponent;
 import org.apache.camel.component.consul.ConsulConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
+import org.kiwiproject.consul.Consul;
+import org.kiwiproject.consul.option.ConsistencyMode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -48,8 +48,8 @@ public class ConsulComponentConfiguration
      */
     private Duration connectTimeout;
     /**
-     * Reference to a com.orbitz.consul.Consul in the registry. The option is a
-     * com.orbitz.consul.Consul type.
+     * Reference to a org.kiwiproject.consul.Consul in the registry. The option
+     * is a org.kiwiproject.consul.Consul type.
      */
     private Consul consulClient;
     /**

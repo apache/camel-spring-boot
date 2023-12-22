@@ -64,7 +64,7 @@
     },
     {
       "name": "camel.cloud.consul.consistency-mode",
-      "type": "com.orbitz.consul.option.ConsistencyMode",
+      "type": "org.kiwiproject.consul.option.ConsistencyMode",
       "description": "The consistencyMode used for queries, default ConsistencyMode.DEFAULT",
       "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
     },
@@ -222,7 +222,7 @@
     },
     {
       "name": "camel.cluster.consul.consistency-mode",
-      "type": "com.orbitz.consul.option.ConsistencyMode",
+      "type": "org.kiwiproject.consul.option.ConsistencyMode",
       "description": "The consistencyMode used for queries, default ConsistencyMode.DEFAULT",
       "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration"
     },
@@ -401,14 +401,14 @@
     },
     {
       "name": "camel.component.consul.consistency-mode",
-      "type": "com.orbitz.consul.option.ConsistencyMode",
+      "type": "org.kiwiproject.consul.option.ConsistencyMode",
       "description": "The consistencyMode used for queries, default ConsistencyMode.DEFAULT",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
       "name": "camel.component.consul.consul-client",
-      "type": "com.orbitz.consul.Consul",
-      "description": "Reference to a com.orbitz.consul.Consul in the registry. The option is a com.orbitz.consul.Consul type.",
+      "type": "org.kiwiproject.consul.Consul",
+      "description": "Reference to a org.kiwiproject.consul.Consul in the registry. The option is a org.kiwiproject.consul.Consul type.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {

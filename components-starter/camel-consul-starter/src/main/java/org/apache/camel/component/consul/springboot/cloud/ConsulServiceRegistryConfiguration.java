@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.orbitz.consul.option.ConsistencyMode;
+import org.kiwiproject.consul.option.ConsistencyMode;
 
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
