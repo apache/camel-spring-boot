@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.dynamicrouter.springboot;
+package org.apache.camel.component.dynamicrouter.control.springboot;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
-import org.apache.camel.component.dynamicrouter.DynamicRouterComponent;
+import org.apache.camel.component.dynamicrouter.control.DynamicRouterControlComponent;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
@@ -40,25 +40,25 @@ import org.springframework.context.annotation.Lazy;
  */
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,DynamicRouterComponentConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.dynamic-router"})
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,DynamicRouterControlComponentConfiguration.class})
+@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.dynamic-router-control"})
 @AutoConfigureAfter(CamelAutoConfiguration.class)
-public class DynamicRouterComponentAutoConfiguration {
+public class DynamicRouterControlComponentAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private DynamicRouterComponentConfiguration configuration;
+    private DynamicRouterControlComponentConfiguration configuration;
 
-    public DynamicRouterComponentAutoConfiguration(
+    public DynamicRouterControlComponentAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
     }
 
     @Lazy
     @Bean
-    public ComponentCustomizer configureDynamicRouterComponent() {
+    public ComponentCustomizer configureDynamicRouterControlComponent() {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
@@ -69,8 +69,8 @@ public class DynamicRouterComponentAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.component.customizer",
-                        "camel.component.dynamic-router.customizer")
-                    && target instanceof DynamicRouterComponent;
+                        "camel.component.dynamic-router-control.customizer")
+                    && target instanceof DynamicRouterControlComponent;
             }
         };
     }

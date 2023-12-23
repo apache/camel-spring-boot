@@ -15,4 +15,5 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-org.apache.camel.component.dynamicrouter.springboot.DynamicRouterComponentAutoConfiguration
+org.apache.camel.component.dynamicrouter.routing.springboot.DynamicRouterComponentAutoConfiguration
+org.apache.camel.component.dynamicrouter.control.springboot.DynamicRouterControlComponentAutoConfiguration
