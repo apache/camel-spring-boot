@@ -3176,6 +3176,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-jte</artifactId>
+        <version>4.4.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-kafka</artifactId>
         <version>4.4.0-SNAPSHOT</version>
       </dependency>
