@@ -60,6 +60,13 @@
       "defaultValue": "classpath:\/kamelets"
     },
     {
+      "name": "camel.component.kamelet.no-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Kamelets, by default, will not do fine-grained error handling, but works in no-error-handler mode. This can be turned off, to use old behaviour in earlier versions of Camel.",
+      "sourceType": "org.apache.camel.component.kamelet.springboot.KameletComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.kamelet.route-properties",
       "type": "java.util.Map<java.lang.String,java.util.Properties>",
       "description": "Set route local parameters.",

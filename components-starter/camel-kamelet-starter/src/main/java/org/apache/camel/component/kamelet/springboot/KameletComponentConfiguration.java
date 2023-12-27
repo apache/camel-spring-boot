@@ -95,6 +95,12 @@ public class KameletComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Kamelets, by default, will not do fine-grained error handling, but works
+     * in no-error-handler mode. This can be turned off, to use old behaviour in
+     * earlier versions of Camel.
+     */
+    private Boolean noErrorHandler = true;
+    /**
      * To plugin a custom listener for when the Kamelet component is loading
      * Kamelets from external resources. The option is a
      * org.apache.camel.spi.RouteTemplateLoaderListener type.
@@ -163,6 +169,14 @@ public class KameletComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getNoErrorHandler() {
+        return noErrorHandler;
+    }
+
+    public void setNoErrorHandler(Boolean noErrorHandler) {
+        this.noErrorHandler = noErrorHandler;
     }
 
     public RouteTemplateLoaderListener getRouteTemplateLoaderListener() {
