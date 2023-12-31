@@ -16,8 +16,10 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,13 +40,19 @@ import org.apache.camel.spi.CliConnectorFactory;
 import org.apache.camel.spi.PackageScanClassResolver;
 import org.apache.camel.spi.PackageScanResourceResolver;
 import org.apache.camel.spi.StartupStepRecorder;
+import org.apache.camel.spi.VariableRepository;
+import org.apache.camel.spi.VariableRepositoryFactory;
 import org.apache.camel.spring.boot.aot.CamelRuntimeHints;
 import org.apache.camel.spring.spi.ApplicationContextBeanRepository;
 import org.apache.camel.spring.spi.CamelBeanPostProcessor;
 import org.apache.camel.support.DefaultRegistry;
+import org.apache.camel.support.LanguageSupport;
+import org.apache.camel.support.ResourceHelper;
 import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.support.startup.LoggingStartupStepRecorder;
+import org.apache.camel.util.IOHelper;
 import org.apache.camel.util.ObjectHelper;
+import org.apache.camel.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -61,12 +69,13 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Role;
 import org.springframework.core.OrderComparator;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.EnumerablePropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MutablePropertySources;
 
 @ImportRuntimeHints(CamelRuntimeHints.class)
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties(CamelConfigurationProperties.class)
+@EnableConfigurationProperties({CamelConfigurationProperties.class})
 @Import(TypeConversionConfiguration.class)
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 public class CamelAutoConfiguration {
@@ -136,6 +145,32 @@ public class CamelAutoConfiguration {
             }
         }
 
+        // configure camel.variable.xx configurations
+        Environment env = applicationContext.getEnvironment();
+        if (env instanceof ConfigurableEnvironment cev) {
+            Map<String, String> vars = doExtractVariablesFromSpringBoot(cev);
+            if (!vars.isEmpty()) {
+                // set variables
+                for (String key : vars.keySet()) {
+                    String value = vars.get(key);
+                    String id = StringHelper.before(key, ":", "global");
+                    key = StringHelper.after(key, ":", key);
+                    VariableRepository repo = camelContext.getCamelContextExtension().getContextPlugin(VariableRepositoryFactory.class)
+                            .getVariableRepository(id);
+                    // it may be a resource to load from disk then
+                    if (value.startsWith(LanguageSupport.RESOURCE)) {
+                        value = value.substring(9);
+                        if (ResourceHelper.hasScheme(value)) {
+                            InputStream is = ResourceHelper.resolveMandatoryResourceAsInputStream(camelContext, value);
+                            value = IOHelper.loadText(is);
+                            IOHelper.close(is);
+                        }
+                    }
+                    repo.setVariable(key, value);
+                }
+            }
+        }
+
         // setup cli connector eager
         configureCliConnector(applicationContext, camelContext);
 
@@ -155,6 +190,24 @@ public class CamelAutoConfiguration {
         DefaultConfigurationConfigurer.afterPropertiesSet(camelContext);
 
         return camelContext;
+    }
+
+    protected static Map<String, String> doExtractVariablesFromSpringBoot(ConfigurableEnvironment env) {
+        Map<String, String> answer = new LinkedHashMap<>();
+
+        // grab all variables
+        env.getPropertySources().forEach(ps -> {
+            if (ps instanceof EnumerablePropertySource eps) {
+                for (String n : eps.getPropertyNames()) {
+                    if (n.startsWith("camel.variable.")) {
+                        String v = env.getRequiredProperty(n);
+                        n = n.substring(15);
+                        answer.put(n, v);
+                    }
+                }
+            }});
+
+        return answer;
     }
 
     static void configureCliConnector(ApplicationContext applicationContext,
