@@ -22,12 +22,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
@@ -50,10 +47,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import freemarker.cache.URLTemplateLoader;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.ProjectDependenciesResolver;
 import org.apache.maven.artifact.Artifact;
@@ -119,9 +112,8 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
             File pomFile = new File(starterDir, "pom.xml");
             writeXmlFormatted(pom, pomFile);
 
-            // write LICENSE, USAGE and spring.provides files
+            // write LICENSE and USAGE files
             writeStaticFiles();
-            writeSpringProvides();
 
         } catch (Exception e) {
             throw new MojoFailureException("Unable to create starter", e);
@@ -133,8 +125,7 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
         Properties properties = new Properties();
         properties.load(getClass().getResourceAsStream("/spring-boot-fix-dependencies.properties"));
 
-        Set<String> deps = new TreeSet<>();
-        deps.addAll(csvToSet(properties.getProperty(getMainDepArtifactId())));
+        Set<String> deps = new TreeSet<>(csvToSet(properties.getProperty(getMainDepArtifactId())));
 
 
         Set<String> globalProps = csvToSet(properties.getProperty("global"));
@@ -153,40 +144,38 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
             deps.addAll(globalProps);
         }
 
-        if (deps.size() > 0) {
+        if (!deps.isEmpty()) {
             getLog().debug("The following dependencies will be added to the starter: " + deps);
 
             XPath xpath = XPathFactory.newInstance().newXPath();
             Node dependencies = ((NodeList) xpath.compile("/project/dependencies").evaluate(pom, XPathConstants.NODESET)).item(0);
 
-            if (deps.size() > 0) {
-                dependencies.appendChild(pom.createComment(GENERATED_SECTION_START));
-                for (String dep : deps) {
-                    Element dependency = pom.createElement("dependency");
-                    dependencies.appendChild(dependency);
+            dependencies.appendChild(pom.createComment(GENERATED_SECTION_START));
+            for (String dep : deps) {
+                Element dependency = pom.createElement("dependency");
+                dependencies.appendChild(dependency);
 
-                    String[] comps = dep.split("\\:");
-                    String groupIdStr = comps[0];
-                    String artifactIdStr = comps[1];
-                    String versionStr = comps.length > 2 ? comps[2] : null;
+                String[] comps = dep.split("\\:");
+                String groupIdStr = comps[0];
+                String artifactIdStr = comps[1];
+                String versionStr = comps.length > 2 ? comps[2] : null;
 
-                    Element groupId = pom.createElement("groupId");
-                    groupId.setTextContent(groupIdStr);
-                    dependency.appendChild(groupId);
+                Element groupId = pom.createElement("groupId");
+                groupId.setTextContent(groupIdStr);
+                dependency.appendChild(groupId);
 
-                    Element artifactId = pom.createElement("artifactId");
-                    artifactId.setTextContent(artifactIdStr);
-                    dependency.appendChild(artifactId);
+                Element artifactId = pom.createElement("artifactId");
+                artifactId.setTextContent(artifactIdStr);
+                dependency.appendChild(artifactId);
 
-                    if (versionStr != null) {
-                        Element version = pom.createElement("version");
-                        version.setTextContent(versionStr);
-                        dependency.appendChild(version);
-                    }
-
+                if (versionStr != null) {
+                    Element version = pom.createElement("version");
+                    version.setTextContent(versionStr);
+                    dependency.appendChild(version);
                 }
-                dependencies.appendChild(pom.createComment(GENERATED_SECTION_END));
+
             }
+            dependencies.appendChild(pom.createComment(GENERATED_SECTION_END));
         }
     }
 
@@ -211,7 +200,7 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
     }
 
     private Set<String> csvToSet(String csv) {
-        if (csv == null || csv.trim().length() == 0) {
+        if (csv == null || csv.trim().isEmpty()) {
             return new TreeSet<>();
         }
 
@@ -252,7 +241,7 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
         properties.load(getClass().getResourceAsStream("/spring-boot-fix-dependencies.properties"));
         String artExcl = properties.getProperty("exclude_" + getMainDepArtifactId());
         getLog().debug("Configured exclusions: " + artExcl);
-        if (artExcl != null && artExcl.trim().length() > 0) {
+        if (artExcl != null && !artExcl.trim().isEmpty()) {
             for (String dep : artExcl.split(",")) {
                 getLog().debug("Adding configured exclusion: " + dep);
                 configExclusions.add(dep);
@@ -264,7 +253,7 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
         libsToRemove.addAll(configExclusions);
         libsToRemove = filterIncludedArtifacts(libsToRemove);
 
-        if (libsToRemove.size() > 0) {
+        if (!libsToRemove.isEmpty()) {
             getLog().info("Spring-Boot-Starter: the following dependencies will be removed from the starter: " + libsToRemove);
 
             XPath xpath = XPathFactory.newInstance().newXPath();
@@ -366,27 +355,6 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
         return pom;
     }
 
-    private Document createBasePomFromScratch() throws Exception {
-        getLog().info("Creating a new pom.xml for the starter from scratch");
-
-        Template pomTemplate = getTemplate("spring-boot-starter-template-pom.template");
-        Map<String, String> props = new HashMap<>();
-        props.put("version", project.getVersion());
-        props.put("componentId", getComponentId());
-        props.put("componentName", project.getName());
-        props.put("componentDescription", project.getDescription());
-
-        StringWriter sw = new StringWriter();
-        pomTemplate.process(props, sw);
-
-        String xml = sw.toString();
-        ByteArrayInputStream bin = new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8));
-
-        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document pom = builder.parse(bin);
-        return pom;
-    }
-
     private void writeStaticFiles() throws IOException {
         String notice;
         String license;
@@ -398,45 +366,6 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
 
         writeIfChanged(notice, new File(baseDir, "src/main/resources/META-INF/NOTICE.txt"));
         writeIfChanged(license, new File(baseDir, "src/main/resources/META-INF/LICENSE.txt"));
-    }
-
-    private void writeSpringProvides() throws IOException, TemplateException {
-        Template fileTemplate = getTemplate("spring-boot-starter-template-spring.provides");
-        Map<String, String> props = new HashMap<>();
-        props.put("artifactId", getMainDepArtifactId());
-
-        File outDir = new File(baseDir, "src/main/resources/META-INF");
-        outDir.mkdirs();
-        File outFile = new File(outDir, "spring.provides");
-
-        StringWriter sw = new StringWriter();
-        fileTemplate.process(props, sw);
-        sw.close();
-
-        writeIfChanged(sw.toString(), outFile);
-    }
-
-
-    private Template getTemplate(String name) throws IOException {
-        Configuration cfg = new Configuration(Configuration.VERSION_2_3_32);
-
-        cfg.setTemplateLoader(new URLTemplateLoader() {
-            @Override
-            protected URL getURL(String name) {
-                return SpringBootStarterMojo.class.getResource("/" + name);
-            }
-        });
-
-        cfg.setDefaultEncoding("UTF-8");
-        Template template = cfg.getTemplate(name);
-        return template;
-    }
-
-
-    private String getComponentId() {
-        String componentName = getMainDepArtifactId();
-        String componentId = componentName.replace("camel-", "");
-        return componentId;
     }
 
     private void writeXmlFormatted(Document pom, File destination) throws Exception {
