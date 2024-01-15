@@ -127,6 +127,24 @@
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
+      "name": "camel.component.salesforce.event-name",
+      "type": "java.lang.String",
+      "description": "Name of Platform Event, Change Data Capture Event, custom event, etc.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.salesforce.event-schema-format",
+      "type": "org.apache.camel.component.salesforce.internal.dto.EventSchemaFormatEnum",
+      "description": "EXPANDED: Apache Avro format but doesnt strictly adhere to the record complex type. COMPACT: Apache Avro, adheres to the specification for the record complex type. This parameter is available in API version 43.0 and later.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.salesforce.event-schema-id",
+      "type": "java.lang.String",
+      "description": "The ID of the event schema.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+    },
+    {
       "name": "camel.component.salesforce.fall-back-replay-id",
       "type": "java.lang.Long",
       "description": "ReplayId to fall back to after an Invalid Replay Id response",

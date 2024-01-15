@@ -30,6 +30,7 @@ import org.apache.camel.component.salesforce.SalesforceLoginConfig;
 import org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata;
 import org.apache.camel.component.salesforce.api.dto.bulk.ContentType;
 import org.apache.camel.component.salesforce.internal.PayloadFormat;
+import org.apache.camel.component.salesforce.internal.dto.EventSchemaFormatEnum;
 import org.apache.camel.component.salesforce.internal.dto.NotifyForFieldsEnum;
 import org.apache.camel.component.salesforce.internal.dto.NotifyForOperationsEnum;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -372,6 +373,21 @@ public class SalesforceComponentConfiguration
      * Composite (raw) method.
      */
     private String compositeMethod;
+    /**
+     * Name of Platform Event, Change Data Capture Event, custom event, etc.
+     */
+    private String eventName;
+    /**
+     * EXPANDED: Apache Avro format but doesnt strictly adhere to the record
+     * complex type. COMPACT: Apache Avro, adheres to the specification for the
+     * record complex type. This parameter is available in API version 43.0 and
+     * later.
+     */
+    private EventSchemaFormatEnum eventSchemaFormat;
+    /**
+     * The ID of the event schema.
+     */
+    private String eventSchemaId;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -1080,6 +1096,30 @@ public class SalesforceComponentConfiguration
 
     public void setCompositeMethod(String compositeMethod) {
         this.compositeMethod = compositeMethod;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public EventSchemaFormatEnum getEventSchemaFormat() {
+        return eventSchemaFormat;
+    }
+
+    public void setEventSchemaFormat(EventSchemaFormatEnum eventSchemaFormat) {
+        this.eventSchemaFormat = eventSchemaFormat;
+    }
+
+    public String getEventSchemaId() {
+        return eventSchemaId;
+    }
+
+    public void setEventSchemaId(String eventSchemaId) {
+        this.eventSchemaId = eventSchemaId;
     }
 
     public Boolean getLazyStartProducer() {
