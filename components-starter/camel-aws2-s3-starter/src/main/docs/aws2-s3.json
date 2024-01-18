@@ -328,6 +328,12 @@
       "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-s3.session-token",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Session Token used when the user needs to assume a IAM role",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws2-s3.storage-class",
       "type": "java.lang.String",
       "description": "The storage class to set in the com.amazonaws.services.s3.model.PutObjectRequest request.",
@@ -391,6 +397,13 @@
       "name": "camel.component.aws2-s3.use-s-s-e-s3",
       "type": "java.lang.Boolean",
       "description": "Define if SSE S3 must be used or not",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.use-session-credentials",
+      "type": "java.lang.Boolean",
+      "description": "Set whether the S3 client should expect to use Session Credentials. This is useful in situation in which the user needs to assume a IAM role for doing operations in S3.",
       "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
       "defaultValue": false
     }

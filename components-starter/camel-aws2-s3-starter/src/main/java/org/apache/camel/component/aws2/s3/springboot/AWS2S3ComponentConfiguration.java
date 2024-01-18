@@ -340,6 +340,10 @@ public class AWS2S3ComponentConfiguration
      */
     private String secretKey;
     /**
+     * Amazon AWS Session Token used when the user needs to assume a IAM role
+     */
+    private String sessionToken;
+    /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
     private Boolean trustAllCertificates = false;
@@ -353,6 +357,12 @@ public class AWS2S3ComponentConfiguration
      * profile credentials provider.
      */
     private Boolean useProfileCredentialsProvider = false;
+    /**
+     * Set whether the S3 client should expect to use Session Credentials. This
+     * is useful in situation in which the user needs to assume a IAM role for
+     * doing operations in S3.
+     */
+    private Boolean useSessionCredentials = false;
 
     public Boolean getAutoCreateBucket() {
         return autoCreateBucket;
@@ -786,6 +796,14 @@ public class AWS2S3ComponentConfiguration
         this.secretKey = secretKey;
     }
 
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
+    }
+
     public Boolean getTrustAllCertificates() {
         return trustAllCertificates;
     }
@@ -810,5 +828,13 @@ public class AWS2S3ComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
+    }
+
+    public Boolean getUseSessionCredentials() {
+        return useSessionCredentials;
+    }
+
+    public void setUseSessionCredentials(Boolean useSessionCredentials) {
+        this.useSessionCredentials = useSessionCredentials;
     }
 }
