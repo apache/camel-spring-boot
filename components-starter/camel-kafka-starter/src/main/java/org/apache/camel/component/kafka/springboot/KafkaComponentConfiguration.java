@@ -118,6 +118,11 @@ public class KafkaComponentConfiguration
      */
     private String autoOffsetReset = "latest";
     /**
+     * Whether to use batching for processing or streaming. The default is
+     * false, which uses streaming
+     */
+    private Boolean batching = false;
+    /**
      * This options controls what happens when a consumer is processing an
      * exchange and it fails. If the option is false then the consumer continues
      * to the next message and processes it. If the option is true then the
@@ -967,6 +972,14 @@ public class KafkaComponentConfiguration
 
     public void setAutoOffsetReset(String autoOffsetReset) {
         this.autoOffsetReset = autoOffsetReset;
+    }
+
+    public Boolean getBatching() {
+        return batching;
+    }
+
+    public void setBatching(Boolean batching) {
+        this.batching = batching;
     }
 
     public Boolean getBreakOnFirstError() {
