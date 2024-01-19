@@ -799,11 +799,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-facebook-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-fastjson-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2692,11 +2687,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-exec</artifactId>
-        <version>4.4.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-facebook</artifactId>
         <version>4.4.0-SNAPSHOT</version>
       </dependency>
       <dependency>

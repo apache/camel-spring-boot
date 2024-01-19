@@ -204,7 +204,6 @@
     <module>camel-elasticsearch-starter</module>
     <module>camel-etcd3-starter</module>
     <module>camel-exec-starter</module>
-    <module>camel-facebook-starter</module>
     <module>camel-fastjson-starter</module>
     <module>camel-fhir-starter</module>
     <module>camel-file-starter</module>
