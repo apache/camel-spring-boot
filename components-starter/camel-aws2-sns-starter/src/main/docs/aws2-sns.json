@@ -165,6 +165,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.aws2-sns.session-token",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Session Token used when the user needs to assume a IAM role",
+      "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws2-sns.subject",
       "type": "java.lang.String",
       "description": "The subject which is used if the message header 'CamelAwsSnsSubject' is not present.",
@@ -201,6 +207,13 @@
       "name": "camel.component.aws2-sns.use-profile-credentials-provider",
       "type": "java.lang.Boolean",
       "description": "Set whether the SNS client should expect to load credentials through a profile credentials provider.",
+      "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-sns.use-session-credentials",
+      "type": "java.lang.Boolean",
+      "description": "Set whether the SNS client should expect to use Session Credentials. This is useful in situation in which the user needs to assume a IAM role for doing operations in SNS.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
       "defaultValue": false
     }

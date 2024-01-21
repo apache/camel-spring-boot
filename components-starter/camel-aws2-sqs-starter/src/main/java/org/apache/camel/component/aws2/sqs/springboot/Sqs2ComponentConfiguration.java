@@ -294,6 +294,10 @@ public class Sqs2ComponentConfiguration
      */
     private String secretKey;
     /**
+     * Amazon AWS Session Token used when the user needs to assume a IAM role
+     */
+    private String sessionToken;
+    /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
     private Boolean trustAllCertificates = false;
@@ -307,6 +311,12 @@ public class Sqs2ComponentConfiguration
      * profile credentials provider.
      */
     private Boolean useProfileCredentialsProvider = false;
+    /**
+     * Set whether the SQS client should expect to use Session Credentials. This
+     * is useful in situation in which the user needs to assume a IAM role for
+     * doing operations in SQS.
+     */
+    private Boolean useSessionCredentials = false;
 
     public String getAmazonAWSHost() {
         return amazonAWSHost;
@@ -672,6 +682,14 @@ public class Sqs2ComponentConfiguration
         this.secretKey = secretKey;
     }
 
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
+    }
+
     public Boolean getTrustAllCertificates() {
         return trustAllCertificates;
     }
@@ -696,5 +714,13 @@ public class Sqs2ComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
+    }
+
+    public Boolean getUseSessionCredentials() {
+        return useSessionCredentials;
+    }
+
+    public void setUseSessionCredentials(Boolean useSessionCredentials) {
+        this.useSessionCredentials = useSessionCredentials;
     }
 }
