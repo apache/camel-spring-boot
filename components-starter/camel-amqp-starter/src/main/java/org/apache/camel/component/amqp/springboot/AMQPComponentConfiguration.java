@@ -593,6 +593,11 @@ public class AMQPComponentConfiguration
      */
     private Boolean includeAllJmsxProperties = false;
     /**
+     * Whether the JMS consumer should include JMSCorrelationIDAsBytes as a
+     * header on the Camel Message.
+     */
+    private Boolean includeCorrelationIDAsBytes = true;
+    /**
      * Pluggable strategy for encoding and decoding JMS keys so they can be
      * compliant with the JMS specification. Camel provides two implementations
      * out of the box: default and passthrough. The default strategy will safely
@@ -1366,6 +1371,15 @@ public class AMQPComponentConfiguration
 
     public void setIncludeAllJmsxProperties(Boolean includeAllJmsxProperties) {
         this.includeAllJmsxProperties = includeAllJmsxProperties;
+    }
+
+    public Boolean getIncludeCorrelationIDAsBytes() {
+        return includeCorrelationIDAsBytes;
+    }
+
+    public void setIncludeCorrelationIDAsBytes(
+            Boolean includeCorrelationIDAsBytes) {
+        this.includeCorrelationIDAsBytes = includeCorrelationIDAsBytes;
     }
 
     public JmsKeyFormatStrategy getJmsKeyFormatStrategy() {

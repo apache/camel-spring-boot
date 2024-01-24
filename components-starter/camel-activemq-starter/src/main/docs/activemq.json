@@ -337,6 +337,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.activemq.include-correlation-i-d-as-bytes",
+      "type": "java.lang.Boolean",
+      "description": "Whether the JMS consumer should include JMSCorrelationIDAsBytes as a header on the Camel Message.",
+      "sourceType": "org.apache.camel.component.activemq.springboot.ActiveMQComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.activemq.include-sent-jms-message-id",
       "type": "java.lang.Boolean",
       "description": "Only applicable when sending to JMS destination using InOnly (eg fire and forget). Enabling this option will enrich the Camel Exchange with the actual JMSMessageID that was used by the JMS client when the message was sent to the JMS destination.",
