@@ -104,6 +104,17 @@
       "sourceMethod": "getCustomizer()"
     },
     {
+      "name": "camel.language.variable",
+      "type": "org.apache.camel.language.variable.springboot.VariableLanguageConfiguration",
+      "sourceType": "org.apache.camel.language.variable.springboot.VariableLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.variable.customizer",
+      "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.language.variable.springboot.VariableLanguageConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
       "name": "camel.resilience4j",
       "type": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties"
@@ -510,6 +521,24 @@
       "type": "java.lang.Boolean",
       "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
       "sourceType": "org.apache.camel.language.tokenizer.springboot.TokenizeLanguageConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.language.variable.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.language.variable.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the variable language. This is enabled by default.",
+      "sourceType": "org.apache.camel.language.variable.springboot.VariableLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.variable.trim",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "sourceType": "org.apache.camel.language.variable.springboot.VariableLanguageConfiguration",
       "defaultValue": true
     },
     {
