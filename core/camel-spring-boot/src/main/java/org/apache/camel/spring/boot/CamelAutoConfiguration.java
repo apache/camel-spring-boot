@@ -257,9 +257,8 @@ public class CamelAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(RoutesCollector.class)
     @ConditionalOnMissingClass("org.apache.camel.spring.boot.endpointdsl.EndpointDslRouteCollector")
-    RoutesCollector routesCollector() {
-        // default collector works with spring boot
-        return new DefaultRoutesCollector();
+    RoutesCollector routesCollector(ApplicationContext applicationContext, CamelConfigurationProperties config) {
+        return new CamelSpringBootRoutesCollector(applicationContext, config.isIncludeNonSingletons());
     }
 
     @Bean

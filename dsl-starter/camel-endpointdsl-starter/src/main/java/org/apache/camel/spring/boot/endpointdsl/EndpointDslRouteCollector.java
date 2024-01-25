@@ -24,13 +24,18 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.apache.camel.builder.endpoint.LambdaEndpointRouteBuilder;
-import org.apache.camel.main.DefaultRoutesCollector;
+import org.apache.camel.spring.boot.CamelSpringBootRoutesCollector;
+import org.springframework.context.ApplicationContext;
 
 /**
  * Enhanced {@link org.apache.camel.main.RoutesCollector} that supports Endpoint DSL with the
  * lambda style {@link LambdaEndpointRouteBuilder}.
  */
-public class EndpointDslRouteCollector extends DefaultRoutesCollector {
+public class EndpointDslRouteCollector extends CamelSpringBootRoutesCollector {
+
+    public EndpointDslRouteCollector(ApplicationContext applicationContext, boolean includeNonSingletons) {
+        super(applicationContext, includeNonSingletons);
+    }
 
     @Override
     protected Collection<RoutesBuilder> collectAdditionalRoutesFromRegistry(CamelContext camelContext, String excludePattern, String includePattern) {
