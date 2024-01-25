@@ -2,28 +2,36 @@
 
 Camel support for Spring Boot provides auto-configuration of the Camel and starters for many Camel xref:components::index.adoc[components]. Our opinionated auto-configuration of the Camel context auto-detects Camel routes available in the Spring context and registers the key Camel utilities (like producer template, consumer template and the type converter) as beans.
 
-Get started by adding the Camel Spring Boot BOM to your Maven `pom.xml` file.
+Get started by adding the Camel and Spring Boot BOMs to your Maven `pom.xml` file.
 
 [source,xml]
 ----
 <dependencyManagement>
-
     <dependencies>
         <!-- Camel BOM -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-spring-boot-bom</artifactId>
-            <version>${project.version}</version>
+            <version>${camel-version}</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
-        <!-- ... other BOMs or dependencies ... -->
+        <!-- Spring Boot BOM -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>${spring-boot-version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
     </dependencies>
-
 </dependencyManagement>
+
 ----
 
 The `camel-spring-boot-bom` is a basic BOM that only holds the list of Camel Spring Boot starter JARs.
+
+NOTE: It is recommended to import Camel Spring Boot BOM before Spring Boot BOM to ensure Camel dependencies are using supported JARs from the release. However, you can flip the order, and let Spring Boot BOM be first. However, you may encounter some dependency mis-aligments in some rare situations.
 
 Next, add the xref:spring-boot.adoc[Camel Spring Boot starter] to startup the xref:manual::camelcontext.adoc[Camel Context].
 
