@@ -64,6 +64,28 @@ public class CamelHealthCheckConfigurationProperties {
     private String excludePattern;
 
     /**
+     * Camel's HealthCheck frequency in seconds
+     */
+    private int healthCheckFrequency = 10;
+
+    /**
+     * Camel HealthCheck pool size
+     */
+    private int healthCheckPoolSize = 5;
+
+    /**
+     * Camel HealthCheck thread name prefix
+     */
+    private String healthCheckThreadNamePrefix = "CamelHealthTaskScheduler";
+
+    /**
+     * Whether Camel Health Checks are executed asynchronously
+     * <p>
+     * disabled by default
+     */
+    private boolean asyncCamelHealthCheck = false;
+
+    /**
      * Sets the level of details to exposure as result of invoking health checks. There are the following levels: full,
      * default, oneline
      *
@@ -157,6 +179,38 @@ public class CamelHealthCheckConfigurationProperties {
 
     public void setInitialState(String initialState) {
         this.initialState = initialState;
+    }
+
+    public int getHealthCheckFrequency() {
+        return healthCheckFrequency;
+    }
+
+    public void setHealthCheckFrequency(int healthCheckFrequency) {
+        this.healthCheckFrequency = healthCheckFrequency;
+    }
+
+    public int getHealthCheckPoolSize() {
+        return healthCheckPoolSize;
+    }
+
+    public void setHealthCheckPoolSize(int healthCheckPoolSize) {
+        this.healthCheckPoolSize = healthCheckPoolSize;
+    }
+
+    public String getHealthCheckThreadNamePrefix() {
+        return healthCheckThreadNamePrefix;
+    }
+
+    public void setHealthCheckThreadNamePrefix(String healthCheckThreadNamePrefix) {
+        this.healthCheckThreadNamePrefix = healthCheckThreadNamePrefix;
+    }
+
+    public boolean isAsyncCamelHealthCheck() {
+        return asyncCamelHealthCheck;
+    }
+
+    public void setAsyncCamelHealthCheck(boolean asyncCamelHealthCheck) {
+        this.asyncCamelHealthCheck = asyncCamelHealthCheck;
     }
 }
 
