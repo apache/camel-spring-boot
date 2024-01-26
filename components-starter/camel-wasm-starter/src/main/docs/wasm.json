@@ -1,0 +1,78 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.wasm",
+      "type": "org.apache.camel.component.wasm.springboot.WasmComponentConfiguration",
+      "sourceType": "org.apache.camel.component.wasm.springboot.WasmComponentConfiguration"
+    },
+    {
+      "name": "camel.component.wasm.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.wasm.springboot.WasmComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.language.wasm",
+      "type": "org.apache.camel.language.wasm.springboot.WasmLanguageConfiguration",
+      "sourceType": "org.apache.camel.language.wasm.springboot.WasmLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.wasm.customizer",
+      "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.language.wasm.springboot.WasmLanguageConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.wasm.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.wasm.springboot.WasmComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.wasm.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.wasm.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the wasm component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.wasm.springboot.WasmComponentConfiguration"
+    },
+    {
+      "name": "camel.component.wasm.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.wasm.springboot.WasmComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.language.wasm.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.language.wasm.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the wasm language. This is enabled by default.",
+      "sourceType": "org.apache.camel.language.wasm.springboot.WasmLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.wasm.module",
+      "type": "java.lang.String",
+      "description": "Set the module (the distributable, loadable, and executable unit of code in WebAssembly) resource that provides the expression function.",
+      "sourceType": "org.apache.camel.language.wasm.springboot.WasmLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.wasm.trim",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "sourceType": "org.apache.camel.language.wasm.springboot.WasmLanguageConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}
