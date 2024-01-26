@@ -514,6 +514,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.health.async-camel-health-check",
+      "type": "java.lang.Boolean",
+      "description": "Whether Camel Health Checks are executed asynchronously <p> disabled by default",
+      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.health.consumers-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether consumers health check is enabled. <p> Is default enabled",
@@ -537,6 +544,27 @@
       "description": "Sets the level of details to exposure as result of invoking health checks. There are the following levels: full, default, oneline The full level will include all details and status from all the invoked health checks. The default level will report UP if everything is okay, and only include detailed information for health checks that was DOWN. The oneline level will only report either UP or DOWN.",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties",
       "defaultValue": "default"
+    },
+    {
+      "name": "camel.health.health-check-frequency",
+      "type": "java.lang.Integer",
+      "description": "Camel's HealthCheck frequency in seconds",
+      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties",
+      "defaultValue": 10
+    },
+    {
+      "name": "camel.health.health-check-pool-size",
+      "type": "java.lang.Integer",
+      "description": "Camel HealthCheck pool size",
+      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties",
+      "defaultValue": 5
+    },
+    {
+      "name": "camel.health.health-check-thread-name-prefix",
+      "type": "java.lang.String",
+      "description": "Camel HealthCheck thread name prefix",
+      "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties",
+      "defaultValue": "CamelHealthTaskScheduler"
     },
     {
       "name": "camel.health.initial-state",
