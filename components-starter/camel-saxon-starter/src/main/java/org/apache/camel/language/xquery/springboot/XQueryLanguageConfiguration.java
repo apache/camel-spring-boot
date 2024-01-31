@@ -53,6 +53,10 @@ public class XQueryLanguageConfiguration
      */
     private List<PropertyDefinition> namespace;
     /**
+     * Name of variable to use as input, instead of the message body
+     */
+    private String variableName;
+    /**
      * Name of property to use as input, instead of the message body. It has a
      * lower precedent than the headerName if both are set.
      */
@@ -85,6 +89,14 @@ public class XQueryLanguageConfiguration
 
     public void setNamespace(List<PropertyDefinition> namespace) {
         this.namespace = namespace;
+    }
+
+    public String getVariableName() {
+        return variableName;
+    }
+
+    public void setVariableName(String variableName) {
+        this.variableName = variableName;
     }
 
     public String getPropertyName() {

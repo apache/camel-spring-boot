@@ -115,6 +115,12 @@
       "type": "java.lang.String",
       "description": "Sets the class name of the result type (type from output) The default result type is NodeSet",
       "sourceType": "org.apache.camel.language.xquery.springboot.XQueryLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.xquery.variable-name",
+      "type": "java.lang.String",
+      "description": "Name of variable to use as input, instead of the message body",
+      "sourceType": "org.apache.camel.language.xquery.springboot.XQueryLanguageConfiguration"
     }
   ],
   "hints": []

@@ -524,6 +524,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.language.tokenize.variable-name",
+      "type": "java.lang.String",
+      "description": "Name of variable to use as input, instead of the message body",
+      "sourceType": "org.apache.camel.language.tokenizer.springboot.TokenizeLanguageConfiguration"
+    },
+    {
       "name": "camel.language.variable.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"

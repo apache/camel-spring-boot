@@ -40,6 +40,10 @@ public class TokenizeLanguageConfiguration
      */
     private String groupDelimiter;
     /**
+     * Name of variable to use as input, instead of the message body
+     */
+    private String variableName;
+    /**
      * Name of property to use as input, instead of the message body. It has a
      * lower precedent than the headerName if both are set.
      */
@@ -56,6 +60,14 @@ public class TokenizeLanguageConfiguration
 
     public void setGroupDelimiter(String groupDelimiter) {
         this.groupDelimiter = groupDelimiter;
+    }
+
+    public String getVariableName() {
+        return variableName;
+    }
+
+    public void setVariableName(String variableName) {
+        this.variableName = variableName;
     }
 
     public String getPropertyName() {

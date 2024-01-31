@@ -88,6 +88,12 @@
       "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
       "sourceType": "org.apache.camel.language.xpath.springboot.XPathLanguageConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.language.xpath.variable-name",
+      "type": "java.lang.String",
+      "description": "Name of variable to use as input, instead of the message body",
+      "sourceType": "org.apache.camel.language.xpath.springboot.XPathLanguageConfiguration"
     }
   ],
   "hints": []
