@@ -78,6 +78,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.language.jsonpath.variable-name",
+      "type": "java.lang.String",
+      "description": "Name of variable to use as input, instead of the message body It has as higher precedent if other are set.",
+      "sourceType": "org.apache.camel.jsonpath.springboot.JsonPathLanguageConfiguration"
+    },
+    {
       "name": "camel.language.jsonpath.write-as-string",
       "type": "java.lang.Boolean",
       "description": "Whether to write the output of each row\/element as a JSON String value instead of a Map\/POJO value.",

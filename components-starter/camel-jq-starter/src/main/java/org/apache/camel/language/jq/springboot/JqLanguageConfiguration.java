@@ -35,6 +35,11 @@ public class JqLanguageConfiguration
      */
     private Boolean enabled;
     /**
+     * Name of variable to use as input, instead of the message body It has as
+     * higher precedent if other are set.
+     */
+    private String variableName;
+    /**
      * Name of header to use as input, instead of the message body It has as
      * higher precedent than the propertyName if both are set.
      */
@@ -49,6 +54,14 @@ public class JqLanguageConfiguration
      * line breaks
      */
     private Boolean trim = true;
+
+    public String getVariableName() {
+        return variableName;
+    }
+
+    public void setVariableName(String variableName) {
+        this.variableName = variableName;
+    }
 
     public String getHeaderName() {
         return headerName;

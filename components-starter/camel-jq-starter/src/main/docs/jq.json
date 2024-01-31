@@ -42,6 +42,12 @@
       "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
       "sourceType": "org.apache.camel.language.jq.springboot.JqLanguageConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.language.jq.variable-name",
+      "type": "java.lang.String",
+      "description": "Name of variable to use as input, instead of the message body It has as higher precedent if other are set.",
+      "sourceType": "org.apache.camel.language.jq.springboot.JqLanguageConfiguration"
     }
   ],
   "hints": []
