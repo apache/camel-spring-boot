@@ -156,15 +156,11 @@ public class JsonPathLanguageTest {
         exchange.getIn().setBody(new File("src/test/resources/type.json"));
 
         JsonPathLanguage lan = (JsonPathLanguage) context.resolveLanguage("jsonpath");
-        lan.setOptions(Option.SUPPRESS_EXCEPTIONS);
-
-        Expression exp = lan.createExpression("$.foo");
+        Expression exp = lan.createExpression("$.foo",
+                new Object[] { null, null, null, null, null, null, null, Option.SUPPRESS_EXCEPTIONS });
         String nofoo = exp.evaluate(exchange, String.class);
 
         assertNull(nofoo);
     }
 
-    
-
-    
 }
