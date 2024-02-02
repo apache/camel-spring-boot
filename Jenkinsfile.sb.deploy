@@ -57,10 +57,8 @@ pipeline {
                 anyOf {
                     branch 'main'
                     branch 'camel-spring-boot-4.0.x'
-                    branch 'camel-spring-boot-3.x'
                     branch 'camel-spring-boot-3.21.x'
-                    branch 'camel-spring-boot-3.20.x'
-                    branch 'camel-spring-boot-3.14.x'
+                    branch 'camel-spring-boot-3.22.x'
                 }
             }
             steps {
