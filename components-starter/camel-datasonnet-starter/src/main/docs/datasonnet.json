@@ -31,9 +31,21 @@
       "sourceType": "org.apache.camel.language.datasonnet.springboot.DatasonnetLanguageConfiguration"
     },
     {
+      "name": "camel.language.datasonnet.header-name",
+      "type": "java.lang.String",
+      "description": "Name of header to use as input, instead of the message body",
+      "sourceType": "org.apache.camel.language.datasonnet.springboot.DatasonnetLanguageConfiguration"
+    },
+    {
       "name": "camel.language.datasonnet.output-media-type",
       "type": "java.lang.String",
       "description": "The String representation of the MediaType to output",
+      "sourceType": "org.apache.camel.language.datasonnet.springboot.DatasonnetLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.datasonnet.property-name",
+      "type": "java.lang.String",
+      "description": "Name of property to use as input, instead of the message body.",
       "sourceType": "org.apache.camel.language.datasonnet.springboot.DatasonnetLanguageConfiguration"
     },
     {
@@ -42,6 +54,12 @@
       "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
       "sourceType": "org.apache.camel.language.datasonnet.springboot.DatasonnetLanguageConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.language.datasonnet.variable-name",
+      "type": "java.lang.String",
+      "description": "Name of variable to use as input, instead of the message body",
+      "sourceType": "org.apache.camel.language.datasonnet.springboot.DatasonnetLanguageConfiguration"
     }
   ],
   "hints": []

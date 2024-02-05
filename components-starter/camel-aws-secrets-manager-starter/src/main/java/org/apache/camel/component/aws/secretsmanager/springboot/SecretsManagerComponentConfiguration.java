@@ -142,6 +142,10 @@ public class SecretsManagerComponentConfiguration
      */
     private String secretKey;
     /**
+     * Amazon AWS Session Token used when the user needs to assume a IAM role
+     */
+    private String sessionToken;
+    /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
     private Boolean trustAllCertificates = false;
@@ -151,6 +155,12 @@ public class SecretsManagerComponentConfiguration
      * be passed in.
      */
     private Boolean useDefaultCredentialsProvider = false;
+    /**
+     * Set whether the Secrets Manager client should expect to use Session
+     * Credentials. This is useful in situation in which the user needs to
+     * assume a IAM role for doing operations in Secrets Manager.
+     */
+    private Boolean useSessionCredentials = false;
 
     public Boolean getBinaryPayload() {
         return binaryPayload;
@@ -306,6 +316,14 @@ public class SecretsManagerComponentConfiguration
         this.secretKey = secretKey;
     }
 
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
+    }
+
     public Boolean getTrustAllCertificates() {
         return trustAllCertificates;
     }
@@ -321,5 +339,13 @@ public class SecretsManagerComponentConfiguration
     public void setUseDefaultCredentialsProvider(
             Boolean useDefaultCredentialsProvider) {
         this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
+    }
+
+    public Boolean getUseSessionCredentials() {
+        return useSessionCredentials;
+    }
+
+    public void setUseSessionCredentials(Boolean useSessionCredentials) {
+        this.useSessionCredentials = useSessionCredentials;
     }
 }

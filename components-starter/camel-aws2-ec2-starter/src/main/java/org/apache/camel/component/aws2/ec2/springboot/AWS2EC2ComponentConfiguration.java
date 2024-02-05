@@ -40,10 +40,6 @@ public class AWS2EC2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Amazon AWS Access Key
-     */
-    private String accessKey;
-    /**
      * To use a existing configured AmazonEC2Client as client. The option is a
      * software.amazon.awssdk.services.ec2.Ec2Client type.
      */
@@ -87,10 +83,6 @@ public class AWS2EC2ComponentConfiguration
      */
     private String region;
     /**
-     * Amazon AWS Secret Key
-     */
-    private String secretKey;
-    /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
      */
@@ -129,10 +121,22 @@ public class AWS2EC2ComponentConfiguration
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
+     * Amazon AWS Access Key
+     */
+    private String accessKey;
+    /**
      * If using a profile credentials provider this parameter will set the
      * profile name
      */
     private String profileCredentialsName;
+    /**
+     * Amazon AWS Secret Key
+     */
+    private String secretKey;
+    /**
+     * Amazon AWS Session Token used when the user needs to assume a IAM role
+     */
+    private String sessionToken;
     /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
@@ -148,14 +152,12 @@ public class AWS2EC2ComponentConfiguration
      * profile credentials provider.
      */
     private Boolean useProfileCredentialsProvider = false;
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
+    /**
+     * Set whether the EC2 client should expect to use Session Credentials. This
+     * is useful in situation in which the user needs to assume a IAM role for
+     * doing operations in EC2.
+     */
+    private Boolean useSessionCredentials = false;
 
     public Ec2Client getAmazonEc2Client() {
         return amazonEc2Client;
@@ -211,14 +213,6 @@ public class AWS2EC2ComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
     }
 
     public String getUriEndpointOverride() {
@@ -277,12 +271,36 @@ public class AWS2EC2ComponentConfiguration
         this.proxyProtocol = proxyProtocol;
     }
 
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
     public String getProfileCredentialsName() {
         return profileCredentialsName;
     }
 
     public void setProfileCredentialsName(String profileCredentialsName) {
         this.profileCredentialsName = profileCredentialsName;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
     }
 
     public Boolean getTrustAllCertificates() {
@@ -309,5 +327,13 @@ public class AWS2EC2ComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
+    }
+
+    public Boolean getUseSessionCredentials() {
+        return useSessionCredentials;
+    }
+
+    public void setUseSessionCredentials(Boolean useSessionCredentials) {
+        this.useSessionCredentials = useSessionCredentials;
     }
 }

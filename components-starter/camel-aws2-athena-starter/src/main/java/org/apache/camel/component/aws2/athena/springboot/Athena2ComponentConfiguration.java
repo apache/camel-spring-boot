@@ -222,6 +222,10 @@ public class Athena2ComponentConfiguration
      */
     private String secretKey;
     /**
+     * Amazon AWS Session Token used when the user needs to assume a IAM role
+     */
+    private String sessionToken;
+    /**
      * Set whether the Athena client should expect to load credentials through a
      * default credentials provider or to expect static credentials to be passed
      * in
@@ -232,6 +236,12 @@ public class Athena2ComponentConfiguration
      * profile credentials provider.
      */
     private Boolean useProfileCredentialsProvider = false;
+    /**
+     * Set whether the Athena client should expect to use Session Credentials.
+     * This is useful in situation in which the user needs to assume a IAM role
+     * for doing operations in Athena.
+     */
+    private Boolean useSessionCredentials = false;
 
     public Athena2Configuration getConfiguration() {
         return configuration;
@@ -489,6 +499,14 @@ public class Athena2ComponentConfiguration
         this.secretKey = secretKey;
     }
 
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
+    }
+
     public Boolean getUseDefaultCredentialsProvider() {
         return useDefaultCredentialsProvider;
     }
@@ -505,5 +523,13 @@ public class Athena2ComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
+    }
+
+    public Boolean getUseSessionCredentials() {
+        return useSessionCredentials;
+    }
+
+    public void setUseSessionCredentials(Boolean useSessionCredentials) {
+        this.useSessionCredentials = useSessionCredentials;
     }
 }

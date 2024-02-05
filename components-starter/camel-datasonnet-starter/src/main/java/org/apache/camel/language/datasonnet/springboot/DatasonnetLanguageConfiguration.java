@@ -43,6 +43,18 @@ public class DatasonnetLanguageConfiguration
      */
     private String outputMediaType;
     /**
+     * Name of variable to use as input, instead of the message body
+     */
+    private String variableName;
+    /**
+     * Name of header to use as input, instead of the message body
+     */
+    private String headerName;
+    /**
+     * Name of property to use as input, instead of the message body.
+     */
+    private String propertyName;
+    /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
      */
@@ -62,6 +74,30 @@ public class DatasonnetLanguageConfiguration
 
     public void setOutputMediaType(String outputMediaType) {
         this.outputMediaType = outputMediaType;
+    }
+
+    public String getVariableName() {
+        return variableName;
+    }
+
+    public void setVariableName(String variableName) {
+        this.variableName = variableName;
+    }
+
+    public String getHeaderName() {
+        return headerName;
+    }
+
+    public void setHeaderName(String headerName) {
+        this.headerName = headerName;
+    }
+
+    public String getPropertyName() {
+        return propertyName;
+    }
+
+    public void setPropertyName(String propertyName) {
+        this.propertyName = propertyName;
     }
 
     public Boolean getTrim() {
