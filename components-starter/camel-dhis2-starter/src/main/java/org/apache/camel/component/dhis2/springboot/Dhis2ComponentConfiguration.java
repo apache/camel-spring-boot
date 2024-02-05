@@ -77,7 +77,9 @@ public class Dhis2ComponentConfiguration
     private Boolean autowiredEnabled = true;
     /**
      * References a user-defined org.hisp.dhis.integration.sdk.api.Dhis2Client.
-     * The option is a org.hisp.dhis.integration.sdk.api.Dhis2Client type.
+     * This option is mutually exclusive to the baseApiUrl, username, password,
+     * and personalAccessToken options. The option is a
+     * org.hisp.dhis.integration.sdk.api.Dhis2Client type.
      */
     private Dhis2Client client;
     /**
@@ -86,11 +88,16 @@ public class Dhis2ComponentConfiguration
      */
     private Dhis2Configuration configuration;
     /**
-     * DHIS2 account password for accessing the DHIS2 API
+     * Password of the DHIS2 username
      */
     private String password;
     /**
-     * DHIS2 account username for accessing the DHIS2 API
+     * Personal access token to authenticate with DHIS2. This option is mutually
+     * exclusive to username and password
+     */
+    private String personalAccessToken;
+    /**
+     * Username of the DHIS2 user to operate as
      */
     private String username;
 
@@ -148,6 +155,14 @@ public class Dhis2ComponentConfiguration
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPersonalAccessToken() {
+        return personalAccessToken;
+    }
+
+    public void setPersonalAccessToken(String personalAccessToken) {
+        this.personalAccessToken = personalAccessToken;
     }
 
     public String getUsername() {

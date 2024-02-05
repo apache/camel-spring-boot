@@ -36,7 +36,7 @@
     {
       "name": "camel.component.dhis2.client",
       "type": "org.hisp.dhis.integration.sdk.api.Dhis2Client",
-      "description": "References a user-defined org.hisp.dhis.integration.sdk.api.Dhis2Client. The option is a org.hisp.dhis.integration.sdk.api.Dhis2Client type.",
+      "description": "References a user-defined org.hisp.dhis.integration.sdk.api.Dhis2Client. This option is mutually exclusive to the baseApiUrl, username, password, and personalAccessToken options. The option is a org.hisp.dhis.integration.sdk.api.Dhis2Client type.",
       "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration"
     },
     {
@@ -66,13 +66,19 @@
     {
       "name": "camel.component.dhis2.password",
       "type": "java.lang.String",
-      "description": "DHIS2 account password for accessing the DHIS2 API",
+      "description": "Password of the DHIS2 username",
+      "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dhis2.personal-access-token",
+      "type": "java.lang.String",
+      "description": "Personal access token to authenticate with DHIS2. This option is mutually exclusive to username and password",
       "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration"
     },
     {
       "name": "camel.component.dhis2.username",
       "type": "java.lang.String",
-      "description": "DHIS2 account username for accessing the DHIS2 API",
+      "description": "Username of the DHIS2 user to operate as",
       "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration"
     }
   ],
