@@ -36,18 +36,15 @@ public class Hl7TerserLanguageConfiguration
      */
     private Boolean enabled;
     /**
-     * Name of variable to use as input, instead of the message body It has as
-     * higher precedent if other are set.
+     * Name of variable to use as input, instead of the message body
      */
     private String variableName;
     /**
-     * Name of header to use as input, instead of the message body It has as
-     * higher precedent than the propertyName if both are set.
+     * Name of header to use as input, instead of the message body
      */
     private String headerName;
     /**
-     * Name of property to use as input, instead of the message body. It has a
-     * lower precedent than the headerName if both are set.
+     * Name of property to use as input, instead of the message body.
      */
     private String propertyName;
     /**

@@ -41,7 +41,7 @@
     {
       "name": "camel.language.jsonpath.header-name",
       "type": "java.lang.String",
-      "description": "Name of header to use as input, instead of the message body It has as higher precedent than the propertyName if both are set.",
+      "description": "Name of header to use as input, instead of the message body",
       "sourceType": "org.apache.camel.jsonpath.springboot.JsonPathLanguageConfiguration"
     },
     {
@@ -53,7 +53,7 @@
     {
       "name": "camel.language.jsonpath.property-name",
       "type": "java.lang.String",
-      "description": "Name of property to use as input, instead of the message body. It has a lower precedent than the headerName if both are set.",
+      "description": "Name of property to use as input, instead of the message body.",
       "sourceType": "org.apache.camel.jsonpath.springboot.JsonPathLanguageConfiguration"
     },
     {
@@ -80,7 +80,7 @@
     {
       "name": "camel.language.jsonpath.variable-name",
       "type": "java.lang.String",
-      "description": "Name of variable to use as input, instead of the message body It has as higher precedent if other are set.",
+      "description": "Name of variable to use as input, instead of the message body",
       "sourceType": "org.apache.camel.jsonpath.springboot.JsonPathLanguageConfiguration"
     },
     {

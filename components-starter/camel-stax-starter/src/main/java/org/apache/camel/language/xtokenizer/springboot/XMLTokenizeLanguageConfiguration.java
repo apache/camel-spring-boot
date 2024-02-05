@@ -53,8 +53,7 @@ public class XMLTokenizeLanguageConfiguration
      */
     private String variableName;
     /**
-     * Name of property to use as input, instead of the message body. It has a
-     * lower precedent than the headerName if both are set.
+     * Name of property to use as input, instead of the message body.
      */
     private String propertyName;
     /**

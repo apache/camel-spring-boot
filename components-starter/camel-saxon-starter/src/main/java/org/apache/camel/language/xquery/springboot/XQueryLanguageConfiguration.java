@@ -37,11 +37,6 @@ public class XQueryLanguageConfiguration
      */
     private Boolean enabled;
     /**
-     * Sets the class name of the result type (type from output) The default
-     * result type is NodeSet
-     */
-    private String type;
-    /**
      * Reference to a saxon configuration instance in the registry to use for
      * xquery (requires camel-saxon). This may be needed to add custom functions
      * to a saxon configuration, so these custom functions can be used in xquery
@@ -57,8 +52,7 @@ public class XQueryLanguageConfiguration
      */
     private String variableName;
     /**
-     * Name of property to use as input, instead of the message body. It has a
-     * lower precedent than the headerName if both are set.
+     * Name of property to use as input, instead of the message body.
      */
     private String propertyName;
     /**
@@ -66,14 +60,6 @@ public class XQueryLanguageConfiguration
      * line breaks
      */
     private Boolean trim = true;
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getConfigurationRef() {
         return configurationRef;

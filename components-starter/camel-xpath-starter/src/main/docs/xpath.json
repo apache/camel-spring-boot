@@ -65,8 +65,15 @@
     {
       "name": "camel.language.xpath.property-name",
       "type": "java.lang.String",
-      "description": "Name of property to use as input, instead of the message body. It has a lower precedent than the headerName if both are set.",
+      "description": "Name of property to use as input, instead of the message body.",
       "sourceType": "org.apache.camel.language.xpath.springboot.XPathLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.xpath.result-q-name",
+      "type": "java.lang.String",
+      "description": "Sets the output type supported by XPath.",
+      "sourceType": "org.apache.camel.language.xpath.springboot.XPathLanguageConfiguration",
+      "defaultValue": "NODESET"
     },
     {
       "name": "camel.language.xpath.saxon",

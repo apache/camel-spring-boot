@@ -56,13 +56,13 @@
     {
       "name": "camel.language.hl7terser.header-name",
       "type": "java.lang.String",
-      "description": "Name of header to use as input, instead of the message body It has as higher precedent than the propertyName if both are set.",
+      "description": "Name of header to use as input, instead of the message body",
       "sourceType": "org.apache.camel.component.hl7.springboot.Hl7TerserLanguageConfiguration"
     },
     {
       "name": "camel.language.hl7terser.property-name",
       "type": "java.lang.String",
-      "description": "Name of property to use as input, instead of the message body. It has a lower precedent than the headerName if both are set.",
+      "description": "Name of property to use as input, instead of the message body.",
       "sourceType": "org.apache.camel.component.hl7.springboot.Hl7TerserLanguageConfiguration"
     },
     {
@@ -75,7 +75,7 @@
     {
       "name": "camel.language.hl7terser.variable-name",
       "type": "java.lang.String",
-      "description": "Name of variable to use as input, instead of the message body It has as higher precedent if other are set.",
+      "description": "Name of variable to use as input, instead of the message body",
       "sourceType": "org.apache.camel.component.hl7.springboot.Hl7TerserLanguageConfiguration"
     }
   ],

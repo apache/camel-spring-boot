@@ -76,7 +76,7 @@
     {
       "name": "camel.language.xtokenize.property-name",
       "type": "java.lang.String",
-      "description": "Name of property to use as input, instead of the message body. It has a lower precedent than the headerName if both are set.",
+      "description": "Name of property to use as input, instead of the message body.",
       "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration"
     },
     {

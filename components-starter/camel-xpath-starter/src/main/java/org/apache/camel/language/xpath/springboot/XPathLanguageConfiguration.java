@@ -41,6 +41,10 @@ public class XPathLanguageConfiguration
      */
     private String documentType;
     /**
+     * Sets the output type supported by XPath.
+     */
+    private String resultQName = "NODESET";
+    /**
      * Whether to use Saxon.
      */
     private Boolean saxon = false;
@@ -86,8 +90,7 @@ public class XPathLanguageConfiguration
      */
     private String variableName;
     /**
-     * Name of property to use as input, instead of the message body. It has a
-     * lower precedent than the headerName if both are set.
+     * Name of property to use as input, instead of the message body.
      */
     private String propertyName;
     /**
@@ -102,6 +105,14 @@ public class XPathLanguageConfiguration
 
     public void setDocumentType(String documentType) {
         this.documentType = documentType;
+    }
+
+    public String getResultQName() {
+        return resultQName;
+    }
+
+    public void setResultQName(String resultQName) {
+        this.resultQName = resultQName;
     }
 
     public Boolean getSaxon() {
