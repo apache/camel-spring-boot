@@ -136,6 +136,10 @@ public class EventbridgeComponentConfiguration
      */
     private String secretKey;
     /**
+     * Amazon AWS Session Token used when the user needs to assume a IAM role
+     */
+    private String sessionToken;
+    /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
     private Boolean trustAllCertificates = false;
@@ -150,6 +154,12 @@ public class EventbridgeComponentConfiguration
      * through a profile credentials provider.
      */
     private Boolean useProfileCredentialsProvider = false;
+    /**
+     * Set whether the Eventbridge client should expect to use Session
+     * Credentials. This is useful in situation in which the user needs to
+     * assume a IAM role for doing operations in Eventbridge.
+     */
+    private Boolean useSessionCredentials = false;
 
     public EventbridgeConfiguration getConfiguration() {
         return configuration;
@@ -295,6 +305,14 @@ public class EventbridgeComponentConfiguration
         this.secretKey = secretKey;
     }
 
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
+    }
+
     public Boolean getTrustAllCertificates() {
         return trustAllCertificates;
     }
@@ -319,5 +337,13 @@ public class EventbridgeComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
+    }
+
+    public Boolean getUseSessionCredentials() {
+        return useSessionCredentials;
+    }
+
+    public void setUseSessionCredentials(Boolean useSessionCredentials) {
+        this.useSessionCredentials = useSessionCredentials;
     }
 }
