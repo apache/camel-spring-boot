@@ -39,21 +39,15 @@
       "sourceType": "org.apache.camel.jsonpath.springboot.JsonPathLanguageConfiguration"
     },
     {
-      "name": "camel.language.jsonpath.header-name",
-      "type": "java.lang.String",
-      "description": "Name of header to use as input, instead of the message body",
-      "sourceType": "org.apache.camel.jsonpath.springboot.JsonPathLanguageConfiguration"
-    },
-    {
       "name": "camel.language.jsonpath.option",
       "type": "java.lang.String",
       "description": "To configure additional options on JSONPath. Multiple values can be separated by comma.",
       "sourceType": "org.apache.camel.jsonpath.springboot.JsonPathLanguageConfiguration"
     },
     {
-      "name": "camel.language.jsonpath.property-name",
+      "name": "camel.language.jsonpath.source",
       "type": "java.lang.String",
-      "description": "Name of property to use as input, instead of the message body.",
+      "description": "Source to use, instead of message body. You can prefix with variable:, header:, or property: to specify kind of source. Otherwise, the source is assumed to be a variable. Use empty or null to use default source, which is the message body.",
       "sourceType": "org.apache.camel.jsonpath.springboot.JsonPathLanguageConfiguration"
     },
     {
@@ -76,12 +70,6 @@
       "description": "Whether to unpack a single element json-array into an object.",
       "sourceType": "org.apache.camel.jsonpath.springboot.JsonPathLanguageConfiguration",
       "defaultValue": false
-    },
-    {
-      "name": "camel.language.jsonpath.variable-name",
-      "type": "java.lang.String",
-      "description": "Name of variable to use as input, instead of the message body",
-      "sourceType": "org.apache.camel.jsonpath.springboot.JsonPathLanguageConfiguration"
     },
     {
       "name": "camel.language.jsonpath.write-as-string",

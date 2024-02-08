@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.kudu.springboot.KuduComponentAutoConfiguration
+org.apache.camel.component.kudu.springboot.KuduComponentConverter

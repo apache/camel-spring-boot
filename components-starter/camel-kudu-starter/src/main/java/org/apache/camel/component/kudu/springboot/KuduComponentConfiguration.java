@@ -17,6 +17,7 @@
 package org.apache.camel.component.kudu.springboot;
 
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.kudu.client.KuduClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -55,6 +56,12 @@ public class KuduComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use an existing Kudu client instance, instead of creating a client per
+     * endpoint. This allows you to customize various aspects to the client
+     * configuration. The option is a org.apache.kudu.client.KuduClient type.
+     */
+    private KuduClient kuduClient;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -70,5 +77,13 @@ public class KuduComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public KuduClient getKuduClient() {
+        return kuduClient;
+    }
+
+    public void setKuduClient(KuduClient kuduClient) {
+        this.kuduClient = kuduClient;
     }
 }

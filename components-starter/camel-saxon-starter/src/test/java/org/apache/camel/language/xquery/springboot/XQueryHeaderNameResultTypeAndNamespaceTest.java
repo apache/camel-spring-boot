@@ -79,9 +79,11 @@ public class XQueryHeaderNameResultTypeAndNamespaceTest {
                 @Override
                 public void configure() throws Exception {
                     Namespaces ns = new Namespaces("c", "http://acme.com/cheese");
+                    var xq = expression().xquery().expression("/c:number = 55").namespaces(ns).resultType(Integer.class)
+                            .source("header:cheeseDetails").end();
 
                     from("direct:in").choice()
-                            .when().xquery("/c:number = 55", Integer.class, ns, "cheeseDetails")
+                            .when(xq)
                             .to("mock:55")
                             .otherwise()
                             .to("mock:other")

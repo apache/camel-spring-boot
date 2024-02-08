@@ -74,9 +74,9 @@
       "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration"
     },
     {
-      "name": "camel.language.xtokenize.property-name",
+      "name": "camel.language.xtokenize.source",
       "type": "java.lang.String",
-      "description": "Name of property to use as input, instead of the message body.",
+      "description": "Source to use, instead of message body. You can prefix with variable:, header:, or property: to specify kind of source. Otherwise, the source is assumed to be a variable. Use empty or null to use default source, which is the message body.",
       "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration"
     },
     {
@@ -85,12 +85,6 @@
       "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
       "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration",
       "defaultValue": true
-    },
-    {
-      "name": "camel.language.xtokenize.variable-name",
-      "type": "java.lang.String",
-      "description": "Name of variable to use as input, instead of the message body",
-      "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration"
     }
   ],
   "hints": []

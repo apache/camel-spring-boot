@@ -76,8 +76,11 @@ public class JsonPathHeaderNameTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
+                    var jp = expression().jsonpath().expression("$..store.book.length()").resultType(int.class)
+                            .source("header:myHeader").end();
+
                     from("direct:start")
-                            .setHeader("number").jsonpath("$..store.book.length()", false, int.class, "myHeader")
+                            .setHeader("number", jp)
                             .to("mock:result");
                 }
             };

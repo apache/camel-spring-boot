@@ -110,11 +110,16 @@ public class XQueryHeaderNameTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
+                    var premium = expression().xquery().expression("/invoice/@orderType = 'premium'")
+                            .source("header:invoiceDetails").end();
+                    var standard = expression().xquery().expression("/invoice/@orderType = 'standard'")
+                            .source("header:invoiceDetails").end();
+
                     from("direct:in")
                             .choice()
-                            .when().xquery("/invoice/@orderType = 'premium'", "invoiceDetails")
+                            .when(premium)
                             .to("mock:premium")
-                            .when().xquery("/invoice/@orderType = 'standard'", "invoiceDetails")
+                            .when(standard)
                             .to("mock:standard")
                             .otherwise()
                             .to("mock:unknown")

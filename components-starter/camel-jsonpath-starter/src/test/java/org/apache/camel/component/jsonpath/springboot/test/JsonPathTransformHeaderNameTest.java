@@ -81,8 +81,10 @@ public class JsonPathTransformHeaderNameTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
+                    var jp = expression().jsonpath().expression("$.store.book[*].author").source("header:myHeader").end();
+
                     from("direct:start")
-                            .transform().jsonpath("$.store.book[*].author", false, null, "myHeader")
+                            .transform(jp)
                             .to("mock:authors");
                 }
             };

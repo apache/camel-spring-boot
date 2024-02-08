@@ -32,6 +32,12 @@
       "sourceType": "org.apache.camel.component.kudu.springboot.KuduComponentConfiguration"
     },
     {
+      "name": "camel.component.kudu.kudu-client",
+      "type": "org.apache.kudu.client.KuduClient",
+      "description": "To use an existing Kudu client instance, instead of creating a client per endpoint. This allows you to customize various aspects to the client configuration. The option is a org.apache.kudu.client.KuduClient type.",
+      "sourceType": "org.apache.camel.component.kudu.springboot.KuduComponentConfiguration"
+    },
+    {
       "name": "camel.component.kudu.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
