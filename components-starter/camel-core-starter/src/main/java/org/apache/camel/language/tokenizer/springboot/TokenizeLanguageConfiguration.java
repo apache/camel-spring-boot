@@ -40,13 +40,12 @@ public class TokenizeLanguageConfiguration
      */
     private String groupDelimiter;
     /**
-     * Name of variable to use as input, instead of the message body
+     * Source to use, instead of message body. You can prefix with variable:,
+     * header:, or property: to specify kind of source. Otherwise, the source is
+     * assumed to be a variable. Use empty or null to use default source, which
+     * is the message body.
      */
-    private String variableName;
-    /**
-     * Name of property to use as input, instead of the message body.
-     */
-    private String propertyName;
+    private String source;
     /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
@@ -61,20 +60,12 @@ public class TokenizeLanguageConfiguration
         this.groupDelimiter = groupDelimiter;
     }
 
-    public String getVariableName() {
-        return variableName;
+    public String getSource() {
+        return source;
     }
 
-    public void setVariableName(String variableName) {
-        this.variableName = variableName;
-    }
-
-    public String getPropertyName() {
-        return propertyName;
-    }
-
-    public void setPropertyName(String propertyName) {
-        this.propertyName = propertyName;
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public Boolean getTrim() {

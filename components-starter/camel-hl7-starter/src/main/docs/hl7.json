@@ -54,15 +54,9 @@
       "sourceType": "org.apache.camel.component.hl7.springboot.Hl7TerserLanguageConfiguration"
     },
     {
-      "name": "camel.language.hl7terser.header-name",
+      "name": "camel.language.hl7terser.source",
       "type": "java.lang.String",
-      "description": "Name of header to use as input, instead of the message body",
-      "sourceType": "org.apache.camel.component.hl7.springboot.Hl7TerserLanguageConfiguration"
-    },
-    {
-      "name": "camel.language.hl7terser.property-name",
-      "type": "java.lang.String",
-      "description": "Name of property to use as input, instead of the message body.",
+      "description": "Source to use, instead of message body. You can prefix with variable:, header:, or property: to specify kind of source. Otherwise, the source is assumed to be a variable. Use empty or null to use default source, which is the message body.",
       "sourceType": "org.apache.camel.component.hl7.springboot.Hl7TerserLanguageConfiguration"
     },
     {
@@ -71,12 +65,6 @@
       "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
       "sourceType": "org.apache.camel.component.hl7.springboot.Hl7TerserLanguageConfiguration",
       "defaultValue": true
-    },
-    {
-      "name": "camel.language.hl7terser.variable-name",
-      "type": "java.lang.String",
-      "description": "Name of variable to use as input, instead of the message body",
-      "sourceType": "org.apache.camel.component.hl7.springboot.Hl7TerserLanguageConfiguration"
     }
   ],
   "hints": []
