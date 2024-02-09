@@ -50,9 +50,9 @@ public class KafkaComponentConfiguration
     private Boolean enabled;
     /**
      * Sets additional properties for either kafka consumer or kafka producer in
-     * case they can't be set directly on the camel configurations (e.g: new
+     * case they can't be set directly on the camel configurations (e.g.: new
      * Kafka properties that are not reflected yet in Camel configurations), the
-     * properties have to be prefixed with additionalProperties.. E.g:
+     * properties have to be prefixed with additionalProperties.., e.g.:
      * additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http://localhost:8811/avro
      */
     private Map<String, Object> additionalProperties;
@@ -90,7 +90,7 @@ public class KafkaComponentConfiguration
     private Integer reconnectBackoffMaxMs = 1000;
     /**
      * Timeout in milliseconds to wait gracefully for the consumer or producer
-     * to shutdown and terminate its worker threads.
+     * to shut down and terminate its worker threads.
      */
     private Integer shutdownTimeout = 30000;
     /**
@@ -113,7 +113,7 @@ public class KafkaComponentConfiguration
     /**
      * What to do when there is no initial offset in ZooKeeper or if an offset
      * is out of range: earliest : automatically reset the offset to the
-     * earliest offset latest : automatically reset the offset to the latest
+     * earliest offset latest: automatically reset the offset to the latest
      * offset fail: throw exception to the consumer
      */
     private String autoOffsetReset = "latest";
@@ -129,12 +129,13 @@ public class KafkaComponentConfiguration
      * consumer breaks out. Using the default NoopCommitManager will cause the
      * consumer to not commit the offset so that the message is re-attempted.
      * The consumer should use the KafkaManualCommit to determine the best way
-     * to handle the message. Using either the SynchCommitManager or the
-     * AsynchCommitManager the consumer will seek back to the offset of the
+     * to handle the message. Using either the SyncCommitManager or the
+     * AsyncCommitManager, the consumer will seek back to the offset of the
      * message that caused a failure, and then re-attempt to process this
-     * message. However this can lead to endless processing of the same message
-     * if its bound to fail every time, eg a poison message. Therefore its
-     * recommended to deal with that for example by using Camel's error handler.
+     * message. However, this can lead to endless processing of the same message
+     * if it's bound to fail every time, e.g., a poison message. Therefore, it's
+     * recommended to deal with that, for example, by using Camel's error
+     * handler.
      */
     private Boolean breakOnFirstError = false;
     /**
@@ -166,13 +167,13 @@ public class KafkaComponentConfiguration
     /**
      * The configuration controls the maximum amount of time the client will
      * wait for the response of a request. If the response is not received
-     * before the timeout elapses the client will resend the request if
+     * before the timeout elapsed, the client will resend the request if
      * necessary or fail the request if retries are exhausted.
      */
     private Integer consumerRequestTimeoutMs = 30000;
     /**
      * The number of consumers that connect to kafka server. Each consumer is
-     * run on a separate thread, that retrieves and process the incoming data.
+     * run on a separate thread that retrieves and process the incoming data.
      */
     private Integer consumersCount = 1;
     /**
@@ -187,7 +188,7 @@ public class KafkaComponentConfiguration
     private Integer fetchMaxBytes = 52428800;
     /**
      * The minimum amount of data the server should return for a fetch request.
-     * If insufficient data is available the request will wait for that much
+     * If insufficient data is available, the request will wait for that much
      * data to accumulate before answering the request.
      */
     private Integer fetchMinBytes = 1;
@@ -199,8 +200,8 @@ public class KafkaComponentConfiguration
     private Integer fetchWaitMaxMs = 500;
     /**
      * A string that uniquely identifies the group of consumer processes to
-     * which this consumer belongs. By setting the same group id multiple
-     * processes indicate that they are all part of the same consumer group.
+     * which this consumer belongs. By setting the same group id, multiple
+     * processes can indicate that they are all part of the same consumer group.
      * This option is required for consumers.
      */
     private String groupId;
@@ -210,7 +211,7 @@ public class KafkaComponentConfiguration
      * a static member, which means that only one instance with this ID is
      * allowed in the consumer group at any time. This can be used in
      * combination with a larger session timeout to avoid group rebalances
-     * caused by transient unavailability (e.g. process restarts). If not set,
+     * caused by transient unavailability (e.g., process restarts). If not set,
      * the consumer will join the group as a dynamic member, which is the
      * traditional behavior.
      */
@@ -251,8 +252,8 @@ public class KafkaComponentConfiguration
      * management. This places an upper bound on the amount of time that the
      * consumer can be idle before fetching more records. If poll() is not
      * called before expiration of this timeout, then the consumer is considered
-     * failed and the group will rebalance in order to reassign the partitions
-     * to another member. The option is a java.lang.Integer type.
+     * failed, and the group will re-balance to reassign the partitions to
+     * another member. The option is a java.lang.Integer type.
      */
     private Integer maxPollIntervalMs;
     /**
@@ -260,7 +261,7 @@ public class KafkaComponentConfiguration
      */
     private Integer maxPollRecords = 500;
     /**
-     * The offset repository to use in order to locally store the offset of each
+     * The offset repository to use to locally store the offset of each
      * partition of the topic. Defining one will disable the autocommit. The
      * option is a org.apache.camel.spi.StateRepository<java.lang.String,
      * java.lang.String> type.
@@ -276,13 +277,13 @@ public class KafkaComponentConfiguration
      * What to do if kafka threw an exception while polling for new messages.
      * Will by default use the value from the component configuration unless an
      * explicit value has been configured on the endpoint level. DISCARD will
-     * discard the message and continue to poll next message. ERROR_HANDLER will
-     * use Camel's error handler to process the exception, and afterwards
-     * continue to poll next message. RECONNECT will re-connect the consumer and
-     * try poll the message again RETRY will let the consumer retry polling the
-     * same message again STOP will stop the consumer (have to be manually
-     * started/restarted if the consumer should be able to consume messages
-     * again)
+     * discard the message and continue to poll the next message. ERROR_HANDLER
+     * will use Camel's error handler to process the exception, and afterwards
+     * continue to poll the next message. RECONNECT will re-connect the consumer
+     * and try polling the message again. RETRY will let the consumer retry poll
+     * the same message again. STOP will stop the consumer (it has to be
+     * manually started/restarted if the consumer should be able to consume
+     * messages again)
      */
     private PollOnError pollOnError = PollOnError.ERROR_HANDLER;
     /**
@@ -293,16 +294,16 @@ public class KafkaComponentConfiguration
     /**
      * Whether to eager validate that broker host:port is valid and can be DNS
      * resolved to known host during starting this consumer. If the validation
-     * fails then an exception is thrown which makes Camel fail fast. Disabling
-     * this will postpone the validation after the consumer is started, and
-     * Camel will keep re-connecting in case of validation or DNS resolution
-     * error.
+     * fails, then an exception is thrown, which makes Camel fail fast.
+     * Disabling this will postpone the validation after the consumer is
+     * started, and Camel will keep re-connecting in case of validation or DNS
+     * resolution error.
      */
     private Boolean preValidateHostAndPort = true;
     /**
-     * Set if KafkaConsumer will read from the beginning or the end on startup:
-     * SeekPolicy.BEGINNING: read from the beginning. SeekPolicy.END: read from
-     * the end.
+     * Set if KafkaConsumer should read from the beginning or the end on
+     * startup: SeekPolicy.BEGINNING: read from the beginning. SeekPolicy.END:
+     * read from the end.
      */
     private SeekPolicy seekTo;
     /**
@@ -355,10 +356,10 @@ public class KafkaComponentConfiguration
      * unconditionally in either mode. Messages will always be returned in
      * offset order. Hence, in read_committed mode, consumer.poll() will only
      * return messages up to the last stable offset (LSO), which is the one less
-     * than the offset of the first open transaction. In particular any messages
-     * appearing after messages belonging to ongoing transactions will be
-     * withheld until the relevant transaction has been completed. As a result,
-     * read_committed consumers will not be able to read up to the high
+     * than the offset of the first open transaction. In particular, any
+     * messages appearing after messages belonging to ongoing transactions will
+     * be withheld until the relevant transaction has been completed. As a
+     * result, read_committed consumers will not be able to read up to the high
      * watermark when there are in flight transactions. Further, when in
      * read_committed the seekToEnd method will return the LSO
      */
@@ -396,15 +397,15 @@ public class KafkaComponentConfiguration
     /**
      * If this feature is enabled and a single element of a batch is an Exchange
      * or Message, the producer will generate individual kafka header values for
-     * it by using the batch Message to determine the values. Normal behaviour
-     * consists in always using the same header values (which are determined by
+     * it by using the batch Message to determine the values. Normal behavior
+     * consists of always using the same header values (which are determined by
      * the parent Exchange which contains the Iterable or Iterator).
      */
     private Boolean batchWithIndividualHeaders = false;
     /**
      * The total bytes of memory the producer can use to buffer records waiting
      * to be sent to the server. If records are sent faster than they can be
-     * delivered to the server the producer will either block or throw an
+     * delivered to the server, the producer will either block or throw an
      * exception based on the preference specified by block.on.buffer.full.This
      * setting should correspond roughly to the total memory the producer will
      * use, but is not a hard bound since not all memory the producer uses is
@@ -474,20 +475,20 @@ public class KafkaComponentConfiguration
     private Boolean lazyStartProducer = false;
     /**
      * The producer groups together any records that arrive in between request
-     * transmissions into a single batched request. Normally this occurs only
-     * under load when records arrive faster than they can be sent out. However
-     * in some circumstances the client may want to reduce the number of
-     * requests even under moderate load. This setting accomplishes this by
-     * adding a small amount of artificial delay that is, rather than
-     * immediately sending out a record the producer will wait for up to the
+     * transmissions into a single, batched, request. Normally, this occurs only
+     * under load when records arrive faster than they can be sent out. However,
+     * in some circumstances, the client may want to reduce the number of
+     * requests even under a moderate load. This setting accomplishes this by
+     * adding a small amount of artificial delay. That is, rather than
+     * immediately sending out a record, the producer will wait for up to the
      * given delay to allow other records to be sent so that they can be batched
      * together. This can be thought of as analogous to Nagle's algorithm in
      * TCP. This setting gives the upper bound on the delay for batching: once
-     * we get batch.size worth of records for a partition it will be sent
-     * immediately regardless of this setting, however if we have fewer than
-     * this many bytes accumulated for this partition we will 'linger' for the
+     * we get batch.size worth of records for a partition, it will be sent
+     * immediately regardless of this setting, however, if we have fewer than
+     * this many bytes accumulated for this partition, we will 'linger' for the
      * specified time waiting for more records to show up. This setting defaults
-     * to 0 (i.e. no delay). Setting linger.ms=5, for example, would have the
+     * to 0 (i.e., no delay). Setting linger.ms=5, for example, would have the
      * effect of reducing the number of requests sent but would add up to 5ms of
      * latency to records sent in the absence of load.
      */
@@ -499,7 +500,7 @@ public class KafkaComponentConfiguration
      * this timeout bounds the total time waiting for both metadata fetch and
      * buffer allocation (blocking in the user-supplied serializers or
      * partitioner is not counted against this timeout). For partitionsFor()
-     * this timeout bounds the time spent waiting for metadata if it is
+     * this time out bounds the time spent waiting for metadata if it is
      * unavailable. The transaction-related methods always block, but may time
      * out if the transaction coordinator could not be discovered or did not
      * respond within the timeout.
@@ -547,8 +548,8 @@ public class KafkaComponentConfiguration
      */
     private String partitioner;
     /**
-     * Whether the message keys should be ignored when computing partition. This
-     * setting has effect only when partitioner is not set
+     * Whether the message keys should be ignored when computing the partition.
+     * This setting has effect only when partitioner is not set
      */
     private Boolean partitionerIgnoreKeys = false;
     /**
@@ -598,21 +599,21 @@ public class KafkaComponentConfiguration
      * The number of acknowledgments the producer requires the leader to have
      * received before considering a request complete. This controls the
      * durability of records that are sent. The following settings are allowed:
-     * acks=0 If set to zero then the producer will not wait for any
+     * acks=0 If set to zero, then the producer will not wait for any
      * acknowledgment from the server at all. The record will be immediately
      * added to the socket buffer and considered sent. No guarantee can be made
-     * that the server has received the record in this case, and the retries
+     * that the server has received the record in this case, and the retry
      * configuration will not take effect (as the client won't generally know of
      * any failures). The offset given back for each record will always be set
      * to -1. acks=1 This will mean the leader will write the record to its
-     * local log but will respond without awaiting full acknowledgement from all
+     * local log but will respond without awaiting full acknowledgment from all
      * followers. In this case should the leader fail immediately after
-     * acknowledging the record but before the followers have replicated it then
-     * the record will be lost. acks=all This means the leader will wait for the
-     * full set of in-sync replicas to acknowledge the record. This guarantees
-     * that the record will not be lost as long as at least one in-sync replica
-     * remains alive. This is the strongest available guarantee. This is
-     * equivalent to the acks=-1 setting. Note that enabling idempotence
+     * acknowledging the record, but before the followers have replicated it,
+     * then the record will be lost. acks=all This means the leader will wait
+     * for the full set of in-sync replicas to acknowledge the record. This
+     * guarantees that the record will not be lost as long as at least one
+     * in-sync replica remains alive. This is the strongest available guarantee.
+     * This is equivalent to the acks=-1 setting. Note that enabling idempotence
      * requires this config value to be 'all'. If conflicting configurations are
      * set and idempotence is not explicitly enabled, idempotence is disabled.
      */
@@ -625,10 +626,10 @@ public class KafkaComponentConfiguration
     private Integer requestTimeoutMs = 30000;
     /**
      * Setting a value greater than zero will cause the client to resend any
-     * record whose send fails with a potentially transient error. Note that
-     * this retry is no different than if the client resent the record upon
-     * receiving the error. Produce requests will be failed before the number of
-     * retries has been exhausted if the timeout configured by
+     * record that has failed to be sent due to a potentially transient error.
+     * Note that this retry is no different from if the client re-sending the
+     * record upon receiving the error. Produce requests will be failed before
+     * the number of retries has been exhausted if the timeout configured by
      * delivery.timeout.ms expires first before successful acknowledgement.
      * Users should generally prefer to leave this config unset and instead use
      * delivery.timeout.ms to control retry behavior. Enabling idempotence
@@ -659,22 +660,22 @@ public class KafkaComponentConfiguration
     private String valueSerializer = "org.apache.kafka.common.serialization.StringSerializer";
     /**
      * To use a custom worker pool for continue routing Exchange after kafka
-     * server has acknowledge the message that was sent to it from KafkaProducer
-     * using asynchronous non-blocking processing. If using this option then you
-     * must handle the lifecycle of the thread pool to shut the pool down when
-     * no longer needed. The option is a java.util.concurrent.ExecutorService
-     * type.
+     * server has acknowledged the message that was sent to it from
+     * KafkaProducer using asynchronous non-blocking processing. If using this
+     * option, then you must handle the lifecycle of the thread pool to shut the
+     * pool down when no longer needed. The option is a
+     * java.util.concurrent.ExecutorService type.
      */
     private ExecutorService workerPool;
     /**
      * Number of core threads for the worker pool for continue routing Exchange
-     * after kafka server has acknowledge the message that was sent to it from
+     * after kafka server has acknowledged the message that was sent to it from
      * KafkaProducer using asynchronous non-blocking processing.
      */
     private Integer workerPoolCoreSize = 10;
     /**
      * Maximum number of threads for the worker pool for continue routing
-     * Exchange after kafka server has acknowledge the message that was sent to
+     * Exchange after kafka server has acknowledged the message that was sent to
      * it from KafkaProducer using asynchronous non-blocking processing.
      */
     private Integer workerPoolMaxSize = 20;
@@ -743,13 +744,13 @@ public class KafkaComponentConfiguration
     private String kerberosInitCmd = "/usr/bin/kinit";
     /**
      * A list of rules for mapping from principal names to short names
-     * (typically operating system usernames). The rules are evaluated in order
+     * (typically operating system usernames). The rules are evaluated in order,
      * and the first rule that matches a principal name is used to map it to a
      * short name. Any later rules in the list are ignored. By default,
      * principal names of the form {username}/{hostname}{REALM} are mapped to
-     * {username}. For more details on the format please see the security
-     * authorization and acls documentation (at the Apache Kafka project).
-     * Multiple values can be separated by comma
+     * {username}. For more details on the format, please see the Security
+     * Authorization and ACLs documentation (at the Apache Kafka project
+     * website). Multiple values can be separated by comma
      */
     private String kerberosPrincipalToLocalRules = "DEFAULT";
     /**
@@ -788,12 +789,12 @@ public class KafkaComponentConfiguration
      * A list of cipher suites. This is a named combination of authentication,
      * encryption, MAC and key exchange algorithm used to negotiate the security
      * settings for a network connection using TLS or SSL network protocol. By
-     * default all the available cipher suites are supported.
+     * default, all the available cipher suites are supported.
      */
     private String sslCipherSuites;
     /**
      * SSL configuration using a Camel SSLContextParameters object. If
-     * configured it's applied before the other SSL endpoint parameters. NOTE:
+     * configured, it's applied before the other SSL endpoint parameters. NOTE:
      * Kafka only supports loading keystore from file locations, so prefix the
      * location with file: in the KeyStoreParameters.resource option. The option
      * is a org.apache.camel.support.jsse.SSLContextParameters type.
@@ -833,13 +834,13 @@ public class KafkaComponentConfiguration
     private String sslKeystoreLocation;
     /**
      * The store password for the key store file. This is optional for the
-     * client and only needed if sslKeystoreLocation' is configured. Key store
+     * client and only needed if sslKeystoreLocation is configured. Key store
      * password is not supported for PEM format.
      */
     private String sslKeystorePassword;
     /**
-     * The file format of the key store file. This is optional for client.
-     * Default value is JKS
+     * The file format of the key store file. This is optional for the client.
+     * The default value is JKS
      */
     private String sslKeystoreType = "JKS";
     /**
@@ -877,7 +878,7 @@ public class KafkaComponentConfiguration
      */
     private String sslTruststorePassword;
     /**
-     * The file format of the trust store file. Default value is JKS.
+     * The file format of the trust store file. The default value is JKS.
      */
     private String sslTruststoreType = "JKS";
     /**
