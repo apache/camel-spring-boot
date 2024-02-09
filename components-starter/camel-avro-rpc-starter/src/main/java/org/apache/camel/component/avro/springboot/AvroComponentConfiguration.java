@@ -49,14 +49,14 @@ public class AvroComponentConfiguration
      */
     private String protocolLocation;
     /**
-     * If protocol object provided is reflection protocol. Should be used only
-     * with protocol parameter because for protocolClassName protocol type will
-     * be auto detected
+     * If the protocol object provided is reflection protocol. Should be used
+     * only with protocol parameter because for protocolClassName protocol type
+     * will be auto-detected
      */
     private Boolean reflectionProtocol = false;
     /**
-     * If true, consumer parameter won't be wrapped into array. Will fail if
-     * protocol specifies more then 1 parameter for the message
+     * If true, consumer parameter won't be wrapped into an array. Will fail if
+     * protocol specifies more than one parameter for the message
      */
     private Boolean singleParameter = false;
     /**

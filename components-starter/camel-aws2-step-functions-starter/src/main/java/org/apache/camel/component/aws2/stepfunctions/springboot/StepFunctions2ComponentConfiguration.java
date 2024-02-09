@@ -147,6 +147,16 @@ public class StepFunctions2ComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * Amazon AWS Session Token used when the user needs to assume a IAM role
+     */
+    private String sessionToken;
+    /**
+     * Set whether the Step Functions client should expect to use Session
+     * Credentials. This is useful in situation in which the user needs to
+     * assume a IAM role for doing operations in Step Functions.
+     */
+    private Boolean useSessionCredentials = false;
 
     public StepFunctions2Configuration getConfiguration() {
         return configuration;
@@ -308,5 +318,21 @@ public class StepFunctions2ComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
+    }
+
+    public Boolean getUseSessionCredentials() {
+        return useSessionCredentials;
+    }
+
+    public void setUseSessionCredentials(Boolean useSessionCredentials) {
+        this.useSessionCredentials = useSessionCredentials;
     }
 }

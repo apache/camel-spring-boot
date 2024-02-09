@@ -55,17 +55,6 @@ public class KinesisFirehose2ComponentConfiguration
      */
     private Boolean overrideEndpoint = false;
     /**
-     * Set the overriding uri endpoint. This option needs to be used in
-     * combination with overrideEndpoint option
-     */
-    private String uriEndpointOverride;
-    /**
-     * Set whether the Kinesis Firehose client should expect to load credentials
-     * through a default credentials provider or to expect static credentials to
-     * be passed in.
-     */
-    private Boolean useDefaultCredentialsProvider = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -87,6 +76,17 @@ public class KinesisFirehose2ComponentConfiguration
      * Region.EU_WEST_1.id()
      */
     private String region;
+    /**
+     * Set the overriding uri endpoint. This option needs to be used in
+     * combination with overrideEndpoint option
+     */
+    private String uriEndpointOverride;
+    /**
+     * Set whether the Kinesis Firehose client should expect to load credentials
+     * through a default credentials provider or to expect static credentials to
+     * be passed in.
+     */
+    private Boolean useDefaultCredentialsProvider = false;
     /**
      * Amazon Kinesis Firehose client to use for all requests for this endpoint.
      * The option is a software.amazon.awssdk.services.firehose.FirehoseClient
@@ -128,6 +128,10 @@ public class KinesisFirehose2ComponentConfiguration
      */
     private String secretKey;
     /**
+     * Amazon AWS Session Token used when the user needs to assume a IAM role
+     */
+    private String sessionToken;
+    /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
     private Boolean trustAllCertificates = false;
@@ -136,6 +140,12 @@ public class KinesisFirehose2ComponentConfiguration
      * through a profile credentials provider.
      */
     private Boolean useProfileCredentialsProvider = false;
+    /**
+     * Set whether the Kinesis Firehose client should expect to use Session
+     * Credentials. This is useful in situation in which the user needs to
+     * assume a IAM role for doing operations in Kinesis Firehose.
+     */
+    private Boolean useSessionCredentials = false;
 
     public Boolean getCborEnabled() {
         return cborEnabled;
@@ -161,23 +171,6 @@ public class KinesisFirehose2ComponentConfiguration
         this.overrideEndpoint = overrideEndpoint;
     }
 
-    public String getUriEndpointOverride() {
-        return uriEndpointOverride;
-    }
-
-    public void setUriEndpointOverride(String uriEndpointOverride) {
-        this.uriEndpointOverride = uriEndpointOverride;
-    }
-
-    public Boolean getUseDefaultCredentialsProvider() {
-        return useDefaultCredentialsProvider;
-    }
-
-    public void setUseDefaultCredentialsProvider(
-            Boolean useDefaultCredentialsProvider) {
-        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
-    }
-
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
@@ -200,6 +193,23 @@ public class KinesisFirehose2ComponentConfiguration
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getUseDefaultCredentialsProvider() {
+        return useDefaultCredentialsProvider;
+    }
+
+    public void setUseDefaultCredentialsProvider(
+            Boolean useDefaultCredentialsProvider) {
+        this.useDefaultCredentialsProvider = useDefaultCredentialsProvider;
     }
 
     public FirehoseClient getAmazonKinesisFirehoseClient() {
@@ -267,6 +277,14 @@ public class KinesisFirehose2ComponentConfiguration
         this.secretKey = secretKey;
     }
 
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
+    }
+
     public Boolean getTrustAllCertificates() {
         return trustAllCertificates;
     }
@@ -282,5 +300,13 @@ public class KinesisFirehose2ComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
+    }
+
+    public Boolean getUseSessionCredentials() {
+        return useSessionCredentials;
+    }
+
+    public void setUseSessionCredentials(Boolean useSessionCredentials) {
+        this.useSessionCredentials = useSessionCredentials;
     }
 }

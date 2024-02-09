@@ -72,14 +72,14 @@
     {
       "name": "camel.component.avro.reflection-protocol",
       "type": "java.lang.Boolean",
-      "description": "If protocol object provided is reflection protocol. Should be used only with protocol parameter because for protocolClassName protocol type will be auto detected",
+      "description": "If the protocol object provided is reflection protocol. Should be used only with protocol parameter because for protocolClassName protocol type will be auto-detected",
       "sourceType": "org.apache.camel.component.avro.springboot.AvroComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.avro.single-parameter",
       "type": "java.lang.Boolean",
-      "description": "If true, consumer parameter won't be wrapped into array. Will fail if protocol specifies more then 1 parameter for the message",
+      "description": "If true, consumer parameter won't be wrapped into an array. Will fail if protocol specifies more than one parameter for the message",
       "sourceType": "org.apache.camel.component.avro.springboot.AvroComponentConfiguration",
       "defaultValue": false
     },

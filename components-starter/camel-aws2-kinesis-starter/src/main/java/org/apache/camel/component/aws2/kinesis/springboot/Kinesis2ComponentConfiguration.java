@@ -172,6 +172,10 @@ public class Kinesis2ComponentConfiguration
      */
     private String secretKey;
     /**
+     * Amazon AWS Session Token used when the user needs to assume a IAM role
+     */
+    private String sessionToken;
+    /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
     private Boolean trustAllCertificates = false;
@@ -186,6 +190,12 @@ public class Kinesis2ComponentConfiguration
      * a profile credentials provider.
      */
     private Boolean useProfileCredentialsProvider = false;
+    /**
+     * Set whether the Kinesis client should expect to use Session Credentials.
+     * This is useful in situation in which the user needs to assume a IAM role
+     * for doing operations in Kinesis.
+     */
+    private Boolean useSessionCredentials = false;
 
     public Boolean getCborEnabled() {
         return cborEnabled;
@@ -371,6 +381,14 @@ public class Kinesis2ComponentConfiguration
         this.secretKey = secretKey;
     }
 
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
+    }
+
     public Boolean getTrustAllCertificates() {
         return trustAllCertificates;
     }
@@ -395,5 +413,13 @@ public class Kinesis2ComponentConfiguration
     public void setUseProfileCredentialsProvider(
             Boolean useProfileCredentialsProvider) {
         this.useProfileCredentialsProvider = useProfileCredentialsProvider;
+    }
+
+    public Boolean getUseSessionCredentials() {
+        return useSessionCredentials;
+    }
+
+    public void setUseSessionCredentials(Boolean useSessionCredentials) {
+        this.useSessionCredentials = useSessionCredentials;
     }
 }
