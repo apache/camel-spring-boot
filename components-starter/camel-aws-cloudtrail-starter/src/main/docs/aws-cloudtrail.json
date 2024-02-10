@@ -86,7 +86,7 @@
     {
       "name": "camel.component.aws-cloudtrail.override-endpoint",
       "type": "java.lang.Boolean",
-      "description": "Set the need for overidding the endpoint. This option needs to be used in combination with uriEndpointOverride option",
+      "description": "Set the need for overriding the endpoint. This option needs to be used in combination with uriEndpointOverride option",
       "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
       "defaultValue": false
     },

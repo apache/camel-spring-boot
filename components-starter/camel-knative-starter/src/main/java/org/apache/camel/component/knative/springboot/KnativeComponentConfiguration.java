@@ -21,6 +21,7 @@ import org.apache.camel.component.knative.KnativeConfiguration;
 import org.apache.camel.component.knative.spi.KnativeConsumerFactory;
 import org.apache.camel.component.knative.spi.KnativeEnvironment;
 import org.apache.camel.component.knative.spi.KnativeProducerFactory;
+import org.apache.camel.component.knative.spi.KnativeSinkBinding;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -79,6 +80,11 @@ public class KnativeComponentConfiguration
      * org.apache.camel.component.knative.spi.KnativeProducerFactory type.
      */
     private KnativeProducerFactory producerFactory;
+    /**
+     * The SinkBinding configuration. The option is a
+     * org.apache.camel.component.knative.spi.KnativeSinkBinding type.
+     */
+    private KnativeSinkBinding sinkBinding;
     /**
      * Set the transport options.
      */
@@ -146,6 +152,18 @@ public class KnativeComponentConfiguration
      * The name of the k8s resource referenced by the endpoint.
      */
     private String name;
+    /**
+     * Used for enabling or disabling all consumer based health checks from this
+     * component
+     */
+    private Boolean healthCheckConsumerEnabled = true;
+    /**
+     * Used for enabling or disabling all producer based health checks from this
+     * component. Notice: Camel has by default disabled all producer based
+     * health-checks. You can turn on producer checks globally by setting
+     * camel.health.producersEnabled=true.
+     */
+    private Boolean healthCheckProducerEnabled = true;
 
     public Map<String, String> getCeOverride() {
         return ceOverride;
@@ -217,6 +235,14 @@ public class KnativeComponentConfiguration
 
     public void setProducerFactory(KnativeProducerFactory producerFactory) {
         this.producerFactory = producerFactory;
+    }
+
+    public KnativeSinkBinding getSinkBinding() {
+        return sinkBinding;
+    }
+
+    public void setSinkBinding(KnativeSinkBinding sinkBinding) {
+        this.sinkBinding = sinkBinding;
     }
 
     public Map<String, Object> getTransportOptions() {
@@ -297,5 +323,21 @@ public class KnativeComponentConfiguration
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 }

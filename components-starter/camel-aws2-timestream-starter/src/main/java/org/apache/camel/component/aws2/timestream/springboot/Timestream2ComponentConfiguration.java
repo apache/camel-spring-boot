@@ -63,8 +63,8 @@ public class Timestream2ComponentConfiguration
      */
     private Timestream2Operations operation;
     /**
-     * Set the need for overidding the endpoint. This option needs to be used in
-     * combination with uriEndpointOverride option
+     * Set the need for overriding the endpoint. This option needs to be used in
+     * combination with the uriEndpointOverride option
      */
     private Boolean overrideEndpoint = false;
     /**
@@ -72,14 +72,15 @@ public class Timestream2ComponentConfiguration
      */
     private Boolean pojoRequest = false;
     /**
-     * If using a profile credentials provider this parameter will set the
+     * If using a profile credentials provider, this parameter will set the
      * profile name
      */
     private String profileCredentialsName;
     /**
-     * The region in which Timestream client needs to work. When using this
+     * The region in which the Timestream client needs to work. When using this
      * parameter, the configuration will expect the lowercase name of the region
-     * (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
+     * (for example, ap-east-1) You'll need to use the name
+     * Region.EU_WEST_1.id()
      */
     private String region;
     /**
@@ -112,15 +113,15 @@ public class Timestream2ComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * To use a existing configured AwsTimestreamQueryClient as client. The
-     * option is a
+     * To use an existing configured AwsTimestreamQueryClient client. The option
+     * is a
      * software.amazon.awssdk.services.timestreamquery.TimestreamQueryClient
      * type.
      */
     private TimestreamQueryClient awsTimestreamQueryClient;
     /**
-     * To use a existing configured AwsTimestreamWriteClient as client. The
-     * option is a
+     * To use an existing configured AwsTimestreamWriteClient client. The option
+     * is a
      * software.amazon.awssdk.services.timestreamwrite.TimestreamWriteClient
      * type.
      */

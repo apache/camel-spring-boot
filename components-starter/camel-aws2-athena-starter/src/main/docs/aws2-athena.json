@@ -217,7 +217,7 @@
     {
       "name": "camel.component.aws2-athena.session-token",
       "type": "java.lang.String",
-      "description": "Amazon AWS Session Token used when the user needs to assume a IAM role",
+      "description": "Amazon AWS Session Token used when the user needs to assume an IAM role",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration"
     },
     {
@@ -237,7 +237,7 @@
     {
       "name": "camel.component.aws2-athena.use-session-credentials",
       "type": "java.lang.Boolean",
-      "description": "Set whether the Athena client should expect to use Session Credentials. This is useful in situation in which the user needs to assume a IAM role for doing operations in Athena.",
+      "description": "Set whether the Athena client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume a IAM role for doing operations in Athena.",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
       "defaultValue": false
     },

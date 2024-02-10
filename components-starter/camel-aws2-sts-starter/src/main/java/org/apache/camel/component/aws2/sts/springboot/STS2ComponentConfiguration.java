@@ -60,8 +60,8 @@ public class STS2ComponentConfiguration
      */
     private STS2Operations operation = STS2Operations.assumeRole;
     /**
-     * Set the need for overidding the endpoint. This option needs to be used in
-     * combination with uriEndpointOverride option
+     * Set the need for overriding the endpoint. This option needs to be used in
+     * combination with the uriEndpointOverride option
      */
     private Boolean overrideEndpoint = false;
     /**
@@ -69,9 +69,10 @@ public class STS2ComponentConfiguration
      */
     private Boolean pojoRequest = false;
     /**
-     * The region in which STS client needs to work. When using this parameter,
-     * the configuration will expect the lowercase name of the region (for
-     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
+     * The region in which the STS client needs to work. When using this
+     * parameter, the configuration will expect the lowercase name of the region
+     * (for example, ap-east-1) You'll need to use the name
+     * Region.EU_WEST_1.id()
      */
     private String region = "aws-global";
     /**
@@ -89,7 +90,7 @@ public class STS2ComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * To use a existing configured AWS STS as client. The option is a
+     * To use an existing configured AWS STS client. The option is a
      * software.amazon.awssdk.services.sts.StsClient type.
      */
     private StsClient stsClient;
@@ -110,7 +111,7 @@ public class STS2ComponentConfiguration
      */
     private String accessKey;
     /**
-     * If using a profile credentials provider this parameter will set the
+     * If using a profile credentials provider, this parameter will set the
      * profile name
      */
     private String profileCredentialsName;

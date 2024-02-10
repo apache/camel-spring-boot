@@ -44,7 +44,7 @@ public class Sqs2ComponentConfiguration
      */
     private String amazonAWSHost = "amazonaws.com";
     /**
-     * Setting the autocreation of the queue
+     * Setting the auto-creation of the queue
      */
     private Boolean autoCreateQueue = false;
     /**
@@ -54,7 +54,7 @@ public class Sqs2ComponentConfiguration
     private Sqs2Configuration configuration;
     /**
      * Set the need for overriding the endpoint. This option needs to be used in
-     * combination with uriEndpointOverride option
+     * combination with the uriEndpointOverride option
      */
     private Boolean overrideEndpoint = false;
     /**
@@ -63,13 +63,13 @@ public class Sqs2ComponentConfiguration
     private String protocol = "https";
     /**
      * Specify the queue owner aws account id when you need to connect the queue
-     * with different account owner.
+     * with a different account owner.
      */
     private String queueOwnerAWSAccountId;
     /**
      * The region in which SQS client needs to work. When using this parameter,
      * the configuration will expect the lowercase name of the region (for
-     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
+     * example, ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
     /**
@@ -110,13 +110,13 @@ public class Sqs2ComponentConfiguration
      */
     private Boolean deleteAfterRead = true;
     /**
-     * Whether or not to send the DeleteMessage to the SQS queue if the exchange
-     * has property with key Sqs2Constants#SQS_DELETE_FILTERED
+     * Whether to send the DeleteMessage to the SQS queue if the exchange has
+     * property with key Sqs2Constants#SQS_DELETE_FILTERED
      * (CamelAwsSqsDeleteFiltered) set to true.
      */
     private Boolean deleteIfFiltered = true;
     /**
-     * If enabled then a scheduled background task will keep extending the
+     * If enabled, then a scheduled background task will keep extending the
      * message visibility on SQS. This is needed if it takes a long time to
      * process the message. If set to true defaultVisibilityTimeout must be set.
      * See details at Amazon docs.
@@ -148,8 +148,8 @@ public class Sqs2ComponentConfiguration
      * subsequent retrieve requests after being retrieved by a ReceiveMessage
      * request to set in the
      * com.amazonaws.services.sqs.model.SetQueueAttributesRequest. This only
-     * make sense if its different from defaultVisibilityTimeout. It changes the
-     * queue visibility timeout attribute permanently.
+     * makes sense if it's different from defaultVisibilityTimeout. It changes
+     * the queue visibility timeout attribute permanently.
      */
     private Integer visibilityTimeout;
     /**
@@ -178,21 +178,21 @@ public class Sqs2ComponentConfiguration
     private Boolean lazyStartProducer = false;
     /**
      * Only for FIFO queues. Strategy for setting the messageDeduplicationId on
-     * the message. Can be one of the following options: useExchangeId,
+     * the message. It can be one of the following options: useExchangeId,
      * useContentBasedDeduplication. For the useContentBasedDeduplication
      * option, no messageDeduplicationId will be set on the message.
      */
     private String messageDeduplicationIdStrategy = "useExchangeId";
     /**
      * Only for FIFO queues. Strategy for setting the messageGroupId on the
-     * message. Can be one of the following options: useConstant, useExchangeId,
-     * usePropertyValue. For the usePropertyValue option, the value of property
-     * CamelAwsMessageGroupId will be used.
+     * message. It can be one of the following options: useConstant,
+     * useExchangeId, usePropertyValue. For the usePropertyValue option, the
+     * value of property CamelAwsMessageGroupId will be used.
      */
     private String messageGroupIdStrategy;
     /**
      * What to do if sending to AWS SQS has more messages than AWS allows
-     * (currently only maximum 10 message headers is allowed). WARN will log a
+     * (currently only maximum 10 message headers are allowed). WARN will log a
      * WARN about the limit is for each additional header, so the message can be
      * sent to AWS. WARN_ONCE will only log one time a WARN about the limit is
      * hit, and drop additional headers, so the message can be sent to AWS.
@@ -206,7 +206,7 @@ public class Sqs2ComponentConfiguration
      */
     private Sqs2Operations operation;
     /**
-     * To use the AmazonSQS as client. The option is a
+     * To use the AmazonSQS client. The option is a
      * software.amazon.awssdk.services.sqs.SqsClient type.
      */
     private SqsClient amazonSQSClient;
@@ -267,7 +267,7 @@ public class Sqs2ComponentConfiguration
     /**
      * To define the queueUrl explicitly. All other parameters, which would
      * influence the queueUrl, are ignored. This parameter is intended to be
-     * used, to connect to a mock implementation of SQS, for testing purposes.
+     * used to connect to a mock implementation of SQS, for testing purposes.
      */
     private String queueUrl;
     /**
@@ -285,7 +285,7 @@ public class Sqs2ComponentConfiguration
      */
     private String accessKey;
     /**
-     * If using a profile credentials provider this parameter will set the
+     * If using a profile credentials provider, this parameter will set the
      * profile name
      */
     private String profileCredentialsName;
@@ -294,7 +294,7 @@ public class Sqs2ComponentConfiguration
      */
     private String secretKey;
     /**
-     * Amazon AWS Session Token used when the user needs to assume a IAM role
+     * Amazon AWS Session Token used when the user needs to assume an IAM role
      */
     private String sessionToken;
     /**
@@ -313,8 +313,8 @@ public class Sqs2ComponentConfiguration
     private Boolean useProfileCredentialsProvider = false;
     /**
      * Set whether the SQS client should expect to use Session Credentials. This
-     * is useful in situation in which the user needs to assume a IAM role for
-     * doing operations in SQS.
+     * is useful in a situation in which the user needs to assume an IAM role
+     * for doing operations in SQS.
      */
     private Boolean useSessionCredentials = false;
 

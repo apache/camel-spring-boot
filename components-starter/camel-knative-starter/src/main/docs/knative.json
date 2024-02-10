@@ -95,6 +95,20 @@
       "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
     },
     {
+      "name": "camel.component.knative.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.knative.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.knative.kind",
       "type": "java.lang.String",
       "description": "The type of the k8s resource referenced by the endpoint.",
@@ -132,6 +146,12 @@
       "description": "Transforms the reply into a cloud event that will be processed by the caller. When listening to events from a Knative Broker, if this flag is enabled, replies will be published to the same Broker where the request comes from (beware that if you don't change the type of the received message, you may create a loop and receive your same reply). When this flag is disabled, CloudEvent headers are removed from the reply.",
       "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.knative.sink-binding",
+      "type": "org.apache.camel.component.knative.spi.KnativeSinkBinding",
+      "description": "The SinkBinding configuration. The option is a org.apache.camel.component.knative.spi.KnativeSinkBinding type.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
     },
     {
       "name": "camel.component.knative.transport-options",

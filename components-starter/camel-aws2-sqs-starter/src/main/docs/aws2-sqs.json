@@ -29,7 +29,7 @@
     {
       "name": "camel.component.aws2-sqs.amazon-s-q-s-client",
       "type": "software.amazon.awssdk.services.sqs.SqsClient",
-      "description": "To use the AmazonSQS as client. The option is a software.amazon.awssdk.services.sqs.SqsClient type.",
+      "description": "To use the AmazonSQS client. The option is a software.amazon.awssdk.services.sqs.SqsClient type.",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration"
     },
     {
@@ -41,7 +41,7 @@
     {
       "name": "camel.component.aws2-sqs.auto-create-queue",
       "type": "java.lang.Boolean",
-      "description": "Setting the autocreation of the queue",
+      "description": "Setting the auto-creation of the queue",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
       "defaultValue": false
     },
@@ -113,7 +113,7 @@
     {
       "name": "camel.component.aws2-sqs.delete-if-filtered",
       "type": "java.lang.Boolean",
-      "description": "Whether or not to send the DeleteMessage to the SQS queue if the exchange has property with key Sqs2Constants#SQS_DELETE_FILTERED (CamelAwsSqsDeleteFiltered) set to true.",
+      "description": "Whether to send the DeleteMessage to the SQS queue if the exchange has property with key Sqs2Constants#SQS_DELETE_FILTERED (CamelAwsSqsDeleteFiltered) set to true.",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
       "defaultValue": true
     },
@@ -126,7 +126,7 @@
     {
       "name": "camel.component.aws2-sqs.extend-message-visibility",
       "type": "java.lang.Boolean",
-      "description": "If enabled then a scheduled background task will keep extending the message visibility on SQS. This is needed if it takes a long time to process the message. If set to true defaultVisibilityTimeout must be set. See details at Amazon docs.",
+      "description": "If enabled, then a scheduled background task will keep extending the message visibility on SQS. This is needed if it takes a long time to process the message. If set to true defaultVisibilityTimeout must be set. See details at Amazon docs.",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
       "defaultValue": false
     },
@@ -178,20 +178,20 @@
     {
       "name": "camel.component.aws2-sqs.message-deduplication-id-strategy",
       "type": "java.lang.String",
-      "description": "Only for FIFO queues. Strategy for setting the messageDeduplicationId on the message. Can be one of the following options: useExchangeId, useContentBasedDeduplication. For the useContentBasedDeduplication option, no messageDeduplicationId will be set on the message.",
+      "description": "Only for FIFO queues. Strategy for setting the messageDeduplicationId on the message. It can be one of the following options: useExchangeId, useContentBasedDeduplication. For the useContentBasedDeduplication option, no messageDeduplicationId will be set on the message.",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
       "defaultValue": "useExchangeId"
     },
     {
       "name": "camel.component.aws2-sqs.message-group-id-strategy",
       "type": "java.lang.String",
-      "description": "Only for FIFO queues. Strategy for setting the messageGroupId on the message. Can be one of the following options: useConstant, useExchangeId, usePropertyValue. For the usePropertyValue option, the value of property CamelAwsMessageGroupId will be used.",
+      "description": "Only for FIFO queues. Strategy for setting the messageGroupId on the message. It can be one of the following options: useConstant, useExchangeId, usePropertyValue. For the usePropertyValue option, the value of property CamelAwsMessageGroupId will be used.",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sqs.message-header-exceeded-limit",
       "type": "java.lang.String",
-      "description": "What to do if sending to AWS SQS has more messages than AWS allows (currently only maximum 10 message headers is allowed). WARN will log a WARN about the limit is for each additional header, so the message can be sent to AWS. WARN_ONCE will only log one time a WARN about the limit is hit, and drop additional headers, so the message can be sent to AWS. IGNORE will ignore (no logging) and drop additional headers, so the message can be sent to AWS. FAIL will cause an exception to be thrown and the message is not sent to AWS.",
+      "description": "What to do if sending to AWS SQS has more messages than AWS allows (currently only maximum 10 message headers are allowed). WARN will log a WARN about the limit is for each additional header, so the message can be sent to AWS. WARN_ONCE will only log one time a WARN about the limit is hit, and drop additional headers, so the message can be sent to AWS. IGNORE will ignore (no logging) and drop additional headers, so the message can be sent to AWS. FAIL will cause an exception to be thrown and the message is not sent to AWS.",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
       "defaultValue": "WARN"
     },
@@ -210,7 +210,7 @@
     {
       "name": "camel.component.aws2-sqs.override-endpoint",
       "type": "java.lang.Boolean",
-      "description": "Set the need for overriding the endpoint. This option needs to be used in combination with uriEndpointOverride option",
+      "description": "Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
       "defaultValue": false
     },
@@ -223,7 +223,7 @@
     {
       "name": "camel.component.aws2-sqs.profile-credentials-name",
       "type": "java.lang.String",
-      "description": "If using a profile credentials provider this parameter will set the profile name",
+      "description": "If using a profile credentials provider, this parameter will set the profile name",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration"
     },
     {
@@ -254,13 +254,13 @@
     {
       "name": "camel.component.aws2-sqs.queue-owner-a-w-s-account-id",
       "type": "java.lang.String",
-      "description": "Specify the queue owner aws account id when you need to connect the queue with different account owner.",
+      "description": "Specify the queue owner aws account id when you need to connect the queue with a different account owner.",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sqs.queue-url",
       "type": "java.lang.String",
-      "description": "To define the queueUrl explicitly. All other parameters, which would influence the queueUrl, are ignored. This parameter is intended to be used, to connect to a mock implementation of SQS, for testing purposes.",
+      "description": "To define the queueUrl explicitly. All other parameters, which would influence the queueUrl, are ignored. This parameter is intended to be used to connect to a mock implementation of SQS, for testing purposes.",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration"
     },
     {
@@ -278,7 +278,7 @@
     {
       "name": "camel.component.aws2-sqs.region",
       "type": "java.lang.String",
-      "description": "The region in which SQS client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()",
+      "description": "The region in which SQS client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example, ap-east-1) You'll need to use the name Region.EU_WEST_1.id()",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration"
     },
     {
@@ -297,7 +297,7 @@
     {
       "name": "camel.component.aws2-sqs.session-token",
       "type": "java.lang.String",
-      "description": "Amazon AWS Session Token used when the user needs to assume a IAM role",
+      "description": "Amazon AWS Session Token used when the user needs to assume an IAM role",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration"
     },
     {
@@ -330,14 +330,14 @@
     {
       "name": "camel.component.aws2-sqs.use-session-credentials",
       "type": "java.lang.Boolean",
-      "description": "Set whether the SQS client should expect to use Session Credentials. This is useful in situation in which the user needs to assume a IAM role for doing operations in SQS.",
+      "description": "Set whether the SQS client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume an IAM role for doing operations in SQS.",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-sqs.visibility-timeout",
       "type": "java.lang.Integer",
-      "description": "The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request to set in the com.amazonaws.services.sqs.model.SetQueueAttributesRequest. This only make sense if its different from defaultVisibilityTimeout. It changes the queue visibility timeout attribute permanently.",
+      "description": "The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request to set in the com.amazonaws.services.sqs.model.SetQueueAttributesRequest. This only makes sense if it's different from defaultVisibilityTimeout. It changes the queue visibility timeout attribute permanently.",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration"
     },
     {

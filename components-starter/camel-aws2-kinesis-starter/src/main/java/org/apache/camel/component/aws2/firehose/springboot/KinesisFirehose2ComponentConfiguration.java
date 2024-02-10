@@ -50,7 +50,7 @@ public class KinesisFirehose2ComponentConfiguration
      */
     private KinesisFirehose2Configuration configuration;
     /**
-     * Set the need for overidding the endpoint. This option needs to be used in
+     * Set the need for overriding the endpoint. This option needs to be used in
      * combination with uriEndpointOverride option
      */
     private Boolean overrideEndpoint = false;

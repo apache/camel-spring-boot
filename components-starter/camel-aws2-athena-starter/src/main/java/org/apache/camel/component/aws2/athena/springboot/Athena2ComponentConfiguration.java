@@ -222,7 +222,7 @@ public class Athena2ComponentConfiguration
      */
     private String secretKey;
     /**
-     * Amazon AWS Session Token used when the user needs to assume a IAM role
+     * Amazon AWS Session Token used when the user needs to assume an IAM role
      */
     private String sessionToken;
     /**
@@ -238,8 +238,8 @@ public class Athena2ComponentConfiguration
     private Boolean useProfileCredentialsProvider = false;
     /**
      * Set whether the Athena client should expect to use Session Credentials.
-     * This is useful in situation in which the user needs to assume a IAM role
-     * for doing operations in Athena.
+     * This is useful in a situation in which the user needs to assume a IAM
+     * role for doing operations in Athena.
      */
     private Boolean useSessionCredentials = false;
 

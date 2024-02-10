@@ -43,6 +43,7 @@ public class KnativeComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.knative.spi.KnativeConsumerFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.knative.spi.KnativeEnvironment.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.knative.spi.KnativeProducerFactory.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.knative.spi.KnativeSinkBinding.class));
         return answer;
     }
 
@@ -63,6 +64,7 @@ public class KnativeComponentConverter implements GenericConverter {
             case "org.apache.camel.component.knative.spi.KnativeConsumerFactory": return applicationContext.getBean(ref, org.apache.camel.component.knative.spi.KnativeConsumerFactory.class);
             case "org.apache.camel.component.knative.spi.KnativeEnvironment": return applicationContext.getBean(ref, org.apache.camel.component.knative.spi.KnativeEnvironment.class);
             case "org.apache.camel.component.knative.spi.KnativeProducerFactory": return applicationContext.getBean(ref, org.apache.camel.component.knative.spi.KnativeProducerFactory.class);
+            case "org.apache.camel.component.knative.spi.KnativeSinkBinding": return applicationContext.getBean(ref, org.apache.camel.component.knative.spi.KnativeSinkBinding.class);
         }
         return null;
     }

@@ -66,7 +66,7 @@ public class CloudtrailComponentConfiguration
      */
     private Integer maxResults = 1;
     /**
-     * Set the need for overidding the endpoint. This option needs to be used in
+     * Set the need for overriding the endpoint. This option needs to be used in
      * combination with uriEndpointOverride option
      */
     private Boolean overrideEndpoint = false;

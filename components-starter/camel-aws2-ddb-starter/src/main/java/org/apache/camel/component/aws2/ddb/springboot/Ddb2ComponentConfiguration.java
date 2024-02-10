@@ -45,8 +45,8 @@ public class Ddb2ComponentConfiguration
      */
     private Ddb2Configuration configuration;
     /**
-     * Determines whether or not strong consistency should be enforced when data
-     * is read.
+     * Determines whether strong consistency should be enforced when data is
+     * read.
      */
     private Boolean consistentRead = false;
     /**
@@ -82,7 +82,7 @@ public class Ddb2ComponentConfiguration
      */
     private Ddb2Operations operation = Ddb2Operations.PutItem;
     /**
-     * Set the need for overidding the endpoint. This option needs to be used in
+     * Set the need for overriding the endpoint. This option needs to be used in
      * combination with uriEndpointOverride option
      */
     private Boolean overrideEndpoint = false;

@@ -60,14 +60,14 @@ public class Cw2ComponentConfiguration
      */
     private String name;
     /**
-     * Set the need for overidding the endpoint. This option needs to be used in
-     * combination with uriEndpointOverride option
+     * Set the need for overriding the endpoint. This option needs to be used in
+     * combination with the uriEndpointOverride option
      */
     private Boolean overrideEndpoint = false;
     /**
      * The region in which CW client needs to work. When using this parameter,
      * the configuration will expect the lowercase name of the region (for
-     * example ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
+     * example, ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
      */
     private String region;
     /**
@@ -130,7 +130,7 @@ public class Cw2ComponentConfiguration
      */
     private String accessKey;
     /**
-     * If using a profile credentials provider this parameter will set the
+     * If using a profile credentials provider, this parameter will set the
      * profile name
      */
     private String profileCredentialsName;
@@ -139,7 +139,7 @@ public class Cw2ComponentConfiguration
      */
     private String secretKey;
     /**
-     * Amazon AWS Session Token used when the user needs to assume a IAM role
+     * Amazon AWS Session Token used when the user needs to assume an IAM role
      */
     private String sessionToken;
     /**
@@ -159,8 +159,8 @@ public class Cw2ComponentConfiguration
     private Boolean useProfileCredentialsProvider = false;
     /**
      * Set whether the CloudWatch client should expect to use Session
-     * Credentials. This is useful in situation in which the user needs to
-     * assume a IAM role for doing operations in CloudWatch.
+     * Credentials. This is useful in a situation in which the user needs to
+     * assume an IAM role for doing operations in CloudWatch.
      */
     private Boolean useSessionCredentials = false;
 
