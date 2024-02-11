@@ -42,6 +42,7 @@
         <module>camel-java-joor-dsl-starter</module>
         <module>camel-js-dsl-starter</module>
         <module>camel-jsh-dsl-starter</module>
+        <module>camel-kotlin-api-starter</module>
         <module>camel-kotlin-dsl-starter</module>
         <module>camel-xml-io-dsl-starter</module>
         <module>camel-xml-jaxb-dsl-starter</module>
