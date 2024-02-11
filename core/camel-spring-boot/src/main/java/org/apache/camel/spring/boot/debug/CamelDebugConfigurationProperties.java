@@ -84,6 +84,11 @@ public class CamelDebugConfigurationProperties {
     private boolean includeExchangeProperties = true;
 
     /**
+     * Whether to include the exchange variables in the traced message
+     */
+    private boolean includeExchangeVariables = true;
+
+    /**
      * Trace messages to include exception if the message failed
      */
     private boolean includeException = true;
@@ -173,6 +178,14 @@ public class CamelDebugConfigurationProperties {
 
     public void setIncludeExchangeProperties(boolean includeExchangeProperties) {
         this.includeExchangeProperties = includeExchangeProperties;
+    }
+
+    public boolean isIncludeExchangeVariables() {
+        return includeExchangeVariables;
+    }
+
+    public void setIncludeExchangeVariables(boolean includeExchangeVariables) {
+        this.includeExchangeVariables = includeExchangeVariables;
     }
 
     public boolean isIncludeException() {

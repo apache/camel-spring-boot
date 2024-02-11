@@ -487,6 +487,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.debug.include-exchange-variables",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include the exchange variables in the traced message",
+      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
+      "defaultValue": true
+    },
+    {
       "name": "camel.debug.logging-level",
       "type": "org.apache.camel.LoggingLevel",
       "description": "The debugger logging level to use when logging activity.",
