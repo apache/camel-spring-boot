@@ -1,0 +1,82 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.qdrant",
+      "type": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration",
+      "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration"
+    },
+    {
+      "name": "camel.component.qdrant.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.qdrant.api-key",
+      "type": "java.lang.String",
+      "description": "Sets the API key to use for authentication",
+      "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration"
+    },
+    {
+      "name": "camel.component.qdrant.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.qdrant.configuration",
+      "type": "org.apache.camel.component.qdrant.QdrantConfiguration",
+      "description": "The configuration;. The option is a org.apache.camel.component.qdrant.QdrantConfiguration type.",
+      "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration"
+    },
+    {
+      "name": "camel.component.qdrant.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.qdrant.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the qdrant component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration"
+    },
+    {
+      "name": "camel.component.qdrant.host",
+      "type": "java.lang.String",
+      "description": "The host to connect to.",
+      "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration",
+      "defaultValue": "localhost"
+    },
+    {
+      "name": "camel.component.qdrant.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.qdrant.port",
+      "type": "java.lang.Integer",
+      "description": "The port to connect to.",
+      "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration",
+      "defaultValue": 6334
+    },
+    {
+      "name": "camel.component.qdrant.timeout",
+      "type": "java.time.Duration",
+      "description": "Sets a default timeout for all requests. The option is a java.time.Duration type.",
+      "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration"
+    },
+    {
+      "name": "camel.component.qdrant.tls",
+      "type": "java.lang.Boolean",
+      "description": "Whether the client uses Transport Layer Security (TLS) to secure communications",
+      "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}
