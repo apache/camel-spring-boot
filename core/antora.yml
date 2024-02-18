@@ -16,4 +16,5 @@
 #
 
 name: camel-spring-boot
-version: next
+version: 4.4.x
+display-version: 4.4.x (LTS)
