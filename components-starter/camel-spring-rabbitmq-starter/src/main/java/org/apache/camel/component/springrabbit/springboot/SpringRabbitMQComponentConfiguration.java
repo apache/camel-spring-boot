@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.springrabbit.springboot;
 
+import java.util.Map;
 import org.apache.camel.component.springrabbit.ListenerContainerFactory;
 import org.apache.camel.component.springrabbit.MessagePropertiesConverter;
 import org.apache.camel.spi.HeaderFilterStrategy;
@@ -186,6 +187,13 @@ public class SpringRabbitMQComponentConfiguration
      * a long type.
      */
     private Long replyTimeout = 5000L;
+    /**
+     * Specify arguments for configuring the different RabbitMQ concepts, a
+     * different prefix is required for each element: consumer. exchange. queue.
+     * binding. dlq.exchange. dlq.queue. dlq.binding. For example to declare a
+     * queue with message ttl argument: queue.x-message-ttl=60000
+     */
+    private Map<String, Object> args;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -411,6 +419,14 @@ public class SpringRabbitMQComponentConfiguration
 
     public void setReplyTimeout(Long replyTimeout) {
         this.replyTimeout = replyTimeout;
+    }
+
+    public Map<String, Object> getArgs() {
+        return args;
+    }
+
+    public void setArgs(Map<String, Object> args) {
+        this.args = args;
     }
 
     public Boolean getAutowiredEnabled() {

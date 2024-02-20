@@ -27,6 +27,12 @@
       "sourceType": "org.apache.camel.component.springrabbit.springboot.SpringRabbitMQComponentConfiguration"
     },
     {
+      "name": "camel.component.spring-rabbitmq.args",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Specify arguments for configuring the different RabbitMQ concepts, a different prefix is required for each element: consumer. exchange. queue. binding. dlq.exchange. dlq.queue. dlq.binding. For example to declare a queue with message ttl argument: queue.x-message-ttl=60000",
+      "sourceType": "org.apache.camel.component.springrabbit.springboot.SpringRabbitMQComponentConfiguration"
+    },
+    {
       "name": "camel.component.spring-rabbitmq.auto-declare",
       "type": "java.lang.Boolean",
       "description": "Specifies whether the consumer should auto declare binding between exchange, queue and routing key when starting. Enabling this can be good for development to make it easy to standup exchanges, queues and bindings on the broker.",
