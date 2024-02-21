@@ -45,11 +45,6 @@ public class HttpComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Whether to the HTTP request should follow redirects. By default the HTTP
-     * request does not follow redirects
-     */
-    private Boolean followRedirects = false;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -60,6 +55,19 @@ public class HttpComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Whether to skip mapping all the Camel headers as HTTP request headers. If
+     * there are no data from Camel headers needed to be included in the HTTP
+     * request then this can avoid parsing overhead with many object allocations
+     * for the JVM garbage collector.
+     */
+    private Boolean skipRequestHeaders = false;
+    /**
+     * Whether to skip mapping all the HTTP response headers to Camel headers.
+     * If there are no data needed from HTTP headers then this can avoid parsing
+     * overhead with many object allocations for the JVM garbage collector.
+     */
+    private Boolean skipResponseHeaders = false;
     /**
      * To use a custom org.apache.hc.client5.http.cookie.CookieStore. By default
      * the org.apache.hc.client5.http.cookie.BasicCookieStore is used which is
@@ -77,24 +85,16 @@ public class HttpComponentConfiguration
      */
     private Boolean copyHeaders = true;
     /**
+     * Whether to the HTTP request should follow redirects. By default the HTTP
+     * request does not follow redirects
+     */
+    private Boolean followRedirects = false;
+    /**
      * This threshold in bytes controls whether the response payload should be
      * stored in memory as a byte array or be streaming based. Set this to -1 to
      * always use streaming mode.
      */
     private Integer responsePayloadStreamingThreshold = 8192;
-    /**
-     * Whether to skip mapping all the Camel headers as HTTP request headers. If
-     * there are no data from Camel headers needed to be included in the HTTP
-     * request then this can avoid parsing overhead with many object allocations
-     * for the JVM garbage collector.
-     */
-    private Boolean skipRequestHeaders = false;
-    /**
-     * Whether to skip mapping all the HTTP response headers to Camel headers.
-     * If there are no data needed from HTTP headers then this can avoid parsing
-     * overhead with many object allocations for the JVM garbage collector.
-     */
-    private Boolean skipResponseHeaders = false;
     /**
      * Whether to allow java serialization when a request uses
      * context-type=application/x-java-serialized-object. This is by default
@@ -267,20 +267,28 @@ public class HttpComponentConfiguration
      */
     private Timeout soTimeout;
 
-    public Boolean getFollowRedirects() {
-        return followRedirects;
-    }
-
-    public void setFollowRedirects(Boolean followRedirects) {
-        this.followRedirects = followRedirects;
-    }
-
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getSkipRequestHeaders() {
+        return skipRequestHeaders;
+    }
+
+    public void setSkipRequestHeaders(Boolean skipRequestHeaders) {
+        this.skipRequestHeaders = skipRequestHeaders;
+    }
+
+    public Boolean getSkipResponseHeaders() {
+        return skipResponseHeaders;
+    }
+
+    public void setSkipResponseHeaders(Boolean skipResponseHeaders) {
+        this.skipResponseHeaders = skipResponseHeaders;
     }
 
     public CookieStore getCookieStore() {
@@ -299,6 +307,14 @@ public class HttpComponentConfiguration
         this.copyHeaders = copyHeaders;
     }
 
+    public Boolean getFollowRedirects() {
+        return followRedirects;
+    }
+
+    public void setFollowRedirects(Boolean followRedirects) {
+        this.followRedirects = followRedirects;
+    }
+
     public Integer getResponsePayloadStreamingThreshold() {
         return responsePayloadStreamingThreshold;
     }
@@ -306,22 +322,6 @@ public class HttpComponentConfiguration
     public void setResponsePayloadStreamingThreshold(
             Integer responsePayloadStreamingThreshold) {
         this.responsePayloadStreamingThreshold = responsePayloadStreamingThreshold;
-    }
-
-    public Boolean getSkipRequestHeaders() {
-        return skipRequestHeaders;
-    }
-
-    public void setSkipRequestHeaders(Boolean skipRequestHeaders) {
-        this.skipRequestHeaders = skipRequestHeaders;
-    }
-
-    public Boolean getSkipResponseHeaders() {
-        return skipResponseHeaders;
-    }
-
-    public void setSkipResponseHeaders(Boolean skipResponseHeaders) {
-        this.skipResponseHeaders = skipResponseHeaders;
     }
 
     public Boolean getAllowJavaSerializedObject() {
