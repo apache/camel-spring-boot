@@ -640,6 +640,29 @@ public class CamelConfigurationProperties extends DefaultConfigurationProperties
     private boolean jmxUpdateRouteEnabled;
 
     /**
+     * Whether routes created by Kamelets should be registered for JMX management. Enabling this allows to have
+     * fine-grained monitoring and management of every route created via Kamelets.
+     *
+     * This is default disabled as a Kamelet is intended as a component (black-box) and its implementation details as
+     * Camel route makes the overall management and monitoring of Camel applications more verbose.
+     *
+     * During development of Kamelets then enabling this will make it possible for developers to do fine-grained
+     * performance inspection and identify potential bottlenecks in the Kamelet routes.
+     *
+     * However, for production usage then keeping this disabled is recommended.
+     */
+    private boolean jmxManagementRegisterRoutesCreateByKamelet;
+
+    /**
+     * Whether routes created by route templates (not Kamelets) should be registered for JMX management. Enabling this
+     * allows to have fine-grained monitoring and management of every route created via route templates.
+     *
+     * This is default enabled (unlike Kamelets) as routes created via templates is regarded as standard routes, and
+     * should be available for management and monitoring.
+     */
+    private boolean jmxManagementRegisterRoutesCreateByTemplate = true;
+
+    /**
      * If dumping is enabled then Camel will during startup dump all loaded routes (incl rests and route templates)
      * represented as XML/YAML DSL into the log. This is intended for trouble shooting or to assist during development.
      *
