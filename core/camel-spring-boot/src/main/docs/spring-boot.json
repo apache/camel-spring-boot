@@ -985,6 +985,16 @@
       "defaultValue": "#name#"
     },
     {
+      "name": "camel.springboot.jmx-management-register-routes-create-by-kamelet",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+    },
+    {
+      "name": "camel.springboot.jmx-management-register-routes-create-by-template",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties"
+    },
+    {
       "name": "camel.springboot.jmx-management-statistics-level",
       "type": "org.apache.camel.ManagementStatisticsLevel",
       "description": "Sets the JMX statistics level The level can be set to Extended to gather additional information The default value is Default.",
