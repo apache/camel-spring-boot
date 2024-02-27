@@ -114,6 +114,7 @@
     <module>camel-atom-starter</module>
     <module>camel-avro-rpc-starter</module>
     <module>camel-avro-starter</module>
+    <module>camel-aws-bedrock-starter</module>
     <module>camel-aws-cloudtrail-starter</module>
     <module>camel-aws-config-starter</module>
     <module>camel-aws-secrets-manager-starter</module>
