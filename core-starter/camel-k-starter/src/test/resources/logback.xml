@@ -17,22 +17,30 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.apache.camel.springboot</groupId>
-    <artifactId>camel-starter-parent</artifactId>
-    <version>4.5.0-SNAPSHOT</version>
-    <relativePath>../tooling/camel-starter-parent</relativePath>
-  </parent>
-  <artifactId>core-starter</artifactId>
-  <packaging>pom</packaging>
-  <name>Camel SB Core Starters</name>
-  <description>Camel Core Starter</description>
-  <modules>
-    <module>camel-spring-boot-starter</module>
-    <module>camel-spring-boot-engine-starter</module>
-    <module>camel-spring-boot-xml-starter</module>
-    <module>camel-k-starter</module>
-  </modules>
-</project>
+<configuration>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+    </encoder>
+    <file>target/camel-k-test.log</file>
+  </appender>
+
+  <logger level="DEBUG" name="org.apache.camel.spring.boot.k"/>
+
+  <root level="INFO">
+    <!--
+      don't turn this off as the org.apache.camel.spring.boot.k.ApplicationShutdownTest has to read
+      the application output in order to determine if a test has been successfully executed.
+    -->
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE"/>
+  </root>
+
+</configuration>
+

@@ -22,12 +22,10 @@ import org.apache.camel.spi.Injector;
 import org.apache.camel.spring.SpringCamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.CamelConfigurationProperties;
-import org.apache.camel.spring.spi.SpringInjector;
 import org.apache.camel.spring.xml.XmlCamelContextConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * Used to merge Camel Spring Boot configuration with {@link org.apache.camel.CamelContext} that
