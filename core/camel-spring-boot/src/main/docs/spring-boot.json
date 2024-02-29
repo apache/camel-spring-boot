@@ -125,6 +125,11 @@
       "sourceType": "org.apache.camel.spring.boot.threadpool.CamelThreadPoolConfigurationProperties$ThreadPoolProfileConfigurationProperties"
     },
     {
+      "name": "camel.trace",
+      "type": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties"
+    },
+    {
       "name": "camel.vault.aws",
       "type": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties",
       "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
@@ -1594,6 +1599,102 @@
       "type": "java.util.concurrent.TimeUnit",
       "description": "Sets the default time unit used for keep alive time",
       "sourceType": "org.apache.camel.spring.boot.threadpool.CamelThreadPoolConfigurationProperties"
+    },
+    {
+      "name": "camel.trace.backlog-size",
+      "type": "java.lang.Integer",
+      "description": "Defines how many of the last messages to keep in the tracer.",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": 1000
+    },
+    {
+      "name": "camel.trace.body-include-files",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include the message body of file based messages. The overhead is that the file content has to be read from the file.",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.trace.body-include-streams",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include the message body of stream based messages. If enabled then beware the stream may not be re-readable later. See more about Stream Caching.",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.trace.body-max-chars",
+      "type": "java.lang.Integer",
+      "description": "To limit the message body to a maximum size in the traced message. Use 0 or negative value to use unlimited size.",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.trace.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables tracer in your Camel application.",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.trace.include-exception",
+      "type": "java.lang.Boolean",
+      "description": "Trace messages to include exception if the message failed",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.trace.include-exchange-properties",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include the exchange properties in the traced message",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.trace.include-exchange-variables",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include the exchange variables in the traced message",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.trace.remove-on-dump",
+      "type": "java.lang.Boolean",
+      "description": "Whether all traced messages should be removed when the tracer is dumping. By default, the messages are removed, which means that dumping will not contain previous dumped messages.",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.trace.standby",
+      "type": "java.lang.Boolean",
+      "description": "To set the tracer in standby mode, where the tracer will be installed by not automatic enabled. The tracer can then later be enabled explicit from Java, JMX or tooling.",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.trace.trace-filter",
+      "type": "java.lang.String",
+      "description": "Filter for tracing messages",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties"
+    },
+    {
+      "name": "camel.trace.trace-pattern",
+      "type": "java.lang.String",
+      "description": "Filter for tracing by route or node id",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties"
+    },
+    {
+      "name": "camel.trace.trace-rests",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trace routes that is created from Rest DSL.",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.trace.trace-templates",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trace routes that is created from route templates or kamelets.",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": false
     },
     {
       "name": "camel.vault.aws.access-key",
