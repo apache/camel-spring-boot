@@ -722,27 +722,6 @@
       "defaultValue": true
     },
     {
-      "name": "camel.springboot.backlog-tracing",
-      "type": "java.lang.Boolean",
-      "description": "Sets whether backlog tracing is enabled or not. Default is false.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.springboot.backlog-tracing-standby",
-      "type": "java.lang.Boolean",
-      "description": "Whether to set backlog tracing on standby. If on standby then the backlog tracer is installed and made available. Then the backlog tracer can be enabled later at runtime via JMX or via Java API. Default is false.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.springboot.backlog-tracing-templates",
-      "type": "java.lang.Boolean",
-      "description": "Whether backlog tracing should trace inner details from route templates (or kamelets). Turning this on increases the verbosity of tracing by including events from internal routes in the templates or kamelets.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties",
-      "defaultValue": false
-    },
-    {
       "name": "camel.springboot.bean-introspection-extended-statistics",
       "type": "java.lang.Boolean",
       "description": "Sets whether bean introspection uses extended statistics. The default is false.",
