@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot.actuate.info;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.support.CamelContextHelper;
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;
 
@@ -37,8 +38,8 @@ public class CamelInfoContributor implements InfoContributor {
             builder.withDetail("camel.name", camelContext.getName());
             builder.withDetail("camel.version", camelContext.getVersion());
             if (camelContext.getUptime() != null) {
-                builder.withDetail("camel.uptime", camelContext.getUptime());
-                builder.withDetail("camel.uptimeMillis", camelContext.getUptimeMillis());
+                builder.withDetail("camel.uptime", CamelContextHelper.getUptime(camelContext));
+                builder.withDetail("camel.uptimeMillis", CamelContextHelper.getUptimeMillis(camelContext));
             }
             builder.withDetail("camel.status", camelContext.getStatus().name());
         }
