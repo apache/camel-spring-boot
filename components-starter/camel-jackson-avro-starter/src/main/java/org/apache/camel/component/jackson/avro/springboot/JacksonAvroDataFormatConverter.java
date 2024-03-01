@@ -37,12 +37,6 @@ public class JacksonAvroDataFormatConverter implements GenericConverter {
 
     @Autowired
     private ApplicationContext applicationContext;
-    private final CamelContext camelContext;
-
-    public JacksonAvroDataFormatConverter(
-            org.apache.camel.CamelContext camelContext) {
-        this.camelContext = camelContext;
-    }
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();

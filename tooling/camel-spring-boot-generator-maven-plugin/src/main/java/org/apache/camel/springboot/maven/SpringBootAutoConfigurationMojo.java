@@ -1523,9 +1523,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
 
         javaClass.implementInterface("GenericConverter");
         javaClass.addField().setPrivate().setName("applicationContext").setType(loadClass("org.springframework.context.ApplicationContext")).addAnnotation(Autowired.class);
-        javaClass.addField().setPrivate().setFinal(true).setName("camelContext").setType(loadClass("org.apache.camel.CamelContext"));
-        javaClass.addMethod().setConstructor(true).setPublic().setPublic().setName(name).addParameter("org.apache.camel.CamelContext", "camelContext")
-                .setBody("this.camelContext = camelContext;\n");
 
         String body = createConverterPairBody(model);
         javaClass.addMethod().setName("getConvertibleTypes").setPublic().setReturnType("Set<ConvertiblePair>")
