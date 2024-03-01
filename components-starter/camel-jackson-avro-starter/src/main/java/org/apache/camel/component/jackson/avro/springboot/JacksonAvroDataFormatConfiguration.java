@@ -129,6 +129,7 @@ public class JacksonAvroDataFormatConfiguration
     private Boolean contentTypeHeader = true;
     /**
      * Optional schema resolver used to lookup schemas for the data in transit.
+     * The option is a org.apache.camel.component.jackson.SchemaResolver type.
      */
     private String schemaResolver;
     /**

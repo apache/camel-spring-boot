@@ -79,10 +79,13 @@ public class RestConfigurationDefinitionProperties {
      */
     private String apiHost;
     /**
-     * Whether to use X-Forward headers for Host and related setting. The
-     * default value is true.
+     * Whether to use X-Forward headers to set host etc. for OpenApi. This may
+     * be needed in special cases involving reverse-proxy and networking going
+     * from HTTP to HTTPS etc. Then the proxy can send X-Forward headers
+     * (X-Forwarded-Proto) that influences the host names in the OpenAPI schema
+     * that camel-openapi-java generates from Rest DSL routes.
      */
-    private Boolean useXForwardHeaders = true;
+    private Boolean useXForwardHeaders = false;
     /**
      * Sets the location of the api document the REST producer will use to
      * validate the REST uri and query parameters are valid accordingly to the

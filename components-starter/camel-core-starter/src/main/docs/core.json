@@ -854,9 +854,9 @@
     {
       "name": "camel.rest.use-x-forward-headers",
       "type": "java.lang.Boolean",
-      "description": "Whether to use X-Forward headers for Host and related setting. The default value is true.",
+      "description": "Whether to use X-Forward headers to set host etc. for OpenApi. This may be needed in special cases involving reverse-proxy and networking going from HTTP to HTTPS etc. Then the proxy can send X-Forward headers (X-Forwarded-Proto) that influences the host names in the OpenAPI schema that camel-openapi-java generates from Rest DSL routes.",
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties",
-      "defaultValue": true
+      "defaultValue": false
     },
     {
       "name": "camel.rest.xml-data-format",

@@ -21,13 +21,13 @@
         <route>
             <from uri="direct:in"/>
             <marshal>
-                <avro instanceClassName="org.apache.camel.dataformat.avro.springboot.test.Value"/>
+                <avro instanceClassName="org.apache.camel.dataformat.avro.springboot.test.Value" library="ApacheAvro"/>
             </marshal>
         </route>
         <route>
             <from uri="direct:back"/>
             <unmarshal>
-                <avro instanceClassName="org.apache.camel.dataformat.avro.springboot.test.Value"/>
+                <avro instanceClassName="org.apache.camel.dataformat.avro.springboot.test.Value" library="ApacheAvro"/>
             </unmarshal>
             <to uri="mock:reverse"/>
         </route>

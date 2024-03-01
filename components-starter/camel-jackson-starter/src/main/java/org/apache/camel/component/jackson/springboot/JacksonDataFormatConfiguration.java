@@ -128,6 +128,7 @@ public class JacksonDataFormatConfiguration
     private String timezone;
     /**
      * Optional schema resolver used to lookup schemas for the data in transit.
+     * The option is a org.apache.camel.component.jackson.SchemaResolver type.
      */
     private String schemaResolver;
     /**

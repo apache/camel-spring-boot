@@ -110,7 +110,7 @@
     {
       "name": "camel.dataformat.avro-jackson.schema-resolver",
       "type": "java.lang.String",
-      "description": "Optional schema resolver used to lookup schemas for the data in transit.",
+      "description": "Optional schema resolver used to lookup schemas for the data in transit. The option is a org.apache.camel.component.jackson.SchemaResolver type.",
       "sourceType": "org.apache.camel.component.jackson.avro.springboot.JacksonAvroDataFormatConfiguration"
     },
     {

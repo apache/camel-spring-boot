@@ -24,6 +24,7 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.dataformat.avro.AvroDataFormat;
+import org.apache.camel.model.dataformat.AvroLibrary;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
@@ -83,7 +84,7 @@ public class AvroMarshalAndUnmarshallTest {
             context.addRoutes(new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:unmarshalC").unmarshal().avro(new CamelException("wrong schema"))
+                    from("direct:unmarshalC").unmarshal().avro(AvroLibrary.ApacheAvro, new CamelException("wrong schema"))
                             .to("mock:reverse");
                 }
             });
@@ -127,10 +128,10 @@ public class AvroMarshalAndUnmarshallTest {
                     from("direct:in").marshal(format);
                     from("direct:back").unmarshal(format).to("mock:reverse");
 
-                    from("direct:marshal").marshal().avro();
-                    from("direct:unmarshalA").unmarshal().avro(Value.class.getName()).to("mock:reverse");
+                    from("direct:marshal").marshal().avro(AvroLibrary.ApacheAvro);
+                    from("direct:unmarshalA").unmarshal().avro(AvroLibrary.ApacheAvro, Value.class.getName()).to("mock:reverse");
 
-                    from("direct:unmarshalB").unmarshal().avro(Value.SCHEMA$).to("mock:reverse");
+                    from("direct:unmarshalB").unmarshal().avro(AvroLibrary.ApacheAvro, Value.SCHEMA$).to("mock:reverse");
                 }
             };
         }
