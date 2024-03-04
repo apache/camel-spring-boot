@@ -31,7 +31,6 @@ import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.component.properties.PropertiesParser;
 import org.apache.camel.main.DefaultConfigurationConfigurer;
-import org.apache.camel.main.DefaultRoutesCollector;
 import org.apache.camel.main.RoutesCollector;
 import org.apache.camel.model.Model;
 import org.apache.camel.spi.BeanRepository;
