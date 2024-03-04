@@ -88,36 +88,4 @@ public class RestOpenApiV2SecuritySchemesTest {
 		}
 	}
 
-	@Test
-	public void testSecuritySchemesV2() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setTitle("Camel User store");
-		config.setLicense("Apache 2.0");
-		config.setLicenseUrl("https://www.apache.org/licenses/LICENSE-2.0.html");
-		config.setVersion("2.0");
-
-		RestOpenApiReader reader = new RestOpenApiReader();
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
-
-		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
-
-		log.info(json);
-
-		json = json.replace("\n", " ").replaceAll("\\s+", " ");
-		assertTrue(json.contains("\"petstore_auth_implicit\" : { \"type\" : \"oauth2\", \"authorizationUrl\" : " +
-		        "\"https://petstore.swagger.io/oauth/dialog\", \"flow\" : \"implicit\" }"));
-		assertTrue(json.contains("\"oauth_password\" : { \"type\" : \"oauth2\", \"tokenUrl\" : " +
-		        "\"https://petstore.swagger.io/oauth/token\", \"flow\" : \"password\" }"));
-		assertTrue(json.contains("\"oauth2_accessCode\" : { \"type\" : \"oauth2\", \"authorizationUrl\" : " +
-		        "\"https://petstore.swagger.io/oauth/dialog\", \"tokenUrl\" : " +
-		        "\"https://petstore.swagger.io/oauth/token\", \"flow\" : \"accessCode\" }"));
-		assertTrue(
-		        json.contains("\"api_key_header\" : { \"type\" : \"apiKey\", \"name\" : \"myHeader\", \"in\" : \"header\" }"));
-		assertTrue(json.contains("\"api_key_query\" : { \"type\" : \"apiKey\", \"name\" : \"myQuery\", \"in\" : \"query\" }"));
-	}
 }

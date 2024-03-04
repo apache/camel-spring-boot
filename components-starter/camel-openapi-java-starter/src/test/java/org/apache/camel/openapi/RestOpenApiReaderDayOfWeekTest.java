@@ -87,37 +87,6 @@ public class RestOpenApiReaderDayOfWeekTest {
 	}
 
 	@Test
-	public void testReaderRead() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setTitle("Day");
-		config.setLicense("Apache 2.0");
-		config.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
-		config.setVersion("2.0");
-		RestOpenApiReader reader = new RestOpenApiReader();
-
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
-
-		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
-
-		log.info(json);
-
-		assertTrue(json.contains("\"host\" : \"localhost:8080\""));
-		assertTrue(json.contains("\"default\" : \"friday\""));
-		assertTrue(json.contains("\"enum\" : [ \"monday\", \"tuesday\", \"wednesday\", \"thursday\", \"friday\" ]"));
-		assertTrue(json.contains("\"$ref\" : \"#/definitions/DayResponse\""));
-		assertTrue(json.contains("\"format\" : \"org.apache.camel.openapi.DayResponse\""));
-		assertTrue(json.contains("\"X-Rate-Limit-Limit\" : {"));
-		assertTrue(json.contains("\"description\" : \"The number of allowed requests in the current period\""));
-
-		context.stop();
-	}
-
-	@Test
 	public void testReaderReadV3() throws Exception {
 		BeanConfig config = new BeanConfig();
 		config.setHost("localhost:8080");
@@ -126,7 +95,6 @@ public class RestOpenApiReaderDayOfWeekTest {
 		config.setTitle("Day");
 		config.setLicense("Apache 2.0");
 		config.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
-		//config.setVersion("2.0");
 		RestOpenApiReader reader = new RestOpenApiReader();
 
 		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),

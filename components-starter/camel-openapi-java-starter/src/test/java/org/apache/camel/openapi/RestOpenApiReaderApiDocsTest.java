@@ -88,34 +88,6 @@ public class RestOpenApiReaderApiDocsTest {
 	}
 
 	@Test
-	public void testReaderRead() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setVersion("2.0");
-		RestOpenApiReader reader = new RestOpenApiReader();
-
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
-
-		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
-
-		log.info(json);
-
-		assertTrue(json.contains("\"host\" : \"localhost:8080\""));
-		assertTrue(json.contains("\"basePath\" : \"/api\""));
-
-		assertFalse(json.contains("\"/hello/bye\""));
-		assertFalse(json.contains("\"summary\" : \"To update the greeting message\""));
-		assertFalse(json.contains("\"/hello/bye/{name}\""));
-		assertTrue(json.contains("\"/hello/hi/{name}\""));
-
-		context.stop();
-	}
-
-	@Test
 	public void testReaderReadV3() throws Exception {
 		BeanConfig config = new BeanConfig();
 		config.setHost("localhost:8080");

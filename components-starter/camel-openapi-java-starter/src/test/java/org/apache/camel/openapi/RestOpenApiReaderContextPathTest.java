@@ -93,44 +93,6 @@ public class RestOpenApiReaderContextPathTest {
 	}
 
 	@Test
-	public void testReaderRead() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		Info info = new Info();
-		config.setInfo(info);
-		config.setVersion("2.0");
-		RestOpenApiReader reader = new RestOpenApiReader();
-
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
-
-		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
-
-		log.info(json);
-
-		assertTrue(json.contains("\"host\" : \"localhost:8080\""));
-		assertTrue(json.contains("\"basePath\" : \"/api\""));
-		assertTrue(json.contains("\"/hello/bye\""));
-		assertTrue(json.contains("\"summary\" : \"To update the greeting message\""));
-		assertTrue(json.contains("\"/hello/bye/{name}\""));
-		assertFalse(json.contains("\"/api/hello/bye/{name}\""));
-		assertTrue(json.contains("\"/hello/hi/{name}\""));
-		assertFalse(json.contains("\"/api/hello/hi/{name}\""));
-		assertTrue(json.contains("\"type\" : \"number\""));
-		assertTrue(json.contains("\"format\" : \"float\""));
-		assertTrue(json.contains("\"application/xml\" : \"<hello>Hi</hello>\""));
-		assertTrue(json.contains("\"x-example\" : \"Donald Duck\""));
-		assertTrue(json.contains("\"success\" : \"123\""));
-		assertTrue(json.contains("\"error\" : \"-1\""));
-		assertTrue(json.contains("\"type\" : \"array\""));
-
-		context.stop();
-	}
-
-	@Test
 	public void testReaderReadV3() throws Exception {
 		BeanConfig config = new BeanConfig();
 		config.setHost("localhost:8080");

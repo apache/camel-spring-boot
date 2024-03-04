@@ -81,29 +81,6 @@ public class RestOpenApiReaderFileResponseModelTest {
 	}
 
 	@Test
-	public void testReaderRead() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		Info info = new Info();
-		config.setInfo(info);
-		config.setVersion("2.0");
-		RestOpenApiReader reader = new RestOpenApiReader();
-
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
-
-		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
-
-		LOG.info(json);
-		assertTrue(json.contains("\"type\" : \"file\""));
-
-		context.stop();
-	}
-
-	@Test
 	public void testReaderReadV3() throws Exception {
 		BeanConfig config = new BeanConfig();
 		config.setHost("localhost:8080");

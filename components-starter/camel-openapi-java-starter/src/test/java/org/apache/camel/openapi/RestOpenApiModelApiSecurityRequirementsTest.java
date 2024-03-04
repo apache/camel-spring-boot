@@ -83,34 +83,6 @@ public class RestOpenApiModelApiSecurityRequirementsTest {
 	}
 
 	@Test
-	public void testReaderRead() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setTitle("Camel User store");
-		config.setLicense("Apache 2.0");
-		config.setLicenseUrl("https://www.apache.org/licenses/LICENSE-2.0.html");
-		config.setVersion("2.0");
-		RestOpenApiReader reader = new RestOpenApiReader();
-
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
-		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
-		log.info(json);
-
-		assertTrue(json.contains("\"securityDefinitions\" : {"));
-		assertTrue(json.contains("\"type\" : \"oauth2\""));
-		assertTrue(json.contains("\"authorizationUrl\" : \"https://petstore.swagger.io/oauth/dialog\""));
-		assertTrue(json.contains("\"flow\" : \"implicit\""));
-		assertTrue(json.contains("\"type\" : \"apiKey\","));
-		assertTrue(json.contains("\"security\" : [ {"));
-		assertTrue(json.contains("\"petstore_auth\" : [ \"read\", \"write\" ]"));
-		assertTrue(json.contains("\"api_key\" : [ ]"));
-	}
-
-	@Test
 	public void testReaderReadV3() throws Exception {
 		BeanConfig config = new BeanConfig();
 		config.setHost("localhost:8080");

@@ -101,36 +101,6 @@ public class RestOpenApiReaderEnableVendorExtensionTest {
 	}
 
 	@Test
-	public void testEnableVendorExtension() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setTitle("Camel User store");
-		config.setLicense("Apache 2.0");
-		config.setVersion("2.0");
-		config.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
-		RestOpenApiReader reader = new RestOpenApiReader();
-
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
-
-		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
-
-		log.info(json);
-
-		String camelId = context.getName();
-
-		assertTrue(json.contains("\"host\" : \"localhost:8080\""));
-		assertTrue(json.contains("\"description\" : \"The user returned\""));
-		assertTrue(json.contains("\"$ref\" : \"#/definitions/User\""));
-		assertFalse(json.contains("\"enum\""));
-		assertTrue(json.contains("\"x-camelContextId\" : \"" + camelId + "\""));
-		context.stop();
-	}
-
-	@Test
 	public void testEnableVendorExtensionV3() throws Exception {
 		BeanConfig config = new BeanConfig();
 		config.setHost("localhost:8080");

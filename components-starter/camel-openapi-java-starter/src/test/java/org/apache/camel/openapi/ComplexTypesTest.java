@@ -132,18 +132,8 @@ public class ComplexTypesTest {
 	}
 
 	@Test
-	public void testV2SchemaForComplexTypesRequest() throws Exception {
-		checkSchemaGeneration("/complexRequest", "2.0", "V2SchemaForComplexTypesRequest.json");
-	}
-
-	@Test
 	public void testV3SchemaForComplexTypesResponse() throws Exception {
 		checkSchemaGeneration("/complexResponse", "3.0", "V3SchemaForComplexTypesResponse.json");
-	}
-
-	@Test
-	public void testV2SchemaForComplexTypesResponse() throws Exception {
-		checkSchemaGeneration("/complexResponse", "2.0", "V2SchemaForComplexTypesResponse.json");
 	}
 
 	private void checkSchemaGeneration(String uri, String apiVersion, String schemaResource) throws Exception {

@@ -140,20 +140,4 @@ public class RestOpenApiV3SecuritySchemesTest {
 		assertTrue(json.contains("\"mutualTLS_auth\" : { \"type\" : \"mutualTLS\" }"));
 	}
 
-	@Test
-	public void testSecuritySchemesV2() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setTitle("Camel User store");
-		config.setLicense("Apache 2.0");
-		config.setLicenseUrl("https://www.apache.org/licenses/LICENSE-2.0.html");
-		config.setVersion("2.0");
-
-		RestOpenApiReader reader = new RestOpenApiReader();
-		assertThrows(IllegalStateException.class,
-				() -> reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-						new DefaultClassResolver()));
-	}
 }

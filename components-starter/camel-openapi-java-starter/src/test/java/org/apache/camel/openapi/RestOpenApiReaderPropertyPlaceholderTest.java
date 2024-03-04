@@ -93,35 +93,4 @@ public class RestOpenApiReaderPropertyPlaceholderTest {
 		}
 	}
 
-	@Test
-	public void testReaderRead() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setVersion("2.0");
-		RestOpenApiReader reader = new RestOpenApiReader();
-
-		RestOpenApiSupport support = new RestOpenApiSupport();
-		List<RestDefinition> rests = support.getRestDefinitions(context);
-
-		OpenAPI openApi = reader.read(context, rests, config, context.getName(), new DefaultClassResolver());
-		assertNotNull(openApi);
-
-
-		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
-
-		log.info(json);
-
-		assertTrue(json.contains("\"host\" : \"localhost:8080\""));
-		assertTrue(json.contains("\"basePath\" : \"/api\""));
-		assertTrue(json.contains("\"/hello/bye\""));
-		assertTrue(json.contains("\"summary\" : \"To update the greeting message\""));
-		assertTrue(json.contains("\"/hello/bye/{name}\""));
-		assertTrue(json.contains("\"/hello/hi/{name}\""));
-		assertFalse(json.contains("{foo}"));
-		assertFalse(json.contains("{bar}"));
-
-		context.stop();
-	}
 }
