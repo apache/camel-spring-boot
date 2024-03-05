@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-xml-jaxb-starter</artifactId>
   <packaging>jar</packaging>
-  <description>Spring-Boot Starter for Camel JAXB Support</description>
+  <name>Camel SB Starters :: JAXB</name>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>

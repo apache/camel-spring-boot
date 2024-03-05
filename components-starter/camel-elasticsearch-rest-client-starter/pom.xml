@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-elasticsearch-rest-client-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: elasticsearch-rest-client</name>
+  <name>Camel SB Starters :: Elasticsearch :: Rest Client</name>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
