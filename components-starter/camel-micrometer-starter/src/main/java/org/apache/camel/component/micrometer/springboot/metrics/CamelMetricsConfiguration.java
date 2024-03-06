@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.micrometer.springboot.metrics;
 
+import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.metrics")
@@ -41,6 +42,21 @@ public class CamelMetricsConfiguration {
      * on route processing times.
      */
     private boolean enableRoutePolicy = true;
+
+    /**
+     * Sets the level of information to capture. Possible values are all,route,context.
+     *
+     * all = both context and routes.
+     * route = routes only.
+     * context = camel context only.
+     */
+    private String routePolicyLevel = "all";
+
+    /**
+     * Controls the name style to use for metrics.
+     * Default = uses micrometer naming convention. Legacy = uses the classic naming style (camelCase)
+     */
+    private String namingStrategy = "default";
 
     /**
      * Set whether to enable the MicrometerMessageHistoryFactory for capturing metrics
@@ -85,6 +101,22 @@ public class CamelMetricsConfiguration {
 
     public void setEnableRoutePolicy(boolean enableRoutePolicy) {
         this.enableRoutePolicy = enableRoutePolicy;
+    }
+
+    public String getNamingStrategy() {
+        return namingStrategy;
+    }
+
+    public void setNamingStrategy(String namingStrategy) {
+        this.namingStrategy = namingStrategy;
+    }
+
+    public String getRoutePolicyLevel() {
+        return routePolicyLevel;
+    }
+
+    public void setRoutePolicyLevel(String routePolicyLevel) {
+        this.routePolicyLevel = routePolicyLevel;
     }
 
     public boolean isEnableMessageHistory() {

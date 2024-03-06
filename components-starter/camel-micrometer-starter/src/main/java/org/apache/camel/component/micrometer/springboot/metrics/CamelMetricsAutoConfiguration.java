@@ -19,9 +19,13 @@ package org.apache.camel.component.micrometer.springboot.metrics;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.micrometer.eventnotifier.MicrometerExchangeEventNotifier;
+import org.apache.camel.component.micrometer.eventnotifier.MicrometerExchangeEventNotifierNamingStrategy;
 import org.apache.camel.component.micrometer.eventnotifier.MicrometerRouteEventNotifier;
+import org.apache.camel.component.micrometer.eventnotifier.MicrometerRouteEventNotifierNamingStrategy;
 import org.apache.camel.component.micrometer.messagehistory.MicrometerMessageHistoryFactory;
+import org.apache.camel.component.micrometer.messagehistory.MicrometerMessageHistoryNamingStrategy;
 import org.apache.camel.component.micrometer.routepolicy.MicrometerRoutePolicyFactory;
+import org.apache.camel.component.micrometer.routepolicy.MicrometerRoutePolicyNamingStrategy;
 import org.apache.camel.spi.ManagementStrategy;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
@@ -45,6 +49,19 @@ public class CamelMetricsAutoConfiguration {
         if (configuration.isEnableRoutePolicy()) {
             MicrometerRoutePolicyFactory factory = new MicrometerRoutePolicyFactory();
             factory.setMeterRegistry(meterRegistry);
+            if ("legacy".equalsIgnoreCase(configuration.getNamingStrategy())) {
+                factory.setNamingStrategy(MicrometerRoutePolicyNamingStrategy.LEGACY);
+            }
+            if ("all".equalsIgnoreCase(configuration.getRoutePolicyLevel())) {
+                factory.getPolicyConfiguration().setContextEnabled(true);
+                factory.getPolicyConfiguration().setRouteEnabled(true);
+            } else if ("context".equalsIgnoreCase(configuration.getRoutePolicyLevel())) {
+                factory.getPolicyConfiguration().setContextEnabled(true);
+                factory.getPolicyConfiguration().setRouteEnabled(false);
+            } else {
+                factory.getPolicyConfiguration().setContextEnabled(false);
+                factory.getPolicyConfiguration().setRouteEnabled(true);
+            }
             camelContext.addRoutePolicyFactory(factory);
         }
 
@@ -52,12 +69,18 @@ public class CamelMetricsAutoConfiguration {
         if (configuration.isEnableExchangeEventNotifier()) {
             MicrometerExchangeEventNotifier notifier = new MicrometerExchangeEventNotifier();
             notifier.setMeterRegistry(meterRegistry);
+            if ("legacy".equalsIgnoreCase(configuration.getNamingStrategy())) {
+                notifier.setNamingStrategy(MicrometerExchangeEventNotifierNamingStrategy.LEGACY);
+            }
             managementStrategy.addEventNotifier(notifier);
         }
 
         if (configuration.isEnableRouteEventNotifier()) {
             MicrometerRouteEventNotifier notifier = new MicrometerRouteEventNotifier();
             notifier.setMeterRegistry(meterRegistry);
+            if ("legacy".equalsIgnoreCase(configuration.getNamingStrategy())) {
+                notifier.setNamingStrategy(MicrometerRouteEventNotifierNamingStrategy.LEGACY);
+            }
             managementStrategy.addEventNotifier(notifier);
         }
 
@@ -67,7 +90,11 @@ public class CamelMetricsAutoConfiguration {
             }
             MicrometerMessageHistoryFactory factory = new MicrometerMessageHistoryFactory();
             factory.setMeterRegistry(meterRegistry);
+            if ("legacy".equalsIgnoreCase(configuration.getNamingStrategy())) {
+                factory.setNamingStrategy(MicrometerMessageHistoryNamingStrategy.LEGACY);
+            }
             camelContext.setMessageHistoryFactory(factory);
         }
     }
+
 }

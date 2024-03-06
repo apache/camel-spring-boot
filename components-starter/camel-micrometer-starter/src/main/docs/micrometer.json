@@ -78,6 +78,20 @@
       "defaultValue": true
     },
     {
+      "name": "camel.metrics.naming-strategy",
+      "type": "java.lang.String",
+      "description": "Controls the name style to use for metrics. Default = uses micrometer naming convention. Legacy = uses the classic naming style (camelCase)",
+      "sourceType": "org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration",
+      "defaultValue": "default"
+    },
+    {
+      "name": "camel.metrics.route-policy-level",
+      "type": "java.lang.String",
+      "description": "Sets the level of information to capture. Possible values are all,route,context. all = both context and routes. route = routes only. context = camel context only.",
+      "sourceType": "org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration",
+      "defaultValue": "all"
+    },
+    {
       "name": "camel.metrics.uri-tag-dynamic",
       "type": "java.lang.Boolean",
       "description": "Whether to use static or dynamic values for URI tags in captured metrics. When using dynamic tags, then a REST service with base URL: \/users\/{id} will capture metrics with uri tag with the actual dynamic value such as: \/users\/123. However, this can lead to many tags as the URI is dynamic, so use this with care.",
