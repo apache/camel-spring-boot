@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.aws2.bedrock.springboot;
+package org.apache.camel.component.aws2.bedrock.runtime.springboot;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
-import org.apache.camel.component.aws2.bedrock.BedrockComponent;
+import org.apache.camel.component.aws2.bedrock.runtime.BedrockComponent;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;

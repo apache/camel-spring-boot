@@ -15,5 +15,7 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConverter
-org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentAutoConfiguration
+org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConverter
+org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentAutoConfiguration
+org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConverter
+org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentAutoConfiguration

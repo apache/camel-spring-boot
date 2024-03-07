@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.aws2.bedrock.springboot;
+package org.apache.camel.component.aws2.bedrock.runtime.springboot;
 
-import org.apache.camel.component.aws2.bedrock.BedrockComponent;
-import org.apache.camel.component.aws2.bedrock.BedrockConfiguration;
-import org.apache.camel.component.aws2.bedrock.BedrockOperations;
+import org.apache.camel.component.aws2.bedrock.runtime.BedrockComponent;
+import org.apache.camel.component.aws2.bedrock.runtime.BedrockConfiguration;
+import org.apache.camel.component.aws2.bedrock.runtime.BedrockOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
@@ -41,7 +41,8 @@ public class BedrockComponentConfiguration
     private Boolean enabled;
     /**
      * Component configuration. The option is a
-     * org.apache.camel.component.aws2.bedrock.BedrockConfiguration type.
+     * org.apache.camel.component.aws2.bedrock.runtime.BedrockConfiguration
+     * type.
      */
     private BedrockConfiguration configuration;
     /**

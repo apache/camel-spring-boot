@@ -2,41 +2,218 @@
   "groups": [
     {
       "name": "camel.component.aws-bedrock",
-      "type": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "type": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime",
+      "type": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
     },
     {
       "name": "camel.component.aws-bedrock.customizer",
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "sourceMethod": "getCustomizer()"
     }
   ],
   "properties": [
     {
+      "name": "camel.component.aws-bedrock-agent-runtime.access-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Access Key",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.bedrock-agent-runtime-client",
+      "type": "software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClient",
+      "description": "To use an existing configured AWS Bedrock Agent Runtime client. The option is a software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClient type.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.configuration",
+      "type": "org.apache.camel.component.aws2.bedrock.agentruntime.BedrockAgentRuntimeConfiguration",
+      "description": "Component configuration. The option is a org.apache.camel.component.aws2.bedrock.agentruntime.BedrockAgentRuntimeConfiguration type.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the aws-bedrock-agent-runtime component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.knowledge-base-id",
+      "type": "java.lang.String",
+      "description": "Define the Knowledge Base Id we are going to use",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.model-id",
+      "type": "java.lang.String",
+      "description": "Define the model Id we are going to use",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.operation",
+      "type": "org.apache.camel.component.aws2.bedrock.agentruntime.BedrockAgentRuntimeOperations",
+      "description": "The operation to perform",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.override-endpoint",
+      "type": "java.lang.Boolean",
+      "description": "Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.pojo-request",
+      "type": "java.lang.Boolean",
+      "description": "If we want to use a POJO request as body or not",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.profile-credentials-name",
+      "type": "java.lang.String",
+      "description": "If using a profile credentials provider, this parameter will set the profile name",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": "false"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.proxy-host",
+      "type": "java.lang.String",
+      "description": "To define a proxy host when instantiating the Bedrock client",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "To define a proxy port when instantiating the Bedrock client",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.proxy-protocol",
+      "type": "software.amazon.awssdk.core.Protocol",
+      "description": "To define a proxy protocol when instantiating the Bedrock client",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.region",
+      "type": "java.lang.String",
+      "description": "The region in which Bedrock Agent Runtime client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example, ap-east-1) You'll need to use the name Region.EU_WEST_1.id()",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.secret-key",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Secret Key",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.session-token",
+      "type": "java.lang.String",
+      "description": "Amazon AWS Session Token used when the user needs to assume an IAM role",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.trust-all-certificates",
+      "type": "java.lang.Boolean",
+      "description": "If we want to trust all certificates in case of overriding the endpoint",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.uri-endpoint-override",
+      "type": "java.lang.String",
+      "description": "Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.use-default-credentials-provider",
+      "type": "java.lang.Boolean",
+      "description": "Set whether the Bedrock client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.use-profile-credentials-provider",
+      "type": "java.lang.Boolean",
+      "description": "Set whether the Bedrock client should expect to load credentials through a profile credentials provider.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.use-session-credentials",
+      "type": "java.lang.Boolean",
+      "description": "Set whether the Bedrock Agent Runtime client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume an IAM role for doing operations in Bedrock.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.aws-bedrock.access-key",
       "type": "java.lang.String",
       "description": "Amazon AWS Access Key",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.aws-bedrock.bedrock-runtime-client",
       "type": "software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient",
       "description": "To use an existing configured AWS Bedrock Runtime client. The option is a software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient type.",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.configuration",
-      "type": "org.apache.camel.component.aws2.bedrock.BedrockConfiguration",
-      "description": "Component configuration. The option is a org.apache.camel.component.aws2.bedrock.BedrockConfiguration type.",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "type": "org.apache.camel.component.aws2.bedrock.runtime.BedrockConfiguration",
+      "description": "Component configuration. The option is a org.apache.camel.component.aws2.bedrock.runtime.BedrockConfiguration type.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.customizer.enabled",
@@ -47,130 +224,130 @@
       "name": "camel.component.aws-bedrock.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the aws-bedrock component. This is enabled by default.",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.health-check-consumer-enabled",
       "type": "java.lang.Boolean",
       "description": "Used for enabling or disabling all consumer based health checks from this component",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.aws-bedrock.health-check-producer-enabled",
       "type": "java.lang.Boolean",
       "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.aws-bedrock.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws-bedrock.model-id",
       "type": "java.lang.String",
       "description": "Define the model Id we are going to use",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.operation",
-      "type": "org.apache.camel.component.aws2.bedrock.BedrockOperations",
+      "type": "org.apache.camel.component.aws2.bedrock.runtime.BedrockOperations",
       "description": "The operation to perform",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.override-endpoint",
       "type": "java.lang.Boolean",
       "description": "Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws-bedrock.pojo-request",
       "type": "java.lang.Boolean",
       "description": "If we want to use a POJO request as body or not",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws-bedrock.profile-credentials-name",
       "type": "java.lang.String",
       "description": "If using a profile credentials provider, this parameter will set the profile name",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": "false"
     },
     {
       "name": "camel.component.aws-bedrock.proxy-host",
       "type": "java.lang.String",
       "description": "To define a proxy host when instantiating the Bedrock client",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.proxy-port",
       "type": "java.lang.Integer",
       "description": "To define a proxy port when instantiating the Bedrock client",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the Bedrock client",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.region",
       "type": "java.lang.String",
       "description": "The region in which Bedrock client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example, ap-east-1) You'll need to use the name Region.EU_WEST_1.id()",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.secret-key",
       "type": "java.lang.String",
       "description": "Amazon AWS Secret Key",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.session-token",
       "type": "java.lang.String",
       "description": "Amazon AWS Session Token used when the user needs to assume an IAM role",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.trust-all-certificates",
       "type": "java.lang.Boolean",
       "description": "If we want to trust all certificates in case of overriding the endpoint",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws-bedrock.uri-endpoint-override",
       "type": "java.lang.String",
       "description": "Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock.use-default-credentials-provider",
       "type": "java.lang.Boolean",
       "description": "Set whether the Bedrock client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in.",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws-bedrock.use-profile-credentials-provider",
       "type": "java.lang.Boolean",
       "description": "Set whether the Bedrock client should expect to load credentials through a profile credentials provider.",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws-bedrock.use-session-credentials",
       "type": "java.lang.Boolean",
       "description": "Set whether the Bedrock client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume an IAM role for doing operations in Bedrock.",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.springboot.BedrockComponentConfiguration",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": false
     }
   ],
