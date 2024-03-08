@@ -65,8 +65,7 @@ public class QdrantComponentConfiguration
      */
     private Integer port = 6334;
     /**
-     * Sets a default timeout for all requests. The option is a
-     * java.time.Duration type.
+     * Sets a default timeout for all requests
      */
     private Duration timeout;
     /**

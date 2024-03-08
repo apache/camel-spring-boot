@@ -128,7 +128,7 @@
     {
       "name": "camel.component.aws2-cw.timestamp",
       "type": "java.time.Instant",
-      "description": "The metric timestamp. The option is a java.time.Instant type.",
+      "description": "The metric timestamp",
       "sourceType": "org.apache.camel.component.aws2.cw.springboot.Cw2ComponentConfiguration"
     },
     {

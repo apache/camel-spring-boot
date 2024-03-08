@@ -67,7 +67,7 @@
     {
       "name": "camel.component.qdrant.timeout",
       "type": "java.time.Duration",
-      "description": "Sets a default timeout for all requests. The option is a java.time.Duration type.",
+      "description": "Sets a default timeout for all requests",
       "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration"
     },
     {

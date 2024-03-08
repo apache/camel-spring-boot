@@ -129,7 +129,6 @@ public class BlobComponentConfiguration
     private BlobServiceClient serviceClient;
     /**
      * An optional timeout value beyond which a RuntimeException will be raised.
-     * The option is a java.time.Duration type.
      */
     private Duration timeout;
     /**
@@ -166,8 +165,7 @@ public class BlobComponentConfiguration
      * return events approximately before the end time. Note: A few events
      * belonging to the next hour can also be returned. A few events belonging
      * to this hour can be missing; to ensure all events from the hour are
-     * returned, round the end time up by an hour. The option is a
-     * java.time.OffsetDateTime type.
+     * returned, round the end time up by an hour.
      */
     private OffsetDateTime changeFeedEndTime;
     /**
@@ -175,8 +173,7 @@ public class BlobComponentConfiguration
      * return events approximately after the start time. Note: A few events
      * belonging to the previous hour can also be returned. A few events
      * belonging to this hour can be missing; to ensure all events from the hour
-     * are returned, round the start time down by an hour. The option is a
-     * java.time.OffsetDateTime type.
+     * are returned, round the start time down by an hour.
      */
     private OffsetDateTime changeFeedStartTime;
     /**

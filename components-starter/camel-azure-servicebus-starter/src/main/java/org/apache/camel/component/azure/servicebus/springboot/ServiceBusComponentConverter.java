@@ -43,9 +43,7 @@ public class ServiceBusComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, com.azure.core.util.ClientOptions.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.servicebus.ServiceBusConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.azure.core.amqp.ProxyOptions.class));
-        answer.add(new ConvertiblePair(String.class, java.time.Duration.class));
         answer.add(new ConvertiblePair(String.class, com.azure.messaging.servicebus.ServiceBusReceiverAsyncClient.class));
-        answer.add(new ConvertiblePair(String.class, java.time.OffsetDateTime.class));
         answer.add(new ConvertiblePair(String.class, com.azure.messaging.servicebus.ServiceBusSenderAsyncClient.class));
         answer.add(new ConvertiblePair(String.class, com.azure.messaging.servicebus.ServiceBusTransactionContext.class));
         answer.add(new ConvertiblePair(String.class, com.azure.core.credential.TokenCredential.class));
@@ -69,9 +67,7 @@ public class ServiceBusComponentConverter implements GenericConverter {
             case "com.azure.core.util.ClientOptions": return applicationContext.getBean(ref, com.azure.core.util.ClientOptions.class);
             case "org.apache.camel.component.azure.servicebus.ServiceBusConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.azure.servicebus.ServiceBusConfiguration.class);
             case "com.azure.core.amqp.ProxyOptions": return applicationContext.getBean(ref, com.azure.core.amqp.ProxyOptions.class);
-            case "java.time.Duration": return applicationContext.getBean(ref, java.time.Duration.class);
             case "com.azure.messaging.servicebus.ServiceBusReceiverAsyncClient": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusReceiverAsyncClient.class);
-            case "java.time.OffsetDateTime": return applicationContext.getBean(ref, java.time.OffsetDateTime.class);
             case "com.azure.messaging.servicebus.ServiceBusSenderAsyncClient": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusSenderAsyncClient.class);
             case "com.azure.messaging.servicebus.ServiceBusTransactionContext": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusTransactionContext.class);
             case "com.azure.core.credential.TokenCredential": return applicationContext.getBean(ref, com.azure.core.credential.TokenCredential.class);

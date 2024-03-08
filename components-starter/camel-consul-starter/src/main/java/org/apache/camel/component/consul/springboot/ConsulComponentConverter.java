@@ -39,7 +39,6 @@ public class ConsulComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, java.time.Duration.class));
         answer.add(new ConvertiblePair(String.class, org.kiwiproject.consul.Consul.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.consul.ConsulConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
@@ -60,7 +59,6 @@ public class ConsulComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "java.time.Duration": return applicationContext.getBean(ref, java.time.Duration.class);
             case "org.kiwiproject.consul.Consul": return applicationContext.getBean(ref, org.kiwiproject.consul.Consul.class);
             case "org.apache.camel.component.consul.ConsulConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.consul.ConsulConfiguration.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);

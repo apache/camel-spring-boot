@@ -396,7 +396,7 @@
     {
       "name": "camel.component.consul.connect-timeout",
       "type": "java.time.Duration",
-      "description": "Connect timeout for OkHttpClient. The option is a java.time.Duration type.",
+      "description": "Connect timeout for OkHttpClient",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
@@ -475,7 +475,7 @@
     {
       "name": "camel.component.consul.read-timeout",
       "type": "java.time.Duration",
-      "description": "Read timeout for OkHttpClient. The option is a java.time.Duration type.",
+      "description": "Read timeout for OkHttpClient",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
@@ -526,7 +526,7 @@
     {
       "name": "camel.component.consul.write-timeout",
       "type": "java.time.Duration",
-      "description": "Write timeout for OkHttpClient. The option is a java.time.Duration type.",
+      "description": "Write timeout for OkHttpClient",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {

@@ -71,7 +71,7 @@ public class Cw2ComponentConfiguration
      */
     private String region;
     /**
-     * The metric timestamp. The option is a java.time.Instant type.
+     * The metric timestamp
      */
     private Instant timestamp;
     /**

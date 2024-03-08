@@ -193,8 +193,7 @@ public class MinioComponentConfiguration
      */
     private Integer maxMessagesPerPoll = 10;
     /**
-     * Set modified since parameter for get object(s). The option is a
-     * java.time.ZonedDateTime type.
+     * Set modified since parameter for get object(s).
      */
     private ZonedDateTime modifiedSince;
     /**
@@ -229,8 +228,7 @@ public class MinioComponentConfiguration
      */
     private String startAfter;
     /**
-     * Set un modified since parameter for get object(s). The option is a
-     * java.time.ZonedDateTime type.
+     * Set un modified since parameter for get object(s).
      */
     private ZonedDateTime unModifiedSince;
     /**

@@ -40,7 +40,6 @@ public class Etcd3ComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.etcd3.Etcd3Configuration.class));
-        answer.add(new ConvertiblePair(String.class, java.time.Duration.class));
         answer.add(new ConvertiblePair(String.class, io.netty.handler.ssl.SslContext.class));
         return answer;
     }
@@ -59,7 +58,6 @@ public class Etcd3ComponentConverter implements GenericConverter {
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.etcd3.Etcd3Configuration": return applicationContext.getBean(ref, org.apache.camel.component.etcd3.Etcd3Configuration.class);
-            case "java.time.Duration": return applicationContext.getBean(ref, java.time.Duration.class);
             case "io.netty.handler.ssl.SslContext": return applicationContext.getBean(ref, io.netty.handler.ssl.SslContext.class);
         }
         return null;

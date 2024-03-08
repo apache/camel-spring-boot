@@ -41,7 +41,6 @@ public class QueueComponentConverter implements GenericConverter {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.storage.queue.QueueConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.azure.storage.queue.QueueServiceClient.class));
-        answer.add(new ConvertiblePair(String.class, java.time.Duration.class));
         answer.add(new ConvertiblePair(String.class, com.azure.storage.common.StorageSharedKeyCredential.class));
         return answer;
     }
@@ -61,7 +60,6 @@ public class QueueComponentConverter implements GenericConverter {
         switch (targetType.getName()) {
             case "org.apache.camel.component.azure.storage.queue.QueueConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.azure.storage.queue.QueueConfiguration.class);
             case "com.azure.storage.queue.QueueServiceClient": return applicationContext.getBean(ref, com.azure.storage.queue.QueueServiceClient.class);
-            case "java.time.Duration": return applicationContext.getBean(ref, java.time.Duration.class);
             case "com.azure.storage.common.StorageSharedKeyCredential": return applicationContext.getBean(ref, com.azure.storage.common.StorageSharedKeyCredential.class);
         }
         return null;
