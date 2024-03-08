@@ -74,13 +74,13 @@
     {
       "name": "camel.component.azure-storage-blob.change-feed-end-time",
       "type": "java.time.OffsetDateTime",
-      "description": "When using getChangeFeed producer operation, this filters the results to return events approximately before the end time. Note: A few events belonging to the next hour can also be returned. A few events belonging to this hour can be missing; to ensure all events from the hour are returned, round the end time up by an hour. The option is a java.time.OffsetDateTime type.",
+      "description": "When using getChangeFeed producer operation, this filters the results to return events approximately before the end time. Note: A few events belonging to the next hour can also be returned. A few events belonging to this hour can be missing; to ensure all events from the hour are returned, round the end time up by an hour.",
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
     },
     {
       "name": "camel.component.azure-storage-blob.change-feed-start-time",
       "type": "java.time.OffsetDateTime",
-      "description": "When using getChangeFeed producer operation, this filters the results to return events approximately after the start time. Note: A few events belonging to the previous hour can also be returned. A few events belonging to this hour can be missing; to ensure all events from the hour are returned, round the start time down by an hour. The option is a java.time.OffsetDateTime type.",
+      "description": "When using getChangeFeed producer operation, this filters the results to return events approximately after the start time. Note: A few events belonging to the previous hour can also be returned. A few events belonging to this hour can be missing; to ensure all events from the hour are returned, round the start time down by an hour.",
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
     },
     {
@@ -245,7 +245,7 @@
     {
       "name": "camel.component.azure-storage-blob.timeout",
       "type": "java.time.Duration",
-      "description": "An optional timeout value beyond which a RuntimeException will be raised. The option is a java.time.Duration type.",
+      "description": "An optional timeout value beyond which a RuntimeException will be raised.",
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
     }
   ],

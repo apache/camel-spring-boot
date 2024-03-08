@@ -42,9 +42,7 @@ public class BlobComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.storage.blob.BlobConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.azure.storage.common.StorageSharedKeyCredential.class));
         answer.add(new ConvertiblePair(String.class, com.azure.storage.blob.BlobServiceClient.class));
-        answer.add(new ConvertiblePair(String.class, java.time.Duration.class));
         answer.add(new ConvertiblePair(String.class, com.azure.core.util.Context.class));
-        answer.add(new ConvertiblePair(String.class, java.time.OffsetDateTime.class));
         return answer;
     }
 
@@ -64,9 +62,7 @@ public class BlobComponentConverter implements GenericConverter {
             case "org.apache.camel.component.azure.storage.blob.BlobConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.azure.storage.blob.BlobConfiguration.class);
             case "com.azure.storage.common.StorageSharedKeyCredential": return applicationContext.getBean(ref, com.azure.storage.common.StorageSharedKeyCredential.class);
             case "com.azure.storage.blob.BlobServiceClient": return applicationContext.getBean(ref, com.azure.storage.blob.BlobServiceClient.class);
-            case "java.time.Duration": return applicationContext.getBean(ref, java.time.Duration.class);
             case "com.azure.core.util.Context": return applicationContext.getBean(ref, com.azure.core.util.Context.class);
-            case "java.time.OffsetDateTime": return applicationContext.getBean(ref, java.time.OffsetDateTime.class);
         }
         return null;
     }

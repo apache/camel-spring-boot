@@ -48,7 +48,7 @@
     {
       "name": "camel.component.etcd3.connection-timeout",
       "type": "java.time.Duration",
-      "description": "Configure the connection timeout. The option is a java.time.Duration type.",
+      "description": "Configure the connection timeout.",
       "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
     },
     {
@@ -84,13 +84,13 @@
     {
       "name": "camel.component.etcd3.keep-alive-time",
       "type": "java.time.Duration",
-      "description": "Configure the interval for gRPC keepalives. The current minimum allowed by gRPC is 10 seconds. The option is a java.time.Duration type.",
+      "description": "Configure the interval for gRPC keepalives. The current minimum allowed by gRPC is 10 seconds.",
       "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
     },
     {
       "name": "camel.component.etcd3.keep-alive-timeout",
       "type": "java.time.Duration",
-      "description": "Configure the timeout for gRPC keepalives. The option is a java.time.Duration type.",
+      "description": "Configure the timeout for gRPC keepalives.",
       "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
     },
     {
@@ -155,7 +155,7 @@
     {
       "name": "camel.component.etcd3.retry-max-duration",
       "type": "java.time.Duration",
-      "description": "Configure the retries max duration. The option is a java.time.Duration type.",
+      "description": "Configure the retries max duration.",
       "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
     },
     {

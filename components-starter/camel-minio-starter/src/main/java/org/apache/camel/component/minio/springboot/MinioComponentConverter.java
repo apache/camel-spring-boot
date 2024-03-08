@@ -44,7 +44,6 @@ public class MinioComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, io.minio.MinioClient.class));
         answer.add(new ConvertiblePair(String.class, io.minio.ServerSideEncryption.class));
         answer.add(new ConvertiblePair(String.class, io.minio.ServerSideEncryptionCustomerKey.class));
-        answer.add(new ConvertiblePair(String.class, java.time.ZonedDateTime.class));
         return answer;
     }
 
@@ -66,7 +65,6 @@ public class MinioComponentConverter implements GenericConverter {
             case "io.minio.MinioClient": return applicationContext.getBean(ref, io.minio.MinioClient.class);
             case "io.minio.ServerSideEncryption": return applicationContext.getBean(ref, io.minio.ServerSideEncryption.class);
             case "io.minio.ServerSideEncryptionCustomerKey": return applicationContext.getBean(ref, io.minio.ServerSideEncryptionCustomerKey.class);
-            case "java.time.ZonedDateTime": return applicationContext.getBean(ref, java.time.ZonedDateTime.class);
         }
         return null;
     }

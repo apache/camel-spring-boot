@@ -242,7 +242,7 @@
     {
       "name": "camel.component.azure-storage-datalake.timeout",
       "type": "java.time.Duration",
-      "description": "Timeout for operation. The option is a java.time.Duration type.",
+      "description": "Timeout for operation",
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
     },
     {

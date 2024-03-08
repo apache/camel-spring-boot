@@ -111,8 +111,7 @@ public class Etcd3ComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * Configure the connection timeout. The option is a java.time.Duration
-     * type.
+     * Configure the connection timeout.
      */
     private Duration connectionTimeout;
     /**
@@ -121,12 +120,11 @@ public class Etcd3ComponentConfiguration
     private Map<String, String> headers;
     /**
      * Configure the interval for gRPC keepalives. The current minimum allowed
-     * by gRPC is 10 seconds. The option is a java.time.Duration type.
+     * by gRPC is 10 seconds.
      */
     private Duration keepAliveTime;
     /**
-     * Configure the timeout for gRPC keepalives. The option is a
-     * java.time.Duration type.
+     * Configure the timeout for gRPC keepalives.
      */
     private Duration keepAliveTimeout;
     /**
@@ -146,8 +144,7 @@ public class Etcd3ComponentConfiguration
      */
     private Long retryMaxDelay = 2500L;
     /**
-     * Configure the retries max duration. The option is a java.time.Duration
-     * type.
+     * Configure the retries max duration.
      */
     private Duration retryMaxDuration;
     /**
