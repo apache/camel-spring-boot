@@ -19,3 +19,5 @@ org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConve
 org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentAutoConfiguration
 org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConverter
 org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentAutoConfiguration
+org.apache.camel.component.aws2.bedrock.agent.springboot.BedrockAgentComponentConverter
+org.apache.camel.component.aws2.bedrock.agent.springboot.BedrockAgentComponentAutoConfiguration
