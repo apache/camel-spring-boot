@@ -148,7 +148,7 @@ public class DataLakeComponentConfiguration
      */
     private String tenantId;
     /**
-     * Timeout for operation. The option is a java.time.Duration type.
+     * Timeout for operation
      */
     private Duration timeout;
     /**

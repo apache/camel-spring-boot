@@ -134,7 +134,6 @@ public class QueueComponentConfiguration
     /**
      * An optional timeout applied to the operation. If a response is not
      * returned before the timeout concludes a RuntimeException will be thrown.
-     * The option is a java.time.Duration type.
      */
     private Duration timeout;
     /**
@@ -144,8 +143,7 @@ public class QueueComponentConfiguration
      * this form: PnDTnHnMn.nS., e.g: PT20.345S -- parses as 20.345 seconds, P2D
      * -- parses as 2 days However, in case you are using
      * EndpointDsl/ComponentDsl, you can do something like Duration.ofSeconds()
-     * since these Java APIs are typesafe. The option is a java.time.Duration
-     * type.
+     * since these Java APIs are typesafe.
      */
     private Duration timeToLive;
     /**
@@ -154,8 +152,7 @@ public class QueueComponentConfiguration
      * this form: PnDTnHnMn.nS., e.g: PT20.345S -- parses as 20.345 seconds, P2D
      * -- parses as 2 days However, in case you are using
      * EndpointDsl/ComponentDsl, you can do something like Duration.ofSeconds()
-     * since these Java APIs are typesafe. The option is a java.time.Duration
-     * type.
+     * since these Java APIs are typesafe.
      */
     private Duration visibilityTimeout;
     /**

@@ -110,7 +110,7 @@
     {
       "name": "camel.component.azure-servicebus.max-auto-lock-renew-duration",
       "type": "java.time.Duration",
-      "description": "Sets the amount of time to continue auto-renewing the lock. Setting ZERO disables auto-renewal. For ServiceBus receive mode (RECEIVE_AND_DELETE RECEIVE_AND_DELETE), auto-renewal is disabled. The option is a java.time.Duration type.",
+      "description": "Sets the amount of time to continue auto-renewing the lock. Setting ZERO disables auto-renewal. For ServiceBus receive mode (RECEIVE_AND_DELETE RECEIVE_AND_DELETE), auto-renewal is disabled.",
       "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
     },
     {
@@ -153,7 +153,7 @@
     {
       "name": "camel.component.azure-servicebus.scheduled-enqueue-time",
       "type": "java.time.OffsetDateTime",
-      "description": "Sets OffsetDateTime at which the message should appear in the Service Bus queue or topic. The option is a java.time.OffsetDateTime type.",
+      "description": "Sets OffsetDateTime at which the message should appear in the Service Bus queue or topic.",
       "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
     },
     {

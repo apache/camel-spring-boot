@@ -205,7 +205,7 @@
     {
       "name": "camel.component.minio.modified-since",
       "type": "java.time.ZonedDateTime",
-      "description": "Set modified since parameter for get object(s). The option is a java.time.ZonedDateTime type.",
+      "description": "Set modified since parameter for get object(s).",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
@@ -324,7 +324,7 @@
     {
       "name": "camel.component.minio.un-modified-since",
       "type": "java.time.ZonedDateTime",
-      "description": "Set un modified since parameter for get object(s). The option is a java.time.ZonedDateTime type.",
+      "description": "Set un modified since parameter for get object(s).",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {

@@ -113,8 +113,7 @@ public class ServiceBusComponentConfiguration
     /**
      * Sets the amount of time to continue auto-renewing the lock. Setting ZERO
      * disables auto-renewal. For ServiceBus receive mode (RECEIVE_AND_DELETE
-     * RECEIVE_AND_DELETE), auto-renewal is disabled. The option is a
-     * java.time.Duration type.
+     * RECEIVE_AND_DELETE), auto-renewal is disabled.
      */
     private Duration maxAutoLockRenewDuration;
     /**
@@ -178,7 +177,7 @@ public class ServiceBusComponentConfiguration
     private ServiceBusProducerOperationDefinition producerOperation = ServiceBusProducerOperationDefinition.sendMessages;
     /**
      * Sets OffsetDateTime at which the message should appear in the Service Bus
-     * queue or topic. The option is a java.time.OffsetDateTime type.
+     * queue or topic.
      */
     private OffsetDateTime scheduledEnqueueTime;
     /**

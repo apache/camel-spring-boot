@@ -42,7 +42,6 @@ public class DataLakeComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.azure.storage.file.datalake.DataLakeServiceClient.class));
         answer.add(new ConvertiblePair(String.class, com.azure.storage.common.StorageSharedKeyCredential.class));
-        answer.add(new ConvertiblePair(String.class, java.time.Duration.class));
         answer.add(new ConvertiblePair(String.class, com.azure.identity.ClientSecretCredential.class));
         answer.add(new ConvertiblePair(String.class, com.azure.core.credential.AzureSasCredential.class));
         return answer;
@@ -64,7 +63,6 @@ public class DataLakeComponentConverter implements GenericConverter {
             case "org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration.class);
             case "com.azure.storage.file.datalake.DataLakeServiceClient": return applicationContext.getBean(ref, com.azure.storage.file.datalake.DataLakeServiceClient.class);
             case "com.azure.storage.common.StorageSharedKeyCredential": return applicationContext.getBean(ref, com.azure.storage.common.StorageSharedKeyCredential.class);
-            case "java.time.Duration": return applicationContext.getBean(ref, java.time.Duration.class);
             case "com.azure.identity.ClientSecretCredential": return applicationContext.getBean(ref, com.azure.identity.ClientSecretCredential.class);
             case "com.azure.core.credential.AzureSasCredential": return applicationContext.getBean(ref, com.azure.core.credential.AzureSasCredential.class);
         }

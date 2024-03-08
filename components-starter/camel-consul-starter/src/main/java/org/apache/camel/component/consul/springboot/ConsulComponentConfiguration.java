@@ -43,8 +43,7 @@ public class ConsulComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Connect timeout for OkHttpClient. The option is a java.time.Duration
-     * type.
+     * Connect timeout for OkHttpClient
      */
     private Duration connectTimeout;
     /**
@@ -62,7 +61,7 @@ public class ConsulComponentConfiguration
      */
     private Boolean pingInstance = true;
     /**
-     * Read timeout for OkHttpClient. The option is a java.time.Duration type.
+     * Read timeout for OkHttpClient
      */
     private Duration readTimeout;
     /**
@@ -74,7 +73,7 @@ public class ConsulComponentConfiguration
      */
     private String url;
     /**
-     * Write timeout for OkHttpClient. The option is a java.time.Duration type.
+     * Write timeout for OkHttpClient
      */
     private Duration writeTimeout;
     /**
