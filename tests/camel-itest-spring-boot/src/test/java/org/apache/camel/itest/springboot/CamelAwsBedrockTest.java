@@ -41,6 +41,7 @@ public class CamelAwsBedrockTest extends AbstractSpringBootTestSupport {
     @Test
     public void componentTests() throws Exception {
         this.runComponentTest(createTestConfig(), "aws-bedrock");
+        this.runComponentTest(createTestConfig(), "aws-bedrock-agent");
         this.runComponentTest(createTestConfig(), "aws-bedrock-agent-runtime");
         
         this.runModuleUnitTestsIfEnabled(config);
