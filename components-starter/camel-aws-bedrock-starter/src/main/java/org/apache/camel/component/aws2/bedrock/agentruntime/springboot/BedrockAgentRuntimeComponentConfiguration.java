@@ -94,14 +94,14 @@ public class BedrockAgentRuntimeComponentConfiguration
      */
     private String uriEndpointOverride;
     /**
-     * Set whether the Bedrock client should expect to load credentials through
-     * a default credentials provider or to expect static credentials to be
-     * passed in.
+     * Set whether the Bedrock Agent Runtime client should expect to load
+     * credentials through a default credentials provider or to expect static
+     * credentials to be passed in.
      */
     private Boolean useDefaultCredentialsProvider = false;
     /**
-     * Set whether the Bedrock client should expect to load credentials through
-     * a profile credentials provider.
+     * Set whether the Bedrock Agent Runtime client should expect to load
+     * credentials through a profile credentials provider.
      */
     private Boolean useProfileCredentialsProvider = false;
     /**
@@ -132,15 +132,18 @@ public class BedrockAgentRuntimeComponentConfiguration
      */
     private Boolean healthCheckProducerEnabled = true;
     /**
-     * To define a proxy host when instantiating the Bedrock client
+     * To define a proxy host when instantiating the Bedrock Agent Runtime
+     * client
      */
     private String proxyHost;
     /**
-     * To define a proxy port when instantiating the Bedrock client
+     * To define a proxy port when instantiating the Bedrock Agent Runtime
+     * client
      */
     private Integer proxyPort;
     /**
-     * To define a proxy protocol when instantiating the Bedrock client
+     * To define a proxy protocol when instantiating the Bedrock Agent Runtime
+     * client
      */
     private Protocol proxyProtocol = Protocol.HTTPS;
     /**
