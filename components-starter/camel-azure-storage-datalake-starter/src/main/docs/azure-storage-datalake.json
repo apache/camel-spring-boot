@@ -66,7 +66,7 @@
     {
       "name": "camel.component.azure-storage-datalake.configuration",
       "type": "org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration",
-      "description": "configuration object for datalake. The option is a org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration type.",
+      "description": "configuration object for data lake. The option is a org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration type.",
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
     },
     {
@@ -176,7 +176,7 @@
     {
       "name": "camel.component.azure-storage-datalake.path",
       "type": "java.lang.String",
-      "description": "path in azure datalake for operations",
+      "description": "path in azure data lake for operations",
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
     },
     {
@@ -224,13 +224,13 @@
     {
       "name": "camel.component.azure-storage-datalake.service-client",
       "type": "com.azure.storage.file.datalake.DataLakeServiceClient",
-      "description": "datalake service client for azure storage datalake. The option is a com.azure.storage.file.datalake.DataLakeServiceClient type.",
+      "description": "data lake service client for azure storage data lake. The option is a com.azure.storage.file.datalake.DataLakeServiceClient type.",
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
     },
     {
       "name": "camel.component.azure-storage-datalake.shared-key-credential",
       "type": "com.azure.storage.common.StorageSharedKeyCredential",
-      "description": "shared key credential for azure datalake gen2. The option is a com.azure.storage.common.StorageSharedKeyCredential type.",
+      "description": "shared key credential for azure data lake gen2. The option is a com.azure.storage.common.StorageSharedKeyCredential type.",
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
     },
     {

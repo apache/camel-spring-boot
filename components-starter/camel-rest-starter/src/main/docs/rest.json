@@ -39,6 +39,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.rest-api.consumer-component-name",
+      "type": "java.lang.String",
+      "description": "The Camel Rest API component to use for the consumer REST transport, such as jetty, servlet, undertow. If no component has been explicitly configured, then Camel will lookup if there is a Camel component that integrates with the Rest DSL, or if a org.apache.camel.spi.RestApiConsumerFactory is registered in the registry. If either one is found, then that is being used.",
+      "sourceType": "org.apache.camel.component.rest.springboot.RestApiComponentConfiguration"
+    },
+    {
       "name": "camel.component.rest-api.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
