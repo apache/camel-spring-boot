@@ -35,11 +35,13 @@ public class SpringBootRuntimeProvider implements RuntimeProvider {
     private static final String DATAFORMAT_DIR = "org/apache/camel/springboot/catalog/dataformats";
     private static final String LANGUAGE_DIR = "org/apache/camel/springboot/catalog/languages";
     private static final String TRANSFORMER_DIR = "org/apache/camel/springboot/catalog/transformers";
+    private static final String CONSOLE_DIR = "org/apache/camel/springboot/catalog/dev-consoles";
     private static final String OTHER_DIR = "org/apache/camel/springboot/catalog/others";
     private static final String COMPONENTS_CATALOG = "org/apache/camel/springboot/catalog/components.properties";
     private static final String DATA_FORMATS_CATALOG = "org/apache/camel/springboot/catalog/dataformats.properties";
     private static final String LANGUAGE_CATALOG = "org/apache/camel/springboot/catalog/languages.properties";
     private static final String TRANSFORMER_CATALOG = "org/apache/camel/springboot/catalog/transformers.properties";
+    private static final String CONSOLES_CATALOG = "org/apache/camel/springboot/catalog/dev-consoles.properties";
     private static final String OTHER_CATALOG = "org/apache/camel/springboot/catalog/others.properties";
 
     private CamelCatalog camelCatalog;
@@ -90,6 +92,11 @@ public class SpringBootRuntimeProvider implements RuntimeProvider {
     }
 
     @Override
+    public String getDevConsoleJSonSchemaDirectory() {
+        return CONSOLE_DIR;
+    }
+
+    @Override
     public String getOtherJSonSchemaDirectory() {
         return OTHER_DIR;
     }
@@ -112,6 +119,11 @@ public class SpringBootRuntimeProvider implements RuntimeProvider {
     @Override
     public List<String> findTransformerNames() {
         return findNames(TRANSFORMER_CATALOG);
+    }
+
+    @Override
+    public List<String> findDevConsoleNames() {
+        return findNames(CONSOLES_CATALOG);
     }
 
     @Override
