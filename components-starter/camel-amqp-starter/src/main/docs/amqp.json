@@ -607,6 +607,12 @@
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {
+      "name": "camel.component.amqp.temporary-queue-resolver",
+      "type": "org.apache.camel.component.jms.TemporaryQueueResolver",
+      "description": "A pluggable TemporaryQueueResolver that allows you to use your own resolver for creating temporary queues (some messaging systems has special requirements for creating temporary queues). The option is a org.apache.camel.component.jms.TemporaryQueueResolver type.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
+    },
+    {
       "name": "camel.component.amqp.test-connection-on-startup",
       "type": "java.lang.Boolean",
       "description": "Specifies whether to test the connection on startup. This ensures that when Camel starts that all the JMS consumers have a valid connection to the JMS broker. If a connection cannot be granted then Camel throws an exception on startup. This ensures that Camel is not started with failed connections. The JMS producers is tested as well.",

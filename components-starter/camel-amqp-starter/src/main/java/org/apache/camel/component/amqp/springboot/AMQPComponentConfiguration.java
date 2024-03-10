@@ -20,15 +20,7 @@ import jakarta.jms.ConnectionFactory;
 import jakarta.jms.ExceptionListener;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.component.amqp.AMQPComponent;
-import org.apache.camel.component.jms.ConsumerType;
-import org.apache.camel.component.jms.DefaultTaskExecutorType;
-import org.apache.camel.component.jms.JmsConfiguration;
-import org.apache.camel.component.jms.JmsKeyFormatStrategy;
-import org.apache.camel.component.jms.JmsMessageType;
-import org.apache.camel.component.jms.MessageCreatedStrategy;
-import org.apache.camel.component.jms.MessageListenerContainerFactory;
-import org.apache.camel.component.jms.QueueBrowseStrategy;
-import org.apache.camel.component.jms.ReplyToType;
+import org.apache.camel.component.jms.*;
 import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -689,6 +681,13 @@ public class AMQPComponentConfiguration
      * Sets whether synchronous processing should be strictly used
      */
     private Boolean synchronous = false;
+    /**
+     * A pluggable TemporaryQueueResolver that allows you to use your own
+     * resolver for creating temporary queues (some messaging systems has
+     * special requirements for creating temporary queues). The option is a
+     * org.apache.camel.component.jms.TemporaryQueueResolver type.
+     */
+    private TemporaryQueueResolver temporaryQueueResolver;
     /**
      * If enabled and you are using Request Reply messaging (InOut) and an
      * Exchange failed on the consumer side, then the caused Exception will be
@@ -1495,6 +1494,15 @@ public class AMQPComponentConfiguration
 
     public void setSynchronous(Boolean synchronous) {
         this.synchronous = synchronous;
+    }
+
+    public TemporaryQueueResolver getTemporaryQueueResolver() {
+        return temporaryQueueResolver;
+    }
+
+    public void setTemporaryQueueResolver(
+            TemporaryQueueResolver temporaryQueueResolver) {
+        this.temporaryQueueResolver = temporaryQueueResolver;
     }
 
     public Boolean getTransferException() {

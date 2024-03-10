@@ -674,6 +674,13 @@ public class JmsComponentConfiguration
      */
     private Boolean synchronous = false;
     /**
+     * A pluggable TemporaryQueueResolver that allows you to use your own
+     * resolver for creating temporary queues (some messaging systems has
+     * special requirements for creating temporary queues). The option is a
+     * org.apache.camel.component.jms.TemporaryQueueResolver type.
+     */
+    private TemporaryQueueResolver temporaryQueueResolver;
+    /**
      * If enabled and you are using Request Reply messaging (InOut) and an
      * Exchange failed on the consumer side, then the caused Exception will be
      * send back in response as a jakarta.jms.ObjectMessage. If the client is
@@ -1471,6 +1478,15 @@ public class JmsComponentConfiguration
 
     public void setSynchronous(Boolean synchronous) {
         this.synchronous = synchronous;
+    }
+
+    public TemporaryQueueResolver getTemporaryQueueResolver() {
+        return temporaryQueueResolver;
+    }
+
+    public void setTemporaryQueueResolver(
+            TemporaryQueueResolver temporaryQueueResolver) {
+        this.temporaryQueueResolver = temporaryQueueResolver;
     }
 
     public Boolean getTransferException() {

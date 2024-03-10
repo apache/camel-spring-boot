@@ -49,6 +49,7 @@ public class JmsComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.MessageCreatedStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.MessageListenerContainerFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.QueueBrowseStrategy.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.jms.TemporaryQueueResolver.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.springframework.transaction.PlatformTransactionManager.class));
         return answer;
@@ -77,6 +78,7 @@ public class JmsComponentConverter implements GenericConverter {
             case "org.apache.camel.component.jms.MessageCreatedStrategy": return applicationContext.getBean(ref, org.apache.camel.component.jms.MessageCreatedStrategy.class);
             case "org.apache.camel.component.jms.MessageListenerContainerFactory": return applicationContext.getBean(ref, org.apache.camel.component.jms.MessageListenerContainerFactory.class);
             case "org.apache.camel.component.jms.QueueBrowseStrategy": return applicationContext.getBean(ref, org.apache.camel.component.jms.QueueBrowseStrategy.class);
+            case "org.apache.camel.component.jms.TemporaryQueueResolver": return applicationContext.getBean(ref, org.apache.camel.component.jms.TemporaryQueueResolver.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
             case "org.springframework.transaction.PlatformTransactionManager": return applicationContext.getBean(ref, org.springframework.transaction.PlatformTransactionManager.class);
         }
