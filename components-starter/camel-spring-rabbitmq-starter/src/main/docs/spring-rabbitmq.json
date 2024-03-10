@@ -37,6 +37,13 @@
       "type": "java.lang.Boolean",
       "description": "Specifies whether the consumer should auto declare binding between exchange, queue and routing key when starting. Enabling this can be good for development to make it easy to standup exchanges, queues and bindings on the broker.",
       "sourceType": "org.apache.camel.component.springrabbit.springboot.SpringRabbitMQComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.spring-rabbitmq.auto-declare-producer",
+      "type": "java.lang.Boolean",
+      "description": "Specifies whether the producer should auto declare binding between exchange, queue and routing key when starting. Enabling this can be good for development to make it easy to standup exchanges, queues and bindings on the broker.",
+      "sourceType": "org.apache.camel.component.springrabbit.springboot.SpringRabbitMQComponentConfiguration",
       "defaultValue": false
     },
     {

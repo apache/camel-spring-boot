@@ -69,7 +69,7 @@ public class SpringRabbitMQComponentConfiguration
      * for development to make it easy to standup exchanges, queues and bindings
      * on the broker.
      */
-    private Boolean autoDeclare = false;
+    private Boolean autoDeclare = true;
     /**
      * Specifies whether the consumer container should auto-startup.
      */
@@ -169,6 +169,13 @@ public class SpringRabbitMQComponentConfiguration
      * thrown.
      */
     private Boolean allowNullBody = false;
+    /**
+     * Specifies whether the producer should auto declare binding between
+     * exchange, queue and routing key when starting. Enabling this can be good
+     * for development to make it easy to standup exchanges, queues and bindings
+     * on the broker.
+     */
+    private Boolean autoDeclareProducer = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -403,6 +410,14 @@ public class SpringRabbitMQComponentConfiguration
 
     public void setAllowNullBody(Boolean allowNullBody) {
         this.allowNullBody = allowNullBody;
+    }
+
+    public Boolean getAutoDeclareProducer() {
+        return autoDeclareProducer;
+    }
+
+    public void setAutoDeclareProducer(Boolean autoDeclareProducer) {
+        this.autoDeclareProducer = autoDeclareProducer;
     }
 
     public Boolean getLazyStartProducer() {
