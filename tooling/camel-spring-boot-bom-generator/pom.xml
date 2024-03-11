@@ -48,7 +48,6 @@
                     <sourcePom>${basedir}/target-template-pom.xml</sourcePom>
                     <targetPom>${basedir}/../camel-spring-boot-bom/pom.xml</targetPom>
                 </configuration>
-
             </plugin>
         </plugins>
     </build>
