@@ -8,6 +8,7 @@
     "firstVersion": "3.15.0",
     "label": "dsl",
     "supportLevel": "Experimental",
+    "metadata": { "routes.language": "jsh" },
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-jsh-dsl-starter",
     "version": "4.5.0-SNAPSHOT"

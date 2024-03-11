@@ -8,6 +8,7 @@
     "firstVersion": "3.9.0",
     "label": "dsl",
     "supportLevel": "Stable",
+    "metadata": { "routes.language": "java" },
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-java-joor-dsl-starter",
     "version": "4.5.0-SNAPSHOT"

@@ -9,6 +9,7 @@
     "label": "cloud",
     "javaType": "org.apache.camel.component.knative.KnativeComponent",
     "supportLevel": "Stable",
+    "metadata": { "protocol": "http" },
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-knative-starter",
     "version": "4.5.0-SNAPSHOT",
