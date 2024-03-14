@@ -1020,6 +1020,16 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-langchain-chat-starter</artifactId>
+        <version>4.5.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-langchain-embeddings-starter</artifactId>
+        <version>4.5.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-language-starter</artifactId>
         <version>4.5.0-SNAPSHOT</version>
       </dependency>
