@@ -230,7 +230,7 @@
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-tracing</artifactId>
-        <version>1.2.3</version>
+        <version>1.2.4</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
@@ -3252,6 +3252,16 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-kudu</artifactId>
+        <version>4.5.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-langchain-chat</artifactId>
+        <version>4.5.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-langchain-embeddings</artifactId>
         <version>4.5.0-SNAPSHOT</version>
       </dependency>
       <dependency>
