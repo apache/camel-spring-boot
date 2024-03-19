@@ -1,0 +1,154 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.camel.spring.boot;
+
+import org.apache.camel.LoggingLevel;
+import org.apache.camel.ManagementMBeansLevel;
+import org.apache.camel.ManagementStatisticsLevel;
+import org.apache.camel.StartupSummaryLevel;
+import org.apache.camel.main.DefaultConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
+
+import java.util.Map;
+
+@ConfigurationProperties(prefix = "camel")
+public class CamelConfigurationProperties  {
+
+    //
+    // Notes: the configuration is split into two classes,
+    // the springboot one and the main one.  The springboot classes,
+    // for historical reasons, duplicates all properties from the camel-main
+    // configuration.  Those {@code camel.springboot.*} properties have
+    // been deprecated in 4.5.0 in favor of {@code camel.main.*} properties.
+    //
+    // When the migration window is closed, the Springboot class can
+    // stop extending the InnerDeprecatedCamelConfigurationProperties class
+    // and that one removed.
+    //
+    // Note that due to the fact that camel-main properties are not set up
+    // as native spring properties, and the fact that the spring annotation
+    // processor which generates the documentation, only reads javadoc on the
+    // fields, the InnerCamelConfigurationProperties needs to duplicate all the
+    // fields from the DefaultConfigurationProperties.
+    //
+    // So both InnerCamelConfigurationProperties and InnerDeprecatedCamelConfigurationProperties
+    // classes contains redefinitions of properties from camel-main, hence
+    // the need to generate this whole file using a velocity template.
+    //
+
+    @NestedConfigurationProperty
+    private final Springboot springboot = new Springboot();
+
+    @NestedConfigurationProperty
+    private final Main main = new Main();
+
+    public Springboot getSpringboot() {
+        return springboot;
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    public class Main extends InnerCamelConfigurationProperties {
+
+    }
+
+    @SuppressWarnings("unused")
+    public class Springboot extends InnerDeprecatedCamelConfigurationProperties {
+        // Spring Boot only Properties
+        // ---------------------------
+
+        /**
+         * Whether to use the main run controller to ensure the Spring-Boot application
+         * keeps running until being stopped or the JVM terminated.
+         * You typically only need this if you run Spring-Boot standalone.
+         * If you run Spring-Boot with spring-boot-starter-web then the web container keeps the JVM running.
+         */
+        private boolean mainRunController;
+
+        /**
+         * Whether to include non-singleton beans (prototypes) when scanning for RouteBuilder instances.
+         * By default only singleton beans is included in the context scan.
+         */
+        private boolean includeNonSingletons;
+
+        /**
+         * Whether to log a WARN if Camel on Spring Boot was immediately shutdown after starting which
+         * very likely is because there is no JVM thread to keep the application running.
+         */
+        private boolean warnOnEarlyShutdown = true;
+
+        public boolean isMainRunController() {
+            return mainRunController;
+        }
+
+        public void setMainRunController(boolean mainRunController) {
+            this.mainRunController = mainRunController;
+        }
+
+        public boolean isIncludeNonSingletons() {
+            return includeNonSingletons;
+        }
+
+        public void setIncludeNonSingletons(boolean includeNonSingletons) {
+            this.includeNonSingletons = includeNonSingletons;
+        }
+
+        public boolean isWarnOnEarlyShutdown() {
+            return warnOnEarlyShutdown;
+        }
+
+        public void setWarnOnEarlyShutdown(boolean warnOnEarlyShutdown) {
+            this.warnOnEarlyShutdown = warnOnEarlyShutdown;
+        }
+
+    }
+
+    class InnerDeprecatedCamelConfigurationProperties extends InnerCamelConfigurationProperties {
+
+#foreach( $opt in $options )
+        @DeprecatedConfigurationProperty(replacement = "camel.main.${opt.propName}", since = "4.5.0")
+        @Deprecated
+        @Override
+        public ${opt.javaType} ${opt.getterName}() {
+            return main.${opt.getterName}();
+        }
+        @Deprecated
+        @Override
+        public void ${opt.setterName}(${opt.javaType} ${opt.fieldName}) {
+            main.${opt.setterName}(${opt.fieldName});
+        }
+
+#end
+    }
+
+    @SuppressWarnings("all")
+    static class InnerCamelConfigurationProperties extends DefaultConfigurationProperties {
+
+#foreach( $opt in $options )
+        ${opt.description}
+     #if ($opt.defaultValue )
+        private ${opt.javaType} ${opt.fieldName} = ${opt.defaultValue};
+     #else
+        private ${opt.javaType} ${opt.fieldName};
+    #end
+#end
+    }
+}

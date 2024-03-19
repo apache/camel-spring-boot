@@ -95,15 +95,15 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                 // we can use the default routes configurer
                 RoutesConfigurer configurer = new RoutesConfigurer();
 
-                if (configurationProperties.isRoutesCollectorEnabled()) {
+                if (configurationProperties.getMain().isRoutesCollectorEnabled()) {
                     configurer.setRoutesCollector(springBootRoutesCollector);
                 }
 
                 configurer.setBeanPostProcessor(PluginHelper.getBeanPostProcessor(camelContext));
-                configurer.setJavaRoutesExcludePattern(configurationProperties.getJavaRoutesExcludePattern());
-                configurer.setJavaRoutesIncludePattern(configurationProperties.getJavaRoutesIncludePattern());
-                configurer.setRoutesExcludePattern(configurationProperties.getRoutesExcludePattern());
-                configurer.setRoutesIncludePattern(configurationProperties.getRoutesIncludePattern());
+                configurer.setJavaRoutesExcludePattern(configurationProperties.getMain().getJavaRoutesExcludePattern());
+                configurer.setJavaRoutesIncludePattern(configurationProperties.getMain().getJavaRoutesIncludePattern());
+                configurer.setRoutesExcludePattern(configurationProperties.getMain().getRoutesExcludePattern());
+                configurer.setRoutesIncludePattern(configurationProperties.getMain().getRoutesIncludePattern());
                 configurer.configureRoutes(camelContext);
 
                 for (CamelContextConfiguration camelContextConfiguration : camelContextConfigurations) {
@@ -111,29 +111,29 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                     camelContextConfiguration.beforeApplicationStart(camelContext);
                 }
 
-                if (configurationProperties.isMainRunController()) {
+                if (configurationProperties.getSpringboot().isMainRunController()) {
                     CamelMainRunController controller = new CamelMainRunController(applicationContext, camelContext);
 
-                    if (configurationProperties.getDurationMaxMessages() > 0 || configurationProperties.getDurationMaxIdleSeconds() > 0) {
-                        if (configurationProperties.getDurationMaxMessages() > 0) {
-                            LOG.info("CamelSpringBoot will terminate after processing {} messages", configurationProperties.getDurationMaxMessages());
+                    if (configurationProperties.getMain().getDurationMaxMessages() > 0 || configurationProperties.getMain().getDurationMaxIdleSeconds() > 0) {
+                        if (configurationProperties.getMain().getDurationMaxMessages() > 0) {
+                            LOG.info("CamelSpringBoot will terminate after processing {} messages", configurationProperties.getMain().getDurationMaxMessages());
                         }
-                        if (configurationProperties.getDurationMaxIdleSeconds() > 0) {
-                            LOG.info("CamelSpringBoot will terminate after being idle for more {} seconds", configurationProperties.getDurationMaxIdleSeconds());
+                        if (configurationProperties.getMain().getDurationMaxIdleSeconds() > 0) {
+                            LOG.info("CamelSpringBoot will terminate after being idle for more {} seconds", configurationProperties.getMain().getDurationMaxIdleSeconds());
                         }
                         // register lifecycle so we can trigger to shutdown the JVM when maximum number of messages has been processed
                         EventNotifier notifier = new MainDurationEventNotifier(camelContext,
-                            configurationProperties.getDurationMaxMessages(), configurationProperties.getDurationMaxIdleSeconds(),
-                            controller.getMainShutdownStrategy(), true, configurationProperties.isRoutesReloadRestartDuration(),
-                            configurationProperties.getDurationMaxAction());
+                            configurationProperties.getMain().getDurationMaxMessages(), configurationProperties.getMain().getDurationMaxIdleSeconds(),
+                            controller.getMainShutdownStrategy(), true, configurationProperties.getMain().isRoutesReloadRestartDuration(),
+                            configurationProperties.getMain().getDurationMaxAction());
                         // register our event notifier
                         ServiceHelper.startService(notifier);
                         camelContext.getManagementStrategy().addEventNotifier(notifier);
                     }
 
-                    if (configurationProperties.getDurationMaxSeconds() > 0) {
-                        LOG.info("CamelSpringBoot will terminate after {} seconds", configurationProperties.getDurationMaxSeconds());
-                        terminateMainControllerAfter(camelContext, configurationProperties.getDurationMaxSeconds(),
+                    if (configurationProperties.getMain().getDurationMaxSeconds() > 0) {
+                        LOG.info("CamelSpringBoot will terminate after {} seconds", configurationProperties.getMain().getDurationMaxSeconds());
+                        terminateMainControllerAfter(camelContext, configurationProperties.getMain().getDurationMaxSeconds(),
                             controller.getMainShutdownStrategy(), controller.getMainCompleteTask());
                     }
 
@@ -154,29 +154,29 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                     if (applicationContext instanceof ConfigurableApplicationContext) {
                         ConfigurableApplicationContext cac = (ConfigurableApplicationContext) applicationContext;
 
-                        if (configurationProperties.getDurationMaxSeconds() > 0) {
-                            LOG.info("CamelSpringBoot will terminate after {} seconds", configurationProperties.getDurationMaxSeconds());
-                            terminateApplicationContext(cac, camelContext, configurationProperties.getDurationMaxSeconds());
+                        if (configurationProperties.getMain().getDurationMaxSeconds() > 0) {
+                            LOG.info("CamelSpringBoot will terminate after {} seconds", configurationProperties.getMain().getDurationMaxSeconds());
+                            terminateApplicationContext(cac, camelContext, configurationProperties.getMain().getDurationMaxSeconds());
                         }
 
-                        if (configurationProperties.getDurationMaxMessages() > 0 || configurationProperties.getDurationMaxIdleSeconds() > 0) {
+                        if (configurationProperties.getMain().getDurationMaxMessages() > 0 || configurationProperties.getMain().getDurationMaxIdleSeconds() > 0) {
 
-                            if (configurationProperties.getDurationMaxMessages() > 0) {
-                                LOG.info("CamelSpringBoot will terminate after processing {} messages", configurationProperties.getDurationMaxMessages());
+                            if (configurationProperties.getMain().getDurationMaxMessages() > 0) {
+                                LOG.info("CamelSpringBoot will terminate after processing {} messages", configurationProperties.getMain().getDurationMaxMessages());
                             }
-                            if (configurationProperties.getDurationMaxIdleSeconds() > 0) {
-                                LOG.info("CamelSpringBoot will terminate after being idle for more {} seconds", configurationProperties.getDurationMaxIdleSeconds());
+                            if (configurationProperties.getMain().getDurationMaxIdleSeconds() > 0) {
+                                LOG.info("CamelSpringBoot will terminate after being idle for more {} seconds", configurationProperties.getMain().getDurationMaxIdleSeconds());
                             }
                             // needed by MainDurationEventNotifier to signal when we have processed the max messages
                             final MainShutdownStrategy strategy = new SimpleMainShutdownStrategy();
 
                             // register lifecycle so we can trigger to shutdown the JVM when maximum number of messages has been processed
                             EventNotifier notifier = new MainDurationEventNotifier(camelContext,
-                                configurationProperties.getDurationMaxMessages(),
-                                configurationProperties.getDurationMaxIdleSeconds(),
+                                configurationProperties.getMain().getDurationMaxMessages(),
+                                configurationProperties.getMain().getDurationMaxIdleSeconds(),
                                 strategy, false,
-                                configurationProperties.isRoutesReloadRestartDuration(),
-                                configurationProperties.getDurationMaxAction());
+                                configurationProperties.getMain().isRoutesReloadRestartDuration(),
+                                configurationProperties.getMain().getDurationMaxAction());
 
                             // register our event notifier
                             ServiceHelper.startService(notifier);
