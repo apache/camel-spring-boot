@@ -95,7 +95,7 @@ public class CamelAutoConfiguration {
     CamelContext camelContext(ApplicationContext applicationContext,
                               CamelConfigurationProperties config,
                               CamelBeanPostProcessor beanPostProcessor) throws Exception {
-        CamelContext camelContext = new SpringBootCamelContext(applicationContext, config.isWarnOnEarlyShutdown());
+        CamelContext camelContext = new SpringBootCamelContext(applicationContext, config.getSpringboot().isWarnOnEarlyShutdown());
         // bean post processor is created before CamelContext
         beanPostProcessor.setCamelContext(camelContext);
         camelContext.getCamelContextExtension().addContextPlugin(CamelBeanPostProcessor.class, beanPostProcessor);
@@ -134,12 +134,12 @@ public class CamelAutoConfiguration {
             camelContext.getCamelContextExtension().setRegistry(new DefaultRegistry(reps));
         }
 
-        if (ObjectHelper.isNotEmpty(config.getFileConfigurations())) {
+        if (ObjectHelper.isNotEmpty(config.getMain().getFileConfigurations())) {
             Environment env = applicationContext.getEnvironment();
             if (env instanceof ConfigurableEnvironment) {
                 MutablePropertySources sources = ((ConfigurableEnvironment) env).getPropertySources();
                 if (!sources.contains("camel-file-configuration")) {
-                    sources.addFirst(new FilePropertySource("camel-file-configuration", applicationContext, config.getFileConfigurations()));
+                    sources.addFirst(new FilePropertySource("camel-file-configuration", applicationContext, config.getMain().getFileConfigurations()));
                 }
             }
         }
@@ -176,13 +176,13 @@ public class CamelAutoConfiguration {
         camelContext.getCamelContextExtension().addContextPlugin(PackageScanClassResolver.class, new FatJarPackageScanClassResolver());
         camelContext.getCamelContextExtension().addContextPlugin(PackageScanResourceResolver.class, new FatJarPackageScanResourceResolver());
 
-        if (config.getRouteFilterIncludePattern() != null || config.getRouteFilterExcludePattern() != null) {
-            LOG.info("Route filtering pattern: include={}, exclude={}", config.getRouteFilterIncludePattern(), config.getRouteFilterExcludePattern());
-            camelContext.getCamelContextExtension().getContextPlugin(Model.class).setRouteFilterPattern(config.getRouteFilterIncludePattern(), config.getRouteFilterExcludePattern());
+        if (config.getMain().getRouteFilterIncludePattern() != null || config.getMain().getRouteFilterExcludePattern() != null) {
+            LOG.info("Route filtering pattern: include={}, exclude={}", config.getMain().getRouteFilterIncludePattern(), config.getMain().getRouteFilterExcludePattern());
+            camelContext.getCamelContextExtension().getContextPlugin(Model.class).setRouteFilterPattern(config.getMain().getRouteFilterIncludePattern(), config.getMain().getRouteFilterExcludePattern());
         }
 
         // configure the common/default options
-        DefaultConfigurationConfigurer.configure(camelContext, config);
+        DefaultConfigurationConfigurer.configure(camelContext, config.getMain());
         // lookup and configure SPI beans
         DefaultConfigurationConfigurer.afterConfigure(camelContext);
         // and call after all properties are set
@@ -228,21 +228,21 @@ public class CamelAutoConfiguration {
     }
 
     static void configureStartupRecorder(CamelContext camelContext, CamelConfigurationProperties config) {
-        if ("false".equals(config.getStartupRecorder())) {
+        if ("false".equals(config.getMain().getStartupRecorder())) {
             camelContext.getCamelContextExtension().getStartupStepRecorder().setEnabled(false);
-        } else if ("logging".equals(config.getStartupRecorder())) {
+        } else if ("logging".equals(config.getMain().getStartupRecorder())) {
             camelContext.getCamelContextExtension().setStartupStepRecorder(new LoggingStartupStepRecorder());
-        } else if ("java-flight-recorder".equals(config.getStartupRecorder())
-                || config.getStartupRecorder() == null) {
+        } else if ("java-flight-recorder".equals(config.getMain().getStartupRecorder())
+                || config.getMain().getStartupRecorder() == null) {
             // try to auto discover camel-jfr to use
             StartupStepRecorder fr = camelContext.getCamelContextExtension().getBootstrapFactoryFinder()
                     .newInstance(StartupStepRecorder.FACTORY, StartupStepRecorder.class).orElse(null);
             if (fr != null) {
                 LOG.debug("Discovered startup recorder: {} from classpath", fr);
-                fr.setRecording(config.isStartupRecorderRecording());
-                fr.setStartupRecorderDuration(config.getStartupRecorderDuration());
-                fr.setRecordingProfile(config.getStartupRecorderProfile());
-                fr.setMaxDepth(config.getStartupRecorderMaxDepth());
+                fr.setRecording(config.getMain().isStartupRecorderRecording());
+                fr.setStartupRecorderDuration(config.getMain().getStartupRecorderDuration());
+                fr.setRecordingProfile(config.getMain().getStartupRecorderProfile());
+                fr.setMaxDepth(config.getMain().getStartupRecorderMaxDepth());
                 camelContext.getCamelContextExtension().setStartupStepRecorder(fr);
             }
         }
@@ -257,7 +257,7 @@ public class CamelAutoConfiguration {
     @ConditionalOnMissingBean(RoutesCollector.class)
     @ConditionalOnMissingClass("org.apache.camel.spring.boot.endpointdsl.EndpointDslRouteCollector")
     RoutesCollector routesCollector(ApplicationContext applicationContext, CamelConfigurationProperties config) {
-        return new CamelSpringBootRoutesCollector(applicationContext, config.isIncludeNonSingletons());
+        return new CamelSpringBootRoutesCollector(applicationContext, config.getSpringboot().isIncludeNonSingletons());
     }
 
     @Bean
@@ -282,7 +282,7 @@ public class CamelAutoConfiguration {
     @Lazy
     FluentProducerTemplate fluentProducerTemplate(CamelContext camelContext,
                                                  CamelConfigurationProperties config) throws Exception {
-        final FluentProducerTemplate fluentProducerTemplate = camelContext.createFluentProducerTemplate(config.getProducerTemplateCacheSize());
+        final FluentProducerTemplate fluentProducerTemplate = camelContext.createFluentProducerTemplate(config.getMain().getProducerTemplateCacheSize());
         // we add this fluentProducerTemplate as a Service to CamelContext so that it performs proper lifecycle (start and stop)
         camelContext.addService(fluentProducerTemplate);
         return fluentProducerTemplate;
@@ -302,7 +302,7 @@ public class CamelAutoConfiguration {
     @Lazy
     ProducerTemplate producerTemplate(CamelContext camelContext,
                                       CamelConfigurationProperties config) throws Exception {
-        final ProducerTemplate producerTemplate = camelContext.createProducerTemplate(config.getProducerTemplateCacheSize());
+        final ProducerTemplate producerTemplate = camelContext.createProducerTemplate(config.getMain().getProducerTemplateCacheSize());
         // we add this producerTemplate as a Service to CamelContext so that it performs proper lifecycle (start and stop)
         camelContext.addService(producerTemplate);
         return producerTemplate;
@@ -322,7 +322,7 @@ public class CamelAutoConfiguration {
     @Lazy
     ConsumerTemplate consumerTemplate(CamelContext camelContext,
                                       CamelConfigurationProperties config) throws Exception {
-        final ConsumerTemplate consumerTemplate = camelContext.createConsumerTemplate(config.getConsumerTemplateCacheSize());
+        final ConsumerTemplate consumerTemplate = camelContext.createConsumerTemplate(config.getMain().getConsumerTemplateCacheSize());
         // we add this consumerTemplate as a Service to CamelContext so that it performs proper lifecycle (start and stop)
         camelContext.addService(consumerTemplate);
         return consumerTemplate;

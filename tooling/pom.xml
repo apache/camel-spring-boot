@@ -33,6 +33,7 @@
     <name>Camel SB Tooling</name>
 
     <modules>
+        <module>camel-spring-boot-config-generator-maven-plugin</module>
         <module>camel-spring-boot-generator-maven-plugin</module>
         <module>camel-spring-boot-dependencies-generator</module>
         <module>camel-spring-boot-dependencies</module>
