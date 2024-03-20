@@ -19,7 +19,10 @@ package org.apache.camel.springboot.catalog;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.camel.catalog.CamelCatalog;
 import org.apache.camel.catalog.RuntimeProvider;
@@ -37,12 +40,14 @@ public class SpringBootRuntimeProvider implements RuntimeProvider {
     private static final String TRANSFORMER_DIR = "org/apache/camel/springboot/catalog/transformers";
     private static final String CONSOLE_DIR = "org/apache/camel/springboot/catalog/dev-consoles";
     private static final String OTHER_DIR = "org/apache/camel/springboot/catalog/others";
+    private static final String BEAN_DIR = "org/apache/camel/springboot/catalog/beans";
     private static final String COMPONENTS_CATALOG = "org/apache/camel/springboot/catalog/components.properties";
     private static final String DATA_FORMATS_CATALOG = "org/apache/camel/springboot/catalog/dataformats.properties";
     private static final String LANGUAGE_CATALOG = "org/apache/camel/springboot/catalog/languages.properties";
     private static final String TRANSFORMER_CATALOG = "org/apache/camel/springboot/catalog/transformers.properties";
     private static final String CONSOLES_CATALOG = "org/apache/camel/springboot/catalog/dev-consoles.properties";
     private static final String OTHER_CATALOG = "org/apache/camel/springboot/catalog/others.properties";
+    private static final String BEAN_CATALOG = "org/apache/camel/springboot/catalog/beans.properties";
 
     private CamelCatalog camelCatalog;
 
@@ -102,6 +107,11 @@ public class SpringBootRuntimeProvider implements RuntimeProvider {
     }
 
     @Override
+    public String getPojoBeanJSonSchemaDirectory() {
+        return BEAN_DIR;
+    }
+
+    @Override
     public List<String> findComponentNames() {
         return findNames(COMPONENTS_CATALOG);
     }
@@ -130,7 +140,18 @@ public class SpringBootRuntimeProvider implements RuntimeProvider {
     public List<String> findOtherNames() {
         return findNames(OTHER_CATALOG);
     }
-    
+
+    @Override
+    public List<String> findBeansNames() {
+        return findNames(BEAN_CATALOG);
+    }
+
+    @Override
+    public Map<String, String> findCapabilities() {
+        // TODO: add SB specific capabilities
+        return Collections.EMPTY_MAP;
+    }
+
     private List<String> findNames(String pathToPropertyCatalogDescriptor) {
         List<String> names = new ArrayList<>();
         try (InputStream is = camelCatalog.getVersionManager().getResourceAsStream(pathToPropertyCatalogDescriptor)) {
