@@ -82,7 +82,7 @@ public class SpringBootConfigGeneratorMojo extends AbstractMojo {
                     String name = mth.getName().substring(3);
                     String fieldName = name.substring(0, 1).toLowerCase(Locale.ROOT) + name.substring(1);
                     String propName = camelCaseToDash(name);
-                    String javaType = mth.getParameters().getFirst().getType().getQualifiedName();
+                    String javaType = mth.getParameters().get(0).getType().getQualifiedName();
                     String defaultValue = null;
                     Field<JavaClassSource> field = inputClass.getField(fieldName);
                     if (field != null && field.getLiteralInitializer() != null) {
