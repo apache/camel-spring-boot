@@ -72,7 +72,6 @@ public class SpringBootConfigGeneratorMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException {
         try {
-            List<String> props = new ArrayList<>();
             getLog().info("Loading config from " + sourceClassFile);
             String classFile = Files.readString(Paths.get(sourceClassFile));
             JavaClass<JavaClassSource> inputClass = (JavaClass) Roaster.parse(classFile);
