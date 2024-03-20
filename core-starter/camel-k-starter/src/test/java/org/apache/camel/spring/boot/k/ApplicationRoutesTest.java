@@ -40,9 +40,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 ApplicationRoutesTest.class
         },
         properties = {
-                // TODO: ideally it would be nice if the camel.main.routes-include-pattern would be honoured.
-                //       The camel.springboot namespace should ideally be for Spring Boot specific options.
-                "camel.springboot.routes-include-pattern=classpath:camel-k/sources/test-route-001.yaml",
+                "camel.main.routes-include-pattern=classpath:camel-k/sources/test-route-001.yaml",
                 // camel-k
                 "camel.k.routes.overrides[0].input.from=direct:r1",
                 "camel.k.routes.overrides[0].input.with=direct:r1override",
