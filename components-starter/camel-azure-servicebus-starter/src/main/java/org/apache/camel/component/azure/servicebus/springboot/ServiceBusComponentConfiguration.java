@@ -111,6 +111,11 @@ public class ServiceBusComponentConfiguration
      */
     private Boolean disableAutoComplete = false;
     /**
+     * Enable application level deadlettering to the subscription deadletter
+     * subqueue if deadletter related headers are set.
+     */
+    private Boolean enableDeadLettering = false;
+    /**
      * Sets the amount of time to continue auto-renewing the lock. Setting ZERO
      * disables auto-renewal. For ServiceBus receive mode (RECEIVE_AND_DELETE
      * RECEIVE_AND_DELETE), auto-renewal is disabled.
@@ -290,6 +295,14 @@ public class ServiceBusComponentConfiguration
 
     public void setDisableAutoComplete(Boolean disableAutoComplete) {
         this.disableAutoComplete = disableAutoComplete;
+    }
+
+    public Boolean getEnableDeadLettering() {
+        return enableDeadLettering;
+    }
+
+    public void setEnableDeadLettering(Boolean enableDeadLettering) {
+        this.enableDeadLettering = enableDeadLettering;
     }
 
     public Duration getMaxAutoLockRenewDuration() {

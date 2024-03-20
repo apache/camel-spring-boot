@@ -89,6 +89,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.azure-servicebus.enable-dead-lettering",
+      "type": "java.lang.Boolean",
+      "description": "Enable application level deadlettering to the subscription deadletter subqueue if deadletter related headers are set.",
+      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.azure-servicebus.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the azure-servicebus component. This is enabled by default.",
