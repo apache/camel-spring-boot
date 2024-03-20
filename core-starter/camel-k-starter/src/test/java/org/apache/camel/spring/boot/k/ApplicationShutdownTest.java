@@ -16,6 +16,8 @@
  */
 package org.apache.camel.spring.boot.k;
 
+import java.util.concurrent.TimeUnit;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
@@ -32,8 +34,6 @@ import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.util.concurrent.TimeUnit;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DirtiesContext
@@ -47,9 +47,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 ApplicationShutdownTest.TestConfiguration.class,
         },
         properties = {
-                // TODO: ideally it would be nice if the camel.main.routes-include-pattern would be honoured.
-                //       The camel.springboot namespace should ideally be for Spring Boot specific options.
-                "camel.springboot.routes-include-pattern=classpath:camel-k/sources/test-route-002.yaml",
+                "camel.main.routes-include-pattern=classpath:camel-k/sources/test-route-002.yaml",
                 // camel-k
                 "camel.k.shutdown.maxMessages=1",
                 "camel.k.shutdown.strategy=CAMEL",
