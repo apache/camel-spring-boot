@@ -251,6 +251,13 @@
       "defaultValue": "Poison JMS message due to ${exception.message}"
     },
     {
+      "name": "camel.component.activemq.embedded",
+      "type": "java.lang.Boolean",
+      "description": "Use an embedded in-memory (non-persistent) ActiveMQ broker for development and testing purposes. You must have activemq-broker JAR on the classpath.",
+      "sourceType": "org.apache.camel.component.activemq.springboot.ActiveMQComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.activemq.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the activemq component. This is enabled by default.",

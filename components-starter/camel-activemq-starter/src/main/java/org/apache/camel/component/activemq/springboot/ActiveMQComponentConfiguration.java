@@ -81,6 +81,12 @@ public class ActiveMQComponentConfiguration
      */
     private String durableSubscriptionName;
     /**
+     * Use an embedded in-memory (non-persistent) ActiveMQ broker for
+     * development and testing purposes. You must have activemq-broker JAR on
+     * the classpath.
+     */
+    private Boolean embedded = false;
+    /**
      * Allows you to force the use of a specific jakarta.jms.Message
      * implementation for sending JMS messages. Possible values are: Bytes, Map,
      * Object, Stream, Text. By default, Camel would determine which JMS message
@@ -865,6 +871,14 @@ public class ActiveMQComponentConfiguration
 
     public void setDurableSubscriptionName(String durableSubscriptionName) {
         this.durableSubscriptionName = durableSubscriptionName;
+    }
+
+    public Boolean getEmbedded() {
+        return embedded;
+    }
+
+    public void setEmbedded(Boolean embedded) {
+        this.embedded = embedded;
     }
 
     public JmsMessageType getJmsMessageType() {
