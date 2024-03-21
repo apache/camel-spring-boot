@@ -19,7 +19,6 @@ package org.apache.camel.spring.boot.actuate.endpoint;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.Route;
 import org.apache.camel.spi.RouteController;

@@ -16,6 +16,9 @@
  */
 package org.apache.camel.spring.boot;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.FluentProducerTemplate;
@@ -26,9 +29,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext
 public class CamelSpringBootTemplateShutdownTest {

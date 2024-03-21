@@ -25,6 +25,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.apache.camel.test.AvailablePortFinder;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -33,7 +34,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @CamelSpringBootTest
 @EnableAutoConfiguration

@@ -17,7 +17,6 @@
 package org.apache.camel.spring.boot.dummy;
 
 import java.util.Map;
-
 import org.apache.camel.Endpoint;
 import org.apache.camel.support.DefaultComponent;
 

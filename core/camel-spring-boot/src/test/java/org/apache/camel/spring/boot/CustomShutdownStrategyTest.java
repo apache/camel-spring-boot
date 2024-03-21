@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.engine.DefaultShutdownStrategy;
 import org.apache.camel.spi.RouteStartupOrder;

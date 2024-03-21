@@ -16,12 +16,6 @@
  */
 package org.apache.camel.spring.boot;
 
-import org.apache.camel.impl.engine.DefaultPackageScanResourceResolver;
-import org.apache.camel.util.IOHelper;
-import org.apache.camel.util.StringHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -33,6 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
+import org.apache.camel.impl.engine.DefaultPackageScanResourceResolver;
+import org.apache.camel.util.IOHelper;
+import org.apache.camel.util.StringHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * An implementation of the {@code org.apache.camel.spi.PackageScanResourceResolver} that is able to scan spring-boot

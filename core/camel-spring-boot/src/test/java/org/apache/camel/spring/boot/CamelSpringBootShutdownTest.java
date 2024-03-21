@@ -18,13 +18,13 @@ package org.apache.camel.spring.boot;
 
 import java.io.Closeable;
 import java.io.InputStream;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.TypeConverter;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.converter.DefaultTypeConverter;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,7 +33,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 /**
  * Test class illustrating the invalid shutdown sequence when using the autoconfiguration provided by

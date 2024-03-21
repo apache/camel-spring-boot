@@ -23,7 +23,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.plugin.AbstractMojo;

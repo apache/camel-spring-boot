@@ -19,8 +19,8 @@ package org.apache.camel.spring.boot.util;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import org.apache.camel.CamelContext;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @CamelSpringBootTest
 @DirtiesContext

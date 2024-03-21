@@ -17,7 +17,6 @@
 package org.apache.camel.spring.boot.util;
 
 import java.util.Arrays;
-
 import org.springframework.boot.autoconfigure.condition.ConditionMessage;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.SpringBootCondition;

@@ -16,13 +16,15 @@
  */
 package org.apache.camel.spring.boot;
 
-import java.util.concurrent.TimeUnit;
+import static org.awaitility.Awaitility.await;
 
+import java.util.concurrent.TimeUnit;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ServiceStatus;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spi.SupervisingRouteController;
 import org.apache.camel.spring.boot.dummy.DummyComponent;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +33,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
-import static org.awaitility.Awaitility.await;
 
 @DirtiesContext
 @CamelSpringBootTest

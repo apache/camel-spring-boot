@@ -21,13 +21,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.impl.cluster.ClusteredRouteConfiguration;
 import org.apache.camel.impl.cluster.ClusteredRouteController;
 import org.apache.camel.impl.cluster.ClusteredRouteFilter;
 import org.apache.camel.impl.cluster.ClusteredRouteFilters;
-
 import org.apache.camel.spi.RouteController;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.util.ObjectHelper;

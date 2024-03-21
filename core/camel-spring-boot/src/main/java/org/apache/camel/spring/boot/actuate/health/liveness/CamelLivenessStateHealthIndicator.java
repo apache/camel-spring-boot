@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.boot.actuate.health.liveness;
 
+import java.util.Collection;
 import org.apache.camel.CamelContext;
 import org.apache.camel.health.HealthCheck;
 import org.apache.camel.health.HealthCheckHelper;
@@ -26,8 +27,6 @@ import org.springframework.boot.actuate.availability.LivenessStateHealthIndicato
 import org.springframework.boot.availability.ApplicationAvailability;
 import org.springframework.boot.availability.AvailabilityState;
 import org.springframework.boot.availability.LivenessState;
-
-import java.util.Collection;
 
 public class CamelLivenessStateHealthIndicator extends LivenessStateHealthIndicator {
 

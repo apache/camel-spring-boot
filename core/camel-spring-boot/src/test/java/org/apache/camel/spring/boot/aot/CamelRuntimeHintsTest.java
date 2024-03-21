@@ -16,14 +16,14 @@
  */
 package org.apache.camel.spring.boot.aot;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.language.simple.SimpleLanguage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.predicate.RuntimeHintsPredicates;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link CamelRuntimeHints}.

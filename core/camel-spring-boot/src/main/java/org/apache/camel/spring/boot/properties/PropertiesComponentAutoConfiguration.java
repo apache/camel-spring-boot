@@ -17,7 +17,6 @@
 package org.apache.camel.spring.boot.properties;
 
 import java.util.Properties;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.component.properties.PropertiesParser;

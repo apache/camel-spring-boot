@@ -29,7 +29,6 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
-
 import org.apache.camel.tooling.util.PackageHelper;
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.artifact.Artifact;

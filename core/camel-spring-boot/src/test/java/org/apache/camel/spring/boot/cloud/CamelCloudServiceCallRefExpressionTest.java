@@ -17,12 +17,12 @@
 package org.apache.camel.spring.boot.cloud;
 
 import java.util.Properties;
-
 import org.apache.camel.Expression;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.language.SimpleExpression;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,6 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.test.annotation.DirtiesContext;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest

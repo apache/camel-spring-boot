@@ -16,15 +16,14 @@
  */
 package org.apache.camel.spring.boot.aot;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit tests for {@link ReflectionHelperTest}.

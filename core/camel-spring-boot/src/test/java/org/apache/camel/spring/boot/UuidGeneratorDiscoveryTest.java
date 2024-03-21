@@ -16,18 +16,17 @@
  */
 package org.apache.camel.spring.boot;
 
-import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.UUID;
 import org.apache.camel.CamelContext;
 import org.apache.camel.spi.UuidGenerator;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @DirtiesContext
 @CamelSpringBootTest

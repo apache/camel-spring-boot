@@ -16,17 +16,19 @@
  */
 package org.apache.camel.springboot.maven;
 
+import static org.apache.camel.tooling.util.PackageHelper.loadText;
+import static org.apache.camel.tooling.util.PackageHelper.writeText;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import org.apache.camel.maven.packaging.MvelHelper;
 import org.apache.camel.springboot.maven.model.SpringBootAutoConfigureOptionModel;
 import org.apache.camel.springboot.maven.model.SpringBootModel;
@@ -42,11 +44,8 @@ import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.mvel2.templates.TemplateRuntime;
 import org.codehaus.plexus.build.BuildContext;
-
-import static org.apache.camel.tooling.util.PackageHelper.loadText;
-import static org.apache.camel.tooling.util.PackageHelper.writeText;
+import org.mvel2.templates.TemplateRuntime;
 
 /**
  * For all the Camel components that has Spring Boot starter JAR, their documentation .adoc files in their component

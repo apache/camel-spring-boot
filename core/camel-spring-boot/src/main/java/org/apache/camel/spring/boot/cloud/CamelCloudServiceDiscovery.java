@@ -18,7 +18,6 @@ package org.apache.camel.spring.boot.cloud;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.camel.cloud.ServiceDefinition;
 import org.apache.camel.cloud.ServiceDiscovery;
 import org.apache.camel.impl.cloud.CombinedServiceDiscovery;

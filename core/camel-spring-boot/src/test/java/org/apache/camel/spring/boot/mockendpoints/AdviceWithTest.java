@@ -16,6 +16,8 @@
  */
 package org.apache.camel.spring.boot.mockendpoints;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.AdviceWith;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
@@ -27,8 +29,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @CamelSpringBootTest
 @UseAdviceWith

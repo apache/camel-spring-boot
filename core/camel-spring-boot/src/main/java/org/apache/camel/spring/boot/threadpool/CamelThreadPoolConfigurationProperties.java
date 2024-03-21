@@ -19,7 +19,6 @@ package org.apache.camel.spring.boot.threadpool;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.camel.util.concurrent.ThreadPoolRejectedPolicy;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

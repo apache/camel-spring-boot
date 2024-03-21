@@ -18,7 +18,6 @@ package org.apache.camel.spring.boot.cluster;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.camel.cluster.CamelClusterService;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.boot.actuate.health;
 
+import java.io.IOException;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.assertj.core.api.Assertions;
@@ -32,8 +33,6 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
-
-import java.io.IOException;
 
 @CamelSpringBootTest
 @EnableAutoConfiguration

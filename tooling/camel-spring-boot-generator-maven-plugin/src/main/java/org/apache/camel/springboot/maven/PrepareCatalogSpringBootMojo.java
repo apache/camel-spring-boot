@@ -27,7 +27,6 @@ import java.util.function.Supplier;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;

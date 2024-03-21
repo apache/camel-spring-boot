@@ -19,7 +19,6 @@ package org.apache.camel.spring.boot.util;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
 import org.apache.camel.PropertyBindingException;

@@ -19,7 +19,7 @@ package org.apache.camel.spring.boot;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,6 @@ import org.springframework.core.convert.ConverterNotFoundException;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.test.annotation.DirtiesContext;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest

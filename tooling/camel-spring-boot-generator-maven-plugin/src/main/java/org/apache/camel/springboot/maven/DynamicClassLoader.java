@@ -22,7 +22,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Iterator;
 import java.util.List;
-
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 

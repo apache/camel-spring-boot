@@ -29,7 +29,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -43,7 +42,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-
 import org.apache.camel.maven.bom.generator.DependencyMatcher;
 import org.apache.camel.maven.bom.generator.DependencySet;
 import org.apache.camel.maven.bom.generator.ExternalBomConflictCheck;

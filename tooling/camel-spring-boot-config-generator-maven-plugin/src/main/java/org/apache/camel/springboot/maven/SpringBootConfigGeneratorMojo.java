@@ -16,6 +16,18 @@
  */
 package org.apache.camel.springboot.maven;
 
+import java.io.File;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -31,19 +43,6 @@ import org.jboss.forge.roaster.model.JavaClass;
 import org.jboss.forge.roaster.model.Method;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.JavaDocCapableSource;
-
-import java.io.File;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
 
 @Mojo(name = "generate-config", threadSafe = true)
 public class SpringBootConfigGeneratorMojo extends AbstractMojo {

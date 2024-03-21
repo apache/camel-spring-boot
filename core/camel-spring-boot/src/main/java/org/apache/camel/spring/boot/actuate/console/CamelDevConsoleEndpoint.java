@@ -16,6 +16,8 @@
  */
 package org.apache.camel.spring.boot.actuate.console;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.console.DevConsole;
@@ -24,9 +26,6 @@ import org.apache.camel.util.json.JsonObject;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.annotation.Selector;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /*
  * Camel Developer Console

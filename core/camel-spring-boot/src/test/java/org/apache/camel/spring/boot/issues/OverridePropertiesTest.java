@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.boot.issues;
 
+import java.util.Properties;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -26,8 +27,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.env.PropertiesPropertySource;
-
-import java.util.Properties;
 
 public class OverridePropertiesTest extends CamelSpringTestSupport {
 

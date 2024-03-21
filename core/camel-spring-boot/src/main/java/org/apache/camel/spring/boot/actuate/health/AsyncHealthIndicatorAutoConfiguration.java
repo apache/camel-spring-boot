@@ -16,6 +16,8 @@
  */
 package org.apache.camel.spring.boot.actuate.health;
 
+import java.time.Duration;
+import java.time.ZonedDateTime;
 import org.apache.camel.spring.boot.actuate.health.liveness.CamelLivenessStateHealthIndicator;
 import org.apache.camel.spring.boot.actuate.health.readiness.CamelReadinessStateHealthIndicator;
 import org.slf4j.Logger;
@@ -29,9 +31,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-
-import java.time.Duration;
-import java.time.ZonedDateTime;
 
 /**
  * Configuration class that replace synchronous Camel Health Checks with asynchronous ones.

@@ -17,7 +17,6 @@
 package org.apache.camel.spring.boot.util;
 
 import java.util.Collection;
-
 import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.ApplicationContext;

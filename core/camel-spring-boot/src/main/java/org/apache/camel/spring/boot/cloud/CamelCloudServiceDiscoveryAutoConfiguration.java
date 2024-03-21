@@ -16,10 +16,9 @@
  */
 package org.apache.camel.spring.boot.cloud;
 
+import jakarta.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
-
-import jakarta.annotation.PostConstruct;
 import org.apache.camel.CamelContext;
 import org.apache.camel.NoTypeConversionAvailableException;
 import org.apache.camel.cloud.ServiceDiscovery;

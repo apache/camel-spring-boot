@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
-
 import org.apache.camel.impl.engine.DefaultPackageScanClassResolver;
 import org.apache.camel.util.IOHelper;
 import org.apache.camel.util.StringHelper;

@@ -16,10 +16,9 @@
  */
 package org.apache.camel.spring.boot.actuate.health;
 
+import java.util.Collection;
 import org.apache.camel.health.HealthCheck;
 import org.slf4j.Logger;
-
-import java.util.Collection;
 
 public final class CamelProbesHelper {
 

@@ -16,6 +16,8 @@
  */
 package org.apache.camel.springboot.maven;
 
+import static org.apache.camel.tooling.util.Strings.camelCaseToDash;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +35,6 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
-
 import org.apache.camel.maven.packaging.AbstractGeneratorMojo;
 import org.apache.camel.tooling.model.ComponentModel;
 import org.apache.camel.tooling.model.ComponentModel.ComponentOptionModel;
@@ -73,8 +74,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-
-import static org.apache.camel.tooling.util.Strings.camelCaseToDash;
 
 /**
  * Generate Spring Boot auto configuration files for Camel components and data formats.

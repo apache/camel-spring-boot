@@ -17,7 +17,6 @@
 package org.apache.camel.spring.boot.util;
 
 import java.util.List;
-
 import org.springframework.core.convert.ConversionException;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;

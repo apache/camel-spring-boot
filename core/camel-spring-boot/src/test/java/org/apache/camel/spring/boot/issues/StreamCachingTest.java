@@ -16,10 +16,11 @@
  */
 package org.apache.camel.spring.boot.issues;
 
+import static java.util.Arrays.asList;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.builder.RouteBuilder;
@@ -29,8 +30,6 @@ import org.apache.camel.test.junit5.CamelTestSupport;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.DefaultConversionService;
-
-import static java.util.Arrays.asList;
 
 public class StreamCachingTest extends CamelTestSupport {
     // this is not a spring boot test as its standalone Camel testing by extending CamelTestSupport

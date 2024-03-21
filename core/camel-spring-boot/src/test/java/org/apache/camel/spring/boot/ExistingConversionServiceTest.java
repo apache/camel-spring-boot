@@ -16,6 +16,9 @@
  */
 package org.apache.camel.spring.boot;
 
+import static org.junit.jupiter.api.Assertions.assertSame;
+
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,9 +29,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.test.annotation.DirtiesContext;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.assertSame;
 
 @DirtiesContext
 @CamelSpringBootTest

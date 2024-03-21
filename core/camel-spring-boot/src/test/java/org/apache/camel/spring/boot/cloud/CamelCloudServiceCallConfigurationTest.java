@@ -16,6 +16,10 @@
  */
 package org.apache.camel.spring.boot.cloud;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.List;
 import java.util.Map;
 import org.apache.camel.cloud.ServiceChooser;
@@ -28,10 +32,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.core.env.Environment;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CamelCloudServiceCallConfigurationTest {
     @Test

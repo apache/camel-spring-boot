@@ -25,7 +25,6 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -39,7 +38,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Exclusion;

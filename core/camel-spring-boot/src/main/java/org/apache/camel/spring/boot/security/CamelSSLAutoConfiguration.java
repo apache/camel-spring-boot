@@ -18,7 +18,6 @@ package org.apache.camel.spring.boot.security;
 
 import java.util.Collections;
 import java.util.Map;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.main.MainHelper;
 import org.apache.camel.spi.ThreadPoolProfile;

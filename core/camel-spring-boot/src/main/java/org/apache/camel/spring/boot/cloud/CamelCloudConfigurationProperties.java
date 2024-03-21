@@ -19,7 +19,6 @@ package org.apache.camel.spring.boot.cloud;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.camel.model.cloud.ServiceCallDefinitionConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

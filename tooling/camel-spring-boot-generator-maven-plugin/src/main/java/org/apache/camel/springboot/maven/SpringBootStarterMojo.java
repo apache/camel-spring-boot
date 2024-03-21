@@ -28,7 +28,6 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
-
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -41,12 +40,6 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.ProjectDependenciesResolver;
 import org.apache.maven.artifact.Artifact;
@@ -61,6 +54,10 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.ProjectBuilder;
 import org.apache.maven.project.ProjectBuildingResult;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * Generate Spring Boot starter for the component

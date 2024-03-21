@@ -16,6 +16,9 @@
  */
 package org.apache.camel.spring.boot.actuate.endpoint;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,7 +27,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.Route;
 import org.apache.camel.RuntimeCamelException;
@@ -36,10 +38,6 @@ import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.annotation.Selector;
 import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
 import org.springframework.lang.Nullable;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /*
  * Spring Boot Management Endpoint to expose Camel Route information.

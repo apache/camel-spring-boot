@@ -16,11 +16,12 @@
  */
 package org.apache.camel.spring.boot.aot;
 
+import static org.apache.camel.spring.boot.aot.RuntimeHintsHelper.registerClassHierarchy;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aot.hint.MemberCategory;
@@ -28,8 +29,6 @@ import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-
-import static org.apache.camel.spring.boot.aot.RuntimeHintsHelper.registerClassHierarchy;
 
 /**
  * {@code CamelRuntimeHints} provide the basic hints for the native compilation of a Camel application.

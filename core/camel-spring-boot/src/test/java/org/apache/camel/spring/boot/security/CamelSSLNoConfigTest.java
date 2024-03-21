@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.security;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.support.jsse.GlobalSSLContextParametersSupplier;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -27,7 +28,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 /**
  * Testing that the ssl configuration is not created if a subproperty of "camel.ssl.config." (note the last dot) is not

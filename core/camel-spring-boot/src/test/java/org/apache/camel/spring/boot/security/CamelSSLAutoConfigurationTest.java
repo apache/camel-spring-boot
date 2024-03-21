@@ -16,6 +16,10 @@
  */
 package org.apache.camel.spring.boot.security;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.support.jsse.GlobalSSLContextParametersSupplier;
 import org.apache.camel.support.jsse.SSLContextParameters;
@@ -24,10 +28,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Testing the ssl configuration
