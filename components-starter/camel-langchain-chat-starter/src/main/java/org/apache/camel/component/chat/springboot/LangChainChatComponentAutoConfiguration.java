@@ -18,7 +18,7 @@ package org.apache.camel.component.chat.springboot;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
-import org.apache.camel.component.chat.LangchainChatComponent;
+import org.apache.camel.component.chat.LangChainChatComponent;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
@@ -40,25 +40,25 @@ import org.springframework.context.annotation.Lazy;
  */
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,LangchainChatComponentConfiguration.class})
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,LangChainChatComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.langchain-chat"})
-@AutoConfigureAfter({CamelAutoConfiguration.class, LangchainChatComponentConverter.class})
-public class LangchainChatComponentAutoConfiguration {
+@AutoConfigureAfter({CamelAutoConfiguration.class, LangChainChatComponentConverter.class})
+public class LangChainChatComponentAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private LangchainChatComponentConfiguration configuration;
+    private LangChainChatComponentConfiguration configuration;
 
-    public LangchainChatComponentAutoConfiguration(
+    public LangChainChatComponentAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
     }
 
     @Lazy
     @Bean
-    public ComponentCustomizer configureLangchainChatComponent() {
+    public ComponentCustomizer configureLangChainChatComponent() {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
@@ -70,7 +70,7 @@ public class LangchainChatComponentAutoConfiguration {
                         applicationContext,
                         "camel.component.customizer",
                         "camel.component.langchain-chat.customizer")
-                    && target instanceof LangchainChatComponent;
+                    && target instanceof LangChainChatComponent;
             }
         };
     }

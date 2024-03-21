@@ -32,14 +32,14 @@ import org.springframework.stereotype.Component;
 @Configuration(proxyBeanMethods = false)
 @ConfigurationPropertiesBinding
 @Component
-public class LangchainChatComponentConverter implements GenericConverter {
+public class LangChainChatComponentConverter implements GenericConverter {
 
     @Autowired
     private ApplicationContext applicationContext;
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.chat.LangchainChatConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.chat.LangChainChatConfiguration.class));
         answer.add(new ConvertiblePair(String.class, dev.langchain4j.model.chat.ChatLanguageModel.class));
         return answer;
     }
@@ -57,7 +57,7 @@ public class LangchainChatComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.apache.camel.component.chat.LangchainChatConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.chat.LangchainChatConfiguration.class);
+            case "org.apache.camel.component.chat.LangChainChatConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.chat.LangChainChatConfiguration.class);
             case "dev.langchain4j.model.chat.ChatLanguageModel": return applicationContext.getBean(ref, dev.langchain4j.model.chat.ChatLanguageModel.class);
         }
         return null;

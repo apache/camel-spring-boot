@@ -17,3 +17,5 @@
 
 org.apache.camel.component.langchain.embeddings.springboot.LangchainEmbeddingsComponentConverter
 org.apache.camel.component.langchain.embeddings.springboot.LangchainEmbeddingsComponentAutoConfiguration
+org.apache.camel.component.langchain.embeddings.springboot.LangChainEmbeddingsComponentConverter
+org.apache.camel.component.langchain.embeddings.springboot.LangChainEmbeddingsComponentAutoConfiguration

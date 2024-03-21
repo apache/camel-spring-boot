@@ -32,7 +32,7 @@ import org.springframework.stereotype.Component;
 @Configuration(proxyBeanMethods = false)
 @ConfigurationPropertiesBinding
 @Component
-public class LangchainEmbeddingsComponentConverter
+public class LangChainEmbeddingsComponentConverter
         implements
             GenericConverter {
 
@@ -41,7 +41,7 @@ public class LangchainEmbeddingsComponentConverter
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.langchain.embeddings.LangchainEmbeddingsConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.langchain.embeddings.LangChainEmbeddingsConfiguration.class));
         answer.add(new ConvertiblePair(String.class, dev.langchain4j.model.embedding.EmbeddingModel.class));
         return answer;
     }
@@ -59,7 +59,7 @@ public class LangchainEmbeddingsComponentConverter
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.apache.camel.component.langchain.embeddings.LangchainEmbeddingsConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.langchain.embeddings.LangchainEmbeddingsConfiguration.class);
+            case "org.apache.camel.component.langchain.embeddings.LangChainEmbeddingsConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.langchain.embeddings.LangChainEmbeddingsConfiguration.class);
             case "dev.langchain4j.model.embedding.EmbeddingModel": return applicationContext.getBean(ref, dev.langchain4j.model.embedding.EmbeddingModel.class);
         }
         return null;

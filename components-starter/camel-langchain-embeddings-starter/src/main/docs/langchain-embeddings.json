@@ -2,13 +2,13 @@
   "groups": [
     {
       "name": "camel.component.langchain-embeddings",
-      "type": "org.apache.camel.component.langchain.embeddings.springboot.LangchainEmbeddingsComponentConfiguration",
-      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangchainEmbeddingsComponentConfiguration"
+      "type": "org.apache.camel.component.langchain.embeddings.springboot.LangChainEmbeddingsComponentConfiguration",
+      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangChainEmbeddingsComponentConfiguration"
     },
     {
       "name": "camel.component.langchain-embeddings.customizer",
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
-      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangchainEmbeddingsComponentConfiguration",
+      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangChainEmbeddingsComponentConfiguration",
       "sourceMethod": "getCustomizer()"
     }
   ],
@@ -17,14 +17,14 @@
       "name": "camel.component.langchain-embeddings.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
-      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangchainEmbeddingsComponentConfiguration",
+      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangChainEmbeddingsComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.langchain-embeddings.configuration",
-      "type": "org.apache.camel.component.langchain.embeddings.LangchainEmbeddingsConfiguration",
-      "description": "The configuration. The option is a org.apache.camel.component.langchain.embeddings.LangchainEmbeddingsConfiguration type.",
-      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangchainEmbeddingsComponentConfiguration"
+      "type": "org.apache.camel.component.langchain.embeddings.LangChainEmbeddingsConfiguration",
+      "description": "The configuration. The option is a org.apache.camel.component.langchain.embeddings.LangChainEmbeddingsConfiguration type.",
+      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangChainEmbeddingsComponentConfiguration"
     },
     {
       "name": "camel.component.langchain-embeddings.customizer.enabled",
@@ -35,19 +35,19 @@
       "name": "camel.component.langchain-embeddings.embedding-model",
       "type": "dev.langchain4j.model.embedding.EmbeddingModel",
       "description": "The EmbeddingModel engine to use. The option is a dev.langchain4j.model.embedding.EmbeddingModel type.",
-      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangchainEmbeddingsComponentConfiguration"
+      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangChainEmbeddingsComponentConfiguration"
     },
     {
       "name": "camel.component.langchain-embeddings.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the langchain-embeddings component. This is enabled by default.",
-      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangchainEmbeddingsComponentConfiguration"
+      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangChainEmbeddingsComponentConfiguration"
     },
     {
       "name": "camel.component.langchain-embeddings.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
-      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangchainEmbeddingsComponentConfiguration",
+      "sourceType": "org.apache.camel.component.langchain.embeddings.springboot.LangChainEmbeddingsComponentConfiguration",
       "defaultValue": false
     }
   ],
